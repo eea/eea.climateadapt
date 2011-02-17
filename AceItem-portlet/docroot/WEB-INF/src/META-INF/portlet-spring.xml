@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" default-destroy-method="destroy" default-init-method="afterPropertiesSet" xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+	<bean id="nl.wur.alterra.cgi.ace.service.AceItemLocalService" class="nl.wur.alterra.cgi.ace.service.impl.AceItemLocalServiceImpl" />
+	<bean id="nl.wur.alterra.cgi.ace.service.AceItemLocalServiceUtil" class="nl.wur.alterra.cgi.ace.service.AceItemLocalServiceUtil">
+		<property name="service" ref="nl.wur.alterra.cgi.ace.service.AceItemLocalService" />
+	</bean>
+	<bean id="nl.wur.alterra.cgi.ace.service.persistence.AceItemPersistence" class="nl.wur.alterra.cgi.ace.service.persistence.AceItemPersistenceImpl" parent="basePersistence" />
+</beans>

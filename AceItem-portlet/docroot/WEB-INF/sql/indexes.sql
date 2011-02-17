@@ -1,0 +1,1 @@
+create index IX_9D82ED2A on Ace_AceItem (groupId);

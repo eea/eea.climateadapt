@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<model-hints>
+	<model name="nl.wur.alterra.cgi.ace.model.AceItem">
+		<field name="aceItemId" type="long" />
+		<field name="companyId" type="long" />
+		<field name="groupId" type="long" />
+		<field name="name" type="String" />
+		<field name="description" type="String" />
+		<field name="type" type="String" />
+		<field name="storedAt" type="String" />
+		<field name="sector" type="String" />
+		<field name="pilar" type="String" />
+		<field name="textSearch" type="String" />
+		<field name="keyword" type="String" />
+		<field name="nutsId" type="String" />
+		<field name="nutsLevel" type="String" />
+		<field name="startDate" type="Date" />
+		<field name="endDate" type="Date" />
+	</model>
+</model-hints>

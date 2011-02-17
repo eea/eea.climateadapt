@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping default-lazy="false" auto-import="false">
+	<import class="nl.wur.alterra.cgi.ace.model.AceItem" />
+	<class name="nl.wur.alterra.cgi.ace.model.impl.AceItemImpl" table="Ace_AceItem">
+		<cache usage="read-write" />
+		<id name="aceItemId" type="long">
+			<generator class="assigned" />
+		</id>
+		<property name="companyId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="groupId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="name" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="description" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="type" column="type_" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="storedAt" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="sector" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="pilar" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="textSearch" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="keyword" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="nutsId" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="nutsLevel" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="startDate" type="org.hibernate.type.TimestampType" />
+		<property name="endDate" type="org.hibernate.type.TimestampType" />
+	</class>
+</hibernate-mapping>

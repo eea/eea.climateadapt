@@ -1,0 +1,60 @@
+<?xml version="1.0"?>
+
+<portlet-app
+	version="2.0"
+	xmlns="http://java.sun.com/xml/ns/portlet/portlet-app_2_0.xsd"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/portlet/portlet-app_2_0.xsd http://java.sun.com/xml/ns/portlet/portlet-app_2_0.xsd"
+>
+	
+	<portlet>
+		<portlet-name>aceitemportlet</portlet-name>
+		<display-name>AceItem</display-name>
+		<portlet-class>
+			nl.wur.alterra.cgi.ace.portlet.AceItemPortlet
+		</portlet-class>
+		<init-param>
+			<name>view-jsp</name>
+			<value>/html/aceitem/view.jsp</value>
+		</init-param>
+		<init-param>
+			<name>edit-jsp</name>
+			<value>/html/aceitem/edit.jsp</value>
+		</init-param>
+		<init-param>
+			<name>help-jsp</name>
+			<value>/html/aceitem/help.jsp</value>
+		</init-param>
+		<expiration-cache>0</expiration-cache>
+		<supports>
+			<mime-type>text/html</mime-type>
+			<portlet-mode>VIEW</portlet-mode>
+			<portlet-mode>EDIT</portlet-mode>
+			<portlet-mode>HELP</portlet-mode>
+		</supports>
+		<portlet-info>
+			<title>AceItem</title>
+			<short-title>AceItemPortlet</short-title>
+			<keywords></keywords>
+		</portlet-info>
+		<!-- Portlet preferences (configurable by user in portlet EDIT mode) -->
+		<portlet-preferences>
+			<preference>
+				<name>rowsPerPage</name>
+				<value>10</value>
+			</preference>
+		</portlet-preferences>
+		<security-role-ref>
+			<role-name>administrator</role-name>
+		</security-role-ref>
+		<security-role-ref>
+			<role-name>guest</role-name>
+		</security-role-ref>
+		<security-role-ref>
+			<role-name>power-user</role-name>
+		</security-role-ref>
+		<security-role-ref>
+			<role-name>user</role-name>
+		</security-role-ref>
+	</portlet>
+</portlet-app>

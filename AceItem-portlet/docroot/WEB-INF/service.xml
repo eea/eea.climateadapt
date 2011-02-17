@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE service-builder PUBLIC "-//Liferay//DTD Service Builder 6.0.0//EN" "http://www.liferay.com/dtd/liferay-service-builder_6_0_0.dtd">
+<service-builder package-path="nl.wur.alterra.cgi.ace">
+	<author>groot052</author>
+	<namespace>Ace</namespace>
+	
+	<!-- Define the entity for the Ace_AceItem table -->
+	<entity name="AceItem" local-service="true" remote-service="false">
+
+		<!-- Primary key column -->
+		<column name="aceItemId" type="long" primary="true" />
+
+		<!-- Foreign key columns -->
+		<column name="companyId" type="long" />
+		<column name="groupId" type="long" />
+
+		<!-- Other columns -->
+		<column name="name" type="String" />
+		<column name="description" type="String" />
+		<column name="type" type="String" />
+		<column name="storedAt" type="String" />
+		<column name="sector" type="String" />
+		<column name="pilar" type="String" />
+		<column name="textSearch" type="String" />
+		<column name="keyword" type="String" />
+		<column name="nutsId" type="String" />
+		<column name="nutsLevel" type="String" />
+		<column name="startDate" type="Date" />
+		<column name="endDate" type="Date" />
+
+		<!-- Sort order -->
+		<order by="asc">
+			<order-column name="name" />
+		</order>
+
+
+		<!-- Finder Methods -->
+		<finder name="GroupId" return-type="Collection">
+			<finder-column name="groupId" />
+		</finder>
+
+	</entity>
+</service-builder>
