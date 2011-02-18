@@ -16,12 +16,12 @@ package nl.wur.alterra.cgi.ace.service.impl;
 
 import com.liferay.counter.service.CounterLocalServiceUtil;
 import com.liferay.portal.kernel.exception.SystemException;
+import nl.wur.alterra.cgi.ace.model.AceItem;
+import nl.wur.alterra.cgi.ace.search.lucene.ACELuceneException;
+import nl.wur.alterra.cgi.ace.search.lucene.AceItemIndexer;
+import nl.wur.alterra.cgi.ace.service.base.AceItemLocalServiceBaseImpl;
 
 import java.util.List;
-
-import nl.wur.alterra.cgi.ace.model.AceItem;
-import nl.wur.alterra.cgi.ace.model.AceItem;
-import nl.wur.alterra.cgi.ace.service.base.AceItemLocalServiceBaseImpl;
 
 /**
  * The implementation of the ace item local service.
@@ -44,15 +44,26 @@ import nl.wur.alterra.cgi.ace.service.base.AceItemLocalServiceBaseImpl;
  */
 public class AceItemLocalServiceImpl extends AceItemLocalServiceBaseImpl {
 	/**
-	 * Adds the AceItem to the database incrementing the primary key
+	 * Adds the AceItem to the database incrementing the primary key, and adds it to the Lucene index.
 	 *
+     * @param aceitem aceitem to add
+     * @return added aceitem
+     * @throws SystemException hmm
 	 */
 	public AceItem addAceItem(AceItem aceitem) throws SystemException {
 		long aceitemId = CounterLocalServiceUtil.increment(AceItem.class.getName());
-
 		aceitem.setAceItemId(aceitemId);
-
-		return super.addAceItem(aceitem);
+        aceitem = super.addAceItem(aceitem);
+        try {
+            AceItemIndexer indexer = new AceItemIndexer();
+            indexer.add(aceitem);
+        }
+        catch (ACELuceneException x) {
+            System.out.println(x.getMessage());
+            x.printStackTrace();
+            throw new SystemException(x.getMessage(), x);
+        }
+        return aceitem;
 	}
 	
 	/**
