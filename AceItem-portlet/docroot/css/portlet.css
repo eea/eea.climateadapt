@@ -1,0 +1,117 @@
+
+#acesearch_container {
+    font-size: 1.2em;
+}
+
+#acesearch_container h2 {
+    font-size: 1.1em;
+}
+
+#acesearch_container ul {
+    list-style-type: none;
+}
+
+#acesearch_container li {
+    margin-bottom: 10px;
+}
+
+
+#acesearch_container a:link {color:#000000;}      /* unvisited link */
+#acesearch_container a:visited {color:#000000;}  /* visited link */
+#acesearch_container a:hover {color:#000000;}  /* mouse over link */
+#acesearch_container a:active {color:#000000;}  /* selected link */
+
+
+/* Search column rules */
+#acesearch_column {
+    background-color: #EEEEEE;
+    padding: 15px;
+    width: 470px;
+}
+
+#acesearch_column span.column {
+    width: 200px;
+}
+
+#acesearch_column div.row {
+    clear: both;
+    padding-top: 5px;
+}
+
+#acesearch_column div.row label.input {
+    float: left;
+    width: 180px;
+    text-align: left;
+}
+
+#acesearch_column div.row label.input_small {
+    float: left;
+    width: 90px;
+    text-align: left;
+}
+
+#acesearch_column .expanded_section {
+    background: url(../images/minus.png) left center no-repeat;
+}
+
+#acesearch_column .collapsed_section {
+    background: url(../images/plus.png) left center no-repeat;
+}
+
+#acesearch_column a {
+    font-size: 1.1em;
+    padding-left: 20px;
+    text-decoration: none;
+    margin-bottom: 10px;
+    height: 20px;
+}
+
+
+
+
+#acesearch_column .search_section {
+    margin-bottom: 25px;
+}
+
+#acesearch_column input.text {
+    width: 270px;
+}
+
+#acesearch_column input.date {
+    width: 100px;
+}
+
+/* Checkbox lists */
+#acesearch_column .checks_container {
+  width:400px;
+  margin-left: 20px;
+  margin-top: 15px;
+  margin-bottom: 5px;
+  overflow:hidden;
+}
+
+#acesearch_column .check{
+  float:left;
+  width:190px;
+}
+
+#range_dates, #specific_date {
+    width:400px;
+    margin-top: 15px;
+    margin-left: 20px;
+    display: none;
+}
+
+#all_selection_types {
+    display: none;
+}
+
+/* Results column rules */
+
+
+/* Other */
+#form_footer {
+    padding: 10px;
+    background-color: #C2C2C2;
+    text-align: right;
+}

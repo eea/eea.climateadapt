@@ -13,6 +13,19 @@
 		</footer-portlet-javascript>
 		<css-class-wrapper>aceitemportlet-portlet</css-class-wrapper>
 	</portlet>
+
+      <portlet>
+		<portlet-name>acesearchportlet</portlet-name>
+		<icon>/icon.png</icon>
+		<instanceable>false</instanceable>
+		<header-portlet-css>/css/portlet.css</header-portlet-css>
+        <header-portlet-javascript>http://code.jquery.com/jquery-1.5.min.js</header-portlet-javascript>
+		<footer-portlet-javascript>
+			/js/search.js
+		</footer-portlet-javascript>
+		<css-class-wrapper>acesearchportlet-portlet</css-class-wrapper>
+	</portlet>
+
 	<role-mapper>
 		<role-name>administrator</role-name>
 		<role-link>Administrator</role-link>
