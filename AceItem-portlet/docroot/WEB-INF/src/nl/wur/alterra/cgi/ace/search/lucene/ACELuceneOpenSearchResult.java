@@ -7,7 +7,7 @@ import nl.wur.alterra.cgi.ace.search.opensearch.BaseOpenSearchResult;
 import nl.wur.alterra.cgi.ace.search.opensearch.ConvertableToBaseOpenSearchResult;
 
 /**
- * Converter for CSW GetRecords response to BaseOpenSearchResult.
+ * Converter for AceItem Lucene search response to BaseOpenSearchResult.
  *
  * @author heikki doeleman
  */
