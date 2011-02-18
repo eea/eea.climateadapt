@@ -1,13 +1,11 @@
 package nl.wur.alterra.cgi.ace.search.lucene;
 
 import org.apache.lucene.analysis.Analyzer;
-import org.apache.lucene.analysis.standard.StandardAnalyzer;
 import org.apache.lucene.document.Document;
 import org.apache.lucene.index.CorruptIndexException;
 import org.apache.lucene.index.IndexWriter;
 import org.apache.lucene.index.Term;
 import org.apache.lucene.store.FSDirectory;
-import org.apache.lucene.util.Version;
 
 import java.io.File;
 import java.io.IOException;
@@ -24,8 +22,8 @@ public class ACEIndexWriter {
      */
     private ACEIndexWriter() {
         try {
-            indexWriter = new IndexWriter(FSDirectory.open(new File(ACEIndexConstant.INDEX_NAME)), new StandardAnalyzer(Version.LUCENE_CURRENT), IndexWriter.MaxFieldLength.UNLIMITED);
             analyzer = ACEAnalyzer.getAnalyzer();
+            indexWriter = new IndexWriter(FSDirectory.open(new File(ACEIndexConstant.INDEX_NAME)), analyzer, IndexWriter.MaxFieldLength.UNLIMITED);
         }
         catch (IOException x) {
             System.out.println(x.getMessage());
@@ -89,8 +87,8 @@ public class ACEIndexWriter {
     /**
      * Deletes an AceItem from the index by its aceItemId.
      *
-     * @param aceItemId
-     * @throws ACELuceneException
+     * @param aceItemId id of aceitem to delete
+     * @throws ACELuceneException hmm
      */
     public void delete(String aceItemId) throws ACELuceneException {
         try {
