@@ -25,6 +25,6 @@ public class ACELuceneOpenSearchResult implements ConvertableToBaseOpenSearchRes
      *          hmm
      */
     public BaseOpenSearchResult convert(String response) throws SearchException {
-        return null;  //To change body of implemented methods use File | Settings | File Templates.
+        return null;  //TODO implement this
     }
 }

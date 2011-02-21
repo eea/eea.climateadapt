@@ -22,7 +22,7 @@ public class ACEIndexWriter {
      */
     private ACEIndexWriter() {
         try {
-            analyzer = ACEAnalyzer.getAnalyzer();
+            Analyzer analyzer = ACEAnalyzer.getAnalyzer();
             indexWriter = new IndexWriter(FSDirectory.open(new File(ACEIndexConstant.INDEX_NAME)), analyzer, IndexWriter.MaxFieldLength.UNLIMITED);
         }
         catch (IOException x) {
@@ -41,11 +41,6 @@ public class ACEIndexWriter {
      * The actual Lucene IndexWriter instance.
      */
     private IndexWriter indexWriter;
-
-    /**
-     *  Used to analyze documents to be indexed, and queries to be searched for.
-     */
-	private Analyzer analyzer;
 
 
     /**

@@ -16,13 +16,23 @@
 
 <%@include file="/html/init.jsp" %>
 
+<%
+	String redirect = PortalUtil.getCurrentURL(renderRequest);	
+	//PortletURL actionURL = renderResponse.createActionURL();
+	
+%>
+<portlet:renderURL var="searchAceitemURL">
+	<portlet:param name="jspPage" value="/html/acesearch/view.jsp" />
+	<portlet:param name="action" value="searchAceitem" />
+</portlet:renderURL>
+	
 
 <div id="acesearch_container">
 
     <!-- Search colum -->
     <div id="acesearch_column">
 
-        <form>
+        <aui:form action="<%=searchAceitemURL%>" method="post" name="aceItemSearchForm">
             <div class="search_section">
                 <h2><liferay-ui:message key="acesearch-section-header1" /></h2>
 
@@ -195,7 +205,7 @@
             <div id="form_footer">
                 <input type="submit" value="<liferay-ui:message key="acesearch-search-btn" />"/>
             </div>
-        </form>
+        </aui:form>
     </div>
 
     <!-- TODO: Results column  -->
