@@ -6,8 +6,12 @@ import com.liferay.portal.kernel.search.HitsOpenSearchImpl;
 import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.portal.kernel.util.WebKeys;
 import com.liferay.portal.theme.ThemeDisplay;
+import nl.wur.alterra.cgi.ace.model.AceItem;
+import nl.wur.alterra.cgi.ace.model.impl.AceItemImpl;
 import nl.wur.alterra.cgi.ace.search.lucene.ACEAnalyzer;
+import nl.wur.alterra.cgi.ace.search.lucene.ACEIndexConstant;
 import nl.wur.alterra.cgi.ace.search.lucene.ACEIndexSearcher;
+import nl.wur.alterra.cgi.ace.search.lucene.ACELuceneException;
 import nl.wur.alterra.cgi.ace.search.lucene.ACELuceneOpenSearchResult;
 import nl.wur.alterra.cgi.ace.search.opensearch.BaseOpenSearchResult;
 import nl.wur.alterra.cgi.ace.search.opensearch.BaseOpenSearchResultEntry;
@@ -20,6 +24,7 @@ import org.apache.lucene.search.ScoreDoc;
 import org.apache.lucene.search.TopDocs;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -120,7 +125,116 @@ public class ACESearchEngine extends HitsOpenSearchImpl {
 
         return result;
 
+    }
 
+    /**
+     *
+     * @param allOfThese
+     * @param anyOfThese
+     * @param exactlyThese
+     * @param excludingThese
+     * @param aceItemTypes
+     * @return results
+     * @throws ACELuceneException hmm
+     */
+    public List<AceItem> search(String[] allOfThese, String[] anyOfThese, String[] exactlyThese, String[] excludingThese, String[] aceItemTypes) throws ACELuceneException {
+        List<AceItem> results = new ArrayList<AceItem>();
+        String any = "";
+        if(anyOfThese != null && anyOfThese.length > 0) {
+            for(String anyTerm : anyOfThese) {
+                if(anyTerm.trim().length() > 0) {
+                    any += anyTerm + " ";
+                }
+            }
+        }
+        String all = "";
+        if(allOfThese != null && allOfThese.length > 0) {
+            for(String allTerm : allOfThese) {
+                if(allTerm.trim().length() > 0) {
+                    all += "+" + allTerm + " ";
+                }
+            }
+        }
+        String exact = "";
+        if(exactlyThese != null && exactlyThese.length > 0) {
+            for(String exactTerm : exactlyThese) {
+                if(exactTerm.trim().length() > 0) {
+                    exact += exactTerm + " ";
+                }
+
+            }
+            exact = "\"" + exact.trim() + "\"";
+        }
+        String without = "";
+        if(excludingThese != null && excludingThese.length > 0) {
+            for(String withoutTerm : excludingThese) {
+                if(withoutTerm.trim().length() > 0) {
+                    without += "-" + withoutTerm + " ";
+                }
+            }
+        }
+
+        String rawQuery = any + " " + all + " " + exact + " " + without;
+        System.out.println("raw query: " + rawQuery);
+
+        //
+        // search Lucene index
+        //
+        try {
+            ACEIndexSearcher searcher = ACEIndexSearcher.getACEIndexSearcher();
+            QueryParser queryParser = new QueryParser(ACEIndexConstant.IndexField.ANY, ACEAnalyzer.getAnalyzer());
+            Query query = queryParser.parse(rawQuery);
+            System.out.println("Lucene query: " + query.toString());
+            //System.out.println("Lucene query (rewritten): " + query.rewrite(((IndexSearcher)searcher).getIndexReader()).toString());
+            long start = System.currentTimeMillis();
+            TopDocs topDocs = searcher.search(query, 10);
+            long end = System.currentTimeMillis();
+            System.out.println("Lucene searcher # total hits: " + topDocs.totalHits + " in " + (end - start) + " ms");
+            ScoreDoc[] hits = topDocs.scoreDocs;
+            for (ScoreDoc hit : hits) {
+                Document document = searcher.doc(hit.doc);
+                AceItem aceItem = new AceItemImpl();
+                String aceItemId = document.get(ACEIndexConstant.IndexField.ACEITEM_ID);
+                if(aceItemId != null) {
+                    aceItem.setAceItemId(Long.parseLong(aceItemId));
+                }
+                String companyId = document.get(ACEIndexConstant.IndexField.COMPANY_ID);
+                if(companyId != null) {
+                    aceItem.setCompanyId(Long.parseLong(companyId));
+                }
+                aceItem.setDescription(document.get(ACEIndexConstant.IndexField.DESCRIPTION));
+                String endDate = document.get(ACEIndexConstant.IndexField.END_DATE);
+                if(endDate != null) {
+                    aceItem.setEndDate(new Date(Long.parseLong(endDate)));
+                }
+                String groupId = document.get(ACEIndexConstant.IndexField.GROUP_ID);
+                if(groupId != null) {
+                    aceItem.setGroupId(Long.parseLong(groupId));
+                }
+                aceItem.setKeyword(document.get(ACEIndexConstant.IndexField.KEYWORD));
+                aceItem.setName(document.get(ACEIndexConstant.IndexField.NAME));
+                aceItem.setNutsId(document.get(ACEIndexConstant.IndexField.NUTS_ID));
+                aceItem.setNutsLevel(document.get(ACEIndexConstant.IndexField.NUTS_LEVEL));
+                aceItem.setPilar(document.get(ACEIndexConstant.IndexField.PILLAR));
+                aceItem.setSector(document.get(ACEIndexConstant.IndexField.SECTOR));
+                String startDate = document.get(ACEIndexConstant.IndexField.START_DATE);
+                if(startDate != null) {
+                    aceItem.setStartDate(new Date(Long.parseLong(startDate)));
+                }
+                aceItem.setStoredAt(document.get(ACEIndexConstant.IndexField.STOREDAT));
+                aceItem.setTextSearch(document.get(ACEIndexConstant.IndexField.ANY));
+                aceItem.setType(document.get(ACEIndexConstant.IndexField.TYPE));
+
+                System.out.println(document.get(ACEIndexConstant.IndexField.NAME));
+                results.add(aceItem);
+            }
+            return results;
+        }
+        catch(ParseException x) {
+            System.out.println(x.getMessage());
+            x.printStackTrace();
+            throw new ACELuceneException(x.getMessage(), x);
+        }
     }
 
     @Override

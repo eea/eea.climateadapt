@@ -16,23 +16,14 @@
 
 <%@include file="/html/init.jsp" %>
 
-<%
-	String redirect = PortalUtil.getCurrentURL(renderRequest);	
-	//PortletURL actionURL = renderResponse.createActionURL();
-	
-%>
-<portlet:renderURL var="searchAceitemURL">
-	<portlet:param name="jspPage" value="/html/acesearch/view.jsp" />
-	<portlet:param name="action" value="searchAceitem" />
-</portlet:renderURL>
-	
+<portlet:actionURL name="searchAceitem" var="searchAceitemURL"/>
 
 <div id="acesearch_container">
 
     <!-- Search colum -->
-    <div id="acesearch_column">
+    <div id="acesearch_column" class="acesearch_column" style="float:left;width:45%;">
 
-        <aui:form action="<%=searchAceitemURL%>" method="post" name="aceItemSearchForm">
+        <aui:form action="<%=searchAceitemURL%>" method="post" name="<portlet:namespace/>aceItemSearchForm">
             <div class="search_section">
                 <h2><liferay-ui:message key="acesearch-section-header1" /></h2>
 
@@ -58,47 +49,47 @@
                         <div class="checks_container">
 
                             <div class="check">
-                                <input type="checkbox" name="chk_type_articles" id="chk_type_articles" />
+                                <input type="checkbox" name="aceitemtype" id="chk_type_articles" value="nl.wur.alterra.cgi.ace.model.impl.AceItemType.ARTICLE"/>
                                 <label for="chk_type_articles"><liferay-ui:message key="acesearch-datainfotype-lbl-articles" /></label>
                             </div>
 
                             <div class="check">
-                                <input type="checkbox" name="chk_type_lists" id="chk_type_lists" />
+                                <input type="checkbox" name="aceitemtype" id="chk_type_lists" value="nl.wur.alterra.cgi.ace.model.impl.AceItemType.LIST"/>
                                 <label for="chk_type_lists"><liferay-ui:message key="acesearch-datainfotype-lbl-lists" /></label>
                             </div>
 
                             <div class="check">
-                                <input type="checkbox" name="chk_type_datasets" id="chk_type_datasets" />
+                                <input type="checkbox" name="aceitemtype" id="chk_type_datasets" value="nl.wur.alterra.cgi.ace.model.impl.AceItemType.DATA"/>
                                 <label for="chk_type_datasets"><liferay-ui:message key="acesearch-datainfotype-lbl-datasets" /></label>
                             </div>
 
                             <div class="check">
-                                <input type="checkbox" name="chk_type_tables" id="chk_type_tables" />
+                                <input type="checkbox" name="aceitemtype" id="chk_type_tables" value="nl.wur.alterra.cgi.ace.model.impl.AceItemType.TABLE"/>
                                 <label for="chk_type_tables"><liferay-ui:message key="acesearch-datainfotype-lbl-tables" /></label>
                             </div>
 
                             <div class="check">
-                                <input type="checkbox" name="chk_type_indicators" id="chk_type_indicators" />
+                                <input type="checkbox" name="aceitemtype" id="chk_type_indicators" value="nl.wur.alterra.cgi.ace.model.impl.AceItemType.INDICATOR"/>
                                 <label for="chk_type_indicators"><liferay-ui:message key="acesearch-datainfotype-lbl-indicators" /></label>
                             </div>
 
                             <div class="check">
-                                <input type="checkbox" name="chk_type_tools" id="chk_type_tools" />
+                                <input type="checkbox" name="aceitemtype" id="chk_type_tools" value="nl.wur.alterra.cgi.ace.model.impl.AceItemType.TOOL"/>
                                 <label for="chk_type_tools"><liferay-ui:message key="acesearch-datainfotype-lbl-tools" /></label>
                             </div>
 
                             <div class="check">
-                                <input type="checkbox" name="chk_type_maps" id="chk_type_maps" />
+                                <input type="checkbox" name="aceitemtype" id="chk_type_maps" value="nl.wur.alterra.cgi.ace.model.impl.AceItemType.MAP"/>
                                 <label for="chk_type_maps"><liferay-ui:message key="acesearch-datainfotype-lbl-maps" /></label>
                             </div>
 
                             <div class="check">
-                                <input type="checkbox" name="chk_type_multimedia" id="chk_type_multimedia" />
+                                <input type="checkbox" name="aceitemtype" id="chk_type_multimedia" value="nl.wur.alterra.cgi.ace.model.impl.AceItemType.MULTIMEDIA"/>
                                 <label for="chk_type_multimedia"><liferay-ui:message key="acesearch-datainfotype-lbl-multimedia" /></label>
                             </div>
 
                             <div class="check">
-                                <input type="checkbox" name="chk_type_flood" id="chk_type_flood" />
+                                <input type="checkbox" name="aceitemtype" id="chk_type_flood" value="nl.wur.alterra.cgi.ace.model.impl.AceItemType.FLOOD"/>
                                 <label for="chk_type_flood"><liferay-ui:message key="acesearch-datainfotype-lbl-flood" /></label>
                             </div>
 
@@ -187,7 +178,7 @@
                             <div class="check">
                                 <input type="checkbox" name="chk_sectors_flood" id="chk_sectors_flood"/>
                                 <label for="chk_sectors_flood"><liferay-ui:message key="acesearch-sectors-lbl-flood" /></label>
-                            </div>
+                             </div>
 
                         </div>
                     </li>
@@ -208,9 +199,55 @@
         </aui:form>
     </div>
 
-    <!-- TODO: Results column  -->
-    <div id="search_results">
 
-    </div>
+		<!-- Results column  -->
+		<div id="search_results" class="acesearch_column" style="float:right;width:45%;">
+		
+			<h1>Data & downloads</h1>
+			
+			<h2 style="color:#808080;">Search results</h2>
+		
+			<c:if test="${fn:length(searchResults) > 0}">	
+			
+				<div class="resultsgroup" style="width:100%;background-color:#d3d3d3;margin:5px 0px 0px 0px;padding:5px;font-size:x-large;">
+					&#9658; Articles and publications
+				</div>
+				<div class="sortbar" style="width:100%;background-color:#eeeeee;margin:0px;padding:10px;font-size:larger;border-bottom:dashed #d3d3d3;">
+					Sort results by: <input type="radio" name="sort" value="date" checked/>Date <input type="radio" name="sort" value="sector"/>Adaptation sector <input type="radio" name="sort" value="country"/>Country
+				</div>
+				
+				<c:forEach var="searchResult" items="${searchResults}">
+				  <div style="padding:5px;background-color:#fff;width:100%;">
+					<div>
+						<span style="font-weight:bolder;">&#187; <c:out value="${searchResult.name}"/> -</span> <c:out value="${searchResult.description}"/>
+					</div>
+					<div style="color:#d3d3d3;margin-top:20px;">
+						<span style="float:left;">4 Nov 2010</span>
+						<div style="display:inline;float:right;">
+							<img src="<%=renderRequest.getContextPath()%>/images/icons/pdf.png" alt="Open" title="Open" style="width:30px;"/>
+							<span style="padding: 0px 5px;text-decoration:underline;">Open</span>
+							<span style="padding: 0px 5px;">&#9474;</span>
+							<span style="padding: 0px 5px;text-decoration:underline;">View metadata</span>							
+						</div>
+						<hr style="clear:both;display:block;visibility:hidden;"/>
+					</div>
+				  </div>
+				</c:forEach>
+
+				<div class="resultsgroup" style="width:100%;background-color:#d3d3d3;margin:5px 0px 0px 0px;padding:5px;font-size:x-large;">
+					&#9658; Maps
+				</div>
+				<div class="resultsgroup" style="width:100%;background-color:#d3d3d3;margin:5px 0px 0px 0px;padding:5px;font-size:x-large;">
+					&#9658; Multimedia
+				</div>
+				<div class="resultsgroup" style="width:100%;background-color:#d3d3d3;margin:5px 0px 0px 0px;padding:5px;font-size:x-large;">
+					&#9658; Data (sets)
+				</div>
+				
+			</c:if>
+
+		</div>
+	
+	<hr style="clear:both;display:block;visibility:hidden;"/>
 
 </div>

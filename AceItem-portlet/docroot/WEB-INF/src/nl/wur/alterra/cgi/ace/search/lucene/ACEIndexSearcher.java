@@ -68,13 +68,15 @@ public class ACEIndexSearcher {
         try {
             if(this.isStale()) {
                 System.out.println("ACEIndexSearcher is stale, reopening indexreader");
-                IndexReader currentReader = searcher.getIndexReader();
+                //zIndexReader currentReader = searcher.getIndexReader();
                 IndexReader newReader = searcher.getIndexReader().reopen();
                 // reader was reopened
+                /*z
                 if (newReader != currentReader) {
                     System.out.println("Reopened indexreader is new, closing old one");
                     currentReader.close();
                 }
+                */
             }
             return searcher.search(query, itemsPerPage);
         }
