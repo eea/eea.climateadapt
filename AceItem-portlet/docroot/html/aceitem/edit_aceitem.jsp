@@ -41,7 +41,9 @@
 			
 		<aui:input name="sector"  />
 		
-		<aui:input name="pilar"  />
+		<b>Element</b><br />
+		<input name="pilar" type="text" value="<%= aceitem == null ? "" : aceitem.getPilar() %>"><br /><br />
+
 		
 		<b>textsearch</b><br />
 		<textarea name="textSearch" rows=15 cols=100><%= aceitem == null ? "" : aceitem.getTextSearch() %></textarea>
