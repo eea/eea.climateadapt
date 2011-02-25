@@ -8,24 +8,34 @@ import com.liferay.portal.kernel.util.WebKeys;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.util.bridges.mvc.MVCPortlet;
-
-import java.util.ArrayList;
-import java.util.Date;
+import nl.wur.alterra.cgi.ace.model.AceItem;
+import nl.wur.alterra.cgi.ace.model.impl.AceItemImpl;
+import nl.wur.alterra.cgi.ace.search.lucene.ACEIndexSynchronizer;
+import nl.wur.alterra.cgi.ace.service.AceItemLocalServiceUtil;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
 import javax.portlet.PortletPreferences;
 import javax.portlet.PortletRequest;
-
-import nl.wur.alterra.cgi.ace.model.AceItem;
-import nl.wur.alterra.cgi.ace.model.impl.AceItemImpl;
-import nl.wur.alterra.cgi.ace.portlet.AceItemValidator;
-import nl.wur.alterra.cgi.ace.service.AceItemLocalServiceUtil;
+import java.util.ArrayList;
+import java.util.Date;
 
 /**
  * Portlet implementation class AceItemPortlet
  */
 public class AceItemPortlet extends MVCPortlet {
+
+    /**
+     * Rebuilds index based on contents of database.
+     *
+     * @param request
+     * @param response
+     * @throws Exception
+     */
+    public void synchronizeIndex(ActionRequest request, ActionResponse response) throws Exception {
+        ACEIndexSynchronizer aceIndexSynchronizer = new ACEIndexSynchronizer();
+        aceIndexSynchronizer.synchronize();
+    }
  
 	/**
 	 * Adds a new aceitem to the database

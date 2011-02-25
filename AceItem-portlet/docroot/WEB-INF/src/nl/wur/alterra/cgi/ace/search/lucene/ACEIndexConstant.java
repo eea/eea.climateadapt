@@ -22,6 +22,31 @@ public class ACEIndexConstant {
      *
      */
     public class IndexField {
+
+        //
+        // sort fields
+        //
+
+        /**
+         * To sort by AceItem startDate.
+         */
+        public static final String DATE_SORT = "datesort";
+        /**
+         * To sort by AceItem sector.
+         */
+        public static final String SECTOR_SORT = "sectorsort";
+        /**
+         * To sort by relevance. This is not an actual sort field in the index, by default Lucene uses relevance.
+         */
+        public static final String RELEVANCE_SORT = "relevancesort";
+
+        // TODO not implemented yet
+        public static final String COUNTRY_SORT = "countrysort";
+
+        //
+        // regular fields
+        //
+
         /**
          * Field containing all text content of an AceItem ('textSearch').
          */

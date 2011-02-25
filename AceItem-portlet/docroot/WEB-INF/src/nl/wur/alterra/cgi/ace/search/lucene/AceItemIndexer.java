@@ -112,7 +112,10 @@ public class AceItemIndexer {
         }
 
         if(sector != null) {
+            // for searching
             document.add(new Field(ACEIndexConstant.IndexField.SECTOR, sector, Field.Store.YES,Field.Index.NOT_ANALYZED));
+            // for sorting
+            document.add(new Field(ACEIndexConstant.IndexField.SECTOR_SORT, sector, Field.Store.NO,Field.Index.NOT_ANALYZED));
         }
 
         if(startDate != null) {

@@ -21,14 +21,17 @@
 %>
 
 <aui:button-row>
+	<portlet:actionURL name="synchronizeIndex" var="rebuildIndexURL"/>
+	<aui:button value="rebuild-index" onClick="<%= rebuildIndexURL.toString() %>"/>
+</aui:button-row>
+
+<aui:button-row>
 	<portlet:renderURL var="addAceItemURL">
 		<portlet:param name="jspPage" value="/html/aceitem/edit_aceitem.jsp" />
 		<portlet:param name="redirect" value="<%= redirect %>" />
 	</portlet:renderURL>
 
 	<aui:button value="add-aceitem" onClick="<%= addAceItemURL.toString() %>"/>
-	
-	
 </aui:button-row>
 
 <liferay-ui:search-container delta='<%= GetterUtil.getInteger(prefs.getValue("rowsPerPage", "10")) %>' emptyResultsMessage="aceitem-empty-results-message">

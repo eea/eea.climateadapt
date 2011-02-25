@@ -1,9 +1,12 @@
 package nl.wur.alterra.cgi.ace.search.lucene;
 
 import org.apache.lucene.document.Document;
+import org.apache.lucene.index.CorruptIndexException;
 import org.apache.lucene.index.IndexReader;
 import org.apache.lucene.search.IndexSearcher;
 import org.apache.lucene.search.Query;
+import org.apache.lucene.search.Sort;
+import org.apache.lucene.search.SortField;
 import org.apache.lucene.search.TopDocs;
 import org.apache.lucene.store.FSDirectory;
 
@@ -64,21 +67,39 @@ public class ACEIndexSearcher {
         this.stale = stale;
     }
 
-    public TopDocs search(Query query, int itemsPerPage) throws ACELuceneException {
+    public TopDocs search(Query query, String sortBy, int itemsPerPage) throws ACELuceneException {
         try {
+
             if(this.isStale()) {
                 System.out.println("ACEIndexSearcher is stale, reopening indexreader");
-                //zIndexReader currentReader = searcher.getIndexReader();
-                IndexReader newReader = searcher.getIndexReader().reopen();
-                // reader was reopened
-                /*z
-                if (newReader != currentReader) {
-                    System.out.println("Reopened indexreader is new, closing old one");
-                    currentReader.close();
+                IndexReader newReader, oldReader;
+                oldReader = this.searcher.getIndexReader();
+                newReader = oldReader.reopen();
+                if (newReader != oldReader) {
+                    System.out.println("index changed");
+                    this.searcher.close();
+                    oldReader.close();
+                    this.searcher = new IndexSearcher(newReader);
                 }
-                */
+                this.setStale(false);
             }
-            return searcher.search(query, itemsPerPage);
+
+            if(sortBy == null) {
+                return searcher.search(query, itemsPerPage);
+            }
+            else {
+                Sort sort = null;
+                // TODO support Date and Country sorting
+                if(sortBy.equals("SECTOR")) {
+                    sort = new Sort(new SortField( ACEIndexConstant.IndexField.SECTOR_SORT, SortField.STRING));
+                    return searcher.search(query, null, itemsPerPage, sort);
+
+                }
+                // undefined sort, just ignore it
+                else {
+                    return searcher.search(query, itemsPerPage);
+                }
+            }
         }
         catch (IOException x) {
             System.out.println(x.getMessage());
@@ -98,6 +119,17 @@ public class ACEIndexSearcher {
         }
     }
 
+    public int maxDoc() throws ACELuceneException {
+        try {
+            return searcher.maxDoc();
+        }
+        catch (IOException x) {
+            System.out.println(x.getMessage());
+            x.printStackTrace();
+            throw new ACELuceneException(x.getMessage(), x);
+        }
+    }
+
     /**
      * Prevents cloning of singleton.
      *
@@ -107,6 +139,40 @@ public class ACEIndexSearcher {
     @Override
     public Object clone() throws CloneNotSupportedException {
         throw new CloneNotSupportedException();
+    }
+
+    /**
+     * Closes indexSearcher.
+     *
+     * @throws Throwable
+     */
+    @Override
+    protected void finalize() throws Throwable {
+        System.out.println("finalizing ACEIndexsearcher");
+        searcher.getIndexReader().close();
+        searcher.close();
+    }
+
+    /**
+     *
+     * @throws ACELuceneException
+     */
+    public void close() throws ACELuceneException {
+        try {
+        System.out.println("closing indexWriter");
+        searcher.getIndexReader().close();
+        searcher.close();
+        }
+        catch (CorruptIndexException x) {
+            System.out.println(x.getMessage());
+            x.printStackTrace();
+            throw new ACELuceneException(x.getMessage(), x);
+        }
+        catch (IOException x) {
+            System.out.println(x.getMessage());
+            x.printStackTrace();
+            throw new ACELuceneException(x.getMessage(), x);
+        }
     }
 
 }

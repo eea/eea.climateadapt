@@ -43,7 +43,8 @@ public class ACESearchEngine extends HitsOpenSearchImpl {
 
 
     /**
-     * Searches a ACEItem index.
+     * Searches a ACEItem index. Note: this method is only in case we'd want to include AceItem search to the default
+     * Liferay search portlet.
      *
      * @param request httpServletRequest
      * @param groupId group id
@@ -78,7 +79,7 @@ public class ACESearchEngine extends HitsOpenSearchImpl {
             Query query = queryParser.parse(keywords);
             System.out.println("Lucene query: " + query.toString());
             //System.out.println("Lucene query (rewritten): " + query.rewrite(((IndexSearcher)searcher).getIndexReader()).toString());
-            TopDocs topDocs = searcher.search(query, itemsPerPage);
+            TopDocs topDocs = searcher.search(query, null, itemsPerPage);
             System.out.println("Lucene searcher # total hits: " + topDocs.totalHits);
             ScoreDoc[] hits = topDocs.scoreDocs;
             for (ScoreDoc hit : hits) {
@@ -128,69 +129,53 @@ public class ACESearchEngine extends HitsOpenSearchImpl {
     }
 
     /**
+     * Searches Lucene, restricted to specified aceItemType.
      *
-     * @param allOfThese
-     * @param anyOfThese
-     * @param exactlyThese
-     * @param excludingThese
-     * @param aceItemTypes
+     * @param aceItemType
      * @return results
      * @throws ACELuceneException hmm
      */
-    public List<AceItem> search(String[] allOfThese, String[] anyOfThese, String[] exactlyThese, String[] excludingThese, String[] aceItemTypes) throws ACELuceneException {
-        List<AceItem> results = new ArrayList<AceItem>();
-        String any = "";
-        if(anyOfThese != null && anyOfThese.length > 0) {
-            for(String anyTerm : anyOfThese) {
-                if(anyTerm.trim().length() > 0) {
-                    any += anyTerm + " ";
-                }
-            }
-        }
-        String all = "";
-        if(allOfThese != null && allOfThese.length > 0) {
-            for(String allTerm : allOfThese) {
-                if(allTerm.trim().length() > 0) {
-                    all += "+" + allTerm + " ";
-                }
-            }
-        }
-        String exact = "";
-        if(exactlyThese != null && exactlyThese.length > 0) {
-            for(String exactTerm : exactlyThese) {
-                if(exactTerm.trim().length() > 0) {
-                    exact += exactTerm + " ";
-                }
-
-            }
-            exact = "\"" + exact.trim() + "\"";
-        }
-        String without = "";
-        if(excludingThese != null && excludingThese.length > 0) {
-            for(String withoutTerm : excludingThese) {
-                if(withoutTerm.trim().length() > 0) {
-                    without += "-" + withoutTerm + " ";
-                }
-            }
-        }
-
-        String rawQuery = any + " " + all + " " + exact + " " + without;
-        System.out.println("raw query: " + rawQuery);
-
-        //
-        // search Lucene index
-        //
+    public List<AceItem> searchLuceneByType(String[] anyOfThese, String aceItemType, String sortBy) throws ACELuceneException {
         try {
+            //
+            // handle free text input
+            //
+
+            //String rawQuery = createRawQuery(allOfThese, anyOfThese, exactlyThese, excludingThese);
+            String rawQuery = "";
+            if(anyOfThese != null && anyOfThese.length > 0) {
+                for(String term : anyOfThese) {
+                    rawQuery = rawQuery + " " + term;
+                }
+            }
+            // user entered no searchterms; do wildcard query
+            else {
+                // TODO create a better, real wildcard-only query
+                rawQuery = "a*|e*|i*|o*|u*";
+            }
+            rawQuery = rawQuery.trim();
+
+            //
+            // handle aceItemType
+            //
+            if(rawQuery.length() > 0) {
+                rawQuery += " AND " + ACEIndexConstant.IndexField.TYPE + ":" + aceItemType;
+            }
+            else {
+                rawQuery = ACEIndexConstant.IndexField.TYPE + ":" + aceItemType;
+            }
+
             ACEIndexSearcher searcher = ACEIndexSearcher.getACEIndexSearcher();
             QueryParser queryParser = new QueryParser(ACEIndexConstant.IndexField.ANY, ACEAnalyzer.getAnalyzer());
             Query query = queryParser.parse(rawQuery);
             System.out.println("Lucene query: " + query.toString());
             //System.out.println("Lucene query (rewritten): " + query.rewrite(((IndexSearcher)searcher).getIndexReader()).toString());
             long start = System.currentTimeMillis();
-            TopDocs topDocs = searcher.search(query, 10);
+            TopDocs topDocs = searcher.search(query, sortBy, 10);
             long end = System.currentTimeMillis();
             System.out.println("Lucene searcher # total hits: " + topDocs.totalHits + " in " + (end - start) + " ms");
             ScoreDoc[] hits = topDocs.scoreDocs;
+            List<AceItem> results = new ArrayList<AceItem>();
             for (ScoreDoc hit : hits) {
                 Document document = searcher.doc(hit.doc);
                 AceItem aceItem = new AceItemImpl();
@@ -235,6 +220,57 @@ public class ACESearchEngine extends HitsOpenSearchImpl {
             x.printStackTrace();
             throw new ACELuceneException(x.getMessage(), x);
         }
+    }
+
+    /**
+     * Creates a raw lucene text query for input to Lucene's QueryBuilder. This is only necessary if we keep different
+     * free text search fields for the various advanced search types; if not, user query can go straight into QueryBuilder.
+     *
+     * @param allOfThese
+     * @param anyOfThese
+     * @param exactlyThese
+     * @param excludingThese
+     * @return
+     */
+    private String createRawQuery(String[] allOfThese, String[] anyOfThese, String[] exactlyThese, String[] excludingThese) {
+        String any = "";
+        if(anyOfThese != null && anyOfThese.length > 0) {
+            for(String anyTerm : anyOfThese) {
+                if(anyTerm.trim().length() > 0) {
+                    any += anyTerm + " ";
+                }
+            }
+        }
+        String all = "";
+        if(allOfThese != null && allOfThese.length > 0) {
+            for(String allTerm : allOfThese) {
+                if(allTerm.trim().length() > 0) {
+                    all += "+" + allTerm + " ";
+                }
+            }
+        }
+        String exact = "";
+        if(exactlyThese != null && exactlyThese.length > 0) {
+            for(String exactTerm : exactlyThese) {
+                if(exactTerm.trim().length() > 0) {
+                    exact += exactTerm + " ";
+                }
+
+            }
+            exact = "\"" + exact.trim() + "\"";
+        }
+        String without = "";
+        if(excludingThese != null && excludingThese.length > 0) {
+            for(String withoutTerm : excludingThese) {
+                if(withoutTerm.trim().length() > 0) {
+                    without += "-" + withoutTerm + " ";
+                }
+            }
+        }
+
+        String rawQuery = any + " " + all + " " + exact + " " + without;
+        System.out.println("raw query: " + rawQuery);
+        return rawQuery;
     }
 
     @Override

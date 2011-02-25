@@ -12,11 +12,48 @@ jQuery(document).ready(function() {
     $("input[name=date_type]:radio").change(function() {
         showDatePanels();
     });
+	
+    $(".expandedResultsGroup").hide();
+	
+    $(".expandedResultsGroupTitle").click(function() {	
+		var expId = this.id;
+		// grab unique part, after dash
+		var unique = expId.match(/-([0-9]+)/)[1];		
+		// hide expandedResultsGroup with same unique id postfix
+       $("#expandedId-"+unique).hide();
+		// show collapsedResultsGroup with same unique id postfix	   
+	   $("#collapsedId-"+unique).show(100);
+    });	
 
+    $(".collapsedResultsGroupTitle").click(function() {
+		var expId = this.id;
+		// grab unique part, after dash
+		var unique = expId.match(/-([0-9]+)/)[1];		
+		// hide collapsedResultsGroup with same unique id postfix
+       $("#collapsedId-"+unique).hide();
+		// show expandedResultsGroup with same unique id postfix	   
+	   $("#expandedId-"+unique).show(100);
+    });	
 
+    $("input[name=sortBy]:radio").change(function() {
+        sortedSearch(this);
+    });
+	
+	// expand first resultgroup
+	var firstResultsGroup = $(".collapsedResultsGroupTitle").first();
+	if(firstResultsGroup) {
+		//alert('firstResultsGroup: ' + firstResultsGroup);
+		firstResultsGroup.click();
+	}
+	else {
+		//alert('No firstResultsGroup');	
+	}
+	
     showDataInfoPanel();
     showDatePanels();
 });
+
+
 
 
 /**

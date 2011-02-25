@@ -26,7 +26,8 @@
 #acesearch_column {
     background-color: #EEEEEE;
     padding: 15px;
-    width: 470px;
+	float:left;
+	width:45%;
 }
 
 #acesearch_column span.column {
@@ -66,7 +67,70 @@
     height: 20px;
 }
 
+#searchresultstitle {
+	color:#808080;
+}
 
+.resultfooter {
+	color:#d3d3d3;
+	margin-top:20px;
+}
+
+.resultsGroupTitle {
+	width:100%;
+	background-color:#d3d3d3;
+	margin:5px 0px 0px 0px;
+	padding:5px;
+	font-size:x-large;
+	cursor:pointer;
+}
+.bolder {
+	font-weight:bolder;
+}
+
+.clearer {
+	clear:both;
+	display:block;
+	visibility:hidden;
+}
+
+.aceitemlink {
+	padding: 0px 3px;
+	text-decoration:underline;
+}
+
+.aceitemlinkseparator {
+	padding: 0px 3px;
+}
+
+.searchresult {
+	padding:5px;
+	background-color:#fff;
+	width:100%;
+}
+
+.pdficon {
+	width:30px;
+}
+
+.aceitemdate {
+	display:inline;
+	float:left;
+}
+
+.aceitemlinks {
+	display:inline;
+	float:right;
+}
+
+.sortbar {
+	width:100%;
+	background-color:#eeeeee;
+	margin:0px;
+	padding:10px;
+	font-size:larger;
+	border-bottom:dashed #d3d3d3;
+}
 
 
 #acesearch_column .search_section {
@@ -108,6 +172,8 @@
 
 #search_results {
 	background-color:#fff;
+	float:right;
+	width:45%;
 }
 
 /* Results column rules */

@@ -20,21 +20,73 @@
 
 <div id="acesearch_container">
 
+<portlet:resourceURL var="sortURL" id="view.jsp" escapeXml="false" />
+
+<%-- this is here and not in js file, because we're using some JSP code in it. TODO solve that and move to js file --%>
+<script type="text/javascript">
+    /**
+	 * retrieves search parameters from the sort-search form that invoked this, executes the search through XHR, and sets json response to correct search results panel.
+	 *
+	 */
+	function sortedSearch(sortRadio) {
+		// grab unique part, after dash
+		var unique = sortRadio.id.match(/-([0-9]+)/)[1];	
+		var sortedSearchForm = $("#sortsearchformId-"+unique);		
+		var querystring = 'anyOfThese=' + $("#sortsearchformId-"+unique + " input[name=anyOfThese]").val();
+		querystring += '&aceitemtype=' + $("#sortsearchformId-"+unique + " input[name=aceitemtype]").val(); 
+		querystring += '&sector=' + $("#sortsearchformId-"+unique + " input[name=sector]").val(); 
+		querystring += '&initial_date=' + $("#sortsearchformId-"+unique + " input[name=initial_date]").val(); 
+		querystring += '&final_date=' + $("#sortsearchformId-"+unique + " input[name=final_date]").val(); 
+		querystring += '&simple_date=' + $("#sortsearchformId-"+unique + " input[name=simple_date]").val(); 
+		querystring += '&sortBy=' + $('#'+sortRadio.id).val();
+		// replace existing resultlist with loading icon
+		$('#resultsListId-'+unique).remove();
+		$('#expandedId-'+unique).append('<div id="loadingId-'+unique+'" style="text-align:center;"><img src="<%=renderRequest.getContextPath()%>/images/icons/loading.gif" title="loading" alt="loading"></div>');
+		jQuery.ajax({
+			type: "POST",
+			url: "<%=renderResponse.encodeURL(sortURL.toString())%>",
+			data: querystring,
+			success: function(json) {
+				// remove loading icon and add results to resultlist	
+				$('#loadingId-'+unique).remove();
+				var resultlist = '<div id="resultsListId-'+unique+'">';				
+				var aceitemResults = new Array();
+				aceitemResults = jQuery.parseJSON(json);
+				jQuery.each(aceitemResults, function(idx, aceitem){ 
+					// add searchresult
+					resultlist += '<div class="searchresult">';
+					// add name and description
+					resultlist += '<div><span class="bolder">&#187; ' + aceitem._name + ' -</span> ' + aceitem._description + '</div>';		
+					// add result footer
+					// TODO use actual date from aceitem, if available
+					resultlist += '<div class="resultfooter"><div class="aceitemdate">4 Nov 2010</div><div class="aceitemlinks"><img class="pdficon" src="<%=renderRequest.getContextPath()%>/images/icons/pdf.png" alt="Open" title="Open"/><span class="aceitemlink">Open</span><span class="aceitemlinkseparator">&#9474;</span><span class="aceitemlink">View metadata</span></div><hr class="clearer"/></div>';					
+					// close searchresult
+					resultlist += '</div>';					
+				});
+				// close searchresultlist
+				resultlist += '</div>';
+				$('#expandedId-'+unique).append(resultlist);
+			}
+		});		
+	}
+										
+</script>
+
+<div id="<portlet:namespace/>content">
+</div>
+
+
+
     <!-- Search colum -->
-    <div id="acesearch_column" class="acesearch_column" style="float:left;width:45%;">
+    <div id="acesearch_column" class="acesearch_column">
 
         <aui:form action="<%=searchAceitemURL%>" method="post" name="<portlet:namespace/>aceItemSearchForm">
             <div class="search_section">
                 <h2><liferay-ui:message key="acesearch-section-header1" /></h2>
 
                 <div class="row">
-                    <label for="all_words" class="input"><liferay-ui:message key="acesearch-lbl-allwords" /></label>
-                    <input type="text" class="text" name="all_words" id="all_words"/>
-                </div>
-
-                <div class="row">
-                    <label for="exact_words" class="input"><liferay-ui:message key="acesearch-lbl-exactwords" /></label>
-                    <input type="text" class="text" name="exact_words" id="exact_words"/>
+                    <label for="anyOfThese" class="input"><liferay-ui:message key="acesearch-lbl-allwords" /></label>
+                    <input type="text" class="text" name="anyOfThese" id="anyOfThese"/>
                 </div>
             </div>
 
@@ -49,47 +101,47 @@
                         <div class="checks_container">
 
                             <div class="check">
-                                <input type="checkbox" name="aceitemtype" id="chk_type_articles" value="nl.wur.alterra.cgi.ace.model.impl.AceItemType.ARTICLE"/>
+                                <input type="checkbox" name="aceitemtype" id="chk_type_articles" value="ARTICLE"/>
                                 <label for="chk_type_articles"><liferay-ui:message key="acesearch-datainfotype-lbl-articles" /></label>
                             </div>
 
                             <div class="check">
-                                <input type="checkbox" name="aceitemtype" id="chk_type_lists" value="nl.wur.alterra.cgi.ace.model.impl.AceItemType.LIST"/>
+                                <input type="checkbox" name="aceitemtype" id="chk_type_lists" value="LIST"/>
                                 <label for="chk_type_lists"><liferay-ui:message key="acesearch-datainfotype-lbl-lists" /></label>
                             </div>
 
                             <div class="check">
-                                <input type="checkbox" name="aceitemtype" id="chk_type_datasets" value="nl.wur.alterra.cgi.ace.model.impl.AceItemType.DATA"/>
+                                <input type="checkbox" name="aceitemtype" id="chk_type_datasets" value="DATA"/>
                                 <label for="chk_type_datasets"><liferay-ui:message key="acesearch-datainfotype-lbl-datasets" /></label>
                             </div>
 
                             <div class="check">
-                                <input type="checkbox" name="aceitemtype" id="chk_type_tables" value="nl.wur.alterra.cgi.ace.model.impl.AceItemType.TABLE"/>
+                                <input type="checkbox" name="aceitemtype" id="chk_type_tables" value="TABLE"/>
                                 <label for="chk_type_tables"><liferay-ui:message key="acesearch-datainfotype-lbl-tables" /></label>
                             </div>
 
                             <div class="check">
-                                <input type="checkbox" name="aceitemtype" id="chk_type_indicators" value="nl.wur.alterra.cgi.ace.model.impl.AceItemType.INDICATOR"/>
+                                <input type="checkbox" name="aceitemtype" id="chk_type_indicators" value="INDICATOR"/>
                                 <label for="chk_type_indicators"><liferay-ui:message key="acesearch-datainfotype-lbl-indicators" /></label>
                             </div>
 
                             <div class="check">
-                                <input type="checkbox" name="aceitemtype" id="chk_type_tools" value="nl.wur.alterra.cgi.ace.model.impl.AceItemType.TOOL"/>
+                                <input type="checkbox" name="aceitemtype" id="chk_type_tools" value="TOOL"/>
                                 <label for="chk_type_tools"><liferay-ui:message key="acesearch-datainfotype-lbl-tools" /></label>
                             </div>
 
                             <div class="check">
-                                <input type="checkbox" name="aceitemtype" id="chk_type_maps" value="nl.wur.alterra.cgi.ace.model.impl.AceItemType.MAP"/>
+                                <input type="checkbox" name="aceitemtype" id="chk_type_maps" value="MAP"/>
                                 <label for="chk_type_maps"><liferay-ui:message key="acesearch-datainfotype-lbl-maps" /></label>
                             </div>
 
                             <div class="check">
-                                <input type="checkbox" name="aceitemtype" id="chk_type_multimedia" value="nl.wur.alterra.cgi.ace.model.impl.AceItemType.MULTIMEDIA"/>
+                                <input type="checkbox" name="aceitemtype" id="chk_type_multimedia" value="MULTIMEDIA"/>
                                 <label for="chk_type_multimedia"><liferay-ui:message key="acesearch-datainfotype-lbl-multimedia" /></label>
                             </div>
 
                             <div class="check">
-                                <input type="checkbox" name="aceitemtype" id="chk_type_flood" value="nl.wur.alterra.cgi.ace.model.impl.AceItemType.FLOOD"/>
+                                <input type="checkbox" name="aceitemtype" id="chk_type_flood" value="FLOOD"/>
                                 <label for="chk_type_flood"><liferay-ui:message key="acesearch-datainfotype-lbl-flood" /></label>
                             </div>
 
@@ -136,47 +188,47 @@
                         <div id="adaptation_sectors_container" class="checks_container">
 
                             <div class="check">
-                                <input type="checkbox" name="chk_sectors_agriculture" id="chk_sectors_agriculture"/>
+                                <input type="checkbox" name="sector" id="chk_sectors_agriculture" value="AGRICULTURE"/>
                                 <label for="chk_sectors_agriculture"><liferay-ui:message key="acesearch-sectors-lbl-agriculture" /></label>
                             </div>
 
                             <div class="check">
-                                <input type="checkbox" name="chk_sectors_health" id="chk_sectors_health"/>
+                                <input type="checkbox" name="sector" id="chk_sectors_health" value="HEALTH"/>
                                 <label for="chk_sectors_health"><liferay-ui:message key="acesearch-sectors-lbl-health" /></label>
                             </div>
 
                             <div class="check">
-                                <input type="checkbox" name="chk_sectors_biodiversity" id="chk_sectors_biodiversity"/>
+                                <input type="checkbox" name="sector" id="chk_sectors_biodiversity" value="BIODIVERSITY"/>
                                 <label for="chk_sectors_biodiversity"><liferay-ui:message key="acesearch-sectors-lbl-biodiversity" /></label>
                             </div>
 
                             <div class="check">
-                                <input type="checkbox" name="chk_sectors_tourism" id="chk_sectors_tourism"/>
+                                <input type="checkbox" name="sector" id="chk_sectors_tourism" value="TOURISM"/>
                                 <label for="chk_sectors_tourism"><liferay-ui:message key="acesearch-sectors-lbl-tourism" /></label>
                             </div>
 
                             <div class="check">
-                                <input type="checkbox" name="chk_sectors_coastal" id="chk_sectors_coastal"/>
+                                <input type="checkbox" name="sector" id="chk_sectors_coastal" value="COASTAL"/>
                                 <label for="chk_sectors_coastal"><liferay-ui:message key="acesearch-sectors-lbl-coastal" /></label>
                             </div>
 
                             <div class="check">
-                                <input type="checkbox" name="chk_sectors_transport" id="chk_sectors_transport"/>
+                                <input type="checkbox" name="sector" id="chk_sectors_transport" value="TRANSPORT"/>
                                 <label for="chk_sectors_transport"><liferay-ui:message key="acesearch-sectors-lbl-transport" /></label>
                             </div>
 
                             <div class="check">
-                                <input type="checkbox" name="chk_sectors_fisheries" id="chk_sectors_fisheries"/>
+                                <input type="checkbox" name="sector" id="chk_sectors_fisheries" value="FISHERIES"/>
                                 <label for="chk_sectors_fisheries"><liferay-ui:message key="acesearch-sectors-lbl-fisheries" /></label>
                             </div>
 
                             <div class="check">
-                                <input type="checkbox" name="chk_sectors_water" id="chk_sectors_water"/>
+                                <input type="checkbox" name="sector" id="chk_sectors_water" value="WATER"/>
                                 <label for="chk_sectors_water"><liferay-ui:message key="acesearch-sectors-lbl-water" /></label>
                             </div>
 
                             <div class="check">
-                                <input type="checkbox" name="chk_sectors_flood" id="chk_sectors_flood"/>
+                                <input type="checkbox" name="sector" id="chk_sectors_flood" value="FLOOD"/>
                                 <label for="chk_sectors_flood"><liferay-ui:message key="acesearch-sectors-lbl-flood" /></label>
                              </div>
 
@@ -199,55 +251,37 @@
         </aui:form>
     </div>
 
-
-		<!-- Results column  -->
-		<div id="search_results" class="acesearch_column" style="float:right;width:45%;">
-		
-			<h1>Data & downloads</h1>
-			
-			<h2 style="color:#808080;">Search results</h2>
-		
-			<c:if test="${fn:length(searchResults) > 0}">	
-			
-				<div class="resultsgroup" style="width:100%;background-color:#d3d3d3;margin:5px 0px 0px 0px;padding:5px;font-size:x-large;">
-					&#9658; Articles and publications
-				</div>
-				<div class="sortbar" style="width:100%;background-color:#eeeeee;margin:0px;padding:10px;font-size:larger;border-bottom:dashed #d3d3d3;">
-					Sort results by: <input type="radio" name="sort" value="date" checked/>Date <input type="radio" name="sort" value="sector"/>Adaptation sector <input type="radio" name="sort" value="country"/>Country
-				</div>
-				
-				<c:forEach var="searchResult" items="${searchResults}">
-				  <div style="padding:5px;background-color:#fff;width:100%;">
-					<div>
-						<span style="font-weight:bolder;">&#187; <c:out value="${searchResult.name}"/> -</span> <c:out value="${searchResult.description}"/>
-					</div>
-					<div style="color:#d3d3d3;margin-top:20px;">
-						<span style="float:left;">4 Nov 2010</span>
-						<div style="display:inline;float:right;">
-							<img src="<%=renderRequest.getContextPath()%>/images/icons/pdf.png" alt="Open" title="Open" style="width:30px;"/>
-							<span style="padding: 0px 5px;text-decoration:underline;">Open</span>
-							<span style="padding: 0px 5px;">&#9474;</span>
-							<span style="padding: 0px 5px;text-decoration:underline;">View metadata</span>							
-						</div>
-						<hr style="clear:both;display:block;visibility:hidden;"/>
-					</div>
-				  </div>
-				</c:forEach>
-
-				<div class="resultsgroup" style="width:100%;background-color:#d3d3d3;margin:5px 0px 0px 0px;padding:5px;font-size:x-large;">
-					&#9658; Maps
-				</div>
-				<div class="resultsgroup" style="width:100%;background-color:#d3d3d3;margin:5px 0px 0px 0px;padding:5px;font-size:x-large;">
-					&#9658; Multimedia
-				</div>
-				<div class="resultsgroup" style="width:100%;background-color:#d3d3d3;margin:5px 0px 0px 0px;padding:5px;font-size:x-large;">
-					&#9658; Data (sets)
-				</div>
-				
-			</c:if>
-
-		</div>
+	<!-- Results column  -->
+	<div id="search_results" class="acesearch_column">
 	
-	<hr style="clear:both;display:block;visibility:hidden;"/>
+		<h1>Data & downloads</h1>
+		
+		<h2 id="searchresultstitle">Search results</h2>
+					
+		<c:set var="groupedResults" scope="page" value="${ARTICLE_searchResults}"/>
+		<c:set var="aceitemtype" scope="page" value="ARTICLE"/>		
+		<c:set var="groupTitle" scope="page" value="Articles and publications"/>
+		<%@ include file="searchresultsbytype.jspf" %>
+		 
+		<c:set var="groupedResults" scope="page" value="${MAP_searchResults}"/>
+		<c:set var="aceitemtype" scope="page" value="MAP"/>		
+		<c:set var="groupTitle" scope="page" value="Maps"/>			
+		<%@ include file="searchresultsbytype.jspf" %>	
+		
+		<c:set var="groupedResults" scope="page" value="${MULTIMEDIA_searchResults}"/>
+		<c:set var="aceitemtype" scope="page" value="MULTIMEDIA"/>				
+		<c:set var="groupTitle" scope="page" value="Multimedia"/>			
+		<%@ include file="searchresultsbytype.jspf" %>					 
+
+		<c:set var="groupedResults" scope="page" value="${DATA_searchResults}"/>
+		<c:set var="aceitemtype" scope="page" value="DATA"/>				
+		<c:set var="groupTitle" scope="page" value="Data (sets)"/>			
+		<%@ include file="searchresultsbytype.jspf" %>	
+		
+		<%-- TODO all types --%>
+
+	</div>
+	
+	<hr class="clearer"/>
 
 </div>

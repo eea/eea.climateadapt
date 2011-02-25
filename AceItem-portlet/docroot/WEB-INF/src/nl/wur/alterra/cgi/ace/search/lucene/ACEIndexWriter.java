@@ -5,6 +5,7 @@ import org.apache.lucene.document.Document;
 import org.apache.lucene.index.CorruptIndexException;
 import org.apache.lucene.index.IndexWriter;
 import org.apache.lucene.index.Term;
+import org.apache.lucene.store.Directory;
 import org.apache.lucene.store.FSDirectory;
 
 import java.io.File;
@@ -22,8 +23,15 @@ public class ACEIndexWriter {
      */
     private ACEIndexWriter() {
         try {
+            System.out.println("creating ACEIndexWriter");
+
+            Directory luceneDirectory = FSDirectory.open(new File(ACEIndexConstant.INDEX_NAME));
+            if(IndexWriter.isLocked(luceneDirectory)) {
+                System.out.println("Lucene directory is locked, forcing unlock");
+                IndexWriter.unlock(luceneDirectory);
+            }
             Analyzer analyzer = ACEAnalyzer.getAnalyzer();
-            indexWriter = new IndexWriter(FSDirectory.open(new File(ACEIndexConstant.INDEX_NAME)), analyzer, IndexWriter.MaxFieldLength.UNLIMITED);
+            indexWriter = new IndexWriter(luceneDirectory, analyzer, IndexWriter.MaxFieldLength.UNLIMITED);
         }
         catch (IOException x) {
             System.out.println(x.getMessage());
@@ -41,6 +49,38 @@ public class ACEIndexWriter {
      * The actual Lucene IndexWriter instance.
      */
     private IndexWriter indexWriter;
+
+    /**
+     * Closes indexWriter.
+     *
+     * @throws Throwable
+     */
+    @Override
+    protected void finalize() throws Throwable {
+        System.out.println("finalizing ACEIndexWriter");
+        indexWriter.close();
+    }
+
+    /**
+     *
+     * @throws ACELuceneException
+     */
+    public void close() throws ACELuceneException {
+        try {
+        System.out.println("closing indexWriter");
+        indexWriter.close();
+        }
+        catch (CorruptIndexException x) {
+            System.out.println(x.getMessage());
+            x.printStackTrace();
+            throw new ACELuceneException(x.getMessage(), x);
+        }
+        catch (IOException x) {
+            System.out.println(x.getMessage());
+            x.printStackTrace();
+            throw new ACELuceneException(x.getMessage(), x);
+        }
+    }
 
 
     /**
@@ -95,6 +135,24 @@ public class ACEIndexWriter {
             System.out.println(x.getMessage());
             x.printStackTrace();
             throw new ACELuceneException(x.getMessage(), x);
+        }
+        catch (IOException x) {
+            System.out.println(x.getMessage());
+            x.printStackTrace();
+            throw new ACELuceneException(x.getMessage(), x);
+        }
+    }
+
+    /**
+     * Deletes all documents from the Lucene index.
+     *
+     * @throws ACELuceneException
+     */
+    public void deleteAll() throws ACELuceneException {
+        try {
+            indexWriter.deleteAll();
+            indexWriter.commit();
+            ACEIndexSearcher.getACEIndexSearcher().setStale(true);
         }
         catch (IOException x) {
             System.out.println(x.getMessage());
