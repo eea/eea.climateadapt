@@ -1,7 +1,7 @@
 jQuery(document).ready(function() {
 
     $("#adaptation_sectors_btn").click(function() {
-       showAdaptationInfoPanel();
+       showAdaptationSectorsPanel();
     });
 
     $("input[name=datainfo_type]:radio").change(function() {
