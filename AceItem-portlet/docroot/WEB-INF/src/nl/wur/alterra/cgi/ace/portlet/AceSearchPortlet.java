@@ -3,6 +3,7 @@ package nl.wur.alterra.cgi.ace.portlet;
 import com.google.gson.Gson;
 import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.servlet.SessionMessages;
+import com.liferay.portal.util.PortalUtil;
 import com.liferay.util.bridges.mvc.MVCPortlet;
 import nl.wur.alterra.cgi.ace.model.AceItem;
 import nl.wur.alterra.cgi.ace.model.impl.AceItemType;
@@ -54,6 +55,7 @@ public class AceSearchPortlet extends MVCPortlet {
         try {
             logParams(request);
             searchByType(request);
+            PortalUtil.copyRequestParameters(request, response);
             SessionMessages.add(request, "acesearch-execution-success");
         }
         catch(Exception x) {

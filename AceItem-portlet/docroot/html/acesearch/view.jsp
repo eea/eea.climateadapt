@@ -16,6 +16,13 @@
 
 <%@include file="/html/init.jsp" %>
 
+<%
+
+String anyOfThese = ParamUtil.getString(request, "anyOfThese");
+
+%>
+
+
 <portlet:actionURL name="searchAceitem" var="searchAceitemURL"/>
 
 <div id="acesearch_container">
@@ -86,7 +93,7 @@
 
                 <div class="row">
                     <label for="anyOfThese" class="input"><liferay-ui:message key="acesearch-lbl-allwords" /></label>
-                    <input type="text" class="text" name="anyOfThese" id="anyOfThese"/>
+                    <input type="text" class="text" name="anyOfThese" id="anyOfThese" value="<%= anyOfThese %>"/>
                 </div>
             </div>
 
