@@ -1,5 +1,9 @@
 jQuery(document).ready(function() {
 
+    $("#clear-search-form-btn").click(function() {
+       clearSearchForm();
+    });
+
     $("#adaptation_sectors_btn").click(function() {
        showAdaptationSectorsPanel();
     });
@@ -118,4 +122,28 @@ function showDatePanels() {
             jQuery('#range_dates').hide();
             jQuery('#specific_date').show(100);
         }
+}
+
+
+/**
+ *
+ * Clear search form controls
+ *
+ *
+ */
+function clearSearchForm() {
+    $("input[name=anyOfThese]").val("");
+    $("input[name=initial_date]").val("");
+    $("input[name=final_date]").val("");
+    $("input[name=simple_date]").val("");
+
+    $("input[name=aceitemtype]:checkbox").each(function() {
+        $(this).attr('checked', false);
+    });
+
+    $("input[name=sector]:checkbox").each(function() {
+        $(this).attr('checked', false);
+    });
+    showDataInfoPanel();
+    showDatePanels();
 }

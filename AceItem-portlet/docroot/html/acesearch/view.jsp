@@ -276,6 +276,7 @@ List<String> sectorsList = Arrays.asList(sectors);
             </div>
 
             <div id="form_footer">
+                <input type="button" id="clear-search-form-btn" value="<liferay-ui:message key="acesearch-reset-btn" />" />
                 <input type="submit" value="<liferay-ui:message key="acesearch-search-btn" />"/>
             </div>
         </aui:form>
