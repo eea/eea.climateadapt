@@ -1,3 +1,4 @@
+<%@ page import="java.util.Arrays" %>
 <%--
 /**
 * Copyright (c) 2000-2010 Liferay, Inc. All rights reserved.
@@ -18,7 +19,29 @@
 
 <%
 
+// Retrieve parameters to fill form
 String anyOfThese = ParamUtil.getString(request, "anyOfThese");
+
+String datainfo_type = ParamUtil.getString(request, "datainfo_type");
+if ((datainfo_type == null) || (datainfo_type.equals(""))) datainfo_type = "1";
+
+String date_type = ParamUtil.getString(request, "date_type");
+if ((date_type == null) || (date_type.equals(""))) date_type = "1";
+
+
+String[] aceitemtypes = request.getParameterValues("aceitemtype");
+if (aceitemtypes == null) aceitemtypes =  new String[0];
+List<String> aceitemtypesList = Arrays.asList(aceitemtypes);
+
+
+String initial_date = ParamUtil.getString(request, "initial_date");
+String final_date = ParamUtil.getString(request, "final_date");
+String simple_date = ParamUtil.getString(request, "simple_date");
+
+String[] sectors = request.getParameterValues("sector");
+if (sectors == null) sectors =  new String[0];
+List<String> sectorsList = Arrays.asList(sectors);
+
 
 %>
 
@@ -101,54 +124,54 @@ String anyOfThese = ParamUtil.getString(request, "anyOfThese");
                 <h2><liferay-ui:message key="acesearch-section-header2" /></h2>
 
                 <div class="row">
-                    <input type="radio" name="datainfo_type" value="1" checked/><liferay-ui:message key="acesearch-datainfotype-lbl-all" />
-                    <input type="radio" name="datainfo_type" value="2"/><liferay-ui:message key="acesearch-datainfotype-lbl-sel" />
+                    <input type="radio" name="datainfo_type" value="1" <%= (datainfo_type.equals("1"))?"checked":"" %> /><liferay-ui:message key="acesearch-datainfotype-lbl-all" />
+                    <input type="radio" name="datainfo_type" value="2" <%= (datainfo_type.equals("2"))?"checked":"" %> /><liferay-ui:message key="acesearch-datainfotype-lbl-sel" />
 
                     <div id="all_selection_types">
                         <div class="checks_container">
 
                             <div class="check">
-                                <input type="checkbox" name="aceitemtype" id="chk_type_articles" value="ARTICLE"/>
+                                <input type="checkbox" name="aceitemtype" id="chk_type_articles" value="ARTICLE" <%= aceitemtypesList.contains("ARTICLE")?"checked":"" %> />
                                 <label for="chk_type_articles"><liferay-ui:message key="acesearch-datainfotype-lbl-articles" /></label>
                             </div>
 
                             <div class="check">
-                                <input type="checkbox" name="aceitemtype" id="chk_type_lists" value="LIST"/>
+                                <input type="checkbox" name="aceitemtype" id="chk_type_lists" value="LIST" <%= aceitemtypesList.contains("LIST")?"checked":"" %> />
                                 <label for="chk_type_lists"><liferay-ui:message key="acesearch-datainfotype-lbl-lists" /></label>
                             </div>
 
                             <div class="check">
-                                <input type="checkbox" name="aceitemtype" id="chk_type_datasets" value="DATA"/>
+                                <input type="checkbox" name="aceitemtype" id="chk_type_datasets" value="DATA" <%= aceitemtypesList.contains("DATA")?"checked":"" %> />
                                 <label for="chk_type_datasets"><liferay-ui:message key="acesearch-datainfotype-lbl-datasets" /></label>
                             </div>
 
                             <div class="check">
-                                <input type="checkbox" name="aceitemtype" id="chk_type_tables" value="TABLE"/>
+                                <input type="checkbox" name="aceitemtype" id="chk_type_tables" value="TABLE" <%= aceitemtypesList.contains("TABLE")?"checked":"" %> />
                                 <label for="chk_type_tables"><liferay-ui:message key="acesearch-datainfotype-lbl-tables" /></label>
                             </div>
 
                             <div class="check">
-                                <input type="checkbox" name="aceitemtype" id="chk_type_indicators" value="INDICATOR"/>
+                                <input type="checkbox" name="aceitemtype" id="chk_type_indicators" value="INDICATOR" <%= aceitemtypesList.contains("INDICATOR")?"checked":"" %> />
                                 <label for="chk_type_indicators"><liferay-ui:message key="acesearch-datainfotype-lbl-indicators" /></label>
                             </div>
 
                             <div class="check">
-                                <input type="checkbox" name="aceitemtype" id="chk_type_tools" value="TOOL"/>
+                                <input type="checkbox" name="aceitemtype" id="chk_type_tools" value="TOOL" <%= aceitemtypesList.contains("TOOL")?"checked":"" %> />
                                 <label for="chk_type_tools"><liferay-ui:message key="acesearch-datainfotype-lbl-tools" /></label>
                             </div>
 
                             <div class="check">
-                                <input type="checkbox" name="aceitemtype" id="chk_type_maps" value="MAP"/>
+                                <input type="checkbox" name="aceitemtype" id="chk_type_maps" value="MAP" <%= aceitemtypesList.contains("MAP")?"checked":"" %> />
                                 <label for="chk_type_maps"><liferay-ui:message key="acesearch-datainfotype-lbl-maps" /></label>
                             </div>
 
                             <div class="check">
-                                <input type="checkbox" name="aceitemtype" id="chk_type_multimedia" value="MULTIMEDIA"/>
+                                <input type="checkbox" name="aceitemtype" id="chk_type_multimedia" value="MULTIMEDIA" <%= aceitemtypesList.contains("MULTIMEDIA")?"checked":"" %> />
                                 <label for="chk_type_multimedia"><liferay-ui:message key="acesearch-datainfotype-lbl-multimedia" /></label>
                             </div>
 
                             <div class="check">
-                                <input type="checkbox" name="aceitemtype" id="chk_type_flood" value="FLOOD"/>
+                                <input type="checkbox" name="aceitemtype" id="chk_type_flood" value="FLOOD"  <%= aceitemtypesList.contains("FLOOD")?"checked":"" %> />
                                 <label for="chk_type_flood"><liferay-ui:message key="acesearch-datainfotype-lbl-flood" /></label>
                             </div>
 
@@ -161,18 +184,18 @@ String anyOfThese = ParamUtil.getString(request, "anyOfThese");
                 <h2><liferay-ui:message key="acesearch-section-header3" /></h2>
 
                 <div class="row">
-                    <input type="radio" name="date_type" value="1" checked/><liferay-ui:message key="acesearch-datetype-lbl-all" />
-                    <input type="radio" name="date_type" value="2"/><liferay-ui:message key="acesearch-datetype-lbl-range" />
-                    <input type="radio" name="date_type" value="3"/><liferay-ui:message key="acesearch-datetype-lbl-simple" />
+                    <input type="radio" name="date_type" value="1" <%= (date_type.equals("1"))?"checked":"" %> /><liferay-ui:message key="acesearch-datetype-lbl-all" />
+                    <input type="radio" name="date_type" value="2" <%= (date_type.equals("2"))?"checked":"" %> /><liferay-ui:message key="acesearch-datetype-lbl-range" />
+                    <input type="radio" name="date_type" value="3" <%= (date_type.equals("3"))?"checked":"" %> /><liferay-ui:message key="acesearch-datetype-lbl-simple" />
 
                     <div id="range_dates">
                         <div class="row">
                             <label for="initial_date" class="input_small"><liferay-ui:message key="acesearch-datetype-lbl-initialdate" /></label>
-                            <input type="text" class="date" name="initial_date" id="initial_date"/>
+                            <input type="text" class="date" name="initial_date" id="initial_date" value="<%= initial_date %>" />
                         </div>
                         <div class="row">
                             <label for="final_date" class="input_small"><liferay-ui:message key="acesearch-datetype-lbl-finaldate" /></label>
-                            <input type="text" class="date" name="final_date" id="final_date"/>
+                            <input type="text" class="date" name="final_date" id="final_date" value="<%= final_date %>"/>
                         </div>
 
                     </div>
@@ -180,7 +203,7 @@ String anyOfThese = ParamUtil.getString(request, "anyOfThese");
                     <div id="specific_date">
                         <div class="row">
                             <label for="simple_date" class="input_small"><liferay-ui:message key="acesearch-datetype-lbl-date" /></label>
-                            <input type="text" class="date" name="simple_date" id="simple_date"/>
+                            <input type="text" class="date" name="simple_date" id="simple_date" value="<%= simple_date %>" />
                         </div>
                     </div>
                 </div>
@@ -195,47 +218,47 @@ String anyOfThese = ParamUtil.getString(request, "anyOfThese");
                         <div id="adaptation_sectors_container" class="checks_container">
 
                             <div class="check">
-                                <input type="checkbox" name="sector" id="chk_sectors_agriculture" value="AGRICULTURE"/>
+                                <input type="checkbox" name="sector" id="chk_sectors_agriculture" value="AGRICULTURE" <%= sectorsList.contains("AGRICULTURE")?"checked":"" %> />
                                 <label for="chk_sectors_agriculture"><liferay-ui:message key="acesearch-sectors-lbl-agriculture" /></label>
                             </div>
 
                             <div class="check">
-                                <input type="checkbox" name="sector" id="chk_sectors_health" value="HEALTH"/>
+                                <input type="checkbox" name="sector" id="chk_sectors_health" value="HEALTH" <%= sectorsList.contains("HEALTH")?"checked":"" %> />
                                 <label for="chk_sectors_health"><liferay-ui:message key="acesearch-sectors-lbl-health" /></label>
                             </div>
 
                             <div class="check">
-                                <input type="checkbox" name="sector" id="chk_sectors_biodiversity" value="BIODIVERSITY"/>
+                                <input type="checkbox" name="sector" id="chk_sectors_biodiversity" value="BIODIVERSITY" <%= sectorsList.contains("BIODIVERSITY")?"checked":"" %> />
                                 <label for="chk_sectors_biodiversity"><liferay-ui:message key="acesearch-sectors-lbl-biodiversity" /></label>
                             </div>
 
                             <div class="check">
-                                <input type="checkbox" name="sector" id="chk_sectors_tourism" value="TOURISM"/>
+                                <input type="checkbox" name="sector" id="chk_sectors_tourism" value="TOURISM" <%= sectorsList.contains("TOURISM")?"checked":"" %> />
                                 <label for="chk_sectors_tourism"><liferay-ui:message key="acesearch-sectors-lbl-tourism" /></label>
                             </div>
 
                             <div class="check">
-                                <input type="checkbox" name="sector" id="chk_sectors_coastal" value="COASTAL"/>
+                                <input type="checkbox" name="sector" id="chk_sectors_coastal" value="COASTAL" <%= sectorsList.contains("COASTAL")?"checked":"" %> />
                                 <label for="chk_sectors_coastal"><liferay-ui:message key="acesearch-sectors-lbl-coastal" /></label>
                             </div>
 
                             <div class="check">
-                                <input type="checkbox" name="sector" id="chk_sectors_transport" value="TRANSPORT"/>
+                                <input type="checkbox" name="sector" id="chk_sectors_transport" value="TRANSPORT" <%= sectorsList.contains("TRANSPORT")?"checked":"" %> />
                                 <label for="chk_sectors_transport"><liferay-ui:message key="acesearch-sectors-lbl-transport" /></label>
                             </div>
 
                             <div class="check">
-                                <input type="checkbox" name="sector" id="chk_sectors_fisheries" value="FISHERIES"/>
+                                <input type="checkbox" name="sector" id="chk_sectors_fisheries" value="FISHERIES" <%= sectorsList.contains("FISHERIES")?"checked":"" %> />
                                 <label for="chk_sectors_fisheries"><liferay-ui:message key="acesearch-sectors-lbl-fisheries" /></label>
                             </div>
 
                             <div class="check">
-                                <input type="checkbox" name="sector" id="chk_sectors_water" value="WATER"/>
+                                <input type="checkbox" name="sector" id="chk_sectors_water" value="WATER" <%= sectorsList.contains("WATER")?"checked":"" %> />
                                 <label for="chk_sectors_water"><liferay-ui:message key="acesearch-sectors-lbl-water" /></label>
                             </div>
 
                             <div class="check">
-                                <input type="checkbox" name="sector" id="chk_sectors_flood" value="FLOOD"/>
+                                <input type="checkbox" name="sector" id="chk_sectors_flood" value="FLOOD" <%= sectorsList.contains("FLOOD")?"checked":"" %> />
                                 <label for="chk_sectors_flood"><liferay-ui:message key="acesearch-sectors-lbl-flood" /></label>
                              </div>
 
