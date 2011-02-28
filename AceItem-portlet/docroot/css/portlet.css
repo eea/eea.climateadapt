@@ -1,6 +1,11 @@
 
 #acesearch_container {
     font-size: 1.2em;
+    background-color: #ffffff;
+}
+
+#acesearch_container h1 {
+    font-size: 1.4em;
 }
 
 #acesearch_container h2 {
@@ -77,11 +82,11 @@
 }
 
 .resultsGroupTitle {
-	width:100%;
 	background-color:#d3d3d3;
 	margin:5px 0px 0px 0px;
 	padding:5px;
-	font-size:x-large;
+	font-size:1.2em;
+    font-weight: bold;
 	cursor:pointer;
 }
 .bolder {
@@ -106,7 +111,6 @@
 .searchresult {
 	padding:5px;
 	background-color:#fff;
-	width:100%;
 }
 
 .pdficon {
@@ -124,11 +128,10 @@
 }
 
 .sortbar {
-	width:100%;
 	background-color:#eeeeee;
 	margin:0px;
 	padding:10px;
-	font-size:larger;
+	font-size:1.1em;
 	border-bottom:dashed #d3d3d3;
 }
 
@@ -173,10 +176,13 @@
 #search_results {
 	background-color:#fff;
 	float:right;
-	width:45%;
+	width:50%;
 }
 
 /* Results column rules */
+.expandedResultsGroup, .collapsedResultsGroup {
+    padding:5px;
+}
 
 
 /* Other */
