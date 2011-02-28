@@ -98,14 +98,23 @@ function showDataInfoPanel() {
  */
 function showDatePanels() {
         if ($("input[name=date_type]:checked").val() == '1') {
+            $("input[name=initial_date]").val("");
+            $("input[name=final_date]").val("");
+            $("input[name=simple_date]").val("");
+
             jQuery('#range_dates').hide();
             jQuery('#specific_date').hide();
 
         } else if ($("input[name=date_type]:checked").val() == '2') {
+            $("input[name=simple_date]").val("");
+
             jQuery('#specific_date').hide();
             jQuery('#range_dates').show(100);
 
         } else {
+            $("input[name=initial_date]").val("");
+            $("input[name=final_date]").val("");
+
             jQuery('#range_dates').hide();
             jQuery('#specific_date').show(100);
         }
