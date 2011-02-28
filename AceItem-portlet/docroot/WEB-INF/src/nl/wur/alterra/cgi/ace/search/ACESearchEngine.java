@@ -135,7 +135,7 @@ public class ACESearchEngine extends HitsOpenSearchImpl {
      * @return results
      * @throws ACELuceneException hmm
      */
-    public List<AceItem> searchLuceneByType(String[] anyOfThese, String aceItemType, String sortBy) throws ACELuceneException {
+    public List<AceItem> searchLuceneByType(String[] anyOfThese, String aceItemType, String[] sectors, String sortBy) throws ACELuceneException {
         try {
             //
             // handle free text input
@@ -163,6 +163,20 @@ public class ACESearchEngine extends HitsOpenSearchImpl {
             }
             else {
                 rawQuery = ACEIndexConstant.IndexField.TYPE + ":" + aceItemType;
+            }
+
+            //
+            // handle sectors
+            //
+            if ((sectors != null) && (sectors.length > 0)) {
+                rawQuery += " AND (";
+
+                for(String sector: sectors) {
+                    rawQuery += " (" + ACEIndexConstant.IndexField.SECTOR + ":" + sector + ") OR";
+                }
+
+                rawQuery =  rawQuery.substring(0, rawQuery.lastIndexOf("OR")) + " )";
+
             }
 
             ACEIndexSearcher searcher = ACEIndexSearcher.getACEIndexSearcher();

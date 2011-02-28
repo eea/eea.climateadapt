@@ -103,7 +103,7 @@ public class AceSearchPortlet extends MVCPortlet {
         // no aceItemTypes requested: search for all of them
         if(aceItemTypes == null || aceItemTypes.length == 0) {
              for(AceItemType aceItemType : AceItemType.values()) {
-                 List<AceItem> results = aceSearchEngine.searchLuceneByType(anyOfThese, aceItemType.name(), sortBy);
+                 List<AceItem> results = aceSearchEngine.searchLuceneByType(anyOfThese, aceItemType.name(), sectors, sortBy);
                  System.out.println("searchAceitem found #" + results.size() + " results of type " + aceItemType.name());
                  request.setAttribute(aceItemType.name() + "_" + SEARCH_RESULTS, results);
                  keysAdded.add(aceItemType.name() + "_" + SEARCH_RESULTS);
@@ -112,7 +112,7 @@ public class AceSearchPortlet extends MVCPortlet {
         // search only requested aceItemTypes
         else {
             for(String aceItemType : aceItemTypes) {
-                 List<AceItem> results = aceSearchEngine.searchLuceneByType(anyOfThese, aceItemType, sortBy);
+                 List<AceItem> results = aceSearchEngine.searchLuceneByType(anyOfThese, aceItemType, sectors, sortBy);
                  System.out.println("searchAceitem found #" + results.size() + " results of type " + aceItemType);
                 request.setAttribute(aceItemType + "_" + SEARCH_RESULTS, results);
                 keysAdded.add(aceItemType + "_" + SEARCH_RESULTS);
