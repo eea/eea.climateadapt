@@ -29,7 +29,11 @@
 			<form name="sortsearchform" id="${sortsearchformId}">
 				<input type="hidden" name="aceitemtype" value="${aceitemtype}"/>	
 				<input type="hidden" name="anyOfThese" id="${anyOfTheseId}" value="${searchParams.anyOfThese}"/>
-				<input type="hidden" name="sector" value="${searchParams.sector}"/>
+
+                <c:forEach var="sector" items="${searchParams.sector}">
+                <input type="hidden" name="sector" value="${sector}"/>
+                </c:forEach>
+
 				<input type="hidden" name="initial_date" value="${searchParams.initialDate}"/>
 				<input type="hidden" name="final_date" value="${searchParams.finalDate}"/>
 				<input type="hidden" name="simple_date" value="${searchParams.simpleDate}"/>
