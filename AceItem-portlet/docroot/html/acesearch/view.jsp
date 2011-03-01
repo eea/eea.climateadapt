@@ -19,6 +19,10 @@
 
 <%
 
+
+Long totalResults = (Long) request.getAttribute("total_results");
+
+
 // Retrieve parameters to fill form
 String anyOfThese = ParamUtil.getString(request, "anyOfThese");
 
@@ -109,7 +113,6 @@ List<String> sectorsList = Arrays.asList(sectors);
 
     <!-- Search colum -->
     <div id="acesearch_column" class="acesearch_column">
-
         <aui:form action="<%=searchAceitemURL%>" method="post" name="<portlet:namespace/>aceItemSearchForm">
             <div class="search_section">
                 <h2><liferay-ui:message key="acesearch-section-header1" /></h2>
@@ -288,7 +291,18 @@ List<String> sectorsList = Arrays.asList(sectors);
 		<h1>Data & downloads</h1>
 		
 		<h2 id="searchresultstitle">Search results</h2>
-					
+
+        <c:if test="<%= totalResults != null %>">
+            <c:choose>
+                <c:when test="<%= totalResults == 0 %>">
+                <h3><liferay-ui:message key="acesearch-no-results" /></h3>
+                </c:when>
+                <c:otherwise>
+                <h3><liferay-ui:message key="acesearch-total-results" /> <%= totalResults%></h3>
+                </c:otherwise>
+            </c:choose>
+        </c:if>
+
 		<c:set var="groupedResults" scope="page" value="${ARTICLE_searchResults}"/>
 		<c:set var="aceitemtype" scope="page" value="ARTICLE"/>		
 		<c:set var="groupTitle" scope="page" value="Articles and publications"/>

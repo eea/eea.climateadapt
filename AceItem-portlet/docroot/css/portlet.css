@@ -12,6 +12,10 @@
     font-size: 1.1em;
 }
 
+#acesearch_container h3 {
+    font-size: 0.9em;
+}
+
 #acesearch_container ul {
     list-style-type: none;
 }
