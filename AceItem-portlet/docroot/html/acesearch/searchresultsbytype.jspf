@@ -51,7 +51,7 @@
 					<div>
                         <c:choose>
                             <c:when test="${!empty searchResult.storedAt && fn:startsWith(searchResult.storedAt, 'http')==true}">
-                            <span class="bolder">&#187; <a href="<c:out value="${searchResult.storedAt}"/>" target="_blank"><c:out value="${searchResult.name}"/></a></span>
+                            <span class="bolder">&#187; <a href="<c:out value="${searchResult.storedAt}"/>"><c:out value="${searchResult.name}"/></a></span>
                             - <c:out value="${searchResult.description}"/>
                             </c:when>
                             <c:otherwise>

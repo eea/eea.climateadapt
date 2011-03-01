@@ -67,8 +67,11 @@ List<String> sectorsList = Arrays.asList(sectors);
 		var unique = sortRadio.id.match(/-([0-9]+)/)[1];	
 		var sortedSearchForm = $("#sortsearchformId-"+unique);		
 		var querystring = 'anyOfThese=' + $("#sortsearchformId-"+unique + " input[name=anyOfThese]").val();
-		querystring += '&aceitemtype=' + $("#sortsearchformId-"+unique + " input[name=aceitemtype]").val(); 
-		querystring += '&sector=' + $("#sortsearchformId-"+unique + " input[name=sector]").val(); 
+		querystring += '&aceitemtype=' + $("#sortsearchformId-"+unique + " input[name=aceitemtype]").val();
+        if ($("#sortsearchformId-"+unique + " input[name=sector]").val() != undefined) {
+		    querystring += '&sector=' + $("#sortsearchformId-"+unique + " input[name=sector]").val();
+        }
+
 		querystring += '&initial_date=' + $("#sortsearchformId-"+unique + " input[name=initial_date]").val(); 
 		querystring += '&final_date=' + $("#sortsearchformId-"+unique + " input[name=final_date]").val(); 
 		querystring += '&simple_date=' + $("#sortsearchformId-"+unique + " input[name=simple_date]").val(); 
