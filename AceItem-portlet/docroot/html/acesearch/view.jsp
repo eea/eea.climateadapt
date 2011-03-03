@@ -93,10 +93,16 @@ List<String> sectorsList = Arrays.asList(sectors);
 					// add searchresult
 					resultlist += '<div class="searchresult">';
 					// add name and description
+
+                    var description = aceitem._description;
+                    if (description.length > 2000) {
+                        description = description.substring(0, 1996) + ' ...';
+                    }
+
                     if (aceitem._storedAt.substr(0, 4) == "http") {
-					    resultlist += '<div><span class="bolder">&#187; <a href="' + aceitem._storedAt + '">' + aceitem._name + '</a></span> - ' + aceitem._description + '</div>';
+					    resultlist += '<div><span class="bolder">&#187; <a href="' + aceitem._storedAt + '">' + aceitem._name + '</a></span> - ' + description + '</div>';
                     } else {
-                        resultlist += '<div><span class="bolder">&#187; ' + aceitem._name + ' </span> - ' + aceitem._description + '</div>';
+                        resultlist += '<div><span class="bolder">&#187; ' + aceitem._name + ' </span> - ' + description + '</div>';
                     }
 					// add result footer
 					// TODO use actual date from aceitem, if available

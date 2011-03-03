@@ -49,13 +49,20 @@
 			<c:forEach var="searchResult" items="${groupedResults}">
 				<div class="searchresult">
 					<div>
+                        <c:set var="descriptionLength" value="${fn:length(searchResult.description)}" />
+
+                        <c:set var="descriptionText" value="${searchResult.description}" />
+
+                        <c:if test="${descriptionLength > 2000}">
+                            <c:set var="descriptionText" value="${fn:substring(searchResult.description, 0, 1996)} ..." />
+                        </c:if>
                         <c:choose>
                             <c:when test="${!empty searchResult.storedAt && fn:startsWith(searchResult.storedAt, 'http')==true}">
                             <span class="bolder">&#187; <a href="<c:out value="${searchResult.storedAt}"/>" target="_blank"><c:out value="${searchResult.name}"/></a></span>
-                            - <c:out value="${searchResult.description}"/>
+                            - <c:out value="${descriptionText}"/>
                             </c:when>
                             <c:otherwise>
-                            <span class="bolder">&#187; <c:out value="${searchResult.name}"/> -</span> <c:out value="${searchResult.description}"/>
+                            <span class="bolder">&#187; <c:out value="${searchResult.name}"/> -</span> <c:out value="${descriptionText}"/>
                             </c:otherwise>
                         </c:choose>
 
