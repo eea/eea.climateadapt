@@ -38,11 +38,11 @@
 				<input type="hidden" name="final_date" value="${searchParams.finalDate}"/>
 				<input type="hidden" name="simple_date" value="${searchParams.simpleDate}"/>
 
-				Sort results by: 
-				<input type="radio" name="sortBy" class="sortByControl" id="${sortsearchRelevanceId}" value="RELEVANCE"/>Relevance 			
-				<input type="radio" name="sortBy" class="sortByControl" id="${sortsearchDateId}" value="DATE"/>Date 
-				<input type="radio" name="sortBy" class="sortByControl" id="${sortsearchSectorId}" value="SECTOR"/>Adaptation sector 
-				<input type="radio" name="sortBy" class="sortByControl" id="${sortsearchCountryId}" value="COUNTRY"/>Country
+				<liferay-ui:message key="acesearch-sort-by" />
+				<input type="radio" name="sortBy" class="sortByControl" id="${sortsearchRelevanceId}" value="RELEVANCE"/><liferay-ui:message key="acesearch-sort-relevance" />
+				<input type="radio" name="sortBy" class="sortByControl" id="${sortsearchDateId}" value="DATE"/><liferay-ui:message key="acesearch-sort-date" />
+				<input type="radio" name="sortBy" class="sortByControl" id="${sortsearchSectorId}" value="SECTOR"/><liferay-ui:message key="acesearch-sort-adaptation-sector" />
+				<input type="radio" name="sortBy" class="sortByControl" id="${sortsearchCountryId}" value="COUNTRY"/><liferay-ui:message key="acesearch-sort-country" />
 			</form>
 		</div>
 		<div id="${resultsListId}">

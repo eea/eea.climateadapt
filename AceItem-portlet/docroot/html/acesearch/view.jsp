@@ -100,7 +100,7 @@ List<String> sectorsList = Arrays.asList(sectors);
                     }
 
                     if (aceitem._storedAt.substr(0, 4) == "http") {
-					    resultlist += '<div><span class="bolder">&#187; <a href="' + aceitem._storedAt + '">' + aceitem._name + '</a></span> - ' + description + '</div>';
+					    resultlist += '<div><span class="bolder">&#187; <a href="' + aceitem._storedAt + '" target="_blank">' + aceitem._name + '</a></span> - ' + description + '</div>';
                     } else {
                         resultlist += '<div><span class="bolder">&#187; ' + aceitem._name + ' </span> - ' + description + '</div>';
                     }
@@ -301,9 +301,9 @@ List<String> sectorsList = Arrays.asList(sectors);
 	<!-- Results column  -->
 	<div id="search_results" class="acesearch_column">
 	
-		<h1>Data & downloads</h1>
+		<h1><liferay-ui:message key="acesearch-data-downloads-headerData" /></h1>
 		
-		<h2 id="searchresultstitle">Search results</h2>
+		<h2 id="searchresultstitle"><liferay-ui:message key="acesearch-results-header" /></h2>
 
         <c:if test="<%= totalResults != null %>">
             <c:choose>
@@ -318,22 +318,22 @@ List<String> sectorsList = Arrays.asList(sectors);
 
 		<c:set var="groupedResults" scope="page" value="${ARTICLE_searchResults}"/>
 		<c:set var="aceitemtype" scope="page" value="ARTICLE"/>		
-		<c:set var="groupTitle" scope="page" value="Articles and publications"/>
+		<c:set var="groupTitle" scope="page"><liferay-ui:message key="acesearch-datainfotype-lbl-articles" /></c:set>
 		<%@ include file="searchresultsbytype.jspf" %>
 		 
 		<c:set var="groupedResults" scope="page" value="${MAP_searchResults}"/>
 		<c:set var="aceitemtype" scope="page" value="MAP"/>		
-		<c:set var="groupTitle" scope="page" value="Maps"/>			
+		<c:set var="groupTitle" scope="page"><liferay-ui:message key="acesearch-datainfotype-lbl-maps" /></c:set>
 		<%@ include file="searchresultsbytype.jspf" %>	
 		
 		<c:set var="groupedResults" scope="page" value="${MULTIMEDIA_searchResults}"/>
 		<c:set var="aceitemtype" scope="page" value="MULTIMEDIA"/>				
-		<c:set var="groupTitle" scope="page" value="Multimedia"/>			
+		<c:set var="groupTitle" scope="page"><liferay-ui:message key="acesearch-datainfotype-lbl-multimedia" /></c:set>
 		<%@ include file="searchresultsbytype.jspf" %>					 
 
 		<c:set var="groupedResults" scope="page" value="${DATA_searchResults}"/>
 		<c:set var="aceitemtype" scope="page" value="DATA"/>				
-		<c:set var="groupTitle" scope="page" value="Data (sets)"/>			
+		<c:set var="groupTitle" scope="page"><liferay-ui:message key="acesearch-datainfotype-lbl-datasets" /></c:set>
 		<%@ include file="searchresultsbytype.jspf" %>	
 		
 		<%-- TODO all types --%>
