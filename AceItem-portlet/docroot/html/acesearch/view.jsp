@@ -301,7 +301,7 @@ List<String> sectorsList = Arrays.asList(sectors);
 	<!-- Results column  -->
 	<div id="search_results" class="acesearch_column">
 	
-		<h1><liferay-ui:message key="acesearch-data-downloads-headerData" /></h1>
+		<h1><liferay-ui:message key="acesearch-data-downloads-header" /></h1>
 		
 		<h2 id="searchresultstitle"><liferay-ui:message key="acesearch-results-header" /></h2>
 
