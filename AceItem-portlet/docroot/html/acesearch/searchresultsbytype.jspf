@@ -60,7 +60,7 @@
                             <c:when test="${!empty searchResult.storedAt && fn:startsWith(searchResult.storedAt, 'http')==true}">
                             <span class="bolder">&#187; <a href="<c:out value="${searchResult.storedAt}"/>" target="_blank"><c:out value="${searchResult.name}"/></a></span>&nbsp;
                             <c:if test="${!empty searchResult.storedAt && fn:startsWith(searchResult.storedAt, 'http://www.tatenbank.')==true}">
-                            <span class="bolder">&#187; <a href="<c:out value="http://66.196.80.202/babelfish/translate_url_content?.intl=us&lp=de_en&trurl=${searchResult.storedAt}"/>" target="_blank">UK</a></span>&nbsp;
+                            <span class="bolder">&#187; <a href="<c:out value="http://66.196.80.202/babelfish/translate_url_content?.intl=us&lp=de_en&trurl=${searchResult.storedAt}"/>" target="_blank">(english)</a></span>&nbsp;
                             </c:if>
                             - <c:out value="${descriptionText}"/>
                             </c:when>
