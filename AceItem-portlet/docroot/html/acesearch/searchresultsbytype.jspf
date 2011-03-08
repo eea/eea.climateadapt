@@ -64,6 +64,11 @@
                             </c:if>
                             - <c:out value="${descriptionText}"/>
                             </c:when>
+                            <c:when test="${!empty searchResult.storedAt && fn:startsWith(searchResult.storedAt, 'ace_project_id')==true}">
+                            <span class="bolder">&#187; <a href="<c:out value="/projects1?${searchResult.storedAt}"/>" target="_blank">
+                            <c:out value="${searchResult.name}"/></a></span>&nbsp;
+                            - <c:out value="${descriptionText}"/>
+                            </c:when>                            
                             <c:otherwise>
                             <span class="bolder">&#187; <c:out value="${searchResult.name}"/> -</span> <c:out value="${descriptionText}"/>
                             </c:otherwise>
