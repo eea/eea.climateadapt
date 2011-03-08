@@ -34,7 +34,6 @@
 		
 		<!-- pagination -->
 		<script type="text/javascript"> 
-			var $j = jQuery.noConflict();
 			$j(function() {
 				$j('#${paginationId}').paginate({
 					count 		: ${fn:length(groupedResults) / 5},
@@ -115,8 +114,8 @@
 			</form>
 		</div>
 		<div id="${resultsListId}">
-			<c:forEach var="searchResult" items="${groupedResults}" begin="0" end="5">
-				<div class="searchresult" style="display:none;">
+			<c:forEach var="searchResult" items="${groupedResults}" begin="0" end="5">		
+				<div class="searchresult">
 					<div>
                         <c:set var="descriptionLength" value="${fn:length(searchResult.description)}" />
 
