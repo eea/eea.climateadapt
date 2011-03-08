@@ -34,8 +34,9 @@
 		
 		<!-- pagination -->
 		<script type="text/javascript"> 
-			$(function() {
-				$('#${paginationId}').paginate({
+			var $j = jQuery.noConflict();
+			$j(function() {
+				$j('#${paginationId}').paginate({
 					count 		: ${fn:length(groupedResults) / 5},
 					start 		: 1,
 					display     : 1,
@@ -48,9 +49,9 @@
 					mouse		: 'press',
 					onChange	: function(page){
 									var aceitemResults = new Array();
-									aceitemResults = jQuery.parseJSON('${groupedJSONResults}');
-									$('#resultsListId-'+${unique}).remove();
-									displayPagedJSONResults(page, ${unique}, aceitemResults);
+									//aceitemResults = jQuery.parseJSON('${groupedJSONResults}');
+									$j('#resultsListId-'+${unique}).remove();
+									displayPagedJSONResults(page, ${unique}, ${groupedJSONResults});
 								}					
 				});	
 			})			
@@ -86,7 +87,7 @@
 			});
 			// close searchresultlist
 			resultlist += '</div>';
-			$('#expandedId-'+unique).append(resultlist);
+			$j('#expandedId-'+unique).append(resultlist);
 		}			
 			
 		</script>

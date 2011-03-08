@@ -62,7 +62,7 @@ List<String> sectorsList = Arrays.asList(sectors);
 	// display only first 5 searchresults
 	jQuery(document).ready(function(){
 		for(var i  = 0; i < 5; i++) {
-			$(".searchresult").next().show();
+			$j(".searchresult").next().show();
 		}
 	});
 
@@ -73,26 +73,26 @@ List<String> sectorsList = Arrays.asList(sectors);
 	function sortedSearch(sortRadio) {
 		// grab unique part, after dash
 		var unique = sortRadio.id.match(/-([0-9]+)/)[1];	
-		var sortedSearchForm = $("#sortsearchformId-"+unique);		
-		var querystring = 'anyOfThese=' + $("#sortsearchformId-"+unique + " input[name=anyOfThese]").val();
-		querystring += '&aceitemtype=' + $("#sortsearchformId-"+unique + " input[name=aceitemtype]").val();
-        if ($("#sortsearchformId-"+unique + " input[name=sector]").val() != undefined) {
-		    querystring += '&sector=' + $("#sortsearchformId-"+unique + " input[name=sector]").val();
+		var sortedSearchForm = $j("#sortsearchformId-"+unique);		
+		var querystring = 'anyOfThese=' + $j("#sortsearchformId-"+unique + " input[name=anyOfThese]").val();
+		querystring += '&aceitemtype=' + $j("#sortsearchformId-"+unique + " input[name=aceitemtype]").val();
+        if ($j("#sortsearchformId-"+unique + " input[name=sector]").val() != undefined) {
+		    querystring += '&sector=' + $j("#sortsearchformId-"+unique + " input[name=sector]").val();
         } 
-		querystring += '&initial_date=' + $("#sortsearchformId-"+unique + " input[name=initial_date]").val(); 
-		querystring += '&final_date=' + $("#sortsearchformId-"+unique + " input[name=final_date]").val(); 
-		querystring += '&simple_date=' + $("#sortsearchformId-"+unique + " input[name=simple_date]").val(); 
-		querystring += '&sortBy=' + $('#'+sortRadio.id).val();
+		querystring += '&initial_date=' + $j("#sortsearchformId-"+unique + " input[name=initial_date]").val(); 
+		querystring += '&final_date=' + $j("#sortsearchformId-"+unique + " input[name=final_date]").val(); 
+		querystring += '&simple_date=' + $j("#sortsearchformId-"+unique + " input[name=simple_date]").val(); 
+		querystring += '&sortBy=' + $j('#'+sortRadio.id).val();
 		// replace existing resultlist with loading icon 
-		$('#resultsListId-'+unique).remove();
-		$('#expandedId-'+unique).append('<div id="loadingId-'+unique+'" style="text-align:center;"><img src="<%=renderRequest.getContextPath()%>/images/icons/loading.gif" title="loading" alt="loading"></div>');
+		$j('#resultsListId-'+unique).remove();
+		$j('#expandedId-'+unique).append('<div id="loadingId-'+unique+'" style="text-align:center;"><img src="<%=renderRequest.getContextPath()%>/images/icons/loading.gif" title="loading" alt="loading"></div>');
 		jQuery.ajax({
 			type: "POST",
 			url: "<%=renderResponse.encodeURL(sortURL.toString())%>",
 			data: querystring,
 			success: function(json) {
 				// remove loading icon and add results to resultlist	
-				$('#loadingId-'+unique).remove();
+				$j('#loadingId-'+unique).remove();
 				var aceitemResults = new Array();
 				aceitemResults = jQuery.parseJSON(json);	
 				var firstFiveAceitemResults = new Array();
@@ -100,7 +100,7 @@ List<String> sectorsList = Arrays.asList(sectors);
 					firstFiveAceitemResults.push(aceitemResults[i]);
 				}
 				displayJSONResults(unique, firstFiveAceitemResults);
-				$('#paginationId-'+unique + ' .jPag-pages li:first-child a').click();
+				$j('#paginationId-'+unique + ' .jPag-pages li:first-child a').click();
 			} 
 		});
  
@@ -123,7 +123,7 @@ List<String> sectorsList = Arrays.asList(sectors);
 			});
 			// close searchresultlist
 			resultlist += '</div>';
-			$('#expandedId-'+unique).append(resultlist);
+			$j('#expandedId-'+unique).append(resultlist);
 		}
 
 	}

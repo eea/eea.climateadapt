@@ -1,50 +1,50 @@
 jQuery(document).ready(function() {
 
-    $("#clear-search-form-btn").click(function() {
+    $j("#clear-search-form-btn").click(function() {
        clearSearchForm();
     });
 
-    $("#adaptation_sectors_btn").click(function() {
+    $j("#adaptation_sectors_btn").click(function() {
        showAdaptationSectorsPanel();
     });
 
-    $("input[name=datainfo_type]:radio").change(function() {
+    $j("input[name=datainfo_type]:radio").change(function() {
         showDataInfoPanel();
     });
 
 
-    $("input[name=date_type]:radio").change(function() {
+    $j("input[name=date_type]:radio").change(function() {
         showDatePanels();
     });
 	
-    $(".expandedResultsGroup").hide();
+    $j(".expandedResultsGroup").hide();
 	
-    $(".expandedResultsGroupTitle").click(function() {	
+    $j(".expandedResultsGroupTitle").click(function() {	
 		var expId = this.id;
 		// grab unique part, after dash
 		var unique = expId.match(/-([0-9]+)/)[1];		
 		// hide expandedResultsGroup with same unique id postfix
-       $("#expandedId-"+unique).hide();
+       $j("#expandedId-"+unique).hide();
 		// show collapsedResultsGroup with same unique id postfix	   
-	   $("#collapsedId-"+unique).show(100);
+	   $j("#collapsedId-"+unique).show(100);
     });	
 
-    $(".collapsedResultsGroupTitle").click(function() {
+    $j(".collapsedResultsGroupTitle").click(function() {
 		var expId = this.id;
 		// grab unique part, after dash
 		var unique = expId.match(/-([0-9]+)/)[1];		
 		// hide collapsedResultsGroup with same unique id postfix
-       $("#collapsedId-"+unique).hide();
+       $j("#collapsedId-"+unique).hide();
 		// show expandedResultsGroup with same unique id postfix	   
-	   $("#expandedId-"+unique).show(100);
+	   $j("#expandedId-"+unique).show(100);
     });	
 
-    $("input[name=sortBy]:radio").change(function() {
+    $j("input[name=sortBy]:radio").change(function() {
         sortedSearch(this);
     });
 	
 	// expand first resultgroup
-	var firstResultsGroup = $(".collapsedResultsGroupTitle").first();
+	var firstResultsGroup = $j(".collapsedResultsGroupTitle").first();
 	if(firstResultsGroup) {
 		//alert('firstResultsGroup: ' + firstResultsGroup);
 		firstResultsGroup.click();
@@ -66,13 +66,13 @@ jQuery(document).ready(function() {
  *
  */
 function showAdaptationSectorsPanel() {
-    $("#adaptation_sectors_container").slideToggle();
-    if ($("#adaptation_sectors_btn").hasClass('collapsed_section')) {
-        $("#adaptation_sectors_btn").removeClass('collapsed_section');
-        $("#adaptation_sectors_btn").addClass('expanded_section');
+    $j("#adaptation_sectors_container").slideToggle();
+    if ($j("#adaptation_sectors_btn").hasClass('collapsed_section')) {
+        $j("#adaptation_sectors_btn").removeClass('collapsed_section');
+        $j("#adaptation_sectors_btn").addClass('expanded_section');
     } else {
-        $("#adaptation_sectors_btn").removeClass('expanded_section');
-        $("#adaptation_sectors_btn").addClass('collapsed_section');
+        $j("#adaptation_sectors_btn").removeClass('expanded_section');
+        $j("#adaptation_sectors_btn").addClass('collapsed_section');
     }
 }
 
@@ -82,10 +82,10 @@ function showAdaptationSectorsPanel() {
  *
  */
 function showDataInfoPanel() {
-    if ($("input[name=datainfo_type]:checked").val() == '1') {
+    if ($j("input[name=datainfo_type]:checked").val() == '1') {
         jQuery('#all_selection_types').hide();
 
-    } else if ($("input[name=datainfo_type]:checked").val() == '2') {
+    } else if ($j("input[name=datainfo_type]:checked").val() == '2') {
         jQuery('#all_selection_types').show(100);
 
     }
@@ -101,23 +101,23 @@ function showDataInfoPanel() {
  *
  */
 function showDatePanels() {
-        if ($("input[name=date_type]:checked").val() == '1') {
-            $("input[name=initial_date]").val("");
-            $("input[name=final_date]").val("");
-            $("input[name=simple_date]").val("");
+        if ($j("input[name=date_type]:checked").val() == '1') {
+            $j("input[name=initial_date]").val("");
+            $j("input[name=final_date]").val("");
+            $j("input[name=simple_date]").val("");
 
             jQuery('#range_dates').hide();
             jQuery('#specific_date').hide();
 
         } else if ($("input[name=date_type]:checked").val() == '2') {
-            $("input[name=simple_date]").val("");
+            $j("input[name=simple_date]").val("");
 
             jQuery('#specific_date').hide();
             jQuery('#range_dates').show(100);
 
         } else {
-            $("input[name=initial_date]").val("");
-            $("input[name=final_date]").val("");
+            $j("input[name=initial_date]").val("");
+            $j("input[name=final_date]").val("");
 
             jQuery('#range_dates').hide();
             jQuery('#specific_date').show(100);
@@ -132,17 +132,17 @@ function showDatePanels() {
  *
  */
 function clearSearchForm() {
-    $("input[name=anyOfThese]").val("");
-    $("input[name=initial_date]").val("");
-    $("input[name=final_date]").val("");
-    $("input[name=simple_date]").val("");
+    $j("input[name=anyOfThese]").val("");
+    $j("input[name=initial_date]").val("");
+    $j("input[name=final_date]").val("");
+    $j("input[name=simple_date]").val("");
 
-    $("input[name=aceitemtype]:checkbox").each(function() {
-        $(this).attr('checked', false);
+    $j("input[name=aceitemtype]:checkbox").each(function() {
+        $j(this).attr('checked', false);
     });
 
-    $("input[name=sector]:checkbox").each(function() {
-        $(this).attr('checked', false);
+    $j("input[name=sector]:checkbox").each(function() {
+        $j(this).attr('checked', false);
     });
     showDataInfoPanel();
     showDatePanels();

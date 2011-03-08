@@ -113,9 +113,38 @@ public class AceSearchPortlet extends MVCPortlet {
 
                  System.out.println("searchAceitem found #" + results.size() + " results of type " + aceItemType.name());
                  request.setAttribute(aceItemType.name() + "_" + SEARCH_RESULTS, results);
+
+                 for(AceItem result : results) {
+                     result.setDescription(result.getDescription().replaceAll("'", "\'"));
+                     result.setKeyword(result.getKeyword().replaceAll("'", "\'"));
+                     result.setName(result.getName().replaceAll("'", "\'"));
+                     result.setNutsId(result.getNutsId().replaceAll("'", "\'"));
+                     result.setNutsLevel(result.getNutsLevel().replaceAll("'", "\'"));
+                     result.setPilar(result.getPilar().replaceAll("'", "\'"));
+                     result.setSector(result.getSector().replaceAll("'", "\'"));
+                     result.setStoredAt(result.getStoredAt().replaceAll("'", "\'"));
+                     result.setTextSearch(result.getTextSearch().replaceAll("'", "\'"));
+                     result.setType(result.getType().replaceAll("'", "\'"));
+
+                     result.setDescription(result.getDescription().replaceAll("\"", "\"\""));
+                     result.setKeyword(result.getKeyword().replaceAll("\"", "\"\""));
+                     result.setName(result.getName().replaceAll("\"", "\"\""));
+                     result.setNutsId(result.getNutsId().replaceAll("\"", "\"\""));
+                     result.setNutsLevel(result.getNutsLevel().replaceAll("\"", "\"\""));
+                     result.setPilar(result.getPilar().replaceAll("\"", "\"\""));
+                     result.setSector(result.getSector().replaceAll("\"", "\"\""));
+                     result.setStoredAt(result.getStoredAt().replaceAll("\"", "\"\""));
+                     result.setTextSearch(result.getTextSearch().replaceAll("\"", "\"\""));
+                     result.setType(result.getType().replaceAll("\"", "\"\""));
+                 }
+
                  keysAdded.add(aceItemType.name() + "_" + SEARCH_RESULTS);
                  Gson gson = new Gson();
                  String json = gson.toJson(results);
+
+                 // escape double quotes
+
+
                  System.out.println("\n\njson LIST is: " + json);
                  request.setAttribute(aceItemType.name() + "_" + "JSON" + SEARCH_RESULTS, json);
                  jsonKeysAdded.add(aceItemType.name() + "_" + "JSON" + SEARCH_RESULTS);
