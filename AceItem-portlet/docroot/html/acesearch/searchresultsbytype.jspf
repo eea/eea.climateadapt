@@ -47,10 +47,8 @@
 					images		: false,
 					mouse		: 'press',
 					onChange	: function(page){
-									alert('page ' + page);
 									var aceitemResults = new Array();
 									aceitemResults = jQuery.parseJSON('${groupedJSONResults}');
-									alert(${unique} + ' ' + aceitemResults);
 									$('#resultsListId-'+${unique}).remove();
 									displayPagedJSONResults(page, ${unique}, aceitemResults);
 								}					
@@ -62,7 +60,6 @@
 				if(endIdx > aceitemResults.length) {
 					endIdx = aceitemResults.length;
 				}
-				alert(startIdx + ' to ' + endIdx);
 				var aceitemPageResults = new Array();
 				for(var i = startIdx; i < endIdx; i++) {
 					aceitemPageResults.push(aceitemResults[i]);
