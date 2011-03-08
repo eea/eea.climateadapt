@@ -100,6 +100,7 @@ List<String> sectorsList = Arrays.asList(sectors);
 					firstFiveAceitemResults.push(aceitemResults[i]);
 				}
 				displayJSONResults(unique, firstFiveAceitemResults);
+				$('#paginationId-'+unique + ' .jPag-pages li:first-child a').click();
 			} 
 		});
  
