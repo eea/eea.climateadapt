@@ -94,8 +94,12 @@ List<String> sectorsList = Arrays.asList(sectors);
 				// remove loading icon and add results to resultlist	
 				$('#loadingId-'+unique).remove();
 				var aceitemResults = new Array();
-				aceitemResults = jQuery.parseJSON(json);				
-				displayJSONResults(unique, aceitemResults);
+				aceitemResults = jQuery.parseJSON(json);	
+				var firstFiveAceitemResults = new Array();
+				for(var i = 0; i < 5; i++) {
+					firstFiveAceitemResults.push(aceitemResults[i]);
+				}
+				displayJSONResults(unique, firstFiveAceitemResults);
 			} 
 		});
  
