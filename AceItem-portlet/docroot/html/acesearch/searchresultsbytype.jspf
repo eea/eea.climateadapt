@@ -5,6 +5,7 @@
 		// a random postfix is used to relate ids of elements
 		//
 		int r = new java.util.Random().nextInt(Integer.MAX_VALUE);
+		pageContext.setAttribute("unique", "" + r);
 		pageContext.setAttribute("expandedId", "expandedId-" + r);		
 		pageContext.setAttribute("collapsedId", "collapsedId-" + r);
 		pageContext.setAttribute("expandedTitleId", "expandedTitleId-" + r);		
@@ -16,14 +17,84 @@
 		pageContext.setAttribute("sortsearchCountryId", "sortsearchCountryId-" + r);
 		pageContext.setAttribute("resultsListId", "resultsListId-" + r);
 		pageContext.setAttribute("anyOfTheseId", "anyOfTheseId-" + r);		
+		pageContext.setAttribute("paginationId", "paginationId-" + r);
 	%>
 	
 	<%-- expanded view --%>
 	<div id="${expandedId}" class="expandedResultsGroup" style="display:none;">
+		<c:set var="groupedResults" value="${groupedResults}"/>
 	
 		<div id="${expandedTitleId}" class="expandedResultsGroupTitle resultsGroupTitle">
-			&#9660; <c:out value='${groupTitle}' />
+			&#9660; <c:out value='${groupTitle}' /> (${fn:length(groupedResults)})
 		</div>
+		
+		<div id="${paginationId}">
+		</div>
+		
+		
+		<!-- pagination -->
+		<script type="text/javascript"> 
+			$(function() {
+				$('#${paginationId}').paginate({
+					count 		: ${fn:length(groupedResults) / 5},
+					start 		: 1,
+					display     : 1,
+					border					: false,
+					text_color  			: '#79B5E3',
+					background_color    	: 'none',	
+					text_hover_color  		: '#2573AF',
+					background_hover_color	: 'none', 
+					images		: false,
+					mouse		: 'press',
+					onChange	: function(page){
+									alert('page ' + page);
+									var aceitemResults = new Array();
+									aceitemResults = jQuery.parseJSON('${groupedJSONResults}');
+									alert(${unique} + ' ' + aceitemResults);
+									$('#resultsListId-'+${unique}).remove();
+									displayPagedJSONResults(page, ${unique}, aceitemResults);
+								}					
+				});	
+			})			
+			function displayPagedJSONResults(page, unique, aceitemResults) {
+				var startIdx = ((page -1) * 5);
+				var endIdx = (page * 5) - 1;
+				if(endIdx > aceitemResults.length) {
+					endIdx = aceitemResults.length;
+				}
+				alert(startIdx + ' to ' + endIdx);
+				var aceitemPageResults = new Array();
+				for(var i = startIdx; i < endIdx; i++) {
+					aceitemPageResults.push(aceitemResults[i]);
+				}
+				displayJSONResults(unique, aceitemPageResults);
+			}
+			
+		function displayJSONResults(unique, aceitemResults) {
+			var resultlist = '<div id="resultsListId-'+unique+'">';
+			jQuery.each(aceitemResults, function(idx, aceitem){ 
+				// add searchresult
+				resultlist += '<div class="searchresult">';
+				// add name and description
+				if (aceitem._storedAt.substr(0, 4) == "http") {
+					resultlist += '<div><span class="bolder">&#187; <a href="' + aceitem._storedAt + '">' + aceitem._name + '</a></span> - ' + aceitem._description + '</div>';
+				} else {
+					resultlist += '<div><span class="bolder">&#187; ' + aceitem._name + ' </span> - ' + aceitem._description + '</div>';
+				}
+				// add result footer 
+				// TODO use actual date from aceitem, if available
+				resultlist += '<div class="resultfooter"><hr class="clearer"/></div>';
+				// close searchresult
+				resultlist += '</div>';					
+			});
+			// close searchresultlist
+			resultlist += '</div>';
+			$('#expandedId-'+unique).append(resultlist);
+		}			
+			
+		</script>
+		
+		<hr class="clearer2"/>
 		
 		<div class="sortbar">
 			<form name="sortsearchform" id="${sortsearchformId}">
@@ -46,8 +117,8 @@
 			</form>
 		</div>
 		<div id="${resultsListId}">
-			<c:forEach var="searchResult" items="${groupedResults}">
-				<div class="searchresult">
+			<c:forEach var="searchResult" items="${groupedResults}" begin="0" end="5">
+				<div class="searchresult" style="display:none;">
 					<div>
                         <c:set var="descriptionLength" value="${fn:length(searchResult.description)}" />
 

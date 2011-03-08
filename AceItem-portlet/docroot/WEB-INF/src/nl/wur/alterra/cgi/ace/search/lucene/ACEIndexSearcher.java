@@ -68,6 +68,10 @@ public class ACEIndexSearcher {
     }
 
     public TopDocs search(Query query, String sortBy, int itemsPerPage) throws ACELuceneException {
+
+        // TODO remove this hack
+        itemsPerPage = 1000;
+
         try {
 
             if(this.isStale()) {

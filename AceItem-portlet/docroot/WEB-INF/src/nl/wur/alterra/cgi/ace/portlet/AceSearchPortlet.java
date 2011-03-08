@@ -101,6 +101,7 @@ public class AceSearchPortlet extends MVCPortlet {
         ACESearchEngine aceSearchEngine = new ACESearchEngine();
 
         List<String> keysAdded = new ArrayList<String>();
+        List<String> jsonKeysAdded = new ArrayList<String>();
 
         long totalResults = 0;
 
@@ -113,6 +114,11 @@ public class AceSearchPortlet extends MVCPortlet {
                  System.out.println("searchAceitem found #" + results.size() + " results of type " + aceItemType.name());
                  request.setAttribute(aceItemType.name() + "_" + SEARCH_RESULTS, results);
                  keysAdded.add(aceItemType.name() + "_" + SEARCH_RESULTS);
+                 Gson gson = new Gson();
+                 String json = gson.toJson(results);
+                 System.out.println("\n\njson LIST is: " + json);
+                 request.setAttribute(aceItemType.name() + "_" + "JSON" + SEARCH_RESULTS, json);
+                 jsonKeysAdded.add(aceItemType.name() + "_" + "JSON" + SEARCH_RESULTS);
              }
         }
         // search only requested aceItemTypes
@@ -124,6 +130,11 @@ public class AceSearchPortlet extends MVCPortlet {
                 System.out.println("searchAceitem found #" + results.size() + " results of type " + aceItemType);
                 request.setAttribute(aceItemType + "_" + SEARCH_RESULTS, results);
                 keysAdded.add(aceItemType + "_" + SEARCH_RESULTS);
+                Gson gson = new Gson();
+                String json = gson.toJson(results);
+                System.out.println("\n\njson LIST is: " + json);
+                request.setAttribute(aceItemType + "_" + "JSON" + SEARCH_RESULTS, json);
+                jsonKeysAdded.add(aceItemType + "_" + "JSON" + SEARCH_RESULTS);
             }
         }
 

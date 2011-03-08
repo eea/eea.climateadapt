@@ -58,10 +58,18 @@ List<String> sectorsList = Arrays.asList(sectors);
 
 <%-- this is here and not in js file, because we're using some JSP code in it. TODO solve that and move to js file --%>
 <script type="text/javascript">
+
+	// display only first 5 searchresults
+	jQuery(document).ready(function(){
+		for(var i  = 0; i < 5; i++) {
+			$(".searchresult").next().show();
+		}
+	});
+
     /**
 	 * retrieves search parameters from the sort-search form that invoked this, executes the search through XHR, and sets json response to correct search results panel.
 	 *
-	 */
+	 */ 
 	function sortedSearch(sortRadio) {
 		// grab unique part, after dash
 		var unique = sortRadio.id.match(/-([0-9]+)/)[1];	
@@ -70,13 +78,12 @@ List<String> sectorsList = Arrays.asList(sectors);
 		querystring += '&aceitemtype=' + $("#sortsearchformId-"+unique + " input[name=aceitemtype]").val();
         if ($("#sortsearchformId-"+unique + " input[name=sector]").val() != undefined) {
 		    querystring += '&sector=' + $("#sortsearchformId-"+unique + " input[name=sector]").val();
-        }
-
+        } 
 		querystring += '&initial_date=' + $("#sortsearchformId-"+unique + " input[name=initial_date]").val(); 
 		querystring += '&final_date=' + $("#sortsearchformId-"+unique + " input[name=final_date]").val(); 
 		querystring += '&simple_date=' + $("#sortsearchformId-"+unique + " input[name=simple_date]").val(); 
 		querystring += '&sortBy=' + $('#'+sortRadio.id).val();
-		// replace existing resultlist with loading icon
+		// replace existing resultlist with loading icon 
 		$('#resultsListId-'+unique).remove();
 		$('#expandedId-'+unique).append('<div id="loadingId-'+unique+'" style="text-align:center;"><img src="<%=renderRequest.getContextPath()%>/images/icons/loading.gif" title="loading" alt="loading"></div>');
 		jQuery.ajax({
@@ -86,35 +93,34 @@ List<String> sectorsList = Arrays.asList(sectors);
 			success: function(json) {
 				// remove loading icon and add results to resultlist	
 				$('#loadingId-'+unique).remove();
-				var resultlist = '<div id="resultsListId-'+unique+'">';				
 				var aceitemResults = new Array();
-				aceitemResults = jQuery.parseJSON(json);
-				jQuery.each(aceitemResults, function(idx, aceitem){ 
-					// add searchresult
-					resultlist += '<div class="searchresult">';
-					// add name and description
+				aceitemResults = jQuery.parseJSON(json);				
+				displayJSONResults(unique, aceitemResults);
+			} 
+		});
+ 
+		function displayJSONResults(unique, aceitemResults) {
+			var resultlist = '<div id="resultsListId-'+unique+'">';
+			jQuery.each(aceitemResults, function(idx, aceitem){ 
+				// add searchresult
+				resultlist += '<div class="searchresult">';
+				// add name and description
+				if (aceitem._storedAt.substr(0, 4) == "http") {
+					resultlist += '<div><span class="bolder">&#187; <a href="' + aceitem._storedAt + '">' + aceitem._name + '</a></span> - ' + aceitem._description + '</div>';
+				} else {
+					resultlist += '<div><span class="bolder">&#187; ' + aceitem._name + ' </span> - ' + aceitem._description + '</div>';
+				}
+				// add result footer 
+				// TODO use actual date from aceitem, if available
+				resultlist += '<div class="resultfooter"><hr class="clearer"/></div>';
+				// close searchresult
+				resultlist += '</div>';					
+			});
+			// close searchresultlist
+			resultlist += '</div>';
+			$('#expandedId-'+unique).append(resultlist);
+		}
 
-                    var description = aceitem._description;
-                    if (description.length > 2000) {
-                        description = description.substring(0, 1996) + ' ...';
-                    }
-
-                    if (aceitem._storedAt.substr(0, 4) == "http") {
-					    resultlist += '<div><span class="bolder">&#187; <a href="' + aceitem._storedAt + '" target="_blank">' + aceitem._name + '</a></span> - ' + description + '</div>';
-                    } else {
-                        resultlist += '<div><span class="bolder">&#187; ' + aceitem._name + ' </span> - ' + description + '</div>';
-                    }
-					// add result footer
-					// TODO use actual date from aceitem, if available
-					resultlist += '<div class="resultfooter"><hr class="clearer"/></div>';
-					// close searchresult
-					resultlist += '</div>';					
-				});
-				// close searchresultlist
-				resultlist += '</div>';
-				$('#expandedId-'+unique).append(resultlist);
-			}
-		});		
 	}
 										
 </script>
@@ -301,9 +307,9 @@ List<String> sectorsList = Arrays.asList(sectors);
 	<!-- Results column  -->
 	<div id="search_results" class="acesearch_column">
 	
-		<h1><liferay-ui:message key="acesearch-data-downloads-header" /></h1>
+		<h1>Data & downloads</h1>
 		
-		<h2 id="searchresultstitle"><liferay-ui:message key="acesearch-results-header" /></h2>
+		<h2 id="searchresultstitle">Search results</h2>
 
         <c:if test="<%= totalResults != null %>">
             <c:choose>
@@ -314,26 +320,31 @@ List<String> sectorsList = Arrays.asList(sectors);
                 <h3><liferay-ui:message key="acesearch-total-results" /> <%= totalResults%></h3>
                 </c:otherwise>
             </c:choose>
-        </c:if>
+			
+        </c:if> 
 
 		<c:set var="groupedResults" scope="page" value="${ARTICLE_searchResults}"/>
+		<c:set var="groupedJSONResults" scope="page" value="${ARTICLE_JSONsearchResults}"/>		
 		<c:set var="aceitemtype" scope="page" value="ARTICLE"/>		
-		<c:set var="groupTitle" scope="page"><liferay-ui:message key="acesearch-datainfotype-lbl-articles" /></c:set>
+		<c:set var="groupTitle" scope="page" value="Articles and publications"/>
 		<%@ include file="searchresultsbytype.jspf" %>
 		 
 		<c:set var="groupedResults" scope="page" value="${MAP_searchResults}"/>
+		<c:set var="groupedJSONResults" scope="page" value="${MAP_JSONsearchResults}"/>
 		<c:set var="aceitemtype" scope="page" value="MAP"/>		
-		<c:set var="groupTitle" scope="page"><liferay-ui:message key="acesearch-datainfotype-lbl-maps" /></c:set>
+		<c:set var="groupTitle" scope="page" value="Maps"/>			
 		<%@ include file="searchresultsbytype.jspf" %>	
 		
 		<c:set var="groupedResults" scope="page" value="${MULTIMEDIA_searchResults}"/>
+		<c:set var="groupedJSONResults" scope="page" value="${MULTIMEDIA_JSONsearchResults}"/>
 		<c:set var="aceitemtype" scope="page" value="MULTIMEDIA"/>				
-		<c:set var="groupTitle" scope="page"><liferay-ui:message key="acesearch-datainfotype-lbl-multimedia" /></c:set>
+		<c:set var="groupTitle" scope="page" value="Multimedia"/>			
 		<%@ include file="searchresultsbytype.jspf" %>					 
 
 		<c:set var="groupedResults" scope="page" value="${DATA_searchResults}"/>
+		<c:set var="groupedJSONResults" scope="page" value="${DATA_JSONsearchResults}"/>
 		<c:set var="aceitemtype" scope="page" value="DATA"/>				
-		<c:set var="groupTitle" scope="page"><liferay-ui:message key="acesearch-datainfotype-lbl-datasets" /></c:set>
+		<c:set var="groupTitle" scope="page" value="Data (sets)"/>			
 		<%@ include file="searchresultsbytype.jspf" %>	
 		
 		<%-- TODO all types --%>
