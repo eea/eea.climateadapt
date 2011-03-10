@@ -59,6 +59,9 @@ List<String> sectorsList = Arrays.asList(sectors);
 <%-- this is here and not in js file, because we're using some JSP code in it. TODO solve that and move to js file --%>
 <script type="text/javascript">
 
+	// ENABLE THIS WHEN RUNNING STANDALONE (WITHOUT REST OF ACE)
+	//var $j = jQuery.noConflict();
+
 	// display only first 5 searchresults
 	jQuery(document).ready(function(){
 		for(var i  = 0; i < 5; i++) {
@@ -255,54 +258,14 @@ List<String> sectorsList = Arrays.asList(sectors);
                 <ul>
                     <li>
                         <a href="#" id="adaptation_sectors_btn" class="expanded_section"><liferay-ui:message key="acesearch-section-adaptation-sectors" /></a>
-
-                        <div id="adaptation_sectors_container" class="checks_container">
-
-                            <div class="check">
-                                <input type="checkbox" name="sector" id="chk_sectors_agriculture" value="AGRICULTURE" <%= sectorsList.contains("AGRICULTURE")?"checked":"" %> />
-                                <label for="chk_sectors_agriculture"><liferay-ui:message key="acesearch-sectors-lbl-agriculture" /></label>
-                            </div>
-
-                            <div class="check">
-                                <input type="checkbox" name="sector" id="chk_sectors_health" value="HEALTH" <%= sectorsList.contains("HEALTH")?"checked":"" %> />
-                                <label for="chk_sectors_health"><liferay-ui:message key="acesearch-sectors-lbl-health" /></label>
-                            </div>
-
-                            <div class="check">
-                                <input type="checkbox" name="sector" id="chk_sectors_biodiversity" value="BIODIVERSITY" <%= sectorsList.contains("BIODIVERSITY")?"checked":"" %> />
-                                <label for="chk_sectors_biodiversity"><liferay-ui:message key="acesearch-sectors-lbl-biodiversity" /></label>
-                            </div>
-
-                            <div class="check">
-                                <input type="checkbox" name="sector" id="chk_sectors_tourism" value="TOURISM" <%= sectorsList.contains("TOURISM")?"checked":"" %> />
-                                <label for="chk_sectors_tourism"><liferay-ui:message key="acesearch-sectors-lbl-tourism" /></label>
-                            </div>
-
-                            <div class="check">
-                                <input type="checkbox" name="sector" id="chk_sectors_coastal" value="COASTAL" <%= sectorsList.contains("COASTAL")?"checked":"" %> />
-                                <label for="chk_sectors_coastal"><liferay-ui:message key="acesearch-sectors-lbl-coastal" /></label>
-                            </div>
-
-                            <div class="check">
-                                <input type="checkbox" name="sector" id="chk_sectors_transport" value="TRANSPORT" <%= sectorsList.contains("TRANSPORT")?"checked":"" %> />
-                                <label for="chk_sectors_transport"><liferay-ui:message key="acesearch-sectors-lbl-transport" /></label>
-                            </div>
-
-                            <div class="check">
-                                <input type="checkbox" name="sector" id="chk_sectors_fisheries" value="FISHERIES" <%= sectorsList.contains("FISHERIES")?"checked":"" %> />
-                                <label for="chk_sectors_fisheries"><liferay-ui:message key="acesearch-sectors-lbl-fisheries" /></label>
-                            </div>
-
-                            <div class="check">
-                                <input type="checkbox" name="sector" id="chk_sectors_water" value="WATER" <%= sectorsList.contains("WATER")?"checked":"" %> />
-                                <label for="chk_sectors_water"><liferay-ui:message key="acesearch-sectors-lbl-water" /></label>
-                            </div>
-
-                            <div class="check">
-                                <input type="checkbox" name="sector" id="chk_sectors_flood" value="FLOOD" <%= sectorsList.contains("FLOOD")?"checked":"" %> />
-                                <label for="chk_sectors_flood"><liferay-ui:message key="acesearch-sectors-lbl-flood" /></label>
-                             </div>
-
+                        <div id="adaptation_sectors_container" class="checks_container">		
+							<%-- note : i18n file should always be in sync with AceItemSector enum --%>						
+							<c:forEach var="adaptationSector" items="<%= nl.wur.alterra.cgi.ace.model.impl.AceItemSector.values() %>" >							
+								<div class="check">
+									<input type="checkbox" name="sector" id="chk_sectors_${adaptationSector}" value="${adaptationSector}" <%= sectorsList.contains("${adaptationSector}")?"checked":"" %> />
+									<label for="chk_sectors_${adaptationSector}"><liferay-ui:message key="acesearch-sectors-lbl-${adaptationSector}" /></label>
+								</div>							
+							</c:forEach>
                         </div>
                     </li>
 

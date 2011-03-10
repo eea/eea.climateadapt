@@ -34,6 +34,10 @@
 		
 		<!-- pagination -->
 		<script type="text/javascript"> 
+			
+			// ENABLE THIS WHEN RUNNING STANDALONE (WITHOUT REST OF ACE)		
+			//var $j = jQuery.noConflict();
+			
 			$j(function() {
 				$j('#${paginationId}').paginate({
 					count 		: ${fn:length(groupedResults) / 5},
