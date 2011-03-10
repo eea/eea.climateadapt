@@ -36,7 +36,7 @@
 		<script type="text/javascript"> 
 			
 			// ENABLE THIS WHEN RUNNING STANDALONE (WITHOUT REST OF ACE)		
-			//var $j = jQuery.noConflict();
+			// var $j = jQuery.noConflict();
 			
 			$j(function() {
 				$j('#${paginationId}').paginate({
@@ -52,7 +52,6 @@
 					mouse		: 'press',
 					onChange	: function(page){
 									var aceitemResults = new Array();
-									//aceitemResults = jQuery.parseJSON('${groupedJSONResults}');
 									$j('#resultsListId-'+${unique}).remove();
 									displayPagedJSONResults(page, ${unique}, ${groupedJSONResults});
 								}					
@@ -65,46 +64,11 @@
 					endIdx = aceitemResults.length;
 				}
 				var aceitemPageResults = new Array();
-				for(var i = startIdx; i < endIdx; i++) {
+				for(var i = startIdx; i <= endIdx; i++) {
 					aceitemPageResults.push(aceitemResults[i]);
 				}
 				displayJSONResults(unique, aceitemPageResults);
-			}
-			
-		function displayJSONResults(unique, aceitemResults) {
-			var resultlist = '<div id="resultsListId-'+unique+'">';
-			jQuery.each(aceitemResults, function(idx, aceitem){ 
-				if (aceitem) {
-					// add searchresult
-					resultlist += '<div class="searchresult">';
-					// add name and description
-					if (aceitem._storedAt.substr(0, 4) == "http") {
-						resultlist += '<div><span class="bolder">&#187; <a href="' + aceitem._storedAt + '">' + aceitem._name + '</a></span>&nbsp;';
-	
-						if (aceitem._storedAt.substr(0, 21) == "http://www.tatenbank.") {
-							resultlist += '<span class="bolder">&#187; <a href="http://babelfish.yahoo.com/translate_url?doit=done&tt=url&intl=1&fr=bf-home&lp=de_en&btnTrUrl=Translate&&trurl='+ aceitem._storedAt + '" target="_blank">(machine translate to english)</a></span>&nbsp;';					
-						}
-						
-						resultlist += ' - ' + aceitem._description + '</div>';
-	
-					} else if (aceitem._storedAt.substr(0, 14) == "ace_project_id") {
-						resultlist += '<div><span class="bolder">&#187; <a href="/projects1?' + aceitem._storedAt + '" target="_blank">' + aceitem._name + '</a></span>&nbsp;';
-						resultlist += ' - ' + aceitem._description + '</div>';
-	
-					} else {
-						resultlist += '<div><span class="bolder">&#187; ' + aceitem._name + ' </span> - ' + aceitem._description + '</div>';
-					}
-					// add result footer 
-					// TODO use actual date from aceitem, if available
-					resultlist += '<div class="resultfooter"><hr class="clearer"/></div>';
-					// close searchresult
-					resultlist += '</div>';					
-				}
-			});
-			// close searchresultlist
-			resultlist += '</div>';
-			$j('#expandedId-'+unique).append(resultlist);
-		}			
+			}		
 			
 		</script>
 		
@@ -138,29 +102,28 @@
 
                         <c:set var="descriptionText" value="${searchResult.description}" />
 
-                        <c:if test="${descriptionLength > 400}">
-                            <c:set var="descriptionText" value="${fn:substring(searchResult.description, 0, 396)} ..." />
-                        </c:if>
-                        <c:choose>
-                            <c:when test="${!empty searchResult.storedAt && fn:startsWith(searchResult.storedAt, 'http')==true}">
-                            <span class="bolder">&#187; <a href="<c:out value="${searchResult.storedAt}"/>" target="_blank"><c:out value="${searchResult.name}"/></a></span>&nbsp;
-                            <c:if test="${!empty searchResult.storedAt && fn:startsWith(searchResult.storedAt, 'http://www.tatenbank.')==true}">
-                            <span class="bolder">&#187; <a href="<c:out value="http://babelfish.yahoo.com/translate_url?doit=done&tt=url&intl=1&fr=bf-home&lp=de_en&btnTrUrl=Translate&&trurl=${searchResult.storedAt}"/>" target="_blank">(machine translate to english)</a></span>&nbsp;
-                            </c:if>
-                            - <c:out value="${descriptionText}"/>
-                            </c:when>
-                            <c:when test="${!empty searchResult.storedAt && fn:startsWith(searchResult.storedAt, 'ace_project_id')==true}">
-                            <span class="bolder">&#187; <a href="<c:out value="/projects1?${searchResult.storedAt}"/>" target="_blank">
-                            <c:out value="${searchResult.name}"/></a></span>&nbsp;
-                            - <c:out value="${descriptionText}"/>
-                            </c:when>                            
-                            <c:otherwise>
-                            <span class="bolder">&#187; <c:out value="${searchResult.name}"/> -</span> <c:out value="${descriptionText}"/>
-                            </c:otherwise>
-                        </c:choose>
-
-
+						<c:if test="${descriptionLength > 400}">
+							<c:set var="descriptionText" value="${fn:substring(searchResult.description, 0, 396)} ..." />
+						</c:if>
+						<c:choose>
+							<c:when test="${!empty searchResult.storedAt && fn:startsWith(searchResult.storedAt, 'http')==true}">
+								<span class="bolder">&#187; <a href="<c:out value="${searchResult.storedAt}"/>" target="_blank"><c:out value="${searchResult.name}"/></a></span>&nbsp;
+								<c:if test="${!empty searchResult.storedAt && fn:startsWith(searchResult.storedAt, 'http://www.tatenbank.')==true}">
+									<span class="bolder">&#187; <a href="<c:out value="http://babelfish.yahoo.com/translate_url?doit=done&tt=url&intl=1&fr=bf-home&lp=de_en&btnTrUrl=Translate&&trurl=${searchResult.storedAt}"/>" target="_blank">(machine translate to english)</a></span>&nbsp;
+								</c:if>
+								- <c:out value="${descriptionText}"/>
+							</c:when>
+							<c:when test="${!empty searchResult.storedAt && fn:startsWith(searchResult.storedAt, 'ace_project_id')==true}">
+								<span class="bolder">&#187; <a href="<c:out value="/projects1?${searchResult.storedAt}"/>" target="_blank">
+									<c:out value="${searchResult.name}"/></a></span>&nbsp;
+								- <c:out value="${descriptionText}"/>
+							</c:when>                            
+							<c:otherwise>
+								<span class="bolder">&#187; <c:out value="${searchResult.name}"/> -</span> <c:out value="${descriptionText}"/>
+							</c:otherwise>
+						</c:choose>
 					</div>
+
 					<div class="resultfooter">
 						<%-- TODO use actual date from aceitem, if available --%>
 						<!--div class="aceitemdate">4 Nov 2010</div>

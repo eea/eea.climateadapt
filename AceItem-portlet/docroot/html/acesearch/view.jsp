@@ -106,43 +106,7 @@ List<String> sectorsList = Arrays.asList(sectors);
 				$j('#paginationId-'+unique + ' .jPag-pages li:first-child a').click();
 			} 
 		});
-                         
-		function displayJSONResults(unique, aceitemResults) {
-			var resultlist = '<div id="resultsListId-'+unique+'">';
-			jQuery.each(aceitemResults, function(idx, aceitem){ 
-				if (aceitem) {		
-					// add searchresult
-					resultlist += '<div class="searchresult">';
-					// add name and description
-					if (aceitem._storedAt.substr(0, 4) == "http") {
-						resultlist += '<div><span class="bolder">&#187; <a href="' + aceitem._storedAt + '">' + aceitem._name + '</a></span>&nbsp;';
-	
-						if (aceitem._storedAt.substr(0, 21) == "http://www.tatenbank.") {
-							resultlist += '<span class="bolder">&#187; <a href="http://babelfish.yahoo.com/translate_url?doit=done&tt=url&intl=1&fr=bf-home&lp=de_en&btnTrUrl=Translate&&trurl='+ aceitem._storedAt + '" target="_blank">(machine translate to english)</a></span>&nbsp;';					
-						}
-						
-						resultlist += ' - ' + aceitem._description + '</div>';
-	
-					} else if (aceitem._storedAt.substr(0, 14) == "ace_project_id") {
-						resultlist += '<div><span class="bolder">&#187; <a href="/projects1?' + aceitem._storedAt + '" target="_blank">' + aceitem._name + '</a></span>&nbsp;';
-						resultlist += ' - ' + aceitem._description + '</div>';
-	
-					} else {
-						resultlist += '<div><span class="bolder">&#187; ' + aceitem._name + ' </span> - ' + aceitem._description + '</div>';
-					}
-					
-					// add result footer 
-					// TODO use actual date from aceitem, if available
-					resultlist += '<div class="resultfooter"><hr class="clearer"/></div>';
-					// close searchresult
-					resultlist += '</div>';			
-				}
-			});
-			// close searchresultlist
-			resultlist += '</div>';
-			$j('#expandedId-'+unique).append(resultlist);
-		}
-
+		
 	}
 										
 </script>
@@ -203,7 +167,7 @@ List<String> sectorsList = Arrays.asList(sectors);
                             <input type="text" class="date" name="final_date" id="final_date" value="<%= final_date %>"/>
                         </div>
 
-                    </div>
+                    </div> 
 
                     <div id="specific_date">
                         <div class="row">
