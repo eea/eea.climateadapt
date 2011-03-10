@@ -19,11 +19,14 @@
 		<icon>/icon.png</icon>
 		<instanceable>false</instanceable>
 		<header-portlet-css>/css/portlet.css</header-portlet-css>
-        <!--header-portlet-javascript>http://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js</header-portlet-javascript-->
-		<header-portlet-javascript>http://tympanus.net/jPaginate/jquery.paginate.js</header-portlet-javascript>
+        <!-- header-portlet-javascript>http://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js</header-portlet-javascript -->
 		<footer-portlet-javascript>
 			/js/search.js
 		</footer-portlet-javascript>
+		<footer-portlet-javascript>
+		<!-- Originally from http://tympanus.net/jPaginate/jquery.paginate.js, but fixed -->
+			/js/jquery.paginate.js
+		</footer-portlet-javascript>		
 		<css-class-wrapper>acesearchportlet-portlet</css-class-wrapper>
 	</portlet>
 
