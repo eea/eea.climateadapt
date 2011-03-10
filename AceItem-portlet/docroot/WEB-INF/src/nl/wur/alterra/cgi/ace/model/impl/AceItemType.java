@@ -6,5 +6,40 @@ package nl.wur.alterra.cgi.ace.model.impl;
  * @author heikki doeleman
  */
 public enum AceItemType {
-    ARTICLE, DATA, INDICATOR, MAP, FLOOD, LIST, TABLE, TOOL, MULTIMEDIA
+    /**
+     * Articles and Publications.
+     */
+    ARTICLE,
+    /**
+     * Data (sets).
+     */
+    DATA,
+    /**
+     * Indicators.
+     */
+    INDICATOR,
+    /**
+     * Maps.
+     */
+    MAP,
+    /**
+     * Guidance.
+     */
+    GUIDANCE,
+    /**
+     * Lists.
+     */
+    LIST,
+    /**
+     * Tables.
+     */
+    TABLE,
+    /**
+     * Tools.
+     */
+    TOOL,
+    /**
+     * Multimedia.
+     */
+    MULTIMEDIA
 }

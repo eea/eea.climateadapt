@@ -60,7 +60,7 @@ List<String> sectorsList = Arrays.asList(sectors);
 <script type="text/javascript">
 
 	// ENABLE THIS WHEN RUNNING STANDALONE (WITHOUT REST OF ACE)
-	//var $j = jQuery.noConflict();
+	// var $j = jQuery.noConflict();
 
 	// display only first 5 searchresults
 	jQuery(document).ready(function(){
@@ -172,53 +172,14 @@ List<String> sectorsList = Arrays.asList(sectors);
                     <input type="radio" name="datainfo_type" value="2" <%= (datainfo_type.equals("2"))?"checked":"" %> /><liferay-ui:message key="acesearch-datainfotype-lbl-sel" />
 
                     <div id="all_selection_types">
-                        <div class="checks_container">
-
-                            <div class="check">
-                                <input type="checkbox" name="aceitemtype" id="chk_type_articles" value="ARTICLE" <%= aceitemtypesList.contains("ARTICLE")?"checked":"" %> />
-                                <label for="chk_type_articles"><liferay-ui:message key="acesearch-datainfotype-lbl-articles" /></label>
-                            </div>
-
-                            <div class="check">
-                                <input type="checkbox" name="aceitemtype" id="chk_type_lists" value="LIST" <%= aceitemtypesList.contains("LIST")?"checked":"" %> />
-                                <label for="chk_type_lists"><liferay-ui:message key="acesearch-datainfotype-lbl-lists" /></label>
-                            </div>
-
-                            <div class="check">
-                                <input type="checkbox" name="aceitemtype" id="chk_type_datasets" value="DATA" <%= aceitemtypesList.contains("DATA")?"checked":"" %> />
-                                <label for="chk_type_datasets"><liferay-ui:message key="acesearch-datainfotype-lbl-datasets" /></label>
-                            </div>
-
-                            <div class="check">
-                                <input type="checkbox" name="aceitemtype" id="chk_type_tables" value="TABLE" <%= aceitemtypesList.contains("TABLE")?"checked":"" %> />
-                                <label for="chk_type_tables"><liferay-ui:message key="acesearch-datainfotype-lbl-tables" /></label>
-                            </div>
-
-                            <div class="check">
-                                <input type="checkbox" name="aceitemtype" id="chk_type_indicators" value="INDICATOR" <%= aceitemtypesList.contains("INDICATOR")?"checked":"" %> />
-                                <label for="chk_type_indicators"><liferay-ui:message key="acesearch-datainfotype-lbl-indicators" /></label>
-                            </div>
-
-                            <div class="check">
-                                <input type="checkbox" name="aceitemtype" id="chk_type_tools" value="TOOL" <%= aceitemtypesList.contains("TOOL")?"checked":"" %> />
-                                <label for="chk_type_tools"><liferay-ui:message key="acesearch-datainfotype-lbl-tools" /></label>
-                            </div>
-
-                            <div class="check">
-                                <input type="checkbox" name="aceitemtype" id="chk_type_maps" value="MAP" <%= aceitemtypesList.contains("MAP")?"checked":"" %> />
-                                <label for="chk_type_maps"><liferay-ui:message key="acesearch-datainfotype-lbl-maps" /></label>
-                            </div>
-
-                            <div class="check">
-                                <input type="checkbox" name="aceitemtype" id="chk_type_multimedia" value="MULTIMEDIA" <%= aceitemtypesList.contains("MULTIMEDIA")?"checked":"" %> />
-                                <label for="chk_type_multimedia"><liferay-ui:message key="acesearch-datainfotype-lbl-multimedia" /></label>
-                            </div>
-
-                            <div class="check">
-                                <input type="checkbox" name="aceitemtype" id="chk_type_flood" value="FLOOD"  <%= aceitemtypesList.contains("FLOOD")?"checked":"" %> />
-                                <label for="chk_type_flood"><liferay-ui:message key="acesearch-datainfotype-lbl-flood" /></label>
-                            </div>
-
+                        <div class="checks_container">						
+							<%-- note : i18n file should always be in sync with AceItemType enum --%>						
+							<c:forEach var="aceItemType" items="<%= nl.wur.alterra.cgi.ace.model.impl.AceItemType.values() %>" >							
+								<div class="check">
+									<input type="checkbox" name="aceitemtype" id="chk_sectors_${aceItemType}" value="${aceItemType}" <%= sectorsList.contains("${aceItemType}")?"checked":"" %> />
+									<label for="chk_sectors_${aceItemType}"><liferay-ui:message key="acesearch-datainfotype-lbl-${aceItemType}" /></label>
+								</div>							
+							</c:forEach>						
                         </div>
                     </div>
                 </div>
