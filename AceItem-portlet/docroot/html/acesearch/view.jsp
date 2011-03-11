@@ -60,14 +60,14 @@ List<String> sectorsList = Arrays.asList(sectors);
 <script type="text/javascript">
 
 	// ENABLE THIS WHEN RUNNING STANDALONE (WITHOUT REST OF ACE)
-	// var $j = jQuery.noConflict();
+	var $j = jQuery.noConflict();
 
 	// display only first 5 searchresults
 	jQuery(document).ready(function(){
 		for(var i  = 0; i < 5; i++) {
 			$j(".searchresult").next().show();
 		}
-	});
+	});     
 
     /**
 	 * retrieves search parameters from the sort-search form that invoked this, executes the search through XHR, and sets json response to correct search results panel.
@@ -107,7 +107,7 @@ List<String> sectorsList = Arrays.asList(sectors);
 			} 
 		});
 		
-	}
+	}      
 										
 </script>
 
@@ -229,7 +229,8 @@ List<String> sectorsList = Arrays.asList(sectors);
             </c:choose>
 			
         </c:if> 
-
+		   
+		   
 		<c:set var="groupedResults" scope="page" value="${ARTICLE_searchResults}"/>
 		<c:set var="groupedJSONResults" scope="page" value="${ARTICLE_JSONsearchResults}"/>		
 		<c:set var="aceitemtype" scope="page" value="ARTICLE"/>		

@@ -1,5 +1,7 @@
 jQuery(document).ready(function() {
 
+	var $j = jQuery.noConflict();
+
     $j("#clear-search-form-btn").click(function() {
        clearSearchForm();
     });
@@ -16,6 +18,11 @@ jQuery(document).ready(function() {
     $j("input[name=date_type]:radio").change(function() {
         showDatePanels();
     });
+	
+	if($j('.resultsgroup').length) {
+		resizePagination();	
+	}								
+	
 	
     $j(".expandedResultsGroup").hide();
 	
@@ -38,26 +45,42 @@ jQuery(document).ready(function() {
 		// show expandedResultsGroup with same unique id postfix	   
 	   $j("#expandedId-"+unique).show(100);
     });	
+	
+	
 
     $j("input[name=sortBy]:radio").change(function() {
         sortedSearch(this);
     });
 	
+	
+	$j.each($j(".expandedResultsGroup"), function(i,v){
+		$j("#" + this.id).hide();
+	});
+	
 	// expand first resultgroup
 	var firstResultsGroup = $j(".collapsedResultsGroupTitle").first();
 	if(firstResultsGroup) {
-		//alert('firstResultsGroup: ' + firstResultsGroup);
 		firstResultsGroup.click();
 	}
-	else {
-		//alert('No firstResultsGroup');	
-	}
-	
+
     showDataInfoPanel();
     showDatePanels();
 });
 
-
+/**
+ * Resizes pagination for results groups according to how many page numbers are displayed.
+ */ 
+function resizePagination() {
+	$j.each($j(".resultsgroup div.jPaginate"), function(index, value){
+		var numbersListWidth = $j('#' + this.id + ' div:nth-child(2) .jPag-pages').width();
+		var numbersListParentWidth = 550;																		
+		if(numbersListWidth <= 550) {
+			numbersListParentWidth = 20 + numbersListWidth;
+		}									
+		$j('#' + this.id + ' div:nth-child(2)').width(numbersListParentWidth);
+		$j('#' + this.id + ' div:nth-child(3)').css("left", 60 + numbersListParentWidth);
+	});				
+}	
 
 
 /**
@@ -187,6 +210,6 @@ function displayJSONResults(unique, aceitemResults) {
 	});
 	// close searchresultlist
 	resultlist += '</div>';
-	$j('#expandedId-'+unique).append(resultlist);
+	jQuery('#expandedId-'+unique).append(resultlist);
 }	
 		
