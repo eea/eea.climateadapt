@@ -226,7 +226,7 @@ public class ACESearchEngine extends HitsOpenSearchImpl {
                 aceItem.setName(document.get(ACEIndexConstant.IndexField.NAME));
                 aceItem.setNutsId(document.get(ACEIndexConstant.IndexField.NUTS_ID));
                 aceItem.setNutsLevel(document.get(ACEIndexConstant.IndexField.NUTS_LEVEL));
-                aceItem.setPilar(document.get(ACEIndexConstant.IndexField.PILLAR));
+                aceItem.setPilar(document.get(ACEIndexConstant.IndexField.ELEMENT));
                 aceItem.setSector(document.get(ACEIndexConstant.IndexField.SECTOR));
                 String startDate = document.get(ACEIndexConstant.IndexField.START_DATE);
                 if(startDate != null) {

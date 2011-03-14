@@ -60,7 +60,7 @@ public class AceItemIndexer {
         String name = aceItem.getName();
         String nutsId = aceItem.getNutsId();
         String nutsLevel = aceItem.getNutsLevel();
-        String pillar = aceItem.getPilar();
+        String element = aceItem.getPilar();
         String sector = aceItem.getSector();
         Date startDate = aceItem.getStartDate();
         String storedAt = aceItem.getStoredAt();
@@ -107,8 +107,8 @@ public class AceItemIndexer {
             document.add(new Field(ACEIndexConstant.IndexField.NUTS_LEVEL, nutsLevel, Field.Store.YES,Field.Index.NOT_ANALYZED));
         }
 
-        if(pillar != null) {
-            document.add(new Field(ACEIndexConstant.IndexField.PILLAR, pillar, Field.Store.YES,Field.Index.NOT_ANALYZED));
+        if(element != null) {
+            document.add(new Field(ACEIndexConstant.IndexField.ELEMENT, element, Field.Store.YES,Field.Index.NOT_ANALYZED));
         }
 
         if(sector != null) {

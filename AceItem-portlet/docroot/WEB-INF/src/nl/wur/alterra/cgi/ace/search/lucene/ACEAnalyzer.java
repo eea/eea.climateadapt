@@ -29,6 +29,7 @@ public class ACEAnalyzer {
         analyzer.addAnalyzer(ACEIndexConstant.IndexField.KEYWORD, keywordAnalyzer);
         analyzer.addAnalyzer(ACEIndexConstant.IndexField.TYPE, keywordAnalyzer);
         analyzer.addAnalyzer(ACEIndexConstant.IndexField.SECTOR, keywordAnalyzer);
+        analyzer.addAnalyzer(ACEIndexConstant.IndexField.ELEMENT, keywordAnalyzer);
         analyzer.addAnalyzer(ACEIndexConstant.IndexField.START_DATE, keywordAnalyzer);
         analyzer.addAnalyzer(ACEIndexConstant.IndexField.STOREDAT, keywordAnalyzer);
         return analyzer;
