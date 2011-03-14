@@ -9,6 +9,11 @@ jQuery(document).ready(function() {
     $j("#adaptation_sectors_btn").click(function() {
        showAdaptationSectorsPanel();
     });
+	
+    $j("#adaptation_elements_btn").click(function() {
+       showAdaptationElementsPanel();
+    });	
+	showAdaptationElementsPanelOnLoad();
 
     $j("input[name=datainfo_type]:radio").change(function() {
         showDataInfoPanel();
@@ -101,22 +106,54 @@ function showAdaptationSectorsPanel() {
 
 /**
  *
- * Shows/hides the data info selection panel
+ * Shows/hides the adaptation elements panel.
+ *
+ */
+function showAdaptationElementsPanel() {
+    $j("#adaptation_elements_container").slideToggle();
+    if ($j("#adaptation_elements_btn").hasClass('collapsed_section')) {
+        $j("#adaptation_elements_btn").removeClass('collapsed_section');
+        $j("#adaptation_elements_btn").addClass('expanded_section');
+    } 
+	else {
+        $j("#adaptation_elements_btn").removeClass('expanded_section');
+        $j("#adaptation_elements_btn").addClass('collapsed_section');
+    }
+}
+
+/**
+ * Expands elements panel if at least one of them is checked.
+ */
+function showAdaptationElementsPanelOnLoad() {
+    if ($j("input[name=element]:checked").length > 0) {
+        jQuery('#adaptation_elements_container').show(100);
+        $j("#adaptation_elements_btn").removeClass('collapsed_section');
+        $j("#adaptation_elements_btn").addClass('expanded_section');
+	} 
+	else {
+        jQuery('#adaptation_elements_container').hide();
+        $j("#adaptation_elements_btn").removeClass('expanded_section');
+        $j("#adaptation_elements_btn").addClass('collapsed_section');    }
+}
+
+
+/**
+ *
+ * Shows/hides the data info selection panel.
  *
  */
 function showDataInfoPanel() {
     if ($j("input[name=datainfo_type]:checked").val() == '1') {
         jQuery('#all_selection_types').hide();
-
-    } else if ($j("input[name=datainfo_type]:checked").val() == '2') {
+    } 
+	else if ($j("input[name=datainfo_type]:checked").val() == '2') {
         jQuery('#all_selection_types').show(100);
-
     }
 }
 
 /**
  *
- * Shows the date panels on date type selection
+ * Shows the date panels on date type selection.
  *
  *   - No date panel
  *   - Date range panel
@@ -167,6 +204,11 @@ function clearSearchForm() {
     $j("input[name=sector]:checkbox").each(function() {
         $j(this).attr('checked', false);
     });
+	
+    $j("input[name=element]:checkbox").each(function() {
+        $j(this).attr('checked', false);
+    });
+	
     showDataInfoPanel();
     showDatePanels();
 }

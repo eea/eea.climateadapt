@@ -129,13 +129,17 @@ public class ACESearchEngine extends HitsOpenSearchImpl {
     }
 
     /**
-     * Searches Lucene, restricted to specified aceItemType.
+     * Searches Lucene, restricted to specified search parameters.
      *
+     * @param anyOfThese
      * @param aceItemType
+     * @param sectors
+     * @param elements
+     * @param sortBy
      * @return results
      * @throws ACELuceneException hmm
      */
-    public List<AceItem> searchLuceneByType(String[] anyOfThese, String aceItemType, String[] sectors, String sortBy) throws ACELuceneException {
+    public List<AceItem> searchLuceneByType(String[] anyOfThese, String aceItemType, String[] sectors, String[] elements, String sortBy) throws ACELuceneException {
         try {
             //
             // handle free text input
@@ -170,13 +174,21 @@ public class ACESearchEngine extends HitsOpenSearchImpl {
             //
             if ((sectors != null) && (sectors.length > 0)) {
                 rawQuery += " AND (";
-
                 for(String sector: sectors) {
                     rawQuery += " (" + ACEIndexConstant.IndexField.SECTOR + ":" + sector + ") OR";
                 }
-
                 rawQuery =  rawQuery.substring(0, rawQuery.lastIndexOf("OR")) + " )";
+            }
 
+            //
+            // handle elements
+            //
+            if ((elements != null) && (elements.length > 0)) {
+                rawQuery += " AND (";
+                for(String element: elements) {
+                    rawQuery += " (" + ACEIndexConstant.IndexField.ELEMENT + ":" + element + ") OR";
+                }
+                rawQuery =  rawQuery.substring(0, rawQuery.lastIndexOf("OR")) + " )";
             }
 
             ACEIndexSearcher searcher = ACEIndexSearcher.getACEIndexSearcher();

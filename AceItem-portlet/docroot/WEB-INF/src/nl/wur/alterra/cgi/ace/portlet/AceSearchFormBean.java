@@ -9,6 +9,7 @@ public class AceSearchFormBean {
 
     private String[] aceitemtype;
     private String[] sector;
+    private String[] element;
     private String initialDate;
     private String finalDate;
     private String simpleDate;
@@ -27,8 +28,16 @@ public class AceSearchFormBean {
         return sector;
     }
 
+    public String[] getElement() {
+        return element;
+    }
+
     public void setSector(String[] sector) {
         this.sector = sector;
+    }
+
+    public void setElement(String[] element) {
+        this.element = element;
     }
 
     public String getInitialDate() {

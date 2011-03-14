@@ -177,7 +177,7 @@
     display: none;
 }
 
-#all_selection_types {
+#all_selection_types, #adaptation_elements_container {
     display: none;
 }
 

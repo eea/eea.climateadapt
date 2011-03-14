@@ -40,6 +40,7 @@ public class AceSearchPortlet extends MVCPortlet {
     private static final String ACEITEM_TYPE = "aceitemtype";
     private static final String SORTBY = "sortBy";
     private static final String SECTOR = "sector";
+    private static final String ELEMENT = "element";
 
     private static final String SEARCH_PARAMS = "searchParams";
     private static final String SEARCH_RESULTS = "searchResults";
@@ -80,6 +81,7 @@ public class AceSearchPortlet extends MVCPortlet {
         String[] finalDates = requestParams.get(FINAL_DATE);
         String[] initialDates = requestParams.get(INITIAL_DATE);
         String[] sectors = requestParams.get(SECTOR);
+        String[] elements = requestParams.get(ELEMENT);
         String[] simpleDates = requestParams.get(SIMPLE_DATE);
         String[] sortBys = requestParams.get(SORTBY);
         String sortBy = null;
@@ -93,10 +95,12 @@ public class AceSearchPortlet extends MVCPortlet {
         formBean.setFinalDate(finalDates[0]);
         formBean.setInitialDate(initialDates[0]);
         formBean.setSector(sectors);
+        formBean.setElement(elements);
         formBean.setSimpleDate(simpleDates[0]);
         formBean.setSortBy(sortBy);
 
         request.setAttribute(SEARCH_PARAMS, formBean);
+
 
         ACESearchEngine aceSearchEngine = new ACESearchEngine();
 
@@ -108,7 +112,7 @@ public class AceSearchPortlet extends MVCPortlet {
         // no aceItemTypes requested: search for all of them
         if(aceItemTypes == null || aceItemTypes.length == 0) {
              for(AceItemType aceItemType : AceItemType.values()) {
-                 List<AceItem> results = aceSearchEngine.searchLuceneByType(anyOfThese, aceItemType.name(), sectors, sortBy);
+                 List<AceItem> results = aceSearchEngine.searchLuceneByType(anyOfThese, aceItemType.name(), sectors, elements, sortBy);
                  totalResults += results.size();
 
                  System.out.println("searchAceitem found #" + results.size() + " results of type " + aceItemType.name());
@@ -153,7 +157,7 @@ public class AceSearchPortlet extends MVCPortlet {
         // search only requested aceItemTypes
         else {
             for(String aceItemType : aceItemTypes) {
-                List<AceItem> results = aceSearchEngine.searchLuceneByType(anyOfThese, aceItemType, sectors, sortBy);
+                List<AceItem> results = aceSearchEngine.searchLuceneByType(anyOfThese, aceItemType, sectors, elements, sortBy);
                 totalResults += results.size();
 
                 System.out.println("searchAceitem found #" + results.size() + " results of type " + aceItemType);

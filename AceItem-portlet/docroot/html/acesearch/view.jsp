@@ -32,20 +32,24 @@ if ((datainfo_type == null) || (datainfo_type.equals(""))) datainfo_type = "1";
 String date_type = ParamUtil.getString(request, "date_type");
 if ((date_type == null) || (date_type.equals(""))) date_type = "1";
 
-
 String[] aceitemtypes = request.getParameterValues("aceitemtype");
 if (aceitemtypes == null) aceitemtypes =  new String[0];
 List<String> aceitemtypesList = Arrays.asList(aceitemtypes);
-
+pageContext.setAttribute("aceitemtypesList", aceitemtypesList);
 
 String initial_date = ParamUtil.getString(request, "initial_date");
 String final_date = ParamUtil.getString(request, "final_date");
 String simple_date = ParamUtil.getString(request, "simple_date");
 
 String[] sectors = request.getParameterValues("sector");
-if (sectors == null) sectors =  new String[0];
+if (sectors == null) sectors = new String[0];
 List<String> sectorsList = Arrays.asList(sectors);
+pageContext.setAttribute("sectorsList", sectorsList);
 
+String[] elements = request.getParameterValues("element");
+if (elements == null) elements = new String[0];
+List<String> elementsList = Arrays.asList(elements);
+pageContext.setAttribute("elementsList", elementsList);
 
 %>
 
@@ -82,6 +86,9 @@ List<String> sectorsList = Arrays.asList(sectors);
         if ($j("#sortsearchformId-"+unique + " input[name=sector]").val() != undefined) {
 		    querystring += '&sector=' + $j("#sortsearchformId-"+unique + " input[name=sector]").val();
         } 
+        if ($j("#sortsearchformId-"+unique + " input[name=element]").val() != undefined) {
+		    querystring += '&element=' + $j("#sortsearchformId-"+unique + " input[name=element]").val();
+        } 		
 		querystring += '&initial_date=' + $j("#sortsearchformId-"+unique + " input[name=initial_date]").val(); 
 		querystring += '&final_date=' + $j("#sortsearchformId-"+unique + " input[name=final_date]").val(); 
 		querystring += '&simple_date=' + $j("#sortsearchformId-"+unique + " input[name=simple_date]").val(); 
@@ -138,16 +145,30 @@ List<String> sectorsList = Arrays.asList(sectors);
                     <div id="all_selection_types">
                         <div class="checks_container">						
 							<%-- note : i18n file should always be in sync with AceItemType enum --%>						
-							<c:forEach var="aceItemType" items="<%= nl.wur.alterra.cgi.ace.model.impl.AceItemType.values() %>" >							
+							<c:forEach var="aceItemType" items="<%= nl.wur.alterra.cgi.ace.model.impl.AceItemType.values() %>" >	
 								<div class="check">
-									<input type="checkbox" name="aceitemtype" id="chk_sectors_${aceItemType}" value="${aceItemType}" <%= sectorsList.contains("${aceItemType}")?"checked":"" %> />
-									<label for="chk_sectors_${aceItemType}"><liferay-ui:message key="acesearch-datainfotype-lbl-${aceItemType}" /></label>
+									<c:set var="aceItemMustBeChecked" value="false" />
+									<c:forEach var="requestedAceItemType" items="${aceitemtypesList}">
+										<c:if test="${requestedAceItemType eq aceItemType}">
+											<c:set var="aceItemMustBeChecked" value="true" />
+										</c:if>
+									</c:forEach>	
+									<c:choose>
+										<c:when test="${aceItemMustBeChecked}">
+											<input type="checkbox" name="aceitemtype" id="chk_type_${aceItemType}" value="${aceItemType}" checked="checked" />
+										</c:when>
+										<c:otherwise>
+											<input type="checkbox" name="aceitemtype" id="chk_type_${aceItemType}" value="${aceItemType}" />
+										</c:otherwise>
+									</c:choose>
+									<label for="chk_type_${aceItemType}"><liferay-ui:message key="acesearch-datainfotype-lbl-${aceItemType}" /></label>								
 								</div>							
 							</c:forEach>						
                         </div>
                     </div>
-                </div>
+                </div>				
             </div>
+
 
             <div class="search_section">
                 <h2><liferay-ui:message key="acesearch-section-header3" /></h2>
@@ -184,10 +205,23 @@ List<String> sectorsList = Arrays.asList(sectors);
                     <li>
                         <a href="#" id="adaptation_sectors_btn" class="expanded_section"><liferay-ui:message key="acesearch-section-adaptation-sectors" /></a>
                         <div id="adaptation_sectors_container" class="checks_container">		
-							<%-- note : i18n file should always be in sync with AceItemSector enum --%>						
+							<%-- note : i18n file should always be in sync with AceItemSector enum --%>	
 							<c:forEach var="adaptationSector" items="<%= nl.wur.alterra.cgi.ace.model.impl.AceItemSector.values() %>" >							
 								<div class="check">
-									<input type="checkbox" name="sector" id="chk_sectors_${adaptationSector}" value="${adaptationSector}" <%= sectorsList.contains("${adaptationSector}")?"checked":"" %> />
+									<c:set var="adaptationSectorMustBeChecked" value="false" />
+									<c:forEach var="requestedSector" items="${sectorsList}">
+										<c:if test="${requestedSector eq adaptationSector}">
+											<c:set var="adaptationSectorMustBeChecked" value="true" />
+										</c:if>
+									</c:forEach>	
+									<c:choose>
+										<c:when test="${adaptationSectorMustBeChecked}">
+											<input type="checkbox" name="sector" id="chk_sectors_${adaptationSector}" value="${adaptationSector}" checked="checked" />
+										</c:when>
+										<c:otherwise>
+											<input type="checkbox" name="sector" id="chk_sectors_${adaptationSector}" value="${adaptationSector}" />
+										</c:otherwise>
+									</c:choose>
 									<label for="chk_sectors_${adaptationSector}"><liferay-ui:message key="acesearch-sectors-lbl-${adaptationSector}" /></label>
 								</div>							
 							</c:forEach>
@@ -199,7 +233,29 @@ List<String> sectorsList = Arrays.asList(sectors);
                     </li>
 
                     <li>
-                        <a href="#" class="collapsed_section"><liferay-ui:message key="acesearch-section-adaptation-pillars" /></a>
+                        <a href="#" id="adaptation_elements_btn" class="collapsed_section"><liferay-ui:message key="acesearch-section-adaptation-elements" /></a>
+                        <div id="adaptation_elements_container" class="checks_container">		
+							<%-- note : i18n file should always be in sync with AceItemElement enum --%>
+							<c:forEach var="adaptationElement" items="<%= nl.wur.alterra.cgi.ace.model.impl.AceItemElement.values() %>" >							
+								<div class="check">
+									<c:set var="adaptationElementMustBeChecked" value="false" />
+									<c:forEach var="requestedElement" items="${elementsList}">
+										<c:if test="${requestedElement eq adaptationElement}">
+											<c:set var="adaptationElementMustBeChecked" value="true" />
+										</c:if>
+									</c:forEach>	
+									<c:choose>
+										<c:when test="${adaptationElementMustBeChecked}">
+											<input type="checkbox" name="element" id="chk_elements_${adaptationElement}" value="${adaptationElement}" checked="checked" />
+										</c:when>
+										<c:otherwise>
+											<input type="checkbox" name="element" id="elements_${adaptationElement}" value="${adaptationElement}" />
+										</c:otherwise>
+									</c:choose>
+									<label for="chk_elements_${adaptationElement}"><liferay-ui:message key="acesearch-elements-lbl-${adaptationElement}" /></label>
+								</div>							
+							</c:forEach>
+                        </div>						
                     </li>
                 </ul>
             </div>

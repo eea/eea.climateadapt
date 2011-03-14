@@ -90,12 +90,17 @@ public class ACEIndexConstant {
         public static final String NUTS_LEVEL = "nutslevel";
         /**
          * Pillar.
+         * TODO remove, not used
          */
         public static final String PILLAR = "pillar";
         /**
          * Sector.
          */
         public static final String SECTOR = "sector";
+        /**
+         * Sector.
+         */
+        public static final String ELEMENT = "element";
         /**
          * Start date.
          */
