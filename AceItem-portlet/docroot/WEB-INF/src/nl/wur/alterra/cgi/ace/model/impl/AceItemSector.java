@@ -37,7 +37,7 @@ public enum AceItemSector {
     /**
      * Marine and Fisheries.
      */
-    FISHERIES,
+    MARINE,
     /**
      * Water management.
      */
