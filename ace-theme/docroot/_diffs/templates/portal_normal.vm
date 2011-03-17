@@ -30,13 +30,13 @@
 			</h1>
 			<div id="header-menu">
                 <ul>
-					<li id="twitter"><a href="http://twitter.com/euenvironment" target="_blank">Twitter</a></li>
+					#if(!$is_signed_in)
+						<li id="signin"><a href="$sign_in_url" id="sign-in" rel="nofollow">$sign_in_text</a></li>
+					#end
+                    <li id="twitter"><a href="http://twitter.com/euenvironment" target="_blank">Twitter</a></li>
 					<li id="sitemap"><a href="/sitemap">Sitemap</a></li>
-					<li id="signin">
-						#if(!$is_signed_in)
-							<a href="$sign_in_url" id="sign-in" rel="nofollow">$sign_in_text</a>
-						#end
-                    </li>
+                    <li id="legal-notice"><a href="http://ec.europa.eu/geninfo/legal_notices_en.htm">Legal notice</a></li>
+					
                 </ul>
             </div>
 			<div id="searchbox">

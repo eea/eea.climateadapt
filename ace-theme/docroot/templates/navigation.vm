@@ -19,11 +19,11 @@
 	</ul>
 </nav>
 	
-<secnav id="sec-menu">
+<nav id="sec-menu">
 	#set ($VOID = $velocityPortletPreferences.setValue('display-style', '4'))
 	#set ($VOID = $velocityPortletPreferences.setValue('portlet-setup-show-borders', 'false'))
 	#set ($instanceId = '9VDq')
 	#set ($myPortletId = "71_INSTANCE_${instanceId}")
 	$taglibLiferay.runtime($myPortletId, '', $velocityPortletPreferences.toString())
 	#set ($VOID = $velocityPortletPreferences.reset())
-</secnav>
+</nav>

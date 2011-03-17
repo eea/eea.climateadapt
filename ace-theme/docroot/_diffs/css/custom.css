@@ -7,17 +7,18 @@
 /* ---------- Base styles ---------- */
 
 body {
-	background: #EEF0F2;
+	background: #FFF;
+	font-family: Tahoma, Times New Roman, serif;
 	font-size: 11px;
 }
 
 a {
-	color: #5B677D;
+	color: #364001;
 	text-decoration: underline;
 }
 
 a:hover {
-	color: #06C;
+	color: #a5bf26;
 	text-decoration: none;
 }
 
@@ -78,11 +79,7 @@ body #banner .logo a {
 
 #sign-in {
 	background: url(../images/common/key.png) no-repeat 3px 50%;
-	/*font-weight: bold;*/
 	padding-left: 25px;
-	/*position: absolute;
-	right: 0;
-	top: 1.4em;*/
 }
 
 .guest-community .logo .current-community {
@@ -104,24 +101,24 @@ body #banner .logo a {
 /* ---------- Main navigation ---------- */
 
 #navigation {
-	background: #003565;/*#414445 url(../images/navigation/bg.png) repeat-x 0 0;*/
+	background: #a5bf26;
 	clear: both;
-	margin: 0 auto 5px;
+	margin: 3px auto;
 	min-height: 2.2em;
-	padding: 0 5px;
 	position: relative;
 	z-index: 1;
-	-moz-border-radius: 0 0 4px 4px;
 }
 
 #navigation ul {
 	list-style: none;
 	margin: 0;
-	padding: 3px;
+	padding: 6px;
 }
 
 .ie7 #navigation ul {
-	padding: 2px;
+	margin-left: 3px;
+	padding: 0 2px 2px 2px;
+	min-height: 2.3em;
 }
 
 #navigation li, #navigation a {
@@ -134,22 +131,30 @@ body #banner .logo a {
 	z-index: 200;
 }
 
+.ie7 #navigation li {
+	line-height: 29px;
+}
+
 #navigation li {
+	background: url("/ace-theme/images/line_sep_main_menu.png") no-repeat right center;
+	margin-left: -2px;
 	position: relative;
-	vertical-align: top;
+	vertical-align: middle;
+}
+
+#navigation li.last {
+	background: none;
 }
 
 #navigation a {
-	color: #FFF;
-	font-size: 1.1em;
-	font-weight: bold;
-	margin: 0 1px;
-	padding: 3px 7px;
+	color: #000;
+	font-size: 1.2em;
+	padding: 0 7px;
 	text-decoration: none;
 }
 
 .ie7 #navigation a {
-	padding: 4px 15px;
+	padding: 0 7px;
 }
 
 #navigation .aui-dd-drop a {
@@ -157,10 +162,8 @@ body #banner .logo a {
 }
 
 #navigation .selected a, #navigation a:hover, #navigation a:focus, #navigation .child-menu li a, #navigation .aui-dd-dragging, .lfr-navigation-proxy {
-	background: #3384CD;/*#313334;*/
 	color: #FFF;
 	outline: 0;
-	/*text-shadow: -1px -1px #000;*/
 }
 
 #navigation .child-menu li a {
@@ -170,7 +173,6 @@ body #banner .logo a {
 }
 
 #navigation li:hover .child-menu {
-	/*background: #1E2529;*/
 	display: block;
 	position: absolute;
 	width: 200px;
@@ -178,7 +180,6 @@ body #banner .logo a {
 }
 
 .ie6 #navigation li.hover .child-menu {
-	background: #1E2529;
 	display: block;
 	position: absolute;
 	width: 200px;
@@ -214,7 +215,6 @@ body #banner .logo a {
 }
 
 #navigation .child-menu .selected a {
-	/*background: #020509 url(../images/navigation/bullet_selected.png) no-repeat 5px 50%;*/
 	color: #000;
 }
 
@@ -236,7 +236,7 @@ body #banner .logo a {
 }
 
 .portlet-title {
-	color: #003565;
+	color: #607209;
 	float: none;
 	font-weight: bold;
 	min-width: 50%;
@@ -355,12 +355,6 @@ body #banner .logo a {
 	-webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.5), 1px 1px 0 #FFF;
 	box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.5), 1px 1px 0 #FFF;
 }
-/*
-#navigation li.selected a {
-	-moz-box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.8);
-	-webkit-box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.8);
-	box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.8);
-}*/
 
 .aui-combobox .aui-toolbar-first {
 	-moz-border-radius-topleft: 0;
@@ -372,35 +366,48 @@ body #banner .logo a {
 }
 
 #heading {
-background-image: url("/ace-theme/images/bg_banner.png");
-background-repeat: repeat-x;
+background-image: url("/ace-theme/images/bg_banner.jpg");
+}
+
+#heading .logo {
+margin-left: 63px;
 }
 
 #header-menu {
+background-image: url("/ace-theme/images/bg_links-tools-ace.png");
 position: absolute;
-top: -5px;
+top: 0;
 right: 0;
 }
 
-.ie #header-menu {
+.ie7 #header-menu {
 top: 15px;
 }
 
+#header-menu ul {
+margin: 7px 10px 7px 60px;
+}
+
 #header-menu li {
+background: url("/ace-theme/images/line_sep_links.gif") no-repeat left center;
 display: inline;
-margin-left: 10px;
+padding: 0 2px 0 7px;
+}
+
+#header-menu li.first {
+background: none;
 }
 
 #header-menu a {
 text-decoration: none;
-color: #003565;
-}
-
-#header-menu a:hover {
 color: #FFF;
 }
 
-#header-menu li#twitter {
+#header-menu a:hover {
+color: #a5bf26;
+}
+
+#header-menu li#twitter a {
 background-image: url("http://www.eea.europa.eu/twitter16x16.png");
 background-repeat: no-repeat;
 padding-bottom: 2px;
@@ -416,7 +423,7 @@ right: 10px;
 top: 50px;
 }
 
-.ie #searchbox {
+.ie7 #searchbox {
 top: 65px;
 }
 
@@ -435,22 +442,22 @@ margin: 0;
 
 #sec-menu ul {
 margin: 5px 0;
-padding-left: 24px;
+padding-left: 5px;
 }
 
 #sec-menu li {
-border-right: 1px solid #00529B;
+background: url("/ace-theme/images/line_sep_sec_menu.png") no-repeat right center;
 display: inline;
 padding: 2px;
 }
 
 #sec-menu li.last {
-border:none;
+background:none;
 }
 
 #sec-menu a {
-color: #003565;
-font-weight: bold;
+color: #758816;
+font-weight: normal;
 margin: 0 2px;
 padding: 2px;
 text-decoration: none;
@@ -458,21 +465,12 @@ text-decoration: none;
 
 #sec-menu a:hover,
 #sec-menu .selected {
-color: #EF8C00;
+color: #2c330a;
 }
 
 /*Adjust styles portlets*/
 .taglib-header {
-color: #003565;
-}
-
-a {
-color: #00529B;
-text-decoration: none;
-}
-
-a:hover {
-color: #EF8C00;
+color: #2c330a;
 }
 
 /*Styles Ace Layout 2 & 3*/
@@ -490,4 +488,11 @@ float: left;
 .ace_layout_2 #column-3,
 .ace_layout_3 #column-4 {
 float: right;
+}
+
+/****Styles modified from originally ace-theme/docroot/css/custom_common.css*****/
+.logo .current-community, #navigation, #navigation a, .portlet, .portlet-topper, .site-breadcrumbs ul {
+	-moz-border-radius: 0;
+	-webkit-border-radius: 0;
+	border-radius: 0;
 }

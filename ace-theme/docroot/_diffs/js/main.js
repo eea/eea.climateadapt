@@ -33,10 +33,8 @@ AUI().ready(
 
 //All JQuery stuff after this point
 
-var $j = jQuery.noConflict();
-
-$j(document).ready(function(){
-	$j("ul li:first-child").addClass("first");
+$(document).ready(function(){
+	$("ul li:first-child").addClass("first");
 	
-    $j("ul li:last-child").addClass("last");
+    $("ul li:last-child").addClass("last");
 });
