@@ -61,13 +61,23 @@
 		/>
 
 		<liferay-ui:search-container-column-text
-			name="type"
-			property="type"
+			name="sectors_"
+			property="sectors_"
 		/>
 
 		<liferay-ui:search-container-column-text
 			name="storedAt"
 			property="storedAt"
+		/>
+
+		<liferay-ui:search-container-column-text
+			name="elements_"
+			property="elements_"
+		/>
+
+		<liferay-ui:search-container-column-text
+			name="climateimpacts_"
+			property="climateimpacts_"
 		/>
 
 		<liferay-ui:search-container-column-jsp
