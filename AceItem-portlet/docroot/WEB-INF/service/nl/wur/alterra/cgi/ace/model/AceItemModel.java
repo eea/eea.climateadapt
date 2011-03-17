@@ -129,19 +129,19 @@ public interface AceItemModel extends BaseModel<AceItem> {
 	public void setDescription(String description);
 
 	/**
-	 * Gets the type of this ace item.
+	 * Gets the datatype of this ace item.
 	 *
-	 * @return the type of this ace item
+	 * @return the datatype of this ace item
 	 */
 	@AutoEscape
-	public String getType();
+	public String getDatatype();
 
 	/**
-	 * Sets the type of this ace item.
+	 * Sets the datatype of this ace item.
 	 *
-	 * @param type the type of this ace item
+	 * @param datatype the datatype of this ace item
 	 */
-	public void setType(String type);
+	public void setDatatype(String datatype);
 
 	/**
 	 * Gets the stored at of this ace item.
@@ -159,34 +159,34 @@ public interface AceItemModel extends BaseModel<AceItem> {
 	public void setStoredAt(String storedAt);
 
 	/**
-	 * Gets the sector of this ace item.
+	 * Gets the storagetype of this ace item.
 	 *
-	 * @return the sector of this ace item
+	 * @return the storagetype of this ace item
 	 */
 	@AutoEscape
-	public String getSector();
+	public String getStoragetype();
 
 	/**
-	 * Sets the sector of this ace item.
+	 * Sets the storagetype of this ace item.
 	 *
-	 * @param sector the sector of this ace item
+	 * @param storagetype the storagetype of this ace item
 	 */
-	public void setSector(String sector);
+	public void setStoragetype(String storagetype);
 
 	/**
-	 * Gets the pilar of this ace item.
+	 * Gets the language of this ace item.
 	 *
-	 * @return the pilar of this ace item
+	 * @return the language of this ace item
 	 */
 	@AutoEscape
-	public String getPilar();
+	public String getLanguage();
 
 	/**
-	 * Sets the pilar of this ace item.
+	 * Sets the language of this ace item.
 	 *
-	 * @param pilar the pilar of this ace item
+	 * @param language the language of this ace item
 	 */
-	public void setPilar(String pilar);
+	public void setLanguage(String language);
 
 	/**
 	 * Gets the text search of this ace item.
@@ -219,34 +219,49 @@ public interface AceItemModel extends BaseModel<AceItem> {
 	public void setKeyword(String keyword);
 
 	/**
-	 * Gets the nuts id of this ace item.
+	 * Gets the targetresolution of this ace item.
 	 *
-	 * @return the nuts id of this ace item
+	 * @return the targetresolution of this ace item
 	 */
 	@AutoEscape
-	public String getNutsId();
+	public String getTargetresolution();
 
 	/**
-	 * Sets the nuts id of this ace item.
+	 * Sets the targetresolution of this ace item.
 	 *
-	 * @param nutsId the nuts id of this ace item
+	 * @param targetresolution the targetresolution of this ace item
 	 */
-	public void setNutsId(String nutsId);
+	public void setTargetresolution(String targetresolution);
 
 	/**
-	 * Gets the nuts level of this ace item.
+	 * Gets the spatial layer of this ace item.
 	 *
-	 * @return the nuts level of this ace item
+	 * @return the spatial layer of this ace item
 	 */
 	@AutoEscape
-	public String getNutsLevel();
+	public String getSpatialLayer();
 
 	/**
-	 * Sets the nuts level of this ace item.
+	 * Sets the spatial layer of this ace item.
 	 *
-	 * @param nutsLevel the nuts level of this ace item
+	 * @param spatialLayer the spatial layer of this ace item
 	 */
-	public void setNutsLevel(String nutsLevel);
+	public void setSpatialLayer(String spatialLayer);
+
+	/**
+	 * Gets the spatial values of this ace item.
+	 *
+	 * @return the spatial values of this ace item
+	 */
+	@AutoEscape
+	public String getSpatialValues();
+
+	/**
+	 * Sets the spatial values of this ace item.
+	 *
+	 * @param spatialValues the spatial values of this ace item
+	 */
+	public void setSpatialValues(String spatialValues);
 
 	/**
 	 * Gets the start date of this ace item.
@@ -275,6 +290,65 @@ public interface AceItemModel extends BaseModel<AceItem> {
 	 * @param endDate the end date of this ace item
 	 */
 	public void setEndDate(Date endDate);
+
+	/**
+	 * Gets the publication date of this ace item.
+	 *
+	 * @return the publication date of this ace item
+	 */
+	public Date getPublicationDate();
+
+	/**
+	 * Sets the publication date of this ace item.
+	 *
+	 * @param publicationDate the publication date of this ace item
+	 */
+	public void setPublicationDate(Date publicationDate);
+
+	/**
+	 * Gets the sectors_ of this ace item.
+	 *
+	 * @return the sectors_ of this ace item
+	 */
+	@AutoEscape
+	public String getSectors_();
+
+	/**
+	 * Sets the sectors_ of this ace item.
+	 *
+	 * @param sectors_ the sectors_ of this ace item
+	 */
+	public void setSectors_(String sectors_);
+
+	/**
+	 * Gets the elements_ of this ace item.
+	 *
+	 * @return the elements_ of this ace item
+	 */
+	@AutoEscape
+	public String getElements_();
+
+	/**
+	 * Sets the elements_ of this ace item.
+	 *
+	 * @param elements_ the elements_ of this ace item
+	 */
+	public void setElements_(String elements_);
+
+	/**
+	 * Gets the climateimpacts_ of this ace item.
+	 *
+	 * @return the climateimpacts_ of this ace item
+	 */
+	@AutoEscape
+	public String getClimateimpacts_();
+
+	/**
+	 * Sets the climateimpacts_ of this ace item.
+	 *
+	 * @param climateimpacts_ the climateimpacts_ of this ace item
+	 */
+	public void setClimateimpacts_(String climateimpacts_);
 
 	/**
 	 * Gets a copy of this ace item as an escaped model instance by wrapping it with an {@link com.liferay.portal.kernel.bean.AutoEscapeBeanHandler}.

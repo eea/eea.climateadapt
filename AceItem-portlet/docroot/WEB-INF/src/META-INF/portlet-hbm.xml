@@ -2,7 +2,31 @@
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 
 <hibernate-mapping default-lazy="false" auto-import="false">
+	<import class="nl.wur.alterra.cgi.ace.model.AceSector" />
+	<import class="nl.wur.alterra.cgi.ace.model.AceElement" />
+	<import class="nl.wur.alterra.cgi.ace.model.AceClimateImpact" />
 	<import class="nl.wur.alterra.cgi.ace.model.AceItem" />
+	<class name="nl.wur.alterra.cgi.ace.model.impl.AceSectorImpl" table="Ace_AceSector">
+		<cache usage="read-write" />
+		<id name="sectorId" type="long">
+			<generator class="assigned" />
+		</id>
+		<property name="sector" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+	</class>
+	<class name="nl.wur.alterra.cgi.ace.model.impl.AceElementImpl" table="Ace_AceElement">
+		<cache usage="read-write" />
+		<id name="elementId" type="long">
+			<generator class="assigned" />
+		</id>
+		<property name="element" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+	</class>
+	<class name="nl.wur.alterra.cgi.ace.model.impl.AceClimateImpactImpl" table="Ace_AceClimateImpact">
+		<cache usage="read-write" />
+		<id name="impactId" type="long">
+			<generator class="assigned" />
+		</id>
+		<property name="impact" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+	</class>
 	<class name="nl.wur.alterra.cgi.ace.model.impl.AceItemImpl" table="Ace_AceItem">
 		<cache usage="read-write" />
 		<id name="aceItemId" type="long">
@@ -12,15 +36,20 @@
 		<property name="groupId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 		<property name="name" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="description" type="com.liferay.portal.dao.orm.hibernate.StringType" />
-		<property name="type" column="type_" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="datatype" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="storedAt" type="com.liferay.portal.dao.orm.hibernate.StringType" />
-		<property name="sector" type="com.liferay.portal.dao.orm.hibernate.StringType" />
-		<property name="pilar" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="storagetype" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="language" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="textSearch" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="keyword" type="com.liferay.portal.dao.orm.hibernate.StringType" />
-		<property name="nutsId" type="com.liferay.portal.dao.orm.hibernate.StringType" />
-		<property name="nutsLevel" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="targetresolution" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="spatialLayer" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="spatialValues" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="startDate" type="org.hibernate.type.TimestampType" />
 		<property name="endDate" type="org.hibernate.type.TimestampType" />
+		<property name="publicationDate" type="org.hibernate.type.TimestampType" />
+		<property name="sectors_" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="elements_" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="climateimpacts_" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 	</class>
 </hibernate-mapping>

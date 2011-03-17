@@ -83,12 +83,12 @@ public class AceItemClp extends BaseModelImpl<AceItem> implements AceItem {
 		_description = description;
 	}
 
-	public String getType() {
-		return _type;
+	public String getDatatype() {
+		return _datatype;
 	}
 
-	public void setType(String type) {
-		_type = type;
+	public void setDatatype(String datatype) {
+		_datatype = datatype;
 	}
 
 	public String getStoredAt() {
@@ -99,20 +99,20 @@ public class AceItemClp extends BaseModelImpl<AceItem> implements AceItem {
 		_storedAt = storedAt;
 	}
 
-	public String getSector() {
-		return _sector;
+	public String getStoragetype() {
+		return _storagetype;
 	}
 
-	public void setSector(String sector) {
-		_sector = sector;
+	public void setStoragetype(String storagetype) {
+		_storagetype = storagetype;
 	}
 
-	public String getPilar() {
-		return _pilar;
+	public String getLanguage() {
+		return _language;
 	}
 
-	public void setPilar(String pilar) {
-		_pilar = pilar;
+	public void setLanguage(String language) {
+		_language = language;
 	}
 
 	public String getTextSearch() {
@@ -131,20 +131,28 @@ public class AceItemClp extends BaseModelImpl<AceItem> implements AceItem {
 		_keyword = keyword;
 	}
 
-	public String getNutsId() {
-		return _nutsId;
+	public String getTargetresolution() {
+		return _targetresolution;
 	}
 
-	public void setNutsId(String nutsId) {
-		_nutsId = nutsId;
+	public void setTargetresolution(String targetresolution) {
+		_targetresolution = targetresolution;
 	}
 
-	public String getNutsLevel() {
-		return _nutsLevel;
+	public String getSpatialLayer() {
+		return _spatialLayer;
 	}
 
-	public void setNutsLevel(String nutsLevel) {
-		_nutsLevel = nutsLevel;
+	public void setSpatialLayer(String spatialLayer) {
+		_spatialLayer = spatialLayer;
+	}
+
+	public String getSpatialValues() {
+		return _spatialValues;
+	}
+
+	public void setSpatialValues(String spatialValues) {
+		_spatialValues = spatialValues;
 	}
 
 	public Date getStartDate() {
@@ -161,6 +169,38 @@ public class AceItemClp extends BaseModelImpl<AceItem> implements AceItem {
 
 	public void setEndDate(Date endDate) {
 		_endDate = endDate;
+	}
+
+	public Date getPublicationDate() {
+		return _publicationDate;
+	}
+
+	public void setPublicationDate(Date publicationDate) {
+		_publicationDate = publicationDate;
+	}
+
+	public String getSectors_() {
+		return _sectors_;
+	}
+
+	public void setSectors_(String sectors_) {
+		_sectors_ = sectors_;
+	}
+
+	public String getElements_() {
+		return _elements_;
+	}
+
+	public void setElements_(String elements_) {
+		_elements_ = elements_;
+	}
+
+	public String getClimateimpacts_() {
+		return _climateimpacts_;
+	}
+
+	public void setClimateimpacts_(String climateimpacts_) {
+		_climateimpacts_ = climateimpacts_;
 	}
 
 	public AceItem toEscapedModel() {
@@ -181,16 +221,21 @@ public class AceItemClp extends BaseModelImpl<AceItem> implements AceItem {
 		clone.setGroupId(getGroupId());
 		clone.setName(getName());
 		clone.setDescription(getDescription());
-		clone.setType(getType());
+		clone.setDatatype(getDatatype());
 		clone.setStoredAt(getStoredAt());
-		clone.setSector(getSector());
-		clone.setPilar(getPilar());
+		clone.setStoragetype(getStoragetype());
+		clone.setLanguage(getLanguage());
 		clone.setTextSearch(getTextSearch());
 		clone.setKeyword(getKeyword());
-		clone.setNutsId(getNutsId());
-		clone.setNutsLevel(getNutsLevel());
+		clone.setTargetresolution(getTargetresolution());
+		clone.setSpatialLayer(getSpatialLayer());
+		clone.setSpatialValues(getSpatialValues());
 		clone.setStartDate(getStartDate());
 		clone.setEndDate(getEndDate());
+		clone.setPublicationDate(getPublicationDate());
+		clone.setSectors_(getSectors_());
+		clone.setElements_(getElements_());
+		clone.setClimateimpacts_(getClimateimpacts_());
 
 		return clone;
 	}
@@ -236,7 +281,7 @@ public class AceItemClp extends BaseModelImpl<AceItem> implements AceItem {
 	}
 
 	public String toString() {
-		StringBundler sb = new StringBundler(31);
+		StringBundler sb = new StringBundler(41);
 
 		sb.append("{aceItemId=");
 		sb.append(getAceItemId());
@@ -248,33 +293,43 @@ public class AceItemClp extends BaseModelImpl<AceItem> implements AceItem {
 		sb.append(getName());
 		sb.append(", description=");
 		sb.append(getDescription());
-		sb.append(", type=");
-		sb.append(getType());
+		sb.append(", datatype=");
+		sb.append(getDatatype());
 		sb.append(", storedAt=");
 		sb.append(getStoredAt());
-		sb.append(", sector=");
-		sb.append(getSector());
-		sb.append(", pilar=");
-		sb.append(getPilar());
+		sb.append(", storagetype=");
+		sb.append(getStoragetype());
+		sb.append(", language=");
+		sb.append(getLanguage());
 		sb.append(", textSearch=");
 		sb.append(getTextSearch());
 		sb.append(", keyword=");
 		sb.append(getKeyword());
-		sb.append(", nutsId=");
-		sb.append(getNutsId());
-		sb.append(", nutsLevel=");
-		sb.append(getNutsLevel());
+		sb.append(", targetresolution=");
+		sb.append(getTargetresolution());
+		sb.append(", spatialLayer=");
+		sb.append(getSpatialLayer());
+		sb.append(", spatialValues=");
+		sb.append(getSpatialValues());
 		sb.append(", startDate=");
 		sb.append(getStartDate());
 		sb.append(", endDate=");
 		sb.append(getEndDate());
+		sb.append(", publicationDate=");
+		sb.append(getPublicationDate());
+		sb.append(", sectors_=");
+		sb.append(getSectors_());
+		sb.append(", elements_=");
+		sb.append(getElements_());
+		sb.append(", climateimpacts_=");
+		sb.append(getClimateimpacts_());
 		sb.append("}");
 
 		return sb.toString();
 	}
 
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(49);
+		StringBundler sb = new StringBundler(64);
 
 		sb.append("<model><model-name>");
 		sb.append("nl.wur.alterra.cgi.ace.model.AceItem");
@@ -301,20 +356,20 @@ public class AceItemClp extends BaseModelImpl<AceItem> implements AceItem {
 		sb.append(getDescription());
 		sb.append("]]></column-value></column>");
 		sb.append(
-			"<column><column-name>type</column-name><column-value><![CDATA[");
-		sb.append(getType());
+			"<column><column-name>datatype</column-name><column-value><![CDATA[");
+		sb.append(getDatatype());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>storedAt</column-name><column-value><![CDATA[");
 		sb.append(getStoredAt());
 		sb.append("]]></column-value></column>");
 		sb.append(
-			"<column><column-name>sector</column-name><column-value><![CDATA[");
-		sb.append(getSector());
+			"<column><column-name>storagetype</column-name><column-value><![CDATA[");
+		sb.append(getStoragetype());
 		sb.append("]]></column-value></column>");
 		sb.append(
-			"<column><column-name>pilar</column-name><column-value><![CDATA[");
-		sb.append(getPilar());
+			"<column><column-name>language</column-name><column-value><![CDATA[");
+		sb.append(getLanguage());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>textSearch</column-name><column-value><![CDATA[");
@@ -325,12 +380,16 @@ public class AceItemClp extends BaseModelImpl<AceItem> implements AceItem {
 		sb.append(getKeyword());
 		sb.append("]]></column-value></column>");
 		sb.append(
-			"<column><column-name>nutsId</column-name><column-value><![CDATA[");
-		sb.append(getNutsId());
+			"<column><column-name>targetresolution</column-name><column-value><![CDATA[");
+		sb.append(getTargetresolution());
 		sb.append("]]></column-value></column>");
 		sb.append(
-			"<column><column-name>nutsLevel</column-name><column-value><![CDATA[");
-		sb.append(getNutsLevel());
+			"<column><column-name>spatialLayer</column-name><column-value><![CDATA[");
+		sb.append(getSpatialLayer());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>spatialValues</column-name><column-value><![CDATA[");
+		sb.append(getSpatialValues());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>startDate</column-name><column-value><![CDATA[");
@@ -339,6 +398,22 @@ public class AceItemClp extends BaseModelImpl<AceItem> implements AceItem {
 		sb.append(
 			"<column><column-name>endDate</column-name><column-value><![CDATA[");
 		sb.append(getEndDate());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>publicationDate</column-name><column-value><![CDATA[");
+		sb.append(getPublicationDate());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>sectors_</column-name><column-value><![CDATA[");
+		sb.append(getSectors_());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>elements_</column-name><column-value><![CDATA[");
+		sb.append(getElements_());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>climateimpacts_</column-name><column-value><![CDATA[");
+		sb.append(getClimateimpacts_());
 		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");
@@ -351,14 +426,19 @@ public class AceItemClp extends BaseModelImpl<AceItem> implements AceItem {
 	private long _groupId;
 	private String _name;
 	private String _description;
-	private String _type;
+	private String _datatype;
 	private String _storedAt;
-	private String _sector;
-	private String _pilar;
+	private String _storagetype;
+	private String _language;
 	private String _textSearch;
 	private String _keyword;
-	private String _nutsId;
-	private String _nutsLevel;
+	private String _targetresolution;
+	private String _spatialLayer;
+	private String _spatialValues;
 	private Date _startDate;
 	private Date _endDate;
+	private Date _publicationDate;
+	private String _sectors_;
+	private String _elements_;
+	private String _climateimpacts_;
 }

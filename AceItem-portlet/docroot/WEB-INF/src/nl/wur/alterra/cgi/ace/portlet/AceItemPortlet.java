@@ -80,17 +80,19 @@ public class AceItemPortlet extends MVCPortlet {
 		aceitem.setName(ParamUtil.getString(request, "name"));
 		aceitem.setDescription(ParamUtil.getString(request, "description"));
 
-		aceitem.setType(ParamUtil.getString(request, "type"));
+		aceitem.setDatatype(ParamUtil.getString(request, "datatype"));
 		aceitem.setStoredAt(ParamUtil.getString(request, "storedAt"));
-		aceitem.setSector(ParamUtil.getString(request, "sector"));
-		aceitem.setPilar(ParamUtil.getString(request, "pilar"));
+		aceitem.setStoragetype(ParamUtil.getString(request, "storagetype"));
+		aceitem.setSectors_(ParamUtil.getString(request, "sectors_"));
+		aceitem.setElements_(ParamUtil.getString(request, "elements_"));
+		aceitem.setClimateimpacts_(ParamUtil.getString(request, "climateimpacts_"));
 		aceitem.setTextSearch(ParamUtil.getString(request, "textSearch"));
 		aceitem.setKeyword(ParamUtil.getString(request, "keyword"));
-		aceitem.setNutsId(ParamUtil.getString(request, "nutsId"));	
-		aceitem.setNutsLevel(ParamUtil.getString(request, "nutsLevel"));		
+		aceitem.setSpatialLayer(ParamUtil.getString(request, "spatialLayer"));
+		aceitem.setSpatialValues(ParamUtil.getString(request, "spatialValues"));			
 		aceitem.setCompanyId(themeDisplay.getCompanyId());
 		aceitem.setGroupId(themeDisplay.getScopeGroupId());
-		
+/*		
 		int dateMonth = ParamUtil.getInteger(request, "startDateMonth");
 		int dateDay = ParamUtil.getInteger(request, "startDateDay");
 		int dateYear = ParamUtil.getInteger(request, "startDateYear");
@@ -102,6 +104,13 @@ public class AceItemPortlet extends MVCPortlet {
 		dateYear = ParamUtil.getInteger(request, "endDateYear");
 		Date enddate = PortalUtil.getDate(dateMonth, dateDay, dateYear);
 		aceitem.setEndDate(enddate);
+		
+		dateMonth = ParamUtil.getInteger(request, "publicationDateMonth");
+		dateDay = ParamUtil.getInteger(request, "publicationDateDay");
+		dateYear = ParamUtil.getInteger(request, "publicationDateYear");
+		Date publicationdate = PortalUtil.getDate(dateMonth, dateDay, dateYear);
+		aceitem.setEndDate(publicationdate);
+*/
 		
 		return aceitem;
 	}

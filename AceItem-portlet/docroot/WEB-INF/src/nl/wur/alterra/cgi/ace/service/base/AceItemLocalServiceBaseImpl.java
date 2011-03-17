@@ -30,9 +30,19 @@ import com.liferay.portal.service.UserService;
 import com.liferay.portal.service.persistence.ResourcePersistence;
 import com.liferay.portal.service.persistence.UserPersistence;
 
+import com.liferay.portlet.asset.service.AssetEntryLocalService;
+import com.liferay.portlet.asset.service.AssetEntryService;
+import com.liferay.portlet.asset.service.persistence.AssetEntryPersistence;
+
 import nl.wur.alterra.cgi.ace.model.AceItem;
+import nl.wur.alterra.cgi.ace.service.AceClimateImpactLocalService;
+import nl.wur.alterra.cgi.ace.service.AceElementLocalService;
 import nl.wur.alterra.cgi.ace.service.AceItemLocalService;
+import nl.wur.alterra.cgi.ace.service.AceSectorLocalService;
+import nl.wur.alterra.cgi.ace.service.persistence.AceClimateImpactPersistence;
+import nl.wur.alterra.cgi.ace.service.persistence.AceElementPersistence;
 import nl.wur.alterra.cgi.ace.service.persistence.AceItemPersistence;
+import nl.wur.alterra.cgi.ace.service.persistence.AceSectorPersistence;
 
 import java.util.List;
 
@@ -234,6 +244,120 @@ public abstract class AceItemLocalServiceBaseImpl implements AceItemLocalService
 	}
 
 	/**
+	 * Gets the ace sector local service.
+	 *
+	 * @return the ace sector local service
+	 */
+	public AceSectorLocalService getAceSectorLocalService() {
+		return aceSectorLocalService;
+	}
+
+	/**
+	 * Sets the ace sector local service.
+	 *
+	 * @param aceSectorLocalService the ace sector local service
+	 */
+	public void setAceSectorLocalService(
+		AceSectorLocalService aceSectorLocalService) {
+		this.aceSectorLocalService = aceSectorLocalService;
+	}
+
+	/**
+	 * Gets the ace sector persistence.
+	 *
+	 * @return the ace sector persistence
+	 */
+	public AceSectorPersistence getAceSectorPersistence() {
+		return aceSectorPersistence;
+	}
+
+	/**
+	 * Sets the ace sector persistence.
+	 *
+	 * @param aceSectorPersistence the ace sector persistence
+	 */
+	public void setAceSectorPersistence(
+		AceSectorPersistence aceSectorPersistence) {
+		this.aceSectorPersistence = aceSectorPersistence;
+	}
+
+	/**
+	 * Gets the ace element local service.
+	 *
+	 * @return the ace element local service
+	 */
+	public AceElementLocalService getAceElementLocalService() {
+		return aceElementLocalService;
+	}
+
+	/**
+	 * Sets the ace element local service.
+	 *
+	 * @param aceElementLocalService the ace element local service
+	 */
+	public void setAceElementLocalService(
+		AceElementLocalService aceElementLocalService) {
+		this.aceElementLocalService = aceElementLocalService;
+	}
+
+	/**
+	 * Gets the ace element persistence.
+	 *
+	 * @return the ace element persistence
+	 */
+	public AceElementPersistence getAceElementPersistence() {
+		return aceElementPersistence;
+	}
+
+	/**
+	 * Sets the ace element persistence.
+	 *
+	 * @param aceElementPersistence the ace element persistence
+	 */
+	public void setAceElementPersistence(
+		AceElementPersistence aceElementPersistence) {
+		this.aceElementPersistence = aceElementPersistence;
+	}
+
+	/**
+	 * Gets the ace climate impact local service.
+	 *
+	 * @return the ace climate impact local service
+	 */
+	public AceClimateImpactLocalService getAceClimateImpactLocalService() {
+		return aceClimateImpactLocalService;
+	}
+
+	/**
+	 * Sets the ace climate impact local service.
+	 *
+	 * @param aceClimateImpactLocalService the ace climate impact local service
+	 */
+	public void setAceClimateImpactLocalService(
+		AceClimateImpactLocalService aceClimateImpactLocalService) {
+		this.aceClimateImpactLocalService = aceClimateImpactLocalService;
+	}
+
+	/**
+	 * Gets the ace climate impact persistence.
+	 *
+	 * @return the ace climate impact persistence
+	 */
+	public AceClimateImpactPersistence getAceClimateImpactPersistence() {
+		return aceClimateImpactPersistence;
+	}
+
+	/**
+	 * Sets the ace climate impact persistence.
+	 *
+	 * @param aceClimateImpactPersistence the ace climate impact persistence
+	 */
+	public void setAceClimateImpactPersistence(
+		AceClimateImpactPersistence aceClimateImpactPersistence) {
+		this.aceClimateImpactPersistence = aceClimateImpactPersistence;
+	}
+
+	/**
 	 * Gets the ace item local service.
 	 *
 	 * @return the ace item local service
@@ -397,6 +521,62 @@ public abstract class AceItemLocalServiceBaseImpl implements AceItemLocalService
 	}
 
 	/**
+	 * Gets the asset entry local service.
+	 *
+	 * @return the asset entry local service
+	 */
+	public AssetEntryLocalService getAssetEntryLocalService() {
+		return assetEntryLocalService;
+	}
+
+	/**
+	 * Sets the asset entry local service.
+	 *
+	 * @param assetEntryLocalService the asset entry local service
+	 */
+	public void setAssetEntryLocalService(
+		AssetEntryLocalService assetEntryLocalService) {
+		this.assetEntryLocalService = assetEntryLocalService;
+	}
+
+	/**
+	 * Gets the asset entry remote service.
+	 *
+	 * @return the asset entry remote service
+	 */
+	public AssetEntryService getAssetEntryService() {
+		return assetEntryService;
+	}
+
+	/**
+	 * Sets the asset entry remote service.
+	 *
+	 * @param assetEntryService the asset entry remote service
+	 */
+	public void setAssetEntryService(AssetEntryService assetEntryService) {
+		this.assetEntryService = assetEntryService;
+	}
+
+	/**
+	 * Gets the asset entry persistence.
+	 *
+	 * @return the asset entry persistence
+	 */
+	public AssetEntryPersistence getAssetEntryPersistence() {
+		return assetEntryPersistence;
+	}
+
+	/**
+	 * Sets the asset entry persistence.
+	 *
+	 * @param assetEntryPersistence the asset entry persistence
+	 */
+	public void setAssetEntryPersistence(
+		AssetEntryPersistence assetEntryPersistence) {
+		this.assetEntryPersistence = assetEntryPersistence;
+	}
+
+	/**
 	 * Performs an SQL query.
 	 *
 	 * @param sql the sql query to perform
@@ -415,6 +595,18 @@ public abstract class AceItemLocalServiceBaseImpl implements AceItemLocalService
 		}
 	}
 
+	@BeanReference(type = AceSectorLocalService.class)
+	protected AceSectorLocalService aceSectorLocalService;
+	@BeanReference(type = AceSectorPersistence.class)
+	protected AceSectorPersistence aceSectorPersistence;
+	@BeanReference(type = AceElementLocalService.class)
+	protected AceElementLocalService aceElementLocalService;
+	@BeanReference(type = AceElementPersistence.class)
+	protected AceElementPersistence aceElementPersistence;
+	@BeanReference(type = AceClimateImpactLocalService.class)
+	protected AceClimateImpactLocalService aceClimateImpactLocalService;
+	@BeanReference(type = AceClimateImpactPersistence.class)
+	protected AceClimateImpactPersistence aceClimateImpactPersistence;
 	@BeanReference(type = AceItemLocalService.class)
 	protected AceItemLocalService aceItemLocalService;
 	@BeanReference(type = AceItemPersistence.class)
@@ -433,4 +625,10 @@ public abstract class AceItemLocalServiceBaseImpl implements AceItemLocalService
 	protected UserService userService;
 	@BeanReference(type = UserPersistence.class)
 	protected UserPersistence userPersistence;
+	@BeanReference(type = AssetEntryLocalService.class)
+	protected AssetEntryLocalService assetEntryLocalService;
+	@BeanReference(type = AssetEntryService.class)
+	protected AssetEntryService assetEntryService;
+	@BeanReference(type = AssetEntryPersistence.class)
+	protected AssetEntryPersistence assetEntryPersistence;
 }

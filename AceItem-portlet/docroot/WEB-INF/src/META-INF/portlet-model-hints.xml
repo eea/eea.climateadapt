@@ -1,21 +1,38 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <model-hints>
+	<model name="nl.wur.alterra.cgi.ace.model.AceSector">
+		<field name="sectorId" type="long" />
+		<field name="sector" type="String" />
+	</model>
+	<model name="nl.wur.alterra.cgi.ace.model.AceElement">
+		<field name="elementId" type="long" />
+		<field name="element" type="String" />
+	</model>
+	<model name="nl.wur.alterra.cgi.ace.model.AceClimateImpact">
+		<field name="impactId" type="long" />
+		<field name="impact" type="String" />
+	</model>
 	<model name="nl.wur.alterra.cgi.ace.model.AceItem">
 		<field name="aceItemId" type="long" />
 		<field name="companyId" type="long" />
 		<field name="groupId" type="long" />
 		<field name="name" type="String" />
 		<field name="description" type="String" />
-		<field name="type" type="String" />
+		<field name="datatype" type="String" />
 		<field name="storedAt" type="String" />
-		<field name="sector" type="String" />
-		<field name="pilar" type="String" />
+		<field name="storagetype" type="String" />
+		<field name="language" type="String" />
 		<field name="textSearch" type="String" />
 		<field name="keyword" type="String" />
-		<field name="nutsId" type="String" />
-		<field name="nutsLevel" type="String" />
+		<field name="targetresolution" type="String" />
+		<field name="spatialLayer" type="String" />
+		<field name="spatialValues" type="String" />
 		<field name="startDate" type="Date" />
 		<field name="endDate" type="Date" />
+		<field name="publicationDate" type="Date" />
+		<field name="sectors_" type="String" />
+		<field name="elements_" type="String" />
+		<field name="climateimpacts_" type="String" />
 	</model>
 </model-hints>

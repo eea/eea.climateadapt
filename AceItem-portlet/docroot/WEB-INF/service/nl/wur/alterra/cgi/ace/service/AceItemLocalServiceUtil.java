@@ -227,6 +227,9 @@ public class AceItemLocalServiceUtil {
 	}
 
 	/**
+	* Hugo de Groot: add these methods by hand to <portlet>LocalServiceImpl
+	* and rerun ServiceBuilder if auto generation fails
+	*
 	* Gets a list with all the AceItems in a group
 	*/
 	public static java.util.List<nl.wur.alterra.cgi.ace.model.AceItem> getAceItemsByGroupId(
@@ -236,6 +239,9 @@ public class AceItemLocalServiceUtil {
 	}
 
 	/**
+	* Hugo de Groot: add these methods by hand to <portlet>LocalServiceImpl
+	* and rerun ServiceBuilder if auto generation fails
+	*
 	* Gets a list with a range of AceItems from a group
 	*/
 	public static java.util.List<nl.wur.alterra.cgi.ace.model.AceItem> getAceItemsByGroupId(
@@ -245,6 +251,9 @@ public class AceItemLocalServiceUtil {
 	}
 
 	/**
+	* Hugo de Groot: add these methods by hand to <portlet>LocalServiceImpl
+	* and rerun ServiceBuilder if auto generation fails
+	*
 	* Gets the number of AceItems in a group
 	*/
 	public static int getAceItemsCountByGroupId(long groupId)

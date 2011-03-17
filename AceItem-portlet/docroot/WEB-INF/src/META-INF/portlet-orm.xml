@@ -7,6 +7,27 @@
 			<access>PROPERTY</access>
 		</persistence-unit-defaults>
 	</persistence-unit-metadata>
+	<mapped-superclass class="nl.wur.alterra.cgi.ace.model.impl.AceSectorModelImpl">
+		<attributes>
+			<id name="sectorId" />
+			<basic name="sector" />
+			<transient name="primaryKey" />
+		</attributes>
+	</mapped-superclass>
+	<mapped-superclass class="nl.wur.alterra.cgi.ace.model.impl.AceElementModelImpl">
+		<attributes>
+			<id name="elementId" />
+			<basic name="element" />
+			<transient name="primaryKey" />
+		</attributes>
+	</mapped-superclass>
+	<mapped-superclass class="nl.wur.alterra.cgi.ace.model.impl.AceClimateImpactModelImpl">
+		<attributes>
+			<id name="impactId" />
+			<basic name="impact" />
+			<transient name="primaryKey" />
+		</attributes>
+	</mapped-superclass>
 	<mapped-superclass class="nl.wur.alterra.cgi.ace.model.impl.AceItemModelImpl">
 		<attributes>
 			<id name="aceItemId" />
@@ -14,25 +35,42 @@
 			<basic name="groupId" />
 			<basic name="name" />
 			<basic name="description" />
-			<basic name="type">
-				<column name="TYPE_" />
-			</basic>
+			<basic name="datatype" />
 			<basic name="storedAt" />
-			<basic name="sector" />
-			<basic name="pilar" />
+			<basic name="storagetype" />
+			<basic name="language" />
 			<basic name="textSearch" />
 			<basic name="keyword" />
-			<basic name="nutsId" />
-			<basic name="nutsLevel" />
+			<basic name="targetresolution" />
+			<basic name="spatialLayer" />
+			<basic name="spatialValues" />
 			<basic name="startDate">
 				<temporal>TIMESTAMP</temporal>
 			</basic>
 			<basic name="endDate">
 				<temporal>TIMESTAMP</temporal>
 			</basic>
+			<basic name="publicationDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="sectors_" />
+			<basic name="elements_" />
+			<basic name="climateimpacts_" />
 			<transient name="primaryKey" />
 		</attributes>
 	</mapped-superclass>
+	<entity class="nl.wur.alterra.cgi.ace.model.impl.AceSectorImpl" name="AceSector">
+		<table name="Ace_AceSector" />
+		<attributes />
+	</entity>
+	<entity class="nl.wur.alterra.cgi.ace.model.impl.AceElementImpl" name="AceElement">
+		<table name="Ace_AceElement" />
+		<attributes />
+	</entity>
+	<entity class="nl.wur.alterra.cgi.ace.model.impl.AceClimateImpactImpl" name="AceClimateImpact">
+		<table name="Ace_AceClimateImpact" />
+		<attributes />
+	</entity>
 	<entity class="nl.wur.alterra.cgi.ace.model.impl.AceItemImpl" name="AceItem">
 		<table name="Ace_AceItem" />
 		<attributes />

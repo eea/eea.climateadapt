@@ -76,12 +76,12 @@ public class AceItemWrapper implements AceItem {
 		_aceItem.setDescription(description);
 	}
 
-	public java.lang.String getType() {
-		return _aceItem.getType();
+	public java.lang.String getDatatype() {
+		return _aceItem.getDatatype();
 	}
 
-	public void setType(java.lang.String type) {
-		_aceItem.setType(type);
+	public void setDatatype(java.lang.String datatype) {
+		_aceItem.setDatatype(datatype);
 	}
 
 	public java.lang.String getStoredAt() {
@@ -92,20 +92,20 @@ public class AceItemWrapper implements AceItem {
 		_aceItem.setStoredAt(storedAt);
 	}
 
-	public java.lang.String getSector() {
-		return _aceItem.getSector();
+	public java.lang.String getStoragetype() {
+		return _aceItem.getStoragetype();
 	}
 
-	public void setSector(java.lang.String sector) {
-		_aceItem.setSector(sector);
+	public void setStoragetype(java.lang.String storagetype) {
+		_aceItem.setStoragetype(storagetype);
 	}
 
-	public java.lang.String getPilar() {
-		return _aceItem.getPilar();
+	public java.lang.String getLanguage() {
+		return _aceItem.getLanguage();
 	}
 
-	public void setPilar(java.lang.String pilar) {
-		_aceItem.setPilar(pilar);
+	public void setLanguage(java.lang.String language) {
+		_aceItem.setLanguage(language);
 	}
 
 	public java.lang.String getTextSearch() {
@@ -124,20 +124,28 @@ public class AceItemWrapper implements AceItem {
 		_aceItem.setKeyword(keyword);
 	}
 
-	public java.lang.String getNutsId() {
-		return _aceItem.getNutsId();
+	public java.lang.String getTargetresolution() {
+		return _aceItem.getTargetresolution();
 	}
 
-	public void setNutsId(java.lang.String nutsId) {
-		_aceItem.setNutsId(nutsId);
+	public void setTargetresolution(java.lang.String targetresolution) {
+		_aceItem.setTargetresolution(targetresolution);
 	}
 
-	public java.lang.String getNutsLevel() {
-		return _aceItem.getNutsLevel();
+	public java.lang.String getSpatialLayer() {
+		return _aceItem.getSpatialLayer();
 	}
 
-	public void setNutsLevel(java.lang.String nutsLevel) {
-		_aceItem.setNutsLevel(nutsLevel);
+	public void setSpatialLayer(java.lang.String spatialLayer) {
+		_aceItem.setSpatialLayer(spatialLayer);
+	}
+
+	public java.lang.String getSpatialValues() {
+		return _aceItem.getSpatialValues();
+	}
+
+	public void setSpatialValues(java.lang.String spatialValues) {
+		_aceItem.setSpatialValues(spatialValues);
 	}
 
 	public java.util.Date getStartDate() {
@@ -154,6 +162,38 @@ public class AceItemWrapper implements AceItem {
 
 	public void setEndDate(java.util.Date endDate) {
 		_aceItem.setEndDate(endDate);
+	}
+
+	public java.util.Date getPublicationDate() {
+		return _aceItem.getPublicationDate();
+	}
+
+	public void setPublicationDate(java.util.Date publicationDate) {
+		_aceItem.setPublicationDate(publicationDate);
+	}
+
+	public java.lang.String getSectors_() {
+		return _aceItem.getSectors_();
+	}
+
+	public void setSectors_(java.lang.String sectors_) {
+		_aceItem.setSectors_(sectors_);
+	}
+
+	public java.lang.String getElements_() {
+		return _aceItem.getElements_();
+	}
+
+	public void setElements_(java.lang.String elements_) {
+		_aceItem.setElements_(elements_);
+	}
+
+	public java.lang.String getClimateimpacts_() {
+		return _aceItem.getClimateimpacts_();
+	}
+
+	public void setClimateimpacts_(java.lang.String climateimpacts_) {
+		_aceItem.setClimateimpacts_(climateimpacts_);
 	}
 
 	public nl.wur.alterra.cgi.ace.model.AceItem toEscapedModel() {

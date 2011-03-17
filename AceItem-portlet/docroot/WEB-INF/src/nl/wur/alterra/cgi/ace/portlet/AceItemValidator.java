@@ -18,8 +18,8 @@ public class AceItemValidator {
 	public static boolean validateAceItem(AceItem aceitem, List errors) {
 		boolean valid = true;
 
-		if (Validator.isNull(aceitem.getType())) {
-			errors.add("aceitemtype-required");
+		if (Validator.isNull(aceitem.getDatatype())) {
+			errors.add("aceitemdatatype-required");
 			valid = false;
 		}
 

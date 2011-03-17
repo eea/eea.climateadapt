@@ -205,6 +205,9 @@ public interface AceItemLocalService {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
+	* Hugo de Groot: add these methods by hand to <portlet>LocalServiceImpl
+	* and rerun ServiceBuilder if auto generation fails
+	*
 	* Gets a list with all the AceItems in a group
 	*/
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
@@ -213,6 +216,9 @@ public interface AceItemLocalService {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
+	* Hugo de Groot: add these methods by hand to <portlet>LocalServiceImpl
+	* and rerun ServiceBuilder if auto generation fails
+	*
 	* Gets a list with a range of AceItems from a group
 	*/
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
@@ -221,6 +227,9 @@ public interface AceItemLocalService {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
+	* Hugo de Groot: add these methods by hand to <portlet>LocalServiceImpl
+	* and rerun ServiceBuilder if auto generation fails
+	*
 	* Gets the number of AceItems in a group
 	*/
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
