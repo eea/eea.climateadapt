@@ -4,56 +4,6 @@
 	<author>groot052</author>
 	<namespace>Ace</namespace>
 
-	<!-- Define the entity for the Ace_AceSector table -->
-	<entity name="AceSector" local-service="true" remote-service="false">
-		
-		<!-- Primary key columns -->
-		<column name="sectorId" type="long" primary="true" />
-
-		<!-- Other columns -->
-		<column name="sector" type="String" />
-		
-		<!-- Sort order -->
-		<order by="asc">
-			<order-column name="sector" />
-		</order>
-		
-	</entity>
-
-
-	<!-- Define the entity for the Ace_AceElement table -->
-	<entity name="AceElement" local-service="true" remote-service="false">
-		
-		<!-- Primary key columns -->
-		<column name="elementId" type="long" primary="true" />
-
-		<!-- Other columns -->
-		<column name="element" type="String" />
-		
-		<!-- Sort order -->
-		<order by="asc">
-			<order-column name="element" />
-		</order>
-		
-	</entity>
-
-
-	<!-- Define the entity for the Ace_AceClimateImpact table -->
-	<entity name="AceClimateImpact" local-service="true" remote-service="false">
-		
-		<!-- Primary key columns -->
-		<column name="impactId" type="long" primary="true" />
-
-		<!-- Other columns -->
-		<column name="impact" type="String" />
-		
-		<!-- Sort order -->
-		<order by="asc">
-			<order-column name="impact" />
-		</order>
-		
-	</entity>
-	
 	<!-- Define the entity for the Ace_AceItem table -->
 	<entity name="AceItem" local-service="true" remote-service="false">
 
