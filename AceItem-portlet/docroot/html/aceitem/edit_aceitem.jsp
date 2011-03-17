@@ -1,5 +1,4 @@
 <%@include file="/html/init.jsp" %>
-
 <%
 	AceItem aceitem = null;
 
@@ -33,30 +32,37 @@
 		<b>description</b><br />
 		<textarea name="description" rows=10 cols=100><%= aceitem == null ? "" : aceitem.getDescription() %></textarea>
 		
-		<liferay-ui:error key="aceitemtype-required" message="aceitemtype-required" />		
-		<aui:input name="type" />
+		<liferay-ui:error key="aceitemdatatype-required" message="aceitemdatatype-required" />		
+		<aui:input name="datatype" />
 		
 		<liferay-ui:error key="aceitemstoredat-required" message="aceitemstoredat-required" />
 		<aui:input name="storedAt" />
-			
-		<aui:input name="sector"  />
 		
-		<b>Element</b><br />
-		<input name="pilar" type="text" value="<%= aceitem == null ? "" : aceitem.getPilar() %>"><br /><br />
+		<aui:input name="storagetype" />	
 
+		<b>Sectors</b><br />
+		<input name="sectors_" type="text" size="65" value="<%= aceitem == null ? "" : aceitem.getSectors_() %>"><br /><br />
+		
+		<b>Elements</b><br />
+		<input name="elements_" type="text" size="65" value="<%= aceitem == null ? "" : aceitem.getElements_() %>"><br /><br />
+		
+		<b>Climate Impacts</b><br />
+		<input name="climateimpacts_" type="text" size="65" value="<%= aceitem == null ? "" : aceitem.getClimateimpacts_() %>"><br /><br />
 		
 		<b>textsearch</b><br />
 		<textarea name="textSearch" rows=15 cols=100><%= aceitem == null ? "" : aceitem.getTextSearch() %></textarea>
 		
 		<aui:input name="keyword"  />
 		
-		<aui:input name="nutsId"  />
+		<aui:input name="spatialLayer"  />
 		
-		<aui:input name="nutsLevel"  />
+		<aui:input name="spatialValues"  />
 		
-		<aui:input name="startdate" />
+		<!--  a u i :input name="startdate" / >
 		
-		<aui:input name="enddate" />
+		< a u  i:input name="enddate" / >
+		
+		< a u i  :input name="publicationdate" / -->
 	</aui:fieldset>
 
 	<aui:button-row>
