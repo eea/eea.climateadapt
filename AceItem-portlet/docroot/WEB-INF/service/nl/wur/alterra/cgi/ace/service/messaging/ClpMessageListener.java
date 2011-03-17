@@ -19,10 +19,7 @@ import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.messaging.Message;
 import com.liferay.portal.kernel.messaging.MessageListener;
 
-import nl.wur.alterra.cgi.ace.service.AceClimateImpactLocalServiceUtil;
-import nl.wur.alterra.cgi.ace.service.AceElementLocalServiceUtil;
 import nl.wur.alterra.cgi.ace.service.AceItemLocalServiceUtil;
-import nl.wur.alterra.cgi.ace.service.AceSectorLocalServiceUtil;
 import nl.wur.alterra.cgi.ace.service.ClpSerializer;
 
 /**
@@ -46,12 +43,6 @@ public class ClpMessageListener implements MessageListener {
 
 		if (command.equals("undeploy") &&
 				servletContextName.equals(SERVLET_CONTEXT_NAME)) {
-			AceSectorLocalServiceUtil.clearService();
-
-			AceElementLocalServiceUtil.clearService();
-
-			AceClimateImpactLocalServiceUtil.clearService();
-
 			AceItemLocalServiceUtil.clearService();
 		}
 	}
