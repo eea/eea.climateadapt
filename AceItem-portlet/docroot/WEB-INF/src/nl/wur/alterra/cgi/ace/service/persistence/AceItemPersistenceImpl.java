@@ -39,6 +39,8 @@ import com.liferay.portal.service.persistence.ResourcePersistence;
 import com.liferay.portal.service.persistence.UserPersistence;
 import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
 
+import com.liferay.portlet.asset.service.persistence.AssetEntryPersistence;
+
 import nl.wur.alterra.cgi.ace.NoSuchItemException;
 import nl.wur.alterra.cgi.ace.model.AceItem;
 import nl.wur.alterra.cgi.ace.model.impl.AceItemImpl;
@@ -288,16 +290,21 @@ public class AceItemPersistenceImpl extends BasePersistenceImpl<AceItem>
 		aceItemImpl.setGroupId(aceItem.getGroupId());
 		aceItemImpl.setName(aceItem.getName());
 		aceItemImpl.setDescription(aceItem.getDescription());
-		aceItemImpl.setType(aceItem.getType());
+		aceItemImpl.setDatatype(aceItem.getDatatype());
 		aceItemImpl.setStoredAt(aceItem.getStoredAt());
-		aceItemImpl.setSector(aceItem.getSector());
-		aceItemImpl.setPilar(aceItem.getPilar());
+		aceItemImpl.setStoragetype(aceItem.getStoragetype());
+		aceItemImpl.setLanguage(aceItem.getLanguage());
 		aceItemImpl.setTextSearch(aceItem.getTextSearch());
 		aceItemImpl.setKeyword(aceItem.getKeyword());
-		aceItemImpl.setNutsId(aceItem.getNutsId());
-		aceItemImpl.setNutsLevel(aceItem.getNutsLevel());
+		aceItemImpl.setTargetresolution(aceItem.getTargetresolution());
+		aceItemImpl.setSpatialLayer(aceItem.getSpatialLayer());
+		aceItemImpl.setSpatialValues(aceItem.getSpatialValues());
 		aceItemImpl.setStartDate(aceItem.getStartDate());
 		aceItemImpl.setEndDate(aceItem.getEndDate());
+		aceItemImpl.setPublicationDate(aceItem.getPublicationDate());
+		aceItemImpl.setSectors_(aceItem.getSectors_());
+		aceItemImpl.setElements_(aceItem.getElements_());
+		aceItemImpl.setClimateimpacts_(aceItem.getClimateimpacts_());
 
 		return aceItemImpl;
 	}
@@ -967,12 +974,20 @@ public class AceItemPersistenceImpl extends BasePersistenceImpl<AceItem>
 		}
 	}
 
+	@BeanReference(type = AceSectorPersistence.class)
+	protected AceSectorPersistence aceSectorPersistence;
+	@BeanReference(type = AceElementPersistence.class)
+	protected AceElementPersistence aceElementPersistence;
+	@BeanReference(type = AceClimateImpactPersistence.class)
+	protected AceClimateImpactPersistence aceClimateImpactPersistence;
 	@BeanReference(type = AceItemPersistence.class)
 	protected AceItemPersistence aceItemPersistence;
 	@BeanReference(type = ResourcePersistence.class)
 	protected ResourcePersistence resourcePersistence;
 	@BeanReference(type = UserPersistence.class)
 	protected UserPersistence userPersistence;
+	@BeanReference(type = AssetEntryPersistence.class)
+	protected AssetEntryPersistence assetEntryPersistence;
 	private static final String _SQL_SELECT_ACEITEM = "SELECT aceItem FROM AceItem aceItem";
 	private static final String _SQL_SELECT_ACEITEM_WHERE = "SELECT aceItem FROM AceItem aceItem WHERE ";
 	private static final String _SQL_COUNT_ACEITEM = "SELECT COUNT(aceItem) FROM AceItem aceItem";
