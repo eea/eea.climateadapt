@@ -91,10 +91,10 @@ public class ClpSerializer {
 
 					method4.invoke(newModel, value4);
 
-					Method method5 = newModelClass.getMethod("setType",
+					Method method5 = newModelClass.getMethod("setDatatype",
 							new Class[] { String.class });
 
-					String value5 = oldCplModel.getType();
+					String value5 = oldCplModel.getDatatype();
 
 					method5.invoke(newModel, value5);
 
@@ -105,17 +105,17 @@ public class ClpSerializer {
 
 					method6.invoke(newModel, value6);
 
-					Method method7 = newModelClass.getMethod("setSector",
+					Method method7 = newModelClass.getMethod("setStoragetype",
 							new Class[] { String.class });
 
-					String value7 = oldCplModel.getSector();
+					String value7 = oldCplModel.getStoragetype();
 
 					method7.invoke(newModel, value7);
 
-					Method method8 = newModelClass.getMethod("setPilar",
+					Method method8 = newModelClass.getMethod("setLanguage",
 							new Class[] { String.class });
 
-					String value8 = oldCplModel.getPilar();
+					String value8 = oldCplModel.getLanguage();
 
 					method8.invoke(newModel, value8);
 
@@ -133,33 +133,68 @@ public class ClpSerializer {
 
 					method10.invoke(newModel, value10);
 
-					Method method11 = newModelClass.getMethod("setNutsId",
+					Method method11 = newModelClass.getMethod("setTargetresolution",
 							new Class[] { String.class });
 
-					String value11 = oldCplModel.getNutsId();
+					String value11 = oldCplModel.getTargetresolution();
 
 					method11.invoke(newModel, value11);
 
-					Method method12 = newModelClass.getMethod("setNutsLevel",
+					Method method12 = newModelClass.getMethod("setSpatialLayer",
 							new Class[] { String.class });
 
-					String value12 = oldCplModel.getNutsLevel();
+					String value12 = oldCplModel.getSpatialLayer();
 
 					method12.invoke(newModel, value12);
 
-					Method method13 = newModelClass.getMethod("setStartDate",
-							new Class[] { Date.class });
+					Method method13 = newModelClass.getMethod("setSpatialValues",
+							new Class[] { String.class });
 
-					Date value13 = oldCplModel.getStartDate();
+					String value13 = oldCplModel.getSpatialValues();
 
 					method13.invoke(newModel, value13);
 
-					Method method14 = newModelClass.getMethod("setEndDate",
+					Method method14 = newModelClass.getMethod("setStartDate",
 							new Class[] { Date.class });
 
-					Date value14 = oldCplModel.getEndDate();
+					Date value14 = oldCplModel.getStartDate();
 
 					method14.invoke(newModel, value14);
+
+					Method method15 = newModelClass.getMethod("setEndDate",
+							new Class[] { Date.class });
+
+					Date value15 = oldCplModel.getEndDate();
+
+					method15.invoke(newModel, value15);
+
+					Method method16 = newModelClass.getMethod("setPublicationDate",
+							new Class[] { Date.class });
+
+					Date value16 = oldCplModel.getPublicationDate();
+
+					method16.invoke(newModel, value16);
+
+					Method method17 = newModelClass.getMethod("setSectors_",
+							new Class[] { String.class });
+
+					String value17 = oldCplModel.getSectors_();
+
+					method17.invoke(newModel, value17);
+
+					Method method18 = newModelClass.getMethod("setElements_",
+							new Class[] { String.class });
+
+					String value18 = oldCplModel.getElements_();
+
+					method18.invoke(newModel, value18);
+
+					Method method19 = newModelClass.getMethod("setClimateimpacts_",
+							new Class[] { String.class });
+
+					String value19 = oldCplModel.getClimateimpacts_();
+
+					method19.invoke(newModel, value19);
 
 					return newModel;
 				}
@@ -247,12 +282,12 @@ public class ClpSerializer {
 
 					newModel.setDescription(value4);
 
-					Method method5 = oldModelClass.getMethod("getType");
+					Method method5 = oldModelClass.getMethod("getDatatype");
 
 					String value5 = (String)method5.invoke(oldModel,
 							(Object[])null);
 
-					newModel.setType(value5);
+					newModel.setDatatype(value5);
 
 					Method method6 = oldModelClass.getMethod("getStoredAt");
 
@@ -261,19 +296,19 @@ public class ClpSerializer {
 
 					newModel.setStoredAt(value6);
 
-					Method method7 = oldModelClass.getMethod("getSector");
+					Method method7 = oldModelClass.getMethod("getStoragetype");
 
 					String value7 = (String)method7.invoke(oldModel,
 							(Object[])null);
 
-					newModel.setSector(value7);
+					newModel.setStoragetype(value7);
 
-					Method method8 = oldModelClass.getMethod("getPilar");
+					Method method8 = oldModelClass.getMethod("getLanguage");
 
 					String value8 = (String)method8.invoke(oldModel,
 							(Object[])null);
 
-					newModel.setPilar(value8);
+					newModel.setLanguage(value8);
 
 					Method method9 = oldModelClass.getMethod("getTextSearch");
 
@@ -289,33 +324,72 @@ public class ClpSerializer {
 
 					newModel.setKeyword(value10);
 
-					Method method11 = oldModelClass.getMethod("getNutsId");
+					Method method11 = oldModelClass.getMethod(
+							"getTargetresolution");
 
 					String value11 = (String)method11.invoke(oldModel,
 							(Object[])null);
 
-					newModel.setNutsId(value11);
+					newModel.setTargetresolution(value11);
 
-					Method method12 = oldModelClass.getMethod("getNutsLevel");
+					Method method12 = oldModelClass.getMethod("getSpatialLayer");
 
 					String value12 = (String)method12.invoke(oldModel,
 							(Object[])null);
 
-					newModel.setNutsLevel(value12);
+					newModel.setSpatialLayer(value12);
 
-					Method method13 = oldModelClass.getMethod("getStartDate");
+					Method method13 = oldModelClass.getMethod(
+							"getSpatialValues");
 
-					Date value13 = (Date)method13.invoke(oldModel,
+					String value13 = (String)method13.invoke(oldModel,
 							(Object[])null);
 
-					newModel.setStartDate(value13);
+					newModel.setSpatialValues(value13);
 
-					Method method14 = oldModelClass.getMethod("getEndDate");
+					Method method14 = oldModelClass.getMethod("getStartDate");
 
 					Date value14 = (Date)method14.invoke(oldModel,
 							(Object[])null);
 
-					newModel.setEndDate(value14);
+					newModel.setStartDate(value14);
+
+					Method method15 = oldModelClass.getMethod("getEndDate");
+
+					Date value15 = (Date)method15.invoke(oldModel,
+							(Object[])null);
+
+					newModel.setEndDate(value15);
+
+					Method method16 = oldModelClass.getMethod(
+							"getPublicationDate");
+
+					Date value16 = (Date)method16.invoke(oldModel,
+							(Object[])null);
+
+					newModel.setPublicationDate(value16);
+
+					Method method17 = oldModelClass.getMethod("getSectors_");
+
+					String value17 = (String)method17.invoke(oldModel,
+							(Object[])null);
+
+					newModel.setSectors_(value17);
+
+					Method method18 = oldModelClass.getMethod("getElements_");
+
+					String value18 = (String)method18.invoke(oldModel,
+							(Object[])null);
+
+					newModel.setElements_(value18);
+
+					Method method19 = oldModelClass.getMethod(
+							"getClimateimpacts_");
+
+					String value19 = (String)method19.invoke(oldModel,
+							(Object[])null);
+
+					newModel.setClimateimpacts_(value19);
 
 					return newModel;
 				}
