@@ -32,7 +32,7 @@ hr, .separator {
 	background: none;
 	margin: 0 auto;
 	max-width: 90%;
-	min-width: 960px;
+	min-width: 984px;
 	position: relative;
 }
 
@@ -221,28 +221,33 @@ body #banner .logo a {
 /* ---------- Portlet wrapper and icons ---------- */
 
 .portlet {
-	background-color: #EEF0F2;
-	border: 1px solid #C8C9CA;
-	margin: 0 0 10px;
-	padding: 3px;
+	margin: 0 0 27px;
 	text-align: left;
 }
 
 .portlet-topper {
-	background: #D4D4D4 url(../images/portlet/header_bg.png) repeat-x 0 0;
-	border: 1px solid;
-	border-color: #C8C9CA #9E9E9E #9E9E9E #C8C9CA;
-	font-size: 1.1em;
+	font-size: 1.818em;
 }
 
 .portlet-title {
-	color: #607209;
+	color: #67788a;
 	float: none;
-	font-weight: bold;
+	font-weight: normal;
+	line-height: 20px;
 	min-width: 50%;
-	padding: 5px;
-	text-shadow: 1px 1px #DEDEDE;
+	padding: 0 0 15px 0;
 }
+
+.portlet-content, .portlet-minimized .portlet-content-container {
+	padding: 0;
+}
+
+.portlet-body {
+	color: #02213d;
+	font-family: arial,serif;
+	line-height: 1.364em;
+}
+
 
 .lfr-portlet-title-editable {
 	margin-top: -4px;
@@ -282,6 +287,10 @@ body #banner .logo a {
 
 .ie6 .portlet-topper {
 	zoom: 1;
+}
+
+.taglib-header {
+	color: #2c330a;
 }
 
 /* ---------- Footer ---------- */
@@ -344,12 +353,6 @@ body #banner .logo a {
 	box-shadow: inset 0 1px 3px #000;
 }
 
-.portlet-topper {
-	-moz-box-shadow: 1px 1px 0 #FFF;
-	-webkit-box-shadow: 1px 1px 0 #FFF;
-	box-shadow: 1px 1px 0 #FFF;
-}
-
 .logo .current-community {
 	-moz-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.5), 1px 1px 0 #FFF;
 	-webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.5), 1px 1px 0 #FFF;
@@ -365,115 +368,120 @@ body #banner .logo a {
 	border-bottom-left-radius: 0;
 }
 
+/**** Heading *****/
+
 #heading {
-background-image: url("/ace-theme/images/bg_banner.jpg");
+	background-image: url("/ace-theme/images/bg_banner.jpg");
 }
 
 #heading .logo {
-margin-left: 63px;
+	margin-left: 63px;
 }
 
+/***** Header menu *****/
+
 #header-menu {
-background-image: url("/ace-theme/images/bg_links-tools-ace.png");
-position: absolute;
-top: 0;
-right: 0;
+	background-image: url("/ace-theme/images/bg_links-tools-ace.png");
+	position: absolute;
+	right: 0;
+	top: 0;
 }
 
 .ie7 #header-menu {
-top: 15px;
+	top: 15px;
 }
 
 #header-menu ul {
-margin: 7px 10px 7px 60px;
+	margin: 7px 10px 7px 60px;
 }
 
 #header-menu li {
-background: url("/ace-theme/images/line_sep_links.gif") no-repeat left center;
-display: inline;
-padding: 0 2px 0 7px;
+	background: url("/ace-theme/images/line_sep_links.gif") no-repeat left center;
+	display: inline;
+	padding: 0 2px 0 7px;
 }
 
 #header-menu li.first {
-background: none;
+	background: none;
 }
 
 #header-menu a {
-text-decoration: none;
-color: #FFF;
+	color: #FFF;
+	text-decoration: none;
 }
 
 #header-menu a:hover {
-color: #a5bf26;
+	color: #a5bf26;
 }
 
 #header-menu li#twitter a {
-background-image: url("http://www.eea.europa.eu/twitter16x16.png");
-background-repeat: no-repeat;
-padding-bottom: 2px;
+	background: url("/ace-theme/images/twitter.png") no-repeat;
+	padding: 1px 0 2px 20px;
 }
 
-#header-menu li#twitter a {
-padding-left: 20px;
+#header-menu li#rss a {
+	background: url("/ace-theme/images/rss.png") no-repeat;
+	padding: 0 0 2px 20px;
 }
+
+/**** Search box in header ****/
 
 #searchbox {
-position: absolute;
-right: 10px;
-top: 50px;
+	position: absolute;
+	right: 10px;
+	top: 50px;
 }
 
 .ie7 #searchbox {
-top: 65px;
+	top: 65px;
 }
 
 #searchbox select {
-display: none;
+	display: none;
 }
 
+/**** Second level menu ****/
+
 #sec-menu {
-padding: 0;
+	font
+	padding: 0;
 }
 
 #sec-menu a#p_71_INSTANCE_9VDq {
-padding: 0;
-margin: 0;
+	margin: 0;
+	padding: 0;
 }
 
 #sec-menu ul {
-margin: 5px 0;
-padding-left: 5px;
+	margin: 5px 0;
+	padding-left: 5px;
 }
 
 #sec-menu li {
-background: url("/ace-theme/images/line_sep_sec_menu.png") no-repeat right center;
-display: inline;
-padding: 2px;
+	background: url("/ace-theme/images/line_sep_sec_menu.png") no-repeat right center;
+	display: inline;
+	padding: 2px;
 }
 
 #sec-menu li.last {
-background:none;
+	background:none;
 }
 
 #sec-menu a {
-color: #758816;
-font-weight: normal;
-margin: 0 2px;
-padding: 2px;
-text-decoration: none;
+	color: #758816;
+	font: normal 11px Tahoma,serif;
+	margin: 0 2px;
+	padding: 2px;
+	text-decoration: none;
 }
 
 #sec-menu a:hover,
 #sec-menu .selected {
-color: #2c330a;
+	color: #2c330a;
 }
 
-/*Adjust styles portlets*/
-.taglib-header {
-color: #2c330a;
-}
+/**** General styles Ace Layouts ****/
 
-/*Styles Ace Layout 2 & 3*/
 .ace_layout_2 #column-1,
 .ace_layout_2 #column-2,
 .ace_layout_2 #column-3,
@@ -481,16 +489,47 @@ color: #2c330a;
 .ace_layout_3 #column-2,
 .ace_layout_3 #column-3,
 .ace_layout_3 #column-4 {
-display: inline-block;
-float: left;
+	display: inline-block;
+	float: left;
 }
 
 .ace_layout_2 #column-3,
 .ace_layout_3 #column-4 {
-float: right;
+	float: right;
 }
 
-/****Styles modified from originally ace-theme/docroot/css/custom_common.css*****/
+.ace_layout_1 #layout-column_column-3,
+.ace_layout_1 #layout-column_column-4,
+.ace_layout_1 #layout-column_column-5,
+.ace_layout_3 #layout-column_column-2,
+.ace_layout_3 #layout-column_column-3,
+.ace_layout_3 #layout-column_column-4 {
+	padding: 0 15px;
+}
+
+.ace_layout_1 #layout-column_column-4,
+.ace_layout_1 #layout-column_column-5,
+.ace_layout_3 #layout-column_column-3,
+.ace_layout_3 #layout-column_column-4 {
+	border-left: #d7e3ef 2px solid;
+}
+
+.ace_layout_3 #column-4 {
+	width: 33%;
+}
+
+/**** Ace Layout 3 ****/
+.ace_layout_3 #layout-column_column-5 {
+	background-color: #d2de92;
+	padding: 27px 19px;
+}
+
+.ace_layout_3 #layout-column_column-5 .portlet-title {
+	color: #758816;
+}
+
+/**** Styles modified from originally ace-theme/docroot/css/custom_common.css ****/
+
 .logo .current-community, #navigation, #navigation a, .portlet, .portlet-topper, .site-breadcrumbs ul {
 	-moz-border-radius: 0;
 	-webkit-border-radius: 0;
