@@ -1,0 +1,7 @@
+<root>
+  <facet id="liferay.layouttpl">
+    <node name="liferay-plugin-project">
+      <attribute name="sdk-name" value="liferay-plugins-sdk-6.0-ee-sp1"/>
+    </node>
+  </facet>
+</root>
