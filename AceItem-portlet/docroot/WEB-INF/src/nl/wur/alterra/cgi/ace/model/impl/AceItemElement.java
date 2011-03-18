@@ -17,11 +17,11 @@ public enum AceItemElement {
     /**
      * Adaptation Actions.
      */
-    ACTION,
+    MEASUREACTION,
     /**
      * National Adaptation Plans and Strategies.
      */
-    NATIONAL,
+    PLANSTRATEGY,
     /**
      * EU Sector Policy.
      */

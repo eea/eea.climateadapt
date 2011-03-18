@@ -81,13 +81,13 @@ public class ACEIndexConstant {
          */
         public static final String NAME = "name";
         /**
-         * Nuts ID.
+         * Spatial Value.
          */
-        public static final String NUTS_ID = "nutsid";
+        public static final String SPATIAL_VALUE = "spatialvalue";
         /**
-         * Nuts level.
+         * Spatial Layer.
          */
-        public static final String NUTS_LEVEL = "nutslevel";
+        public static final String SPATIAL_LAYER = "spatiallayer";
         /**
          * Sector.
          */
@@ -105,8 +105,8 @@ public class ACEIndexConstant {
          */
         public static final String STOREDAT = "storedat";
         /**
-         *
+         * Datatype.
          */
-        public static final String TYPE = "type";
+        public static final String DATATYPE = "datatype";
     }
 }

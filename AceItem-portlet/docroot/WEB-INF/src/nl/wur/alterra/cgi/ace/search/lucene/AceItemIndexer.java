@@ -58,14 +58,14 @@ public class AceItemIndexer {
 		// long scopeGroupId = entry.getGroupId();
         String keyword = aceItem.getKeyword();
         String name = aceItem.getName();
-        String nutsId = aceItem.getNutsId();
-        String nutsLevel = aceItem.getNutsLevel();
-        String element = aceItem.getPilar();
-        String sector = aceItem.getSector();
+        String spatialValues = aceItem.getSpatialValues();
+        String spatialLayers = aceItem.getSpatialLayer();
+        String elements = aceItem.getElements_();
+        String sectors = aceItem.getSectors_();
         Date startDate = aceItem.getStartDate();
         String storedAt = aceItem.getStoredAt();
         String textSearch = aceItem.getTextSearch();
-        String type = aceItem.getType();
+        String datatype = aceItem.getDatatype();
 
         Document document = new Document();
 
@@ -99,23 +99,23 @@ public class AceItemIndexer {
             document.add(new Field(ACEIndexConstant.IndexField.NAME, name, Field.Store.YES,Field.Index.ANALYZED));
         }
 
-        if(nutsId != null) {
-            document.add(new Field(ACEIndexConstant.IndexField.NUTS_ID, nutsId, Field.Store.YES,Field.Index.NOT_ANALYZED));
+        if(spatialValues != null) {
+            document.add(new Field(ACEIndexConstant.IndexField.SPATIAL_VALUE, spatialValues, Field.Store.YES,Field.Index.NOT_ANALYZED));
         }
 
-        if(nutsLevel != null) {
-            document.add(new Field(ACEIndexConstant.IndexField.NUTS_LEVEL, nutsLevel, Field.Store.YES,Field.Index.NOT_ANALYZED));
+        if(spatialLayers != null) {
+            document.add(new Field(ACEIndexConstant.IndexField.SPATIAL_LAYER, spatialLayers, Field.Store.YES,Field.Index.NOT_ANALYZED));
         }
 
-        if(element != null) {
-            document.add(new Field(ACEIndexConstant.IndexField.ELEMENT, element, Field.Store.YES,Field.Index.NOT_ANALYZED));
+        if(elements != null) {
+            document.add(new Field(ACEIndexConstant.IndexField.ELEMENT, elements, Field.Store.YES,Field.Index.NOT_ANALYZED));
         }
 
-        if(sector != null) {
+        if(sectors != null) {
             // for searching
-            document.add(new Field(ACEIndexConstant.IndexField.SECTOR, sector, Field.Store.YES,Field.Index.NOT_ANALYZED));
+            document.add(new Field(ACEIndexConstant.IndexField.SECTOR, sectors, Field.Store.YES,Field.Index.NOT_ANALYZED));
             // for sorting
-            document.add(new Field(ACEIndexConstant.IndexField.SECTOR_SORT, sector, Field.Store.NO,Field.Index.NOT_ANALYZED));
+            document.add(new Field(ACEIndexConstant.IndexField.SECTOR_SORT, sectors, Field.Store.NO,Field.Index.NOT_ANALYZED));
         }
 
         if(startDate != null) {
@@ -136,8 +136,8 @@ public class AceItemIndexer {
             document.add(new Field(ACEIndexConstant.IndexField.ANY, textSearch, Field.Store.YES,Field.Index.ANALYZED));
         }
 
-        if(type != null) {
-            document.add(new Field(ACEIndexConstant.IndexField.TYPE, type, Field.Store.YES,Field.Index.NOT_ANALYZED));
+        if(datatype != null) {
+            document.add(new Field(ACEIndexConstant.IndexField.DATATYPE, datatype, Field.Store.YES,Field.Index.NOT_ANALYZED));
         }
 
 		return document;

@@ -41,5 +41,5 @@ public enum AceItemSector {
     /**
      * Water management.
      */
-    WATER
+    WATERMANAGEMENT
 }

@@ -7,39 +7,43 @@ package nl.wur.alterra.cgi.ace.model.impl;
  */
 public enum AceItemType {
     /**
-     * Articles and Publications.
+     * Document.
      */
-    ARTICLE,
+    DOCUMENT,
     /**
      * Data (sets).
      */
-    DATA,
-    /**
-     * Indicators.
-     */
-    INDICATOR,
-    /**
-     * Maps.
-     */
-    MAP,
-    /**
-     * Guidance.
-     */
-    GUIDANCE,
-    /**
-     * Lists.
-     */
-    LIST,
+    DATASET,
     /**
      * Tables.
      */
     TABLE,
     /**
-     * Tools.
-     */
-    TOOL,
-    /**
      * Multimedia.
      */
-    MULTIMEDIA
+    MULTIMEDIA,
+    /**
+     * Maps.
+     */
+    MAP,
+    /**
+     * Indicators.
+     */
+    INDICATOR,
+    /**
+     * Tool Guidance.
+     */
+    TOOLGUIDANCE,
+    /**
+     * ResearchProject.
+     */
+    RESEARCHPROJECT,
+    /**
+     * MeasureActionOption.
+     */
+    MEASUREACTIONOPTION,
+    /**
+     * Organisation.
+     */
+    ORGANISATION
 }

@@ -163,10 +163,10 @@ public class ACESearchEngine extends HitsOpenSearchImpl {
             // handle aceItemType
             //
             if(rawQuery.length() > 0) {
-                rawQuery += " AND " + ACEIndexConstant.IndexField.TYPE + ":" + aceItemType;
+                rawQuery += " AND " + ACEIndexConstant.IndexField.DATATYPE + ":" + aceItemType;
             }
             else {
-                rawQuery = ACEIndexConstant.IndexField.TYPE + ":" + aceItemType;
+                rawQuery = ACEIndexConstant.IndexField.DATATYPE + ":" + aceItemType;
             }
 
             //
@@ -224,17 +224,17 @@ public class ACESearchEngine extends HitsOpenSearchImpl {
                 }
                 aceItem.setKeyword(document.get(ACEIndexConstant.IndexField.KEYWORD));
                 aceItem.setName(document.get(ACEIndexConstant.IndexField.NAME));
-                aceItem.setNutsId(document.get(ACEIndexConstant.IndexField.NUTS_ID));
-                aceItem.setNutsLevel(document.get(ACEIndexConstant.IndexField.NUTS_LEVEL));
-                aceItem.setPilar(document.get(ACEIndexConstant.IndexField.ELEMENT));
-                aceItem.setSector(document.get(ACEIndexConstant.IndexField.SECTOR));
+                aceItem.setSpatialValues(document.get(ACEIndexConstant.IndexField.SPATIAL_VALUE));
+                aceItem.setSpatialLayer(document.get(ACEIndexConstant.IndexField.SPATIAL_LAYER));
+                aceItem.setElements_(document.get(ACEIndexConstant.IndexField.ELEMENT));
+                aceItem.setSectors_(document.get(ACEIndexConstant.IndexField.SECTOR));
                 String startDate = document.get(ACEIndexConstant.IndexField.START_DATE);
                 if(startDate != null) {
                     aceItem.setStartDate(new Date(Long.parseLong(startDate)));
                 }
                 aceItem.setStoredAt(document.get(ACEIndexConstant.IndexField.STOREDAT));
                 aceItem.setTextSearch(document.get(ACEIndexConstant.IndexField.ANY));
-                aceItem.setType(document.get(ACEIndexConstant.IndexField.TYPE));
+                aceItem.setDatatype(document.get(ACEIndexConstant.IndexField.DATATYPE));
 
                 System.out.println(document.get(ACEIndexConstant.IndexField.NAME));
                 results.add(aceItem);

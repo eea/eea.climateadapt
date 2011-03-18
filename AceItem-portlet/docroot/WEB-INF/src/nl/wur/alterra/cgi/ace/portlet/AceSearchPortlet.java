@@ -9,6 +9,7 @@ import nl.wur.alterra.cgi.ace.model.AceItem;
 import nl.wur.alterra.cgi.ace.model.impl.AceItemType;
 import nl.wur.alterra.cgi.ace.search.ACESearchEngine;
 import nl.wur.alterra.cgi.ace.search.lucene.ACEIndexSearcher;
+import nl.wur.alterra.cgi.ace.search.lucene.ACEIndexSynchronizer;
 import nl.wur.alterra.cgi.ace.search.lucene.ACEIndexWriter;
 import nl.wur.alterra.cgi.ace.search.lucene.ACELuceneException;
 
@@ -46,6 +47,19 @@ public class AceSearchPortlet extends MVCPortlet {
     private static final String SEARCH_RESULTS = "searchResults";
 
      private static final String TOTAL_RESULTS = "total_results";
+
+    /**
+     * Called by the portlet container to indicate to a portlet that the portlet is being placed into service.
+     *
+     * Rebuilds the Lucene index.
+     *
+     * @throws PortletException hmm
+     */
+    public void init() throws PortletException {
+        super.init();
+        ACEIndexSynchronizer aceIndexSynchronizer = new ACEIndexSynchronizer();
+        aceIndexSynchronizer.synchronize();
+    }
 
     /**
      * Searches AceItem Lucene index.
@@ -122,24 +136,24 @@ public class AceSearchPortlet extends MVCPortlet {
                      result.setDescription(result.getDescription().replaceAll("'", "\'"));
                      result.setKeyword(result.getKeyword().replaceAll("'", "\'"));
                      result.setName(result.getName().replaceAll("'", "\'"));
-                     result.setNutsId(result.getNutsId().replaceAll("'", "\'"));
-                     result.setNutsLevel(result.getNutsLevel().replaceAll("'", "\'"));
-                     result.setPilar(result.getPilar().replaceAll("'", "\'"));
-                     result.setSector(result.getSector().replaceAll("'", "\'"));
+                     result.setSpatialValues(result.getSpatialValues().replaceAll("'", "\'"));
+                     result.setSpatialLayer(result.getSpatialLayer().replaceAll("'", "\'"));
+                     result.setElements_(result.getElements_().replaceAll("'", "\'"));
+                     result.setSectors_(result.getSectors_().replaceAll("'", "\'"));
                      result.setStoredAt(result.getStoredAt().replaceAll("'", "\'"));
                      result.setTextSearch(result.getTextSearch().replaceAll("'", "\'"));
-                     result.setType(result.getType().replaceAll("'", "\'"));
+                     result.setDatatype(result.getDatatype().replaceAll("'", "\'"));
 
                      result.setDescription(result.getDescription().replaceAll("\"", "\"\""));
                      result.setKeyword(result.getKeyword().replaceAll("\"", "\"\""));
                      result.setName(result.getName().replaceAll("\"", "\"\""));
-                     result.setNutsId(result.getNutsId().replaceAll("\"", "\"\""));
-                     result.setNutsLevel(result.getNutsLevel().replaceAll("\"", "\"\""));
-                     result.setPilar(result.getPilar().replaceAll("\"", "\"\""));
-                     result.setSector(result.getSector().replaceAll("\"", "\"\""));
+                     result.setSpatialValues(result.getSpatialValues().replaceAll("\"", "\"\""));
+                     result.setSpatialLayer(result.getSpatialLayer().replaceAll("\"", "\"\""));
+                     result.setElements_(result.getElements_().replaceAll("\"", "\"\""));
+                     result.setSectors_(result.getSectors_().replaceAll("\"", "\"\""));
                      result.setStoredAt(result.getStoredAt().replaceAll("\"", "\"\""));
                      result.setTextSearch(result.getTextSearch().replaceAll("\"", "\"\""));
-                     result.setType(result.getType().replaceAll("\"", "\"\""));
+                     result.setDatatype(result.getDatatype().replaceAll("\"", "\"\""));
                  }
 
                  keysAdded.add(aceItemType.name() + "_" + SEARCH_RESULTS);

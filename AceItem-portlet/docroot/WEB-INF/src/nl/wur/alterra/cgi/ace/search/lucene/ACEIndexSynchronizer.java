@@ -22,7 +22,7 @@ public class ACEIndexSynchronizer {
             aceIndexWriter.deleteAll();
 
             List<AceItem> aceItems = AceItemLocalServiceUtil.getAceItems(0, AceItemLocalServiceUtil.getAceItemsCount());
-            System.out.println("\n\n\n# aceitems retrieved: " + aceItems.size());
+            System.out.println("\n\n\nACEIndexSynchronizer # aceitems retrieved: " + aceItems.size());
 
             AceItemIndexer indexer = new AceItemIndexer();
             for(AceItem aceItem : aceItems) {
