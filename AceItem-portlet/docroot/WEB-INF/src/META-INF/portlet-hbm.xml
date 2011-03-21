@@ -2,31 +2,7 @@
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 
 <hibernate-mapping default-lazy="false" auto-import="false">
-	<import class="nl.wur.alterra.cgi.ace.model.AceSector" />
-	<import class="nl.wur.alterra.cgi.ace.model.AceElement" />
-	<import class="nl.wur.alterra.cgi.ace.model.AceClimateImpact" />
 	<import class="nl.wur.alterra.cgi.ace.model.AceItem" />
-	<class name="nl.wur.alterra.cgi.ace.model.impl.AceSectorImpl" table="Ace_AceSector">
-		<cache usage="read-write" />
-		<id name="sectorId" type="long">
-			<generator class="assigned" />
-		</id>
-		<property name="sector" type="com.liferay.portal.dao.orm.hibernate.StringType" />
-	</class>
-	<class name="nl.wur.alterra.cgi.ace.model.impl.AceElementImpl" table="Ace_AceElement">
-		<cache usage="read-write" />
-		<id name="elementId" type="long">
-			<generator class="assigned" />
-		</id>
-		<property name="element" type="com.liferay.portal.dao.orm.hibernate.StringType" />
-	</class>
-	<class name="nl.wur.alterra.cgi.ace.model.impl.AceClimateImpactImpl" table="Ace_AceClimateImpact">
-		<cache usage="read-write" />
-		<id name="impactId" type="long">
-			<generator class="assigned" />
-		</id>
-		<property name="impact" type="com.liferay.portal.dao.orm.hibernate.StringType" />
-	</class>
 	<class name="nl.wur.alterra.cgi.ace.model.impl.AceItemImpl" table="Ace_AceItem">
 		<cache usage="read-write" />
 		<id name="aceItemId" type="long">
