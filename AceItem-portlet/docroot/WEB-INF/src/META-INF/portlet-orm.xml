@@ -7,27 +7,6 @@
 			<access>PROPERTY</access>
 		</persistence-unit-defaults>
 	</persistence-unit-metadata>
-	<mapped-superclass class="nl.wur.alterra.cgi.ace.model.impl.AceSectorModelImpl">
-		<attributes>
-			<id name="sectorId" />
-			<basic name="sector" />
-			<transient name="primaryKey" />
-		</attributes>
-	</mapped-superclass>
-	<mapped-superclass class="nl.wur.alterra.cgi.ace.model.impl.AceElementModelImpl">
-		<attributes>
-			<id name="elementId" />
-			<basic name="element" />
-			<transient name="primaryKey" />
-		</attributes>
-	</mapped-superclass>
-	<mapped-superclass class="nl.wur.alterra.cgi.ace.model.impl.AceClimateImpactModelImpl">
-		<attributes>
-			<id name="impactId" />
-			<basic name="impact" />
-			<transient name="primaryKey" />
-		</attributes>
-	</mapped-superclass>
 	<mapped-superclass class="nl.wur.alterra.cgi.ace.model.impl.AceItemModelImpl">
 		<attributes>
 			<id name="aceItemId" />
@@ -59,18 +38,6 @@
 			<transient name="primaryKey" />
 		</attributes>
 	</mapped-superclass>
-	<entity class="nl.wur.alterra.cgi.ace.model.impl.AceSectorImpl" name="AceSector">
-		<table name="Ace_AceSector" />
-		<attributes />
-	</entity>
-	<entity class="nl.wur.alterra.cgi.ace.model.impl.AceElementImpl" name="AceElement">
-		<table name="Ace_AceElement" />
-		<attributes />
-	</entity>
-	<entity class="nl.wur.alterra.cgi.ace.model.impl.AceClimateImpactImpl" name="AceClimateImpact">
-		<table name="Ace_AceClimateImpact" />
-		<attributes />
-	</entity>
 	<entity class="nl.wur.alterra.cgi.ace.model.impl.AceItemImpl" name="AceItem">
 		<table name="Ace_AceItem" />
 		<attributes />
