@@ -35,14 +35,8 @@ import com.liferay.portlet.asset.service.AssetEntryService;
 import com.liferay.portlet.asset.service.persistence.AssetEntryPersistence;
 
 import nl.wur.alterra.cgi.ace.model.AceItem;
-import nl.wur.alterra.cgi.ace.service.AceClimateImpactLocalService;
-import nl.wur.alterra.cgi.ace.service.AceElementLocalService;
 import nl.wur.alterra.cgi.ace.service.AceItemLocalService;
-import nl.wur.alterra.cgi.ace.service.AceSectorLocalService;
-import nl.wur.alterra.cgi.ace.service.persistence.AceClimateImpactPersistence;
-import nl.wur.alterra.cgi.ace.service.persistence.AceElementPersistence;
 import nl.wur.alterra.cgi.ace.service.persistence.AceItemPersistence;
-import nl.wur.alterra.cgi.ace.service.persistence.AceSectorPersistence;
 
 import java.util.List;
 
@@ -241,120 +235,6 @@ public abstract class AceItemLocalServiceBaseImpl implements AceItemLocalService
 		aceItem.setNew(false);
 
 		return aceItemPersistence.update(aceItem, merge);
-	}
-
-	/**
-	 * Gets the ace sector local service.
-	 *
-	 * @return the ace sector local service
-	 */
-	public AceSectorLocalService getAceSectorLocalService() {
-		return aceSectorLocalService;
-	}
-
-	/**
-	 * Sets the ace sector local service.
-	 *
-	 * @param aceSectorLocalService the ace sector local service
-	 */
-	public void setAceSectorLocalService(
-		AceSectorLocalService aceSectorLocalService) {
-		this.aceSectorLocalService = aceSectorLocalService;
-	}
-
-	/**
-	 * Gets the ace sector persistence.
-	 *
-	 * @return the ace sector persistence
-	 */
-	public AceSectorPersistence getAceSectorPersistence() {
-		return aceSectorPersistence;
-	}
-
-	/**
-	 * Sets the ace sector persistence.
-	 *
-	 * @param aceSectorPersistence the ace sector persistence
-	 */
-	public void setAceSectorPersistence(
-		AceSectorPersistence aceSectorPersistence) {
-		this.aceSectorPersistence = aceSectorPersistence;
-	}
-
-	/**
-	 * Gets the ace element local service.
-	 *
-	 * @return the ace element local service
-	 */
-	public AceElementLocalService getAceElementLocalService() {
-		return aceElementLocalService;
-	}
-
-	/**
-	 * Sets the ace element local service.
-	 *
-	 * @param aceElementLocalService the ace element local service
-	 */
-	public void setAceElementLocalService(
-		AceElementLocalService aceElementLocalService) {
-		this.aceElementLocalService = aceElementLocalService;
-	}
-
-	/**
-	 * Gets the ace element persistence.
-	 *
-	 * @return the ace element persistence
-	 */
-	public AceElementPersistence getAceElementPersistence() {
-		return aceElementPersistence;
-	}
-
-	/**
-	 * Sets the ace element persistence.
-	 *
-	 * @param aceElementPersistence the ace element persistence
-	 */
-	public void setAceElementPersistence(
-		AceElementPersistence aceElementPersistence) {
-		this.aceElementPersistence = aceElementPersistence;
-	}
-
-	/**
-	 * Gets the ace climate impact local service.
-	 *
-	 * @return the ace climate impact local service
-	 */
-	public AceClimateImpactLocalService getAceClimateImpactLocalService() {
-		return aceClimateImpactLocalService;
-	}
-
-	/**
-	 * Sets the ace climate impact local service.
-	 *
-	 * @param aceClimateImpactLocalService the ace climate impact local service
-	 */
-	public void setAceClimateImpactLocalService(
-		AceClimateImpactLocalService aceClimateImpactLocalService) {
-		this.aceClimateImpactLocalService = aceClimateImpactLocalService;
-	}
-
-	/**
-	 * Gets the ace climate impact persistence.
-	 *
-	 * @return the ace climate impact persistence
-	 */
-	public AceClimateImpactPersistence getAceClimateImpactPersistence() {
-		return aceClimateImpactPersistence;
-	}
-
-	/**
-	 * Sets the ace climate impact persistence.
-	 *
-	 * @param aceClimateImpactPersistence the ace climate impact persistence
-	 */
-	public void setAceClimateImpactPersistence(
-		AceClimateImpactPersistence aceClimateImpactPersistence) {
-		this.aceClimateImpactPersistence = aceClimateImpactPersistence;
 	}
 
 	/**
@@ -595,18 +475,6 @@ public abstract class AceItemLocalServiceBaseImpl implements AceItemLocalService
 		}
 	}
 
-	@BeanReference(type = AceSectorLocalService.class)
-	protected AceSectorLocalService aceSectorLocalService;
-	@BeanReference(type = AceSectorPersistence.class)
-	protected AceSectorPersistence aceSectorPersistence;
-	@BeanReference(type = AceElementLocalService.class)
-	protected AceElementLocalService aceElementLocalService;
-	@BeanReference(type = AceElementPersistence.class)
-	protected AceElementPersistence aceElementPersistence;
-	@BeanReference(type = AceClimateImpactLocalService.class)
-	protected AceClimateImpactLocalService aceClimateImpactLocalService;
-	@BeanReference(type = AceClimateImpactPersistence.class)
-	protected AceClimateImpactPersistence aceClimateImpactPersistence;
 	@BeanReference(type = AceItemLocalService.class)
 	protected AceItemLocalService aceItemLocalService;
 	@BeanReference(type = AceItemPersistence.class)
