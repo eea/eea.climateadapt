@@ -1,18 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <model-hints>
-	<model name="nl.wur.alterra.cgi.ace.model.AceSector">
-		<field name="sectorId" type="long" />
-		<field name="sector" type="String" />
-	</model>
-	<model name="nl.wur.alterra.cgi.ace.model.AceElement">
-		<field name="elementId" type="long" />
-		<field name="element" type="String" />
-	</model>
-	<model name="nl.wur.alterra.cgi.ace.model.AceClimateImpact">
-		<field name="impactId" type="long" />
-		<field name="impact" type="String" />
-	</model>
 	<model name="nl.wur.alterra.cgi.ace.model.AceItem">
 		<field name="aceItemId" type="long" />
 		<field name="companyId" type="long" />
