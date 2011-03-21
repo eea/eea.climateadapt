@@ -974,12 +974,6 @@ public class AceItemPersistenceImpl extends BasePersistenceImpl<AceItem>
 		}
 	}
 
-	@BeanReference(type = AceSectorPersistence.class)
-	protected AceSectorPersistence aceSectorPersistence;
-	@BeanReference(type = AceElementPersistence.class)
-	protected AceElementPersistence aceElementPersistence;
-	@BeanReference(type = AceClimateImpactPersistence.class)
-	protected AceClimateImpactPersistence aceClimateImpactPersistence;
 	@BeanReference(type = AceItemPersistence.class)
 	protected AceItemPersistence aceItemPersistence;
 	@BeanReference(type = ResourcePersistence.class)
