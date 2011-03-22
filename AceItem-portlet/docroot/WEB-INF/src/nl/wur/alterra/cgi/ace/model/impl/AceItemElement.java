@@ -15,9 +15,13 @@ public enum AceItemElement {
      */
     VULNERABILITY,
     /**
+     * Adaptation Measures.
+     */
+    MEASURE,
+    /**
      * Adaptation Actions.
      */
-    MEASUREACTION,
+    ACTION,
     /**
      * National Adaptation Plans and Strategies.
      */
