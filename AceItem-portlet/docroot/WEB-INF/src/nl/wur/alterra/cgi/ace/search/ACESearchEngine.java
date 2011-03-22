@@ -8,6 +8,7 @@ import com.liferay.portal.kernel.util.WebKeys;
 import com.liferay.portal.theme.ThemeDisplay;
 import nl.wur.alterra.cgi.ace.model.AceItem;
 import nl.wur.alterra.cgi.ace.model.impl.AceItemImpl;
+import nl.wur.alterra.cgi.ace.portlet.AceSearchFormBean;
 import nl.wur.alterra.cgi.ace.search.lucene.ACEAnalyzer;
 import nl.wur.alterra.cgi.ace.search.lucene.ACEIndexConstant;
 import nl.wur.alterra.cgi.ace.search.lucene.ACEIndexSearcher;
@@ -131,15 +132,13 @@ public class ACESearchEngine extends HitsOpenSearchImpl {
     /**
      * Searches Lucene, restricted to specified search parameters.
      *
-     * @param anyOfThese
      * @param aceItemType
-     * @param sectors
-     * @param elements
-     * @param sortBy
      * @return results
      * @throws ACELuceneException hmm
      */
-    public List<AceItem> searchLuceneByType(String[] anyOfThese, String aceItemType, String[] sectors, String[] elements, String sortBy) throws ACELuceneException {
+
+    public List<AceItem> searchLuceneByType(AceSearchFormBean formBean, String aceItemType) throws ACELuceneException {
+    //public List<AceItem> searchLuceneByType(String[] anyOfThese, String aceItemType, String[] sectors, String[] elements, String sortBy) throws ACELuceneException {
         try {
             //
             // handle free text input
@@ -147,11 +146,10 @@ public class ACESearchEngine extends HitsOpenSearchImpl {
 
             //String rawQuery = createRawQuery(allOfThese, anyOfThese, exactlyThese, excludingThese);
             String rawQuery = "";
-            if(anyOfThese != null && anyOfThese.length > 0) {
-                for(String term : anyOfThese) {
-                    rawQuery = rawQuery + " " + term;
-                }
+            if(formBean.getAnyOfThese() != null) {
+                rawQuery = rawQuery + " " + formBean.getAnyOfThese();
             }
+
             // user entered no searchterms; do wildcard query
             else {
                 // TODO create a better, real wildcard-only query
@@ -172,7 +170,8 @@ public class ACESearchEngine extends HitsOpenSearchImpl {
             //
             // handle sectors
             //
-            if ((sectors != null) && (sectors.length > 0)) {
+            String[] sectors = formBean.getSector();
+            if ((formBean.getSector() != null) && (sectors.length > 0)) {
                 rawQuery += " AND (";
                 for(String sector: sectors) {
                     rawQuery += " (" + ACEIndexConstant.IndexField.SECTOR + ":" + sector + ") OR";
@@ -183,6 +182,7 @@ public class ACESearchEngine extends HitsOpenSearchImpl {
             //
             // handle elements
             //
+            String[] elements = formBean.getElement();
             if ((elements != null) && (elements.length > 0)) {
                 rawQuery += " AND (";
                 for(String element: elements) {
@@ -191,13 +191,26 @@ public class ACESearchEngine extends HitsOpenSearchImpl {
                 rawQuery =  rawQuery.substring(0, rawQuery.lastIndexOf("OR")) + " )";
             }
 
+            //
+            // handle countries
+            //
+            String[] countries = formBean.getCountries();
+            if ((countries != null) && (countries.length > 0)) {
+                rawQuery += " AND (";
+                for(String country: countries) {
+                    rawQuery += " (" + ACEIndexConstant.IndexField.SPATIAL_VALUE + ":" + country + " AND " + ACEIndexConstant.IndexField.SPATIAL_LAYER + ":countries) OR";
+                }
+                rawQuery =  rawQuery.substring(0, rawQuery.lastIndexOf("OR")) + " )";
+            }
+
             ACEIndexSearcher searcher = ACEIndexSearcher.getACEIndexSearcher();
             QueryParser queryParser = new QueryParser(ACEIndexConstant.IndexField.ANY, ACEAnalyzer.getAnalyzer());
             Query query = queryParser.parse(rawQuery);
+            System.out.println("Lucene raw query: " + rawQuery);
             System.out.println("Lucene query: " + query.toString());
             //System.out.println("Lucene query (rewritten): " + query.rewrite(((IndexSearcher)searcher).getIndexReader()).toString());
             long start = System.currentTimeMillis();
-            TopDocs topDocs = searcher.search(query, sortBy, 10);
+            TopDocs topDocs = searcher.search(query, formBean.getSortBy(), 10);
             long end = System.currentTimeMillis();
             System.out.println("Lucene searcher # total hits: " + topDocs.totalHits + " in " + (end - start) + " ms");
             ScoreDoc[] hits = topDocs.scoreDocs;

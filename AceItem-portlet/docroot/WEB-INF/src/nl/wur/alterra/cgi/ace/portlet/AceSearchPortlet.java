@@ -41,6 +41,7 @@ public class AceSearchPortlet extends MVCPortlet {
     private static final String ACEITEM_TYPE = "aceitemtype";
     private static final String SORTBY = "sortBy";
     private static final String SECTOR = "sector";
+    private static final String COUNTRIES = "countries";
     private static final String ELEMENT = "element";
 
     private static final String SEARCH_PARAMS = "searchParams";
@@ -95,6 +96,7 @@ public class AceSearchPortlet extends MVCPortlet {
         String[] finalDates = requestParams.get(FINAL_DATE);
         String[] initialDates = requestParams.get(INITIAL_DATE);
         String[] sectors = requestParams.get(SECTOR);
+        String[] countries = requestParams.get(COUNTRIES);
         String[] elements = requestParams.get(ELEMENT);
         String[] simpleDates = requestParams.get(SIMPLE_DATE);
         String[] sortBys = requestParams.get(SORTBY);
@@ -110,6 +112,7 @@ public class AceSearchPortlet extends MVCPortlet {
         formBean.setInitialDate(initialDates[0]);
         formBean.setSector(sectors);
         formBean.setElement(elements);
+        formBean.setCountries(countries);
         formBean.setSimpleDate(simpleDates[0]);
         formBean.setSortBy(sortBy);
 
@@ -126,7 +129,7 @@ public class AceSearchPortlet extends MVCPortlet {
         // no aceItemTypes requested: search for all of them
         if(aceItemTypes == null || aceItemTypes.length == 0) {
              for(AceItemType aceItemType : AceItemType.values()) {
-                 List<AceItem> results = aceSearchEngine.searchLuceneByType(anyOfThese, aceItemType.name(), sectors, elements, sortBy);
+                 List<AceItem> results = aceSearchEngine.searchLuceneByType(formBean, aceItemType.name());
                  totalResults += results.size();
 
                  System.out.println("searchAceitem found #" + results.size() + " results of type " + aceItemType.name());
@@ -171,7 +174,7 @@ public class AceSearchPortlet extends MVCPortlet {
         // search only requested aceItemTypes
         else {
             for(String aceItemType : aceItemTypes) {
-                List<AceItem> results = aceSearchEngine.searchLuceneByType(anyOfThese, aceItemType, sectors, elements, sortBy);
+                List<AceItem> results = aceSearchEngine.searchLuceneByType(formBean, aceItemType);
                 totalResults += results.size();
 
                 System.out.println("searchAceitem found #" + results.size() + " results of type " + aceItemType);

@@ -51,6 +51,10 @@ if (elements == null) elements = new String[0];
 List<String> elementsList = Arrays.asList(elements);
 pageContext.setAttribute("elementsList", elementsList);
 
+String[] countries = request.getParameterValues("countries");
+if (countries == null) countries = new String[0];
+List<String> countriesList = Arrays.asList(countries);
+pageContext.setAttribute("countriesList", countriesList);
 %>
 
 
@@ -229,14 +233,37 @@ pageContext.setAttribute("elementsList", elementsList);
                     </li>
 
                     <li>
-                        <a href="#" class="collapsed_section"><liferay-ui:message key="acesearch-section-countries" /></a>
+                        <a href="#" id="countries_btn" class="collapsed_section"><liferay-ui:message key="acesearch-section-countries" /></a>
+                        <div id="countries_container" class="checks_container">
+                            <%-- note : i18n file should always be in sync with AceItemCountry enum --%>
+							<c:forEach var="countryElement" items="<%= nl.wur.alterra.cgi.ace.model.impl.AceItemCountry.values() %>" >
+								<div class="check">
+									<c:set var="countryElementMustBeChecked" value="false" />
+									<c:forEach var="requestedElement" items="${countriesList}">
+										<c:if test="${requestedElement eq countryElement}">
+											<c:set var="countryElementMustBeChecked" value="true" />
+										</c:if>
+									</c:forEach>
+									<c:choose>
+										<c:when test="${countryElementMustBeChecked}">
+											<input type="checkbox" name="countries" id="chk_countries_${countryElement}" value="${countryElement}" checked="checked" />
+										</c:when>
+										<c:otherwise>
+											<input type="checkbox" name="countries" id="chk_countries_${countryElement}" value="${countryElement}" />
+										</c:otherwise>
+									</c:choose>
+									<label for="chk_countries_${countryElement}"><liferay-ui:message key="acesearch-country-lbl-${countryElement}" /></label>
+								</div>
+							</c:forEach>
+                        </div>
+
                     </li>
 
                     <li>
                         <a href="#" id="adaptation_elements_btn" class="collapsed_section"><liferay-ui:message key="acesearch-section-adaptation-elements" /></a>
                         <div id="adaptation_elements_container" class="checks_container">		
 							<%-- note : i18n file should always be in sync with AceItemElement enum --%>
-							<c:forEach var="adaptationElement" items="<%= nl.wur.alterra.cgi.ace.model.impl.AceItemElement.values() %>" >							
+							<c:forEach var="adaptationElement" items="<%= nl.wur.alterra.cgi.ace.model.impl.AceItemElement.values() %>" >
 								<div class="check">
 									<c:set var="adaptationElementMustBeChecked" value="false" />
 									<c:forEach var="requestedElement" items="${elementsList}">
@@ -249,7 +276,7 @@ pageContext.setAttribute("elementsList", elementsList);
 											<input type="checkbox" name="element" id="chk_elements_${adaptationElement}" value="${adaptationElement}" checked="checked" />
 										</c:when>
 										<c:otherwise>
-											<input type="checkbox" name="element" id="elements_${adaptationElement}" value="${adaptationElement}" />
+											<input type="checkbox" name="element" id="chk_elements_${adaptationElement}" value="${adaptationElement}" />
 										</c:otherwise>
 									</c:choose>
 									<label for="chk_elements_${adaptationElement}"><liferay-ui:message key="acesearch-elements-lbl-${adaptationElement}" /></label>

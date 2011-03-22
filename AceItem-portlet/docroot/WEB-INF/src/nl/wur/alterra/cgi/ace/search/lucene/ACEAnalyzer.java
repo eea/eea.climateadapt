@@ -30,6 +30,8 @@ public class ACEAnalyzer {
         analyzer.addAnalyzer(ACEIndexConstant.IndexField.DATATYPE, keywordAnalyzer);
         analyzer.addAnalyzer(ACEIndexConstant.IndexField.SECTOR, keywordAnalyzer);
         analyzer.addAnalyzer(ACEIndexConstant.IndexField.ELEMENT, keywordAnalyzer);
+        analyzer.addAnalyzer(ACEIndexConstant.IndexField.SPATIAL_LAYER, keywordAnalyzer);
+        analyzer.addAnalyzer(ACEIndexConstant.IndexField.SPATIAL_VALUE, keywordAnalyzer);
         analyzer.addAnalyzer(ACEIndexConstant.IndexField.START_DATE, keywordAnalyzer);
         analyzer.addAnalyzer(ACEIndexConstant.IndexField.STOREDAT, keywordAnalyzer);
         return analyzer;

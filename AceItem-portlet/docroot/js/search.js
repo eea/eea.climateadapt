@@ -9,6 +9,11 @@ jQuery(document).ready(function() {
     $j("#adaptation_sectors_btn").click(function() {
        showAdaptationSectorsPanel();
     });
+
+    $j("#countries_btn").click(function() {
+          showCountriesPanel();
+       });
+
 	
     $j("#adaptation_elements_btn").click(function() {
        showAdaptationElementsPanel();
@@ -101,6 +106,24 @@ function showAdaptationSectorsPanel() {
     } else {
         $j("#adaptation_sectors_btn").removeClass('expanded_section');
         $j("#adaptation_sectors_btn").addClass('collapsed_section');
+    }
+}
+
+
+/**
+ *
+ * Shows/hides the countries elements panel.
+ *
+ */
+function showCountriesPanel() {
+    $j("#countries_container").slideToggle();
+    if ($j("#countries_btn").hasClass('collapsed_section')) {
+        $j("#countries_btn").removeClass('collapsed_section');
+        $j("#countries_btn").addClass('expanded_section');
+    }
+	else {
+        $j("#countries_btn").removeClass('expanded_section');
+        $j("#countries_btn").addClass('collapsed_section');
     }
 }
 
@@ -202,6 +225,10 @@ function clearSearchForm() {
     });
 
     $j("input[name=sector]:checkbox").each(function() {
+        $j(this).attr('checked', false);
+    });
+
+    $j("input[name=countries]:checkbox").each(function() {
         $j(this).attr('checked', false);
     });
 	
