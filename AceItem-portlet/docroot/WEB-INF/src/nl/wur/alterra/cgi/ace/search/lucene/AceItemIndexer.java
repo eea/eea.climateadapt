@@ -108,14 +108,22 @@ public class AceItemIndexer {
         }
 
         if(elements != null) {
-            document.add(new Field(ACEIndexConstant.IndexField.ELEMENT, elements, Field.Store.YES,Field.Index.NOT_ANALYZED));
+            String[] elementValues = elements.split(";");
+
+            for(int i = 0; i < elementValues.length; i++) {
+                document.add(new Field(ACEIndexConstant.IndexField.ELEMENT, elementValues[i], Field.Store.YES,Field.Index.NOT_ANALYZED));
+            }
         }
 
         if(sectors != null) {
-            // for searching
-            document.add(new Field(ACEIndexConstant.IndexField.SECTOR, sectors, Field.Store.YES,Field.Index.NOT_ANALYZED));
-            // for sorting
-            document.add(new Field(ACEIndexConstant.IndexField.SECTOR_SORT, sectors, Field.Store.NO,Field.Index.NOT_ANALYZED));
+            String[] sectorValues = sectors.split(";");
+
+            for(int i = 0; i < sectorValues.length; i++) {
+                // for searching
+                document.add(new Field(ACEIndexConstant.IndexField.SECTOR, sectorValues[i], Field.Store.YES,Field.Index.NOT_ANALYZED));
+                // for sorting
+                document.add(new Field(ACEIndexConstant.IndexField.SECTOR_SORT, sectorValues[i], Field.Store.NO,Field.Index.NOT_ANALYZED));
+            }
         }
 
         if(startDate != null) {
