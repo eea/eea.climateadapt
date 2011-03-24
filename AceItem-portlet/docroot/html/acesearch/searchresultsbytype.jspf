@@ -147,9 +147,12 @@
 
 	
 	<%-- collapsed view --%>	
-	<div id="${collapsedId}" class="collapsedResultsGroup">	
+	<div id="${collapsedId}" class="collapsedResultsGroup">
+
+        <c:set var="groupedResults" value="${groupedResults}"/>
+
 		<div id="${collapsedTitleId}" class="collapsedResultsGroupTitle resultsGroupTitle">
-			&#9658; <c:out value='${groupTitle}' />
+			&#9658; <c:out value='${groupTitle}' /> (${fn:length(groupedResults)})
 		</div>
 	</div>
 	
