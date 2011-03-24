@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<model-hints>
+	<model name="nl.wur.alterra.cgi.ace.model.Measure">
+		<field name="measureId" type="long" />
+		<field name="companyId" type="long" />
+		<field name="groupId" type="long" />
+		<field name="name" type="String" />
+		<field name="description" type="String" />
+		<field name="implementationtype" type="String" />
+		<field name="implementationtime" type="long" />
+		<field name="lifetime" type="long" />
+		<field name="spatiallayer" type="String" />
+		<field name="spatialvalues" type="String" />
+		<field name="legalaspects" type="String" />
+		<field name="stakeholderparticipation" type="String" />
+		<field name="contact" type="String" />
+		<field name="succeslimitations" type="String" />
+		<field name="website" type="String" />
+		<field name="costbenefit" type="String" />
+		<field name="keywords" type="String" />
+		<field name="startdate" type="Date" />
+		<field name="enddate" type="Date" />
+		<field name="publicationdate" type="Date" />
+		<field name="language" type="String" />
+		<field name="sectors_" type="String" />
+		<field name="elements_" type="String" />
+		<field name="climateimpacts_" type="String" />
+		<field name="mao_type" type="String" />
+	</model>
+</model-hints>

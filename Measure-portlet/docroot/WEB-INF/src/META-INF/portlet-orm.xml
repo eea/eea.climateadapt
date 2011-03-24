@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<entity-mappings xmlns="http://java.sun.com/xml/ns/persistence/orm" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="1.0" xsi:schemaLocation="http://java.sun.com/xml/ns/persistence/orm http://java.sun.com/xml/ns/persistence/orm_1_0.xsd">
+	<persistence-unit-metadata>
+		<xml-mapping-metadata-complete/>
+		<persistence-unit-defaults>
+			<access>PROPERTY</access>
+		</persistence-unit-defaults>
+	</persistence-unit-metadata>
+	<mapped-superclass class="nl.wur.alterra.cgi.ace.model.impl.MeasureModelImpl">
+		<attributes>
+			<id name="measureId" />
+			<basic name="companyId" />
+			<basic name="groupId" />
+			<basic name="name" />
+			<basic name="description" />
+			<basic name="implementationtype" />
+			<basic name="implementationtime" />
+			<basic name="lifetime" />
+			<basic name="spatiallayer" />
+			<basic name="spatialvalues" />
+			<basic name="legalaspects" />
+			<basic name="stakeholderparticipation" />
+			<basic name="contact" />
+			<basic name="succeslimitations" />
+			<basic name="website" />
+			<basic name="costbenefit" />
+			<basic name="keywords" />
+			<basic name="startdate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="enddate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="publicationdate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="language" />
+			<basic name="sectors_" />
+			<basic name="elements_" />
+			<basic name="climateimpacts_" />
+			<basic name="mao_type" />
+			<transient name="primaryKey" />
+		</attributes>
+	</mapped-superclass>
+	<entity class="nl.wur.alterra.cgi.ace.model.impl.MeasureImpl" name="Measure">
+		<table name="Ace_Measure" />
+		<attributes />
+	</entity>
+</entity-mappings>
