@@ -6,9 +6,8 @@
 
 <head>
 	<title>$the_title - $company_name</title>
-
 	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js"></script>
-	
+
 	$theme.include($top_head_include)
 </head>
 

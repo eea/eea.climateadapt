@@ -13,7 +13,8 @@ body {
 }
 
 a {
-	color: #364001;
+	color: #02213D;
+	font-weight: normal;
 	text-decoration: underline;
 }
 
@@ -26,6 +27,10 @@ hr, .separator {
 	border-color: #BFBFBF transparent #FFF;
 	border-style: solid;
 	border-width: 1px 0;
+}
+
+#dockbar {
+	min-width: 984px;
 }
 
 #wrapper {
@@ -443,7 +448,6 @@ body #banner .logo a {
 /**** Second level menu ****/
 
 #sec-menu {
-	font
 	padding: 0;
 }
 
@@ -478,6 +482,10 @@ body #banner .logo a {
 #sec-menu a:hover,
 #sec-menu .selected {
 	color: #2c330a;
+}
+
+#sec-menu .portlet-borderless-bar {
+	display: none;
 }
 
 /**** General styles Ace Layouts ****/
@@ -519,13 +527,72 @@ body #banner .logo a {
 }
 
 /**** Ace Layout 3 ****/
-.ace_layout_3 #layout-column_column-5 {
+
+.ace_layout_3 #layout-column_column-1 {
+	padding: 0 2px 27px 0;
+}
+
+.ace_layout_3 #column-5 {
 	background-color: #d2de92;
+}
+
+.ace_layout_3 #layout-column_column-5 {
 	padding: 27px 19px;
 }
 
 .ace_layout_3 #layout-column_column-5 .portlet-title {
 	color: #758816;
+}
+
+/**** Template Sector Main Article ****/
+
+.sector-main-article {
+	height: 240px;
+	padding: 0;
+}
+
+.sector-main-article .image {
+	float: left;
+	height: 240px;
+	width: 33%;
+}
+
+.sector-main-article .text-container, 
+.sector-main-article .filter-container {
+	left: 245px;
+	position: absolute;
+	width: auto;
+}
+		
+.sector-main-article .text-container {
+	background: url("../images/bg_sector_main_article_text.png") repeat-y scroll left center;
+	height: 200px;
+	top: 40px;
+}
+
+.sector-main-article .filter-container {
+	background: url("../images/bg_sector_main_article_filter.png") repeat-y scroll left center;
+	height: 40px;
+	right: 0;
+	top: 0;
+}
+
+.sector-main-article .filter-options {
+	float: right;
+	margin: 10px 17px;
+}
+
+.sector-main-article .title {
+	margin: 15px 17px;
+}
+
+.sector-main-article h1 {
+	font: normal 26px Tahoma, Times New Roman, serif;
+	margin: 15px 0;
+}
+
+.sector-main-article .body {
+	margin: 0 17px;
 }
 
 /**** Styles modified from originally ace-theme/docroot/css/custom_common.css ****/
@@ -534,4 +601,14 @@ body #banner .logo a {
 	-moz-border-radius: 0;
 	-webkit-border-radius: 0;
 	border-radius: 0;
+}
+
+/**** Styles for adjusting the display of RSS feeds ****/
+
+.portlet-rss .feed {
+	padding: 0;
+}
+
+span.opens-new-window-accessible {
+	display: none;
 }
