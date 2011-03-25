@@ -22,11 +22,4 @@ String redirect = PortalUtil.getCurrentURL(renderRequest);
 	
 	<liferay-ui:icon image="edit" url="<%=editURL.toString() %>" />
 
-    <!--  PERFORM PORTLET ACTION deleteAceItem AT CHOICE delete -->
-	<portlet:actionURL name="deleteAceItem" var="deleteURL">
-		<portlet:param name="aceItemId" value="<%= String.valueOf(aceItemId) %>" />
-		<portlet:param name="redirect" value="<%= redirect %>"/>
-	</portlet:actionURL>
-		
-	<liferay-ui:icon image="delete" url="<%=deleteURL.toString() %>" />
-<!--  Commented out: no Actons button: /liferay-ui:icon-menu -->
+ <!--  Commented out: no Actons button: /liferay-ui:icon-menu -->
