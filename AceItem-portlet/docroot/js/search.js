@@ -270,7 +270,7 @@ function displayJSONResults(unique, aceitemResults) {
 			
 			// add name and description
 			if (aceitem._storedAt.substr(0, 4) == "http") {
-				resultlist += '<div><span class="bolder">&#187; <a href="' + aceitem._storedAt + '">' + aceitem._name + '</a></span>&nbsp;';
+				resultlist += '<div><span class="bolder">&#187; <a target="_blank" href="' + aceitem._storedAt + '">' + aceitem._name + '</a></span>&nbsp;';
 
 				if (aceitem._storedAt.substr(0, 21) == "http://www.tatenbank.") {
 					resultlist += '<span class="bolder">&#187; <a href="http://babelfish.yahoo.com/translate_url?doit=done&tt=url&intl=1&fr=bf-home&lp=de_en&btnTrUrl=Translate&&trurl='+ aceitem._storedAt + '" target="_blank">(machine translate to english)</a></span>&nbsp;';					
