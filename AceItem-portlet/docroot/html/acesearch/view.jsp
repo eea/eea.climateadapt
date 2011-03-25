@@ -354,9 +354,9 @@ pageContext.setAttribute("countriesList", countriesList);
 		<c:set var="groupTitle" scope="page"><liferay-ui:message key="acesearch-datainfotype-lbl-INDICATOR" /></c:set>
 		<%@ include file="searchresultsbytype.jspf" %>
 
-		<c:set var="groupedResults" scope="page" value="${DATA_searchResults}"/>
-		<c:set var="groupedJSONResults" scope="page" value="${DATA_JSONsearchResults}"/>
-		<c:set var="aceitemtype" scope="page" value="DATA"/>				
+		<c:set var="groupedResults" scope="page" value="${DATASET_searchResults}"/>
+		<c:set var="groupedJSONResults" scope="page" value="${DATASET_JSONsearchResults}"/>
+		<c:set var="aceitemtype" scope="page" value="DATASET"/>				
 		<c:set var="groupTitle" scope="page"><liferay-ui:message key="acesearch-datainfotype-lbl-DATASET" /></c:set>
 		<%@ include file="searchresultsbytype.jspf" %>
 
