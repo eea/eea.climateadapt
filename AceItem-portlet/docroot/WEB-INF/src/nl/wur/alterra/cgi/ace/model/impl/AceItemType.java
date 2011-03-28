@@ -41,7 +41,7 @@ public enum AceItemType {
     /**
      * Measure.
      */
-    MEASURE,
+    MEASURE, 
     /**
      * Action.
      */
