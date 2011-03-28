@@ -336,10 +336,16 @@ pageContext.setAttribute("countriesList", countriesList);
 		<c:set var="groupTitle" scope="page"><liferay-ui:message key="acesearch-datainfotype-lbl-RESEARCHPROJECT" /></c:set>
 		<%@ include file="searchresultsbytype.jspf" %>
 
-        <c:set var="groupedResults" scope="page" value="${MEASUREACTIONOPTION_searchResults}"/>
-		<c:set var="groupedJSONResults" scope="page" value="${MEASUREACTIONOPTION_JSONsearchResults}"/>
+          <c:set var="groupedResults" scope="page" value="${MEASURE_searchResults}"/>
+		<c:set var="groupedJSONResults" scope="page" value="${MEASURE_JSONsearchResults}"/>
+		<c:set var="aceitemtype" scope="page" value="MEASURE"/>
+		<c:set var="groupTitle" scope="page"><liferay-ui:message key="acesearch-datainfotype-lbl-MEASURE" /></c:set>
+		<%@ include file="searchresultsbytype.jspf" %>
+
+        <c:set var="groupedResults" scope="page" value="${ACTION_searchResults}"/>
+		<c:set var="groupedJSONResults" scope="page" value="${ACTION_JSONsearchResults}"/>
 		<c:set var="aceitemtype" scope="page" value="MEASUREACTIONOPTION"/>
-		<c:set var="groupTitle" scope="page"><liferay-ui:message key="acesearch-datainfotype-lbl-MEASUREACTIONOPTION" /></c:set>
+		<c:set var="groupTitle" scope="page"><liferay-ui:message key="acesearch-datainfotype-lbl-ACTION" /></c:set>
 		<%@ include file="searchresultsbytype.jspf" %>
 
         <c:set var="groupedResults" scope="page" value="${ORGANISATION_searchResults}"/>
