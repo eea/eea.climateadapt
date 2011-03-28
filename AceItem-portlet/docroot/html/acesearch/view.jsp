@@ -173,36 +173,6 @@ pageContext.setAttribute("countriesList", countriesList);
                 </div>				
             </div>
 
-
-            <div class="search_section">
-                <h2><liferay-ui:message key="acesearch-section-header3" /></h2>
-
-                <div class="row">
-                    <input type="radio" name="date_type" value="1" <%= (date_type.equals("1"))?"checked":"" %> /><liferay-ui:message key="acesearch-datetype-lbl-all" />
-                    <input type="radio" name="date_type" value="2" <%= (date_type.equals("2"))?"checked":"" %> /><liferay-ui:message key="acesearch-datetype-lbl-range" />
-                    <input type="radio" name="date_type" value="3" <%= (date_type.equals("3"))?"checked":"" %> /><liferay-ui:message key="acesearch-datetype-lbl-simple" />
-
-                    <div id="range_dates">
-                        <div class="row">
-                            <label for="initial_date" class="input_small"><liferay-ui:message key="acesearch-datetype-lbl-initialdate" /></label>
-                            <input type="text" class="date" name="initial_date" id="initial_date" value="<%= initial_date %>" />
-                        </div>
-                        <div class="row">
-                            <label for="final_date" class="input_small"><liferay-ui:message key="acesearch-datetype-lbl-finaldate" /></label>
-                            <input type="text" class="date" name="final_date" id="final_date" value="<%= final_date %>"/>
-                        </div>
-
-                    </div> 
-
-                    <div id="specific_date">
-                        <div class="row">
-                            <label for="simple_date" class="input_small"><liferay-ui:message key="acesearch-datetype-lbl-date" /></label>
-                            <input type="text" class="date" name="simple_date" id="simple_date" value="<%= simple_date %>" />
-                        </div>
-                    </div>
-                </div>
-            </div>
-
             <div class="search_section">
                 <h2><liferay-ui:message key="acesearch-section-header4" /></h2>
                 <ul>

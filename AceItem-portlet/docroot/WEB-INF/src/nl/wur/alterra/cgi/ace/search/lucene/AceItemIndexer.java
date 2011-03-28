@@ -97,6 +97,8 @@ public class AceItemIndexer {
 
         if(name != null) {
             document.add(new Field(ACEIndexConstant.IndexField.NAME, name, Field.Store.YES,Field.Index.ANALYZED));
+            // for sorting
+            document.add(new Field(ACEIndexConstant.IndexField.NAME_SORT, name, Field.Store.NO,Field.Index.NOT_ANALYZED));
         }
 
         if(spatialValues != null) {

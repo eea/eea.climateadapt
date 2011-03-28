@@ -12,7 +12,7 @@
 		pageContext.setAttribute("collapsedTitleId", "collapsedTitleId-" + r);		
 		pageContext.setAttribute("sortsearchformId", "sortsearchformId-" + r);
 		pageContext.setAttribute("sortsearchRelevanceId", "sortsearchRelevanceId-" + r);		
-		pageContext.setAttribute("sortsearchDateId", "sortsearchDateId-" + r);		
+		pageContext.setAttribute("sortsearchNameId", "sortsearchNameId-" + r);
 		pageContext.setAttribute("sortsearchSectorId", "sortsearchSectorId-" + r);		
 		pageContext.setAttribute("sortsearchCountryId", "sortsearchCountryId-" + r);
 		pageContext.setAttribute("resultsListId", "resultsListId-" + r);
@@ -86,13 +86,9 @@
                 <input type="hidden" name="sector" value="${sector}"/>
                 </c:forEach>
 
-				<input type="hidden" name="initial_date" value="${searchParams.initialDate}"/>
-				<input type="hidden" name="final_date" value="${searchParams.finalDate}"/>
-				<input type="hidden" name="simple_date" value="${searchParams.simpleDate}"/>
-
 				<liferay-ui:message key="acesearch-sort-by" />
 				<input type="radio" name="sortBy" class="sortByControl" id="${sortsearchRelevanceId}" value="RELEVANCE" checked /><liferay-ui:message key="acesearch-sort-relevance" />
-				<input type="radio" name="sortBy" class="sortByControl" id="${sortsearchDateId}" value="DATE"/><liferay-ui:message key="acesearch-sort-date" />
+				<input type="radio" name="sortBy" class="sortByControl" id="${sortsearchNameId}" value="NAME"/><liferay-ui:message key="acesearch-sort-name" />
 				<input type="radio" name="sortBy" class="sortByControl" id="${sortsearchSectorId}" value="SECTOR"/><liferay-ui:message key="acesearch-sort-adaptation-sector" />
 				<input type="radio" name="sortBy" class="sortByControl" id="${sortsearchCountryId}" value="COUNTRY"/><liferay-ui:message key="acesearch-sort-country" />
 			</form>

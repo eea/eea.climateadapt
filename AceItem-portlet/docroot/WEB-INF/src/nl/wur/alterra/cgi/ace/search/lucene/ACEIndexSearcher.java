@@ -99,6 +99,11 @@ public class ACEIndexSearcher {
                     return searcher.search(query, null, itemsPerPage, sort);
 
                 }
+                else if(sortBy.equals("NAME")) {
+                    sort = new Sort(new SortField( ACEIndexConstant.IndexField.NAME_SORT, SortField.STRING));
+                    return searcher.search(query, null, itemsPerPage, sort);
+
+                }
                 // undefined sort, just ignore it
                 else {
                     return searcher.search(query, itemsPerPage);

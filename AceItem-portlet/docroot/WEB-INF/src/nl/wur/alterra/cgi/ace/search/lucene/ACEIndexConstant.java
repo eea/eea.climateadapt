@@ -36,6 +36,10 @@ public class ACEIndexConstant {
          */
         public static final String SECTOR_SORT = "sectorsort";
         /**
+         * To sort by AceItem name.
+         */
+        public static final String NAME_SORT = "namesort";
+        /**
          * To sort by relevance. This is not an actual sort field in the index, by default Lucene uses relevance.
          */
         public static final String RELEVANCE_SORT = "relevancesort";

@@ -93,12 +93,9 @@ public class AceSearchPortlet extends MVCPortlet {
 
         String[] anyOfThese = requestParams.get(ANY);
         String[] aceItemTypes = requestParams.get(ACEITEM_TYPE);
-        String[] finalDates = requestParams.get(FINAL_DATE);
-        String[] initialDates = requestParams.get(INITIAL_DATE);
         String[] sectors = requestParams.get(SECTOR);
         String[] countries = requestParams.get(COUNTRIES);
         String[] elements = requestParams.get(ELEMENT);
-        String[] simpleDates = requestParams.get(SIMPLE_DATE);
         String[] sortBys = requestParams.get(SORTBY);
         String sortBy = null;
         if(sortBys != null && sortBys.length > 0) {
@@ -108,12 +105,9 @@ public class AceSearchPortlet extends MVCPortlet {
         AceSearchFormBean formBean = new AceSearchFormBean();
         formBean.setAnyOfThese(anyOfThese[0]);
         formBean.setAceitemtype(aceItemTypes);
-        formBean.setFinalDate(finalDates[0]);
-        formBean.setInitialDate(initialDates[0]);
         formBean.setSector(sectors);
         formBean.setElement(elements);
         formBean.setCountries(countries);
-        formBean.setSimpleDate(simpleDates[0]);
         formBean.setSortBy(sortBy);
 
         request.setAttribute(SEARCH_PARAMS, formBean);
