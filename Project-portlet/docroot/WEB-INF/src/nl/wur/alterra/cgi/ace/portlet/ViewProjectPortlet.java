@@ -34,7 +34,6 @@ public class ViewProjectPortlet extends GenericPortlet {
     		PortalUtil.getHttpServletRequest(renderRequest) ) ;
    	
     	renderRequest.setAttribute(ID, httpRequest.getParameter("ace_project_id"));
-    	//renderRequest.setAttribute(ID, 3l);  // works
     	
         include(viewJSP, renderRequest, renderResponse);
     }
