@@ -70,6 +70,9 @@ pageContext.setAttribute("countriesList", countriesList);
 	// ENABLE THIS WHEN RUNNING STANDALONE (WITHOUT REST OF ACE)
 	var $j = jQuery.noConflict();
 
+    // Stores results for each data type group
+    var groupedJSONResults = new Array();
+
 	// display only first 5 searchresults
 	jQuery(document).ready(function(){
 		for(var i  = 0; i < 5; i++) {
@@ -105,11 +108,16 @@ pageContext.setAttribute("countriesList", countriesList);
 			url: "<%=renderResponse.encodeURL(sortURL.toString())%>",
 			data: querystring,
 			success: function(json) {
+
 				// remove loading icon and add results to resultlist	
 				$j('#loadingId-'+unique).remove();
 				var aceitemResults = new Array();
 				aceitemResults = jQuery.parseJSON(json);	
-				var firstFiveAceitemResults = new Array();
+
+                // Updates the results for each data type sorted
+                groupedJSONResults[$j("#sortsearchformId-"+unique + " input[name=aceitemtype]").val()] = aceitemResults;
+
+                var firstFiveAceitemResults = new Array();
 				for(var i = 0; i < 5; i++) {
 					firstFiveAceitemResults.push(aceitemResults[i]);
 				}

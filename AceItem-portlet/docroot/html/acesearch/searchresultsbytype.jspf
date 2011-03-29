@@ -38,7 +38,10 @@
 			
 			// ENABLE THIS WHEN RUNNING STANDALONE (WITHOUT REST OF ACE)		
 			var $j = jQuery.noConflict();
-			
+
+            // Stores the results the data type
+            groupedJSONResults['${aceitemtype}'] = ${groupedJSONResults};
+
 			$j(function() {
 				$j('#${paginationId}').paginate({
 					count 		: ${fn:length(groupedResults) / 5},
@@ -54,7 +57,7 @@
 					onChange	: function(page){
 									var aceitemResults = new Array();
 									$j('#resultsListId-'+${unique}).remove();
-									displayPagedJSONResults(page, ${unique}, ${groupedJSONResults});									
+									displayPagedJSONResults(page, ${unique}, groupedJSONResults['${aceitemtype}']);
 								}					
 				});	
 				
