@@ -1,6 +1,7 @@
 package nl.wur.alterra.cgi.ace.search.lucene;
 
 import nl.wur.alterra.cgi.ace.model.AceItem;
+import nl.wur.alterra.cgi.ace.model.impl.AceConstants;
 import org.apache.lucene.document.Document;
 import org.apache.lucene.document.Field;
 import org.apache.lucene.document.NumericField;
@@ -107,6 +108,13 @@ public class AceItemIndexer {
 
         if(spatialLayers != null) {
             document.add(new Field(ACEIndexConstant.IndexField.SPATIAL_LAYER, spatialLayers, Field.Store.YES,Field.Index.NOT_ANALYZED));
+        }
+
+        if ((spatialValues != null) && (spatialLayers != null))  {
+            // for searching by country
+            if (spatialLayers.equals(AceConstants.COUNTRY_LAYER_NAME)) {
+                document.add(new Field(ACEIndexConstant.IndexField.COUNTRY_SORT, spatialValues, Field.Store.NO,Field.Index.NOT_ANALYZED));
+            }
         }
 
         if(elements != null) {

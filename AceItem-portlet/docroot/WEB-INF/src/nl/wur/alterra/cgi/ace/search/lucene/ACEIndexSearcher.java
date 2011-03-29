@@ -88,9 +88,11 @@ public class ACEIndexSearcher {
                 this.setStale(false);
             }
 
+            System.out.println("ACEIndexSearcher sortBy" + sortBy);
             if(sortBy == null) {
-                return searcher.search(query, itemsPerPage);
-            }
+                 Sort sort = new Sort(new SortField[] { SortField.FIELD_SCORE, SortField.FIELD_DOC });
+                 return searcher.search(query, null, itemsPerPage, sort);
+                            }
             else {
                 Sort sort = null;
                 // TODO support Date and Country sorting
@@ -104,9 +106,15 @@ public class ACEIndexSearcher {
                     return searcher.search(query, null, itemsPerPage, sort);
 
                 }
+                else if(sortBy.equals("COUNTRY")) {
+                    sort = new Sort(new SortField( ACEIndexConstant.IndexField.COUNTRY_SORT, SortField.STRING));
+                    return searcher.search(query, null, itemsPerPage, sort);
+
+                }
                 // undefined sort, just ignore it
                 else {
-                    return searcher.search(query, itemsPerPage);
+                    sort = new Sort(new SortField[] { SortField.FIELD_SCORE, SortField.FIELD_DOC });
+                    return searcher.search(query, null, itemsPerPage, sort);
                 }
             }
         }
