@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping default-lazy="false" auto-import="false">
+	<import class="nl.wur.alterra.cgi.ace.model.Project" />
+	<class name="nl.wur.alterra.cgi.ace.model.impl.ProjectImpl" table="Ace_Project">
+		<cache usage="read-write" />
+		<id name="projectId" type="long">
+			<generator class="assigned" />
+		</id>
+		<property name="companyId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="groupId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="acronym" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="title" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="startdate" type="org.hibernate.type.TimestampType" />
+		<property name="enddate" type="org.hibernate.type.TimestampType" />
+		<property name="lead" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="partners" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="funding" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="sectors" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="spatiallevel" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="abstracts" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="element" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="keywords" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="website" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="duration" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+	</class>
+</hibernate-mapping>

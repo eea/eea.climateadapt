@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<model-hints>
+	<model name="nl.wur.alterra.cgi.ace.model.Project">
+		<field name="projectId" type="long" />
+		<field name="companyId" type="long" />
+		<field name="groupId" type="long" />
+		<field name="acronym" type="String" />
+		<field name="title" type="String" />
+		<field name="startdate" type="Date" />
+		<field name="enddate" type="Date" />
+		<field name="lead" type="String" />
+		<field name="partners" type="String" />
+		<field name="funding" type="String" />
+		<field name="sectors" type="String" />
+		<field name="spatiallevel" type="String" />
+		<field name="abstracts" type="String" />
+		<field name="element" type="String" />
+		<field name="keywords" type="String" />
+		<field name="website" type="String" />
+		<field name="duration" type="String" />
+	</model>
+</model-hints>
