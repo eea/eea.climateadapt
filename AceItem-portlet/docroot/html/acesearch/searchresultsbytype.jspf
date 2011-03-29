@@ -109,11 +109,8 @@
 							<c:set var="descriptionText" value="${fn:substring(searchResult.description, 0, 396)} ..." />
 						</c:if>
 						<c:choose>
-							<c:when test="${!empty searchResult.storedAt && fn:startsWith(searchResult.storedAt, 'http')==true}">
-								<span class="bolder">&#187; <a href="<c:out value="${searchResult.storedAt}"/>" target="_blank"><c:out value="${searchResult.name}"/></a></span>&nbsp;
-								<c:if test="${!empty searchResult.storedAt && fn:startsWith(searchResult.storedAt, 'http://www.tatenbank.')==true}">
-									<span class="bolder">&#187; <a href="<c:out value="http://babelfish.yahoo.com/translate_url?doit=done&tt=url&intl=1&fr=bf-home&lp=de_en&btnTrUrl=Translate&&trurl=${searchResult.storedAt}"/>" target="_blank">(machine translate to english)</a></span>&nbsp;
-								</c:if>
+							<c:when test="${!empty searchResult.storedAt && fn:startsWith(searchResult.storagetype, 'URL')==true}">
+								<span class="bolder">&#187; <a href="<c:out value="//viewaceitem?aceitem_id=${searchResult.aceItemId}"/>" target="_blank"><c:out value="${searchResult.name}"/></a></span>&nbsp;
 								- <c:out value="${descriptionText}"/>
 							</c:when>
 							<c:when test="${!empty searchResult.storedAt && fn:startsWith(searchResult.storedAt, 'ace_project_id')==true}">
