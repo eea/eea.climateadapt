@@ -344,7 +344,7 @@ pageContext.setAttribute("countriesList", countriesList);
 
         <c:set var="groupedResults" scope="page" value="${ACTION_searchResults}"/>
 		<c:set var="groupedJSONResults" scope="page" value="${ACTION_JSONsearchResults}"/>
-		<c:set var="aceitemtype" scope="page" value="MEASUREACTIONOPTION"/>
+		<c:set var="aceitemtype" scope="page" value="ACTION"/>
 		<c:set var="groupTitle" scope="page"><liferay-ui:message key="acesearch-datainfotype-lbl-ACTION" /></c:set>
 		<%@ include file="searchresultsbytype.jspf" %>
 
