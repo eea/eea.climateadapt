@@ -302,7 +302,7 @@ pageContext.setAttribute("countriesList", countriesList);
 
         <c:set var="groupedResults" scope="page" value="${TOOLGUIDANCE_searchResults}"/>
         <c:set var="groupedJSONResults" scope="page" value="${TOOLGUIDANCE_JSONsearchResults}"/>
-        <c:set var="aceitemtype" scope="page" value="TABLE"/>
+        <c:set var="aceitemtype" scope="page" value="TOOLGUIDANCE"/>
         <c:set var="groupTitle" scope="page"><liferay-ui:message key="acesearch-datainfotype-lbl-TOOLGUIDANCE" /></c:set>
         <%@ include file="searchresultsbytype.jspf" %>
 
