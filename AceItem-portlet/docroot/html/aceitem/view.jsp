@@ -76,8 +76,8 @@
 		/>
 
 		<liferay-ui:search-container-column-text
-			name="climateimpacts_"
-			property="climateimpacts_"
+			name="datatype"
+			property="datatype"
 		/>
 
 		<liferay-ui:search-container-column-jsp
