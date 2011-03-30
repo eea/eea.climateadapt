@@ -110,7 +110,7 @@
 						</c:if>
 						<c:choose>
 							<c:when test="${!empty searchResult.storedAt && fn:startsWith(searchResult.storagetype, 'URL')==true}">
-								<span class="bolder">&#187; <a href="<c:out value="//viewaceitem?aceitem_id=${searchResult.aceItemId}"/>" target="_blank"><c:out value="${searchResult.name}"/></a></span>&nbsp;
+								<span class="bolder">&#187; <a href="<c:out value="/viewaceitem?aceitem_id=${searchResult.aceItemId}"/>" target="_blank"><c:out value="${searchResult.name}"/></a></span>&nbsp;
 								- <c:out value="${descriptionText}"/>
 							</c:when>
 							<c:when test="${!empty searchResult.storedAt && fn:startsWith(searchResult.storedAt, 'ace_project_id')==true}">
