@@ -119,7 +119,7 @@
 								- <c:out value="${descriptionText}"/>
 							</c:when>                            
 							<c:otherwise>
-								<span class="bolder">&#187; <a href="<c:out value="/viewaceitem?aceitem_id=${searchResult.aceItemId}"/>" target="_blank"><c:out value="${searchResult.name}"/></a></span>&nbsp;
+								<span class="bolder">&#187; <a href="<c:out value="/viewaceitem?aceitem_id=${searchResult.aceItemId}"/>" ><c:out value="${searchResult.name}"/></a></span>&nbsp;
 								- <c:out value="${descriptionText}"/>
 							</c:otherwise>
 						</c:choose>
