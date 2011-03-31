@@ -37,15 +37,15 @@
 	 <% 
 		String s = aceitem.getSectors_();
 		
-		s.replace("AGRICULTURE","Agriculture and Forest");		
-		s.replace("BIODIVERSITY","Biodiversity");		
-		s.replace("COASTAL","Coastal areas");		
-		s.replace("DISASTERRISKREDUCTION","Disaster Risk Reduction");		
-		s.replace("FINANCIAL","Financial");		
-		s.replace("HEALTH","Health");		
-		s.replace("INFRASTRUCTURE","Infrastructure");		
-		s.replace("MARINE","Marine and Fisheries");		
-		s.replace("WATERMANAGEMENT","Water management");	
+		s = s.replace("AGRICULTURE","Agriculture and Forest");		
+		s = s.replace("BIODIVERSITY","Biodiversity");		
+		s = s.replace("COASTAL","Coastal areas");		
+		s = s.replace("DISASTERRISKREDUCTION","Disaster Risk Reduction");		
+		s = s.replace("FINANCIAL","Financial");		
+		s = s.replace("HEALTH","Health");		
+		s = s.replace("INFRASTRUCTURE","Infrastructure");		
+		s = s.replace("MARINE","Marine and Fisheries");		
+		s = s.replace("WATERMANAGEMENT","Water management");	
 		
 		out.print( s.replace(";","<br />") ); %><br /><br />
 	 <b>Website</b><br />
