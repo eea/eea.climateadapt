@@ -33,6 +33,17 @@
 	 <% out.print( aceitem.getDescription() ); %><br /><br />
 	 <b>Keywords</b><br />
 	 <% out.print( aceitem.getKeyword()); %><br /><br />
+	 <b>Elements</b><br />
+	 <% 
+	 	String e = aceitem.getElements_() ; %><br /><br />
+	 		
+		e = e.replace("OBSERVATIONS","Observations and Scenarios");
+		e = e.replace("VULNERABILITY","Vulnerability Assessment");
+		e = e.replace("MEASUREACTION","Adaptation Measures and Adaptation Actions");
+		e = e.replace("PLANSTRATEGY","National Adaptation Plans and Strategies");
+		e = e.replace("EU_POLICY","EU Sector Policy");
+
+		out.print( e.replace(";","<br />") ); %><br /><br />
 	 <b>Sectors</b><br />
 	 <% 
 		String s = aceitem.getSectors_();
