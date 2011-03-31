@@ -31,16 +31,38 @@
 	 <% out.print( project.getPartners() ); %><br /><br />
 	 <b>Abstract</b><br />
 	 <% out.print( project.getAbstracts() ); %><br /><br />
-	 <b>Element</b><br />
-	 <% out.print( project.getElement() ); %><br /><br />
+	 <b>Elements</b><br />
+	 <% 
+	 	String e = project.getElement() ; %><br /><br />
+	 		
+		e = e.replace("OBSERVATIONS","Observations and Scenarios");
+		e = e.replace("VULNERABILITY","Vulnerability Assessment");
+		e = e.replace("MEASUREACTION","Adaptation Measures and Adaptation Actions");
+		e = e.replace("PLANSTRATEGY","National Adaptation Plans and Strategies");
+		e = e.replace("EU_POLICY","EU Sector Policy");
+
+		out.print( e.replace(";","<br />") ); %><br /><br />
 	 <b>Funding</b><br />
 	 <% out.print( project.getFunding() ); %><br /><br />
 	 <b>Keywords</b><br />
 	 <% out.print( project.getKeywords()); %><br /><br />
 	 <b>Spatial Level</b><br />
 	 <% out.print( project.getSpatiallevel() ); %><br /><br />
-	 <b>Sector</b><br />
-	 <% out.print( project.getSectors() ); %><br /><br />
+	 <b>Sectors</b><br />
+	 <% 
+		String s = project.getSectors();
+		
+		s = s.replace("AGRICULTURE","Agriculture and Forest");		
+		s = s.replace("BIODIVERSITY","Biodiversity");		
+		s = s.replace("COASTAL","Coastal areas");		
+		s = s.replace("DISASTERRISKREDUCTION","Disaster Risk Reduction");		
+		s = s.replace("FINANCIAL","Financial");		
+		s = s.replace("HEALTH","Health");		
+		s = s.replace("INFRASTRUCTURE","Infrastructure");		
+		s = s.replace("MARINE","Marine and Fisheries");		
+		s = s.replace("WATERMANAGEMENT","Water management");	
+		
+		out.print( s.replace(";","<br />") ); %><br /><br />	 
 	 <b>Duration</b><br />
 	 <% out.print( project.getDuration() ); %><br /><br />
 	 <b>Website</b><br />
