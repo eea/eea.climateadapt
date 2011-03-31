@@ -33,7 +33,7 @@
 	 <% out.print( project.getAbstracts() ); %><br /><br />
 	 <b>Elements</b><br />
 	 <% 
-	 	String e = project.getElement() ; %><br /><br />
+	 	String e = project.getElement() ; 
 	 		
 		e = e.replace("OBSERVATIONS","Observations and Scenarios");
 		e = e.replace("VULNERABILITY","Vulnerability Assessment");
