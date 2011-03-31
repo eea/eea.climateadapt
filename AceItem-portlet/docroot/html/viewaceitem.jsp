@@ -35,7 +35,7 @@
 	 <% out.print( aceitem.getKeyword()); %><br /><br />
 	 <b>Elements</b><br />
 	 <% 
-	 	String e = aceitem.getElements_() ; %><br /><br />
+	 	String e = aceitem.getElements_() ; 
 	 		
 		e = e.replace("OBSERVATIONS","Observations and Scenarios");
 		e = e.replace("VULNERABILITY","Vulnerability Assessment");
