@@ -34,7 +34,20 @@
 	 <b>Keywords</b><br />
 	 <% out.print( aceitem.getKeyword()); %><br /><br />
 	 <b>Sectors</b><br />
-	 <% out.print( aceitem.getSectors_() ); %><br /><br />
+	 <% 
+		String s = aceitem.getSectors_();
+		
+		s.replace("AGRICULTURE","Agriculture and Forest");		
+		s.replace("BIODIVERSITY","Biodiversity");		
+		s.replace("COASTAL","Coastal areas");		
+		s.replace("DISASTERRISKREDUCTION","Disaster Risk Reduction");		
+		s.replace("FINANCIAL","Financial");		
+		s.replace("HEALTH","Health");		
+		s.replace("INFRASTRUCTURE","Infrastructure");		
+		s.replace("MARINE","Marine and Fisheries");		
+		s.replace("WATERMANAGEMENT","Water management");	
+		
+		out.print( s.replace(";","<br />") ); %><br /><br />
 	 <b>Website</b><br />
 	 <% out.print(  url ); %><br /><br />
 
