@@ -149,6 +149,7 @@ public class AceSearchPortlet extends MVCPortlet {
                      result.setElements_(result.getElements_().replaceAll("\"", "\"\""));
                      result.setSectors_(result.getSectors_().replaceAll("\"", "\"\""));
                      result.setStoredAt(result.getStoredAt().replaceAll("\"", "\"\""));
+                     result.setStoragetype(result.getStoragetype().replaceAll("\"", "\"\""));
                      result.setTextSearch(result.getTextSearch().replaceAll("\"", "\"\""));
                      result.setDatatype(result.getDatatype().replaceAll("\"", "\"\""));
                  }

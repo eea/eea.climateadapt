@@ -232,22 +232,19 @@ function displayJSONResults(unique, aceitemResults) {
 			var descriptionText = aceitem._description.length > 400 ? aceitem._description.substring(0, 396) + " ..." : aceitem._description;
 			
 			// add name and description
-			if (aceitem._storedAt.substr(0, 4) == "http") {
-				resultlist += '<div><span class="bolder">&#187; <a target="_blank" href="' + aceitem._storedAt + '">' + aceitem._name + '</a></span>&nbsp;';
+            if ((aceitem._storedAt != "") && (aceitem._storagetype.substr(0, 3) == "URL")) {
+                   resultlist += '<div><span class="bolder">&#187; <a target="_blank" href="/viewaceitem?aceitem_id=' +  aceitem._aceItemId  + '" >' + aceitem._name + ' </a></span> - ' + descriptionText + '</div>';
 
-				if (aceitem._storedAt.substr(0, 21) == "http://www.tatenbank.") {
-					resultlist += '<span class="bolder">&#187; <a href="http://babelfish.yahoo.com/translate_url?doit=done&tt=url&intl=1&fr=bf-home&lp=de_en&btnTrUrl=Translate&&trurl='+ aceitem._storedAt + '" target="_blank">(machine translate to english)</a></span>&nbsp;';					
-				}
-				
-				resultlist += ' - ' + descriptionText + '</div>';
+           } else if (aceitem._storedAt.substr(0, 14) == "ace_project_id") {
+                   resultlist += '<div><span class="bolder">&#187; <a href="/projects1?' + aceitem._storedAt + '" target="_blank">' + aceitem._name + '</a></span>&nbsp;';
+                   resultlist += ' - ' + descriptionText + '</div>';
 
-			} else if (aceitem._storedAt.substr(0, 14) == "ace_project_id") {
-				resultlist += '<div><span class="bolder">&#187; <a href="/projects1?' + aceitem._storedAt + '" target="_blank">' + aceitem._name + '</a></span>&nbsp;';
-				resultlist += ' - ' + descriptionText + '</div>';
+           } else {
+                   resultlist += '<div><span class="bolder">&#187; <a target="_self" href="/viewaceitem?aceitem_id=' +  aceitem._aceItemId + '" >' + aceitem._name + ' </a></span> - ' + descriptionText + '</div>';
 
-			} else {
-				resultlist += '<div><span class="bolder">&#187; ' + aceitem._name + ' </span> - ' + descriptionText + '</div>';
-			}
+           }
+
+
 			// add result footer 
 			// TODO use actual date from aceitem, if available
 			resultlist += '<div class="resultfooter"><hr class="clearer"/></div>';

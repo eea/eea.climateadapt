@@ -246,6 +246,7 @@ public class ACESearchEngine extends HitsOpenSearchImpl {
                     aceItem.setStartDate(new Date(Long.parseLong(startDate)));
                 }
                 aceItem.setStoredAt(document.get(ACEIndexConstant.IndexField.STOREDAT));
+                aceItem.setStoragetype(document.get(ACEIndexConstant.IndexField.STORAGETYPE)) ;
                 aceItem.setTextSearch(document.get(ACEIndexConstant.IndexField.ANY));
                 aceItem.setDatatype(document.get(ACEIndexConstant.IndexField.DATATYPE));
 

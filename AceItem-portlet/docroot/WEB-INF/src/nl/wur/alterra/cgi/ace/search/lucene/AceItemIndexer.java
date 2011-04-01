@@ -65,6 +65,7 @@ public class AceItemIndexer {
         String sectors = aceItem.getSectors_();
         Date startDate = aceItem.getStartDate();
         String storedAt = aceItem.getStoredAt();
+        String storageType = aceItem.getStoragetype();
         String textSearch = aceItem.getTextSearch();
         String datatype = aceItem.getDatatype();
 
@@ -146,6 +147,10 @@ public class AceItemIndexer {
 
         if(storedAt != null) {
             document.add(new Field(ACEIndexConstant.IndexField.STOREDAT, storedAt, Field.Store.YES,Field.Index.NOT_ANALYZED));
+        }
+
+        if(storageType != null) {
+            document.add(new Field(ACEIndexConstant.IndexField.STORAGETYPE, storageType, Field.Store.YES,Field.Index.NOT_ANALYZED));
         }
 
         if(textSearch != null) {

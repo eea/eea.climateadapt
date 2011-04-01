@@ -108,6 +108,12 @@ public class ACEIndexConstant {
          * Location where it is stored.
          */
         public static final String STOREDAT = "storedat";
+
+        /**
+         * Storage type
+         */
+        public static final String STORAGETYPE = "storagetype";
+
         /**
          * Datatype.
          */
