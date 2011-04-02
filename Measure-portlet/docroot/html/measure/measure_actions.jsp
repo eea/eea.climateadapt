@@ -22,4 +22,15 @@ String redirect = PortalUtil.getCurrentURL(renderRequest);
 	
 	<liferay-ui:icon image="edit" url="<%=editURL.toString() %>" />
 
+    <!--  PERFORM PORTLET ACTION deleteMeasure AT CHOICE delete -->
+	<portlet:actionURL name="deleteMeasure" var="deleteURL">
+		<portlet:param name="measureId" value="<%= String.valueOf(measureId) %>" />
+		<portlet:param name="redirect" value="<%= redirect %>"/>
+	</portlet:actionURL>
+
+<%
+String confirmURL = "Javascript: if(confirm('Delete?')){document.location.replace('" + deleteURL.toString() + "')};";
+%>
+	<liferay-ui:icon image="delete" url="<%= confirmURL %>" />		
+
 <!--  Commented out: no Actons button: /liferay-ui:icon-menu -->
