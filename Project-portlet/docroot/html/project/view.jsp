@@ -52,9 +52,14 @@
       
       better alternative: als access the acronym by property="acronym"
       properties always get escaped                                   -->	
+
+<%
+	String acronymLink = "<a href='/projects1?ace_project_id=" + project.getProjectId() + "'>" +  project.getAcronym() + "</a>" ;
+%>      
+      
 		<liferay-ui:search-container-column-text
 			name="acronym"
-			value="<%= project.getAcronym() %>"
+			value="<%= acronymLink %>"
 		/>
 
 		<liferay-ui:search-container-column-text

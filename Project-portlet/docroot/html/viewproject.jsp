@@ -34,12 +34,19 @@
 	 <b>Elements</b><br />
 	 <% 
 	 	String e = project.getElement() ; 
+
+		e = e.replace("A","M");
+		e = e.replace("M","Adaptation Measures and Adaptation Actions");
+		e = e.replace("O","Observations and Scenarios");
+		e = e.replace("V","Vulnerability Assessment");
+		e = e.replace("P","National Adaptation Plans and Strategies");
+		e = e.replace("E","EU Sector Policy");
 	 		
-		e = e.replace("OBSERVATIONS","Observations and Scenarios");
-		e = e.replace("VULNERABILITY","Vulnerability Assessment");
-		e = e.replace("MEASUREACTION","Adaptation Measures and Adaptation Actions");
-		e = e.replace("PLANSTRATEGY","National Adaptation Plans and Strategies");
-		e = e.replace("EU_POLICY","EU Sector Policy");
+		//e = e.replace("OBSERVATIONS","Observations and Scenarios");
+		//e = e.replace("VULNERABILITY","Vulnerability Assessment");
+		//e = e.replace("MEASUREACTION","Adaptation Measures and Adaptation Actions");
+		//e = e.replace("PLANSTRATEGY","National Adaptation Plans and Strategies");
+		//e = e.replace("EU_POLICY","EU Sector Policy");
 
 		out.print( e.replace(";","<br />") ); %><br /><br />
 	 <b>Funding</b><br />
@@ -52,15 +59,25 @@
 	 <% 
 		String s = project.getSectors();
 		
-		s = s.replace("AGRICULTURE","Agriculture and Forest");		
-		s = s.replace("BIODIVERSITY","Biodiversity");		
-		s = s.replace("COASTAL","Coastal areas");		
-		s = s.replace("DISASTERRISKREDUCTION","Disaster Risk Reduction");		
-		s = s.replace("FINANCIAL","Financial");		
-		s = s.replace("HEALTH","Health");		
-		s = s.replace("INFRASTRUCTURE","Infrastructure");		
-		s = s.replace("MARINE","Marine and Fisheries");		
-		s = s.replace("WATERMANAGEMENT","Water management");	
+		s = s.replace("F","Financial");
+		s = s.replace("A","Agriculture and Forest");		
+		s = s.replace("B","Biodiversity");		
+		s = s.replace("C","Coastal areas");		
+		s = s.replace("D","Disaster Risk Reduction");		
+		s = s.replace("H","Health");		
+		s = s.replace("I","Infrastructure");		
+		s = s.replace("M","Marine and Fisheries");		
+		s = s.replace("W","Water management");
+		
+		//s = s.replace("AGRICULTURE","Agriculture and Forest");		
+		//s = s.replace("BIODIVERSITY","Biodiversity");		
+		//s = s.replace("COASTAL","Coastal areas");		
+		//s = s.replace("DISASTERRISKREDUCTION","Disaster Risk Reduction");		
+		//s = s.replace("FINANCIAL","Financial");		
+		//s = s.replace("HEALTH","Health");		
+		//s = s.replace("INFRASTRUCTURE","Infrastructure");		
+		//s = s.replace("MARINE","Marine and Fisheries");		
+		//s = s.replace("WATERMANAGEMENT","Water management");	
 		
 		out.print( s.replace(";","<br />") ); %><br /><br />	 
 	 <b>Duration</b><br />

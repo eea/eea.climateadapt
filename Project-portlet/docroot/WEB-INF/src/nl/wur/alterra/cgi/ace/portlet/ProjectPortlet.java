@@ -86,7 +86,13 @@ public class ProjectPortlet extends MVCPortlet {
 		project.setLead(ParamUtil.getString(request, "lead"));
 		project.setPartners(ParamUtil.getString(request, "partners"));
 		project.setFunding(ParamUtil.getString(request, "funding"));
-		project.setSectors(ParamUtil.getString(request, "sectors"));
+		String sectors = ParamUtil.getString(request, "sectors");
+			
+		if( sectors.equalsIgnoreCase("All")) {
+			sectors = "A;B;C;D;F;H;I;M;W;";
+		}
+			
+		project.setSectors(sectors);
 		project.setSpatiallevel(ParamUtil.getString(request, "spatiallevel"));
 		project.setAbstracts(ParamUtil.getString(request, "abstracts"));
 		project.setElement(ParamUtil.getString(request, "element"));
