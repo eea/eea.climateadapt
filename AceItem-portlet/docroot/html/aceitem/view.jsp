@@ -50,11 +50,21 @@
       which is accessed by < %= aceitem.getAcronym() % > 
       
       better alternative: als access the acronym by property="acronym"
-      properties always get escaped                                   -->	
+      properties always get escaped                                   -->
+<%
+	  String nameLink = aceitem.getName() ;
+	  
+	  if (aceitem.getStoragetype().equalsIgnoreCase("URL")) {
+	  	  // Only URL type gets viewed by viewaceitem portlet; Ace Serviced Entities have their own portlets
+		  nameLink = "<a href='/viewaceitem?aceitem_id=" + aceitem.getAceItemId() + "'>" +  aceitem.getName() + "</a>" ;
+	  }
+%>      
+      
 		<liferay-ui:search-container-column-text
 			name="name"
-			value="<%= aceitem.getName() %>"
-		/>
+			value="<%= nameLink %>"
+		/>      
+      	
 		<liferay-ui:search-container-column-text
 			name="description"
 			property="description"
@@ -80,10 +90,19 @@
 			property="datatype"
 		/>
 
+<%
+	  if (aceitem.getStoragetype().equalsIgnoreCase("URL")) {
+		// Only URL type get maintained here; Ace Serviced Entities have their own maintenance pages
+%>		  
+	  	
 		<liferay-ui:search-container-column-jsp
 			align="right"
 			path="/html/aceitem/aceitem_actions.jsp"
 		/>
+<%
+	  }
+%> 
+
 	</liferay-ui:search-container-row>
 
 	<liferay-ui:search-iterator />

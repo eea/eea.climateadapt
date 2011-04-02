@@ -59,8 +59,24 @@
 		s = s.replace("WATERMANAGEMENT","Water management");	
 		
 		out.print( s.replace(";","<br />") ); %><br /><br />
+	 <b>Climate impacts</b><br />
+	 <% 
+	    String c = aceitem.getClimateimpacts_();
+		
+		c = c.replace("FLOODING","Flooding");		
+		c = c.replace("DROUGHT","Drought");		
+		c = c.replace("STORM","Strorm");		
+		c = c.replace("ICEANDSNOW","Ice and Snow");		
+		
+		out.print( c.replace(";","<br />") ); %><br /><br />
 	 <b>Website</b><br />
 	 <% out.print(  url ); %><br /><br />
+
+	 <b>Resolution</b><br />
+	 <% out.print( aceitem.getTargetresolution()); %><br /><br />
+
+	 <b>Spatial reference</b><br />
+	 <% out.print( aceitem.getSpatialLayer() + " " + aceitem.getSpatialValues()); %><br /><br />
 
    </c:when>
    <c:otherwise>
