@@ -17,6 +17,11 @@
 		measure = MeasureLocalServiceUtil.getMeasure( measure_id ) ;
 		url = measure.getWebsite();
 		if(url.trim().length() > 0) {
+			if ( !url.startsWith("http://")) {
+				
+				url = "http://" + url;
+			}
+			
 			url = "<a href='" + url + "' target='_blank'>" + url + "</a>" ;
 		} 
 		
