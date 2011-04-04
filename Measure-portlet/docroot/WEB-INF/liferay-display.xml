@@ -7,5 +7,6 @@
 	</category>
 	<category name="Ace">
 		<portlet id="measureportlet"></portlet>
+		<portlet id="viewmeasureportlet"></portlet>
 	</category>
 </display>
