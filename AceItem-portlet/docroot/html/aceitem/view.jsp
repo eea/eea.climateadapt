@@ -54,6 +54,12 @@
 <%
 	  String nameLink = aceitem.getName() ;
 	  
+	  String sectors = aceitem.getSectors_() ;
+	  sectors = sectors.replace(";","; ");
+	  
+	  String elements = aceitem.getElements_() ;
+	  elements = elements.replace(";","; ");
+	  
 	  if (aceitem.getStoragetype().equalsIgnoreCase("URL")) {
 	  	  // Only URL type gets viewed by viewaceitem portlet; Ace Serviced Entities have their own portlets
 		  nameLink = "<a href='/viewaceitem?aceitem_id=" + aceitem.getAceItemId() + "'>" +  aceitem.getName() + "</a>" ;
@@ -72,7 +78,7 @@
 
 		<liferay-ui:search-container-column-text
 			name="sectors_"
-			property="sectors_"
+			value="<%= sectors %>"
 		/>
 
 		<liferay-ui:search-container-column-text
@@ -82,7 +88,7 @@
 
 		<liferay-ui:search-container-column-text
 			name="elements_"
-			property="elements_"
+			value="<%= elements %>"
 		/>
 
 		<liferay-ui:search-container-column-text
