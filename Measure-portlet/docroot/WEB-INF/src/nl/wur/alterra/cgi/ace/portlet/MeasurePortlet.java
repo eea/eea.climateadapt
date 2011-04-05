@@ -103,7 +103,14 @@ public class MeasurePortlet extends MVCPortlet {
 		measure.setEndDate(publicationdate);
 */	
 		measure.setLanguage(ParamUtil.getString(request, "language"));
-		measure.setSectors_(ParamUtil.getString(request, "sectors_"));
+
+		String sectors = ParamUtil.getString(request, "sectors_");
+		
+		if( sectors.equalsIgnoreCase("All")) {
+			sectors = "A;B;C;D;F;H;I;M;W;";
+		}
+		
+		measure.setSectors_(sectors);
 		measure.setElements_(ParamUtil.getString(request, "elements_"));
 		measure.setClimateimpacts_(ParamUtil.getString(request, "climateimpacts_"));
 		measure.setMao_type(ParamUtil.getString(request, "mao_type"));

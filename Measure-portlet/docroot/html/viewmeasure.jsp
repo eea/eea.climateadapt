@@ -34,7 +34,7 @@
 
  <c:choose>
    <c:when test="${measure_id>0}">
-	 <H1><% out.print( measure.getName() ); %>( <%= type %> )</H1>
+	 <H1><% out.print( measure.getName() ); %> (<%= type %>)</H1>
 	 <b>Description</b><br />
 	 <% out.print( measure.getDescription() ); %><br /><br />
 	 <b>Contact</b><br />
