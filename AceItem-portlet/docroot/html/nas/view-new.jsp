@@ -26,6 +26,12 @@
 
 	// ENABLE THIS WHEN RUNNING STANDALONE (WITHOUT REST OF ACE)
 	var $j = jQuery.noConflict();
+	
+	$j(document).ready(function(){
+		$j('#nas-table').dataTable( {
+			"bJQueryUI": true
+			});
+	})	
 
 	var actual_image = "europe";
 	var selectedCountry = '';
@@ -186,28 +192,43 @@
 		<table cellpadding="0" cellspacing="0" border="0" class="display" id="nas-table" style="width:480px"> 
 			<thead> 
 				<tr> 
-					<th>Countries</th> 
-					<th>NAS adopted</th> 
-					<th>Impacts, vulnerability & adaptation assessments</th> 
-					<th>Links</th> 
+					<th>Rendering engine</th> 
+					<th>Browser</th> 
+					<th>Platform(s)</th> 
+					<th>Engine version</th> 
+					<th>CSS grade</th> 
 				</tr> 
 			</thead> 
 			<tbody> 
-				<c:forEach var="searchResult" items="${nasResults}">		
-					<tr class="gradeX"> 
-						<td>
-							<c:out value="${searchResult.name}"/>"
-						</td> 
-						<td>
-							<c:out value="${searchResult.adoptedDescription}"/>"
-						</td> 
-						<!-- todo support 3rd column -->
-						<!-- todo aceitems in 4th column -->
-					</tr> 			
-				</c:forEach>
+				<tr class="gradeX"> 
+					<td>Trident</td> 
+					<td>Internet
+						 Explorer 4.0</td> 
+					<td>Win 95+</td> 
+					<td class="center">4</td> 
+					<td class="center">X</td> 
+				</tr> 
+				<tr class="gradeC"> 
+					<td>Trident</td> 
+					<td>Internet
+						 Explorer 5.0</td> 
+					<td>Win 95+</td> 
+					<td class="center">5</td> 
+					<td class="center">C</td> 
+				</tr> 
+				<tr class="gradeA"> 
+					<td>Trident</td> 
+					<td>Internet
+						 Explorer 5.5</td> 
+					<td>Win 95+</td> 
+					<td class="center">5.5</td> 
+					<td class="center">A</td> 
+				</tr> 
 			</tbody> 
 		</table>	
+		<c:forEach var="searchResult" items="${nasResults}">		
 		
+		</c:forEach>		
 	</div>
 	
 	<hr class="clearer"/>
