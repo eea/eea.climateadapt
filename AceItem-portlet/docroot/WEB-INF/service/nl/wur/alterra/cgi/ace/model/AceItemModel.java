@@ -99,6 +99,20 @@ public interface AceItemModel extends BaseModel<AceItem> {
 	public void setGroupId(long groupId);
 
 	/**
+	 * Gets the nas id of this ace item.
+	 *
+	 * @return the nas id of this ace item
+	 */
+	public long getNasId();
+
+	/**
+	 * Sets the nas id of this ace item.
+	 *
+	 * @param nasId the nas id of this ace item
+	 */
+	public void setNasId(long nasId);
+
+	/**
 	 * Gets the name of this ace item.
 	 *
 	 * @return the name of this ace item

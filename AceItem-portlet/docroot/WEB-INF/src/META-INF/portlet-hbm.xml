@@ -3,6 +3,7 @@
 
 <hibernate-mapping default-lazy="false" auto-import="false">
 	<import class="nl.wur.alterra.cgi.ace.model.AceItem" />
+	<import class="nl.wur.alterra.cgi.ace.model.NAS" />
 	<class name="nl.wur.alterra.cgi.ace.model.impl.AceItemImpl" table="Ace_AceItem">
 		<cache usage="read-write" />
 		<id name="aceItemId" type="long">
@@ -10,6 +11,7 @@
 		</id>
 		<property name="companyId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 		<property name="groupId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="nasId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 		<property name="name" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="description" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="datatype" type="com.liferay.portal.dao.orm.hibernate.StringType" />
@@ -27,5 +29,16 @@
 		<property name="sectors_" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="elements_" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="climateimpacts_" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+	</class>
+	<class name="nl.wur.alterra.cgi.ace.model.impl.NASImpl" table="Ace_NAS">
+		<cache usage="read-write" />
+		<id name="nasId" type="long">
+			<generator class="assigned" />
+		</id>
+		<property name="name" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="adoptedStatus" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="adoptedDescription" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="companyId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="groupId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 	</class>
 </hibernate-mapping>

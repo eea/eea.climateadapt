@@ -4,6 +4,19 @@
     background-color: #ffffff;
 }
 
+#nas_container {
+    font-size: 1.2em;
+    background-color: #ffffff;
+}
+#nas_results {
+	float:right;
+	width:65%;
+}
+#nas_left_column {
+	float:left;
+	width:35%;
+}
+
 #acesearch_container h1 {
     font-size: 1.4em;
 }
@@ -123,6 +136,22 @@
 
 .pdficon {
 	width:30px;
+}
+
+.link-external {
+    background: url("../images/icons/link_icon.gif") no-repeat scroll 0 1px transparent;
+    padding: 1px 0 1px 19px;
+}
+#country-selection-map {
+	padding-bottom:20px;
+	margin-bottom:20px;
+}
+#nas_intro {
+	padding:10px;
+	margin-bottom:30px;
+}
+#intro-link {
+	padding:10px;
 }
 
 .aceitemdate {

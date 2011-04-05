@@ -6,4 +6,9 @@
 		<property name="service" ref="nl.wur.alterra.cgi.ace.service.AceItemLocalService" />
 	</bean>
 	<bean id="nl.wur.alterra.cgi.ace.service.persistence.AceItemPersistence" class="nl.wur.alterra.cgi.ace.service.persistence.AceItemPersistenceImpl" parent="basePersistence" />
+	<bean id="nl.wur.alterra.cgi.ace.service.NASLocalService" class="nl.wur.alterra.cgi.ace.service.impl.NASLocalServiceImpl" />
+	<bean id="nl.wur.alterra.cgi.ace.service.NASLocalServiceUtil" class="nl.wur.alterra.cgi.ace.service.NASLocalServiceUtil">
+		<property name="service" ref="nl.wur.alterra.cgi.ace.service.NASLocalService" />
+	</bean>
+	<bean id="nl.wur.alterra.cgi.ace.service.persistence.NASPersistence" class="nl.wur.alterra.cgi.ace.service.persistence.NASPersistenceImpl" parent="basePersistence" />
 </beans>

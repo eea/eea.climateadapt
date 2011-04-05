@@ -19,6 +19,7 @@ import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.model.BaseModel;
 
 import nl.wur.alterra.cgi.ace.model.AceItemClp;
+import nl.wur.alterra.cgi.ace.model.NASClp;
 
 import java.lang.reflect.Method;
 
@@ -77,124 +78,199 @@ public class ClpSerializer {
 
 					method2.invoke(newModel, value2);
 
-					Method method3 = newModelClass.getMethod("setName",
-							new Class[] { String.class });
+					Method method3 = newModelClass.getMethod("setNasId",
+							new Class[] { Long.TYPE });
 
-					String value3 = oldCplModel.getName();
+					Long value3 = new Long(oldCplModel.getNasId());
 
 					method3.invoke(newModel, value3);
 
-					Method method4 = newModelClass.getMethod("setDescription",
+					Method method4 = newModelClass.getMethod("setName",
 							new Class[] { String.class });
 
-					String value4 = oldCplModel.getDescription();
+					String value4 = oldCplModel.getName();
 
 					method4.invoke(newModel, value4);
 
-					Method method5 = newModelClass.getMethod("setDatatype",
+					Method method5 = newModelClass.getMethod("setDescription",
 							new Class[] { String.class });
 
-					String value5 = oldCplModel.getDatatype();
+					String value5 = oldCplModel.getDescription();
 
 					method5.invoke(newModel, value5);
 
-					Method method6 = newModelClass.getMethod("setStoredAt",
+					Method method6 = newModelClass.getMethod("setDatatype",
 							new Class[] { String.class });
 
-					String value6 = oldCplModel.getStoredAt();
+					String value6 = oldCplModel.getDatatype();
 
 					method6.invoke(newModel, value6);
 
-					Method method7 = newModelClass.getMethod("setStoragetype",
+					Method method7 = newModelClass.getMethod("setStoredAt",
 							new Class[] { String.class });
 
-					String value7 = oldCplModel.getStoragetype();
+					String value7 = oldCplModel.getStoredAt();
 
 					method7.invoke(newModel, value7);
 
-					Method method8 = newModelClass.getMethod("setLanguage",
+					Method method8 = newModelClass.getMethod("setStoragetype",
 							new Class[] { String.class });
 
-					String value8 = oldCplModel.getLanguage();
+					String value8 = oldCplModel.getStoragetype();
 
 					method8.invoke(newModel, value8);
 
-					Method method9 = newModelClass.getMethod("setTextSearch",
+					Method method9 = newModelClass.getMethod("setLanguage",
 							new Class[] { String.class });
 
-					String value9 = oldCplModel.getTextSearch();
+					String value9 = oldCplModel.getLanguage();
 
 					method9.invoke(newModel, value9);
 
-					Method method10 = newModelClass.getMethod("setKeyword",
+					Method method10 = newModelClass.getMethod("setTextSearch",
 							new Class[] { String.class });
 
-					String value10 = oldCplModel.getKeyword();
+					String value10 = oldCplModel.getTextSearch();
 
 					method10.invoke(newModel, value10);
 
-					Method method11 = newModelClass.getMethod("setTargetresolution",
+					Method method11 = newModelClass.getMethod("setKeyword",
 							new Class[] { String.class });
 
-					String value11 = oldCplModel.getTargetresolution();
+					String value11 = oldCplModel.getKeyword();
 
 					method11.invoke(newModel, value11);
 
-					Method method12 = newModelClass.getMethod("setSpatialLayer",
+					Method method12 = newModelClass.getMethod("setTargetresolution",
 							new Class[] { String.class });
 
-					String value12 = oldCplModel.getSpatialLayer();
+					String value12 = oldCplModel.getTargetresolution();
 
 					method12.invoke(newModel, value12);
 
-					Method method13 = newModelClass.getMethod("setSpatialValues",
+					Method method13 = newModelClass.getMethod("setSpatialLayer",
 							new Class[] { String.class });
 
-					String value13 = oldCplModel.getSpatialValues();
+					String value13 = oldCplModel.getSpatialLayer();
 
 					method13.invoke(newModel, value13);
 
-					Method method14 = newModelClass.getMethod("setStartDate",
-							new Class[] { Date.class });
+					Method method14 = newModelClass.getMethod("setSpatialValues",
+							new Class[] { String.class });
 
-					Date value14 = oldCplModel.getStartDate();
+					String value14 = oldCplModel.getSpatialValues();
 
 					method14.invoke(newModel, value14);
 
-					Method method15 = newModelClass.getMethod("setEndDate",
+					Method method15 = newModelClass.getMethod("setStartDate",
 							new Class[] { Date.class });
 
-					Date value15 = oldCplModel.getEndDate();
+					Date value15 = oldCplModel.getStartDate();
 
 					method15.invoke(newModel, value15);
 
-					Method method16 = newModelClass.getMethod("setPublicationDate",
+					Method method16 = newModelClass.getMethod("setEndDate",
 							new Class[] { Date.class });
 
-					Date value16 = oldCplModel.getPublicationDate();
+					Date value16 = oldCplModel.getEndDate();
 
 					method16.invoke(newModel, value16);
 
-					Method method17 = newModelClass.getMethod("setSectors_",
-							new Class[] { String.class });
+					Method method17 = newModelClass.getMethod("setPublicationDate",
+							new Class[] { Date.class });
 
-					String value17 = oldCplModel.getSectors_();
+					Date value17 = oldCplModel.getPublicationDate();
 
 					method17.invoke(newModel, value17);
 
-					Method method18 = newModelClass.getMethod("setElements_",
+					Method method18 = newModelClass.getMethod("setSectors_",
 							new Class[] { String.class });
 
-					String value18 = oldCplModel.getElements_();
+					String value18 = oldCplModel.getSectors_();
 
 					method18.invoke(newModel, value18);
 
-					Method method19 = newModelClass.getMethod("setClimateimpacts_",
+					Method method19 = newModelClass.getMethod("setElements_",
 							new Class[] { String.class });
 
-					String value19 = oldCplModel.getClimateimpacts_();
+					String value19 = oldCplModel.getElements_();
 
 					method19.invoke(newModel, value19);
+
+					Method method20 = newModelClass.getMethod("setClimateimpacts_",
+							new Class[] { String.class });
+
+					String value20 = oldCplModel.getClimateimpacts_();
+
+					method20.invoke(newModel, value20);
+
+					return newModel;
+				}
+				catch (Exception e) {
+					_log.error(e, e);
+				}
+			}
+			finally {
+				Thread.currentThread().setContextClassLoader(contextClassLoader);
+			}
+		}
+
+		if (oldModelClassName.equals(NASClp.class.getName())) {
+			NASClp oldCplModel = (NASClp)oldModel;
+
+			ClassLoader contextClassLoader = Thread.currentThread()
+												   .getContextClassLoader();
+
+			try {
+				Thread.currentThread().setContextClassLoader(_classLoader);
+
+				try {
+					Class<?> newModelClass = Class.forName("nl.wur.alterra.cgi.ace.model.impl.NASImpl",
+							true, _classLoader);
+
+					Object newModel = newModelClass.newInstance();
+
+					Method method0 = newModelClass.getMethod("setNasId",
+							new Class[] { Long.TYPE });
+
+					Long value0 = new Long(oldCplModel.getNasId());
+
+					method0.invoke(newModel, value0);
+
+					Method method1 = newModelClass.getMethod("setName",
+							new Class[] { String.class });
+
+					String value1 = oldCplModel.getName();
+
+					method1.invoke(newModel, value1);
+
+					Method method2 = newModelClass.getMethod("setAdoptedStatus",
+							new Class[] { String.class });
+
+					String value2 = oldCplModel.getAdoptedStatus();
+
+					method2.invoke(newModel, value2);
+
+					Method method3 = newModelClass.getMethod("setAdoptedDescription",
+							new Class[] { String.class });
+
+					String value3 = oldCplModel.getAdoptedDescription();
+
+					method3.invoke(newModel, value3);
+
+					Method method4 = newModelClass.getMethod("setCompanyId",
+							new Class[] { Long.TYPE });
+
+					Long value4 = new Long(oldCplModel.getCompanyId());
+
+					method4.invoke(newModel, value4);
+
+					Method method5 = newModelClass.getMethod("setGroupId",
+							new Class[] { Long.TYPE });
+
+					Long value5 = new Long(oldCplModel.getGroupId());
+
+					method5.invoke(newModel, value5);
 
 					return newModel;
 				}
@@ -268,128 +344,196 @@ public class ClpSerializer {
 
 					newModel.setGroupId(value2);
 
-					Method method3 = oldModelClass.getMethod("getName");
+					Method method3 = oldModelClass.getMethod("getNasId");
 
-					String value3 = (String)method3.invoke(oldModel,
-							(Object[])null);
+					Long value3 = (Long)method3.invoke(oldModel, (Object[])null);
 
-					newModel.setName(value3);
+					newModel.setNasId(value3);
 
-					Method method4 = oldModelClass.getMethod("getDescription");
+					Method method4 = oldModelClass.getMethod("getName");
 
 					String value4 = (String)method4.invoke(oldModel,
 							(Object[])null);
 
-					newModel.setDescription(value4);
+					newModel.setName(value4);
 
-					Method method5 = oldModelClass.getMethod("getDatatype");
+					Method method5 = oldModelClass.getMethod("getDescription");
 
 					String value5 = (String)method5.invoke(oldModel,
 							(Object[])null);
 
-					newModel.setDatatype(value5);
+					newModel.setDescription(value5);
 
-					Method method6 = oldModelClass.getMethod("getStoredAt");
+					Method method6 = oldModelClass.getMethod("getDatatype");
 
 					String value6 = (String)method6.invoke(oldModel,
 							(Object[])null);
 
-					newModel.setStoredAt(value6);
+					newModel.setDatatype(value6);
 
-					Method method7 = oldModelClass.getMethod("getStoragetype");
+					Method method7 = oldModelClass.getMethod("getStoredAt");
 
 					String value7 = (String)method7.invoke(oldModel,
 							(Object[])null);
 
-					newModel.setStoragetype(value7);
+					newModel.setStoredAt(value7);
 
-					Method method8 = oldModelClass.getMethod("getLanguage");
+					Method method8 = oldModelClass.getMethod("getStoragetype");
 
 					String value8 = (String)method8.invoke(oldModel,
 							(Object[])null);
 
-					newModel.setLanguage(value8);
+					newModel.setStoragetype(value8);
 
-					Method method9 = oldModelClass.getMethod("getTextSearch");
+					Method method9 = oldModelClass.getMethod("getLanguage");
 
 					String value9 = (String)method9.invoke(oldModel,
 							(Object[])null);
 
-					newModel.setTextSearch(value9);
+					newModel.setLanguage(value9);
 
-					Method method10 = oldModelClass.getMethod("getKeyword");
+					Method method10 = oldModelClass.getMethod("getTextSearch");
 
 					String value10 = (String)method10.invoke(oldModel,
 							(Object[])null);
 
-					newModel.setKeyword(value10);
+					newModel.setTextSearch(value10);
 
-					Method method11 = oldModelClass.getMethod(
-							"getTargetresolution");
+					Method method11 = oldModelClass.getMethod("getKeyword");
 
 					String value11 = (String)method11.invoke(oldModel,
 							(Object[])null);
 
-					newModel.setTargetresolution(value11);
+					newModel.setKeyword(value11);
 
-					Method method12 = oldModelClass.getMethod("getSpatialLayer");
+					Method method12 = oldModelClass.getMethod(
+							"getTargetresolution");
 
 					String value12 = (String)method12.invoke(oldModel,
 							(Object[])null);
 
-					newModel.setSpatialLayer(value12);
+					newModel.setTargetresolution(value12);
 
-					Method method13 = oldModelClass.getMethod(
-							"getSpatialValues");
+					Method method13 = oldModelClass.getMethod("getSpatialLayer");
 
 					String value13 = (String)method13.invoke(oldModel,
 							(Object[])null);
 
-					newModel.setSpatialValues(value13);
+					newModel.setSpatialLayer(value13);
 
-					Method method14 = oldModelClass.getMethod("getStartDate");
+					Method method14 = oldModelClass.getMethod(
+							"getSpatialValues");
 
-					Date value14 = (Date)method14.invoke(oldModel,
+					String value14 = (String)method14.invoke(oldModel,
 							(Object[])null);
 
-					newModel.setStartDate(value14);
+					newModel.setSpatialValues(value14);
 
-					Method method15 = oldModelClass.getMethod("getEndDate");
+					Method method15 = oldModelClass.getMethod("getStartDate");
 
 					Date value15 = (Date)method15.invoke(oldModel,
 							(Object[])null);
 
-					newModel.setEndDate(value15);
+					newModel.setStartDate(value15);
 
-					Method method16 = oldModelClass.getMethod(
-							"getPublicationDate");
+					Method method16 = oldModelClass.getMethod("getEndDate");
 
 					Date value16 = (Date)method16.invoke(oldModel,
 							(Object[])null);
 
-					newModel.setPublicationDate(value16);
+					newModel.setEndDate(value16);
 
-					Method method17 = oldModelClass.getMethod("getSectors_");
+					Method method17 = oldModelClass.getMethod(
+							"getPublicationDate");
 
-					String value17 = (String)method17.invoke(oldModel,
+					Date value17 = (Date)method17.invoke(oldModel,
 							(Object[])null);
 
-					newModel.setSectors_(value17);
+					newModel.setPublicationDate(value17);
 
-					Method method18 = oldModelClass.getMethod("getElements_");
+					Method method18 = oldModelClass.getMethod("getSectors_");
 
 					String value18 = (String)method18.invoke(oldModel,
 							(Object[])null);
 
-					newModel.setElements_(value18);
+					newModel.setSectors_(value18);
 
-					Method method19 = oldModelClass.getMethod(
-							"getClimateimpacts_");
+					Method method19 = oldModelClass.getMethod("getElements_");
 
 					String value19 = (String)method19.invoke(oldModel,
 							(Object[])null);
 
-					newModel.setClimateimpacts_(value19);
+					newModel.setElements_(value19);
+
+					Method method20 = oldModelClass.getMethod(
+							"getClimateimpacts_");
+
+					String value20 = (String)method20.invoke(oldModel,
+							(Object[])null);
+
+					newModel.setClimateimpacts_(value20);
+
+					return newModel;
+				}
+				catch (Exception e) {
+					_log.error(e, e);
+				}
+			}
+			finally {
+				Thread.currentThread().setContextClassLoader(contextClassLoader);
+			}
+		}
+
+		if (oldModelClassName.equals(
+					"nl.wur.alterra.cgi.ace.model.impl.NASImpl")) {
+			ClassLoader contextClassLoader = Thread.currentThread()
+												   .getContextClassLoader();
+
+			try {
+				Thread.currentThread().setContextClassLoader(_classLoader);
+
+				try {
+					NASClp newModel = new NASClp();
+
+					Method method0 = oldModelClass.getMethod("getNasId");
+
+					Long value0 = (Long)method0.invoke(oldModel, (Object[])null);
+
+					newModel.setNasId(value0);
+
+					Method method1 = oldModelClass.getMethod("getName");
+
+					String value1 = (String)method1.invoke(oldModel,
+							(Object[])null);
+
+					newModel.setName(value1);
+
+					Method method2 = oldModelClass.getMethod("getAdoptedStatus");
+
+					String value2 = (String)method2.invoke(oldModel,
+							(Object[])null);
+
+					newModel.setAdoptedStatus(value2);
+
+					Method method3 = oldModelClass.getMethod(
+							"getAdoptedDescription");
+
+					String value3 = (String)method3.invoke(oldModel,
+							(Object[])null);
+
+					newModel.setAdoptedDescription(value3);
+
+					Method method4 = oldModelClass.getMethod("getCompanyId");
+
+					Long value4 = (Long)method4.invoke(oldModel, (Object[])null);
+
+					newModel.setCompanyId(value4);
+
+					Method method5 = oldModelClass.getMethod("getGroupId");
+
+					Long value5 = (Long)method5.invoke(oldModel, (Object[])null);
+
+					newModel.setGroupId(value5);
 
 					return newModel;
 				}

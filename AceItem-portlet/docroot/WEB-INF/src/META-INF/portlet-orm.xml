@@ -12,6 +12,7 @@
 			<id name="aceItemId" />
 			<basic name="companyId" />
 			<basic name="groupId" />
+			<basic name="nasId" />
 			<basic name="name" />
 			<basic name="description" />
 			<basic name="datatype" />
@@ -38,8 +39,23 @@
 			<transient name="primaryKey" />
 		</attributes>
 	</mapped-superclass>
+	<mapped-superclass class="nl.wur.alterra.cgi.ace.model.impl.NASModelImpl">
+		<attributes>
+			<id name="nasId" />
+			<basic name="name" />
+			<basic name="adoptedStatus" />
+			<basic name="adoptedDescription" />
+			<basic name="companyId" />
+			<basic name="groupId" />
+			<transient name="primaryKey" />
+		</attributes>
+	</mapped-superclass>
 	<entity class="nl.wur.alterra.cgi.ace.model.impl.AceItemImpl" name="AceItem">
 		<table name="Ace_AceItem" />
+		<attributes />
+	</entity>
+	<entity class="nl.wur.alterra.cgi.ace.model.impl.NASImpl" name="NAS">
+		<table name="Ace_NAS" />
 		<attributes />
 	</entity>
 </entity-mappings>

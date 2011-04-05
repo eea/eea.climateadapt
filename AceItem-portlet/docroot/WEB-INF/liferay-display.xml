@@ -8,6 +8,7 @@
 	<category name="Ace">
 		<portlet id="aceitemportlet"></portlet>
 		<portlet id="acesearchportlet"></portlet>
+		<portlet id="nasportlet"></portlet>
 		<portlet id="viewaceitemportlet"></portlet>
 	</category>
 </display>

@@ -60,6 +60,14 @@ public class AceItemWrapper implements AceItem {
 		_aceItem.setGroupId(groupId);
 	}
 
+	public long getNasId() {
+		return _aceItem.getNasId();
+	}
+
+	public void setNasId(long nasId) {
+		_aceItem.setNasId(nasId);
+	}
+
 	public java.lang.String getName() {
 		return _aceItem.getName();
 	}

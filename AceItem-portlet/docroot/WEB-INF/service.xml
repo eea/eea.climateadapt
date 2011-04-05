@@ -11,9 +11,12 @@
 		<column name="aceItemId" type="long" primary="true" />
 
 		<!-- Foreign key columns -->
+		<!-- Liferay internal: -->
 		<column name="companyId" type="long" />
 		<column name="groupId" type="long" />
-
+		<!-- Foreign key to NAS -->
+		<column name="nasId" type="long" convert-null="false" />
+		
 		<!-- Other columns -->
 		<column name="name" type="String" />
 		<column name="description" type="String" />
@@ -46,6 +49,29 @@
     <reference package-path="com.liferay.portlet.asset" entity="AssetEntry" />
 
 	</entity>
+	
+	<entity name="NAS" local-service="true" remote-service="false">
+		<column name="nasId" type="long" primary="true" />
+		<column name="name" type="String" />
+		<column name="adoptedStatus" type="String" />
+		<column name="adoptedDescription" type="String" />
+		<column name="companyId" type="long" />
+		<column name="groupId" type="long" />
+		<!-- foreign key relation to AceItem-->
+		<column
+		name="aceItems"
+		type="Collection"
+		entity="AceItem"
+		mapping-key="nasId" />
+		
+		<order by="asc">
+			<order-column name="name" case-sensitive="false" />
+		</order>		
+		<finder name="GroupId" return-type="Collection">
+			<finder-column name="groupId" />
+		</finder>		
+		<reference package-path="com.liferay.portlet.asset" entity="AssetEntry" />		
+	</entity>	
 
 	
 </service-builder>

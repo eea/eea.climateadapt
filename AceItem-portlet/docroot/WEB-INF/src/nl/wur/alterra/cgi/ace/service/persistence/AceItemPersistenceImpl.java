@@ -288,6 +288,7 @@ public class AceItemPersistenceImpl extends BasePersistenceImpl<AceItem>
 		aceItemImpl.setAceItemId(aceItem.getAceItemId());
 		aceItemImpl.setCompanyId(aceItem.getCompanyId());
 		aceItemImpl.setGroupId(aceItem.getGroupId());
+		aceItemImpl.setNasId(aceItem.getNasId());
 		aceItemImpl.setName(aceItem.getName());
 		aceItemImpl.setDescription(aceItem.getDescription());
 		aceItemImpl.setDatatype(aceItem.getDatatype());
@@ -976,6 +977,8 @@ public class AceItemPersistenceImpl extends BasePersistenceImpl<AceItem>
 
 	@BeanReference(type = AceItemPersistence.class)
 	protected AceItemPersistence aceItemPersistence;
+	@BeanReference(type = NASPersistence.class)
+	protected NASPersistence nasPersistence;
 	@BeanReference(type = ResourcePersistence.class)
 	protected ResourcePersistence resourcePersistence;
 	@BeanReference(type = UserPersistence.class)

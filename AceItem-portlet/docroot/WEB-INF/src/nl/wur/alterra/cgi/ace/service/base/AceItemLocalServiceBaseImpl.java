@@ -36,7 +36,9 @@ import com.liferay.portlet.asset.service.persistence.AssetEntryPersistence;
 
 import nl.wur.alterra.cgi.ace.model.AceItem;
 import nl.wur.alterra.cgi.ace.service.AceItemLocalService;
+import nl.wur.alterra.cgi.ace.service.NASLocalService;
 import nl.wur.alterra.cgi.ace.service.persistence.AceItemPersistence;
+import nl.wur.alterra.cgi.ace.service.persistence.NASPersistence;
 
 import java.util.List;
 
@@ -274,6 +276,42 @@ public abstract class AceItemLocalServiceBaseImpl implements AceItemLocalService
 	}
 
 	/**
+	 * Gets the n a s local service.
+	 *
+	 * @return the n a s local service
+	 */
+	public NASLocalService getNASLocalService() {
+		return nasLocalService;
+	}
+
+	/**
+	 * Sets the n a s local service.
+	 *
+	 * @param nasLocalService the n a s local service
+	 */
+	public void setNASLocalService(NASLocalService nasLocalService) {
+		this.nasLocalService = nasLocalService;
+	}
+
+	/**
+	 * Gets the n a s persistence.
+	 *
+	 * @return the n a s persistence
+	 */
+	public NASPersistence getNASPersistence() {
+		return nasPersistence;
+	}
+
+	/**
+	 * Sets the n a s persistence.
+	 *
+	 * @param nasPersistence the n a s persistence
+	 */
+	public void setNASPersistence(NASPersistence nasPersistence) {
+		this.nasPersistence = nasPersistence;
+	}
+
+	/**
 	 * Gets the counter local service.
 	 *
 	 * @return the counter local service
@@ -479,6 +517,10 @@ public abstract class AceItemLocalServiceBaseImpl implements AceItemLocalService
 	protected AceItemLocalService aceItemLocalService;
 	@BeanReference(type = AceItemPersistence.class)
 	protected AceItemPersistence aceItemPersistence;
+	@BeanReference(type = NASLocalService.class)
+	protected NASLocalService nasLocalService;
+	@BeanReference(type = NASPersistence.class)
+	protected NASPersistence nasPersistence;
 	@BeanReference(type = CounterLocalService.class)
 	protected CounterLocalService counterLocalService;
 	@BeanReference(type = ResourceLocalService.class)

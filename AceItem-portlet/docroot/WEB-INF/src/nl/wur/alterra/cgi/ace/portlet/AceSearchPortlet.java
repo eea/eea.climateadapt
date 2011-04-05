@@ -22,7 +22,6 @@ import javax.portlet.ResourceResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
-import java.util.Enumeration;
 import java.util.List;
 import java.util.Map;
 
@@ -71,7 +70,7 @@ public class AceSearchPortlet extends MVCPortlet {
      */
     public void searchAceitem(ActionRequest request, ActionResponse response) throws Exception {
         try {
-            logParams(request);
+            PortletUtils.logParams(request);
             searchByType(request);
             PortalUtil.copyRequestParameters(request, response);
             SessionMessages.add(request, "acesearch-execution-success");
@@ -200,7 +199,7 @@ public class AceSearchPortlet extends MVCPortlet {
 	public void serveResource(ResourceRequest request, ResourceResponse response) throws PortletException, IOException {
         try {
             System.out.println("In serveResource code");
-            logParams(request);
+            PortletUtils.logParams(request);
             List<String> resultKeys = searchByType(request);
             List<AceItem> results = (List<AceItem>)request.getAttribute(resultKeys.get(0));
             Gson gson = new Gson();
@@ -217,24 +216,6 @@ public class AceSearchPortlet extends MVCPortlet {
             throw new PortletException(x.getMessage(), x);
         }
 	}
-
-    /**
-     * For debugging, logs request params.
-     *
-     * @param request request
-     */
-    private void logParams(ClientDataRequest request) {
-        Map<String, String[]> requestParams = request.getParameterMap();
-        Enumeration<String> parameterNames = request.getParameterNames();
-        while(parameterNames.hasMoreElements()) {
-            String name = parameterNames.nextElement();
-            String[] values = requestParams.get(name);
-            System.out.println("* param: " + name);
-            for(String value : values) {
-                System.out.println("'" + value + "'");
-            }
-        }
-    }
 
     @Override
     public void destroy() {

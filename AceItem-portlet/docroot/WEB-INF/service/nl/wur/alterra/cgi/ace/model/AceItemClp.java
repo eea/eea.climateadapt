@@ -67,6 +67,14 @@ public class AceItemClp extends BaseModelImpl<AceItem> implements AceItem {
 		_groupId = groupId;
 	}
 
+	public long getNasId() {
+		return _nasId;
+	}
+
+	public void setNasId(long nasId) {
+		_nasId = nasId;
+	}
+
 	public String getName() {
 		return _name;
 	}
@@ -219,6 +227,7 @@ public class AceItemClp extends BaseModelImpl<AceItem> implements AceItem {
 		clone.setAceItemId(getAceItemId());
 		clone.setCompanyId(getCompanyId());
 		clone.setGroupId(getGroupId());
+		clone.setNasId(getNasId());
 		clone.setName(getName());
 		clone.setDescription(getDescription());
 		clone.setDatatype(getDatatype());
@@ -281,7 +290,7 @@ public class AceItemClp extends BaseModelImpl<AceItem> implements AceItem {
 	}
 
 	public String toString() {
-		StringBundler sb = new StringBundler(41);
+		StringBundler sb = new StringBundler(43);
 
 		sb.append("{aceItemId=");
 		sb.append(getAceItemId());
@@ -289,6 +298,8 @@ public class AceItemClp extends BaseModelImpl<AceItem> implements AceItem {
 		sb.append(getCompanyId());
 		sb.append(", groupId=");
 		sb.append(getGroupId());
+		sb.append(", nasId=");
+		sb.append(getNasId());
 		sb.append(", name=");
 		sb.append(getName());
 		sb.append(", description=");
@@ -329,7 +340,7 @@ public class AceItemClp extends BaseModelImpl<AceItem> implements AceItem {
 	}
 
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(64);
+		StringBundler sb = new StringBundler(67);
 
 		sb.append("<model><model-name>");
 		sb.append("nl.wur.alterra.cgi.ace.model.AceItem");
@@ -346,6 +357,10 @@ public class AceItemClp extends BaseModelImpl<AceItem> implements AceItem {
 		sb.append(
 			"<column><column-name>groupId</column-name><column-value><![CDATA[");
 		sb.append(getGroupId());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>nasId</column-name><column-value><![CDATA[");
+		sb.append(getNasId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>name</column-name><column-value><![CDATA[");
@@ -424,6 +439,7 @@ public class AceItemClp extends BaseModelImpl<AceItem> implements AceItem {
 	private long _aceItemId;
 	private long _companyId;
 	private long _groupId;
+	private long _nasId;
 	private String _name;
 	private String _description;
 	private String _datatype;
