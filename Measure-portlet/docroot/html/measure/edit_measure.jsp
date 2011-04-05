@@ -59,8 +59,10 @@
 
 		<b>succes limitations</b><br />
 		<textarea name="succeslimitations" rows=10 cols=100><%= measure == null ? "" : measure.getSucceslimitations() %></textarea>
+		<br /><br />
 
-		<aui:input name="website"  />	
+		<b>website</b><br />	
+		<input name="website" type="text" size="120" value="<%= measure == null ? "" : measure.getWebsite() %>"><br /><br />
 		
 		<b>cost / benefit</b><br />
 		<textarea name="costbenefit" rows=10 cols=100><%= measure == null ? "" : measure.getCostbenefit() %></textarea>
@@ -70,15 +72,15 @@
 		
 		<aui:input name="language"  />	
 
-		<b>Sectors</b><br />
+		<b>Sectors(A;B;C;D;F;H;I;M;W;)</b><br />
 		<input name="sectors_" type="text" size="65" value="<%= measure == null ? "" : measure.getSectors_() %>">
 		<br /><br />
 		
-		<b>Elements</b><br />
+		<b>Elements(O;V;M;P;E;)</b><br />
 		<input name="elements_" type="text" size="65" value="<%= measure == null ? "" : measure.getElements_() %>">
 		<br /><br />
 		
-		<b>Climate Impacts</b><br />
+		<b>Climate Impacts (E;W;D;F;S;I;)</b><br />
 		<input name="climateimpacts_" type="text" size="65" value="<%= measure == null ? "" : measure.getClimateimpacts_() %>"><br /><br />
 		
 		<b>M (measure) or A (action)</b><br />

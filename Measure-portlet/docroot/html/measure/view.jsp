@@ -46,10 +46,16 @@
       
       better alternative: als access the acronym by property="acronym"
       properties always get escaped                                   -->	
+      
+<%
+	String nameLink = "<a href='/viewmeasure?ace_measure_id=" + measure.getMeasureId() + "'>" +  measure.getName() + "</a>" ;
+%>      
+      
 		<liferay-ui:search-container-column-text
 			name="name"
-			value="<%= measure.getName() %>"
-		/>
+			value="<%= nameLink %>"
+		/>      
+      
 		<liferay-ui:search-container-column-text
 			name="description"
 			property="description"
