@@ -36,17 +36,19 @@
 		<aui:input name="datatype" />
 		
 		<liferay-ui:error key="aceitemstoredat-required" message="aceitemstoredat-required" />
-		<aui:input name="storedAt" />
+		<b>website</b><br />	
+		<input name="storedAt" type="text" size="120" value="<%= aceitem == null ? "" : aceitem.getStoredAt() %>"><br /><br />
 		
-		<aui:input name="storagetype" />	
+		<b>storagetype</b><br />	
+		<input name="storagetype" type="text" size="65" value="<%= aceitem == null ? "URL" : aceitem.getStoragetype() %>"><br /><br />
 
-		<b>Sectors</b><br />
+		<b>Sectors (A;B;C;D;F;H;I;M;W;)</b><br />
 		<input name="sectors_" type="text" size="65" value="<%= aceitem == null ? "" : aceitem.getSectors_() %>"><br /><br />
 		
-		<b>Elements</b><br />
+		<b>Elements(O;V;M;P;E;)</b><br />
 		<input name="elements_" type="text" size="65" value="<%= aceitem == null ? "" : aceitem.getElements_() %>"><br /><br />
 		
-		<b>Climate Impacts</b><br />
+		<b>Climate Impacts (E;W;D;F;S;I;)</b><br />
 		<input name="climateimpacts_" type="text" size="65" value="<%= aceitem == null ? "" : aceitem.getClimateimpacts_() %>"><br /><br />
 		
 		<b>textsearch</b><br />
