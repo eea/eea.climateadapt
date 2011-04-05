@@ -57,7 +57,10 @@
 		<textarea name="keywords" rows=10 cols=100><%= project == null ? "" : project.getKeywords() %></textarea>
 			
 		<aui:input name=""  />
-		<aui:input name="website"  />
+
+		<b>website</b><br />	
+		<input name="website" type="text" size="120" value="<%= project == null ? "" : project.getWebsite() %>"><br /><br />
+		
 		<aui:input name="duration"  />
 
 	</aui:fieldset>

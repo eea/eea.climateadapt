@@ -15,9 +15,11 @@
 		project_id = Long.parseLong( (String) request.getAttribute("project_id") ) ;
 		project = ProjectLocalServiceUtil.getProject( project_id ) ;
 		url = project.getWebsite();
-		//if(url.startsWith("http")) {
-			url = "<a href='" + url + "' target='_blank'>" + url + "</a>" ;
-		//} 
+		if( !url.startsWith("http://")) {
+		
+			url = "http://" + url;
+		} 
+		url = "<a href='" + url + "' target='_blank'>" + url + "</a>" ;
 	}
 	
 %>
