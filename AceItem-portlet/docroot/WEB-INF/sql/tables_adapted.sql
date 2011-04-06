@@ -59,6 +59,22 @@ WITH (
 );
 ALTER TABLE ace_aceitem OWNER TO postgres;
 
+CREATE TABLE ace_nas
+(
+  nasid bigint not null primary key,
+  name character varying(255),
+  adoptedstatus character varying(24),
+  adopteddescription character varying(75),
+  companyid bigint,
+  groupid bigint,
+  parentnasid bigint,
+  CONSTRAINT ace_nas_parent_fk FOREIGN KEY (parentnasid)
+      REFERENCES ace_nas (nasid)
+)
+WITH (
+  OIDS=FALSE
+);
+
 CREATE SEQUENCE ace_aceitem_id_seq
   INCREMENT 1
   MINVALUE 1
