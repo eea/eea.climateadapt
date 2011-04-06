@@ -89,6 +89,6 @@
 
    </c:when>
    <c:otherwise>
-     <H1>No Project Identification available</H1>
+     <H1>No Project selected</H1>
    </c:otherwise>
  </c:choose>
