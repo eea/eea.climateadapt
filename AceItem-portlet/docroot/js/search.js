@@ -233,14 +233,18 @@ function displayJSONResults(unique, aceitemResults) {
 			
 			// add name and description
             if ((aceitem._storedAt != "") && (aceitem._storagetype.substr(0, 3) == "URL")) {
-                   resultlist += '<div><span class="bolder">&#187; <a target="_blank" href="/viewaceitem?aceitem_id=' +  aceitem._aceItemId  + '" >' + aceitem._name + ' </a></span> - ' + descriptionText + '</div>';
+                   resultlist += '<div><span class="bolder">&#187; <a href="/viewaceitem?aceitem_id=' +  aceitem._aceItemId  + '" >' + aceitem._name + ' </a></span> - ' + descriptionText + '</div>';
 
            } else if (aceitem._storedAt.substr(0, 14) == "ace_project_id") {
-                   resultlist += '<div><span class="bolder">&#187; <a href="/projects1?' + aceitem._storedAt + '" target="_blank">' + aceitem._name + '</a></span>&nbsp;';
+                   resultlist += '<div><span class="bolder">&#187; <a href="/projects1?' + aceitem._storedAt + '" >' + aceitem._name + '</a></span>&nbsp;';
                    resultlist += ' - ' + descriptionText + '</div>';
 
+            } else if (aceitem._storedAt.substr(0, 14) == "ace_measure_id") {
+                               resultlist += '<div><span class="bolder">&#187; <a href="/viewmeasure?' + aceitem._storedAt + '" >' + aceitem._name + '</a></span>&nbsp;';
+                               resultlist += ' - ' + descriptionText + '</div>';
+
            } else {
-                   resultlist += '<div><span class="bolder">&#187; <a target="_self" href="/viewaceitem?aceitem_id=' +  aceitem._aceItemId + '" >' + aceitem._name + ' </a></span> - ' + descriptionText + '</div>';
+                   resultlist += '<div><span class="bolder">&#187; <a href="/viewaceitem?aceitem_id=' +  aceitem._aceItemId + '" >' + aceitem._name + ' </a></span> - ' + descriptionText + '</div>';
 
            }
 
@@ -255,5 +259,4 @@ function displayJSONResults(unique, aceitemResults) {
 	// close searchresultlist
 	resultlist += '</div>';
 	jQuery('#expandedId-'+unique).append(resultlist);
-}	
-		
+}
