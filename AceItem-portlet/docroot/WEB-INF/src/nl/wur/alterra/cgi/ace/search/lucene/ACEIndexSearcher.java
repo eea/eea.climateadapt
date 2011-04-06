@@ -102,7 +102,7 @@ public class ACEIndexSearcher {
 
                 }
                 else if(sortBy.equals("COUNTRY")) {
-                    sort = new Sort(new SortField( ACEIndexConstant.IndexField.COUNTRY_SORT, SortField.STRING));
+                    sort = new Sort(new SortField( ACEIndexConstant.IndexField.COUNTRY_SORT, new MissingStringLastComparatorSource()));
                     return searcher.search(query, null, itemsPerPage, sort);
 
                 }

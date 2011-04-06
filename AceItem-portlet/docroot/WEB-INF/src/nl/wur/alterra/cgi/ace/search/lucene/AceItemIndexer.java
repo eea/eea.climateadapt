@@ -113,7 +113,7 @@ public class AceItemIndexer {
 
         if ((spatialValues != null) && (spatialLayers != null))  {
             // for searching by country
-            if (spatialLayers.equals(AceConstants.COUNTRY_LAYER_NAME)) {
+            if ((spatialLayers.equals(AceConstants.COUNTRY_LAYER_NAME)) && !(spatialValues.equals(""))) {
                 document.add(new Field(ACEIndexConstant.IndexField.COUNTRY_SORT, spatialValues, Field.Store.NO,Field.Index.NOT_ANALYZED));
             }
         }
