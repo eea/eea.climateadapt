@@ -35,6 +35,7 @@ create table Ace_AceItem (
 	aceitemid bigint not null primary key,
 	companyid bigint,
 	groupid bigint,
+	nasid bigint,
 	name character varying(255) ,
 	description text,
 	datatype  character varying(255) ,

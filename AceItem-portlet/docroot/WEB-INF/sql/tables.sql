@@ -35,6 +35,7 @@ create table Ace_AceItem (
 	aceItemId LONG not null primary key,
 	companyId LONG,
 	groupId LONG,
+	nasId LONG,
 	name VARCHAR(75) null,
 	description VARCHAR(75) null,
 	datatype VARCHAR(75) null,
@@ -52,6 +53,15 @@ create table Ace_AceItem (
 	sectors_ VARCHAR(75) null,
 	elements_ VARCHAR(75) null,
 	climateimpacts_ VARCHAR(75) null
+);
+
+create table Ace_NAS (
+	nasId LONG not null primary key,
+	name VARCHAR(75) null,
+	adoptedStatus VARCHAR(75) null,
+	adoptedDescription VARCHAR(75) null,
+	companyId LONG,
+	groupId LONG
 );
 
 create table ace_aceitem (
