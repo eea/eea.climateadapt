@@ -90,6 +90,6 @@
 		<% } %>
    </c:when>
    <c:otherwise>
-     <H1>No Measure Identification available</H1>
+     <H1>No Measure selected</H1>
    </c:otherwise>
  </c:choose>
