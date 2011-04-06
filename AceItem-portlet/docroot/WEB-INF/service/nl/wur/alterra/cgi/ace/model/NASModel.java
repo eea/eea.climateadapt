@@ -142,6 +142,35 @@ public interface NASModel extends BaseModel<NAS> {
 	public void setGroupId(long groupId);
 
 	/**
+	 * Gets the parent nas id of this n a s.
+	 *
+	 * @return the parent nas id of this n a s
+	 */
+	public long getParentNasId();
+
+	/**
+	 * Sets the parent nas id of this n a s.
+	 *
+	 * @param parentNasId the parent nas id of this n a s
+	 */
+	public void setParentNasId(long parentNasId);
+
+	/**
+	 * Gets the iso country of this n a s.
+	 *
+	 * @return the iso country of this n a s
+	 */
+	@AutoEscape
+	public String getIsoCountry();
+
+	/**
+	 * Sets the iso country of this n a s.
+	 *
+	 * @param isoCountry the iso country of this n a s
+	 */
+	public void setIsoCountry(String isoCountry);
+
+	/**
 	 * Gets a copy of this n a s as an escaped model instance by wrapping it with an {@link com.liferay.portal.kernel.bean.AutoEscapeBeanHandler}.
 	 *
 	 * @return the escaped model instance

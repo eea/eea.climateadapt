@@ -1,6 +1,6 @@
 package nl.wur.alterra.cgi.ace.portlet;
 
-import javax.portlet.ClientDataRequest;
+import javax.portlet.PortletRequest;
 import java.util.Enumeration;
 import java.util.Map;
 
@@ -16,7 +16,7 @@ public class PortletUtils {
      *
      * @param request request
      */
-    public static void logParams(ClientDataRequest request) {
+    public static void logParams(PortletRequest request) {
         Map<String, String[]> requestParams = request.getParameterMap();
         Enumeration<String> parameterNames = request.getParameterNames();
         while(parameterNames.hasMoreElements()) {

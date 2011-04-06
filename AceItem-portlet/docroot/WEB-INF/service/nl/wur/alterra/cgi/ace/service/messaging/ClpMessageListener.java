@@ -22,6 +22,7 @@ import com.liferay.portal.kernel.messaging.MessageListener;
 import nl.wur.alterra.cgi.ace.service.AceItemLocalServiceUtil;
 import nl.wur.alterra.cgi.ace.service.ClpSerializer;
 import nl.wur.alterra.cgi.ace.service.NASLocalServiceUtil;
+import nl.wur.alterra.cgi.ace.service.NASSourceLocalServiceUtil;
 
 /**
  * @author Brian Wing Shun Chan
@@ -47,6 +48,8 @@ public class ClpMessageListener implements MessageListener {
 			AceItemLocalServiceUtil.clearService();
 
 			NASLocalServiceUtil.clearService();
+
+			NASSourceLocalServiceUtil.clearService();
 		}
 	}
 

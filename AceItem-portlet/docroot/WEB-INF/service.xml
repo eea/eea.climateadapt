@@ -57,6 +57,8 @@
 		<column name="adoptedDescription" type="String" />
 		<column name="companyId" type="long" />
 		<column name="groupId" type="long" />
+		<column name="parentNasId" type="long"/>
+		<column name="isoCountry" type="String" />		
 		<!-- foreign key relation to AceItem-->
 		<column
 		name="aceItems"

@@ -16,6 +16,18 @@
 	float:left;
 	width:35%;
 }
+.nas-row td {
+	padding: 5px 20px 0px 20px;
+}
+.nas-region-row td:first-child {
+	padding: 5px 20px 0px 40px;
+}
+
+#nas-header th {
+	padding: 5px 20px 0px 20px;
+	background-color:#F1EDC2;
+	border:1px solid #000;
+}
 
 #acesearch_container h1 {
     font-size: 1.4em;

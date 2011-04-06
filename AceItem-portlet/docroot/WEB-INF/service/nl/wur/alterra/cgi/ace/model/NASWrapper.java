@@ -84,6 +84,22 @@ public class NASWrapper implements NAS {
 		_nas.setGroupId(groupId);
 	}
 
+	public long getParentNasId() {
+		return _nas.getParentNasId();
+	}
+
+	public void setParentNasId(long parentNasId) {
+		_nas.setParentNasId(parentNasId);
+	}
+
+	public java.lang.String getIsoCountry() {
+		return _nas.getIsoCountry();
+	}
+
+	public void setIsoCountry(java.lang.String isoCountry) {
+		_nas.setIsoCountry(isoCountry);
+	}
+
 	public nl.wur.alterra.cgi.ace.model.NAS toEscapedModel() {
 		return _nas.toEscapedModel();
 	}

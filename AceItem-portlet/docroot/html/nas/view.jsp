@@ -26,7 +26,69 @@
 
 	// ENABLE THIS WHEN RUNNING STANDALONE (WITHOUT REST OF ACE)
 	var $j = jQuery.noConflict();
+	
+	$j(document).ready(function() {
+		sortCountries();
+		$j('#country-selection-list').change(function() {select(this.value);});	
+		sortNasTable();
+	});
+	
+	// sort countries select by their i18n name
+	function sortCountries() {
+		var options = $j('#country-selection-list > option');
+		countryNames = new Array();
+		countryValues = new Array();
+		for(i = 0; i < options.length; i++)  {
+			countryNames[i] = [options[i].text, options[i].value, options[i].id];
+		}
+		countryNames.sort(sortByFirstElement);
+		for(i = 0; i < options.length; i++)  {
+			options[i].text = countryNames[i][0];
+			options[i].value = countryNames[i][1];
+			options[i].id = countryNames[i][2];
+		}	
+	}
+	
+	// sort NAS table by country (to put regions under their country)
+	function sortNasTable() {
+		var allNAS = $j('.nas-row');
+		var countriesNAS = $j('.nas-row').not('.nas-region-row');
+		countriesNAS.sort(function(a, b) {
+		   var compA = $(a).text().toUpperCase();
+		   var compB = $(b).text().toUpperCase();
+		   return (compA < compB) ? -1 : (compA > compB) ? 1 : 0;
+		});	
+		var regionsNAS = $j('.nas-region-row');	
+		var sorted = new Array();
 
+		$j.each(countriesNAS, function(index, value) { 
+			sorted.push(value);
+			$j.each(regionsNAS, function(index2, value2) {
+				if(value.id == value2.id) {
+					sorted.push(value2);
+				}
+			});
+		});				
+		allNAS.remove();
+		$j('#nas-header').after(sorted);	
+		$j('.nas-row').hover(function(){ this.style.backgroundColor = '#fdfcdc';},function(){this.style.backgroundColor = '#fff';});			
+	}
+	
+	// sorts arrays by natural order of their first element
+	// except special id 'no-selection-option' which always comes first
+	function sortByFirstElement(array1, array2){
+		var id = array1[2];
+		if(id == 'no-selection-option') {
+			return -1;
+		}
+		var a = array1[0];
+		var b = array2[0];
+		if ( a < b ) return -1;
+		else if( a > b ) return 1;
+		else return 0;		
+	}
+
+	
 	var actual_image = "europe";
 	var selectedCountry = '';
 	
@@ -47,18 +109,35 @@
 		if (area != actual_image) {
 			$j("#"+ area+'_selected').hide();
 		}
-	}	
+	}
+
+	function clearSelection() {
+		$j("#"+ actual_image+'_selected').hide();
+		actual_image = "europe";
+		$j("#"+ actual_image+'_selected').show();
+		
+		$j('.nas-row').fadeIn(200);
+		
+		$j('#country-selection-list').value = '';
+		$j('#no-selection-option').attr('selected', true);	
+	}
 	
 	function select(area) {
+		// deselect
 		if (actual_image == area) {
-			// Deselect image if clicked on it again	
 			$j("#"+ actual_image+'_selected').hide();
 			actual_image = "europe";
 			$j("#"+ actual_image+'_selected').show();
 			
 			selectedCountry = '';
-			
-		} else {
+			$j('.nas-row').fadeIn(200);
+		} 
+		// select
+		else {
+			if(area == null || area == "") {
+				clearSelection();
+				return false;
+			}
 			$j("#"+ actual_image+'_selected').hide();
 			$j.each(countries, function(country) {
 				$j('#' + country+ '_selected').hide();
@@ -67,11 +146,16 @@
 			actual_image = area;
 			$j("#"+ actual_image+'_selected').show();
 			
-			selectedCountry = area;
-		}
-		
+			selectedCountry = area;		
+			$j('.nas-row').fadeOut(200);
+			$j('.' + area + '-row').fadeIn(200);
+			$j('#country-selection-list').value = area;
+			$j('#' + area + '-option').attr("selected", true);
+			
+		}		
 		return false;
 	}
+	
 	
 </script>
 
@@ -122,6 +206,31 @@
 		<img id="RO_selected" src="<%=renderRequest.getContextPath()%>/images/countryselectionmap/RO.png" width="458" height="515" border="0" usemap="#Map" style="display:none;"/>
 		<img id="SE_selected" src="<%=renderRequest.getContextPath()%>/images/countryselectionmap/SE.png" width="458" height="515" border="0" usemap="#Map" style="display:none;"/>
 	
+		<select id="country-selection-list"  style="margin-top:5px;">
+			<option id="no-selection-option" value="" selected="selected">No country selected</option>
+			<option id="AT-option" value="AT">Austria</option>
+			<option id="CH-option" value="CH">Switzerland</option>
+			<option id="CZ-option" value="CZ">Czech Republic</option>
+			<option id="DE-option" value="DE">Germany</option>
+			<option id="EE-option" value="EE">Estonia</option>
+			<option id="ES-option" value="ES">Spain</option>
+			<option id="FI-option" value="FI">Finland</option>
+			<option id="FR-option" value="FR">France</option>
+			<option id="GB-option" value="GB">Great Britain</option>
+			<option id="GR-option" value="GR">Greece</option>
+			<option id="HU-option" value="HU">Hungary</option>
+			<option id="IR-option" value="IR">Ireland</option>
+			<option id="IS-option" value="IS">Iceland</option>
+			<option id="LT-option" value="LT">Lithuania</option>
+			<option id="LV-option" value="LV">Latvia</option>
+			<option id="NL-option" value="NL">Netherlands</option>
+			<option id="NO-option" value="NO">Norvegia</option>
+			<option id="PT-option" value="PT">Portugal</option>
+			<option id="RO-option" value="RO">Romania</option>
+			<option id="SE-option" value="SE">Sweden</option>
+		</select>
+		<button style="margin-top:5px;" onclick="clearSelection();">clear</button>
+
 		<map name="Map" id="country-selection-map">
 			<!-- portugal -->
 			<area shape="poly" coords="32,412,17,437,23,446,17,462,34,465,41,453,39,445,44,441,40,431,46,431,49,423,51,413,59,408,53,400,40,399,39,394,33,396,30,410" href="#PT" alt="portugal" onclick="return select('PT')" onmouseover="highlight('PT');" onmouseout="unhighlight('PT');"/>
@@ -183,27 +292,93 @@
 			Progress towards national adaptation strategies (NAS)
 		</h2>
 		
-		<table cellpadding="0" cellspacing="0" border="0" class="display" id="nas-table" style="width:480px"> 
+		<table id="nas-table" style="width:900px"> 
+			<colgroup>
+				<col style="width: 150px;border:solid #000 1px;" />
+				<col style="width: 100px;margin-left:20px;border:solid #000 1px;" />
+				<col style="width: 300px;border:solid #000 1px;" />
+				<col style="width: 350px;border:solid #000 1px;" />
+			</colgroup>
 			<thead> 
-				<tr> 
+				<tr id="nas-header"> 
 					<th>Countries</th> 
 					<th>NAS adopted</th> 
-					<th>Impacts, vulnerability & adaptation assessments</th> 
+					<th>Assessments</th> 
 					<th>Links</th> 
 				</tr> 
 			</thead> 
 			<tbody> 
-				<c:forEach var="searchResult" items="${nasResults}">		
-					<tr class="gradeX"> 
-						<td>
-							<c:out value="${searchResult.name}"/>"
-						</td> 
-						<td>
-							<c:out value="${searchResult.adoptedDescription}"/>"
-						</td> 
-						<!-- todo support 3rd column -->
-						<!-- todo aceitems in 4th column -->
-					</tr> 			
+				<c:forEach var="searchResult" items="${nasResults}">
+					<c:choose>
+						<c:when test="${searchResult.parentNasId > 0}">
+							<tr id="country-${searchResult.parentNasId}" class="nas-row ${searchResult.isoCountry}-row nas-region-row"> 
+								<td valign="top">
+									<c:out value="${searchResult.name}"/>
+								</td> 
+								<td valign="top">
+									<c:out value="${searchResult.adoptedDescription}"/>
+								</td> 
+								<td valign="top">
+									<c:forEach var="nasSource" items="${nasSourceResults}">
+										<ul>
+											<c:if test="${nasSource.nasId == searchResult.nasId}">
+												<li style="">
+													<c:out value="${nasSource.name}"/>
+												</li>
+											</c:if>
+										</ul>
+									</c:forEach>
+								</td>								
+								<td valign="top">
+									<c:forEach var="aceItem" items="${aceItemResults}">
+										<ul>
+											<c:if test="${aceItem.nasId == searchResult.nasId}">
+												<li style="">
+													<a href=""${aceItem.storedAt}">
+														<c:out value="${aceItem.name}"/>
+													</a>	
+												</li>
+											</c:if>
+										</ul>
+									</c:forEach>
+								</td>
+							</tr>	
+						</c:when>
+						<c:otherwise>
+							<tr id="country-${searchResult.nasId}" class="nas-row ${searchResult.isoCountry}-row">
+								<td valign="top">
+									<c:out value="${searchResult.name}"/>
+								</td> 
+								<td valign="top">
+									<c:out value="${searchResult.adoptedDescription}"/>
+								</td> 
+								<td valign="top">
+									<c:forEach var="nasSource" items="${nasSourceResults}">
+										<ul>
+											<c:if test="${nasSource.nasId == searchResult.nasId}">
+												<li style="">
+													<c:out value="${nasSource.name}"/>
+												</li>
+											</c:if>
+										</ul>
+									</c:forEach>
+								</td>								
+								<td valign="top">
+									<c:forEach var="aceItem" items="${aceItemResults}">
+										<ul>
+											<c:if test="${aceItem.nasId == searchResult.nasId}">
+												<li style="">
+													<a href="${aceItem.storedAt}">
+														<c:out value="${aceItem.name}"/>
+													</a>	
+												</li>
+											</c:if>
+										</ul>
+									</c:forEach>
+								</td>								
+							</tr>							
+						</c:otherwise>
+					</c:choose>			
 				</c:forEach>
 			</tbody> 
 		</table>	

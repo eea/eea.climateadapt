@@ -20,6 +20,7 @@ import com.liferay.portal.model.BaseModel;
 
 import nl.wur.alterra.cgi.ace.model.AceItemClp;
 import nl.wur.alterra.cgi.ace.model.NASClp;
+import nl.wur.alterra.cgi.ace.model.NASSourceClp;
 
 import java.lang.reflect.Method;
 
@@ -271,6 +272,81 @@ public class ClpSerializer {
 					Long value5 = new Long(oldCplModel.getGroupId());
 
 					method5.invoke(newModel, value5);
+
+					Method method6 = newModelClass.getMethod("setParentNasId",
+							new Class[] { Long.TYPE });
+
+					Long value6 = new Long(oldCplModel.getParentNasId());
+
+					method6.invoke(newModel, value6);
+
+					Method method7 = newModelClass.getMethod("setIsoCountry",
+							new Class[] { String.class });
+
+					String value7 = oldCplModel.getIsoCountry();
+
+					method7.invoke(newModel, value7);
+
+					return newModel;
+				}
+				catch (Exception e) {
+					_log.error(e, e);
+				}
+			}
+			finally {
+				Thread.currentThread().setContextClassLoader(contextClassLoader);
+			}
+		}
+
+		if (oldModelClassName.equals(NASSourceClp.class.getName())) {
+			NASSourceClp oldCplModel = (NASSourceClp)oldModel;
+
+			ClassLoader contextClassLoader = Thread.currentThread()
+												   .getContextClassLoader();
+
+			try {
+				Thread.currentThread().setContextClassLoader(_classLoader);
+
+				try {
+					Class<?> newModelClass = Class.forName("nl.wur.alterra.cgi.ace.model.impl.NASSourceImpl",
+							true, _classLoader);
+
+					Object newModel = newModelClass.newInstance();
+
+					Method method0 = newModelClass.getMethod("setNassourceid",
+							new Class[] { Long.TYPE });
+
+					Long value0 = new Long(oldCplModel.getNassourceid());
+
+					method0.invoke(newModel, value0);
+
+					Method method1 = newModelClass.getMethod("setNasId",
+							new Class[] { Long.TYPE });
+
+					Long value1 = new Long(oldCplModel.getNasId());
+
+					method1.invoke(newModel, value1);
+
+					Method method2 = newModelClass.getMethod("setName",
+							new Class[] { String.class });
+
+					String value2 = oldCplModel.getName();
+
+					method2.invoke(newModel, value2);
+
+					Method method3 = newModelClass.getMethod("setCompanyId",
+							new Class[] { Long.TYPE });
+
+					Long value3 = new Long(oldCplModel.getCompanyId());
+
+					method3.invoke(newModel, value3);
+
+					Method method4 = newModelClass.getMethod("setGroupId",
+							new Class[] { Long.TYPE });
+
+					Long value4 = new Long(oldCplModel.getGroupId());
+
+					method4.invoke(newModel, value4);
 
 					return newModel;
 				}
@@ -534,6 +610,72 @@ public class ClpSerializer {
 					Long value5 = (Long)method5.invoke(oldModel, (Object[])null);
 
 					newModel.setGroupId(value5);
+
+					Method method6 = oldModelClass.getMethod("getParentNasId");
+
+					Long value6 = (Long)method6.invoke(oldModel, (Object[])null);
+
+					newModel.setParentNasId(value6);
+
+					Method method7 = oldModelClass.getMethod("getIsoCountry");
+
+					String value7 = (String)method7.invoke(oldModel,
+							(Object[])null);
+
+					newModel.setIsoCountry(value7);
+
+					return newModel;
+				}
+				catch (Exception e) {
+					_log.error(e, e);
+				}
+			}
+			finally {
+				Thread.currentThread().setContextClassLoader(contextClassLoader);
+			}
+		}
+
+		if (oldModelClassName.equals(
+					"nl.wur.alterra.cgi.ace.model.impl.NASSourceImpl")) {
+			ClassLoader contextClassLoader = Thread.currentThread()
+												   .getContextClassLoader();
+
+			try {
+				Thread.currentThread().setContextClassLoader(_classLoader);
+
+				try {
+					NASSourceClp newModel = new NASSourceClp();
+
+					Method method0 = oldModelClass.getMethod("getNassourceid");
+
+					Long value0 = (Long)method0.invoke(oldModel, (Object[])null);
+
+					newModel.setNassourceid(value0);
+
+					Method method1 = oldModelClass.getMethod("getNasId");
+
+					Long value1 = (Long)method1.invoke(oldModel, (Object[])null);
+
+					newModel.setNasId(value1);
+
+					Method method2 = oldModelClass.getMethod("getName");
+
+					String value2 = (String)method2.invoke(oldModel,
+							(Object[])null);
+
+					newModel.setName(value2);
+
+					Method method3 = oldModelClass.getMethod("getCompanyId");
+
+					Long value3 = (Long)method3.invoke(oldModel, (Object[])null);
+
+					newModel.setCompanyId(value3);
+
+					Method method4 = oldModelClass.getMethod("getGroupId");
+
+					Long value4 = (Long)method4.invoke(oldModel, (Object[])null);
+
+					newModel.setGroupId(value4);
 
 					return newModel;
 				}
