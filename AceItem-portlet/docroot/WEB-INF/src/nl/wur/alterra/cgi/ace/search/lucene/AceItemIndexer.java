@@ -127,9 +127,6 @@ public class AceItemIndexer {
         }
 
         if(sectors != null) {
-            // for sorting
-            document.add(new Field(ACEIndexConstant.IndexField.SECTOR_SORT, sectors, Field.Store.NO,Field.Index.NOT_ANALYZED));
-
             String[] sectorValues = sectors.split(";");
 
             for(int i = 0; i < sectorValues.length; i++) {
