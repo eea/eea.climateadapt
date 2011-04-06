@@ -10,6 +10,7 @@
 	Long aceitem_id = 0l ;
 	AceItem aceitem = null;
 	String url = null;
+	String language = null;
 	
 	if(request.getAttribute("aceitem_id")!=null) {
 		aceitem_id = Long.parseLong( (String) request.getAttribute("aceitem_id") ) ;
@@ -17,12 +18,14 @@
 		
 		url = "<a href='" + aceitem.getStoredAt() + "' target='_blank'>" + aceitem.getStoredAt() + "</a>" ;
 		
-		if(aceitem.getLanguage().equalsIgnoreCase("de_DE")) {
+		language = ( aceitem.getLanguage() == null ? "" : aceitem.getLanguage() );
+		
+		if(language.equalsIgnoreCase("de_DE")) {
 			
 			url = url + "&nbsp;&nbsp;(in german)&nbsp;&nbsp;&nbsp;<a href='http://babelfish.yahoo.com/translate_url?doit=done&tt=url&intl=1&fr=bf-home&lp=de_en&btnTrUrl=Translate&&trurl=" + aceitem.getStoredAt() + "' target='_blank'>(machine translate to english)</a>" ;
 			
 		} 
-		else if(aceitem.getLanguage().equalsIgnoreCase("nl_NL")) {
+		else if(language.equalsIgnoreCase("nl_NL")) {
 			
 			url = url + "&nbsp;&nbsp;(in dutch)&nbsp;&nbsp;&nbsp;<a href='http://babelfish.yahoo.com/translate_url?doit=done&tt=url&intl=1&fr=bf-home&lp=nl_en&btnTrUrl=Translate&&trurl=" + aceitem.getStoredAt() + "' target='_blank'>(machine translate to english)</a>" ;
 			
@@ -85,6 +88,6 @@
 
    </c:when>
    <c:otherwise>
-     <H1>No AceItem Identification available</H1>
+     <H1>No AceItem selected</H1>
    </c:otherwise>
  </c:choose>
