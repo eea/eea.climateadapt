@@ -95,13 +95,8 @@ public class ACEIndexSearcher {
                             }
             else {
                 Sort sort = null;
-                // TODO support Date and Country sorting
-                if(sortBy.equals("SECTOR")) {
-                    sort = new Sort(new SortField( ACEIndexConstant.IndexField.SECTOR_SORT, SortField.STRING));
-                    return searcher.search(query, null, itemsPerPage, sort);
 
-                }
-                else if(sortBy.equals("NAME")) {
+                if(sortBy.equals("NAME")) {
                     sort = new Sort(new SortField( ACEIndexConstant.IndexField.NAME_SORT, SortField.STRING));
                     return searcher.search(query, null, itemsPerPage, sort);
 
