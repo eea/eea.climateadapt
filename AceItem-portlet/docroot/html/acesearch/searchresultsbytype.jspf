@@ -15,7 +15,9 @@
 		pageContext.setAttribute("sortsearchNameId", "sortsearchNameId-" + r);
 		pageContext.setAttribute("sortsearchCountryId", "sortsearchCountryId-" + r);
 		pageContext.setAttribute("resultsListId", "resultsListId-" + r);
-		pageContext.setAttribute("anyOfTheseId", "anyOfTheseId-" + r);		
+		pageContext.setAttribute("anyOfTheseId", "anyOfTheseId-" + r);
+        pageContext.setAttribute("conditionAdaptationSectorId", "conditionAdaptationSectorId-" + r);
+        pageContext.setAttribute("conditionAdaptationElementId", "conditionAdaptationElementId-" + r);
 		pageContext.setAttribute("paginationId", "paginationId-" + r);
 		pageContext.setAttribute("demoId", "demoId-" + r);
 	%>
@@ -87,6 +89,18 @@
                 <c:forEach var="sector" items="${searchParams.sector}">
                 <input type="hidden" name="sector" value="${sector}"/>
                 </c:forEach>
+
+                <c:forEach var="element" items="${searchParams.element}">
+                <input type="hidden" name="element" value="${element}"/>
+                </c:forEach>
+
+                <c:forEach var="countries" items="${searchParams.countries}">
+                <input type="hidden" name="countries" value="${countries}"/>
+                </c:forEach>
+
+
+                <input type="hidden" name="conditionAdaptationSector" id="${conditionAdaptationSectorId}" value="${searchParams.conditionAdaptationSector}"/>
+                <input type="hidden" name="conditionAdaptationElement" id="${conditionAdaptationElementId}" value="${searchParams.conditionAdaptationElement}"/>
 
 				<liferay-ui:message key="acesearch-sort-by" />
 				<input type="radio" name="sortBy" class="sortByControl" id="${sortsearchRelevanceId}" value="RELEVANCE" checked /><liferay-ui:message key="acesearch-sort-relevance" />

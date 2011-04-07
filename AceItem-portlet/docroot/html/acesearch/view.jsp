@@ -99,10 +99,15 @@ pageContext.setAttribute("countriesList", countriesList);
         } 
         if ($j("#sortsearchformId-"+unique + " input[name=element]").val() != undefined) {
 		    querystring += '&element=' + $j("#sortsearchformId-"+unique + " input[name=element]").val();
-        } 		
-		querystring += '&initial_date=' + $j("#sortsearchformId-"+unique + " input[name=initial_date]").val(); 
-		querystring += '&final_date=' + $j("#sortsearchformId-"+unique + " input[name=final_date]").val(); 
-		querystring += '&simple_date=' + $j("#sortsearchformId-"+unique + " input[name=simple_date]").val(); 
+        }
+
+        if ($j("#sortsearchformId-"+unique + " input[name=countries]").val() != undefined) {
+		    querystring += '&countries=' + $j("#sortsearchformId-"+unique + " input[name=countries]").val();
+        }
+
+        querystring += '&conditionAdaptationSector=' + $j("#sortsearchformId-"+unique + " input[name=conditionAdaptationSector]").val();
+        querystring += '&conditionAdaptationElement=' + $j("#sortsearchformId-"+unique + " input[name=conditionAdaptationElement]").val();
+
 		querystring += '&sortBy=' + $j('#'+sortRadio.id).val();
 		// replace existing resultlist with loading icon 
 		$j('#resultsListId-'+unique).remove();
