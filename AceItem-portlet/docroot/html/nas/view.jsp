@@ -222,6 +222,52 @@
 		<img id="RO_selected" src="<%=renderRequest.getContextPath()%>/images/countryselectionmap/RO.png" width="458" height="515" border="0" usemap="#Map" style="display:none;"/>
 		<img id="SE_selected" src="<%=renderRequest.getContextPath()%>/images/countryselectionmap/SE.png" width="458" height="515" border="0" usemap="#Map" style="display:none;"/>
 	
+		<div style="width:300px;margin:10px 0px;">
+		
+			<div style="width:500px;">
+				<div style="background:#6cc06a;width:30px;height:15px;float:left;"> </div>
+				<div style="height:15px;float:left;margin-left:10px;">
+					National Adaptation Strategy adopted
+				</div>
+			</div>
+			<hr class="clearer"/>
+
+			<div style="width:500px;">			
+				<div style="background:#deb062;width:30px;height:15px;float:left;"> </div>
+				<div style="height:15px;float:left;margin-left:10px;">
+					National Adaptation Strategy in development/preparation
+				</div>
+			</div>
+			<hr class="clearer"/>
+			
+			<div style="width:500px;">
+				<div style="background:#f2706b;width:30px;height:15px;float:left;"> </div>
+				<div style="height:15px;float:left;margin-left:10px;">
+					No National Adaptation Strategy
+				</div>			
+			</div>
+			<hr class="clearer"/>
+			
+			<div style="width:500px;">
+				<div style="background:#fff;width:30px;height:15px;float:left;">
+					<img src="<%=renderRequest.getContextPath()%>/images/icons/pinstripes.png" border="0"/>
+				</div>
+				<div style="height:15px;float:left;margin-left:10px;">
+					Not included in study, following (EEA, 2008)
+				</div>			
+			</div>
+			<hr class="clearer"/>
+			
+			<div style="width:500px;">
+				<div style="background:#bbb;width:30px;height:15px;float:left;"> </div>
+				<div style="height:15px;float:left;margin-left:10px;">
+					No information available
+				</div>			
+			</div>
+			<hr class="clearer"/>
+			
+		</div>
+
 		<select id="country-selection-list"  style="margin-top:5px;">
 			<option id="no-selection-option" value="" selected="selected">No country selected</option>
 			<option id="AT-option" value="AT">Austria</option>
