@@ -206,6 +206,10 @@
   overflow:hidden;
 }
 
+#acesearch_column .condition_container {
+  margin-bottom: 10px;
+}
+
 #acesearch_column .check{
   float:left;
   width:190px;

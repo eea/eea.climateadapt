@@ -34,11 +34,10 @@ import java.util.Map;
 public class AceSearchPortlet extends MVCPortlet {
 
     private static final String ANY = "anyOfThese";
-    private static final String INITIAL_DATE = "initial_date";
-    private static final String FINAL_DATE = "final_date";
-    private static final String SIMPLE_DATE = "simple_date";
     private static final String ACEITEM_TYPE = "aceitemtype";
     private static final String SORTBY = "sortBy";
+    private static final String CONDITION_ADAPTATION_SECTOR = "conditionAdaptationSector";
+    private static final String CONDITION_ADAPTATION_ELEMENT = "conditionAdaptationElement";
     private static final String SECTOR = "sector";
     private static final String COUNTRIES = "countries";
     private static final String ELEMENT = "element";
@@ -46,7 +45,10 @@ public class AceSearchPortlet extends MVCPortlet {
     private static final String SEARCH_PARAMS = "searchParams";
     private static final String SEARCH_RESULTS = "searchResults";
 
-     private static final String TOTAL_RESULTS = "total_results";
+    private static final String TOTAL_RESULTS = "total_results";
+
+    private static final String AND_CONDITION = "AND";
+    private static final String OR_CONDITION = "OR";
 
     /**
      * Called by the portlet container to indicate to a portlet that the portlet is being placed into service.
@@ -95,6 +97,9 @@ public class AceSearchPortlet extends MVCPortlet {
         String[] sectors = requestParams.get(SECTOR);
         String[] countries = requestParams.get(COUNTRIES);
         String[] elements = requestParams.get(ELEMENT);
+        String[] conditionAdaptationSector = requestParams.get(CONDITION_ADAPTATION_SECTOR);
+        String[] conditionAdaptationElement = requestParams.get(CONDITION_ADAPTATION_ELEMENT);
+
         String[] sortBys = requestParams.get(SORTBY);
         String sortBy = null;
         if(sortBys != null && sortBys.length > 0) {
@@ -108,6 +113,19 @@ public class AceSearchPortlet extends MVCPortlet {
         formBean.setElement(elements);
         formBean.setCountries(countries);
         formBean.setSortBy(sortBy);
+
+        if (conditionAdaptationSector != null && conditionAdaptationSector[0].equalsIgnoreCase(AND_CONDITION)) {
+            formBean.setConditionAdaptationSector(AND_CONDITION);
+        } else {
+            formBean.setConditionAdaptationSector(OR_CONDITION);
+        }
+
+
+        if (conditionAdaptationElement != null && conditionAdaptationElement[0].equalsIgnoreCase(AND_CONDITION)) {
+            formBean.setConditionAdaptationElement(AND_CONDITION);
+        } else {
+            formBean.setConditionAdaptationElement(OR_CONDITION);
+        }
 
         request.setAttribute(SEARCH_PARAMS, formBean);
 

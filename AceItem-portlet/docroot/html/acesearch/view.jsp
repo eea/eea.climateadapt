@@ -32,14 +32,16 @@ if ((datainfo_type == null) || (datainfo_type.equals(""))) datainfo_type = "1";
 String date_type = ParamUtil.getString(request, "date_type");
 if ((date_type == null) || (date_type.equals(""))) date_type = "1";
 
+String conditionAdaptationSector = ParamUtil.getString(request, "conditionAdaptationSector");
+if ((conditionAdaptationSector == null) || (conditionAdaptationSector.equals(""))) conditionAdaptationSector = "OR";
+
+String conditionAdaptationElement = ParamUtil.getString(request, "conditionAdaptationElement");
+if ((conditionAdaptationElement == null) || (conditionAdaptationElement.equals(""))) conditionAdaptationElement = "OR";
+
 String[] aceitemtypes = request.getParameterValues("aceitemtype");
 if (aceitemtypes == null) aceitemtypes =  new String[0];
 List<String> aceitemtypesList = Arrays.asList(aceitemtypes);
 pageContext.setAttribute("aceitemtypesList", aceitemtypesList);
-
-String initial_date = ParamUtil.getString(request, "initial_date");
-String final_date = ParamUtil.getString(request, "final_date");
-String simple_date = ParamUtil.getString(request, "simple_date");
 
 String[] sectors = request.getParameterValues("sector");
 if (sectors == null) sectors = new String[0];
@@ -55,6 +57,8 @@ String[] countries = request.getParameterValues("countries");
 if (countries == null) countries = new String[0];
 List<String> countriesList = Arrays.asList(countries);
 pageContext.setAttribute("countriesList", countriesList);
+
+
 %>
 
 
@@ -183,10 +187,19 @@ pageContext.setAttribute("countriesList", countriesList);
 
             <div class="search_section">
                 <h2><liferay-ui:message key="acesearch-section-header4" /></h2>
+
                 <ul>
                     <li>
                         <a href="#" id="adaptation_sectors_btn" class="expanded_section"><liferay-ui:message key="acesearch-section-adaptation-sectors" /></a>
-                        <div id="adaptation_sectors_container" class="checks_container">		
+
+
+
+                        <div id="adaptation_sectors_container" class="checks_container">
+                            <div class="condition_container">
+                                <input type="radio" name="conditionAdaptationSector" value="OR" <%= (conditionAdaptationSector.equals("OR"))?"checked":"" %> />&nbsp;<liferay-ui:message key="acesearch-anycriteria" />
+                                &nbsp;&nbsp;<input type="radio" name="conditionAdaptationSector" value="AND" <%= (conditionAdaptationSector.equals("AND"))?"checked":"" %> />&nbsp;<liferay-ui:message key="acesearch-allcriteria" />
+                            </div>
+
 							<%-- note : i18n file should always be in sync with AceItemSector enum --%>	
 							<c:forEach var="adaptationSector" items="<%= nl.wur.alterra.cgi.ace.model.impl.AceItemSector.values() %>" >							
 								<div class="check">
@@ -239,7 +252,13 @@ pageContext.setAttribute("countriesList", countriesList);
 
                     <li>
                         <a href="#" id="adaptation_elements_btn" class="collapsed_section"><liferay-ui:message key="acesearch-section-adaptation-elements" /></a>
-                        <div id="adaptation_elements_container" class="checks_container">		
+
+                        <div id="adaptation_elements_container" class="checks_container">
+                            <div class="condition_container">
+                                <input type="radio" name="conditionAdaptationElement" value="OR" <%= (conditionAdaptationElement.equals("OR"))?"checked":"" %> />&nbsp;<liferay-ui:message key="acesearch-anycriteria" />
+                                &nbsp;&nbsp;<input type="radio" name="conditionAdaptationElement" value="AND" <%= (conditionAdaptationElement.equals("AND"))?"checked":"" %> />&nbsp;<liferay-ui:message key="acesearch-allcriteria" />
+                            </div>
+
 							<%-- note : i18n file should always be in sync with AceItemElement enum --%>
 							<c:forEach var="adaptationElement" items="<%= nl.wur.alterra.cgi.ace.model.impl.AceItemElement.values() %>" >
 								<div class="check">

@@ -174,9 +174,9 @@ public class ACESearchEngine extends HitsOpenSearchImpl {
             if ((formBean.getSector() != null) && (sectors.length > 0)) {
                 rawQuery += " AND (";
                 for(String sector: sectors) {
-                    rawQuery += " (" + ACEIndexConstant.IndexField.SECTOR + ":" + sector + ") OR";
+                    rawQuery += " (" + ACEIndexConstant.IndexField.SECTOR + ":" + sector + ") " + formBean.getConditionAdaptationSector();
                 }
-                rawQuery =  rawQuery.substring(0, rawQuery.lastIndexOf("OR")) + " )";
+                rawQuery =  rawQuery.substring(0, rawQuery.lastIndexOf(formBean.getConditionAdaptationSector())) + " )";
             }
 
             //
@@ -186,9 +186,9 @@ public class ACESearchEngine extends HitsOpenSearchImpl {
             if ((elements != null) && (elements.length > 0)) {
                 rawQuery += " AND (";
                 for(String element: elements) {
-                    rawQuery += " (" + ACEIndexConstant.IndexField.ELEMENT + ":" + element + ") OR";
+                    rawQuery += " (" + ACEIndexConstant.IndexField.ELEMENT + ":" + element + ") " + formBean.getConditionAdaptationElement();
                 }
-                rawQuery =  rawQuery.substring(0, rawQuery.lastIndexOf("OR")) + " )";
+                rawQuery =  rawQuery.substring(0, rawQuery.lastIndexOf(formBean.getConditionAdaptationElement())) + " )";
             }
 
             //

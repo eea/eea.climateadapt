@@ -11,11 +11,11 @@ public class AceSearchFormBean {
     private String[] sector;
     private String[] element;
     private String[] countries;
-    private String initialDate;
-    private String finalDate;
-    private String simpleDate;
     private String sortBy;
     private String anyOfThese;
+
+    private String conditionAdaptationSector;
+    private String conditionAdaptationElement;
 
     public String[] getAceitemtype() {
         return aceitemtype;
@@ -49,30 +49,6 @@ public class AceSearchFormBean {
         this.countries = countries;
     }
 
-    public String getInitialDate() {
-        return initialDate;
-    }
-
-    public void setInitialDate(String initialDate) {
-        this.initialDate = initialDate;
-    }
-
-    public String getFinalDate() {
-        return finalDate;
-    }
-
-    public void setFinalDate(String finalDate) {
-        this.finalDate = finalDate;
-    }
-
-    public String getSimpleDate() {
-        return simpleDate;
-    }
-
-    public void setSimpleDate(String simpleDate) {
-        this.simpleDate = simpleDate;
-    }
-
     public String getSortBy() {
         return sortBy;
     }
@@ -87,5 +63,21 @@ public class AceSearchFormBean {
 
     public void setAnyOfThese(String anyOfThese) {
         this.anyOfThese = anyOfThese;
+    }
+
+    public String getConditionAdaptationSector() {
+        return conditionAdaptationSector;
+    }
+
+    public void setConditionAdaptationSector(String conditionAdaptationSector) {
+        this.conditionAdaptationSector = conditionAdaptationSector;
+    }
+
+    public String getConditionAdaptationElement() {
+        return conditionAdaptationElement;
+    }
+
+    public void setConditionAdaptationElement(String conditionAdaptationElement) {
+        this.conditionAdaptationElement = conditionAdaptationElement;
     }
 }
