@@ -10,11 +10,9 @@
 }
 #nas_results {
 	float:right;
-	width:65%;
 }
 #nas_left_column {
 	float:left;
-	width:35%;
 }
 .nas-row-even {
     background-color: #F7F6ED;

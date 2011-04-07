@@ -358,8 +358,8 @@
 			<colgroup>
 				<col style="width: 150px;border:solid #000 1px;" />
 				<col style="width: 100px;margin-left:20px;border:solid #000 1px;" />
-				<col style="width: 300px;border:solid #000 1px;" />
-				<col style="width: 350px;border:solid #000 1px;" />
+				<col style="width: 150px;border:solid #000 1px;" />
+				<col style="width: 250px;border:solid #000 1px;" />
 			</colgroup>
 			<thead> 
 				<tr id="nas-header"> 
