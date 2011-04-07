@@ -350,7 +350,18 @@
 										<ul>
 											<c:if test="${aceItem.nasId == searchResult.nasId}">
 												<li style="">
-													<a href=""${aceItem.storedAt}">
+													<c:choose>
+														<c:when test="${aceItem.storagetype == 'PDF-URL'}">
+															<img src="<%=renderRequest.getContextPath()%>/images/icons/pdf2.png" alt="PDF document link" title="PDF document link"/>
+														</c:when>
+														<c:when test="${aceItem.storagetype == 'DOC-URL'}">
+															<img src="<%=renderRequest.getContextPath()%>/images/icons/doc.png" alt="Office document link" title="Office document link"/>
+														</c:when>
+														<c:otherwise>
+															<img src="<%=renderRequest.getContextPath()%>/images/icons/link_icon.gif" alt="External link" title="External link"/>
+														</c:otherwise>
+													</c:choose>												
+													<a href="${aceItem.storedAt}">
 														<c:out value="${aceItem.name}"/>
 													</a>	
 												</li>
@@ -384,9 +395,20 @@
 										<ul>
 											<c:if test="${aceItem.nasId == searchResult.nasId}">
 												<li style="">
+													<c:choose>
+														<c:when test="${aceItem.storagetype == 'PDF-URL'}">
+															<img src="<%=renderRequest.getContextPath()%>/images/icons/pdf2.png" alt="PDF document link" title="PDF document link"/>
+														</c:when>
+														<c:when test="${aceItem.storagetype == 'DOC-URL'}">
+															<img src="<%=renderRequest.getContextPath()%>/images/icons/doc.png" alt="Office document link" title="Office document link"/>
+														</c:when>
+														<c:otherwise>
+															<img src="<%=renderRequest.getContextPath()%>/images/icons/link_icon.gif" alt="External link" title="External link"/>
+														</c:otherwise>
+													</c:choose>	
 													<a href="${aceItem.storedAt}">
 														<c:out value="${aceItem.name}"/>
-													</a>	
+													</a>														
 												</li>
 											</c:if>
 										</ul>
