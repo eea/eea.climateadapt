@@ -75,5 +75,22 @@
 		<reference package-path="com.liferay.portlet.asset" entity="AssetEntry" />		
 	</entity>	
 
+	<entity name="NASSource" local-service="true" remote-service="false">
+		<column name="nassourceid" type="long" primary="true" />
+		<column name="nasId" type="long" />
+		<column name="name" type="String" />
+		<column name="companyId" type="long" />
+		<column name="groupId" type="long" />
+		
+		<order by="asc">
+			<order-column name="name" case-sensitive="false" />
+		</order>	
+		<finder name="GroupId" return-type="Collection">
+			<finder-column name="groupId" />
+		</finder>		
+		<reference package-path="com.liferay.portlet.asset" entity="AssetEntry" />	
+	</entity>	
+	
+
 	
 </service-builder>
