@@ -361,7 +361,7 @@
 															<img src="<%=renderRequest.getContextPath()%>/images/icons/link_icon.gif" alt="External link" title="External link"/>
 														</c:otherwise>
 													</c:choose>												
-													<a href="${aceItem.storedAt}">
+													<a href="${aceItem.storedAt}" target="_blank">
 														<c:out value="${aceItem.name}"/>
 													</a>	
 												</li>
@@ -406,7 +406,7 @@
 															<img src="<%=renderRequest.getContextPath()%>/images/icons/link_icon.gif" alt="External link" title="External link"/>
 														</c:otherwise>
 													</c:choose>	
-													<a href="${aceItem.storedAt}">
+													<a href="${aceItem.storedAt}" target="_blank">
 														<c:out value="${aceItem.name}"/>
 													</a>														
 												</li>
