@@ -292,6 +292,8 @@ public class NASPersistenceImpl extends BasePersistenceImpl<NAS>
 		nasImpl.setAdoptedDescription(nas.getAdoptedDescription());
 		nasImpl.setCompanyId(nas.getCompanyId());
 		nasImpl.setGroupId(nas.getGroupId());
+		nasImpl.setParentNasId(nas.getParentNasId());
+		nasImpl.setIsoCountry(nas.getIsoCountry());
 
 		return nasImpl;
 	}
@@ -1186,6 +1188,8 @@ public class NASPersistenceImpl extends BasePersistenceImpl<NAS>
 	protected AceItemPersistence aceItemPersistence;
 	@BeanReference(type = NASPersistence.class)
 	protected NASPersistence nasPersistence;
+	@BeanReference(type = NASSourcePersistence.class)
+	protected NASSourcePersistence nasSourcePersistence;
 	@BeanReference(type = ResourcePersistence.class)
 	protected ResourcePersistence resourcePersistence;
 	@BeanReference(type = UserPersistence.class)

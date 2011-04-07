@@ -113,7 +113,7 @@ public class AceItemIndexer {
 
         if ((spatialValues != null) && (spatialLayers != null))  {
             // for searching by country
-            if ((spatialLayers.equals(AceConstants.COUNTRY_LAYER_NAME)) && !(spatialValues.equals(""))) {
+            if (spatialLayers.equals(AceConstants.COUNTRY_LAYER_NAME)) {
                 document.add(new Field(ACEIndexConstant.IndexField.COUNTRY_SORT, spatialValues, Field.Store.NO,Field.Index.NOT_ANALYZED));
             }
         }
@@ -127,6 +127,9 @@ public class AceItemIndexer {
         }
 
         if(sectors != null) {
+            // for sorting
+            document.add(new Field(ACEIndexConstant.IndexField.SECTOR_SORT, sectors, Field.Store.NO,Field.Index.NOT_ANALYZED));
+
             String[] sectorValues = sectors.split(";");
 
             for(int i = 0; i < sectorValues.length; i++) {

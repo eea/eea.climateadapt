@@ -41,10 +41,10 @@ import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
 
 import com.liferay.portlet.asset.service.persistence.AssetEntryPersistence;
 
-import nl.wur.alterra.cgi.ace.NoSuchItemException;
-import nl.wur.alterra.cgi.ace.model.AceItem;
-import nl.wur.alterra.cgi.ace.model.impl.AceItemImpl;
-import nl.wur.alterra.cgi.ace.model.impl.AceItemModelImpl;
+import nl.wur.alterra.cgi.ace.NoSuchNASSourceException;
+import nl.wur.alterra.cgi.ace.model.NASSource;
+import nl.wur.alterra.cgi.ace.model.impl.NASSourceImpl;
+import nl.wur.alterra.cgi.ace.model.impl.NASSourceModelImpl;
 
 import java.io.Serializable;
 
@@ -53,10 +53,10 @@ import java.util.Collections;
 import java.util.List;
 
 /**
- * The persistence implementation for the ace item service.
+ * The persistence implementation for the n a s source service.
  *
  * <p>
- * Never modify or reference this class directly. Always use {@link AceItemUtil} to access the ace item persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this class.
+ * Never modify or reference this class directly. Always use {@link NASSourceUtil} to access the n a s source persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this class.
  * </p>
  *
  * <p>
@@ -64,17 +64,17 @@ import java.util.List;
  * </p>
  *
  * @author groot052
- * @see AceItemPersistence
- * @see AceItemUtil
+ * @see NASSourcePersistence
+ * @see NASSourceUtil
  * @generated
  */
-public class AceItemPersistenceImpl extends BasePersistenceImpl<AceItem>
-	implements AceItemPersistence {
-	public static final String FINDER_CLASS_NAME_ENTITY = AceItemImpl.class.getName();
+public class NASSourcePersistenceImpl extends BasePersistenceImpl<NASSource>
+	implements NASSourcePersistence {
+	public static final String FINDER_CLASS_NAME_ENTITY = NASSourceImpl.class.getName();
 	public static final String FINDER_CLASS_NAME_LIST = FINDER_CLASS_NAME_ENTITY +
 		".List";
-	public static final FinderPath FINDER_PATH_FIND_BY_GROUPID = new FinderPath(AceItemModelImpl.ENTITY_CACHE_ENABLED,
-			AceItemModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
+	public static final FinderPath FINDER_PATH_FIND_BY_GROUPID = new FinderPath(NASSourceModelImpl.ENTITY_CACHE_ENABLED,
+			NASSourceModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
 			"findByGroupId",
 			new String[] {
 				Long.class.getName(),
@@ -82,125 +82,125 @@ public class AceItemPersistenceImpl extends BasePersistenceImpl<AceItem>
 			"java.lang.Integer", "java.lang.Integer",
 				"com.liferay.portal.kernel.util.OrderByComparator"
 			});
-	public static final FinderPath FINDER_PATH_COUNT_BY_GROUPID = new FinderPath(AceItemModelImpl.ENTITY_CACHE_ENABLED,
-			AceItemModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
+	public static final FinderPath FINDER_PATH_COUNT_BY_GROUPID = new FinderPath(NASSourceModelImpl.ENTITY_CACHE_ENABLED,
+			NASSourceModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
 			"countByGroupId", new String[] { Long.class.getName() });
-	public static final FinderPath FINDER_PATH_FIND_ALL = new FinderPath(AceItemModelImpl.ENTITY_CACHE_ENABLED,
-			AceItemModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
+	public static final FinderPath FINDER_PATH_FIND_ALL = new FinderPath(NASSourceModelImpl.ENTITY_CACHE_ENABLED,
+			NASSourceModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
 			"findAll", new String[0]);
-	public static final FinderPath FINDER_PATH_COUNT_ALL = new FinderPath(AceItemModelImpl.ENTITY_CACHE_ENABLED,
-			AceItemModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
+	public static final FinderPath FINDER_PATH_COUNT_ALL = new FinderPath(NASSourceModelImpl.ENTITY_CACHE_ENABLED,
+			NASSourceModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
 			"countAll", new String[0]);
 
 	/**
-	 * Caches the ace item in the entity cache if it is enabled.
+	 * Caches the n a s source in the entity cache if it is enabled.
 	 *
-	 * @param aceItem the ace item to cache
+	 * @param nasSource the n a s source to cache
 	 */
-	public void cacheResult(AceItem aceItem) {
-		EntityCacheUtil.putResult(AceItemModelImpl.ENTITY_CACHE_ENABLED,
-			AceItemImpl.class, aceItem.getPrimaryKey(), aceItem);
+	public void cacheResult(NASSource nasSource) {
+		EntityCacheUtil.putResult(NASSourceModelImpl.ENTITY_CACHE_ENABLED,
+			NASSourceImpl.class, nasSource.getPrimaryKey(), nasSource);
 	}
 
 	/**
-	 * Caches the ace items in the entity cache if it is enabled.
+	 * Caches the n a s sources in the entity cache if it is enabled.
 	 *
-	 * @param aceItems the ace items to cache
+	 * @param nasSources the n a s sources to cache
 	 */
-	public void cacheResult(List<AceItem> aceItems) {
-		for (AceItem aceItem : aceItems) {
+	public void cacheResult(List<NASSource> nasSources) {
+		for (NASSource nasSource : nasSources) {
 			if (EntityCacheUtil.getResult(
-						AceItemModelImpl.ENTITY_CACHE_ENABLED,
-						AceItemImpl.class, aceItem.getPrimaryKey(), this) == null) {
-				cacheResult(aceItem);
+						NASSourceModelImpl.ENTITY_CACHE_ENABLED,
+						NASSourceImpl.class, nasSource.getPrimaryKey(), this) == null) {
+				cacheResult(nasSource);
 			}
 		}
 	}
 
 	/**
-	 * Clears the cache for all ace items.
+	 * Clears the cache for all n a s sources.
 	 *
 	 * <p>
 	 * The {@link com.liferay.portal.kernel.dao.orm.EntityCache} and {@link com.liferay.portal.kernel.dao.orm.FinderCache} are both cleared by this method.
 	 * </p>
 	 */
 	public void clearCache() {
-		CacheRegistryUtil.clear(AceItemImpl.class.getName());
-		EntityCacheUtil.clearCache(AceItemImpl.class.getName());
+		CacheRegistryUtil.clear(NASSourceImpl.class.getName());
+		EntityCacheUtil.clearCache(NASSourceImpl.class.getName());
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_ENTITY);
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
 	}
 
 	/**
-	 * Clears the cache for the ace item.
+	 * Clears the cache for the n a s source.
 	 *
 	 * <p>
 	 * The {@link com.liferay.portal.kernel.dao.orm.EntityCache} and {@link com.liferay.portal.kernel.dao.orm.FinderCache} are both cleared by this method.
 	 * </p>
 	 */
-	public void clearCache(AceItem aceItem) {
-		EntityCacheUtil.removeResult(AceItemModelImpl.ENTITY_CACHE_ENABLED,
-			AceItemImpl.class, aceItem.getPrimaryKey());
+	public void clearCache(NASSource nasSource) {
+		EntityCacheUtil.removeResult(NASSourceModelImpl.ENTITY_CACHE_ENABLED,
+			NASSourceImpl.class, nasSource.getPrimaryKey());
 	}
 
 	/**
-	 * Creates a new ace item with the primary key. Does not add the ace item to the database.
+	 * Creates a new n a s source with the primary key. Does not add the n a s source to the database.
 	 *
-	 * @param aceItemId the primary key for the new ace item
-	 * @return the new ace item
+	 * @param nassourceid the primary key for the new n a s source
+	 * @return the new n a s source
 	 */
-	public AceItem create(long aceItemId) {
-		AceItem aceItem = new AceItemImpl();
+	public NASSource create(long nassourceid) {
+		NASSource nasSource = new NASSourceImpl();
 
-		aceItem.setNew(true);
-		aceItem.setPrimaryKey(aceItemId);
+		nasSource.setNew(true);
+		nasSource.setPrimaryKey(nassourceid);
 
-		return aceItem;
+		return nasSource;
 	}
 
 	/**
-	 * Removes the ace item with the primary key from the database. Also notifies the appropriate model listeners.
+	 * Removes the n a s source with the primary key from the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param primaryKey the primary key of the ace item to remove
-	 * @return the ace item that was removed
-	 * @throws com.liferay.portal.NoSuchModelException if a ace item with the primary key could not be found
+	 * @param primaryKey the primary key of the n a s source to remove
+	 * @return the n a s source that was removed
+	 * @throws com.liferay.portal.NoSuchModelException if a n a s source with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
-	public AceItem remove(Serializable primaryKey)
+	public NASSource remove(Serializable primaryKey)
 		throws NoSuchModelException, SystemException {
 		return remove(((Long)primaryKey).longValue());
 	}
 
 	/**
-	 * Removes the ace item with the primary key from the database. Also notifies the appropriate model listeners.
+	 * Removes the n a s source with the primary key from the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param aceItemId the primary key of the ace item to remove
-	 * @return the ace item that was removed
-	 * @throws nl.wur.alterra.cgi.ace.NoSuchItemException if a ace item with the primary key could not be found
+	 * @param nassourceid the primary key of the n a s source to remove
+	 * @return the n a s source that was removed
+	 * @throws nl.wur.alterra.cgi.ace.NoSuchNASSourceException if a n a s source with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
-	public AceItem remove(long aceItemId)
-		throws NoSuchItemException, SystemException {
+	public NASSource remove(long nassourceid)
+		throws NoSuchNASSourceException, SystemException {
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			AceItem aceItem = (AceItem)session.get(AceItemImpl.class,
-					new Long(aceItemId));
+			NASSource nasSource = (NASSource)session.get(NASSourceImpl.class,
+					new Long(nassourceid));
 
-			if (aceItem == null) {
+			if (nasSource == null) {
 				if (_log.isWarnEnabled()) {
-					_log.warn(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY + aceItemId);
+					_log.warn(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY + nassourceid);
 				}
 
-				throw new NoSuchItemException(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY +
-					aceItemId);
+				throw new NoSuchNASSourceException(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY +
+					nassourceid);
 			}
 
-			return remove(aceItem);
+			return remove(nasSource);
 		}
-		catch (NoSuchItemException nsee) {
+		catch (NoSuchNASSourceException nsee) {
 			throw nsee;
 		}
 		catch (Exception e) {
@@ -211,24 +211,25 @@ public class AceItemPersistenceImpl extends BasePersistenceImpl<AceItem>
 		}
 	}
 
-	protected AceItem removeImpl(AceItem aceItem) throws SystemException {
-		aceItem = toUnwrappedModel(aceItem);
+	protected NASSource removeImpl(NASSource nasSource)
+		throws SystemException {
+		nasSource = toUnwrappedModel(nasSource);
 
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			if (aceItem.isCachedModel() || BatchSessionUtil.isEnabled()) {
-				Object staleObject = session.get(AceItemImpl.class,
-						aceItem.getPrimaryKeyObj());
+			if (nasSource.isCachedModel() || BatchSessionUtil.isEnabled()) {
+				Object staleObject = session.get(NASSourceImpl.class,
+						nasSource.getPrimaryKeyObj());
 
 				if (staleObject != null) {
 					session.evict(staleObject);
 				}
 			}
 
-			session.delete(aceItem);
+			session.delete(nasSource);
 
 			session.flush();
 		}
@@ -241,24 +242,25 @@ public class AceItemPersistenceImpl extends BasePersistenceImpl<AceItem>
 
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
 
-		EntityCacheUtil.removeResult(AceItemModelImpl.ENTITY_CACHE_ENABLED,
-			AceItemImpl.class, aceItem.getPrimaryKey());
+		EntityCacheUtil.removeResult(NASSourceModelImpl.ENTITY_CACHE_ENABLED,
+			NASSourceImpl.class, nasSource.getPrimaryKey());
 
-		return aceItem;
+		return nasSource;
 	}
 
-	public AceItem updateImpl(nl.wur.alterra.cgi.ace.model.AceItem aceItem,
-		boolean merge) throws SystemException {
-		aceItem = toUnwrappedModel(aceItem);
+	public NASSource updateImpl(
+		nl.wur.alterra.cgi.ace.model.NASSource nasSource, boolean merge)
+		throws SystemException {
+		nasSource = toUnwrappedModel(nasSource);
 
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			BatchSessionUtil.update(session, aceItem, merge);
+			BatchSessionUtil.update(session, nasSource, merge);
 
-			aceItem.setNew(false);
+			nasSource.setNew(false);
 		}
 		catch (Exception e) {
 			throw processException(e);
@@ -269,175 +271,161 @@ public class AceItemPersistenceImpl extends BasePersistenceImpl<AceItem>
 
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
 
-		EntityCacheUtil.putResult(AceItemModelImpl.ENTITY_CACHE_ENABLED,
-			AceItemImpl.class, aceItem.getPrimaryKey(), aceItem);
+		EntityCacheUtil.putResult(NASSourceModelImpl.ENTITY_CACHE_ENABLED,
+			NASSourceImpl.class, nasSource.getPrimaryKey(), nasSource);
 
-		return aceItem;
+		return nasSource;
 	}
 
-	protected AceItem toUnwrappedModel(AceItem aceItem) {
-		if (aceItem instanceof AceItemImpl) {
-			return aceItem;
+	protected NASSource toUnwrappedModel(NASSource nasSource) {
+		if (nasSource instanceof NASSourceImpl) {
+			return nasSource;
 		}
 
-		AceItemImpl aceItemImpl = new AceItemImpl();
+		NASSourceImpl nasSourceImpl = new NASSourceImpl();
 
-		aceItemImpl.setNew(aceItem.isNew());
-		aceItemImpl.setPrimaryKey(aceItem.getPrimaryKey());
+		nasSourceImpl.setNew(nasSource.isNew());
+		nasSourceImpl.setPrimaryKey(nasSource.getPrimaryKey());
 
-		aceItemImpl.setAceItemId(aceItem.getAceItemId());
-		aceItemImpl.setCompanyId(aceItem.getCompanyId());
-		aceItemImpl.setGroupId(aceItem.getGroupId());
-		aceItemImpl.setNasId(aceItem.getNasId());
-		aceItemImpl.setName(aceItem.getName());
-		aceItemImpl.setDescription(aceItem.getDescription());
-		aceItemImpl.setDatatype(aceItem.getDatatype());
-		aceItemImpl.setStoredAt(aceItem.getStoredAt());
-		aceItemImpl.setStoragetype(aceItem.getStoragetype());
-		aceItemImpl.setLanguage(aceItem.getLanguage());
-		aceItemImpl.setTextSearch(aceItem.getTextSearch());
-		aceItemImpl.setKeyword(aceItem.getKeyword());
-		aceItemImpl.setTargetresolution(aceItem.getTargetresolution());
-		aceItemImpl.setSpatialLayer(aceItem.getSpatialLayer());
-		aceItemImpl.setSpatialValues(aceItem.getSpatialValues());
-		aceItemImpl.setStartDate(aceItem.getStartDate());
-		aceItemImpl.setEndDate(aceItem.getEndDate());
-		aceItemImpl.setPublicationDate(aceItem.getPublicationDate());
-		aceItemImpl.setSectors_(aceItem.getSectors_());
-		aceItemImpl.setElements_(aceItem.getElements_());
-		aceItemImpl.setClimateimpacts_(aceItem.getClimateimpacts_());
+		nasSourceImpl.setNassourceid(nasSource.getNassourceid());
+		nasSourceImpl.setNasId(nasSource.getNasId());
+		nasSourceImpl.setName(nasSource.getName());
+		nasSourceImpl.setCompanyId(nasSource.getCompanyId());
+		nasSourceImpl.setGroupId(nasSource.getGroupId());
 
-		return aceItemImpl;
+		return nasSourceImpl;
 	}
 
 	/**
-	 * Finds the ace item with the primary key or throws a {@link com.liferay.portal.NoSuchModelException} if it could not be found.
+	 * Finds the n a s source with the primary key or throws a {@link com.liferay.portal.NoSuchModelException} if it could not be found.
 	 *
-	 * @param primaryKey the primary key of the ace item to find
-	 * @return the ace item
-	 * @throws com.liferay.portal.NoSuchModelException if a ace item with the primary key could not be found
+	 * @param primaryKey the primary key of the n a s source to find
+	 * @return the n a s source
+	 * @throws com.liferay.portal.NoSuchModelException if a n a s source with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
-	public AceItem findByPrimaryKey(Serializable primaryKey)
+	public NASSource findByPrimaryKey(Serializable primaryKey)
 		throws NoSuchModelException, SystemException {
 		return findByPrimaryKey(((Long)primaryKey).longValue());
 	}
 
 	/**
-	 * Finds the ace item with the primary key or throws a {@link nl.wur.alterra.cgi.ace.NoSuchItemException} if it could not be found.
+	 * Finds the n a s source with the primary key or throws a {@link nl.wur.alterra.cgi.ace.NoSuchNASSourceException} if it could not be found.
 	 *
-	 * @param aceItemId the primary key of the ace item to find
-	 * @return the ace item
-	 * @throws nl.wur.alterra.cgi.ace.NoSuchItemException if a ace item with the primary key could not be found
+	 * @param nassourceid the primary key of the n a s source to find
+	 * @return the n a s source
+	 * @throws nl.wur.alterra.cgi.ace.NoSuchNASSourceException if a n a s source with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
-	public AceItem findByPrimaryKey(long aceItemId)
-		throws NoSuchItemException, SystemException {
-		AceItem aceItem = fetchByPrimaryKey(aceItemId);
+	public NASSource findByPrimaryKey(long nassourceid)
+		throws NoSuchNASSourceException, SystemException {
+		NASSource nasSource = fetchByPrimaryKey(nassourceid);
 
-		if (aceItem == null) {
+		if (nasSource == null) {
 			if (_log.isWarnEnabled()) {
-				_log.warn(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY + aceItemId);
+				_log.warn(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY + nassourceid);
 			}
 
-			throw new NoSuchItemException(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY +
-				aceItemId);
+			throw new NoSuchNASSourceException(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY +
+				nassourceid);
 		}
 
-		return aceItem;
+		return nasSource;
 	}
 
 	/**
-	 * Finds the ace item with the primary key or returns <code>null</code> if it could not be found.
+	 * Finds the n a s source with the primary key or returns <code>null</code> if it could not be found.
 	 *
-	 * @param primaryKey the primary key of the ace item to find
-	 * @return the ace item, or <code>null</code> if a ace item with the primary key could not be found
+	 * @param primaryKey the primary key of the n a s source to find
+	 * @return the n a s source, or <code>null</code> if a n a s source with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
-	public AceItem fetchByPrimaryKey(Serializable primaryKey)
+	public NASSource fetchByPrimaryKey(Serializable primaryKey)
 		throws SystemException {
 		return fetchByPrimaryKey(((Long)primaryKey).longValue());
 	}
 
 	/**
-	 * Finds the ace item with the primary key or returns <code>null</code> if it could not be found.
+	 * Finds the n a s source with the primary key or returns <code>null</code> if it could not be found.
 	 *
-	 * @param aceItemId the primary key of the ace item to find
-	 * @return the ace item, or <code>null</code> if a ace item with the primary key could not be found
+	 * @param nassourceid the primary key of the n a s source to find
+	 * @return the n a s source, or <code>null</code> if a n a s source with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
-	public AceItem fetchByPrimaryKey(long aceItemId) throws SystemException {
-		AceItem aceItem = (AceItem)EntityCacheUtil.getResult(AceItemModelImpl.ENTITY_CACHE_ENABLED,
-				AceItemImpl.class, aceItemId, this);
+	public NASSource fetchByPrimaryKey(long nassourceid)
+		throws SystemException {
+		NASSource nasSource = (NASSource)EntityCacheUtil.getResult(NASSourceModelImpl.ENTITY_CACHE_ENABLED,
+				NASSourceImpl.class, nassourceid, this);
 
-		if (aceItem == null) {
+		if (nasSource == null) {
 			Session session = null;
 
 			try {
 				session = openSession();
 
-				aceItem = (AceItem)session.get(AceItemImpl.class,
-						new Long(aceItemId));
+				nasSource = (NASSource)session.get(NASSourceImpl.class,
+						new Long(nassourceid));
 			}
 			catch (Exception e) {
 				throw processException(e);
 			}
 			finally {
-				if (aceItem != null) {
-					cacheResult(aceItem);
+				if (nasSource != null) {
+					cacheResult(nasSource);
 				}
 
 				closeSession(session);
 			}
 		}
 
-		return aceItem;
+		return nasSource;
 	}
 
 	/**
-	 * Finds all the ace items where groupId = &#63;.
+	 * Finds all the n a s sources where groupId = &#63;.
 	 *
 	 * @param groupId the group id to search with
-	 * @return the matching ace items
+	 * @return the matching n a s sources
 	 * @throws SystemException if a system exception occurred
 	 */
-	public List<AceItem> findByGroupId(long groupId) throws SystemException {
+	public List<NASSource> findByGroupId(long groupId)
+		throws SystemException {
 		return findByGroupId(groupId, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
 	/**
-	 * Finds a range of all the ace items where groupId = &#63;.
+	 * Finds a range of all the n a s sources where groupId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
 	 * @param groupId the group id to search with
-	 * @param start the lower bound of the range of ace items to return
-	 * @param end the upper bound of the range of ace items to return (not inclusive)
-	 * @return the range of matching ace items
+	 * @param start the lower bound of the range of n a s sources to return
+	 * @param end the upper bound of the range of n a s sources to return (not inclusive)
+	 * @return the range of matching n a s sources
 	 * @throws SystemException if a system exception occurred
 	 */
-	public List<AceItem> findByGroupId(long groupId, int start, int end)
+	public List<NASSource> findByGroupId(long groupId, int start, int end)
 		throws SystemException {
 		return findByGroupId(groupId, start, end, null);
 	}
 
 	/**
-	 * Finds an ordered range of all the ace items where groupId = &#63;.
+	 * Finds an ordered range of all the n a s sources where groupId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
 	 * @param groupId the group id to search with
-	 * @param start the lower bound of the range of ace items to return
-	 * @param end the upper bound of the range of ace items to return (not inclusive)
+	 * @param start the lower bound of the range of n a s sources to return
+	 * @param end the upper bound of the range of n a s sources to return (not inclusive)
 	 * @param orderByComparator the comparator to order the results by
-	 * @return the ordered range of matching ace items
+	 * @return the ordered range of matching n a s sources
 	 * @throws SystemException if a system exception occurred
 	 */
-	public List<AceItem> findByGroupId(long groupId, int start, int end,
+	public List<NASSource> findByGroupId(long groupId, int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
 				groupId,
@@ -446,7 +434,7 @@ public class AceItemPersistenceImpl extends BasePersistenceImpl<AceItem>
 				String.valueOf(orderByComparator)
 			};
 
-		List<AceItem> list = (List<AceItem>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_GROUPID,
+		List<NASSource> list = (List<NASSource>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_GROUPID,
 				finderArgs, this);
 
 		if (list == null) {
@@ -465,7 +453,7 @@ public class AceItemPersistenceImpl extends BasePersistenceImpl<AceItem>
 					query = new StringBundler(3);
 				}
 
-				query.append(_SQL_SELECT_ACEITEM_WHERE);
+				query.append(_SQL_SELECT_NASSOURCE_WHERE);
 
 				query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
 
@@ -475,7 +463,7 @@ public class AceItemPersistenceImpl extends BasePersistenceImpl<AceItem>
 				}
 
 				else {
-					query.append(AceItemModelImpl.ORDER_BY_JPQL);
+					query.append(NASSourceModelImpl.ORDER_BY_JPQL);
 				}
 
 				String sql = query.toString();
@@ -486,14 +474,15 @@ public class AceItemPersistenceImpl extends BasePersistenceImpl<AceItem>
 
 				qPos.add(groupId);
 
-				list = (List<AceItem>)QueryUtil.list(q, getDialect(), start, end);
+				list = (List<NASSource>)QueryUtil.list(q, getDialect(), start,
+						end);
 			}
 			catch (Exception e) {
 				throw processException(e);
 			}
 			finally {
 				if (list == null) {
-					list = new ArrayList<AceItem>();
+					list = new ArrayList<NASSource>();
 				}
 
 				cacheResult(list);
@@ -509,7 +498,7 @@ public class AceItemPersistenceImpl extends BasePersistenceImpl<AceItem>
 	}
 
 	/**
-	 * Finds the first ace item in the ordered set where groupId = &#63;.
+	 * Finds the first n a s source in the ordered set where groupId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
@@ -517,14 +506,14 @@ public class AceItemPersistenceImpl extends BasePersistenceImpl<AceItem>
 	 *
 	 * @param groupId the group id to search with
 	 * @param orderByComparator the comparator to order the set by
-	 * @return the first matching ace item
-	 * @throws nl.wur.alterra.cgi.ace.NoSuchItemException if a matching ace item could not be found
+	 * @return the first matching n a s source
+	 * @throws nl.wur.alterra.cgi.ace.NoSuchNASSourceException if a matching n a s source could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
-	public AceItem findByGroupId_First(long groupId,
+	public NASSource findByGroupId_First(long groupId,
 		OrderByComparator orderByComparator)
-		throws NoSuchItemException, SystemException {
-		List<AceItem> list = findByGroupId(groupId, 0, 1, orderByComparator);
+		throws NoSuchNASSourceException, SystemException {
+		List<NASSource> list = findByGroupId(groupId, 0, 1, orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(4);
@@ -536,7 +525,7 @@ public class AceItemPersistenceImpl extends BasePersistenceImpl<AceItem>
 
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
 
-			throw new NoSuchItemException(msg.toString());
+			throw new NoSuchNASSourceException(msg.toString());
 		}
 		else {
 			return list.get(0);
@@ -544,7 +533,7 @@ public class AceItemPersistenceImpl extends BasePersistenceImpl<AceItem>
 	}
 
 	/**
-	 * Finds the last ace item in the ordered set where groupId = &#63;.
+	 * Finds the last n a s source in the ordered set where groupId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
@@ -552,16 +541,16 @@ public class AceItemPersistenceImpl extends BasePersistenceImpl<AceItem>
 	 *
 	 * @param groupId the group id to search with
 	 * @param orderByComparator the comparator to order the set by
-	 * @return the last matching ace item
-	 * @throws nl.wur.alterra.cgi.ace.NoSuchItemException if a matching ace item could not be found
+	 * @return the last matching n a s source
+	 * @throws nl.wur.alterra.cgi.ace.NoSuchNASSourceException if a matching n a s source could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
-	public AceItem findByGroupId_Last(long groupId,
+	public NASSource findByGroupId_Last(long groupId,
 		OrderByComparator orderByComparator)
-		throws NoSuchItemException, SystemException {
+		throws NoSuchNASSourceException, SystemException {
 		int count = countByGroupId(groupId);
 
-		List<AceItem> list = findByGroupId(groupId, count - 1, count,
+		List<NASSource> list = findByGroupId(groupId, count - 1, count,
 				orderByComparator);
 
 		if (list.isEmpty()) {
@@ -574,7 +563,7 @@ public class AceItemPersistenceImpl extends BasePersistenceImpl<AceItem>
 
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
 
-			throw new NoSuchItemException(msg.toString());
+			throw new NoSuchNASSourceException(msg.toString());
 		}
 		else {
 			return list.get(0);
@@ -582,37 +571,37 @@ public class AceItemPersistenceImpl extends BasePersistenceImpl<AceItem>
 	}
 
 	/**
-	 * Finds the ace items before and after the current ace item in the ordered set where groupId = &#63;.
+	 * Finds the n a s sources before and after the current n a s source in the ordered set where groupId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param aceItemId the primary key of the current ace item
+	 * @param nassourceid the primary key of the current n a s source
 	 * @param groupId the group id to search with
 	 * @param orderByComparator the comparator to order the set by
-	 * @return the previous, current, and next ace item
-	 * @throws nl.wur.alterra.cgi.ace.NoSuchItemException if a ace item with the primary key could not be found
+	 * @return the previous, current, and next n a s source
+	 * @throws nl.wur.alterra.cgi.ace.NoSuchNASSourceException if a n a s source with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
-	public AceItem[] findByGroupId_PrevAndNext(long aceItemId, long groupId,
-		OrderByComparator orderByComparator)
-		throws NoSuchItemException, SystemException {
-		AceItem aceItem = findByPrimaryKey(aceItemId);
+	public NASSource[] findByGroupId_PrevAndNext(long nassourceid,
+		long groupId, OrderByComparator orderByComparator)
+		throws NoSuchNASSourceException, SystemException {
+		NASSource nasSource = findByPrimaryKey(nassourceid);
 
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			AceItem[] array = new AceItemImpl[3];
+			NASSource[] array = new NASSourceImpl[3];
 
-			array[0] = getByGroupId_PrevAndNext(session, aceItem, groupId,
+			array[0] = getByGroupId_PrevAndNext(session, nasSource, groupId,
 					orderByComparator, true);
 
-			array[1] = aceItem;
+			array[1] = nasSource;
 
-			array[2] = getByGroupId_PrevAndNext(session, aceItem, groupId,
+			array[2] = getByGroupId_PrevAndNext(session, nasSource, groupId,
 					orderByComparator, false);
 
 			return array;
@@ -625,8 +614,8 @@ public class AceItemPersistenceImpl extends BasePersistenceImpl<AceItem>
 		}
 	}
 
-	protected AceItem getByGroupId_PrevAndNext(Session session,
-		AceItem aceItem, long groupId, OrderByComparator orderByComparator,
+	protected NASSource getByGroupId_PrevAndNext(Session session,
+		NASSource nasSource, long groupId, OrderByComparator orderByComparator,
 		boolean previous) {
 		StringBundler query = null;
 
@@ -638,7 +627,7 @@ public class AceItemPersistenceImpl extends BasePersistenceImpl<AceItem>
 			query = new StringBundler(3);
 		}
 
-		query.append(_SQL_SELECT_ACEITEM_WHERE);
+		query.append(_SQL_SELECT_NASSOURCE_WHERE);
 
 		query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
 
@@ -697,7 +686,7 @@ public class AceItemPersistenceImpl extends BasePersistenceImpl<AceItem>
 		}
 
 		else {
-			query.append(AceItemModelImpl.ORDER_BY_JPQL);
+			query.append(NASSourceModelImpl.ORDER_BY_JPQL);
 		}
 
 		String sql = query.toString();
@@ -712,14 +701,14 @@ public class AceItemPersistenceImpl extends BasePersistenceImpl<AceItem>
 		qPos.add(groupId);
 
 		if (orderByComparator != null) {
-			Object[] values = orderByComparator.getOrderByValues(aceItem);
+			Object[] values = orderByComparator.getOrderByValues(nasSource);
 
 			for (Object value : values) {
 				qPos.add(value);
 			}
 		}
 
-		List<AceItem> list = q.list();
+		List<NASSource> list = q.list();
 
 		if (list.size() == 2) {
 			return list.get(1);
@@ -730,52 +719,53 @@ public class AceItemPersistenceImpl extends BasePersistenceImpl<AceItem>
 	}
 
 	/**
-	 * Finds all the ace items.
+	 * Finds all the n a s sources.
 	 *
-	 * @return the ace items
+	 * @return the n a s sources
 	 * @throws SystemException if a system exception occurred
 	 */
-	public List<AceItem> findAll() throws SystemException {
+	public List<NASSource> findAll() throws SystemException {
 		return findAll(QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
 	/**
-	 * Finds a range of all the ace items.
+	 * Finds a range of all the n a s sources.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param start the lower bound of the range of ace items to return
-	 * @param end the upper bound of the range of ace items to return (not inclusive)
-	 * @return the range of ace items
+	 * @param start the lower bound of the range of n a s sources to return
+	 * @param end the upper bound of the range of n a s sources to return (not inclusive)
+	 * @return the range of n a s sources
 	 * @throws SystemException if a system exception occurred
 	 */
-	public List<AceItem> findAll(int start, int end) throws SystemException {
+	public List<NASSource> findAll(int start, int end)
+		throws SystemException {
 		return findAll(start, end, null);
 	}
 
 	/**
-	 * Finds an ordered range of all the ace items.
+	 * Finds an ordered range of all the n a s sources.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param start the lower bound of the range of ace items to return
-	 * @param end the upper bound of the range of ace items to return (not inclusive)
+	 * @param start the lower bound of the range of n a s sources to return
+	 * @param end the upper bound of the range of n a s sources to return (not inclusive)
 	 * @param orderByComparator the comparator to order the results by
-	 * @return the ordered range of ace items
+	 * @return the ordered range of n a s sources
 	 * @throws SystemException if a system exception occurred
 	 */
-	public List<AceItem> findAll(int start, int end,
+	public List<NASSource> findAll(int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
 				String.valueOf(start), String.valueOf(end),
 				String.valueOf(orderByComparator)
 			};
 
-		List<AceItem> list = (List<AceItem>)FinderCacheUtil.getResult(FINDER_PATH_FIND_ALL,
+		List<NASSource> list = (List<NASSource>)FinderCacheUtil.getResult(FINDER_PATH_FIND_ALL,
 				finderArgs, this);
 
 		if (list == null) {
@@ -791,7 +781,7 @@ public class AceItemPersistenceImpl extends BasePersistenceImpl<AceItem>
 					query = new StringBundler(2 +
 							(orderByComparator.getOrderByFields().length * 3));
 
-					query.append(_SQL_SELECT_ACEITEM);
+					query.append(_SQL_SELECT_NASSOURCE);
 
 					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
 						orderByComparator);
@@ -799,19 +789,19 @@ public class AceItemPersistenceImpl extends BasePersistenceImpl<AceItem>
 					sql = query.toString();
 				}
 				else {
-					sql = _SQL_SELECT_ACEITEM.concat(AceItemModelImpl.ORDER_BY_JPQL);
+					sql = _SQL_SELECT_NASSOURCE.concat(NASSourceModelImpl.ORDER_BY_JPQL);
 				}
 
 				Query q = session.createQuery(sql);
 
 				if (orderByComparator == null) {
-					list = (List<AceItem>)QueryUtil.list(q, getDialect(),
+					list = (List<NASSource>)QueryUtil.list(q, getDialect(),
 							start, end, false);
 
 					Collections.sort(list);
 				}
 				else {
-					list = (List<AceItem>)QueryUtil.list(q, getDialect(),
+					list = (List<NASSource>)QueryUtil.list(q, getDialect(),
 							start, end);
 				}
 			}
@@ -820,7 +810,7 @@ public class AceItemPersistenceImpl extends BasePersistenceImpl<AceItem>
 			}
 			finally {
 				if (list == null) {
-					list = new ArrayList<AceItem>();
+					list = new ArrayList<NASSource>();
 				}
 
 				cacheResult(list);
@@ -835,33 +825,33 @@ public class AceItemPersistenceImpl extends BasePersistenceImpl<AceItem>
 	}
 
 	/**
-	 * Removes all the ace items where groupId = &#63; from the database.
+	 * Removes all the n a s sources where groupId = &#63; from the database.
 	 *
 	 * @param groupId the group id to search with
 	 * @throws SystemException if a system exception occurred
 	 */
 	public void removeByGroupId(long groupId) throws SystemException {
-		for (AceItem aceItem : findByGroupId(groupId)) {
-			remove(aceItem);
+		for (NASSource nasSource : findByGroupId(groupId)) {
+			remove(nasSource);
 		}
 	}
 
 	/**
-	 * Removes all the ace items from the database.
+	 * Removes all the n a s sources from the database.
 	 *
 	 * @throws SystemException if a system exception occurred
 	 */
 	public void removeAll() throws SystemException {
-		for (AceItem aceItem : findAll()) {
-			remove(aceItem);
+		for (NASSource nasSource : findAll()) {
+			remove(nasSource);
 		}
 	}
 
 	/**
-	 * Counts all the ace items where groupId = &#63;.
+	 * Counts all the n a s sources where groupId = &#63;.
 	 *
 	 * @param groupId the group id to search with
-	 * @return the number of matching ace items
+	 * @return the number of matching n a s sources
 	 * @throws SystemException if a system exception occurred
 	 */
 	public int countByGroupId(long groupId) throws SystemException {
@@ -878,7 +868,7 @@ public class AceItemPersistenceImpl extends BasePersistenceImpl<AceItem>
 
 				StringBundler query = new StringBundler(2);
 
-				query.append(_SQL_COUNT_ACEITEM_WHERE);
+				query.append(_SQL_COUNT_NASSOURCE_WHERE);
 
 				query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
 
@@ -911,9 +901,9 @@ public class AceItemPersistenceImpl extends BasePersistenceImpl<AceItem>
 	}
 
 	/**
-	 * Counts all the ace items.
+	 * Counts all the n a s sources.
 	 *
-	 * @return the number of ace items
+	 * @return the number of n a s sources
 	 * @throws SystemException if a system exception occurred
 	 */
 	public int countAll() throws SystemException {
@@ -928,7 +918,7 @@ public class AceItemPersistenceImpl extends BasePersistenceImpl<AceItem>
 			try {
 				session = openSession();
 
-				Query q = session.createQuery(_SQL_COUNT_ACEITEM);
+				Query q = session.createQuery(_SQL_COUNT_NASSOURCE);
 
 				count = (Long)q.uniqueResult();
 			}
@@ -951,19 +941,19 @@ public class AceItemPersistenceImpl extends BasePersistenceImpl<AceItem>
 	}
 
 	/**
-	 * Initializes the ace item persistence.
+	 * Initializes the n a s source persistence.
 	 */
 	public void afterPropertiesSet() {
 		String[] listenerClassNames = StringUtil.split(GetterUtil.getString(
 					com.liferay.util.service.ServiceProps.get(
-						"value.object.listener.nl.wur.alterra.cgi.ace.model.AceItem")));
+						"value.object.listener.nl.wur.alterra.cgi.ace.model.NASSource")));
 
 		if (listenerClassNames.length > 0) {
 			try {
-				List<ModelListener<AceItem>> listenersList = new ArrayList<ModelListener<AceItem>>();
+				List<ModelListener<NASSource>> listenersList = new ArrayList<ModelListener<NASSource>>();
 
 				for (String listenerClassName : listenerClassNames) {
-					listenersList.add((ModelListener<AceItem>)InstanceFactory.newInstance(
+					listenersList.add((ModelListener<NASSource>)InstanceFactory.newInstance(
 							listenerClassName));
 				}
 
@@ -987,13 +977,13 @@ public class AceItemPersistenceImpl extends BasePersistenceImpl<AceItem>
 	protected UserPersistence userPersistence;
 	@BeanReference(type = AssetEntryPersistence.class)
 	protected AssetEntryPersistence assetEntryPersistence;
-	private static final String _SQL_SELECT_ACEITEM = "SELECT aceItem FROM AceItem aceItem";
-	private static final String _SQL_SELECT_ACEITEM_WHERE = "SELECT aceItem FROM AceItem aceItem WHERE ";
-	private static final String _SQL_COUNT_ACEITEM = "SELECT COUNT(aceItem) FROM AceItem aceItem";
-	private static final String _SQL_COUNT_ACEITEM_WHERE = "SELECT COUNT(aceItem) FROM AceItem aceItem WHERE ";
-	private static final String _FINDER_COLUMN_GROUPID_GROUPID_2 = "aceItem.groupId = ?";
-	private static final String _ORDER_BY_ENTITY_ALIAS = "aceItem.";
-	private static final String _NO_SUCH_ENTITY_WITH_PRIMARY_KEY = "No AceItem exists with the primary key ";
-	private static final String _NO_SUCH_ENTITY_WITH_KEY = "No AceItem exists with the key {";
-	private static Log _log = LogFactoryUtil.getLog(AceItemPersistenceImpl.class);
+	private static final String _SQL_SELECT_NASSOURCE = "SELECT nasSource FROM NASSource nasSource";
+	private static final String _SQL_SELECT_NASSOURCE_WHERE = "SELECT nasSource FROM NASSource nasSource WHERE ";
+	private static final String _SQL_COUNT_NASSOURCE = "SELECT COUNT(nasSource) FROM NASSource nasSource";
+	private static final String _SQL_COUNT_NASSOURCE_WHERE = "SELECT COUNT(nasSource) FROM NASSource nasSource WHERE ";
+	private static final String _FINDER_COLUMN_GROUPID_GROUPID_2 = "nasSource.groupId = ?";
+	private static final String _ORDER_BY_ENTITY_ALIAS = "nasSource.";
+	private static final String _NO_SUCH_ENTITY_WITH_PRIMARY_KEY = "No NASSource exists with the primary key ";
+	private static final String _NO_SUCH_ENTITY_WITH_KEY = "No NASSource exists with the key {";
+	private static Log _log = LogFactoryUtil.getLog(NASSourcePersistenceImpl.class);
 }

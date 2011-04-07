@@ -32,6 +32,10 @@ public class ACEIndexConstant {
          */
         public static final String DATE_SORT = "datesort";
         /**
+         * To sort by AceItem sector.
+         */
+        public static final String SECTOR_SORT = "sectorsort";
+        /**
          * To sort by AceItem name.
          */
         public static final String NAME_SORT = "namesort";

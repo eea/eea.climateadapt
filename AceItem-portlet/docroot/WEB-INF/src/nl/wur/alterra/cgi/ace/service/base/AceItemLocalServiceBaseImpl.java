@@ -37,8 +37,10 @@ import com.liferay.portlet.asset.service.persistence.AssetEntryPersistence;
 import nl.wur.alterra.cgi.ace.model.AceItem;
 import nl.wur.alterra.cgi.ace.service.AceItemLocalService;
 import nl.wur.alterra.cgi.ace.service.NASLocalService;
+import nl.wur.alterra.cgi.ace.service.NASSourceLocalService;
 import nl.wur.alterra.cgi.ace.service.persistence.AceItemPersistence;
 import nl.wur.alterra.cgi.ace.service.persistence.NASPersistence;
+import nl.wur.alterra.cgi.ace.service.persistence.NASSourcePersistence;
 
 import java.util.List;
 
@@ -312,6 +314,44 @@ public abstract class AceItemLocalServiceBaseImpl implements AceItemLocalService
 	}
 
 	/**
+	 * Gets the n a s source local service.
+	 *
+	 * @return the n a s source local service
+	 */
+	public NASSourceLocalService getNASSourceLocalService() {
+		return nasSourceLocalService;
+	}
+
+	/**
+	 * Sets the n a s source local service.
+	 *
+	 * @param nasSourceLocalService the n a s source local service
+	 */
+	public void setNASSourceLocalService(
+		NASSourceLocalService nasSourceLocalService) {
+		this.nasSourceLocalService = nasSourceLocalService;
+	}
+
+	/**
+	 * Gets the n a s source persistence.
+	 *
+	 * @return the n a s source persistence
+	 */
+	public NASSourcePersistence getNASSourcePersistence() {
+		return nasSourcePersistence;
+	}
+
+	/**
+	 * Sets the n a s source persistence.
+	 *
+	 * @param nasSourcePersistence the n a s source persistence
+	 */
+	public void setNASSourcePersistence(
+		NASSourcePersistence nasSourcePersistence) {
+		this.nasSourcePersistence = nasSourcePersistence;
+	}
+
+	/**
 	 * Gets the counter local service.
 	 *
 	 * @return the counter local service
@@ -521,6 +561,10 @@ public abstract class AceItemLocalServiceBaseImpl implements AceItemLocalService
 	protected NASLocalService nasLocalService;
 	@BeanReference(type = NASPersistence.class)
 	protected NASPersistence nasPersistence;
+	@BeanReference(type = NASSourceLocalService.class)
+	protected NASSourceLocalService nasSourceLocalService;
+	@BeanReference(type = NASSourcePersistence.class)
+	protected NASSourcePersistence nasSourcePersistence;
 	@BeanReference(type = CounterLocalService.class)
 	protected CounterLocalService counterLocalService;
 	@BeanReference(type = ResourceLocalService.class)
