@@ -122,7 +122,8 @@ public class NASPortlet extends MVCPortlet {
     private List<AceItem> filterAceItems(List<AceItem> aceItemList) {
         List<AceItem> results = new ArrayList<AceItem>();
         for(AceItem aceItem : aceItemList){
-            if(aceItem.getNasId() > 0) {
+            // must be related to NAS, but not the AceItems representing NASs themselves
+            if(aceItem.getNasId() > 0 && !aceItem.getDatatype().equals("NAS")) {
                 results.add(aceItem);
             }
         }
