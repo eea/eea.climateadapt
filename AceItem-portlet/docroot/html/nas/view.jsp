@@ -61,17 +61,33 @@
 		var regionsNAS = $j('.nas-region-row');	
 		var sorted = new Array();
 
-		$j.each(countriesNAS, function(index, value) { 
+		$j.each(countriesNAS, function(index, value) {
+            $j(value).removeClass("nas-row-even");
+            $j(value).removeClass("nas-row-odd");
+
+            if (index % 2 == 0) {
+                $j(value).addClass("nas-row-odd")
+            } else {
+                $j(value).addClass("nas-row-even")
+            }
+
 			sorted.push(value);
 			$j.each(regionsNAS, function(index2, value2) {
 				if(value.id == value2.id) {
+
+                    if (index % 2 == 0) {
+                        $j(value2).addClass("nas-row-odd")
+                    } else {
+                        $j(value2).addClass("nas-row-even")
+                    }
+
 					sorted.push(value2);
 				}
 			});
 		});				
 		allNAS.remove();
 		$j('#nas-header').after(sorted);	
-		$j('.nas-row').hover(function(){ this.style.backgroundColor = '#fdfcdc';},function(){this.style.backgroundColor = '#fff';});			
+		$j('.nas-row').hover(function(){ $j(this).addClass("nas-row-selected");},function(){$j(this).removeClass("nas-row-selected") });
 	}
 	
 	// sorts arrays by natural order of their first element
@@ -292,7 +308,7 @@
 			Progress towards national adaptation strategies (NAS)
 		</h2>
 		
-		<table id="nas-table" style="width:900px"> 
+		<table id="nas-table">
 			<colgroup>
 				<col style="width: 150px;border:solid #000 1px;" />
 				<col style="width: 100px;margin-left:20px;border:solid #000 1px;" />
@@ -308,10 +324,10 @@
 				</tr> 
 			</thead> 
 			<tbody> 
-				<c:forEach var="searchResult" items="${nasResults}">
+				<c:forEach var="searchResult" items="${nasResults}" varStatus="loopStatus">
 					<c:choose>
 						<c:when test="${searchResult.parentNasId > 0}">
-							<tr id="country-${searchResult.parentNasId}" class="nas-row ${searchResult.isoCountry}-row nas-region-row"> 
+							<tr id="country-${searchResult.parentNasId}"class="nas-row ${searchResult.isoCountry}-row nas-region-row">
 								<td valign="top">
 									<c:out value="${searchResult.name}"/>
 								</td> 

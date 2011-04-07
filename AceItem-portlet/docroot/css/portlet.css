@@ -16,6 +16,18 @@
 	float:left;
 	width:35%;
 }
+.nas-row-even {
+    background-color: #F7F6ED;
+}
+
+.nas-row-odd {
+    background-color: #ffffff;
+}
+
+.nas-row-selected {
+    background-color: #fdfcdc;
+}
+
 .nas-row td {
 	padding: 5px 20px 0px 20px;
 }
