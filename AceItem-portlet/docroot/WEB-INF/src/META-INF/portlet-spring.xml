@@ -11,4 +11,9 @@
 		<property name="service" ref="nl.wur.alterra.cgi.ace.service.NASLocalService" />
 	</bean>
 	<bean id="nl.wur.alterra.cgi.ace.service.persistence.NASPersistence" class="nl.wur.alterra.cgi.ace.service.persistence.NASPersistenceImpl" parent="basePersistence" />
+	<bean id="nl.wur.alterra.cgi.ace.service.NASSourceLocalService" class="nl.wur.alterra.cgi.ace.service.impl.NASSourceLocalServiceImpl" />
+	<bean id="nl.wur.alterra.cgi.ace.service.NASSourceLocalServiceUtil" class="nl.wur.alterra.cgi.ace.service.NASSourceLocalServiceUtil">
+		<property name="service" ref="nl.wur.alterra.cgi.ace.service.NASSourceLocalService" />
+	</bean>
+	<bean id="nl.wur.alterra.cgi.ace.service.persistence.NASSourcePersistence" class="nl.wur.alterra.cgi.ace.service.persistence.NASSourcePersistenceImpl" parent="basePersistence" />
 </beans>

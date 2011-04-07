@@ -47,6 +47,18 @@
 			<basic name="adoptedDescription" />
 			<basic name="companyId" />
 			<basic name="groupId" />
+			<basic name="parentNasId" />
+			<basic name="isoCountry" />
+			<transient name="primaryKey" />
+		</attributes>
+	</mapped-superclass>
+	<mapped-superclass class="nl.wur.alterra.cgi.ace.model.impl.NASSourceModelImpl">
+		<attributes>
+			<id name="nassourceid" />
+			<basic name="nasId" />
+			<basic name="name" />
+			<basic name="companyId" />
+			<basic name="groupId" />
 			<transient name="primaryKey" />
 		</attributes>
 	</mapped-superclass>
@@ -56,6 +68,10 @@
 	</entity>
 	<entity class="nl.wur.alterra.cgi.ace.model.impl.NASImpl" name="NAS">
 		<table name="Ace_NAS" />
+		<attributes />
+	</entity>
+	<entity class="nl.wur.alterra.cgi.ace.model.impl.NASSourceImpl" name="NASSource">
+		<table name="Ace_NASSource" />
 		<attributes />
 	</entity>
 </entity-mappings>

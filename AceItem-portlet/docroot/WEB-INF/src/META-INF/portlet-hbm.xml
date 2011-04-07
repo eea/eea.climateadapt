@@ -4,6 +4,7 @@
 <hibernate-mapping default-lazy="false" auto-import="false">
 	<import class="nl.wur.alterra.cgi.ace.model.AceItem" />
 	<import class="nl.wur.alterra.cgi.ace.model.NAS" />
+	<import class="nl.wur.alterra.cgi.ace.model.NASSource" />
 	<class name="nl.wur.alterra.cgi.ace.model.impl.AceItemImpl" table="Ace_AceItem">
 		<cache usage="read-write" />
 		<id name="aceItemId" type="long">
@@ -38,6 +39,18 @@
 		<property name="name" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="adoptedStatus" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="adoptedDescription" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="companyId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="groupId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="parentNasId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="isoCountry" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+	</class>
+	<class name="nl.wur.alterra.cgi.ace.model.impl.NASSourceImpl" table="Ace_NASSource">
+		<cache usage="read-write" />
+		<id name="nassourceid" type="long">
+			<generator class="assigned" />
+		</id>
+		<property name="nasId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="name" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="companyId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 		<property name="groupId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 	</class>

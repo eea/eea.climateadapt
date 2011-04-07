@@ -31,5 +31,14 @@
 		<field name="adoptedDescription" type="String" />
 		<field name="companyId" type="long" />
 		<field name="groupId" type="long" />
+		<field name="parentNasId" type="long" />
+		<field name="isoCountry" type="String" />
+	</model>
+	<model name="nl.wur.alterra.cgi.ace.model.NASSource">
+		<field name="nassourceid" type="long" />
+		<field name="nasId" type="long" />
+		<field name="name" type="String" />
+		<field name="companyId" type="long" />
+		<field name="groupId" type="long" />
 	</model>
 </model-hints>
