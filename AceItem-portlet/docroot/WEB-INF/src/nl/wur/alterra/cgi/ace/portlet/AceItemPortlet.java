@@ -12,6 +12,8 @@ import nl.wur.alterra.cgi.ace.model.AceItem;
 import nl.wur.alterra.cgi.ace.model.impl.AceItemImpl;
 import nl.wur.alterra.cgi.ace.search.lucene.ACEIndexSynchronizer;
 import nl.wur.alterra.cgi.ace.service.AceItemLocalServiceUtil;
+import nl.wur.alterra.cgi.ace.model.impl.AceItemSector;
+import nl.wur.alterra.cgi.ace.model.impl.AceItemElement;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
@@ -83,8 +85,30 @@ public class AceItemPortlet extends MVCPortlet {
 		aceitem.setDatatype(ParamUtil.getString(request, "datatype"));
 		aceitem.setStoredAt(ParamUtil.getString(request, "storedAt"));
 		aceitem.setStoragetype(ParamUtil.getString(request, "storagetype"));
-		aceitem.setSectors_(ParamUtil.getString(request, "sectors_"));
-		aceitem.setElements_(ParamUtil.getString(request, "elements_"));
+		
+		String choosensectors = "";
+		for(AceItemSector aceitemsector : AceItemSector.values() ) {
+			
+			if( ParamUtil.getString(request, "chk_sectors_" + aceitemsector.toString()) != null )  {
+				String s =  ParamUtil.getString(request, "chk_sectors_" + aceitemsector.toString());
+				if(s.equalsIgnoreCase(aceitemsector.toString())) {				
+					choosensectors +=  aceitemsector.toString() + ";";
+				}
+			}
+		}
+		aceitem.setSectors_(choosensectors);
+		
+		String choosenelements = "";
+		for(AceItemElement aceitemelement : AceItemElement.values() ) {
+			if( ParamUtil.getString(request, "chk_elements_" + aceitemelement) != null )  {
+				String e =  ParamUtil.getString(request, "chk_elements_" + aceitemelement);
+				if(e.equalsIgnoreCase(aceitemelement.toString())) {
+					choosenelements +=  aceitemelement.toString() + ";";
+				}
+			}
+		}		
+		aceitem.setElements_(choosenelements);
+		
 		aceitem.setClimateimpacts_(ParamUtil.getString(request, "climateimpacts_"));
 		aceitem.setTextSearch(ParamUtil.getString(request, "textSearch"));
 		aceitem.setKeyword(ParamUtil.getString(request, "keyword"));

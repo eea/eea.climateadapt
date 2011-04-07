@@ -1,37 +1,4 @@
-create table Ace_AceClimateImpact (
-	impactId bigint not null primary key,
-	impact VARCHAR(75) null
-);
-
-create table Ace_AceElement (
-	elementId bigint not null primary key,
-	element VARCHAR(75) null
-);
-
-create table Ace_AceSector (
-	sectorId bigint not null primary key,
-	sector VARCHAR(75) null
-);
-
-create table Ace_Items_ClimateImpacts (
-	aceItemId bigint not null,
-	impactId bigint not null,
-	primary key (aceItemId, impactId)
-);
-
-create table Ace_Items_Elements (
-	aceItemId bigint not null,
-	elementId bigint not null,
-	primary key (aceItemId, elementId)
-);
-
-create table Ace_Items_Sectors (
-	sectorId bigint not null,
-	aceItemId bigint not null,
-	primary key (sectorId, aceItemId)
-);
-
-create table Ace_AceItem (
+create table Ace_Aceitem (
 	aceitemid bigint not null primary key,
 	companyid bigint,
 	groupid bigint,
@@ -79,8 +46,18 @@ CREATE SEQUENCE ace_aceitem_id_seq
   INCREMENT 1
   MINVALUE 1
   MAXVALUE 9223372036854775807
-  START 1
+  START 100402
   CACHE 1;
 ALTER TABLE ace_aceitem_id_seq OWNER TO postgres;
 
 ALTER TABLE ace_aceitem ALTER COLUMN aceitemid SET DEFAULT nextval('ace_aceitem_id_seq'::regclass);
+
+create table ace_nas (
+	nasid bigint not null ,
+	name character varying(255) ,
+	adoptedstatus character varying(255) ,
+	adopteddescription character varying(2048) ,
+	companyid bigint,
+	groupid bigint,
+	CONSTRAINT ace_nas_pkey PRIMARY KEY (nasid)
+);

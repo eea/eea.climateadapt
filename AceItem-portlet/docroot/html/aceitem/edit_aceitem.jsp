@@ -40,13 +40,54 @@
 		<input name="storedAt" type="text" size="120" value="<%= aceitem == null ? "" : aceitem.getStoredAt() %>"><br /><br />
 		
 		<b>storagetype</b><br />	
-		<input name="storagetype" type="text" size="65" value="<%= aceitem == null ? "URL" : aceitem.getStoragetype() %>"><br /><br />
+		<input name="storagetype" type="text" size="65" enabled="false" value="<%= aceitem == null ? "URL" : aceitem.getStoragetype() %>"><br /><br />
 
-		<b>Sectors (A;B;C;D;F;H;I;M;W;)</b><br />
-		<input name="sectors_" type="text" size="65" value="<%= aceitem == null ? "" : aceitem.getSectors_() %>"><br /><br />
+		<b>Sectors</b><br />
+		<!--   input name="sectors_" type="text" size="65" value="< %= aceitem == null ? "" : aceitem.getSectors_() % >"><br /><br / -->
 		
-		<b>Elements(O;V;M;P;E;)</b><br />
-		<input name="elements_" type="text" size="65" value="<%= aceitem == null ? "" : aceitem.getElements_() %>"><br /><br />
+       <%-- note : i18n file should always be in sync with AceItemSector enum --%>	
+		<c:forEach var="adaptationSector" items="<%= nl.wur.alterra.cgi.ace.model.impl.AceItemSector.values() %>" >
+			<div class="check">
+				<c:set var="aceItemSectors" value="<%= aceitem == null ? "" : aceitem.getSectors_() %>" />
+				<c:set var="adaptationSectorMustBeChecked" value="false" />
+				<c:if test="${fn:indexOf(aceItemSectors, adaptationSector)>=0}">
+					<c:set var="adaptationSectorMustBeChecked" value="true" />
+				</c:if>	
+				<c:choose>
+					<c:when test="${adaptationSectorMustBeChecked}">
+						<input type="checkbox" name="chk_sectors_${adaptationSector}" id="chk_sectors_${adaptationSector}" value="${adaptationSector}" checked="checked" />
+					</c:when>
+					<c:otherwise>
+						<input type="checkbox" name="chk_sectors_${adaptationSector}" id="chk_sectors_${adaptationSector}" value="${adaptationSector}" />
+					</c:otherwise>
+				</c:choose>
+				<label for="chk_sectors_${adaptationSector}"><liferay-ui:message key="acesearch-sectors-lbl-${adaptationSector}" /></label>
+			</div>							
+		</c:forEach>
+        <br>
+		
+		<b>Elements</b><br />
+		<%-- note : i18n file should always be in sync with AceItemElement enum --%>
+		<c:forEach var="adaptationElement" items="<%= nl.wur.alterra.cgi.ace.model.impl.AceItemElement.values() %>" >
+			<div class="check">
+				<c:set var="adaptationElementMustBeChecked" value="false" />
+				<c:set var="aceItemElements" value="<%= aceitem == null ? "" : aceitem.getElements_() %>" />
+				<c:set var="adaptationElementMustBeChecked" value="false" />
+				<c:if test="${fn:indexOf(aceItemElements, adaptationElement)>=0}">
+					<c:set var="adaptationElementMustBeChecked" value="true" />
+				</c:if>	
+				<c:choose>
+					<c:when test="${adaptationElementMustBeChecked}">
+						<input type="checkbox" name="chk_elements_${adaptationElement}" id="chk_elements_${adaptationElement}" value="${adaptationElement}" checked="checked" />
+					</c:when>
+					<c:otherwise>
+						<input type="checkbox" name="chk_elements_${adaptationElement}" id="chk_elements_${adaptationElement}" value="${adaptationElement}" />
+					</c:otherwise>
+				</c:choose>
+				<label for="chk_elements_${adaptationElement}"><liferay-ui:message key="acesearch-elements-lbl-${adaptationElement}" /></label>
+			</div>							
+		</c:forEach>
+       <br />
 		
 		<b>Climate Impacts (E;W;D;F;S;I;)</b><br />
 		<input name="climateimpacts_" type="text" size="65" value="<%= aceitem == null ? "" : aceitem.getClimateimpacts_() %>"><br /><br />

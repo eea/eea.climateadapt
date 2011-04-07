@@ -1,36 +1,3 @@
-create table Ace_AceClimateImpact (
-	impactId LONG not null primary key,
-	impact VARCHAR(75) null
-);
-
-create table Ace_AceElement (
-	elementId LONG not null primary key,
-	element VARCHAR(75) null
-);
-
-create table Ace_AceSector (
-	sectorId LONG not null primary key,
-	sector VARCHAR(75) null
-);
-
-create table Ace_Items_ClimateImpacts (
-	aceItemId LONG not null,
-	impactId LONG not null,
-	primary key (aceItemId, impactId)
-);
-
-create table Ace_Items_Elements (
-	aceItemId LONG not null,
-	elementId LONG not null,
-	primary key (aceItemId, elementId)
-);
-
-create table Ace_Items_Sectors (
-	sectorId LONG not null,
-	aceItemId LONG not null,
-	primary key (sectorId, aceItemId)
-);
-
 create table Ace_AceItem (
 	aceItemId LONG not null primary key,
 	companyId LONG,
@@ -61,26 +28,41 @@ create table Ace_NAS (
 	adoptedStatus VARCHAR(75) null,
 	adoptedDescription VARCHAR(75) null,
 	companyId LONG,
+	groupId LONG,
+	parentNasId LONG,
+	isoCountry VARCHAR(75) null
+);
+
+create table Ace_NASSource (
+	nassourceid LONG not null primary key,
+	nasId LONG,
+	name VARCHAR(75) null,
+	companyId LONG,
 	groupId LONG
 );
 
 create table ace_aceitem (
-	aceitemid bigint not null,
+	aceitemid bigint not null primary key,
 	companyid bigint,
 	groupid bigint,
-	name character varying(254) ,
-	description text ,
-	type_ character varying(254) ,
-	storedat character varying(254),
-	sector character varying(254) ,
-	pilar character varying(254) ,
-	textsearch text ,
-	keyword character varying(254) ,
-	nutsid character varying(75) ,
-	nutslevel character varying(75),
-	startdate  timestamp without time zone,
-	enddate  timestamp without time zone,
-  CONSTRAINT ace_aceitem_pkey PRIMARY KEY (aceitemid)
+	nasid bigint,
+	name character varying(255) ,
+	description text,
+	datatype  character varying(255) ,
+	storedat  character varying(255) ,
+	storagetype character varying(255) ,
+	language character varying(24) ,
+	textSearch text,
+	keyword character varying(2048) ,
+	targetresolution character varying(255) ,
+	spatiallayer character varying(75) ,
+	spatialvalues character varying(75) ,
+	startdate timestamp without time zone,
+	enddate timestamp without time zone,
+	publicationDate timestamp without time zone,
+	sectors_ character varying(255) ,
+	elements_ character varying(255) ,
+	climateimpacts_ character varying(255)
 )
 WITH (
   OIDS=FALSE

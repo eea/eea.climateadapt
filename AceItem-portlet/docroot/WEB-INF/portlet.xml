@@ -32,6 +32,8 @@
 			<portlet-mode>EDIT</portlet-mode>
 			<portlet-mode>HELP</portlet-mode>
 		</supports>
+        <!-- Resource Bundle -->
+		<resource-bundle>content.Language</resource-bundle>
 		<portlet-info>
 			<title>AceItem</title>
 			<short-title>AceItemPortlet</short-title>
@@ -178,6 +180,8 @@
     		<mime-type>text/html</mime-type>
     		<portlet-mode>VIEW</portlet-mode>
     	</supports>
+        <!-- Resource Bundle -->
+		<resource-bundle>content.Language</resource-bundle>
     	<portlet-info>
     		<title>ViewAceItemPortlet</title>
     		<short-title>ViewAceItemPortlet</short-title>
