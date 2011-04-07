@@ -9,7 +9,8 @@
     background-color: #ffffff;
 }
 #nas_results {
-	float:right;
+	float:left;
+	margin-left:50px;
 }
 #nas_left_column {
 	float:left;
