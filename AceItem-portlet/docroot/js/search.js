@@ -198,6 +198,21 @@ function showDataInfoPanel() {
 function clearSearchForm() {
     $j("input[name=anyOfThese]").val("");
 
+    var radiosConditionAdaptationSector = $j("input[name=conditionAdaptationSector]:radio");
+
+    radiosConditionAdaptationSector.each(function() {
+        $j(this).attr('checked', false);
+    });
+
+    radiosConditionAdaptationSector.filter('[value=OR]').attr('checked', true);
+
+    var radiosConditionAdaptationElement = $j("input[name=conditionAdaptationElement]:radio");
+
+    radiosConditionAdaptationElement.each(function() {
+        $j(this).attr('checked', false);
+    });
+
+    radiosConditionAdaptationElement.filter('[value=OR]').attr('checked', true);
 
     $j("input[name=aceitemtype]:checkbox").each(function() {
         $j(this).attr('checked', false);
