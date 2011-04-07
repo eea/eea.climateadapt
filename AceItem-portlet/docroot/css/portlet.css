@@ -17,7 +17,7 @@
 	margin-left:50px;
 }
 .nas-row-even {
-    background-color: #F7F6ED;
+    background-color: #FDFCDC;
 }
 
 .nas-row-odd {
@@ -25,7 +25,7 @@
 }
 
 .nas-row-selected {
-    background-color: #fdfcdc;
+    background-color: #FEF5CA;
 }
 
 .nas-row td {
