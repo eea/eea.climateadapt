@@ -33,10 +33,10 @@ String date_type = ParamUtil.getString(request, "date_type");
 if ((date_type == null) || (date_type.equals(""))) date_type = "1";
 
 String conditionAdaptationSector = ParamUtil.getString(request, "conditionAdaptationSector");
-if ((conditionAdaptationSector == null) || (conditionAdaptationSector.equals(""))) conditionAdaptationSector = "OR";
+if ((conditionAdaptationSector == null) || (conditionAdaptationSector.equals(""))) conditionAdaptationSector = "AND";
 
 String conditionAdaptationElement = ParamUtil.getString(request, "conditionAdaptationElement");
-if ((conditionAdaptationElement == null) || (conditionAdaptationElement.equals(""))) conditionAdaptationElement = "OR";
+if ((conditionAdaptationElement == null) || (conditionAdaptationElement.equals(""))) conditionAdaptationElement = "AND";
 
 String[] aceitemtypes = request.getParameterValues("aceitemtype");
 if (aceitemtypes == null) aceitemtypes =  new String[0];

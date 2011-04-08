@@ -114,17 +114,17 @@ public class AceSearchPortlet extends MVCPortlet {
         formBean.setCountries(countries);
         formBean.setSortBy(sortBy);
 
-        if (conditionAdaptationSector != null && conditionAdaptationSector[0].equalsIgnoreCase(AND_CONDITION)) {
-            formBean.setConditionAdaptationSector(AND_CONDITION);
-        } else {
+        if (conditionAdaptationSector != null && conditionAdaptationSector[0].equalsIgnoreCase(OR_CONDITION)) {
             formBean.setConditionAdaptationSector(OR_CONDITION);
+        } else {
+            formBean.setConditionAdaptationSector(AND_CONDITION);
         }
 
 
-        if (conditionAdaptationElement != null && conditionAdaptationElement[0].equalsIgnoreCase(AND_CONDITION)) {
-            formBean.setConditionAdaptationElement(AND_CONDITION);
-        } else {
+        if (conditionAdaptationElement != null && conditionAdaptationElement[0].equalsIgnoreCase(OR_CONDITION)) {
             formBean.setConditionAdaptationElement(OR_CONDITION);
+        } else {
+            formBean.setConditionAdaptationElement(AND_CONDITION);
         }
 
         request.setAttribute(SEARCH_PARAMS, formBean);

@@ -204,7 +204,7 @@ function clearSearchForm() {
         $j(this).attr('checked', false);
     });
 
-    radiosConditionAdaptationSector.filter('[value=OR]').attr('checked', true);
+    radiosConditionAdaptationSector.filter('[value=AND]').attr('checked', true);
 
     var radiosConditionAdaptationElement = $j("input[name=conditionAdaptationElement]:radio");
 
@@ -212,7 +212,7 @@ function clearSearchForm() {
         $j(this).attr('checked', false);
     });
 
-    radiosConditionAdaptationElement.filter('[value=OR]').attr('checked', true);
+    radiosConditionAdaptationElement.filter('[value=AND]').attr('checked', true);
 
     $j("input[name=aceitemtype]:checkbox").each(function() {
         $j(this).attr('checked', false);
