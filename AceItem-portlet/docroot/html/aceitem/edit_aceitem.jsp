@@ -27,7 +27,8 @@
 
 		<aui:input type="hidden" name="aceItemId" value='<%= aceitem == null ? "" : aceitem.getAceItemId() %>'/>
 
-		<aui:input name="name" />
+		<b>name</b><br />	
+		<input name="name" type="text" size="120" value="<%= aceitem == null ? "" : aceitem.getName() %>"><br /><br />
 
 		<b>description</b><br />
 		<textarea name="description" rows=10 cols=100><%= aceitem == null ? "" : aceitem.getDescription() %></textarea>
@@ -115,11 +116,14 @@
 		<b>textsearch</b><br />
 		<textarea name="textSearch" rows=15 cols=100><%= aceitem == null ? "" : aceitem.getTextSearch() %></textarea>
 		
-		<aui:input name="keyword"  />
+		<b>keyword</b><br />	
+		<input name="keyword" type="text" size="120" value="<%= aceitem == null ? "" : aceitem.getKeyword() %>"><br /><br />
 		
-		<aui:input name="spatialLayer"  />
+		<b>spatialLayer</b><br />	
+		<input name="spatialLayer" type="text" size="120" value="<%= aceitem == null ? "" : aceitem.getSpatialLayer() %>"><br /><br />
 		
-		<aui:input name="spatialValues"  />
+		<b>spatialValues</b><br />	
+		<input name="spatialValues" type="text" size="120" value="<%= aceitem == null ? "" : aceitem.getSpatialValues() %>"><br /><br />
 		
 		<!--  a u i :input name="startdate" / >
 		
