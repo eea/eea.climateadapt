@@ -28,7 +28,8 @@
 		<aui:input type="hidden" name="measureId" value='<%= measure == null ? "" : measure.getMeasureId() %>'/>
 
 		<liferay-ui:error key="measurename-required" message="measurename-required" />
-		<aui:input name="name" />
+		<b>name</b><br />	
+		<input name="name" type="text" size="120" value="<%= measure == null ? "" : measure.getName() %>"><br /><br />
 
 		<b>description</b><br />
 		<textarea name="description" rows=10 cols=100><%= measure == null ? "" : measure.getDescription() %></textarea>
@@ -41,9 +42,12 @@
 		
 		<aui:input name="lifetime" />
 		
-		<aui:input name="spatiallayer"  />
+		<b>spatiallayer</b><br />	
+		<input name="spatiallayer" type="text" size="120" value="<%= measure == null ? "" : measure.getSpatiallayer() %>"><br /><br />
 		
-		<aui:input name="spatialvalues"  />
+
+		<b>spatialvalues</b><br />	
+		<input name="spatialvalues" type="text" size="120" value="<%= measure == null ? "" : measure.getSpatialvalues() %>"><br /><br />
 
 		<b>legal aspects</b><br />
 		<textarea name="legalaspects" rows=10 cols=100><%= measure == null ? "" : measure.getLegalaspects() %></textarea>
@@ -67,21 +71,22 @@
 		<b>cost / benefit</b><br />
 		<textarea name="costbenefit" rows=10 cols=100><%= measure == null ? "" : measure.getCostbenefit() %></textarea>
 		<br /><br />
-		
-		<aui:input name="keywords"  />	
+			
+		<b>keywords</b><br />	
+		<input name="keywords" type="text" size="120" value="<%= measure == null ? "" : measure.getKeywords() %>"><br /><br />
 		
 		<aui:input name="language"  />	
 
 		<b>Sectors(A;B;C;D;F;H;I;M;W;)</b><br />
-		<input name="sectors_" type="text" size="65" value="<%= measure == null ? "" : measure.getSectors_() %>">
+		<input name="sectors_" type="text" size="120" value="<%= measure == null ? "" : measure.getSectors_() %>">
 		<br /><br />
 		
 		<b>Elements(O;V;M;P;E;)</b><br />
-		<input name="elements_" type="text" size="65" value="<%= measure == null ? "" : measure.getElements_() %>">
+		<input name="elements_" type="text" size="120" value="<%= measure == null ? "" : measure.getElements_() %>">
 		<br /><br />
 		
 		<b>Climate Impacts (E;W;D;F;S;I;)</b><br />
-		<input name="climateimpacts_" type="text" size="65" value="<%= measure == null ? "" : measure.getClimateimpacts_() %>"><br /><br />
+		<input name="climateimpacts_" type="text" size="120" value="<%= measure == null ? "" : measure.getClimateimpacts_() %>"><br /><br />
 		
 		<b>M (measure) or A (action)</b><br />
 		<input name="mao_type" type="text" size="5" value="<%= measure == null ? "" : measure.getMao_type() %>"><br /><br />
