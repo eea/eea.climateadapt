@@ -59,17 +59,17 @@
 			<liferay-ui:message key="acesearch-elements-lbl-${adaptationElement}" /><br />
 		</c:if>	
 	 </c:forEach>
+	 <br /><br />
 	 
 	 <b>Climate impacts</b><br />
-	 <% 
-	    String c = aceitem.getClimateimpacts_();
-		
-		c = c.replace("FLOODING","Flooding");		
-		c = c.replace("DROUGHT","Drought");		
-		c = c.replace("STORM","Strorm");		
-		c = c.replace("ICEANDSNOW","Ice and Snow");		
-		
-		out.print( c.replace(";","<br />") ); %><br /><br />
+	 <c:set var="aceItemClimateImpacts" value="<%= aceitem.getClimateimpacts_() %>" />
+     <c:forEach var="adaptationClimateImpact" items="<%= nl.wur.alterra.cgi.ace.model.impl.AceItemClimateImpact.values() %>" >
+		<c:if test="${fn:indexOf(aceItemClimateImpacts, adaptationClimateImpact)>=0}">
+			<liferay-ui:message key="aceitem-climateimpacts-lbl-${adaptationClimateImpact}" /><br />
+		</c:if>	
+	 </c:forEach>
+	 <br /><br />
+	 
 	 <b>Website</b><br />
 	 <% out.print(  url ); %><br /><br />
 

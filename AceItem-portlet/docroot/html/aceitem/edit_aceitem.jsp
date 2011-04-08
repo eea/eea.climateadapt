@@ -64,7 +64,7 @@
 				<label for="chk_sectors_${adaptationSector}"><liferay-ui:message key="acesearch-sectors-lbl-${adaptationSector}" /></label>
 			</div>							
 		</c:forEach>
-        <br>
+        <br />
 		
 		<b>Elements</b><br />
 		<%-- note : i18n file should always be in sync with AceItemElement enum --%>
@@ -87,7 +87,7 @@
 				<label for="chk_elements_${adaptationElement}"><liferay-ui:message key="acesearch-elements-lbl-${adaptationElement}" /></label>
 			</div>							
 		</c:forEach>
-       <br /><br />
+       <br />
 		
 		<b>Climate Impacts</b><br />
 		<%-- note : i18n file should always be in sync with AceItemClimateImpact enum --%>
@@ -110,7 +110,7 @@
 				<label for="chk_climateimpacts_${adaptationClimateImpact}"><liferay-ui:message key="aceitem-climateimpacts-lbl-${adaptationClimateImpact}" /></label>
 			</div>							
 		</c:forEach>
-       <br /><br />
+       <br />
        		
 		<b>textsearch</b><br />
 		<textarea name="textSearch" rows=15 cols=100><%= aceitem == null ? "" : aceitem.getTextSearch() %></textarea>
