@@ -72,8 +72,8 @@ public class MeasurePortlet extends MVCPortlet {
 		measure.setName(ParamUtil.getString(request, "name"));
 		measure.setDescription(ParamUtil.getString(request, "description"));
 		measure.setImplementationtype(ParamUtil.getString(request, "implementationtype"));
-		measure.setImplementationtime(ParamUtil.getLong(request, "implementationtime"));
-		measure.setLifetime(ParamUtil.getLong(request, "lifetime"));
+		measure.setImplementationtime(ParamUtil.getString(request, "implementationtime"));
+		measure.setLifetime(ParamUtil.getString(request, "lifetime"));
 		measure.setSpatiallayer(ParamUtil.getString(request, "spatiallayer"));
 		measure.setSpatialvalues(ParamUtil.getString(request, "spatialvalues"));		
 		measure.setLegalaspects(ParamUtil.getString(request, "legalaspects"));
