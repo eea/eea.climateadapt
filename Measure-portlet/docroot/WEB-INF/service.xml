@@ -17,8 +17,8 @@
 		<column name="name" type="String" />
 		<column name="description" type="String" />
 		<column name="implementationtype" type="String" />
-		<column name="implementationtime" type="long" />
-		<column name="lifetime" type="long" />
+		<column name="implementationtime" type="String" />
+		<column name="lifetime" type="String" />
 		<column name="spatiallayer" type="String" />
 		<column name="spatialvalues" type="String" />
 		<column name="legalaspects" type="String" />
