@@ -8,8 +8,8 @@
 		<field name="name" type="String" />
 		<field name="description" type="String" />
 		<field name="implementationtype" type="String" />
-		<field name="implementationtime" type="long" />
-		<field name="lifetime" type="long" />
+		<field name="implementationtime" type="String" />
+		<field name="lifetime" type="String" />
 		<field name="spatiallayer" type="String" />
 		<field name="spatialvalues" type="String" />
 		<field name="legalaspects" type="String" />
