@@ -87,11 +87,31 @@
 				<label for="chk_elements_${adaptationElement}"><liferay-ui:message key="acesearch-elements-lbl-${adaptationElement}" /></label>
 			</div>							
 		</c:forEach>
-       <br />
+       <br /><br />
 		
-		<b>Climate Impacts (E;W;D;F;S;I;)</b><br />
-		<input name="climateimpacts_" type="text" size="65" value="<%= aceitem == null ? "" : aceitem.getClimateimpacts_() %>"><br /><br />
-		
+		<b>Climate Impacts</b><br />
+		<%-- note : i18n file should always be in sync with AceItemClimateImpact enum --%>
+		<c:forEach var="adaptationClimateImpact" items="<%= nl.wur.alterra.cgi.ace.model.impl.AceItemClimateImpact.values() %>" >
+			<div class="check">
+				<c:set var="adaptationClimateImpactMustBeChecked" value="false" />
+				<c:set var="aceItemClimateImpacts" value="<%= aceitem == null ? "" : aceitem.getClimateimpacts_() %>" />
+				<c:set var="adaptationClimateImpactMustBeChecked" value="false" />
+				<c:if test="${fn:indexOf(aceItemClimateImpacts, adaptationClimateImpact)>=0}">
+					<c:set var="adaptationClimateImpactMustBeChecked" value="true" />
+				</c:if>	
+				<c:choose>
+					<c:when test="${adaptationClimateImpactMustBeChecked}">
+						<input type="checkbox" name="chk_climateimpacts_${adaptationClimateImpact}" id="chk_climateimpacts_${adaptationClimateImpact}" value="${adaptationClimateImpact}" checked="checked" />
+					</c:when>
+					<c:otherwise>
+						<input type="checkbox" name="chk_climateimpacts_${adaptationClimateImpact}" id="chk_climateimpacts_${adaptationClimateImpact}" value="${adaptationClimateImpact}" />
+					</c:otherwise>
+				</c:choose>
+				<label for="chk_climateimpacts_${adaptationClimateImpact}"><liferay-ui:message key="aceitem-climateimpacts-lbl-${adaptationClimateImpact}" /></label>
+			</div>							
+		</c:forEach>
+       <br /><br />
+       		
 		<b>textsearch</b><br />
 		<textarea name="textSearch" rows=15 cols=100><%= aceitem == null ? "" : aceitem.getTextSearch() %></textarea>
 		

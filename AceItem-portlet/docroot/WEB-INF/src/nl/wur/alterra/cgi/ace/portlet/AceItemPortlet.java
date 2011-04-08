@@ -14,6 +14,7 @@ import nl.wur.alterra.cgi.ace.search.lucene.ACEIndexSynchronizer;
 import nl.wur.alterra.cgi.ace.service.AceItemLocalServiceUtil;
 import nl.wur.alterra.cgi.ace.model.impl.AceItemSector;
 import nl.wur.alterra.cgi.ace.model.impl.AceItemElement;
+import nl.wur.alterra.cgi.ace.model.impl.AceItemClimateImpact;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
@@ -109,7 +110,17 @@ public class AceItemPortlet extends MVCPortlet {
 		}		
 		aceitem.setElements_(choosenelements);
 		
-		aceitem.setClimateimpacts_(ParamUtil.getString(request, "climateimpacts_"));
+		String choosenclimateimpacts = "";
+		for(AceItemClimateImpact aceitemclimateimpact : AceItemClimateImpact.values() ) {
+			if( ParamUtil.getString(request, "chk_climateimpacts_" + aceitemclimateimpact) != null )  {
+				String e =  ParamUtil.getString(request, "chk_climateimpacts_" + aceitemclimateimpact);
+				if(e.equalsIgnoreCase(aceitemclimateimpact.toString())) {
+					choosenclimateimpacts +=  aceitemclimateimpact.toString() + ";";
+				}
+			}
+		}		
+		aceitem.setClimateimpacts_(choosenclimateimpacts);
+		
 		aceitem.setTextSearch(ParamUtil.getString(request, "textSearch"));
 		aceitem.setKeyword(ParamUtil.getString(request, "keyword"));
 		aceitem.setSpatialLayer(ParamUtil.getString(request, "spatialLayer"));
