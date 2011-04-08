@@ -99,16 +99,16 @@ public class ClpSerializer {
 					method5.invoke(newModel, value5);
 
 					Method method6 = newModelClass.getMethod("setImplementationtime",
-							new Class[] { Long.TYPE });
+							new Class[] { String.class });
 
-					Long value6 = new Long(oldCplModel.getImplementationtime());
+					String value6 = oldCplModel.getImplementationtime();
 
 					method6.invoke(newModel, value6);
 
 					Method method7 = newModelClass.getMethod("setLifetime",
-							new Class[] { Long.TYPE });
+							new Class[] { String.class });
 
-					Long value7 = new Long(oldCplModel.getLifetime());
+					String value7 = oldCplModel.getLifetime();
 
 					method7.invoke(newModel, value7);
 
@@ -328,13 +328,15 @@ public class ClpSerializer {
 					Method method6 = oldModelClass.getMethod(
 							"getImplementationtime");
 
-					Long value6 = (Long)method6.invoke(oldModel, (Object[])null);
+					String value6 = (String)method6.invoke(oldModel,
+							(Object[])null);
 
 					newModel.setImplementationtime(value6);
 
 					Method method7 = oldModelClass.getMethod("getLifetime");
 
-					Long value7 = (Long)method7.invoke(oldModel, (Object[])null);
+					String value7 = (String)method7.invoke(oldModel,
+							(Object[])null);
 
 					newModel.setLifetime(value7);
 
