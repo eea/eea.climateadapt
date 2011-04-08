@@ -62,8 +62,8 @@ public class MeasureModelImpl extends BaseModelImpl<Measure>
 			{ "name", new Integer(Types.VARCHAR) },
 			{ "description", new Integer(Types.VARCHAR) },
 			{ "implementationtype", new Integer(Types.VARCHAR) },
-			{ "implementationtime", new Integer(Types.BIGINT) },
-			{ "lifetime", new Integer(Types.BIGINT) },
+			{ "implementationtime", new Integer(Types.VARCHAR) },
+			{ "lifetime", new Integer(Types.VARCHAR) },
 			{ "spatiallayer", new Integer(Types.VARCHAR) },
 			{ "spatialvalues", new Integer(Types.VARCHAR) },
 			{ "legalaspects", new Integer(Types.VARCHAR) },
@@ -82,7 +82,7 @@ public class MeasureModelImpl extends BaseModelImpl<Measure>
 			{ "climateimpacts_", new Integer(Types.VARCHAR) },
 			{ "mao_type", new Integer(Types.VARCHAR) }
 		};
-	public static final String TABLE_SQL_CREATE = "create table Ace_Measure (measureId LONG not null primary key,companyId LONG,groupId LONG,name VARCHAR(75) null,description VARCHAR(75) null,implementationtype VARCHAR(75) null,implementationtime LONG,lifetime LONG,spatiallayer VARCHAR(75) null,spatialvalues VARCHAR(75) null,legalaspects VARCHAR(75) null,stakeholderparticipation VARCHAR(75) null,contact VARCHAR(75) null,succeslimitations VARCHAR(75) null,website VARCHAR(75) null,costbenefit VARCHAR(75) null,keywords VARCHAR(75) null,startdate DATE null,enddate DATE null,publicationdate DATE null,language VARCHAR(75) null,sectors_ VARCHAR(75) null,elements_ VARCHAR(75) null,climateimpacts_ VARCHAR(75) null,mao_type VARCHAR(75) null)";
+	public static final String TABLE_SQL_CREATE = "create table Ace_Measure (measureId LONG not null primary key,companyId LONG,groupId LONG,name VARCHAR(75) null,description VARCHAR(75) null,implementationtype VARCHAR(75) null,implementationtime VARCHAR(75) null,lifetime VARCHAR(75) null,spatiallayer VARCHAR(75) null,spatialvalues VARCHAR(75) null,legalaspects VARCHAR(75) null,stakeholderparticipation VARCHAR(75) null,contact VARCHAR(75) null,succeslimitations VARCHAR(75) null,website VARCHAR(75) null,costbenefit VARCHAR(75) null,keywords VARCHAR(75) null,startdate DATE null,enddate DATE null,publicationdate DATE null,language VARCHAR(75) null,sectors_ VARCHAR(75) null,elements_ VARCHAR(75) null,climateimpacts_ VARCHAR(75) null,mao_type VARCHAR(75) null)";
 	public static final String TABLE_SQL_DROP = "drop table Ace_Measure";
 	public static final String ORDER_BY_JPQL = " ORDER BY measure.name ASC";
 	public static final String ORDER_BY_SQL = " ORDER BY Ace_Measure.name ASC";
@@ -176,19 +176,29 @@ public class MeasureModelImpl extends BaseModelImpl<Measure>
 		_implementationtype = implementationtype;
 	}
 
-	public long getImplementationtime() {
-		return _implementationtime;
+	public String getImplementationtime() {
+		if (_implementationtime == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _implementationtime;
+		}
 	}
 
-	public void setImplementationtime(long implementationtime) {
+	public void setImplementationtime(String implementationtime) {
 		_implementationtime = implementationtime;
 	}
 
-	public long getLifetime() {
-		return _lifetime;
+	public String getLifetime() {
+		if (_lifetime == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _lifetime;
+		}
 	}
 
-	public void setLifetime(long lifetime) {
+	public void setLifetime(String lifetime) {
 		_lifetime = lifetime;
 	}
 
@@ -670,8 +680,8 @@ public class MeasureModelImpl extends BaseModelImpl<Measure>
 	private String _name;
 	private String _description;
 	private String _implementationtype;
-	private long _implementationtime;
-	private long _lifetime;
+	private String _implementationtime;
+	private String _lifetime;
 	private String _spatiallayer;
 	private String _spatialvalues;
 	private String _legalaspects;
