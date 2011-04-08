@@ -94,7 +94,7 @@ public class NASPortlet extends MVCPortlet {
         List<NAS> results = new ArrayList<NAS>();
         int nasCount = NASLocalServiceUtil.getNASsCount();
         if(nasCount > 0) {
-            results = NASLocalServiceUtil.getNASs(0, nasCount - 1);
+            results = NASLocalServiceUtil.getNASs(com.liferay.portal.kernel.dao.orm.QueryUtil.ALL_POS, com.liferay.portal.kernel.dao.orm.QueryUtil.ALL_POS);
         }
         System.out.println("NASPortlet retrieved # " + results.size() + " NAS");
         return results;
@@ -104,7 +104,7 @@ public class NASPortlet extends MVCPortlet {
         List<NASSource> results = new ArrayList<NASSource>();
         int nasSourceCount = NASSourceLocalServiceUtil.getNASSourcesCount();
         if(nasSourceCount > 0) {
-            results = NASSourceLocalServiceUtil.getNASSources(0, nasSourceCount - 1);
+            results = NASSourceLocalServiceUtil.getNASSources(com.liferay.portal.kernel.dao.orm.QueryUtil.ALL_POS, com.liferay.portal.kernel.dao.orm.QueryUtil.ALL_POS);
         }
         System.out.println("NASPortlet retrieved # " + results.size() + " NASSources");
         return results;
@@ -114,7 +114,7 @@ public class NASPortlet extends MVCPortlet {
         List<AceItem> results = new ArrayList<AceItem>();
         int aceItemCount = AceItemLocalServiceUtil.getAceItemsCount();
         if(aceItemCount > 0) {
-            results = AceItemLocalServiceUtil.getAceItems(0, aceItemCount - 1);
+            results = AceItemLocalServiceUtil.getAceItems(com.liferay.portal.kernel.dao.orm.QueryUtil.ALL_POS, com.liferay.portal.kernel.dao.orm.QueryUtil.ALL_POS);
         }
         System.out.println("NASPortlet retrieved # " + results.size() + " AceItems");
         return results;
