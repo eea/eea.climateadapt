@@ -1,4 +1,4 @@
-create table Ace_Aceitem (
+create table ace_aceitem (
 	aceitemid bigint not null primary key,
 	companyid bigint,
 	groupid bigint,
@@ -46,7 +46,7 @@ CREATE SEQUENCE ace_aceitem_id_seq
   INCREMENT 1
   MINVALUE 1
   MAXVALUE 9223372036854775807
-  START 100402
+  START 100735
   CACHE 1;
 ALTER TABLE ace_aceitem_id_seq OWNER TO postgres;
 
