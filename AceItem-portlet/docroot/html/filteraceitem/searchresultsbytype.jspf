@@ -121,7 +121,7 @@
 						</c:choose>
 					</div>
 
-					<div class="resultfooter">
+					<div class="resultfooter" style="display:none">
 						<%-- TODO use actual date from aceitem, if available --%>
 						<!--div class="aceitemdate">4 Nov 2010</div>
 						<div class="aceitemlinks">
