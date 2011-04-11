@@ -262,7 +262,7 @@ public class FilterAceItemPortlet extends MVCPortlet {
 
 				// escape double quotes
 
-				System.out.println("\n\njson LIST is: " + json);
+				//System.out.println("\n\njson LIST is: " + json);
 				request.setAttribute(aceItemType.name() + "_" + "JSON"
 						+ SEARCH_RESULTS, json);
 				jsonKeysAdded.add(aceItemType.name() + "_" + "JSON"
@@ -283,7 +283,7 @@ public class FilterAceItemPortlet extends MVCPortlet {
 				keysAdded.add(aceItemType + "_" + SEARCH_RESULTS);
 				Gson gson = new Gson();
 				String json = gson.toJson(results);
-				System.out.println("\n\njson LIST is: " + json);
+				//System.out.println("\n\njson LIST is: " + json);
 				request.setAttribute(aceItemType + "_" + "JSON"
 						+ SEARCH_RESULTS, json);
 				jsonKeysAdded.add(aceItemType + "_" + "JSON" + SEARCH_RESULTS);
@@ -319,7 +319,7 @@ public class FilterAceItemPortlet extends MVCPortlet {
 					.getAttribute(resultKeys.get(0));
 			Gson gson = new Gson();
 			String json = gson.toJson(results);
-			System.out.println("\n\njson LIST is: " + json);
+			//System.out.println("\n\njson LIST is: " + json);
 			response.setContentType("text/html");
 			// the page that was calling...
 			String resourceID = request.getResourceID();
