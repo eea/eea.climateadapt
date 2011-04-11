@@ -33,10 +33,14 @@
 	}
 	
 %>
-
+<div class="item-detail">
+<div class="text-container">
  <c:choose>
    <c:when test="${aceitem_id>0}">
+     <div class="portlet-title">
 	 <H1><% out.print( aceitem.getName() ); %></H1>
+	 </div>
+	 <div class="body">
 	 <b>Description</b><br />
 	 <% out.print( aceitem.getDescription() ); %><br /><br />
 	 <b>Keywords</b><br />
@@ -78,9 +82,13 @@
 
 	 <b>Spatial reference</b><br />
 	 <% out.print( aceitem.getSpatialLayer() + " " + aceitem.getSpatialValues()); %><br /><br />
-
+     </div>
    </c:when>
    <c:otherwise>
+   <div class="portlet-title">
      <H1>No AceItem selected</H1>
+    </div>
    </c:otherwise>
  </c:choose>
+ </div>
+ </div>
