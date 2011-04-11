@@ -91,7 +91,7 @@ public class AceSearchPortlet extends MVCPortlet {
             System.out.println("Search cannot be executed, it seems your portlet container failed to send the search form in this request.");
             return null;
         }
-
+        
         String[] anyOfThese = requestParams.get(ANY);
         String[] aceItemTypes = requestParams.get(ACEITEM_TYPE);
         String[] sectors = requestParams.get(SECTOR);
