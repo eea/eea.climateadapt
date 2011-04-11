@@ -56,6 +56,9 @@ public class FilterAceItemPortlet extends MVCPortlet {
 	public static final String SEARCH_PARAMS = "searchParams";
 	private static final String SEARCH_RESULTS = "searchResults";
 
+    private static final String AND_CONDITION = "AND";
+    private static final String OR_CONDITION = "OR";
+    
 	private static final String TOTAL_RESULTS = "total_results";
 
 	/**
@@ -160,6 +163,9 @@ public class FilterAceItemPortlet extends MVCPortlet {
 		if (sortBys != null && sortBys.length > 0) {
 			sortBy = sortBys[0];
 		}
+		
+        String[] conditionAdaptationSector = {"AND"};
+        String[] conditionAdaptationElement = {"AND"};
 
 		AceSearchFormBean aceSearchFormBean = new AceSearchFormBean();
 		if (anyOfThese != null && anyOfThese.length > 0) {
@@ -173,7 +179,20 @@ public class FilterAceItemPortlet extends MVCPortlet {
 		aceSearchFormBean.setCountries(countries);
 		aceSearchFormBean.setSortBy(sortBy);
 
-		request.setAttribute(SEARCH_PARAMS, aceSearchFormBean);
+        if (conditionAdaptationSector != null && conditionAdaptationSector[0].equalsIgnoreCase(OR_CONDITION)) {
+        	aceSearchFormBean.setConditionAdaptationSector(OR_CONDITION);
+        } else {
+        	aceSearchFormBean.setConditionAdaptationSector(AND_CONDITION);
+        }
+
+
+        if (conditionAdaptationElement != null && conditionAdaptationElement[0].equalsIgnoreCase(OR_CONDITION)) {
+        	aceSearchFormBean.setConditionAdaptationElement(OR_CONDITION);
+        } else {
+        	aceSearchFormBean.setConditionAdaptationElement(AND_CONDITION);
+        }
+
+        request.setAttribute(SEARCH_PARAMS, aceSearchFormBean);
 
 		ACESearchEngine aceSearchEngine = new ACESearchEngine();
 
