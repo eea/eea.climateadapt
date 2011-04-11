@@ -241,7 +241,7 @@ function displayJSONFilterResults(unique, aceitemResults) {
 	jQuery.each(aceitemResults, function(idx, aceitem){ 
 		if (aceitem) {
 			// add searchresult
-			resultlist += '<div class="searchresult">';
+			resultlist += '<div class="searchresultFilter">';
 			
 			// add name 
             if ((aceitem._storedAt != "") && (aceitem._storagetype.substr(0, 3) == "URL")) {

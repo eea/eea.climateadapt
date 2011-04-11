@@ -202,6 +202,28 @@
     font-weight: bold;
 	cursor:pointer;
 }
+
+/** styles for filter portlet **/
+.resultsGroupTitleFilter {
+   cursor: pointer;
+   font-size: 1.2em;
+   font-weight: bold;
+   margin: 5px 0 0;
+   padding: 5px;
+}
+
+.sortbarFilter {
+    background-color: #EEEEEE;
+    border-bottom: medium dashed #D3D3D3;
+    font-size: 1.1em;
+    margin: 0;
+    padding: 10px;
+}
+
+.searchresultFilter {
+    padding: 5px;
+}
+
 .bolder {
 	font-weight:bolder;
 }

@@ -29,7 +29,7 @@
 	
 		<c:set var="groupedResults" value="${groupedResults}"/>
 	
-		<div id="${expandedTitleId}" class="expandedResultsGroupTitle resultsGroupTitle">
+		<div id="${expandedTitleId}" class="expandedResultsGroupTitle resultsGroupTitleFilter">
 			&#9660; <c:out value='${groupTitle}' /> (${fn:length(groupedResults)})
 		</div>
 		
@@ -83,7 +83,7 @@
 		
 		<hr class="clearer2"/>
 		
-		<div class="sortbar">
+		<div class="sortbarFilter">
 			<form name="sortsearchform" id="${sortsearchformId}">
 				<input type="hidden" name="aceitemtype" value="${aceitemtype}"/>	
 				<input type="hidden" name="anyOfThese" id="${anyOfTheseId}" value="${searchParams.anyOfThese}"/>
@@ -102,7 +102,7 @@
 		
 		<div id="${resultsListId}">
 			<c:forEach var="searchResult" items="${groupedResults}" begin="0" end="<%= itemsOnPage-1 %>">		
-				<div class="searchresult">
+				<div class="searchresultFilter">
 					<div>
                         <c:set var="descriptionLength" value="${fn:length(searchResult.description)}" />
 
@@ -148,7 +148,7 @@
 
         <c:set var="groupedResults" value="${groupedResults}"/>
 
-		<div id="${collapsedTitleId}" class="collapsedResultsGroupTitle resultsGroupTitle">
+		<div id="${collapsedTitleId}" class="collapsedResultsGroupTitle resultsGroupTitleFilter">
 			&#9658; <c:out value='${groupTitle}' /> (${fn:length(groupedResults)})
 		</div>
 	</div>
