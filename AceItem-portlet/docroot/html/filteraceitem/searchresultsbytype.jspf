@@ -16,7 +16,6 @@
 		pageContext.setAttribute("sortsearchformId", "sortsearchformId-" + r);
 		pageContext.setAttribute("sortsearchRelevanceId", "sortsearchRelevanceId-" + r);		
 		pageContext.setAttribute("sortsearchNameId", "sortsearchNameId-" + r);
-		pageContext.setAttribute("sortsearchSectorId", "sortsearchSectorId-" + r);		
 		pageContext.setAttribute("sortsearchCountryId", "sortsearchCountryId-" + r);
 		pageContext.setAttribute("resultsListId", "resultsListId-" + r);
 		pageContext.setAttribute("anyOfTheseId", "anyOfTheseId-" + r);		
@@ -95,7 +94,6 @@
 				<liferay-ui:message key="acesearch-sort-by" />
 				<input type="radio" name="sortBy" class="sortByControl" id="${sortsearchRelevanceId}" value="RELEVANCE" checked /><liferay-ui:message key="acesearch-sort-relevance" />
 				<input type="radio" name="sortBy" class="sortByControl" id="${sortsearchNameId}" value="NAME"/><liferay-ui:message key="acesearch-sort-name" />
-				<input type="radio" name="sortBy" class="sortByControl" id="${sortsearchSectorId}" value="SECTOR"/><liferay-ui:message key="acesearch-sort-adaptation-sector" />
 				<input type="radio" name="sortBy" class="sortByControl" id="${sortsearchCountryId}" value="COUNTRY"/><liferay-ui:message key="acesearch-sort-country" />
 			</form>
 		</div>
