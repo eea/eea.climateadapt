@@ -82,7 +82,7 @@
 		
 		<hr class="clearer2"/>
 		
-		<div class="sortbarFilter">
+		<div class="sortbarFilter" style="display:none">
 			<form name="sortsearchform" id="${sortsearchformId}">
 				<input type="hidden" name="aceitemtype" value="${aceitemtype}"/>	
 				<input type="hidden" name="anyOfThese" id="${anyOfTheseId}" value="${searchParams.anyOfThese}"/>
