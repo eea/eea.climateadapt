@@ -232,6 +232,44 @@ function clearSearchForm() {
 	
     showDataInfoPanel();
 }
+/**
+ * Creates filtered results HTML from list of JSON AceItems from FilterAceItemPortlet.
+ *
+ */
+function displayJSONFilterResults(unique, aceitemResults) {
+	var resultlist = '<div id="resultsListId-'+unique+'">';
+	jQuery.each(aceitemResults, function(idx, aceitem){ 
+		if (aceitem) {
+			// add searchresult
+			resultlist += '<div class="searchresult">';
+			
+			// add name 
+            if ((aceitem._storedAt != "") && (aceitem._storagetype.substr(0, 3) == "URL")) {
+                   resultlist += '<div><span class="bolder">&#187; <a href="/viewaceitem?aceitem_id=' +  aceitem._aceItemId  + '" >' + aceitem._name + ' </a></span></div>';
+
+           } else if (aceitem._storedAt.substr(0, 14) == "ace_project_id") {
+                   resultlist += '<div><span class="bolder">&#187; <a href="/projects1?' + aceitem._storedAt + '" >' + aceitem._name + '</a></span></div>';
+
+            } else if (aceitem._storedAt.substr(0, 14) == "ace_measure_id") {
+                               resultlist += '<div><span class="bolder">&#187; <a href="/viewmeasure?' + aceitem._storedAt + '" >' + aceitem._name + '</a></span></div>';
+
+           } else {
+                   resultlist += '<div><span class="bolder">&#187; <a href="/viewaceitem?aceitem_id=' +  aceitem._aceItemId + '" >' + aceitem._name + ' </a></span></div>';
+
+           }
+
+
+			// add result footer 
+			// TODO use actual date from aceitem, if available
+			resultlist += '<div class="resultfooter"><hr class="clearer"/></div>';
+			// close searchresult
+			resultlist += '</div>';					
+		}
+	});
+	// close searchresultlist
+	resultlist += '</div>';
+	jQuery('#expandedId-'+unique).append(resultlist);
+}
 
 /**
  * Creates search results HTML from list of JSON AceItems.

@@ -76,7 +76,7 @@
 				for(var i = startIdx; i <= endIdx; i++) {
 					aceitemPageResults.push(aceitemResults[i]);
 				}
-				displayJSONResults(unique, aceitemPageResults);
+				displayJSONFilterResults(unique, aceitemPageResults);
 			}		
 			
 		</script>
