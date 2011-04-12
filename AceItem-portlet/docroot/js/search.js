@@ -66,12 +66,6 @@ jQuery(document).ready(function() {
 	$j.each($j(".expandedResultsGroup"), function(i,v){
 		$j("#" + this.id).hide();
 	});
-	
-	// expand first resultgroup
-	var firstResultsGroup = $j(".collapsedResultsGroupTitle").first();
-	if(firstResultsGroup) {
-		firstResultsGroup.click();
-	}
 
     showDataInfoPanel();
 });
