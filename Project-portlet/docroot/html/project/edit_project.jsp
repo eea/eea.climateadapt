@@ -35,10 +35,13 @@
 		<aui:input name="acronym"  />
 		
 		<liferay-ui:error key="projecttitle-required" message="projecttitle-required" />
-		<aui:input name="title"  />
-		
-		<liferay-ui:error key="projectlead-required" message="projectlead-required" />		
-		<aui:input name="lead"  />
+
+		<b>title</b><br />	
+		<input name="title" type="text" size="120" value="<%= project == null ? "" : project.getTitle() %>"><br /><br />
+
+		<b>lead</b><br />	
+		<input name="lead" type="text" size="120" value="<%= project == null ? "" : project.getLead() %>"><br /><br />
+
 
 		<b>partners</b><br />
 		<textarea name="partners" rows=10 cols=100><%= project == null ? "" : project.getPartners() %></textarea>
@@ -49,14 +52,15 @@
 		<textarea name="abstracts" rows=10 cols=100><%= project == null ? "" : project.getAbstracts() %></textarea>
 				
 		<aui:input name="funding"  />
-		<aui:input name="sectors"  />
+
+		<b>sectors</b><br />	
+		<input name="sectors" type="text" size="120" value="<%= project == null ? "" : project.getSectors() %>"><br /><br />
+
 		<aui:input name="spatiallevel"  />
 		<aui:input name="element"  />
 
 		<b>keywords</b><br />
-		<textarea name="keywords" rows=10 cols=100><%= project == null ? "" : project.getKeywords() %></textarea>
-			
-		<aui:input name=""  />
+		<textarea name="keywords" rows=10 cols=100><%= project == null ? "" : project.getKeywords() %></textarea><br /><br />
 
 		<b>website</b><br />	
 		<input name="website" type="text" size="120" value="<%= project == null ? "" : project.getWebsite() %>"><br /><br />

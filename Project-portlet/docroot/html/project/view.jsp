@@ -68,8 +68,8 @@
 		/>
 
 		<liferay-ui:search-container-column-text
-			name="lead"
-			property="lead"
+			name="website"
+			property="website"
 		/>
 
 		<liferay-ui:search-container-column-text
@@ -78,8 +78,8 @@
 		/>
 
 		<liferay-ui:search-container-column-text
-			name="duration"
-			property="duration"
+			name="elements"
+			property="element"
 		/>
 
 		<liferay-ui:search-container-column-jsp
