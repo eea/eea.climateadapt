@@ -5,7 +5,7 @@
 		// a random postfix is used to relate ids of elements
 		//
 		
-		int itemsOnPage = 10; // and replace 3 times in javascript here below
+		int itemsOnPage = 10; 
 		
 		int r = new java.util.Random().nextInt(Integer.MAX_VALUE);
 		pageContext.setAttribute("unique", "" + r);
@@ -28,6 +28,8 @@
 	
 		<c:set var="groupedResults" value="${groupedResults}"/>
 	
+		<c:set var="nrPageItems" value="<%= itemsOnPage %>"/>
+	
 		<div id="${expandedTitleId}" class="expandedResultsGroupTitle resultsGroupTitleFilter">
 			&#9660; <c:out value='${groupTitle}' /> (${fn:length(groupedResults)})
 		</div>
@@ -46,7 +48,7 @@
 
 			$j(function() {
 				$j('#${paginationId}').paginate({
-					count 		: ${fn:length(groupedResults) / 10},
+					count 		: ${fn:length(groupedResults) / nrPageItems},
 					start 		: 1,
 					display     : 1,
 					border					: false,
@@ -66,8 +68,8 @@
 			
 			})			
 			function displayPagedJSONResults(page, unique, aceitemResults) {
-				var startIdx = ((page -1) * 10);
-				var endIdx = (page * 10) - 1;
+				var startIdx = ((page -1) * <%= itemsOnPage %>);
+				var endIdx = (page * <%= itemsOnPage %>) - 1;
 				if(endIdx > aceitemResults.length) {
 					endIdx = aceitemResults.length;
 				}
