@@ -17,10 +17,15 @@
 			<name>view-jsp</name>
 			<value>/html/measure/view.jsp</value>
 		</init-param>
+		<init-param>
+			<name>edit-jsp</name>
+			<value>/html/measure/edit.jsp</value>
+		</init-param>
 		<expiration-cache>0</expiration-cache>
 		<supports>
 			<mime-type>text/html</mime-type>
 			<portlet-mode>VIEW</portlet-mode>
+			<portlet-mode>EDIT</portlet-mode>
 		</supports>
 		<resource-bundle>content/Language.properties</resource-bundle>
 		<portlet-info>
@@ -28,6 +33,17 @@
 			<short-title>MeasurePortlet</short-title>
 			<keywords></keywords>
 		</portlet-info>
+		<!-- Portlet preferences (configurable by user in portlet EDIT mode) -->
+		<portlet-preferences>
+			<preference>
+				<name>orderByCol</name>
+				<value>name</value>
+			</preference>
+			<preference>
+				<name>orderByType</name>
+				<value>asc</value>
+			</preference>
+		</portlet-preferences>		
 		<security-role-ref>
 			<role-name>administrator</role-name>
 		</security-role-ref>

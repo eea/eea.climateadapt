@@ -91,19 +91,19 @@ public class MeasureClp extends BaseModelImpl<Measure> implements Measure {
 		_implementationtype = implementationtype;
 	}
 
-	public long getImplementationtime() {
+	public String getImplementationtime() {
 		return _implementationtime;
 	}
 
-	public void setImplementationtime(long implementationtime) {
+	public void setImplementationtime(String implementationtime) {
 		_implementationtime = implementationtime;
 	}
 
-	public long getLifetime() {
+	public String getLifetime() {
 		return _lifetime;
 	}
 
-	public void setLifetime(long lifetime) {
+	public void setLifetime(String lifetime) {
 		_lifetime = lifetime;
 	}
 
@@ -502,8 +502,8 @@ public class MeasureClp extends BaseModelImpl<Measure> implements Measure {
 	private String _name;
 	private String _description;
 	private String _implementationtype;
-	private long _implementationtime;
-	private long _lifetime;
+	private String _implementationtime;
+	private String _lifetime;
 	private String _spatiallayer;
 	private String _spatialvalues;
 	private String _legalaspects;

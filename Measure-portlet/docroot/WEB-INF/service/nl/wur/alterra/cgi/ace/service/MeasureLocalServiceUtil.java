@@ -254,6 +254,20 @@ public class MeasureLocalServiceUtil {
 	* Hugo de Groot: add these methods by hand to <portlet>LocalServiceImpl
 	* and rerun ServiceBuilder if auto generation fails
 	*
+	* Gets a list with a range of Measures from a group
+	*/
+	public static java.util.List<nl.wur.alterra.cgi.ace.model.Measure> getMeasuresByGroupId(
+		long groupId, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService()
+				   .getMeasuresByGroupId(groupId, start, end, orderByComparator);
+	}
+
+	/**
+	* Hugo de Groot: add these methods by hand to <portlet>LocalServiceImpl
+	* and rerun ServiceBuilder if auto generation fails
+	*
 	* Gets the number of Measures in a group
 	*/
 	public static int getMeasuresCountByGroupId(long groupId)

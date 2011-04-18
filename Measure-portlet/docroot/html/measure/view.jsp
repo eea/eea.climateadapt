@@ -18,8 +18,23 @@
 
 <%
 	String redirect = PortalUtil.getCurrentURL(renderRequest);	
-%>
 
+	String orderByCol = ParamUtil.getString(request, "orderByCol");
+	String orderByType = ParamUtil.getString(request, "orderByType");
+
+	if (Validator.isNotNull(orderByCol) && Validator.isNotNull(orderByType)) {
+		prefs.setValue("orderByCol", orderByCol);
+		prefs.setValue("orderByType", orderByType);
+
+	} else {
+
+		orderByCol = prefs.getValue("orderByCol", "name");
+		orderByType = prefs.getValue("orderByType", "asc");
+
+	}
+
+	OrderByComparator orderByComparator = MeasureUtil.getMeasureOrderByComparator(orderByCol, orderByType);
+%>
 <aui:button-row>
 	<portlet:renderURL var="addMeasureURL">
 		<portlet:param name="jspPage" value="/html/measure/edit_measure.jsp" />
@@ -29,9 +44,9 @@
 	<aui:button value="add-measure" onClick="<%= addMeasureURL.toString() %>"/>
 </aui:button-row>
 
-<liferay-ui:search-container delta='10' emptyResultsMessage="measure-empty-results-message">
+<liferay-ui:search-container delta='10' emptyResultsMessage="measure-empty-results-message" orderByCol="<%= orderByCol %>" orderByType="<%= orderByType %>">
 	<liferay-ui:search-container-results
-		results="<%= MeasureLocalServiceUtil.getMeasuresByGroupId(scopeGroupId, searchContainer.getStart(), searchContainer.getEnd()) %>"
+		results="<%= MeasureLocalServiceUtil.getMeasuresByGroupId(scopeGroupId, searchContainer.getStart(), searchContainer.getEnd(), orderByComparator) %>"
 		total="<%= MeasureLocalServiceUtil.getMeasuresCountByGroupId(scopeGroupId) %>"
 	/>
 
@@ -49,22 +64,31 @@
       
 <%
 	String nameLink = "<a href='/viewmeasure?ace_measure_id=" + measure.getMeasureId() + "'>" +  measure.getName() + "</a>" ;
+	String desc =  measure.getDescription() ;
+	if (desc.length() > 300) {
+		desc = desc.substring(0,299) + " ..." ;
+	}
 %>      
       
 		<liferay-ui:search-container-column-text
-			name="name"
-			value="<%= nameLink %>"
-		/>      
+			name="measureId" orderable="<%= true %>" orderableProperty="measureId" >
+			<%= measure.getMeasureId() %>
+		</liferay-ui:search-container-column-text> 
+      
+		<liferay-ui:search-container-column-text
+			name="name" orderable="<%= true %>" orderableProperty="name" >
+			<%= nameLink %>
+		</liferay-ui:search-container-column-text>      
       
 		<liferay-ui:search-container-column-text
 			name="description"
-			property="description"
+			value="<%= desc %>"
 		/>
 
 		<liferay-ui:search-container-column-text
-			name="sectors_"
-			property="sectors_"
-		/>
+			name="sectors_" 
+			property="sectors_"	
+		/>  
 
 		<liferay-ui:search-container-column-text
 			name="elements_"

@@ -38,7 +38,8 @@
 	 <b>Description</b><br />
 	 <% out.print( measure.getDescription() ); %><br /><br />
 	 <b>Contact</b><br />
-	 <% out.print( measure.getContact() ); %><br /><br />
+	 <% out.print( measure.getContact() ); %><br /><br />	 
+	 
 	 <b>Elements</b><br />
 	 <% 
 	 	String e = measure.getElements_() ; 
@@ -84,6 +85,35 @@
 		out.print( s.replace(";","<br />") ); %><br /><br />
 	 	<b>Keywords</b><br />
 	 <% out.print( measure.getKeywords()); %><br /><br />
+	 
+	 
+	 <b>Implementationtype</b><br />
+	 <% out.print( measure.getImplementationtype() ); %><br /><br />
+	 
+	 <b>Implementationtime</b><br />
+	 <% out.print( measure.getImplementationtime() ); %><br /><br />
+	 
+	 <b>Lifetime</b><br />
+	 <% out.print( measure.getLifetime() ); %><br /><br />
+	 
+	 <b>Spatial layer</b><br />
+	 <% out.print( measure.getSpatiallayer() ); %><br /><br />
+	 
+	 <b>Spatial values</b><br />
+	 <% out.print( measure.getSpatialvalues() ); %><br /><br />
+	 
+	 <b>Legal aspects</b><br />
+	 <% out.print( measure.getLegalaspects() ); %><br /><br />
+	 
+	 <b>Stakeholder participation</b><br />
+	 <% out.print( measure.getStakeholderparticipation() ); %><br /><br />
+	 
+	 <b>Succes and limitation factors</b><br />
+	 <% out.print( measure.getSucceslimitations() ); %><br /><br />
+	 
+	 <b>Cost benefit</b><br />
+	 <% out.print( measure.getCostbenefit() ); %><br /><br />	
+	 
 		<% if (url != null && url.trim().length() > 0)  {%>		
 			 <b>Website</b><br />
 			 <%= url %><br /><br />

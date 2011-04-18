@@ -148,28 +148,30 @@ public interface MeasureModel extends BaseModel<Measure> {
 	 *
 	 * @return the implementationtime of this measure
 	 */
-	public long getImplementationtime();
+	@AutoEscape
+	public String getImplementationtime();
 
 	/**
 	 * Sets the implementationtime of this measure.
 	 *
 	 * @param implementationtime the implementationtime of this measure
 	 */
-	public void setImplementationtime(long implementationtime);
+	public void setImplementationtime(String implementationtime);
 
 	/**
 	 * Gets the lifetime of this measure.
 	 *
 	 * @return the lifetime of this measure
 	 */
-	public long getLifetime();
+	@AutoEscape
+	public String getLifetime();
 
 	/**
 	 * Sets the lifetime of this measure.
 	 *
 	 * @param lifetime the lifetime of this measure
 	 */
-	public void setLifetime(long lifetime);
+	public void setLifetime(String lifetime);
 
 	/**
 	 * Gets the spatiallayer of this measure.

@@ -14,10 +14,13 @@
 
 package nl.wur.alterra.cgi.ace.service.impl;
 import java.util.List;
-import com.liferay.counter.service.CounterLocalServiceUtil;
-import com.liferay.portal.kernel.exception.SystemException;
+
 import nl.wur.alterra.cgi.ace.model.Measure;
 import nl.wur.alterra.cgi.ace.service.base.MeasureLocalServiceBaseImpl;
+
+import com.liferay.counter.service.CounterLocalServiceUtil;
+import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.util.OrderByComparator;
 
 /**
  * The implementation of the measure local service.
@@ -77,6 +80,18 @@ public class MeasureLocalServiceImpl extends MeasureLocalServiceBaseImpl {
 		return measurePersistence.findByGroupId(groupId, start, end);
 	}
 
+	/**
+	 * 	
+	 * Hugo de Groot: add these methods by hand to <portlet>LocalServiceImpl
+	 * and rerun ServiceBuilder if auto generation fails 
+	 * 
+	 * Gets a list with a range of Measures from a group
+	 *
+	 */
+	public List<Measure> getMeasuresByGroupId(long groupId, int start, int end, OrderByComparator orderByComparator) throws SystemException {
+		return measurePersistence.findByGroupId(groupId, start, end, orderByComparator);
+	}
+	
 	/**
 	 * 	
 	 * Hugo de Groot: add these methods by hand to <portlet>LocalServiceImpl

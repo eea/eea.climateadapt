@@ -442,11 +442,40 @@ public class MeasureLocalServiceClp implements MeasureLocalService {
 		return (java.util.List<nl.wur.alterra.cgi.ace.model.Measure>)ClpSerializer.translateOutput(returnObj);
 	}
 
+	public java.util.List<nl.wur.alterra.cgi.ace.model.Measure> getMeasuresByGroupId(
+		long groupId, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		Object returnObj = null;
+
+		MethodHandler methodHandler = new MethodHandler(_getMeasuresByGroupIdMethodKey15,
+				groupId, start, end, orderByComparator);
+
+		try {
+			returnObj = _classLoaderProxy.invoke(methodHandler);
+		}
+		catch (Throwable t) {
+			if (t instanceof com.liferay.portal.kernel.exception.SystemException) {
+				throw (com.liferay.portal.kernel.exception.SystemException)t;
+			}
+
+			if (t instanceof RuntimeException) {
+				throw (RuntimeException)t;
+			}
+			else {
+				throw new RuntimeException(t.getClass().getName() +
+					" is not a valid exception");
+			}
+		}
+
+		return (java.util.List<nl.wur.alterra.cgi.ace.model.Measure>)ClpSerializer.translateOutput(returnObj);
+	}
+
 	public int getMeasuresCountByGroupId(long groupId)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		Object returnObj = null;
 
-		MethodHandler methodHandler = new MethodHandler(_getMeasuresCountByGroupIdMethodKey15,
+		MethodHandler methodHandler = new MethodHandler(_getMeasuresCountByGroupIdMethodKey16,
 				groupId);
 
 		try {
@@ -510,6 +539,9 @@ public class MeasureLocalServiceClp implements MeasureLocalService {
 			"getMeasuresByGroupId", long.class);
 	private MethodKey _getMeasuresByGroupIdMethodKey14 = new MethodKey(_classLoaderProxy.getClassName(),
 			"getMeasuresByGroupId", long.class, int.class, int.class);
-	private MethodKey _getMeasuresCountByGroupIdMethodKey15 = new MethodKey(_classLoaderProxy.getClassName(),
+	private MethodKey _getMeasuresByGroupIdMethodKey15 = new MethodKey(_classLoaderProxy.getClassName(),
+			"getMeasuresByGroupId", long.class, int.class, int.class,
+			com.liferay.portal.kernel.util.OrderByComparator.class);
+	private MethodKey _getMeasuresCountByGroupIdMethodKey16 = new MethodKey(_classLoaderProxy.getClassName(),
 			"getMeasuresCountByGroupId", long.class);
 }

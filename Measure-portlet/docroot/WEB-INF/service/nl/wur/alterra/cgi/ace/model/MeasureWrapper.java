@@ -84,19 +84,19 @@ public class MeasureWrapper implements Measure {
 		_measure.setImplementationtype(implementationtype);
 	}
 
-	public long getImplementationtime() {
+	public java.lang.String getImplementationtime() {
 		return _measure.getImplementationtime();
 	}
 
-	public void setImplementationtime(long implementationtime) {
+	public void setImplementationtime(java.lang.String implementationtime) {
 		_measure.setImplementationtime(implementationtime);
 	}
 
-	public long getLifetime() {
+	public java.lang.String getLifetime() {
 		return _measure.getLifetime();
 	}
 
-	public void setLifetime(long lifetime) {
+	public void setLifetime(java.lang.String lifetime) {
 		_measure.setLifetime(lifetime);
 	}
 

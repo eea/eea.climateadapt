@@ -38,7 +38,7 @@
 		<column name="mao_type" type="String" />
 
 		<!-- Sort order -->
-		<order by="asc">
+		<order by="asc" >
 			<order-column name="name" />
 		</order>
 

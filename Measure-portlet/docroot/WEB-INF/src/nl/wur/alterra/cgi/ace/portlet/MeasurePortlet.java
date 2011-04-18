@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
+import javax.portlet.PortletPreferences;
 import javax.portlet.PortletRequest;
 
 import nl.wur.alterra.cgi.ace.model.Measure;
@@ -169,6 +170,26 @@ public class MeasurePortlet extends MVCPortlet {
 		else {
 			SessionErrors.add(request, "error-deleting");
 		}
+	}
+
+	/**
+	 * Sets the preferences for how measures can be ordered
+	 *
+	 */
+	public void setMeasurePref(ActionRequest request, ActionResponse response)
+		throws Exception {
+
+		String orderByCol = ParamUtil.getString(request, "orderByCol");
+
+		PortletPreferences prefs = request.getPreferences();
+
+		prefs.setValue("orderByCol", orderByCol);
+
+		String orderByType = ParamUtil.getString(request, "orderByType");
+
+		prefs.setValue("orderByType", orderByType);
+
+		prefs.store();
 	}
 	
 	private static Log _log = LogFactoryUtil.getLog(MeasurePortlet.class);
