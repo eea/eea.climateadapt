@@ -567,6 +567,7 @@ body #banner .logo a {
 .sector-main-article .text-container {
 	background: url("../images/bg_sector_main_article_text.png") repeat-y scroll left center;
 	height: 200px;
+	right: 0;
 	top: 40px;
 }
 
