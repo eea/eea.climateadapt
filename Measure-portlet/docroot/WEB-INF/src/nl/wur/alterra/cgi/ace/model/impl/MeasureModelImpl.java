@@ -80,9 +80,10 @@ public class MeasureModelImpl extends BaseModelImpl<Measure>
 			{ "sectors_", new Integer(Types.VARCHAR) },
 			{ "elements_", new Integer(Types.VARCHAR) },
 			{ "climateimpacts_", new Integer(Types.VARCHAR) },
-			{ "mao_type", new Integer(Types.VARCHAR) }
+			{ "mao_type", new Integer(Types.VARCHAR) },
+			{ "source", new Integer(Types.VARCHAR) }
 		};
-	public static final String TABLE_SQL_CREATE = "create table Ace_Measure (measureId LONG not null primary key,companyId LONG,groupId LONG,name VARCHAR(75) null,description VARCHAR(75) null,implementationtype VARCHAR(75) null,implementationtime VARCHAR(75) null,lifetime VARCHAR(75) null,spatiallayer VARCHAR(75) null,spatialvalues VARCHAR(75) null,legalaspects VARCHAR(75) null,stakeholderparticipation VARCHAR(75) null,contact VARCHAR(75) null,succeslimitations VARCHAR(75) null,website VARCHAR(75) null,costbenefit VARCHAR(75) null,keywords VARCHAR(75) null,startdate DATE null,enddate DATE null,publicationdate DATE null,language VARCHAR(75) null,sectors_ VARCHAR(75) null,elements_ VARCHAR(75) null,climateimpacts_ VARCHAR(75) null,mao_type VARCHAR(75) null)";
+	public static final String TABLE_SQL_CREATE = "create table Ace_Measure (measureId LONG not null primary key,companyId LONG,groupId LONG,name VARCHAR(75) null,description VARCHAR(75) null,implementationtype VARCHAR(75) null,implementationtime VARCHAR(75) null,lifetime VARCHAR(75) null,spatiallayer VARCHAR(75) null,spatialvalues VARCHAR(75) null,legalaspects VARCHAR(75) null,stakeholderparticipation VARCHAR(75) null,contact VARCHAR(75) null,succeslimitations VARCHAR(75) null,website VARCHAR(75) null,costbenefit VARCHAR(75) null,keywords VARCHAR(75) null,startdate DATE null,enddate DATE null,publicationdate DATE null,language VARCHAR(75) null,sectors_ VARCHAR(75) null,elements_ VARCHAR(75) null,climateimpacts_ VARCHAR(75) null,mao_type VARCHAR(75) null,source VARCHAR(75) null)";
 	public static final String TABLE_SQL_DROP = "drop table Ace_Measure";
 	public static final String ORDER_BY_JPQL = " ORDER BY measure.name ASC";
 	public static final String ORDER_BY_SQL = " ORDER BY Ace_Measure.name ASC";
@@ -408,6 +409,19 @@ public class MeasureModelImpl extends BaseModelImpl<Measure>
 		_mao_type = mao_type;
 	}
 
+	public String getSource() {
+		if (_source == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _source;
+		}
+	}
+
+	public void setSource(String source) {
+		_source = source;
+	}
+
 	public Measure toEscapedModel() {
 		if (isEscapedModel()) {
 			return (Measure)this;
@@ -459,6 +473,7 @@ public class MeasureModelImpl extends BaseModelImpl<Measure>
 		clone.setElements_(getElements_());
 		clone.setClimateimpacts_(getClimateimpacts_());
 		clone.setMao_type(getMao_type());
+		clone.setSource(getSource());
 
 		return clone;
 	}
@@ -504,7 +519,7 @@ public class MeasureModelImpl extends BaseModelImpl<Measure>
 	}
 
 	public String toString() {
-		StringBundler sb = new StringBundler(51);
+		StringBundler sb = new StringBundler(53);
 
 		sb.append("{measureId=");
 		sb.append(getMeasureId());
@@ -556,13 +571,15 @@ public class MeasureModelImpl extends BaseModelImpl<Measure>
 		sb.append(getClimateimpacts_());
 		sb.append(", mao_type=");
 		sb.append(getMao_type());
+		sb.append(", source=");
+		sb.append(getSource());
 		sb.append("}");
 
 		return sb.toString();
 	}
 
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(79);
+		StringBundler sb = new StringBundler(82);
 
 		sb.append("<model><model-name>");
 		sb.append("nl.wur.alterra.cgi.ace.model.Measure");
@@ -668,6 +685,10 @@ public class MeasureModelImpl extends BaseModelImpl<Measure>
 			"<column><column-name>mao_type</column-name><column-value><![CDATA[");
 		sb.append(getMao_type());
 		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>source</column-name><column-value><![CDATA[");
+		sb.append(getSource());
+		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");
 
@@ -699,5 +720,6 @@ public class MeasureModelImpl extends BaseModelImpl<Measure>
 	private String _elements_;
 	private String _climateimpacts_;
 	private String _mao_type;
+	private String _source;
 	private transient ExpandoBridge _expandoBridge;
 }

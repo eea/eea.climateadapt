@@ -237,6 +237,14 @@ public class MeasureWrapper implements Measure {
 		_measure.setMao_type(mao_type);
 	}
 
+	public java.lang.String getSource() {
+		return _measure.getSource();
+	}
+
+	public void setSource(java.lang.String source) {
+		_measure.setSource(source);
+	}
+
 	public nl.wur.alterra.cgi.ace.model.Measure toEscapedModel() {
 		return _measure.toEscapedModel();
 	}

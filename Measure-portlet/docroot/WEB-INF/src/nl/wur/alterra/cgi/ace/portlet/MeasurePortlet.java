@@ -115,6 +115,7 @@ public class MeasurePortlet extends MVCPortlet {
 		measure.setElements_(ParamUtil.getString(request, "elements_"));
 		measure.setClimateimpacts_(ParamUtil.getString(request, "climateimpacts_"));
 		measure.setMao_type(ParamUtil.getString(request, "mao_type"));
+		measure.setSource(ParamUtil.getString(request, "source"));
 
 		return measure;
 	}

@@ -20,7 +20,6 @@ public class MeasureIdComparator extends OrderByComparator {
 	public MeasureIdComparator(boolean orderBy) {
 		_asc = orderBy;
 		
-		System.out.println("MeasureIdComparator");
 	}
 
 	
@@ -35,7 +34,6 @@ public class MeasureIdComparator extends OrderByComparator {
 
 		int value = Integer.parseInt( "" + (measure2.getMeasureId() - measure1.getMeasureId()) );
 
-		System.out.println("" + value + " " + _asc);
 		
 		if (_asc) {
 			

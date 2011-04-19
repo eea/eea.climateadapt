@@ -91,6 +91,9 @@
 		<b>M (measure) or A (action)</b><br />
 		<input name="mao_type" type="text" size="5" value="<%= measure == null ? "" : measure.getMao_type() %>"><br /><br />
 		
+		<b>Source)</b><br />
+		<input name="source" type="text" size="100" value="<%= measure == null ? "" : measure.getSource() %>"><br /><br />
+		
 		<!--  a u i :input name="startdate" / >
 		
 		< a u  i:input name="enddate" / >

@@ -27,5 +27,6 @@
 		<field name="elements_" type="String" />
 		<field name="climateimpacts_" type="String" />
 		<field name="mao_type" type="String" />
+		<field name="source" type="String" />
 	</model>
 </model-hints>

@@ -32,5 +32,6 @@
 		<property name="elements_" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="climateimpacts_" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="mao_type" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="source" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 	</class>
 </hibernate-mapping>

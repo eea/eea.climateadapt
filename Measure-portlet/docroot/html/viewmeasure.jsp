@@ -39,7 +39,10 @@
 	 <% out.print( measure.getDescription() ); %><br /><br />
 	 <b>Contact</b><br />
 	 <% out.print( measure.getContact() ); %><br /><br />	 
-	 
+
+	 <b>Source</b><br />
+	 <% out.print( measure.getSource() ); %><br /><br />
+	 	 
 	 <b>Elements</b><br />
 	 <% 
 	 	String e = measure.getElements_() ; 

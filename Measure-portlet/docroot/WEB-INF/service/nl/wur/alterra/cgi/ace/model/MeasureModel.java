@@ -426,6 +426,21 @@ public interface MeasureModel extends BaseModel<Measure> {
 	public void setMao_type(String mao_type);
 
 	/**
+	 * Gets the source of this measure.
+	 *
+	 * @return the source of this measure
+	 */
+	@AutoEscape
+	public String getSource();
+
+	/**
+	 * Sets the source of this measure.
+	 *
+	 * @param source the source of this measure
+	 */
+	public void setSource(String source);
+
+	/**
 	 * Gets a copy of this measure as an escaped model instance by wrapping it with an {@link com.liferay.portal.kernel.bean.AutoEscapeBeanHandler}.
 	 *
 	 * @return the escaped model instance

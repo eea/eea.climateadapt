@@ -243,6 +243,14 @@ public class MeasureClp extends BaseModelImpl<Measure> implements Measure {
 		_mao_type = mao_type;
 	}
 
+	public String getSource() {
+		return _source;
+	}
+
+	public void setSource(String source) {
+		_source = source;
+	}
+
 	public Measure toEscapedModel() {
 		if (isEscapedModel()) {
 			return this;
@@ -281,6 +289,7 @@ public class MeasureClp extends BaseModelImpl<Measure> implements Measure {
 		clone.setElements_(getElements_());
 		clone.setClimateimpacts_(getClimateimpacts_());
 		clone.setMao_type(getMao_type());
+		clone.setSource(getSource());
 
 		return clone;
 	}
@@ -326,7 +335,7 @@ public class MeasureClp extends BaseModelImpl<Measure> implements Measure {
 	}
 
 	public String toString() {
-		StringBundler sb = new StringBundler(51);
+		StringBundler sb = new StringBundler(53);
 
 		sb.append("{measureId=");
 		sb.append(getMeasureId());
@@ -378,13 +387,15 @@ public class MeasureClp extends BaseModelImpl<Measure> implements Measure {
 		sb.append(getClimateimpacts_());
 		sb.append(", mao_type=");
 		sb.append(getMao_type());
+		sb.append(", source=");
+		sb.append(getSource());
 		sb.append("}");
 
 		return sb.toString();
 	}
 
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(79);
+		StringBundler sb = new StringBundler(82);
 
 		sb.append("<model><model-name>");
 		sb.append("nl.wur.alterra.cgi.ace.model.Measure");
@@ -490,6 +501,10 @@ public class MeasureClp extends BaseModelImpl<Measure> implements Measure {
 			"<column><column-name>mao_type</column-name><column-value><![CDATA[");
 		sb.append(getMao_type());
 		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>source</column-name><column-value><![CDATA[");
+		sb.append(getSource());
+		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");
 
@@ -521,4 +536,5 @@ public class MeasureClp extends BaseModelImpl<Measure> implements Measure {
 	private String _elements_;
 	private String _climateimpacts_;
 	private String _mao_type;
+	private String _source;
 }

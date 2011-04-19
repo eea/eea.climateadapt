@@ -36,6 +36,7 @@
 		<column name="elements_" type="String" />
 		<column name="climateimpacts_" type="String" />
 		<column name="mao_type" type="String" />
+		<column name="source" type="String" />
 
 		<!-- Sort order -->
 		<order by="asc" >

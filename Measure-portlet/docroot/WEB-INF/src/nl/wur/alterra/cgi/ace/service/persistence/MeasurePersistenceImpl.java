@@ -308,6 +308,7 @@ public class MeasurePersistenceImpl extends BasePersistenceImpl<Measure>
 		measureImpl.setElements_(measure.getElements_());
 		measureImpl.setClimateimpacts_(measure.getClimateimpacts_());
 		measureImpl.setMao_type(measure.getMao_type());
+		measureImpl.setSource(measure.getSource());
 
 		return measureImpl;
 	}

@@ -231,6 +231,13 @@ public class ClpSerializer {
 
 					method24.invoke(newModel, value24);
 
+					Method method25 = newModelClass.getMethod("setSource",
+							new Class[] { String.class });
+
+					String value25 = oldCplModel.getSource();
+
+					method25.invoke(newModel, value25);
+
 					return newModel;
 				}
 				catch (Exception e) {
@@ -462,6 +469,13 @@ public class ClpSerializer {
 							(Object[])null);
 
 					newModel.setMao_type(value24);
+
+					Method method25 = oldModelClass.getMethod("getSource");
+
+					String value25 = (String)method25.invoke(oldModel,
+							(Object[])null);
+
+					newModel.setSource(value25);
 
 					return newModel;
 				}

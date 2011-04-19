@@ -24,13 +24,10 @@ public class MeasureUtil {
 		if (orderByCol.equals("measureId")) {
 			
 			orderByComparator = new MeasureIdComparator(orderByAsc);
-			System.out.println(orderByComparator.toString());
 		} 
 	    else if (orderByCol.equals("name")) {
 			// depends on measure.getName()
 			orderByComparator = new MeasureNameComparator(orderByAsc);
-			
-			System.out.println(orderByComparator.toString());
 		}
 		
 		return orderByComparator;

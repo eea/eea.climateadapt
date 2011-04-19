@@ -40,6 +40,7 @@
 			<basic name="elements_" />
 			<basic name="climateimpacts_" />
 			<basic name="mao_type" />
+			<basic name="source" />
 			<transient name="primaryKey" />
 		</attributes>
 	</mapped-superclass>

@@ -19,10 +19,7 @@ public class MeasureNameComparator extends OrderByComparator {
 	
 	public MeasureNameComparator(boolean orderBy) {
 		_asc = orderBy;
-		
-		System.out.println("MeasureNameComparator");
-		
-	   
+			   
 	}
 
 	
@@ -36,9 +33,7 @@ public class MeasureNameComparator extends OrderByComparator {
 
 		int value = measure1.getName().toLowerCase().compareTo(
 		measure2.getName().toLowerCase());
-	
-		System.out.println("" + value + " " + _asc + " " + super.getOrderByFields().toString());
-		
+			
 		if (_asc) {
 			
 			return value;
