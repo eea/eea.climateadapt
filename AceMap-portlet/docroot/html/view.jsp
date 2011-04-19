@@ -284,9 +284,10 @@ Ext.onReady(function() {
 });		
 				
             </script>
-			
-			<div id="tree" style="float:left;"></div>
-			<div id="mappanel" style="float:left;"></div>
+			<div style="width: 1100px; overflow-x: scroll">
+				<div id="tree" style="float:left;"></div>
+				<div id="mappanel" style="float:left;"></div>
+			</div>
 			
             </div>
     </div>
