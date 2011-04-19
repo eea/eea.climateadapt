@@ -16,16 +16,24 @@
 
 <%@ taglib uri="http://java.sun.com/portlet_2_0" prefix="portlet" %>
 
+<%@ page import="com.liferay.portal.util.PortalUtil" %>
+
 <portlet:defineObjects />
 
+<%
+HttpServletRequest httpRequest = PortalUtil.getOriginalServletRequest(request);
+%>
 This is the <b>Ace map portlet</b> portlet.
 
 <div>
     <div id="acemap_column" style="margin-right: 10px; margin-top: 50px; float:left">
     <script defer="defer" type="text/javascript">
+    
+    
 Ext.onReady(function() {
-
     Ext.QuickTips.init();
+
+	OpenLayers.ProxyHost = '<%= request.getContextPath() %>/proxy?url=';
 
     var map = new OpenLayers.Map();
     var base = new OpenLayers.Layer.WMS(
@@ -263,9 +271,15 @@ Ext.onReady(function() {
         rootVisible: false,
         lines: false,
         bbar: [{
-            text: ""
+            text: "Add layers",
+            handler: function() {
+            	
+            	 GeoNetwork.WindowManager.showWindow("addwms");    
+            }
         }]
     });
+    
+    GeoNetwork.WindowManager.registerWindow("addwms", GeoNetwork.AddWmsLayerWindow, {map: map, id:"addwms"});
 	
 });		
 				

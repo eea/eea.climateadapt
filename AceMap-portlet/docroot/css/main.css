@@ -3,3 +3,9 @@
 	list-style-type:none;
 	margin-left:0em;
 }
+
+#gn_wmsbrowserpanel ul, #gn_wmsbrowserpanel ul ul {
+	list-style:none;
+	list-style-type:none;
+	margin-left:0em;
+}
