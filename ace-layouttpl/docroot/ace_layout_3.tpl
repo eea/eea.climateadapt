@@ -2,7 +2,7 @@
 #if ($browserSniffer.isIe($request) && $browserSniffer.getMajorVersion($request) < 8)
 	<table class="portlet-layout">
 		<tr>
-			<td class="aui-w75 portlet-column portlet-column-first" id="column-left">
+			<td class="aui-w75 portlet-column portlet-column-first" id="column-1">
 				$processor.processColumn("column-1", "portlet-column-content portlet-column-content-first")
 			    <table>
 		            <tr>
@@ -18,8 +18,8 @@
 			        </tr>
 	            </table>
 			</td>
-			<td class="aui-w25 portlet-column portlet-column-last" id="column-4">
-				$processor.processColumn("column-4", "portlet-column-content portlet-column-content-last")
+			<td class="aui-w25 portlet-column portlet-column-last" id="column-5">
+				$processor.processColumn("column-5", "portlet-column-content portlet-column-content-last")
 			</td>
 		</tr>
     </table>
