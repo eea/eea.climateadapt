@@ -42,6 +42,9 @@ public class ACESearchEngine extends HitsOpenSearchImpl {
 
     public static final String TITLE = "ACE Search ";
 
+    private static final String defaultFuzziness = "0.7";
+
+
 
     /**
      * Searches a ACEItem index. Note: this method is only in case we'd want to include AceItem search to the default
@@ -77,8 +80,9 @@ public class ACESearchEngine extends HitsOpenSearchImpl {
         try {
             ACEIndexSearcher searcher = ACEIndexSearcher.getACEIndexSearcher();
             QueryParser queryParser = new QueryParser("any", ACEAnalyzer.getAnalyzer());
+            keywords = addFuzziness(keywords, defaultFuzziness);
             Query query = queryParser.parse(keywords);
-            System.out.println("Lucene query: " + query.toString());
+            System.out.println("*** ACESearchEngine search: Lucene query is: " + query.toString());
             //System.out.println("Lucene query (rewritten): " + query.rewrite(((IndexSearcher)searcher).getIndexReader()).toString());
             TopDocs topDocs = searcher.search(query, null, itemsPerPage);
             System.out.println("Lucene searcher # total hits: " + topDocs.totalHits);
@@ -130,6 +134,24 @@ public class ACESearchEngine extends HitsOpenSearchImpl {
     }
 
     /**
+     * Adds fuzziness to each term in a whitespace-separated string.
+     * @param keywords keywords in whitepsace-separated string
+     * @param fuzziness fuzziness factor
+     * @return keywords with added fuzziness in whitepsace-separated string
+     */
+    private String addFuzziness(String keywords, String fuzziness) {
+        String[] searchterms = keywords.split("\\s");
+        String result = "";
+        for(String searchterm : searchterms) {
+            if(searchterm != null && searchterm.trim().length() > 0) {
+                result += searchterm.trim() + "~" + fuzziness + " ";
+            }
+        }
+        System.out.println("*** ACESearchEngine search: searchterms with fuzziness: " + result);
+        return result;
+    }
+
+    /**
      * Searches Lucene, restricted to specified search parameters.
      *
      * @param aceItemType
@@ -148,6 +170,8 @@ public class ACESearchEngine extends HitsOpenSearchImpl {
             String rawQuery = "";
             if(formBean.getAnyOfThese() != null) {
                 rawQuery = rawQuery + " " + formBean.getAnyOfThese();
+
+                rawQuery = addFuzziness(rawQuery, defaultFuzziness);
             }
 
             // user entered no searchterms; do wildcard query
