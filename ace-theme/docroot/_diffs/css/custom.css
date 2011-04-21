@@ -301,7 +301,28 @@ body #banner .logo a {
 /* ---------- Footer ---------- */
 
 #footer {
-	text-align: right;
+	border-top: 2px solid #D7E3EF;
+	margin-top: 15px;
+}
+
+#footer .container {
+	display: block;
+	margin-top: 15px;
+	position: absolute;
+	right: 32%;
+	text-align: center;
+	width: 100%;
+}
+
+.ie7 #footer .container {
+	right: 34%;
+}
+
+#footer a {
+	float: right;
+	margin-bottom: 15px;
+	text-decoration: none;
+	width: 200px;
 }
 
 /* ---------- Hudcrumbs ---------- */
@@ -529,7 +550,12 @@ body #banner .logo a {
 /**** Ace Layout 3 ****/
 
 .ace_layout_3 #layout-column_column-1 {
+	margin-top: -15px;
 	padding: 0 2px 27px 0;
+}
+
+.ie7 .ace_layout_3 #layout-column_column-1 {
+	margin-top: 0;
 }
 
 .ace_layout_3 #column-5 {
@@ -547,14 +573,13 @@ body #banner .logo a {
 /**** Template Sector Main Article ****/
 
 .sector-main-article {
-	height: 240px;
 	padding: 0;
 }
 
 .sector-main-article .image {
 	float: left;
 	height: 240px;
-	width: 33%;
+	width: 0;
 }
 
 .sector-main-article .text-container, 
@@ -565,14 +590,15 @@ body #banner .logo a {
 }
 		
 .sector-main-article .text-container {
-	background: url("../images/bg_sector_main_article_text.png") repeat-y scroll left center;
-	height: 200px;
-	right: 0;
+	background: url("../images/bg_sector_main_article_text.png") repeat-y scroll 5% center;
+	margin-right: 245px;
+	min-height: 200px;
+	position: relative;
 	top: 40px;
 }
 
 .sector-main-article .filter-container {
-	background: url("../images/bg_sector_main_article_filter.png") repeat-y scroll left center;
+	background: url("../images/bg_sector_main_article_filter.png") repeat-y scroll 5% center;
 	height: 40px;
 	right: 0;
 	top: 0;
@@ -594,6 +620,15 @@ body #banner .logo a {
 
 .sector-main-article .body {
 	margin: 0 17px;
+}
+
+.sector-main-article #read-more-link {
+	margin-bottom: 20px;
+	text-align:right;
+}
+
+.sector-main-article .read-more-body {
+	margin: 0 17px 25px -257px;
 }
 
 /**** Styles modified from originally ace-theme/docroot/css/custom_common.css ****/

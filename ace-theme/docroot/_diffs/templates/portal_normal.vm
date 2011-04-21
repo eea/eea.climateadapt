@@ -33,7 +33,7 @@
 						<li id="signin"><a href="$sign_in_url" id="sign-in" rel="nofollow">$sign_in_text</a></li>
 					#end
                     <li id="twitter"><a href="http://twitter.com/euenvironment" target="_blank">Twitter</a></li>
-                    <li id="rss"><a href="http://localhost:8080/web/guest/home/-/journal/rss/14403?doAsGroupId=18&refererPlid=13750&_15_groupId=18" target="_blank">RSS</a></li>
+                    <li id="rss"><a href="/web/guest/home/-/journal/rss/14403?doAsGroupId=18&refererPlid=13750&_15_groupId=18" target="_blank">RSS</a></li>
 					<li id="sitemap"><a href="/sitemap">Sitemap</a></li>
                     <li id="legal-notice"><a href="http://ec.europa.eu/geninfo/legal_notices_en.htm">Legal notice</a></li>
 					
@@ -78,9 +78,10 @@
 	</div>
 
 	<footer id="footer" role="contentinfo">
-		<p class="powered-by">
-			#language("powered-by") <a href="http://www.liferay.com" rel="external">Liferay</a>
-		</p>
+		<div class="container">
+            <a href="http://ec.europa.eu/" target="_blank"><img src="/ace-theme/images/logo_eu.jpg" alt="European Commission logo" style="margin-bottom: 3px" /><div>European Commission</div></a>
+			<a href="http://www.eea.europa.eu/" target="_blank"><img src="/ace-theme/images/logo_eea.png" style="width: 52px; margin-top: -8px" alt="EEA logo" /><div>European Environment Agency</div></a>
+        </div>
 	</footer>
 </div>
 
