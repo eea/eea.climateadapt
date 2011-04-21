@@ -23,27 +23,45 @@
 <%
 HttpServletRequest httpRequest = PortalUtil.getOriginalServletRequest(request);
 %>
-This is the <b>Ace map portlet</b> portlet.
+This is the <b>Ace Adaptation Tools portlet</b> portlet.
 
 <div>
     <div id="acemap_column" style="margin-right: 10px; margin-top: 50px; float:left;border:solid 1px red;width:850px;">
     <script defer="defer" type="text/javascript">
 		var $j = jQuery.noConflict();
-		$j(document).ready(function(){
-			//$j(".info-button").hide();
-			//create a bubble popup for each DOM element with class attribute as "button"
-			$j(".info-button").CreateBubblePopup({
+		$j(document).ready(function(){			
+			$j('.info-button.top-bubble').CreateBubblePopup({
 					position : 'top',
 					align	 : 'center',
-					innerHtml: 'Take a look to the HTML source of this page <br /> \
-								to learn how the plugin works!',
+					innerHtml: '<div style=""> \
+									<div style="background:green;color:#fff;height:15px;border:1px solid lime;padding:5px;">information</div> \
+									<div style="height:35px;padding:5px;">short description</div> \
+									<div style="height:15px;text-align:right;padding:5px;">read more &raquo;</div> \
+								</div>',
 					innerHtmlStyle: {
-										color:'#FFFFFF', 
+										color:'#000', 
+										'text-align':'left'
+									},
+					themeName: 	'green',
+					themePath: 	'<%=renderRequest.getContextPath()%>/js/bubblepopup/jquerybubblepopup-theme'					
+			});
+			$j('.info-button.right-bubble').CreateBubblePopup({
+					position : 'right',
+					align	 : 'center',
+					innerHtml: '<div style=""> \
+									<div style="background:#ff6347;color:#fff;height:15px;border:1px solid #ffd700;padding:5px;">information</div> \
+									<div style="height:35px;padding:5px;">short description</div> \
+									<div style="height:15px;text-align:right;padding:5px;">read more &raquo;</div> \
+								</div>',
+					innerHtmlStyle: {
+										color:'#000', 
 										'text-align':'center'
 									},
-					themeName: 	'all-black',
+					themeName: 	'orange',
 					themePath: 	'<%=renderRequest.getContextPath()%>/js/bubblepopup/jquerybubblepopup-theme'
 			});
+		
+			
 		});
     
 Ext.onReady(function() {
@@ -237,7 +255,7 @@ Ext.onReady(function() {
 				<option>Droughts</option>
 				<option>Flooding</option>
 			</select>
-			<div class="info-button">
+			<div class="info-button top-bubble">
 				i
 			</div>	
 		</div>		
@@ -278,7 +296,7 @@ Ext.onReady(function() {
 					Water management
 				</option>
 			</select>				
-			<div class="info-button">
+			<div class="info-button top-bubble">
 				i
 			</div>
 		</div>
@@ -298,7 +316,7 @@ Ext.onReady(function() {
 		</h2>
 		
 		<div id="indicator-climate-changes" class="indicator-category">
-			<div class="info-button">
+			<div class="info-button right-bubble">
 				i
 			</div>
 			<h3 class="indicator-category-title">
@@ -307,7 +325,7 @@ Ext.onReady(function() {
 		</div>
 				
 		<div id="indicator-exposure" class="indicator-category">
-			<div class="info-button">
+			<div class="info-button right-bubble">
 				i
 			</div>
 			<h3 class="indicator-category-title">
@@ -316,7 +334,7 @@ Ext.onReady(function() {
 		</div>
 				
 		<div id="indicator-sensitivity" class="indicator-category">
-			<div class="info-button">
+			<div class="info-button right-bubble">
 				i
 			</div>
 			<h3 class="indicator-category-title">
@@ -325,7 +343,7 @@ Ext.onReady(function() {
 		</div>
 		
 		<div id="indicator-vulnerability" class="indicator-category">
-			<div class="info-button">
+			<div class="info-button right-bubble">
 				i
 			</div>
 			<h3 class="indicator-category-title">
@@ -334,7 +352,7 @@ Ext.onReady(function() {
 		</div>
 				
 		<div id="indicator-human-causes" class="indicator-category">
-			<div class="info-button">
+			<div class="info-button right-bubble">
 				i
 			</div>
 			<h3 class="indicator-category-title">
