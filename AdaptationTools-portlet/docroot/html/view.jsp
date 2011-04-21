@@ -26,7 +26,7 @@ HttpServletRequest httpRequest = PortalUtil.getOriginalServletRequest(request);
 This is the <b>Ace map portlet</b> portlet.
 
 <div>
-    <div id="acemap_column" style="margin-right: 10px; margin-top: 50px; float:left;border:solid 1px red;">
+    <div id="acemap_column" style="margin-right: 10px; margin-top: 50px; float:left;border:solid 1px red;width:850px;">
     <script defer="defer" type="text/javascript">
     
 Ext.onReady(function() {
@@ -208,36 +208,98 @@ Ext.onReady(function() {
 				
             </script>
 			
-			<h1 id="adaptationtools-heading" style="border:solid 1px lime;padding:20px;">
-				Am I vulnerable to climate change and what are my risks
-			</h1>
-			<div id="adaptationtools-selectors-top" style="border:solid 1px orange;">
-				<select>
-					<option>Water scarcity and droughts</option>
-				</select>
-				<span style="width: 15px;height:15px;background-color:beige;padding:5px;">
-					i
-				<span>
-					Filter by sector
-				</span>
-				<select>
-					<option>Water management</option>
-				</select>				
-				<span style="width: 15px;height:15px;background-color:beige;padding:5px;">
-					i
-				<span>
+	<h1 id="adaptationtools-heading">
+		Am I vulnerable to climate change and what are my risks
+	</h1>
+	
+	<div id="adaptationtools-selectors-top">
+		<div id="risks-selector" class="adaptationtools-selector">
+			<select>
+				<option>Water scarcity</option>
+				<option>Droughts</option>
+				<option>Flooding</option>
+			</select>
+			<div class="info-button">
+				i
+			</div>	
+		</div>		
+		<div id="sector-selector"  class="adaptationtools-selector">
+			<span style="margin-right:30px;">
+				Filter by sector
+			</span>
+			<select>
+				<option>all</option>
+				<option>Water management</option>
+				<option>Agriculture & forest</option>
+				<option>Health</option>
+			</select>				
+			<div class="info-button">
+				i
 			</div>
+		</div>
+	</div>
+	
+	<hr style="clear:both;display:block;visibility:hidden;"></hr>
+
+	<div id="adaptationtools-map">
+		<div id="tree" style="float:left;"></div>
+		<div id="mappanel" style="float:left;"></div>
+	</div>
 			
-			<div id="adaptationtools-indicators" style="border:solid 1px aqua;float:left;width:150px;height:500px;">
-			
+	<div id="adaptationtools-indicators">
+		<h2>
+			Indicators
+		</h2>
+		
+		<div id="indicator-climate-changes" class="indicator-category">
+			<div class="info-button">
+				i
 			</div>
+			<h3 class="indicator-category-title">
+				Climate changes
+			</h3>
+		</div>
+				
+		<div id="indicator-exposure" class="indicator-category">
+			<div class="info-button">
+				i
+			</div>
+			<h3 class="indicator-category-title">
+				Exposure
+			</h3>
+		</div>
+				
+		<div id="indicator-sensitivity" class="indicator-category">
+			<div class="info-button">
+				i
+			</div>
+			<h3 class="indicator-category-title">
+				Sensitivity
+			</h3>					
+		</div>
+		
+		<div id="indicator-vulnerability" class="indicator-category">
+			<div class="info-button">
+				i
+			</div>
+			<h3 class="indicator-category-title">
+				Vulnerability & risks
+			</h3>					
+		</div>
+				
+		<div id="indicator-human-causes" class="indicator-category">
+			<div class="info-button">
+				i
+			</div>
+			<h3 class="indicator-category-title">
+				Underlying human causes
+			</h3>					
+		</div>
+				
+	</div>
 						
-			<div id="adaptationtools-map" style="width: 400px; overflow-x: scroll;border:solid 1px salmon;float:left;">
-				<div id="tree" style="float:left;"></div>
-				<div id="mappanel" style="float:left;"></div>
-			</div>
-	
-            </div>
+
+	<!-- acemap_column -->
     </div>
-	
+<!-- outer div -->	
 </div>	

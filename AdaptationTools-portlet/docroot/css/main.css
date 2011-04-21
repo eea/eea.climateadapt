@@ -9,3 +9,52 @@
 	list-style-type:none;
 	margin-left:0em;
 }
+
+#adaptationtools-heading {
+	padding:20px;
+}
+#adaptationtools-selectors-top {
+	position:relative;
+}
+.adaptationtools-selector {
+	position:absolute;
+}
+#risks-selector {
+	left:100px;
+}
+#sector-selector {
+	right:100px;
+}
+.info-button {
+	width: 15px;
+	height:15px;
+	background-color:beige;
+	padding: 5px 10px;
+	display:inline;
+	border:1px dotted #CDC0B0;
+	font-weight:bolder;
+	font-size:larger;
+}
+#adaptationtools-indicators {
+	float:right;
+	width:385px;
+	height:500px;
+	margin:20px;
+}
+.indicator-category {
+	margin: 10px 0px;
+}
+.indicator-category-title {
+	margin-left:10px;
+	display: inline;
+}
+#adaptationtools-map {
+	width: 400px; 
+	overflow-x: scroll;
+	float:right;
+	margin-right:20px;
+	margin-top:20px;
+}
+#mappanel {
+	margin-top:20px;
+}
