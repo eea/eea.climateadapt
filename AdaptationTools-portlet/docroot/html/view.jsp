@@ -26,9 +26,8 @@ HttpServletRequest httpRequest = PortalUtil.getOriginalServletRequest(request);
 This is the <b>Ace map portlet</b> portlet.
 
 <div>
-    <div id="acemap_column" style="margin-right: 10px; margin-top: 50px; float:left">
+    <div id="acemap_column" style="margin-right: 10px; margin-top: 50px; float:left;border:solid 1px red;">
     <script defer="defer" type="text/javascript">
-    
     
 Ext.onReady(function() {
     Ext.QuickTips.init();
@@ -196,99 +195,48 @@ Ext.onReady(function() {
 
     var mapPanel = new GeoExt.MapPanel({
         renderTo: "mappanel",
-        height: 500,
-        width: 900,
+        height: 400,
+        width: 400,
         map: map,
-        center: new OpenLayers.LonLat(10, 52),
-        zoom: 4,
+        center: new OpenLayers.LonLat(7, 44),
+        zoom: 8,
         tbar: toolbarItems
     });
-	
-    // create our own layer node UI class, using the TreeNodeUIEventMixin
-    var LayerNodeUI = Ext.extend(GeoExt.tree.LayerNodeUI, new GeoExt.tree.TreeNodeUIEventMixin());
-        
-    // using OpenLayers.Format.JSON to create a nice formatted string of the
-    // configuration for editing it in the UI
-    var treeConfig = new OpenLayers.Format.JSON().write([{
-        nodeType: "gx_baselayercontainer"
-    }, {
-        nodeType: "gx_overlaylayercontainer",
-        expanded: true,
-        // render the nodes inside this container with a radio button,
-        // and assign them the group "foo".
-        loader: {
-            baseAttrs: {
-                radioGroup: "foo",
-                uiProvider: "layernodeui"
-            }
-        }
-    }], true);
-
-    // create the tree with the configuration from above
-    tree = new Ext.tree.TreePanel({
-		renderTo: 'tree',
-        border: true,
-        region: "west",
-        title: "Layers",
-        width: 200,
-		height: 500,
-        split: true,
-        collapsible: false,
-        collapseMode: "mini",
-        autoScroll: true,
-        /*
-		  plugins: [
-           new GeoExt.plugins.TreeNodeRadioButton({
-                listeners: {
-                    "radiochange": function(node) {
-                        alert(node.text + " is now the active layer.");
-                    }
-                }
-            })
-        ],
-		*/
-        loader: new Ext.tree.TreeLoader({
-            // applyLoader has to be set to false to not interfer with loaders
-            // of nodes further down the tree hierarchy
-            applyLoader: false,
-            uiProviders: {
-                "layernodeui": LayerNodeUI
-            }
-        }),
-		
-        root: {
-            nodeType: "async",
-            // the children property of an Ext.tree.AsyncTreeNode is used to
-            // provide an initial set of layer nodes. We use the treeConfig
-            // from above, that we created with OpenLayers.Format.JSON.write.
-            children: Ext.decode(treeConfig)
-        },
-        listeners: {
-            "radiochange": function(node){
-                alert(node.layer.name + " is now the the active layer.");
-            }
-        },
-        rootVisible: false,
-        lines: false,
-        bbar: [{
-            text: "Add layers",
-            handler: function() {
-            	
-            	 GeoNetwork.WindowManager.showWindow("addwms");    
-            }
-        }]
-    });
     
-    GeoNetwork.WindowManager.registerWindow("addwms", GeoNetwork.AddWmsLayerWindow, {map: map, id:"addwms"});
 	
 });		
 				
             </script>
-			<div style="width: 1100px; overflow-x: scroll">
+			
+			<h1 id="adaptationtools-heading" style="border:solid 1px lime;padding:20px;">
+				Am I vulnerable to climate change and what are my risks
+			</h1>
+			<div id="adaptationtools-selectors-top" style="border:solid 1px orange;">
+				<select>
+					<option>Water scarcity and droughts</option>
+				</select>
+				<span style="width: 15px;height:15px;background-color:beige;padding:5px;">
+					i
+				<span>
+					Filter by sector
+				</span>
+				<select>
+					<option>Water management</option>
+				</select>				
+				<span style="width: 15px;height:15px;background-color:beige;padding:5px;">
+					i
+				<span>
+			</div>
+			
+			<div id="adaptationtools-indicators" style="border:solid 1px aqua;float:left;width:150px;height:500px;">
+			
+			</div>
+						
+			<div id="adaptationtools-map" style="width: 400px; overflow-x: scroll;border:solid 1px salmon;float:left;">
 				<div id="tree" style="float:left;"></div>
 				<div id="mappanel" style="float:left;"></div>
 			</div>
-			
+	
             </div>
     </div>
 	

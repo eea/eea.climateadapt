@@ -7,6 +7,17 @@
 		<icon>/icon.png</icon>
 		<instanceable>false</instanceable>
 		<header-portlet-css>/css/main.css</header-portlet-css>
+		<header-portlet-css>http://extjs.cachefly.net/ext-3.2.1/resources/css/ext-all.css</header-portlet-css>
+		<header-portlet-css>http://extjs.cachefly.net/ext-3.2.1/examples/shared/examples.css</header-portlet-css>
+		
+        <header-portlet-javascript>/js/ext-base.js</header-portlet-javascript>
+        <header-portlet-javascript>/js/ext-all.js</header-portlet-javascript>
+        <header-portlet-javascript>/js/OpenLayers.js</header-portlet-javascript>
+		<header-portlet-javascript>/js/GeoExt.js</header-portlet-javascript>
+        <header-portlet-javascript>/js/proj4js-compressed.js</header-portlet-javascript>
+        <header-portlet-javascript>/js/maplib.js</header-portlet-javascript>
+		<footer-portlet-javascript>/js/main.js</footer-portlet-javascript>
+		
 		<css-class-wrapper>AdaptationTools-portlet</css-class-wrapper>		
 	</portlet>
 	<role-mapper>
