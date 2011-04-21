@@ -50,13 +50,18 @@
 	margin-left:10px;
 	display: inline;
 }
-#adaptationtools-map {
-	width: 400px; 
-	overflow-x: scroll;
+div.map-overlay {
+	bottom:0px;
+	position:absolute;
+	left:0px;
+	z-index:1000;
+	background-color: #cccccc;
+	padding: 2px;
+}
+
+#map_container {
+	position: relative;
 	float:right;
 	margin-right:20px;
-	margin-top:20px;
-}
-#mappanel {
 	margin-top:20px;
 }
