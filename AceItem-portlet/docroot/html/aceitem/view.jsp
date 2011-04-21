@@ -69,12 +69,7 @@
 		<liferay-ui:search-container-column-text
 			name="name"
 			value="<%= nameLink %>"
-		/>      
-      	
-		<liferay-ui:search-container-column-text
-			name="description"
-			property="description"
-		/>
+		/>  
 
 		<liferay-ui:search-container-column-text
 			name="sectors_"
