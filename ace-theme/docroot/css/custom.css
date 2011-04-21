@@ -309,7 +309,7 @@ body #banner .logo a {
 	display: block;
 	margin-top: 15px;
 	position: absolute;
-	right: 32%;
+	left: 32%;
 	text-align: center;
 	width: 100%;
 }
@@ -319,7 +319,7 @@ body #banner .logo a {
 }
 
 #footer a {
-	float: right;
+	float: left;
 	margin-bottom: 15px;
 	text-decoration: none;
 	width: 200px;
