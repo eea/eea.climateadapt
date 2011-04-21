@@ -361,7 +361,37 @@ Ext.onReady(function() {
 		</div>
 				
 	</div>
-						
+	
+	<hr style="clear:both;display:block;visibility:hidden;"></hr>
+
+	<div style="padding:10px;margin:10px;">
+		<div id="read-more-on-the-approach" style="float:left;">
+			Read more on the approach &raquo;
+		</div>
+		<div id="time-selector" style="float:right;">
+			<span style="margin-right:30px;">
+				Time
+			</span>
+			<select disabled="disabled">
+				<option>
+					2050
+				</option>	
+			</select>
+		</div>
+		<div id="scenario-selector" style="float:right;margin-right:120px;">
+			<span style="margin-right:30px;">
+				Scenario
+			</span>
+			<select disabled="disabled">
+				<option>
+					Economy first
+				</option>	
+			</select>
+		</div>
+	</div>
+	
+	<hr style="clear:both;display:block;visibility:hidden;"></hr>
+	
 
 	<!-- acemap_column -->
     </div>

@@ -38,8 +38,10 @@
 #adaptationtools-indicators {
 	float:right;
 	width:385px;
-	height:500px;
 	margin:20px;
+}
+#read-more-on-the-approach {
+	width:385px;
 }
 .indicator-category {
 	margin: 10px 0px;
