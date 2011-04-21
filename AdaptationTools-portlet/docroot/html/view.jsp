@@ -215,6 +215,7 @@ Ext.onReady(function() {
 	<div id="adaptationtools-selectors-top">
 		<div id="risks-selector" class="adaptationtools-selector">
 			<select>
+				<option>choose a risk</option>
 				<option>Water scarcity</option>
 				<option>Droughts</option>
 				<option>Flooding</option>
@@ -227,17 +228,45 @@ Ext.onReady(function() {
 			<span style="margin-right:30px;">
 				Filter by sector
 			</span>
+			<!-- TODO load dynamically from enumeration -- but aceitem model classes must be made available as a jar for that -->
 			<select>
-				<option>all</option>
-				<option>Water management</option>
-				<option>Agriculture & forest</option>
-				<option>Health</option>
+				<option disabled="disabled" value="all">
+					all
+				</option>
+				<option value="AGRICULTURE">
+					Agriculture and Forest
+				</option>
+				<option disabled="disabled" value="BIODIVERSITY">
+					Biodiversity
+				</option>
+				<option disabled="disabled" value="COASTAL">
+					Coastal areas
+				</option>
+				<option disabled="disabled" value="DISASTERRISKREDUCTION">
+					Disaster Risk Reduction
+				</option>
+				<option disabled="disabled" value="FINANCIAL"">
+					Financial
+				</option>
+				<option disabled="disabled" value="HEALTH">
+					Health
+				</option>
+				<option disabled="disabled" value="INFRASTRUCTURE">
+					Infrastructure
+				</option>
+				<option disabled="disabled" value="MARINE">
+					Marine and Fisheries
+				</option>
+				<option value="WATERMANAGEMENT">
+					Water management
+				</option>
 			</select>				
 			<div class="info-button">
 				i
 			</div>
 		</div>
 	</div>
+    	
 	
 	<hr style="clear:both;display:block;visibility:hidden;"></hr>
 
