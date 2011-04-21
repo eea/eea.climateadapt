@@ -28,6 +28,23 @@ This is the <b>Ace map portlet</b> portlet.
 <div>
     <div id="acemap_column" style="margin-right: 10px; margin-top: 50px; float:left;border:solid 1px red;width:850px;">
     <script defer="defer" type="text/javascript">
+		var $j = jQuery.noConflict();
+		$j(document).ready(function(){
+			//$j(".info-button").hide();
+			//create a bubble popup for each DOM element with class attribute as "button"
+			$j(".info-button").CreateBubblePopup({
+					position : 'top',
+					align	 : 'center',
+					innerHtml: 'Take a look to the HTML source of this page <br /> \
+								to learn how the plugin works!',
+					innerHtmlStyle: {
+										color:'#FFFFFF', 
+										'text-align':'center'
+									},
+					themeName: 	'all-black',
+					themePath: 	'<%=renderRequest.getContextPath()%>/js/bubblepopup/jquerybubblepopup-theme'
+			});
+		});
     
 Ext.onReady(function() {
     Ext.QuickTips.init();
