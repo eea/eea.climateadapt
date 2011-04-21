@@ -33,7 +33,7 @@ This is the <b>Ace Adaptation Tools portlet</b> portlet.
 			$j('.info-button.top-bubble').CreateBubblePopup({
 					position : 'top',
 					align	 : 'center',
-					innerHtml: '<div style=""> \
+					innerHtml: '<div style="position:relative;z-index:9999;"> \
 									<div style="background:green;color:#fff;height:15px;border:1px solid lime;padding:5px;">information</div> \
 									<div style="height:35px;padding:5px;">short description</div> \
 									<div style="height:15px;text-align:right;padding:5px;">read more &raquo;</div> \
@@ -48,7 +48,7 @@ This is the <b>Ace Adaptation Tools portlet</b> portlet.
 			$j('.info-button.right-bubble').CreateBubblePopup({
 					position : 'right',
 					align	 : 'center',
-					innerHtml: '<div style=""> \
+					innerHtml: '<div style="position:relative;z-index:9999;"> \
 									<div style="background:#ff6347;color:#fff;height:15px;border:1px solid #ffd700;padding:5px;">information</div> \
 									<div style="height:35px;padding:5px;">short description</div> \
 									<div style="height:15px;text-align:right;padding:5px;">read more &raquo;</div> \
@@ -377,8 +377,11 @@ Ext.onReady(function() {
 					2050
 				</option>	
 			</select>
+			<div class="info-button top-bubble">
+				i
+			</div>			
 		</div>
-		<div id="scenario-selector" style="float:right;margin-right:120px;">
+		<div id="scenario-selector" style="float:right;margin-right:60px;">
 			<span style="margin-right:30px;">
 				Scenario
 			</span>
@@ -387,6 +390,9 @@ Ext.onReady(function() {
 					Economy first
 				</option>	
 			</select>
+			<div class="info-button top-bubble">
+				i
+			</div>			
 		</div>
 	</div>
 	
