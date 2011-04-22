@@ -109,6 +109,9 @@ This is the <b>Ace Adaptation Tools portlet</b> portlet.
 			if(filtervalue === 'all') {
 				return indicators;
 			}
+			if(filtervalue === 'none') {
+				return indicatorsDisplayed;
+			}			
 			$j.each(indicators, function(idx, indicator){
 				$j.each(indicator, function(property, value){
 					if(property === filterproperty) {
