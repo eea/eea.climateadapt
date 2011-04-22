@@ -95,8 +95,8 @@ This is the <b>Ace Adaptation Tools portlet</b> portlet.
 			});
 						
 		function displayIndicators(indicators) {
+			$j('.indicator-category-list').fadeOut();
 			$j('.indicator-category-list').empty();
-			$j('.indicator-category-list').hide();
 			$j.each(indicators, function() {
 				var indicator = '<div class="indicator-category-list-item">' + this.title + '</div>';
 				$j('.indicator-category-list:random').append(indicator);			
