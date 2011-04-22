@@ -71,23 +71,28 @@ This is the <b>Ace Adaptation Tools portlet</b> portlet.
 	
 	<div id="adaptationtools-selectors-top">
 		<div id="risks-selector" class="adaptationtools-selector">
+			<!-- TODO load dynamically from enumeration nl.wur.alterra.cgi.ace.model.impl.AceItemClimateImpact -- but aceitem model classes must be made available as a jar for that -->
 			<select>
-				<option>choose a risk</option>
-				<option>Water scarcity</option>
-				<option>Droughts</option>
-				<option>Flooding</option>
+				<option value="none">choose a risk</option>
+				<option value="EXTREMETEMP">Extreme Temperatures</option>
+				<option value="WATERSCARCE">Water Scarcity</option>
+				<option value="FLOODING">Flooding</option>
+				<option value="DROUGHT">Droughts</option>
+				<option value="STORM">Storms</option>
+				<option value="ICEANDSNOW">Ice and Snow</option>
 			</select>
 			<div class="info-button top-bubble">
 				i
 			</div>	
 		</div>		
+		
 		<div id="sector-selector"  class="adaptationtools-selector">
 			<span style="margin-right:30px;">
 				Filter by sector
 			</span>
-			<!-- TODO load dynamically from enumeration -- but aceitem model classes must be made available as a jar for that -->
+			<!-- TODO load dynamically from enumeration nl.wur.alterra.cgi.ace.model.impl.AceItemSector -- but aceitem model classes must be made available as a jar for that -->
 			<select>
-				<option disabled="disabled" value="all">
+				<option value="all">
 					all
 				</option>
 				<option value="AGRICULTURE">
