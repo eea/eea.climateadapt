@@ -50,6 +50,12 @@
 	margin-left:10px;
 	display: inline;
 }
+.indicator-category-list {
+	padding:5px;
+}
+.indicator-category-list-item {
+	padding:2px 0px;
+}
 div.map-overlay {
 	bottom:0px;
 	position:absolute;

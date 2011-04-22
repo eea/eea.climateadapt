@@ -1,0 +1,57 @@
+<indicators>
+	<indicator>
+		<title>Precipitation</title>
+		<sector>WATERMANAGEMENT</sector>
+		<sector>AGRICULTURE</sector>		
+	</indicator>
+	<indicator>
+		<title>Water availability</title>
+		<sector>WATERMANAGEMENT</sector>
+		<sector>AGRICULTURE</sector>	
+	</indicator>
+	<indicator>
+		<title>Soil erosion</title>
+		<sector>WATERMANAGEMENT</sector>
+		<sector>AGRICULTURE</sector>			
+	</indicator>
+	<indicator>
+		<title>Water withdrawals</title>
+		<sector>WATERMANAGEMENT</sector>
+	</indicator>
+	<indicator>
+		<title>Water stress</title>
+		<sector>WATERMANAGEMENT</sector>
+	</indicator>
+	<indicator>
+		<title>Land use</title>
+		<sector>WATERMANAGEMENT</sector>
+		<sector>AGRICULTURE</sector>			
+	</indicator>
+	<indicator>
+		<title>Population</title>
+		<sector>WATERMANAGEMENT</sector>
+		<sector>AGRICULTURE</sector>			
+	</indicator>
+	<indicator>
+		<title>Water use by agriculture - livestock</title>
+		<sector>WATERMANAGEMENT</sector>
+		<sector>AGRICULTURE</sector>			
+	</indicator>	
+	<indicator>
+		<title>Water use by agriculture - irrigation</title>
+		<sector>WATERMANAGEMENT</sector>
+		<sector>AGRICULTURE</sector>			
+	</indicator>	
+	<indicator>
+		<title>Water use by manufacturing industry</title>
+		<sector>WATERMANAGEMENT</sector>
+	</indicator>	
+	<indicator>
+		<title>Water use by electricity production</title>
+		<sector>WATERMANAGEMENT</sector>
+	</indicator>	
+	<indicator>
+		<title>Water use by domestic</title>
+		<sector>WATERMANAGEMENT</sector>
+	</indicator>								
+</indicators>

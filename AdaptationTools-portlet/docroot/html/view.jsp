@@ -28,8 +28,13 @@ This is the <b>Ace Adaptation Tools portlet</b> portlet.
 <div>
     <div id="acemap_column" style="margin-right: 10px; margin-top: 50px; float:left;border:solid 1px red;width:850px;">
     <script defer="defer" type="text/javascript">
+		var indicators = new Array();
 		var $j = jQuery.noConflict();
-		$j(document).ready(function(){			
+		$j(document).ready(function(){	
+		
+			//
+			// create information popups
+			//
 			$j('.info-button.top-bubble').CreateBubblePopup({
 					position : 'top',
 					align	 : 'center',
@@ -60,9 +65,75 @@ This is the <b>Ace Adaptation Tools portlet</b> portlet.
 					themeName: 	'orange',
 					themePath: 	'<%=renderRequest.getContextPath()%>/js/bubblepopup/jquerybubblepopup-theme'
 			});
-		
 			
+			//
+			// load indicators data
+			//
+			<% 
+				String serverName = request.getServerName();
+				int serverPort = request.getServerPort();
+			%>
+			$j.getJSON('http://<%=serverName%>:<%=serverPort%>/AdaptationTools-portlet/prototype-data/indicators.json',
+				function(json) {
+					indicators = json.indicators.indicator;
+				})
+				.success(function() {})
+				.error(function() {})
+				.complete(function() {});	
+
+			// handle change to sector selector
+			$('#sector-select').change(function() {
+				displayIndicators(filterIndicators('sector', $(this).attr('value')));
+			});
+				
 		});
+		
+		$j.jQueryRandom = 0;
+		$j.extend($j.expr[":"], {
+			random: function(a, i, m, r) {
+						if (i == 0) {
+							$j.jQueryRandom = Math.floor(Math.random() * r.length);
+						};
+						return i == $j.jQueryRandom;
+					}
+			});
+						
+		function displayIndicators(indicators) {
+			$j('.indicator-category-list').empty();
+			$j('.indicator-category-list').hide();
+			$j.each(indicators, function() {
+				var indicator = '<div class="indicator-category-list-item">' + this.title + '</div>';
+				$j('.indicator-category-list:random').append(indicator);			
+			}); 
+			$j('.indicator-category-list').fadeIn();
+		}
+		
+		function filterIndicators(filterproperty, filtervalue) {
+			var indicatorsDisplayed = new Array();
+			if(filtervalue === 'all') {
+				return indicators;
+			}
+			$j.each(indicators, function(idx, indicator){
+				$j.each(indicator, function(property, value){
+					if(property === filterproperty) {
+						if($j.isArray(value)) {
+							$j.each(value, function(ix, v){
+								if(v === filtervalue) {
+									indicatorsDisplayed.push(indicator);
+								}
+							});
+						}
+						else {
+							if(value === filtervalue) {
+								indicatorsDisplayed.push(indicator);
+							}
+						}
+					}
+				});
+			});
+			return indicatorsDisplayed;
+		}
+		
             </script>
 			
 	<h1 id="adaptationtools-heading">
@@ -73,7 +144,8 @@ This is the <b>Ace Adaptation Tools portlet</b> portlet.
 		<div id="risks-selector" class="adaptationtools-selector">
 			<!-- TODO load dynamically from enumeration nl.wur.alterra.cgi.ace.model.impl.AceItemClimateImpact -- but aceitem model classes must be made available as a jar for that -->
 			<select>
-				<option value="none">choose a risk</option>
+				<option value="none" selected="selected">Choose a risk:</option>
+				<option value="all">All risks</option>
 				<option value="EXTREMETEMP">Extreme Temperatures</option>
 				<option value="WATERSCARCE">Water Scarcity</option>
 				<option value="FLOODING">Flooding</option>
@@ -91,37 +163,18 @@ This is the <b>Ace Adaptation Tools portlet</b> portlet.
 				Filter by sector
 			</span>
 			<!-- TODO load dynamically from enumeration nl.wur.alterra.cgi.ace.model.impl.AceItemSector -- but aceitem model classes must be made available as a jar for that -->
-			<select>
-				<option value="all">
-					all
-				</option>
-				<option value="AGRICULTURE">
-					Agriculture and Forest
-				</option>
-				<option disabled="disabled" value="BIODIVERSITY">
-					Biodiversity
-				</option>
-				<option disabled="disabled" value="COASTAL">
-					Coastal areas
-				</option>
-				<option disabled="disabled" value="DISASTERRISKREDUCTION">
-					Disaster Risk Reduction
-				</option>
-				<option disabled="disabled" value="FINANCIAL"">
-					Financial
-				</option>
-				<option disabled="disabled" value="HEALTH">
-					Health
-				</option>
-				<option disabled="disabled" value="INFRASTRUCTURE">
-					Infrastructure
-				</option>
-				<option disabled="disabled" value="MARINE">
-					Marine and Fisheries
-				</option>
-				<option value="WATERMANAGEMENT">
-					Water management
-				</option>
+			<select id="sector-select">
+				<option value="none" selected="selected">Choose a sector:</option>
+				<option value="all">All sectors</option>
+				<option value="AGRICULTURE">Agriculture and Forest</option>
+				<option value="BIODIVERSITY" disabled="disabled">Biodiversity</option>
+				<option value="COASTAL" disabled="disabled">Coastal areas</option>
+				<option value="DISASTERRISKREDUCTION" disabled="disabled">Disaster Risk Reduction</option>
+				<option value="FINANCIAL" disabled="disabled">Financial</option>
+				<option value="HEALTH" disabled="disabled">Health</option>
+				<option value="INFRASTRUCTURE" disabled="disabled">Infrastructure</option>
+				<option value="MARINE" disabled="disabled">Marine and Fisheries</option>
+				<option value="WATERMANAGEMENT">Water management</option>
 			</select>				
 			<div class="info-button top-bubble">
 				i
@@ -152,6 +205,7 @@ This is the <b>Ace Adaptation Tools portlet</b> portlet.
 			<h3 class="indicator-category-title">
 				Climate changes
 			</h3>
+			<div class="indicator-category-list"></div>
 		</div>
 				
 		<div id="indicator-exposure" class="indicator-category">
@@ -161,6 +215,7 @@ This is the <b>Ace Adaptation Tools portlet</b> portlet.
 			<h3 class="indicator-category-title">
 				Exposure
 			</h3>
+			<div class="indicator-category-list"></div>
 		</div>
 				
 		<div id="indicator-sensitivity" class="indicator-category">
@@ -170,6 +225,7 @@ This is the <b>Ace Adaptation Tools portlet</b> portlet.
 			<h3 class="indicator-category-title">
 				Sensitivity
 			</h3>					
+			<div class="indicator-category-list"></div>
 		</div>
 		
 		<div id="indicator-vulnerability" class="indicator-category">
@@ -179,6 +235,7 @@ This is the <b>Ace Adaptation Tools portlet</b> portlet.
 			<h3 class="indicator-category-title">
 				Vulnerability & risks
 			</h3>					
+			<div class="indicator-category-list"></div>
 		</div>
 				
 		<div id="indicator-human-causes" class="indicator-category">
@@ -188,6 +245,7 @@ This is the <b>Ace Adaptation Tools portlet</b> portlet.
 			<h3 class="indicator-category-title">
 				Underlying human causes
 			</h3>					
+			<div class="indicator-category-list"></div>
 		</div>
 				
 	</div>
