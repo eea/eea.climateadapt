@@ -69,11 +69,7 @@ This is the <b>Ace Adaptation Tools portlet</b> portlet.
 			//
 			// load indicators data
 			//
-			<% 
-				String serverName = request.getServerName();
-				int serverPort = request.getServerPort();
-			%>
-			$j.getJSON('http://<%=serverName%>:<%=serverPort%>/AdaptationTools-portlet/prototype-data/indicators.json',
+			$j.getJSON('http://<%=request.getContextPath()%>/AdaptationTools-portlet/prototype-data/indicators.json',
 				function(json) {
 					indicators = json.indicators.indicator;
 				})
