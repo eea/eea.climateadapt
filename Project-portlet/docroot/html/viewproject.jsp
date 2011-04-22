@@ -9,17 +9,34 @@
 <%
 	Long project_id = 0l ;
 	Project project = null;
+	String[] urls = null;
 	String url = null;
+	String websitelabel = "Website";
 	
 	if(request.getAttribute("project_id")!=null) {
 		project_id = Long.parseLong( (String) request.getAttribute("project_id") ) ;
 		project = ProjectLocalServiceUtil.getProject( project_id ) ;
-		url = project.getWebsite();
-		if( !url.startsWith("http://")) {
 		
-			url = "http://" + url;
-		} 
-		url = "<a href='" + url + "' target='_blank'>" + url + "</a>" ;
+		url = project.getWebsite();
+		
+		if(url != null && url.trim().length() > 0) {
+			urls = url.split(";");
+			
+			url = "" ;
+			for(int i=0; i<urls.length; i++) {
+				
+				if(i>0) { websitelabel += "s" ;}
+				
+				if(urls[i].trim().length() > 0) {
+					if ( !urls[i].startsWith("http://")) {
+						
+						urls[i] = "http://" + urls[i];
+					}
+					
+					url += "<a href='" + urls[i] + "' target='_blank'>" + urls[i] + "</a>&nbsp;&nbsp;&nbsp;&nbsp;" ;
+				}
+			} 
+		}
 	}
 	
 %>
@@ -84,8 +101,10 @@
 		out.print( s.replace(";","<br />") ); %><br /><br />	 
 	 <b>Duration</b><br />
 	 <% out.print( project.getDuration() ); %><br /><br />
-	 <b>Website</b><br />
-	 <% out.print(  url ); %><br /><br />
+	 <% if (url != null && url.trim().length() > 0)  {%>		
+		 <b><%= websitelabel %></b><br />
+		 <%= url %><br /><br />
+	 <% } %>
 
    </c:when>
    <c:otherwise>
