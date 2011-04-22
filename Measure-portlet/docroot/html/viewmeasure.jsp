@@ -9,21 +9,35 @@
 <%
 	Long measure_id = 0l ;
 	Measure measure = null;
+	String[] urls = null;
 	String url = null;
 	String type = "Measure";
+	String websitelabel = "Website";
 	
 	if(request.getAttribute("measure_id")!=null) {
 		measure_id = Long.parseLong( (String) request.getAttribute("measure_id") ) ;
 		measure = MeasureLocalServiceUtil.getMeasure( measure_id ) ;
+		
 		url = measure.getWebsite();
-		if(url.trim().length() > 0) {
-			if ( !url.startsWith("http://")) {
-				
-				url = "http://" + url;
-			}
+		
+		if(url != null && url.trim().length() > 0) {
+			urls = url.split(";");
 			
-			url = "<a href='" + url + "' target='_blank'>" + url + "</a>" ;
-		} 
+			url = "" ;
+			for(int i=0; i<urls.length; i++) {
+				
+				if(i>0) { websitelabel += "s" ;}
+				
+				if(urls[i].trim().length() > 0) {
+					if ( !urls[i].startsWith("http://")) {
+						
+						urls[i] = "http://" + urls[i];
+					}
+					
+					url += "<a href='" + urls[i] + "' target='_blank'>" + urls[i] + "</a>&nbsp;&nbsp;&nbsp;&nbsp;" ;
+				}
+			} 
+		}
 		
 		if( measure.getMao_type().equalsIgnoreCase("A")) {
 			type = "Action" ;
@@ -118,7 +132,7 @@
 	 <% out.print( measure.getCostbenefit() ); %><br /><br />	
 	 
 		<% if (url != null && url.trim().length() > 0)  {%>		
-			 <b>Website</b><br />
+			 <b><%= websitelabel %></b><br />
 			 <%= url %><br /><br />
 		<% } %>
    </c:when>
