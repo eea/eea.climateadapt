@@ -100,11 +100,27 @@ This is the <b>Ace Adaptation Tools portlet</b> portlet.
 			$j('.indicator-category-list').fadeOut();
 			$j('.indicator-category-list').empty();
 			$j.each(indicators, function() {
-				var indicator = '<div class="indicator-category-list-item">' + this.title + '</div>';
-				$j('.indicator-category-list:random').append(indicator);			
+				var indicator;
+				if(this.url != null && this.url.length > 0) {
+					var u = this.url;
+					var ln = this.layername;
+					var t = this.title;
+					indicator = $j(document.createElement("div"))
+						.addClass("indicator-category-list-item")
+						.addClass("clickable")
+						.append(t)
+						.appendTo($j('.indicator-category-list:random'))
+						.click(function() {
+							app.addLayer(u, ln, t);
+						});
+				}
+				else {
+					indicator = '<div class="indicator-category-list-item">' + this.title + '</div>';				
+					$j('.indicator-category-list:random').append(indicator);			
+				}
 			}); 
 			$j('.indicator-category-list').fadeIn();
-		}
+		}	
 		
 		function filterIndicators(filterproperty, filtervalue) {
 			var indicatorsDisplayed = new Array();
