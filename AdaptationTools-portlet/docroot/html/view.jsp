@@ -107,7 +107,7 @@ This is the <b>Ace Adaptation Tools portlet</b> portlet.
 				image step 2 goes here
 			</div>
 			<div id="what-should-i-do" style="margin:5px;background:#BCEE68;">
-				<div id="what-should-i-do-heading" style="color:green;font-size:24px;" onclick="$j('#analyze-maps-options').fadeOut();$j('#what-should-i-do-options').fadeIn();$j('#analyze-maps-heading').addClass('clickable');$j('#what-should-i-do-heading').removeClass('clickable');">
+				<div id="what-should-i-do-heading" style="color:green;font-size:24px;" onclick="$j('#analyze-maps-options').fadeOut();$j('#what-should-i-do-options').fadeIn();$j('#analyze-maps-heading').addClass('clickable');$j('#what-should-i-do-heading').removeClass('clickable');$('#general-content').fadeOut();$('#indicators-map').fadeOut();">
 					What should I do?
 				</div>
 				<div id="what-should-i-do-options" style="">
@@ -325,9 +325,9 @@ This is the <b>Ace Adaptation Tools portlet</b> portlet.
 			Am I vulnerable to climate change and what are my risks
 		</h1>
 		
-		<div id="general-content-text" class="what-should-i-do-content">
+		<div id="general-content" class="what-should-i-do-content">
 			<img src="<%=renderRequest.getContextPath()%>/images/step-2.jpg" style="float:right;margin-right:30px;"/>
-			<div id="general-content" style="float:left;width:50%;margin-left:30px;">
+			<div id="general-content-text" style="float:left;width:50%;margin-left:30px;">
 				Next step after preparing the ground is vulnerability assessment. It is the analysis of the expected impacts, risks and the adaptive capacity of an area in the context of climate change.
 				The objective of this step is to gain a better understanding of how and in what way climate change will affect the services, social groups, economic sectors and assets and to identify
 				the priority areas for action. Vulnerability assessment is more than measuring potential harm using information about climate impacts. It includes an assessment of the area's ability
