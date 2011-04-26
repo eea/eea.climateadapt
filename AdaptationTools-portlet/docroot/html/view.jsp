@@ -26,7 +26,10 @@ HttpServletRequest httpRequest = PortalUtil.getOriginalServletRequest(request);
 This is the <b>Ace Adaptation Tools portlet</b> portlet.
 
 <div>
-    <div id="acemap_column" style="margin-right: 10px; margin-top: 50px; float:left;border:solid 1px red;width:850px;">
+	<div style="border:solid 1px green;margin-right: 10px; margin-top: 50px; float:left;width:400px;height:600px;">
+	</div>
+	
+    <div id="acemap_column" style="margin-right: 10px; margin-top: 50px; float:left;border:solid 1px red;width:850px;height:600px;">
     <script defer="defer" type="text/javascript">
 		var indicators = new Array();
 		var $j = jQuery.noConflict();
