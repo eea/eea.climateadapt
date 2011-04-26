@@ -27,7 +27,54 @@ This is the <b>Ace Adaptation Tools portlet</b> portlet.
 
 <div>
 	<div style="border:solid 1px green;margin-right: 10px; margin-top: 50px; float:left;width:400px;height:600px;">
+		<div style="background:lime;width: 330px;margin:5px;height:100px;padding:30px;color:#fff;font-size:36px;text-align:center;">image goes here</div>
+		<div id="what-should-i-do" style="margin:5px;">
+			<div id="what-should-i-do-heading" style="color:green;font-size:24px;" onclick="$j('#analyze-maps-options').fadeOut();$j('#what-should-i-do-options').fadeIn();$j('#analyze-maps-heading').addClass('clickable');$j('#what-should-i-do-heading').removeClass('clickable');">
+				What should I do?
+			</div>
+			<div id="what-should-i-do-options" style="">
+				<ul>
+					<li>
+						something
+					</li>
+					<li>
+						something else
+					</li>
+					<li>
+						something other
+					</li>
+					<li>
+						something different
+					</li>
+
+				</ul>
+			</div>
+		</div>
+		<div id="analyze-maps" style="margin:5px;">
+			<div id="analyze-maps-heading" class="clickable" style="color:green;font-size:24px;" onclick="$j('#what-should-i-do-options').fadeOut();$j('#analyze-maps-options').fadeIn();$j('#what-should-i-do-heading').addClass('clickable');$j('#analyze-maps-heading').removeClass('clickable');">
+				Analyze pan-European maps
+			</div>
+			<div id="analyze-maps-options" style="display:none;">
+				<ul>
+					<li>
+						something
+					</li>
+					<li>
+						something else
+					</li>
+					<li>
+						something other
+					</li>
+					<li>
+						something different
+					</li>
+
+				</ul>			
+			</div>
+		</div>
 	</div>
+
+		</div>
 	
     <div id="acemap_column" style="margin-right: 10px; margin-top: 50px; float:left;border:solid 1px red;width:850px;height:600px;">
     <script defer="defer" type="text/javascript">
