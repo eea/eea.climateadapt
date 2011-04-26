@@ -1,3 +1,4 @@
+var app;
 Ext.onReady(function() {
 	Ext.QuickTips.init();
 	
@@ -9,7 +10,7 @@ Ext.onReady(function() {
     );
 
 	// Create application
-	var app = new MapViewer({
+	app = new MapViewer({
 		widgetConfig: {
 			toolbar: false,
             legend: false,
