@@ -80,3 +80,8 @@ div.map-overlay {
 	margin-right:20px;
 	margin-top:20px;
 }
+
+.jquerybubblepopup {
+    z-index: 1020;
+
+}
