@@ -191,6 +191,7 @@ This is the <b>Ace Adaptation Tools portlet</b> portlet.
 			</form>
 		</div>
 	</div>
+    <div id="map_legend"></div>
 			
 	<div id="adaptationtools-indicators">
 		<h2>

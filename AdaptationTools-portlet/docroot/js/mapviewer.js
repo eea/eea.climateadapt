@@ -12,6 +12,7 @@ Ext.onReady(function() {
 	var app = new MapViewer({
 		widgetConfig: {
 			toolbar: false,
+            legend: false,
 			renderTo: "map_container",
 			width: 400, 
 			height: 400
@@ -22,7 +23,13 @@ Ext.onReady(function() {
 			numZoomLevels: 15,
 			center: [7, 44],
 			zoom: 4
-		}
+		},
+
+        legendConfig: {
+            renderTo: "map_legend",
+			width: 400,
+			height: 400
+        }
 	});
 
 
@@ -179,6 +186,31 @@ var MapViewer = Ext.extend(Ext.util.Observable, {
 					]
 				}
 			});    
+        }
+
+
+        // Map legend panel
+        if (widgetConfig.legend) {
+            var legendConfig = this.initialConfig.legendConfig || {
+                renderTo: "map_legend",
+			    width: 300,
+			    height: 400
+            };
+
+            this.legendPanel = new GeoExt.LegendPanel({
+                defaults: {
+                    style: 'padding:5px'
+                },
+                filter: function(record) {
+                    return !record.getLayer().isBaseLayer;
+                },
+                bodyStyle: 'padding:5px',
+                width: legendConfig.width,
+                height: legendConfig.height,
+                autoScroll: true,
+                renderTo: legendConfig.renderTo
+            });
+
         }
 
     },
