@@ -105,14 +105,23 @@ This is the <b>Ace Adaptation Tools portlet</b> portlet.
 					var u = this.url;
 					var ln = this.layername;
 					var t = this.title;
+					var randomIndicatorType = $j('.indicator-category-list:random');
 					indicator = $j(document.createElement("div"))
 						.addClass("indicator-category-list-item")
 						.addClass("clickable")
+						.attr({ style: 'float:left;' })
 						.append(t)
-						.appendTo($j('.indicator-category-list:random'))
+						.appendTo(randomIndicatorType)
 						.click(function() {
 							app.addLayer(u, ln, t);
 						});
+						$j(document.createElement("img"))
+							.attr({ src: '<%=renderRequest.getContextPath()%>/images/map_icon.gif', title: 'show map' })
+							.attr({ style: 'float:left;margin-left:5px;' })
+							.appendTo(randomIndicatorType);
+						$j(document.createElement("hr"))
+							.attr({ style: 'clear:both;display:block;visibility:hidden;' })
+							.appendTo(randomIndicatorType);															
 				}
 				else {
 					indicator = '<div class="indicator-category-list-item">' + this.title + '</div>';				
