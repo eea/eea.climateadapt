@@ -14,7 +14,7 @@ Ext.onReady(function() {
 			toolbar: false,
             legend: false,
 			renderTo: "map_container",
-			width: 400, 
+			width: 400,
 			height: 400
 		},
 	
@@ -41,7 +41,38 @@ Ext.onReady(function() {
     app.addLayer(serverUrl, layerName, layerTitle);*/
 });
 		
-		
+
+/** api: constructor
+ *  .. class:: MapViewer(config)
+ *     Create a new ACE MapViewer application.
+ *
+ *     Parameters:
+ *     config - {Object} Optional application configuration properties.
+ *
+ *     Valid config properties:
+ *     widgetConfig - {Object} Map widget configuration object.
+ *     mapConfig - {Object} Map configuration object.
+ *     legendConfig - {Object} Legend configuration object
+ *
+ *     Valid widget config properties:
+ *         toolbar - {Boolean} Optional show/hide map toolbar. Default to false.
+ *         legend - {Boolean} Optioncal show/hide layers legend. Default to false.
+ *         renderTo - {String} Id of dom element to render the map widget.
+ *         width - {Integer} Optional map widget width (pixels)
+ *         height - {Integer} Optional map widget height (pixels)
+ *
+ *     Valid map config properties:
+ *     layers - {Array} List of {OpenLayers.Layer} to add to map.
+ *     numZoomLevels - {Integer} Optional default number of zoom levels.
+ *     center - {Array} Default center map point.
+ *     zoom - {Integer} Optional default initial zoom level.
+ *
+ *     Valid legend config properties:
+ *     renderTo - {String} Id of dom element to render the map legend.
+ *     width - {Integer} Optional map legend width (pixels)
+ *     height - {Integer} Optional map legend height (pixels)
+
+ */
 var MapViewer = Ext.extend(Ext.util.Observable, {
     
     /** api: property[map]
@@ -201,6 +232,7 @@ var MapViewer = Ext.extend(Ext.util.Observable, {
                 defaults: {
                     style: 'padding:5px'
                 },
+                // Don't show base layer legend
                 filter: function(record) {
                     return !record.getLayer().isBaseLayer;
                 },
