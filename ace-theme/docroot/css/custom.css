@@ -302,6 +302,7 @@ body #banner .logo a {
 
 #footer {
 	border-top: 2px solid #D7E3EF;
+	height: 100px;
 	margin-top: 15px;
 }
 
@@ -591,10 +592,15 @@ body #banner .logo a {
 		
 .sector-main-article .text-container {
 	background: url("../images/bg_sector_main_article_text.png") repeat-y scroll 5% center;
+	margin-bottom: 60px;
 	margin-right: 245px;
 	min-height: 200px;
 	position: relative;
 	top: 40px;
+}
+
+.ie7 .sector-main-article .text-container {
+	margin-bottom: 80px;
 }
 
 .sector-main-article .filter-container {
@@ -623,12 +629,21 @@ body #banner .logo a {
 }
 
 .sector-main-article #read-more-link {
-	margin-bottom: 20px;
-	text-align:right;
+	background-color: #AFC7DF;
+	line-height: 30px;
+	position: absolute;
+	right: 0;
+	text-align: center;
+	top: 240px;
+	width: 80px;
+}
+
+.sector-main-article #read-more-link a:hover {
+	color: #FFF;
 }
 
 .sector-main-article .read-more-body {
-	margin: 0 17px 25px -257px;
+	margin: 85px 17px 0 0;
 }
 
 /**** Styles modified from originally ace-theme/docroot/css/custom_common.css ****/
