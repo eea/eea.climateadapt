@@ -422,36 +422,6 @@ This is the <b>Ace Adaptation Tools portlet</b> portlet.
 					Indicators
 				</h2>
 				
-				<div id="indicator-climate-changes" class="indicator-category">
-					<div class="info-button right-bubble">
-						i
-					</div>
-					<h3 class="indicator-category-title">
-						Climate changes
-					</h3>
-					<div class="indicator-category-list"></div>
-				</div>
-					
-				<div id="indicator-exposure" class="indicator-category">
-					<div class="info-button right-bubble">
-						i
-					</div>
-					<h3 class="indicator-category-title">
-						Exposure
-					</h3>
-					<div class="indicator-category-list"></div>
-				</div>
-						
-				<div id="indicator-sensitivity" class="indicator-category">
-					<div class="info-button right-bubble">
-						i
-					</div>
-					<h3 class="indicator-category-title">
-						Sensitivity
-					</h3>					
-					<div class="indicator-category-list"></div>
-				</div>
-				
 				<div id="indicator-vulnerability" class="indicator-category">
 					<div class="info-button right-bubble">
 						i
@@ -461,8 +431,42 @@ This is the <b>Ace Adaptation Tools portlet</b> portlet.
 					</h3>					
 					<div class="indicator-category-list"></div>
 				</div>
+
+				<h2 class="disabled">
+					Underlying causes
+				</h2>
+
+				<div id="indicator-exposure" class="indicator-category disabled">
+					<div class="info-button right-bubble">
+						i
+					</div>
+					<h3 class="indicator-category-title">
+						Exposure
+					</h3>
+					<div class="indicator-category-list"></div>
+				</div>
+
+				<div id="indicator-sensitivity" class="indicator-category disabled">
+					<div class="info-button right-bubble">
+						i
+					</div>
+					<h3 class="indicator-category-title">
+						Sensitivity
+					</h3>					
+					<div class="indicator-category-list"></div>
+				</div>
+				
+				<div id="indicator-climate-changes" class="xindicator-category" style="display:none;">
+					<div class="info-button right-bubble">
+						i
+					</div>
+					<h3 class="indicator-category-title">
+						Climate changes
+					</h3>
+					<div class="indicator-category-list"></div>
+				</div>
 					
-				<div id="indicator-human-causes" class="indicator-category">
+				<div id="indicator-human-causes" class="xindicator-category"  style="display:none;">
 					<div class="info-button right-bubble">
 						i
 					</div>

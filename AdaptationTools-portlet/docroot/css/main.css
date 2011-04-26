@@ -43,6 +43,9 @@
 #read-more-on-the-approach {
 	width:385px;
 }
+.disabled {
+	color:#cfcfcf;
+}
 .indicator-category {
 	margin: 10px 0px;
 }
