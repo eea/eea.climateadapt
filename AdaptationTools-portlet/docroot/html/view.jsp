@@ -29,6 +29,8 @@ This is the <b>Ace Adaptation Tools portlet</b> portlet.
 	function displayStep(nr) {
 		$('.step-left').fadeOut();
 		$('#step-left-'+nr).fadeIn();
+		$('.step-right').fadeOut();
+		$('#step-right-'+nr).fadeIn();		
 	}
 </script>
 
@@ -173,8 +175,8 @@ This is the <b>Ace Adaptation Tools portlet</b> portlet.
 			step 1
 			
 	-->
-	<div id="step1">
-		<img src="<%=renderRequest.getContextPath()%>/images/Adaptation-Tool-Step-1.jpg" />
+	<div id="step-right-1" class="step-right">
+		<img src="<%=renderRequest.getContextPath()%>/images/step-1.jpg" />
 		<hr style="clear:both;display:block;visibility:hidden;"></hr>
 	</div>
 	
@@ -318,158 +320,169 @@ This is the <b>Ace Adaptation Tools portlet</b> portlet.
 		
             </script>
 		
-	<div id="step2" style="display:none;">		
+	<div id="step-right-2" class="step-right">		
 		<h1 id="adaptationtools-heading">
 			Am I vulnerable to climate change and what are my risks
 		</h1>
 		
-		<div id="adaptationtools-selectors-top">
-			<div id="risks-selector" class="adaptationtools-selector">
-				<!-- TODO load dynamically from enumeration nl.wur.alterra.cgi.ace.model.impl.AceItemClimateImpact -- but aceitem model classes must be made available as a jar for that -->
-				<select>
-					<option value="none" selected="selected">Choose a risk:</option>
-					<option value="all">All risks</option>
-					<option value="EXTREMETEMP">Extreme Temperatures</option>
-					<option value="WATERSCARCE">Water Scarcity</option>
-					<option value="FLOODING">Flooding</option>
-					<option value="DROUGHT">Droughts</option>
-					<option value="STORM">Storms</option>
-					<option value="ICEANDSNOW">Ice and Snow</option>
-				</select>
-				<div class="info-button top-bubble">
-					i
-				</div>	
-			</div>		
+		<img src="<%=renderRequest.getContextPath()%>/images/step-2.jpg" style="float:right;margin-right:30px;"/>
+		<div id="general-content" style="float:left;width:50%;margin-left:30px;">
+			Next step after preparing the ground is vulnerability assessment. It is the analysis of the expected impacts, risks and the adaptive capacity of an area in the context of climate change.
+			The objective of this step is to gain a better understanding of how and in what way climate change will affect the services, social groups, economic sectors and assets and to identify
+			the priority areas for action. Vulnerability assessment is more than measuring potential harm using information about climate impacts. It includes an assessment of the area's ability
+			to adapt.
+		</div>
+		
+		<div id="indicators-map" style="display:none;">
+		
+			<div id="adaptationtools-selectors-top">
+				<div id="risks-selector" class="adaptationtools-selector">
+					<!-- TODO load dynamically from enumeration nl.wur.alterra.cgi.ace.model.impl.AceItemClimateImpact -- but aceitem model classes must be made available as a jar for that -->
+					<select>
+						<option value="none" selected="selected">Choose a risk:</option>
+						<option value="all">All risks</option>
+						<option value="EXTREMETEMP">Extreme Temperatures</option>
+						<option value="WATERSCARCE">Water Scarcity</option>
+						<option value="FLOODING">Flooding</option>
+						<option value="DROUGHT">Droughts</option>
+						<option value="STORM">Storms</option>
+						<option value="ICEANDSNOW">Ice and Snow</option>
+					</select>
+					<div class="info-button top-bubble">
+						i
+					</div>	
+				</div>		
 			
-			<div id="sector-selector"  class="adaptationtools-selector">
-				<span style="margin-right:30px;">
-					Filter by sector
-				</span>
-				<!-- TODO load dynamically from enumeration nl.wur.alterra.cgi.ace.model.impl.AceItemSector -- but aceitem model classes must be made available as a jar for that -->
-				<select id="sector-select">
-					<option value="none" selected="selected">Choose a sector:</option>
-					<option value="all">All sectors</option>
-					<option value="AGRICULTURE">Agriculture and Forest</option>
-					<option value="BIODIVERSITY" disabled="disabled">Biodiversity</option>
-					<option value="COASTAL" disabled="disabled">Coastal areas</option>
-					<option value="DISASTERRISKREDUCTION" disabled="disabled">Disaster Risk Reduction</option>
-					<option value="FINANCIAL" disabled="disabled">Financial</option>
-					<option value="HEALTH" disabled="disabled">Health</option>
-					<option value="INFRASTRUCTURE" disabled="disabled">Infrastructure</option>
-					<option value="MARINE" disabled="disabled">Marine and Fisheries</option>
-					<option value="WATERMANAGEMENT">Water management</option>
-				</select>				
-				<div class="info-button top-bubble">
-					i
+				<div id="sector-selector"  class="adaptationtools-selector">
+					<span style="margin-right:30px;">
+						Filter by sector
+					</span>
+					<!-- TODO load dynamically from enumeration nl.wur.alterra.cgi.ace.model.impl.AceItemSector -- but aceitem model classes must be made available as a jar for that -->
+					<select id="sector-select">
+						<option value="none" selected="selected">Choose a sector:</option>
+						<option value="all">All sectors</option>
+						<option value="AGRICULTURE">Agriculture and Forest</option>
+						<option value="BIODIVERSITY" disabled="disabled">Biodiversity</option>
+						<option value="COASTAL" disabled="disabled">Coastal areas</option>
+						<option value="DISASTERRISKREDUCTION" disabled="disabled">Disaster Risk Reduction</option>
+						<option value="FINANCIAL" disabled="disabled">Financial</option>
+						<option value="HEALTH" disabled="disabled">Health</option>
+						<option value="INFRASTRUCTURE" disabled="disabled">Infrastructure</option>
+						<option value="MARINE" disabled="disabled">Marine and Fisheries</option>
+						<option value="WATERMANAGEMENT">Water management</option>
+					</select>				
+					<div class="info-button top-bubble">
+						i
+					</div>
+				</div>			
+			</div>
+			
+			<hr style="clear:both;display:block;visibility:hidden;"></hr>
+
+			<div id="map_container">
+				<div id="map_info">This is a map info panel</div>
+				<div class="map-overlay">
+					<form>
+					Locate: <input type="text" name="locate" />&nbsp;<button type="submit">Find</button>
+					</form>
 				</div>
 			</div>
-		</div>
-			
-		
-		<hr style="clear:both;display:block;visibility:hidden;"></hr>
-
-		<div id="map_container">
-			<div id="map_info">This is a map info panel</div>
-			<div class="map-overlay">
-				<form>
-				Locate: <input type="text" name="locate" />&nbsp;<button type="submit">Find</button>
-				</form>
-			</div>
-		</div>
-		<div id="map_legend"></div>
+			<div id="map_legend"></div>
 				
-		<div id="adaptationtools-indicators">
-			<h2>
-				Indicators
-			</h2>
-			
-			<div id="indicator-climate-changes" class="indicator-category">
-				<div class="info-button right-bubble">
-					i
+			<div id="adaptationtools-indicators">
+				<h2>
+					Indicators
+				</h2>
+				
+				<div id="indicator-climate-changes" class="indicator-category">
+					<div class="info-button right-bubble">
+						i
+					</div>
+					<h3 class="indicator-category-title">
+						Climate changes
+					</h3>
+					<div class="indicator-category-list"></div>
 				</div>
-				<h3 class="indicator-category-title">
-					Climate changes
-				</h3>
-				<div class="indicator-category-list"></div>
-			</div>
 					
-			<div id="indicator-exposure" class="indicator-category">
-				<div class="info-button right-bubble">
-					i
+				<div id="indicator-exposure" class="indicator-category">
+					<div class="info-button right-bubble">
+						i
+					</div>
+					<h3 class="indicator-category-title">
+						Exposure
+					</h3>
+					<div class="indicator-category-list"></div>
 				</div>
-				<h3 class="indicator-category-title">
-					Exposure
-				</h3>
-				<div class="indicator-category-list"></div>
-			</div>
+						
+				<div id="indicator-sensitivity" class="indicator-category">
+					<div class="info-button right-bubble">
+						i
+					</div>
+					<h3 class="indicator-category-title">
+						Sensitivity
+					</h3>					
+					<div class="indicator-category-list"></div>
+				</div>
+				
+				<div id="indicator-vulnerability" class="indicator-category">
+					<div class="info-button right-bubble">
+						i
+					</div>
+					<h3 class="indicator-category-title">
+						Vulnerability & risks
+					</h3>					
+					<div class="indicator-category-list"></div>
+				</div>
 					
-			<div id="indicator-sensitivity" class="indicator-category">
-				<div class="info-button right-bubble">
-					i
+				<div id="indicator-human-causes" class="indicator-category">
+					<div class="info-button right-bubble">
+						i
+					</div>
+					<h3 class="indicator-category-title">
+						Underlying human causes
+					</h3>					
+					<div class="indicator-category-list"></div>
 				</div>
-				<h3 class="indicator-category-title">
-					Sensitivity
-				</h3>					
-				<div class="indicator-category-list"></div>
-			</div>
-			
-			<div id="indicator-vulnerability" class="indicator-category">
-				<div class="info-button right-bubble">
-					i
-				</div>
-				<h3 class="indicator-category-title">
-					Vulnerability & risks
-				</h3>					
-				<div class="indicator-category-list"></div>
-			</div>
 					
-			<div id="indicator-human-causes" class="indicator-category">
-				<div class="info-button right-bubble">
-					i
-				</div>
-				<h3 class="indicator-category-title">
-					Underlying human causes
-				</h3>					
-				<div class="indicator-category-list"></div>
 			</div>
-					
-		</div>
 		
-		<hr style="clear:both;display:block;visibility:hidden;"></hr>
+			<hr style="clear:both;display:block;visibility:hidden;"></hr>
 
-		<div style="padding:10px;margin:10px;">
-			<div id="read-more-on-the-approach" style="float:left;">
-				Read more on the approach &raquo;
+			<div style="padding:10px;margin:10px;">
+				<div id="read-more-on-the-approach" style="float:left;">
+					Read more on the approach &raquo;
+				</div>
+				<div id="time-selector" style="float:right;">
+					<span style="margin-right:30px;">
+						Time
+					</span>
+					<select disabled="disabled">
+						<option>
+							2050
+						</option>	
+					</select>
+					<div class="info-button top-bubble">
+						i
+					</div>			
+				</div>
+				<div id="scenario-selector" style="float:right;margin-right:60px;">
+					<span style="margin-right:30px;">
+						Scenario
+					</span>
+					<select disabled="disabled">
+						<option>
+							Economy first
+						</option>	
+					</select>
+					<div class="info-button top-bubble">
+						i
+					</div>			
+				</div>
 			</div>
-			<div id="time-selector" style="float:right;">
-				<span style="margin-right:30px;">
-					Time
-				</span>
-				<select disabled="disabled">
-					<option>
-						2050
-					</option>	
-				</select>
-				<div class="info-button top-bubble">
-					i
-				</div>			
-			</div>
-			<div id="scenario-selector" style="float:right;margin-right:60px;">
-				<span style="margin-right:30px;">
-					Scenario
-				</span>
-				<select disabled="disabled">
-					<option>
-						Economy first
-					</option>	
-				</select>
-				<div class="info-button top-bubble">
-					i
-				</div>			
-			</div>
+		<!-- end of indicators map page -->
 		</div>
 		
-	<!-- step2 -->
+	<!-- end of step2 -->
 	</div>
 	
 	<hr style="clear:both;display:block;visibility:hidden;"></hr>
