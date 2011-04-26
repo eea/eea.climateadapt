@@ -47,7 +47,7 @@ var MapViewer = Ext.extend(Ext.util.Observable, {
     	this.createLayout();    
     },
     
-     createLayout: function() {
+    createLayout: function() {
      	var mapConfig = this.initialConfig.mapConfig || {};
      	
      	this.map = new OpenLayers.Map({
@@ -173,6 +173,17 @@ var MapViewer = Ext.extend(Ext.util.Observable, {
 			});    
         }
 
+    },
+
+    addLayer: function(serverUrl, layerName, layerTitle) {
+
+        var layer = new OpenLayers.Layer.WMS(
+            layerTitle,
+            serverUrl,
+            {layers: layerName, format: 'image/png', transparent: 'true'}, {'isBaseLayer':false}
+        );
+
+        this.map.addLayer(layer);
     }
     
 });
