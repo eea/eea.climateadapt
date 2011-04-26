@@ -140,7 +140,7 @@ This is the <b>Ace Adaptation Tools portlet</b> portlet.
 				</div>
 			</div>
 			<div id="analyze-maps" style="margin:5px;">
-				<div id="analyze-maps-heading" class="clickable" style="color:green;font-size:24px;" onclick="$j('#what-should-i-do-options').fadeOut();$j('#analyze-maps-options').fadeIn();$j('#what-should-i-do-heading').addClass('clickable');$j('#analyze-maps-heading').removeClass('clickable');">
+				<div id="analyze-maps-heading" class="clickable" style="color:green;font-size:24px;" onclick="$j('#what-should-i-do-options').fadeOut();$j('#analyze-maps-options').fadeIn();$j('#what-should-i-do-heading').addClass('clickable');$j('#analyze-maps-heading').removeClass('clickable');$('.what-should-i-do-content').fadeOut();$('#indicators-map').fadeIn();">
 					Analyze pan-European maps
 				</div>
 				<div id="analyze-maps-options" style="display:none;">
@@ -325,12 +325,14 @@ This is the <b>Ace Adaptation Tools portlet</b> portlet.
 			Am I vulnerable to climate change and what are my risks
 		</h1>
 		
-		<img src="<%=renderRequest.getContextPath()%>/images/step-2.jpg" style="float:right;margin-right:30px;"/>
-		<div id="general-content" style="float:left;width:50%;margin-left:30px;">
-			Next step after preparing the ground is vulnerability assessment. It is the analysis of the expected impacts, risks and the adaptive capacity of an area in the context of climate change.
-			The objective of this step is to gain a better understanding of how and in what way climate change will affect the services, social groups, economic sectors and assets and to identify
-			the priority areas for action. Vulnerability assessment is more than measuring potential harm using information about climate impacts. It includes an assessment of the area's ability
-			to adapt.
+		<div id="general-content-text" class="what-should-i-do-content">
+			<img src="<%=renderRequest.getContextPath()%>/images/step-2.jpg" style="float:right;margin-right:30px;"/>
+			<div id="general-content" style="float:left;width:50%;margin-left:30px;">
+				Next step after preparing the ground is vulnerability assessment. It is the analysis of the expected impacts, risks and the adaptive capacity of an area in the context of climate change.
+				The objective of this step is to gain a better understanding of how and in what way climate change will affect the services, social groups, economic sectors and assets and to identify
+				the priority areas for action. Vulnerability assessment is more than measuring potential harm using information about climate impacts. It includes an assessment of the area's ability
+				to adapt.
+			</div>
 		</div>
 		
 		<div id="indicators-map" style="display:none;">
