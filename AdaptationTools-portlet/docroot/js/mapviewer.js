@@ -103,7 +103,7 @@ var MapViewer = Ext.extend(Ext.util.Observable, {
 		});
 		
 		this.map.addControl(new OpenLayers.Control.PanZoomBar(), new OpenLayers.Pixel(225,5));
-        this.map.addControl(new OpenLayers.Control.LoadingPanel());
+        //this.map.addControl(new OpenLayers.Control.LoadingPanel());
 
 		// Load layers
 		for (var i = 0; i < mapConfig.layers.length; i++) {
