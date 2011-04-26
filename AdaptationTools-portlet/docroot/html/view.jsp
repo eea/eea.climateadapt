@@ -25,6 +25,13 @@ HttpServletRequest httpRequest = PortalUtil.getOriginalServletRequest(request);
 %>
 This is the <b>Ace Adaptation Tools portlet</b> portlet.
 
+<script defer="defer" type="text/javascript">
+	function displayStep(nr) {
+		$('.step-left').fadeOut();
+		$('#step-left-'+nr).fadeIn();
+	}
+</script>
+
 <div>
 	<!-- left panel -->
 	<div style="border:solid 1px green;margin-right: 10px; margin-top: 50px; float:left;width:400px;height:600px;">
@@ -33,124 +40,131 @@ This is the <b>Ace Adaptation Tools portlet</b> portlet.
 				step 1
 				
 		-->
-		<div style="background:lime;width: 330px;margin:5px;height:100px;padding:30px;color:#fff;font-size:36px;text-align:center;">
-			image step 1 goes here
-		</div>
-		<div id="adaptation-support-tool" style="margin:5px;background:#BCEE68;">
-			<div id="adaptation-support-tool-heading" style="color:#8E8E38;font-size:24px;padding:20px 10px;">
-				Adaptation support tool
+		<div id="step-left-1" class="step-left">
+			<div style="background:lime;width: 330px;margin:5px;height:100px;padding:30px;color:#fff;font-size:36px;text-align:center;"
+				onclick="displayStep(2);">
+				image step 1 goes here
 			</div>
-			<div id="what-is-it" style="margin:20px 10px;">
-				<div id="what-is-it-heading" style="color:green;font-size:18px;">
-					What is it?
+			<div id="adaptation-support-tool" style="margin:5px;background:#BCEE68;">
+				<div id="adaptation-support-tool-heading" style="color:#8E8E38;font-size:24px;padding:20px 10px;">
+					Adaptation support tool
 				</div>
-				<div style="color:green;font-size:12px;margin:20px 10px;">
-					It is a tool for users involved in development of the climate change adaptation policies who search for information on climate change.
-				</div>
-			</div>
-			<div id="how-can-i-use-it" style="margin:20px 10px;">
-				<div id="how-can-i-use-it-heading" style="color:green;font-size:18px;">
-					How can I use it?
-				</div>
-				<div style="color:green;font-size:12px;margin:20px 10px;">
-					The tool is based on policy cycle. Resources relevant for four stages of policy-making process are grouped together. Simply choose relevant policy state to
-					access resources that might be relevant to you.
-				</div>				
-			</div>
-			<div id="where-can-i-find-more-information" style="margin:20px 10px;">
-				<div id="where-can-i-find-more-information-heading" style="color:green;font-size:18px;">
-					Where can I find more information?
-				</div>
-				<div style="color:green;font-size:12px;margin:20px 10px;">
-					You can find more about designing and mainstreaming adaptation policies in these documents:
-					<div style="margin:20px 0px;">
-						<span style="background:green;color:white;font-size:larger;padding:0px 0px 2px 4px;text-align:center;">
-							&raquo;
-						</span>
-						<span style="margin-left:5px;">
-							Design of guidelines for the elaboration of Regional Climate Change Adaptation Strategies
-						</span>
+				<div id="what-is-it" style="margin:20px 10px;">
+					<div id="what-is-it-heading" style="color:green;font-size:18px;">
+						What is it?
 					</div>
-					<div style="margin:20px 0px;">
-						<span style="background:green;color:white;font-size:larger;padding:0px 0px 2px 4px;text-align:center;">
-							&raquo;
-						</span>
-						<span style="margin-left:5px;">
-							Integrating Climate Change Adaptation into Development Co-operation
-						</span>
-					</div>					
-				</div>				
-			</div>			
-			<hr style="clear:both;display:block;visibility:hidden;"></hr>
+					<div style="color:green;font-size:12px;margin:20px 10px;">
+						It is a tool for users involved in development of the climate change adaptation policies who search for information on climate change.
+					</div>
+				</div>
+				<div id="how-can-i-use-it" style="margin:20px 10px;">
+					<div id="how-can-i-use-it-heading" style="color:green;font-size:18px;">
+						How can I use it?
+					</div>
+					<div style="color:green;font-size:12px;margin:20px 10px;">
+						The tool is based on policy cycle. Resources relevant for four stages of policy-making process are grouped together. Simply choose relevant policy state to
+						access resources that might be relevant to you.
+					</div>				
+				</div>
+				<div id="where-can-i-find-more-information" style="margin:20px 10px;">
+					<div id="where-can-i-find-more-information-heading" style="color:green;font-size:18px;">
+						Where can I find more information?
+					</div>
+					<div style="color:green;font-size:12px;margin:20px 10px;">
+						You can find more about designing and mainstreaming adaptation policies in these documents:
+						<div style="margin:20px 0px;">
+							<span style="background:green;color:white;font-size:larger;padding:0px 0px 2px 4px;text-align:center;">
+								&raquo;
+							</span>
+							<span style="margin-left:5px;">
+								Design of guidelines for the elaboration of Regional Climate Change Adaptation Strategies
+							</span>
+						</div>
+						<div style="margin:20px 0px;">
+							<span style="background:green;color:white;font-size:larger;padding:0px 0px 2px 4px;text-align:center;">
+								&raquo;
+							</span>
+							<span style="margin-left:5px;">
+								Integrating Climate Change Adaptation into Development Co-operation
+							</span>
+						</div>					
+					</div>				
+				</div>			
+				<hr style="clear:both;display:block;visibility:hidden;"></hr>
+			</div>
+		<!-- end step 1 -->	
 		</div>
-
 
 		<!--
 		
 				step 2
 				
 		-->
-	
-		<div style="display:none;background:lime;width: 330px;margin:5px;height:100px;padding:30px;color:#fff;font-size:36px;text-align:center;">
-			image step 2 goes here
-		</div>
-		<div id="what-should-i-do" style="display:none;margin:5px;background:#BCEE68;">
-			<div id="what-should-i-do-heading" style="color:green;font-size:24px;" onclick="$j('#analyze-maps-options').fadeOut();$j('#what-should-i-do-options').fadeIn();$j('#analyze-maps-heading').addClass('clickable');$j('#what-should-i-do-heading').removeClass('clickable');">
-				What should I do?
+		<div id="step-left-2" class="step-left">
+			<div style="background:lime;width: 330px;margin:5px;height:100px;padding:30px;color:#fff;font-size:36px;text-align:center;">
+				image step 2 goes here
 			</div>
-			<div id="what-should-i-do-options" style="">
-				<ul>
-					<li>
-						2.1 General
-					</li>
-					<li>
-						2.2 What are key systems?
-					</li>
-					<li>
-						2.3 How do I analyze impacts of past weather?
-					</li>
-					<li>
-						2.4 How do I analyze recent climate trends?
-					</li>
-					<li>
-						2.5 Where do I find possible scenarios?
-					</li>
-					<li>
-						2.6 How do I identify impacts of climate change?
-					</li>
-					<li>
-						2.7 How do I assess vulnerability?
-					</li>
-					<li>
-						2.8 What about risks and opportunities?
-					</li>
-				</ul>
+			<div id="what-should-i-do" style="margin:5px;background:#BCEE68;">
+				<div id="what-should-i-do-heading" style="color:green;font-size:24px;" onclick="$j('#analyze-maps-options').fadeOut();$j('#what-should-i-do-options').fadeIn();$j('#analyze-maps-heading').addClass('clickable');$j('#what-should-i-do-heading').removeClass('clickable');">
+					What should I do?
+				</div>
+				<div id="what-should-i-do-options" style="">
+					<ul>
+						<li>
+							2.1 General
+						</li>
+						<li>
+							2.2 What are key systems?
+						</li>
+						<li>
+							2.3 How do I analyze impacts of past weather?
+						</li>
+						<li>
+							2.4 How do I analyze recent climate trends?
+						</li>
+						<li>
+							2.5 Where do I find possible scenarios?
+						</li>
+						<li>
+							2.6 How do I identify impacts of climate change?
+						</li>
+						<li>
+							2.7 How do I assess vulnerability?
+						</li>
+						<li>
+							2.8 What about risks and opportunities?
+						</li>
+					</ul>
+				</div>
 			</div>
-		</div>
-		<div id="analyze-maps" style="display:none;margin:5px;">
-			<div id="analyze-maps-heading" class="clickable" style="color:green;font-size:24px;" onclick="$j('#what-should-i-do-options').fadeOut();$j('#analyze-maps-options').fadeIn();$j('#what-should-i-do-heading').addClass('clickable');$j('#analyze-maps-heading').removeClass('clickable');">
-				Analyze pan-European maps
-			</div>
-			<div id="analyze-maps-options" style="display:none;">
-				<ul>
-					<li>
-						something
-					</li>
-					<li>
-						something else
-					</li>
-					<li>
-						something other
-					</li>
-					<li>
-						something different
-					</li>
+			<div id="analyze-maps" style="margin:5px;">
+				<div id="analyze-maps-heading" class="clickable" style="color:green;font-size:24px;" onclick="$j('#what-should-i-do-options').fadeOut();$j('#analyze-maps-options').fadeIn();$j('#what-should-i-do-heading').addClass('clickable');$j('#analyze-maps-heading').removeClass('clickable');">
+					Analyze pan-European maps
+				</div>
+				<div id="analyze-maps-options" style="display:none;">
+					<ul>
+						<li>
+							something
+						</li>
+						<li>
+							something else
+						</li>
+						<li>
+							something other
+						</li>
+						<li>
+							something different
+						</li>
 
-				</ul>			
+					</ul>			
+				</div>
 			</div>
+
+		<!-- end step 2 -->
 		</div>
+		
+	<!-- end left panel -->
 	</div>
-
 	
 	<!-- right panel -->
     <div id="acemap_column" style="margin-right: 10px; margin-top: 50px; float:left;border:solid 1px red;width:850px;height:600px;background:#fff;">
