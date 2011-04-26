@@ -33,42 +33,36 @@ This is the <b>Ace Adaptation Tools portlet</b> portlet.
 				step 1
 				
 		-->
-		<div style="background:lime;width: 330px;margin:5px;height:100px;padding:30px;color:#fff;font-size:36px;text-align:center;">image step 1 goes here</div>
+		<div style="background:lime;width: 330px;margin:5px;height:100px;padding:30px;color:#fff;font-size:36px;text-align:center;">
+			image step 1 goes here
+		</div>
 		<div id="adaptation-support-tool" style="margin:5px;background:#BCEE68;">
-			<div id="adaptation-support-tool-heading" style="color:#8E8E38;font-size:36px;">
+			<div id="adaptation-support-tool-heading" style="color:#8E8E38;font-size:24px;padding:20px 10px;">
 				Adaptation support tool
 			</div>
-			<div id="what-is-it" style="color:green;font-size:12px;">
-				<div id="what-is-it-heading">
+			<div id="what-is-it" style="margin:20px 10px;">
+				<div id="what-is-it-heading" style="color:green;font-size:18px;">
 					What is it?
 				</div>
-				<div>
-					blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah 
-					blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah 
-					blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah 
-					blah blah blah blah .
+				<div style="color:green;font-size:12px;margin:20px 10px;">
+					It is a tool for users involved in development of the climate change adaptation policies who search for information on climate change.
 				</div>
 			</div>
-			<div id="how-can-i-use-it" style="color:green;font-size:24px;">
-				<div id="how-can-i-use-it-heading">
+			<div id="how-can-i-use-it" style="margin:20px 10px;">
+				<div id="how-can-i-use-it-heading" style="color:green;font-size:18px;">
 					How can I use it?
 				</div>
-				<div>
-					blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah 
-					blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah 
-					blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah 
-					blah blah blah blah .
+				<div style="color:green;font-size:12px;margin:20px 10px;">
+					The tool is based on policy cycle. Resources relevant for four stages of policy-making process are grouped together. Simply choose relevant policy state to
+					access resources that might be relevant to you.
 				</div>				
 			</div>
-			<div id="where-can-i-find-more-information" style="color:green;font-size:24px;">
-				<div id="where-can-i-find-more-information-heading">
+			<div id="where-can-i-find-more-information" style="margin:20px 10px;">
+				<div id="where-can-i-find-more-information-heading" style="color:green;font-size:18px;">
 					Where can I find more information?
 				</div>
-				<div>
-					blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah 
-					blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah 
-					blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah 
-					blah blah blah blah .
+				<div style="color:green;font-size:12px;margin:20px 10px;">
+					You can find more about designing and mainstreaming adaptation policies in these documents:
 				</div>				
 			</div>			
 		</div>
@@ -79,7 +73,9 @@ This is the <b>Ace Adaptation Tools portlet</b> portlet.
 				
 		-->
 	
-		<div style="display:none;background:lime;width: 330px;margin:5px;height:100px;padding:30px;color:#fff;font-size:36px;text-align:center;">image step 2 goes here</div>
+		<div style="display:none;background:lime;width: 330px;margin:5px;height:100px;padding:30px;color:#fff;font-size:36px;text-align:center;">
+			image step 2 goes here
+		</div>
 		<div id="what-should-i-do" style="display:none;margin:5px;background:#BCEE68;">
 			<div id="what-should-i-do-heading" style="color:green;font-size:24px;" onclick="$j('#analyze-maps-options').fadeOut();$j('#what-should-i-do-options').fadeIn();$j('#analyze-maps-heading').addClass('clickable');$j('#what-should-i-do-heading').removeClass('clickable');">
 				What should I do?
@@ -145,8 +141,10 @@ This is the <b>Ace Adaptation Tools portlet</b> portlet.
 			step 1
 			
 	-->
-	<img src="<%=renderRequest.getContextPath()%>/images/Adaptation-Tool-Step-1.jpg" />
-	
+	<div id="step1">
+		<img src="<%=renderRequest.getContextPath()%>/images/Adaptation-Tool-Step-1.jpg" />
+		<hr style="clear:both;display:block;visibility:hidden;"></hr>
+	</div>
 	
 	<!--
 	
@@ -287,155 +285,159 @@ This is the <b>Ace Adaptation Tools portlet</b> portlet.
 		}
 		
             </script>
+		
+	<div id="step2" style="display:none;">		
+		<h1 id="adaptationtools-heading">
+			Am I vulnerable to climate change and what are my risks
+		</h1>
+		
+		<div id="adaptationtools-selectors-top">
+			<div id="risks-selector" class="adaptationtools-selector">
+				<!-- TODO load dynamically from enumeration nl.wur.alterra.cgi.ace.model.impl.AceItemClimateImpact -- but aceitem model classes must be made available as a jar for that -->
+				<select>
+					<option value="none" selected="selected">Choose a risk:</option>
+					<option value="all">All risks</option>
+					<option value="EXTREMETEMP">Extreme Temperatures</option>
+					<option value="WATERSCARCE">Water Scarcity</option>
+					<option value="FLOODING">Flooding</option>
+					<option value="DROUGHT">Droughts</option>
+					<option value="STORM">Storms</option>
+					<option value="ICEANDSNOW">Ice and Snow</option>
+				</select>
+				<div class="info-button top-bubble">
+					i
+				</div>	
+			</div>		
 			
-	<h1 id="adaptationtools-heading">
-		Am I vulnerable to climate change and what are my risks
-	</h1>
-	
-	<div id="adaptationtools-selectors-top">
-		<div id="risks-selector" class="adaptationtools-selector">
-			<!-- TODO load dynamically from enumeration nl.wur.alterra.cgi.ace.model.impl.AceItemClimateImpact -- but aceitem model classes must be made available as a jar for that -->
-			<select>
-				<option value="none" selected="selected">Choose a risk:</option>
-				<option value="all">All risks</option>
-				<option value="EXTREMETEMP">Extreme Temperatures</option>
-				<option value="WATERSCARCE">Water Scarcity</option>
-				<option value="FLOODING">Flooding</option>
-				<option value="DROUGHT">Droughts</option>
-				<option value="STORM">Storms</option>
-				<option value="ICEANDSNOW">Ice and Snow</option>
-			</select>
-			<div class="info-button top-bubble">
-				i
-			</div>	
-		</div>		
-		
-		<div id="sector-selector"  class="adaptationtools-selector">
-			<span style="margin-right:30px;">
-				Filter by sector
-			</span>
-			<!-- TODO load dynamically from enumeration nl.wur.alterra.cgi.ace.model.impl.AceItemSector -- but aceitem model classes must be made available as a jar for that -->
-			<select id="sector-select">
-				<option value="none" selected="selected">Choose a sector:</option>
-				<option value="all">All sectors</option>
-				<option value="AGRICULTURE">Agriculture and Forest</option>
-				<option value="BIODIVERSITY" disabled="disabled">Biodiversity</option>
-				<option value="COASTAL" disabled="disabled">Coastal areas</option>
-				<option value="DISASTERRISKREDUCTION" disabled="disabled">Disaster Risk Reduction</option>
-				<option value="FINANCIAL" disabled="disabled">Financial</option>
-				<option value="HEALTH" disabled="disabled">Health</option>
-				<option value="INFRASTRUCTURE" disabled="disabled">Infrastructure</option>
-				<option value="MARINE" disabled="disabled">Marine and Fisheries</option>
-				<option value="WATERMANAGEMENT">Water management</option>
-			</select>				
-			<div class="info-button top-bubble">
-				i
+			<div id="sector-selector"  class="adaptationtools-selector">
+				<span style="margin-right:30px;">
+					Filter by sector
+				</span>
+				<!-- TODO load dynamically from enumeration nl.wur.alterra.cgi.ace.model.impl.AceItemSector -- but aceitem model classes must be made available as a jar for that -->
+				<select id="sector-select">
+					<option value="none" selected="selected">Choose a sector:</option>
+					<option value="all">All sectors</option>
+					<option value="AGRICULTURE">Agriculture and Forest</option>
+					<option value="BIODIVERSITY" disabled="disabled">Biodiversity</option>
+					<option value="COASTAL" disabled="disabled">Coastal areas</option>
+					<option value="DISASTERRISKREDUCTION" disabled="disabled">Disaster Risk Reduction</option>
+					<option value="FINANCIAL" disabled="disabled">Financial</option>
+					<option value="HEALTH" disabled="disabled">Health</option>
+					<option value="INFRASTRUCTURE" disabled="disabled">Infrastructure</option>
+					<option value="MARINE" disabled="disabled">Marine and Fisheries</option>
+					<option value="WATERMANAGEMENT">Water management</option>
+				</select>				
+				<div class="info-button top-bubble">
+					i
+				</div>
 			</div>
 		</div>
-	</div>
-    	
-	
-	<hr style="clear:both;display:block;visibility:hidden;"></hr>
-
-	<div id="map_container">
-        <div id="map_info">This is a map info panel</div>
-		<div class="map-overlay">
-			<form>
-			Locate: <input type="text" name="locate" />&nbsp;<button type="submit">Find</button>
-			</form>
-		</div>
-	</div>
-    <div id="map_legend"></div>
 			
-	<div id="adaptationtools-indicators">
-		<h2>
-			Indicators
-		</h2>
 		
-		<div id="indicator-climate-changes" class="indicator-category">
-			<div class="info-button right-bubble">
-				i
-			</div>
-			<h3 class="indicator-category-title">
-				Climate changes
-			</h3>
-			<div class="indicator-category-list"></div>
-		</div>
-				
-		<div id="indicator-exposure" class="indicator-category">
-			<div class="info-button right-bubble">
-				i
-			</div>
-			<h3 class="indicator-category-title">
-				Exposure
-			</h3>
-			<div class="indicator-category-list"></div>
-		</div>
-				
-		<div id="indicator-sensitivity" class="indicator-category">
-			<div class="info-button right-bubble">
-				i
-			</div>
-			<h3 class="indicator-category-title">
-				Sensitivity
-			</h3>					
-			<div class="indicator-category-list"></div>
-		</div>
-		
-		<div id="indicator-vulnerability" class="indicator-category">
-			<div class="info-button right-bubble">
-				i
-			</div>
-			<h3 class="indicator-category-title">
-				Vulnerability & risks
-			</h3>					
-			<div class="indicator-category-list"></div>
-		</div>
-				
-		<div id="indicator-human-causes" class="indicator-category">
-			<div class="info-button right-bubble">
-				i
-			</div>
-			<h3 class="indicator-category-title">
-				Underlying human causes
-			</h3>					
-			<div class="indicator-category-list"></div>
-		</div>
-				
-	</div>
-	
-	<hr style="clear:both;display:block;visibility:hidden;"></hr>
+		<hr style="clear:both;display:block;visibility:hidden;"></hr>
 
-	<div style="padding:10px;margin:10px;">
-		<div id="read-more-on-the-approach" style="float:left;">
-			Read more on the approach &raquo;
+		<div id="map_container">
+			<div id="map_info">This is a map info panel</div>
+			<div class="map-overlay">
+				<form>
+				Locate: <input type="text" name="locate" />&nbsp;<button type="submit">Find</button>
+				</form>
+			</div>
 		</div>
-		<div id="time-selector" style="float:right;">
-			<span style="margin-right:30px;">
-				Time
-			</span>
-			<select disabled="disabled">
-				<option>
-					2050
-				</option>	
-			</select>
-			<div class="info-button top-bubble">
-				i
-			</div>			
+		<div id="map_legend"></div>
+				
+		<div id="adaptationtools-indicators">
+			<h2>
+				Indicators
+			</h2>
+			
+			<div id="indicator-climate-changes" class="indicator-category">
+				<div class="info-button right-bubble">
+					i
+				</div>
+				<h3 class="indicator-category-title">
+					Climate changes
+				</h3>
+				<div class="indicator-category-list"></div>
+			</div>
+					
+			<div id="indicator-exposure" class="indicator-category">
+				<div class="info-button right-bubble">
+					i
+				</div>
+				<h3 class="indicator-category-title">
+					Exposure
+				</h3>
+				<div class="indicator-category-list"></div>
+			</div>
+					
+			<div id="indicator-sensitivity" class="indicator-category">
+				<div class="info-button right-bubble">
+					i
+				</div>
+				<h3 class="indicator-category-title">
+					Sensitivity
+				</h3>					
+				<div class="indicator-category-list"></div>
+			</div>
+			
+			<div id="indicator-vulnerability" class="indicator-category">
+				<div class="info-button right-bubble">
+					i
+				</div>
+				<h3 class="indicator-category-title">
+					Vulnerability & risks
+				</h3>					
+				<div class="indicator-category-list"></div>
+			</div>
+					
+			<div id="indicator-human-causes" class="indicator-category">
+				<div class="info-button right-bubble">
+					i
+				</div>
+				<h3 class="indicator-category-title">
+					Underlying human causes
+				</h3>					
+				<div class="indicator-category-list"></div>
+			</div>
+					
 		</div>
-		<div id="scenario-selector" style="float:right;margin-right:60px;">
-			<span style="margin-right:30px;">
-				Scenario
-			</span>
-			<select disabled="disabled">
-				<option>
-					Economy first
-				</option>	
-			</select>
-			<div class="info-button top-bubble">
-				i
-			</div>			
+		
+		<hr style="clear:both;display:block;visibility:hidden;"></hr>
+
+		<div style="padding:10px;margin:10px;">
+			<div id="read-more-on-the-approach" style="float:left;">
+				Read more on the approach &raquo;
+			</div>
+			<div id="time-selector" style="float:right;">
+				<span style="margin-right:30px;">
+					Time
+				</span>
+				<select disabled="disabled">
+					<option>
+						2050
+					</option>	
+				</select>
+				<div class="info-button top-bubble">
+					i
+				</div>			
+			</div>
+			<div id="scenario-selector" style="float:right;margin-right:60px;">
+				<span style="margin-right:30px;">
+					Scenario
+				</span>
+				<select disabled="disabled">
+					<option>
+						Economy first
+					</option>	
+				</select>
+				<div class="info-button top-bubble">
+					i
+				</div>			
+			</div>
 		</div>
+		
+	<!-- step2 -->
 	</div>
 	
 	<hr style="clear:both;display:block;visibility:hidden;"></hr>
