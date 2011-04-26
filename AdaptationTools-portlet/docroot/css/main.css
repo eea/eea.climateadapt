@@ -56,6 +56,9 @@
 .indicator-category-list-item {
 	padding:2px 0px;
 }
+.clickable {
+	cursor:pointer;
+}
 div.map-overlay {
 	bottom:0px;
 	position:absolute;
