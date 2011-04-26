@@ -22,7 +22,7 @@ Ext.onReady(function() {
 		mapConfig: {
 			layers: [base],
 			numZoomLevels: 15,
-			center: [7, 50],
+			center: [9, 50],
 			zoom: 4
 		},
 
@@ -33,7 +33,7 @@ Ext.onReady(function() {
         }
 	});
 
-
+    //app.showMapInfoPanel("This is a test map");
 
     /*var serverUrl = "http://hrz-vm130.hrz.uni-kassel.de/cgi-bin/mapserv?map=/var/www/html/maps/mapfiles/wg3_drivers2/prec2_pch_cell_0ann_2050ipcm4a2.map&";
     var layerName = "prec2_pch_cell_0ann_2050ipcm4a2";
@@ -103,7 +103,8 @@ var MapViewer = Ext.extend(Ext.util.Observable, {
 		});
 		
 		this.map.addControl(new OpenLayers.Control.PanZoomBar(), new OpenLayers.Pixel(225,5));
-		
+        this.map.addControl(new OpenLayers.Control.LoadingPanel());
+
 		// Load layers
 		for (var i = 0; i < mapConfig.layers.length; i++) {
 			this.map.addLayer(mapConfig.layers[i]);
@@ -249,6 +250,7 @@ var MapViewer = Ext.extend(Ext.util.Observable, {
     },
 
     addLayer: function(serverUrl, layerName, layerTitle) {
+        $("#map_info").hide();
 
         var layer = new OpenLayers.Layer.WMS(
             layerTitle,
@@ -257,6 +259,22 @@ var MapViewer = Ext.extend(Ext.util.Observable, {
         );
 
         this.map.addLayer(layer);
+    }
+    ,
+
+    showMapInfoPanel: function(content) {
+        var viewSize = this.map.getSize();
+        var msgW = viewSize.w;
+        var msgH = viewSize.h;
+
+        var infoPanel = $("#map_info");
+
+        infoPanel.css("width", msgW + "px");
+        infoPanel.css("height", msgH + "px");
+
+        infoPanel.innerHtml = content;
+        infoPanel.show();
+
     }
     
 });

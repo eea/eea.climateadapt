@@ -262,6 +262,7 @@ This is the <b>Ace Adaptation Tools portlet</b> portlet.
 	<hr style="clear:both;display:block;visibility:hidden;"></hr>
 
 	<div id="map_container">
+        <div id="map_info">This is a map info panel</div>
 		<div class="map-overlay">
 			<form>
 			Locate: <input type="text" name="locate" />&nbsp;<button type="submit">Find</button>

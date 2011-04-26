@@ -85,3 +85,12 @@ div.map-overlay {
     z-index: 1020;
 
 }
+
+#map_info {
+    bottom:0px;
+	position:absolute;
+	left:0px;
+	z-index:1010;
+	background-color: #cccccc;
+    display: none;
+}
