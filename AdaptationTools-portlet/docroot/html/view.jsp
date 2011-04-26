@@ -107,7 +107,7 @@ This is the <b>Ace Adaptation Tools portlet</b> portlet.
 				image step 2 goes here
 			</div>
 			<div id="what-should-i-do" style="margin:5px;background:#BCEE68;">
-				<div id="what-should-i-do-heading" style="color:green;font-size:24px;" onclick="$j('#analyze-maps-options').fadeOut();$j('#what-should-i-do-options').fadeIn();$j('#analyze-maps-heading').addClass('clickable');$j('#what-should-i-do-heading').removeClass('clickable');$('#general-content').fadeOut();$('#indicators-map').fadeOut();">
+				<div id="what-should-i-do-heading" style="color:green;font-size:24px;" onclick="$j('#analyze-maps-options').fadeOut();$j('#what-should-i-do-options').fadeIn();$j('#analyze-maps-heading').addClass('clickable');$j('#what-should-i-do-heading').removeClass('clickable');$('#general-content').fadeIn();$('#indicators-map').fadeOut();">
 					What should I do?
 				</div>
 				<div id="what-should-i-do-options" style="">
