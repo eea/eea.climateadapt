@@ -24,6 +24,14 @@ Ext.onReady(function() {
 			zoom: 4
 		}
 	});
+
+
+
+    /*var serverUrl = "http://hrz-vm130.hrz.uni-kassel.de/cgi-bin/mapserv?map=/var/www/html/maps/mapfiles/wg3_drivers2/prec2_pch_cell_0ann_2050ipcm4a2.map&";
+    var layerName = "prec2_pch_cell_0ann_2050ipcm4a2";
+    var layerTitle = "Precipitation";
+
+    app.addLayer(serverUrl, layerName, layerTitle);*/
 });
 		
 		
@@ -180,7 +188,7 @@ var MapViewer = Ext.extend(Ext.util.Observable, {
         var layer = new OpenLayers.Layer.WMS(
             layerTitle,
             serverUrl,
-            {layers: layerName, format: 'image/png', transparent: 'true'}, {'isBaseLayer':false}
+            {layers: layerName, format: 'image/png', transparent: 'true'}, {'isBaseLayer':false, 'singleTile': true}
         );
 
         this.map.addLayer(layer);
