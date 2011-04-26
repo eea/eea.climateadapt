@@ -111,29 +111,53 @@ This is the <b>Ace Adaptation Tools portlet</b> portlet.
 					What should I do?
 				</div>
 				<div id="what-should-i-do-options" style="">
-					<ul>
+					<ul style="list-style:none;">
 						<li>
+							<span style="background:green;color:white;font-size:larger;padding:0px 0px 2px 4px;text-align:center;margin-right:10px;">
+								&raquo;
+							</span>
 							2.1 General
 						</li>
 						<li>
+							<span style="background:green;color:white;font-size:larger;padding:0px 0px 2px 4px;text-align:center;margin-right:10px;">
+								&raquo;
+							</span>						
 							2.2 What are key systems?
 						</li>
 						<li>
+							<span style="background:green;color:white;font-size:larger;padding:0px 0px 2px 4px;text-align:center;margin-right:10px;">
+								&raquo;
+							</span>						
 							2.3 How do I analyze impacts of past weather?
 						</li>
 						<li>
+							<span style="background:green;color:white;font-size:larger;padding:0px 0px 2px 4px;text-align:center;margin-right:10px;">
+								&raquo;
+							</span>						
 							2.4 How do I analyze recent climate trends?
 						</li>
 						<li>
+							<span style="background:green;color:white;font-size:larger;padding:0px 0px 2px 4px;text-align:center;margin-right:10px;">
+								&raquo;
+							</span>						
 							2.5 Where do I find possible scenarios?
 						</li>
 						<li>
+							<span style="background:green;color:white;font-size:larger;padding:0px 0px 2px 4px;text-align:center;margin-right:10px;">
+								&raquo;
+							</span>						
 							2.6 How do I identify impacts of climate change?
 						</li>
 						<li>
+							<span style="background:green;color:white;font-size:larger;padding:0px 0px 2px 4px;text-align:center;margin-right:10px;">
+								&raquo;
+							</span>						
 							2.7 How do I assess vulnerability?
 						</li>
 						<li>
+							<span style="background:green;color:white;font-size:larger;padding:0px 0px 2px 4px;text-align:center;margin-right:10px;">
+								&raquo;
+							</span>						
 							2.8 What about risks and opportunities?
 						</li>
 					</ul>
