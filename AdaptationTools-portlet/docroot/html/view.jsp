@@ -37,6 +37,7 @@ This is the <b>Ace Adaptation Tools portlet</b> portlet.
 			//
 			$j('.info-button.top-bubble').CreateBubblePopup({
 					position : 'top',
+                    selectable: true,
 					align	 : 'center',
 					innerHtml: '<div style="position:relative;z-index:9999;"> \
 									<div style="background:green;color:#fff;height:15px;border:1px solid lime;padding:5px;">information</div> \
@@ -52,6 +53,7 @@ This is the <b>Ace Adaptation Tools portlet</b> portlet.
 			});
 			$j('.info-button.right-bubble').CreateBubblePopup({
 					position : 'right',
+                    selectable: true,
 					align	 : 'center',
 					innerHtml: '<div style="position:relative;z-index:9999;"> \
 									<div style="background:#ff6347;color:#fff;height:15px;border:1px solid #ffd700;padding:5px;">information</div> \
