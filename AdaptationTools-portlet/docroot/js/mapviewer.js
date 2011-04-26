@@ -15,14 +15,14 @@ Ext.onReady(function() {
 			toolbar: false,
             legend: false,
 			renderTo: "map_container",
-			width: 400,
+			width: 500,
 			height: 400
 		},
 	
 		mapConfig: {
 			layers: [base],
 			numZoomLevels: 15,
-			center: [7, 44],
+			center: [7, 50],
 			zoom: 4
 		},
 
@@ -102,7 +102,7 @@ var MapViewer = Ext.extend(Ext.util.Observable, {
 			  	numZoomLevels: mapConfig.numZoomLevels || 20 
 		});
 		
-		this.map.addControl(new OpenLayers.Control.PanZoomBar(), new OpenLayers.Pixel(175,5)); 
+		this.map.addControl(new OpenLayers.Control.PanZoomBar(), new OpenLayers.Pixel(225,5));
 		
 		// Load layers
 		for (var i = 0; i < mapConfig.layers.length; i++) {
