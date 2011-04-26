@@ -94,3 +94,10 @@ div.map-overlay {
 	background-color: #cccccc;
     display: none;
 }
+
+.olControlLoadingPanel {
+    background-image:url(../images/loading_indicator.gif);
+    background-position:center;
+    background-repeat:no-repeat;
+}
+

@@ -17,6 +17,7 @@
         <header-portlet-javascript>/js/ext-base.js</header-portlet-javascript>
         <header-portlet-javascript>/js/ext-all.js</header-portlet-javascript>
         <header-portlet-javascript>/js/OpenLayers.js</header-portlet-javascript>
+        <header-portlet-javascript>/js/LoadingPanel.js</header-portlet-javascript>
 		<header-portlet-javascript>/js/GeoExt.js</header-portlet-javascript>
         <header-portlet-javascript>/js/proj4js-compressed.js</header-portlet-javascript>
         <header-portlet-javascript>/js/mapviewer.js</header-portlet-javascript>
