@@ -9,6 +9,8 @@ Ext.onReady(function() {
         {layers: "bluemarble", format: 'image/png', transparent: 'true'}, {'isBaseLayer':true}
     );
 
+
+
 	// Create application
 	app = new MapViewer({
 		widgetConfig: {
@@ -20,7 +22,7 @@ Ext.onReady(function() {
 		},
 	
 		mapConfig: {
-			layers: [base],
+			layers: [],
 			numZoomLevels: 15,
 			center: [9, 50],
 			zoom: 4
@@ -43,7 +45,18 @@ Ext.onReady(function() {
 
     app.addLayer(serverUrl, layerName, layerTitle);*/
 });
-		
+
+var $j = jQuery.noConflict();
+$j(window).load(function() {
+    var base = new OpenLayers.Layer.WMS(
+        "Global Imagery",
+        "http://maps.opengeo.org/geowebcache/service/wms",
+        {layers: "bluemarble", format: 'image/png', transparent: 'true'}, {'isBaseLayer':true}
+    );
+
+    app.addBaseLayer(base);
+
+});
 
 /** api: constructor
  *  .. class:: MapViewer(config)
@@ -98,14 +111,21 @@ var MapViewer = Ext.extend(Ext.util.Observable, {
     
     createLayout: function() {
      	var mapConfig = this.initialConfig.mapConfig || {};
-     	
+
+        var widgetConfig = this.initialConfig.widgetConfig || {};
+
      	this.map = new OpenLayers.Map({
 				controls: [new OpenLayers.Control.Navigation()], 
-			  	numZoomLevels: mapConfig.numZoomLevels || 20 
+			  	numZoomLevels: mapConfig.numZoomLevels || 20
 		});
 		
 		this.map.addControl(new OpenLayers.Control.PanZoomBar(), new OpenLayers.Pixel(225,5));
         this.map.addControl(new OpenLayers.Control.LoadingPanel());
+
+        var base = new OpenLayers.Layer.Image('base', '../images/blank.gif', new OpenLayers.Bounds(-180,-90,180,90),
+                    new OpenLayers.Size(widgetConfig.width || 400, widgetConfig.height || 400), {isBaseLayer: true, displayInLayerSwitcher: false});
+
+        this.map.addLayer(base);
 
 		// Load layers
 		for (var i = 0; i < mapConfig.layers.length; i++) {
@@ -123,7 +143,7 @@ var MapViewer = Ext.extend(Ext.util.Observable, {
 			zoom: mapConfig.zoom || 1
 		});
 		
-        var widgetConfig = this.initialConfig.widgetConfig || {};
+
         
         // Toolbar
         var ctrl, toolbarItems = [], action, actions = {};
@@ -251,6 +271,12 @@ var MapViewer = Ext.extend(Ext.util.Observable, {
 
     },
 
+    addBaseLayer: function(layer) {
+        this.map.addLayer(layer);
+
+        this.map.setBaseLayer(layer);
+    },
+
     addLayer: function(serverUrl, layerName, layerTitle) {
         $("#map_info").hide();
 
@@ -261,8 +287,7 @@ var MapViewer = Ext.extend(Ext.util.Observable, {
         );
 
         this.map.addLayer(layer);
-    }
-    ,
+    },
 
     showMapInfoPanel: function(content) {
         var viewSize = this.map.getSize();
