@@ -33,6 +33,8 @@ Ext.onReady(function() {
         }
 	});
 
+	displayStep(1);
+	
     //app.showMapInfoPanel("This is a test map");
 
     /*var serverUrl = "http://hrz-vm130.hrz.uni-kassel.de/cgi-bin/mapserv?map=/var/www/html/maps/mapfiles/wg3_drivers2/prec2_pch_cell_0ann_2050ipcm4a2.map&";
