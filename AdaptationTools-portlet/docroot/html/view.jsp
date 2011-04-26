@@ -139,25 +139,27 @@ This is the <b>Ace Adaptation Tools portlet</b> portlet.
 					</ul>
 				</div>
 			</div>
-			<div id="analyze-maps" style="margin:5px;">
+			<div id="analyze-maps" style="margin:5px;background:#BCEE68;">
 				<div id="analyze-maps-heading" class="clickable" style="color:green;font-size:24px;" onclick="$j('#what-should-i-do-options').fadeOut();$j('#analyze-maps-options').fadeIn();$j('#what-should-i-do-heading').addClass('clickable');$j('#analyze-maps-heading').removeClass('clickable');$('.what-should-i-do-content').fadeOut();$('#indicators-map').fadeIn();">
 					Analyze pan-European maps
 				</div>
 				<div id="analyze-maps-options" style="display:none;">
 					<ul>
 						<li>
-							something
+							What are the key vulnerabilities and risks?
 						</li>
 						<li>
-							something else
+							What are the underlying causes?
 						</li>
 						<li>
-							something other
+							How does the climate change?
 						</li>
 						<li>
-							something different
+							How does the socio-ecological system change?
 						</li>
-
+						<li>
+							Uncertainties
+						</li>
 					</ul>			
 				</div>
 			</div>
