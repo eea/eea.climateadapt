@@ -26,31 +26,94 @@ HttpServletRequest httpRequest = PortalUtil.getOriginalServletRequest(request);
 This is the <b>Ace Adaptation Tools portlet</b> portlet.
 
 <div>
+	<!-- left panel -->
 	<div style="border:solid 1px green;margin-right: 10px; margin-top: 50px; float:left;width:400px;height:600px;">
-		<div style="background:lime;width: 330px;margin:5px;height:100px;padding:30px;color:#fff;font-size:36px;text-align:center;">image goes here</div>
-		<div id="what-should-i-do" style="margin:5px;">
+		<!--
+		
+				step 1
+				
+		-->
+		<div style="background:lime;width: 330px;margin:5px;height:100px;padding:30px;color:#fff;font-size:36px;text-align:center;">image step 1 goes here</div>
+		<div id="adaptation-support-tool" style="margin:5px;background:#BCEE68;">
+			<div id="adaptation-support-tool-heading" style="color:#8E8E38;font-size:36px;">
+				Adaptation support tool
+			</div>
+			<div id="what-is-it" style="color:green;font-size:12px;">
+				<div id="what-is-it-heading">
+					What is it?
+				</div>
+				<div>
+					blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah 
+					blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah 
+					blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah 
+					blah blah blah blah .
+				</div>
+			</div>
+			<div id="how-can-i-use-it" style="color:green;font-size:24px;">
+				<div id="how-can-i-use-it-heading">
+					How can I use it?
+				</div>
+				<div>
+					blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah 
+					blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah 
+					blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah 
+					blah blah blah blah .
+				</div>				
+			</div>
+			<div id="where-can-i-find-more-information" style="color:green;font-size:24px;">
+				<div id="where-can-i-find-more-information-heading">
+					Where can I find more information?
+				</div>
+				<div>
+					blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah 
+					blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah 
+					blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah 
+					blah blah blah blah .
+				</div>				
+			</div>			
+		</div>
+		
+		<!--
+		
+				step 2
+				
+		-->
+	
+		<div style="display:none;background:lime;width: 330px;margin:5px;height:100px;padding:30px;color:#fff;font-size:36px;text-align:center;">image step 2 goes here</div>
+		<div id="what-should-i-do" style="display:none;margin:5px;background:#BCEE68;">
 			<div id="what-should-i-do-heading" style="color:green;font-size:24px;" onclick="$j('#analyze-maps-options').fadeOut();$j('#what-should-i-do-options').fadeIn();$j('#analyze-maps-heading').addClass('clickable');$j('#what-should-i-do-heading').removeClass('clickable');">
 				What should I do?
 			</div>
 			<div id="what-should-i-do-options" style="">
 				<ul>
 					<li>
-						something
+						2.1 General
 					</li>
 					<li>
-						something else
+						2.2 What are key systems?
 					</li>
 					<li>
-						something other
+						2.3 How do I analyze impacts of past weather?
 					</li>
 					<li>
-						something different
+						2.4 How do I analyze recent climate trends?
 					</li>
-
+					<li>
+						2.5 Where do I find possible scenarios?
+					</li>
+					<li>
+						2.6 How do I identify impacts of climate change?
+					</li>
+					<li>
+						2.7 How do I assess vulnerability?
+					</li>
+					<li>
+						2.8 What about risks and opportunities?
+					</li>
 				</ul>
 			</div>
 		</div>
-		<div id="analyze-maps" style="margin:5px;">
+		<div id="analyze-maps" style="display:none;margin:5px;">
 			<div id="analyze-maps-heading" class="clickable" style="color:green;font-size:24px;" onclick="$j('#what-should-i-do-options').fadeOut();$j('#analyze-maps-options').fadeIn();$j('#what-should-i-do-heading').addClass('clickable');$j('#analyze-maps-heading').removeClass('clickable');">
 				Analyze pan-European maps
 			</div>
@@ -74,9 +137,22 @@ This is the <b>Ace Adaptation Tools portlet</b> portlet.
 		</div>
 	</div>
 
-		</div>
 	
+	<!-- right panel -->
     <div id="acemap_column" style="margin-right: 10px; margin-top: 50px; float:left;border:solid 1px red;width:850px;height:600px;">
+	<!--
+	
+			step 1
+			
+	-->
+	<img src="<%=renderRequest.getContextPath()%>/images/Adaptation-Tool-Step-1.jpg" />
+	
+	
+	<!--
+	
+			step 2 
+			
+	-->
     <script defer="defer" type="text/javascript">
 		var indicators = new Array();
 		var $j = jQuery.noConflict();
