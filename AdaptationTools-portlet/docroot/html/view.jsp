@@ -69,7 +69,7 @@ This is the <b>Ace Adaptation Tools portlet</b> portlet.
 			//
 			// load indicators data
 			//
-			$j.getJSON('<%=request.getContextPath()%>/AdaptationTools-portlet/prototype-data/indicators.json',
+			$j.getJSON('<%=request.getContextPath()%>/prototype-data/indicators.json',
 				function(json) {
 					indicators = json.indicators.indicator;
 				})
