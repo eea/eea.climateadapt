@@ -63,10 +63,28 @@ This is the <b>Ace Adaptation Tools portlet</b> portlet.
 				</div>
 				<div style="color:green;font-size:12px;margin:20px 10px;">
 					You can find more about designing and mainstreaming adaptation policies in these documents:
+					<div style="margin:20px 0px;">
+						<span style="background:green;color:white;font-size:larger;padding:0px 0px 2px 4px;text-align:center;">
+							&raquo;
+						</span>
+						<span style="margin-left:5px;">
+							Design of guidelines for the elaboration of Regional Climate Change Adaptation Strategies
+						</span>
+					</div>
+					<div style="margin:20px 0px;">
+						<span style="background:green;color:white;font-size:larger;padding:0px 0px 2px 4px;text-align:center;">
+							&raquo;
+						</span>
+						<span style="margin-left:5px;">
+							Integrating Climate Change Adaptation into Development Co-operation
+						</span>
+					</div>					
 				</div>				
 			</div>			
+			<hr style="clear:both;display:block;visibility:hidden;"></hr>
 		</div>
-		
+
+
 		<!--
 		
 				step 2
@@ -135,7 +153,7 @@ This is the <b>Ace Adaptation Tools portlet</b> portlet.
 
 	
 	<!-- right panel -->
-    <div id="acemap_column" style="margin-right: 10px; margin-top: 50px; float:left;border:solid 1px red;width:850px;height:600px;">
+    <div id="acemap_column" style="margin-right: 10px; margin-top: 50px; float:left;border:solid 1px red;width:850px;height:600px;background:#fff;">
 	<!--
 	
 			step 1
