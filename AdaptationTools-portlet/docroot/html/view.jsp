@@ -27,6 +27,9 @@ This is the <b>Ace Adaptation Tools portlet</b> portlet.
 
 <script defer="defer" type="text/javascript">
 	function displayStep(nr) {
+
+        $("#image_steps").attr("src", "<%=renderRequest.getContextPath()%>/images/AST_small" + nr + ".png");
+
 		$('.step-left').fadeOut();
 		$('#step-left-'+nr).fadeIn();
 		$('.step-right').fadeOut();
@@ -38,16 +41,19 @@ This is the <b>Ace Adaptation Tools portlet</b> portlet.
 	<!-- left panel -->
 	<div style="border:solid 1px green;margin-right: 10px; margin-top: 50px; float:left;width:400px;height:600px;background-color:#d2df92;">
 
+        <!-- Steps selection image -->
+        <div style="margin:5px;">
+            <img id="image_steps" src="<%=renderRequest.getContextPath()%>/images/AST_small1.png" width="380px" height="236px" usemap="#navigation-map"/>
+        </div>
 
 		<!--
 		
 				step 1
 				
 		-->
+
+
 		<div id="step-left-1" class="step-left">
-			<div style="margin:5px;">
-				<img src="<%=renderRequest.getContextPath()%>/images/AST_small1.png" width="380px" height="236px" usemap="#navigation-map"/>
-			</div>
 			<div id="adaptation-support-tool" style="margin:5px;background:#d2df92;">
 				<div id="adaptation-support-tool-heading" style="font-size:24px;padding:20px 10px;">
 					Adaptation support tool
@@ -109,9 +115,6 @@ This is the <b>Ace Adaptation Tools portlet</b> portlet.
 				
 		-->
 		<div id="step-left-2" class="step-left">
-			<div style="margin:5px;">
-				<img src="<%=renderRequest.getContextPath()%>/images/AST_small2.png" width="380px" height="236px" usemap="#navigation-map"/>
-			</div>
 			<div id="what-should-i-do" style="margin:5px;">
 				<div id="what-should-i-do-heading" style="font-size:24px;" onclick="$j('#analyze-maps-options').fadeOut();$j('#what-should-i-do-options').fadeIn();$j('#analyze-maps-heading').addClass('clickable');$j('#what-should-i-do-heading').removeClass('clickable');$('#general-content').fadeIn();$('#indicators-map').fadeOut();">
 					What should I do?
@@ -192,9 +195,6 @@ This is the <b>Ace Adaptation Tools portlet</b> portlet.
 
         -->
         <div id="step-left-3" class="step-left">
-           <div style="margin:5px;">
-				<img src="<%=renderRequest.getContextPath()%>/images/AST_small3.png" width="380px" height="236px" usemap="#navigation-map"/>			   
-           </div>
 
         <!-- end step 3 -->
         </div>
@@ -206,9 +206,6 @@ This is the <b>Ace Adaptation Tools portlet</b> portlet.
 
 		-->
 		<div id="step-left-4" class="step-left">
-			<div style="margin:5px;">
-				<img src="<%=renderRequest.getContextPath()%>/images/AST_small4.png" width="380px" height="236px" usemap="#navigation-map"/>
-			</div>
             <div id="what-should-i-do-4" style="margin:5px;">
 				<div id="what-should-i-do-4-heading" style="font-size:24px;">
 					What should I do?
@@ -243,9 +240,6 @@ This is the <b>Ace Adaptation Tools portlet</b> portlet.
 
         -->
         <div id="step-left-5" class="step-left">
-            <div style="margin:5px;">
-				<img src="<%=renderRequest.getContextPath()%>/images/AST_small5.png" width="380px" height="236px" usemap="#navigation-map"/>			   
-            </div>
             <div id="what-should-i-do-5" style="margin:5px;">
                 <div id="what-should-i-do-5-heading" style="font-size:24px;">
                     What should I do?
