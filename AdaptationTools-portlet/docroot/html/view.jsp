@@ -123,64 +123,64 @@ This is the <b>Ace Adaptation Tools portlet</b> portlet.
 					<ul style="list-style:none;">
 						<li class="list-option">
 							<img src="<%=renderRequest.getContextPath()%>/images/arrow_green.png" class="valigned"/>
-							2.1 General
+							1. General
 						</li>
 						<li class="list-option">
 							<img src="<%=renderRequest.getContextPath()%>/images/arrow_green.png" class="valigned"/>
-							2.2 What are key systems?
+							2. What are key systems?
 						</li>
 						<li class="list-option">
 							<img src="<%=renderRequest.getContextPath()%>/images/arrow_green.png" class="valigned"/>
-							2.3 How do I analyze impacts of past weather?
+							3. How do I analyze impacts of past weather?
 						</li>
 						<li class="list-option">
 							<img src="<%=renderRequest.getContextPath()%>/images/arrow_green.png" class="valigned"/>
-							2.4 How do I analyze recent climate trends?
+							4. How do I analyze recent climate trends?
 						</li>
 						<li class="list-option">
 							<img src="<%=renderRequest.getContextPath()%>/images/arrow_green.png" class="valigned"/>
-							2.5 Where do I find possible scenarios?
+							5. Where do I find possible scenarios?
 						</li>
 						<li class="list-option">
 							<img src="<%=renderRequest.getContextPath()%>/images/arrow_green.png" class="valigned"/>
-							2.6 How do I identify impacts of climate change?
+							6. How do I identify impacts of climate change?
 						</li>
 						<li class="list-option">
 							<img src="<%=renderRequest.getContextPath()%>/images/arrow_green.png" class="valigned"/>
-							2.7 How do I assess vulnerability?
+							7. How do I assess vulnerability?
 						</li>
 						<li class="list-option">
 							<img src="<%=renderRequest.getContextPath()%>/images/arrow_green.png" class="valigned"/>
-							2.8 What about risks and opportunities?
+							8. What about risks and opportunities?
 						</li>
 					</ul>
 				</div>
 			</div>
 			<div id="analyze-maps" style="margin:5px;">
 				<div id="analyze-maps-heading" class="clickable" style="font-size:24px;" onclick="$j('#what-should-i-do-options').fadeOut();$j('#analyze-maps-options').fadeIn();$j('#what-should-i-do-heading').addClass('clickable');$j('#analyze-maps-heading').removeClass('clickable');$('.what-should-i-do-content').fadeOut();$('#indicators-map').fadeIn(); initMapViewerIndicators();">
-					Analyze pan-European maps
+					Compare my area to Europe
 				</div>
 				<div id="analyze-maps-options" style="display:none;">
 					<ul style="list-style:none;">
 						<li class="list-option">
 							<img src="<%=renderRequest.getContextPath()%>/images/arrow_green.png" class="valigned"/>
-							<a href="#" onclick="showVulnerabilitiesAndRisks(); return false">What are the key vulnerabilities and risks?</a>
+							1. <a href="#" onclick="showVulnerabilitiesAndRisks(); return false">What are the key vulnerabilities and risks?</a>
 						</li>
 						<li class="list-option">
 							<img src="<%=renderRequest.getContextPath()%>/images/arrow_green.png" class="valigned"/>
-							<a href="#" onclick="showUnderlyingCauses(); return false">What are the underlying causes?</a>
+							2. <a href="#" onclick="showUnderlyingCauses(); return false">What are the underlying causes?</a>
 						</li>
 						<li class="list-option">
 							<img src="<%=renderRequest.getContextPath()%>/images/arrow_green.png" class="valigned"/>
-							<a href="#" onclick="showUnderlyingNaturalCauses(); return false">How does the climate change?</a>
+							3. <a href="#" onclick="showUnderlyingNaturalCauses(); return false">How does the climate change?</a>
 						</li>
 						<li class="list-option">
 							<img src="<%=renderRequest.getContextPath()%>/images/arrow_green.png" class="valigned"/>
-							<a href="#" onclick="showUnderlyingHumanCauses(); return false">How does the socio-ecological system change?</a>
+							4. <a href="#" onclick="showUnderlyingHumanCauses(); return false">How does the socio-ecological system change?</a>
 						</li>
 						<li class="list-option">
 							<img src="<%=renderRequest.getContextPath()%>/images/arrow_green.png" class="valigned"/>
-							Uncertainties
+							5. Uncertainties
 						</li>
 					</ul>			
 				</div>
@@ -218,14 +218,17 @@ This is the <b>Ace Adaptation Tools portlet</b> portlet.
 				</div>
 				<div id="search-option-database-options">
 					<ul>
+                        <li>
+                            <img src="<%=renderRequest.getContextPath()%>/images/arrow_green.png" class="valigned"/>
+                            1. <a href="#" onclick="showLocateRegion(); return false;">Locate your region and find similar regions</a>
+                        </li>
 						<li>
-							What are generic measures?
+                            <img src="<%=renderRequest.getContextPath()%>/images/arrow_green.png" class="valigned"/>
+							2. <a href="#" onclick="showGenericMeasures(); return false;">What are generic measures?</a>
 						</li>
 						<li>
-							Locate your region and find similar regions
-						</li>
-						<li>
-							What are potential good practices for your region based on experiences in similar regions?
+                            <img src="<%=renderRequest.getContextPath()%>/images/arrow_green.png" class="valigned"/>
+							3. <a href="#" onclick="showLocateRegion(); return false;">What are potential good practices for your region based on experiences in similar regions?</a>
 						</li>
 					</ul>
 				</div>
@@ -248,19 +251,19 @@ This is the <b>Ace Adaptation Tools portlet</b> portlet.
                     <ul style="list-style:none;">
                         <li>
                             <img src="<%=renderRequest.getContextPath()%>/images/arrow_green.png" class="green-arrow"/>
-                            5.1 General
+                            1. General
                         </li>
                         <li>
                             <img src="<%=renderRequest.getContextPath()%>/images/arrow_green.png" class="green-arrow"/>
-                            5.2 What are the feasible adaptation options?
+                            2. What are the feasible adaptation options?
                         </li>
                         <li>
                             <img src="<%=renderRequest.getContextPath()%>/images/arrow_green.png" class="green-arrow"/>
-                            5.3 How can I agree to set adaptation measures?
+                            3. How can I agree to set adaptation measures?
                         </li>
                         <li>
                             <img src="<%=renderRequest.getContextPath()%>/images/arrow_green.png" class="green-arrow"/>
-                            5.4 How can I design implementation plan?
+                            4. How can I design implementation plan?
                         </li>
                     </ul>
                 </div>
@@ -670,19 +673,41 @@ This is the <b>Ace Adaptation Tools portlet</b> portlet.
 			step 4
 
 	-->
-	<div id="step-right-4" class="step-right">
+    <script defer="defer" type="text/javascript">
+        function showGenericMeasures() {
+            $j("#locate-region").hide()
+            $j("#generic-measures").show();
+        }
 
-        <div style="margin-bottom: 10px">
-            <form>
+        function showLocateRegion() {
+            $j("#locate-region").show()
+            $j("#generic-measures").hide();
+        }
+
+    </script>
+
+	<div id="step-right-4" class="step-right">
+        <div id="generic-measures">
+			 <form>
                 Region of interest: <input type="text" name="locate" style="width:200px" />&nbsp;<button type="submit">Search for similar regions</button>
             </form>
-        </div>
-        <div id="map-container-step4">
+		</div>
+
+
+        <div id="locate-region">
+            <div style="margin-bottom: 10px">
+                <form>
+                    Region of interest: <input type="text" name="locate" style="width:200px" />&nbsp;<button type="submit">Search for similar regions</button>
+                </form>
+            </div>
+            <div id="map-container-step4">
+            </div>
+
+            <div id="specify-region-similarity-criteria" style="margin-top:10px;">
+                Specify region similarity criteria &raquo;
+            </div>
         </div>
 
-        <div id="specify-region-similarity-criteria" style="margin-top:10px;">
-            Specify region similarity criteria &raquo;
-        </div>
 
         <hr style="clear:both;display:block;visibility:hidden;"/>
 	</div>
