@@ -30,7 +30,7 @@ This is the <b>Ace Adaptation Tools portlet</b> portlet.
 
         $("#image_steps").attr("src", "<%=renderRequest.getContextPath()%>/images/AST_small" + nr + ".png");
 
-		$('.step-left').fadeOut();
+		$('.step-left').hide();
 		$('#step-left-'+nr).fadeIn();
 		$('.step-right').fadeOut();
 		$('#step-right-'+nr).fadeIn();		
