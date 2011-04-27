@@ -42,7 +42,7 @@ This is the <b>Ace Adaptation Tools portlet</b> portlet.
 	<div style="border:solid 1px green;margin-right: 10px; margin-top: 50px; float:left;width:385px;height:600px;background-color:#d2df92;">
 
         <!-- Steps selection image -->
-        <div style="margin:5px;">
+        <div>
             <img id="image_steps" src="<%=renderRequest.getContextPath()%>/images/AST_small1.png" width="380px" height="236px" usemap="#navigation-map"/>
         </div>
 
