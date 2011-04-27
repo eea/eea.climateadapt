@@ -3,27 +3,21 @@ package nl.wur.alterra.cgi.ace.model.impl;
 /**
  * Types of AceItems.
  *
+ * Must be kept in sync with the i18n section about this in Language.properties.
+ *
  * @author heikki doeleman
  */
 public enum AceItemType {
     /**
-     * Document.
+     * Publications and reports.
      */
     DOCUMENT,
     /**
-     * Data (sets).
+     * Datasets.
      */
     DATASET,
     /**
-     * Tables.
-     */
-    TABLE,
-    /**
-     * Multimedia.
-     */
-    MULTIMEDIA,
-    /**
-     * Maps.
+     * Maps and graphs.
      */
     MAP,
     /**
@@ -31,23 +25,23 @@ public enum AceItemType {
      */
     INDICATOR,
     /**
-     * Tool Guidance.
+     * Guidance.
      */
     TOOLGUIDANCE,
     /**
-     * ResearchProject.
+     * Research projects.
      */
     RESEARCHPROJECT,
     /**
-     * Measure.
+     * Measures.
      */
     MEASURE, 
     /**
-     * Action.
+     * Good practices.
      */
     ACTION,
     /**
-     * Organisation.
+     * Organisations.
      */
     ORGANISATION
 }
