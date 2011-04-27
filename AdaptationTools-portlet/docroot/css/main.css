@@ -25,6 +25,14 @@
 #sector-selector {
 	right:100px;
 }
+.step-left {
+	background-color:#d2df92;
+	color:#7e8f2e;
+}
+.green-arrow {
+	display:table-cell; 
+	vertical-align:middle;
+}
 .info-button {
 	width: 15px;
 	height:15px;
