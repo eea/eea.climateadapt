@@ -747,6 +747,11 @@ This is the <b>Ace Adaptation Tools portlet</b> portlet.
 
 	-->
 	<div id="step-right-3" class="step-right">
+        <h1 id="strategy-adaptation-heading">
+			<img src="<%=renderRequest.getContextPath()%>/images/bullit3.png" class="valigned"/>
+			What should be my strategy to adapt?
+		</h1>
+
         <hr style="clear:both;display:block;visibility:hidden;"/>
 	</div>
 
@@ -769,6 +774,11 @@ This is the <b>Ace Adaptation Tools portlet</b> portlet.
     </script>
 
 	<div id="step-right-4" class="step-right">
+        <h1 id="aplication-options-heading">
+			<img src="<%=renderRequest.getContextPath()%>/images/bullit4.png" class="valigned"/>
+			How can identify my adaptation options?
+		</h1>
+
         <div id="generic-measures" style="display: none">
 			 <form>
                  <div id="risks-selector-step4" style="float: left;">
@@ -838,6 +848,11 @@ This is the <b>Ace Adaptation Tools portlet</b> portlet.
 
 	-->
 	<div id="step-right-5" class="step-right">
+        <h1 id="assess-adaptation-options-heading">
+			<img src="<%=renderRequest.getContextPath()%>/images/bullit5.png" class="valigned"/>
+			How can I assess my adaptation options?
+		</h1>
+
         <hr style="clear:both;display:block;visibility:hidden;"/>
 	</div>
 
