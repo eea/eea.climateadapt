@@ -461,8 +461,8 @@ This is the <b>Ace Adaptation Tools portlet</b> portlet.
 				</h2>
 
 				<div id="indicator-exposure" class="indicator-category disabled">
-					<div class="info-button right-bubble">
-						i
+					<div class="right-bubble" style="float:left;margin-right:10px;">
+						<img src="<%=renderRequest.getContextPath()%>/images/info.png" class="valigned"/>
 					</div>
 					<h3 class="indicator-category-title">
 						Exposure
@@ -471,8 +471,8 @@ This is the <b>Ace Adaptation Tools portlet</b> portlet.
 				</div>
 
 				<div id="indicator-sensitivity" class="indicator-category disabled">
-					<div class="info-button right-bubble">
-						i
+					<div class="right-bubble" style="float:left;margin-right:10px;">
+						<img src="<%=renderRequest.getContextPath()%>/images/info.png" class="valigned"/>
 					</div>
 					<h3 class="indicator-category-title">
 						Sensitivity
@@ -481,8 +481,8 @@ This is the <b>Ace Adaptation Tools portlet</b> portlet.
 				</div>
 				
 				<div id="indicator-climate-changes" class="xindicator-category" style="display:none;">
-					<div class="info-button right-bubble">
-						i
+					<div class="right-bubble" style="float:left;margin-right:10px;">
+						<img src="<%=renderRequest.getContextPath()%>/images/info.png" class="valigned"/>
 					</div>
 					<h3 class="indicator-category-title">
 						Climate changes
@@ -491,8 +491,8 @@ This is the <b>Ace Adaptation Tools portlet</b> portlet.
 				</div>
 					
 				<div id="indicator-human-causes" class="xindicator-category"  style="display:none;">
-					<div class="info-button right-bubble">
-						i
+					<div class="right-bubble" style="float:left;margin-right:10px;">
+						<img src="<%=renderRequest.getContextPath()%>/images/info.png" class="valigned"/>
 					</div>
 					<h3 class="indicator-category-title">
 						Underlying human causes
@@ -517,9 +517,9 @@ This is the <b>Ace Adaptation Tools portlet</b> portlet.
 							2050
 						</option>	
 					</select>
-					<div class="info-button top-bubble">
-						i
-					</div>			
+					<div class="top-bubble" style="float:left;margin-left:10px;">
+						<img src="<%=renderRequest.getContextPath()%>/images/info.png" class="valigned"/>
+					</div>		
 				</div>
 				<div id="scenario-selector" style="float:right;margin-right:60px;">
 					<span style="margin-right:30px;">
@@ -530,9 +530,9 @@ This is the <b>Ace Adaptation Tools portlet</b> portlet.
 							Economy first
 						</option>	
 					</select>
-					<div class="info-button top-bubble">
-						i
-					</div>			
+					<div class="top-bubble" style="float:left;margin-left:10px;">
+						<img src="<%=renderRequest.getContextPath()%>/images/info.png" class="valigned"/>
+					</div>		
 				</div>
 			</div>
 		<!-- end of indicators map page -->
