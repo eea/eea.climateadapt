@@ -157,7 +157,7 @@ This is the <b>Ace Adaptation Tools portlet</b> portlet.
 				</div>
 			</div>
 			<div id="analyze-maps" style="margin:5px;">
-				<div id="analyze-maps-heading" class="clickable" style="font-size:24px;" onclick="$j('#what-should-i-do-options').fadeOut();$j('#analyze-maps-options').fadeIn();$j('#what-should-i-do-heading').addClass('clickable');$j('#analyze-maps-heading').removeClass('clickable');$('.what-should-i-do-content').fadeOut();$('#indicators-map').fadeIn(); initMapViewerIndicators();">
+				<div id="analyze-maps-heading" class="clickable" style="font-size:24px;" onclick="$j('#what-should-i-do-options').fadeOut();$j('#analyze-maps-options').fadeIn();$j('#what-should-i-do-heading').addClass('clickable');$j('#analyze-maps-heading').removeClass('clickable');$('.what-should-i-do-content').fadeOut();$('#indicators-map').fadeIn(); showVulnerabilitiesAndRisks(); initMapViewerIndicators();">
 					Compare my area to Europe
 				</div>
 				<div id="analyze-maps-options" style="display:none;">
@@ -218,15 +218,15 @@ This is the <b>Ace Adaptation Tools portlet</b> portlet.
 				</div>
 				<div id="search-option-database-options">
 					<ul>
-                        <li>
+                        <li class="list-option">
                             <img src="<%=renderRequest.getContextPath()%>/images/arrow_green.png" class="valigned"/>
                             1. <a href="#" onclick="showLocateRegion(); return false;">Locate your region and find similar regions</a>
                         </li>
-						<li>
+						<li class="list-option">
                             <img src="<%=renderRequest.getContextPath()%>/images/arrow_green.png" class="valigned"/>
 							2. <a href="#" onclick="showGenericMeasures(); return false;">What are generic measures?</a>
 						</li>
-						<li>
+						<li class="list-option">
                             <img src="<%=renderRequest.getContextPath()%>/images/arrow_green.png" class="valigned"/>
 							3. <a href="#" onclick="showLocateRegion(); return false;">What are potential good practices for your region based on experiences in similar regions?</a>
 						</li>
@@ -432,6 +432,18 @@ This is the <b>Ace Adaptation Tools portlet</b> portlet.
 
 
         function showVulnerabilitiesAndRisks() {
+            $j("#header-climate-change").hide();
+            $j("#text-climate-change").hide();
+
+            $j("#header-socio-ecological").hide();
+            $j("#text-socio-ecological").hide();
+
+            $j("#header-underlying-causes").hide();
+            $j("#text-underlying-causes").hide();
+
+            $j("#header-vulnerability").show();
+            $j("#text-vulnerability").show();
+
             $j("#underlying-causes-header").text("Underlying causes");
 
             $j("#underlying-causes-header").addClass("disabled");
@@ -445,6 +457,18 @@ This is the <b>Ace Adaptation Tools portlet</b> portlet.
         }
 
         function showUnderlyingCauses() {
+            $j("#header-vulnerability").hide();
+            $j("#text-vulnerability").hide();
+
+            $j("#header-climate-change").hide();
+            $j("#text-climate-change").hide();
+
+            $j("#header-socio-ecological").hide();
+            $j("#text-socio-ecological").hide();
+
+            $j("#header-underlying-causes").show();
+            $j("#text-underlying-causes").show();
+
             $j("#underlying-causes-header").text("Underlying causes");
 
             $j("#underlying-causes-header").removeClass("disabled");
@@ -459,6 +483,18 @@ This is the <b>Ace Adaptation Tools portlet</b> portlet.
         }
 
         function showUnderlyingNaturalCauses() {
+            $j("#header-socio-ecological").hide();
+            $j("#text-socio-ecological").hide();
+
+            $j("#header-underlying-causes").hide();
+            $j("text-underlying-causes").hide();
+
+            $j("#header-vulnerability").hide();
+            $j("#text-vulnerability").hide();
+
+            $j("#header-climate-change").show();
+            $j("#text-climate-change").show();
+
             $j("#underlying-causes-header").text("Underlying natural causes");
 
             $j("#indicator-changes").hide();
@@ -472,17 +508,29 @@ This is the <b>Ace Adaptation Tools portlet</b> portlet.
         }
 
          function showUnderlyingHumanCauses() {
-             $j("#underlying-causes-header").text("Underlying human causes");
+            $j("#header-underlying-causes").hide();
+            $j("#text-underlying-causes").hide();
 
-             $j("#indicator-changes").hide();
-             $j("#indicator-climate-changes").hide();
-             $j("#indicator-human-causes").show();
+            $j("#header-vulnerability").hide();
+            $j("#text-vulnerability").hide();
 
-             $j("#underlying-causes-header").removeClass("disabled");
-             $j("#indicator-sensitivity").removeClass("disabled");
-             $j("#indicator-exposure").hide();
-             $j("#indicator-climate-changes").hide();
-             $j("#indicator-sensitivity").show();
+            $j("#header-climate-change").hide();
+            $j("#text-climate-change").hide();
+
+            $j("#header-socio-ecological").show();
+            $j("#text-socio-ecological").show();
+
+            $j("#underlying-causes-header").text("Underlying human causes");
+
+            $j("#indicator-changes").hide();
+            $j("#indicator-climate-changes").hide();
+            $j("#indicator-human-causes").show();
+
+            $j("#underlying-causes-header").removeClass("disabled");
+            $j("#indicator-sensitivity").removeClass("disabled");
+            $j("#indicator-exposure").hide();
+            $j("#indicator-climate-changes").hide();
+            $j("#indicator-sensitivity").show();
         }
             </script>
 		
@@ -491,7 +539,23 @@ This is the <b>Ace Adaptation Tools portlet</b> portlet.
 			<img src="<%=renderRequest.getContextPath()%>/images/bullit2.png" class="valigned"/>	
 			Am I vulnerable to climate change and what are my risks
 		</h1>
-		
+
+         <h2 id="header-vulnerability" class="heading" style="display: none">
+             1. What are the key vulnerabilities and risks?
+         </h2>
+
+        <h2 id="header-underlying-causes" class="heading" style="display: none">
+             2. What are the underlying causes?
+        </h2>
+
+        <h2 id="header-climate-change" class="heading" style="display: none">
+             3. What are the underlying causes?
+        </h2>
+
+        <h2 id="header-socio-ecological" class="heading" style="display: none">
+             4. How does the socio-ecological system change?
+        </h2>
+
 		<div id="general-content" class="what-should-i-do-content">
 			<img src="<%=renderRequest.getContextPath()%>/images/step-2.jpg" style="float:right;margin-right:30px;"/>
 			<div id="general-content-text" style="float:left;width:50%;margin-left:30px;">
@@ -503,6 +567,24 @@ This is the <b>Ace Adaptation Tools portlet</b> portlet.
 		</div>
 		
 		<div id="indicators-map" style="display: none">
+            <div id="text-vulnerability" class="description" style="display: none">
+                <p>Vulnerability and risks represent bla bla bla  lorum ipsum hardanger voda en joda krijgt het heen en weer...</p>
+                <p>Choose a risk and (optionally) a sector to find out what corresponding vulnerabilities and risks are. </p>
+            </div>
+
+            <div id="text-underlying-causes" class="description" style="display: none">
+                <p>Underlying causes can be both caused by the global system (exposure) and the human system (sensitivity) bla bla bla
+                    lorum ipsum hardanger voda en joda krijgt het heen en weer... </p>
+            </div>
+
+            <div id="text-climate-change" class="description" style="display: none">
+                <p>Climate changes bla bla bla  lorum ipsum hardanger voda en joda krijgt het heen en weer...</p>
+            </div>
+
+             <div id="text-socio-ecological" class="description" style="display: none">
+                <p>Socio-ecological bla bla bla  lorum ipsum hardanger voda en joda krijgt het heen en weer...</p>
+            </div>
+
 			<div id="adaptationtools-selectors-top">
 				<div id="risks-selector" class="adaptationtools-selector">
 					<!-- TODO load dynamically from enumeration nl.wur.alterra.cgi.ace.model.impl.AceItemClimateImpact -- but aceitem model classes must be made available as a jar for that -->
@@ -559,7 +641,7 @@ This is the <b>Ace Adaptation Tools portlet</b> portlet.
 				
 			<div id="adaptationtools-indicators">
 				<h2>
-					Indicators
+					Choose an indicator to view it's map
 				</h2>
 				
 				<div id="indicator-vulnerability" class="indicator-category">
@@ -687,9 +769,47 @@ This is the <b>Ace Adaptation Tools portlet</b> portlet.
     </script>
 
 	<div id="step-right-4" class="step-right">
-        <div id="generic-measures">
+        <div id="generic-measures" style="display: none">
 			 <form>
-                Region of interest: <input type="text" name="locate" style="width:200px" />&nbsp;<button type="submit">Search for similar regions</button>
+                 <div id="risks-selector-step4" style="float: left;">
+                     <!-- TODO load dynamically from enumeration nl.wur.alterra.cgi.ace.model.impl.AceItemClimateImpact -- but aceitem model classes must be made available as a jar for that -->
+                     <select  style="float:left;">
+                         <option value="none" selected="selected">Choose a risk:</option>
+                         <option value="all">All risks</option>
+                         <option value="EXTREMETEMP">Extreme Temperatures</option>
+                         <option value="WATERSCARCE">Water Scarcity</option>
+                         <option value="FLOODING">Flooding</option>
+                         <option value="DROUGHT">Droughts</option>
+                         <option value="STORM">Storms</option>
+                         <option value="ICEANDSNOW">Ice and Snow</option>
+                     </select>
+                     <div class="top-bubble" style="float:left;margin-left:10px;">
+                         <img src="<%=renderRequest.getContextPath()%>/images/info.png" class="valigned"/>
+                     </div>
+                 </div>
+
+                 <div id="sector-selector-step4"  style="float: left;margin-left: 20px; ">
+                     <span style="margin-right:30px;">
+                         Filter by sector
+                     </span>
+                     <!-- TODO load dynamically from enumeration nl.wur.alterra.cgi.ace.model.impl.AceItemSector -- but aceitem model classes must be made available as a jar for that -->
+                     <select id="sector-select-step4" style="float:left;">
+                         <option value="none" selected="selected">Choose a sector:</option>
+                         <option value="all">All sectors</option>
+                         <option value="AGRICULTURE">Agriculture and Forest</option>
+                         <option value="BIODIVERSITY" disabled="disabled">Biodiversity</option>
+                         <option value="COASTAL" disabled="disabled">Coastal areas</option>
+                         <option value="DISASTERRISKREDUCTION" disabled="disabled">Disaster Risk Reduction</option>
+                         <option value="FINANCIAL" disabled="disabled">Financial</option>
+                         <option value="HEALTH" disabled="disabled">Health</option>
+                         <option value="INFRASTRUCTURE" disabled="disabled">Infrastructure</option>
+                         <option value="MARINE" disabled="disabled">Marine and Fisheries</option>
+                         <option value="WATERMANAGEMENT">Water management</option>
+                     </select>
+                     <div class="top-bubble" style="float:left;margin-left:10px;">
+                         <img src="<%=renderRequest.getContextPath()%>/images/info.png" class="valigned"/>
+                     </div>
+                 </div>
             </form>
 		</div>
 

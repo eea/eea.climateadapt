@@ -100,6 +100,12 @@ div.map-overlay {
 
 }
 
+.olControlLoadingPanel {
+    background-image:url(../images/loading_indicator.gif);
+    background-position:center;
+    background-repeat:no-repeat;
+}
+
 #map_info {
     bottom:0px;
 	position:absolute;
@@ -112,12 +118,15 @@ div.map-overlay {
 
 #map_info p {
     padding: 10px;
-
 }
 
-.olControlLoadingPanel {
-    background-image:url(../images/loading_indicator.gif);
-    background-position:center;
-    background-repeat:no-repeat;
+h2.heading {
+    padding-left: 20px;
+    padding-bottom: 15px;
 }
 
+div.description {
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-bottom: 15px;
+}
