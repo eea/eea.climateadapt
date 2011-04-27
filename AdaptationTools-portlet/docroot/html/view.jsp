@@ -74,13 +74,13 @@ This is the <b>Ace Adaptation Tools portlet</b> portlet.
 					<div style="font-size:12px;margin:20px 10px;">
 						You can find more about designing and mainstreaming adaptation policies in these documents:
 						<div style="margin:20px 0px;">
-							<img src="<%=renderRequest.getContextPath()%>/images/arrow_green.png"/ class="valigned"/>
+							<img src="<%=renderRequest.getContextPath()%>/images/arrow_green.png" class="valigned"/>
 							<span style="margin-left:5px;">
 								Design of guidelines for the elaboration of Regional Climate Change Adaptation Strategies
 							</span>
 						</div>
 						<div style="margin:20px 0px;">
-							<img src="<%=renderRequest.getContextPath()%>/images/arrow_green.png"/ class="valigned"/>
+							<img src="<%=renderRequest.getContextPath()%>/images/arrow_green.png" class="valigned"/>
 							<span style="margin-left:5px;">
 								Integrating Climate Change Adaptation into Development Co-operation
 							</span>
@@ -108,35 +108,35 @@ This is the <b>Ace Adaptation Tools portlet</b> portlet.
 				<div id="what-should-i-do-options" style="">
 					<ul style="list-style:none;">
 						<li class="list-option">
-							<img src="<%=renderRequest.getContextPath()%>/images/arrow_green.png"/ class="valigned"/>
+							<img src="<%=renderRequest.getContextPath()%>/images/arrow_green.png" class="valigned"/>
 							2.1 General
 						</li>
 						<li class="list-option">
-							<img src="<%=renderRequest.getContextPath()%>/images/arrow_green.png"/ class="valigned"/>					
+							<img src="<%=renderRequest.getContextPath()%>/images/arrow_green.png" class="valigned"/>
 							2.2 What are key systems?
 						</li>
 						<li class="list-option">
-							<img src="<%=renderRequest.getContextPath()%>/images/arrow_green.png"/ class="valigned"/>					
+							<img src="<%=renderRequest.getContextPath()%>/images/arrow_green.png" class="valigned"/>
 							2.3 How do I analyze impacts of past weather?
 						</li>
 						<li class="list-option">
-							<img src="<%=renderRequest.getContextPath()%>/images/arrow_green.png"/ class="valigned"/>					
+							<img src="<%=renderRequest.getContextPath()%>/images/arrow_green.png" class="valigned"/>
 							2.4 How do I analyze recent climate trends?
 						</li>
 						<li class="list-option">
-							<img src="<%=renderRequest.getContextPath()%>/images/arrow_green.png"/ class="valigned"/>						
+							<img src="<%=renderRequest.getContextPath()%>/images/arrow_green.png" class="valigned"/>
 							2.5 Where do I find possible scenarios?
 						</li>
 						<li class="list-option">
-							<img src="<%=renderRequest.getContextPath()%>/images/arrow_green.png"/ class="valigned"/>					
+							<img src="<%=renderRequest.getContextPath()%>/images/arrow_green.png" class="valigned"/>
 							2.6 How do I identify impacts of climate change?
 						</li>
 						<li class="list-option">
-							<img src="<%=renderRequest.getContextPath()%>/images/arrow_green.png"/ class="valigned"/>					
+							<img src="<%=renderRequest.getContextPath()%>/images/arrow_green.png" class="valigned"/>
 							2.7 How do I assess vulnerability?
 						</li>
 						<li class="list-option">
-							<img src="<%=renderRequest.getContextPath()%>/images/arrow_green.png"/ class="valigned"/>					
+							<img src="<%=renderRequest.getContextPath()%>/images/arrow_green.png" class="valigned"/>
 							2.8 What about risks and opportunities?
 						</li>
 					</ul>
@@ -149,23 +149,23 @@ This is the <b>Ace Adaptation Tools portlet</b> portlet.
 				<div id="analyze-maps-options" style="display:none;">
 					<ul style="list-style:none;">
 						<li class="list-option">
-							<img src="<%=renderRequest.getContextPath()%>/images/arrow_green.png"/ class="valigned"/>					
+							<img src="<%=renderRequest.getContextPath()%>/images/arrow_green.png" class="valigned"/>
 							What are the key vulnerabilities and risks?
 						</li>
 						<li class="list-option">
-							<img src="<%=renderRequest.getContextPath()%>/images/arrow_green.png"/ class="valigned"/>					
+							<img src="<%=renderRequest.getContextPath()%>/images/arrow_green.png" class="valigned"/>
 							What are the underlying causes?
 						</li>
 						<li class="list-option">
-							<img src="<%=renderRequest.getContextPath()%>/images/arrow_green.png"/ class="valigned"/>					
+							<img src="<%=renderRequest.getContextPath()%>/images/arrow_green.png" class="valigned"/>
 							How does the climate change?
 						</li>
 						<li class="list-option">
-							<img src="<%=renderRequest.getContextPath()%>/images/arrow_green.png"/ class="valigned"/>					
+							<img src="<%=renderRequest.getContextPath()%>/images/arrow_green.png" class="valigned"/>
 							How does the socio-ecological system change?
 						</li>
 						<li class="list-option">
-							<img src="<%=renderRequest.getContextPath()%>/images/arrow_green.png"/ class="valigned"/>					
+							<img src="<%=renderRequest.getContextPath()%>/images/arrow_green.png" class="valigned"/>
 							Uncertainties
 						</li>
 					</ul>			
@@ -242,19 +242,19 @@ This is the <b>Ace Adaptation Tools portlet</b> portlet.
                 <div id="what-should-i-do-5-options" style="">
                     <ul style="list-style:none;">
                         <li>
-                            <img src="<%=renderRequest.getContextPath()%>/images/arrow_green.png"/ class="green-arrow"/>
+                            <img src="<%=renderRequest.getContextPath()%>/images/arrow_green.png" class="green-arrow"/>
                             5.1 General
                         </li>
                         <li>
-                            <img src="<%=renderRequest.getContextPath()%>/images/arrow_green.png"/ class="green-arrow"/>
+                            <img src="<%=renderRequest.getContextPath()%>/images/arrow_green.png" class="green-arrow"/>
                             5.2 What are the feasible adaptation options?
                         </li>
                         <li>
-                            <img src="<%=renderRequest.getContextPath()%>/images/arrow_green.png"/ class="green-arrow"/>
+                            <img src="<%=renderRequest.getContextPath()%>/images/arrow_green.png" class="green-arrow"/>
                             5.3 How can I agree to set adaptation measures?
                         </li>
                         <li>
-                            <img src="<%=renderRequest.getContextPath()%>/images/arrow_green.png"/ class="green-arrow"/>
+                            <img src="<%=renderRequest.getContextPath()%>/images/arrow_green.png" class="green-arrow"/>
                             5.4 How can I design implementation plan?
                         </li>
                     </ul>
