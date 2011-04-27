@@ -312,7 +312,7 @@ body #banner .logo a {
 	position: absolute;
 	left: 32%;
 	text-align: center;
-	width: 100%;
+	width: 50%;
 }
 
 .ie7 #footer .container {
@@ -571,6 +571,24 @@ body #banner .logo a {
 	color: #758816;
 }
 
+/**** Ace Layout 4 ****/
+
+.ace_layout_4 #column-1 .portlet-column-content {
+	padding: 0 15px 0 0;
+}
+
+.ace_layout_4 #column-2 {
+	background-color: #d2de92;
+}
+
+.ace_layout_4 #column-2 {
+	padding: 27px 19px;
+}
+
+.ace_layout_4 #column-2 .portlet-title {
+	color: #758816;
+}
+
 /**** Template Sector Main Article ****/
 
 .sector-main-article {
@@ -644,6 +662,51 @@ body #banner .logo a {
 
 .sector-main-article .read-more-body {
 	margin: 85px 17px 0 0;
+}
+
+/**** Template for Research Project ****/
+
+.project-description .intro {
+	height: 150px;
+}
+
+.project-description .image {
+	float: left;
+}
+
+.project-description .title-container {
+	margin: 20px 15px 20px 170px;
+	position: absolute;
+}
+
+.project-description .title-container h1{
+	color: #02213d;
+	font-family: Tahoma, Times New Roman, serif;
+	font-size: 26px;
+	font-weight: normal;
+	margin-bottom: 15px;
+}
+
+.project-description .title-container .subtitle {
+	color: #02213d;
+	font-family: Tahoma, Times New Roman, serif;
+	font-size: 13px;
+	font-weight: normal;
+}
+
+.project-description .text-container {
+	margin-top: 25px;
+}
+
+.project-description .text-container .ui-state-active a {
+	color: #02213d;
+	font-size: 13px;
+}
+
+.project-description .text-container .ui-corner-top,
+.project-description .text-container .ui-corner-bottom,
+.project-description .text-container .ui-corner-all {
+	border-radius: 0px;
 }
 
 /**** Styles modified from originally ace-theme/docroot/css/custom_common.css ****/
