@@ -217,7 +217,7 @@ This is the <b>Ace Adaptation Tools portlet</b> portlet.
 					Search the option database
 				</div>
 				<div id="search-option-database-options">
-					<ul>
+					<ul style="list-style:none;">
                         <li class="list-option">
                             <img src="<%=renderRequest.getContextPath()%>/images/arrow_green.png" class="valigned"/>
                             1. <a href="#" onclick="showLocateRegion(); return false;">Locate your region and find similar regions</a>
