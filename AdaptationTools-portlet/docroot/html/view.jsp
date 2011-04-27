@@ -302,7 +302,7 @@ This is the <b>Ace Adaptation Tools portlet</b> portlet.
 			//
 			// create information popups
 			//
-			$j('.info-button.top-bubble').CreateBubblePopup({
+			$j('.top-bubble').CreateBubblePopup({
 					position : 'top',
                     selectable: true,
 					align	 : 'center',
@@ -318,7 +318,7 @@ This is the <b>Ace Adaptation Tools portlet</b> portlet.
 					themeName: 	'green',
 					themePath: 	'<%=renderRequest.getContextPath()%>/js/bubblepopup/jquerybubblepopup-theme'					
 			});
-			$j('.info-button.right-bubble').CreateBubblePopup({
+			$j('.right-bubble').CreateBubblePopup({
 					position : 'right',
                     selectable: true,
 					align	 : 'center',
