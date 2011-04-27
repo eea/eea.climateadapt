@@ -1,26 +1,25 @@
 
 #acesearch_container {
-    background-color: #ffffff;
+    background-color: #fff;
 }
 
 #nas_container {
-    font-size: 1.2em;
-    background-color: #ffffff;
+    background-color: #fff;
 }
 #nas_results {
 	float:left;
-	margin-left:50px;
+	margin-left:10px;
 }
 #nas_left_column {
 	float:left;
-	margin-left:50px;
+	margin-left:20px;
 }
 .nas-row-even {
     background-color: #FDFCDC;
 }
 
 .nas-row-odd {
-    background-color: #ffffff;
+    background-color: #fff;
 }
 
 .nas-row-selected {
@@ -28,12 +27,14 @@
 }
 
 .nas-row td {
-	padding: 5px 20px 0px 20px;
+	padding: 5px 5px 0px 5px;
 }
 .nas-region-row td:first-child {
 	padding: 5px 20px 0px 40px;
 }
-
+#nas-table  ul {
+	margin-left: 15px;
+}
 #nas-header th {
 	padding: 5px 20px 0px 20px;
 	background-color:#F1EDC2;
