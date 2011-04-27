@@ -169,7 +169,45 @@ This is the <b>Ace Adaptation Tools portlet</b> portlet.
 
 		<!-- end step 2 -->
 		</div>
-		
+
+
+        <!--
+
+				step 4
+
+		-->
+		<div id="step-left-4" class="step-left">
+			<div style="margin:5px;cursor:pointer;">
+				<img src="<%=renderRequest.getContextPath()%>/images/AST_small4.png"/>
+			</div>
+            <div id="what-should-i-do-4" style="margin:5px;">
+				<div id="what-should-i-do-4-heading" style="font-size:24px;">
+					What should I do?
+				</div>
+
+            </div>
+			<div id="search-option-database" style="margin:5px;">
+				<div id="search-option-database-heading" style="font-size:24px;">
+					Search the option database
+				</div>
+				<div id="search-option-database-options">
+					<ul>
+						<li>
+							What are generic measures?
+						</li>
+						<li>
+							Locate your region and find similar regions
+						</li>
+						<li>
+							What are potential good practices for your region based on experiences in similar regions?
+						</li>
+					</ul>
+				</div>
+			</div>
+
+		<!-- end step 4 -->
+		</div>
+
 	<!-- end left panel -->
 	</div>
 	
@@ -498,6 +536,17 @@ This is the <b>Ace Adaptation Tools portlet</b> portlet.
 	
 	<hr style="clear:both;display:block;visibility:hidden;"></hr>
 	
+    <!--
+
+			step 4
+
+	-->
+	<div id="step-right-4" class="step-right">
+
+		<hr style="clear:both;display:block;visibility:hidden;"></hr>
+        <div id="map-container-step4">
+        </div>
+	</div>
 
 	<!-- acemap_column -->
     </div>
