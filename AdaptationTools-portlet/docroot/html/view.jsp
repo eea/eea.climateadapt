@@ -499,8 +499,7 @@ This is the <b>Ace Adaptation Tools portlet</b> portlet.
 			</div>
 		</div>
 		
-		<div id="indicators-map" style="display:none;">
-		
+		<div id="indicators-map">
 			<div id="adaptationtools-selectors-top">
 				<div id="risks-selector" class="adaptationtools-selector">
 					<!-- TODO load dynamically from enumeration nl.wur.alterra.cgi.ace.model.impl.AceItemClimateImpact -- but aceitem model classes must be made available as a jar for that -->
