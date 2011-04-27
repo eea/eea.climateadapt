@@ -175,6 +175,19 @@ This is the <b>Ace Adaptation Tools portlet</b> portlet.
 		<!-- end step 2 -->
 		</div>
 
+        <!--
+
+               step 3
+
+        -->
+        <div id="step-left-3" class="step-left">
+           <div style="margin:5px;cursor:pointer;" onclick="displayStep(4);">
+               <img src="<%=renderRequest.getContextPath()%>/images/AST_small3.png"/>
+           </div>
+
+        <!-- end step 3 -->
+        </div>
+
 
         <!--
 
@@ -182,7 +195,7 @@ This is the <b>Ace Adaptation Tools portlet</b> portlet.
 
 		-->
 		<div id="step-left-4" class="step-left">
-			<div style="margin:5px;cursor:pointer;">
+			<div style="margin:5px;cursor:pointer;"  onclick="displayStep(5);">
 				<img src="<%=renderRequest.getContextPath()%>/images/AST_small4.png"/>
 			</div>
             <div id="what-should-i-do-4" style="margin:5px;">
@@ -212,6 +225,49 @@ This is the <b>Ace Adaptation Tools portlet</b> portlet.
 
 		<!-- end step 4 -->
 		</div>
+
+        <!--
+
+                step 5
+
+        -->
+        <div id="step-left-5" class="step-left">
+            <div style="margin:5px;cursor:pointer;" onclick="displayStep(3);">
+                <img src="<%=renderRequest.getContextPath()%>/images/AST_small5.png"/>
+            </div>
+            <div id="what-should-i-do-5" style="margin:5px;">
+                <div id="what-should-i-do-5-heading" style="font-size:24px;">
+                    What should I do?
+                </div>
+                <div id="what-should-i-do-5-options" style="">
+                    <ul style="list-style:none;">
+                        <li>
+                            <img src="<%=renderRequest.getContextPath()%>/images/arrow_green.png"/ class="green-arrow"/>
+                            5.1 General
+                        </li>
+                        <li>
+                            <img src="<%=renderRequest.getContextPath()%>/images/arrow_green.png"/ class="green-arrow"/>
+                            5.2 What are the feasible adaptation options?
+                        </li>
+                        <li>
+                            <img src="<%=renderRequest.getContextPath()%>/images/arrow_green.png"/ class="green-arrow"/>
+                            5.3 How can I agree to set adaptation measures?
+                        </li>
+                        <li>
+                            <img src="<%=renderRequest.getContextPath()%>/images/arrow_green.png"/ class="green-arrow"/>
+                            5.4 How can I design implementation plan?
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div id="search-cost-benefir-db" style="margin:5px;">
+                <div id="search-cost-benefir-db-heading" style="font-size:24px;">
+                    Search the cost benefit database
+                </div>
+            </div>
+
+        <!-- end step 2 -->
+        </div>
 
 	<!-- end left panel -->
 	</div>
@@ -541,8 +597,16 @@ This is the <b>Ace Adaptation Tools portlet</b> portlet.
 	<!-- end of step2 -->
 	</div>
 	
-	<hr style="clear:both;display:block;visibility:hidden;"></hr>
-	
+
+    <!--
+
+			step 3
+
+	-->
+	<div id="step-right-3" class="step-right">
+        <hr style="clear:both;display:block;visibility:hidden;"></hr>
+	</div>
+
     <!--
 
 			step 4
@@ -550,10 +614,23 @@ This is the <b>Ace Adaptation Tools portlet</b> portlet.
 	-->
 	<div id="step-right-4" class="step-right">
 
-		<hr style="clear:both;display:block;visibility:hidden;"></hr>
         <div id="map-container-step4">
         </div>
+
+        <hr style="clear:both;display:block;visibility:hidden;"></hr>
 	</div>
+
+    <!--
+
+			step 5
+
+	-->
+	<div id="step-right-5" class="step-right">
+        <hr style="clear:both;display:block;visibility:hidden;"></hr>
+	</div>
+
+    <hr style="clear:both;display:block;visibility:hidden;"></hr>
+
 
 	<!-- acemap_column -->
     </div>
