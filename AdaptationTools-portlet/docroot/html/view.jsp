@@ -38,22 +38,15 @@ This is the <b>Ace Adaptation Tools portlet</b> portlet.
 	<!-- left panel -->
 	<div style="border:solid 1px green;margin-right: 10px; margin-top: 50px; float:left;width:400px;height:600px;background-color:#d2df92;">
 
-		<!-- navigation in images -->
-		<map name="navigation-map" id="navigation-map">
-			<area shape="poly" coords="151,17,148,56,242,61,243,16" nohref="nohref" onclick="alert('a');displayStep(1);alert('b');"/>
-			<area shape="poly" coords="181,60,332,58,346,99,191,96,191,96,192,102" nohref="nohref" onclick="alert('a');displayStep(2);alert('b');" />
-			<area shape="poly" coords="190,107,333,109,341,145,192,144" nohref="nohref" onclick="displayStep(3);" />
-			<area shape="poly" coords="175,152,332,153,336,186,180,186,170,172" nohref="nohref" onclick="displayStep(4);" />
-			<area shape="poly" coords="123,177,165,177,181,188,233,192,278,199,280,224,130,227,122,205" nohref="nohref" onclick="displayStep(5);" />
-		</map>
+
 		<!--
 		
 				step 1
 				
 		-->
 		<div id="step-left-1" class="step-left">
-			<div style="margin:5px;cursor:pointer;">
-				<img src="<%=renderRequest.getContextPath()%>/images/AST_small1.png" usemap="navigation-map"/>
+			<div style="margin:5px;">
+				<img src="<%=renderRequest.getContextPath()%>/images/AST_small1.png" width="380px" height="236px" usemap="#navigation-map"/>
 			</div>
 			<div id="adaptation-support-tool" style="margin:5px;background:#d2df92;">
 				<div id="adaptation-support-tool-heading" style="font-size:24px;padding:20px 10px;">
@@ -98,6 +91,15 @@ This is the <b>Ace Adaptation Tools portlet</b> portlet.
 				</div>			
 				<hr style="clear:both;display:block;visibility:hidden;"></hr>
 			</div>
+			<!-- navigation in images -->
+			<map name="navigation-map" id="navigation-map">
+				<area shape="poly" coords="151,17,148,56,242,61,243,16" nohref="nohref" onclick="displayStep(1);" class="clickable"/>
+				<area shape="poly" coords="181,60,332,58,346,99,191,96,191,96,192,102" nohref="nohref" onclick="displayStep(2);" class="clickable" />
+				<area shape="poly" coords="190,107,333,109,341,145,192,144" nohref="nohref" onclick="displayStep(3);" class="clickable" />
+				<area shape="poly" coords="175,152,332,153,336,186,180,186,170,172" nohref="nohref" onclick="displayStep(4);" class="clickable" />
+				<area shape="poly" coords="123,177,165,177,181,188,233,192,278,199,280,224,130,227,122,205" nohref="nohref" onclick="displayStep(5);" class="clickable" />
+			</map>
+		
 		<!-- end step 1 -->	
 		</div>
 
@@ -107,8 +109,8 @@ This is the <b>Ace Adaptation Tools portlet</b> portlet.
 				
 		-->
 		<div id="step-left-2" class="step-left">
-			<div style="margin:5px;cursor:pointer;">
-				<img src="<%=renderRequest.getContextPath()%>/images/AST_small2.png" usemap="navigation-map"/>
+			<div style="margin:5px;">
+				<img src="<%=renderRequest.getContextPath()%>/images/AST_small2.png" usemap="#navigation-map"/>
 			</div>
 			<div id="what-should-i-do" style="margin:5px;">
 				<div id="what-should-i-do-heading" style="font-size:24px;" onclick="$j('#analyze-maps-options').fadeOut();$j('#what-should-i-do-options').fadeIn();$j('#analyze-maps-heading').addClass('clickable');$j('#what-should-i-do-heading').removeClass('clickable');$('#general-content').fadeIn();$('#indicators-map').fadeOut();">
@@ -190,8 +192,8 @@ This is the <b>Ace Adaptation Tools portlet</b> portlet.
 
         -->
         <div id="step-left-3" class="step-left">
-           <div style="margin:5px;cursor:pointer;" onclick="displayStep(4);">
-               <img src="<%=renderRequest.getContextPath()%>/images/AST_small3.png"/>
+           <div style="margin:5px;">
+				<img src="<%=renderRequest.getContextPath()%>/images/AST_small3.png" width="380px" height="236px" usemap="#navigation-map"/>			   
            </div>
 
         <!-- end step 3 -->
@@ -204,8 +206,8 @@ This is the <b>Ace Adaptation Tools portlet</b> portlet.
 
 		-->
 		<div id="step-left-4" class="step-left">
-			<div style="margin:5px;cursor:pointer;">
-				<img src="<%=renderRequest.getContextPath()%>/images/AST_small4.png" usemap="navigation-map"/>
+			<div style="margin:5px;">
+				<img src="<%=renderRequest.getContextPath()%>/images/AST_small4.png" width="380px" height="236px" usemap="#navigation-map"/>			   
 			</div>
             <div id="what-should-i-do-4" style="margin:5px;">
 				<div id="what-should-i-do-4-heading" style="font-size:24px;">
@@ -241,8 +243,8 @@ This is the <b>Ace Adaptation Tools portlet</b> portlet.
 
         -->
         <div id="step-left-5" class="step-left">
-            <div style="margin:5px;cursor:pointer;" onclick="displayStep(3);">
-                <img src="<%=renderRequest.getContextPath()%>/images/AST_small5.png"/>
+            <div style="margin:5px;">
+				<img src="<%=renderRequest.getContextPath()%>/images/AST_small5.png" width="380px" height="236px" usemap="#navigation-map"/>			   
             </div>
             <div id="what-should-i-do-5" style="margin:5px;">
                 <div id="what-should-i-do-5-heading" style="font-size:24px;">
