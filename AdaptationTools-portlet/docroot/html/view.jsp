@@ -74,13 +74,13 @@ This is the <b>Ace Adaptation Tools portlet</b> portlet.
 					<div style="font-size:12px;margin:20px 10px;">
 						You can find more about designing and mainstreaming adaptation policies in these documents:
 						<div style="margin:20px 0px;">
-							<img src="<%=renderRequest.getContextPath()%>/images/arrow_green.png"/ class="green-arrow"/>
+							<img src="<%=renderRequest.getContextPath()%>/images/arrow_green.png"/ class="valigned"/>
 							<span style="margin-left:5px;">
 								Design of guidelines for the elaboration of Regional Climate Change Adaptation Strategies
 							</span>
 						</div>
 						<div style="margin:20px 0px;">
-							<img src="<%=renderRequest.getContextPath()%>/images/arrow_green.png"/ class="green-arrow"/>
+							<img src="<%=renderRequest.getContextPath()%>/images/arrow_green.png"/ class="valigned"/>
 							<span style="margin-left:5px;">
 								Integrating Climate Change Adaptation into Development Co-operation
 							</span>
@@ -107,36 +107,36 @@ This is the <b>Ace Adaptation Tools portlet</b> portlet.
 				</div>
 				<div id="what-should-i-do-options" style="">
 					<ul style="list-style:none;">
-						<li>
-							<img src="<%=renderRequest.getContextPath()%>/images/arrow_green.png"/ class="green-arrow"/>
+						<li class="list-option">
+							<img src="<%=renderRequest.getContextPath()%>/images/arrow_green.png"/ class="valigned"/>
 							2.1 General
 						</li>
-						<li>
-							<img src="<%=renderRequest.getContextPath()%>/images/arrow_green.png"/ class="green-arrow"/>					
+						<li class="list-option">
+							<img src="<%=renderRequest.getContextPath()%>/images/arrow_green.png"/ class="valigned"/>					
 							2.2 What are key systems?
 						</li>
-						<li>
-							<img src="<%=renderRequest.getContextPath()%>/images/arrow_green.png"/ class="green-arrow"/>					
+						<li class="list-option">
+							<img src="<%=renderRequest.getContextPath()%>/images/arrow_green.png"/ class="valigned"/>					
 							2.3 How do I analyze impacts of past weather?
 						</li>
-						<li>
-							<img src="<%=renderRequest.getContextPath()%>/images/arrow_green.png"/ class="green-arrow"/>					
+						<li class="list-option">
+							<img src="<%=renderRequest.getContextPath()%>/images/arrow_green.png"/ class="valigned"/>					
 							2.4 How do I analyze recent climate trends?
 						</li>
-						<li>
-							<img src="<%=renderRequest.getContextPath()%>/images/arrow_green.png"/ class="green-arrow"/>						
+						<li class="list-option">
+							<img src="<%=renderRequest.getContextPath()%>/images/arrow_green.png"/ class="valigned"/>						
 							2.5 Where do I find possible scenarios?
 						</li>
-						<li>
-							<img src="<%=renderRequest.getContextPath()%>/images/arrow_green.png"/ class="green-arrow"/>					
+						<li class="list-option">
+							<img src="<%=renderRequest.getContextPath()%>/images/arrow_green.png"/ class="valigned"/>					
 							2.6 How do I identify impacts of climate change?
 						</li>
-						<li>
-							<img src="<%=renderRequest.getContextPath()%>/images/arrow_green.png"/ class="green-arrow"/>					
+						<li class="list-option">
+							<img src="<%=renderRequest.getContextPath()%>/images/arrow_green.png"/ class="valigned"/>					
 							2.7 How do I assess vulnerability?
 						</li>
-						<li>
-							<img src="<%=renderRequest.getContextPath()%>/images/arrow_green.png"/ class="green-arrow"/>					
+						<li class="list-option">
+							<img src="<%=renderRequest.getContextPath()%>/images/arrow_green.png"/ class="valigned"/>					
 							2.8 What about risks and opportunities?
 						</li>
 					</ul>
@@ -147,20 +147,25 @@ This is the <b>Ace Adaptation Tools portlet</b> portlet.
 					Analyze pan-European maps
 				</div>
 				<div id="analyze-maps-options" style="display:none;">
-					<ul>
-						<li>
+					<ul style="list-style:none;">
+						<li class="list-option">
+							<img src="<%=renderRequest.getContextPath()%>/images/arrow_green.png"/ class="valigned"/>					
 							What are the key vulnerabilities and risks?
 						</li>
-						<li>
+						<li class="list-option">
+							<img src="<%=renderRequest.getContextPath()%>/images/arrow_green.png"/ class="valigned"/>					
 							What are the underlying causes?
 						</li>
-						<li>
+						<li class="list-option">
+							<img src="<%=renderRequest.getContextPath()%>/images/arrow_green.png"/ class="valigned"/>					
 							How does the climate change?
 						</li>
-						<li>
+						<li class="list-option">
+							<img src="<%=renderRequest.getContextPath()%>/images/arrow_green.png"/ class="valigned"/>					
 							How does the socio-ecological system change?
 						</li>
-						<li>
+						<li class="list-option">
+							<img src="<%=renderRequest.getContextPath()%>/images/arrow_green.png"/ class="valigned"/>					
 							Uncertainties
 						</li>
 					</ul>			
@@ -219,7 +224,7 @@ This is the <b>Ace Adaptation Tools portlet</b> portlet.
 			
 	-->
 	<div id="step-right-1" class="step-right">
-		<img src="<%=renderRequest.getContextPath()%>/images/step-1.jpg" />
+		<img src="<%=renderRequest.getContextPath()%>/images/AST_large.png" />
 		<hr style="clear:both;display:block;visibility:hidden;"></hr>
 	</div>
 	
@@ -365,6 +370,7 @@ This is the <b>Ace Adaptation Tools portlet</b> portlet.
 		
 	<div id="step-right-2" class="step-right">		
 		<h1 id="adaptationtools-heading">
+			<img src="<%=renderRequest.getContextPath()%>/images/bullit2.png" class="valigned"/>	
 			Am I vulnerable to climate change and what are my risks
 		</h1>
 		
@@ -383,7 +389,7 @@ This is the <b>Ace Adaptation Tools portlet</b> portlet.
 			<div id="adaptationtools-selectors-top">
 				<div id="risks-selector" class="adaptationtools-selector">
 					<!-- TODO load dynamically from enumeration nl.wur.alterra.cgi.ace.model.impl.AceItemClimateImpact -- but aceitem model classes must be made available as a jar for that -->
-					<select>
+					<select  style="float:left;">
 						<option value="none" selected="selected">Choose a risk:</option>
 						<option value="all">All risks</option>
 						<option value="EXTREMETEMP">Extreme Temperatures</option>
@@ -393,8 +399,8 @@ This is the <b>Ace Adaptation Tools portlet</b> portlet.
 						<option value="STORM">Storms</option>
 						<option value="ICEANDSNOW">Ice and Snow</option>
 					</select>
-					<div class="info-button top-bubble">
-						i
+					<div class="top-bubble" style="float:left;margin-left:10px;">
+						<img src="<%=renderRequest.getContextPath()%>/images/info.png" class="valigned"/>
 					</div>	
 				</div>		
 			
@@ -403,7 +409,7 @@ This is the <b>Ace Adaptation Tools portlet</b> portlet.
 						Filter by sector
 					</span>
 					<!-- TODO load dynamically from enumeration nl.wur.alterra.cgi.ace.model.impl.AceItemSector -- but aceitem model classes must be made available as a jar for that -->
-					<select id="sector-select">
+					<select id="sector-select" style="float:left;">
 						<option value="none" selected="selected">Choose a sector:</option>
 						<option value="all">All sectors</option>
 						<option value="AGRICULTURE">Agriculture and Forest</option>
@@ -416,8 +422,8 @@ This is the <b>Ace Adaptation Tools portlet</b> portlet.
 						<option value="MARINE" disabled="disabled">Marine and Fisheries</option>
 						<option value="WATERMANAGEMENT">Water management</option>
 					</select>				
-					<div class="info-button top-bubble">
-						i
+					<div class="top-bubble" style="float:left;margin-left:10px;">
+						<img src="<%=renderRequest.getContextPath()%>/images/info.png" class="valigned"/>
 					</div>
 				</div>			
 			</div>
@@ -440,8 +446,9 @@ This is the <b>Ace Adaptation Tools portlet</b> portlet.
 				</h2>
 				
 				<div id="indicator-vulnerability" class="indicator-category">
-					<div class="info-button right-bubble">
-						i
+
+					<div class="right-bubble" style="float:left;margin-right:10px;">
+						<img src="<%=renderRequest.getContextPath()%>/images/info.png" class="valigned"/>
 					</div>
 					<h3 class="indicator-category-title">
 						Vulnerability & risks

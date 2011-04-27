@@ -29,9 +29,12 @@
 	background-color:#d2df92;
 	color:#7e8f2e;
 }
-.green-arrow {
+.valigned {
 	display:table-cell; 
 	vertical-align:middle;
+}
+.list-option{
+	margin:10px 0px;
 }
 .info-button {
 	width: 15px;
