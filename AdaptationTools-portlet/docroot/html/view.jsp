@@ -89,7 +89,7 @@ This is the <b>Ace Adaptation Tools portlet</b> portlet.
 						</div>					
 					</div>				
 				</div>			
-				<hr style="clear:both;display:block;visibility:hidden;"></hr>
+				<hr style="clear:both;display:block;visibility:hidden;"/>
 			</div>
 			<!-- navigation in images -->
 			<map name="navigation-map" id="navigation-map">
@@ -110,7 +110,7 @@ This is the <b>Ace Adaptation Tools portlet</b> portlet.
 		-->
 		<div id="step-left-2" class="step-left">
 			<div style="margin:5px;">
-				<img src="<%=renderRequest.getContextPath()%>/images/AST_small2.png" usemap="#navigation-map"/>
+				<img src="<%=renderRequest.getContextPath()%>/images/AST_small2.png" width="380px" height="236px" usemap="#navigation-map"/>
 			</div>
 			<div id="what-should-i-do" style="margin:5px;">
 				<div id="what-should-i-do-heading" style="font-size:24px;" onclick="$j('#analyze-maps-options').fadeOut();$j('#what-should-i-do-options').fadeIn();$j('#analyze-maps-heading').addClass('clickable');$j('#what-should-i-do-heading').removeClass('clickable');$('#general-content').fadeIn();$('#indicators-map').fadeOut();">
@@ -161,19 +161,19 @@ This is the <b>Ace Adaptation Tools portlet</b> portlet.
 					<ul style="list-style:none;">
 						<li class="list-option">
 							<img src="<%=renderRequest.getContextPath()%>/images/arrow_green.png" class="valigned"/>
-							What are the key vulnerabilities and risks?
+							<a href="#" onclick="showVulnerabilitiesAndRisks(); return false">What are the key vulnerabilities and risks?</a>
 						</li>
 						<li class="list-option">
 							<img src="<%=renderRequest.getContextPath()%>/images/arrow_green.png" class="valigned"/>
-							What are the underlying causes?
+							<a href="#" onclick="showUnderlyingCauses(); return false">What are the underlying causes?</a>
 						</li>
 						<li class="list-option">
 							<img src="<%=renderRequest.getContextPath()%>/images/arrow_green.png" class="valigned"/>
-							How does the climate change?
+							<a href="#" onclick="showUnderlyingNaturalCauses(); return false">How does the climate change?</a>
 						</li>
 						<li class="list-option">
 							<img src="<%=renderRequest.getContextPath()%>/images/arrow_green.png" class="valigned"/>
-							How does the socio-ecological system change?
+							<a href="#" onclick="showUnderlyingHumanCauses(); return false">How does the socio-ecological system change?</a>
 						</li>
 						<li class="list-option">
 							<img src="<%=renderRequest.getContextPath()%>/images/arrow_green.png" class="valigned"/>
@@ -207,7 +207,7 @@ This is the <b>Ace Adaptation Tools portlet</b> portlet.
 		-->
 		<div id="step-left-4" class="step-left">
 			<div style="margin:5px;">
-				<img src="<%=renderRequest.getContextPath()%>/images/AST_small4.png" width="380px" height="236px" usemap="#navigation-map"/>			   
+				<img src="<%=renderRequest.getContextPath()%>/images/AST_small4.png" width="380px" height="236px" usemap="#navigation-map"/>
 			</div>
             <div id="what-should-i-do-4" style="margin:5px;">
 				<div id="what-should-i-do-4-heading" style="font-size:24px;">
@@ -292,7 +292,7 @@ This is the <b>Ace Adaptation Tools portlet</b> portlet.
 	-->
 	<div id="step-right-1" class="step-right">
 		<img src="<%=renderRequest.getContextPath()%>/images/AST_large.png" />
-		<hr style="clear:both;display:block;visibility:hidden;"></hr>
+		<hr style="clear:both;display:block;visibility:hidden;" />
 	</div>
 	
 	<!--
@@ -432,7 +432,61 @@ This is the <b>Ace Adaptation Tools portlet</b> portlet.
 			});
 			return indicatorsDisplayed;
 		}
-		
+
+
+        function showVulnerabilitiesAndRisks() {
+            $j("#underlying-causes-header").text("Underlying causes");
+
+            $j("#underlying-causes-header").addClass("disabled");
+            $j("#indicator-exposure").addClass("disabled");
+            $j("#indicator-sensitivity").addClass("disabled");
+
+            $j("#indicator-sensitivity").show();
+            $j("#indicator-exposure").show();
+            $j("#indicator-climate-changes").hide();
+            $j("#indicator-human-causes").hide();
+        }
+
+        function showUnderlyingCauses() {
+            $j("#underlying-causes-header").text("Underlying causes");
+
+            $j("#underlying-causes-header").removeClass("disabled");
+            $j("#indicator-exposure").removeClass("disabled");
+            $j("#indicator-sensitivity").removeClass("disabled");
+
+            $j("#indicator-sensitivity").show();
+            $j("#indicator-exposure").show();
+            $j("#indicator-climate-changes").hide();
+
+
+        }
+
+        function showUnderlyingNaturalCauses() {
+            $j("#underlying-causes-header").text("Underlying natural causes");
+
+            $j("#indicator-changes").hide();
+            $j("#indicator-human-causes").hide();
+            $j("#indicator-climate-changes").show();
+
+            $j("#underlying-causes-header").removeClass("disabled");
+            $j("#indicator-exposure").removeClass("disabled");
+            $j("#indicator-sensitivity").hide();
+            $j("#indicator-exposure").show();
+        }
+
+         function showUnderlyingHumanCauses() {
+             $j("#underlying-causes-header").text("Underlying human causes");
+
+             $j("#indicator-changes").hide();
+             $j("#indicator-climate-changes").hide();
+             $j("#indicator-human-causes").show();
+
+             $j("#underlying-causes-header").removeClass("disabled");
+             $j("#indicator-sensitivity").removeClass("disabled");
+             $j("#indicator-exposure").hide();
+             $j("#indicator-climate-changes").hide();
+             $j("#indicator-sensitivity").show();
+        }
             </script>
 		
 	<div id="step-right-2" class="step-right">		
@@ -495,7 +549,7 @@ This is the <b>Ace Adaptation Tools portlet</b> portlet.
 				</div>			
 			</div>
 			
-			<hr style="clear:both;display:block;visibility:hidden;"></hr>
+			<hr style="clear:both;display:block;visibility:hidden;"/>
 
 			<div id="map_container">
 				<div id="map_info">This is a map info panel</div>
@@ -523,7 +577,7 @@ This is the <b>Ace Adaptation Tools portlet</b> portlet.
 					<div class="indicator-category-list"></div>
 				</div>
 
-				<h2 class="disabled">
+				<h2 id="underlying-causes-header" class="disabled">
 					Underlying causes
 				</h2>
 
@@ -562,14 +616,14 @@ This is the <b>Ace Adaptation Tools portlet</b> portlet.
 						<img src="<%=renderRequest.getContextPath()%>/images/info.png" class="valigned"/>
 					</div>
 					<h3 class="indicator-category-title">
-						Underlying human causes
+						Resource efficiency
 					</h3>					
 					<div class="indicator-category-list"></div>
 				</div>
 					
 			</div>
 		
-			<hr style="clear:both;display:block;visibility:hidden;"></hr>
+			<hr style="clear:both;display:block;visibility:hidden;"/>
 
 			<div style="padding:10px;margin:10px;">
 				<div id="read-more-on-the-approach" style="float:left;">
@@ -615,7 +669,7 @@ This is the <b>Ace Adaptation Tools portlet</b> portlet.
 
 	-->
 	<div id="step-right-3" class="step-right">
-        <hr style="clear:both;display:block;visibility:hidden;"></hr>
+        <hr style="clear:both;display:block;visibility:hidden;"/>
 	</div>
 
     <!--
@@ -628,7 +682,7 @@ This is the <b>Ace Adaptation Tools portlet</b> portlet.
         <div id="map-container-step4">
         </div>
 
-        <hr style="clear:both;display:block;visibility:hidden;"></hr>
+        <hr style="clear:both;display:block;visibility:hidden;"/>
 	</div>
 
     <!--
@@ -637,10 +691,10 @@ This is the <b>Ace Adaptation Tools portlet</b> portlet.
 
 	-->
 	<div id="step-right-5" class="step-right">
-        <hr style="clear:both;display:block;visibility:hidden;"></hr>
+        <hr style="clear:both;display:block;visibility:hidden;"/>
 	</div>
 
-    <hr style="clear:both;display:block;visibility:hidden;"></hr>
+    <hr style="clear:both;display:block;visibility:hidden;"/>
 
 
 	<!-- acemap_column -->
