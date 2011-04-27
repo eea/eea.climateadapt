@@ -33,7 +33,7 @@ This is the <b>Ace Adaptation Tools portlet</b> portlet.
 		$('.step-left').hide();
 		$('#step-left-'+nr).fadeIn();
 		$('.step-right').fadeOut();
-		$('#step-right-'+nr).fadeIn();		
+		$('#step-right-'+nr).fadeIn();
 	}
 </script>
 
@@ -157,7 +157,7 @@ This is the <b>Ace Adaptation Tools portlet</b> portlet.
 				</div>
 			</div>
 			<div id="analyze-maps" style="margin:5px;">
-				<div id="analyze-maps-heading" class="clickable" style="font-size:24px;" onclick="$j('#what-should-i-do-options').fadeOut();$j('#analyze-maps-options').fadeIn();$j('#what-should-i-do-heading').addClass('clickable');$j('#analyze-maps-heading').removeClass('clickable');$('.what-should-i-do-content').fadeOut();$('#indicators-map').fadeIn();">
+				<div id="analyze-maps-heading" class="clickable" style="font-size:24px;" onclick="$j('#what-should-i-do-options').fadeOut();$j('#analyze-maps-options').fadeIn();$j('#what-should-i-do-heading').addClass('clickable');$j('#analyze-maps-heading').removeClass('clickable');$('.what-should-i-do-content').fadeOut();$('#indicators-map').fadeIn(); initMapViewerIndicators();">
 					Analyze pan-European maps
 				</div>
 				<div id="analyze-maps-options" style="display:none;">
@@ -499,7 +499,7 @@ This is the <b>Ace Adaptation Tools portlet</b> portlet.
 			</div>
 		</div>
 		
-		<div id="indicators-map">
+		<div id="indicators-map" style="display: none">
 			<div id="adaptationtools-selectors-top">
 				<div id="risks-selector" class="adaptationtools-selector">
 					<!-- TODO load dynamically from enumeration nl.wur.alterra.cgi.ace.model.impl.AceItemClimateImpact -- but aceitem model classes must be made available as a jar for that -->
