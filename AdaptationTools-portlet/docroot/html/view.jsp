@@ -39,7 +39,7 @@ This is the <b>Ace Adaptation Tools portlet</b> portlet.
 
 <div>
 	<!-- left panel -->
-	<div style="border:solid 1px green;margin-right: 10px; margin-top: 50px; float:left;width:400px;height:600px;background-color:#d2df92;">
+	<div style="border:solid 1px green;margin-right: 10px; margin-top: 50px; float:left;width:385px;height:600px;background-color:#d2df92;">
 
         <!-- Steps selection image -->
         <div style="margin:5px;">
@@ -548,7 +548,7 @@ This is the <b>Ace Adaptation Tools portlet</b> portlet.
 				<div id="map_info">This is a map info panel</div>
 				<div class="map-overlay">
 					<form>
-					Locate: <input type="text" name="locate" />&nbsp;<button type="submit">Find</button>
+					Locate: <input type="text" name="locate" style="width:150px"/>&nbsp;<button type="submit">Find</button>
 					</form>
 				</div>
 			</div>
@@ -672,7 +672,16 @@ This is the <b>Ace Adaptation Tools portlet</b> portlet.
 	-->
 	<div id="step-right-4" class="step-right">
 
+        <div style="margin-bottom: 10px">
+            <form>
+                Region of interest: <input type="text" name="locate" style="width:200px" />&nbsp;<button type="submit">Search for similar regions</button>
+            </form>
+        </div>
         <div id="map-container-step4">
+        </div>
+
+        <div id="specify-region-similarity-criteria" style="margin-top:10px;">
+            Specify region similarity criteria &raquo;
         </div>
 
         <hr style="clear:both;display:block;visibility:hidden;"/>
