@@ -255,7 +255,7 @@ function displayJSONFilterResults(unique, aceitemResults) {
 
 			// add result footer 
 			// TODO use actual date from aceitem, if available
-			resultlist += '<div class="resultfooter" style="display:none"><hr class="clearer"/></div>';
+//			resultlist += '<div class="resultfooter" style="display:none"><hr class="clearer"/></div>';
 			// close searchresult
 			resultlist += '</div>';					
 		}
@@ -298,7 +298,7 @@ function displayJSONResults(unique, aceitemResults) {
 
 			// add result footer 
 			// TODO use actual date from aceitem, if available
-			resultlist += '<div class="resultfooter"><hr class="clearer"/></div>';
+//			resultlist += '<div class="resultfooter"><hr class="clearer"/></div>';
 			// close searchresult
 			resultlist += '</div>';					
 		}

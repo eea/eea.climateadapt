@@ -298,11 +298,11 @@ pageContext.setAttribute("countriesList", countriesList);
 
 	<!-- Results column  -->
 	<div id="search_results" class="acesearch_column">
-	
+	<!--
 		<h1><liferay-ui:message key="acesearch-data-downloads-header" /></h1>
 		
 		<h2 id="searchresultstitle"><liferay-ui:message key="acesearch-results-header" /></h2>
-
+	-->
         <c:if test="<%= totalResults != null %>">
             <c:choose>
                 <c:when test="<%= totalResults == 0 %>">

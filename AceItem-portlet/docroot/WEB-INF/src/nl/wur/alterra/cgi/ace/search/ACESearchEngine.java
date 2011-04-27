@@ -144,8 +144,12 @@ public class ACESearchEngine extends HitsOpenSearchImpl {
         String result = "";
         for(String searchterm : searchterms) {
             if(searchterm != null && searchterm.trim().length() > 0) {
-                result += searchterm.trim() + "~" + fuzziness + " ";
+                result += searchterm.trim() + "~" + fuzziness + " AND ";
             }
+        }
+        // strip last " AND "
+        if(result != null && result.length() > 0 && result.indexOf(" AND ") >= 0) {
+            result = result.substring(0, result.lastIndexOf(" AND "));
         }
         System.out.println("*** ACESearchEngine search: searchterms with fuzziness: " + result);
         return result;
@@ -230,8 +234,8 @@ public class ACESearchEngine extends HitsOpenSearchImpl {
             ACEIndexSearcher searcher = ACEIndexSearcher.getACEIndexSearcher();
             QueryParser queryParser = new QueryParser(ACEIndexConstant.IndexField.ANY, ACEAnalyzer.getAnalyzer());
             Query query = queryParser.parse(rawQuery);
-            System.out.println("Lucene raw query: " + rawQuery);
-            System.out.println("Lucene query: " + query.toString());
+            System.out.println("LLucene raw query: " + rawQuery);
+            System.out.println("LLucene query: " + query.toString());
             //System.out.println("Lucene query (rewritten): " + query.rewrite(((IndexSearcher)searcher).getIndexReader()).toString());
             long start = System.currentTimeMillis();
             TopDocs topDocs = searcher.search(query, formBean.getSortBy(), 10);
