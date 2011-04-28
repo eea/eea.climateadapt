@@ -14,6 +14,7 @@
       {
         "title": "Soil erosion",
         "riskandsector": {
+          "risk": "WATERSCARCE",
           "sector": "WATERMANAGEMENT",
           "url": "http://eusoils.jrc.ec.europa.eu/wrb/wms_Threats.asp",
           "layername": "PESERA",
@@ -33,6 +34,7 @@
       {
         "title": "Water use by agriculture - livestock",
         "riskandsector": {
+          "risk": "WATERSCARCE",
           "sector": "WATERMANAGEMENT",
           "url": "http://hrz-vm130.hrz.uni-kassel.de/cgi-bin/mapserv?map=/var/www/html/maps/mapfiles/wg3_statevar2/wwd2_ls_pch_bas35_2050ecf.map",
           "layername": "wwd2_ls_pch_bas35_2050ecf",
@@ -42,6 +44,7 @@
       {
         "title": "Water use by agriculture - irrigation",
         "riskandsector": {
+          "risk": "WATERSCARCE",
           "sector": "WATERMANAGEMENT",
           "url": "http://hrz-vm130.hrz.uni-kassel.de/cgi-bin/mapserv?map=/var/www/html/maps/mapfiles/wg3_statevar2/wwd2_ir_pch_bas35_2050ecf_ipcm.map",
           "layername": "wwd2_ir_pch_bas35_2050ecf_ipcm",
@@ -51,6 +54,7 @@
       {
         "title": "Water use by manufacturing industry",
         "riskandsector": {
+          "risk": "WATERSCARCE",
           "sector": "WATERMANAGEMENT",
           "url": "http://hrz-vm130.hrz.uni-kassel.de/cgi-bin/mapserv?map=/var/www/html/maps/mapfiles/wg3_statevar2/wwd2_man_pch_bas35_2050ecf.map",
           "layername": "wwd2_man_pch_bas35_2050ecf",
@@ -60,6 +64,7 @@
       {
         "title": "Water use by electricity production",
         "riskandsector": {
+          "risk": "WATERSCARCE",
           "sector": "WATERMANAGEMENT",
           "url": "http://hrz-vm130.hrz.uni-kassel.de/cgi-bin/mapserv?map=/var/www/html/maps/mapfiles/wg3_statevar2/wwd2_el_pch_bas35_2050ecf.map",
           "layername": "wwd2_el_pch_bas35_2050ecf",
@@ -69,6 +74,7 @@
       {
         "title": "Water use by domestic",
         "riskandsector": {
+          "risk": "WATERSCARCE",
           "sector": "WATERMANAGEMENT",
           "url": "http://hrz-vm130.hrz.uni-kassel.de/cgi-bin/mapserv?map=/var/www/html/maps/mapfiles/wg3_statevar2/wwd2_dom_pch_bas35_2050ecf.map",
           "layername": "wwd2_dom_pch_bas35_2025ecf",

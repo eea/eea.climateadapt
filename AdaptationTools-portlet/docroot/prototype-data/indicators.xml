@@ -12,6 +12,7 @@
 	<indicator>
 		<title>Soil erosion</title>
 		<riskandsector>
+			<risk>WATERSCARCE</risk>		
 			<sector>WATERMANAGEMENT</sector>
 			<url>http://eusoils.jrc.ec.europa.eu/wrb/wms_Threats.asp</url>	
 			<layername>PESERA</layername>
@@ -31,6 +32,7 @@
 	<indicator>
 		<title>Water use by agriculture - livestock</title>
 		<riskandsector>
+			<risk>WATERSCARCE</risk>		
 			<sector>WATERMANAGEMENT</sector>
 			<url>http://hrz-vm130.hrz.uni-kassel.de/cgi-bin/mapserv?map=/var/www/html/maps/mapfiles/wg3_statevar2/wwd2_ls_pch_bas35_2050ecf.map</url>	
 			<layername>wwd2_ls_pch_bas35_2050ecf</layername>
@@ -40,6 +42,7 @@
 	<indicator>
 		<title>Water use by agriculture - irrigation</title>
 		<riskandsector>
+			<risk>WATERSCARCE</risk>		
 			<sector>WATERMANAGEMENT</sector>
 			<url>http://hrz-vm130.hrz.uni-kassel.de/cgi-bin/mapserv?map=/var/www/html/maps/mapfiles/wg3_statevar2/wwd2_ir_pch_bas35_2050ecf_ipcm.map</url>
 			<layername>wwd2_ir_pch_bas35_2050ecf_ipcm</layername>		
@@ -49,6 +52,7 @@
 	<indicator>
 		<title>Water use by manufacturing industry</title>
 		<riskandsector>
+			<risk>WATERSCARCE</risk>		
 			<sector>WATERMANAGEMENT</sector>
 			<url>http://hrz-vm130.hrz.uni-kassel.de/cgi-bin/mapserv?map=/var/www/html/maps/mapfiles/wg3_statevar2/wwd2_man_pch_bas35_2050ecf.map</url>
 			<layername>wwd2_man_pch_bas35_2050ecf</layername>	
@@ -58,6 +62,7 @@
 	<indicator>
 		<title>Water use by electricity production</title>
 		<riskandsector>
+			<risk>WATERSCARCE</risk>		
 			<sector>WATERMANAGEMENT</sector>
 			<url>http://hrz-vm130.hrz.uni-kassel.de/cgi-bin/mapserv?map=/var/www/html/maps/mapfiles/wg3_statevar2/wwd2_el_pch_bas35_2050ecf.map</url>
 			<layername>wwd2_el_pch_bas35_2050ecf</layername>	
@@ -67,6 +72,7 @@
 	<indicator>
 		<title>Water use by domestic</title>
 		<riskandsector>
+			<risk>WATERSCARCE</risk>		
 			<sector>WATERMANAGEMENT</sector>
 			<url>http://hrz-vm130.hrz.uni-kassel.de/cgi-bin/mapserv?map=/var/www/html/maps/mapfiles/wg3_statevar2/wwd2_dom_pch_bas35_2050ecf.map</url>
 			<layername>wwd2_dom_pch_bas35_2025ecf</layername>
