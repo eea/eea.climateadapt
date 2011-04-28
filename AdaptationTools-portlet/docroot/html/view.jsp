@@ -27,16 +27,16 @@ This is the <b>Ace Adaptation Tools portlet</b> portlet.
 
 <script defer="defer" type="text/javascript">
     var proxyUrl = '<%= request.getContextPath() %>/proxy?url=';
-
+    var $j = jQuery.noConflict();
 
 	function displayStep(nr) {
 
-        $("#image_steps").attr("src", "<%=renderRequest.getContextPath()%>/images/AST_small" + nr + ".png");
+        $j("#image_steps").attr("src", "<%=renderRequest.getContextPath()%>/images/AST_small" + nr + ".png");
 
-		$('.step-left').hide();
-		$('#step-left-'+nr).fadeIn();
-		$('.step-right').fadeOut();
-		$('#step-right-'+nr).fadeIn();
+		$j('.step-left').hide();
+		$j('#step-left-'+nr).fadeIn();
+		$j('.step-right').fadeOut();
+		$j('#step-right-'+nr).fadeIn();
 	}
 </script>
 
@@ -119,7 +119,7 @@ This is the <b>Ace Adaptation Tools portlet</b> portlet.
 		-->
 		<div id="step-left-2" class="step-left">
 			<div id="what-should-i-do" style="margin:5px;">
-				<div id="what-should-i-do-heading" style="font-size:24px;" onclick="$j('#analyze-maps-options').fadeOut();$j('#what-should-i-do-options').fadeIn();$j('#analyze-maps-heading').addClass('clickable');$j('#what-should-i-do-heading').removeClass('clickable');$('#general-content').fadeIn();$('#indicators-map').fadeOut();">
+				<div id="what-should-i-do-heading" style="font-size:24px;" onclick="$j('#analyze-maps-options').fadeOut();$j('#what-should-i-do-options').fadeIn();$j('#analyze-maps-heading').addClass('clickable');$j('#what-should-i-do-heading').removeClass('clickable');$j('#general-content').fadeIn();$j('#indicators-map').fadeOut();">
 					What should I do?
 				</div>
 				<div id="what-should-i-do-options" style="">
@@ -160,7 +160,7 @@ This is the <b>Ace Adaptation Tools portlet</b> portlet.
 				</div>
 			</div>
 			<div id="analyze-maps" style="margin:5px;">
-				<div id="analyze-maps-heading" class="clickable" style="font-size:24px;" onclick="$j('#what-should-i-do-options').fadeOut();$j('#analyze-maps-options').fadeIn();$j('#what-should-i-do-heading').addClass('clickable');$j('#analyze-maps-heading').removeClass('clickable');$('.what-should-i-do-content').fadeOut();$('#indicators-map').fadeIn(); showVulnerabilitiesAndRisks(); initMapViewerIndicators();">
+				<div id="analyze-maps-heading" class="clickable" style="font-size:24px;" onclick="$j('#what-should-i-do-options').fadeOut();$j('#analyze-maps-options').fadeIn();$j('#what-should-i-do-heading').addClass('clickable');$j('#analyze-maps-heading').removeClass('clickable');$j('.what-should-i-do-content').fadeOut();$j('#indicators-map').fadeIn(); showVulnerabilitiesAndRisks(); initMapViewerIndicators();">
 					Compare my area to Europe
 				</div>
 				<div id="analyze-maps-options" style="display:none;">
@@ -353,8 +353,8 @@ This is the <b>Ace Adaptation Tools portlet</b> portlet.
 				.complete(function() {});	
 
 			// handle change to sector selector
-			$('#sector-select').change(function() {
-				displayIndicators(filterIndicators('sector', $(this).attr('value')));
+			$j('#sector-select').change(function() {
+				displayIndicators(filterIndicators('sector', $j(this).attr('value')));
 			});
 				
 		});
@@ -640,6 +640,7 @@ This is the <b>Ace Adaptation Tools portlet</b> portlet.
 					</form>
 				</div>
 			</div>
+
 			<div id="map_legend"></div>
 				
 			<div id="adaptationtools-indicators">
@@ -830,7 +831,7 @@ This is the <b>Ace Adaptation Tools portlet</b> portlet.
         <div id="locate-region">
             <div style="margin-bottom: 10px">
                 <form>
-                    Region of interest: <input type="text" id="locate_region" name="locate_region" style="width:200px" />&nbsp;<button type="submit" onclick="gazeeteer.search($('#locate_region').val()); return false;" >Search for similar regions</button>
+                    Region of interest: <input type="text" id="locate_region" name="locate_region" style="width:200px" />&nbsp;<button type="submit" onclick="gazeeteer.search($j('#locate_region').val()); return false;" >Search for similar regions</button>
                 </form>
             </div>
             <div id="map-container-step4">
