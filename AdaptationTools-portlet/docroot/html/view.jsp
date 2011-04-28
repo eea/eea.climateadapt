@@ -27,6 +27,9 @@ This is the <b>Ace Adaptation Tools portlet</b> portlet.
 
 <script defer="defer" type="text/javascript">
     var proxyUrl = '<%= request.getContextPath() %>/proxy?url=';
+
+    OpenLayers.ProxyHost = '<%= request.getContextPath() %>/proxy?url=';
+
     var $j = jQuery.noConflict();
 
 	function displayStep(nr) {
@@ -629,8 +632,11 @@ This is the <b>Ace Adaptation Tools portlet</b> portlet.
 					</div>
 				</div>			
 			</div>
-			
+
+            <div id="map_legend" style="float: right"><a href="#" onclick="app.showLegendWindow(); return false;">Show Legend</a></div>
+
 			<hr style="clear:both;display:block;visibility:hidden;"/>
+
 
 			<div id="map_container">
 				<div id="map_info">This is a map info panel</div>
@@ -641,8 +647,7 @@ This is the <b>Ace Adaptation Tools portlet</b> portlet.
 				</div>
 			</div>
 
-			<div id="map_legend"></div>
-				
+
 			<div id="adaptationtools-indicators">
 				<h2>
 					Choose an indicator to view it's map

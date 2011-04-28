@@ -91,7 +91,7 @@ div.map-overlay {
 	position: relative;
 	float:right;
 	margin-right:20px;
-	margin-top:20px;
+	/*margin-top:20px; */
 }
 
 #map_legend {
