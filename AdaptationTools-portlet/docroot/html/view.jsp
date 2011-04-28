@@ -308,6 +308,10 @@ This is the <b>Ace Adaptation Tools portlet</b> portlet.
 		var $j = jQuery.noConflict();
 		$j(document).ready(function(){	
 		
+			// force risk and sector selectors to defaults
+			$j('#risk-select option[value="none"]').attr('selected', 'selected');
+			$j('#sector-select option[value="none"]').attr('selected', 'selected');
+		
 			//
 			// create information popups
 			//
@@ -688,13 +692,13 @@ This is the <b>Ace Adaptation Tools portlet</b> portlet.
 						<option value="all">All sectors</option>
 						<option value="AGRICULTURE">Agriculture and Forest</option>
 						<option value="BIODIVERSITY" disabled="disabled">Biodiversity</option>
-						<option value="COASTAL" disabled="disabled">Coastal areas</option>
+						<option value="COASTAL" disabled="disabled">Coastal Areas</option>
 						<option value="DISASTERRISKREDUCTION" disabled="disabled">Disaster Risk Reduction</option>
 						<option value="FINANCIAL" disabled="disabled">Financial</option>
 						<option value="HEALTH" disabled="disabled">Health</option>
 						<option value="INFRASTRUCTURE" disabled="disabled">Infrastructure</option>
 						<option value="MARINE" disabled="disabled">Marine and Fisheries</option>
-						<option value="WATERMANAGEMENT">Water management</option>
+						<option value="WATERMANAGEMENT">Water Management</option>
 					</select>				
 					<div class="top-bubble" style="float:left;margin-left:10px;">
 						<img src="<%=renderRequest.getContextPath()%>/images/info.png" class="valigned"/>
