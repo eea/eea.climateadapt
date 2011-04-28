@@ -1,8 +1,9 @@
+
 <indicators>
 	<indicator>
 		<title>Precipitation</title>
 		<sector>WATERMANAGEMENT</sector>
-		<sector>AGRICULTURE</sector>		
+		<sector>AGRICULTURE</sector>
 		<url>http://hrz-vm130.hrz.uni-kassel.de/cgi-bin/mapserv?map=/var/www/html/maps/mapfiles/wg3_drivers2/prec2_pch_cell_0ann_2050ipcm4a2.map</url>
 		<layername>prec2_pch_cell_0ann_2050ipcm4a2</layername>
 	</indicator>
@@ -29,6 +30,8 @@
 	<indicator>
 		<title>Water stress</title>
 		<sector>WATERMANAGEMENT</sector>
+        <url>http://portal.fieldfact.com/geoserver/wms?"</url>
+        <layername>climwatadapt:WTA_JJA_milm3EcF2050ipcm"</layername>
 	</indicator>
 	<indicator>
 		<title>Land use</title>
