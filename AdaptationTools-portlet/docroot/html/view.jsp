@@ -361,7 +361,7 @@ This is the <b>Ace Adaptation Tools portlet</b> portlet.
 			});
 			// handle change to risk selector
 			$('#risk-select').change(function() {
-				displayIndicators(filterIndicators($(this).attr('value'), $('#sector-select').attr('value'), ));
+				displayIndicators(filterIndicators($(this).attr('value'), $('#sector-select').attr('value')));
 			});			
 				
 		});
