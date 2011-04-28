@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
 <web-app xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" id="WebApp_ID" version="2.5">
 	<display-name>AceItem-portlet</display-name>
 	<filter>
@@ -263,6 +262,53 @@
 	<listener>
 		<listener-class>com.liferay.portal.kernel.servlet.PortletContextListener</listener-class>
 	</listener>
+    <!-- Servlet proxy -->
+    <servlet>
+        <servlet-name>HttpProxy</servlet-name>
+        <servlet-class>org.geonetwork.http.proxy.HttpProxyServlet</servlet-class>
+
+    <!-- List of allowed content types -->
+    <init-param>
+      <param-name>AllowedContentTypes</param-name>
+      <param-value>
+          application/xml,text/xml,
+          text/html,
+          text/plain,
+          application/vnd.ogc.se_xml,
+          application/vnd.ogc.se+xml,
+          application/vnd.ogc.success+xml,
+          application/vnd.ogc.wms_xml,
+          application/vnd.ogc.context+xml,
+          application/vnd.ogc.gml,
+          application/vnd.ogc.sld+xml,
+          application/vnd.google-earth.kml+xml,
+          application/json
+      </param-value>
+    </init-param>
+
+    <!-- List of host alloed to be accesed by the proxy: If not specified or empty, any hosts is allowed -->
+    <init-param>
+        <param-name>AllowedHosts</param-name>
+        <param-value />
+    </init-param>
+
+    <!-- Default proxy url if none is provided -->
+    <init-param>
+        <param-name>DefaultProxyUrl</param-name>
+        <param-value>http://www.openlayers.org</param-value>
+    </init-param>
+
+    <load-on-startup>0</load-on-startup>
+    </servlet>
+	<servlet>
+		<servlet-name>AdaptationTools</servlet-name>
+		<servlet-class>com.liferay.portal.kernel.servlet.PortletServlet</servlet-class>
+		<init-param>
+			<param-name>portlet-class</param-name>
+			<param-value>com.sample.jsp.portlet.JSPPortlet</param-value>
+		</init-param>
+		<load-on-startup>0</load-on-startup>
+	</servlet>
 	<servlet>
 		<servlet-name>aceitemportlet</servlet-name>
 		<servlet-class>com.liferay.portal.kernel.servlet.PortletServlet</servlet-class>
@@ -308,6 +354,14 @@
 		</init-param>
 		<load-on-startup>0</load-on-startup>
 	</servlet>
+	<servlet-mapping>
+		<servlet-name>AdaptationTools</servlet-name>
+		<url-pattern>/AdaptationTools/*</url-pattern>
+	</servlet-mapping>
+        <servlet-mapping>
+            <servlet-name>HttpProxy</servlet-name>
+            <url-pattern>/proxy</url-pattern>
+        </servlet-mapping>
 	<servlet-mapping>
 		<servlet-name>aceitemportlet</servlet-name>
 		<url-pattern>/aceitemportlet/*</url-pattern>

@@ -1,0 +1,132 @@
+#tree ul {
+	list-style:none;
+	list-style-type:none;
+	margin-left:0em;
+}
+
+#gn_wmsbrowserpanel ul, #gn_wmsbrowserpanel ul ul {
+	list-style:none;
+	list-style-type:none;
+	margin-left:0em;
+}
+
+div.step-right h1 {
+	padding:20px;
+}
+#adaptationtools-selectors-top {
+	position:relative;
+}
+.adaptationtools-selector {
+	position:absolute;
+}
+#risks-selector {
+	left:100px;
+}
+#sector-selector {
+	right:100px;
+}
+.step-left {
+	background-color:#d2df92;
+	color:#7e8f2e;
+}
+.valigned {
+	display:table-cell; 
+	vertical-align:middle;
+}
+.list-option{
+	margin:10px 0px;
+}
+.info-button {
+	width: 15px;
+	height:15px;
+	background-color:beige;
+	padding: 5px 10px;
+	display:inline;
+	border:1px dotted #CDC0B0;
+	font-weight:bolder;
+	font-size:larger;
+}
+#adaptationtools-indicators {
+	float:right;
+	width:270px;
+	margin:20px;
+}
+#read-more-on-the-approach {
+	width:385px;
+}
+.disabled {
+	color:#cfcfcf;
+}
+.indicator-category {
+	margin: 10px 0px;
+}
+.indicator-category-title {
+	margin-left:10px;
+	display: inline;
+}
+.indicator-category-list {
+	padding:5px;
+}
+.indicator-category-list-item {
+	padding:2px 0px;
+}
+.clickable {
+	cursor:pointer;
+}
+div.map-overlay {
+	bottom:0px;
+	position:absolute;
+	left:0px;
+	z-index:1000;
+	background-color: #cccccc;
+	padding: 2px;
+}
+
+#map_container {
+	position: relative;
+	float:right;
+	margin-right:20px;
+	margin-top:20px;
+}
+
+#map_legend {
+	float:right;
+	margin-right:20px;
+	margin-top:20px;
+}
+
+.jquerybubblepopup {
+    z-index: 1020;
+
+}
+
+.olControlLoadingPanel {
+    background-image:url(../images/loading_indicator.gif);
+    background-position:center;
+    background-repeat:no-repeat;
+}
+
+#map_info {
+    bottom:0px;
+	position:absolute;
+	left:0px;
+	z-index:1010;
+	background-color: #ffffff;
+    display: none;
+    border: 1px solid #000000;
+}
+
+#map_info p {
+    padding: 10px;
+}
+
+h2.heading {
+    padding-left: 20px;
+    padding-bottom: 15px;
+}
+
+div.description {
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-bottom: 15px;
+}
