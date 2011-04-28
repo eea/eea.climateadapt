@@ -624,7 +624,7 @@ This is the <b>Ace Adaptation Tools portlet</b> portlet.
         </h2>
 
         <h2 id="header-climate-change" class="heading" style="display: none">
-             3. What are the underlying causes?
+             3. How does the climate change?
         </h2>
 
         <h2 id="header-socio-ecological" class="heading" style="display: none">
