@@ -358,10 +358,12 @@ This is the <b>Ace Adaptation Tools portlet</b> portlet.
 			// handle change to sector selector
 			$('#sector-select').change(function() {
 				displayIndicators(filterIndicators($('#risk-select').attr('value'), $(this).attr('value')));
+				showVulnerabilitiesAndRisks();
 			});
 			// handle change to risk selector
 			$('#risk-select').change(function() {
 				displayIndicators(filterIndicators($(this).attr('value'), $('#sector-select').attr('value')));
+				showVulnerabilitiesAndRisks();
 			});			
 				
 		});
@@ -517,8 +519,8 @@ This is the <b>Ace Adaptation Tools portlet</b> portlet.
             $j("#header-underlying-causes").hide();
             $j("#text-underlying-causes").hide();
 
-            $j("#header-vulnerability").show();
-            $j("#text-vulnerability").show();
+            $j("#header-vulnerability").fadeIn();
+            $j("#text-vulnerability").fadeIn();
 
             $j("#underlying-causes-header").text("Underlying causes");
 
@@ -526,8 +528,8 @@ This is the <b>Ace Adaptation Tools portlet</b> portlet.
             $j("#indicator-exposure").addClass("disabled");
             $j("#indicator-sensitivity").addClass("disabled");
 
-            $j("#indicator-sensitivity").show();
-            $j("#indicator-exposure").show();
+            $j("#indicator-sensitivity").fadeIn();
+            $j("#indicator-exposure").fadeIn();
             $j("#indicator-climate-changes").hide();
             $j("#indicator-human-causes").hide();
         }
@@ -542,8 +544,8 @@ This is the <b>Ace Adaptation Tools portlet</b> portlet.
             $j("#header-socio-ecological").hide();
             $j("#text-socio-ecological").hide();
 
-            $j("#header-underlying-causes").show();
-            $j("#text-underlying-causes").show();
+            $j("#header-underlying-causes").fadeIn();
+            $j("#text-underlying-causes").fadeIn();
 
             $j("#underlying-causes-header").text("Underlying causes");
 
@@ -551,8 +553,8 @@ This is the <b>Ace Adaptation Tools portlet</b> portlet.
             $j("#indicator-exposure").removeClass("disabled");
             $j("#indicator-sensitivity").removeClass("disabled");
 
-            $j("#indicator-sensitivity").show();
-            $j("#indicator-exposure").show();
+            $j("#indicator-sensitivity").fadeIn();
+            $j("#indicator-exposure").fadeIn();
             $j("#indicator-climate-changes").hide();
 
 
@@ -568,19 +570,19 @@ This is the <b>Ace Adaptation Tools portlet</b> portlet.
             $j("#header-vulnerability").hide();
             $j("#text-vulnerability").hide();
 
-            $j("#header-climate-change").show();
-            $j("#text-climate-change").show();
+            $j("#header-climate-change").fadeIn();
+            $j("#text-climate-change").fadeIn();
 
             $j("#underlying-causes-header").text("Underlying natural causes");
 
             $j("#indicator-changes").hide();
             $j("#indicator-human-causes").hide();
-            $j("#indicator-climate-changes").show();
+            $j("#indicator-climate-changes").fadeIn();
 
             $j("#underlying-causes-header").removeClass("disabled");
             $j("#indicator-exposure").removeClass("disabled");
             $j("#indicator-sensitivity").hide();
-            $j("#indicator-exposure").show();
+            $j("#indicator-exposure").fadeIn();
         }
 
          function showUnderlyingHumanCauses() {
@@ -593,20 +595,20 @@ This is the <b>Ace Adaptation Tools portlet</b> portlet.
             $j("#header-climate-change").hide();
             $j("#text-climate-change").hide();
 
-            $j("#header-socio-ecological").show();
-            $j("#text-socio-ecological").show();
+            $j("#header-socio-ecological").fadeIn();
+            $j("#text-socio-ecological").fadeIn();
 
             $j("#underlying-causes-header").text("Underlying human causes");
 
             $j("#indicator-changes").hide();
             $j("#indicator-climate-changes").hide();
-            $j("#indicator-human-causes").show();
+            $j("#indicator-human-causes").fadeIn();
 
             $j("#underlying-causes-header").removeClass("disabled");
             $j("#indicator-sensitivity").removeClass("disabled");
             $j("#indicator-exposure").hide();
             $j("#indicator-climate-changes").hide();
-            $j("#indicator-sensitivity").show();
+            $j("#indicator-sensitivity").fadeIn();
         }
             </script>
 		
@@ -728,7 +730,7 @@ This is the <b>Ace Adaptation Tools portlet</b> portlet.
 					<div class="right-bubble" style="float:left;margin-right:10px;">
 						<img src="<%=renderRequest.getContextPath()%>/images/info.png" class="valigned"/>
 					</div>
-					<h3 class="indicator-category-title">
+					<h3 class="indicator-category-title" onclick="showVulnerabilitiesAndRisks();" style="cursor:pointer;">
 						Vulnerability & risks
 					</h3>					
 					<div class="indicator-category-list"></div>
@@ -758,7 +760,7 @@ This is the <b>Ace Adaptation Tools portlet</b> portlet.
 					<div class="indicator-category-list"></div>
 				</div>
 				
-				<div id="indicator-climate-changes" class="xindicator-category" style="display:none;">
+				<div id="indicator-climate-changes" class="indicator-category" style="display:none;">
 					<div class="right-bubble" style="float:left;margin-right:10px;">
 						<img src="<%=renderRequest.getContextPath()%>/images/info.png" class="valigned"/>
 					</div>
@@ -768,7 +770,7 @@ This is the <b>Ace Adaptation Tools portlet</b> portlet.
 					<div class="indicator-category-list"></div>
 				</div>
 					
-				<div id="indicator-human-causes" class="xindicator-category"  style="display:none;">
+				<div id="indicator-human-causes" class="indicator-category"  style="display:none;">
 					<div class="right-bubble" style="float:left;margin-right:10px;">
 						<img src="<%=renderRequest.getContextPath()%>/images/info.png" class="valigned"/>
 					</div>
@@ -887,13 +889,13 @@ This is the <b>Ace Adaptation Tools portlet</b> portlet.
                          <option value="all">All sectors</option>
                          <option value="AGRICULTURE">Agriculture and Forest</option>
                          <option value="BIODIVERSITY" disabled="disabled">Biodiversity</option>
-                         <option value="COASTAL" disabled="disabled">Coastal areas</option>
+                         <option value="COASTAL" disabled="disabled">Coastal Areas</option>
                          <option value="DISASTERRISKREDUCTION" disabled="disabled">Disaster Risk Reduction</option>
                          <option value="FINANCIAL" disabled="disabled">Financial</option>
                          <option value="HEALTH" disabled="disabled">Health</option>
                          <option value="INFRASTRUCTURE" disabled="disabled">Infrastructure</option>
                          <option value="MARINE" disabled="disabled">Marine and Fisheries</option>
-                         <option value="WATERMANAGEMENT">Water management</option>
+                         <option value="WATERMANAGEMENT">Water Management</option>
                      </select>
                      <div class="top-bubble" style="float:left;margin-left:10px;">
                          <img src="<%=renderRequest.getContextPath()%>/images/info.png" class="valigned"/>
