@@ -677,6 +677,11 @@ body #banner .logo a {
 .project-description .title-container {
 	margin: 20px 15px 20px 170px;
 	position: absolute;
+	width: 79%;
+}
+
+.ie7 .project-description .title-container {
+	margin-left: 20px;
 }
 
 .project-description .title-container h1{
@@ -701,12 +706,43 @@ body #banner .logo a {
 .project-description .text-container .ui-state-active a {
 	color: #02213d;
 	font-size: 13px;
+	font-weight: bold;
 }
 
 .project-description .text-container .ui-corner-top,
 .project-description .text-container .ui-corner-bottom,
 .project-description .text-container .ui-corner-all {
 	border-radius: 0px;
+}
+
+.project-facts,
+.project-facts a {
+	color: #353f02;
+}
+
+.project-facts a:hover {
+	color: #FFF;
+}
+
+.project-facts .portlet-title {
+	padding: 0;
+}
+
+.project-facts h3 {
+	font-size: 13px;
+	margin: 20px 0 5px 0;
+}
+
+.project-facts #instrument h3 {
+	margin-top: 0;
+}
+
+.ie7 .project-facts #instrument h3 {
+	margin-top: 15px;
+}
+
+.project-facts #project-website {
+	margin-top: 20px;
 }
 
 /**** Styles modified from originally ace-theme/docroot/css/custom_common.css ****/
