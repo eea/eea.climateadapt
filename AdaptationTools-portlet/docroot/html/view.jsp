@@ -486,14 +486,14 @@ This is the <b>Ace Adaptation Tools portlet</b> portlet.
 								// the risk defined for this riskandsector
 								if(idx3 === 'risk') {
 									// is equal to the user's filter risk 
-									if(child === riskvalue || child === 'all') {
+									if(child === riskvalue || riskvalue === 'all') {
 										riskFilterOK = true;
 								}
 						}
 								// the sector defined for this riskandsector
 								if(idx3 === 'sector') {
 									// is equal to the user's filter sector 
-									if(child === sectorvalue || child === 'all') {
+									if(child === sectorvalue || riskvalue === 'all') {
 										sectorFilterOK = true;
 							}
 						}
