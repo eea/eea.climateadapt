@@ -26,6 +26,9 @@ HttpServletRequest httpRequest = PortalUtil.getOriginalServletRequest(request);
 This is the <b>Ace Adaptation Tools portlet</b> portlet.
 
 <script defer="defer" type="text/javascript">
+    var proxyUrl = '<%= request.getContextPath() %>/proxy?url=';
+
+
 	function displayStep(nr) {
 
         $("#image_steps").attr("src", "<%=renderRequest.getContextPath()%>/images/AST_small" + nr + ".png");
@@ -827,7 +830,7 @@ This is the <b>Ace Adaptation Tools portlet</b> portlet.
         <div id="locate-region">
             <div style="margin-bottom: 10px">
                 <form>
-                    Region of interest: <input type="text" name="locate" style="width:200px" />&nbsp;<button type="submit">Search for similar regions</button>
+                    Region of interest: <input type="text" id="locate_region" name="locate_region" style="width:200px" />&nbsp;<button type="submit" onclick="gazeeteer.search($('#locate_region').val()); return false;" >Search for similar regions</button>
                 </form>
             </div>
             <div id="map-container-step4">
