@@ -356,12 +356,13 @@ This is the <b>Ace Adaptation Tools portlet</b> portlet.
 				.complete(function() {});	
 
 			// handle change to sector selector
-			$j('#sector-select').change(function() {
-				displayIndicators(filterIndicators('sector', $j(this).attr('value')));
+			$('#sector-select').change(function() {
+				displayIndicators(filterIndicators($('#risk-select').attr('value'), $(this).attr('value')));
 			});
 				
 		});
 		
+		// utility to select random children -- TODO move to utilities file
 		$j.jQueryRandom = 0;
 		$j.extend($j.expr[":"], {
 			random: function(a, i, m, r) {
@@ -372,70 +373,135 @@ This is the <b>Ace Adaptation Tools portlet</b> portlet.
 					}
 			});
 						
+						
+		// displays indicators, based on their indicator-type.				
 		function displayIndicators(indicators) {
 			$j('.indicator-category-list').fadeOut();
 			$j('.indicator-category-list').empty();
 			$j.each(indicators, function() {
 				var indicator;
-				if(this.url != null && this.url.length > 0) {
-					var u = this.url;
-					var ln = this.layername;
+				if(this.riskandsector.url != null && this.riskandsector.url.length > 0) {
+					var u = this.riskandsector.url;
+					var ln = this.riskandsector.layername;
 					var t = this.title;
-					var randomIndicatorType = $j('.indicator-category-list:random');
+					var y = this.riskandsector.indicatortype;
+					
+					// var randomIndicatorType = $j('.indicator-category-list:random');
+					
+					var indicatortype ;
+					
+					if(y === 'VULNERABILITY') {
+						indicatortype = $j('#indicator-vulnerability .indicator-category-list');
+					}
+					else if(y === 'CLIMATECHANGES') {
+						indicatortype = $j('#indicator-climate-changes .indicator-category-list');					
+					}
+					else if(y === 'EXPOSURE') {
+						indicatortype = $j('#indicator-exposure .indicator-category-list');					
+					}					
+					else if(y === 'SENSITIVITY') {
+						indicatortype = $j('#indicator-sensitivity .indicator-category-list');					
+					}
+					else if(y === 'RESOURCEEFFICIENCY') {
+						indicatortype = $j('#indicator-human-causes .indicator-category-list');					
+					}
+					
 					indicator = $j(document.createElement("div"))
 						.addClass("indicator-category-list-item")
 						.addClass("clickable")
 						.attr({ style: 'float:left;' })
 						.append(t)
-						.appendTo(randomIndicatorType)
+						.appendTo(indicatortype)
 						.click(function() {
 							app.addLayer(u, ln, t);
+							// if this is a vulnerability type
+							if(y === 'VULNERABILITY') {
+								// enable underlying cause indicators
+								$j('#underlying-causes-header').removeClass('disabled');
+								$j('#indicator-exposure').removeClass('disabled');
+								$j('#indicator-sensitivity').removeClass('disabled');							
+							}
+							// if this is an underlying cause type
+							else if(y === 'EXPOSURE') {
+								// enable climate changes
+								$j('#indicator-climate-changes').removeClass('disabled');
+								$j('#indicator-sensitivity').fadeOut();							
+								$j('#indicator-climate-changes').fadeIn();
+							}
+							else if(y === 'SENSITIVITY') {
+								// enable resource efficiency
+								$j('#indicator-human-causes').removeClass('disabled');
+								$j('#indicator-exposure').fadeOut();
+								$j('#indicator-human-causes').fadeIn();
+							}
 						});
-						$j(document.createElement("img"))
-							.attr({ src: '<%=renderRequest.getContextPath()%>/images/map_icon.gif', title: 'show map' })
-							.attr({ style: 'float:left;margin-left:5px;' })
-							.appendTo(randomIndicatorType);
+				
+					// no map icon	
+					//$j(document.createElement("img"))
+					//		.attr({ src: '<%=renderRequest.getContextPath()%>/images/map_icon.gif', title: 'show map' })
+					//		.attr({ style: 'float:left;margin-left:5px;' })
+					//		.appendTo(indicatortype);
+					
 						$j(document.createElement("hr"))
 							.attr({ style: 'clear:both;display:block;visibility:hidden;' })
-							.appendTo(randomIndicatorType);															
+							.appendTo(indicatortype);															
 				}
-				else {
-					indicator = '<div class="indicator-category-list-item">' + this.title + '</div>';				
-					$j('.indicator-category-list:random').append(indicator);			
-				}
+				
+				// no url ? no display
+				//else {
+				//	indicator = '<div class="indicator-category-list-item">' + this.riskandsector.title + '</div>';				
+				//	$j('.indicator-category-list:random').append(indicator);			
+				//}
+				
 			}); 
 			$j('.indicator-category-list').fadeIn();
 		}	
 		
-		function filterIndicators(filterproperty, filtervalue) {
-			var indicatorsDisplayed = new Array();
-			if(filtervalue === 'all') {
+		// filters indicators. They are filtered by a combination of values for RISK and SECTOR.
+		function filterIndicators(riskvalue, sectorvalue) {
+			// both filters set to 'all'
+			if(riskvalue === 'all' && sectorvalue === 'all') {
+				// use global variable holding all indicators
 				return indicators;
 			}
-			if(filtervalue === 'none') {
+			var indicatorsDisplayed = new Array();
+			// both filters set to 'none'
+			if(riskvalue === 'all' && sectorvalue === 'all') {
+				// use empty array of indicators
 				return indicatorsDisplayed;
 			}			
+			// loop all indicators
 			$j.each(indicators, function(idx, indicator){
-				$j.each(indicator, function(property, value){
-					if(property === filterproperty) {
-						if($j.isArray(value)) {
-							$j.each(value, function(ix, v){
-								if(v === filtervalue) {
-									indicatorsDisplayed.push(indicator);
+				// loop all riskandsectors
+				$j.each(indicator, function(idx2, riskandsector){
+					if(idx2 === 'riskandsector') {
+						var riskFilterOK = false;
+						var sectorFilterOK = false;
+						// loop all riskandsector children
+						$j.each(riskandsector, function(idx3, child){
+								// the risk defined for this riskandsector
+								if(idx3 === 'risk') {
+									// is equal to the user's filter risk 
+									if(child === riskvalue) {
+										riskFilterOK = true;
 								}
-							});
 						}
-						else {
-							if(value === filtervalue) {
-								indicatorsDisplayed.push(indicator);
+								// the sector defined for this riskandsector
+								if(idx3 === 'sector') {
+									// is equal to the user's filter sector 
+									if(child === sectorvalue) {
+										sectorFilterOK = true;
 							}
 						}
+							});
+						if(riskFilterOK && sectorFilterOK) {
+							indicatorsDisplayed.push(indicator);
+						}						
 					}
 				});
 			});
 			return indicatorsDisplayed;
 		}
-
 
         function showVulnerabilitiesAndRisks() {
             $j("#header-climate-change").hide();
@@ -575,12 +641,12 @@ This is the <b>Ace Adaptation Tools portlet</b> portlet.
 		<div id="indicators-map" style="display: none">
             <div id="text-vulnerability" class="description" style="display: none">
                 <p>Vulnerability and risks represent bla bla bla  lorum ipsum hardanger voda en joda krijgt het heen en weer...</p>
-                <p>Choose a risk and (optionally) a sector to find out what corresponding vulnerabilities and risks are. </p>
+                <p>Choose a risk and (optionally) a sector to find out what corresponding vulnerabilities and risks are.</p>
             </div>
 
             <div id="text-underlying-causes" class="description" style="display: none">
                 <p>Underlying causes can be both caused by the global system (exposure) and the human system (sensitivity) bla bla bla
-                    lorum ipsum hardanger voda en joda krijgt het heen en weer... </p>
+                    lorum ipsum hardanger voda en joda krijgt het heen en weer...</p>
             </div>
 
             <div id="text-climate-change" class="description" style="display: none">
@@ -594,7 +660,7 @@ This is the <b>Ace Adaptation Tools portlet</b> portlet.
 			<div id="adaptationtools-selectors-top">
 				<div id="risks-selector" class="adaptationtools-selector">
 					<!-- TODO load dynamically from enumeration nl.wur.alterra.cgi.ace.model.impl.AceItemClimateImpact -- but aceitem model classes must be made available as a jar for that -->
-					<select  style="float:left;">
+					<select id="risk-select" style="float:left;">
 						<option value="none" selected="selected">Choose a risk:</option>
 						<option value="all">All risks</option>
 						<option value="EXTREMETEMP">Extreme Temperatures</option>

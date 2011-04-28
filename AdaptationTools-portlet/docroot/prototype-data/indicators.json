@@ -2,95 +2,57 @@
   "indicators": {
     "indicator": [
       {
+        "title": "Water stress",
+        "riskandsector": {
+          "risk": "WATERSCARCE",
+          "sector": "WATERMANAGEMENT",
+          "url": "http://portal.fieldfact.com/geoserver/wms?",
+          "layername": "climwatadapt:WTA_JJA_milm3EcF2050ipcm",
+          "indicatortype": "VULNERABILITY"
+        }
+      },
+      {
         "title": "Precipitation",
-        "sector": [
-          "WATERMANAGEMENT",
-          "AGRICULTURE"
-        ],
-        "url": "http://hrz-vm130.hrz.uni-kassel.de/cgi-bin/mapserv?map=/var/www/html/maps/mapfiles/wg3_drivers2/prec2_pch_cell_0ann_2050ipcm4a2.map",
-        "layername": "prec2_pch_cell_0ann_2050ipcm4a2"
+        "riskandsector": {
+          "risk": "WATERSCARCE",
+          "sector": "WATERMANAGEMENT",
+          "url": "http://hrz-vm130.hrz.uni-kassel.de/cgi-bin/mapserv?map=/var/www/html/maps/mapfiles/wg3_drivers2/prec2_pch_cell_0ann_2050ipcm4a2.map",
+          "layername": "prec2_pch_cell_0ann_2050ipcm4a2",
+          "indicatortype": "CLIMATECHANGES"
+        }
       },
       {
         "title": "Water availability",
-        "sector": [
-          "WATERMANAGEMENT",
-          "AGRICULTURE"
-        ],
-        "url": "http://hrz-vm130.hrz.uni-kassel.de/cgi-bin/mapserv?map=/var/www/html/maps/mapfiles/wg3_statevar2/avl2_pch_bas35_0ann_2050ipcm4a2.map",
-        "layername": "avl2_pch_bas35_0ann_2050ipcm4a2"
-      },
-      {
-        "title": "Soil erosion",
-        "sector": [
-          "WATERMANAGEMENT",
-          "AGRICULTURE"
-        ],
-        "url": "http://eusoils.jrc.ec.europa.eu/wrb/wms_Threats.asp",
-        "layername": "PESERA"
-      },
-      {
-        "title": "Water withdrawals",
-        "sector": "WATERMANAGEMENT",
-        "url": "http://hrz-vm130.hrz.uni-kassel.de/cgi-bin/mapserv?map=/var/www/html/maps/mapfiles/wg3_statevar2/wwd2_tot_pch_bas35_2050ecf_ipcm4.map",
-        "layername": "wwd2_tot_pch_bas35_2050ecf_ipcm4"
-      },
-      {
-        "title": "Water stress",
-        "sector": "WATERMANAGEMENT",
-        "url": "http://portal.fieldfact.com/geoserver/wms?",
-        "layername": " climwatadapt:WTA_JJA_milm3EcF2050ipcm"
-      },
-      {
-        "title": "Land use",
-        "sector": [
-          "WATERMANAGEMENT",
-          "AGRICULTURE"
+        "riskandsector": [
+          {
+            "risk": "WATERSCARCE",
+            "sector": "WATERMANAGEMENT",
+            "url": "http://hrz-vm130.hrz.uni-kassel.de/cgi-bin/mapserv?map=/var/www/html/maps/mapfiles/wg3_statevar2/avl2_pch_bas35_0ann_2050ipcm4a2.map",
+            "layername": "avl2_pch_bas35_0ann_2050ipcm4a2",
+            "indicatortype": "EXPOSURE"
+          },
+          { "sector": "AGRICULTURE" }
         ]
       },
       {
+        "title": "Water withdrawals",
+        "riskandsector": {
+          "risk": "WATERSCARCE",
+          "sector": "WATERMANAGEMENT",
+          "url": "http://hrz-vm130.hrz.uni-kassel.de/cgi-bin/mapserv?map=/var/www/html/maps/mapfiles/wg3_statevar2/wwd2_tot_pch_bas35_2050ecf_ipcm4.map",
+          "layername": "wwd2_tot_pch_bas35_2050ecf_ipcm4",
+          "indicatortype": "SENSITIVITY"
+        }
+      },
+      {
         "title": "Population",
-        "sector": [
-          "WATERMANAGEMENT",
-          "AGRICULTURE"
-        ],
-        "url": "http://hrz-vm130.hrz.uni-kassel.de/cgi-bin/mapserv?map=/var/www/html/maps/mapfiles/wg3_drivers2/pop_tot_pch_bas35_2050ecf.map",
-        "layername": "pop_tot_pch_bas35_2050ecf"
-      },
-      {
-        "title": "Water use by agriculture - livestock",
-        "sector": [
-          "WATERMANAGEMENT",
-          "AGRICULTURE"
-        ],
-        "url": "http://hrz-vm130.hrz.uni-kassel.de/cgi-bin/mapserv?map=/var/www/html/maps/mapfiles/wg3_statevar2/wwd2_ls_pch_bas35_2050ecf.map",
-        "layername": "wwd2_ls_pch_bas35_2050ecf"
-      },
-      {
-        "title": "Water use by agriculture - irrigation",
-        "sector": [
-          "WATERMANAGEMENT",
-          "AGRICULTURE"
-        ],
-        "url": "http://hrz-vm130.hrz.uni-kassel.de/cgi-bin/mapserv?map=/var/www/html/maps/mapfiles/wg3_statevar2/wwd2_ir_pch_bas35_2050ecf_ipcm.map",
-        "layername": "wwd2_ir_pch_bas35_2050ecf_ipcm"
-      },
-      {
-        "title": "Water use by manufacturing industry",
-        "sector": "WATERMANAGEMENT",
-        "url": "http://hrz-vm130.hrz.uni-kassel.de/cgi-bin/mapserv?map=/var/www/html/maps/mapfiles/wg3_statevar2/wwd2_man_pch_bas35_2050ecf.map",
-        "layername": "wwd2_man_pch_bas35_2050ecf"
-      },
-      {
-        "title": "Water use by electricity production",
-        "sector": "WATERMANAGEMENT",
-        "url": "http://hrz-vm130.hrz.uni-kassel.de/cgi-bin/mapserv?map=/var/www/html/maps/mapfiles/wg3_statevar2/wwd2_el_pch_bas35_2050ecf.map",
-        "layername": "wwd2_el_pch_bas35_2050ecf"
-      },
-      {
-        "title": "Water use by domestic",
-        "sector": "WATERMANAGEMENT",
-        "url": "http://hrz-vm130.hrz.uni-kassel.de/cgi-bin/mapserv?map=/var/www/html/maps/mapfiles/wg3_statevar2/wwd2_dom_pch_bas35_2050ecf.map",
-        "layername": "wwd2_dom_pch_bas35_2025ecf"
+        "riskandsector": {
+          "risk": "WATERSCARCE",
+          "sector": "WATERMANAGEMENT",
+          "url": "http://hrz-vm130.hrz.uni-kassel.de/cgi-bin/mapserv?map=/var/www/html/maps/mapfiles/wg3_drivers2/pop_tot_pch_bas35_2050ecf.map",
+          "layername": "pop_tot_pch_bas35_2050ecf",
+          "indicatortype": "RESOURCEEFFICIENCY"
+        }
       }
     ]
   }
