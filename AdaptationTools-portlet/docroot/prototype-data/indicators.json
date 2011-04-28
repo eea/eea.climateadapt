@@ -36,7 +36,9 @@
       },
       {
         "title": "Water stress",
-        "sector": "WATERMANAGEMENT"
+        "sector": "WATERMANAGEMENT",
+        "url": "http://portal.fieldfact.com/geoserver/wms?",
+        "layername": " climwatadapt:WTA_JJA_milm3EcF2050ipcm"
       },
       {
         "title": "Land use",

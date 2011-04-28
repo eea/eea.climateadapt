@@ -40,7 +40,7 @@ This is the <b>Ace Adaptation Tools portlet</b> portlet.
 	}
 </script>
 
-<div>
+<div id="adaptationtool_container">
 	<!-- left panel -->
 	<div style="border:solid 1px green;margin-right: 10px; margin-top: 50px; float:left;width:385px;height:600px;background-color:#d2df92;">
 

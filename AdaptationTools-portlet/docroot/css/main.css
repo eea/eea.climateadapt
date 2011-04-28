@@ -1,3 +1,8 @@
+#adaptationtool_container {
+    width: 1280px;
+    overflow-x: scroll;
+}
+
 #tree ul {
 	list-style:none;
 	list-style-type:none;
