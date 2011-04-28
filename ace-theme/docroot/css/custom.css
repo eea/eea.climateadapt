@@ -672,10 +672,15 @@ body #banner .logo a {
 
 .project-description .image {
 	float: left;
+	line-height: 13.636em;
 }
 
+.project-description .image img {
+	vertical-align: middle;
+} 
+
 .project-description .title-container {
-	margin: 20px 15px 20px 170px;
+	margin: 30px 15px 20px 170px;
 	position: absolute;
 	width: 79%;
 }
