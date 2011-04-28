@@ -495,7 +495,7 @@ This is the <b>Ace Adaptation Tools portlet</b> portlet.
 								// the sector defined for this riskandsector
 								if(idx3 === 'sector') {
 									// is equal to the user's filter sector 
-									if(child === sectorvalue || riskvalue === 'all') {
+									if(child === sectorvalue || sectorvalue === 'all') {
 										sectorFilterOK = true;
 							}
 						}
