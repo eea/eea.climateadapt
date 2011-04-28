@@ -88,9 +88,6 @@
 			<layername>avl2_pch_bas35_0ann_2050ipcm4a2</layername>
 			<indicatortype>EXPOSURE</indicatortype>
 		</riskandsector>
-		<riskandsector>
-			<sector>AGRICULTURE</sector>	
-		</riskandsector>
 	</indicator>
 	<indicator>
 		<title>Water withdrawals</title>

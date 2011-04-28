@@ -83,16 +83,13 @@
       },
       {
         "title": "Water availability",
-        "riskandsector": [
-          {
-            "risk": "WATERSCARCE",
-            "sector": "WATERMANAGEMENT",
-            "url": "http://hrz-vm130.hrz.uni-kassel.de/cgi-bin/mapserv?map=/var/www/html/maps/mapfiles/wg3_statevar2/avl2_pch_bas35_0ann_2050ipcm4a2.map",
-            "layername": "avl2_pch_bas35_0ann_2050ipcm4a2",
-            "indicatortype": "EXPOSURE"
-          },
-          { "sector": "AGRICULTURE" }
-        ]
+        "riskandsector": {
+          "risk": "WATERSCARCE",
+          "sector": "WATERMANAGEMENT",
+          "url": "http://hrz-vm130.hrz.uni-kassel.de/cgi-bin/mapserv?map=/var/www/html/maps/mapfiles/wg3_statevar2/avl2_pch_bas35_0ann_2050ipcm4a2.map",
+          "layername": "avl2_pch_bas35_0ann_2050ipcm4a2",
+          "indicatortype": "EXPOSURE"
+        }
       },
       {
         "title": "Water withdrawals",
