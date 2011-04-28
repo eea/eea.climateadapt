@@ -843,6 +843,8 @@ This is the <b>Ace Adaptation Tools portlet</b> portlet.
 
 	-->
     <script defer="defer" type="text/javascript">
+		var $j = jQuery.noConflict();
+
         function showGenericMeasures() {
             $j("#locate-region").hide()
             $j("#generic-measures").show();
@@ -909,11 +911,15 @@ This is the <b>Ace Adaptation Tools portlet</b> portlet.
         <div id="locate-region">
             <div style="margin-bottom: 10px">
                 <form>
-                    Region of interest: <input type="text" id="locate_region" name="locate_region" style="width:200px" />&nbsp;<button type="submit" onclick="gazeeteer.search($j('#locate_region').val()); return false;" >Search for similar regions</button>
+                    Region of interest: <input type="text" id="locate_region_input" name="locate_region_input" style="width:200px" />&nbsp;<button type="submit" onclick="gazeeteer.search($j('#locate_region_input').val()); return false;" >Search for similar regions</button>
                 </form>
             </div>
             <div id="map-container-step4">
             </div>
+
+            <div id="locate_region_results" style="float:right; width:190px; height: 300px;"></div>
+
+            <hr style="clear:both;display:block;visibility:hidden;"/>
 
             <div id="specify-region-similarity-criteria" style="margin-top:10px;">
                 Specify region similarity criteria &raquo;

@@ -94,6 +94,10 @@ div.map-overlay {
 	/*margin-top:20px; */
 }
 
+#map-container-step4 {
+	float:left;
+}
+
 #map_legend {
 	float:right;
 	margin-right:20px;
