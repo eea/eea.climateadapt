@@ -359,6 +359,10 @@ This is the <b>Ace Adaptation Tools portlet</b> portlet.
 			$('#sector-select').change(function() {
 				displayIndicators(filterIndicators($('#risk-select').attr('value'), $(this).attr('value')));
 			});
+			// handle change to risk selector
+			$('#risk-select').change(function() {
+				displayIndicators(filterIndicators($(this).attr('value'), $('#sector-select').attr('value'), ));
+			});			
 				
 		});
 		
@@ -465,8 +469,8 @@ This is the <b>Ace Adaptation Tools portlet</b> portlet.
 				return indicators;
 			}
 			var indicatorsDisplayed = new Array();
-			// both filters set to 'none'
-			if(riskvalue === 'all' && sectorvalue === 'all') {
+			// either one or both filters set to 'none'
+			if(riskvalue === 'none' || sectorvalue === 'none') {
 				// use empty array of indicators
 				return indicatorsDisplayed;
 			}			
@@ -482,14 +486,14 @@ This is the <b>Ace Adaptation Tools portlet</b> portlet.
 								// the risk defined for this riskandsector
 								if(idx3 === 'risk') {
 									// is equal to the user's filter risk 
-									if(child === riskvalue) {
+									if(child === riskvalue || child === 'all') {
 										riskFilterOK = true;
 								}
 						}
 								// the sector defined for this riskandsector
 								if(idx3 === 'sector') {
 									// is equal to the user's filter sector 
-									if(child === sectorvalue) {
+									if(child === sectorvalue || child === 'all') {
 										sectorFilterOK = true;
 							}
 						}
