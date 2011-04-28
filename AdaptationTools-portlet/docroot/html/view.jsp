@@ -351,7 +351,10 @@ This is the <b>Ace Adaptation Tools portlet</b> portlet.
 				function(json) {
 					indicators = json.indicators.indicator;
 				})
-				.success(function() {})
+				.success(function() {
+						$('#risk-select').removeAttr("disabled");
+						$('#sector-select').removeAttr("disabled");
+					})
 				.error(function() {})
 				.complete(function() {});	
 
@@ -423,22 +426,16 @@ This is the <b>Ace Adaptation Tools portlet</b> portlet.
 							// if this is a vulnerability type
 							if(y === 'VULNERABILITY') {
 								// enable underlying cause indicators
-								$j('#underlying-causes-header').removeClass('disabled');
-								$j('#indicator-exposure').removeClass('disabled');
-								$j('#indicator-sensitivity').removeClass('disabled');							
+								showUnderlyingCauses();								
 							}
 							// if this is an underlying cause type
 							else if(y === 'EXPOSURE') {
 								// enable climate changes
-								$j('#indicator-climate-changes').removeClass('disabled');
-								$j('#indicator-sensitivity').fadeOut();							
-								$j('#indicator-climate-changes').fadeIn();
+								showUnderlyingNaturalCauses();
 							}
 							else if(y === 'SENSITIVITY') {
 								// enable resource efficiency
-								$j('#indicator-human-causes').removeClass('disabled');
-								$j('#indicator-exposure').fadeOut();
-								$j('#indicator-human-causes').fadeIn();
+								showUnderlyingHumanCauses();
 							}
 						});
 				
@@ -666,7 +663,7 @@ This is the <b>Ace Adaptation Tools portlet</b> portlet.
 			<div id="adaptationtools-selectors-top">
 				<div id="risks-selector" class="adaptationtools-selector">
 					<!-- TODO load dynamically from enumeration nl.wur.alterra.cgi.ace.model.impl.AceItemClimateImpact -- but aceitem model classes must be made available as a jar for that -->
-					<select id="risk-select" style="float:left;">
+					<select id="risk-select" style="float:left;" disabled="disabled">
 						<option value="none" selected="selected">Choose a risk:</option>
 						<option value="all">All risks</option>
 						<option value="EXTREMETEMP">Extreme Temperatures</option>
@@ -686,7 +683,7 @@ This is the <b>Ace Adaptation Tools portlet</b> portlet.
 						Filter by sector
 					</span>
 					<!-- TODO load dynamically from enumeration nl.wur.alterra.cgi.ace.model.impl.AceItemSector -- but aceitem model classes must be made available as a jar for that -->
-					<select id="sector-select" style="float:left;">
+					<select id="sector-select" style="float:left;" disabled="disabled">
 						<option value="none" selected="selected">Choose a sector:</option>
 						<option value="all">All sectors</option>
 						<option value="AGRICULTURE">Agriculture and Forest</option>
