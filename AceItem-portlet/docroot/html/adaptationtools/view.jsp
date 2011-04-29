@@ -710,25 +710,7 @@ HttpServletRequest httpRequest = PortalUtil.getOriginalServletRequest(request);
             </div>
 
 			<div id="adaptationtools-selectors-top">
-				<div id="risks-selector" class="adaptationtools-selector" style="float:right;">
-					<div class="top-bubble" style="float:right;margin:0px 10px;">
-						<img src="<%=renderRequest.getContextPath()%>/images/info.png" class="valigned"/>
-					</div>	
-					<span style="margin-right:10px;">
-						Risk
-					</span>
-					<!-- TODO load dynamically from enumeration nl.wur.alterra.cgi.ace.model.impl.AceItemClimateImpact -- but aceitem model classes must be made available as a jar for that -->
-					<select id="risk-select" style="" disabled="disabled">
-						<option value="none" selected="selected">Choose a risk:</option>
-						<option value="all">All risks</option>
-						<option value="EXTREMETEMP">Extreme Temperatures</option>
-						<option value="WATERSCARCE">Water Scarcity</option>
-						<option value="FLOODING">Flooding</option>
-						<option value="DROUGHT">Droughts</option>
-						<option value="STORM">Storms</option>
-						<option value="ICEANDSNOW">Ice and Snow</option>
-					</select>
-				</div>		
+	
 			
 				<div id="sector-selector"  class="adaptationtools-selector"  style="float:right;">
 					<div class="top-bubble" style="float:right;margin:0px 10px;">
@@ -752,6 +734,27 @@ HttpServletRequest httpRequest = PortalUtil.getOriginalServletRequest(request);
 						<option value="WATERMANAGEMENT">Water Management</option>
 					</select>				
 				</div>			
+
+				<div id="risks-selector" class="adaptationtools-selector" style="float:right;">
+					<div class="top-bubble" style="float:right;margin:0px 10px;">
+						<img src="<%=renderRequest.getContextPath()%>/images/info.png" class="valigned"/>
+					</div>	
+					<span style="margin-right:10px;">
+						Risk
+					</span>
+					<!-- TODO load dynamically from enumeration nl.wur.alterra.cgi.ace.model.impl.AceItemClimateImpact -- but aceitem model classes must be made available as a jar for that -->
+					<select id="risk-select" style="" disabled="disabled">
+						<option value="none" selected="selected">Choose a risk:</option>
+						<option value="all">All risks</option>
+						<option value="EXTREMETEMP">Extreme Temperatures</option>
+						<option value="WATERSCARCE">Water Scarcity</option>
+						<option value="FLOODING">Flooding</option>
+						<option value="DROUGHT">Droughts</option>
+						<option value="STORM">Storms</option>
+						<option value="ICEANDSNOW">Ice and Snow</option>
+					</select>
+				</div>	
+			
 			</div>
 
             <div id="map_legend" style="float: right"><a href="#" onclick="app.showLegendWindow(); return false;">Show Legend</a></div>
