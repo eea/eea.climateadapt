@@ -156,3 +156,18 @@ div.description {
     display: none;
     border: 1px solid #cccccc;
 }
+
+#locate_region_results {
+    position: absolute;
+    z-index: 1010;
+    float:left;
+    width: 230px;
+    height: 70px;
+    overflow-y: auto;
+    border: 1px solid #cccccc;
+    background-color: #ffffff;
+    top:398px;
+    left: 490px;
+    display:none;
+
+}
