@@ -38,9 +38,19 @@
 
 		<div id="${resultsListId}">
 			<c:forEach var="searchResult" items="${groupedResults}" begin="0" end="<%= itemsOnPage-1 %>">		
-				<div class="searchresultFilter ${searchResult.keyword}" style="display:none">
-					<div>
+               <c:set var="keywordCss" value="" />
 
+               <c:if test="${fn:contains(searchResult.keyword, 'dr_ag')}">
+                   <c:set var="keywordCss">dr_ag</c:set>
+               </c:if>
+
+                <c:if test="${fn:contains(searchResult.keyword, 'dr_wm')}">
+                   <c:set var="keywordCss">dr_wm</c:set>
+               </c:if>
+
+
+				<div class="searchresultFilter ${keywordCss}" style="display:none">
+					<div>
                         <c:set var="descriptionText" value="${searchResult.description}" />
 
 						<c:if test="${descriptionLength > 400}">
