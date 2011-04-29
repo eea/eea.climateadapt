@@ -940,6 +940,14 @@ This is the <b>Ace Adaptation Tools portlet</b> portlet.
 			<img src="<%=renderRequest.getContextPath()%>/images/bullit5.png" class="valigned"/>
 			How can I assess my adaptation options?
 		</h1>
+		<h2>
+			5.2 What are feasible adaptation options?			
+		</h2>
+		<p>
+			Once you made a portfolio of potential adaptation options, you need to assess them ad determine which of them suit your specific context. You have to consider their effectiveness
+			in reducing vulnerability (or enhancing resilience) and their wider impact on sustainabilty. Assessment of feasible options helps avoiding decisions that lead to mal-adaptation.
+			There is a set of criteria that you should onsider when assessing adaptation options (read more). Tools and guidance documents provided in this section will help you to select feasible options.
+		</p>
 
         <hr style="clear:both;display:block;visibility:hidden;"/>
 	</div>
