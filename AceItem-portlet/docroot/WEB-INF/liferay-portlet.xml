@@ -13,6 +13,7 @@
                 <header-portlet-css>/css/main.css</header-portlet-css>
 		<header-portlet-javascript>http://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js</header-portlet-javascript>
 		<header-portlet-javascript>/js/bubblepopup/jquery.bubblepopup.v2.3.1.min.js</header-portlet-javascript>
+		<header-portlet-javascript>/js/equalheights/jquery.equalheights.js</header-portlet-javascript>
 
                 <header-portlet-javascript>/js/ext-base.js</header-portlet-javascript>
                 <header-portlet-javascript>/js/ext-all.js</header-portlet-javascript>
