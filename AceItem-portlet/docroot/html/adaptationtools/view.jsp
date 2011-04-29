@@ -18,6 +18,8 @@
 
 <%@ page import="com.liferay.portal.util.PortalUtil" %>
 
+<%@include file="/html/init.jsp" %>
+
 <portlet:defineObjects />
 
 <%
@@ -923,6 +925,44 @@ HttpServletRequest httpRequest = PortalUtil.getOriginalServletRequest(request);
             $j("#generic-measures").hide();
         }
 
+        function filterMeasures() {
+            var risk = $j("#risk-selector-step4").val();
+            var sector = $j("#sector-select-step4").val();
+
+            $j("div.dr_ag").hide();
+            $j("div.dr_wm").hide();
+
+            if ((risk === 'none' || (sector === 'none'))) {
+                $j("#measures-step4").hide();
+                return;
+            }
+
+            var filter = '';
+            if (risk === "DROUGHT") {
+                filter = "dr_";
+            } else if (risk === 'all') {
+                 filter = "dr_";
+            }
+
+            if (sector === 'AGRICULTURE') {
+                filter = filter + "ag";
+
+                $j("div." + filter).show();
+
+            } else if (sector === 'WATERMANAGEMENT') {
+                filter = filter + "wm";
+
+                $j("div." + filter).show();
+
+            } else if (sector === 'all') {
+                $j("div.dr_ag").show();
+                $j("div.dr_wm").show();
+
+            }
+
+            $j("#measures-step4").show();
+        }
+
     </script>
 
 	<div id="step-right-4" class="step-right">
@@ -931,46 +971,65 @@ HttpServletRequest httpRequest = PortalUtil.getOriginalServletRequest(request);
 			How can identify my adaptation options?
 		</h1>
 
-        <div id="generic-measures" style="display: none">
+        <div id="generic-measures" style="display: none; margin-left: 20px;">
 			 <form>
-                 <div id="risks-selector-step4" style="float: left;">
-                     <!-- TODO load dynamically from enumeration nl.wur.alterra.cgi.ace.model.impl.AceItemClimateImpact -- but aceitem model classes must be made available as a jar for that -->
-                     <select  style="float:left;">
-                         <option value="none" selected="selected">Choose a risk:</option>
-                         <option value="all">All risks</option>
-                         <option value="EXTREMETEMP">Extreme Temperatures</option>
-                         <option value="WATERSCARCE">Water Scarcity</option>
-                         <option value="FLOODING">Flooding</option>
-                         <option value="DROUGHT">Droughts</option>
-                         <option value="STORM">Storms</option>
-                         <option value="ICEANDSNOW">Ice and Snow</option>
-                     </select>
-                     <div class="top-bubble" style="float:left;margin-left:10px;">
-                         <img src="<%=renderRequest.getContextPath()%>/images/info.png" class="valigned"/>
+                 <div id="selectors-step4" style="margin-left: 20px; float:left;">
+
+                     <div id="risks-selector-step4" class="adaptationtools-selector" style="float:left;">
+                        <span style="margin-right:10px;float:left;" >
+                            Risk
+                        </span>
+
+                         <!-- TODO load dynamically from enumeration nl.wur.alterra.cgi.ace.model.impl.AceItemClimateImpact -- but aceitem model classes must be made available as a jar for that -->
+                         <select id="risk-selector-step4" style="float:left;" onchange="filterMeasures();">
+                             <option value="none" selected="selected">Choose a risk:</option>
+                             <option value="all">All risks</option>
+                             <option value="EXTREMETEMP" disabled="disabled">Extreme Temperatures</option>
+                             <option value="WATERSCARCE" disabled="disabled">Water Scarcity</option>
+                             <option value="FLOODING" disabled="disabled">Flooding</option>
+                             <option value="DROUGHT" >Droughts</option>
+                             <option value="STORM"  disabled="disabled">Storms</option>
+                             <option value="ICEANDSNOW"  disabled="disabled">Ice and Snow</option>
+                         </select>
+                         <div class="top-bubble" style="float:right;margin:0px 10px;">
+                            <img src="<%=renderRequest.getContextPath()%>/images/info.png" class="valigned"/>
+                        </div>
+                     </div>
+
+                     <div id="sector-selector-step4" class="adaptationtools-selector" style="float:left;">
+                        <span style="margin-right:10px;float:left;">
+                            Sector
+                        </span>
+                         <!-- TODO load dynamically from enumeration nl.wur.alterra.cgi.ace.model.impl.AceItemSector -- but aceitem model classes must be made available as a jar for that -->
+                         <select id="sector-select-step4" style="float:left;" onchange="filterMeasures();" >
+                             <option value="none" selected="selected">Choose a sector:</option>
+                             <option value="all">All sectors</option>
+                             <option value="AGRICULTURE">Agriculture and Forest</option>
+                             <option value="BIODIVERSITY" disabled="disabled">Biodiversity</option>
+                             <option value="COASTAL" disabled="disabled">Coastal Areas</option>
+                             <option value="DISASTERRISKREDUCTION" disabled="disabled">Disaster Risk Reduction</option>
+                             <option value="FINANCIAL" disabled="disabled">Financial</option>
+                             <option value="HEALTH" disabled="disabled">Health</option>
+                             <option value="INFRASTRUCTURE" disabled="disabled">Infrastructure</option>
+                             <option value="MARINE" disabled="disabled">Marine and Fisheries</option>
+                             <option value="WATERMANAGEMENT">Water Management</option>
+                         </select>
+
+                         <div class="top-bubble" style="float:right;margin:0px 10px;">
+                            <img src="<%=renderRequest.getContextPath()%>/images/info.png" class="valigned"/>
+                        </div>
                      </div>
                  </div>
 
-                 <div id="sector-selector-step4"  style="float: left;margin-left: 20px; ">
-                     <span style="margin-right:30px;">
-                         Filter by sector
-                     </span>
-                     <!-- TODO load dynamically from enumeration nl.wur.alterra.cgi.ace.model.impl.AceItemSector -- but aceitem model classes must be made available as a jar for that -->
-                     <select id="sector-select-step4" style="float:left;">
-                         <option value="none" selected="selected">Choose a sector:</option>
-                         <option value="all">All sectors</option>
-                         <option value="AGRICULTURE">Agriculture and Forest</option>
-                         <option value="BIODIVERSITY" disabled="disabled">Biodiversity</option>
-                         <option value="COASTAL" disabled="disabled">Coastal Areas</option>
-                         <option value="DISASTERRISKREDUCTION" disabled="disabled">Disaster Risk Reduction</option>
-                         <option value="FINANCIAL" disabled="disabled">Financial</option>
-                         <option value="HEALTH" disabled="disabled">Health</option>
-                         <option value="INFRASTRUCTURE" disabled="disabled">Infrastructure</option>
-                         <option value="MARINE" disabled="disabled">Marine and Fisheries</option>
-                         <option value="WATERMANAGEMENT">Water Management</option>
-                     </select>
-                     <div class="top-bubble" style="float:left;margin-left:10px;">
-                         <img src="<%=renderRequest.getContextPath()%>/images/info.png" class="valigned"/>
-                     </div>
+
+                 <hr style="clear:both;display:block;visibility:hidden;"/>
+
+                 <div id ="measures-step4" style="float: left;margin-left: 20px; display:none;">
+                    <c:set var="groupedResults" scope="page" value="${MEASURE_searchResults}"/>
+                    <c:set var="groupedJSONResults" scope="page" value="${MEASURE_JSONsearchResults}"/>
+                    <c:set var="aceitemtype" scope="page" value="MEASURE"/>
+                    <c:set var="groupTitle" scope="page"><liferay-ui:message key="acesearch-datainfotype-lbl-MEASURE" /></c:set>
+                    <%@ include file="searchresultsbytype.jspf" %>
                  </div>
             </form>
 		</div>
