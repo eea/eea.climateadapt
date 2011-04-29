@@ -45,7 +45,7 @@ This is the <b>Ace Adaptation Tools portlet</b> portlet.
 
 <div id="adaptationtool_container">
 	<!-- left panel -->
-	<div style="border:solid 1px green;margin-right: 10px; margin-top: 50px; float:left;width:385px;height:600px;background-color:#d2df92;">
+	<div style="border:solid 1px green;margin-right: 10px; margin-top: 50px; float:left;width:385px;background-color:#d2df92;">
 
         <!-- Steps selection image -->
         <div>
@@ -287,7 +287,7 @@ This is the <b>Ace Adaptation Tools portlet</b> portlet.
 	</div>
 	
 	<!-- right panel -->
-    <div id="acemap_column" style="margin-right: 10px; margin-top: 50px; float:left;border:solid 1px red;width:850px;height:600px;background:#fff;">
+    <div id="acemap_column" style="margin-right: 10px; margin-top: 50px; float:left;border:solid 1px red;width:850px;background:#fff;">
 	<!--
 	
 			step 1
