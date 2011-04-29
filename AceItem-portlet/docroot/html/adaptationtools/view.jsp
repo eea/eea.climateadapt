@@ -28,19 +28,22 @@ This is the <b>Ace Adaptation Tools portlet</b> portlet.
 <script defer="defer" type="text/javascript">
     var proxyUrl = '<%= request.getContextPath() %>/proxy?url=';
 
+    OpenLayers.ProxyHost = '<%= request.getContextPath() %>/proxy?url=';
+
+    var $j = jQuery.noConflict();
 
 	function displayStep(nr) {
 
-        $("#image_steps").attr("src", "<%=renderRequest.getContextPath()%>/images/AST_small" + nr + ".png");
+        $j("#image_steps").attr("src", "<%=renderRequest.getContextPath()%>/images/AST_small" + nr + ".png");
 
-		$('.step-left').hide();
-		$('#step-left-'+nr).fadeIn();
-		$('.step-right').fadeOut();
-		$('#step-right-'+nr).fadeIn();
+		$j('.step-left').hide();
+		$j('#step-left-'+nr).fadeIn();
+		$j('.step-right').fadeOut();
+		$j('#step-right-'+nr).fadeIn();
 	}
 </script>
 
-<div>
+<div id="adaptationtool_container">
 	<!-- left panel -->
 	<div style="border:solid 1px green;margin-right: 10px; margin-top: 50px; float:left;width:385px;height:600px;background-color:#d2df92;">
 
@@ -119,7 +122,7 @@ This is the <b>Ace Adaptation Tools portlet</b> portlet.
 		-->
 		<div id="step-left-2" class="step-left">
 			<div id="what-should-i-do" style="margin:5px;">
-				<div id="what-should-i-do-heading" style="font-size:24px;" onclick="$j('#analyze-maps-options').fadeOut();$j('#what-should-i-do-options').fadeIn();$j('#analyze-maps-heading').addClass('clickable');$j('#what-should-i-do-heading').removeClass('clickable');$('#general-content').fadeIn();$('#indicators-map').fadeOut();">
+				<div id="what-should-i-do-heading" style="font-size:24px;" onclick="$j('#analyze-maps-options').fadeOut();$j('#what-should-i-do-options').fadeIn();$j('#analyze-maps-heading').addClass('clickable');$j('#what-should-i-do-heading').removeClass('clickable');$j('#general-content').fadeIn();$j('#indicators-map').fadeOut();">
 					What should I do?
 				</div>
 				<div id="what-should-i-do-options" style="">
@@ -160,7 +163,7 @@ This is the <b>Ace Adaptation Tools portlet</b> portlet.
 				</div>
 			</div>
 			<div id="analyze-maps" style="margin:5px;">
-				<div id="analyze-maps-heading" class="clickable" style="font-size:24px;" onclick="$j('#what-should-i-do-options').fadeOut();$j('#analyze-maps-options').fadeIn();$j('#what-should-i-do-heading').addClass('clickable');$j('#analyze-maps-heading').removeClass('clickable');$('.what-should-i-do-content').fadeOut();$('#indicators-map').fadeIn(); showVulnerabilitiesAndRisks(); initMapViewerIndicators();">
+				<div id="analyze-maps-heading" class="clickable" style="font-size:24px;" onclick="$j('#what-should-i-do-options').fadeOut();$j('#analyze-maps-options').fadeIn();$j('#what-should-i-do-heading').addClass('clickable');$j('#analyze-maps-heading').removeClass('clickable');$j('.what-should-i-do-content').fadeOut();$j('#indicators-map').fadeIn(); showVulnerabilitiesAndRisks(); initMapViewerIndicators();">
 					Compare my area to Europe
 				</div>
 				<div id="analyze-maps-options" style="display:none;">
@@ -305,6 +308,10 @@ This is the <b>Ace Adaptation Tools portlet</b> portlet.
 		var $j = jQuery.noConflict();
 		$j(document).ready(function(){	
 		
+			// force risk and sector selectors to defaults
+			$j('#risk-select option[value="none"]').attr('selected', 'selected');
+			$j('#sector-select option[value="none"]').attr('selected', 'selected');
+		
 			//
 			// create information popups
 			//
@@ -348,17 +355,27 @@ This is the <b>Ace Adaptation Tools portlet</b> portlet.
 				function(json) {
 					indicators = json.indicators.indicator;
 				})
-				.success(function() {})
+				.success(function() {
+						$('#risk-select').removeAttr("disabled");
+						$('#sector-select').removeAttr("disabled");
+					})
 				.error(function() {})
 				.complete(function() {});	
 
 			// handle change to sector selector
 			$('#sector-select').change(function() {
-				displayIndicators(filterIndicators('sector', $(this).attr('value')));
+				displayIndicators(filterIndicators($('#risk-select').attr('value'), $(this).attr('value')));
+				showVulnerabilitiesAndRisks();
 			});
+			// handle change to risk selector
+			$('#risk-select').change(function() {
+				displayIndicators(filterIndicators($(this).attr('value'), $('#sector-select').attr('value')));
+				showVulnerabilitiesAndRisks();
+			});			
 				
 		});
 		
+		// utility to select random children -- TODO move to utilities file
 		$j.jQueryRandom = 0;
 		$j.extend($j.expr[":"], {
 			random: function(a, i, m, r) {
@@ -369,70 +386,129 @@ This is the <b>Ace Adaptation Tools portlet</b> portlet.
 					}
 			});
 						
+						
+		// displays indicators, based on their indicator-type.				
 		function displayIndicators(indicators) {
 			$j('.indicator-category-list').fadeOut();
 			$j('.indicator-category-list').empty();
 			$j.each(indicators, function() {
 				var indicator;
-				if(this.url != null && this.url.length > 0) {
-					var u = this.url;
-					var ln = this.layername;
+				if(this.riskandsector.url != null && this.riskandsector.url.length > 0) {
+					var u = this.riskandsector.url;
+					var ln = this.riskandsector.layername;
 					var t = this.title;
-					var randomIndicatorType = $j('.indicator-category-list:random');
+					var y = this.riskandsector.indicatortype;
+					
+					// var randomIndicatorType = $j('.indicator-category-list:random');
+					
+					var indicatortype ;
+					
+					if(y === 'VULNERABILITY') {
+						indicatortype = $j('#indicator-vulnerability .indicator-category-list');
+					}
+					else if(y === 'CLIMATECHANGES') {
+						indicatortype = $j('#indicator-climate-changes .indicator-category-list');					
+					}
+					else if(y === 'EXPOSURE') {
+						indicatortype = $j('#indicator-exposure .indicator-category-list');					
+					}					
+					else if(y === 'SENSITIVITY') {
+						indicatortype = $j('#indicator-sensitivity .indicator-category-list');					
+					}
+					else if(y === 'RESOURCEEFFICIENCY') {
+						indicatortype = $j('#indicator-human-causes .indicator-category-list');					
+					}
+					
 					indicator = $j(document.createElement("div"))
 						.addClass("indicator-category-list-item")
 						.addClass("clickable")
 						.attr({ style: 'float:left;' })
 						.append(t)
-						.appendTo(randomIndicatorType)
+						.appendTo(indicatortype)
 						.click(function() {
 							app.addLayer(u, ln, t);
+							// if this is a vulnerability type
+							if(y === 'VULNERABILITY') {
+								// enable underlying cause indicators
+								showUnderlyingCauses();								
+							}
+							// if this is an underlying cause type
+							else if(y === 'EXPOSURE') {
+								// enable climate changes
+								showUnderlyingNaturalCauses();
+							}
+							else if(y === 'SENSITIVITY') {
+								// enable resource efficiency
+								showUnderlyingHumanCauses();
+							}
 						});
-						$j(document.createElement("img"))
-							.attr({ src: '<%=renderRequest.getContextPath()%>/images/map_icon.gif', title: 'show map' })
-							.attr({ style: 'float:left;margin-left:5px;' })
-							.appendTo(randomIndicatorType);
+				
+					// no map icon	
+					//$j(document.createElement("img"))
+					//		.attr({ src: '<%=renderRequest.getContextPath()%>/images/map_icon.gif', title: 'show map' })
+					//		.attr({ style: 'float:left;margin-left:5px;' })
+					//		.appendTo(indicatortype);
+					
 						$j(document.createElement("hr"))
 							.attr({ style: 'clear:both;display:block;visibility:hidden;' })
-							.appendTo(randomIndicatorType);															
+							.appendTo(indicatortype);															
 				}
-				else {
-					indicator = '<div class="indicator-category-list-item">' + this.title + '</div>';				
-					$j('.indicator-category-list:random').append(indicator);			
-				}
+				
+				// no url ? no display
+				//else {
+				//	indicator = '<div class="indicator-category-list-item">' + this.riskandsector.title + '</div>';				
+				//	$j('.indicator-category-list:random').append(indicator);			
+				//}
+				
 			}); 
 			$j('.indicator-category-list').fadeIn();
 		}	
 		
-		function filterIndicators(filterproperty, filtervalue) {
-			var indicatorsDisplayed = new Array();
-			if(filtervalue === 'all') {
+		// filters indicators. They are filtered by a combination of values for RISK and SECTOR.
+		function filterIndicators(riskvalue, sectorvalue) {
+			// both filters set to 'all'
+			if(riskvalue === 'all' && sectorvalue === 'all') {
+				// use global variable holding all indicators
 				return indicators;
 			}
-			if(filtervalue === 'none') {
+			var indicatorsDisplayed = new Array();
+			// either one or both filters set to 'none'
+			if(riskvalue === 'none' || sectorvalue === 'none') {
+				// use empty array of indicators
 				return indicatorsDisplayed;
 			}			
+			// loop all indicators
 			$j.each(indicators, function(idx, indicator){
-				$j.each(indicator, function(property, value){
-					if(property === filterproperty) {
-						if($j.isArray(value)) {
-							$j.each(value, function(ix, v){
-								if(v === filtervalue) {
-									indicatorsDisplayed.push(indicator);
+				// loop all riskandsectors
+				$j.each(indicator, function(idx2, riskandsector){
+					if(idx2 === 'riskandsector') {
+						var riskFilterOK = false;
+						var sectorFilterOK = false;
+						// loop all riskandsector children
+						$j.each(riskandsector, function(idx3, child){
+								// the risk defined for this riskandsector
+								if(idx3 === 'risk') {
+									// is equal to the user's filter risk 
+									if(child === riskvalue || riskvalue === 'all') {
+										riskFilterOK = true;
 								}
-							});
 						}
-						else {
-							if(value === filtervalue) {
-								indicatorsDisplayed.push(indicator);
+								// the sector defined for this riskandsector
+								if(idx3 === 'sector') {
+									// is equal to the user's filter sector 
+									if(child === sectorvalue || sectorvalue === 'all') {
+										sectorFilterOK = true;
 							}
 						}
+							});
+						if(riskFilterOK && sectorFilterOK) {
+							indicatorsDisplayed.push(indicator);
+						}						
 					}
 				});
 			});
 			return indicatorsDisplayed;
 		}
-
 
         function showVulnerabilitiesAndRisks() {
             $j("#header-climate-change").hide();
@@ -444,8 +520,8 @@ This is the <b>Ace Adaptation Tools portlet</b> portlet.
             $j("#header-underlying-causes").hide();
             $j("#text-underlying-causes").hide();
 
-            $j("#header-vulnerability").show();
-            $j("#text-vulnerability").show();
+            $j("#header-vulnerability").fadeIn();
+            $j("#text-vulnerability").fadeIn();
 
             $j("#underlying-causes-header").text("Underlying causes");
 
@@ -453,8 +529,8 @@ This is the <b>Ace Adaptation Tools portlet</b> portlet.
             $j("#indicator-exposure").addClass("disabled");
             $j("#indicator-sensitivity").addClass("disabled");
 
-            $j("#indicator-sensitivity").show();
-            $j("#indicator-exposure").show();
+            $j("#indicator-sensitivity").fadeIn();
+            $j("#indicator-exposure").fadeIn();
             $j("#indicator-climate-changes").hide();
             $j("#indicator-human-causes").hide();
         }
@@ -469,8 +545,8 @@ This is the <b>Ace Adaptation Tools portlet</b> portlet.
             $j("#header-socio-ecological").hide();
             $j("#text-socio-ecological").hide();
 
-            $j("#header-underlying-causes").show();
-            $j("#text-underlying-causes").show();
+            $j("#header-underlying-causes").fadeIn();
+            $j("#text-underlying-causes").fadeIn();
 
             $j("#underlying-causes-header").text("Underlying causes");
 
@@ -478,8 +554,8 @@ This is the <b>Ace Adaptation Tools portlet</b> portlet.
             $j("#indicator-exposure").removeClass("disabled");
             $j("#indicator-sensitivity").removeClass("disabled");
 
-            $j("#indicator-sensitivity").show();
-            $j("#indicator-exposure").show();
+            $j("#indicator-sensitivity").fadeIn();
+            $j("#indicator-exposure").fadeIn();
             $j("#indicator-climate-changes").hide();
 
 
@@ -495,19 +571,19 @@ This is the <b>Ace Adaptation Tools portlet</b> portlet.
             $j("#header-vulnerability").hide();
             $j("#text-vulnerability").hide();
 
-            $j("#header-climate-change").show();
-            $j("#text-climate-change").show();
+            $j("#header-climate-change").fadeIn();
+            $j("#text-climate-change").fadeIn();
 
             $j("#underlying-causes-header").text("Underlying natural causes");
 
             $j("#indicator-changes").hide();
             $j("#indicator-human-causes").hide();
-            $j("#indicator-climate-changes").show();
+            $j("#indicator-climate-changes").fadeIn();
 
             $j("#underlying-causes-header").removeClass("disabled");
             $j("#indicator-exposure").removeClass("disabled");
             $j("#indicator-sensitivity").hide();
-            $j("#indicator-exposure").show();
+            $j("#indicator-exposure").fadeIn();
         }
 
          function showUnderlyingHumanCauses() {
@@ -520,20 +596,20 @@ This is the <b>Ace Adaptation Tools portlet</b> portlet.
             $j("#header-climate-change").hide();
             $j("#text-climate-change").hide();
 
-            $j("#header-socio-ecological").show();
-            $j("#text-socio-ecological").show();
+            $j("#header-socio-ecological").fadeIn();
+            $j("#text-socio-ecological").fadeIn();
 
             $j("#underlying-causes-header").text("Underlying human causes");
 
             $j("#indicator-changes").hide();
             $j("#indicator-climate-changes").hide();
-            $j("#indicator-human-causes").show();
+            $j("#indicator-human-causes").fadeIn();
 
             $j("#underlying-causes-header").removeClass("disabled");
             $j("#indicator-sensitivity").removeClass("disabled");
             $j("#indicator-exposure").hide();
             $j("#indicator-climate-changes").hide();
-            $j("#indicator-sensitivity").show();
+            $j("#indicator-sensitivity").fadeIn();
         }
             </script>
 		
@@ -552,7 +628,7 @@ This is the <b>Ace Adaptation Tools portlet</b> portlet.
         </h2>
 
         <h2 id="header-climate-change" class="heading" style="display: none">
-             3. What are the underlying causes?
+             3. How does the climate change?
         </h2>
 
         <h2 id="header-socio-ecological" class="heading" style="display: none">
@@ -572,12 +648,12 @@ This is the <b>Ace Adaptation Tools portlet</b> portlet.
 		<div id="indicators-map" style="display: none">
             <div id="text-vulnerability" class="description" style="display: none">
                 <p>Vulnerability and risks represent bla bla bla  lorum ipsum hardanger voda en joda krijgt het heen en weer...</p>
-                <p>Choose a risk and (optionally) a sector to find out what corresponding vulnerabilities and risks are. </p>
+                <p>Choose a risk and (optionally) a sector to find out what corresponding vulnerabilities and risks are.</p>
             </div>
 
             <div id="text-underlying-causes" class="description" style="display: none">
                 <p>Underlying causes can be both caused by the global system (exposure) and the human system (sensitivity) bla bla bla
-                    lorum ipsum hardanger voda en joda krijgt het heen en weer... </p>
+                    lorum ipsum hardanger voda en joda krijgt het heen en weer...</p>
             </div>
 
             <div id="text-climate-change" class="description" style="display: none">
@@ -591,7 +667,7 @@ This is the <b>Ace Adaptation Tools portlet</b> portlet.
 			<div id="adaptationtools-selectors-top">
 				<div id="risks-selector" class="adaptationtools-selector">
 					<!-- TODO load dynamically from enumeration nl.wur.alterra.cgi.ace.model.impl.AceItemClimateImpact -- but aceitem model classes must be made available as a jar for that -->
-					<select  style="float:left;">
+					<select id="risk-select" style="float:left;" disabled="disabled">
 						<option value="none" selected="selected">Choose a risk:</option>
 						<option value="all">All risks</option>
 						<option value="EXTREMETEMP">Extreme Temperatures</option>
@@ -611,26 +687,29 @@ This is the <b>Ace Adaptation Tools portlet</b> portlet.
 						Filter by sector
 					</span>
 					<!-- TODO load dynamically from enumeration nl.wur.alterra.cgi.ace.model.impl.AceItemSector -- but aceitem model classes must be made available as a jar for that -->
-					<select id="sector-select" style="float:left;">
+					<select id="sector-select" style="float:left;" disabled="disabled">
 						<option value="none" selected="selected">Choose a sector:</option>
 						<option value="all">All sectors</option>
 						<option value="AGRICULTURE">Agriculture and Forest</option>
 						<option value="BIODIVERSITY" disabled="disabled">Biodiversity</option>
-						<option value="COASTAL" disabled="disabled">Coastal areas</option>
+						<option value="COASTAL" disabled="disabled">Coastal Areas</option>
 						<option value="DISASTERRISKREDUCTION" disabled="disabled">Disaster Risk Reduction</option>
 						<option value="FINANCIAL" disabled="disabled">Financial</option>
 						<option value="HEALTH" disabled="disabled">Health</option>
 						<option value="INFRASTRUCTURE" disabled="disabled">Infrastructure</option>
 						<option value="MARINE" disabled="disabled">Marine and Fisheries</option>
-						<option value="WATERMANAGEMENT">Water management</option>
+						<option value="WATERMANAGEMENT">Water Management</option>
 					</select>				
 					<div class="top-bubble" style="float:left;margin-left:10px;">
 						<img src="<%=renderRequest.getContextPath()%>/images/info.png" class="valigned"/>
 					</div>
 				</div>			
 			</div>
-			
+
+            <div id="map_legend" style="float: right"><a href="#" onclick="app.showLegendWindow(); return false;">Show Legend</a></div>
+
 			<hr style="clear:both;display:block;visibility:hidden;"/>
+
 
 			<div id="map_container">
 				<div id="map_info">This is a map info panel</div>
@@ -640,8 +719,8 @@ This is the <b>Ace Adaptation Tools portlet</b> portlet.
 					</form>
 				</div>
 			</div>
-			<div id="map_legend"></div>
-				
+
+
 			<div id="adaptationtools-indicators">
 				<h2>
 					Choose an indicator to view it's map
@@ -652,7 +731,7 @@ This is the <b>Ace Adaptation Tools portlet</b> portlet.
 					<div class="right-bubble" style="float:left;margin-right:10px;">
 						<img src="<%=renderRequest.getContextPath()%>/images/info.png" class="valigned"/>
 					</div>
-					<h3 class="indicator-category-title">
+					<h3 class="indicator-category-title" onclick="showVulnerabilitiesAndRisks();" style="cursor:pointer;">
 						Vulnerability & risks
 					</h3>					
 					<div class="indicator-category-list"></div>
@@ -682,7 +761,7 @@ This is the <b>Ace Adaptation Tools portlet</b> portlet.
 					<div class="indicator-category-list"></div>
 				</div>
 				
-				<div id="indicator-climate-changes" class="xindicator-category" style="display:none;">
+				<div id="indicator-climate-changes" class="indicator-category" style="display:none;">
 					<div class="right-bubble" style="float:left;margin-right:10px;">
 						<img src="<%=renderRequest.getContextPath()%>/images/info.png" class="valigned"/>
 					</div>
@@ -692,7 +771,7 @@ This is the <b>Ace Adaptation Tools portlet</b> portlet.
 					<div class="indicator-category-list"></div>
 				</div>
 					
-				<div id="indicator-human-causes" class="xindicator-category"  style="display:none;">
+				<div id="indicator-human-causes" class="indicator-category"  style="display:none;">
 					<div class="right-bubble" style="float:left;margin-right:10px;">
 						<img src="<%=renderRequest.getContextPath()%>/images/info.png" class="valigned"/>
 					</div>
@@ -764,6 +843,8 @@ This is the <b>Ace Adaptation Tools portlet</b> portlet.
 
 	-->
     <script defer="defer" type="text/javascript">
+		var $j = jQuery.noConflict();
+
         function showGenericMeasures() {
             $j("#locate-region").hide()
             $j("#generic-measures").show();
@@ -811,13 +892,13 @@ This is the <b>Ace Adaptation Tools portlet</b> portlet.
                          <option value="all">All sectors</option>
                          <option value="AGRICULTURE">Agriculture and Forest</option>
                          <option value="BIODIVERSITY" disabled="disabled">Biodiversity</option>
-                         <option value="COASTAL" disabled="disabled">Coastal areas</option>
+                         <option value="COASTAL" disabled="disabled">Coastal Areas</option>
                          <option value="DISASTERRISKREDUCTION" disabled="disabled">Disaster Risk Reduction</option>
                          <option value="FINANCIAL" disabled="disabled">Financial</option>
                          <option value="HEALTH" disabled="disabled">Health</option>
                          <option value="INFRASTRUCTURE" disabled="disabled">Infrastructure</option>
                          <option value="MARINE" disabled="disabled">Marine and Fisheries</option>
-                         <option value="WATERMANAGEMENT">Water management</option>
+                         <option value="WATERMANAGEMENT">Water Management</option>
                      </select>
                      <div class="top-bubble" style="float:left;margin-left:10px;">
                          <img src="<%=renderRequest.getContextPath()%>/images/info.png" class="valigned"/>
@@ -830,11 +911,15 @@ This is the <b>Ace Adaptation Tools portlet</b> portlet.
         <div id="locate-region">
             <div style="margin-bottom: 10px">
                 <form>
-                    Region of interest: <input type="text" id="locate_region" name="locate_region" style="width:200px" />&nbsp;<button type="submit" onclick="gazeeteer.search($('#locate_region').val()); return false;" >Search for similar regions</button>
+                    Region of interest: <input type="text" id="locate_region_input" name="locate_region_input" style="width:200px" />&nbsp;<button type="submit" onclick="gazeeteer.search($j('#locate_region_input').val()); return false;" >Search for similar regions</button>
                 </form>
             </div>
             <div id="map-container-step4">
             </div>
+
+            <div id="locate_region_results" style="float:right; width:190px; height: 300px;"></div>
+
+            <hr style="clear:both;display:block;visibility:hidden;"/>
 
             <div id="specify-region-similarity-criteria" style="margin-top:10px;">
                 Specify region similarity criteria &raquo;

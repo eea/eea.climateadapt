@@ -1,3 +1,8 @@
+#adaptationtool_container {
+    width: 1280px;
+    overflow-x: scroll;
+}
+
 #tree ul {
 	list-style:none;
 	list-style-type:none;
@@ -86,7 +91,11 @@ div.map-overlay {
 	position: relative;
 	float:right;
 	margin-right:20px;
-	margin-top:20px;
+	/*margin-top:20px; */
+}
+
+#map-container-step4 {
+	float:left;
 }
 
 #map_legend {
