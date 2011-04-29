@@ -33,7 +33,12 @@ HttpServletRequest httpRequest = PortalUtil.getOriginalServletRequest(request);
 
 	function displayStep(nr) {
 
-        $j("#image_steps").attr("src", "<%=renderRequest.getContextPath()%>/images/AST_small" + nr + ".png");
+        if(nr !== 1) {
+			$j("#image_steps").attr("src", "<%=renderRequest.getContextPath()%>/images/AST_small" + nr + ".png").fadeIn();
+		}
+        if(nr === 1) {
+			$j("#image_steps").attr("src", "<%=renderRequest.getContextPath()%>/images/AST_small" + nr + ".png").fadeOut();
+		}
 
 		$j('.step-left').hide();
 		$j('#step-left-'+nr).fadeIn();
@@ -81,7 +86,7 @@ HttpServletRequest httpRequest = PortalUtil.getOriginalServletRequest(request);
 
         <!-- Steps selection image -->
         <div>
-            <img id="image_steps" src="<%=renderRequest.getContextPath()%>/images/AST_small1.png" width="380px" height="236px" usemap="#navigation-map"/>
+            <img id="image_steps" src="<%=renderRequest.getContextPath()%>/images/AST_small1.png" width="380px" height="236px" usemap="#navigation-map" style="display:none;"/>
         </div>
 
 		<!--
@@ -341,7 +346,13 @@ HttpServletRequest httpRequest = PortalUtil.getOriginalServletRequest(request);
 			
 	-->
 	<div id="step-right-1" class="step-right">
-		<img src="<%=renderRequest.getContextPath()%>/images/AST_large.png" />
+		<img src="<%=renderRequest.getContextPath()%>/images/AST_large.png" usemap="#large-navigation"/>
+		<map name="large-navigation" id="large-navigation">
+		  <area shape="poly" coords="415,131,480,106,699,129,699,208,432,186,412,163" nohref="nohref" onclick="displayStep(2);" class="clickable"/>
+		  <area shape="poly" coords="698,213,441,195,416,224,432,265,481,282,698,280" nohref="nohref" onclick="displayStep(3);" class="clickable"/>
+		  <area shape="poly" coords="682,301,471,296,427,282,397,295,399,333,428,357,483,359,653,359,681,348" nohref="nohref" onclick="displayStep(4);" class="clickable"/>
+		  <area shape="poly" coords="414,361,376,332,314,332,292,365,292,402,344,425,439,429,669,432,668,383,632,371" nohref="nohref" onclick="displayStep(5);" class="clickable"/>
+		</map>		
 		<hr style="clear:both;display:block;visibility:hidden;" />
 	</div>
 	
