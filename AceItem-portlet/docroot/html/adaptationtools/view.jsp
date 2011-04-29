@@ -713,9 +713,11 @@ This is the <b>Ace Adaptation Tools portlet</b> portlet.
 
 			<div id="map_container">
 				<div id="map_info">This is a map info panel</div>
-				<div class="map-overlay">
-					<form>
-					Locate: <input type="text" name="locate" style="width:150px"/>&nbsp;<button type="submit">Find</button>
+
+                <div id="locate_region_step2_results"></div>
+                <div class="map-overlay">
+                    <form>
+					Locate: <input type="text" id="locate_region_step2_input" name="locate_region_step2_input" style="width:150px"/>&nbsp;<button type="submit" onclick="gazeeteerStep2.search($j('#locate_region_step2_input').val()); return false;" >Find</button>
 					</form>
 				</div>
 			</div>

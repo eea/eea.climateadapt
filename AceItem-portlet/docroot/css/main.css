@@ -88,6 +88,8 @@ div.map-overlay {
 	z-index:1000;
 	background-color: #cccccc;
 	padding: 2px;
+    width: 250px;
+    height: 30px;
 }
 
 #map_container {
@@ -141,4 +143,16 @@ div.description {
     padding-left: 20px;
     padding-right: 20px;
     padding-bottom: 15px;
+}
+
+#locate_region_step2_results {
+    position: absolute;
+    width: 252px;
+    height: 200px;
+    bottom:32px;
+	left:0px;
+	z-index:1000;
+	background-color: #dddddd;
+    display: none;
+    border: 1px solid #cccccc;
 }
