@@ -721,6 +721,9 @@ HttpServletRequest httpRequest = PortalUtil.getOriginalServletRequest(request);
 
              <div id="text-socio-ecological" class="description step2description" style="display: none">
                 <p>
+					Changes in climate are mostly not the only causes of vulnerability. Humans increase their vulnerability due to land use changes such as urbanization of flood (coastal)  plains, deforestation, land 
+					degradation due to unsustainable agricultural practices. Resource use efficiency also has significant impact on vulnerability, especially in the case of water scarcity and droughts, as reduced water 
+					use can counteract to some extend decreasing water availability.				
 				</p>
             </div>
 
