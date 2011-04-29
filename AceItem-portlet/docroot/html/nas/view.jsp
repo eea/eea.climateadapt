@@ -177,25 +177,6 @@
 
 <div id="<portlet:namespace/>content"></div>
 
-	<!-- Introduction -->
-	<div id="nas_intro">
-	
-		<h1>
-			National adaptation strategies
-		</h1>
-		<div>
-			EEA member countries are at different stages of preparing, developing and implementing national adaptation strategies. The development depends on the magnitude and nature of the observed impacts, assessments of current and future vulnerability and the capacity to adapt. All countries have also submitted information on their adaptation plans in their 5th National Communication to the United Nations Framework Convention on Climate Change due on 1 January 2010. In addition, some actions and measures are increasingly being taken at regional and local levels.		
-		</div>
-		<div id="intro-link">
-			<span class="link-external">
-				<a href="http://unfccc.int/national_reports/annex_i_natcom/submitted_natcom/items/4903.php" class="external-link">
-					5<sup>th</sup> National Communication to the United Nations Framework Convention on Climate Change
-				</a>			
-			</span>
-		</div>
-	
-	</div>
-
     <!-- Map colum -->
     <div id="nas_left_column" class="nas_column">
 
