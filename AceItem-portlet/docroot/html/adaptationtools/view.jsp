@@ -1035,7 +1035,7 @@ HttpServletRequest httpRequest = PortalUtil.getOriginalServletRequest(request);
 		</div>
 
 
-        <div id="locate-region">
+        <div id="locate-region" style="margin-left: 20px;">
             <div style="float:left; margin-bottom: 10px">
                 <form>
                     Region of interest:
