@@ -4,7 +4,7 @@
 	<portlet>
 		<portlet-name>AdaptationTools</portlet-name>
 		<display-name>Adaptation Tools</display-name>
-		<portlet-class>com.sample.jsp.portlet.JSPPortlet</portlet-class>
+		<portlet-class>nl.wur.alterra.cgi.ace.portlet.AdaptationToolJSPPortlet</portlet-class>
 		<init-param>
 			<name>view-jsp</name>
 			<value>/html/adaptationtools/view.jsp</value>

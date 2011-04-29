@@ -20,7 +20,7 @@
  * SOFTWARE.
  */
 
-package com.sample.jsp.portlet;
+package nl.wur.alterra.cgi.ace.portlet;
 
 import java.io.IOException;
 
@@ -36,12 +36,11 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 /**
- * <a href="JSPPortlet.java.html"><b><i>View Source</i></b></a>
+ * <a href="AdaptationToolJSPPortlet.java.html"><b><i>View Source</i></b></a>
  *
- * @author Brian Wing Shun Chan
  *
  */
-public class JSPPortlet extends GenericPortlet {
+public class AdaptationToolJSPPortlet extends GenericPortlet {
 
 	public void init() throws PortletException {
 		editJSP = getInitParameter("edit-jsp");
@@ -114,6 +113,6 @@ public class JSPPortlet extends GenericPortlet {
 	protected String helpJSP;
 	protected String viewJSP;
 
-	private static Log _log = LogFactory.getLog(JSPPortlet.class);
+	private static Log _log = LogFactory.getLog(nl.wur.alterra.cgi.ace.portlet.AdaptationToolJSPPortlet.class);
 
 }
