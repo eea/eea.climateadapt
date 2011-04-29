@@ -30,6 +30,8 @@ HttpServletRequest httpRequest = PortalUtil.getOriginalServletRequest(request);
     OpenLayers.ProxyHost = '<%= request.getContextPath() %>/proxy?url=';
 
     var $j = jQuery.noConflict();
+	
+	
 
 	function displayStep(nr) {
 
@@ -82,7 +84,7 @@ HttpServletRequest httpRequest = PortalUtil.getOriginalServletRequest(request);
 
 <div id="adaptationtool_container">
 	<!-- left panel -->
-	<div style="border:solid 1px green;margin-right: 10px; margin-top: 50px; float:left;width:385px;background-color:#d2df92;">
+	<div class="adaptationtool-column" style="margin-top: 50px; float:left;width:385px;background-color:#d2df92;">
 
         <!-- Steps selection image -->
         <div>
@@ -339,7 +341,7 @@ HttpServletRequest httpRequest = PortalUtil.getOriginalServletRequest(request);
 	</div>
 	
 	<!-- right panel -->
-    <div id="acemap_column" style="margin-right: 10px; margin-top: 50px; float:left;border:solid 1px red;width:850px;background:#fff;">
+    <div  class="adaptationtool-column" id="acemap_column" style="margin-right: 10px; margin-top: 50px; float:left;width:850px;background:#fff;">
 	<!--
 	
 			step 1
@@ -369,7 +371,9 @@ HttpServletRequest httpRequest = PortalUtil.getOriginalServletRequest(request);
 			// force risk and sector selectors to defaults
 			$j('#risk-select option[value="none"]').attr('selected', 'selected');
 			$j('#sector-select option[value="none"]').attr('selected', 'selected');
-		
+
+			$j('.adaptationtool-column').equalHeights();			
+			
 			//
 			// create information popups
 			//
