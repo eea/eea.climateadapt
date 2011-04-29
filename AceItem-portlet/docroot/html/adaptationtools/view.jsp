@@ -356,20 +356,20 @@ This is the <b>Ace Adaptation Tools portlet</b> portlet.
 					indicators = json.indicators.indicator;
 				})
 				.success(function() {
-						$('#risk-select').removeAttr("disabled");
-						$('#sector-select').removeAttr("disabled");
+						$j('#risk-select').removeAttr("disabled");
+						$j('#sector-select').removeAttr("disabled");
 					})
 				.error(function() {})
 				.complete(function() {});	
 
 			// handle change to sector selector
-			$('#sector-select').change(function() {
-				displayIndicators(filterIndicators($('#risk-select').attr('value'), $(this).attr('value')));
+			$j('#sector-select').change(function() {
+				displayIndicators(filterIndicators($j('#risk-select').attr('value'), $j(this).attr('value')));
 				showVulnerabilitiesAndRisks();
 			});
 			// handle change to risk selector
-			$('#risk-select').change(function() {
-				displayIndicators(filterIndicators($(this).attr('value'), $('#sector-select').attr('value')));
+			$j('#risk-select').change(function() {
+				displayIndicators(filterIndicators($j(this).attr('value'), $j('#sector-select').attr('value')));
 				showVulnerabilitiesAndRisks();
 			});			
 				
