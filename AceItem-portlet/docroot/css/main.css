@@ -23,15 +23,13 @@ div.step-right h1 {
 }
 #adaptationtools-selectors-top {
 	position:relative;
+	margin-right: 20px;
 }
 .adaptationtools-selector {
-	position:absolute;
 }
 #risks-selector {
-	left:100px;
 }
 #sector-selector {
-	right:100px;
 }
 .step-left {
 	background-color:#d2df92;
