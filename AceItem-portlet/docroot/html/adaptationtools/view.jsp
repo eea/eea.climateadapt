@@ -720,7 +720,8 @@ HttpServletRequest httpRequest = PortalUtil.getOriginalServletRequest(request);
             </div>
 
              <div id="text-socio-ecological" class="description step2description" style="display: none">
-                <p>Socio-ecological bla bla bla  lorum ipsum hardanger voda en joda krijgt het heen en weer...</p>
+                <p>
+				</p>
             </div>
 
 			<div id="adaptationtools-selectors-top">
