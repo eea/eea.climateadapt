@@ -692,17 +692,31 @@ HttpServletRequest httpRequest = PortalUtil.getOriginalServletRequest(request);
 		
 		<div id="indicators-map" style="display: none">
             <div id="text-vulnerability" class="description step2description" style="display: none">
-                <p>Vulnerability and risks represent bla bla bla  lorum ipsum hardanger voda en joda krijgt het heen en weer...</p>
-                <p>Choose a risk and (optionally) a sector to find out what corresponding vulnerabilities and risks are.</p>
+                <p>
+					Vulnerability is the degree to which a system is susceptible to, and unable to cope with, adverse effects of climate change, including climate variability and extremes. Vulnerability is a 
+					function of the character, magnitude, and rate of climate change and variation to which a system is exposed, its sensitivity, and its adaptive capacity. (IPCC, 2007) There are many vulnerability 
+					indicators, but most of them do not follow strictly the definition above, because adaptive capacity is ha highly controversial issue. Most of vulnerability  indicators are impact indicators, or 
+					indicators, measuring the effect of climate change on the socio-ecological system.
+                </p>
+                <p>				
+					Risk here denotes climate hazards, e.g., floods, droughts, water scarcity, heat waves, etc.				
+				</p>
             </div>
 
             <div id="text-underlying-causes" class="description step2description" style="display: none">
-                <p>Underlying causes can be both caused by the global system (exposure) and the human system (sensitivity) bla bla bla
-                    lorum ipsum hardanger voda en joda krijgt het heen en weer...</p>
+                <p>
+					Climate impacts arise from the interrelations between climate and socio-ecological systems. Climate impact indicators allow to identify vulnerable areas and sectors. As they are aggregated 
+					indicators, they can not give information on what are the causes of the identified vulnerability and whether this vulnerability arises due to changes in physical system (exposure),  in 
+					socio-ecological system (sensitivity) or in both. Therefore separate examination of the constituents of impact indicators is needed in order to understand the underlying causes of vulnerability.				
+				</p>
             </div>
 
             <div id="text-climate-change" class="description step2description" style="display: none">
-                <p>Climate changes bla bla bla  lorum ipsum hardanger voda en joda krijgt het heen en weer...</p>
+                <p>
+					Current climate variables such as temperature, precipitation, river flow are characterized by  variability of their magnitudes (severity or intensity)  duration and timing. This variability is 
+					studied on the basis of the statistics of past events. Current global climate change models indicate that climate change will modify some of these statistics.  Climate projections can help to 
+					identify future trends, which are of great importance for contingency planning.				
+				</p>
             </div>
 
              <div id="text-socio-ecological" class="description step2description" style="display: none">
