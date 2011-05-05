@@ -41,12 +41,12 @@ HttpServletRequest httpRequest = PortalUtil.getOriginalServletRequest(request);
 			$j("#image_steps").attr("src", "<%=renderRequest.getContextPath()%>/images/AST_small" + nr + ".png").fadeIn();
 		}
         if(nr === 1) {
-			$j("#image_steps").attr("src", "<%=renderRequest.getContextPath()%>/images/AST_small" + nr + ".png").fadeOut();
+			$j("#image_steps").attr("src", "<%=renderRequest.getContextPath()%>/images/AST_small" + nr + ".png").hide();
 		}
 
 		$j('.step-left').hide();
 		$j('#step-left-'+nr).fadeIn();
-		$j('.step-right').fadeOut();
+		$j('.step-right').hide();
 		$j('#step-right-'+nr).fadeIn();
 	}
 	
@@ -60,10 +60,10 @@ HttpServletRequest httpRequest = PortalUtil.getOriginalServletRequest(request);
 		var substepHeadingIds = ['#analyze-maps-heading', '#analyze-nas-heading', '#what-should-i-do-heading'];
 	
 		$j.each(substepOptionIds, function(index, value){
-				$j(value).fadeOut();
+				$j(value).hide();
 			});
 		$j.each(substepContentIds, function(index, value){
-				$j(value).fadeOut();
+				$j(value).hide();
 			});	
 			
 		$j('.step2heading').hide();
@@ -86,7 +86,7 @@ HttpServletRequest httpRequest = PortalUtil.getOriginalServletRequest(request);
 
 <div id="adaptationtool_container">
 	<!-- left panel -->
-	<div class="adaptationtool-column" style="margin-top: 50px; float:left;width:385px;background-color:#d2df92;">
+	<div class="adaptationtool-column" style="float:left;width:385px;background-color:#d2df92;">
 
         <!-- Steps selection image -->
         <div>
@@ -149,7 +149,7 @@ HttpServletRequest httpRequest = PortalUtil.getOriginalServletRequest(request);
 				<area shape="poly" coords="151,17,148,56,242,61,243,16" nohref="nohref" onclick="displayStep(1);" class="clickable"/>
 				<area shape="poly" coords="181,60,332,58,346,99,191,96,191,96,192,102" nohref="nohref" onclick="displayStep(2);" class="clickable" />
 				<area shape="poly" coords="190,107,333,109,341,145,192,144" nohref="nohref" onclick="displayStep(3);" class="clickable" />
-				<area shape="poly" coords="175,152,332,153,336,186,180,186,170,172" nohref="nohref" onclick="displayStep(4);" class="clickable" />
+				<area shape="poly" coords="175,152,332,153,336,186,180,186,170,172" nohref="nohref" onclick="displayStep(4);showGenericMeasures();" class="clickable" />
 				<area shape="poly" coords="123,177,165,177,181,188,233,192,278,199,280,224,130,227,122,205" nohref="nohref" onclick="displayStep(5);" class="clickable" />
 			</map>
 		
@@ -205,7 +205,7 @@ HttpServletRequest httpRequest = PortalUtil.getOriginalServletRequest(request);
 			</div>
 			<div id="analyze-in-nas" style="margin:5px;">
 				<div id="analyze-nas-heading" class="clickable" style="font-size:24px;" onclick="step2substep(this.id);">
-					Assessments	in my area
+					Assessments	in my region
 				</div>
 				<div id="analyze-nas-options" style="display:none;">
 					<ul style="list-style:none;">
@@ -220,7 +220,7 @@ HttpServletRequest httpRequest = PortalUtil.getOriginalServletRequest(request);
 			
 			<div id="analyze-maps" style="margin:5px;">
 				<div id="analyze-maps-heading" class="clickable" style="font-size:24px;" onclick="step2substep(this.id);showVulnerabilitiesAndRisks(); initMapViewerIndicators();">
-					Compare my area to Europe
+					Compare my region to Europe
 				</div>
 				<div id="analyze-maps-options" style="display:none;">
 					<ul style="list-style:none;">
@@ -280,17 +280,17 @@ HttpServletRequest httpRequest = PortalUtil.getOriginalServletRequest(request);
 				</div>
 				<div id="search-option-database-options">
 					<ul style="list-style:none;">
-                        <li class="list-option">
-                            <img src="<%=renderRequest.getContextPath()%>/images/arrow_green.png" class="valigned"/>
-                            1. <a href="#" onclick="showLocateRegion(); return false;">Locate your region and find similar regions</a>
-                        </li>
 						<li class="list-option">
                             <img src="<%=renderRequest.getContextPath()%>/images/arrow_green.png" class="valigned"/>
-							2. <a href="#" onclick="showGenericMeasures(); return false;">What are generic measures?</a>
+							1. <a href="#" onclick="showGenericMeasures(); return false;">What are possible measures?</a>
 						</li>
 						<li class="list-option">
                             <img src="<%=renderRequest.getContextPath()%>/images/arrow_green.png" class="valigned"/>
-							3. <a href="#" onclick="showLocateRegion(); return false;">What are potential good practices for your region based on experiences in similar regions?</a>
+							2. <a href="#" onclick="showGoodPractices(); return false;">What are possible good practices?</a>
+						</li>						
+						<li class="list-option">
+                            <img src="<%=renderRequest.getContextPath()%>/images/arrow_green.png" class="valigned"/>
+							3. <a href="#" onclick="showLocateRegion(); return false;">What good practices are available in regions similar to mine?</a>
 						</li>
 					</ul>
 				</div>
@@ -343,7 +343,7 @@ HttpServletRequest httpRequest = PortalUtil.getOriginalServletRequest(request);
 	</div>
 	
 	<!-- right panel -->
-    <div  class="adaptationtool-column" id="acemap_column" style="margin-right: 10px; margin-top: 50px; float:left;width:850px;background:#fff;">
+    <div  class="adaptationtool-column" id="acemap_column" style="margin-right: 10px; float:left;width:850px;background:#fff;">
 	<!--
 	
 			step 1
@@ -352,9 +352,9 @@ HttpServletRequest httpRequest = PortalUtil.getOriginalServletRequest(request);
 	<div id="step-right-1" class="step-right">
 		<img src="<%=renderRequest.getContextPath()%>/images/AST_large.png" usemap="#large-navigation"/>
 		<map name="large-navigation" id="large-navigation">
-		  <area shape="poly" coords="415,131,480,106,699,129,699,208,432,186,412,163" nohref="nohref" onclick="displayStep(2);" class="clickable"/>
+		  <area shape="poly" coords="415,131,480,106,699,129,699,208,432,186,412,163" nohref="nohref" onclick="displayStep(2);" class="clickable" style="cursor:hand !important;z-index:999;"/>
 		  <area shape="poly" coords="698,213,441,195,416,224,432,265,481,282,698,280" nohref="nohref" onclick="displayStep(3);" class="clickable"/>
-		  <area shape="poly" coords="682,301,471,296,427,282,397,295,399,333,428,357,483,359,653,359,681,348" nohref="nohref" onclick="displayStep(4);" class="clickable"/>
+		  <area shape="poly" coords="682,301,471,296,427,282,397,295,399,333,428,357,483,359,653,359,681,348" nohref="nohref" onclick="displayStep(4);showGenericMeasures();" class="clickable"/>
 		  <area shape="poly" coords="414,361,376,332,314,332,292,365,292,402,344,425,439,429,669,432,668,383,632,371" nohref="nohref" onclick="displayStep(5);" class="clickable"/>
 		</map>		
 		<hr style="clear:both;display:block;visibility:hidden;" />
@@ -369,7 +369,7 @@ HttpServletRequest httpRequest = PortalUtil.getOriginalServletRequest(request);
 		var indicators = new Array();
 		var $j = jQuery.noConflict();
 		$j(document).ready(function(){	
-		
+				
 			// force risk and sector selectors to defaults
 			$j('#risk-select option[value="none"]').attr('selected', 'selected');
 			$j('#sector-select option[value="none"]').attr('selected', 'selected');
@@ -475,13 +475,17 @@ HttpServletRequest httpRequest = PortalUtil.getOriginalServletRequest(request);
 						.appendTo(indicatortype)
 						.click(function() {
 							app.addLayer(u, ln, t);
+							
+							/* do not do this anymore; user must use steps in left panel
 							// if this is a vulnerability type
 							if(y === 'VULNERABILITY') {
 								// enable underlying cause indicators
 								showUnderlyingCauses();								
 							}
+							*/
+							
 							// if this is an underlying cause type
-							else if(y === 'EXPOSURE') {
+							if(y === 'EXPOSURE') {
 								// enable climate changes
 								showUnderlyingNaturalCauses();
 							}
@@ -729,20 +733,20 @@ HttpServletRequest httpRequest = PortalUtil.getOriginalServletRequest(request);
 				</p>
             </div>
 
-			<div id="adaptationtools-selectors-top">
+			<div id="adaptationtools-selectors-top" style="">
 	
-			
-				<div id="sector-selector"  class="adaptationtools-selector"  style="float:right;">
+				<!-- added width because IE8 renders it at 100% width otherwise -->
+				<div id="sector-selector"  class="adaptationtools-selector"  style="float:right;width:229px;">
 					<div class="top-bubble" style="float:right;margin:0px 10px;">
 						<img src="<%=renderRequest.getContextPath()%>/images/info.png" class="valigned"/>
 					</div>	
 					<span style="margin-right:10px;">
 						Sector
 					</span>
-					<!-- TODO load dynamically from enumeration nl.wur.alterra.cgi.ace.model.impl.AceItemSector -- but aceitem model classes must be made available as a jar for that -->
+					<!-- TODO load dynamically from enumeration nl.wur.alterra.cgi.ace.model.impl.AceItemSector -->
 					<select id="sector-select" style="" disabled="disabled">
 						<option value="none" selected="selected">Choose a sector:</option>
-						<option value="all">All sectors</option>
+						<option value="all" disabled="disabled">All sectors</option>
 						<option value="AGRICULTURE">Agriculture and Forest</option>
 						<option value="BIODIVERSITY" disabled="disabled">Biodiversity</option>
 						<option value="COASTAL" disabled="disabled">Coastal Areas</option>
@@ -755,23 +759,26 @@ HttpServletRequest httpRequest = PortalUtil.getOriginalServletRequest(request);
 					</select>				
 				</div>			
 
-				<div id="risks-selector" class="adaptationtools-selector" style="float:right;">
+				<!-- added width because IE8 renders it at 100% width otherwise -->				
+				<div id="risks-selector" class="adaptationtools-selector" style="float:right;width:212px;">
 					<div class="top-bubble" style="float:right;margin:0px 10px;">
 						<img src="<%=renderRequest.getContextPath()%>/images/info.png" class="valigned"/>
 					</div>	
 					<span style="margin-right:10px;">
 						Risk
 					</span>
-					<!-- TODO load dynamically from enumeration nl.wur.alterra.cgi.ace.model.impl.AceItemClimateImpact -- but aceitem model classes must be made available as a jar for that -->
+					<!-- TODO load dynamically from enumeration nl.wur.alterra.cgi.ace.model.impl.AceItemClimateImpact -->
 					<select id="risk-select" style="" disabled="disabled">
 						<option value="none" selected="selected">Choose a risk:</option>
-						<option value="all">All risks</option>
-						<option value="EXTREMETEMP">Extreme Temperatures</option>
+						<option value="all" disabled="disabled">All risks</option>
+						<!-- TODO this one is not present in enum AceItemClimateImpact -->
+						<option value="SEALEVEL" disabled="disabled">Sea Level Rise</option>
+						<option value="EXTREMETEMP" disabled="disabled">Extreme Temperatures</option>
 						<option value="WATERSCARCE">Water Scarcity</option>
-						<option value="FLOODING">Flooding</option>
-						<option value="DROUGHT">Droughts</option>
-						<option value="STORM">Storms</option>
-						<option value="ICEANDSNOW">Ice and Snow</option>
+						<option value="FLOODING" disabled="disabled">Flooding</option>
+						<option value="DROUGHT" disabled="disabled">Droughts</option>
+						<option value="STORM" disabled="disabled">Storms</option>
+						<option value="ICEANDSNOW" disabled="disabled">Ice and Snow</option>
 					</select>
 				</div>	
 			
@@ -796,11 +803,11 @@ HttpServletRequest httpRequest = PortalUtil.getOriginalServletRequest(request);
 
 			<div id="adaptationtools-indicators">
 				<h2>
-					Choose an indicator to view it's map
+					Select an indicator to view map
 				</h2>
 				
 				<div id="indicator-vulnerability" class="indicator-category">
-					<h3 class="indicator-category-title" onclick="showVulnerabilitiesAndRisks();" style="cursor:pointer;">
+					<h3 class="indicator-category-title">
 						Vulnerability & risks
 					</h3>					
 					<div class="indicator-category-list"></div>
@@ -843,10 +850,11 @@ HttpServletRequest httpRequest = PortalUtil.getOriginalServletRequest(request);
 			<hr style="clear:both;display:block;visibility:hidden;"/>
 
 			<div style="padding:10px;margin:10px;">
-				<div id="read-more-on-the-approach" style="float:left;width:200px;">
-					Read more on the approach &raquo;
+				<div id="read-more-on-the-approach" style="float:left;width:200px;">					
+					<a href="/explain-ast-vul">Read more on the approach &raquo;</a>
 				</div>
-				<div id="model-selector" style="float:right;">
+				<!-- added width because IE8 renders it at 100% width otherwise -->								
+				<div id="model-selector" style="float:right;width:169px;">
 					<div class="top-bubble" style="float:right;margin:0px 10px;">
 						<img src="<%=renderRequest.getContextPath()%>/images/info.png" class="valigned"/>
 					</div>
@@ -855,11 +863,12 @@ HttpServletRequest httpRequest = PortalUtil.getOriginalServletRequest(request);
 					</span>
 					<select disabled="disabled">
 						<option>
-							Choose a model:
+							WATERGAP
 						</option>	
 					</select>		
 				</div>
-				<div id="time-selector" style="float:right;">
+				<!-- added width because IE8 renders it at 100% width otherwise -->								
+				<div id="time-selector" style="float:right;width:129px;">
 					<div class="top-bubble" style="float:right;margin:0px 10px;">
 						<img src="<%=renderRequest.getContextPath()%>/images/info.png" class="valigned"/>
 					</div>		
@@ -868,11 +877,12 @@ HttpServletRequest httpRequest = PortalUtil.getOriginalServletRequest(request);
 					</span>
 					<select disabled="disabled">
 						<option>
-							Choose a time:
+							2050
 						</option>	
 					</select>
 					</div>		
-				<div id="scenario-selector" style="float:right;">
+				<!-- added width because IE8 renders it at 100% width otherwise -->									
+				<div id="scenario-selector" style="float:right;width:192px;">
 					<div class="top-bubble" style="float:right;margin:0px 10px;">
 						<img src="<%=renderRequest.getContextPath()%>/images/info.png" class="valigned"/>
 				</div>
@@ -881,7 +891,7 @@ HttpServletRequest httpRequest = PortalUtil.getOriginalServletRequest(request);
 					</span>
 					<select disabled="disabled">
 						<option>
-							Choose a scenario:
+							Economy first
 						</option>	
 					</select>
 				</div>
@@ -917,14 +927,22 @@ HttpServletRequest httpRequest = PortalUtil.getOriginalServletRequest(request);
 
         function showGenericMeasures() {
             $j("#locate-region").hide()
-            $j("#generic-measures").show();
+            $j("#good-practices").hide()
+            $j("#generic-measures").fadeIn();
         }
 
         function showLocateRegion() {
-            $j("#locate-region").show()
+            $j("#good-practices").hide()
             $j("#generic-measures").hide();
+            $j("#locate-region").fadeIn()
         }
-
+		
+        function showGoodPractices() {
+            $j("#generic-measures").hide();
+            $j("#locate-region").hide()
+            $j("#good-practices").fadeIn()
+        }
+		
         function filterMeasures() {
             var risk = $j("#risk-selector-step4").val();
             var sector = $j("#sector-select-step4").val();
@@ -940,28 +958,61 @@ HttpServletRequest httpRequest = PortalUtil.getOriginalServletRequest(request);
             var filter = '';
             if (risk === "DROUGHT") {
                 filter = "dr_";
-            } else if (risk === 'all') {
+            } 
+			else if (risk === 'all') {
                  filter = "dr_";
             }
 
             if (sector === 'AGRICULTURE') {
                 filter = filter + "ag";
-
                 $j("div." + filter).show();
-
-            } else if (sector === 'WATERMANAGEMENT') {
+            } 
+			else if (sector === 'WATERMANAGEMENT') {
                 filter = filter + "wm";
-
                 $j("div." + filter).show();
-
-            } else if (sector === 'all') {
+            }
+			else if (sector === 'all') {
                 $j("div.dr_ag").show();
                 $j("div.dr_wm").show();
-
             }
-
             $j("#measures-step4").show();
         }
+		
+        function filterGoodPractices() {
+            var risk = $j("#risk-selector-step4-gp").val();
+            var sector = $j("#sector-select-step4-gp").val();
+
+            $j("div.dr_ag").hide();
+            $j("div.dr_wm").hide();
+
+            if ((risk === 'none' || (sector === 'none'))) {
+                $j("#good-practices-step4").hide();
+                return;
+            }
+
+            var filter = '';
+            if (risk === "DROUGHT") {
+                filter = "dr_";
+            } 
+			else if (risk === 'all') {
+                 filter = "dr_";
+            }
+
+            if (sector === 'AGRICULTURE') {
+                filter = filter + "ag";
+                $j("div." + filter).show();
+            } 
+			else if (sector === 'WATERMANAGEMENT') {
+                filter = filter + "wm";
+                $j("div." + filter).show();
+            } 
+			else if (sector === 'all') {
+                $j("div.dr_ag").show();
+                $j("div.dr_wm").show();
+            }
+
+            $j("#good-practices-step4").show();
+        }		
 
     </script>
 
@@ -971,72 +1022,147 @@ HttpServletRequest httpRequest = PortalUtil.getOriginalServletRequest(request);
 			How can identify my adaptation options?
 		</h1>
 
-        <div id="generic-measures" style="display: none; margin-left: 20px;">
-			 <form>
-                 <div id="selectors-step4" style="margin-left: 20px; float:left;">
+		<div id="generic-measures" style="display: none; margin-left: 20px;">
+			<h2>
+				What are possible measures?
+			</h2>	
+			<form>
+				<div id="selectors-step4" style="margin-left: 20px; float:left;">
+					<!-- added width because IE8 renders a 100% width otherwise -->				
+					<div id="risks-selector-step4" class="adaptationtools-selector" style="float:left;width:208px;">
+						<span style="margin-right:10px;float:left;" >
+							Risk
+						</span>
+						<!-- TODO load dynamically from enumeration nl.wur.alterra.cgi.ace.model.impl.AceItemClimateImpact -->
+						<select id="risk-selector-step4" style="float:left;" onchange="filterMeasures();">
+							<option value="none" selected="selected">Choose a risk:</option>
+							<option value="all" disabled="disabled">All risks</option>
+							<!-- TODO this one is not present in enum AceItemClimateImpact -->
+							<option value="SEALEVEL" disabled="disabled">Sea Level Rise</option>
+							<option value="EXTREMETEMP" disabled="disabled">Extreme Temperatures</option>
+							<option value="WATERSCARCE">Water Scarcity</option>
+							<option value="FLOODING" disabled="disabled">Flooding</option>
+							<option value="DROUGHT" disabled="disabled">Droughts</option>
+							<option value="STORM" disabled="disabled">Storms</option>
+							<option value="ICEANDSNOW" disabled="disabled">Ice and Snow</option>
+						</select>
+						<div class="top-bubble" style="float:right;margin:0px 10px;">
+							<img src="<%=renderRequest.getContextPath()%>/images/info.png" class="valigned"/>
+						</div>
+					</div>
+					<!-- added width because IE8 renders a 100% width otherwise -->
+					<div id="sector-selector-step4" class="adaptationtools-selector" style="float:left;width:226px;">
+						<span style="margin-right:10px;float:left;">
+							Sector
+						</span>
+						<!-- TODO load dynamically from enumeration nl.wur.alterra.cgi.ace.model.impl.AceItemSector -->
+						<select id="sector-select-step4" style="float:left;" onchange="filterMeasures();" >
+							<option value="none" selected="selected">Choose a sector:</option>
+							<option value="all" disabled="disabled">All sectors</option>
+							<option value="AGRICULTURE">Agriculture and Forest</option>
+							<option value="BIODIVERSITY" disabled="disabled">Biodiversity</option>
+							<option value="COASTAL" disabled="disabled">Coastal Areas</option>
+							<option value="DISASTERRISKREDUCTION" disabled="disabled">Disaster Risk Reduction</option>
+							<option value="FINANCIAL" disabled="disabled">Financial</option>
+							<option value="HEALTH" disabled="disabled">Health</option>
+							<option value="INFRASTRUCTURE" disabled="disabled">Infrastructure</option>
+							<option value="MARINE" disabled="disabled">Marine and Fisheries</option>
+							<option value="WATERMANAGEMENT">Water Management</option>
+						</select>
+						<div class="top-bubble" style="float:right;margin:0px 10px;">
+							<img src="<%=renderRequest.getContextPath()%>/images/info.png" class="valigned"/>
+						</div>
+					</div>
+				</div>
+		
+				<hr style="clear:both;display:block;visibility:hidden;"/>
 
-                     <div id="risks-selector-step4" class="adaptationtools-selector" style="float:left;">
-                        <span style="margin-right:10px;float:left;" >
-                            Risk
-                        </span>
-
-                         <!-- TODO load dynamically from enumeration nl.wur.alterra.cgi.ace.model.impl.AceItemClimateImpact -- but aceitem model classes must be made available as a jar for that -->
-                         <select id="risk-selector-step4" style="float:left;" onchange="filterMeasures();">
-                             <option value="none" selected="selected">Choose a risk:</option>
-                             <option value="all">All risks</option>
-                             <option value="EXTREMETEMP" disabled="disabled">Extreme Temperatures</option>
-                             <option value="WATERSCARCE" disabled="disabled">Water Scarcity</option>
-                             <option value="FLOODING" disabled="disabled">Flooding</option>
-                             <option value="DROUGHT" >Droughts</option>
-                             <option value="STORM"  disabled="disabled">Storms</option>
-                             <option value="ICEANDSNOW"  disabled="disabled">Ice and Snow</option>
-                         </select>
-                         <div class="top-bubble" style="float:right;margin:0px 10px;">
-                            <img src="<%=renderRequest.getContextPath()%>/images/info.png" class="valigned"/>
-                        </div>
-                     </div>
-
-                     <div id="sector-selector-step4" class="adaptationtools-selector" style="float:left;">
-                        <span style="margin-right:10px;float:left;">
-                            Sector
-                        </span>
-                         <!-- TODO load dynamically from enumeration nl.wur.alterra.cgi.ace.model.impl.AceItemSector -- but aceitem model classes must be made available as a jar for that -->
-                         <select id="sector-select-step4" style="float:left;" onchange="filterMeasures();" >
-                             <option value="none" selected="selected">Choose a sector:</option>
-                             <option value="all">All sectors</option>
-                             <option value="AGRICULTURE">Agriculture and Forest</option>
-                             <option value="BIODIVERSITY" disabled="disabled">Biodiversity</option>
-                             <option value="COASTAL" disabled="disabled">Coastal Areas</option>
-                             <option value="DISASTERRISKREDUCTION" disabled="disabled">Disaster Risk Reduction</option>
-                             <option value="FINANCIAL" disabled="disabled">Financial</option>
-                             <option value="HEALTH" disabled="disabled">Health</option>
-                             <option value="INFRASTRUCTURE" disabled="disabled">Infrastructure</option>
-                             <option value="MARINE" disabled="disabled">Marine and Fisheries</option>
-                             <option value="WATERMANAGEMENT">Water Management</option>
-                         </select>
-
-                         <div class="top-bubble" style="float:right;margin:0px 10px;">
-                            <img src="<%=renderRequest.getContextPath()%>/images/info.png" class="valigned"/>
-                        </div>
-                     </div>
-                 </div>
-
-
-                 <hr style="clear:both;display:block;visibility:hidden;"/>
-
-                 <div id ="measures-step4" style="float: left;margin-left: 20px; display:none;">
-                    <c:set var="groupedResults" scope="page" value="${MEASURE_searchResults}"/>
-                    <c:set var="groupedJSONResults" scope="page" value="${MEASURE_JSONsearchResults}"/>
-                    <c:set var="aceitemtype" scope="page" value="MEASURE"/>
-                    <c:set var="groupTitle" scope="page"><liferay-ui:message key="acesearch-datainfotype-lbl-MEASURE" /></c:set>
-                    <%@ include file="searchresultsbytype.jspf" %>
-                 </div>
-            </form>
+				<div id ="measures-step4" style="float: left;margin-left: 20px; display:none;">
+					<c:set var="groupedResults" scope="page" value="${MEASURE_searchResults}"/>
+					<c:set var="groupedJSONResults" scope="page" value="${MEASURE_JSONsearchResults}"/>
+					<c:set var="aceitemtype" scope="page" value="MEASURE"/>
+					<c:set var="groupTitle" scope="page"><liferay-ui:message key="acesearch-datainfotype-lbl-MEASURE" /></c:set>
+					<%@ include file="searchresultsbytype.jspf" %>
+				</div>
+			</form>
+		<!-- end generic measures -->
 		</div>
 
+		<div id="good-practices" style="display: none; margin-left: 20px;">
+			<h2>
+				What are possible good practices?
+			</h2>		
+			<form>
+				<div id="selectors-step4-gp" style="margin-left: 20px; float:left;">
+					<!-- added width because IE8 renders a 100% width otherwise -->
+					<div id="risks-selector-step4-gp" class="adaptationtools-selector" style="float:left;width:208px;">
+						<span style="margin-right:10px;float:left;" >
+							Risk
+						</span>
+						<!-- TODO load dynamically from enumeration nl.wur.alterra.cgi.ace.model.impl.AceItemClimateImpact -->
+						<select id="risk-selector-step4-gp" style="float:left;" onchange="filterGoodPractices();">
+							<option value="none" selected="selected">Choose a risk:</option>
+							<option value="all" disabled="disabled">All risks</option>
+							<!-- TODO this one is not present in enum AceItemClimateImpact -->
+							<option value="SEALEVEL" disabled="disabled">Sea Level Rise</option>
+							<option value="EXTREMETEMP" disabled="disabled">Extreme Temperatures</option>
+							<option value="WATERSCARCE">Water Scarcity</option>
+							<option value="FLOODING" disabled="disabled">Flooding</option>
+							<option value="DROUGHT" disabled="disabled">Droughts</option>
+							<option value="STORM" disabled="disabled">Storms</option>
+							<option value="ICEANDSNOW" disabled="disabled">Ice and Snow</option>
+						</select>
+						<div class="top-bubble" style="float:right;margin:0px 10px;">
+							<img src="<%=renderRequest.getContextPath()%>/images/info.png" class="valigned"/>
+						</div>
+					</div>
+					<!-- added width because IE8 renders a 100% width otherwise -->
+					<div id="sector-selector-step4-gp" class="adaptationtools-selector" style="float:left;width:226px;">
+						<span style="margin-right:10px;float:left;">
+							Sector
+						</span>
+						<!-- TODO load dynamically from enumeration nl.wur.alterra.cgi.ace.model.impl.AceItemSector -->
+						<select id="sector-select-step4-gp" style="float:left;" onchange="filterGoodPractices();" >
+							<option value="none" selected="selected">Choose a sector:</option>
+							<option value="all" disabled="disabled">All sectors</option>
+							<option value="AGRICULTURE">Agriculture and Forest</option>
+							<option value="BIODIVERSITY" disabled="disabled">Biodiversity</option>
+							<option value="COASTAL" disabled="disabled">Coastal Areas</option>
+							<option value="DISASTERRISKREDUCTION" disabled="disabled">Disaster Risk Reduction</option>
+							<option value="FINANCIAL" disabled="disabled">Financial</option>
+							<option value="HEALTH" disabled="disabled">Health</option>
+							<option value="INFRASTRUCTURE" disabled="disabled">Infrastructure</option>
+							<option value="MARINE" disabled="disabled">Marine and Fisheries</option>
+							<option value="WATERMANAGEMENT">Water Management</option>
+						</select>
+						<div class="top-bubble" style="float:right;margin:0px 10px;">
+							<img src="<%=renderRequest.getContextPath()%>/images/info.png" class="valigned"/>
+						</div>
+					</div>
+				</div>
+		
+				<hr style="clear:both;display:block;visibility:hidden;"/>
 
-        <div id="locate-region" style="margin-left: 20px;">
-            <div style="float:left; margin-bottom: 10px">
+				<div id ="good-practices-step4" style="float: left;margin-left: 20px; display:none;">
+					<c:set var="groupedResults" scope="page" value="${ACTION_searchResults}"/>
+					<c:set var="groupedJSONResults" scope="page" value="${ACTION_JSONsearchResults}"/>
+					<c:set var="aceitemtype" scope="page" value="ACTION"/>
+					<c:set var="groupTitle" scope="page"><liferay-ui:message key="acesearch-datainfotype-lbl-ACTION" /></c:set>
+					<%@ include file="searchresultsbytype.jspf" %>
+				</div>
+			</form>
+		<!-- end good practices -->
+		</div>
+		
+        <div id="locate-region" style="margin-left: 20px;display:none;">
+			<h2>
+				What good practices are available in regions similar to mine?
+			</h2>		
+			<img src="<%=renderRequest.getContextPath()%>/images/step-4.jpg"/>
+			
+			<!-- gazetteer map removed by not displaying anything -->
+            
+			<div style="float:left; margin-bottom: 10px; display:none;">
                 <form>
                     Region of interest:
                     <input type="text" autocomplete="off" id="locate_region_input" name="locate_region_input"
@@ -1046,18 +1172,18 @@ HttpServletRequest httpRequest = PortalUtil.getOriginalServletRequest(request);
                 </form>
                 <div id="locate_region_results"></div>
             </div>
-            <div id="map-container-step4">
-            </div>
+            <div id="map-container-step4" style="display:none;"></div>
 
+            <hr style="clear:both;display:block;visibility:hidden; display:none;"/>
 
-
-            <hr style="clear:both;display:block;visibility:hidden;"/>
-
-            <div id="specify-region-similarity-criteria" style="margin-top:10px;">
+            <div id="specify-region-similarity-criteria" style="margin-top:10px; display:none;">
                 Specify region similarity criteria &raquo;
             </div>
+			
+			<!-- end of gazetteer map removed -->
+			
         </div>
-
+		<!-- end locate-region -->
 
         <hr style="clear:both;display:block;visibility:hidden;"/>
 	</div>

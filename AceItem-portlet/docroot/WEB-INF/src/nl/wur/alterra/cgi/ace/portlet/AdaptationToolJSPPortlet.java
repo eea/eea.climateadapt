@@ -22,12 +22,6 @@
 
 package nl.wur.alterra.cgi.ace.portlet;
 
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.portlet.*;
-
 import com.google.gson.Gson;
 import nl.wur.alterra.cgi.ace.model.AceItem;
 import nl.wur.alterra.cgi.ace.model.impl.AceItemType;
@@ -36,9 +30,19 @@ import nl.wur.alterra.cgi.ace.search.lucene.ACELuceneException;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+import javax.portlet.ActionRequest;
+import javax.portlet.ActionResponse;
+import javax.portlet.GenericPortlet;
+import javax.portlet.PortletException;
+import javax.portlet.PortletRequestDispatcher;
+import javax.portlet.RenderRequest;
+import javax.portlet.RenderResponse;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
 /**
- * <a href="AdaptationToolJSPPortlet.java.html"><b><i>View Source</i></b></a>
- *
+ * TODO javadoc.
  *
  */
 public class AdaptationToolJSPPortlet extends GenericPortlet {
@@ -56,12 +60,16 @@ public class AdaptationToolJSPPortlet extends GenericPortlet {
 		viewJSP = getInitParameter("view-jsp");
 	}
 
-	public void doDispatch(
-			RenderRequest renderRequest, RenderResponse renderResponse)
-		throws IOException, PortletException {
-
+    /**
+     * TODO javadoc.
+     *
+     * @param renderRequest
+     * @param renderResponse
+     * @throws IOException
+     * @throws PortletException
+     */
+	public void doDispatch(RenderRequest renderRequest, RenderResponse renderResponse) throws IOException, PortletException {
 		String jspPage = renderRequest.getParameter("jspPage");
-
 		if (jspPage != null) {
 			include(jspPage, renderRequest, renderResponse);
 		}
@@ -70,10 +78,15 @@ public class AdaptationToolJSPPortlet extends GenericPortlet {
 		}
 	}
 
-	public void doEdit(
-			RenderRequest renderRequest, RenderResponse renderResponse)
-		throws IOException, PortletException {
-
+    /**
+     * TODO javadoc.
+     *
+     * @param renderRequest
+     * @param renderResponse
+     * @throws IOException
+     * @throws PortletException
+     */
+	public void doEdit(RenderRequest renderRequest, RenderResponse renderResponse) throws IOException, PortletException {
 		if (renderRequest.getPreferences() == null) {
 			super.doEdit(renderRequest, renderResponse);
 		}
@@ -82,40 +95,59 @@ public class AdaptationToolJSPPortlet extends GenericPortlet {
 		}
 	}
 
-	public void doHelp(
-			RenderRequest renderRequest, RenderResponse renderResponse)
-		throws IOException, PortletException {
-
+    /**
+     * TODO javadoc.
+     *
+     * @param renderRequest
+     * @param renderResponse
+     * @throws IOException
+     * @throws PortletException
+     */
+	public void doHelp(RenderRequest renderRequest, RenderResponse renderResponse) throws IOException, PortletException {
 		include(helpJSP, renderRequest, renderResponse);
 	}
 
-	public void doView(
-			RenderRequest renderRequest, RenderResponse renderResponse)
-		throws IOException, PortletException {
-
-
+    /**
+     * TODO javadoc.
+     *
+     * @param renderRequest
+     * @param renderResponse
+     * @throws IOException
+     * @throws PortletException
+     */
+	public void doView(RenderRequest renderRequest, RenderResponse renderResponse) throws IOException, PortletException {
         try {
             search(renderRequest);
             include(viewJSP, renderRequest, renderResponse);
-
-        } catch (Exception ex)  {
-            throw new PortletException(ex.getMessage());
+        }
+        catch (Exception x)  {
+            x.printStackTrace();
+            throw new PortletException(x.getMessage());
         }
 	}
 
-	public void processAction(
-			ActionRequest actionRequest, ActionResponse actionResponse)
-		throws IOException, PortletException {
+    /**
+     * TODO javadoc.
+     *
+     * @param actionRequest
+     * @param actionResponse
+     * @throws IOException
+     * @throws PortletException
+     */
+	public void processAction(ActionRequest actionRequest, ActionResponse actionResponse) throws IOException, PortletException {
 	}
 
-	protected void include(
-			String path, RenderRequest renderRequest,
-			RenderResponse renderResponse)
-		throws IOException, PortletException {
-
-		PortletRequestDispatcher portletRequestDispatcher =
-			getPortletContext().getRequestDispatcher(path);
-
+    /**
+     * TODO javadoc.
+     *
+     * @param path
+     * @param renderRequest
+     * @param renderResponse
+     * @throws IOException
+     * @throws PortletException
+     */
+	protected void include(String path, RenderRequest renderRequest, RenderResponse renderResponse) throws IOException, PortletException {
+		PortletRequestDispatcher portletRequestDispatcher = getPortletContext().getRequestDispatcher(path);
 		if (portletRequestDispatcher == null) {
 			_log.error(path + " is not a valid include");
 		}
@@ -124,11 +156,16 @@ public class AdaptationToolJSPPortlet extends GenericPortlet {
 		}
 	}
 
-    private List<String> search(RenderRequest request)
-            throws ACELuceneException {
-
+    /**
+     * TODO javadoc.
+     *
+     * @param request
+     * @return
+     * @throws ACELuceneException
+     */
+    private List<String> search(RenderRequest request) throws ACELuceneException {
         String[] anyOfThese = null;
-        String[] aceItemTypes = {AceItemType.MEASURE.toString()};
+        String[] aceItemTypes = {AceItemType.MEASURE.toString(), AceItemType.ACTION.toString()};
         String[] sectors = null;
         String[] countries = null;
         String[] elements = null;
@@ -144,7 +181,8 @@ public class AdaptationToolJSPPortlet extends GenericPortlet {
         AceSearchFormBean aceSearchFormBean = new AceSearchFormBean();
         if (anyOfThese != null && anyOfThese.length > 0) {
             aceSearchFormBean.setAnyOfThese(anyOfThese[0]);
-        } else {
+        }
+        else {
             aceSearchFormBean.setAnyOfThese("");
         }
         aceSearchFormBean.setAceitemtype(aceItemTypes);
@@ -155,14 +193,15 @@ public class AdaptationToolJSPPortlet extends GenericPortlet {
 
         if (conditionAdaptationSector != null && conditionAdaptationSector[0].equalsIgnoreCase(OR_CONDITION)) {
             aceSearchFormBean.setConditionAdaptationSector(OR_CONDITION);
-        } else {
+        }
+        else {
             aceSearchFormBean.setConditionAdaptationSector(AND_CONDITION);
         }
 
-
         if (conditionAdaptationElement != null && conditionAdaptationElement[0].equalsIgnoreCase(OR_CONDITION)) {
             aceSearchFormBean.setConditionAdaptationElement(OR_CONDITION);
-        } else {
+        }
+        else {
             aceSearchFormBean.setConditionAdaptationElement(AND_CONDITION);
         }
 
@@ -178,94 +217,61 @@ public class AdaptationToolJSPPortlet extends GenericPortlet {
         // no aceItemTypes requested: search for all of them
         if (aceItemTypes == null || aceItemTypes.length == 0) {
             for (AceItemType aceItemType : AceItemType.values()) {
-                List<AceItem> results = aceSearchEngine.searchLuceneByType(
-                        aceSearchFormBean, aceItemType.name());
+                List<AceItem> results = aceSearchEngine.searchLuceneByType(aceSearchFormBean, aceItemType.name());
                 totalResults += results.size();
 
-                System.out.println("searchAceitem found #" + results.size()
-                        + " results of type " + aceItemType.name());
-                request.setAttribute(aceItemType.name() + "_" + SEARCH_RESULTS,
-                        results);
+                System.out.println("searchAceitem found #" + results.size() + " results of type " + aceItemType.name());
+                request.setAttribute(aceItemType.name() + "_" + SEARCH_RESULTS, results);
 
                 for (AceItem result : results) {
-                    result.setDescription(result.getDescription().replaceAll(
-                            "'", "\'"));
+                    result.setDescription(result.getDescription().replaceAll("'", "\'"));
                     result.setKeyword(result.getKeyword().replaceAll("'", "\'"));
                     result.setName(result.getName().replaceAll("'", "\'"));
-                    result.setSpatialValues(result.getSpatialValues()
-                            .replaceAll("'", "\'"));
-                    result.setSpatialLayer(result.getSpatialLayer().replaceAll(
-                            "'", "\'"));
-                    result.setElements_(result.getElements_().replaceAll("'",
-                            "\'"));
-                    result.setSectors_(result.getSectors_().replaceAll("'",
-                            "\'"));
-                    result.setStoredAt(result.getStoredAt().replaceAll("'",
-                            "\'"));
-                    result.setTextSearch(result.getTextSearch().replaceAll("'",
-                            "\'"));
-                    result.setDatatype(result.getDatatype().replaceAll("'",
-                            "\'"));
-
-                    result.setDescription(result.getDescription().replaceAll(
-                            "\"", "\"\""));
-                    result.setKeyword(result.getKeyword().replaceAll("\"",
-                            "\"\""));
+                    result.setSpatialValues(result.getSpatialValues().replaceAll("'", "\'"));
+                    result.setSpatialLayer(result.getSpatialLayer().replaceAll("'", "\'"));
+                    result.setElements_(result.getElements_().replaceAll("'", "\'"));
+                    result.setSectors_(result.getSectors_().replaceAll("'", "\'"));
+                    result.setStoredAt(result.getStoredAt().replaceAll("'", "\'"));
+                    result.setTextSearch(result.getTextSearch().replaceAll("'", "\'"));
+                    result.setDatatype(result.getDatatype().replaceAll("'", "\'"));
+                    result.setDescription(result.getDescription().replaceAll("\"", "\"\""));
+                    result.setKeyword(result.getKeyword().replaceAll("\"", "\"\""));
                     result.setName(result.getName().replaceAll("\"", "\"\""));
-                    result.setSpatialValues(result.getSpatialValues()
-                            .replaceAll("\"", "\"\""));
-                    result.setSpatialLayer(result.getSpatialLayer().replaceAll(
-                            "\"", "\"\""));
-                    result.setElements_(result.getElements_().replaceAll("\"",
-                            "\"\""));
-                    result.setSectors_(result.getSectors_().replaceAll("\"",
-                            "\"\""));
-                    result.setStoredAt(result.getStoredAt().replaceAll("\"",
-                            "\"\""));
-                    result.setStoragetype(result.getStoragetype().replaceAll(
-                            "\"", "\"\""));
-                    result.setTextSearch(result.getTextSearch().replaceAll(
-                            "\"", "\"\""));
-                    result.setDatatype(result.getDatatype().replaceAll("\"",
-                            "\"\""));
+                    result.setSpatialValues(result.getSpatialValues().replaceAll("\"", "\"\""));
+                    result.setSpatialLayer(result.getSpatialLayer().replaceAll("\"", "\"\""));
+                    result.setElements_(result.getElements_().replaceAll("\"", "\"\""));
+                    result.setSectors_(result.getSectors_().replaceAll("\"", "\"\""));
+                    result.setStoredAt(result.getStoredAt().replaceAll("\"", "\"\""));
+                    result.setStoragetype(result.getStoragetype().replaceAll("\"", "\"\""));
+                    result.setTextSearch(result.getTextSearch().replaceAll("\"", "\"\""));
+                    result.setDatatype(result.getDatatype().replaceAll("\"", "\"\""));
                 }
 
                 keysAdded.add(aceItemType.name() + "_" + SEARCH_RESULTS);
                 Gson gson = new Gson();
                 String json = gson.toJson(results);
 
-                // escape double quotes
-
                 //System.out.println("\n\njson LIST is: " + json);
-                request.setAttribute(aceItemType.name() + "_" + "JSON"
-                        + SEARCH_RESULTS, json);
-                jsonKeysAdded.add(aceItemType.name() + "_" + "JSON"
-                        + SEARCH_RESULTS);
+                request.setAttribute(aceItemType.name() + "_" + "JSON" + SEARCH_RESULTS, json);
+                jsonKeysAdded.add(aceItemType.name() + "_" + "JSON" + SEARCH_RESULTS);
             }
         }
         // search only requested aceItemTypes
         else {
             for (String aceItemType : aceItemTypes) {
-                List<AceItem> results = aceSearchEngine.searchLuceneByType(
-                        aceSearchFormBean, aceItemType);
+                List<AceItem> results = aceSearchEngine.searchLuceneByType(aceSearchFormBean, aceItemType);
                 totalResults += results.size();
-
-                System.out.println("searchAceitem found #" + results.size()
-                        + " results of type " + aceItemType);
-                request.setAttribute(aceItemType + "_" + SEARCH_RESULTS,
-                        results);
+                System.out.println("searchAceitem found #" + results.size() + " results of type " + aceItemType);
+                request.setAttribute(aceItemType + "_" + SEARCH_RESULTS, results);
                 keysAdded.add(aceItemType + "_" + SEARCH_RESULTS);
                 Gson gson = new Gson();
                 String json = gson.toJson(results);
                 //System.out.println("\n\njson LIST is: " + json);
-                request.setAttribute(aceItemType + "_" + "JSON"
-                        + SEARCH_RESULTS, json);
+                request.setAttribute(aceItemType + "_" + "JSON" + SEARCH_RESULTS, json);
                 jsonKeysAdded.add(aceItemType + "_" + "JSON" + SEARCH_RESULTS);
             }
         }
-
         request.setAttribute(TOTAL_RESULTS, totalResults);
-
         return keysAdded;
     }
 
