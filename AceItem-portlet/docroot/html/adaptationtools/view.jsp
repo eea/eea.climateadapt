@@ -379,11 +379,12 @@ HttpServletRequest httpRequest = PortalUtil.getOriginalServletRequest(request);
 			//
 			// create information popups
 			//
+			// the zoom and opacity in the innerHtml's div is because IE renders the popups transparent otherwise
 			$j('.top-bubble').CreateBubblePopup({
 					position : 'top',
                     selectable: true,
 					align	 : 'center',
-					innerHtml: '<div style="position:relative;z-index:9999;"> \
+					innerHtml: '<div style="position:relative;z-index:9999;background:#fff;zoom:1;filter:alpha(opacity = 100);"> \
 									<div style="background:green;color:#fff;height:15px;border:1px solid lime;padding:5px;">information</div> \
 									<div style="height:35px;padding:5px;">short description</div> \
 									<div style="height:15px;text-align:right;padding:5px;">read more &raquo;</div> \
