@@ -1041,9 +1041,9 @@ HttpServletRequest httpRequest = PortalUtil.getOriginalServletRequest(request);
 							<!-- TODO this one is not present in enum AceItemClimateImpact -->
 							<option value="SEALEVEL" disabled="disabled">Sea Level Rise</option>
 							<option value="EXTREMETEMP" disabled="disabled">Extreme Temperatures</option>
-							<option value="WATERSCARCE">Water Scarcity</option>
+							<option value="WATERSCARCE" disabled="disabled">Water Scarcity</option>
 							<option value="FLOODING" disabled="disabled">Flooding</option>
-							<option value="DROUGHT" disabled="disabled">Droughts</option>
+							<option value="DROUGHT">Droughts</option>
 							<option value="STORM" disabled="disabled">Storms</option>
 							<option value="ICEANDSNOW" disabled="disabled">Ice and Snow</option>
 						</select>
@@ -1107,9 +1107,9 @@ HttpServletRequest httpRequest = PortalUtil.getOriginalServletRequest(request);
 							<!-- TODO this one is not present in enum AceItemClimateImpact -->
 							<option value="SEALEVEL" disabled="disabled">Sea Level Rise</option>
 							<option value="EXTREMETEMP" disabled="disabled">Extreme Temperatures</option>
-							<option value="WATERSCARCE">Water Scarcity</option>
+							<option value="WATERSCARCE" disabled="disabled">Water Scarcity</option>
 							<option value="FLOODING" disabled="disabled">Flooding</option>
-							<option value="DROUGHT" disabled="disabled">Droughts</option>
+							<option value="DROUGHT">Droughts</option>
 							<option value="STORM" disabled="disabled">Storms</option>
 							<option value="ICEANDSNOW" disabled="disabled">Ice and Snow</option>
 						</select>
