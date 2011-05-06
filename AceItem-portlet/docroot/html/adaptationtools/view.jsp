@@ -1146,12 +1146,12 @@ HttpServletRequest httpRequest = PortalUtil.getOriginalServletRequest(request);
 				</div>
 		
 				<hr style="clear:both;display:block;visibility:hidden;"/>
-
+		
 				<div id ="good-practices-step4" style="float: left;margin-left: 20px; display:none;">
 					<c:set var="groupedResults" scope="page" value="${ACTION_searchResults}"/>
 					<c:set var="groupedJSONResults" scope="page" value="${ACTION_JSONsearchResults}"/>
 					<c:set var="aceitemtype" scope="page" value="ACTION"/>
-					<c:set var="groupTitle" scope="page"><liferay-ui:message key="acesearch-datainfotype-lbl-ACTION" /></c:set>
+					<c:set var="groupTitle" scope="page">TEST<liferay-ui:message key="acesearch-datainfotype-lbl-ACTION" /></c:set>
 					<%@ include file="searchresultsbytype.jspf" %>
 				</div>
 			</form>
