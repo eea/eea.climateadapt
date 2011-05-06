@@ -478,12 +478,13 @@ HttpServletRequest httpRequest = PortalUtil.getOriginalServletRequest(request);
 							app.addLayer(u, ln, t);
 							
 							/* do not do this anymore; user must use steps in left panel
+							
 							// if this is a vulnerability type
 							if(y === 'VULNERABILITY') {
 								// enable underlying cause indicators
 								showUnderlyingCauses();								
 							}
-							*/
+							
 							
 							// if this is an underlying cause type
 							if(y === 'EXPOSURE') {
@@ -494,6 +495,8 @@ HttpServletRequest httpRequest = PortalUtil.getOriginalServletRequest(request);
 								// enable resource efficiency
 								showUnderlyingHumanCauses();
 							}
+							*/
+							
 						});
 				
 					// no map icon	
