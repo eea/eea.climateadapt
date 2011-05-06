@@ -121,6 +121,15 @@ $j(window).load(function() {
 	
 	*/
 	
+	// in IE, pressing <ENTER> in the gazetteer input in step 2, reloads the page (thus makes step 2 disappear) if not handled explicitly:	
+	$j('#locate_region_step2_input').bind('keydown',function(e){ 
+		// jQuery.which normalizes keycodes for all browsers; 13 is <ENTER>
+		if(e.which === 13) {
+			gazeeteerStep2.search($j('#locate_region_step2_input').val()); 
+			return false;
+		}
+	});	
+	
 });
 
 /** api: constructor
