@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<project-modules id="moduleCoreId" project-version="1.5.0">
-    <wb-module deploy-name="ace-layouttpl">
-        <wb-resource deploy-path="/" source-path="/docroot"/>
-        <property name="java-output-path" value="/ace-layout-1-layouttpl/docroot/WEB-INF/classes"/>
-        <property name="context-root" value="ace-layouttpl"/>
-    </wb-module>
-</project-modules>
