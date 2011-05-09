@@ -919,7 +919,23 @@ HttpServletRequest httpRequest = PortalUtil.getOriginalServletRequest(request);
 			<img src="<%=renderRequest.getContextPath()%>/images/bullit3.png" class="valigned"/>
 			What should be my strategy to adapt?
 		</h1>
-
+		
+		<p>	
+			Climate Change Adaptation refers to policies, practices and projects which can either moderate damage and/or realise opportunities associated with climate change. This may include mainstreaming adaptation into existing strategies directly or undertaking isolated measures to reduce specific vulnerabilities. 
+		</p>
+		
+		<p>
+			In this process existing relevant national and EU legislation, policies, plans and guidance have to be taken into account and integrated in your strategy. 
+		</p>
+        
+		<a href="http://ec.europa.eu/clima/sites/change" target="_blank">EC DG Climate Action, Adaptation to climate change (new window)</a>
+		
+		<a href="/eu-sector-policy/general" target="_blank">EU Sector policies (new window)</a>
+		
+		<a href="/national-adaptation-strategies" target="_blank">Open National Adaptation Strategies (new window)</a>
+		
+		<a href="http://eur-lex.europa.eu/LexUriServ/LexUriServ.do?uri=COM:2009:0147:FIN:EN:PDF" target="_blank">WHITE PAPER: Adapting to climate change: Towards a European framework for action (new window)</a>
+		
         <hr style="clear:both;display:block;visibility:hidden;"/>
 	</div>
 
