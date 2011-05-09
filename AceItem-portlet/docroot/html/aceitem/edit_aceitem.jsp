@@ -27,6 +27,11 @@
 
 		<aui:input type="hidden" name="aceItemId" value='<%= aceitem == null ? "" : aceitem.getAceItemId() %>'/>
 
+		<aui:input type="hidden" name="aceItemId" value='<%= aceitem == null ? "" : aceitem.getAceItemId() %>'/>
+		
+		<b>nasId</b><br />	
+		<input name="nasId" type="text" size="10" READONLY style="color:grey" value="<%= aceitem == null ? "0" : aceitem.getNasId() %>"><br /><br />
+
 		<b>name</b><br />	
 		<input name="name" type="text" size="120" value="<%= aceitem == null ? "" : aceitem.getName() %>"><br /><br />
 
@@ -41,7 +46,7 @@
 		<input name="storedAt" type="text" size="120" value="<%= aceitem == null ? "" : aceitem.getStoredAt() %>"><br /><br />
 		
 		<b>storagetype</b><br />	
-		<input name="storagetype" type="text" size="65" enabled="false" value="<%= aceitem == null ? "URL" : aceitem.getStoragetype() %>"><br /><br />
+		<input name="storagetype" type="text" size="65" READONLY style="color:grey" value="<%= aceitem == null ? "URL" : aceitem.getStoragetype() %>"><br /><br />
 
 		<b>Sectors</b><br />
 		<!--   input name="sectors_" type="text" size="65" value="< %= aceitem == null ? "" : aceitem.getSectors_() % >"><br /><br / -->
