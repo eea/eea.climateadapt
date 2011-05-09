@@ -80,6 +80,7 @@ public class AceItemPortlet extends MVCPortlet {
 
 		AceItemImpl aceitem = new AceItemImpl();
 		aceitem.setAceItemId(ParamUtil.getLong(request, "aceItemId"));
+		aceitem.setNasId(ParamUtil.getLong(request, "nasId"));
 		aceitem.setName(ParamUtil.getString(request, "name"));
 		aceitem.setDescription(ParamUtil.getString(request, "description"));
 
