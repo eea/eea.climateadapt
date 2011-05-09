@@ -253,11 +253,7 @@ HttpServletRequest httpRequest = PortalUtil.getOriginalServletRequest(request);
 
         -->
         <div id="step-left-3" class="step-left">
-			<div id="what-should-i-do-3" style="margin:5px;">
-				<div id="what-should-i-do-3-heading" style="font-size:24px;" >
-					&nbsp;
-				</div>
-			</div>
+
         <!-- end step 3 -->
         </div>
 
