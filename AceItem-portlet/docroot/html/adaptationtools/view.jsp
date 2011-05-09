@@ -913,6 +913,7 @@ HttpServletRequest httpRequest = PortalUtil.getOriginalServletRequest(request);
 			step 3
 
 	-->
+	
 	<div id="step-right-3" class="step-right">
         <h1 id="strategy-adaptation-heading">
 			<img src="<%=renderRequest.getContextPath()%>/images/bullit3.png" class="valigned"/>
@@ -1039,6 +1040,16 @@ HttpServletRequest httpRequest = PortalUtil.getOriginalServletRequest(request);
 
 		<div id="general" style="display: none; margin-left: 20px;">
 			This section provides tools that allow you to assess relevant adaptation measures and good practices. It provides tools to select measures and good practices from the Clearinghouse Mechanism on Adaptation's repository and allows you to assess which measures are implemented in your region and similar regions.
+			<br /><br />
+			Adaptation options may include the options to prevent  or accept losses (i.e. do nothing), to accommodate.  Multiple options for achieving the same result should be considered at the initial stage.
+			<br /><br />
+			There are various typologies of adaptation options. One of them classifies them in grey and green infrastructure measures and non-structural soft adaptation options: 
+			<br /><br />
+			<b>Grey infrastructure</b> is physical interventions or construction measures that use engineering services to make buildings and infrastructure resilient to weather events;
+			<br /><br />
+			<b>Green infrastructure</b> is using ecosystem  functions and services to design more sustainable and cost-effective adaptation measures. 
+			<br /><br />
+			<b>"Soft" non-structural approaches</b> relate to policy incentives such as land-use controls, information dissemination and economic incentives to reduce or prevent disaster vulnerability
 		</div>
 		
 		<div id="generic-measures" style="display: none; margin-left: 20px;">
