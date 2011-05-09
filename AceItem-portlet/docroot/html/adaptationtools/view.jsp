@@ -55,7 +55,7 @@ HttpServletRequest httpRequest = PortalUtil.getOriginalServletRequest(request);
 		
 		var hashedHeadingId = '#' + headingId;
 
-		var substepOptionIds = ['#analyze-maps-options', '#analyze-nas-options', '#what-should-i-do-options']
+		var substepOptionIds = ['#analyze-maps-options', '#analyze-nas-options'];
 		var substepContentIds = ['#indicators-map', '#analyze-nas-content', '#general-content'];
 		var substepHeadingIds = ['#analyze-maps-heading', '#analyze-nas-heading', '#what-should-i-do-heading'];
 	
@@ -77,8 +77,6 @@ HttpServletRequest httpRequest = PortalUtil.getOriginalServletRequest(request);
 				}
 			});
 		$j(hashedHeadingId).removeClass('clickable');
-
-		
 			
 	}
 	
@@ -184,71 +182,65 @@ HttpServletRequest httpRequest = PortalUtil.getOriginalServletRequest(request);
 							<img src="<%=renderRequest.getContextPath()%>/images/arrow_green.png" class="valigned"/>
 							3. How do I analyze impacts of past weather?
 						</li>
+						<li class="list-option" id="analyze-in-nas">
+							<img src="<%=renderRequest.getContextPath()%>/images/arrow_green.png" class="valigned"/>
+							<a href="#" onclick="step2substep('analyze-in-nas');showGoToNAS(); return false">
+								4. Assessments in my region
+							</a>
+						</li>						
+						<li class="list-option" id="analyze-maps-heading">
+							<img src="<%=renderRequest.getContextPath()%>/images/arrow_green.png" class="valigned"/>
+							<a href="#" onclick="step2substep('analyze-maps-heading');showVulnerabilitiesAndRisks(); initMapViewerIndicators();">
+								5. Compare my region to Europe
+							</a>	
+								<div id="analyze-maps-options" style="display:none;">
+									<ul style="list-style:none;">
+										<li class="list-option">
+											<img src="<%=renderRequest.getContextPath()%>/images/arrow_green.png" class="valigned"/>
+											1. <a href="#" onclick="showVulnerabilitiesAndRisks(); return false">What are the key vulnerabilities and risks?</a>
+										</li>
+										<li class="list-option">
+											<img src="<%=renderRequest.getContextPath()%>/images/arrow_green.png" class="valigned"/>
+											2. <a href="#" onclick="showUnderlyingCauses(); return false">What are the underlying causes?</a>
+										</li>
+										<li class="list-option">
+											<img src="<%=renderRequest.getContextPath()%>/images/arrow_green.png" class="valigned"/>
+											3. <a href="#" onclick="showUnderlyingNaturalCauses(); return false">How does the climate change?</a>
+										</li>
+										<li class="list-option">
+											<img src="<%=renderRequest.getContextPath()%>/images/arrow_green.png" class="valigned"/>
+											4. <a href="#" onclick="showUnderlyingHumanCauses(); return false">How does the socio-ecological system change?</a>
+										</li>
+										<li class="list-option">
+											<img src="<%=renderRequest.getContextPath()%>/images/arrow_green.png" class="valigned"/>
+											5. Uncertainties
+										</li>
+									</ul>			
+								</div>							
+						</li>						
+						
+						
 						<li class="list-option">
 							<img src="<%=renderRequest.getContextPath()%>/images/arrow_green.png" class="valigned"/>
-							4. How do I analyze recent climate trends?
+							6. How do I analyze recent climate trends?
 						</li>
 						<li class="list-option">
 							<img src="<%=renderRequest.getContextPath()%>/images/arrow_green.png" class="valigned"/>
-							5. Where do I find possible scenarios?
+							7. Where do I find possible scenarios?
 						</li>
 						<li class="list-option">
 							<img src="<%=renderRequest.getContextPath()%>/images/arrow_green.png" class="valigned"/>
-							6. How do I identify impacts of climate change?
+							8. How do I identify impacts of climate change?
 						</li>
 						<li class="list-option">
 							<img src="<%=renderRequest.getContextPath()%>/images/arrow_green.png" class="valigned"/>
-							7. How do I assess vulnerability?
+							9. How do I assess vulnerability?
 						</li>
 						<li class="list-option">
 							<img src="<%=renderRequest.getContextPath()%>/images/arrow_green.png" class="valigned"/>
-							8. What about risks and opportunities?
+							10. What about risks and opportunities?
 						</li>
 					</ul>
-				</div>
-			</div>
-			<div id="analyze-in-nas" style="margin:5px;">
-				<div id="analyze-nas-heading" class="clickable" style="font-size:24px;" onclick="step2substep(this.id);">
-					Assessments	in my region
-				</div>
-				<div id="analyze-nas-options" style="display:none;">
-					<ul style="list-style:none;">
-						<li class="list-option">
-							<img src="<%=renderRequest.getContextPath()%>/images/arrow_green.png" class="valigned"/>
-							1. <a href="#" onclick="showGoToNAS(); return false">National adaptation strategies</a>
-						</li>
-					</ul>	
-				</div>
-			</div>
-			
-			
-			<div id="analyze-maps" style="margin:5px;">
-				<div id="analyze-maps-heading" class="clickable" style="font-size:24px;" onclick="step2substep(this.id);showVulnerabilitiesAndRisks(); initMapViewerIndicators();">
-					Compare my region to Europe
-				</div>
-				<div id="analyze-maps-options" style="display:none;">
-					<ul style="list-style:none;">
-						<li class="list-option">
-							<img src="<%=renderRequest.getContextPath()%>/images/arrow_green.png" class="valigned"/>
-							1. <a href="#" onclick="showVulnerabilitiesAndRisks(); return false">What are the key vulnerabilities and risks?</a>
-						</li>
-						<li class="list-option">
-							<img src="<%=renderRequest.getContextPath()%>/images/arrow_green.png" class="valigned"/>
-							2. <a href="#" onclick="showUnderlyingCauses(); return false">What are the underlying causes?</a>
-						</li>
-						<li class="list-option">
-							<img src="<%=renderRequest.getContextPath()%>/images/arrow_green.png" class="valigned"/>
-							3. <a href="#" onclick="showUnderlyingNaturalCauses(); return false">How does the climate change?</a>
-						</li>
-						<li class="list-option">
-							<img src="<%=renderRequest.getContextPath()%>/images/arrow_green.png" class="valigned"/>
-							4. <a href="#" onclick="showUnderlyingHumanCauses(); return false">How does the socio-ecological system change?</a>
-						</li>
-						<li class="list-option">
-							<img src="<%=renderRequest.getContextPath()%>/images/arrow_green.png" class="valigned"/>
-							5. Uncertainties
-						</li>
-					</ul>			
 				</div>
 			</div>
 
@@ -699,7 +691,7 @@ HttpServletRequest httpRequest = PortalUtil.getOriginalServletRequest(request);
 			</div>
 		</div>
 		
-		<div id="analyze-nas-content">
+		<div id="analyze-nas-content" style="display:none;">
 			<div id="analyze-nas-content-text" style="float:left;width:50%;margin-left:30px;">
 				<a href="/national-adaptation-strategies" target="_blank">Open National Adaptation Strategies (new window)</a>
 			</div>
