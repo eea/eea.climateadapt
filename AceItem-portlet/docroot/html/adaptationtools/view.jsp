@@ -1212,7 +1212,12 @@ HttpServletRequest httpRequest = PortalUtil.getOriginalServletRequest(request);
         <div id="locate-region" style="margin-left: 20px;display:none;">
 			<h2>
 				What good practices are available in regions similar to mine?
-			</h2>		
+			</h2>	
+			
+			<p>
+				The specific characteristics of the region you are in highly determine which adaptation measures are feasible. Taking into account for instance bio-physical and socio-economic characteristics will allow for the identification of good practices that are implemented in your region and similar regions.
+			</p>
+					
 			<img src="<%=renderRequest.getContextPath()%>/images/step-4.jpg"/>
 			
 			<!-- gazetteer map removed by not displaying anything -->
