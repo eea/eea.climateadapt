@@ -10,18 +10,21 @@
 		<header-portlet-css>http://extjs.cachefly.net/ext-3.2.1/resources/css/ext-all.css</header-portlet-css>
 		<header-portlet-css>http://extjs.cachefly.net/ext-3.2.1/examples/shared/examples.css</header-portlet-css>		
 		<header-portlet-css>/js/bubblepopup/jquery.bubblepopup.v2.3.1.css</header-portlet-css>
-                <header-portlet-css>/css/main.css</header-portlet-css>
+		<header-portlet-css>/js/lightbox/css/jquery.lightbox-0.5.css</header-portlet-css>
+        <header-portlet-css>/css/main.css</header-portlet-css>
+		
 		<header-portlet-javascript>http://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js</header-portlet-javascript>
 		<header-portlet-javascript>/js/bubblepopup/jquery.bubblepopup.v2.3.1.min.js</header-portlet-javascript>
 		<header-portlet-javascript>/js/equalheights/jquery.equalheights.js</header-portlet-javascript>
-
-                <header-portlet-javascript>/js/ext-base.js</header-portlet-javascript>
-                <header-portlet-javascript>/js/ext-all.js</header-portlet-javascript>
-                <header-portlet-javascript>/js/OpenLayers.js</header-portlet-javascript>
-                <header-portlet-javascript>/js/LoadingPanel.js</header-portlet-javascript>
+		<header-portlet-javascript>/js/lightbox/js/jquery.lightbox-0.5.js</header-portlet-javascript>
+		<header-portlet-javascript>/js/ext-base.js</header-portlet-javascript>
+		<header-portlet-javascript>/js/ext-all.js</header-portlet-javascript>
+		<header-portlet-javascript>/js/OpenLayers.js</header-portlet-javascript>
+		<header-portlet-javascript>/js/LoadingPanel.js</header-portlet-javascript>
 		<header-portlet-javascript>/js/GeoExt.js</header-portlet-javascript>
-                <header-portlet-javascript>/js/proj4js-compressed.js</header-portlet-javascript>
-                <header-portlet-javascript>/js/mapviewer.js</header-portlet-javascript>
+		<header-portlet-javascript>/js/proj4js-compressed.js</header-portlet-javascript>
+		<header-portlet-javascript>/js/mapviewer.js</header-portlet-javascript>
+		
 		<footer-portlet-javascript>/js/main.js</footer-portlet-javascript>
 		
 		<css-class-wrapper>AdaptationTools-portlet</css-class-wrapper>		

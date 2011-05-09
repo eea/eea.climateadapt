@@ -307,36 +307,46 @@ HttpServletRequest httpRequest = PortalUtil.getOriginalServletRequest(request);
         <div id="step-left-5" class="step-left">
             <div id="what-should-i-do-5" style="margin:5px;">
                 <div id="what-should-i-do-5-heading" style="font-size:24px;">
-                    What should I do?
+                    How can I assess my adaptation options?
                 </div>
                 <div id="what-should-i-do-5-options" style="">
                     <ul style="list-style:none;">
                         <li>
                             <img src="<%=renderRequest.getContextPath()%>/images/arrow_green.png" class="green-arrow"/>
-                            1. General
+                            1. <a href="#" onclick="step5substep('5-1'); return false;">General</a>
                         </li>
                         <li>
                             <img src="<%=renderRequest.getContextPath()%>/images/arrow_green.png" class="green-arrow"/>
-                            2. What are the feasible adaptation options?
+                            2. <a href="#" onclick="step5substep('5-2-1'); return false;">How much does adaptation cost?</a>
+							<div id="what-should-i-do-5-options" style="">
+								<ul style="list-style:none;">
+                        <li>
+                            <img src="<%=renderRequest.getContextPath()%>/images/arrow_green.png" class="green-arrow"/>
+										<a href="#" onclick="step5substep('5-2-1'); return false;">2.1 How can I determine my adaptation costs?</a>
                         </li>
                         <li>
                             <img src="<%=renderRequest.getContextPath()%>/images/arrow_green.png" class="green-arrow"/>
-                            3. How can I agree to set adaptation measures?
+										<a href="#" onclick="step5substep('5-2-2'); return false;">2.2 Search the cost-benefit database</a>
                         </li>
+                    </ul>
+                </div>
+                        </li>						
                         <li>
                             <img src="<%=renderRequest.getContextPath()%>/images/arrow_green.png" class="green-arrow"/>
-                            4. How can I design implementation plan?
+                            3. <a href="#" onclick="step5substep('5-3'); return false;">How do I decide which measures to include in my portfolio?</a>
+                        </li>						
+                        <li>
+                            <img src="<%=renderRequest.getContextPath()%>/images/arrow_green.png" class="green-arrow"/>
+                            4. <a href="#" onclick="step5substep('5-4'); return false;">What is my Adaptive Capacity?</a>
+                        </li>						
+                        <li>
+                            <img src="<%=renderRequest.getContextPath()%>/images/arrow_green.png" class="green-arrow"/>
+                            5. <a href="#" onclick="step5substep('5-5'); return false;">How to plan for adaptation?</a>
                         </li>
                     </ul>
                 </div>
             </div>
-            <div id="search-cost-benefir-db" style="margin:5px;">
-                <div id="search-cost-benefir-db-heading" style="font-size:24px;">
-                    Search the cost benefit database
-                </div>
-            </div>
-
-        <!-- end step 2 -->
+        <!-- end step 5 -->
         </div>
 
 	<!-- end left panel -->
@@ -1253,19 +1263,357 @@ HttpServletRequest httpRequest = PortalUtil.getOriginalServletRequest(request);
 			step 5
 
 	-->
-	<div id="step-right-5" class="step-right">
+
+    <script defer="defer" type="text/javascript">
+		var $j = jQuery.noConflict();
+		$j(document).ready(function(){	
+			// imageBlank is to make IE change cursor on hover
+			$j('a.lightbox').lightBox({
+				overlayBgColor: '#000',
+				overlayOpacity: 0.6,
+				imageLoading: '<%=renderRequest.getContextPath()%>/js/lightbox/images/lightbox-ico-loading.gif',
+				imageBtnClose: '<%=renderRequest.getContextPath()%>/js/lightbox/images/lightbox-btn-close.gif',
+				imageBlank: '<%=renderRequest.getContextPath()%>/js/lightbox/images/lightbox-blank.gif' 	
+			});
+			// handle change to risk selector
+			$j('#cost-benefit-risks-selector').change(function() {
+				$j('#cost-benefit-results').fadeIn();
+			});			
+			// handle change to region selector
+			$j('#cost-benefit-regions-selector').change(function() {
+				$j('#cost-benefit-results').fadeIn();
+			});				
+		});
+		function step5substep(id) {
+			$j('.step-5-sub').hide();
+			$j('#'+id).fadeIn();
+		}		
+	</script>
+	
+	<div id="step-right-5" class="step-right" style="margin-left:30px;">
         <h1 id="assess-adaptation-options-heading">
 			<img src="<%=renderRequest.getContextPath()%>/images/bullit5.png" class="valigned"/>
 			How can I assess my adaptation options?
 		</h1>
+		
+		<div id="5-1" class="step-5-sub" style="">
+			<h2>
+				5.1 General
+			</h2>
+			<p>
+				Once you made a portfolio of potential adaptation options, you need to assess them and determine which of them suit your specific context. You have to consider their effectiveness in reducing vulnerability (or enhancing 
+				resilience), their wider impact on sustainability and their costs. Assessment of feasible options helps avoiding decisions that lead to mal-adaptation. There is a set of criteria that you should consider when assessing 
+				adaptation options (Read more).
+			</p>
+			<p>
+				Tools and guidance documents provided in this section will help you to select feasible options.	
+			</p>	
+		</div>
+		
+		<div id="5-2">
+			<div id="5-2-1" class="step-5-sub" style="display:none;">
+				<h2>
+					5.2.1 How can I determine my adaptation costs?
+				</h2>
+				<p>
+					When calculating adaptation costs, the following steps need to be considered:
+					<ol id="adaptation-cost-list" style="">
+						<li class="adaptation-cost-list-item" style="margin-top:5px;">
+							Determine the applicable measures and their implementation feasibility;
+						</li>
+						<li class="adaptation-cost-list-item" style="margin-top:5px;">
+							Calculate societal costs based on a pre-determined discount rate;
+						</li>
+						<li class="adaptation-cost-list-item" style="margin-top:5px;">
+							Analyse what is the rate of penetration for a given measure and whether it is already being undertaken;
+						</li>
+						<li class="adaptation-cost-list-item" style="margin-top:5px;">
+							Calculate the actual costs of each measure;
+							<div style="margin:10px 0px;">
+								This step requires to determine upfront investment costs, operating and lifetime implementation costs of the measure. This will help in determining the annualized cost per measure. Future 
+								costs can be extrapolated on the basis of locally verified estimates; a trajectory for the growth in cost can be based largely on inflation rates. Once a trajectory has been established for 
+								a business as usual scenario, calculate the potential loss averted for each measure on the basis of different scenarios;						
+							</div>
+						</li>
+						<li class="adaptation-cost-list-item" style="margin-top:5px;">
+							Estimate the benefits of adaptation actions;
+						</li>
+						<li class="adaptation-cost-list-item" style="margin-top:5px;">
+							Select the applicable valuation approach, e.g. Multi Criteria Analysis;
+						</li>					
+					</ol>
+					<div style="font-style:italic;padding-top:20px;">
+						Cost-benefit tools and methodologies					
+					</div>
+					<div style="margin-top:10px;">
+						<a href="" target="_blank">
+							Identification and elaboration of methodology to be used in the classification and costing of projects and programmes for adaptation to climate change	(new window)			
+						</a>
+					</div>
+					<div style="font-style:italic;padding-top:20px;">
+						Projects					
+					</div>
+					<div style="margin-top:10px;">
+						<a href="http://www.climatecost.cc/" target="_blank">
+							ClimateCost project (new window)
+						</a>
+					</div>				
+				</p>
+			<!-- end 5.2.1 -->
+			</div>
+			
+			<div id="5-2-2" class="step-5-sub" style="display:none;">
+				<h2>
+					5.2.2 Search the cost-benefit database
+				</h2>
+				<p>
+					Assess available information on adaptation costs and benefits from the Clearinghouse Mechanism on Adaptation's repository, based on your risk(s) and region of interest.
+					<!-- added width because IE8 renders it at 100% width otherwise -->				
+					<div id="cost-benefit-risks-selector" class="adaptationtools-selector" style="float:left;width:212px;">
+						<span style="margin-right:10px;">
+							Risk
+						</span>
+						<!-- TODO load dynamically from enumeration nl.wur.alterra.cgi.ace.model.impl.AceItemClimateImpact -->
+						<select id="risk-select" style="">
+							<option value="none" selected="selected">Choose a risk:</option>
+							<option value="all" disabled="disabled">All risks</option>
+							<!-- TODO this one is not present in enum AceItemClimateImpact -->
+							<option value="SEALEVEL" disabled="disabled">Sea Level Rise</option>
+							<option value="EXTREMETEMP" disabled="disabled">Extreme Temperatures</option>
+							<option value="WATERSCARCE" disabled="disabled">Water Scarcity</option>
+							<option value="FLOODING">Flooding</option>
+							<option value="DROUGHT" disabled="disabled">Droughts</option>
+							<option value="STORM" disabled="disabled">Storms</option>
+							<option value="ICEANDSNOW" disabled="disabled">Ice and Snow</option>
+						</select>
+					</div>
+					<div id="cost-benefit-regions-selector" class="adaptationtools-selector" style="float:left;width:212px;">					
+						<span style="margin-right:10px;">
+							Region
+						</span>
+						<select id="region-select" style="">
+							<option id="all-regions" value="ALL" disabled="disabled">All regions</option>
+							<option id="EU-option" value="EU" selected="selected">EU</option>
+							<option id="AT-option" value="AT" disabled="disabled">Austria</option>
+							<option id="CH-option" value="CH" disabled="disabled">Switzerland</option>
+							<option id="CZ-option" value="CZ" disabled="disabled">Czech Republic</option>
+							<option id="DE-option" value="DE" disabled="disabled">Germany</option>
+							<option id="EE-option" value="EE" disabled="disabled">Estonia</option>
+							<option id="ES-option" value="ES" disabled="disabled">Spain</option>
+							<option id="FI-option" value="FI" disabled="disabled">Finland</option>
+							<option id="FR-option" value="FR" disabled="disabled">France</option>
+							<option id="GB-option" value="GB" disabled="disabled">Great Britain</option>
+							<option id="GR-option" value="GR" disabled="disabled">Greece</option>
+							<option id="HU-option" value="HU" disabled="disabled">Hungary</option>
+							<option id="IR-option" value="IR" disabled="disabled">Ireland</option>
+							<option id="IS-option" value="IS" disabled="disabled">Iceland</option>
+							<option id="LT-option" value="LT" disabled="disabled">Lithuania</option>
+							<option id="LV-option" value="LV" disabled="disabled">Latvia</option>
+							<option id="NL-option" value="NL" disabled="disabled">Netherlands</option>
+							<option id="NO-option" value="NO" disabled="disabled">Norvegia</option>
+							<option id="PT-option" value="PT" disabled="disabled">Portugal</option>
+							<option id="RO-option" value="RO" disabled="disabled">Romania</option>
+							<option id="SE-option" value="SE" disabled="disabled">Sweden</option>
+						</select>
+					</div>	
+					<hr style="clear:both;display:block;visibility:hidden;"/>
+					
+					<div id="cost-benefit-results" style="display:none;padding-top:20px;">
+						<table id="cost-benefit-table">
+							<colgroup>
+								<col style="width: 100px;border:solid #000 1px;" />
+								<col style="width: 100px;margin-left:20px;border:solid #000 1px;" />
+								<col style="width: 100px;border:solid #000 1px;" />
+								<col style="width: 100px;border:solid #000 1px;" />
+								<col style="width: 100px;border:solid #000 1px;" />
+								<col style="width: 100px;border:solid #000 1px;" />
+								<col style="width: 100px;border:solid #000 1px;" />
+							</colgroup>
+							<thead> 
+								<tr id="cost-benefit-table-header"> 
+									<th style="background-color: #F1EDC2;border: 1px solid #000;padding: 5px 20px 0;">Adaptation Measure</th> 
+									<th style="background-color: #F1EDC2;border: 1px solid #000;padding: 5px 20px 0;">Level (EU, MS, regional)</th> 
+									<th style="background-color: #F1EDC2;border: 1px solid #000;padding: 5px 20px 0;">Impact addressed</th> 
+									<th style="background-color: #F1EDC2;border: 1px solid #000;padding: 5px 20px 0;">Expected direct damage Cost</th> 
+									<th style="background-color: #F1EDC2;border: 1px solid #000;padding: 5px 20px 0;">Expected Cost of Adaptation</th> 
+									<th style="background-color: #F1EDC2;border: 1px solid #000;padding: 5px 20px 0;">Expected benefits</th> 
+									<th style="background-color: #F1EDC2;border: 1px solid #000;padding: 5px 20px 0;">Source</th> 
+								</tr> 
+							</thead> 
+							<tbody> 
+								<tr class="cost-benefit-table-row">
+									<td class="cost-benefit-table-column" valign="top" style="padding: 5px 5px;">
+										River Flood protection
+									</td>
+									<td class="cost-benefit-table-column" valign="top" style="padding: 5px 5px;">
+										EU
+									</td>
+									<td class="cost-benefit-table-column" valign="top" style="padding: 5px 5px;">
+										Relative change in 100y return level flow
+									</td>
+									<td class="cost-benefit-table-column" valign="top" style="padding: 5px 5px;">
+										Expected mean annual damages
+										<br/>
+										<div style="margin:10px;text-align:center;">
+											<a class="lightbox" href="<%=renderRequest.getContextPath()%>/images/cost-benefit/1_1_Flood EU 27 Mean Annual Damages (bar graph).png">
+												<img src="<%=renderRequest.getContextPath()%>/images/cost-benefit/thumb-1_1_Flood EU 27 Mean Annual Damages (bar graph).png" width="72" height="72" alt="" />
+											</a>
+										</div>
+										<br/>
+										Expected mean annual damages per RCM
+										<br/>
+										<div style="margin:10px;text-align:center;">
+											<a class="lightbox" href="<%=renderRequest.getContextPath()%>/images/cost-benefit/1_2 Floods EU 27 Average Min Max Mean Annual Flood Damages (line graph).png">
+												<img src="<%=renderRequest.getContextPath()%>/images/cost-benefit/thumb-1_2 Floods EU 27 Average Min Max Mean Annual Flood Damages (line graph).png" width="72" height="72" alt="" />
+											</a>
+										</div>										
+									</td>
+									<td class="cost-benefit-table-column" valign="top" style="padding: 5px 5px;">
+										Costs of Adaptation, in Billion Euro/year, to maintain 1 in 100 year levels of flood protection
+										<br/>
+										<div style="margin:10px;text-align:center;">
+											<a class="lightbox" href="<%=renderRequest.getContextPath()%>/images/cost-benefit/2_1_Floods EU 27 Cost of Adaptation (line graph).png">
+												<img src="<%=renderRequest.getContextPath()%>/images/cost-benefit/thumb-2_1_Floods EU 27 Cost of Adaptation (line graph).png" width="72" height="72" alt="" />
+											</a>
+										</div>										
+										Cost of Adaptation per RCM
+										<br/>
+										<div style="margin:10px;text-align:center;">
+											<a class="lightbox" href="<%=renderRequest.getContextPath()%>/images/cost-benefit/2_2_Floods EU 27 Cost of Adaptation (line graph).png">
+												<img src="<%=renderRequest.getContextPath()%>/images/cost-benefit/thumb-2_2_Floods EU 27 Cost of Adaptation (line graph).png" width="72" height="72" alt="" />
+											</a>
+										</div>	
+									</td>
+									<td class="cost-benefit-table-column" valign="top" style="padding: 5px 5px;">
+										Expected benefits from maintaining 1-in-100 y river protection	
+										<br/>
+										<div style="margin:10px;text-align:center;">
+											<a class="lightbox" href="<%=renderRequest.getContextPath()%>/images/cost-benefit/3_1_Floods EU 27 Benefits of Adaptation (table).png">
+												<img src="<%=renderRequest.getContextPath()%>/images/cost-benefit/thumb-3_1_Floods EU 27 Benefits of Adaptation (table).png" width="72" height="72" alt="" />
+											</a>
+										</div>										
+									</td>
+									<td class="cost-benefit-table-column" valign="top" style="padding: 5px 5px;">
+										<a href="http://www.climatecost.cc/" target="_blank">
+											ClimateCost (new window)
+										</a>	
+										<br/>
+										<a href="" target="_blank">										
+											Policy brief 6 (new window)
+										</a>	
+									</td>									
+								</tr>
+								<tr class="cost-benefit-table-row" style="background-color: #FDFCDC;">
+									<td class="cost-benefit-table-column" valign="top" style="padding: 5px 5px;">
+										River Flood protection									
+									</td>
+									<td class="cost-benefit-table-column" valign="top" style="padding: 5px 5px;">
+										27 member states
+									</td>
+									<td class="cost-benefit-table-column" valign="top" style="padding: 5px 5px;">
+										Relative change in 100y return level flow									
+									</td>
+									<td class="cost-benefit-table-column" valign="top" style="padding: 5px 5px;">
+										Expected mean annual damages
+										<br/>
+										<div style="margin:10px;text-align:center;">
+											<a class="lightbox" href="<%=renderRequest.getContextPath()%>/images/cost-benefit/1_3_Flood EU 27 Mean Annual Damages per M S (bar graph).png">
+												<img src="<%=renderRequest.getContextPath()%>/images/cost-benefit/thumb-1_3_Flood EU 27 Mean Annual Damages per M S (bar graph).png" width="72" height="72" alt="" />
+											</a>
+										</div>											
+									</td>
+									<td class="cost-benefit-table-column" valign="top" style="padding: 5px 5px;">
+										Costs of Adaptation to maintain 1 in 100 year levels of flood protection
+										<br/>
+										<div style="margin:10px;text-align:center;">
+											<a class="lightbox" href="<%=renderRequest.getContextPath()%>/images/cost-benefit/2_3 Floods EU 27 Cost of Adaptation per MS (bar graph).png">
+												<img src="<%=renderRequest.getContextPath()%>/images/cost-benefit/thumb-2_3 Floods EU 27 Cost of Adaptation per MS (bar graph).png" width="72" height="72" alt="" />
+											</a>
+										</div>
+									</td>
+									<td class="cost-benefit-table-column" valign="top" style="padding: 5px 5px;">
+									</td>
+									<td class="cost-benefit-table-column" valign="top" style="padding: 5px 5px;">
+										<a href="http://www.climatecost.cc/" target="_blank">
+											ClimateCost (new window)
+										</a>	
+										<br/>
+										<a href="" target="_blank">										
+											Policy brief 6 (new window)
+										</a>
+									</td>	
+								</tr>
+							</tbody>
+						</table>					
+					</div>					
+				</p>
+			<!-- end 5.2.2 -->
+			</div>
+				
+		<!-- end 5.2 -->	
+		</div>
+		
+		<div id="5-3" class="step-5-sub" style="display:none;">
+			<h2>
+				5.3. How do I decide which measures to include in my portfolio?
+			</h2>
+			<p>
+				Adaptation options have to be effective and efficient in order to be considered for implementation. Effective options are options that reduce a certain vulnerability or number of vulnerabilities to a desired level. 
+				Efficient options are the options whose benefits exceed their costs and are more cost-effective than the alternatives. These benefits can be economic, social and environmental. In the feasibility assessment all these 
+				three aspects have to be taken into account.
+				<div>
+					(Read more)
+				</div>
+				<div>				
+					Links:
+					<ul>					
+						<li>
+							Link to MCA tool of ClimWatAdapt (link to be provided by Natasha)	
+						</li>
+					</ul>
+				</div>	
+			</p>
+		<!-- end 5.3 -->	
+		</div>				
+		
+		<div id="5-4" class="step-5-sub" style="display:none;">
 		<h2>
-			5.2 What are feasible adaptation options?			
+				5.4. What is my Adaptive Capacity?
+			</h2>
+			<p>
+				Adaptive capacity is "the ability of a (human) system to adjust to climate change (including climate variability and extremes) to moderate potential damages, to take advantage of opportunities, or to cope with the 
+				consequences." Adaptive capacity is very much determined by available financial recourses, education level and available adaptation options. There are also a number of hidden costs associated with the implementation of 
+				measures, related to adaptive capacity such as institutional capacity and the experience of an administration in implementing a specific adaptation measure. GDP, education statistics, lack of impact data, appropriate 
+				emergency response scheme or overall adaptation strategy are all indicators that could be used to assess adaptive capacity.
+				<div>
+					(Read more)
+				</div>
+			</p>		
+		<!-- end 5.4 -->	
+		</div>	
+		
+		<div id="5-5" class="step-5-sub" style="display:none;">
+			<h2>
+				5.5. How to plan for adaptation
 		</h2>
 		<p>
-			Once you made a portfolio of potential adaptation options, you need to assess them ad determine which of them suit your specific context. You have to consider their effectiveness
-			in reducing vulnerability (or enhancing resilience) and their wider impact on sustainabilty. Assessment of feasible options helps avoiding decisions that lead to mal-adaptation.
-			There is a set of criteria that you should onsider when assessing adaptation options (read more). Tools and guidance documents provided in this section will help you to select feasible options.
+				Climate change introduces a moving target to adaptation and therefore it requires new planning approaches. An example of such a novel approach is the adaptation plan for climate proofing of Thames estuary in 21st century.			
+				<div>
+					(Read more)
+				</div>
+				<div>				
+					Links:
+					<ul>					
+						<li>
+							<a href="http://www.environment-agency.gov.uk/research/planning/109030.aspx" target="_blank">
+								Thames Estuary 2100 case
+							</a>
+						</li>
+					</ul>
+				</div>					
 		</p>
+		<!-- end 5.5 -->	
+		</div>
 
         <hr style="clear:both;display:block;visibility:hidden;"/>
 	</div>
