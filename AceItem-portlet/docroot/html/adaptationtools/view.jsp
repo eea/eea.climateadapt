@@ -1056,6 +1056,11 @@ HttpServletRequest httpRequest = PortalUtil.getOriginalServletRequest(request);
 			<h2>
 				What are possible measures?
 			</h2>	
+			
+			<p>
+				Select feasible adaptation measures from the Clearinghouse Mechanism on Adaptations repository, based on your risk(s) and sector(s) of interest.
+			</p>	
+				
 			<form>
 				<div id="selectors-step4" style="margin-left: 20px; float:left;">
 					<!-- added width because IE8 renders a 100% width otherwise -->				
@@ -1120,8 +1125,13 @@ HttpServletRequest httpRequest = PortalUtil.getOriginalServletRequest(request);
 
 		<div id="good-practices" style="display: none; margin-left: 20px;">
 			<h2>
-				What are possible good practices?
-			</h2>		
+				What are possible good practices? 
+			</h2>	
+			
+			<p>
+				Select feasible good practices for adaptation from the Clearinghouse Mechanism on Adaptations repository, based on your risk(s) and sector(s) of interest.
+			</p>	
+	
 			<form>
 				<div id="selectors-step4-gp" style="margin-left: 20px; float:left;">
 					<!-- added width because IE8 renders a 100% width otherwise -->
