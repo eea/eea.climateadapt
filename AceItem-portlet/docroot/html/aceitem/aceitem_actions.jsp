@@ -7,6 +7,7 @@ AceItem aceitem = (AceItem)row.getObject();
 long groupId = aceitem.getGroupId();
 String name = AceItem.class.getName();
 long aceItemId = aceitem.getAceItemId();
+long nasId = aceitem.getNasId();
 
 String redirect = PortalUtil.getCurrentURL(renderRequest);
 %>
@@ -29,8 +30,13 @@ String redirect = PortalUtil.getCurrentURL(renderRequest);
 	</portlet:actionURL>
 		
 <%
-String confirmURL = "Javascript: if(confirm('Delete?')){document.location.replace('" + deleteURL.toString() + "')};";
+    if(nasId ==0) {
+		String confirmURL = "Javascript: if(confirm('Delete?')){document.location.replace('" + deleteURL.toString() + "')};";
 %>
-	<liferay-ui:icon image="delete" url="<%= confirmURL %>" />
+		<liferay-ui:icon image="delete" url="<%= confirmURL %>" />
+
+<%
+    }
+%>
 
  <!--  Commented out: no Actons button: /liferay-ui:icon-menu -->

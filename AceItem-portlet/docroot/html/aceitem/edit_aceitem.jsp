@@ -30,7 +30,7 @@
 		<aui:input type="hidden" name="aceItemId" value='<%= aceitem == null ? "" : aceitem.getAceItemId() %>'/>
 		
 		<b>nasId</b><br />	
-		<input name="nasId" type="text" size="10" READONLY style="color:grey" value="<%= aceitem == null ? "0" : aceitem.getNasId() %>"><br /><br />
+		<input name="nasId" type="text" size="10" value="<%= aceitem == null ? "0" : aceitem.getNasId() %>"><br /><br />
 
 		<b>name</b><br />	
 		<input name="name" type="text" size="120" value="<%= aceitem == null ? "" : aceitem.getName() %>"><br /><br />
