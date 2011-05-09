@@ -197,23 +197,23 @@ HttpServletRequest httpRequest = PortalUtil.getOriginalServletRequest(request);
 									<ul style="list-style:none;">
 										<li class="list-option">
 											<img src="<%=renderRequest.getContextPath()%>/images/arrow_green.png" class="valigned"/>
-											1. <a href="#" onclick="showVulnerabilitiesAndRisks(); return false">What are the key vulnerabilities and risks?</a>
+											5.1. <a href="#" onclick="showVulnerabilitiesAndRisks(); return false">What are the key vulnerabilities and risks?</a>
 										</li>
 										<li class="list-option">
 											<img src="<%=renderRequest.getContextPath()%>/images/arrow_green.png" class="valigned"/>
-											2. <a href="#" onclick="showUnderlyingCauses(); return false">What are the underlying causes?</a>
+											5.2. <a href="#" onclick="showUnderlyingCauses(); return false">What are the underlying causes?</a>
 										</li>
 										<li class="list-option">
 											<img src="<%=renderRequest.getContextPath()%>/images/arrow_green.png" class="valigned"/>
-											3. <a href="#" onclick="showUnderlyingNaturalCauses(); return false">How does the climate change?</a>
+											5.3. <a href="#" onclick="showUnderlyingNaturalCauses(); return false">How does the climate change?</a>
 										</li>
 										<li class="list-option">
 											<img src="<%=renderRequest.getContextPath()%>/images/arrow_green.png" class="valigned"/>
-											4. <a href="#" onclick="showUnderlyingHumanCauses(); return false">How does the socio-ecological system change?</a>
+											5.4. <a href="#" onclick="showUnderlyingHumanCauses(); return false">How does the socio-ecological system change?</a>
 										</li>
 										<li class="list-option">
 											<img src="<%=renderRequest.getContextPath()%>/images/arrow_green.png" class="valigned"/>
-											5. Uncertainties
+											5.5. Uncertainties
 										</li>
 									</ul>			
 								</div>							
@@ -670,19 +670,19 @@ HttpServletRequest httpRequest = PortalUtil.getOriginalServletRequest(request);
 		</h1>
 
          <h2 id="header-vulnerability" class="heading step2heading" style="display: none">
-             1. What are the key vulnerabilities and risks?
+             5.1. What are the key vulnerabilities and risks?
          </h2>
 
         <h2 id="header-underlying-causes" class="heading step2heading" style="display: none">
-             2. What are the underlying causes?
+             5.2. What are the underlying causes?
         </h2>
 
         <h2 id="header-climate-change" class="heading step2heading" style="display: none">
-             3. How does the climate change?
+             5.3. How does the climate change?
         </h2>
 
         <h2 id="header-socio-ecological" class="heading step2heading" style="display: none">
-             4. How does the socio-ecological system change?
+             5.4. How does the socio-ecological system change?
         </h2>
 
 		<div id="general-content" class="what-should-i-do-content">
