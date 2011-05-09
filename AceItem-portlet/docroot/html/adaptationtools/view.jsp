@@ -278,15 +278,19 @@ HttpServletRequest httpRequest = PortalUtil.getOriginalServletRequest(request);
 					<ul style="list-style:none;">
 						<li class="list-option">
                             <img src="<%=renderRequest.getContextPath()%>/images/arrow_green.png" class="valigned"/>
-							1. <a href="#" onclick="showGenericMeasures(); return false;">What are possible measures?</a>
+							1. <a href="#" onclick="showGeneral(); return false;">General</a>
 						</li>
 						<li class="list-option">
                             <img src="<%=renderRequest.getContextPath()%>/images/arrow_green.png" class="valigned"/>
-							2. <a href="#" onclick="showGoodPractices(); return false;">What are possible good practices?</a>
+							2. <a href="#" onclick="showGenericMeasures(); return false;">What are possible measures?</a>
+						</li>
+						<li class="list-option">
+                            <img src="<%=renderRequest.getContextPath()%>/images/arrow_green.png" class="valigned"/>
+							3. <a href="#" onclick="showGoodPractices(); return false;">What are possible good practices?</a>
 						</li>						
 						<li class="list-option">
                             <img src="<%=renderRequest.getContextPath()%>/images/arrow_green.png" class="valigned"/>
-							3. <a href="#" onclick="showLocateRegion(); return false;">What good practices are available in regions similar to mine?</a>
+							4. <a href="#" onclick="showLocateRegion(); return false;">What good practices are available in regions similar to mine?</a>
 						</li>
 					</ul>
 				</div>
@@ -351,7 +355,7 @@ HttpServletRequest httpRequest = PortalUtil.getOriginalServletRequest(request);
 		<map name="large-navigation" id="large-navigation">
 		  <area shape="poly" coords="415,131,480,106,699,129,699,208,432,186,412,163" nohref="nohref" href="#" onclick="displayStep(2);" class="clickable" style="cursor:hand !important;z-index:999;"/>
 		  <area shape="poly" coords="698,213,441,195,416,224,432,265,481,282,698,280" nohref="nohref" href="#" onclick="displayStep(3);" class="clickable"/>
-		  <area shape="poly" coords="682,301,471,296,427,282,397,295,399,333,428,357,483,359,653,359,681,348" nohref="nohref" href="#" onclick="displayStep(4);showGenericMeasures();" class="clickable"/>
+		  <area shape="poly" coords="682,301,471,296,427,282,397,295,399,333,428,357,483,359,653,359,681,348" nohref="nohref" href="#" onclick="displayStep(4);showGeneral();" class="clickable"/>
 		  <area shape="poly" coords="414,361,376,332,314,332,292,365,292,402,344,425,439,429,669,432,668,383,632,371" nohref="nohref" href="#" onclick="displayStep(5);" class="clickable"/>
 		</map>		
 		<hr style="clear:both;display:block;visibility:hidden;" />
@@ -926,21 +930,31 @@ HttpServletRequest httpRequest = PortalUtil.getOriginalServletRequest(request);
     <script defer="defer" type="text/javascript">
 		var $j = jQuery.noConflict();
 
+        function showGeneral() {
+            $j("#locate-region").hide()
+            $j("#good-practices").hide()
+            $j("#generic-measures").hide();
+			$j("#general").fadeIn();
+        }
+		
         function showGenericMeasures() {
             $j("#locate-region").hide()
             $j("#good-practices").hide()
+			$j("#general").hide();
             $j("#generic-measures").fadeIn();
         }
 
         function showLocateRegion() {
             $j("#good-practices").hide()
             $j("#generic-measures").hide();
+			$j("#general").hide();
             $j("#locate-region").fadeIn()
         }
 		
         function showGoodPractices() {
             $j("#generic-measures").hide();
             $j("#locate-region").hide()
+			$j("#general").hide();
             $j("#good-practices").fadeIn()
         }
 		
@@ -1023,6 +1037,10 @@ HttpServletRequest httpRequest = PortalUtil.getOriginalServletRequest(request);
 			How can identify my adaptation options?
 		</h1>
 
+		<div id="general" style="display: none; margin-left: 20px;">
+			This section provides tools that allow you to assess relevant adaptation measures and good practices. It provides tools to select measures and good practices from the Clearinghouse Mechanism on Adaptation's repository and allows you to assess which measures are implemented in your region and similar regions.
+		</div>
+		
 		<div id="generic-measures" style="display: none; margin-left: 20px;">
 			<h2>
 				What are possible measures?
