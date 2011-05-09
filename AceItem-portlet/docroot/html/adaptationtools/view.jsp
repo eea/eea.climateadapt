@@ -107,10 +107,10 @@ HttpServletRequest httpRequest = PortalUtil.getOriginalServletRequest(request);
 				</div>
 				<div id="what-is-it" style="margin:20px 10px;">
 					<div id="what-is-it-heading" style="font-size:18px;">
-						What is it?
+						What is the Adaptation Support Tool?
 					</div>
 					<div style="font-size:12px;margin:20px 10px;">
-						It is a tool for users involved in development of the climate change adaptation policies who search for information on climate change.
+						The aim of the Adaptation Support Tool is to assist users involved in development of climate change adaptation policies by providing guidance, links to relevant sources and the provision of dedicated tools.
 					</div>
 				</div>
 				<div id="how-can-i-use-it" style="margin:20px 10px;">
@@ -118,8 +118,7 @@ HttpServletRequest httpRequest = PortalUtil.getOriginalServletRequest(request);
 						How can I use it?
 					</div>
 					<div style="font-size:12px;margin:20px 10px;">
-						The tool is based on policy cycle. Resources relevant for four stages of policy-making process are grouped together. Simply choose relevant policy state to
-						access resources that might be relevant to you.
+						The tool is based on the policy cycle. The cycle highlights that climate change adaptation is an iterative process. The steps of this cycle should be re-visited periodically in order to ensure that adaptation decisions are based on up-to-date data, knowledge and policies. This will also allow monitoring and in time assessment of successes and failures and encourage an adaptive learning process.
 					</div>				
 				</div>
 				<div id="where-can-i-find-more-information" style="margin:20px 10px;">
@@ -127,17 +126,21 @@ HttpServletRequest httpRequest = PortalUtil.getOriginalServletRequest(request);
 						Where can I find more information?
 					</div>
 					<div style="font-size:12px;margin:20px 10px;">
-						You can find more about designing and mainstreaming adaptation policies in these documents:
+						More information on designing and mainstreaming adaptation policies can be found in the following documents:
 						<div style="margin:20px 0px;">
 							<img src="<%=renderRequest.getContextPath()%>/images/arrow_green.png" class="valigned"/>
 							<span style="margin-left:5px;">
-								Design of guidelines for the elaboration of Regional Climate Change Adaptation Strategies
+								<a href="http://ec.europa.eu/clima/documentation/adaptation/docs/RAS%20Final%20Report.pdf" target="_blank">
+									Design of guidelines for the elaboration of Regional Climate Change Adaptation Strategies
+								</a>
 							</span>
 						</div>
 						<div style="margin:20px 0px;">
 							<img src="<%=renderRequest.getContextPath()%>/images/arrow_green.png" class="valigned"/>
 							<span style="margin-left:5px;">
-								Integrating Climate Change Adaptation into Development Co-operation
+								<a href="http://eur-lex.europa.eu/LexUriServ/LexUriServ.do?uri=COM:2009:0147:FIN:EN:PDF" target="_blank">
+									WHITE PAPER: Adapting to climate change: Towards a European framework for action
+								</a>
 							</span>
 						</div>					
 					</div>				
