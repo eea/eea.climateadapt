@@ -470,7 +470,7 @@ HttpServletRequest httpRequest = PortalUtil.getOriginalServletRequest(request);
 						align	 : 'center',
 						innerHtml: '<div style="position:relative;z-index:9999;background:#fff;zoom:1;filter:alpha(opacity = 100);"> \
 										<div style="background:green;color:#fff;height:15px;border:1px solid lime;padding:5px;">information</div> \
-										<div style="height:350px;padding:5px;"> \
+										<div style="height:380px;width:400px;padding:5px;"> \
 											SCENES scenario "Economy First" (EcF) \
 											<br/> \
 											<br/>The economy develops towards globalisation and liberalisation so innovations spread but income \
