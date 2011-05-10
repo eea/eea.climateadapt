@@ -252,30 +252,30 @@ HttpServletRequest httpRequest = PortalUtil.getOriginalServletRequest(request);
 		-->
 		<div id="step-left-4" class="step-left">
             <div id="what-should-i-do-4" style="margin:5px;">
-				<div id="what-should-i-do-4-heading" style="font-size:24px;">
+				<div id="what-should-i-do-4-heading" style="font-size:18px;line-height:20px;">
 					What should I do?
 				</div>
 
             </div>
 			<div id="search-option-database" style="margin:5px;">
-				<div id="search-option-database-heading" style="font-size:24px;">
+				<div id="search-option-database-heading" style="font-size:18px;line-height:20px;">
 					Search the option database
 				</div>
 				<div id="search-option-database-options">
-					<ul class="menu-left">
+					<ol class="menu-left">
 						<li class="list-option">
-							1. <a href="#" onclick="showGeneral(); return false;">General</a>
+							<a href="#" onclick="showGeneral(); return false;">General</a>
 						</li>
 						<li class="list-option">
-							2. <a href="#" onclick="showGenericMeasures(); return false;">What are possible measures?</a>
+						    <a href="#" onclick="showGenericMeasures(); return false;">What are possible measures?</a>
 						</li>
 						<li class="list-option">
-							3. <a href="#" onclick="showGoodPractices(); return false;">What are possible good practices?</a>
+							<a href="#" onclick="showGoodPractices(); return false;">What are possible good practices?</a>
 						</li>
 						<li class="list-option">
-							4. <a href="#" onclick="showLocateRegion(); return false;">What good practices are available in regions similar to mine?</a>
+							<a href="#" onclick="showLocateRegion(); return false;">What good practices are available in regions similar to mine?</a>
 						</li>
-					</ul>
+					</ol>
 				</div>
 			</div>
 
