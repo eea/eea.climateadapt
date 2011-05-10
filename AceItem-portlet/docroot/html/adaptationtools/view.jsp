@@ -734,7 +734,7 @@ HttpServletRequest httpRequest = PortalUtil.getOriginalServletRequest(request);
 
 
 
-	<div id="step-right-2" class="step-right">
+	<div id="step-right-2" class="step-right step-2-right">
 		<h1 id="adaptationtools-heading">
 			Am I vulnerable to climate change and what are my risks
 		</h1>
