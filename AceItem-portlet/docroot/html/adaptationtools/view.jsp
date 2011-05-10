@@ -168,28 +168,28 @@ HttpServletRequest httpRequest = PortalUtil.getOriginalServletRequest(request);
 				<div id="what-should-i-do-options" style="">
 					<ul class="menu-left">
 						<li class="list-option">
-							<a href="#" onclick="step2substep('2-1'); return false">
-							1. General
+							1. <a href="#" onclick="step2substep('2-1'); return false">
+								General
 							</a>
 						</li>
 						<li class="list-option">
-							<a href="#" onclick="step2substep('2-2'); return false">
-								2. How do I analyse impacts of past weather and recent climate trends?
+							2. <a href="#" onclick="step2substep('2-2'); return false">
+								How do I analyse impacts of past weather and recent climate trends?
 							</a>
 						</li>
 						<li class="list-option">
-							<a href="#" onclick="step2substep('2-3'); return false">
-								3. How do I identify the impacts of climate change?
+							3. <a href="#" onclick="step2substep('2-3'); return false">
+								How do I identify the impacts of climate change?
 							</a>
 						</li>
 						<li class="list-option" id="analyze-in-nas">
-							<a href="#" onclick="step2substep('2-4'); return false">
-								4. Are there vulnerability assessments in my region?
+							4. <a href="#" onclick="step2substep('2-4'); return false">
+								Are there vulnerability assessments in my region?
 							</a>
 						</li>
 						<li class="list-option" id="analyze-maps-heading">
-							<a href="#" onclick="step2substep('analyze-maps-heading');showVulnerabilitiesAndRisks(); initMapViewerIndicators();">
-								5. How do I analyse impacts from European scale vulnerability assessments?
+							5. <a href="#" onclick="step2substep('analyze-maps-heading');showVulnerabilitiesAndRisks(); initMapViewerIndicators();">
+								How do I analyse impacts from European scale vulnerability assessments?
 							</a>
 								<div id="analyze-maps-options" style="display:none;">
 									<ul class="menu-left">
@@ -213,18 +213,18 @@ HttpServletRequest httpRequest = PortalUtil.getOriginalServletRequest(request);
 						</li>
 
 						<li class="list-option">
-							<a href="#" onclick="step2substep('2-6'); return false">
-								6. What are the risks?
+							6. <a href="#" onclick="step2substep('2-6'); return false">
+								What are the risks?
 							</a>
 						</li>
 						<li class="list-option">
-							<a href="#" onclick="step2substep('2-7'); return false">
-								7. Are there also opportunities?
+							7. <a href="#" onclick="step2substep('2-7'); return false">
+								Are there also opportunities?
 							</a>
 						</li>
 						<li class="list-option">
-							<a href="#" onclick="step2substep('2-8'); return false">
-								8. What are the uncertainties?
+							8. <a href="#" onclick="step2substep('2-8'); return false">
+								What are the uncertainties?
 							</a>
 						</li>
 					</ul>
@@ -262,20 +262,20 @@ HttpServletRequest httpRequest = PortalUtil.getOriginalServletRequest(request);
 					Search the option database
 				</div>
 				<div id="search-option-database-options">
-					<ol class="menu-left">
+					<ul class="menu-left">
 						<li class="list-option">
-							<a href="#" onclick="showGeneral(); return false;">General</a>
+							1. <a href="#" onclick="showGeneral(); return false;">General</a>
 						</li>
 						<li class="list-option">
-						    <a href="#" onclick="showGenericMeasures(); return false;">What are possible measures?</a>
+							2. <a href="#" onclick="showGenericMeasures(); return false;">What are possible measures?</a>
 						</li>
 						<li class="list-option">
-							<a href="#" onclick="showGoodPractices(); return false;">What are possible good practices?</a>
+							3. <a href="#" onclick="showGoodPractices(); return false;">What are possible good practices?</a>
 						</li>
 						<li class="list-option">
-							<a href="#" onclick="showLocateRegion(); return false;">What good practices are available in regions similar to mine?</a>
+							4. <a href="#" onclick="showLocateRegion(); return false;">What good practices are available in regions similar to mine?</a>
 						</li>
-					</ol>
+					</ul>
 				</div>
 			</div>
 
