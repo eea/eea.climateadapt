@@ -15,6 +15,10 @@
 	margin-left:0em;
 }
 
+.step-right {
+	width: 560px;
+}
+
 div.step-right h1 {
 	padding:20px;
 }
