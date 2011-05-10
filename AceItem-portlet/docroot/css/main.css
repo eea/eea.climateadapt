@@ -209,3 +209,10 @@ div.description {
     background-repeat:no-repeat;
     padding-left: 70px;
 }
+
+#navigation-map area:active,
+#navigation-map area:focus,
+#large-navigation area:active,
+#large-navigation area:focus {
+    outline: none;
+}
