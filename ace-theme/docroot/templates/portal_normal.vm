@@ -34,13 +34,11 @@
 					#end
                     <li id="twitter"><a href="http://twitter.com/euenvironment" target="_blank">Twitter</a></li>
                     <li id="rss"><a href="/web/guest/home/-/journal/rss/14403?doAsGroupId=18&refererPlid=13750&_15_groupId=18" target="_blank">RSS</a></li>
+					<li id="search"><a href="/data-and-downloads">Search</a></li>
 					<li id="sitemap"><a href="/sitemap">Sitemap</a></li>
                     <li id="legal-notice"><a href="http://ec.europa.eu/geninfo/legal_notices_en.htm">Legal notice</a></li>
 					
                 </ul>
-            </div>
-			<div id="searchbox">
-                <span>$theme.search()</span>
             </div>
 
 			<h2 class="community-title">
