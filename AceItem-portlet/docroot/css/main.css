@@ -180,3 +180,32 @@ div.description {
     display:none;
 
 }
+
+
+#adaptationtools-heading {
+    background-image:url(../images/bullit2.png);
+    background-position: 20px 5px;
+    background-repeat:no-repeat;
+    padding-left: 70px;
+}
+
+#strategy-adaptation-heading {
+    background-image:url(../images/bullit3.png);
+    background-position: 20px 5px;
+    background-repeat:no-repeat;
+    padding-left: 70px;
+}
+
+#aplication-options-heading {
+    background-image:url(../images/bullit4.png);
+    background-position: 20px 5px;
+    background-repeat:no-repeat;
+    padding-left: 70px;
+}
+
+#assess-adaptation-options-heading {
+    background-image:url(../images/bullit5.png);
+    background-position: 20px 5px;
+    background-repeat:no-repeat;
+    padding-left: 70px;
+}
