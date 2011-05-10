@@ -367,13 +367,15 @@ HttpServletRequest httpRequest = PortalUtil.getOriginalServletRequest(request);
 			// create information popups
 			//
 			// the zoom and opacity in the innerHtml's div is because IE renders the popups transparent otherwise
-			$j('.top-bubble').CreateBubblePopup({
+			$j('#sector-selector-bubble').CreateBubblePopup({
 					position : 'top',
                     selectable: true,
 					align	 : 'center',
 					innerHtml: '<div style="position:relative;z-index:9999;background:#fff;zoom:1;filter:alpha(opacity = 100);"> \
 									<div style="background:green;color:#fff;height:15px;border:1px solid lime;padding:5px;">information</div> \
-									<div style="height:35px;padding:5px;">short description</div> \
+									<div style="height:35px;padding:5px;"> \
+										EU policy sectors \
+									</div> \
 									<div style="height:15px;text-align:right;padding:5px;">read more &raquo;</div> \
 								</div>',
 					innerHtmlStyle: {
@@ -383,6 +385,44 @@ HttpServletRequest httpRequest = PortalUtil.getOriginalServletRequest(request);
 					themeName: 	'green',
 					themePath: 	'<%=renderRequest.getContextPath()%>/js/bubblepopup/jquerybubblepopup-theme'
 			});
+			// the zoom and opacity in the innerHtml's div is because IE renders the popups transparent otherwise
+			$j('#risks-selector-bubble').CreateBubblePopup({
+					position : 'top',
+                    selectable: true,
+					align	 : 'center',
+					innerHtml: '<div style="position:relative;z-index:9999;background:#fff;zoom:1;filter:alpha(opacity = 100);"> \
+									<div style="background:green;color:#fff;height:15px;border:1px solid lime;padding:5px;">information</div> \
+									<div style="height:35px;padding:5px;"> \
+										Climate hazards \
+									</div> \
+									<div style="height:15px;text-align:right;padding:5px;">read more &raquo;</div> \
+								</div>',
+					innerHtmlStyle: {
+										color:'#000',
+										'text-align':'left'
+									},
+					themeName: 	'green',
+					themePath: 	'<%=renderRequest.getContextPath()%>/js/bubblepopup/jquerybubblepopup-theme'
+			});
+			// the zoom and opacity in the innerHtml's div is because IE renders the popups transparent otherwise
+			$j('#scenario-selector-bubble').CreateBubblePopup({
+					position : 'top',
+                    selectable: true,
+					align	 : 'center',
+					innerHtml: '<div style="position:relative;z-index:9999;background:#fff;zoom:1;filter:alpha(opacity = 100);"> \
+									<div style="background:green;color:#fff;height:15px;border:1px solid lime;padding:5px;">information</div> \
+									<div id="scenario-selector-shorttext" style="height:35px;padding:5px;"> \
+										SCENES project, Economy First \
+									</div> \
+									<div id="scenario-read-more" style="height:15px;text-align:right;padding:5px;cursor:pointer;" onclick="createBubble();">read more &raquo;</div> \
+								</div>',
+					innerHtmlStyle: {
+										color:'#000', 
+										'text-align':'left'
+									},
+					themeName: 	'green',
+					themePath: 	'<%=renderRequest.getContextPath()%>/js/bubblepopup/jquerybubblepopup-theme'
+				});	
 
 			//
 			// load indicators data
@@ -422,6 +462,44 @@ HttpServletRequest httpRequest = PortalUtil.getOriginalServletRequest(request);
 					}
 			});
 
+			function createBubble() {
+				// the zoom and opacity in the innerHtml's div is because IE renders the popups transparent otherwise
+				$j('#scenario-read-more').CreateBubblePopup({
+						position : 'top',
+						selectable: true,
+						align	 : 'center',
+						innerHtml: '<div style="position:relative;z-index:9999;background:#fff;zoom:1;filter:alpha(opacity = 100);"> \
+										<div style="background:green;color:#fff;height:15px;border:1px solid lime;padding:5px;">information</div> \
+										<div style="height:350px;padding:5px;"> \
+											SCENES scenario "Economy First" (EcF) \
+											<br/> \
+											<br/>The economy develops towards globalisation and liberalisation so innovations spread but income \
+											inequality, immigration and urban sprawl cause social tensions. All energy production alternatives \
+											are considered, international consortia are financed to find high-tech alternatives to fossil fuels. \
+											Global demand for food and biofuels drives the intensification of agriculture with increasing need \
+											for irrigation and new cultivation area. As CAP is weakened farms are abandoned where crop production \
+											is uneconomic. Slow adoption of water-efficient technologies due to peoples' limited income, low \
+											water-saving consciousness, more single-person households, increase in tourism and lack in training \
+											using new irrigation technologies lead to higher water use. Only the higher water prices dampen this \
+											trend. It is economic to treat and re-use irrigation return flows thus this practice also reducing \
+											diffuse pollution is adopted. Water ecosystems providing ecological goods and services for economies \
+											and society (e.g. tourism) are preserved and improved. Thus WFD changes its conceptual focus from the \
+											good ecological status to preserving socio-economically worth ecological services. Pollution load \
+											increases due to curtailed infrastructure, poor treatment and intensified agriculture. Poisoning \
+											incidents catch the interest of media and public. Scientific findings and public protests are being \
+											finally heard. Even if governments and European institutions are weak in EcF they are the last straw \
+											after recession and social upheaval in 2040s to start working with NGOs, industries and other \
+											representatives of civil society to restore economic prosperity and make ground for social coherence. \
+										</div> \
+									</div>',
+						innerHtmlStyle: {
+											color:'#000', 
+											'text-align':'left'
+										},
+						themeName: 	'green',
+						themePath: 	'<%=renderRequest.getContextPath()%>/js/bubblepopup/jquerybubblepopup-theme'
+					});	
+			}		
 
 		// displays indicators, based on their indicator-type.
 		function displayIndicators(indicators) {
@@ -464,33 +542,45 @@ HttpServletRequest httpRequest = PortalUtil.getOriginalServletRequest(request);
 						.click(function() {
 							app.addLayer(u, ln, t);
 
-							/* do not do this anymore; user must use steps in left panel
-
-							// if this is a vulnerability type
-							if(y === 'VULNERABILITY') {
-								// enable underlying cause indicators
-								showUnderlyingCauses();
-							}
-
-
-							// if this is an underlying cause type
-							if(y === 'EXPOSURE') {
-								// enable climate changes
-								showUnderlyingNaturalCauses();
-							}
-							else if(y === 'SENSITIVITY') {
-								// enable resource efficiency
-								showUnderlyingHumanCauses();
-							}
-							*/
-
 						});
 
-					// no map icon
-					//$j(document.createElement("img"))
-					//		.attr({ src: '<%=renderRequest.getContextPath()%>/images/map_icon.gif', title: 'show map' })
-					//		.attr({ style: 'float:left;margin-left:5px;' })
-					//		.appendTo(indicatortype);
+					if(t === 'Water stress') {
+					$j('<div id="waterstress-bubble" class="top-bubble" style="float:left;margin:0px 10px;"><img src="<%=renderRequest.getContextPath()%>/images/info.png" class="valigned"/></div>').appendTo(indicatortype);
+					// the zoom and opacity in the innerHtml's div is because IE renders the popups transparent otherwise
+					$j('#waterstress-bubble').CreateBubblePopup({
+							position : 'right',
+							selectable: true,
+							align	 : 'center',
+							innerHtml: '<div style="position:relative;z-index:9999;background:#fff;zoom:1;filter:alpha(opacity = 100);"> \
+											<div style="background:green;color:#fff;height:15px;border:1px solid lime;padding:5px;">information</div> \
+											<div style="height:300px;padding:5px;"> \
+												<br/>Indicator: Water Stress \
+												<br/>\
+												<br/>Description: Water withdrawals to water availability ratio in summer (June, July, August) \
+												<br/>\
+												<br/>Source: ClimWatAdapt \
+												<br/>\
+												<br/>Spatial Resolution: 5x5 0, aggregated on NUTs-2 level \
+												<br/>\
+												<br/>Scenario: SCENES, Economy First \
+												<br/>\
+												<br/>Baseline: 2005 \
+												<br/>\
+												<br/>Year: 2050 \
+												<br/>\
+												<br/>Model: WaterGAP \
+											</div> \
+											<div style="height:15px;text-align:right;padding:5px;">read more &raquo;</div> \
+										</div>',
+							innerHtmlStyle: {
+												color:'#000', 
+												'text-align':'left'
+											},
+							themeName: 	'green',
+							themePath: 	'<%=renderRequest.getContextPath()%>/js/bubblepopup/jquerybubblepopup-theme'
+						});
+					}					
+
 
 						$j(document.createElement("hr"))
 							.attr({ style: 'clear:both;display:block;visibility:hidden;' })
@@ -979,7 +1069,7 @@ HttpServletRequest httpRequest = PortalUtil.getOriginalServletRequest(request);
 
 				<!-- added width because IE8 renders it at 100% width otherwise -->
 				<div id="sector-selector"  class="adaptationtools-selector"  style="float:right;width:229px;">
-					<div class="top-bubble" style="float:right;margin:0px 10px;">
+					<div id="sector-selector-bubble" class="top-bubble" style="float:right;margin:0px 10px;">
 						<img src="<%=renderRequest.getContextPath()%>/images/info.png" class="valigned"/>
 					</div>
 					<span style="margin-right:10px;">
@@ -1003,7 +1093,7 @@ HttpServletRequest httpRequest = PortalUtil.getOriginalServletRequest(request);
 
 				<!-- added width because IE8 renders it at 100% width otherwise -->
 				<div id="risks-selector" class="adaptationtools-selector" style="float:right;width:212px;">
-					<div class="top-bubble" style="float:right;margin:0px 10px;">
+					<div id="risks-selector-bubble" class="top-bubble" style="float:right;margin:0px 10px;">
 						<img src="<%=renderRequest.getContextPath()%>/images/info.png" class="valigned"/>
 					</div>
 					<span style="margin-right:10px;">
@@ -1097,9 +1187,6 @@ HttpServletRequest httpRequest = PortalUtil.getOriginalServletRequest(request);
 				</div>
 				<!-- added width because IE8 renders it at 100% width otherwise -->
 				<div id="model-selector" style="float:right;width:169px;">
-					<div class="top-bubble" style="float:right;margin:0px 10px;">
-						<img src="<%=renderRequest.getContextPath()%>/images/info.png" class="valigned"/>
-					</div>
 					<span style="margin-right:10px;">
 						Model
 					</span>
@@ -1111,9 +1198,6 @@ HttpServletRequest httpRequest = PortalUtil.getOriginalServletRequest(request);
 				</div>
 				<!-- added width because IE8 renders it at 100% width otherwise -->
 				<div id="time-selector" style="float:right;width:129px;">
-					<div class="top-bubble" style="float:right;margin:0px 10px;">
-						<img src="<%=renderRequest.getContextPath()%>/images/info.png" class="valigned"/>
-					</div>
 					<span style="margin-right:10px;">
 						Time
 					</span>
@@ -1125,7 +1209,7 @@ HttpServletRequest httpRequest = PortalUtil.getOriginalServletRequest(request);
 					</div>
 				<!-- added width because IE8 renders it at 100% width otherwise -->
 				<div id="scenario-selector" style="float:right;width:192px;">
-					<div class="top-bubble" style="float:right;margin:0px 10px;">
+					<div id="scenario-selector-bubble" class="top-bubble" style="float:right;margin:0px 10px;">
 						<img src="<%=renderRequest.getContextPath()%>/images/info.png" class="valigned"/>
 				</div>
 					<span style="margin-right:10px;">
