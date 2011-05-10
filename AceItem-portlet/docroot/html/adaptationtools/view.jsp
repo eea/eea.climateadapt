@@ -47,7 +47,7 @@ HttpServletRequest httpRequest = PortalUtil.getOriginalServletRequest(request);
 		$j('.step-right').hide();
 		$j('#step-right-'+nr).fadeIn();
 	}
-	
+
 	
 	function step2substep(headingId) {
 		
@@ -114,7 +114,7 @@ HttpServletRequest httpRequest = PortalUtil.getOriginalServletRequest(request);
 					</div>
 					<div style="font-size:12px;margin:20px 10px;">
 						The tool is based on the policy cycle. The cycle highlights that climate change adaptation is an iterative process. The steps of this cycle should be re-visited periodically in order to ensure that adaptation decisions are based on up-to-date data, knowledge and policies. This will also allow monitoring and in time assessment of successes and failures and encourage an adaptive learning process.
-					</div>				
+					</div>
 				</div>
 				<div id="where-can-i-find-more-information" style="margin:20px 10px;">
 					<div id="where-can-i-find-more-information-heading" style="font-size:18px;">
@@ -137,9 +137,9 @@ HttpServletRequest httpRequest = PortalUtil.getOriginalServletRequest(request);
 									WHITE PAPER: Adapting to climate change: Towards a European framework for action
 								</a>
 							</span>
-						</div>					
-					</div>				
-				</div>			
+						</div>
+					</div>
+				</div>
 				<hr style="clear:both;display:block;visibility:hidden;"/>
 			</div>
 			<!-- navigation in images -->
@@ -151,14 +151,14 @@ HttpServletRequest httpRequest = PortalUtil.getOriginalServletRequest(request);
 				<area shape="poly" coords="175,152,332,153,336,186,180,186,170,172" nohref="nohref" href="#" onclick="displayStep(4);showGeneral();" class="clickable" />
 				<area shape="poly" coords="123,177,165,177,181,188,233,192,278,199,280,224,130,227,122,205" nohref="nohref" href="#" onclick="displayStep(5);" class="clickable" />
 			</map>
-		
-		<!-- end step 1 -->	
+
+		<!-- end step 1 -->
 		</div>
 
 		<!--
-		
+
 				step 2
-				
+
 		-->
 		<div id="step-left-2" class="step-left">
 			<div id="what-should-i-do" style="margin:5px;">
@@ -166,76 +166,63 @@ HttpServletRequest httpRequest = PortalUtil.getOriginalServletRequest(request);
 					What should I do?
 				</div>
 				<div id="what-should-i-do-options" style="">
-					<ul style="list-style:none;">
+					<ul class="menu-left">
 						<li class="list-option">
-							<img src="<%=renderRequest.getContextPath()%>/images/arrow_green.png" class="valigned" style="width:13px;"/>
 							<a href="#" onclick="step2substep('2-1'); return false">
 							1. General
 							</a>
 						</li>
 						<li class="list-option">
-							<img src="<%=renderRequest.getContextPath()%>/images/arrow_green.png" class="valigned" style="width:13px;"/>
 							<a href="#" onclick="step2substep('2-2'); return false">
 								2. How do I analyse impacts of past weather and recent climate trends?
 							</a>
 						</li>
 						<li class="list-option">
-							<img src="<%=renderRequest.getContextPath()%>/images/arrow_green.png" class="valigned" style="width:13px;"/>
 							<a href="#" onclick="step2substep('2-3'); return false">
 								3. How do I identify the impacts of climate change?
 							</a>
 						</li>
 						<li class="list-option" id="analyze-in-nas">
-							<img src="<%=renderRequest.getContextPath()%>/images/arrow_green.png" class="valigned"/>
 							<a href="#" onclick="step2substep('2-4'); return false">
 								4. Are there vulnerability assessments in my region?
 							</a>
-						</li>						
+						</li>
 						<li class="list-option" id="analyze-maps-heading">
-							<img src="<%=renderRequest.getContextPath()%>/images/arrow_green.png" class="valigned"/>
 							<a href="#" onclick="step2substep('analyze-maps-heading');showVulnerabilitiesAndRisks(); initMapViewerIndicators();">
 								5. How do I analyse impacts from European scale vulnerability assessments?
-							</a>	
+							</a>
 								<div id="analyze-maps-options" style="display:none;">
-									<ul style="list-style:none;">
+									<ul class="menu-left">
 										<li class="list-option">
-											<img src="<%=renderRequest.getContextPath()%>/images/arrow_green.png" class="valigned"/>
 											5.1. <a href="#" onclick="showVulnerabilitiesAndRisks(); return false">What are the key vulnerabilities and risks?</a>
 										</li>
 										<li class="list-option">
-											<img src="<%=renderRequest.getContextPath()%>/images/arrow_green.png" class="valigned"/>
 											5.2. <a href="#" onclick="showUnderlyingCauses(); return false">What are the underlying causes?</a>
 										</li>
 										<li class="list-option">
-											<img src="<%=renderRequest.getContextPath()%>/images/arrow_green.png" class="valigned"/>
 											5.3. <a href="#" onclick="showUnderlyingNaturalCauses(); return false">How does the climate change?</a>
 										</li>
 										<li class="list-option">
-											<img src="<%=renderRequest.getContextPath()%>/images/arrow_green.png" class="valigned"/>
 											5.4. <a href="#" onclick="showUnderlyingHumanCauses(); return false">How does the socio-ecological system change?</a>
 										</li>
 										<li class="list-option">
-											<img src="<%=renderRequest.getContextPath()%>/images/arrow_green.png" class="valigned"/>
 											5.5. Uncertainties
 										</li>
-									</ul>			
-								</div>							
-						</li>						
-						
+									</ul>
+								</div>
+						</li>
+
 						<li class="list-option">
-							<img src="<%=renderRequest.getContextPath()%>/images/arrow_green.png" class="valigned"/>
 							<a href="#" onclick="step2substep('2-6'); return false">
 								6. What are the risks?
 							</a>
 						</li>
 						<li class="list-option">
-							<img src="<%=renderRequest.getContextPath()%>/images/arrow_green.png" class="valigned"/>
 							<a href="#" onclick="step2substep('2-7'); return false">
 								7. Are there also opportunities?
 							</a>
 						</li>
 						<li class="list-option">
-							<img src="<%=renderRequest.getContextPath()%>/images/arrow_green.png" class="valigned"/>
 							<a href="#" onclick="step2substep('2-8'); return false">
 								8. What are the uncertainties?
 							</a>
@@ -275,21 +262,17 @@ HttpServletRequest httpRequest = PortalUtil.getOriginalServletRequest(request);
 					Search the option database
 				</div>
 				<div id="search-option-database-options">
-					<ul style="list-style:none;">
+					<ul class="menu-left">
 						<li class="list-option">
-                            <img src="<%=renderRequest.getContextPath()%>/images/arrow_green.png" class="valigned"/>
 							1. <a href="#" onclick="showGeneral(); return false;">General</a>
 						</li>
 						<li class="list-option">
-                            <img src="<%=renderRequest.getContextPath()%>/images/arrow_green.png" class="valigned"/>
 							2. <a href="#" onclick="showGenericMeasures(); return false;">What are possible measures?</a>
 						</li>
 						<li class="list-option">
-                            <img src="<%=renderRequest.getContextPath()%>/images/arrow_green.png" class="valigned"/>
 							3. <a href="#" onclick="showGoodPractices(); return false;">What are possible good practices?</a>
-						</li>						
+						</li>
 						<li class="list-option">
-                            <img src="<%=renderRequest.getContextPath()%>/images/arrow_green.png" class="valigned"/>
 							4. <a href="#" onclick="showLocateRegion(); return false;">What good practices are available in regions similar to mine?</a>
 						</li>
 					</ul>
@@ -310,37 +293,30 @@ HttpServletRequest httpRequest = PortalUtil.getOriginalServletRequest(request);
                     How can I assess my adaptation options?
                 </div>
                 <div id="what-should-i-do-5-options" style="">
-                    <ul style="list-style:none;">
+                    <ul class="menu-left">
                         <li>
-                            <img src="<%=renderRequest.getContextPath()%>/images/arrow_green.png" class="green-arrow"/>
                             1. <a href="#" onclick="step5substep('5-1'); return false;">General</a>
                         </li>
                         <li>
-                            <img src="<%=renderRequest.getContextPath()%>/images/arrow_green.png" class="green-arrow"/>
                             2. <a href="#" onclick="step5substep('5-2-1'); return false;">How much does adaptation cost?</a>
 							<div id="what-should-i-do-5-options" style="">
-								<ul style="list-style:none;">
-                        <li>
-                            <img src="<%=renderRequest.getContextPath()%>/images/arrow_green.png" class="green-arrow"/>
-										<a href="#" onclick="step5substep('5-2-1'); return false;">2.1 How can I determine my adaptation costs?</a>
+								<ul class="menu-left">
+                                    <li>
+                                        <a href="#" onclick="step5substep('5-2-1'); return false;">2.1 How can I determine my adaptation costs?</a>
+                                    </li>
+                                    <li>
+                                        <a href="#" onclick="step5substep('5-2-2'); return false;">2.2 Search the cost-benefit database</a>
+                                    </li>
+                                </ul>
+                            </div>
                         </li>
                         <li>
-                            <img src="<%=renderRequest.getContextPath()%>/images/arrow_green.png" class="green-arrow"/>
-										<a href="#" onclick="step5substep('5-2-2'); return false;">2.2 Search the cost-benefit database</a>
-                        </li>
-                    </ul>
-                </div>
-                        </li>						
-                        <li>
-                            <img src="<%=renderRequest.getContextPath()%>/images/arrow_green.png" class="green-arrow"/>
                             3. <a href="#" onclick="step5substep('5-3'); return false;">How do I decide which measures to include in my portfolio?</a>
-                        </li>						
+                        </li>
                         <li>
-                            <img src="<%=renderRequest.getContextPath()%>/images/arrow_green.png" class="green-arrow"/>
                             4. <a href="#" onclick="step5substep('5-4'); return false;">What is my Adaptive Capacity?</a>
-                        </li>						
+                        </li>
                         <li>
-                            <img src="<%=renderRequest.getContextPath()%>/images/arrow_green.png" class="green-arrow"/>
                             5. <a href="#" onclick="step5substep('5-5'); return false;">How to plan for adaptation?</a>
                         </li>
                     </ul>
@@ -351,13 +327,13 @@ HttpServletRequest httpRequest = PortalUtil.getOriginalServletRequest(request);
 
 	<!-- end left panel -->
 	</div>
-	
+
 	<!-- right panel -->
     <div  class="adaptationtool-column" id="acemap_column" style="margin-right: 10px; float:left;width:850px;background:#fff;">
 	<!--
-	
+
 			step 1
-			
+
 	-->
 	<div id="step-right-1" class="step-right">
 		<img src="<%=renderRequest.getContextPath()%>/images/AST_large.png" usemap="#large-navigation"/>
@@ -367,26 +343,26 @@ HttpServletRequest httpRequest = PortalUtil.getOriginalServletRequest(request);
 		  <area shape="poly" coords="698,213,441,195,416,224,432,265,481,282,698,280" nohref="nohref" href="#" onclick="displayStep(3);" class="clickable"/>
 		  <area shape="poly" coords="682,301,471,296,427,282,397,295,399,333,428,357,483,359,653,359,681,348" nohref="nohref" href="#" onclick="displayStep(4);showGeneral();" class="clickable"/>
 		  <area shape="poly" coords="414,361,376,332,314,332,292,365,292,402,344,425,439,429,669,432,668,383,632,371" nohref="nohref" href="#" onclick="displayStep(5);" class="clickable"/>
-		</map>		
+		</map>
 		<hr style="clear:both;display:block;visibility:hidden;" />
 	</div>
-	
+
 	<!--
-	
-			step 2 
-			
+
+			step 2
+
 	-->
     <script defer="defer" type="text/javascript">
 		var indicators = new Array();
 		var $j = jQuery.noConflict();
-		$j(document).ready(function(){	
-				
+		$j(document).ready(function(){
+
 			// force risk and sector selectors to defaults
 			$j('#risk-select option[value="none"]').attr('selected', 'selected');
 			$j('#sector-select option[value="none"]').attr('selected', 'selected');
 
-			$j('.adaptationtool-column').equalHeights();			
-			
+			$j('.adaptationtool-column').equalHeights();
+
 			//
 			// create information popups
 			//
@@ -401,13 +377,13 @@ HttpServletRequest httpRequest = PortalUtil.getOriginalServletRequest(request);
 									<div style="height:15px;text-align:right;padding:5px;">read more &raquo;</div> \
 								</div>',
 					innerHtmlStyle: {
-										color:'#000', 
+										color:'#000',
 										'text-align':'left'
 									},
 					themeName: 	'green',
-					themePath: 	'<%=renderRequest.getContextPath()%>/js/bubblepopup/jquerybubblepopup-theme'					
+					themePath: 	'<%=renderRequest.getContextPath()%>/js/bubblepopup/jquerybubblepopup-theme'
 			});
-			
+
 			//
 			// load indicators data
 			//
@@ -420,7 +396,7 @@ HttpServletRequest httpRequest = PortalUtil.getOriginalServletRequest(request);
 						$j('#sector-select').removeAttr("disabled");
 					})
 				.error(function() {})
-				.complete(function() {});	
+				.complete(function() {});
 
 			// handle change to sector selector
 			$j('#sector-select').change(function() {
@@ -431,10 +407,10 @@ HttpServletRequest httpRequest = PortalUtil.getOriginalServletRequest(request);
 			$j('#risk-select').change(function() {
 				displayIndicators(filterIndicators($j(this).attr('value'), $j('#sector-select').attr('value')));
 				showVulnerabilitiesAndRisks();
-			});			
-				
+			});
+
 		});
-		
+
 		// utility to select random children -- TODO move to utilities file
 		$j.jQueryRandom = 0;
 		$j.extend($j.expr[":"], {
@@ -445,9 +421,9 @@ HttpServletRequest httpRequest = PortalUtil.getOriginalServletRequest(request);
 						return i == $j.jQueryRandom;
 					}
 			});
-						
-						
-		// displays indicators, based on their indicator-type.				
+
+
+		// displays indicators, based on their indicator-type.
 		function displayIndicators(indicators) {
 			$j('.indicator-category-list').fadeOut();
 			$j('.indicator-category-list').empty();
@@ -458,27 +434,27 @@ HttpServletRequest httpRequest = PortalUtil.getOriginalServletRequest(request);
 					var ln = this.riskandsector.layername;
 					var t = this.title;
 					var y = this.riskandsector.indicatortype;
-					
+
 					// var randomIndicatorType = $j('.indicator-category-list:random');
-					
+
 					var indicatortype ;
-					
+
 					if(y === 'VULNERABILITY') {
 						indicatortype = $j('#indicator-vulnerability .indicator-category-list');
 					}
 					else if(y === 'CLIMATECHANGES') {
-						indicatortype = $j('#indicator-climate-changes .indicator-category-list');					
+						indicatortype = $j('#indicator-climate-changes .indicator-category-list');
 					}
 					else if(y === 'EXPOSURE') {
-						indicatortype = $j('#indicator-exposure .indicator-category-list');					
-					}					
+						indicatortype = $j('#indicator-exposure .indicator-category-list');
+					}
 					else if(y === 'SENSITIVITY') {
-						indicatortype = $j('#indicator-sensitivity .indicator-category-list');					
+						indicatortype = $j('#indicator-sensitivity .indicator-category-list');
 					}
 					else if(y === 'RESOURCEEFFICIENCY') {
-						indicatortype = $j('#indicator-human-causes .indicator-category-list');					
+						indicatortype = $j('#indicator-human-causes .indicator-category-list');
 					}
-					
+
 					indicator = $j(document.createElement("div"))
 						.addClass("indicator-category-list-item")
 						.addClass("clickable")
@@ -487,16 +463,16 @@ HttpServletRequest httpRequest = PortalUtil.getOriginalServletRequest(request);
 						.appendTo(indicatortype)
 						.click(function() {
 							app.addLayer(u, ln, t);
-							
+
 							/* do not do this anymore; user must use steps in left panel
-							
+
 							// if this is a vulnerability type
 							if(y === 'VULNERABILITY') {
 								// enable underlying cause indicators
-								showUnderlyingCauses();								
+								showUnderlyingCauses();
 							}
-							
-							
+
+
 							// if this is an underlying cause type
 							if(y === 'EXPOSURE') {
 								// enable climate changes
@@ -507,30 +483,30 @@ HttpServletRequest httpRequest = PortalUtil.getOriginalServletRequest(request);
 								showUnderlyingHumanCauses();
 							}
 							*/
-							
+
 						});
-				
-					// no map icon	
+
+					// no map icon
 					//$j(document.createElement("img"))
 					//		.attr({ src: '<%=renderRequest.getContextPath()%>/images/map_icon.gif', title: 'show map' })
 					//		.attr({ style: 'float:left;margin-left:5px;' })
 					//		.appendTo(indicatortype);
-					
+
 						$j(document.createElement("hr"))
 							.attr({ style: 'clear:both;display:block;visibility:hidden;' })
-							.appendTo(indicatortype);															
+							.appendTo(indicatortype);
 				}
-				
+
 				// no url ? no display
 				//else {
-				//	indicator = '<div class="indicator-category-list-item">' + this.riskandsector.title + '</div>';				
-				//	$j('.indicator-category-list:random').append(indicator);			
+				//	indicator = '<div class="indicator-category-list-item">' + this.riskandsector.title + '</div>';
+				//	$j('.indicator-category-list:random').append(indicator);
 				//}
-				
-			}); 
+
+			});
 			$j('.indicator-category-list').fadeIn();
-		}	
-		
+		}
+
 		// filters indicators. They are filtered by a combination of values for RISK and SECTOR.
 		function filterIndicators(riskvalue, sectorvalue) {
 			// both filters set to 'all'
@@ -543,7 +519,7 @@ HttpServletRequest httpRequest = PortalUtil.getOriginalServletRequest(request);
 			if(riskvalue === 'none' || sectorvalue === 'none') {
 				// use empty array of indicators
 				return indicatorsDisplayed;
-			}			
+			}
 			// loop all indicators
 			$j.each(indicators, function(idx, indicator){
 				// loop all riskandsectors
@@ -555,14 +531,14 @@ HttpServletRequest httpRequest = PortalUtil.getOriginalServletRequest(request);
 						$j.each(riskandsector, function(idx3, child){
 								// the risk defined for this riskandsector
 								if(idx3 === 'risk') {
-									// is equal to the user's filter risk 
+									// is equal to the user's filter risk
 									if(child === riskvalue || riskvalue === 'all') {
 										riskFilterOK = true;
 								}
 						}
 								// the sector defined for this riskandsector
 								if(idx3 === 'sector') {
-									// is equal to the user's filter sector 
+									// is equal to the user's filter sector
 									if(child === sectorvalue || sectorvalue === 'all') {
 										sectorFilterOK = true;
 							}
@@ -570,7 +546,7 @@ HttpServletRequest httpRequest = PortalUtil.getOriginalServletRequest(request);
 							});
 						if(riskFilterOK && sectorFilterOK) {
 							indicatorsDisplayed.push(indicator);
-						}						
+						}
 					}
 				});
 			});
@@ -644,7 +620,7 @@ HttpServletRequest httpRequest = PortalUtil.getOriginalServletRequest(request);
         }
 
          function showUnderlyingHumanCauses() {
-		 
+
 			$j('.step2heading').hide();
 			$j('.step2description').hide();
 
@@ -663,14 +639,14 @@ HttpServletRequest httpRequest = PortalUtil.getOriginalServletRequest(request);
             $j("#indicator-climate-changes").hide();
             $j("#indicator-sensitivity").fadeIn();
         }
-		
+
             </script>
-		
-	
-		
-	<div id="step-right-2" class="step-right">		
+
+
+
+	<div id="step-right-2" class="step-right">
 		<h1 id="adaptationtools-heading">
-			<img src="<%=renderRequest.getContextPath()%>/images/bullit2.png" class="valigned"/>	
+			<img src="<%=renderRequest.getContextPath()%>/images/bullit2.png" class="valigned"/>
 			Am I vulnerable to climate change and what are my risks
 		</h1>
 
@@ -699,7 +675,7 @@ HttpServletRequest httpRequest = PortalUtil.getOriginalServletRequest(request);
 				to adapt.
 			</div>
 		</div>
-		
+
 		<div id="2-1" class="what-should-i-do-content step2substep" style="display:none;">
 			<h2 style="margin-left:30px;">
 				2.1 General
@@ -707,19 +683,19 @@ HttpServletRequest httpRequest = PortalUtil.getOriginalServletRequest(request);
 			<img src="<%=renderRequest.getContextPath()%>/images/step-2.jpg" style="float:right;margin-right:30px;"/>
 			<div id="general-content-text" style="float:left;width:50%;margin-left:30px;">
 				<p>
-					Even if emissions of greenhouse gases stop today, these changes would continue for many decades and in the case of sea level for centuries. This is due to the historical build-up of the gases in the 
-					atmosphere and time lags in the response of climatic and oceanic systems to changes in the atmospheric concentration of the gases. Therefore, in addition to emission reduction (mitigation) measures, it 
+					Even if emissions of greenhouse gases stop today, these changes would continue for many decades and in the case of sea level for centuries. This is due to the historical build-up of the gases in the
+					atmosphere and time lags in the response of climatic and oceanic systems to changes in the atmospheric concentration of the gases. Therefore, in addition to emission reduction (mitigation) measures, it
 					is essential that natural as well as human systems also develop adequate adaptive responses to avoid the risks posed by, and to take advantage of the opportunities arising from global climate change.
 				</p>
 				<p>
-					Observed temperature rises and changes in precipitation patterns already affect various areas in Europe, making them vulnerable to different weather events. Within the context of climate change, the 
-					IPCC defines vulnerability to climate change as the degree to which a system is susceptible to, or unable to cope with, adverse effects of climate change, including climate variability and extremes. 
+					Observed temperature rises and changes in precipitation patterns already affect various areas in Europe, making them vulnerable to different weather events. Within the context of climate change, the
+					IPCC defines vulnerability to climate change as the degree to which a system is susceptible to, or unable to cope with, adverse effects of climate change, including climate variability and extremes.
 					Vulnerability is a function of the character, magnitude, and rate of climate variation to which a system is exposed, its sensitivity, and its adaptive capacity.
 				</p>
 				<p>
-					In order to perform a sound vulnerability assessment, all available relevant information has to be collected and assessed. This includes analysis of past and current weather trends, future climate change 
-					projections and their uncertainty.			
-				</p>	
+					In order to perform a sound vulnerability assessment, all available relevant information has to be collected and assessed. This includes analysis of past and current weather trends, future climate change
+					projections and their uncertainty.
+				</p>
 			</div>
 		</div>
 
@@ -730,8 +706,8 @@ HttpServletRequest httpRequest = PortalUtil.getOriginalServletRequest(request);
 			<img src="<%=renderRequest.getContextPath()%>/images/step-2.jpg" style="float:right;margin-right:30px;"/>
 			<div id="general-content-text" style="float:left;width:50%;margin-left:30px;">
 			<p>
-				The assessment of existing vulnerability to climate variability and extremes is a necessary starting point for any adaptation. Assessment of past weather events, for example heavy rain or extreme temperatures, 
-				and analysis of responses to them can help in gaining insights on which responses have been successful or ineffective. Lessons learned from this exercise can be used as a basis for designing climate change 
+				The assessment of existing vulnerability to climate variability and extremes is a necessary starting point for any adaptation. Assessment of past weather events, for example heavy rain or extreme temperatures,
+				and analysis of responses to them can help in gaining insights on which responses have been successful or ineffective. Lessons learned from this exercise can be used as a basis for designing climate change
 				adaptation plans.
 			</p>
 			<p>
@@ -746,33 +722,33 @@ HttpServletRequest httpRequest = PortalUtil.getOriginalServletRequest(request);
 					</li>
 					<li>
 						<a href="http://www.emdat.be/" target="_blank">
-							Emergency Events Database EM-DAT  
+							Emergency Events Database EM-DAT
 						</a>
 					</li>
 					<li>
 						<a href="http://ensembles-eu.metoffice.com/data.html" target="_blank">
-							ENSEMBLES. Daily, European gridded temperature and precipitation, at 25km resolution, 1950 to 2008  
+							ENSEMBLES. Daily, European gridded temperature and precipitation, at 25km resolution, 1950 to 2008
 						</a>
 					</li>
 					<li>
 						<a href="http://www.ecmwf.int/research/era/do/get/index" target="_blank">
-							ERA 40 / ERA-40-interim. Six-hourly, global gridded variables (many) at resolutions of approximately 1° and 0.5°, 1958-2002 for ERA40, 1989 to present for ERA-interim  
+							ERA 40 / ERA-40-interim. Six-hourly, global gridded variables (many) at resolutions of approximately 1° and 0.5°, 1958-2002 for ERA40, 1989 to present for ERA-interim
 						</a>
 					</li>
 					<li>
 						<a href="http://badc.nerc.ac.uk/data/cru/" target="_blank">
-							CRU. Monthly, global gridded variables (ten) at 0.5° resolution, 1901 to present  
+							CRU. Monthly, global gridded variables (ten) at 0.5° resolution, 1901 to present
 						</a>
-					</li>	
+					</li>
 					<li>
 						<a href="http://eca.knmi.nl/" target="_blank">
-							European Climate Assessment & Dataset (ECA&D)  
+							European Climate Assessment & Dataset (ECA&D)
 						</a>
-					</li>						
+					</li>
 				</ul>
 				<div style="font-style:italic">
 					Links to tools:
-				</div>				
+				</div>
 				<ul>
 					<li>
 						<a href="/mars-viewer">
@@ -783,7 +759,7 @@ HttpServletRequest httpRequest = PortalUtil.getOriginalServletRequest(request);
 			</p>
 			</div>
 		</div>
-				
+
 		<div id="2-3" class="what-should-i-do-content step2substep" style="display:none;">
 			<h2 style="margin-left:30px;">
 				2.3 How do I identify the impacts of climate change?
@@ -791,8 +767,8 @@ HttpServletRequest httpRequest = PortalUtil.getOriginalServletRequest(request);
 			<img src="<%=renderRequest.getContextPath()%>/images/step-2.jpg" style="float:right;margin-right:30px;"/>
 			<div id="general-content-text" style="float:left;width:50%;margin-left:30px;">
 			<p>
-				The extent to which climate change poses threats or opportunities will depend on how the climate, society and economy of the region of interest changes in coming years. These changes are studied with the help 
-				of different climate and socio-economic scenarios. Scenarios provide plausible descriptions of different possible future states of the world based on the choices society makes. (Read more)			
+				The extent to which climate change poses threats or opportunities will depend on how the climate, society and economy of the region of interest changes in coming years. These changes are studied with the help
+				of different climate and socio-economic scenarios. Scenarios provide plausible descriptions of different possible future states of the world based on the choices society makes. (Read more)
 			</p>
 			</div>
 		</div>
@@ -804,13 +780,13 @@ HttpServletRequest httpRequest = PortalUtil.getOriginalServletRequest(request);
 			<img src="<%=renderRequest.getContextPath()%>/images/step-2.jpg" style="float:right;margin-right:30px;"/>
 			<div id="general-content-text" style="float:left;width:50%;margin-left:30px;">
 			<p>
-				In many cases, the results of national or regional vulnerability assessments can be expected to better fit the goals of regional adaptation plans. Therefore a logical first step in assessing vulnerability to 
-				climate change is to look for existing (sub)national, regional or local assessments. Currently this section provides access to the section on National Adaptation Plans and Strategies, that includes among others 
+				In many cases, the results of national or regional vulnerability assessments can be expected to better fit the goals of regional adaptation plans. Therefore a logical first step in assessing vulnerability to
+				climate change is to look for existing (sub)national, regional or local assessments. Currently this section provides access to the section on National Adaptation Plans and Strategies, that includes among others
 				references to national and regional vulnerability studies. (In a later stage this section will more specifically link to available vulnerability assessments)
 				<br/><br/>
 				<a href="/national-adaptation-strategies" target="_blank">
-					Open National Adaptation Strategies  
-				</a> 				
+					Open National Adaptation Strategies
+				</a>
 			</p>
 			</div>
 		</div>
@@ -822,88 +798,88 @@ HttpServletRequest httpRequest = PortalUtil.getOriginalServletRequest(request);
 			<img src="<%=renderRequest.getContextPath()%>/images/step-2.jpg" style="float:right;margin-right:30px;"/>
 			<div id="general-content-text" style="float:left;width:50%;margin-left:30px;">
 				<p>
-					There are a number of European-wide and national projects that have created different socio-economic and climate scenarios across a variety of sectors and made projections for different socio-economic and 
-					climate variables. These variables, when combined, produce indicators for climate impacts. Adaptation cannot be planned only on the basis of climate indicators, it needs impact indicators showing how climate 
+					There are a number of European-wide and national projects that have created different socio-economic and climate scenarios across a variety of sectors and made projections for different socio-economic and
+					climate variables. These variables, when combined, produce indicators for climate impacts. Adaptation cannot be planned only on the basis of climate indicators, it needs impact indicators showing how climate
 					interacts with socio-economic developments.
 				</p>
 				<p>
-					The Adaptation Support Tool allows you to assess a variety of impact indicators, calculated within different projects. They can help you to assess whether you are vulnerable to climate change and whether 
-					there are opportunities arising from it. In order to identify whether the vulnerability arises due to changes in climate, in socio-economic development or both, these indicators are disaggregated to their 
-					components.				
+					The Adaptation Support Tool allows you to assess a variety of impact indicators, calculated within different projects. They can help you to assess whether you are vulnerable to climate change and whether
+					there are opportunities arising from it. In order to identify whether the vulnerability arises due to changes in climate, in socio-economic development or both, these indicators are disaggregated to their
+					components.
 				</p>
 				<p>
-					For example the indicator for water stress, used as impact indicator for water scarcity and droughts, disaggregates to two indicators – for water availability and water use (withdrawals). Their analysis will 
-					give an indication whether water scarcity is caused by climate change (manifested as decrease in water availability), socio-economic developments (increase in water use) or both.				
+					For example the indicator for water stress, used as impact indicator for water scarcity and droughts, disaggregates to two indicators – for water availability and water use (withdrawals). Their analysis will
+					give an indication whether water scarcity is caused by climate change (manifested as decrease in water availability), socio-economic developments (increase in water use) or both.
 				</p>
 				<p>
-					While the components of the aggregated impact indicators let you identify where the vulnerabilities come from, they do not allow to identify the root cause of the problem. Therefore you should go further back 
-					in the casual chain and look for the causes. In the case of a water stress indicator, causes for decrease in water availability can be decrease in precipitation, increase in evapo-transpiration, decrease in 
-					river flow, change in the timing of snow melting and/or precipitation. Water availability decreases also due to deterioration of water quality. Water use can increase due to introduction of different crops 
-					or cooling technologies, land use changes such as urbanisation, land erosion that decreases significantly water holding capacity of the soils. For some of these root causes European-wide data are available, 
-					but for most of them they still do not exist. When planning for adaptation it is of great importance to find local data on these sub-indicators and to analyse them within your vulnerability assessment in 
-					order to address the right causes and to design effective adaptation measure mix.				
+					While the components of the aggregated impact indicators let you identify where the vulnerabilities come from, they do not allow to identify the root cause of the problem. Therefore you should go further back
+					in the casual chain and look for the causes. In the case of a water stress indicator, causes for decrease in water availability can be decrease in precipitation, increase in evapo-transpiration, decrease in
+					river flow, change in the timing of snow melting and/or precipitation. Water availability decreases also due to deterioration of water quality. Water use can increase due to introduction of different crops
+					or cooling technologies, land use changes such as urbanisation, land erosion that decreases significantly water holding capacity of the soils. For some of these root causes European-wide data are available,
+					but for most of them they still do not exist. When planning for adaptation it is of great importance to find local data on these sub-indicators and to analyse them within your vulnerability assessment in
+					order to address the right causes and to design effective adaptation measure mix.
 				</p>
 				<p>
 					<div style="font-style:italic">
 						Links to European scale vulnerability assessments:
-					</div>				
+					</div>
 					<ul>
 						<li>
 							<a href="http://www.climwatadapt.eu" target="_blank">
-								ClimWatAdapt  
+								ClimWatAdapt
 							</a>
 						</li>
 						<li>
 							<a href=" http://peseta.jrc.ec.europa.eu/" target="_blank">
-								PESETA study  
+								PESETA study
 							</a>
 						</li>
-					</ul>				
+					</ul>
 				</p>
 				<p>
 					<div style="font-style:italic">
 						Links to tools:
-					</div>				
+					</div>
 					<ul>
 						<li>
 							<a href="http://www.1stcellmedia.de/customer/uni/cms/index.php?option=com_frontpage&Itemid=1" target="_blank">
-								SCENES WebService  
+								SCENES WebService
 							</a>
 						</li>
 						<li>
 							<a href="http://adam-digital-compendium.pik-potsdam.de/macro-economic-analysis/direct-impacts-1/impacts-by-region/" target="_blank">
-								ADAM Digital Compendium  
+								ADAM Digital Compendium
 							</a>
 						</li>
-					</ul>				
-				</p>	
+					</ul>
+				</p>
 				<p>
 					<div style="font-style:italic">
 						Links to data generators, databases and meta-data platforms
-					</div>				
+					</div>
 					<ul>
 						<li>
 							<a href="http://cera-www.dkrz.de/" target="_blank">
-								The CERA database  
+								The CERA database
 							</a>
 						</li>
 						<li>
 							<a href="http://www.espon-climate.eu/" target="_blank">
-								ESPON CLIMATE  
+								ESPON CLIMATE
 							</a>
 						</li>
 						<li>
 							<a href="http://www.circeproject.eu/" target="_blank">
-								CIRCE (Climate Change and Impact Research: the Mediterranean Environment  
-							</a>
-						</li>						
-						<li>
-							<a href="http://www-pcmdi.llnl.gov/" target="_blank">
-								PCMDI (Project for Climate Model Diagnosis and Inter-comparison)  
+								CIRCE (Climate Change and Impact Research: the Mediterranean Environment
 							</a>
 						</li>
-					</ul>				
-				</p>					
+						<li>
+							<a href="http://www-pcmdi.llnl.gov/" target="_blank">
+								PCMDI (Project for Climate Model Diagnosis and Inter-comparison)
+							</a>
+						</li>
+					</ul>
+				</p>
 			</div>
 		</div>
 
@@ -918,12 +894,12 @@ HttpServletRequest httpRequest = PortalUtil.getOriginalServletRequest(request);
 				<br/><br/>
 				Risk = Expected damages x Probability
 				<br/><br/>
-				In the case of climate change projections considerable complexities arise in calculation of the risk function, associated with assigning probability to certain climate change scenarios and with making 
-				assumptions about impacts of future socioeconomic development.			
+				In the case of climate change projections considerable complexities arise in calculation of the risk function, associated with assigning probability to certain climate change scenarios and with making
+				assumptions about impacts of future socioeconomic development.
 			</p>
 			</div>
 		</div>
-		
+
 		<div id="2-7" class="what-should-i-do-content step2substep" style="display:none;">
 			<h2 style="margin-left:30px;">
 				2.7. Are there also opportunities?
@@ -947,51 +923,51 @@ HttpServletRequest httpRequest = PortalUtil.getOriginalServletRequest(request);
 			</p>
 			</div>
 		</div>
-		
+
 		<div id="indicators-map" style="display: none">
             <div id="text-vulnerability" class="description step2description" style="display: none">
                 <p>
-					Vulnerability is the degree to which a system is susceptible to, and unable to cope with, adverse effects of climate change, including climate variability and extremes. Vulnerability is a 
-					function of the character, magnitude, and rate of climate change and variation to which a system is exposed, its sensitivity, and its adaptive capacity. (IPCC, 2007) There are many vulnerability 
-					indicators, but most of them do not follow strictly the definition above, because adaptive capacity is ha highly controversial issue. Most of vulnerability  indicators are impact indicators, or 
+					Vulnerability is the degree to which a system is susceptible to, and unable to cope with, adverse effects of climate change, including climate variability and extremes. Vulnerability is a
+					function of the character, magnitude, and rate of climate change and variation to which a system is exposed, its sensitivity, and its adaptive capacity. (IPCC, 2007) There are many vulnerability
+					indicators, but most of them do not follow strictly the definition above, because adaptive capacity is ha highly controversial issue. Most of vulnerability  indicators are impact indicators, or
 					indicators, measuring the effect of climate change on the socio-ecological system.
                 </p>
-                <p>				
-					Risk here denotes climate hazards, e.g., floods, droughts, water scarcity, heat waves, etc.				
+                <p>
+					Risk here denotes climate hazards, e.g., floods, droughts, water scarcity, heat waves, etc.
 				</p>
             </div>
 
             <div id="text-underlying-causes" class="description step2description" style="display: none">
                 <p>
-					Climate impacts arise from the interrelations between climate and socio-ecological systems. Climate impact indicators allow to identify vulnerable areas and sectors. As they are aggregated 
-					indicators, they can not give information on what are the causes of the identified vulnerability and whether this vulnerability arises due to changes in physical system (exposure),  in 
-					socio-ecological system (sensitivity) or in both. Therefore separate examination of the constituents of impact indicators is needed in order to understand the underlying causes of vulnerability.				
+					Climate impacts arise from the interrelations between climate and socio-ecological systems. Climate impact indicators allow to identify vulnerable areas and sectors. As they are aggregated
+					indicators, they can not give information on what are the causes of the identified vulnerability and whether this vulnerability arises due to changes in physical system (exposure),  in
+					socio-ecological system (sensitivity) or in both. Therefore separate examination of the constituents of impact indicators is needed in order to understand the underlying causes of vulnerability.
 				</p>
             </div>
 
             <div id="text-climate-change" class="description step2description" style="display: none">
                 <p>
-					Current climate variables such as temperature, precipitation, river flow are characterized by  variability of their magnitudes (severity or intensity)  duration and timing. This variability is 
-					studied on the basis of the statistics of past events. Current global climate change models indicate that climate change will modify some of these statistics.  Climate projections can help to 
-					identify future trends, which are of great importance for contingency planning.				
+					Current climate variables such as temperature, precipitation, river flow are characterized by  variability of their magnitudes (severity or intensity)  duration and timing. This variability is
+					studied on the basis of the statistics of past events. Current global climate change models indicate that climate change will modify some of these statistics.  Climate projections can help to
+					identify future trends, which are of great importance for contingency planning.
 				</p>
             </div>
 
              <div id="text-socio-ecological" class="description step2description" style="display: none">
                 <p>
-					Changes in climate are mostly not the only causes of vulnerability. Humans increase their vulnerability due to land use changes such as urbanization of flood (coastal)  plains, deforestation, land 
-					degradation due to unsustainable agricultural practices. Resource use efficiency also has significant impact on vulnerability, especially in the case of water scarcity and droughts, as reduced water 
-					use can counteract to some extend decreasing water availability.				
+					Changes in climate are mostly not the only causes of vulnerability. Humans increase their vulnerability due to land use changes such as urbanization of flood (coastal)  plains, deforestation, land
+					degradation due to unsustainable agricultural practices. Resource use efficiency also has significant impact on vulnerability, especially in the case of water scarcity and droughts, as reduced water
+					use can counteract to some extend decreasing water availability.
 				</p>
             </div>
 
 			<div id="adaptationtools-selectors-top" style="">
-	
+
 				<!-- added width because IE8 renders it at 100% width otherwise -->
 				<div id="sector-selector"  class="adaptationtools-selector"  style="float:right;width:229px;">
 					<div class="top-bubble" style="float:right;margin:0px 10px;">
 						<img src="<%=renderRequest.getContextPath()%>/images/info.png" class="valigned"/>
-					</div>	
+					</div>
 					<span style="margin-right:10px;">
 						Sector
 					</span>
@@ -1008,14 +984,14 @@ HttpServletRequest httpRequest = PortalUtil.getOriginalServletRequest(request);
 						<option value="INFRASTRUCTURE" disabled="disabled">Infrastructure</option>
 						<option value="MARINE" disabled="disabled">Marine and Fisheries</option>
 						<option value="WATERMANAGEMENT">Water Management</option>
-					</select>				
-				</div>			
+					</select>
+				</div>
 
-				<!-- added width because IE8 renders it at 100% width otherwise -->				
+				<!-- added width because IE8 renders it at 100% width otherwise -->
 				<div id="risks-selector" class="adaptationtools-selector" style="float:right;width:212px;">
 					<div class="top-bubble" style="float:right;margin:0px 10px;">
 						<img src="<%=renderRequest.getContextPath()%>/images/info.png" class="valigned"/>
-					</div>	
+					</div>
 					<span style="margin-right:10px;">
 						Risk
 					</span>
@@ -1032,8 +1008,8 @@ HttpServletRequest httpRequest = PortalUtil.getOriginalServletRequest(request);
 						<option value="STORM" disabled="disabled">Storms</option>
 						<option value="ICEANDSNOW" disabled="disabled">Ice and Snow</option>
 					</select>
-				</div>	
-			
+				</div>
+
 			</div>
 
             <div id="map_legend" style="float: right"><a href="#" onclick="app.showLegendWindow(); return false;">Show Legend</a></div>
@@ -1057,11 +1033,11 @@ HttpServletRequest httpRequest = PortalUtil.getOriginalServletRequest(request);
 				<h2>
 					Select an indicator to view map
 				</h2>
-				
+
 				<div id="indicator-vulnerability" class="indicator-category">
 					<h3 class="indicator-category-title">
 						Vulnerability & risks
-					</h3>					
+					</h3>
 					<div class="indicator-category-list"></div>
 				</div>
 
@@ -1079,33 +1055,33 @@ HttpServletRequest httpRequest = PortalUtil.getOriginalServletRequest(request);
 				<div id="indicator-sensitivity" class="indicator-category disabled">
 					<h3 class="indicator-category-title">
 						Sensitivity
-					</h3>					
+					</h3>
 					<div class="indicator-category-list"></div>
 				</div>
-				
+
 				<div id="indicator-climate-changes" class="indicator-category" style="display:none;">
 					<h3 class="indicator-category-title">
 						Climate changes
 					</h3>
 					<div class="indicator-category-list"></div>
 				</div>
-					
+
 				<div id="indicator-human-causes" class="indicator-category"  style="display:none;">
 					<h3 class="indicator-category-title">
 						Resource efficiency
-					</h3>					
+					</h3>
 					<div class="indicator-category-list"></div>
 				</div>
-					
+
 			</div>
-		
+
 			<hr style="clear:both;display:block;visibility:hidden;"/>
 
 			<div style="padding:10px;margin:10px;">
-				<div id="read-more-on-the-approach" style="float:left;width:200px;">					
+				<div id="read-more-on-the-approach" style="float:left;width:200px;">
 					<a href="/explain-ast-vul">Read more on the approach &raquo;</a>
 				</div>
-				<!-- added width because IE8 renders it at 100% width otherwise -->								
+				<!-- added width because IE8 renders it at 100% width otherwise -->
 				<div id="model-selector" style="float:right;width:169px;">
 					<div class="top-bubble" style="float:right;margin:0px 10px;">
 						<img src="<%=renderRequest.getContextPath()%>/images/info.png" class="valigned"/>
@@ -1116,24 +1092,24 @@ HttpServletRequest httpRequest = PortalUtil.getOriginalServletRequest(request);
 					<select disabled="disabled">
 						<option>
 							WATERGAP
-						</option>	
-					</select>		
+						</option>
+					</select>
 				</div>
-				<!-- added width because IE8 renders it at 100% width otherwise -->								
+				<!-- added width because IE8 renders it at 100% width otherwise -->
 				<div id="time-selector" style="float:right;width:129px;">
 					<div class="top-bubble" style="float:right;margin:0px 10px;">
 						<img src="<%=renderRequest.getContextPath()%>/images/info.png" class="valigned"/>
-					</div>		
+					</div>
 					<span style="margin-right:10px;">
 						Time
 					</span>
 					<select disabled="disabled">
 						<option>
 							2050
-						</option>	
+						</option>
 					</select>
-					</div>		
-				<!-- added width because IE8 renders it at 100% width otherwise -->									
+					</div>
+				<!-- added width because IE8 renders it at 100% width otherwise -->
 				<div id="scenario-selector" style="float:right;width:192px;">
 					<div class="top-bubble" style="float:right;margin:0px 10px;">
 						<img src="<%=renderRequest.getContextPath()%>/images/info.png" class="valigned"/>
@@ -1144,23 +1120,23 @@ HttpServletRequest httpRequest = PortalUtil.getOriginalServletRequest(request);
 					<select disabled="disabled">
 						<option>
 							Economy first
-						</option>	
+						</option>
 					</select>
 				</div>
 			</div>
 		<!-- end of indicators map page -->
 		</div>
-		
+
 	<!-- end of step2 -->
 	</div>
-	
+
 
     <!--
 
 			step 3
 
 	-->
-	
+
 	<div id="step-right-3" class="step-right">
         <h1 id="strategy-adaptation-heading">
 			<img src="<%=renderRequest.getContextPath()%>/images/bullit3.png" class="valigned"/>
@@ -1168,10 +1144,10 @@ HttpServletRequest httpRequest = PortalUtil.getOriginalServletRequest(request);
 		</h1>
 
 		<div id="strategy-adaptation-heading-text" style="float:left;width:90%;margin-left:30px;">
-		
-		Climate Change Adaptation refers to policies, practices and projects which can either moderate damage and/or realise opportunities associated with climate change. This may include mainstreaming adaptation into existing strategies directly or undertaking isolated measures to reduce specific vulnerabilities. 
+
+		Climate Change Adaptation refers to policies, practices and projects which can either moderate damage and/or realise opportunities associated with climate change. This may include mainstreaming adaptation into existing strategies directly or undertaking isolated measures to reduce specific vulnerabilities.
 		<br /><br />
-		In this process existing relevant national and EU legislation, policies, plans and guidance have to be taken into account and integrated in your strategy. 
+		In this process existing relevant national and EU legislation, policies, plans and guidance have to be taken into account and integrated in your strategy.
 		<br /><br />
 		<a href="http://ec.europa.eu/clima/sites/change" target="_blank">EC DG Climate Action, Adaptation to climate change  </a>
 		<br /><br />
@@ -1180,7 +1156,7 @@ HttpServletRequest httpRequest = PortalUtil.getOriginalServletRequest(request);
 		<a href="/national-adaptation-strategies" target="_blank">Open National Adaptation Strategies  </a>
 		<br /><br />
 		<a href="http://eur-lex.europa.eu/LexUriServ/LexUriServ.do?uri=COM:2009:0147:FIN:EN:PDF" target="_blank">WHITE PAPER: Adapting to climate change: Towards a European framework for action  </a>
-		</div>	
+		</div>
 
         <hr style="clear:both;display:block;visibility:hidden;"/>
 	</div>
@@ -1199,7 +1175,7 @@ HttpServletRequest httpRequest = PortalUtil.getOriginalServletRequest(request);
             $j("#generic-measures").hide();
 			$j("#general").fadeIn();
         }
-		
+
         function showGenericMeasures() {
             $j("#locate-region").hide()
             $j("#good-practices").hide()
@@ -1213,14 +1189,14 @@ HttpServletRequest httpRequest = PortalUtil.getOriginalServletRequest(request);
 			$j("#general").hide();
             $j("#locate-region").fadeIn()
         }
-		
+
         function showGoodPractices() {
             $j("#generic-measures").hide();
             $j("#locate-region").hide()
 			$j("#general").hide();
             $j("#good-practices").fadeIn()
         }
-		
+
         function filterMeasures() {
             var risk = $j("#risk-selector-step4").val();
             var sector = $j("#sector-select-step4").val();
@@ -1236,7 +1212,7 @@ HttpServletRequest httpRequest = PortalUtil.getOriginalServletRequest(request);
             var filter = '';
             if (risk === "DROUGHT") {
                 filter = "dr_";
-            } 
+            }
 			else if (risk === 'all') {
                  filter = "dr_";
             }
@@ -1244,7 +1220,7 @@ HttpServletRequest httpRequest = PortalUtil.getOriginalServletRequest(request);
             if (sector === 'AGRICULTURE') {
                 filter = filter + "ag";
                 $j("div." + filter).show();
-            } 
+            }
 			else if (sector === 'WATERMANAGEMENT') {
                 filter = filter + "wm";
                 $j("div." + filter).show();
@@ -1255,7 +1231,7 @@ HttpServletRequest httpRequest = PortalUtil.getOriginalServletRequest(request);
             }
             $j("#measures-step4").show();
         }
-		
+
         function filterGoodPractices() {
             var risk = $j("#risk-selector-step4-gp").val();
             var sector = $j("#sector-select-step4-gp").val();
@@ -1271,7 +1247,7 @@ HttpServletRequest httpRequest = PortalUtil.getOriginalServletRequest(request);
             var filter = '';
             if (risk === "DROUGHT") {
                 filter = "dr_";
-            } 
+            }
 			else if (risk === 'all') {
                  filter = "dr_";
             }
@@ -1279,18 +1255,18 @@ HttpServletRequest httpRequest = PortalUtil.getOriginalServletRequest(request);
             if (sector === 'AGRICULTURE') {
                 filter = filter + "ag";
                 $j("div." + filter).show();
-            } 
+            }
 			else if (sector === 'WATERMANAGEMENT') {
                 filter = filter + "wm";
                 $j("div." + filter).show();
-            } 
+            }
 			else if (sector === 'all') {
                 $j("div.dr_ag").show();
                 $j("div.dr_wm").show();
             }
 
             $j("#good-practices-step4").show();
-        }		
+        }
 
     </script>
 
@@ -1302,33 +1278,33 @@ HttpServletRequest httpRequest = PortalUtil.getOriginalServletRequest(request);
 
 		<div id="general" style="display: none; margin-left: 30px;">
 			<h2>
-				4.1 General 
-			</h2>	
+				4.1 General
+			</h2>
 			This section provides tools that allow you to assess relevant adaptation measures and good practices. It provides tools to select measures and good practices from the Clearinghouse Mechanism on Adaptation's repository and allows you to assess which measures are implemented in your region and similar regions.
 			<br /><br />
 			Adaptation options may include the options to prevent  or accept losses (i.e. do nothing), to accommodate.  Multiple options for achieving the same result should be considered at the initial stage.
 			<br /><br />
-			There are various typologies of adaptation options. One of them classifies them in grey and green infrastructure measures and non-structural soft adaptation options: 
+			There are various typologies of adaptation options. One of them classifies them in grey and green infrastructure measures and non-structural soft adaptation options:
 			<br /><br />
 			<b>Grey infrastructure</b> concerns physical interventions or construction measures that use engineering services to make buildings and infrastructure resilient to weather events;
 			<br /><br />
-			<b>Green infrastructure</b> concerns using ecosystem  functions and services to design more sustainable and cost-effective adaptation measures. 
+			<b>Green infrastructure</b> concerns using ecosystem  functions and services to design more sustainable and cost-effective adaptation measures.
 			<br /><br />
 			<b>"Soft" non-structural approaches</b> relate to policy incentives such as land-use controls, information dissemination and economic incentives to reduce or prevent disaster vulnerability
 		</div>
-		
+
 		<div id="generic-measures" style="display: none; margin-left: 20px;">
 			<h2>
 				4.2 What are possible measures?
-			</h2>	
-			
+			</h2>
+
 			<p>
 				Select feasible adaptation measures from the Clearinghouse Mechanism on Adaptations repository, based on your risk(s) and sector(s) of interest.
-			</p>	
-				
+			</p>
+
 			<form>
 				<div id="selectors-step4" style="margin-left: 20px; float:left;">
-					<!-- added width because IE8 renders a 100% width otherwise -->				
+					<!-- added width because IE8 renders a 100% width otherwise -->
 					<div id="risks-selector-step4" class="adaptationtools-selector" style="float:left;width:208px;">
 						<span style="margin-right:10px;float:left;" >
 							Risk
@@ -1374,7 +1350,7 @@ HttpServletRequest httpRequest = PortalUtil.getOriginalServletRequest(request);
 						</div>
 					</div>
 				</div>
-		
+
 				<hr style="clear:both;display:block;visibility:hidden;"/>
 
 				<div id ="measures-step4" style="float: left;margin-left: 20px; display:none;">
@@ -1390,13 +1366,13 @@ HttpServletRequest httpRequest = PortalUtil.getOriginalServletRequest(request);
 
 		<div id="good-practices" style="display: none; margin-left: 20px;">
 			<h2>
-				4.3 What are possible good practices? 
-			</h2>	
-			
+				4.3 What are possible good practices?
+			</h2>
+
 			<p>
 				Select feasible good practices for adaptation from the Clearinghouse Mechanism on Adaptations repository, based on your risk(s) and sector(s) of interest.
 			</p>
-	
+
 			<form>
 				<div id="selectors-step4-gp" style="margin-left: 20px; float:left;">
 					<!-- added width because IE8 renders a 100% width otherwise -->
@@ -1445,10 +1421,10 @@ HttpServletRequest httpRequest = PortalUtil.getOriginalServletRequest(request);
 						</div>
 					</div>
 				</div>
-		
+
 				<hr style="clear:both;display:block;visibility:hidden;"/>
-		
-				<div id ="good-practices-step4" style="float: left;margin-left: 20px; display:none;">			
+
+				<div id ="good-practices-step4" style="float: left;margin-left: 20px; display:none;">
 					<c:set var="groupedResults" scope="page" value="${ACTION_searchResults}"/>
 					<c:set var="groupedJSONResults" scope="page" value="${ACTION_JSONsearchResults}"/>
 					<c:set var="aceitemtype" scope="page" value="ACTION"/>
@@ -1458,20 +1434,20 @@ HttpServletRequest httpRequest = PortalUtil.getOriginalServletRequest(request);
 			</form>
 		<!-- end good practices -->
 		</div>
-		
+
         <div id="locate-region" style="margin-left: 20px;display:none;">
 			<h2>
 				4.4 What good practices are available in regions similar to mine?
-			</h2>	
-			
+			</h2>
+
 			<p>
 				The specific characteristics of the region you are in highly determine which adaptation measures are feasible. Taking into account for instance bio-physical and socio-economic characteristics will allow for the identification of good practices that are implemented in your region and similar regions.
 			</p>
-					
+
 			<img src="<%=renderRequest.getContextPath()%>/images/step-4.jpg"/>
-			
+
 			<!-- gazetteer map removed by not displaying anything -->
-            
+
 			<div style="float:left; margin-bottom: 10px; display:none;">
                 <form>
                     Region of interest:
@@ -1489,9 +1465,9 @@ HttpServletRequest httpRequest = PortalUtil.getOriginalServletRequest(request);
             <div id="specify-region-similarity-criteria" style="margin-top:10px; display:none;">
                 Specify region similarity criteria &raquo;
             </div>
-			
+
 			<!-- end of gazetteer map removed -->
-			
+
         </div>
 		<!-- end locate-region -->
 
@@ -1506,14 +1482,14 @@ HttpServletRequest httpRequest = PortalUtil.getOriginalServletRequest(request);
 
     <script defer="defer" type="text/javascript">
 		var $j = jQuery.noConflict();
-		$j(document).ready(function(){	
+		$j(document).ready(function(){
 			// imageBlank is to make IE change cursor on hover
 			$j('a.lightbox').lightBox({
 				overlayBgColor: '#000',
 				overlayOpacity: 0.6,
 				imageLoading: '<%=renderRequest.getContextPath()%>/js/lightbox/images/lightbox-ico-loading.gif',
 				imageBtnClose: '<%=renderRequest.getContextPath()%>/js/lightbox/images/lightbox-btn-close.gif',
-				imageBlank: '<%=renderRequest.getContextPath()%>/js/lightbox/images/lightbox-blank.gif' 	
+				imageBlank: '<%=renderRequest.getContextPath()%>/js/lightbox/images/lightbox-blank.gif'
 			});
 			// handle change to risk selector
 			$j('#cost-benefit-risks-selector').change(function() {
@@ -1521,13 +1497,13 @@ HttpServletRequest httpRequest = PortalUtil.getOriginalServletRequest(request);
 				$j('#cost-benefit-results').fadeIn();
 				}
 				else {
-					$j('#cost-benefit-results').hide();				
+					$j('#cost-benefit-results').hide();
 				}
-			});			
+			});
 			// handle change to region selector
 			$j('#cost-benefit-regions-selector').change(function() {
 				$j('#cost-benefit-results').fadeIn();
-			});				
+			});
 		});
 		function step5substep(id) {
 			// hide results
@@ -1536,32 +1512,32 @@ HttpServletRequest httpRequest = PortalUtil.getOriginalServletRequest(request);
 				$j('#cost-benefit-risk-select option[value="none"]').attr('selected', 'selected');
 				$j('#cost-benefit-region-select option[value="EU"]').attr('selected', 'selected');
 			}
-			
+
 			$j('.step-5-sub').hide();
 			$j('#'+id).fadeIn();
-		}		
+		}
 	</script>
-	
+
 	<div id="step-right-5" class="step-right" style="margin-left:30px;">
         <h1 id="assess-adaptation-options-heading">
 			<img src="<%=renderRequest.getContextPath()%>/images/bullit5.png" class="valigned"/>
 			How can I assess my adaptation options?
 		</h1>
-		
+
 		<div id="5-1" class="step-5-sub" style="">
 			<h2>
 				5.1 General
 			</h2>
 			<p>
-				Once you made a portfolio of potential adaptation options, you need to assess them and determine which of them suit your specific context. You have to consider their effectiveness in reducing vulnerability (or enhancing 
-				resilience), their wider impact on sustainability and their costs. Assessment of feasible options helps avoiding decisions that lead to mal-adaptation. There is a set of criteria that you should consider when assessing 
+				Once you made a portfolio of potential adaptation options, you need to assess them and determine which of them suit your specific context. You have to consider their effectiveness in reducing vulnerability (or enhancing
+				resilience), their wider impact on sustainability and their costs. Assessment of feasible options helps avoiding decisions that lead to mal-adaptation. There is a set of criteria that you should consider when assessing
 				adaptation options (Read more).
 			</p>
 			<p>
-				Tools and guidance documents provided in this section will help you to select feasible options.	
-			</p>	
+				Tools and guidance documents provided in this section will help you to select feasible options.
+			</p>
 		</div>
-		
+
 		<div id="5-2">
 			<div id="5-2-1" class="step-5-sub" style="display:none;">
 				<h2>
@@ -1582,9 +1558,9 @@ HttpServletRequest httpRequest = PortalUtil.getOriginalServletRequest(request);
 						<li class="adaptation-cost-list-item" style="margin-top:5px;">
 							Calculate the actual costs of each measure;
 							<div style="margin:10px 0px;">
-								This step requires to determine upfront investment costs, operating and lifetime implementation costs of the measure. This will help in determining the annualized cost per measure. Future 
-								costs can be extrapolated on the basis of locally verified estimates; a trajectory for the growth in cost can be based largely on inflation rates. Once a trajectory has been established for 
-								a business as usual scenario, calculate the potential loss averted for each measure on the basis of different scenarios;						
+								This step requires to determine upfront investment costs, operating and lifetime implementation costs of the measure. This will help in determining the annualized cost per measure. Future
+								costs can be extrapolated on the basis of locally verified estimates; a trajectory for the growth in cost can be based largely on inflation rates. Once a trajectory has been established for
+								a business as usual scenario, calculate the potential loss averted for each measure on the basis of different scenarios;
 							</div>
 						</li>
 						<li class="adaptation-cost-list-item" style="margin-top:5px;">
@@ -1592,35 +1568,35 @@ HttpServletRequest httpRequest = PortalUtil.getOriginalServletRequest(request);
 						</li>
 						<li class="adaptation-cost-list-item" style="margin-top:5px;">
 							Select the applicable valuation approach, e.g. Multi Criteria Analysis;
-						</li>					
+						</li>
 					</ol>
 					<div style="font-style:italic;padding-top:20px;">
-						Cost-benefit tools and methodologies					
+						Cost-benefit tools and methodologies
 					</div>
 					<div style="margin-top:10px;">
 						<a href="" target="_blank">
-							Identification and elaboration of methodology to be used in the classification and costing of projects and programmes for adaptation to climate change	 			
+							Identification and elaboration of methodology to be used in the classification and costing of projects and programmes for adaptation to climate change
 						</a>
 					</div>
 					<div style="font-style:italic;padding-top:20px;">
-						Projects					
+						Projects
 					</div>
 					<div style="margin-top:10px;">
 						<a href="http://www.climatecost.cc/" target="_blank">
-							ClimateCost project  
+							ClimateCost project
 						</a>
-					</div>				
+					</div>
 				</p>
 			<!-- end 5.2.1 -->
 			</div>
-			
+
 			<div id="5-2-2" class="step-5-sub" style="display:none;">
 				<h2>
 					5.2.2 Search the cost-benefit database
 				</h2>
 				<p>
 					Assess available information on adaptation costs and benefits from the Clearinghouse Mechanism on Adaptation's repository, based on your risk(s) and region of interest.
-					<!-- added width because IE8 renders it at 100% width otherwise -->				
+					<!-- added width because IE8 renders it at 100% width otherwise -->
 					<div id="cost-benefit-risks-selector" class="adaptationtools-selector" style="float:left;width:212px;">
 						<span style="margin-right:10px;">
 							Risk
@@ -1639,7 +1615,7 @@ HttpServletRequest httpRequest = PortalUtil.getOriginalServletRequest(request);
 							<option value="ICEANDSNOW" disabled="disabled">Ice and Snow</option>
 						</select>
 					</div>
-					<div id="cost-benefit-regions-selector" class="adaptationtools-selector" style="float:left;width:212px;">					
+					<div id="cost-benefit-regions-selector" class="adaptationtools-selector" style="float:left;width:212px;">
 						<span style="margin-right:10px;">
 							Region
 						</span>
@@ -1667,9 +1643,9 @@ HttpServletRequest httpRequest = PortalUtil.getOriginalServletRequest(request);
 							<option id="RO-option" value="RO" disabled="disabled">Romania</option>
 							<option id="SE-option" value="SE" disabled="disabled">Sweden</option>
 						</select>
-					</div>	
+					</div>
 					<hr style="clear:both;display:block;visibility:hidden;"/>
-					
+
 					<div id="cost-benefit-results" style="display:none;padding-top:20px;">
 						<table id="cost-benefit-table">
 							<colgroup>
@@ -1681,18 +1657,18 @@ HttpServletRequest httpRequest = PortalUtil.getOriginalServletRequest(request);
 								<col style="width: 100px;border:solid #000 1px;" />
 								<col style="width: 100px;border:solid #000 1px;" />
 							</colgroup>
-							<thead> 
-								<tr id="cost-benefit-table-header"> 
-									<th style="background-color: #F1EDC2;border: 1px solid #000;padding: 5px 20px 0;">Adaptation Measure</th> 
-									<th style="background-color: #F1EDC2;border: 1px solid #000;padding: 5px 20px 0;">Level (EU, MS, regional)</th> 
-									<th style="background-color: #F1EDC2;border: 1px solid #000;padding: 5px 20px 0;">Impact addressed</th> 
-									<th style="background-color: #F1EDC2;border: 1px solid #000;padding: 5px 20px 0;">Expected direct damage Cost</th> 
-									<th style="background-color: #F1EDC2;border: 1px solid #000;padding: 5px 20px 0;">Expected Cost of Adaptation</th> 
-									<th style="background-color: #F1EDC2;border: 1px solid #000;padding: 5px 20px 0;">Expected benefits</th> 
-									<th style="background-color: #F1EDC2;border: 1px solid #000;padding: 5px 20px 0;">Source</th> 
-								</tr> 
-							</thead> 
-							<tbody> 
+							<thead>
+								<tr id="cost-benefit-table-header">
+									<th style="background-color: #F1EDC2;border: 1px solid #000;padding: 5px 20px 0;">Adaptation Measure</th>
+									<th style="background-color: #F1EDC2;border: 1px solid #000;padding: 5px 20px 0;">Level (EU, MS, regional)</th>
+									<th style="background-color: #F1EDC2;border: 1px solid #000;padding: 5px 20px 0;">Impact addressed</th>
+									<th style="background-color: #F1EDC2;border: 1px solid #000;padding: 5px 20px 0;">Expected direct damage Cost</th>
+									<th style="background-color: #F1EDC2;border: 1px solid #000;padding: 5px 20px 0;">Expected Cost of Adaptation</th>
+									<th style="background-color: #F1EDC2;border: 1px solid #000;padding: 5px 20px 0;">Expected benefits</th>
+									<th style="background-color: #F1EDC2;border: 1px solid #000;padding: 5px 20px 0;">Source</th>
+								</tr>
+							</thead>
+							<tbody>
 								<tr class="cost-benefit-table-row">
 									<td class="cost-benefit-table-column" valign="top" style="padding: 5px 5px;">
 										River Flood protection
@@ -1718,7 +1694,7 @@ HttpServletRequest httpRequest = PortalUtil.getOriginalServletRequest(request);
 											<a class="lightbox" href="<%=renderRequest.getContextPath()%>/images/cost-benefit/1_2 Floods EU 27 Average Min Max Mean Annual Flood Damages (line graph).png">
 												<img src="<%=renderRequest.getContextPath()%>/images/cost-benefit/thumb-1_2 Floods EU 27 Average Min Max Mean Annual Flood Damages (line graph).png" width="72" height="72" alt="" />
 											</a>
-										</div>										
+										</div>
 									</td>
 									<td class="cost-benefit-table-column" valign="top" style="padding: 5px 5px;">
 										Costs of Adaptation, in Billion Euro/year, to maintain 1 in 100 year levels of flood protection
@@ -1727,43 +1703,43 @@ HttpServletRequest httpRequest = PortalUtil.getOriginalServletRequest(request);
 											<a class="lightbox" href="<%=renderRequest.getContextPath()%>/images/cost-benefit/2_1_Floods EU 27 Cost of Adaptation (line graph).png">
 												<img src="<%=renderRequest.getContextPath()%>/images/cost-benefit/thumb-2_1_Floods EU 27 Cost of Adaptation (line graph).png" width="72" height="72" alt="" />
 											</a>
-										</div>										
+										</div>
 										Cost of Adaptation per RCM
 										<br/>
 										<div style="margin:10px;text-align:center;">
 											<a class="lightbox" href="<%=renderRequest.getContextPath()%>/images/cost-benefit/2_2_Floods EU 27 Cost of Adaptation (line graph).png">
 												<img src="<%=renderRequest.getContextPath()%>/images/cost-benefit/thumb-2_2_Floods EU 27 Cost of Adaptation (line graph).png" width="72" height="72" alt="" />
 											</a>
-										</div>	
+										</div>
 									</td>
 									<td class="cost-benefit-table-column" valign="top" style="padding: 5px 5px;">
-										Expected benefits from maintaining 1-in-100 y river protection	
+										Expected benefits from maintaining 1-in-100 y river protection
 										<br/>
 										<div style="margin:10px;text-align:center;">
 											<a class="lightbox" href="<%=renderRequest.getContextPath()%>/images/cost-benefit/3_1_Floods EU 27 Benefits of Adaptation (table).png">
 												<img src="<%=renderRequest.getContextPath()%>/images/cost-benefit/thumb-3_1_Floods EU 27 Benefits of Adaptation (table).png" width="72" height="72" alt="" />
 											</a>
-										</div>										
+										</div>
 									</td>
 									<td class="cost-benefit-table-column" valign="top" style="padding: 5px 5px;">
 										<a href="http://www.climatecost.cc/" target="_blank">
-											ClimateCost  
-										</a>	
+											ClimateCost
+										</a>
 										<br/>
-										<a href="" target="_blank">										
-											Policy brief 6  
-										</a>	
-									</td>									
+										<a href="" target="_blank">
+											Policy brief 6
+										</a>
+									</td>
 								</tr>
 								<tr class="cost-benefit-table-row" style="background-color: #FDFCDC;">
 									<td class="cost-benefit-table-column" valign="top" style="padding: 5px 5px;">
-										River Flood protection									
+										River Flood protection
 									</td>
 									<td class="cost-benefit-table-column" valign="top" style="padding: 5px 5px;">
 										27 member states
 									</td>
 									<td class="cost-benefit-table-column" valign="top" style="padding: 5px 5px;">
-										Relative change in 100y return level flow									
+										Relative change in 100y return level flow
 									</td>
 									<td class="cost-benefit-table-column" valign="top" style="padding: 5px 5px;">
 										Expected mean annual damages
@@ -1772,7 +1748,7 @@ HttpServletRequest httpRequest = PortalUtil.getOriginalServletRequest(request);
 											<a class="lightbox" href="<%=renderRequest.getContextPath()%>/images/cost-benefit/1_3_Flood EU 27 Mean Annual Damages per M S (bar graph).png">
 												<img src="<%=renderRequest.getContextPath()%>/images/cost-benefit/thumb-1_3_Flood EU 27 Mean Annual Damages per M S (bar graph).png" width="72" height="72" alt="" />
 											</a>
-										</div>											
+										</div>
 									</td>
 									<td class="cost-benefit-table-column" valign="top" style="padding: 5px 5px;">
 										Costs of Adaptation to maintain 1 in 100 year levels of flood protection
@@ -1787,40 +1763,40 @@ HttpServletRequest httpRequest = PortalUtil.getOriginalServletRequest(request);
 									</td>
 									<td class="cost-benefit-table-column" valign="top" style="padding: 5px 5px;">
 										<a href="http://www.climatecost.cc/" target="_blank">
-											ClimateCost  
-										</a>	
-										<br/>
-										<a href="" target="_blank">										
-											Policy brief 6  
+											ClimateCost
 										</a>
-									</td>	
+										<br/>
+										<a href="" target="_blank">
+											Policy brief 6
+										</a>
+									</td>
 								</tr>
 							</tbody>
-						</table>					
-					</div>					
+						</table>
+					</div>
 				</p>
 			<!-- end 5.2.2 -->
 			</div>
-				
-		<!-- end 5.2 -->	
+
+		<!-- end 5.2 -->
 		</div>
-		
+
 		<div id="5-3" class="step-5-sub" style="display:none;">
 			<h2>
 				5.3 How do I decide which measures to include in my portfolio?
 			</h2>
 			<p>
-				Adaptation options have to be effective and efficient in order to be considered for implementation. Effective options are options that reduce a certain vulnerability or number of vulnerabilities to a desired level. 
-				Efficient options are the options whose benefits exceed their costs and are more cost-effective than the alternatives. These benefits can be economic, social and environmental. In the feasibility assessment all these 
+				Adaptation options have to be effective and efficient in order to be considered for implementation. Effective options are options that reduce a certain vulnerability or number of vulnerabilities to a desired level.
+				Efficient options are the options whose benefits exceed their costs and are more cost-effective than the alternatives. These benefits can be economic, social and environmental. In the feasibility assessment all these
 				three aspects have to be taken into account.
 				<div>
 					(Read more)
 				</div>
-				<div>				
+				<div>
 					Links:
-					<ul>					
+					<ul>
 						<li>
-							Link to MCA tool of ClimWatAdapt 	
+							Link to MCA tool of ClimWatAdapt
 						</li>
 					</ul>
 				</div>	

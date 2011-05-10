@@ -42,6 +42,12 @@ div.step-right h1 {
 .list-option{
 	margin:10px 0px;
 }
+
+ul.menu-left {
+    padding-left: 20px;
+    list-style-image: url(../images/arrow_green.png);Œ
+}
+
 .info-button {
 	width: 15px;
 	height:15px;
