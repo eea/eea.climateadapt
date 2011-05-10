@@ -53,8 +53,11 @@ HttpServletRequest httpRequest = PortalUtil.getOriginalServletRequest(request);
 		
 		var hashedHeadingId = '#' + headingId;
 
+		$j('.step2substep').hide();
+		$j(hashedHeadingId).fadeIn();
+
 		var substepOptionIds = ['#analyze-maps-options', '#analyze-nas-options'];
-		var substepContentIds = ['#indicators-map', '#analyze-nas-content', '#general-content'];
+		var substepContentIds = ['#indicators-map', '#general-content'];
 		var substepHeadingIds = ['#analyze-maps-heading', '#analyze-nas-heading', '#what-should-i-do-heading'];
 	
 		$j.each(substepOptionIds, function(index, value){
@@ -74,7 +77,6 @@ HttpServletRequest httpRequest = PortalUtil.getOriginalServletRequest(request);
 					$j(substepContentIds[index]).fadeIn();
 				}
 			});
-		$j(hashedHeadingId).removeClass('clickable');
 			
 	}
 	
@@ -170,26 +172,32 @@ HttpServletRequest httpRequest = PortalUtil.getOriginalServletRequest(request);
 					<ul style="list-style:none;">
 						<li class="list-option">
 							<img src="<%=renderRequest.getContextPath()%>/images/arrow_green.png" class="valigned"/>
+							<a href="#" onclick="step2substep('2-1'); return false">
 							1. General
+							</a>
 						</li>
 						<li class="list-option">
 							<img src="<%=renderRequest.getContextPath()%>/images/arrow_green.png" class="valigned"/>
-							2. What are key systems?
+							<a href="#" onclick="step2substep('2-2'); return false">
+								2. How do I analyse impacts of past weather and recent climate trends?
+							</a>
 						</li>
 						<li class="list-option">
 							<img src="<%=renderRequest.getContextPath()%>/images/arrow_green.png" class="valigned"/>
-							3. How do I analyze impacts of past weather?
+							<a href="#" onclick="step2substep('2-3'); return false">
+								3. How do I identify the impacts of climate change?
+							</a>
 						</li>
 						<li class="list-option" id="analyze-in-nas">
 							<img src="<%=renderRequest.getContextPath()%>/images/arrow_green.png" class="valigned"/>
-							<a href="#" onclick="step2substep('analyze-in-nas');showGoToNAS(); return false">
-								4. Assessments in my region
+							<a href="#" onclick="step2substep('2-4'); return false">
+								4. Are there vulnerability assessments in my region?
 							</a>
 						</li>						
 						<li class="list-option" id="analyze-maps-heading">
 							<img src="<%=renderRequest.getContextPath()%>/images/arrow_green.png" class="valigned"/>
 							<a href="#" onclick="step2substep('analyze-maps-heading');showVulnerabilitiesAndRisks(); initMapViewerIndicators();">
-								5. Compare my region to Europe
+								5. How do I analyse impacts from European scale vulnerability assessments?
 							</a>	
 								<div id="analyze-maps-options" style="display:none;">
 									<ul style="list-style:none;">
@@ -217,26 +225,23 @@ HttpServletRequest httpRequest = PortalUtil.getOriginalServletRequest(request);
 								</div>							
 						</li>						
 						
-						
 						<li class="list-option">
 							<img src="<%=renderRequest.getContextPath()%>/images/arrow_green.png" class="valigned"/>
-							6. How do I analyze recent climate trends?
+							<a href="#" onclick="step2substep('2-6'); return false">
+								6. What are the risks?
+							</a>
 						</li>
 						<li class="list-option">
 							<img src="<%=renderRequest.getContextPath()%>/images/arrow_green.png" class="valigned"/>
-							7. Where do I find possible scenarios?
+							<a href="#" onclick="step2substep('2-7'); return false">
+								7. Are there also opportunities?
+							</a>
 						</li>
 						<li class="list-option">
 							<img src="<%=renderRequest.getContextPath()%>/images/arrow_green.png" class="valigned"/>
-							8. How do I identify impacts of climate change?
-						</li>
-						<li class="list-option">
-							<img src="<%=renderRequest.getContextPath()%>/images/arrow_green.png" class="valigned"/>
-							9. How do I assess vulnerability?
-						</li>
-						<li class="list-option">
-							<img src="<%=renderRequest.getContextPath()%>/images/arrow_green.png" class="valigned"/>
-							10. What about risks and opportunities?
+							<a href="#" onclick="step2substep('2-8'); return false">
+								8. What are the uncertainties?
+							</a>
 						</li>
 					</ul>
 				</div>
@@ -641,14 +646,6 @@ HttpServletRequest httpRequest = PortalUtil.getOriginalServletRequest(request);
             $j("#indicator-exposure").fadeIn();
         }
 
-		function showGoToNAS() {
-
-			$j('.step2heading').hide();
-			$j('.step2description').hide();
-
-			$j("#analyze-nas-content").fadeIn();
-		}
-
          function showUnderlyingHumanCauses() {
 		 
 			$j('.step2heading').hide();
@@ -669,7 +666,10 @@ HttpServletRequest httpRequest = PortalUtil.getOriginalServletRequest(request);
             $j("#indicator-climate-changes").hide();
             $j("#indicator-sensitivity").fadeIn();
         }
+		
             </script>
+		
+	
 		
 	<div id="step-right-2" class="step-right">		
 		<h1 id="adaptationtools-heading">
@@ -703,9 +703,251 @@ HttpServletRequest httpRequest = PortalUtil.getOriginalServletRequest(request);
 			</div>
 		</div>
 		
-		<div id="analyze-nas-content" style="display:none;">
-			<div id="analyze-nas-content-text" style="float:left;width:50%;margin-left:30px;">
-				<a href="/national-adaptation-strategies" target="_blank">Open National Adaptation Strategies (new window)</a>
+		<div id="2-1" class="what-should-i-do-content step2substep" style="display:none;">
+			<h2 style="margin-left:30px;">
+				2.1 General
+			</h2>
+			<img src="<%=renderRequest.getContextPath()%>/images/step-2.jpg" style="float:right;margin-right:30px;"/>
+			<div id="general-content-text" style="float:left;width:50%;margin-left:30px;">
+				<p>
+					Even if emissions of greenhouse gases stop today, these changes would continue for many decades and in the case of sea level for centuries. This is due to the historical build-up of the gases in the 
+					atmosphere and time lags in the response of climatic and oceanic systems to changes in the atmospheric concentration of the gases. Therefore, in addition to emission reduction (mitigation) measures, it 
+					is essential that natural as well as human systems also develop adequate adaptive responses to avoid the risks posed by, and to take advantage of the opportunities arising from global climate change.
+				</p>
+				<p>
+					Observed temperature rises and changes in precipitation patterns already affect various areas in Europe, making them vulnerable to different weather events. Within the context of climate change, the 
+					IPCC defines vulnerability to climate change as the degree to which a system is susceptible to, or unable to cope with, adverse effects of climate change, including climate variability and extremes. 
+					Vulnerability is a function of the character, magnitude, and rate of climate variation to which a system is exposed, its sensitivity, and its adaptive capacity.
+				</p>
+				<p>
+					In order to perform a sound vulnerability assessment, all available relevant information has to be collected and assessed. This includes analysis of past and current weather trends, future climate change 
+					projections and their uncertainty.			
+				</p>	
+			</div>
+		</div>
+
+		<div id="2-2" class="what-should-i-do-content step2substep" style="display:none;">
+			<h2 style="margin-left:30px;">
+				2.2 How do I analyse impacts of past weather and recent climate trends?
+			</h2>
+			<img src="<%=renderRequest.getContextPath()%>/images/step-2.jpg" style="float:right;margin-right:30px;"/>
+			<div id="general-content-text" style="float:left;width:50%;margin-left:30px;">
+			<p>
+				The assessment of existing vulnerability to climate variability and extremes is a necessary starting point for any adaptation. Assessment of past weather events, for example heavy rain or extreme temperatures, 
+				and analysis of responses to them can help in gaining insights on which responses have been successful or ineffective. Lessons learned from this exercise can be used as a basis for designing climate change 
+				adaptation plans.
+			</p>
+			<p>
+				<div style="font-style:italic">
+					Links:
+				</div>
+				<ul>
+					<li>
+						<a href="http://ace.geocat.net/web/guest/observations-and-scenarios">
+							Observations and Scenarios
+						</a>
+					</li>
+					<li>
+						<a href="http://www.emdat.be/" target="_blank">
+							Emergency Events Database EM-DAT (new window)
+						</a>
+					</li>
+					<li>
+						<a href="http://ensembles-eu.metoffice.com/data.html" target="_blank">
+							ENSEMBLES. Daily, European gridded temperature and precipitation, at 25km resolution, 1950 to 2008 (new window)
+						</a>
+					</li>
+					<li>
+						<a href="http://www.ecmwf.int/research/era/do/get/index" target="_blank">
+							ERA 40 / ERA-40-interim. Six-hourly, global gridded variables (many) at resolutions of approximately 1° and 0.5°, 1958-2002 for ERA40, 1989 to present for ERA-interim (new window)
+						</a>
+					</li>
+					<li>
+						<a href="http://badc.nerc.ac.uk/data/cru/" target="_blank">
+							CRU. Monthly, global gridded variables (ten) at 0.5° resolution, 1901 to present (new window)
+						</a>
+					</li>	
+					<li>
+						<a href="http://eca.knmi.nl/" target="_blank">
+							European Climate Assessment & Dataset (ECA&D) (new window)
+						</a>
+					</li>						
+				</ul>
+				<div style="font-style:italic">
+					Links to tools:
+				</div>				
+				<ul>
+					<li>
+						<a href="">
+							JRC, AGRI4CAST web data viewer, providing access to observations of weather and agriculture indicators (TODO link to CHM portlet)
+						</a>
+					</li>
+				</ul>
+			</p>
+			</div>
+		</div>
+				
+		<div id="2-3" class="what-should-i-do-content step2substep" style="display:none;">
+			<h2 style="margin-left:30px;">
+				2.3 How do I identify the impacts of climate change?
+			</h2>
+			<img src="<%=renderRequest.getContextPath()%>/images/step-2.jpg" style="float:right;margin-right:30px;"/>
+			<div id="general-content-text" style="float:left;width:50%;margin-left:30px;">
+			<p>
+				The extent to which climate change poses threats or opportunities will depend on how the climate, society and economy of the region of interest changes in coming years. These changes are studied with the help 
+				of different climate and socio-economic scenarios. Scenarios provide plausible descriptions of different possible future states of the world based on the choices society makes. (Read more)			
+			</p>
+			</div>
+		</div>
+
+		<div id="2-4" class="what-should-i-do-content step2substep" style="display:none;">
+			<h2 style="margin-left:30px;">
+				2.4. Are there vulnerability assessments in my region?
+			</h2>
+			<img src="<%=renderRequest.getContextPath()%>/images/step-2.jpg" style="float:right;margin-right:30px;"/>
+			<div id="general-content-text" style="float:left;width:50%;margin-left:30px;">
+			<p>
+				In many cases, the results of national or regional vulnerability assessments can be expected to better fit the goals of regional adaptation plans. Therefore a logical first step in assessing vulnerability to 
+				climate change is to look for existing (sub)national, regional or local assessments. Currently this section provides access to the section on National Adaptation Plans and Strategies, that includes among others 
+				references to national and regional vulnerability studies. (In a later stage this section will more specifically link to available vulnerability assessments)
+				<br/><br/>
+				<a href="/national-adaptation-strategies" target="_blank">
+					Open National Adaptation Strategies (new window)
+				</a> 				
+			</p>
+			</div>
+		</div>
+
+		<div id="2-5" class="what-should-i-do-content step2substep" style="display:none;">
+			<h2 class="heading step2heading">
+				2.5 How do I analyse impacts from European scale vulnerability assessments?
+			</h2>
+			<img src="<%=renderRequest.getContextPath()%>/images/step-2.jpg" style="float:right;margin-right:30px;"/>
+			<div id="general-content-text" style="float:left;width:50%;margin-left:30px;">
+				<p>
+					There are a number of European-wide and national projects that have created different socio-economic and climate scenarios across a variety of sectors and made projections for different socio-economic and 
+					climate variables. These variables, when combined, produce indicators for climate impacts. Adaptation cannot be planned only on the basis of climate indicators, it needs impact indicators showing how climate 
+					interacts with socio-economic developments.
+				</p>
+				<p>
+					The Adaptation Support Tool allows you to assess a variety of impact indicators, calculated within different projects. They can help you to assess whether you are vulnerable to climate change and whether 
+					there are opportunities arising from it. In order to identify whether the vulnerability arises due to changes in climate, in socio-economic development or both, these indicators are disaggregated to their 
+					components.				
+				</p>
+				<p>
+					For example the indicator for water stress, used as impact indicator for water scarcity and droughts, disaggregates to two indicators – for water availability and water use (withdrawals). Their analysis will 
+					give an indication whether water scarcity is caused by climate change (manifested as decrease in water availability), socio-economic developments (increase in water use) or both.				
+				</p>
+				<p>
+					While the components of the aggregated impact indicators let you identify where the vulnerabilities come from, they do not allow to identify the root cause of the problem. Therefore you should go further back 
+					in the casual chain and look for the causes. In the case of a water stress indicator, causes for decrease in water availability can be decrease in precipitation, increase in evapo-transpiration, decrease in 
+					river flow, change in the timing of snow melting and/or precipitation. Water availability decreases also due to deterioration of water quality. Water use can increase due to introduction of different crops 
+					or cooling technologies, land use changes such as urbanisation, land erosion that decreases significantly water holding capacity of the soils. For some of these root causes European-wide data are available, 
+					but for most of them they still do not exist. When planning for adaptation it is of great importance to find local data on these sub-indicators and to analyse them within your vulnerability assessment in 
+					order to address the right causes and to design effective adaptation measure mix.				
+				</p>
+				<p>
+					<div style="font-style:italic">
+						Links to European scale vulnerability assessments:
+					</div>				
+					<ul>
+						<li>
+							<a href="http://www.climwatadapt.eu" target="_blank">
+								ClimWatAdapt (new window)
+							</a>
+						</li>
+						<li>
+							<a href=" http://peseta.jrc.ec.europa.eu/" target="_blank">
+								PESETA study (new window)
+							</a>
+						</li>
+					</ul>				
+				</p>
+				<p>
+					<div style="font-style:italic">
+						Links to tools:
+					</div>				
+					<ul>
+						<li>
+							<a href="http://www.1stcellmedia.de/customer/uni/cms/index.php?option=com_frontpage&Itemid=1" target="_blank">
+								SCENES WebService (new window)
+							</a>
+						</li>
+						<li>
+							<a href="http://adam-digital-compendium.pik-potsdam.de/macro-economic-analysis/direct-impacts-1/impacts-by-region/" target="_blank">
+								ADAM Digital Compendium (new window)
+							</a>
+						</li>
+					</ul>				
+				</p>	
+				<p>
+					<div style="font-style:italic">
+						Links to data generators, databases and meta-data platforms
+					</div>				
+					<ul>
+						<li>
+							<a href="http://cera-www.dkrz.de/" target="_blank">
+								The CERA database (new window)
+							</a>
+						</li>
+						<li>
+							<a href="http://www.espon-climate.eu/" target="_blank">
+								ESPON CLIMATE (new window)
+							</a>
+						</li>
+						<li>
+							<a href="http://www.circeproject.eu/" target="_blank">
+								CIRCE (Climate Change and Impact Research: the Mediterranean Environment (new window)
+							</a>
+						</li>						
+						<li>
+							<a href="http://www-pcmdi.llnl.gov/" target="_blank">
+								PCMDI (Project for Climate Model Diagnosis and Inter-comparison) (new window)
+							</a>
+						</li>
+					</ul>				
+				</p>					
+			</div>
+		</div>
+
+		<div id="2-6" class="what-should-i-do-content step2substep" style="display:none;">
+			<h2 style="margin-left:30px;">
+				2.6. What are the risks?
+			</h2>
+			<img src="<%=renderRequest.getContextPath()%>/images/step-2.jpg" style="float:right;margin-right:30px;"/>
+			<div id="general-content-text" style="float:left;width:50%;margin-left:30px;">
+			<p>
+				Current risk management approaches require knowledge of risk, calculated as
+				<br/><br/>
+				Risk = Expected damages x Probability
+				<br/><br/>
+				In the case of climate change projections considerable complexities arise in calculation of the risk function, associated with assigning probability to certain climate change scenarios and with making 
+				assumptions about impacts of future socioeconomic development.			
+			</p>
+			</div>
+		</div>
+		
+		<div id="2-7" class="what-should-i-do-content step2substep" style="display:none;">
+			<h2 style="margin-left:30px;">
+				2.7. Are there also opportunities?
+			</h2>
+			<img src="<%=renderRequest.getContextPath()%>/images/step-2.jpg" style="float:right;margin-right:30px;"/>
+			<div id="general-content-text" style="float:left;width:50%;margin-left:30px;">
+			<p>
+				To be added later
+			</p>
+			</div>
+		</div>
+
+		<div id="2-8" class="what-should-i-do-content step2substep" style="display:none;">
+			<h2 style="margin-left:30px;">
+				8. What are the uncertainties?
+			</h2>
+			<img src="<%=renderRequest.getContextPath()%>/images/step-2.jpg" style="float:right;margin-right:30px;"/>
+			<div id="general-content-text" style="float:left;width:50%;margin-left:30px;">
+			<p>
+				To be added later
+			</p>
 			</div>
 		</div>
 		
