@@ -478,7 +478,7 @@ HttpServletRequest httpRequest = PortalUtil.getOriginalServletRequest(request);
 											are considered, international consortia are financed to find high-tech alternatives to fossil fuels. \
 											Global demand for food and biofuels drives the intensification of agriculture with increasing need \
 											for irrigation and new cultivation area. As CAP is weakened farms are abandoned where crop production \
-											is uneconomic. Slow adoption of water-efficient technologies due to peoples' limited income, low \
+											is uneconomic. Slow adoption of water-efficient technologies due to peoples limited income, low \
 											water-saving consciousness, more single-person households, increase in tourism and lack in training \
 											using new irrigation technologies lead to higher water use. Only the higher water prices dampen this \
 											trend. It is economic to treat and re-use irrigation return flows thus this practice also reducing \
