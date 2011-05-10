@@ -570,7 +570,6 @@ HttpServletRequest httpRequest = PortalUtil.getOriginalServletRequest(request);
 												<br/>\
 												<br/>Model: WaterGAP \
 											</div> \
-											<div style="height:15px;text-align:right;padding:5px;">read more &raquo;</div> \
 										</div>',
 							innerHtmlStyle: {
 												color:'#000', 
