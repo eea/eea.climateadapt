@@ -646,7 +646,6 @@ HttpServletRequest httpRequest = PortalUtil.getOriginalServletRequest(request);
 
 	<div id="step-right-2" class="step-right">
 		<h1 id="adaptationtools-heading">
-			<img src="<%=renderRequest.getContextPath()%>/images/bullit2.png" class="valigned"/>
 			Am I vulnerable to climate change and what are my risks
 		</h1>
 
@@ -1154,7 +1153,6 @@ HttpServletRequest httpRequest = PortalUtil.getOriginalServletRequest(request);
 
 	<div id="step-right-3" class="step-right">
         <h1 id="strategy-adaptation-heading">
-			<img src="<%=renderRequest.getContextPath()%>/images/bullit3.png" class="valigned"/>
 			What should be my strategy to adapt?
 		</h1>
 
@@ -1287,7 +1285,6 @@ HttpServletRequest httpRequest = PortalUtil.getOriginalServletRequest(request);
 
 	<div id="step-right-4" class="step-right">
         <h1 id="aplication-options-heading">
-			<img src="<%=renderRequest.getContextPath()%>/images/bullit4.png" class="valigned"/>
 			How can identify my adaptation options?
 		</h1>
 
@@ -1535,7 +1532,6 @@ HttpServletRequest httpRequest = PortalUtil.getOriginalServletRequest(request);
 
 	<div id="step-right-5" class="step-right" style="margin-left:30px;">
         <h1 id="assess-adaptation-options-heading">
-			<img src="<%=renderRequest.getContextPath()%>/images/bullit5.png" class="valigned"/>
 			How can I assess my adaptation options?
 		</h1>
 
