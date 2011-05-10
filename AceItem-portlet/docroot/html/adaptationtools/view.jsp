@@ -680,19 +680,19 @@ HttpServletRequest httpRequest = PortalUtil.getOriginalServletRequest(request);
 		</h1>
 
          <h2 id="header-vulnerability" class="heading step2heading" style="display: none">
-             5.1. What are the key vulnerabilities and risks?
+             2.5.1 What are the key vulnerabilities and risks?
          </h2>
 
         <h2 id="header-underlying-causes" class="heading step2heading" style="display: none">
-             5.2. What are the underlying causes?
+             2.5.2 What are the underlying causes?
         </h2>
 
         <h2 id="header-climate-change" class="heading step2heading" style="display: none">
-             5.3. How does the climate change?
+             2.5.3 How does the climate change?
         </h2>
 
         <h2 id="header-socio-ecological" class="heading step2heading" style="display: none">
-             5.4. How does the socio-ecological system change?
+             2.5.4 How does the socio-ecological system change?
         </h2>
 
 		<div id="general-content" class="what-should-i-do-content">
