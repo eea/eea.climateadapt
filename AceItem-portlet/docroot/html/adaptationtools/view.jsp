@@ -1245,13 +1245,16 @@ HttpServletRequest httpRequest = PortalUtil.getOriginalServletRequest(request);
 		<br /><br />
 		In this process existing relevant national and EU legislation, policies, plans and guidance have to be taken into account and integrated in your strategy.
 		<br /><br />
-		<a href="http://ec.europa.eu/clima/sites/change" target="_blank">EC DG Climate Action, Adaptation to climate change  </a>
+		<div style="font-weight:bold; font-size: 12px; padding-top:20px;">				
+			Links
+		</div>
+		<a href="http://ec.europa.eu/clima/sites/change" target="_blank">EC DG Climate Action</a>, Adaptation to climate change
 		<br /><br />
-		<a href="/eu-sector-policy/general" target="_blank">EU Sector policies  </a>
+		<a href="/eu-sector-policy/general" target="_blank">EU Sector policies</a> section on Clearinghouse Mechanism on Adaptation
 		<br /><br />
-		<a href="/national-adaptation-strategies" target="_blank">Open National Adaptation Strategies  </a>
+		<a href="/national-adaptation-strategies" target="_blank">Open National Adaptation Strategies</a> section on Clearinghouse Mechanism on Adaptation
 		<br /><br />
-		<a href="http://eur-lex.europa.eu/LexUriServ/LexUriServ.do?uri=COM:2009:0147:FIN:EN:PDF" target="_blank">WHITE PAPER: Adapting to climate change: Towards a European framework for action  </a>
+		WHITE PAPER: <a href="http://eur-lex.europa.eu/LexUriServ/LexUriServ.do?uri=COM:2009:0147:FIN:EN:PDF" target="_blank">Adapting to climate change: Towards a European framework for action</a>
 		</div>
 
         <hr style="clear:both;display:block;visibility:hidden;"/>
