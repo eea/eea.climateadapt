@@ -123,7 +123,7 @@ HttpServletRequest httpRequest = PortalUtil.getOriginalServletRequest(request);
 					<div style="font-size:12px;margin:20px 10px;">
 						More information on designing and mainstreaming adaptation policies can be found in the following documents:
 						<div style="margin:20px 0px;">
-							<img src="<%=renderRequest.getContextPath()%>/images/arrow_green.png" class="valigned"/>
+							<img src="<%=renderRequest.getContextPath()%>/images/arrow_green.png"/>
 							<span style="margin-left:5px;">
 								<a href="http://ec.europa.eu/clima/documentation/adaptation/docs/RAS%20Final%20Report.pdf" target="_blank">
 									Design of guidelines for the elaboration of Regional Climate Change Adaptation Strategies
@@ -131,7 +131,7 @@ HttpServletRequest httpRequest = PortalUtil.getOriginalServletRequest(request);
 							</span>
 						</div>
 						<div style="margin:20px 0px;">
-							<img src="<%=renderRequest.getContextPath()%>/images/arrow_green.png" class="valigned"/>
+							<img src="<%=renderRequest.getContextPath()%>/images/arrow_green.png"/>
 							<span style="margin-left:5px;">
 								<a href="http://eur-lex.europa.eu/LexUriServ/LexUriServ.do?uri=COM:2009:0147:FIN:EN:PDF" target="_blank">
 									WHITE PAPER: Adapting to climate change: Towards a European framework for action
@@ -294,29 +294,29 @@ HttpServletRequest httpRequest = PortalUtil.getOriginalServletRequest(request);
                 </div>
                 <div id="what-should-i-do-5-options" style="">
                     <ul class="menu-left">
-                        <li>
+                        <li class="list-option">
                             1. <a href="#" onclick="step5substep('5-1'); return false;">General</a>
                         </li>
-                        <li>
+                        <li class="list-option">
                             2. <a href="#" onclick="step5substep('5-2-1'); return false;">How much does adaptation cost?</a>
 							<div id="what-should-i-do-5-options" style="">
 								<ul class="menu-left">
-                                    <li>
+                                    <li class="list-option">
                                         <a href="#" onclick="step5substep('5-2-1'); return false;">2.1 How can I determine my adaptation costs?</a>
                                     </li>
-                                    <li>
+                                    <li class="list-option">
                                         <a href="#" onclick="step5substep('5-2-2'); return false;">2.2 Search the cost-benefit database</a>
                                     </li>
                                 </ul>
                             </div>
                         </li>
-                        <li>
+                        <li class="list-option">
                             3. <a href="#" onclick="step5substep('5-3'); return false;">How do I decide which measures to include in my portfolio?</a>
                         </li>
-                        <li>
+                        <li class="list-option">
                             4. <a href="#" onclick="step5substep('5-4'); return false;">What is my Adaptive Capacity?</a>
                         </li>
-                        <li>
+                        <li class="list-option">
                             5. <a href="#" onclick="step5substep('5-5'); return false;">How to plan for adaptation?</a>
                         </li>
                     </ul>

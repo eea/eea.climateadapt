@@ -45,11 +45,12 @@ div.step-right h1 {
 }
 .list-option{
 	margin:10px 0px;
+    background: url(../images/arrow_green.png) no-repeat left top;
+    padding-left: 15px;
 }
 
 ul.menu-left {
-    padding-left: 20px;
-    list-style-image: url(../images/arrow_green.png);Œ
+    list-style-type:none;
 }
 
 .info-button {
