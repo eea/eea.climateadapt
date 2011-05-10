@@ -788,7 +788,6 @@ HttpServletRequest httpRequest = PortalUtil.getOriginalServletRequest(request);
 			<h2 style="margin-left:30px;">
 				2.4. Are there vulnerability assessments in my region?
 			</h2>
-			<img src="<%=renderRequest.getContextPath()%>/images/step-2.jpg" style="float:right;margin-right:30px;"/>
 			<div id="general-content-text" style="float:left;dispaly:block;margin-left:30px;">
 			<p>
 				In many cases, the results of national or regional vulnerability assessments can be expected to better fit the goals of regional adaptation plans. Therefore a logical first step in assessing vulnerability to
@@ -800,6 +799,8 @@ HttpServletRequest httpRequest = PortalUtil.getOriginalServletRequest(request);
 				</a>
 			</p>
 			</div>
+			<img src="<%=renderRequest.getContextPath()%>/images/step-2.jpg" style="float:right;margin-right:30px;"/>
+			
 		</div>
 
 		<div id="2-5" class="what-should-i-do-content step2substep" style="display:none;">
