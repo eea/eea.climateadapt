@@ -162,7 +162,7 @@ HttpServletRequest httpRequest = PortalUtil.getOriginalServletRequest(request);
 		-->
 		<div id="step-left-2" class="step-left">
 			<div id="what-should-i-do" style="margin:5px;">
-				<div id="what-should-i-do-heading" style="font-size:24px;" onclick="step2substep(this.id);">
+				<div id="what-should-i-do-heading" style="font-size:18px;line-height:20px;" onclick="step2substep(this.id);">
 					What should I do?
 				</div>
 				<div id="what-should-i-do-options" style="">
@@ -289,7 +289,7 @@ HttpServletRequest httpRequest = PortalUtil.getOriginalServletRequest(request);
         -->
         <div id="step-left-5" class="step-left">
             <div id="what-should-i-do-5" style="margin:5px;">
-                <div id="what-should-i-do-5-heading" style="font-size:24px;">
+                <div id="what-should-i-do-5-heading" style="font-size:18px;line-height:20px;">
                     How can I assess my adaptation options?
                 </div>
                 <div id="what-should-i-do-5-options" style="">
