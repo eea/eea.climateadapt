@@ -666,7 +666,7 @@ HttpServletRequest httpRequest = PortalUtil.getOriginalServletRequest(request);
         </h2>
 
 		<div id="general-content" class="what-should-i-do-content">
-			<div id="general-content-text" style="float:left;width:50%;margin-left:30px;">
+			<div id="general-content-text" style="display:block;float:left;margin-left:30px;">
 				Next step after preparing the ground is vulnerability assessment. It is the analysis of the expected impacts, risks and the adaptive capacity of an area in the context of climate change.
 				The objective of this step is to gain a better understanding of how and in what way climate change will affect the services, social groups, economic sectors and assets and to identify
 				the priority areas for action. Vulnerability assessment is more than measuring potential harm using information about climate impacts. It includes an assessment of the area's ability
@@ -679,8 +679,7 @@ HttpServletRequest httpRequest = PortalUtil.getOriginalServletRequest(request);
 			<h2 style="margin-left:30px;">
 				2.1 General
 			</h2>
-			<img src="<%=renderRequest.getContextPath()%>/images/step-2.jpg" style="float:right;margin-right:30px;"/>
-			<div id="general-content-text" style="float:left;width:50%;margin-left:30px;">
+			<div id="general-content-text" style="float:left;dispaly:block;margin-left:30px;">
 				<p>
 					Even if emissions of greenhouse gases stop today, these changes would continue for many decades and in the case of sea level for centuries. This is due to the historical build-up of the gases in the
 					atmosphere and time lags in the response of climatic and oceanic systems to changes in the atmospheric concentration of the gases. Therefore, in addition to emission reduction (mitigation) measures, it
@@ -696,14 +695,15 @@ HttpServletRequest httpRequest = PortalUtil.getOriginalServletRequest(request);
 					projections and their uncertainty.
 				</p>
 			</div>
+			<img src="<%=renderRequest.getContextPath()%>/images/step-2.jpg" style="float:right;margin-right:30px;"/>
+			
 		</div>
 
 		<div id="2-2" class="what-should-i-do-content step2substep" style="display:none;">
 			<h2 style="margin-left:30px;">
 				2.2 How do I analyse impacts of past weather and recent climate trends?
 			</h2>
-			<img src="<%=renderRequest.getContextPath()%>/images/step-2.jpg" style="float:right;margin-right:30px;"/>
-			<div id="general-content-text" style="float:left;width:50%;margin-left:30px;">
+			<div id="general-content-text" style="float:left;dispaly:block;margin-left:30px;">
 			<p>
 				The assessment of existing vulnerability to climate variability and extremes is a necessary starting point for any adaptation. Assessment of past weather events, for example heavy rain or extreme temperatures,
 				and analysis of responses to them can help in gaining insights on which responses have been successful or ineffective. Lessons learned from this exercise can be used as a basis for designing climate change
@@ -765,27 +765,29 @@ HttpServletRequest httpRequest = PortalUtil.getOriginalServletRequest(request);
 				</ul>
 			</p>
 			</div>
+			<img src="<%=renderRequest.getContextPath()%>/images/step-2.jpg" style="float:right;margin-right:30px;"/>
+			
 		</div>
 
 		<div id="2-3" class="what-should-i-do-content step2substep" style="display:none;">
 			<h2 style="margin-left:30px;">
 				2.3 How do I identify the impacts of climate change?
 			</h2>
-			<img src="<%=renderRequest.getContextPath()%>/images/step-2.jpg" style="float:right;margin-right:30px;"/>
-			<div id="general-content-text" style="float:left;width:50%;margin-left:30px;">
+			<div id="general-content-text" style="float:left;dispaly:block;margin-left:30px;">
 			<p>
 				The extent to which climate change poses threats or opportunities will depend on how the climate, society and economy of the region of interest changes in coming years. These changes are studied with the help
 				of different climate and socio-economic scenarios. Scenarios provide plausible descriptions of different possible future states of the world based on the choices society makes. (Read more)
 			</p>
 			</div>
+			<img src="<%=renderRequest.getContextPath()%>/images/step-2.jpg" style="float:right;margin-right:30px;"/>
+			
 		</div>
 
 		<div id="2-4" class="what-should-i-do-content step2substep" style="display:none;">
 			<h2 style="margin-left:30px;">
 				2.4. Are there vulnerability assessments in my region?
 			</h2>
-			<img src="<%=renderRequest.getContextPath()%>/images/step-2.jpg" style="float:right;margin-right:30px;"/>
-			<div id="general-content-text" style="float:left;width:50%;margin-left:30px;">
+			<div id="general-content-text" style="float:left;dispaly:block;margin-left:30px;">
 			<p>
 				In many cases, the results of national or regional vulnerability assessments can be expected to better fit the goals of regional adaptation plans. Therefore a logical first step in assessing vulnerability to
 				climate change is to look for existing (sub)national, regional or local assessments. Currently this section provides access to the section on National Adaptation Plans and Strategies, that includes among others
@@ -796,14 +798,15 @@ HttpServletRequest httpRequest = PortalUtil.getOriginalServletRequest(request);
 				</a>
 			</p>
 			</div>
+			<img src="<%=renderRequest.getContextPath()%>/images/step-2.jpg" style="float:right;margin-right:30px;"/>
+			
 		</div>
 
 		<div id="2-5" class="what-should-i-do-content step2substep" style="display:none;">
 			<h2 class="heading step2heading">
 				2.5 How do I analyse impacts from European scale vulnerability assessments?
 			</h2>
-			<img src="<%=renderRequest.getContextPath()%>/images/step-2.jpg" style="float:right;margin-right:30px;"/>
-			<div id="general-content-text" style="float:left;width:50%;margin-left:30px;">
+			<div id="general-content-text" style="float:left;dispaly:block;margin-left:30px;">
 				<p>
 					There are a number of European-wide and national projects that have created different socio-economic and climate scenarios across a variety of sectors and made projections for different socio-economic and
 					climate variables. These variables, when combined, produce indicators for climate impacts. Adaptation cannot be planned only on the basis of climate indicators, it needs impact indicators showing how climate
@@ -888,14 +891,15 @@ HttpServletRequest httpRequest = PortalUtil.getOriginalServletRequest(request);
 					</ul>
 				</p>
 			</div>
+			<img src="<%=renderRequest.getContextPath()%>/images/step-2.jpg" style="float:right;margin-right:30px;"/>
+			
 		</div>
 
 		<div id="2-6" class="what-should-i-do-content step2substep" style="display:none;">
 			<h2 style="margin-left:30px;">
 				2.6. What are the risks?
 			</h2>
-			<img src="<%=renderRequest.getContextPath()%>/images/step-2.jpg" style="float:right;margin-right:30px;"/>
-			<div id="general-content-text" style="float:left;width:50%;margin-left:30px;">
+			<div id="general-content-text" style="float:left;dispaly:block;margin-left:30px;">
 			<p>
 				Current risk management approaches require knowledge of risk, calculated as
 				<br/><br/>
@@ -905,30 +909,33 @@ HttpServletRequest httpRequest = PortalUtil.getOriginalServletRequest(request);
 				assumptions about impacts of future socioeconomic development.
 			</p>
 			</div>
+			<img src="<%=renderRequest.getContextPath()%>/images/step-2.jpg" style="float:right;margin-right:30px;"/>
+			
 		</div>
 
 		<div id="2-7" class="what-should-i-do-content step2substep" style="display:none;">
 			<h2 style="margin-left:30px;">
 				2.7. Are there also opportunities?
 			</h2>
-			<img src="<%=renderRequest.getContextPath()%>/images/step-2.jpg" style="float:right;margin-right:30px;"/>
-			<div id="general-content-text" style="float:left;width:50%;margin-left:30px;">
+			<div id="general-content-text" style="float:left;dispaly:block;margin-left:30px;">
 			<p>
 				To be added later
 			</p>
 			</div>
+			<img src="<%=renderRequest.getContextPath()%>/images/step-2.jpg" style="float:right;margin-right:30px;"/>
 		</div>
 
 		<div id="2-8" class="what-should-i-do-content step2substep" style="display:none;">
 			<h2 style="margin-left:30px;">
 				8. What are the uncertainties?
 			</h2>
-			<img src="<%=renderRequest.getContextPath()%>/images/step-2.jpg" style="float:right;margin-right:30px;"/>
-			<div id="general-content-text" style="float:left;width:50%;margin-left:30px;">
+			<div id="general-content-text" style="float:left;dispaly:block;margin-left:30px;">
 			<p>
 				To be added later
 			</p>
 			</div>
+			<img src="<%=renderRequest.getContextPath()%>/images/step-2.jpg" style="float:right;margin-right:30px;"/>
+			
 		</div>
 
 		<div id="indicators-map" style="display: none">
