@@ -880,10 +880,12 @@ HttpServletRequest httpRequest = PortalUtil.getOriginalServletRequest(request);
 			<p>
 				In many cases, the results of national or regional vulnerability assessments can be expected to better fit the goals of regional adaptation plans. Therefore a logical first step in assessing vulnerability to
 				climate change is to look for existing (sub)national, regional or local assessments. Currently this section provides access to the section on National Adaptation Plans and Strategies, that includes among others
-				references to national and regional vulnerability studies. (In a later stage this section will more specifically link to available vulnerability assessments)
+				references to national and regional vulnerability studies.
+				<br/><br/>
+				(In a later stage this section will more specifically link to available vulnerability assessments)
 				<br/><br/>
 				<a href="/national-adaptation-strategies" target="_blank">
-					Open National Adaptation Strategies
+					Go to national and regional vulnerability assessments
 				</a>
 			</p>
 			</div>
@@ -1245,7 +1247,7 @@ HttpServletRequest httpRequest = PortalUtil.getOriginalServletRequest(request);
 		<br /><br />
 		In this process existing relevant national and EU legislation, policies, plans and guidance have to be taken into account and integrated in your strategy.
 		<br /><br />
-		<div style="font-weight:bold; font-size: 12px; padding-bottom:20px;">				
+		<div style="font-weight:bold; font-size: 12px; padding-bottom:10px;">				
 			Links
 		</div>
 		<a href="http://ec.europa.eu/clima/sites/change" target="_blank">EC DG Climate Action</a>, Adaptation to climate change
@@ -1644,16 +1646,16 @@ HttpServletRequest httpRequest = PortalUtil.getOriginalServletRequest(request);
 					When calculating adaptation costs, the following steps need to be considered:
 					<ol id="adaptation-cost-list" style="">
 						<li class="adaptation-cost-list-item" style="margin-top:5px;">
-							Determine the applicable measures and their implementation feasibility;
+							Defining cost assessment boundaries and baselines;
 						</li>
 						<li class="adaptation-cost-list-item" style="margin-top:5px;">
-							Calculate societal costs based on a pre-determined discount rate;
+							Identifying climate change risks and vulnerabilities;
 						</li>
 						<li class="adaptation-cost-list-item" style="margin-top:5px;">
-							Analyse what is the rate of penetration for a given measure and whether it is already being undertaken;
+							Identifying adaptation measures applicable to identified risks;
 						</li>
 						<li class="adaptation-cost-list-item" style="margin-top:5px;">
-							Calculate the actual costs of each measure;
+							Selecting the applicable valuation approach;
 							<div style="margin:10px 0px;">
 								This step requires to determine upfront investment costs, operating and lifetime implementation costs of the measure. This will help in determining the annualized cost per measure. Future
 								costs can be extrapolated on the basis of locally verified estimates; a trajectory for the growth in cost can be based largely on inflation rates. Once a trajectory has been established for
@@ -1661,17 +1663,20 @@ HttpServletRequest httpRequest = PortalUtil.getOriginalServletRequest(request);
 							</div>
 						</li>
 						<li class="adaptation-cost-list-item" style="margin-top:5px;">
-							Estimate the benefits of adaptation actions;
+							Identifying and collecting data needed for evaluation;
 						</li>
 						<li class="adaptation-cost-list-item" style="margin-top:5px;">
-							Select the applicable valuation approach, e.g. Multi Criteria Analysis;
+							Estimating costs and benefits of adaptation actions;
+						</li>
+						<li class="adaptation-cost-list-item" style="margin-top:5px;">
+							Prioritising adaption measures and selecting the appropriate level of governance for implementation.
 						</li>
 					</ol>
 					<div style="font-weight:bold; font-size: 12px; padding-top:20px;">
 						Cost-benefit tools and methodologies
 					</div>
 					<div style="margin-top:10px;">
-						<a href="" target="_blank">
+						<a href="/documents/18/0/AST+step+5.2.1" target="_blank">
 							Identification and elaboration of methodology to be used in the classification and costing of projects and programmes for adaptation to climate change
 						</a>
 					</div>
