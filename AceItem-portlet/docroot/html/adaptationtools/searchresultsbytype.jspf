@@ -31,7 +31,7 @@
 		<c:set var="nrPageItems" value="<%= itemsOnPage %>"/>
 
 		<div id="${expandedTitleId}" class="expandedResultsGroupTitle resultsGroupTitleFilter">
-			<h2>MEASURES</h2>
+			<h2><c:out value='${groupTitle}' /></h2>
 		</div>
 
 		<hr class="clearer2"/>

@@ -13,6 +13,8 @@
 		<supports>
 			<mime-type>text/html</mime-type>
 		</supports>
+		<!-- Resource Bundle -->
+		<resource-bundle>content.Language</resource-bundle>
 		<portlet-info>
 			<title>Adaptation Tools</title>
 			<short-title>Adaptation Tools</short-title>
