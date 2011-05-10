@@ -543,6 +543,14 @@ HttpServletRequest httpRequest = PortalUtil.getOriginalServletRequest(request);
 							app.addLayer(u, ln, t);
 
 						});
+						
+					// TODO maybe something like this to store reference to click function with object
+					// so we can later easily bind/unbind said function when object gets enabled/disabled
+					//var indicDiv = indicator.get();
+					//indicDiv.addlayerfunction = function() {
+					//	app.addLayer(u, ln, t);
+					//}	
+					//indicator.bind('click', indicDiv.addlayerfunction);						
 
 					if(t === 'Water stress') {
 					$j('<div id="waterstress-bubble" class="top-bubble" style="float:left;margin:0px 10px;"><img src="<%=renderRequest.getContextPath()%>/images/info.png" class="valigned"/></div>').appendTo(indicatortype);
