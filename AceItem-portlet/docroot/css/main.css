@@ -16,7 +16,7 @@
 }
 
 .step-2-right {
-	width: 880px;
+	width: 880px !important;
 }
 
 div.step-2-right h1 {
