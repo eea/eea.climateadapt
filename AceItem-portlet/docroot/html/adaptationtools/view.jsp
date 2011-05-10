@@ -646,6 +646,7 @@ HttpServletRequest httpRequest = PortalUtil.getOriginalServletRequest(request);
 
 	<div id="step-right-2" class="step-right">
 		<h1 id="adaptationtools-heading">
+			<img src="<%=renderRequest.getContextPath()%>/images/bullit2.png" class="valigned"/>
 			Am I vulnerable to climate change and what are my risks
 		</h1>
 
@@ -787,6 +788,7 @@ HttpServletRequest httpRequest = PortalUtil.getOriginalServletRequest(request);
 			<h2 style="margin-left:30px;">
 				2.4. Are there vulnerability assessments in my region?
 			</h2>
+			<img src="<%=renderRequest.getContextPath()%>/images/step-2.jpg" style="float:right;margin-right:30px;"/>
 			<div id="general-content-text" style="float:left;dispaly:block;margin-left:30px;">
 			<p>
 				In many cases, the results of national or regional vulnerability assessments can be expected to better fit the goals of regional adaptation plans. Therefore a logical first step in assessing vulnerability to
@@ -798,8 +800,6 @@ HttpServletRequest httpRequest = PortalUtil.getOriginalServletRequest(request);
 				</a>
 			</p>
 			</div>
-			<img src="<%=renderRequest.getContextPath()%>/images/step-2.jpg" style="float:right;margin-right:30px;"/>
-			
 		</div>
 
 		<div id="2-5" class="what-should-i-do-content step2substep" style="display:none;">
@@ -818,7 +818,7 @@ HttpServletRequest httpRequest = PortalUtil.getOriginalServletRequest(request);
 					components.
 				</p>
 				<p>
-					For example the indicator for water stress, used as impact indicator for water scarcity and droughts, disaggregates to two indicators – for water availability and water use (withdrawals). Their analysis will
+					For example the indicator for water stress, used as impact indicator for water scarcity and droughts, disaggregates to two indicators for water availability and water use (withdrawals). Their analysis will
 					give an indication whether water scarcity is caused by climate change (manifested as decrease in water availability), socio-economic developments (increase in water use) or both.
 				</p>
 				<p>
@@ -919,7 +919,7 @@ HttpServletRequest httpRequest = PortalUtil.getOriginalServletRequest(request);
 			</h2>
 			<div id="general-content-text" style="float:left;dispaly:block;margin-left:30px;">
 			<p>
-				Content on adaptation opportunities to be included in a later stage
+				To be added later
 			</p>
 			</div>
 			<img src="<%=renderRequest.getContextPath()%>/images/step-2.jpg" style="float:right;margin-right:30px;"/>
@@ -931,7 +931,7 @@ HttpServletRequest httpRequest = PortalUtil.getOriginalServletRequest(request);
 			</h2>
 			<div id="general-content-text" style="float:left;dispaly:block;margin-left:30px;">
 			<p>
-				This section will include the guidance to be developed on handling uncertainties in the frame of the Clearinghouse Mechanism for Adaptation
+				To be added later
 			</p>
 			</div>
 			<img src="<%=renderRequest.getContextPath()%>/images/step-2.jpg" style="float:right;margin-right:30px;"/>
@@ -1153,6 +1153,7 @@ HttpServletRequest httpRequest = PortalUtil.getOriginalServletRequest(request);
 
 	<div id="step-right-3" class="step-right">
         <h1 id="strategy-adaptation-heading">
+			<img src="<%=renderRequest.getContextPath()%>/images/bullit3.png" class="valigned"/>
 			What should be my strategy to adapt?
 		</h1>
 
@@ -1285,6 +1286,7 @@ HttpServletRequest httpRequest = PortalUtil.getOriginalServletRequest(request);
 
 	<div id="step-right-4" class="step-right">
         <h1 id="aplication-options-heading">
+			<img src="<%=renderRequest.getContextPath()%>/images/bullit4.png" class="valigned"/>
 			How can identify my adaptation options?
 		</h1>
 
@@ -1530,8 +1532,9 @@ HttpServletRequest httpRequest = PortalUtil.getOriginalServletRequest(request);
 		}
 	</script>
 
-	<div id="step-right-5" class="step-right">
+	<div id="step-right-5" class="step-right" style="margin-left:30px;">
         <h1 id="assess-adaptation-options-heading">
+			<img src="<%=renderRequest.getContextPath()%>/images/bullit5.png" class="valigned"/>
 			How can I assess my adaptation options?
 		</h1>
 
