@@ -1517,7 +1517,12 @@ HttpServletRequest httpRequest = PortalUtil.getOriginalServletRequest(request);
 			});
 			// handle change to risk selector
 			$j('#cost-benefit-risks-selector').change(function() {
+				if($j('#cost-benefit-risk-select').val() !== 'none') {
 				$j('#cost-benefit-results').fadeIn();
+				}
+				else {
+					$j('#cost-benefit-results').hide();				
+				}
 			});			
 			// handle change to region selector
 			$j('#cost-benefit-regions-selector').change(function() {
@@ -1525,6 +1530,13 @@ HttpServletRequest httpRequest = PortalUtil.getOriginalServletRequest(request);
 			});				
 		});
 		function step5substep(id) {
+			// hide results
+			if(id === '5-2-2') {
+				$j('#cost-benefit-results').hide();
+				$j('#cost-benefit-risk-select option[value="none"]').attr('selected', 'selected');
+				$j('#cost-benefit-region-select option[value="EU"]').attr('selected', 'selected');
+			}
+			
 			$j('.step-5-sub').hide();
 			$j('#'+id).fadeIn();
 		}		
@@ -1614,7 +1626,7 @@ HttpServletRequest httpRequest = PortalUtil.getOriginalServletRequest(request);
 							Risk
 						</span>
 						<!-- TODO load dynamically from enumeration nl.wur.alterra.cgi.ace.model.impl.AceItemClimateImpact -->
-						<select id="risk-select" style="">
+						<select id="cost-benefit-risk-select" style="">
 							<option value="none" selected="selected">Choose a risk:</option>
 							<option value="all" disabled="disabled">All risks</option>
 							<!-- TODO this one is not present in enum AceItemClimateImpact -->
@@ -1631,7 +1643,7 @@ HttpServletRequest httpRequest = PortalUtil.getOriginalServletRequest(request);
 						<span style="margin-right:10px;">
 							Region
 						</span>
-						<select id="region-select" style="">
+						<select id="cost-benefit-region-select" style="">
 							<option id="all-regions" value="ALL" disabled="disabled">All regions</option>
 							<option id="EU-option" value="EU" selected="selected">EU</option>
 							<option id="AT-option" value="AT" disabled="disabled">Austria</option>
