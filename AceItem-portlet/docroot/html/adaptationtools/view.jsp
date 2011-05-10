@@ -146,7 +146,7 @@ HttpServletRequest httpRequest = PortalUtil.getOriginalServletRequest(request);
 			<map name="navigation-map" id="navigation-map">
 				<!-- the href="#" attributes are to make IE8 change the mouse cursor on hover. TODO add them by javascript only in case of IE, and remove the nohref attribute in that case. -->
 				<area shape="poly" coords="151,17,148,56,242,61,243,16" nohref="nohref" href="#" onclick="displayStep(1);" class="clickable"/>
-				<area shape="poly" coords="181,60,332,58,346,99,191,96,191,96,192,102" nohref="nohref" href="#" onclick="displayStep(2);" class="clickable" />
+				<area shape="poly" coords="181,60,332,58,346,99,191,96,191,96,192,102" nohref="nohref" href="#" onclick="displayStep(2);step2substep('2-1');" class="clickable" />
 				<area shape="poly" coords="190,107,333,109,341,145,192,144" nohref="nohref" href="#" onclick="displayStep(3);" class="clickable" />
 				<area shape="poly" coords="175,152,332,153,336,186,180,186,170,172" nohref="nohref" href="#" onclick="displayStep(4);showGeneral();" class="clickable" />
 				<area shape="poly" coords="123,177,165,177,181,188,233,192,278,199,280,224,130,227,122,205" nohref="nohref" href="#" onclick="displayStep(5);" class="clickable" />
@@ -339,7 +339,7 @@ HttpServletRequest httpRequest = PortalUtil.getOriginalServletRequest(request);
 		<img src="<%=renderRequest.getContextPath()%>/images/AST_large.png" usemap="#large-navigation"/>
 		<!-- the href="#" attributes are to make IE8 change the mouse cursor on hover. TODO add them by javascript only in case of IE, and remove the nohref attribute in that case. -->
 		<map name="large-navigation" id="large-navigation">
-		  <area shape="poly" coords="415,131,480,106,699,129,699,208,432,186,412,163" nohref="nohref" href="#" onclick="displayStep(2);" class="clickable" style="cursor:hand !important;z-index:999;"/>
+		  <area shape="poly" coords="415,131,480,106,699,129,699,208,432,186,412,163" nohref="nohref" href="#" onclick="displayStep(2);step2substep('2-1');" class="clickable" style="cursor:hand !important;z-index:999;"/>
 		  <area shape="poly" coords="698,213,441,195,416,224,432,265,481,282,698,280" nohref="nohref" href="#" onclick="displayStep(3);" class="clickable"/>
 		  <area shape="poly" coords="682,301,471,296,427,282,397,295,399,333,428,357,483,359,653,359,681,348" nohref="nohref" href="#" onclick="displayStep(4);showGeneral();" class="clickable"/>
 		  <area shape="poly" coords="414,361,376,332,314,332,292,365,292,402,344,425,439,429,669,432,668,383,632,371" nohref="nohref" href="#" onclick="displayStep(5);" class="clickable"/>
@@ -728,7 +728,7 @@ HttpServletRequest httpRequest = PortalUtil.getOriginalServletRequest(request);
             $j("#indicator-climate-changes").hide();
             $j("#indicator-sensitivity").fadeIn();
         }
-
+        
             </script>
 
 
