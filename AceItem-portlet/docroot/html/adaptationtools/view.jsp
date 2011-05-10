@@ -151,7 +151,7 @@ HttpServletRequest httpRequest = PortalUtil.getOriginalServletRequest(request);
 				<area shape="poly" coords="151,17,148,56,242,61,243,16" nohref="nohref" href="#" onclick="displayStep(1);" class="clickable"/>
 				<area shape="poly" coords="181,60,332,58,346,99,191,96,191,96,192,102" nohref="nohref" href="#" onclick="displayStep(2);" class="clickable" />
 				<area shape="poly" coords="190,107,333,109,341,145,192,144" nohref="nohref" href="#" onclick="displayStep(3);" class="clickable" />
-				<area shape="poly" coords="175,152,332,153,336,186,180,186,170,172" nohref="nohref" href="#" onclick="displayStep(4);showGenericMeasures();" class="clickable" />
+				<area shape="poly" coords="175,152,332,153,336,186,180,186,170,172" nohref="nohref" href="#" onclick="displayStep(4);showGeneral();" class="clickable" />
 				<area shape="poly" coords="123,177,165,177,181,188,233,192,278,199,280,224,130,227,122,205" nohref="nohref" href="#" onclick="displayStep(5);" class="clickable" />
 			</map>
 		
@@ -1064,6 +1064,9 @@ HttpServletRequest httpRequest = PortalUtil.getOriginalServletRequest(request);
 		</h1>
 
 		<div id="general" style="display: none; margin-left: 30px;">
+			<h2>
+				4.1 General 
+			</h2>	
 			This section provides tools that allow you to assess relevant adaptation measures and good practices. It provides tools to select measures and good practices from the Clearinghouse Mechanism on Adaptation's repository and allows you to assess which measures are implemented in your region and similar regions.
 			<br /><br />
 			Adaptation options may include the options to prevent  or accept losses (i.e. do nothing), to accommodate.  Multiple options for achieving the same result should be considered at the initial stage.
@@ -1079,7 +1082,7 @@ HttpServletRequest httpRequest = PortalUtil.getOriginalServletRequest(request);
 		
 		<div id="generic-measures" style="display: none; margin-left: 20px;">
 			<h2>
-				What are possible measures?
+				4.2 What are possible measures?
 			</h2>	
 			
 			<p>
@@ -1150,7 +1153,7 @@ HttpServletRequest httpRequest = PortalUtil.getOriginalServletRequest(request);
 
 		<div id="good-practices" style="display: none; margin-left: 20px;">
 			<h2>
-				What are possible good practices? 
+				4.3 What are possible good practices? 
 			</h2>	
 			
 			<p>
@@ -1221,7 +1224,7 @@ HttpServletRequest httpRequest = PortalUtil.getOriginalServletRequest(request);
 		
         <div id="locate-region" style="margin-left: 20px;display:none;">
 			<h2>
-				What good practices are available in regions similar to mine?
+				4.4 What good practices are available in regions similar to mine?
 			</h2>	
 			
 			<p>
@@ -1555,7 +1558,7 @@ HttpServletRequest httpRequest = PortalUtil.getOriginalServletRequest(request);
 		
 		<div id="5-3" class="step-5-sub" style="display:none;">
 			<h2>
-				5.3. How do I decide which measures to include in my portfolio?
+				5.3 How do I decide which measures to include in my portfolio?
 			</h2>
 			<p>
 				Adaptation options have to be effective and efficient in order to be considered for implementation. Effective options are options that reduce a certain vulnerability or number of vulnerabilities to a desired level. 
@@ -1578,7 +1581,7 @@ HttpServletRequest httpRequest = PortalUtil.getOriginalServletRequest(request);
 		
 		<div id="5-4" class="step-5-sub" style="display:none;">
 		<h2>
-				5.4. What is my Adaptive Capacity?
+				5.4 What is my Adaptive Capacity?
 			</h2>
 			<p>
 				Adaptive capacity is "the ability of a (human) system to adjust to climate change (including climate variability and extremes) to moderate potential damages, to take advantage of opportunities, or to cope with the 
@@ -1594,7 +1597,7 @@ HttpServletRequest httpRequest = PortalUtil.getOriginalServletRequest(request);
 		
 		<div id="5-5" class="step-5-sub" style="display:none;">
 			<h2>
-				5.5. How to plan for adaptation
+				5.5 How to plan for adaptation
 		</h2>
 		<p>
 				Climate change introduces a moving target to adaptation and therefore it requires new planning approaches. An example of such a novel approach is the adaptation plan for climate proofing of Thames estuary in 21st century.			
