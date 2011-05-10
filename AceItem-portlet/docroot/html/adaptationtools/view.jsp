@@ -711,49 +711,57 @@ HttpServletRequest httpRequest = PortalUtil.getOriginalServletRequest(request);
 				adaptation plans.
 			</p>
 			<p>
-				<div style="font-style:italic">
-					Links:
+				<div style="font-weight:bold; font-size: 12px; padding-top:20px;">				
+					Links
 				</div>
 				<ul>
 					<li>
-						<a href="http://ace.geocat.net/web/guest/observations-and-scenarios">
+						<a href="/web/guest/observations-and-scenarios">
 							Observations and Scenarios
 						</a>
+						section on Clearinghouse Mechanism on Adaptation
 					</li>
 					<li>
 						<a href="http://www.emdat.be/" target="_blank">
-							Emergency Events Database EM-DAT
+							Emergency Events Database
 						</a>
+						EM-DAT
 					</li>
 					<li>
 						<a href="http://ensembles-eu.metoffice.com/data.html" target="_blank">
-							ENSEMBLES. Daily, European gridded temperature and precipitation, at 25km resolution, 1950 to 2008
+							ENSEMBLES
 						</a>
+						. Daily, European gridded temperature and precipitation, at 25km resolution, 1950 to 2008
 					</li>
 					<li>
 						<a href="http://www.ecmwf.int/research/era/do/get/index" target="_blank">
-							ERA 40 / ERA-40-interim. Six-hourly, global gridded variables (many) at resolutions of approximately 1° and 0.5°, 1958-2002 for ERA40, 1989 to present for ERA-interim
+							ERA 40 / ERA-40-interim
 						</a>
+						. Six-hourly, global gridded variables (many) at resolutions of approximately 1° and 0.5°, 1958-2002 for ERA40, 1989 to present for ERA-interim
 					</li>
 					<li>
 						<a href="http://badc.nerc.ac.uk/data/cru/" target="_blank">
-							CRU. Monthly, global gridded variables (ten) at 0.5° resolution, 1901 to present
+							CRU
 						</a>
+						. Monthly, global gridded variables (ten) at 0.5° resolution, 1901 to present
 					</li>
 					<li>
 						<a href="http://eca.knmi.nl/" target="_blank">
-							European Climate Assessment & Dataset (ECA&D)
+							European Climate Assessment & Dataset
 						</a>
+						 (ECA&D)
 					</li>
 				</ul>
-				<div style="font-style:italic">
-					Links to tools:
+				<div style="font-weight:bold; font-size: 12px; padding-top:20px;">				
+					Links to tools
 				</div>
 				<ul>
 					<li>
+						JRC, AGRI4CAST
 						<a href="/mars-viewer">
-							JRC, AGRI4CAST web data viewer, providing access to observations of weather and agriculture indicators
+							MARS web data viewer
 						</a>
+						, providing access to observations of weather and agriculture indicators
 					</li>
 				</ul>
 			</p>
@@ -1831,7 +1839,7 @@ HttpServletRequest httpRequest = PortalUtil.getOriginalServletRequest(request);
 					(Read more)
 				</div>
 				<div style="font-weight:bold; font-size: 12px; padding-top:20px;">				
-					Links:
+					Links
 				</div>
 					<ul>					
 						<li>
