@@ -778,8 +778,8 @@ HttpServletRequest httpRequest = PortalUtil.getOriginalServletRequest(request);
 				</div>				
 				<ul>
 					<li>
-						<a href="">
-							JRC, AGRI4CAST web data viewer, providing access to observations of weather and agriculture indicators (TODO link to CHM portlet)
+						<a href="/mars-viewer">
+							JRC, AGRI4CAST web data viewer, providing access to observations of weather and agriculture indicators
 						</a>
 					</li>
 				</ul>
