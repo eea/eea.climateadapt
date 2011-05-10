@@ -15,6 +15,14 @@
 	margin-left:0em;
 }
 
+.step-2-right {
+	width: 880px;
+}
+
+div.step-2-right h1 {
+	padding:20px;
+}
+
 .step-right {
 	width: 560px;
 }
