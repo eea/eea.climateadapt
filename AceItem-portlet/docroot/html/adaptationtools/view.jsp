@@ -171,19 +171,19 @@ HttpServletRequest httpRequest = PortalUtil.getOriginalServletRequest(request);
 				<div id="what-should-i-do-options" style="">
 					<ul style="list-style:none;">
 						<li class="list-option">
-							<img src="<%=renderRequest.getContextPath()%>/images/arrow_green.png" class="valigned"/>
+							<img src="<%=renderRequest.getContextPath()%>/images/arrow_green.png" class="valigned" style="width:13px;"/>
 							<a href="#" onclick="step2substep('2-1'); return false">
 							1. General
 							</a>
 						</li>
 						<li class="list-option">
-							<img src="<%=renderRequest.getContextPath()%>/images/arrow_green.png" class="valigned"/>
+							<img src="<%=renderRequest.getContextPath()%>/images/arrow_green.png" class="valigned" style="width:13px;"/>
 							<a href="#" onclick="step2substep('2-2'); return false">
 								2. How do I analyse impacts of past weather and recent climate trends?
 							</a>
 						</li>
 						<li class="list-option">
-							<img src="<%=renderRequest.getContextPath()%>/images/arrow_green.png" class="valigned"/>
+							<img src="<%=renderRequest.getContextPath()%>/images/arrow_green.png" class="valigned" style="width:13px;"/>
 							<a href="#" onclick="step2substep('2-3'); return false">
 								3. How do I identify the impacts of climate change?
 							</a>
