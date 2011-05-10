@@ -1570,7 +1570,7 @@ HttpServletRequest httpRequest = PortalUtil.getOriginalServletRequest(request);
 							Select the applicable valuation approach, e.g. Multi Criteria Analysis;
 						</li>
 					</ol>
-					<div style="font-style:italic;padding-top:20px;">
+					<div style="font-weight:bold; font-size: 12px; padding-top:20px;">
 						Cost-benefit tools and methodologies
 					</div>
 					<div style="margin-top:10px;">
@@ -1578,7 +1578,7 @@ HttpServletRequest httpRequest = PortalUtil.getOriginalServletRequest(request);
 							Identification and elaboration of methodology to be used in the classification and costing of projects and programmes for adaptation to climate change
 						</a>
 					</div>
-					<div style="font-style:italic;padding-top:20px;">
+					<div style="font-weight:bold; font-size: 12px; padding-top:20px;">
 						Projects
 					</div>
 					<div style="margin-top:10px;">
@@ -1792,14 +1792,15 @@ HttpServletRequest httpRequest = PortalUtil.getOriginalServletRequest(request);
 				<div>
 					(Read more)
 				</div>
-				<div>
-					Links:
+				<div style="font-weight:bold; font-size: 12px; padding-top:20px;">				
+					Links
+				</div>
 					<ul>
 						<li>
 							Link to MCA tool of ClimWatAdapt
 						</li>
 					</ul>
-				</div>	
+					
 			</p>
 		<!-- end 5.3 -->	
 		</div>				
@@ -1829,8 +1830,9 @@ HttpServletRequest httpRequest = PortalUtil.getOriginalServletRequest(request);
 				<div>
 					(Read more)
 				</div>
-				<div>				
+				<div style="font-weight:bold; font-size: 12px; padding-top:20px;">				
 					Links:
+				</div>
 					<ul>					
 						<li>
 							<a href="http://www.environment-agency.gov.uk/research/planning/109030.aspx" target="_blank">
@@ -1838,7 +1840,7 @@ HttpServletRequest httpRequest = PortalUtil.getOriginalServletRequest(request);
 							</a>
 						</li>
 					</ul>
-				</div>					
+									
 		</p>
 		<!-- end 5.5 -->	
 		</div>
