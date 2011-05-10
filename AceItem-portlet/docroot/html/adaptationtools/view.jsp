@@ -919,7 +919,7 @@ HttpServletRequest httpRequest = PortalUtil.getOriginalServletRequest(request);
 			</h2>
 			<div id="general-content-text" style="float:left;dispaly:block;margin-left:30px;">
 			<p>
-				To be added later
+				Content on adaptation opportunities to be included in a later stage
 			</p>
 			</div>
 			<img src="<%=renderRequest.getContextPath()%>/images/step-2.jpg" style="float:right;margin-right:30px;"/>
@@ -931,7 +931,7 @@ HttpServletRequest httpRequest = PortalUtil.getOriginalServletRequest(request);
 			</h2>
 			<div id="general-content-text" style="float:left;dispaly:block;margin-left:30px;">
 			<p>
-				To be added later
+				This section will include the guidance to be developed on handling uncertainties in the frame of the Clearinghouse Mechanism for Adaptation
 			</p>
 			</div>
 			<img src="<%=renderRequest.getContextPath()%>/images/step-2.jpg" style="float:right;margin-right:30px;"/>
