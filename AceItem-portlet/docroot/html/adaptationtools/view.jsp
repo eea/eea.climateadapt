@@ -1245,7 +1245,7 @@ HttpServletRequest httpRequest = PortalUtil.getOriginalServletRequest(request);
 		<br /><br />
 		In this process existing relevant national and EU legislation, policies, plans and guidance have to be taken into account and integrated in your strategy.
 		<br /><br />
-		<div style="font-weight:bold; font-size: 12px; padding-top:20px;">				
+		<div style="font-weight:bold; font-size: 12px; padding-bottom:20px;">				
 			Links
 		</div>
 		<a href="http://ec.europa.eu/clima/sites/change" target="_blank">EC DG Climate Action</a>, Adaptation to climate change
