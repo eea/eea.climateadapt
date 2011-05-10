@@ -100,9 +100,6 @@ HttpServletRequest httpRequest = PortalUtil.getOriginalServletRequest(request);
 
 		<div id="step-left-1" class="step-left">
 			<div id="adaptation-support-tool" style="margin:5px;background:#d2df92;">
-				<div id="adaptation-support-tool-heading" style="font-size:24px;padding:20px 10px;">
-					Adaptation support tool
-				</div>
 				<div id="what-is-it" style="margin:20px 10px;">
 					<div id="what-is-it-heading" style="font-size:18px;">
 						What is the Adaptation Support Tool?
@@ -749,27 +746,27 @@ HttpServletRequest httpRequest = PortalUtil.getOriginalServletRequest(request);
 					</li>
 					<li>
 						<a href="http://www.emdat.be/" target="_blank">
-							Emergency Events Database EM-DAT (new window)
+							Emergency Events Database EM-DAT  
 						</a>
 					</li>
 					<li>
 						<a href="http://ensembles-eu.metoffice.com/data.html" target="_blank">
-							ENSEMBLES. Daily, European gridded temperature and precipitation, at 25km resolution, 1950 to 2008 (new window)
+							ENSEMBLES. Daily, European gridded temperature and precipitation, at 25km resolution, 1950 to 2008  
 						</a>
 					</li>
 					<li>
 						<a href="http://www.ecmwf.int/research/era/do/get/index" target="_blank">
-							ERA 40 / ERA-40-interim. Six-hourly, global gridded variables (many) at resolutions of approximately 1° and 0.5°, 1958-2002 for ERA40, 1989 to present for ERA-interim (new window)
+							ERA 40 / ERA-40-interim. Six-hourly, global gridded variables (many) at resolutions of approximately 1° and 0.5°, 1958-2002 for ERA40, 1989 to present for ERA-interim  
 						</a>
 					</li>
 					<li>
 						<a href="http://badc.nerc.ac.uk/data/cru/" target="_blank">
-							CRU. Monthly, global gridded variables (ten) at 0.5° resolution, 1901 to present (new window)
+							CRU. Monthly, global gridded variables (ten) at 0.5° resolution, 1901 to present  
 						</a>
 					</li>	
 					<li>
 						<a href="http://eca.knmi.nl/" target="_blank">
-							European Climate Assessment & Dataset (ECA&D) (new window)
+							European Climate Assessment & Dataset (ECA&D)  
 						</a>
 					</li>						
 				</ul>
@@ -812,7 +809,7 @@ HttpServletRequest httpRequest = PortalUtil.getOriginalServletRequest(request);
 				references to national and regional vulnerability studies. (In a later stage this section will more specifically link to available vulnerability assessments)
 				<br/><br/>
 				<a href="/national-adaptation-strategies" target="_blank">
-					Open National Adaptation Strategies (new window)
+					Open National Adaptation Strategies  
 				</a> 				
 			</p>
 			</div>
@@ -853,12 +850,12 @@ HttpServletRequest httpRequest = PortalUtil.getOriginalServletRequest(request);
 					<ul>
 						<li>
 							<a href="http://www.climwatadapt.eu" target="_blank">
-								ClimWatAdapt (new window)
+								ClimWatAdapt  
 							</a>
 						</li>
 						<li>
 							<a href=" http://peseta.jrc.ec.europa.eu/" target="_blank">
-								PESETA study (new window)
+								PESETA study  
 							</a>
 						</li>
 					</ul>				
@@ -870,12 +867,12 @@ HttpServletRequest httpRequest = PortalUtil.getOriginalServletRequest(request);
 					<ul>
 						<li>
 							<a href="http://www.1stcellmedia.de/customer/uni/cms/index.php?option=com_frontpage&Itemid=1" target="_blank">
-								SCENES WebService (new window)
+								SCENES WebService  
 							</a>
 						</li>
 						<li>
 							<a href="http://adam-digital-compendium.pik-potsdam.de/macro-economic-analysis/direct-impacts-1/impacts-by-region/" target="_blank">
-								ADAM Digital Compendium (new window)
+								ADAM Digital Compendium  
 							</a>
 						</li>
 					</ul>				
@@ -887,22 +884,22 @@ HttpServletRequest httpRequest = PortalUtil.getOriginalServletRequest(request);
 					<ul>
 						<li>
 							<a href="http://cera-www.dkrz.de/" target="_blank">
-								The CERA database (new window)
+								The CERA database  
 							</a>
 						</li>
 						<li>
 							<a href="http://www.espon-climate.eu/" target="_blank">
-								ESPON CLIMATE (new window)
+								ESPON CLIMATE  
 							</a>
 						</li>
 						<li>
 							<a href="http://www.circeproject.eu/" target="_blank">
-								CIRCE (Climate Change and Impact Research: the Mediterranean Environment (new window)
+								CIRCE (Climate Change and Impact Research: the Mediterranean Environment  
 							</a>
 						</li>						
 						<li>
 							<a href="http://www-pcmdi.llnl.gov/" target="_blank">
-								PCMDI (Project for Climate Model Diagnosis and Inter-comparison) (new window)
+								PCMDI (Project for Climate Model Diagnosis and Inter-comparison)  
 							</a>
 						</li>
 					</ul>				
@@ -1176,13 +1173,13 @@ HttpServletRequest httpRequest = PortalUtil.getOriginalServletRequest(request);
 		<br /><br />
 		In this process existing relevant national and EU legislation, policies, plans and guidance have to be taken into account and integrated in your strategy. 
 		<br /><br />
-		<a href="http://ec.europa.eu/clima/sites/change" target="_blank">EC DG Climate Action, Adaptation to climate change (new window)</a>
+		<a href="http://ec.europa.eu/clima/sites/change" target="_blank">EC DG Climate Action, Adaptation to climate change  </a>
 		<br /><br />
-		<a href="/eu-sector-policy/general" target="_blank">EU Sector policies (new window)</a>
+		<a href="/eu-sector-policy/general" target="_blank">EU Sector policies  </a>
 		<br /><br />
-		<a href="/national-adaptation-strategies" target="_blank">Open National Adaptation Strategies (new window)</a>
+		<a href="/national-adaptation-strategies" target="_blank">Open National Adaptation Strategies  </a>
 		<br /><br />
-		<a href="http://eur-lex.europa.eu/LexUriServ/LexUriServ.do?uri=COM:2009:0147:FIN:EN:PDF" target="_blank">WHITE PAPER: Adapting to climate change: Towards a European framework for action (new window)</a>
+		<a href="http://eur-lex.europa.eu/LexUriServ/LexUriServ.do?uri=COM:2009:0147:FIN:EN:PDF" target="_blank">WHITE PAPER: Adapting to climate change: Towards a European framework for action  </a>
 		</div>	
 
         <hr style="clear:both;display:block;visibility:hidden;"/>
@@ -1313,9 +1310,9 @@ HttpServletRequest httpRequest = PortalUtil.getOriginalServletRequest(request);
 			<br /><br />
 			There are various typologies of adaptation options. One of them classifies them in grey and green infrastructure measures and non-structural soft adaptation options: 
 			<br /><br />
-			<b>Grey infrastructure</b> is physical interventions or construction measures that use engineering services to make buildings and infrastructure resilient to weather events;
+			<b>Grey infrastructure</b> concerns physical interventions or construction measures that use engineering services to make buildings and infrastructure resilient to weather events;
 			<br /><br />
-			<b>Green infrastructure</b> is using ecosystem  functions and services to design more sustainable and cost-effective adaptation measures. 
+			<b>Green infrastructure</b> concerns using ecosystem  functions and services to design more sustainable and cost-effective adaptation measures. 
 			<br /><br />
 			<b>"Soft" non-structural approaches</b> relate to policy incentives such as land-use controls, information dissemination and economic incentives to reduce or prevent disaster vulnerability
 		</div>
@@ -1590,7 +1587,7 @@ HttpServletRequest httpRequest = PortalUtil.getOriginalServletRequest(request);
 					</div>
 					<div style="margin-top:10px;">
 						<a href="" target="_blank">
-							Identification and elaboration of methodology to be used in the classification and costing of projects and programmes for adaptation to climate change	(new window)			
+							Identification and elaboration of methodology to be used in the classification and costing of projects and programmes for adaptation to climate change	 			
 						</a>
 					</div>
 					<div style="font-style:italic;padding-top:20px;">
@@ -1598,7 +1595,7 @@ HttpServletRequest httpRequest = PortalUtil.getOriginalServletRequest(request);
 					</div>
 					<div style="margin-top:10px;">
 						<a href="http://www.climatecost.cc/" target="_blank">
-							ClimateCost project (new window)
+							ClimateCost project  
 						</a>
 					</div>				
 				</p>
@@ -1738,11 +1735,11 @@ HttpServletRequest httpRequest = PortalUtil.getOriginalServletRequest(request);
 									</td>
 									<td class="cost-benefit-table-column" valign="top" style="padding: 5px 5px;">
 										<a href="http://www.climatecost.cc/" target="_blank">
-											ClimateCost (new window)
+											ClimateCost  
 										</a>	
 										<br/>
 										<a href="" target="_blank">										
-											Policy brief 6 (new window)
+											Policy brief 6  
 										</a>	
 									</td>									
 								</tr>
@@ -1778,11 +1775,11 @@ HttpServletRequest httpRequest = PortalUtil.getOriginalServletRequest(request);
 									</td>
 									<td class="cost-benefit-table-column" valign="top" style="padding: 5px 5px;">
 										<a href="http://www.climatecost.cc/" target="_blank">
-											ClimateCost (new window)
+											ClimateCost  
 										</a>	
 										<br/>
 										<a href="" target="_blank">										
-											Policy brief 6 (new window)
+											Policy brief 6  
 										</a>
 									</td>	
 								</tr>
@@ -1811,7 +1808,7 @@ HttpServletRequest httpRequest = PortalUtil.getOriginalServletRequest(request);
 					Links:
 					<ul>					
 						<li>
-							Link to MCA tool of ClimWatAdapt (link to be provided by Natasha)	
+							Link to MCA tool of ClimWatAdapt 	
 						</li>
 					</ul>
 				</div>	
