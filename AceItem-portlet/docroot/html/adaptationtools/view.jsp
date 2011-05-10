@@ -667,13 +667,13 @@ HttpServletRequest httpRequest = PortalUtil.getOriginalServletRequest(request);
         </h2>
 
 		<div id="general-content" class="what-should-i-do-content">
-			<img src="<%=renderRequest.getContextPath()%>/images/step-2.jpg" style="float:right;margin-right:30px;"/>
 			<div id="general-content-text" style="float:left;width:50%;margin-left:30px;">
 				Next step after preparing the ground is vulnerability assessment. It is the analysis of the expected impacts, risks and the adaptive capacity of an area in the context of climate change.
 				The objective of this step is to gain a better understanding of how and in what way climate change will affect the services, social groups, economic sectors and assets and to identify
 				the priority areas for action. Vulnerability assessment is more than measuring potential harm using information about climate impacts. It includes an assessment of the area's ability
 				to adapt.
 			</div>
+			<img src="<%=renderRequest.getContextPath()%>/images/step-2.jpg" style="float:right;margin-right:30px;"/>
 		</div>
 
 		<div id="2-1" class="what-should-i-do-content step2substep" style="display:none;">
@@ -1143,7 +1143,7 @@ HttpServletRequest httpRequest = PortalUtil.getOriginalServletRequest(request);
 			What should be my strategy to adapt?
 		</h1>
 
-		<div id="strategy-adaptation-heading-text" style="float:left;width:90%;margin-left:30px;">
+		<div id="strategy-adaptation-heading-text" style="float:left;margin-left:30px;">
 
 		Climate Change Adaptation refers to policies, practices and projects which can either moderate damage and/or realise opportunities associated with climate change. This may include mainstreaming adaptation into existing strategies directly or undertaking isolated measures to reduce specific vulnerabilities.
 		<br /><br />
