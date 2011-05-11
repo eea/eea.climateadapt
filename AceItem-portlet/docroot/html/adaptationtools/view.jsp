@@ -362,7 +362,7 @@ HttpServletRequest httpRequest = PortalUtil.getOriginalServletRequest(request);
 			$j('#sector-select option[value="none"]').attr('selected', 'selected');
 
 			$j('.adaptationtool-column').equalHeights();
-
+			
 			//
 			// create information popups
 			//
@@ -540,8 +540,11 @@ HttpServletRequest httpRequest = PortalUtil.getOriginalServletRequest(request);
 						.addClass("clickable")
 						.attr({ style: 'float:left;' })
 						.data('addlayerfunction', f)
+						.bind('click', f)
+						.css('cursor', 'pointer')
 						.append(t)
 						.appendTo(indicatortype);
+	
 
 					if(t === 'Water stress') {
 					$j('<div id="waterstress-bubble" class="top-bubble" style="float:left;margin:0px 10px;"><img src="<%=renderRequest.getContextPath()%>/images/info.png" class="valigned"/></div>').appendTo(indicatortype);
