@@ -376,8 +376,7 @@ HttpServletRequest httpRequest = PortalUtil.getOriginalServletRequest(request);
 									<div style="height:35px;padding:5px;"> \
 										EU policy sectors \
 									</div> \
-									<div style="height:15px;text-align:right;padding:5px;">read more &raquo;</div> \
-								</div>',
+									</div>',
 					innerHtmlStyle: {
 										color:'#000',
 										'text-align':'left'
@@ -395,8 +394,7 @@ HttpServletRequest httpRequest = PortalUtil.getOriginalServletRequest(request);
 									<div style="height:35px;padding:5px;"> \
 										Climate hazards \
 									</div> \
-									<div style="height:15px;text-align:right;padding:5px;">read more &raquo;</div> \
-								</div>',
+									</div>',
 					innerHtmlStyle: {
 										color:'#000',
 										'text-align':'left'
@@ -1289,7 +1287,6 @@ HttpServletRequest httpRequest = PortalUtil.getOriginalServletRequest(request);
 									<div style="height:35px;padding:5px;"> \
 										EU policy sectors \
 									</div> \
-									<div style="height:15px;text-align:right;padding:5px;">read more &raquo;</div> \
 								</div>',
 					innerHtmlStyle: {
 										color:'#000',
@@ -1308,7 +1305,6 @@ HttpServletRequest httpRequest = PortalUtil.getOriginalServletRequest(request);
 									<div style="height:35px;padding:5px;"> \
 										Climate hazards \
 									</div> \
-									<div style="height:15px;text-align:right;padding:5px;">read more &raquo;</div> \
 								</div>',
 					innerHtmlStyle: {
 										color:'#000',
@@ -1327,7 +1323,6 @@ HttpServletRequest httpRequest = PortalUtil.getOriginalServletRequest(request);
 									<div style="height:35px;padding:5px;"> \
 										EU policy sectors \
 									</div> \
-									<div style="height:15px;text-align:right;padding:5px;">read more &raquo;</div> \
 								</div>',
 					innerHtmlStyle: {
 										color:'#000',
@@ -1346,7 +1341,6 @@ HttpServletRequest httpRequest = PortalUtil.getOriginalServletRequest(request);
 									<div style="height:35px;padding:5px;"> \
 										Climate hazards \
 									</div> \
-									<div style="height:15px;text-align:right;padding:5px;">read more &raquo;</div> \
 								</div>',
 					innerHtmlStyle: {
 										color:'#000',
