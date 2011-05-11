@@ -1278,6 +1278,85 @@ HttpServletRequest httpRequest = PortalUtil.getOriginalServletRequest(request);
     <script defer="defer" type="text/javascript">
 		var $j = jQuery.noConflict();
 
+		$j(document).ready(function(){
+
+			$j('#sector-selector-bubble-step42').CreateBubblePopup({
+					position : 'top',
+					selectable: true,
+					align	 : 'center',
+					innerHtml: '<div style="position:relative;z-index:9999;background:#fff;zoom:1;filter:alpha(opacity = 100);"> \
+									<div style="background:green;color:#fff;height:15px;border:1px solid lime;padding:5px;">information</div> \
+									<div style="height:35px;padding:5px;"> \
+										EU policy sectors \
+									</div> \
+									<div style="height:15px;text-align:right;padding:5px;">read more &raquo;</div> \
+								</div>',
+					innerHtmlStyle: {
+										color:'#000',
+										'text-align':'left'
+									},
+					themeName: 	'green',
+					themePath: 	'<%=renderRequest.getContextPath()%>/js/bubblepopup/jquerybubblepopup-theme'
+			});
+			// the zoom and opacity in the innerHtml's div is because IE renders the popups transparent otherwise
+			$j('#risks-selector-bubble-step42').CreateBubblePopup({
+					position : 'top',
+					selectable: true,
+					align	 : 'center',
+					innerHtml: '<div style="position:relative;z-index:9999;background:#fff;zoom:1;filter:alpha(opacity = 100);"> \
+									<div style="background:green;color:#fff;height:15px;border:1px solid lime;padding:5px;">information</div> \
+									<div style="height:35px;padding:5px;"> \
+										Climate hazards \
+									</div> \
+									<div style="height:15px;text-align:right;padding:5px;">read more &raquo;</div> \
+								</div>',
+					innerHtmlStyle: {
+										color:'#000',
+										'text-align':'left'
+									},
+					themeName: 	'green',
+					themePath: 	'<%=renderRequest.getContextPath()%>/js/bubblepopup/jquerybubblepopup-theme'
+			});
+			
+			$j('#sector-selector-bubble-step43').CreateBubblePopup({
+					position : 'top',
+					selectable: true,
+					align	 : 'center',
+					innerHtml: '<div style="position:relative;z-index:9999;background:#fff;zoom:1;filter:alpha(opacity = 100);"> \
+									<div style="background:green;color:#fff;height:15px;border:1px solid lime;padding:5px;">information</div> \
+									<div style="height:35px;padding:5px;"> \
+										EU policy sectors \
+									</div> \
+									<div style="height:15px;text-align:right;padding:5px;">read more &raquo;</div> \
+								</div>',
+					innerHtmlStyle: {
+										color:'#000',
+										'text-align':'left'
+									},
+					themeName: 	'green',
+					themePath: 	'<%=renderRequest.getContextPath()%>/js/bubblepopup/jquerybubblepopup-theme'
+			});
+			// the zoom and opacity in the innerHtml's div is because IE renders the popups transparent otherwise
+			$j('#risks-selector-bubble-step43').CreateBubblePopup({
+					position : 'top',
+					selectable: true,
+					align	 : 'center',
+					innerHtml: '<div style="position:relative;z-index:9999;background:#fff;zoom:1;filter:alpha(opacity = 100);"> \
+									<div style="background:green;color:#fff;height:15px;border:1px solid lime;padding:5px;">information</div> \
+									<div style="height:35px;padding:5px;"> \
+										Climate hazards \
+									</div> \
+									<div style="height:15px;text-align:right;padding:5px;">read more &raquo;</div> \
+								</div>',
+					innerHtmlStyle: {
+										color:'#000',
+										'text-align':'left'
+									},
+					themeName: 	'green',
+					themePath: 	'<%=renderRequest.getContextPath()%>/js/bubblepopup/jquerybubblepopup-theme'
+			});
+		});
+		
         function showGeneral() {
             $j("#locate-region").hide()
             $j("#good-practices").hide()
@@ -1430,7 +1509,7 @@ HttpServletRequest httpRequest = PortalUtil.getOriginalServletRequest(request);
 							<option value="STORM" disabled="disabled">Storms</option>
 							<option value="ICEANDSNOW" disabled="disabled">Ice and Snow</option>
 						</select>
-						<div class="top-bubble" style="float:right;margin:0px 10px;">
+						<div id="risks-selector-bubble-step42" class="top-bubble" style="float:right;margin:0px 10px;">
 							<img src="<%=renderRequest.getContextPath()%>/images/info.png" class="valigned"/>
 						</div>
 					</div>
@@ -1453,7 +1532,7 @@ HttpServletRequest httpRequest = PortalUtil.getOriginalServletRequest(request);
 							<option value="MARINE" disabled="disabled">Marine and Fisheries</option>
 							<option value="WATERMANAGEMENT">Water Management</option>
 						</select>
-						<div class="top-bubble" style="float:right;margin:0px 10px;">
+						<div id="sector-selector-bubble-step42" class="top-bubble" style="float:right;margin:0px 10px;">
 							<img src="<%=renderRequest.getContextPath()%>/images/info.png" class="valigned"/>
 						</div>
 					</div>
@@ -1501,7 +1580,7 @@ HttpServletRequest httpRequest = PortalUtil.getOriginalServletRequest(request);
 							<option value="STORM" disabled="disabled">Storms</option>
 							<option value="ICEANDSNOW" disabled="disabled">Ice and Snow</option>
 						</select>
-						<div class="top-bubble" style="float:right;margin:0px 10px;">
+						<div id="risks-selector-bubble-step43" class="top-bubble" style="float:right;margin:0px 10px;">
 							<img src="<%=renderRequest.getContextPath()%>/images/info.png" class="valigned"/>
 						</div>
 					</div>
@@ -1524,7 +1603,7 @@ HttpServletRequest httpRequest = PortalUtil.getOriginalServletRequest(request);
 							<option value="MARINE" disabled="disabled">Marine and Fisheries</option>
 							<option value="WATERMANAGEMENT">Water Management</option>
 						</select>
-						<div class="top-bubble" style="float:right;margin:0px 10px;">
+						<div id="sector-selector-bubble-step43" class="top-bubble" style="float:right;margin:0px 10px;">
 							<img src="<%=renderRequest.getContextPath()%>/images/info.png" class="valigned"/>
 						</div>
 					</div>
