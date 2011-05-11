@@ -531,24 +531,17 @@ HttpServletRequest httpRequest = PortalUtil.getOriginalServletRequest(request);
 						indicatortype = $j('#indicator-human-causes .indicator-category-list');
 					}
 
+					var f = function() {
+						app.addLayer(u, ln, t);
+					} ;
+					
 					indicator = $j(document.createElement("div"))
 						.addClass("indicator-category-list-item")
 						.addClass("clickable")
 						.attr({ style: 'float:left;' })
+						.data('addlayerfunction', f)
 						.append(t)
-						.appendTo(indicatortype)
-						.click(function() {
-							app.addLayer(u, ln, t);
-
-						});
-						
-					// TODO maybe something like this to store reference to click function with object
-					// so we can later easily bind/unbind said function when object gets enabled/disabled
-					//var indicDiv = indicator.get();
-					//indicDiv.addlayerfunction = function() {
-					//	app.addLayer(u, ln, t);
-					//}	
-					//indicator.bind('click', indicDiv.addlayerfunction);						
+						.appendTo(indicatortype);
 
 					if(t === 'Water stress') {
 					$j('<div id="waterstress-bubble" class="top-bubble" style="float:left;margin:0px 10px;"><img src="<%=renderRequest.getContextPath()%>/images/info.png" class="valigned"/></div>').appendTo(indicatortype);
@@ -592,11 +585,6 @@ HttpServletRequest httpRequest = PortalUtil.getOriginalServletRequest(request);
 							.appendTo(indicatortype);
 				}
 
-				// no url ? no display
-				//else {
-				//	indicator = '<div class="indicator-category-list-item">' + this.riskandsector.title + '</div>';
-				//	$j('.indicator-category-list:random').append(indicator);
-				//}
 
 			});
 			$j('.indicator-category-list').fadeIn();
@@ -648,6 +636,23 @@ HttpServletRequest httpRequest = PortalUtil.getOriginalServletRequest(request);
 			return indicatorsDisplayed;
 		}
 
+		function removeF(id) {
+			var indicators = $j(id + ' .indicator-category-list-item');
+			indicators.each(function(i, e){
+				var f = $j(this).data('addlayerfunction');
+				$j(this).unbind('click', f);
+				$j(this).css('cursor', 'default');				
+			});
+		}
+		function addF(id) {
+			var indicators = $j(id + ' .indicator-category-list-item');
+			indicators.each(function(i, e){
+				var f = $j(this).data('addlayerfunction');
+				$j(this).bind('click', f);
+				$j(this).css('cursor', 'pointer');
+			});
+		}		
+
         function showVulnerabilitiesAndRisks() {
 
 			$j('.step2heading').hide();
@@ -660,7 +665,9 @@ HttpServletRequest httpRequest = PortalUtil.getOriginalServletRequest(request);
 
             $j("#underlying-causes-header").addClass("disabled");
             $j("#indicator-exposure").addClass("disabled");
+            removeF("#indicator-exposure");
             $j("#indicator-sensitivity").addClass("disabled");
+			removeF("#indicator-sensitivity");
 
             $j("#indicator-sensitivity").fadeIn();
             $j("#indicator-exposure").fadeIn();
@@ -685,7 +692,9 @@ HttpServletRequest httpRequest = PortalUtil.getOriginalServletRequest(request);
 
             $j("#underlying-causes-header").removeClass("disabled");
             $j("#indicator-exposure").removeClass("disabled");
+            addF("#indicator-exposure");			
             $j("#indicator-sensitivity").removeClass("disabled");
+			addF("#indicator-sensitivity");			
 
             $j("#indicator-sensitivity").fadeIn();
             $j("#indicator-exposure").fadeIn();
@@ -710,6 +719,8 @@ HttpServletRequest httpRequest = PortalUtil.getOriginalServletRequest(request);
 
             $j("#underlying-causes-header").removeClass("disabled");
             $j("#indicator-exposure").removeClass("disabled");
+			addF("#indicator-exposure");			
+			
             $j("#indicator-sensitivity").hide();
             $j("#indicator-exposure").fadeIn();
         }
@@ -730,6 +741,7 @@ HttpServletRequest httpRequest = PortalUtil.getOriginalServletRequest(request);
 
             $j("#underlying-causes-header").removeClass("disabled");
             $j("#indicator-sensitivity").removeClass("disabled");
+			addF("#indicator-sensitivity");						
             $j("#indicator-exposure").hide();
             $j("#indicator-climate-changes").hide();
             $j("#indicator-sensitivity").fadeIn();
