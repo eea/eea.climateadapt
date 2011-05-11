@@ -1552,7 +1552,7 @@ HttpServletRequest httpRequest = PortalUtil.getOriginalServletRequest(request);
 				The specific characteristics of the region you are in highly determine which adaptation measures are feasible. Taking into account for instance bio-physical and socio-economic characteristics will allow for the identification of good practices that are implemented in your region and similar regions.
 			</p>
 
-			<img src="<%=renderRequest.getContextPath()%>/images/step-4.jpg"/>
+			<img src="<%=renderRequest.getContextPath()%>/images/ACE_goodpractiseFinder.png"/>
 
 			<!-- gazetteer map removed by not displaying anything -->
 
@@ -1836,7 +1836,7 @@ HttpServletRequest httpRequest = PortalUtil.getOriginalServletRequest(request);
 											ClimateCost
 										</a>
 										<br/>
-										<a href="" target="_blank">
+										<a href="http://ace.geocat.net/documents/18/1fad6914-25f9-45d3-9d51-6e8b9ea548d3" target="_blank">
 											Policy brief 6
 										</a>
 									</td>
@@ -1876,7 +1876,7 @@ HttpServletRequest httpRequest = PortalUtil.getOriginalServletRequest(request);
 											ClimateCost
 										</a>
 										<br/>
-										<a href="" target="_blank">
+										<a href="http://ace.geocat.net/documents/18/1fad6914-25f9-45d3-9d51-6e8b9ea548d3" target="_blank">
 											Policy brief 6
 										</a>
 									</td>
