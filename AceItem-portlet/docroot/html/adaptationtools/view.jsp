@@ -298,7 +298,7 @@ HttpServletRequest httpRequest = PortalUtil.getOriginalServletRequest(request);
                             1. <a href="#" onclick="step5substep('5-1'); return false;">General</a>
                         </li>
                         <li class="list-option">
-                            2. <a href="#" onclick="step5substep('5-2-1'); return false;">How much does adaptation cost?</a>
+                            2. <a href="#" onclick="step5substep('5-2'); return false;">How much does adaptation cost?</a>
 							<div id="what-should-i-do-5-options" style="">
 								<ul class="menu-left">
                                     <li class="list-option">
@@ -886,7 +886,7 @@ HttpServletRequest httpRequest = PortalUtil.getOriginalServletRequest(request);
 			<div id="general-content-text" style="float:left;dispaly:block;margin-left:30px;">
 			<p>
 				The extent to which climate change poses threats or opportunities will depend on how the climate, society and economy of the region of interest changes in coming years. These changes are studied with the help
-				of different climate and socio-economic scenarios. Scenarios provide plausible descriptions of different possible future states of the world based on the choices society makes. (Read more)
+				of different climate and socio-economic scenarios. Scenarios provide plausible descriptions of different possible future states of the world based on the choices society makes.  
 			</p>
 			</div>
 			<img src="<%=renderRequest.getContextPath()%>/images/step-2.jpg" style="float:right;margin-right:30px;"/>
@@ -1714,7 +1714,7 @@ HttpServletRequest httpRequest = PortalUtil.getOriginalServletRequest(request);
 		}
 	</script>
 
-	<div id="step-right-5" class="step-right" style="margin-left:30px;">
+	<div id="step-right-5" class="step-right" >
         <h1 id="assess-adaptation-options-heading">
 			How can I assess my adaptation options?
 		</h1>
@@ -1726,15 +1726,26 @@ HttpServletRequest httpRequest = PortalUtil.getOriginalServletRequest(request);
 			<p>
 				Once you made a portfolio of potential adaptation options, you need to assess them and determine which of them suit your specific context. You have to consider their effectiveness in reducing vulnerability (or enhancing
 				resilience), their wider impact on sustainability and their costs. Assessment of feasible options helps avoiding decisions that lead to mal-adaptation. There is a set of criteria that you should consider when assessing
-				adaptation options (Read more).
+				adaptation options.
 			</p>
 			<p>
 				Tools and guidance documents provided in this section will help you to select feasible options.
 			</p>
 		</div>
 
-		<div id="5-2">
-			<div id="5-2-1" class="step-5-sub" style="display:none;">
+		<div id="5-2" class="step-5-sub" style="display:none;">
+			<h2>
+				5.2 How much does adaptation cost?
+			</h2>
+			<p>
+				In order to assess feasible adaptation options the assessments of costs and benefits of adaptation options is crucial. This sections provides information and guidance for the costing of adaptation options.
+			</p>
+			<p>
+				This section provides access to available guidance and tools for costing of adaptation. It also allows to query the repository of the Clearinghouse Mechanism on Adaptation for available information on the economics of adaptation originating from resrach projects and studies.
+			</p>
+         </div>
+		
+		<div id="5-2-1" class="step-5-sub" style="display:none;">
 				<h2>
 					5.2.1 How can I determine my adaptation costs?
 				</h2>
@@ -1977,7 +1988,6 @@ HttpServletRequest httpRequest = PortalUtil.getOriginalServletRequest(request);
 			</div>
 
 		<!-- end 5.2 -->
-		</div>
 
 		<div id="5-3" class="step-5-sub" style="display:none;">
 			<h2>
@@ -1987,7 +1997,7 @@ HttpServletRequest httpRequest = PortalUtil.getOriginalServletRequest(request);
 				Adaptation options have to be effective and efficient in order to be considered for implementation. Effective options are options that reduce a certain vulnerability or number of vulnerabilities to a desired level.
 				Efficient options are the options whose benefits exceed their costs and are more cost-effective than the alternatives. These benefits can be economic, social and environmental. In the feasibility assessment all these
 				three aspects have to be taken into account.
-				<div>
+				<div style="display:none;">
 					(Read more)
 				</div>
 				<div style="font-weight:bold; font-size: 12px; padding-top:20px;">				
@@ -2012,7 +2022,7 @@ HttpServletRequest httpRequest = PortalUtil.getOriginalServletRequest(request);
 				consequences." Adaptive capacity is very much determined by available financial recourses, education level and available adaptation options. There are also a number of hidden costs associated with the implementation of 
 				measures, related to adaptive capacity such as institutional capacity and the experience of an administration in implementing a specific adaptation measure. GDP, education statistics, lack of impact data, appropriate 
 				emergency response scheme or overall adaptation strategy are all indicators that could be used to assess adaptive capacity.
-				<div>
+				<div style="display:none;">
 					(Read more)
 				</div>
 			</p>		
@@ -2025,7 +2035,7 @@ HttpServletRequest httpRequest = PortalUtil.getOriginalServletRequest(request);
 		</h2>
 		<p>
 				Climate change introduces a moving target to adaptation and therefore it requires new planning approaches. An example of such a novel approach is the adaptation plan for climate proofing of Thames estuary in 21st century.			
-				<div>
+				<div style="display:none;">
 					(Read more)
 				</div>
 				<div style="font-weight:bold; font-size: 12px; padding-top:20px;">				
