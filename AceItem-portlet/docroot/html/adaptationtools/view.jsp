@@ -789,7 +789,7 @@ HttpServletRequest httpRequest = PortalUtil.getOriginalServletRequest(request);
 			<h2 style="margin-left:30px;">
 				2.1 General
 			</h2>
-			<div id="general-content-text" style="float:left;dispaly:block;margin-left:30px;">
+			<div id="general-content-text" style="float:left;dispaly:block;width:560px;margin-left:30px;">
 				<p>
 					Even if emissions of greenhouse gases stop today, these changes would continue for many decades and in the case of sea level for centuries. This is due to the historical build-up of the gases in the
 					atmosphere and time lags in the response of climatic and oceanic systems to changes in the atmospheric concentration of the gases. Therefore, in addition to emission reduction (mitigation) measures, it
@@ -813,7 +813,7 @@ HttpServletRequest httpRequest = PortalUtil.getOriginalServletRequest(request);
 			<h2 style="margin-left:30px;">
 				2.2 How do I analyse impacts of past weather and recent climate trends?
 			</h2>
-			<div id="general-content-text" style="float:left;dispaly:block;margin-left:30px;">
+			<div id="general-content-text" style="float:left;dispaly:block;width:560px;margin-left:30px;">
 			<p>
 				The assessment of existing vulnerability to climate variability and extremes is a necessary starting point for any adaptation. Assessment of past weather events, for example heavy rain or extreme temperatures,
 				and analysis of responses to them can help in gaining insights on which responses have been successful or ineffective. Lessons learned from this exercise can be used as a basis for designing climate change
@@ -883,7 +883,7 @@ HttpServletRequest httpRequest = PortalUtil.getOriginalServletRequest(request);
 			<h2 style="margin-left:30px;">
 				2.3 How do I identify the impacts of climate change?
 			</h2>
-			<div id="general-content-text" style="float:left;dispaly:block;margin-left:30px;">
+			<div id="general-content-text" style="float:left;dispaly:block;width:560px;margin-left:30px;">
 			<p>
 				The extent to which climate change poses threats or opportunities will depend on how the climate, society and economy of the region of interest changes in coming years. These changes are studied with the help
 				of different climate and socio-economic scenarios. Scenarios provide plausible descriptions of different possible future states of the world based on the choices society makes.  
@@ -897,7 +897,7 @@ HttpServletRequest httpRequest = PortalUtil.getOriginalServletRequest(request);
 			<h2 style="margin-left:30px;">
 				2.4. Are there vulnerability assessments in my region?
 			</h2>
-			<div id="general-content-text" style="float:left;dispaly:block;margin-left:30px;">
+			<div id="general-content-text" style="float:left;dispaly:block;width:560px;margin-left:30px;">
 			<p>
 				In many cases, the results of national or regional vulnerability assessments can be expected to better fit the goals of regional adaptation plans. Therefore a logical first step in assessing vulnerability to
 				climate change is to look for existing (sub)national, regional or local assessments. Currently this section provides access to the section on National Adaptation Plans and Strategies, that includes among others
@@ -1011,7 +1011,7 @@ HttpServletRequest httpRequest = PortalUtil.getOriginalServletRequest(request);
 			<h2 style="margin-left:30px;">
 				2.6. What are the risks?
 			</h2>
-			<div id="general-content-text" style="float:left;dispaly:block;margin-left:30px;">
+			<div id="general-content-text" style="float:left;dispaly:block;width:560px;margin-left:30px;">
 			<p>
 				Current risk management approaches require knowledge of risk, calculated as
 				<br/><br/>
@@ -1029,7 +1029,7 @@ HttpServletRequest httpRequest = PortalUtil.getOriginalServletRequest(request);
 			<h2 style="margin-left:30px;">
 				2.7. Are there also opportunities?
 			</h2>
-			<div id="general-content-text" style="float:left;dispaly:block;margin-left:30px;">
+			<div id="general-content-text" style="float:left;dispaly:block;width:560px;margin-left:30px;">
 			<p>
 				Content on adaptation opportunities to be included in a later stage
 			</p>
@@ -1041,7 +1041,7 @@ HttpServletRequest httpRequest = PortalUtil.getOriginalServletRequest(request);
 			<h2 style="margin-left:30px;">
 				8. What are the uncertainties?
 			</h2>
-			<div id="general-content-text" style="float:left;dispaly:block;margin-left:30px;">
+			<div id="general-content-text" style="float:left;dispaly:block;width:560px;margin-left:30px;">
 			<p>
 				This section will include the guidance to be developed on handling uncertainties in the frame of the Clearinghouse Mechanism for Adaptation
 			</p>
@@ -1101,7 +1101,7 @@ HttpServletRequest httpRequest = PortalUtil.getOriginalServletRequest(request);
 					<select id="sector-select" style="" disabled="disabled">
 						<option value="none" selected="selected">Choose a sector:</option>
 						<option value="all" disabled="disabled">All sectors</option>
-						<option value="AGRICULTURE">Agriculture and Forest</option>
+						<option value="AGRICULTURE" disabled="disabled">Agriculture and Forest</option>
 						<option value="BIODIVERSITY" disabled="disabled">Biodiversity</option>
 						<option value="COASTAL" disabled="disabled">Coastal Areas</option>
 						<option value="DISASTERRISKREDUCTION" disabled="disabled">Disaster Risk Reduction</option>
