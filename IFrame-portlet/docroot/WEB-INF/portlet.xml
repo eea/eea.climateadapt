@@ -36,7 +36,7 @@
 		<portlet-preferences>
 			<preference>
 				<name>url</name>
-				<value>www.wur.nl</value>
+				<value></value>
 			</preference>
 			<preference>
 				<name>inline-attributes</name>
