@@ -1,0 +1,59 @@
+<?xml version="1.0"?>
+
+<portlet-app
+	version="2.0"
+	xmlns="http://java.sun.com/xml/ns/portlet/portlet-app_2_0.xsd"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/portlet/portlet-app_2_0.xsd http://java.sun.com/xml/ns/portlet/portlet-app_2_0.xsd"
+>
+	
+	<portlet>
+		<portlet-name>iframeportlet</portlet-name>
+		<display-name>IFramePortlet</display-name>
+		<portlet-class>
+			nl.wur.alterra.cgi.ace.IFramePortlet
+		</portlet-class>
+		<init-param>
+			<name>view-jsp</name>
+			<value>/html/view.jsp</value>
+		</init-param>
+		<init-param>
+			<name>edit-jsp</name>
+			<value>/html/edit.jsp</value>
+		</init-param>
+		<expiration-cache>0</expiration-cache>
+		<supports>
+			<mime-type>text/html</mime-type>
+			<portlet-mode>VIEW</portlet-mode>
+			<portlet-mode>EDIT</portlet-mode>
+		</supports>
+		<portlet-info>
+			<title>IFramePortlet</title>
+			<short-title>IFramePortlet</short-title>
+			<keywords></keywords>
+		</portlet-info>
+		<!-- Portlet preferences (configurable by user in portlet EDIT mode) -->
+		<portlet-preferences>
+			<preference>
+				<name>url</name>
+				<value>www.wur.nl</value>
+			</preference>
+			<preference>
+				<name>inline-attributes</name>
+				<value>frameborder='0' style='min-width:984px;min-height:800px' width='100%' height='100%'</value>
+			</preference>
+		</portlet-preferences>
+		<security-role-ref>
+			<role-name>administrator</role-name>
+		</security-role-ref>
+		<security-role-ref>
+			<role-name>guest</role-name>
+		</security-role-ref>
+		<security-role-ref>
+			<role-name>power-user</role-name>
+		</security-role-ref>
+		<security-role-ref>
+			<role-name>user</role-name>
+		</security-role-ref>
+	</portlet>
+</portlet-app>
