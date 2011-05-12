@@ -1479,14 +1479,6 @@ HttpServletRequest httpRequest = PortalUtil.getOriginalServletRequest(request);
 			This section provides tools that allow you to assess relevant adaptation measures and good practices. It provides tools to select measures and good practices from the Clearinghouse Mechanism on Adaptation's repository and allows you to assess which measures are implemented in your region and similar regions.
 			<br /><br />
 			Adaptation options may include the options to prevent  or accept losses (i.e. do nothing), to accommodate.  Multiple options for achieving the same result should be considered at the initial stage.
-			<br /><br />
-			There are various typologies of adaptation options. One of them classifies them in grey and green infrastructure measures and non-structural soft adaptation options:
-			<br /><br />
-			<b>Grey infrastructure</b> concerns physical interventions or construction measures that use engineering services to make buildings and infrastructure resilient to weather events;
-			<br /><br />
-			<b>Green infrastructure</b> concerns using ecosystem  functions and services to design more sustainable and cost-effective adaptation measures.
-			<br /><br />
-			<b>"Soft" non-structural approaches</b> relate to policy incentives such as land-use controls, information dissemination and economic incentives to reduce or prevent disaster vulnerability
 		</div>
 
 		<div id="generic-measures" style="display: none; margin-left: 20px;">
@@ -1640,7 +1632,7 @@ HttpServletRequest httpRequest = PortalUtil.getOriginalServletRequest(request);
 				The specific characteristics of the region you are in highly determine which adaptation measures are feasible. Taking into account for instance bio-physical and socio-economic characteristics will allow for the identification of good practices that are implemented in your region and similar regions.
 			</p>
 
-			<img src="<%=renderRequest.getContextPath()%>/images/ACE_goodpractiseFinder.png"/>
+			<img src="<%=renderRequest.getContextPath()%>/images/ACE_goodpractiseFinder2.png"/>
 
 			<!-- gazetteer map removed by not displaying anything -->
 
