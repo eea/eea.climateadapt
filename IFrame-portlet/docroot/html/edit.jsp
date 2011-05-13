@@ -29,9 +29,12 @@
 <portlet:actionURL name="setIFramePref" var="setIFramePrefUrl" />
 
 <aui:form action="<%= setIFramePrefUrl %>" method="POST" name="fm" >
-	<aui:input name="url" value='<%= renderRequest.getPreferences().getValue("url","") %>' size="150" type="text" />
-	
-	<aui:input name="inline" value='<%= renderRequest.getPreferences().getValue("inline-attributes","") %>' size="150" type="text" />
+
+	<b>url</b><br />	
+	<input name="url" type="text" size="150" value="<%= renderRequest.getPreferences().getValue("url","") %>"><br /><br />
+
+	<b>IFrame inline attributes</b><br />	
+	<input name="inline" type="text" size="150" value="<%= renderRequest.getPreferences().getValue("inline-attributes","") %>"><br /><br />
 
 	<aui:button-row>
 		<aui:button type="submit" />

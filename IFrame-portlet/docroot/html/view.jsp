@@ -24,6 +24,4 @@
 	String inline = renderRequest.getPreferences().getValue("inline-attributes", "frameborder='0' style='min-width:984px;min-height:800px' width='100%' height='100%' ");
 %>
 <br />
-&nbsp;
-<br />
 <iframe <%= inline %> src='<%= url %>'></iframe>
