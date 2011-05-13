@@ -801,9 +801,29 @@ HttpServletRequest httpRequest = PortalUtil.getOriginalServletRequest(request);
 					Vulnerability is a function of the character, magnitude, and rate of climate variation to which a system is exposed, its sensitivity, and its adaptive capacity.
 				</p>
 				<p>
-					In order to perform a sound vulnerability assessment, all available relevant information has to be collected and assessed. This includes analysis of past and current weather trends, future climate change
-					projections and their uncertainty.
+					The objective of this step is to help the user in identifying the expected impacts and risks of an area in the context of climate change in order to gain a better understanding of how and in what way climate change will affect the services, social groups, economic sectors and assets and to identify the priority areas for action. In order to perform a sound vulnerability assessment, all available relevant information has to be collected and assessed. This includes analysis of past and current weather trends, future climate change projections and their uncertainty.
 				</p>
+			   <p style="font-weight:bold; font-size: 12px; padding-top:20px;">				
+					Topics
+				</p>
+				<p>
+					Definition(s)
+				</p>
+				<p>
+					Why regions become vulnerable 
+				</p>
+				<p>
+					Which are the major factors contributing to vulnerability (climate, geomorphology, socio-economic developments, state of natural systems, etc)
+				</p>
+				<p>
+					How vulnerability is measured
+				</p>
+				<p>
+					How to link vulnerability assessment and adaptation 
+				</p>
+				<p>
+					Discussion points (terminology, frameworks, methodologies, etc.)
+				</p>				
 			</div>
 			<img src="<%=renderRequest.getContextPath()%>/images/step-2.jpg" style="float:right;margin-right:30px;"/>
 			
@@ -820,6 +840,27 @@ HttpServletRequest httpRequest = PortalUtil.getOriginalServletRequest(request);
 				adaptation plans.
 			</p>
 			<p>
+			   <p style="font-weight:bold; font-size: 14px; padding-top:20px;">				
+					Topics
+				</p>
+				<p style="font-size: 12px;">
+					Definition(s)
+				</p>
+				<p style="font-size: 12px;">
+					Why regions become vulnerable 
+				</p>
+				<p style="font-size: 12px;">
+					Which are the major factors contributing to vulnerability (climate, geomorphology, socio-economic developments, state of natural systems, etc)
+				</p>
+				<p style="font-size: 12px;">
+					How vulnerability is measured
+				</p>
+				<p style="font-size: 12px;">
+					How to link vulnerability assessment and adaptation 
+				</p>
+				<p style="font-size: 12px;">
+					Discussion points (terminology, frameworks, methodologies, etc.)
+				</p>	
 				<div style="font-weight:bold; font-size: 12px; padding-top:20px;">				
 					Links
 				</div>
@@ -846,13 +887,13 @@ HttpServletRequest httpRequest = PortalUtil.getOriginalServletRequest(request);
 						<a href="http://www.ecmwf.int/research/era/do/get/index" target="_blank">
 							ERA 40 / ERA-40-interim
 						</a>
-						. Six-hourly, global gridded variables (many) at resolutions of approximately 1° and 0.5°, 1958-2002 for ERA40, 1989 to present for ERA-interim
+						. Six-hourly, global gridded variables (many) at resolutions of approximately 1 degree and 0.5 degree, 1958-2002 for ERA40, 1989 to present for ERA-interim
 					</li>
 					<li>
 						<a href="http://badc.nerc.ac.uk/data/cru/" target="_blank">
 							CRU
 						</a>
-						. Monthly, global gridded variables (ten) at 0.5° resolution, 1901 to present
+						. Monthly, global gridded variables (ten) at 0.5 degree resolution, 1901 to present
 					</li>
 					<li>
 						<a href="http://eca.knmi.nl/" target="_blank">
