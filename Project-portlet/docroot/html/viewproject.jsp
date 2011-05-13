@@ -28,7 +28,7 @@
 				if(i>0) { websitelabel += "s" ;}
 				
 				if(urls[i].trim().length() > 0) {
-					if ( !urls[i].startsWith("http://")) {
+					if ( ! urls[i].startsWith("http://")  && ! urls[i].startsWith("/") ) {
 						
 						urls[i] = "http://" + urls[i];
 					}
