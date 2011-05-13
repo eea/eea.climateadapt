@@ -163,7 +163,7 @@ HttpServletRequest httpRequest = PortalUtil.getOriginalServletRequest(request);
 		<div id="step-left-2" class="step-left">
 			<div id="what-should-i-do" style="margin:5px;">
 				<div id="what-should-i-do-heading" style="font-size:18px;line-height:20px;" onclick="step2substep(this.id);">
-					What should I do?
+					What should my region or sector do?
 				</div>
 				<div id="what-should-i-do-options" style="">
 					<ul class="menu-left">
@@ -174,56 +174,46 @@ HttpServletRequest httpRequest = PortalUtil.getOriginalServletRequest(request);
 						</li>
 						<li class="list-option">
 							2. <a href="#" onclick="step2substep('2-2'); return false">
-								How do I analyse impacts of past weather and recent climate trends?
-							</a>
-						</li>
-						<li class="list-option">
-							3. <a href="#" onclick="step2substep('2-3'); return false">
-								How do I identify the impacts of climate change?
+								How do I analyse past weather and climate change?
 							</a>
 						</li>
 						<li class="list-option" id="analyze-in-nas">
-							4. <a href="#" onclick="step2substep('2-4'); return false">
-								Are there vulnerability assessments in my region?
+							3. <a href="#" onclick="step2substep('2-3'); return false">
+								Are there impact and vulnerability assessments in my region or sector?	
 							</a>
 						</li>
 						<li class="list-option" id="analyze-maps-heading">
-							5. <a href="#" onclick="step2substep('analyze-maps-heading');showVulnerabilitiesAndRisks(); initMapViewerIndicators();">
-								How do I analyse impacts from European scale vulnerability assessments?
+							4. <a href="#" onclick="step2substep('analyze-maps-heading');showVulnerabilitiesAndRisks(); initMapViewerIndicators();">
+								How do I analyse European scale vulnerability?
 							</a>
 								<div id="analyze-maps-options" style="display:none;">
 									<ul class="menu-left">
 										<li class="list-option">
-											5.1. <a href="#" onclick="showVulnerabilitiesAndRisks(); return false">What are the key vulnerabilities and risks?</a>
+											4.1. <a href="#" onclick="showVulnerabilitiesAndRisks(); return false">What are the key vulnerabilities and risks?</a>
 										</li>
 										<li class="list-option">
-											5.2. <a href="#" onclick="showUnderlyingCauses(); return false">What are the underlying causes?</a>
+											4.2. <a href="#" onclick="showUnderlyingCauses(); return false">What are the underlying causes?</a>
 										</li>
 										<li class="list-option">
-											5.3. <a href="#" onclick="showUnderlyingNaturalCauses(); return false">How does the climate change?</a>
+											4.3. <a href="#" onclick="showUnderlyingNaturalCauses(); return false">How does the climate change?</a>
 										</li>
 										<li class="list-option">
-											5.4. <a href="#" onclick="showUnderlyingHumanCauses(); return false">How does the socio-ecological system change?</a>
+											4.4. <a href="#" onclick="showUnderlyingHumanCauses(); return false">How does the socio-ecological system change?</a>
 										</li>
 										<li class="list-option">
-											5.5. Uncertainties
+											4.5. Uncertainties
 										</li>
 									</ul>
 								</div>
 						</li>
 
 						<li class="list-option">
-							6. <a href="#" onclick="step2substep('2-6'); return false">
-								What are the risks?
-							</a>
-						</li>
-						<li class="list-option">
-							7. <a href="#" onclick="step2substep('2-7'); return false">
+							5. <a href="#" onclick="step2substep('2-5'); return false">
 								Are there also opportunities?
 							</a>
 						</li>
 						<li class="list-option">
-							8. <a href="#" onclick="step2substep('2-8'); return false">
+							6. <a href="#" onclick="step2substep('2-6'); return false">
 								What are the uncertainties?
 							</a>
 						</li>
@@ -253,7 +243,7 @@ HttpServletRequest httpRequest = PortalUtil.getOriginalServletRequest(request);
 		<div id="step-left-4" class="step-left">
             <div id="what-should-i-do-4" style="margin:5px;">
 				<div id="what-should-i-do-4-heading" style="font-size:18px;line-height:20px;">
-					What should I do?
+					What should my region or sector do?
 				</div>
 
             </div>
@@ -760,19 +750,19 @@ HttpServletRequest httpRequest = PortalUtil.getOriginalServletRequest(request);
 		</h1>
 
          <h2 id="header-vulnerability" class="heading step2heading" style="display: none">
-             2.5.1 What are the key vulnerabilities and risks?
+             2.4.1 What are the key vulnerabilities and risks?
          </h2>
 
         <h2 id="header-underlying-causes" class="heading step2heading" style="display: none">
-             2.5.2 What are the underlying causes?
+             2.4.2 What are the underlying causes?
         </h2>
 
         <h2 id="header-climate-change" class="heading step2heading" style="display: none">
-             2.5.3 How does the climate change?
+             2.4.3 How does the climate change?
         </h2>
 
         <h2 id="header-socio-ecological" class="heading step2heading" style="display: none">
-             2.5.4 How does the socio-ecological system change?
+             2.4.4 How does the socio-ecological system change?
         </h2>
 
 		<div id="general-content" class="what-should-i-do-content">
@@ -802,8 +792,7 @@ HttpServletRequest httpRequest = PortalUtil.getOriginalServletRequest(request);
 				</p>
 				<p>
 					The objective of this step is to help the user in identifying the expected impacts and risks of an area in the context of climate change in order to gain a better understanding of how and in what way climate change will affect the services, social groups, economic sectors and assets and to identify the priority areas for action. In order to perform a sound vulnerability assessment, all available relevant information has to be collected and assessed. This includes analysis of past and current weather trends, future climate change projections and their uncertainty.
-				</p>
-			   <p style="font-weight:bold; font-size: 12px; padding-top:20px;">				
+				</p>			   <p style="font-weight:bold; font-size: 12px; padding-top:20px;">				
 					Topics
 				</p>
 				<p>
@@ -831,36 +820,27 @@ HttpServletRequest httpRequest = PortalUtil.getOriginalServletRequest(request);
 
 		<div id="2-2" class="what-should-i-do-content step2substep" style="display:none;">
 			<h2 style="margin-left:30px;">
-				2.2 How do I analyse impacts of past weather and recent climate trends?
+				2.2 How do I analyse past weather and climate change im my region or sector?
 			</h2>
 			<div id="general-content-text" style="float:left;dispaly:block;width:560px;margin-left:30px;">
 			<p>
 				The assessment of existing vulnerability to climate variability and extremes is a necessary starting point for any adaptation. Assessment of past weather events, for example heavy rain or extreme temperatures,
 				and analysis of responses to them can help in gaining insights on which responses have been successful or ineffective. Lessons learned from this exercise can be used as a basis for designing climate change
 				adaptation plans.
-			</p>
-			<p>
-			   <p style="font-weight:bold; font-size: 14px; padding-top:20px;">				
+			</p>			   
+			 <p style="font-weight:bold; font-size: 14px; padding-top:20px;">				
 					Topics
 				</p>
 				<p style="font-size: 12px;">
-					Definition(s)
+					Past climate - short overview of paleoclimate, climate during the Holocene, last 200 years
 				</p>
 				<p style="font-size: 12px;">
-					Why regions become vulnerable 
+					Climate variability 
 				</p>
 				<p style="font-size: 12px;">
-					Which are the major factors contributing to vulnerability (climate, geomorphology, socio-economic developments, state of natural systems, etc)
+					Data on past climate in Europe: sources, coverage, data quality
 				</p>
-				<p style="font-size: 12px;">
-					How vulnerability is measured
-				</p>
-				<p style="font-size: 12px;">
-					How to link vulnerability assessment and adaptation 
-				</p>
-				<p style="font-size: 12px;">
-					Discussion points (terminology, frameworks, methodologies, etc.)
-				</p>	
+			<p>	
 				<div style="font-weight:bold; font-size: 12px; padding-top:20px;">				
 					Links
 				</div>
@@ -914,6 +894,13 @@ HttpServletRequest httpRequest = PortalUtil.getOriginalServletRequest(request);
 						, providing access to observations of weather and agriculture indicators
 					</li>
 				</ul>
+				<div style="font-weight:bold; font-size: 12px; padding-top:20px;">				
+					Links to national Meteorological Offices (to be included later)
+				</div>
+				<ul>
+					<li>&nbsp;
+					</li>
+				</ul>
 			</p>
 			</div>
 			<img src="<%=renderRequest.getContextPath()%>/images/step-2.jpg" style="float:right;margin-right:30px;"/>
@@ -922,165 +909,90 @@ HttpServletRequest httpRequest = PortalUtil.getOriginalServletRequest(request);
 
 		<div id="2-3" class="what-should-i-do-content step2substep" style="display:none;">
 			<h2 style="margin-left:30px;">
-				2.3 How do I identify the impacts of climate change?
+				2.3. Are there impact and vulnerability assessments in my region or sector?
 			</h2>
 			<div id="general-content-text" style="float:left;dispaly:block;width:560px;margin-left:30px;">
 			<p>
-				The extent to which climate change poses threats or opportunities will depend on how the climate, society and economy of the region of interest changes in coming years. These changes are studied with the help
-				of different climate and socio-economic scenarios. Scenarios provide plausible descriptions of different possible future states of the world based on the choices society makes.  
-			</p>
+				In many countries and cities in Europe impact and vulnerability assessments have already been done.
+				Therefore a logical first step in assessing vulnerability to climate change is to look for such existing (sub)national, 
+				regional or local assessments. This section will provide access to the results of such existing vulnerability studies, 
+				for example by providing access to existing maps at the scale at which these are available from the original data provider.
+			</p>			   
+			 <p style="font-weight:bold; font-size: 14px; padding-top:20px;">				
+					Topics
+				</p>
+				<p style="font-size: 12px;">
+					Dealing with different scales in vulnerability assessments  - European-wide vs regional/local
+				</p>
 			</div>
 			<img src="<%=renderRequest.getContextPath()%>/images/step-2.jpg" style="float:right;margin-right:30px;"/>
 			
 		</div>
 
 		<div id="2-4" class="what-should-i-do-content step2substep" style="display:none;">
-			<h2 style="margin-left:30px;">
-				2.4. Are there vulnerability assessments in my region?
+			<h2 class="heading step2heading">
+				2.4 How do I analyse European scale vulnerability?
 			</h2>
-			<div id="general-content-text" style="float:left;dispaly:block;width:560px;margin-left:30px;">
-			<p>
-				In many cases, the results of national or regional vulnerability assessments can be expected to better fit the goals of regional adaptation plans. Therefore a logical first step in assessing vulnerability to
-				climate change is to look for existing (sub)national, regional or local assessments. Currently this section provides access to the section on National Adaptation Plans and Strategies, that includes among others
-				references to national and regional vulnerability studies.
-				<br/><br/>
-				(In a later stage this section will more specifically link to available vulnerability assessments)
-				<br/><br/>
-				<a href="/national-adaptation-strategies" target="_blank">
-					Go to national and regional vulnerability assessments
-				</a>
-			</p>
+			<div id="general-content-text" style="float:left;dispaly:block;margin-left:30px;">
+				<p>
+					Vulnerability assessment is the analysis of the expected impacts, risks and the adaptive capacity of a region or sector  in the context of climate change. The objective of this step is to gain a better understanding of how and in what way climate change will affect the ecosystems, economic sectors and assets and human health and to identify the priorities for action. Vulnerability assessment is more than measuring potential harm using information about climate impacts. It includes an assessment of the region's or sector's ability to adapt. 
+				</p>
+				<p>
+					Vulnerability is the degree to which a system is susceptible to, and unable to cope with, adverse effects of climate change, including climate variability and extremes. Vulnerability is a function of the character, magnitude, and rate of climate change and variation to which a system is exposed, its sensitivity, and its adaptive capacity. (IPCC, 2007) There are many vulnerability indicators, but most of them do not follow strictly the definition above, because adaptive capacity cannot be measured in most cases in a meaningful way. Most of vulnerability indicators are impact indicators, or indicators, measuring the effect of climate change on the socio-ecological system. 
+				</p>
+				<p>
+					There are various methods to analyse climate change vulnerabilities or risks. A method from analysis of natural hazard uses the following approach:
+				</p>
+				<p>
+					Risk = Expected damages x Probability 
+				</p>
+				<p>
+					In the case of climate change projections considerable complexities arise in calculation of the risk function, associated with assigning probability to certain climate change scenarios and with making assumptions about impacts of future socioeconomic development. 
+				</p>
+				<p>
+					Therefore here a pragmatic approach is followed and both (IPCC) vulnerability and natural hazard risk assessments are presented in this section.
+				</p>			   
+			 <p style="font-weight:bold; font-size: 14px; padding-top:20px;">				
+					Topics
+				</p>
+				<p style="font-size: 12px;">
+					How to identify the key vulnerabilities: system boundary, major known risk, possible unknown risks, etc.
+				</p>
+				<p style="font-size: 12px;">
+					Interlinked vulnerabilities 
+				</p>
+				<p style="font-size: 12px;">
+					MENU WITH CHOICES OF INDICATORS FROM DIFFERENT PROJECTS (To Be Included later)
+				</p>
 			</div>
 			<img src="<%=renderRequest.getContextPath()%>/images/step-2.jpg" style="float:right;margin-right:30px;"/>
 			
 		</div>
 
 		<div id="2-5" class="what-should-i-do-content step2substep" style="display:none;">
-			<h2 class="heading step2heading">
-				2.5 How do I analyse impacts from European scale vulnerability assessments?
-			</h2>
-			<div id="general-content-text" style="float:left;dispaly:block;margin-left:30px;">
-				<p>
-					There are a number of European-wide and national projects that have created different socio-economic and climate scenarios across a variety of sectors and made projections for different socio-economic and
-					climate variables. These variables, when combined, produce indicators for climate impacts. Adaptation cannot be planned only on the basis of climate indicators, it needs impact indicators showing how climate
-					interacts with socio-economic developments.
-				</p>
-				<p>
-					The Adaptation Support Tool allows you to assess a variety of impact indicators, calculated within different projects. They can help you to assess whether you are vulnerable to climate change and whether
-					there are opportunities arising from it. In order to identify whether the vulnerability arises due to changes in climate, in socio-economic development or both, these indicators are disaggregated to their
-					components.
-				</p>
-				<p>
-					For example the indicator for water stress, used as impact indicator for water scarcity and droughts, disaggregates to two indicators for water availability and water use (withdrawals). Their analysis will
-					give an indication whether water scarcity is caused by climate change (manifested as decrease in water availability), socio-economic developments (increase in water use) or both.
-				</p>
-				<p>
-					While the components of the aggregated impact indicators let you identify where the vulnerabilities come from, they do not allow to identify the root cause of the problem. Therefore you should go further back
-					in the casual chain and look for the causes. In the case of a water stress indicator, causes for decrease in water availability can be decrease in precipitation, increase in evapo-transpiration, decrease in
-					river flow, change in the timing of snow melting and/or precipitation. Water availability decreases also due to deterioration of water quality. Water use can increase due to introduction of different crops
-					or cooling technologies, land use changes such as urbanisation, land erosion that decreases significantly water holding capacity of the soils. For some of these root causes European-wide data are available,
-					but for most of them they still do not exist. When planning for adaptation it is of great importance to find local data on these sub-indicators and to analyse them within your vulnerability assessment in
-					order to address the right causes and to design effective adaptation measure mix.
-				</p>
-				<p>
-					<div style="font-style:italic">
-						Links to European scale vulnerability assessments:
-					</div>
-					<ul>
-						<li>
-							<a href="http://www.climwatadapt.eu" target="_blank">
-								ClimWatAdapt
-							</a>
-						</li>
-						<li>
-							<a href=" http://peseta.jrc.ec.europa.eu/" target="_blank">
-								PESETA study
-							</a>
-						</li>
-					</ul>
-				</p>
-				<p>
-					<div style="font-style:italic">
-						Links to tools:
-					</div>
-					<ul>
-						<li>
-							<a href="http://www.1stcellmedia.de/customer/uni/cms/index.php?option=com_frontpage&Itemid=1" target="_blank">
-								SCENES WebService
-							</a>
-						</li>
-						<li>
-							<a href="http://adam-digital-compendium.pik-potsdam.de/macro-economic-analysis/direct-impacts-1/impacts-by-region/" target="_blank">
-								ADAM Digital Compendium
-							</a>
-						</li>
-					</ul>
-				</p>
-				<p>
-					<div style="font-style:italic">
-						Links to data generators, databases and meta-data platforms
-					</div>
-					<ul>
-						<li>
-							<a href="http://cera-www.dkrz.de/" target="_blank">
-								The CERA database
-							</a>
-						</li>
-						<li>
-							<a href="http://www.espon-climate.eu/" target="_blank">
-								ESPON CLIMATE
-							</a>
-						</li>
-						<li>
-							<a href="http://www.circeproject.eu/" target="_blank">
-								CIRCE (Climate Change and Impact Research: the Mediterranean Environment
-							</a>
-						</li>
-						<li>
-							<a href="http://www-pcmdi.llnl.gov/" target="_blank">
-								PCMDI (Project for Climate Model Diagnosis and Inter-comparison)
-							</a>
-						</li>
-					</ul>
-				</p>
-			</div>
-			<img src="<%=renderRequest.getContextPath()%>/images/step-2.jpg" style="float:right;margin-right:30px;"/>
-			
-		</div>
-
-		<div id="2-6" class="what-should-i-do-content step2substep" style="display:none;">
 			<h2 style="margin-left:30px;">
-				2.6. What are the risks?
-			</h2>
-			<div id="general-content-text" style="float:left;dispaly:block;width:560px;margin-left:30px;">
-			<p>
-				Current risk management approaches require knowledge of risk, calculated as
-				<br/><br/>
-				Risk = Expected damages x Probability
-				<br/><br/>
-				In the case of climate change projections considerable complexities arise in calculation of the risk function, associated with assigning probability to certain climate change scenarios and with making
-				assumptions about impacts of future socioeconomic development.
-			</p>
-			</div>
-			<img src="<%=renderRequest.getContextPath()%>/images/step-2.jpg" style="float:right;margin-right:30px;"/>
-			
-		</div>
-
-		<div id="2-7" class="what-should-i-do-content step2substep" style="display:none;">
-			<h2 style="margin-left:30px;">
-				2.7. Are there also opportunities?
+				2.5. Are there also opportunities?
 			</h2>
 			<div id="general-content-text" style="float:left;dispaly:block;width:560px;margin-left:30px;">
 			<p>
 				Content on adaptation opportunities to be included in a later stage
-			</p>
+			</p>			   
+			 <p style="font-weight:bold; font-size: 14px; padding-top:20px;">				
+					Topics
+				</p>
+				<p style="font-size: 12px;">
+					Opportunities due to climate change - a short overview
+				</p>
+				<p style="font-size: 12px;">
+					Dealing with vulnerability also creates opporunities: examples of innovation
+				</p>
 			</div>
 			<img src="<%=renderRequest.getContextPath()%>/images/step-2.jpg" style="float:right;margin-right:30px;"/>
 		</div>
 
-		<div id="2-8" class="what-should-i-do-content step2substep" style="display:none;">
+		<div id="2-6" class="what-should-i-do-content step2substep" style="display:none;">
 			<h2 style="margin-left:30px;">
-				8. What are the uncertainties?
+				2.6. What are the uncertainties?
 			</h2>
 			<div id="general-content-text" style="float:left;dispaly:block;width:560px;margin-left:30px;">
 			<p>
@@ -1093,38 +1005,83 @@ HttpServletRequest httpRequest = PortalUtil.getOriginalServletRequest(request);
 
 		<div id="indicators-map" style="display: none">
             <div id="text-vulnerability" class="description step2description" style="display: none">
-                <p>
-					Vulnerability is the degree to which a system is susceptible to, and unable to cope with, adverse effects of climate change, including climate variability and extremes. Vulnerability is a
-					function of the character, magnitude, and rate of climate change and variation to which a system is exposed, its sensitivity, and its adaptive capacity. (IPCC, 2007) There are many vulnerability
-					indicators, but most of them do not follow strictly the definition above, because adaptive capacity is ha highly controversial issue. Most of vulnerability  indicators are impact indicators, or
-					indicators, measuring the effect of climate change on the socio-ecological system.
-                </p>
-                <p>
-					Risk here denotes climate hazards, e.g., floods, droughts, water scarcity, heat waves, etc.
+				<p>
+					Vulnerability assessment is the analysis of the expected impacts, risks and the adaptive capacity of a region or sector  in the context of climate change. The objective of this step is to gain a better understanding of how and in what way climate change will affect the ecosystems, economic sectors and assets and human health and to identify the priorities for action. Vulnerability assessment is more than measuring potential harm using information about climate impacts. It includes an assessment of the region's or sector's ability to adapt. 
+				</p>
+				<p>
+					Vulnerability is the degree to which a system is susceptible to, and unable to cope with, adverse effects of climate change, including climate variability and extremes. Vulnerability is a function of the character, magnitude, and rate of climate change and variation to which a system is exposed, its sensitivity, and its adaptive capacity. (IPCC, 2007) There are many vulnerability indicators, but most of them do not follow strictly the definition above, because adaptive capacity cannot be measured in most cases in a meaningful way. Most of vulnerability indicators are impact indicators, or indicators, measuring the effect of climate change on the socio-ecological system. 
+				</p>
+				<p>
+					There are various methods to analyse climate change vulnerabilities or risks. A method from analysis of natural hazard uses the following approach:
+				</p>
+				<p>
+					Risk = Expected damages x Probability 
+				</p>
+				<p>
+					In the case of climate change projections considerable complexities arise in calculation of the risk function, associated with assigning probability to certain climate change scenarios and with making assumptions about impacts of future socioeconomic development. 
+				</p>
+				<p>
+					Therefore here a pragmatic approach is followed and both (IPCC) vulnerability and natural hazard risk assessments are presented in this section.
+				</p>			   
+			 <p style="font-weight:bold; font-size: 14px; padding-top:20px;">				
+					Topics
+				</p>
+				<p style="font-size: 12px;">
+					How to identify the key vulnerabilities: system boundary, major known risk, possible unknown risks, etc.
+				</p>
+				<p style="font-size: 12px;">
+					Interlinked vulnerabilities 
+				</p>
+				<p style="font-size: 12px;">
+					MENU WITH CHOICES OF INDICATORS FROM DIFFERENT PROJECTS (To Be Included later)
 				</p>
             </div>
 
             <div id="text-underlying-causes" class="description step2description" style="display: none">
                 <p>
-					Climate impacts arise from the interrelations between climate and socio-ecological systems. Climate impact indicators allow to identify vulnerable areas and sectors. As they are aggregated
-					indicators, they can not give information on what are the causes of the identified vulnerability and whether this vulnerability arises due to changes in physical system (exposure),  in
-					socio-ecological system (sensitivity) or in both. Therefore separate examination of the constituents of impact indicators is needed in order to understand the underlying causes of vulnerability.
+					Climate vulnerability arises from the interrelations between climate and socio-ecological systems. Climate vulnerability indicators aim to identify vulnerable areas and sectors. There is a need to understand whether the calcuted vulnerability arises mainly due to changes in physical system (exposure), in the socio-ecological system (sensitivity) or in both. Therefore separate analysis of the main elements of vulnerability indicators is needed in order to understand the underlying causes of vulnerability. 
+				</p>
+				<p style="font-weight:bold; font-size: 14px; padding-top:20px;">				
+					Topics
+				</p>
+				<p style="font-size: 12px;">
+					Components of aggregated indicators
 				</p>
             </div>
 
             <div id="text-climate-change" class="description step2description" style="display: none">
                 <p>
-					Current climate variables such as temperature, precipitation, river flow are characterized by  variability of their magnitudes (severity or intensity)  duration and timing. This variability is
-					studied on the basis of the statistics of past events. Current global climate change models indicate that climate change will modify some of these statistics.  Climate projections can help to
-					identify future trends, which are of great importance for contingency planning.
+					 The extent to which climate change poses threats or opportunities will depend on how the climate, society and economy of the region or sector of interest changes in coming years. These changes are studied with the help of different climate and socio-economic scenarios. Socio-economic scenarios provide plausible descriptions of different possible future states of the world based on the choices society makes. Combining socio-economic scenarios and scenarios of emissions of greenhouse gases and using global climate models provide projections of future climate change at global scale. These projections can be used to calculate more detailed climate projections for Europe at a smaller scale. 
+				</p>
+				<p style="font-weight:bold; font-size: 14px; padding-top:20px;">				
+					Topics
+				</p>
+				<p style="font-size: 12px;">
+					Future climate - short overview of  state_of_the art climate change science
+				</p>
+				<p style="font-size: 12px;">
+					Data on future climate in Europe: sources, coverage,  sectors 
+				</p>
+				<p style="font-size: 12px;">
+					Methods to explore future: scenarios, statistical methods (e.g., extreme value theory), expert judgements 
+				</p>
+				<p style="font-size: 12px;">
+					Climate change indicators: How to compare projections from different sources: pay attention to scenarios, assumption, time horizons
 				</p>
             </div>
 
              <div id="text-socio-ecological" class="description step2description" style="display: none">
                 <p>
-					Changes in climate are mostly not the only causes of vulnerability. Humans increase their vulnerability due to land use changes such as urbanization of flood (coastal)  plains, deforestation, land
-					degradation due to unsustainable agricultural practices. Resource use efficiency also has significant impact on vulnerability, especially in the case of water scarcity and droughts, as reduced water
-					use can counteract to some extend decreasing water availability.
+					Changes in climate are mostly not the only causes of vulnerability. Humans increase their vulnerability due to land use changes such as urbanization of flood (coastal) plains, deforestation, land degradation due to unsustainable agricultural practices. Resource use efficiency also has significant impact on vulnerability, especially in the case of water scarcity and droughts, as reduced water use can counteract to some extend decreasing water availability. Furthermore increases in wealth and assets in risk-prone areas also increase vulnerabilities.
+				</p>
+				<p style="font-weight:bold; font-size: 14px; padding-top:20px;">				
+					Topics
+				</p>
+				<p style="font-size: 12px;">
+					Land use changes, natural resource (over)use, changes in GDP
+				</p>
+				<p style="font-size: 12px;">
+					Sensitivity indicators: data sources, coverage, quality
 				</p>
             </div>
 
