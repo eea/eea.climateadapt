@@ -792,26 +792,29 @@ HttpServletRequest httpRequest = PortalUtil.getOriginalServletRequest(request);
 				</p>
 				<p>
 					The objective of this step is to help the user in identifying the expected impacts and risks of an area in the context of climate change in order to gain a better understanding of how and in what way climate change will affect the services, social groups, economic sectors and assets and to identify the priority areas for action. In order to perform a sound vulnerability assessment, all available relevant information has to be collected and assessed. This includes analysis of past and current weather trends, future climate change projections and their uncertainty.
-				</p>			   <p style="font-weight:bold; font-size: 12px; padding-top:20px;">				
-					Topics
 				</p>
-				<p>
+				 <p style="font-size: 12px; ">				
+					<b>Topics</b>
+				<ul>
+				<li>
 					Definition(s)
-				</p>
-				<p>
+				</li>
+				<li>
 					Why regions become vulnerable 
-				</p>
-				<p>
+				</li>
+				<li>
 					Which are the major factors contributing to vulnerability (climate, geomorphology, socio-economic developments, state of natural systems, etc)
-				</p>
-				<p>
+				</li>
+				<li>
 					How vulnerability is measured
-				</p>
-				<p>
+				</li>
+				<li>
 					How to link vulnerability assessment and adaptation 
-				</p>
-				<p>
+				</li>
+				<li>
 					Discussion points (terminology, frameworks, methodologies, etc.)
+				</li>
+				</ul>
 				</p>				
 			</div>
 			<img src="<%=renderRequest.getContextPath()%>/images/step-2.jpg" style="float:right;margin-right:30px;"/>
@@ -828,18 +831,20 @@ HttpServletRequest httpRequest = PortalUtil.getOriginalServletRequest(request);
 				and analysis of responses to them can help in gaining insights on which responses have been successful or ineffective. Lessons learned from this exercise can be used as a basis for designing climate change
 				adaptation plans.
 			</p>			   
-			 <p style="font-weight:bold; font-size: 14px; padding-top:20px;">				
-					Topics
-				</p>
-				<p style="font-size: 12px;">
+				 <p style="font-size: 12px; ">				
+					<b>Topics</b>
+				<ul>
+				<li>
 					Past climate - short overview of paleoclimate, climate during the Holocene, last 200 years
-				</p>
-				<p style="font-size: 12px;">
+				</li>
+				<li>
 					Climate variability 
-				</p>
-				<p style="font-size: 12px;">
+				</li>
+				<li>
 					Data on past climate in Europe: sources, coverage, data quality
-				</p>
+				</li>
+				</ul>					
+			</p>
 			<p>	
 				<div style="font-weight:bold; font-size: 12px; padding-top:20px;">				
 					Links
@@ -918,15 +923,16 @@ HttpServletRequest httpRequest = PortalUtil.getOriginalServletRequest(request);
 				regional or local assessments. This section will provide access to the results of such existing vulnerability studies, 
 				for example by providing access to existing maps at the scale at which these are available from the original data provider.
 			</p>			   
-			 <p style="font-weight:bold; font-size: 14px; padding-top:20px;">				
-					Topics
-				</p>
-				<p style="font-size: 12px;">
+				 <p style="font-size: 12px; ">				
+					<b>Topics</b>
+				<ul>
+				<li>
 					Dealing with different scales in vulnerability assessments  - European-wide vs regional/local
-				</p>
+				</li>
+				</ul>					
+			</p>
 			</div>
 			<img src="<%=renderRequest.getContextPath()%>/images/step-2.jpg" style="float:right;margin-right:30px;"/>
-			
 		</div>
 
 		<div id="2-4" class="what-should-i-do-content step2substep" style="display:none;">
@@ -948,21 +954,21 @@ HttpServletRequest httpRequest = PortalUtil.getOriginalServletRequest(request);
 				</p>
 				<p>
 					In the case of climate change projections considerable complexities arise in calculation of the risk function, associated with assigning probability to certain climate change scenarios and with making assumptions about impacts of future socioeconomic development. 
-				</p>
-				<p>
 					Therefore here a pragmatic approach is followed and both (IPCC) vulnerability and natural hazard risk assessments are presented in this section.
 				</p>			   
-			 <p style="font-weight:bold; font-size: 14px; padding-top:20px;">				
-					Topics
-				</p>
-				<p style="font-size: 12px;">
+				 <p style="font-size: 12px; ">				
+					<b>Topics</b>
+				  <ul>
+				   <li>
 					How to identify the key vulnerabilities: system boundary, major known risk, possible unknown risks, etc.
-				</p>
-				<p style="font-size: 12px;">
+				    </li>
+				    <li>
 					Interlinked vulnerabilities 
-				</p>
-				<p style="font-size: 12px;">
-					MENU WITH CHOICES OF INDICATORS FROM DIFFERENT PROJECTS (To Be Included later)
+				    </li>
+				    <li>
+					Menu with choices of indicatord from different projects
+					</li>
+				  </ul>
 				</p>
 			</div>
 			<img src="<%=renderRequest.getContextPath()%>/images/step-2.jpg" style="float:right;margin-right:30px;"/>
@@ -977,14 +983,16 @@ HttpServletRequest httpRequest = PortalUtil.getOriginalServletRequest(request);
 			<p>
 				Content on adaptation opportunities to be included in a later stage
 			</p>			   
-			 <p style="font-weight:bold; font-size: 14px; padding-top:20px;">				
-					Topics
-				</p>
-				<p style="font-size: 12px;">
+				 <p style="font-size: 12px; ">				
+					<b>Topics</b>
+				<ul>
+				<li>
 					Opportunities due to climate change - a short overview
-				</p>
-				<p style="font-size: 12px;">
+				</li>
+				<li>
 					Dealing with vulnerability also creates opporunities: examples of innovation
+				</li>
+				</ul>
 				</p>
 			</div>
 			<img src="<%=renderRequest.getContextPath()%>/images/step-2.jpg" style="float:right;margin-right:30px;"/>
@@ -1004,7 +1012,7 @@ HttpServletRequest httpRequest = PortalUtil.getOriginalServletRequest(request);
 		</div>
 
 		<div id="indicators-map" style="display: none">
-            <div id="text-vulnerability" class="description step2description" style="display: none">
+            <div id="text-vulnerability" class="description step2description" style="width:780px;display: none">
 				<p>
 					Vulnerability assessment is the analysis of the expected impacts, risks and the adaptive capacity of a region or sector  in the context of climate change. The objective of this step is to gain a better understanding of how and in what way climate change will affect the ecosystems, economic sectors and assets and human health and to identify the priorities for action. Vulnerability assessment is more than measuring potential harm using information about climate impacts. It includes an assessment of the region's or sector's ability to adapt. 
 				</p>
@@ -1015,73 +1023,82 @@ HttpServletRequest httpRequest = PortalUtil.getOriginalServletRequest(request);
 					There are various methods to analyse climate change vulnerabilities or risks. A method from analysis of natural hazard uses the following approach:
 				</p>
 				<p>
-					Risk = Expected damages x Probability 
+				  <ul>
+					<li> 
+					Risk = Expected damages x Probability
+					</li>
+				  </ul> 
 				</p>
 				<p>
 					In the case of climate change projections considerable complexities arise in calculation of the risk function, associated with assigning probability to certain climate change scenarios and with making assumptions about impacts of future socioeconomic development. 
-				</p>
-				<p>
 					Therefore here a pragmatic approach is followed and both (IPCC) vulnerability and natural hazard risk assessments are presented in this section.
 				</p>			   
-			 <p style="font-weight:bold; font-size: 14px; padding-top:20px;">				
-					Topics
-				</p>
-				<p style="font-size: 12px;">
+				 <p style="font-size: 12px; ">				
+					<b>Topics</b>
+				  <ul>
+					<li> 
 					How to identify the key vulnerabilities: system boundary, major known risk, possible unknown risks, etc.
-				</p>
-				<p style="font-size: 12px;">
+				    </li>
+				    <li>
 					Interlinked vulnerabilities 
-				</p>
-				<p style="font-size: 12px;">
-					MENU WITH CHOICES OF INDICATORS FROM DIFFERENT PROJECTS (To Be Included later)
+				    </li>
+				    <li>
+					Menu with choices of indicatord from different projects
+					</li>
+				  </ul>
 				</p>
             </div>
 
-            <div id="text-underlying-causes" class="description step2description" style="display: none">
+            <div id="text-underlying-causes" class="description step2description" style="width:780px;display: none">
                 <p>
 					Climate vulnerability arises from the interrelations between climate and socio-ecological systems. Climate vulnerability indicators aim to identify vulnerable areas and sectors. There is a need to understand whether the calcuted vulnerability arises mainly due to changes in physical system (exposure), in the socio-ecological system (sensitivity) or in both. Therefore separate analysis of the main elements of vulnerability indicators is needed in order to understand the underlying causes of vulnerability. 
 				</p>
-				<p style="font-weight:bold; font-size: 14px; padding-top:20px;">				
-					Topics
-				</p>
-				<p style="font-size: 12px;">
+				 <p style="font-size: 12px; ">				
+					<b>Topics</b>
+				<ul>
+					<li>
 					Components of aggregated indicators
+					</li>
+				  </ul>					
 				</p>
             </div>
 
-            <div id="text-climate-change" class="description step2description" style="display: none">
+            <div id="text-climate-change" class="description step2description" style="width:780px;display: none">
                 <p>
 					 The extent to which climate change poses threats or opportunities will depend on how the climate, society and economy of the region or sector of interest changes in coming years. These changes are studied with the help of different climate and socio-economic scenarios. Socio-economic scenarios provide plausible descriptions of different possible future states of the world based on the choices society makes. Combining socio-economic scenarios and scenarios of emissions of greenhouse gases and using global climate models provide projections of future climate change at global scale. These projections can be used to calculate more detailed climate projections for Europe at a smaller scale. 
 				</p>
-				<p style="font-weight:bold; font-size: 14px; padding-top:20px;">				
-					Topics
-				</p>
-				<p style="font-size: 12px;">
+				 <p style="font-size: 12px; ">				
+					<b>Topics</b>
+				<ul>
+					<li>
 					Future climate - short overview of  state_of_the art climate change science
-				</p>
-				<p style="font-size: 12px;">
+					</li>
+					<li>
 					Data on future climate in Europe: sources, coverage,  sectors 
-				</p>
-				<p style="font-size: 12px;">
+					</li>
+					<li>
 					Methods to explore future: scenarios, statistical methods (e.g., extreme value theory), expert judgements 
-				</p>
-				<p style="font-size: 12px;">
+					</li>
+					<li>
 					Climate change indicators: How to compare projections from different sources: pay attention to scenarios, assumption, time horizons
-				</p>
+					</li>
+				  </ul>
             </div>
 
-             <div id="text-socio-ecological" class="description step2description" style="display: none">
+             <div id="text-socio-ecological" class="description step2description" style="width:780px;display: none">
                 <p>
 					Changes in climate are mostly not the only causes of vulnerability. Humans increase their vulnerability due to land use changes such as urbanization of flood (coastal) plains, deforestation, land degradation due to unsustainable agricultural practices. Resource use efficiency also has significant impact on vulnerability, especially in the case of water scarcity and droughts, as reduced water use can counteract to some extend decreasing water availability. Furthermore increases in wealth and assets in risk-prone areas also increase vulnerabilities.
 				</p>
-				<p style="font-weight:bold; font-size: 14px; padding-top:20px;">				
-					Topics
-				</p>
-				<p style="font-size: 12px;">
+				 <p style="font-size: 12px; ">				
+					<b>Topics</b>
+				  <ul>
+					<li>
 					Land use changes, natural resource (over)use, changes in GDP
-				</p>
-				<p style="font-size: 12px;">
+					</li>
+					<li>
 					Sensitivity indicators: data sources, coverage, quality
+					</li>
+				  </ul>
 				</p>
             </div>
 
@@ -1141,7 +1158,7 @@ HttpServletRequest httpRequest = PortalUtil.getOriginalServletRequest(request);
 			<hr style="clear:both;display:block;visibility:hidden;"/>
 
 
-			<div id="map_container">
+			<div id="map_container" style="">
 				<div id="map_info">This is a map info panel</div>
 
                 <div id="locate_region_step2_results"></div>
@@ -1709,7 +1726,7 @@ HttpServletRequest httpRequest = PortalUtil.getOriginalServletRequest(request);
 			How can I assess my adaptation options?
 		</h1>
 
-		<div id="5-1" class="step-5-sub" style="">
+		<div id="5-1" class="step-5-sub" style="margin-left: 30px;">
 			<h2>
 				5.1 General
 			</h2>
@@ -1723,7 +1740,7 @@ HttpServletRequest httpRequest = PortalUtil.getOriginalServletRequest(request);
 			</p>
 		</div>
 
-		<div id="5-2" class="step-5-sub" style="display:none;">
+		<div id="5-2" class="step-5-sub" style="margin-left: 30px;display:none;">
 			<h2>
 				5.2 How much does adaptation cost?
 			</h2>
@@ -1735,7 +1752,7 @@ HttpServletRequest httpRequest = PortalUtil.getOriginalServletRequest(request);
 			</p>
          </div>
 		
-		<div id="5-2-1" class="step-5-sub" style="display:none;">
+		<div id="5-2-1" class="step-5-sub" style="margin-left: 30px;display:none;">
 				<h2>
 					5.2.1 How can I determine my adaptation costs?
 				</h2>
@@ -1789,7 +1806,7 @@ HttpServletRequest httpRequest = PortalUtil.getOriginalServletRequest(request);
 			<!-- end 5.2.1 -->
 			</div>
 
-			<div id="5-2-2" class="step-5-sub" style="display:none;">
+			<div id="5-2-2" class="step-5-sub" style="margin-left: 30px;display:none;">
 				<h2>
 					5.2.2 Search the cost-benefit database
 				</h2>
@@ -1979,7 +1996,7 @@ HttpServletRequest httpRequest = PortalUtil.getOriginalServletRequest(request);
 
 		<!-- end 5.2 -->
 
-		<div id="5-3" class="step-5-sub" style="display:none;">
+		<div id="5-3" class="step-5-sub" style="margin-left: 30px;display:none;">
 			<h2>
 				5.3 How do I decide which measures to include in my portfolio?
 			</h2>
@@ -2003,7 +2020,7 @@ HttpServletRequest httpRequest = PortalUtil.getOriginalServletRequest(request);
 		<!-- end 5.3 -->	
 		</div>				
 		
-		<div id="5-4" class="step-5-sub" style="display:none;">
+		<div id="5-4" class="step-5-sub" style="margin-left: 30px;display:none;">
 		<h2>
 				5.4 What is my Adaptive Capacity?
 			</h2>
@@ -2019,7 +2036,7 @@ HttpServletRequest httpRequest = PortalUtil.getOriginalServletRequest(request);
 		<!-- end 5.4 -->	
 		</div>	
 		
-		<div id="5-5" class="step-5-sub" style="display:none;">
+		<div id="5-5" class="step-5-sub" style="margin-left: 30px;display:none;">
 			<h2>
 				5.5 How to plan for adaptation
 		</h2>
