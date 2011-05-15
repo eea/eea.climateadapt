@@ -200,9 +200,6 @@ HttpServletRequest httpRequest = PortalUtil.getOriginalServletRequest(request);
 										<li class="list-option">
 											4.4. <a href="#" onclick="showUnderlyingHumanCauses(); return false">How does the socio-ecological system change?</a>
 										</li>
-										<li class="list-option">
-											4.5. Uncertainties
-										</li>
 									</ul>
 								</div>
 						</li>
@@ -319,7 +316,7 @@ HttpServletRequest httpRequest = PortalUtil.getOriginalServletRequest(request);
 	</div>
 
 	<!-- right panel -->
-    <div  class="adaptationtool-column" id="acemap_column" style="margin-right: 10px; float:left;width:850px;background:#fff;">
+    <div  class="adaptationtool-column" id="acemap_column" style="margin-right: 10px; float:left;width:880px;background:#fff;">
 	<!--
 
 			step 1
@@ -794,7 +791,7 @@ HttpServletRequest httpRequest = PortalUtil.getOriginalServletRequest(request);
 					The objective of this step is to help the user in identifying the expected impacts and risks of an area in the context of climate change in order to gain a better understanding of how and in what way climate change will affect the services, social groups, economic sectors and assets and to identify the priority areas for action. In order to perform a sound vulnerability assessment, all available relevant information has to be collected and assessed. This includes analysis of past and current weather trends, future climate change projections and their uncertainty.
 				</p>
 				 <p style="font-size: 12px; ">				
-					<b>Topics</b>
+					<b>Topics to be included</b>
 				<ul>
 				<li>
 					Definition(s)
@@ -832,7 +829,7 @@ HttpServletRequest httpRequest = PortalUtil.getOriginalServletRequest(request);
 				adaptation plans.
 			</p>			   
 				 <p style="font-size: 12px; ">				
-					<b>Topics</b>
+					<b>Topics to be included</b>
 				<ul>
 				<li>
 					Past climate - short overview of paleoclimate, climate during the Holocene, last 200 years
@@ -900,12 +897,8 @@ HttpServletRequest httpRequest = PortalUtil.getOriginalServletRequest(request);
 					</li>
 				</ul>
 				<div style="font-weight:bold; font-size: 12px; padding-top:20px;">				
-					Links to national Meteorological Offices (to be included later)
+					Links to national Meteorological Offices
 				</div>
-				<ul>
-					<li>&nbsp;
-					</li>
-				</ul>
 			</p>
 			</div>
 			<img src="<%=renderRequest.getContextPath()%>/images/step-2.jpg" style="float:right;margin-right:30px;"/>
@@ -924,13 +917,26 @@ HttpServletRequest httpRequest = PortalUtil.getOriginalServletRequest(request);
 				for example by providing access to existing maps at the scale at which these are available from the original data provider.
 			</p>			   
 				 <p style="font-size: 12px; ">				
-					<b>Topics</b>
+					<b>Topics to be included</b>
 				<ul>
 				<li>
 					Dealing with different scales in vulnerability assessments  - European-wide vs regional/local
 				</li>
+				<li>
+					Access to regional and local vulnerability assessments
+				</li>
 				</ul>					
 			</p>
+				<div style="font-weight:bold; font-size: 12px; padding-top:20px;">				
+					Links
+				</div>
+				<ul>
+					<li>
+						<a href="/national-adaptation-strategies">
+							National Adaptation Plans and Strategies
+						</a>
+					</li>
+				</ul>
 			</div>
 			<img src="<%=renderRequest.getContextPath()%>/images/step-2.jpg" style="float:right;margin-right:30px;"/>
 		</div>
@@ -957,7 +963,7 @@ HttpServletRequest httpRequest = PortalUtil.getOriginalServletRequest(request);
 					Therefore here a pragmatic approach is followed and both (IPCC) vulnerability and natural hazard risk assessments are presented in this section.
 				</p>			   
 				 <p style="font-size: 12px; ">				
-					<b>Topics</b>
+					<b>Topics to be included</b>
 				  <ul>
 				   <li>
 					How to identify the key vulnerabilities: system boundary, major known risk, possible unknown risks, etc.
@@ -984,7 +990,7 @@ HttpServletRequest httpRequest = PortalUtil.getOriginalServletRequest(request);
 				Content on adaptation opportunities to be included in a later stage
 			</p>			   
 				 <p style="font-size: 12px; ">				
-					<b>Topics</b>
+					<b>Topics to be included</b>
 				<ul>
 				<li>
 					Opportunities due to climate change - a short overview
@@ -1032,9 +1038,10 @@ HttpServletRequest httpRequest = PortalUtil.getOriginalServletRequest(request);
 				<p>
 					In the case of climate change projections considerable complexities arise in calculation of the risk function, associated with assigning probability to certain climate change scenarios and with making assumptions about impacts of future socioeconomic development. 
 					Therefore here a pragmatic approach is followed and both (IPCC) vulnerability and natural hazard risk assessments are presented in this section.
-				</p>			   
-				 <p style="font-size: 12px; ">				
-					<b>Topics</b>
+				</p>
+<% /*							   
+	    		 <p style="font-size: 12px; ">				
+					<b>Topics to be included</b>
 				  <ul>
 					<li> 
 					How to identify the key vulnerabilities: system boundary, major known risk, possible unknown risks, etc.
@@ -1046,29 +1053,33 @@ HttpServletRequest httpRequest = PortalUtil.getOriginalServletRequest(request);
 					Menu with choices of indicatord from different projects
 					</li>
 				  </ul>
-				</p>
+				</p>    
+*/ %>				
             </div>
 
             <div id="text-underlying-causes" class="description step2description" style="width:780px;display: none">
                 <p>
 					Climate vulnerability arises from the interrelations between climate and socio-ecological systems. Climate vulnerability indicators aim to identify vulnerable areas and sectors. There is a need to understand whether the calcuted vulnerability arises mainly due to changes in physical system (exposure), in the socio-ecological system (sensitivity) or in both. Therefore separate analysis of the main elements of vulnerability indicators is needed in order to understand the underlying causes of vulnerability. 
 				</p>
+<% /*				
 				 <p style="font-size: 12px; ">				
-					<b>Topics</b>
+					<b>Topics to be included</b>
 				<ul>
 					<li>
 					Components of aggregated indicators
 					</li>
 				  </ul>					
 				</p>
+*/ %>				
             </div>
 
             <div id="text-climate-change" class="description step2description" style="width:780px;display: none">
                 <p>
 					 The extent to which climate change poses threats or opportunities will depend on how the climate, society and economy of the region or sector of interest changes in coming years. These changes are studied with the help of different climate and socio-economic scenarios. Socio-economic scenarios provide plausible descriptions of different possible future states of the world based on the choices society makes. Combining socio-economic scenarios and scenarios of emissions of greenhouse gases and using global climate models provide projections of future climate change at global scale. These projections can be used to calculate more detailed climate projections for Europe at a smaller scale. 
 				</p>
+<% /*				
 				 <p style="font-size: 12px; ">				
-					<b>Topics</b>
+					<b>Topics to be included</b>
 				<ul>
 					<li>
 					Future climate - short overview of  state_of_the art climate change science
@@ -1083,14 +1094,17 @@ HttpServletRequest httpRequest = PortalUtil.getOriginalServletRequest(request);
 					Climate change indicators: How to compare projections from different sources: pay attention to scenarios, assumption, time horizons
 					</li>
 				  </ul>
+				</p>
+*/ %>				  
             </div>
 
              <div id="text-socio-ecological" class="description step2description" style="width:780px;display: none">
                 <p>
 					Changes in climate are mostly not the only causes of vulnerability. Humans increase their vulnerability due to land use changes such as urbanization of flood (coastal) plains, deforestation, land degradation due to unsustainable agricultural practices. Resource use efficiency also has significant impact on vulnerability, especially in the case of water scarcity and droughts, as reduced water use can counteract to some extend decreasing water availability. Furthermore increases in wealth and assets in risk-prone areas also increase vulnerabilities.
 				</p>
+<% /*				
 				 <p style="font-size: 12px; ">				
-					<b>Topics</b>
+					<b>Topics to be included</b>
 				  <ul>
 					<li>
 					Land use changes, natural resource (over)use, changes in GDP
@@ -1100,6 +1114,7 @@ HttpServletRequest httpRequest = PortalUtil.getOriginalServletRequest(request);
 					</li>
 				  </ul>
 				</p>
+*/ %>
             </div>
 
 			<div id="adaptationtools-selectors-top" style="">
