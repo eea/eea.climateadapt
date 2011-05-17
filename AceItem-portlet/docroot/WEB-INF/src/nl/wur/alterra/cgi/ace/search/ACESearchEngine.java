@@ -82,7 +82,7 @@ public class ACESearchEngine extends HitsOpenSearchImpl {
         try {
             ACEIndexSearcher searcher = ACEIndexSearcher.getACEIndexSearcher();
             QueryParser queryParser = new QueryParser("any", ACEAnalyzer.getAnalyzer());
-            keywords = addFuzziness(keywords, defaultFuzziness, defaultFreetextMode);
+            keywords = prepareFreetext(keywords, defaultFuzziness, defaultFreetextMode);
             Query query = queryParser.parse(keywords);
             System.out.println("*** ACESearchEngine search: Lucene query is: " + query.toString());
             //System.out.println("Lucene query (rewritten): " + query.rewrite(((IndexSearcher)searcher).getIndexReader()).toString());
@@ -136,13 +136,15 @@ public class ACESearchEngine extends HitsOpenSearchImpl {
     }
 
     /**
-     * Adds fuzziness to each term in a whitespace-separated string.
+     * Prepares free text query by adding fuzziness to each term in a whitespace-separated string, adding AND if the
+     * user requested to search for all words, and wraps it up.
      *
-     * @param keywords keywords in whitepsace-separated string
+     * @param keywords keywords in whitespace-separated string
      * @param fuzziness fuzziness factor
-     * @return keywords with added fuzziness in whitepsace-separated string
+     * @param freetextMode any or all
+     * @return prepared query for free text
      */
-    private String addFuzziness(String keywords, String fuzziness, FreetextMode freetextMode) {
+    private String prepareFreetext(String keywords, String fuzziness, FreetextMode freetextMode) {
         String[] searchterms = keywords.split("\\s");
         String result = "";
         for(String searchterm : searchterms) {
@@ -191,7 +193,7 @@ public class ACESearchEngine extends HitsOpenSearchImpl {
             if(formBean.getAnyOfThese() != null) {
                 rawQuery = rawQuery + " " + formBean.getAnyOfThese();
 
-                rawQuery = addFuzziness(rawQuery, defaultFuzziness, formBean.getFreeTextMode());
+                rawQuery = prepareFreetext(rawQuery, defaultFuzziness, formBean.getFreeTextMode());
             }
 
             // user entered no searchterms; do wildcard query
