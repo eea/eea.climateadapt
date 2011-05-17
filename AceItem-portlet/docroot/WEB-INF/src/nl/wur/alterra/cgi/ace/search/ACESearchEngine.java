@@ -17,14 +17,20 @@ import nl.wur.alterra.cgi.ace.search.lucene.ACELuceneOpenSearchResult;
 import nl.wur.alterra.cgi.ace.search.opensearch.BaseOpenSearchResult;
 import nl.wur.alterra.cgi.ace.search.opensearch.BaseOpenSearchResultEntry;
 import nl.wur.alterra.cgi.ace.search.opensearch.ConvertableToBaseOpenSearchResult;
+import org.apache.lucene.analysis.TokenStream;
+import org.apache.lucene.analysis.tokenattributes.OffsetAttribute;
+import org.apache.lucene.analysis.tokenattributes.TermAttribute;
 import org.apache.lucene.document.Document;
 import org.apache.lucene.queryParser.ParseException;
 import org.apache.lucene.queryParser.QueryParser;
 import org.apache.lucene.search.Query;
 import org.apache.lucene.search.ScoreDoc;
 import org.apache.lucene.search.TopDocs;
+import org.apache.lucene.util.Attribute;
 
 import javax.servlet.http.HttpServletRequest;
+import java.io.IOException;
+import java.io.StringReader;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -81,7 +87,7 @@ public class ACESearchEngine extends HitsOpenSearchImpl {
         //
         try {
             ACEIndexSearcher searcher = ACEIndexSearcher.getACEIndexSearcher();
-            QueryParser queryParser = new QueryParser("any", ACEAnalyzer.getAnalyzer());
+            QueryParser queryParser = new QueryParser(ACEIndexConstant.IndexField.ANY, ACEAnalyzer.getAnalyzer());
             keywords = prepareFreetext(keywords, defaultFuzziness, defaultFreetextMode);
             Query query = queryParser.parse(keywords);
             System.out.println("*** ACESearchEngine search: Lucene query is: " + query.toString());
@@ -95,6 +101,10 @@ public class ACESearchEngine extends HitsOpenSearchImpl {
             }
         }
         catch(ParseException x) {
+            System.out.println(x.getMessage());
+            x.printStackTrace();
+        }
+        catch (IOException x) {
             System.out.println(x.getMessage());
             x.printStackTrace();
         }
@@ -144,10 +154,12 @@ public class ACESearchEngine extends HitsOpenSearchImpl {
      * @param freetextMode any or all
      * @return prepared query for free text
      */
-    private String prepareFreetext(String keywords, String fuzziness, FreetextMode freetextMode) {
-        String[] searchterms = keywords.split("\\s");
+    private String prepareFreetext(String keywords, String fuzziness, FreetextMode freetextMode) throws IOException {
         String result = "";
-        for(String searchterm : searchterms) {
+        TokenStream tokenStream = ACEAnalyzer.getAnalyzer().tokenStream(ACEIndexConstant.IndexField.ANY, new StringReader(keywords));
+        TermAttribute termAttribute = (TermAttribute) tokenStream.getAttribute(TermAttribute.class);
+        while (tokenStream.incrementToken()) {
+            String searchterm = termAttribute.term();
             if(searchterm != null && searchterm.trim().length() > 0) {
                 result += "(";
                 switch (freetextMode) {
@@ -316,6 +328,11 @@ public class ACESearchEngine extends HitsOpenSearchImpl {
             return results;
         }
         catch(ParseException x) {
+            System.out.println(x.getMessage());
+            x.printStackTrace();
+            throw new ACELuceneException(x.getMessage(), x);
+        }
+        catch (IOException x) {
             System.out.println(x.getMessage());
             x.printStackTrace();
             throw new ACELuceneException(x.getMessage(), x);
