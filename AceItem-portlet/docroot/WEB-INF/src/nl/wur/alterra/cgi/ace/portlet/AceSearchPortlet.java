@@ -34,6 +34,10 @@ import java.util.Map;
 public class AceSearchPortlet extends MVCPortlet {
 
     private static final String ANY = "anyOfThese";
+    /**
+     * Either 1 (search any of the words) or 2 (search all words).
+     */
+    private static final String FREETEXT_MODE = "freetextAny";
     private static final String ACEITEM_TYPE = "aceitemtype";
     private static final String SORTBY = "sortBy";
     private static final String CONDITION_ADAPTATION_SECTOR = "conditionAdaptationSector";
@@ -93,6 +97,7 @@ public class AceSearchPortlet extends MVCPortlet {
         }
         
         String[] anyOfThese = requestParams.get(ANY);
+        String[] freetextMode = requestParams.get(FREETEXT_MODE);
         String[] aceItemTypes = requestParams.get(ACEITEM_TYPE);
         String[] sectors = requestParams.get(SECTOR);
         String[] countries = requestParams.get(COUNTRIES);
@@ -108,6 +113,7 @@ public class AceSearchPortlet extends MVCPortlet {
 
         AceSearchFormBean formBean = new AceSearchFormBean();
         formBean.setAnyOfThese(anyOfThese[0]);
+        formBean.setFreetextMode(freetextMode[0]);
         formBean.setAceitemtype(aceItemTypes);
         formBean.setSector(sectors);
         formBean.setElement(elements);

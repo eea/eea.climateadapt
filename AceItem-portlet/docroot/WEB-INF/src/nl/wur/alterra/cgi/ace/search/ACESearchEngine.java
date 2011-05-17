@@ -67,6 +67,8 @@ public class ACESearchEngine extends HitsOpenSearchImpl {
         System.out.println("## itemsPerPage: " + itemsPerPage);
         System.out.println("## keywords: " + keywords);
 
+        FreetextMode defaultFreetextMode = FreetextMode.ANY;
+
         int start = (startPage * itemsPerPage) - itemsPerPage;
 
         int total = 4;
@@ -80,7 +82,7 @@ public class ACESearchEngine extends HitsOpenSearchImpl {
         try {
             ACEIndexSearcher searcher = ACEIndexSearcher.getACEIndexSearcher();
             QueryParser queryParser = new QueryParser("any", ACEAnalyzer.getAnalyzer());
-            keywords = addFuzziness(keywords, defaultFuzziness);
+            keywords = addFuzziness(keywords, defaultFuzziness, defaultFreetextMode);
             Query query = queryParser.parse(keywords);
             System.out.println("*** ACESearchEngine search: Lucene query is: " + query.toString());
             //System.out.println("Lucene query (rewritten): " + query.rewrite(((IndexSearcher)searcher).getIndexReader()).toString());
@@ -135,21 +137,36 @@ public class ACESearchEngine extends HitsOpenSearchImpl {
 
     /**
      * Adds fuzziness to each term in a whitespace-separated string.
+     *
      * @param keywords keywords in whitepsace-separated string
      * @param fuzziness fuzziness factor
      * @return keywords with added fuzziness in whitepsace-separated string
      */
-    private String addFuzziness(String keywords, String fuzziness) {
+    private String addFuzziness(String keywords, String fuzziness, FreetextMode freetextMode) {
         String[] searchterms = keywords.split("\\s");
         String result = "";
         for(String searchterm : searchterms) {
             if(searchterm != null && searchterm.trim().length() > 0) {
-                result += searchterm.trim() + "~" + fuzziness + " AND ";
+                result += "(";
+                switch (freetextMode) {
+                    case ANY :
+                        result += searchterm.trim() + "~" + fuzziness + ") ";
+                        break;
+                    case ALL :
+                        result += searchterm.trim() + "~" + fuzziness + ") AND ";
+                        break;
+                    default:
+                        result += searchterm.trim() + "~" + fuzziness + ") ";
+                }
             }
         }
         // strip last " AND "
         if(result != null && result.length() > 0 && result.indexOf(" AND ") >= 0) {
             result = result.substring(0, result.lastIndexOf(" AND "));
+        }
+        // wrap query in brackets
+        if(result.trim().length() > 0) {
+            result = "(" + result + ")";
         }
         System.out.println("*** ACESearchEngine search: searchterms with fuzziness: " + result);
         return result;
@@ -164,7 +181,6 @@ public class ACESearchEngine extends HitsOpenSearchImpl {
      */
 
     public List<AceItem> searchLuceneByType(AceSearchFormBean formBean, String aceItemType) throws ACELuceneException {
-    //public List<AceItem> searchLuceneByType(String[] anyOfThese, String aceItemType, String[] sectors, String[] elements, String sortBy) throws ACELuceneException {
         try {
             //
             // handle free text input
@@ -175,7 +191,7 @@ public class ACESearchEngine extends HitsOpenSearchImpl {
             if(formBean.getAnyOfThese() != null) {
                 rawQuery = rawQuery + " " + formBean.getAnyOfThese();
 
-                rawQuery = addFuzziness(rawQuery, defaultFuzziness);
+                rawQuery = addFuzziness(rawQuery, defaultFuzziness, formBean.getFreeTextMode());
             }
 
             // user entered no searchterms; do wildcard query
@@ -234,8 +250,9 @@ public class ACESearchEngine extends HitsOpenSearchImpl {
             ACEIndexSearcher searcher = ACEIndexSearcher.getACEIndexSearcher();
             QueryParser queryParser = new QueryParser(ACEIndexConstant.IndexField.ANY, ACEAnalyzer.getAnalyzer());
             Query query = queryParser.parse(rawQuery);
-            System.out.println("LLucene raw query: " + rawQuery);
-            System.out.println("LLucene query: " + query.toString());
+            System.out.println("Lucene raw query: " + rawQuery);
+            System.out.println("Lucene query: " + query.toString());
+            // rewritten query is better for logging/debugging but potentially throws runtime exceptions
             //System.out.println("Lucene query (rewritten): " + query.rewrite(((IndexSearcher)searcher).getIndexReader()).toString());
             long start = System.currentTimeMillis();
             TopDocs topDocs = searcher.search(query, formBean.getSortBy(), 10);

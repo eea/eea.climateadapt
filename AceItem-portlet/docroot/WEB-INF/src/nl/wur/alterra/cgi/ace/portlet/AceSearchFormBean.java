@@ -1,5 +1,7 @@
 package nl.wur.alterra.cgi.ace.portlet;
 
+import nl.wur.alterra.cgi.ace.search.FreetextMode;
+
 /**
  * Bean for AceItem search form parameters.
  *
@@ -13,6 +15,12 @@ public class AceSearchFormBean {
     private String[] countries;
     private String sortBy;
     private String anyOfThese;
+
+    public FreetextMode getFreeTextMode() {
+        return freeTextMode;
+    }
+
+    private FreetextMode freeTextMode;
 
     private String conditionAdaptationSector;
     private String conditionAdaptationElement;
@@ -80,4 +88,22 @@ public class AceSearchFormBean {
     public void setConditionAdaptationElement(String conditionAdaptationElement) {
         this.conditionAdaptationElement = conditionAdaptationElement;
     }
+
+    public void setFreetextMode(String freetextMode$) {
+        // if undefined search for any
+        if(freetextMode$ == null) {
+            this.freeTextMode = FreetextMode.ANY;
+        }
+        if(freetextMode$.equals("1")) {
+            this.freeTextMode = FreetextMode.ANY;
+        }
+        else if(freetextMode$.equals("2")) {
+            this.freeTextMode = FreetextMode.ALL;
+        }
+        // if value unknown search for any
+        else {
+            this.freeTextMode = FreetextMode.ANY;
+        }
+    }
+
 }

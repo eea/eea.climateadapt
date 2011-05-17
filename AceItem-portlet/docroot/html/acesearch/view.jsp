@@ -26,6 +26,9 @@ Long totalResults = (Long) request.getAttribute("total_results");
 // Retrieve parameters to fill form
 String anyOfThese = ParamUtil.getString(request, "anyOfThese");
 
+String freetextAny = ParamUtil.getString(request, "freetextAny");
+if ((freetextAny == null) || (freetextAny.equals(""))) freetextAny = "1";
+
 String datainfo_type = ParamUtil.getString(request, "datainfo_type");
 if ((datainfo_type == null) || (datainfo_type.equals(""))) datainfo_type = "1";
 
@@ -151,18 +154,41 @@ pageContext.setAttribute("countriesList", countriesList);
                 <h2><liferay-ui:message key="acesearch-section-header1" /></h2>
 
                 <div class="row">
-                    <label for="anyOfThese" class="input"><liferay-ui:message key="acesearch-lbl-allwords" /></label>
-                    <input type="text" class="text" name="anyOfThese" id="anyOfThese" value="<%= anyOfThese %>"/>
-                </div>
+				
+					<div id="anyorall" style="">
+						<!-- any of these words -->
+						<input type="radio" id="any" name="freetextAny" value="1" <%= (freetextAny.equals("1"))?"checked":"" %> style="float:left;"/>
+						<label for="any" class="input"  style="float:left;width:120px;margin-left:3px;">
+							<liferay-ui:message key="acesearch-lbl-anywords" />
+						</label>
+
+						<!-- all of these words -->
+						<input type="radio" id="all" name="freetextAny" value="2" <%= (freetextAny.equals("2"))?"checked":"" %>  style="float:left;"/>
+						<label for="all" class="input"  style="float:left;width:120px;margin-left:3px;">
+							<liferay-ui:message key="acesearch-lbl-allwords" />
+						</label>
+					</div>
+					
+					<!-- freetext input -->
+                    <input type="text" class="text" name="anyOfThese" id="anyOfThese" value="<%= anyOfThese %>" style="margin-top:5px;" />
+
+				</div>
             </div>
+			
+			<hr class="clearer"/>
 
             <div class="search_section">
                 <h2><liferay-ui:message key="acesearch-section-header2" /></h2>
 
                 <div class="row">
-                    <input type="radio" name="datainfo_type" value="1" <%= (datainfo_type.equals("1"))?"checked":"" %> /><liferay-ui:message key="acesearch-datainfotype-lbl-all" />
-                    <input type="radio" name="datainfo_type" value="2" <%= (datainfo_type.equals("2"))?"checked":"" %> /><liferay-ui:message key="acesearch-datainfotype-lbl-sel" />
-
+                    <input type="radio" id="alltypes" name="datainfo_type" value="1" <%= (datainfo_type.equals("1"))?"checked":"" %> />
+					<label for="alltypes">
+						<liferay-ui:message key="acesearch-datainfotype-lbl-all" />
+					</label>
+                    <input type="radio" id="anytypes" name="datainfo_type" value="2" <%= (datainfo_type.equals("2"))?"checked":"" %> />
+					<label for="anytypes">
+						<liferay-ui:message key="acesearch-datainfotype-lbl-sel" />
+					</label>					
                     <div id="all_selection_types">
                         <div class="checks_container">						
 							<%-- note : i18n file should always be in sync with AceItemType enum --%>						
@@ -201,8 +227,14 @@ pageContext.setAttribute("countriesList", countriesList);
 
                         <div id="adaptation_sectors_container" class="checks_container">
                             <div class="condition_container">
-                                <input type="radio" name="conditionAdaptationSector" value="OR" <%= (conditionAdaptationSector.equals("OR"))?"checked":"" %> />&nbsp;<liferay-ui:message key="acesearch-anycriteria" />
-                                &nbsp;&nbsp;<input type="radio" name="conditionAdaptationSector" value="AND" <%= (conditionAdaptationSector.equals("AND"))?"checked":"" %> />&nbsp;<liferay-ui:message key="acesearch-allcriteria" />
+                                <input type="radio" id="anysectors" name="conditionAdaptationSector" value="OR" <%= (conditionAdaptationSector.equals("OR"))?"checked":"" %> />
+								<label for="anysectors">
+									&nbsp;<liferay-ui:message key="acesearch-anycriteria" />
+								</label>	
+                                &nbsp;&nbsp;<input type="radio" id="allsectors" name="conditionAdaptationSector" value="AND" <%= (conditionAdaptationSector.equals("AND"))?"checked":"" %> />
+								<label for="allsectors">
+									&nbsp;<liferay-ui:message key="acesearch-allcriteria" />
+								</label>	
                             </div>
 
 							<%-- note : i18n file should always be in sync with AceItemSector enum --%>	
@@ -260,8 +292,14 @@ pageContext.setAttribute("countriesList", countriesList);
 
                         <div id="adaptation_elements_container" class="checks_container">
                             <div class="condition_container">
-                                <input type="radio" name="conditionAdaptationElement" value="OR" <%= (conditionAdaptationElement.equals("OR"))?"checked":"" %> />&nbsp;<liferay-ui:message key="acesearch-anycriteria" />
-                                &nbsp;&nbsp;<input type="radio" name="conditionAdaptationElement" value="AND" <%= (conditionAdaptationElement.equals("AND"))?"checked":"" %> />&nbsp;<liferay-ui:message key="acesearch-allcriteria" />
+                                <input type="radio" id="anyelements" name="conditionAdaptationElement" value="OR" <%= (conditionAdaptationElement.equals("OR"))?"checked":"" %> />
+								<label for="anyelements">
+									&nbsp;<liferay-ui:message key="acesearch-anycriteria" />
+								</label>	
+                                &nbsp;&nbsp;<input type="radio" id="allelements" name="conditionAdaptationElement" value="AND" <%= (conditionAdaptationElement.equals("AND"))?"checked":"" %> />
+								<label for="allelements">
+									&nbsp;<liferay-ui:message key="acesearch-allcriteria" />
+								</label>	
                             </div>
 
 							<%-- note : i18n file should always be in sync with AceItemElement enum --%>
