@@ -169,6 +169,7 @@ public class AdaptationToolJSPPortlet extends GenericPortlet {
         String[] sectors = null;
         String[] countries = null;
         String[] elements = null;
+        String[] impacts = null;
         String[] sortBys = null;
         String sortBy = null;
         if (sortBys != null && sortBys.length > 0) {
@@ -177,6 +178,7 @@ public class AdaptationToolJSPPortlet extends GenericPortlet {
 
         String[] conditionAdaptationSector = {"AND"};
         String[] conditionAdaptationElement = {"AND"};
+        String[] conditionClimateImpact = {"AND"};
 
         AceSearchFormBean aceSearchFormBean = new AceSearchFormBean();
         if (anyOfThese != null && anyOfThese.length > 0) {
@@ -188,6 +190,7 @@ public class AdaptationToolJSPPortlet extends GenericPortlet {
         aceSearchFormBean.setAceitemtype(aceItemTypes);
         aceSearchFormBean.setSector(sectors);
         aceSearchFormBean.setElement(elements);
+        aceSearchFormBean.setImpact(impacts);
         aceSearchFormBean.setCountries(countries);
         aceSearchFormBean.setSortBy(sortBy);
 
@@ -203,6 +206,13 @@ public class AdaptationToolJSPPortlet extends GenericPortlet {
         }
         else {
             aceSearchFormBean.setConditionAdaptationElement(AND_CONDITION);
+        }
+
+        if (conditionClimateImpact != null && conditionClimateImpact[0].equalsIgnoreCase(OR_CONDITION)) {
+            aceSearchFormBean.setConditionClimateImpact(OR_CONDITION);
+        }
+        else {
+            aceSearchFormBean.setConditionClimateImpact(AND_CONDITION);
         }
 
         request.setAttribute(SEARCH_PARAMS, aceSearchFormBean);
@@ -230,6 +240,7 @@ public class AdaptationToolJSPPortlet extends GenericPortlet {
                     result.setSpatialValues(result.getSpatialValues().replaceAll("'", "\'"));
                     result.setSpatialLayer(result.getSpatialLayer().replaceAll("'", "\'"));
                     result.setElements_(result.getElements_().replaceAll("'", "\'"));
+                    result.setClimateimpacts_(result.getClimateimpacts_().replaceAll("'", "\'"));
                     result.setSectors_(result.getSectors_().replaceAll("'", "\'"));
                     result.setStoredAt(result.getStoredAt().replaceAll("'", "\'"));
                     result.setTextSearch(result.getTextSearch().replaceAll("'", "\'"));
@@ -240,6 +251,7 @@ public class AdaptationToolJSPPortlet extends GenericPortlet {
                     result.setSpatialValues(result.getSpatialValues().replaceAll("\"", "\"\""));
                     result.setSpatialLayer(result.getSpatialLayer().replaceAll("\"", "\"\""));
                     result.setElements_(result.getElements_().replaceAll("\"", "\"\""));
+                    result.setClimateimpacts_(result.getClimateimpacts_().replaceAll("\"", "\"\""));
                     result.setSectors_(result.getSectors_().replaceAll("\"", "\"\""));
                     result.setStoredAt(result.getStoredAt().replaceAll("\"", "\"\""));
                     result.setStoragetype(result.getStoragetype().replaceAll("\"", "\"\""));

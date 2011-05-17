@@ -12,6 +12,7 @@ public class AceSearchFormBean {
     private String[] aceitemtype;
     private String[] sector;
     private String[] element;
+    private String[] impact;
     private String[] countries;
     private String sortBy;
     private String anyOfThese;
@@ -24,6 +25,7 @@ public class AceSearchFormBean {
 
     private String conditionAdaptationSector;
     private String conditionAdaptationElement;
+    private String conditionClimateImpact;
 
     public String[] getAceitemtype() {
         return aceitemtype;
@@ -41,6 +43,10 @@ public class AceSearchFormBean {
         return element;
     }
 
+    public String[] getImpact() {
+        return impact;
+    }
+
     public String[] getCountries() {
         return countries;
     }
@@ -51,6 +57,10 @@ public class AceSearchFormBean {
 
     public void setElement(String[] element) {
         this.element = element;
+    }
+
+    public void setImpact(String[] impact) {
+        this.impact = impact;
     }
 
     public void setCountries(String[] countries) {
@@ -85,8 +95,16 @@ public class AceSearchFormBean {
         return conditionAdaptationElement;
     }
 
+    public String getConditionClimateImpact() {
+        return conditionClimateImpact;
+    }
+
     public void setConditionAdaptationElement(String conditionAdaptationElement) {
         this.conditionAdaptationElement = conditionAdaptationElement;
+    }
+
+    public void setConditionClimateImpact(String conditionClimateImpact) {
+        this.conditionClimateImpact = conditionClimateImpact;
     }
 
     public void setFreetextMode(String freetextMode$) {

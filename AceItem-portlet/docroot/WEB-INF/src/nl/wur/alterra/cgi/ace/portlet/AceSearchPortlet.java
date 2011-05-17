@@ -42,9 +42,12 @@ public class AceSearchPortlet extends MVCPortlet {
     private static final String SORTBY = "sortBy";
     private static final String CONDITION_ADAPTATION_SECTOR = "conditionAdaptationSector";
     private static final String CONDITION_ADAPTATION_ELEMENT = "conditionAdaptationElement";
+    private static final String CONDITION_CLIMATE_IMPACT = "conditionClimateImpact";
     private static final String SECTOR = "sector";
     private static final String COUNTRIES = "countries";
     private static final String ELEMENT = "element";
+    private static final String IMPACT = "impact";
+
 
     private static final String SEARCH_PARAMS = "searchParams";
     private static final String SEARCH_RESULTS = "searchResults";
@@ -102,8 +105,10 @@ public class AceSearchPortlet extends MVCPortlet {
         String[] sectors = requestParams.get(SECTOR);
         String[] countries = requestParams.get(COUNTRIES);
         String[] elements = requestParams.get(ELEMENT);
+        String[] impacts = requestParams.get(IMPACT);
         String[] conditionAdaptationSector = requestParams.get(CONDITION_ADAPTATION_SECTOR);
         String[] conditionAdaptationElement = requestParams.get(CONDITION_ADAPTATION_ELEMENT);
+        String[] conditionClimateImpact = requestParams.get(CONDITION_CLIMATE_IMPACT);
 
         String[] sortBys = requestParams.get(SORTBY);
         String sortBy = null;
@@ -117,24 +122,32 @@ public class AceSearchPortlet extends MVCPortlet {
         formBean.setAceitemtype(aceItemTypes);
         formBean.setSector(sectors);
         formBean.setElement(elements);
+        formBean.setImpact(impacts);
         formBean.setCountries(countries);
         formBean.setSortBy(sortBy);
 
         if (conditionAdaptationSector != null && conditionAdaptationSector[0].equalsIgnoreCase(OR_CONDITION)) {
             formBean.setConditionAdaptationSector(OR_CONDITION);
-        } else {
+        }
+        else {
             formBean.setConditionAdaptationSector(AND_CONDITION);
         }
 
-
         if (conditionAdaptationElement != null && conditionAdaptationElement[0].equalsIgnoreCase(OR_CONDITION)) {
             formBean.setConditionAdaptationElement(OR_CONDITION);
-        } else {
+        }
+        else {
             formBean.setConditionAdaptationElement(AND_CONDITION);
         }
 
-        request.setAttribute(SEARCH_PARAMS, formBean);
+        if (conditionClimateImpact != null && conditionClimateImpact[0].equalsIgnoreCase(OR_CONDITION)) {
+            formBean.setConditionClimateImpact(OR_CONDITION);
+        }
+        else {
+            formBean.setConditionClimateImpact(AND_CONDITION);
+        }
 
+        request.setAttribute(SEARCH_PARAMS, formBean);
 
         ACESearchEngine aceSearchEngine = new ACESearchEngine();
 
@@ -159,6 +172,7 @@ public class AceSearchPortlet extends MVCPortlet {
                      result.setSpatialValues(result.getSpatialValues().replaceAll("'", "\'"));
                      result.setSpatialLayer(result.getSpatialLayer().replaceAll("'", "\'"));
                      result.setElements_(result.getElements_().replaceAll("'", "\'"));
+                     result.setClimateimpacts_(result.getClimateimpacts_().replaceAll("'", "\'"));
                      result.setSectors_(result.getSectors_().replaceAll("'", "\'"));
                      result.setStoredAt(result.getStoredAt().replaceAll("'", "\'"));
                      result.setTextSearch(result.getTextSearch().replaceAll("'", "\'"));
@@ -170,6 +184,7 @@ public class AceSearchPortlet extends MVCPortlet {
                      result.setSpatialValues(result.getSpatialValues().replaceAll("\"", "\"\""));
                      result.setSpatialLayer(result.getSpatialLayer().replaceAll("\"", "\"\""));
                      result.setElements_(result.getElements_().replaceAll("\"", "\"\""));
+                     result.setClimateimpacts_(result.getClimateimpacts_().replaceAll("\"", "\"\""));
                      result.setSectors_(result.getSectors_().replaceAll("\"", "\"\""));
                      result.setStoredAt(result.getStoredAt().replaceAll("\"", "\"\""));
                      result.setStoragetype(result.getStoragetype().replaceAll("\"", "\"\""));

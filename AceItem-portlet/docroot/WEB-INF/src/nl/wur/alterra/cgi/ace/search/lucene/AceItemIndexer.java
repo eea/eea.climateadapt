@@ -1,7 +1,6 @@
 package nl.wur.alterra.cgi.ace.search.lucene;
 
 import nl.wur.alterra.cgi.ace.model.AceItem;
-import nl.wur.alterra.cgi.ace.model.impl.AceConstants;
 import org.apache.lucene.document.Document;
 import org.apache.lucene.document.Field;
 import org.apache.lucene.document.NumericField;
@@ -62,6 +61,7 @@ public class AceItemIndexer {
         String spatialValues = aceItem.getSpatialValues();
         String spatialLayers = aceItem.getSpatialLayer();
         String elements = aceItem.getElements_();
+        String impacts = aceItem.getClimateimpacts_();
         String sectors = aceItem.getSectors_();
         Date startDate = aceItem.getStartDate();
         String storedAt = aceItem.getStoredAt();
@@ -121,6 +121,14 @@ public class AceItemIndexer {
 
             for(int i = 0; i < elementValues.length; i++) {
                 document.add(new Field(ACEIndexConstant.IndexField.ELEMENT, elementValues[i], Field.Store.YES,Field.Index.NOT_ANALYZED));
+            }
+        }
+
+        if(impacts != null) {
+            String[] impactValues = impacts.split(";");
+
+            for(int i = 0; i < impactValues.length; i++) {
+                document.add(new Field(ACEIndexConstant.IndexField.IMPACT, impactValues[i], Field.Store.YES,Field.Index.NOT_ANALYZED));
             }
         }
 

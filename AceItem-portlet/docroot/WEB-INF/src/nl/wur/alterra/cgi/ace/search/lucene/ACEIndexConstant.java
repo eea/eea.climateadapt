@@ -97,6 +97,10 @@ public class ACEIndexConstant {
          */
         public static final String ELEMENT = "element";
         /**
+         * Impact.
+         */
+        public static final String IMPACT = "impact";
+        /**
          * Start date.
          */
         public static final String START_DATE = "startdate";

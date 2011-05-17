@@ -236,6 +236,18 @@ public class ACESearchEngine extends HitsOpenSearchImpl {
             }
 
             //
+            // handle impacts
+            //
+            String[] impacts = formBean.getImpact();
+            if ((impacts != null) && (impacts.length > 0)) {
+                rawQuery += " AND (";
+                for(String impact: impacts) {
+                    rawQuery += " (" + ACEIndexConstant.IndexField.IMPACT + ":" + impact + ") " + formBean.getConditionClimateImpact();
+                }
+                rawQuery =  rawQuery.substring(0, rawQuery.lastIndexOf(formBean.getConditionClimateImpact())) + " )";
+            }
+
+            //
             // handle countries
             //
             String[] countries = formBean.getCountries();
@@ -285,6 +297,7 @@ public class ACESearchEngine extends HitsOpenSearchImpl {
                 aceItem.setSpatialValues(document.get(ACEIndexConstant.IndexField.SPATIAL_VALUE));
                 aceItem.setSpatialLayer(document.get(ACEIndexConstant.IndexField.SPATIAL_LAYER));
                 aceItem.setElements_(document.get(ACEIndexConstant.IndexField.ELEMENT));
+                aceItem.setClimateimpacts_(document.get(ACEIndexConstant.IndexField.IMPACT));
                 aceItem.setSectors_(document.get(ACEIndexConstant.IndexField.SECTOR));
                 String startDate = document.get(ACEIndexConstant.IndexField.START_DATE);
                 if(startDate != null) {

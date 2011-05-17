@@ -8,7 +8,7 @@ jQuery(document).ready(function() {
 
     $j("#adaptation_sectors_btn").click(function() {
        showAdaptationSectorsPanel();
-    });
+    });	
 
     $j("#countries_btn").click(function() {
           showCountriesPanel();
@@ -20,6 +20,11 @@ jQuery(document).ready(function() {
     });	
 	showAdaptationElementsPanelOnLoad();
 
+    $j("#climate_impacts_btn").click(function() {
+       showClimateImpactsPanel();
+    });	
+	showClimateImpactsPanelOnLoad();	
+	
     $j("input[name=datainfo_type]:radio").change(function() {
         showDataInfoPanel();
     });
@@ -138,6 +143,23 @@ function showAdaptationElementsPanel() {
 }
 
 /**
+ *
+ * Shows/hides the climate impacts panel.
+ *
+ */
+function showClimateImpactsPanel() {
+    $j("#climate_impacts_container").slideToggle();
+    if ($j("#climate_impacts_btn").hasClass('collapsed_section')) {
+        $j("#climate_impacts_btn").removeClass('collapsed_section');
+        $j("#climate_impacts_btn").addClass('expanded_section');
+    } 
+	else {
+        $j("#climate_impacts_btn").removeClass('expanded_section');
+        $j("#climate_impacts_btn").addClass('collapsed_section');
+    }
+}
+
+/**
  * Expands elements panel if at least one of them is checked.
  */
 function showAdaptationElementsPanelOnLoad() {
@@ -152,6 +174,20 @@ function showAdaptationElementsPanelOnLoad() {
         $j("#adaptation_elements_btn").addClass('collapsed_section');    }
 }
 
+/**
+ * Expands impacts panel if at least one of them is checked.
+ */
+function showClimateImpactsPanelOnLoad() {
+    if ($j("input[name=impact]:checked").length > 0) {
+        jQuery('#climate_impacts_container').show(100);
+        $j("#climate_impacts_btn").removeClass('collapsed_section');
+        $j("#climate_impacts_btn").addClass('expanded_section');
+	} 
+	else {
+        jQuery('#climate_impacts_container').hide();
+        $j("#climate_impacts_btn").removeClass('expanded_section');
+        $j("#climate_impacts_btn").addClass('collapsed_section');    }
+}
 
 /**
  * Expands countries panel if at least one of them is checked.
@@ -193,21 +229,23 @@ function clearSearchForm() {
     $j("input[name=anyOfThese]").val("");
 
     var radiosConditionAdaptationSector = $j("input[name=conditionAdaptationSector]:radio");
-
     radiosConditionAdaptationSector.each(function() {
         $j(this).attr('checked', false);
     });
-
     radiosConditionAdaptationSector.filter('[value=AND]').attr('checked', true);
 
     var radiosConditionAdaptationElement = $j("input[name=conditionAdaptationElement]:radio");
-
     radiosConditionAdaptationElement.each(function() {
         $j(this).attr('checked', false);
     });
-
     radiosConditionAdaptationElement.filter('[value=AND]').attr('checked', true);
 
+    var radiosConditionClimateImpact = $j("input[name=conditionClimateImpact]:radio");
+    radiosConditionClimateImpact.each(function() {
+        $j(this).attr('checked', false);
+    });
+    radiosConditionClimateImpact.filter('[value=AND]').attr('checked', true);
+	
     $j("input[name=aceitemtype]:checkbox").each(function() {
         $j(this).attr('checked', false);
     });
@@ -223,6 +261,10 @@ function clearSearchForm() {
     $j("input[name=element]:checkbox").each(function() {
         $j(this).attr('checked', false);
     });
+	
+    $j("input[name=impact]:checkbox").each(function() {
+        $j(this).attr('checked', false);
+    });	
 	
     showDataInfoPanel();
 }
