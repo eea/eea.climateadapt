@@ -19,6 +19,10 @@ public enum AceItemClimateImpact {
      */
     FLOODING,
     /**
+     * Sea Level Rise
+     */
+    SEALEVELRISE,
+    /**
      * Droughts
      */
     DROUGHT,
