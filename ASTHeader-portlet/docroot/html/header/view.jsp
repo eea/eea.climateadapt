@@ -25,11 +25,12 @@
 %>
 <table border="0" cellpadding="5">
 <tr valign="middle">
-	<td>
-	<img src="<%= request.getContextPath() %>/images/bullit<%= step %>.png">
+	<td colspan="2" height="50px">&nbsp;
 	</td>
-	<td width="10px">
-	&nbsp;
+</tr>
+<tr valign="middle">
+	<td width="70px">
+	<img src="<%= request.getContextPath() %>/images/bullit<%= step %>.png">
 	</td>
 	<td style="font-size: 24px">
 	<%= headertext %>
