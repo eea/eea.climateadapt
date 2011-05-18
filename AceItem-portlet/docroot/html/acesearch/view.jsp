@@ -178,7 +178,7 @@ pageContext.setAttribute("countriesList", countriesList);
 					</div>
 					
 					<!-- freetext input -->
-                    <input type="text" class="text" name="anyOfThese" id="anyOfThese" value="<%= anyOfThese %>" style="margin-top:5px;" />
+                    <input type="text" class="text" name="anyOfThese" id="anyOfThese" size="60" value="<%= anyOfThese %>" style="margin-top:5px;" />
 
 				</div>
             </div>
