@@ -155,6 +155,9 @@ public class ACESearchEngine extends HitsOpenSearchImpl {
      * @return prepared query for free text
      */
     private String prepareFreetext(String keywords, String fuzziness, FreetextMode freetextMode) throws IOException {
+        if(freetextMode == null) {
+            freetextMode = FreetextMode.ANY;
+        }
         String result = "";
         TokenStream tokenStream = ACEAnalyzer.getAnalyzer().tokenStream(ACEIndexConstant.IndexField.ANY, new StringReader(keywords));
         TermAttribute termAttribute = (TermAttribute) tokenStream.getAttribute(TermAttribute.class);
