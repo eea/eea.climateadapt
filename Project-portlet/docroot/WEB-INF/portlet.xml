@@ -32,6 +32,8 @@
 			<portlet-mode>EDIT</portlet-mode>
 			<portlet-mode>HELP</portlet-mode>
 		</supports>
+		<!-- Resource Bundle -->
+		<resource-bundle>content.Language</resource-bundle>
 		<portlet-info>
 			<title>ProjectPortlet</title>
 			<short-title>ProjectPortlet</short-title>
@@ -73,6 +75,8 @@
 			<mime-type>text/html</mime-type>
 			<portlet-mode>VIEW</portlet-mode>
 		</supports>
+		<!-- Resource Bundle -->
+		<resource-bundle>content.Language</resource-bundle>
 		<portlet-info>
 			<title>ViewProjectPortlet</title>
 			<short-title>Project Detail</short-title>

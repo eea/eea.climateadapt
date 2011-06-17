@@ -53,11 +53,53 @@
 				
 		<aui:input name="funding"  />
 
-		<b>sectors</b><br />	
-		<input name="sectors" type="text" size="120" value="<%= project == null ? "" : project.getSectors() %>"><br /><br />
+	   <b>Sectors</b><br />
+       <%-- note : i18n file should always be in sync with AceItemSector enum --%>	
+		<c:forEach var="adaptationSector" items="<%= nl.wur.alterra.cgi.ace.model.impl.AceItemSector.values() %>" >
+			<div class="check">
+				<c:set var="aceItemSectors" value="<%= project == null ? "" : project.getSectors() %>" />
+				<c:set var="adaptationSectorMustBeChecked" value="false" />
+				<c:if test="${fn:indexOf(aceItemSectors, adaptationSector)>=0}">
+					<c:set var="adaptationSectorMustBeChecked" value="true" />
+				</c:if>	
+				<c:choose>
+					<c:when test="${adaptationSectorMustBeChecked}">
+						<input type="checkbox" name="chk_sectors_${adaptationSector}" id="chk_sectors_${adaptationSector}" value="${adaptationSector}" checked="checked" />
+					</c:when>
+					<c:otherwise>
+						<input type="checkbox" name="chk_sectors_${adaptationSector}" id="chk_sectors_${adaptationSector}" value="${adaptationSector}" />
+					</c:otherwise>
+				</c:choose>
+				<label for="chk_sectors_${adaptationSector}"><liferay-ui:message key="acesearch-sectors-lbl-${adaptationSector}" /></label>
+			</div>							
+		</c:forEach>
+        <br />
 
 		<aui:input name="spatiallevel"  />
-		<aui:input name="element"  />
+
+		
+		<b>Element(s)</b><br />
+		<%-- note : i18n file should always be in sync with AceItemElement enum --%>
+		<c:forEach var="adaptationElement" items="<%= nl.wur.alterra.cgi.ace.model.impl.AceItemElement.values() %>" >
+			<div class="check">
+				<c:set var="adaptationElementMustBeChecked" value="false" />
+				<c:set var="aceItemElements" value="<%= project == null ? "" : project.getElement() %>" />
+				<c:set var="adaptationElementMustBeChecked" value="false" />
+				<c:if test="${fn:indexOf(aceItemElements, adaptationElement)>=0}">
+					<c:set var="adaptationElementMustBeChecked" value="true" />
+				</c:if>	
+				<c:choose>
+					<c:when test="${adaptationElementMustBeChecked}">
+						<input type="checkbox" name="chk_elements_${adaptationElement}" id="chk_elements_${adaptationElement}" value="${adaptationElement}" checked="checked" />
+					</c:when>
+					<c:otherwise>
+						<input type="checkbox" name="chk_elements_${adaptationElement}" id="chk_elements_${adaptationElement}" value="${adaptationElement}" />
+					</c:otherwise>
+				</c:choose>
+				<label for="chk_elements_${adaptationElement}"><liferay-ui:message key="acesearch-elements-lbl-${adaptationElement}" /></label>
+			</div>							
+		</c:forEach>
+       <br />
 
 		<b>keywords</b><br />
 		<textarea name="keywords" rows=10 cols=100><%= project == null ? "" : project.getKeywords() %></textarea><br /><br />

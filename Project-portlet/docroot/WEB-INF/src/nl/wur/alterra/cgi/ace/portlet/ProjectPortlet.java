@@ -20,6 +20,8 @@ import javax.portlet.PortletPreferences;
 import javax.portlet.PortletRequest;
 
 import nl.wur.alterra.cgi.ace.model.Project;
+import nl.wur.alterra.cgi.ace.model.impl.AceItemElement;
+import nl.wur.alterra.cgi.ace.model.impl.AceItemSector;
 import nl.wur.alterra.cgi.ace.model.impl.ProjectImpl;
 import nl.wur.alterra.cgi.ace.service.ProjectLocalServiceUtil;
 
@@ -86,16 +88,33 @@ public class ProjectPortlet extends MVCPortlet {
 		project.setLead(ParamUtil.getString(request, "lead"));
 		project.setPartners(ParamUtil.getString(request, "partners"));
 		project.setFunding(ParamUtil.getString(request, "funding"));
-		String sectors = ParamUtil.getString(request, "sectors");
+		
+		String choosensectors = "";
+		for(AceItemSector aceitemsector : AceItemSector.values() ) {
 			
-		if( sectors.equalsIgnoreCase("All")) {
-			sectors = "A;B;C;D;F;H;I;M;W;";
+			if( ParamUtil.getString(request, "chk_sectors_" + aceitemsector.toString()) != null )  {
+				String s =  ParamUtil.getString(request, "chk_sectors_" + aceitemsector.toString());
+				if(s.equalsIgnoreCase(aceitemsector.toString())) {				
+					choosensectors +=  aceitemsector.toString() + ";";
+				}
+			}
 		}
+		project.setSectors(choosensectors);
 			
-		project.setSectors(sectors);
 		project.setSpatiallevel(ParamUtil.getString(request, "spatiallevel"));
 		project.setAbstracts(ParamUtil.getString(request, "abstracts"));
-		project.setElement(ParamUtil.getString(request, "element"));
+		
+		String choosenelements = "";
+		for(AceItemElement aceitemelement : AceItemElement.values() ) {
+			if( ParamUtil.getString(request, "chk_elements_" + aceitemelement) != null )  {
+				String e =  ParamUtil.getString(request, "chk_elements_" + aceitemelement);
+				if(e.equalsIgnoreCase(aceitemelement.toString())) {
+					choosenelements +=  aceitemelement.toString() + ";";
+				}
+			}
+		}		
+		project.setElement(choosenelements);
+		
 		project.setKeywords(ParamUtil.getString(request, "keywords"));
 		project.setWebsite(ParamUtil.getString(request, "website"));	
 		project.setDuration(ParamUtil.getString(request, "duration"));		

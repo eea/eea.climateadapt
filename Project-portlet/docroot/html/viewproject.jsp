@@ -50,55 +50,32 @@
 	 <% out.print( project.getPartners() ); %><br /><br />
 	 <b>Abstract</b><br />
 	 <% out.print( project.getAbstracts() ); %><br /><br />
+	 
 	 <b>Elements</b><br />
-	 <% 
-	 	String e = project.getElement() ; 
-
-		e = e.replace("A","M");
-		e = e.replace("M","Adaptation Measures and Adaptation Actions");
-		e = e.replace("O","Observations and Scenarios");
-		e = e.replace("V","Vulnerability Assessment");
-		e = e.replace("P","National Adaptation Plans and Strategies");
-		e = e.replace("E","EU Sector Policy");
-	 		
-		//e = e.replace("OBSERVATIONS","Observations and Scenarios");
-		//e = e.replace("VULNERABILITY","Vulnerability Assessment");
-		//e = e.replace("MEASUREACTION","Adaptation Measures and Adaptation Actions");
-		//e = e.replace("PLANSTRATEGY","National Adaptation Plans and Strategies");
-		//e = e.replace("EU_POLICY","EU Sector Policy");
-
-		out.print( e.replace(";","<br />") ); %><br /><br />
+	 <c:set var="aceItemElements" value="<%= project.getElement() %>" />
+     <c:forEach var="adaptationElement" items="<%= nl.wur.alterra.cgi.ace.model.impl.AceItemElement.values() %>" >
+		<c:if test="${fn:indexOf(aceItemElements, adaptationElement)>=0}">
+			<liferay-ui:message key="acesearch-elements-lbl-${adaptationElement}" /><br />
+		</c:if>	
+	 </c:forEach>
+	 <br />
+	 
 	 <b>Funding</b><br />
 	 <% out.print( project.getFunding() ); %><br /><br />
 	 <b>Keywords</b><br />
 	 <% out.print( project.getKeywords()); %><br /><br />
 	 <b>Spatial Level</b><br />
 	 <% out.print( project.getSpatiallevel() ); %><br /><br />
+
 	 <b>Sectors</b><br />
-	 <% 
-		String s = project.getSectors();
-		
-		s = s.replace("F","Financial");
-		s = s.replace("A","Agriculture and Forest");		
-		s = s.replace("B","Biodiversity");		
-		s = s.replace("C","Coastal areas");		
-		s = s.replace("D","Disaster Risk Reduction");		
-		s = s.replace("H","Health");		
-		s = s.replace("I","Infrastructure");		
-		s = s.replace("M","Marine and Fisheries");		
-		s = s.replace("W","Water management");
-		
-		//s = s.replace("AGRICULTURE","Agriculture and Forest");		
-		//s = s.replace("BIODIVERSITY","Biodiversity");		
-		//s = s.replace("COASTAL","Coastal areas");		
-		//s = s.replace("DISASTERRISKREDUCTION","Disaster Risk Reduction");		
-		//s = s.replace("FINANCIAL","Financial");		
-		//s = s.replace("HEALTH","Health");		
-		//s = s.replace("INFRASTRUCTURE","Infrastructure");		
-		//s = s.replace("MARINE","Marine and Fisheries");		
-		//s = s.replace("WATERMANAGEMENT","Water management");	
-		
-		out.print( s.replace(";","<br />") ); %><br /><br />	 
+	 <c:set var="aceItemSectors" value="<%= project.getSectors() %>" />
+     <c:forEach var="adaptationSector" items="<%= nl.wur.alterra.cgi.ace.model.impl.AceItemSector.values() %>" >
+		<c:if test="${fn:indexOf(aceItemSectors, adaptationSector)>=0}">
+			<liferay-ui:message key="acesearch-sectors-lbl-${adaptationSector}" /><br />
+		</c:if>	
+	 </c:forEach>
+	 <br />
+	 	 
 	 <b>Duration</b><br />
 	 <% out.print( project.getDuration() ); %><br /><br />
 	 <% if (url != null && url.trim().length() > 0)  {%>		
