@@ -56,50 +56,34 @@
 
 	 <b>Source</b><br />
 	 <% out.print( measure.getSource() ); %><br /><br />
-	 	 
-	 <b>Elements</b><br />
-	 <% 
-	 	String e = measure.getElements_() ; 
-
-		e = e.replace("A","M");
-		e = e.replace("M","Adaptation Measures and Adaptation Actions");
-		e = e.replace("O","Observations and Scenarios");
-		e = e.replace("V","Vulnerability Assessment");
-		e = e.replace("P","National Adaptation Plans and Strategies");
-		e = e.replace("E","EU Sector Policy");
-	 		
-		//e = e.replace("OBSERVATIONS","Observations and Scenarios");
-		//e = e.replace("VULNERABILITY","Vulnerability Assessment");
-		//e = e.replace("MEASUREACTION","Adaptation Measures and Adaptation Actions");
-		//e = e.replace("PLANSTRATEGY","National Adaptation Plans and Strategies");
-		//e = e.replace("EU_POLICY","EU Sector Policy");
-
-		out.print( e.replace(";","<br />") ); %><br /><br />
+   
 	 <b>Sectors</b><br />
-	 <% 
-		String s = measure.getSectors_();
-		
-		s = s.replace("F","Financial");
-		s = s.replace("A","Agriculture and Forest");		
-		s = s.replace("B","Biodiversity");		
-		s = s.replace("C","Coastal areas");		
-		s = s.replace("D","Disaster Risk Reduction");		
-		s = s.replace("H","Health");		
-		s = s.replace("I","Infrastructure");		
-		s = s.replace("M","Marine and Fisheries");		
-		s = s.replace("W","Water management");
-		
-		//s = s.replace("AGRICULTURE","Agriculture and Forest");		
-		//s = s.replace("BIODIVERSITY","Biodiversity");		
-		//s = s.replace("COASTAL","Coastal areas");		
-		//s = s.replace("DISASTERRISKREDUCTION","Disaster Risk Reduction");		
-		//s = s.replace("FINANCIAL","Financial");		
-		//s = s.replace("HEALTH","Health");		
-		//s = s.replace("INFRASTRUCTURE","Infrastructure");		
-		//s = s.replace("MARINE","Marine and Fisheries");		
-		//s = s.replace("WATERMANAGEMENT","Water management");	
-		
-		out.print( s.replace(";","<br />") ); %><br /><br />
+	 <c:set var="aceItemSectors" value="<%= measure.getSectors_() %>" />
+     <c:forEach var="adaptationSector" items="<%= nl.wur.alterra.cgi.ace.model.impl.AceItemSector.values() %>" >
+		<c:if test="${fn:indexOf(aceItemSectors, adaptationSector)>=0}">
+			<liferay-ui:message key="acesearch-sectors-lbl-${adaptationSector}" /><br />
+		</c:if>	
+	 </c:forEach>
+	 <br /><br />
+	 
+	 <b>Elements</b><br />
+	 <c:set var="aceItemElements" value="<%= measure.getElements_() %>" />
+     <c:forEach var="adaptationElement" items="<%= nl.wur.alterra.cgi.ace.model.impl.AceItemElement.values() %>" >
+		<c:if test="${fn:indexOf(aceItemElements, adaptationElement)>=0}">
+			<liferay-ui:message key="acesearch-elements-lbl-${adaptationElement}" /><br />
+		</c:if>	
+	 </c:forEach>
+	 <br /><br />
+	 
+	 <b>Climate impacts</b><br />
+	 <c:set var="aceItemClimateImpacts" value="<%= measure.getClimateimpacts_() %>" />
+     <c:forEach var="adaptationClimateImpact" items="<%= nl.wur.alterra.cgi.ace.model.impl.AceItemClimateImpact.values() %>" >
+		<c:if test="${fn:indexOf(aceItemClimateImpacts, adaptationClimateImpact)>=0}">
+			<liferay-ui:message key="aceitem-climateimpacts-lbl-${adaptationClimateImpact}" /><br />
+		</c:if>	
+	 </c:forEach>
+	 <br /><br />
+	 
 	 	<b>Keywords</b><br />
 	 <% out.print( measure.getKeywords()); %><br /><br />
 	 

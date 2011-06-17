@@ -8,6 +8,9 @@ import javax.portlet.PortletPreferences;
 import javax.portlet.PortletRequest;
 
 import nl.wur.alterra.cgi.ace.model.Measure;
+import nl.wur.alterra.cgi.ace.model.impl.AceItemClimateImpact;
+import nl.wur.alterra.cgi.ace.model.impl.AceItemElement;
+import nl.wur.alterra.cgi.ace.model.impl.AceItemSector;
 import nl.wur.alterra.cgi.ace.model.impl.MeasureImpl;
 import nl.wur.alterra.cgi.ace.service.MeasureLocalServiceUtil;
 
@@ -105,15 +108,50 @@ public class MeasurePortlet extends MVCPortlet {
 */	
 		measure.setLanguage(ParamUtil.getString(request, "language"));
 
-		String sectors = ParamUtil.getString(request, "sectors_");
+		//String sectors = ParamUtil.getString(request, "sectors_");
 		
-		if( sectors.equalsIgnoreCase("All")) {
-			sectors = "A;B;C;D;F;H;I;M;W;";
+		//if( sectors.equalsIgnoreCase("All")) {
+		//	sectors = "A;B;C;D;F;H;I;M;W;";
+		//}
+		
+		//measure.setSectors_(sectors);
+		//measure.setElements_(ParamUtil.getString(request, "elements_"));
+		//measure.setClimateimpacts_(ParamUtil.getString(request, "climateimpacts_"));
+		
+		String choosensectors = "";
+		for(AceItemSector aceitemsector : AceItemSector.values() ) {
+			
+			if( ParamUtil.getString(request, "chk_sectors_" + aceitemsector.toString()) != null )  {
+				String s =  ParamUtil.getString(request, "chk_sectors_" + aceitemsector.toString());
+				if(s.equalsIgnoreCase(aceitemsector.toString())) {				
+					choosensectors +=  aceitemsector.toString() + ";";
+				}
+			}
 		}
+		measure.setSectors_(choosensectors);
 		
-		measure.setSectors_(sectors);
-		measure.setElements_(ParamUtil.getString(request, "elements_"));
-		measure.setClimateimpacts_(ParamUtil.getString(request, "climateimpacts_"));
+		String choosenelements = "";
+		for(AceItemElement aceitemelement : AceItemElement.values() ) {
+			if( ParamUtil.getString(request, "chk_elements_" + aceitemelement) != null )  {
+				String e =  ParamUtil.getString(request, "chk_elements_" + aceitemelement);
+				if(e.equalsIgnoreCase(aceitemelement.toString())) {
+					choosenelements +=  aceitemelement.toString() + ";";
+				}
+			}
+		}		
+		measure.setElements_(choosenelements);
+		
+		String choosenclimateimpacts = "";
+		for(AceItemClimateImpact aceitemclimateimpact : AceItemClimateImpact.values() ) {
+			if( ParamUtil.getString(request, "chk_climateimpacts_" + aceitemclimateimpact) != null )  {
+				String e =  ParamUtil.getString(request, "chk_climateimpacts_" + aceitemclimateimpact);
+				if(e.equalsIgnoreCase(aceitemclimateimpact.toString())) {
+					choosenclimateimpacts +=  aceitemclimateimpact.toString() + ";";
+				}
+			}
+		}		
+		measure.setClimateimpacts_(choosenclimateimpacts);
+		
 		measure.setMao_type(ParamUtil.getString(request, "mao_type"));
 		measure.setSource(ParamUtil.getString(request, "source"));
 

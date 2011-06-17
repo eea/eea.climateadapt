@@ -27,7 +27,8 @@
 			<portlet-mode>VIEW</portlet-mode>
 			<portlet-mode>EDIT</portlet-mode>
 		</supports>
-		<resource-bundle>content/Language.properties</resource-bundle>
+		<!-- Resource Bundle -->
+		<resource-bundle>content.Language</resource-bundle>
 		<portlet-info>
 			<title>MeasurePortlet</title>
 			<short-title>MeasurePortlet</short-title>
@@ -72,6 +73,8 @@
 			<mime-type>text/html</mime-type>
 			<portlet-mode>VIEW</portlet-mode>
 		</supports>
+		<!-- Resource Bundle -->
+		<resource-bundle>content.Language</resource-bundle>
 		<portlet-info>
 			<title>ViewMeasurePortlet</title>
 			<short-title>ViewMeasurePortlet</short-title>
