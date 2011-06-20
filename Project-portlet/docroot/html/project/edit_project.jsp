@@ -31,6 +31,7 @@
 
 		<aui:input type="hidden" name="projectId" value='<%= project == null ? "" : project.getProjectId() %>'/>
 
+
 		<liferay-ui:error key="projectacronym-required" message="projectacronym-required" />		
 		<aui:input name="acronym"  />
 		
@@ -43,15 +44,21 @@
 		<input name="lead" type="text" size="120" value="<%= project == null ? "" : project.getLead() %>"><br /><br />
 
 
-		<b>partners</b><br />
-		<textarea name="partners" rows=10 cols=100><%= project == null ? "" : project.getPartners() %></textarea>
-		
-		<br /><br />
+		<b>website</b><br />	
+		<input name="website" type="text" size="120" value="<%= project == null ? "" : project.getWebsite() %>"><br /><br />
 
+	<div style="float: left; margin-right: 35px;">
 		<b>abstract</b><br />
-		<textarea name="abstracts" rows=10 cols=100><%= project == null ? "" : project.getAbstracts() %></textarea>
-				
-		<aui:input name="funding"  />
+		<textarea name="abstracts" rows=10 cols=100><%= project == null ? "" : project.getAbstracts() %></textarea><br /><br />
+
+		<b>partners</b><br />
+		<textarea name="partners" rows=5 cols=100><%= project == null ? "" : project.getPartners() %></textarea><br /><br />
+
+		<b>keywords</b><br />
+		<textarea name="keywords" rows=5 cols=100><%= project == null ? "" : project.getKeywords() %></textarea><br /><br />
+
+	 </div>
+	<div style="float: left;">	
 
 	   <b>Sectors</b><br />
        <%-- note : i18n file should always be in sync with AceItemSector enum --%>	
@@ -75,9 +82,6 @@
 		</c:forEach>
         <br />
 
-		<aui:input name="spatiallevel"  />
-
-		
 		<b>Element(s)</b><br />
 		<%-- note : i18n file should always be in sync with AceItemElement enum --%>
 		<c:forEach var="adaptationElement" items="<%= nl.wur.alterra.cgi.ace.model.impl.AceItemElement.values() %>" >
@@ -100,15 +104,13 @@
 			</div>							
 		</c:forEach>
        <br />
+				
+		<aui:input name="funding"  />
 
-		<b>keywords</b><br />
-		<textarea name="keywords" rows=10 cols=100><%= project == null ? "" : project.getKeywords() %></textarea><br /><br />
-
-		<b>website</b><br />	
-		<input name="website" type="text" size="120" value="<%= project == null ? "" : project.getWebsite() %>"><br /><br />
+		<aui:input name="spatiallevel"  />
 		
 		<aui:input name="duration"  />
-
+	 </div>
 	</aui:fieldset>
 
 	<aui:button-row>

@@ -55,6 +55,12 @@
 
 <%
 	String acronymLink = "<a href='/projects1?ace_project_id=" + project.getProjectId() + "'>" +  project.getAcronym() + "</a>" ;
+
+	  String sectors = project.getSectors() ;
+	  sectors = sectors.replace(";","; ");	
+	  
+	  String elements = project.getElement() ;
+	  elements = elements.replace(";","; ");	
 %>      
       
 		<liferay-ui:search-container-column-text
@@ -74,12 +80,12 @@
 
 		<liferay-ui:search-container-column-text
 			name="sectors"
-			property="sectors"
+			value="<%= sectors %>"
 		/>
 
 		<liferay-ui:search-container-column-text
 			name="elements"
-			property="element"
+			value="<%= elements %>"
 		/>
 
 		<liferay-ui:search-container-column-jsp
