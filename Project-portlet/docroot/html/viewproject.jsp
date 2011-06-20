@@ -46,7 +46,9 @@
 	 <H1><% out.print( project.getAcronym() ); %>: <% out.print( project.getTitle() ); %></H1>
 	 <b>Abstract</b><br />
 	 <% out.print( project.getAbstracts() ); %><br /><br />
-	<div style="float: left; margin-right: 15px;">
+	 
+	<table border="0" width="100%"><tr>
+	<td width="50%" valign="top"><div style="margin-right: 35px;">
  	 <b>Lead</b><br />
 	 <% out.print( project.getLead() ); %><br /><br />
 	 <b>Partners</b><br />
@@ -68,8 +70,8 @@
 	 </c:forEach>
 	 <br />
 
-	 </div>
-	<div style="float: left;">		 
+	 </div></td>
+	<td width="50%" valign="top"><div>		 
 	 <b>Funding</b><br />
 	 <% out.print( project.getFunding() ); %><br /><br />
 	 <b>Keywords</b><br />
@@ -83,7 +85,8 @@
 		 <b><%= websitelabel %></b><br />
 		 <%= url %><br /><br />
 	 <% } %>
-	</div>
+	 </div></td></tr>
+      </table>
    </c:when>
    <c:otherwise>
      <H1>No Project selected</H1>
