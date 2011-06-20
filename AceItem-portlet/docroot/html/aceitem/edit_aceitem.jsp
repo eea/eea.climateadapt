@@ -35,17 +35,27 @@
 		<b>name</b><br />	
 		<input name="name" type="text" size="120" value="<%= aceitem == null ? "" : aceitem.getName() %>"><br /><br />
 
-		<b>description</b><br />
-		<textarea name="description" rows=10 cols=100><%= aceitem == null ? "" : aceitem.getDescription() %></textarea>
-		
-		<liferay-ui:error key="aceitemdatatype-required" message="aceitemdatatype-required" />		
-		<aui:input name="datatype" />
 		
 		<liferay-ui:error key="aceitemstoredat-required" message="aceitemstoredat-required" />
 		<b>website</b><br />	
 		<input name="storedAt" type="text" size="120" value="<%= aceitem == null ? "" : aceitem.getStoredAt() %>"><br /><br />
+
+
+	<div style="float: left; margin-right: 35px;">
+		<liferay-ui:error key="aceitemdatatype-required" message="aceitemdatatype-required" />		
+		<aui:input name="datatype" />
 		
-		<b>storagetype</b><br />	
+		<b>description</b><br />
+		<textarea name="description" rows=10 cols=100><%= aceitem == null ? "" : aceitem.getDescription() %></textarea><br /><br />
+
+		<b>textsearch</b><br />
+		<textarea name="textSearch" rows=15 cols=100><%= aceitem == null ? "" : aceitem.getTextSearch() %></textarea><br /><br />
+
+            <b>keywords</b><br />	
+		<textarea name="keyword" rows=5 cols=100><%= aceitem == null ? "" : aceitem.getKeyword() %></textarea><br /><br />
+	 </div>
+	<div style="float: left;">			
+		<br><b>storagetype</b><br />	
 		<input name="storagetype" type="text" size="65" READONLY style="color:grey" value="<%= aceitem == null ? "URL" : aceitem.getStoragetype() %>"><br /><br />
 
 		<b>Sectors</b><br />
@@ -117,18 +127,12 @@
 			</div>							
 		</c:forEach>
        <br />
-       		
-		<b>textsearch</b><br />
-		<textarea name="textSearch" rows=15 cols=100><%= aceitem == null ? "" : aceitem.getTextSearch() %></textarea>
-		
-		<b>keyword</b><br />	
-		<input name="keyword" type="text" size="120" value="<%= aceitem == null ? "" : aceitem.getKeyword() %>"><br /><br />
-		
 		<b>spatialLayer</b><br />	
-		<input name="spatialLayer" type="text" size="120" value="<%= aceitem == null ? "" : aceitem.getSpatialLayer() %>"><br /><br />
+		<input name="spatialLayer" type="text" size="65" value="<%= aceitem == null ? "" : aceitem.getSpatialLayer() %>"><br /><br />
 		
 		<b>spatialValues</b><br />	
-		<input name="spatialValues" type="text" size="120" value="<%= aceitem == null ? "" : aceitem.getSpatialValues() %>"><br /><br />
+		<input name="spatialValues" type="text" size="65" value="<%= aceitem == null ? "" : aceitem.getSpatialValues() %>"><br /><br />
+       </div>		
 		
 		<!--  a u i :input name="startdate" / >
 		
