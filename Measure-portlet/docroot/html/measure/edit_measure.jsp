@@ -31,51 +31,54 @@
 		<b>name</b><br />	
 		<input name="name" type="text" size="120" value="<%= measure == null ? "" : measure.getName() %>"><br /><br />
 
+		<b>website</b><br />	
+		<input name="website" type="text" size="120" value="<%= measure == null ? "" : measure.getWebsite() %>"><br /><br />
+
+	<div style="float: left; margin-right: 35px;">		
 		<b>description</b><br />
 		<textarea name="description" rows=10 cols=100><%= measure == null ? "" : measure.getDescription() %></textarea>
 		<br /><br />
-				
-		<b>implementationtype</b><br />
-		<textarea name="implementationtype" rows=10 cols=100><%= measure == null ? "" : measure.getImplementationtype() %></textarea>
+
+		<b>legal aspects</b><br />
+		<textarea name="legalaspects" rows=5 cols=100><%= measure == null ? "" : measure.getLegalaspects() %></textarea>
+		<br /><br />
+
+		<b>stakeholder participation</b><br />
+		<textarea name="stakeholderparticipation" rows=5 cols=100><%= measure == null ? "" : measure.getStakeholderparticipation() %></textarea>
+		<br /><br />
+
+		<b>contact</b><br />
+		<textarea name="contact" rows=5 cols=100><%= measure == null ? "" : measure.getContact() %></textarea>
+		<br /><br />
+
+		<b>succes limitations</b><br />
+		<textarea name="succeslimitations" rows=5 cols=100><%= measure == null ? "" : measure.getSucceslimitations() %></textarea>
+		<br /><br />
+		<b>cost / benefit</b><br />
+		<textarea name="costbenefit" rows=5 cols=100><%= measure == null ? "" : measure.getCostbenefit() %></textarea>
+		<br /><br />
+			
+		<b>keywords</b><br />	
+		<textarea name="keywords"  rows=5 cols=100><%= measure == null ? "" : measure.getKeywords() %></textarea>
+		<br /><br />
+	
+
+	 </div>
+	<div style="float: left;">	
+
+		<b>implementationtype</b><br />	
+		<input name="implementationtype" type="text" size="65" value="<%= measure == null ? "" : measure.getImplementationtype() %>"><br /><br />
 		
 		<aui:input name="implementationtime" />
 		
 		<aui:input name="lifetime" />
 		
-		<b>spatiallayer</b><br />	
-		<input name="spatiallayer" type="text" size="120" value="<%= measure == null ? "" : measure.getSpatiallayer() %>"><br /><br />
+		<b>language</b><br />	
+		<input name="language" type="text" size="24" maxlength="24" value="<%= measure == null ? "en_UK" : measure.getImplementationtype() %>"><br /><br />
 		
-
-		<b>spatialvalues</b><br />	
-		<input name="spatialvalues" type="text" size="120" value="<%= measure == null ? "" : measure.getSpatialvalues() %>"><br /><br />
-
-		<b>legal aspects</b><br />
-		<textarea name="legalaspects" rows=10 cols=100><%= measure == null ? "" : measure.getLegalaspects() %></textarea>
-		<br /><br />
-
-		<b>stakeholder participation</b><br />
-		<textarea name="stakeholderparticipation" rows=10 cols=100><%= measure == null ? "" : measure.getStakeholderparticipation() %></textarea>
-		<br /><br />
-
-		<b>contact</b><br />
-		<textarea name="contact" rows=10 cols=100><%= measure == null ? "" : measure.getContact() %></textarea>
-		<br /><br />
-
-		<b>succes limitations</b><br />
-		<textarea name="succeslimitations" rows=10 cols=100><%= measure == null ? "" : measure.getSucceslimitations() %></textarea>
-		<br /><br />
-
-		<b>website</b><br />	
-		<input name="website" type="text" size="120" value="<%= measure == null ? "" : measure.getWebsite() %>"><br /><br />
+		<aui:input name="spatiallayer" />
 		
-		<b>cost / benefit</b><br />
-		<textarea name="costbenefit" rows=10 cols=100><%= measure == null ? "" : measure.getCostbenefit() %></textarea>
-		<br /><br />
-			
-		<b>keywords</b><br />	
-		<input name="keywords" type="text" size="120" value="<%= measure == null ? "" : measure.getKeywords() %>"><br /><br />
-		
-		<aui:input name="language"  />	
+		<aui:input name="spatialvalues"  />
 
 	   <b>Sectors</b><br />
        <%-- note : i18n file should always be in sync with AceItemSector enum --%>	
@@ -149,13 +152,14 @@
 		<input name="mao_type" type="text" size="5" value="<%= measure == null ? "" : measure.getMao_type() %>"><br /><br />
 		
 		<b>Source)</b><br />
-		<input name="source" type="text" size="100" value="<%= measure == null ? "" : measure.getSource() %>"><br /><br />
-		
+		<input name="source" type="text" size="65" value="<%= measure == null ? "" : measure.getSource() %>"><br /><br />
 		<!--  a u i :input name="startdate" / >
 		
 		< a u  i:input name="enddate" / >
 		
 		< a u i  :input name="publicationdate" / -->
+		</div>		
+		
 	</aui:fieldset>
 
 	<aui:button-row>

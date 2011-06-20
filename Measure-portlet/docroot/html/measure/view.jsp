@@ -68,6 +68,12 @@
 	if (desc.length() > 300) {
 		desc = desc.substring(0,299) + " ..." ;
 	}
+	
+	String sectors = measure.getSectors_() ;
+	sectors = sectors.replace(";","; ");
+	
+	String impacts = measure.getClimateimpacts_() ;
+	impacts = impacts.replace(";","; ");	
 %>      
       
 		<liferay-ui:search-container-column-text
@@ -87,17 +93,17 @@
 
 		<liferay-ui:search-container-column-text
 			name="sectors_" 
-			property="sectors_"	
+			value="<%= sectors %>"
 		/>  
+
+		<liferay-ui:search-container-column-text
+			name="climateimpacts_"
+			value="<%= impacts %>"
+		/>
 
 		<liferay-ui:search-container-column-text
 			name="type"
 			property="mao_type"
-		/>
-
-		<liferay-ui:search-container-column-text
-			name="climateimpacts_"
-			property="climateimpacts_"
 		/>
 
 		<liferay-ui:search-container-column-jsp

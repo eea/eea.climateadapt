@@ -53,9 +53,13 @@
 	 <% out.print( measure.getDescription() ); %><br /><br />
 	 <b>Contact</b><br />
 	 <% out.print( measure.getContact() ); %><br /><br />	 
-
-	 <b>Source</b><br />
-	 <% out.print( measure.getSource() ); %><br /><br />
+		 
+		<% if (url != null && url.trim().length() > 0)  {%>		
+			 <b><%= websitelabel %></b><br />
+			 <%= url %><br /><br />
+		<% } %>
+	<table border="0" width="100%"><tr>
+	<td width="50%" valign="top"><div style="margin-right: 35px;">
    
 	 <b>Sectors</b><br />
 	 <c:set var="aceItemSectors" value="<%= measure.getSectors_() %>" />
@@ -84,9 +88,20 @@
 	 </c:forEach>
 	 <br /><br />
 	 
+	 <b>Source</b><br />
+	 <% out.print( measure.getSource() ); %><br /><br />
+	 
 	 	<b>Keywords</b><br />
 	 <% out.print( measure.getKeywords()); %><br /><br />
 	 
+	 <b>Spatial layer</b><br />
+	 <% out.print( measure.getSpatiallayer() ); %><br /><br />
+	 
+	 <b>Spatial values</b><br />
+	 <% out.print( measure.getSpatialvalues() ); %><br /><br />
+
+	 </div></td>
+	<td width="50%" valign="top"><div>		 
 	 
 	 <b>Implementationtype</b><br />
 	 <% out.print( measure.getImplementationtype() ); %><br /><br />
@@ -96,12 +111,6 @@
 	 
 	 <b>Lifetime</b><br />
 	 <% out.print( measure.getLifetime() ); %><br /><br />
-	 
-	 <b>Spatial layer</b><br />
-	 <% out.print( measure.getSpatiallayer() ); %><br /><br />
-	 
-	 <b>Spatial values</b><br />
-	 <% out.print( measure.getSpatialvalues() ); %><br /><br />
 	 
 	 <b>Legal aspects</b><br />
 	 <% out.print( measure.getLegalaspects() ); %><br /><br />
@@ -114,11 +123,9 @@
 	 
 	 <b>Cost benefit</b><br />
 	 <% out.print( measure.getCostbenefit() ); %><br /><br />	
-	 
-		<% if (url != null && url.trim().length() > 0)  {%>		
-			 <b><%= websitelabel %></b><br />
-			 <%= url %><br /><br />
-		<% } %>
+
+	 </div></td></tr>
+      </table>
    </c:when>
    <c:otherwise>
      <H1>No Measure selected</H1>
