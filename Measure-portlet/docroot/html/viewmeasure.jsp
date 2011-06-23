@@ -40,7 +40,7 @@
 		}
 		
 		if( measure.getMao_type().equalsIgnoreCase("A")) {
-			type = "Action" ;
+			type = "Good practice" ;
 		}
 	}
 	

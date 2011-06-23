@@ -147,9 +147,21 @@
 			</div>							
 		</c:forEach>
        <br />
+
+<%
+		String m_checked = "";
+		String a_checked = "";
 		
-		<b>M (measure) or A (action)</b><br />
-		<input name="mao_type" type="text" size="5" value="<%= measure == null ? "" : measure.getMao_type() %>"><br /><br />
+		if(measure != null && measure.getMao_type().equalsIgnoreCase("A") ) {
+			a_checked = "checked";
+		}
+		else {
+			m_checked = "checked";
+		}
+%>
+		<b>Type</b><br />
+		<input name="mao_type" type="radio" value="M" <%= m_checked %>>Measure&nbsp;&nbsp;&nbsp;
+		<input name="mao_type" type="radio" value="A" <%= a_checked %>>Good practice<br /><br />
 		
 		<b>Source)</b><br />
 		<input name="source" type="text" size="65" value="<%= measure == null ? "" : measure.getSource() %>"><br /><br />

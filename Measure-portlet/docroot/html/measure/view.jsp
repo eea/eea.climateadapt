@@ -74,6 +74,11 @@
 	
 	String impacts = measure.getClimateimpacts_() ;
 	impacts = impacts.replace(";","; ");	
+	
+	String type = "Measure";
+	if( measure.getMao_type().equalsIgnoreCase("A")) {
+		type = "Good practice" ;
+	}
 %>      
       
 		<liferay-ui:search-container-column-text
@@ -103,7 +108,7 @@
 
 		<liferay-ui:search-container-column-text
 			name="type"
-			property="mao_type"
+			value="<%= type %>"
 		/>
 
 		<liferay-ui:search-container-column-jsp
