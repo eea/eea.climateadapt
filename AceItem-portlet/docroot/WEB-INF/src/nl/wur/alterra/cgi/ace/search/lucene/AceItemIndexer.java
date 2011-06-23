@@ -103,8 +103,21 @@ public class AceItemIndexer {
             document.add(new Field(ACEIndexConstant.IndexField.NAME_SORT, name, Field.Store.NO,Field.Index.NOT_ANALYZED));
         }
 
+/*		old:
+  
         if(spatialValues != null) {
             document.add(new Field(ACEIndexConstant.IndexField.SPATIAL_VALUE, spatialValues, Field.Store.YES,Field.Index.NOT_ANALYZED));
+        }        
+
+        new:
+*/
+        if(spatialValues != null) {
+            String[] spatialValuesValues = spatialValues.split(";");
+
+            for(int i = 0; i < spatialValuesValues.length; i++) {
+                // for searching
+                document.add(new Field(ACEIndexConstant.IndexField.SPATIAL_VALUE, spatialValuesValues[i].trim(), Field.Store.YES,Field.Index.NOT_ANALYZED));
+            }
         }
 
         if(spatialLayers != null) {
@@ -120,7 +133,7 @@ public class AceItemIndexer {
             String[] elementValues = elements.split(";");
 
             for(int i = 0; i < elementValues.length; i++) {
-                document.add(new Field(ACEIndexConstant.IndexField.ELEMENT, elementValues[i], Field.Store.YES,Field.Index.NOT_ANALYZED));
+                document.add(new Field(ACEIndexConstant.IndexField.ELEMENT, elementValues[i].trim(), Field.Store.YES,Field.Index.NOT_ANALYZED));
             }
         }
 
@@ -128,7 +141,7 @@ public class AceItemIndexer {
             String[] impactValues = impacts.split(";");
 
             for(int i = 0; i < impactValues.length; i++) {
-                document.add(new Field(ACEIndexConstant.IndexField.IMPACT, impactValues[i], Field.Store.YES,Field.Index.NOT_ANALYZED));
+                document.add(new Field(ACEIndexConstant.IndexField.IMPACT, impactValues[i].trim(), Field.Store.YES,Field.Index.NOT_ANALYZED));
             }
         }
 
@@ -137,7 +150,7 @@ public class AceItemIndexer {
 
             for(int i = 0; i < sectorValues.length; i++) {
                 // for searching
-                document.add(new Field(ACEIndexConstant.IndexField.SECTOR, sectorValues[i], Field.Store.YES,Field.Index.NOT_ANALYZED));
+                document.add(new Field(ACEIndexConstant.IndexField.SECTOR, sectorValues[i].trim(), Field.Store.YES,Field.Index.NOT_ANALYZED));
             }
         }
 
