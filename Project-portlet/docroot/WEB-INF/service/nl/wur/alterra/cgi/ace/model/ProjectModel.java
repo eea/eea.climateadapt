@@ -307,6 +307,34 @@ public interface ProjectModel extends BaseModel<Project> {
 	public void setDuration(String duration);
 
 	/**
+	 * Gets the rating of this project.
+	 *
+	 * @return the rating of this project
+	 */
+	public long getRating();
+
+	/**
+	 * Sets the rating of this project.
+	 *
+	 * @param rating the rating of this project
+	 */
+	public void setRating(long rating);
+
+	/**
+	 * Gets the importance of this project.
+	 *
+	 * @return the importance of this project
+	 */
+	public long getImportance();
+
+	/**
+	 * Sets the importance of this project.
+	 *
+	 * @param importance the importance of this project
+	 */
+	public void setImportance(long importance);
+
+	/**
 	 * Gets a copy of this project as an escaped model instance by wrapping it with an {@link com.liferay.portal.kernel.bean.AutoEscapeBeanHandler}.
 	 *
 	 * @return the escaped model instance

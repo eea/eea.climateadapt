@@ -30,7 +30,7 @@ import java.util.List;
  * @author Brian Wing Shun Chan
  */
 public class ClpSerializer {
-	public static final String SERVLET_CONTEXT_NAME = "project-portlet";
+	public static final String SERVLET_CONTEXT_NAME = "Project-portlet";
 
 	public static void setClassLoader(ClassLoader classLoader) {
 		_classLoader = classLoader;
@@ -174,6 +174,20 @@ public class ClpSerializer {
 					String value16 = oldCplModel.getDuration();
 
 					method16.invoke(newModel, value16);
+
+					Method method17 = newModelClass.getMethod("setRating",
+							new Class[] { Long.TYPE });
+
+					Long value17 = new Long(oldCplModel.getRating());
+
+					method17.invoke(newModel, value17);
+
+					Method method18 = newModelClass.getMethod("setImportance",
+							new Class[] { Long.TYPE });
+
+					Long value18 = new Long(oldCplModel.getImportance());
+
+					method18.invoke(newModel, value18);
 
 					return newModel;
 				}
@@ -342,6 +356,20 @@ public class ClpSerializer {
 							(Object[])null);
 
 					newModel.setDuration(value16);
+
+					Method method17 = oldModelClass.getMethod("getRating");
+
+					Long value17 = (Long)method17.invoke(oldModel,
+							(Object[])null);
+
+					newModel.setRating(value17);
+
+					Method method18 = oldModelClass.getMethod("getImportance");
+
+					Long value18 = (Long)method18.invoke(oldModel,
+							(Object[])null);
+
+					newModel.setImportance(value18);
 
 					return newModel;
 				}

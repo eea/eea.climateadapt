@@ -19,5 +19,7 @@
 		<field name="keywords" type="String" />
 		<field name="website" type="String" />
 		<field name="duration" type="String" />
+		<field name="rating" type="long" />
+		<field name="importance" type="long" />
 	</model>
 </model-hints>

@@ -24,5 +24,7 @@
 		<property name="keywords" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="website" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="duration" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="rating" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="importance" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 	</class>
 </hibernate-mapping>

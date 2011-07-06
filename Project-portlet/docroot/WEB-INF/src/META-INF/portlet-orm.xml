@@ -30,6 +30,8 @@
 			<basic name="keywords" />
 			<basic name="website" />
 			<basic name="duration" />
+			<basic name="rating" />
+			<basic name="importance" />
 			<transient name="primaryKey" />
 		</attributes>
 	</mapped-superclass>

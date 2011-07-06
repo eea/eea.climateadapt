@@ -179,6 +179,22 @@ public class ProjectClp extends BaseModelImpl<Project> implements Project {
 		_duration = duration;
 	}
 
+	public long getRating() {
+		return _rating;
+	}
+
+	public void setRating(long rating) {
+		_rating = rating;
+	}
+
+	public long getImportance() {
+		return _importance;
+	}
+
+	public void setImportance(long importance) {
+		_importance = importance;
+	}
+
 	public Project toEscapedModel() {
 		if (isEscapedModel()) {
 			return this;
@@ -209,6 +225,8 @@ public class ProjectClp extends BaseModelImpl<Project> implements Project {
 		clone.setKeywords(getKeywords());
 		clone.setWebsite(getWebsite());
 		clone.setDuration(getDuration());
+		clone.setRating(getRating());
+		clone.setImportance(getImportance());
 
 		return clone;
 	}
@@ -254,7 +272,7 @@ public class ProjectClp extends BaseModelImpl<Project> implements Project {
 	}
 
 	public String toString() {
-		StringBundler sb = new StringBundler(35);
+		StringBundler sb = new StringBundler(39);
 
 		sb.append("{projectId=");
 		sb.append(getProjectId());
@@ -290,13 +308,17 @@ public class ProjectClp extends BaseModelImpl<Project> implements Project {
 		sb.append(getWebsite());
 		sb.append(", duration=");
 		sb.append(getDuration());
+		sb.append(", rating=");
+		sb.append(getRating());
+		sb.append(", importance=");
+		sb.append(getImportance());
 		sb.append("}");
 
 		return sb.toString();
 	}
 
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(55);
+		StringBundler sb = new StringBundler(61);
 
 		sb.append("<model><model-name>");
 		sb.append("nl.wur.alterra.cgi.ace.model.Project");
@@ -370,6 +392,14 @@ public class ProjectClp extends BaseModelImpl<Project> implements Project {
 			"<column><column-name>duration</column-name><column-value><![CDATA[");
 		sb.append(getDuration());
 		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>rating</column-name><column-value><![CDATA[");
+		sb.append(getRating());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>importance</column-name><column-value><![CDATA[");
+		sb.append(getImportance());
+		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");
 
@@ -393,4 +423,6 @@ public class ProjectClp extends BaseModelImpl<Project> implements Project {
 	private String _keywords;
 	private String _website;
 	private String _duration;
+	private long _rating;
+	private long _importance;
 }

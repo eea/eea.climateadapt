@@ -117,7 +117,19 @@ public class ProjectPortlet extends MVCPortlet {
 		
 		project.setKeywords(ParamUtil.getString(request, "keywords"));
 		project.setWebsite(ParamUtil.getString(request, "website"));	
-		project.setDuration(ParamUtil.getString(request, "duration"));		
+		project.setDuration(ParamUtil.getString(request, "duration"));
+		
+		String importance = ParamUtil.getString(request, "chk_importance");
+		if(project.getImportance() == 1) {
+			project.setImportance( project.getImportance()-1 );
+			project.setRating( project.getRating() - 100);
+
+		}
+		if( importance != null && importance.equalsIgnoreCase("1")) {
+			project.setImportance(project.getImportance()+1);
+			project.setRating( project.getRating() + 100);
+		}
+		
 		project.setCompanyId(themeDisplay.getCompanyId());
 		project.setGroupId(themeDisplay.getScopeGroupId());
 

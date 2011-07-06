@@ -57,6 +57,8 @@
 		<b>keywords</b><br />
 		<textarea name="keywords" rows=5 cols=100><%= project == null ? "" : project.getKeywords() %></textarea><br /><br />
 
+		<input type="checkbox" name="chk_importance" id="chk_importance" value="1" <% if (project != null) { out.print( project.getImportance() == 1 ? "checked" : "") ; } %> />
+		<b>High importance</b><br />
 	 </div>
 	<div style="float: left;">	
 
@@ -86,7 +88,6 @@
 		<%-- note : i18n file should always be in sync with AceItemElement enum --%>
 		<c:forEach var="adaptationElement" items="<%= nl.wur.alterra.cgi.ace.model.impl.AceItemElement.values() %>" >
 			<div class="check">
-				<c:set var="adaptationElementMustBeChecked" value="false" />
 				<c:set var="aceItemElements" value="<%= project == null ? "" : project.getElement() %>" />
 				<c:set var="adaptationElementMustBeChecked" value="false" />
 				<c:if test="${fn:indexOf(aceItemElements, adaptationElement)>=0}">
@@ -104,7 +105,7 @@
 			</div>							
 		</c:forEach>
        <br />
-				
+						
 		<aui:input name="funding"  />
 
 		<aui:input name="spatiallevel"  />

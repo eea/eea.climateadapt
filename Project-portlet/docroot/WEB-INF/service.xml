@@ -29,6 +29,8 @@
 		<column name="keywords" type="String" />
 		<column name="website" type="String" />
 		<column name="duration" type="String" />
+		<column name="rating" type="long" />
+		<column name="importance" type="long" />
 		
 		<!-- Sort order -->
 		<order by="asc">

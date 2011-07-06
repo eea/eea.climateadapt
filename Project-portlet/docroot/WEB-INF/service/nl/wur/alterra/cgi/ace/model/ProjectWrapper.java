@@ -172,6 +172,22 @@ public class ProjectWrapper implements Project {
 		_project.setDuration(duration);
 	}
 
+	public long getRating() {
+		return _project.getRating();
+	}
+
+	public void setRating(long rating) {
+		_project.setRating(rating);
+	}
+
+	public long getImportance() {
+		return _project.getImportance();
+	}
+
+	public void setImportance(long importance) {
+		_project.setImportance(importance);
+	}
+
 	public nl.wur.alterra.cgi.ace.model.Project toEscapedModel() {
 		return _project.toEscapedModel();
 	}

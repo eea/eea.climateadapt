@@ -15,5 +15,7 @@ create table Ace_Project (
 	element VARCHAR(75) null,
 	keywords VARCHAR(75) null,
 	website VARCHAR(75) null,
-	duration VARCHAR(75) null
+	duration VARCHAR(75) null,
+	rating LONG,
+	importance LONG
 );
