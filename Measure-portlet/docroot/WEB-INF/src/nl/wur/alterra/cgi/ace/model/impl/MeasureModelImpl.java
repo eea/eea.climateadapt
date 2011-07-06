@@ -81,9 +81,11 @@ public class MeasureModelImpl extends BaseModelImpl<Measure>
 			{ "elements_", new Integer(Types.VARCHAR) },
 			{ "climateimpacts_", new Integer(Types.VARCHAR) },
 			{ "mao_type", new Integer(Types.VARCHAR) },
-			{ "source", new Integer(Types.VARCHAR) }
+			{ "source", new Integer(Types.VARCHAR) },
+			{ "rating", new Integer(Types.BIGINT) },
+			{ "importance", new Integer(Types.BIGINT) }
 		};
-	public static final String TABLE_SQL_CREATE = "create table Ace_Measure (measureId LONG not null primary key,companyId LONG,groupId LONG,name VARCHAR(75) null,description VARCHAR(75) null,implementationtype VARCHAR(75) null,implementationtime VARCHAR(75) null,lifetime VARCHAR(75) null,spatiallayer VARCHAR(75) null,spatialvalues VARCHAR(75) null,legalaspects VARCHAR(75) null,stakeholderparticipation VARCHAR(75) null,contact VARCHAR(75) null,succeslimitations VARCHAR(75) null,website VARCHAR(75) null,costbenefit VARCHAR(75) null,keywords VARCHAR(75) null,startdate DATE null,enddate DATE null,publicationdate DATE null,language VARCHAR(75) null,sectors_ VARCHAR(75) null,elements_ VARCHAR(75) null,climateimpacts_ VARCHAR(75) null,mao_type VARCHAR(75) null,source VARCHAR(75) null)";
+	public static final String TABLE_SQL_CREATE = "create table Ace_Measure (measureId LONG not null primary key,companyId LONG,groupId LONG,name VARCHAR(75) null,description VARCHAR(75) null,implementationtype VARCHAR(75) null,implementationtime VARCHAR(75) null,lifetime VARCHAR(75) null,spatiallayer VARCHAR(75) null,spatialvalues VARCHAR(75) null,legalaspects VARCHAR(75) null,stakeholderparticipation VARCHAR(75) null,contact VARCHAR(75) null,succeslimitations VARCHAR(75) null,website VARCHAR(75) null,costbenefit VARCHAR(75) null,keywords VARCHAR(75) null,startdate DATE null,enddate DATE null,publicationdate DATE null,language VARCHAR(75) null,sectors_ VARCHAR(75) null,elements_ VARCHAR(75) null,climateimpacts_ VARCHAR(75) null,mao_type VARCHAR(75) null,source VARCHAR(75) null,rating LONG,importance LONG)";
 	public static final String TABLE_SQL_DROP = "drop table Ace_Measure";
 	public static final String ORDER_BY_JPQL = " ORDER BY measure.name ASC";
 	public static final String ORDER_BY_SQL = " ORDER BY Ace_Measure.name ASC";
@@ -422,6 +424,22 @@ public class MeasureModelImpl extends BaseModelImpl<Measure>
 		_source = source;
 	}
 
+	public long getRating() {
+		return _rating;
+	}
+
+	public void setRating(long rating) {
+		_rating = rating;
+	}
+
+	public long getImportance() {
+		return _importance;
+	}
+
+	public void setImportance(long importance) {
+		_importance = importance;
+	}
+
 	public Measure toEscapedModel() {
 		if (isEscapedModel()) {
 			return (Measure)this;
@@ -474,6 +492,8 @@ public class MeasureModelImpl extends BaseModelImpl<Measure>
 		clone.setClimateimpacts_(getClimateimpacts_());
 		clone.setMao_type(getMao_type());
 		clone.setSource(getSource());
+		clone.setRating(getRating());
+		clone.setImportance(getImportance());
 
 		return clone;
 	}
@@ -519,7 +539,7 @@ public class MeasureModelImpl extends BaseModelImpl<Measure>
 	}
 
 	public String toString() {
-		StringBundler sb = new StringBundler(53);
+		StringBundler sb = new StringBundler(57);
 
 		sb.append("{measureId=");
 		sb.append(getMeasureId());
@@ -573,13 +593,17 @@ public class MeasureModelImpl extends BaseModelImpl<Measure>
 		sb.append(getMao_type());
 		sb.append(", source=");
 		sb.append(getSource());
+		sb.append(", rating=");
+		sb.append(getRating());
+		sb.append(", importance=");
+		sb.append(getImportance());
 		sb.append("}");
 
 		return sb.toString();
 	}
 
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(82);
+		StringBundler sb = new StringBundler(88);
 
 		sb.append("<model><model-name>");
 		sb.append("nl.wur.alterra.cgi.ace.model.Measure");
@@ -689,6 +713,14 @@ public class MeasureModelImpl extends BaseModelImpl<Measure>
 			"<column><column-name>source</column-name><column-value><![CDATA[");
 		sb.append(getSource());
 		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>rating</column-name><column-value><![CDATA[");
+		sb.append(getRating());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>importance</column-name><column-value><![CDATA[");
+		sb.append(getImportance());
+		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");
 
@@ -721,5 +753,7 @@ public class MeasureModelImpl extends BaseModelImpl<Measure>
 	private String _climateimpacts_;
 	private String _mao_type;
 	private String _source;
+	private long _rating;
+	private long _importance;
 	private transient ExpandoBridge _expandoBridge;
 }

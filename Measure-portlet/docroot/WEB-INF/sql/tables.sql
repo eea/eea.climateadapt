@@ -24,5 +24,7 @@ create table Ace_Measure (
 	elements_ VARCHAR(75) null,
 	climateimpacts_ VARCHAR(75) null,
 	mao_type VARCHAR(75) null,
-	source VARCHAR(75) null
+	source VARCHAR(75) null,
+	rating LONG,
+	importance LONG
 );

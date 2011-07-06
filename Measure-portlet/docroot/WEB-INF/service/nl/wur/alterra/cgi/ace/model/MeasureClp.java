@@ -251,6 +251,22 @@ public class MeasureClp extends BaseModelImpl<Measure> implements Measure {
 		_source = source;
 	}
 
+	public long getRating() {
+		return _rating;
+	}
+
+	public void setRating(long rating) {
+		_rating = rating;
+	}
+
+	public long getImportance() {
+		return _importance;
+	}
+
+	public void setImportance(long importance) {
+		_importance = importance;
+	}
+
 	public Measure toEscapedModel() {
 		if (isEscapedModel()) {
 			return this;
@@ -290,6 +306,8 @@ public class MeasureClp extends BaseModelImpl<Measure> implements Measure {
 		clone.setClimateimpacts_(getClimateimpacts_());
 		clone.setMao_type(getMao_type());
 		clone.setSource(getSource());
+		clone.setRating(getRating());
+		clone.setImportance(getImportance());
 
 		return clone;
 	}
@@ -335,7 +353,7 @@ public class MeasureClp extends BaseModelImpl<Measure> implements Measure {
 	}
 
 	public String toString() {
-		StringBundler sb = new StringBundler(53);
+		StringBundler sb = new StringBundler(57);
 
 		sb.append("{measureId=");
 		sb.append(getMeasureId());
@@ -389,13 +407,17 @@ public class MeasureClp extends BaseModelImpl<Measure> implements Measure {
 		sb.append(getMao_type());
 		sb.append(", source=");
 		sb.append(getSource());
+		sb.append(", rating=");
+		sb.append(getRating());
+		sb.append(", importance=");
+		sb.append(getImportance());
 		sb.append("}");
 
 		return sb.toString();
 	}
 
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(82);
+		StringBundler sb = new StringBundler(88);
 
 		sb.append("<model><model-name>");
 		sb.append("nl.wur.alterra.cgi.ace.model.Measure");
@@ -505,6 +527,14 @@ public class MeasureClp extends BaseModelImpl<Measure> implements Measure {
 			"<column><column-name>source</column-name><column-value><![CDATA[");
 		sb.append(getSource());
 		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>rating</column-name><column-value><![CDATA[");
+		sb.append(getRating());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>importance</column-name><column-value><![CDATA[");
+		sb.append(getImportance());
+		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");
 
@@ -537,4 +567,6 @@ public class MeasureClp extends BaseModelImpl<Measure> implements Measure {
 	private String _climateimpacts_;
 	private String _mao_type;
 	private String _source;
+	private long _rating;
+	private long _importance;
 }

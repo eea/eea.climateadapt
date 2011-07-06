@@ -62,7 +62,8 @@
 		<textarea name="keywords"  rows=5 cols=100><%= measure == null ? "" : measure.getKeywords() %></textarea>
 		<br /><br />
 	
-
+		<input type="checkbox" name="chk_importance" id="chk_importance" value="1" <% if (measure != null) { out.print( measure.getImportance() == 1 ? "checked" : "") ; } %> />
+		<b>High importance</b><br />
 	 </div>
 	<div style="float: left;">	
 

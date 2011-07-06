@@ -238,6 +238,20 @@ public class ClpSerializer {
 
 					method25.invoke(newModel, value25);
 
+					Method method26 = newModelClass.getMethod("setRating",
+							new Class[] { Long.TYPE });
+
+					Long value26 = new Long(oldCplModel.getRating());
+
+					method26.invoke(newModel, value26);
+
+					Method method27 = newModelClass.getMethod("setImportance",
+							new Class[] { Long.TYPE });
+
+					Long value27 = new Long(oldCplModel.getImportance());
+
+					method27.invoke(newModel, value27);
+
 					return newModel;
 				}
 				catch (Exception e) {
@@ -476,6 +490,20 @@ public class ClpSerializer {
 							(Object[])null);
 
 					newModel.setSource(value25);
+
+					Method method26 = oldModelClass.getMethod("getRating");
+
+					Long value26 = (Long)method26.invoke(oldModel,
+							(Object[])null);
+
+					newModel.setRating(value26);
+
+					Method method27 = oldModelClass.getMethod("getImportance");
+
+					Long value27 = (Long)method27.invoke(oldModel,
+							(Object[])null);
+
+					newModel.setImportance(value27);
 
 					return newModel;
 				}

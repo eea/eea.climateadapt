@@ -441,6 +441,34 @@ public interface MeasureModel extends BaseModel<Measure> {
 	public void setSource(String source);
 
 	/**
+	 * Gets the rating of this measure.
+	 *
+	 * @return the rating of this measure
+	 */
+	public long getRating();
+
+	/**
+	 * Sets the rating of this measure.
+	 *
+	 * @param rating the rating of this measure
+	 */
+	public void setRating(long rating);
+
+	/**
+	 * Gets the importance of this measure.
+	 *
+	 * @return the importance of this measure
+	 */
+	public long getImportance();
+
+	/**
+	 * Sets the importance of this measure.
+	 *
+	 * @param importance the importance of this measure
+	 */
+	public void setImportance(long importance);
+
+	/**
 	 * Gets a copy of this measure as an escaped model instance by wrapping it with an {@link com.liferay.portal.kernel.bean.AutoEscapeBeanHandler}.
 	 *
 	 * @return the escaped model instance

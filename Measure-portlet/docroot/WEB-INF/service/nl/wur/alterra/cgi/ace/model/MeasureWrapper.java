@@ -245,6 +245,22 @@ public class MeasureWrapper implements Measure {
 		_measure.setSource(source);
 	}
 
+	public long getRating() {
+		return _measure.getRating();
+	}
+
+	public void setRating(long rating) {
+		_measure.setRating(rating);
+	}
+
+	public long getImportance() {
+		return _measure.getImportance();
+	}
+
+	public void setImportance(long importance) {
+		_measure.setImportance(importance);
+	}
+
 	public nl.wur.alterra.cgi.ace.model.Measure toEscapedModel() {
 		return _measure.toEscapedModel();
 	}

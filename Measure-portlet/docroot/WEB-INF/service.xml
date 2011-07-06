@@ -37,7 +37,9 @@
 		<column name="climateimpacts_" type="String" />
 		<column name="mao_type" type="String" />
 		<column name="source" type="String" />
-
+		<column name="rating" type="long" />
+		<column name="importance" type="long" />
+		
 		<!-- Sort order -->
 		<order by="asc" >
 			<order-column name="name" />

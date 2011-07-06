@@ -155,6 +155,17 @@ public class MeasurePortlet extends MVCPortlet {
 		measure.setMao_type(ParamUtil.getString(request, "mao_type"));
 		measure.setSource(ParamUtil.getString(request, "source"));
 
+		String importance = ParamUtil.getString(request, "chk_importance");
+		if(measure.getImportance() == 1) {
+			measure.setImportance( measure.getImportance()-1 );
+			measure.setRating( measure.getRating() - 100);
+
+		}
+		if( importance != null && importance.equalsIgnoreCase("1")) {
+			measure.setImportance(measure.getImportance()+1);
+			measure.setRating( measure.getRating() + 100);
+		}
+		
 		return measure;
 	}
 
