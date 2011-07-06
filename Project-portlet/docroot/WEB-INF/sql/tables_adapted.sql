@@ -17,9 +17,23 @@ CREATE TABLE ace_project
   keywords character varying(2048),
   website character varying(1024),
   duration character varying(255),
+  rating bigint,
+  importance bigint,
   CONSTRAINT ace_project_pkey PRIMARY KEY (projectid)
 )
 WITH (
   OIDS=FALSE
 );
 ALTER TABLE ace_project OWNER TO postgres;
+
+/* liferay uses own id counter - for loading in the back start with 100000  */
+
+CREATE SEQUENCE ace_project_id_seq
+  INCREMENT 1
+  MINVALUE 1
+  MAXVALUE 9223372036854775807
+  START 100000
+  CACHE 1;
+ALTER TABLE ace_project_id_seq OWNER TO postgres;
+
+ALTER TABLE ace_project ALTER COLUMN projectid SET DEFAULT nextval('ace_project_id_seq'::regclass);
