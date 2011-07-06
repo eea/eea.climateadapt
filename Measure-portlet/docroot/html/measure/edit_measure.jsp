@@ -78,7 +78,8 @@
 		
 		<aui:input name="spatiallayer" />
 		
-		<aui:input name="spatialvalues"  />
+		<b>spatialvalues - separate them by ';' - Country search works on Nuts member state codes.</b><br />
+		<input name="spatialvalues" type="text" size="65" value="<%= measure == null ? "" : measure.getSpatialvalues() %>"><br /><br />
 
 	   <b>Sectors</b><br />
        <%-- note : i18n file should always be in sync with AceItemSector enum --%>	
@@ -163,7 +164,7 @@
 		<input name="mao_type" type="radio" value="M" <%= m_checked %>>Measure&nbsp;&nbsp;&nbsp;
 		<input name="mao_type" type="radio" value="A" <%= a_checked %>>Good practice<br /><br />
 		
-		<b>Source)</b><br />
+		<b>Source</b><br />
 		<input name="source" type="text" size="65" value="<%= measure == null ? "" : measure.getSource() %>"><br /><br />
 		<!--  a u i :input name="startdate" / >
 		
