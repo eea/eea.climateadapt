@@ -108,7 +108,7 @@
 	var actual_image = "europe";
 	var selectedCountry = '';
 	
-	var countries = ['AT', 'BE', 'CH', 'CZ', 'DE', 'DK', 'EE', 'ES', 'FI', 'FR', 'GB', 'GR', 'HU', 'IR', 'IS', 'LT', 'LV', 'MT', 'NL', 'NO', 'PL', 'PT', 'RO', 'SE'];
+	var countries = ['AT', 'BE', 'CH', 'CY', 'CZ', 'DE', 'DK', 'EE', 'ES', 'FI', 'FR', 'GB', 'GR', 'HU', 'IR', 'IS', 'LT', 'LV', 'MT', 'NL', 'NO', 'PL', 'PT', 'RO', 'SE'];
 	
 	function highlight(area) {
 		$j("#"+ actual_image+'_selected').hide();
@@ -180,31 +180,32 @@
     <!-- Map colum -->
     <div id="nas_left_column" class="nas_column">
 
-		<img id="europe_selected" src="<%=renderRequest.getContextPath()%>/images/countryselectionmap/europe.png" width="458" height="515" border="0" usemap="#Map" style="display:block;"/>
-		<img id="AT_selected" src="<%=renderRequest.getContextPath()%>/images/countryselectionmap/AT.png" width="458" height="515" border="0" usemap="#Map" style="display:none;"/>
-		<img id="BE_selected" src="<%=renderRequest.getContextPath()%>/images/countryselectionmap/BE.png" width="458" height="515" border="0" usemap="#Map" style="display:none;" />
-		<img id="CH_selected" src="<%=renderRequest.getContextPath()%>/images/countryselectionmap/CH.png" width="458" height="515" border="0" usemap="#Map" style="display:none;" />
-		<img id="CZ_selected" src="<%=renderRequest.getContextPath()%>/images/countryselectionmap/CZ.png" width="458" height="515" border="0" usemap="#Map" style="display:none;" />
-		<img id="DE_selected" src="<%=renderRequest.getContextPath()%>/images/countryselectionmap/DE.png" width="458" height="515" border="0" usemap="#Map" style="display:none;"/>
-		<img id="DK_selected" src="<%=renderRequest.getContextPath()%>/images/countryselectionmap/DK.png" width="458" height="515" border="0" usemap="#Map" style="display:none;"/>
-		<img id="EE_selected" src="<%=renderRequest.getContextPath()%>/images/countryselectionmap/EE.png" width="458" height="515" border="0" usemap="#Map" style="display:none;"/>
-		<img id="ES_selected" src="<%=renderRequest.getContextPath()%>/images/countryselectionmap/ES.png" width="458" height="515" border="0" usemap="#Map" style="display:none;"/>
-		<img id="FI_selected" src="<%=renderRequest.getContextPath()%>/images/countryselectionmap/FI.png" width="458" height="515" border="0" usemap="#Map" style="display:none;"/>
-		<img id="FR_selected" src="<%=renderRequest.getContextPath()%>/images/countryselectionmap/FR.png" width="458" height="515" border="0" usemap="#Map" style="display:none;"/>
-		<img id="GB_selected" src="<%=renderRequest.getContextPath()%>/images/countryselectionmap/GB.png" width="458" height="515" border="0" usemap="#Map" style="display:none;"/>
-		<img id="GR_selected" src="<%=renderRequest.getContextPath()%>/images/countryselectionmap/GR.png" width="458" height="515" border="0" usemap="#Map" style="display:none;"/>
-		<img id="HU_selected" src="<%=renderRequest.getContextPath()%>/images/countryselectionmap/HU.png" width="458" height="515" border="0" usemap="#Map" style="display:none;"/>
-		<img id="IR_selected" src="<%=renderRequest.getContextPath()%>/images/countryselectionmap/IR.png" width="458" height="515" border="0" usemap="#Map" style="display:none;"/>
-		<img id="IS_selected" src="<%=renderRequest.getContextPath()%>/images/countryselectionmap/IS.png" width="458" height="515" border="0" usemap="#Map" style="display:none;"/>
-		<img id="LT_selected" src="<%=renderRequest.getContextPath()%>/images/countryselectionmap/LT.png" width="458" height="515" border="0" usemap="#Map" style="display:none;"/>
-		<img id="LV_selected" src="<%=renderRequest.getContextPath()%>/images/countryselectionmap/LV.png" width="458" height="515" border="0" usemap="#Map" style="display:none;"/>
-		<img id="MT_selected" src="<%=renderRequest.getContextPath()%>/images/countryselectionmap/MT.png" width="458" height="515" border="0" usemap="#Map" style="display:none;"/>
-		<img id="NL_selected" src="<%=renderRequest.getContextPath()%>/images/countryselectionmap/NL.png" width="458" height="515" border="0" usemap="#Map" style="display:none;"/>
-		<img id="NO_selected" src="<%=renderRequest.getContextPath()%>/images/countryselectionmap/NO.png" width="458" height="515" border="0" usemap="#Map" style="display:none;"/>
-		<img id="PL_selected" src="<%=renderRequest.getContextPath()%>/images/countryselectionmap/PL.png" width="458" height="515" border="0" usemap="#Map" style="display:none;"/>
-		<img id="PT_selected" src="<%=renderRequest.getContextPath()%>/images/countryselectionmap/PT.png" width="458" height="515" border="0" usemap="#Map" style="display:none;"/>
-		<img id="RO_selected" src="<%=renderRequest.getContextPath()%>/images/countryselectionmap/RO.png" width="458" height="515" border="0" usemap="#Map" style="display:none;"/>
-		<img id="SE_selected" src="<%=renderRequest.getContextPath()%>/images/countryselectionmap/SE.png" width="458" height="515" border="0" usemap="#Map" style="display:none;"/>
+		<img id="europe_selected" src="<%=renderRequest.getContextPath()%>/images/countryselectionmap/europe.png" width="511" height="515" border="0" usemap="#Map" style="display:block;"/>
+		<img id="AT_selected" src="<%=renderRequest.getContextPath()%>/images/countryselectionmap/AT.png" width="511" height="515" border="0" usemap="#Map" style="display:none;"/>
+		<img id="BE_selected" src="<%=renderRequest.getContextPath()%>/images/countryselectionmap/BE.png" width="511" height="515" border="0" usemap="#Map" style="display:none;" />
+		<img id="CH_selected" src="<%=renderRequest.getContextPath()%>/images/countryselectionmap/CH.png" width="511" height="515" border="0" usemap="#Map" style="display:none;" />
+		<img id="CY_selected" src="<%=renderRequest.getContextPath()%>/images/countryselectionmap/CY.png" width="511" height="515" border="0" usemap="#Map" style="display:none;" />
+		<img id="CZ_selected" src="<%=renderRequest.getContextPath()%>/images/countryselectionmap/CZ.png" width="511" height="515" border="0" usemap="#Map" style="display:none;" />
+		<img id="DE_selected" src="<%=renderRequest.getContextPath()%>/images/countryselectionmap/DE.png" width="511" height="515" border="0" usemap="#Map" style="display:none;"/>
+		<img id="DK_selected" src="<%=renderRequest.getContextPath()%>/images/countryselectionmap/DK.png" width="511" height="515" border="0" usemap="#Map" style="display:none;"/>
+		<img id="EE_selected" src="<%=renderRequest.getContextPath()%>/images/countryselectionmap/EE.png" width="511" height="515" border="0" usemap="#Map" style="display:none;"/>
+		<img id="ES_selected" src="<%=renderRequest.getContextPath()%>/images/countryselectionmap/ES.png" width="511" height="515" border="0" usemap="#Map" style="display:none;"/>
+		<img id="FI_selected" src="<%=renderRequest.getContextPath()%>/images/countryselectionmap/FI.png" width="511" height="515" border="0" usemap="#Map" style="display:none;"/>
+		<img id="FR_selected" src="<%=renderRequest.getContextPath()%>/images/countryselectionmap/FR.png" width="511" height="515" border="0" usemap="#Map" style="display:none;"/>
+		<img id="GB_selected" src="<%=renderRequest.getContextPath()%>/images/countryselectionmap/GB.png" width="511" height="515" border="0" usemap="#Map" style="display:none;"/>
+		<img id="GR_selected" src="<%=renderRequest.getContextPath()%>/images/countryselectionmap/GR.png" width="511" height="515" border="0" usemap="#Map" style="display:none;"/>
+		<img id="HU_selected" src="<%=renderRequest.getContextPath()%>/images/countryselectionmap/HU.png" width="511" height="515" border="0" usemap="#Map" style="display:none;"/>
+		<img id="IR_selected" src="<%=renderRequest.getContextPath()%>/images/countryselectionmap/IR.png" width="511" height="515" border="0" usemap="#Map" style="display:none;"/>
+		<img id="IS_selected" src="<%=renderRequest.getContextPath()%>/images/countryselectionmap/IS.png" width="511" height="515" border="0" usemap="#Map" style="display:none;"/>
+		<img id="LT_selected" src="<%=renderRequest.getContextPath()%>/images/countryselectionmap/LT.png" width="511" height="515" border="0" usemap="#Map" style="display:none;"/>
+		<img id="LV_selected" src="<%=renderRequest.getContextPath()%>/images/countryselectionmap/LV.png" width="511" height="515" border="0" usemap="#Map" style="display:none;"/>
+		<img id="MT_selected" src="<%=renderRequest.getContextPath()%>/images/countryselectionmap/MT.png" width="511" height="515" border="0" usemap="#Map" style="display:none;"/>
+		<img id="NL_selected" src="<%=renderRequest.getContextPath()%>/images/countryselectionmap/NL.png" width="511" height="515" border="0" usemap="#Map" style="display:none;"/>
+		<img id="NO_selected" src="<%=renderRequest.getContextPath()%>/images/countryselectionmap/NO.png" width="511" height="515" border="0" usemap="#Map" style="display:none;"/>
+		<img id="PL_selected" src="<%=renderRequest.getContextPath()%>/images/countryselectionmap/PL.png" width="511" height="515" border="0" usemap="#Map" style="display:none;"/>
+		<img id="PT_selected" src="<%=renderRequest.getContextPath()%>/images/countryselectionmap/PT.png" width="511" height="515" border="0" usemap="#Map" style="display:none;"/>
+		<img id="RO_selected" src="<%=renderRequest.getContextPath()%>/images/countryselectionmap/RO.png" width="511" height="515" border="0" usemap="#Map" style="display:none;"/>
+		<img id="SE_selected" src="<%=renderRequest.getContextPath()%>/images/countryselectionmap/SE.png" width="511" height="515" border="0" usemap="#Map" style="display:none;"/>
 	
 		<div style="width:300px;margin:10px 0px;">
 		
@@ -257,6 +258,7 @@
 			<option id="AT-option" value="AT">Austria</option>
 			<option id="BE-option" value="BE">Belgium</option>
 			<option id="CH-option" value="CH">Switzerland</option>
+			<option id="CY-option" value="CY">Cyprus</option>
 			<option id="CZ-option" value="CZ">Czech Republic</option>
 			<option id="DE-option" value="DE">Germany</option>
 			<option id="EE-option" value="EE">Estonia</option>
@@ -285,6 +287,8 @@
 			<area shape="poly" coords="225,349,232,350,236,354,240,351,249,350,252,355,262,357,274,357,277,353,285,352,289,346,289,338,295,337,294,331,292,323,284,323,275,321,272,326,266,327,261,329,258,333,259,340,251,342,246,343,235,343,228,343" href="#AT" alt="austria"  onclick="return select('AT')" onmouseover="highlight('AT');" onmouseout="unhighlight('AT');"/>
 			<!-- belgium -->
 			<area shape="poly" coords="162, 289, 165, 295, 168, 295, 168, 299, 172, 301, 176, 301, 176, 306, 180, 307, 182, 306, 182, 310, 188, 314, 191, 314, 190, 311, 190, 308, 191, 305, 194, 305, 196, 302, 194, 297, 190, 297, 190, 294, 191, 292, 188, 289, 183, 286, 179, 287, 175, 289, 171, 288, 169, 286"href="#BE" alt="belgium" onclick="return select('BE')" onmouseover="highlight('BE');" onmouseout="unhighlight('BE');"/>
+			<!-- cyprus -->
+			<area shape="poly" coords="479,477,506,459,509,464,505,477, 492,487,484,485,479,477" href="#CY"alt="cyprus"  onclick="return select('CY')" onmouseover="highlight('CY');" onmouseout="unhighlight('CY');" />
 			<!-- czech republic -->
 			<area shape="poly" coords="265,326,273,326,276,321,283,323,293,323,299,321,304,317,303,314,309,310,306,305,302,303,299,304,297,301,292,300,291,303,286,300,286,296,275,293,268,293,262,298,252,303,248,307,252,314,258,317" href="#CZ" alt="czech republic"  onclick="return select('CZ')" onmouseover="highlight('CZ');" onmouseout="unhighlight('CZ');"/>
 			<!-- denmark -->
