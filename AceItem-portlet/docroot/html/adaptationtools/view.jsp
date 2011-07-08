@@ -257,10 +257,10 @@ HttpServletRequest httpRequest = PortalUtil.getOriginalServletRequest(request);
 							2. <a href="#" onclick="showGenericMeasures(); return false;">What are possible measures?</a>
 						</li>
 						<li class="list-option">
-							3. <a href="#" onclick="showGoodPractices(); return false;">What are possible good practices?</a>
+							3. <a href="#" onclick="showGoodPractices(); return false;">What are feasible case studies?</a>
 						</li>
 						<li class="list-option">
-							4. <a href="#" onclick="showLocateRegion(); return false;">What good practices are available in regions similar to mine?</a>
+							4. <a href="#" onclick="showLocateRegion(); return false;">Which case studies are available in regions similar to mine?</a>
 						</li>
 					</ul>
 				</div>
@@ -292,7 +292,7 @@ HttpServletRequest httpRequest = PortalUtil.getOriginalServletRequest(request);
                                         <a href="#" onclick="step5substep('5-2-1'); return false;">2.1 How can I determine my adaptation costs?</a>
                                     </li>
                                     <li class="list-option">
-                                        <a href="#" onclick="step5substep('5-2-2'); return false;">2.2 Search the cost-benefit database</a>
+                                        <a href="#" onclick="step5substep('5-2-2'); return false;">2.2 Search the costs and benefits of adaptation</a>
                                     </li>
                                 </ul>
                             </div>
@@ -1506,7 +1506,7 @@ HttpServletRequest httpRequest = PortalUtil.getOriginalServletRequest(request);
 			<h2>
 				4.1 General
 			</h2>
-			This section provides tools that allow you to assess relevant adaptation measures and good practices. It provides tools to select measures and good practices from the Clearinghouse Mechanism on Adaptation's repository and allows you to assess which measures are implemented in your region and similar regions.
+			This section provides tools that allow you to assess relevant adaptation measures and case studies. It provides tools to select measures and case studies from the Clearinghouse Mechanism on Adaptation's repository and allows you to assess which measures are implemented in your region and similar regions.
 			<br /><br />
 			Adaptation options may include the options to prevent  or accept losses (i.e. do nothing), to accommodate.  Multiple options for achieving the same result should be considered at the initial stage.
 		</div>
@@ -1584,11 +1584,11 @@ HttpServletRequest httpRequest = PortalUtil.getOriginalServletRequest(request);
 
 		<div id="good-practices" style="display: none; margin-left: 20px;">
 			<h2>
-				4.3 What are possible good practices?
+				4.3 What are feasible case studies?
 			</h2>
 
 			<p>
-				Select feasible good practices for adaptation from the Clearinghouse Mechanism on Adaptations repository, based on your risk(s) and sector(s) of interest.
+				Select feasible case studies for adaptation from the Clearinghouse Mechanism on Adaptations repository, based on your risk(s) and sector(s) of interest.
 			</p>
 
 			<form>
@@ -1655,15 +1655,20 @@ HttpServletRequest httpRequest = PortalUtil.getOriginalServletRequest(request);
 
         <div id="locate-region" style="margin-left: 20px;display:none;">
 			<h2>
-				4.4 What good practices are available in regions similar to mine?
+				4.4 Which feasible case studies are available in regions similar to mine?
 			</h2>
 
 			<p>
-				The specific characteristics of the region you are in highly determine which adaptation measures are feasible. Taking into account for instance bio-physical and socio-economic characteristics will allow for the identification of good practices that are implemented in your region and similar regions.
+				The specific characteristics of the region you are in highly determine which adaptation measures are feasible. Taking into account for instance bio-physical and socio-economic characteristics will allow for the identification of case studies that are implemented in your region and similar regions.
 			</p>
 
-			<img src="<%=renderRequest.getContextPath()%>/images/ACE_goodpractiseFinder2.png"/>
+			<p>
+				<a href="/similar-areas-step-1" target="_blank"><b>Find case studies with the similar areas tool</b></a>
+			</p>
 
+<% /*
+			<img src="<%=renderRequest.getContextPath()% >/images/ACE_goodpractiseFinder2.png"/>
+			
 			<!-- gazetteer map removed by not displaying anything -->
 
 			<div style="float:left; margin-bottom: 10px; display:none;">
@@ -1685,7 +1690,7 @@ HttpServletRequest httpRequest = PortalUtil.getOriginalServletRequest(request);
             </div>
 
 			<!-- end of gazetteer map removed -->
-
+*/ %>
         </div>
 		<!-- end locate-region -->
 
@@ -1823,7 +1828,7 @@ HttpServletRequest httpRequest = PortalUtil.getOriginalServletRequest(request);
 
 			<div id="5-2-2" class="step-5-sub" style="margin-left: 30px;display:none;">
 				<h2>
-					5.2.2 Search the cost-benefit database
+					5.2.2 Search the costs and benefits of adaptation
 				</h2>
 				<p>
 					Assess available information on adaptation costs and benefits from the Clearinghouse Mechanism on Adaptation's repository, based on your risk(s) and region of interest.
