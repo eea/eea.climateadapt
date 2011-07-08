@@ -261,6 +261,7 @@
 			<option id="CY-option" value="CY">Cyprus</option>
 			<option id="CZ-option" value="CZ">Czech Republic</option>
 			<option id="DE-option" value="DE">Germany</option>
+			<option id="DK-option" value="DK">Denmark</option>
 			<option id="EE-option" value="EE">Estonia</option>
 			<option id="ES-option" value="ES">Spain</option>
 			<option id="FI-option" value="FI">Finland</option>
