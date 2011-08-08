@@ -121,7 +121,7 @@ public class NASSourceWrapper implements NASSource {
 		return _nasSource.clone();
 	}
 
-	public int compareTo(NASSource nasSource) {
+	public int compareTo(nl.wur.alterra.cgi.ace.model.NASSource nasSource) {
 		return _nasSource.compareTo(nasSource);
 	}
 

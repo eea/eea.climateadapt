@@ -365,6 +365,34 @@ public interface AceItemModel extends BaseModel<AceItem> {
 	public void setClimateimpacts_(String climateimpacts_);
 
 	/**
+	 * Gets the rating of this ace item.
+	 *
+	 * @return the rating of this ace item
+	 */
+	public long getRating();
+
+	/**
+	 * Sets the rating of this ace item.
+	 *
+	 * @param rating the rating of this ace item
+	 */
+	public void setRating(long rating);
+
+	/**
+	 * Gets the importance of this ace item.
+	 *
+	 * @return the importance of this ace item
+	 */
+	public long getImportance();
+
+	/**
+	 * Sets the importance of this ace item.
+	 *
+	 * @param importance the importance of this ace item
+	 */
+	public void setImportance(long importance);
+
+	/**
 	 * Gets a copy of this ace item as an escaped model instance by wrapping it with an {@link com.liferay.portal.kernel.bean.AutoEscapeBeanHandler}.
 	 *
 	 * @return the escaped model instance

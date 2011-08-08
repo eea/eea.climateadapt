@@ -211,6 +211,22 @@ public class AceItemClp extends BaseModelImpl<AceItem> implements AceItem {
 		_climateimpacts_ = climateimpacts_;
 	}
 
+	public long getRating() {
+		return _rating;
+	}
+
+	public void setRating(long rating) {
+		_rating = rating;
+	}
+
+	public long getImportance() {
+		return _importance;
+	}
+
+	public void setImportance(long importance) {
+		_importance = importance;
+	}
+
 	public AceItem toEscapedModel() {
 		if (isEscapedModel()) {
 			return this;
@@ -245,6 +261,8 @@ public class AceItemClp extends BaseModelImpl<AceItem> implements AceItem {
 		clone.setSectors_(getSectors_());
 		clone.setElements_(getElements_());
 		clone.setClimateimpacts_(getClimateimpacts_());
+		clone.setRating(getRating());
+		clone.setImportance(getImportance());
 
 		return clone;
 	}
@@ -290,7 +308,7 @@ public class AceItemClp extends BaseModelImpl<AceItem> implements AceItem {
 	}
 
 	public String toString() {
-		StringBundler sb = new StringBundler(43);
+		StringBundler sb = new StringBundler(47);
 
 		sb.append("{aceItemId=");
 		sb.append(getAceItemId());
@@ -334,13 +352,17 @@ public class AceItemClp extends BaseModelImpl<AceItem> implements AceItem {
 		sb.append(getElements_());
 		sb.append(", climateimpacts_=");
 		sb.append(getClimateimpacts_());
+		sb.append(", rating=");
+		sb.append(getRating());
+		sb.append(", importance=");
+		sb.append(getImportance());
 		sb.append("}");
 
 		return sb.toString();
 	}
 
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(67);
+		StringBundler sb = new StringBundler(73);
 
 		sb.append("<model><model-name>");
 		sb.append("nl.wur.alterra.cgi.ace.model.AceItem");
@@ -430,6 +452,14 @@ public class AceItemClp extends BaseModelImpl<AceItem> implements AceItem {
 			"<column><column-name>climateimpacts_</column-name><column-value><![CDATA[");
 		sb.append(getClimateimpacts_());
 		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>rating</column-name><column-value><![CDATA[");
+		sb.append(getRating());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>importance</column-name><column-value><![CDATA[");
+		sb.append(getImportance());
+		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");
 
@@ -457,4 +487,6 @@ public class AceItemClp extends BaseModelImpl<AceItem> implements AceItem {
 	private String _sectors_;
 	private String _elements_;
 	private String _climateimpacts_;
+	private long _rating;
+	private long _importance;
 }

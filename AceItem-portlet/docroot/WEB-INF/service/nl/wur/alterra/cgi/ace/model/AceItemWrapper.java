@@ -204,6 +204,22 @@ public class AceItemWrapper implements AceItem {
 		_aceItem.setClimateimpacts_(climateimpacts_);
 	}
 
+	public long getRating() {
+		return _aceItem.getRating();
+	}
+
+	public void setRating(long rating) {
+		_aceItem.setRating(rating);
+	}
+
+	public long getImportance() {
+		return _aceItem.getImportance();
+	}
+
+	public void setImportance(long importance) {
+		_aceItem.setImportance(importance);
+	}
+
 	public nl.wur.alterra.cgi.ace.model.AceItem toEscapedModel() {
 		return _aceItem.toEscapedModel();
 	}
