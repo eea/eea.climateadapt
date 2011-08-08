@@ -301,12 +301,13 @@
 	<listener>
 		<listener-class>com.liferay.portal.kernel.servlet.PortletContextListener</listener-class>
 	</listener>
+	
 	<servlet>
 		<servlet-name>AdaptationTools</servlet-name>
 		<servlet-class>com.liferay.portal.kernel.servlet.PortletServlet</servlet-class>
 		<init-param>
 			<param-name>portlet-class</param-name>
-			<param-value>com.sample.jsp.portlet.JSPPortlet</param-value>
+			<param-value>nl.wur.alterra.cgi.ace.portlet.AdaptationToolJSPPortlet</param-value>
 		</init-param>
 		<load-on-startup>0</load-on-startup>
 	</servlet>
@@ -360,32 +361,36 @@
         <url-pattern>/proxy</url-pattern>
     </servlet-mapping>
 
-	<taglib>
-		<taglib-uri>http://liferay.com/tld/aui</taglib-uri>
-		<taglib-location>/WEB-INF/tld/liferay-aui.tld</taglib-location>
-	</taglib>
-	<taglib>
-		<taglib-uri>http://java.sun.com/portlet_2_0</taglib-uri>
-		<taglib-location>/WEB-INF/tld/liferay-portlet.tld</taglib-location>
-	</taglib>
-	<taglib>
-		<taglib-uri>http://liferay.com/tld/portlet</taglib-uri>
-		<taglib-location>/WEB-INF/tld/liferay-portlet-ext.tld</taglib-location>
-	</taglib>
-	<taglib>
-		<taglib-uri>http://liferay.com/tld/security</taglib-uri>
-		<taglib-location>/WEB-INF/tld/liferay-security.tld</taglib-location>
-	</taglib>
-	<taglib>
-		<taglib-uri>http://liferay.com/tld/theme</taglib-uri>
-		<taglib-location>/WEB-INF/tld/liferay-theme.tld</taglib-location>
-	</taglib>
-	<taglib>
-		<taglib-uri>http://liferay.com/tld/ui</taglib-uri>
-		<taglib-location>/WEB-INF/tld/liferay-ui.tld</taglib-location>
-	</taglib>
-	<taglib>
-		<taglib-uri>http://liferay.com/tld/util</taglib-uri>
-		<taglib-location>/WEB-INF/tld/liferay-util.tld</taglib-location>
-	</taglib>
+		<taglib>
+			<taglib-uri>http://java.sun.com/portlet_2_0</taglib-uri>
+			<taglib-location>/WEB-INF/tld/liferay-portlet.tld</taglib-location>
+		</taglib>
+		<taglib>
+			<taglib-uri>http://java.sun.com/jstl/core_rt</taglib-uri>
+			<taglib-location>/WEB-INF/tld/c.tld</taglib-location>
+		</taglib>
+		<taglib>
+			<taglib-uri>http://liferay.com/tld/aui</taglib-uri>
+			<taglib-location>/WEB-INF/tld/liferay-aui.tld</taglib-location>
+		</taglib>
+		<taglib>
+			<taglib-uri>http://liferay.com/tld/portlet</taglib-uri>
+			<taglib-location>/WEB-INF/tld/liferay-portlet-ext.tld</taglib-location>
+		</taglib>
+		<taglib>
+			<taglib-uri>http://liferay.com/tld/security</taglib-uri>
+			<taglib-location>/WEB-INF/tld/liferay-security.tld</taglib-location>
+		</taglib>
+		<taglib>
+			<taglib-uri>http://liferay.com/tld/theme</taglib-uri>
+			<taglib-location>/WEB-INF/tld/liferay-theme.tld</taglib-location>
+		</taglib>
+		<taglib>
+			<taglib-uri>http://liferay.com/tld/ui</taglib-uri>
+			<taglib-location>/WEB-INF/tld/liferay-ui.tld</taglib-location>
+		</taglib>
+		<taglib>
+			<taglib-uri>http://liferay.com/tld/util</taglib-uri>
+			<taglib-location>/WEB-INF/tld/liferay-util.tld</taglib-location>
+		</taglib>
 </web-app>
