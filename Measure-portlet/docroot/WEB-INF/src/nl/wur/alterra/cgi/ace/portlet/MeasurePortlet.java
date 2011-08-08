@@ -24,6 +24,7 @@ import com.liferay.portal.kernel.util.WebKeys;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.util.bridges.mvc.MVCPortlet;
+import com.liferay.util.servlet.SessionParameters;
 
 /**
  * Portlet implementation class MeasurePortlet
@@ -36,8 +37,11 @@ public class MeasurePortlet extends MVCPortlet {
 	 */
 	public void addMeasure(ActionRequest request, ActionResponse response)
 		throws Exception {
-
-		Measure measure = measureFromRequest(request);
+		
+		Measure measure = new MeasureImpl();
+		
+		measure.setMeasureId(ParamUtil.getLong(request, "measureId"));		
+		measureFromRequest(request, measure);
 
 		ArrayList<String> errors = new ArrayList<String>();
 
@@ -60,19 +64,17 @@ public class MeasurePortlet extends MVCPortlet {
 	}
 
 	/**
-	 * Convenience method to create a Measure object out of the request. Used
+	 * Convenience method to   F I L L   a Measure object out of the request. Used
 	 * by the Add / Edit methods.
 	 *
 	 */
-	private Measure measureFromRequest(PortletRequest request) {
+	private void measureFromRequest(PortletRequest request, Measure measure) {
 		ThemeDisplay themeDisplay =
 			(ThemeDisplay)request.getAttribute(WebKeys.THEME_DISPLAY);
-		MeasureImpl measure = new MeasureImpl();
-
+		
 		measure.setCompanyId(themeDisplay.getCompanyId());
 		measure.setGroupId(themeDisplay.getScopeGroupId());
 		
-		measure.setMeasureId(ParamUtil.getLong(request, "measureId"));
 		measure.setName(ParamUtil.getString(request, "name"));
 		measure.setDescription(ParamUtil.getString(request, "description"));
 		measure.setImplementationtype(ParamUtil.getString(request, "implementationtype"));
@@ -165,8 +167,6 @@ public class MeasurePortlet extends MVCPortlet {
 			measure.setImportance(measure.getImportance()+1);
 			measure.setRating( measure.getRating() + 100);
 		}
-		
-		return measure;
 	}
 
 	/**
@@ -176,7 +176,9 @@ public class MeasurePortlet extends MVCPortlet {
 	public void updateMeasure(ActionRequest request, ActionResponse response)
 		throws Exception {
 
-		Measure measure = measureFromRequest(request);
+		Measure measure = MeasureLocalServiceUtil.getMeasure(ParamUtil.getLong(request, "measureId"));
+		
+		measureFromRequest(request, measure);
 
 		ArrayList<String> errors = new ArrayList<String>();
 
@@ -184,7 +186,7 @@ public class MeasurePortlet extends MVCPortlet {
 			MeasureLocalServiceUtil.updateMeasure(measure);
 
 			SessionMessages.add(request, "measure-updated");
-
+			
 			sendRedirect(request, response);
 		}
 		else {
