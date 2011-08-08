@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping default-lazy="false" auto-import="false">
+	<import class="nl.wur.alterra.cgi.ace.model.AceItem" />
+	<import class="nl.wur.alterra.cgi.ace.model.NAS" />
+	<import class="nl.wur.alterra.cgi.ace.model.NASSource" />
+	<class name="nl.wur.alterra.cgi.ace.model.impl.AceItemImpl" table="Ace_AceItem">
+		<cache usage="read-write" />
+		<id name="aceItemId" type="long">
+			<generator class="assigned" />
+		</id>
+		<property name="companyId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="groupId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="nasId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="name" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="description" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="datatype" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="storedAt" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="storagetype" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="language" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="textSearch" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="keyword" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="targetresolution" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="spatialLayer" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="spatialValues" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="startDate" type="org.hibernate.type.TimestampType" />
+		<property name="endDate" type="org.hibernate.type.TimestampType" />
+		<property name="publicationDate" type="org.hibernate.type.TimestampType" />
+		<property name="sectors_" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="elements_" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="climateimpacts_" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+	</class>
+	<class name="nl.wur.alterra.cgi.ace.model.impl.NASImpl" table="Ace_NAS">
+		<cache usage="read-write" />
+		<id name="nasId" type="long">
+			<generator class="assigned" />
+		</id>
+		<property name="name" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="adoptedStatus" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="adoptedDescription" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="companyId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="groupId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="parentNasId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="isoCountry" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+	</class>
+	<class name="nl.wur.alterra.cgi.ace.model.impl.NASSourceImpl" table="Ace_NASSource">
+		<cache usage="read-write" />
+		<id name="nassourceid" type="long">
+			<generator class="assigned" />
+		</id>
+		<property name="nasId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="name" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="companyId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="groupId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+	</class>
+</hibernate-mapping>

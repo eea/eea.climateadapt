@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<portlet-app xmlns="http://java.sun.com/xml/ns/portlet/portlet-app_2_0.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="2.0" xsi:schemaLocation="http://java.sun.com/xml/ns/portlet/portlet-app_2_0.xsd http://java.sun.com/xml/ns/portlet/portlet-app_2_0.xsd">
+
+	<portlet>
+		<portlet-name>acesearchportlet</portlet-name>
+		<display-name>AceSearch</display-name>
+		<portlet-class>nl.wur.alterra.cgi.ace.portlet.AceSearchPortlet</portlet-class>
+		<init-param>
+			<name>view-jsp</name>
+			<value>/html/acesearch/view.jsp</value>
+		</init-param>
+		<init-param>
+			<name>edit-jsp</name>
+			<value>/html/acesearch/edit.jsp</value>
+		</init-param>
+		<init-param>
+			<name>help-jsp</name>
+			<value>/html/acesearch/help.jsp</value>
+		</init-param>
+		<expiration-cache>-1</expiration-cache>
+		<supports>
+			<mime-type>text/html</mime-type>
+			<portlet-mode>VIEW</portlet-mode>
+			<portlet-mode>EDIT</portlet-mode>
+			<portlet-mode>HELP</portlet-mode>
+		</supports>
+		<!-- Resource Bundle -->
+		<resource-bundle>content.Language</resource-bundle>
+		<portlet-info>
+			<title>AceSearch</title>
+			<short-title>AceSearchPortlet</short-title>
+			<keywords></keywords>
+		</portlet-info>
+		<!-- Portlet preferences (configurable by user in portlet EDIT mode) -->
+		<portlet-preferences>
+			<preference>
+				<name>rowsPerPage</name>
+				<value>10</value>
+			</preference>
+		</portlet-preferences>
+		<security-role-ref>
+			<role-name>administrator</role-name>
+		</security-role-ref>
+		<security-role-ref>
+			<role-name>guest</role-name>
+		</security-role-ref>
+		<security-role-ref>
+			<role-name>power-user</role-name>
+		</security-role-ref>
+		<security-role-ref>
+			<role-name>user</role-name>
+		</security-role-ref>
+	</portlet>
+
+</portlet-app>

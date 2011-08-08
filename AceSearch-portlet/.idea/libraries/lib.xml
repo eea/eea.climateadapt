@@ -1,0 +1,22 @@
+<component name="libraryTable">
+  <library name="lib">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/docroot/WEB-INF/lib/gson-1.6.jar!/" />
+      <root url="jar://$PROJECT_DIR$/docroot/WEB-INF/lib/commons-httpclient-3.0.1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/docroot/WEB-INF/lib/commons-codec-1.2.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../../../bundles/liferay.605/tomcat-6.0.26/lib/ext/AceItem-portlet-service.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../../../bundles/liferay.605/tomcat-6.0.26/webapps/ROOT/WEB-INF/lib/util-taglib.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../../../bundles/liferay.605/tomcat-6.0.26/webapps/ROOT/WEB-INF/lib/util-bridges.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../../../bundles/liferay.605/tomcat-6.0.26/webapps/ROOT/WEB-INF/lib/util-java.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../../../bundles/liferay.605/tomcat-6.0.26/webapps/ROOT/WEB-INF/lib/lucene.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../../../bundles/liferay.605/tomcat-6.0.26/webapps/ROOT/WEB-INF/lib/log4j.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../../../bundles/liferay.605/tomcat-6.0.26/webapps/ROOT/WEB-INF/lib/commons-logging.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../../../bundles/liferay.605/tomcat-6.0.26/lib/servlet-api.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../../../bundles/liferay.605/tomcat-6.0.26/lib/ext/portal-service.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../../../bundles/liferay.605/tomcat-6.0.26/lib/ext/portlet.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../../../bundles/liferay.605/tomcat-6.0.26/lib/ext/AceSearchEngine.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
