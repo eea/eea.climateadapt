@@ -1666,7 +1666,7 @@ HttpServletRequest httpRequest = PortalUtil.getOriginalServletRequest(request);
 				<a href="/similar-areas-step-1" target="_blank"><b>Find case studies with the similar areas tool</b></a>
 			</p>
 
-<% /*
+
 			<img src="<%=renderRequest.getContextPath()%>/images/ACE_goodpractiseFinder2.png"/>
 
 			<!-- gazetteer map removed by not displaying anything -->
@@ -1690,7 +1690,7 @@ HttpServletRequest httpRequest = PortalUtil.getOriginalServletRequest(request);
             </div>
 
 			<!-- end of gazetteer map removed -->
-*/ %>
+
         </div>
 		<!-- end locate-region -->
 
