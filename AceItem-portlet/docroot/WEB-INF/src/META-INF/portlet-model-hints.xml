@@ -23,6 +23,8 @@
 		<field name="sectors_" type="String" />
 		<field name="elements_" type="String" />
 		<field name="climateimpacts_" type="String" />
+		<field name="rating" type="long" />
+		<field name="importance" type="long" />
 	</model>
 	<model name="nl.wur.alterra.cgi.ace.model.NAS">
 		<field name="nasId" type="long" />

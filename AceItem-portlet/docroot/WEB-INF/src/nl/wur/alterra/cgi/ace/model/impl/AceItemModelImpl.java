@@ -76,9 +76,11 @@ public class AceItemModelImpl extends BaseModelImpl<AceItem>
 			{ "publicationDate", new Integer(Types.TIMESTAMP) },
 			{ "sectors_", new Integer(Types.VARCHAR) },
 			{ "elements_", new Integer(Types.VARCHAR) },
-			{ "climateimpacts_", new Integer(Types.VARCHAR) }
+			{ "climateimpacts_", new Integer(Types.VARCHAR) },
+			{ "rating", new Integer(Types.BIGINT) },
+			{ "importance", new Integer(Types.BIGINT) }
 		};
-	public static final String TABLE_SQL_CREATE = "create table Ace_AceItem (aceItemId LONG not null primary key,companyId LONG,groupId LONG,nasId LONG,name VARCHAR(75) null,description VARCHAR(75) null,datatype VARCHAR(75) null,storedAt VARCHAR(75) null,storagetype VARCHAR(75) null,language VARCHAR(75) null,textSearch VARCHAR(75) null,keyword VARCHAR(75) null,targetresolution VARCHAR(75) null,spatialLayer VARCHAR(75) null,spatialValues VARCHAR(75) null,startDate DATE null,endDate DATE null,publicationDate DATE null,sectors_ VARCHAR(75) null,elements_ VARCHAR(75) null,climateimpacts_ VARCHAR(75) null)";
+	public static final String TABLE_SQL_CREATE = "create table Ace_AceItem (aceItemId LONG not null primary key,companyId LONG,groupId LONG,nasId LONG,name VARCHAR(75) null,description VARCHAR(75) null,datatype VARCHAR(75) null,storedAt VARCHAR(75) null,storagetype VARCHAR(75) null,language VARCHAR(75) null,textSearch VARCHAR(75) null,keyword VARCHAR(75) null,targetresolution VARCHAR(75) null,spatialLayer VARCHAR(75) null,spatialValues VARCHAR(75) null,startDate DATE null,endDate DATE null,publicationDate DATE null,sectors_ VARCHAR(75) null,elements_ VARCHAR(75) null,climateimpacts_ VARCHAR(75) null,rating LONG,importance LONG)";
 	public static final String TABLE_SQL_DROP = "drop table Ace_AceItem";
 	public static final String ORDER_BY_JPQL = " ORDER BY aceItem.name ASC";
 	public static final String ORDER_BY_SQL = " ORDER BY Ace_AceItem.name ASC";
@@ -347,6 +349,22 @@ public class AceItemModelImpl extends BaseModelImpl<AceItem>
 		_climateimpacts_ = climateimpacts_;
 	}
 
+	public long getRating() {
+		return _rating;
+	}
+
+	public void setRating(long rating) {
+		_rating = rating;
+	}
+
+	public long getImportance() {
+		return _importance;
+	}
+
+	public void setImportance(long importance) {
+		_importance = importance;
+	}
+
 	public AceItem toEscapedModel() {
 		if (isEscapedModel()) {
 			return (AceItem)this;
@@ -394,6 +412,8 @@ public class AceItemModelImpl extends BaseModelImpl<AceItem>
 		clone.setSectors_(getSectors_());
 		clone.setElements_(getElements_());
 		clone.setClimateimpacts_(getClimateimpacts_());
+		clone.setRating(getRating());
+		clone.setImportance(getImportance());
 
 		return clone;
 	}
@@ -439,7 +459,7 @@ public class AceItemModelImpl extends BaseModelImpl<AceItem>
 	}
 
 	public String toString() {
-		StringBundler sb = new StringBundler(43);
+		StringBundler sb = new StringBundler(47);
 
 		sb.append("{aceItemId=");
 		sb.append(getAceItemId());
@@ -483,13 +503,17 @@ public class AceItemModelImpl extends BaseModelImpl<AceItem>
 		sb.append(getElements_());
 		sb.append(", climateimpacts_=");
 		sb.append(getClimateimpacts_());
+		sb.append(", rating=");
+		sb.append(getRating());
+		sb.append(", importance=");
+		sb.append(getImportance());
 		sb.append("}");
 
 		return sb.toString();
 	}
 
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(67);
+		StringBundler sb = new StringBundler(73);
 
 		sb.append("<model><model-name>");
 		sb.append("nl.wur.alterra.cgi.ace.model.AceItem");
@@ -579,6 +603,14 @@ public class AceItemModelImpl extends BaseModelImpl<AceItem>
 			"<column><column-name>climateimpacts_</column-name><column-value><![CDATA[");
 		sb.append(getClimateimpacts_());
 		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>rating</column-name><column-value><![CDATA[");
+		sb.append(getRating());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>importance</column-name><column-value><![CDATA[");
+		sb.append(getImportance());
+		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");
 
@@ -606,5 +638,7 @@ public class AceItemModelImpl extends BaseModelImpl<AceItem>
 	private String _sectors_;
 	private String _elements_;
 	private String _climateimpacts_;
+	private long _rating;
+	private long _importance;
 	private transient ExpandoBridge _expandoBridge;
 }
