@@ -386,12 +386,33 @@ public class AceItemLocalServiceClp implements AceItemLocalService {
 		return (nl.wur.alterra.cgi.ace.model.AceItem)ClpSerializer.translateOutput(returnObj);
 	}
 
+	public nl.wur.alterra.cgi.ace.model.AceItem createAceItem() {
+		Object returnObj = null;
+
+		MethodHandler methodHandler = new MethodHandler(_createAceItemMethodKey13);
+
+		try {
+			returnObj = _classLoaderProxy.invoke(methodHandler);
+		}
+		catch (Throwable t) {
+			if (t instanceof RuntimeException) {
+				throw (RuntimeException)t;
+			}
+			else {
+				throw new RuntimeException(t.getClass().getName() +
+					" is not a valid exception");
+			}
+		}
+
+		return (nl.wur.alterra.cgi.ace.model.AceItem)ClpSerializer.translateOutput(returnObj);
+	}
+
 	public java.util.List<nl.wur.alterra.cgi.ace.model.AceItem> getAceItemsByGroupId(
 		long groupId)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		Object returnObj = null;
 
-		MethodHandler methodHandler = new MethodHandler(_getAceItemsByGroupIdMethodKey13,
+		MethodHandler methodHandler = new MethodHandler(_getAceItemsByGroupIdMethodKey14,
 				groupId);
 
 		try {
@@ -419,7 +440,7 @@ public class AceItemLocalServiceClp implements AceItemLocalService {
 		throws com.liferay.portal.kernel.exception.SystemException {
 		Object returnObj = null;
 
-		MethodHandler methodHandler = new MethodHandler(_getAceItemsByGroupIdMethodKey14,
+		MethodHandler methodHandler = new MethodHandler(_getAceItemsByGroupIdMethodKey15,
 				groupId, start, end);
 
 		try {
@@ -446,7 +467,7 @@ public class AceItemLocalServiceClp implements AceItemLocalService {
 		throws com.liferay.portal.kernel.exception.SystemException {
 		Object returnObj = null;
 
-		MethodHandler methodHandler = new MethodHandler(_getAceItemsCountByGroupIdMethodKey15,
+		MethodHandler methodHandler = new MethodHandler(_getAceItemsCountByGroupIdMethodKey16,
 				groupId);
 
 		try {
@@ -506,10 +527,12 @@ public class AceItemLocalServiceClp implements AceItemLocalService {
 	private MethodKey _updateAceItemMethodKey12 = new MethodKey(_classLoaderProxy.getClassName(),
 			"updateAceItem", nl.wur.alterra.cgi.ace.model.AceItem.class,
 			boolean.class);
-	private MethodKey _getAceItemsByGroupIdMethodKey13 = new MethodKey(_classLoaderProxy.getClassName(),
-			"getAceItemsByGroupId", long.class);
+	private MethodKey _createAceItemMethodKey13 = new MethodKey(_classLoaderProxy.getClassName(),
+			"createAceItem");
 	private MethodKey _getAceItemsByGroupIdMethodKey14 = new MethodKey(_classLoaderProxy.getClassName(),
+			"getAceItemsByGroupId", long.class);
+	private MethodKey _getAceItemsByGroupIdMethodKey15 = new MethodKey(_classLoaderProxy.getClassName(),
 			"getAceItemsByGroupId", long.class, int.class, int.class);
-	private MethodKey _getAceItemsCountByGroupIdMethodKey15 = new MethodKey(_classLoaderProxy.getClassName(),
+	private MethodKey _getAceItemsCountByGroupIdMethodKey16 = new MethodKey(_classLoaderProxy.getClassName(),
 			"getAceItemsCountByGroupId", long.class);
 }

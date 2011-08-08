@@ -49,7 +49,7 @@
      
 	 <b>Sectors</b><br />
 	 <c:set var="aceItemSectors" value="<%= aceitem.getSectors_() %>" />
-     <c:forEach var="adaptationSector" items="<%= nl.wur.alterra.cgi.ace.model.impl.AceItemSector.values() %>" >
+     <c:forEach var="adaptationSector" items="<%= nl.wur.alterra.cgi.ace.model.constants.AceItemSector.values() %>" >
 		<c:if test="${fn:indexOf(aceItemSectors, adaptationSector)>=0}">
 			<liferay-ui:message key="acesearch-sectors-lbl-${adaptationSector}" /><br />
 		</c:if>	
@@ -58,7 +58,7 @@
 	 
 	 <b>Elements</b><br />
 	 <c:set var="aceItemElements" value="<%= aceitem.getElements_() %>" />
-     <c:forEach var="adaptationElement" items="<%= nl.wur.alterra.cgi.ace.model.impl.AceItemElement.values() %>" >
+     <c:forEach var="adaptationElement" items="<%= nl.wur.alterra.cgi.ace.model.constants.AceItemElement.values() %>" >
 		<c:if test="${fn:indexOf(aceItemElements, adaptationElement)>=0}">
 			<liferay-ui:message key="acesearch-elements-lbl-${adaptationElement}" /><br />
 		</c:if>	
@@ -67,7 +67,7 @@
 	 
 	 <b>Climate impacts</b><br />
 	 <c:set var="aceItemClimateImpacts" value="<%= aceitem.getClimateimpacts_() %>" />
-     <c:forEach var="adaptationClimateImpact" items="<%= nl.wur.alterra.cgi.ace.model.impl.AceItemClimateImpact.values() %>" >
+     <c:forEach var="adaptationClimateImpact" items="<%= nl.wur.alterra.cgi.ace.model.constants.AceItemClimateImpact.values() %>" >
 		<c:if test="${fn:indexOf(aceItemClimateImpacts, adaptationClimateImpact)>=0}">
 			<liferay-ui:message key="aceitem-climateimpacts-lbl-${adaptationClimateImpact}" /><br />
 		</c:if>	

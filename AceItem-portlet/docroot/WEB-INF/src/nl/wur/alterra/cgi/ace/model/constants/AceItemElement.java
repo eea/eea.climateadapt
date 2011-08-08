@@ -1,4 +1,4 @@
-package nl.wur.alterra.cgi.ace.model.impl;
+package nl.wur.alterra.cgi.ace.model.constants;
 
 /**
  * Elements of AceItems.

@@ -62,7 +62,7 @@
 		<!--   input name="sectors_" type="text" size="65" value="< %= aceitem == null ? "" : aceitem.getSectors_() % >"><br /><br / -->
 		
        <%-- note : i18n file should always be in sync with AceItemSector enum --%>	
-		<c:forEach var="adaptationSector" items="<%= nl.wur.alterra.cgi.ace.model.impl.AceItemSector.values() %>" >
+		<c:forEach var="adaptationSector" items="<%= nl.wur.alterra.cgi.ace.model.constants.AceItemSector.values() %>" >
 			<div class="check">
 				<c:set var="aceItemSectors" value="<%= aceitem == null ? "" : aceitem.getSectors_() %>" />
 				<c:set var="adaptationSectorMustBeChecked" value="false" />
@@ -84,7 +84,7 @@
 		
 		<b>Elements</b><br />
 		<%-- note : i18n file should always be in sync with AceItemElement enum --%>
-		<c:forEach var="adaptationElement" items="<%= nl.wur.alterra.cgi.ace.model.impl.AceItemElement.values() %>" >
+		<c:forEach var="adaptationElement" items="<%= nl.wur.alterra.cgi.ace.model.constants.AceItemElement.values() %>" >
 			<div class="check">
 				<c:set var="adaptationElementMustBeChecked" value="false" />
 				<c:set var="aceItemElements" value="<%= aceitem == null ? "" : aceitem.getElements_() %>" />
@@ -107,7 +107,7 @@
 		
 		<b>Climate Impacts</b><br />
 		<%-- note : i18n file should always be in sync with AceItemClimateImpact enum --%>
-		<c:forEach var="adaptationClimateImpact" items="<%= nl.wur.alterra.cgi.ace.model.impl.AceItemClimateImpact.values() %>" >
+		<c:forEach var="adaptationClimateImpact" items="<%= nl.wur.alterra.cgi.ace.model.constants.AceItemClimateImpact.values() %>" >
 			<div class="check">
 				<c:set var="adaptationClimateImpactMustBeChecked" value="false" />
 				<c:set var="aceItemClimateImpacts" value="<%= aceitem == null ? "" : aceitem.getClimateimpacts_() %>" />
@@ -132,7 +132,14 @@
 		
 		<b>spatialValues</b><br />	
 		<input name="spatialValues" type="text" size="65" value="<%= aceitem == null ? "" : aceitem.getSpatialValues() %>"><br /><br />
-       </div>		
+    
+		<b>keywords</b><br />  
+
+		<textarea name="keyword" rows=5 cols=100><%= aceitem == null ? "" : aceitem.getKeyword() %></textarea><br /><br />
+		<input type="checkbox" name="chk_importance" id="chk_importance" value="1" <% if (aceitem != null) { out.print( aceitem.getImportance() == 1 ? "checked" : "") ; } %> />
+		<b>High importance</b><br />
+	
+	</div>		
 		
 		<!--  a u i :input name="startdate" / >
 		

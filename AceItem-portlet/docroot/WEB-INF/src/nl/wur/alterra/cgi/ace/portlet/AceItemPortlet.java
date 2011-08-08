@@ -9,19 +9,18 @@ import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.util.bridges.mvc.MVCPortlet;
 import nl.wur.alterra.cgi.ace.model.AceItem;
+import nl.wur.alterra.cgi.ace.model.constants.AceItemClimateImpact;
+import nl.wur.alterra.cgi.ace.model.constants.AceItemElement;
+import nl.wur.alterra.cgi.ace.model.constants.AceItemSector;
 import nl.wur.alterra.cgi.ace.model.impl.AceItemImpl;
 import nl.wur.alterra.cgi.ace.search.lucene.ACEIndexSynchronizer;
 import nl.wur.alterra.cgi.ace.service.AceItemLocalServiceUtil;
-import nl.wur.alterra.cgi.ace.model.impl.AceItemSector;
-import nl.wur.alterra.cgi.ace.model.impl.AceItemElement;
-import nl.wur.alterra.cgi.ace.model.impl.AceItemClimateImpact;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
 import javax.portlet.PortletPreferences;
 import javax.portlet.PortletRequest;
 import java.util.ArrayList;
-import java.util.Date;
 
 /**
  * Portlet implementation class AceItemPortlet
@@ -147,6 +146,17 @@ public class AceItemPortlet extends MVCPortlet {
 		Date publicationdate = PortalUtil.getDate(dateMonth, dateDay, dateYear);
 		aceitem.setEndDate(publicationdate);
 */
+		String importance = ParamUtil.getString(request, "chk_importance");
+
+		if(aceitem.getImportance() == 1) {
+			  aceitem.setImportance( aceitem.getImportance()-1 );
+			  aceitem.setRating( aceitem.getRating() - 100);
+		}
+
+		if( importance != null && importance.equalsIgnoreCase("1")) {
+			  aceitem.setImportance(aceitem.getImportance()+1);
+			  aceitem.setRating( aceitem.getRating() + 100);
+		}
 		
 		return aceitem;
 	}

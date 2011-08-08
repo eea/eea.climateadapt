@@ -216,6 +216,10 @@ public class AceItemLocalServiceWrapper implements AceItemLocalService {
 		return _aceItemLocalService.updateAceItem(aceItem, merge);
 	}
 
+	public nl.wur.alterra.cgi.ace.model.AceItem createAceItem() {
+		return _aceItemLocalService.createAceItem();
+	}
+
 	/**
 	* Hugo de Groot: add these methods by hand to <portlet>LocalServiceImpl
 	* and rerun ServiceBuilder if auto generation fails

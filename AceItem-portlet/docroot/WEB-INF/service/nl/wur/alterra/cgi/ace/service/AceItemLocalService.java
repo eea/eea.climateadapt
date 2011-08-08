@@ -204,6 +204,8 @@ public interface AceItemLocalService {
 		nl.wur.alterra.cgi.ace.model.AceItem aceItem, boolean merge)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	public nl.wur.alterra.cgi.ace.model.AceItem createAceItem();
+
 	/**
 	* Hugo de Groot: add these methods by hand to <portlet>LocalServiceImpl
 	* and rerun ServiceBuilder if auto generation fails

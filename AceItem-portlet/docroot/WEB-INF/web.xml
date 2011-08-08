@@ -262,53 +262,7 @@
 	<listener>
 		<listener-class>com.liferay.portal.kernel.servlet.PortletContextListener</listener-class>
 	</listener>
-    <!-- Servlet proxy -->
-    <servlet>
-        <servlet-name>HttpProxy</servlet-name>
-        <servlet-class>org.geonetwork.http.proxy.HttpProxyServlet</servlet-class>
 
-    <!-- List of allowed content types -->
-    <init-param>
-      <param-name>AllowedContentTypes</param-name>
-      <param-value>
-          application/xml,text/xml,
-          text/html,
-          text/plain,
-          application/vnd.ogc.se_xml,
-          application/vnd.ogc.se+xml,
-          application/vnd.ogc.success+xml,
-          application/vnd.ogc.wms_xml,
-          application/vnd.ogc.context+xml,
-          application/vnd.ogc.gml,
-          application/vnd.ogc.sld+xml,
-          application/vnd.google-earth.kml+xml,
-          application/json
-      </param-value>
-    </init-param>
-
-    <!-- List of host alloed to be accesed by the proxy: If not specified or empty, any hosts is allowed -->
-    <init-param>
-        <param-name>AllowedHosts</param-name>
-        <param-value />
-    </init-param>
-
-    <!-- Default proxy url if none is provided -->
-    <init-param>
-        <param-name>DefaultProxyUrl</param-name>
-        <param-value>http://www.openlayers.org</param-value>
-    </init-param>
-
-    <load-on-startup>0</load-on-startup>
-    </servlet>
-	<servlet>
-		<servlet-name>AdaptationTools</servlet-name>
-		<servlet-class>com.liferay.portal.kernel.servlet.PortletServlet</servlet-class>
-		<init-param>
-			<param-name>portlet-class</param-name>
-			<param-value>nl.wur.alterra.cgi.ace.portlet.AdaptationToolJSPPortlet</param-value>
-		</init-param>
-		<load-on-startup>0</load-on-startup>
-	</servlet>
 	<servlet>
 		<servlet-name>aceitemportlet</servlet-name>
 		<servlet-class>com.liferay.portal.kernel.servlet.PortletServlet</servlet-class>
@@ -328,15 +282,6 @@
 		<load-on-startup>0</load-on-startup>
 	</servlet>
 	<servlet>
-		<servlet-name>acesearchportlet</servlet-name>
-		<servlet-class>com.liferay.portal.kernel.servlet.PortletServlet</servlet-class>
-		<init-param>
-			<param-name>portlet-class</param-name>
-			<param-value>nl.wur.alterra.cgi.ace.portlet.AceSearchPortlet</param-value>
-		</init-param>
-		<load-on-startup>0</load-on-startup>
-	</servlet>
-	<servlet>
 		<servlet-name>viewaceitemportlet</servlet-name>
 		<servlet-class>com.liferay.portal.kernel.servlet.PortletServlet</servlet-class>
 		<init-param>
@@ -345,23 +290,7 @@
 		</init-param>
 		<load-on-startup>0</load-on-startup>
 	</servlet>
-	<servlet>
-		<servlet-name>filteraceitemportlet</servlet-name>
-		<servlet-class>com.liferay.portal.kernel.servlet.PortletServlet</servlet-class>
-		<init-param>
-			<param-name>portlet-class</param-name>
-			<param-value>nl.wur.alterra.cgi.ace.portlet.FilterAceItemPortlet</param-value>
-		</init-param>
-		<load-on-startup>0</load-on-startup>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>AdaptationTools</servlet-name>
-		<url-pattern>/AdaptationTools/*</url-pattern>
-	</servlet-mapping>
-        <servlet-mapping>
-            <servlet-name>HttpProxy</servlet-name>
-            <url-pattern>/proxy</url-pattern>
-        </servlet-mapping>
+
 	<servlet-mapping>
 		<servlet-name>aceitemportlet</servlet-name>
 		<url-pattern>/aceitemportlet/*</url-pattern>
@@ -371,17 +300,10 @@
 		<url-pattern>/nasportlet/*</url-pattern>
 	</servlet-mapping>
 	<servlet-mapping>
-		<servlet-name>acesearchportlet</servlet-name>
-		<url-pattern>/acesearchportlet/*</url-pattern>
-	</servlet-mapping>
-	<servlet-mapping>
 		<servlet-name>viewaceitemportlet</servlet-name>
 		<url-pattern>/viewaceitemportlet/*</url-pattern>
 	</servlet-mapping>
-	<servlet-mapping>
-		<servlet-name>filteraceitemportlet</servlet-name>
-		<url-pattern>/filteraceitemportlet/*</url-pattern>
-	</servlet-mapping>
+
 	<welcome-file-list>
 		<welcome-file>index.html</welcome-file>
 		<welcome-file>index.htm</welcome-file>

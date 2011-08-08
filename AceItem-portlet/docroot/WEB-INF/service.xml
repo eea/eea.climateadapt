@@ -35,7 +35,8 @@
 		<column name="sectors_" type="String" />
 		<column name="elements_" type="String" />
 		<column name="climateimpacts_" type="String" />
-
+		<column name="rating" type="long" />
+		<column name="importance" type="long" />
 		<!-- Sort order -->
 		<order by="asc">
 			<order-column name="name" />

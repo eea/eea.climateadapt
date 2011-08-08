@@ -4,10 +4,7 @@
 <display>
 	<category name="Ace">
 		<portlet id="aceitemportlet"></portlet>
-		<portlet id="acesearchportlet"></portlet>
 		<portlet id="nasportlet"></portlet>
 		<portlet id="viewaceitemportlet"></portlet>
-		<portlet id="filteraceitemportlet"></portlet>
-                <portlet id="AdaptationTools" />
 	</category>
 </display>

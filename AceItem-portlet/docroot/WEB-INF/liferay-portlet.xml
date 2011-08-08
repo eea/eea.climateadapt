@@ -3,33 +3,6 @@
 
 <liferay-portlet-app>
 	<portlet>
-		<portlet-name>AdaptationTools</portlet-name>
-		<icon>/icon.png</icon>
-		<instanceable>false</instanceable>
-
-		<header-portlet-css>http://extjs.cachefly.net/ext-3.2.1/resources/css/ext-all.css</header-portlet-css>
-		<header-portlet-css>http://extjs.cachefly.net/ext-3.2.1/examples/shared/examples.css</header-portlet-css>		
-		<header-portlet-css>/js/bubblepopup/jquery.bubblepopup.v2.3.1.css</header-portlet-css>
-		<header-portlet-css>/js/lightbox/css/jquery.lightbox-0.5.css</header-portlet-css>
-        <header-portlet-css>/css/main.css</header-portlet-css>
-		
-		<header-portlet-javascript>http://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js</header-portlet-javascript>
-		<header-portlet-javascript>/js/bubblepopup/jquery.bubblepopup.v2.3.1.min.js</header-portlet-javascript>
-		<header-portlet-javascript>/js/equalheights/jquery.equalheights.js</header-portlet-javascript>
-		<header-portlet-javascript>/js/lightbox/js/jquery.lightbox-0.5.js</header-portlet-javascript>
-		<header-portlet-javascript>/js/ext-base.js</header-portlet-javascript>
-		<header-portlet-javascript>/js/ext-all.js</header-portlet-javascript>
-		<header-portlet-javascript>/js/OpenLayers.js</header-portlet-javascript>
-		<header-portlet-javascript>/js/LoadingPanel.js</header-portlet-javascript>
-		<header-portlet-javascript>/js/GeoExt.js</header-portlet-javascript>
-		<header-portlet-javascript>/js/proj4js-compressed.js</header-portlet-javascript>
-		<header-portlet-javascript>/js/mapviewer.js</header-portlet-javascript>
-		
-		<footer-portlet-javascript>/js/main.js</footer-portlet-javascript>
-		
-		<css-class-wrapper>AdaptationTools-portlet</css-class-wrapper>		
-	</portlet>
-	<portlet>
 		<portlet-name>aceitemportlet</portlet-name>
 		<icon>/icon.png</icon>
 		<instanceable>false</instanceable>
@@ -37,19 +10,7 @@
 		<footer-portlet-javascript>/js/javascript.js</footer-portlet-javascript>
 		<css-class-wrapper>aceitemportlet-portlet</css-class-wrapper>
 	</portlet>
-	<portlet>
-		<portlet-name>acesearchportlet</portlet-name>
-		<icon>/icon.png</icon>
-		<instanceable>false</instanceable>
-		<header-portlet-css>/css/portlet.css</header-portlet-css>
-		<header-portlet-css>/css/data_table.css</header-portlet-css>
-		<header-portlet-css>/css/data_table_jui.css</header-portlet-css>
-		<header-portlet-javascript>http://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js</header-portlet-javascript>
-		<!-- Originally from http://tympanus.net/jPaginate/jquery.paginate.js, but fixed -->
-		<header-portlet-javascript>/js/jquery.paginate.js</header-portlet-javascript>
-		<footer-portlet-javascript>/js/search.js</footer-portlet-javascript>
-		<css-class-wrapper>acesearchportlet-portlet</css-class-wrapper>
-	</portlet>
+
 	<portlet>
 		<portlet-name>nasportlet</portlet-name>
 		<icon>/icon.png</icon>
@@ -68,19 +29,6 @@
 		<header-portlet-css>/css/portlet.css</header-portlet-css>
 		<footer-portlet-javascript>/js/javascript.js</footer-portlet-javascript>
 		<css-class-wrapper>viewaceitemportlet-portlet</css-class-wrapper>
-	</portlet>
-	<portlet>
-		<portlet-name>filteraceitemportlet</portlet-name>
-		<icon>/icon.png</icon>
-		<instanceable>false</instanceable>
-		<header-portlet-css>/css/portlet.css</header-portlet-css>
-		<header-portlet-css>/css/data_table.css</header-portlet-css>
-		<header-portlet-css>/css/data_table_jui.css</header-portlet-css>
-		<header-portlet-javascript>http://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js</header-portlet-javascript>
-		<!-- Originally from http://tympanus.net/jPaginate/jquery.paginate.js, but fixed -->
-		<header-portlet-javascript>/js/jquery.paginate.js</header-portlet-javascript>
-		<footer-portlet-javascript>/js/search.js</footer-portlet-javascript>
-		<css-class-wrapper>filteraceitemportlet-portlet</css-class-wrapper>
 	</portlet>
 	<role-mapper>
 		<role-name>administrator</role-name>

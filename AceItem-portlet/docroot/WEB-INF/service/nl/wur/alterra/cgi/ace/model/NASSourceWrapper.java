@@ -76,7 +76,7 @@ public class NASSourceWrapper implements NASSource {
 		_nasSource.setGroupId(groupId);
 	}
 
-	public NASSource toEscapedModel() {
+	public nl.wur.alterra.cgi.ace.model.NASSource toEscapedModel() {
 		return _nasSource.toEscapedModel();
 	}
 

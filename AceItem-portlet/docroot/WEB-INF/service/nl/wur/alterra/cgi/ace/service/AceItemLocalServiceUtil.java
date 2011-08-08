@@ -226,6 +226,10 @@ public class AceItemLocalServiceUtil {
 		return getService().updateAceItem(aceItem, merge);
 	}
 
+	public static nl.wur.alterra.cgi.ace.model.AceItem createAceItem() {
+		return getService().createAceItem();
+	}
+
 	/**
 	* Hugo de Groot: add these methods by hand to <portlet>LocalServiceImpl
 	* and rerun ServiceBuilder if auto generation fails

@@ -70,3 +70,8 @@ WITH (
 );
 ALTER TABLE ace_nassource OWNER TO postgres;
 
+-- heikki: added from Hugo email dd July 11th 2011
+alter table ace_aceitem add column rating bigint;
+alter table ace_aceitem add column importance bigint;
+update ace_aceitem set rating = 0, importance = 0;
+

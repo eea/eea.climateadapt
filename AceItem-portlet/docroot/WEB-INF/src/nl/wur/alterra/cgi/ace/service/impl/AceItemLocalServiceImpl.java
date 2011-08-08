@@ -17,6 +17,7 @@ package nl.wur.alterra.cgi.ace.service.impl;
 import com.liferay.counter.service.CounterLocalServiceUtil;
 import com.liferay.portal.kernel.exception.SystemException;
 import nl.wur.alterra.cgi.ace.model.AceItem;
+import nl.wur.alterra.cgi.ace.model.impl.AceItemImpl;
 import nl.wur.alterra.cgi.ace.search.lucene.ACELuceneException;
 import nl.wur.alterra.cgi.ace.search.lucene.AceItemIndexer;
 import nl.wur.alterra.cgi.ace.service.base.AceItemLocalServiceBaseImpl;
@@ -43,6 +44,11 @@ import java.util.List;
  * @see nl.wur.alterra.cgi.ace.service.AceItemLocalServiceUtil
  */
 public class AceItemLocalServiceImpl extends AceItemLocalServiceBaseImpl {
+
+    public AceItem createAceItem() {
+        return new AceItemImpl();
+    }
+
 	/**
 	 * Adds the AceItem to the database incrementing the primary key, and adds it to the Lucene index.
 	 *
