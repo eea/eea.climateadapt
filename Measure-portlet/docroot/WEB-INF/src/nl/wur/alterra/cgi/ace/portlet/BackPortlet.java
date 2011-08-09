@@ -1,7 +1,5 @@
 package nl.wur.alterra.cgi.ace.portlet;
 
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.util.PortalUtil;
 
 import java.io.IOException;
@@ -13,11 +11,9 @@ import javax.portlet.RenderResponse;
 import javax.servlet.http.HttpServletRequest;
 
 /**
- * Portlet implementation class ViewMeasurePortlet
+ * Portlet implementation class BackPortlet
  */
-public class ViewMeasurePortlet extends GenericPortlet {
-
-    private static final String ID = "measure_id";
+public class BackPortlet extends GenericPortlet {
 
     public void init() {
         viewJSP = getInitParameter("view-jsp");
@@ -26,13 +22,7 @@ public class ViewMeasurePortlet extends GenericPortlet {
     public void doView(
             RenderRequest renderRequest, RenderResponse renderResponse)
         throws IOException, PortletException {
-    	
-    	HttpServletRequest httpRequest = 
-    		PortalUtil.getOriginalServletRequest(
-    		PortalUtil.getHttpServletRequest(renderRequest) ) ;
-   	
-    	renderRequest.setAttribute(ID, httpRequest.getParameter("ace_measure_id"));
-        
+    	        
         include(viewJSP, renderRequest, renderResponse);
     }
 
@@ -44,16 +34,9 @@ public class ViewMeasurePortlet extends GenericPortlet {
         PortletRequestDispatcher portletRequestDispatcher =
             getPortletContext().getRequestDispatcher(path);
 
-        if (portletRequestDispatcher == null) {
-            _log.error(path + " is not a valid include");
-        }
-        else {
-            portletRequestDispatcher.include(renderRequest, renderResponse);
-        }
+        portletRequestDispatcher.include(renderRequest, renderResponse);
     }
  
     protected String viewJSP;
-
-    private static Log _log = LogFactoryUtil.getLog(ViewMeasurePortlet.class);
 
 }

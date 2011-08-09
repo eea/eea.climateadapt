@@ -164,11 +164,11 @@
 	</portlet:actionURL>
 	
 	<liferay-ui:icon image="rateup" url="<%=rateUpURL.toString() %>" />
-	 &nbsp;&nbsp;		
+	 &nbsp;&nbsp;<br /><br />		
 <%	 }  %>
 </c:when>
 <c:otherwise>
  <H1>No Measure selected</H1>
 </c:otherwise>
 </c:choose>
-<input type="button" value="Back" onClick="history.go(-1);">
+

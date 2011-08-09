@@ -14,7 +14,7 @@
 		<css-class-wrapper>measureportlet-portlet</css-class-wrapper>
 	</portlet>
 	<portlet>
-		<portlet-name>viewmeasureportlet</portlet-name>
+		<portlet-name>backportlet</portlet-name>
 		<icon>/icon.png</icon>
 		<instanceable>true</instanceable>
 		<header-portlet-css>/css/portlet.css</header-portlet-css>
@@ -22,7 +22,7 @@
 			/js/javascript.js
 		</footer-portlet-javascript>
 		<css-class-wrapper>
-			viewmeasureportlet-portlet
+			backportlet-portlet
 		</css-class-wrapper>
 	</portlet>
 	<portlet>

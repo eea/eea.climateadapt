@@ -59,14 +59,14 @@
 		</security-role-ref>
 	</portlet>
 	<portlet>
-		<portlet-name>viewmeasureportlet</portlet-name>
+		<portlet-name>backportlet</portlet-name>
 		<display-name>ViewMeasurePortlet</display-name>
 		<portlet-class>
-			nl.wur.alterra.cgi.ace.portlet.ViewMeasurePortlet
+			nl.wur.alterra.cgi.ace.portlet.BackPortlet
 		</portlet-class>
 		<init-param>
 			<name>view-jsp</name>
-			<value>/html/viewmeasure.jsp</value>
+			<value>/html/viewback.jsp</value>
 		</init-param>
 		<expiration-cache>0</expiration-cache>
 		<supports>
@@ -76,8 +76,8 @@
 		<!-- Resource Bundle -->
 		<resource-bundle>content.Language</resource-bundle>
 		<portlet-info>
-			<title>ViewMeasurePortlet</title>
-			<short-title>ViewMeasurePortlet</short-title>
+			<title>BackPortlet</title>
+			<short-title>BackPortlet</short-title>
 			<keywords></keywords>
 		</portlet-info>
 		<security-role-ref>
