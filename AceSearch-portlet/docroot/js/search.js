@@ -75,6 +75,18 @@ jQuery(document).ready(function() {
     showDataInfoPanel();
 });
 
+function removeHTMLTags(inStrRemoveTags){
+            var strInputCode = inStrRemoveTags;
+            /*
+                    This line is optional, it replaces escaped brackets with real ones,
+                    i.e. &lt; is replaced with < and &gt; is replaced with >
+            */
+            strInputCode = strInputCode.replace(/&(lt|gt);/g, function (strMatch, p1){
+                    return (p1 == "lt")? "<" : ">";
+            });
+            return strInputCode.replace(/<\/?[^>]+(>|$)/g, "");
+}
+
 /**
  * Resizes pagination for results groups according to how many page numbers are displayed.
  */ 
@@ -319,7 +331,8 @@ function displayJSONResults(unique, aceitemResults) {
 			resultlist += '<div class="searchresult">';
 		
 			var descriptionText = aceitem._description.length > 400 ? aceitem._description.substring(0, 396) + " ..." : aceitem._description;
-			
+			descriptionText = removeHTMLTags(descriptionText) ;
+
 			// add name and description
             if ((aceitem._storedAt != "") && (aceitem._storagetype.substr(0, 3) == "URL")) {
                    resultlist += '<div><span class="bolder">&#187; <a href="/viewaceitem?aceitem_id=' +  aceitem._aceItemId  + '" >' + aceitem._name + ' </a></span> - ' + descriptionText + '</div>';
