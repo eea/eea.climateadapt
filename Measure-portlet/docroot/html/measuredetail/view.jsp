@@ -148,25 +148,27 @@
 		lastratedmeasureid = (String) renderRequest.getPortletSession().getAttribute("lastRatedMeasureId") ;
 	}
 	if( ! measure_id.toString().equalsIgnoreCase( lastratedmeasureid )) { %>
-	    <!--  PERFORM PORTLET ACTION rateUpMeasure -->
-		<portlet:actionURL name="rateDownMeasure" var="rateDownURL">
-			<portlet:param name="measureId" value="<%= measure_id.toString() %>" />
-			<portlet:param name="redirect" value="<%= redirect %>"/>
-		</portlet:actionURL>
-		
-		<liferay-ui:icon image="ratedown" url="<%=rateDownURL.toString() %>" />
-		
-	    <!--  PERFORM PORTLET ACTION rateUpMeasure -->
-		<portlet:actionURL name="rateUpMeasure" var="rateUpURL">
-			<portlet:param name="measureId" value="<%= measure_id.toString() %>" />
-			<portlet:param name="redirect" value="<%= redirect %>"/>
-		</portlet:actionURL>
-		
-		<liferay-ui:icon image="rateup" url="<%=rateUpURL.toString() %>" />
-		
+	Your meaning about this item:
+    <!--  PERFORM PORTLET ACTION rateUpMeasure -->
+	<portlet:actionURL name="rateDownMeasure" var="rateDownURL">
+		<portlet:param name="measureId" value="<%= measure_id.toString() %>" />
+		<portlet:param name="redirect" value="<%= redirect %>"/>
+	</portlet:actionURL>
+	
+	<liferay-ui:icon image="ratedown" url="<%=rateDownURL.toString() %>" />
+	&nbsp;&nbsp;
+    <!--  PERFORM PORTLET ACTION rateUpMeasure -->
+	<portlet:actionURL name="rateUpMeasure" var="rateUpURL">
+		<portlet:param name="measureId" value="<%= measure_id.toString() %>" />
+		<portlet:param name="redirect" value="<%= redirect %>"/>
+	</portlet:actionURL>
+	
+	<liferay-ui:icon image="rateup" url="<%=rateUpURL.toString() %>" />
+	 &nbsp;&nbsp;		
 <%	 }  %>
-   </c:when>
-   <c:otherwise>
-     <H1>No Measure selected</H1>
-   </c:otherwise>
- </c:choose>
+</c:when>
+<c:otherwise>
+ <H1>No Measure selected</H1>
+</c:otherwise>
+</c:choose>
+<input type="button" value="Back" onClick="history.go(-1);">
