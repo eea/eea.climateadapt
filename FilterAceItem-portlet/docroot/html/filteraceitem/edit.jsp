@@ -1,4 +1,5 @@
 <%@page import="nl.wur.alterra.cgi.ace.search.AceSearchFormBean"%>
+<%@page import="nl.wur.alterra.cgi.ace.search.SearchRequestParams"%>
 <%@page import="nl.wur.alterra.cgi.ace.portlet.FilterAceItemPortlet"%>
 <%@ page import="java.util.Arrays" %>
 <%--
@@ -24,7 +25,7 @@
 
 Long totalResults = (Long) request.getAttribute("total_results");
 
-AceSearchFormBean acesearchformbean = (AceSearchFormBean) request.getAttribute(FilterAceItemPortlet.SEARCH_PARAMS);
+AceSearchFormBean acesearchformbean = (AceSearchFormBean) request.getAttribute(SearchRequestParams.SEARCH_PARAMS);
 
 // Retrieve parameters to fill form
 String anyOfThese = acesearchformbean.getAnyOfThese();
@@ -160,7 +161,7 @@ pageContext.setAttribute("countriesList", countriesList);
                     <div id="all_selection_types">
                         <div class="checks_container">						
 							<%-- note : i18n file should always be in sync with AceItemType enum --%>						
-							<c:forEach var="aceItemType" items="<%= nl.wur.alterra.cgi.ace.model.impl.AceItemType.values() %>" >	
+							<c:forEach var="aceItemType" items="<%= nl.wur.alterra.cgi.ace.model.constants.AceItemType.values() %>" >	
 								<div class="check">
 									<c:set var="aceItemMustBeChecked" value="false" />
 									<c:forEach var="requestedAceItemType" items="${aceitemtypesList}">
@@ -191,7 +192,7 @@ pageContext.setAttribute("countriesList", countriesList);
                         <a href="#" id="adaptation_sectors_btn" class="expanded_section"><liferay-ui:message key="acesearch-section-adaptation-sectors" /></a>
                         <div id="adaptation_sectors_container" class="checks_container">		
 							<%-- note : i18n file should always be in sync with AceItemSector enum --%>	
-							<c:forEach var="adaptationSector" items="<%= nl.wur.alterra.cgi.ace.model.impl.AceItemSector.values() %>" >							
+							<c:forEach var="adaptationSector" items="<%= nl.wur.alterra.cgi.ace.model.constants.AceItemSector.values() %>" >							
 								<div class="check">
 									<c:set var="adaptationSectorMustBeChecked" value="false" />
 									<c:forEach var="requestedSector" items="${sectorsList}">
@@ -217,7 +218,7 @@ pageContext.setAttribute("countriesList", countriesList);
                         <a href="#" id="countries_btn" class="collapsed_section"><liferay-ui:message key="acesearch-section-countries" /></a>
                         <div id="countries_container" class="checks_container">
                             <%-- note : i18n file should always be in sync with AceItemCountry enum --%>
-							<c:forEach var="countryElement" items="<%= nl.wur.alterra.cgi.ace.model.impl.AceItemCountry.values() %>" >
+							<c:forEach var="countryElement" items="<%= nl.wur.alterra.cgi.ace.model.constants.AceItemCountry.values() %>" >
 								<div class="check">
 									<c:set var="countryElementMustBeChecked" value="false" />
 									<c:forEach var="requestedElement" items="${countriesList}">
@@ -244,7 +245,7 @@ pageContext.setAttribute("countriesList", countriesList);
                         <a href="#" id="adaptation_elements_btn" class="collapsed_section"><liferay-ui:message key="acesearch-section-adaptation-elements" /></a>
                         <div id="adaptation_elements_container" class="checks_container">		
 							<%-- note : i18n file should always be in sync with AceItemElement enum --%>
-							<c:forEach var="adaptationElement" items="<%= nl.wur.alterra.cgi.ace.model.impl.AceItemElement.values() %>" >
+							<c:forEach var="adaptationElement" items="<%= nl.wur.alterra.cgi.ace.model.constants.AceItemElement.values() %>" >
 								<div class="check">
 									<c:set var="adaptationElementMustBeChecked" value="false" />
 									<c:forEach var="requestedElement" items="${elementsList}">
