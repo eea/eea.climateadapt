@@ -64,7 +64,7 @@
 
 	   <b>Sectors</b><br />
        <%-- note : i18n file should always be in sync with AceItemSector enum --%>	
-		<c:forEach var="adaptationSector" items="<%= nl.wur.alterra.cgi.ace.model.impl.AceItemSector.values() %>" >
+		<c:forEach var="adaptationSector" items="<%= nl.wur.alterra.cgi.ace.model.constants.AceItemSector.values() %>" >
 			<div class="check">
 				<c:set var="aceItemSectors" value="<%= project == null ? "" : project.getSectors() %>" />
 				<c:set var="adaptationSectorMustBeChecked" value="false" />
@@ -86,7 +86,7 @@
 
 		<b>Element(s)</b><br />
 		<%-- note : i18n file should always be in sync with AceItemElement enum --%>
-		<c:forEach var="adaptationElement" items="<%= nl.wur.alterra.cgi.ace.model.impl.AceItemElement.values() %>" >
+		<c:forEach var="adaptationElement" items="<%= nl.wur.alterra.cgi.ace.model.constants.AceItemElement.values() %>" >
 			<div class="check">
 				<c:set var="aceItemElements" value="<%= project == null ? "" : project.getElement() %>" />
 				<c:set var="adaptationElementMustBeChecked" value="false" />

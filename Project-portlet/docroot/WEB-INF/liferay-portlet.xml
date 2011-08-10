@@ -14,14 +14,16 @@
 		<css-class-wrapper>projectportlet-portlet</css-class-wrapper>
 	</portlet>
 	<portlet>
-		<portlet-name>viewprojectportlet</portlet-name>
+		<portlet-name>projectdetailportlet</portlet-name>
 		<icon>/icon.png</icon>
-		<instanceable>false</instanceable>
+		<instanceable>true</instanceable>
 		<header-portlet-css>/css/portlet.css</header-portlet-css>
 		<footer-portlet-javascript>
 			/js/javascript.js
 		</footer-portlet-javascript>
-		<css-class-wrapper>viewprojectportlet-portlet</css-class-wrapper>
+		<css-class-wrapper>
+			projectdetailportlet-portlet
+		</css-class-wrapper>
 	</portlet>
 	<role-mapper>
 		<role-name>administrator</role-name>

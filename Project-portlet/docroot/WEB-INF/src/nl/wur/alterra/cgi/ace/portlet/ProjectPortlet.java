@@ -12,7 +12,6 @@ import com.liferay.portal.util.PortalUtil;
 import com.liferay.util.bridges.mvc.MVCPortlet;
 
 import java.util.ArrayList;
-import java.util.Date;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
@@ -20,8 +19,8 @@ import javax.portlet.PortletPreferences;
 import javax.portlet.PortletRequest;
 
 import nl.wur.alterra.cgi.ace.model.Project;
-import nl.wur.alterra.cgi.ace.model.impl.AceItemElement;
-import nl.wur.alterra.cgi.ace.model.impl.AceItemSector;
+import nl.wur.alterra.cgi.ace.model.constants.AceItemElement;
+import nl.wur.alterra.cgi.ace.model.constants.AceItemSector;
 import nl.wur.alterra.cgi.ace.model.impl.ProjectImpl;
 import nl.wur.alterra.cgi.ace.service.ProjectLocalServiceUtil;
 
@@ -37,7 +36,10 @@ public class ProjectPortlet extends MVCPortlet {
 	public void addProject(ActionRequest request, ActionResponse response)
 		throws Exception {
 
-		Project project = projectFromRequest(request);
+		Project project = new ProjectImpl(); 
+		
+		project.setProjectId(ParamUtil.getLong(request, "projectId"));
+		projectFromRequest(request, project);
 
 		ArrayList<String> errors = new ArrayList<String>();
 
@@ -60,16 +62,14 @@ public class ProjectPortlet extends MVCPortlet {
 	}
 
 	/**
-	 * Convenience method to create a Project object out of the request. Used
+	 * Convenience method to  F I L L  a Project object out of the request. Used
 	 * by the Add / Edit methods.
 	 *
 	 */
-	private Project projectFromRequest(PortletRequest request) {
+	private void projectFromRequest(PortletRequest request, Project project) {
 		ThemeDisplay themeDisplay =
 			(ThemeDisplay)request.getAttribute(WebKeys.THEME_DISPLAY);
-
-		ProjectImpl project = new ProjectImpl();
-		project.setProjectId(ParamUtil.getLong(request, "projectId"));
+		
 		project.setAcronym(ParamUtil.getString(request, "acronym"));
 		project.setTitle(ParamUtil.getString(request, "title"));
 /*		
@@ -132,8 +132,6 @@ public class ProjectPortlet extends MVCPortlet {
 		
 		project.setCompanyId(themeDisplay.getCompanyId());
 		project.setGroupId(themeDisplay.getScopeGroupId());
-
-		return project;
 	}
 
 	/**
@@ -143,7 +141,8 @@ public class ProjectPortlet extends MVCPortlet {
 	public void updateProject(ActionRequest request, ActionResponse response)
 		throws Exception {
 
-		Project project = projectFromRequest(request);
+		Project project = ProjectLocalServiceUtil.getProject(ParamUtil.getLong(request, "projectId"));			
+		projectFromRequest(request, project);
 
 		ArrayList<String> errors = new ArrayList<String>();
 

@@ -7,6 +7,6 @@
 	</category>
 	<category name="Ace">
 		<portlet id="projectportlet"></portlet>
-		<portlet id="viewprojectportlet"></portlet>
+		<portlet id="projectdetailportlet"></portlet>
 	</category>
 </display>
