@@ -8,9 +8,9 @@ import javax.portlet.PortletPreferences;
 import javax.portlet.PortletRequest;
 
 import nl.wur.alterra.cgi.ace.model.Measure;
-import nl.wur.alterra.cgi.ace.model.impl.AceItemClimateImpact;
-import nl.wur.alterra.cgi.ace.model.impl.AceItemElement;
-import nl.wur.alterra.cgi.ace.model.impl.AceItemSector;
+import nl.wur.alterra.cgi.ace.model.constants.AceItemClimateImpact;
+import nl.wur.alterra.cgi.ace.model.constants.AceItemElement;
+import nl.wur.alterra.cgi.ace.model.constants.AceItemSector;
 import nl.wur.alterra.cgi.ace.model.impl.MeasureImpl;
 import nl.wur.alterra.cgi.ace.service.MeasureLocalServiceUtil;
 
