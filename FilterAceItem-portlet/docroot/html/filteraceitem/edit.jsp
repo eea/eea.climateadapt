@@ -1,4 +1,4 @@
-<%@page import="nl.wur.alterra.cgi.ace.portlet.AceSearchFormBean"%>
+<%@page import="nl.wur.alterra.cgi.ace.search.AceSearchFormBean"%>
 <%@page import="nl.wur.alterra.cgi.ace.portlet.FilterAceItemPortlet"%>
 <%@ page import="java.util.Arrays" %>
 <%--
