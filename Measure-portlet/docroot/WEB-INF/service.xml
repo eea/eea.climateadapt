@@ -39,6 +39,9 @@
 		<column name="source" type="String" />
 		<column name="rating" type="long" />
 		<column name="importance" type="long" />
+		<column name="lon" type="double" />
+		<column name="lat" type="double" />
+		<column name="satarea" type="String" />
 		
 		<!-- Sort order -->
 		<order by="asc" >

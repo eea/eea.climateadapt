@@ -311,6 +311,9 @@ public class MeasurePersistenceImpl extends BasePersistenceImpl<Measure>
 		measureImpl.setSource(measure.getSource());
 		measureImpl.setRating(measure.getRating());
 		measureImpl.setImportance(measure.getImportance());
+		measureImpl.setLon(measure.getLon());
+		measureImpl.setLat(measure.getLat());
+		measureImpl.setSatarea(measure.getSatarea());
 
 		return measureImpl;
 	}

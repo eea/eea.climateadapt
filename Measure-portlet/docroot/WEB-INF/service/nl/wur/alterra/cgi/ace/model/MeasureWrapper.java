@@ -261,6 +261,30 @@ public class MeasureWrapper implements Measure {
 		_measure.setImportance(importance);
 	}
 
+	public double getLon() {
+		return _measure.getLon();
+	}
+
+	public void setLon(double lon) {
+		_measure.setLon(lon);
+	}
+
+	public double getLat() {
+		return _measure.getLat();
+	}
+
+	public void setLat(double lat) {
+		_measure.setLat(lat);
+	}
+
+	public java.lang.String getSatarea() {
+		return _measure.getSatarea();
+	}
+
+	public void setSatarea(java.lang.String satarea) {
+		_measure.setSatarea(satarea);
+	}
+
 	public nl.wur.alterra.cgi.ace.model.Measure toEscapedModel() {
 		return _measure.toEscapedModel();
 	}

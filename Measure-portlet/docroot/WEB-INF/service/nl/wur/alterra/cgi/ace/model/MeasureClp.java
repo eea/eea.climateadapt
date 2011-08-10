@@ -267,6 +267,30 @@ public class MeasureClp extends BaseModelImpl<Measure> implements Measure {
 		_importance = importance;
 	}
 
+	public double getLon() {
+		return _lon;
+	}
+
+	public void setLon(double lon) {
+		_lon = lon;
+	}
+
+	public double getLat() {
+		return _lat;
+	}
+
+	public void setLat(double lat) {
+		_lat = lat;
+	}
+
+	public String getSatarea() {
+		return _satarea;
+	}
+
+	public void setSatarea(String satarea) {
+		_satarea = satarea;
+	}
+
 	public Measure toEscapedModel() {
 		if (isEscapedModel()) {
 			return this;
@@ -308,6 +332,9 @@ public class MeasureClp extends BaseModelImpl<Measure> implements Measure {
 		clone.setSource(getSource());
 		clone.setRating(getRating());
 		clone.setImportance(getImportance());
+		clone.setLon(getLon());
+		clone.setLat(getLat());
+		clone.setSatarea(getSatarea());
 
 		return clone;
 	}
@@ -353,7 +380,7 @@ public class MeasureClp extends BaseModelImpl<Measure> implements Measure {
 	}
 
 	public String toString() {
-		StringBundler sb = new StringBundler(57);
+		StringBundler sb = new StringBundler(63);
 
 		sb.append("{measureId=");
 		sb.append(getMeasureId());
@@ -411,13 +438,19 @@ public class MeasureClp extends BaseModelImpl<Measure> implements Measure {
 		sb.append(getRating());
 		sb.append(", importance=");
 		sb.append(getImportance());
+		sb.append(", lon=");
+		sb.append(getLon());
+		sb.append(", lat=");
+		sb.append(getLat());
+		sb.append(", satarea=");
+		sb.append(getSatarea());
 		sb.append("}");
 
 		return sb.toString();
 	}
 
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(88);
+		StringBundler sb = new StringBundler(97);
 
 		sb.append("<model><model-name>");
 		sb.append("nl.wur.alterra.cgi.ace.model.Measure");
@@ -535,6 +568,18 @@ public class MeasureClp extends BaseModelImpl<Measure> implements Measure {
 			"<column><column-name>importance</column-name><column-value><![CDATA[");
 		sb.append(getImportance());
 		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>lon</column-name><column-value><![CDATA[");
+		sb.append(getLon());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>lat</column-name><column-value><![CDATA[");
+		sb.append(getLat());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>satarea</column-name><column-value><![CDATA[");
+		sb.append(getSatarea());
+		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");
 
@@ -569,4 +614,7 @@ public class MeasureClp extends BaseModelImpl<Measure> implements Measure {
 	private String _source;
 	private long _rating;
 	private long _importance;
+	private double _lon;
+	private double _lat;
+	private String _satarea;
 }

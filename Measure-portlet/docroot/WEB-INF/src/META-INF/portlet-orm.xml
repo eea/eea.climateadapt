@@ -43,6 +43,9 @@
 			<basic name="source" />
 			<basic name="rating" />
 			<basic name="importance" />
+			<basic name="lon" />
+			<basic name="lat" />
+			<basic name="satarea" />
 			<transient name="primaryKey" />
 		</attributes>
 	</mapped-superclass>

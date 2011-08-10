@@ -83,9 +83,12 @@ public class MeasureModelImpl extends BaseModelImpl<Measure>
 			{ "mao_type", new Integer(Types.VARCHAR) },
 			{ "source", new Integer(Types.VARCHAR) },
 			{ "rating", new Integer(Types.BIGINT) },
-			{ "importance", new Integer(Types.BIGINT) }
+			{ "importance", new Integer(Types.BIGINT) },
+			{ "lon", new Integer(Types.DOUBLE) },
+			{ "lat", new Integer(Types.DOUBLE) },
+			{ "satarea", new Integer(Types.VARCHAR) }
 		};
-	public static final String TABLE_SQL_CREATE = "create table Ace_Measure (measureId LONG not null primary key,companyId LONG,groupId LONG,name VARCHAR(75) null,description VARCHAR(75) null,implementationtype VARCHAR(75) null,implementationtime VARCHAR(75) null,lifetime VARCHAR(75) null,spatiallayer VARCHAR(75) null,spatialvalues VARCHAR(75) null,legalaspects VARCHAR(75) null,stakeholderparticipation VARCHAR(75) null,contact VARCHAR(75) null,succeslimitations VARCHAR(75) null,website VARCHAR(75) null,costbenefit VARCHAR(75) null,keywords VARCHAR(75) null,startdate DATE null,enddate DATE null,publicationdate DATE null,language VARCHAR(75) null,sectors_ VARCHAR(75) null,elements_ VARCHAR(75) null,climateimpacts_ VARCHAR(75) null,mao_type VARCHAR(75) null,source VARCHAR(75) null,rating LONG,importance LONG)";
+	public static final String TABLE_SQL_CREATE = "create table Ace_Measure (measureId LONG not null primary key,companyId LONG,groupId LONG,name VARCHAR(75) null,description VARCHAR(75) null,implementationtype VARCHAR(75) null,implementationtime VARCHAR(75) null,lifetime VARCHAR(75) null,spatiallayer VARCHAR(75) null,spatialvalues VARCHAR(75) null,legalaspects VARCHAR(75) null,stakeholderparticipation VARCHAR(75) null,contact VARCHAR(75) null,succeslimitations VARCHAR(75) null,website VARCHAR(75) null,costbenefit VARCHAR(75) null,keywords VARCHAR(75) null,startdate DATE null,enddate DATE null,publicationdate DATE null,language VARCHAR(75) null,sectors_ VARCHAR(75) null,elements_ VARCHAR(75) null,climateimpacts_ VARCHAR(75) null,mao_type VARCHAR(75) null,source VARCHAR(75) null,rating LONG,importance LONG,lon DOUBLE,lat DOUBLE,satarea VARCHAR(75) null)";
 	public static final String TABLE_SQL_DROP = "drop table Ace_Measure";
 	public static final String ORDER_BY_JPQL = " ORDER BY measure.name ASC";
 	public static final String ORDER_BY_SQL = " ORDER BY Ace_Measure.name ASC";
@@ -440,6 +443,35 @@ public class MeasureModelImpl extends BaseModelImpl<Measure>
 		_importance = importance;
 	}
 
+	public double getLon() {
+		return _lon;
+	}
+
+	public void setLon(double lon) {
+		_lon = lon;
+	}
+
+	public double getLat() {
+		return _lat;
+	}
+
+	public void setLat(double lat) {
+		_lat = lat;
+	}
+
+	public String getSatarea() {
+		if (_satarea == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _satarea;
+		}
+	}
+
+	public void setSatarea(String satarea) {
+		_satarea = satarea;
+	}
+
 	public Measure toEscapedModel() {
 		if (isEscapedModel()) {
 			return (Measure)this;
@@ -494,6 +526,9 @@ public class MeasureModelImpl extends BaseModelImpl<Measure>
 		clone.setSource(getSource());
 		clone.setRating(getRating());
 		clone.setImportance(getImportance());
+		clone.setLon(getLon());
+		clone.setLat(getLat());
+		clone.setSatarea(getSatarea());
 
 		return clone;
 	}
@@ -539,7 +574,7 @@ public class MeasureModelImpl extends BaseModelImpl<Measure>
 	}
 
 	public String toString() {
-		StringBundler sb = new StringBundler(57);
+		StringBundler sb = new StringBundler(63);
 
 		sb.append("{measureId=");
 		sb.append(getMeasureId());
@@ -597,13 +632,19 @@ public class MeasureModelImpl extends BaseModelImpl<Measure>
 		sb.append(getRating());
 		sb.append(", importance=");
 		sb.append(getImportance());
+		sb.append(", lon=");
+		sb.append(getLon());
+		sb.append(", lat=");
+		sb.append(getLat());
+		sb.append(", satarea=");
+		sb.append(getSatarea());
 		sb.append("}");
 
 		return sb.toString();
 	}
 
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(88);
+		StringBundler sb = new StringBundler(97);
 
 		sb.append("<model><model-name>");
 		sb.append("nl.wur.alterra.cgi.ace.model.Measure");
@@ -721,6 +762,18 @@ public class MeasureModelImpl extends BaseModelImpl<Measure>
 			"<column><column-name>importance</column-name><column-value><![CDATA[");
 		sb.append(getImportance());
 		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>lon</column-name><column-value><![CDATA[");
+		sb.append(getLon());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>lat</column-name><column-value><![CDATA[");
+		sb.append(getLat());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>satarea</column-name><column-value><![CDATA[");
+		sb.append(getSatarea());
+		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");
 
@@ -755,5 +808,8 @@ public class MeasureModelImpl extends BaseModelImpl<Measure>
 	private String _source;
 	private long _rating;
 	private long _importance;
+	private double _lon;
+	private double _lat;
+	private String _satarea;
 	private transient ExpandoBridge _expandoBridge;
 }

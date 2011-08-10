@@ -469,6 +469,49 @@ public interface MeasureModel extends BaseModel<Measure> {
 	public void setImportance(long importance);
 
 	/**
+	 * Gets the lon of this measure.
+	 *
+	 * @return the lon of this measure
+	 */
+	public double getLon();
+
+	/**
+	 * Sets the lon of this measure.
+	 *
+	 * @param lon the lon of this measure
+	 */
+	public void setLon(double lon);
+
+	/**
+	 * Gets the lat of this measure.
+	 *
+	 * @return the lat of this measure
+	 */
+	public double getLat();
+
+	/**
+	 * Sets the lat of this measure.
+	 *
+	 * @param lat the lat of this measure
+	 */
+	public void setLat(double lat);
+
+	/**
+	 * Gets the satarea of this measure.
+	 *
+	 * @return the satarea of this measure
+	 */
+	@AutoEscape
+	public String getSatarea();
+
+	/**
+	 * Sets the satarea of this measure.
+	 *
+	 * @param satarea the satarea of this measure
+	 */
+	public void setSatarea(String satarea);
+
+	/**
 	 * Gets a copy of this measure as an escaped model instance by wrapping it with an {@link com.liferay.portal.kernel.bean.AutoEscapeBeanHandler}.
 	 *
 	 * @return the escaped model instance

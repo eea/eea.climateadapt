@@ -27,6 +27,9 @@ create table ace_measure (
   source character varying(75),
   rating bigint,
   importance bigint,
+  lon double precision,
+  lat double precision,
+  satarea character varying(254),
   CONSTRAINT ace_measure_pkey PRIMARY KEY (measureid)
 )
 WITH (

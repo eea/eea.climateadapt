@@ -35,5 +35,8 @@
 		<property name="source" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="rating" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 		<property name="importance" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="lon" type="com.liferay.portal.dao.orm.hibernate.DoubleType" />
+		<property name="lat" type="com.liferay.portal.dao.orm.hibernate.DoubleType" />
+		<property name="satarea" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 	</class>
 </hibernate-mapping>

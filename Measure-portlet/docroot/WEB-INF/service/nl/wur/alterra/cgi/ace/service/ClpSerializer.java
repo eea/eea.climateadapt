@@ -252,6 +252,27 @@ public class ClpSerializer {
 
 					method27.invoke(newModel, value27);
 
+					Method method28 = newModelClass.getMethod("setLon",
+							new Class[] { Double.TYPE });
+
+					Double value28 = new Double(oldCplModel.getLon());
+
+					method28.invoke(newModel, value28);
+
+					Method method29 = newModelClass.getMethod("setLat",
+							new Class[] { Double.TYPE });
+
+					Double value29 = new Double(oldCplModel.getLat());
+
+					method29.invoke(newModel, value29);
+
+					Method method30 = newModelClass.getMethod("setSatarea",
+							new Class[] { String.class });
+
+					String value30 = oldCplModel.getSatarea();
+
+					method30.invoke(newModel, value30);
+
 					return newModel;
 				}
 				catch (Exception e) {
@@ -504,6 +525,27 @@ public class ClpSerializer {
 							(Object[])null);
 
 					newModel.setImportance(value27);
+
+					Method method28 = oldModelClass.getMethod("getLon");
+
+					Double value28 = (Double)method28.invoke(oldModel,
+							(Object[])null);
+
+					newModel.setLon(value28);
+
+					Method method29 = oldModelClass.getMethod("getLat");
+
+					Double value29 = (Double)method29.invoke(oldModel,
+							(Object[])null);
+
+					newModel.setLat(value29);
+
+					Method method30 = oldModelClass.getMethod("getSatarea");
+
+					String value30 = (String)method30.invoke(oldModel,
+							(Object[])null);
+
+					newModel.setSatarea(value30);
 
 					return newModel;
 				}

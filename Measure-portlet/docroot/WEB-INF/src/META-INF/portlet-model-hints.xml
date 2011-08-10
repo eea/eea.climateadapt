@@ -30,5 +30,8 @@
 		<field name="source" type="String" />
 		<field name="rating" type="long" />
 		<field name="importance" type="long" />
+		<field name="lon" type="double" />
+		<field name="lat" type="double" />
+		<field name="satarea" type="String" />
 	</model>
 </model-hints>
