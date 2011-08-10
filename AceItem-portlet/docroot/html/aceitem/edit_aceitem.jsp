@@ -68,7 +68,7 @@
        <%-- note : i18n file should always be in sync with AceItemSector enum --%>	
 		<c:forEach var="adaptationSector" items="<%= nl.wur.alterra.cgi.ace.model.constants.AceItemSector.values() %>" >
 			<div class="check">
-				<c:set var="aceItemSectors" value="<%= aceitem == null ? "" : aceitem.getSectors_() %>" />
+				<c:set var="aceItemSectors" value='<%= aceitem == null ? "" : aceitem.getSectors_() %>' />
 				<c:set var="adaptationSectorMustBeChecked" value="false" />
 				<c:if test="${fn:indexOf(aceItemSectors, adaptationSector)>=0}">
 					<c:set var="adaptationSectorMustBeChecked" value="true" />
@@ -91,7 +91,7 @@
 		<c:forEach var="adaptationElement" items="<%= nl.wur.alterra.cgi.ace.model.constants.AceItemElement.values() %>" >
 			<div class="check">
 				<c:set var="adaptationElementMustBeChecked" value="false" />
-				<c:set var="aceItemElements" value="<%= aceitem == null ? "" : aceitem.getElements_() %>" />
+				<c:set var="aceItemElements" value='<%= aceitem == null ? "" : aceitem.getElements_() %>' />
 				<c:set var="adaptationElementMustBeChecked" value="false" />
 				<c:if test="${fn:indexOf(aceItemElements, adaptationElement)>=0}">
 					<c:set var="adaptationElementMustBeChecked" value="true" />
@@ -114,7 +114,7 @@
 		<c:forEach var="adaptationClimateImpact" items="<%= nl.wur.alterra.cgi.ace.model.constants.AceItemClimateImpact.values() %>" >
 			<div class="check">
 				<c:set var="adaptationClimateImpactMustBeChecked" value="false" />
-				<c:set var="aceItemClimateImpacts" value="<%= aceitem == null ? "" : aceitem.getClimateimpacts_() %>" />
+				<c:set var="aceItemClimateImpacts" value='<%= aceitem == null ? "" : aceitem.getClimateimpacts_() %>' />
 				<c:set var="adaptationClimateImpactMustBeChecked" value="false" />
 				<c:if test="${fn:indexOf(aceItemClimateImpacts, adaptationClimateImpact)>=0}">
 					<c:set var="adaptationClimateImpactMustBeChecked" value="true" />
@@ -132,10 +132,10 @@
 		</c:forEach>
        <br />
 		<b>spatialLayer</b><br />	
-		<input name="spatialLayer" type="text" size="65" value="<%= aceitem == null ? "" : aceitem.getSpatialLayer() %>"><br /><br />
+		<input name="spatialLayer" type="text" size="65" value='<%= aceitem == null ? "" : aceitem.getSpatialLayer() %>'><br /><br />
 		
 		<b>spatialValues</b><br />	
-		<input name="spatialValues" type="text" size="65" value="<%= aceitem == null ? "" : aceitem.getSpatialValues() %>"><br /><br />
+		<input name="spatialValues" type="text" size="65" value='<%= aceitem == null ? "" : aceitem.getSpatialValues() %>'><br /><br />
 	
 	</div>		
 		
