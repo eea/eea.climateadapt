@@ -84,7 +84,7 @@
 
 	   <b>Sectors</b><br />
        <%-- note : i18n file should always be in sync with AceItemSector enum --%>	
-		<c:forEach var="adaptationSector" items="<%= nl.wur.alterra.cgi.ace.model.impl.AceItemSector.values() %>" >
+		<c:forEach var="adaptationSector" items="<%= nl.wur.alterra.cgi.ace.model.constants.AceItemSector.values() %>" >
 			<div class="check">
 				<c:set var="aceItemSectors" value="<%= measure == null ? "" : measure.getSectors_() %>" />
 				<c:set var="adaptationSectorMustBeChecked" value="false" />
@@ -106,7 +106,7 @@
 		
 		<b>Elements</b><br />
 		<%-- note : i18n file should always be in sync with AceItemElement enum --%>
-		<c:forEach var="adaptationElement" items="<%= nl.wur.alterra.cgi.ace.model.impl.AceItemElement.values() %>" >
+		<c:forEach var="adaptationElement" items="<%= nl.wur.alterra.cgi.ace.model.constants.AceItemElement.values() %>" >
 			<div class="check">
 				<c:set var="adaptationElementMustBeChecked" value="false" />
 				<c:set var="aceItemElements" value="<%= measure == null ? "" : measure.getElements_() %>" />
@@ -129,7 +129,7 @@
 		
 		<b>Climate Impacts</b><br />
 		<%-- note : i18n file should always be in sync with AceItemClimateImpact enum --%>
-		<c:forEach var="adaptationClimateImpact" items="<%= nl.wur.alterra.cgi.ace.model.impl.AceItemClimateImpact.values() %>" >
+		<c:forEach var="adaptationClimateImpact" items="<%= nl.wur.alterra.cgi.ace.model.constants.AceItemClimateImpact.values() %>" >
 			<div class="check">
 				<c:set var="adaptationClimateImpactMustBeChecked" value="false" />
 				<c:set var="aceItemClimateImpacts" value="<%= measure == null ? "" : measure.getClimateimpacts_() %>" />
@@ -162,8 +162,8 @@
 		}
 %>
 		<b>Type</b><br />
-		<input name="mao_type" type="radio" value="M" <%= m_checked %>>Measure&nbsp;&nbsp;&nbsp;
-		<input name="mao_type" type="radio" value="A" <%= a_checked %>>Good practice<br /><br />
+		<input name="mao_type" type="radio" value="M" <%= m_checked %>>Adaptation option&nbsp;&nbsp;&nbsp;
+		<input name="mao_type" type="radio" value="A" <%= a_checked %>>Case study<br /><br />
 		
 		<b>Source</b><br />
 		<input name="source" type="text" size="65" value="<%= measure == null ? "" : measure.getSource() %>"><br /><br />

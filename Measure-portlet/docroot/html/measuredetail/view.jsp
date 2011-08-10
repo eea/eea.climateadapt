@@ -23,7 +23,7 @@
 	Measure measure = null;
 	String[] urls = null;
 	String url = null;
-	String type = "Measure";
+	String type = "Adaptation option";
 	String websitelabel = "Website";
 
 	String redirect = PortalUtil.getCurrentURL(renderRequest);
@@ -54,7 +54,7 @@
 		}
 		
 		if( measure.getMao_type().equalsIgnoreCase("A")) {
-			type = "Good practice" ;
+			type = "Case study" ;
 		}
 	}
 	
@@ -77,7 +77,7 @@
    
 	 <b>Sectors</b><br />
 	 <c:set var="aceItemSectors" value="<%= measure.getSectors_() %>" />
-     <c:forEach var="adaptationSector" items="<%= nl.wur.alterra.cgi.ace.model.impl.AceItemSector.values() %>" >
+     <c:forEach var="adaptationSector" items="<%= nl.wur.alterra.cgi.ace.model.constants.AceItemSector.values() %>" >
 		<c:if test="${fn:indexOf(aceItemSectors, adaptationSector)>=0}">
 			<liferay-ui:message key="acesearch-sectors-lbl-${adaptationSector}" /><br />
 		</c:if>	
@@ -86,7 +86,7 @@
 	 
 	 <b>Elements</b><br />
 	 <c:set var="aceItemElements" value="<%= measure.getElements_() %>" />
-     <c:forEach var="adaptationElement" items="<%= nl.wur.alterra.cgi.ace.model.impl.AceItemElement.values() %>" >
+     <c:forEach var="adaptationElement" items="<%= nl.wur.alterra.cgi.ace.model.constants.AceItemElement.values() %>" >
 		<c:if test="${fn:indexOf(aceItemElements, adaptationElement)>=0}">
 			<liferay-ui:message key="acesearch-elements-lbl-${adaptationElement}" /><br />
 		</c:if>	
@@ -95,7 +95,7 @@
 	 
 	 <b>Climate impacts</b><br />
 	 <c:set var="aceItemClimateImpacts" value="<%= measure.getClimateimpacts_() %>" />
-     <c:forEach var="adaptationClimateImpact" items="<%= nl.wur.alterra.cgi.ace.model.impl.AceItemClimateImpact.values() %>" >
+     <c:forEach var="adaptationClimateImpact" items="<%= nl.wur.alterra.cgi.ace.model.constants.AceItemClimateImpact.values() %>" >
 		<c:if test="${fn:indexOf(aceItemClimateImpacts, adaptationClimateImpact)>=0}">
 			<liferay-ui:message key="aceitem-climateimpacts-lbl-${adaptationClimateImpact}" /><br />
 		</c:if>	
@@ -148,22 +148,25 @@
 		lastratedmeasureid = (String) renderRequest.getPortletSession().getAttribute("lastRatedMeasureId") ;
 	}
 	if( ! measure_id.toString().equalsIgnoreCase( lastratedmeasureid )) { %>
-	Your meaning about this item:
-    <!--  PERFORM PORTLET ACTION rateUpMeasure -->
+	Would you recommend this item to others?
+	&nbsp;&nbsp;
+	
+    <!--  PERFORM PORTLET ACTION rateDownMeasure -->
 	<portlet:actionURL name="rateDownMeasure" var="rateDownURL">
 		<portlet:param name="measureId" value="<%= measure_id.toString() %>" />
 		<portlet:param name="redirect" value="<%= redirect %>"/>
 	</portlet:actionURL>
 	
-	<liferay-ui:icon image="ratedown" url="<%=rateDownURL.toString() %>" />
+	<liferay-ui:icon image="no" url="<%=rateDownURL.toString() %>" />
 	&nbsp;&nbsp;
+	
     <!--  PERFORM PORTLET ACTION rateUpMeasure -->
 	<portlet:actionURL name="rateUpMeasure" var="rateUpURL">
 		<portlet:param name="measureId" value="<%= measure_id.toString() %>" />
 		<portlet:param name="redirect" value="<%= redirect %>"/>
 	</portlet:actionURL>
 	
-	<liferay-ui:icon image="rateup" url="<%=rateUpURL.toString() %>" />
+	<liferay-ui:icon image="yes" url="<%=rateUpURL.toString() %>" />
 	 &nbsp;&nbsp;<br /><br />		
 <%	 }  %>
 </c:when>

@@ -75,9 +75,9 @@
 	String impacts = measure.getClimateimpacts_() ;
 	impacts = impacts.replace(";","; ");	
 	
-	String type = "Measure";
+	String type = "Adaptation option";
 	if( measure.getMao_type().equalsIgnoreCase("A")) {
-		type = "Good practice" ;
+		type = "Case study" ;
 	}
 %>      
       
