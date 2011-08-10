@@ -19,7 +19,9 @@ create table ace_aceitem (
 	publicationDate timestamp without time zone,
 	sectors_ character varying(255) ,
 	elements_ character varying(255) ,
-	climateimpacts_ character varying(255)
+	climateimpacts_ character varying(255),
+    rating bigint,
+    importance bigint
 )
 WITH (
   OIDS=FALSE
