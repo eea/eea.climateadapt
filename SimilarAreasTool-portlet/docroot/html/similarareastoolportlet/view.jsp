@@ -44,6 +44,14 @@
 <div id='map_element' style='width: 500px; height: 500px;'></div>
 
 <script type="text/javascript">
+	var proxyUrl = '<%= request.getContextPath() %>/proxy?url=';
+	
+	var geoserverUrl = 'http://dev.ace.geocat.net/geoserver/';
+	
+	var wms = 'wms';
+	
+	var wfs = 'wfs';
+	
 	var satchmmap = new CHM.SATCHMMap('map_element', {});
 				
 	riskChange();

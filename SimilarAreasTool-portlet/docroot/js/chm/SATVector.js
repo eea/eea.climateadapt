@@ -19,7 +19,7 @@ CHM.SATVector = OpenLayers.Class(OpenLayers.Layer.Vector, {
 		
         protocol = new OpenLayers.Protocol.WFS({
 	       	version: '1.1.0',
-			url:  'http://dev.ace.geocat.net/geoserver/wfs', 
+			url:  proxyUrl + geoserverUrl + wfs + '?', 
 	        featureType: 'casestudies_intersect',
 	        featureNS: 'http://ace.geocat.net',
 	        geometryName: 'geom',

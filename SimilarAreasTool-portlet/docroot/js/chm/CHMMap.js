@@ -12,7 +12,7 @@ CHM.CHMMap = OpenLayers.Class(OpenLayers.Map, {
 		this.units = 'm';
 		
 		var base_wms_layer = new OpenLayers.Layer.WMS('NUTS0 Base layer', 
-			'http://dev.ace.geocat.net/geoserver/wms?', 
+			geoserverUrl + wms + '?', 
 			{layers: 'nuts:nuts0', format: 'image/png', transparent: 'true'}, 
 			{isBaseLayer: true}
 		);

@@ -4,7 +4,7 @@ CHM.SATCHMMap = OpenLayers.Class(CHM.CHMMap, {
 		CHM.CHMMap.prototype.initialize.apply(this, arguments);
 		
 		var biogeo_layer = new OpenLayers.Layer.WMS('Biogeographical regions 2005', 
-			'http://dev.ace.geocat.net/geoserver/wms?', 
+			geoserverUrl + wms + '?', 
 			{layers: 'chm:biogeo_2005', format: 'image/png', transparent: 'true'}, 
 			{isBaseLayer: false}
 		);
@@ -34,7 +34,7 @@ CHM.SATCHMMap = OpenLayers.Class(CHM.CHMMap, {
 		var control = new OpenLayers.Control.GetFeature({
 	        protocol: new OpenLayers.Protocol.WFS({
 		      	version: '1.1.0',
-		        url:  'http://dev.ace.geocat.net/geoserver/wfs', 
+		        url: proxyUrl + geoserverUrl + wfs + '?', 
 		        featureType: 'biogeo_2005',
 		        featureNS: 'http://ace.geocat.net',
 		        geometryName: 'geom',
