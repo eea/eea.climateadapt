@@ -14,30 +14,20 @@
 */
 --%>
 
-<%@ taglib uri="http://java.sun.com/portlet_2_0" prefix="portlet" %>
-
-<portlet:defineObjects />
+<%@include file="/html/init.jsp" %>
 
 <form>
 	<select id="riskSelect" onchange="riskChange()">
-		<option value="EXTREMETEMP">Extreme Temperatures</option>
-		<option value="WATERSCARCE">Water Scarcity</option>
-		<option value="FLOODING">Flooding</option>
-		<option value="SEALEVELRISE">Sea Level Rise</option>
-		<option value="DROUGHT">Droughts</option>
-		<option value="STORM">Storms</option>
-		<option value="ICEANDSNOW">Ice and Snow</option>
+		<c:forEach var="adaptationClimateImpact" items="<%= nl.wur.alterra.cgi.ace.model.constants.AceItemClimateImpact.values() %>" >
+			<option id="chk_climateimpacts_${adaptationClimateImpact}" value="${adaptationClimateImpact}" />
+			<label for="chk_climateimpacts_${adaptationClimateImpact}"><liferay-ui:message key="aceitem-climateimpacts-lbl-${adaptationClimateImpact}" /></label>
+		</c:forEach>
 	</select>
 	<select id="sectorSelect" onchange="sectorChange()">
-		<option value="AGRICULTURE">Agriculture and Forest</option>
-		<option value="BIODIVERSITY">Biodiversity</option>
-		<option value="COASTAL">Coastal areas</option>
-		<option value="DISASTERRISKREDUCTION">Disaster Risk Reduction</option>
-		<option value="FINANCIAL">Financial</option>
-		<option value="HEALTH">Health</option>
-		<option value="INFRASTRUCTURE">Infrastructure</option>
-		<option value="MARINE">Marine and Fisheries</option>
-		<option value="WATERMANAGEMENT">Water management</option>
+		<c:forEach var="adaptationSector" items="<%= nl.wur.alterra.cgi.ace.model.constants.AceItemSector.values() %>" >
+			<option id="chk_sectors_${adaptationSector}" value="${adaptationSector}" />
+			<label for="chk_sectors_${adaptationSector}"><liferay-ui:message key="acesearch-sectors-lbl-${adaptationSector}" /></label>
+		</c:forEach>
 	</select>
 </form>
 
@@ -46,11 +36,11 @@
 <script type="text/javascript">
 	var proxyUrl = '<%= request.getContextPath() %>/proxy?url=';
 	
-	var geoserverUrl = 'http://dev.ace.geocat.net/geoserver/';
+	var geoserverUrl = '<%= prefs.getValue(Constants.geoserverUrlPreferenceName, "http://ace.geocat.net/geoserver/") %>';
 	
-	var wms = 'wms';
+	var wms = '<%= prefs.getValue(Constants.wfsPreferenceName, "wfs") %>';
 	
-	var wfs = 'wfs';
+	var wfs = '<%= prefs.getValue(Constants.wmsPreferenceName, "wms") %>';
 	
 	var satchmmap = new CHM.SATCHMMap('map_element', {});
 				
