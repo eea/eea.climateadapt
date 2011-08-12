@@ -104,25 +104,25 @@
 	</portlet>
 
     <portlet>
-    	<portlet-name>viewaceitemportlet</portlet-name>
-    	<display-name>ViewAceItemPortlet</display-name>
+    	<portlet-name>aceitemdetailportlet</portlet-name>
+    	<display-name>AceItemDetailPortlet</display-name>
     	<portlet-class>
-    		nl.wur.alterra.cgi.ace.portlet.ViewAceItemPortlet
+    		nl.wur.alterra.cgi.ace.portlet.AceItemDetailPortlet
     	</portlet-class>
     	<init-param>
     		<name>view-jsp</name>
-    		<value>/html/viewaceitem.jsp</value>
+    		<value>/html/aceitemdetail/view.jsp</value>
     	</init-param>
     	<expiration-cache>0</expiration-cache>
     	<supports>
     		<mime-type>text/html</mime-type>
     		<portlet-mode>VIEW</portlet-mode>
     	</supports>
-        <!-- Resource Bundle -->
+		<!-- Resource Bundle -->
 		<resource-bundle>content.Language</resource-bundle>
     	<portlet-info>
-    		<title>ViewAceItemPortlet</title>
-    		<short-title>ViewAceItemPortlet</short-title>
+    		<title>AceItemDetailPortlet</title>
+    		<short-title>AceItemDetailPortlet</short-title>
     		<keywords></keywords>
     	</portlet-info>
     	<security-role-ref>
@@ -138,5 +138,4 @@
     		<role-name>user</role-name>
     	</security-role-ref>
     </portlet>
-
 </portlet-app>

@@ -23,12 +23,16 @@
 		<css-class-wrapper>nasportlet-portlet</css-class-wrapper>
 	</portlet>
 	<portlet>
-		<portlet-name>viewaceitemportlet</portlet-name>
+		<portlet-name>aceitemdetailportlet</portlet-name>
 		<icon>/icon.png</icon>
 		<instanceable>true</instanceable>
 		<header-portlet-css>/css/portlet.css</header-portlet-css>
-		<footer-portlet-javascript>/js/javascript.js</footer-portlet-javascript>
-		<css-class-wrapper>viewaceitemportlet-portlet</css-class-wrapper>
+		<footer-portlet-javascript>
+			/js/javascript.js
+		</footer-portlet-javascript>
+		<css-class-wrapper>
+			aceitemdetailportlet-portlet
+		</css-class-wrapper>
 	</portlet>
 	<role-mapper>
 		<role-name>administrator</role-name>

@@ -11,6 +11,8 @@
 	AceItem aceitem = null;
 	String url = null;
 	String language = null;
+
+	String redirect = PortalUtil.getCurrentURL(renderRequest);
 	
 	if(request.getAttribute("aceitem_id")!=null) {
 		aceitem_id = Long.parseLong( (String) request.getAttribute("aceitem_id") ) ;
@@ -43,10 +45,24 @@
 	 <div class="body">
 	 <b>Description</b><br />
 	 <% out.print( aceitem.getDescription() ); %><br /><br />
+
+	<table border="0" width="100%"><tr>
+	<td width="50%" valign="top"><div style="margin-right: 35px;">	 
 	 <b>Keywords</b><br />
 	 <% out.print( aceitem.getKeyword()); %><br /><br />
-     <br /><br />
-     
+	 
+	 <b>Website</b><br />
+	 <% out.print(  url ); %><br /><br />
+
+	 <b>Resolution</b><br />
+	 <% out.print( aceitem.getTargetresolution()); %><br /><br />
+
+	 <b>Spatial reference</b><br />
+	 <% out.print( aceitem.getSpatialLayer() + " " + aceitem.getSpatialValues()); %><br /><br />
+	
+	</div></td>
+	<td width="50%" valign="top"><div>	
+	
 	 <b>Sectors</b><br />
 	 <c:set var="aceItemSectors" value="<%= aceitem.getSectors_() %>" />
      <c:forEach var="adaptationSector" items="<%= nl.wur.alterra.cgi.ace.model.constants.AceItemSector.values() %>" >
@@ -73,16 +89,39 @@
 		</c:if>	
 	 </c:forEach>
 	 <br /><br />
-	 
-	 <b>Website</b><br />
-	 <% out.print(  url ); %><br /><br />
 
-	 <b>Resolution</b><br />
-	 <% out.print( aceitem.getTargetresolution()); %><br /><br />
-
-	 <b>Spatial reference</b><br />
-	 <% out.print( aceitem.getSpatialLayer() + " " + aceitem.getSpatialValues()); %><br /><br />
+	 </div></td></tr>
+      </table>	 
      </div>
+<%  
+	String lastratedaceitemid = "";
+
+	if( renderRequest.getPortletSession().getAttribute("lastRatedAceItemId") != null) {
+		
+		lastratedaceitemid = (String) renderRequest.getPortletSession().getAttribute("lastRatedAceItemId") ;
+	}
+	if( ! aceitem_id.toString().equalsIgnoreCase( lastratedaceitemid )) { %>
+	Would you recommend this item to others?
+	&nbsp;&nbsp;
+	
+    <!--  PERFORM PORTLET ACTION rateDownAceItem -->
+	<portlet:actionURL name="rateDownAceItem" var="rateDownURL">
+		<portlet:param name="aceitemId" value="<%= aceitem_id.toString() %>" />
+		<portlet:param name="redirect" value="<%= redirect %>"/>
+	</portlet:actionURL>
+	
+	<liferay-ui:icon image="no" url="<%=rateDownURL.toString() %>" />
+	&nbsp;&nbsp;
+	
+    <!--  PERFORM PORTLET ACTION rateUpAceItem -->
+	<portlet:actionURL name="rateUpAceItem" var="rateUpURL">
+		<portlet:param name="aceitemId" value="<%= aceitem_id.toString() %>" />
+		<portlet:param name="redirect" value="<%= redirect %>"/>
+	</portlet:actionURL>
+	
+	<liferay-ui:icon image="yes" url="<%=rateUpURL.toString() %>" />
+	 &nbsp;&nbsp;<br /><br />		
+<%	 }  %>     
    </c:when>
    <c:otherwise>
    <div class="portlet-title">

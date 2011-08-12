@@ -46,7 +46,10 @@ public class AceItemPortlet extends MVCPortlet {
 	public void addAceItem(ActionRequest request, ActionResponse response)
 		throws Exception {
 
-		AceItem aceitem = aceitemFromRequest(request);
+		AceItem aceitem = new AceItemImpl(); 
+
+		aceitem.setAceItemId(ParamUtil.getLong(request, "aceItemId"));
+		aceitemFromRequest(request, aceitem);
 
 		ArrayList<String> errors = new ArrayList<String>();
 
@@ -73,12 +76,13 @@ public class AceItemPortlet extends MVCPortlet {
 	 * by the Add / Edit methods.
 	 *
 	 */
-	private AceItem aceitemFromRequest(PortletRequest request) {
+	private AceItem aceitemFromRequest(PortletRequest request, AceItem aceitem) {
 		ThemeDisplay themeDisplay =
 			(ThemeDisplay)request.getAttribute(WebKeys.THEME_DISPLAY);
+		
+		aceitem.setCompanyId(themeDisplay.getCompanyId());
+		aceitem.setGroupId(themeDisplay.getScopeGroupId());
 
-		AceItemImpl aceitem = new AceItemImpl();
-		aceitem.setAceItemId(ParamUtil.getLong(request, "aceItemId"));
 		aceitem.setNasId(ParamUtil.getLong(request, "nasId"));
 		aceitem.setName(ParamUtil.getString(request, "name"));
 		aceitem.setDescription(ParamUtil.getString(request, "description"));
@@ -168,7 +172,9 @@ public class AceItemPortlet extends MVCPortlet {
 	public void updateAceItem(ActionRequest request, ActionResponse response)
 		throws Exception {
 
-		AceItem aceitem = aceitemFromRequest(request);
+		AceItem aceitem = AceItemLocalServiceUtil.getAceItem(ParamUtil.getLong(request, "aceItemId"));
+		
+		aceitemFromRequest(request, aceitem);
 
 		ArrayList<String> errors = new ArrayList<String>();
 

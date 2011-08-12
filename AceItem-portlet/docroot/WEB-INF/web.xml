@@ -282,11 +282,11 @@
 		<load-on-startup>0</load-on-startup>
 	</servlet>
 	<servlet>
-		<servlet-name>viewaceitemportlet</servlet-name>
+		<servlet-name>aceitemdetailportlet</servlet-name>
 		<servlet-class>com.liferay.portal.kernel.servlet.PortletServlet</servlet-class>
 		<init-param>
 			<param-name>portlet-class</param-name>
-			<param-value>nl.wur.alterra.cgi.ace.portlet.ViewAceItemPortlet</param-value>
+			<param-value>nl.wur.alterra.cgi.ace.portlet.AceItemDetailPortlet</param-value>
 		</init-param>
 		<load-on-startup>0</load-on-startup>
 	</servlet>
@@ -300,8 +300,8 @@
 		<url-pattern>/nasportlet/*</url-pattern>
 	</servlet-mapping>
 	<servlet-mapping>
-		<servlet-name>viewaceitemportlet</servlet-name>
-		<url-pattern>/viewaceitemportlet/*</url-pattern>
+		<servlet-name>aceitemdetailportlet</servlet-name>
+		<url-pattern>/aceitemdetailportlet/*</url-pattern>
 	</servlet-mapping>
 
 	<welcome-file-list>
