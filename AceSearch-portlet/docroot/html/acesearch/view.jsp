@@ -141,8 +141,8 @@ pageContext.setAttribute("countriesList", countriesList);
 				for(var i = 0; i < 5; i++) {
 					firstFiveAceitemResults.push(aceitemResults[i]);
 				}
-				displayJSONResults(unique, firstFiveAceitemResults);
-				$j('#paginationId-'+unique + ' .jPag-pages li:first-child a').click();
+				//displayJSONResults(unique, firstFiveAceitemResults);				
+				$j('#paginationId-'+unique).trigger('setPage', [0]); // invokes displayJSONResults
 			} 
 		});
 		

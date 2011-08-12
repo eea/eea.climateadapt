@@ -36,9 +36,9 @@
 			&#9660; <c:out value='${groupTitle}' /> (${fn:length(groupedResults)})
 		</div>
 		
-		<div id="${paginationId}">
-		</div>		
-		
+		<div id="${paginationId}" style="padding-left: 10px; height: 20px;background-color: #D2DF92;">
+			
+		</div>	
 		<!-- pagination -->
 		<script type="text/javascript"> 
 			
@@ -49,25 +49,17 @@
             groupedJSONResults['${aceitemtype}'] = ${groupedJSONResults};
 
 			$j(function() {
-				$j('#${paginationId}').paginate({
-					count 		: ${fn:length(groupedResults) / nrPageItems},
-					start 		: 1,
-					display     : 1,
-					border					: false,
-					text_color  			: '#79B5E3',
-					background_color    	: 'none',	
-					text_hover_color  		: '#2573AF',
-					background_hover_color	: 'none', 
-					images		: false,
-					mouse		: 'press',
-					onChange	: function(page){
+				$j('#${paginationId}').pagination(${fn:length(groupedResults)}, {
+					items_per_page: 10,
+					num_display_entries: 10,	// Number of pagination links to show			
+					num_edge_entries: 1,		// Number of fix edge page numbers to show in the pagination links
+					callback	: function(page){
 									var aceitemResults = new Array();
 									$j('#resultsListId-'+${unique}).remove();
-									displayPagedJSONResults(page, ${unique}, groupedJSONResults['${aceitemtype}']);
+									// Page numbering starts with 0
+									displayPagedJSONResults(page+1, ${unique}, groupedJSONResults['${aceitemtype}']);
 								}					
 				});	
-				
-			
 			})			
 			function displayPagedJSONResults(page, unique, aceitemResults) {
 				var startIdx = ((page -1) * <%= itemsOnPage %>);
@@ -128,21 +120,21 @@
 						<c:choose>
 							<c:when test="${!empty searchResult.storedAt && fn:startsWith(searchResult.storagetype, 'URL')==true}">
 								<span class="bolder">&#187; <a href="<c:out value="/viewaceitem?aceitem_id=${searchResult.aceItemId}"/>" ><c:out value="${searchResult.name}"/></a></span>&nbsp;
-								- <c:out value="${descriptionText}"/>
+								- <c:out value="${descriptionText}" />
 							</c:when>
 							<c:when test="${!empty searchResult.storedAt && fn:startsWith(searchResult.storedAt, 'ace_project_id')==true}">
 								<span class="bolder">&#187; <a href="<c:out value="/projects1?${searchResult.storedAt}"/>" >
 									<c:out value="${searchResult.name}"/></a></span>&nbsp;
-								- <c:out value="${descriptionText}"/>
+								- <c:out value="${descriptionText}" />
 							</c:when>
 							<c:when test="${!empty searchResult.storedAt && fn:startsWith(searchResult.storedAt, 'ace_measure_id')==true}">
 								<span class="bolder">&#187; <a href="<c:out value="/viewmeasure?${searchResult.storedAt}"/>" >
 									<c:out value="${searchResult.name}"/></a></span>&nbsp;
-								- <c:out value="${descriptionText}"/>
+								- <c:out value="${descriptionText}" />
 							</c:when>                            
 							<c:otherwise>
 								<span class="bolder">&#187; <a href="<c:out value="/viewaceitem?aceitem_id=${searchResult.aceItemId}"/>" ><c:out value="${searchResult.name}"/></a></span>&nbsp;
-								- <c:out value="${descriptionText}"/>
+								- <c:out value="${descriptionText}" />
 							</c:otherwise>
 						</c:choose>
 
