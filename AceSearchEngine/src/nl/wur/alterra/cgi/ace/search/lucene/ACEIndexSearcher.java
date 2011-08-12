@@ -25,7 +25,7 @@ public class ACEIndexSearcher {
      */
     private ACEIndexSearcher() {
         try {
-            searcher = new IndexSearcher(FSDirectory.open(new File(ACEIndexConstant.INDEX_NAME)), true);
+            searcher = new IndexSearcher(FSDirectory.open(new File(ACEIndexUtil.retrieveIndexFolder() + ACEIndexConstant.INDEX_NAME)), true);
         }
         catch (IOException x) {
             throw new ExceptionInInitializerError(x);

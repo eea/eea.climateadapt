@@ -25,7 +25,7 @@ public class ACEIndexWriter {
         try {
             System.out.println("creating ACEIndexWriter");
 
-            Directory luceneDirectory = FSDirectory.open(new File(ACEIndexConstant.INDEX_NAME));
+            Directory luceneDirectory = FSDirectory.open(new File(ACEIndexUtil.retrieveIndexFolder() + ACEIndexConstant.INDEX_NAME));
             if(IndexWriter.isLocked(luceneDirectory)) {
                 System.out.println("Lucene directory is locked, forcing unlock");
                 IndexWriter.unlock(luceneDirectory);
