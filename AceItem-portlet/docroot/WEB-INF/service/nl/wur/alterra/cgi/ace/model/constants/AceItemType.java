@@ -5,7 +5,7 @@ package nl.wur.alterra.cgi.ace.model.constants;
  *
  * Must be kept in sync with the i18n section about this in Language.properties.
  *
- * @author heikki doeleman
+ * @author heikki doeleman / hugo de groot
  */
 public enum AceItemType {
     /**
@@ -13,13 +13,13 @@ public enum AceItemType {
      */
     DOCUMENT,
     /**
-     * Datasets.
+     * Information Sources.
      */
-    DATASET,
+    INFORMATIONSOURCE,
     /**
-     * Maps and graphs.
+     * Maps, graphs and datasets.
      */
-    MAP,
+    MAPGRAPHDATASET,
     /**
      * Indicators.
      */
@@ -29,15 +29,15 @@ public enum AceItemType {
      */
     TOOLGUIDANCE,
     /**
-     * Research projects.
+     * Research and knowledge projects.
      */
     RESEARCHPROJECT,
     /**
-     * Measures.
+     * Adaptation options.
      */
     MEASURE, 
     /**
-     * Good practices.
+     * Case studies.
      */
     ACTION,
     /**
