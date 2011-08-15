@@ -423,10 +423,10 @@ pageContext.setAttribute("countriesList", countriesList);
         <c:set var="groupTitle" scope="page"><liferay-ui:message key="acesearch-datainfotype-lbl-TOOLGUIDANCE" /></c:set>
         <%@ include file="searchresultsbytype.jspf" %>
 
-		<c:set var="groupedResults" scope="page" value="${MAP_searchResults}"/>
-		<c:set var="groupedJSONResults" scope="page" value="${MAP_JSONsearchResults}"/>
-		<c:set var="aceitemtype" scope="page" value="MAP"/>		
-		<c:set var="groupTitle" scope="page"><liferay-ui:message key="acesearch-datainfotype-lbl-MAP" /></c:set>
+		<c:set var="groupedResults" scope="page" value="${MAPGRAPHDATASET_searchResults}"/>
+		<c:set var="groupedJSONResults" scope="page" value="${MAPGRAPHDATASET_JSONsearchResults}"/>
+		<c:set var="aceitemtype" scope="page" value="MAPGRAPHDATASET"/>		
+		<c:set var="groupTitle" scope="page"><liferay-ui:message key="acesearch-datainfotype-lbl-MAPGRAPHDATASET" /></c:set>
 		<%@ include file="searchresultsbytype.jspf" %>	
 		
 		<c:set var="groupedResults" scope="page" value="${MULTIMEDIA_searchResults}"/>
@@ -441,10 +441,10 @@ pageContext.setAttribute("countriesList", countriesList);
 		<c:set var="groupTitle" scope="page"><liferay-ui:message key="acesearch-datainfotype-lbl-INDICATOR" /></c:set>
 		<%@ include file="searchresultsbytype.jspf" %>
 
-		<c:set var="groupedResults" scope="page" value="${DATASET_searchResults}"/>
-		<c:set var="groupedJSONResults" scope="page" value="${DATASET_JSONsearchResults}"/>
-		<c:set var="aceitemtype" scope="page" value="DATASET"/>				
-		<c:set var="groupTitle" scope="page"><liferay-ui:message key="acesearch-datainfotype-lbl-DATASET" /></c:set>
+		<c:set var="groupedResults" scope="page" value="${INFORMATIONSOURCE_searchResults}"/>
+		<c:set var="groupedJSONResults" scope="page" value="${INFORMATIONSOURCE_JSONsearchResults}"/>
+		<c:set var="aceitemtype" scope="page" value="INFORMATIONSOURCE"/>				
+		<c:set var="groupTitle" scope="page"><liferay-ui:message key="acesearch-datainfotype-lbl-INFORMATIONSOURCE" /></c:set>
 		<%@ include file="searchresultsbytype.jspf" %>
 
         <c:set var="groupedResults" scope="page" value="${RESEARCHPROJECT_searchResults}"/>
