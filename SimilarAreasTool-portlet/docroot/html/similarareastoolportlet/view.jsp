@@ -34,13 +34,13 @@
 <div id='map_element' style='width: 500px; height: 500px;'></div>
 
 <script type="text/javascript">
-	var proxyUrl = '<%= request.getContextPath() %>/proxy?url=';
+	var proxyUrl = '<%= prefs.getValue(Constants.proxyUrlPreferenceName, "") %>';
 	
 	var geoserverUrl = '<%= prefs.getValue(Constants.geoserverUrlPreferenceName, "http://ace.geocat.net/geoserver/") %>';
 	
-	var wms = '<%= prefs.getValue(Constants.wfsPreferenceName, "wfs") %>';
+	var wms = '<%= prefs.getValue(Constants.wmsPreferenceName, "wms") %>';
 	
-	var wfs = '<%= prefs.getValue(Constants.wmsPreferenceName, "wms") %>';
+	var wfs = '<%= prefs.getValue(Constants.wfsPreferenceName, "wfs") %>';
 	
 	var satchmmap = new CHM.SATCHMMap('map_element', {});
 				

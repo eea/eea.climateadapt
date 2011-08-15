@@ -13,15 +13,27 @@ import com.liferay.util.bridges.mvc.MVCPortlet;
 public class SimilarAreasToolPortlet extends MVCPortlet {
 
 	public void setPreferences(ActionRequest request, ActionResponse response) throws Exception {
+		PortletPreferences prefs = request.getPreferences();
+		
+		String proxyUrl = ParamUtil.getString(request, Constants.proxyUrlPreferenceName);
+
+		prefs.setValue(Constants.proxyUrlPreferenceName, proxyUrl);
+		
 		String geoserverUrl = ParamUtil.getString(request, Constants.geoserverUrlPreferenceName);
 		
 		if (! geoserverUrl.endsWith("/")) {
 			geoserverUrl += "/";
 		}
 
-		PortletPreferences prefs = request.getPreferences();
-
 		prefs.setValue(Constants.geoserverUrlPreferenceName, geoserverUrl);
+		
+		String wfs = ParamUtil.getString(request, Constants.wfsPreferenceName);
+
+		prefs.setValue(Constants.wfsPreferenceName, wfs);
+		
+		String wms = ParamUtil.getString(request, Constants.wmsPreferenceName);
+
+		prefs.setValue(Constants.wmsPreferenceName, wms);
 
 		prefs.store();
 	}
