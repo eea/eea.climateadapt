@@ -131,13 +131,13 @@
 		
 		// Initialize options with default values
 		opts = jQuery.extend({
-			items_per_page:10,
-			num_display_entries:11,
+			items_per_page:0,
+			num_display_entries:0,
 			current_page:0,
 			num_edge_entries:0,
 			link_to:"#",
-			prev_text:"Prev",
-			next_text:"Next",
+			prev_text:"&lt;",
+			next_text:"&gt;",
 			ellipse_text:"...",
 			prev_show_always:true,
 			next_show_always:true,

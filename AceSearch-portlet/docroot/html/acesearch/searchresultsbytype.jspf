@@ -50,8 +50,8 @@
 
 			$j(function() {
 				$j('#${paginationId}').pagination(${fn:length(groupedResults)}, {
-					items_per_page: 10,
-					num_display_entries: 10,	// Number of pagination links to show			
+					items_per_page: <%= itemsOnPage %>,
+					num_display_entries: 11,	// Number of pagination links to show			
 					num_edge_entries: 1,		// Number of fix edge page numbers to show in the pagination links
 					callback	: function(page){
 									var aceitemResults = new Array();
