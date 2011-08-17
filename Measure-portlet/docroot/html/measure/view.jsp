@@ -19,17 +19,17 @@
 <%
 	String redirect = PortalUtil.getCurrentURL(renderRequest);	
 
-	String orderByCol = ParamUtil.getString(request, "orderByCol");
-	String orderByType = ParamUtil.getString(request, "orderByType");
+	String orderByCol = ParamUtil.getString(request, Constants.ORDERBYCOL);
+	String orderByType = ParamUtil.getString(request, Constants.ORDERBYTYPE);
 
 	if (Validator.isNotNull(orderByCol) && Validator.isNotNull(orderByType)) {
-		prefs.setValue("orderByCol", orderByCol);
-		prefs.setValue("orderByType", orderByType);
+		prefs.setValue(Constants.ORDERBYCOL, orderByCol);
+		prefs.setValue(Constants.ORDERBYTYPE, orderByType);
 
 	} else {
 
-		orderByCol = prefs.getValue("orderByCol", "name");
-		orderByType = prefs.getValue("orderByType", "asc");
+		orderByCol = prefs.getValue(Constants.ORDERBYCOL, "name");
+		orderByType = prefs.getValue(Constants.ORDERBYTYPE, "asc");
 
 	}
 

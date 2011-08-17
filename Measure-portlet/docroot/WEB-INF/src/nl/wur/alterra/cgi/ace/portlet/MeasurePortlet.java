@@ -234,15 +234,15 @@ public class MeasurePortlet extends MVCPortlet {
 	public void setMeasurePref(ActionRequest request, ActionResponse response)
 		throws Exception {
 
-		String orderByCol = ParamUtil.getString(request, "orderByCol");
+		String orderByCol = ParamUtil.getString(request, Constants.ORDERBYCOL);
 
 		PortletPreferences prefs = request.getPreferences();
 
-		prefs.setValue("orderByCol", orderByCol);
+		prefs.setValue(Constants.ORDERBYCOL, orderByCol);
 
-		String orderByType = ParamUtil.getString(request, "orderByType");
+		String orderByType = ParamUtil.getString(request, Constants.ORDERBYTYPE);
 
-		prefs.setValue("orderByType", orderByType);
+		prefs.setValue(Constants.ORDERBYTYPE, orderByType);
 
 		String proxyUrl = ParamUtil.getString(request, Constants.proxyUrlPreferenceName);
 

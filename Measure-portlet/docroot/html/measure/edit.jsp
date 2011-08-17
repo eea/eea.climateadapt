@@ -21,13 +21,9 @@
 <portlet:actionURL name="setMeasurePref" var="setMeasurePrefUrl" />
 
 <aui:form action="<%= setMeasurePrefUrl %>" method="POST" name="fm" >
-	<aui:input name="orderByCol" value='<%= prefs.getValue("orderByCol","") %>' size="45" type="text" />
+	<aui:input name="<%= Constants.ORDERBYCOL %>" value='<%= prefs.getValue(Constants.ORDERBYCOL,"") %>' size="45" type="text" />
 
-    <aui:input name="orderByType" value='<%= prefs.getValue("orderByType","") %>' size="45" type="text" />
-
-	<aui:button-row>
-		<aui:button type="submit" />
-	</aui:button-row>
+    <aui:input name="<%= Constants.ORDERBYTYPE %>" value='<%= prefs.getValue(Constants.ORDERBYTYPE,"") %>' size="45" type="text" />
 
 	<aui:input name="<%= nl.wur.alterra.cgi.ace.portlet.Constants.proxyUrlPreferenceName %>" value='<%= prefs.getValue(Constants.proxyUrlPreferenceName, "/SimilarAreasTool-portlet/proxy?url=") %>' size="45" type="text" />
 

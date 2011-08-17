@@ -1,6 +1,9 @@
 package nl.wur.alterra.cgi.ace.portlet;
 
 public class Constants {
+	public static final String ORDERBYCOL = "orderByCol";
+
+	public static final String ORDERBYTYPE = "orderByType";
 
 	public static String geoserverUrlPreferenceName = "geoserverUrl";
 
