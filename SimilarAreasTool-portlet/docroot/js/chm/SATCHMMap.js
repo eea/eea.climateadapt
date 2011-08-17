@@ -6,6 +6,7 @@ CHM.SATCHMMap = OpenLayers.Class(CHM.CHMMap, {
 		var biogeo_layer = new OpenLayers.Layer.WMS('Biogeographical regions 2005', 
 			geoserverUrl + wms + '?', 
 			{layers: 'chm:biogeo_2005', format: 'image/png', transparent: 'true'}, 
+			{visibility: false}, 
 			{isBaseLayer: false}
 		);
 		
@@ -75,9 +76,9 @@ CHM.SATCHMMap = OpenLayers.Class(CHM.CHMMap, {
         	feature.geometry.getBounds().getCenterLonLat(),
             null,
             "<table width='100%' border='0'>" +
-            "<tr><td>Area</td><td>" + feature.attributes.area + "</td></tr>" + 
-            "<tr><td>Sector</td><td>" + feature.attributes.sector + "</td></tr>" + 
-            "<tr><td>Risk</td><td>" + feature.attributes.risk + "</td></tr>" + 
+            "<tr><th>" + feature.attributes.name + "</th></tr>" + 
+            "<tr><td>" + feature.attributes.description + "</td></tr>" + 
+            "<tr><td><a href='" + feature.attributes.website + "' target='top'>" + feature.attributes.website + "</a></td></tr>" + 
             "</table>",
             null, true, null);
             

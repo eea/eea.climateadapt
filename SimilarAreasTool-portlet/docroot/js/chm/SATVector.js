@@ -20,7 +20,7 @@ CHM.SATVector = OpenLayers.Class(OpenLayers.Layer.Vector, {
         protocol = new OpenLayers.Protocol.WFS({
 	       	version: '1.1.0',
 			url:  proxyUrl + geoserverUrl + wfs + '?', 
-	        featureType: 'casestudies_intersect',
+	        featureType: 'casestudies',
 	        featureNS: 'http://ace.geocat.net',
 	        geometryName: 'geom',
 	        srsName: 'EPSG:3035'
@@ -70,13 +70,13 @@ CHM.SATVector = OpenLayers.Class(OpenLayers.Layer.Vector, {
 			filters.push(area_filter);
 			
 			if (this.risk != null) {
-				var risk_filter = this.createFilter(OpenLayers.Filter.Comparison.EQUAL_TO, 'risk', this.risk);
+				var risk_filter = this.createFilter(OpenLayers.Filter.Comparison.LIKE, 'risks', '*' + this.risk + '*');
 				
 				filters.push(risk_filter);
 			}
 			
 			if (this.sector != null) {
-				var sector_filter = this.createFilter(OpenLayers.Filter.Comparison.EQUAL_TO, 'sector', this.sector);
+				var sector_filter = this.createFilter(OpenLayers.Filter.Comparison.LIKE, 'sectors', '*' + this.sector + '*');
 				
 				filters.push(sector_filter);
 			}
