@@ -58,17 +58,9 @@ public class FilterAceItemPortlet extends MVCPortlet {
         String[] sortBys = requestParams.get(SearchRequestParams.SORTBY);
         
 		PortletPreferences prefs = request.getPreferences();
-
-		int maxhits = Integer.parseInt( ParamUtil.getString(request, Constants.MAXHITS) ) ;
-		int nritemspage = Integer.parseInt( ParamUtil.getString(request, Constants.NRITEMSPAGE) ) ;
 		
-		if( nritemspage > maxhits && maxhits > 0) {
-			
-			nritemspage = maxhits;
-		}
-		
-		prefs.setValue(Constants.MAXHITS, "" + maxhits);
-		prefs.setValue(Constants.NRITEMSPAGE, ""+ nritemspage);
+		prefs.setValue(Constants.PAGING, ParamUtil.getString(request, Constants.PAGING) );
+		prefs.setValue(Constants.NRITEMSPAGE, ParamUtil.getString(request, Constants.NRITEMSPAGE) );
 
 		prefs.store();
 		prefs.setValues(SearchRequestParams.ANY, anyOfThese);
