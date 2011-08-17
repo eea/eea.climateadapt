@@ -1,0 +1,59 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<title>Measure</title>
+		<script type='text/javascript' src="js/proj4js/lib/proj4js-combined.js"></script>
+		<script type='text/javascript' src='js/OpenLayers.js'></script>
+		<script type="text/javascript" src="js/chm/CHM.js"></script>
+		<script type="text/javascript" src="js/chm/CHMMap.js"></script>
+		<script type="text/javascript" src="js/chm/Measure.js"></script>
+		<script type="text/javascript" src="js/chm/MeasureControl.js"></script>
+		<script type="text/javascript" src="js/chm/MeasureCHMMap.js"></script>
+		<script type="text/javascript">
+			var measurechmmap;
+			
+			function init() {
+				proxyUrl = '';
+				
+				geoserverUrl = 'http://localhost/geoserver/';
+				
+				wfs = 'wfs';
+				
+				wms = 'wms';
+				
+				measurechmmap = new CHM.MeasureCHMMap('map_element', {});
+				
+				measurechmmap.setOnMeasureChanged(this.measureChanged);
+				
+				measurechmmap.setOnAreaChanged(this.areaChanged);
+			}
+			
+			function handleClick(e) {
+				measurechmmap.setMeasure(new CHM.Measure(5.0, 52.0, "EPSG:4326"));
+			}
+			
+			function measureChanged() {
+				var measure = measurechmmap.getMeasure('EPSG:4326');
+				
+				document.form.lat.value = measure.x;
+				
+				document.form.lon.value = measure.y;
+			}
+			
+			function areaChanged() {
+				document.form.area.value = measurechmmap.getArea();
+			}
+		</script>
+	</head>
+	<body onload="init();">
+		<div id='map_element' style='width: 500px; height: 500px;'></div>
+		<form name='form' id='form'>
+			<input name='lat' id='lat'/>
+			<input name='lon' id='lon'/>
+			<input name='area' id='area'/>
+		</form>
+		<a onclick="handleClick(event)">Test setMeasure()</a>
+	</body>
+</html>

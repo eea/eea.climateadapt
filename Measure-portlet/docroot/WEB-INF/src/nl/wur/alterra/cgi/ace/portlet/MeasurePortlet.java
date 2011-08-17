@@ -24,7 +24,6 @@ import com.liferay.portal.kernel.util.WebKeys;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.util.bridges.mvc.MVCPortlet;
-import com.liferay.util.servlet.SessionParameters;
 
 /**
  * Portlet implementation class MeasurePortlet
@@ -167,6 +166,10 @@ public class MeasurePortlet extends MVCPortlet {
 			measure.setImportance(measure.getImportance()+1);
 			measure.setRating( measure.getRating() + 100);
 		}
+		
+		measure.setLat(Double.parseDouble(ParamUtil.getString(request, "lat")));
+		measure.setLon(Double.parseDouble(ParamUtil.getString(request, "lon")));
+		measure.setSatarea(ParamUtil.getString(request, "satarea"));
 	}
 
 	/**
@@ -240,6 +243,26 @@ public class MeasurePortlet extends MVCPortlet {
 		String orderByType = ParamUtil.getString(request, "orderByType");
 
 		prefs.setValue("orderByType", orderByType);
+
+		String proxyUrl = ParamUtil.getString(request, Constants.proxyUrlPreferenceName);
+
+		prefs.setValue(Constants.proxyUrlPreferenceName, proxyUrl);
+		
+		String geoserverUrl = ParamUtil.getString(request, Constants.geoserverUrlPreferenceName);
+		
+		if (! geoserverUrl.endsWith("/")) {
+			geoserverUrl += "/";
+		}
+
+		prefs.setValue(Constants.geoserverUrlPreferenceName, geoserverUrl);
+		
+		String wfs = ParamUtil.getString(request, Constants.wfsPreferenceName);
+
+		prefs.setValue(Constants.wfsPreferenceName, wfs);
+		
+		String wms = ParamUtil.getString(request, Constants.wmsPreferenceName);
+
+		prefs.setValue(Constants.wmsPreferenceName, wms);
 
 		prefs.store();
 	}

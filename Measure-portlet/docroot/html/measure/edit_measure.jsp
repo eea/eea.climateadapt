@@ -86,7 +86,7 @@
        <%-- note : i18n file should always be in sync with AceItemSector enum --%>	
 		<c:forEach var="adaptationSector" items="<%= nl.wur.alterra.cgi.ace.model.constants.AceItemSector.values() %>" >
 			<div class="check">
-				<c:set var="aceItemSectors" value="<%= measure == null ? "" : measure.getSectors_() %>" />
+				<c:set var="aceItemSectors" value='<%= measure == null ? "" : measure.getSectors_() %>' />
 				<c:set var="adaptationSectorMustBeChecked" value="false" />
 				<c:if test="${fn:indexOf(aceItemSectors, adaptationSector)>=0}">
 					<c:set var="adaptationSectorMustBeChecked" value="true" />
@@ -109,7 +109,7 @@
 		<c:forEach var="adaptationElement" items="<%= nl.wur.alterra.cgi.ace.model.constants.AceItemElement.values() %>" >
 			<div class="check">
 				<c:set var="adaptationElementMustBeChecked" value="false" />
-				<c:set var="aceItemElements" value="<%= measure == null ? "" : measure.getElements_() %>" />
+				<c:set var="aceItemElements" value='<%= measure == null ? "" : measure.getElements_() %>' />
 				<c:set var="adaptationElementMustBeChecked" value="false" />
 				<c:if test="${fn:indexOf(aceItemElements, adaptationElement)>=0}">
 					<c:set var="adaptationElementMustBeChecked" value="true" />
@@ -132,7 +132,7 @@
 		<c:forEach var="adaptationClimateImpact" items="<%= nl.wur.alterra.cgi.ace.model.constants.AceItemClimateImpact.values() %>" >
 			<div class="check">
 				<c:set var="adaptationClimateImpactMustBeChecked" value="false" />
-				<c:set var="aceItemClimateImpacts" value="<%= measure == null ? "" : measure.getClimateimpacts_() %>" />
+				<c:set var="aceItemClimateImpacts" value='<%= measure == null ? "" : measure.getClimateimpacts_() %>' />
 				<c:set var="adaptationClimateImpactMustBeChecked" value="false" />
 				<c:if test="${fn:indexOf(aceItemClimateImpacts, adaptationClimateImpact)>=0}">
 					<c:set var="adaptationClimateImpactMustBeChecked" value="true" />
@@ -166,14 +166,26 @@
 		<input name="mao_type" type="radio" value="A" <%= a_checked %>>Case study<br /><br />
 		
 		<b>Source</b><br />
-		<input name="source" type="text" size="65" value="<%= measure == null ? "" : measure.getSource() %>"><br /><br />
+		<input name="source" type="text" size="65" value='<%= measure == null ? "" : measure.getSource() %>'><br /><br />
 		<!--  a u i :input name="startdate" / >
 		
 		< a u  i:input name="enddate" / >
 		
 		< a u i  :input name="publicationdate" / -->
-		</div>		
 		
+		<div id="map_element" style='width: 500px; height: 500px;'></div>
+		
+		<b>lat</b><br />	
+		<input name="lat" type="text" size="10" value='<%= measure == null ? "" : measure.getLat() %>'><br /><br />
+		
+		<b>lon</b><br />	
+		<input name="lon" type="text" size="10" value='<%= measure == null ? "" : measure.getLon() %>'><br /><br />
+		
+		<a onclick="handleClick(event)">Apply</a><br />
+		
+		<b>satarea</b><br />	
+		<input name="satarea" type="text" size="50" value='<%= measure == null ? "" : measure.getSatarea() %>'><br /><br />
+		</div>		
 	</aui:fieldset>
 
 	<aui:button-row>
@@ -182,3 +194,37 @@
 		<aui:button type="cancel"  onClick="<%= redirect %>" />
 	</aui:button-row>
 </aui:form>
+
+<script type="text/javascript">
+	var proxyUrl = '<%= prefs.getValue(Constants.proxyUrlPreferenceName, "") %>';
+	
+	var geoserverUrl = '<%= prefs.getValue(Constants.geoserverUrlPreferenceName, "http://ace.geocat.net/geoserver/") %>';
+	
+	var wms = '<%= prefs.getValue(Constants.wmsPreferenceName, "wms") %>';
+	
+	var wfs = '<%= prefs.getValue(Constants.wfsPreferenceName, "wfs") %>';
+				
+	var measurechmmap = new CHM.MeasureCHMMap('map_element', {});
+	
+	measurechmmap.setOnMeasureChanged(this.measureChanged);
+				
+	measurechmmap.setOnAreaChanged(this.areaChanged);
+	
+	handleClick(null);
+			
+	function handleClick(e) {
+		measurechmmap.setMeasure(new CHM.Measure(document._measureportlet_WAR_Measureportlet_fm.lat.value, document._measureportlet_WAR_Measureportlet_fm.lon.value, "EPSG:4326"));
+	}
+			
+	function measureChanged() {
+		var measure = measurechmmap.getMeasure('EPSG:4326');
+				
+		document._measureportlet_WAR_Measureportlet_fm.lat.value = measure.x;
+				
+		document._measureportlet_WAR_Measureportlet_fm.lon.value = measure.y;
+	}
+			
+	function areaChanged() {
+		document._measureportlet_WAR_Measureportlet_fm.satarea.value = measurechmmap.getArea();
+	}
+</script>
