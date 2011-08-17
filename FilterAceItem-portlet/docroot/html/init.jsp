@@ -1,4 +1,4 @@
-<%@ taglib uri="http://java.sun.com/portlet_2_0" prefix="portlet" %>
+<%@ taglib uri="http://java.sun.com/portlet" prefix="portlet" %>
 <%@ taglib uri="http://java.sun.com/jstl/core_rt" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <%@ taglib uri="http://liferay.com/tld/portlet" prefix="liferay-portlet" %>
@@ -23,6 +23,7 @@
 
 <%@ page import="nl.wur.alterra.cgi.ace.model.AceItem"%>
 <%@ page import="nl.wur.alterra.cgi.ace.service.AceItemLocalServiceUtil"%>
+<%@ page import="nl.wur.alterra.cgi.ace.portlet.Constants"%>
 
 <liferay-theme:defineObjects />
 

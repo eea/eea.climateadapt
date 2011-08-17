@@ -143,7 +143,20 @@ pageContext.setAttribute("countriesList", countriesList);
     <div id="filteraceitems_column" class="filteraceitems_column">
         <aui:form action="<%=searchAceitemURL%>" method="post" name="<portlet:namespace/>aceItemSearchForm">
             <div class="search_section">
-                <h2><liferay-ui:message key="acesearch-section-header1" /></h2>
+                <div class="row">
+                    <label for='<%= Constants.MAXHITS %>' class="input"><liferay-ui:message key='acefilter-lbl-maxhits' /></label>
+                    <input type="text" class="text" name='<%= Constants.MAXHITS %>' id='<%= Constants.MAXHITS %>' value='<%= renderRequest.getPreferences().getValue(Constants.MAXHITS,"0") %>'/>
+                 </div>
+            </div>
+            <div class="search_section">
+                <div class="row">
+                    <label for='<%= Constants.NRITEMSPAGE %>' class="input"><liferay-ui:message key='acefilter-lbl-nritemspage' /></label>
+                    <input type="text" class="text" name='<%= Constants.NRITEMSPAGE %>' id='<%= Constants.NRITEMSPAGE %>' value='<%= renderRequest.getPreferences().getValue(Constants.NRITEMSPAGE,"10") %>'/>
+                </div>
+            </div>
+            
+             <div class="search_section">
+               <h2><liferay-ui:message key="acesearch-section-header1" /></h2>
 
                 <div class="row">
                     <label for="anyOfThese" class="input"><liferay-ui:message key="acesearch-lbl-allwords" /></label>

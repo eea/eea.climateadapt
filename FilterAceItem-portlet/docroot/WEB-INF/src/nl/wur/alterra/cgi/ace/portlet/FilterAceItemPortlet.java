@@ -1,5 +1,6 @@
 package nl.wur.alterra.cgi.ace.portlet;
 
+import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.util.bridges.mvc.MVCPortlet;
 import nl.wur.alterra.cgi.ace.search.ACESearchPortalInterface;
 import nl.wur.alterra.cgi.ace.search.AceSearchFormBean;
@@ -58,6 +59,18 @@ public class FilterAceItemPortlet extends MVCPortlet {
         
 		PortletPreferences prefs = request.getPreferences();
 
+		int maxhits = Integer.parseInt( ParamUtil.getString(request, Constants.MAXHITS) ) ;
+		int nritemspage = Integer.parseInt( ParamUtil.getString(request, Constants.NRITEMSPAGE) ) ;
+		
+		if( nritemspage > maxhits && maxhits > 0) {
+			
+			nritemspage = maxhits;
+		}
+		
+		prefs.setValue(Constants.MAXHITS, "" + maxhits);
+		prefs.setValue(Constants.NRITEMSPAGE, ""+ nritemspage);
+
+		prefs.store();
 		prefs.setValues(SearchRequestParams.ANY, anyOfThese);
 		prefs.setValues(SearchRequestParams.ACEITEM_TYPE, aceItemTypes);
 		prefs.setValues(SearchRequestParams.SECTOR, sectors);

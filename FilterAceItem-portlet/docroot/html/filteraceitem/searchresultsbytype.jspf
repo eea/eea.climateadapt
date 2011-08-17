@@ -5,8 +5,8 @@
 		// a random postfix is used to relate ids of elements
 		//
 		
-		int itemsOnPage = 10; 
-		
+		int itemsOnPage = Integer.parseInt( renderRequest.getPreferences().getValue(Constants.NRITEMSPAGE, "10") ); 
+
 		int r = new java.util.Random().nextInt(Integer.MAX_VALUE);
 		pageContext.setAttribute("unique", "" + r);
 		pageContext.setAttribute("expandedId", "expandedId-" + r);		
@@ -105,7 +105,7 @@
 		</div>
 		
 		<div id="${resultsListId}">
-			<c:forEach var="searchResult" items="${groupedResults}" begin="0" end="4">		
+			<c:forEach var="searchResult" items="${groupedResults}" begin="0" end="<%= itemsOnPage-1 %>">		
 				<div class="searchresult">
 					<div>
                         <c:set var="descriptionLength" value="${fn:length(searchResult.description)}" />

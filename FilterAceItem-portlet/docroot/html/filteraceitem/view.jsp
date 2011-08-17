@@ -41,7 +41,7 @@ Long totalResults = (Long) request.getAttribute("total_results");
 
 	// display only first 5 searchresults
 	jQuery(document).ready(function(){
-		for(var i  = 0; i < 5; i++) {
+		for(var i  = 0; i < <%= renderRequest.getPreferences().getValue(Constants.NRITEMSPAGE, "10") %>; i++) {
 			$j(".searchresult").next().show();
 		}
 	});     
@@ -83,11 +83,11 @@ Long totalResults = (Long) request.getAttribute("total_results");
                 // Updates the results for each data type sorted
                 groupedJSONResults[$j("#sortsearchformId-"+unique + " input[name=aceitemtype]").val()] = aceitemResults;
 
-                var firstFiveAceitemResults = new Array();
-				for(var i = 0; i < 5; i++) {
-					firstFiveAceitemResults.push(aceitemResults[i]);
+                var firstAceitemResults = new Array();
+				for(var i = 0; i < <%= renderRequest.getPreferences().getValue(Constants.NRITEMSPAGE, "10") %>; i++) {
+					firstAceitemResults.push(aceitemResults[i]);
 				}
-				displayJSONResults(unique, firstFiveAceitemResults);
+				displayJSONResults(unique, firstAceitemResults);
 				$j('#paginationId-'+unique + ' .jPag-pages li:first-child a').click();
 			} 
 		});

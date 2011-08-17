@@ -26,6 +26,17 @@
 			<short-title>FilterAceItemPortlet</short-title>
 			<keywords></keywords>
 		</portlet-info>
+		<!-- Portlet preferences (configurable by user in portlet EDIT mode) -->
+		<portlet-preferences>
+			<preference>
+				<name>maxHits</name>
+				<value>0</value>
+			</preference>
+			<preference>
+				<name>nrItemsPage</name>
+				<value>10</value>
+			</preference>
+		</portlet-preferences>
 		<security-role-ref>
 			<role-name>administrator</role-name>
 		</security-role-ref>
