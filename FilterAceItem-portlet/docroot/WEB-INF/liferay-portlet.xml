@@ -6,7 +6,7 @@
 	<portlet>
 		<portlet-name>filteraceitemportlet</portlet-name>
 		<icon>/icon.png</icon>
-		<instanceable>false</instanceable>
+		<instanceable>true</instanceable>
 		<header-portlet-css>/css/portlet.css</header-portlet-css>
 		<header-portlet-css>/css/data_table.css</header-portlet-css>
 		<header-portlet-css>/css/data_table_jui.css</header-portlet-css>

@@ -29,8 +29,8 @@
 		<!-- Portlet preferences (configurable by user in portlet EDIT mode) -->
 		<portlet-preferences>
 			<preference>
-				<name>maxHits</name>
-				<value>0</value>
+				<name>paging</name>
+				<value>1</value>
 			</preference>
 			<preference>
 				<name>nrItemsPage</name>

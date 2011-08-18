@@ -200,7 +200,13 @@
     font-weight: bold;
 	cursor:pointer;
 }
-
+.resultsTitle {
+	background-color:#D2DF92;
+	margin:5px 0px 0px 0px;
+	padding:5px;
+	font-size:1.2em;
+    font-weight: bold;
+}
 /** styles for filter portlet **/
 .resultsGroupTitleFilter {
    cursor: pointer;
