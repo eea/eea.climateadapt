@@ -14,6 +14,14 @@
 			var satchmmap;
 			
 			function init() {
+				proxyUrl = '';
+				
+				geoserverUrl = 'http://localhost/geoserver/';
+				
+				wfs = 'wfs';
+				
+				wms = 'wms';
+				
 				satchmmap = new CHM.SATCHMMap('map_element', {});
 				
 				riskChange();
