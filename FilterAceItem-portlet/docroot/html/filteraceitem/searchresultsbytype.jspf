@@ -31,14 +31,9 @@
 		<c:set var="nrPageItems" value="<%= itemsOnPage %>"/>
 	
 		<div id="${expandedTitleId}" class="expandedResultsGroupTitle resultsGroupTitle">
-			&#9660; <c:out value='${groupTitle}' /> 
-<% 
-	int paging = Integer.parseInt( renderRequest.getPreferences().getValue(Constants.PAGING, "0") );
-	if( paging > 0) {	%>	
-			(${fn:length(groupedResults)})
+			&#9660; <c:out value='${groupTitle}' /> (${fn:length(groupedResults)})
 		</div>
 		<div id="${paginationId}" style="padding-left: 10px; height: 20px;background-color: #D2DF92;">
-<% } %>			
 		</div>
 		<!-- pagination -->
 		<script type="text/javascript"> 
@@ -99,16 +94,12 @@
 
                 <input type="hidden" name="conditionAdaptationSector" id="${conditionAdaptationSectorId}" value="${searchParams.conditionAdaptationSector}"/>
                 <input type="hidden" name="conditionAdaptationElement" id="${conditionAdaptationElementId}" value="${searchParams.conditionAdaptationElement}"/>
-<% 
-	if( paging > 0) {	%>	
+
 				<liferay-ui:message key="acesearch-sort-by" />
 				<input type="radio" name="sortBy" class="sortByControl" id="${sortsearchRelevanceId}" value="RELEVANCE" checked /><liferay-ui:message key="acesearch-sort-relevance" />
 				<input type="radio" name="sortBy" class="sortByControl" id="${sortsearchNameId}" value="NAME"/><liferay-ui:message key="acesearch-sort-name" />
 				<input type="radio" name="sortBy" class="sortByControl" id="${sortsearchCountryId}" value="COUNTRY"/><liferay-ui:message key="acesearch-sort-country" />
 
-<% } else { %>	
-                <input type="hidden" name="sortBy" id="${sortsearchRelevanceId}" value="RELEVANCE" />
-<% } %>	
 			</form>
 		</div>
 		
@@ -162,12 +153,7 @@
         <c:set var="groupedResults" value="${groupedResults}"/>
 
 		<div id="${collapsedTitleId}" class="collapsedResultsGroupTitle resultsGroupTitle">
-			&#9658; <c:out value='${groupTitle}' />
-<% 
-	if( paging > 0) {	%>	
-			(${fn:length(groupedResults)})
-
-<% } %>				
+			&#9658; <c:out value='${groupTitle}' /> (${fn:length(groupedResults)})
 		</div>
 	</div>
 	

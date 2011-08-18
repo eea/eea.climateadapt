@@ -21,9 +21,15 @@
 
 <%
 Long totalResults = (Long) request.getAttribute("total_results");
+
+int paging = Integer.parseInt( renderRequest.getPreferences().getValue(Constants.PAGING, "0") );
+
+String includeFile = "searchresultsonetype.jspf";
+
+if( paging > 0) {
+	includeFile = "searchresultsbytype.jspf";
+ } 
 %>
-
-
 <portlet:actionURL name="searchAceitem" var="searchAceitemURL"/>
 
 <div id="filteraceitems_container">
@@ -105,73 +111,91 @@ Long totalResults = (Long) request.getAttribute("total_results");
 		<c:set var="groupedJSONResults" scope="page" value="${DOCUMENT_JSONsearchResults}"/>
 		<c:set var="aceitemtype" scope="page" value="DOCUMENT"/>
 		<c:set var="groupTitle" scope="page"><liferay-ui:message key="acesearch-datainfotype-lbl-DOCUMENT" /></c:set>
-		<%@ include file="searchresultsbytype.jspf" %>
-
-        <c:set var="groupedResults" scope="page" value="${TABLE_searchResults}"/>
-        <c:set var="groupedJSONResults" scope="page" value="${TABLE_JSONsearchResults}"/>
-        <c:set var="aceitemtype" scope="page" value="TABLE"/>
-        <c:set var="groupTitle" scope="page"><liferay-ui:message key="acesearch-datainfotype-lbl-TABLE" /></c:set>
+<% 	if( paging > 0) {	%>	
         <%@ include file="searchresultsbytype.jspf" %>
-		   
-		<c:set var="groupedResults" scope="page" value="${ARTICLE_searchResults}"/>
-		<c:set var="groupedJSONResults" scope="page" value="${ARTICLE_JSONsearchResults}"/>		
-		<c:set var="aceitemtype" scope="page" value="ARTICLE"/>		
-		<c:set var="groupTitle" scope="page"><liferay-ui:message key="acesearch-datainfotype-lbl-ARTICLE" /></c:set>
-		<%@ include file="searchresultsbytype.jspf" %>
+<% } else { %>	
+        <%@ include file="searchresultsonetype.jspf" %>
+<% } %>	        
 
         <c:set var="groupedResults" scope="page" value="${TOOLGUIDANCE_searchResults}"/>
         <c:set var="groupedJSONResults" scope="page" value="${TOOLGUIDANCE_JSONsearchResults}"/>
         <c:set var="aceitemtype" scope="page" value="TOOLGUIDANCE"/>
         <c:set var="groupTitle" scope="page"><liferay-ui:message key="acesearch-datainfotype-lbl-TOOLGUIDANCE" /></c:set>
+<% 	if( paging > 0) {	%>	
         <%@ include file="searchresultsbytype.jspf" %>
+<% } else { %>	
+        <%@ include file="searchresultsonetype.jspf" %>
+<% } %>
 
 		<c:set var="groupedResults" scope="page" value="${MAPGRAPHDATASET_searchResults}"/>
 		<c:set var="groupedJSONResults" scope="page" value="${MAPGRAPHDATASET_JSONsearchResults}"/>
 		<c:set var="aceitemtype" scope="page" value="MAPGRAPHDATASET"/>		
 		<c:set var="groupTitle" scope="page"><liferay-ui:message key="acesearch-datainfotype-lbl-MAPGRAPHDATASET" /></c:set>
-		<%@ include file="searchresultsbytype.jspf" %>	
+<% 	if( paging > 0) {	%>	
+        <%@ include file="searchresultsbytype.jspf" %>
+<% } else { %>	
+        <%@ include file="searchresultsonetype.jspf" %>
+<% } %>
 		
 		<c:set var="groupedResults" scope="page" value="${MULTIMEDIA_searchResults}"/>
 		<c:set var="groupedJSONResults" scope="page" value="${MULTIMEDIA_JSONsearchResults}"/>
 		<c:set var="aceitemtype" scope="page" value="MULTIMEDIA"/>				
 		<c:set var="groupTitle" scope="page"><liferay-ui:message key="acesearch-datainfotype-lbl-MULTIMEDIA" /></c:set>
-		<%@ include file="searchresultsbytype.jspf" %>
+<% 	if( paging > 0) {	%>	
+        <%@ include file="searchresultsbytype.jspf" %>
+<% } else { %>	
+        <%@ include file="searchresultsonetype.jspf" %>
+<% } %>
 
         <c:set var="groupedResults" scope="page" value="${INDICATOR_searchResults}"/>
 		<c:set var="groupedJSONResults" scope="page" value="${INDICATOR_JSONsearchResults}"/>
 		<c:set var="aceitemtype" scope="page" value="INDICATOR"/>
 		<c:set var="groupTitle" scope="page"><liferay-ui:message key="acesearch-datainfotype-lbl-INDICATOR" /></c:set>
-		<%@ include file="searchresultsbytype.jspf" %>
+<% 	if( paging > 0) {	%>	
+        <%@ include file="searchresultsbytype.jspf" %>
+<% } else { %>	
+        <%@ include file="searchresultsonetype.jspf" %>
+<% } %>
 
 		<c:set var="groupedResults" scope="page" value="${INFORMATIONSOURCE_searchResults}"/>
 		<c:set var="groupedJSONResults" scope="page" value="${INFORMATIONSOURCE_JSONsearchResults}"/>
 		<c:set var="aceitemtype" scope="page" value="INFORMATIONSOURCE"/>				
 		<c:set var="groupTitle" scope="page"><liferay-ui:message key="acesearch-datainfotype-lbl-INFORMATIONSOURCE" /></c:set>
-		<%@ include file="searchresultsbytype.jspf" %>
+<% 	if( paging > 0) {	%>	
+        <%@ include file="searchresultsbytype.jspf" %>
+<% } else { %>	
+        <%@ include file="searchresultsonetype.jspf" %>
+<% } %>
 
         <c:set var="groupedResults" scope="page" value="${RESEARCHPROJECT_searchResults}"/>
 		<c:set var="groupedJSONResults" scope="page" value="${RESEARCHPROJECT_JSONsearchResults}"/>
 		<c:set var="aceitemtype" scope="page" value="RESEARCHPROJECT"/>
 		<c:set var="groupTitle" scope="page"><liferay-ui:message key="acesearch-datainfotype-lbl-RESEARCHPROJECT" /></c:set>
-		<%@ include file="searchresultsbytype.jspf" %>
+<% 	if( paging > 0) {	%>	
+        <%@ include file="searchresultsbytype.jspf" %>
+<% } else { %>	
+        <%@ include file="searchresultsonetype.jspf" %>
+<% } %>
 
-          <c:set var="groupedResults" scope="page" value="${MEASURE_searchResults}"/>
+        <c:set var="groupedResults" scope="page" value="${MEASURE_searchResults}"/>
 		<c:set var="groupedJSONResults" scope="page" value="${MEASURE_JSONsearchResults}"/>
 		<c:set var="aceitemtype" scope="page" value="MEASURE"/>
 		<c:set var="groupTitle" scope="page"><liferay-ui:message key="acesearch-datainfotype-lbl-MEASURE" /></c:set>
-		<%@ include file="searchresultsbytype.jspf" %>
-
-        <c:set var="groupedResults" scope="page" value="${ACTION_searchResults}"/>
-		<c:set var="groupedJSONResults" scope="page" value="${ACTION_JSONsearchResults}"/>
-		<c:set var="aceitemtype" scope="page" value="ACTION"/>
-		<c:set var="groupTitle" scope="page"><liferay-ui:message key="acesearch-datainfotype-lbl-ACTION" /></c:set>
-		<%@ include file="searchresultsbytype.jspf" %>
+<% 	if( paging > 0) {	%>	
+        <%@ include file="searchresultsbytype.jspf" %>
+<% } else { %>	
+        <%@ include file="searchresultsonetype.jspf" %>
+<% } %>
 
         <c:set var="groupedResults" scope="page" value="${ORGANISATION_searchResults}"/>
 		<c:set var="groupedJSONResults" scope="page" value="${ORGANISATION_JSONsearchResults}"/>
 		<c:set var="aceitemtype" scope="page" value="ORGANISATION"/>
 		<c:set var="groupTitle" scope="page"><liferay-ui:message key="acesearch-datainfotype-lbl-ORGANISATION" /></c:set>
-		<%@ include file="searchresultsbytype.jspf" %>
+<% 	if( paging > 0) {	%>	
+        <%@ include file="searchresultsbytype.jspf" %>
+<% } else { %>	
+        <%@ include file="searchresultsonetype.jspf" %>
+<% } %>
 		
 		<%-- TODO all types --%>
 
