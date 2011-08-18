@@ -181,7 +181,7 @@
 		<b>lon</b><br />	
 		<input name="lon" type="text" size="10" value='<%= measure == null ? "" : measure.getLon() %>'><br /><br />
 		
-		<a onclick="handleClick(event)">Apply</a><br />
+		<a onclick="handleClick(event)">Apply</a><br /><br />
 		
 		<b>satarea</b><br />	
 		<input name="satarea" type="text" size="50" value='<%= measure == null ? "" : measure.getSatarea() %>'><br /><br />
