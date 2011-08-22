@@ -36,10 +36,30 @@ jQuery(document).ready(function() {
 	
 	if($j('.resultsgroup').length) {
 		resizePagination();	
-	}								
-	
-	
-    $j(".expandedResultsGroup").hide();
+	}		
+
+	$j(".description").hide();
+	$j(".minus").hide();	
+    
+    $j(".minus").click(function() {	
+		var expId = this.id;
+		// grab unique part, after dash
+		var unique = expId.match(/-([0-9]+)/)[1];		
+		// hide expandedResultsGroup with same unique id postfix
+	       $j("#descriptionId-"+unique).hide();
+	       $j("#minusId-"+unique).hide();
+	       $j("#plusId-"+unique).show(100);
+    });	
+
+    $j(".plus").click(function() {
+		var expId = this.id;
+		// grab unique part, after dash
+		var unique = expId.match(/-([0-9]+)/)[1];		
+		// hide collapsedResultsGroup with same unique id postfix   
+	   $j("#descriptionId-"+unique).show(100);
+       $j("#minusId-"+unique).show(100);
+       $j("#plusId-"+unique).hide();
+    });
 	
     $j(".expandedResultsGroupTitle").click(function() {	
 		var expId = this.id;

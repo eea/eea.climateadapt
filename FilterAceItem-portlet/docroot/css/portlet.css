@@ -285,6 +285,17 @@
 	display:inline;
 	float:right;
 }
+.description {
+	font-weight:normal;
+}
+.minus {
+	font-weight:bold;
+	cursor:pointer;
+}
+.plus {
+	font-weight:bold;
+	cursor:pointer;
+}
 
 .sortbar {
 	background-color:#D2DF92;

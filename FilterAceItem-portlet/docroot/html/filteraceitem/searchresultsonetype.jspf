@@ -39,23 +39,42 @@
 			<c:forEach var="searchResult" items="${groupedResults}" begin="0" end="<%= itemsOnPage-1 %>">		
 				<div class="searchresult">
 					<div>
+                        <c:set var="descriptionLength" value="${fn:length(searchResult.description)}" />
+
+                        <c:set var="descriptionText" value="${searchResult.description}" />
+
+						<c:set var="descriptionId" value="descriptionId-${searchResult.aceItemId}" />
+
+						<c:set var="plusId" value="plusId-${searchResult.aceItemId}" />
+
+						<c:set var="minusId" value="minusId-${searchResult.aceItemId}" />
+
+						<c:if test="${descriptionLength > 400}">
+							<c:set var="descriptionText" value="${fn:substring(searchResult.description, 0, 396)} ..." />
+						</c:if>		
+						
+						<span id="${plusId}" class="plus"><img src="<%=renderRequest.getContextPath()%>/images/icons/01_plus.png" /></span>
+						<span id="${minusId}" class="minus"><img src="<%=renderRequest.getContextPath()%>/images/icons/01_minus.png" /></span>
+						
 						<c:choose>
 							<c:when test="${!empty searchResult.storedAt && fn:startsWith(searchResult.storagetype, 'URL')==true}">
-								<span class="bolder">&#187; <a href="<c:out value="/viewaceitem?aceitem_id=${searchResult.aceItemId}"/>" ><c:out value="${searchResult.name}"/></a></span>&nbsp;
+								<span class="bolder">&nbsp;<a href="<c:out value="/viewaceitem?aceitem_id=${searchResult.aceItemId}"/>" ><c:out value="${searchResult.name}"/></a></span>&nbsp;
 							</c:when>
 							<c:when test="${!empty searchResult.storedAt && fn:startsWith(searchResult.storedAt, 'ace_project_id')==true}">
-								<span class="bolder">&#187; <a href="<c:out value="/projects1?${searchResult.storedAt}"/>" >
+								<span class="bolder">&nbsp;<a href="<c:out value="/projects1?${searchResult.storedAt}"/>" >
 									<c:out value="${searchResult.name}"/></a></span>&nbsp;
 							</c:when>
 							<c:when test="${!empty searchResult.storedAt && fn:startsWith(searchResult.storedAt, 'ace_measure_id')==true}">
-								<span class="bolder">&#187; <a href="<c:out value="/viewmeasure?${searchResult.storedAt}"/>" >
-									<c:out value="${searchResult.name}"/></a></span>&nbsp;
+								<span class="bolder">&nbsp;<a href="<c:out value="/viewmeasure?${searchResult.storedAt}"/>" >
+									<c:out value="${searchResult.name}"/></a></span>
 							</c:when>                            
 							<c:otherwise>
-								<span class="bolder">&#187; <a href="<c:out value="/viewaceitem?aceitem_id=${searchResult.aceItemId}"/>" ><c:out value="${searchResult.name}"/></a></span>&nbsp;
+								<span class="bolder"><a href="<c:out value="/viewaceitem?aceitem_id=${searchResult.aceItemId}"/>" ><c:out value="${searchResult.name}"/></a></span>&nbsp;
 							</c:otherwise>
-						</c:choose>
+						</c:choose>					
 
+						<span id="${descriptionId}" class="description"><c:out value="${descriptionText}" /></span>
+		
 					</div><%-- 
 
 					<div class="resultfooter">
