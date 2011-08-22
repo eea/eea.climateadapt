@@ -1,4 +1,20 @@
-
+.relevance-marker {
+    position:relative;
+    top:4px;
+    width:8px;
+    height:3px;
+    background-color: lime;
+    border: 1px solid limegreen;
+    float:left;
+    margin: 0px 1px;
+}
+.relevance-title {
+    float:left;
+    margin-right:10px;
+}
+.relevance {
+    margin-right: 5px;
+}
 #acesearch_container {
     background-color: #fff;
 	width: 1100px; 

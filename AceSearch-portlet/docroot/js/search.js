@@ -352,31 +352,31 @@ function displayJSONResults(unique, aceitemResults) {
             // add relevance
             //resultlist += '<div class="relevance">relevance: ' + aceitem.relevance + '%</div>';
 
-            resultlist += '<div class="relevance" style="float:left;margin-right: 5px;">relevance: ';
+            resultlist += '<div class="relevance">relevance: ';
             if(aceitem.relevance > 80) {
-                resultlist += '<div class="relevance-marker" style="width:8px;height:3px;background-color: lime;border: 1px solid limegreen;float:left;margin: 0px 1px;"></div>';
-                resultlist += '<div class="relevance-marker" style="width:8px;height:3px;background-color: lime;border: 1px solid limegreen;float:left;margin: 0px 1px;"></div>';
-                resultlist += '<div class="relevance-marker" style="width:8px;height:3px;background-color: lime;border: 1px solid limegreen;float:left;margin: 0px 1px;"></div>';
-                resultlist += '<div class="relevance-marker" style="width:8px;height:3px;background-color: lime;border: 1px solid limegreen;float:left;margin: 0px 1px;"></div>';
-                resultlist += '<div class="relevance-marker" style="width:8px;height:3px;background-color: lime;border: 1px solid limegreen;float:left;margin: 0px 1px;"></div>';
+                resultlist += '<div class="relevance-marker"></div>';
+                resultlist += '<div class="relevance-marker"></div>';
+                resultlist += '<div class="relevance-marker"></div>';
+                resultlist += '<div class="relevance-marker"></div>';
+                resultlist += '<div class="relevance-marker"></div>';
             }
             else if(aceitem.relevance > 60) {
-                resultlist += '<div class="relevance-marker" style="width:8px;height:3px;background-color: lime;border: 1px solid limegreen;float:left;margin: 0px 1px;"></div>';
-                resultlist += '<div class="relevance-marker" style="width:8px;height:3px;background-color: lime;border: 1px solid limegreen;float:left;margin: 0px 1px;"></div>';
-                resultlist += '<div class="relevance-marker" style="width:8px;height:3px;background-color: lime;border: 1px solid limegreen;float:left;margin: 0px 1px;"></div>';
-                resultlist += '<div class="relevance-marker" style="width:8px;height:3px;background-color: lime;border: 1px solid limegreen;float:left;margin: 0px 1px;"></div>';
+                resultlist += '<div class="relevance-marker"></div>';
+                resultlist += '<div class="relevance-marker"></div>';
+                resultlist += '<div class="relevance-marker"></div>';
+                resultlist += '<div class="relevance-marker"></div>';
             }
             else if(aceitem.relevance > 40) {
-                resultlist += '<div class="relevance-marker" style="width:8px;height:3px;background-color: lime;border: 1px solid limegreen;float:left;margin: 0px 1px;"></div>';
-                resultlist += '<div class="relevance-marker" style="width:8px;height:3px;background-color: lime;border: 1px solid limegreen;float:left;margin: 0px 1px;"></div>';
-                resultlist += '<div class="relevance-marker" style="width:8px;height:3px;background-color: lime;border: 1px solid limegreen;float:left;margin: 0px 1px;"></div>';
+                resultlist += '<div class="relevance-marker"></div>';
+                resultlist += '<div class="relevance-marker"></div>';
+                resultlist += '<div class="relevance-marker"></div>';
             }
             else if(aceitem.relevance > 20) {
-                resultlist += '<div class="relevance-marker" style="width:8px;height:3px;background-color: lime;border: 1px solid limegreen;float:left;margin: 0px 1px;"></div>';
-                resultlist += '<div class="relevance-marker" style="width:8px;height:3px;background-color: lime;border: 1px solid limegreen;float:left;margin: 0px 1px;"></div>';
+                resultlist += '<div class="relevance-marker"></div>';
+                resultlist += '<div class="relevance-marker"></div>';
             }
             else {
-                resultlist += '<div class="relevance-marker" style="width:8px;height:3px;background-color: lime;border: 1px solid limegreen;float:left;margin: 0px 1px;"></div>';
+                resultlist += '<div class="relevance-marker"></div>';
             }
             resultlist +=  '%</div>';
 
