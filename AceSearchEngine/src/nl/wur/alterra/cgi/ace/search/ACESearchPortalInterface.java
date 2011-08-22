@@ -49,13 +49,15 @@ public class ACESearchPortalInterface {
 		// no aceItemTypes requested: search for all of them
 		if (isEmpty(formBean.getAceitemtype())) {
 			for (AceItemType aceItemType : AceItemType.values()) {
-				List<AceItem> results = searchEngine.searchLuceneByType(formBean, aceItemType.name());
+				List<AceItemSearchResult> results = searchEngine.searchLuceneByType(formBean, aceItemType.name());
 				totalResults += results.size();
 
 				System.out.println("searchAceitem found #" + results.size() + " results of type " + aceItemType.name());
 				request.setAttribute(aceItemType.name() + "_" + SearchRequestParams.SEARCH_RESULTS, results);
 
-                 for(AceItem result : results) {
+                 for(AceItemSearchResult wresult : results) {
+
+                     AceItem result = wresult.getAceItem();
 
                     // escape single quotes
                      result.setClimateimpacts_(result.getClimateimpacts_().replaceAll("'", "\'"));
@@ -97,7 +99,7 @@ public class ACESearchPortalInterface {
 		// search only requested aceItemTypes
 		else {
 			for (String aceItemType : formBean.getAceitemtype()) {
-				List<AceItem> results = searchEngine.searchLuceneByType(formBean, aceItemType);
+				List<AceItemSearchResult> results = searchEngine.searchLuceneByType(formBean, aceItemType);
 				totalResults += results.size();
 
 				System.out.println("searchAceitem found #" + results.size() + " results of type " + aceItemType);
@@ -127,7 +129,8 @@ public class ACESearchPortalInterface {
         System.out.println("handleAjaxSearchRequest start");
         //PortletUtils.logParams(request);
         List<String> resultKeys = handleSearchRequest(request);
-        List<AceItem> results = (List<AceItem>) request.getAttribute(resultKeys.get(0));
+        List<AceItemSearchResult> results = (List<AceItemSearchResult>) request.getAttribute(resultKeys.get(0));
+
         Gson gson = new Gson();
         String json = gson.toJson(results);
         response.setContentType("text/html");

@@ -8,6 +8,7 @@ import org.apache.lucene.search.Query;
 import org.apache.lucene.search.Sort;
 import org.apache.lucene.search.SortField;
 import org.apache.lucene.search.TopDocs;
+import org.apache.lucene.search.TopFieldCollector;
 import org.apache.lucene.store.FSDirectory;
 
 import java.io.File;
@@ -89,29 +90,40 @@ public class ACEIndexSearcher {
             }
 
             System.out.println("ACEIndexSearcher sortBy" + sortBy);
+            Sort sort = null;
             if(sortBy == null) {
-                 Sort sort = new Sort(new SortField[] { SortField.FIELD_SCORE, SortField.FIELD_DOC });
-                 return searcher.search(query, null, itemsPerPage, sort);
+                 sort = new Sort(new SortField[] { SortField.FIELD_SCORE, SortField.FIELD_DOC });
                             }
             else {
-                Sort sort = null;
-
-                if(sortBy.equals("NAME")) {
+                if(sortBy.equals("RATING")) {
+                    sort = new Sort(new SortField( ACEIndexConstant.IndexField.RATING_SORT, SortField.LONG));
+                }
+                else if(sortBy.equals("NAME")) {
                     sort = new Sort(new SortField( ACEIndexConstant.IndexField.NAME_SORT, SortField.STRING));
-                    return searcher.search(query, null, itemsPerPage, sort);
-
+                }
+                else if(sortBy.equals("RELEVANCE")) {
+                    // ignore it (let Lucene default to relevance)
+                    sort = new Sort(new SortField[] { SortField.FIELD_SCORE, SortField.FIELD_DOC });
                 }
                 else if(sortBy.equals("COUNTRY")) {
                     sort = new Sort(new SortField( ACEIndexConstant.IndexField.COUNTRY_SORT, SortField.STRING));
-                    return searcher.search(query, null, itemsPerPage, sort);
-
                 }
-                // undefined sort, just ignore it
+                // undefined sort: default to rating
                 else {
-                    sort = new Sort(new SortField[] { SortField.FIELD_SCORE, SortField.FIELD_DOC });
-                    return searcher.search(query, null, itemsPerPage, sort);
+                    sort = new Sort(new SortField( ACEIndexConstant.IndexField.RATING_SORT, SortField.LONG));
                 }
             }
+           // return searcher.search(query, null, itemsPerPage, sort);
+            int numHits = searcher.maxDoc();
+            TopFieldCollector collector = TopFieldCollector.create(
+                sort,
+                numHits,
+                true,         // fillFields - whether the actual field values should be returned on the results
+                true,          // trackDocScores - need doc and score fields
+                true,          // trackMaxScore - related to trackDocScores
+                sort == null); // should docs be in docId order?
+            searcher.search(query, null, collector);
+            return collector.topDocs();
         }
         catch (IOException x) {
             System.out.println(x.getMessage());

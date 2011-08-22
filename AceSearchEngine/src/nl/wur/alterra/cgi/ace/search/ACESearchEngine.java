@@ -5,6 +5,7 @@ import nl.wur.alterra.cgi.ace.search.lucene.ACEAnalyzer;
 import nl.wur.alterra.cgi.ace.search.lucene.ACEIndexConstant;
 import nl.wur.alterra.cgi.ace.search.lucene.ACEIndexSearcher;
 import nl.wur.alterra.cgi.ace.search.lucene.ACELuceneException;
+import nl.wur.alterra.cgi.ace.service.AceItemLocalService;
 import nl.wur.alterra.cgi.ace.service.AceItemLocalServiceUtil;
 import org.apache.lucene.analysis.TokenStream;
 import org.apache.lucene.analysis.tokenattributes.TermAttribute;
@@ -200,7 +201,7 @@ public class ACESearchEngine {
      * @return results results
      * @throws ACELuceneException hmm
      */
-    protected List<AceItem> searchLuceneByType(AceSearchFormBean formBean, String aceItemType) throws ACELuceneException {
+    protected List<AceItemSearchResult> searchLuceneByType(AceSearchFormBean formBean, String aceItemType) throws ACELuceneException {
         try {
             //
             // handle free text input
@@ -287,14 +288,40 @@ public class ACESearchEngine {
             // rewritten query is better for logging/debugging but potentially throws runtime exceptions
             //System.out.println("Lucene query (rewritten): " + query.rewrite(((IndexSearcher)searcher).getIndexReader()).toString());
             long start = System.currentTimeMillis();
+
             TopDocs topDocs = searcher.search(query, formBean.getSortBy(), 10);
             long end = System.currentTimeMillis();
             System.out.println("Lucene searcher # total hits: " + topDocs.totalHits + " in " + (end - start) + " ms");
             ScoreDoc[] hits = topDocs.scoreDocs;
-            List<AceItem> results = new ArrayList<AceItem>();
+
+            List<AceItemSearchResult> results = new ArrayList<AceItemSearchResult>();
+
+            //
+            // calculate factor to normalize relevance scores
+            float topScore = 0f;
+            for(ScoreDoc hit : hits) {
+                float score = hit.score;
+                System.out.println("score: " + score);
+                if(score != Float.NaN) {
+                    if(score > topScore) {
+                        topScore = score;
+                    }
+                }
+            }
+            System.out.println("topscore is: " + topScore);
+            if(topScore == Float.NaN || !(topScore > 0f)) {
+                topScore = 1f;
+            }
+            float normalizeScoreFactor = 1 / topScore ;
+            System.out.println("normalizeScoreFactor is: " + normalizeScoreFactor);
+
+
             for (ScoreDoc hit : hits) {
                 Document document = searcher.doc(hit.doc);
-                AceItem aceItem = AceItemLocalServiceUtil.getService().createAceItem();
+
+                AceItemLocalService aceItemLocalService = AceItemLocalServiceUtil.getService();
+                AceItem aceItem = AceItemLocalServiceUtil.createAceItem();
+
                 String aceItemId = document.get(ACEIndexConstant.IndexField.ACEITEM_ID);
                 if(aceItemId != null) {
                     aceItem.setAceItemId(Long.parseLong(aceItemId));
@@ -329,7 +356,18 @@ public class ACESearchEngine {
                 aceItem.setDatatype(document.get(ACEIndexConstant.IndexField.DATATYPE));
 
                 System.out.println(document.get(ACEIndexConstant.IndexField.NAME));
-                results.add(aceItem);
+
+                // relevance expressed as a percentage
+                float relevance = hit.score * normalizeScoreFactor * 100;
+
+                System.out.println("hit.score is: " + hit.score);
+                System.out.println("relevance is: " + relevance);
+
+
+                AceItemSearchResult aceItemSearchResult = new AceItemSearchResult(aceItem);
+                aceItemSearchResult.setRelevance(relevance);
+
+                results.add(aceItemSearchResult);
             }
             return results;
         }
