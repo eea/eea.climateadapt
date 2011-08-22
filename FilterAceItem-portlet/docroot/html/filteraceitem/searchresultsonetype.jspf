@@ -14,7 +14,8 @@
 		pageContext.setAttribute("expandedTitleId", "expandedTitleId-" + r);		
 		pageContext.setAttribute("collapsedTitleId", "collapsedTitleId-" + r);		
 		pageContext.setAttribute("sortsearchformId", "sortsearchformId-" + r);
-		pageContext.setAttribute("sortsearchRelevanceId", "sortsearchRelevanceId-" + r);		
+		pageContext.setAttribute("sortsearchRelevanceId", "sortsearchRelevanceId-" + r);
+        pageContext.setAttribute("sortsearchRatingId", "sortsearchRatingId-" + r);
 		pageContext.setAttribute("sortsearchNameId", "sortsearchNameId-" + r);
 		pageContext.setAttribute("sortsearchCountryId", "sortsearchCountryId-" + r);
 		pageContext.setAttribute("resultsListId", "resultsListId-" + r);
