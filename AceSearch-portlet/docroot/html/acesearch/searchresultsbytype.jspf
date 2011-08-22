@@ -15,6 +15,7 @@
 		pageContext.setAttribute("collapsedTitleId", "collapsedTitleId-" + r);		
 		pageContext.setAttribute("sortsearchformId", "sortsearchformId-" + r);
 		pageContext.setAttribute("sortsearchRelevanceId", "sortsearchRelevanceId-" + r);		
+        pageContext.setAttribute("sortsearchRatingId", "sortsearchRatingId-" + r);
 		pageContext.setAttribute("sortsearchNameId", "sortsearchNameId-" + r);
 		pageContext.setAttribute("sortsearchCountryId", "sortsearchCountryId-" + r);
 		pageContext.setAttribute("resultsListId", "resultsListId-" + r);
@@ -100,15 +101,21 @@
                 <input type="hidden" name="conditionAdaptationElement" id="${conditionAdaptationElementId}" value="${searchParams.conditionAdaptationElement}"/>
 
 				<liferay-ui:message key="acesearch-sort-by" />
-				<input type="radio" name="sortBy" class="sortByControl" id="${sortsearchRelevanceId}" value="RELEVANCE" checked /><liferay-ui:message key="acesearch-sort-relevance" />
+                <input type="radio" name="sortBy" class="sortByControl" id="${sortsearchRatingId}" value="RATING" checked /><liferay-ui:message key="acesearch-sort-rating" />
+                <input type="radio" name="sortBy" class="sortByControl" id="${sortsearchRelevanceId}" value="RELEVANCE" /><liferay-ui:message key="acesearch-sort-relevance" />
 				<input type="radio" name="sortBy" class="sortByControl" id="${sortsearchNameId}" value="NAME"/><liferay-ui:message key="acesearch-sort-name" />
+                <%--
 				<input type="radio" name="sortBy" class="sortByControl" id="${sortsearchCountryId}" value="COUNTRY"/><liferay-ui:message key="acesearch-sort-country" />
+				--%>
 			</form>
 		</div>
 		
 		<div id="${resultsListId}">
-			<c:forEach var="searchResult" items="${groupedResults}" begin="0" end="4">		
-				<div class="searchresult">
+			<c:forEach var="wrappedSearchResult" items="${groupedResults}" begin="0" end="4">
+
+                <c:set var="searchResult" value="${wrappedSearchResult.aceItem}"/>
+
+				<div class="searchresult" style="border:1px solid;margin:5px 0px;">
 					<div>
                         <c:set var="descriptionLength" value="${fn:length(searchResult.description)}" />
 
@@ -137,6 +144,44 @@
 								- <c:out value="${descriptionText}" />
 							</c:otherwise>
 						</c:choose>
+
+                        <hr class="clearer"/>
+
+                        <div class="relevance" style="margin-right: 5px;">
+                            <div class="relevance-title" style="float:left;margin-right:10px;">
+                                <liferay-ui:message key="acesearch-relevance" />
+                            </div>
+                            <c:set var="relevance" value="${wrappedSearchResult.relevance}" />
+                            <c:choose>
+                                <c:when test="${relevance > 80}">
+                                    <div class="relevance-marker" style="position:relative;top:4px;width:8px;height:3px;background-color: lime;border: 1px solid limegreen;float:left;margin: 0px 1px;"></div>
+                                    <div class="relevance-marker" style="position:relative;top:4px;width:8px;height:3px;background-color: lime;border: 1px solid limegreen;float:left;margin: 0px 1px;"></div>
+                                    <div class="relevance-marker" style="position:relative;top:4px;width:8px;height:3px;background-color: lime;border: 1px solid limegreen;float:left;margin: 0px 1px;"></div>
+                                    <div class="relevance-marker" style="position:relative;top:4px;width:8px;height:3px;background-color: lime;border: 1px solid limegreen;float:left;margin: 0px 1px;"></div>
+                                    <div class="relevance-marker" style="position:relative;top:4px;width:8px;height:3px;background-color: lime;border: 1px solid limegreen;float:left;margin: 0px 1px;"></div>
+                                </c:when>
+                                <c:when test="${relevance > 60}">
+                                    <div class="relevance-marker" style="position:relative;top:4px;width:8px;height:3px;background-color: lime;border: 1px solid limegreen;float:left;margin: 0px 1px;"></div>
+                                    <div class="relevance-marker" style="position:relative;top:4px;width:8px;height:3px;background-color: lime;border: 1px solid limegreen;float:left;margin: 0px 1px;"></div>
+                                    <div class="relevance-marker" style="position:relative;top:4px;width:8px;height:3px;background-color: lime;border: 1px solid limegreen;float:left;margin: 0px 1px;"></div>
+                                    <div class="relevance-marker" style="position:relative;top:4px;width:8px;height:3px;background-color: lime;border: 1px solid limegreen;float:left;margin: 0px 1px;"></div>
+                                </c:when>
+                                <c:when test="${relevance > 40}">
+                                    <div class="relevance-marker" style="position:relative;top:4px;width:8px;height:3px;background-color: lime;border: 1px solid limegreen;float:left;margin: 0px 1px;"></div>
+                                    <div class="relevance-marker" style="position:relative;top:4px;width:8px;height:3px;background-color: lime;border: 1px solid limegreen;float:left;margin: 0px 1px;"></div>
+                                    <div class="relevance-marker" style="position:relative;top:4px;width:8px;height:3px;background-color: lime;border: 1px solid limegreen;float:left;margin: 0px 1px;"></div>
+                                </c:when>
+                                <c:when test="${relevance > 20}">
+                                    <div class="relevance-marker" style="position:relative;top:4px;width:8px;height:3px;background-color: lime;border: 1px solid limegreen;float:left;margin: 0px 1px;"></div>
+                                    <div class="relevance-marker" style="position:relative;top:4px;width:8px;height:3px;background-color: lime;border: 1px solid limegreen;float:left;margin: 0px 1px;"></div>
+                                </c:when>
+                                <c:otherwise>
+                                    <div class="relevance-marker" style="position:relative;top:4px;width:8px;height:3px;background-color: lime;border: 1px solid limegreen;float:left;margin: 0px 1px;"></div>
+                                </c:otherwise>
+                            </c:choose>
+                        </div>
+
+                        <hr class="clearer"/>
 
 					</div>
 

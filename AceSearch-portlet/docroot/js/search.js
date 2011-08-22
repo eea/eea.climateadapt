@@ -328,28 +328,57 @@ function displayJSONResults(unique, aceitemResults) {
 	jQuery.each(aceitemResults, function(idx, aceitem){ 
 		if (aceitem) {
 			// add searchresult
-			resultlist += '<div class="searchresult">';
+			resultlist += '<div class="searchresult" style="border: 1px solid;margin: 5px 0px;">';
 		
-			var descriptionText = aceitem._description.length > 400 ? aceitem._description.substring(0, 396) + " ..." : aceitem._description;
+			var descriptionText = aceitem.aceItem._description.length > 400 ? aceitem.aceItem._description.substring(0, 396) + " ..." : aceitem.aceItem._description;
 			descriptionText = removeHTMLTags(descriptionText) ;
 
 			// add name and description
-            if ((aceitem._storedAt != "") && (aceitem._storagetype.substr(0, 3) == "URL")) {
-                   resultlist += '<div><span class="bolder">&#187; <a href="/viewaceitem?aceitem_id=' +  aceitem._aceItemId  + '" >' + aceitem._name + ' </a></span> - ' + descriptionText + '</div>';
+            if ((aceitem.aceItem._storedAt != "") && (aceitem.aceItem._storagetype.substr(0, 3) == "URL")) {
+                   resultlist += '<div><span class="bolder">&#187; <a href="/viewaceitem?aceitem_id=' +  aceitem.aceItem._aceItemId  + '" >' + aceitem.aceItem._name + ' </a></span> - ' + descriptionText + '</div>';
 
-           } else if (aceitem._storedAt.substr(0, 14) == "ace_project_id") {
-                   resultlist += '<div><span class="bolder">&#187; <a href="/projects1?' + aceitem._storedAt + '" >' + aceitem._name + '</a></span>&nbsp;';
+           } else if (aceitem.aceItem._storedAt.substr(0, 14) == "ace_project_id") {
+                   resultlist += '<div><span class="bolder">&#187; <a href="/projects1?' + aceitem.aceItem._storedAt + '" >' + aceitem.aceItem._name + '</a></span>&nbsp;';
                    resultlist += ' - ' + descriptionText + '</div>';
 
-            } else if (aceitem._storedAt.substr(0, 14) == "ace_measure_id") {
-                               resultlist += '<div><span class="bolder">&#187; <a href="/viewmeasure?' + aceitem._storedAt + '" >' + aceitem._name + '</a></span>&nbsp;';
+            } else if (aceitem.aceItem._storedAt.substr(0, 14) == "ace_measure_id") {
+                               resultlist += '<div><span class="bolder">&#187; <a href="/viewmeasure?' + aceitem.aceItem._storedAt + '" >' + aceitem.aceItem._name + '</a></span>&nbsp;';
                                resultlist += ' - ' + descriptionText + '</div>';
 
            } else {
-                   resultlist += '<div><span class="bolder">&#187; <a href="/viewaceitem?aceitem_id=' +  aceitem._aceItemId + '" >' + aceitem._name + ' </a></span> - ' + descriptionText + '</div>';
+                   resultlist += '<div><span class="bolder">&#187; <a href="/viewaceitem?aceitem_id=' +  aceitem.aceItem._aceItemId + '" >' + aceitem.aceItem._name + ' </a></span> - ' + descriptionText + '</div>';
 
            }
+            // add relevance
+            //resultlist += '<div class="relevance">relevance: ' + aceitem.relevance + '%</div>';
 
+            resultlist += '<div class="relevance" style="float:left;margin-right: 5px;">relevance: ';
+            if(aceitem.relevance > 80) {
+                resultlist += '<div class="relevance-marker" style="width:8px;height:3px;background-color: lime;border: 1px solid limegreen;float:left;margin: 0px 1px;"></div>';
+                resultlist += '<div class="relevance-marker" style="width:8px;height:3px;background-color: lime;border: 1px solid limegreen;float:left;margin: 0px 1px;"></div>';
+                resultlist += '<div class="relevance-marker" style="width:8px;height:3px;background-color: lime;border: 1px solid limegreen;float:left;margin: 0px 1px;"></div>';
+                resultlist += '<div class="relevance-marker" style="width:8px;height:3px;background-color: lime;border: 1px solid limegreen;float:left;margin: 0px 1px;"></div>';
+                resultlist += '<div class="relevance-marker" style="width:8px;height:3px;background-color: lime;border: 1px solid limegreen;float:left;margin: 0px 1px;"></div>';
+            }
+            else if(aceitem.relevance > 60) {
+                resultlist += '<div class="relevance-marker" style="width:8px;height:3px;background-color: lime;border: 1px solid limegreen;float:left;margin: 0px 1px;"></div>';
+                resultlist += '<div class="relevance-marker" style="width:8px;height:3px;background-color: lime;border: 1px solid limegreen;float:left;margin: 0px 1px;"></div>';
+                resultlist += '<div class="relevance-marker" style="width:8px;height:3px;background-color: lime;border: 1px solid limegreen;float:left;margin: 0px 1px;"></div>';
+                resultlist += '<div class="relevance-marker" style="width:8px;height:3px;background-color: lime;border: 1px solid limegreen;float:left;margin: 0px 1px;"></div>';
+            }
+            else if(aceitem.relevance > 40) {
+                resultlist += '<div class="relevance-marker" style="width:8px;height:3px;background-color: lime;border: 1px solid limegreen;float:left;margin: 0px 1px;"></div>';
+                resultlist += '<div class="relevance-marker" style="width:8px;height:3px;background-color: lime;border: 1px solid limegreen;float:left;margin: 0px 1px;"></div>';
+                resultlist += '<div class="relevance-marker" style="width:8px;height:3px;background-color: lime;border: 1px solid limegreen;float:left;margin: 0px 1px;"></div>';
+            }
+            else if(aceitem.relevance > 20) {
+                resultlist += '<div class="relevance-marker" style="width:8px;height:3px;background-color: lime;border: 1px solid limegreen;float:left;margin: 0px 1px;"></div>';
+                resultlist += '<div class="relevance-marker" style="width:8px;height:3px;background-color: lime;border: 1px solid limegreen;float:left;margin: 0px 1px;"></div>';
+            }
+            else {
+                resultlist += '<div class="relevance-marker" style="width:8px;height:3px;background-color: lime;border: 1px solid limegreen;float:left;margin: 0px 1px;"></div>';
+            }
+            resultlist +=  '%</div>';
 
 			// add result footer 
 			// TODO use actual date from aceitem, if available
