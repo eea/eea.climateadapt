@@ -14,8 +14,7 @@
 		pageContext.setAttribute("expandedTitleId", "expandedTitleId-" + r);		
 		pageContext.setAttribute("collapsedTitleId", "collapsedTitleId-" + r);		
 		pageContext.setAttribute("sortsearchformId", "sortsearchformId-" + r);
-		pageContext.setAttribute("sortsearchRelevanceId", "sortsearchRelevanceId-" + r);
-        pageContext.setAttribute("sortsearchRatingId", "sortsearchRatingId-" + r);
+		pageContext.setAttribute("sortsearchRelevanceId", "sortsearchRelevanceId-" + r);		
 		pageContext.setAttribute("sortsearchNameId", "sortsearchNameId-" + r);
 		pageContext.setAttribute("sortsearchCountryId", "sortsearchCountryId-" + r);
 		pageContext.setAttribute("resultsListId", "resultsListId-" + r);
@@ -25,7 +24,7 @@
 	%>
 	
 	<%-- expanded view --%>	
-	<div id="${collapsedId}" class="collapsedResultsGroup">
+	<div id="${collapsedId}">
 
         <c:set var="groupedResults" value="${groupedResults}"/>
 
@@ -37,7 +36,7 @@
 	
 		<div id="${resultsListId}">
 			<c:forEach var="searchResult" items="${groupedResults}" begin="0" end="<%= itemsOnPage-1 %>">		
-				<div class="searchresult">
+				<div>
 					<div>
                         <c:set var="descriptionLength" value="${fn:length(searchResult.description)}" />
 
@@ -58,18 +57,18 @@
 						
 						<c:choose>
 							<c:when test="${!empty searchResult.storedAt && fn:startsWith(searchResult.storagetype, 'URL')==true}">
-								<span class="bolder">&nbsp;<a href="<c:out value="/viewaceitem?aceitem_id=${searchResult.aceItemId}"/>" ><c:out value="${searchResult.name}"/></a></span>&nbsp;
+								&nbsp;<a href="<c:out value="/viewaceitem?aceitem_id=${searchResult.aceItemId}"/>" ><c:out value="${searchResult.name}"/></a>
 							</c:when>
 							<c:when test="${!empty searchResult.storedAt && fn:startsWith(searchResult.storedAt, 'ace_project_id')==true}">
-								<span class="bolder">&nbsp;<a href="<c:out value="/projects1?${searchResult.storedAt}"/>" >
-									<c:out value="${searchResult.name}"/></a></span>&nbsp;
+								&nbsp;<a href="<c:out value="/projects1?${searchResult.storedAt}"/>" >
+									<c:out value="${searchResult.name}"/></a>
 							</c:when>
 							<c:when test="${!empty searchResult.storedAt && fn:startsWith(searchResult.storedAt, 'ace_measure_id')==true}">
-								<span class="bolder">&nbsp;<a href="<c:out value="/viewmeasure?${searchResult.storedAt}"/>" >
-									<c:out value="${searchResult.name}"/></a></span>
+								&nbsp;<a href="<c:out value="/viewmeasure?${searchResult.storedAt}"/>" >
+									<c:out value="${searchResult.name}"/></a>
 							</c:when>                            
 							<c:otherwise>
-								<span class="bolder"><a href="<c:out value="/viewaceitem?aceitem_id=${searchResult.aceItemId}"/>" ><c:out value="${searchResult.name}"/></a></span>&nbsp;
+								&nbsp;<a href="<c:out value="/viewaceitem?aceitem_id=${searchResult.aceItemId}"/>" ><c:out value="${searchResult.name}"/></a>
 							</c:otherwise>
 						</c:choose>					
 
