@@ -88,9 +88,23 @@ jQuery(document).ready(function() {
     });
 	
 	
-	$j.each($j(".expandedResultsGroup"), function(i,v){
-		$j("#" + this.id).hide();
-	});
+	// If only one section, show opened
+	if ($j(".expandedResultsGroup").length == 1) {
+		$j.each($j(".collapsedResultsGroup"), function(i,v){
+			$j("#" + this.id).hide();
+		});
+		
+		$j.each($j(".expandedResultsGroup"), function(i,v){
+			$j("#" + this.id).show();
+		});
+		
+	} else {
+		$j.each($j(".expandedResultsGroup"), function(i,v){
+			$j("#" + this.id).hide();
+		});
+		
+	}
+	
 
     showDataInfoPanel();
 });
