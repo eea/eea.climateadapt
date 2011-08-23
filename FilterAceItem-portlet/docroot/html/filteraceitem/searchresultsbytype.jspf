@@ -6,108 +6,115 @@
 		//
 		
 		int itemsOnPage = Integer.parseInt( renderRequest.getPreferences().getValue(Constants.NRITEMSPAGE, "10") ); 
+	
+	int r = new java.util.Random().nextInt(Integer.MAX_VALUE);
+	pageContext.setAttribute("unique", "" + r);
+	pageContext.setAttribute("expandedId", "expandedId-" + r);		
+	pageContext.setAttribute("collapsedId", "collapsedId-" + r);
+	pageContext.setAttribute("expandedTitleId", "expandedTitleId-" + r);		
+	pageContext.setAttribute("collapsedTitleId", "collapsedTitleId-" + r);		
+	pageContext.setAttribute("sortsearchformId", "sortsearchformId-" + r);
+	pageContext.setAttribute("sortsearchRelevanceId", "sortsearchRelevanceId-" + r);		
+    pageContext.setAttribute("sortsearchRatingId", "sortsearchRatingId-" + r);
+	pageContext.setAttribute("sortsearchNameId", "sortsearchNameId-" + r);
+	pageContext.setAttribute("sortsearchCountryId", "sortsearchCountryId-" + r);
+	pageContext.setAttribute("resultsListId", "resultsListId-" + r);
+	pageContext.setAttribute("anyOfTheseId", "anyOfTheseId-" + r);
+    pageContext.setAttribute("conditionAdaptationSectorId", "conditionAdaptationSectorId-" + r);
+    pageContext.setAttribute("conditionAdaptationElementId", "conditionAdaptationElementId-" + r);
+	pageContext.setAttribute("paginationId", "paginationId-" + r);
+	pageContext.setAttribute("demoId", "demoId-" + r);
+%>
 
-		int r = new java.util.Random().nextInt(Integer.MAX_VALUE);
-		pageContext.setAttribute("unique", "" + r);
-		pageContext.setAttribute("expandedId", "expandedId-" + r);		
-		pageContext.setAttribute("collapsedId", "collapsedId-" + r);
-		pageContext.setAttribute("expandedTitleId", "expandedTitleId-" + r);		
-		pageContext.setAttribute("collapsedTitleId", "collapsedTitleId-" + r);		
-		pageContext.setAttribute("sortsearchformId", "sortsearchformId-" + r);
-		pageContext.setAttribute("sortsearchRelevanceId", "sortsearchRelevanceId-" + r);
-        pageContext.setAttribute("sortsearchRatingId", "sortsearchRatingId-" + r);
-		pageContext.setAttribute("sortsearchNameId", "sortsearchNameId-" + r);
-		pageContext.setAttribute("sortsearchCountryId", "sortsearchCountryId-" + r);
-		pageContext.setAttribute("resultsListId", "resultsListId-" + r);
-		pageContext.setAttribute("anyOfTheseId", "anyOfTheseId-" + r);		
-		pageContext.setAttribute("paginationId", "paginationId-" + r);
-		pageContext.setAttribute("demoId", "demoId-" + r);
-	%>
-	
-	<%-- expanded view --%>	
-	<div id="${expandedId}" class="resultsgroup expandedResultsGroup">
-	
-		<c:set var="groupedResults" value="${groupedResults}"/>
-	
-		<c:set var="nrPageItems" value="<%= itemsOnPage %>"/>
-	
-		<div id="${expandedTitleId}" class="expandedResultsGroupTitle resultsGroupTitle">
-			&#9660; <c:out value='${groupTitle}' /> (${fn:length(groupedResults)})
-		</div>
-		<div id="${paginationId}" style="padding-left: 10px; height: 20px;background-color: #D2DF92;">
-		</div>
-		<!-- pagination -->
-		<script type="text/javascript"> 
-			
-			// ENABLE THIS WHEN RUNNING STANDALONE (WITHOUT REST OF ACE)		
-			var $j = jQuery.noConflict();
+<%-- expanded view --%>	
+<div id="${expandedId}" class="resultsgroup expandedResultsGroup">
 
-            // Stores the results the data type
-            groupedJSONResults['${aceitemtype}'] = ${groupedJSONResults};
+	<c:set var="groupedResults" value="${groupedResults}"/>
 
-			$j(function() {
-				$j('#${paginationId}').pagination(${fn:length(groupedResults)}, {
-					items_per_page: <%= itemsOnPage %>,
-					num_display_entries: 11,	// Number of pagination links to show			
-					num_edge_entries: 1,		// Number of fix edge page numbers to show in the pagination links
-					callback	: function(page){
-									var aceitemResults = new Array();
-									$j('#resultsListId-'+${unique}).remove();
-									// Page numbering starts with 0
-									displayPagedJSONResults(page+1, ${unique}, groupedJSONResults['${aceitemtype}']);
-								}					
-				});	
-			})			
-			function displayPagedJSONResults(page, unique, aceitemResults) {
-				var startIdx = ((page -1) * <%= itemsOnPage %>);
-				var endIdx = (page * <%= itemsOnPage %>) - 1;
-				if(endIdx > aceitemResults.length) {
-					endIdx = aceitemResults.length;
-				}
-				var aceitemPageResults = new Array();
-				for(var i = startIdx; i <= endIdx; i++) {
-					aceitemPageResults.push(aceitemResults[i]);
-				}
-				displayJSONResults(unique, aceitemPageResults);
-			}		
-			
-		</script>
+	<c:set var="nrPageItems" value="<%= itemsOnPage %>"/>
+
+	<div id="${expandedTitleId}" class="expandedResultsGroupTitle resultsGroupTitle">
+		&#9660; <c:out value='${groupTitle}' /> (${fn:length(groupedResults)})
+	</div>
+	
+	<div id="${paginationId}" style="padding-left: 10px; height: 20px;background-color: #D2DF92;">
 		
-		<hr class="clearer2"/>
+	</div>	
+	<!-- pagination -->
+	<script type="text/javascript"> 
 		
-		<div class="sortbar">
-			<form name="sortsearchform" id="${sortsearchformId}">
-				<input type="hidden" name="aceitemtype" value="${aceitemtype}"/>	
-				<input type="hidden" name="anyOfThese" id="${anyOfTheseId}" value="${searchParams.anyOfThese}"/>
+		// ENABLE THIS WHEN RUNNING STANDALONE (WITHOUT REST OF ACE)		
+		var $j = jQuery.noConflict();
 
-                <c:forEach var="sector" items="${searchParams.sector}">
-                <input type="hidden" name="sector" value="${sector}"/>
-                </c:forEach>
+        // Stores the results the data type
+        groupedJSONResults['${aceitemtype}'] = ${groupedJSONResults};
 
-                <c:forEach var="element" items="${searchParams.element}">
-                <input type="hidden" name="element" value="${element}"/>
-                </c:forEach>
-
-                <c:forEach var="countries" items="${searchParams.countries}">
-                <input type="hidden" name="countries" value="${countries}"/>
-                </c:forEach>
-
-
-                <input type="hidden" name="conditionAdaptationSector" id="${conditionAdaptationSectorId}" value="${searchParams.conditionAdaptationSector}"/>
-                <input type="hidden" name="conditionAdaptationElement" id="${conditionAdaptationElementId}" value="${searchParams.conditionAdaptationElement}"/>
-
-				<liferay-ui:message key="acesearch-sort-by" />
-                <input type="radio" name="sortBy" class="sortByControl" id="${sortsearchRatingId}" value="RATING" checked /><liferay-ui:message key="acesearch-sort-rating" />
-                <input type="radio" name="sortBy" class="sortByControl" id="${sortsearchRelevanceId}" value="RELEVANCE" /><liferay-ui:message key="acesearch-sort-relevance" />
-				<input type="radio" name="sortBy" class="sortByControl" id="${sortsearchNameId}" value="NAME"/><liferay-ui:message key="acesearch-sort-name" />
-                <%--
-				<input type="radio" name="sortBy" class="sortByControl" id="${sortsearchCountryId}" value="COUNTRY"/><liferay-ui:message key="acesearch-sort-country" />
-				--%>
-			</form>
-		</div>
+		$j(function() {
+			$j('#${paginationId}').pagination(${fn:length(groupedResults)}, {
+				items_per_page: <%= itemsOnPage %>,
+				num_display_entries: 11,	// Number of pagination links to show			
+				num_edge_entries: 1,		// Number of fix edge page numbers to show in the pagination links
+				callback	: function(page){
+								var aceitemResults = new Array();
+								$j('#resultsListId-'+${unique}).remove();
+								// Page numbering starts with 0
+								displayPagedJSONResults(page+1, ${unique}, groupedJSONResults['${aceitemtype}']);
+							}					
+			});	
+		})			
+		function displayPagedJSONResults(page, unique, aceitemResults) {
+			var startIdx = ((page -1) * <%= itemsOnPage %>);
+			var endIdx = (page * <%= itemsOnPage %>) - 1;
+			if(endIdx > aceitemResults.length) {
+				endIdx = aceitemResults.length;
+			}
+			var aceitemPageResults = new Array();
+			for(var i = startIdx; i <= endIdx; i++) {
+				aceitemPageResults.push(aceitemResults[i]);
+			}
+			displayJSONResults(unique, aceitemPageResults);
+		}		
 		
-		<div id="${resultsListId}">
-			<c:forEach var="searchResult" items="${groupedResults}" begin="0" end="<%= itemsOnPage-1 %>">		
+	</script>
+	
+	<hr class="clearer2"/>
+	
+	<div class="sortbar">
+		<form name="sortsearchform" id="${sortsearchformId}">
+			<input type="hidden" name="aceitemtype" value="${aceitemtype}"/>	
+			<input type="hidden" name="anyOfThese" id="${anyOfTheseId}" value="${searchParams.anyOfThese}"/>
+
+            <c:forEach var="sector" items="${searchParams.sector}">
+            <input type="hidden" name="sector" value="${sector}"/>
+            </c:forEach>
+
+            <c:forEach var="element" items="${searchParams.element}">
+            <input type="hidden" name="element" value="${element}"/>
+            </c:forEach>
+
+            <c:forEach var="countries" items="${searchParams.countries}">
+            <input type="hidden" name="countries" value="${countries}"/>
+            </c:forEach>
+
+
+            <input type="hidden" name="conditionAdaptationSector" id="${conditionAdaptationSectorId}" value="${searchParams.conditionAdaptationSector}"/>
+            <input type="hidden" name="conditionAdaptationElement" id="${conditionAdaptationElementId}" value="${searchParams.conditionAdaptationElement}"/>
+
+			<liferay-ui:message key="acesearch-sort-by" />
+            <input type="radio" name="sortBy" class="sortByControl" id="${sortsearchRatingId}" value="RATING" checked /><liferay-ui:message key="acesearch-sort-rating" />
+            <input type="radio" name="sortBy" class="sortByControl" id="${sortsearchRelevanceId}" value="RELEVANCE" /><liferay-ui:message key="acesearch-sort-relevance" />
+			<input type="radio" name="sortBy" class="sortByControl" id="${sortsearchNameId}" value="NAME"/><liferay-ui:message key="acesearch-sort-name" />
+            <%--
+			<input type="radio" name="sortBy" class="sortByControl" id="${sortsearchCountryId}" value="COUNTRY"/><liferay-ui:message key="acesearch-sort-country" />
+			--%>
+		</form>
+	</div>
+	
+	<div id="${resultsListId}">
+		<c:forEach var="wrappedSearchResult" items="${groupedResults}" begin="0" end="<%= itemsOnPage-1 %>">		
+
+                <c:set var="searchResult" value="${wrappedSearchResult.aceItem}"/>
+
 				<div class="searchresult">
 					<div>
                         <c:set var="descriptionLength" value="${fn:length(searchResult.description)}" />
@@ -138,11 +145,44 @@
 							</c:otherwise>
 						</c:choose>
 
+                        <div class="relevance">
+                            <div class="relevance-title">
+                                <liferay-ui:message key="acesearch-relevance" />
+                            </div>
+                            <c:set var="relevance" value="${wrappedSearchResult.relevance}" />
+                            <c:choose>
+                                <c:when test="${relevance > 80}">
+                                    <div class="relevance-marker"></div>
+                                    <div class="relevance-marker"></div>
+                                    <div class="relevance-marker"></div>
+                                    <div class="relevance-marker"></div>
+                                    <div class="relevance-marker"></div>
+                                </c:when>
+                                <c:when test="${relevance > 60}">
+                                    <div class="relevance-marker"></div>
+                                    <div class="relevance-marker"></div>
+                                    <div class="relevance-marker"></div>
+                                    <div class="relevance-marker"></div>
+                                </c:when>
+                                <c:when test="${relevance > 40}">
+                                    <div class="relevance-marker"></div>
+                                    <div class="relevance-marker"></div>
+                                    <div class="relevance-marker"></div>
+                                </c:when>
+                                <c:when test="${relevance > 20}">
+                                    <div class="relevance-marker"></div>
+                                    <div class="relevance-marker"></div>
+                                </c:when>
+                                <c:otherwise>
+                                    <div class="relevance-marker"></div>
+                                </c:otherwise>
+                            </c:choose>
+                        </div>
+
+                        <hr class="clearer"/>
+
 					</div>
 
-					<div class="resultfooter">
-						<hr class="clearer"/>
-					</div>
 				</div>
 			</c:forEach>
 		</div>

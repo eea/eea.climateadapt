@@ -35,8 +35,9 @@
 		<c:set var="nrPageItems" value="<%= itemsOnPage %>"/>
 	
 		<div id="${resultsListId}">
-			<c:forEach var="searchResult" items="${groupedResults}" begin="0" end="<%= itemsOnPage-1 %>">		
-				<div>
+			<c:forEach var="wrappedSearchResult" items="${groupedResults}" begin="0" end="<%= itemsOnPage-1 %>">		
+
+                <c:set var="searchResult" value="${wrappedSearchResult.aceItem}"/>					<div>
 					<div>
                         <c:set var="descriptionLength" value="${fn:length(searchResult.description)}" />
 
