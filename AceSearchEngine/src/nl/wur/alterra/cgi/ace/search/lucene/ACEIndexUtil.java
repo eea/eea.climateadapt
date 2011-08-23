@@ -28,7 +28,7 @@ public class ACEIndexUtil {
 		try {
 			// Use the jar file path to find the properties file
 			String path = getJarFolder();
-   						
+   			System.out.println("---> getJarFolder: "+ path);						
 
 			fis = new FileInputStream
    				(new File( path + "/aceindex.properties"));
@@ -42,12 +42,12 @@ public class ACEIndexUtil {
 				if (!indexFolderPath.endsWith(File.separator)) indexFolderPath += File.separator;
 			}
 			
-			System.out.println("Index folder path: "+ indexFolderPath);	
+			System.out.println("---> Index folder path: "+ indexFolderPath);	
 			
 		} catch (IOException e) {
 			// Log error	
 			indexFolderPath = "";
-			System.out.println("Index folder path: "+ indexFolderPath);	
+			System.out.println("---> Index folder path: "+ indexFolderPath);	
 		
 		} finally {
 			if (fis != null) try { fis.close(); } catch (IOException e) { } 
@@ -64,6 +64,7 @@ public class ACEIndexUtil {
 	 * @return Lucene index folder
 	 */
 	public static String retrieveIndexFolder() {
+		System.out.println("---> retrieveIndexFolder: "+ indexFolderPath);
 		return indexFolderPath;	
 	}
 	
@@ -76,11 +77,11 @@ public class ACEIndexUtil {
 		// get name and path
 		ACEIndexUtil a = new ACEIndexUtil();
 		
-		String name = a.getClass().getName().replace('.', '/');
-		name = a.getClass().getResource("/" + name + ".class").toString();
+		String name = a.getClass().getName().replace('.', '/');				
+		name = a.getClass().getResource("/" + name + ".class").toString();			
 		// remove junk
-		name = name.substring(0, name.indexOf(".jar"));
-		name = name.substring(name.lastIndexOf(':')-1, name.lastIndexOf('/')+1).replace('%', ' ');
+		name = name.substring(0, name.indexOf(".jar"));			
+		name = name.substring(name.lastIndexOf(':')+1, name.lastIndexOf('/')+1).replace('%', ' ');	
 		// remove escape characters
 		String s = "";
 		for (int k=0; k<name.length(); k++) {
