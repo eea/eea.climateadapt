@@ -4,6 +4,7 @@ import java.util.Properties;
 import java.io.File;
 import java.io.IOException;
 import java.io.FileInputStream;
+import java.security.CodeSource;
 
 /**
  * Utility methods for Lucene index in ACE.
@@ -44,7 +45,7 @@ public class ACEIndexUtil {
 			
 			System.out.println("---> Index folder path: "+ indexFolderPath);	
 			
-		} catch (IOException e) {
+		} catch (Exception e) {
 			// Log error	
 			indexFolderPath = "";
 			System.out.println("---> Index folder path: "+ indexFolderPath);	
@@ -73,23 +74,15 @@ public class ACEIndexUtil {
 	 *
 	 * @return Path for the jar file containing the class
 	 */
-	private static String getJarFolder() {
-		// get name and path
+	private static String getJarFolder() throws Exception {
 		ACEIndexUtil a = new ACEIndexUtil();
 		
-		String name = a.getClass().getName().replace('.', '/');				
-		name = a.getClass().getResource("/" + name + ".class").toString();			
-		// remove junk
-		name = name.substring(0, name.indexOf(".jar"));			
-		name = name.substring(name.lastIndexOf(':')+1, name.lastIndexOf('/')+1).replace('%', ' ');	
-		// remove escape characters
-		String s = "";
-		for (int k=0; k<name.length(); k++) {
-		  s += name.charAt(k);
-		  if (name.charAt(k) == ' ') k += 2;
-		}
-		// replace '/' with system separator char
-		return s.replace('/', File.separatorChar);
+		CodeSource codeSource = a.getClass().getProtectionDomain().getCodeSource();
+    	File jarFile = new File(codeSource.getLocation().toURI().getPath());
+    	String jarDir = jarFile.getParentFile().getPath();
+    	
+		System.out.println("---> getJarFolder: "+ jarDir);	
+		return jarDir;
   }
   
 }
