@@ -36,5 +36,7 @@ public class SearchRequestParams {
     public static final String CONDITION_ADAPTATION_SECTOR = "conditionAdaptationSector";
     public static final String CONDITION_ADAPTATION_ELEMENT = "conditionAdaptationElement";
     public static final String CONDITION_CLIMATE_IMPACT = "conditionClimateImpact";
+    
+    public static final String FUZZINESS = "fuzziness";
 
 }

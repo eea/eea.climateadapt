@@ -9,10 +9,13 @@ import nl.wur.alterra.cgi.ace.search.lucene.ACELuceneException;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
+import javax.portlet.PortletPreferences;
 import javax.portlet.PortletException;
 import javax.portlet.ResourceRequest;
 import javax.portlet.ResourceResponse;
 import java.io.IOException;
+
+import com.liferay.portal.kernel.util.ParamUtil;
 
 /**
  * Search interface for AceItems.
@@ -63,5 +66,18 @@ public class AceSearchPortlet extends MVCPortlet {
             throw new PortletException(x);
         }
     }
-
+    
+    /**
+     * Stores fuzziness preference
+     *
+     * @param request request
+	 * @param response response
+     */
+    public void setAceSearchPref(ActionRequest request, ActionResponse response) throws Exception {
+		PortletPreferences prefs = request.getPreferences();
+		
+		prefs.setValue(Constants.fuzzinessPreferenceName, ParamUtil.getString(request, Constants.fuzzinessPreferenceName) );
+	
+		prefs.store();	
+	}
 }

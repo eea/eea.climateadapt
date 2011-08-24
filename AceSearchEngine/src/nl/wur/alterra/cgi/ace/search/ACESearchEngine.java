@@ -31,7 +31,7 @@ import java.util.Map;
  */
 public class ACESearchEngine {
 
-    private static final String defaultFuzziness = "0.7";
+    private static final String defaultFuzziness = "";
 
     /**
      * Prepares ACESearchFormBean from values in a map, using defaults where necessary.
@@ -39,7 +39,7 @@ public class ACESearchEngine {
      * @param searchParams
      * @return formbean
      */
-    protected AceSearchFormBean prepareACESearchFormBean(Map<String, String[]> searchParams) {
+    protected AceSearchFormBean prepareACESearchFormBean(Map<String, String[]> searchParams, String fuzziness) {
 
         String[] aceItemTypes ;
         String[] anyOfThese ;
@@ -52,7 +52,7 @@ public class ACESearchEngine {
         String[] impacts ;
         String[] sectors ;
         String[] sortBys ;
-
+		
         aceItemTypes = searchParams.get(SearchRequestParams.ACEITEM_TYPE);
         anyOfThese = searchParams.get(SearchRequestParams.ANY);
         conditionAdaptationElement = searchParams.get(SearchRequestParams.CONDITION_ADAPTATION_ELEMENT);
@@ -86,6 +86,11 @@ public class ACESearchEngine {
         if(sortBys != null && sortBys.length > 0) {
             sortBy = sortBys[0];
         }
+        
+        String fuzzinessVal = defaultFuzziness;
+        if(fuzziness != null) {
+            fuzzinessVal = fuzziness;
+        }
 
         AceSearchFormBean formBean = new AceSearchFormBean();
 
@@ -96,6 +101,8 @@ public class ACESearchEngine {
         formBean.setImpact(impacts);
         formBean.setSector(sectors);
         formBean.setSortBy(sortBy);
+        
+        formBean.setFuzziness(fuzzinessVal);
 
 		if(isEmpty(anyOfThese)) {
             formBean.setAnyOfThese("");
@@ -156,7 +163,7 @@ public class ACESearchEngine {
                 result += "(";
                 switch (freetextMode) {
                     case ANY :
-                        if(searchterm.trim().length() < 4) {
+                        if((searchterm.trim().length() < 4) || (fuzziness.equals(""))){
                             result += searchterm.trim() + ") ";
                         }
                         else {
@@ -164,7 +171,7 @@ public class ACESearchEngine {
                         }
                         break;
                     case ALL :
-                        if(searchterm.trim().length() < 4) {
+                        if((searchterm.trim().length() < 4) || (fuzziness.equals(""))){
                             result += searchterm.trim() + ") AND ";
                         }
                         else {
@@ -172,7 +179,7 @@ public class ACESearchEngine {
                         }
                         break;
                     default:
-                        if(searchterm.trim().length() < 4) {
+                        if((searchterm.trim().length() < 4) || (fuzziness.equals(""))){
                             result += searchterm.trim() + ") ";
                         }
                         else {
@@ -212,7 +219,7 @@ public class ACESearchEngine {
             if(formBean.getAnyOfThese() != null) {
                 rawQuery = rawQuery + " " + formBean.getAnyOfThese();
 
-                rawQuery = prepareFreetext(rawQuery, defaultFuzziness, formBean.getFreeTextMode());
+                rawQuery = prepareFreetext(rawQuery, formBean.getFuzziness(), formBean.getFreeTextMode());
             }
 
             // user entered no searchterms; do wildcard query

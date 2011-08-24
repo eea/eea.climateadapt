@@ -13,6 +13,7 @@ public class AceSearchFormBean {
     private String[] impact;
     private String[] countries;
     private String sortBy;
+    private String fuzziness;
     private String anyOfThese;
 
     public FreetextMode getFreeTextMode() {
@@ -71,6 +72,14 @@ public class AceSearchFormBean {
 
     public void setSortBy(String sortBy) {
         this.sortBy = sortBy;
+    }
+
+    public String getFuzziness() {
+        return fuzziness;
+    }
+
+    public void setFuzziness(String fuzziness) {
+        this.fuzziness = fuzziness;
     }
 
     public String getAnyOfThese() {

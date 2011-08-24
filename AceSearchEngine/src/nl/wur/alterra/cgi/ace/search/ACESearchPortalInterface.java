@@ -156,6 +156,7 @@ public class ACESearchPortalInterface {
      */
     public AceSearchFormBean prepareACESearchFormBean(PortletRequest request) {
         Map<String, String[]> requestParams;
+		String fuzziness = null;
 
         //
         // TODO: do this by checking actual pagename rather than request type ?
@@ -164,13 +165,22 @@ public class ACESearchPortalInterface {
         // request from search portlet
         if(request instanceof ClientDataRequest) {
             requestParams = request.getParameterMap();
+
+			// Retrieve fuzziness from preferences
+            PortletPreferences preferences = request.getPreferences();
+            System.out.println("prepareACESearchFormBean (fuzziness): " + preferences.getValue(SearchRequestParams.FUZZINESS, ""));
+            
+			fuzziness = preferences.getValue(SearchRequestParams.FUZZINESS, "");            
         }
         // request from adaptationtooljsp portlet or filteraceitemportlet
         else { //if(request instanceof RenderRequest) {
             PortletPreferences preferences = request.getPreferences();
             requestParams = preferences.getMap();
+
+			fuzziness = preferences.getValue(SearchRequestParams.FUZZINESS, "");
+
         }
         ACESearchEngine searchEngine = new ACESearchEngine();
-        return searchEngine.prepareACESearchFormBean(requestParams);
+        return searchEngine.prepareACESearchFormBean(requestParams, fuzziness);
     }
 }

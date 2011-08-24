@@ -18,10 +18,12 @@
 
 <%@include file="/html/init.jsp" %>
 
-<portlet:actionURL name="setAceItemPref" var="setAceItemPrefUrl" />
+<portlet:actionURL name="setAceSearchPref" var="setAceSearchPref" />
 
-<aui:form action="<%= setAceItemPrefUrl %>" method="POST" name="fm" >
-	<aui:input name="rowsPerPage" value='<%= prefs.getValue("rowsPerPage","") %>' size="45" type="text" />
+<aui:form action="<%= setAceSearchPref %>" method="POST" name="fm" >
+	<aui:input name="<%= Constants.rowsPerPagePreferenceName %>" value='<%= prefs.getValue(Constants.rowsPerPagePreferenceName,"10") %>' size="45" type="text" />
+	
+	<aui:input name="<%= Constants.fuzzinessPreferenceName %>" value='<%= prefs.getValue(Constants.fuzzinessPreferenceName, "0.7") %>' size="45" type="text" />
 
 	<aui:button-row>
 		<aui:button type="submit" />
