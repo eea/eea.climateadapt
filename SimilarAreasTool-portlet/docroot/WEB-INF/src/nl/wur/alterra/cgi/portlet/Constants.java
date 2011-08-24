@@ -6,7 +6,7 @@ public class Constants {
 
 	public static String locatorUrlPreferenceName = "locatorUrl";
 	
-	public static String locatorKey = "locatorKey";
+	public static String locatorKeyPreferenceName = "locatorKey";
 
 	public static String proxyUrlPreferenceName = "proxyUrl";
 
