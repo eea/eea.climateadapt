@@ -1,5 +1,7 @@
 CHM.MeasureCHMMap = OpenLayers.Class(CHM.CHMMap, {
 
+	feature : null,
+	
 	measure : null,
 	
 	onmeasurechanged : null,
@@ -7,8 +9,6 @@ CHM.MeasureCHMMap = OpenLayers.Class(CHM.CHMMap, {
 	area : null,
 	
 	onareachanged : null,
-	
-	feature : null,
 	
 	measurecontrol : null, 
 	
@@ -18,7 +18,7 @@ CHM.MeasureCHMMap = OpenLayers.Class(CHM.CHMMap, {
 	
 	initialize: function(options) {
 		CHM.CHMMap.prototype.initialize.apply(this, arguments);
-
+		
 		measurevectorlayer = new OpenLayers.Layer.Vector('Measure');
 		
 		similarareasvectorlayer = new OpenLayers.Layer.Vector("WFS", {
@@ -29,7 +29,8 @@ CHM.MeasureCHMMap = OpenLayers.Class(CHM.CHMMap, {
 		        featureType: 'biogeo_2005',
 		        featureNS: 'http://ace.geocat.net',
 		        geometryName: 'geom',
-		        srsName: 'EPSG:3035'
+		        maxFeatures: 1,
+		        srsName: this.projection
 		    })
 		});
 		
@@ -66,12 +67,38 @@ CHM.MeasureCHMMap = OpenLayers.Class(CHM.CHMMap, {
 		}
 	},
 	
-	transform : function(aMeasure, aEPSGCode) {
-		var sourceprojection = new OpenLayers.Projection(aMeasure.getEPSGCode());
+	getMeasure : function(aEPSGCode) {
+		return this.transform(this.measure, aEPSGCode);
+	}, 
+	
+	setMeasure : function(aMeasure) {
+		this.measure = this.transform(aMeasure, this.projection);
+		
+        if (this.measure != null) {
+        	this.setFeature(new OpenLayers.Feature.Vector(this.measure));
+        } else {
+        	this.setFeature(null);
+        }
+        
+		this.handleOnMeasureChanged();
+	},
+	
+	setOnMeasureChanged : function(aFunction) {
+		this.onmeasurechanged = aFunction;
+	},
+	
+	handleOnMeasureChanged : function() {
+		if (this.onmeasurechanged != null) {
+			this.onmeasurechanged();
+		}
+	},
+	
+	transform : function(aMeasure, aProjection) {
+		var sourceprojection = aMeasure.getProjection();
 
-		var targetprojection = new OpenLayers.Projection(aEPSGCode);
+		var targetprojection = aProjection;
 
-		var result = new CHM.Measure(aMeasure.x, aMeasure.y, aEPSGCode);
+		var result = new CHM.Measure(aMeasure.x, aMeasure.y, targetprojection);
 
 		result.transform(sourceprojection, targetprojection);
 		
@@ -100,32 +127,6 @@ CHM.MeasureCHMMap = OpenLayers.Class(CHM.CHMMap, {
 		    });
 			
 			similarareasvectorlayer.refresh({force: true});
-		}
-	}, 
-	
-	getMeasure : function(aEPSGCode) {
-		return this.transform(this.measure, aEPSGCode);
-	}, 
-	
-	setMeasure : function(aMeasure) {
-		this.measure = this.transform(aMeasure, this.projection);
-		
-        if (this.measure != null) {
-	        this.setFeature(new OpenLayers.Feature.Vector(this.measure));
-        } else {
-        	this.setFeature(null);
-        }
-        
-		this.handleOnMeasureChanged();
-	},
-	
-	setOnMeasureChanged : function(aFunction) {
-		this.onmeasurechanged = aFunction;
-	},
-	
-	handleOnMeasureChanged : function() {
-		if (this.onmeasurechanged != null) {
-			this.onmeasurechanged();
 		}
 	}
 });

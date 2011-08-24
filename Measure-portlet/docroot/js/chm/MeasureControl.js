@@ -5,7 +5,7 @@ CHM.MeasureControl = OpenLayers.Class(OpenLayers.Control, {
 		'single' : true,
 		'double' : false,
 		'pixelTolerance' : 0,
-		'stopSingle' : false,
+		'stopSingle' : true,
 		'stopDouble' : false
 	},
 	
