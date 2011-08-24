@@ -31,7 +31,13 @@
 	</select>
 </form>
 
+<div id="locator">
+	<input type="text" name="location" id="location" />
+	<a onclick="locate(document.getElementById('location').value)">Locate</a>
+</div>
+
 <div id='map_element' style='width: 500px; height: 500px;'></div>
+<div id='locations_element'></div>
 
 <script type="text/javascript">
 	var proxyUrl = '<%= prefs.getValue(Constants.proxyUrlPreferenceName, "") %>';
@@ -42,8 +48,16 @@
 	
 	var wfs = '<%= prefs.getValue(Constants.wfsPreferenceName, "wfs") %>';
 	
+	var locatorUrl = '<%= prefs.getValue(Constants.locatorUrlPreferenceName, "http://dev.virtualearth.net/REST/v1/Locations/") %>';
+	
+	var locatorKey = '<%= prefs.getValue(Constants.locatorKey, "Ao9qujBzDtg-nFiusTjt5VQ9x2NJB2wAD7YCRjaPz7hQQjxdFcl24tyhOwCDCIrw") %>';
+	
 	var satchmmap = new CHM.SATCHMMap('map_element', {});
 				
+	var locator = new CHM.Locator('locations_element', {});
+	
+	locator.setOnLocationChanged(handleLocationChanged);
+	
 	riskChange();
 				
 	sectorChange();
@@ -62,6 +76,14 @@
 		var sector = getSelectedValue(document.getElementById('sectorSelect'));
 			
 		satchmmap.setSector(sector);
+	}
+	
+	function locate(aLocation) {
+		locator.locate(aLocation);
+	}
+	
+	function handleLocationChanged() {
+		satchmmap.setLocation(locator.getLocation());
 	}
 </script>
 

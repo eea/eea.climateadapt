@@ -4,6 +4,10 @@ public class Constants {
 
 	public static String geoserverUrlPreferenceName = "geoserverUrl";
 
+	public static String locatorUrlPreferenceName = "locatorUrl";
+	
+	public static String locatorKey = "locatorKey";
+
 	public static String proxyUrlPreferenceName = "proxyUrl";
 
 	public static String wfsPreferenceName = "wms";

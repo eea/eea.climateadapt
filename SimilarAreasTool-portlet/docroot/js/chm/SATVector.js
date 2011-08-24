@@ -23,7 +23,7 @@ CHM.SATVector = OpenLayers.Class(OpenLayers.Layer.Vector, {
 	        featureType: 'casestudies',
 	        featureNS: 'http://ace.geocat.net',
 	        geometryName: 'geom',
-	        srsName: 'EPSG:3035'
+	        srsName: 'EPSG:900913'
         });
         
         this.styleMap = new OpenLayers.StyleMap({
@@ -88,7 +88,7 @@ CHM.SATVector = OpenLayers.Class(OpenLayers.Layer.Vector, {
 		    
 	        this.removeAllFeatures();
 	         	
-	        var response = protocol.read({
+	        protocol.read({
 	            filter: filter,
 	            callback: function(result) {
 	                if(result.success()) {

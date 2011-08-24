@@ -4,14 +4,23 @@
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 		<title>Prototype Similar Areas Tool</title>
+		<script type='text/javascript' src="http://ecn.dev.virtualearth.net/mapcontrol/mapcontrol.ashx?v=6.2&amp;mkt=en-us"></script>
 		<script type='text/javascript' src="js/proj4js/lib/proj4js-combined.js"></script>
 		<script type='text/javascript' src='js/OpenLayers.js'></script>
 		<script type="text/javascript" src="js/chm/CHM.js"></script>
 		<script type="text/javascript" src="js/chm/CHMMap.js"></script>
 		<script type="text/javascript" src="js/chm/SATCHMMap.js"></script>
 		<script type="text/javascript" src="js/chm/SATVector.js"></script>
+		<script type="text/javascript" src="js/chm/Resource.js"></script>
+		<script type="text/javascript" src="js/chm/ResourceSet.js"></script>
+		<script type="text/javascript" src="js/chm/Point.js"></script>
+		<script type="text/javascript" src="js/chm/Locator.js"></script>
+		<script type="text/javascript" src="js/chm/Location.js"></script>
+		<script type="text/javascript" src="js/chm/LocationControl.js"></script>
 		<script type="text/javascript">
 			var satchmmap;
+			
+			var locator;
 			
 			function init() {
 				proxyUrl = '';
@@ -21,8 +30,16 @@
 				wfs = 'wfs';
 				
 				wms = 'wms';
+
+				locatorUrl = 'http://localhost/ve/REST/v1/Locations/';
+				
+				locatorKey = 'Ao9qujBzDtg-nFiusTjt5VQ9x2NJB2wAD7YCRjaPz7hQQjxdFcl24tyhOwCDCIrw';
 				
 				satchmmap = new CHM.SATCHMMap('map_element', {});
+				
+				locator = new CHM.Locator('locations_element', {});
+				
+				locator.setOnLocationChanged(handleLocationChanged);
 				
 				riskChange();
 				
@@ -44,9 +61,18 @@
 				
 				satchmmap.setSector(sector);
 			}
+			
+			function locate(aLocation) {
+				locator.locate(aLocation);
+			}
+			
+			function handleLocationChanged() {
+				satchmmap.setLocation(locator.getLocation());
+			}
 		</script>
 	</head>
 	<body onload="init();">
+
 		<form>
 			<select id="riskSelect" onchange="riskChange()">
 				<option value="EXTREMETEMP">Extreme Temperatures</option>
@@ -69,6 +95,14 @@
 				<option value="WATERMANAGEMENT">Water management</option>
 			</select>
 		</form>
+
+		<div id="locator">
+			<input type="text" name="location" id="location" />
+			<a onclick="locate(document.getElementById('location').value)">Locate</a>
+		</div>
+
 		<div id='map_element' style='width: 500px; height: 500px;'></div>
+
+		<div id='locations_element'></div>
 	</body>
 </html>
