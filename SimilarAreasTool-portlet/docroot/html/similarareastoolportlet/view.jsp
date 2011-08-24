@@ -35,9 +35,9 @@
 	<input type="text" name="location" id="location" />
 	<a onclick="locate(document.getElementById('location').value)">Locate</a>
 </div>
-
-<div id='map_element' style='width: 500px; height: 500px;'></div>
 <div id='locations_element'></div>
+
+<div id='map_element'></div>
 
 <script type="text/javascript">
 	var proxyUrl = '<%= prefs.getValue(Constants.proxyUrlPreferenceName, "") %>';
