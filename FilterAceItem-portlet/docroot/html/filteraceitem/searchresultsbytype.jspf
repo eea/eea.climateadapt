@@ -27,7 +27,7 @@
 %>
 
 <%-- expanded view --%>	
-<div id="${expandedId}" class="resultsgroup expandedResultsGroup">
+<div id="${expandedId}" class="resultsgroup expandedResultsGroup togglehide">
 
 	<c:set var="groupedResults" value="${groupedResults}"/>
 
@@ -196,7 +196,7 @@
 
 	
 	<%-- collapsed view --%>	
-	<div id="${collapsedId}" class="collapsedResultsGroup">
+	<div id="${collapsedId}" class="collapsedResultsGroup toggleshow">
 
         <c:set var="groupedResults" value="${groupedResults}"/>
 

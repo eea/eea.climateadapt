@@ -39,16 +39,24 @@ jQuery(document).ready(function() {
 	}								
 	
 	
-    $j(".expandedResultsGroup").hide();
+    //$j(".expandedResultsGroup").hide();
 	
     $j(".expandedResultsGroupTitle").click(function() {	
 		var expId = this.id;
 		// grab unique part, after dash
 		var unique = expId.match(/-([0-9]+)/)[1];		
 		// hide expandedResultsGroup with same unique id postfix
-       $j("#expandedId-"+unique).hide();
+       //$j("#expandedId-"+unique).hide();
 		// show collapsedResultsGroup with same unique id postfix	   
-	   $j("#collapsedId-"+unique).show(100);
+	   //$j("#collapsedId-"+unique).show(100);
+	   
+	   // hide expandedResultsGroup with same unique id postfix
+	   $j("#expandedId-"+unique).removeClass("toggleshow");
+	   $j("#expandedId-"+unique).addClass("togglehide");
+	       
+	   // show collapsedResultsGroup with same unique id postfix	   
+	   $j("#collapsedId-"+unique).removeClass("togglehide");
+	   $j("#collapsedId-"+unique).addClass("toggleshow");
     });	
 
     $j(".collapsedResultsGroupTitle").click(function() {
@@ -56,9 +64,18 @@ jQuery(document).ready(function() {
 		// grab unique part, after dash
 		var unique = expId.match(/-([0-9]+)/)[1];		
 		// hide collapsedResultsGroup with same unique id postfix
-       $j("#collapsedId-"+unique).hide();
+       //$j("#collapsedId-"+unique).hide();
 		// show expandedResultsGroup with same unique id postfix	   
-	   $j("#expandedId-"+unique).show(100);
+	   //$j("#expandedId-"+unique).show(100);
+	   
+	   // hide collapsedResultsGroup with same unique id postfix
+       $j("#collapsedId-"+unique).removeClass("toggleshow");
+	   $j("#collapsedId-"+unique).addClass("togglehide");
+
+		// show expandedResultsGroup with same unique id postfix	   
+       $j("#expandedId-"+unique).removeClass("togglehide");
+	   $j("#expandedId-"+unique).addClass("toggleshow");
+
     });	
 	
 	
@@ -71,16 +88,26 @@ jQuery(document).ready(function() {
 	// If only one section, show opened
 	if ($j(".expandedResultsGroup").length == 1) {
 		$j.each($j(".collapsedResultsGroup"), function(i,v){
-			$j("#" + this.id).hide();
+			//$j("#" + this.id).hide();			
+			$j("#" + this.id).removeClass("toggleshow");
+			$j("#" + this.id).addClass("togglehide");
+			
 		});
 		
 		$j.each($j(".expandedResultsGroup"), function(i,v){
-			$j("#" + this.id).show();
+			//$j("#" + this.id).show();
+			
+			$j("#" + this.id).removeClass("togglehide");
+			$j("#" + this.id).addClass("toggleshow");
 		});
 		
 	} else {
 		$j.each($j(".expandedResultsGroup"), function(i,v){
-			$j("#" + this.id).hide();
+			//$j("#" + this.id).hide();
+
+			$j("#" + this.id).removeClass("toggleshow");
+			$j("#" + this.id).addClass("togglehide");
+
 		});
 		
 	}
