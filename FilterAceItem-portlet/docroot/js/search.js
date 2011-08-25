@@ -393,7 +393,7 @@ function displayJSONResults(unique, aceitemResults) {
 	jQuery.each(aceitemResults, function(idx, aceitem){ 
 		if (aceitem) {
 			// add searchresult
-			resultlist += '<div class="searchresult" style="border: 1px solid;margin: 5px 0px;">';
+			resultlist += '<div class="searchresult">';
 		
 			var descriptionText = aceitem.shortdescription ;
 
