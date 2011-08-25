@@ -345,8 +345,7 @@ function displayJSONResults(unique, aceitemResults) {
 			// add searchresult
 			resultlist += '<div class="searchresult" style="border: 1px solid;margin: 5px 0px;">';
 		
-			var descriptionText = aceitem.aceItem._description.length > 400 ? aceitem.aceItem._description.substring(0, 396) + " ..." : aceitem.aceItem._description;
-			descriptionText = removeHTMLTags(descriptionText) ;
+			var descriptionText = aceitem.shortdescription ;
 
 			// add name and description
             if ((aceitem.aceItem._storedAt != "") && (aceitem.aceItem._storagetype.substr(0, 3) == "URL")) {
