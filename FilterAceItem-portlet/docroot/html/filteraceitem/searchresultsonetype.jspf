@@ -39,9 +39,6 @@
 
                 <c:set var="searchResult" value="${wrappedSearchResult.aceItem}"/>					<div>
 					<div>
-                        <c:set var="descriptionLength" value="${fn:length(searchResult.description)}" />
-
-                        <c:set var="descriptionText" value="${searchResult.description}" />
 
 						<c:set var="descriptionId" value="descriptionId-${searchResult.aceItemId}" />
 
@@ -49,9 +46,7 @@
 
 						<c:set var="minusId" value="minusId-${searchResult.aceItemId}" />
 
-						<c:if test="${descriptionLength > 400}">
-							<c:set var="descriptionText" value="${fn:substring(searchResult.description, 0, 396)} ..." />
-						</c:if>		
+                        <c:set var="descriptionText" value="${wrappedSearchResult.shortdescription}" />	
 						
 						<span id="${plusId}" class="plus"><img src="<%=renderRequest.getContextPath()%>/images/icons/01_plus.png" /></span>
 						<span id="${minusId}" class="minus"><img src="<%=renderRequest.getContextPath()%>/images/icons/01_minus.png" /></span>
