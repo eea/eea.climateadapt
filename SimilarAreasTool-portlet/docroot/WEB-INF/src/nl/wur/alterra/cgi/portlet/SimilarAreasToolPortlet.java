@@ -53,6 +53,11 @@ public class SimilarAreasToolPortlet extends MVCPortlet {
 
 		prefs.setValue(Constants.locatorKeyPreferenceName, locatorkey);
 		
+		// Microsoft Bing time out
+		String bingtimeout = ParamUtil.getString(request, Constants.bingTimeOutPreferenceName);
+
+		prefs.setValue(Constants.bingTimeOutPreferenceName, bingtimeout);
+		
 		prefs.store();
 	}
 }

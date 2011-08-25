@@ -23,17 +23,6 @@
 			var locator;
 			
 			function init() {
-				proxyUrl = '';
-				
-				geoserverUrl = 'http://localhost/geoserver/';
-				
-				wfs = 'wfs';
-				
-				wms = 'wms';
-
-				locatorUrl = 'http://localhost/ve/REST/v1/Locations/';
-				
-				locatorKey = 'Ao9qujBzDtg-nFiusTjt5VQ9x2NJB2wAD7YCRjaPz7hQQjxdFcl24tyhOwCDCIrw';
 				
 				satchmmap = new CHM.SATCHMMap('map_element', {});
 				
@@ -104,5 +93,61 @@
 		<div id='map_element' style='width: 500px; height: 500px;'></div>
 
 		<div id='locations_element'></div>
+
+		<script>
+			var proxyUrl = '';
+			
+			var geoserverUrl = 'http://localhost/geoserver/';
+			
+			var wfs = 'wfs';
+			
+			var wms = 'wms';
+	
+			var locatorUrl = 'http://localhost/ve/REST/v1/Locations/';
+			
+			var locatorKey = 'Ao9qujBzDtg-nFiusTjt5VQ9x2NJB2wAD7YCRjaPz7hQQjxdFcl24tyhOwCDCIrw';
+			
+			var satchmmap = new CHM.SATCHMMap('map_element', {});
+						
+			var locator = new CHM.Locator('locations_element', {});
+			
+		    $(document).ready(function() {
+		    	console.log("Document ready!");
+		    	
+		    	satchmmap = new CHM.SATCHMMap('map_element', {});
+				
+		    	locator = new CHM.Locator('locations_element', {});
+		
+		    	locator.setOnLocationChanged(handleLocationChanged);
+		    	
+		    	riskChange();
+		    				
+		    	sectorChange();
+		    });
+		
+			function handleLocationChanged() {
+				satchmmap.setLocation(locator.getLocation());
+			}
+		    		
+		    function getSelectedValue(select) {
+		    	return select.options[select.selectedIndex].value;
+		    }
+		    			
+		    function riskChange() {
+		    	var risk = getSelectedValue(document.getElementById('riskSelect'));
+		    				
+		    	satchmmap.setRisk(risk);
+		    }
+		    			
+		    function sectorChange() {
+		    	var sector = getSelectedValue(document.getElementById('sectorSelect'));
+		    			
+		    	satchmmap.setSector(sector);
+		    }
+		    	
+		    function locate(aLocation) {
+		    	locator.locate(aLocation);
+		    }
+		</script>
 	</body>
 </html>

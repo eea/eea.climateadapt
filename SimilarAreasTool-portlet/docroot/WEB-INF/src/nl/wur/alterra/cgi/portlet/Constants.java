@@ -2,6 +2,8 @@ package nl.wur.alterra.cgi.portlet;
 
 public class Constants {
 
+	public static String bingTimeOutPreferenceName = "bingtimeout";
+
 	public static String geoserverUrlPreferenceName = "geoserverUrl";
 
 	public static String locatorUrlPreferenceName = "locatorUrl";

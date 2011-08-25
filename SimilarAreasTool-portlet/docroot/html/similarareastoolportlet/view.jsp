@@ -35,11 +35,12 @@
 	<input type="text" name="location" id="location" />
 	<a onclick="locate(document.getElementById('location').value)">Locate</a>
 </div>
+
 <div id='locations_element'></div>
 
 <div id='map_element'></div>
 
-<script type="text/javascript">
+<script>
 	var proxyUrl = '<%= prefs.getValue(Constants.proxyUrlPreferenceName, "") %>';
 	
 	var geoserverUrl = '<%= prefs.getValue(Constants.geoserverUrlPreferenceName, "http://ace.geocat.net/geoserver/") %>';
@@ -52,38 +53,47 @@
 	
 	var locatorKey = '<%= prefs.getValue(Constants.locatorKeyPreferenceName, "Ao9qujBzDtg-nFiusTjt5VQ9x2NJB2wAD7YCRjaPz7hQQjxdFcl24tyhOwCDCIrw") %>';
 	
-	var satchmmap = new CHM.SATCHMMap('map_element', {});
+	var satchmmap;
 				
-	var locator = new CHM.Locator('locations_element', {});
+	var locator;
 	
-	locator.setOnLocationChanged(handleLocationChanged);
-	
-	riskChange();
-				
-	sectorChange();
+    $(document).ready(function() {
+    	setTimeout(function(){init();}, <%= prefs.getValue(Constants.bingTimeOutPreferenceName, "100") %>);
+    });
+    
+    function init() {	
+    	satchmmap = new CHM.SATCHMMap('map_element', {});
 		
-	function getSelectedValue(select) {
-		return select.options[select.selectedIndex].value;
-	}
-			
-	function riskChange() {
-		var risk = getSelectedValue(document.getElementById('riskSelect'));
-				
-		satchmmap.setRisk(risk);
-	}
-			
-	function sectorChange() {
-		var sector = getSelectedValue(document.getElementById('sectorSelect'));
-			
-		satchmmap.setSector(sector);
-	}
-	
-	function locate(aLocation) {
-		locator.locate(aLocation);
-	}
-	
+    	locator = new CHM.Locator('locations_element', {});
+
+    	locator.setOnLocationChanged(handleLocationChanged);
+    	
+    	riskChange();
+    				
+    	sectorChange();
+    }
+
 	function handleLocationChanged() {
 		satchmmap.setLocation(locator.getLocation());
 	}
+    		
+    function getSelectedValue(select) {
+    	return select.options[select.selectedIndex].value;
+    }
+    			
+    function riskChange() {
+    	var risk = getSelectedValue(document.getElementById('riskSelect'));
+    				
+    	satchmmap.setRisk(risk);
+    }
+    			
+    function sectorChange() {
+    	var sector = getSelectedValue(document.getElementById('sectorSelect'));
+    			
+    	satchmmap.setSector(sector);
+    }
+    	
+    function locate(aLocation) {
+    	locator.locate(aLocation);
+    }
 </script>
-
