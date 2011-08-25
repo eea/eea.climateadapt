@@ -61,6 +61,7 @@ public class FilterAceItemPortlet extends MVCPortlet {
 		
 		prefs.setValue(Constants.PAGING, ParamUtil.getString(request, Constants.PAGING) );
 		prefs.setValue(Constants.NRITEMSPAGE, ParamUtil.getString(request, Constants.NRITEMSPAGE) );
+		prefs.setValue(Constants.FUZZINESS, ParamUtil.getString(request, Constants.FUZZINESS) );
 
 		prefs.store();
 		prefs.setValues(SearchRequestParams.ANY, anyOfThese);

@@ -142,6 +142,7 @@ pageContext.setAttribute("countriesList", countriesList);
     <!-- Search colum -->
     <div id="filteraceitems_column" class="filteraceitems_column">
         <aui:form action="<%=searchAceitemURL%>" method="post" name="<portlet:namespace/>aceItemSearchForm">
+        	        
             <div class="search_section">
                 <div class="row">
                     <label for='<%= Constants.PAGING %>' class="input"><liferay-ui:message key='acefilter-lbl-paging' /></label>
@@ -154,7 +155,14 @@ pageContext.setAttribute("countriesList", countriesList);
                     <input type="text" class="text" name='<%= Constants.NRITEMSPAGE %>' id='<%= Constants.NRITEMSPAGE %>' value='<%= renderRequest.getPreferences().getValue(Constants.NRITEMSPAGE,"10") %>'/>
                 </div>
             </div>
-            
+        
+            <div class="search_section">
+                <div class="row">
+                    <label for='<%= Constants.FUZZINESS %>' class="input"><liferay-ui:message key='acefilter-lbl-fuzziness' /></label>
+                    <input type="text" class="text" name="<%= Constants.FUZZINESS %>" value='<%= renderRequest.getPreferences().getValue(Constants.FUZZINESS, "0.7") %>' />
+                 </div>
+            </div>  
+
              <div class="search_section">
                <h2><liferay-ui:message key="acesearch-section-header1" /></h2>
 
