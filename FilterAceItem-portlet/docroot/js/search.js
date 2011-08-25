@@ -36,7 +36,7 @@ jQuery(document).ready(function() {
 	
 	if($j('.resultsgroup').length) {
 		resizePagination();	
-	}		
+	}								
 
 	$j(".description").hide();
 	$j(".minus").hide();	
@@ -60,6 +60,8 @@ jQuery(document).ready(function() {
        $j("#minusId-"+unique).show(100);
        $j("#plusId-"+unique).hide();
     });
+    
+    $j(".expandedResultsGroup").hide();
 	
     $j(".expandedResultsGroupTitle").click(function() {	
 		var expId = this.id;
@@ -88,26 +90,24 @@ jQuery(document).ready(function() {
     });
 	
 	
-	// If only one section, show opened
-	if ($j(".expandedResultsGroup").length == 1) {
-		$j.each($j(".collapsedResultsGroup"), function(i,v){
-			$j("#" + this.id).hide();
-		});
-		
-		$j.each($j(".expandedResultsGroup"), function(i,v){
-			$j("#" + this.id).show();
-		});
-		
-	} else {
-		$j.each($j(".expandedResultsGroup"), function(i,v){
-			$j("#" + this.id).hide();
-		});
-		
-	}
-	
+	$j.each($j(".expandedResultsGroup"), function(i,v){
+		$j("#" + this.id).hide();
+	});
 
     showDataInfoPanel();
 });
+
+function removeHTMLTags(inStrRemoveTags){
+            var strInputCode = inStrRemoveTags;
+            /*
+                    This line is optional, it replaces escaped brackets with real ones,
+                    i.e. &lt; is replaced with < and &gt; is replaced with >
+            */
+            strInputCode = strInputCode.replace(/&(lt|gt);/g, function (strMatch, p1){
+                    return (p1 == "lt")? "<" : ">";
+            });
+            return strInputCode.replace(/<\/?[^>]+(>|$)/g, "");
+}
 
 /**
  * Resizes pagination for results groups according to how many page numbers are displayed.
@@ -314,17 +314,17 @@ function displayJSONFilterResults(unique, aceitemResults) {
 			resultlist += '<div class="searchresultFilter">';
 			
 			// add name 
-            if ((aceitem._storedAt != "") && (aceitem._storagetype.substr(0, 3) == "URL")) {
-                   resultlist += '<div><span class="bolder">&#187; <a href="/viewaceitem?aceitem_id=' +  aceitem._aceItemId  + '" >' + aceitem._name + ' </a></span></div>';
+            if ((aceitem.aceItem._storedAt != "") && (aceitem.aceItem._storagetype.substr(0, 3) == "URL")) {
+                   resultlist += '<div><span class="bolder">&#187; <a href="/viewaceitem?aceitem_id=' +  aceitem.aceItem._aceItemId  + '" >' + aceitem.aceItem._name + ' </a></span></div>';
 
-           } else if (aceitem._storedAt.substr(0, 14) == "ace_project_id") {
-                   resultlist += '<div><span class="bolder">&#187; <a href="/projects1?' + aceitem._storedAt + '" >' + aceitem._name + '</a></span></div>';
+           } else if (aceitem.aceItem._storedAt.substr(0, 14) == "ace_project_id") {
+                   resultlist += '<div><span class="bolder">&#187; <a href="/projects1?' + aceitem.aceItem._storedAt + '" >' + aceitem.aceItem._name + '</a></span></div>';
 
-            } else if (aceitem._storedAt.substr(0, 14) == "ace_measure_id") {
-                               resultlist += '<div><span class="bolder">&#187; <a href="/viewmeasure?' + aceitem._storedAt + '" >' + aceitem._name + '</a></span></div>';
+            } else if (aceitem.aceItem._storedAt.substr(0, 14) == "ace_measure_id") {
+                               resultlist += '<div><span class="bolder">&#187; <a href="/viewmeasure?' + aceitem.aceItem._storedAt + '" >' + aceitem.aceItem._name + '</a></span></div>';
 
            } else {
-                   resultlist += '<div><span class="bolder">&#187; <a href="/viewaceitem?aceitem_id=' +  aceitem._aceItemId + '" >' + aceitem._name + ' </a></span></div>';
+                   resultlist += '<div><span class="bolder">&#187; <a href="/viewaceitem?aceitem_id=' +  aceitem.aceItem._aceItemId + '" >' + aceitem.aceItem._name + ' </a></span></div>';
 
            }
 
@@ -350,27 +350,56 @@ function displayJSONResults(unique, aceitemResults) {
 	jQuery.each(aceitemResults, function(idx, aceitem){ 
 		if (aceitem) {
 			// add searchresult
-			resultlist += '<div class="searchresult">';
+			resultlist += '<div class="searchresult" style="border: 1px solid;margin: 5px 0px;">';
 		
-			var descriptionText = aceitem._description.length > 400 ? aceitem._description.substring(0, 396) + " ..." : aceitem._description;
-			
-			// add name and description
-            if ((aceitem._storedAt != "") && (aceitem._storagetype.substr(0, 3) == "URL")) {
-                   resultlist += '<div><span class="bolder">&#187; <a href="/viewaceitem?aceitem_id=' +  aceitem._aceItemId  + '" >' + aceitem._name + ' </a></span> - ' + descriptionText + '</div>';
+			var descriptionText = aceitem.shortdescription ;
 
-           } else if (aceitem._storedAt.substr(0, 14) == "ace_project_id") {
-                   resultlist += '<div><span class="bolder">&#187; <a href="/projects1?' + aceitem._storedAt + '" >' + aceitem._name + '</a></span>&nbsp;';
+			// add name and description
+            if ((aceitem.aceItem._storedAt != "") && (aceitem.aceItem._storagetype.substr(0, 3) == "URL")) {
+                   resultlist += '<div><span class="bolder">&#187; <a href="/viewaceitem?aceitem_id=' +  aceitem.aceItem._aceItemId  + '" >' + aceitem.aceItem._name + ' </a></span> - ' + descriptionText + '</div>';
+
+           } else if (aceitem.aceItem._storedAt.substr(0, 14) == "ace_project_id") {
+                   resultlist += '<div><span class="bolder">&#187; <a href="/projects1?' + aceitem.aceItem._storedAt + '" >' + aceitem.aceItem._name + '</a></span>&nbsp;';
                    resultlist += ' - ' + descriptionText + '</div>';
 
-            } else if (aceitem._storedAt.substr(0, 14) == "ace_measure_id") {
-                               resultlist += '<div><span class="bolder">&#187; <a href="/viewmeasure?' + aceitem._storedAt + '" >' + aceitem._name + '</a></span>&nbsp;';
+            } else if (aceitem.aceItem._storedAt.substr(0, 14) == "ace_measure_id") {
+                               resultlist += '<div><span class="bolder">&#187; <a href="/viewmeasure?' + aceitem.aceItem._storedAt + '" >' + aceitem.aceItem._name + '</a></span>&nbsp;';
                                resultlist += ' - ' + descriptionText + '</div>';
 
            } else {
-                   resultlist += '<div><span class="bolder">&#187; <a href="/viewaceitem?aceitem_id=' +  aceitem._aceItemId + '" >' + aceitem._name + ' </a></span> - ' + descriptionText + '</div>';
+                   resultlist += '<div><span class="bolder">&#187; <a href="/viewaceitem?aceitem_id=' +  aceitem.aceItem._aceItemId + '" >' + aceitem.aceItem._name + ' </a></span> - ' + descriptionText + '</div>';
 
            }
+            // add relevance
+            //resultlist += '<div class="relevance">relevance: ' + aceitem.relevance + '%</div>';
 
+            resultlist += '<div class="relevance">relevance: ';
+            if(aceitem.relevance > 80) {
+                resultlist += '<div class="relevance-marker"></div>';
+                resultlist += '<div class="relevance-marker"></div>';
+                resultlist += '<div class="relevance-marker"></div>';
+                resultlist += '<div class="relevance-marker"></div>';
+                resultlist += '<div class="relevance-marker"></div>';
+            }
+            else if(aceitem.relevance > 60) {
+                resultlist += '<div class="relevance-marker"></div>';
+                resultlist += '<div class="relevance-marker"></div>';
+                resultlist += '<div class="relevance-marker"></div>';
+                resultlist += '<div class="relevance-marker"></div>';
+            }
+            else if(aceitem.relevance > 40) {
+                resultlist += '<div class="relevance-marker"></div>';
+                resultlist += '<div class="relevance-marker"></div>';
+                resultlist += '<div class="relevance-marker"></div>';
+            }
+            else if(aceitem.relevance > 20) {
+                resultlist += '<div class="relevance-marker"></div>';
+                resultlist += '<div class="relevance-marker"></div>';
+            }
+            else {
+                resultlist += '<div class="relevance-marker"></div>';
+            }
+            resultlist +=  '%</div>';
 
 			// add result footer 
 			// TODO use actual date from aceitem, if available
