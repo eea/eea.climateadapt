@@ -37,9 +37,13 @@
 		&#9660; <c:out value='${groupTitle}' /> (${fn:length(groupedResults)})
 	</div>
 	
+	<c:if test="${fn:length(groupedResults) > nrPageItems}">
 	<div id="${paginationId}" style="padding-left: 10px; height: 20px;background-color: #D2DF92;">
-		
+	
+	
 	</div>	
+	</c:if>
+	
 	<!-- pagination -->
 	<script type="text/javascript"> 
 		
@@ -49,6 +53,7 @@
         // Stores the results the data type
         groupedJSONResults['${aceitemtype}'] = ${groupedJSONResults};
 
+		<c:if test="${fn:length(groupedResults) > nrPageItems}">
 		$j(function() {
 			$j('#${paginationId}').pagination(${fn:length(groupedResults)}, {
 				items_per_page: <%= itemsOnPage %>,
@@ -61,7 +66,9 @@
 								displayPagedJSONResults(page+1, ${unique}, groupedJSONResults['${aceitemtype}']);
 							}					
 			});	
-		})			
+		})	
+		</c:if>
+		
 		function displayPagedJSONResults(page, unique, aceitemResults) {
 			var startIdx = ((page -1) * <%= itemsOnPage %>);
 			var endIdx = (page * <%= itemsOnPage %>) - 1;
