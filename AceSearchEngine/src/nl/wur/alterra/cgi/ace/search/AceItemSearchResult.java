@@ -11,10 +11,12 @@ public class AceItemSearchResult {
 
     private AceItem aceItem;
     private float relevance;
+    private String shortdescription;
 
     public AceItemSearchResult(AceItem aceItem) {
         this.aceItem = aceItem;
     }
+    
     public AceItem getAceItem() {
         return aceItem;
     }
@@ -29,5 +31,19 @@ public class AceItemSearchResult {
 
     public void setRelevance(float relevance) {
         this.relevance = relevance;
+    }
+
+    public String getShortdescription() {
+        return shortdescription;
+    }
+
+    public void setShortdescription(String shortdescription) {
+        this.shortdescription = shortdescription.replaceAll("\\<.*?\\>", " ");
+        
+        if( this.shortdescription.length() > 400) {
+        	
+        	this.shortdescription = this.shortdescription.substring(0,396) + " ..." ; 
+        }
+        
     }
 }

@@ -59,6 +59,9 @@ public class ACESearchPortalInterface {
 
                      AceItem result = wresult.getAceItem();
 
+                     //setter handles the shortening
+                     wresult.setShortdescription(result.getDescription());
+
                     // escape single quotes
                      result.setClimateimpacts_(result.getClimateimpacts_().replaceAll("'", "\'"));
                      result.setDatatype(result.getDatatype().replaceAll("'", "\'"));
@@ -100,6 +103,15 @@ public class ACESearchPortalInterface {
 		else {
 			for (String aceItemType : formBean.getAceitemtype()) {
 				List<AceItemSearchResult> results = searchEngine.searchLuceneByType(formBean, aceItemType);
+				
+                for(AceItemSearchResult wresult : results) {
+
+                    AceItem result = wresult.getAceItem();
+                    
+                    //setter handles the shortening
+                    wresult.setShortdescription(result.getDescription());
+                }
+                
 				totalResults += results.size();
 
 				System.out.println("searchAceitem found #" + results.size() + " results of type " + aceItemType);
