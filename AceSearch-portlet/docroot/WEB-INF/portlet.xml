@@ -38,6 +38,10 @@
 				<name>rowsPerPage</name>
 				<value>10</value>
 			</preference>
+			<preference>
+				<name>fuzziness</name>
+				<value>0.7</value>
+			</preference>
 		</portlet-preferences>
 		<security-role-ref>
 			<role-name>administrator</role-name>
