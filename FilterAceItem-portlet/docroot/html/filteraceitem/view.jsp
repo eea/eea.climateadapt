@@ -93,8 +93,8 @@ if( paging > 0) {
 				for(var i = 0; i < <%= renderRequest.getPreferences().getValue(Constants.NRITEMSPAGE, "10") %>; i++) {
 					firstAceitemResults.push(aceitemResults[i]);
 				}
-				displayJSONResults(unique, firstAceitemResults);
-				$j('#paginationId-'+unique + ' .jPag-pages li:first-child a').click();
+				//displayJSONResults(unique, firstAceitemResults);
+				$j('#paginationId-'+unique).trigger('setPage', [0]); // invokes displayJSONResults
 			} 
 		});
 		

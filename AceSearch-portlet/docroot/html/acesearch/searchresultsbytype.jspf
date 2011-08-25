@@ -40,6 +40,7 @@
 		<div id="${paginationId}" style="padding-left: 10px; height: 20px;background-color: #D2DF92;">
 			
 		</div>	
+		
 		<!-- pagination -->
 		<script type="text/javascript"> 
 			
@@ -61,7 +62,15 @@
 									displayPagedJSONResults(page+1, ${unique}, groupedJSONResults['${aceitemtype}']);
 								}					
 				});	
-			})			
+				
+				<c:if test="${fn:length(groupedResults) <= nrPageItems}">
+				$j('#${paginationId}').hide();
+				</c:if>
+			})	
+			
+			
+			
+			
 			function displayPagedJSONResults(page, unique, aceitemResults) {
 				var startIdx = ((page -1) * <%= itemsOnPage %>);
 				var endIdx = (page * <%= itemsOnPage %>) - 1;
