@@ -1,3 +1,20 @@
+.togglehide {
+	display:none;
+}
+.toggleshow {
+	display:inline;
+}
+.description {
+	font-weight:normal;
+}
+.minus {
+	font-weight:bold;
+	cursor:pointer;
+}
+.plus {
+	font-weight:bold;
+	cursor:pointer;
+}
 .relevance-marker {
     position:relative;
     top:4px;
@@ -216,13 +233,7 @@
     font-weight: bold;
 	cursor:pointer;
 }
-.resultsTitle {
-	background-color:#D2DF92;
-	margin:5px 0px 0px 0px;
-	padding:5px;
-	font-size:1.2em;
-    font-weight: bold;
-}
+
 /** styles for filter portlet **/
 .resultsGroupTitleFilter {
    cursor: pointer;
@@ -300,17 +311,6 @@
 .aceitemlinks {
 	display:inline;
 	float:right;
-}
-.description {
-	font-weight:normal;
-}
-.minus {
-	font-weight:bold;
-	cursor:pointer;
-}
-.plus {
-	font-weight:bold;
-	cursor:pointer;
 }
 
 .sortbar {

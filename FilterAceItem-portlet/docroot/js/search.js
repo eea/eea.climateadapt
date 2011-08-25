@@ -36,19 +36,19 @@ jQuery(document).ready(function() {
 	
 	if($j('.resultsgroup').length) {
 		resizePagination();	
-	}								
-
-	$j(".description").hide();
-	$j(".minus").hide();	
+	}						
     
     $j(".minus").click(function() {	
 		var expId = this.id;
 		// grab unique part, after dash
 		var unique = expId.match(/-([0-9]+)/)[1];		
 		// hide expandedResultsGroup with same unique id postfix
-	       $j("#descriptionId-"+unique).hide();
-	       $j("#minusId-"+unique).hide();
-	       $j("#plusId-"+unique).show(100);
+	       $j("#descriptionId-"+unique).removeClass("toggleshow");
+	       $j("#descriptionId-"+unique).addClass("togglehide");
+	       $j("#minusId-"+unique).removeClass("toggleshow");
+	       $j("#minusId-"+unique).addClass("togglehide");
+	       $j("#plusId-"+unique).removeClass("togglehide");
+	       $j("#plusId-"+unique).addClass("toggleshow");
     });	
 
     $j(".plus").click(function() {
@@ -56,9 +56,12 @@ jQuery(document).ready(function() {
 		// grab unique part, after dash
 		var unique = expId.match(/-([0-9]+)/)[1];		
 		// hide collapsedResultsGroup with same unique id postfix   
-	   $j("#descriptionId-"+unique).show(100);
-       $j("#minusId-"+unique).show(100);
-       $j("#plusId-"+unique).hide();
+		   $j("#descriptionId-"+unique).removeClass("togglehide");  
+		   $j("#descriptionId-"+unique).addClass("toggleshow");
+	       $j("#minusId-"+unique).removeClass("togglehide");
+	       $j("#minusId-"+unique).addClass("toggleshow");
+	       $j("#plusId-"+unique).removeClass("toggleshow");
+	       $j("#plusId-"+unique).addClass("togglehide");
     });
     
     $j(".expandedResultsGroup").hide();
