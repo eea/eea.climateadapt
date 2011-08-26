@@ -21,10 +21,12 @@
 <portlet:actionURL name="setMeasurePref" var="setMeasurePrefUrl" />
 
 <aui:form action="<%= setMeasurePrefUrl %>" method="POST" name="fm" >
-	<aui:input name="<%= Constants.ORDERBYCOL %>" value='<%= prefs.getValue(Constants.ORDERBYCOL,"name") %>' size="45" type="text" />
-
-    <aui:input name="<%= Constants.ORDERBYTYPE %>" value='<%= prefs.getValue(Constants.ORDERBYTYPE,"asc") %>' size="45" type="text" />
-
+	<b>Order By Column (name or measureId)</b><br />
+	<input name='<%= Constants.ORDERBYCOL %>' type="text" size="45" value='<%= prefs.getValue(Constants.ORDERBYCOL,"name") %>' /><br /><br />
+		
+	<b>Order By Type (asc or desc)</b><br />
+	<input name='<%= Constants.ORDERBYTYPE %>' type="text" size="45" value='<%= prefs.getValue(Constants.ORDERBYTYPE,"asc") %>' /><br /><br />
+	
 	<aui:input name="<%= nl.wur.alterra.cgi.ace.portlet.Constants.proxyUrlPreferenceName %>" value='<%= prefs.getValue(Constants.proxyUrlPreferenceName, "/SimilarAreasTool-portlet/proxy?url=") %>' size="45" type="text" />
 
 	<aui:input name="<%= Constants.geoserverUrlPreferenceName %>" value='<%= prefs.getValue(Constants.geoserverUrlPreferenceName, "http://ace.geocat.net/geoserver/") %>' size="45" type="text" />

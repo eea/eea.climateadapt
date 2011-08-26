@@ -37,7 +37,7 @@
 		<!-- Portlet preferences (configurable by user in portlet EDIT mode) -->
 		<portlet-preferences>
 			<preference>
-				<name>orderByColumn</name>
+				<name>orderByCol</name>
 				<value>name</value>
 			</preference>
 			<preference>

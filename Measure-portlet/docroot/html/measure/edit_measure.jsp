@@ -154,11 +154,11 @@
 		String m_checked = "";
 		String a_checked = "";
 		
-		if(measure != null && measure.getMao_type().equalsIgnoreCase("A") ) {
-			a_checked = "checked";
+		if(measure != null && measure.getMao_type().equalsIgnoreCase("M") ) {
+			m_checked = "checked";
 		}
 		else {
-			m_checked = "checked";
+			a_checked = "checked";
 		}
 %>
 		<b>Type</b><br />
