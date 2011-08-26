@@ -416,7 +416,7 @@ function displayJSONResults(unique, aceitemResults) {
             // add relevance
             //resultlist += '<div class="relevance">relevance: ' + aceitem.relevance + '%</div>';
 
-            resultlist += '<div class="relevance">relevance: ';
+            resultlist += '<div class="relevance-title">relevance: </div>';
             if(aceitem.relevance > 80) {
                 resultlist += '<div class="relevance-marker"></div>';
                 resultlist += '<div class="relevance-marker"></div>';
@@ -441,14 +441,13 @@ function displayJSONResults(unique, aceitemResults) {
             }
             else {
                 resultlist += '<div class="relevance-marker"></div>';
-            }
-            resultlist +=  '%</div>';
+            } 
 
 			// add result footer 
 			// TODO use actual date from aceitem, if available
 //			resultlist += '<div class="resultfooter"><hr class="clearer"/></div>';
 			// close searchresult
-			resultlist += '</div>';					
+			resultlist += '<hr class="clearer"/></div>';					
 		}
 	});
 	// close searchresultlist
