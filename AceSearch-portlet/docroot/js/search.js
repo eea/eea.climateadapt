@@ -334,17 +334,17 @@ function displayJSONFilterResults(unique, aceitemResults) {
 			resultlist += '<div class="searchresultFilter">';
 			
 			// add name 
-            if ((aceitem._storedAt != "") && (aceitem._storagetype.substr(0, 3) == "URL")) {
-                   resultlist += '<div><span class="bolder">&#187; <a href="/viewaceitem?aceitem_id=' +  aceitem._aceItemId  + '" >' + aceitem._name + ' </a></span></div>';
+            if ((aceitem.aceItem._storedAt != "") && (aceitem.aceItem._storagetype.substr(0, 3) == "URL")) {
+                   resultlist += '<div><span class="bolder">&#187; <a href="/viewaceitem?aceitem_id=' +  aceitem.aceItem._aceItemId  + '" >' + aceitem.aceItem._name + ' </a></span></div>';
 
-           } else if (aceitem._storedAt.substr(0, 14) == "ace_project_id") {
-                   resultlist += '<div><span class="bolder">&#187; <a href="/projects1?' + aceitem._storedAt + '" >' + aceitem._name + '</a></span></div>';
+           } else if (aceitem.aceItem._storedAt.substr(0, 14) == "ace_project_id") {
+                   resultlist += '<div><span class="bolder">&#187; <a href="/projects1?' + aceitem.aceItem._storedAt + '" >' + aceitem.aceItem._name + '</a></span></div>';
 
-            } else if (aceitem._storedAt.substr(0, 14) == "ace_measure_id") {
-                               resultlist += '<div><span class="bolder">&#187; <a href="/viewmeasure?' + aceitem._storedAt + '" >' + aceitem._name + '</a></span></div>';
+            } else if (aceitem.aceItem._storedAt.substr(0, 14) == "ace_measure_id") {
+                               resultlist += '<div><span class="bolder">&#187; <a href="/viewmeasure?' + aceitem.aceItem._storedAt + '" >' + aceitem.aceItem._name + '</a></span></div>';
 
            } else {
-                   resultlist += '<div><span class="bolder">&#187; <a href="/viewaceitem?aceitem_id=' +  aceitem._aceItemId + '" >' + aceitem._name + ' </a></span></div>';
+                   resultlist += '<div><span class="bolder">&#187; <a href="/viewaceitem?aceitem_id=' +  aceitem.aceItem._aceItemId + '" >' + aceitem.aceItem._name + ' </a></span></div>';
 
            }
 
@@ -393,7 +393,7 @@ function displayJSONResults(unique, aceitemResults) {
             // add relevance
             //resultlist += '<div class="relevance">relevance: ' + aceitem.relevance + '%</div>';
 
-            resultlist += '<div class="relevance">relevance: ';
+            resultlist += '<div class="relevance-title">relevance: </div>';
             if(aceitem.relevance > 80) {
                 resultlist += '<div class="relevance-marker"></div>';
                 resultlist += '<div class="relevance-marker"></div>';
@@ -418,14 +418,13 @@ function displayJSONResults(unique, aceitemResults) {
             }
             else {
                 resultlist += '<div class="relevance-marker"></div>';
-            }
-            resultlist +=  '%</div>';
+            } 
 
 			// add result footer 
 			// TODO use actual date from aceitem, if available
 //			resultlist += '<div class="resultfooter"><hr class="clearer"/></div>';
 			// close searchresult
-			resultlist += '</div>';					
+			resultlist += '<hr class="clearer"/></div>';					
 		}
 	});
 	// close searchresultlist

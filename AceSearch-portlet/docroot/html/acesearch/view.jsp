@@ -237,11 +237,11 @@ pageContext.setAttribute("countriesList", countriesList);
                             <div class="condition_container">
                                 <input type="radio" id="anysectors" name="conditionAdaptationSector" value="OR" <%= (conditionAdaptationSector.equals("OR"))?"checked":"" %> />
 								<label for="anysectors">
-									&nbsp;<liferay-ui:message key="acesearch-anycriteria" />
+									&nbsp;<liferay-ui:message key="acesearch-anysectors" />
 								</label>	
                                 &nbsp;&nbsp;<input type="radio" id="allsectors" name="conditionAdaptationSector" value="AND" <%= (conditionAdaptationSector.equals("AND"))?"checked":"" %> />
 								<label for="allsectors">
-									&nbsp;<liferay-ui:message key="acesearch-allcriteria" />
+									&nbsp;<liferay-ui:message key="acesearch-allsectors" />
 								</label>	
                             </div>
 
@@ -269,30 +269,41 @@ pageContext.setAttribute("countriesList", countriesList);
                     </li>
 
                     <li>
-                        <a href="#" id="countries_btn" class="collapsed_section"><liferay-ui:message key="acesearch-section-countries" /></a>
-                        <div id="countries_container" class="checks_container">
-                            <%-- note : i18n file should always be in sync with AceItemCountry enum --%>
-							<c:forEach var="countryElement" items="<%= nl.wur.alterra.cgi.ace.model.constants.AceItemCountry.values() %>" >
+                        <a href="#" id="climate_impacts_btn" class="collapsed_section"><liferay-ui:message key="acesearch-section-climate-impacts" /></a>
+
+                        <div id="climate_impacts_container" class="checks_container">
+                            <div class="condition_container">
+                                <input type="radio" id="anyimpacts" name="conditionClimateImpact" value="OR" <%= (conditionClimateImpact.equals("OR"))?"checked":"" %> />
+								<label for="anyimpacts">
+									&nbsp;<liferay-ui:message key="acesearch-anyimpacts" />
+								</label>	
+                                &nbsp;&nbsp;<input type="radio" id="allimpacts" name="conditionClimateImpact" value="AND" <%= (conditionClimateImpact.equals("AND"))?"checked":"" %> />
+								<label for="allimpacts">
+									&nbsp;<liferay-ui:message key="acesearch-allimpacts" />
+								</label>	
+                            </div>
+
+							<%-- note : i18n file should always be in sync with AceItemClimateImpact enum --%>
+							<c:forEach var="climateImpact" items="<%= nl.wur.alterra.cgi.ace.model.constants.AceItemClimateImpact.values() %>" >
 								<div class="check">
-									<c:set var="countryElementMustBeChecked" value="false" />
-									<c:forEach var="requestedElement" items="${countriesList}">
-										<c:if test="${requestedElement eq countryElement}">
-											<c:set var="countryElementMustBeChecked" value="true" />
+									<c:set var="climateImpactMustBeChecked" value="false" />
+									<c:forEach var="requestedImpact" items="${impactsList}">
+										<c:if test="${requestedImpact eq climateImpact}">
+											<c:set var="climateImpactMustBeChecked" value="true" />
 										</c:if>
-									</c:forEach>
+									</c:forEach>	
 									<c:choose>
-										<c:when test="${countryElementMustBeChecked}">
-											<input type="checkbox" name="countries" id="chk_countries_${countryElement}" value="${countryElement}" checked="checked" />
+										<c:when test="${climateImpactMustBeChecked}">
+											<input type="checkbox" name="impact" id="chk_impacts_${climateImpact}" value="${climateImpact}" checked="checked" />
 										</c:when>
 										<c:otherwise>
-											<input type="checkbox" name="countries" id="chk_countries_${countryElement}" value="${countryElement}" />
+											<input type="checkbox" name="impact" id="chk_impacts_${climateImpact}" value="${climateImpact}" />
 										</c:otherwise>
 									</c:choose>
-									<label for="chk_countries_${countryElement}"><liferay-ui:message key="acesearch-country-lbl-${countryElement}" /></label>
-								</div>
+									<label for="chk_impacts_${climateImpact}"><liferay-ui:message key="aceitem-climateimpacts-lbl-${climateImpact}" /></label>
+								</div>							
 							</c:forEach>
-                        </div>
-
+                        </div>						
                     </li>
 
                     <li>
@@ -302,11 +313,11 @@ pageContext.setAttribute("countriesList", countriesList);
                             <div class="condition_container">
                                 <input type="radio" id="anyelements" name="conditionAdaptationElement" value="OR" <%= (conditionAdaptationElement.equals("OR"))?"checked":"" %> />
 								<label for="anyelements">
-									&nbsp;<liferay-ui:message key="acesearch-anycriteria" />
+									&nbsp;<liferay-ui:message key="acesearch-anyelements" />
 								</label>	
                                 &nbsp;&nbsp;<input type="radio" id="allelements" name="conditionAdaptationElement" value="AND" <%= (conditionAdaptationElement.equals("AND"))?"checked":"" %> />
 								<label for="allelements">
-									&nbsp;<liferay-ui:message key="acesearch-allcriteria" />
+									&nbsp;<liferay-ui:message key="acesearch-allelements" />
 								</label>	
                             </div>
 
@@ -334,41 +345,30 @@ pageContext.setAttribute("countriesList", countriesList);
                     </li>
 
                     <li>
-                        <a href="#" id="climate_impacts_btn" class="collapsed_section"><liferay-ui:message key="acesearch-section-climate-impacts" /></a>
-
-                        <div id="climate_impacts_container" class="checks_container">
-                            <div class="condition_container">
-                                <input type="radio" id="anyimpacts" name="conditionClimateImpact" value="OR" <%= (conditionClimateImpact.equals("OR"))?"checked":"" %> />
-								<label for="anyimpacts">
-									&nbsp;<liferay-ui:message key="acesearch-anycriteria" />
-								</label>	
-                                &nbsp;&nbsp;<input type="radio" id="allimpacts" name="conditionClimateImpact" value="AND" <%= (conditionClimateImpact.equals("AND"))?"checked":"" %> />
-								<label for="allimpacts">
-									&nbsp;<liferay-ui:message key="acesearch-allcriteria" />
-								</label>	
-                            </div>
-
-							<%-- note : i18n file should always be in sync with AceItemClimateImpact enum --%>
-							<c:forEach var="climateImpact" items="<%= nl.wur.alterra.cgi.ace.model.constants.AceItemClimateImpact.values() %>" >
+                        <a href="#" id="countries_btn" class="collapsed_section"><liferay-ui:message key="acesearch-section-countries" /></a>
+                        <div id="countries_container" class="checks_container">
+                            <%-- note : i18n file should always be in sync with AceItemCountry enum --%>
+							<c:forEach var="countryElement" items="<%= nl.wur.alterra.cgi.ace.model.constants.AceItemCountry.values() %>" >
 								<div class="check">
-									<c:set var="climateImpactMustBeChecked" value="false" />
-									<c:forEach var="requestedImpact" items="${impactsList}">
-										<c:if test="${requestedImpact eq climateImpact}">
-											<c:set var="climateImpactMustBeChecked" value="true" />
+									<c:set var="countryElementMustBeChecked" value="false" />
+									<c:forEach var="requestedElement" items="${countriesList}">
+										<c:if test="${requestedElement eq countryElement}">
+											<c:set var="countryElementMustBeChecked" value="true" />
 										</c:if>
-									</c:forEach>	
+									</c:forEach>
 									<c:choose>
-										<c:when test="${climateImpactMustBeChecked}">
-											<input type="checkbox" name="impact" id="chk_impacts_${climateImpact}" value="${climateImpact}" checked="checked" />
+										<c:when test="${countryElementMustBeChecked}">
+											<input type="checkbox" name="countries" id="chk_countries_${countryElement}" value="${countryElement}" checked="checked" />
 										</c:when>
 										<c:otherwise>
-											<input type="checkbox" name="impact" id="chk_impacts_${climateImpact}" value="${climateImpact}" />
+											<input type="checkbox" name="countries" id="chk_countries_${countryElement}" value="${countryElement}" />
 										</c:otherwise>
 									</c:choose>
-									<label for="chk_impacts_${climateImpact}"><liferay-ui:message key="aceitem-climateimpacts-lbl-${climateImpact}" /></label>
-								</div>							
+									<label for="chk_countries_${countryElement}"><liferay-ui:message key="acesearch-country-lbl-${countryElement}" /></label>
+								</div>
 							</c:forEach>
-                        </div>						
+                        </div>
+
                     </li>
 					
                 </ul>
