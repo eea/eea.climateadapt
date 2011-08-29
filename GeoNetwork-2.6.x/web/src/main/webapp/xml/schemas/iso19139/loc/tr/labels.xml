@@ -1,0 +1,2447 @@
+<?xml version="1.0" encoding="utf-8"?>
+<labels xmlns:gmd="http://www.isotc211.org/2005/gmd" xmlns:gts="http://www.isotc211.org/2005/gts"
+    xmlns:gco="http://www.isotc211.org/2005/gco" xmlns:gml="http://www.opengis.net/gml"
+    xmlns:srv="http://www.isotc211.org/2005/srv" xmlns:gmx="http://www.isotc211.org/2005/gmx">
+    
+    <element name="gmd:MD_ScopeCode">
+        <label>Kapsam Kodu</label>
+        <description>Referans veren varlıgın uygulandığı bilgi sınıfı</description>
+    </element>
+    <element name="code" id="207.0" context="gmd:MD_Identifier">
+        <label>Kod</label>
+        <description>Kapsam dahilindeki varlıklara ait suretleri isimlendirmede kullanılan
+            alfanumerik karakter</description>
+        <help>Kapsam dahilindeki varlıkları isimlendirmede kullanılan alfanumerik karakter</help>
+    </element>
+    <element name="code">
+        <label>Sistem Kodu</label>
+        <description>Kod. Ör:EPSG Kodu</description>
+    </element>
+    <element name="code" id="547.0" context="gmd:MD_CodeValue">
+        <label>Kod</label>
+        <description>Değer Kodu</description>
+        <help>Değer Kodu (i.e. numerik)</help>
+    </element>
+    <element name="codeSpace" id="208.1">
+        <label>Referans Otoritesi</label>
+        <description>Kod belirleyici otorite ör: EPSG</description>
+    </element>
+    <element name="gco:Date" id="364.0" context="gmd:CI_Citation">
+        <label>Sürüm Tarihi</label>
+        <description>Sürüm Tarihi</description>
+    </element>
+    <element name="gco:Date" id="393.0">
+        <label>Tarih</label>
+        <description>Tarih Biçimi 2007-09-12 (YYYY-MM-DD)</description>
+        <help>referans tarih ve ilişkili olay</help>
+        <_condition>Referans veren nesneden kısıt/şart ile kullanılır </_condition>
+    </element>
+    <element name="gco:DateTime" id="64.0" context="gmd:MD_Usage">
+        <description>Biçimlendirme 2007-09-12T15:00:00 (YYYY-MM-DDTHH:mm:ss)</description>
+        <label>Kullanım Tarih/Saat</label>
+        <help>Kaynagin veya kaynaklar serisinin ilk kullanım tarihi</help>
+    </element>
+    <element name="gco:DateTime" id="300.0" context="gmd:MD_StandardOrderProcess">
+        <description>Biçimlendirme 2007-09-12T15:00:00 (YYYY-MM-DDTHH:mm:ss)</description>
+        <label>Planlanan Uygun Tarih/Zaman</label>
+        <help>Kaynagin hazır olarak bulunacagı zaman</help>
+    </element>
+    <!--<element name="gmd:dateTime">
+        <label>DateTime</label>
+        <description>Date and time or range of date and time on or over which the process step
+            occurred (YYYY-MM-DDThh:mm:ss)</description>
+    </element>-->
+    <element name="gco:Measure" id="100.0" context="gmd:DQ_Element">
+        <label>Ölçüm İsmi</label>
+        <description>Veiye uygulanan testin adı</description>
+    </element>
+    <element name="gco:Measure" id="357.0" context="gmd:EX_VerticalExtent">
+        <label>Ölçüm birimi</label>
+        <description>Dikey bilgi ölçümlerinde kullanılan dikey birimler Examples:
+            metre,feet,milimetre,hektopaskal</description>
+        <_condition>M</_condition>
+    </element>
+    <element name="gmd:CI_Address" id="380.0">
+        <label>Adres</label>
+        <description>Birey veya kuruluşa ait mekan bilgisi</description>
+        <_condition>Referans veren nesneden kısıt/şart ile kullanılır</_condition>
+    </element>
+    <element name="gmd:CI_Citation" id="359.0">
+        <label>Atıf</label>
+        <description>Standart kaynak referansı</description>
+        <_condition>Referans veren nesneden kısıt/şart ile kullanılır</_condition>
+    </element>
+    <element name="gmd:CI_Contact" id="387.0">
+        <label>İletişim Bilgisi</label>
+        <description>İlgili birey veya kuruluş ile iletişim gereken bilgiler</description>
+        <_condition>Referans veren nesneden kısıt/şart ile kullanılır</_condition>
+    </element>
+    <element name="gmd:CI_Date" id="393.0">
+        <label>Date</label>
+        <description>Reference date and event used to describe it (YYYY-MM-DD)</description>
+        <_condition>Use obligation/condition from referencing object</_condition>
+    </element>
+    <element name="gmd:CI_OnlineResource" id="396.0">
+        <label>Çevrimiçi Kaynak</label>
+        <description>Veri seti,teknik dokuman,profil adı ve genişletilmiş metaveri alınabilecek
+            çevrimiçi kaynaklar</description>
+        <_condition>Referans veren nesneden kısıt/şart ile kullanılır</_condition>
+    </element>
+    <element name="gmd:CI_ResponsibleParty" id="374.0">
+        <label>Sorumlu Taraf</label>
+        <description>Veri kümesi ile ilgili kişi veya kuruluşa ait kimlik ve iletişim
+            bilgileri</description>
+        <_condition>Referans veren nesneden kısıt/şart ile kullanılır</_condition>
+    </element>
+    <element name="gmd:CI_Series" id="403.0">
+        <label>Seriler</label>
+        <description>Veri kümesinin ait olduğu seri veya toplu veri kümesine ait
+            bilgiler</description>
+        <_condition>Referans veren nesneden kısıt/şart ile kullanılır</_condition>
+    </element>
+    <element name="gmd:CI_Telephone" id="407.0">
+        <label>Telefon</label>
+        <description>Sorumlu kişi veya kuruluşa ait telefon numarası</description>
+        <_condition>Referans veren nesneden kısıt/şart ile kullanılır</_condition>
+    </element>
+    <element name="gmd:DQ_AbsoluteExternalPositionalAccuracy" id="117.0">
+        <label>Mutlak Dış Konumsal Doruluk</label>
+        <description>Raporlanan koordinatların doğru kabul edilen koordinatlara olan
+            yakınlığı</description>
+    </element>
+    <element name="gmd:DQ_AccuracyOfATimeMeasurement" id="121.0">
+        <label>Zaman Ölçüm Doğruluğu</label>
+        <description>Zamansal ölçüm bilgilerinin doğruluğı (zaman ölçümündeki hatanın
+            raporlanması)</description>
+    </element>
+    <element name="gmd:DQ_CompletenessCommission" id="109.0">
+        <label>Tamlık Belgesi</label>
+        <description>Kapsam dahilinde tanımlanmış olan veri kümesindeki fazla veri</description>
+    </element>
+    <element name="gmd:DQ_CompletenessOmission" id="110.0">
+        <label>Tamlık omisyonu</label>
+        <description>Kapsam dahilindeki veri kümesinde bulunmayan veriler</description>
+    </element>
+    <element name="gmd:DQ_ConceptualConsistency" id="112.0">
+        <label>Kavramsal Tutarlılık</label>
+        <description>Kavramsal şemanın kuralları ile olan uyumluluk</description>
+    </element>
+    <element name="gmd:DQ_ConformanceResult" id="129.0">
+        <label>Konformasyon Sonuçları</label>
+        <description>Elde edilen verilerin belirlenen kalite seviyesine göre olan durumlarının
+            ölçümü</description>
+    </element>
+    <element name="gmd:DQ_DataQuality" id="78.0">
+        <label>Veri Kalitesi</label>
+        <description>Verilerin Belirlenen veri kalitesi kapsamındaki değerleri </description>
+    </element>
+    <element name="gmd:DQ_DomainConsistency" id="113.0">
+        <label>Alan Tutarlılığı</label>
+        <description>Değerlerin alan verisi ve kriterleri ile uyumluluğu</description>
+    </element>
+    <element name="gmd:DQ_FormatConsistency" id="114.0">
+        <label>Biçim Tutarlılığı</label>
+        <description>Verilerin kapsam dahilinde tanımlanmış veri kümesinin fiziksel yapısı ile
+            uygunluk derecesi</description>
+    </element>
+    <element name="gmd:DQ_GriddedDataPositionalAccuracy" id="118.0">
+        <label>Grid veri konumsal doğruluğu</label>
+        <description>Grid verilerin doğru olarak kabul edilen verilere olan yakınlığı</description>
+    </element>
+    <element name="gmd:DQ_NonQuantitativeAttributeAccuracy" id="126.0">
+        <label>Sayısal olamyan özelliklere ait doğruluk</label>
+        <description>Sayısal olmayan özelliklere ait doğruluk bilgisi</description>
+    </element>
+    <element name="gmd:DQ_QuantitativeAttributeAccuracy" id="127.0">
+        <label>Sayısal Özellik Doğruluğu</label>
+        <description>Sayısal özelliklere ait doğruluk bilgisi</description>
+    </element>
+    <element name="gmd:DQ_QuantitativeResult" id="133.0">
+        <label>Sayısal Sonuç</label>
+        <description>Yapılan veri kalitesi ölçümü sonucunda elde edilen veri ve
+            bilgiler</description>
+    </element>
+    <element name="gmd:DQ_RelativeInternalPositionalAccuracy" id="119.0">
+        <label>Göreceli iç konum doğruluğu</label>
+        <description>kapsam dahlindeki özelliklerin göreceli konumların doğru kabul edilen göreceli
+            konumlara göre olan yakınlığı</description>
+    </element>
+    <element name="gmd:DQ_Scope" id="138.0">
+        <label>Kapsam</label>
+        <description>Kapsamda belirlenen verinin tanımı</description>
+        <help>kalite bilgisinin raporlandığı verilerin karakteristik özellikleri</help>
+    </element>
+    <element name="gmd:DQ_TemporalConsistency" id="122.0">
+        <label>Zamansal Tutarlılık</label>
+        <description>Sıralanmış olayların doğruluğuna ait bilgi</description>
+    </element>
+    <element name="gmd:DQ_TemporalValidity" id="123.0">
+        <label>Zamansal Geçerlilik</label>
+        <description>Kapsamda tanımlanan verinin zamana göre geçerliliği</description>
+    </element>
+    <element name="gmd:DQ_ThematicClassificationCorrectness" id="125.0">
+        <label>Tematik Sınıflandırma doğrulaması</label>
+        <description>Özellik sınıflandırmalarının ve özniteliklerinin bilinen bir uzay ile
+            kıyaslaması</description>
+    </element>
+    <element name="gmd:DQ_TopologicalConsistency" id="115.0">
+        <label>Topoloji Tutarlılığı</label>
+        <description>Veri kümesinin kapsam dahilinde tanımlanan haricen kodlanmış topoloji
+            karakteristiklerine göre doğruluğu</description>
+    </element>
+    <element name="gmd:EX_BoundingPolygon" id="341.0">
+        <label>Sınırlayan Poligon</label>
+        <description>Veri kümesine ait sınır bilgisi, (x,y) koordinatlarından oluşan küme (en son
+            nokta ilk noktayı replike eder)</description>
+    </element>
+    <element name="gmd:EX_Extent" id="334.0">
+        <label>Kapsam</label>
+        <description>Mekansal,Dikey ve Zamansal kapsam hakkında bilgi</description>
+        <label>Kapsam</label>
+        <description>Mekansal,Dikey ve Zamansal kapsam hakkında bilgi</description>
+    </element>
+    <element name="gmd:EX_GeographicBoundingBox" id="343.0">
+        <label>Coğrafi Sınırlama Kutusu</label>
+        <description>Veri kümesinin coğrafi konumu</description>
+    </element>
+    <element name="gmd:EX_GeographicDescription" id="348.0">
+        <label>Coğrafi Konum</label>
+        <description>Coğrafi alanın belirteçler kullanılarak yapılan tanımı.</description>
+    </element>
+    <element name="gmd:EX_SpatialTemporalExtent" id="352.0">
+        <label>Mekansal Zaman Derecesi</label>
+        <description>Tarih/Zaman ve Mekansal sınırlandırmaya ait kapsama bilgileri </description>
+    </element>
+    <element name="gmd:EX_TemporalExtent" id="350.0">
+        <label>Zamansal Derece</label>
+        <description>Veri kümesinin içerdiği zaman aralığına ait bilgi</description>
+    </element>
+    <element name="gmd:EX_VerticalExtent" id="354.0">
+        <label>Dikey Derece</label>
+        <description>Veri kümesinin dikey alandaki kapsamı</description>
+    </element>
+    <element name="gmd:ISBN" id="372.0">
+        <label>ISBN</label>
+        <description>International Standard Book Number</description>
+    </element>
+    <element name="gmd:ISSN" id="373.0">
+        <label>ISSN</label>
+        <description>International Standard Serial Number</description>
+    </element>
+    <element name="gmd:LI_Lineage" id="82.0">
+        <label>Köken-Lineage***</label>
+        <description>Kapsam dahilindeki verinin oluşturulması sırasındaki adım,olay ve kaynaklar ya
+            da bu bilgilerin olmadığını gösteren açıklamalar</description>
+    </element>
+    <element name="gmd:LI_ProcessStep" id="86.0">
+        <label>İşlem Adımı</label>
+        <description>Kapsam dahilindeki verilerin oluşturulması sırasında gerçekleşen işlem adımları
+            hakkında bilgiler</description>
+        <help>Veri kümesinin idamesi de dahil olmak üzere yaşam süresi boyunca maruz kaldığı
+            olay,işlem veya değişiklikler</help>
+    </element>
+    <element name="gmd:LI_Source" id="92.0">
+        <label>Kaynak</label>
+        <description>Kapsam dahilindeki veriyi oluşturmada kullanılan kaynak veriye ait
+            bilgiler</description>
+    </element>
+    <element name="gmd:MD_AggregateInformation" id="66.1">
+        <label>Toplam Bilgi</label>
+        <description>Verikümesine ait toplam, bütünleşik bilgiler</description>
+    </element>
+    <element name="gmd:MD_ApplicationSchemaInformation" id="320.0">
+        <description>Verikümesi oluşturmada kullanılan uygulama şemasına ait bilgiler</description>
+        <label>Uygulama Şema Bilgileri</label>
+    </element>
+    <element name="gmd:MD_Band" id="259.0">
+        <label>Bant</label>
+        <description>Elektromanyetik spektrumdaki dalgaboyu menzilleri</description>
+        <help>Elektromanyetik spektrumdaki dalgaboyu menzilleri</help>
+    </element>
+    <element name="gmd:MD_BrowseGraphic" id="48.0">
+        <description>verikümesini detaylı acıklamada kullanılan görsel araç (grafiğe ait lejant da
+            içermelidir)</description>
+        <label>Grafiklere Gözat</label>
+    </element>
+    <element name="gmd:MD_Constraints" id="67.0">
+        <label>Kısıt</label>
+        <description>Kaynak ve metaverinin kullanımına ve erişimine getirilen
+            sınırlamalar</description>
+    </element>
+    <element name="gmd:MD_CoverageDescription" id="239.0">
+        <label>Kapsama Tanımı</label>
+        <description>Grid veri hücresinin içeriğine ait bilgiler</description>
+    </element>
+    <element name="gmd:MD_DataIdentification" id="36.0">
+        <label>Veri kimliklendirme</label>
+        <description>Veri kümesini kimliklendirmek için gereken bilgiler</description>
+    </element>
+    <element name="gmd:MD_DigitalTransferOptions" id="274.0">
+        <label>Dijital transfer seçenekleri</label>
+        <description>Distribütörden alınacak verinin aktarımına ilişkin teknik bilgiler ve ortam
+            bilgilerini içerir</description>
+    </element>
+    <element name="gmd:MD_Dimension" id="179.0">
+        <label>Boyut</label>
+        <description>Eksen Özellikleri</description>
+    </element>
+    <element name="gmd:MD_Distribution" id="270.0">
+        <label>Dağıtım</label>
+        <description>Kaynağa ilişkin dağıtıcı ve kaynağın alımına ilişkin bilgileri
+            içerir</description>
+    </element>
+    <element name="gmd:MD_Distributor" id="279.0">
+        <label>Dağıtıcı</label>
+        <description>Distribütör hakkında bilgiler.</description>
+    </element>
+    <element name="gmd:MD_ExtendedElementInformation" id="306.0">
+        <description>ISO 19115'te bulunmayan yeni metaveri birimi.Coğrafi veriyi tanımlamada
+            gereklidir.</description>
+        <label>Genişletilmiş(Kapsamlı) Eleman Bilgileri</label>
+    </element>
+    <element name="gmd:MD_FeatureCatalogueDescription" id="233.0">
+        <label>Özellik kataloğu tanımları</label>
+        <description>Özellik kataloğu ve kavramsal şemaya ilişkin bilgileri içerir</description>
+    </element>
+    <element name="gmd:MD_Format" id="284.0">
+        <label>Biçim</label>
+        <description>Veri nesnelerinin dosya,kayıt veya depolama biriminde saklanmasına imkan veren
+            bilgisayar dili yapısına ait tanımlamalar. </description>
+    </element>
+    <element name="gmd:MD_GeometricObjects" id="183.0">
+        <label>Geometrik Nesneler</label>
+        <description>Geometrik nesne tipine göre sınıflandırılmış olan veri kümesi içinde yer alan
+            nesne sayısı</description>
+    </element>
+    <element name="gmd:MD_Georectified" id="162.0">
+        <label>Jeorektifiye</label>
+        <description>Hücreleri duzenli olarak Mekansal Referans Sisteminde bulunan bir coğrafi
+            (lat/long) veya harita koordinat sistemine yerleştirilmiş ve hücreleri veri içinde yer
+            alan jeolokasyon bilgisi ile jeolokasyon edilebilen ancak tek başına grid
+            özelliklerinden hücrelerine jeolokasyon yapılamayan grid. </description>
+    </element>
+    <element name="gmd:MD_Georeferenceable" id="170.0">
+        <label>Jeoreferans</label>
+        <description>Hücreleri herhangi bir coğrafi/harita projeksiyon koordinat sistemine düzensiz
+            yerleştirilmiş ve hücreleri veri içinde yer alan jeolokasyon bilgisi ile jeolokasyona
+            tabi tutulan ancak tek başına grid özelliklerinden hücrelerine jeolokasyon yapılamayan
+            grid.</description>
+    </element>
+    <element name="gmd:MD_GridSpatialRepresentation" id="157.0">
+        <label>Grid mekansal gösterimi</label>
+        <description>Veri kümesi içindeki grid mekansal nesnelerine ait bilgiler</description>
+    </element>
+    <element name="gmd:MD_Identifier" id="205.0">
+        <label>Kimlik</label>
+        <description>Uzaydaki bir nesneyi diğerlerinden ayırt etmeyi sağlayan tekil bir kimlik
+            değeridir</description>
+    </element>
+    <element name="gmd:MD_ImageDescription" id="243.0">
+        <label>Görüntü Tanımı</label>
+        <description>Bir görüntünün kullanım için uygunluğuna dair bilgiler.</description>
+    </element>
+    <element name="gmd:MD_Keywords" id="52.0">
+        <label>Anahtar Kelimeler</label>
+        <description>Anahtar kelimeler,türleri ve referans kaynakları </description>
+    </element>
+    <element name="gmd:MD_LegalConstraints" id="69.0">
+        <label>Yasal Kısıtlamalar</label>
+        <description>Kaynak veya verikümesinin erişim ve kullanımına ilişkin sınırlama ve yasal
+            önşartlar</description>
+    </element>
+    <element name="gmd:MD_MaintenanceInformation" id="142.0">
+        <label>Bakım Bilgisi</label>
+        <description>Güncelleme sıklığı ve kapsamına ilişkin bilgiler</description>
+    </element>
+    <element name="gmd:MD_Medium" id="291.0">
+        <label>Ortam</label>
+        <description>Kaynağın dağıtılacağı ortama ilişkin bilgileri içerir. </description>
+    </element>
+    <element name="gmd:MD_Metadata" id="1.0">
+        <label>Metaveri,Üstveri</label>
+        <description>Kaynak veya kaynaklara ilişkin üstbilgi tanımlarını içeren kök
+            varlıklar.</description>
+    </element>
+    <element name="gmd:MD_MetadataExtensionInformation" id="303.0">
+        <description>Metaveri uzantılarını tanımlayan bilgiler </description>
+        <label>Metaveri Uzantı Bilgileri</label>
+        <description>Metaveri uzantılarını tanımlayan bilgiler</description>
+    </element>
+    <element name="gmd:MD_PortrayalCatalogueReference" id="268.0">
+        <label>Portre katalog referansı</label>
+        <description>Kullanılan portre kataloğuna ait bilgi</description>
+        <label>Portre katalog referansı</label>
+    </element>
+    <element name="gmd:MD_RangeDimension" id="256.0">
+        <label>Menzil Boyutu</label>
+        <description>Hücre ölçümünün her boyutuna ait menzil bilgisi</description>
+    </element>
+    <element name="gmd:MD_ReferenceSystem" id="186.0">
+        <label>Referans Sistem</label>
+        <description>Referans Sisteme ait bilgi</description>
+        <help>Referans Sisteme ait bilgi</help>
+    </element>
+    <element name="gmd:MD_RepresentativeFraction" id="56.0">
+        <label>Sembolik Fraksiyon</label>
+        <description> MD_RepresentativeFraction.denominator = 1 / Scale.measure And
+            Scale.targetUnits = Scale.sourceUnits sonucu elde edilen değer</description>
+    </element>
+    <element name="gmd:MD_Resolution" id="59.0">
+        <label>Çözünürlük</label>
+        <description>Ölçek faktörü veya yer mesafesinde sunulan detay seviyesi ve
+            miktarı</description>
+    </element>
+    <element name="gmd:MD_ScopeDescription" id="149.0">
+        <label>Kapsam Tanımı</label>
+        <description>Sunulan bilgilerin kapsamı ve sınıfı ile ilgili açıklamalar</description>
+        <condition>attributes, features, featureInstances, attributeInstnaces, dataset(özellik,veri
+            kümesi,suret bilgileri) sağlanmalıdır</condition>
+    </element>
+    <element name="gmd:MD_SecurityConstraints" id="73.0">
+        <label>Güvenlik Kısıtları</label>
+        <description>Ulusal güvenlik politikası ve benzer düzenlemeler kapsamında uygulanan kural ve
+            güvenlik tedbirleri</description>
+    </element>
+    <element name="gmd:MD_ServiceIdentification" id="47.0">
+        <label>Servis Kimliklendirme</label>
+        <description>Servis sağlayıcının ,kullanıcıya arayüzler üzerinden sağladığı fonksiyonalite
+            ve özelliklere ait kimlik bilgisi- daha fazla bilgi için ISO 19119 inceleyiniz- </description>
+    </element>
+    <element name="gmd:MD_StandardOrderProcess" id="298.0">
+        <label>Standard sipariş işleme</label>
+        <description>Kaynağın elde edilmesi için gerekli adımlar ve ücret bilgileri</description>
+    </element>
+    <element name="gmd:MD_Usage" id="62.0">
+        <label>Kullanım</label>
+        <description>Kaynakların güncel kullanımı ile ilgili bilgilendirme</description>
+    </element>
+    <element name="gmd:MD_VectorSpatialRepresentation" id="176.0">
+        <label>Vektör Mekansal Gösterim-Sunum</label>
+        <description>Veri kümesindeki vektör mekansal nesnelere ait bilgiler</description>
+    </element>
+    <element name="gmd:PT_FreeText" id="601.0">
+        <label>Serbest Metin</label>
+        <description>Çoklu dil desteği olan metaveri birimine ait tanım</description>
+    </element>
+    <element name="gmd:RS_Identifier" id="208.0">
+        <description>Referans sisteme ait kimlik bilgisi</description>
+        <label>Kimlik Bilgisi</label>
+    </element>
+    <element name="gmd:URL" id="608.0">
+        <label>URL</label>
+        <description>URL</description>
+    </element>
+    <element name="gmd:abstract" id="25.0">
+        <label>Özet</label>
+        <description>Kaynak içeriklerine ait özet açıklama </description>
+        <condition>zorunlu</condition>
+    </element>
+    <element name="gmd:accessConstraints" id="70.0">
+        <label>Erişim kısıtları</label>
+        <description>kaynağa erişimi kısıtlayan ve güvenlik , koruma,telif hakkı vb gibi yasal
+            düzenlemelere uyumlu erişim sağlayan uygulama kısıtları</description>
+    </element>
+    <element name="gmd:address" id="525.0" context="gmd:CI_ResponsibleParty">
+        <label>Adres</label>
+        <description>Sorumlu tarafa ait adres bilgisi</description>
+    </element>
+    <element name="gmd:address" id="389.0">
+        <label>Adres</label>
+        <description>Kişi veya kuruluşa ait fiziksel ve eposta adresi</description>
+    </element>
+    <element name="gmd:administrativeArea" id="383.0">
+        <label>Yönetimsel Alan</label>
+        <description>Mekana ait eyalet,şehir bilgisi</description>
+    </element>
+    <element name="gmd:aggregateDataSetIdentifier" id="66.3">
+        <label>Toplam verikümesi kimliklendirme</label>
+        <description>Bütünleşik verikümesi kimlik bilgileri</description>
+    </element>
+    <element name="gmd:aggregateDataSetName" id="66.2">
+        <label>Toplam-Bütünleşik verikümesi adı</label>
+        <description>Toplam verikümesine ait atıf bilgisi</description>
+        <_condition>C / if aggregateDataSetIdentifier not documented?</_condition>
+    </element>
+    <element name="gmd:aggregationInfo" id="35.1">
+        <label>Bütünleştirme Bilgisi</label>
+        <description>Toplam(bütünleşik,bütün) veri kümesine ait bilgileri sunar</description>
+    </element>
+    <element name="gmd:alternateTitle" id="361.0">
+        <label>Alternatif Başlık</label>
+        <description>Atıfta bulunana bilginin kısa başlığı ve başka bir dildeki adı Örnek: "DCW" -
+            "Digital Chart of the World</description>
+    </element>
+    <element name="gmd:amendmentNumber" id="287.0">
+        <label>Değişiklik Numarası</label>
+        <description>Biçim versiyonu değişiklik numarası</description>
+    </element>
+    <element name="gmd:applicationProfile" id="399.0">
+        <label>Uygulama Profili</label>
+        <description>ÇEvrimiçi kaynak ile kullanılabilecek uygulama profili adı</description>
+    </element>
+    <element name="gmd:applicationSchemaInfo" id="21.0">
+        <label>Uygulama şema bilgisi</label>
+        <description>Veri kümesine ait kavramsal şemaya ait bilgi sağlar</description>
+    </element>
+    <element name="gmd:associationType" id="66.4">
+        <label>İlişki Türü</label>
+        <description>Toplam veri kümesine ait ilişki türü</description>
+        <condition>zorunlu</condition>
+    </element>
+    <element name="gmd:attributeDescription" id="240.0">
+        <label>Özellik tanımı</label>
+        <description>Ölçüm değerinde tanımlanan özellik tanımları</description>
+        <condition>zorunlu</condition>
+    </element>
+    <element name="gmd:attributeInstances" id="153.0">
+        <label>Özellik Suretleri</label>
+        <description>Bilgiye ait özellik suretleri</description>
+        <condition/>
+    </element>
+    <element name="gmd:attributes" id="150.0">
+        <label>Özellikler</label>
+        <description>Bilgiye ait özellikler</description>
+        <condition/>
+    </element>
+    <element name="gmd:authority" id="206.0">
+        <label>Otorite</label>
+        <description>İdameden sorumlu kişi veya kuruluş </description>
+    </element>
+    <element name="gmd:axisDimensionProperties" id="159.0">
+        <label>Aktif Boyut Özellikleri</label>
+        <description>Mekansal geçici eksen bilgileri</description>
+        <_condition>M</_condition>
+    </element>
+    <element name="gmd:bitsPerValue" id="264.0">
+        <label>Değer başına Bit</label>
+        <description>pixelin her bandının sıkıştırılmamış biçiminde bulunan maksimum bit
+            sayısı</description>
+    </element>
+    <element name="gmd:cameraCalibrationInformationAvailability" id="253.0">
+        <label>Kamera kalibrasyon bilgisinin mevcudiyeti</label>
+        <description>Kamera kalibrasyon doğrulamasının yapılması için gereken bilgilerin varlığına
+            ait indikatörler</description>
+    </element>
+    <element name="gmd:cellGeometry" id="160.0">
+        <label>Hücre Geometrisi</label>
+        <description>Grid verisinin nokta veya hücre olarak belirlenmesi</description>
+        <condition>zorunlu</condition>
+    </element>
+    <element name="gmd:centerPoint" id="166.0">
+        <label>Merkez Nokta</label>
+        <description>Mekansal Referans Sisteminde tanımlı yeryüzü koordinatı ve gridin zıt uçları
+            arasındaki yarı uzaklıgın mekansal boyuttaki grid koordinatları</description>
+    </element>
+    <element name="gmd:characterSet" id="4.0" context="gmd:MD_Metadata">
+        <label>Karakter Seti</label>
+        <description>metaveri kümesinin karakter kodlama standardının tam adı</description>
+        <condition>şartlı</condition>
+        <_condition>şartlı / ISO/IEC 10646-1 kullanılmadı ve tanımlı değil?</_condition>
+    </element>
+    <element name="gmd:characterSet" id="40.0" context="gmd:MD_DataIdentification">
+        <label>Karakter Seti</label>
+        <description>veri kümesinin karakter kodlama standardının tam adı</description>
+        <_condition>Şartlı / ISO 10646-1 kullanılmadı?</_condition>
+    </element>
+    <element name="gmd:characterSet" id="4.0">
+        <label>Karakter Seti</label>
+        <description>metaveri kümesinin karakter kodlama standardının tam adı</description>
+        <condition>şartlı</condition>
+    </element>
+    <element name="gmd:checkPointAvailability" id="163.0">
+        <description>Jeoreferanslı grid verisinin doğruluğunu test etmede kullanılan coğrafi konum
+            noktalarının mevcudiyet indikatörü</description>
+        <condition>zorunlu</condition>
+        <label>Kontrol Noktası Tanımı</label>
+    </element>
+    <element name="gmd:checkPointDescription" id="164.0">
+        <description>Jeoreferanslı grid verisinin doğruluğunu test etmede kullanılan coğrafi konum
+            noktaları tanımı </description>
+        <condition>şartlı</condition>
+        <label>Kontrol Noktası Tanımı</label>
+    </element>
+    <element name="gmd:citation" id="24.0" context="gmd:MD_Identification">
+        <label>Atıf</label>
+        <description>Kaynaklara yapılan atıflar</description>
+    </element>
+    <element name="gmd:citation" id="576.0" context="gmd:MD_Authority">
+        <label>Atıf</label>
+        <description>Otoriteye ait atıflar</description>
+    </element>
+    <element name="gmd:citation" id="581.0" context="gmd:MD_Thesaurus">
+        <label>Atıf</label>
+        <description>Sözlüğye yapılan atıflar</description>
+    </element>
+    <element name="gmd:citation" id="581.0">
+        <label>Atıf</label>
+        <description>Kaynaklara ait atıf bilgisi</description>
+    </element>
+    <element name="gmd:citedResponsibleParty" id="367.0">
+        <label>Atıfta Bulunulan Sorumlu Taraf</label>
+        <description>Kaynaktan sorumlu kişi vera kuruluşa ait isim ve konum bilgileri</description>
+    </element>
+    <element name="gmd:city" id="382.0">
+        <label>şehir</label>
+        <description>Mekana ait şehir bilgisi</description>
+    </element>
+    <element name="gmd:classification" id="74.0">
+        <condition>zorunlu</condition>
+        <label>Sınıflandırma</label>
+        <description>kaynak veya metaveri üzerindeki kısıtlamaların Adı</description>
+    </element>
+    <element name="gmd:classificationSystem" id="76.0">
+        <label>Sınıflandırma sistemi</label>
+        <description>Sınıflandırma sistemi </description>
+        <label>Sınıflandırma Sistemi</label>
+    </element>
+    <element name="gmd:cloudCoverPercentage" id="248.0">
+        <label>Cloud cover percentage</label>
+        <description>mekansal büyüklüğün bir yüzdesi olarak ifade edilen, bulutlar tarafından
+            gizlenmiş veri kümesi alanı </description>
+    </element>
+    <element name="gmd:code" id="207.0" context="gmd:MD_Identifier">
+        <label>Kod</label>
+        <description>Kimliklendirmede kullanılan alfanumerik karakter</description>
+        <condition>Zorunlu</condition>
+    </element>
+    <element name="gmd:code" id="547.0" context="gmd:MD_CodeValue">
+        <description>Değer kodu</description>
+        <help>Değer kodu (nümerik olacak)</help>
+    </element>
+    <element name="gmd:codeSpace" id="208.1">
+        <label>KodAralığı</label>
+        <description>İsim veya kişi kimliği yada 'namespace' yetkisi olan organizasyon</description>
+        <helper>
+            <option value="EPSG">EPSG</option>
+        </helper>
+    </element>
+    <element name="gmd:collectiveTitle" id="371.0">
+        <label>Kollektif başlık</label>
+        <description>Not içeren genel başlıktır. Notlu başlık birarada bir dizi elemanları
+            içerir</description>
+        <help>This field is used to name the Basic Geodata as defined in the GeoIV Annex I, as it is
+            possible that there are more than 1 "physical" datasets assigned to 1 legal entry. E.g.:
+            Entry no. 47 "Geophysikalisches Kartenwerk" consists of 3 datasets "Geophysikalische
+            Karten 1:500000", "Geophysikalische Spezialkarten" and "Gravimetrischer Atlas
+            1:100000"</help>
+    </element>
+    <element name="gmd:complianceCode" id="234.0">
+        <label>Uyum kodu</label>
+        <description>Obje kataloğunun (feature catalog) ISO 19110 standartlarına uygun olup
+            olmadığını belirtir.</description>
+    </element>
+    <element name="gmd:compressionGenerationQuantity" id="250.0">
+        <label>Compression generation quantity</label>
+        <description>Count of the number the number of lossy compression cycles performed on the
+            image</description>
+    </element>
+    <element name="gmd:condition" id="312.0">
+        <label>Koşul</label>
+        <description>Koşul altında hangi genişletilmiş elemanın zorunlu olduğudur.</description>
+    </element>
+    <element name="gmd:constraintLanguage" id="323.0">
+        <label>Kısıtlayıcı dil</label>
+        <description>Uygulama tasarımında kullanılan onaylanmış dil</description>
+        <condition>zorunlu</condition>
+    </element>
+    <element name="gmd:contact" id="8.0" context="gmd:MD_Metadata">
+        <condition>zorunlu</condition>
+        <label>İrtibat(Contact)</label>
+        <description>Metaveri bilgisinden sorumlu taraf</description>
+    </element>
+    <element name="gmd:contact" id="148.1" context="gmd:MD_MaintenanceInformation">
+        <label>İrtibat(Contact)</label>
+        <description>Metaveriyi sağlayan sorumlu kişi veya organizasyonun iletişim
+            bilgileridir</description>
+    </element>
+    <element name="gmd:contact" id="8.0">
+        <label>Metaveri yazarı</label>
+        <description>Metaveri bilgisinden sorumlu taraf</description>
+        <condition>zorunlu</condition>
+    </element>
+    <element name="gmd:contactInfo" id="378.0">
+        <description>Sorumlu tarafın adresi</description>
+        <label>İrtibat Bilgisi</label>
+    </element>
+    <element name="gmd:contactInstructions" id="392.0">
+        <label>İrtibat Talimatları</label>
+        <description>Ne zaman veya nasıl, kişiyle yada organizasyonla irtibata geçileceğini belirten
+            ilave talimatlar</description>
+    </element>
+    <element name="gmd:contentInfo" id="16.0">
+        <description>Obje kataloğu hakkında bilgi sağlar ve kapsamı ve görüntü verileri
+            özelliklerini açıklar</description>
+        <label>İçerik Bilgisi</label>
+    </element>
+    <element name="gmd:contentType" id="241.0">
+        <label>İçerik tipi</label>
+        <description>Hücre (cell) değeri ile gösterilen bilgi tipi</description>
+        <condition>zorunlu</condition>
+    </element>
+    <element name="gmd:controlPointAvailability" id="171.0">
+        <description>Kontrol noktalarının olup olmadığının gösterilmesi</description>
+        <condition>zorunlu</condition>
+        <label>Kontrol noktası Uygunluğu</label>
+    </element>
+    <element name="gmd:cornerPoints" id="165.0">
+        <label>Köşe noktalar</label>
+        <description>Earth location in the coordinate system defined by the Spatial Reference System
+            and the grid coordinate of the cells at opposite ends of grid coverage along two
+            diagonals in the grid spatial dimensions. There are four corner points in a georectified
+            grid; at least two corner points along one diagonal are required</description>
+        <condition>zorunlu</condition>
+    </element>
+    <element name="gmd:country" id="612.0">
+        <label>Ülke</label>
+        <description>Ülkenin fiziki adresi</description>
+    </element>
+    <element name="gmd:country" id="508.0" context="gmd:MD_Legislation">
+        <label>Ülke</label>
+        <description>Ülkede hangi kanun çıkarılmıştır</description>
+    </element>
+    <element name="gmd:country" id="605.0" context="PT_Group">
+        <label>Ülke</label>
+        <description>Düz metin yazmak için Ülkede kullanılan dil</description>
+    </element>
+    <element name="gmd:credit" id="27.0">
+        <label>Övgü</label>
+        <description>Kaynak/Kaynaklara katkıda bulunanları onaylama</description>
+    </element>
+    <element name="gmd:dataQualityInfo" id="18.0">
+        <label>Veri kalitesi bilgisi</label>
+        <description>Kaynağın kalitesinin genel değerlendirilmesini sağlama</description>
+    </element>
+    <element name="gmd:dataSetURI" id="11.1">
+        <label>VeriKümesi(Dataset) URI</label>
+        <description>Metaverisi Uniformed Resource Identifier (URI) of the dataset to which the
+            metadata applies</description>
+        <help>Uniformed Resource Identifier (URI) of the dataset to which the metadata applies. This
+            link refers direct to the machine-readable dataset.***</help>
+    </element>
+    <element name="gmd:dataType" id="313.0">
+        <label>Veri tipi</label>
+        <description>Code which identifies the kind of valueprovidedeprovided in the extended
+            element</description>
+        <condition>zorunlu</condition>
+    </element>
+    <element name="gmd:dataset" id="154.0">
+        <description>Veri kümesine hangi bilginin uygulandığı</description>
+        <condition/>
+        <label>VeriKümesi</label>
+    </element>
+    <element name="gmd:date" id="570.0">
+        <label>Tarih</label>
+        <description>Anılan kaynağın referans tarihidir (YYYY-MM-DD)</description>
+        <condition>zorunlu</condition>
+    </element>
+    <element name="gmd:date" id="570.0" context="gmd:MD_Revision">
+        <label>Son Güncelleme Tarihi</label>
+        <description>Son Güncelleme Tarihi</description>
+    </element>
+    <element name="gmd:date" id="144.0" context="gmd:MD_MaintenanceInformation">
+        <label>Bir sonraki Güncelleme Tarihi</label>
+        <description>Kaynağın planlanmış revizyon tarihi</description>
+    </element>
+    <element name="gmd:date" id="362.0" context="gmd:CI_Citation">
+        <condition>zorunlu</condition>
+        <label>Tarih</label>
+        <description>Alıntı yapılmış kaynağın referans tarihi</description>
+        <_condition>M</_condition>
+    </element>
+    <element name="gmd:date" id="394.0" context="gmd:CI_Date">
+        <condition>mandatory</condition>
+        <label>Tarih</label>
+        <description>Alıntı yapılmış kaynağın referans tarihi</description>
+        <_condition>M</_condition>
+    </element>
+    <element name="gmd:dateOfNextUpdate" id="144.0">
+        <label>Bir sonraki Güncelleme Tarihi</label>
+        <description>Kaynağın planlanmış revizyon tarihi (YYYY-MM-DD)</description>
+    </element>
+    <element name="gmd:dateStamp" id="9.0">
+        <label>Onay tarihi</label>
+        <description>Metaverinin oluşturulduğu tarih (YYYY-MM-DDThh:mm:ss)</description>
+        <condition>zorunlu</condition>
+    </element>
+    <!--<element name="gmd:dateTime" id="89.0">
+        <label>Date / Time</label>
+        <description>Date and time or range of date and time on or over which the process step
+            occurred (YYYY-MM-DDThh:mm:ss)</description>
+    </element>-->
+    <element name="gmd:dateTime" id="89.0" context="LI_ProcessStep">
+        <description>Tarih ve zaman yada proses adımlarının başlangıç yada bitiş aralığı
+            (YYYY-MM-DDThh:mm:ss)</description>
+        <label>Tarih / Saat</label>
+        <description>Tarih ve zaman yada proses adımlarının başlangıç yada bitiş
+            aralığı</description>
+    </element>
+    <element name="gmd:dateTime" id="106.0" context="gmd:DQ_Element">
+        <label>Tarih / Saat</label>
+        <description>Veri kalitesi ölçümü yapıldığı gün aralıkları veya tarihi</description>
+    </element>
+    <element name="gmd:dateType" id="395.0">
+        <label>Veri tipi</label>
+        <description>Referens tarihi için kullanılan durum</description>
+        <condition>zorunlu</condition>
+    </element>
+    <element name="gmd:definition" id="310.0">
+        <label>Tanımlama</label>
+        <description>Genişletilmiş eleman tanımı</description>
+        <condition>zorunlu</condition>
+    </element>
+    <element name="gmd:deliveryPoint" id="381.0">
+        <label>Hedef nokta</label>
+        <description>Konumun adres satırı ( ISO 11180, EK A da açıklandığı gibi)</description>
+    </element>
+    <element name="gmd:denominator" id="57.0">
+        <label>Payda</label>
+        <description>The number below the line in a vulgar fraction</description>
+        <condition>Bir payda veya mesafe ekleyin</condition>
+        <helper>
+            <option value="5000">1:5´000</option>
+            <option value="10000">1:10´000</option>
+            <option value="25000">1:25´000</option>
+            <option value="50000">1:50´000</option>
+            <option value="100000">1:100´000</option>
+            <option value="200000">1:200´000</option>
+            <option value="300000">1:300´000</option>
+            <option value="500000">1:500´000</option>
+            <option value="1000000">1:1´000´000</option>
+        </helper>
+
+    </element>
+    <element name="gmd:density" id="293.0">
+        <label>Yoğunluk</label>
+        <description>Verinin kaydedildiği yoğunluktur.</description>
+    </element>
+    <element name="gmd:densityUnits" id="294.0">
+        <label>Yoğunluk birimi</label>
+        <description>Kaydedilen yoğunluğun ölçü birimidir.</description>
+        <condition>koşullu</condition>
+    </element>
+    <element name="gmd:description" id="561.0">
+        <label>Açıklama</label>
+        <description>İlgili parametreleri veya hata payını gösteren durum açıklaması</description>
+    </element>
+    <element name="gmd:description" id="561.0" context="gmd:MD_AbstractClass">
+        <label>Açıklama</label>
+        <description>Açıklama</description>
+    </element>
+    <element name="gmd:description" id="87.0" context="LI_ProcessStep">
+        <condition>zorunlu</condition>
+        <label>Açıklama</label>
+        <description>İlgili parametreleri veya hata payını gösteren durum açıklaması</description>
+    </element>
+    <element name="gmd:description" id="93.0" context="LI_Source">
+        <label>Açıklama</label>
+        <description>Kaynak veri sviyesinin detaylı açıklaması</description>
+        <_condition>Koşullu / sourceExtent not provided?</_condition>
+    </element>
+    <element name="gmd:description" id="335.0" context="gmd:EX_Extent">
+        <label>Açıklama</label>
+        <description>Referans objenin geçici ve mekansal kapsamı</description>
+        <_condition>Koşullu / CoğrafiEleman ve GeçiciEleman ve DüşeyEleman yazılmamış?</_condition>
+    </element>
+    <element name="gmd:description" id="401.0" context="gmd:CI_OnlineResource">
+        <label>Açıklama</label>
+        <description>Online kaynakların detaylı yazılı açıklaması</description>
+    </element>
+    <element name="gmd:description" id="541.0" context="gmd:MD_CodeDomain">
+        <label>Açıklama</label>
+        <description>Kod alanının açıklaması</description>
+    </element>
+    <element name="gmd:description" id="549.0" context="gmd:MD_CodeValue">
+        <label>Değer açıklaması</label>
+        <description>Değerin açıklaması</description>
+    </element>
+    <element name="gmd:description" id="552.0" context="gmd:MD_Attribute">
+        <label>Açıklama</label>
+        <description>Öznitelik açıklaması</description>
+    </element>
+    <element name="gmd:description" id="557.0" context="gmd:MD_Role">
+        <label>Açıklama</label>
+        <description>Rol açıklaması</description>
+    </element>
+    <element name="gmd:descriptiveKeywords" id="33.0">
+        <label>Descriptive keywords</label>
+        <description>Provides category keywords, their type, and reference source</description>
+    </element>
+    <element name="gmd:descriptor" id="258.0">
+        <label>Açıklayıcı</label>
+        <description>Bir hücrenin (cell) ölçüm değeri aralığının açıklaması.</description>
+    </element>
+    <element name="gmd:dimension" id="242.0">
+        <label>Boyut</label>
+        <description>Bir hücrenin (cell) ölçüm değeri boyutları bilgisi açıklaması.</description>
+    </element>
+    <element name="gmd:dimensionName" id="180.0">
+        <label>Boyut adı</label>
+        <description>Eksen adı</description>
+        <condition>zorunlu</condition>
+    </element>
+    <element name="gmd:dimensionSize" id="181.0">
+        <label>Boyut ölçüsü</label>
+        <description>Eksen üzerindeki eleman sayısı</description>
+        <condition>zorunlu</condition>
+    </element>
+    <element name="gmd:distance" id="61.0">
+        <label>Mesafe</label>
+        <description>Zemindeki örnek mesafe</description>
+        <condition>Eşdeğer ölçek tanımlanmamışsa mesafe bilgilerini sağlar.</condition>
+        <helper>
+            <option value="0.10">10 cm</option>
+            <option value="0.25">25 cm</option>
+            <option value="0.50">50 cm</option>
+            <option value="1">1 m</option>
+            <option value="30">30 m</option>
+            <option value="100">100 m</option>
+        </helper>
+    </element>
+    <element name="gmd:distributionFormat" id="271.0">
+        <label>Dağıtım (Distribution) formatı</label>
+        <condition>zorunlu</condition>
+        <description>Dağıtılan datanın formatını açıklar</description>
+    </element>
+    <element name="gmd:distributionInfo" id="17.0">
+        <description>Provides information about the distributor of and options for obtaining the
+            resource(s)</description>
+        <label>Dağıtım Bilgisi</label>
+    </element>
+    <element name="gmd:distributionOrderProcess" id="281.0">
+        <label>Dağıtım / Sipariş Süreci (Process)</label>
+        <description>Kaynağın nasıl elde edildiğini, gerekli talimatları ve harç bilgilerini
+            sağlar</description>
+    </element>
+    <element name="gmd:distributor" id="272.0">
+        <label>Dağıtıcı (distributor)</label>
+        <description>Dağıtıcı hakkında bilgi sağlar</description>
+    </element>
+    <element name="gmd:distributorContact" id="280.0">
+        <label>Dağıtıcı (Distributor) irtibatı</label>
+        <description>Party from whom the resource may be obtained. This list need not be
+            exhaustive***</description>
+        <condition>zorunlu</condition>
+    </element>
+    <element name="gmd:distributorFormat" id="282.0">
+        <label>Dağıtıcı (Distributor) formatı</label>
+        <description>Dağıtıcı tarafından kullanılan format bilgilerini sağlar</description>
+        <condition>koşullu</condition>
+    </element>
+    <element name="gmd:distributorTransferOptions" id="283.0">
+        <label>Dağıtıcı (Distributor) transfer seçenekleri</label>
+        <description>Provides information about the technical means and media used by the
+            distributor***</description>
+    </element>
+    <element name="gmd:domainCode" id="309.0">
+        <label>Domain (Alan) kodu</label>
+        <description>Genişletilmiş elemana üç haneli kod atanır</description>
+        <_condition>Conditional / is dataType ?codelistElement??</_condition>
+    </element>
+    <element name="gmd:domainOfValidity" id="197.0">
+        <label>Domain (Alan) geçerliliği</label>
+        <description>Referans sistemi için doğru zaman aralığı</description>
+    </element>
+    <element name="gmd:domainValue" id="315.0">
+        <label>Alan (Domain) değeri</label>
+        <description>Genişletilmiş elemana doğru değeri atanır.</description>
+        <_condition>Conditonal / dataType not 'codelist', 'enumeration' or
+            'codelistElement'</_condition>
+    </element>
+    <element name="gmd:eastBoundLongitude" id="345.0">
+        <label>Doğu sınırı</label>
+        <description>Eastern-most coordinate of the limit of the dataset extent, expressed in
+            longitude in decimal degrees (positive east)</description>
+        <condition>zorunlu</condition>
+    </element>
+    <element name="gmd:edition" id="363.0">
+        <label>Baskı (Edition)</label>
+        <description>Alıntı yapılan kaynağın versiyonu</description>
+    </element>
+    <element name="gmd:editionDate" id="364.0">
+        <label>Baskı (Edition) tarihi</label>
+        <description>Baskı tarihi(YYYY-MM-DD)</description>
+    </element>
+    <element name="gmd:electronicMailAddress" id="386.0">
+        <label>Elektronik posta adresi</label>
+        <description> Sorumlu organizasyon veya kişinin elektronik mail adresi</description>
+    </element>
+    <element name="gmd:environmentDescription" id="44.0">
+        <label>Ortam açıklaması</label>
+        <description>Üretici veri kümesinin program, işletim sistemi, dosya adı, veri kümesi boyutu
+            bilgilerinin yer aldığı açıklamalardır.</description>
+    </element>
+    <element name="gmd:equivalentScale" id="60.0">
+        <label>Eşdeğer Ölçek</label>
+        <description>Level of detail expressed as the scale of a comparable hardcopy map or
+            chart***</description>
+        <_condition>Conditional / distance not documented?</_condition>
+    </element>
+    <element name="gmd:errorStatistic" id="136.0">
+        <label>Hata istatistiği (Error statistic)</label>
+        <description>Değere karar veren istatistik metodu</description>
+    </element>
+    <element name="gmd:evaluationMethodDescription" id="104.0">
+        <label>Değerlendirme (Evaluation) metodu açıklaması</label>
+        <description>Değerlendirme metodu açıklaması</description>
+    </element>
+    <element name="gmd:evaluationMethodType" id="103.0">
+        <label>Değerlendirme (Evaluation) Metodu</label>
+        <description>Veri Kümesi kalitesini değerlendirmek için kullanılan yöntem türü</description>
+    </element>
+    <element name="gmd:evaluationProcedure" id="105.0">
+        <label>Değerlendirme (Evaluation) yöntemi</label>
+        <description>Yöntem bilgilerinden bahsetme</description>
+    </element>
+    <element name="gmd:explanation" id="131.0">
+        <label>Açıklama</label>
+        <description>Sonuç uyumunun anlamının açıklanması</description>
+        <condition>zorunlu</condition>
+    </element>
+    <element name="gmd:extendedElementInformation" id="305.0">
+        <label>Genişletilmiş eleman bilgisi</label>
+        <description>Tanımlanması gereken coğrafik verinin ISO 19115 standartlarında bulunmayan yeni
+            metaveri bilgilerini sağlar.</description>
+    </element>
+    <element name="gmd:extensionOnLineResource" id="304.0">
+        <label>Online kaynak uzantısı</label>
+        <description>On-line kaynakta topluluk profil bilgileri ve genişletilmiş metaveri elemanları
+            içeren on-line kaynak bilgileridir. Bütün yeni metaveri elemanlarının
+            bilgisidir.</description>
+    </element>
+    <element name="gmd:extent" id="45.0" context="gmd:MD_DataIdentification">
+        <label>Uzantı (Extent)</label>
+        <description>Extent information including the bounding polygon, vertical, and temporal
+            extent of the dataset</description>
+        <_condition>Conditional / if hierarchyLevel equals "dataset"? Either
+            extent.geographicElement.EX_GeographicBoundingBox or
+            extent.geographicElement.EX_GeographicDescription is required</_condition>
+    </element>
+    <element name="gmd:extent" id="140.0" context="gmd:DQ_Scope">
+        <label>Uzantı (Extent)</label>
+        <description>Kapsam içindeki verinin yatay, düşey ve geçici uzantılarının
+            bilgileridir</description>
+    </element>
+    <element name="gmd:extent" id="351.0" context="gmd:EX_TemporalExtent">
+        <label>Uzantı (Extent)</label>
+        <description>Veri kümesi içeriğindeki tarih ve saati gösterir</description>
+        <_condition>zorunlu</_condition>
+    </element>
+    <element name="gmd:extentTypeCode" id="340.0">
+        <label>Uzantı (Extent) tipi kodu</label>
+        <description>Indication of whether the bounding polygon encompasses an area covered by the
+            data or an area where data is not present. Possible values: '1' for inclusion or '0' for
+            exclusion</description>
+    </element>
+    <element name="gmd:facsimile" id="409.0">
+        <label>Faks</label>
+        <description>Sorumlu organizasyon yada kişinin faks numarasıdır</description>
+    </element>
+    <element name="gmd:featureCatalogueCitation" id="238.0">
+        <label>Obje kataloğu alıntısı</label>
+        <description>Dış obje kataloğunun (Feature catalogue) kaynakça bilgisidir</description>
+        <condition>zorunlu</condition>
+    </element>
+    <element name="gmd:featureInstances" id="152.0">
+        <label>Obje (Feature) örnekleri</label>
+        <description>Feature instances to which the information applies***</description>
+        <condition/>
+    </element>
+    <element name="gmd:featureTypes" id="237.0">
+        <label>Obje tipleri</label>
+        <description>Subset of feature types from cited feature catalogue occurring in
+            data***</description>
+    </element>
+    <element name="gmd:features" id="151.0">
+        <label>Objeler</label>
+        <description>Hangi bilginin uygulandığı objelerdir</description>
+        <condition/>
+    </element>
+    <element name="gmd:fees" id="299.0">
+        <label>Ücretler</label>
+        <description>Kaynağı almak için gereken koşul ve ücretlendirmelerdir. Para birimi
+            tanımlanmıştır (ISO 4217 de belirtilen)</description>
+    </element>
+    <element name="gmd:fileDecompressionTechnique" id="289.0">
+        <label>Sıkıştırılmış dosya açma tekniği</label>
+        <description>Recommendations of algorithms or processes that can be applied to read or
+            expand resources to which compression techniques have been applied</description>
+    </element>
+    <element name="gmd:fileDescription" id="50.0">
+        <label>Dosya Açıklama</label>
+        <description>Tanımın metinsel açıklaması</description>
+    </element>
+    <element name="gmd:fileIdentifier" id="2.0">
+        <label>Dosya belirtici</label>
+        <description>Metaveri dosyası için tekil (unique) olarak tanımlanan belirtici</description>
+    </element>
+    <element name="gmd:fileName" id="49.0">
+        <label>Dosya adı</label>
+        <description>Name of the file that contains a graphic that provides an illustration of the
+            dataset. It could be a public image document URL.</description>
+        <condition>zorunlu</condition>
+    </element>
+    <element name="gmd:fileType" id="51.0">
+        <label>Dosya tipi</label>
+        <description>Resimde kodlanmış formattır</description>
+        <help>Kodlanmış formatlara örnek olarak : CGM, EPS, GIF, JPEG, PBM, PS, TIFF, XWD</help>
+    </element>
+    <element name="gmd:filmDistortionInformationAvailability" id="254.0">
+        <label>Film distortion information availability</label>
+        <description>Indication of whether or not Calibration Reseau information is
+            available</description>
+    </element>
+    <element name="gmd:formatDistributor" id="290.0">
+        <label>Dağıtıcı formatı</label>
+        <description>Dağıtıcının format bilgilerini sağlar</description>
+    </element>
+    <element name="gmd:function" id="402.0">
+        <label>Fonksiyon</label>
+        <description>Online kaynak tarafından uygulanan işlev kodudur</description>
+    </element>
+    <element name="gmd:geographicElement" id="336.0">
+        <label>Coğrafik eleman</label>
+        <description>Bir objenin coğrafik bileşenlerini sağlar</description>
+        <_condition>Conditional / description and temporalElement and verticalElement not
+            documented?</_condition>
+    </element>
+    <element name="gmd:geographicIdentifier" id="349.0">
+        <label>Coğrafik tanımlayıcı</label>
+        <description>Coğrafik bir alanı temsil eden tanım</description>
+        <condition>mandatory</condition>
+    </element>
+    <element name="gmd:geometricObjectCount" id="185.0">
+        <label>Geometrik obje sayımı</label>
+        <description>Veri kümesinde yer alan nokta veya vektör objelerin toplam sayısı</description>
+    </element>
+    <element name="gmd:geometricObjectType" id="184.0">
+        <label>Geometrik obje tipi</label>
+        <description>Mekansal objeleri konumlandırmak için veri kümesindeki sifır, bir ve iki
+            boyutlu mekansal konumların nokta ve vektör adları konumların nokta ve vektör
+            adları</description>
+        <condition>mandatory</condition>
+    </element>
+    <element name="gmd:geometricObjects" id="178.0">
+        <label>Geometrik objeler</label>
+        <description>Veri kümesinde kullanılan geometrik objelerin bilgileridir</description>
+    </element>
+    <element name="gmd:georeferencedParameters" id="174.0">
+        <label>GeoreferencedParameters</label>
+        <description>GeoreferencedParameters</description>
+    </element>
+    <element name="gmd:graphicOverview" id="31.0">
+        <label>Grafik görünüm</label>
+        <description>Kaynağın grafik görünümünü sağlar (grafik gösterim için lejant
+            olmalıdır)</description>
+    </element>
+    <element name="gmd:graphicsFile" id="325.0">
+        <label>Grafik dosya</label>
+        <description>Grafik dosyası için verilen uygulama tasarımının tamamı</description>
+    </element>
+    <element name="gmd:handlingDescription" id="77.0">
+        <label>Kullanım açıklaması</label>
+        <description>kaynak kullanımı üzerindeki kısıtlamalar hakkında ek bilgiler</description>
+    </element>
+    <element name="gmd:hierarchyLevel" id="6.0">
+        <label>Hiyerarşi katmanı</label>
+        <description>Metaverinin geçerli olduğu kapsam (Metaveri hiyerarşi katmanı hakkında daha
+            fazla bilgi için bakınız Ek H )</description>
+    </element>
+    <element name="gmd:hierarchyLevelName" id="7.0">
+        <label>Hiyerarşi katman adı</label>
+        <description>Metaveri sağlanan hiyerarşik katmanların adı</description>
+        <_condition>Conditional / hierarchyLevel is not equal to "dataset"?</_condition>
+    </element>
+    <element name="gmd:hoursOfService" id="391.0">
+        <label>Servis saatleri</label>
+        <description>Kişilerin veya organizasyonların bağlantı kurabildikleri zaman peryodu (zone
+            bilgisi içeren)</description>
+        <label>Hours of Service</label>
+    </element>
+    <element name="gmd:identificationInfo" id="15.0">
+        <label>Tanımlama Bilgisi</label>
+        <description>Kaynağa hangi metaverinin uygulandığını gözteren temel bilgiler</description>
+        <condition>mandatory</condition>
+    </element>
+    <element name="gmd:identifier" id="573.0">
+        <label>Tanımlayıcı</label>
+        <description>Kaynağın tekil (unique) tanımlayıcısı. Örneğin: Universal Product Code (UPC),
+            National Stock Number (NSN)</description>
+    </element>
+    <element name="gmd:identifier" id="573.0" context="gmd:CI_Citation">
+        <label>Alıntı tanımlayıcı</label>
+        <description>Alıntıyı tanımlayan</description>
+    </element>
+    <element name="gmd:identifier" id="575.0" context="gmd:MD_Authority">
+        <label>Tanımlayıcı</label>
+        <description>Kuruma ait tanımlayıcı</description>
+    </element>
+    <element name="gmd:illuminationAzimuthAngle" id="245.0">
+        <label>Illumination azimuth angle</label>
+        <description>Illumination azimuth measured in degrees clockwise from true north at the time
+            the image is taken. For images from a scanning device, refer to the centre pixel of the
+            image</description>
+    </element>
+    <element name="gmd:illuminationElevationAngle" id="244.0">
+        <label>Illumination elevation angle</label>
+        <description>Illumination elevation measured in degrees clockwise from the target plane at
+            intersection of the optical line of sight with the Earth_s surface. For images from a
+            scanning device, refer to the centre pixel of the image</description>
+    </element>
+    <element name="gmd:imageQualityCode" id="247.0">
+        <label>Resim kalitesi kodu</label>
+        <description>Resim kalitesini tanımlar</description>
+        <help>Resim kalitesini tanımlar</help>
+    </element>
+    <element name="gmd:imagingCondition" id="246.0">
+        <label>Görüntüleme koşulu</label>
+        <description>Resme etki eden koşullar</description>
+    </element>
+    <element name="gmd:includedWithDataset" id="236.0">
+        <label>Veri kümesi içerme</label>
+        <description>Obje kataloğunun veri kümesi ile birlikte olup olmamasının
+            göstergesi</description>
+        <condition>zorunlu</condition>
+    </element>
+    <element name="gmd:individualName" id="375.0">
+        <label>Individual name</label>
+        <description>Name of the responsible person- surname, given name, title separated by a
+            delimiter</description>
+        <_condition>Conditional / organisationName and positionName not documented?</_condition>
+    </element>
+    <element name="gmd:initiativeType" id="66.5">
+        <label>Initiative Type</label>
+        <description>Type of initiative under which the aggregate dataset was produced</description>
+    </element>
+    <element name="gmd:issueIdentification" id="405.0">
+        <label>Sorun tanımlama</label>
+        <description>Sorunu tanımlama bilgisi</description>
+    </element>
+    <element name="gmd:keyword" id="53.0">
+        <label>Anahtar kelimeler (Keyword)</label>
+        <description>Konuyu tanımlamak için sık kullanılan kelime(ler) veya onaylanmış kelime(ler)
+            veya deyim(ler)</description>
+    </element>
+    <element name="gmd:language" context="gmd:MD_Metadata" id="3.0">
+        <label>Metaveri dili</label>
+        <description>Metaveriyi belgelemek için kullanılan dil</description>
+        <condition>conditional</condition>
+        <element name="gmd:language" context="gmd:MD_DataIdentification" id="39.0"> </element>
+        <label>Dil</label>
+        <description>Veri kümesinde kullanılan dil(ler)</description>
+        <help>Veri kümesinde kullanılan dil(ler)</help>
+        <_condition>Zorunlu</_condition>
+    </element>
+    <element name="gmd:language" context="gmd:MD_FeatureCatalogueDescription" id="235.0">
+        <label>Dil</label>
+        <description>Katalogda kullanılan dil(ler)</description>
+    </element>
+    <element name="gmd:lensDistortionInformationAvailability" id="255.0">
+        <label>Objektif bozulumu bilgisinin ulaşılabilirliği</label>
+        <description>Objektif sapma düzeltilmesi bilgisinin ulaşılabilir olup olmadığının gösterimi </description>
+    </element>
+    <element name="gmd:level" id="139.0">
+        <label>Hiyerarşi seviyesi</label>
+        <description>Kapsamda ifade edilen veilerin hiyerarşik seviyesi</description>
+        <condition>zorunlu</condition>
+    </element>
+    <element name="gmd:levelDescription" id="141.0">
+        <label>Seviye tanımı</label>
+        <description>Kapsamda ifade edilen verilerin detaylı tanımı </description>
+        <_condition>Koşullu / seviye 'Veri kümesi' veya 'serilere' eşit değil?</_condition>
+    </element>
+    <element name="gmd:lineage" id="81.0">
+        <label>Sıra</label>
+        <description>Kapsamda ifade edilen verilerin sıralarının nicel olmayan kalite bilgisi </description>
+        <_condition>Koşullu / rapor sağlanamaz ?</_condition>
+    </element>
+    <element name="gmd:linkage" id="397.0">
+        <label>Bağlantı</label>
+        <description>Kaynak bulucu adresi veya http://www.statkart.no/isotc211 gibi benzer adresleme
+            kategorisi kullanarak çevrimiçi ulaşım için konum </description>
+        <condition>zorunlu</condition>
+    </element>
+    <element name="gmd:maintenanceAndUpdateFrequency" id="143.0">
+        <label>Bakım ve güncelleme sıklığı</label>
+        <description>Bağlangıç kaynağının tamamlanmasının ardından kaynağa yapılan eklemelerin ve
+            değişikliklerin sıklığı </description>
+        <condition>zorunlu</condition>
+    </element>
+    <element name="gmd:maintenanceNote" id="148.0">
+        <label>Bakım notu</label>
+        <description>Kaynağın bakımı için gereken belirli gereksinimler ile ilgili bilgi </description>
+    </element>
+    <element name="gmd:maxValue" id="260.0">
+        <label>En yüksek değer</label>
+        <description>Belirlenen bant içerisinde sensörün toplayabildiği en uzun dalgaboyu </description>
+    </element>
+    <element name="gmd:maximumValue" id="356.0">
+        <label>En yüksek değer</label>
+        <description>Veri kümesinde yer alan en yüksek dikey alan Highest vertical extent contained
+            in the dataset</description>
+        <condition>zorunlu</condition>
+    </element>
+    <element name="gmd:measureDescription" id="102.0">
+        <label>Ölçüm tanımı</label>
+        <description>Tanımlanan ölçümün tanımı</description>
+    </element>
+    <element name="gmd:measureIdentification" id="101.0">
+        <label>Ölçüm tanımı</label>
+        <description>Kayıtlı bir standart prosedürü tanımlayan kod</description>
+    </element>
+    <element name="gmd:mediumFormat" id="296.0">
+        <label>Ortam biçimi</label>
+        <description>Ortamı yazmak için kullanılan metod</description>
+    </element>
+    <element name="gmd:mediumNote" id="297.0">
+        <label>Ortam notu</label>
+        <description>Ortamı kullanmak için gereken gereksinim ve limitlerin tanımı </description>
+    </element>
+    <element name="gmd:metadataConstraints" id="20.0" context="gmd:MD_Metadata">
+        <label>Üst veri kısıtları</label>
+        <description>Üst veri erişimi ve kullanımı ile ilgili kısıtlamaları sağlar </description>
+    </element>
+    <element name="gmd:metadataConstraints">
+        <label>Üst veri kısıtları</label>
+        <description>Veri erişimi ve kullanımı ile ilgili kısıtlamaları sağlar</description>
+    </element>
+    <element name="gmd:metadataExtensionInfo" id="14.0">
+        <description>Üst veri uzantılarını tarif eden bilgi</description>
+        <label>Üst veri uzantı bilgisi</label>
+    </element>
+    <element name="gmd:metadataMaintenance" id="22.0">
+        <label>Üst veri bakımı</label>
+        <description>Üst veri güncelleme sıklığı ve bu güncellemelerin kapsamı hakkında bilgi sağlar </description>
+    </element>
+    <element name="gmd:metadataStandardName" id="10.0">
+        <label>Üst veri standart ismi</label>
+        <description>Kullanılan standart üst veri adı (profil adı dahil)</description>
+    </element>
+    <element name="gmd:metadataStandardVersion" id="11.0">
+        <label>Üst veri standart versiyonu</label>
+        <description>Üst veri standardı tarafından kullanılan versiyon (profil)</description>
+    </element>
+    <element name="gmd:minValue" id="261.0">
+        <label>En küçük değer</label>
+        <description>Belirlenen bant içerisinde sensörün toplayabildiği en kısa dalgaboyu </description>
+    </element>
+    <element name="gmd:minimumValue" id="355.0">
+        <label>En küçük değer</label>
+        <description>Üst veride yer alan en düşük dikey alan</description>
+        <condition>zorunlu</condition>
+    </element>
+    <element name="gmd:name" context="gmd:MD_AbstractClass" id="560.0">
+        <label>İsim</label>
+        <description>İsim</description>
+    </element>
+    <element name="gmd:name" context="gmd:MD_Medium" id="292.0">
+        <label>İsim</label>
+        <description>Kaynakların alınabileceği ortamın adı</description>
+    </element>
+    <element name="gmd:name" context="gmd:RS_ReferenceSystem" id="196.0">
+        <label>İsim</label>
+        <description>Kullanılan referans sistemin adı</description>
+        <condition>zorunlu</condition>
+    </element>
+    <element name="gmd:name" context="gmd:MD_Format" id="285.0">
+        <label>İsim</label>
+        <description>Veri transfer biçim(ler)inin adı</description>
+        <help>veri transfer biçim(ler)inin adı</help>
+        <condition>zorunlu</condition>
+    </element>
+    <element name="gmd:name" context="gmd:MD_ExtendedElementInformation" id="307.0">
+        <label>İsim</label>
+        <description>Büyütülmüş üst veri elemanının adı</description>
+        <condition>zorunlu</condition>
+    </element>
+    <element name="gmd:name" context="gmd:MD_ApplicationSchemaInformation" id="321.0">
+        <label>İsim</label>
+        <description>Kullanılan uygulama kategorisinin adı</description>
+        <condition>zorunlu</condition>
+    </element>
+    <element name="gmd:name" context="gmd:CI_OnlineResource" id="400.0">
+        <label>Kaynağın adı</label>
+        <description>Çevirim içi kaynağın adı</description>
+    </element>
+    <element name="gmd:name" context="gmd:CI_Series" id="404.0">
+        <label>İsim</label>
+        <description>Veri kümelerinin bir parçası olduğu serilerin veya toplanmış veri kümelerin adı </description>
+    </element>
+    <element name="gmd:name" context="gmd:MD_CodeDomain" id="537.0">
+        <label>İsim</label>
+        <description>Kod alanının adı</description>
+    </element>
+    <element name="gmd:name" context="gmd:MD_CodeValue" id="546.0">
+        <label>İsim</label>
+        <description>Değer ismi</description>
+    </element>
+    <element name="gmd:name" context="gmd:MD_Attribute" id="551.0">
+        <label>İsim</label>
+        <description>Özellik ismi</description>
+    </element>
+    <element name="gmd:name" context="gmd:MD_Role" id="556.0">
+        <label>İsim</label>
+        <description>Görev ismi</description>
+    </element>
+    <element name="gmd:name">
+        <label>İsim</label>
+        <description/>
+    </element>
+    <element name="gmd:nameOfMeasure" id="100.0">
+        <label>Ölçüm ismi</label>
+        <description>veriye uygulanan testin adı</description>
+    </element>
+    <element name="gmd:northBoundLatitude" id="347.0">
+        <label>Kuzey sınır</label>
+        <description>Paralel ondalık derecelerle ifade edilen veri kümesi alanı limitinin en kuzey
+            koordinatı </description>
+        <condition>zorunlu</condition>
+    </element>
+    <element name="gmd:numberOfDimensions" id="158.0">
+        <label>Boyut sayıları </label>
+        <description>Bağımsız mekan-zaman eksenlerinin sayısı </description>
+        <condition>zorunlu</condition>
+    </element>
+    <element name="gmd:obligation" id="311.0">
+        <label>Zorunluluk</label>
+        <description>Büyütülmüş eleman zorunluluğu</description>
+    </element>
+    <element name="gmd:offLine" id="278.0">
+        <label>Çevrimdışı</label>
+        <description>Kaynakların elde edilebileceği çevrimdışı ortamlar hakkında bilgi </description>
+    </element>
+    <element name="gmd:offset" id="267.0">
+        <label>Uzaklık</label>
+        <description>Sıfırın hücre değeri ile ilgili fiziksel değer</description>
+    </element>
+    <element name="gmd:onLine" id="277.0">
+        <label>Çevrimiçi kaynak</label>
+        <description>Kaynakların elde edilebildiği online kaynaklar hakkında bilgi </description>
+    </element>
+    <element name="gmd:onlineResource" id="390.0">
+        <help>Web site'ye erişebilmek için URL tanımlayınız</help>
+        <label>Web site</label>
+        <description>Kişilerle ya da organizasyonlarla iletişim kurabilmek için kullanılan çevrimiçi
+            bilgi </description>
+    </element>
+    <element name="gmd:orderingInstructions" id="301.0">
+        <label>Sipariş talimatları</label>
+        <description>Dağıtımcı tarafından sağlanan genel talimatlar, şartlar ve servisler </description>
+    </element>
+    <element name="gmd:organisationName" id="376.0">
+        <label>Organizasyon adı</label>
+        <description>Sorumlu organizasyonun adı</description>
+        <condition>koşullu</condition>
+    </element>
+    <element name="gmd:orientationParameterAvailability" id="172.0">
+        <label>Oryantasyon parametreleri uygunluğu</label>
+        <description>Oryantasyon parametrelerinin uygun olup olmadığının bildirimi </description>
+        <condition>zorunlu</condition>
+    </element>
+    <element name="gmd:orientationParameterDescription" id="173.0">
+        <label>Oryantasyon parametreleri tanımı</label>
+        <description>Sensor oryantasyonunu tarif etmek için kullanılan parametrelerin tanımı </description>
+    </element>
+    <element name="gmd:other" id="155.0">
+        <label>Other</label>
+        <description>Bilgilerin uygulandığı kategorilere dahil olmayan </description>
+        <condition/>
+    </element>
+    <element name="gmd:otherCitationDetails" id="370.0">
+        <label>Diğer alıntı detayları</label>
+        <description>Başka bir yerde kayıtlı olmayan alıntıları tamamlamak için gereken diğer
+            bilgiler </description>
+    </element>
+    <element name="gmd:otherConstraints" id="72.0">
+        <label>Diğer kısıtlar</label>
+        <description>Kaynaklara erişim ve kullanım için gereken diğer sınırlamalar ve yasal
+            önkoşullar </description>
+        <condition>koşullu</condition>
+    </element>
+    <element name="gmd:page" id="406.0">
+        <label>Sayfa</label>
+        <description>Yayınlanan makalenin sayfaları hakkında detaylar </description>
+    </element>
+    <element name="gmd:parameterCitation" id="175.0">
+        <label>Parametre alıntısı</label>
+        <description>Parametrelerin tanımlanmasını sağlamak için referans </description>
+    </element>
+    <element name="gmd:parentEntity" id="316.0">
+        <label>Ebeveyn birim</label>
+        <description>Bu büyütülmüş üst verinin altında görünebileceği üst veri
+            biriminin(birimlerinin) adı. Bu isim(ler) standart üst veri elemanları ya da büyütülmüş
+            üst veri elemanları olabilir. </description>
+        <condition>zorunlu</condition>
+    </element>
+    <element name="gmd:parentIdentifier" id="5.0">
+        <label>Ebeveyn tanımlayıcı</label>
+        <description>Bu üstverinin alt kümesi olan üst verinin dosya tanıtıcısı </description>
+    </element>
+    <element name="gmd:pass" id="132.0">
+        <label>Geç</label>
+        <description>0= kalan ve 1= geçen olduğu yerlerde uyumlu sonuçlar olduğunun gösterimi </description>
+        <condition>zorunlu</condition>
+    </element>
+    <element name="gmd:peakResponse" id="263.0">
+        <label>Zirve tepki </label>
+        <description>Tepkinin en yüksek olduğu dalga</description>
+    </element>
+    <element name="gmd:phone" id="388.0">
+        <label>Phone</label>
+        <description>Kişilerle ya da organizasyonlarla iletişim kurulan telefon numaraları </description>
+    </element>
+    <element name="gmd:phone" id="407.0">
+        <label>Phone</label>
+        <description>Kişilerle ya da organizasyonlarla iletişim kurulan telefon numaraları </description>
+    </element>
+    <element name="gmd:phone" id="526.0">
+        <label>Telefon</label>
+        <description>Kişilerle ya da organizasyonlarla iletişim kurulan telefon numaraları </description>
+    </element>
+    <element name="gmd:plannedAvailableDateTime" id="300.0">
+        <label>Planlanmış ulaşılma tarih-saati</label>
+        <description>Veri kümesinin ulaşılabilir olduğu tarih ve saat
+            (CCYY-MM-DDThh:mm:ss)</description>
+    </element>
+    <element name="gmd:pointInPixel" id="167.0">
+        <label>Piksel Noktası</label>
+        <description>Dünya konum pikseli ile ilişkilendirilmiş bir piksel noktası </description>
+        <condition>zorunlu</condition>
+    </element>
+    <element name="gmd:pointOfContact" id="29.0">
+        <label>Temas noktası</label>
+        <description>Kaynaklarla ilgili organizasyonlar ve kişiler ile iletişimin tanımı, anlamı </description>
+    </element>
+    <element name="gmd:polygon" id="342.0">
+        <label>Poligon</label>
+        <description>Sınırlı bir poligonu gösteren noktalar kümesi</description>
+        <condition>zorunlu</condition>
+    </element>
+    <element name="gmd:portrayalCatalogueCitation" id="269.0">
+        <label>Katalog alıntı tanımı</label>
+        <description>Alıntı yapılan katalog tanımına bibliyografik referans </description>
+        <condition>zorunlu</condition>
+    </element>
+    <element name="gmd:portrayalCatalogueInfo" id="19.0">
+        <label>Katalog bilgi tanımı</label>
+        <description>Kaynakların tanımlanmasında belirtilen kuralların kataloğu hakkında bilgi
+            sağlar </description>
+    </element>
+    <element name="gmd:positionName" id="377.0">
+        <label>Pozisyon ismi</label>
+        <description>Sorumlu kişinin pozisyon ve görevi</description>
+        <condition>koşullu</condition>
+    </element>
+    <element name="gmd:postalCode" id="384.0">
+        <label>Posta kodu</label>
+        <description>ZIP veya diğer posta kodu</description>
+    </element>
+    <element name="gmd:presentationForm" id="368.0">
+        <label>Sunum formu</label>
+        <description>Kaynağın sunulduğu mod</description>
+    </element>
+    <element name="gmd:processStep" id="84.0">
+        <label>Süreç adımı</label>
+        <description>Kapsamda belirtilen verinin yaratılma sürecindeki bir olay hakkında bilgi </description>
+        <condition>koşullu</condition>
+    </element>
+    <element name="gmd:processingLevelCode" id="249.0">
+        <label>İşleme seviye kodu</label>
+        <description>Uygulanan radyometrik ve geometrik işlemlerin seviyelerini tanımlayan görüntü
+            dağıtım kodu </description>
+    </element>
+    <element name="gmd:processor" id="90.0">
+        <label>İşlemci</label>
+        <description>Süreç adımları ile ilgili kişi ve organizasyonların tanımı ve onlarla
+            iletişimin anlamı </description>
+    </element>
+    <element name="gmd:protocol" id="398.0">
+        <label>Protokol</label>
+        <description>Kullanılan bağlantı protokolü</description>
+    </element>
+    <element name="gmd:purpose" id="26.0">
+        <label>Amaç</label>
+        <description>Kaynakların birlikte geliştirildiği amaçların özeti </description>
+    </element>
+    <element name="gmd:radiometricCalibrationDataAvailability" id="252.0">
+        <label>Radyometrik kalibrasyon verisi ulaşılabilirliği</label>
+        <description>Radyometrik olarak calibre edilmiş standart veri ürünü yaratılması için
+            radyometrik kalibrasyon bilgisinin erişilebilir olup olmadığı </description>
+    </element>
+    <element name="gmd:rationale" id="88.0">
+        <label>Gerekçe</label>
+        <description>Süreç adımının gereksinim veya amacı</description>
+    </element>
+    <element name="gmd:rationale" id="318.0" context="gmd:MD_ExtendedElementInformation">
+        <label>Gerekçe</label>
+        <description>Büyütülmüş elemanın yaratılmasının nedeni</description>
+    </element>
+    <element name="gmd:referenceSystemIdentifier" id="187.0">
+        <label>Referans sistem tanımlayıcısı</label>
+        <description>Referans sistemin ismi</description>
+        <condition>koşullu</condition>
+    </element>
+    <element name="gmd:referenceSystemInfo" id="13.0">
+        <label>Referans sistemin bilgisi</label>
+        <description>Veri kümesinde kullanılan mekan ve zaman referans sisteminin tanımı </description>
+    </element>
+    <element name="gmd:report" id="80.0">
+        <label>Rapor</label>
+        <description>Verinin kapsamda belirtilen nicel kalite bilgisi </description>
+        <condition>koşullu</condition>
+    </element>
+    <element name="gmd:resolution" id="182.0">
+        <label>Çözünürlük</label>
+        <description>Grid veri kümesindeki detay derecesi</description>
+    </element>
+    <element name="gmd:resourceConstraints" id="35.0">
+        <label>Kaynak kısıtları</label>
+        <description>Kaynaklara uygulanacak kısıtlar hakkında bilgi sağlar </description>
+    </element>
+    <element name="gmd:resourceFormat" id="32.0">
+        <label>Kaynak biçimi</label>
+        <description>Kaynakların biçimi hakkında bir tanım sağlar </description>
+    </element>
+    <element name="gmd:resourceMaintenance" id="30.0">
+        <label>Kaynak bakımı</label>
+        <description>Kaynak güncellemelerinin sıklığı ve kapsamı hakkında bilgi sağlar </description>
+    </element>
+    <element name="gmd:resourceSpecificUsage" id="34.0">
+        <label>Belirli kaynak kullanımı</label>
+        <description>Farklı kullanıcılar tarafından kullanılan kaynaklar için belirli uygulamalar
+            hakkında temel bilgi sağlar </description>
+    </element>
+    <element name="gmd:result" id="107.0">
+        <label>Sonuç</label>
+        <description>Veri kalite ölçümü uygulanması veya elde edilen değerin değerlendirilmesi ile
+            elde edilen değerlerin karşısında kabul edilebilir belirli bir kalite seviyesi </description>
+        <condition>zorunlu</condition>
+    </element>
+    <element name="gmd:role" id="566.0" context="gmd:MD_Association">
+        <label>Görev</label>
+        <description>Somut bir birliğin görevlerine referans</description>
+    </element>
+    <element name="gmd:role" id="379.0">
+        <label>Görev</label>
+        <description>Sorumlu parça tarafından yapılan işlev</description>
+        <condition>zorunlu</condition>
+    </element>
+    <element name="gmd:rule" id="317.0">
+        <label>Kural</label>
+        <description>Büyütülmüş elamanların, diğer eleman ve birimlerle nasıl ilişkili olduğunu
+            ifade eder </description>
+        <condition>zorunlu</condition>
+    </element>
+    <element name="gmd:scaleDenominator" id="94.0">
+        <label>Payda ölçeği</label>
+        <description>Kaynak haritanın temsili kesir paydası</description>
+    </element>
+    <element name="gmd:scaleFactor" id="266.0">
+        <label>Çarpan ölçeği</label>
+        <description>Hücre değerine uygulanan çarpan ölçeği</description>
+    </element>
+    <element name="gmd:schemaAscii" id="324.0">
+        <description>Bir ASCII dosyası olarak verilen tam uygulama kategorisi</description>
+        <label>ASCII kategorisi</label>
+        <description>Bir ASCII dosyası olarak verilen tam uygulama kategorisi</description>
+    </element>
+    <element name="gmd:schemaLanguage" id="322.0">
+        <label>Kategori dili</label>
+        <description>Kullanılan kategori dili tanımlaması</description>
+        <condition>zorunlu</condition>
+    </element>
+    <element name="gmd:scope" id="79.0">
+        <label>Kapsam</label>
+        <description>Veri kalite bilgisi uygulanan belirli veri</description>
+    </element>
+    <element name="gmd:sequenceIdentifier" id="257.0">
+        <label>Sıra tanımlayıcısı</label>
+        <description>Sensorün çalıştığı dalgaboyu bandını eşsiz olarak tanımlayan sayı </description>
+    </element>
+    <element name="gmd:series" id="369.0">
+        <label>Dizi</label>
+        <description>Veri kümesinin bir parçası olduğu dizi veya toplanmış veri kümesi hakkında
+            bilgi </description>
+    </element>
+    <element name="gmd:series" id="369.0">
+        <label>Dizi</label>
+        <description>Veri kümesinin bir parçası olduğu dizi veya toplanmış veri kümesi hakkında
+            bilgi </description>
+    </element>
+    <element name="gmd:shortName" id="308.0">
+        <label>Kısa isim</label>
+        <description>XML veya SGML gibi uygulama metodları için kullanılan uygun Diğer metodların
+            kullanılabilir olduğunu UNUTMAYINIZ </description>
+    </element>
+    <element name="gmd:softwareDevelopmentFile" id="326.0">
+        <label>Yazılım geliştirme dosyası</label>
+        <description>Yazılım geliştirme dosyası olarak verilen tam uygulama kategorisi </description>
+    </element>
+    <element name="gmd:softwareDevelopmentFileFormat" id="327.0">
+        <label>Yazılım geliştirme dosyası biçimi</label>
+        <description>Uygulama kategorisi yazılım bağımlı dosyası için kullanılan yazılım bağımlı
+            biçimi </description>
+    </element>
+    <element name="gmd:source" id="85.0">
+        <label>Kaynak</label>
+        <description>Kapsamda belirtilen verileri yaratmak için kullanılan kaynak veriler hakkında
+            bilgi </description>
+        <condition>zorunlu</condition>
+    </element>
+    <element name="gmd:source" id="319.0" context="gmd:MD_ExtendedElementInformation">
+        <condition>zorunlu</condition>
+        <label>Kaynak</label>
+        <description>Büyütülmüş elemanı yaratan kişi ya da organizasyon</description>
+    </element>
+    <element name="gmd:sourceCitation" id="96.0">
+        <label>Kaynak alıntısı</label>
+        <description>Kaynak veri için kullanılması önerilen referans</description>
+    </element>
+    <element name="gmd:sourceExtent" id="97.0">
+        <label>Kaynak alanı</label>
+        <description>Kaynak verinin mekansal, dikey ve zamansal alan hakkındaki bilgileri </description>
+        <condition>koşullu</condition>
+    </element>
+    <element name="gmd:sourceReferenceSystem" id="95.0">
+        <label>Kaynak referans sistemi</label>
+        <description>Kaynak veri tarafından kullanılan mekansal referans sistemi</description>
+    </element>
+    <element name="gmd:sourceStep" id="98.0">
+        <label>Kaynak adımı</label>
+        <description>Kaynak verinin yaratılması sürecinde oluşan bir olay hakkındaki bilgi </description>
+    </element>
+    <element name="gmd:southBoundLatitude" id="346.0">
+        <label>Güney sınır</label>
+        <description>Ondalık dereceli paralellerde gösterilen veri kümesi alanı limitinin en güney
+            koordinatı </description>
+        <condition>zorunlu</condition>
+    </element>
+    <element name="gmd:spatialExtent" id="353.0">
+        <label>Mekansal alan</label>
+        <description>Zamansal ve mekansal alan bileşiminin mekansal alan bileşeni</description>
+        <condition>zorunlu</condition>
+    </element>
+    <element name="gmd:spatialRepresentationInfo" id="12.0">
+        <label>Mekansal gösterim bilgisi</label>
+        <description>Veri kümesindeki mekansal bilginin dijital gösterimi</description>
+    </element>
+    <element name="gmd:spatialRepresentationType" id="37.0">
+        <label>Mekansal gösterim türü</label>
+        <description>Coğrafi bilginin mekansal olarak göstrimi için kullanılan metod</description>
+    </element>
+    <element name="gmd:spatialResolution" id="38.0">
+        <label>Mekansal çözünürlük</label>
+        <description>Veri kümesindeki mekansal veri yoğunluğu için genel bir anlayış sağlayan etken </description>
+    </element>
+    <element name="gmd:specificUsage" id="63.0">
+        <label>Belirli kullanım</label>
+        <description>Kaynak ve kaynak dizi kullanımının kısa tanımı</description>
+        <condition>zorunlu</condition>
+    </element>
+    <element name="gmd:specification" id="130.0" context="gmd:DQ_ConformanceResult">
+        <condition>zorunlu</condition>
+        <label>Özellik</label>
+        <description>Değerlendirilen verilere karşın ürün özellikleri veya kullanıcı gereksinimleri
+            alıntısı </description>
+    </element>
+    <element name="gmd:specification" id="288.0" context="gmd:MD_Format">
+        <label>Özellik</label>
+        <description>Altküme, profil veya ürün biçim özellikleri ismi </description>
+    </element>
+    <element name="gmd:specification">
+        <label>Özellik</label>
+    </element>
+    <element name="gmd:statement" id="83.0">
+        <label>Açıklama</label>
+        <description>Veri kümesi kökeni hakkındaki veri üreticisi bilgisinin genel açıklaması </description>
+        <condition>koşullu</condition>
+    </element>
+    <element name="gmd:status" id="28.0">
+        <label>Durum</label>
+        <description>kaynakların durumu</description>
+    </element>
+    <element name="gmd:supplementalInformation" id="46.0">
+        <label>Tamamlayıcı bilgi</label>
+        <description>Veri kümesi hakkındaki herhangi bir tanımlayıcı bilgi</description>
+    </element>
+    <element name="gmd:temporalElement" id="337.0">
+        <label>Zamansal eleman</label>
+        <description>İlgili obje alanının zamansal bileşenini sağlar</description>
+        <condition>koşullu</condition>
+    </element>
+    <element name="gmd:textGroup" id="602.0">
+        <label>MetinGrubu</label>
+        <description>MetinGrubu</description>
+    </element>
+    <element name="gmd:thesaurusName" id="55.0">
+        <label>Sözlük ismi</label>
+        <description>Sözlük veya benzer bir güvenilir kaynakta resmi olarak kayıtlı isim </description>
+    </element>
+    <element name="gmd:title" id="360.0">
+        <label>Başlık</label>
+        <description>kaynak alıntısı yapanın ismi</description>
+        <condition>zorunlu</condition>
+    </element>
+    <element name="gmd:title" id="507.0" context="gmd:MD_Legislation">
+        <label>Başlık</label>
+        <description>Resmi başlığa referans</description>
+    </element>
+    <element name="gmd:toneGradation" id="265.0">
+        <label>Tone graditation***</label>
+        <description>Grid verisindeki soyut değerlerin sayısı</description>
+    </element>
+    <element name="gmd:topicCategory" id="41.0">
+        <label>Başlık kategorisi</label>
+        <description>Veri kümesinin ana teması</description>
+        <condition>zorunlu</condition>
+    </element>
+    <element name="gmd:MD_TopicCategoryCode">
+        <label>Konu kategori kodu</label>
+        <description>Uygun coğrafik veri kümelerinin araştırılması ve gruplandırılmasına yardımcı
+            olmak için yüksek seviye coğrafik veri tematik sınıflandırması. Grup anahtar kelimeleri
+            de kullanılabilir. Listelenmiş örnekler çok kapsamlı değildir.Genel kategoriler arasında
+            üst üste binme olduğu anlaşılmış olup ve kullanıcının en uygun olanı seçmeye
+            yönelendirildiğini UNUTMAYINIZ. </description>
+    </element>
+    <element name="gmd:topologyLevel" id="177.0">
+        <label>Topoloji seviyesi</label>
+        <description>Mekansal ilişkilerin karmaşıklık derecesini belirten kod </description>
+    </element>
+    <element name="gmd:transferOptions" id="273.0">
+        <label>Transfer seçenekleri</label>
+        <description>Dağıtımcıdan elde edilen bir kaynağın teknik anlam ve ortam bilgisini sağlar </description>
+    </element>
+    <element name="gmd:transferSize" id="276.0">
+        <label>Transfer boyu</label>
+        <description>Belirli transfer biçimindeki bir birimin tahmini boyutu (megabyte olarak
+            gösterimi) Transfer boyu &gt; 0.0</description>
+    </element>
+    <element name="gmd:transformationDimensionDescription" id="168.0">
+        <label>Transformasyon boyut tanımı</label>
+        <description>Grid boyutlarının mekansal olduğu bilgilerin tanımı </description>
+    </element>
+    <element name="gmd:transformationDimensionMapping" id="169.0">
+        <label>Transformasyon boyut haritalaması</label>
+        <description>Hangi grid boyutlarının mekansal boyut olduğunun bilgisi </description>
+    </element>
+    <element name="gmd:transformationParameterAvailability" id="161.0">
+        <label>Dönüşüm Parametresi Kullanılabilirliği</label>
+        <condition>zorunlu</condition>
+        <description>Görüntü koordinatları ve coğrafi veya harita koordinatları arasındaki dönüşüm
+            parametrelerinin bulunup bulunmadığını belirtir</description>
+    </element>
+    <element name="gmd:triangulationIndicator" id="251.0">
+        <label>Üçgenleme Göstergesi</label>
+        <description>Görüntü üzerinde üçgenlemenin yapılıp yapılmadığını gösterir</description>
+    </element>
+    <element name="gmd:turnaround" id="302.0">
+        <label>Dönüş Süresi</label>
+        <description>Bir siparişin yerine getirilmesi için geçen tipik dönüş süresi</description>
+    </element>
+    <element name="gmd:type" id="54.0">
+        <label>Tip</label>
+        <description>Benzer anahtar kelimeleri gruplamak için kullanılan ifade</description>
+    </element>
+    <element name="gmd:type" id="540.0" context="gmd:MD_CodeDomain">
+        <label>Tip</label>
+        <description>Alan kodunun veri tipi</description>
+    </element>
+    <element name="gmd:type" id="543.0" context="gmd:MD_Type">
+        <label>Tip tanımı</label>
+        <description>Veri tipi tanımı</description>
+        <help>Data type definition, formal of informal (i.e. Text12, Line)</help>
+    </element>
+    <element name="gmd:units" id="262.0">
+        <label>Değer birimi</label>
+        <description>Algılayıcının dalgaboylarının belirtildiği birim</description>
+    </element>
+    <element name="gmd:unitsOfDistribution" id="275.0">
+        <label>Dağıtım birimi</label>
+        <description>Verinin sunum şekilleri; tile'lar, katmanlar, coğrafi alanlar,
+            vs.</description>
+    </element>
+    <element name="gmd:updateScope" id="146.0">
+        <label>Güncelleme kapsamı</label>
+        <description>İdamenin uygulandığı verinin kapsamı</description>
+    </element>
+    <element name="gmd:updateScopeDescription" id="147.0">
+        <label>Güncelleme kapsamı tanımı</label>
+        <description>Kaynağın genişliği veya sınırı hakkındaki ek bilgi</description>
+    </element>
+    <element name="gmd:usageDateTime" id="64.0">
+        <label>Kullanım tarih/zamanı</label>
+        <description>Kaynak ve/veya kaynak serisinin ilk kullanım veya kullanım aralığının tarih ve
+            zamanı (YYYY-MM-DDThh:mm:ss)</description>
+    </element>
+    <element name="gmd:useConstraints" id="71.0">
+        <label>Kullanım kısıtlamaları</label>
+        <description>Gizliliğin veya fikri mülkiyetin korunmasını sağlamak için kullanılan
+            kısıtlamalarla birlikte kaynağın kullanımı hakkındaki özel şartlar veya sınırlamalar
+            veya uyarılar</description>
+    </element>
+    <element name="gmd:useLimitation" id="68.0">
+        <label>Kullanım sınırlamaları</label>
+        <description>Kaynağın kullnım yerini etkileyen sınırlamalar. Örnek, _navigasyon için
+            kullnılamaz_</description>
+    </element>
+    <element name="gmd:userContactInfo" id="66.0">
+        <label>Kullanıcı iletişim bilgileri</label>
+        <description>Kaynak ve/veya kaynakları kullanan kişi ve kurumların ın tespit edilmesi ve
+            iletişim kurulması</description>
+        <condition>mandatory</condition>
+    </element>
+    <element name="gmd:userDefinedMaintenanceFrequency" id="145.0">
+        <label>Kullanıcı tanımlı idame sıklığı</label>
+        <description>Tanımlanmış olanlar haricindeki idame periyodu</description>
+    </element>
+    <element name="gmd:userDeterminedLimitations" id="65.0">
+        <label>Kullanıcı tanımlı sınırlamalar</label>
+        <description>Kullanıcı tarafından kaynak ve/veya kaynak serilerine uygun olmadığı
+            belirlenmiş uygulamalar</description>
+    </element>
+    <element name="gmd:userNote" id="75.0">
+        <label>Kullanıcı notu</label>
+        <description>Kaynak veya metaveriyi elde etmek ve kullanmak için olan yasal kısıtlamaların
+            veya diğer sınırlamalarının ve yasal önkoşulların uygulamasının açıklaması</description>
+        <label>Kullanıcı notu</label>
+    </element>
+    <element name="gmd:value" id="137.0" context="gmd:DQ_QuantitativeResult">
+        <condition>mandatory</condition>
+        <label>Değer</label>
+        <description>İçeriği kullanılan değerlendirme prosedürü ile belirlenen nicel değer veya
+            değerler</description>
+    </element>
+    <element name="gmd:value">
+        <label>Değer</label>
+        <description/>
+    </element>
+    <element name="gmd:value" id="544.0" context="gmd:MD_Type">
+        <label>Değer</label>
+        <description>Veri tipi değeri</description>
+    </element>
+    <element name="gmd:valueType" id="134.0">
+        <label>Veri tipi</label>
+        <description>Nicel kalite için geçerli değer seviyesi veya değerler aralığı</description>
+    </element>
+    <element name="gmd:valueUnit" id="135.0">
+        <label>Veri birimi</label>
+        <description>Bir veri kalite sonucunu raporlamak için kullanılan değer birimi</description>
+        <condition>zorunlu</condition>
+    </element>
+    <element name="gmd:version" id="208.2" context="gmd:RS_Identifier">
+        <label>Versiyon</label>
+        <description>İsim uzayları için versiyon tanımlayıcı</description>
+    </element>
+    <element name="gmd:version" id="286.0">
+        <label>Versiyon</label>
+        <description>Biçimin versiyonu (tarih, sayı, vs.)</description>
+        <condition>zorunlu</condition>
+    </element>
+    <element name="gmd:verticalElement" id="338.0">
+        <label>Dikey elaman</label>
+        <description>Referans alınan objenin kapsamının dikey bileşenini belirtir</description>
+        <condition>koşullu</condition>
+    </element>
+    <element name="gmd:voice" id="408.0">
+        <label>Ses</label>
+        <description>Kişilerin sorumlu organizasyon veya kişilerle konuşabilmesini sağlayan telefon
+            numarası</description>
+    </element>
+    <element name="gmd:volumes" id="295.0">
+        <label>Sesler</label>
+        <description>Tanımlanan medyadaki öğelerin sayısı</description>
+    </element>
+    <element name="gmd:westBoundLongitude" id="344.0">
+        <label>Batı sınırı</label>
+        <description>Veri setinin kapsamındaki en batıdaki koordinat, ondalık derece cinsinden
+            boylam olarak ifade edilir (pozitive doğu)</description>
+        <condition>zorunlu</condition>
+    </element>
+    <element name="gml:beginPosition">
+        <label>Başlangıç tarihi</label>
+        <description>2007-09-12T15:00:00 olarak biçimlendirilmiştir
+            (YYYY-MM-DDTHH:mm:ss)</description>
+    </element>
+
+    <element name="gml:endPosition">
+        <label>Bitiş tarihi</label>
+        <description>2007-09-12T15:00:00 olarak biçimlendirilmiştir
+            (YYYY-MM-DDTHH:mm:ss)</description>
+    </element>
+
+    <element name="gml:relatedTime">
+        <label>İlişkili zaman</label>
+        <description>Belli bir zamanın objeye olan ilişkisini tanımlar</description>
+    </element>
+
+    <element name="gml:coordinates">
+        <label>Koordinatlar</label>
+        <description>Demetlerin veya koordinatların bir dizisini kaydetmek için
+            kullanılır</description>
+    </element>
+
+    <element name="gml:Polygon">
+        <label>Poligon</label>
+        <description>Bir gml:Poligon, tek bir yüzey yaması ile tanımlanan özel bir yüzeydir. Bu
+            yamanın sınırı eşdüzlemli olup, poligon kendi içinde düzlemsel enterpolsayonu
+            kullanır.</description>
+    </element>
+
+    <element name="gml:Point">
+        <label>Nokta</label>
+        <description>Bir gml:Nokta, tek koordinat demeti ile tanımlanır</description>
+        <example>74. -37.</example>
+    </element>
+
+    <element name="gml:LineString">
+        <label>Çizgi</label>
+        <description>Bir gml:LineString, doğrusal enterpolasyonlu tek bir segmentten oluşan özel bir
+            yaydır. Aralarında doğrusal enterpolasyon olan iki veya daha fazla koordinat demeti ile
+            tanımlanır.</description>
+    </element>
+
+    <element name="gml:LinearRing">
+        <label>Doğrusal halka</label>
+        <description>Bir gml:LinearRing, aralarında doğrusal enterpolasyon olan 4 veya daha fazla
+            koordinat demeti ile tanımlanır; ilk ve son koordinatlar çakışmalıdır.</description>
+    </element>
+
+    <element name="gml:exterior">
+        <label>Dış sınır</label>
+        <description>3 boyutlu bir cismin dış sınırı</description>
+    </element>
+
+    <element name="gml:interior">
+        <label>İç sınır</label>
+        <description>3 boyutlu bir cismin iç sınırı</description>
+    </element>
+
+
+    <element name="gml:begin">
+        <label>Başlangıç</label>
+        <description/>
+    </element>
+    <element name="gml:end">
+        <label>Bitiş</label>
+        <description/>
+    </element>
+    <element name="gml:duration">
+        <label>Süre</label>
+        <description/>
+    </element>
+    <element name="gml:timeInterval">
+        <label>Zaman aralığı</label>
+        <description/>
+    </element>
+    <element name="gml:TimeInstant">
+        <label>Anlık zaman</label>
+        <description/>
+    </element>
+    <element name="gml:TimePosition">
+        <label>Zaman pozisyonu</label>
+        <description/>
+    </element>
+    <element name="gml:TimePeriod">
+        <label>Zaman periyodu</label>
+        <description/>
+    </element>
+    <element name="gml:TimeNode">
+        <label>Zaman nodu</label>
+        <description/>
+    </element>
+    <element name="gml:TimeEdge">
+        <label>Zaman sınırı</label>
+        <description/>
+    </element>
+    <element name="gml:ProjectedCRS">
+        <label>Tahmini CRS</label>
+        <description/>
+    </element>
+
+    <element name="gml:id">
+        <label>Tanımlayıcı</label>
+        <description>Tek tanımlayıcı</description>
+    </element>
+
+    <element name="gml:id" id="191.0" context="gmd:MD_CRS">
+        <label>Elipsoit</label>
+        <description>Kullanılan elipsoidin tanımı</description>
+        <help>Kullanılan elipsoidin tanımı</help>
+    </element>
+    <element name="id" id="191.0">
+        <label>Tanımlayıcı</label>
+        <description>Tek tanımlayıcı</description>
+    </element>
+
+    <element name="srv:SV_ServiceIdentification">
+        <label>Hizmet Tanımlaması (19119)</label>
+        <description>ISO 19119-2005 Hizmet Tanımlaması</description>
+    </element>
+    <element name="srv:SV_ParameterDirection">
+        <label>Parametre yönü</label>
+    </element>
+    <element name="srv:serviceType">
+        <!-- readonly="true" -->
+        <label>Hizmet Tipi</label>
+        <description>Hizmetlerin kaydından servis tipi ismi. Mesela, GeneralName'in nameSpace ve
+            name niteliklerinin değeri 'OGC' and 'catalogue' olabilir</description>
+        <helper>
+            <option value="OGC:WMS">OGC Web Map Service (OGC:WMS)</option>
+            <option value="OGC:WFS">OGC Web Feature Service (OGC:WFS)</option>
+            <option value="OGC:WCS">OGC Web Coverage Service (OGC:WCS)</option>
+            <option value="W3C:HTML:DOWNLOAD">Download (W3C:HTML:DOWNLOAD)</option>
+            <option value="W3C:HTML:LINK">Information (W3C:HTML:LINK)</option>
+            <!-- INSPIRE Service type defined in MD IR / 1.3.1 Spatial data service type
+            <option value="discovery">Discovery Service (discovery)</option>
+            <option value="view">View Service (view)</option>
+            <option value="download">Download Service (download)</option>
+            <option value="transformation">Transformation Service (transformation)</option>
+            <option value="other">Other Services (other)</option> -->
+        </helper>
+    </element>
+    <element name="srv:serviceTypeVersion">
+        <label>Hizmet versiyonu</label>
+        <description>serviceType'a göre arama yapılmasını sağlar. Mesela, sadece OGC Catalogue V1.1
+            hizmetleri ile ilgilenmek isteyebiliriz. Eğer versiyon ayrı bir nitelik olarak
+            tutulursa, kullanıcılar belli bir tipteki hizmetleri versiyonuna bakmadan kolayca
+            araştırabilirler.</description>
+    </element>
+    <element name="srv:accessProperties">
+        <label>Erişim Özellikleri</label>
+        <description>Hizmetin erişilebilirliği hakkındaki bilgi örn. harçlar, kullanılabilirlik,
+            sipariş talimatları</description>
+    </element>
+    <element name="srv:restrictions">
+        <label>Sınırlamalar</label>
+        <description>Hizmete erişim ve hizmet tarafından üretilen verinin dağıtımı ile ilgili hukuki
+            ve güvenlik kısıtlamaları</description>
+    </element>
+    <element name="srv:containsOperations">
+        <label>İçerme İşlemleri</label>
+        <description>Hizmeti oluşturan işlemlerle ilgili bilgiyi sağlar</description>
+    </element>
+    <element name="srv:operatesOn">
+        <label>Çalışma İşlemleri</label>
+        <description>Hizmetin üzerinde çalıştığı veri setleri hakkında bilgi sağlar</description>
+    </element>
+    <element name="srv:operationName">
+        <label>İşlem ismi</label>
+        <description>Bu arayüzü için kullnılan eşsiz tanımlayıcı</description>
+    </element>
+    <element name="srv:SV_OperationMetadata">
+        <label>İşlem</label>
+        <description>İşlem Metaverisi</description>
+    </element>
+    <element name="srv:DCP">
+        <label>Dağıtık Hesaplama Platformları</label>
+        <description>İşlemin uygulandığı dağıtık hesaplama platformları</description>
+    </element>
+    <element name="srv:operationDescription">
+        <label>İşlem Tanımı</label>
+        <description>İşlemin amacını ve sonucunu tanımlayan serbest metin</description>
+    </element>
+    <element name="srv:invocationName">
+        <label>Çağrı İsmi</label>
+        <description>DCP içinden bu arayüzü çağırmak için kullanılan isim. Bütün DCPler için bu isim
+            aynıdır</description>
+    </element>
+    <element name="srv:parameters">
+        <label>Parametreler</label>
+        <description>Bu arayüz için gerekli olan parametreler</description>
+    </element>
+    <element name="srv:SV_Parameter">
+        <label>Parametre</label>
+        <description>Bu arayüz için gerekli olan parametreler</description>
+    </element>
+    <element name="srv:direction">
+        <label>Yön</label>
+    </element>
+    <element name="srv:valueType">
+        <label>Değer tipi</label>
+    </element>
+    <element name="srv:connectPoint">
+        <label>Bağlantı Noktası</label>
+        <description>Servis ara yüzüne erişim için bağlantı noktası</description>
+    </element>
+    <element name="srv:dependsOn">
+        <label>Bağlı operasyon listesi</label>
+        <description>Üzerinde çalışılan operasyon gerçekleşmeden önce acil olarak tamamlanacak olan
+            operasyonların listesi</description>
+    </element>
+    <element name="srv:providerName">
+        <label>Kaynak sağlayıcı</label>
+        <description>Organizasyonu tanımlayıcı belirteç</description>
+    </element>
+    <element name="srv:serviceContact">
+        <label>Servis Erişim Bilgileri</label>
+        <description>Servis sağlayıcıya erişim bilgileri</description>
+    </element>
+    <element name="srv:name">
+        <label>İsim</label>
+        <description>Zincir işlem veya parametre için kullanılan servisin ismi</description>
+    </element>
+    <element name="srv:description">
+        <label>Tanım</label>
+        <description>Zincirdeki servislerin kısa açıklamaları ve parametrelerin sonuçları veya
+            rollerin çıktıları</description>
+    </element>
+    <element name="srv:optionality">
+        <label>Parametre Gerekliliği</label>
+        <description>Parametre gerekliliği</description>
+    </element>
+    <element name="srv:repeatability">
+        <label>Parametre tekrar etme</label>
+        <description>Parametrelerden bir veya daha fazlasının sağlanabilmesi bilgisi</description>
+    </element>
+    <element name="srv:coupledResource">
+        <label>Çiftleyen kaynak</label>
+        <description>Bu servis ile çoklayan servisin detayları</description>
+        <inspireInfo>Optional in INSPIRE</inspireInfo>
+    </element>
+    <element name="srv:SV_CoupledResource">
+        <label>Çiftleyen kaynak</label>
+        <description>Bu servis ile çoklayan servisin detayları</description>
+    </element>
+    <element name="srv:identifier">
+        <label>Belirteç</label>
+        <description>IOperasyonun uyguladığı servisin kaynağının belirteci</description>
+    </element>
+    <element name="srv:couplingType">
+        <label>Çiftleme türü</label>
+        <description>Çiftleme türü</description>
+    </element>
+    <element name="srv:extent">
+        <label>Kapsam-Uzantı</label>
+        <description>Servisin coğrafi kapsamı, uzantısı</description>
+    </element>
+    <element name="srv:keywords">
+        <label>Anahtar Kelimeler</label>
+        <description>Servisi tanımlayan anahtar kelimeler</description>
+    </element>
+    <element name="gmd:locale">
+        <label>Diğer Dil</label>
+        <description>Bu bölümü diğer metaveri dilini tanımlamak için kullanın</description>
+    </element>
+    <element name="gmd:describes">
+        <label>Tanımlar</label>
+        <description>Tanımlar</description>
+    </element>
+    <element name="gmd:propertyType">
+        <label>Ayniyat-Mülkiyet Türü</label>
+        <description>Ayniyat-Mülkiyet Türü</description>
+    </element>
+    <element name="gmd:PT_Locale">
+        <label>Lokal</label>
+        <description>Lokal</description>
+    </element>
+    <element name="gmd:PT_LocaleContainer">
+        <label>PT_LokalTaşıyıcı</label>
+        <description>PT_LocaleContainer</description>
+    </element>
+    <element name="gmd:featureType">
+        <label>Feature türü</label>
+        <description>Veri içinde geçen, sözü edilen feature katalogunun içindeki feature ların alt
+            kümesi</description>
+    </element>
+    <element name="gmd:featureTypes">
+        <label>Feature türü</label>
+        <description>Veri içinde geçen, sözü edilen feature katalogunun içindeki feature ların alt
+            kümesi</description>
+    </element>
+    <element name="gmd:featureAttribute">
+        <label>Feature özniteliği</label>
+        <description/>
+    </element>
+    <element name="gmd:DS_Association">
+        <label>DS_ilişki-Kurum</label>
+        <description>DS_ilişki-Kurum</description>
+    </element>
+    <element name="gmd:DS_DataSet">
+        <label>DS_veriseti</label>
+        <description>DS_veriseti</description>
+    </element>
+    <element name="gmd:DS_Initiative">
+        <label>DS_teşebbüs</label>
+        <description>DS_teşebbüs</description>
+    </element>
+    <element name="gmd:DS_OtherAggregate">
+        <label>DS_DiğerToplam</label>
+        <description>DS_DiğerToplam</description>
+    </element>
+    <element name="gmd:DS_Platform">
+        <label>DS_Platform</label>
+        <description>DS_Platform</description>
+    </element>
+    <element name="gmd:DS_ProductionSeries">
+        <label>DS_Üretimserisi</label>
+        <description>DS_üretimserisi</description>
+    </element>
+    <element name="gmd:DS_Sensor">
+        <label>DS_Sensör</label>
+        <description>DS_Sensör</description>
+    </element>
+    <element name="gmd:DS_Series">
+        <label>DS_Seriler</label>
+        <description>DS_Seriler</description>
+    </element>
+    <element name="gmd:DS_StereoMate">
+        <label>DS_Steryoeşi</label>
+        <description>DS_Steryoeşi</description>
+    </element>
+    <element name="gmd:languageCode">
+        <label>Dil</label>
+        <description>Dil kodu</description>
+    </element>
+    <element name="gmd:LanguageCode">
+		<label>ISO Language code</label>
+		<description>Language code</description>
+	</element>
+    <element name="gmd:characterEncoding">
+        <label>Karakter kodlaması</label>
+        <description>Karakter kodlaması</description>
+    </element>
+    <element name="uuidref">
+        <label>Metaveri belirteçi-uuid</label>
+        <description>Metaveri belirteçi</description>
+    </element>
+    <element name="uom">
+        <label>Ölçüm Birimi</label>
+        <description/>
+        <helper>
+            <option value="m">meters</option>
+        </helper>
+    </element>
+    <element name="gco:Record">
+        <label>Kayıt</label>
+        <description/>
+    </element>
+    <element name="gco:Binary">
+        <label>Binary</label>
+        <description/>
+    </element>
+    <element name="gco:MemberName">
+        <label>Üye adı</label>
+        <description/>
+    </element>
+    <element name="gco:aName">
+        <label>İsim</label>
+        <description/>
+    </element>
+    <element name="gco:aName" context="gco:TypeName">
+        <label>Tür adı</label>
+        <description/>
+        <helper>
+            <option value="BOOLEAN">BOOLEAN</option>
+            <option vaue="BYTE">BYTE</option>
+            <option value="CHARACTER">CHARACTER</option>
+            <option value="DATE">DATE</option>
+            <option value="DATETIME">DATETIME</option>
+            <option value="DOUBLE">DOUBLE</option>
+            <option value="FLOAT">FLOAT</option>
+            <option value="INTEGER">INTEGER</option>
+            <option value="NUMERIC">NUMERIC</option>
+            <option value="REAL">REAL</option>
+            <option value="SERIAL">SERIAL</option>
+            <option value="VARCHAR">VARCHAR</option>
+            <option value="TEXT">TEXT</option>
+        </helper>
+    </element>
+    <element name="gco:attributeType">
+        <label>Öznitelik tipi</label>
+        <description/>
+    </element>
+    <element name="gco:TypeName">
+        <label>Tür adı</label>
+        <description/>
+    </element>
+    <element name="gco:LocalName">
+        <label>Lokal ismi</label>
+        <description/>
+    </element>
+    <element name="gco:ScopedName">
+        <label>Scoped name</label>
+        <description/>
+    </element>
+    <element name="gmd:has">
+        <label>Has</label>
+        <description>Has</description>
+    </element>
+    <element name="gmd:MD_PixelOrientationCode">
+        <label>Piksel oryantasyon kodu</label>
+        <description>piksel içindeki nokta, pikselin dünya üzerindeki lokasyonunu
+            belirtir</description>
+    </element>
+    <element name="gmd:MD_ObligationCode">
+        <label>Zorunluluk kodu</label>
+        <description>Varlığın veya elementin zorunluluğu</description>
+    </element>
+    <element name="gmd:maximumOccurrence">
+        <label>En fazla gerçekleşme</label>
+        <description>Eklenmiş elemanın enfazla gerçekleşmesi</description>
+    </element>
+    <element name="gco:localName">
+        <label>İsim</label>
+        <description/>
+    </element>
+    <element name="gmd:composedOf">
+        <label>Komsozisyonu</label>
+        <description>Komsozisyonu</description>
+    </element>
+    <element name="gmd:partOf">
+        <label>Bağlıolduğu</label>
+        <description>Bağlıolduğu</description>
+    </element>
+    <element name="gmd:seriesMetadata">
+        <label>Metaveriserisi</label>
+        <description>Metaveriserisi</description>
+    </element>
+    <element name="gmd:subset">
+        <label>Altküme</label>
+        <description>Altküme</description>
+    </element>
+    <element name="gmd:superset">
+        <label>Üstküme</label>
+        <description>Üstküme</description>
+    </element>
+    <element name="gmd:CI_RoleCode">
+        <label>Rol kodu</label>
+        <description/>
+    </element>
+    <element name="gts:TM_PeriodDuration">
+        <label>Periyod süresi-duration</label>
+        <description> Süre veri tipi zaman aralığı belirtmek için kullanılır Zaman aralığı aşağıdaki
+            açıklamalar ile "PnYnMnDTnHnMnS" olarak kullanılır:
+            * P periyot (gerekli) 
+            * nY yıl sayısını 
+            * nM ay sayısı 
+            * nD gün sayısı 
+            * T zaman bölümünün başlangıcıbı belirtir 
+            * nH saat sayısı 
+            * nM dakika sayısı 
+            * nS saniye sayısı
+        </description>
+    </element>
+    <element name="gco:CharacterString">
+        <label>Text</label>
+        <description/>
+    </element>
+    <element name="gco:nilReason">
+        <label>Nil reason attribute</label>
+        <description/>
+    </element>
+    <element name="srv:DCPList">
+        <label>Dağıtılmış hesaplama platformları listesi</label>
+    </element>
+    <element name="gmd:verticalCRS">
+        <label>Dikey CRS</label>
+        <description>Provides information about the origin from which the maximum and minimum
+            elevation values are measured</description>
+    </element>
+    <element name="gmx:FileName">
+        <label>Dosya Adı</label>
+        <description>Dosya adı ve kaynak URL</description>
+    </element>
+    <element name="src">
+        <label>Kaynak URL</label>
+        <description>Dokümanın URL si</description>
+    </element>
+</labels>

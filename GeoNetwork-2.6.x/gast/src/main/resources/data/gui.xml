@@ -1,0 +1,286 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<gui>
+	<class package="org.fao.gast.gui.panels"/>
+	<precon type="stopped">
+		<image>22x22/stop.png</image>
+		<tip>${1}</tip>
+	</precon>
+	
+	<precon type="restart">
+		<image>22x22/reload.png</image>
+		<tip>${2}</tip>
+	</precon>
+	
+	<precon type="running">
+		<image>22x22/launch.png</image>
+		<tip>${3}</tip>
+	</precon>
+	
+	<!-- ========================================================== -->
+	<!-- Configuration -->
+	<!-- ========================================================== -->
+	
+	<container>
+		<image>22x22/configure.png</image>
+		<label>${4}</label>
+		
+		<!-- Site ID - - - - - - - - - - - - - - - - - - - - - - - --> 
+		
+		<form>
+			<id>siteid</id>
+			<image>16x16/package_settings.png</image>
+			<label>${51}</label>
+			<title>${52}</title>
+			<class>config.siteid.MainPanel</class>
+			<description>
+				${50}
+			</description>
+			
+			<button>
+				<image>16x16/filesave.png</image>
+				<label>Change</label>
+				<action>change</action>
+			</button>
+			
+			<precon type="stopped">
+				GeoNetwork must be stopped
+			</precon>
+		</form>
+		
+		<!-- Jetty - - - - - - - - - - - - - - - - - - - - - - - - -->
+<!--		
+		<form>
+			<id>jetty</id>
+			<image>16x16/package_settings.png</image>
+			<label>Jetty</label>
+			<title>${5}</title>
+			<class>config.jetty.MainPanel</class>
+			<description>
+				${6}
+			</description>
+			
+			<button>
+				<image>16x16/filesave.png</image>
+				<label>${7}</label>
+				<action>save</action>
+			</button>
+			
+			<precon type="restart">
+				${8}
+			</precon>
+		</form>
+-->
+		
+		<!-- DBMS - - - - - - - - - - - - - - - - - - - - - - - - - -->
+		
+		<form>
+			<id>dbms</id>
+			<image>16x16/package_settings.png</image>
+			<label>${9}</label>
+			<title>${10}</title>
+			<class>config.dbms.MainPanel</class>
+			<description>
+				${11}
+			</description>
+			
+			<button>
+				<image>16x16/filesave.png</image>
+				<label>${7}</label>
+				<action>save</action>
+			</button>
+			
+			<precon type="restart">
+				${45}
+			</precon>
+		</form>
+	</container>
+	
+	<!-- ========================================================== -->
+	<!-- Management -->
+	<!-- ========================================================== -->
+	
+	<container>
+		<image>22x22/gear.png</image>
+		<label>${12}</label>
+		
+		<!-- Import - - - - - - - - - - - - - - - - - - - - - - -->
+		
+		<form>
+			<id>mefimport</id>
+			<image>16x16/run.png</image>
+			<label>${13}</label>
+			<title>${14}</title>
+			<class>manag.mefimport.MainPanel</class>
+			<description>
+			${15}
+			</description>
+			
+			<button>
+				<image>16x16/down.png</image>
+				<label>${13}</label>
+				<action>import</action>
+			</button>
+			
+			<precon type="running">
+				${16}
+			</precon>
+		</form>
+		
+		<!-- Export  - - - - - - - - - - - - - - - - - - - - - -->
+		
+		<form>
+			<id>mefexportc</id>
+			<image>16x16/run.png</image>
+			<label>${17}</label>
+			<title>${18}</title>
+			<class>manag.mefexport.MainPanel</class>
+			<description>
+				${19}
+			</description>
+			
+			<button>
+				<image>16x16/up.png</image>
+				<label>${17}</label>
+				<action>export</action>
+			</button>
+			
+			<precon type="running">
+				${46}
+			</precon>
+		</form>
+		
+		<!-- Metadata Sync - - - - - - - - - - - - - - - - - - - - - - -->
+		
+		<form>
+			<id>mdsync</id>
+			<image>16x16/run.png</image>
+			<label>${20}</label>
+			<title>${21}</title>
+			<class>manag.mdsync.MainPanel</class>
+			<description>
+			${22}
+			</description>
+			
+			<button>
+				<image>16x16/run.png</image>
+				<label>${23}</label>
+				<action>sync</action>
+			</button>
+			
+			<precon type="stopped">
+				${24}
+			</precon>
+		</form>
+		
+		<!-- 115 to 139 - - - - - - - - - - - - - - - - - - - - - - -->
+		
+		<form>
+			<id>115to139</id>
+			<image>16x16/run.png</image>
+			<label>${25}</label>
+			<title>${26}</title>
+			<class>manag.conversion.MainPanel</class>
+			<description>
+				${27}
+			</description>
+			
+			<button>
+				<image>16x16/run.png</image>
+				<label>${28}</label>
+				<action>convert</action>
+			</button>
+			
+			<precon type="stopped">
+				${29}
+			</precon>
+		</form>
+		
+	</container>
+		
+	<!-- ========================================================== -->
+	<!-- Database -->
+	<!-- ========================================================== -->
+	
+	<container>
+		<image>22x22/hdd_unmount.png</image>
+		<label>${30}</label>
+		
+		<!-- Setup - - - - - - - - - - - - - - - - - - - - - - - - - -->
+		
+		<form>
+			<id>setup</id>
+			<image>16x16/hdd_unmount.png</image>
+			<label>${31}</label>
+			<title>${32}</title>
+			<class>database.setup.MainPanel</class>
+			<description>
+				${33}
+			</description>
+			
+			<button>
+				<image>16x16/run.png</image>
+				<label>${31}</label>
+				<action>setup</action>
+			</button>
+			
+			<precon type="stopped">
+			${34}
+			</precon>
+		</form>
+		
+		<!-- Sample data - - - - - - - - - - - - - - - - - - - - - - - - -->
+		
+		<form>
+			<id>sampleData</id>
+			<image>16x16/hdd_unmount.png</image>
+			<label>${35}</label>
+			<title>${36}</title>
+			<class>database.sample.MainPanel</class>
+			<description>
+				${37}
+			</description>
+			
+			<button>
+				<image>16x16/run.png</image>
+				<label>${13}</label>
+				<action>import</action>
+			</button>
+			
+			<precon type="running">
+				${38}
+			</precon>
+		</form>
+	</container>
+	
+	<!-- ========================================================== -->
+	<!-- Migration -->
+	<!-- ========================================================== -->
+	
+	<container>
+		<image>22x22/vcs_update.png</image>
+		<label>${39}</label>
+		
+		<!-- Old GeoNetwork - - - - - - - - - - - - - - - - - - - - - -->
+		<form>
+			<id>fromOld</id>
+			<image>16x16/kget.png</image>
+			<label>${40}</label>
+			<title>${41}</title>
+			<class>migration.oldinst.MainPanel</class>
+			<description>
+				${42}
+			</description>
+			
+			<button>
+				<image>16x16/kget.png</image>
+				<label>${43}</label>
+				<action>migrate</action>
+			</button>
+			
+			<precon type="stopped">
+				${44}
+			</precon>
+		</form>
+	</container>
+</gui>

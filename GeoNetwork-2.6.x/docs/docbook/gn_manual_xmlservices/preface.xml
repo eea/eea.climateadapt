@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.4//EN"
+                      "http://www.docbook.org/xml/4.4/docbookx.dtd">
+<book>
+    <preface
+        id="preface">
+        <title>Preface</title>
+        <formalpara>
+            <title>About this Project</title>
+            <para>This document provides guidelines to use GeoNetwork opensource
+                XML services to develop third party applications. The GeoNetwork project 
+				started out as a Spatial Data Catalogue System for the <ulink
+                    url="http://www.fao.org">Food and Agriculture organisation of the United Nations
+                    (FAO)</ulink>, the <ulink
+                    url="http://vam.wfp.org">United Nations World Food Programme (WFP)</ulink> and
+                the <ulink
+                    url="http://www.unep.org">United Nations Environmental Programme (UNEP)</ulink>.
+                At present the project is widely used as the basis of Spatial Data Infrastructures
+                all around the world. The project is part of the Open Source Geospatial Foundation
+                (<glossterm linkend="glos-osgeo">OSGeo</glossterm>) and can be found at <ulink
+                    url="http://geonetwork-opensource.org" />. </para>
+        </formalpara>
+        <formalpara>
+            <title>License Information</title>
+            <para> Copyright (c) 2007-2010 Open Source Geospatial Foundation (<ulink
+                    url="http://www.osgeo.org">OSGeo</ulink>). </para>
+        </formalpara>
+        <para>The GeoNetwork opensource Documentation is released under a <glossterm linkend="glos-cc">Creative Commons</glossterm> license with the following conditions.</para>
+        <para>You are free to Share (to copy, distribute and transmit) and to Remix (to adapt) the documentation under the following conditions: <itemizedlist>
+                <listitem>
+                    <para>Attribution. You must attribute GeoNetwork opensource documentation to `GeoNetwork opensource developers <ulink url="http://geonetwork-opensource.org" />.</para>
+                </listitem>
+                <listitem>
+                    <para>Share Alike. If you alter, transform, or build upon this work, you may distribute the resulting work only under the same or similar license to this one.</para>
+                </listitem>
+            </itemizedlist></para>
+            
+            <para>With the understanding that: <itemizedlist>
+                <listitem>
+                    <para>Any of the above conditions can be waived if you get permission from the copyright holder.</para>
+                </listitem>
+                <listitem>
+                    <para>Public Domain. Where the work or any of its elements is in the public domain under applicable law, that status is in no way affected by the license.</para>
+                </listitem>
+            </itemizedlist></para>
+            <para>Other Rights. In no way are any of the following rights affected by the license: <itemizedlist>
+                <listitem>
+                    <para>Your fair dealing or fair use rights, or other applicable copyright exceptions and limitations.</para>
+                </listitem>
+                <listitem>
+                    <para>The author's moral rights.</para>
+                </listitem>
+                <listitem>
+                    <para>Rights other persons may have either in the work itself or in how the work is used, such as publicity or privacy rights.</para>
+                </listitem>
+            </itemizedlist></para>
+		<para>
+		Notice: For any reuse or distribution, you must make clear to others the license terms of this work. The best way to do this is with a link to this web page.
+		</para.
+        <para>You may obtain a copy of the License at <ulink
+                url="http://creativecommons.org/licenses/by-sa/3.0/">Creative Commons Attribution-ShareAlike 3.0 Unported License</ulink></para>
+        <para>The document is written in DocBook format for consistency and portability.</para>
+        <formalpara>
+            <title>Author Information</title>
+            <para>This framework and documentation was written by the GeoNetwork opensource
+                Developers. If you have questions, found a bug or have enhancements, please contact
+                us through the GeoNetwork opensource Development Mailing list at
+                    <email>geonetwork-devel@lists.sourceforge.net</email></para>
+        </formalpara>
+        <para />
+        <para><inlinemediaobject
+                id="gn_logo"><imageobject><imagedata
+                        fileref="images/GeoNetwork_opensource_logo.jpg"
+                        width="4cm"
+                        contentwidth="4cm" /></imageobject></inlinemediaobject></para>
+        <para />
+        <para><inlinemediaobject
+                id="osgeo_logo"><imageobject><imagedata
+                        fileref="images/OSGeo_logo.jpg"
+                        width="4cm"
+                        contentwidth="4cm" /></imageobject></inlinemediaobject></para>
+    </preface>
+</book>

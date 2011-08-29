@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<strings>
+    <heading>Error de privilegis</heading>
+    <message>Potser no té privilegis suficients per realitzar aquesta operació.</message>
+	<button>Enrere</button>
+</strings>
+

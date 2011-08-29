@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<langpack>
+    <str id="core" txt="Çekirdek Paket"/>
+    <str id="core.description" txt="GeoNetwork açık kaynak uygulaması. Bu uygulama, Mekansal Veri Kataloğu web uygulamasıdır."/>
+    <str id="idSampleM" txt="Örnek üstveri"/>
+    <str id="idSampleM.description" txt="Örnek üstveriyi test için içeri alınız."/>
+    <str id="geoserver" txt="GeoServer web harita sunucusu"/>
+    <str id="geoserver.description" txt="GeoServer, bilgilerinizin Geospatial web ile bağlatısını sağlayacak bir açık kaynak sunucusudur. Bu gömülü versiyon, GeoNetwork'de bulunan harita görüntüleyicileri için temel katman sağlayan bir kurulumdur. Bu kurulumu modern bir bilgisayara güvenle kurabilirsiniz. Fakat küçük hafızası olan (256MB RAM'den az) eski bir bilgisayarda kurulum yapmak için dikkatli olmalısınız. Tam çözünürlüklü arkaplan katmanına sahip olmak için GeoNetwork sitesini talimatlara ulaçmak ve dosya indirmek amacıyla kontrol ediniz."/>
+    <str id="csw" txt="CSW test istemcisi"/>
+    <str id="csw.description" txt="GeoNetwork açık kaynak Web 2.0.1 desteği için Katalog Servisi (Catalog Services) sağlar. Bu, CSW 2.0.1 servislerini test etmek için kullanılabilecek olan ayrı bir test uygulamasıdır."/>
+    <str id="src" txt="Kaynak kod"/>
+    <str id="src.description" txt="GeoNetwork kaynak kodu ve ant derlenmiş betik (ant build script)."/>
+    <str id="ibt" txt="Kurucu derleme araçları"/>
+    <str id="ibt.description" txt="Kurucu veri dosyaları. Bu paketleri kurarak, kurucuyu yaratabileceksiniz."/>        
+</langpack>
+        

@@ -1,0 +1,249 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.4//EN"
+                      "http://www.docbook.org/xml/4.4/docbookx.dtd">
+<book>
+    <chapter id="basic_configuration">
+        <title>Basic configuration</title>
+        <section>
+            <title>System configuration</title>
+            <para>Most of the GeoNetwork system configuration parameters can be changed using the
+                web interface. Those parameters that cannot be changed through the web interface can
+                usually be changed using the <glossterm linkend="glos-gast">GAST</glossterm> application.</para>
+            <important><para>Configuration of these parameters is critically important for a proper 
+                functioning of the GeoNetwork catalogue in an operational context. Failing to 
+                properly change these settings may result in a system that does not function as 
+                expected. For example, downloads may fail to be correctly processed, or metadata 
+                harvesting from other servers may not work.</para></important>
+            <para>To get to the System configuration, you must be logged on as administrator first.
+                Open the Administration page and select System configuration (<xref
+                    linkend="admin_config_where"/>. The link is surrounded with a red rectangle). </para>
+            <important>
+                <para>New installations of GeoNetwork use <literal>admin</literal> for both username
+                    and password. It is important to change this from the Administration page once
+                    you logged on!</para>
+            </important>
+
+            <figure id="admin_config_where">
+                <title>The link to the System configuration page</title>
+                <mediaobject>
+                    <imageobject>
+                        <imagedata fileref="images/admin/web-config-where.png" width="12cm"
+                            align="center"/>
+                    </imageobject>
+                </mediaobject>
+            </figure>
+
+            <para>Clicking the page’s link you will get the set of parameters that you can change
+                    (<xref linkend="admin_config_options"/>). Here follows a detailed description of
+                them: </para>
+
+            <figure id="admin_config_options">
+                <title>The configuration options</title>
+                <mediaobject>
+                    <imageobject>
+                        <imagedata fileref="images/admin/web-config-options.png" width="8.609cm" align="center"/>
+                    </imageobject>
+                </mediaobject>
+            </figure>
+
+            <para>At the bottom of the page there are some buttons with the following purpose: </para>
+            <para>Back Simply returns to the main administration page. Save Saves the current
+                options. If some options are invalid, the system will show a dialogue with the wrong
+                parameter and will focus its text field on the page. Once the configuration is saved
+                a success dialogue will be shown. Refresh This button simply refreshes the displayed
+                options taking the new values from the server. This can be useful if some options
+                get changed dynamically (for example by another user). </para>
+
+            <para>Public host and port usage </para>
+            <para>Up to now, the server’s host and port are used in these cases: </para>
+
+            <orderedlist>
+                <listitem>
+                    <para>During an editing session, when adding data links to a metadata. The host
+                        and port will be used to build download links to store inside the metadata.
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>During CSW requests. The GetCapabilities operation returns an XML document
+                        with HTTP links to the CSW services. These links are dynamically built using
+                        the host and port values.</para>
+                </listitem>
+            </orderedlist>
+
+            <section>
+                <title>Site General site parameters.</title>
+                <para><emphasis>Name</emphasis> The name of the GeoNetwork’s installation. This name
+                    will be used to identify the node in operations like the harvesting.</para>
+                <para><emphasis>organisation</emphasis> The organisation the node belongs to. Just
+                    for informative reasons.</para>
+                <para><emphasis>Server</emphasis> Here you have to enter the address of your
+                    GeoNetwork’s node. This address is important because it will be used to access
+                    the node. </para>
+                <para><emphasis>Host</emphasis> The node’s address or IP number. If your node is
+                    publicly accessible from the Internet, you have to use the machine’s
+                    domain/address. If your node is hidden into your private network and you have a
+                    firewall or web server that redirects incoming calls to the node, you have to
+                    enter the public address of the firewall or web server. A typical configuration
+                    is to have an Apache web server on address A that is publicly accessible and
+                    redirects the requests to a Tomcat server on a private address B. In this case
+                    you have to enter A in the host parameter.</para>
+                <para><emphasis>port</emphasis> The node’s port (usually 80 or 8080). If the node is
+                    hidden, you have to enter the port on the public firewall or web server.</para>
+                <para><emphasis>Intranet</emphasis> A common need for an organisation is to
+                    discriminate between internal anonymous users (users that access the node from
+                    within the organisation) and external ones (users from the Internet). Node’s
+                    administrators can specify different privileges for internal and external
+                    anonymous users and, in order to do so, they have to specify the parameters of
+                    the internal network. </para>
+                <para><emphasis>Network</emphasis> The internal network’s address in IP form.</para>
+                <para><emphasis>Netmask</emphasis> The network’s mask.</para>
+            </section>
+            <section>
+                <title>Catalogue services (CSW, Z39.50)</title>
+                <section>
+                    <title>OGC CSW configuration</title>
+                    <para>When using Open Geospatial Catalogue Service for the Web (OGC-CSW) service, 
+                        a client will ask for a description of the
+                        service. This description, provided in the form of a GetCapabilities document, describes
+                        the main service's properties. The administration section allows
+                        configuration of the following CSW properties:</para>
+                    <para><emphasis>Enable</emphasis>: This option allows you to start or stop the CSW
+                        services. If this option is disabled, other catalogues cannot
+                        connect to the node using CSW protocol.</para>
+                    <para>
+                        <emphasis>Contact</emphasis>: The main contact who is defined in
+                        the GetCapabilities document of the CSW service. This contact is one
+                        user of the catalogue. </para>
+                    <para>
+                        <emphasis>Title</emphasis>: The title of your CSW service. </para>
+                    <para>
+                        <emphasis>Abstract</emphasis>: The abstract of your CSW service.
+                    </para>
+                    <para>
+                        <emphasis>Fees</emphasis>
+                    </para>
+                    <para>
+                        <emphasis>Access constraints</emphasis>
+                    </para>
+                    <para>The service description also contains the main keywords of the catalogue.
+                        The list of keywords is generated by the catalogue based on metadata
+                        content.</para>
+                    <!-- TODO : Add documentation about config-csw.xml options -->
+                </section>
+                <section>
+                    <title>Z39.50 configuration</title>
+                    <para><emphasis><glossterm linkend="glos-z3950">Z39.50</glossterm></emphasis>: GeoNetwork can act as a Z39.50 server, which
+                        is an OGC communication protocol to query and retrieve metadata. </para>
+                    <para><emphasis>Enable</emphasis>: Check this option to start the Z39.50
+                        submodule. Please, notice that GeoNetwork must be restarted in order to make
+                        this change active.</para>
+                    <para><emphasis>port</emphasis>: This is the port on which GeoNetwork will be
+                        listening for incoming Z39.50 requests. Usually, the value of 2100 is a
+                        standard one, but to have multiple GeoNetwork nodes on the same machine you
+                        have to change this value in order to avoid port conflicts between the
+                        different nodes.</para>
+                </section>
+            </section>
+            <section>
+                <title>Proxy configuration</title>
+                <para><emphasis>Proxy</emphasis>: In some occasions (like harvesting) GeoNetwork must
+                    be able to connect to remote sites and this may be denied if an organisation
+                    uses proxy servers. In this cases, GeoNetwork must be configured to use the
+                    proxy server in order to route outgoing requests. </para>
+                
+                <figure id="admin_config_options_proxy">
+                    <title>The proxy configuration options</title>
+                    <mediaobject>
+                        <imageobject>
+                            <imagedata fileref="images/admin/web-config-options-proxy.png" width="7cm"
+                                align="center"/>
+                        </imageobject>
+                    </mediaobject>
+                </figure>
+                
+                <para><emphasis>Host</emphasis>: The proxy’s name or address to use (usually an IP
+                    address).</para>
+                <para><emphasis>Port</emphasis>: The proxy’s port to use.</para>
+                <para><emphasis>Username</emphasis> (optional): a username should be provided if the proxy server requires authentication.</para>
+                <para><emphasis>Password</emphasis> (optional): a password should be provided if the proxy server requires authentication.</para>
+            </section>
+            <section>
+                <title>Email &amp; notification</title>
+                <para><emphasis>Feedback</emphasis> GeoNetwork can sometimes send email, for example if a metadata is downloaded or
+                    if a user provides feedback using the online form. You have to configure
+                    the mail server GeoNetwork should use in order to enable it to send email. </para>
+                
+                
+                <figure id="admin_config_options_mailserver">
+                    <title>The mail server configuration options</title>
+                    <mediaobject>
+                        <imageobject>
+                            <imagedata fileref="images/admin/web-config-options-mailserver.png" width="7cm"
+                                align="center"/>
+                        </imageobject>
+                    </mediaobject>
+                </figure>
+                
+                <para><emphasis>Email</emphasis>: This is the email address that will be used to send
+                    the email (the From address).</para>
+                <para><emphasis><glossterm linkend="glos-smtp">SMTP</glossterm> host</emphasis>: the mail server address to use when sending
+                    email.</para>
+                <para><emphasis>SMTP port</emphasis>: the mail server SMTP port (usually 25). </para>
+            </section>
+            <section>
+                <title>Removed metadata</title>
+                <para>Defines the directory used to store a backup of metadata and data after a delete action. This
+                    directory is used as a backup directory to allow system administrators to recover metadata and possibly 
+                    related data after erroneous deletion. By default the <literal>removed</literal> directory 
+                    is created under the data folder</para>
+            </section>
+            <section>
+                <title>Authentication</title>
+								<para>In this section you define the source against which GeoNetwork will authenticate users and passwords.</para>
+                <figure id="admin_authentication_config_options">
+                 		<title>Authentication configuration options</title>
+                 		<mediaobject>
+                     		<imageobject>
+                         		<imagedata fileref="images/admin/web-config-options-authentication.png" width="6.321cm" align="center"/>
+                       	</imageobject>
+                  	</mediaobject>
+               	</figure>
+								<para>By default, users are authenticated against info held in the GeoNetwork database. When the GeoNetwork database is used as the authentication source, the user self-registation function can be enabled.</para>
+								<para>You may choose to authenticate logins against either the GeoNetwork database tables or LDAP (the lightweight directory access protocol) but not both. The next section describes how to authenticate against LDAP.</para>
+								<para>In addition to either of these options, you may also configure other authentication sources. At present, Shibboleth is the only additional authentication source that can be configured. Shibboleth is typically used for national access federations such as the Australian Access Federation. Configuring shibboleth authentication in GeoNetwork to use such a federation would allow not only users from a local database or LDAP directory to use your installation, but any user from such a federation.</para>
+            		<section>
+                		<title><glossterm linkend="glos-ldap">LDAP</glossterm> Authentication</title>
+                		<para>The section defines how to connect to an LDAP authentication system.</para>
+                
+                		<figure id="admin_config_options_ldap">
+                    		<title>The LDAP configuration options</title>
+                    		<mediaobject>
+                        		<imageobject>
+                            		<imagedata fileref="images/admin/web-config-options-ldap.png" width="9.54cm"
+                                		align="center"/>
+                        		</imageobject>
+                    		</mediaobject>
+                		</figure>
+
+                		<para>Typically all users must have their details in the LDAP directory to login to GeoNetwork. However if a user is added to the GeoNetwork database with the Administrator profile then they will be able to login without their details being present in the LDAP directory.</para>
+                
+            		</section>
+            		<section>
+                		<title><glossterm linkend="glos-shibboleth">Shibboleth</glossterm> Authentication</title>
+                		<para>When using either the GeoNetwork database or LDAP for authentication, you can also configure shibboleth to allow authentication against access federations.</para>
+                		<figure id="admin_config_options_shibboleth">
+                    		<title>The Shibboleth configuration options</title>
+                    		<mediaobject>
+                        		<imageobject>
+                            		<imagedata fileref="images/admin/web-config-options-shibboleth.png" width="12.7cm"
+                                		align="center"/>
+                        		</imageobject>
+                    		</mediaobject>
+                		</figure>
+               			<para>Shibboleth authentication requires interaction with Apache web server. In particular, the apache web server must be configured to require Shibboleth authentication to access the path entered in the configuration. The apache web server configuration will contain the details of the shibboleth server that works out where a user is located (sometimes called a 'where are you from' server).</para>
+										<para>The remainder of the shibboleth login configuration describes how shibboleth authentication attributes are mapped to GeoNetwork user database fields as once a user is authenticated against shibboleth, their details are copied to the local GeoNetwork database.</para>
+            		</section>
+            </section>
+        </section>
+    </chapter>
+</book>

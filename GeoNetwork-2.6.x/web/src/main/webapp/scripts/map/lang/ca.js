@@ -1,0 +1,133 @@
+/*
+ * Copyright (C) 2009 GeoNetwork
+ *
+ * This file is part of GeoNetwork
+ *
+ * GeoNetwork is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * GeoNetwork is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with GeoNetwork.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
+Ext.namespace('GeoNetwork', 'GeoNetwork.lang');
+
+GeoNetwork.lang.ca = {
+    'featureInfoTooltipTitle': "Informaci&oacute; de l'entitat",
+    'featureInfoTooltipText': "Feu clic sobre el mapa per obtenir informaci&oacute; de totes les entitats de les capes visibles.",
+    'zoomToMaxExtentTooltipTitle': "Extensi&oacute; completa",
+    'zoomToMaxExtentTooltipText': "Useu aquest bot&oacute; per fer un zoom complet del mapa.",
+    'zoominTooltipTitle': "Apropar-vos",
+    'zoominTooltipText': "Dibuixeu una capsa en el mapa per apropar-vos. Tamb&eacute; podeu fer clic en el mapa per apropar-vos amb un factor 2.",
+    'zoomoutTooltipTitle': "Allunyar-vos",
+    'zoomoutTooltipText': "Feu clic en el mapa o dibuixi una capsa per allunyar-vos.",
+    'dragTooltipTitle': "Despla&ccedil;ament",
+    'dragTooltipText': "Premeu el bot&oacute; esquerre per arrossegar el mapa.",
+    'previousTooltipTitle': "Vista anterior",
+    'previosTooltipText': "Feu clic en aquest bot&oacute; per recuperar la vista anterior ",
+    'nextTooltipTitle': "Vista seg&uuml;ent",
+    'nextTooltipText': "Feu clic en aquest bot&oacute; per recuperar la vista seg&uuml;ent",
+    'featureInfoTitle': "Informaci&oacute; de l'entitat",
+    'layerManagerTabTitle': "Gesti&oacute; de capes",
+    'legendTabTitle': "Llegenda",
+    'scaleTitle': "Escala",
+    'xTitle': "X",
+    'yTitle': "Y",
+    'projectionTitle': "Projecci&oacute;",
+    'FeatureInfoNotQueryable': "No hi ha cap capa consultable",
+    'WMSBrowserTab1': "Seleccionar",
+    'WMSBrowserTab3': "Extern",
+    'WMSBrowserPreviewTitle': "Vista pr&egrave;via de la capa",
+    'WMSBrowserAddButton': "Afegir",
+    'WMSBrowserDuplicateMsg': "La capa ja est&agrave; carregada",
+    'WMSBrowserPreviewWaitMsg': "Recuperant la vista pr&egrave;via",
+    'WMSBrowserConnectButton': "Connexi&oacute;",
+    'WMSBrowserConnectError': "Error de connexi&oacute; al Web Map Service. Si us plau, verifiqui la URL.",
+    'infoTitle': "Informaci&oacute;",
+    'mf.print.mapTitle': "T&iacute;tol",
+    'mf.print.comment': "Commentari",
+    'mf.print.dpi': "Resoluci&oacute;",
+    'mf.print.scale': "Escala",
+    'mf.print.rotation': "Angle",
+    'mf.print.resetPos': "Inicialitzar",
+    'mf.print.print': "Imprimir",
+    'mf.print.generatingPDF': "Generant PDF",
+    'mf.print.unableToPrint': "No ha estat possible imprimir, si us plau intenti-ho m&eacute;s tard ",
+    'mf.error': "Error",  
+    'selectExtentTooltipTitle': "Seleccioneu l'extensi&oacute;",
+    'selectExtentTooltipText': "Seleccioneu l'extensi&oacute; per cerques al cat&agrave;leg.",
+    'printTooltipTitle': "Imprimir",
+    'printTooltipText': "Imprimir el mapa actual",
+    'savewmcTooltipTitle': "Salvar el WMC (Web Map Context)",
+    'savewmcTooltipText': "Salva el WMC (Web Map Context) del mapa actual",
+    'saveWMCFile.windowTitle': "Salva el WMC (Web Map Context)",
+    'saveWMCFile.errorSaveWMC': "No ha estat possible salvar el WMC (Web Map Context)",
+    'loadwmcTooltipTitle': "Carregar WMC (Web Map Context)",
+    'loadwmcTooltipText': "Carregar WMC (Web Map Context) en el mapa actual",
+    'selectWMCFile.windowTitle': "carregar WMC (Web Map Context)",
+    'selectWMCFile': "Seleccionar arxiu WMC (Web Map Context)",
+    'selectWMCFile.waitLoadingWMC': "Carregant WMC (Web Map Context)",
+    'selectWMCFile.loadButtonText': "Carregar",
+    'selectWMCFile.mergeButtonText': "Combinar",
+    'selectWMCFile.errorLoadingWMC': "No ha estat possible carregar el WMC (Web Map Context)",
+    'opacityButtonText': "Opacitat",
+    'opacityWindowTitle': "Opacitat",
+    'metadataButtonText': "Metadada",
+    'removeButtonText': "Eliminar",
+    'addWMSButtonText': "Afegir WMS",
+    'addWMSWindowTitle': "Afegir WMS",
+    'layerInfoPanel.windowTitle' : "Metadades de la capa",
+    'layerInfoPanel.titleField' : "T&iacute;tol",
+    'layerInfoPanel.descriptionField' : "Descripci&oacute;",
+    'layerInfoPanel.queryableField' : "Consultable",
+    'layerList' : "Llista de capes",
+    'baseLayerList': "Capes base",
+    'metadataResults.buttonText' : "Resultats",
+    'metadataResults.tooltipTitle' : "Resultats",
+    'metadataResults.tooltipText' : "Anar a la p&agrave;gina de resultats",
+    'metadataResults.alertTitle' : "Resultats",
+    'metadataResults.alertText' : "Cap resultat",
+    'featureInfoWindow.windowTitle': "Informaci&oacute; de l'entitat",
+    'mf.information': 'Imprimir',
+    'mf.print.pdfReady': 'Preparat per PDF',
+    'loadLayer.loadingMessage': "Carregant capa",
+    'loadLayer.error.title': "Carregar la capa",
+    'loadLayer.error.message': "No ha estat possible carregar la capa",
+    'disclaimer.windowTitle': "Disclaimer",
+    'disclaimer.loading': "Carregant...",
+    'disclaimer.buttonClose': "Tanca",
+    'gazetteerAddressField1Label': "Codi postal",
+    'gazetteerAddressField2Label': "Carrer",
+    'gazetteerAddressField3Label': "Lloc",
+    'gazetteerAddressField4Label': "Municipi",
+    'gazetteerAddressField5Label': "N&uacute;mero",
+    'searchOptionButton': "Cercar",
+    'GazetteerWindowTitle': "Cercar per adre&ccedil;a",
+    'searchResults': "Resultats",
+    'errorTitle': "Error",
+    'SearchOptionLoadFailureMsg': "Cap resultat disponible . \n es possible que el servei no estigui disponible. \n",
+    'gazetteerTooltipTitle': "Cerca basada en l'adre&ccedil;a",
+    'gazetteerTooltipText': "Cerca per localitzaci&oacute;, basada en el codi postal, carrer, municipi o lloc.",
+    'SearchOptionNoResults': "No s'ha trobat cap resultat",
+    'zoomlayerTooltipTitle': "Zoom a la capa",
+    'zoomlayerTooltipText': "Useu aquest bot&oacute; per anar a l'extensi&oacute; completa de la capa seleccionada.",
+    'zoomlayer.selectLayerTitle': "Zoom a la capa",
+    'zoomlayer.selectLayerText': "Cap capa seleccionada",
+    'layerStylesWindowTitle': "Estils de capa",
+    'layerStylesPreviewTitle': "Previsualitzar la llegenda",
+    'selectStyleButton': "Seleccioneu estil",
+    'WMSTimeWindowTitle': "WMS Time",
+    'WMSTimePositionTitle': "Pick a time position",
+    'WMSTimeMovieTitle': "Animaci&oacute;",
+    'wmsTimeUpdateButtonText': "Aplicar",
+    'WMSTimeAnimationCheckbox': "Play a movie loop spanning the last ${steps} time positions"
+};
+
+OpenLayers.Util.extend(OpenLayers.Lang.ca, GeoNetwork.lang.ca);

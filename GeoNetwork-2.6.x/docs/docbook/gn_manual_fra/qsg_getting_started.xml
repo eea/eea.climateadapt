@@ -1,0 +1,588 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.4//EN"
+                      "http://www.docbook.org/xml/4.4/docbookx.dtd">
+<book>
+    <chapter id="getting_started">
+        <title>Pour démarrer</title>
+        <indexterm>
+            <primary>login</primary>
+        </indexterm>
+
+        <para>Veuillez vous assurer que vous avez ouvert la page d'accueil de votre catalogue
+            GeoNetwork. <footnote>
+                <para>Si vous avez installé et démarré le logiciel sur votre ordinateur, l'adresse
+                    par défaut est <ulink url="http://localhost:8080/geonetwork"/></para>
+            </footnote></para>
+
+        <para>Il existe plusieurs méthodes pour rechercher des cartes ou d'autres données
+            géographiques dans le catalogue. Ce guide va vous présenter les méthodes de recherche
+            les plus populaires : recherche par défaut, recherche avancée et recherche par
+            catégorie. Quelle que soit la méthode que vous avez choisie, n'oubliez pas que les
+            résultats que vous verrez sont fonction de vos privilèges (<xref linkend="privileges"/>)
+            et du groupe auquel vous appartenez.</para>
+
+
+        <para>Le terme <emphasis role="bold">données</emphasis> dans ce progamme désigne
+            indifféremment les jeux de données, cartes, tableaux, documents, etc. qui sont liés aux
+            métadonnées d'un enregistrement donné.</para>
+
+        <section>
+            <title>Recherche par défaut</title>
+
+            <para>Le mode de recherche par défaut vous permet de chercher du texte (par exemple des
+                mots-clefs ou un nom de lieu) dans l'ensemble du catalogue.</para>
+
+            <formalpara>
+                <title>Recherche en texte intégral</title>
+                <para>
+                    <emphasis>Entrez</emphasis> les termes que vous recherchez dans le champ
+                        <emphasis>Recherche</emphasis>. Pour rechercher une séquence précise de
+                    mots, mettez votre texte entre guillemets. </para>
+            </formalpara>
+            <para>Le texte et les opérateurs (and, or, not) ne sont pas sensibles à la casse. (Ref.
+                    <xref linkend="simple_free_text"/>).</para>
+
+            <figure id="simple_free_text">
+                <title>Le champ de recherche</title>
+                <mediaobject>
+                    <imageobject>
+                        <imagedata fileref="images/what.png" width="5cm" align="center"/>
+                    </imageobject>
+                </mediaobject>
+            </figure>
+
+            <formalpara>
+                <title>Recherche géographique</title>
+                <para>Lors d'une recherche géographque, deux options permettent de sélectionner une
+                    région afin de restreindre l'étendue de la recherche :</para>
+            </formalpara>
+
+            <para>Vous pouvez sélectionner une <emphasis role="bold">région</emphasis> dans une
+                liste prédéfinie (<xref linkend="simple_region_field"/>);</para>
+
+
+            <figure id="simple_region_field">
+                <title>Le champ région</title>
+                <mediaobject>
+                    <imageobject>
+                        <imagedata fileref="images/where1.png" width="5cm" align="center"/>
+                    </imageobject>
+                </mediaobject>
+            </figure>
+
+            <para>Vous pouvez définir votre propre <emphasis>zone d'intérêt</emphasis> de manière
+                plus interactive. Il vous suffit de la dessiner sur la carte du monde miniature
+                affichée sur l'écran. Pour cela, cliquez sur le bouton en haut à droite de la carte
+                    (<xref linkend="aoi_map"/>);</para>
+            <figure id="aoi_map">
+                <title>Carte interactive où définir les zones d'intérêt</title>
+                <mediaobject>
+                    <imageobject>
+
+                        <imagedata fileref="images/where2.png" width="5cm" align="center"/>
+                    </imageobject>
+                </mediaobject>
+            </figure>
+
+
+            <formalpara>
+                <title>Effectuer une recherche</title>
+                <para>Les deux types de recherche (texte intégral et géographique) peuvent être
+                    combinées pour affiner la requête.</para>
+            </formalpara>
+            <para>Cliquez sur le bouton <literal>Rechercher</literal> pour lancer la recherche et
+                afficher les résultats. (<xref linkend="search_button"/>).</para>
+
+            <figure id="search_button">
+                <title>Le bouton Rechercher</title>
+                <mediaobject>
+                    <imageobject>
+                        <imagedata fileref="images/search_button.png" width="3cm" align="center"/>
+                    </imageobject>
+                </mediaobject>
+            </figure>
+
+        </section>
+
+        <section>
+            <title>Recherche par catégories</title>
+
+            <para>Une autre méthode pour rechercher des données dans GeoNetwork depuis la page
+                d'accueil consiste à effectuer une recherche par <emphasis role="bold"
+                    >catégorie</emphasis>. L'accès à la liste des catégories permet à l'utilisateur
+                d'identifier des données de manière plus générique : <emphasis role="bold"
+                    >Applications</emphasis>, <emphasis role="bold">Autres ressources</emphasis>,
+                    <emphasis role="bold">Cartes &amp; graphiques</emphasis>, <emphasis
+                    role="bold">Conférences</emphasis>, <emphasis role="bold">Étude de cas,
+                    meilleures pratiques</emphasis>, <emphasis role="bold">Jeux de
+                    données</emphasis>, <emphasis role="bold">Photographies</emphasis>, <emphasis
+                    role="bold">Répertoires</emphasis>, <emphasis role="bold">Ressources
+                    interactives</emphasis>, <emphasis role="bold">Vidéo/Audio</emphasis>.</para>
+
+            <para>Pour rechercher uniquement des cartes, cliquez sur <emphasis role="bold">Cartes
+                    &amp; graphiques</emphasis> (<xref linkend="categories"/>). À partir de la
+                liste des cartes affichée, vous pouvez accéder à la description d'une carte en
+                cliquant sur le bouton <emphasis role="bold">Plus d'information</emphasis> qui y est
+                associé.</para>
+
+            <figure id="categories">
+                <title>Recherche par catégorie</title>
+
+                <mediaobject>
+                    <imageobject>
+                        <imagedata fileref="images/Categories.png" width="6cm" align="center"/>
+                    </imageobject>
+                </mediaobject>
+            </figure>
+        </section>
+
+        <section>
+
+            <title>Recherche avancée</title>
+
+            <para>L'option de recherche avancée (<xref linkend="advanced_search"/>) fonctionne de
+                manière semblable à la recherche par défaut. Cependant vous pouvez affiner vos
+                recherches en profitant des différents critères proposés, chacun étant axé sur un
+                thème particulier : <emphasis role="bold">Quoi ?, Où ?, Quand ?</emphasis>
+            </para>
+
+            <figure id="advanced_search">
+                <title>Options de recherche avancée</title>
+
+                <mediaobject>
+                    <imageobject>
+                        <imagedata fileref="images/advanced_search1.png" width="14cm" align="center"
+                        />
+                    </imageobject>
+                </mediaobject>
+            </figure>
+
+            <para>Pour effectuer une <emphasis role="bold">
+
+                    <emphasis>recherche avancée</emphasis>
+                </emphasis> depuis la page d'accueil, <emphasis role="bold">cliquez sur </emphasis>
+                <emphasis role="bold">Avancée </emphasis>situé sous le bouton Rechercher (ref. <xref
+                    linkend="advanced_search_button"/>).</para>
+
+            <figure id="advanced_search_button">
+                <title>Afficher les options de recherche avancée</title>
+
+                <mediaobject>
+                    <imageobject>
+                        <imagedata fileref="images/advanced_search_button.png" width="3cm"
+                            align="center"/>
+                    </imageobject>
+                </mediaobject>
+            </figure>
+
+            <para>Dans la section <emphasis role="bold">QUOI ?</emphasis> tous les éléments sont
+                liés au contenu des données. Par leur intermédiaire, au lieu de chercher uniquement
+                des mots dans l'ensemble des métadonnées, vous pouvez chercher directement dans le
+                titre ou le résumé et ajouter des mots-clefs pour affiner votre recherche. Vous
+                pouvez également ajuster le niveau de précision que vous souhaitez atteindre lors de
+                l'exécution de votre requête (<xref linkend="adv_what_options"/>).</para>
+
+            <itemizedlist>
+                <listitem>
+                    <para>Pour effectuer une recherche dans le <emphasis role="bold"
+                            >Titre</emphasis>, le <emphasis role="bold">résumé</emphasis>, <emphasis
+                            role="bold">partout</emphasis>, ou parmi les <emphasis role="bold"
+                            >mots-clés</emphasis>, saisissez votre texte dans le champ approprié.
+                        Vous pouvez renseigner plusieurs champs simultanément. Si vous souhaitez
+                        ignorer un critère de recherche, laissez le champ correspondant vide
+                        ;</para>
+
+                </listitem>
+
+                <listitem>
+                    <para>Vous pouvez définir la <emphasis role="bold">précision</emphasis> de votre
+                        recherche en terme de justesse orthographique, de <emphasis role="bold"
+                            >Précis</emphasis> = 1 à <emphasis role="bold">Imprécis</emphasis> =
+                        0.2, avec trois valeurs intermédiaires égales à 0.8, 0.6, 0.4.</para>
+
+                </listitem>
+            </itemizedlist>
+
+            <figure id="adv_what_options">
+                <title>La section "Quoi" de la recherche avancée</title>
+
+                <mediaobject>
+                    <imageobject>
+                        <imagedata fileref="images/advanced_search_what.png" width="5cm"
+                            align="center"/>
+
+                    </imageobject>
+                </mediaobject>
+            </figure>
+
+            <para>Les paramètres de la section <emphasis role="bold">OÙ?</emphasis> sont liés à
+                l'empreinte géographique des données. Comme dans la recherche par défaut, ils vous
+                permettent de définir votre propre zone d'intérêt ou d'en sélectionner une
+                prédéfinie dans la liste déroulante. Dans cette section, vous pouvez également
+                saisir les coordonnées géographiques d'une zone d'intérêt. (<xref
+                    linkend="adv_where_options"/>)</para>
+
+            <itemizedlist>
+
+                <listitem>
+                    <para>Pour définir <emphasis role="bold">votre propre zone d'intérêt</emphasis>,
+                        dessinez le cadre l'englobant sur la carte du monde en utilisant l'outil
+                        approprié accessible sur la gauche de la carte (bouton du bas) ;</para>
+                </listitem>
+
+                <listitem>
+                    <para>Pour saisir <emphasis role="bold">librement les coordonnées</emphasis> de
+                        votre zone d'intérêt, renseignez les champs latitude et longitude situés
+                        autour de la carte. Le nombre de décimales n'est pas limité ;</para>
+
+                </listitem>
+
+                <listitem>
+                    <para>Pour utiliser les coordonnées d'une <emphasis role="bold">région
+                            prédéfinie</emphasis>, sélectionnez cette région dans la liste
+                        déroulante.</para>
+
+                    <para/>
+                </listitem>
+            </itemizedlist>
+
+            <figure id="adv_where_options">
+                <title>La section "Où" de la recherche avancée</title>
+
+                <mediaobject>
+                    <imageobject>
+                        <imagedata fileref="images/advanced_search_where.png" width="8cm"
+                            align="center"/>
+                    </imageobject>
+                </mediaobject>
+            </figure>
+
+            <para>Quelque soit le type de recherche géographique que vous avez décidé d'effectuer,
+                dans le champ <emphasis role="bold">Type</emphasis>, vous pouvez choisir une option
+                parmi celles-ci: <emphasis role="bold">identique</emphasis>, <emphasis role="bold"
+                    >chevauche</emphasis>, <emphasis role="bold">contient</emphasis>, <emphasis
+                    role="bold">en dehors de</emphasis> (<xref linkend="adv_where_options"/>). Si
+                vous utilisez ce critère, faites attention à la manière dont cela affecte le
+                résultat de votre recherche :</para>
+
+            <itemizedlist>
+                <listitem>
+                    <para>Si vous choisissez le <emphasis role="bold">type</emphasis> de recherche
+                        spatiale <citetitle>identique</citetitle> “Pays”, seules les cartes du pays
+                        sélectionné seront affichées. En d'autres termes, la carte d'une ville de ce
+                        pays ne sera pas affichée dans la liste des résultats de la
+                        recherche.</para>
+                </listitem>
+
+                <listitem>
+
+                    <para>Si vous choisissez le <emphasis role="bold">type</emphasis> de recherche
+                        spatiale <citetitle>chevauche</citetitle> “Pays”, toutes les cartes dont
+                        l'emprise chevauche ce pays seront affichées dans la liste des résultats :
+                        c.-à-d. les pays limitrophes, le continent du pays en question et les cartes
+                        du monde.</para>
+                </listitem>
+
+                <listitem>
+                    <para>Si vous choisissez le <emphasis role="bold">type</emphasis> de recherche
+                        spatiale <citetitle>contient</citetitle> “Pays” vous obtiendrez en premier
+                        dans la liste des résultats les cartes du pays suivies de toutes les cartes
+                        incluses dans ce dernier.</para>
+
+                </listitem>
+
+                <listitem>
+                    <para>De la même manière, si vous choisissez le <emphasis role="bold"
+                            >type</emphasis> de recherche spatiale <citetitle>en dehors</citetitle>
+                        d'une région sélectionnée, seules les cartes répondant strictement à ce
+                        critère sont affichées dans la liste des résultats.</para>
+                </listitem>
+            </itemizedlist>
+
+            <para>La section <emphasis role="bold">QUAND ?</emphasis> vous donne la possibilité de
+                restreindre votre recherche en fonction de critères temporels en indiquant une
+                période pour la création ou la publication des données (<xref
+                    linkend="adv_when_options"/>).</para>
+
+            <itemizedlist>
+                <listitem>
+                    <para>Pour définir une période, cliquez sur le bouton représentant un calendrier
+                        à côté des champs <emphasis role="bold">Début - Fin</emphasis>. Utilisez les
+                            symboles<emphasis role="bold"> &gt;</emphasis> et <emphasis
+                            role="bold">&gt;&gt;</emphasis> en haut du calendrier pour
+                        choisir d'abord le mois et l'année avant de cliquer sur le jour ; une date
+                        complète est formatée de la manière suivant : AA-MM-JJ.</para>
+
+                </listitem>
+            </itemizedlist>
+
+            <itemizedlist>
+                <listitem>
+                    <para>Pour effacer les champs de début et fin de période, cliquez sur la croix
+                        blanche à la droite du champ fin ; l'option <emphasis role="bold">N'importe
+                            quand</emphasis> sera sélectionnée automatiquement et la recherche sera
+                        exécutée sans aucune restriction temporelle.</para>
+                </listitem>
+
+            </itemizedlist>
+
+            <figure id="adv_when_options">
+                <title>La section "Quand" de la recherche avancée</title>
+
+                <mediaobject>
+                    <imageobject>
+                        <imagedata fileref="images/advanced_search_when.png" width="8cm"
+                            align="center"/>
+                    </imageobject>
+                </mediaobject>
+
+            </figure>
+
+            <para>Enfin, la recherche avancée permet de restreindre la recherche en appliquant des
+                critères supplémentaires à la source des données, leur catégorie et leur format
+                    (<xref linkend="adv_more_options"/>).</para>
+
+            <itemizedlist>
+                <listitem>
+                    <para>Pour limiter vos requêtes à un seul <emphasis role="bold"
+                            >Catalogue</emphasis> parmi ceux rendus accessibles au moment de
+                        l'installation grâce au mécanisme de moissonnage, cliquez sur le catalogue
+                        qui vous intéresse. Autrement, sélectionnez <emphasis role="bold"
+                            >Tous</emphasis> pour chercher dans tous les catalogues. (Pour en savoir
+                        plus sur <emphasis role="bold">le moissonnage de métadonnées</emphasis>,
+                        veuillez vous référer à la Section 4 Chapitre 1 de ce manuel).</para>
+
+                </listitem>
+                <listitem>
+                    <para>Pour rechercher des données organisées en <emphasis role="bold"
+                            >Catégories</emphasis> telles que Applications, Jeux de données, etc.,
+                        sélectionnez dans la liste déroulante la catégorie dans laquelle vous
+                        souhaitez effectuer votre recherche. Autrement, nous vous suggérons de
+                        laisser sélectionnée la valeur <emphasis role="bold">Tous</emphasis> dans le
+                        champ Catégories.</para>
+                </listitem>
+                <listitem>
+                    <para>Vous pouvez chercher des cartes <emphasis role="bold"
+                            >numériques</emphasis> ou <emphasis role="bold">imprimées</emphasis>.
+                        Pour cela, sélectionnez la case à cocher correspondant au type de carte que
+                        vous souhaitez rechercher. Si aucune case n'est cochée, la recherche sera
+                        effectuée pour les deux types de cartes.</para>
+
+                </listitem>
+            </itemizedlist>
+
+            <para>Enfin, vous pouvez personnaliser le nombre de résultats affichés par page dans le
+                champ <emphasis role="bold">Nombre de résultats par page</emphasis>. </para>
+
+            <itemizedlist>
+                <listitem>
+                    <para>Cliquez sur le bouton <emphasis role="bold">Rechercher</emphasis>.</para>
+
+                </listitem>
+            </itemizedlist>
+
+            <figure id="adv_more_options">
+                <title>Autres options de la recherche avancée</title>
+
+                <mediaobject>
+                    <imageobject>
+                        <imagedata fileref="images/advanced_search_morerest.png" width="8cm"
+                            align="center"/>
+                    </imageobject>
+                </mediaobject>
+
+            </figure>
+        </section>
+
+        <section>
+            <title>Analyser les résultats de la recherche</title>
+
+            <para>Le résultat d'une recherche est constitué d'une liste de métadonnées qui devraient
+                correspondre à votre requête. Pour chaque élément dans cette liste, le titre, un
+                résumé et les mots-clefs sont affichés dans la page de résultats. En fonction des
+                privilèges qui ont été associés à chaque métadonnée, au maximum quatre sections
+                peuvent être consultées comme le montre la capture d'écran ci-dessous. (<xref
+                    linkend="search_output"/>)</para>
+
+            <para>
+
+                <figure id="search_output">
+                    <title>Résultats de la recherche</title>
+
+                    <mediaobject>
+                        <imageobject>
+                            <imagedata fileref="images/search_output2.png" width="11cm"
+                                align="center"/>
+                        </imageobject>
+                    </mediaobject>
+                </figure>
+
+            </para>
+
+            <orderedlist>
+                <listitem>
+                    <para><emphasis role="bold">Métadonnées</emphasis> : La section relative aux
+                        métadonnées décrit le jeu de données (par exemple : citation, propriétaire
+                        de la donnée, information temporelle / spatiale / méthodologique) et peut
+                        éventuellement contenir des liens vers d'autres sites internet susceptibles
+                        de fournir de plus amples informations sur le jeu de données. </para>
+
+                </listitem>
+
+                <listitem>
+
+                    <para><emphasis role="bold">Télécharger</emphasis> : Selon les privilèges
+                        associés à chaque résultat, lorsque ce bouton est présent, le jeu de données
+                        est disponible et téléchargeable. Accéder aux données est simple et rapide
+                        puisqu'il suffit de cliquer sur le bouton de téléchargement (<xref
+                            linkend="search_result_resource"/>) ou d'utiliser le lien approprié dans
+                        la section Distribution des métadonnées lorsqu'elles sont affichées en
+                        entier (<xref linkend="online_resources"/>).</para>
+
+                    <para>
+                        <figure id="search_result_resource">
+                            <title>Un résultat de recherche</title>
+
+                            <mediaobject>
+
+                                <imageobject>
+                                    <imagedata fileref="images/search_output1.png" width="11cm"
+                                        align="center"/>
+                                </imageobject>
+                            </mediaobject>
+                        </figure>
+                    </para>
+
+                    <para>
+                        <figure id="online_resources">
+
+                            <title>Services disponibles associés à cette ressource</title>
+
+                            <mediaobject>
+                                <imageobject>
+                                    <imagedata fileref="images/download.png" width="11cm"
+                                        align="center"/>
+                                </imageobject>
+                            </mediaobject>
+                        </figure>
+                    </para>
+
+                </listitem>
+
+                <listitem>
+                    <para><emphasis role="bold">Carte interactive</emphasis> : Le service
+                        cartographique est également optionnel. Lorsque ce bouton est visible, une
+                        carte interactive pour cette couche d'information est disponible et, par
+                        défaut, sera affichée sur la carte associée à la recherche simple. Pour
+                        mieux voir la carte, <emphasis role="bold">cliquez</emphasis> sur <emphasis
+                            role="bold">Afficher la carte</emphasis> situé en bas à droite de la
+                        carte miniature (<xref linkend="interactive_map"/>).</para>
+
+                    <para>
+                        <figure id="interactive_map">
+                            <title>La carte interactive</title>
+
+                            <mediaobject>
+                                <imageobject>
+                                    <imagedata fileref="images/interactive_map.png" width="11cm"
+                                        align="center"/>
+                                </imageobject>
+
+                            </mediaobject>
+                        </figure>
+                    </para>
+                </listitem>
+
+                <listitem>
+                    <para><emphasis role="bold">Aperçu visuel</emphasis> : Des aperçus visuels de la
+                        donnée de petite et de grande taille permettent d'évaluer son utilité, en
+                        particulier lorsque la carte interactive n'est pas disponible. Il suffit de
+                        cliquer sur la petite image pour l'agrandir. (<xref
+                            linkend="large_thumbnail"/>)</para>
+
+                    <para>
+                        <figure id="large_thumbnail">
+                            <title>Aperçu visuel de grande taille</title>
+
+                            <mediaobject>
+                                <imageobject>
+                                    <imagedata fileref="images/thumbnail.png" width="10cm"
+                                        align="center"/>
+                                </imageobject>
+
+                            </mediaobject>
+                        </figure>
+                    </para>
+                </listitem>
+            </orderedlist>
+
+        </section>
+        <section id="privileges">
+            <title>Privilèges, rôles and groupes d'utilisateurs</title>
+
+            <indexterm>
+                <primary>security</primary>
+                <secondary>privilèges</secondary>
+            </indexterm>
+            <indexterm>
+                <primary>security</primary>
+                <secondary>rôles</secondary>
+            </indexterm>
+            <indexterm>
+                <primary>security</primary>
+                <secondary>groupes d'utilisateurs</secondary>
+            </indexterm>
+            <indexterm>
+                <primary>security</primary>
+                <secondary>restrictions d'accès</secondary>
+            </indexterm>
+
+            <para>GeoNetwork utilise un système constitué de <emphasis>Privilèges</emphasis>, de
+                    <emphasis>Rôles</emphasis> et de <emphasis>groupes
+                d'utilisateurs</emphasis>.</para>
+
+            <para>Il n'y a pas de restrictions imposées aux utilisateurs désireux de rechercher ou
+                d'accéder à des <emphasis role="bold">informations publiques</emphasis> contenues
+                dans un catalogue GeoNetwork opensource. Pour accéder à des <emphasis role="bold"
+                    >informations à accès restreint</emphasis> ou à des fonctionnalités avancées, il
+                est nécessaire de posséder un compte afin de se connecter sur le site. Celui-ci
+                devrait être fourni par l'administrateur de Geonetwork.</para>
+            <para>Pour se connecter, il suffit de se rendre sur la page d'accueil, de saisir son nom
+                d'utilisateur et son mot de passe dans l'angle en haut à droite et de cliquer sur le
+                bouton de connexion. (Ref. <xref linkend="login"/>)</para>
+
+            <figure id="login">
+                <title>Bouton de connexion au catalogue</title>
+
+                <mediaobject>
+                    <imageobject>
+                        <imagedata fileref="images/login.png" width="7cm" align="center"/>
+                    </imageobject>
+                </mediaobject>
+            </figure>
+            <formalpara>
+                <title>Privilèges</title>
+
+                <para>En fonction des privilèges associés à un enregistrement de métadonnées et de
+                    votre rôle en tant qu'utilisateur authentifié, vous serez à même de lire des
+                    informations qui y sont liées et aurez la possibilité de télécharger ou de
+                    visualiser interactivement les données associées à cet enregistrement.</para>
+            </formalpara>
+            <formalpara>
+                <title>Rôles</title>
+                <para>Les utilisateurs avec un rôle d'<emphasis>Éditeur</emphasis> peuvent créer,
+                    importer et éditer des enregistrements de métadonnées. Ils peuvent également
+                    charger des données et configurer les liens vers les services de cartographie
+                    interactive.</para>
+            </formalpara>
+
+            <formalpara>
+                <title>Groupes d'utilisateurs</title>
+                <para>Chaque utilisateur authentifié est membre d'un groupe de travail particulier
+                    et a la possibilité de visualiser des données au sein de ce groupe.</para>
+            </formalpara>
+        </section>
+
+    </chapter>
+
+</book>

@@ -1,0 +1,339 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.4//EN"
+ "http://www.docbook.org/xml/4.4/docbookx.dtd">
+<book>
+    <appendix id="glossary_of_metadata_fields_description">
+        <title>Glossary of Metadata Fields Description</title>
+
+        <para>This glossary provides you with brief descriptions of the minimum set of metadata
+            fields required to properly describe a geoghaphical data as well as some optional
+            elements highly suggested for a more extensive standard description.
+            <!--Note: the <emphasis
+                role="bold">mandatory</emphasis> fields are in bold in the following list. --></para>
+
+        <formalpara>
+            <title>Contraintes d'accès</title>
+            <para>Contraintes d'accès appliquées pour assurer la protection de la propriété privée et intellectuelle, et autres restrictions spéciales ou limitations pour obtenir les métadonnées ou la ressource</para>
+        </formalpara>
+        <formalpara>
+            <title>Résumé</title>
+            <para>Court résumé explicatif du contenu de la donnée</para>
+        </formalpara>
+        <formalpara>
+            <title>Administrative area</title>
+            <para>State, province of the location</para>
+        </formalpara>
+        <formalpara>
+            <title>Etendue temporelle - Date de début</title>
+            <para>Date de début (YYYY-MM-DDTHH:mm:ss)</para>
+        </formalpara>
+        <formalpara>
+            <title>Jeu de caractères</title>
+            <para>Nom de l'encodage utilisé dans la métadonnée</para>
+        </formalpara>
+        <formalpara>
+            <title>Type de raster</title>
+            <para>Identification du type de raster (point ou cellule)</para>
+        </formalpara>
+        <formalpara>
+            <title>Ville</title>
+            <para>Nom de la ville</para>
+        </formalpara>
+        <formalpara>
+            <title>Code du système</title>
+            <para>Code. Par exemple, le code epsg.</para>
+        </formalpara>
+        <formalpara>
+            <title>Pays</title>
+            <para>Pays</para>
+        </formalpara>
+        <formalpara>
+            <title>Information sur la qualité de la donnée</title>
+            <para>Information sur la qualité de la donnée</para>
+        </formalpara>
+        <formalpara>
+            <title>Date</title>
+            <para>Date(s) de référence pour la ressource en question</para>
+        </formalpara>
+        <formalpara>
+            <title>Date de mise à jour</title>
+            <para>Date de mise à jour de la métadonnée (YYYY-MM-DDThh:mm:ss)</para>
+        </formalpara>
+        <formalpara>
+            <title>Type de date</title>
+            <para>Définit l'événement sur lequel porte la date</para>
+        </formalpara>
+        <formalpara>
+            <title>Adresse courrier</title>
+            <para>Adresse du point de distribution</para>
+        </formalpara>
+        <formalpara>
+            <title>Dénominateur de l'échelle</title>
+            <para>Dénominateur de l'échelle</para>
+        </formalpara>
+        <formalpara>
+            <title>Qualité de la donnée - Desciption</title>
+            <para>Description of the event, including related parameters or tolerances</para>
+        </formalpara>
+        <formalpara>
+            <title>Ressource en ligne - Description</title>
+            <para>Texte descriptif détaillé sur ce que la ressource en ligne est/fait</para>
+        </formalpara>
+        <formalpara>
+            <title>Mots-clés</title>
+            <para>Classe pour les mots clés, leur type et leur source de référence</para>
+        </formalpara>
+        <formalpara>
+            <title>Représentation spatiale du raster - Noms des axes</title>
+            <para>Nom de l'axe (i.e. lignes, colonnes)</para>
+        </formalpara>
+        <formalpara>
+            <title>Représentation spatiale du raster - Nombre de pixels</title>
+            <para>Nombre d'éléments le long de cet axe</para>
+        </formalpara>
+        <formalpara>
+            <title>Résolution</title>
+            <para>Degré de détail dans le jeu de données de type raster</para>
+        </formalpara>
+        <formalpara>
+            <title>Informations sur la distribution</title>
+            <para>Fournit des informations sur le distributeur et sur la manière d'obtenir la ressource</para>
+        </formalpara>
+        <formalpara>
+            <title>Rectangle englobant - Longitude est</title>
+            <para>coordonnée la plus à l'est de la limite de l'étendue du jeu de données, exprimée en longitude avec des degrés décimaux (EST positif)</para>
+        </formalpara>
+        <formalpara>
+            <title>Edition</title>
+            <para>Version de la ressource</para>
+        </formalpara>
+        <formalpara>
+            <title>Adresse mel</title>
+            <para>Adresse mel de l'organisation ou de la personne responsable</para>
+        </formalpara>
+        <formalpara>
+            <title>Etendue temporelle - Date de fin</title>
+            <para>Date de fin (YYYY-MM-DDTHH:mm:ss)</para>
+        </formalpara>
+        <formalpara>
+            <title>Echelle comparative</title>
+            <para>échelle d'un graphique ou carte papier exprimé par son dénominateur (ex 25000 pour une carte au 1/25000)</para>
+        </formalpara>
+        <formalpara>
+            <title>Emprise</title>
+            <para>Extension de la ressource. Type de données pour l'information sur l'étendue horizontale, verticale et temporelle du jeu de données</para>
+        </formalpara>
+        <formalpara>
+            <title>Fax</title>
+            <para>Numéro du fax permettant de contacter l'organisme et/ou le contact</para>
+        </formalpara>
+        <formalpara>
+            <title>Identifiant du fichier</title>
+            <para>Identifiant unique pour le fichier de métadonnées</para>
+        </formalpara>
+        <formalpara>
+            <title>Représentation spatiale du vecteur - Type d'objet géométrique</title>
+            <para>Nom des types d’objets spatiaux utilisés pour localiser les données : lignes, polygones,…</para>
+        </formalpara>
+        <formalpara>
+            <title>Représentation spatiale du vecteur - Nombre d'objets géométriques</title>
+            <para>Nombre total d'objets de type point ou vecteur intervenant dans le jeu de données</para>
+        </formalpara>
+        <formalpara>
+            <title>Rectangle englobant</title>
+            <para>Coordonnées des quatre points cardinaux constituant le rectangle englobant l’ensemble des données. Dans ce cas, les coordonnées s’expriment toujours en longitude / Latitude.</para>
+        </formalpara>
+        <formalpara>
+            <title>Représentation spatiale du raster</title>
+            <para>Classe contenant l'information sur les objets spatiaux de type raster du jeu de données</para>
+        </formalpara>
+        <formalpara>
+            <title>Représentation spatiale du raster - Résolution</title>
+            <para>Degré de détail dans le jeu de données de type raster</para>
+        </formalpara>
+        <formalpara>
+            <title>Représentation spatiale du raster - Disponibilité des paramètres de transformation</title>
+            <para>Indication si oui ou non des paramètres de transformation existent (booléen)</para>
+        </formalpara>
+        <formalpara>
+            <title>Qualité de la donnée - Niveau hiérarchique</title>
+            <para>Niveau hiérarchique des données spécifiées par l'attribut scope (79) du domaine d'applicabilité (B.5.25)</para>
+        </formalpara>
+        <formalpara>
+            <title>Informations d'identification</title>
+            <para>Informations de base sur la ressource</para>
+        </formalpara>
+        <formalpara>
+            <title>Point de contact - Nom</title>
+            <para>Nom de la personne responsable</para>
+        </formalpara>
+        <formalpara>
+            <title>Mot-clé</title>
+            <para>Mots ou notions courants utilisés pour décrire le sujet</para>
+        </formalpara>
+        <formalpara>
+            <title>Langue de la donnée</title>
+            <para>Langue utilisée pour la donnée documentée</para>
+        </formalpara>
+        <formalpara>
+            <title>Langue de la métadonnée</title>
+            <para>Langue utilisée pour la métadonnée</para>
+        </formalpara>
+        <formalpara>
+            <title>Qualité de la donnée - Généalogie</title>
+            <para>Informations de qualité concernant la provenance des données</para>
+        </formalpara>
+        <formalpara>
+            <title>Ressource en ligne - Adresse (URL)</title>
+            <para>URL ou indication semblable d'une adresse Internet pour un accès en ligne, par exemple http://www.isotc211.org</para>
+        </formalpara>
+        <formalpara>
+            <title>Maintenance et fréquence de mise à jour</title>
+            <para>Informations sur la fréquence de mise à jour des données</para>
+        </formalpara>
+        <formalpara>
+            <title>Auteur de la métadonnée</title>
+            <para>Personne/équipe responsable pour l’information sur la métadonnée. (Point de contact) (Ci-citation et adresse)</para>
+        </formalpara>
+        <formalpara>
+            <title>Norme de métadonnée</title>
+            <para>Norme de la métadonnée utilisée</para>
+        </formalpara>
+        <formalpara>
+            <title>Version de la norme de métadonnée</title>
+            <para>Version de la norme de métadonnée utilisée</para>
+        </formalpara>
+        <formalpara>
+            <title>Ressource en ligne - Nom</title>
+            <para>Nom de la ressource en ligne</para>
+        </formalpara>
+        <formalpara>
+            <title>Rectangle englobant - Latitude nord</title>
+            <para>Coordonnée la plus au nord de la limite de l'étendue du jeu de données, exprimée en latitude avec des degrés décimaux (NORD positif)</para>
+        </formalpara>
+        <formalpara>
+            <title>Représentation du raster - Nombre de dimensions</title>
+            <para>Nombre d'axes spatio-temporels indépendants</para>
+        </formalpara>
+        <formalpara>
+            <title>Informations de distribution - Ressource en ligne</title>
+            <para>Informations sur les sources en ligne à partir desquelles la ressource peut être obtenue</para>
+        </formalpara>
+        <formalpara>
+            <title>Point de contact - Nom de l'organisation</title>
+            <para>Nom de l'organisation responsable</para>
+        </formalpara>
+        <formalpara>
+            <title>Autres contraintes</title>
+            <para>Autres restrictions et prérequis légaux pour accéder et utiliser les métadonnées ou la ressource</para>
+        </formalpara>
+        <formalpara>
+            <title>Point de contact</title>
+            <para>Identification, et mode de communication avec, des personnes ou des organisations devant servir de point de contact pour la ressource</para>
+        </formalpara>
+        <formalpara>
+            <title>Point de contact - Position</title>
+            <para>Rôle de la personne responsable dans l'organisation</para>
+        </formalpara>
+        <formalpara>
+            <title>Code postal</title>
+            <para>Code postal</para>
+        </formalpara>
+        <formalpara>
+            <title>Type de représentation</title>
+            <para>Type de représentation de la ressource</para>
+        </formalpara>
+        <formalpara>
+            <title>Ressource en ligne - protocole</title>
+            <para>Protocole de connection utilisé</para>
+        </formalpara>
+        <formalpara>
+            <title>Objectifs</title>
+            <para>Résumé des intentions pour lesquelles la donnée a été créée</para>
+        </formalpara>
+        <formalpara>
+            <title>Informations sur le système de localisation</title>
+            <para>Description du système de projection spatial et temporel utilisé par la ressource</para>
+        </formalpara>
+        <formalpara>
+            <title>Rapport sur la qualité de la donnée</title>
+            <para>Description d'un rapport sur la qualité sur l'une des 5 composantes de la qualité</para>
+        </formalpara>
+        <formalpara>
+            <title>Représentation spatiale du raster - Résolution</title>
+            <para>Degré de détail dans le jeu de données de type raster</para>
+        </formalpara>
+        <formalpara>
+            <title>Point de contact - Rôle</title>
+            <para>Fonction de la personne sur la ressource</para>
+        </formalpara>
+        <formalpara>
+            <title>Rectangle englobant - latitude sud</title>
+            <para>Coordonnée la plus au sud de la limite de l'étendue du jeu de données, exprimée en latitude avec des degrés décimaux (NORD positif)</para>
+        </formalpara>
+        <formalpara>
+            <title>Informations sur la représentation spatiale</title>
+            <para>Informations sur la représentation spatiale</para>
+        </formalpara>
+        <formalpara>
+            <title>Type de représentation spatiale</title>
+            <para>Méthode utilisée pour représenter spatialement l'information géographique</para>
+        </formalpara>
+        <formalpara>
+            <title>Qualité de la donnée - Généralités sur la provenance</title>
+            <para>Explication générale sur les connaissances du producteur de données sur la généalogie du jeu de données</para>
+        </formalpara>
+        <formalpara>
+            <title>Etat</title>
+            <para>Etat de la ressource</para>
+        </formalpara>
+        <formalpara>
+            <title>Information supplémentaire</title>
+            <para>Toute autre information descriptive sur le jeu de données</para>
+        </formalpara>
+        <formalpara>
+            <title>Etendue temporelle</title>
+            <para>Période de temps couverte par le jeu de données</para>
+        </formalpara>
+        <formalpara>
+            <title>Titre</title>
+            <para>Nom par lequel la ressource est connue</para>
+        </formalpara>
+        <formalpara>
+            <title>Thématique</title>
+            <para>thème(s) principal(aux) du jeu de données (voir liste fermée de la norme) (B.5.27)</para>
+        </formalpara>
+        <formalpara>
+            <title>Représentation spatiale du raster - Disponibilité des paramètres de transformation</title>
+            <para>Indication si oui ou non des paramètres de transformation existent (booléen)</para>
+        </formalpara>
+        <formalpara>
+            <title>Représentation spatiale du vecteur - Niveau topologique</title>
+            <para>Information qui identifie le degré de complexité des relations spatiales : topologie, planaire, (B.5.28)</para>
+        </formalpara>
+        <formalpara>
+            <title>Type de mots-clés</title>
+            <para>Thèmes utilisés pour grouper des mots clés similaires</para>
+        </formalpara>
+        <formalpara>
+            <title>URL</title>
+            <para>Unified Resource Locator</para>
+        </formalpara>
+        <formalpara>
+            <title>Contraintes d'utilisation</title>
+            <para>Contraintes appliquées pour assurer la protection des sphères privées et intellectuelles, et autres restrictions spéciales ou limitations ou mises en garde pour utiliser les métadonnées ou la ressource</para>
+        </formalpara>
+        <formalpara>
+            <title>Représentation spatiale du vecteur</title>
+            <para>Classe qui contient l'information sur les objets géographiques de type vecteur du jeu de données</para>
+        </formalpara>
+        <formalpara>
+            <title>Numéro de téléphone</title>
+            <para>Numéro de téléphone</para>
+        </formalpara>
+        <formalpara>
+            <title>Rectangle englobant - Longitude ouest</title>
+            <para>Coordonnée la plus à l'ouest de la limite de l'étendue du jeu de données, exprimée en longitude avec des degrés décimaux (EST positif)</para>
+        </formalpara>
+    </appendix>
+</book>
