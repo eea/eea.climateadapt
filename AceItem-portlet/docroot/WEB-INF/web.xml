@@ -282,6 +282,15 @@
 		<load-on-startup>0</load-on-startup>
 	</servlet>
 	<servlet>
+		<servlet-name>wxsharvesterportlet</servlet-name>
+		<servlet-class>com.liferay.portal.kernel.servlet.PortletServlet</servlet-class>
+		<init-param>
+			<param-name>portlet-class</param-name>
+			<param-value>nl.wur.alterra.cgi.ace.portlet.WxsHarvesterPortlet</param-value>
+		</init-param>
+		<load-on-startup>0</load-on-startup>
+	</servlet>
+	<servlet>
 		<servlet-name>aceitemdetailportlet</servlet-name>
 		<servlet-class>com.liferay.portal.kernel.servlet.PortletServlet</servlet-class>
 		<init-param>
@@ -298,6 +307,10 @@
 	<servlet-mapping>
 		<servlet-name>nasportlet</servlet-name>
 		<url-pattern>/nasportlet/*</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>wxsharvesterportlet</servlet-name>
+		<url-pattern>/wxsharvesterportlet/*</url-pattern>
 	</servlet-mapping>
 	<servlet-mapping>
 		<servlet-name>aceitemdetailportlet</servlet-name>

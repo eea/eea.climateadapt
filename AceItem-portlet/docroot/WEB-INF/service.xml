@@ -80,17 +80,44 @@
 		<column name="nassourceid" type="long" primary="true" />
 		<column name="nasId" type="long" />
 		<column name="name" type="String" />
+        <!-- Liferay internal: -->
 		<column name="companyId" type="long" />
 		<column name="groupId" type="long" />
 		
 		<order by="asc">
 			<order-column name="name" case-sensitive="false" />
-		</order>	
+		</order>
+
+        <!-- Liferay internal: -->
 		<finder name="GroupId" return-type="Collection">
 			<finder-column name="groupId" />
 		</finder>		
 		<reference package-path="com.liferay.portlet.asset" entity="AssetEntry" />	
-	</entity>	
+	</entity>
+
+	<entity name="WxsHarvester" local-service="true" remote-service="false">
+		<column name="wxsharvesterid" type="long" primary="true" />
+		<column name="name" type="String" />
+        <column name="url" type="String" />
+        <column name="ogctype" type="String" />
+        <column name="every" type="int" />
+        <column name="topic" type="String" />
+        <column name="savedToGeoNetwork" type="boolean" />
+        <column name="geonetworkId" type="long" />
+        <column name="geonetworkUUID" type="String" />
+        <!-- Liferay internal: -->
+		<column name="companyId" type="long" />
+		<column name="groupId" type="long" />
+
+		<order by="asc">
+			<order-column name="name" case-sensitive="false" />
+		</order>
+        <!-- Liferay internal: -->
+		<finder name="GroupId" return-type="Collection">
+			<finder-column name="groupId" />
+		</finder>
+		<reference package-path="com.liferay.portlet.asset" entity="AssetEntry" />
+	</entity>
 	
 
 	

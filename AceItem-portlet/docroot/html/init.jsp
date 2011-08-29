@@ -23,6 +23,8 @@
 
 <%@ page import="nl.wur.alterra.cgi.ace.model.AceItem"%>
 <%@ page import="nl.wur.alterra.cgi.ace.service.AceItemLocalServiceUtil"%>
+<%@ page import="nl.wur.alterra.cgi.ace.model.WxsHarvester"%>
+<%@ page import="nl.wur.alterra.cgi.ace.service.WxsHarvesterLocalServiceUtil"%>
 
 <liferay-theme:defineObjects />
 

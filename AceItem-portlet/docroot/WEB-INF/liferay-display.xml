@@ -4,7 +4,8 @@
 <display>
 	<category name="Ace">
 		<portlet id="aceitemportlet"></portlet>
-		<portlet id="nasportlet"></portlet>
+        <portlet id="nasportlet"></portlet>
+        <portlet id="wxsharvesterportlet"></portlet>
 		<portlet id="aceitemdetailportlet"></portlet>
 	</category>
 </display>
