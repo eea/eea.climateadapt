@@ -264,6 +264,25 @@ public class MeasurePortlet extends MVCPortlet {
 
 		prefs.setValue(Constants.wmsPreferenceName, wms);
 
+		// Microsoft Virtual Earth locator REST API URL
+		String locatorUrl = ParamUtil.getString(request, Constants.locatorUrlPreferenceName);
+		
+		if (! locatorUrl.endsWith("/")) {
+			locatorUrl += "/";
+		}
+
+		prefs.setValue(Constants.locatorUrlPreferenceName, locatorUrl);
+		
+		// Microsoft VE API key
+		String locatorkey = ParamUtil.getString(request, Constants.locatorKeyPreferenceName);
+
+		prefs.setValue(Constants.locatorKeyPreferenceName, locatorkey);
+		
+		// Microsoft Bing time out
+		String bingtimeout = ParamUtil.getString(request, Constants.bingTimeOutPreferenceName);
+
+		prefs.setValue(Constants.bingTimeOutPreferenceName, bingtimeout);
+
 		prefs.store();
 	}
 	

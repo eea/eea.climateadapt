@@ -195,7 +195,9 @@
 	</aui:button-row>
 </aui:form>
 
-<script type="text/javascript">
+<div id='map_element'></div>
+
+<script>
 	var proxyUrl = '<%= prefs.getValue(Constants.proxyUrlPreferenceName, "") %>';
 	
 	var geoserverUrl = '<%= prefs.getValue(Constants.geoserverUrlPreferenceName, "http://ace.geocat.net/geoserver/") %>';
@@ -203,21 +205,29 @@
 	var wms = '<%= prefs.getValue(Constants.wmsPreferenceName, "wms") %>';
 	
 	var wfs = '<%= prefs.getValue(Constants.wfsPreferenceName, "wfs") %>';
-				
-	var measurechmmap = new CHM.MeasureCHMMap('map_element', {});
 	
-	measurechmmap.setOnMeasureChanged(this.measureChanged);
-				
-	measurechmmap.setOnAreaChanged(this.areaChanged);
+	var measurechmmap;
 	
-	handleClick(null);
-			
-	function handleClick(e) {
-		measurechmmap.setMeasure(new CHM.Measure(document._measureportlet_WAR_Measureportlet_fm.lat.value, document._measureportlet_WAR_Measureportlet_fm.lon.value, "EPSG:4326"));
+    $(document).ready(function() {
+    	setTimeout(function(){init();}, <%= prefs.getValue(Constants.bingTimeOutPreferenceName, "100") %>);
+    });
+    
+    function init() {	
+    	measurechmmap = new CHM.MeasureCHMMap('map_element', {});
+    	
+    	measurechmmap.setOnMeasureChanged(this.measureChanged);
+		
+    	measurechmmap.setOnAreaChanged(this.areaChanged);
+    	
+    	handleClick(null);
+    }    			
+
+    function handleClick(e) {
+		measurechmmap.setMeasure(new CHM.Measure(document._measureportlet_WAR_Measureportlet_fm.lat.value, document._measureportlet_WAR_Measureportlet_fm.lon.value, new OpenLayers.Projection('EPSG:4326')));
 	}
 			
 	function measureChanged() {
-		var measure = measurechmmap.getMeasure('EPSG:4326');
+		var measure = measurechmmap.getMeasure(new OpenLayers.Projection('EPSG:4326'));
 				
 		document._measureportlet_WAR_Measureportlet_fm.lat.value = measure.x;
 				

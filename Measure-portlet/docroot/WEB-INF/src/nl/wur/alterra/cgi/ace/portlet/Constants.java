@@ -5,7 +5,13 @@ public class Constants {
 
 	public static final String ORDERBYTYPE = "orderByType"; // exactly this is obliged
 
+	public static String bingTimeOutPreferenceName = "bingtimeout";
+
 	public static String geoserverUrlPreferenceName = "geoserverUrl";
+
+	public static String locatorUrlPreferenceName = "locatorUrl";
+	
+	public static String locatorKeyPreferenceName = "locatorKey";
 
 	public static String proxyUrlPreferenceName = "proxyUrl";
 
