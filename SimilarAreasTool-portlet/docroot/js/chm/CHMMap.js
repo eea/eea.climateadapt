@@ -46,9 +46,5 @@ CHM.CHMMap = OpenLayers.Class(OpenLayers.Map, {
 		if (! this.getCenter()) {
 			this.zoomToMaxExtent();
 		}
-	},
-	
-	getFeature : function() {
-		return this.feature;
 	} 
 });

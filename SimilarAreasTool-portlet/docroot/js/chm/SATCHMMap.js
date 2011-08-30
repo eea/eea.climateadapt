@@ -46,7 +46,7 @@ CHM.SATCHMMap = OpenLayers.Class(CHM.CHMMap, {
     			displayInLayerSwitcher: true,
         		type: OpenLayers.Filter.Comparison.NOT_EQUAL_TO, 
         		fill_color: '#ff9393', 
-        		stroke_color: '#ff0000'
+        		stroke_color: '#ffff00'
         	});
         
         select = new OpenLayers.Layer.Vector(
@@ -84,9 +84,6 @@ CHM.SATCHMMap = OpenLayers.Class(CHM.CHMMap, {
         	feature.geometry.getBounds().getCenterLonLat(),
             null,
             "<table width='100%' border='0'>" +
-            "<tr><th>" + feature.attributes.sectors + "</th></tr>" + 
-            "<tr><th>" + feature.attributes.risks + "</th></tr>" + 
-            "<tr><th>" + feature.attributes.area + "</th></tr>" + 
             "<tr><th>" + feature.attributes.name + "</th></tr>" + 
             "<tr><td>" + feature.attributes.description + "</td></tr>" + 
             "<tr><td><a href='" + feature.attributes.website + "' target='top'>" + feature.attributes.website + "</a></td></tr>" + 
