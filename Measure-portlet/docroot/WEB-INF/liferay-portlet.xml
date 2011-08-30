@@ -17,6 +17,12 @@
 		<header-portlet-javascript>/js/chm/Measure.js</header-portlet-javascript>
 		<header-portlet-javascript>/js/chm/MeasureControl.js</header-portlet-javascript>
 		<header-portlet-javascript>/js/chm/MeasureCHMMap.js</header-portlet-javascript>
+		<header-portlet-javascript>/js/chm/Resource.js</header-portlet-javascript>
+		<header-portlet-javascript>/js/chm/ResourceSet.js</header-portlet-javascript>
+		<header-portlet-javascript>/js/chm/Point.js</header-portlet-javascript>
+		<header-portlet-javascript>/js/chm/Location.js</header-portlet-javascript>
+		<header-portlet-javascript>/js/chm/LocationControl.js</header-portlet-javascript>
+		<header-portlet-javascript>/js/chm/Locator.js</header-portlet-javascript>
 		<footer-portlet-javascript>/js/javascript.js</footer-portlet-javascript>
 		<css-class-wrapper>measureportlet-portlet</css-class-wrapper>
 	</portlet>

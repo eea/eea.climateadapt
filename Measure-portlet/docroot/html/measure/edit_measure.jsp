@@ -173,6 +173,13 @@
 		
 		< a u i  :input name="publicationdate" / -->
 		
+		<div id="locator">
+			<input type="text" name="location" id="location" />
+			<a onclick="locate(document.getElementById('location').value)">Locate</a>
+		</div>
+		
+		<div id='locations_element'></div>
+
 		<div id="map_element" style='width: 500px; height: 500px;'></div>
 		
 		<b>lat</b><br />	
@@ -206,7 +213,13 @@
 	
 	var wfs = '<%= prefs.getValue(Constants.wfsPreferenceName, "wfs") %>';
 	
+	var locatorUrl = '<%= prefs.getValue(Constants.locatorUrlPreferenceName, "http://dev.virtualearth.net/REST/v1/Locations/") %>';
+	
+	var locatorKey = '<%= prefs.getValue(Constants.locatorKeyPreferenceName, "Ao9qujBzDtg-nFiusTjt5VQ9x2NJB2wAD7YCRjaPz7hQQjxdFcl24tyhOwCDCIrw") %>';
+	
 	var measurechmmap;
+	
+	var locator;
 	
     $(document).ready(function() {
     	setTimeout(function(){init();}, <%= prefs.getValue(Constants.bingTimeOutPreferenceName, "100") %>);
@@ -218,9 +231,17 @@
     	measurechmmap.setOnMeasureChanged(this.measureChanged);
 		
     	measurechmmap.setOnAreaChanged(this.areaChanged);
+		
+    	locator = new CHM.Locator('locations_element', {});
+
+    	locator.setOnLocationChanged(handleLocationChanged);
     	
     	handleClick(null);
     }    			
+
+	function handleLocationChanged() {
+		measurechmmap.setMeasure(new CHM.Measure(locator.getLocation().x, locator.getLocation().y, new OpenLayers.Projection('EPSG:4326')));
+	}
 
     function handleClick(e) {
 		measurechmmap.setMeasure(new CHM.Measure(document._measureportlet_WAR_Measureportlet_fm.lat.value, document._measureportlet_WAR_Measureportlet_fm.lon.value, new OpenLayers.Projection('EPSG:4326')));
@@ -237,4 +258,8 @@
 	function areaChanged() {
 		document._measureportlet_WAR_Measureportlet_fm.satarea.value = measurechmmap.getArea();
 	}
+	
+    function locate(aLocation) {
+    	locator.locate(aLocation);
+    }
 </script>

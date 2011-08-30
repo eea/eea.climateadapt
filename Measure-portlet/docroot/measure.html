@@ -13,8 +13,19 @@
 		<script type="text/javascript" src="js/chm/Measure.js"></script>
 		<script type="text/javascript" src="js/chm/MeasureControl.js"></script>
 		<script type="text/javascript" src="js/chm/MeasureCHMMap.js"></script>
+		<script type="text/javascript" src="js/chm/Resource.js"></script>
+		<script type="text/javascript" src="js/chm/ResourceSet.js"></script>
+		<script type="text/javascript" src="js/chm/Point.js"></script>
+		<script type="text/javascript" src="js/chm/Locator.js"></script>
+		<script type="text/javascript" src="js/chm/Location.js"></script>
+		<script type="text/javascript" src="js/chm/LocationControl.js"></script>
 	</head>
 	<body>
+		<div id="locator">
+			<input type="text" name="location" id="location" />
+			<a onclick="locate(document.getElementById('location').value)">Locate</a>
+		</div>
+		<div id='locations_element'></div>
 		<div id='map_element' style='width: 500px; height: 500px;'></div>
 		<form name='form' id='form'>
 			<input name='lat' id='lat'/>
@@ -31,7 +42,13 @@
 			
 			var wfs = 'wfs';
 			
+			var locatorUrl = 'http://localhost/ve/REST/v1/Locations/';
+			
+			var locatorKey = 'Ao9qujBzDtg-nFiusTjt5VQ9x2NJB2wAD7YCRjaPz7hQQjxdFcl24tyhOwCDCIrw';
+			
 			var measurechmmap;
+			
+			var locator;
 			
 		    $(document).ready(function() {
 		    	setTimeout(function(){init();}, 500);
@@ -44,8 +61,16 @@
 				
 		    	measurechmmap.setOnAreaChanged(this.areaChanged);
 		    	
+				locator = new CHM.Locator('locations_element', {});
+				
+				locator.setOnLocationChanged(handleLocationChanged);
+				
 		    	handleClick(null);
 		    }    			
+			
+			function handleLocationChanged() {
+				measurechmmap.setMeasure(new CHM.Measure(locator.getLocation().x, locator.getLocation().y, new OpenLayers.Projection('EPSG:4326')));
+			}
 		
 		    function handleClick(e) {
 				measurechmmap.setMeasure(new CHM.Measure(document.form.lat.value, document.form.lon.value, new OpenLayers.Projection('EPSG:4326')));
@@ -62,6 +87,10 @@
 			function areaChanged() {
 				document.form.area.value = measurechmmap.getArea();
 			}
+	    	
+		    function locate(aLocation) {
+		    	locator.locate(aLocation);
+		    }
 		</script>
 	</body>
 </html>
