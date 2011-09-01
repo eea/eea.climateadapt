@@ -10,6 +10,25 @@
 
 	String redirect = ParamUtil.getString(request, "redirect");
 %>
+		<script type="text/javascript"> 
+			
+		jQuery(document).ready(function() {
+
+			var $j = jQuery.noConflict();	
+
+		    $j("#mao_m").click(function() {
+			       $j("#locationselection").removeClass("toggleshow");
+			       $j("#locationselection").addClass("togglehide");
+		    });
+		    
+		    $j("#mao_a").click(function() {	
+			       $j("#locationselection").removeClass("togglehide");
+			       $j("#locationselection").addClass("toggleshow");
+		    });
+
+		});		
+			
+		</script>
 
 <liferay-ui:header
 	backURL="<%= redirect %>"
@@ -153,17 +172,21 @@
 <%
 		String m_checked = "";
 		String a_checked = "";
+		String toggleclass = "togglehide";
 		
 		if(measure != null && measure.getMao_type().equalsIgnoreCase("M") ) {
 			m_checked = "checked";
 		}
 		else {
 			a_checked = "checked";
+			toggleclass = "toggleshow";
 		}
 %>
 		<b>Type</b><br />
-		<input name="mao_type" type="radio" value="M" <%= m_checked %>>Adaptation option&nbsp;&nbsp;&nbsp;
-		<input name="mao_type" type="radio" value="A" <%= a_checked %>>Case study<br /><br />
+		<input id="mao_m" name="mao_type" type="radio" value="M" <%= m_checked %>>Adaptation option&nbsp;&nbsp;&nbsp;
+		<input id="mao_a" name="mao_type" type="radio" value="A" <%= a_checked %>>Case study<br /><br />
+		
+
 		
 		<b>Source</b><br />
 		<input name="source" type="text" size="65" value='<%= measure == null ? "" : measure.getSource() %>'><br /><br />
@@ -172,7 +195,7 @@
 		< a u  i:input name="enddate" / >
 		
 		< a u i  :input name="publicationdate" / -->
-		
+	<div id="locationselection" class="<%= toggleclass %>">	
 		<div id="locator">
 			<input type="text" name="location" id="location" />
 			<a onclick="locate(document.getElementById('location').value)">Locate</a>
@@ -192,13 +215,14 @@
 		
 		<b>satarea</b><br />	
 		<input name="satarea" type="text" size="50" value='<%= measure == null ? "" : measure.getSatarea() %>'><br /><br />
-		</div>		
+	  </div>
+	</div>		
 	</aui:fieldset>
 
 	<aui:button-row>
 		<aui:button type="submit" />
 
-		<aui:button type="cancel"  onClick="<%= redirect %>" />
+		<aui:button type="cancel"  onClick="history.go(-1);" /> <!-- onClick="< %= redirect % >" -->
 	</aui:button-row>
 </aui:form>
 

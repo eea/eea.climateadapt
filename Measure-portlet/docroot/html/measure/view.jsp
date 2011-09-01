@@ -97,17 +97,27 @@
 		/>
 
 		<liferay-ui:search-container-column-text
-			name="sectors_" 
+			name="sectors" 
 			value="<%= sectors %>"
-		/>  
+		/> 
 
 		<liferay-ui:search-container-column-text
-			name="climateimpacts_"
+			name="impacts"
 			value="<%= impacts %>"
 		/>
 
 		<liferay-ui:search-container-column-text
-			name="type"
+			name="lon" 
+			value="<%= "" + measure.getLon() %>"
+		/>
+
+		<liferay-ui:search-container-column-text
+			name="lat" 
+			value="<%= "" + measure.getLat() %>"
+		/> 
+
+		<liferay-ui:search-container-column-text
+			name="type" orderable="<%= true %>" orderableProperty="type" 
 			value="<%= type %>"
 		/>
 
