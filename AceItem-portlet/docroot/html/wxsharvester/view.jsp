@@ -54,6 +54,8 @@
 <%
 	  String nameLink = wxsharvester.getName() ;
 	  String urlLink = wxsharvester.getUrl() ;
+	  
+	  String availableInGeoNetwork = (wxsharvester.getSavedToGeoNetwork() ? "yes" : "no");
 %>      
       
 		<liferay-ui:search-container-column-text
@@ -64,6 +66,11 @@
 		<liferay-ui:search-container-column-text
 			name="url"
 			value="<%= urlLink %>"
+		/>
+
+		<liferay-ui:search-container-column-text
+			name="Available in GeoNetwork"
+			value="<%= availableInGeoNetwork %>"
 		/>
 
 		<liferay-ui:search-container-column-jsp

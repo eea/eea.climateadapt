@@ -84,7 +84,7 @@ public class WxsHarvesterPortlet extends MVCPortlet {
         wxsHarvester.setGeonetworkUUID(ParamUtil.getString(request, "geonetworkUUID"));
         wxsHarvester.setName(ParamUtil.getString(request, "name"));
         wxsHarvester.setOgctype(ParamUtil.getString(request, "ogctype"));
-        wxsHarvester.setSavedToGeoNetwork(ParamUtil.getBoolean(request, "savedToGeoNetwork"));
+        //wxsHarvester.setSavedToGeoNetwork(ParamUtil.getBoolean(request, "savedToGeoNetwork"));
         wxsHarvester.setUrl(ParamUtil.getString(request, "url"));
         wxsHarvester.setTopic(ParamUtil.getString(request, "topic"));
 
@@ -131,6 +131,52 @@ public class WxsHarvesterPortlet extends MVCPortlet {
 		}
 	}
 
+
+	/**
+	 * Adds a WxsHarvester to GeoNetwork.
+	 *
+	 */
+	public void saveWxsHarvesterToGeoNetwork(ActionRequest request, ActionResponse response) throws Exception {	
+		WxsHarvester wxsHarvester = WxsHarvesterLocalServiceUtil.getWxsHarvester(ParamUtil.getLong(request, "wxsharvesterid"));
+		
+		if (!wxsHarvester.getSavedToGeoNetwork()) {
+			// TODO: Implement to create the harvester in GeoNetwork
+			
+			wxsHarvester.setSavedToGeoNetwork(true);
+			WxsHarvesterLocalServiceUtil.updateWxsHarvester(wxsHarvester);
+			SessionMessages.add(request, "wxsHarvester-updated");
+			sendRedirect(request, response);
+				
+		} else {
+			SessionErrors.add(request, "aceharvestergeonetwork-exist");
+			
+			PortalUtil.copyRequestParameters(request, response);
+			response.setRenderParameter("jspPage", "/html/wxsharvester/edit_wxsharvester.jsp");
+		}
+	}
+	
+	/**
+	 * Executes a WxsHarvester .
+	 *
+	 */
+	public void executeWxsHarvester(ActionRequest request, ActionResponse response) throws Exception {	
+		WxsHarvester wxsHarvester = WxsHarvesterLocalServiceUtil.getWxsHarvester(ParamUtil.getLong(request, "wxsharvesterid"));
+		
+		if (wxsHarvester.getSavedToGeoNetwork()) {
+			// TODO: Implement to create the harvester in GeoNetwork
+			
+			SessionMessages.add(request, "wxsHarvester-updated");
+			sendRedirect(request, response);
+				
+		} else {
+			SessionErrors.add(request, "aceharvestergeonetwork-notexist");
+			
+			PortalUtil.copyRequestParameters(request, response);
+			response.setRenderParameter("jspPage", "/html/wxsharvester/edit_wxsharvester.jsp");
+		}
+	}
+
+	
 	/**
 	 * Sets the preferences for how many WxsHarvesters can be viewed per page.
 	 *

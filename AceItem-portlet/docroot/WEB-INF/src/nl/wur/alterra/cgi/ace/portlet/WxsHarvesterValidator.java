@@ -18,7 +18,11 @@ public class WxsHarvesterValidator {
 	public static boolean validateWxsHarvester(WxsHarvester wxsHarvester, List errors) {
 		boolean valid = true;
 		if (Validator.isNull(wxsHarvester.getName())) {
-			errors.add("wxsHarvestername-required");
+			errors.add("aceharvestername-required");
+			valid = false;
+		}
+		if (Validator.isNull(wxsHarvester.getUrl())) {
+			errors.add("aceharvesterurl-required");
 			valid = false;
 		}
 		return valid;
