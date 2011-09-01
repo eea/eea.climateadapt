@@ -9,39 +9,20 @@ package nl.wur.alterra.cgi.ace.model.constants;
  */
 public enum OGCType {
     /**
-     * Publications and reports.
+     * WMS 1.0.0
      */
-    DOCUMENT,
+    WMS100,
     /**
-     * Information Sources.
+     * WMS 1.1.0
      */
-    INFORMATIONSOURCE,
+    WMS110,
     /**
-     * Maps, graphs and datasets.
+     * WMS 1.3.0
      */
-    MAPGRAPHDATASET,
-    /**
-     * Indicators.
-     */
-    INDICATOR,
-    /**
-     * Guidance.
-     */
-    TOOLGUIDANCE,
-    /**
-     * Research and knowledge projects.
-     */
-    RESEARCHPROJECT,
-    /**
-     * Adaptation options.
-     */
-    MEASURE, 
-    /**
-     * Case studies.
-     */
-    ACTION,
-    /**
-     * Organisations.
-     */
-    ORGANISATION
+    WMS130;
+    
+    public String getString() {
+        return this.name();
+    }
+
 }

@@ -9,39 +9,83 @@ package nl.wur.alterra.cgi.ace.model.constants;
  */
 public enum ISOTopicCategory {
     /**
-     * Publications and reports.
+     * farming
      */
-    DOCUMENT,
+    farming,
     /**
-     * Information Sources.
+     * biota
      */
-    INFORMATIONSOURCE,
+    biota,
     /**
-     * Maps, graphs and datasets.
+     * boundaries
      */
-    MAPGRAPHDATASET,
+    boundaries,
     /**
-     * Indicators.
+     * climatologyMeteorologyAtmosphere
      */
-    INDICATOR,
+    climatologyMeteorologyAtmosphere,
     /**
-     * Guidance.
+     * economy
      */
-    TOOLGUIDANCE,
+    economy,
     /**
-     * Research and knowledge projects.
+     * elevation
      */
-    RESEARCHPROJECT,
+    elevation,
     /**
-     * Adaptation options.
+     * environment
      */
-    MEASURE, 
+    environment,
     /**
-     * Case studies.
+     * geoscientificInformation
      */
-    ACTION,
+    geoscientificInformation,
     /**
-     * Organisations.
+     * health
      */
-    ORGANISATION
+    health,
+    /**
+     * imagerybasemapsearthcover
+     */
+    imageryBaseMapsEarthCover,
+    /**
+     * intelligencemilitary
+     */
+    intelligenceMilitary,
+    /**
+     * location
+     */
+    location,
+    /**
+     * inlandwaters
+     */
+    inlandWaters,
+    /**
+     * oceans
+     */
+    oceans,
+    /**
+     * planningcadastre
+     */
+    planningCadastre,
+    /**
+     * society
+     */
+    society,
+    /**
+     * structure
+     */
+    structure,
+    /**
+     * wms 1.0.0
+     */
+    transportation,
+    /**
+     * utilitiescommunication
+     */
+    utilitiesCommunication;
+    
+    public String getString() {
+        return this.name();
+    }
 }

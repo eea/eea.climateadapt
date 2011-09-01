@@ -53,11 +53,17 @@
       properties always get escaped                                   -->
 <%
 	  String nameLink = wxsharvester.getName() ;
+	  String urlLink = wxsharvester.getUrl() ;
 %>      
       
 		<liferay-ui:search-container-column-text
 			name="name"
 			value="<%= nameLink %>"
+		/>
+		
+		<liferay-ui:search-container-column-text
+			name="url"
+			value="<%= urlLink %>"
 		/>
 
 		<liferay-ui:search-container-column-jsp
