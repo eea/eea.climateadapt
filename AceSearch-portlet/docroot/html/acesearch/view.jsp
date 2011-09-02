@@ -1,4 +1,6 @@
 <%@ page import="java.util.Arrays" %>
+<%@page import="nl.wur.alterra.cgi.ace.search.AceSearchFormBean"%>
+<%@page import="nl.wur.alterra.cgi.ace.search.SearchRequestParams"%>
 <%--
 /**
 * Copyright (c) 2000-2010 Liferay, Inc. All rights reserved.
@@ -24,7 +26,16 @@ Long totalResults = (Long) request.getAttribute("total_results");
 
 
 // Retrieve parameters to fill form
-String anyOfThese = ParamUtil.getString(request, "anyOfThese");
+String anyOfThese;
+
+AceSearchFormBean acesearchformbean = (AceSearchFormBean) request.getAttribute(SearchRequestParams.SEARCH_PARAMS);
+
+if(acesearchformbean != null) {
+   anyOfThese = acesearchformbean.getAnyOfThese();
+}
+else {
+	anyOfThese = ParamUtil.getString(request, "anyOfThese");
+}
 
 String freetextAny = ParamUtil.getString(request, "freetextAny");
 if ((freetextAny == null) || (freetextAny.equals(""))) freetextAny = "1";

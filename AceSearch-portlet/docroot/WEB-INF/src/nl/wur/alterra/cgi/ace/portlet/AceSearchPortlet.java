@@ -5,15 +5,22 @@ import com.liferay.portal.kernel.servlet.SessionMessages;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.util.bridges.mvc.MVCPortlet;
 import nl.wur.alterra.cgi.ace.search.ACESearchPortalInterface;
+import nl.wur.alterra.cgi.ace.search.AceSearchFormBean;
+import nl.wur.alterra.cgi.ace.search.SearchRequestParams;
 import nl.wur.alterra.cgi.ace.search.lucene.ACELuceneException;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
 import javax.portlet.PortletPreferences;
 import javax.portlet.PortletException;
+import javax.portlet.RenderRequest;
+import javax.portlet.RenderResponse;
 import javax.portlet.ResourceRequest;
 import javax.portlet.ResourceResponse;
+import javax.servlet.http.HttpServletRequest;
+
 import java.io.IOException;
+import java.util.Map;
 
 import com.liferay.portal.kernel.util.ParamUtil;
 
@@ -25,6 +32,36 @@ import com.liferay.portal.kernel.util.ParamUtil;
  */
 public class AceSearchPortlet extends MVCPortlet {
 
+	@Override
+	public void doView(RenderRequest renderRequest, RenderResponse renderResponse) throws IOException, PortletException {
+		try {
+	    	HttpServletRequest httpRequest = 
+	    		PortalUtil.getOriginalServletRequest(
+	    		PortalUtil.getHttpServletRequest(renderRequest) ) ;
+	    	
+	    		String searchtext = httpRequest.getParameter("searchtext") ;
+	    		
+	    		if(searchtext != null && searchtext.trim().length() > 0) {
+	
+		        	ACESearchPortalInterface searchEngine = new ACESearchPortalInterface();		    			
+	    			AceSearchFormBean formBean = searchEngine.prepareACESearchFormBean(renderRequest);
+	    			formBean.setAnyOfThese( searchtext );
+	    			renderRequest.setAttribute(SearchRequestParams.SEARCH_PARAMS, formBean);
+	    			
+	    			searchEngine.handleSearchRequest(renderRequest, formBean);
+	    		}
+	    		else {
+
+	    			renderRequest.setAttribute(SearchRequestParams.SEARCH_PARAMS, null);
+	    		}
+		}
+        catch (ACELuceneException x) {
+			x.printStackTrace();
+            throw new PortletException(x);
+		}
+		super.doView(renderRequest, renderResponse);
+	}
+	
     /**
      * Searches AceItem Lucene index.
      *
