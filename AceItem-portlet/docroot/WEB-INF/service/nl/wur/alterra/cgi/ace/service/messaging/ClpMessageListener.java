@@ -23,6 +23,7 @@ import nl.wur.alterra.cgi.ace.service.AceItemLocalServiceUtil;
 import nl.wur.alterra.cgi.ace.service.ClpSerializer;
 import nl.wur.alterra.cgi.ace.service.NASLocalServiceUtil;
 import nl.wur.alterra.cgi.ace.service.NASSourceLocalServiceUtil;
+import nl.wur.alterra.cgi.ace.service.WxsHarvesterLocalServiceUtil;
 
 /**
  * @author Brian Wing Shun Chan
@@ -50,6 +51,8 @@ public class ClpMessageListener implements MessageListener {
 			NASLocalServiceUtil.clearService();
 
 			NASSourceLocalServiceUtil.clearService();
+
+			WxsHarvesterLocalServiceUtil.clearService();
 		}
 	}
 

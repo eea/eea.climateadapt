@@ -43,4 +43,17 @@
 		<field name="companyId" type="long" />
 		<field name="groupId" type="long" />
 	</model>
+	<model name="nl.wur.alterra.cgi.ace.model.WxsHarvester">
+		<field name="wxsharvesterid" type="long" />
+		<field name="name" type="String" />
+		<field name="url" type="String" />
+		<field name="ogctype" type="String" />
+		<field name="every" type="int" />
+		<field name="topic" type="String" />
+		<field name="savedToGeoNetwork" type="boolean" />
+		<field name="geonetworkId" type="long" />
+		<field name="geonetworkUUID" type="String" />
+		<field name="companyId" type="long" />
+		<field name="groupId" type="long" />
+	</model>
 </model-hints>

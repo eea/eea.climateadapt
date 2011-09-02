@@ -16,4 +16,9 @@
 		<property name="service" ref="nl.wur.alterra.cgi.ace.service.NASSourceLocalService" />
 	</bean>
 	<bean id="nl.wur.alterra.cgi.ace.service.persistence.NASSourcePersistence" class="nl.wur.alterra.cgi.ace.service.persistence.NASSourcePersistenceImpl" parent="basePersistence" />
+	<bean id="nl.wur.alterra.cgi.ace.service.WxsHarvesterLocalService" class="nl.wur.alterra.cgi.ace.service.impl.WxsHarvesterLocalServiceImpl" />
+	<bean id="nl.wur.alterra.cgi.ace.service.WxsHarvesterLocalServiceUtil" class="nl.wur.alterra.cgi.ace.service.WxsHarvesterLocalServiceUtil">
+		<property name="service" ref="nl.wur.alterra.cgi.ace.service.WxsHarvesterLocalService" />
+	</bean>
+	<bean id="nl.wur.alterra.cgi.ace.service.persistence.WxsHarvesterPersistence" class="nl.wur.alterra.cgi.ace.service.persistence.WxsHarvesterPersistenceImpl" parent="basePersistence" />
 </beans>

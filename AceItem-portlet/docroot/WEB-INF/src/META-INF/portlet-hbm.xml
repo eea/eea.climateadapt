@@ -5,6 +5,7 @@
 	<import class="nl.wur.alterra.cgi.ace.model.AceItem" />
 	<import class="nl.wur.alterra.cgi.ace.model.NAS" />
 	<import class="nl.wur.alterra.cgi.ace.model.NASSource" />
+	<import class="nl.wur.alterra.cgi.ace.model.WxsHarvester" />
 	<class name="nl.wur.alterra.cgi.ace.model.impl.AceItemImpl" table="Ace_AceItem">
 		<cache usage="read-write" />
 		<id name="aceItemId" type="long">
@@ -53,6 +54,22 @@
 		</id>
 		<property name="nasId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 		<property name="name" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="companyId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="groupId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+	</class>
+	<class name="nl.wur.alterra.cgi.ace.model.impl.WxsHarvesterImpl" table="Ace_WxsHarvester">
+		<cache usage="read-write" />
+		<id name="wxsharvesterid" type="long">
+			<generator class="assigned" />
+		</id>
+		<property name="name" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="url" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="ogctype" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="every" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
+		<property name="topic" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="savedToGeoNetwork" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
+		<property name="geonetworkId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="geonetworkUUID" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="companyId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 		<property name="groupId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 	</class>

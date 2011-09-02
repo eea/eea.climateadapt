@@ -971,6 +971,8 @@ public class NASSourcePersistenceImpl extends BasePersistenceImpl<NASSource>
 	protected NASPersistence nasPersistence;
 	@BeanReference(type = NASSourcePersistence.class)
 	protected NASSourcePersistence nasSourcePersistence;
+	@BeanReference(type = WxsHarvesterPersistence.class)
+	protected WxsHarvesterPersistence wxsHarvesterPersistence;
 	@BeanReference(type = ResourcePersistence.class)
 	protected ResourcePersistence resourcePersistence;
 	@BeanReference(type = UserPersistence.class)

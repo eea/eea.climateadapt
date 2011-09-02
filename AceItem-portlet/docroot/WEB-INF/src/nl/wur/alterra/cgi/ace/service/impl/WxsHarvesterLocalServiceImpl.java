@@ -11,14 +11,15 @@
  * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
  * details.
  */
-
 package nl.wur.alterra.cgi.ace.service.impl;
 
 import com.liferay.counter.service.CounterLocalServiceUtil;
 import com.liferay.portal.kernel.exception.SystemException;
+import nl.wur.alterra.cgi.ace.harvester.HarvesterUtil;
 import nl.wur.alterra.cgi.ace.model.WxsHarvester;
 import nl.wur.alterra.cgi.ace.model.impl.WxsHarvesterImpl;
 import nl.wur.alterra.cgi.ace.service.base.WxsHarvesterLocalServiceBaseImpl;
+import nl.wur.alterra.cgi.ace.util.GeoNetworkConnector;
 
 import java.util.List;
 
@@ -37,38 +38,69 @@ import java.util.List;
  * This is a local service. Methods of this service will not have security checks based on the propagated JAAS credentials because this service can only be accessed from within the same VM.
  * </p>
  *
- * @author heikki doeleman
  * @see nl.wur.alterra.cgi.ace.service.base.WxsHarvesterLocalServiceBaseImpl
  * @see nl.wur.alterra.cgi.ace.service.WxsHarvesterLocalServiceUtil
+ *
+ * @author heikki doeleman
+ *
  */
 public class WxsHarvesterLocalServiceImpl extends WxsHarvesterLocalServiceBaseImpl {
 
+    /**
+     * Creates empty WxsHarvester.
+     *
+     * @return wxsharvester
+     */
     public WxsHarvester createWxsHarvester() {
         return new WxsHarvesterImpl();
     }
 
 	/**
-	 * Adds the WxsHarvester to the database incrementing the primary key, and adds it to the Lucene index.
+	 * Adds the WxsHarvester to the database incrementing the primary key, adds the harvester to GeoNetwork, and
+     * schedules a periodic run.
 	 *
      * @param wxsHarvester WxsHarvester to add
      * @return added WxsHarvester
      * @throws com.liferay.portal.kernel.exception.SystemException hmm
 	 */
 	public WxsHarvester addWxsHarvester(WxsHarvester wxsHarvester) throws SystemException {
+
+        //
+        // add harvester in geonetwork
+        //
+        try {
+            System.out.println("adding harvester to GeoNetwork");
+            GeoNetworkConnector geoNetworkConnector = new GeoNetworkConnector();
+            wxsHarvester = geoNetworkConnector.addHarvester(wxsHarvester);
+            wxsHarvester.setSavedToGeoNetwork(true);
+
+        }
+        // if it fails, still add it in ACE for later retry
+        catch(Exception x) {
+            wxsHarvester.setSavedToGeoNetwork(false);
+            System.out.println("Error: failed to add harvester to GeoNetwork " + x.getMessage());
+            x.printStackTrace();
+        }
+
+        //
+        // add harvester in ACE
+        //
+        System.out.println("adding harvester to ACE");
 		long wxsHarvesterId = CounterLocalServiceUtil.increment(WxsHarvester.class.getName());
 		wxsHarvester.setWxsharvesterid(wxsHarvesterId);
         wxsHarvester = super.addWxsHarvester(wxsHarvester);
-       // try {
-       //     AceItemIndexer indexer = new AceItemIndexer();
-       //     indexer.add(aceitem);
-       // }
-       // catch (ACELuceneException x) {
-       //     System.out.println(x.getMessage());
-       //     x.printStackTrace();
-       //     throw new SystemException(x.getMessage(), x);
-       // }
+        System.out.println("finished adding harvester to ACE");
+
+        //
+        // schedule harvester for periodic runs
+        //
+        System.out.println("scheduling harvester thread");
+        HarvesterUtil.scheduleWxsHarvester(wxsHarvester);
+        System.out.println("finished scheduling harvester thread");
+
         return wxsHarvester;
 	}
+
 
 	/**
 	 *

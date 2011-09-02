@@ -21,6 +21,7 @@ import com.liferay.portal.model.BaseModel;
 import nl.wur.alterra.cgi.ace.model.AceItemClp;
 import nl.wur.alterra.cgi.ace.model.NASClp;
 import nl.wur.alterra.cgi.ace.model.NASSourceClp;
+import nl.wur.alterra.cgi.ace.model.WxsHarvesterClp;
 
 import java.lang.reflect.Method;
 
@@ -373,6 +374,109 @@ public class ClpSerializer {
 			}
 		}
 
+		if (oldModelClassName.equals(WxsHarvesterClp.class.getName())) {
+			WxsHarvesterClp oldCplModel = (WxsHarvesterClp)oldModel;
+
+			ClassLoader contextClassLoader = Thread.currentThread()
+												   .getContextClassLoader();
+
+			try {
+				Thread.currentThread().setContextClassLoader(_classLoader);
+
+				try {
+					Class<?> newModelClass = Class.forName("nl.wur.alterra.cgi.ace.model.impl.WxsHarvesterImpl",
+							true, _classLoader);
+
+					Object newModel = newModelClass.newInstance();
+
+					Method method0 = newModelClass.getMethod("setWxsharvesterid",
+							new Class[] { Long.TYPE });
+
+					Long value0 = new Long(oldCplModel.getWxsharvesterid());
+
+					method0.invoke(newModel, value0);
+
+					Method method1 = newModelClass.getMethod("setName",
+							new Class[] { String.class });
+
+					String value1 = oldCplModel.getName();
+
+					method1.invoke(newModel, value1);
+
+					Method method2 = newModelClass.getMethod("setUrl",
+							new Class[] { String.class });
+
+					String value2 = oldCplModel.getUrl();
+
+					method2.invoke(newModel, value2);
+
+					Method method3 = newModelClass.getMethod("setOgctype",
+							new Class[] { String.class });
+
+					String value3 = oldCplModel.getOgctype();
+
+					method3.invoke(newModel, value3);
+
+					Method method4 = newModelClass.getMethod("setEvery",
+							new Class[] { Integer.TYPE });
+
+					Integer value4 = new Integer(oldCplModel.getEvery());
+
+					method4.invoke(newModel, value4);
+
+					Method method5 = newModelClass.getMethod("setTopic",
+							new Class[] { String.class });
+
+					String value5 = oldCplModel.getTopic();
+
+					method5.invoke(newModel, value5);
+
+					Method method6 = newModelClass.getMethod("setSavedToGeoNetwork",
+							new Class[] { Boolean.TYPE });
+
+					Boolean value6 = new Boolean(oldCplModel.getSavedToGeoNetwork());
+
+					method6.invoke(newModel, value6);
+
+					Method method7 = newModelClass.getMethod("setGeonetworkId",
+							new Class[] { Long.TYPE });
+
+					Long value7 = new Long(oldCplModel.getGeonetworkId());
+
+					method7.invoke(newModel, value7);
+
+					Method method8 = newModelClass.getMethod("setGeonetworkUUID",
+							new Class[] { String.class });
+
+					String value8 = oldCplModel.getGeonetworkUUID();
+
+					method8.invoke(newModel, value8);
+
+					Method method9 = newModelClass.getMethod("setCompanyId",
+							new Class[] { Long.TYPE });
+
+					Long value9 = new Long(oldCplModel.getCompanyId());
+
+					method9.invoke(newModel, value9);
+
+					Method method10 = newModelClass.getMethod("setGroupId",
+							new Class[] { Long.TYPE });
+
+					Long value10 = new Long(oldCplModel.getGroupId());
+
+					method10.invoke(newModel, value10);
+
+					return newModel;
+				}
+				catch (Exception e) {
+					_log.error(e, e);
+				}
+			}
+			finally {
+				Thread.currentThread().setContextClassLoader(contextClassLoader);
+			}
+		}
+
 		return oldModel;
 	}
 
@@ -704,6 +808,105 @@ public class ClpSerializer {
 					Long value4 = (Long)method4.invoke(oldModel, (Object[])null);
 
 					newModel.setGroupId(value4);
+
+					return newModel;
+				}
+				catch (Exception e) {
+					_log.error(e, e);
+				}
+			}
+			finally {
+				Thread.currentThread().setContextClassLoader(contextClassLoader);
+			}
+		}
+
+		if (oldModelClassName.equals(
+					"nl.wur.alterra.cgi.ace.model.impl.WxsHarvesterImpl")) {
+			ClassLoader contextClassLoader = Thread.currentThread()
+												   .getContextClassLoader();
+
+			try {
+				Thread.currentThread().setContextClassLoader(_classLoader);
+
+				try {
+					WxsHarvesterClp newModel = new WxsHarvesterClp();
+
+					Method method0 = oldModelClass.getMethod(
+							"getWxsharvesterid");
+
+					Long value0 = (Long)method0.invoke(oldModel, (Object[])null);
+
+					newModel.setWxsharvesterid(value0);
+
+					Method method1 = oldModelClass.getMethod("getName");
+
+					String value1 = (String)method1.invoke(oldModel,
+							(Object[])null);
+
+					newModel.setName(value1);
+
+					Method method2 = oldModelClass.getMethod("getUrl");
+
+					String value2 = (String)method2.invoke(oldModel,
+							(Object[])null);
+
+					newModel.setUrl(value2);
+
+					Method method3 = oldModelClass.getMethod("getOgctype");
+
+					String value3 = (String)method3.invoke(oldModel,
+							(Object[])null);
+
+					newModel.setOgctype(value3);
+
+					Method method4 = oldModelClass.getMethod("getEvery");
+
+					Integer value4 = (Integer)method4.invoke(oldModel,
+							(Object[])null);
+
+					newModel.setEvery(value4);
+
+					Method method5 = oldModelClass.getMethod("getTopic");
+
+					String value5 = (String)method5.invoke(oldModel,
+							(Object[])null);
+
+					newModel.setTopic(value5);
+
+					Method method6 = oldModelClass.getMethod(
+							"getSavedToGeoNetwork");
+
+					Boolean value6 = (Boolean)method6.invoke(oldModel,
+							(Object[])null);
+
+					newModel.setSavedToGeoNetwork(value6);
+
+					Method method7 = oldModelClass.getMethod("getGeonetworkId");
+
+					Long value7 = (Long)method7.invoke(oldModel, (Object[])null);
+
+					newModel.setGeonetworkId(value7);
+
+					Method method8 = oldModelClass.getMethod(
+							"getGeonetworkUUID");
+
+					String value8 = (String)method8.invoke(oldModel,
+							(Object[])null);
+
+					newModel.setGeonetworkUUID(value8);
+
+					Method method9 = oldModelClass.getMethod("getCompanyId");
+
+					Long value9 = (Long)method9.invoke(oldModel, (Object[])null);
+
+					newModel.setCompanyId(value9);
+
+					Method method10 = oldModelClass.getMethod("getGroupId");
+
+					Long value10 = (Long)method10.invoke(oldModel,
+							(Object[])null);
+
+					newModel.setGroupId(value10);
 
 					return newModel;
 				}

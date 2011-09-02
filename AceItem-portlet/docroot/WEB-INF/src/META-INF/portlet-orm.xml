@@ -64,6 +64,22 @@
 			<transient name="primaryKey" />
 		</attributes>
 	</mapped-superclass>
+	<mapped-superclass class="nl.wur.alterra.cgi.ace.model.impl.WxsHarvesterModelImpl">
+		<attributes>
+			<id name="wxsharvesterid" />
+			<basic name="name" />
+			<basic name="url" />
+			<basic name="ogctype" />
+			<basic name="every" />
+			<basic name="topic" />
+			<basic name="savedToGeoNetwork" />
+			<basic name="geonetworkId" />
+			<basic name="geonetworkUUID" />
+			<basic name="companyId" />
+			<basic name="groupId" />
+			<transient name="primaryKey" />
+		</attributes>
+	</mapped-superclass>
 	<entity class="nl.wur.alterra.cgi.ace.model.impl.AceItemImpl" name="AceItem">
 		<table name="Ace_AceItem" />
 		<attributes />
@@ -74,6 +90,10 @@
 	</entity>
 	<entity class="nl.wur.alterra.cgi.ace.model.impl.NASSourceImpl" name="NASSource">
 		<table name="Ace_NASSource" />
+		<attributes />
+	</entity>
+	<entity class="nl.wur.alterra.cgi.ace.model.impl.WxsHarvesterImpl" name="WxsHarvester">
+		<table name="Ace_WxsHarvester" />
 		<attributes />
 	</entity>
 </entity-mappings>

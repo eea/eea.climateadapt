@@ -38,9 +38,11 @@ import nl.wur.alterra.cgi.ace.model.AceItem;
 import nl.wur.alterra.cgi.ace.service.AceItemLocalService;
 import nl.wur.alterra.cgi.ace.service.NASLocalService;
 import nl.wur.alterra.cgi.ace.service.NASSourceLocalService;
+import nl.wur.alterra.cgi.ace.service.WxsHarvesterLocalService;
 import nl.wur.alterra.cgi.ace.service.persistence.AceItemPersistence;
 import nl.wur.alterra.cgi.ace.service.persistence.NASPersistence;
 import nl.wur.alterra.cgi.ace.service.persistence.NASSourcePersistence;
+import nl.wur.alterra.cgi.ace.service.persistence.WxsHarvesterPersistence;
 
 import java.util.List;
 
@@ -352,6 +354,44 @@ public abstract class AceItemLocalServiceBaseImpl implements AceItemLocalService
 	}
 
 	/**
+	 * Gets the wxs harvester local service.
+	 *
+	 * @return the wxs harvester local service
+	 */
+	public WxsHarvesterLocalService getWxsHarvesterLocalService() {
+		return wxsHarvesterLocalService;
+	}
+
+	/**
+	 * Sets the wxs harvester local service.
+	 *
+	 * @param wxsHarvesterLocalService the wxs harvester local service
+	 */
+	public void setWxsHarvesterLocalService(
+		WxsHarvesterLocalService wxsHarvesterLocalService) {
+		this.wxsHarvesterLocalService = wxsHarvesterLocalService;
+	}
+
+	/**
+	 * Gets the wxs harvester persistence.
+	 *
+	 * @return the wxs harvester persistence
+	 */
+	public WxsHarvesterPersistence getWxsHarvesterPersistence() {
+		return wxsHarvesterPersistence;
+	}
+
+	/**
+	 * Sets the wxs harvester persistence.
+	 *
+	 * @param wxsHarvesterPersistence the wxs harvester persistence
+	 */
+	public void setWxsHarvesterPersistence(
+		WxsHarvesterPersistence wxsHarvesterPersistence) {
+		this.wxsHarvesterPersistence = wxsHarvesterPersistence;
+	}
+
+	/**
 	 * Gets the counter local service.
 	 *
 	 * @return the counter local service
@@ -565,6 +605,10 @@ public abstract class AceItemLocalServiceBaseImpl implements AceItemLocalService
 	protected NASSourceLocalService nasSourceLocalService;
 	@BeanReference(type = NASSourcePersistence.class)
 	protected NASSourcePersistence nasSourcePersistence;
+	@BeanReference(type = WxsHarvesterLocalService.class)
+	protected WxsHarvesterLocalService wxsHarvesterLocalService;
+	@BeanReference(type = WxsHarvesterPersistence.class)
+	protected WxsHarvesterPersistence wxsHarvesterPersistence;
 	@BeanReference(type = CounterLocalService.class)
 	protected CounterLocalService counterLocalService;
 	@BeanReference(type = ResourceLocalService.class)
