@@ -34,10 +34,7 @@ public class ACESearchPortalInterface {
      * @return keys to lists of results grouped by aceitemtype
      * @throws ACELuceneException hmm
      */
-    public List<String> handleSearchRequest(PortletRequest request) throws ACELuceneException {
-
-        AceSearchFormBean formBean = prepareACESearchFormBean(request);
-        request.setAttribute(SearchRequestParams.SEARCH_PARAMS, formBean);
+    public List<String> handleSearchRequest(PortletRequest request, AceSearchFormBean formBean) throws ACELuceneException {
 
 		List<String> keysAdded = new ArrayList<String>();
 		List<String> jsonKeysAdded = new ArrayList<String>();
@@ -52,15 +49,12 @@ public class ACESearchPortalInterface {
 				List<AceItemSearchResult> results = searchEngine.searchLuceneByType(formBean, aceItemType.name());
 				totalResults += results.size();
 
-				System.out.println("searchAceitem found #" + results.size() + " results of type " + aceItemType.name());
+				// System.out.println("searchAceitem found #" + results.size() + " results of type " + aceItemType.name());
 				request.setAttribute(aceItemType.name() + "_" + SearchRequestParams.SEARCH_RESULTS, results);
 
                  for(AceItemSearchResult wresult : results) {
 
                      AceItem result = wresult.getAceItem();
-
-                     //setter handles the shortening
-                     wresult.setShortdescription(result.getDescription());
 
                     // escape single quotes
                      result.setClimateimpacts_(result.getClimateimpacts_().replaceAll("'", "\'"));
@@ -103,18 +97,10 @@ public class ACESearchPortalInterface {
 		else {
 			for (String aceItemType : formBean.getAceitemtype()) {
 				List<AceItemSearchResult> results = searchEngine.searchLuceneByType(formBean, aceItemType);
-				
-                for(AceItemSearchResult wresult : results) {
-
-                    AceItem result = wresult.getAceItem();
-                    
-                    //setter handles the shortening
-                    wresult.setShortdescription(result.getDescription());
-                }
                 
 				totalResults += results.size();
 
-				System.out.println("searchAceitem found #" + results.size() + " results of type " + aceItemType);
+				// System.out.println("searchAceitem found #" + results.size() + " results of type " + aceItemType);
 				request.setAttribute(aceItemType + "_" + SearchRequestParams.SEARCH_RESULTS, results);
 				keysAdded.add(aceItemType + "_" + SearchRequestParams.SEARCH_RESULTS);
 				Gson gson = new Gson();
@@ -129,6 +115,13 @@ public class ACESearchPortalInterface {
 
 		return keysAdded;
     }
+    
+    public List<String> handleSearchRequest(PortletRequest request) throws ACELuceneException {
+
+    	AceSearchFormBean formBean = prepareACESearchFormBean(request);
+    	request.setAttribute(SearchRequestParams.SEARCH_PARAMS, formBean);    	
+    	return handleSearchRequest(request, formBean) ;
+    }
 
     /**
      * Executes 'sorting' search requests issued by Ajax calls from search results.
@@ -138,7 +131,7 @@ public class ACESearchPortalInterface {
      * @throws nl.wur.alterra.cgi.ace.search.lucene.ACELuceneException hmm
      */
     public void handleAjaxSearchRequest(ResourceRequest request, ResourceResponse response) throws ACELuceneException {
-        System.out.println("handleAjaxSearchRequest start");
+        // System.out.println("handleAjaxSearchRequest start");
         //PortletUtils.logParams(request);
         List<String> resultKeys = handleSearchRequest(request);
         List<AceItemSearchResult> results = (List<AceItemSearchResult>) request.getAttribute(resultKeys.get(0));
@@ -148,7 +141,7 @@ public class ACESearchPortalInterface {
         response.setContentType("text/html");
         // the page that was calling...
         String resourceID = request.getResourceID();
-        System.out.println("resourceId was : " + resourceID);
+        // System.out.println("resourceId was : " + resourceID);
         PrintWriter writer = null;
         try {
             writer = response.getWriter();
@@ -180,7 +173,7 @@ public class ACESearchPortalInterface {
 
 			// Retrieve fuzziness from preferences
             PortletPreferences preferences = request.getPreferences();
-            System.out.println("prepareACESearchFormBean (fuzziness): " + preferences.getValue(SearchRequestParams.FUZZINESS, ""));
+            // System.out.println("prepareACESearchFormBean (fuzziness): " + preferences.getValue(SearchRequestParams.FUZZINESS, ""));
             
 			fuzziness = preferences.getValue(SearchRequestParams.FUZZINESS, "");            
         }

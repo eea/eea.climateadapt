@@ -30,7 +30,15 @@ public class AceItemSearchResult {
     }
 
     public void setRelevance(float relevance) {
-        this.relevance = relevance;
+        String help = "" + relevance;
+        if( ! help.startsWith("NaN")) {
+        	
+        	this.relevance = relevance ;
+        }  
+        else {
+        	
+        	this.relevance = 0.0f;
+        }
     }
 
     public String getShortdescription() {

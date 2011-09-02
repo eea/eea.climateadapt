@@ -196,7 +196,7 @@ public class ACESearchEngine {
         if(result != null && result.trim().length() > 0) {
             result = "(" + result + ")";
         }
-        System.out.println("*** ACESearchEngine search: searchterms with fuzziness: " + result);
+        // // System.out.println("*** ACESearchEngine search: searchterms with fuzziness: " + result);
         return result;
     }
 
@@ -290,15 +290,15 @@ public class ACESearchEngine {
             ACEIndexSearcher searcher = ACEIndexSearcher.getACEIndexSearcher();
             QueryParser queryParser = new QueryParser(ACEIndexConstant.IndexField.ANY, ACEAnalyzer.getAnalyzer());
             Query query = queryParser.parse(rawQuery);
-            System.out.println("Lucene raw query: " + rawQuery);
-            System.out.println("Lucene query: " + query.toString());
+            // System.out.println("Lucene raw query: " + rawQuery);
+            // System.out.println("Lucene query: " + query.toString());
             // rewritten query is better for logging/debugging but potentially throws runtime exceptions
-            //System.out.println("Lucene query (rewritten): " + query.rewrite(((IndexSearcher)searcher).getIndexReader()).toString());
+            //// System.out.println("Lucene query (rewritten): " + query.rewrite(((IndexSearcher)searcher).getIndexReader()).toString());
             long start = System.currentTimeMillis();
 
             TopDocs topDocs = searcher.search(query, formBean.getSortBy(), 10);
             long end = System.currentTimeMillis();
-            System.out.println("Lucene searcher # total hits: " + topDocs.totalHits + " in " + (end - start) + " ms");
+            // System.out.println("Lucene searcher # total hits: " + topDocs.totalHits + " in " + (end - start) + " ms");
             ScoreDoc[] hits = topDocs.scoreDocs;
 
             List<AceItemSearchResult> results = new ArrayList<AceItemSearchResult>();
@@ -308,19 +308,19 @@ public class ACESearchEngine {
             float topScore = 0f;
             for(ScoreDoc hit : hits) {
                 float score = hit.score;
-                System.out.println("score: " + score);
+                // System.out.println("score: " + score);
                 if(score != Float.NaN) {
                     if(score > topScore) {
                         topScore = score;
                     }
                 }
             }
-            System.out.println("topscore is: " + topScore);
+            // System.out.println("topscore is: " + topScore);
             if(topScore == Float.NaN || !(topScore > 0f)) {
                 topScore = 1f;
             }
             float normalizeScoreFactor = 1 / topScore ;
-            System.out.println("normalizeScoreFactor is: " + normalizeScoreFactor);
+            // System.out.println("normalizeScoreFactor is: " + normalizeScoreFactor);
 
 
             for (ScoreDoc hit : hits) {
@@ -362,17 +362,20 @@ public class ACESearchEngine {
                 aceItem.setTextSearch(document.get(ACEIndexConstant.IndexField.ANY));
                 aceItem.setDatatype(document.get(ACEIndexConstant.IndexField.DATATYPE));
 
-                System.out.println(document.get(ACEIndexConstant.IndexField.NAME));
+                // System.out.println(document.get(ACEIndexConstant.IndexField.NAME));
+
 
                 // relevance expressed as a percentage
                 float relevance = hit.score * normalizeScoreFactor * 100;
-
-                System.out.println("hit.score is: " + hit.score);
-                System.out.println("relevance is: " + relevance);
+                
+                // System.out.println("hit.score is: " + hit.score);
+                System.out.println("relevance (0.0) is: " + relevance);
 
 
                 AceItemSearchResult aceItemSearchResult = new AceItemSearchResult(aceItem);
                 aceItemSearchResult.setRelevance(relevance);
+                
+                aceItemSearchResult.setShortdescription( aceItem.getDescription());
 
                 results.add(aceItemSearchResult);
             }
