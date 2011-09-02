@@ -1,7 +1,8 @@
-package nl.wur.alterra.cgi.ace.util;
+package nl.wur.alterra.cgi.ace.geonetwork;
 
 import com.liferay.portal.kernel.exception.SystemException;
 import nl.wur.alterra.cgi.ace.model.WxsHarvester;
+import nl.wur.alterra.cgi.ace.util.HTTPUtils;
 
 /**
  * Interface to GeoNetwork.

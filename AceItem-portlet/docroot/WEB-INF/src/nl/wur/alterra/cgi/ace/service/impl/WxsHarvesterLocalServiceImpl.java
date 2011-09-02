@@ -15,11 +15,11 @@ package nl.wur.alterra.cgi.ace.service.impl;
 
 import com.liferay.counter.service.CounterLocalServiceUtil;
 import com.liferay.portal.kernel.exception.SystemException;
+import nl.wur.alterra.cgi.ace.geonetwork.GeoNetworkConnector;
 import nl.wur.alterra.cgi.ace.harvester.HarvesterUtil;
 import nl.wur.alterra.cgi.ace.model.WxsHarvester;
 import nl.wur.alterra.cgi.ace.model.impl.WxsHarvesterImpl;
 import nl.wur.alterra.cgi.ace.service.base.WxsHarvesterLocalServiceBaseImpl;
-import nl.wur.alterra.cgi.ace.util.GeoNetworkConnector;
 
 import java.util.List;
 
