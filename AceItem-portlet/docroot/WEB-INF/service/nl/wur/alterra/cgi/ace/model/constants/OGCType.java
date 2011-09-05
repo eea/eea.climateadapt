@@ -13,9 +13,9 @@ public enum OGCType {
      */
     WMS100,
     /**
-     * WMS 1.1.0
+     * WMS 1.1.1
      */
-    WMS110,
+    WMS111,
     /**
      * WMS 1.3.0
      */
