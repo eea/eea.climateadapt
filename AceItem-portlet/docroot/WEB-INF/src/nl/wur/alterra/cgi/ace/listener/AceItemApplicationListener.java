@@ -11,6 +11,7 @@ import javax.servlet.ServletContextEvent;
  */
 public class AceItemApplicationListener extends com.liferay.portal.kernel.servlet.PortletContextListener { //implements ServletContextListener {
 
+    @Override
     public void contextInitialized(ServletContextEvent servletContextEvent) {
         System.out.println("AceItem Web Application Context initialized");
     }
@@ -32,6 +33,7 @@ public class AceItemApplicationListener extends com.liferay.portal.kernel.servle
      *
      * @param servletContextEvent
      */
+    @Override
     public void contextDestroyed(ServletContextEvent servletContextEvent) {
         //System.out.println("destroying AceItem Web Application Context");
         // TODO ungraceful shutdown, is ok? Otherwise shutdown can take an arbitrary time to complete

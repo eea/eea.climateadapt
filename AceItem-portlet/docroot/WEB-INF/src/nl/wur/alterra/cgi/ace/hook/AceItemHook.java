@@ -13,11 +13,11 @@ public class AceItemHook extends com.liferay.portal.kernel.events.SimpleAction {
     /**
      * Schedules existing harvesters at application startup.
      *
-     * @param strings
+     * @param ids
      * @throws ActionException
      */
     @Override
-    public void run(String[] strings) throws ActionException {
+    public void run(String[] ids) throws ActionException {
         System.out.println("AceItemHook start");
         HarvesterUtil.scheduleHarvesters();
         System.out.println("AceItemHook end");
