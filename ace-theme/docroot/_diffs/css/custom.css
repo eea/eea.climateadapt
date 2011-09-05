@@ -9,7 +9,7 @@
 body {
 	background: #FFF;
 	font-family: Tahoma, Times New Roman, serif;
-	font-size: 11px;
+	font-size: 12px;
 }
 
 a {
@@ -36,8 +36,7 @@ hr, .separator {
 #wrapper {
 	background: none;
 	margin: 0 auto;
-	max-width: 90%;
-	min-width: 984px;
+	max-width: 984px;
 	position: relative;
 }
 
@@ -537,6 +536,11 @@ body #banner .logo a {
 	padding: 0 15px;
 }
 
+.ace_layout_1 #layout-column_column-3,
+.ace_layout_3 #layout-column_column-2 {
+	padding-left: 0
+}
+
 .ace_layout_1 #layout-column_column-4,
 .ace_layout_1 #layout-column_column-5,
 .ace_layout_3 #layout-column_column-3,
@@ -610,11 +614,10 @@ body #banner .logo a {
 		
 .sector-main-article .text-container {
 	background: url("../images/bg_sector_main_article_text.png") repeat-y scroll 5% center;
-	margin-bottom: 60px;
+	margin-bottom: 20px;
 	margin-right: 245px;
-	min-height: 200px;
+	min-height: 240px;
 	position: relative;
-	top: 40px;
 }
 
 .ie7 .sector-main-article .text-container {
@@ -640,6 +643,7 @@ body #banner .logo a {
 .sector-main-article h1 {
 	font: normal 26px Tahoma, Times New Roman, serif;
 	margin: 15px 0;
+	padding: 10px 0 0;
 }
 
 .sector-main-article .body {
@@ -661,7 +665,7 @@ body #banner .logo a {
 }
 
 .sector-main-article .read-more-body {
-	margin: 85px 17px 0 0;
+	margin: 45px 17px 0 0;
 }
 
 /**** Template for Research Project ****/
@@ -768,6 +772,30 @@ body #banner .logo a {
 	margin-top: 20px;
 }
 
+
+/**** Specific styles for adaptation information image and text on frontpage ****/
+
+#p_p_id_56_INSTANCE_7vIW_ {
+	margin-top: -10px;
+}
+
+#p_p_id_56_INSTANCE_7vIW_ h1 {
+	color: #02213D;
+}
+
+#p_p_id_56_INSTANCE_cjC4_ .portlet-body {
+	margin: -30px 0 15px 0;
+}
+
+.ie #p_p_id_56_INSTANCE_7vIW_ {
+	margin-top: -15px;
+}
+
+.ie #p_p_id_56_INSTANCE_cjC4_ .portlet-body {
+	margin: -15px 0px 15px
+}
+
+
 /**** Styles modified from originally ace-theme/docroot/css/custom_common.css ****/
 
 .logo .current-community, #navigation, #navigation a, .portlet, .portlet-topper, .site-breadcrumbs ul {
@@ -780,6 +808,10 @@ body #banner .logo a {
 
 .portlet-rss .feed {
 	padding: 0;
+}
+
+.portlet-rss .feed-entry-content img {
+	width: 100%
 }
 
 span.opens-new-window-accessible {
