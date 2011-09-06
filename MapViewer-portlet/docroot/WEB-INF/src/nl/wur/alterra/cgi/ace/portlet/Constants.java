@@ -8,6 +8,8 @@ public class Constants {
 	
 	public static String locatorKeyPreferenceName = "locatorKey";
 	
+	public static String cswServletURLPreferenceName = "cswServletURL";
+	
 	public static String cswURLPreferenceName = "cswURL";
 
 	public static String proxyUrlPreferenceName = "proxyUrl";

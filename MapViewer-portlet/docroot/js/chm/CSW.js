@@ -10,7 +10,8 @@ CHM.CSW = OpenLayers.Class({
 		    	url: proxyUrl + cswServletUrl,
 		    	params: 
 		    	{
-		    		metadataRecordID: aID, 
+		    		metadataRecordID: aID,
+		    		cswURL: cswUrl, 
 		    		random: Math.random()
 		    	},
 		    callback: this.handler
@@ -18,8 +19,6 @@ CHM.CSW = OpenLayers.Class({
 	}, 
 	
 	handler : function(response) {
-		console.log(response);
-		
 		var digitaltransferoptions = new CHM.DigitalTransferOptions();
 
 		digitaltransferoptions.read(response.responseText);

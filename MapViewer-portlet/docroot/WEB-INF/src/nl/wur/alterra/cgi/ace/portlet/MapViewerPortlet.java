@@ -45,6 +45,15 @@ public class MapViewerPortlet extends MVCPortlet {
 
 		prefs.setValue(Constants.bingTimeOutPreferenceName, bingtimeout);
 
+		// Catalogue Server Servlet URL
+		String cswServletUrl = ParamUtil.getString(request, Constants.cswServletURLPreferenceName);
+		
+		if (! cswServletUrl.endsWith("?")) {
+			cswServletUrl += "?";
+		}
+
+		prefs.setValue(Constants.cswURLPreferenceName, cswServletUrl);
+
 		// Catalogue Server URL
 		String cswUrl = ParamUtil.getString(request, Constants.cswURLPreferenceName);
 		

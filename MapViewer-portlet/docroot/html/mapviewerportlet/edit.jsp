@@ -27,6 +27,8 @@
 
 	<aui:input name="<%= Constants.bingTimeOutPreferenceName %>" value='<%= prefs.getValue(Constants.bingTimeOutPreferenceName, "100") %>' size="45" type="text" />
 
+	<aui:input name="<%= Constants.cswServletURLPreferenceName %>" value='<%= prefs.getValue(Constants.cswServletURLPreferenceName, "/MapViewer-portlet/cswservlet?") %>' size="45" type="text" />
+
 	<aui:input name="<%= Constants.cswURLPreferenceName %>" value='<%= prefs.getValue(Constants.cswURLPreferenceName, "http://ace.geocat.net/geonetwork/srv/en/csw?") %>' size="45" type="text" />
 
 	<aui:button-row>

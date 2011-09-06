@@ -22,11 +22,6 @@
     <display-name>CSWServlet</display-name>
     <servlet-name>CSWServlet</servlet-name>
     <servlet-class>nl.wur.alterra.cgi.ace.mapviewer.CSWServlet</servlet-class>
-    <init-param>
-      <description></description>
-      <param-name>cswURL</param-name>
-      <param-value>http://dev.ace.geocat.net/geonetwork/srv/en/csw?</param-value>
-    </init-param>
   </servlet>
   <servlet-mapping>
     <servlet-name>CSWServlet</servlet-name>

@@ -15,6 +15,8 @@
 		<header-portlet-javascript>/js/GeoExt.js</header-portlet-javascript>
 		<header-portlet-javascript>/js/chm/CHM.js</header-portlet-javascript>
 		<header-portlet-javascript>/js/chm/CHMMap.js</header-portlet-javascript>
+		<header-portlet-javascript>/js/chm/DigitalTransferOptions.js</header-portlet-javascript>
+		<header-portlet-javascript>/js/chm/CSW.js</header-portlet-javascript>
 		<header-portlet-javascript>/js/chm/Resource.js</header-portlet-javascript>
 		<header-portlet-javascript>/js/chm/ResourceSet.js</header-portlet-javascript>
 		<header-portlet-javascript>/js/chm/Point.js</header-portlet-javascript>

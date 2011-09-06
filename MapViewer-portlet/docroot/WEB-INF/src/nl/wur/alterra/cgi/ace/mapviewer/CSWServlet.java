@@ -31,10 +31,6 @@ public class CSWServlet extends HttpServlet {
         super.init(servletConfig);
 
         try {
-        	String cswurl = servletConfig.getInitParameter(Constants.cswURLPreferenceName);
-        	
-			csw = new CSW(cswurl, null, null);
-			
 			gson = new Gson();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -49,6 +45,12 @@ public class CSWServlet extends HttpServlet {
 		PrintWriter writer = null;
 		
 		try {
+        	String cswurl = request.getParameter(Constants.cswURLPreferenceName);
+        	
+        	if (csw == null || ! csw.getOnlineResource().equalsIgnoreCase(cswurl)) {
+        		csw = new CSW(cswurl, null, null);
+        	}
+			
 			String metadatarecordid = request.getParameter(Constants.metadataRecordIDParameterName);
 			
 			if (metadatarecordid != null && metadatarecordid.length() > 0) {
