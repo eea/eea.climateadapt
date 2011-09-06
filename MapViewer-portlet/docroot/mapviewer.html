@@ -1,0 +1,94 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<title>Prototype MapViewer</title>
+		<script type='text/javascript' src="http://ecn.dev.virtualearth.net/mapcontrol/mapcontrol.ashx?v=6.2&amp;mkt=en-us"></script>
+		<script type="text/javascript" src='js/ext-base.js'></script>
+		<script type="text/javascript" src='js/ext-all.js'></script>
+		<script type='text/javascript' src='js/OpenLayers.js'></script>
+		<script type="text/javascript" src='js/GeoExt.js'></script>
+		<script type="text/javascript" src="js/chm/CHM.js"></script>
+		<script type="text/javascript" src="js/chm/CHMMap.js"></script>
+		<script type="text/javascript" src="js/chm/DigitalTransferOptions.js"></script>
+		<script type="text/javascript" src="js/chm/CSW.js"></script>
+		<script type="text/javascript" src="js/chm/Resource.js"></script>
+		<script type="text/javascript" src="js/chm/ResourceSet.js"></script>
+		<script type="text/javascript" src="js/chm/Point.js"></script>
+		<script type="text/javascript" src="js/chm/Locator.js"></script>
+		<script type="text/javascript" src="js/chm/Location.js"></script>
+		<script type="text/javascript" src="js/chm/LocationControl.js"></script>
+	</head>
+	<body>
+
+		<div id="getRecordByID">
+			<input type="text" name="recordID" id="recordID" value="8a60b47e-e4d8-426a-9105-9f36186db82b" />
+			<input type="submit" value="GetRecordByID" onclick="getRecordByID(document.getElementById('recordID').value)"/>
+		</div>
+
+		<div id="locator">
+			<input type="text" name="location" id="location" />
+			<input type="submit" value="Locate" onclick="locate(document.getElementById('location').value)"/>
+		</div>
+
+		<div id='locations_element'></div>
+
+		<div id='map_element'></div>
+
+		<div id='legend_element'></div>
+
+		<script>
+			var proxyUrl = '';
+			
+			var geoserverUrl = 'http://localhost/geoserver/';
+			
+			var wfs = 'wfs';
+			
+			var wms = 'wms';
+	
+			var locatorUrl = 'http://localhost/ve/REST/v1/Locations/';
+			
+			var locatorKey = 'Ao9qujBzDtg-nFiusTjt5VQ9x2NJB2wAD7YCRjaPz7hQQjxdFcl24tyhOwCDCIrw';
+			
+			var cswServletUrl = 'http://localhost/cswservlet?';
+			
+			var chmmap;
+						
+			var locator;
+			
+			var csw;
+			
+		    Ext.onReady(function() {
+		    	chmmap = new CHM.CHMMap();
+				
+		        new GeoExt.MapPanel({
+		            renderTo: 'map_element',
+		            height: 500,
+		            width: 500,
+		            map: chmmap
+		        });
+		        
+		        chmmap.addBingLayers();
+		        
+		    	locator = new CHM.Locator('locations_element', {});
+
+		    	locator.setOnLocationChanged(handleLocationChanged);
+		    	
+		    	csw = new CHM.CSW();
+		    });
+
+			function handleLocationChanged() {
+				alert("Not implemented yet!");
+			}
+			
+		    function locate(aLocation) {
+		    	locator.locate(aLocation);
+		    }
+			
+		    function getRecordByID(aID) {
+		    	csw.getRecordByID(aID);
+		    }
+		</script>
+	</body>
+</html>
