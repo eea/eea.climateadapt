@@ -5,8 +5,10 @@
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 		<title>Prototype Similar Areas Tool</title>
 		<script type='text/javascript' src="http://ecn.dev.virtualearth.net/mapcontrol/mapcontrol.ashx?v=6.2&amp;mkt=en-us"></script>
-		<script type='text/javascript' src="js/proj4js/lib/proj4js-combined.js"></script>
+		<script type="text/javascript" src='js/ext-base.js'></script>
+		<script type="text/javascript" src='js/ext-all.js'></script>
 		<script type='text/javascript' src='js/OpenLayers.js'></script>
+		<script type="text/javascript" src='js/GeoExt.js'></script>
 		<script type="text/javascript" src="js/chm/CHM.js"></script>
 		<script type="text/javascript" src="js/chm/CHMMap.js"></script>
 		<script type="text/javascript" src="js/chm/SATCHMMap.js"></script>
@@ -17,53 +19,13 @@
 		<script type="text/javascript" src="js/chm/Locator.js"></script>
 		<script type="text/javascript" src="js/chm/Location.js"></script>
 		<script type="text/javascript" src="js/chm/LocationControl.js"></script>
-		<script type="text/javascript">
-			var satchmmap;
-			
-			var locator;
-			
-			function init() {
-				
-				satchmmap = new CHM.SATCHMMap('map_element', {});
-				
-				locator = new CHM.Locator('locations_element', {});
-				
-				locator.setOnLocationChanged(handleLocationChanged);
-				
-				riskChange();
-				
-				sectorChange();
-			}
-			
-			function getSelectedValue(select) {
-				return select.options[select.selectedIndex].value;
-			}
-			
-			function riskChange() {
-				var risk = getSelectedValue(document.getElementById('riskSelect'));
-				
-				satchmmap.setRisk(risk);
-			}
-			
-			function sectorChange() {
-				var sector = getSelectedValue(document.getElementById('sectorSelect'));
-				
-				satchmmap.setSector(sector);
-			}
-			
-			function locate(aLocation) {
-				locator.locate(aLocation);
-			}
-			
-			function handleLocationChanged() {
-				satchmmap.setLocation(locator.getLocation());
-			}
-		</script>
 	</head>
-	<body onload="init();">
+	<body>
 
 		<form>
+		    Select a risk:
 			<select id="riskSelect" onchange="riskChange()">
+				<option value="ALL">All risks</option>
 				<option value="EXTREMETEMP">Extreme Temperatures</option>
 				<option value="WATERSCARCE">Water Scarcity</option>
 				<option value="FLOODING">Flooding</option>
@@ -72,7 +34,9 @@
 				<option value="STORM">Storms</option>
 				<option value="ICEANDSNOW">Ice and Snow</option>
 			</select>
+			Select a sector: 
 			<select id="sectorSelect" onchange="sectorChange()">
+				<option value="ALL">All sectors</option>
 				<option value="AGRICULTURE">Agriculture and Forest</option>
 				<option value="BIODIVERSITY">Biodiversity</option>
 				<option value="COASTAL">Coastal areas</option>
@@ -87,12 +51,14 @@
 
 		<div id="locator">
 			<input type="text" name="location" id="location" />
-			<a onclick="locate(document.getElementById('location').value)">Locate</a>
+			<input type="submit" value="Locate" onclick="locate(document.getElementById('location').value)"/>
 		</div>
 
-		<div id='map_element' style='width: 500px; height: 500px;'></div>
-
 		<div id='locations_element'></div>
+
+		<div id='map_element'></div>
+
+		<div id='legend_element'><img id="legendGraphicImage"/></div>
 
 		<script>
 			var proxyUrl = '';
@@ -107,14 +73,25 @@
 			
 			var locatorKey = 'Ao9qujBzDtg-nFiusTjt5VQ9x2NJB2wAD7YCRjaPz7hQQjxdFcl24tyhOwCDCIrw';
 			
-			var satchmmap = new CHM.SATCHMMap('map_element', {});
+			var satchmmap;
 						
-			var locator = new CHM.Locator('locations_element', {});
-			
-		    $(document).ready(function() {
-		    	console.log("Document ready!");
-		    	
-		    	satchmmap = new CHM.SATCHMMap('map_element', {});
+			var locator;
+
+		    Ext.onReady(function() {
+		    	satchmmap = new CHM.SATCHMMap();
+
+		        new GeoExt.MapPanel({
+		            renderTo: 'map_element',
+		            height: 500,
+		            width: 500,
+		            map: satchmmap
+		        });
+		        
+		        satchmmap.addBingLayers();
+		        
+		        satchmmap.addSATLayers();
+		        
+		        document.getElementById('legendGraphicImage').src = geoserverUrl + wms + "?TRANSPARENT=true&SERVICE=WMS&VERSION=1.1.1&REQUEST=GetLegendGraphic&EXCEPTIONS=application%2Fvnd.ogc.se_xml&LAYER=chm%3Abiogeo_2005&SCALE=55468034.09051751&FORMAT=image%2Fgif";
 				
 		    	locator = new CHM.Locator('locations_element', {});
 		
@@ -124,7 +101,7 @@
 		    				
 		    	sectorChange();
 		    });
-		
+
 			function handleLocationChanged() {
 				satchmmap.setLocation(locator.getLocation());
 			}

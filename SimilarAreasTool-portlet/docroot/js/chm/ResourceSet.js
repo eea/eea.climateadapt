@@ -1,6 +1,6 @@
 CHM.ResourceSet = OpenLayers.Class(OpenLayers.Format.JSON, {
 	
-	resources: [], 
+	resources : [], 
 	
     read : function(json) {
         var obj = null;

@@ -69,13 +69,13 @@ CHM.SATVector = OpenLayers.Class(OpenLayers.Layer.Vector, {
 			
 			filters.push(area_filter);
 			
-			if (this.risk != null) {
+			if (this.risk != "ALL") {
 				var risk_filter = this.createFilter(OpenLayers.Filter.Comparison.LIKE, 'risks', '*' + this.risk + '*');
 				
 				filters.push(risk_filter);
 			}
 			
-			if (this.sector != null) {
+			if (this.sector != "ALL") {
 				var sector_filter = this.createFilter(OpenLayers.Filter.Comparison.LIKE, 'sectors', '*' + this.sector + '*');
 				
 				filters.push(sector_filter);

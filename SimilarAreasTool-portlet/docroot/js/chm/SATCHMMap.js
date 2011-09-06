@@ -4,8 +4,27 @@ CHM.SATCHMMap = OpenLayers.Class(CHM.CHMMap, {
 	
 	initialize: function(options) {
 		CHM.CHMMap.prototype.initialize.apply(this, arguments);
-		
-		location_vector_layer = new OpenLayers.Layer.Vector('Location');
+	},
+	
+	addSATLayers : function() {
+		location_vector_layer = new OpenLayers.Layer.Vector('Location',	{
+	    	displayInLayerSwitcher: true,
+	    	styleMap: new OpenLayers.StyleMap({
+	    	    "default": new OpenLayers.Style({
+	    	        pointRadius: 6, 
+	    	        fillColor: "#0000ff",
+	    	        strokeColor: "#0000ff",
+	    	        strokeWidth: 2,
+	    	        graphicZIndex: 1
+	    	    }),
+	    	    "select": new OpenLayers.Style({
+	    	        pointRadius: 6, 
+	    	        fillColor: "#66ccff",
+	    	        strokeColor: "#3399ff",
+	    	        graphicZIndex: 2
+	    	    })
+	    	})
+	    });
 		
 		var similar_areas_image_layer = new OpenLayers.Layer.WMS('Biogeographical regions 2005', 
 			geoserverUrl + wms + '?', 
@@ -36,7 +55,7 @@ CHM.SATCHMMap = OpenLayers.Class(CHM.CHMMap, {
         	{
     			displayInLayerSwitcher: true,
         		type: OpenLayers.Filter.Comparison.EQUAL_TO, 
-        		fill_color: '#93ff93', 
+        		fill_color: '#00ff00', 
         		stroke_color: '#00ff00'
         	});
         
@@ -45,7 +64,7 @@ CHM.SATCHMMap = OpenLayers.Class(CHM.CHMMap, {
         	{
     			displayInLayerSwitcher: true,
         		type: OpenLayers.Filter.Comparison.NOT_EQUAL_TO, 
-        		fill_color: '#ff9393', 
+        		fill_color: '#ffff00', 
         		stroke_color: '#ffff00'
         	});
         
@@ -86,7 +105,7 @@ CHM.SATCHMMap = OpenLayers.Class(CHM.CHMMap, {
             "<table width='100%' border='0'>" +
             "<tr><th>" + feature.attributes.name + "</th></tr>" + 
             "<tr><td>" + feature.attributes.description + "</td></tr>" + 
-            "<tr><td><a href='" + feature.attributes.website + "' target='top'>" + feature.attributes.website + "</a></td></tr>" + 
+            "<tr><td><a href='" + feature.attributes.website + "' target='top'>read more</a></td></tr>" + 
             "</table>",
             null, true, null);
             

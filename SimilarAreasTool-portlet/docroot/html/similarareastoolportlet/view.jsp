@@ -17,13 +17,20 @@
 <%@include file="/html/init.jsp" %>
 
 <form>
+	<label for="riskSelect"><liferay-ui:message key="select-climate-impact" /></label>
 	<select id="riskSelect" onchange="riskChange()">
+		<option id="chk_risks_all" value="ALL" />
+		<label for="chk_risks_all"><liferay-ui:message key="aceitem-climateimpacts-lbl-ALL" /></label>
 		<c:forEach var="adaptationClimateImpact" items="<%= nl.wur.alterra.cgi.ace.model.constants.AceItemClimateImpact.values() %>" >
 			<option id="chk_climateimpacts_${adaptationClimateImpact}" value="${adaptationClimateImpact}" />
 			<label for="chk_climateimpacts_${adaptationClimateImpact}"><liferay-ui:message key="aceitem-climateimpacts-lbl-${adaptationClimateImpact}" /></label>
 		</c:forEach>
 	</select>
+	<br />
+	<label for="riskSelect"><liferay-ui:message key="select-adaptation-sector" /></label>
 	<select id="sectorSelect" onchange="sectorChange()">
+		<option id="chk_sectors_all" value="ALL" />
+		<label for="chk_sectors_all"><liferay-ui:message key="acesearch-sectors-lbl-ALL" /></label>
 		<c:forEach var="adaptationSector" items="<%= nl.wur.alterra.cgi.ace.model.constants.AceItemSector.values() %>" >
 			<option id="chk_sectors_${adaptationSector}" value="${adaptationSector}" />
 			<label for="chk_sectors_${adaptationSector}"><liferay-ui:message key="acesearch-sectors-lbl-${adaptationSector}" /></label>
@@ -33,12 +40,14 @@
 
 <div id="locator">
 	<input type="text" name="location" id="location" />
-	<a onclick="locate(document.getElementById('location').value)">Locate</a>
+	<input type="submit" value="Locate" onclick="locate(document.getElementById('location').value)"/>
 </div>
 
 <div id='locations_element'></div>
 
 <div id='map_element'></div>
+
+<div id='legend_element'><img id="legendGraphicImage"/></div>
 
 <script>
 	var proxyUrl = '<%= prefs.getValue(Constants.proxyUrlPreferenceName, "") %>';
@@ -57,21 +66,30 @@
 				
 	var locator;
 	
-    $(document).ready(function() {
-    	setTimeout(function(){init();}, <%= prefs.getValue(Constants.bingTimeOutPreferenceName, "100") %>);
-    });
-    
-    function init() {	
-    	satchmmap = new CHM.SATCHMMap('map_element', {});
-		
-    	locator = new CHM.Locator('locations_element', {});
+    Ext.onReady(function() {
+    	satchmmap = new CHM.SATCHMMap();
+
+        new GeoExt.MapPanel({
+            renderTo: 'map_element',
+            height: 500,
+            width: 500,
+            map: satchmmap
+        });
+
+        satchmmap.addBingLayers();
+        
+        satchmmap.addSATLayers();
+        
+        document.getElementById('legendGraphicImage').src = geoserverUrl + wms + "?TRANSPARENT=true&SERVICE=WMS&VERSION=1.1.1&REQUEST=GetLegendGraphic&EXCEPTIONS=application%2Fvnd.ogc.se_xml&LAYER=chm%3Abiogeo_2005&SCALE=55468034.09051751&FORMAT=image%2Fgif";		
+
+        locator = new CHM.Locator('locations_element', {});
 
     	locator.setOnLocationChanged(handleLocationChanged);
     	
     	riskChange();
     				
     	sectorChange();
-    }
+    });
 
 	function handleLocationChanged() {
 		satchmmap.setLocation(locator.getLocation());

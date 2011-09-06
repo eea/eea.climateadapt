@@ -16,7 +16,9 @@ CHM.CHMMap = OpenLayers.Class(OpenLayers.Map, {
 		this.restrictedExtent = new OpenLayers.Bounds(-2680799.4555375, 4050551.002161, 5253975.5752687, 11799431.180210993);
         
         this.addControl(new OpenLayers.Control.LayerSwitcher());
-
+	},
+	
+	addBingLayers : function() {
         var road = new OpenLayers.Layer.VirtualEarth("Road", {
             sphericalMercator: true,
             maxExtent: new OpenLayers.Bounds(-20037508.34,-20037508.34,20037508.34,20037508.34),
@@ -42,7 +44,7 @@ CHM.CHMMap = OpenLayers.Class(OpenLayers.Map, {
         });
 
         this.addLayers([road, shaded, hybrid, aerial]);
-            
+        
 		if (! this.getCenter()) {
 			this.zoomToMaxExtent();
 		}
