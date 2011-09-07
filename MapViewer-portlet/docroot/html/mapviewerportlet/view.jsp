@@ -1,7 +1,7 @@
 <%@include file="/html/init.jsp" %>
 
 <div id="getRecordByID">
-	<input type="text" name="recordID" id="recordID" value="b4ee29cf-851d-4780-81ce-cf79ffacb7a2" />
+	<input type="text" name="recordID" id="recordID" value="66dc6023-fece-4044-ab8b-49ac6379da35" />
 	<input type="submit" value="GetRecordByID" onclick="getRecordByID(document.getElementById('recordID').value)"/>
 </div>
 
@@ -13,6 +13,8 @@
 <div id='locations_element'></div>
 
 <div id='map_element'></div>
+
+<div id='legend_element'></div>
 
 <script>
 	var proxyUrl = '<%= prefs.getValue(Constants.proxyUrlPreferenceName, "") %>';
@@ -34,11 +36,17 @@
     Ext.onReady(function() {
     	chmmap = new CHM.CHMMap();
 		
-        new GeoExt.MapPanel({
+        mappanel = new GeoExt.MapPanel({
             renderTo: 'map_element',
             height: 500,
             width: 500,
             map: chmmap
+        });
+        
+        legendpanel = new GeoExt.LegendPanel({
+            layerStore: mappanel.layers,
+            renderTo: "legend_element",
+            border: false
         });
 
         chmmap.addBingLayers();

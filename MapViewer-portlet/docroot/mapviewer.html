@@ -23,7 +23,7 @@
 	<body>
 
 		<div id="getRecordByID">
-			<input type="text" name="recordID" id="recordID" value="8a60b47e-e4d8-426a-9105-9f36186db82b" />
+			<input type="text" name="recordID" id="recordID" value="66dc6023-fece-4044-ab8b-49ac6379da35" />
 			<input type="submit" value="GetRecordByID" onclick="getRecordByID(document.getElementById('recordID').value)"/>
 		</div>
 
@@ -35,6 +35,8 @@
 		<div id='locations_element'></div>
 
 		<div id='map_element'></div>
+
+		<div id='legend_element'></div>
 
 		<script>
 			var proxyUrl = '';
@@ -51,6 +53,8 @@
 			
 			var cswServletUrl = 'http://localhost/cswservlet?';
 			
+			var cswUrl = 'http://dev.ace.geocat.net/geonetwork/srv/en/csw?';
+			
 			var chmmap;
 						
 			var locator;
@@ -60,11 +64,17 @@
 		    Ext.onReady(function() {
 		    	chmmap = new CHM.CHMMap();
 				
-		        new GeoExt.MapPanel({
+		        mapPanel = new GeoExt.MapPanel({
 		            renderTo: 'map_element',
 		            height: 500,
 		            width: 500,
 		            map: chmmap
+		        });
+		        
+		        legendPanel = new GeoExt.LegendPanel({
+		            layerStore: mapPanel.layers,
+		            renderTo: "legend_element",
+		            border: false
 		        });
 		        
 		        chmmap.addBingLayers();
