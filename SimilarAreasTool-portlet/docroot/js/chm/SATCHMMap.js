@@ -33,7 +33,7 @@ CHM.SATCHMMap = OpenLayers.Class(CHM.CHMMap, {
 			{isBaseLayer: false}
 		);
 		
-		similar_areas_vector_layer = new OpenLayers.Layer.Vector("WFS", {
+		similar_areas_vector_layer = new OpenLayers.Layer.Vector("Selected area", {
 		    strategies: [new OpenLayers.Strategy.BBOX()],
 		    protocol: new OpenLayers.Protocol.WFS({
 		      	version: '1.1.0',
@@ -99,13 +99,19 @@ CHM.SATCHMMap = OpenLayers.Class(CHM.CHMMap, {
 	}, 
 	
 	onFeatureSelect : function(feature) {
-		popup = new OpenLayers.Popup.Anchored("chicken", 
+		var description = feature.attributes.description;
+		
+		if (description == undefined) {
+			description = '';
+		}
+		
+		popup = new OpenLayers.Popup.Anchored(null, 
         	feature.geometry.getBounds().getCenterLonLat(),
-            null,
+        	new OpenLayers.Size(250,250),
             "<table width='100%' border='0'>" +
             "<tr><th>" + feature.attributes.name + "</th></tr>" + 
-            "<tr><td>" + feature.attributes.description + "</td></tr>" + 
-            "<tr><td><a href='" + feature.attributes.website + "' target='top'>read more</a></td></tr>" + 
+            "<tr><td>" + description + "</td></tr>" + 
+            "<tr><td><a href='/viewmeasure?ace_measure_id=" + feature.attributes.measureid + "'>read more</a></td></tr>" + 
             "</table>",
             null, true, null);
             
@@ -175,6 +181,8 @@ CHM.SATCHMMap = OpenLayers.Class(CHM.CHMMap, {
 		
 		if (this.feature != null) {
 			location_vector_layer.addFeatures([this.feature]); 
+			
+			this.setArea(null);
 			
 			similar_areas_vector_layer.filter = new OpenLayers.Filter.Spatial({
 		        type: OpenLayers.Filter.Spatial.INTERSECTS,

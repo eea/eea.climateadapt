@@ -99,6 +99,8 @@ CHM.SATVector = OpenLayers.Class(OpenLayers.Layer.Vector, {
 	            },
 	            scope: this
 	        });
+		} else {
+			this.removeAllFeatures();
 		}
 	}, 
 		
