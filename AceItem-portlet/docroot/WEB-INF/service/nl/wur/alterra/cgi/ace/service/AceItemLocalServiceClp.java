@@ -407,12 +407,40 @@ public class AceItemLocalServiceClp implements AceItemLocalService {
 		return (nl.wur.alterra.cgi.ace.model.AceItem)ClpSerializer.translateOutput(returnObj);
 	}
 
+	public nl.wur.alterra.cgi.ace.model.AceItem getAceItemByStoredAt(
+		java.lang.String s)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		Object returnObj = null;
+
+		MethodHandler methodHandler = new MethodHandler(_getAceItemByStoredAtMethodKey14,
+				s);
+
+		try {
+			returnObj = _classLoaderProxy.invoke(methodHandler);
+		}
+		catch (Throwable t) {
+			if (t instanceof com.liferay.portal.kernel.exception.SystemException) {
+				throw (com.liferay.portal.kernel.exception.SystemException)t;
+			}
+
+			if (t instanceof RuntimeException) {
+				throw (RuntimeException)t;
+			}
+			else {
+				throw new RuntimeException(t.getClass().getName() +
+					" is not a valid exception");
+			}
+		}
+
+		return (nl.wur.alterra.cgi.ace.model.AceItem)ClpSerializer.translateOutput(returnObj);
+	}
+
 	public java.util.List<nl.wur.alterra.cgi.ace.model.AceItem> getAceItemsByGroupId(
 		long groupId)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		Object returnObj = null;
 
-		MethodHandler methodHandler = new MethodHandler(_getAceItemsByGroupIdMethodKey14,
+		MethodHandler methodHandler = new MethodHandler(_getAceItemsByGroupIdMethodKey15,
 				groupId);
 
 		try {
@@ -440,7 +468,7 @@ public class AceItemLocalServiceClp implements AceItemLocalService {
 		throws com.liferay.portal.kernel.exception.SystemException {
 		Object returnObj = null;
 
-		MethodHandler methodHandler = new MethodHandler(_getAceItemsByGroupIdMethodKey15,
+		MethodHandler methodHandler = new MethodHandler(_getAceItemsByGroupIdMethodKey16,
 				groupId, start, end);
 
 		try {
@@ -467,7 +495,7 @@ public class AceItemLocalServiceClp implements AceItemLocalService {
 		throws com.liferay.portal.kernel.exception.SystemException {
 		Object returnObj = null;
 
-		MethodHandler methodHandler = new MethodHandler(_getAceItemsCountByGroupIdMethodKey16,
+		MethodHandler methodHandler = new MethodHandler(_getAceItemsCountByGroupIdMethodKey17,
 				groupId);
 
 		try {
@@ -529,10 +557,12 @@ public class AceItemLocalServiceClp implements AceItemLocalService {
 			boolean.class);
 	private MethodKey _createAceItemMethodKey13 = new MethodKey(_classLoaderProxy.getClassName(),
 			"createAceItem");
-	private MethodKey _getAceItemsByGroupIdMethodKey14 = new MethodKey(_classLoaderProxy.getClassName(),
-			"getAceItemsByGroupId", long.class);
+	private MethodKey _getAceItemByStoredAtMethodKey14 = new MethodKey(_classLoaderProxy.getClassName(),
+			"getAceItemByStoredAt", java.lang.String.class);
 	private MethodKey _getAceItemsByGroupIdMethodKey15 = new MethodKey(_classLoaderProxy.getClassName(),
+			"getAceItemsByGroupId", long.class);
+	private MethodKey _getAceItemsByGroupIdMethodKey16 = new MethodKey(_classLoaderProxy.getClassName(),
 			"getAceItemsByGroupId", long.class, int.class, int.class);
-	private MethodKey _getAceItemsCountByGroupIdMethodKey16 = new MethodKey(_classLoaderProxy.getClassName(),
+	private MethodKey _getAceItemsCountByGroupIdMethodKey17 = new MethodKey(_classLoaderProxy.getClassName(),
 			"getAceItemsCountByGroupId", long.class);
 }

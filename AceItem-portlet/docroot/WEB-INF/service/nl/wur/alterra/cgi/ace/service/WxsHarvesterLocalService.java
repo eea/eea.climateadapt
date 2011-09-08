@@ -207,6 +207,11 @@ public interface WxsHarvesterLocalService {
 		nl.wur.alterra.cgi.ace.model.WxsHarvester wxsHarvester, boolean merge)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	/**
+	* Creates empty WxsHarvester.
+	*
+	* @return wxsharvester
+	*/
 	public nl.wur.alterra.cgi.ace.model.WxsHarvester createWxsHarvester();
 
 	/**

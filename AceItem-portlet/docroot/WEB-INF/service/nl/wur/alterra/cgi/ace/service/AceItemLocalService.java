@@ -204,7 +204,24 @@ public interface AceItemLocalService {
 		nl.wur.alterra.cgi.ace.model.AceItem aceItem, boolean merge)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	/**
+	* Creates new empty aceitem
+	*
+	* @return
+	*/
 	public nl.wur.alterra.cgi.ace.model.AceItem createAceItem();
+
+	/**
+	* Retrieves an AceItem by its storedAt value.
+	*
+	* @param s requested storedAt value
+	* @return aceitem, or null if not found
+	* @throws SystemException hmm
+	*/
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public nl.wur.alterra.cgi.ace.model.AceItem getAceItemByStoredAt(
+		java.lang.String s)
+		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
 	* Hugo de Groot: add these methods by hand to <portlet>LocalServiceImpl

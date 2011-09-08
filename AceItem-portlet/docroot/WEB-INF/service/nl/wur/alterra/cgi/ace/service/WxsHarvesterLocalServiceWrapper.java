@@ -220,6 +220,11 @@ public class WxsHarvesterLocalServiceWrapper implements WxsHarvesterLocalService
 		return _wxsHarvesterLocalService.updateWxsHarvester(wxsHarvester, merge);
 	}
 
+	/**
+	* Creates empty WxsHarvester.
+	*
+	* @return wxsharvester
+	*/
 	public nl.wur.alterra.cgi.ace.model.WxsHarvester createWxsHarvester() {
 		return _wxsHarvesterLocalService.createWxsHarvester();
 	}

@@ -216,8 +216,26 @@ public class AceItemLocalServiceWrapper implements AceItemLocalService {
 		return _aceItemLocalService.updateAceItem(aceItem, merge);
 	}
 
+	/**
+	* Creates new empty aceitem
+	*
+	* @return
+	*/
 	public nl.wur.alterra.cgi.ace.model.AceItem createAceItem() {
 		return _aceItemLocalService.createAceItem();
+	}
+
+	/**
+	* Retrieves an AceItem by its storedAt value.
+	*
+	* @param s requested storedAt value
+	* @return aceitem, or null if not found
+	* @throws SystemException hmm
+	*/
+	public nl.wur.alterra.cgi.ace.model.AceItem getAceItemByStoredAt(
+		java.lang.String s)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _aceItemLocalService.getAceItemByStoredAt(s);
 	}
 
 	/**

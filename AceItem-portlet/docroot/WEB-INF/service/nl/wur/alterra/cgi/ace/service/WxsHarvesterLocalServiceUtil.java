@@ -226,6 +226,11 @@ public class WxsHarvesterLocalServiceUtil {
 		return getService().updateWxsHarvester(wxsHarvester, merge);
 	}
 
+	/**
+	* Creates empty WxsHarvester.
+	*
+	* @return wxsharvester
+	*/
 	public static nl.wur.alterra.cgi.ace.model.WxsHarvester createWxsHarvester() {
 		return getService().createWxsHarvester();
 	}
