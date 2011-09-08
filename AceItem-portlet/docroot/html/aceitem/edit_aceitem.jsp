@@ -52,10 +52,10 @@
             <b>keywords</b><br />	
 		<textarea name="keyword" rows=5 cols=100><%= aceitem == null ? "" : aceitem.getKeyword() %></textarea><br /><br />
 
+		<aui:input name="source" />
+
 		<input type="checkbox" name="chk_importance" id="chk_importance" value="1" <% if (aceitem != null) { out.print( aceitem.getImportance() == 1 ? "checked" : "") ; } %> />
 		<b>High importance</b><br />
-
-		<aui:input name="source" />
 		
 	 </div>
 	<div style="float: left;">			
