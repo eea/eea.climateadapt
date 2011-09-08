@@ -31,7 +31,7 @@ AceSearchFormBean acesearchformbean = (AceSearchFormBean) request.getAttribute(S
 String anyOfThese = acesearchformbean.getAnyOfThese();
 	
 String datainfo_type = null;
-if ((datainfo_type == null) || (datainfo_type.equals(""))) datainfo_type = "1";
+if ((datainfo_type == null) || (datainfo_type.equals(""))) datainfo_type = "2";
 	
 String date_type = null;
 if ((date_type == null) || (date_type.equals(""))) date_type = "1";
@@ -176,8 +176,8 @@ pageContext.setAttribute("countriesList", countriesList);
                 <h2><liferay-ui:message key="acesearch-section-header2" /></h2>
 
                 <div class="row">
-                    <input type="radio" name="datainfo_type" value="1" <%= (datainfo_type.equals("1"))?"checked":"" %> /><liferay-ui:message key="acesearch-datainfotype-lbl-all" />
-                    <input type="radio" name="datainfo_type" value="2" <%= (datainfo_type.equals("2"))?"checked":"" %> /><liferay-ui:message key="acesearch-datainfotype-lbl-sel" />
+                    <% //  input type="radio" name="datainfo_type" value="1" < %= (datainfo_type.equals("1"))?"checked":"" % > /><liferay-ui:message key="acesearch-datainfotype-lbl-all" / -->  %>
+                    <input type="radio" name="datainfo_type" value="2" <%= (datainfo_type.equals("2"))?"checked":"" %> /><liferay-ui:message key="acesearch-datainfotype-lbl-sel" /> (select none = all)
 
                     <div id="all_selection_types">
                         <div class="checks_container">						

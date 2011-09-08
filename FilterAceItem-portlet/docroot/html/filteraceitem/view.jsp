@@ -117,10 +117,20 @@ if( paging > 0) {
         <%@ include file="searchresultsonetype.jspf" %>
 <% } %>	        
 
-        <c:set var="groupedResults" scope="page" value="${TOOLGUIDANCE_searchResults}"/>
-        <c:set var="groupedJSONResults" scope="page" value="${TOOLGUIDANCE_JSONsearchResults}"/>
-        <c:set var="aceitemtype" scope="page" value="TOOLGUIDANCE"/>
-        <c:set var="groupTitle" scope="page"><liferay-ui:message key="acesearch-datainfotype-lbl-TOOLGUIDANCE" /></c:set>
+        <c:set var="groupedResults" scope="page" value="${GUIDANCE_searchResults}"/>
+        <c:set var="groupedJSONResults" scope="page" value="${GUIDANCE_JSONsearchResults}"/>
+        <c:set var="aceitemtype" scope="page" value="GUIDANCE"/>
+        <c:set var="groupTitle" scope="page"><liferay-ui:message key="acesearch-datainfotype-lbl-GUIDANCE" /></c:set>
+<% 	if( paging > 0) {	%>	
+        <%@ include file="searchresultsbytype.jspf" %>
+<% } else { %>	
+        <%@ include file="searchresultsonetype.jspf" %>
+<% } %>       
+
+        <c:set var="groupedResults" scope="page" value="${TOOL_searchResults}"/>
+        <c:set var="groupedJSONResults" scope="page" value="${TOOL_JSONsearchResults}"/>
+        <c:set var="aceitemtype" scope="page" value="TOOL"/>
+        <c:set var="groupTitle" scope="page"><liferay-ui:message key="acesearch-datainfotype-lbl-TOOL" /></c:set>
 <% 	if( paging > 0) {	%>	
         <%@ include file="searchresultsbytype.jspf" %>
 <% } else { %>	
