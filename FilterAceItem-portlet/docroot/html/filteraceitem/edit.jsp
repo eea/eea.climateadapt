@@ -92,7 +92,7 @@ pageContext.setAttribute("countriesList", countriesList);
 		// grab unique part, after dash
 		var unique = sortRadio.id.match(/-([0-9]+)/)[1];	
 		var sortedSearchForm = $j("#sortsearchformId-"+unique);		
-		var querystring = 'anyOfThese=' + $j("#sortsearchformId-"+unique + " input[name=anyOfThese]").val();
+		var querystring = 'datainfo_type=2&anyOfThese=' + $j("#sortsearchformId-"+unique + " input[name=anyOfThese]").val();
 		querystring += '&aceitemtype=' + $j("#sortsearchformId-"+unique + " input[name=aceitemtype]").val();
         if ($j("#sortsearchformId-"+unique + " input[name=sector]").val() != undefined) {
 		    querystring += '&sector=' + $j("#sortsearchformId-"+unique + " input[name=sector]").val();
