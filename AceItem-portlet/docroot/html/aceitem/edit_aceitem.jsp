@@ -54,6 +54,8 @@
 
 		<input type="checkbox" name="chk_importance" id="chk_importance" value="1" <% if (aceitem != null) { out.print( aceitem.getImportance() == 1 ? "checked" : "") ; } %> />
 		<b>High importance</b><br />
+
+		<aui:input name="source" />
 		
 	 </div>
 	<div style="float: left;">			

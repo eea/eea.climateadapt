@@ -27,7 +27,11 @@ public enum AceItemType {
     /**
      * Guidance.
      */
-    TOOLGUIDANCE,
+    GUIDANCE,
+    /**
+     * Tool.
+     */
+    TOOL,
     /**
      * Research and knowledge projects.
      */

@@ -25,6 +25,7 @@
 		<field name="climateimpacts_" type="String" />
 		<field name="rating" type="long" />
 		<field name="importance" type="long" />
+		<field name="source" type="String" />
 	</model>
 	<model name="nl.wur.alterra.cgi.ace.model.NAS">
 		<field name="nasId" type="long" />

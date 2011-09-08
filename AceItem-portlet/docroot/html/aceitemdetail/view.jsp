@@ -51,6 +51,9 @@
 	 <b>Keywords</b><br />
 	 <% out.print( aceitem.getKeyword()); %><br /><br />
 	 
+	 <b>Source</b><br />
+	 <% out.print( aceitem.getSource()); %><br /><br />
+	 
 	 <b>Website</b><br />
 	 <% out.print(  url ); %><br /><br />
 

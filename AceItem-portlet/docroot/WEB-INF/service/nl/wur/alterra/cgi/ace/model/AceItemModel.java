@@ -393,6 +393,21 @@ public interface AceItemModel extends BaseModel<AceItem> {
 	public void setImportance(long importance);
 
 	/**
+	 * Gets the source of this ace item.
+	 *
+	 * @return the source of this ace item
+	 */
+	@AutoEscape
+	public String getSource();
+
+	/**
+	 * Sets the source of this ace item.
+	 *
+	 * @param source the source of this ace item
+	 */
+	public void setSource(String source);
+
+	/**
 	 * Gets a copy of this ace item as an escaped model instance by wrapping it with an {@link com.liferay.portal.kernel.bean.AutoEscapeBeanHandler}.
 	 *
 	 * @return the escaped model instance

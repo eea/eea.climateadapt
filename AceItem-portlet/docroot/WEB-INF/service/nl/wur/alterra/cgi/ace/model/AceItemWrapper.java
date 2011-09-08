@@ -220,6 +220,14 @@ public class AceItemWrapper implements AceItem {
 		_aceItem.setImportance(importance);
 	}
 
+	public java.lang.String getSource() {
+		return _aceItem.getSource();
+	}
+
+	public void setSource(java.lang.String source) {
+		_aceItem.setSource(source);
+	}
+
 	public nl.wur.alterra.cgi.ace.model.AceItem toEscapedModel() {
 		return _aceItem.toEscapedModel();
 	}

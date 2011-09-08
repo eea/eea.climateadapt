@@ -38,6 +38,7 @@
 			<basic name="climateimpacts_" />
 			<basic name="rating" />
 			<basic name="importance" />
+			<basic name="source" />
 			<transient name="primaryKey" />
 		</attributes>
 	</mapped-superclass>

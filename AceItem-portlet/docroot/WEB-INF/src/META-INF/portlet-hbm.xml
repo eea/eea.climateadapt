@@ -33,6 +33,7 @@
 		<property name="climateimpacts_" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="rating" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 		<property name="importance" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="source" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 	</class>
 	<class name="nl.wur.alterra.cgi.ace.model.impl.NASImpl" table="Ace_NAS">
 		<cache usage="read-write" />

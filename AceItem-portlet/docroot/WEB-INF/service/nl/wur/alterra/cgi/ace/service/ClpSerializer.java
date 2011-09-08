@@ -220,6 +220,13 @@ public class ClpSerializer {
 
 					method22.invoke(newModel, value22);
 
+					Method method23 = newModelClass.getMethod("setSource",
+							new Class[] { String.class });
+
+					String value23 = oldCplModel.getSource();
+
+					method23.invoke(newModel, value23);
+
 					return newModel;
 				}
 				catch (Exception e) {
@@ -680,6 +687,13 @@ public class ClpSerializer {
 							(Object[])null);
 
 					newModel.setImportance(value22);
+
+					Method method23 = oldModelClass.getMethod("getSource");
+
+					String value23 = (String)method23.invoke(oldModel,
+							(Object[])null);
+
+					newModel.setSource(value23);
 
 					return newModel;
 				}

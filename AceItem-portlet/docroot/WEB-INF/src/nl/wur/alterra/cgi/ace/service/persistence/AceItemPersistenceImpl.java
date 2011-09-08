@@ -344,6 +344,7 @@ public class AceItemPersistenceImpl extends BasePersistenceImpl<AceItem>
 		aceItemImpl.setClimateimpacts_(aceItem.getClimateimpacts_());
 		aceItemImpl.setRating(aceItem.getRating());
 		aceItemImpl.setImportance(aceItem.getImportance());
+		aceItemImpl.setSource(aceItem.getSource());
 
 		return aceItemImpl;
 	}

@@ -227,6 +227,14 @@ public class AceItemClp extends BaseModelImpl<AceItem> implements AceItem {
 		_importance = importance;
 	}
 
+	public String getSource() {
+		return _source;
+	}
+
+	public void setSource(String source) {
+		_source = source;
+	}
+
 	public AceItem toEscapedModel() {
 		if (isEscapedModel()) {
 			return this;
@@ -263,6 +271,7 @@ public class AceItemClp extends BaseModelImpl<AceItem> implements AceItem {
 		clone.setClimateimpacts_(getClimateimpacts_());
 		clone.setRating(getRating());
 		clone.setImportance(getImportance());
+		clone.setSource(getSource());
 
 		return clone;
 	}
@@ -308,7 +317,7 @@ public class AceItemClp extends BaseModelImpl<AceItem> implements AceItem {
 	}
 
 	public String toString() {
-		StringBundler sb = new StringBundler(47);
+		StringBundler sb = new StringBundler(49);
 
 		sb.append("{aceItemId=");
 		sb.append(getAceItemId());
@@ -356,13 +365,15 @@ public class AceItemClp extends BaseModelImpl<AceItem> implements AceItem {
 		sb.append(getRating());
 		sb.append(", importance=");
 		sb.append(getImportance());
+		sb.append(", source=");
+		sb.append(getSource());
 		sb.append("}");
 
 		return sb.toString();
 	}
 
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(73);
+		StringBundler sb = new StringBundler(76);
 
 		sb.append("<model><model-name>");
 		sb.append("nl.wur.alterra.cgi.ace.model.AceItem");
@@ -460,6 +471,10 @@ public class AceItemClp extends BaseModelImpl<AceItem> implements AceItem {
 			"<column><column-name>importance</column-name><column-value><![CDATA[");
 		sb.append(getImportance());
 		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>source</column-name><column-value><![CDATA[");
+		sb.append(getSource());
+		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");
 
@@ -489,4 +504,5 @@ public class AceItemClp extends BaseModelImpl<AceItem> implements AceItem {
 	private String _climateimpacts_;
 	private long _rating;
 	private long _importance;
+	private String _source;
 }
