@@ -203,6 +203,41 @@ public interface AceItemPersistence extends BasePersistence<AceItem> {
 			nl.wur.alterra.cgi.ace.NoSuchItemException;
 
 	/**
+	* Finds the ace item where storedAt = &#63; or throws a {@link nl.wur.alterra.cgi.ace.NoSuchItemException} if it could not be found.
+	*
+	* @param storedAt the stored at to search with
+	* @return the matching ace item
+	* @throws nl.wur.alterra.cgi.ace.NoSuchItemException if a matching ace item could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public nl.wur.alterra.cgi.ace.model.AceItem findByStoredAt(
+		java.lang.String storedAt)
+		throws com.liferay.portal.kernel.exception.SystemException,
+			nl.wur.alterra.cgi.ace.NoSuchItemException;
+
+	/**
+	* Finds the ace item where storedAt = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	*
+	* @param storedAt the stored at to search with
+	* @return the matching ace item, or <code>null</code> if a matching ace item could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public nl.wur.alterra.cgi.ace.model.AceItem fetchByStoredAt(
+		java.lang.String storedAt)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Finds the ace item where storedAt = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	*
+	* @param storedAt the stored at to search with
+	* @return the matching ace item, or <code>null</code> if a matching ace item could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public nl.wur.alterra.cgi.ace.model.AceItem fetchByStoredAt(
+		java.lang.String storedAt, boolean retrieveFromCache)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
 	* Finds all the ace items.
 	*
 	* @return the ace items
@@ -255,6 +290,16 @@ public interface AceItemPersistence extends BasePersistence<AceItem> {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
+	* Removes the ace item where storedAt = &#63; from the database.
+	*
+	* @param storedAt the stored at to search with
+	* @throws SystemException if a system exception occurred
+	*/
+	public void removeByStoredAt(java.lang.String storedAt)
+		throws com.liferay.portal.kernel.exception.SystemException,
+			nl.wur.alterra.cgi.ace.NoSuchItemException;
+
+	/**
 	* Removes all the ace items from the database.
 	*
 	* @throws SystemException if a system exception occurred
@@ -270,6 +315,16 @@ public interface AceItemPersistence extends BasePersistence<AceItem> {
 	* @throws SystemException if a system exception occurred
 	*/
 	public int countByGroupId(long groupId)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Counts all the ace items where storedAt = &#63;.
+	*
+	* @param storedAt the stored at to search with
+	* @return the number of matching ace items
+	* @throws SystemException if a system exception occurred
+	*/
+	public int countByStoredAt(java.lang.String storedAt)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**

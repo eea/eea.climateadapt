@@ -16,7 +16,8 @@ public class GeoNetworkConnector {
      * @deprecated use GeoNetworkConnector(String geoNetworkBaseUrl, String username, String password)
      */
     public GeoNetworkConnector() {
-        this.geoNetworkBaseURL = "http://localhost:8081/geonetwork";
+        //this.geoNetworkBaseURL = "http://dev.ace.geocat.net:8080/geonetwork"; 
+		this.geoNetworkBaseURL = "http://localhost:8081/geonetwork";
         this.GeoNetworkLoginURL  = geoNetworkBaseURL + "/srv/en/xml.user.login";
         this.GeoNetworkAddHarvesterURL  = geoNetworkBaseURL + "/srv/en/xml.harvesting.add";
         this.GeoNetworkStartHarvesterURL  = geoNetworkBaseURL + "/srv/en/xml.harvesting.start";
@@ -57,6 +58,13 @@ public class GeoNetworkConnector {
      */
     public GeoNetworkConnector(String geoNetworkBaseUrl, String username, String password) {
         this.geoNetworkBaseURL = geoNetworkBaseUrl;
+        this.GeoNetworkLoginURL  = geoNetworkBaseURL + "/srv/en/xml.user.login";
+        this.GeoNetworkAddHarvesterURL  = geoNetworkBaseURL + "/srv/en/xml.harvesting.add";
+        this.GeoNetworkStartHarvesterURL  = geoNetworkBaseURL + "/srv/en/xml.harvesting.start";
+        this.GeoNetworkStopHarvesterURL  = geoNetworkBaseURL + "/srv/en/xml.harvesting.stop";
+        this.GeoNetworkRunHarvesterURL  = geoNetworkBaseURL + "/srv/en/xml.harvesting.run";
+        this.GeoNetworkGetHarvesterURL  = geoNetworkBaseURL + "/srv/en/xml.harvesting.get";
+        this.GeoNetworkXMLSearchURL  = geoNetworkBaseURL + "/srv/en/xml.search";		
         this.username = username;
         this.password = password;
     }
