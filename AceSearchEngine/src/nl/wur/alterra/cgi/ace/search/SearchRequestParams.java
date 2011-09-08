@@ -18,6 +18,7 @@ public class SearchRequestParams {
     public static final String INITIAL_DATE = "initial_date";
 	public static final String FINAL_DATE = "final_date";
 	public static final String SIMPLE_DATE = "simple_date";
+	public static final String DATAINFO_TYPE = "datainfo_type";
 	public static final String ACEITEM_TYPE = "aceitemtype";
 	public static final String SORTBY = "sortBy";
 	public static final String SECTOR = "sector";

@@ -52,8 +52,10 @@ public class ACESearchEngine {
         String[] impacts ;
         String[] sectors ;
         String[] sortBys ;
+        String[] datainfo_type;
 		
         aceItemTypes = searchParams.get(SearchRequestParams.ACEITEM_TYPE);
+        datainfo_type = searchParams.get(SearchRequestParams.DATAINFO_TYPE);
         anyOfThese = searchParams.get(SearchRequestParams.ANY);
         conditionAdaptationElement = searchParams.get(SearchRequestParams.CONDITION_ADAPTATION_ELEMENT);
         conditionAdaptationSector = searchParams.get(SearchRequestParams.CONDITION_ADAPTATION_SECTOR);
@@ -95,6 +97,7 @@ public class ACESearchEngine {
         AceSearchFormBean formBean = new AceSearchFormBean();
 
         formBean.setAceitemtype(aceItemTypes);
+        formBean.setDatainfo_type(datainfo_type[0]);
         formBean.setCountries(countries);
         formBean.setElement(elements);
         formBean.setFreetextMode(freetextMode[0]);

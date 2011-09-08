@@ -12,6 +12,7 @@ public class AceSearchFormBean {
     private String[] element;
     private String[] impact;
     private String[] countries;
+    private String datainfo_type;
     private String sortBy;
     private String fuzziness;
     private String anyOfThese;
@@ -88,6 +89,14 @@ public class AceSearchFormBean {
 
     public void setAnyOfThese(String anyOfThese) {
         this.anyOfThese = anyOfThese;
+    }
+
+    public String getDatainfo_type() {
+        return datainfo_type;
+    }
+
+    public void setDatainfo_type(String datainfo_type) {
+        this.datainfo_type = datainfo_type;
     }
 
     public String getConditionAdaptationSector() {

@@ -43,8 +43,8 @@ public class ACESearchPortalInterface {
         ACESearchEngine searchEngine = new ACESearchEngine();
 
 
-		// no aceItemTypes requested: search for all of them
-		if (isEmpty(formBean.getAceitemtype())) {
+		// no aceItemTypes requested or "All" choosen: search for all of them
+		if (isEmpty(formBean.getAceitemtype()) || formBean.getDatainfo_type().equals("1")) {
 			for (AceItemType aceItemType : AceItemType.values()) {
 				List<AceItemSearchResult> results = searchEngine.searchLuceneByType(formBean, aceItemType.name());
 				totalResults += results.size();
