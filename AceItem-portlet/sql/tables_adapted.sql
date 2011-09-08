@@ -21,7 +21,8 @@ create table ace_aceitem (
 	elements_ character varying(255) ,
 	climateimpacts_ character varying(255),
     rating bigint,
-    importance bigint
+    importance bigint,
+    source character varying(75)
 )
 WITH (
   OIDS=FALSE
