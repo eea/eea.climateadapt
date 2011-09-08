@@ -87,11 +87,11 @@ public class HTTPUtils {
             else {
                 responseStream = x.getErrorStream();
                 response = inputStream2String(responseStream);
-                System.out.println(response);
+                //System.out.println(response);
                 // TODO do not throw SystemException in case of unsuccesful HTTP response
                 throw new SystemException("Server returned response code: " + x.getResponseCode() + " with content:\n" + response);
             }
-            System.out.println("\nresponse from server after POST to: "+ destination + "\n" + response + "\n");
+            //System.out.println("\nresponse from server after POST to: "+ destination + "\n" + response + "\n");
             return response;
         }
         catch(MalformedURLException x) {

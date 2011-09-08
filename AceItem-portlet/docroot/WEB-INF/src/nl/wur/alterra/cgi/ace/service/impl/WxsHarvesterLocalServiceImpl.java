@@ -63,6 +63,7 @@ public class WxsHarvesterLocalServiceImpl extends WxsHarvesterLocalServiceBaseIm
      * @return added WxsHarvester
      * @throws com.liferay.portal.kernel.exception.SystemException hmm
 	 */
+    @Override
 	public WxsHarvester addWxsHarvester(WxsHarvester wxsHarvester) throws SystemException {
 
         //

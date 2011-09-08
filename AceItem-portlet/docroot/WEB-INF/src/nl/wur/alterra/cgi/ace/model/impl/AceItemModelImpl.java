@@ -193,6 +193,14 @@ public class AceItemModelImpl extends BaseModelImpl<AceItem>
 
 	public void setStoredAt(String storedAt) {
 		_storedAt = storedAt;
+
+		if (_originalStoredAt == null) {
+			_originalStoredAt = storedAt;
+		}
+	}
+
+	public String getOriginalStoredAt() {
+		return GetterUtil.getString(_originalStoredAt);
 	}
 
 	public String getStoragetype() {
@@ -625,6 +633,7 @@ public class AceItemModelImpl extends BaseModelImpl<AceItem>
 	private String _description;
 	private String _datatype;
 	private String _storedAt;
+	private String _originalStoredAt;
 	private String _storagetype;
 	private String _language;
 	private String _textSearch;

@@ -20,7 +20,9 @@ public class GeoNetworkConnector {
         this.GeoNetworkLoginURL  = geoNetworkBaseURL + "/srv/en/xml.user.login";
         this.GeoNetworkAddHarvesterURL  = geoNetworkBaseURL + "/srv/en/xml.harvesting.add";
         this.GeoNetworkStartHarvesterURL  = geoNetworkBaseURL + "/srv/en/xml.harvesting.start";
+        this.GeoNetworkStopHarvesterURL  = geoNetworkBaseURL + "/srv/en/xml.harvesting.stop";
         this.GeoNetworkRunHarvesterURL  = geoNetworkBaseURL + "/srv/en/xml.harvesting.run";
+        this.GeoNetworkGetHarvesterURL  = geoNetworkBaseURL + "/srv/en/xml.harvesting.get";
         this.GeoNetworkXMLSearchURL  = geoNetworkBaseURL + "/srv/en/xml.search";
         this.username = "admin";
         this.password = "admin";
@@ -38,7 +40,9 @@ public class GeoNetworkConnector {
         this.GeoNetworkLoginURL  = geoNetworkBaseURL + "/srv/en/xml.user.login";
         this.GeoNetworkAddHarvesterURL  = geoNetworkBaseURL + "/srv/en/xml.harvesting.add";
         this.GeoNetworkStartHarvesterURL  = geoNetworkBaseURL + "/srv/en/xml.harvesting.start";
+        this.GeoNetworkStopHarvesterURL  = geoNetworkBaseURL + "/srv/en/xml.harvesting.stop";
         this.GeoNetworkRunHarvesterURL  = geoNetworkBaseURL + "/srv/en/xml.harvesting.run";
+        this.GeoNetworkGetHarvesterURL  = geoNetworkBaseURL + "/srv/en/xml.harvesting.get";
         this.GeoNetworkXMLSearchURL  = geoNetworkBaseURL + "/srv/en/xml.search";
         this.username = "admin";
         this.password = "admin";
@@ -64,7 +68,9 @@ public class GeoNetworkConnector {
     private String GeoNetworkLoginURL;
     private String GeoNetworkAddHarvesterURL;
     private String GeoNetworkStartHarvesterURL ;
+    private String GeoNetworkStopHarvesterURL ;
     private String GeoNetworkRunHarvesterURL;
+    private String GeoNetworkGetHarvesterURL;
     private String GeoNetworkXMLSearchURL;
 
     private HTTPUtils httpUtils = new HTTPUtils();
@@ -77,15 +83,103 @@ public class GeoNetworkConnector {
      */
     public WxsHarvester addHarvester(WxsHarvester wxsHarvester) throws SystemException {
         login();
-        String xml = convertHarvester2GeoNetworkServiceXML(wxsHarvester);
+        String xml = createAddRequest(wxsHarvester);
         String response = httpUtils.post(xml, GeoNetworkAddHarvesterURL);
+        // TODO verify success?
         // TODO logout?
-        System.out.println("**************\n"+response+"\n****************");
         return setGeoNetworkIDs(wxsHarvester, response);
     }
 
     /**
-     * Updates wxsHarvester with ID and UUID provided by GeoNetwork.
+     * Activates a harvester in GeoNetwork.
+     *
+     * @param wxsHarvester
+     * @throws SystemException
+     */
+    public void activateHarvester(WxsHarvester wxsHarvester) throws SystemException {
+        login();
+        String xml = createActivateRequest(wxsHarvester);
+        String response = httpUtils.post(xml, GeoNetworkStartHarvesterURL);
+        // TODO verify success?
+        // TODO logout?
+    }
+
+    /**
+     * De-activates a harvester in GeoNetwork.
+     *
+     * @param wxsHarvester
+     * @throws SystemException
+     */
+    public String deActivateHarvester(WxsHarvester wxsHarvester) throws SystemException {
+        login();
+        String xml = createDeActivateRequest(wxsHarvester);
+        String response = httpUtils.post(xml, GeoNetworkStopHarvesterURL);
+        // TODO verify success?
+        // TODO logout?
+        return response;
+    }
+
+    /**
+     * Runs a harvester in GeoNetwork.
+     *
+     * @param wxsHarvester
+     * @throws SystemException
+     */
+    public String runHarvester(WxsHarvester wxsHarvester) throws SystemException {
+        login();
+        String xml = createRunRequest(wxsHarvester);
+        String response = httpUtils.post(xml, GeoNetworkRunHarvesterURL);
+        // TODO verify success?
+        // TODO logout?
+        return response;
+    }
+
+    /**
+     * Gets a harvester's info from GeoNetwork -- this includes whether it is running right now.
+     *
+     * @param wxsHarvester
+     * @throws SystemException
+     */
+    public String getHarvester(WxsHarvester wxsHarvester) throws SystemException {
+        login();
+        String xml = createGetRequest(wxsHarvester);
+        String response = httpUtils.post(xml, GeoNetworkGetHarvesterURL);
+        // TODO logout?
+        return response;
+    }
+
+    /**
+     * Retrieves all metadata resulting from a particular harvester in GeoNetwork.
+     *
+     * @param wxsHarvester
+     * @return
+     * @throws SystemException
+     */
+    public String getHarvesterResults(WxsHarvester wxsHarvester) throws SystemException {
+        login();
+        String xml = createHarvesterResultRequest(wxsHarvester);
+        String response = httpUtils.post(xml, GeoNetworkXMLSearchURL);
+        // TODO logout?
+        return response;
+    }
+
+    /**
+     * Creates a request to retrieve metadata from a particular harvester.
+     * @param wxsHarvester
+     * @return
+     */
+    private String createHarvesterResultRequest(WxsHarvester wxsHarvester) {
+        String xml = "<request>";
+        xml += "<harvestUuid>" + wxsHarvester.getGeonetworkUUID() + "</harvestUuid>";
+        // if not sent, GeoNetwork only returns short summaries (2.6.x, seems a bug)
+        xml += "<fast>false</fast>";
+        xml += "</request>";
+        return xml;
+    }
+
+
+    /**
+     * Updates ACE wxsHarvester with ID and UUID provided by GeoNetwork.
      *
      * A typical GeoNetwork response to adding a harvester is:
      *
@@ -159,13 +253,62 @@ public class GeoNetworkConnector {
     }
 
     /**
+     * Creates a request to get a harvester in GeoNetwork.
+     * @param wxsHarvester
+     * @return
+     */
+    private String createGetRequest(WxsHarvester wxsHarvester) {
+        String xml = "<request>";
+            xml += "<id>" + wxsHarvester.getGeonetworkId() + "</id>";
+        xml += "</request>";
+        return xml;
+    }
+
+    /**
+     * Creates a request to activate a harvester in GeoNetwork.
+     * @param wxsHarvester
+     * @return
+     */
+    private String createActivateRequest(WxsHarvester wxsHarvester) {
+        String xml = "<request>";
+            xml += "<id>" + wxsHarvester.getGeonetworkId() + "</id>";
+        xml += "</request>";
+        return xml;
+    }
+
+    /**
+     * Creates a request to de-activate a harvester in GeoNetwork.
+     * @param wxsHarvester
+     * @return
+     */
+    private String createDeActivateRequest(WxsHarvester wxsHarvester) {
+        String xml = "<request>";
+            xml += "<id>" + wxsHarvester.getGeonetworkId() + "</id>";
+        xml += "</request>";
+        return xml;
+    }
+
+    /**
+     * Creates a request to run a harvester in GeoNetwork.
+     * @param wxsHarvester
+     * @return
+     */
+    private String createRunRequest(WxsHarvester wxsHarvester) {
+        String xml = "<request>";
+            xml += "<id>" + wxsHarvester.getGeonetworkId() + "</id>";
+        xml += "</request>";
+        return xml;
+    }
+
+    /**
      * Creates a ADD-WXSHARVESTER request for GeoNetwork. Some of the parameters are hard-coded, if desired they could
      * be made variable by adding them as properties to WxsHarvester.
      *
      * @param wxsHarvester wxsharvester
      * @return add harvester request
      */
-    private String convertHarvester2GeoNetworkServiceXML(WxsHarvester wxsHarvester) {
+    private String createAddRequest(WxsHarvester wxsHarvester) {
+
         String xml = "<node type=\"ogcwxs\">";
 
             xml += "<site>";

@@ -33,6 +33,7 @@ import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.ModelListener;
 import com.liferay.portal.service.persistence.BatchSessionUtil;
 import com.liferay.portal.service.persistence.ResourcePersistence;
@@ -85,6 +86,12 @@ public class AceItemPersistenceImpl extends BasePersistenceImpl<AceItem>
 	public static final FinderPath FINDER_PATH_COUNT_BY_GROUPID = new FinderPath(AceItemModelImpl.ENTITY_CACHE_ENABLED,
 			AceItemModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
 			"countByGroupId", new String[] { Long.class.getName() });
+	public static final FinderPath FINDER_PATH_FETCH_BY_STOREDAT = new FinderPath(AceItemModelImpl.ENTITY_CACHE_ENABLED,
+			AceItemModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_ENTITY,
+			"fetchByStoredAt", new String[] { String.class.getName() });
+	public static final FinderPath FINDER_PATH_COUNT_BY_STOREDAT = new FinderPath(AceItemModelImpl.ENTITY_CACHE_ENABLED,
+			AceItemModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
+			"countByStoredAt", new String[] { String.class.getName() });
 	public static final FinderPath FINDER_PATH_FIND_ALL = new FinderPath(AceItemModelImpl.ENTITY_CACHE_ENABLED,
 			AceItemModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
 			"findAll", new String[0]);
@@ -100,6 +107,9 @@ public class AceItemPersistenceImpl extends BasePersistenceImpl<AceItem>
 	public void cacheResult(AceItem aceItem) {
 		EntityCacheUtil.putResult(AceItemModelImpl.ENTITY_CACHE_ENABLED,
 			AceItemImpl.class, aceItem.getPrimaryKey(), aceItem);
+
+		FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_STOREDAT,
+			new Object[] { aceItem.getStoredAt() }, aceItem);
 	}
 
 	/**
@@ -141,6 +151,9 @@ public class AceItemPersistenceImpl extends BasePersistenceImpl<AceItem>
 	public void clearCache(AceItem aceItem) {
 		EntityCacheUtil.removeResult(AceItemModelImpl.ENTITY_CACHE_ENABLED,
 			AceItemImpl.class, aceItem.getPrimaryKey());
+
+		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_STOREDAT,
+			new Object[] { aceItem.getStoredAt() });
 	}
 
 	/**
@@ -241,6 +254,11 @@ public class AceItemPersistenceImpl extends BasePersistenceImpl<AceItem>
 
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
 
+		AceItemModelImpl aceItemModelImpl = (AceItemModelImpl)aceItem;
+
+		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_STOREDAT,
+			new Object[] { aceItemModelImpl.getOriginalStoredAt() });
+
 		EntityCacheUtil.removeResult(AceItemModelImpl.ENTITY_CACHE_ENABLED,
 			AceItemImpl.class, aceItem.getPrimaryKey());
 
@@ -250,6 +268,10 @@ public class AceItemPersistenceImpl extends BasePersistenceImpl<AceItem>
 	public AceItem updateImpl(nl.wur.alterra.cgi.ace.model.AceItem aceItem,
 		boolean merge) throws SystemException {
 		aceItem = toUnwrappedModel(aceItem);
+
+		boolean isNew = aceItem.isNew();
+
+		AceItemModelImpl aceItemModelImpl = (AceItemModelImpl)aceItem;
 
 		Session session = null;
 
@@ -271,6 +293,20 @@ public class AceItemPersistenceImpl extends BasePersistenceImpl<AceItem>
 
 		EntityCacheUtil.putResult(AceItemModelImpl.ENTITY_CACHE_ENABLED,
 			AceItemImpl.class, aceItem.getPrimaryKey(), aceItem);
+
+		if (!isNew &&
+				(!Validator.equals(aceItem.getStoredAt(),
+					aceItemModelImpl.getOriginalStoredAt()))) {
+			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_STOREDAT,
+				new Object[] { aceItemModelImpl.getOriginalStoredAt() });
+		}
+
+		if (isNew ||
+				(!Validator.equals(aceItem.getStoredAt(),
+					aceItemModelImpl.getOriginalStoredAt()))) {
+			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_STOREDAT,
+				new Object[] { aceItem.getStoredAt() }, aceItem);
+		}
 
 		return aceItem;
 	}
@@ -732,6 +768,147 @@ public class AceItemPersistenceImpl extends BasePersistenceImpl<AceItem>
 	}
 
 	/**
+	 * Finds the ace item where storedAt = &#63; or throws a {@link nl.wur.alterra.cgi.ace.NoSuchItemException} if it could not be found.
+	 *
+	 * @param storedAt the stored at to search with
+	 * @return the matching ace item
+	 * @throws nl.wur.alterra.cgi.ace.NoSuchItemException if a matching ace item could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	public AceItem findByStoredAt(String storedAt)
+		throws NoSuchItemException, SystemException {
+		AceItem aceItem = fetchByStoredAt(storedAt);
+
+		if (aceItem == null) {
+			StringBundler msg = new StringBundler(4);
+
+			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
+
+			msg.append("storedAt=");
+			msg.append(storedAt);
+
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+			if (_log.isWarnEnabled()) {
+				_log.warn(msg.toString());
+			}
+
+			throw new NoSuchItemException(msg.toString());
+		}
+
+		return aceItem;
+	}
+
+	/**
+	 * Finds the ace item where storedAt = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	 *
+	 * @param storedAt the stored at to search with
+	 * @return the matching ace item, or <code>null</code> if a matching ace item could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	public AceItem fetchByStoredAt(String storedAt) throws SystemException {
+		return fetchByStoredAt(storedAt, true);
+	}
+
+	/**
+	 * Finds the ace item where storedAt = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	 *
+	 * @param storedAt the stored at to search with
+	 * @return the matching ace item, or <code>null</code> if a matching ace item could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	public AceItem fetchByStoredAt(String storedAt, boolean retrieveFromCache)
+		throws SystemException {
+		Object[] finderArgs = new Object[] { storedAt };
+
+		Object result = null;
+
+		if (retrieveFromCache) {
+			result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_STOREDAT,
+					finderArgs, this);
+		}
+
+		if (result == null) {
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				StringBundler query = new StringBundler(3);
+
+				query.append(_SQL_SELECT_ACEITEM_WHERE);
+
+				if (storedAt == null) {
+					query.append(_FINDER_COLUMN_STOREDAT_STOREDAT_1);
+				}
+				else {
+					if (storedAt.equals(StringPool.BLANK)) {
+						query.append(_FINDER_COLUMN_STOREDAT_STOREDAT_3);
+					}
+					else {
+						query.append(_FINDER_COLUMN_STOREDAT_STOREDAT_2);
+					}
+				}
+
+				query.append(AceItemModelImpl.ORDER_BY_JPQL);
+
+				String sql = query.toString();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				if (storedAt != null) {
+					qPos.add(storedAt);
+				}
+
+				List<AceItem> list = q.list();
+
+				result = list;
+
+				AceItem aceItem = null;
+
+				if (list.isEmpty()) {
+					FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_STOREDAT,
+						finderArgs, list);
+				}
+				else {
+					aceItem = list.get(0);
+
+					cacheResult(aceItem);
+
+					if ((aceItem.getStoredAt() == null) ||
+							!aceItem.getStoredAt().equals(storedAt)) {
+						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_STOREDAT,
+							finderArgs, aceItem);
+					}
+				}
+
+				return aceItem;
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				if (result == null) {
+					FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_STOREDAT,
+						finderArgs, new ArrayList<AceItem>());
+				}
+
+				closeSession(session);
+			}
+		}
+		else {
+			if (result instanceof List<?>) {
+				return null;
+			}
+			else {
+				return (AceItem)result;
+			}
+		}
+	}
+
+	/**
 	 * Finds all the ace items.
 	 *
 	 * @return the ace items
@@ -849,6 +1026,19 @@ public class AceItemPersistenceImpl extends BasePersistenceImpl<AceItem>
 	}
 
 	/**
+	 * Removes the ace item where storedAt = &#63; from the database.
+	 *
+	 * @param storedAt the stored at to search with
+	 * @throws SystemException if a system exception occurred
+	 */
+	public void removeByStoredAt(String storedAt)
+		throws NoSuchItemException, SystemException {
+		AceItem aceItem = findByStoredAt(storedAt);
+
+		remove(aceItem);
+	}
+
+	/**
 	 * Removes all the ace items from the database.
 	 *
 	 * @throws SystemException if a system exception occurred
@@ -903,6 +1093,71 @@ public class AceItemPersistenceImpl extends BasePersistenceImpl<AceItem>
 				}
 
 				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_GROUPID,
+					finderArgs, count);
+
+				closeSession(session);
+			}
+		}
+
+		return count.intValue();
+	}
+
+	/**
+	 * Counts all the ace items where storedAt = &#63;.
+	 *
+	 * @param storedAt the stored at to search with
+	 * @return the number of matching ace items
+	 * @throws SystemException if a system exception occurred
+	 */
+	public int countByStoredAt(String storedAt) throws SystemException {
+		Object[] finderArgs = new Object[] { storedAt };
+
+		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_STOREDAT,
+				finderArgs, this);
+
+		if (count == null) {
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				StringBundler query = new StringBundler(2);
+
+				query.append(_SQL_COUNT_ACEITEM_WHERE);
+
+				if (storedAt == null) {
+					query.append(_FINDER_COLUMN_STOREDAT_STOREDAT_1);
+				}
+				else {
+					if (storedAt.equals(StringPool.BLANK)) {
+						query.append(_FINDER_COLUMN_STOREDAT_STOREDAT_3);
+					}
+					else {
+						query.append(_FINDER_COLUMN_STOREDAT_STOREDAT_2);
+					}
+				}
+
+				String sql = query.toString();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				if (storedAt != null) {
+					qPos.add(storedAt);
+				}
+
+				count = (Long)q.uniqueResult();
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				if (count == null) {
+					count = Long.valueOf(0);
+				}
+
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_STOREDAT,
 					finderArgs, count);
 
 				closeSession(session);
@@ -996,6 +1251,9 @@ public class AceItemPersistenceImpl extends BasePersistenceImpl<AceItem>
 	private static final String _SQL_COUNT_ACEITEM = "SELECT COUNT(aceItem) FROM AceItem aceItem";
 	private static final String _SQL_COUNT_ACEITEM_WHERE = "SELECT COUNT(aceItem) FROM AceItem aceItem WHERE ";
 	private static final String _FINDER_COLUMN_GROUPID_GROUPID_2 = "aceItem.groupId = ?";
+	private static final String _FINDER_COLUMN_STOREDAT_STOREDAT_1 = "aceItem.storedAt IS NULL";
+	private static final String _FINDER_COLUMN_STOREDAT_STOREDAT_2 = "aceItem.storedAt = ?";
+	private static final String _FINDER_COLUMN_STOREDAT_STOREDAT_3 = "(aceItem.storedAt IS NULL OR aceItem.storedAt = ?)";
 	private static final String _ORDER_BY_ENTITY_ALIAS = "aceItem.";
 	private static final String _NO_SUCH_ENTITY_WITH_PRIMARY_KEY = "No AceItem exists with the primary key ";
 	private static final String _NO_SUCH_ENTITY_WITH_KEY = "No AceItem exists with the key {";

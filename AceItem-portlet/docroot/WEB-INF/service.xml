@@ -47,6 +47,10 @@
 			<finder-column name="groupId" />
 		</finder>
 
+        <finder name="StoredAt" return-type="nl.wur.alterra.cgi.ace.model.AceItem">
+            <finder-column name="storedAt"/>
+        </finder>
+
     <reference package-path="com.liferay.portlet.asset" entity="AssetEntry" />
 
 	</entity>

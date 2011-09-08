@@ -45,6 +45,10 @@ import java.util.List;
  */
 public class AceItemLocalServiceImpl extends AceItemLocalServiceBaseImpl {
 
+    /**
+     * Creates new empty aceitem.
+     * @return
+     */
     public AceItem createAceItem() {
         return new AceItemImpl();
     }
@@ -71,11 +75,23 @@ public class AceItemLocalServiceImpl extends AceItemLocalServiceBaseImpl {
         }
         return aceitem;
 	}
-	
+
+
+    /**
+     * Retrieves an AceItem by its storedAt value.
+     *
+     * @param s requested storedAt value
+     * @return aceitem, or null if not found
+     * @throws SystemException hmm
+     */
+    public AceItem getAceItemByStoredAt(String s) throws SystemException {
+        return aceItemPersistence.fetchByStoredAt(s);
+    }
+
 	/**
-	 * 	
+	 *
 	 * Hugo de Groot: add these methods by hand to <portlet>LocalServiceImpl
-	 * and rerun ServiceBuilder if auto generation fails 
+	 * and rerun ServiceBuilder if auto generation fails
 	 * 
 	 * Gets a list with all the AceItems in a group
 	 *
