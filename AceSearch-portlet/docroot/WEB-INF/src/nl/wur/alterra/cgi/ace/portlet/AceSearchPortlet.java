@@ -41,6 +41,8 @@ public class AceSearchPortlet extends MVCPortlet {
 	    	
 	    		String searchtext = httpRequest.getParameter("searchtext") ;
 	    		
+	    		System.out.println("searchtext parameter: " + searchtext) ;
+	    		
 	    		if(searchtext != null && searchtext.trim().length() > 0) {
 	
 		        	ACESearchPortalInterface searchEngine = new ACESearchPortalInterface();		    			
