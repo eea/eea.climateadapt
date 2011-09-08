@@ -48,7 +48,8 @@ public class FilterAceItemPortlet extends MVCPortlet {
         if(requestParams == null || requestParams.get(SearchRequestParams.ANY) == null) {
             System.out.println("Search cannot be executed, it seems your portlet container failed to send the search form in this request.");
         }
-        
+
+        String[] datainfo_type = requestParams.get(SearchRequestParams.DATAINFO_TYPE);      
         String[] anyOfThese = requestParams.get(SearchRequestParams.ANY);
         String[] aceItemTypes = requestParams.get(SearchRequestParams.ACEITEM_TYPE);
         String[] sectors = requestParams.get(SearchRequestParams.SECTOR);
@@ -64,6 +65,7 @@ public class FilterAceItemPortlet extends MVCPortlet {
 		prefs.setValue(Constants.FUZZINESS, ParamUtil.getString(request, Constants.FUZZINESS) );
 
 		prefs.store();
+		prefs.setValues(SearchRequestParams.DATAINFO_TYPE, datainfo_type);
 		prefs.setValues(SearchRequestParams.ANY, anyOfThese);
 		prefs.setValues(SearchRequestParams.ACEITEM_TYPE, aceItemTypes);
 		prefs.setValues(SearchRequestParams.SECTOR, sectors);
