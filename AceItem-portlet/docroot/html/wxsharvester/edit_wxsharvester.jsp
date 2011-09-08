@@ -25,7 +25,7 @@
 
 <%
 	// Default values
-	String ogcType = nl.wur.alterra.cgi.ace.model.constants.OGCType.WMS130.getString();
+	String ogcType = nl.wur.alterra.cgi.ace.model.constants.OGCType.WMS111.getString();
 	String isoTopic = "";
 	String every_days = "0";
 	String every_hours = "1";
@@ -35,7 +35,7 @@
 
 	if (wxsHarvester != null) {
 		ogcType = wxsHarvester.getOgctype();
-		if (ogcType == "") ogcType = nl.wur.alterra.cgi.ace.model.constants.OGCType.WMS130.getString();
+		if (ogcType == null || ogcType.equals("")) ogcType = nl.wur.alterra.cgi.ace.model.constants.OGCType.WMS111.getString();
 		isoTopic = wxsHarvester.getTopic();
 		savedToGeoNetwork = wxsHarvester.getSavedToGeoNetwork();
 		
@@ -114,10 +114,9 @@
 		<c:set var="ogcTypeVal" value="<%= ogcType %>" />
 
 		<select name="ogctype">
-			<c:forEach var="ogcTypeEl" items="<%= nl.wur.alterra.cgi.ace.model.constants.OGCType.values() %>" >
+			<c:forEach var="ogcTypeEl" items="<%= nl.wur.alterra.cgi.ace.model.constants.OGCType.stringvalues() %>" >
 			
 				<c:set var="ogcTypeElMustBeChecked" value="false" />
-				
 				<c:if test="${ogcTypeEl == ogcTypeVal}">
 					<c:set var="ogcTypeElMustBeChecked" value="true" />
 				</c:if>	
