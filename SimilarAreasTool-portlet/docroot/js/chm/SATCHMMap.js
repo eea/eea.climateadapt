@@ -99,7 +99,7 @@ CHM.SATCHMMap = OpenLayers.Class(CHM.CHMMap, {
 	}, 
 	
 	onFeatureSelect : function(feature) {
-		var description = feature.attributes.description;
+		var description = feature.attributes.desc;
 		
 		if (description == undefined) {
 			description = '';
@@ -107,9 +107,9 @@ CHM.SATCHMMap = OpenLayers.Class(CHM.CHMMap, {
 		
 		popup = new OpenLayers.Popup.Anchored(null, 
         	feature.geometry.getBounds().getCenterLonLat(),
-        	new OpenLayers.Size(250,250),
+        	new OpenLayers.Size(250,100),
             "<table width='100%' border='0'>" +
-            "<tr><th>" + feature.attributes.name + "</th></tr>" + 
+            "<tr><th>" + feature.attributes.itemname + "</th></tr>" + 
             "<tr><td>" + description + "</td></tr>" + 
             "<tr><td><a href='/viewmeasure?ace_measure_id=" + feature.attributes.measureid + "'>read more</a></td></tr>" + 
             "</table>",

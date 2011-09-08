@@ -47,7 +47,7 @@
 
 <div id='map_element'></div>
 
-<div id='legend_element'><img id="legendGraphicImage"/></div>
+<div id='legend_element'></div>
 
 <script>
 	var proxyUrl = '<%= prefs.getValue(Constants.proxyUrlPreferenceName, "") %>';
@@ -69,19 +69,23 @@
     Ext.onReady(function() {
     	satchmmap = new CHM.SATCHMMap();
 
-        new GeoExt.MapPanel({
+        mappanel = new GeoExt.MapPanel({
             renderTo: 'map_element',
             height: 500,
             width: 500,
             map: satchmmap
+        });
+        
+        legendpanel = new GeoExt.LegendPanel({
+            layerStore: mappanel.layers,
+            renderTo: "legend_element",
+            border: false
         });
 
         satchmmap.addBingLayers();
         
         satchmmap.addSATLayers();
         
-        document.getElementById('legendGraphicImage').src = geoserverUrl + wms + "?TRANSPARENT=true&SERVICE=WMS&VERSION=1.1.1&REQUEST=GetLegendGraphic&EXCEPTIONS=application%2Fvnd.ogc.se_xml&LAYER=chm%3Abiogeo_2005&SCALE=55468034.09051751&FORMAT=image%2Fgif";		
-
         locator = new CHM.Locator('locations_element', {});
 
     	locator.setOnLocationChanged(handleLocationChanged);
