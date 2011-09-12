@@ -48,8 +48,8 @@
 
                         <c:set var="descriptionText" value="${wrappedSearchResult.shortdescription}" />	
 						
-						<span id="${plusId}" class="plus toggleshow"><img src="<%=renderRequest.getContextPath()%>/images/icons/01_plus.png" /></span>
-						<span id="${minusId}" class="minus togglehide"><img src="<%=renderRequest.getContextPath()%>/images/icons/01_minus.png" /></span>
+						<span id="${plusId}" class="plus toggleshow"><img src="/ace-theme/images/arrows/01_plus.png" /></span>
+						<span id="${minusId}" class="minus togglehide"><img src="/ace-theme/images/arrows/01_minus.png" /></span>
 						
 						<c:choose>
 							<c:when test="${!empty searchResult.storedAt && fn:startsWith(searchResult.storagetype, 'URL')==true}">
