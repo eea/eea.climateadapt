@@ -14,8 +14,6 @@
 */
 --%>
 
-<%@ taglib uri="http://java.sun.com/portlet_2_0" prefix="portlet" %>
-
 <%@include file="/html/init.jsp" %>
 
 <portlet:actionURL name="setAceSearchPref" var="setAceSearchPref" />

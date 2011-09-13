@@ -33,7 +33,7 @@ import com.liferay.portal.kernel.util.ParamUtil;
 public class AceSearchPortlet extends MVCPortlet {
 
 	@Override
-	public void doView(RenderRequest renderRequest, RenderResponse renderResponse) throws IOException, PortletException {
+	public void doView(RenderRequest renderRequest, RenderResponse renderResponse) throws PortletException, IOException {
 		try {
 	    	HttpServletRequest httpRequest = 
 	    		PortalUtil.getOriginalServletRequest(
@@ -57,7 +57,7 @@ public class AceSearchPortlet extends MVCPortlet {
 	    			renderRequest.setAttribute(SearchRequestParams.SEARCH_PARAMS, null);
 	    		}
 		}
-        catch (ACELuceneException x) {
+        catch (Exception x) {
 			x.printStackTrace();
             throw new PortletException(x);
 		}
@@ -100,8 +100,8 @@ public class AceSearchPortlet extends MVCPortlet {
             ACESearchPortalInterface searchEngine = new ACESearchPortalInterface();
             searchEngine.handleAjaxSearchRequest(request, response);
         }
-        catch (ACELuceneException x) {
-            x.printStackTrace();
+        catch (Exception x) {
+        	x.printStackTrace();
             throw new PortletException(x);
         }
     }
