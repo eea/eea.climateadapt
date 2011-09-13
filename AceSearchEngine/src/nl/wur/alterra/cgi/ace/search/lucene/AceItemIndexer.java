@@ -58,11 +58,15 @@ public class AceItemIndexer {
 		// long scopeGroupId = entry.getGroupId();
         String keyword = aceItem.getKeyword();
         String name = aceItem.getName();
-        Long rating = aceItem.getRating();
-        if(rating == null) {
+        String rating$ = "" + aceItem.getRating();
+        Long rating = 0l;
+        if(rating$ == null || rating$.equalsIgnoreCase("NaN")) {
             rating = 0l;
         }
-        String rating$ = Long.toString(rating);
+        else {
+        	rating = Long.parseLong(rating$) ;
+        }
+        rating$ = "" + rating; 
         String spatialValues = aceItem.getSpatialValues();
         String spatialLayers = aceItem.getSpatialLayer();
         String elements = aceItem.getElements_();
@@ -108,7 +112,7 @@ public class AceItemIndexer {
             document.add(new Field(ACEIndexConstant.IndexField.NAME_SORT, name, Field.Store.NO,Field.Index.NOT_ANALYZED));
         }
 
-        if(rating != null) {
+        if(rating$ != null) {
             document.add(new Field(ACEIndexConstant.IndexField.RATING, rating$, Field.Store.YES,Field.Index.ANALYZED));
             // for sorting
             document.add(new Field(ACEIndexConstant.IndexField.RATING_SORT, rating$, Field.Store.NO,Field.Index.NOT_ANALYZED));

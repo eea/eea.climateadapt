@@ -92,7 +92,7 @@ public class ACEIndexSearcher {
             System.out.println("ACEIndexSearcher sortBy" + sortBy);
             Sort sort = null;
             if(sortBy == null) {
-                 sort = new Sort(new SortField[] { SortField.FIELD_SCORE, SortField.FIELD_DOC });
+                 sort = new Sort(new SortField( ACEIndexConstant.IndexField.RATING_SORT, SortField.LONG));
                             }
             else {
                 if(sortBy.equals("RATING")) {

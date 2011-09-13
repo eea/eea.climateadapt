@@ -211,7 +211,7 @@ public class ACESearchEngine {
      * @return results results
      * @throws ACELuceneException hmm
      */
-    protected List<AceItemSearchResult> searchLuceneByType(AceSearchFormBean formBean, String aceItemType) throws ACELuceneException {
+    protected List<AceItemSearchResult> searchLuceneByType(AceSearchFormBean formBean, String aceItemType) throws Exception {
         try {
             //
             // handle free text input
@@ -329,58 +329,61 @@ public class ACESearchEngine {
             for (ScoreDoc hit : hits) {
                 Document document = searcher.doc(hit.doc);
 
-                AceItemLocalService aceItemLocalService = AceItemLocalServiceUtil.getService();
-                AceItem aceItem = AceItemLocalServiceUtil.createAceItem();
+                //AceItemLocalService aceItemLocalService = AceItemLocalServiceUtil.getService();
+                AceItem aceItem ;
 
                 String aceItemId = document.get(ACEIndexConstant.IndexField.ACEITEM_ID);
                 if(aceItemId != null) {
-                    aceItem.setAceItemId(Long.parseLong(aceItemId));
+
+                    aceItem = AceItemLocalServiceUtil.getAceItem(Long.parseLong(aceItemId));  
+                    aceItem.setAceItemId(Long.parseLong(aceItemId));                  
+/*
+                    String companyId = document.get(ACEIndexConstant.IndexField.COMPANY_ID);
+	                if(companyId != null) {
+	                    aceItem.setCompanyId(Long.parseLong(companyId));
+	                }
+	                aceItem.setDescription(document.get(ACEIndexConstant.IndexField.DESCRIPTION));
+	                String endDate = document.get(ACEIndexConstant.IndexField.END_DATE);
+	                if(endDate != null) {
+	                    aceItem.setEndDate(new Date(Long.parseLong(endDate)));
+	                }
+	                String groupId = document.get(ACEIndexConstant.IndexField.GROUP_ID);
+	                if(groupId != null) {
+	                    aceItem.setGroupId(Long.parseLong(groupId));
+	                }
+	                aceItem.setKeyword(document.get(ACEIndexConstant.IndexField.KEYWORD));
+	                aceItem.setName(document.get(ACEIndexConstant.IndexField.NAME));
+	                aceItem.setSpatialValues(document.get(ACEIndexConstant.IndexField.SPATIAL_VALUE));
+	                aceItem.setSpatialLayer(document.get(ACEIndexConstant.IndexField.SPATIAL_LAYER));
+	                aceItem.setElements_(document.get(ACEIndexConstant.IndexField.ELEMENT));
+	                aceItem.setClimateimpacts_(document.get(ACEIndexConstant.IndexField.IMPACT));
+	                aceItem.setSectors_(document.get(ACEIndexConstant.IndexField.SECTOR));
+	                String startDate = document.get(ACEIndexConstant.IndexField.START_DATE);
+	                if(startDate != null) {
+	                    aceItem.setStartDate(new Date(Long.parseLong(startDate)));
+	                }
+	                aceItem.setStoredAt(document.get(ACEIndexConstant.IndexField.STOREDAT));
+	                aceItem.setStoragetype(document.get(ACEIndexConstant.IndexField.STORAGETYPE)) ;
+	                aceItem.setTextSearch(document.get(ACEIndexConstant.IndexField.ANY));
+	                aceItem.setDatatype(document.get(ACEIndexConstant.IndexField.DATATYPE));
+*/	
+	                // System.out.println(document.get(ACEIndexConstant.IndexField.NAME));
+	
+	
+	                // relevance expressed as a percentage
+	                float relevance = hit.score * normalizeScoreFactor * 100;
+	                
+	                // System.out.println("hit.score is: " + hit.score);
+	                System.out.println("relevance (0.0) is: " + relevance);
+	
+	
+	                AceItemSearchResult aceItemSearchResult = new AceItemSearchResult(aceItem);
+	                aceItemSearchResult.setRelevance(relevance);
+	                
+	                aceItemSearchResult.setShortdescription( aceItem.getDescription());
+	
+	                results.add(aceItemSearchResult);
                 }
-                String companyId = document.get(ACEIndexConstant.IndexField.COMPANY_ID);
-                if(companyId != null) {
-                    aceItem.setCompanyId(Long.parseLong(companyId));
-                }
-                aceItem.setDescription(document.get(ACEIndexConstant.IndexField.DESCRIPTION));
-                String endDate = document.get(ACEIndexConstant.IndexField.END_DATE);
-                if(endDate != null) {
-                    aceItem.setEndDate(new Date(Long.parseLong(endDate)));
-                }
-                String groupId = document.get(ACEIndexConstant.IndexField.GROUP_ID);
-                if(groupId != null) {
-                    aceItem.setGroupId(Long.parseLong(groupId));
-                }
-                aceItem.setKeyword(document.get(ACEIndexConstant.IndexField.KEYWORD));
-                aceItem.setName(document.get(ACEIndexConstant.IndexField.NAME));
-                aceItem.setSpatialValues(document.get(ACEIndexConstant.IndexField.SPATIAL_VALUE));
-                aceItem.setSpatialLayer(document.get(ACEIndexConstant.IndexField.SPATIAL_LAYER));
-                aceItem.setElements_(document.get(ACEIndexConstant.IndexField.ELEMENT));
-                aceItem.setClimateimpacts_(document.get(ACEIndexConstant.IndexField.IMPACT));
-                aceItem.setSectors_(document.get(ACEIndexConstant.IndexField.SECTOR));
-                String startDate = document.get(ACEIndexConstant.IndexField.START_DATE);
-                if(startDate != null) {
-                    aceItem.setStartDate(new Date(Long.parseLong(startDate)));
-                }
-                aceItem.setStoredAt(document.get(ACEIndexConstant.IndexField.STOREDAT));
-                aceItem.setStoragetype(document.get(ACEIndexConstant.IndexField.STORAGETYPE)) ;
-                aceItem.setTextSearch(document.get(ACEIndexConstant.IndexField.ANY));
-                aceItem.setDatatype(document.get(ACEIndexConstant.IndexField.DATATYPE));
-
-                // System.out.println(document.get(ACEIndexConstant.IndexField.NAME));
-
-
-                // relevance expressed as a percentage
-                float relevance = hit.score * normalizeScoreFactor * 100;
-                
-                // System.out.println("hit.score is: " + hit.score);
-                System.out.println("relevance (0.0) is: " + relevance);
-
-
-                AceItemSearchResult aceItemSearchResult = new AceItemSearchResult(aceItem);
-                aceItemSearchResult.setRelevance(relevance);
-                
-                aceItemSearchResult.setShortdescription( aceItem.getDescription());
-
-                results.add(aceItemSearchResult);
             }
             return results;
         }

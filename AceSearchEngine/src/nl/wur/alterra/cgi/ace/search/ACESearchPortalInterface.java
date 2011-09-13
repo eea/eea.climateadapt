@@ -34,7 +34,7 @@ public class ACESearchPortalInterface {
      * @return keys to lists of results grouped by aceitemtype
      * @throws ACELuceneException hmm
      */
-    public List<String> handleSearchRequest(PortletRequest request, AceSearchFormBean formBean) throws ACELuceneException {
+    public List<String> handleSearchRequest(PortletRequest request, AceSearchFormBean formBean) throws Exception {
 
 		List<String> keysAdded = new ArrayList<String>();
 		List<String> jsonKeysAdded = new ArrayList<String>();
@@ -49,7 +49,7 @@ public class ACESearchPortalInterface {
 				List<AceItemSearchResult> results = searchEngine.searchLuceneByType(formBean, aceItemType.name());
 				totalResults += results.size();
 
-				// System.out.println("searchAceitem found #" + results.size() + " results of type " + aceItemType.name());
+				System.out.println("searchAceitem found #" + results.size() + " results of type " + aceItemType.name());
 				request.setAttribute(aceItemType.name() + "_" + SearchRequestParams.SEARCH_RESULTS, results);
 
                  for(AceItemSearchResult wresult : results) {
@@ -83,6 +83,9 @@ public class ACESearchPortalInterface {
                      result.setStoredAt(result.getStoredAt().replaceAll("\"", "\"\""));
                      result.setTextSearch(result.getTextSearch().replaceAll("\"", "\"\""));
                      result.setDatatype(result.getDatatype().replaceAll("\"", "\"\""));
+                     
+                     System.out.println("rating " + result.getRating());
+     				
                  }
 
                  keysAdded.add(aceItemType.name() + "_" + SearchRequestParams.SEARCH_RESULTS);
@@ -116,7 +119,7 @@ public class ACESearchPortalInterface {
 		return keysAdded;
     }
     
-    public List<String> handleSearchRequest(PortletRequest request) throws ACELuceneException {
+    public List<String> handleSearchRequest(PortletRequest request) throws Exception {
 
     	AceSearchFormBean formBean = prepareACESearchFormBean(request);
     	request.setAttribute(SearchRequestParams.SEARCH_PARAMS, formBean);    	
@@ -130,7 +133,7 @@ public class ACESearchPortalInterface {
      * @param response response
      * @throws nl.wur.alterra.cgi.ace.search.lucene.ACELuceneException hmm
      */
-    public void handleAjaxSearchRequest(ResourceRequest request, ResourceResponse response) throws ACELuceneException {
+    public void handleAjaxSearchRequest(ResourceRequest request, ResourceResponse response) throws Exception {
         // System.out.println("handleAjaxSearchRequest start");
         //PortletUtils.logParams(request);
         List<String> resultKeys = handleSearchRequest(request);
