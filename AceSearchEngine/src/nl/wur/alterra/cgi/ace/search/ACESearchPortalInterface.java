@@ -44,12 +44,13 @@ public class ACESearchPortalInterface {
 
 
 		// no aceItemTypes requested or "All" choosen: search for all of them
-		if (isEmpty(formBean.getAceitemtype()) || formBean.getDatainfo_type().equals("1")) {
+		if ( isEmpty(formBean.getAceitemtype()) || 
+			 (formBean.getDatainfo_type().equals("1") && formBean.getSortBy()==null) ) {
 			for (AceItemType aceItemType : AceItemType.values()) {
 				List<AceItemSearchResult> results = searchEngine.searchLuceneByType(formBean, aceItemType.name());
 				totalResults += results.size();
 
-				System.out.println("searchAceitem found #" + results.size() + " results of type " + aceItemType.name());
+				//System.out.println("From all searchAceitem found #" + results.size() + " results of type " + aceItemType.name());
 				request.setAttribute(aceItemType.name() + "_" + SearchRequestParams.SEARCH_RESULTS, results);
 
                  for(AceItemSearchResult wresult : results) {
@@ -84,7 +85,7 @@ public class ACESearchPortalInterface {
                      result.setTextSearch(result.getTextSearch().replaceAll("\"", "\"\""));
                      result.setDatatype(result.getDatatype().replaceAll("\"", "\"\""));
                      
-                     System.out.println("rating " + result.getRating());
+                     //System.out.println("rating " + result.getRating());
      				
                  }
 
@@ -103,7 +104,7 @@ public class ACESearchPortalInterface {
                 
 				totalResults += results.size();
 
-				// System.out.println("searchAceitem found #" + results.size() + " results of type " + aceItemType);
+				//System.out.println("Limited set seacrhAceitem found #" + results.size() + " results of type " + aceItemType);
 				request.setAttribute(aceItemType + "_" + SearchRequestParams.SEARCH_RESULTS, results);
 				keysAdded.add(aceItemType + "_" + SearchRequestParams.SEARCH_RESULTS);
 				Gson gson = new Gson();

@@ -379,7 +379,7 @@ public class ACESearchEngine {
 	                float relevance = hit.score * normalizeScoreFactor * 100;
 	                
 	                // System.out.println("hit.score is: " + hit.score);
-	                System.out.println("relevance (0.0) is: " + relevance);
+	                // System.out.println("relevance (0.0) is: " + relevance);
 	
 	
 	                AceItemSearchResult aceItemSearchResult = new AceItemSearchResult(aceItem);
