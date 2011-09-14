@@ -37,4 +37,8 @@ $(document).ready(function(){
 	$("ul li:first-child").addClass("first");
 	
     $("ul li:last-child").addClass("last");
+    
+    if ($("#sec-menu ul").length == 0){
+    	  $("#navigation .selected").css("background","none");
+    }
 });
