@@ -56,6 +56,11 @@ public class ACESearchEngine {
 		
         aceItemTypes = searchParams.get(SearchRequestParams.ACEITEM_TYPE);
         datainfo_type = searchParams.get(SearchRequestParams.DATAINFO_TYPE);
+        if(datainfo_type==null || datainfo_type.length==0) {
+        	
+        	datainfo_type = new String[1];
+        	datainfo_type[0] = "2";
+        }
         anyOfThese = searchParams.get(SearchRequestParams.ANY);
         conditionAdaptationElement = searchParams.get(SearchRequestParams.CONDITION_ADAPTATION_ELEMENT);
         conditionAdaptationSector = searchParams.get(SearchRequestParams.CONDITION_ADAPTATION_SECTOR);
