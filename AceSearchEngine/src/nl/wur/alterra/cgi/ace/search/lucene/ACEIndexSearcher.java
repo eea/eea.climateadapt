@@ -89,14 +89,14 @@ public class ACEIndexSearcher {
                 this.setStale(false);
             }
 
-            System.out.println("ACEIndexSearcher sortBy" + sortBy);
+            //System.out.println("ACEIndexSearcher sortBy" + sortBy);
             Sort sort = null;
             if(sortBy == null) {
-                 sort = new Sort(new SortField( ACEIndexConstant.IndexField.RATING_SORT, SortField.LONG));
+                 sort = new Sort(new SortField( ACEIndexConstant.IndexField.RATING_SORT, SortField.STRING));
                             }
             else {
                 if(sortBy.equals("RATING")) {
-                    sort = new Sort(new SortField( ACEIndexConstant.IndexField.RATING_SORT, SortField.LONG));
+                    sort = new Sort(new SortField( ACEIndexConstant.IndexField.RATING_SORT, SortField.STRING));
                 }
                 else if(sortBy.equals("NAME")) {
                     sort = new Sort(new SortField( ACEIndexConstant.IndexField.NAME_SORT, SortField.STRING));
@@ -110,7 +110,7 @@ public class ACEIndexSearcher {
                 }
                 // undefined sort: default to rating
                 else {
-                    sort = new Sort(new SortField( ACEIndexConstant.IndexField.RATING_SORT, SortField.LONG));
+                    sort = new Sort(new SortField( ACEIndexConstant.IndexField.RATING_SORT, SortField.STRING));
                 }
             }
            // return searcher.search(query, null, itemsPerPage, sort);
