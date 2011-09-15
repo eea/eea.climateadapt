@@ -66,7 +66,7 @@ public class AceItemIndexer {
         else {
         	rating = Long.parseLong(rating$) ;
         }
-        rating = 9999999l - rating; // to get right order with String comparison - descending rating order
+        rating = 555555555l - rating; // to get right order with String comparison - descending rating order
         rating$ = "" + rating; 
         String spatialValues = aceItem.getSpatialValues();
         String spatialLayers = aceItem.getSpatialLayer();
