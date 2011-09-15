@@ -50,7 +50,7 @@
 						
 						<span id="${plusId}" class="plus toggleshow"><img src="/ace-theme/images/arrows/01_plus.png" /></span>
 						<span id="${minusId}" class="minus togglehide"><img src="/ace-theme/images/arrows/01_minus.png" /></span>
-						
+						<span class="feed-entry-title">
 						<c:choose>
 							<c:when test="${!empty searchResult.storedAt && fn:startsWith(searchResult.storagetype, 'URL')==true}">
 								&nbsp;<a href="<c:out value="/viewaceitem?aceitem_id=${searchResult.aceItemId}"/>" ><c:out value="${searchResult.name}"/></a>
@@ -67,8 +67,8 @@
 								&nbsp;<a href="<c:out value="/viewaceitem?aceitem_id=${searchResult.aceItemId}"/>" ><c:out value="${searchResult.name}"/></a>
 							</c:otherwise>
 						</c:choose>					
-
-						<span id="${descriptionId}" class="description togglehide"><c:out value="${descriptionText}" /></span>
+						</span>
+						<span id="${descriptionId}" class="feed-entry-content togglehide"><c:out value="${descriptionText}" /></span>
 		
 					</div><%-- 
 

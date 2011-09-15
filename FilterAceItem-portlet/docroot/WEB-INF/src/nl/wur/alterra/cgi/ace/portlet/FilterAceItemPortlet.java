@@ -35,7 +35,7 @@ public class FilterAceItemPortlet extends MVCPortlet {
             ACESearchPortalInterface searchEngine = new ACESearchPortalInterface();
 			searchEngine.handleSearchRequest(renderRequest);
 		}
-        catch (ACELuceneException x) {
+        catch (Exception x) {
 			x.printStackTrace();
             throw new PortletException(x);
 		}
@@ -99,7 +99,7 @@ public class FilterAceItemPortlet extends MVCPortlet {
             ACESearchPortalInterface searchEngine = new ACESearchPortalInterface();
             searchEngine.handleAjaxSearchRequest(request, response);
         }
-        catch (ACELuceneException x) {
+        catch (Exception x) {
             x.printStackTrace();
             throw new PortletException(x);
         }
