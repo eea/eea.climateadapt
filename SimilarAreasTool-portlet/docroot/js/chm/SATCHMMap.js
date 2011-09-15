@@ -111,7 +111,7 @@ CHM.SATCHMMap = OpenLayers.Class(CHM.CHMMap, {
             "<table width='100%' border='0'>" +
             "<tr><th>" + feature.attributes.itemname + "</th></tr>" + 
             "<tr><td>" + description + "</td></tr>" + 
-            "<tr><td><a href='/viewmeasure?ace_measure_id=" + feature.attributes.measureid + "'>read more</a></td></tr>" + 
+            "<tr><td><a href='/viewmeasure?ace_measure_id=" + feature.attributes.measureid + "' target='_blank'>read more</a></td></tr>" + 
             "</table>",
             null, true, null);
             
