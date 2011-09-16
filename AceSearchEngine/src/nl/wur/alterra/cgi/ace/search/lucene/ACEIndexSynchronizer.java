@@ -14,8 +14,26 @@ import java.util.List;
  */
 public class ACEIndexSynchronizer {
 
-    public void synchronize() {
+    /**
+     * Re-indexes a single entry in the Lucene index based on AceItem.
+     * @param aceItem to be indexed
+     */
+    public synchronized void synchronize(AceItem aceItem) {
+        AceItemIndexer indexer = new AceItemIndexer();
+        try {
+            indexer.delete(aceItem);
+            indexer.add(aceItem);
+        }
+        catch (ACELuceneException x) {
+            System.out.println(x.getMessage());
+            x.printStackTrace();
+        }
+    }
 
+    /**
+     * Re-indexes the complete Lucene index based on current content of AceItem table in DBMS.
+     */
+    public synchronized void synchronize() {
         try {
 
             ACEIndexWriter aceIndexWriter = ACEIndexWriter.getACEIndexWriter();
