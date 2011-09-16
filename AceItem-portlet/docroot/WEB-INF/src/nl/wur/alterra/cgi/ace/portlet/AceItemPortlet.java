@@ -161,8 +161,6 @@ public class AceItemPortlet extends MVCPortlet {
 			  aceitem.setImportance(aceitem.getImportance()+1);
 			  aceitem.setRating( aceitem.getRating() + 100);
 		}
-
-		aceitem.setSource(ParamUtil.getString(request, "source"));
 		
 		return aceitem;
 	}
