@@ -805,6 +805,71 @@ body #banner .logo a {
 	margin-top: 20px;
 }
 
+/**** Template for the AST pages ****/
+
+.ast #column-1 {
+	background-color: #d2df92;
+}
+
+.ast #column-1 .portlet-column-content {
+	padding-top: 0px;
+}
+
+#ast-menu {
+	width: 280px
+}
+
+.ast .astheaderportlet-portlet {
+	left: -10px;
+	margin-bottom: 15px;
+	position: relative;
+}
+
+.ast #bottom-column,
+.ast #layout-column_column-2 {
+	margin-left: 27px;
+}
+
+.ast-main-article #read-more-link {
+	background-color: #AFC7DF;
+	line-height: 30px;
+	position: relative;
+	left: 545px;
+	text-align: center;
+	width: 80px;
+}
+
+.ast-main-article #read-more-link a:hover {
+	color: #FFF;
+}
+
+.ast-main-article .read-more-body {
+	margin-top: 10px;
+}
+
+.ast #column-3 .portlet-column-content {
+	padding: 0 15px 0 0;
+}
+
+.ast #column-4 .portlet-column-content {
+	padding: 0 15px;
+}
+
+.ast #layout-column_column-4 {
+	border-left: #d7e3ef 2px solid;
+	min-height: 100px;
+}
+
+.ast #bottom-column ul {
+	line-height: 24px;
+	list-style-image: url('/ace-theme/images/arrows/01_plus.png');
+	margin-top: 0;
+}
+
+.ast #bottom-column a {
+	color: #758816;
+	text-decoration: none;
+}
 
 /**** Specific styles for adaptation information image and text on frontpage ****/
 
@@ -851,12 +916,8 @@ body #banner .logo a {
 	font-size: 11px;
 }
 
-.portlet-rss .feed-entry img {
-	
-}
-
 .portlet-rss .feed-entry-content img {
-	width: 100%
+	max-width: 100%
 }
 
 .portlet-rss .feed-entry-title {
