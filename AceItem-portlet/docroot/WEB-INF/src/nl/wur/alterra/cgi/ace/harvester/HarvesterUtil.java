@@ -6,6 +6,7 @@ import nl.wur.alterra.cgi.ace.geonetwork.GeoNetworkConnector;
 import nl.wur.alterra.cgi.ace.model.AceItem;
 import nl.wur.alterra.cgi.ace.model.WxsHarvester;
 import nl.wur.alterra.cgi.ace.model.constants.AceItemType;
+import nl.wur.alterra.cgi.ace.search.lucene.ACEIndexSynchronizer;
 import nl.wur.alterra.cgi.ace.service.AceItemLocalServiceUtil;
 import nl.wur.alterra.cgi.ace.service.WxsHarvesterLocalServiceUtil;
 
@@ -231,7 +232,7 @@ public class HarvesterUtil {
         String harvesterResultsAfter = geoNetworkConnector.getHarvesterResults(wxsHarvester);
 
         //
-        // convert to AceItems and save
+        // convert to AceItems, save in DBMS and update Lucene index
         //
         storeAsAceItems(harvesterResultsBefore, harvesterResultsAfter);
 
@@ -465,6 +466,8 @@ public class HarvesterUtil {
         Map<String, String> abstractMap = (Map<String, String>)contentMapAfter.get(2);
         Map<String, List<String>> keywordMap = (Map<String, List<String>>)contentMapAfter.get(3);
 
+        ACEIndexSynchronizer aceIndexSynchronizer = new ACEIndexSynchronizer();
+
         // ids in before, and not in after: delete them
         for(String id : idsBeforeList) {
             if(!idsAfterList.contains(id)) {
@@ -478,6 +481,10 @@ public class HarvesterUtil {
                 else {
                     System.out.println("WARNING: failed to delete AceItem with geonetwork id: " + id + ", it seems it does not exist");
                 }
+                //
+                // re-index Lucene
+                //
+                aceIndexSynchronizer.delete(toDelete);
             }
         }
 
@@ -502,8 +509,13 @@ public class HarvesterUtil {
                     AceItemLocalServiceUtil.addAceItem(aceItem);
                     System.out.println("finished creating AceItem with geonetwork id: " + id);
                 }
+                //
+                // re-index Lucene
+                //
+                aceIndexSynchronizer.update(toUpdate);
             }
         }
+
 
         // ids in after and not in before: create them
         for(String id : idsAfterList) {
@@ -516,6 +528,11 @@ public class HarvesterUtil {
 
                 AceItemLocalServiceUtil.addAceItem(aceItem);
                 System.out.println("finished creating AceItem with geonetwork id: " + id);
+
+                //
+                // re-index Lucene
+                //
+                aceIndexSynchronizer.add(aceItem);
             }
         }
 
@@ -534,7 +551,8 @@ public class HarvesterUtil {
      */
     private static synchronized AceItem fillAceItem(AceItem aceItem, String id, Map<String, String> titleMap, Map<String, String> abstractMap, Map<String, List<String>> keywordMap) {
         aceItem.setStoredAt(id);
-        aceItem.setStoragetype(AceItemType.MAPGRAPHDATASET.name());
+        aceItem.setDatatype(AceItemType.MAPGRAPHDATASET.name());
+        aceItem.setStoragetype("GEONETWORK");
         String title = titleMap.get(id);
         if(title.length() > aceItemNameLength) {
             System.out.println("WARNING: Metadata title too long for AceItem, cut off. Original metadata title:\n" + title + "\n");
@@ -543,7 +561,6 @@ public class HarvesterUtil {
         aceItem.setName(title);
         String abstrakt = abstractMap.get(id);
         aceItem.setDescription(abstrakt);
-        aceItem.setTextSearch(abstrakt);
         List<String> keywords = keywordMap.get(id);
         String keyword$ = "";
         if(keywords != null && keywords.size() > 0) {
@@ -557,13 +574,16 @@ public class HarvesterUtil {
         }
         aceItem.setKeyword(keyword$);
 
+        aceItem.setTextSearch(keyword$ + " " + title + " " + abstrakt);
+
         System.out.println("\naceItem filled with:\n" +
                 "storedAt: " + aceItem.getStoredAt() +
+                "datatype: " + aceItem.getDatatype() +
                 "storageType: " + aceItem.getStoragetype() +
                 "name: " + aceItem.getName() +
+                "keyword: " + aceItem.getKeyword() +
                 "description: " + aceItem.getDescription() +
-                "textsearch: " + aceItem.getTextSearch() +
-                "keyword: " + aceItem.getKeyword() + "\n\n"
+                "textsearch: " + aceItem.getTextSearch() + "\n\n"
         );
 
         return aceItem;
