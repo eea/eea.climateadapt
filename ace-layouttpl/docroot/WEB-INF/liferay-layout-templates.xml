@@ -23,5 +23,10 @@
 			<wap-template-path>/ace_layout_4.wap.tpl</wap-template-path>
 			<thumbnail-path>/ace_layout_4.png</thumbnail-path>
 		</layout-template>
+		<layout-template id="ast" name="AST">
+			<template-path>/ast.tpl</template-path>
+			<wap-template-path>/ast.wap.tpl</wap-template-path>
+			<thumbnail-path>/ast.png</thumbnail-path>
+		</layout-template>
 	</custom>
 </layout-templates>
