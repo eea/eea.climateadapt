@@ -9,7 +9,7 @@
 					autoHeight: false,
 					navigation: true,
 					navigationFilter: function(){
-						
+						$(this).addClass("active;");
 						return document.location.href.endsWith($(this).attr('href'));
 					}
 				});
@@ -45,38 +45,38 @@
         
         <div class="aui-w33 portlet-column portlet-column-first" id="column-1">
             $processor.processColumn("column-1", "portlet-column-content portlet-column-content-first")
-            <ul id="ast-menu">
+            <ol id="ast-menu">
 	            <li><a href="/adaptation-support-tool/step-1" name="step-1" onclick="document.location.href='/adaptation-support-tool/step-1'">Getting started</a>
-		            <ul id="step-1">
-		            	<li><a href="/adaptation-support-tool/step-1-1" name="step-1-1" onclick="document.location.href='/adaptation-support-tool/step-1-1'">How to use the adaptation support tool?</a></li>
-		            	<li><a href="/adaptation-support-tool/step-1-2" name="step-1-2" onclick="document.location.href='/adaptation-support-tool/step-1-2'">Why adapt to climate change?</a></li>
-		            	<li><a href="/adaptation-support-tool/step-1-3" name="step-1-3" onclick="document.location.href='/adaptation-support-tool/step-1-3'">How to plan for adaptation?</a></li>
+		            <ul id="step-1" style="list-style-type: none">
+		            	<li><a href="/adaptation-support-tool/step-1-1" name="step-1-1" onclick="document.location.href='/adaptation-support-tool/step-1-1'">1.1. How to use the adaptation support tool?</a></li>
+		            	<li><a href="/adaptation-support-tool/step-1-2" name="step-1-2" onclick="document.location.href='/adaptation-support-tool/step-1-2'">1.2. Why adapt to climate change?</a></li>
+		            	<li><a href="/adaptation-support-tool/step-1-3" name="step-1-3" onclick="document.location.href='/adaptation-support-tool/step-1-3'">1.3. How to plan for adaptation?</a></li>
 		            </ul>
 		        </li>
 	            <li><a href="/adaptation-support-tool/step-2" name="step-2" onclick="document.location.href='/adaptation-support-tool/step-2'">Assessing risks and vulnerability to climate change</a>
-		            <ul id="step-2">
-		            	<li><a href="/adaptation-support-tool/step-2-1" name="step-2-1" onclick="document.location.href='/adaptation-support-tool/step-2-1'">How is the European climate changing?</a></li>
-		            	<li><a href="/adaptation-support-tool/step-2-2" name="step-2-2" onclick="document.location.href='/adaptation-support-tool/step-2-2'">Risks and vulnerabilities in European sectors and regions</a></li>
-		            	<li><a href="/adaptation-support-tool/step-2-3" name="step-2-3" onclick="document.location.href='/adaptation-support-tool/step-2-3'">Are there also opportunities?</a></li>
-		            	<li><a href="/adaptation-support-tool/step-2-4" name="step-2-4" onclick="document.location.href='/adaptation-support-tool/step-2-4'">How to assess adaptive capacity?</a></li>
-		            	<li><a href="/adaptation-support-tool/step-2-5" name="step-2-5" onclick="document.location.href='/adaptation-support-tool/step-2-5'">How to deal with uncertainties?</a></li>
+		            <ul id="step-2" style="list-style-type: none">
+		            	<li><a href="/adaptation-support-tool/step-2-1" name="step-2-1" onclick="document.location.href='/adaptation-support-tool/step-2-1'">2.1. How is the European climate changing?</a></li>
+		            	<li><a href="/adaptation-support-tool/step-2-2" name="step-2-2" onclick="document.location.href='/adaptation-support-tool/step-2-2'">2.2. Risks and vulnerabilities in European sectors and regions</a></li>
+		            	<li><a href="/adaptation-support-tool/step-2-3" name="step-2-3" onclick="document.location.href='/adaptation-support-tool/step-2-3'">2.3. Are there also opportunities?</a></li>
+		            	<li><a href="/adaptation-support-tool/step-2-4" name="step-2-4" onclick="document.location.href='/adaptation-support-tool/step-2-4'">2.4. How to assess adaptive capacity?</a></li>
+		            	<li><a href="/adaptation-support-tool/step-2-5" name="step-2-5" onclick="document.location.href='/adaptation-support-tool/step-2-5'">2.5. How to deal with uncertainties?</a></li>
 		            </ul>
 		        </li>
 		        <li><a href="/adaptation-support-tool/step-3" name="step-3" onclick="document.location.href='/adaptation-support-tool/step-3'">Identifying adaptation options</a>
-		            <ul id="step-3">
-		            	<li><a href="/adaptation-support-tool/step-3-1" name="step-3-1" onclick="document.location.href='/adaptation-support-tool/step-3-1'">What adaptation options are available?</a></li>
-		            	<li><a href="/adaptation-support-tool/step-3-2" name="step-3-2" onclick="document.location.href='/adaptation-support-tool/step-3-2'">What case studies are available?</a></li>
+		            <ul id="step-3" style="list-style-type: none">
+		            	<li><a href="/adaptation-support-tool/step-3-1" name="step-3-1" onclick="document.location.href='/adaptation-support-tool/step-3-1'">3.1. What adaptation options are available?</a></li>
+		            	<li><a href="/adaptation-support-tool/step-3-2" name="step-3-2" onclick="document.location.href='/adaptation-support-tool/step-3-2'">3.2. What case studies are available?</a></li>
 		            </ul>
 		        </li>
 		        <li><a href="/adaptation-support-tool/step-4" name="step-4" onclick="document.location.href='/adaptation-support-tool/step-4'">Assessing adaptation options</a>
-		            <ul id="step-4">
-		            	<li><a href="/adaptation-support-tool/step-4-1" name="step-4-1" onclick="document.location.href='/adaptation-support-tool/step-4-1'">How to decide which options to include in an adaptation strategy?</a></li>
-		            	<li><a href="/adaptation-support-tool/step-4-2" name="step-4-2" onclick="document.location.href='/adaptation-support-tool/step-4-2'">What are costs and benefits of adaptation?</a></li>
+		            <ul id="step-4" style="list-style-type: none">
+		            	<li><a href="/adaptation-support-tool/step-4-1" name="step-4-1" onclick="document.location.href='/adaptation-support-tool/step-4-1'">4.1. How to decide which options to include in an adaptation strategy?</a></li>
+		            	<li><a href="/adaptation-support-tool/step-4-2" name="step-4-2" onclick="document.location.href='/adaptation-support-tool/step-4-2'">4.2. What are costs and benefits of adaptation?</a></li>
 		            </ul>
 		        </li>
 		        <li><a href="/adaptation-support-tool/step-5" name="step-5" onclick="document.location.href='/adaptation-support-tool/step-5'">Implementation</a></li>
 		        <li><a href="/adaptation-support-tool/step-6" name="step-6" onclick="document.location.href='/adaptation-support-tool/step-6'">Monitoring & Evaluation</a></li>
-            </ul>
+            </ol>
         </div>
         
         <div class="aui-w66 portlet-column portlet-column-last" id="column-right">
