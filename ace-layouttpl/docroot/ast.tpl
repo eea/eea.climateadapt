@@ -1,11 +1,16 @@
 <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js"></script>
 	<script type="text/javascript">
+			String.prototype.endsWith = function(suffix) {
+    			return this.match(suffix+"$") == suffix;
+			};
+		
           	$(document).ready(function() {
 				$("#ast-menu").accordion({ 
 					autoHeight: false,
 					navigation: true,
 					navigationFilter: function(){
-					//Write custom navigationFilter to open the right accordion based on current URL
+						
+						return document.location.href.endsWith($(this).attr('href'));
 					}
 				});
 			});
