@@ -9,8 +9,11 @@
 					autoHeight: false,
 					navigation: true,
 					navigationFilter: function(){
-						$(this).addClass("active");
-						return document.location.href.endsWith($(this).attr('href'));
+						if( document.location.href.endsWith($(this).attr('href')) ) {
+							$(this).addClass("active");
+							return true;
+						}
+						else {return false;}
 					}
 				});
 			});
