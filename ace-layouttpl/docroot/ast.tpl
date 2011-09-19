@@ -9,7 +9,7 @@
 					autoHeight: false,
 					navigation: true,
 					navigationFilter: function(){
-						$(this).addClass("active;");
+						$(this).addClass("active");
 						return document.location.href.endsWith($(this).attr('href'));
 					}
 				});
