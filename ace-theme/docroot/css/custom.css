@@ -816,7 +816,61 @@ body #banner .logo a {
 }
 
 #ast-menu {
-	width: 280px
+	list-style-type: none;
+	margin: 0;
+	width: 330px
+}
+
+#ast-menu li {
+	list-style-type: none;
+	margin-bottom: 2px;
+}
+
+#ast-menu .ui-accordion-li-fix {
+	background: url("/ace-theme/images/arrow_ast.png") no-repeat 10px 50% #9AA854;
+}
+
+#ast-menu a.ui-state-active {
+	background: url('/ace-theme/images/arrow_ast_wit.png') no-repeat 10px 50%;
+	color: #FFF
+}
+
+#ast-menu li.no-substep a.ui-state-active {
+	background: url("/ace-theme/images/arrow_ast.png") no-repeat 10px 50%;
+	color: #FFF
+}
+
+#ast-menu .ui-accordion-content-active {
+	background-color: #E9EFC9;
+	margin: 0;
+	padding: 10px 5px 5px 20px;
+	width: 305px;
+}
+
+#ast-menu .ui-accordion-content-active a {
+	background: url('/ace-theme/images/arrows/arrow_darkgreen.png') no-repeat 5px 50%;
+}
+
+#ast-menu .ui-accordion-content-active p {
+	margin:-22px 0 0;
+	padding-left:50px; 
+}
+
+#ast-menu .ui-accordion-content-active a.active,
+#ast-menu .ui-accordion-content-active a:hover {
+	background: url('/ace-theme/images/arrows/01_plus.png') no-repeat 5px 50%;
+	color: #a5bf26;
+}
+
+#ast-menu a {
+	color: #2C330A;
+	line-height: 22px;
+	padding-left: 25px;
+	text-decoration: none;
+}
+
+#ast-menu a:hover {
+	color: #FFF;
 }
 
 .ast .astheaderportlet-portlet {
