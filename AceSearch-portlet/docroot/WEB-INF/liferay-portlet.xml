@@ -19,6 +19,15 @@
 		<css-class-wrapper>acesearchportlet-portlet</css-class-wrapper>
 	</portlet>
 
+	<portlet>
+		<portlet-name>simplesearchportlet</portlet-name>
+		<icon>/icon.png</icon>
+		<instanceable>true</instanceable>
+		<header-portlet-css>/css/portlet.css</header-portlet-css>
+		<css-class-wrapper>
+			simplesearchportlet-portlet
+		</css-class-wrapper>
+	</portlet>
 	<role-mapper>
 		<role-name>administrator</role-name>
 		<role-link>Administrator</role-link>

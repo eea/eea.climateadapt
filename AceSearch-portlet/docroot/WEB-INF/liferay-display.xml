@@ -4,5 +4,6 @@
 <display>
 	<category name="Ace">
 		<portlet id="acesearchportlet"></portlet>
+		<portlet id="simplesearchportlet"></portlet>
 	</category>
 </display>
