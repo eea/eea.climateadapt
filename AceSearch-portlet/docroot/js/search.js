@@ -393,7 +393,8 @@ function displayJSONResults(unique, aceitemResults) {
             // add relevance
             //resultlist += '<div class="relevance">relevance: ' + aceitem.relevance + '%</div>';
 
-            resultlist += '<div class="relevance-title"> rating: ' + aceitem.aceItem._rating + '. relevance: </div>';
+            //resultlist += '<div class="relevance-title"> rating: ' + aceitem.aceItem._rating + '. relevance: </div>';
+            resultlist += '<div class="relevance-title">relevance: </div>';
             if(aceitem.relevance > 80) {
                 resultlist += '<div class="relevance-marker"></div>';
                 resultlist += '<div class="relevance-marker"></div>';

@@ -416,18 +416,12 @@ pageContext.setAttribute("countriesList", countriesList);
 		<c:set var="groupTitle" scope="page"><liferay-ui:message key="acesearch-datainfotype-lbl-DOCUMENT" /></c:set>
 		<%@ include file="searchresultsbytype.jspf" %>
 
-        <c:set var="groupedResults" scope="page" value="${TABLE_searchResults}"/>
-        <c:set var="groupedJSONResults" scope="page" value="${TABLE_JSONsearchResults}"/>
-        <c:set var="aceitemtype" scope="page" value="TABLE"/>
-        <c:set var="groupTitle" scope="page"><liferay-ui:message key="acesearch-datainfotype-lbl-TABLE" /></c:set>
-        <%@ include file="searchresultsbytype.jspf" %>
-		   
-		<c:set var="groupedResults" scope="page" value="${ARTICLE_searchResults}"/>
-		<c:set var="groupedJSONResults" scope="page" value="${ARTICLE_JSONsearchResults}"/>		
-		<c:set var="aceitemtype" scope="page" value="ARTICLE"/>		
-		<c:set var="groupTitle" scope="page"><liferay-ui:message key="acesearch-datainfotype-lbl-ARTICLE" /></c:set>
+		<c:set var="groupedResults" scope="page" value="${INFORMATIONSOURCE_searchResults}"/>
+		<c:set var="groupedJSONResults" scope="page" value="${INFORMATIONSOURCE_JSONsearchResults}"/>
+		<c:set var="aceitemtype" scope="page" value="INFORMATIONSOURCE"/>				
+		<c:set var="groupTitle" scope="page"><liferay-ui:message key="acesearch-datainfotype-lbl-INFORMATIONSOURCE" /></c:set>
 		<%@ include file="searchresultsbytype.jspf" %>
-
+		
         <c:set var="groupedResults" scope="page" value="${GUIDANCE_searchResults}"/>
         <c:set var="groupedJSONResults" scope="page" value="${GUIDANCE_JSONsearchResults}"/>
         <c:set var="aceitemtype" scope="page" value="GUIDANCE"/>
@@ -445,23 +439,11 @@ pageContext.setAttribute("countriesList", countriesList);
 		<c:set var="aceitemtype" scope="page" value="MAPGRAPHDATASET"/>		
 		<c:set var="groupTitle" scope="page"><liferay-ui:message key="acesearch-datainfotype-lbl-MAPGRAPHDATASET" /></c:set>
 		<%@ include file="searchresultsbytype.jspf" %>	
-		
-		<c:set var="groupedResults" scope="page" value="${MULTIMEDIA_searchResults}"/>
-		<c:set var="groupedJSONResults" scope="page" value="${MULTIMEDIA_JSONsearchResults}"/>
-		<c:set var="aceitemtype" scope="page" value="MULTIMEDIA"/>				
-		<c:set var="groupTitle" scope="page"><liferay-ui:message key="acesearch-datainfotype-lbl-MULTIMEDIA" /></c:set>
-		<%@ include file="searchresultsbytype.jspf" %>
 
         <c:set var="groupedResults" scope="page" value="${INDICATOR_searchResults}"/>
 		<c:set var="groupedJSONResults" scope="page" value="${INDICATOR_JSONsearchResults}"/>
 		<c:set var="aceitemtype" scope="page" value="INDICATOR"/>
 		<c:set var="groupTitle" scope="page"><liferay-ui:message key="acesearch-datainfotype-lbl-INDICATOR" /></c:set>
-		<%@ include file="searchresultsbytype.jspf" %>
-
-		<c:set var="groupedResults" scope="page" value="${INFORMATIONSOURCE_searchResults}"/>
-		<c:set var="groupedJSONResults" scope="page" value="${INFORMATIONSOURCE_JSONsearchResults}"/>
-		<c:set var="aceitemtype" scope="page" value="INFORMATIONSOURCE"/>				
-		<c:set var="groupTitle" scope="page"><liferay-ui:message key="acesearch-datainfotype-lbl-INFORMATIONSOURCE" /></c:set>
 		<%@ include file="searchresultsbytype.jspf" %>
 
         <c:set var="groupedResults" scope="page" value="${RESEARCHPROJECT_searchResults}"/>
