@@ -152,7 +152,7 @@
 
                         <div class="relevance">
                             <div class="relevance-title">
-                                <!-- rating: <c:out value="${searchResult.rating}"/ >. --><liferay-ui:message key="acesearch-relevance" />
+                                <% // rating: <c:out value="${searchResult.rating}"/ >. %><liferay-ui:message key="acesearch-relevance" />
                             </div>
                             <c:set var="relevance" value="${wrappedSearchResult.relevance}" />
                             <c:choose>
