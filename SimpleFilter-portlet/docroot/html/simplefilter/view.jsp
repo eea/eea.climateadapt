@@ -63,7 +63,13 @@ String includeFile = "searchresultsonetype.jspf";
 		<c:set var="groupTitle" scope="page"><liferay-ui:message key="acesearch-datainfotype-lbl-DOCUMENT" /></c:set>
 	
         <%@ include file="searchresultsonetype.jspf" %>
-        
+
+		<c:set var="groupedResults" scope="page" value="${INFORMATIONSOURCE_searchResults}"/>
+		<c:set var="groupedJSONResults" scope="page" value="${INFORMATIONSOURCE_JSONsearchResults}"/>
+		<c:set var="aceitemtype" scope="page" value="INFORMATIONSOURCE"/>				
+		<c:set var="groupTitle" scope="page"><liferay-ui:message key="acesearch-datainfotype-lbl-INFORMATIONSOURCE" /></c:set>
+
+        <%@ include file="searchresultsonetype.jspf" %>
 
         <c:set var="groupedResults" scope="page" value="${GUIDANCE_searchResults}"/>
         <c:set var="groupedJSONResults" scope="page" value="${GUIDANCE_JSONsearchResults}"/>
@@ -71,7 +77,6 @@ String includeFile = "searchresultsonetype.jspf";
         <c:set var="groupTitle" scope="page"><liferay-ui:message key="acesearch-datainfotype-lbl-GUIDANCE" /></c:set>
 
         <%@ include file="searchresultsonetype.jspf" %>
-      
 
         <c:set var="groupedResults" scope="page" value="${TOOL_searchResults}"/>
         <c:set var="groupedJSONResults" scope="page" value="${TOOL_JSONsearchResults}"/>
@@ -86,25 +91,11 @@ String includeFile = "searchresultsonetype.jspf";
 		<c:set var="groupTitle" scope="page"><liferay-ui:message key="acesearch-datainfotype-lbl-MAPGRAPHDATASET" /></c:set>
 
         <%@ include file="searchresultsonetype.jspf" %>
-		
-		<c:set var="groupedResults" scope="page" value="${MULTIMEDIA_searchResults}"/>
-		<c:set var="groupedJSONResults" scope="page" value="${MULTIMEDIA_JSONsearchResults}"/>
-		<c:set var="aceitemtype" scope="page" value="MULTIMEDIA"/>				
-		<c:set var="groupTitle" scope="page"><liferay-ui:message key="acesearch-datainfotype-lbl-MULTIMEDIA" /></c:set>
-
-        <%@ include file="searchresultsonetype.jspf" %>
 
         <c:set var="groupedResults" scope="page" value="${INDICATOR_searchResults}"/>
 		<c:set var="groupedJSONResults" scope="page" value="${INDICATOR_JSONsearchResults}"/>
 		<c:set var="aceitemtype" scope="page" value="INDICATOR"/>
 		<c:set var="groupTitle" scope="page"><liferay-ui:message key="acesearch-datainfotype-lbl-INDICATOR" /></c:set>
-
-        <%@ include file="searchresultsonetype.jspf" %>
-
-		<c:set var="groupedResults" scope="page" value="${INFORMATIONSOURCE_searchResults}"/>
-		<c:set var="groupedJSONResults" scope="page" value="${INFORMATIONSOURCE_JSONsearchResults}"/>
-		<c:set var="aceitemtype" scope="page" value="INFORMATIONSOURCE"/>				
-		<c:set var="groupTitle" scope="page"><liferay-ui:message key="acesearch-datainfotype-lbl-INFORMATIONSOURCE" /></c:set>
 
         <%@ include file="searchresultsonetype.jspf" %>
 
@@ -119,6 +110,13 @@ String includeFile = "searchresultsonetype.jspf";
 		<c:set var="groupedJSONResults" scope="page" value="${MEASURE_JSONsearchResults}"/>
 		<c:set var="aceitemtype" scope="page" value="MEASURE"/>
 		<c:set var="groupTitle" scope="page"><liferay-ui:message key="acesearch-datainfotype-lbl-MEASURE" /></c:set>
+
+        <%@ include file="searchresultsonetype.jspf" %>
+
+        <c:set var="groupedResults" scope="page" value="${ACTION_searchResults}"/>
+		<c:set var="groupedJSONResults" scope="page" value="${ACTION_JSONsearchResults}"/>
+		<c:set var="aceitemtype" scope="page" value="ACTION"/>
+		<c:set var="groupTitle" scope="page"><liferay-ui:message key="acesearch-datainfotype-lbl-ACTION" /></c:set>
 
         <%@ include file="searchresultsonetype.jspf" %>
 
