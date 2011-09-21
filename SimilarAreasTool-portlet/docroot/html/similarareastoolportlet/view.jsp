@@ -16,7 +16,7 @@
 
 <%@include file="/html/init.jsp" %>
 
-<form>
+<form id="risk-select">
 	<label for="riskSelect"><liferay-ui:message key="select-climate-impact" /></label>
 	<select id="riskSelect" onchange="riskChange()">
 		<option id="chk_risks_all" value="ALL" />
@@ -26,7 +26,8 @@
 			<label for="chk_climateimpacts_${adaptationClimateImpact}"><liferay-ui:message key="aceitem-climateimpacts-lbl-${adaptationClimateImpact}" /></label>
 		</c:forEach>
 	</select>
-	<br />
+</form>
+<form id="sector-select">
 	<label for="riskSelect"><liferay-ui:message key="select-adaptation-sector" /></label>
 	<select id="sectorSelect" onchange="sectorChange()">
 		<option id="chk_sectors_all" value="ALL" />
@@ -47,7 +48,7 @@
 
 <div id='map_element'></div>
 
-<div id='legend_element'></div>
+<div id='legend_element'><h3 id="legend-title">Legend</h3></div>
 
 <script>
 	var proxyUrl = '<%= prefs.getValue(Constants.proxyUrlPreferenceName, "") %>';
@@ -71,8 +72,8 @@
 
         mappanel = new GeoExt.MapPanel({
             renderTo: 'map_element',
-            height: 500,
-            width: 500,
+            height: 350,
+            width: 675,
             map: satchmmap
         });
         
