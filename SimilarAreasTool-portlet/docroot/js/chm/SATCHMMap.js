@@ -151,6 +151,8 @@ CHM.SATCHMMap = OpenLayers.Class(CHM.CHMMap, {
 		
         if (this.location != null) {
         	this.setFeature(new OpenLayers.Feature.Vector(this.location));
+        	
+            this.setCenter(new OpenLayers.LonLat(this.location.x, this.location.y));
         } else {
         	this.setFeature(null);
         }

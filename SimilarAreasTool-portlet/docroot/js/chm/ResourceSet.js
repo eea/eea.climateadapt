@@ -1,6 +1,6 @@
 CHM.ResourceSet = OpenLayers.Class(OpenLayers.Format.JSON, {
 	
-	resources : [], 
+	resources : null, 
 	
     read : function(json) {
         var obj = null;
@@ -14,6 +14,8 @@ CHM.ResourceSet = OpenLayers.Class(OpenLayers.Format.JSON, {
         if(! obj) {
         	console.log("Bad JSON: " + json);
         } else {
+        	this.resources = new Array();
+        	
         	for (var i = 0; i < obj.resourceSets.length; i ++) {
         		try {
         			var resourceset = obj.resourceSets[i];
