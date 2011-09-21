@@ -247,6 +247,7 @@ body #banner .logo a {
 .portlet-title {
 	color: #67788a;
 	float: none;
+	font-size: 20px;
 	font-weight: normal;
 	line-height: 20px;
 	min-width: 50%;
@@ -568,9 +569,13 @@ body #banner .logo a {
 	padding: 0 15px;
 }
 
+.ace_layout_1 #layout-column_column-5 {
+	padding: 0 0 0 15px;
+}
+
 .ace_layout_1 #layout-column_column-3,
 .ace_layout_3 #layout-column_column-2 {
-	padding-left: 0
+	
 }
 
 .ace_layout_1 #layout-column_column-4,
@@ -928,11 +933,13 @@ body #banner .logo a {
 /**** Specific styles for adaptation information image and text on frontpage ****/
 
 #p_p_id_56_INSTANCE_7vIW_ {
-	margin-top: -10px;
+	margin-top: 10px;
+	padding-left: 15px;
 }
 
 #p_p_id_56_INSTANCE_7vIW_ h1 {
 	color: #02213D;
+	font-size: 26px;
 }
 
 .image-ai-fp .portlet-body {
@@ -966,6 +973,10 @@ body #banner .logo a {
 	padding: 0;
 }
 
+.portlet-rss .feed-entry-expander {
+	padding-top: 1px;
+}
+
 .portlet-rss .feed-entry {
 	font-size: 11px;
 }
@@ -995,4 +1006,131 @@ span.opens-new-window-accessible,
 #acesearch_container {
 	overflow: hidden;
 	width: 100%;
+}
+
+/**** Styling of the similar areas tool ****/
+.sat-text {
+	background-color: #D2DE92;
+	margin-top: -20px
+}
+
+.sat-text .portlet-topper {
+	padding: 15px 15px 0;
+}
+
+.sat-text .portlet-title {
+	color: #758816;
+}
+
+.sat-text .portlet-content {
+	padding:0 15px;
+}
+
+.sat-text,
+.sat-map #legend_element {
+	float: right;
+	width: 284px;
+}
+
+.sat-map {
+	margin-top: -20px;
+	width: 700px;
+}
+
+.sat-map #locations_element {
+	height: 40px;
+	margin-bottom: 10px;
+	overflow: auto;
+	width: 190px;
+}
+
+.sat-map #map_element {
+	height: 350px;
+	width: 670px;
+}
+
+.sat-map form {
+	clear: both;
+	float:right;
+	margin-right: 25px;
+}
+
+.sat-map #risk-select {
+	margin-top: -265px;
+}
+
+.sat-map #risk-select label {
+	padding-right: 25px;
+}
+
+.sat-map #risk-select select {
+	width: 175px;
+}
+
+.sat-map #sector-select {
+	margin-top: -238px;
+}
+
+.sat-map #sector-select label {
+	padding-right: 3px;
+}
+
+.sat-map #sector-select select {
+	width: 175px;
+}
+
+.sat-map #legend_element {
+	background-color: #D2DE92;
+	margin: -165px -284px 0 0;
+	padding: 15px 0 0; 
+}
+
+#legend-title {
+	font-size: 14px;
+	padding-left: 15px;
+}
+
+/** adjustment of legend items **/
+.sat-map #ext-comp-1002 {
+	padding-left: 15px
+}
+
+.sat-map #ext-comp-1003 {
+	display: none;
+	/*clear: both;
+	float: left;
+	margin-bottom: 5px;*/
+}
+
+.sat-map #ext-comp-1004 {
+	display: none;
+	/*clear: both;
+	float: left;*/
+}
+
+.sat-map #ext-comp-1005 {
+	left: -167px;
+}
+
+.sat-map #ext-comp-1007 {
+	left: -195px;
+}
+
+.sat-map #ext-comp-1009 {
+	left: -88px;
+}
+
+.sat-map #ext-comp-1011 {
+	left: -95px;
+}
+
+.sat-map #ext-comp-1005,
+.sat-map #ext-comp-1007,
+.sat-map #ext-comp-1009,
+.sat-map #ext-comp-1011 {
+	clear: both;
+	float:right;
+	margin-bottom: 10px;
+	position:relative;
+	top:2px;
 }
