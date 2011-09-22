@@ -65,7 +65,7 @@ String redirect = PortalUtil.getCurrentURL(renderRequest);
 		<portlet:param name="redirect" value="<%= redirect %>"/>
 	</portlet:actionURL>	
 
-       					<div id="risk-selector-div" class="adaptationtools-selector" style="width:208px;">
+       					<div id="risk-selector-div" class="adaptationtools-selector" style="width:288px;">
 						<span style="margin-right:10px;float:left;" >
 							Climate impact
 						</span>
@@ -91,7 +91,7 @@ String redirect = PortalUtil.getCurrentURL(renderRequest);
 	}
 %>					
 					<!-- added width because IE8 renders a 100% width otherwise -->
-					<div id="sector-selector-div" class="adaptationtools-selector" style="float:left;width:226px;">
+					<div id="sector-selector-div" class="adaptationtools-selector" style="float:left;width:306px;">
 						<span style="margin-left:10px; margin-right:10px;float:left;">
 							Adaptation sector
 						</span>
