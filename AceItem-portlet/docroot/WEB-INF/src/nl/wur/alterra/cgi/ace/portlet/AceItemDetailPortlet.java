@@ -14,6 +14,7 @@ import nl.wur.alterra.cgi.ace.model.AceItem;
 import nl.wur.alterra.cgi.ace.service.AceItemLocalServiceUtil;
 
 import com.liferay.portal.kernel.servlet.SessionErrors;
+import com.liferay.portal.kernel.servlet.SessionMessages;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.util.PortalUtil;
@@ -92,4 +93,11 @@ public class AceItemDetailPortlet extends MVCPortlet {
 			SessionErrors.add(request, "error-rating");
 		}
 	}
+	
+	// override
+	protected void addSuccessMessage(
+        ActionRequest actionRequest, ActionResponse actionResponse) {
+
+        SessionMessages.add(actionRequest, "request_processed", "Thank you for your feedback");
+    }
 }
