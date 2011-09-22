@@ -7,15 +7,8 @@ import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.util.WebKeys;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
-import com.liferay.util.bridges.mvc.MVCPortlet;
-import nl.wur.alterra.cgi.ace.model.AceItem;
 import nl.wur.alterra.cgi.ace.model.WxsHarvester;
-import nl.wur.alterra.cgi.ace.model.constants.AceItemClimateImpact;
-import nl.wur.alterra.cgi.ace.model.constants.AceItemElement;
-import nl.wur.alterra.cgi.ace.model.constants.AceItemSector;
 import nl.wur.alterra.cgi.ace.model.impl.WxsHarvesterImpl;
-import nl.wur.alterra.cgi.ace.search.lucene.ACEIndexSynchronizer;
-import nl.wur.alterra.cgi.ace.service.AceItemLocalServiceUtil;
 import nl.wur.alterra.cgi.ace.service.WxsHarvesterLocalServiceUtil;
 
 import javax.portlet.ActionRequest;
@@ -30,20 +23,8 @@ import java.util.List;
  *
  * @author heikki doeleman
  */
-public class WxsHarvesterPortlet extends MVCPortlet {
+public class WxsHarvesterPortlet extends LuceneIndexUpdatePortlet {
 
-    /**
-     * Rebuilds index based on contents of database.
-     *
-     * @param request
-     * @param response
-     * @throws Exception
-     */
-    public void synchronizeIndex(ActionRequest request, ActionResponse response) throws Exception {
-        ACEIndexSynchronizer aceIndexSynchronizer = new ACEIndexSynchronizer();
-        aceIndexSynchronizer.synchronize();
-    }
- 
 	/**
 	 * Adds a new wxsharvester to the database
 	 * 

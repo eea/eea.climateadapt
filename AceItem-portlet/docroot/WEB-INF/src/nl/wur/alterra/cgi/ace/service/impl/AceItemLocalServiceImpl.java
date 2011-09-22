@@ -18,8 +18,6 @@ import com.liferay.counter.service.CounterLocalServiceUtil;
 import com.liferay.portal.kernel.exception.SystemException;
 import nl.wur.alterra.cgi.ace.model.AceItem;
 import nl.wur.alterra.cgi.ace.model.impl.AceItemImpl;
-import nl.wur.alterra.cgi.ace.search.lucene.ACELuceneException;
-import nl.wur.alterra.cgi.ace.search.lucene.AceItemIndexer;
 import nl.wur.alterra.cgi.ace.service.base.AceItemLocalServiceBaseImpl;
 
 import java.util.List;
@@ -54,7 +52,7 @@ public class AceItemLocalServiceImpl extends AceItemLocalServiceBaseImpl {
     }
 
 	/**
-	 * Adds the AceItem to the database incrementing the primary key, and adds it to the Lucene index.
+	 * Adds the AceItem to the database incrementing the primary key.
 	 *
      * @param aceitem aceitem to add
      * @return added aceitem
@@ -64,15 +62,6 @@ public class AceItemLocalServiceImpl extends AceItemLocalServiceBaseImpl {
 		long aceitemId = CounterLocalServiceUtil.increment(AceItem.class.getName());
 		aceitem.setAceItemId(aceitemId);
         aceitem = super.addAceItem(aceitem);
-        try {
-            AceItemIndexer indexer = new AceItemIndexer();
-            indexer.add(aceitem);
-        }
-        catch (ACELuceneException x) {
-            System.out.println(x.getMessage());
-            x.printStackTrace();
-            throw new SystemException(x.getMessage(), x);
-        }
         return aceitem;
 	}
 

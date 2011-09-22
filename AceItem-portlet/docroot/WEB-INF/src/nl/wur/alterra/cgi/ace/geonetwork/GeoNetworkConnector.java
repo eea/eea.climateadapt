@@ -22,6 +22,8 @@ public class GeoNetworkConnector {
         this.geoNetworkBaseURL = "http://dev.ace.geocat.net/geonetwork";
         this.GeoNetworkLoginURL  = geoNetworkBaseURL + "/srv/en/xml.user.login";
         this.GeoNetworkAddHarvesterURL  = geoNetworkBaseURL + "/srv/en/xml.harvesting.add";
+        this.GeoNetworkRemoveHarvesterURL  = geoNetworkBaseURL + "/srv/en/xml.harvesting.remove";
+        this.GeoNetworkUpdateHarvesterURL  = geoNetworkBaseURL + "/srv/en/xml.harvesting.update";
         this.GeoNetworkStartHarvesterURL  = geoNetworkBaseURL + "/srv/en/xml.harvesting.start";
         this.GeoNetworkStopHarvesterURL  = geoNetworkBaseURL + "/srv/en/xml.harvesting.stop";
         this.GeoNetworkRunHarvesterURL  = geoNetworkBaseURL + "/srv/en/xml.harvesting.run";
@@ -46,6 +48,8 @@ public class GeoNetworkConnector {
         this.geoNetworkBaseURL = geoNetworkBaseUrl;
         this.GeoNetworkLoginURL  = geoNetworkBaseURL + "/srv/en/xml.user.login";
         this.GeoNetworkAddHarvesterURL  = geoNetworkBaseURL + "/srv/en/xml.harvesting.add";
+        this.GeoNetworkRemoveHarvesterURL  = geoNetworkBaseURL + "/srv/en/xml.harvesting.remove";
+        this.GeoNetworkUpdateHarvesterURL  = geoNetworkBaseURL + "/srv/en/xml.harvesting.update";
         this.GeoNetworkStartHarvesterURL  = geoNetworkBaseURL + "/srv/en/xml.harvesting.start";
         this.GeoNetworkStopHarvesterURL  = geoNetworkBaseURL + "/srv/en/xml.harvesting.stop";
         this.GeoNetworkRunHarvesterURL  = geoNetworkBaseURL + "/srv/en/xml.harvesting.run";
@@ -74,6 +78,8 @@ public class GeoNetworkConnector {
 
     private String GeoNetworkLoginURL;
     private String GeoNetworkAddHarvesterURL;
+    private String GeoNetworkRemoveHarvesterURL;
+    private String GeoNetworkUpdateHarvesterURL;
     private String GeoNetworkStartHarvesterURL ;
     private String GeoNetworkStopHarvesterURL ;
     private String GeoNetworkRunHarvesterURL;
@@ -90,12 +96,44 @@ public class GeoNetworkConnector {
      */
     public WxsHarvester addHarvester(WxsHarvester wxsHarvester) throws SystemException {
         login();
-        String xml = createAddRequest(wxsHarvester);
+        String xml = createAddOrUpdateRequest(wxsHarvester, null);
         String response = httpUtils.post(xml, GeoNetworkAddHarvesterURL);
         // TODO verify success?
         // TODO logout?
         return setGeoNetworkIDs(wxsHarvester, response);
     }
+
+    /**
+     * Updates an ACE WxsHarvester in GeoNetwork.
+     *
+     * @param wxsHarvester
+     * @return
+     * @throws SystemException
+     */
+    public WxsHarvester updateHarvester(WxsHarvester wxsHarvester) throws SystemException {
+        login();
+        String xml = createAddOrUpdateRequest(wxsHarvester, Long.toString(wxsHarvester.getGeonetworkId()));
+        String response = httpUtils.post(xml, GeoNetworkUpdateHarvesterURL);
+        // TODO verify success?
+        // TODO logout?
+        return setGeoNetworkIDs(wxsHarvester, response);
+    }
+
+    /**
+     * Deletes an ACE WxsHarvester in GeoNetwork.
+     *
+     * @param wxsHarvester
+     * @return
+     * @throws SystemException
+     */
+    public void deleteHarvester(WxsHarvester wxsHarvester) throws SystemException {
+        login();
+        String xml = createDeleteRequest(wxsHarvester);
+        String response = httpUtils.post(xml, GeoNetworkRemoveHarvesterURL);
+        // TODO verify success?
+        // TODO logout?
+    }
+
 
     /**
      * Activates a harvester in GeoNetwork.
@@ -296,6 +334,18 @@ public class GeoNetworkConnector {
     }
 
     /**
+     * Creates a request to delete a harvester in GeoNetwork.
+     * @param wxsHarvester
+     * @return
+     */
+    private String createDeleteRequest(WxsHarvester wxsHarvester) {
+        String xml = "<request>";
+            xml += "<id>" + wxsHarvester.getGeonetworkId() + "</id>";
+        xml += "</request>";
+        return xml;
+    }
+
+    /**
      * Creates a request to run a harvester in GeoNetwork.
      * @param wxsHarvester
      * @return
@@ -308,15 +358,25 @@ public class GeoNetworkConnector {
     }
 
     /**
-     * Creates a ADD-WXSHARVESTER request for GeoNetwork. Some of the parameters are hard-coded, if desired they could
-     * be made variable by adding them as properties to WxsHarvester.
+     * Creates a ADD-WXSHARVESTER or UPDATE-WXSHARVESTER request for GeoNetwork. Some of the parameters are hard-coded,
+     * if desired they could be made variable by adding them as properties to WxsHarvester.
      *
      * @param wxsHarvester wxsharvester
+     * @param id GeoNetwork id (if updating, otherwise null)
      * @return add harvester request
      */
-    private String createAddRequest(WxsHarvester wxsHarvester) {
+    private String createAddOrUpdateRequest(WxsHarvester wxsHarvester, String id) {
 
-        String xml = "<node type=\"ogcwxs\">";
+        String xml;
+
+        // add
+        if(id == null) {
+            xml = "<node type=\"ogcwxs\">";
+        }
+        // update
+        else {
+            xml = "<node id=\"" + id + "\" type=\"ogcwxs\">";
+        }
 
             xml += "<site>";
                 xml += "<name>" + wxsHarvester.getName() + "</name>";

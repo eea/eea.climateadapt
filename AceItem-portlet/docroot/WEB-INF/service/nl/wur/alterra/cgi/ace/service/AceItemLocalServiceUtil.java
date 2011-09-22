@@ -227,7 +227,7 @@ public class AceItemLocalServiceUtil {
 	}
 
 	/**
-	* Creates new empty aceitem
+	* Creates new empty aceitem.
 	*
 	* @return
 	*/

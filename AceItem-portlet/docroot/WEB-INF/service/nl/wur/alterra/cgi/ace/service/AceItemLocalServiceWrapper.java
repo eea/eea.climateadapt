@@ -217,7 +217,7 @@ public class AceItemLocalServiceWrapper implements AceItemLocalService {
 	}
 
 	/**
-	* Creates new empty aceitem
+	* Creates new empty aceitem.
 	*
 	* @return
 	*/

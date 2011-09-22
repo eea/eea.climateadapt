@@ -99,6 +99,8 @@
 		<aui:input type="hidden" name="redirect" value="<%= redirect %>" />
 
 		<aui:input type="hidden" name="wxsharvesterid" value='<%= wxsHarvester == null ? "" : wxsHarvester.getWxsharvesterid() %>'/>
+        <aui:input type="hidden" name="geonetworkId" value='<%= wxsHarvester == null ? "" : wxsHarvester.getGeonetworkId() %>'/>
+        <aui:input type="hidden" name="geonetworkUUID" value='<%= wxsHarvester == null ? "" : wxsHarvester.getGeonetworkUUID() %>'/>
 
 		<aui:input type="hidden" name="every" value='<%= wxsHarvester == null ? "" : wxsHarvester.getEvery() %>'/>
 

@@ -205,7 +205,7 @@ public interface AceItemLocalService {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Creates new empty aceitem
+	* Creates new empty aceitem.
 	*
 	* @return
 	*/
