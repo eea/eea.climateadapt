@@ -1014,6 +1014,29 @@ span.opens-new-window-accessible,
 	font-size: 12px;
 }
 
+/** Additional styling for the FilterAceItemPortlet
+    add class indicators to the desired portlet in 
+    order to use the styles below
+**/
+.indicators #filter_results {
+	padding-left: 18px;
+}
+
+.indicators .plus,
+.indicators .minus {
+	margin-left: -18px;
+}
+
+.indicators a {
+	color: #02213D;
+	text-decoration: none;
+}
+
+.indicators a:hover {
+	color: #a5bf26;
+	text-decoration: none;
+}
+
 /**** Styling of the search and discover page ****/
 #acesearch_container {
 	overflow: hidden;
