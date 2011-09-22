@@ -93,6 +93,13 @@ public class MeasureDetailPortlet extends MVCPortlet {
 		else {
 			SessionErrors.add(request, "error-rating");
 		}
-	}
+	}    
+	
+	// override
+	protected void addSuccessMessage(
+        ActionRequest actionRequest, ActionResponse actionResponse) {
+
+        SessionMessages.add(actionRequest, "request_processed", "Thank you for your feedback");
+    }
 
 }
