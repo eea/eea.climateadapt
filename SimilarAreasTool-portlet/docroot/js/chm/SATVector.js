@@ -8,6 +8,8 @@ CHM.SATVector = OpenLayers.Class(OpenLayers.Layer.Vector, {
 	
 	stroke_color: null,
 	
+	radius: null,
+	
 	area: null,
 	
 	risk: null,
@@ -28,17 +30,18 @@ CHM.SATVector = OpenLayers.Class(OpenLayers.Layer.Vector, {
         
         this.styleMap = new OpenLayers.StyleMap({
 	        "default": new OpenLayers.Style({
-		        pointRadius: 6, 
+		        pointRadius: this.radius, 
 		        fillColor: this.fill_color,
 		        strokeColor: this.stroke_color,
 		        strokeWidth: 2,
 		        graphicZIndex: 1
 	        }),
 	        "select": new OpenLayers.Style({
-		        pointRadius: 6, 
-		        fillColor: "#66ccff",
-		        strokeColor: "#3399ff",
-		        graphicZIndex: 2
+		        pointRadius: this.radius, 
+		        fillColor: this.fill_color,
+		        strokeColor: this.stroke_color,
+		        strokeWidth: 2,
+		        graphicZIndex: 1
 	        })
         });
 	},

@@ -40,7 +40,15 @@
 </form>
 
 <div id="locator">
-	<input type="text" name="location" id="location" />
+	<script type="text/javascript">
+	    function getKey (event) {
+	        var keyCode = ('which' in event) ? event.which : event.keyCode;
+	        if (keyCode == 13) {
+	        	locate(document.getElementById('location').value);
+	        }
+	    }
+	</script>
+	<input type="text" name="location" id="location" onkeydown="getKey(event)" />
 	<input type="submit" value="Locate" onclick="locate(document.getElementById('location').value)"/>
 </div>
 

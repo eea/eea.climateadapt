@@ -11,19 +11,26 @@ CHM.SATCHMMap = OpenLayers.Class(CHM.CHMMap, {
 	    	displayInLayerSwitcher: true,
 	    	styleMap: new OpenLayers.StyleMap({
 	    	    "default": new OpenLayers.Style({
-	    	        pointRadius: 6, 
-	    	        fillColor: "#0000ff",
-	    	        strokeColor: "#0000ff",
+	    	        pointRadius: 12, 
+	    	        fillColor: "#0070c0",
+	    	        strokeColor: "#002060",
 	    	        strokeWidth: 2,
 	    	        graphicZIndex: 1
 	    	    }),
-	    	    "select": new OpenLayers.Style({
-	    	        pointRadius: 6, 
-	    	        fillColor: "#66ccff",
-	    	        strokeColor: "#3399ff",
-	    	        graphicZIndex: 2
-	    	    })
+	    	    "default": new OpenLayers.Style({
+	    	        pointRadius: 12, 
+	    	        fillColor: "#0070c0",
+	    	        strokeColor: "#002060",
+	    	        strokeWidth: 2,
+	    	        graphicZIndex: 1
+	    	    }),
 	    	})
+//	    	styleMap: new OpenLayers.StyleMap({
+//                // Set the external graphic and background graphic images.
+//                externalGraphic: "/sat/js/chm/img/location.png",
+//                graphicZIndex: 1,
+//                pointRadius: 12
+//            })	    	
 	    });
 		
 		var similar_areas_image_layer = new OpenLayers.Layer.WMS('Biogeographical regions 2005', 
@@ -55,8 +62,9 @@ CHM.SATCHMMap = OpenLayers.Class(CHM.CHMMap, {
         	{
     			displayInLayerSwitcher: true,
         		type: OpenLayers.Filter.Comparison.EQUAL_TO, 
-        		fill_color: '#00ff00', 
-        		stroke_color: '#00ff00'
+        		fill_color: '#ff0000', 
+        		stroke_color: '#c00000',
+        		radius: 12
         	});
         
         case_studies_dissimilar_areas = new CHM.SATVector(
@@ -64,8 +72,9 @@ CHM.SATCHMMap = OpenLayers.Class(CHM.CHMMap, {
         	{
     			displayInLayerSwitcher: true,
         		type: OpenLayers.Filter.Comparison.NOT_EQUAL_TO, 
-        		fill_color: '#ffff00', 
-        		stroke_color: '#ffff00'
+        		fill_color: '#b8b894', 
+        		stroke_color: '#484b35',
+        		radius: 8
         	});
         
         select = new OpenLayers.Layer.Vector(
