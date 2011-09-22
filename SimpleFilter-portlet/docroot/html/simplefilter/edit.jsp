@@ -66,71 +66,11 @@ pageContext.setAttribute("countriesList", countriesList);
 
 <div id="filteraceitems_container">
 
-<portlet:resourceURL var="sortURL" id="view.jsp" escapeXml="false" />
-
 <%-- this is here and not in js file, because we're using some JSP code in it. TODO solve that and move to js file --%>
 <script type="text/javascript">
 
-	// ENABLE THIS WHEN RUNNING STANDALONE (WITHOUT REST OF ACE)
-	var $j = jQuery.noConflict();
-
     // Stores results for each data type group
     var groupedJSONResults = new Array();
-
-	// display only first 5 searchresults
-	jQuery(document).ready(function(){
-		for(var i  = 0; i < 5; i++) {
-			$j(".searchresult").next().show();
-		}
-	});     
-
-    /**
-	 * retrieves search parameters from the sort-search form that invoked this, executes the search through XHR, and sets json response to correct search results panel.
-	 *
-	 */ 
-	function sortedSearch(sortRadio) {	
-		// grab unique part, after dash
-		var unique = sortRadio.id.match(/-([0-9]+)/)[1];	
-		var sortedSearchForm = $j("#sortsearchformId-"+unique);		
-		var querystring = 'datainfo_type=2&anyOfThese=' + $j("#sortsearchformId-"+unique + " input[name=anyOfThese]").val();
-		querystring += '&aceitemtype=' + $j("#sortsearchformId-"+unique + " input[name=aceitemtype]").val();
-        if ($j("#sortsearchformId-"+unique + " input[name=sector]").val() != undefined) {
-		    querystring += '&sector=' + $j("#sortsearchformId-"+unique + " input[name=sector]").val();
-        } 
-        if ($j("#sortsearchformId-"+unique + " input[name=element]").val() != undefined) {
-		    querystring += '&element=' + $j("#sortsearchformId-"+unique + " input[name=element]").val();
-        } 		
-		querystring += '&initial_date=' + $j("#sortsearchformId-"+unique + " input[name=initial_date]").val(); 
-		querystring += '&final_date=' + $j("#sortsearchformId-"+unique + " input[name=final_date]").val(); 
-		querystring += '&simple_date=' + $j("#sortsearchformId-"+unique + " input[name=simple_date]").val(); 
-		querystring += '&sortBy=' + $j('#'+sortRadio.id).val();
-		// replace existing resultlist with loading icon 
-		$j('#resultsListId-'+unique).remove();
-		$j('#expandedId-'+unique).append('<div id="loadingId-'+unique+'" style="text-align:center;"><img src="<%=renderRequest.getContextPath()%>/images/icons/loading.gif" title="loading" alt="loading"></div>');
-		jQuery.ajax({
-			type: "POST",
-			url: "<%=renderResponse.encodeURL(sortURL.toString())%>",
-			data: querystring,
-			success: function(json) {
-
-				// remove loading icon and add results to resultlist	
-				$j('#loadingId-'+unique).remove();
-				var aceitemResults = new Array();
-				aceitemResults = jQuery.parseJSON(json);	
-
-                // Updates the results for each data type sorted
-                groupedJSONResults[$j("#sortsearchformId-"+unique + " input[name=aceitemtype]").val()] = aceitemResults;
-
-                var firstFiveAceitemResults = new Array();
-				for(var i = 0; i < 5; i++) {
-					firstFiveAceitemResults.push(aceitemResults[i]);
-				}
-				displayJSONResults(unique, firstFiveAceitemResults);
-				$j('#paginationId-'+unique + ' .jPag-pages li:first-child a').click();
-			} 
-		});
-		
-	}      
 										
 </script>
 
@@ -289,7 +229,6 @@ pageContext.setAttribute("countriesList", countriesList);
             </div>
 
             <div id="form_footer">
-                <input type="button" id="clear-search-form-btn" value="<liferay-ui:message key="acesearch-reset-btn" />" />
                 <input type="submit" value="<liferay-ui:message key="acesearch-search-btn" />"/>
             </div>
         </aui:form>

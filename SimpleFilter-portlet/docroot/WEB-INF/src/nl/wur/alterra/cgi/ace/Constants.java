@@ -6,4 +6,8 @@ public class Constants {
 	public static final String NRITEMSPAGE = "nrItemsPage";
 	
 	public static final String FUZZINESS = "fuzziness";
+	
+	public static final String USERSECTOR = "usersector";
+	
+	public static final String USERIMPACT = "userimpact";
 }

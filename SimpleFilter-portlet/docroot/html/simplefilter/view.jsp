@@ -22,39 +22,99 @@
 <%
 Long totalResults = (Long) request.getAttribute("total_results");
 
+int filter = Integer.parseInt( renderRequest.getPreferences().getValue(Constants.FREEPAR, "0") );
+
 String includeFile = "searchresultsonetype.jspf";
+
+String selected ;
+
+String selected_impact = (String) request.getAttribute(Constants.USERIMPACT);
+
+String selected_sector = (String) request.getAttribute(Constants.USERSECTOR);
+
+if (selected_impact == null || selected_impact.equalsIgnoreCase("all")) {
+	
+	selected = "";
+}
+else {
+	selected = "selected='selected'";
+}
+
+String redirect = PortalUtil.getCurrentURL(renderRequest);
 
 %>
 <portlet:actionURL name="searchAceitem" var="searchAceitemURL"/>
 
-<div id="filteraceitems_container">
 
-<portlet:resourceURL var="sortURL" id="view.jsp" escapeXml="false" />
+<!--  portlet:resourceURL var="sortURL" id="view.jsp" escapeXml="false" / -->
 
 <%-- this is here and not in js file, because we're using some JSP code in it. TODO solve that and move to js file --%>
 <script type="text/javascript">
 
-	// ENABLE THIS WHEN RUNNING STANDALONE (WITHOUT REST OF ACE)
-	
-	
-	//var $ = jQuery.noConflict();
-
-    // Stores results for each data type group
-    var groupedJSONResults = new Array();
-
-	// display only first 5 searchresults
-	jQuery(document).ready(function(){
-		for(var i  = 0; i < <%= renderRequest.getPreferences().getValue(Constants.NRITEMSPAGE, "10") %>; i++) {
-			$(".searchresult").next().show();
-		}
-	});     
-    
-										
+	var groupedJSONResults = new Array();
+								
 </script>
 
-<div id="<portlet:namespace/>content">
-</div>
+<div id="<portlet:namespace/>content" style="width: 100%;">
+<%
+	if (filter==1) {
+%>
+			<form action="<%=searchAceitemURL%>" method="post" id="ace_simplefilter_30x" name="<portlet:namespace/>aceItemSearchForm">
 
+	<portlet:actionURL name="searchAceitem" var="searchURL">
+		<portlet:param name="redirect" value="<%= redirect %>"/>
+	</portlet:actionURL>	
+
+       					<div id="risk-selector-div" class="adaptationtools-selector" style="width:208px;">
+						<span style="margin-right:10px;float:left;" >
+							Risk
+						</span>
+						<select id="risk-selector" name="risk-selector" style="float:left;" onchange="document.getElementById('ace_simplefilter_30x').submit()" >
+							<option value="all" <%= selected %>>All risks</option>
+							<c:set var="selectedImpact" value="<%= selected_impact %>" />
+							<c:forEach var="adaptationClimateImpact" items="<%= nl.wur.alterra.cgi.ace.model.constants.AceItemClimateImpact.values() %>" >	
+							        <option value="${adaptationClimateImpact}"
+									<c:if test="${fn:indexOf(selectedImpact, adaptationClimateImpact)>=0}">
+										selected='selected'
+									</c:if>       
+							        ><liferay-ui:message key="aceitem-climateimpacts-lbl-${adaptationClimateImpact}" /></option>
+							</c:forEach>
+						</select>
+					</div>
+<%
+	if (selected_sector == null || selected_sector.equalsIgnoreCase("all")) {
+	
+		selected = "";
+	}
+	else {
+		selected = "selected='selected'";
+	}
+%>					
+					<!-- added width because IE8 renders a 100% width otherwise -->
+					<div id="sector-selector-div" class="adaptationtools-selector" style="float:left;width:226px;">
+						<span style="margin-left:10px; margin-right:10px;float:left;">
+							Sector
+						</span>
+						<select id="sector-selector" name="sector-selector" style="float:left;" onchange="document.getElementById('ace_simplefilter_30x').submit()" >
+							<option value="all" <%= selected %>>All sectors</option>
+							<c:set var="selectedSector" value="<%= selected_sector %>" />
+							<c:forEach var="adaptationSector" items="<%= nl.wur.alterra.cgi.ace.model.constants.AceItemSector.values() %>">	
+							        <option value="${adaptationSector}"
+									<c:if test="${fn:indexOf(selectedSector, adaptationSector)>=0}">
+										selected='selected'
+									</c:if>       
+							        ><liferay-ui:message key="acesearch-sectors-lbl-${adaptationSector}" /></option>
+							</c:forEach>
+						</select>
+					</div>				
+        </form>
+        <br />        
+        <br />
+<% 		
+	}
+%>
+</div>
+<div id="filteraceitems_container" style="width: 100%;">
 	<!-- Results column  -->
 	<div id="filter_results" class="filteraceitems_column">
         <c:set var="groupedResults" scope="page" value="${DOCUMENT_searchResults}"/>

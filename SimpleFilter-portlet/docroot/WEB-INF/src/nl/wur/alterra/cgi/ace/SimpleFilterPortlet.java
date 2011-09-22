@@ -1,10 +1,14 @@
 package nl.wur.alterra.cgi.ace;
 
 
+import com.liferay.portal.kernel.servlet.SessionErrors;
+import com.liferay.portal.kernel.servlet.SessionMessages;
 import com.liferay.portal.kernel.util.ParamUtil;
+import com.liferay.portal.util.PortalUtil;
 import com.liferay.util.bridges.mvc.MVCPortlet;
 
 import nl.wur.alterra.cgi.ace.Constants;
+import nl.wur.alterra.cgi.ace.search.ACESearchEngine;
 import nl.wur.alterra.cgi.ace.search.ACESearchPortalInterface;
 import nl.wur.alterra.cgi.ace.search.AceSearchFormBean;
 import nl.wur.alterra.cgi.ace.search.SearchRequestParams;
@@ -35,7 +39,42 @@ public class SimpleFilterPortlet extends MVCPortlet {
 	public void doView(RenderRequest renderRequest, RenderResponse renderResponse) throws IOException, PortletException {
 		try {
             ACESearchPortalInterface searchEngine = new ACESearchPortalInterface();
-			searchEngine.handleSearchRequest(renderRequest);
+
+        	String sector[] = new String[1];
+        	sector[0] = (String) renderRequest.getAttribute(Constants.USERSECTOR);
+
+        	if(sector[0] != null) {
+              	 
+            	//System.out.println("Sector: " + sector[0]);
+            	String impact[] = new String[1];
+            	impact[0] = (String) renderRequest.getAttribute(Constants.USERIMPACT);
+            	//System.out.println("Impact: " + impact[0]);
+            	       
+                Map<String, String[]> requestParams;
+        		String fuzziness = null;
+
+                PortletPreferences preferences = renderRequest.getPreferences();
+                requestParams = preferences.getMap();
+
+        		fuzziness = preferences.getValue(SearchRequestParams.FUZZINESS, "");
+
+                ACESearchEngine se = new ACESearchEngine();
+                AceSearchFormBean formBean = se.prepareACESearchFormBean(requestParams, fuzziness);        	
+                
+                if( !sector[0].equalsIgnoreCase("all") ) {
+                	formBean.setSector( sector );
+                }        	
+                
+                if( !impact[0].equalsIgnoreCase("all") ) {
+                	formBean.setImpact( impact );
+                }
+                
+    			searchEngine.handleSearchRequest(renderRequest, formBean);
+        	}
+        	else {
+            
+        		searchEngine.handleSearchRequest(renderRequest);
+        	}
 		}
         catch (Exception x) {
 			x.printStackTrace();
@@ -44,6 +83,30 @@ public class SimpleFilterPortlet extends MVCPortlet {
 		super.doView(renderRequest, renderResponse);
 	}
 
+	//override 
+    protected void addSuccessMessage(
+    // omit all success messages
+            ActionRequest actionRequest, ActionResponse actionResponse) {
+
+                return;
+    }	
+
+
+    public void searchAceitem(ActionRequest request, ActionResponse response) throws Exception {
+        try {
+        		request.setAttribute(Constants.USERSECTOR, ParamUtil.getString(request, "sector-selector"));
+    			request.setAttribute(Constants.USERIMPACT, ParamUtil.getString(request, "risk-selector"));
+
+        }
+        catch(Exception x) {
+            SessionErrors.add(request, "acesearch-execution-failure");
+            x.printStackTrace();
+            throw x;
+        }
+
+		sendRedirect(request, response);
+    }
+	
 	public void setFilterAceItemPref(ActionRequest request, ActionResponse response) throws Exception {
         Map<String, String[]> requestParams = request.getParameterMap();
 
