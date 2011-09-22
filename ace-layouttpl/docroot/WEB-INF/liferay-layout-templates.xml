@@ -28,5 +28,13 @@
 			<wap-template-path>/ast.wap.tpl</wap-template-path>
 			<thumbnail-path>/ast.png</thumbnail-path>
 		</layout-template>
+		<layout-template id="transnationalregion"
+			name="Transnational Region">
+			<template-path>/transnationalregion.tpl</template-path>
+			<wap-template-path>
+				/transnationalregion.wap.tpl
+			</wap-template-path>
+			<thumbnail-path>/transnationalregion.png</thumbnail-path>
+		</layout-template>
 	</custom>
 </layout-templates>
