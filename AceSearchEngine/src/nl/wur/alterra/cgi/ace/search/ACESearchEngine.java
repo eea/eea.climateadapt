@@ -37,7 +37,7 @@ public class ACESearchEngine {
      * @param searchParams
      * @return formbean
      */
-    protected AceSearchFormBean prepareACESearchFormBean(Map<String, String[]> searchParams, String fuzziness) {
+    public AceSearchFormBean prepareACESearchFormBean(Map<String, String[]> searchParams, String fuzziness) {
 
         String[] aceItemTypes ;
         String[] anyOfThese ;
