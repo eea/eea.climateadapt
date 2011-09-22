@@ -39,7 +39,7 @@ hr, .separator {
 }
 
 #wrapper {
-	background: none;
+	background: none repeat scroll 0 0 transparent;
 	margin: 0 auto;
 	max-width: 984px;
 	position: relative;
@@ -163,11 +163,15 @@ body #banner .logo a {
 
 #navigation .selected {
 	background-color: #e9efc9;
+	border-left: 1px solid #758816;
+	border-right: 1px solid #758816;
+	border-top: 1px solid #758816;
 	border-top-left-radius: 3px;
 	border-top-right-radius: 3px;
+	height: 26px;
 	-moz-border-radius-topleft: 3px;
 	-moz-border-radius-topright: 3px; 
-	top:5px 
+	top:3px 
 }
 
 #navigation .selected a {
@@ -512,6 +516,8 @@ body #banner .logo a {
 
 #sec-menu ul {
 	background-color: #e9efc9;
+	border-top: 1px solid #758816;
+	border-bottom: 1px solid #758816;
 	margin: 0;
 	padding: 5px;
 }
@@ -542,6 +548,12 @@ body #banner .logo a {
 	display: none;
 }
 
+/**** Adjusting general LifeRay layouts ****/
+/*.portlet-column-content-only {
+	padding: 10px 15px 0;
+}*/
+
+
 /**** General styles Ace Layouts ****/
 
 .ace_layout_2 #column-1,
@@ -570,7 +582,7 @@ body #banner .logo a {
 }
 
 .ace_layout_1 #layout-column_column-5 {
-	padding: 0 0 0 15px;
+	padding: 0 15px;
 }
 
 .ace_layout_1 #layout-column_column-3,
@@ -1008,7 +1020,12 @@ span.opens-new-window-accessible,
 	width: 100%;
 }
 
-/**** Styling of the similar areas tool ****/
+/**** Styling of the similar areas tool 
+The SAT does NOT have a seperate layout template. 
+To retrieve the appropiate styling is it therefore
+necessary to add the class sat-text to the instruction 
+text and the class sat-map to the SimilarAreasToolPortlet.
+****/
 .sat-text {
 	background-color: #D2DE92;
 	margin-top: -20px
@@ -1134,3 +1151,22 @@ span.opens-new-window-accessible,
 	position:relative;
 	top:2px;
 }
+
+/**** Styling for the transnational pages
+Entry page
+The entry does NOT have a seperate layout template. 
+To retrieve the appropiate styling is it therefore
+necessary to add the class sector-main-article to the
+main article and the class transnational-search to
+the search column.
+****/
+.transnational-search {
+	background-color: #D2DF92;
+	margin-top: 15px;
+	padding: 15px;
+}
+
+.transnational-search .portlet-title {
+	color: #758816;
+}
+
