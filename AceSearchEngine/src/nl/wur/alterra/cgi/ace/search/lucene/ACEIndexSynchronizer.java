@@ -47,7 +47,7 @@ public class ACEIndexSynchronizer {
 
     /**
      * Deletes single entry in the Lucene index based on AceItem.
-     * @param aceItem to be indexed
+     * @param aceItem to be deleted
      */
     public synchronized void delete(AceItem aceItem) {
         AceItemIndexer indexer = new AceItemIndexer();
@@ -58,6 +58,23 @@ public class ACEIndexSynchronizer {
             System.out.println(x.getMessage());
             x.printStackTrace();
         }
+    }
+
+    /**
+     * Re-indexes entry in the Lucene index based on AceItem.
+     * @param aceItem to be re-indexed
+     */
+    public synchronized void reIndex(AceItem aceItem) {
+        System.out.println("AceItemSynchronizer: reIndexing aceitem " + aceItem.getAceItemId());
+        AceItemIndexer indexer = new AceItemIndexer();
+        try {
+            indexer.reIndex(aceItem);
+        }
+        catch (ACELuceneException x) {
+            System.out.println(x.getMessage());
+            x.printStackTrace();
+        }
+        System.out.println("AceItemSynchronizer: finished reIndexing aceitem " + aceItem.getAceItemId());
     }
 
     /**

@@ -102,10 +102,12 @@ public class ACEIndexWriter {
      * @throws ACELuceneException hmm
      */
     public void add(Document document) throws ACELuceneException {
+        System.out.println("ACEIndexWriter: adding aceitem ");
         try {
             indexWriter.addDocument(document);
             indexWriter.commit();
             ACEIndexSearcher.getACEIndexSearcher().setStale(true);
+            System.out.println("ACEIndexWriter: finished adding aceitem ");
         }
         catch(CorruptIndexException x) {
             System.out.println(x.getMessage());
@@ -126,10 +128,12 @@ public class ACEIndexWriter {
      * @throws ACELuceneException hmm
      */
     public void delete(String aceItemId) throws ACELuceneException {
+        System.out.println("ACEIndexWriter: deleting aceitem " + aceItemId);
         try {
             indexWriter.deleteDocuments(new Term(ACEIndexConstant.IndexField.ACEITEM_ID, aceItemId));
             indexWriter.commit();
             ACEIndexSearcher.getACEIndexSearcher().setStale(true);
+            System.out.println("ACEIndexWriter: finished deleting aceitem " + aceItemId);
         }
         catch(CorruptIndexException x) {
             System.out.println(x.getMessage());

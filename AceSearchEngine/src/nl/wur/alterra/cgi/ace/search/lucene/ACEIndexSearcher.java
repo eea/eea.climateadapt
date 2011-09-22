@@ -69,6 +69,7 @@ public class ACEIndexSearcher {
     }
 
     public TopDocs search(Query query, String sortBy, int itemsPerPage) throws ACELuceneException {
+        System.out.println("ACIndexSearcher: query " + query.toString());
 
         // TODO remove this hack
         itemsPerPage = 1000;
@@ -76,7 +77,7 @@ public class ACEIndexSearcher {
         try {
 
             if(this.isStale()) {
-                System.out.println("ACEIndexSearcher is stale, reopening indexreader");
+                System.out.println("ACEIndexSearcher is stale, re-opening indexreader");
                 IndexReader newReader, oldReader;
                 oldReader = this.searcher.getIndexReader();
                 newReader = oldReader.reopen();

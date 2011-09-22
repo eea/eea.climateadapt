@@ -1,10 +1,10 @@
 package nl.wur.alterra.cgi.ace.search.lucene;
 
-import java.util.Properties;
 import java.io.File;
-import java.io.IOException;
 import java.io.FileInputStream;
+import java.io.IOException;
 import java.security.CodeSource;
+import java.util.Properties;
 
 /**
  * Utility methods for Lucene index in ACE.

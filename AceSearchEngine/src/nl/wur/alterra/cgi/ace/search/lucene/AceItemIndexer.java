@@ -40,6 +40,26 @@ public class AceItemIndexer {
     }
 
     /**
+     * Re-indexes an AceItem by trying first to delete it, and regardless of the result, then add it.
+     *
+     * @param aceItem
+     * @throws ACELuceneException
+     */
+    public void reIndex(AceItem aceItem) throws ACELuceneException {
+        System.out.println("AceItemIndexer: reindexing AceItem " + aceItem.getAceItemId());
+        try {
+            aceIndexWriter.delete(Long.toString(aceItem.getAceItemId()));
+        }
+        // if this fails (maybe it did not exist?) just try to add it
+        catch(ACELuceneException x) {
+            System.out.println("AceItemIndexer: error deleting AceItem from index, id: " + aceItem.getAceItemId() + " message is: " + x.getMessage());
+        }
+        Document document = convertToLuceneDocument(aceItem);
+        aceIndexWriter.add(document);
+        System.out.println("AceItemIndexer: successfully indexed AceItem " + aceItem.getAceItemId());
+    }
+
+    /**
      * Creates a Lucene Document from an AceItem.
      *
      *

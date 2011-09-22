@@ -5,7 +5,6 @@ import nl.wur.alterra.cgi.ace.search.lucene.ACEAnalyzer;
 import nl.wur.alterra.cgi.ace.search.lucene.ACEIndexConstant;
 import nl.wur.alterra.cgi.ace.search.lucene.ACEIndexSearcher;
 import nl.wur.alterra.cgi.ace.search.lucene.ACELuceneException;
-import nl.wur.alterra.cgi.ace.service.AceItemLocalService;
 import nl.wur.alterra.cgi.ace.service.AceItemLocalServiceUtil;
 import org.apache.lucene.analysis.TokenStream;
 import org.apache.lucene.analysis.tokenattributes.TermAttribute;
@@ -19,7 +18,6 @@ import org.apache.lucene.search.TopDocs;
 import java.io.IOException;
 import java.io.StringReader;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
