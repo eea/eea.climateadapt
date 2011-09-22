@@ -67,10 +67,10 @@ String redirect = PortalUtil.getCurrentURL(renderRequest);
 
        					<div id="risk-selector-div" class="adaptationtools-selector" style="width:208px;">
 						<span style="margin-right:10px;float:left;" >
-							Risk
+							Climate impact
 						</span>
 						<select id="risk-selector" name="risk-selector" style="float:left;" onchange="document.getElementById('ace_simplefilter_30x').submit()" >
-							<option value="all" <%= selected %>>All risks</option>
+							<option value="all" <%= selected %>>All climate impacts</option>
 							<c:set var="selectedImpact" value="<%= selected_impact %>" />
 							<c:forEach var="adaptationClimateImpact" items="<%= nl.wur.alterra.cgi.ace.model.constants.AceItemClimateImpact.values() %>" >	
 							        <option value="${adaptationClimateImpact}"
@@ -93,10 +93,10 @@ String redirect = PortalUtil.getCurrentURL(renderRequest);
 					<!-- added width because IE8 renders a 100% width otherwise -->
 					<div id="sector-selector-div" class="adaptationtools-selector" style="float:left;width:226px;">
 						<span style="margin-left:10px; margin-right:10px;float:left;">
-							Sector
+							Adaptation sector
 						</span>
 						<select id="sector-selector" name="sector-selector" style="float:left;" onchange="document.getElementById('ace_simplefilter_30x').submit()" >
-							<option value="all" <%= selected %>>All sectors</option>
+							<option value="all" <%= selected %>>All adaptation sectors</option>
 							<c:set var="selectedSector" value="<%= selected_sector %>" />
 							<c:forEach var="adaptationSector" items="<%= nl.wur.alterra.cgi.ace.model.constants.AceItemSector.values() %>">	
 							        <option value="${adaptationSector}"
