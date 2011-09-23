@@ -1,0 +1,78 @@
+<c:if test="${fn:length(groupedResults) > 0}">
+
+	<%
+		//
+		// a random postfix is used to relate ids of elements
+		//
+		
+		int itemsOnPage = Integer.parseInt( renderRequest.getPreferences().getValue(Constants.NRITEMSPAGE, "10") ); 
+
+		int r = new java.util.Random().nextInt(Integer.MAX_VALUE);
+		pageContext.setAttribute("unique", "" + r);
+		pageContext.setAttribute("expandedId", "expandedId-" + r);		
+		pageContext.setAttribute("collapsedId", "collapsedId-" + r);
+		pageContext.setAttribute("expandedTitleId", "expandedTitleId-" + r);		
+		pageContext.setAttribute("collapsedTitleId", "collapsedTitleId-" + r);		
+		pageContext.setAttribute("resultsListId", "resultsListId-" + r);
+		pageContext.setAttribute("anyOfTheseId", "anyOfTheseId-" + r);		
+		pageContext.setAttribute("paginationId", "paginationId-" + r);
+		pageContext.setAttribute("demoId", "demoId-" + r);
+	%>
+	
+	<%-- expanded view --%>	
+	<div id="${collapsedId}">
+
+        <c:set var="groupedResults" value="${groupedResults}"/>
+
+		<%-- <div id="oneview" class="collapsedResultsGroupTitle resultsTitle">
+			<c:out value='${groupTitle}' /> 
+		</div>  --%>
+	
+		<c:set var="nrPageItems" value="<%= itemsOnPage %>"/>
+	
+		<div id="${resultsListId}">
+			<c:forEach var="wrappedSearchResult" items="${groupedResults}" begin="0" end="<%= itemsOnPage-1 %>">		
+
+                <c:set var="searchResult" value="${wrappedSearchResult.aceItem}"/>					<div>
+					<div>
+
+						<c:set var="descriptionId" value="descriptionId-${searchResult.aceItemId}" />
+
+						<c:set var="plusId" value="plusId-${searchResult.aceItemId}" />
+
+						<c:set var="minusId" value="minusId-${searchResult.aceItemId}" />
+
+                        <c:set var="descriptionText" value="${wrappedSearchResult.shortdescription}" />	
+						
+						<span id="${plusId}" class="plus toggleshow"><img src="/ace-theme/images/arrows/01_plus.png" /></span>
+						<span id="${minusId}" class="minus togglehide"><img src="/ace-theme/images/arrows/01_minus.png" /></span>
+						<span class="feed-entry-title">
+						<c:choose>
+							<c:when test="${!empty searchResult.storedAt && fn:startsWith(searchResult.storedAt, 'http://')==true}">
+								&nbsp;<a href="<c:out value="${searchResult.storedAt}"/>" target="_blank">
+									<c:out value="${searchResult.name}"/></a>
+							</c:when>
+							<c:when test="${!empty searchResult.storedAt && fn:startsWith(searchResult.storedAt, 'www.')==true}">
+								&nbsp;<a href="<c:out value="http://${searchResult.storedAt}"/>" target="_blank">
+									<c:out value="${searchResult.name}"/></a>
+							</c:when>                            
+							<c:otherwise>
+								&nbsp;<a href="<c:out value="/viewaceitem?aceitem_id=${searchResult.aceItemId}"/>" target="_blank"><c:out value="${searchResult.name}"/></a>
+							</c:otherwise>
+						</c:choose>					
+						</span>
+						<span id="${descriptionId}" class="feed-entry-content togglehide"><c:out value="${descriptionText}" /></span>
+		
+					</div><%-- 
+
+					<div class="resultfooter">
+						<hr class="clearer"/>
+					</div> --%> 
+				</div>
+			</c:forEach>
+		</div>
+
+	</div>
+	
+</c:if>
+	

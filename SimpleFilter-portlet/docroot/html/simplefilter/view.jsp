@@ -121,71 +121,111 @@ String redirect = PortalUtil.getCurrentURL(renderRequest);
 		<c:set var="groupedJSONResults" scope="page" value="${DOCUMENT_JSONsearchResults}"/>
 		<c:set var="aceitemtype" scope="page" value="DOCUMENT"/>
 		<c:set var="groupTitle" scope="page"><liferay-ui:message key="acesearch-datainfotype-lbl-DOCUMENT" /></c:set>
-	
+        
+<% 	if( filter <= 1) {	%>	
         <%@ include file="searchresultsonetype.jspf" %>
+<% } else { %>	
+        <%@ include file="searchresultsgowebsite.jspf" %>
+<% } %>	
 
 		<c:set var="groupedResults" scope="page" value="${INFORMATIONSOURCE_searchResults}"/>
 		<c:set var="groupedJSONResults" scope="page" value="${INFORMATIONSOURCE_JSONsearchResults}"/>
 		<c:set var="aceitemtype" scope="page" value="INFORMATIONSOURCE"/>				
 		<c:set var="groupTitle" scope="page"><liferay-ui:message key="acesearch-datainfotype-lbl-INFORMATIONSOURCE" /></c:set>
 
+<% 	if( filter <= 1) {	%>	
         <%@ include file="searchresultsonetype.jspf" %>
+<% } else { %>	
+        <%@ include file="searchresultsgowebsite.jspf" %>
+<% } %>
 
         <c:set var="groupedResults" scope="page" value="${GUIDANCE_searchResults}"/>
         <c:set var="groupedJSONResults" scope="page" value="${GUIDANCE_JSONsearchResults}"/>
         <c:set var="aceitemtype" scope="page" value="GUIDANCE"/>
         <c:set var="groupTitle" scope="page"><liferay-ui:message key="acesearch-datainfotype-lbl-GUIDANCE" /></c:set>
 
+<% 	if( filter <= 1) {	%>	
         <%@ include file="searchresultsonetype.jspf" %>
+<% } else { %>	
+        <%@ include file="searchresultsgowebsite.jspf" %>
+<% } %>
 
         <c:set var="groupedResults" scope="page" value="${TOOL_searchResults}"/>
         <c:set var="groupedJSONResults" scope="page" value="${TOOL_JSONsearchResults}"/>
         <c:set var="aceitemtype" scope="page" value="TOOL"/>
         <c:set var="groupTitle" scope="page"><liferay-ui:message key="acesearch-datainfotype-lbl-TOOL" /></c:set>
 
+<% 	if( filter <= 1) {	%>	
         <%@ include file="searchresultsonetype.jspf" %>
+<% } else { %>	
+        <%@ include file="searchresultsgowebsite.jspf" %>
+<% } %>
 
 		<c:set var="groupedResults" scope="page" value="${MAPGRAPHDATASET_searchResults}"/>
 		<c:set var="groupedJSONResults" scope="page" value="${MAPGRAPHDATASET_JSONsearchResults}"/>
 		<c:set var="aceitemtype" scope="page" value="MAPGRAPHDATASET"/>		
 		<c:set var="groupTitle" scope="page"><liferay-ui:message key="acesearch-datainfotype-lbl-MAPGRAPHDATASET" /></c:set>
 
+<% 	if( filter <= 1) {	%>	
         <%@ include file="searchresultsonetype.jspf" %>
+<% } else { %>	
+        <%@ include file="searchresultsgowebsite.jspf" %>
+<% } %>
 
         <c:set var="groupedResults" scope="page" value="${INDICATOR_searchResults}"/>
 		<c:set var="groupedJSONResults" scope="page" value="${INDICATOR_JSONsearchResults}"/>
 		<c:set var="aceitemtype" scope="page" value="INDICATOR"/>
 		<c:set var="groupTitle" scope="page"><liferay-ui:message key="acesearch-datainfotype-lbl-INDICATOR" /></c:set>
 
+<% 	if( filter <= 1) {	%>	
         <%@ include file="searchresultsonetype.jspf" %>
+<% } else { %>	
+        <%@ include file="searchresultsgowebsite.jspf" %>
+<% } %>
 
         <c:set var="groupedResults" scope="page" value="${RESEARCHPROJECT_searchResults}"/>
 		<c:set var="groupedJSONResults" scope="page" value="${RESEARCHPROJECT_JSONsearchResults}"/>
 		<c:set var="aceitemtype" scope="page" value="RESEARCHPROJECT"/>
 		<c:set var="groupTitle" scope="page"><liferay-ui:message key="acesearch-datainfotype-lbl-RESEARCHPROJECT" /></c:set>
 
+<% 	if( filter <= 1) {	%>	
         <%@ include file="searchresultsonetype.jspf" %>
+<% } else { %>	
+        <%@ include file="searchresultsgowebsite.jspf" %>
+<% } %>
 
         <c:set var="groupedResults" scope="page" value="${MEASURE_searchResults}"/>
 		<c:set var="groupedJSONResults" scope="page" value="${MEASURE_JSONsearchResults}"/>
 		<c:set var="aceitemtype" scope="page" value="MEASURE"/>
 		<c:set var="groupTitle" scope="page"><liferay-ui:message key="acesearch-datainfotype-lbl-MEASURE" /></c:set>
 
+<% 	if( filter <= 1) {	%>	
         <%@ include file="searchresultsonetype.jspf" %>
+<% } else { %>	
+        <%@ include file="searchresultsgowebsite.jspf" %>
+<% } %>
 
         <c:set var="groupedResults" scope="page" value="${ACTION_searchResults}"/>
 		<c:set var="groupedJSONResults" scope="page" value="${ACTION_JSONsearchResults}"/>
 		<c:set var="aceitemtype" scope="page" value="ACTION"/>
 		<c:set var="groupTitle" scope="page"><liferay-ui:message key="acesearch-datainfotype-lbl-ACTION" /></c:set>
 
+<% 	if( filter <= 1) {	%>	
         <%@ include file="searchresultsonetype.jspf" %>
+<% } else { %>	
+        <%@ include file="searchresultsgowebsite.jspf" %>
+<% } %>
 
         <c:set var="groupedResults" scope="page" value="${ORGANISATION_searchResults}"/>
 		<c:set var="groupedJSONResults" scope="page" value="${ORGANISATION_JSONsearchResults}"/>
 		<c:set var="aceitemtype" scope="page" value="ORGANISATION"/>
 		<c:set var="groupTitle" scope="page"><liferay-ui:message key="acesearch-datainfotype-lbl-ORGANISATION" /></c:set>
 
+<% 	if( filter <= 1) {	%>	
         <%@ include file="searchresultsonetype.jspf" %>
+<% } else { %>	
+        <%@ include file="searchresultsgowebsite.jspf" %>
+<% } %>
 		
 		<%-- TODO all types --%>
 
