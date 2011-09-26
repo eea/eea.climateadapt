@@ -42,8 +42,9 @@
             </div>
             
             <div id="searchbox">
-            	#set ($instanceId = "Ox2x")
-				#set ($myPortletId = "SimpleSearchPortlet_WAR_Marsportlet_INSTANCE_${instanceId}")
+            	<p id="search-title">Search the CHM database</p>
+            	#set ($instanceId = "0oHV")
+				#set ($myPortletId = "simplesearchportlet_WAR_AceSearchportlet_INSTANCE_${instanceId}")
 				$taglibLiferay.runtime($myPortletId, '', $velocityPortletPreferences.toString())
 				$velocityPortletPreferences.reset()
 			</div>

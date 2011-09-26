@@ -479,6 +479,16 @@ body #banner .logo a {
 	top: 50px;
 }
 
+#search-title {
+	color: #FFF;
+	float: left;
+	padding: 4px 10px 0 0;
+}
+
+#p_p_id_simplesearchportlet_WAR_AceSearchportlet_INSTANCE_0oHV_ {
+	float: left;
+}
+
 #searchbox .portlet-topper {
 	display: none;
 }
@@ -491,16 +501,13 @@ body #banner .logo a {
 	display: none;
 }
 
-#searchbox input[type="button"] {
-	background: #074a8b;
-	border: none; 
-	border-radius:0px;
-	color: #FFF;
-	text-shadow:none; 
+#searchbox .portlet-content img {
+	position: relative;
+	top: 4px;
 }
 
-#searchbox input[type="button"]:hover {
-	background: #A5BF26;
+#searchbox .portlet-content img:hover {
+	cursor: pointer;
 }
 
 /**** Second level menu ****/
@@ -1189,7 +1196,34 @@ the search column.
 	padding: 15px;
 }
 
-.transnational-search .portlet-title {
+.transnational-search .portlet-title,
+.transnationalregion #column-3 .portlet-title {
 	color: #758816;
 }
 
+.transnationalregion .region-list select {
+	width: 145px;
+}
+
+.transnationalregion #column-2 {
+	background: url("../images/bg_sector_main_article_text.png") repeat-y scroll 5% center transparent;
+	padding: 15px;
+}
+
+.transnationalregion #column-2 .portlet-title {
+	color: 	#02213D;
+	padding-bottom:5px
+}
+
+.transnationalregion #column-2 .title {
+	font-size:13px
+}
+
+.transnationalregion #assessments {
+	margin-top:20px;
+}
+                            
+.transnationalregion #column-3 {
+	background-color: #D2DF92;
+	padding: 15px;
+}
