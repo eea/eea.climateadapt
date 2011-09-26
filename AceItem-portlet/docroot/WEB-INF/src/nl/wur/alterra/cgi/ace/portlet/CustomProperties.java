@@ -37,6 +37,7 @@ public class CustomProperties {
     /**
      * Initializes custom properties.
      *
+     * @throws CustomPropertiesNotInitializedException hmm	 
      */
     public synchronized static void init() throws CustomPropertiesNotInitializedException {
         properties = new Properties();
