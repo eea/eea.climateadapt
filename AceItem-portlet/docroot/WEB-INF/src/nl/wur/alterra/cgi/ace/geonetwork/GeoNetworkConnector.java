@@ -2,6 +2,8 @@ package nl.wur.alterra.cgi.ace.geonetwork;
 
 import com.liferay.portal.kernel.exception.SystemException;
 import nl.wur.alterra.cgi.ace.model.WxsHarvester;
+import nl.wur.alterra.cgi.ace.portlet.CustomProperties;
+import nl.wur.alterra.cgi.ace.portlet.CustomPropertiesNotInitializedException;
 import nl.wur.alterra.cgi.ace.util.HTTPUtils;
 
 /**
@@ -13,63 +15,27 @@ public class GeoNetworkConnector {
 
     /**
      * Constructor relying on hard-coded values for GN base url and credentials.
-     * @deprecated use GeoNetworkConnector(String geoNetworkBaseUrl, String username, String password)
      */
-    public GeoNetworkConnector() {
-        // localhost
-        // this.geoNetworkBaseURL = "http://localhost:8081/geonetwork";
-        // ACE dev server
-        this.geoNetworkBaseURL = "http://dev.ace.geocat.net/geonetwork";
-        this.GeoNetworkLoginURL  = geoNetworkBaseURL + "/srv/en/xml.user.login";
-        this.GeoNetworkAddHarvesterURL  = geoNetworkBaseURL + "/srv/en/xml.harvesting.add";
-        this.GeoNetworkRemoveHarvesterURL  = geoNetworkBaseURL + "/srv/en/xml.harvesting.remove";
-        this.GeoNetworkUpdateHarvesterURL  = geoNetworkBaseURL + "/srv/en/xml.harvesting.update";
-        this.GeoNetworkStartHarvesterURL  = geoNetworkBaseURL + "/srv/en/xml.harvesting.start";
-        this.GeoNetworkStopHarvesterURL  = geoNetworkBaseURL + "/srv/en/xml.harvesting.stop";
-        this.GeoNetworkRunHarvesterURL  = geoNetworkBaseURL + "/srv/en/xml.harvesting.run";
-        this.GeoNetworkGetHarvesterURL  = geoNetworkBaseURL + "/srv/en/xml.harvesting.get";
-        this.GeoNetworkXMLSearchURL  = geoNetworkBaseURL + "/srv/en/xml.search";
-        // GN default
-        this.username = "admin";
-        this.password = "admin";
-        // ACE dev server
-        this.username = "admin";
-        this.password = "test20ace11";
-    }
-
-    /**
-     * Constructor with configurable base url, relying on hard-coded credentials.
-     *
-     * @param geoNetworkBaseUrl base url to GeoNetwork
-     *
-     * @deprecated use GeoNetworkConnector(String geoNetworkBaseUrl, String username, String password)
-     */
-    public GeoNetworkConnector(String geoNetworkBaseUrl) {
-        this.geoNetworkBaseURL = geoNetworkBaseUrl;
-        this.GeoNetworkLoginURL  = geoNetworkBaseURL + "/srv/en/xml.user.login";
-        this.GeoNetworkAddHarvesterURL  = geoNetworkBaseURL + "/srv/en/xml.harvesting.add";
-        this.GeoNetworkRemoveHarvesterURL  = geoNetworkBaseURL + "/srv/en/xml.harvesting.remove";
-        this.GeoNetworkUpdateHarvesterURL  = geoNetworkBaseURL + "/srv/en/xml.harvesting.update";
-        this.GeoNetworkStartHarvesterURL  = geoNetworkBaseURL + "/srv/en/xml.harvesting.start";
-        this.GeoNetworkStopHarvesterURL  = geoNetworkBaseURL + "/srv/en/xml.harvesting.stop";
-        this.GeoNetworkRunHarvesterURL  = geoNetworkBaseURL + "/srv/en/xml.harvesting.run";
-        this.GeoNetworkGetHarvesterURL  = geoNetworkBaseURL + "/srv/en/xml.harvesting.get";
-        this.GeoNetworkXMLSearchURL  = geoNetworkBaseURL + "/srv/en/xml.search";
-        this.username = "admin";
-        this.password = "admin";
-    }
-
-    /**
-     * Constructor with configurable base url, username and password.
-     *
-     * @param geoNetworkBaseUrl base url to GeoNetwork
-     * @param username username to log in to GeoNetwork
-     * @param password password to log in to GeoNetwork
-     */
-    public GeoNetworkConnector(String geoNetworkBaseUrl, String username, String password) {
-        this.geoNetworkBaseURL = geoNetworkBaseUrl;
-        this.username = username;
-        this.password = password;
+    public GeoNetworkConnector() throws ExceptionInInitializerError {
+        try {
+            // configurable properties
+            this.geoNetworkBaseURL = CustomProperties.getProperty(CustomProperties.GEONETWORK_BASE_URL);
+            this.username = CustomProperties.getProperty(CustomProperties.GEONETWORK_ADMIN_USERNAME);
+            this.password = CustomProperties.getProperty(CustomProperties.GEONETWORK_ADMIN_PASSWORD);
+            // hardcoded properties
+            this.GeoNetworkLoginURL  = geoNetworkBaseURL + "/srv/en/xml.user.login";
+            this.GeoNetworkAddHarvesterURL  = geoNetworkBaseURL + "/srv/en/xml.harvesting.add";
+            this.GeoNetworkRemoveHarvesterURL  = geoNetworkBaseURL + "/srv/en/xml.harvesting.remove";
+            this.GeoNetworkUpdateHarvesterURL  = geoNetworkBaseURL + "/srv/en/xml.harvesting.update";
+            this.GeoNetworkStartHarvesterURL  = geoNetworkBaseURL + "/srv/en/xml.harvesting.start";
+            this.GeoNetworkStopHarvesterURL  = geoNetworkBaseURL + "/srv/en/xml.harvesting.stop";
+            this.GeoNetworkRunHarvesterURL  = geoNetworkBaseURL + "/srv/en/xml.harvesting.run";
+            this.GeoNetworkGetHarvesterURL  = geoNetworkBaseURL + "/srv/en/xml.harvesting.get";
+            this.GeoNetworkXMLSearchURL  = geoNetworkBaseURL + "/srv/en/xml.search";
+        }
+        catch(CustomPropertiesNotInitializedException x) {
+            throw new ExceptionInInitializerError(x);
+        }
     }
 
     private String username ;
