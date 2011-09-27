@@ -112,7 +112,7 @@
 			$j('#country-selection-list').value = area;
 			$j('#' + area + '-option').attr("selected", true);
 
-			document.location.replace('/countries/' + document.getElementById(area + '-option').innerHTML.toLowerCase().replace(' ','-') );
+			document.location.href = '/countries/' + document.getElementById(area + '-option').innerHTML.toLowerCase().replace(' ','-') ;
 		}		
 		return false;
 	}
@@ -159,6 +159,7 @@
 	
 		<p>
 		<select id="country-selection-list"  style="margin-top:5px;">
+			<option id="no-selection-option" value="" selected="selected">Choose a country </option>
 			<option id="AT-option" value="AT">Austria</option>
 			<option id="BE-option" value="BE">Belgium</option>
 			<option id="BG-option" value="BG">Bulgaria</option>
