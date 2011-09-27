@@ -108,7 +108,7 @@
 	var actual_image = "europe";
 	var selectedCountry = '';
 	
-	var countries = ['AT', 'BE', 'BG', 'CH', 'CY', 'CZ', 'DE', 'DK', 'EE', 'ES', 'FI', 'FR', 'GB', 'GR', 'HU', 'IR', 'IT', 'IS', 'LT', 'LV', 'MT', 'NL', 'NO', 'PL', 'PT', 'RO', 'SE', 'SI', 'SK'];
+	var countries = ['AT', 'BE', 'BG', 'CH', 'CY', 'CZ', 'DE', 'DK', 'EE', 'ES', 'FI', 'FR', 'GB', 'GR', 'HU', 'IR', 'IT', 'IS', 'LT', 'LV', 'LU', 'MT', 'NL', 'NO', 'PL', 'PT', 'RO', 'SE', 'SI', 'SK'];
 	
 	function highlight(area) {
 		$j("#"+ actual_image+'_selected').hide();
@@ -200,6 +200,7 @@
 		<img id="IS_selected" src="<%=renderRequest.getContextPath()%>/images/countryselectionmap/IS.png" width="500" height="375" border="0" usemap="#Map" style="display:none;"/>
 		<img id="IT_selected" src="<%=renderRequest.getContextPath()%>/images/countryselectionmap/IT.png" width="500" height="375" border="0" usemap="#Map" style="display:none;"/>
 		<img id="LT_selected" src="<%=renderRequest.getContextPath()%>/images/countryselectionmap/LT.png" width="500" height="375" border="0" usemap="#Map" style="display:none;"/>
+		<img id="LU_selected" src="<%=renderRequest.getContextPath()%>/images/countryselectionmap/LU.png" width="500" height="375" border="0" usemap="#Map" style="display:none;"/>
 		<img id="LV_selected" src="<%=renderRequest.getContextPath()%>/images/countryselectionmap/LV.png" width="500" height="375" border="0" usemap="#Map" style="display:none;"/>
 		<img id="MT_selected" src="<%=renderRequest.getContextPath()%>/images/countryselectionmap/MT.png" width="500" height="375" border="0" usemap="#Map" style="display:none;"/>
 		<img id="NL_selected" src="<%=renderRequest.getContextPath()%>/images/countryselectionmap/NL.png" width="500" height="375" border="0" usemap="#Map" style="display:none;"/>
@@ -238,16 +239,6 @@
 			<hr class="clearer"/>
 			
 			<div style="width:500px;">
-				<div style="background:#fff;width:30px;height:15px;float:left;">
-					<img src="<%=renderRequest.getContextPath()%>/images/icons/pinstripes.png" border="0"/>
-				</div>
-				<div style="height:15px;float:left;margin-left:10px;">
-					Not included in study, following (EEA, 2008)
-				</div>			
-			</div>
-			<hr class="clearer"/>
-			
-			<div style="width:500px;">
 				<div style="background:#bbb;width:30px;height:15px;float:left;"> </div>
 				<div style="height:15px;float:left;margin-left:10px;">
 					No information available
@@ -276,9 +267,10 @@
 			<option id="HU-option" value="HU">Hungary</option>
 			<option id="IR-option" value="IR">Ireland</option>
 			<option id="IS-option" value="IS">Iceland</option>
-			<option id="IT-option" value="IS">Italy</option>
+			<option id="IT-option" value="IT">Italy</option>
 			<option id="LT-option" value="LT">Lithuania</option>
 			<option id="LV-option" value="LV">Latvia</option>
+			<option id="LU-option" value="LU">Luxembourg</option>
 			<option id="MT-option" value="MT">Malta</option>
 			<option id="NL-option" value="NL">Netherlands</option>
 			<option id="NO-option" value="NO">Norvegia</option>
@@ -330,6 +322,8 @@
 <area shape="poly" coords="337,157,339,167,347,166,350,168,350,173,353,173,356,177,361,176,366,172,369,171,366,164,373,160,370,155,359,149,347,152,340,153" href="#LT" alt="lithuania"  onclick="return select('LT')" onmouseover="highlight('LT');" onmouseout="unhighlight('LT');"/>
 <!-- latvia -->
 <area shape="poly" coords="352,134,357,133,363,135,366,136,370,135,377,147,376,152,371,155,359,150,350,151,341,154,338,154,334,145,336,142,342,139,345,141,351,145,353,143" href="#LV" alt="latvia"  onclick="return select('LV')" onmouseover="highlight('LV');" onmouseout="unhighlight('LV');"/>
+<!-- luxembourg -->
+<area shape="poly" coords="247,222,251,222,252,226,253,230,248,229,245,225"  href="#LU" alt="luxembourg"  onclick="return select('LU')" onmouseover="highlight('LU');" onmouseout="unhighlight('LU');"/>					
 <!-- malta -->
 <area shape="poly" coords="309,362,313,363,315,368,310,368,308,365" href="#MT" alt="malta"  onclick="return select('MT')" onmouseover="highlight('MT');" onmouseout="unhighlight('MT');"/>					
 <!-- netherlands -->
