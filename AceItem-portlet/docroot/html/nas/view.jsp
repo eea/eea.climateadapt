@@ -108,7 +108,7 @@
 	var actual_image = "europe";
 	var selectedCountry = '';
 	
-	var countries = ['AT', 'BE', 'CH', 'CY', 'CZ', 'DE', 'DK', 'EE', 'ES', 'FI', 'FR', 'GB', 'GR', 'HU', 'IR', 'IS', 'LT', 'LV', 'MT', 'NL', 'NO', 'PL', 'PT', 'RO', 'SE'];
+	var countries = ['AT', 'BE', 'BG', 'CH', 'CY', 'CZ', 'DE', 'DK', 'EE', 'ES', 'FI', 'FR', 'GB', 'GR', 'HU', 'IR', 'IT', 'IS', 'LT', 'LV', 'MT', 'NL', 'NO', 'PL', 'PT', 'RO', 'SE', 'SI', 'SK'];
 	
 	function highlight(area) {
 		$j("#"+ actual_image+'_selected').hide();
@@ -180,32 +180,36 @@
     <!-- Map colum -->
     <div id="nas_left_column" class="nas_column">
 
-		<img id="europe_selected" src="<%=renderRequest.getContextPath()%>/images/countryselectionmap/europe.png" width="511" height="515" border="0" usemap="#Map" style="display:block;"/>
-		<img id="AT_selected" src="<%=renderRequest.getContextPath()%>/images/countryselectionmap/AT.png" width="511" height="515" border="0" usemap="#Map" style="display:none;"/>
-		<img id="BE_selected" src="<%=renderRequest.getContextPath()%>/images/countryselectionmap/BE.png" width="511" height="515" border="0" usemap="#Map" style="display:none;" />
-		<img id="CH_selected" src="<%=renderRequest.getContextPath()%>/images/countryselectionmap/CH.png" width="511" height="515" border="0" usemap="#Map" style="display:none;" />
-		<img id="CY_selected" src="<%=renderRequest.getContextPath()%>/images/countryselectionmap/CY.png" width="511" height="515" border="0" usemap="#Map" style="display:none;" />
-		<img id="CZ_selected" src="<%=renderRequest.getContextPath()%>/images/countryselectionmap/CZ.png" width="511" height="515" border="0" usemap="#Map" style="display:none;" />
-		<img id="DE_selected" src="<%=renderRequest.getContextPath()%>/images/countryselectionmap/DE.png" width="511" height="515" border="0" usemap="#Map" style="display:none;"/>
-		<img id="DK_selected" src="<%=renderRequest.getContextPath()%>/images/countryselectionmap/DK.png" width="511" height="515" border="0" usemap="#Map" style="display:none;"/>
-		<img id="EE_selected" src="<%=renderRequest.getContextPath()%>/images/countryselectionmap/EE.png" width="511" height="515" border="0" usemap="#Map" style="display:none;"/>
-		<img id="ES_selected" src="<%=renderRequest.getContextPath()%>/images/countryselectionmap/ES.png" width="511" height="515" border="0" usemap="#Map" style="display:none;"/>
-		<img id="FI_selected" src="<%=renderRequest.getContextPath()%>/images/countryselectionmap/FI.png" width="511" height="515" border="0" usemap="#Map" style="display:none;"/>
-		<img id="FR_selected" src="<%=renderRequest.getContextPath()%>/images/countryselectionmap/FR.png" width="511" height="515" border="0" usemap="#Map" style="display:none;"/>
-		<img id="GB_selected" src="<%=renderRequest.getContextPath()%>/images/countryselectionmap/GB.png" width="511" height="515" border="0" usemap="#Map" style="display:none;"/>
-		<img id="GR_selected" src="<%=renderRequest.getContextPath()%>/images/countryselectionmap/GR.png" width="511" height="515" border="0" usemap="#Map" style="display:none;"/>
-		<img id="HU_selected" src="<%=renderRequest.getContextPath()%>/images/countryselectionmap/HU.png" width="511" height="515" border="0" usemap="#Map" style="display:none;"/>
-		<img id="IR_selected" src="<%=renderRequest.getContextPath()%>/images/countryselectionmap/IR.png" width="511" height="515" border="0" usemap="#Map" style="display:none;"/>
-		<img id="IS_selected" src="<%=renderRequest.getContextPath()%>/images/countryselectionmap/IS.png" width="511" height="515" border="0" usemap="#Map" style="display:none;"/>
-		<img id="LT_selected" src="<%=renderRequest.getContextPath()%>/images/countryselectionmap/LT.png" width="511" height="515" border="0" usemap="#Map" style="display:none;"/>
-		<img id="LV_selected" src="<%=renderRequest.getContextPath()%>/images/countryselectionmap/LV.png" width="511" height="515" border="0" usemap="#Map" style="display:none;"/>
-		<img id="MT_selected" src="<%=renderRequest.getContextPath()%>/images/countryselectionmap/MT.png" width="511" height="515" border="0" usemap="#Map" style="display:none;"/>
-		<img id="NL_selected" src="<%=renderRequest.getContextPath()%>/images/countryselectionmap/NL.png" width="511" height="515" border="0" usemap="#Map" style="display:none;"/>
-		<img id="NO_selected" src="<%=renderRequest.getContextPath()%>/images/countryselectionmap/NO.png" width="511" height="515" border="0" usemap="#Map" style="display:none;"/>
-		<img id="PL_selected" src="<%=renderRequest.getContextPath()%>/images/countryselectionmap/PL.png" width="511" height="515" border="0" usemap="#Map" style="display:none;"/>
-		<img id="PT_selected" src="<%=renderRequest.getContextPath()%>/images/countryselectionmap/PT.png" width="511" height="515" border="0" usemap="#Map" style="display:none;"/>
-		<img id="RO_selected" src="<%=renderRequest.getContextPath()%>/images/countryselectionmap/RO.png" width="511" height="515" border="0" usemap="#Map" style="display:none;"/>
-		<img id="SE_selected" src="<%=renderRequest.getContextPath()%>/images/countryselectionmap/SE.png" width="511" height="515" border="0" usemap="#Map" style="display:none;"/>
+		<img id="europe_selected" src="<%=renderRequest.getContextPath()%>/images/countryselectionmap/europe.png" width="500" height="375" border="0" usemap="#Map" style="display:block;"/>
+		<img id="AT_selected" src="<%=renderRequest.getContextPath()%>/images/countryselectionmap/AT.png" width="500" height="375" border="0" usemap="#Map" style="display:none;"/>
+		<img id="BE_selected" src="<%=renderRequest.getContextPath()%>/images/countryselectionmap/BE.png" width="500" height="375" border="0" usemap="#Map" style="display:none;" />
+		<img id="BG_selected" src="<%=renderRequest.getContextPath()%>/images/countryselectionmap/BG.png" width="500" height="375" border="0" usemap="#Map" style="display:none;" />
+		<img id="CH_selected" src="<%=renderRequest.getContextPath()%>/images/countryselectionmap/CH.png" width="500" height="375" border="0" usemap="#Map" style="display:none;" />
+		<img id="CY_selected" src="<%=renderRequest.getContextPath()%>/images/countryselectionmap/CY.png" width="500" height="375" border="0" usemap="#Map" style="display:none;" />
+		<img id="CZ_selected" src="<%=renderRequest.getContextPath()%>/images/countryselectionmap/CZ.png" width="500" height="375" border="0" usemap="#Map" style="display:none;" />
+		<img id="DE_selected" src="<%=renderRequest.getContextPath()%>/images/countryselectionmap/DE.png" width="500" height="375" border="0" usemap="#Map" style="display:none;"/>
+		<img id="DK_selected" src="<%=renderRequest.getContextPath()%>/images/countryselectionmap/DK.png" width="500" height="375" border="0" usemap="#Map" style="display:none;"/>
+		<img id="EE_selected" src="<%=renderRequest.getContextPath()%>/images/countryselectionmap/EE.png" width="500" height="375" border="0" usemap="#Map" style="display:none;"/>
+		<img id="ES_selected" src="<%=renderRequest.getContextPath()%>/images/countryselectionmap/ES.png" width="500" height="375" border="0" usemap="#Map" style="display:none;"/>
+		<img id="FI_selected" src="<%=renderRequest.getContextPath()%>/images/countryselectionmap/FI.png" width="500" height="375" border="0" usemap="#Map" style="display:none;"/>
+		<img id="FR_selected" src="<%=renderRequest.getContextPath()%>/images/countryselectionmap/FR.png" width="500" height="375" border="0" usemap="#Map" style="display:none;"/>
+		<img id="GB_selected" src="<%=renderRequest.getContextPath()%>/images/countryselectionmap/GB.png" width="500" height="375" border="0" usemap="#Map" style="display:none;"/>
+		<img id="GR_selected" src="<%=renderRequest.getContextPath()%>/images/countryselectionmap/GR.png" width="500" height="375" border="0" usemap="#Map" style="display:none;"/>
+		<img id="HU_selected" src="<%=renderRequest.getContextPath()%>/images/countryselectionmap/HU.png" width="500" height="375" border="0" usemap="#Map" style="display:none;"/>
+		<img id="IR_selected" src="<%=renderRequest.getContextPath()%>/images/countryselectionmap/IR.png" width="500" height="375" border="0" usemap="#Map" style="display:none;"/>
+		<img id="IS_selected" src="<%=renderRequest.getContextPath()%>/images/countryselectionmap/IS.png" width="500" height="375" border="0" usemap="#Map" style="display:none;"/>
+		<img id="IT_selected" src="<%=renderRequest.getContextPath()%>/images/countryselectionmap/IT.png" width="500" height="375" border="0" usemap="#Map" style="display:none;"/>
+		<img id="LT_selected" src="<%=renderRequest.getContextPath()%>/images/countryselectionmap/LT.png" width="500" height="375" border="0" usemap="#Map" style="display:none;"/>
+		<img id="LV_selected" src="<%=renderRequest.getContextPath()%>/images/countryselectionmap/LV.png" width="500" height="375" border="0" usemap="#Map" style="display:none;"/>
+		<img id="MT_selected" src="<%=renderRequest.getContextPath()%>/images/countryselectionmap/MT.png" width="500" height="375" border="0" usemap="#Map" style="display:none;"/>
+		<img id="NL_selected" src="<%=renderRequest.getContextPath()%>/images/countryselectionmap/NL.png" width="500" height="375" border="0" usemap="#Map" style="display:none;"/>
+		<img id="NO_selected" src="<%=renderRequest.getContextPath()%>/images/countryselectionmap/NO.png" width="500" height="375" border="0" usemap="#Map" style="display:none;"/>
+		<img id="PL_selected" src="<%=renderRequest.getContextPath()%>/images/countryselectionmap/PL.png" width="500" height="375" border="0" usemap="#Map" style="display:none;"/>
+		<img id="PT_selected" src="<%=renderRequest.getContextPath()%>/images/countryselectionmap/PT.png" width="500" height="375" border="0" usemap="#Map" style="display:none;"/>
+		<img id="RO_selected" src="<%=renderRequest.getContextPath()%>/images/countryselectionmap/RO.png" width="500" height="375" border="0" usemap="#Map" style="display:none;"/>
+		<img id="SE_selected" src="<%=renderRequest.getContextPath()%>/images/countryselectionmap/SE.png" width="500" height="375" border="0" usemap="#Map" style="display:none;"/>
+		<img id="SI_selected" src="<%=renderRequest.getContextPath()%>/images/countryselectionmap/SI.png" width="500" height="375" border="0" usemap="#Map" style="display:none;"/>
+		<img id="SK_selected" src="<%=renderRequest.getContextPath()%>/images/countryselectionmap/SK.png" width="500" height="375" border="0" usemap="#Map" style="display:none;"/>
 	
 		<div style="width:300px;margin:10px 0px;">
 		
@@ -257,6 +261,7 @@
 			<option id="no-selection-option" value="" selected="selected">No country selected</option>
 			<option id="AT-option" value="AT">Austria</option>
 			<option id="BE-option" value="BE">Belgium</option>
+			<option id="BG-option" value="BG">Bulgaria</option>
 			<option id="CH-option" value="CH">Switzerland</option>
 			<option id="CY-option" value="CY">Cyprus</option>
 			<option id="CZ-option" value="CZ">Czech Republic</option>
@@ -271,6 +276,7 @@
 			<option id="HU-option" value="HU">Hungary</option>
 			<option id="IR-option" value="IR">Ireland</option>
 			<option id="IS-option" value="IS">Iceland</option>
+			<option id="IT-option" value="IS">Italy</option>
 			<option id="LT-option" value="LT">Lithuania</option>
 			<option id="LV-option" value="LV">Latvia</option>
 			<option id="MT-option" value="MT">Malta</option>
@@ -280,67 +286,74 @@
 			<option id="PT-option" value="PT">Portugal</option>
 			<option id="RO-option" value="RO">Romania</option>
 			<option id="SE-option" value="SE">Sweden</option>
+			<option id="SI-option" value="SI">Slovenia</option>
+			<option id="SK-option" value="SK">Slovakia</option>
 		</select>
 		<button style="margin-top:5px;" onclick="clearSelection();">clear</button>
 
 		<map name="Map" id="country-selection-map">
-			<!-- austria -->
-			<area shape="poly" coords="225,349,232,350,236,354,240,351,249,350,252,355,262,357,274,357,277,353,285,352,289,346,289,338,295,337,294,331,292,323,284,323,275,321,272,326,266,327,261,329,258,333,259,340,251,342,246,343,235,343,228,343" href="#AT" alt="austria"  onclick="return select('AT')" onmouseover="highlight('AT');" onmouseout="unhighlight('AT');"/>
-			<!-- belgium -->
-			<area shape="poly" coords="162, 289, 165, 295, 168, 295, 168, 299, 172, 301, 176, 301, 176, 306, 180, 307, 182, 306, 182, 310, 188, 314, 191, 314, 190, 311, 190, 308, 191, 305, 194, 305, 196, 302, 194, 297, 190, 297, 190, 294, 191, 292, 188, 289, 183, 286, 179, 287, 175, 289, 171, 288, 169, 286"href="#BE" alt="belgium" onclick="return select('BE')" onmouseover="highlight('BE');" onmouseout="unhighlight('BE');"/>
-			<!-- cyprus -->
-			<area shape="poly" coords="479,477,506,459,509,464,505,477, 492,487,484,485,479,477" href="#CY"alt="cyprus"  onclick="return select('CY')" onmouseover="highlight('CY');" onmouseout="unhighlight('CY');" />
-			<!-- czech republic -->
-			<area shape="poly" coords="265,326,273,326,276,321,283,323,293,323,299,321,304,317,303,314,309,310,306,305,302,303,299,304,297,301,292,300,291,303,286,300,286,296,275,293,268,293,262,298,252,303,248,307,252,314,258,317" href="#CZ" alt="czech republic"  onclick="return select('CZ')" onmouseover="highlight('CZ');" onmouseout="unhighlight('CZ');"/>
-			<!-- denmark -->
-			<area shape="poly" coords="216,241,228,242,235,242,241,244,245,245,249,239,248,232,250,230,249,223,244,223,240,224,237,227,232,229,232,223,237,218,232,215,233,209,238,207,233,199,228,202,225,207,217,208,215,214,213,222,213,230" href="#DK" alt="denmark"  onclick="return select('DK')" onmouseover="highlight('DK');" onmouseout="unhighlight('DK');"/>
-			<!-- estonia -->
-			<area shape="poly" coords="318,191,321,186,327,182,334,187,340,184,345,184,350,186,355,185,359,187,361,182,356,172,355,167,358,161,351,160,339,160,333,163,327,167,319,174,315,176,315,182" href="#EE"  alt="estonia"  onclick="return select('EE')" onmouseover="highlight('EE');" onmouseout="unhighlight('EE');"/>
-			<!-- finland -->
-			<area shape="poly" coords="320,163,351,147,365,112,365,107,360,102,352,98,354,94,352,90,348,84,345,83,345,78,344,73,343,68,334,58,333,51,336,46,330,41,326,41,323,37,323,33,322,30,322,20,315,17,310,19,308,23,307,28,308,33,305,38,300,38,297,41,291,39,286,34,284,38,286,40,289,44,295,44,299,49,302,57,306,63,306,71,309,78,317,81,315,88,315,96,308,106,304,116,299,116,302,120,300,128,302,135,305,148,305,154,308,160" href="#FI" alt="finland"  onclick="return select('FI')" onmouseover="highlight('FI');" onmouseout="unhighlight('FI');"/>
-			<area shape="poly" coords="300,164,295,159,298,156,302,159,304,163" href="FI" alt="finland"  onclick="return select('FI')" onmouseover="highlight('FI');" onmouseout="unhighlight('FI');"/>
-			<!-- france -->
-			<area shape="poly" coords="157,408,151,410,138,403,128,402,115,398,111,392,106,391,113,388,119,364,116,352,110,344,110,336,104,335,104,331,94,327,89,316,108,313,112,318,120,317,123,319,121,312,120,303,127,304,128,309,136,311,139,306,145,303,153,301,153,291,161,289,164,294,167,295,169,299,173,301,176,302,176,307,180,307,182,310,188,314,191,316,196,316,200,320,203,322,206,319,212,322,206,335,206,341,201,341,195,348,191,352,189,356,188,361,192,362,195,358,197,358,197,362,197,365,201,373,196,375,195,377,198,380,196,387,204,391,204,395,195,402,187,405,178,400,169,397,162,398,157,403" href="#FR" alt="france"  onclick="return select('FR')" onmouseover="highlight('FR');" onmouseout="unhighlight('FR');"/>
-			<area shape="poly" coords="220,430,225,419,223,406,221,409,215,411,213,416,214,422,217,428" href="#FR" alt="france"  onclick="return select('FR')" onmouseover="highlight('FR');" onmouseout="unhighlight('FR');"/>
-			<!-- germany -->
-			<area shape="poly" coords="201,258,207,263,205,269,204,276,202,281,195,282,197,287,195,297,197,302,194,305,197,310,196,315,203,321,207,318,213,321,207,335,207,341,213,339,222,340,226,343,248,342,257,340,258,331,264,326,248,306,267,293,272,292,272,285,269,274,263,266,265,259,265,252,258,243,253,244,248,247,240,251,238,245,233,246,229,243,218,242,218,249,218,254" href="#DE"  alt="germany"  onclick="return select('DE')" onmouseover="highlight('DE');" onmouseout="unhighlight('DE');"/>
-			<!-- great britain -->
-			<area shape="poly" coords="83,226,83,231,87,233,92,230,93,235,97,238,100,235,105,232,103,227,100,219,94,219" href="#GB" alt="great britain"  onclick="return select('GB')" onmouseover="highlight('GB');" onmouseout="unhighlight('GB');"/>
-			<area shape="poly" coords="88,293,93,296,96,292,102,291,105,295,111,289,116,289,118,292,131,292,148,292,154,288,154,284,147,283,153,280,158,271,159,265,150,261,145,263,147,259,146,251,145,243,139,236,138,223,135,218,130,214,128,209,138,202,140,194,134,191,125,190,133,181,136,174,140,171,135,169,131,177,121,175,111,175,102,180,97,187,95,194,103,194,99,200,106,207,102,205,99,213,102,216,104,220,110,218,108,225,110,230,118,230,118,236,122,242,117,250,109,248,105,255,109,256,109,263,103,264,98,267,98,272,105,275,114,278,104,279" href="#GB" alt="great britain"  onclick="return select('GB')" onmouseover="highlight('GB');" onmouseout="unhighlight('GB');"/>
-			<!-- greece -->
-			<area shape="poly" coords="400,405,404,411,400,418,397,425,394,433,403,437,409,442,405,449,406,455,416,457,420,468,427,470,434,472,433,480,424,475,408,465,415,473,412,479,403,481,391,480,386,468,380,471,374,475,379,483,378,490,386,492,392,495,414,494,420,490,424,483,426,491,416,496,415,499,401,503,386,501,384,494,375,488,370,487,361,483,358,474,350,473,344,466,345,455,339,452,329,444,339,446,341,439,344,434,347,432,344,427,351,427,355,422,363,422,365,417,377,413,381,412" href="#GR"  alt="greece"  onclick="return select('GR')" onmouseover="highlight('GR');" onmouseout="unhighlight('GR');"/>
-			<!-- hungary -->
-			<area shape="poly" coords="295,332,296,337,290,339,290,346,288,350,292,354,298,359,303,363,312,363,316,360,321,357,323,355,330,355,335,352,338,346,340,340,342,333,350,327,343,322,337,321,328,321,325,326,314,330,307,334" href="#HU" alt="hungary"  onclick="return select('HU')" onmouseover="highlight('HU');" onmouseout="unhighlight('HU');"/>
-			<!-- iceland -->
-			<area shape="poly" coords="33,68,42,72,51,83,60,85,65,82,72,82,83,81,89,78,93,73,94,67,91,63,92,54,87,54,88,49,83,48,81,52,76,52,73,49,66,48,62,45,60,49,53,50,56,46,53,36,47,35,40,39,36,42,40,46,46,48,43,50,34,51,40,56,40,63,39,65" href="#IS" alt="iceland"  onclick="return select('IS')" onmouseover="highlight('IS');" onmouseout="unhighlight('IS');"/>
-			<!-- ireland -->
-			<area shape="poly" coords="58,266,54,258,55,252,61,251,68,243,62,237,66,232,64,228,68,224,74,226,79,226,78,222,84,217,92,216,94,219,87,223,82,226,82,231,87,234,91,230,92,235,96,238,94,251,90,258,88,263" href="#IR" alt="ireland"  onclick="return select('IR')" onmouseover="highlight('IR');" onmouseout="unhighlight('IR');"/>
-			<!-- lithuania -->
-			<area shape="poly" coords="314,216,317,225,322,230,330,229,331,235,334,239,338,240,338,244,347,243,352,237,356,237,355,226,361,219,360,214,352,210,345,209,344,206,341,209,329,209,322,210,317,213" href="#LT" alt="lithuania"  onclick="return select('LT')" onmouseover="highlight('LT');" onmouseout="unhighlight('LT');"/>
-			<!-- latvia -->
-			<area shape="poly" coords="314,214,322,210,329,208,341,208,344,206,348,209,354,210,359,213,363,211,370,203,363,190,354,186,350,187,342,184,334,188,337,192,338,195,332,200,329,199,323,192,317,194,315,199,313,205" href="#LV" alt="latvia"  onclick="return select('LV')" onmouseover="highlight('LV');" onmouseout="unhighlight('LV');"/>
-			<!-- malta -->
-			<area shape="poly" coords="275, 501, 277, 503, 278, 505, 281, 506, 282, 504, 281, 501, 279, 500" href="#MT" alt="malta"  onclick="return select('MT')" onmouseover="highlight('MT');" onmouseout="unhighlight('MT');"/>					
-			<!-- netherlands -->
-			<area shape="poly" coords="170,286,174,280,179,276,182,271,182,264,187,259,199,258,203,261,206,263,203,271,203,274,201,280,194,282,196,286,196,290,194,296,190,297,190,293,189,287,181,288" href="#NL" alt="netherlands"  onclick="return select('NL')" onmouseover="highlight('NL');" onmouseout="unhighlight('NL');"/>
-			<!-- norway -->
-			<area shape="poly" coords="208,196,218,194,233,180,241,180,240,170,245,166,244,153,246,149,241,144,240,123,245,111,253,107,250,101,253,94,253,82,262,70,262,60,266,53,271,47,280,44,279,38,285,33,295,38,303,36,306,24,314,16,323,19,324,27,331,16,327,7,312,3,300,4,289,12,282,21,273,22,266,31,261,40,257,37,252,43,243,57,256,53,250,66,242,82,241,93,233,98,236,104,227,111,225,118,219,116,216,122,196,137,193,145,193,160,192,180,198,190" href="#NO" alt="norway"  onclick="return select('NO')" onmouseover="highlight('NO');" onmouseout="unhighlight('NO');"/>
-			<!-- poland -->
-			<area shape="poly" coords="264, 252, 263, 265, 269, 276, 273, 293, 285, 295, 287, 302, 291, 299, 298, 300, 300, 304, 303, 303, 307, 305, 311, 312, 314, 308, 319, 313, 322, 310, 329, 310, 330, 308, 338, 308, 340, 311, 345, 311, 344, 304, 350, 291, 353, 291, 352, 284, 346, 275, 346, 269, 341, 266, 346, 259, 338, 240, 332, 237, 311, 241, 298, 242, 298, 235, 284, 239, 277, 246" href="#PL" alt="poland"  onclick="return select('PL')" onmouseover="highlight('PL');" onmouseout="unhighlight('PL');"/>		
-			<!-- portugal -->
-			<area shape="poly" coords="32,412,17,437,23,446,17,462,34,465,41,453,39,445,44,441,40,431,46,431,49,423,51,413,59,408,53,400,40,399,39,394,33,396,30,410" href="#PT" alt="portugal" onclick="return select('PT')" onmouseover="highlight('PT');" onmouseout="unhighlight('PT');"/>
-			<!-- romania -->
-			<area shape="poly" coords="351,325,343,333,340,344,335,353,329,355,334,360,336,365,341,367,343,371,349,376,356,374,355,378,360,384,365,382,373,383,385,381,390,375,396,373,408,371,416,375,416,368,415,363,417,358,422,356,421,351,419,347,415,350,409,353,406,348,403,343,403,334,400,330,384,315,380,320,374,322,372,324,369,327,365,324" href="#RO" alt="romania"  onclick="return select('RO')" onmouseover="highlight('RO');" onmouseout="unhighlight('RO');"/>
-			<!-- spain -->
-			<area shape="poly" coords="34,393,41,396,50,399,60,407,52,414,47,431,41,431,44,441,39,445,42,452,35,465,44,472,45,480,51,485,58,480,64,482,68,479,83,481,86,482,89,481,91,483,99,474,109,473,109,467,121,459,116,452,117,446,131,432,130,428,145,426,156,419,159,412,157,409,151,410,144,407,136,403,131,403,123,401,114,398,112,393,107,392,99,389,94,389,90,386,81,385,72,382,64,380,55,378,47,374,43,378,37,377,33,379,33,384" href="#ES" alt="spain"  onclick="return select('ES')" onmouseover="highlight('ES');" onmouseout="unhighlight('ES');"/>
-			<area shape="poly" coords="145,450,154,456,159,450,153,445" href="#ES" alt="spain"  onclick="return select('ES')" onmouseover="highlight('ES');" onmouseout="unhighlight('ES');"/>
-			<area shape="poly" coords="136,454,132,458,134,461,137,461,137,455" href="#ES" alt="spain"  onclick="return select('ES')" onmouseover="highlight('ES');" onmouseout="unhighlight('ES');"/>
-			<area shape="poly" coords="162,448,167,449,168,444,163,443,161,445" href="#ES" alt="spain"  onclick="return select('ES')" onmouseover="highlight('ES');" onmouseout="unhighlight('ES');"/>
-			<!-- sweden -->
-			<area shape="poly" coords="284,37,280,39,281,45,272,47,272,54,266,55,262,62,264,68,259,79,254,83,256,93,252,101,254,109,248,111,243,117,241,126,242,143,248,149,245,153,247,160,246,166,242,170,242,181,236,181,237,190,241,200,245,210,250,216,247,219,249,222,252,228,254,233,262,233,262,229,264,223,270,221,276,219,280,219,282,202,279,197,278,188,284,182,289,178,293,169,287,157,279,156,277,145,280,131,284,120,295,111,299,100,295,96,298,89,300,85,302,80,309,80,306,67,302,58,296,46,289,45" href="#SE"  alt="sweden"  onclick="return select('SE')" onmouseover="highlight('SE');" onmouseout="unhighlight('SE');"/>
-			<area shape="poly" coords="290,209,288,198,297,192,296,197,296,202" href="#SE" alt="sweden"  onclick="return select('SE')" onmouseover="highlight('SE');" onmouseout="unhighlight('SE');"/>
-			<!-- switzerland -->
-			<area shape="poly" coords="189,360,193,362,197,358,198,365,205,365,210,363,213,358,218,367,222,358,229,362,234,352,225,350,225,343,220,341,214,339,207,342,201,342,195,350,190,354" href="#CH"alt="switzerland"  onclick="return select('CH')" onmouseover="highlight('CH');" onmouseout="unhighlight('CH');" />
+<!-- austria -->
+<area shape="poly" coords="273,249,278,250,280,249,282,250,294,246,294,243,299,239,302,237,306,237,309,233,311,233,315,235,320,235,320,237,324,243,320,244,319,249,319,255,308,259,302,259,292,258,284,255,283,256,278,256,273,254,271,251" href="#AT" alt="austria"  onclick="return select('AT')" onmouseover="highlight('AT');" onmouseout="unhighlight('AT');" />
+<!-- belgium -->
+<area shape="poly" coords="227,210,235,206,243,208,249,214,252,220,248,224,249,229,244,229,236,223,231,217" href="#BE" alt="belgium" onclick="return select('BE')" onmouseover="highlight('BE');" onmouseout="unhighlight('BE');"/>
+<!-- bulgaria -->
+<area shape="poly" coords="367,276,368,283,371,286,369,289,369,295,373,301,382,298,395,297,396,293,399,294,403,291,407,290,411,290,407,284,408,277,412,271,399,269,390,276,385,277,369,278" href="#BG" alt="bulgaria" onclick="return select('BG')" onmouseover="highlight('BG');" onmouseout="unhighlight('BG');"/>
+<!-- cyprus -->
+<area shape="poly" coords="458,347,465,342,469,341,476,336,479,338,475,343,476,348,471,350,466,353,459,351" onclick="return select('CY')" onmouseover="highlight('CY');" onmouseout="unhighlight('CY');" />
+<!-- czech republic -->
+<area shape="poly" coords="304,212,317,215,316,217,319,220,320,216,325,218,327,221,336,225,320,235,312,234,310,232,306,237,302,236,293,229,292,224,290,221" href="#CZ" alt="czech republic"  onclick="return select('CZ')" onmouseover="highlight('CZ');" onmouseout="unhighlight('CZ');"/>
+<!-- denmark -->
+<area shape="poly" coords="264,177,274,173,278,176,288,177,288,176,289,168,288,161,282,162,279,165,275,165,281,158,277,152,282,151,278,144,273,148,264,151,263,159,264,169" href="#DK" alt="denmark"  onclick="return select('DK')" onmouseover="highlight('DK');" onmouseout="unhighlight('DK');"/>
+<!-- estonia -->
+<area shape="poly" coords="366,116,353,117,342,124,336,126,338,132,340,138,347,132,355,134,359,133,367,135,371,131,369,119" href="#EE"  alt="estonia"  onclick="return select('EE')" onmouseover="highlight('EE');" onmouseout="unhighlight('EE');"/>
+<!-- finland -->
+<area shape="poly" coords="315,28,322,32,327,37,331,45,331,51,334,57,339,58,339,64,337,71,329,84,326,84,327,88,330,102,331,115,337,117,348,116,364,105,376,76,366,71,366,65,359,57,358,50,352,40,354,34,348,30,343,27,344,21,349,11,343,12,343,13,339,13,337,11,331,16,333,19,333,25,328,29,320,30,317,25" href="FI" alt="finland"  onclick="return select('FI')" onmouseover="highlight('FI');" onmouseout="unhighlight('FI');"/>
+<!-- france -->
+<area shape="poly" coords="188,283,200,294,209,293,212,296,214,297,223,298,224,293,232,288,237,290,244,293,251,293,256,289,257,284,253,276,251,273,254,272,254,265,250,260,247,262,247,259,255,249,261,247,259,245,260,241,262,236,256,231,250,229,243,228,239,223,234,218,227,212,224,211,220,214,219,219,215,220,208,223,209,226,202,224,202,220,195,220,195,225,197,230,190,228,185,227,174,228,177,236,183,241,187,244,190,249,193,258,193,267,192,276" href="#FR" alt="france"  onclick="return select('FR')" onmouseover="highlight('FR');" onmouseout="unhighlight('FR');"/>
+<area shape="poly" coords="269,295,264,299,264,308,267,312,270,311,273,301,271,294" href="#FR" alt="france"  onclick="return select('FR')" onmouseover="highlight('FR');" onmouseout="unhighlight('FR');"/>
+<!-- germany -->
+<area shape="poly" coords="250,222,252,230,257,231,262,236,258,246,263,247,269,247,273,248,284,249,294,246,295,242,301,236,293,229,291,221,304,211,301,194,301,186,295,176,289,179,283,181,283,178,277,178,273,174,268,174,268,180,266,185,260,185,255,186,259,190,254,205,251,205,251,210,248,212,251,216" href="#DE"  alt="germany"  onclick="return select('DE')" onmouseover="highlight('DE');" onmouseout="unhighlight('DE');"/>
+<!-- great britain -->
+<area shape="poly" coords="174,130,177,141,179,146,180,154,180,159,169,166,174,169,178,172,184,170,186,168,187,175,194,174,194,178,193,182,189,179,185,181,184,186,186,191,180,193,179,198,187,202,169,211,180,215,189,213,219,212,220,208,219,203,225,197,225,190,217,189,216,178,210,168,209,161,205,153,212,142,201,137,209,130,220,118,221,109,215,116,211,123,201,128,190,127,179,130" href="#GB" alt="great britain"  onclick="return select('GB')" onmouseover="highlight('GB');" onmouseout="unhighlight('GB');"/>
+<!-- greece -->
+<area shape="poly" coords="348,321,355,321,359,310,366,306,372,305,375,301,384,298,396,298,396,294,400,295,403,299,399,306,398,312,405,317,407,322,406,330,412,332,413,339,427,342,423,351,419,358,412,363,400,367,392,368,376,356,368,353,366,345,361,344,355,337,357,331" href="#GR"  alt="greece"  onclick="return select('GR')" onmouseover="highlight('GR');" onmouseout="unhighlight('GR');"/>
+<!-- hungary -->
+<area shape="poly" coords="321,245,320,255,329,265,338,265,344,259,349,258,356,252,359,242,363,236,357,234,348,233,345,237,337,240,335,243,327,242,324,244" href="#HU" alt="hungary"  onclick="return select('HU')" onmouseover="highlight('HU');" onmouseout="unhighlight('HU');"/>
+<!-- iceland -->
+<area shape="poly" coords="133,27,146,22,152,31,166,34,175,35,177,43,180,49,178,56,169,63,144,63,138,55,131,51,132,43,131,33" href="#IS" alt="iceland"  onclick="return select('IS')" onmouseover="highlight('IS');" onmouseout="unhighlight('IS');"/>
+<!-- ireland -->
+<area shape="poly" coords="180,159,174,157,165,160,167,164,165,165,157,163,155,168,154,172,159,178,153,180,147,182,149,193,154,194,176,190,179,178,178,171,175,168,173,169,168,166,174,162" href="#IR" alt="ireland"  onclick="return select('IR')" onmouseover="highlight('IR');" onmouseout="unhighlight('IR');"/>
+<!-- italy -->
+<area shape="poly" coords="253,266,261,267,265,260,268,268,270,260,276,263,276,259,280,259,279,256,295,258,300,264,300,268,292,272,294,275,292,279,303,289,306,298,316,303,322,304,321,309,344,319,342,324,329,319,328,324,332,328,332,336,324,347,319,347,320,359,308,355,299,351,292,348,299,343,304,343,312,343,317,339,321,334,320,328,300,313,294,314,284,304,278,296,276,288,267,283,265,285,260,288,256,284,254,280,254,276,252,273,255,273" href="#IT" alt="italy"  onclick="return select('IT')" onmouseover="highlight('IT');" onmouseout="unhighlight('IT');"/>
+<area shape="poly" coords="262,312,272,313,274,322,274,334,267,338,262,336,259,318" href="#IT" alt="italy"  onclick="return select('IT')" onmouseover="highlight('IT');" onmouseout="unhighlight('IT');"/>
+<!-- lithuania -->
+<area shape="poly" coords="337,157,339,167,347,166,350,168,350,173,353,173,356,177,361,176,366,172,369,171,366,164,373,160,370,155,359,149,347,152,340,153" href="#LT" alt="lithuania"  onclick="return select('LT')" onmouseover="highlight('LT');" onmouseout="unhighlight('LT');"/>
+<!-- latvia -->
+<area shape="poly" coords="352,134,357,133,363,135,366,136,370,135,377,147,376,152,371,155,359,150,350,151,341,154,338,154,334,145,336,142,342,139,345,141,351,145,353,143" href="#LV" alt="latvia"  onclick="return select('LV')" onmouseover="highlight('LV');" onmouseout="unhighlight('LV');"/>
+<!-- malta -->
+<area shape="poly" coords="309,362,313,363,315,368,310,368,308,365" href="#MT" alt="malta"  onclick="return select('MT')" onmouseover="highlight('MT');" onmouseout="unhighlight('MT');"/>					
+<!-- netherlands -->
+<area shape="poly" coords="235,205,241,207,248,213,251,210,250,205,255,205,257,200,257,196,259,190,245,187"  href="#NL" alt="netherlands"  onclick="return select('NL')" onmouseover="highlight('NL');" onmouseout="unhighlight('NL');"/>
+<!-- norway -->
+<area shape="poly" coords="284,133,284,123,288,122,288,114,286,110,289,110,287,105,285,97,286,84,290,81,294,81,294,77,292,75,296,63,294,60,298,58,300,47,301,41,305,39,306,35,312,34,314,27,316,24,320,28,326,29,330,28,333,24,332,15,338,12,343,15,344,10,348,6,332,2,324,3,316,10,305,18,295,26,287,39,291,41,294,40,290,48,283,63,279,70,272,84,267,84,263,90,251,98,249,103,249,130,250,135,257,143,264,143,273,134,278,131" href="#NO" alt="norway"  onclick="return select('NO')" onmouseover="highlight('NO');" onmouseout="unhighlight('NO');"/>
+<!-- poland -->
+<area shape="poly" coords="302,182,301,194,305,208,307,213,317,215,316,218,319,221,321,216,327,218,327,221,331,222,335,225,337,225,339,226,343,226,349,224,353,223,358,226,360,226,359,220,366,211,366,206,360,200,361,195,357,192,361,188,356,176,353,173,350,173,332,175,328,173,322,171,312,176" href="#PL" alt="poland"  onclick="return select('PL')" onmouseover="highlight('PL');" onmouseout="unhighlight('PL');"/>		
+<!-- portugal -->
+<area shape="poly" coords="131,288,138,287,139,291,150,291,152,296,147,302,144,315,139,314,140,318,142,321,138,326,140,329,135,334,134,339,119,338,123,323,119,319,125,310,130,300" href="#PT" alt="portugal" onclick="return select('PT')" onmouseover="highlight('PT');" onmouseout="unhighlight('PT');"/>
+<area shape="poly" coords="43,355,43,360,48,364,55,356" href="#PT" alt="portugal" onclick="return select('PT')" onmouseover="highlight('PT');" onmouseout="unhighlight('PT');"/>
+<!-- romania -->
+<area shape="poly" coords="364,235,378,234,388,228,392,231,403,243,404,252,406,255,409,254,413,250,416,251,416,256,412,262,411,272,399,269,390,276,382,278,370,278,366,272,357,271,356,266,352,263,348,258,350,258,355,252,359,240" href="#RO" alt="romania"  onclick="return select('RO')" onmouseover="highlight('RO');" onmouseout="unhighlight('RO');"/>
+<!-- spain -->
+<area shape="poly" coords="133,287,132,280,132,275,142,271,148,271,152,274,167,278,176,279,185,283,189,285,196,291,201,294,206,294,210,295,211,298,215,299,220,299,225,298,226,304,216,310,207,311,205,315,195,325,195,328,199,332,197,336,190,343,190,345,183,345,179,348,176,352,158,349,152,350,149,353,144,353,141,345,137,339,135,338,137,329,138,329,143,321,140,314,144,315,148,300,153,296,151,291,141,290,136,288" href="#ES" alt="spain"  onclick="return select('ES')" onmouseover="highlight('ES');" onmouseout="unhighlight('ES');"/>
+<area shape="poly" coords="229,321,218,322,204,330,204,336,207,338,222,332,231,327,231,323" href="#ES" alt="spain"  onclick="return select('ES')" onmouseover="highlight('ES');" onmouseout="unhighlight('ES');"/>
+<!-- slovakia -->
+<area shape="poly" coords="324,242,320,237,324,233,330,229,338,225,341,227,347,225,355,223,359,226,362,227,358,229,357,234,350,233,346,235,343,238,335,240,334,243,324,242" href="#SK" alt="slovakia"  onclick="return select('SK')" onmouseover="highlight('SK');" onmouseout="unhighlight('SK');"/>
+<!-- slovenia -->
+<area shape="poly" coords="299,259,301,269,313,270,317,263,323,258,319,256,310,258" href="#SI" alt="slovenia"  onclick="return select('SI')" onmouseover="highlight('SI');" onmouseout="unhighlight('SI');"/>
+<!-- sweden -->
+<area shape="poly" coords="282,133,283,143,289,156,289,162,292,168,297,168,304,172,301,163,310,159,321,152,326,139,319,145,314,147,312,138,315,132,322,122,319,114,313,112,313,95,323,81,327,72,325,67,327,60,334,57,331,51,330,42,320,31,314,29,312,34,307,36,304,39,301,41,295,59,296,63,293,74,294,82,289,83,286,85,286,100,289,109,288,121,285,123" href="#SE" alt="sweden"  onclick="return select('SE')" onmouseover="highlight('SE');" onmouseout="unhighlight('SE');"/>
+<!-- switzerland -->
+<area shape="poly" coords="254,249,247,261,247,262,250,260,252,262,253,265,260,266,264,260,268,268,271,261,276,263,276,258,279,259,278,256,272,253,271,248,265,247,257,248" href="#CH"alt="switzerland"  onclick="return select('CH')" onmouseover="highlight('CH');" onmouseout="unhighlight('CH');" />
 		</map>
 	
     </div>
