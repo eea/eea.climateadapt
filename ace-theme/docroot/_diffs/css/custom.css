@@ -1126,6 +1126,15 @@ text and the class sat-map to the SimilarAreasToolPortlet.
 	width: 175px;
 }
 
+.sat-map #toc_element {
+	background-color: #D2DE92;
+	padding: 0 0 0 15px;
+	margin: -425px -284px 0 0;
+	min-height: 280px;
+	float: right;
+	width: 269px
+}
+
 .sat-map #legend_element {
 	background-color: #D2DE92;
 	margin: -165px -284px 0 0;
@@ -1226,4 +1235,122 @@ the search column.
 .transnationalregion #column-3 {
 	background-color: #D2DF92;
 	padding: 15px;
+}
+
+/****
+   Styling for the national pages
+   it uses the layout template transnational region, however slightly
+   different web content templates
+****/
+.transnationalregion .countries-list select {
+	width: 147px;
+}
+
+.transnationalregion #tabs {
+	margin-top: 15px;
+}
+
+.transnationalregion .ui-widget-header {
+	background: none;
+	border: none;
+	border-bottom: 1px solid #AAAAAA;
+}
+
+.transnationalregion .ui-state-active a,
+.transnationalregion .ui-state-active a:link,
+.transnationalregion .ui-state-active a:visited {
+	color: #02213D;
+}
+
+.transnationalregion .ui-widget-content {
+	background: none;
+	border: none;
+}
+
+.transnationalregion .ui-corner-top {
+	border-top-left-radius: 0px;
+	border-top-right-radius: 0px;
+}
+
+.transnationalregion .ui-corner-all {
+	border-bottom-left-radius: 0px;
+	border-bottom-right-radius: 0px;
+}
+
+/**** Styling of the map viewer 
+The Map Viewer does NOT have a seperate layout template. 
+To retrieve the appropiate styling is it therefore
+necessary to add the class sat-text to the instruction 
+text and the class mapviewer to the MapViewerPortlet.
+****/
+.mapviewer #legend_element,
+.mapviewer #toc_element {
+	float: right;
+	width: 284px;
+}
+
+.mapviewer {
+	margin-top: -20px;
+	width: 700px;
+}
+
+.mapviewer #locations_element {
+	height: 40px;
+	margin-bottom: 10px;
+	overflow: auto;
+	width: 190px;
+}
+
+.mapviewer #map_element {
+	height: 350px;
+	width: 670px;
+}
+
+.mapviewer #toc_element {
+	background-color: #D2DE92;
+	padding: 0 0 15px 0;
+	margin: -425px -284px 0 0;
+	min-height: 250px;
+}
+
+.mapviewer #toc_element ul { 
+	list-style-type: none;
+	margin-left: 15px;
+}
+
+.mapviewer #toc_element a {
+	text-decoration: none;
+	cursor: default;
+	padding-left: 3px;
+}
+
+.mapviewer #toc_element a:hover {
+	color: #02213D;
+}
+
+.mapviewer #legend_element {
+	background-color: #D2DE92;
+	margin: -165px -284px 0 0;
+	min-height: 150px;
+	padding: 15px 0 0; 
+}
+
+.mapviewer #legend-title,
+.mapviewer #toc-title {
+	font-size: 14px;
+	padding-left: 15px;
+}
+
+/** adjustment of legend items **/
+.mapviewer #legend_element label {
+	padding-left: 15px;
+}
+
+.mapviewer #legend_element img {
+	clear: both;
+	float:left;
+	margin-left: 15px;
+	margin-bottom: 10px;
+	position:relative;
+	top:2px;
 }
