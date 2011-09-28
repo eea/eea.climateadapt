@@ -1073,6 +1073,10 @@ text and the class sat-map to the SimilarAreasToolPortlet.
 	padding:0 15px;
 }
 
+.sat-text .portlet-content p {
+	color: #353F02;
+}
+
 .sat-text,
 .sat-map #legend_element {
 	float: right;
@@ -1103,7 +1107,7 @@ text and the class sat-map to the SimilarAreasToolPortlet.
 }
 
 .sat-map #risk-select {
-	margin-top: -265px;
+	margin-top: -285px;
 }
 
 .sat-map #risk-select label {
@@ -1115,7 +1119,7 @@ text and the class sat-map to the SimilarAreasToolPortlet.
 }
 
 .sat-map #sector-select {
-	margin-top: -238px;
+	margin-top: -258px;
 }
 
 .sat-map #sector-select label {
@@ -1126,22 +1130,15 @@ text and the class sat-map to the SimilarAreasToolPortlet.
 	width: 175px;
 }
 
-.sat-map #toc_element {
-	background-color: #D2DE92;
-	padding: 0 0 0 15px;
-	margin: -425px -284px 0 0;
-	min-height: 280px;
-	float: right;
-	width: 269px
-}
-
 .sat-map #legend_element {
 	background-color: #D2DE92;
+	color: #353F02;
 	margin: -165px -284px 0 0;
 	padding: 15px 0 0; 
 }
 
 #legend-title {
+	color: #758816;
 	font-size: 14px;
 	padding-left: 15px;
 }
@@ -1319,6 +1316,7 @@ text and the class mapviewer to the MapViewerPortlet.
 }
 
 .mapviewer #toc_element a {
+	color: #353F02;
 	text-decoration: none;
 	cursor: default;
 	padding-left: 3px;
@@ -1330,6 +1328,7 @@ text and the class mapviewer to the MapViewerPortlet.
 
 .mapviewer #legend_element {
 	background-color: #D2DE92;
+	color: #353F02;
 	margin: -165px -284px 0 0;
 	min-height: 150px;
 	padding: 15px 0 0; 
@@ -1337,6 +1336,7 @@ text and the class mapviewer to the MapViewerPortlet.
 
 .mapviewer #legend-title,
 .mapviewer #toc-title {
+	color: #758816;
 	font-size: 14px;
 	padding-left: 15px;
 }
@@ -1353,4 +1353,27 @@ text and the class mapviewer to the MapViewerPortlet.
 	margin-bottom: 10px;
 	position:relative;
 	top:2px;
+}
+
+/****
+   Styling of the FilterAceItemPortlet
+****/
+.resultsGroupTitle {
+	color: #353f02;
+	font-size: 12px;
+}
+
+.searchresult {
+	color: #000;
+	background-color: #E9EFC9;
+	border: 1px solid #758816;
+}
+
+#filteraceitems_container a {
+	color: #000;
+	text-decoration: none;
+}
+
+#filteraceitems_container a:hover {
+	color: #a5bf26;
 }
