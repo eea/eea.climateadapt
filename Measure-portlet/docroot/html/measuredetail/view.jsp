@@ -167,7 +167,7 @@
 	</portlet:actionURL>
 	
 	<liferay-ui:icon image="yes" url="<%=rateUpURL.toString() %>" />
-	 &nbsp;&nbsp;<br /><br />		
+	 &nbsp;&nbsp;<br />	
 <%	 }  %>
 </c:when>
 <c:otherwise>
