@@ -18,8 +18,12 @@
 		aceitem_id = Long.parseLong( (String) request.getAttribute("aceitem_id") ) ;
 		aceitem = AceItemLocalServiceUtil.getAceItem( aceitem_id ) ;
 		
-		url = "<a href='" + aceitem.getStoredAt() + "' target='_blank'>" + aceitem.getStoredAt() + "</a>" ;
-		
+		if(aceitem.getStoragetype().equalsIgnoreCase("GEONETWORK")) {
+			url = "<a href='/map-viewer?cswRecordFileIdentifier=" + aceitem.getStoredAt() + "' >" + aceitem.getName() + "</a>" ; 
+		}
+		else {	
+			url = "<a href='" + aceitem.getStoredAt() + "' target='_blank'>" + aceitem.getStoredAt() + "</a>" ;
+		}
 		language = ( aceitem.getLanguage() == null ? "" : aceitem.getLanguage() );
 		
 		if(language.equalsIgnoreCase("de_DE")) {
@@ -53,10 +57,13 @@
 	 
 	 <b>Source</b><br />
 	 <% out.print( aceitem.getSource()); %><br /><br />
-	 
-	 <b>Website</b><br />
+<%  	if(aceitem.getStoragetype().equalsIgnoreCase("GEONETWORK") ) { %>
+	<b>View map</b><br />
+<%	 }
+	 else { %>
+	 	<b>Website</b><br />
+<% 	} %>
 	 <% out.print(  url ); %><br /><br />
-
 	 <b>Resolution</b><br />
 	 <% out.print( aceitem.getTargetresolution()); %><br /><br />
 
@@ -123,7 +130,7 @@
 	</portlet:actionURL>
 	
 	<liferay-ui:icon image="yes" url="<%=rateUpURL.toString() %>" />
-	 &nbsp;&nbsp;<br /><br />		
+	 &nbsp;&nbsp;<br />	
 <%	 }  %>     
    </c:when>
    <c:otherwise>

@@ -60,7 +60,7 @@
 	  String elements = aceitem.getElements_() ;
 	  elements = elements.replace(";","; ");
 	  
-	  if (aceitem.getStoragetype().equalsIgnoreCase("URL")) {
+	  if (aceitem.getStoragetype().equalsIgnoreCase("URL") || aceitem.getStoragetype().equalsIgnoreCase("GEONETWORK")) {
 	  	  // Only URL type gets viewed by viewaceitem portlet; Ace Serviced Entities have their own portlets
 		  nameLink = "<a href='/viewaceitem?aceitem_id=" + aceitem.getAceItemId() + "'>" +  aceitem.getName() + "</a>" ;
 	  }
@@ -92,7 +92,7 @@
 		/>
 
 <%
-	  if (aceitem.getStoragetype().equalsIgnoreCase("URL")) {
+	  if (aceitem.getStoragetype().equalsIgnoreCase("URL")|| aceitem.getStoragetype().equalsIgnoreCase("GEONETWORK")) {
 		// Only URL type get maintained here; Ace Serviced Entities have their own maintenance pages
 %>		  
 	  	

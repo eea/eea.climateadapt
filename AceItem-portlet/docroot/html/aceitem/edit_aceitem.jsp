@@ -1,7 +1,7 @@
 <%@include file="/html/init.jsp" %>
 <%
 	AceItem aceitem = null;
-
+	
 	long aceItemId = ParamUtil.getLong(request, "aceItemId");
 
 	if (aceItemId > 0) {
@@ -59,9 +59,16 @@
 		
 	 </div>
 	<div style="float: left;">			
-		<br><b>storagetype</b><br />	
-		<input name="storagetype" type="text" size="65" READONLY style="color:grey" value="<%= aceitem == null ? "URL" : aceitem.getStoragetype() %>"><br /><br />
+		<br><b>storagetype</b><br />
+	    <select name="storagetype">		
+<% 		String help = "";
+		if (aceitem==null || aceitem.getStoragetype().equalsIgnoreCase("URL"))	{
+			help = "selected" ;
+		} %>
 
+			<option value="URL" <%= help %> >URL</option>
+			<option value="GEONETWORK" <%= help.length() > 0 ? "" : "selected"%> >GEONETWORK</option>
+		</select><br /><br />
 		<b>Sectors</b><br />
 		<!--   input name="sectors_" type="text" size="65" value="< %= aceitem == null ? "" : aceitem.getSectors_() % >"><br /><br / -->
 		
