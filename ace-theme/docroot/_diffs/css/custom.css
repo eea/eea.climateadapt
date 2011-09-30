@@ -7,7 +7,7 @@
 /* ---------- Base styles ---------- */
 
 body {
-	background: #FFF;
+	background: #CCCCCC;
 	font-family: Tahoma, Times New Roman, serif;
 	font-size: 12px;
 }
@@ -39,7 +39,7 @@ hr, .separator {
 }
 
 #wrapper {
-	background: none repeat scroll 0 0 transparent;
+	background: none repeat scroll 0 0 #FFF;
 	margin: 0 auto;
 	max-width: 984px;
 	position: relative;
@@ -56,7 +56,7 @@ hr, .separator {
 
 #banner .company-title {
 	float: none;
-	margin: 15px 0 0;
+	margin: 0;
 	position: static;
 }
 
@@ -555,12 +555,6 @@ body #banner .logo a {
 	display: none;
 }
 
-/**** Adjusting general LifeRay layouts ****/
-/*.portlet-column-content-only {
-	padding: 10px 15px 0;
-}*/
-
-
 /**** General styles Ace Layouts ****/
 
 .ace_layout_2 #column-1,
@@ -635,7 +629,7 @@ body #banner .logo a {
 /**** Ace Layout 4 ****/
 
 .ace_layout_4 #column-1 .portlet-column-content {
-	padding: 0 15px 0 0;
+	padding: 0 15px;
 }
 
 .ace_layout_4 #column-2 {
@@ -722,7 +716,7 @@ body #banner .logo a {
 }
 
 .sector-main-article .read-more-body {
-	margin: 45px 17px 0 0;
+	margin: 45px 17px 0 15px;
 }
 
 /**** Template for Research Project ****/
@@ -830,13 +824,12 @@ body #banner .logo a {
 }
 
 /**** Template for the AST pages ****/
-
 .ast #column-1 {
 	background-color: #d2df92;
 }
 
 .ast #column-1 .portlet-column-content {
-	padding-top: 0px;
+	padding: 0;
 }
 
 #ast-menu {
@@ -953,7 +946,6 @@ body #banner .logo a {
 
 #p_p_id_56_INSTANCE_7vIW_ {
 	margin-top: 10px;
-	padding-left: 15px;
 }
 
 #p_p_id_56_INSTANCE_7vIW_ h1 {
@@ -966,7 +958,11 @@ body #banner .logo a {
 }
 
 .ie #p_p_id_56_INSTANCE_7vIW_ {
-	margin-top: -15px;
+	margin-top: 5px;
+}
+
+.image-ai-fp {
+	margin-right: -15px;
 }
 
 .ie .image-ai-fp .portlet-body {
@@ -1050,6 +1046,11 @@ span.opens-new-window-accessible,
 	width: 100%;
 }
 
+#acesearch_container .search_section {
+	color: #353f02;
+	margin: 0;
+}
+
 /**** Styling of the similar areas tool 
 The SAT does NOT have a seperate layout template. 
 To retrieve the appropiate styling is it therefore
@@ -1080,7 +1081,7 @@ text and the class sat-map to the SimilarAreasToolPortlet.
 .sat-text,
 .sat-map #legend_element {
 	float: right;
-	width: 284px;
+	width: 269px;
 }
 
 .sat-map {
@@ -1107,7 +1108,7 @@ text and the class sat-map to the SimilarAreasToolPortlet.
 }
 
 .sat-map #risk-select {
-	margin-top: -285px;
+	margin-top: -305px;
 }
 
 .sat-map #risk-select label {
@@ -1119,7 +1120,7 @@ text and the class sat-map to the SimilarAreasToolPortlet.
 }
 
 .sat-map #sector-select {
-	margin-top: -258px;
+	margin-top: -278px;
 }
 
 .sat-map #sector-select label {
@@ -1133,7 +1134,7 @@ text and the class sat-map to the SimilarAreasToolPortlet.
 .sat-map #legend_element {
 	background-color: #D2DE92;
 	color: #353F02;
-	margin: -165px -284px 0 0;
+	margin: -165px -254px 0 0;
 	padding: 15px 0 0; 
 }
 
@@ -1283,7 +1284,7 @@ text and the class mapviewer to the MapViewerPortlet.
 .mapviewer #legend_element,
 .mapviewer #toc_element {
 	float: right;
-	width: 284px;
+	width: 269px;
 }
 
 .mapviewer {
@@ -1306,7 +1307,7 @@ text and the class mapviewer to the MapViewerPortlet.
 .mapviewer #toc_element {
 	background-color: #D2DE92;
 	padding: 0 0 15px 0;
-	margin: -425px -284px 0 0;
+	margin: -425px -254px 0 0;
 	min-height: 250px;
 }
 
@@ -1329,7 +1330,7 @@ text and the class mapviewer to the MapViewerPortlet.
 .mapviewer #legend_element {
 	background-color: #D2DE92;
 	color: #353F02;
-	margin: -165px -284px 0 0;
+	margin: -165px -254px 0 0;
 	min-height: 150px;
 	padding: 15px 0 0; 
 }
@@ -1376,4 +1377,15 @@ text and the class mapviewer to the MapViewerPortlet.
 
 #filteraceitems_container a:hover {
 	color: #a5bf26;
+}
+
+/****
+     Adjustment of layout padding styles because of grey background 
+****/
+.portlet-column-content-only, .ltr .portlet-column-content-last, .rtl .portlet-column-content-first {
+	padding-right: 15px;
+}
+
+.portlet-column-content-only, .ltr .portlet-column-content-first, .rtl .portlet-column-content-last {
+	padding-left: 15px;
 }
