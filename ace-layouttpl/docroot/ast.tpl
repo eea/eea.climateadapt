@@ -37,7 +37,7 @@
 			                $processor.processColumn("column-3", "portlet-column-content portlet-column-content-first")
 			            </td>
 			            <td class="aui-w33 portlet-column portlet-column" id="column-4">
-			                $processor.processColumn("column-4", "portlet-column-content portlet-column-content")
+			                $processor.processColumn("column-4", "portlet-column-content portlet-column-content-last")
 			            </td>
 			        </tr>
 	            </table>
@@ -49,7 +49,7 @@
     <div class="portlet-layout">
         
         <div class="aui-w33 portlet-column portlet-column-first" id="column-1">
-            $processor.processColumn("column-1", "portlet-column-content portlet-column-content-first")
+            $processor.processColumn("column-1", "portlet-column-content")
             <ul id="ast-menu">
 	            <li><a href="/adaptation-support-tool/step-1" name="step-1" onclick="document.location.href='/adaptation-support-tool/step-1'"><strong>1.</strong> Getting started</a>
 		            <ul id="step-1">
@@ -87,7 +87,7 @@
         <div class="aui-w66 portlet-column portlet-column-last" id="column-right">
             <div id="aui-w66 top-column">
 	            <div class="aui-w100 portlet-column portlet-column-first" id="column-2">
-	                $processor.processColumn("column-2", "portlet-column-content portlet-column-content-first")
+	                $processor.processColumn("column-2", "portlet-column-content portlet-column-content-last")
 	            </div>
             </div>
             <div id="bottom-column">
@@ -95,7 +95,7 @@
 	                $processor.processColumn("column-3", "portlet-column-content portlet-column-content-first")
 	            </div>
 	            <div class="aui-w33 portlet-column portlet-column" id="column-4">
-	                $processor.processColumn("column-4", "portlet-column-content portlet-column-content")
+	                $processor.processColumn("column-4", "portlet-column-content portlet-column-content-last")
 	            </div>
             </div>
         </div>
