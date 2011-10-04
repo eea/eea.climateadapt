@@ -36,14 +36,46 @@
 		<div id="${expandedTitleId}" class="expandedResultsGroupTitle resultsGroupTitle">
 			&#9660; <c:out value='${groupTitle}' /> (${fn:length(groupedResults)})
 		</div>
-		
-		<div id="${paginationId}" style="padding-left: 10px; height: 20px;background-color: #D2DF92;">
-			
+
+		<div class="sortbar">
+			<form name="sortsearchform" id="${sortsearchformId}">
+				<input type="hidden" name="aceitemtype" value="${aceitemtype}"/>	
+				<input type="hidden" name="anyOfThese" id="${anyOfTheseId}" value="${searchParams.anyOfThese}"/>
+
+                <c:forEach var="sector" items="${searchParams.sector}">
+                <input type="hidden" name="sector" value="${sector}"/>
+                </c:forEach>
+
+                <c:forEach var="element" items="${searchParams.element}">
+                <input type="hidden" name="element" value="${element}"/>
+                </c:forEach>
+
+                <c:forEach var="countries" items="${searchParams.countries}">
+                <input type="hidden" name="countries" value="${countries}"/>
+                </c:forEach>
+
+
+                <input type="hidden" name="conditionAdaptationSector" id="${conditionAdaptationSectorId}" value="${searchParams.conditionAdaptationSector}"/>
+                <input type="hidden" name="conditionAdaptationElement" id="${conditionAdaptationElementId}" value="${searchParams.conditionAdaptationElement}"/>
+
+				<liferay-ui:message key="acesearch-sort-by" />
+                <input type="radio" name="sortBy" class="sortByControl" id="${sortsearchRatingId}" value="RATING" checked /><liferay-ui:message key="acesearch-sort-rating" />
+                <input type="radio" name="sortBy" class="sortByControl" id="${sortsearchRelevanceId}" value="RELEVANCE" /><liferay-ui:message key="acesearch-sort-relevance" />
+				<input type="radio" name="sortBy" class="sortByControl" id="${sortsearchNameId}" value="NAME"/><liferay-ui:message key="acesearch-sort-name" />
+                <%--
+				<input type="radio" name="sortBy" class="sortByControl" id="${sortsearchCountryId}" value="COUNTRY"/><liferay-ui:message key="acesearch-sort-country" />
+				--%>
+			</form>
+		</div>
+				
+		<div id="${paginationId}" style="padding-left: 10px; height: 30px;background-color: #D2DF92;">
+
 		</div>	
 		
 		<!-- pagination -->
 		<script type="text/javascript"> 
-			
+
+			// searchresultsbytpe AceSearchPortlet
 			// ENABLE THIS WHEN RUNNING STANDALONE (WITHOUT REST OF ACE)		
 			var $j = jQuery.noConflict();
 
@@ -85,39 +117,8 @@
 			}		
 			
 		</script>
-		
+			
 		<hr class="clearer2"/>
-		
-		<div class="sortbar">
-			<form name="sortsearchform" id="${sortsearchformId}">
-				<input type="hidden" name="aceitemtype" value="${aceitemtype}"/>	
-				<input type="hidden" name="anyOfThese" id="${anyOfTheseId}" value="${searchParams.anyOfThese}"/>
-
-                <c:forEach var="sector" items="${searchParams.sector}">
-                <input type="hidden" name="sector" value="${sector}"/>
-                </c:forEach>
-
-                <c:forEach var="element" items="${searchParams.element}">
-                <input type="hidden" name="element" value="${element}"/>
-                </c:forEach>
-
-                <c:forEach var="countries" items="${searchParams.countries}">
-                <input type="hidden" name="countries" value="${countries}"/>
-                </c:forEach>
-
-
-                <input type="hidden" name="conditionAdaptationSector" id="${conditionAdaptationSectorId}" value="${searchParams.conditionAdaptationSector}"/>
-                <input type="hidden" name="conditionAdaptationElement" id="${conditionAdaptationElementId}" value="${searchParams.conditionAdaptationElement}"/>
-
-				<liferay-ui:message key="acesearch-sort-by" />
-                <input type="radio" name="sortBy" class="sortByControl" id="${sortsearchRatingId}" value="RATING" checked /><liferay-ui:message key="acesearch-sort-rating" />
-                <input type="radio" name="sortBy" class="sortByControl" id="${sortsearchRelevanceId}" value="RELEVANCE" /><liferay-ui:message key="acesearch-sort-relevance" />
-				<input type="radio" name="sortBy" class="sortByControl" id="${sortsearchNameId}" value="NAME"/><liferay-ui:message key="acesearch-sort-name" />
-                <%--
-				<input type="radio" name="sortBy" class="sortByControl" id="${sortsearchCountryId}" value="COUNTRY"/><liferay-ui:message key="acesearch-sort-country" />
-				--%>
-			</form>
-		</div>
 		
 		<div id="${resultsListId}">
 			<c:forEach var="wrappedSearchResult" items="${groupedResults}" begin="0" end="4">

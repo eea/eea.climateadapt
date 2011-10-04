@@ -1,3 +1,7 @@
+<%@ taglib uri="http://java.sun.com/portlet" prefix="portlet" %>
+
+<portlet:defineObjects />
+
 <script type="text/javascript">
     function GetKey (event){
         var keyCode = ('which' in event) ? event.which : event.keyCode;
@@ -8,4 +12,4 @@
     }
 </script>
 <input id="searchtext" name="searchtext" type="text" onkeydown="GetKey(event)" >
-<input type="button" value="Go" onClick="document.location.href='/data-and-downloads?searchtext=' + document.getElementById('searchtext').value; document.getElementById('searchtext').value='';">
+&nbsp;<img src="<%= request.getContextPath() %>/images/vergrootglas.png"  onClick="document.location.href='/data-and-downloads?searchtext=' + document.getElementById('searchtext').value; document.getElementById('searchtext').value='';">
