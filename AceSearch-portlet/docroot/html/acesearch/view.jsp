@@ -240,9 +240,7 @@ pageContext.setAttribute("countriesList", countriesList);
 
                 <ul>
                     <li>
-                        <a href="#" id="adaptation_sectors_btn" class="expanded_section"><liferay-ui:message key="acesearch-section-adaptation-sectors" /></a>
-
-
+                        <a href="#" id="adaptation_sectors_btn" class="collapsed_section"><liferay-ui:message key="acesearch-section-adaptation-sectors" /></a>
 
                         <div id="adaptation_sectors_container" class="checks_container">
                             <div class="condition_container">
@@ -394,18 +392,14 @@ pageContext.setAttribute("countriesList", countriesList);
 
 	<!-- Results column  -->
 	<div id="search_results" class="acesearch_column">
-	<!--
-		<h1><liferay-ui:message key="acesearch-data-downloads-header" /></h1>
-		
-		<h2 id="searchresultstitle"><liferay-ui:message key="acesearch-results-header" /></h2>
-	-->
-        <c:if test="<%= totalResults != null %>">
+		<c:if test="<%= totalResults != null %>">
+        	<div class="results_header"><liferay-ui:message key="acesearch-data-downloads-header" /></div>
             <c:choose>
                 <c:when test="<%= totalResults == 0 %>">
-                <h3><liferay-ui:message key="acesearch-no-results" /></h3>
+                <div class="number_of_results"><liferay-ui:message key="acesearch-no-results" /></div>
                 </c:when>
                 <c:otherwise>
-                <h3><liferay-ui:message key="acesearch-total-results" /> <%= totalResults%></h3>
+                <div class="number_of_results"><liferay-ui:message key="acesearch-total-results" /> <%= totalResults%></div>
                 </c:otherwise>
             </c:choose>
         </c:if>

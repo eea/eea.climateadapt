@@ -349,7 +349,7 @@
     display: none;
 }
 
-#all_selection_types, #adaptation_elements_container {
+#all_selection_types, #adaptation_elements_container, #adaptation_sectors_container {
     display: none;
 }
 
