@@ -93,18 +93,11 @@ pageContext.setAttribute("countriesList", countriesList);
 <%-- this is here and not in js file, because we're using some JSP code in it. TODO solve that and move to js file --%>
 <script type="text/javascript">
 
-	// ENABLE THIS WHEN RUNNING STANDALONE (WITHOUT REST OF ACE)
+	/* ENABLE THIS WHEN RUNNING STANDALONE (WITHOUT REST OF ACE - view.jsp from AceSearch-portlet) */
 	var $j = jQuery.noConflict();
 
-    // Stores results for each data type group
+    /* Stores results for each data type group */
     var groupedJSONResults = new Array();
-
-	// display only first 5 searchresults
-	jQuery(document).ready(function(){
-		for(var i  = 0; i < 5; i++) {
-			$j(".searchresult").next().show();
-		}
-	});     
 
     /**
 	 * retrieves search parameters from the sort-search form that invoked this, executes the search through XHR, and sets json response to correct search results panel.
@@ -149,7 +142,7 @@ pageContext.setAttribute("countriesList", countriesList);
                 groupedJSONResults[$j("#sortsearchformId-"+unique + " input[name=aceitemtype]").val()] = aceitemResults;
 
                 var firstFiveAceitemResults = new Array();
-				for(var i = 0; i < 5; i++) {
+				for(var i = 0; i < <%= renderRequest.getPreferences().getValue(Constants.rowsPerPagePreferenceName, "5") %>; i++) {
 					firstFiveAceitemResults.push(aceitemResults[i]);
 				}
 				//displayJSONResults(unique, firstFiveAceitemResults);				

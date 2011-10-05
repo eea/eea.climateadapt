@@ -5,7 +5,7 @@
 		// a random postfix is used to relate ids of elements
 		//
 		
-		int itemsOnPage = 5; 
+		int itemsOnPage = Integer.parseInt(renderRequest.getPreferences().getValue(Constants.rowsPerPagePreferenceName, "5")); 
 	
 		int r = new java.util.Random().nextInt(Integer.MAX_VALUE);
 		pageContext.setAttribute("unique", "" + r);
@@ -75,7 +75,7 @@
 		<!-- pagination -->
 		<script type="text/javascript"> 
 
-			// searchresultsbytpe AceSearchPortlet
+			// searchresultsbytpe.jspf AceSearchPortlet
 			// ENABLE THIS WHEN RUNNING STANDALONE (WITHOUT REST OF ACE)		
 			var $j = jQuery.noConflict();
 
@@ -121,7 +121,7 @@
 		<hr class="clearer2"/>
 		
 		<div id="${resultsListId}">
-			<c:forEach var="wrappedSearchResult" items="${groupedResults}" begin="0" end="4">
+			<c:forEach var="wrappedSearchResult" items="${groupedResults}" begin="0" end="<%= itemsOnPage-1 %>">
 
                 <c:set var="searchResult" value="${wrappedSearchResult.aceItem}"/>
 

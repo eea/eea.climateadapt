@@ -110,9 +110,11 @@ public class AceSearchPortlet extends MVCPortlet {
      */
     public void setAceSearchPref(ActionRequest request, ActionResponse response) throws Exception {
 		PortletPreferences prefs = request.getPreferences();
-		
-		prefs.setValue(Constants.fuzzinessPreferenceName, ParamUtil.getString(request, Constants.fuzzinessPreferenceName) );
+
+		prefs.setValue(Constants.rowsPerPagePreferenceName, ParamUtil.getString(request, Constants.rowsPerPagePreferenceName) );
 	
+		prefs.setValue(Constants.fuzzinessPreferenceName, ParamUtil.getString(request, Constants.fuzzinessPreferenceName) );
+
 		prefs.store();	
 	}
 }

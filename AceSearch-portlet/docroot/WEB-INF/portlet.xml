@@ -31,7 +31,7 @@
 		<portlet-preferences>
 			<preference>
 				<name>rowsPerPage</name>
-				<value>10</value>
+				<value>5</value>
 			</preference>
 			<preference>
 				<name>fuzziness</name>
