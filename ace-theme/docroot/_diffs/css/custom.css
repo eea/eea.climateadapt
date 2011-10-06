@@ -110,131 +110,143 @@ body #banner .logo a {
 /* ---------- Main navigation ---------- */
 
 #navigation {
-	background: #a5bf26;
-	clear: both;
+	
 	margin-top: 3px;
-	position: relative;
 	z-index: 1;
 }
 
-#navigation ul {
+ul#topnav {
+	margin: 0; padding: 0;
+	float: left;
+	width: 984px;
 	list-style: none;
-	margin: 0;
-}
-
-.ie7 #navigation ul {
-	margin-left: 3px;
-}
-
-#navigation li, #navigation a {
-	display: inline-block;
-}
-
-.ie6 #navigation li, .ie7 #navigation li, .ie6 #navigation a, .ie7 #navigation a {
-	display: inline;
-	zoom: 1;
-	z-index: 200;
-}
-
-#navigation li {
-	line-height: 29px;
 	position: relative;
-	vertical-align: middle;
+	font-size: 13px;
+	background: #a5bf26;
+	height: 32px;
+	z-index: 100;
+	border-bottom: 1px solid #758816;
+}
+ul#topnav li {
+	float: left;
+	margin: 0; 
+	padding: 7px;
 }
 
 #navigation li.first {
 	margin-left: 4px;
 }
 
-#navigation a {
+ul#topnav .selected {
+	background-color: #E9ECC9; 
+	border-top: 1px solid #758816;
+	border-left: 1px solid #758816;
+	border-right: 1px solid #758816;
+	border-top-left-radius: 3px;
+	border-top-right-radius: 3px;
+	-moz-border-radius-topleft: 3px;
+	-moz-border-radius-topright: 3px;
+	margin-top: 4px;
+	padding-top: 0;
+}
+
+ul#topnav li.selected a {
+	margin-bottom: 1px;
+	padding-top: 2px;
+}
+
+ul#topnav li a {
+	display: block;
 	color: #000;
-	font-size: 1.1em;
-	padding: 0 7px;
 	text-decoration: none;
 }
 
-.ie7 #navigation a {
-	padding: 0 7px;
-}
-
-#navigation .aui-dd-drop a {
-	cursor: move;
-}
-
-#navigation .selected {
-	background-color: #e9efc9;
+ul#topnav li.submenu:hover { 
+	background: #e9efc9;
+	border-top: 1px solid #758816;
 	border-left: 1px solid #758816;
 	border-right: 1px solid #758816;
-	border-top: 1px solid #758816;
 	border-top-left-radius: 3px;
 	border-top-right-radius: 3px;
-	height: 26px;
 	-moz-border-radius-topleft: 3px;
-	-moz-border-radius-topright: 3px; 
-	top:3px 
+	-moz-border-radius-topright: 3px;
+	margin-top: 4px;
+	padding-top: 3px; 
 }
 
-#navigation .selected a {
+ul#topnav li.submenu a:hover {
 	color: #000;
-	position: relative;
-	top: -5px;
+	margin-bottom: 1px;
+	padding-top: 0;
 }
 
-#navigation a:hover, #navigation a:focus, #navigation .child-menu li a, #navigation .aui-dd-dragging, .lfr-navigation-proxy {
-	color: #FFF;
-	outline: 0;
+
+
+ul#topnav li a:hover { 
+	color: #FFF; 
 }
 
-#navigation .child-menu li a {
-	background: none;
-	color: #555;
-	text-shadow: none;
-}
-
-#navigation li:hover .child-menu {
-	display: block;
+ul#topnav li ul {
+	/*border-top: 1px solid #758816;*/
+	border-bottom: 1px solid #758816;
+	float: left;
+	padding: 4px 5px 6px 5px;
 	position: absolute;
-	width: 200px;
-	z-index: 200;
-}
-
-.ie6 #navigation li.hover .child-menu {
-	display: block;
-	position: absolute;
-	width: 200px;
-	z-index: 200;
-}
-
-.ie6 #navigation li.hover .child-menu, .ie7 #navigation li:hover ul.child-menu {
+	list-style: none;
 	left: 0;
-	top: 25px;
-}
-
-#navigation .child-menu {
+	margin: 0; 
+	font-size: 11px;
+	top: 33px;
 	display: none;
+	width: 974px;
+	background: #e9efc9;
+	z-index: 1000;
 }
 
-#navigation .child-menu li {
-	border-width: 0 0 1px;
-	display: block;
-	float: none;
-	margin: 0;
+ul#topnav li ul li {
+	margin: 0 1px 0 2px;
+	padding: 0;
 }
 
-#navigation .child-menu li a {
-	cursor: pointer !important;
+ul#subnav li a {
+	padding: 6px;
 }
 
-.ie7 #navigation .child-menu li a {
-	zoom: 1;
+ul#subnav li.selected {
+	background: none; 
+	border: none;
+	margin-top: 0;
 }
 
-#navigation .child-menu li a:hover {
-	color: #000;
+ul#subnav li.selected a {
+	margin-bottom:0;
+	padding-top:6px;
 }
 
-#navigation .child-menu .selected a {
-	color: #000;
+ul#subnav li.first {
+	margin-left: 0
+}
+
+ul#topnav li:hover ul { 
+	display: block; 
+} /*--Show subnav on hover--*/
+
+ul#subnav li:hover { 
+	background: #e9efc9;
+	border: none;
+	margin-top: 0; 
+}
+
+ul#topnav li ul a { 
+	color: #758816;
+	display: inline; 
+} /*--Since we declared a link style on the parent list link, we will correct it back to its original state--*/
+
+ul#subnav li a:hover {
+	color: #2C330A;
+	margin-bottom: 0;
+	padding-top: 6px;
+	text-decoration: none;
 }
 
 /* ---------- Portlet wrapper and icons ---------- */
@@ -513,6 +525,7 @@ body #banner .logo a {
 /**** Second level menu ****/
 
 #sec-menu {
+	margin-top: 35px;
 	padding: 0;
 }
 
@@ -523,7 +536,7 @@ body #banner .logo a {
 
 #sec-menu ul {
 	background-color: #e9efc9;
-	border-top: 1px solid #758816;
+	/*border-top: 1px solid #758816;*/
 	border-bottom: 1px solid #758816;
 	margin: 0;
 	padding: 5px;
@@ -1049,6 +1062,10 @@ span.opens-new-window-accessible,
 #acesearch_container .search_section {
 	color: #353f02;
 	margin: 0;
+}
+
+#acesearch_container h2 {
+	margin-bottom: 5px;
 }
 
 /**** Styling of the similar areas tool 
