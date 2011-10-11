@@ -23,11 +23,11 @@ public class ACEIndexWriter {
      */
     private ACEIndexWriter() {
         try {
-            System.out.println("creating ACEIndexWriter");
+            //System.out.println("creating ACEIndexWriter");
 
             Directory luceneDirectory = FSDirectory.open(new File(ACEIndexUtil.retrieveIndexFolder() + ACEIndexConstant.INDEX_NAME));
             if(IndexWriter.isLocked(luceneDirectory)) {
-                System.out.println("Lucene directory is locked, forcing unlock");
+                //System.out.println("Lucene directory is locked, forcing unlock");
                 IndexWriter.unlock(luceneDirectory);
             }
             Analyzer analyzer = ACEAnalyzer.getAnalyzer();
@@ -57,7 +57,7 @@ public class ACEIndexWriter {
      */
     @Override
     protected void finalize() throws Throwable {
-        System.out.println("finalizing ACEIndexWriter");
+        //System.out.println("finalizing ACEIndexWriter");
         indexWriter.close();
     }
 
@@ -67,7 +67,7 @@ public class ACEIndexWriter {
      */
     public void close() throws ACELuceneException {
         try {
-        System.out.println("closing indexWriter");
+        //System.out.println("closing indexWriter");
         indexWriter.close();
         }
         catch (CorruptIndexException x) {
@@ -102,12 +102,12 @@ public class ACEIndexWriter {
      * @throws ACELuceneException hmm
      */
     public void add(Document document) throws ACELuceneException {
-        System.out.println("ACEIndexWriter: adding aceitem ");
+        //System.out.println("ACEIndexWriter: adding aceitem ");
         try {
             indexWriter.addDocument(document);
             indexWriter.commit();
             ACEIndexSearcher.getACEIndexSearcher().setStale(true);
-            System.out.println("ACEIndexWriter: finished adding aceitem ");
+            //System.out.println("ACEIndexWriter: finished adding aceitem ");
         }
         catch(CorruptIndexException x) {
             System.out.println(x.getMessage());
@@ -128,12 +128,12 @@ public class ACEIndexWriter {
      * @throws ACELuceneException hmm
      */
     public void delete(String aceItemId) throws ACELuceneException {
-        System.out.println("ACEIndexWriter: deleting aceitem " + aceItemId);
+        //System.out.println("ACEIndexWriter: deleting aceitem " + aceItemId);
         try {
             indexWriter.deleteDocuments(new Term(ACEIndexConstant.IndexField.ACEITEM_ID, aceItemId));
             indexWriter.commit();
             ACEIndexSearcher.getACEIndexSearcher().setStale(true);
-            System.out.println("ACEIndexWriter: finished deleting aceitem " + aceItemId);
+            //System.out.println("ACEIndexWriter: finished deleting aceitem " + aceItemId);
         }
         catch(CorruptIndexException x) {
             System.out.println(x.getMessage());

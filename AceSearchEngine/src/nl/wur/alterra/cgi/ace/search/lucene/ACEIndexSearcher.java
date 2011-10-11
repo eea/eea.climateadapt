@@ -69,7 +69,7 @@ public class ACEIndexSearcher {
     }
 
     public TopDocs search(Query query, String sortBy, int itemsPerPage) throws ACELuceneException {
-        System.out.println("ACIndexSearcher: query " + query.toString());
+        //System.out.println("ACIndexSearcher: query " + query.toString());
 
         // TODO remove this hack
         itemsPerPage = 1000;
@@ -77,12 +77,12 @@ public class ACEIndexSearcher {
         try {
 
             if(this.isStale()) {
-                System.out.println("ACEIndexSearcher is stale, re-opening indexreader");
+                //System.out.println("ACEIndexSearcher is stale, re-opening indexreader");
                 IndexReader newReader, oldReader;
                 oldReader = this.searcher.getIndexReader();
                 newReader = oldReader.reopen();
                 if (newReader != oldReader) {
-                    System.out.println("index changed");
+                    //System.out.println("index changed");
                     this.searcher.close();
                     oldReader.close();
                     this.searcher = new IndexSearcher(newReader);
@@ -173,7 +173,7 @@ public class ACEIndexSearcher {
      */
     @Override
     protected void finalize() throws Throwable {
-        System.out.println("finalizing ACEIndexsearcher");
+        //System.out.println("finalizing ACEIndexsearcher");
         searcher.getIndexReader().close();
         searcher.close();
     }
@@ -184,7 +184,7 @@ public class ACEIndexSearcher {
      */
     public void close() throws ACELuceneException {
         try {
-        System.out.println("closing indexWriter");
+        //System.out.println("closing indexWriter");
         searcher.getIndexReader().close();
         searcher.close();
         }

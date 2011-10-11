@@ -65,7 +65,7 @@ public class ACEIndexSynchronizer {
      * @param aceItem to be re-indexed
      */
     public synchronized void reIndex(AceItem aceItem) {
-        System.out.println("AceItemSynchronizer: reIndexing aceitem " + aceItem.getAceItemId());
+        //System.out.println("AceItemSynchronizer: reIndexing aceitem " + aceItem.getAceItemId());
         AceItemIndexer indexer = new AceItemIndexer();
         try {
             indexer.reIndex(aceItem);
@@ -74,7 +74,7 @@ public class ACEIndexSynchronizer {
             System.out.println(x.getMessage());
             x.printStackTrace();
         }
-        System.out.println("AceItemSynchronizer: finished reIndexing aceitem " + aceItem.getAceItemId());
+        //System.out.println("AceItemSynchronizer: finished reIndexing aceitem " + aceItem.getAceItemId());
     }
 
     /**
@@ -87,7 +87,7 @@ public class ACEIndexSynchronizer {
             aceIndexWriter.deleteAll();
 
             List<AceItem> aceItems = AceItemLocalServiceUtil.getAceItems(0, AceItemLocalServiceUtil.getAceItemsCount());
-            System.out.println("\n\n\nACEIndexSynchronizer # aceitems retrieved: " + aceItems.size());
+            //System.out.println("\n\n\nACEIndexSynchronizer # aceitems retrieved: " + aceItems.size());
 
             AceItemIndexer indexer = new AceItemIndexer();
             for(AceItem aceItem : aceItems) {
