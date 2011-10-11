@@ -46,7 +46,7 @@ public class AceItemIndexer {
      * @throws ACELuceneException
      */
     public void reIndex(AceItem aceItem) throws ACELuceneException {
-        System.out.println("AceItemIndexer: reindexing AceItem " + aceItem.getAceItemId());
+        //System.out.println("AceItemIndexer: reindexing AceItem " + aceItem.getAceItemId());
         try {
             aceIndexWriter.delete(Long.toString(aceItem.getAceItemId()));
         }
@@ -56,7 +56,7 @@ public class AceItemIndexer {
         }
         Document document = convertToLuceneDocument(aceItem);
         aceIndexWriter.add(document);
-        System.out.println("AceItemIndexer: successfully indexed AceItem " + aceItem.getAceItemId());
+        //System.out.println("AceItemIndexer: successfully indexed AceItem " + aceItem.getAceItemId());
     }
 
     /**
