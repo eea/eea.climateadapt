@@ -30,10 +30,10 @@ public abstract class LuceneIndexUpdatePortlet extends MVCPortlet {
      * @throws Exception
      */
     public void synchronizeIndex(ActionRequest request, ActionResponse response) throws Exception {
-        System.out.println("Synchronizing Lucene index with DBMS");
+        //System.out.println("Synchronizing Lucene index with DBMS");
         ACEIndexSynchronizer aceIndexSynchronizer = new ACEIndexSynchronizer();
         aceIndexSynchronizer.synchronize();
-        System.out.println("Finished synchronizing Lucene index with DBMS");
+        //System.out.println("Finished synchronizing Lucene index with DBMS");
     }
 
 
@@ -42,10 +42,10 @@ public abstract class LuceneIndexUpdatePortlet extends MVCPortlet {
      *
      */
     public void synchronizeIndexSingleAceItem(AceItem aceitem) {
-        System.out.println("Re-building Lucene index for single AceItem");
+        //System.out.println("Re-building Lucene index for single AceItem");
         ACEIndexSynchronizer aceIndexSynchronizer = new ACEIndexSynchronizer();
         aceIndexSynchronizer.reIndex(aceitem);
-        System.out.println("Finished re-building Lucene index for single AceItem");
+        //System.out.println("Finished re-building Lucene index for single AceItem");
     }
 
     /**
@@ -66,6 +66,9 @@ public abstract class LuceneIndexUpdatePortlet extends MVCPortlet {
         aceitem.setNasId(ParamUtil.getLong(request, "nasId"));
         aceitem.setName(ParamUtil.getString(request, "name"));
         aceitem.setDescription(ParamUtil.getString(request, "description"));
+        
+        String oldlanguage = aceitem.getLanguage();
+        aceitem.setLanguage(ParamUtil.getString(request, "language"));
 
         aceitem.setDatatype(ParamUtil.getString(request, "datatype"));
         aceitem.setStoredAt(ParamUtil.getString(request, "storedAt"));
@@ -104,8 +107,16 @@ public abstract class LuceneIndexUpdatePortlet extends MVCPortlet {
             }
         }
         aceitem.setClimateimpacts_(choosenclimateimpacts);
-
-        aceitem.setTextSearch(ParamUtil.getString(request, "textSearch"));
+        
+        String oldtextsearch = ParamUtil.getString(request, "textSearch");
+        if(oldlanguage != null && oldlanguage.trim().length() > 0 &&
+        	oldtextsearch.startsWith(oldlanguage) ) {
+        	
+        	oldtextsearch = oldtextsearch.substring( oldlanguage.length()+1 );
+        }
+        
+        aceitem.setTextSearch(ParamUtil.getString(request, "language") + " " 
+        		            + oldtextsearch);
         aceitem.setKeyword(ParamUtil.getString(request, "keyword"));
         aceitem.setSpatialLayer(ParamUtil.getString(request, "spatialLayer"));
         aceitem.setSpatialValues(ParamUtil.getString(request, "spatialValues"));

@@ -67,11 +67,14 @@
 		
 		<b>description</b><br />
 		<textarea name="description" rows=10 cols=100><%= aceitem == null ? "" : aceitem.getDescription() %></textarea><br /><br />
-
+		
+		<b>special tagging</b><br />
+		<input name="language" type="text" size="65" value='<%= aceitem == null ? "" : aceitem.getLanguage() %>'><br /><br />
+		
 		<b>textsearch</b><br />
 		<textarea name="textSearch" rows=15 cols=100><%= aceitem == null ? "" : aceitem.getTextSearch() %></textarea><br /><br />
 
-            <b>keywords</b><br />	
+        <b>keywords</b><br />	
 		<textarea name="keyword" rows=5 cols=100><%= aceitem == null ? "" : aceitem.getKeyword() %></textarea><br /><br />
 
 		<aui:input name="source" />
