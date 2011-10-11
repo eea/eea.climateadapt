@@ -266,6 +266,20 @@ public class AceItemLocalServiceWrapper implements AceItemLocalService {
 	* Hugo de Groot: add these methods by hand to <portlet>LocalServiceImpl
 	* and rerun ServiceBuilder if auto generation fails
 	*
+	* Gets a list with a range of AceItems from a group
+	*/
+	public java.util.List<nl.wur.alterra.cgi.ace.model.AceItem> getAceItemsByGroupId(
+		long groupId, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _aceItemLocalService.getAceItemsByGroupId(groupId, start, end,
+			orderByComparator);
+	}
+
+	/**
+	* Hugo de Groot: add these methods by hand to <portlet>LocalServiceImpl
+	* and rerun ServiceBuilder if auto generation fails
+	*
 	* Gets the number of AceItems in a group
 	*/
 	public int getAceItemsCountByGroupId(long groupId)

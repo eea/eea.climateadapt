@@ -43,3 +43,17 @@ create table Ace_NASSource (
 	companyId LONG,
 	groupId LONG
 );
+
+create table Ace_WxsHarvester (
+	wxsharvesterid LONG not null primary key,
+	name VARCHAR(75) null,
+	url VARCHAR(75) null,
+	ogctype VARCHAR(75) null,
+	every INTEGER,
+	topic VARCHAR(75) null,
+	savedToGeoNetwork BOOLEAN,
+	geonetworkId LONG,
+	geonetworkUUID VARCHAR(75) null,
+	companyId LONG,
+	groupId LONG
+);

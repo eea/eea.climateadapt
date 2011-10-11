@@ -95,6 +95,15 @@ public class AceItemPortlet extends LuceneIndexUpdatePortlet {
 		String rowsPerPage = ParamUtil.getString(request, "rowsPerPage");
 		PortletPreferences prefs = request.getPreferences();
 		prefs.setValue("rowsPerPage", rowsPerPage);
+		
+		String orderByCol = ParamUtil.getString(request, Constants.ORDERBYCOL);
+
+		prefs.setValue(Constants.ORDERBYCOL, orderByCol);
+
+		String orderByType = ParamUtil.getString(request, Constants.ORDERBYTYPE);
+
+		prefs.setValue(Constants.ORDERBYTYPE, orderByType);
+		
 		prefs.store();
 	}
 }

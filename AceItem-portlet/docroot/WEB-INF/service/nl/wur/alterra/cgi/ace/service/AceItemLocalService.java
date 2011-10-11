@@ -249,6 +249,18 @@ public interface AceItemLocalService {
 	* Hugo de Groot: add these methods by hand to <portlet>LocalServiceImpl
 	* and rerun ServiceBuilder if auto generation fails
 	*
+	* Gets a list with a range of AceItems from a group
+	*/
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public java.util.List<nl.wur.alterra.cgi.ace.model.AceItem> getAceItemsByGroupId(
+		long groupId, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Hugo de Groot: add these methods by hand to <portlet>LocalServiceImpl
+	* and rerun ServiceBuilder if auto generation fails
+	*
 	* Gets the number of AceItems in a group
 	*/
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)

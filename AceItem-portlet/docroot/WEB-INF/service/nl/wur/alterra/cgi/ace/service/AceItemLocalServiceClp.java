@@ -491,11 +491,40 @@ public class AceItemLocalServiceClp implements AceItemLocalService {
 		return (java.util.List<nl.wur.alterra.cgi.ace.model.AceItem>)ClpSerializer.translateOutput(returnObj);
 	}
 
+	public java.util.List<nl.wur.alterra.cgi.ace.model.AceItem> getAceItemsByGroupId(
+		long groupId, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		Object returnObj = null;
+
+		MethodHandler methodHandler = new MethodHandler(_getAceItemsByGroupIdMethodKey17,
+				groupId, start, end, orderByComparator);
+
+		try {
+			returnObj = _classLoaderProxy.invoke(methodHandler);
+		}
+		catch (Throwable t) {
+			if (t instanceof com.liferay.portal.kernel.exception.SystemException) {
+				throw (com.liferay.portal.kernel.exception.SystemException)t;
+			}
+
+			if (t instanceof RuntimeException) {
+				throw (RuntimeException)t;
+			}
+			else {
+				throw new RuntimeException(t.getClass().getName() +
+					" is not a valid exception");
+			}
+		}
+
+		return (java.util.List<nl.wur.alterra.cgi.ace.model.AceItem>)ClpSerializer.translateOutput(returnObj);
+	}
+
 	public int getAceItemsCountByGroupId(long groupId)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		Object returnObj = null;
 
-		MethodHandler methodHandler = new MethodHandler(_getAceItemsCountByGroupIdMethodKey17,
+		MethodHandler methodHandler = new MethodHandler(_getAceItemsCountByGroupIdMethodKey18,
 				groupId);
 
 		try {
@@ -563,6 +592,9 @@ public class AceItemLocalServiceClp implements AceItemLocalService {
 			"getAceItemsByGroupId", long.class);
 	private MethodKey _getAceItemsByGroupIdMethodKey16 = new MethodKey(_classLoaderProxy.getClassName(),
 			"getAceItemsByGroupId", long.class, int.class, int.class);
-	private MethodKey _getAceItemsCountByGroupIdMethodKey17 = new MethodKey(_classLoaderProxy.getClassName(),
+	private MethodKey _getAceItemsByGroupIdMethodKey17 = new MethodKey(_classLoaderProxy.getClassName(),
+			"getAceItemsByGroupId", long.class, int.class, int.class,
+			com.liferay.portal.kernel.util.OrderByComparator.class);
+	private MethodKey _getAceItemsCountByGroupIdMethodKey18 = new MethodKey(_classLoaderProxy.getClassName(),
 			"getAceItemsCountByGroupId", long.class);
 }

@@ -40,8 +40,30 @@
 
 
 	<div style="float: left; margin-right: 35px;">
-		<liferay-ui:error key="aceitemdatatype-required" message="aceitemdatatype-required" />		
-		<aui:input name="datatype" />
+		<b>Datatype</b><br />
+	    <select name="datatype">	
+		<%-- note : i18n file should always be in sync with AceItemElement enum --%>
+		<c:forEach var="adaptationType" items="<%= nl.wur.alterra.cgi.ace.model.constants.AceItemType.values() %>" >
+			<div class="check">
+				<c:set var="adaptationTypeMustBeChecked" value="false" />
+				<c:set var="aceItemType" value='<%= aceitem == null ? "" : aceitem.getDatatype() %>' />
+				<c:set var="adaptationTypeMustBeChecked" value="false" />
+				<c:if test="${fn:indexOf(aceItemType, adaptationType)>=0}">
+					<c:set var="adaptationTypeMustBeChecked" value="true" />
+				</c:if>	
+				<c:choose>
+					<c:when test="${adaptationTypeMustBeChecked}">
+						<option value="${adaptationType}" selected="selected" >
+					</c:when>
+					<c:otherwise>
+						<option value="${adaptationType}">
+					</c:otherwise>
+				</c:choose>
+				<liferay-ui:message key="acesearch-datainfotype-lbl-${adaptationType}" /></option>
+			</div>							
+		</c:forEach>
+		</select>
+		<br />
 		
 		<b>description</b><br />
 		<textarea name="description" rows=10 cols=100><%= aceitem == null ? "" : aceitem.getDescription() %></textarea><br /><br />

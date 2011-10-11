@@ -25,7 +25,7 @@
 			url = "<a href='" + aceitem.getStoredAt() + "' target='_blank'>" + aceitem.getStoredAt() + "</a>" ;
 		}
 		language = ( aceitem.getLanguage() == null ? "" : aceitem.getLanguage() );
-		
+/*		
 		if(language.equalsIgnoreCase("de_DE")) {
 			
 			url = url + "&nbsp;&nbsp;(in german)&nbsp;&nbsp;&nbsp;<a href='http://babelfish.yahoo.com/translate_url?doit=done&tt=url&intl=1&fr=bf-home&lp=de_en&btnTrUrl=Translate&&trurl=" + aceitem.getStoredAt() + "' target='_blank'>(machine translate to english)</a>" ;
@@ -36,6 +36,7 @@
 			url = url + "&nbsp;&nbsp;(in dutch)&nbsp;&nbsp;&nbsp;<a href='http://babelfish.yahoo.com/translate_url?doit=done&tt=url&intl=1&fr=bf-home&lp=nl_en&btnTrUrl=Translate&&trurl=" + aceitem.getStoredAt() + "' target='_blank'>(machine translate to english)</a>" ;
 			
 		}
+*/
 	}
 	
 %>

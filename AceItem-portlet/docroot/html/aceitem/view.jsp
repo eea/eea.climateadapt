@@ -17,7 +17,23 @@
 <%@include file="/html/init.jsp" %>
 
 <%
-	String redirect = PortalUtil.getCurrentURL(renderRequest);	
+	String redirect = PortalUtil.getCurrentURL(renderRequest);		
+
+	String orderByCol = ParamUtil.getString(request, Constants.ORDERBYCOL);
+	String orderByType = ParamUtil.getString(request, Constants.ORDERBYTYPE);
+
+	if (Validator.isNotNull(orderByCol) && Validator.isNotNull(orderByType)) {
+		prefs.setValue(Constants.ORDERBYCOL, orderByCol);
+		prefs.setValue(Constants.ORDERBYTYPE, orderByType);
+
+	} else {
+
+		orderByCol = prefs.getValue(Constants.ORDERBYCOL, "name");
+		orderByType = prefs.getValue(Constants.ORDERBYTYPE, "asc");
+
+	}
+
+	OrderByComparator orderByComparator = AceItemUtil.getAceItemOrderByComparator(orderByCol, orderByType);
 %>
 
 <aui:button-row>
@@ -34,9 +50,9 @@
 	<aui:button value="add-aceitem" onClick="<%= addAceItemURL.toString() %>"/>
 </aui:button-row>
 
-<liferay-ui:search-container delta='<%= GetterUtil.getInteger(prefs.getValue("rowsPerPage", "10")) %>' emptyResultsMessage="aceitem-empty-results-message">
+<liferay-ui:search-container delta='<%= GetterUtil.getInteger(prefs.getValue("rowsPerPage", "75")) %>' emptyResultsMessage="aceitem-empty-results-message"  orderByCol="<%= orderByCol %>" orderByType="<%= orderByType %>" >
 	<liferay-ui:search-container-results
-		results="<%= AceItemLocalServiceUtil.getAceItemsByGroupId(scopeGroupId, searchContainer.getStart(), searchContainer.getEnd()) %>"
+		results="<%= AceItemLocalServiceUtil.getAceItemsByGroupId(scopeGroupId, searchContainer.getStart(), searchContainer.getEnd(), orderByComparator) %>"
 		total="<%= AceItemLocalServiceUtil.getAceItemsCountByGroupId(scopeGroupId) %>"
 	/>
 
@@ -66,10 +82,15 @@
 	  }
 %>      
       
+      	<liferay-ui:search-container-column-text
+			name="aceItemId" orderable="<%= true %>" orderableProperty="aceItemId" >
+			<%= aceitem.getAceItemId() %>
+		</liferay-ui:search-container-column-text> 
+      
 		<liferay-ui:search-container-column-text
-			name="name"
-			value="<%= nameLink %>"
-		/>  
+			name="name" orderable="<%= true %>" orderableProperty="name" >
+			<%= nameLink %>
+		</liferay-ui:search-container-column-text>  
 
 		<liferay-ui:search-container-column-text
 			name="sectors_"
@@ -87,9 +108,9 @@
 		/>
 
 		<liferay-ui:search-container-column-text
-			name="datatype"
-			property="datatype"
-		/>
+		 	name="datatype" orderable="<%= true %>" orderableProperty="datatype" >
+			<%= aceitem.getDatatype() %>
+		</liferay-ui:search-container-column-text> 
 
 <%
 	  if (aceitem.getStoragetype().equalsIgnoreCase("URL")|| aceitem.getStoragetype().equalsIgnoreCase("GEONETWORK")) {

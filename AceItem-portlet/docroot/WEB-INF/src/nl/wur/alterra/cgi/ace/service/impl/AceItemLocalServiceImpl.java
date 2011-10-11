@@ -16,6 +16,8 @@ package nl.wur.alterra.cgi.ace.service.impl;
 
 import com.liferay.counter.service.CounterLocalServiceUtil;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.util.OrderByComparator;
+
 import nl.wur.alterra.cgi.ace.model.AceItem;
 import nl.wur.alterra.cgi.ace.model.impl.AceItemImpl;
 import nl.wur.alterra.cgi.ace.service.base.AceItemLocalServiceBaseImpl;
@@ -100,7 +102,17 @@ public class AceItemLocalServiceImpl extends AceItemLocalServiceBaseImpl {
 	public List<AceItem> getAceItemsByGroupId(long groupId, int start, int end) throws SystemException {
 		return aceItemPersistence.findByGroupId(groupId, start, end);
 	}
-
+	/**
+	 * 	
+	 * Hugo de Groot: add these methods by hand to <portlet>LocalServiceImpl
+	 * and rerun ServiceBuilder if auto generation fails 
+	 * 
+	 * Gets a list with a range of AceItems from a group
+	 *
+	 */
+	public List<AceItem> getAceItemsByGroupId(long groupId, int start, int end, OrderByComparator orderByComparator) throws SystemException {
+		return aceItemPersistence.findByGroupId(groupId, start, end, orderByComparator);
+	}
 	/**
 	 * 	
 	 * Hugo de Groot: add these methods by hand to <portlet>LocalServiceImpl

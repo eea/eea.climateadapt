@@ -21,7 +21,14 @@
 <portlet:actionURL name="setAceItemPref" var="setAceItemPrefUrl" />
 
 <aui:form action="<%= setAceItemPrefUrl %>" method="POST" name="fm" >
-	<aui:input name="rowsPerPage" value='<%= prefs.getValue("rowsPerPage","") %>' size="45" type="text" />
+	<aui:input name="rowsPerPage" value='<%= prefs.getValue("rowsPerPage","75") %>' size="45" type="text" />
+
+	<b>Order By Column (name or aceitemId)</b><br />
+	<input name='<%= Constants.ORDERBYCOL %>' type="text" size="45" value='<%= prefs.getValue(Constants.ORDERBYCOL,"name") %>' /><br /><br />
+		
+	<b>Order By Type (asc or desc)</b><br />
+	<input name='<%= Constants.ORDERBYTYPE %>' type="text" size="45" value='<%= prefs.getValue(Constants.ORDERBYTYPE,"asc") %>' /><br /><br />
+	
 
 	<aui:button-row>
 		<aui:button type="submit" />
