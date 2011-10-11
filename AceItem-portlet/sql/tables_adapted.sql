@@ -73,8 +73,23 @@ WITH (
 );
 ALTER TABLE ace_nassource OWNER TO postgres;
 
--- heikki: added from Hugo email dd July 11th 2011
-alter table ace_aceitem add column rating bigint;
-alter table ace_aceitem add column importance bigint;
-update ace_aceitem set rating = 0, importance = 0;
+CREATE TABLE ace_wxsharvester
+(
+  wxsharvesterid bigint NOT NULL,
+  "name" character varying(75),
+  url character varying(75),
+  ogctype character varying(75),
+  every integer,
+  topic character varying(75),
+  savedtogeonetwork boolean,
+  geonetworkid bigint,
+  geonetworkuuid character varying(75),
+  companyid bigint,
+  groupid bigint,
+  CONSTRAINT ace_wxsharvester_pkey PRIMARY KEY (wxsharvesterid)
+)
+WITH (
+  OIDS=FALSE
+);
+ALTER TABLE ace_wxsharvester OWNER TO postgres;
 
