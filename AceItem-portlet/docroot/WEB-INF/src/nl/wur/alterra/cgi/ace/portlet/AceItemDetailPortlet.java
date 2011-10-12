@@ -25,7 +25,6 @@ import com.liferay.util.bridges.mvc.MVCPortlet;
  */
 public class AceItemDetailPortlet extends MVCPortlet {
  
-    private static final String ID = "aceitem_id";
 
     public void doView(
             RenderRequest renderRequest, RenderResponse renderResponse)
@@ -35,7 +34,7 @@ public class AceItemDetailPortlet extends MVCPortlet {
     		PortalUtil.getOriginalServletRequest(
     		PortalUtil.getHttpServletRequest(renderRequest) ) ;
         	
-    		renderRequest.setAttribute(ID, httpRequest.getParameter("aceitem_id"));
+    		renderRequest.setAttribute(Constants.ACEITEMID, httpRequest.getParameter(Constants.ACEITEMID));
     		
         include(viewJSP, renderRequest, renderResponse);
     }    
@@ -97,7 +96,11 @@ public class AceItemDetailPortlet extends MVCPortlet {
 	// override
 	protected void addSuccessMessage(
         ActionRequest actionRequest, ActionResponse actionResponse) {
-
+        
+		//if (false) { // it is possible to omit Messages at all.
+        //    return;
+        //}
+		
         SessionMessages.add(actionRequest, "request_processed", "Thank you for your feedback");
     }
 }

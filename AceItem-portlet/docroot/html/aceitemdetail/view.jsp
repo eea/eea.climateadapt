@@ -14,8 +14,8 @@
 
 	String redirect = PortalUtil.getCurrentURL(renderRequest);
 	
-	if(request.getAttribute("aceitem_id")!=null) {
-		aceitem_id = Long.parseLong( (String) request.getAttribute("aceitem_id") ) ;
+	if(request.getAttribute(Constants.ACEITEMID)!=null) {
+		aceitem_id = Long.parseLong( (String) request.getAttribute(Constants.ACEITEMID) ) ;
 		aceitem = AceItemLocalServiceUtil.getAceItem( aceitem_id ) ;
 		
 		if(aceitem.getStoragetype().equalsIgnoreCase("GEONETWORK")) {

@@ -184,6 +184,52 @@
     		<short-title>AceItemDetailPortlet</short-title>
     		<keywords></keywords>
     	</portlet-info>
+    	<portlet-preferences>
+			<preference>
+				<name>editUrl</name>
+				<value>/web/guest/aceitems1</value>
+			</preference>
+		</portlet-preferences>
+    	<security-role-ref>
+    		<role-name>administrator</role-name>
+    	</security-role-ref>
+    	<security-role-ref>
+    		<role-name>guest</role-name>
+    	</security-role-ref>
+    	<security-role-ref>
+    		<role-name>power-user</role-name>
+    	</security-role-ref>
+    	<security-role-ref>
+    		<role-name>user</role-name>
+    	</security-role-ref>
+    </portlet>
+    <portlet>
+    	<portlet-name>aceitemgoeditportlet</portlet-name>
+    	<display-name>AceItemGoEditPortlet</display-name>
+    	<portlet-class>
+    		nl.wur.alterra.cgi.ace.portlet.AceItemGoEditPortlet
+    	</portlet-class>
+    	<init-param>
+    		<name>view-jsp</name>
+    		<value>/html/aceitemgoedit/view.jsp</value>
+    	</init-param>
+    	<init-param>
+    		<name>edit-jsp</name>
+    		<value>/html/aceitemgoedit/edit.jsp</value>
+    	</init-param>
+    	<expiration-cache>0</expiration-cache>
+    	<supports>
+    		<mime-type>text/html</mime-type>
+    		<portlet-mode>VIEW</portlet-mode>
+    		<portlet-mode>EDIT</portlet-mode>
+    	</supports>
+        <!-- Resource Bundle -->
+		<resource-bundle>content.Language</resource-bundle>
+    	<portlet-info>
+    		<title>AceItemGoEditPortlet</title>
+    		<short-title>AceItemGoEditPortlet</short-title>
+    		<keywords></keywords>
+    	</portlet-info>
     	<security-role-ref>
     		<role-name>administrator</role-name>
     	</security-role-ref>
