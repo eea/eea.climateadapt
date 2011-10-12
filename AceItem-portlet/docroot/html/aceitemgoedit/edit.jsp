@@ -22,8 +22,8 @@
 
 <aui:form action="<%= setAceItemGoEditPrefUrl %>" method="POST" name="fm" >
 
-	<b>Edit url (long stuff)</b><br />
-	<input name='<%= Constants.EDITURL %>' type="text" size="160" value='<%= prefs.getValue(Constants.EDITURL,"/web/guest/aceitems1") %>' /><br /><br />
+	<b>Edit url (long stuff ending with 'aceItemId=')</b><br />
+	<input name='<%= Constants.EDITURL %>' type="text" size="180" value='<%= prefs.getValue(Constants.EDITURL,"/web/guest/aceitems1") %>' /><br /><br />
 
 	<aui:button-row>
 		<aui:button type="submit" />

@@ -230,6 +230,13 @@
     		<short-title>AceItemGoEditPortlet</short-title>
     		<keywords></keywords>
     	</portlet-info>
+    	<!-- Portlet preferences (configurable by user in portlet EDIT mode) -->
+		<portlet-preferences>
+			<preference>
+				<name>editUrl</name>
+				<value>/web/guest/aceitems1</value>
+			</preference>
+		</portlet-preferences>
     	<security-role-ref>
     		<role-name>administrator</role-name>
     	</security-role-ref>
