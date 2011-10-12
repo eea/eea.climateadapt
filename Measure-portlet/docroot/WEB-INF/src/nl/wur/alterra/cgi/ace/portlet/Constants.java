@@ -4,6 +4,10 @@ public class Constants {
 	public static final String ORDERBYCOL = "orderByCol";  // exactly this is obliged
 
 	public static final String ORDERBYTYPE = "orderByType"; // exactly this is obliged
+	
+    public static final String MEASUREID = "measure_id";
+	
+	public static final String EDITURL = "editUrl"; // used inside AceItemGoEditPortlet
 
 	public static String bingTimeOutPreferenceName = "bingtimeout";
 

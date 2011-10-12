@@ -47,6 +47,8 @@ public class MeasurePortlet extends MVCPortlet {
 		if (MeasureValidator.validateMeasure(measure, errors)) {
 			MeasureLocalServiceUtil.addMeasure(measure);
 
+			//com.liferay.portal.kernel.dao.orm.EntityCacheUtil.clearCache();
+			
 			SessionMessages.add(request, "measure-added");
 
 			sendRedirect(request, response);
@@ -187,6 +189,8 @@ public class MeasurePortlet extends MVCPortlet {
 
 		if (MeasureValidator.validateMeasure(measure, errors)) {
 			MeasureLocalServiceUtil.updateMeasure(measure);
+
+			//com.liferay.portal.kernel.dao.orm.EntityCacheUtil.clearCache();
 
 			SessionMessages.add(request, "measure-updated");
 			

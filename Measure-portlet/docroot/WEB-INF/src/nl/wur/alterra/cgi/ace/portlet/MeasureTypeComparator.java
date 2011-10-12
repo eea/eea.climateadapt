@@ -11,9 +11,9 @@ public class MeasureTypeComparator extends OrderByComparator {
 	 */
 	private static final long serialVersionUID = 1778625443566249409L;
 
-	public static String ORDER_BY_ASC = "mao_type ASC";
+	public static String ORDER_BY_ASC = "mao_type ASC"; // "mao_type, name ASC";
 
-	public static String ORDER_BY_DESC = "mao_type DESC";
+	public static String ORDER_BY_DESC = "mao_type DESC"; //  "mao_type, name DESC";
 	
 	private boolean _asc ;
 	
@@ -31,6 +31,9 @@ public class MeasureTypeComparator extends OrderByComparator {
 		Measure measure1 = (Measure) obj1;
 		Measure measure2 = (Measure) obj2;
 
+		//int value = measure1.getMao_type().concat(measure1.getName()).toLowerCase().compareTo(
+		//		measure2.getMao_type().concat(measure2.getName()).toLowerCase() );
+		
 		int value = measure1.getMao_type().toLowerCase().compareTo(
 		measure2.getMao_type().toLowerCase());
 			

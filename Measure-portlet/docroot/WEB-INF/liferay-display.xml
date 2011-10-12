@@ -9,5 +9,6 @@
 		<portlet id="measureportlet"></portlet>
 		<portlet id="backportlet"></portlet>
 		<portlet id="measuredetailportlet"></portlet>
+		<portlet id="measuregoeditportlet"></portlet>
 	</category>
 </display>

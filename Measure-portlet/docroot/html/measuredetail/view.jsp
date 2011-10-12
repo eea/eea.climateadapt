@@ -28,8 +28,8 @@
 
 	String redirect = PortalUtil.getCurrentURL(renderRequest);
 	
-	if(request.getAttribute("measure_id")!=null) {
-		measure_id = Long.parseLong( (String) request.getAttribute("measure_id") ) ;
+	if(request.getAttribute(Constants.MEASUREID)!=null) {
+		measure_id = Long.parseLong( (String) request.getAttribute(Constants.MEASUREID) ) ;
 		measure = MeasureLocalServiceUtil.getMeasure( measure_id ) ;
 		
 		url = measure.getWebsite();

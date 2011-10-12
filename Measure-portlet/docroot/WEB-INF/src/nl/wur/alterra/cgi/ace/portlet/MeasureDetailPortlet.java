@@ -26,8 +26,6 @@ import com.liferay.util.bridges.mvc.MVCPortlet;
  */
 public class MeasureDetailPortlet extends MVCPortlet {
 
-    private static final String ID = "measure_id";
-
     public void doView(
             RenderRequest renderRequest, RenderResponse renderResponse)
         throws IOException, PortletException {
@@ -36,7 +34,7 @@ public class MeasureDetailPortlet extends MVCPortlet {
     		PortalUtil.getOriginalServletRequest(
     		PortalUtil.getHttpServletRequest(renderRequest) ) ;
         	
-    		renderRequest.setAttribute(ID, httpRequest.getParameter("ace_measure_id"));
+    		renderRequest.setAttribute(Constants.MEASUREID, httpRequest.getParameter("ace_measure_id"));
     		
         include(viewJSP, renderRequest, renderResponse);
     }    

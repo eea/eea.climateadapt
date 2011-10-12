@@ -93,8 +93,8 @@
 		
 		<aui:input name="lifetime" />
 		
-		<b>language</b><br />	
-		<input name="language" type="text" size="24" maxlength="24" value="<%= measure == null ? "en_UK" : measure.getImplementationtype() %>"><br /><br />
+		<b>special tagging</b><br />	
+		<input name="language" type="text" size="65" maxlength="75" value="<%= measure == null ? "" : measure.getLanguage() %>"><br /><br />
 		
 		<aui:input name="spatiallayer" />
 		
