@@ -98,11 +98,6 @@
 		/>
 
 		<liferay-ui:search-container-column-text
-			name="storedAt"
-			property="storedAt"
-		/>
-
-		<liferay-ui:search-container-column-text
 			name="elements_"
 			value="<%= elements %>"
 		/>
