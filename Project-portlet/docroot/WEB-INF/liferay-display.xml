@@ -8,5 +8,6 @@
 	<category name="Ace">
 		<portlet id="projectportlet"></portlet>
 		<portlet id="projectdetailportlet"></portlet>
+		<portlet id="projectgoeditportlet"></portlet>
 	</category>
 </display>

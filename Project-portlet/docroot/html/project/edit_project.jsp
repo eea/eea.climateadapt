@@ -110,7 +110,12 @@
 
 		<aui:input name="spatiallevel"  />
 		
-		<aui:input name="duration"  />
+		<aui:input name="duration"  />	
+			
+		<b>special tagging</b><br />	
+		<input name="language" type="text" size="65" maxlength="75" value="<%= project == null ? "" : project.getLanguage() %>"><br /><br />
+		
+		
 	 </div>
 	</aui:fieldset>
 

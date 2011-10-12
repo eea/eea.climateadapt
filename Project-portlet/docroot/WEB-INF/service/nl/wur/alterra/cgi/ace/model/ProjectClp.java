@@ -195,6 +195,14 @@ public class ProjectClp extends BaseModelImpl<Project> implements Project {
 		_importance = importance;
 	}
 
+	public String getLanguage() {
+		return _language;
+	}
+
+	public void setLanguage(String language) {
+		_language = language;
+	}
+
 	public Project toEscapedModel() {
 		if (isEscapedModel()) {
 			return this;
@@ -227,6 +235,7 @@ public class ProjectClp extends BaseModelImpl<Project> implements Project {
 		clone.setDuration(getDuration());
 		clone.setRating(getRating());
 		clone.setImportance(getImportance());
+		clone.setLanguage(getLanguage());
 
 		return clone;
 	}
@@ -272,7 +281,7 @@ public class ProjectClp extends BaseModelImpl<Project> implements Project {
 	}
 
 	public String toString() {
-		StringBundler sb = new StringBundler(39);
+		StringBundler sb = new StringBundler(41);
 
 		sb.append("{projectId=");
 		sb.append(getProjectId());
@@ -312,13 +321,15 @@ public class ProjectClp extends BaseModelImpl<Project> implements Project {
 		sb.append(getRating());
 		sb.append(", importance=");
 		sb.append(getImportance());
+		sb.append(", language=");
+		sb.append(getLanguage());
 		sb.append("}");
 
 		return sb.toString();
 	}
 
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(61);
+		StringBundler sb = new StringBundler(64);
 
 		sb.append("<model><model-name>");
 		sb.append("nl.wur.alterra.cgi.ace.model.Project");
@@ -400,6 +411,10 @@ public class ProjectClp extends BaseModelImpl<Project> implements Project {
 			"<column><column-name>importance</column-name><column-value><![CDATA[");
 		sb.append(getImportance());
 		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>language</column-name><column-value><![CDATA[");
+		sb.append(getLanguage());
+		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");
 
@@ -425,4 +440,5 @@ public class ProjectClp extends BaseModelImpl<Project> implements Project {
 	private String _duration;
 	private long _rating;
 	private long _importance;
+	private String _language;
 }

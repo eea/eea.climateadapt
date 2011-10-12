@@ -28,8 +28,8 @@
 
 	String redirect = PortalUtil.getCurrentURL(renderRequest);
 	
-	if(request.getAttribute("project_id")!=null) {
-		project_id = Long.parseLong( (String) request.getAttribute("project_id") ) ;
+	if(request.getAttribute(Constants.PROJECTID)!=null) {
+		project_id = Long.parseLong( (String) request.getAttribute(Constants.PROJECTID) ) ;
 		project = ProjectLocalServiceUtil.getProject( project_id ) ;
 		
 		url = project.getWebsite();

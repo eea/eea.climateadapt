@@ -188,6 +188,14 @@ public class ProjectWrapper implements Project {
 		_project.setImportance(importance);
 	}
 
+	public java.lang.String getLanguage() {
+		return _project.getLanguage();
+	}
+
+	public void setLanguage(java.lang.String language) {
+		_project.setLanguage(language);
+	}
+
 	public nl.wur.alterra.cgi.ace.model.Project toEscapedModel() {
 		return _project.toEscapedModel();
 	}

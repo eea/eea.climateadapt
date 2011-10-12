@@ -21,5 +21,6 @@
 		<field name="duration" type="String" />
 		<field name="rating" type="long" />
 		<field name="importance" type="long" />
+		<field name="language" type="String" />
 	</model>
 </model-hints>

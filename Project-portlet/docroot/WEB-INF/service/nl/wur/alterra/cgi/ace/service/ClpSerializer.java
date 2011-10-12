@@ -189,6 +189,13 @@ public class ClpSerializer {
 
 					method18.invoke(newModel, value18);
 
+					Method method19 = newModelClass.getMethod("setLanguage",
+							new Class[] { String.class });
+
+					String value19 = oldCplModel.getLanguage();
+
+					method19.invoke(newModel, value19);
+
 					return newModel;
 				}
 				catch (Exception e) {
@@ -370,6 +377,13 @@ public class ClpSerializer {
 							(Object[])null);
 
 					newModel.setImportance(value18);
+
+					Method method19 = oldModelClass.getMethod("getLanguage");
+
+					String value19 = (String)method19.invoke(oldModel,
+							(Object[])null);
+
+					newModel.setLanguage(value19);
 
 					return newModel;
 				}

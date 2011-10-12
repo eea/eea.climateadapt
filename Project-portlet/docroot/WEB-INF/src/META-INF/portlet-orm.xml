@@ -32,6 +32,7 @@
 			<basic name="duration" />
 			<basic name="rating" />
 			<basic name="importance" />
+			<basic name="language" />
 			<transient name="primaryKey" />
 		</attributes>
 	</mapped-superclass>

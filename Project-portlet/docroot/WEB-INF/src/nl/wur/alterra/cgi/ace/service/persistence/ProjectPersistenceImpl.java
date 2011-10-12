@@ -302,6 +302,7 @@ public class ProjectPersistenceImpl extends BasePersistenceImpl<Project>
 		projectImpl.setDuration(project.getDuration());
 		projectImpl.setRating(project.getRating());
 		projectImpl.setImportance(project.getImportance());
+		projectImpl.setLanguage(project.getLanguage());
 
 		return projectImpl;
 	}

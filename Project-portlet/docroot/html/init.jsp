@@ -21,6 +21,7 @@
 <%@ page import="com.liferay.portal.security.permission.ActionKeys"%>
 <%@ page import="com.liferay.portal.util.PortalUtil" %>
 
+<%@ page import="nl.wur.alterra.cgi.ace.portlet.Constants"%>
 <%@ page import="nl.wur.alterra.cgi.ace.model.Project"%>
 <%@ page import="nl.wur.alterra.cgi.ace.service.ProjectLocalServiceUtil"%>
 

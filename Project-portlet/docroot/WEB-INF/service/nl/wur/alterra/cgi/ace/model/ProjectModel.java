@@ -335,6 +335,21 @@ public interface ProjectModel extends BaseModel<Project> {
 	public void setImportance(long importance);
 
 	/**
+	 * Gets the language of this project.
+	 *
+	 * @return the language of this project
+	 */
+	@AutoEscape
+	public String getLanguage();
+
+	/**
+	 * Sets the language of this project.
+	 *
+	 * @param language the language of this project
+	 */
+	public void setLanguage(String language);
+
+	/**
 	 * Gets a copy of this project as an escaped model instance by wrapping it with an {@link com.liferay.portal.kernel.bean.AutoEscapeBeanHandler}.
 	 *
 	 * @return the escaped model instance

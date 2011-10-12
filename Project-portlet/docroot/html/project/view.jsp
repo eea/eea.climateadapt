@@ -74,11 +74,6 @@
 		/>
 
 		<liferay-ui:search-container-column-text
-			name="website"
-			property="website"
-		/>
-
-		<liferay-ui:search-container-column-text
 			name="sectors"
 			value="<%= sectors %>"
 		/>

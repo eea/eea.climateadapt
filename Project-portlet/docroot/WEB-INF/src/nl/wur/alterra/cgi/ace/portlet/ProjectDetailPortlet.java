@@ -24,8 +24,6 @@ import com.liferay.util.bridges.mvc.MVCPortlet;
  * Portlet implementation class ProjectDetailPortlet
  */
 public class ProjectDetailPortlet extends MVCPortlet {
- 
-    private static final String ID = "project_id";
    
     public void doView(
             RenderRequest renderRequest, RenderResponse renderResponse)
@@ -35,7 +33,7 @@ public class ProjectDetailPortlet extends MVCPortlet {
     		PortalUtil.getOriginalServletRequest(
     		PortalUtil.getHttpServletRequest(renderRequest) ) ;
    	
-    	renderRequest.setAttribute(ID, httpRequest.getParameter("ace_project_id"));
+    	renderRequest.setAttribute(Constants.PROJECTID, httpRequest.getParameter("ace_project_id"));
     	
         include(viewJSP, renderRequest, renderResponse);
     }

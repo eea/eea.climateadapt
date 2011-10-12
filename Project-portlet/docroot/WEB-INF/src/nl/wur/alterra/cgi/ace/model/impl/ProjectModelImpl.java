@@ -74,9 +74,10 @@ public class ProjectModelImpl extends BaseModelImpl<Project>
 			{ "website", new Integer(Types.VARCHAR) },
 			{ "duration", new Integer(Types.VARCHAR) },
 			{ "rating", new Integer(Types.BIGINT) },
-			{ "importance", new Integer(Types.BIGINT) }
+			{ "importance", new Integer(Types.BIGINT) },
+			{ "language", new Integer(Types.VARCHAR) }
 		};
-	public static final String TABLE_SQL_CREATE = "create table Ace_Project (projectId LONG not null primary key,companyId LONG,groupId LONG,acronym VARCHAR(75) null,title VARCHAR(75) null,startdate DATE null,enddate DATE null,lead VARCHAR(75) null,partners VARCHAR(75) null,funding VARCHAR(75) null,sectors VARCHAR(75) null,spatiallevel VARCHAR(75) null,abstracts VARCHAR(75) null,element VARCHAR(75) null,keywords VARCHAR(75) null,website VARCHAR(75) null,duration VARCHAR(75) null,rating LONG,importance LONG)";
+	public static final String TABLE_SQL_CREATE = "create table Ace_Project (projectId LONG not null primary key,companyId LONG,groupId LONG,acronym VARCHAR(75) null,title VARCHAR(75) null,startdate DATE null,enddate DATE null,lead VARCHAR(75) null,partners VARCHAR(75) null,funding VARCHAR(75) null,sectors VARCHAR(75) null,spatiallevel VARCHAR(75) null,abstracts VARCHAR(75) null,element VARCHAR(75) null,keywords VARCHAR(75) null,website VARCHAR(75) null,duration VARCHAR(75) null,rating LONG,importance LONG,language VARCHAR(75) null)";
 	public static final String TABLE_SQL_DROP = "drop table Ace_Project";
 	public static final String ORDER_BY_JPQL = " ORDER BY project.acronym ASC";
 	public static final String ORDER_BY_SQL = " ORDER BY Ace_Project.acronym ASC";
@@ -319,6 +320,19 @@ public class ProjectModelImpl extends BaseModelImpl<Project>
 		_importance = importance;
 	}
 
+	public String getLanguage() {
+		if (_language == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _language;
+		}
+	}
+
+	public void setLanguage(String language) {
+		_language = language;
+	}
+
 	public Project toEscapedModel() {
 		if (isEscapedModel()) {
 			return (Project)this;
@@ -364,6 +378,7 @@ public class ProjectModelImpl extends BaseModelImpl<Project>
 		clone.setDuration(getDuration());
 		clone.setRating(getRating());
 		clone.setImportance(getImportance());
+		clone.setLanguage(getLanguage());
 
 		return clone;
 	}
@@ -409,7 +424,7 @@ public class ProjectModelImpl extends BaseModelImpl<Project>
 	}
 
 	public String toString() {
-		StringBundler sb = new StringBundler(39);
+		StringBundler sb = new StringBundler(41);
 
 		sb.append("{projectId=");
 		sb.append(getProjectId());
@@ -449,13 +464,15 @@ public class ProjectModelImpl extends BaseModelImpl<Project>
 		sb.append(getRating());
 		sb.append(", importance=");
 		sb.append(getImportance());
+		sb.append(", language=");
+		sb.append(getLanguage());
 		sb.append("}");
 
 		return sb.toString();
 	}
 
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(61);
+		StringBundler sb = new StringBundler(64);
 
 		sb.append("<model><model-name>");
 		sb.append("nl.wur.alterra.cgi.ace.model.Project");
@@ -537,6 +554,10 @@ public class ProjectModelImpl extends BaseModelImpl<Project>
 			"<column><column-name>importance</column-name><column-value><![CDATA[");
 		sb.append(getImportance());
 		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>language</column-name><column-value><![CDATA[");
+		sb.append(getLanguage());
+		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");
 
@@ -562,5 +583,6 @@ public class ProjectModelImpl extends BaseModelImpl<Project>
 	private String _duration;
 	private long _rating;
 	private long _importance;
+	private String _language;
 	private transient ExpandoBridge _expandoBridge;
 }
