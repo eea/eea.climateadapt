@@ -33,14 +33,14 @@
 		<div id="${resultsListId}">
 			<c:forEach var="wrappedSearchResult" items="${groupedResults}" begin="0" end="<%= itemsOnPage-1 %>">		
 
-                <c:set var="searchResult" value="${wrappedSearchResult.aceItem}"/>					<div>
+				<div>
 					<div>
 
-						<c:set var="descriptionId" value="descriptionId-${searchResult.aceItemId}" />
+						<c:set var="descriptionId" value="descriptionId-${wrappedSearchResult.aceItemId}" />
 
-						<c:set var="plusId" value="plusId-${searchResult.aceItemId}" />
+						<c:set var="plusId" value="plusId-${wrappedSearchResult.aceItemId}" />
 
-						<c:set var="minusId" value="minusId-${searchResult.aceItemId}" />
+						<c:set var="minusId" value="minusId-${wrappedSearchResult.aceItemId}" />
 
                         <c:set var="descriptionText" value="${wrappedSearchResult.shortdescription}" />	
 						
@@ -48,16 +48,16 @@
 						<span id="${minusId}" class="minus togglehide"><img src="/ace-theme/images/arrows/01_minus.png" /></span>
 						<span class="feed-entry-title">
 						<c:choose>
-							<c:when test="${!empty searchResult.storedAt && fn:startsWith(searchResult.storedAt, 'http://')==true}">
-								&nbsp;<a href="<c:out value="${searchResult.storedAt}"/>" target="_blank">
-									<c:out value="${searchResult.name}"/></a>
+							<c:when test="${!empty wrappedSearchResult.storedAt && fn:startsWith(wrappedSearchResult.storedAt, 'http://')==true}">
+								&nbsp;<a href="<c:out value="${wrappedSearchResult.storedAt}"/>" target="_blank">
+									<c:out value="${wrappedSearchResult.name}"/></a>
 							</c:when>
-							<c:when test="${!empty searchResult.storedAt && fn:startsWith(searchResult.storedAt, 'www.')==true}">
-								&nbsp;<a href="<c:out value="http://${searchResult.storedAt}"/>" target="_blank">
-									<c:out value="${searchResult.name}"/></a>
+							<c:when test="${!empty wrappedSearchResult.storedAt && fn:startsWith(wrappedSearchResult.storedAt, 'www.')==true}">
+								&nbsp;<a href="<c:out value="http://${wrappedSearchResult.storedAt}"/>" target="_blank">
+									<c:out value="${wrappedSearchResult.name}"/></a>
 							</c:when>                            
 							<c:otherwise>
-								&nbsp;<a href="<c:out value="/viewaceitem?aceitem_id=${searchResult.aceItemId}"/>" target="_blank"><c:out value="${searchResult.name}"/></a>
+								&nbsp;<a href="<c:out value="/viewaceitem?aceitem_id=${wrappedSearchResult.aceItemId}"/>" target="_blank"><c:out value="${wrappedSearchResult.name}"/></a>
 							</c:otherwise>
 						</c:choose>					
 						</span>

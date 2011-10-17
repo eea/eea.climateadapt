@@ -251,19 +251,19 @@ function displayJSONResults(unique, aceitemResults) {
 			var descriptionText = aceitem.shortdescription ;
 
 			// add name and description
-            if ((aceitem.aceItem._storedAt != "") && (aceitem.aceItem._storagetype.substr(0, 3) == "URL")) {
-                   resultlist += '<div><span class="bolder">&#187; <a href="/viewaceitem?aceitem_id=' +  aceitem.aceItem._aceItemId  + '" >' + aceitem.aceItem._name + ' </a></span> - ' + descriptionText + '</div>';
+            if ((aceitem.storedAt != "") && (aceitem.storagetype.substr(0, 3) == "URL")) {
+                   resultlist += '<div><span class="bolder">&#187; <a href="/viewaceitem?aceitem_id=' +  aceitem.aceItemId  + '" >' + aceitem.name + ' </a></span> - ' + descriptionText + '</div>';
 
-           } else if (aceitem.aceItem._storedAt.substr(0, 14) == "ace_project_id") {
-                   resultlist += '<div><span class="bolder">&#187; <a href="/projects1?' + aceitem.aceItem._storedAt + '" >' + aceitem.aceItem._name + '</a></span>&nbsp;';
+           } else if (aceitem.storedAt.substr(0, 14) == "ace_project_id") {
+                   resultlist += '<div><span class="bolder">&#187; <a href="/projects1?' + aceitem.storedAt + '" >' + aceitem.name + '</a></span>&nbsp;';
                    resultlist += ' - ' + descriptionText + '</div>';
 
-            } else if (aceitem.aceItem._storedAt.substr(0, 14) == "ace_measure_id") {
-                               resultlist += '<div><span class="bolder">&#187; <a href="/viewmeasure?' + aceitem.aceItem._storedAt + '" >' + aceitem.aceItem._name + '</a></span>&nbsp;';
+            } else if (aceitem.storedAt.substr(0, 14) == "ace_measure_id") {
+                               resultlist += '<div><span class="bolder">&#187; <a href="/viewmeasure?' + aceitem.storedAt + '" >' + aceitem.name + '</a></span>&nbsp;';
                                resultlist += ' - ' + descriptionText + '</div>';
 
            } else {
-                   resultlist += '<div><span class="bolder">&#187; <a href="/viewaceitem?aceitem_id=' +  aceitem.aceItem._aceItemId + '" >' + aceitem.aceItem._name + ' </a></span> - ' + descriptionText + '</div>';
+                   resultlist += '<div><span class="bolder">&#187; <a href="/viewaceitem?aceitem_id=' +  aceitem.aceItemId + '" >' + aceitem.name + ' </a></span> - ' + descriptionText + '</div>';
 
            }
             // add relevance
