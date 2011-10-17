@@ -39,7 +39,7 @@ if( paging > 0) {
 <%-- this is here and not in js file, because we're using some JSP code in it. TODO solve that and move to js file --%>
 <script type="text/javascript">
 
-	// ENABLE THIS WHEN RUNNING STANDALONE (WITHOUT REST OF ACE)
+	// ENABLE THIS WHEN RUNNING STANDALONE (WITHOUT REST OF ACE- view.jsp from FilterAceItem-portlet)
 	var $j = jQuery.noConflict();
 
     // Stores results for each data type group
