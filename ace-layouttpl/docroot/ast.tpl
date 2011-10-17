@@ -1,15 +1,23 @@
 <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js"></script>
 	<script type="text/javascript">
-			String.prototype.endsWith = function(suffix) {
-    			return this.match(suffix+"$") == suffix;
-			};
+
 		
-          	$(document).ready(function() {
+		   	$(document).ready(function() {
 				$("#ast-menu").accordion({ 
 					autoHeight: false,
 					navigation: true,
 					navigationFilter: function(){
-						if( document.location.href.endsWith($(this).attr('href')) ) {
+					    // assumes tool/ in url before /step
+					    var doc_rel_href = document.location.href.substr( document.location.href.indexOf('tool/step')+4 );
+					    
+					    var this_rel_href = $(this).attr('href');
+					    this_rel_href = this_rel_href.substr( this_rel_href.indexOf('tool/step')+4 );
+					    
+					    if(doc_rel_href.indexOf('?') > 0) {
+					    	doc_rel_href = doc_rel_href.substr(0, doc_rel_href.indexOf('?') );
+					    }
+					    
+					    if( (doc_rel_href == this_rel_href) ) {
 							$(this).addClass("active");
 							return true;
 						}
