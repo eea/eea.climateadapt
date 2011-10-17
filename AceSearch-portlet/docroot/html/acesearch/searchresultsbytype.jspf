@@ -123,37 +123,35 @@
 		<div id="${resultsListId}">
 			<c:forEach var="wrappedSearchResult" items="${groupedResults}" begin="0" end="<%= itemsOnPage-1 %>">
 
-                <c:set var="searchResult" value="${wrappedSearchResult.aceItem}"/>
-
-				<div class="searchresult">
+                <div class="searchresult">
 					<div>
 
                         <c:set var="descriptionText" value="${wrappedSearchResult.shortdescription}" />
 
 						<c:choose>
-							<c:when test="${!empty searchResult.storedAt && fn:startsWith(searchResult.storagetype, 'URL')==true}">
-								<span class="bolder">&#187; <a href="<c:out value="/viewaceitem?aceitem_id=${searchResult.aceItemId}"/>" ><c:out value="${searchResult.name}"/></a></span>&nbsp;
+							<c:when test="${!empty wrappedSearchResult.storedAt && fn:startsWith(wrappedSearchResult.storagetype, 'URL')==true}">
+								<span class="bolder">&#187; <a href="<c:out value="/viewaceitem?aceitem_id=${wrappedSearchResult.aceItemId}"/>" ><c:out value="${wrappedSearchResult.name}"/></a></span>&nbsp;
 								- <c:out value="${descriptionText}" />
 							</c:when>
-							<c:when test="${!empty searchResult.storedAt && fn:startsWith(searchResult.storedAt, 'ace_project_id')==true}">
-								<span class="bolder">&#187; <a href="<c:out value="/projects1?${searchResult.storedAt}"/>" >
-									<c:out value="${searchResult.name}"/></a></span>&nbsp;
+							<c:when test="${!empty wrappedSearchResult.storedAt && fn:startsWith(wrappedSearchResult.storedAt, 'ace_project_id')==true}">
+								<span class="bolder">&#187; <a href="<c:out value="/projects1?${wrappedSearchResult.storedAt}"/>" >
+									<c:out value="${wrappedSearchResult.name}"/></a></span>&nbsp;
 								- <c:out value="${descriptionText}" />
 							</c:when>
-							<c:when test="${!empty searchResult.storedAt && fn:startsWith(searchResult.storedAt, 'ace_measure_id')==true}">
-								<span class="bolder">&#187; <a href="<c:out value="/viewmeasure?${searchResult.storedAt}"/>" >
-									<c:out value="${searchResult.name}"/></a></span>&nbsp;
+							<c:when test="${!empty wrappedSearchResult.storedAt && fn:startsWith(wrappedSearchResult.storedAt, 'ace_measure_id')==true}">
+								<span class="bolder">&#187; <a href="<c:out value="/viewmeasure?${wrappedSearchResult.storedAt}"/>" >
+									<c:out value="${wrappedSearchResult.name}"/></a></span>&nbsp;
 								- <c:out value="${descriptionText}" />
 							</c:when>                            
 							<c:otherwise>
-								<span class="bolder">&#187; <a href="<c:out value="/viewaceitem?aceitem_id=${searchResult.aceItemId}"/>" ><c:out value="${searchResult.name}"/></a></span>&nbsp;
+								<span class="bolder">&#187; <a href="<c:out value="/viewaceitem?aceitem_id=${wrappedSearchResult.aceItemId}"/>" ><c:out value="${wrappedSearchResult.name}"/></a></span>&nbsp;
 								- <c:out value="${descriptionText}" />
 							</c:otherwise>
 						</c:choose>
 
                         <div class="relevance">
                             <div class="relevance-title">
-                                <% // rating: <c:out value="${searchResult.rating}"/ >. %><liferay-ui:message key="acesearch-relevance" />
+                                <% // rating: <c:out value="${wrappedSearchResult.rating}"/ >. %><liferay-ui:message key="acesearch-relevance" />
                             </div>
                             <c:set var="relevance" value="${wrappedSearchResult.relevance}" />
                             <c:choose>
