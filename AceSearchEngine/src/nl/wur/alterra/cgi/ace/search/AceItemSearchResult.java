@@ -3,26 +3,69 @@ package nl.wur.alterra.cgi.ace.search;
 import nl.wur.alterra.cgi.ace.model.AceItem;
 
 /**
- * Class to decorate AceItem with search result specific properties.
+ * AceItem wrapper class to export only relevant AceItem attributes to searchResults and add  search result specific properties.
  *
- * @heikki doeleman
+ * @heikki doeleman / Hugo de Groot
  */
 public class AceItemSearchResult {
 
-    private AceItem aceItem;
+    private long aceItemId;
+    private String name;
+    private String storedAt;
+    private String storagetype;
     private float relevance;
+    private long rating;
     private String shortdescription;
 
-    public AceItemSearchResult(AceItem aceItem) {
-        this.aceItem = aceItem;
+    public AceItemSearchResult(AceItem aceitem) {
+    	 
+    	setAceItemId( aceitem.getAceItemId() ) ;
+    	 
+    	setName( aceitem.getName().replaceAll("'","\'") ) ;
+    	 
+    	setStoredAt( aceitem.getStoredAt().replaceAll("'","\'") ) ;
+    	 
+    	setStoragetype( aceitem.getStoragetype().replaceAll("'","\'") ) ;
+    	 
+    	setRating( aceitem.getRating() ) ;
+    	 
+    	setShortdescription( aceitem.getDescription().replaceAll("'","\'") ) ;
     }
     
-    public AceItem getAceItem() {
-        return aceItem;
+	public Long getAceItemId() {
+		return aceItemId;
+	}
+
+	public void setAceItemId(Long aceItemId)
+	{
+        this.aceItemId = aceItemId;
     }
 
-    public void setAceItem(AceItem aceItem) {
-        this.aceItem = aceItem;
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name)
+	{
+        this.name = name.replaceAll("\"", "\"\"");
+    }
+
+	public String getStoragetype() {
+		return storagetype;
+	}
+
+	public void setStoragetype(String storagetype)
+	{
+        this.storagetype = storagetype.replaceAll("\"", "\"\"");
+    }
+
+	public String getStoredAt() {
+		return storedAt;
+	}
+
+	public void setStoredAt(String storedAt)
+	{
+        this.storedAt = storedAt.replaceAll("\"", "\"\"");
     }
 
     public float getRelevance() {
@@ -41,6 +84,15 @@ public class AceItemSearchResult {
         }
     }
 
+	public Long getRating() {
+		return rating;
+	}
+
+	public void setRating(Long rating)
+	{
+        this.rating = rating;
+    }
+    
     public String getShortdescription() {
         return shortdescription;
     }
@@ -50,7 +102,7 @@ public class AceItemSearchResult {
         
         if( this.shortdescription.length() > 400) {
         	
-        	this.shortdescription = this.shortdescription.substring(0,396) + " ..." ; 
+        	this.shortdescription = this.shortdescription.substring(0,396).replaceAll("\"", "\"\"") + " ..." ; 
         }
         
     }

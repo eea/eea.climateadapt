@@ -53,42 +53,6 @@ public class ACESearchPortalInterface {
 				//System.out.println("From all searchAceitem found #" + results.size() + " results of type " + aceItemType.name());
 				request.setAttribute(aceItemType.name() + "_" + SearchRequestParams.SEARCH_RESULTS, results);
 
-                 for(AceItemSearchResult wresult : results) {
-
-                     AceItem result = wresult.getAceItem();
-
-                    // escape single quotes
-                     result.setClimateimpacts_(result.getClimateimpacts_().replaceAll("'", "\'"));
-                     result.setDatatype(result.getDatatype().replaceAll("'", "\'"));
-                     result.setDescription(result.getDescription().replaceAll("'", "\'"));
-                     result.setElements_(result.getElements_().replaceAll("'", "\'"));
-                     result.setKeyword(result.getKeyword().replaceAll("'", "\'"));
-                     result.setName(result.getName().replaceAll("'", "\'"));
-                     result.setSectors_(result.getSectors_().replaceAll("'", "\'"));
-                     result.setSpatialLayer(result.getSpatialLayer().replaceAll("'", "\'"));
-                     result.setSpatialValues(result.getSpatialValues().replaceAll("'", "\'"));
-                     result.setStoragetype(result.getStoragetype().replaceAll("'", "\'"));
-                     result.setStoredAt(result.getStoredAt().replaceAll("'", "\'"));
-                     result.setTextSearch(result.getTextSearch().replaceAll("'", "\'"));
-
-                    // escape double quotes
-                     result.setClimateimpacts_(result.getClimateimpacts_().replaceAll("\"", "\"\""));
-                     result.setDescription(result.getDescription().replaceAll("\"", "\"\""));
-                     result.setElements_(result.getElements_().replaceAll("\"", "\"\""));
-                     result.setKeyword(result.getKeyword().replaceAll("\"", "\"\""));
-                     result.setName(result.getName().replaceAll("\"", "\"\""));
-                     result.setSpatialLayer(result.getSpatialLayer().replaceAll("\"", "\"\""));
-                     result.setSpatialValues(result.getSpatialValues().replaceAll("\"", "\"\""));
-                     result.setSectors_(result.getSectors_().replaceAll("\"", "\"\""));
-                     result.setStoragetype(result.getStoragetype().replaceAll("\"", "\"\""));
-                     result.setStoredAt(result.getStoredAt().replaceAll("\"", "\"\""));
-                     result.setTextSearch(result.getTextSearch().replaceAll("\"", "\"\""));
-                     result.setDatatype(result.getDatatype().replaceAll("\"", "\"\""));
-                     
-                     //System.out.println("rating " + result.getRating());
-     				
-                 }
-
                  keysAdded.add(aceItemType.name() + "_" + SearchRequestParams.SEARCH_RESULTS);
                  Gson gson = new Gson();
                  String json = gson.toJson(results);
