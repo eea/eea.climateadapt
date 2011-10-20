@@ -183,7 +183,7 @@
 			<option id="LU-option" value="LU">Luxembourg</option>
 			<option id="MT-option" value="MT">Malta</option>
 			<option id="NL-option" value="NL">Netherlands</option>
-			<option id="NO-option" value="NO">Norvegia</option>
+			<option id="NO-option" value="NO">Norway</option>
 			<option id="PL-option" value="PL">Poland</option>
 			<option id="PT-option" value="PT">Portugal</option>
 			<option id="RO-option" value="RO">Romania</option>
