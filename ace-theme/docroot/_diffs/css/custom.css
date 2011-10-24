@@ -1149,8 +1149,7 @@ text and the class sat-map to the SimilarAreasToolPortlet.
 .sat-map #legend_element {
 	background-color: #D2DE92;
 	color: #353F02;
-	margin: -165px -254px 0 0;
-	padding: 15px 0 0; 
+	margin: -151px -254px 0 0;
 }
 
 #legend-title {
@@ -1178,19 +1177,19 @@ text and the class sat-map to the SimilarAreasToolPortlet.
 }
 
 .sat-map #ext-comp-1005 {
-	left: -167px;
+	left: -151px;
 }
 
 .sat-map #ext-comp-1007 {
-	left: -195px;
+	left: -180px;
 }
 
 .sat-map #ext-comp-1009 {
-	left: -88px;
+	left: -65px;
 }
 
 .sat-map #ext-comp-1011 {
-	left: -95px;
+	left: -75px;
 }
 
 .sat-map #ext-comp-1005,
