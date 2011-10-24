@@ -1076,7 +1076,6 @@ text and the class sat-map to the SimilarAreasToolPortlet.
 ****/
 .sat-text {
 	background-color: #D2DE92;
-	margin-top: -20px
 }
 
 .sat-text .portlet-topper {
@@ -1102,7 +1101,6 @@ text and the class sat-map to the SimilarAreasToolPortlet.
 }
 
 .sat-map {
-	margin-top: -20px;
 	width: 700px;
 }
 
