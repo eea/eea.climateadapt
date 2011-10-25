@@ -958,7 +958,7 @@ ul#subnav li a:hover {
 /**** Specific styles for adaptation information image and text on frontpage ****/
 
 #p_p_id_56_INSTANCE_7vIW_ {
-	margin-top: 10px;
+	margin-top: 15px;
 }
 
 #p_p_id_56_INSTANCE_7vIW_ h1 {
@@ -967,11 +967,11 @@ ul#subnav li a:hover {
 }
 
 .image-ai-fp .portlet-body {
-	margin: -10px 0 15px 0;
+	margin: -5px 0 15px 0;
 }
 
 .ie #p_p_id_56_INSTANCE_7vIW_ {
-	margin-top: 5px;
+	margin-top: 15px;
 }
 
 .image-ai-fp {
@@ -979,7 +979,7 @@ ul#subnav li a:hover {
 }
 
 .ie .image-ai-fp .portlet-body {
-	margin: -15px 0px 15px
+	margin: -5px 0px 15px
 }
 
 .more-spacing-list li {
@@ -1402,4 +1402,28 @@ text and the class mapviewer to the MapViewerPortlet.
 
 .portlet-column-content-only, .ltr .portlet-column-content-first, .rtl .portlet-column-content-last {
 	padding-left: 15px;
+}
+
+/****
+	Styling of glossary items
+****/
+.glossary-item {
+	
+}
+
+.GlossaryTitle {
+	background: url("/ace-theme/images/bg_sector_main_article_text.png") repeat-y scroll 0pt 0pt transparent;
+	color: #67788A;
+	font-size: 16px;
+	font-weight: normal;
+	margin-top: 10px;
+	padding-top: 10px;
+	padding-bottom: 7px;
+}
+
+.top-link {
+	float: right;
+	margin-right: 10px;
+	font-size: 11px;
+	text-decoration: none;
 }
