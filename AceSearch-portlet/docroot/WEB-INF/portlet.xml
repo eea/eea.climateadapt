@@ -62,16 +62,28 @@
 			<name>view-jsp</name>
 			<value>/html/simplesearch/view.jsp</value>
 		</init-param>
+		<init-param>
+			<name>edit-jsp</name>
+			<value>/html/simplesearch/edit.jsp</value>
+		</init-param>
 		<expiration-cache>0</expiration-cache>
 		<supports>
 			<mime-type>text/html</mime-type>
 			<portlet-mode>VIEW</portlet-mode>
+			<portlet-mode>EDIT</portlet-mode>
 		</supports>
 		<portlet-info>
 			<title>SimpleSearchPortlet</title>
 			<short-title>SimpleSearchPortlet</short-title>
 			<keywords></keywords>
 		</portlet-info>
+		<!-- Portlet preferences (configurable by user in portlet EDIT mode) -->
+		<portlet-preferences>
+			<preference>
+				<name>searchBox</name>
+				<value>searchtext_top</value>
+			</preference>
+		</portlet-preferences>
 		<security-role-ref>
 			<role-name>administrator</role-name>
 		</security-role-ref>

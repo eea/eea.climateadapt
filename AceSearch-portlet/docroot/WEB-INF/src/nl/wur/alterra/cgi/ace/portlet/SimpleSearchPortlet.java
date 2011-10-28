@@ -2,9 +2,16 @@ package nl.wur.alterra.cgi.ace.portlet;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.util.ParamUtil;
+import com.liferay.util.bridges.mvc.MVCPortlet;
+
 import java.io.IOException;
+
+import javax.portlet.ActionRequest;
+import javax.portlet.ActionResponse;
 import javax.portlet.GenericPortlet;
 import javax.portlet.PortletException;
+import javax.portlet.PortletPreferences;
 import javax.portlet.PortletRequestDispatcher;
 import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
@@ -12,37 +19,20 @@ import javax.portlet.RenderResponse;
 /**
  * Portlet implementation class SimpleSearchPortlet
  */
-public class SimpleSearchPortlet extends GenericPortlet {
+public class SimpleSearchPortlet extends MVCPortlet {
 
-    public void init() {
-        viewJSP = getInitParameter("view-jsp");
-    }
-    
-    public void doView(
-            RenderRequest renderRequest, RenderResponse renderResponse)
-        throws IOException, PortletException {
-        
-        include(viewJSP, renderRequest, renderResponse);
-    }
+    /**
+     * Stores the name for the input box
+     *
+     * @param request request
+	 * @param response response
+     */
+    public void setSimpleSearchPref(ActionRequest request, ActionResponse response) throws Exception {
+		PortletPreferences prefs = request.getPreferences();
 
-    protected void include(
-            String path, RenderRequest renderRequest,
-            RenderResponse renderResponse)
-        throws IOException, PortletException {
+		prefs.setValue(Constants.searchBoxPreferenceName, ParamUtil.getString(request, Constants.searchBoxPreferenceName) );
 
-        PortletRequestDispatcher portletRequestDispatcher =
-            getPortletContext().getRequestDispatcher(path);
-
-        if (portletRequestDispatcher == null) {
-            _log.error(path + " is not a valid include");
-        }
-        else {
-            portletRequestDispatcher.include(renderRequest, renderResponse);
-        }
-    }
- 
-    protected String viewJSP;
-
-    private static Log _log = LogFactoryUtil.getLog(SimpleSearchPortlet.class);
+		prefs.store();	
+	}
 
 }
