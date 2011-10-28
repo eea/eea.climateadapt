@@ -6,7 +6,4 @@
 		<portlet id="acesearchportlet"></portlet>
 		<portlet id="simplesearchportlet"></portlet>
 	</category>
-	<category name="category.sample">
-		<portlet id="simple_searchportlet"></portlet>
-	</category>
 </display>
