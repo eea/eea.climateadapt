@@ -19,6 +19,7 @@ import nl.wur.alterra.cgi.ace.geonetwork.GeoNetworkConnector;
 import nl.wur.alterra.cgi.ace.harvester.HarvesterUtil;
 import nl.wur.alterra.cgi.ace.model.WxsHarvester;
 import nl.wur.alterra.cgi.ace.model.impl.WxsHarvesterImpl;
+import nl.wur.alterra.cgi.ace.service.AceItemLocalServiceUtil;
 import nl.wur.alterra.cgi.ace.service.base.WxsHarvesterLocalServiceBaseImpl;
 
 import java.util.List;
@@ -103,7 +104,7 @@ public class WxsHarvesterLocalServiceImpl extends WxsHarvesterLocalServiceBaseIm
         // if it fails, TODO what to do ? Leave in ACE for later retry ? Or delete anyway ? For now, it is just left in ACE
         catch(Exception x) {
             wxsHarvester.setSavedToGeoNetwork(true);
-            System.out.println("Error: failed to delete harvester to GeoNetwork " + x.getMessage() + ". Also not deleting from ACE DBMS.");
+            System.out.println("ERROR: failed to delete harvester to GeoNetwork " + x.getMessage() + ". Also not deleting from ACE DBMS.");
             x.printStackTrace();
             throw new SystemException(x);
         }
@@ -114,7 +115,7 @@ public class WxsHarvesterLocalServiceImpl extends WxsHarvesterLocalServiceBaseIm
         super.deleteWxsHarvester(wxsHarvester);
         System.out.println("finished deleting harvester to ACE");
 
-        // TODO delete AceItems created from metadata from this harvester too, or not ?
+        // TODO delete AceItems created from metadata from this harvester too, or not ?    YES
     }
 
 

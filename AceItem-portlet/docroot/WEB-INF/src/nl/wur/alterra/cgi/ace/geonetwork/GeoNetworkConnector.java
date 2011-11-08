@@ -14,7 +14,7 @@ import nl.wur.alterra.cgi.ace.util.HTTPUtils;
 public class GeoNetworkConnector {
 
     /**
-     * Constructor relying on hard-coded values for GN base url and credentials.
+     * Constructor using configurable values for GN base url and credentials.
      */
     public GeoNetworkConnector() throws ExceptionInInitializerError {
         try {
@@ -34,6 +34,7 @@ public class GeoNetworkConnector {
             this.GeoNetworkXMLSearchURL  = geoNetworkBaseURL + "/srv/en/xml.search";
         }
         catch(CustomPropertiesNotInitializedException x) {
+            System.out.println("ERROR initializing GeoNetworkConnector: configuration unavailable.");
             throw new ExceptionInInitializerError(x);
         }
     }
@@ -96,7 +97,12 @@ public class GeoNetworkConnector {
         login();
         String xml = createDeleteRequest(wxsHarvester);
         String response = httpUtils.post(xml, GeoNetworkRemoveHarvesterURL);
-        // TODO verify success?
+
+        System.out.println("deleteHarvester GeoNetwork response:\n" + response);
+        if(!response.contains("status=\"ok\"")) {
+            throw new SystemException("Failed to delete harvester from GeoNetwork");
+        }
+
         // TODO logout?
     }
 
@@ -248,14 +254,14 @@ public class GeoNetworkConnector {
         // strip from first "
         id = id.substring(0, id.indexOf("\""));
 
-        System.out.println("@#@#@ id: " + id);
+        System.out.println("processing harvester with id: " + id);
 
         // strip up to uuid
         String uuid = geonetworkInfo.substring(geonetworkInfo.indexOf("<uuid>") + "<uuid>".length());
         // strip from first <
         uuid = uuid.substring(0, uuid.indexOf("<"));
 
-        System.out.println("@#@#@ uuid: " + uuid);
+        System.out.println("processing harvester with uuid: " + uuid);
 
         wxsHarvester.setGeonetworkId(Long.parseLong(id));
         wxsHarvester.setGeonetworkUUID(uuid);
