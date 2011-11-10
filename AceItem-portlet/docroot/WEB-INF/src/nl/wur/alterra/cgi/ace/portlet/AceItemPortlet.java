@@ -7,6 +7,7 @@ import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.util.PortalUtil;
 import nl.wur.alterra.cgi.ace.model.AceItem;
 import nl.wur.alterra.cgi.ace.model.impl.AceItemImpl;
+import nl.wur.alterra.cgi.ace.search.lucene.ACEIndexSynchronizer;
 import nl.wur.alterra.cgi.ace.service.AceItemLocalServiceUtil;
 
 import javax.portlet.ActionRequest;
@@ -76,10 +77,14 @@ public class AceItemPortlet extends LuceneIndexUpdatePortlet {
 		long aceitemId = ParamUtil.getLong(request, "aceItemId");
 		List<String> errors = new ArrayList<String>();
 		if (Validator.isNotNull(aceitemId)) {
+            
+			// delete the index entry
+			AceItem aceitem = AceItemLocalServiceUtil.getAceItem(aceitemId);
+			new ACEIndexSynchronizer().delete(aceitem);			
+			
+			// delete the aceitem
 			AceItemLocalServiceUtil.deleteAceItem(aceitemId);
 			SessionMessages.add(request, "aceitem-deleted");
-            AceItem aceitem = AceItemLocalServiceUtil.getAceItem(ParamUtil.getLong(request, "aceItemId"));
-            synchronizeIndexSingleAceItem(aceitem);
 			sendRedirect(request, response);
 		}
 		else {
