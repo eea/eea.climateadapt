@@ -18,10 +18,12 @@ import javax.portlet.ActionResponse;
 import javax.portlet.PortletPreferences;
 import javax.portlet.PortletRequest;
 
+import nl.wur.alterra.cgi.ace.model.AceItem;
 import nl.wur.alterra.cgi.ace.model.Project;
 import nl.wur.alterra.cgi.ace.model.constants.AceItemElement;
 import nl.wur.alterra.cgi.ace.model.constants.AceItemSector;
 import nl.wur.alterra.cgi.ace.model.impl.ProjectImpl;
+import nl.wur.alterra.cgi.ace.service.AceItemLocalServiceUtil;
 import nl.wur.alterra.cgi.ace.service.ProjectLocalServiceUtil;
 
 /**
@@ -148,9 +150,11 @@ public class ProjectPortlet extends MVCPortlet {
 
 		if (ProjectValidator.validateProject(project, errors)) {
 			ProjectLocalServiceUtil.updateProject(project);
-
+			
+			updateAceItem(project);
+			
 			SessionMessages.add(request, "project-updated");
-
+			
 			sendRedirect(request, response);
 		}
 		else {
@@ -188,7 +192,19 @@ public class ProjectPortlet extends MVCPortlet {
 		}
 	}
 		
-
+	/**
+	 * Update the corresponding AceItem when updating a Project.
+	 *
+	 */
+	private void updateAceItem(Project project) throws Exception {
+		AceItem aceitem = AceItemLocalServiceUtil.getAceItemByStoredAt("ace_project_id=" + project.getProjectId());
+		
+		aceitem.setRating(project.getRating());
+		
+		AceItemLocalServiceUtil.updateAceItem(aceitem);
+	}
+	
+		
 	/**
 	 * Sets the preferences for how many projects can be viewed
 	 * per page and the format for the phone number
