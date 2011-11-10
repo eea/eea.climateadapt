@@ -22,7 +22,10 @@ import nl.wur.alterra.cgi.ace.model.AceItem;
 import nl.wur.alterra.cgi.ace.model.Project;
 import nl.wur.alterra.cgi.ace.model.constants.AceItemElement;
 import nl.wur.alterra.cgi.ace.model.constants.AceItemSector;
+import nl.wur.alterra.cgi.ace.model.constants.AceItemType;
+import nl.wur.alterra.cgi.ace.model.impl.AceItemImpl;
 import nl.wur.alterra.cgi.ace.model.impl.ProjectImpl;
+import nl.wur.alterra.cgi.ace.search.lucene.ACEIndexSynchronizer;
 import nl.wur.alterra.cgi.ace.service.AceItemLocalServiceUtil;
 import nl.wur.alterra.cgi.ace.service.ProjectLocalServiceUtil;
 
@@ -47,7 +50,18 @@ public class ProjectPortlet extends MVCPortlet {
 
 		if (ProjectValidator.validateProject(project, errors)) {
 			ProjectLocalServiceUtil.addProject(project);
-
+			
+			// create an AceItem for this project
+			AceItem aceitem = new AceItemImpl();
+			aceitem.setAceItemId(ParamUtil.getLong(request, "aceItemId"));
+			aceitem.setCompanyId(project.getCompanyId());
+			aceitem.setGroupId(project.getGroupId());
+			aceitem.setDatatype(AceItemType.RESEARCHPROJECT.toString());
+			aceitem.setStoredAt("ace_project_id=" + project.getProjectId());
+			aceitem.setStoragetype("PROJECT");
+			AceItemLocalServiceUtil.addAceItem(aceitem);
+			updateAceItem(project, aceitem);
+			
 			SessionMessages.add(request, "project-added");
 
 			sendRedirect(request, response);
@@ -120,6 +134,7 @@ public class ProjectPortlet extends MVCPortlet {
 		project.setKeywords(ParamUtil.getString(request, "keywords"));
 		project.setWebsite(ParamUtil.getString(request, "website"));	
 		project.setDuration(ParamUtil.getString(request, "duration"));
+		project.setLanguage(ParamUtil.getString(request, "language"));
 		
 		String importance = ParamUtil.getString(request, "chk_importance");
 		if(project.getImportance() == 1) {
@@ -151,7 +166,9 @@ public class ProjectPortlet extends MVCPortlet {
 		if (ProjectValidator.validateProject(project, errors)) {
 			ProjectLocalServiceUtil.updateProject(project);
 			
-			updateAceItem(project);
+			AceItem aceitem = AceItemLocalServiceUtil.getAceItemByStoredAt("ace_project_id=" + project.getProjectId());
+			
+			updateAceItem(project, aceitem);
 			
 			SessionMessages.add(request, "project-updated");
 			
@@ -181,6 +198,13 @@ public class ProjectPortlet extends MVCPortlet {
 		ArrayList<String> errors = new ArrayList<String>();
 
 		if (Validator.isNotNull(projectId)) {
+
+			AceItem aceitem = AceItemLocalServiceUtil.getAceItemByStoredAt("ace_project_id=" + projectId);
+			// delete the aceitem index entry
+			new ACEIndexSynchronizer().delete(aceitem);			
+			// delete the aceitem
+			AceItemLocalServiceUtil.deleteAceItem(aceitem.getAceItemId());
+			
 			ProjectLocalServiceUtil.deleteProject(projectId);
 
 			SessionMessages.add(request, "project-deleted");
@@ -191,17 +215,66 @@ public class ProjectPortlet extends MVCPortlet {
 			SessionErrors.add(request, "error-deleting");
 		}
 	}
+
+	private String coalesce(String aString) {
+		String result = "";
 		
+		if(aString != null) {
+			
+			result = aString.trim();
+		}
+		
+		return result;
+	}
+	
 	/**
 	 * Update the corresponding AceItem when updating a Project.
 	 *
 	 */
-	private void updateAceItem(Project project) throws Exception {
-		AceItem aceitem = AceItemLocalServiceUtil.getAceItemByStoredAt("ace_project_id=" + project.getProjectId());
+	private void updateAceItem(Project project, AceItem aceitem) throws Exception {
+		aceitem.setRating(project.getRating());
+
+		aceitem.setName(project.getAcronym().trim() + " project");
+		
+		aceitem.setDescription(project.getTitle());
+		
+		aceitem.setKeyword(project.getKeywords());
+		
+		aceitem.setSpatialLayer(project.getSpatiallevel());
+		
+		aceitem.setSectors_(project.getSectors());
+		
+		aceitem.setElements_(project.getElement());
 		
 		aceitem.setRating(project.getRating());
 		
+		aceitem.setImportance(project.getImportance());
+		
+		// language holds the special tagging
+		aceitem.setLanguage(project.getLanguage());
+		
+		aceitem.setTextSearch( coalesce( project.getLanguage()) + ' ' +
+	               			   aceitem.getName() + ' ' +
+				               coalesce( project.getTitle()) + ' ' +
+				               coalesce( project.getLead()) + ' ' +
+				               coalesce( project.getPartners()) + ' ' +
+				               coalesce( project.getFunding()) + ' ' +
+				               coalesce( project.getSpatiallevel()) + ' ' +
+				               coalesce( project.getAbstracts()) + ' ' +
+				               coalesce( project.getKeywords()) + ' ' +
+				               coalesce( project.getSpatiallevel()) 
+				              );
+		
+		String choosensectors = project.getSectors();
+
+		if( choosensectors.indexOf(";")  ==  choosensectors.lastIndexOf(";")) { // one sector
+			
+			aceitem.setTextSearch( aceitem.getTextSearch() + ' ' + coalesce( choosensectors ) );
+		}
+		
 		AceItemLocalServiceUtil.updateAceItem(aceitem);
+
+        new ACEIndexSynchronizer().reIndex(aceitem);
 	}
 	
 		
