@@ -7,11 +7,13 @@ import javax.portlet.ActionResponse;
 import javax.portlet.PortletPreferences;
 import javax.portlet.PortletRequest;
 
+import nl.wur.alterra.cgi.ace.model.AceItem;
 import nl.wur.alterra.cgi.ace.model.Measure;
 import nl.wur.alterra.cgi.ace.model.constants.AceItemClimateImpact;
 import nl.wur.alterra.cgi.ace.model.constants.AceItemElement;
 import nl.wur.alterra.cgi.ace.model.constants.AceItemSector;
 import nl.wur.alterra.cgi.ace.model.impl.MeasureImpl;
+import nl.wur.alterra.cgi.ace.service.AceItemLocalServiceUtil;
 import nl.wur.alterra.cgi.ace.service.MeasureLocalServiceUtil;
 
 import com.liferay.portal.kernel.log.Log;
@@ -191,7 +193,9 @@ public class MeasurePortlet extends MVCPortlet {
 			MeasureLocalServiceUtil.updateMeasure(measure);
 
 			//com.liferay.portal.kernel.dao.orm.EntityCacheUtil.clearCache();
-
+			
+			updateAceItem(measure);
+			
 			SessionMessages.add(request, "measure-updated");
 			
 			sendRedirect(request, response);
@@ -230,7 +234,19 @@ public class MeasurePortlet extends MVCPortlet {
 			SessionErrors.add(request, "error-deleting");
 		}
 	}
-
+	
+	/**
+	 * Update the corresponding AceItem when updating a Project.
+	 *
+	 */
+	private void updateAceItem(Measure measure) throws Exception {
+		AceItem aceitem = AceItemLocalServiceUtil.getAceItemByStoredAt("ace_measure_id=" + measure.getMeasureId());
+		
+		aceitem.setRating(measure.getRating());
+		
+		AceItemLocalServiceUtil.updateAceItem(aceitem);
+	}
+	
 	/**
 	 * Sets the preferences for how measures can be ordered
 	 *
