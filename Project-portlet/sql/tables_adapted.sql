@@ -19,6 +19,7 @@ CREATE TABLE ace_project
   duration character varying(255),
   rating bigint,
   importance bigint,
+  "language" character varying(75),
   CONSTRAINT ace_project_pkey PRIMARY KEY (projectid)
 )
 WITH (
