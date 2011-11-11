@@ -232,7 +232,6 @@ public class ProjectPortlet extends MVCPortlet {
 	 *
 	 */
 	private void updateAceItem(Project project, AceItem aceitem) throws Exception {
-		aceitem.setRating(project.getRating());
 
 		aceitem.setName(project.getAcronym().trim() + " project");
 		
