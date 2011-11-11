@@ -195,8 +195,6 @@ public class ProjectPortlet extends MVCPortlet {
 
 		long projectId = ParamUtil.getLong(request, "projectId");
 
-		ArrayList<String> errors = new ArrayList<String>();
-
 		if (Validator.isNotNull(projectId)) {
 
 			AceItem aceitem = AceItemLocalServiceUtil.getAceItemByStoredAt("ace_project_id=" + projectId);
@@ -264,11 +262,11 @@ public class ProjectPortlet extends MVCPortlet {
 				               coalesce( project.getSpatiallevel()) 
 				              );
 		
-		String choosensectors = project.getSectors();
-
-		if( choosensectors.indexOf(";")  ==  choosensectors.lastIndexOf(";")) { // one sector
+		String sctrs = project.getSectors();
+		
+		if( sctrs.indexOf(";")  ==  sctrs.lastIndexOf(";")) { // one sector
 			
-			aceitem.setTextSearch( aceitem.getTextSearch() + ' ' + coalesce( choosensectors ) );
+			aceitem.setTextSearch( aceitem.getTextSearch() + ' ' + coalesce( sctrs.substring(0, sctrs.indexOf(";") ) ) );
 		}
 		
 		AceItemLocalServiceUtil.updateAceItem(aceitem);
@@ -294,8 +292,6 @@ public class ProjectPortlet extends MVCPortlet {
 		prefs.store();
 	}
 	
-	private static Log _log = LogFactoryUtil.getLog(ProjectPortlet.class);
-
 }
 
 

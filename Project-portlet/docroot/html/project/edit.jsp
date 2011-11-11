@@ -21,7 +21,7 @@
 <portlet:actionURL name="setProjectPref" var="setProjectPrefUrl" />
 
 <aui:form action="<%= setProjectPrefUrl %>" method="POST" name="fm" >
-	<aui:input name="rowsPerPage" value='<%= prefs.getValue("rowsPerPage","") %>' size="45" type="text" />
+	<aui:input name="rowsPerPage" value='<%= prefs.getValue("rowsPerPage","75") %>' size="45" type="text" />
 
 	<aui:button-row>
 		<aui:button type="submit" />

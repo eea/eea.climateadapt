@@ -35,7 +35,7 @@
 	<aui:button value="add-project" onClick="<%= addProjectURL.toString() %>"/>
 </aui:button-row>
 
-<liferay-ui:search-container delta='<%= GetterUtil.getInteger(prefs.getValue("rowsPerPage", "10")) %>' emptyResultsMessage="project-empty-results-message">
+<liferay-ui:search-container delta='<%= GetterUtil.getInteger(prefs.getValue("rowsPerPage", "75")) %>' emptyResultsMessage="project-empty-results-message">
 	<liferay-ui:search-container-results
 		results="<%= ProjectLocalServiceUtil.getProjectsByGroupId(scopeGroupId, searchContainer.getStart(), searchContainer.getEnd()) %>"
 		total="<%= ProjectLocalServiceUtil.getProjectsCountByGroupId(scopeGroupId) %>"

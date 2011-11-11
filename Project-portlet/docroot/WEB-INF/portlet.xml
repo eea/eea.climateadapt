@@ -38,7 +38,7 @@
 		<portlet-preferences>
 			<preference>
 				<name>rowsPerPage</name>
-				<value>10</value>
+				<value>75</value>
 			</preference>
 		</portlet-preferences>
 		<security-role-ref>
