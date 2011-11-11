@@ -12,7 +12,10 @@ import nl.wur.alterra.cgi.ace.model.Measure;
 import nl.wur.alterra.cgi.ace.model.constants.AceItemClimateImpact;
 import nl.wur.alterra.cgi.ace.model.constants.AceItemElement;
 import nl.wur.alterra.cgi.ace.model.constants.AceItemSector;
+import nl.wur.alterra.cgi.ace.model.constants.AceItemType;
+import nl.wur.alterra.cgi.ace.model.impl.AceItemImpl;
 import nl.wur.alterra.cgi.ace.model.impl.MeasureImpl;
+import nl.wur.alterra.cgi.ace.search.lucene.ACEIndexSynchronizer;
 import nl.wur.alterra.cgi.ace.service.AceItemLocalServiceUtil;
 import nl.wur.alterra.cgi.ace.service.MeasureLocalServiceUtil;
 
@@ -49,7 +52,15 @@ public class MeasurePortlet extends MVCPortlet {
 		if (MeasureValidator.validateMeasure(measure, errors)) {
 			MeasureLocalServiceUtil.addMeasure(measure);
 
-			//com.liferay.portal.kernel.dao.orm.EntityCacheUtil.clearCache();
+			// create an AceItem for this measure
+			AceItem aceitem = new AceItemImpl();
+			aceitem.setAceItemId(ParamUtil.getLong(request, "aceItemId"));
+			aceitem.setCompanyId(measure.getCompanyId());
+			aceitem.setGroupId(measure.getGroupId());
+			aceitem.setStoredAt("ace_measure_id=" + measure.getMeasureId());
+			aceitem.setStoragetype("MEASURE");
+			AceItemLocalServiceUtil.addAceItem(aceitem);
+			updateAceItem(measure, aceitem);
 			
 			SessionMessages.add(request, "measure-added");
 
@@ -192,9 +203,9 @@ public class MeasurePortlet extends MVCPortlet {
 		if (MeasureValidator.validateMeasure(measure, errors)) {
 			MeasureLocalServiceUtil.updateMeasure(measure);
 
-			//com.liferay.portal.kernel.dao.orm.EntityCacheUtil.clearCache();
-			
-			updateAceItem(measure);
+			AceItem aceitem = AceItemLocalServiceUtil.getAceItemByStoredAt("ace_measure_id=" + measure.getMeasureId());
+						
+			updateAceItem(measure, aceitem);
 			
 			SessionMessages.add(request, "measure-updated");
 			
@@ -221,9 +232,15 @@ public class MeasurePortlet extends MVCPortlet {
 
 		long measureId = ParamUtil.getLong(request, "measureId");
 
-		ArrayList<String> errors = new ArrayList<String>();
-
 		if (Validator.isNotNull(measureId)) {
+			
+			AceItem aceitem = AceItemLocalServiceUtil.getAceItemByStoredAt("ace_measure_id=" + measureId);
+			
+			// delete the aceitem index entry
+			new ACEIndexSynchronizer().delete(aceitem);			
+			// delete the aceitem
+			AceItemLocalServiceUtil.deleteAceItem(aceitem.getAceItemId());			
+			
 			MeasureLocalServiceUtil.deleteMeasure(measureId);
 
 			SessionMessages.add(request, "measure-deleted");
@@ -234,17 +251,90 @@ public class MeasurePortlet extends MVCPortlet {
 			SessionErrors.add(request, "error-deleting");
 		}
 	}
+
+	private String coalesce(String aString) {
+		String result = "";
+		
+		if(aString != null) {
+			
+			result = aString.trim();
+		}
+		
+		return result;
+	}
 	
 	/**
 	 * Update the corresponding AceItem when updating a Project.
 	 *
 	 */
-	private void updateAceItem(Measure measure) throws Exception {
-		AceItem aceitem = AceItemLocalServiceUtil.getAceItemByStoredAt("ace_measure_id=" + measure.getMeasureId());
+	private void updateAceItem(Measure measure, AceItem aceitem) throws Exception {
+
+		aceitem.setName(measure.getName());
+		
+		aceitem.setDescription(measure.getDescription());
+		
+		if(measure.getMao_type().indexOf("A") >= 0) {
+
+			aceitem.setDatatype(AceItemType.ACTION.toString());			
+		}
+		else {
+
+			aceitem.setDatatype(AceItemType.MEASURE.toString());
+		}
+				
+		aceitem.setKeyword(measure.getKeywords());
+		
+		aceitem.setSpatialLayer(measure.getSpatiallayer());
+		
+		aceitem.setSpatialValues(measure.getSpatialvalues());
+		
+		aceitem.setSectors_(measure.getSectors_());
+		
+		aceitem.setElements_(measure.getElements_());
+
+		aceitem.setClimateimpacts_(measure.getClimateimpacts_());
 		
 		aceitem.setRating(measure.getRating());
 		
+		aceitem.setImportance(measure.getImportance());
+
+		aceitem.setSource(measure.getSource());
+		
+		// language holds the special tagging
+		aceitem.setLanguage(measure.getLanguage());
+		
+		aceitem.setTextSearch( coalesce( measure.getLanguage()) + ' ' +
+ 			   		aceitem.getName() + ' ' +
+ 			   		coalesce( measure.getDescription()) + ' ' +
+ 			   		coalesce( measure.getContact()) + ' ' +
+ 			   		coalesce( measure.getKeywords())+ ' ' +
+ 			   		coalesce( measure.getWebsite()) + ' ' +
+ 			   		coalesce( measure.getSpatiallayer()) + ' ' +
+ 			   		coalesce( measure.getSpatialvalues()) + ' ' +
+ 			   		coalesce( measure.getLegalaspects()) + ' ' +
+ 			   		coalesce( measure.getSucceslimitations()) + ' ' +
+ 			   		coalesce( measure.getCostbenefit()) + ' ' +
+ 			   		coalesce( measure.getStakeholderparticipation()) + ' ' +
+ 			   		coalesce( measure.getSource())
+ 			   	);
+					
+		String sctrs = measure.getSectors_();
+		
+		if( sctrs.indexOf(";")  ==  sctrs.lastIndexOf(";")) { // one sector
+			
+			aceitem.setTextSearch( aceitem.getTextSearch() + ' ' + coalesce( sctrs.substring(0, sctrs.indexOf(";") ) ) );
+		}	
+		
+		String mpcts = measure.getClimateimpacts_();
+		
+		if( mpcts.indexOf(";")  ==  mpcts.lastIndexOf(";")) { // one sector
+			
+			aceitem.setTextSearch( aceitem.getTextSearch() + ' ' + coalesce( mpcts.substring(0, mpcts.indexOf(";") ) ) );
+		}	
+		
 		AceItemLocalServiceUtil.updateAceItem(aceitem);
+
+        new ACEIndexSynchronizer().reIndex(aceitem);		
 	}
 	
 	/**
@@ -304,9 +394,6 @@ public class MeasurePortlet extends MVCPortlet {
 		prefs.setValue(Constants.bingTimeOutPreferenceName, bingtimeout);
 
 		prefs.store();
-	}
-	
-	private static Log _log = LogFactoryUtil.getLog(MeasurePortlet.class);
- 
+	} 
 
 }

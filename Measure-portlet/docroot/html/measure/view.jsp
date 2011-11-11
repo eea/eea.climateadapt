@@ -44,7 +44,7 @@
 	<aui:button value="add-measure" onClick="<%= addMeasureURL.toString() %>"/>
 </aui:button-row>
 
-<liferay-ui:search-container delta='10' emptyResultsMessage="measure-empty-results-message" orderByCol="<%= orderByCol %>" orderByType="<%= orderByType %>">
+<liferay-ui:search-container delta='<%= GetterUtil.getInteger(prefs.getValue("rowsPerPage", "75")) %>' emptyResultsMessage="measure-empty-results-message" orderByCol="<%= orderByCol %>" orderByType="<%= orderByType %>">
 	<liferay-ui:search-container-results
 		results="<%= MeasureLocalServiceUtil.getMeasuresByGroupId(scopeGroupId, searchContainer.getStart(), searchContainer.getEnd(), orderByComparator) %>"
 		total="<%= MeasureLocalServiceUtil.getMeasuresCountByGroupId(scopeGroupId) %>"

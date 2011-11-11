@@ -37,6 +37,10 @@
 		<!-- Portlet preferences (configurable by user in portlet EDIT mode) -->
 		<portlet-preferences>
 			<preference>
+				<name>rowsPerPage</name>
+				<value>75</value>
+			</preference>
+			<preference>
 				<name>orderByCol</name>
 				<value>name</value>
 			</preference>

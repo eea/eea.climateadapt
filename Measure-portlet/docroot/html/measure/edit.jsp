@@ -41,6 +41,8 @@
 
 	<aui:input name="<%= Constants.bingTimeOutPreferenceName %>" value='<%= prefs.getValue(Constants.bingTimeOutPreferenceName, "100") %>' size="45" type="text" />
 
+    <aui:input name="rowsPerPage" value='<%= prefs.getValue("rowsPerPage","75") %>' size="45" type="text" />
+
 	<aui:button-row>
 		<aui:button type="submit" />
 	</aui:button-row>
