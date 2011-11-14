@@ -119,20 +119,10 @@
 			<name>view-jsp</name>
 			<value>/html/wxsharvester/view.jsp</value>
 		</init-param>
-		<init-param>
-			<name>edit-jsp</name>
-			<value>/html/wxsharvester/edit.jsp</value>
-		</init-param>
-		<init-param>
-			<name>help-jsp</name>
-			<value>/html/wxsharvester/help.jsp</value>
-		</init-param>
 		<expiration-cache>-1</expiration-cache>
 		<supports>
 			<mime-type>text/html</mime-type>
 			<portlet-mode>VIEW</portlet-mode>
-			<portlet-mode>EDIT</portlet-mode>
-			<portlet-mode>HELP</portlet-mode>
 		</supports>
 		<!-- Resource Bundle -->
 		<resource-bundle>content.Language</resource-bundle>
