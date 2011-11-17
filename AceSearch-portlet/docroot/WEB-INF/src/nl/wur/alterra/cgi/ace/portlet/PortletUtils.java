@@ -22,9 +22,9 @@ public class PortletUtils {
         while(parameterNames.hasMoreElements()) {
             String name = parameterNames.nextElement();
             String[] values = requestParams.get(name);
-            System.out.println("logging request parameter: " + name);
+            //System.out.println("logging request parameter: " + name);
             for(String value : values) {
-                System.out.println("'" + value + "'");
+                //System.out.println("'" + value + "'");
             }
         }
     }
