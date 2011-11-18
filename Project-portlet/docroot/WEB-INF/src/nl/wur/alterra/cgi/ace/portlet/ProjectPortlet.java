@@ -134,7 +134,7 @@ public class ProjectPortlet extends MVCPortlet {
 		project.setKeywords(ParamUtil.getString(request, "keywords"));
 		project.setWebsite(ParamUtil.getString(request, "website"));	
 		project.setDuration(ParamUtil.getString(request, "duration"));
-		project.setLanguage(ParamUtil.getString(request, "language"));
+		project.setSpecialtagging(ParamUtil.getString(request, "specialtagging"));
 		
 		String importance = ParamUtil.getString(request, "chk_importance");
 		if(project.getImportance() == 1) {
@@ -248,9 +248,9 @@ public class ProjectPortlet extends MVCPortlet {
 		aceitem.setImportance(project.getImportance());
 		
 		// language holds the special tagging
-		aceitem.setLanguage(project.getLanguage());
+		aceitem.setLanguage(project.getSpecialtagging());
 		
-		aceitem.setTextSearch( coalesce( project.getLanguage()) + ' ' +
+		aceitem.setTextSearch( coalesce( project.getSpecialtagging()) + ' ' +
 	               			   aceitem.getName() + ' ' +
 				               coalesce( project.getTitle()) + ' ' +
 				               coalesce( project.getLead()) + ' ' +

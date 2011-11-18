@@ -335,19 +335,91 @@ public interface ProjectModel extends BaseModel<Project> {
 	public void setImportance(long importance);
 
 	/**
-	 * Gets the language of this project.
+	 * Gets the specialtagging of this project.
 	 *
-	 * @return the language of this project
+	 * @return the specialtagging of this project
 	 */
 	@AutoEscape
-	public String getLanguage();
+	public String getSpecialtagging();
 
 	/**
-	 * Sets the language of this project.
+	 * Sets the specialtagging of this project.
 	 *
-	 * @param language the language of this project
+	 * @param specialtagging the specialtagging of this project
 	 */
-	public void setLanguage(String language);
+	public void setSpecialtagging(String specialtagging);
+
+	/**
+	 * Gets the controlstatus of this project.
+	 *
+	 * @return the controlstatus of this project
+	 */
+	public short getControlstatus();
+
+	/**
+	 * Sets the controlstatus of this project.
+	 *
+	 * @param controlstatus the controlstatus of this project
+	 */
+	public void setControlstatus(short controlstatus);
+
+	/**
+	 * Gets the creator of this project.
+	 *
+	 * @return the creator of this project
+	 */
+	@AutoEscape
+	public String getCreator();
+
+	/**
+	 * Sets the creator of this project.
+	 *
+	 * @param creator the creator of this project
+	 */
+	public void setCreator(String creator);
+
+	/**
+	 * Gets the creationdate of this project.
+	 *
+	 * @return the creationdate of this project
+	 */
+	public Date getCreationdate();
+
+	/**
+	 * Sets the creationdate of this project.
+	 *
+	 * @param creationdate the creationdate of this project
+	 */
+	public void setCreationdate(Date creationdate);
+
+	/**
+	 * Gets the moderator of this project.
+	 *
+	 * @return the moderator of this project
+	 */
+	@AutoEscape
+	public String getModerator();
+
+	/**
+	 * Sets the moderator of this project.
+	 *
+	 * @param moderator the moderator of this project
+	 */
+	public void setModerator(String moderator);
+
+	/**
+	 * Gets the approvaldate of this project.
+	 *
+	 * @return the approvaldate of this project
+	 */
+	public Date getApprovaldate();
+
+	/**
+	 * Sets the approvaldate of this project.
+	 *
+	 * @param approvaldate the approvaldate of this project
+	 */
+	public void setApprovaldate(Date approvaldate);
 
 	/**
 	 * Gets a copy of this project as an escaped model instance by wrapping it with an {@link com.liferay.portal.kernel.bean.AutoEscapeBeanHandler}.

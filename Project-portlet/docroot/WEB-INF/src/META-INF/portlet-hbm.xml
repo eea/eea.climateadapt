@@ -26,6 +26,11 @@
 		<property name="duration" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="rating" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 		<property name="importance" type="com.liferay.portal.dao.orm.hibernate.LongType" />
-		<property name="language" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="specialtagging" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="controlstatus" type="com.liferay.portal.dao.orm.hibernate.ShortType" />
+		<property name="creator" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="creationdate" type="org.hibernate.type.TimestampType" />
+		<property name="moderator" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="approvaldate" type="org.hibernate.type.TimestampType" />
 	</class>
 </hibernate-mapping>

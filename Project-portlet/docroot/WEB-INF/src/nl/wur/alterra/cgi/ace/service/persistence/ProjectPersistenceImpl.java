@@ -83,6 +83,18 @@ public class ProjectPersistenceImpl extends BasePersistenceImpl<Project>
 	public static final FinderPath FINDER_PATH_COUNT_BY_GROUPID = new FinderPath(ProjectModelImpl.ENTITY_CACHE_ENABLED,
 			ProjectModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
 			"countByGroupId", new String[] { Long.class.getName() });
+	public static final FinderPath FINDER_PATH_FIND_BY_CONTROLSTATUS = new FinderPath(ProjectModelImpl.ENTITY_CACHE_ENABLED,
+			ProjectModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
+			"findByControlstatus",
+			new String[] {
+				Short.class.getName(),
+				
+			"java.lang.Integer", "java.lang.Integer",
+				"com.liferay.portal.kernel.util.OrderByComparator"
+			});
+	public static final FinderPath FINDER_PATH_COUNT_BY_CONTROLSTATUS = new FinderPath(ProjectModelImpl.ENTITY_CACHE_ENABLED,
+			ProjectModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
+			"countByControlstatus", new String[] { Short.class.getName() });
 	public static final FinderPath FINDER_PATH_FIND_ALL = new FinderPath(ProjectModelImpl.ENTITY_CACHE_ENABLED,
 			ProjectModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
 			"findAll", new String[0]);
@@ -302,7 +314,12 @@ public class ProjectPersistenceImpl extends BasePersistenceImpl<Project>
 		projectImpl.setDuration(project.getDuration());
 		projectImpl.setRating(project.getRating());
 		projectImpl.setImportance(project.getImportance());
-		projectImpl.setLanguage(project.getLanguage());
+		projectImpl.setSpecialtagging(project.getSpecialtagging());
+		projectImpl.setControlstatus(project.getControlstatus());
+		projectImpl.setCreator(project.getCreator());
+		projectImpl.setCreationdate(project.getCreationdate());
+		projectImpl.setModerator(project.getModerator());
+		projectImpl.setApprovaldate(project.getApprovaldate());
 
 		return projectImpl;
 	}
@@ -727,6 +744,344 @@ public class ProjectPersistenceImpl extends BasePersistenceImpl<Project>
 	}
 
 	/**
+	 * Finds all the projects where controlstatus = &#63;.
+	 *
+	 * @param controlstatus the controlstatus to search with
+	 * @return the matching projects
+	 * @throws SystemException if a system exception occurred
+	 */
+	public List<Project> findByControlstatus(short controlstatus)
+		throws SystemException {
+		return findByControlstatus(controlstatus, QueryUtil.ALL_POS,
+			QueryUtil.ALL_POS, null);
+	}
+
+	/**
+	 * Finds a range of all the projects where controlstatus = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param controlstatus the controlstatus to search with
+	 * @param start the lower bound of the range of projects to return
+	 * @param end the upper bound of the range of projects to return (not inclusive)
+	 * @return the range of matching projects
+	 * @throws SystemException if a system exception occurred
+	 */
+	public List<Project> findByControlstatus(short controlstatus, int start,
+		int end) throws SystemException {
+		return findByControlstatus(controlstatus, start, end, null);
+	}
+
+	/**
+	 * Finds an ordered range of all the projects where controlstatus = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param controlstatus the controlstatus to search with
+	 * @param start the lower bound of the range of projects to return
+	 * @param end the upper bound of the range of projects to return (not inclusive)
+	 * @param orderByComparator the comparator to order the results by
+	 * @return the ordered range of matching projects
+	 * @throws SystemException if a system exception occurred
+	 */
+	public List<Project> findByControlstatus(short controlstatus, int start,
+		int end, OrderByComparator orderByComparator) throws SystemException {
+		Object[] finderArgs = new Object[] {
+				controlstatus,
+				
+				String.valueOf(start), String.valueOf(end),
+				String.valueOf(orderByComparator)
+			};
+
+		List<Project> list = (List<Project>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_CONTROLSTATUS,
+				finderArgs, this);
+
+		if (list == null) {
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				StringBundler query = null;
+
+				if (orderByComparator != null) {
+					query = new StringBundler(3 +
+							(orderByComparator.getOrderByFields().length * 3));
+				}
+				else {
+					query = new StringBundler(3);
+				}
+
+				query.append(_SQL_SELECT_PROJECT_WHERE);
+
+				query.append(_FINDER_COLUMN_CONTROLSTATUS_CONTROLSTATUS_2);
+
+				if (orderByComparator != null) {
+					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+						orderByComparator);
+				}
+
+				else {
+					query.append(ProjectModelImpl.ORDER_BY_JPQL);
+				}
+
+				String sql = query.toString();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(controlstatus);
+
+				list = (List<Project>)QueryUtil.list(q, getDialect(), start, end);
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				if (list == null) {
+					list = new ArrayList<Project>();
+				}
+
+				cacheResult(list);
+
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_CONTROLSTATUS,
+					finderArgs, list);
+
+				closeSession(session);
+			}
+		}
+
+		return list;
+	}
+
+	/**
+	 * Finds the first project in the ordered set where controlstatus = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param controlstatus the controlstatus to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the first matching project
+	 * @throws nl.wur.alterra.cgi.ace.NoSuchProjectException if a matching project could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	public Project findByControlstatus_First(short controlstatus,
+		OrderByComparator orderByComparator)
+		throws NoSuchProjectException, SystemException {
+		List<Project> list = findByControlstatus(controlstatus, 0, 1,
+				orderByComparator);
+
+		if (list.isEmpty()) {
+			StringBundler msg = new StringBundler(4);
+
+			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
+
+			msg.append("controlstatus=");
+			msg.append(controlstatus);
+
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+			throw new NoSuchProjectException(msg.toString());
+		}
+		else {
+			return list.get(0);
+		}
+	}
+
+	/**
+	 * Finds the last project in the ordered set where controlstatus = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param controlstatus the controlstatus to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the last matching project
+	 * @throws nl.wur.alterra.cgi.ace.NoSuchProjectException if a matching project could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	public Project findByControlstatus_Last(short controlstatus,
+		OrderByComparator orderByComparator)
+		throws NoSuchProjectException, SystemException {
+		int count = countByControlstatus(controlstatus);
+
+		List<Project> list = findByControlstatus(controlstatus, count - 1,
+				count, orderByComparator);
+
+		if (list.isEmpty()) {
+			StringBundler msg = new StringBundler(4);
+
+			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
+
+			msg.append("controlstatus=");
+			msg.append(controlstatus);
+
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+			throw new NoSuchProjectException(msg.toString());
+		}
+		else {
+			return list.get(0);
+		}
+	}
+
+	/**
+	 * Finds the projects before and after the current project in the ordered set where controlstatus = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param projectId the primary key of the current project
+	 * @param controlstatus the controlstatus to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the previous, current, and next project
+	 * @throws nl.wur.alterra.cgi.ace.NoSuchProjectException if a project with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	public Project[] findByControlstatus_PrevAndNext(long projectId,
+		short controlstatus, OrderByComparator orderByComparator)
+		throws NoSuchProjectException, SystemException {
+		Project project = findByPrimaryKey(projectId);
+
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			Project[] array = new ProjectImpl[3];
+
+			array[0] = getByControlstatus_PrevAndNext(session, project,
+					controlstatus, orderByComparator, true);
+
+			array[1] = project;
+
+			array[2] = getByControlstatus_PrevAndNext(session, project,
+					controlstatus, orderByComparator, false);
+
+			return array;
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	protected Project getByControlstatus_PrevAndNext(Session session,
+		Project project, short controlstatus,
+		OrderByComparator orderByComparator, boolean previous) {
+		StringBundler query = null;
+
+		if (orderByComparator != null) {
+			query = new StringBundler(6 +
+					(orderByComparator.getOrderByFields().length * 6));
+		}
+		else {
+			query = new StringBundler(3);
+		}
+
+		query.append(_SQL_SELECT_PROJECT_WHERE);
+
+		query.append(_FINDER_COLUMN_CONTROLSTATUS_CONTROLSTATUS_2);
+
+		if (orderByComparator != null) {
+			String[] orderByFields = orderByComparator.getOrderByFields();
+
+			if (orderByFields.length > 0) {
+				query.append(WHERE_AND);
+			}
+
+			for (int i = 0; i < orderByFields.length; i++) {
+				query.append(_ORDER_BY_ENTITY_ALIAS);
+				query.append(orderByFields[i]);
+
+				if ((i + 1) < orderByFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN_HAS_NEXT);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN);
+					}
+				}
+			}
+
+			query.append(ORDER_BY_CLAUSE);
+
+			for (int i = 0; i < orderByFields.length; i++) {
+				query.append(_ORDER_BY_ENTITY_ALIAS);
+				query.append(orderByFields[i]);
+
+				if ((i + 1) < orderByFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC_HAS_NEXT);
+					}
+					else {
+						query.append(ORDER_BY_DESC_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC);
+					}
+					else {
+						query.append(ORDER_BY_DESC);
+					}
+				}
+			}
+		}
+
+		else {
+			query.append(ProjectModelImpl.ORDER_BY_JPQL);
+		}
+
+		String sql = query.toString();
+
+		Query q = session.createQuery(sql);
+
+		q.setFirstResult(0);
+		q.setMaxResults(2);
+
+		QueryPos qPos = QueryPos.getInstance(q);
+
+		qPos.add(controlstatus);
+
+		if (orderByComparator != null) {
+			Object[] values = orderByComparator.getOrderByValues(project);
+
+			for (Object value : values) {
+				qPos.add(value);
+			}
+		}
+
+		List<Project> list = q.list();
+
+		if (list.size() == 2) {
+			return list.get(1);
+		}
+		else {
+			return null;
+		}
+	}
+
+	/**
 	 * Finds all the projects.
 	 *
 	 * @return the projects
@@ -844,6 +1199,19 @@ public class ProjectPersistenceImpl extends BasePersistenceImpl<Project>
 	}
 
 	/**
+	 * Removes all the projects where controlstatus = &#63; from the database.
+	 *
+	 * @param controlstatus the controlstatus to search with
+	 * @throws SystemException if a system exception occurred
+	 */
+	public void removeByControlstatus(short controlstatus)
+		throws SystemException {
+		for (Project project : findByControlstatus(controlstatus)) {
+			remove(project);
+		}
+	}
+
+	/**
 	 * Removes all the projects from the database.
 	 *
 	 * @throws SystemException if a system exception occurred
@@ -898,6 +1266,60 @@ public class ProjectPersistenceImpl extends BasePersistenceImpl<Project>
 				}
 
 				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_GROUPID,
+					finderArgs, count);
+
+				closeSession(session);
+			}
+		}
+
+		return count.intValue();
+	}
+
+	/**
+	 * Counts all the projects where controlstatus = &#63;.
+	 *
+	 * @param controlstatus the controlstatus to search with
+	 * @return the number of matching projects
+	 * @throws SystemException if a system exception occurred
+	 */
+	public int countByControlstatus(short controlstatus)
+		throws SystemException {
+		Object[] finderArgs = new Object[] { controlstatus };
+
+		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_CONTROLSTATUS,
+				finderArgs, this);
+
+		if (count == null) {
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				StringBundler query = new StringBundler(2);
+
+				query.append(_SQL_COUNT_PROJECT_WHERE);
+
+				query.append(_FINDER_COLUMN_CONTROLSTATUS_CONTROLSTATUS_2);
+
+				String sql = query.toString();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(controlstatus);
+
+				count = (Long)q.uniqueResult();
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				if (count == null) {
+					count = Long.valueOf(0);
+				}
+
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_CONTROLSTATUS,
 					finderArgs, count);
 
 				closeSession(session);
@@ -983,6 +1405,7 @@ public class ProjectPersistenceImpl extends BasePersistenceImpl<Project>
 	private static final String _SQL_COUNT_PROJECT = "SELECT COUNT(project) FROM Project project";
 	private static final String _SQL_COUNT_PROJECT_WHERE = "SELECT COUNT(project) FROM Project project WHERE ";
 	private static final String _FINDER_COLUMN_GROUPID_GROUPID_2 = "project.groupId = ?";
+	private static final String _FINDER_COLUMN_CONTROLSTATUS_CONTROLSTATUS_2 = "project.controlstatus = ?";
 	private static final String _ORDER_BY_ENTITY_ALIAS = "project.";
 	private static final String _NO_SUCH_ENTITY_WITH_PRIMARY_KEY = "No Project exists with the primary key ";
 	private static final String _NO_SUCH_ENTITY_WITH_KEY = "No Project exists with the key {";

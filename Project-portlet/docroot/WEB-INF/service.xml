@@ -31,8 +31,13 @@
 		<column name="duration" type="String" />
 		<column name="rating" type="long" />
 		<column name="importance" type="long" />
-		<column name="language" type="String" />
-		
+		<column name="specialtagging" type="String" />
+		<column name="controlstatus" type="short" />
+		<column name="creator" type="String" />
+		<column name="creationdate" type="Date" />
+		<column name="moderator" type="String" />
+		<column name="approvaldate" type="Date" />
+				
 		<!-- Sort order -->
 		<order by="asc">
 			<order-column name="acronym" />
@@ -41,6 +46,11 @@
 		<!-- Finder Methods -->
 		<finder name="GroupId" return-type="Collection">
 			<finder-column name="groupId" />
+		</finder>
+
+		<!-- Finder Methods -->
+		<finder name="Controlstatus" return-type="Collection">
+			<finder-column name="controlstatus" />
 		</finder>
 	</entity>
 	

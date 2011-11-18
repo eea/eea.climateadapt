@@ -188,12 +188,52 @@ public class ProjectWrapper implements Project {
 		_project.setImportance(importance);
 	}
 
-	public java.lang.String getLanguage() {
-		return _project.getLanguage();
+	public java.lang.String getSpecialtagging() {
+		return _project.getSpecialtagging();
 	}
 
-	public void setLanguage(java.lang.String language) {
-		_project.setLanguage(language);
+	public void setSpecialtagging(java.lang.String specialtagging) {
+		_project.setSpecialtagging(specialtagging);
+	}
+
+	public short getControlstatus() {
+		return _project.getControlstatus();
+	}
+
+	public void setControlstatus(short controlstatus) {
+		_project.setControlstatus(controlstatus);
+	}
+
+	public java.lang.String getCreator() {
+		return _project.getCreator();
+	}
+
+	public void setCreator(java.lang.String creator) {
+		_project.setCreator(creator);
+	}
+
+	public java.util.Date getCreationdate() {
+		return _project.getCreationdate();
+	}
+
+	public void setCreationdate(java.util.Date creationdate) {
+		_project.setCreationdate(creationdate);
+	}
+
+	public java.lang.String getModerator() {
+		return _project.getModerator();
+	}
+
+	public void setModerator(java.lang.String moderator) {
+		_project.setModerator(moderator);
+	}
+
+	public java.util.Date getApprovaldate() {
+		return _project.getApprovaldate();
+	}
+
+	public void setApprovaldate(java.util.Date approvaldate) {
+		_project.setApprovaldate(approvaldate);
 	}
 
 	public nl.wur.alterra.cgi.ace.model.Project toEscapedModel() {

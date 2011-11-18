@@ -1,6 +1,6 @@
 CREATE TABLE ace_project
 (
-  projectid bigint NOT NULL,
+  projectid bigint NOT NULL DEFAULT nextval('ace_project_id_seq'::regclass),
   companyid bigint,
   groupid bigint,
   acronym character varying(75),
@@ -19,7 +19,12 @@ CREATE TABLE ace_project
   duration character varying(255),
   rating bigint,
   importance bigint,
-  "language" character varying(75),
+  specialtagging character varying(75),
+  controlstatus smallint,
+  creator character varying(75),
+  creationdate timestamp without time zone,
+  moderator character varying(75),
+  approvaldate timestamp without time zone,
   CONSTRAINT ace_project_pkey PRIMARY KEY (projectid)
 )
 WITH (
@@ -27,7 +32,7 @@ WITH (
 );
 ALTER TABLE ace_project OWNER TO postgres;
 
-/* liferay uses own id counter - for loading in the back start with 100000  */
+/* liferay uses own id counter - for loading in the back start with 100000  
 
 CREATE SEQUENCE ace_project_id_seq
   INCREMENT 1
@@ -38,3 +43,4 @@ CREATE SEQUENCE ace_project_id_seq
 ALTER TABLE ace_project_id_seq OWNER TO postgres;
 
 ALTER TABLE ace_project ALTER COLUMN projectid SET DEFAULT nextval('ace_project_id_seq'::regclass);
+*/

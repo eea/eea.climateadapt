@@ -79,4 +79,47 @@ public class ProjectLocalServiceImpl extends ProjectLocalServiceBaseImpl {
 	public int getProjectsCountByGroupId(long groupId) throws SystemException {
 		return projectPersistence.countByGroupId(groupId);
 	}
+
+
+	/**
+	 * Gets a list with all the Projects by controlstatus
+	 *
+	 */
+	public List<Project> getProjectsByControlstatus(short controlstatus) throws SystemException {
+		return projectPersistence.findByControlstatus(controlstatus);
+	}
+
+	/**
+	 * Gets a list with a range of Projects by controlstatus
+	 *
+	 */
+	public List<Project> getProjectsByGroupId(short controlstatus, int start, int end) throws SystemException {
+		return projectPersistence.findByControlstatus(controlstatus, start, end);
+	}
+	
+
+	/**
+	 * Gets a list with a range of Projects by controlstatus
+	 *
+	 */
+	public List<Project> getProjectsByControlstatus(short controlstatus, int start, int end) throws SystemException {
+		return projectPersistence.findByControlstatus(controlstatus, start, end);
+	}
+
+	/**
+	 * Gets the number of Projects by controlstatus
+	 *
+	 */
+	
+	public int getProjectsCountByGroupId(short controlstatus) throws SystemException {
+		return projectPersistence.countByControlstatus(controlstatus);
+	}
+	
+	/**
+	 * Gets the number of Projects by controlstatus
+	 *
+	 */
+	public int getProjectsCountByControlstatus(short controlstatus) throws SystemException {
+		return projectPersistence.countByControlstatus(controlstatus);
+	}
 }

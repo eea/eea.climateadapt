@@ -32,7 +32,16 @@
 			<basic name="duration" />
 			<basic name="rating" />
 			<basic name="importance" />
-			<basic name="language" />
+			<basic name="specialtagging" />
+			<basic name="controlstatus" />
+			<basic name="creator" />
+			<basic name="creationdate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="moderator" />
+			<basic name="approvaldate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
 			<transient name="primaryKey" />
 		</attributes>
 	</mapped-superclass>

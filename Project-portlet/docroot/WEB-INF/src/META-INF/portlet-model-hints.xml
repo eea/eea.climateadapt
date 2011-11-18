@@ -21,6 +21,11 @@
 		<field name="duration" type="String" />
 		<field name="rating" type="long" />
 		<field name="importance" type="long" />
-		<field name="language" type="String" />
+		<field name="specialtagging" type="String" />
+		<field name="controlstatus" type="short" />
+		<field name="creator" type="String" />
+		<field name="creationdate" type="Date" />
+		<field name="moderator" type="String" />
+		<field name="approvaldate" type="Date" />
 	</model>
 </model-hints>

@@ -226,4 +226,27 @@ public interface ProjectLocalService {
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int getProjectsCountByGroupId(long groupId)
 		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Gets a list with all the Projects in a group
+	*/
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public java.util.List<nl.wur.alterra.cgi.ace.model.Project> getProjectsByControlstatus(
+		short controlstatus)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Gets a list with a range of Projects from a group
+	*/
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public java.util.List<nl.wur.alterra.cgi.ace.model.Project> getProjectsByGroupId(
+		short controlstatus, int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Gets the number of Projects in a group
+	*/
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public int getProjectsCountByGroupId(short controlstatus)
+		throws com.liferay.portal.kernel.exception.SystemException;
 }

@@ -75,9 +75,14 @@ public class ProjectModelImpl extends BaseModelImpl<Project>
 			{ "duration", new Integer(Types.VARCHAR) },
 			{ "rating", new Integer(Types.BIGINT) },
 			{ "importance", new Integer(Types.BIGINT) },
-			{ "language", new Integer(Types.VARCHAR) }
+			{ "specialtagging", new Integer(Types.VARCHAR) },
+			{ "controlstatus", new Integer(Types.INTEGER) },
+			{ "creator", new Integer(Types.VARCHAR) },
+			{ "creationdate", new Integer(Types.TIMESTAMP) },
+			{ "moderator", new Integer(Types.VARCHAR) },
+			{ "approvaldate", new Integer(Types.TIMESTAMP) }
 		};
-	public static final String TABLE_SQL_CREATE = "create table Ace_Project (projectId LONG not null primary key,companyId LONG,groupId LONG,acronym VARCHAR(75) null,title VARCHAR(75) null,startdate DATE null,enddate DATE null,lead VARCHAR(75) null,partners VARCHAR(75) null,funding VARCHAR(75) null,sectors VARCHAR(75) null,spatiallevel VARCHAR(75) null,abstracts VARCHAR(75) null,element VARCHAR(75) null,keywords VARCHAR(75) null,website VARCHAR(75) null,duration VARCHAR(75) null,rating LONG,importance LONG,language VARCHAR(75) null)";
+	public static final String TABLE_SQL_CREATE = "create table Ace_Project (projectId LONG not null primary key,companyId LONG,groupId LONG,acronym VARCHAR(75) null,title VARCHAR(75) null,startdate DATE null,enddate DATE null,lead VARCHAR(75) null,partners VARCHAR(75) null,funding VARCHAR(75) null,sectors VARCHAR(75) null,spatiallevel VARCHAR(75) null,abstracts VARCHAR(75) null,element VARCHAR(75) null,keywords VARCHAR(75) null,website VARCHAR(75) null,duration VARCHAR(75) null,rating LONG,importance LONG,specialtagging VARCHAR(75) null,controlstatus INTEGER,creator VARCHAR(75) null,creationdate DATE null,moderator VARCHAR(75) null,approvaldate DATE null)";
 	public static final String TABLE_SQL_DROP = "drop table Ace_Project";
 	public static final String ORDER_BY_JPQL = " ORDER BY project.acronym ASC";
 	public static final String ORDER_BY_SQL = " ORDER BY Ace_Project.acronym ASC";
@@ -320,17 +325,67 @@ public class ProjectModelImpl extends BaseModelImpl<Project>
 		_importance = importance;
 	}
 
-	public String getLanguage() {
-		if (_language == null) {
+	public String getSpecialtagging() {
+		if (_specialtagging == null) {
 			return StringPool.BLANK;
 		}
 		else {
-			return _language;
+			return _specialtagging;
 		}
 	}
 
-	public void setLanguage(String language) {
-		_language = language;
+	public void setSpecialtagging(String specialtagging) {
+		_specialtagging = specialtagging;
+	}
+
+	public short getControlstatus() {
+		return _controlstatus;
+	}
+
+	public void setControlstatus(short controlstatus) {
+		_controlstatus = controlstatus;
+	}
+
+	public String getCreator() {
+		if (_creator == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _creator;
+		}
+	}
+
+	public void setCreator(String creator) {
+		_creator = creator;
+	}
+
+	public Date getCreationdate() {
+		return _creationdate;
+	}
+
+	public void setCreationdate(Date creationdate) {
+		_creationdate = creationdate;
+	}
+
+	public String getModerator() {
+		if (_moderator == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _moderator;
+		}
+	}
+
+	public void setModerator(String moderator) {
+		_moderator = moderator;
+	}
+
+	public Date getApprovaldate() {
+		return _approvaldate;
+	}
+
+	public void setApprovaldate(Date approvaldate) {
+		_approvaldate = approvaldate;
 	}
 
 	public Project toEscapedModel() {
@@ -378,7 +433,12 @@ public class ProjectModelImpl extends BaseModelImpl<Project>
 		clone.setDuration(getDuration());
 		clone.setRating(getRating());
 		clone.setImportance(getImportance());
-		clone.setLanguage(getLanguage());
+		clone.setSpecialtagging(getSpecialtagging());
+		clone.setControlstatus(getControlstatus());
+		clone.setCreator(getCreator());
+		clone.setCreationdate(getCreationdate());
+		clone.setModerator(getModerator());
+		clone.setApprovaldate(getApprovaldate());
 
 		return clone;
 	}
@@ -424,7 +484,7 @@ public class ProjectModelImpl extends BaseModelImpl<Project>
 	}
 
 	public String toString() {
-		StringBundler sb = new StringBundler(41);
+		StringBundler sb = new StringBundler(51);
 
 		sb.append("{projectId=");
 		sb.append(getProjectId());
@@ -464,15 +524,25 @@ public class ProjectModelImpl extends BaseModelImpl<Project>
 		sb.append(getRating());
 		sb.append(", importance=");
 		sb.append(getImportance());
-		sb.append(", language=");
-		sb.append(getLanguage());
+		sb.append(", specialtagging=");
+		sb.append(getSpecialtagging());
+		sb.append(", controlstatus=");
+		sb.append(getControlstatus());
+		sb.append(", creator=");
+		sb.append(getCreator());
+		sb.append(", creationdate=");
+		sb.append(getCreationdate());
+		sb.append(", moderator=");
+		sb.append(getModerator());
+		sb.append(", approvaldate=");
+		sb.append(getApprovaldate());
 		sb.append("}");
 
 		return sb.toString();
 	}
 
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(64);
+		StringBundler sb = new StringBundler(79);
 
 		sb.append("<model><model-name>");
 		sb.append("nl.wur.alterra.cgi.ace.model.Project");
@@ -555,8 +625,28 @@ public class ProjectModelImpl extends BaseModelImpl<Project>
 		sb.append(getImportance());
 		sb.append("]]></column-value></column>");
 		sb.append(
-			"<column><column-name>language</column-name><column-value><![CDATA[");
-		sb.append(getLanguage());
+			"<column><column-name>specialtagging</column-name><column-value><![CDATA[");
+		sb.append(getSpecialtagging());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>controlstatus</column-name><column-value><![CDATA[");
+		sb.append(getControlstatus());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>creator</column-name><column-value><![CDATA[");
+		sb.append(getCreator());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>creationdate</column-name><column-value><![CDATA[");
+		sb.append(getCreationdate());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>moderator</column-name><column-value><![CDATA[");
+		sb.append(getModerator());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>approvaldate</column-name><column-value><![CDATA[");
+		sb.append(getApprovaldate());
 		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");
@@ -583,6 +673,11 @@ public class ProjectModelImpl extends BaseModelImpl<Project>
 	private String _duration;
 	private long _rating;
 	private long _importance;
-	private String _language;
+	private String _specialtagging;
+	private short _controlstatus;
+	private String _creator;
+	private Date _creationdate;
+	private String _moderator;
+	private Date _approvaldate;
 	private transient ExpandoBridge _expandoBridge;
 }

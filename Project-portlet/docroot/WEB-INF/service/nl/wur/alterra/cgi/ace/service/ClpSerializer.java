@@ -189,12 +189,47 @@ public class ClpSerializer {
 
 					method18.invoke(newModel, value18);
 
-					Method method19 = newModelClass.getMethod("setLanguage",
+					Method method19 = newModelClass.getMethod("setSpecialtagging",
 							new Class[] { String.class });
 
-					String value19 = oldCplModel.getLanguage();
+					String value19 = oldCplModel.getSpecialtagging();
 
 					method19.invoke(newModel, value19);
+
+					Method method20 = newModelClass.getMethod("setControlstatus",
+							new Class[] { Short.TYPE });
+
+					Short value20 = new Short(oldCplModel.getControlstatus());
+
+					method20.invoke(newModel, value20);
+
+					Method method21 = newModelClass.getMethod("setCreator",
+							new Class[] { String.class });
+
+					String value21 = oldCplModel.getCreator();
+
+					method21.invoke(newModel, value21);
+
+					Method method22 = newModelClass.getMethod("setCreationdate",
+							new Class[] { Date.class });
+
+					Date value22 = oldCplModel.getCreationdate();
+
+					method22.invoke(newModel, value22);
+
+					Method method23 = newModelClass.getMethod("setModerator",
+							new Class[] { String.class });
+
+					String value23 = oldCplModel.getModerator();
+
+					method23.invoke(newModel, value23);
+
+					Method method24 = newModelClass.getMethod("setApprovaldate",
+							new Class[] { Date.class });
+
+					Date value24 = oldCplModel.getApprovaldate();
+
+					method24.invoke(newModel, value24);
 
 					return newModel;
 				}
@@ -378,12 +413,49 @@ public class ClpSerializer {
 
 					newModel.setImportance(value18);
 
-					Method method19 = oldModelClass.getMethod("getLanguage");
+					Method method19 = oldModelClass.getMethod(
+							"getSpecialtagging");
 
 					String value19 = (String)method19.invoke(oldModel,
 							(Object[])null);
 
-					newModel.setLanguage(value19);
+					newModel.setSpecialtagging(value19);
+
+					Method method20 = oldModelClass.getMethod(
+							"getControlstatus");
+
+					Short value20 = (Short)method20.invoke(oldModel,
+							(Object[])null);
+
+					newModel.setControlstatus(value20);
+
+					Method method21 = oldModelClass.getMethod("getCreator");
+
+					String value21 = (String)method21.invoke(oldModel,
+							(Object[])null);
+
+					newModel.setCreator(value21);
+
+					Method method22 = oldModelClass.getMethod("getCreationdate");
+
+					Date value22 = (Date)method22.invoke(oldModel,
+							(Object[])null);
+
+					newModel.setCreationdate(value22);
+
+					Method method23 = oldModelClass.getMethod("getModerator");
+
+					String value23 = (String)method23.invoke(oldModel,
+							(Object[])null);
+
+					newModel.setModerator(value23);
+
+					Method method24 = oldModelClass.getMethod("getApprovaldate");
+
+					Date value24 = (Date)method24.invoke(oldModel,
+							(Object[])null);
+
+					newModel.setApprovaldate(value24);
 
 					return newModel;
 				}

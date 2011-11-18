@@ -195,12 +195,52 @@ public class ProjectClp extends BaseModelImpl<Project> implements Project {
 		_importance = importance;
 	}
 
-	public String getLanguage() {
-		return _language;
+	public String getSpecialtagging() {
+		return _specialtagging;
 	}
 
-	public void setLanguage(String language) {
-		_language = language;
+	public void setSpecialtagging(String specialtagging) {
+		_specialtagging = specialtagging;
+	}
+
+	public short getControlstatus() {
+		return _controlstatus;
+	}
+
+	public void setControlstatus(short controlstatus) {
+		_controlstatus = controlstatus;
+	}
+
+	public String getCreator() {
+		return _creator;
+	}
+
+	public void setCreator(String creator) {
+		_creator = creator;
+	}
+
+	public Date getCreationdate() {
+		return _creationdate;
+	}
+
+	public void setCreationdate(Date creationdate) {
+		_creationdate = creationdate;
+	}
+
+	public String getModerator() {
+		return _moderator;
+	}
+
+	public void setModerator(String moderator) {
+		_moderator = moderator;
+	}
+
+	public Date getApprovaldate() {
+		return _approvaldate;
+	}
+
+	public void setApprovaldate(Date approvaldate) {
+		_approvaldate = approvaldate;
 	}
 
 	public Project toEscapedModel() {
@@ -235,7 +275,12 @@ public class ProjectClp extends BaseModelImpl<Project> implements Project {
 		clone.setDuration(getDuration());
 		clone.setRating(getRating());
 		clone.setImportance(getImportance());
-		clone.setLanguage(getLanguage());
+		clone.setSpecialtagging(getSpecialtagging());
+		clone.setControlstatus(getControlstatus());
+		clone.setCreator(getCreator());
+		clone.setCreationdate(getCreationdate());
+		clone.setModerator(getModerator());
+		clone.setApprovaldate(getApprovaldate());
 
 		return clone;
 	}
@@ -281,7 +326,7 @@ public class ProjectClp extends BaseModelImpl<Project> implements Project {
 	}
 
 	public String toString() {
-		StringBundler sb = new StringBundler(41);
+		StringBundler sb = new StringBundler(51);
 
 		sb.append("{projectId=");
 		sb.append(getProjectId());
@@ -321,15 +366,25 @@ public class ProjectClp extends BaseModelImpl<Project> implements Project {
 		sb.append(getRating());
 		sb.append(", importance=");
 		sb.append(getImportance());
-		sb.append(", language=");
-		sb.append(getLanguage());
+		sb.append(", specialtagging=");
+		sb.append(getSpecialtagging());
+		sb.append(", controlstatus=");
+		sb.append(getControlstatus());
+		sb.append(", creator=");
+		sb.append(getCreator());
+		sb.append(", creationdate=");
+		sb.append(getCreationdate());
+		sb.append(", moderator=");
+		sb.append(getModerator());
+		sb.append(", approvaldate=");
+		sb.append(getApprovaldate());
 		sb.append("}");
 
 		return sb.toString();
 	}
 
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(64);
+		StringBundler sb = new StringBundler(79);
 
 		sb.append("<model><model-name>");
 		sb.append("nl.wur.alterra.cgi.ace.model.Project");
@@ -412,8 +467,28 @@ public class ProjectClp extends BaseModelImpl<Project> implements Project {
 		sb.append(getImportance());
 		sb.append("]]></column-value></column>");
 		sb.append(
-			"<column><column-name>language</column-name><column-value><![CDATA[");
-		sb.append(getLanguage());
+			"<column><column-name>specialtagging</column-name><column-value><![CDATA[");
+		sb.append(getSpecialtagging());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>controlstatus</column-name><column-value><![CDATA[");
+		sb.append(getControlstatus());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>creator</column-name><column-value><![CDATA[");
+		sb.append(getCreator());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>creationdate</column-name><column-value><![CDATA[");
+		sb.append(getCreationdate());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>moderator</column-name><column-value><![CDATA[");
+		sb.append(getModerator());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>approvaldate</column-name><column-value><![CDATA[");
+		sb.append(getApprovaldate());
 		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");
@@ -440,5 +515,10 @@ public class ProjectClp extends BaseModelImpl<Project> implements Project {
 	private String _duration;
 	private long _rating;
 	private long _importance;
-	private String _language;
+	private String _specialtagging;
+	private short _controlstatus;
+	private String _creator;
+	private Date _creationdate;
+	private String _moderator;
+	private Date _approvaldate;
 }

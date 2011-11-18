@@ -469,6 +469,89 @@ public class ProjectLocalServiceClp implements ProjectLocalService {
 		return ((Integer)returnObj).intValue();
 	}
 
+	public java.util.List<nl.wur.alterra.cgi.ace.model.Project> getProjectsByControlstatus(
+		short controlstatus)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		Object returnObj = null;
+
+		MethodHandler methodHandler = new MethodHandler(_getProjectsByControlstatusMethodKey16,
+				controlstatus);
+
+		try {
+			returnObj = _classLoaderProxy.invoke(methodHandler);
+		}
+		catch (Throwable t) {
+			if (t instanceof com.liferay.portal.kernel.exception.SystemException) {
+				throw (com.liferay.portal.kernel.exception.SystemException)t;
+			}
+
+			if (t instanceof RuntimeException) {
+				throw (RuntimeException)t;
+			}
+			else {
+				throw new RuntimeException(t.getClass().getName() +
+					" is not a valid exception");
+			}
+		}
+
+		return (java.util.List<nl.wur.alterra.cgi.ace.model.Project>)ClpSerializer.translateOutput(returnObj);
+	}
+
+	public java.util.List<nl.wur.alterra.cgi.ace.model.Project> getProjectsByGroupId(
+		short controlstatus, int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		Object returnObj = null;
+
+		MethodHandler methodHandler = new MethodHandler(_getProjectsByGroupIdMethodKey17,
+				controlstatus, start, end);
+
+		try {
+			returnObj = _classLoaderProxy.invoke(methodHandler);
+		}
+		catch (Throwable t) {
+			if (t instanceof com.liferay.portal.kernel.exception.SystemException) {
+				throw (com.liferay.portal.kernel.exception.SystemException)t;
+			}
+
+			if (t instanceof RuntimeException) {
+				throw (RuntimeException)t;
+			}
+			else {
+				throw new RuntimeException(t.getClass().getName() +
+					" is not a valid exception");
+			}
+		}
+
+		return (java.util.List<nl.wur.alterra.cgi.ace.model.Project>)ClpSerializer.translateOutput(returnObj);
+	}
+
+	public int getProjectsCountByGroupId(short controlstatus)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		Object returnObj = null;
+
+		MethodHandler methodHandler = new MethodHandler(_getProjectsCountByGroupIdMethodKey18,
+				controlstatus);
+
+		try {
+			returnObj = _classLoaderProxy.invoke(methodHandler);
+		}
+		catch (Throwable t) {
+			if (t instanceof com.liferay.portal.kernel.exception.SystemException) {
+				throw (com.liferay.portal.kernel.exception.SystemException)t;
+			}
+
+			if (t instanceof RuntimeException) {
+				throw (RuntimeException)t;
+			}
+			else {
+				throw new RuntimeException(t.getClass().getName() +
+					" is not a valid exception");
+			}
+		}
+
+		return ((Integer)returnObj).intValue();
+	}
+
 	public ClassLoaderProxy getClassLoaderProxy() {
 		return _classLoaderProxy;
 	}
@@ -512,4 +595,10 @@ public class ProjectLocalServiceClp implements ProjectLocalService {
 			"getProjectsByGroupId", long.class, int.class, int.class);
 	private MethodKey _getProjectsCountByGroupIdMethodKey15 = new MethodKey(_classLoaderProxy.getClassName(),
 			"getProjectsCountByGroupId", long.class);
+	private MethodKey _getProjectsByControlstatusMethodKey16 = new MethodKey(_classLoaderProxy.getClassName(),
+			"getProjectsByControlstatus", short.class);
+	private MethodKey _getProjectsByGroupIdMethodKey17 = new MethodKey(_classLoaderProxy.getClassName(),
+			"getProjectsByGroupId", short.class, int.class, int.class);
+	private MethodKey _getProjectsCountByGroupIdMethodKey18 = new MethodKey(_classLoaderProxy.getClassName(),
+			"getProjectsCountByGroupId", short.class);
 }
