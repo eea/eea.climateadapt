@@ -264,7 +264,7 @@ public class ProjectPortlet extends MVCPortlet {
 		
 		String sctrs = project.getSectors();
 		
-		if( sctrs.indexOf(";")  ==  sctrs.lastIndexOf(";")) { // one sector
+		if( ( coalesce(sctrs).length() > 0 ) && ( sctrs.indexOf(";")  ==  sctrs.lastIndexOf(";") ) ) { // one sector
 			
 			aceitem.setTextSearch( aceitem.getTextSearch() + ' ' + coalesce( sctrs.substring(0, sctrs.indexOf(";") ) ) );
 		}
