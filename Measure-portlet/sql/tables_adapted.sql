@@ -1,5 +1,6 @@
-create table ace_measure (
-  measureid bigint not null,
+CREATE TABLE ace_measure
+(
+  measureid bigint NOT NULL DEFAULT nextval('ace_measure_id_seq'::regclass),
   companyid bigint,
   groupid bigint,
   "name" character varying(255),
@@ -19,7 +20,7 @@ create table ace_measure (
   startdate timestamp without time zone,
   enddate timestamp without time zone,
   publicationdate timestamp without time zone,
-  "language" character varying(24) DEFAULT 'en_UK'::character varying,
+  specialtagging character varying(75) DEFAULT NULL::character varying,
   sectors_ character varying(255),
   elements_ character varying(255),
   climateimpacts_ character varying(255),
@@ -30,15 +31,19 @@ create table ace_measure (
   lon double precision,
   lat double precision,
   satarea character varying(254),
+  controlstatus smallint,
+  creator character varying(75),
+  creationdate timestamp without time zone,
+  moderator character varying(75),
+  approvaldate timestamp without time zone,
   CONSTRAINT ace_measure_pkey PRIMARY KEY (measureid)
 )
 WITH (
   OIDS=FALSE
 );
-
 ALTER TABLE ace_measure OWNER TO postgres;
 
-/* liferay uses own id counter - for loading in the back start with 100000  */
+/* liferay uses own id counter - for loading in the back start with 100000  
 
 CREATE SEQUENCE ace_measure_id_seq
   INCREMENT 1
@@ -49,3 +54,5 @@ CREATE SEQUENCE ace_measure_id_seq
 ALTER TABLE ace_measure_id_seq OWNER TO postgres;
 
 ALTER TABLE ace_measure ALTER COLUMN measureid SET DEFAULT nextval('ace_measure_id_seq'::regclass);
+
+*/

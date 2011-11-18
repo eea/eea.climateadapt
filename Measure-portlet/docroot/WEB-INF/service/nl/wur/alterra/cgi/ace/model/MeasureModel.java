@@ -351,19 +351,19 @@ public interface MeasureModel extends BaseModel<Measure> {
 	public void setPublicationdate(Date publicationdate);
 
 	/**
-	 * Gets the language of this measure.
+	 * Gets the specialtagging of this measure.
 	 *
-	 * @return the language of this measure
+	 * @return the specialtagging of this measure
 	 */
 	@AutoEscape
-	public String getLanguage();
+	public String getSpecialtagging();
 
 	/**
-	 * Sets the language of this measure.
+	 * Sets the specialtagging of this measure.
 	 *
-	 * @param language the language of this measure
+	 * @param specialtagging the specialtagging of this measure
 	 */
-	public void setLanguage(String language);
+	public void setSpecialtagging(String specialtagging);
 
 	/**
 	 * Gets the sectors_ of this measure.
@@ -510,6 +510,78 @@ public interface MeasureModel extends BaseModel<Measure> {
 	 * @param satarea the satarea of this measure
 	 */
 	public void setSatarea(String satarea);
+
+	/**
+	 * Gets the controlstatus of this measure.
+	 *
+	 * @return the controlstatus of this measure
+	 */
+	public short getControlstatus();
+
+	/**
+	 * Sets the controlstatus of this measure.
+	 *
+	 * @param controlstatus the controlstatus of this measure
+	 */
+	public void setControlstatus(short controlstatus);
+
+	/**
+	 * Gets the creator of this measure.
+	 *
+	 * @return the creator of this measure
+	 */
+	@AutoEscape
+	public String getCreator();
+
+	/**
+	 * Sets the creator of this measure.
+	 *
+	 * @param creator the creator of this measure
+	 */
+	public void setCreator(String creator);
+
+	/**
+	 * Gets the creationdate of this measure.
+	 *
+	 * @return the creationdate of this measure
+	 */
+	public Date getCreationdate();
+
+	/**
+	 * Sets the creationdate of this measure.
+	 *
+	 * @param creationdate the creationdate of this measure
+	 */
+	public void setCreationdate(Date creationdate);
+
+	/**
+	 * Gets the moderator of this measure.
+	 *
+	 * @return the moderator of this measure
+	 */
+	@AutoEscape
+	public String getModerator();
+
+	/**
+	 * Sets the moderator of this measure.
+	 *
+	 * @param moderator the moderator of this measure
+	 */
+	public void setModerator(String moderator);
+
+	/**
+	 * Gets the approvaldate of this measure.
+	 *
+	 * @return the approvaldate of this measure
+	 */
+	public Date getApprovaldate();
+
+	/**
+	 * Sets the approvaldate of this measure.
+	 *
+	 * @param approvaldate the approvaldate of this measure
+	 */
+	public void setApprovaldate(Date approvaldate);
 
 	/**
 	 * Gets a copy of this measure as an escaped model instance by wrapping it with an {@link com.liferay.portal.kernel.bean.AutoEscapeBeanHandler}.

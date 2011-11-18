@@ -265,6 +265,51 @@ public class MeasureLocalServiceWrapper implements MeasureLocalService {
 		return _measureLocalService.getMeasuresCountByGroupId(groupId);
 	}
 
+	/**
+	* Gets a list with all the Measures by controlstatus
+	*/
+	public java.util.List<nl.wur.alterra.cgi.ace.model.Measure> getMeasuresByControlstatus(
+		short controlstatus)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _measureLocalService.getMeasuresByControlstatus(controlstatus);
+	}
+
+	/**
+	* Gets a list with a range of Measures by controlstatus
+	*/
+	public java.util.List<nl.wur.alterra.cgi.ace.model.Measure> getMeasuresByGroupId(
+		short controlstatus, int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _measureLocalService.getMeasuresByGroupId(controlstatus, start,
+			end);
+	}
+
+	/**
+	* Gets a list with a range of Measures by controlstatus
+	*/
+	public java.util.List<nl.wur.alterra.cgi.ace.model.Measure> getMeasuresByControlstatus(
+		short controlstatus, int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _measureLocalService.getMeasuresByControlstatus(controlstatus,
+			start, end);
+	}
+
+	/**
+	* Gets the number of Measures by controlstatus
+	*/
+	public int getMeasuresCountByGroupId(short controlstatus)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _measureLocalService.getMeasuresCountByGroupId(controlstatus);
+	}
+
+	/**
+	* Gets the number of Measures by controlstatus
+	*/
+	public int getMeasuresCountByControlstatus(short controlstatus)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _measureLocalService.getMeasuresCountByControlstatus(controlstatus);
+	}
+
 	public MeasureLocalService getWrappedMeasureLocalService() {
 		return _measureLocalService;
 	}

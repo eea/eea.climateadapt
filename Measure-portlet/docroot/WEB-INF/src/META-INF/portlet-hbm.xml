@@ -27,7 +27,7 @@
 		<property name="startdate" type="org.hibernate.type.TimestampType" />
 		<property name="enddate" type="org.hibernate.type.TimestampType" />
 		<property name="publicationdate" type="org.hibernate.type.TimestampType" />
-		<property name="language" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="specialtagging" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="sectors_" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="elements_" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="climateimpacts_" type="com.liferay.portal.dao.orm.hibernate.StringType" />
@@ -38,5 +38,10 @@
 		<property name="lon" type="com.liferay.portal.dao.orm.hibernate.DoubleType" />
 		<property name="lat" type="com.liferay.portal.dao.orm.hibernate.DoubleType" />
 		<property name="satarea" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="controlstatus" type="com.liferay.portal.dao.orm.hibernate.ShortType" />
+		<property name="creator" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="creationdate" type="org.hibernate.type.TimestampType" />
+		<property name="moderator" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="approvaldate" type="org.hibernate.type.TimestampType" />
 	</class>
 </hibernate-mapping>

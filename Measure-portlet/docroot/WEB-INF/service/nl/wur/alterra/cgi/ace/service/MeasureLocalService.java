@@ -247,4 +247,42 @@ public interface MeasureLocalService {
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int getMeasuresCountByGroupId(long groupId)
 		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Gets a list with all the Measures by controlstatus
+	*/
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public java.util.List<nl.wur.alterra.cgi.ace.model.Measure> getMeasuresByControlstatus(
+		short controlstatus)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Gets a list with a range of Measures by controlstatus
+	*/
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public java.util.List<nl.wur.alterra.cgi.ace.model.Measure> getMeasuresByGroupId(
+		short controlstatus, int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Gets a list with a range of Measures by controlstatus
+	*/
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public java.util.List<nl.wur.alterra.cgi.ace.model.Measure> getMeasuresByControlstatus(
+		short controlstatus, int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Gets the number of Measures by controlstatus
+	*/
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public int getMeasuresCountByGroupId(short controlstatus)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Gets the number of Measures by controlstatus
+	*/
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public int getMeasuresCountByControlstatus(short controlstatus)
+		throws com.liferay.portal.kernel.exception.SystemException;
 }

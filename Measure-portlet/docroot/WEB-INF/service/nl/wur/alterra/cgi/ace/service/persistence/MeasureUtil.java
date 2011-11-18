@@ -312,6 +312,129 @@ public class MeasureUtil {
 	}
 
 	/**
+	* Finds all the measures where controlstatus = &#63;.
+	*
+	* @param controlstatus the controlstatus to search with
+	* @return the matching measures
+	* @throws SystemException if a system exception occurred
+	*/
+	public static java.util.List<nl.wur.alterra.cgi.ace.model.Measure> findByControlstatus(
+		short controlstatus)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence().findByControlstatus(controlstatus);
+	}
+
+	/**
+	* Finds a range of all the measures where controlstatus = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param controlstatus the controlstatus to search with
+	* @param start the lower bound of the range of measures to return
+	* @param end the upper bound of the range of measures to return (not inclusive)
+	* @return the range of matching measures
+	* @throws SystemException if a system exception occurred
+	*/
+	public static java.util.List<nl.wur.alterra.cgi.ace.model.Measure> findByControlstatus(
+		short controlstatus, int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence().findByControlstatus(controlstatus, start, end);
+	}
+
+	/**
+	* Finds an ordered range of all the measures where controlstatus = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param controlstatus the controlstatus to search with
+	* @param start the lower bound of the range of measures to return
+	* @param end the upper bound of the range of measures to return (not inclusive)
+	* @param orderByComparator the comparator to order the results by
+	* @return the ordered range of matching measures
+	* @throws SystemException if a system exception occurred
+	*/
+	public static java.util.List<nl.wur.alterra.cgi.ace.model.Measure> findByControlstatus(
+		short controlstatus, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence()
+				   .findByControlstatus(controlstatus, start, end,
+			orderByComparator);
+	}
+
+	/**
+	* Finds the first measure in the ordered set where controlstatus = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param controlstatus the controlstatus to search with
+	* @param orderByComparator the comparator to order the set by
+	* @return the first matching measure
+	* @throws nl.wur.alterra.cgi.ace.NoSuchMeasureException if a matching measure could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public static nl.wur.alterra.cgi.ace.model.Measure findByControlstatus_First(
+		short controlstatus,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException,
+			nl.wur.alterra.cgi.ace.NoSuchMeasureException {
+		return getPersistence()
+				   .findByControlstatus_First(controlstatus, orderByComparator);
+	}
+
+	/**
+	* Finds the last measure in the ordered set where controlstatus = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param controlstatus the controlstatus to search with
+	* @param orderByComparator the comparator to order the set by
+	* @return the last matching measure
+	* @throws nl.wur.alterra.cgi.ace.NoSuchMeasureException if a matching measure could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public static nl.wur.alterra.cgi.ace.model.Measure findByControlstatus_Last(
+		short controlstatus,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException,
+			nl.wur.alterra.cgi.ace.NoSuchMeasureException {
+		return getPersistence()
+				   .findByControlstatus_Last(controlstatus, orderByComparator);
+	}
+
+	/**
+	* Finds the measures before and after the current measure in the ordered set where controlstatus = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param measureId the primary key of the current measure
+	* @param controlstatus the controlstatus to search with
+	* @param orderByComparator the comparator to order the set by
+	* @return the previous, current, and next measure
+	* @throws nl.wur.alterra.cgi.ace.NoSuchMeasureException if a measure with the primary key could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public static nl.wur.alterra.cgi.ace.model.Measure[] findByControlstatus_PrevAndNext(
+		long measureId, short controlstatus,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException,
+			nl.wur.alterra.cgi.ace.NoSuchMeasureException {
+		return getPersistence()
+				   .findByControlstatus_PrevAndNext(measureId, controlstatus,
+			orderByComparator);
+	}
+
+	/**
 	* Finds all the measures.
 	*
 	* @return the measures
@@ -372,6 +495,17 @@ public class MeasureUtil {
 	}
 
 	/**
+	* Removes all the measures where controlstatus = &#63; from the database.
+	*
+	* @param controlstatus the controlstatus to search with
+	* @throws SystemException if a system exception occurred
+	*/
+	public static void removeByControlstatus(short controlstatus)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		getPersistence().removeByControlstatus(controlstatus);
+	}
+
+	/**
 	* Removes all the measures from the database.
 	*
 	* @throws SystemException if a system exception occurred
@@ -391,6 +525,18 @@ public class MeasureUtil {
 	public static int countByGroupId(long groupId)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().countByGroupId(groupId);
+	}
+
+	/**
+	* Counts all the measures where controlstatus = &#63;.
+	*
+	* @param controlstatus the controlstatus to search with
+	* @return the number of matching measures
+	* @throws SystemException if a system exception occurred
+	*/
+	public static int countByControlstatus(short controlstatus)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence().countByControlstatus(controlstatus);
 	}
 
 	/**

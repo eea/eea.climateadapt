@@ -16,6 +16,7 @@ package nl.wur.alterra.cgi.ace.service.impl;
 import java.util.List;
 
 import nl.wur.alterra.cgi.ace.model.Measure;
+import nl.wur.alterra.cgi.ace.model.Measure;
 import nl.wur.alterra.cgi.ace.service.base.MeasureLocalServiceBaseImpl;
 
 import com.liferay.counter.service.CounterLocalServiceUtil;
@@ -103,4 +104,47 @@ public class MeasureLocalServiceImpl extends MeasureLocalServiceBaseImpl {
 	public int getMeasuresCountByGroupId(long groupId) throws SystemException {
 		return measurePersistence.countByGroupId(groupId);
 	}
+
+	/**
+	 * Gets a list with all the Measures by controlstatus
+	 *
+	 */
+	
+	public List<Measure> getMeasuresByControlstatus(short controlstatus) throws SystemException {
+		return measurePersistence.findByControlstatus(controlstatus);
+	}
+
+	/**
+	 * Gets a list with a range of Measures by controlstatus
+	 *
+	 */
+	public List<Measure> getMeasuresByGroupId(short controlstatus, int start, int end) throws SystemException {
+		return measurePersistence.findByControlstatus(controlstatus, start, end);
+	}
+	
+
+	/**
+	 * Gets a list with a range of Measures by controlstatus
+	 *
+	 */
+	public List<Measure> getMeasuresByControlstatus(short controlstatus, int start, int end) throws SystemException {
+		return measurePersistence.findByControlstatus(controlstatus, start, end);
+	}
+
+	/**
+	 * Gets the number of Measures by controlstatus
+	 *
+	 */
+	
+	public int getMeasuresCountByGroupId(short controlstatus) throws SystemException {
+		return measurePersistence.countByControlstatus(controlstatus);
+	}
+	
+	/**
+	 * Gets the number of Measures by controlstatus
+	 *
+	 */
+	public int getMeasuresCountByControlstatus(short controlstatus) throws SystemException {
+		return measurePersistence.countByControlstatus(controlstatus);
+	}	
 }

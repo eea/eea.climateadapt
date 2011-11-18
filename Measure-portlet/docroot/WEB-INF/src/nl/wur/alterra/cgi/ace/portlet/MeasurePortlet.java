@@ -122,18 +122,8 @@ public class MeasurePortlet extends MVCPortlet {
 		Date publicationdate = PortalUtil.getDate(dateMonth, dateDay, dateYear);
 		measure.setEndDate(publicationdate);
 */	
-		measure.setLanguage(ParamUtil.getString(request, "language"));
+		measure.setSpecialtagging(ParamUtil.getString(request, "specialtagging"));
 
-		//String sectors = ParamUtil.getString(request, "sectors_");
-		
-		//if( sectors.equalsIgnoreCase("All")) {
-		//	sectors = "A;B;C;D;F;H;I;M;W;";
-		//}
-		
-		//measure.setSectors_(sectors);
-		//measure.setElements_(ParamUtil.getString(request, "elements_"));
-		//measure.setClimateimpacts_(ParamUtil.getString(request, "climateimpacts_"));
-		
 		String choosensectors = "";
 		for(AceItemSector aceitemsector : AceItemSector.values() ) {
 			
@@ -301,9 +291,9 @@ public class MeasurePortlet extends MVCPortlet {
 		aceitem.setSource(measure.getSource());
 		
 		// language holds the special tagging
-		aceitem.setLanguage(measure.getLanguage());
+		aceitem.setLanguage(measure.getSpecialtagging());
 		
-		aceitem.setTextSearch( coalesce( measure.getLanguage()) + ' ' +
+		aceitem.setTextSearch( coalesce( measure.getSpecialtagging()) + ' ' +
  			   		aceitem.getName() + ' ' +
  			   		coalesce( measure.getDescription()) + ' ' +
  			   		coalesce( measure.getContact()) + ' ' +
@@ -320,15 +310,15 @@ public class MeasurePortlet extends MVCPortlet {
 					
 		String sctrs = measure.getSectors_();
 		
-		if( sctrs.indexOf(";")  ==  sctrs.lastIndexOf(";")) { // one sector
-			
+		if( ( coalesce(sctrs).length() > 0 ) && ( sctrs.indexOf(";")  ==  sctrs.lastIndexOf(";") ) ) { // one sector
+				
 			aceitem.setTextSearch( aceitem.getTextSearch() + ' ' + coalesce( sctrs.substring(0, sctrs.indexOf(";") ) ) );
 		}	
 		
 		String mpcts = measure.getClimateimpacts_();
 		
-		if( mpcts.indexOf(";")  ==  mpcts.lastIndexOf(";")) { // one sector
-			
+		if( ( coalesce(mpcts).length() > 0 ) && ( mpcts.indexOf(";")  ==  mpcts.lastIndexOf(";") ) ) { // one climate impact
+				
 			aceitem.setTextSearch( aceitem.getTextSearch() + ' ' + coalesce( mpcts.substring(0, mpcts.indexOf(";") ) ) );
 		}	
 		

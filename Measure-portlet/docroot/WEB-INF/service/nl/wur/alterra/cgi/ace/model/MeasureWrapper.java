@@ -197,12 +197,12 @@ public class MeasureWrapper implements Measure {
 		_measure.setPublicationdate(publicationdate);
 	}
 
-	public java.lang.String getLanguage() {
-		return _measure.getLanguage();
+	public java.lang.String getSpecialtagging() {
+		return _measure.getSpecialtagging();
 	}
 
-	public void setLanguage(java.lang.String language) {
-		_measure.setLanguage(language);
+	public void setSpecialtagging(java.lang.String specialtagging) {
+		_measure.setSpecialtagging(specialtagging);
 	}
 
 	public java.lang.String getSectors_() {
@@ -283,6 +283,46 @@ public class MeasureWrapper implements Measure {
 
 	public void setSatarea(java.lang.String satarea) {
 		_measure.setSatarea(satarea);
+	}
+
+	public short getControlstatus() {
+		return _measure.getControlstatus();
+	}
+
+	public void setControlstatus(short controlstatus) {
+		_measure.setControlstatus(controlstatus);
+	}
+
+	public java.lang.String getCreator() {
+		return _measure.getCreator();
+	}
+
+	public void setCreator(java.lang.String creator) {
+		_measure.setCreator(creator);
+	}
+
+	public java.util.Date getCreationdate() {
+		return _measure.getCreationdate();
+	}
+
+	public void setCreationdate(java.util.Date creationdate) {
+		_measure.setCreationdate(creationdate);
+	}
+
+	public java.lang.String getModerator() {
+		return _measure.getModerator();
+	}
+
+	public void setModerator(java.lang.String moderator) {
+		_measure.setModerator(moderator);
+	}
+
+	public java.util.Date getApprovaldate() {
+		return _measure.getApprovaldate();
+	}
+
+	public void setApprovaldate(java.util.Date approvaldate) {
+		_measure.setApprovaldate(approvaldate);
 	}
 
 	public nl.wur.alterra.cgi.ace.model.Measure toEscapedModel() {

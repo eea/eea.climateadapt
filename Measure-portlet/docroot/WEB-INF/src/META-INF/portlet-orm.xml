@@ -35,7 +35,7 @@
 			<basic name="publicationdate">
 				<temporal>TIMESTAMP</temporal>
 			</basic>
-			<basic name="language" />
+			<basic name="specialtagging" />
 			<basic name="sectors_" />
 			<basic name="elements_" />
 			<basic name="climateimpacts_" />
@@ -46,6 +46,15 @@
 			<basic name="lon" />
 			<basic name="lat" />
 			<basic name="satarea" />
+			<basic name="controlstatus" />
+			<basic name="creator" />
+			<basic name="creationdate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="moderator" />
+			<basic name="approvaldate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
 			<transient name="primaryKey" />
 		</attributes>
 	</mapped-superclass>

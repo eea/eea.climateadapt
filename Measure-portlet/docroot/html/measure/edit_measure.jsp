@@ -3,7 +3,7 @@
 	Measure measure = null;
 
 	long measureId = ParamUtil.getLong(request, "measureId");
-
+	
 	if (measureId > 0) {
 		measure = MeasureLocalServiceUtil.getMeasure(measureId);
 	}
@@ -94,7 +94,7 @@
 		<aui:input name="lifetime" />
 		
 		<b>special tagging</b><br />	
-		<input name="language" type="text" size="65" maxlength="75" value="<%= measure == null ? "" : measure.getLanguage() %>"><br /><br />
+		<input name="specialtagging" type="text" size="65" maxlength="75" value="<%= measure == null ? "" : measure.getSpecialtagging() %>"><br /><br />
 		
 		<aui:input name="spatiallayer" />
 		

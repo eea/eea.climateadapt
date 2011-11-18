@@ -498,6 +498,144 @@ public class MeasureLocalServiceClp implements MeasureLocalService {
 		return ((Integer)returnObj).intValue();
 	}
 
+	public java.util.List<nl.wur.alterra.cgi.ace.model.Measure> getMeasuresByControlstatus(
+		short controlstatus)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		Object returnObj = null;
+
+		MethodHandler methodHandler = new MethodHandler(_getMeasuresByControlstatusMethodKey17,
+				controlstatus);
+
+		try {
+			returnObj = _classLoaderProxy.invoke(methodHandler);
+		}
+		catch (Throwable t) {
+			if (t instanceof com.liferay.portal.kernel.exception.SystemException) {
+				throw (com.liferay.portal.kernel.exception.SystemException)t;
+			}
+
+			if (t instanceof RuntimeException) {
+				throw (RuntimeException)t;
+			}
+			else {
+				throw new RuntimeException(t.getClass().getName() +
+					" is not a valid exception");
+			}
+		}
+
+		return (java.util.List<nl.wur.alterra.cgi.ace.model.Measure>)ClpSerializer.translateOutput(returnObj);
+	}
+
+	public java.util.List<nl.wur.alterra.cgi.ace.model.Measure> getMeasuresByGroupId(
+		short controlstatus, int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		Object returnObj = null;
+
+		MethodHandler methodHandler = new MethodHandler(_getMeasuresByGroupIdMethodKey18,
+				controlstatus, start, end);
+
+		try {
+			returnObj = _classLoaderProxy.invoke(methodHandler);
+		}
+		catch (Throwable t) {
+			if (t instanceof com.liferay.portal.kernel.exception.SystemException) {
+				throw (com.liferay.portal.kernel.exception.SystemException)t;
+			}
+
+			if (t instanceof RuntimeException) {
+				throw (RuntimeException)t;
+			}
+			else {
+				throw new RuntimeException(t.getClass().getName() +
+					" is not a valid exception");
+			}
+		}
+
+		return (java.util.List<nl.wur.alterra.cgi.ace.model.Measure>)ClpSerializer.translateOutput(returnObj);
+	}
+
+	public java.util.List<nl.wur.alterra.cgi.ace.model.Measure> getMeasuresByControlstatus(
+		short controlstatus, int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		Object returnObj = null;
+
+		MethodHandler methodHandler = new MethodHandler(_getMeasuresByControlstatusMethodKey19,
+				controlstatus, start, end);
+
+		try {
+			returnObj = _classLoaderProxy.invoke(methodHandler);
+		}
+		catch (Throwable t) {
+			if (t instanceof com.liferay.portal.kernel.exception.SystemException) {
+				throw (com.liferay.portal.kernel.exception.SystemException)t;
+			}
+
+			if (t instanceof RuntimeException) {
+				throw (RuntimeException)t;
+			}
+			else {
+				throw new RuntimeException(t.getClass().getName() +
+					" is not a valid exception");
+			}
+		}
+
+		return (java.util.List<nl.wur.alterra.cgi.ace.model.Measure>)ClpSerializer.translateOutput(returnObj);
+	}
+
+	public int getMeasuresCountByGroupId(short controlstatus)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		Object returnObj = null;
+
+		MethodHandler methodHandler = new MethodHandler(_getMeasuresCountByGroupIdMethodKey20,
+				controlstatus);
+
+		try {
+			returnObj = _classLoaderProxy.invoke(methodHandler);
+		}
+		catch (Throwable t) {
+			if (t instanceof com.liferay.portal.kernel.exception.SystemException) {
+				throw (com.liferay.portal.kernel.exception.SystemException)t;
+			}
+
+			if (t instanceof RuntimeException) {
+				throw (RuntimeException)t;
+			}
+			else {
+				throw new RuntimeException(t.getClass().getName() +
+					" is not a valid exception");
+			}
+		}
+
+		return ((Integer)returnObj).intValue();
+	}
+
+	public int getMeasuresCountByControlstatus(short controlstatus)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		Object returnObj = null;
+
+		MethodHandler methodHandler = new MethodHandler(_getMeasuresCountByControlstatusMethodKey21,
+				controlstatus);
+
+		try {
+			returnObj = _classLoaderProxy.invoke(methodHandler);
+		}
+		catch (Throwable t) {
+			if (t instanceof com.liferay.portal.kernel.exception.SystemException) {
+				throw (com.liferay.portal.kernel.exception.SystemException)t;
+			}
+
+			if (t instanceof RuntimeException) {
+				throw (RuntimeException)t;
+			}
+			else {
+				throw new RuntimeException(t.getClass().getName() +
+					" is not a valid exception");
+			}
+		}
+
+		return ((Integer)returnObj).intValue();
+	}
+
 	public ClassLoaderProxy getClassLoaderProxy() {
 		return _classLoaderProxy;
 	}
@@ -544,4 +682,14 @@ public class MeasureLocalServiceClp implements MeasureLocalService {
 			com.liferay.portal.kernel.util.OrderByComparator.class);
 	private MethodKey _getMeasuresCountByGroupIdMethodKey16 = new MethodKey(_classLoaderProxy.getClassName(),
 			"getMeasuresCountByGroupId", long.class);
+	private MethodKey _getMeasuresByControlstatusMethodKey17 = new MethodKey(_classLoaderProxy.getClassName(),
+			"getMeasuresByControlstatus", short.class);
+	private MethodKey _getMeasuresByGroupIdMethodKey18 = new MethodKey(_classLoaderProxy.getClassName(),
+			"getMeasuresByGroupId", short.class, int.class, int.class);
+	private MethodKey _getMeasuresByControlstatusMethodKey19 = new MethodKey(_classLoaderProxy.getClassName(),
+			"getMeasuresByControlstatus", short.class, int.class, int.class);
+	private MethodKey _getMeasuresCountByGroupIdMethodKey20 = new MethodKey(_classLoaderProxy.getClassName(),
+			"getMeasuresCountByGroupId", short.class);
+	private MethodKey _getMeasuresCountByControlstatusMethodKey21 = new MethodKey(_classLoaderProxy.getClassName(),
+			"getMeasuresCountByControlstatus", short.class);
 }

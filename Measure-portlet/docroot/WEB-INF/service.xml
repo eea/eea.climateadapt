@@ -31,7 +31,7 @@
 		<column name="startdate" type="Date" />
 		<column name="enddate" type="Date" />
 		<column name="publicationdate" type="Date" />
-		<column name="language" type="String" />
+		<column name="specialtagging" type="String" />
 		<column name="sectors_" type="String" />
 		<column name="elements_" type="String" />
 		<column name="climateimpacts_" type="String" />
@@ -42,6 +42,11 @@
 		<column name="lon" type="double" />
 		<column name="lat" type="double" />
 		<column name="satarea" type="String" />
+		<column name="controlstatus" type="short" />
+		<column name="creator" type="String" />
+		<column name="creationdate" type="Date" />
+		<column name="moderator" type="String" />
+		<column name="approvaldate" type="Date" />
 		
 		<!-- Sort order -->
 		<order by="asc" >
@@ -51,6 +56,11 @@
 		<!-- Finder Methods -->
 		<finder name="GroupId" return-type="Collection">
 			<finder-column name="groupId" />
+		</finder>
+
+		<!-- Finder Methods -->
+		<finder name="Controlstatus" return-type="Collection">
+			<finder-column name="controlstatus" />
 		</finder>
 
 	</entity>

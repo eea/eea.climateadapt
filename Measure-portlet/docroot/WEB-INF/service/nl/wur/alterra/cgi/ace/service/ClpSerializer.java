@@ -196,10 +196,10 @@ public class ClpSerializer {
 
 					method19.invoke(newModel, value19);
 
-					Method method20 = newModelClass.getMethod("setLanguage",
+					Method method20 = newModelClass.getMethod("setSpecialtagging",
 							new Class[] { String.class });
 
-					String value20 = oldCplModel.getLanguage();
+					String value20 = oldCplModel.getSpecialtagging();
 
 					method20.invoke(newModel, value20);
 
@@ -272,6 +272,41 @@ public class ClpSerializer {
 					String value30 = oldCplModel.getSatarea();
 
 					method30.invoke(newModel, value30);
+
+					Method method31 = newModelClass.getMethod("setControlstatus",
+							new Class[] { Short.TYPE });
+
+					Short value31 = new Short(oldCplModel.getControlstatus());
+
+					method31.invoke(newModel, value31);
+
+					Method method32 = newModelClass.getMethod("setCreator",
+							new Class[] { String.class });
+
+					String value32 = oldCplModel.getCreator();
+
+					method32.invoke(newModel, value32);
+
+					Method method33 = newModelClass.getMethod("setCreationdate",
+							new Class[] { Date.class });
+
+					Date value33 = oldCplModel.getCreationdate();
+
+					method33.invoke(newModel, value33);
+
+					Method method34 = newModelClass.getMethod("setModerator",
+							new Class[] { String.class });
+
+					String value34 = oldCplModel.getModerator();
+
+					method34.invoke(newModel, value34);
+
+					Method method35 = newModelClass.getMethod("setApprovaldate",
+							new Class[] { Date.class });
+
+					Date value35 = oldCplModel.getApprovaldate();
+
+					method35.invoke(newModel, value35);
 
 					return newModel;
 				}
@@ -469,12 +504,13 @@ public class ClpSerializer {
 
 					newModel.setPublicationdate(value19);
 
-					Method method20 = oldModelClass.getMethod("getLanguage");
+					Method method20 = oldModelClass.getMethod(
+							"getSpecialtagging");
 
 					String value20 = (String)method20.invoke(oldModel,
 							(Object[])null);
 
-					newModel.setLanguage(value20);
+					newModel.setSpecialtagging(value20);
 
 					Method method21 = oldModelClass.getMethod("getSectors_");
 
@@ -546,6 +582,42 @@ public class ClpSerializer {
 							(Object[])null);
 
 					newModel.setSatarea(value30);
+
+					Method method31 = oldModelClass.getMethod(
+							"getControlstatus");
+
+					Short value31 = (Short)method31.invoke(oldModel,
+							(Object[])null);
+
+					newModel.setControlstatus(value31);
+
+					Method method32 = oldModelClass.getMethod("getCreator");
+
+					String value32 = (String)method32.invoke(oldModel,
+							(Object[])null);
+
+					newModel.setCreator(value32);
+
+					Method method33 = oldModelClass.getMethod("getCreationdate");
+
+					Date value33 = (Date)method33.invoke(oldModel,
+							(Object[])null);
+
+					newModel.setCreationdate(value33);
+
+					Method method34 = oldModelClass.getMethod("getModerator");
+
+					String value34 = (String)method34.invoke(oldModel,
+							(Object[])null);
+
+					newModel.setModerator(value34);
+
+					Method method35 = oldModelClass.getMethod("getApprovaldate");
+
+					Date value35 = (Date)method35.invoke(oldModel,
+							(Object[])null);
+
+					newModel.setApprovaldate(value35);
 
 					return newModel;
 				}

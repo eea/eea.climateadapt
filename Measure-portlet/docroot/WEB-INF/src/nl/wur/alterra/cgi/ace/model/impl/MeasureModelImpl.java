@@ -76,7 +76,7 @@ public class MeasureModelImpl extends BaseModelImpl<Measure>
 			{ "startdate", new Integer(Types.TIMESTAMP) },
 			{ "enddate", new Integer(Types.TIMESTAMP) },
 			{ "publicationdate", new Integer(Types.TIMESTAMP) },
-			{ "language", new Integer(Types.VARCHAR) },
+			{ "specialtagging", new Integer(Types.VARCHAR) },
 			{ "sectors_", new Integer(Types.VARCHAR) },
 			{ "elements_", new Integer(Types.VARCHAR) },
 			{ "climateimpacts_", new Integer(Types.VARCHAR) },
@@ -86,9 +86,14 @@ public class MeasureModelImpl extends BaseModelImpl<Measure>
 			{ "importance", new Integer(Types.BIGINT) },
 			{ "lon", new Integer(Types.DOUBLE) },
 			{ "lat", new Integer(Types.DOUBLE) },
-			{ "satarea", new Integer(Types.VARCHAR) }
+			{ "satarea", new Integer(Types.VARCHAR) },
+			{ "controlstatus", new Integer(Types.INTEGER) },
+			{ "creator", new Integer(Types.VARCHAR) },
+			{ "creationdate", new Integer(Types.TIMESTAMP) },
+			{ "moderator", new Integer(Types.VARCHAR) },
+			{ "approvaldate", new Integer(Types.TIMESTAMP) }
 		};
-	public static final String TABLE_SQL_CREATE = "create table Ace_Measure (measureId LONG not null primary key,companyId LONG,groupId LONG,name VARCHAR(75) null,description VARCHAR(75) null,implementationtype VARCHAR(75) null,implementationtime VARCHAR(75) null,lifetime VARCHAR(75) null,spatiallayer VARCHAR(75) null,spatialvalues VARCHAR(75) null,legalaspects VARCHAR(75) null,stakeholderparticipation VARCHAR(75) null,contact VARCHAR(75) null,succeslimitations VARCHAR(75) null,website VARCHAR(75) null,costbenefit VARCHAR(75) null,keywords VARCHAR(75) null,startdate DATE null,enddate DATE null,publicationdate DATE null,language VARCHAR(75) null,sectors_ VARCHAR(75) null,elements_ VARCHAR(75) null,climateimpacts_ VARCHAR(75) null,mao_type VARCHAR(75) null,source VARCHAR(75) null,rating LONG,importance LONG,lon DOUBLE,lat DOUBLE,satarea VARCHAR(75) null)";
+	public static final String TABLE_SQL_CREATE = "create table Ace_Measure (measureId LONG not null primary key,companyId LONG,groupId LONG,name VARCHAR(75) null,description VARCHAR(75) null,implementationtype VARCHAR(75) null,implementationtime VARCHAR(75) null,lifetime VARCHAR(75) null,spatiallayer VARCHAR(75) null,spatialvalues VARCHAR(75) null,legalaspects VARCHAR(75) null,stakeholderparticipation VARCHAR(75) null,contact VARCHAR(75) null,succeslimitations VARCHAR(75) null,website VARCHAR(75) null,costbenefit VARCHAR(75) null,keywords VARCHAR(75) null,startdate DATE null,enddate DATE null,publicationdate DATE null,specialtagging VARCHAR(75) null,sectors_ VARCHAR(75) null,elements_ VARCHAR(75) null,climateimpacts_ VARCHAR(75) null,mao_type VARCHAR(75) null,source VARCHAR(75) null,rating LONG,importance LONG,lon DOUBLE,lat DOUBLE,satarea VARCHAR(75) null,controlstatus INTEGER,creator VARCHAR(75) null,creationdate DATE null,moderator VARCHAR(75) null,approvaldate DATE null)";
 	public static final String TABLE_SQL_DROP = "drop table Ace_Measure";
 	public static final String ORDER_BY_JPQL = " ORDER BY measure.name ASC";
 	public static final String ORDER_BY_SQL = " ORDER BY Ace_Measure.name ASC";
@@ -349,17 +354,17 @@ public class MeasureModelImpl extends BaseModelImpl<Measure>
 		_publicationdate = publicationdate;
 	}
 
-	public String getLanguage() {
-		if (_language == null) {
+	public String getSpecialtagging() {
+		if (_specialtagging == null) {
 			return StringPool.BLANK;
 		}
 		else {
-			return _language;
+			return _specialtagging;
 		}
 	}
 
-	public void setLanguage(String language) {
-		_language = language;
+	public void setSpecialtagging(String specialtagging) {
+		_specialtagging = specialtagging;
 	}
 
 	public String getSectors_() {
@@ -472,6 +477,56 @@ public class MeasureModelImpl extends BaseModelImpl<Measure>
 		_satarea = satarea;
 	}
 
+	public short getControlstatus() {
+		return _controlstatus;
+	}
+
+	public void setControlstatus(short controlstatus) {
+		_controlstatus = controlstatus;
+	}
+
+	public String getCreator() {
+		if (_creator == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _creator;
+		}
+	}
+
+	public void setCreator(String creator) {
+		_creator = creator;
+	}
+
+	public Date getCreationdate() {
+		return _creationdate;
+	}
+
+	public void setCreationdate(Date creationdate) {
+		_creationdate = creationdate;
+	}
+
+	public String getModerator() {
+		if (_moderator == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _moderator;
+		}
+	}
+
+	public void setModerator(String moderator) {
+		_moderator = moderator;
+	}
+
+	public Date getApprovaldate() {
+		return _approvaldate;
+	}
+
+	public void setApprovaldate(Date approvaldate) {
+		_approvaldate = approvaldate;
+	}
+
 	public Measure toEscapedModel() {
 		if (isEscapedModel()) {
 			return (Measure)this;
@@ -518,7 +573,7 @@ public class MeasureModelImpl extends BaseModelImpl<Measure>
 		clone.setStartdate(getStartdate());
 		clone.setEnddate(getEnddate());
 		clone.setPublicationdate(getPublicationdate());
-		clone.setLanguage(getLanguage());
+		clone.setSpecialtagging(getSpecialtagging());
 		clone.setSectors_(getSectors_());
 		clone.setElements_(getElements_());
 		clone.setClimateimpacts_(getClimateimpacts_());
@@ -529,6 +584,11 @@ public class MeasureModelImpl extends BaseModelImpl<Measure>
 		clone.setLon(getLon());
 		clone.setLat(getLat());
 		clone.setSatarea(getSatarea());
+		clone.setControlstatus(getControlstatus());
+		clone.setCreator(getCreator());
+		clone.setCreationdate(getCreationdate());
+		clone.setModerator(getModerator());
+		clone.setApprovaldate(getApprovaldate());
 
 		return clone;
 	}
@@ -574,7 +634,7 @@ public class MeasureModelImpl extends BaseModelImpl<Measure>
 	}
 
 	public String toString() {
-		StringBundler sb = new StringBundler(63);
+		StringBundler sb = new StringBundler(73);
 
 		sb.append("{measureId=");
 		sb.append(getMeasureId());
@@ -616,8 +676,8 @@ public class MeasureModelImpl extends BaseModelImpl<Measure>
 		sb.append(getEnddate());
 		sb.append(", publicationdate=");
 		sb.append(getPublicationdate());
-		sb.append(", language=");
-		sb.append(getLanguage());
+		sb.append(", specialtagging=");
+		sb.append(getSpecialtagging());
 		sb.append(", sectors_=");
 		sb.append(getSectors_());
 		sb.append(", elements_=");
@@ -638,13 +698,23 @@ public class MeasureModelImpl extends BaseModelImpl<Measure>
 		sb.append(getLat());
 		sb.append(", satarea=");
 		sb.append(getSatarea());
+		sb.append(", controlstatus=");
+		sb.append(getControlstatus());
+		sb.append(", creator=");
+		sb.append(getCreator());
+		sb.append(", creationdate=");
+		sb.append(getCreationdate());
+		sb.append(", moderator=");
+		sb.append(getModerator());
+		sb.append(", approvaldate=");
+		sb.append(getApprovaldate());
 		sb.append("}");
 
 		return sb.toString();
 	}
 
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(97);
+		StringBundler sb = new StringBundler(112);
 
 		sb.append("<model><model-name>");
 		sb.append("nl.wur.alterra.cgi.ace.model.Measure");
@@ -731,8 +801,8 @@ public class MeasureModelImpl extends BaseModelImpl<Measure>
 		sb.append(getPublicationdate());
 		sb.append("]]></column-value></column>");
 		sb.append(
-			"<column><column-name>language</column-name><column-value><![CDATA[");
-		sb.append(getLanguage());
+			"<column><column-name>specialtagging</column-name><column-value><![CDATA[");
+		sb.append(getSpecialtagging());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>sectors_</column-name><column-value><![CDATA[");
@@ -774,6 +844,26 @@ public class MeasureModelImpl extends BaseModelImpl<Measure>
 			"<column><column-name>satarea</column-name><column-value><![CDATA[");
 		sb.append(getSatarea());
 		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>controlstatus</column-name><column-value><![CDATA[");
+		sb.append(getControlstatus());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>creator</column-name><column-value><![CDATA[");
+		sb.append(getCreator());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>creationdate</column-name><column-value><![CDATA[");
+		sb.append(getCreationdate());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>moderator</column-name><column-value><![CDATA[");
+		sb.append(getModerator());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>approvaldate</column-name><column-value><![CDATA[");
+		sb.append(getApprovaldate());
+		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");
 
@@ -800,7 +890,7 @@ public class MeasureModelImpl extends BaseModelImpl<Measure>
 	private Date _startdate;
 	private Date _enddate;
 	private Date _publicationdate;
-	private String _language;
+	private String _specialtagging;
 	private String _sectors_;
 	private String _elements_;
 	private String _climateimpacts_;
@@ -811,5 +901,10 @@ public class MeasureModelImpl extends BaseModelImpl<Measure>
 	private double _lon;
 	private double _lat;
 	private String _satarea;
+	private short _controlstatus;
+	private String _creator;
+	private Date _creationdate;
+	private String _moderator;
+	private Date _approvaldate;
 	private transient ExpandoBridge _expandoBridge;
 }

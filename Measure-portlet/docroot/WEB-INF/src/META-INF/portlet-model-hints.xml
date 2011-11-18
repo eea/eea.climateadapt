@@ -22,7 +22,7 @@
 		<field name="startdate" type="Date" />
 		<field name="enddate" type="Date" />
 		<field name="publicationdate" type="Date" />
-		<field name="language" type="String" />
+		<field name="specialtagging" type="String" />
 		<field name="sectors_" type="String" />
 		<field name="elements_" type="String" />
 		<field name="climateimpacts_" type="String" />
@@ -33,5 +33,10 @@
 		<field name="lon" type="double" />
 		<field name="lat" type="double" />
 		<field name="satarea" type="String" />
+		<field name="controlstatus" type="short" />
+		<field name="creator" type="String" />
+		<field name="creationdate" type="Date" />
+		<field name="moderator" type="String" />
+		<field name="approvaldate" type="Date" />
 	</model>
 </model-hints>

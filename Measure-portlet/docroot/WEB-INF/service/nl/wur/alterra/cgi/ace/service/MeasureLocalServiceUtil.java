@@ -275,6 +275,49 @@ public class MeasureLocalServiceUtil {
 		return getService().getMeasuresCountByGroupId(groupId);
 	}
 
+	/**
+	* Gets a list with all the Measures by controlstatus
+	*/
+	public static java.util.List<nl.wur.alterra.cgi.ace.model.Measure> getMeasuresByControlstatus(
+		short controlstatus)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService().getMeasuresByControlstatus(controlstatus);
+	}
+
+	/**
+	* Gets a list with a range of Measures by controlstatus
+	*/
+	public static java.util.List<nl.wur.alterra.cgi.ace.model.Measure> getMeasuresByGroupId(
+		short controlstatus, int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService().getMeasuresByGroupId(controlstatus, start, end);
+	}
+
+	/**
+	* Gets a list with a range of Measures by controlstatus
+	*/
+	public static java.util.List<nl.wur.alterra.cgi.ace.model.Measure> getMeasuresByControlstatus(
+		short controlstatus, int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService().getMeasuresByControlstatus(controlstatus, start, end);
+	}
+
+	/**
+	* Gets the number of Measures by controlstatus
+	*/
+	public static int getMeasuresCountByGroupId(short controlstatus)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService().getMeasuresCountByGroupId(controlstatus);
+	}
+
+	/**
+	* Gets the number of Measures by controlstatus
+	*/
+	public static int getMeasuresCountByControlstatus(short controlstatus)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService().getMeasuresCountByControlstatus(controlstatus);
+	}
+
 	public static void clearService() {
 		_service = null;
 	}
