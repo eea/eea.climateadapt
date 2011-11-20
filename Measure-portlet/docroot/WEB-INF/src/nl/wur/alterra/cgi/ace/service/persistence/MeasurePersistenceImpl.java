@@ -331,6 +331,7 @@ public class MeasurePersistenceImpl extends BasePersistenceImpl<Measure>
 		measureImpl.setCreationdate(measure.getCreationdate());
 		measureImpl.setModerator(measure.getModerator());
 		measureImpl.setApprovaldate(measure.getApprovaldate());
+		measureImpl.setReplacesId(measure.getReplacesId());
 
 		return measureImpl;
 	}

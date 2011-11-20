@@ -308,6 +308,13 @@ public class ClpSerializer {
 
 					method35.invoke(newModel, value35);
 
+					Method method36 = newModelClass.getMethod("setReplacesId",
+							new Class[] { Long.TYPE });
+
+					Long value36 = new Long(oldCplModel.getReplacesId());
+
+					method36.invoke(newModel, value36);
+
 					return newModel;
 				}
 				catch (Exception e) {
@@ -618,6 +625,13 @@ public class ClpSerializer {
 							(Object[])null);
 
 					newModel.setApprovaldate(value35);
+
+					Method method36 = oldModelClass.getMethod("getReplacesId");
+
+					Long value36 = (Long)method36.invoke(oldModel,
+							(Object[])null);
+
+					newModel.setReplacesId(value36);
 
 					return newModel;
 				}

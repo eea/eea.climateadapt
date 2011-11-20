@@ -325,6 +325,14 @@ public class MeasureWrapper implements Measure {
 		_measure.setApprovaldate(approvaldate);
 	}
 
+	public long getReplacesId() {
+		return _measure.getReplacesId();
+	}
+
+	public void setReplacesId(long replacesId) {
+		_measure.setReplacesId(replacesId);
+	}
+
 	public nl.wur.alterra.cgi.ace.model.Measure toEscapedModel() {
 		return _measure.toEscapedModel();
 	}

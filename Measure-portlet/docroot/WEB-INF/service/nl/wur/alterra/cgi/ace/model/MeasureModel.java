@@ -584,6 +584,20 @@ public interface MeasureModel extends BaseModel<Measure> {
 	public void setApprovaldate(Date approvaldate);
 
 	/**
+	 * Gets the replaces id of this measure.
+	 *
+	 * @return the replaces id of this measure
+	 */
+	public long getReplacesId();
+
+	/**
+	 * Sets the replaces id of this measure.
+	 *
+	 * @param replacesId the replaces id of this measure
+	 */
+	public void setReplacesId(long replacesId);
+
+	/**
 	 * Gets a copy of this measure as an escaped model instance by wrapping it with an {@link com.liferay.portal.kernel.bean.AutoEscapeBeanHandler}.
 	 *
 	 * @return the escaped model instance
