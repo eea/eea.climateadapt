@@ -25,6 +25,7 @@ CREATE TABLE ace_project
   creationdate timestamp without time zone,
   moderator character varying(75),
   approvaldate timestamp without time zone,
+  replacesid bigint,
   CONSTRAINT ace_project_pkey PRIMARY KEY (projectid)
 )
 WITH (
