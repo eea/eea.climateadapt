@@ -253,7 +253,7 @@ public class ProjectLocalServiceUtil {
 	}
 
 	/**
-	* Gets a list with all the Projects in a group
+	* Gets a list with all the Projects by controlstatus
 	*/
 	public static java.util.List<nl.wur.alterra.cgi.ace.model.Project> getProjectsByControlstatus(
 		short controlstatus)
@@ -262,7 +262,7 @@ public class ProjectLocalServiceUtil {
 	}
 
 	/**
-	* Gets a list with a range of Projects from a group
+	* Gets a list with a range of Projects by controlstatus
 	*/
 	public static java.util.List<nl.wur.alterra.cgi.ace.model.Project> getProjectsByGroupId(
 		short controlstatus, int start, int end)
@@ -271,11 +271,28 @@ public class ProjectLocalServiceUtil {
 	}
 
 	/**
-	* Gets the number of Projects in a group
+	* Gets a list with a range of Projects by controlstatus
+	*/
+	public static java.util.List<nl.wur.alterra.cgi.ace.model.Project> getProjectsByControlstatus(
+		short controlstatus, int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService().getProjectsByControlstatus(controlstatus, start, end);
+	}
+
+	/**
+	* Gets the number of Projects by controlstatus
 	*/
 	public static int getProjectsCountByGroupId(short controlstatus)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getService().getProjectsCountByGroupId(controlstatus);
+	}
+
+	/**
+	* Gets the number of Projects by controlstatus
+	*/
+	public static int getProjectsCountByControlstatus(short controlstatus)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService().getProjectsCountByControlstatus(controlstatus);
 	}
 
 	public static void clearService() {

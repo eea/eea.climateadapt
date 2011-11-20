@@ -320,6 +320,7 @@ public class ProjectPersistenceImpl extends BasePersistenceImpl<Project>
 		projectImpl.setCreationdate(project.getCreationdate());
 		projectImpl.setModerator(project.getModerator());
 		projectImpl.setApprovaldate(project.getApprovaldate());
+		projectImpl.setReplacesId(project.getReplacesId());
 
 		return projectImpl;
 	}

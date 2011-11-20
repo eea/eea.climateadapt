@@ -42,6 +42,7 @@
 			<basic name="approvaldate">
 				<temporal>TIMESTAMP</temporal>
 			</basic>
+			<basic name="replacesId" />
 			<transient name="primaryKey" />
 		</attributes>
 	</mapped-superclass>

@@ -228,7 +228,7 @@ public interface ProjectLocalService {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Gets a list with all the Projects in a group
+	* Gets a list with all the Projects by controlstatus
 	*/
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<nl.wur.alterra.cgi.ace.model.Project> getProjectsByControlstatus(
@@ -236,7 +236,7 @@ public interface ProjectLocalService {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Gets a list with a range of Projects from a group
+	* Gets a list with a range of Projects by controlstatus
 	*/
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<nl.wur.alterra.cgi.ace.model.Project> getProjectsByGroupId(
@@ -244,9 +244,24 @@ public interface ProjectLocalService {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Gets the number of Projects in a group
+	* Gets a list with a range of Projects by controlstatus
+	*/
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public java.util.List<nl.wur.alterra.cgi.ace.model.Project> getProjectsByControlstatus(
+		short controlstatus, int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Gets the number of Projects by controlstatus
 	*/
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int getProjectsCountByGroupId(short controlstatus)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Gets the number of Projects by controlstatus
+	*/
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public int getProjectsCountByControlstatus(short controlstatus)
 		throws com.liferay.portal.kernel.exception.SystemException;
 }

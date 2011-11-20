@@ -243,7 +243,7 @@ public class ProjectLocalServiceWrapper implements ProjectLocalService {
 	}
 
 	/**
-	* Gets a list with all the Projects in a group
+	* Gets a list with all the Projects by controlstatus
 	*/
 	public java.util.List<nl.wur.alterra.cgi.ace.model.Project> getProjectsByControlstatus(
 		short controlstatus)
@@ -252,7 +252,7 @@ public class ProjectLocalServiceWrapper implements ProjectLocalService {
 	}
 
 	/**
-	* Gets a list with a range of Projects from a group
+	* Gets a list with a range of Projects by controlstatus
 	*/
 	public java.util.List<nl.wur.alterra.cgi.ace.model.Project> getProjectsByGroupId(
 		short controlstatus, int start, int end)
@@ -262,11 +262,29 @@ public class ProjectLocalServiceWrapper implements ProjectLocalService {
 	}
 
 	/**
-	* Gets the number of Projects in a group
+	* Gets a list with a range of Projects by controlstatus
+	*/
+	public java.util.List<nl.wur.alterra.cgi.ace.model.Project> getProjectsByControlstatus(
+		short controlstatus, int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _projectLocalService.getProjectsByControlstatus(controlstatus,
+			start, end);
+	}
+
+	/**
+	* Gets the number of Projects by controlstatus
 	*/
 	public int getProjectsCountByGroupId(short controlstatus)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _projectLocalService.getProjectsCountByGroupId(controlstatus);
+	}
+
+	/**
+	* Gets the number of Projects by controlstatus
+	*/
+	public int getProjectsCountByControlstatus(short controlstatus)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _projectLocalService.getProjectsCountByControlstatus(controlstatus);
 	}
 
 	public ProjectLocalService getWrappedProjectLocalService() {

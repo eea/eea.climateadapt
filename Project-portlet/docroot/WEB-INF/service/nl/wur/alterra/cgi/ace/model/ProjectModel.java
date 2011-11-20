@@ -422,6 +422,20 @@ public interface ProjectModel extends BaseModel<Project> {
 	public void setApprovaldate(Date approvaldate);
 
 	/**
+	 * Gets the replaces id of this project.
+	 *
+	 * @return the replaces id of this project
+	 */
+	public long getReplacesId();
+
+	/**
+	 * Sets the replaces id of this project.
+	 *
+	 * @param replacesId the replaces id of this project
+	 */
+	public void setReplacesId(long replacesId);
+
+	/**
 	 * Gets a copy of this project as an escaped model instance by wrapping it with an {@link com.liferay.portal.kernel.bean.AutoEscapeBeanHandler}.
 	 *
 	 * @return the escaped model instance

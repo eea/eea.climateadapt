@@ -80,9 +80,10 @@ public class ProjectModelImpl extends BaseModelImpl<Project>
 			{ "creator", new Integer(Types.VARCHAR) },
 			{ "creationdate", new Integer(Types.TIMESTAMP) },
 			{ "moderator", new Integer(Types.VARCHAR) },
-			{ "approvaldate", new Integer(Types.TIMESTAMP) }
+			{ "approvaldate", new Integer(Types.TIMESTAMP) },
+			{ "replacesId", new Integer(Types.BIGINT) }
 		};
-	public static final String TABLE_SQL_CREATE = "create table Ace_Project (projectId LONG not null primary key,companyId LONG,groupId LONG,acronym VARCHAR(75) null,title VARCHAR(75) null,startdate DATE null,enddate DATE null,lead VARCHAR(75) null,partners VARCHAR(75) null,funding VARCHAR(75) null,sectors VARCHAR(75) null,spatiallevel VARCHAR(75) null,abstracts VARCHAR(75) null,element VARCHAR(75) null,keywords VARCHAR(75) null,website VARCHAR(75) null,duration VARCHAR(75) null,rating LONG,importance LONG,specialtagging VARCHAR(75) null,controlstatus INTEGER,creator VARCHAR(75) null,creationdate DATE null,moderator VARCHAR(75) null,approvaldate DATE null)";
+	public static final String TABLE_SQL_CREATE = "create table Ace_Project (projectId LONG not null primary key,companyId LONG,groupId LONG,acronym VARCHAR(75) null,title VARCHAR(75) null,startdate DATE null,enddate DATE null,lead VARCHAR(75) null,partners VARCHAR(75) null,funding VARCHAR(75) null,sectors VARCHAR(75) null,spatiallevel VARCHAR(75) null,abstracts VARCHAR(75) null,element VARCHAR(75) null,keywords VARCHAR(75) null,website VARCHAR(75) null,duration VARCHAR(75) null,rating LONG,importance LONG,specialtagging VARCHAR(75) null,controlstatus INTEGER,creator VARCHAR(75) null,creationdate DATE null,moderator VARCHAR(75) null,approvaldate DATE null,replacesId LONG)";
 	public static final String TABLE_SQL_DROP = "drop table Ace_Project";
 	public static final String ORDER_BY_JPQL = " ORDER BY project.acronym ASC";
 	public static final String ORDER_BY_SQL = " ORDER BY Ace_Project.acronym ASC";
@@ -388,6 +389,14 @@ public class ProjectModelImpl extends BaseModelImpl<Project>
 		_approvaldate = approvaldate;
 	}
 
+	public long getReplacesId() {
+		return _replacesId;
+	}
+
+	public void setReplacesId(long replacesId) {
+		_replacesId = replacesId;
+	}
+
 	public Project toEscapedModel() {
 		if (isEscapedModel()) {
 			return (Project)this;
@@ -439,6 +448,7 @@ public class ProjectModelImpl extends BaseModelImpl<Project>
 		clone.setCreationdate(getCreationdate());
 		clone.setModerator(getModerator());
 		clone.setApprovaldate(getApprovaldate());
+		clone.setReplacesId(getReplacesId());
 
 		return clone;
 	}
@@ -484,7 +494,7 @@ public class ProjectModelImpl extends BaseModelImpl<Project>
 	}
 
 	public String toString() {
-		StringBundler sb = new StringBundler(51);
+		StringBundler sb = new StringBundler(53);
 
 		sb.append("{projectId=");
 		sb.append(getProjectId());
@@ -536,13 +546,15 @@ public class ProjectModelImpl extends BaseModelImpl<Project>
 		sb.append(getModerator());
 		sb.append(", approvaldate=");
 		sb.append(getApprovaldate());
+		sb.append(", replacesId=");
+		sb.append(getReplacesId());
 		sb.append("}");
 
 		return sb.toString();
 	}
 
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(79);
+		StringBundler sb = new StringBundler(82);
 
 		sb.append("<model><model-name>");
 		sb.append("nl.wur.alterra.cgi.ace.model.Project");
@@ -648,6 +660,10 @@ public class ProjectModelImpl extends BaseModelImpl<Project>
 			"<column><column-name>approvaldate</column-name><column-value><![CDATA[");
 		sb.append(getApprovaldate());
 		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>replacesId</column-name><column-value><![CDATA[");
+		sb.append(getReplacesId());
+		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");
 
@@ -679,5 +695,6 @@ public class ProjectModelImpl extends BaseModelImpl<Project>
 	private Date _creationdate;
 	private String _moderator;
 	private Date _approvaldate;
+	private long _replacesId;
 	private transient ExpandoBridge _expandoBridge;
 }

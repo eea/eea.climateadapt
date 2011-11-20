@@ -27,5 +27,6 @@
 		<field name="creationdate" type="Date" />
 		<field name="moderator" type="String" />
 		<field name="approvaldate" type="Date" />
+		<field name="replacesId" type="long" />
 	</model>
 </model-hints>

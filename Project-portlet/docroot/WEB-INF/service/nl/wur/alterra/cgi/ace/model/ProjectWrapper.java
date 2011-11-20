@@ -236,6 +236,14 @@ public class ProjectWrapper implements Project {
 		_project.setApprovaldate(approvaldate);
 	}
 
+	public long getReplacesId() {
+		return _project.getReplacesId();
+	}
+
+	public void setReplacesId(long replacesId) {
+		_project.setReplacesId(replacesId);
+	}
+
 	public nl.wur.alterra.cgi.ace.model.Project toEscapedModel() {
 		return _project.toEscapedModel();
 	}

@@ -243,6 +243,14 @@ public class ProjectClp extends BaseModelImpl<Project> implements Project {
 		_approvaldate = approvaldate;
 	}
 
+	public long getReplacesId() {
+		return _replacesId;
+	}
+
+	public void setReplacesId(long replacesId) {
+		_replacesId = replacesId;
+	}
+
 	public Project toEscapedModel() {
 		if (isEscapedModel()) {
 			return this;
@@ -281,6 +289,7 @@ public class ProjectClp extends BaseModelImpl<Project> implements Project {
 		clone.setCreationdate(getCreationdate());
 		clone.setModerator(getModerator());
 		clone.setApprovaldate(getApprovaldate());
+		clone.setReplacesId(getReplacesId());
 
 		return clone;
 	}
@@ -326,7 +335,7 @@ public class ProjectClp extends BaseModelImpl<Project> implements Project {
 	}
 
 	public String toString() {
-		StringBundler sb = new StringBundler(51);
+		StringBundler sb = new StringBundler(53);
 
 		sb.append("{projectId=");
 		sb.append(getProjectId());
@@ -378,13 +387,15 @@ public class ProjectClp extends BaseModelImpl<Project> implements Project {
 		sb.append(getModerator());
 		sb.append(", approvaldate=");
 		sb.append(getApprovaldate());
+		sb.append(", replacesId=");
+		sb.append(getReplacesId());
 		sb.append("}");
 
 		return sb.toString();
 	}
 
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(79);
+		StringBundler sb = new StringBundler(82);
 
 		sb.append("<model><model-name>");
 		sb.append("nl.wur.alterra.cgi.ace.model.Project");
@@ -490,6 +501,10 @@ public class ProjectClp extends BaseModelImpl<Project> implements Project {
 			"<column><column-name>approvaldate</column-name><column-value><![CDATA[");
 		sb.append(getApprovaldate());
 		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>replacesId</column-name><column-value><![CDATA[");
+		sb.append(getReplacesId());
+		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");
 
@@ -521,4 +536,5 @@ public class ProjectClp extends BaseModelImpl<Project> implements Project {
 	private Date _creationdate;
 	private String _moderator;
 	private Date _approvaldate;
+	private long _replacesId;
 }
