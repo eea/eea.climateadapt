@@ -86,6 +86,8 @@ public class MeasurePortlet extends MVCPortlet {
 		ThemeDisplay themeDisplay =
 			(ThemeDisplay)request.getAttribute(WebKeys.THEME_DISPLAY);
 		
+		measure.setControlstatus( (short) 1);
+		
 		measure.setCompanyId(themeDisplay.getCompanyId());
 		measure.setGroupId(themeDisplay.getScopeGroupId());
 		
@@ -290,9 +292,26 @@ public class MeasurePortlet extends MVCPortlet {
 
 		aceitem.setSource(measure.getSource());
 		
-		// language holds the special tagging
-		aceitem.setLanguage(measure.getSpecialtagging());
+		aceitem.setSpecialtagging(measure.getSpecialtagging());
+/*		
+		aceitem.setControlstatus(measure.getControlstatus());
 		
+		if(measure.getCreator() != null) {
+			aceitem.setCreator(measure.getCreator());
+		}
+		
+		if(measure.getCreationdate() != null) {
+			aceitem.setCreationdate(measure.getCreationdate());
+		}
+		
+		if(measure.getModerator() != null) {
+			aceitem.setModerator(measure.getModerator());
+		}
+		
+		if(measure.getApprovaldate() != null) {
+			aceitem.setApprovaldate(measure.getApprovaldate());
+		}
+*/		
 		aceitem.setTextSearch( coalesce( measure.getSpecialtagging()) + ' ' +
  			   		aceitem.getName() + ' ' +
  			   		coalesce( measure.getDescription()) + ' ' +
