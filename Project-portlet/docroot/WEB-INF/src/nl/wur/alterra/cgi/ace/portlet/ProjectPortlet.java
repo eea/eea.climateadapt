@@ -247,8 +247,19 @@ public class ProjectPortlet extends MVCPortlet {
 		
 		aceitem.setImportance(project.getImportance());
 		
-		// language holds the special tagging
-		aceitem.setLanguage(project.getSpecialtagging());
+		aceitem.setSpecialtagging(project.getSpecialtagging());
+		
+		aceitem.setDeeplink(project.getWebsite());
+		
+		aceitem.setControlstatus(project.getControlstatus());
+		
+		aceitem.setCreator(project.getCreator());
+		
+		aceitem.setCreationdate(project.getCreationdate());
+		
+		aceitem.setModerator(project.getModerator());
+		
+		aceitem.setApprovaldate(project.getApprovaldate());
 		
 		aceitem.setTextSearch( coalesce( project.getSpecialtagging()) + ' ' +
 	               			   aceitem.getName() + ' ' +

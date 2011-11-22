@@ -49,7 +49,6 @@
 			<finder-column name="groupId" />
 		</finder>
 
-		<!-- Finder Methods -->
 		<finder name="Controlstatus" return-type="Collection">
 			<finder-column name="controlstatus" />
 		</finder>
