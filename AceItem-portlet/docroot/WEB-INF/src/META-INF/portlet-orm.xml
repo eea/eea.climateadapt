@@ -12,13 +12,13 @@
 			<id name="aceItemId" />
 			<basic name="companyId" />
 			<basic name="groupId" />
-			<basic name="nasId" />
+			<basic name="wxsharvesterId" />
 			<basic name="name" />
 			<basic name="description" />
 			<basic name="datatype" />
 			<basic name="storedAt" />
 			<basic name="storagetype" />
-			<basic name="language" />
+			<basic name="specialtagging" />
 			<basic name="textSearch" />
 			<basic name="keyword" />
 			<basic name="targetresolution" />
@@ -39,29 +39,17 @@
 			<basic name="rating" />
 			<basic name="importance" />
 			<basic name="source" />
-			<transient name="primaryKey" />
-		</attributes>
-	</mapped-superclass>
-	<mapped-superclass class="nl.wur.alterra.cgi.ace.model.impl.NASModelImpl">
-		<attributes>
-			<id name="nasId" />
-			<basic name="name" />
-			<basic name="adoptedStatus" />
-			<basic name="adoptedDescription" />
-			<basic name="companyId" />
-			<basic name="groupId" />
-			<basic name="parentNasId" />
-			<basic name="isoCountry" />
-			<transient name="primaryKey" />
-		</attributes>
-	</mapped-superclass>
-	<mapped-superclass class="nl.wur.alterra.cgi.ace.model.impl.NASSourceModelImpl">
-		<attributes>
-			<id name="nassourceid" />
-			<basic name="nasId" />
-			<basic name="name" />
-			<basic name="companyId" />
-			<basic name="groupId" />
+			<basic name="deeplink" />
+			<basic name="controlstatus" />
+			<basic name="creator" />
+			<basic name="creationdate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="moderator" />
+			<basic name="approvaldate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="replacesId" />
 			<transient name="primaryKey" />
 		</attributes>
 	</mapped-superclass>
@@ -83,14 +71,6 @@
 	</mapped-superclass>
 	<entity class="nl.wur.alterra.cgi.ace.model.impl.AceItemImpl" name="AceItem">
 		<table name="Ace_AceItem" />
-		<attributes />
-	</entity>
-	<entity class="nl.wur.alterra.cgi.ace.model.impl.NASImpl" name="NAS">
-		<table name="Ace_NAS" />
-		<attributes />
-	</entity>
-	<entity class="nl.wur.alterra.cgi.ace.model.impl.NASSourceImpl" name="NASSource">
-		<table name="Ace_NASSource" />
 		<attributes />
 	</entity>
 	<entity class="nl.wur.alterra.cgi.ace.model.impl.WxsHarvesterImpl" name="WxsHarvester">

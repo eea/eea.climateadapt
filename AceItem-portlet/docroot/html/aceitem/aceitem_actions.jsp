@@ -7,7 +7,7 @@ AceItem aceitem = (AceItem)row.getObject();
 long groupId = aceitem.getGroupId();
 String name = AceItem.class.getName();
 long aceItemId = aceitem.getAceItemId();
-long nasId = aceitem.getNasId();
+long wxsharvesterId = aceitem.getWxsharvesterId();
 
 String redirect = PortalUtil.getCurrentURL(renderRequest);
 %>
@@ -30,7 +30,7 @@ String redirect = PortalUtil.getCurrentURL(renderRequest);
 	</portlet:actionURL>
 		
 <%
-    if(nasId ==0) {
+    if(wxsharvesterId==0) {
 		String confirmURL = "Javascript: if(confirm('Delete?')){document.location.replace('" + deleteURL.toString() + "')};";
 %>
 		<liferay-ui:icon image="delete" url="<%= confirmURL %>" />

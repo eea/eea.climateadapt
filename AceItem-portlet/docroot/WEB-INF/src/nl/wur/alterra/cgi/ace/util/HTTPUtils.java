@@ -1,7 +1,5 @@
 package nl.wur.alterra.cgi.ace.util;
 
-import com.liferay.portal.kernel.exception.SystemException;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -42,7 +40,7 @@ public class HTTPUtils {
      * @return response content as string
      * @throws com.liferay.portal.kernel.exception.SystemException hmm
      */
-    public String post(String stringContent, String destination) throws SystemException {
+    public String post(String stringContent, String destination) throws Exception {
         try {
             URL url = new URL(destination);
             HttpURLConnection x = (HttpURLConnection) url.openConnection();
@@ -89,18 +87,18 @@ public class HTTPUtils {
                 response = inputStream2String(responseStream);
                 //System.out.println(response);
                 // TODO do not throw SystemException in case of unsuccesful HTTP response
-                throw new SystemException("Server returned response code: " + x.getResponseCode() + " with content:\n" + response);
+                throw new Exception("Server returned response code: " + x.getResponseCode() + " with content:\n" + response);
             }
             //System.out.println("\nresponse from server after POST to: "+ destination + "\n" + response + "\n");
             return response;
         }
         catch(MalformedURLException x) {
             x.printStackTrace();
-            throw new SystemException(x.getMessage(), x);
+            throw new Exception(x.getMessage(), x);
         }
         catch (IOException x) {
             x.printStackTrace();
-            throw new SystemException(x.getMessage(), x);
+            throw new Exception(x.getMessage(), x);
         }
     }
 

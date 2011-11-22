@@ -28,7 +28,7 @@
 		<aui:input type="hidden" name="aceItemId" value='<%= aceitem == null ? "" : aceitem.getAceItemId() %>'/>
 		
 		<b>nasId</b><br />	
-		<input name="nasId" type="text" size="10" value='<%= aceitem == null ? "0" : aceitem.getNasId() %>' ><br /><br />
+		<input name="wxsharvesterId" type="text" size="10" value='<%= aceitem == null ? "0" : aceitem.getWxsharvesterId() %>' ><br /><br />
 
 		<b>name</b><br />	
 		<input name="name" type="text" size="120" value='<%= aceitem == null ? "" : aceitem.getName() %>'><br /><br />
@@ -69,7 +69,7 @@
 		<textarea name="description" rows=10 cols=100><%= aceitem == null ? "" : aceitem.getDescription() %></textarea><br /><br />
 		
 		<b>special tagging</b><br />
-		<input name="language" type="text" size="65" value='<%= aceitem == null ? "" : aceitem.getLanguage() %>'><br /><br />
+		<input name="specialtagging" type="text" size="65" value='<%= aceitem == null ? "" : aceitem.getSpecialtagging() %>'><br /><br />
 		
 		<b>textsearch</b><br />
 		<textarea name="textSearch" rows=15 cols=100><%= aceitem == null ? "" : aceitem.getTextSearch() %></textarea><br /><br />

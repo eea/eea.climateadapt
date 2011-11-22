@@ -99,18 +99,18 @@ public interface AceItemModel extends BaseModel<AceItem> {
 	public void setGroupId(long groupId);
 
 	/**
-	 * Gets the nas id of this ace item.
+	 * Gets the wxsharvester id of this ace item.
 	 *
-	 * @return the nas id of this ace item
+	 * @return the wxsharvester id of this ace item
 	 */
-	public long getNasId();
+	public long getWxsharvesterId();
 
 	/**
-	 * Sets the nas id of this ace item.
+	 * Sets the wxsharvester id of this ace item.
 	 *
-	 * @param nasId the nas id of this ace item
+	 * @param wxsharvesterId the wxsharvester id of this ace item
 	 */
-	public void setNasId(long nasId);
+	public void setWxsharvesterId(long wxsharvesterId);
 
 	/**
 	 * Gets the name of this ace item.
@@ -188,19 +188,19 @@ public interface AceItemModel extends BaseModel<AceItem> {
 	public void setStoragetype(String storagetype);
 
 	/**
-	 * Gets the language of this ace item.
+	 * Gets the specialtagging of this ace item.
 	 *
-	 * @return the language of this ace item
+	 * @return the specialtagging of this ace item
 	 */
 	@AutoEscape
-	public String getLanguage();
+	public String getSpecialtagging();
 
 	/**
-	 * Sets the language of this ace item.
+	 * Sets the specialtagging of this ace item.
 	 *
-	 * @param language the language of this ace item
+	 * @param specialtagging the specialtagging of this ace item
 	 */
-	public void setLanguage(String language);
+	public void setSpecialtagging(String specialtagging);
 
 	/**
 	 * Gets the text search of this ace item.
@@ -406,6 +406,107 @@ public interface AceItemModel extends BaseModel<AceItem> {
 	 * @param source the source of this ace item
 	 */
 	public void setSource(String source);
+
+	/**
+	 * Gets the deeplink of this ace item.
+	 *
+	 * @return the deeplink of this ace item
+	 */
+	@AutoEscape
+	public String getDeeplink();
+
+	/**
+	 * Sets the deeplink of this ace item.
+	 *
+	 * @param deeplink the deeplink of this ace item
+	 */
+	public void setDeeplink(String deeplink);
+
+	/**
+	 * Gets the controlstatus of this ace item.
+	 *
+	 * @return the controlstatus of this ace item
+	 */
+	public short getControlstatus();
+
+	/**
+	 * Sets the controlstatus of this ace item.
+	 *
+	 * @param controlstatus the controlstatus of this ace item
+	 */
+	public void setControlstatus(short controlstatus);
+
+	/**
+	 * Gets the creator of this ace item.
+	 *
+	 * @return the creator of this ace item
+	 */
+	@AutoEscape
+	public String getCreator();
+
+	/**
+	 * Sets the creator of this ace item.
+	 *
+	 * @param creator the creator of this ace item
+	 */
+	public void setCreator(String creator);
+
+	/**
+	 * Gets the creationdate of this ace item.
+	 *
+	 * @return the creationdate of this ace item
+	 */
+	public Date getCreationdate();
+
+	/**
+	 * Sets the creationdate of this ace item.
+	 *
+	 * @param creationdate the creationdate of this ace item
+	 */
+	public void setCreationdate(Date creationdate);
+
+	/**
+	 * Gets the moderator of this ace item.
+	 *
+	 * @return the moderator of this ace item
+	 */
+	@AutoEscape
+	public String getModerator();
+
+	/**
+	 * Sets the moderator of this ace item.
+	 *
+	 * @param moderator the moderator of this ace item
+	 */
+	public void setModerator(String moderator);
+
+	/**
+	 * Gets the approvaldate of this ace item.
+	 *
+	 * @return the approvaldate of this ace item
+	 */
+	public Date getApprovaldate();
+
+	/**
+	 * Sets the approvaldate of this ace item.
+	 *
+	 * @param approvaldate the approvaldate of this ace item
+	 */
+	public void setApprovaldate(Date approvaldate);
+
+	/**
+	 * Gets the replaces id of this ace item.
+	 *
+	 * @return the replaces id of this ace item
+	 */
+	public long getReplacesId();
+
+	/**
+	 * Sets the replaces id of this ace item.
+	 *
+	 * @param replacesId the replaces id of this ace item
+	 */
+	public void setReplacesId(long replacesId);
 
 	/**
 	 * Gets a copy of this ace item as an escaped model instance by wrapping it with an {@link com.liferay.portal.kernel.bean.AutoEscapeBeanHandler}.

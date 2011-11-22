@@ -14,8 +14,8 @@
 		<!-- Liferay internal: -->
 		<column name="companyId" type="long" />
 		<column name="groupId" type="long" />
-		<!-- Foreign key to NAS -->
-		<column name="nasId" type="long" convert-null="false" />
+		<!-- Foreign key to WxsHarvester -->
+		<column name="wxsharvesterId" type="long" convert-null="false" />
 		
 		<!-- Other columns -->
 		<column name="name" type="String" />
@@ -23,7 +23,7 @@
 		<column name="datatype" type="String" />
 		<column name="storedAt" type="String" />
 		<column name="storagetype" type="String" />
-		<column name="language" type="String" />
+		<column name="specialtagging" type="String" />
 		<column name="textSearch" type="String" />
 		<column name="keyword" type="String" />
 		<column name="targetresolution" type="String" />
@@ -38,6 +38,13 @@
 		<column name="rating" type="long" />
 		<column name="importance" type="long" />
 		<column name="source" type="String" />
+		<column name="deeplink" type="String" />
+		<column name="controlstatus" type="short" />
+		<column name="creator" type="String" />
+		<column name="creationdate" type="Date" />
+		<column name="moderator" type="String" />
+		<column name="approvaldate" type="Date" />
+		<column name="replacesId" type="long" />
 		<!-- Sort order -->
 		<order by="asc">
 			<order-column name="name" />
@@ -55,51 +62,6 @@
     <reference package-path="com.liferay.portlet.asset" entity="AssetEntry" />
 
 	</entity>
-	
-	<entity name="NAS" local-service="true" remote-service="false">
-		<column name="nasId" type="long" primary="true" />
-		<column name="name" type="String" />
-		<column name="adoptedStatus" type="String" />
-		<column name="adoptedDescription" type="String" />
-		<column name="companyId" type="long" />
-		<column name="groupId" type="long" />
-		<column name="parentNasId" type="long"/>
-		<column name="isoCountry" type="String" />		
-		<!-- foreign key relation to AceItem-->
-		<column
-		name="aceItems"
-		type="Collection"
-		entity="AceItem"
-		mapping-key="nasId" />
-		
-		<order by="asc">
-			<order-column name="name" case-sensitive="false" />
-		</order>		
-		<finder name="GroupId" return-type="Collection">
-			<finder-column name="groupId" />
-		</finder>		
-		<reference package-path="com.liferay.portlet.asset" entity="AssetEntry" />		
-	</entity>	
-
-	<entity name="NASSource" local-service="true" remote-service="false">
-		<column name="nassourceid" type="long" primary="true" />
-		<column name="nasId" type="long" />
-		<column name="name" type="String" />
-        <!-- Liferay internal: -->
-		<column name="companyId" type="long" />
-		<column name="groupId" type="long" />
-		
-		<order by="asc">
-			<order-column name="name" case-sensitive="false" />
-		</order>
-
-        <!-- Liferay internal: -->
-		<finder name="GroupId" return-type="Collection">
-			<finder-column name="groupId" />
-		</finder>		
-		<reference package-path="com.liferay.portlet.asset" entity="AssetEntry" />	
-	</entity>
-
 	<entity name="WxsHarvester" local-service="true" remote-service="false">
 		<column name="wxsharvesterid" type="long" primary="true" />
 		<column name="name" type="String" />

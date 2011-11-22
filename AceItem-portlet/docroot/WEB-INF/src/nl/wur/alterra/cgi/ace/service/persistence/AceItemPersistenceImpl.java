@@ -324,13 +324,13 @@ public class AceItemPersistenceImpl extends BasePersistenceImpl<AceItem>
 		aceItemImpl.setAceItemId(aceItem.getAceItemId());
 		aceItemImpl.setCompanyId(aceItem.getCompanyId());
 		aceItemImpl.setGroupId(aceItem.getGroupId());
-		aceItemImpl.setNasId(aceItem.getNasId());
+		aceItemImpl.setWxsharvesterId(aceItem.getWxsharvesterId());
 		aceItemImpl.setName(aceItem.getName());
 		aceItemImpl.setDescription(aceItem.getDescription());
 		aceItemImpl.setDatatype(aceItem.getDatatype());
 		aceItemImpl.setStoredAt(aceItem.getStoredAt());
 		aceItemImpl.setStoragetype(aceItem.getStoragetype());
-		aceItemImpl.setLanguage(aceItem.getLanguage());
+		aceItemImpl.setSpecialtagging(aceItem.getSpecialtagging());
 		aceItemImpl.setTextSearch(aceItem.getTextSearch());
 		aceItemImpl.setKeyword(aceItem.getKeyword());
 		aceItemImpl.setTargetresolution(aceItem.getTargetresolution());
@@ -345,6 +345,13 @@ public class AceItemPersistenceImpl extends BasePersistenceImpl<AceItem>
 		aceItemImpl.setRating(aceItem.getRating());
 		aceItemImpl.setImportance(aceItem.getImportance());
 		aceItemImpl.setSource(aceItem.getSource());
+		aceItemImpl.setDeeplink(aceItem.getDeeplink());
+		aceItemImpl.setControlstatus(aceItem.getControlstatus());
+		aceItemImpl.setCreator(aceItem.getCreator());
+		aceItemImpl.setCreationdate(aceItem.getCreationdate());
+		aceItemImpl.setModerator(aceItem.getModerator());
+		aceItemImpl.setApprovaldate(aceItem.getApprovaldate());
+		aceItemImpl.setReplacesId(aceItem.getReplacesId());
 
 		return aceItemImpl;
 	}
@@ -1235,10 +1242,6 @@ public class AceItemPersistenceImpl extends BasePersistenceImpl<AceItem>
 
 	@BeanReference(type = AceItemPersistence.class)
 	protected AceItemPersistence aceItemPersistence;
-	@BeanReference(type = NASPersistence.class)
-	protected NASPersistence nasPersistence;
-	@BeanReference(type = NASSourcePersistence.class)
-	protected NASSourcePersistence nasSourcePersistence;
 	@BeanReference(type = WxsHarvesterPersistence.class)
 	protected WxsHarvesterPersistence wxsHarvesterPersistence;
 	@BeanReference(type = ResourcePersistence.class)

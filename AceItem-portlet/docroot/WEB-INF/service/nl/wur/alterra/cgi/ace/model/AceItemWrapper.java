@@ -60,12 +60,12 @@ public class AceItemWrapper implements AceItem {
 		_aceItem.setGroupId(groupId);
 	}
 
-	public long getNasId() {
-		return _aceItem.getNasId();
+	public long getWxsharvesterId() {
+		return _aceItem.getWxsharvesterId();
 	}
 
-	public void setNasId(long nasId) {
-		_aceItem.setNasId(nasId);
+	public void setWxsharvesterId(long wxsharvesterId) {
+		_aceItem.setWxsharvesterId(wxsharvesterId);
 	}
 
 	public java.lang.String getName() {
@@ -108,12 +108,12 @@ public class AceItemWrapper implements AceItem {
 		_aceItem.setStoragetype(storagetype);
 	}
 
-	public java.lang.String getLanguage() {
-		return _aceItem.getLanguage();
+	public java.lang.String getSpecialtagging() {
+		return _aceItem.getSpecialtagging();
 	}
 
-	public void setLanguage(java.lang.String language) {
-		_aceItem.setLanguage(language);
+	public void setSpecialtagging(java.lang.String specialtagging) {
+		_aceItem.setSpecialtagging(specialtagging);
 	}
 
 	public java.lang.String getTextSearch() {
@@ -226,6 +226,62 @@ public class AceItemWrapper implements AceItem {
 
 	public void setSource(java.lang.String source) {
 		_aceItem.setSource(source);
+	}
+
+	public java.lang.String getDeeplink() {
+		return _aceItem.getDeeplink();
+	}
+
+	public void setDeeplink(java.lang.String deeplink) {
+		_aceItem.setDeeplink(deeplink);
+	}
+
+	public short getControlstatus() {
+		return _aceItem.getControlstatus();
+	}
+
+	public void setControlstatus(short controlstatus) {
+		_aceItem.setControlstatus(controlstatus);
+	}
+
+	public java.lang.String getCreator() {
+		return _aceItem.getCreator();
+	}
+
+	public void setCreator(java.lang.String creator) {
+		_aceItem.setCreator(creator);
+	}
+
+	public java.util.Date getCreationdate() {
+		return _aceItem.getCreationdate();
+	}
+
+	public void setCreationdate(java.util.Date creationdate) {
+		_aceItem.setCreationdate(creationdate);
+	}
+
+	public java.lang.String getModerator() {
+		return _aceItem.getModerator();
+	}
+
+	public void setModerator(java.lang.String moderator) {
+		_aceItem.setModerator(moderator);
+	}
+
+	public java.util.Date getApprovaldate() {
+		return _aceItem.getApprovaldate();
+	}
+
+	public void setApprovaldate(java.util.Date approvaldate) {
+		_aceItem.setApprovaldate(approvaldate);
+	}
+
+	public long getReplacesId() {
+		return _aceItem.getReplacesId();
+	}
+
+	public void setReplacesId(long replacesId) {
+		_aceItem.setReplacesId(replacesId);
 	}
 
 	public nl.wur.alterra.cgi.ace.model.AceItem toEscapedModel() {

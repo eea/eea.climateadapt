@@ -3,8 +3,6 @@
 
 <hibernate-mapping default-lazy="false" auto-import="false">
 	<import class="nl.wur.alterra.cgi.ace.model.AceItem" />
-	<import class="nl.wur.alterra.cgi.ace.model.NAS" />
-	<import class="nl.wur.alterra.cgi.ace.model.NASSource" />
 	<import class="nl.wur.alterra.cgi.ace.model.WxsHarvester" />
 	<class name="nl.wur.alterra.cgi.ace.model.impl.AceItemImpl" table="Ace_AceItem">
 		<cache usage="read-write" />
@@ -13,13 +11,13 @@
 		</id>
 		<property name="companyId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 		<property name="groupId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
-		<property name="nasId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="wxsharvesterId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 		<property name="name" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="description" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="datatype" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="storedAt" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="storagetype" type="com.liferay.portal.dao.orm.hibernate.StringType" />
-		<property name="language" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="specialtagging" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="textSearch" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="keyword" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="targetresolution" type="com.liferay.portal.dao.orm.hibernate.StringType" />
@@ -34,29 +32,13 @@
 		<property name="rating" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 		<property name="importance" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 		<property name="source" type="com.liferay.portal.dao.orm.hibernate.StringType" />
-	</class>
-	<class name="nl.wur.alterra.cgi.ace.model.impl.NASImpl" table="Ace_NAS">
-		<cache usage="read-write" />
-		<id name="nasId" type="long">
-			<generator class="assigned" />
-		</id>
-		<property name="name" type="com.liferay.portal.dao.orm.hibernate.StringType" />
-		<property name="adoptedStatus" type="com.liferay.portal.dao.orm.hibernate.StringType" />
-		<property name="adoptedDescription" type="com.liferay.portal.dao.orm.hibernate.StringType" />
-		<property name="companyId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
-		<property name="groupId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
-		<property name="parentNasId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
-		<property name="isoCountry" type="com.liferay.portal.dao.orm.hibernate.StringType" />
-	</class>
-	<class name="nl.wur.alterra.cgi.ace.model.impl.NASSourceImpl" table="Ace_NASSource">
-		<cache usage="read-write" />
-		<id name="nassourceid" type="long">
-			<generator class="assigned" />
-		</id>
-		<property name="nasId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
-		<property name="name" type="com.liferay.portal.dao.orm.hibernate.StringType" />
-		<property name="companyId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
-		<property name="groupId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="deeplink" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="controlstatus" type="com.liferay.portal.dao.orm.hibernate.ShortType" />
+		<property name="creator" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="creationdate" type="org.hibernate.type.TimestampType" />
+		<property name="moderator" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="approvaldate" type="org.hibernate.type.TimestampType" />
+		<property name="replacesId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 	</class>
 	<class name="nl.wur.alterra.cgi.ace.model.impl.WxsHarvesterImpl" table="Ace_WxsHarvester">
 		<cache usage="read-write" />

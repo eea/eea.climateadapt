@@ -975,10 +975,6 @@ public class WxsHarvesterPersistenceImpl extends BasePersistenceImpl<WxsHarveste
 
 	@BeanReference(type = AceItemPersistence.class)
 	protected AceItemPersistence aceItemPersistence;
-	@BeanReference(type = NASPersistence.class)
-	protected NASPersistence nasPersistence;
-	@BeanReference(type = NASSourcePersistence.class)
-	protected NASSourcePersistence nasSourcePersistence;
 	@BeanReference(type = WxsHarvesterPersistence.class)
 	protected WxsHarvesterPersistence wxsHarvesterPersistence;
 	@BeanReference(type = ResourcePersistence.class)

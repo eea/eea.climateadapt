@@ -1,7 +1,6 @@
 package nl.wur.alterra.cgi.ace.harvester;
 
 import com.liferay.portal.kernel.exception.PortalException;
-import com.liferay.portal.kernel.exception.SystemException;
 import nl.wur.alterra.cgi.ace.geonetwork.GeoNetworkConnector;
 import nl.wur.alterra.cgi.ace.model.AceItem;
 import nl.wur.alterra.cgi.ace.model.WxsHarvester;
@@ -82,7 +81,7 @@ public class HarvesterUtil {
             }
         }
         // do not block application startup if something goes wrong retrieving harvesters
-        catch (SystemException x) {
+        catch (Exception x) {
             System.out.println("Error: failed to retrieve harvesters: "+ x.getMessage());
             x.printStackTrace();
         }
@@ -170,7 +169,7 @@ public class HarvesterUtil {
      *
      * @param wxsHarvester harvester to run
      */
-    public static synchronized void executeWxsHarvester(WxsHarvester wxsHarvester) throws SystemException, PortalException {
+    public static synchronized void executeWxsHarvester(WxsHarvester wxsHarvester) throws Exception, PortalException {
         System.out.println("executing harvester: " + wxsHarvester.getName());
 
         // harvester was not saved to GeoNetwork
@@ -448,7 +447,7 @@ public class HarvesterUtil {
      * @param harvesterResultBefore
      * @param harvesterResultAfter
      */
-    private static synchronized void storeAsAceItems(String harvesterResultBefore, String harvesterResultAfter) throws SystemException, PortalException {
+    private static synchronized void storeAsAceItems(String harvesterResultBefore, String harvesterResultAfter) throws Exception, PortalException {
         System.out.println("applying harvesting result to AceItem table");
 
         System.out.println("looking for metadata ids in search response before harvesting:");

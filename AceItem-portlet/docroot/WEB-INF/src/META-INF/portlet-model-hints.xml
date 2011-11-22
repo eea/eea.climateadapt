@@ -5,13 +5,13 @@
 		<field name="aceItemId" type="long" />
 		<field name="companyId" type="long" />
 		<field name="groupId" type="long" />
-		<field name="nasId" type="long" />
+		<field name="wxsharvesterId" type="long" />
 		<field name="name" type="String" />
 		<field name="description" type="String" />
 		<field name="datatype" type="String" />
 		<field name="storedAt" type="String" />
 		<field name="storagetype" type="String" />
-		<field name="language" type="String" />
+		<field name="specialtagging" type="String" />
 		<field name="textSearch" type="String" />
 		<field name="keyword" type="String" />
 		<field name="targetresolution" type="String" />
@@ -26,23 +26,13 @@
 		<field name="rating" type="long" />
 		<field name="importance" type="long" />
 		<field name="source" type="String" />
-	</model>
-	<model name="nl.wur.alterra.cgi.ace.model.NAS">
-		<field name="nasId" type="long" />
-		<field name="name" type="String" />
-		<field name="adoptedStatus" type="String" />
-		<field name="adoptedDescription" type="String" />
-		<field name="companyId" type="long" />
-		<field name="groupId" type="long" />
-		<field name="parentNasId" type="long" />
-		<field name="isoCountry" type="String" />
-	</model>
-	<model name="nl.wur.alterra.cgi.ace.model.NASSource">
-		<field name="nassourceid" type="long" />
-		<field name="nasId" type="long" />
-		<field name="name" type="String" />
-		<field name="companyId" type="long" />
-		<field name="groupId" type="long" />
+		<field name="deeplink" type="String" />
+		<field name="controlstatus" type="short" />
+		<field name="creator" type="String" />
+		<field name="creationdate" type="Date" />
+		<field name="moderator" type="String" />
+		<field name="approvaldate" type="Date" />
+		<field name="replacesId" type="long" />
 	</model>
 	<model name="nl.wur.alterra.cgi.ace.model.WxsHarvester">
 		<field name="wxsharvesterid" type="long" />

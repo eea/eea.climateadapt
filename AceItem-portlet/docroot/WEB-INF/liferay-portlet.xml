@@ -12,17 +12,6 @@
 	</portlet>
 
 	<portlet>
-		<portlet-name>nasportlet</portlet-name>
-		<icon>/icon.png</icon>
-		<instanceable>false</instanceable>
-		<header-portlet-css>/css/portlet.css</header-portlet-css>
-        <header-portlet-javascript>http://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js</header-portlet-javascript>	
-		<footer-portlet-javascript>
-			/js/javascript.js
-		</footer-portlet-javascript>		
-		<css-class-wrapper>nasportlet-portlet</css-class-wrapper>
-	</portlet>
-	<portlet>
 		<portlet-name>wxsharvesterportlet</portlet-name>
 		<icon>/icon.png</icon>
 		<instanceable>false</instanceable>

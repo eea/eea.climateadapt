@@ -59,13 +59,13 @@ public class AceItemModelImpl extends BaseModelImpl<AceItem>
 			{ "aceItemId", new Integer(Types.BIGINT) },
 			{ "companyId", new Integer(Types.BIGINT) },
 			{ "groupId", new Integer(Types.BIGINT) },
-			{ "nasId", new Integer(Types.BIGINT) },
+			{ "wxsharvesterId", new Integer(Types.BIGINT) },
 			{ "name", new Integer(Types.VARCHAR) },
 			{ "description", new Integer(Types.VARCHAR) },
 			{ "datatype", new Integer(Types.VARCHAR) },
 			{ "storedAt", new Integer(Types.VARCHAR) },
 			{ "storagetype", new Integer(Types.VARCHAR) },
-			{ "language", new Integer(Types.VARCHAR) },
+			{ "specialtagging", new Integer(Types.VARCHAR) },
 			{ "textSearch", new Integer(Types.VARCHAR) },
 			{ "keyword", new Integer(Types.VARCHAR) },
 			{ "targetresolution", new Integer(Types.VARCHAR) },
@@ -79,9 +79,16 @@ public class AceItemModelImpl extends BaseModelImpl<AceItem>
 			{ "climateimpacts_", new Integer(Types.VARCHAR) },
 			{ "rating", new Integer(Types.BIGINT) },
 			{ "importance", new Integer(Types.BIGINT) },
-			{ "source", new Integer(Types.VARCHAR) }
+			{ "source", new Integer(Types.VARCHAR) },
+			{ "deeplink", new Integer(Types.VARCHAR) },
+			{ "controlstatus", new Integer(Types.INTEGER) },
+			{ "creator", new Integer(Types.VARCHAR) },
+			{ "creationdate", new Integer(Types.TIMESTAMP) },
+			{ "moderator", new Integer(Types.VARCHAR) },
+			{ "approvaldate", new Integer(Types.TIMESTAMP) },
+			{ "replacesId", new Integer(Types.BIGINT) }
 		};
-	public static final String TABLE_SQL_CREATE = "create table Ace_AceItem (aceItemId LONG not null primary key,companyId LONG,groupId LONG,nasId LONG,name VARCHAR(75) null,description VARCHAR(75) null,datatype VARCHAR(75) null,storedAt VARCHAR(75) null,storagetype VARCHAR(75) null,language VARCHAR(75) null,textSearch VARCHAR(75) null,keyword VARCHAR(75) null,targetresolution VARCHAR(75) null,spatialLayer VARCHAR(75) null,spatialValues VARCHAR(75) null,startDate DATE null,endDate DATE null,publicationDate DATE null,sectors_ VARCHAR(75) null,elements_ VARCHAR(75) null,climateimpacts_ VARCHAR(75) null,rating LONG,importance LONG,source VARCHAR(75) null)";
+	public static final String TABLE_SQL_CREATE = "create table Ace_AceItem (aceItemId LONG not null primary key,companyId LONG,groupId LONG,wxsharvesterId LONG,name VARCHAR(75) null,description VARCHAR(75) null,datatype VARCHAR(75) null,storedAt VARCHAR(75) null,storagetype VARCHAR(75) null,specialtagging VARCHAR(75) null,textSearch VARCHAR(75) null,keyword VARCHAR(75) null,targetresolution VARCHAR(75) null,spatialLayer VARCHAR(75) null,spatialValues VARCHAR(75) null,startDate DATE null,endDate DATE null,publicationDate DATE null,sectors_ VARCHAR(75) null,elements_ VARCHAR(75) null,climateimpacts_ VARCHAR(75) null,rating LONG,importance LONG,source VARCHAR(75) null,deeplink VARCHAR(75) null,controlstatus INTEGER,creator VARCHAR(75) null,creationdate DATE null,moderator VARCHAR(75) null,approvaldate DATE null,replacesId LONG)";
 	public static final String TABLE_SQL_DROP = "drop table Ace_AceItem";
 	public static final String ORDER_BY_JPQL = " ORDER BY aceItem.name ASC";
 	public static final String ORDER_BY_SQL = " ORDER BY Ace_AceItem.name ASC";
@@ -136,12 +143,12 @@ public class AceItemModelImpl extends BaseModelImpl<AceItem>
 		_groupId = groupId;
 	}
 
-	public long getNasId() {
-		return _nasId;
+	public long getWxsharvesterId() {
+		return _wxsharvesterId;
 	}
 
-	public void setNasId(long nasId) {
-		_nasId = nasId;
+	public void setWxsharvesterId(long wxsharvesterId) {
+		_wxsharvesterId = wxsharvesterId;
 	}
 
 	public String getName() {
@@ -217,17 +224,17 @@ public class AceItemModelImpl extends BaseModelImpl<AceItem>
 		_storagetype = storagetype;
 	}
 
-	public String getLanguage() {
-		if (_language == null) {
+	public String getSpecialtagging() {
+		if (_specialtagging == null) {
 			return StringPool.BLANK;
 		}
 		else {
-			return _language;
+			return _specialtagging;
 		}
 	}
 
-	public void setLanguage(String language) {
-		_language = language;
+	public void setSpecialtagging(String specialtagging) {
+		_specialtagging = specialtagging;
 	}
 
 	public String getTextSearch() {
@@ -387,6 +394,77 @@ public class AceItemModelImpl extends BaseModelImpl<AceItem>
 		_source = source;
 	}
 
+	public String getDeeplink() {
+		if (_deeplink == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _deeplink;
+		}
+	}
+
+	public void setDeeplink(String deeplink) {
+		_deeplink = deeplink;
+	}
+
+	public short getControlstatus() {
+		return _controlstatus;
+	}
+
+	public void setControlstatus(short controlstatus) {
+		_controlstatus = controlstatus;
+	}
+
+	public String getCreator() {
+		if (_creator == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _creator;
+		}
+	}
+
+	public void setCreator(String creator) {
+		_creator = creator;
+	}
+
+	public Date getCreationdate() {
+		return _creationdate;
+	}
+
+	public void setCreationdate(Date creationdate) {
+		_creationdate = creationdate;
+	}
+
+	public String getModerator() {
+		if (_moderator == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _moderator;
+		}
+	}
+
+	public void setModerator(String moderator) {
+		_moderator = moderator;
+	}
+
+	public Date getApprovaldate() {
+		return _approvaldate;
+	}
+
+	public void setApprovaldate(Date approvaldate) {
+		_approvaldate = approvaldate;
+	}
+
+	public long getReplacesId() {
+		return _replacesId;
+	}
+
+	public void setReplacesId(long replacesId) {
+		_replacesId = replacesId;
+	}
+
 	public AceItem toEscapedModel() {
 		if (isEscapedModel()) {
 			return (AceItem)this;
@@ -416,13 +494,13 @@ public class AceItemModelImpl extends BaseModelImpl<AceItem>
 		clone.setAceItemId(getAceItemId());
 		clone.setCompanyId(getCompanyId());
 		clone.setGroupId(getGroupId());
-		clone.setNasId(getNasId());
+		clone.setWxsharvesterId(getWxsharvesterId());
 		clone.setName(getName());
 		clone.setDescription(getDescription());
 		clone.setDatatype(getDatatype());
 		clone.setStoredAt(getStoredAt());
 		clone.setStoragetype(getStoragetype());
-		clone.setLanguage(getLanguage());
+		clone.setSpecialtagging(getSpecialtagging());
 		clone.setTextSearch(getTextSearch());
 		clone.setKeyword(getKeyword());
 		clone.setTargetresolution(getTargetresolution());
@@ -437,6 +515,13 @@ public class AceItemModelImpl extends BaseModelImpl<AceItem>
 		clone.setRating(getRating());
 		clone.setImportance(getImportance());
 		clone.setSource(getSource());
+		clone.setDeeplink(getDeeplink());
+		clone.setControlstatus(getControlstatus());
+		clone.setCreator(getCreator());
+		clone.setCreationdate(getCreationdate());
+		clone.setModerator(getModerator());
+		clone.setApprovaldate(getApprovaldate());
+		clone.setReplacesId(getReplacesId());
 
 		return clone;
 	}
@@ -482,7 +567,7 @@ public class AceItemModelImpl extends BaseModelImpl<AceItem>
 	}
 
 	public String toString() {
-		StringBundler sb = new StringBundler(49);
+		StringBundler sb = new StringBundler(63);
 
 		sb.append("{aceItemId=");
 		sb.append(getAceItemId());
@@ -490,8 +575,8 @@ public class AceItemModelImpl extends BaseModelImpl<AceItem>
 		sb.append(getCompanyId());
 		sb.append(", groupId=");
 		sb.append(getGroupId());
-		sb.append(", nasId=");
-		sb.append(getNasId());
+		sb.append(", wxsharvesterId=");
+		sb.append(getWxsharvesterId());
 		sb.append(", name=");
 		sb.append(getName());
 		sb.append(", description=");
@@ -502,8 +587,8 @@ public class AceItemModelImpl extends BaseModelImpl<AceItem>
 		sb.append(getStoredAt());
 		sb.append(", storagetype=");
 		sb.append(getStoragetype());
-		sb.append(", language=");
-		sb.append(getLanguage());
+		sb.append(", specialtagging=");
+		sb.append(getSpecialtagging());
 		sb.append(", textSearch=");
 		sb.append(getTextSearch());
 		sb.append(", keyword=");
@@ -532,13 +617,27 @@ public class AceItemModelImpl extends BaseModelImpl<AceItem>
 		sb.append(getImportance());
 		sb.append(", source=");
 		sb.append(getSource());
+		sb.append(", deeplink=");
+		sb.append(getDeeplink());
+		sb.append(", controlstatus=");
+		sb.append(getControlstatus());
+		sb.append(", creator=");
+		sb.append(getCreator());
+		sb.append(", creationdate=");
+		sb.append(getCreationdate());
+		sb.append(", moderator=");
+		sb.append(getModerator());
+		sb.append(", approvaldate=");
+		sb.append(getApprovaldate());
+		sb.append(", replacesId=");
+		sb.append(getReplacesId());
 		sb.append("}");
 
 		return sb.toString();
 	}
 
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(76);
+		StringBundler sb = new StringBundler(97);
 
 		sb.append("<model><model-name>");
 		sb.append("nl.wur.alterra.cgi.ace.model.AceItem");
@@ -557,8 +656,8 @@ public class AceItemModelImpl extends BaseModelImpl<AceItem>
 		sb.append(getGroupId());
 		sb.append("]]></column-value></column>");
 		sb.append(
-			"<column><column-name>nasId</column-name><column-value><![CDATA[");
-		sb.append(getNasId());
+			"<column><column-name>wxsharvesterId</column-name><column-value><![CDATA[");
+		sb.append(getWxsharvesterId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>name</column-name><column-value><![CDATA[");
@@ -581,8 +680,8 @@ public class AceItemModelImpl extends BaseModelImpl<AceItem>
 		sb.append(getStoragetype());
 		sb.append("]]></column-value></column>");
 		sb.append(
-			"<column><column-name>language</column-name><column-value><![CDATA[");
-		sb.append(getLanguage());
+			"<column><column-name>specialtagging</column-name><column-value><![CDATA[");
+		sb.append(getSpecialtagging());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>textSearch</column-name><column-value><![CDATA[");
@@ -640,6 +739,34 @@ public class AceItemModelImpl extends BaseModelImpl<AceItem>
 			"<column><column-name>source</column-name><column-value><![CDATA[");
 		sb.append(getSource());
 		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>deeplink</column-name><column-value><![CDATA[");
+		sb.append(getDeeplink());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>controlstatus</column-name><column-value><![CDATA[");
+		sb.append(getControlstatus());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>creator</column-name><column-value><![CDATA[");
+		sb.append(getCreator());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>creationdate</column-name><column-value><![CDATA[");
+		sb.append(getCreationdate());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>moderator</column-name><column-value><![CDATA[");
+		sb.append(getModerator());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>approvaldate</column-name><column-value><![CDATA[");
+		sb.append(getApprovaldate());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>replacesId</column-name><column-value><![CDATA[");
+		sb.append(getReplacesId());
+		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");
 
@@ -649,14 +776,14 @@ public class AceItemModelImpl extends BaseModelImpl<AceItem>
 	private long _aceItemId;
 	private long _companyId;
 	private long _groupId;
-	private long _nasId;
+	private long _wxsharvesterId;
 	private String _name;
 	private String _description;
 	private String _datatype;
 	private String _storedAt;
 	private String _originalStoredAt;
 	private String _storagetype;
-	private String _language;
+	private String _specialtagging;
 	private String _textSearch;
 	private String _keyword;
 	private String _targetresolution;
@@ -671,5 +798,12 @@ public class AceItemModelImpl extends BaseModelImpl<AceItem>
 	private long _rating;
 	private long _importance;
 	private String _source;
+	private String _deeplink;
+	private short _controlstatus;
+	private String _creator;
+	private Date _creationdate;
+	private String _moderator;
+	private Date _approvaldate;
+	private long _replacesId;
 	private transient ExpandoBridge _expandoBridge;
 }

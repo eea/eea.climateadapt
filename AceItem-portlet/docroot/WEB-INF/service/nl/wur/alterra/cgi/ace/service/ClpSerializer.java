@@ -19,8 +19,6 @@ import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.model.BaseModel;
 
 import nl.wur.alterra.cgi.ace.model.AceItemClp;
-import nl.wur.alterra.cgi.ace.model.NASClp;
-import nl.wur.alterra.cgi.ace.model.NASSourceClp;
 import nl.wur.alterra.cgi.ace.model.WxsHarvesterClp;
 
 import java.lang.reflect.Method;
@@ -80,10 +78,10 @@ public class ClpSerializer {
 
 					method2.invoke(newModel, value2);
 
-					Method method3 = newModelClass.getMethod("setNasId",
+					Method method3 = newModelClass.getMethod("setWxsharvesterId",
 							new Class[] { Long.TYPE });
 
-					Long value3 = new Long(oldCplModel.getNasId());
+					Long value3 = new Long(oldCplModel.getWxsharvesterId());
 
 					method3.invoke(newModel, value3);
 
@@ -122,10 +120,10 @@ public class ClpSerializer {
 
 					method8.invoke(newModel, value8);
 
-					Method method9 = newModelClass.getMethod("setLanguage",
+					Method method9 = newModelClass.getMethod("setSpecialtagging",
 							new Class[] { String.class });
 
-					String value9 = oldCplModel.getLanguage();
+					String value9 = oldCplModel.getSpecialtagging();
 
 					method9.invoke(newModel, value9);
 
@@ -227,148 +225,54 @@ public class ClpSerializer {
 
 					method23.invoke(newModel, value23);
 
-					return newModel;
-				}
-				catch (Exception e) {
-					_log.error(e, e);
-				}
-			}
-			finally {
-				Thread.currentThread().setContextClassLoader(contextClassLoader);
-			}
-		}
-
-		if (oldModelClassName.equals(NASClp.class.getName())) {
-			NASClp oldCplModel = (NASClp)oldModel;
-
-			ClassLoader contextClassLoader = Thread.currentThread()
-												   .getContextClassLoader();
-
-			try {
-				Thread.currentThread().setContextClassLoader(_classLoader);
-
-				try {
-					Class<?> newModelClass = Class.forName("nl.wur.alterra.cgi.ace.model.impl.NASImpl",
-							true, _classLoader);
-
-					Object newModel = newModelClass.newInstance();
-
-					Method method0 = newModelClass.getMethod("setNasId",
-							new Class[] { Long.TYPE });
-
-					Long value0 = new Long(oldCplModel.getNasId());
-
-					method0.invoke(newModel, value0);
-
-					Method method1 = newModelClass.getMethod("setName",
+					Method method24 = newModelClass.getMethod("setDeeplink",
 							new Class[] { String.class });
 
-					String value1 = oldCplModel.getName();
+					String value24 = oldCplModel.getDeeplink();
 
-					method1.invoke(newModel, value1);
+					method24.invoke(newModel, value24);
 
-					Method method2 = newModelClass.getMethod("setAdoptedStatus",
+					Method method25 = newModelClass.getMethod("setControlstatus",
+							new Class[] { Short.TYPE });
+
+					Short value25 = new Short(oldCplModel.getControlstatus());
+
+					method25.invoke(newModel, value25);
+
+					Method method26 = newModelClass.getMethod("setCreator",
 							new Class[] { String.class });
 
-					String value2 = oldCplModel.getAdoptedStatus();
+					String value26 = oldCplModel.getCreator();
 
-					method2.invoke(newModel, value2);
+					method26.invoke(newModel, value26);
 
-					Method method3 = newModelClass.getMethod("setAdoptedDescription",
+					Method method27 = newModelClass.getMethod("setCreationdate",
+							new Class[] { Date.class });
+
+					Date value27 = oldCplModel.getCreationdate();
+
+					method27.invoke(newModel, value27);
+
+					Method method28 = newModelClass.getMethod("setModerator",
 							new Class[] { String.class });
 
-					String value3 = oldCplModel.getAdoptedDescription();
+					String value28 = oldCplModel.getModerator();
 
-					method3.invoke(newModel, value3);
+					method28.invoke(newModel, value28);
 
-					Method method4 = newModelClass.getMethod("setCompanyId",
+					Method method29 = newModelClass.getMethod("setApprovaldate",
+							new Class[] { Date.class });
+
+					Date value29 = oldCplModel.getApprovaldate();
+
+					method29.invoke(newModel, value29);
+
+					Method method30 = newModelClass.getMethod("setReplacesId",
 							new Class[] { Long.TYPE });
 
-					Long value4 = new Long(oldCplModel.getCompanyId());
+					Long value30 = new Long(oldCplModel.getReplacesId());
 
-					method4.invoke(newModel, value4);
-
-					Method method5 = newModelClass.getMethod("setGroupId",
-							new Class[] { Long.TYPE });
-
-					Long value5 = new Long(oldCplModel.getGroupId());
-
-					method5.invoke(newModel, value5);
-
-					Method method6 = newModelClass.getMethod("setParentNasId",
-							new Class[] { Long.TYPE });
-
-					Long value6 = new Long(oldCplModel.getParentNasId());
-
-					method6.invoke(newModel, value6);
-
-					Method method7 = newModelClass.getMethod("setIsoCountry",
-							new Class[] { String.class });
-
-					String value7 = oldCplModel.getIsoCountry();
-
-					method7.invoke(newModel, value7);
-
-					return newModel;
-				}
-				catch (Exception e) {
-					_log.error(e, e);
-				}
-			}
-			finally {
-				Thread.currentThread().setContextClassLoader(contextClassLoader);
-			}
-		}
-
-		if (oldModelClassName.equals(NASSourceClp.class.getName())) {
-			NASSourceClp oldCplModel = (NASSourceClp)oldModel;
-
-			ClassLoader contextClassLoader = Thread.currentThread()
-												   .getContextClassLoader();
-
-			try {
-				Thread.currentThread().setContextClassLoader(_classLoader);
-
-				try {
-					Class<?> newModelClass = Class.forName("nl.wur.alterra.cgi.ace.model.impl.NASSourceImpl",
-							true, _classLoader);
-
-					Object newModel = newModelClass.newInstance();
-
-					Method method0 = newModelClass.getMethod("setNassourceid",
-							new Class[] { Long.TYPE });
-
-					Long value0 = new Long(oldCplModel.getNassourceid());
-
-					method0.invoke(newModel, value0);
-
-					Method method1 = newModelClass.getMethod("setNasId",
-							new Class[] { Long.TYPE });
-
-					Long value1 = new Long(oldCplModel.getNasId());
-
-					method1.invoke(newModel, value1);
-
-					Method method2 = newModelClass.getMethod("setName",
-							new Class[] { String.class });
-
-					String value2 = oldCplModel.getName();
-
-					method2.invoke(newModel, value2);
-
-					Method method3 = newModelClass.getMethod("setCompanyId",
-							new Class[] { Long.TYPE });
-
-					Long value3 = new Long(oldCplModel.getCompanyId());
-
-					method3.invoke(newModel, value3);
-
-					Method method4 = newModelClass.getMethod("setGroupId",
-							new Class[] { Long.TYPE });
-
-					Long value4 = new Long(oldCplModel.getGroupId());
-
-					method4.invoke(newModel, value4);
+					method30.invoke(newModel, value30);
 
 					return newModel;
 				}
@@ -545,11 +449,12 @@ public class ClpSerializer {
 
 					newModel.setGroupId(value2);
 
-					Method method3 = oldModelClass.getMethod("getNasId");
+					Method method3 = oldModelClass.getMethod(
+							"getWxsharvesterId");
 
 					Long value3 = (Long)method3.invoke(oldModel, (Object[])null);
 
-					newModel.setNasId(value3);
+					newModel.setWxsharvesterId(value3);
 
 					Method method4 = oldModelClass.getMethod("getName");
 
@@ -586,12 +491,13 @@ public class ClpSerializer {
 
 					newModel.setStoragetype(value8);
 
-					Method method9 = oldModelClass.getMethod("getLanguage");
+					Method method9 = oldModelClass.getMethod(
+							"getSpecialtagging");
 
 					String value9 = (String)method9.invoke(oldModel,
 							(Object[])null);
 
-					newModel.setLanguage(value9);
+					newModel.setSpecialtagging(value9);
 
 					Method method10 = oldModelClass.getMethod("getTextSearch");
 
@@ -695,133 +601,55 @@ public class ClpSerializer {
 
 					newModel.setSource(value23);
 
-					return newModel;
-				}
-				catch (Exception e) {
-					_log.error(e, e);
-				}
-			}
-			finally {
-				Thread.currentThread().setContextClassLoader(contextClassLoader);
-			}
-		}
+					Method method24 = oldModelClass.getMethod("getDeeplink");
 
-		if (oldModelClassName.equals(
-					"nl.wur.alterra.cgi.ace.model.impl.NASImpl")) {
-			ClassLoader contextClassLoader = Thread.currentThread()
-												   .getContextClassLoader();
-
-			try {
-				Thread.currentThread().setContextClassLoader(_classLoader);
-
-				try {
-					NASClp newModel = new NASClp();
-
-					Method method0 = oldModelClass.getMethod("getNasId");
-
-					Long value0 = (Long)method0.invoke(oldModel, (Object[])null);
-
-					newModel.setNasId(value0);
-
-					Method method1 = oldModelClass.getMethod("getName");
-
-					String value1 = (String)method1.invoke(oldModel,
+					String value24 = (String)method24.invoke(oldModel,
 							(Object[])null);
 
-					newModel.setName(value1);
+					newModel.setDeeplink(value24);
 
-					Method method2 = oldModelClass.getMethod("getAdoptedStatus");
+					Method method25 = oldModelClass.getMethod(
+							"getControlstatus");
 
-					String value2 = (String)method2.invoke(oldModel,
+					Short value25 = (Short)method25.invoke(oldModel,
 							(Object[])null);
 
-					newModel.setAdoptedStatus(value2);
+					newModel.setControlstatus(value25);
 
-					Method method3 = oldModelClass.getMethod(
-							"getAdoptedDescription");
+					Method method26 = oldModelClass.getMethod("getCreator");
 
-					String value3 = (String)method3.invoke(oldModel,
+					String value26 = (String)method26.invoke(oldModel,
 							(Object[])null);
 
-					newModel.setAdoptedDescription(value3);
+					newModel.setCreator(value26);
 
-					Method method4 = oldModelClass.getMethod("getCompanyId");
+					Method method27 = oldModelClass.getMethod("getCreationdate");
 
-					Long value4 = (Long)method4.invoke(oldModel, (Object[])null);
-
-					newModel.setCompanyId(value4);
-
-					Method method5 = oldModelClass.getMethod("getGroupId");
-
-					Long value5 = (Long)method5.invoke(oldModel, (Object[])null);
-
-					newModel.setGroupId(value5);
-
-					Method method6 = oldModelClass.getMethod("getParentNasId");
-
-					Long value6 = (Long)method6.invoke(oldModel, (Object[])null);
-
-					newModel.setParentNasId(value6);
-
-					Method method7 = oldModelClass.getMethod("getIsoCountry");
-
-					String value7 = (String)method7.invoke(oldModel,
+					Date value27 = (Date)method27.invoke(oldModel,
 							(Object[])null);
 
-					newModel.setIsoCountry(value7);
+					newModel.setCreationdate(value27);
 
-					return newModel;
-				}
-				catch (Exception e) {
-					_log.error(e, e);
-				}
-			}
-			finally {
-				Thread.currentThread().setContextClassLoader(contextClassLoader);
-			}
-		}
+					Method method28 = oldModelClass.getMethod("getModerator");
 
-		if (oldModelClassName.equals(
-					"nl.wur.alterra.cgi.ace.model.impl.NASSourceImpl")) {
-			ClassLoader contextClassLoader = Thread.currentThread()
-												   .getContextClassLoader();
-
-			try {
-				Thread.currentThread().setContextClassLoader(_classLoader);
-
-				try {
-					NASSourceClp newModel = new NASSourceClp();
-
-					Method method0 = oldModelClass.getMethod("getNassourceid");
-
-					Long value0 = (Long)method0.invoke(oldModel, (Object[])null);
-
-					newModel.setNassourceid(value0);
-
-					Method method1 = oldModelClass.getMethod("getNasId");
-
-					Long value1 = (Long)method1.invoke(oldModel, (Object[])null);
-
-					newModel.setNasId(value1);
-
-					Method method2 = oldModelClass.getMethod("getName");
-
-					String value2 = (String)method2.invoke(oldModel,
+					String value28 = (String)method28.invoke(oldModel,
 							(Object[])null);
 
-					newModel.setName(value2);
+					newModel.setModerator(value28);
 
-					Method method3 = oldModelClass.getMethod("getCompanyId");
+					Method method29 = oldModelClass.getMethod("getApprovaldate");
 
-					Long value3 = (Long)method3.invoke(oldModel, (Object[])null);
+					Date value29 = (Date)method29.invoke(oldModel,
+							(Object[])null);
 
-					newModel.setCompanyId(value3);
+					newModel.setApprovaldate(value29);
 
-					Method method4 = oldModelClass.getMethod("getGroupId");
+					Method method30 = oldModelClass.getMethod("getReplacesId");
 
-					Long value4 = (Long)method4.invoke(oldModel, (Object[])null);
+					Long value30 = (Long)method30.invoke(oldModel,
+							(Object[])null);
 
-					newModel.setGroupId(value4);
+					newModel.setReplacesId(value30);
 
 					return newModel;
 				}

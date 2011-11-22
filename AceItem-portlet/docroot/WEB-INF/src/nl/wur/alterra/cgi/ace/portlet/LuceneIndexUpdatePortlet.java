@@ -63,12 +63,12 @@ public abstract class LuceneIndexUpdatePortlet extends MVCPortlet {
         aceitem.setCompanyId(themeDisplay.getCompanyId());
         aceitem.setGroupId(themeDisplay.getScopeGroupId());
 
-        aceitem.setNasId(ParamUtil.getLong(request, "nasId"));
+        aceitem.setWxsharvesterId(ParamUtil.getLong(request, "wxsharvesterId"));
         aceitem.setName(ParamUtil.getString(request, "name"));
         aceitem.setDescription(ParamUtil.getString(request, "description"));
         
-        String oldlanguage = aceitem.getLanguage();
-        aceitem.setLanguage(ParamUtil.getString(request, "language"));
+        String oldspecialtagging = aceitem.getSpecialtagging();
+        aceitem.setSpecialtagging(ParamUtil.getString(request, "specialtagging"));
 
         aceitem.setDatatype(ParamUtil.getString(request, "datatype"));
         aceitem.setStoredAt(ParamUtil.getString(request, "storedAt"));
@@ -109,10 +109,10 @@ public abstract class LuceneIndexUpdatePortlet extends MVCPortlet {
         aceitem.setClimateimpacts_(choosenclimateimpacts);
         
         String oldtextsearch = ParamUtil.getString(request, "textSearch");
-        if(oldlanguage != null && oldlanguage.trim().length() > 0 &&
-        	oldtextsearch.startsWith(oldlanguage) ) {
+        if(oldspecialtagging != null && oldspecialtagging.trim().length() > 0 &&
+        	oldtextsearch.startsWith(oldspecialtagging) ) {
         	
-        	oldtextsearch = oldtextsearch.substring( oldlanguage.length()+1 );
+        	oldtextsearch = oldtextsearch.substring( oldspecialtagging.length()+1 );
         }
         
         aceitem.setTextSearch(ParamUtil.getString(request, "language") + " " 

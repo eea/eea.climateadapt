@@ -1,6 +1,5 @@
 package nl.wur.alterra.cgi.ace.geonetwork;
 
-import com.liferay.portal.kernel.exception.SystemException;
 import nl.wur.alterra.cgi.ace.model.WxsHarvester;
 import nl.wur.alterra.cgi.ace.portlet.CustomProperties;
 import nl.wur.alterra.cgi.ace.portlet.CustomPropertiesNotInitializedException;
@@ -59,9 +58,9 @@ public class GeoNetworkConnector {
      * Adds an ACE WxsHarvester to GeoNetwork.
      *
      * @param wxsHarvester wxsharvester to publish
-     * @throws com.liferay.portal.kernel.exception.SystemException hmm
+     * @throws com.liferay.portal.kernel.exception.Exception hmm
      */
-    public WxsHarvester addHarvester(WxsHarvester wxsHarvester) throws SystemException {
+    public WxsHarvester addHarvester(WxsHarvester wxsHarvester) throws Exception {
         login();
         String xml = createAddOrUpdateRequest(wxsHarvester, null);
         String response = httpUtils.post(xml, GeoNetworkAddHarvesterURL);
@@ -75,9 +74,9 @@ public class GeoNetworkConnector {
      *
      * @param wxsHarvester
      * @return
-     * @throws SystemException
+     * @throws Exception
      */
-    public WxsHarvester updateHarvester(WxsHarvester wxsHarvester) throws SystemException {
+    public WxsHarvester updateHarvester(WxsHarvester wxsHarvester) throws Exception {
         login();
         String xml = createAddOrUpdateRequest(wxsHarvester, Long.toString(wxsHarvester.getGeonetworkId()));
         String response = httpUtils.post(xml, GeoNetworkUpdateHarvesterURL);
@@ -91,16 +90,16 @@ public class GeoNetworkConnector {
      *
      * @param wxsHarvester
      * @return
-     * @throws SystemException
+     * @throws Exception
      */
-    public void deleteHarvester(WxsHarvester wxsHarvester) throws SystemException {
+    public void deleteHarvester(WxsHarvester wxsHarvester) throws Exception {
         login();
         String xml = createDeleteRequest(wxsHarvester);
         String response = httpUtils.post(xml, GeoNetworkRemoveHarvesterURL);
 
         System.out.println("deleteHarvester GeoNetwork response:\n" + response);
         if(!response.contains("status=\"ok\"")) {
-            throw new SystemException("Failed to delete harvester from GeoNetwork");
+            throw new Exception("Failed to delete harvester from GeoNetwork");
         }
 
         // TODO logout?
@@ -111,9 +110,9 @@ public class GeoNetworkConnector {
      * Activates a harvester in GeoNetwork.
      *
      * @param wxsHarvester
-     * @throws SystemException
+     * @throws Exception
      */
-    public void activateHarvester(WxsHarvester wxsHarvester) throws SystemException {
+    public void activateHarvester(WxsHarvester wxsHarvester) throws Exception {
         login();
         String xml = createActivateRequest(wxsHarvester);
         String response = httpUtils.post(xml, GeoNetworkStartHarvesterURL);
@@ -125,9 +124,9 @@ public class GeoNetworkConnector {
      * De-activates a harvester in GeoNetwork.
      *
      * @param wxsHarvester
-     * @throws SystemException
+     * @throws Exception
      */
-    public String deActivateHarvester(WxsHarvester wxsHarvester) throws SystemException {
+    public String deActivateHarvester(WxsHarvester wxsHarvester) throws Exception {
         login();
         String xml = createDeActivateRequest(wxsHarvester);
         String response = httpUtils.post(xml, GeoNetworkStopHarvesterURL);
@@ -140,9 +139,9 @@ public class GeoNetworkConnector {
      * Runs a harvester in GeoNetwork.
      *
      * @param wxsHarvester
-     * @throws SystemException
+     * @throws Exception
      */
-    public String runHarvester(WxsHarvester wxsHarvester) throws SystemException {
+    public String runHarvester(WxsHarvester wxsHarvester) throws Exception {
         login();
         String xml = createRunRequest(wxsHarvester);
         String response = httpUtils.post(xml, GeoNetworkRunHarvesterURL);
@@ -155,9 +154,9 @@ public class GeoNetworkConnector {
      * Gets a harvester's info from GeoNetwork -- this includes whether it is running right now.
      *
      * @param wxsHarvester
-     * @throws SystemException
+     * @throws Exception
      */
-    public String getHarvester(WxsHarvester wxsHarvester) throws SystemException {
+    public String getHarvester(WxsHarvester wxsHarvester) throws Exception {
         login();
         String xml = createGetRequest(wxsHarvester);
         String response = httpUtils.post(xml, GeoNetworkGetHarvesterURL);
@@ -170,9 +169,9 @@ public class GeoNetworkConnector {
      *
      * @param wxsHarvester
      * @return
-     * @throws SystemException
+     * @throws Exception
      */
-    public String getHarvesterResults(WxsHarvester wxsHarvester) throws SystemException {
+    public String getHarvesterResults(WxsHarvester wxsHarvester) throws Exception {
         login();
         String xml = createHarvesterResultRequest(wxsHarvester);
         String response = httpUtils.post(xml, GeoNetworkXMLSearchURL);
@@ -394,9 +393,9 @@ public class GeoNetworkConnector {
     /**
      * Logs in to GeoNetwork.
      *
-     * @throws SystemException hmm
+     * @throws Exception hmm
      */
-    public void login() throws SystemException {
+    public void login() throws Exception {
         String loginRequest = createLoginRequest();
         String response = httpUtils.post(loginRequest, GeoNetworkLoginURL);
         // TODO verify success

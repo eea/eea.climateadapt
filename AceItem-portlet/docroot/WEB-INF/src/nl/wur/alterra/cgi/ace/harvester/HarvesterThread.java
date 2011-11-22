@@ -1,7 +1,6 @@
 package nl.wur.alterra.cgi.ace.harvester;
 
 import com.liferay.portal.kernel.exception.PortalException;
-import com.liferay.portal.kernel.exception.SystemException;
 import nl.wur.alterra.cgi.ace.model.WxsHarvester;
 
 import java.util.concurrent.ExecutionException;
@@ -33,11 +32,11 @@ public class HarvesterThread implements RunnableFuture {
         try {
             HarvesterUtil.executeWxsHarvester(this.wxsHarvester);
         }
-        catch (SystemException x) {
+        catch (PortalException x) {
             System.out.println("ERROR: " + x.getMessage());
             x.printStackTrace();
         }
-        catch (PortalException x) {
+        catch (Exception x) {
             System.out.println("ERROR: " + x.getMessage());
             x.printStackTrace();
         }

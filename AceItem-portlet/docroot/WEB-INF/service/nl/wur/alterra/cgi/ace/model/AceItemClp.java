@@ -67,12 +67,12 @@ public class AceItemClp extends BaseModelImpl<AceItem> implements AceItem {
 		_groupId = groupId;
 	}
 
-	public long getNasId() {
-		return _nasId;
+	public long getWxsharvesterId() {
+		return _wxsharvesterId;
 	}
 
-	public void setNasId(long nasId) {
-		_nasId = nasId;
+	public void setWxsharvesterId(long wxsharvesterId) {
+		_wxsharvesterId = wxsharvesterId;
 	}
 
 	public String getName() {
@@ -115,12 +115,12 @@ public class AceItemClp extends BaseModelImpl<AceItem> implements AceItem {
 		_storagetype = storagetype;
 	}
 
-	public String getLanguage() {
-		return _language;
+	public String getSpecialtagging() {
+		return _specialtagging;
 	}
 
-	public void setLanguage(String language) {
-		_language = language;
+	public void setSpecialtagging(String specialtagging) {
+		_specialtagging = specialtagging;
 	}
 
 	public String getTextSearch() {
@@ -235,6 +235,62 @@ public class AceItemClp extends BaseModelImpl<AceItem> implements AceItem {
 		_source = source;
 	}
 
+	public String getDeeplink() {
+		return _deeplink;
+	}
+
+	public void setDeeplink(String deeplink) {
+		_deeplink = deeplink;
+	}
+
+	public short getControlstatus() {
+		return _controlstatus;
+	}
+
+	public void setControlstatus(short controlstatus) {
+		_controlstatus = controlstatus;
+	}
+
+	public String getCreator() {
+		return _creator;
+	}
+
+	public void setCreator(String creator) {
+		_creator = creator;
+	}
+
+	public Date getCreationdate() {
+		return _creationdate;
+	}
+
+	public void setCreationdate(Date creationdate) {
+		_creationdate = creationdate;
+	}
+
+	public String getModerator() {
+		return _moderator;
+	}
+
+	public void setModerator(String moderator) {
+		_moderator = moderator;
+	}
+
+	public Date getApprovaldate() {
+		return _approvaldate;
+	}
+
+	public void setApprovaldate(Date approvaldate) {
+		_approvaldate = approvaldate;
+	}
+
+	public long getReplacesId() {
+		return _replacesId;
+	}
+
+	public void setReplacesId(long replacesId) {
+		_replacesId = replacesId;
+	}
+
 	public AceItem toEscapedModel() {
 		if (isEscapedModel()) {
 			return this;
@@ -251,13 +307,13 @@ public class AceItemClp extends BaseModelImpl<AceItem> implements AceItem {
 		clone.setAceItemId(getAceItemId());
 		clone.setCompanyId(getCompanyId());
 		clone.setGroupId(getGroupId());
-		clone.setNasId(getNasId());
+		clone.setWxsharvesterId(getWxsharvesterId());
 		clone.setName(getName());
 		clone.setDescription(getDescription());
 		clone.setDatatype(getDatatype());
 		clone.setStoredAt(getStoredAt());
 		clone.setStoragetype(getStoragetype());
-		clone.setLanguage(getLanguage());
+		clone.setSpecialtagging(getSpecialtagging());
 		clone.setTextSearch(getTextSearch());
 		clone.setKeyword(getKeyword());
 		clone.setTargetresolution(getTargetresolution());
@@ -272,6 +328,13 @@ public class AceItemClp extends BaseModelImpl<AceItem> implements AceItem {
 		clone.setRating(getRating());
 		clone.setImportance(getImportance());
 		clone.setSource(getSource());
+		clone.setDeeplink(getDeeplink());
+		clone.setControlstatus(getControlstatus());
+		clone.setCreator(getCreator());
+		clone.setCreationdate(getCreationdate());
+		clone.setModerator(getModerator());
+		clone.setApprovaldate(getApprovaldate());
+		clone.setReplacesId(getReplacesId());
 
 		return clone;
 	}
@@ -317,7 +380,7 @@ public class AceItemClp extends BaseModelImpl<AceItem> implements AceItem {
 	}
 
 	public String toString() {
-		StringBundler sb = new StringBundler(49);
+		StringBundler sb = new StringBundler(63);
 
 		sb.append("{aceItemId=");
 		sb.append(getAceItemId());
@@ -325,8 +388,8 @@ public class AceItemClp extends BaseModelImpl<AceItem> implements AceItem {
 		sb.append(getCompanyId());
 		sb.append(", groupId=");
 		sb.append(getGroupId());
-		sb.append(", nasId=");
-		sb.append(getNasId());
+		sb.append(", wxsharvesterId=");
+		sb.append(getWxsharvesterId());
 		sb.append(", name=");
 		sb.append(getName());
 		sb.append(", description=");
@@ -337,8 +400,8 @@ public class AceItemClp extends BaseModelImpl<AceItem> implements AceItem {
 		sb.append(getStoredAt());
 		sb.append(", storagetype=");
 		sb.append(getStoragetype());
-		sb.append(", language=");
-		sb.append(getLanguage());
+		sb.append(", specialtagging=");
+		sb.append(getSpecialtagging());
 		sb.append(", textSearch=");
 		sb.append(getTextSearch());
 		sb.append(", keyword=");
@@ -367,13 +430,27 @@ public class AceItemClp extends BaseModelImpl<AceItem> implements AceItem {
 		sb.append(getImportance());
 		sb.append(", source=");
 		sb.append(getSource());
+		sb.append(", deeplink=");
+		sb.append(getDeeplink());
+		sb.append(", controlstatus=");
+		sb.append(getControlstatus());
+		sb.append(", creator=");
+		sb.append(getCreator());
+		sb.append(", creationdate=");
+		sb.append(getCreationdate());
+		sb.append(", moderator=");
+		sb.append(getModerator());
+		sb.append(", approvaldate=");
+		sb.append(getApprovaldate());
+		sb.append(", replacesId=");
+		sb.append(getReplacesId());
 		sb.append("}");
 
 		return sb.toString();
 	}
 
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(76);
+		StringBundler sb = new StringBundler(97);
 
 		sb.append("<model><model-name>");
 		sb.append("nl.wur.alterra.cgi.ace.model.AceItem");
@@ -392,8 +469,8 @@ public class AceItemClp extends BaseModelImpl<AceItem> implements AceItem {
 		sb.append(getGroupId());
 		sb.append("]]></column-value></column>");
 		sb.append(
-			"<column><column-name>nasId</column-name><column-value><![CDATA[");
-		sb.append(getNasId());
+			"<column><column-name>wxsharvesterId</column-name><column-value><![CDATA[");
+		sb.append(getWxsharvesterId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>name</column-name><column-value><![CDATA[");
@@ -416,8 +493,8 @@ public class AceItemClp extends BaseModelImpl<AceItem> implements AceItem {
 		sb.append(getStoragetype());
 		sb.append("]]></column-value></column>");
 		sb.append(
-			"<column><column-name>language</column-name><column-value><![CDATA[");
-		sb.append(getLanguage());
+			"<column><column-name>specialtagging</column-name><column-value><![CDATA[");
+		sb.append(getSpecialtagging());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>textSearch</column-name><column-value><![CDATA[");
@@ -475,6 +552,34 @@ public class AceItemClp extends BaseModelImpl<AceItem> implements AceItem {
 			"<column><column-name>source</column-name><column-value><![CDATA[");
 		sb.append(getSource());
 		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>deeplink</column-name><column-value><![CDATA[");
+		sb.append(getDeeplink());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>controlstatus</column-name><column-value><![CDATA[");
+		sb.append(getControlstatus());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>creator</column-name><column-value><![CDATA[");
+		sb.append(getCreator());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>creationdate</column-name><column-value><![CDATA[");
+		sb.append(getCreationdate());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>moderator</column-name><column-value><![CDATA[");
+		sb.append(getModerator());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>approvaldate</column-name><column-value><![CDATA[");
+		sb.append(getApprovaldate());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>replacesId</column-name><column-value><![CDATA[");
+		sb.append(getReplacesId());
+		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");
 
@@ -484,13 +589,13 @@ public class AceItemClp extends BaseModelImpl<AceItem> implements AceItem {
 	private long _aceItemId;
 	private long _companyId;
 	private long _groupId;
-	private long _nasId;
+	private long _wxsharvesterId;
 	private String _name;
 	private String _description;
 	private String _datatype;
 	private String _storedAt;
 	private String _storagetype;
-	private String _language;
+	private String _specialtagging;
 	private String _textSearch;
 	private String _keyword;
 	private String _targetresolution;
@@ -505,4 +610,11 @@ public class AceItemClp extends BaseModelImpl<AceItem> implements AceItem {
 	private long _rating;
 	private long _importance;
 	private String _source;
+	private String _deeplink;
+	private short _controlstatus;
+	private String _creator;
+	private Date _creationdate;
+	private String _moderator;
+	private Date _approvaldate;
+	private long _replacesId;
 }

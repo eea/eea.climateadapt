@@ -21,8 +21,6 @@ import com.liferay.portal.kernel.messaging.MessageListener;
 
 import nl.wur.alterra.cgi.ace.service.AceItemLocalServiceUtil;
 import nl.wur.alterra.cgi.ace.service.ClpSerializer;
-import nl.wur.alterra.cgi.ace.service.NASLocalServiceUtil;
-import nl.wur.alterra.cgi.ace.service.NASSourceLocalServiceUtil;
 import nl.wur.alterra.cgi.ace.service.WxsHarvesterLocalServiceUtil;
 
 /**
@@ -47,10 +45,6 @@ public class ClpMessageListener implements MessageListener {
 		if (command.equals("undeploy") &&
 				servletContextName.equals(SERVLET_CONTEXT_NAME)) {
 			AceItemLocalServiceUtil.clearService();
-
-			NASLocalServiceUtil.clearService();
-
-			NASSourceLocalServiceUtil.clearService();
 
 			WxsHarvesterLocalServiceUtil.clearService();
 		}
