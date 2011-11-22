@@ -16,6 +16,8 @@ public class AceItemSearchResult {
     private float relevance;
     private long rating;
     private String shortdescription;
+    private short controlstatus;
+    private String deeplink;
 
     public AceItemSearchResult(AceItem aceitem) {
     	 
@@ -30,6 +32,10 @@ public class AceItemSearchResult {
     	setRating( aceitem.getRating() ) ;
     	 
     	setShortdescription( aceitem.getDescription().replaceAll("'","\'") ) ;
+    	 
+    	setControlstatus( aceitem.getControlstatus() ) ;
+    	 
+    	setDeeplink( aceitem.getDeeplink().replaceAll("'","\'") ) ;
     }
     
 	public Long getAceItemId() {
@@ -105,5 +111,23 @@ public class AceItemSearchResult {
         	this.shortdescription = this.shortdescription.substring(0,396).replaceAll("\"", "\"\"") + " ..." ; 
         }
         
+    }
+
+	public Short getControlstatus() {
+		return controlstatus;
+	}
+
+	public void setControlstatus(Short controlstatus)
+	{
+        this.controlstatus = controlstatus;
+    }
+
+	public String getDeeplink() {
+		return deeplink;
+	}
+
+	public void setDeeplink(String deeplink)
+	{
+        this.deeplink = deeplink.replaceAll("\"", "\"\"");
     }
 }

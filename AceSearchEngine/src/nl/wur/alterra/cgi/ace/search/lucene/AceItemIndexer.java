@@ -73,6 +73,7 @@ public class AceItemIndexer {
         String description = aceItem.getDescription();
         Date endDate = aceItem.getEndDate();
         long groupId = aceItem.getGroupId();
+        String controlstatus$ = "" + aceItem.getControlstatus();
         // TODO this is how BookmarkIndexer does it. Why do this like this ?
 		// long groupId = getParentGroupId(entry.getGroupId());
 		// long scopeGroupId = entry.getGroupId();
@@ -138,6 +139,10 @@ public class AceItemIndexer {
             // for sorting
             document.add(new Field(ACEIndexConstant.IndexField.RATING_SORT, rating$, Field.Store.NO,Field.Index.NOT_ANALYZED));
         }
+
+        if(controlstatus$ != null) {
+            document.add(new Field(ACEIndexConstant.IndexField.CONTROLSTATUS, controlstatus$, Field.Store.YES,Field.Index.NOT_ANALYZED));
+       }
 
         if(spatialValues != null) {
             document.add(new Field(ACEIndexConstant.IndexField.SPATIAL_VALUE, spatialValues, Field.Store.YES,Field.Index.NOT_ANALYZED));

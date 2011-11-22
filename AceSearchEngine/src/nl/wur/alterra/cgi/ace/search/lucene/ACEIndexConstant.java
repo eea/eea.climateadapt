@@ -89,6 +89,10 @@ public class ACEIndexConstant {
          */
         public static final String RATING = "rating";
         /**
+         * Controlstatus.
+         */
+        public static final String CONTROLSTATUS = "controlstatus";
+        /**
          * Spatial Value.
          */
         public static final String SPATIAL_VALUE = "spatialvalue";
