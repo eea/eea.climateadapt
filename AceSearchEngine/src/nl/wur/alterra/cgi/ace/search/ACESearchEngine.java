@@ -245,6 +245,7 @@ public class ACESearchEngine {
                 rawQuery = ACEIndexConstant.IndexField.DATATYPE + ":" + aceItemType;
             }
 
+            rawQuery += " AND " + ACEIndexConstant.IndexField.CONTROLSTATUS + ":1 ";
             //
             // handle sectors
             //
@@ -296,8 +297,8 @@ public class ACESearchEngine {
             ACEIndexSearcher searcher = ACEIndexSearcher.getACEIndexSearcher();
             QueryParser queryParser = new QueryParser(ACEIndexConstant.IndexField.ANY, ACEAnalyzer.getAnalyzer());
             Query query = queryParser.parse(rawQuery);
-            // System.out.println("Lucene raw query: " + rawQuery);
-            // System.out.println("Lucene query: " + query.toString());
+            //System.out.println("Lucene raw query: " + rawQuery);
+            //System.out.println("Lucene query: " + query.toString());
             // rewritten query is better for logging/debugging but potentially throws runtime exceptions
             //// System.out.println("Lucene query (rewritten): " + query.rewrite(((IndexSearcher)searcher).getIndexReader()).toString());
             long start = System.currentTimeMillis();
