@@ -27,7 +27,7 @@
 
 		<aui:input type="hidden" name="aceItemId" value='<%= aceitem == null ? "" : aceitem.getAceItemId() %>'/>
 		
-		<b>nasId</b><br />	
+		<b>wxsharvesterId</b><br />	
 		<input name="wxsharvesterId" type="text" size="10" value='<%= aceitem == null ? "0" : aceitem.getWxsharvesterId() %>' ><br /><br />
 
 		<b>name</b><br />	
