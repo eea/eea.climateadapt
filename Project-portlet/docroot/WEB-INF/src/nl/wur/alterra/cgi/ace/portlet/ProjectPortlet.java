@@ -117,7 +117,7 @@ public class ProjectPortlet extends MVCPortlet {
 		}
 		project.setSectors(choosensectors);
 			
-		project.setSpatiallevel(ParamUtil.getString(request, "spatiallevel"));
+		project.setSpatiallevel(ParamUtil.getString(request, "spatiallevel").replace("UK","GB"));
 		project.setAbstracts(ParamUtil.getString(request, "abstracts"));
 		
 		String choosenelements = "";
