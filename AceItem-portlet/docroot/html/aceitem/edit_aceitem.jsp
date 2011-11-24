@@ -71,11 +71,11 @@
 		<b>special tagging</b><br />
 		<input name="specialtagging" type="text" size="65" value='<%= aceitem == null ? "" : aceitem.getSpecialtagging() %>'><br /><br />
 		
-		<b>textsearch</b><br />
-		<textarea name="textSearch" rows=15 cols=100><%= aceitem == null ? "" : aceitem.getTextSearch() %></textarea><br /><br />
-
         <b>keywords</b><br />	
 		<textarea name="keyword" rows=5 cols=100><%= aceitem == null ? "" : aceitem.getKeyword() %></textarea><br /><br />
+
+        <b>Comments</b><br />	
+		<textarea name="comments" rows=10 cols=100><%= aceitem == null ? "" : aceitem.getComments() %></textarea><br /><br />
 
 		<aui:input name="source" />
 
@@ -168,7 +168,7 @@
 		
 		<b>Countries - separate them by ';' - Country search works on Nuts member state codes.</b><br />	
 		<input name="spatialValues" type="text" size="65" value='<%= aceitem == null ? "" : aceitem.getSpatialValues() %>'><br /><br />
-	
+
 	</div>		
 		
 		<!--  a u i :input name="startdate" / >

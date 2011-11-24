@@ -50,6 +50,8 @@
 				<temporal>TIMESTAMP</temporal>
 			</basic>
 			<basic name="replacesId" />
+			<basic name="comments" />
+			<basic name="textwebpage" />
 			<transient name="primaryKey" />
 		</attributes>
 	</mapped-superclass>

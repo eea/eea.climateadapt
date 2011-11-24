@@ -274,6 +274,20 @@ public class ClpSerializer {
 
 					method30.invoke(newModel, value30);
 
+					Method method31 = newModelClass.getMethod("setComments",
+							new Class[] { String.class });
+
+					String value31 = oldCplModel.getComments();
+
+					method31.invoke(newModel, value31);
+
+					Method method32 = newModelClass.getMethod("setTextwebpage",
+							new Class[] { String.class });
+
+					String value32 = oldCplModel.getTextwebpage();
+
+					method32.invoke(newModel, value32);
+
 					return newModel;
 				}
 				catch (Exception e) {
@@ -650,6 +664,20 @@ public class ClpSerializer {
 							(Object[])null);
 
 					newModel.setReplacesId(value30);
+
+					Method method31 = oldModelClass.getMethod("getComments");
+
+					String value31 = (String)method31.invoke(oldModel,
+							(Object[])null);
+
+					newModel.setComments(value31);
+
+					Method method32 = oldModelClass.getMethod("getTextwebpage");
+
+					String value32 = (String)method32.invoke(oldModel,
+							(Object[])null);
+
+					newModel.setTextwebpage(value32);
 
 					return newModel;
 				}

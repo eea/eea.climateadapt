@@ -509,6 +509,36 @@ public interface AceItemModel extends BaseModel<AceItem> {
 	public void setReplacesId(long replacesId);
 
 	/**
+	 * Gets the comments of this ace item.
+	 *
+	 * @return the comments of this ace item
+	 */
+	@AutoEscape
+	public String getComments();
+
+	/**
+	 * Sets the comments of this ace item.
+	 *
+	 * @param comments the comments of this ace item
+	 */
+	public void setComments(String comments);
+
+	/**
+	 * Gets the textwebpage of this ace item.
+	 *
+	 * @return the textwebpage of this ace item
+	 */
+	@AutoEscape
+	public String getTextwebpage();
+
+	/**
+	 * Sets the textwebpage of this ace item.
+	 *
+	 * @param textwebpage the textwebpage of this ace item
+	 */
+	public void setTextwebpage(String textwebpage);
+
+	/**
 	 * Gets a copy of this ace item as an escaped model instance by wrapping it with an {@link com.liferay.portal.kernel.bean.AutoEscapeBeanHandler}.
 	 *
 	 * @return the escaped model instance

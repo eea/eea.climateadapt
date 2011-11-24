@@ -352,6 +352,8 @@ public class AceItemPersistenceImpl extends BasePersistenceImpl<AceItem>
 		aceItemImpl.setModerator(aceItem.getModerator());
 		aceItemImpl.setApprovaldate(aceItem.getApprovaldate());
 		aceItemImpl.setReplacesId(aceItem.getReplacesId());
+		aceItemImpl.setComments(aceItem.getComments());
+		aceItemImpl.setTextwebpage(aceItem.getTextwebpage());
 
 		return aceItemImpl;
 	}

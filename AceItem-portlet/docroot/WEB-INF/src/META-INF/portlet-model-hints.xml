@@ -33,6 +33,8 @@
 		<field name="moderator" type="String" />
 		<field name="approvaldate" type="Date" />
 		<field name="replacesId" type="long" />
+		<field name="comments" type="String" />
+		<field name="textwebpage" type="String" />
 	</model>
 	<model name="nl.wur.alterra.cgi.ace.model.WxsHarvester">
 		<field name="wxsharvesterid" type="long" />

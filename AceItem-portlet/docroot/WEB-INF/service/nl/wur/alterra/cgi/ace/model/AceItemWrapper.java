@@ -284,6 +284,22 @@ public class AceItemWrapper implements AceItem {
 		_aceItem.setReplacesId(replacesId);
 	}
 
+	public java.lang.String getComments() {
+		return _aceItem.getComments();
+	}
+
+	public void setComments(java.lang.String comments) {
+		_aceItem.setComments(comments);
+	}
+
+	public java.lang.String getTextwebpage() {
+		return _aceItem.getTextwebpage();
+	}
+
+	public void setTextwebpage(java.lang.String textwebpage) {
+		_aceItem.setTextwebpage(textwebpage);
+	}
+
 	public nl.wur.alterra.cgi.ace.model.AceItem toEscapedModel() {
 		return _aceItem.toEscapedModel();
 	}

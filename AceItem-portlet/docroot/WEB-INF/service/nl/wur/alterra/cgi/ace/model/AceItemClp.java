@@ -291,6 +291,22 @@ public class AceItemClp extends BaseModelImpl<AceItem> implements AceItem {
 		_replacesId = replacesId;
 	}
 
+	public String getComments() {
+		return _comments;
+	}
+
+	public void setComments(String comments) {
+		_comments = comments;
+	}
+
+	public String getTextwebpage() {
+		return _textwebpage;
+	}
+
+	public void setTextwebpage(String textwebpage) {
+		_textwebpage = textwebpage;
+	}
+
 	public AceItem toEscapedModel() {
 		if (isEscapedModel()) {
 			return this;
@@ -335,6 +351,8 @@ public class AceItemClp extends BaseModelImpl<AceItem> implements AceItem {
 		clone.setModerator(getModerator());
 		clone.setApprovaldate(getApprovaldate());
 		clone.setReplacesId(getReplacesId());
+		clone.setComments(getComments());
+		clone.setTextwebpage(getTextwebpage());
 
 		return clone;
 	}
@@ -380,7 +398,7 @@ public class AceItemClp extends BaseModelImpl<AceItem> implements AceItem {
 	}
 
 	public String toString() {
-		StringBundler sb = new StringBundler(63);
+		StringBundler sb = new StringBundler(67);
 
 		sb.append("{aceItemId=");
 		sb.append(getAceItemId());
@@ -444,13 +462,17 @@ public class AceItemClp extends BaseModelImpl<AceItem> implements AceItem {
 		sb.append(getApprovaldate());
 		sb.append(", replacesId=");
 		sb.append(getReplacesId());
+		sb.append(", comments=");
+		sb.append(getComments());
+		sb.append(", textwebpage=");
+		sb.append(getTextwebpage());
 		sb.append("}");
 
 		return sb.toString();
 	}
 
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(97);
+		StringBundler sb = new StringBundler(103);
 
 		sb.append("<model><model-name>");
 		sb.append("nl.wur.alterra.cgi.ace.model.AceItem");
@@ -580,6 +602,14 @@ public class AceItemClp extends BaseModelImpl<AceItem> implements AceItem {
 			"<column><column-name>replacesId</column-name><column-value><![CDATA[");
 		sb.append(getReplacesId());
 		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>comments</column-name><column-value><![CDATA[");
+		sb.append(getComments());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>textwebpage</column-name><column-value><![CDATA[");
+		sb.append(getTextwebpage());
+		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");
 
@@ -617,4 +647,6 @@ public class AceItemClp extends BaseModelImpl<AceItem> implements AceItem {
 	private String _moderator;
 	private Date _approvaldate;
 	private long _replacesId;
+	private String _comments;
+	private String _textwebpage;
 }

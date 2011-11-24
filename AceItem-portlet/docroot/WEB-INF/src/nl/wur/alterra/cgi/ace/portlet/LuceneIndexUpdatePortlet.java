@@ -48,6 +48,18 @@ public abstract class LuceneIndexUpdatePortlet extends MVCPortlet {
         //System.out.println("Finished re-building Lucene index for single AceItem");
     }
 
+
+	private String coalesce(String aString) {
+		String result = "";
+		
+		if(aString != null) {
+			
+			result = aString.trim();
+		}
+		
+		return result;
+	}
+    
     /**
      * Convenience method to create a AceItem object out of the request.
      *
@@ -66,14 +78,21 @@ public abstract class LuceneIndexUpdatePortlet extends MVCPortlet {
         aceitem.setWxsharvesterId(ParamUtil.getLong(request, "wxsharvesterId"));
         aceitem.setName(ParamUtil.getString(request, "name"));
         aceitem.setDescription(ParamUtil.getString(request, "description"));
-        
-        String oldspecialtagging = aceitem.getSpecialtagging();
+
         aceitem.setSpecialtagging(ParamUtil.getString(request, "specialtagging"));
 
         aceitem.setDatatype(ParamUtil.getString(request, "datatype"));
         aceitem.setStoredAt(ParamUtil.getString(request, "storedAt"));
         aceitem.setStoragetype(ParamUtil.getString(request, "storagetype"));
 
+        
+        aceitem.setKeyword(ParamUtil.getString(request, "keyword"));
+        aceitem.setSpatialLayer(ParamUtil.getString(request, "spatialLayer"));
+        aceitem.setSpatialValues(ParamUtil.getString(request, "spatialValues").replace("UK","GB"));
+
+        aceitem.setSource(ParamUtil.getString(request, "source"));
+        aceitem.setComments(ParamUtil.getString(request, "comments"));
+        
         String choosensectors = "";
         for(AceItemSector aceitemsector : AceItemSector.values() ) {
 
@@ -108,20 +127,29 @@ public abstract class LuceneIndexUpdatePortlet extends MVCPortlet {
         }
         aceitem.setClimateimpacts_(choosenclimateimpacts);
         
-        String oldtextsearch = ParamUtil.getString(request, "textSearch");
-        if(oldspecialtagging != null && oldspecialtagging.trim().length() > 0 &&
-        	oldtextsearch.startsWith(oldspecialtagging) ) {
-        	
-        	oldtextsearch = oldtextsearch.substring( oldspecialtagging.length()+1 );
-        }
-        
-        aceitem.setTextSearch(ParamUtil.getString(request, "specialtagging") + " " 
-        		            + oldtextsearch);
-        aceitem.setKeyword(ParamUtil.getString(request, "keyword"));
-        aceitem.setSpatialLayer(ParamUtil.getString(request, "spatialLayer"));
-        aceitem.setSpatialValues(ParamUtil.getString(request, "spatialValues").replace("UK","GB"));
-        aceitem.setCompanyId(themeDisplay.getCompanyId());
-        aceitem.setGroupId(themeDisplay.getScopeGroupId());
+        aceitem.setTextSearch(aceitem.getSpecialtagging() + " " 
+        					+ aceitem.getName() + " "
+        					+ aceitem.getDescription() + " " 
+        					+ aceitem.getKeyword() + " " 
+        					+ aceitem.getSource() + " " 
+        					+ aceitem.getSpatialLayer() + " " 
+        					+ aceitem.getSpatialValues()+ " " 
+        					+ aceitem.getTextwebpage() );        
+		
+		if( ( coalesce(choosensectors).length() > 0 ) && ( choosensectors.indexOf(";")  ==  choosensectors.lastIndexOf(";") ) ) { // one sector
+				
+			aceitem.setTextSearch( aceitem.getTextSearch() + ' ' + coalesce( choosensectors.substring(0, choosensectors.indexOf(";") ) ) );
+		}	
+		
+		if( ( coalesce(choosenelements).length() > 0 ) && ( choosenelements.indexOf(";")  ==  choosenelements.lastIndexOf(";") ) ) { // one climate impact
+				
+			aceitem.setTextSearch( aceitem.getTextSearch() + ' ' + coalesce( choosenelements.substring(0, choosenelements.indexOf(";") ) ) );
+		}
+		
+		if( ( coalesce(choosenclimateimpacts).length() > 0 ) && ( choosenclimateimpacts.indexOf(";")  ==  choosenclimateimpacts.lastIndexOf(";") ) ) { // one climate impact
+				
+			aceitem.setTextSearch( aceitem.getTextSearch() + ' ' + coalesce( choosenclimateimpacts.substring(0, choosenclimateimpacts.indexOf(";") ) ) );
+		}       
 /*
 		int dateMonth = ParamUtil.getInteger(request, "startDateMonth");
 		int dateDay = ParamUtil.getInteger(request, "startDateDay");
@@ -153,12 +181,6 @@ public abstract class LuceneIndexUpdatePortlet extends MVCPortlet {
               aceitem.setRating( aceitem.getRating() + 100);
         }
 
-        aceitem.setSource(ParamUtil.getString(request, "source"));
-
         return aceitem;
     }
-
-
-
-
 }

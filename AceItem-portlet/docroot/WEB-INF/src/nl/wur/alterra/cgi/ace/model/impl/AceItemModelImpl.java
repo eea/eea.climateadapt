@@ -86,9 +86,11 @@ public class AceItemModelImpl extends BaseModelImpl<AceItem>
 			{ "creationdate", new Integer(Types.TIMESTAMP) },
 			{ "moderator", new Integer(Types.VARCHAR) },
 			{ "approvaldate", new Integer(Types.TIMESTAMP) },
-			{ "replacesId", new Integer(Types.BIGINT) }
+			{ "replacesId", new Integer(Types.BIGINT) },
+			{ "comments", new Integer(Types.VARCHAR) },
+			{ "textwebpage", new Integer(Types.VARCHAR) }
 		};
-	public static final String TABLE_SQL_CREATE = "create table Ace_AceItem (aceItemId LONG not null primary key,companyId LONG,groupId LONG,wxsharvesterId LONG,name VARCHAR(75) null,description VARCHAR(75) null,datatype VARCHAR(75) null,storedAt VARCHAR(75) null,storagetype VARCHAR(75) null,specialtagging VARCHAR(75) null,textSearch VARCHAR(75) null,keyword VARCHAR(75) null,targetresolution VARCHAR(75) null,spatialLayer VARCHAR(75) null,spatialValues VARCHAR(75) null,startDate DATE null,endDate DATE null,publicationDate DATE null,sectors_ VARCHAR(75) null,elements_ VARCHAR(75) null,climateimpacts_ VARCHAR(75) null,rating LONG,importance LONG,source VARCHAR(75) null,deeplink VARCHAR(75) null,controlstatus INTEGER,creator VARCHAR(75) null,creationdate DATE null,moderator VARCHAR(75) null,approvaldate DATE null,replacesId LONG)";
+	public static final String TABLE_SQL_CREATE = "create table Ace_AceItem (aceItemId LONG not null primary key,companyId LONG,groupId LONG,wxsharvesterId LONG,name VARCHAR(75) null,description VARCHAR(75) null,datatype VARCHAR(75) null,storedAt VARCHAR(75) null,storagetype VARCHAR(75) null,specialtagging VARCHAR(75) null,textSearch VARCHAR(75) null,keyword VARCHAR(75) null,targetresolution VARCHAR(75) null,spatialLayer VARCHAR(75) null,spatialValues VARCHAR(75) null,startDate DATE null,endDate DATE null,publicationDate DATE null,sectors_ VARCHAR(75) null,elements_ VARCHAR(75) null,climateimpacts_ VARCHAR(75) null,rating LONG,importance LONG,source VARCHAR(75) null,deeplink VARCHAR(75) null,controlstatus INTEGER,creator VARCHAR(75) null,creationdate DATE null,moderator VARCHAR(75) null,approvaldate DATE null,replacesId LONG,comments VARCHAR(75) null,textwebpage VARCHAR(75) null)";
 	public static final String TABLE_SQL_DROP = "drop table Ace_AceItem";
 	public static final String ORDER_BY_JPQL = " ORDER BY aceItem.name ASC";
 	public static final String ORDER_BY_SQL = " ORDER BY Ace_AceItem.name ASC";
@@ -465,6 +467,32 @@ public class AceItemModelImpl extends BaseModelImpl<AceItem>
 		_replacesId = replacesId;
 	}
 
+	public String getComments() {
+		if (_comments == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _comments;
+		}
+	}
+
+	public void setComments(String comments) {
+		_comments = comments;
+	}
+
+	public String getTextwebpage() {
+		if (_textwebpage == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _textwebpage;
+		}
+	}
+
+	public void setTextwebpage(String textwebpage) {
+		_textwebpage = textwebpage;
+	}
+
 	public AceItem toEscapedModel() {
 		if (isEscapedModel()) {
 			return (AceItem)this;
@@ -522,6 +550,8 @@ public class AceItemModelImpl extends BaseModelImpl<AceItem>
 		clone.setModerator(getModerator());
 		clone.setApprovaldate(getApprovaldate());
 		clone.setReplacesId(getReplacesId());
+		clone.setComments(getComments());
+		clone.setTextwebpage(getTextwebpage());
 
 		return clone;
 	}
@@ -567,7 +597,7 @@ public class AceItemModelImpl extends BaseModelImpl<AceItem>
 	}
 
 	public String toString() {
-		StringBundler sb = new StringBundler(63);
+		StringBundler sb = new StringBundler(67);
 
 		sb.append("{aceItemId=");
 		sb.append(getAceItemId());
@@ -631,13 +661,17 @@ public class AceItemModelImpl extends BaseModelImpl<AceItem>
 		sb.append(getApprovaldate());
 		sb.append(", replacesId=");
 		sb.append(getReplacesId());
+		sb.append(", comments=");
+		sb.append(getComments());
+		sb.append(", textwebpage=");
+		sb.append(getTextwebpage());
 		sb.append("}");
 
 		return sb.toString();
 	}
 
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(97);
+		StringBundler sb = new StringBundler(103);
 
 		sb.append("<model><model-name>");
 		sb.append("nl.wur.alterra.cgi.ace.model.AceItem");
@@ -767,6 +801,14 @@ public class AceItemModelImpl extends BaseModelImpl<AceItem>
 			"<column><column-name>replacesId</column-name><column-value><![CDATA[");
 		sb.append(getReplacesId());
 		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>comments</column-name><column-value><![CDATA[");
+		sb.append(getComments());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>textwebpage</column-name><column-value><![CDATA[");
+		sb.append(getTextwebpage());
+		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");
 
@@ -805,5 +847,7 @@ public class AceItemModelImpl extends BaseModelImpl<AceItem>
 	private String _moderator;
 	private Date _approvaldate;
 	private long _replacesId;
+	private String _comments;
+	private String _textwebpage;
 	private transient ExpandoBridge _expandoBridge;
 }
