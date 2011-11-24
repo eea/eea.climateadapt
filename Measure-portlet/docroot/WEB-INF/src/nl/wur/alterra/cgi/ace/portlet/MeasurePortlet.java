@@ -104,7 +104,8 @@ public class MeasurePortlet extends MVCPortlet {
 		measure.setSucceslimitations(ParamUtil.getString(request, "succeslimitations"));
 		measure.setWebsite(ParamUtil.getString(request, "website"));
 		measure.setCostbenefit(ParamUtil.getString(request, "costbenefit"));	
-		measure.setKeywords(ParamUtil.getString(request, "keywords"));			
+		measure.setKeywords(ParamUtil.getString(request, "keywords"));	
+		measure.setComments(ParamUtil.getString(request, "comments"));			
 		/*		
 		int dateMonth = ParamUtil.getInteger(request, "startdateMonth");
 		int dateDay = ParamUtil.getInteger(request, "startdateDay");
@@ -291,8 +292,6 @@ public class MeasurePortlet extends MVCPortlet {
 		aceitem.setImportance(measure.getImportance());
 
 		aceitem.setSource(measure.getSource());
-
-		aceitem.setComments(measure.getComments());
 		
 		aceitem.setDeeplink(measure.getWebsite());
 		
