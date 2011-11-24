@@ -245,7 +245,9 @@ public class ACESearchEngine {
                 rawQuery = ACEIndexConstant.IndexField.DATATYPE + ":" + aceItemType;
             }
 
-            rawQuery += " AND " + ACEIndexConstant.IndexField.CONTROLSTATUS + ":1 ";
+            rawQuery += " AND ( (" + ACEIndexConstant.IndexField.CONTROLSTATUS + ":1) OR (" 
+            + ACEIndexConstant.IndexField.CONTROLSTATUS + ":2) )";
+
             //
             // handle sectors
             //
