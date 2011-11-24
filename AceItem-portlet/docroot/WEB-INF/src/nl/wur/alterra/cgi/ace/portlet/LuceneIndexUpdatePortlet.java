@@ -115,7 +115,7 @@ public abstract class LuceneIndexUpdatePortlet extends MVCPortlet {
         	oldtextsearch = oldtextsearch.substring( oldspecialtagging.length()+1 );
         }
         
-        aceitem.setTextSearch(ParamUtil.getString(request, "language") + " " 
+        aceitem.setTextSearch(ParamUtil.getString(request, "specialtagging") + " " 
         		            + oldtextsearch);
         aceitem.setKeyword(ParamUtil.getString(request, "keyword"));
         aceitem.setSpatialLayer(ParamUtil.getString(request, "spatialLayer"));
