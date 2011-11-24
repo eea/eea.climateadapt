@@ -39,5 +39,7 @@
 		<field name="moderator" type="String" />
 		<field name="approvaldate" type="Date" />
 		<field name="replacesId" type="long" />
+		<field name="comments" type="String" />
+		<field name="textwebpage" type="String" />
 	</model>
 </model-hints>

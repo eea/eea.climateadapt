@@ -37,6 +37,8 @@ CREATE TABLE ace_measure
   moderator character varying(75),
   approvaldate timestamp without time zone,
   replacesid bigint,
+  comments text,
+  textwebpage text,
   CONSTRAINT ace_measure_pkey PRIMARY KEY (measureid)
 )
 WITH (

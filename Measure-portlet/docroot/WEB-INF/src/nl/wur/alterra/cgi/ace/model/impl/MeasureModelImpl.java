@@ -92,9 +92,11 @@ public class MeasureModelImpl extends BaseModelImpl<Measure>
 			{ "creationdate", new Integer(Types.TIMESTAMP) },
 			{ "moderator", new Integer(Types.VARCHAR) },
 			{ "approvaldate", new Integer(Types.TIMESTAMP) },
-			{ "replacesId", new Integer(Types.BIGINT) }
+			{ "replacesId", new Integer(Types.BIGINT) },
+			{ "comments", new Integer(Types.VARCHAR) },
+			{ "textwebpage", new Integer(Types.VARCHAR) }
 		};
-	public static final String TABLE_SQL_CREATE = "create table Ace_Measure (measureId LONG not null primary key,companyId LONG,groupId LONG,name VARCHAR(75) null,description VARCHAR(75) null,implementationtype VARCHAR(75) null,implementationtime VARCHAR(75) null,lifetime VARCHAR(75) null,spatiallayer VARCHAR(75) null,spatialvalues VARCHAR(75) null,legalaspects VARCHAR(75) null,stakeholderparticipation VARCHAR(75) null,contact VARCHAR(75) null,succeslimitations VARCHAR(75) null,website VARCHAR(75) null,costbenefit VARCHAR(75) null,keywords VARCHAR(75) null,startdate DATE null,enddate DATE null,publicationdate DATE null,specialtagging VARCHAR(75) null,sectors_ VARCHAR(75) null,elements_ VARCHAR(75) null,climateimpacts_ VARCHAR(75) null,mao_type VARCHAR(75) null,source VARCHAR(75) null,rating LONG,importance LONG,lon DOUBLE,lat DOUBLE,satarea VARCHAR(75) null,controlstatus INTEGER,creator VARCHAR(75) null,creationdate DATE null,moderator VARCHAR(75) null,approvaldate DATE null,replacesId LONG)";
+	public static final String TABLE_SQL_CREATE = "create table Ace_Measure (measureId LONG not null primary key,companyId LONG,groupId LONG,name VARCHAR(75) null,description VARCHAR(75) null,implementationtype VARCHAR(75) null,implementationtime VARCHAR(75) null,lifetime VARCHAR(75) null,spatiallayer VARCHAR(75) null,spatialvalues VARCHAR(75) null,legalaspects VARCHAR(75) null,stakeholderparticipation VARCHAR(75) null,contact VARCHAR(75) null,succeslimitations VARCHAR(75) null,website VARCHAR(75) null,costbenefit VARCHAR(75) null,keywords VARCHAR(75) null,startdate DATE null,enddate DATE null,publicationdate DATE null,specialtagging VARCHAR(75) null,sectors_ VARCHAR(75) null,elements_ VARCHAR(75) null,climateimpacts_ VARCHAR(75) null,mao_type VARCHAR(75) null,source VARCHAR(75) null,rating LONG,importance LONG,lon DOUBLE,lat DOUBLE,satarea VARCHAR(75) null,controlstatus INTEGER,creator VARCHAR(75) null,creationdate DATE null,moderator VARCHAR(75) null,approvaldate DATE null,replacesId LONG,comments VARCHAR(75) null,textwebpage VARCHAR(75) null)";
 	public static final String TABLE_SQL_DROP = "drop table Ace_Measure";
 	public static final String ORDER_BY_JPQL = " ORDER BY measure.name ASC";
 	public static final String ORDER_BY_SQL = " ORDER BY Ace_Measure.name ASC";
@@ -536,6 +538,32 @@ public class MeasureModelImpl extends BaseModelImpl<Measure>
 		_replacesId = replacesId;
 	}
 
+	public String getComments() {
+		if (_comments == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _comments;
+		}
+	}
+
+	public void setComments(String comments) {
+		_comments = comments;
+	}
+
+	public String getTextwebpage() {
+		if (_textwebpage == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _textwebpage;
+		}
+	}
+
+	public void setTextwebpage(String textwebpage) {
+		_textwebpage = textwebpage;
+	}
+
 	public Measure toEscapedModel() {
 		if (isEscapedModel()) {
 			return (Measure)this;
@@ -599,6 +627,8 @@ public class MeasureModelImpl extends BaseModelImpl<Measure>
 		clone.setModerator(getModerator());
 		clone.setApprovaldate(getApprovaldate());
 		clone.setReplacesId(getReplacesId());
+		clone.setComments(getComments());
+		clone.setTextwebpage(getTextwebpage());
 
 		return clone;
 	}
@@ -644,7 +674,7 @@ public class MeasureModelImpl extends BaseModelImpl<Measure>
 	}
 
 	public String toString() {
-		StringBundler sb = new StringBundler(75);
+		StringBundler sb = new StringBundler(79);
 
 		sb.append("{measureId=");
 		sb.append(getMeasureId());
@@ -720,13 +750,17 @@ public class MeasureModelImpl extends BaseModelImpl<Measure>
 		sb.append(getApprovaldate());
 		sb.append(", replacesId=");
 		sb.append(getReplacesId());
+		sb.append(", comments=");
+		sb.append(getComments());
+		sb.append(", textwebpage=");
+		sb.append(getTextwebpage());
 		sb.append("}");
 
 		return sb.toString();
 	}
 
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(115);
+		StringBundler sb = new StringBundler(121);
 
 		sb.append("<model><model-name>");
 		sb.append("nl.wur.alterra.cgi.ace.model.Measure");
@@ -880,6 +914,14 @@ public class MeasureModelImpl extends BaseModelImpl<Measure>
 			"<column><column-name>replacesId</column-name><column-value><![CDATA[");
 		sb.append(getReplacesId());
 		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>comments</column-name><column-value><![CDATA[");
+		sb.append(getComments());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>textwebpage</column-name><column-value><![CDATA[");
+		sb.append(getTextwebpage());
+		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");
 
@@ -923,5 +965,7 @@ public class MeasureModelImpl extends BaseModelImpl<Measure>
 	private String _moderator;
 	private Date _approvaldate;
 	private long _replacesId;
+	private String _comments;
+	private String _textwebpage;
 	private transient ExpandoBridge _expandoBridge;
 }

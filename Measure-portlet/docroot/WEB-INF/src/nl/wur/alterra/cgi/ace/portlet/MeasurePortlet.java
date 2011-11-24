@@ -291,6 +291,8 @@ public class MeasurePortlet extends MVCPortlet {
 		aceitem.setImportance(measure.getImportance());
 
 		aceitem.setSource(measure.getSource());
+
+		aceitem.setComments(measure.getComments());
 		
 		aceitem.setDeeplink(measure.getWebsite());
 		
@@ -314,19 +316,20 @@ public class MeasurePortlet extends MVCPortlet {
 			aceitem.setApprovaldate(measure.getApprovaldate());
 		}
 */		
-		aceitem.setTextSearch( coalesce( measure.getSpecialtagging()) + ' ' +
+		aceitem.setTextSearch( measure.getSpecialtagging() + ' ' +
  			   		aceitem.getName() + ' ' +
- 			   		coalesce( measure.getDescription()) + ' ' +
- 			   		coalesce( measure.getContact()) + ' ' +
- 			   		coalesce( measure.getKeywords())+ ' ' +
- 			   		coalesce( measure.getWebsite()) + ' ' +
- 			   		coalesce( measure.getSpatiallayer()) + ' ' +
- 			   		coalesce( measure.getSpatialvalues()) + ' ' +
- 			   		coalesce( measure.getLegalaspects()) + ' ' +
- 			   		coalesce( measure.getSucceslimitations()) + ' ' +
- 			   		coalesce( measure.getCostbenefit()) + ' ' +
- 			   		coalesce( measure.getStakeholderparticipation()) + ' ' +
- 			   		coalesce( measure.getSource())
+ 			   		measure.getDescription() + ' ' +
+ 			   		measure.getContact() + ' ' +
+ 			   		measure.getKeywords()+ ' ' +
+ 			   		measure.getWebsite() + ' ' +
+ 			   		measure.getSpatiallayer() + ' ' +
+ 			   		measure.getSpatialvalues() + ' ' +
+ 			   		measure.getLegalaspects() + ' ' +
+ 			   		measure.getSucceslimitations() + ' ' +
+ 			   		measure.getCostbenefit() + ' ' +
+ 			   		measure.getStakeholderparticipation() + ' ' +
+ 			   		measure.getSource() + ' ' +
+ 			   		measure.getTextwebpage()
  			   	);
 					
 		String sctrs = measure.getSectors_();

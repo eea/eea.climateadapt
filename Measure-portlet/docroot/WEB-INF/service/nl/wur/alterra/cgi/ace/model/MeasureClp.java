@@ -339,6 +339,22 @@ public class MeasureClp extends BaseModelImpl<Measure> implements Measure {
 		_replacesId = replacesId;
 	}
 
+	public String getComments() {
+		return _comments;
+	}
+
+	public void setComments(String comments) {
+		_comments = comments;
+	}
+
+	public String getTextwebpage() {
+		return _textwebpage;
+	}
+
+	public void setTextwebpage(String textwebpage) {
+		_textwebpage = textwebpage;
+	}
+
 	public Measure toEscapedModel() {
 		if (isEscapedModel()) {
 			return this;
@@ -389,6 +405,8 @@ public class MeasureClp extends BaseModelImpl<Measure> implements Measure {
 		clone.setModerator(getModerator());
 		clone.setApprovaldate(getApprovaldate());
 		clone.setReplacesId(getReplacesId());
+		clone.setComments(getComments());
+		clone.setTextwebpage(getTextwebpage());
 
 		return clone;
 	}
@@ -434,7 +452,7 @@ public class MeasureClp extends BaseModelImpl<Measure> implements Measure {
 	}
 
 	public String toString() {
-		StringBundler sb = new StringBundler(75);
+		StringBundler sb = new StringBundler(79);
 
 		sb.append("{measureId=");
 		sb.append(getMeasureId());
@@ -510,13 +528,17 @@ public class MeasureClp extends BaseModelImpl<Measure> implements Measure {
 		sb.append(getApprovaldate());
 		sb.append(", replacesId=");
 		sb.append(getReplacesId());
+		sb.append(", comments=");
+		sb.append(getComments());
+		sb.append(", textwebpage=");
+		sb.append(getTextwebpage());
 		sb.append("}");
 
 		return sb.toString();
 	}
 
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(115);
+		StringBundler sb = new StringBundler(121);
 
 		sb.append("<model><model-name>");
 		sb.append("nl.wur.alterra.cgi.ace.model.Measure");
@@ -670,6 +692,14 @@ public class MeasureClp extends BaseModelImpl<Measure> implements Measure {
 			"<column><column-name>replacesId</column-name><column-value><![CDATA[");
 		sb.append(getReplacesId());
 		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>comments</column-name><column-value><![CDATA[");
+		sb.append(getComments());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>textwebpage</column-name><column-value><![CDATA[");
+		sb.append(getTextwebpage());
+		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");
 
@@ -713,4 +743,6 @@ public class MeasureClp extends BaseModelImpl<Measure> implements Measure {
 	private String _moderator;
 	private Date _approvaldate;
 	private long _replacesId;
+	private String _comments;
+	private String _textwebpage;
 }

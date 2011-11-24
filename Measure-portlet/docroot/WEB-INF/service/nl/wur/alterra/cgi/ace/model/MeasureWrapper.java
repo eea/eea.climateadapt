@@ -333,6 +333,22 @@ public class MeasureWrapper implements Measure {
 		_measure.setReplacesId(replacesId);
 	}
 
+	public java.lang.String getComments() {
+		return _measure.getComments();
+	}
+
+	public void setComments(java.lang.String comments) {
+		_measure.setComments(comments);
+	}
+
+	public java.lang.String getTextwebpage() {
+		return _measure.getTextwebpage();
+	}
+
+	public void setTextwebpage(java.lang.String textwebpage) {
+		_measure.setTextwebpage(textwebpage);
+	}
+
 	public nl.wur.alterra.cgi.ace.model.Measure toEscapedModel() {
 		return _measure.toEscapedModel();
 	}

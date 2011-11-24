@@ -44,5 +44,7 @@
 		<property name="moderator" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="approvaldate" type="org.hibernate.type.TimestampType" />
 		<property name="replacesId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="comments" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="textwebpage" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 	</class>
 </hibernate-mapping>

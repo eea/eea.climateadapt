@@ -598,6 +598,36 @@ public interface MeasureModel extends BaseModel<Measure> {
 	public void setReplacesId(long replacesId);
 
 	/**
+	 * Gets the comments of this measure.
+	 *
+	 * @return the comments of this measure
+	 */
+	@AutoEscape
+	public String getComments();
+
+	/**
+	 * Sets the comments of this measure.
+	 *
+	 * @param comments the comments of this measure
+	 */
+	public void setComments(String comments);
+
+	/**
+	 * Gets the textwebpage of this measure.
+	 *
+	 * @return the textwebpage of this measure
+	 */
+	@AutoEscape
+	public String getTextwebpage();
+
+	/**
+	 * Sets the textwebpage of this measure.
+	 *
+	 * @param textwebpage the textwebpage of this measure
+	 */
+	public void setTextwebpage(String textwebpage);
+
+	/**
 	 * Gets a copy of this measure as an escaped model instance by wrapping it with an {@link com.liferay.portal.kernel.bean.AutoEscapeBeanHandler}.
 	 *
 	 * @return the escaped model instance
