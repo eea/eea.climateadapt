@@ -97,7 +97,7 @@ public class MeasurePortlet extends MVCPortlet {
 		measure.setImplementationtime(ParamUtil.getString(request, "implementationtime"));
 		measure.setLifetime(ParamUtil.getString(request, "lifetime"));
 		measure.setSpatiallayer(ParamUtil.getString(request, "spatiallayer"));
-		measure.setSpatialvalues(ParamUtil.getString(request, "spatialvalues"));		
+		measure.setSpatialvalues(ParamUtil.getString(request, "spatialvalues").replace("UK","GB"));		
 		measure.setLegalaspects(ParamUtil.getString(request, "legalaspects"));
 		measure.setStakeholderparticipation(ParamUtil.getString(request, "stakeholderparticipation"));
 		measure.setContact(ParamUtil.getString(request, "contact"));
@@ -291,6 +291,8 @@ public class MeasurePortlet extends MVCPortlet {
 		aceitem.setImportance(measure.getImportance());
 
 		aceitem.setSource(measure.getSource());
+		
+		aceitem.setDeeplink(measure.getWebsite());
 		
 		aceitem.setSpecialtagging(measure.getSpecialtagging());
 /*		

@@ -108,10 +108,10 @@
 	 	<b>Keywords</b><br />
 	 <% out.print( measure.getKeywords()); %><br /><br />
 	 
-	 <b>Spatial layer</b><br />
+	 <b>Geographic characterisation</b><br />
 	 <% out.print( measure.getSpatiallayer() ); %><br /><br />
 	 
-	 <b>Spatial values</b><br />
+	 <b>Countries</b><br />
 	 <% out.print( measure.getSpatialvalues() ); %><br /><br />
 
 	 </div></td>

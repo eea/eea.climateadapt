@@ -96,9 +96,10 @@
 		<b>special tagging</b><br />	
 		<input name="specialtagging" type="text" size="65" maxlength="75" value="<%= measure == null ? "" : measure.getSpecialtagging() %>"><br /><br />
 		
-		<aui:input name="spatiallayer" />
+		<b>Geographic characterisation</b><br />	
+		<input name="spatiallayer" type="text" size="65" value='<%= measure == null ? "" : measure.getSpatiallayer() %>'><br /><br />
 		
-		<b>spatialvalues - separate them by ';' - Country search works on Nuts member state codes.</b><br />
+		<b>Countries - separate them by ';' - Country search works on Nuts member state codes.</b><br />
 		<input name="spatialvalues" type="text" size="65" value="<%= measure == null ? "" : measure.getSpatialvalues() %>"><br /><br />
 
 	   <b>Sectors</b><br />
