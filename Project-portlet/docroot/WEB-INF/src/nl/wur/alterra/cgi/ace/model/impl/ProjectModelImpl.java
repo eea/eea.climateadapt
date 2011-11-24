@@ -81,9 +81,11 @@ public class ProjectModelImpl extends BaseModelImpl<Project>
 			{ "creationdate", new Integer(Types.TIMESTAMP) },
 			{ "moderator", new Integer(Types.VARCHAR) },
 			{ "approvaldate", new Integer(Types.TIMESTAMP) },
-			{ "replacesId", new Integer(Types.BIGINT) }
+			{ "replacesId", new Integer(Types.BIGINT) },
+			{ "comments", new Integer(Types.VARCHAR) },
+			{ "textwebpage", new Integer(Types.VARCHAR) }
 		};
-	public static final String TABLE_SQL_CREATE = "create table Ace_Project (projectId LONG not null primary key,companyId LONG,groupId LONG,acronym VARCHAR(75) null,title VARCHAR(75) null,startdate DATE null,enddate DATE null,lead VARCHAR(75) null,partners VARCHAR(75) null,funding VARCHAR(75) null,sectors VARCHAR(75) null,spatiallevel VARCHAR(75) null,abstracts VARCHAR(75) null,element VARCHAR(75) null,keywords VARCHAR(75) null,website VARCHAR(75) null,duration VARCHAR(75) null,rating LONG,importance LONG,specialtagging VARCHAR(75) null,controlstatus INTEGER,creator VARCHAR(75) null,creationdate DATE null,moderator VARCHAR(75) null,approvaldate DATE null,replacesId LONG)";
+	public static final String TABLE_SQL_CREATE = "create table Ace_Project (projectId LONG not null primary key,companyId LONG,groupId LONG,acronym VARCHAR(75) null,title VARCHAR(75) null,startdate DATE null,enddate DATE null,lead VARCHAR(75) null,partners VARCHAR(75) null,funding VARCHAR(75) null,sectors VARCHAR(75) null,spatiallevel VARCHAR(75) null,abstracts VARCHAR(75) null,element VARCHAR(75) null,keywords VARCHAR(75) null,website VARCHAR(75) null,duration VARCHAR(75) null,rating LONG,importance LONG,specialtagging VARCHAR(75) null,controlstatus INTEGER,creator VARCHAR(75) null,creationdate DATE null,moderator VARCHAR(75) null,approvaldate DATE null,replacesId LONG,comments VARCHAR(75) null,textwebpage VARCHAR(75) null)";
 	public static final String TABLE_SQL_DROP = "drop table Ace_Project";
 	public static final String ORDER_BY_JPQL = " ORDER BY project.acronym ASC";
 	public static final String ORDER_BY_SQL = " ORDER BY Ace_Project.acronym ASC";
@@ -397,6 +399,32 @@ public class ProjectModelImpl extends BaseModelImpl<Project>
 		_replacesId = replacesId;
 	}
 
+	public String getComments() {
+		if (_comments == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _comments;
+		}
+	}
+
+	public void setComments(String comments) {
+		_comments = comments;
+	}
+
+	public String getTextwebpage() {
+		if (_textwebpage == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _textwebpage;
+		}
+	}
+
+	public void setTextwebpage(String textwebpage) {
+		_textwebpage = textwebpage;
+	}
+
 	public Project toEscapedModel() {
 		if (isEscapedModel()) {
 			return (Project)this;
@@ -449,6 +477,8 @@ public class ProjectModelImpl extends BaseModelImpl<Project>
 		clone.setModerator(getModerator());
 		clone.setApprovaldate(getApprovaldate());
 		clone.setReplacesId(getReplacesId());
+		clone.setComments(getComments());
+		clone.setTextwebpage(getTextwebpage());
 
 		return clone;
 	}
@@ -494,7 +524,7 @@ public class ProjectModelImpl extends BaseModelImpl<Project>
 	}
 
 	public String toString() {
-		StringBundler sb = new StringBundler(53);
+		StringBundler sb = new StringBundler(57);
 
 		sb.append("{projectId=");
 		sb.append(getProjectId());
@@ -548,13 +578,17 @@ public class ProjectModelImpl extends BaseModelImpl<Project>
 		sb.append(getApprovaldate());
 		sb.append(", replacesId=");
 		sb.append(getReplacesId());
+		sb.append(", comments=");
+		sb.append(getComments());
+		sb.append(", textwebpage=");
+		sb.append(getTextwebpage());
 		sb.append("}");
 
 		return sb.toString();
 	}
 
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(82);
+		StringBundler sb = new StringBundler(88);
 
 		sb.append("<model><model-name>");
 		sb.append("nl.wur.alterra.cgi.ace.model.Project");
@@ -664,6 +698,14 @@ public class ProjectModelImpl extends BaseModelImpl<Project>
 			"<column><column-name>replacesId</column-name><column-value><![CDATA[");
 		sb.append(getReplacesId());
 		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>comments</column-name><column-value><![CDATA[");
+		sb.append(getComments());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>textwebpage</column-name><column-value><![CDATA[");
+		sb.append(getTextwebpage());
+		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");
 
@@ -696,5 +738,7 @@ public class ProjectModelImpl extends BaseModelImpl<Project>
 	private String _moderator;
 	private Date _approvaldate;
 	private long _replacesId;
+	private String _comments;
+	private String _textwebpage;
 	private transient ExpandoBridge _expandoBridge;
 }

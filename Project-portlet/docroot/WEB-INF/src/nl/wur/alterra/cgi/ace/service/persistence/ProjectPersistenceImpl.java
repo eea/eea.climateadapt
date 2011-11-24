@@ -321,6 +321,8 @@ public class ProjectPersistenceImpl extends BasePersistenceImpl<Project>
 		projectImpl.setModerator(project.getModerator());
 		projectImpl.setApprovaldate(project.getApprovaldate());
 		projectImpl.setReplacesId(project.getReplacesId());
+		projectImpl.setComments(project.getComments());
+		projectImpl.setTextwebpage(project.getTextwebpage());
 
 		return projectImpl;
 	}

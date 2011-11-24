@@ -244,6 +244,22 @@ public class ProjectWrapper implements Project {
 		_project.setReplacesId(replacesId);
 	}
 
+	public java.lang.String getComments() {
+		return _project.getComments();
+	}
+
+	public void setComments(java.lang.String comments) {
+		_project.setComments(comments);
+	}
+
+	public java.lang.String getTextwebpage() {
+		return _project.getTextwebpage();
+	}
+
+	public void setTextwebpage(java.lang.String textwebpage) {
+		_project.setTextwebpage(textwebpage);
+	}
+
 	public nl.wur.alterra.cgi.ace.model.Project toEscapedModel() {
 		return _project.toEscapedModel();
 	}

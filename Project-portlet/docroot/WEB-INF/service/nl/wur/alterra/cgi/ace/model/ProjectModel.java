@@ -436,6 +436,36 @@ public interface ProjectModel extends BaseModel<Project> {
 	public void setReplacesId(long replacesId);
 
 	/**
+	 * Gets the comments of this project.
+	 *
+	 * @return the comments of this project
+	 */
+	@AutoEscape
+	public String getComments();
+
+	/**
+	 * Sets the comments of this project.
+	 *
+	 * @param comments the comments of this project
+	 */
+	public void setComments(String comments);
+
+	/**
+	 * Gets the textwebpage of this project.
+	 *
+	 * @return the textwebpage of this project
+	 */
+	@AutoEscape
+	public String getTextwebpage();
+
+	/**
+	 * Sets the textwebpage of this project.
+	 *
+	 * @param textwebpage the textwebpage of this project
+	 */
+	public void setTextwebpage(String textwebpage);
+
+	/**
 	 * Gets a copy of this project as an escaped model instance by wrapping it with an {@link com.liferay.portal.kernel.bean.AutoEscapeBeanHandler}.
 	 *
 	 * @return the escaped model instance

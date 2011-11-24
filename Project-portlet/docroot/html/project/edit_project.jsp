@@ -57,6 +57,9 @@
 		<b>keywords</b><br />
 		<textarea name="keywords" rows=5 cols=100><%= project == null ? "" : project.getKeywords() %></textarea><br /><br />
 
+        <b>Comments</b><br />	
+		<textarea name="comments" rows=10 cols=100><%= project == null ? "" : project.getComments() %></textarea><br /><br />
+
 		<input type="checkbox" name="chk_importance" id="chk_importance" value="1" <% if (project != null) { out.print( project.getImportance() == 1 ? "checked" : "") ; } %> />
 		<b>High importance</b><br />
 	 </div>

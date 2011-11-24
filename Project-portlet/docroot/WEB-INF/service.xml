@@ -38,6 +38,8 @@
 		<column name="moderator" type="String" />
 		<column name="approvaldate" type="Date" />
 		<column name="replacesId" type="long" />
+		<column name="comments" type="String" />
+		<column name="textwebpage" type="String" />
 				
 		<!-- Sort order -->
 		<order by="asc">

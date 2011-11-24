@@ -119,6 +119,7 @@ public class ProjectPortlet extends MVCPortlet {
 			
 		project.setSpatiallevel(ParamUtil.getString(request, "spatiallevel").replace("UK","GB"));
 		project.setAbstracts(ParamUtil.getString(request, "abstracts"));
+		project.setComments(ParamUtil.getString(request, "comments"));
 		
 		String choosenelements = "";
 		for(AceItemElement aceitemelement : AceItemElement.values() ) {
@@ -261,16 +262,17 @@ public class ProjectPortlet extends MVCPortlet {
 		
 		aceitem.setApprovaldate(project.getApprovaldate());
 		
-		aceitem.setTextSearch( coalesce( project.getSpecialtagging()) + ' ' +
+		aceitem.setTextSearch( project.getSpecialtagging() + ' ' +
 	               			   aceitem.getName() + ' ' +
-				               coalesce( project.getTitle()) + ' ' +
-				               coalesce( project.getLead()) + ' ' +
-				               coalesce( project.getPartners()) + ' ' +
-				               coalesce( project.getFunding()) + ' ' +
-				               coalesce( project.getSpatiallevel()) + ' ' +
-				               coalesce( project.getAbstracts()) + ' ' +
-				               coalesce( project.getKeywords()) + ' ' +
-				               coalesce( project.getSpatiallevel()) 
+				               project.getTitle() + ' ' +
+				               project.getLead() + ' ' +
+				               project.getPartners() + ' ' +
+				               project.getFunding() + ' ' +
+				               project.getSpatiallevel() + ' ' +
+				               project.getAbstracts() + ' ' +
+				               project.getKeywords() + ' ' +
+				               project.getSpatiallevel() + ' ' +
+				               project.getTextwebpage() 
 				              );
 		
 		String sctrs = project.getSectors();
