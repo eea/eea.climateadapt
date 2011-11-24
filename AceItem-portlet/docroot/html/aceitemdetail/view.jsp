@@ -55,7 +55,7 @@
 	 <b>Resolution</b><br />
 	 <% out.print( aceitem.getTargetresolution()); %><br /><br />
 
-	 <b>Spatial reference</b><br />
+	 <b>Geographic area / scale</b><br />
 	 <% out.print( aceitem.getSpatialLayer() + " " + aceitem.getSpatialValues()); %><br /><br />
 	
 	</div></td>

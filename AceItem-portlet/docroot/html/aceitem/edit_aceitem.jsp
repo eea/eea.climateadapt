@@ -163,10 +163,10 @@
 			</div>							
 		</c:forEach>
        <br />
-		<b>spatialLayer</b><br />	
+		<b>Geographic characterisation</b><br />	
 		<input name="spatialLayer" type="text" size="65" value='<%= aceitem == null ? "" : aceitem.getSpatialLayer() %>'><br /><br />
 		
-		<b>spatialValues</b><br />	
+		<b>Countries - separate them by ';' - Country search works on Nuts member state codes.</b><br />	
 		<input name="spatialValues" type="text" size="65" value='<%= aceitem == null ? "" : aceitem.getSpatialValues() %>'><br /><br />
 	
 	</div>		

@@ -119,7 +119,7 @@ public abstract class LuceneIndexUpdatePortlet extends MVCPortlet {
         		            + oldtextsearch);
         aceitem.setKeyword(ParamUtil.getString(request, "keyword"));
         aceitem.setSpatialLayer(ParamUtil.getString(request, "spatialLayer"));
-        aceitem.setSpatialValues(ParamUtil.getString(request, "spatialValues"));
+        aceitem.setSpatialValues(ParamUtil.getString(request, "spatialValues").replace("UK","GB"));
         aceitem.setCompanyId(themeDisplay.getCompanyId());
         aceitem.setGroupId(themeDisplay.getScopeGroupId());
 /*
