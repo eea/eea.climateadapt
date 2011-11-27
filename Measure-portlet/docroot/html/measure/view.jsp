@@ -90,11 +90,11 @@
 			name="name" orderable="<%= true %>" orderableProperty="name" >
 			<%= nameLink %>
 		</liferay-ui:search-container-column-text>      
-      
-		<liferay-ui:search-container-column-text
-			name="description"
-			value="<%= desc %>"
-		/>
+
+		<liferay-ui:search-container-column-text  
+			name="reviewed" orderable="<%= true %>" orderableProperty="controlstatus" >
+		<%= (measure.getControlstatus()==0 ? "No" : "Yes") %>
+		</liferay-ui:search-container-column-text> 
 
 		<liferay-ui:search-container-column-text
 			name="sectors" 
@@ -110,11 +110,6 @@
 			name="lon" 
 			value="<%= "" + measure.getLon() %>"
 		/>
-
-		<liferay-ui:search-container-column-text
-			name="lat" 
-			value="<%= "" + measure.getLat() %>"
-		/> 
 
 		<liferay-ui:search-container-column-text
 			name="type" orderable="<%= true %>" orderableProperty="type" 

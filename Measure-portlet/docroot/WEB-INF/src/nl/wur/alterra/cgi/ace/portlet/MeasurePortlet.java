@@ -194,10 +194,15 @@ public class MeasurePortlet extends MVCPortlet {
 		ArrayList<String> errors = new ArrayList<String>();
 
 		if (MeasureValidator.validateMeasure(measure, errors)) {
+			
+			// ETC review nov/dec 2011: updated means reviewed
+			measure.setControlstatus( (short) 1 );
+			
 			MeasureLocalServiceUtil.updateMeasure(measure);
 
 			AceItem aceitem = AceItemLocalServiceUtil.getAceItemByStoredAt("ace_measure_id=" + measure.getMeasureId());
-						
+			
+			
 			updateAceItem(measure, aceitem);
 			
 			SessionMessages.add(request, "measure-updated");

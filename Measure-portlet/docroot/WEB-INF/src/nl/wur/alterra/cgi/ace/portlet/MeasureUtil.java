@@ -33,6 +33,10 @@ public class MeasureUtil {
 			// depends on measure.getMao_type()
 			orderByComparator = new MeasureTypeComparator(orderByAsc);
 		}
+	    else if (orderByCol.equals("controlstatus")) {
+			// depends on measure.getControlstatus()
+			orderByComparator = new MeasureControlstatusComparator(orderByAsc);
+		}
 		
 		return orderByComparator;
 	}
