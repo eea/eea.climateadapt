@@ -33,6 +33,10 @@ public class AceItemUtil {
 				// depends on aceitem.getDatatype()
 				orderByComparator = new AceItemTypeComparator(orderByAsc);
 			}
+		    else if (orderByCol.equals("controlstatus")) {
+				// depends on measure.getControlstatus()
+				orderByComparator = new AceItemControlstatusComparator(orderByAsc);
+			}
 			
 			return orderByComparator;
 		}

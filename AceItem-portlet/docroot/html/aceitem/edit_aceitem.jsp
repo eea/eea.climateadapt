@@ -23,16 +23,13 @@
 
 <aui:form action="<%= editAceItemURL %>" method="POST" name="fm">
 	<aui:fieldset>
+
 		<aui:input type="hidden" name="redirect" value="<%= redirect %>" />
 
 		<aui:input type="hidden" name="aceItemId" value='<%= aceitem == null ? "" : aceitem.getAceItemId() %>'/>
-		
-		<b>wxsharvesterId</b><br />	
-		<input name="wxsharvesterId" type="text" size="10" value='<%= aceitem == null ? "0" : aceitem.getWxsharvesterId() %>' ><br /><br />
 
 		<b>name</b><br />	
 		<input name="name" type="text" size="120" value='<%= aceitem == null ? "" : aceitem.getName() %>'><br /><br />
-
 		
 		<liferay-ui:error key="aceitemstoredat-required" message="aceitemstoredat-required" />
 		<b>website</b><br />	
@@ -73,9 +70,6 @@
 		
         <b>keywords</b><br />	
 		<textarea name="keyword" rows=5 cols=100><%= aceitem == null ? "" : aceitem.getKeyword() %></textarea><br /><br />
-
-        <b>Comments</b><br />	
-		<textarea name="comments" rows=10 cols=100><%= aceitem == null ? "" : aceitem.getComments() %></textarea><br /><br />
 
 		<aui:input name="source" />
 
@@ -169,7 +163,7 @@
 		<b>Countries - separate them by ';' - Country search works on Nuts member state codes.</b><br />	
 		<input name="spatialValues" type="text" size="65" value='<%= aceitem == null ? "" : aceitem.getSpatialValues() %>'><br /><br />
 
-	</div>		
+	  </div>
 		
 		<!--  a u i :input name="startdate" / >
 		
@@ -178,9 +172,12 @@
 		< a u i  :input name="publicationdate" / -->
 	</aui:fieldset>
 
+    <b>Comments about this database item <i>[information entered below will not be displayed on the public pages of the clearinghouse]</i></b><br />	
+	<textarea style="border-color: blue; border-style: solid; border-width: thin;" name="comments" rows=10 cols=150><%= aceitem == null ? "" : aceitem.getComments() %></textarea><br /><br />
+
 	<aui:button-row>
 		<aui:button type="submit" />
 
-		<aui:button type="cancel"  onClick="<%= redirect %>" />
+		<aui:button type="cancel"  onClick="history.go(-1);" /> <!-- onClick="< %= redirect % >" -->
 	</aui:button-row>
 </aui:form>

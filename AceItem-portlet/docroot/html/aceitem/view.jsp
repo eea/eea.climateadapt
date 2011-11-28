@@ -90,7 +90,12 @@
 		<liferay-ui:search-container-column-text
 			name="name" orderable="<%= true %>" orderableProperty="name" >
 			<%= nameLink %>
-		</liferay-ui:search-container-column-text>  
+		</liferay-ui:search-container-column-text>        
+
+		<liferay-ui:search-container-column-text  
+			name="reviewed" orderable="<%= true %>" orderableProperty="controlstatus" >
+		<%= (aceitem.getControlstatus()<1 ? "No" : "Yes") %>
+		</liferay-ui:search-container-column-text> 
 
 		<liferay-ui:search-container-column-text
 			name="sectors_"
