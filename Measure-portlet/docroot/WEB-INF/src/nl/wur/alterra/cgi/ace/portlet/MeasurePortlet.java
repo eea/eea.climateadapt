@@ -175,8 +175,12 @@ public class MeasurePortlet extends MVCPortlet {
 			measure.setRating( measure.getRating() + 100);
 		}
 		
-		measure.setLat(Double.parseDouble(ParamUtil.getString(request, "lat")));
-		measure.setLon(Double.parseDouble(ParamUtil.getString(request, "lon")));
+		if(ParamUtil.getString(request, "lat") != null) {
+			measure.setLat(Double.parseDouble(ParamUtil.getString(request, "lat")));
+		}
+		if(ParamUtil.getString(request, "lon") != null) {
+			measure.setLon(Double.parseDouble(ParamUtil.getString(request, "lon")));
+		}
 		measure.setSatarea(ParamUtil.getString(request, "satarea"));
 	}
 
