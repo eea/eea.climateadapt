@@ -93,7 +93,7 @@
 
 		<liferay-ui:search-container-column-text  
 			name="reviewed" orderable="<%= true %>" orderableProperty="controlstatus" >
-		<%= (measure.getControlstatus()==0 ? "No" : "Yes") %>
+		<%= (measure.getControlstatus()<1 ? "No" : "Yes") %>
 		</liferay-ui:search-container-column-text> 
 
 		<liferay-ui:search-container-column-text

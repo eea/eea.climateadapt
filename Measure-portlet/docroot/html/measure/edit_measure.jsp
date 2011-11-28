@@ -53,7 +53,7 @@
 		<b>website</b><br />	
 		<input name="website" type="text" size="120" value="<%= measure == null ? "" : measure.getWebsite() %>"><br /><br />
 
-	<div style="float: left; margin-right: 35px;">		
+	 <div style="float: left; margin-right: 35px;">		
 		<b>description</b><br />
 		<textarea name="description" rows=10 cols=100><%= measure == null ? "" : measure.getDescription() %></textarea>
 		<br /><br />
@@ -80,18 +80,31 @@
 		<b>keywords</b><br />	
 		<textarea name="keywords"  rows=5 cols=100><%= measure == null ? "" : measure.getKeywords() %></textarea>
 		<br /><br />
-
-        <b>Comments</b><br />	
-		<textarea name="comments" rows=10 cols=100><%= measure == null ? "" : measure.getComments() %></textarea><br /><br />
 	
 		<input type="checkbox" name="chk_importance" id="chk_importance" value="1" <% if (measure != null) { out.print( measure.getImportance() == 1 ? "checked" : "") ; } %> />
 		<b>High importance</b><br />
 	 </div>
 	<div style="float: left;">	
 
-		<b>implementationtype</b><br />	
-		<input name="implementationtype" type="text" size="65" value="<%= measure == null ? "" : measure.getImplementationtype() %>"><br /><br />
-		
+		<b>Implementationtype</b><br />	
+		<select name="implementationtype">		
+<% 		String help = "";
+		if (measure==null || measure.getImplementationtype().equalsIgnoreCase("grey"))	{
+			help = "selected" ;
+		} %>
+
+			<option value="grey" <%= help %> >Technical ('grey')</option>
+<%		help="";
+		if (measure!=null && measure.getImplementationtype().equalsIgnoreCase("green"))	{
+			help = "selected" ;
+		} %>			
+			<option value="green" <%= help %> >Nature ('green')</option>
+<%		help="";
+		if (measure!=null && measure.getImplementationtype().equalsIgnoreCase("soft"))	{
+			help = "selected" ;
+		} %>			
+			<option value="soft" <%= help %> >Human behaviour ('soft')</option>			
+		</select>		
 		<aui:input name="implementationtime" />
 		
 		<aui:input name="lifetime" />
@@ -220,8 +233,13 @@
 		<b>satarea</b><br />	
 		<input name="satarea" type="text" size="50" value='<%= measure == null ? "" : measure.getSatarea() %>'><br /><br />
 	  </div>
-	</div>		
+ 
+	 </div>	
+
 	</aui:fieldset>
+
+    <b>Comments about this database item <i>[information entered below will not be displayed on the public pages of the clearinghouse]</i></b><br />	
+	<textarea style="border-color: blue; border-style: solid; border-width: thin;" name="comments" rows=10 cols=150><%= measure == null ? "" : measure.getComments() %></textarea><br /><br />
 
 	<aui:button-row>
 		<aui:button type="submit" />
