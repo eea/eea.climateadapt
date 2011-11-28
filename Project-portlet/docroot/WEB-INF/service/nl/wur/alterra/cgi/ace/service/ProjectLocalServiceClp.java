@@ -442,11 +442,40 @@ public class ProjectLocalServiceClp implements ProjectLocalService {
 		return (java.util.List<nl.wur.alterra.cgi.ace.model.Project>)ClpSerializer.translateOutput(returnObj);
 	}
 
+	public java.util.List<nl.wur.alterra.cgi.ace.model.Project> getProjectsByGroupId(
+		long groupId, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		Object returnObj = null;
+
+		MethodHandler methodHandler = new MethodHandler(_getProjectsByGroupIdMethodKey15,
+				groupId, start, end, orderByComparator);
+
+		try {
+			returnObj = _classLoaderProxy.invoke(methodHandler);
+		}
+		catch (Throwable t) {
+			if (t instanceof com.liferay.portal.kernel.exception.SystemException) {
+				throw (com.liferay.portal.kernel.exception.SystemException)t;
+			}
+
+			if (t instanceof RuntimeException) {
+				throw (RuntimeException)t;
+			}
+			else {
+				throw new RuntimeException(t.getClass().getName() +
+					" is not a valid exception");
+			}
+		}
+
+		return (java.util.List<nl.wur.alterra.cgi.ace.model.Project>)ClpSerializer.translateOutput(returnObj);
+	}
+
 	public int getProjectsCountByGroupId(long groupId)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		Object returnObj = null;
 
-		MethodHandler methodHandler = new MethodHandler(_getProjectsCountByGroupIdMethodKey15,
+		MethodHandler methodHandler = new MethodHandler(_getProjectsCountByGroupIdMethodKey16,
 				groupId);
 
 		try {
@@ -474,7 +503,7 @@ public class ProjectLocalServiceClp implements ProjectLocalService {
 		throws com.liferay.portal.kernel.exception.SystemException {
 		Object returnObj = null;
 
-		MethodHandler methodHandler = new MethodHandler(_getProjectsByControlstatusMethodKey16,
+		MethodHandler methodHandler = new MethodHandler(_getProjectsByControlstatusMethodKey17,
 				controlstatus);
 
 		try {
@@ -502,7 +531,7 @@ public class ProjectLocalServiceClp implements ProjectLocalService {
 		throws com.liferay.portal.kernel.exception.SystemException {
 		Object returnObj = null;
 
-		MethodHandler methodHandler = new MethodHandler(_getProjectsByGroupIdMethodKey17,
+		MethodHandler methodHandler = new MethodHandler(_getProjectsByGroupIdMethodKey18,
 				controlstatus, start, end);
 
 		try {
@@ -530,7 +559,7 @@ public class ProjectLocalServiceClp implements ProjectLocalService {
 		throws com.liferay.portal.kernel.exception.SystemException {
 		Object returnObj = null;
 
-		MethodHandler methodHandler = new MethodHandler(_getProjectsByControlstatusMethodKey18,
+		MethodHandler methodHandler = new MethodHandler(_getProjectsByControlstatusMethodKey19,
 				controlstatus, start, end);
 
 		try {
@@ -557,7 +586,7 @@ public class ProjectLocalServiceClp implements ProjectLocalService {
 		throws com.liferay.portal.kernel.exception.SystemException {
 		Object returnObj = null;
 
-		MethodHandler methodHandler = new MethodHandler(_getProjectsCountByGroupIdMethodKey19,
+		MethodHandler methodHandler = new MethodHandler(_getProjectsCountByGroupIdMethodKey20,
 				controlstatus);
 
 		try {
@@ -584,7 +613,7 @@ public class ProjectLocalServiceClp implements ProjectLocalService {
 		throws com.liferay.portal.kernel.exception.SystemException {
 		Object returnObj = null;
 
-		MethodHandler methodHandler = new MethodHandler(_getProjectsCountByControlstatusMethodKey20,
+		MethodHandler methodHandler = new MethodHandler(_getProjectsCountByControlstatusMethodKey21,
 				controlstatus);
 
 		try {
@@ -648,16 +677,19 @@ public class ProjectLocalServiceClp implements ProjectLocalService {
 			"getProjectsByGroupId", long.class);
 	private MethodKey _getProjectsByGroupIdMethodKey14 = new MethodKey(_classLoaderProxy.getClassName(),
 			"getProjectsByGroupId", long.class, int.class, int.class);
-	private MethodKey _getProjectsCountByGroupIdMethodKey15 = new MethodKey(_classLoaderProxy.getClassName(),
+	private MethodKey _getProjectsByGroupIdMethodKey15 = new MethodKey(_classLoaderProxy.getClassName(),
+			"getProjectsByGroupId", long.class, int.class, int.class,
+			com.liferay.portal.kernel.util.OrderByComparator.class);
+	private MethodKey _getProjectsCountByGroupIdMethodKey16 = new MethodKey(_classLoaderProxy.getClassName(),
 			"getProjectsCountByGroupId", long.class);
-	private MethodKey _getProjectsByControlstatusMethodKey16 = new MethodKey(_classLoaderProxy.getClassName(),
+	private MethodKey _getProjectsByControlstatusMethodKey17 = new MethodKey(_classLoaderProxy.getClassName(),
 			"getProjectsByControlstatus", short.class);
-	private MethodKey _getProjectsByGroupIdMethodKey17 = new MethodKey(_classLoaderProxy.getClassName(),
+	private MethodKey _getProjectsByGroupIdMethodKey18 = new MethodKey(_classLoaderProxy.getClassName(),
 			"getProjectsByGroupId", short.class, int.class, int.class);
-	private MethodKey _getProjectsByControlstatusMethodKey18 = new MethodKey(_classLoaderProxy.getClassName(),
+	private MethodKey _getProjectsByControlstatusMethodKey19 = new MethodKey(_classLoaderProxy.getClassName(),
 			"getProjectsByControlstatus", short.class, int.class, int.class);
-	private MethodKey _getProjectsCountByGroupIdMethodKey19 = new MethodKey(_classLoaderProxy.getClassName(),
+	private MethodKey _getProjectsCountByGroupIdMethodKey20 = new MethodKey(_classLoaderProxy.getClassName(),
 			"getProjectsCountByGroupId", short.class);
-	private MethodKey _getProjectsCountByControlstatusMethodKey20 = new MethodKey(_classLoaderProxy.getClassName(),
+	private MethodKey _getProjectsCountByControlstatusMethodKey21 = new MethodKey(_classLoaderProxy.getClassName(),
 			"getProjectsCountByControlstatus", short.class);
 }

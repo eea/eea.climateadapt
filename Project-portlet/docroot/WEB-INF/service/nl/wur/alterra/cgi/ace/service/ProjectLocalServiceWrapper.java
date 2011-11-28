@@ -235,6 +235,20 @@ public class ProjectLocalServiceWrapper implements ProjectLocalService {
 	}
 
 	/**
+	* Hugo de Groot: add these methods by hand to <portlet>LocalServiceImpl
+	* and rerun ServiceBuilder if auto generation fails
+	*
+	* Gets a list with a range of Projects from a group
+	*/
+	public java.util.List<nl.wur.alterra.cgi.ace.model.Project> getProjectsByGroupId(
+		long groupId, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _projectLocalService.getProjectsByGroupId(groupId, start, end,
+			orderByComparator);
+	}
+
+	/**
 	* Gets the number of Projects in a group
 	*/
 	public int getProjectsCountByGroupId(long groupId)

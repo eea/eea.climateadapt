@@ -37,6 +37,7 @@
 		
 		<liferay-ui:error key="projecttitle-required" message="projecttitle-required" />
 
+	  <div style="float: left; margin-right: 35px;">
 		<b>title</b><br />	
 		<input name="title" type="text" size="120" value="<%= project == null ? "" : project.getTitle() %>"><br /><br />
 
@@ -47,7 +48,6 @@
 		<b>website</b><br />	
 		<input name="website" type="text" size="120" value="<%= project == null ? "" : project.getWebsite() %>"><br /><br />
 
-	<div style="float: left; margin-right: 35px;">
 		<b>abstract</b><br />
 		<textarea name="abstracts" rows=10 cols=100><%= project == null ? "" : project.getAbstracts() %></textarea><br /><br />
 
@@ -57,13 +57,10 @@
 		<b>keywords</b><br />
 		<textarea name="keywords" rows=5 cols=100><%= project == null ? "" : project.getKeywords() %></textarea><br /><br />
 
-        <b>Comments</b><br />	
-		<textarea name="comments" rows=10 cols=100><%= project == null ? "" : project.getComments() %></textarea><br /><br />
-
-		<input type="checkbox" name="chk_importance" id="chk_importance" value="1" <% if (project != null) { out.print( project.getImportance() == 1 ? "checked" : "") ; } %> />
+ 		<input type="checkbox" name="chk_importance" id="chk_importance" value="1" <% if (project != null) { out.print( project.getImportance() == 1 ? "checked" : "") ; } %> />
 		<b>High importance</b><br />
-	 </div>
-	<div style="float: left;">	
+	  </div>
+	  <div style="float: left;">	
 
 	   <b>Sectors</b><br />
        <%-- note : i18n file should always be in sync with AceItemSector enum --%>	
@@ -119,13 +116,18 @@
 		<input name="specialtagging" type="text" size="65" maxlength="75" value="<%= project == null ? "" : project.getSpecialtagging() %>"><br /><br />
 		
 		
-	 </div>
+	  </div>
+
+
 	</aui:fieldset>
+
+    <b>Comments about this database item <i>[information entered below will not be displayed on the public pages of the clearinghouse]</i></b><br />	
+	<textarea style="border-color: blue; border-style: solid; border-width: thin;" name="comments" rows=10 cols=150><%= project == null ? "" : project.getComments() %></textarea><br /><br />
 
 	<aui:button-row>
 		<aui:button type="submit" />
 
-		<aui:button type="cancel"  onClick="<%= redirect %>" />
+		<aui:button type="cancel"  onClick="history.go(-1);" /> <!-- onClick="< %= redirect % >" -->
 	</aui:button-row>
 </aui:form>
 		

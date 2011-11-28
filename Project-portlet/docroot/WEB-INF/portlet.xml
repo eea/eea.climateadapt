@@ -40,6 +40,14 @@
 				<name>rowsPerPage</name>
 				<value>75</value>
 			</preference>
+			<preference>
+				<name>orderByCol</name>
+				<value>acronym</value>
+			</preference>
+			<preference>
+				<name>orderByType</name>
+				<value>asc</value>
+			</preference>
 		</portlet-preferences>
 		<security-role-ref>
 			<role-name>administrator</role-name>

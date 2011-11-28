@@ -23,6 +23,12 @@
 <aui:form action="<%= setProjectPrefUrl %>" method="POST" name="fm" >
 	<aui:input name="rowsPerPage" value='<%= prefs.getValue("rowsPerPage","75") %>' size="45" type="text" />
 
+	<b>Order By Column (projectId, acronym or controlstatus)</b><br />
+	<input name='<%= Constants.ORDERBYCOL %>' type="text" size="45" value='<%= prefs.getValue(Constants.ORDERBYCOL,"acronym") %>' /><br /><br />
+		
+	<b>Order By Type (asc or desc)</b><br />
+	<input name='<%= Constants.ORDERBYTYPE %>' type="text" size="45" value='<%= prefs.getValue(Constants.ORDERBYTYPE,"asc") %>' /><br /><br />
+
 	<aui:button-row>
 		<aui:button type="submit" />
 	</aui:button-row>

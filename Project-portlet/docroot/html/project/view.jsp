@@ -24,6 +24,21 @@
 
 <%
 	String redirect = PortalUtil.getCurrentURL(renderRequest);	
+	String orderByCol = ParamUtil.getString(request, Constants.ORDERBYCOL);
+	String orderByType = ParamUtil.getString(request, Constants.ORDERBYTYPE);
+
+	if (Validator.isNotNull(orderByCol) && Validator.isNotNull(orderByType)) {
+		prefs.setValue(Constants.ORDERBYCOL, orderByCol);
+		prefs.setValue(Constants.ORDERBYTYPE, orderByType);
+
+	} else {
+
+		orderByCol = prefs.getValue(Constants.ORDERBYCOL, "acronym");
+		orderByType = prefs.getValue(Constants.ORDERBYTYPE, "asc");
+
+	}
+
+	OrderByComparator orderByComparator = ProjectUtil.getProjectOrderByComparator(orderByCol, orderByType);
 %>
 
 <aui:button-row>
@@ -35,9 +50,9 @@
 	<aui:button value="add-project" onClick="<%= addProjectURL.toString() %>"/>
 </aui:button-row>
 
-<liferay-ui:search-container delta='<%= GetterUtil.getInteger(prefs.getValue("rowsPerPage", "75")) %>' emptyResultsMessage="project-empty-results-message">
+<liferay-ui:search-container delta='<%= GetterUtil.getInteger(prefs.getValue("rowsPerPage", "75")) %>' emptyResultsMessage="project-empty-results-message" orderByCol="<%= orderByCol %>" orderByType="<%= orderByType %>">
 	<liferay-ui:search-container-results
-		results="<%= ProjectLocalServiceUtil.getProjectsByGroupId(scopeGroupId, searchContainer.getStart(), searchContainer.getEnd()) %>"
+		results="<%= ProjectLocalServiceUtil.getProjectsByGroupId(scopeGroupId, searchContainer.getStart(), searchContainer.getEnd(), orderByComparator) %>"
 		total="<%= ProjectLocalServiceUtil.getProjectsCountByGroupId(scopeGroupId) %>"
 	/>
 
@@ -62,17 +77,25 @@
 	  String elements = project.getElement() ;
 	  elements = elements.replace(";","; ");	
 %>      
-      
 		<liferay-ui:search-container-column-text
-			name="acronym"
-			value="<%= acronymLink %>"
-		/>
+			name="projectId" orderable="<%= true %>" orderableProperty="projectId" >
+			<%= project.getProjectId() %>
+		</liferay-ui:search-container-column-text> 
+		      
+		<liferay-ui:search-container-column-text
+			name="acronym" orderable="<%= true %>" orderableProperty="acronym" >
+			<%= acronymLink %>
+		</liferay-ui:search-container-column-text>
 
 		<liferay-ui:search-container-column-text
 			name="title"
 			property="title"
 		/>
-
+		<liferay-ui:search-container-column-text  
+			name="reviewed" orderable="<%= true %>" orderableProperty="controlstatus" >
+		<%= (project.getControlstatus()<1 ? "No" : "Yes") %>
+		</liferay-ui:search-container-column-text> 
+		
 		<liferay-ui:search-container-column-text
 			name="sectors"
 			value="<%= sectors %>"

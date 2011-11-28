@@ -15,7 +15,9 @@
 
 <%@ page import="com.liferay.portal.kernel.dao.search.ResultRow" %>
 <%@ page import="com.liferay.portal.kernel.util.GetterUtil" %>
+<%@ page import="com.liferay.portal.kernel.util.OrderByComparator" %>
 <%@ page import="com.liferay.portal.kernel.util.ParamUtil" %>
+<%@ page import="com.liferay.portal.kernel.util.Validator" %>
 <%@ page import="com.liferay.portal.kernel.util.WebKeys" %>
 <%@ page import="com.liferay.portal.model.Group"%>
 <%@ page import="com.liferay.portal.security.permission.ActionKeys"%>
@@ -24,6 +26,7 @@
 <%@ page import="nl.wur.alterra.cgi.ace.portlet.Constants"%>
 <%@ page import="nl.wur.alterra.cgi.ace.model.Project"%>
 <%@ page import="nl.wur.alterra.cgi.ace.service.ProjectLocalServiceUtil"%>
+<%@ page import="nl.wur.alterra.cgi.ace.portlet.ProjectUtil"%>
 
 <liferay-theme:defineObjects />
 

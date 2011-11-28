@@ -165,6 +165,10 @@ public class ProjectPortlet extends MVCPortlet {
 		ArrayList<String> errors = new ArrayList<String>();
 
 		if (ProjectValidator.validateProject(project, errors)) {
+			
+			// ETC review nov/dec 2011: updated means reviewed
+			project.setControlstatus( (short) 1 );
+			
 			ProjectLocalServiceUtil.updateProject(project);
 			
 			AceItem aceitem = AceItemLocalServiceUtil.getAceItemByStoredAt("ace_project_id=" + project.getProjectId());
@@ -298,7 +302,15 @@ public class ProjectPortlet extends MVCPortlet {
 
 		String rowsPerPage = ParamUtil.getString(request, "rowsPerPage");
 
+		String orderByCol = ParamUtil.getString(request, Constants.ORDERBYCOL);
+
 		PortletPreferences prefs = request.getPreferences();
+
+		prefs.setValue(Constants.ORDERBYCOL, orderByCol);
+
+		String orderByType = ParamUtil.getString(request, Constants.ORDERBYTYPE);
+
+		prefs.setValue(Constants.ORDERBYTYPE, orderByType);
 
 		prefs.setValue("rowsPerPage", rowsPerPage);
 

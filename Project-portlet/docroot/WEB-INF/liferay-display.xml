@@ -2,9 +2,6 @@
 <!DOCTYPE display PUBLIC "-//Liferay//DTD Display 6.0.0//EN" "http://www.liferay.com/dtd/liferay-display_6_0_0.dtd">
 
 <display>
-	<category name="category.sample">
-		
-	</category>
 	<category name="Ace">
 		<portlet id="projectportlet"></portlet>
 		<portlet id="projectdetailportlet"></portlet>
