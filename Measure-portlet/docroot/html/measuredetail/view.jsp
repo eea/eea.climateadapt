@@ -25,6 +25,7 @@
 	String url = null;
 	String type = "Adaptation option";
 	String websitelabel = "Website";
+	String implementationtype = "";
 
 	String redirect = PortalUtil.getCurrentURL(renderRequest);
 	
@@ -55,6 +56,16 @@
 		
 		if( measure.getMao_type().equalsIgnoreCase("A")) {
 			type = "Case study" ;
+		}
+		
+		if (measure.getImplementationtype().equalsIgnoreCase("grey"))	{
+			implementationtype = "Technical ('grey')" ;
+		}
+		else if (measure.getImplementationtype().equalsIgnoreCase("green"))	{
+			implementationtype = "Ecological ('green')" ;
+		}
+		else if (measure.getImplementationtype().equalsIgnoreCase("soft"))	{
+			implementationtype = "Behavioural / policy ('soft')" ;
 		}
 	}
 	
@@ -118,7 +129,7 @@
 	<td width="50%" valign="top"><div>		 
 	 
 	 <b>Implementationtype</b><br />
-	 <% out.print( measure.getImplementationtype() ); %><br /><br />
+	 <% out.print( implementationtype ); %><br /><br />
 	 
 	 <b>Implementationtime</b><br />
 	 <% out.print( measure.getImplementationtime() ); %><br /><br />

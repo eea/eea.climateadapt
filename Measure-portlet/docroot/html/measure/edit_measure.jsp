@@ -87,9 +87,10 @@
 	<div style="float: left;">	
 
 		<b>Implementationtype</b><br />	
-		<select name="implementationtype">		
+		<select name="implementationtype">	
+		<option value="" >Unknown</option>	
 <% 		String help = "";
-		if (measure==null || measure.getImplementationtype().equalsIgnoreCase("grey"))	{
+		if (measure!=null && measure.getImplementationtype().equalsIgnoreCase("grey"))	{
 			help = "selected" ;
 		} %>
 
@@ -98,12 +99,12 @@
 		if (measure!=null && measure.getImplementationtype().equalsIgnoreCase("green"))	{
 			help = "selected" ;
 		} %>			
-			<option value="green" <%= help %> >Nature ('green')</option>
+			<option value="green" <%= help %> >Ecological ('green')</option>
 <%		help="";
 		if (measure!=null && measure.getImplementationtype().equalsIgnoreCase("soft"))	{
 			help = "selected" ;
 		} %>			
-			<option value="soft" <%= help %> >Human behaviour ('soft')</option>			
+			<option value="soft" <%= help %> >Behavioural / policy ('soft')</option>			
 		</select>		
 		<aui:input name="implementationtime" />
 		
