@@ -37,11 +37,6 @@
 %>
 
 <aui:button-row>
-	<portlet:actionURL name="synchronizeIndex" var="rebuildIndexURL"/>
-	<aui:button value="rebuild-index" onClick="<%= rebuildIndexURL.toString() %>"/>
-</aui:button-row>
-
-<aui:button-row>
 	<portlet:renderURL var="addAceItemURL">
 		<portlet:param name="jspPage" value="/html/aceitem/edit_aceitem.jsp" />
 		<portlet:param name="redirect" value="<%= redirect %>" />
@@ -129,3 +124,8 @@
 
 	<liferay-ui:search-iterator />
 </liferay-ui:search-container>
+
+<aui:button-row>
+	<portlet:actionURL name="synchronizeIndex" var="rebuildIndexURL"/>
+	<aui:button value="rebuild-index" onClick="<%= rebuildIndexURL.toString() %>"/>
+</aui:button-row>
