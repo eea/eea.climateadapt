@@ -65,6 +65,7 @@ public class FilterAceItemPortlet extends MVCPortlet {
 		prefs.setValue(Constants.FUZZINESS, ParamUtil.getString(request, Constants.FUZZINESS) );
 
 		prefs.store();
+		prefs.setValues(SearchRequestParams.FREETEXT_MODE, new String[] {"2"} ); // always search all of the words
 		prefs.setValues(SearchRequestParams.DATAINFO_TYPE, datainfo_type);
 		prefs.setValues(SearchRequestParams.ANY, anyOfThese);
 		prefs.setValues(SearchRequestParams.ACEITEM_TYPE, aceItemTypes);

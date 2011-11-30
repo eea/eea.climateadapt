@@ -42,7 +42,7 @@
 			</preference>
 			<preference>
 				<name>datainfo_type</name>
-				<value>1</value>
+				<value>2</value>
 			</preference>
 		</portlet-preferences>
 		<security-role-ref>
