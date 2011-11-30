@@ -40,23 +40,33 @@
 		<b>Datatype</b><br />
 	    <select name="datatype">	
 		<%-- note : i18n file should always be in sync with AceItemElement enum --%>
+		<c:set var="skiptypes" value="RESEARCHPROJECT_MEASURE_ACTION" />
 		<c:forEach var="adaptationType" items="<%= nl.wur.alterra.cgi.ace.model.constants.AceItemType.values() %>" >
 			<div class="check">
 				<c:set var="adaptationTypeMustBeChecked" value="false" />
+				<c:set var="showtype" value="true" />
 				<c:set var="aceItemType" value='<%= aceitem == null ? "" : aceitem.getDatatype() %>' />
 				<c:set var="adaptationTypeMustBeChecked" value="false" />
 				<c:if test="${fn:indexOf(aceItemType, adaptationType)>=0}">
 					<c:set var="adaptationTypeMustBeChecked" value="true" />
 				</c:if>	
+				<c:if test="${fn:indexOf(skiptypes, adaptationType)>=0}">
+					<c:set var="showtype" value="false" />
+				</c:if>
 				<c:choose>
-					<c:when test="${adaptationTypeMustBeChecked}">
-						<option value="${adaptationType}" selected="selected" >
+					<c:when test="${showtype}">
+					<c:choose>
+						<c:when test="${adaptationTypeMustBeChecked}">
+							<option value="${adaptationType}" selected="selected" >
+							<liferay-ui:message key="acesearch-datainfotype-lbl-${adaptationType}" /></option>
+						</c:when>
+						<c:otherwise>
+							<option value="${adaptationType}">
+							<liferay-ui:message key="acesearch-datainfotype-lbl-${adaptationType}" /></option>
+						</c:otherwise>
+					</c:choose>
 					</c:when>
-					<c:otherwise>
-						<option value="${adaptationType}">
-					</c:otherwise>
 				</c:choose>
-				<liferay-ui:message key="acesearch-datainfotype-lbl-${adaptationType}" /></option>
 			</div>							
 		</c:forEach>
 		</select>
@@ -79,7 +89,7 @@
 	 </div>
 	<div style="float: left;">			
 		<br><b>storagetype</b><br />
-	    <select name="storagetype">		
+	    <select name="storagetype" disabled>		
 <% 		String help = "";
 		if (aceitem==null || aceitem.getStoragetype().equalsIgnoreCase("URL"))	{
 			help = "selected" ;
@@ -175,6 +185,11 @@
     <b>Comments about this database item <i>[information entered below will not be displayed on the public pages of the clearinghouse]</i></b><br />	
 	<textarea style="border-color: blue; border-style: solid; border-width: thin;" name="comments" rows=10 cols=150><%= aceitem == null ? "" : aceitem.getComments() %></textarea><br /><br />
 
+ 	<b>Before edited by: <% if (aceitem != null) { out.print( aceitem.getModerator() ) ; } %> </b>	
+	<br /><br />
+ 	<input type="checkbox" name="chk_controlstatus" id="chk_controlstatus" value="1" <% if (aceitem != null) { out.print( aceitem.getControlstatus() == 1 ? "checked" : "") ; } %> />
+	<b>Reviewed</b><br />
+	
 	<aui:button-row>
 		<aui:button type="submit" />
 

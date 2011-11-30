@@ -2,6 +2,8 @@ package nl.wur.alterra.cgi.ace.portlet;
 
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.WebKeys;
+import com.liferay.portal.model.User;
+import com.liferay.portal.service.UserServiceUtil;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.util.bridges.mvc.MVCPortlet;
 import nl.wur.alterra.cgi.ace.model.AceItem;
@@ -69,9 +71,18 @@ public abstract class LuceneIndexUpdatePortlet extends MVCPortlet {
      * @param aceitem
      * @return
      */
-    protected AceItem aceitemFromRequest(PortletRequest request, AceItem aceitem) {
+    protected AceItem aceitemFromRequest(PortletRequest request, AceItem aceitem) throws Exception {
         ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(WebKeys.THEME_DISPLAY);
 
+        if(request.getRemoteUser() != null) {
+			User user = UserServiceUtil.getUserById( Long.parseLong(request.getRemoteUser()));
+			String moderator = aceitem.getModerator();
+			if(moderator.indexOf(user.getScreenName())==-1) {
+				
+				aceitem.setModerator( moderator + (moderator.length()==0 ? "" : ", ") + user.getScreenName());
+			}
+		}
+		
         aceitem.setCompanyId(themeDisplay.getCompanyId());
         aceitem.setGroupId(themeDisplay.getScopeGroupId());
 

@@ -56,9 +56,6 @@ public class AceItemPortlet extends LuceneIndexUpdatePortlet {
 		List<String> errors = new ArrayList<String>();
 		if (AceItemValidator.validateAceItem(aceitem, errors)) {
 			
-			// ETC review nov/dec 2011: updated means reviewed
-			aceitem.setControlstatus( (short) 1 );
-			
 			AceItemLocalServiceUtil.updateAceItem(aceitem);
 			SessionMessages.add(request, "aceitem-updated");
             synchronizeIndexSingleAceItem(aceitem);

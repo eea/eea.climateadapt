@@ -18,13 +18,16 @@ public enum AceItemCountry {
     FR, /* France */
     GR, /* Greece */
     HU, /* Hungary */
+    IS, /* Iceland */
     IE, /* Ireland */
     IT, /* Italy */
     LV, /* Latvia */
+    LI, /* Liechtenstein */
     LT, /* Lithuania */
     LU, /* Luxembourg */
     MT, /* Malta */
     NL, /* Netherlands */
+    NO, /* Norway */
     PL, /* Poland */
     PT, /* Portugal */
     RO, /* Romania */
@@ -32,5 +35,7 @@ public enum AceItemCountry {
     SI, /* Slovenia */
     ES, /* Spain */
     SE, /* Sweden */
-    GB  /* United Kingdom */
+    CH, /* Switzerland */
+    TR, /* Turkey */
+    GB /* United Kingdom */
 }
