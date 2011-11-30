@@ -11,7 +11,7 @@ CREATE TABLE ace_project
   partners character varying(3800),
   funding character varying(75),
   sectors character varying(255),
-  spatiallevel character varying(1024),
+  spatiallayer character varying(1024),
   abstracts text,
   element character varying(255),
   keywords character varying(2048),
@@ -28,6 +28,9 @@ CREATE TABLE ace_project
   replacesid bigint,
   comments text,
   textwebpage text,
+  spatialvalues character varying(75),
+  source character varying(75),
+  climateimpacts character varying(255),
   CONSTRAINT ace_project_pkey PRIMARY KEY (projectid)
 )
 WITH (
