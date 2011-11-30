@@ -13,7 +13,7 @@
 		<field name="partners" type="String" />
 		<field name="funding" type="String" />
 		<field name="sectors" type="String" />
-		<field name="spatiallevel" type="String" />
+		<field name="spatiallayer" type="String" />
 		<field name="abstracts" type="String" />
 		<field name="element" type="String" />
 		<field name="keywords" type="String" />
@@ -30,5 +30,8 @@
 		<field name="replacesId" type="long" />
 		<field name="comments" type="String" />
 		<field name="textwebpage" type="String" />
+		<field name="spatialvalues" type="String" />
+		<field name="source" type="String" />
+		<field name="climateimpacts" type="String" />
 	</model>
 </model-hints>

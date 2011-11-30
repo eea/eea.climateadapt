@@ -24,7 +24,7 @@
 			<basic name="partners" />
 			<basic name="funding" />
 			<basic name="sectors" />
-			<basic name="spatiallevel" />
+			<basic name="spatiallayer" />
 			<basic name="abstracts" />
 			<basic name="element" />
 			<basic name="keywords" />
@@ -45,6 +45,9 @@
 			<basic name="replacesId" />
 			<basic name="comments" />
 			<basic name="textwebpage" />
+			<basic name="spatialvalues" />
+			<basic name="source" />
+			<basic name="climateimpacts" />
 			<transient name="primaryKey" />
 		</attributes>
 	</mapped-superclass>

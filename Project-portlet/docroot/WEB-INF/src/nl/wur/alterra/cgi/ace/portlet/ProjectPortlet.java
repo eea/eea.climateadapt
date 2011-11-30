@@ -7,6 +7,8 @@ import com.liferay.portal.kernel.servlet.SessionMessages;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.util.WebKeys;
+import com.liferay.portal.model.User;
+import com.liferay.portal.service.UserServiceUtil;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.util.bridges.mvc.MVCPortlet;
@@ -20,6 +22,7 @@ import javax.portlet.PortletRequest;
 
 import nl.wur.alterra.cgi.ace.model.AceItem;
 import nl.wur.alterra.cgi.ace.model.Project;
+import nl.wur.alterra.cgi.ace.model.constants.AceItemClimateImpact;
 import nl.wur.alterra.cgi.ace.model.constants.AceItemElement;
 import nl.wur.alterra.cgi.ace.model.constants.AceItemSector;
 import nl.wur.alterra.cgi.ace.model.constants.AceItemType;
@@ -82,9 +85,18 @@ public class ProjectPortlet extends MVCPortlet {
 	 * by the Add / Edit methods.
 	 *
 	 */
-	private void projectFromRequest(PortletRequest request, Project project) {
+	private void projectFromRequest(PortletRequest request, Project project) throws Exception {
 		ThemeDisplay themeDisplay =
 			(ThemeDisplay)request.getAttribute(WebKeys.THEME_DISPLAY);
+		
+		if(request.getRemoteUser() != null) {
+			User user = UserServiceUtil.getUserById( Long.parseLong(request.getRemoteUser()));
+			String moderator = project.getModerator();
+			if(moderator.indexOf(user.getScreenName())==-1) {
+				
+				project.setModerator( moderator + (moderator.length()==0 ? "" : ", ") + user.getScreenName());
+			}
+		}
 		
 		project.setAcronym(ParamUtil.getString(request, "acronym"));
 		project.setTitle(ParamUtil.getString(request, "title"));
@@ -116,8 +128,9 @@ public class ProjectPortlet extends MVCPortlet {
 			}
 		}
 		project.setSectors(choosensectors);
-			
-		project.setSpatiallevel(ParamUtil.getString(request, "spatiallevel").replace("UK","GB"));
+
+		project.setSpatiallayer(ParamUtil.getString(request, "spatiallayer"));
+		project.setSpatialvalues(ParamUtil.getString(request, "spatialvalues").replace("UK","GB"));
 		project.setAbstracts(ParamUtil.getString(request, "abstracts"));
 		project.setComments(ParamUtil.getString(request, "comments"));
 		
@@ -132,10 +145,22 @@ public class ProjectPortlet extends MVCPortlet {
 		}		
 		project.setElement(choosenelements);
 		
+		String choosenclimateimpacts = "";
+		for(AceItemClimateImpact aceitemclimateimpact : AceItemClimateImpact.values() ) {
+			if( ParamUtil.getString(request, "chk_climateimpacts_" + aceitemclimateimpact) != null )  {
+				String e =  ParamUtil.getString(request, "chk_climateimpacts_" + aceitemclimateimpact);
+				if(e.equalsIgnoreCase(aceitemclimateimpact.toString())) {
+					choosenclimateimpacts +=  aceitemclimateimpact.toString() + ";";
+				}
+			}
+		}		
+		project.setClimateimpacts(choosenclimateimpacts);
+		
 		project.setKeywords(ParamUtil.getString(request, "keywords"));
 		project.setWebsite(ParamUtil.getString(request, "website"));	
 		project.setDuration(ParamUtil.getString(request, "duration"));
 		project.setSpecialtagging(ParamUtil.getString(request, "specialtagging"));
+		project.setSource(ParamUtil.getString(request, "source"));
 		
 		String importance = ParamUtil.getString(request, "chk_importance");
 		if(project.getImportance() == 1) {
@@ -146,6 +171,19 @@ public class ProjectPortlet extends MVCPortlet {
 		if( importance != null && importance.equalsIgnoreCase("1")) {
 			project.setImportance(project.getImportance()+1);
 			project.setRating( project.getRating() + 100);
+		}
+		
+		String approved = ParamUtil.getString(request, "chk_controlstatus");
+		short s_int = 1;
+		if(project.getControlstatus() > 0) {
+			s_int = project.getControlstatus() ;
+			s_int--; 
+			project.setControlstatus( s_int );
+
+		}
+		if( approved != null && approved.equalsIgnoreCase("1")) {
+			s_int++;
+			project.setControlstatus( s_int );
 		}
 		
 		project.setCompanyId(themeDisplay.getCompanyId());
@@ -165,9 +203,6 @@ public class ProjectPortlet extends MVCPortlet {
 		ArrayList<String> errors = new ArrayList<String>();
 
 		if (ProjectValidator.validateProject(project, errors)) {
-			
-			// ETC review nov/dec 2011: updated means reviewed
-			project.setControlstatus( (short) 1 );
 			
 			ProjectLocalServiceUtil.updateProject(project);
 			
@@ -242,11 +277,15 @@ public class ProjectPortlet extends MVCPortlet {
 		
 		aceitem.setKeyword(project.getKeywords());
 		
-		aceitem.setSpatialLayer(project.getSpatiallevel());
+		aceitem.setSpatialLayer(project.getSpatiallayer());
+		
+		aceitem.setSpatialValues(project.getSpatialvalues());
 		
 		aceitem.setSectors_(project.getSectors());
 		
 		aceitem.setElements_(project.getElement());
+		
+		aceitem.setClimateimpacts_(project.getClimateimpacts());
 		
 		aceitem.setRating(project.getRating());
 		
@@ -272,10 +311,12 @@ public class ProjectPortlet extends MVCPortlet {
 				               project.getLead() + ' ' +
 				               project.getPartners() + ' ' +
 				               project.getFunding() + ' ' +
-				               project.getSpatiallevel() + ' ' +
+			 			   	   project.getSpatiallayer().replace("_" , "") + ' ' +
+			 			   	   project.getSpatialvalues() + ' ' +
 				               project.getAbstracts() + ' ' +
 				               project.getKeywords() + ' ' +
-				               project.getSpatiallevel() + ' ' +
+				               project.getSource() + ' ' +
+				               project.getSpatialvalues() + ' ' +
 				               project.getTextwebpage() 
 				              );
 		

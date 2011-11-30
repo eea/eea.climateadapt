@@ -18,7 +18,7 @@
 		<property name="partners" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="funding" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="sectors" type="com.liferay.portal.dao.orm.hibernate.StringType" />
-		<property name="spatiallevel" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="spatiallayer" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="abstracts" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="element" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="keywords" type="com.liferay.portal.dao.orm.hibernate.StringType" />
@@ -35,5 +35,8 @@
 		<property name="replacesId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 		<property name="comments" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="textwebpage" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="spatialvalues" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="source" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="climateimpacts" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 	</class>
 </hibernate-mapping>

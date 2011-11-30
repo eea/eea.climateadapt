@@ -23,7 +23,7 @@
 		<column name="partners" type="String" />
 		<column name="funding" type="String" />
 		<column name="sectors" type="String" />
-		<column name="spatiallevel" type="String" />
+		<column name="spatiallayer" type="String" />
 		<column name="abstracts" type="String" />
 		<column name="element" type="String" />
 		<column name="keywords" type="String" />
@@ -40,7 +40,9 @@
 		<column name="replacesId" type="long" />
 		<column name="comments" type="String" />
 		<column name="textwebpage" type="String" />
-				
+		<column name="spatialvalues" type="String" />
+		<column name="source" type="String" />
+		<column name="climateimpacts" type="String" />	
 		<!-- Sort order -->
 		<order by="asc">
 			<order-column name="acronym" />

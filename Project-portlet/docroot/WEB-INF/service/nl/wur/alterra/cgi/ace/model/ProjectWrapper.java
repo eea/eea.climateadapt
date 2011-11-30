@@ -124,12 +124,12 @@ public class ProjectWrapper implements Project {
 		_project.setSectors(sectors);
 	}
 
-	public java.lang.String getSpatiallevel() {
-		return _project.getSpatiallevel();
+	public java.lang.String getSpatiallayer() {
+		return _project.getSpatiallayer();
 	}
 
-	public void setSpatiallevel(java.lang.String spatiallevel) {
-		_project.setSpatiallevel(spatiallevel);
+	public void setSpatiallayer(java.lang.String spatiallayer) {
+		_project.setSpatiallayer(spatiallayer);
 	}
 
 	public java.lang.String getAbstracts() {
@@ -258,6 +258,30 @@ public class ProjectWrapper implements Project {
 
 	public void setTextwebpage(java.lang.String textwebpage) {
 		_project.setTextwebpage(textwebpage);
+	}
+
+	public java.lang.String getSpatialvalues() {
+		return _project.getSpatialvalues();
+	}
+
+	public void setSpatialvalues(java.lang.String spatialvalues) {
+		_project.setSpatialvalues(spatialvalues);
+	}
+
+	public java.lang.String getSource() {
+		return _project.getSource();
+	}
+
+	public void setSource(java.lang.String source) {
+		_project.setSource(source);
+	}
+
+	public java.lang.String getClimateimpacts() {
+		return _project.getClimateimpacts();
+	}
+
+	public void setClimateimpacts(java.lang.String climateimpacts) {
+		_project.setClimateimpacts(climateimpacts);
 	}
 
 	public nl.wur.alterra.cgi.ace.model.Project toEscapedModel() {

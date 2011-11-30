@@ -67,7 +67,7 @@ public class ProjectModelImpl extends BaseModelImpl<Project>
 			{ "partners", new Integer(Types.VARCHAR) },
 			{ "funding", new Integer(Types.VARCHAR) },
 			{ "sectors", new Integer(Types.VARCHAR) },
-			{ "spatiallevel", new Integer(Types.VARCHAR) },
+			{ "spatiallayer", new Integer(Types.VARCHAR) },
 			{ "abstracts", new Integer(Types.VARCHAR) },
 			{ "element", new Integer(Types.VARCHAR) },
 			{ "keywords", new Integer(Types.VARCHAR) },
@@ -83,9 +83,12 @@ public class ProjectModelImpl extends BaseModelImpl<Project>
 			{ "approvaldate", new Integer(Types.TIMESTAMP) },
 			{ "replacesId", new Integer(Types.BIGINT) },
 			{ "comments", new Integer(Types.VARCHAR) },
-			{ "textwebpage", new Integer(Types.VARCHAR) }
+			{ "textwebpage", new Integer(Types.VARCHAR) },
+			{ "spatialvalues", new Integer(Types.VARCHAR) },
+			{ "source", new Integer(Types.VARCHAR) },
+			{ "climateimpacts", new Integer(Types.VARCHAR) }
 		};
-	public static final String TABLE_SQL_CREATE = "create table Ace_Project (projectId LONG not null primary key,companyId LONG,groupId LONG,acronym VARCHAR(75) null,title VARCHAR(75) null,startdate DATE null,enddate DATE null,lead VARCHAR(75) null,partners VARCHAR(75) null,funding VARCHAR(75) null,sectors VARCHAR(75) null,spatiallevel VARCHAR(75) null,abstracts VARCHAR(75) null,element VARCHAR(75) null,keywords VARCHAR(75) null,website VARCHAR(75) null,duration VARCHAR(75) null,rating LONG,importance LONG,specialtagging VARCHAR(75) null,controlstatus INTEGER,creator VARCHAR(75) null,creationdate DATE null,moderator VARCHAR(75) null,approvaldate DATE null,replacesId LONG,comments VARCHAR(75) null,textwebpage VARCHAR(75) null)";
+	public static final String TABLE_SQL_CREATE = "create table Ace_Project (projectId LONG not null primary key,companyId LONG,groupId LONG,acronym VARCHAR(75) null,title VARCHAR(75) null,startdate DATE null,enddate DATE null,lead VARCHAR(75) null,partners VARCHAR(75) null,funding VARCHAR(75) null,sectors VARCHAR(75) null,spatiallayer VARCHAR(75) null,abstracts VARCHAR(75) null,element VARCHAR(75) null,keywords VARCHAR(75) null,website VARCHAR(75) null,duration VARCHAR(75) null,rating LONG,importance LONG,specialtagging VARCHAR(75) null,controlstatus INTEGER,creator VARCHAR(75) null,creationdate DATE null,moderator VARCHAR(75) null,approvaldate DATE null,replacesId LONG,comments VARCHAR(75) null,textwebpage VARCHAR(75) null,spatialvalues VARCHAR(75) null,source VARCHAR(75) null,climateimpacts VARCHAR(75) null)";
 	public static final String TABLE_SQL_DROP = "drop table Ace_Project";
 	public static final String ORDER_BY_JPQL = " ORDER BY project.acronym ASC";
 	public static final String ORDER_BY_SQL = " ORDER BY Ace_Project.acronym ASC";
@@ -234,17 +237,17 @@ public class ProjectModelImpl extends BaseModelImpl<Project>
 		_sectors = sectors;
 	}
 
-	public String getSpatiallevel() {
-		if (_spatiallevel == null) {
+	public String getSpatiallayer() {
+		if (_spatiallayer == null) {
 			return StringPool.BLANK;
 		}
 		else {
-			return _spatiallevel;
+			return _spatiallayer;
 		}
 	}
 
-	public void setSpatiallevel(String spatiallevel) {
-		_spatiallevel = spatiallevel;
+	public void setSpatiallayer(String spatiallayer) {
+		_spatiallayer = spatiallayer;
 	}
 
 	public String getAbstracts() {
@@ -425,6 +428,45 @@ public class ProjectModelImpl extends BaseModelImpl<Project>
 		_textwebpage = textwebpage;
 	}
 
+	public String getSpatialvalues() {
+		if (_spatialvalues == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _spatialvalues;
+		}
+	}
+
+	public void setSpatialvalues(String spatialvalues) {
+		_spatialvalues = spatialvalues;
+	}
+
+	public String getSource() {
+		if (_source == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _source;
+		}
+	}
+
+	public void setSource(String source) {
+		_source = source;
+	}
+
+	public String getClimateimpacts() {
+		if (_climateimpacts == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _climateimpacts;
+		}
+	}
+
+	public void setClimateimpacts(String climateimpacts) {
+		_climateimpacts = climateimpacts;
+	}
+
 	public Project toEscapedModel() {
 		if (isEscapedModel()) {
 			return (Project)this;
@@ -462,7 +504,7 @@ public class ProjectModelImpl extends BaseModelImpl<Project>
 		clone.setPartners(getPartners());
 		clone.setFunding(getFunding());
 		clone.setSectors(getSectors());
-		clone.setSpatiallevel(getSpatiallevel());
+		clone.setSpatiallayer(getSpatiallayer());
 		clone.setAbstracts(getAbstracts());
 		clone.setElement(getElement());
 		clone.setKeywords(getKeywords());
@@ -479,6 +521,9 @@ public class ProjectModelImpl extends BaseModelImpl<Project>
 		clone.setReplacesId(getReplacesId());
 		clone.setComments(getComments());
 		clone.setTextwebpage(getTextwebpage());
+		clone.setSpatialvalues(getSpatialvalues());
+		clone.setSource(getSource());
+		clone.setClimateimpacts(getClimateimpacts());
 
 		return clone;
 	}
@@ -524,7 +569,7 @@ public class ProjectModelImpl extends BaseModelImpl<Project>
 	}
 
 	public String toString() {
-		StringBundler sb = new StringBundler(57);
+		StringBundler sb = new StringBundler(63);
 
 		sb.append("{projectId=");
 		sb.append(getProjectId());
@@ -548,8 +593,8 @@ public class ProjectModelImpl extends BaseModelImpl<Project>
 		sb.append(getFunding());
 		sb.append(", sectors=");
 		sb.append(getSectors());
-		sb.append(", spatiallevel=");
-		sb.append(getSpatiallevel());
+		sb.append(", spatiallayer=");
+		sb.append(getSpatiallayer());
 		sb.append(", abstracts=");
 		sb.append(getAbstracts());
 		sb.append(", element=");
@@ -582,13 +627,19 @@ public class ProjectModelImpl extends BaseModelImpl<Project>
 		sb.append(getComments());
 		sb.append(", textwebpage=");
 		sb.append(getTextwebpage());
+		sb.append(", spatialvalues=");
+		sb.append(getSpatialvalues());
+		sb.append(", source=");
+		sb.append(getSource());
+		sb.append(", climateimpacts=");
+		sb.append(getClimateimpacts());
 		sb.append("}");
 
 		return sb.toString();
 	}
 
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(88);
+		StringBundler sb = new StringBundler(97);
 
 		sb.append("<model><model-name>");
 		sb.append("nl.wur.alterra.cgi.ace.model.Project");
@@ -639,8 +690,8 @@ public class ProjectModelImpl extends BaseModelImpl<Project>
 		sb.append(getSectors());
 		sb.append("]]></column-value></column>");
 		sb.append(
-			"<column><column-name>spatiallevel</column-name><column-value><![CDATA[");
-		sb.append(getSpatiallevel());
+			"<column><column-name>spatiallayer</column-name><column-value><![CDATA[");
+		sb.append(getSpatiallayer());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>abstracts</column-name><column-value><![CDATA[");
@@ -706,6 +757,18 @@ public class ProjectModelImpl extends BaseModelImpl<Project>
 			"<column><column-name>textwebpage</column-name><column-value><![CDATA[");
 		sb.append(getTextwebpage());
 		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>spatialvalues</column-name><column-value><![CDATA[");
+		sb.append(getSpatialvalues());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>source</column-name><column-value><![CDATA[");
+		sb.append(getSource());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>climateimpacts</column-name><column-value><![CDATA[");
+		sb.append(getClimateimpacts());
+		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");
 
@@ -723,7 +786,7 @@ public class ProjectModelImpl extends BaseModelImpl<Project>
 	private String _partners;
 	private String _funding;
 	private String _sectors;
-	private String _spatiallevel;
+	private String _spatiallayer;
 	private String _abstracts;
 	private String _element;
 	private String _keywords;
@@ -740,5 +803,8 @@ public class ProjectModelImpl extends BaseModelImpl<Project>
 	private long _replacesId;
 	private String _comments;
 	private String _textwebpage;
+	private String _spatialvalues;
+	private String _source;
+	private String _climateimpacts;
 	private transient ExpandoBridge _expandoBridge;
 }

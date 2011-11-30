@@ -107,13 +107,21 @@
        <br />
 						
 		<aui:input name="funding"  />
-
-		<aui:input name="spatiallevel"  />
 		
 		<aui:input name="duration"  />	
+		
+		<b>Geographic characterisation</b><br />	
+		<input name="spatiallayer" type="text" size="65" value='<%= project == null ? "" : project.getSpatiallayer() %>'><br /><br />
+		
+		<b>Countries - separate them by ';' - Country search works on Nuts member state codes.</b><br />
+		<input name="spatialvalues" type="text" size="65" value="<%= project == null ? "" : project.getSpatialvalues() %>"><br /><br />
 			
 		<b>special tagging</b><br />	
 		<input name="specialtagging" type="text" size="65" maxlength="75" value="<%= project == null ? "" : project.getSpecialtagging() %>"><br /><br />
+		
+			
+		<b>source</b><br />	
+		<input name="source" type="text" size="65" maxlength="75" value="<%= project == null ? "" : project.getSource() %>"><br /><br />
 		
 		
 	  </div>
@@ -123,7 +131,12 @@
 
     <b>Comments about this database item <i>[information entered below will not be displayed on the public pages of the clearinghouse]</i></b><br />	
 	<textarea style="border-color: blue; border-style: solid; border-width: thin;" name="comments" rows=10 cols=150><%= project == null ? "" : project.getComments() %></textarea><br /><br />
-
+ 	
+ 	<b>Before edited by: <% if (project != null) { out.print( project.getModerator() ) ; } %> </b>	
+	<br /><br />
+ 	<input type="checkbox" name="chk_controlstatus" id="chk_controlstatus" value="1" <% if (project != null) { out.print( project.getControlstatus() == 1 ? "checked" : "") ; } %> />
+	<b>Reviewed</b><br />
+	
 	<aui:button-row>
 		<aui:button type="submit" />
 

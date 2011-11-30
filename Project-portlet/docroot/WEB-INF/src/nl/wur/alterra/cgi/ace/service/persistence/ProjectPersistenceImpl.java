@@ -306,7 +306,7 @@ public class ProjectPersistenceImpl extends BasePersistenceImpl<Project>
 		projectImpl.setPartners(project.getPartners());
 		projectImpl.setFunding(project.getFunding());
 		projectImpl.setSectors(project.getSectors());
-		projectImpl.setSpatiallevel(project.getSpatiallevel());
+		projectImpl.setSpatiallayer(project.getSpatiallayer());
 		projectImpl.setAbstracts(project.getAbstracts());
 		projectImpl.setElement(project.getElement());
 		projectImpl.setKeywords(project.getKeywords());
@@ -323,6 +323,9 @@ public class ProjectPersistenceImpl extends BasePersistenceImpl<Project>
 		projectImpl.setReplacesId(project.getReplacesId());
 		projectImpl.setComments(project.getComments());
 		projectImpl.setTextwebpage(project.getTextwebpage());
+		projectImpl.setSpatialvalues(project.getSpatialvalues());
+		projectImpl.setSource(project.getSource());
+		projectImpl.setClimateimpacts(project.getClimateimpacts());
 
 		return projectImpl;
 	}

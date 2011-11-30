@@ -133,10 +133,10 @@ public class ClpSerializer {
 
 					method10.invoke(newModel, value10);
 
-					Method method11 = newModelClass.getMethod("setSpatiallevel",
+					Method method11 = newModelClass.getMethod("setSpatiallayer",
 							new Class[] { String.class });
 
-					String value11 = oldCplModel.getSpatiallevel();
+					String value11 = oldCplModel.getSpatiallayer();
 
 					method11.invoke(newModel, value11);
 
@@ -251,6 +251,27 @@ public class ClpSerializer {
 					String value27 = oldCplModel.getTextwebpage();
 
 					method27.invoke(newModel, value27);
+
+					Method method28 = newModelClass.getMethod("setSpatialvalues",
+							new Class[] { String.class });
+
+					String value28 = oldCplModel.getSpatialvalues();
+
+					method28.invoke(newModel, value28);
+
+					Method method29 = newModelClass.getMethod("setSource",
+							new Class[] { String.class });
+
+					String value29 = oldCplModel.getSource();
+
+					method29.invoke(newModel, value29);
+
+					Method method30 = newModelClass.getMethod("setClimateimpacts",
+							new Class[] { String.class });
+
+					String value30 = oldCplModel.getClimateimpacts();
+
+					method30.invoke(newModel, value30);
 
 					return newModel;
 				}
@@ -378,12 +399,12 @@ public class ClpSerializer {
 
 					newModel.setSectors(value10);
 
-					Method method11 = oldModelClass.getMethod("getSpatiallevel");
+					Method method11 = oldModelClass.getMethod("getSpatiallayer");
 
 					String value11 = (String)method11.invoke(oldModel,
 							(Object[])null);
 
-					newModel.setSpatiallevel(value11);
+					newModel.setSpatiallayer(value11);
 
 					Method method12 = oldModelClass.getMethod("getAbstracts");
 
@@ -498,6 +519,29 @@ public class ClpSerializer {
 							(Object[])null);
 
 					newModel.setTextwebpage(value27);
+
+					Method method28 = oldModelClass.getMethod(
+							"getSpatialvalues");
+
+					String value28 = (String)method28.invoke(oldModel,
+							(Object[])null);
+
+					newModel.setSpatialvalues(value28);
+
+					Method method29 = oldModelClass.getMethod("getSource");
+
+					String value29 = (String)method29.invoke(oldModel,
+							(Object[])null);
+
+					newModel.setSource(value29);
+
+					Method method30 = oldModelClass.getMethod(
+							"getClimateimpacts");
+
+					String value30 = (String)method30.invoke(oldModel,
+							(Object[])null);
+
+					newModel.setClimateimpacts(value30);
 
 					return newModel;
 				}

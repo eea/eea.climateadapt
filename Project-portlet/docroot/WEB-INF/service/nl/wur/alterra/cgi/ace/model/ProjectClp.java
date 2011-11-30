@@ -131,12 +131,12 @@ public class ProjectClp extends BaseModelImpl<Project> implements Project {
 		_sectors = sectors;
 	}
 
-	public String getSpatiallevel() {
-		return _spatiallevel;
+	public String getSpatiallayer() {
+		return _spatiallayer;
 	}
 
-	public void setSpatiallevel(String spatiallevel) {
-		_spatiallevel = spatiallevel;
+	public void setSpatiallayer(String spatiallayer) {
+		_spatiallayer = spatiallayer;
 	}
 
 	public String getAbstracts() {
@@ -267,6 +267,30 @@ public class ProjectClp extends BaseModelImpl<Project> implements Project {
 		_textwebpage = textwebpage;
 	}
 
+	public String getSpatialvalues() {
+		return _spatialvalues;
+	}
+
+	public void setSpatialvalues(String spatialvalues) {
+		_spatialvalues = spatialvalues;
+	}
+
+	public String getSource() {
+		return _source;
+	}
+
+	public void setSource(String source) {
+		_source = source;
+	}
+
+	public String getClimateimpacts() {
+		return _climateimpacts;
+	}
+
+	public void setClimateimpacts(String climateimpacts) {
+		_climateimpacts = climateimpacts;
+	}
+
 	public Project toEscapedModel() {
 		if (isEscapedModel()) {
 			return this;
@@ -291,7 +315,7 @@ public class ProjectClp extends BaseModelImpl<Project> implements Project {
 		clone.setPartners(getPartners());
 		clone.setFunding(getFunding());
 		clone.setSectors(getSectors());
-		clone.setSpatiallevel(getSpatiallevel());
+		clone.setSpatiallayer(getSpatiallayer());
 		clone.setAbstracts(getAbstracts());
 		clone.setElement(getElement());
 		clone.setKeywords(getKeywords());
@@ -308,6 +332,9 @@ public class ProjectClp extends BaseModelImpl<Project> implements Project {
 		clone.setReplacesId(getReplacesId());
 		clone.setComments(getComments());
 		clone.setTextwebpage(getTextwebpage());
+		clone.setSpatialvalues(getSpatialvalues());
+		clone.setSource(getSource());
+		clone.setClimateimpacts(getClimateimpacts());
 
 		return clone;
 	}
@@ -353,7 +380,7 @@ public class ProjectClp extends BaseModelImpl<Project> implements Project {
 	}
 
 	public String toString() {
-		StringBundler sb = new StringBundler(57);
+		StringBundler sb = new StringBundler(63);
 
 		sb.append("{projectId=");
 		sb.append(getProjectId());
@@ -377,8 +404,8 @@ public class ProjectClp extends BaseModelImpl<Project> implements Project {
 		sb.append(getFunding());
 		sb.append(", sectors=");
 		sb.append(getSectors());
-		sb.append(", spatiallevel=");
-		sb.append(getSpatiallevel());
+		sb.append(", spatiallayer=");
+		sb.append(getSpatiallayer());
 		sb.append(", abstracts=");
 		sb.append(getAbstracts());
 		sb.append(", element=");
@@ -411,13 +438,19 @@ public class ProjectClp extends BaseModelImpl<Project> implements Project {
 		sb.append(getComments());
 		sb.append(", textwebpage=");
 		sb.append(getTextwebpage());
+		sb.append(", spatialvalues=");
+		sb.append(getSpatialvalues());
+		sb.append(", source=");
+		sb.append(getSource());
+		sb.append(", climateimpacts=");
+		sb.append(getClimateimpacts());
 		sb.append("}");
 
 		return sb.toString();
 	}
 
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(88);
+		StringBundler sb = new StringBundler(97);
 
 		sb.append("<model><model-name>");
 		sb.append("nl.wur.alterra.cgi.ace.model.Project");
@@ -468,8 +501,8 @@ public class ProjectClp extends BaseModelImpl<Project> implements Project {
 		sb.append(getSectors());
 		sb.append("]]></column-value></column>");
 		sb.append(
-			"<column><column-name>spatiallevel</column-name><column-value><![CDATA[");
-		sb.append(getSpatiallevel());
+			"<column><column-name>spatiallayer</column-name><column-value><![CDATA[");
+		sb.append(getSpatiallayer());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>abstracts</column-name><column-value><![CDATA[");
@@ -535,6 +568,18 @@ public class ProjectClp extends BaseModelImpl<Project> implements Project {
 			"<column><column-name>textwebpage</column-name><column-value><![CDATA[");
 		sb.append(getTextwebpage());
 		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>spatialvalues</column-name><column-value><![CDATA[");
+		sb.append(getSpatialvalues());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>source</column-name><column-value><![CDATA[");
+		sb.append(getSource());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>climateimpacts</column-name><column-value><![CDATA[");
+		sb.append(getClimateimpacts());
+		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");
 
@@ -552,7 +597,7 @@ public class ProjectClp extends BaseModelImpl<Project> implements Project {
 	private String _partners;
 	private String _funding;
 	private String _sectors;
-	private String _spatiallevel;
+	private String _spatiallayer;
 	private String _abstracts;
 	private String _element;
 	private String _keywords;
@@ -569,4 +614,7 @@ public class ProjectClp extends BaseModelImpl<Project> implements Project {
 	private long _replacesId;
 	private String _comments;
 	private String _textwebpage;
+	private String _spatialvalues;
+	private String _source;
+	private String _climateimpacts;
 }

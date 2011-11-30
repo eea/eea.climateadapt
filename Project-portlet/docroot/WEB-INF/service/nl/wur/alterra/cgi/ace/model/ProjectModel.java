@@ -217,19 +217,19 @@ public interface ProjectModel extends BaseModel<Project> {
 	public void setSectors(String sectors);
 
 	/**
-	 * Gets the spatiallevel of this project.
+	 * Gets the spatiallayer of this project.
 	 *
-	 * @return the spatiallevel of this project
+	 * @return the spatiallayer of this project
 	 */
 	@AutoEscape
-	public String getSpatiallevel();
+	public String getSpatiallayer();
 
 	/**
-	 * Sets the spatiallevel of this project.
+	 * Sets the spatiallayer of this project.
 	 *
-	 * @param spatiallevel the spatiallevel of this project
+	 * @param spatiallayer the spatiallayer of this project
 	 */
-	public void setSpatiallevel(String spatiallevel);
+	public void setSpatiallayer(String spatiallayer);
 
 	/**
 	 * Gets the abstracts of this project.
@@ -464,6 +464,51 @@ public interface ProjectModel extends BaseModel<Project> {
 	 * @param textwebpage the textwebpage of this project
 	 */
 	public void setTextwebpage(String textwebpage);
+
+	/**
+	 * Gets the spatialvalues of this project.
+	 *
+	 * @return the spatialvalues of this project
+	 */
+	@AutoEscape
+	public String getSpatialvalues();
+
+	/**
+	 * Sets the spatialvalues of this project.
+	 *
+	 * @param spatialvalues the spatialvalues of this project
+	 */
+	public void setSpatialvalues(String spatialvalues);
+
+	/**
+	 * Gets the source of this project.
+	 *
+	 * @return the source of this project
+	 */
+	@AutoEscape
+	public String getSource();
+
+	/**
+	 * Sets the source of this project.
+	 *
+	 * @param source the source of this project
+	 */
+	public void setSource(String source);
+
+	/**
+	 * Gets the climateimpacts of this project.
+	 *
+	 * @return the climateimpacts of this project
+	 */
+	@AutoEscape
+	public String getClimateimpacts();
+
+	/**
+	 * Sets the climateimpacts of this project.
+	 *
+	 * @param climateimpacts the climateimpacts of this project
+	 */
+	public void setClimateimpacts(String climateimpacts);
 
 	/**
 	 * Gets a copy of this project as an escaped model instance by wrapping it with an {@link com.liferay.portal.kernel.bean.AutoEscapeBeanHandler}.

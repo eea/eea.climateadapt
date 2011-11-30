@@ -86,20 +86,27 @@
 	 <br />
 
 	 </div></td>
-	<td width="50%" valign="top"><div>		 
-	 <b>Funding</b><br />
-	 <% out.print( project.getFunding() ); %><br /><br />
-	 <b>Keywords</b><br />
-	 <% out.print( project.getKeywords()); %><br /><br />
-	 <b>Spatial Level</b><br />
-	 <% out.print( project.getSpatiallevel() ); %><br /><br />
-	 	 
-	 <b>Duration</b><br />
-	 <% out.print( project.getDuration() ); %><br /><br />
+	<td width="50%" valign="top"><div>	
+	 
 	 <% if (url != null && url.trim().length() > 0)  {%>		
 		 <b><%= websitelabel %></b><br />
 		 <%= url %><br /><br />
-	 <% } %>
+	 <% } %>	 
+	 <b>Keywords</b><br />
+	 <% out.print( project.getKeywords()); %><br /><br />
+	 <b>Funding</b><br />
+	 <% out.print( project.getFunding() ); %><br /><br />
+ 
+	 <b>Duration</b><br />
+	 <% out.print( project.getDuration() ); %><br /><br />
+	 <b>Source</b><br />
+	 <% out.print( project.getSource() ); %><br /><br />
+	 
+	 <b>Geographic characterisation</b><br />
+	 <% out.print( project.getSpatiallayer().replace("_", " ") ); %><br /><br />
+	 
+	 <b>Countries</b><br />
+	 <% out.print( project.getSpatialvalues() ); %><br /><br />
 	 </div></td></tr>
       </table>
 <%  
