@@ -26,6 +26,8 @@ import com.liferay.portal.kernel.servlet.SessionMessages;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.util.WebKeys;
+import com.liferay.portal.model.User;
+import com.liferay.portal.service.UserServiceUtil;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.util.bridges.mvc.MVCPortlet;
@@ -82,11 +84,18 @@ public class MeasurePortlet extends MVCPortlet {
 	 * by the Add / Edit methods.
 	 *
 	 */
-	private void measureFromRequest(PortletRequest request, Measure measure) {
+	private void measureFromRequest(PortletRequest request, Measure measure)  throws Exception  {
 		ThemeDisplay themeDisplay =
 			(ThemeDisplay)request.getAttribute(WebKeys.THEME_DISPLAY);
 		
-		measure.setControlstatus( (short) 1);
+		if(request.getRemoteUser() != null) {
+			User user = UserServiceUtil.getUserById( Long.parseLong(request.getRemoteUser()));
+			String moderator = measure.getModerator();
+			if(moderator.indexOf(user.getScreenName())==-1) {
+				
+				measure.setModerator( moderator + (moderator.length()==0 ? "" : ", ") + user.getScreenName());
+			}
+		}
 		
 		measure.setCompanyId(themeDisplay.getCompanyId());
 		measure.setGroupId(themeDisplay.getScopeGroupId());
@@ -175,6 +184,19 @@ public class MeasurePortlet extends MVCPortlet {
 			measure.setRating( measure.getRating() + 100);
 		}
 		
+		String approved = ParamUtil.getString(request, "chk_controlstatus");
+		short s_int = 1;
+		if(measure.getControlstatus() > 0) {
+			s_int = measure.getControlstatus() ;
+			s_int--; 
+			measure.setControlstatus( s_int );
+
+		}
+		if( approved != null && approved.equalsIgnoreCase("1")) {
+			s_int++;
+			measure.setControlstatus( s_int );
+		}
+		
 		if(ParamUtil.getString(request, "lat") != null) {
 			measure.setLat(Double.parseDouble(ParamUtil.getString(request, "lat")));
 		}
@@ -198,10 +220,7 @@ public class MeasurePortlet extends MVCPortlet {
 		ArrayList<String> errors = new ArrayList<String>();
 
 		if (MeasureValidator.validateMeasure(measure, errors)) {
-			
-			// ETC review nov/dec 2011: updated means reviewed
-			measure.setControlstatus( (short) 1 );
-			
+						
 			MeasureLocalServiceUtil.updateMeasure(measure);
 
 			AceItem aceitem = AceItemLocalServiceUtil.getAceItemByStoredAt("ace_measure_id=" + measure.getMeasureId());
@@ -330,7 +349,7 @@ public class MeasurePortlet extends MVCPortlet {
  			   		measure.getContact() + ' ' +
  			   		measure.getKeywords()+ ' ' +
  			   		measure.getWebsite() + ' ' +
- 			   		measure.getSpatiallayer() + ' ' +
+ 			   		measure.getSpatiallayer().replace("_" , "") + ' ' +
  			   		measure.getSpatialvalues() + ' ' +
  			   		measure.getLegalaspects() + ' ' +
  			   		measure.getSucceslimitations() + ' ' +

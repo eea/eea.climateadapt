@@ -120,7 +120,7 @@
 	 <% out.print( measure.getKeywords()); %><br /><br />
 	 
 	 <b>Geographic characterisation</b><br />
-	 <% out.print( measure.getSpatiallayer() ); %><br /><br />
+	 <% out.print( measure.getSpatiallayer().replace("_", " ") ); %><br /><br />
 	 
 	 <b>Countries</b><br />
 	 <% out.print( measure.getSpatialvalues() ); %><br /><br />

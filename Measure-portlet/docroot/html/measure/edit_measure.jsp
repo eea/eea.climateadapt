@@ -109,6 +109,9 @@
 		<aui:input name="implementationtime" />
 		
 		<aui:input name="lifetime" />
+
+		<b>Source</b><br />
+		<input name="source" type="text" size="65" value='<%= measure == null ? "" : measure.getSource() %>'><br /><br />
 		
 		<b>special tagging</b><br />	
 		<input name="specialtagging" type="text" size="65" maxlength="75" value="<%= measure == null ? "" : measure.getSpecialtagging() %>"><br /><br />
@@ -204,10 +207,6 @@
 		<input id="mao_m" name="mao_type" type="radio" value="M" <%= m_checked %>>Adaptation option&nbsp;&nbsp;&nbsp;
 		<input id="mao_a" name="mao_type" type="radio" value="A" <%= a_checked %>>Case study<br /><br />
 		
-
-		
-		<b>Source</b><br />
-		<input name="source" type="text" size="65" value='<%= measure == null ? "" : measure.getSource() %>'><br /><br />
 		<!--  a u i :input name="startdate" / >
 		
 		< a u  i:input name="enddate" / >
@@ -241,7 +240,12 @@
 
     <b>Comments about this database item <i>[information entered below will not be displayed on the public pages of the clearinghouse]</i></b><br />	
 	<textarea style="border-color: blue; border-style: solid; border-width: thin;" name="comments" rows=10 cols=150><%= measure == null ? "" : measure.getComments() %></textarea><br /><br />
-
+ 
+ 	<b>Before edited by: <% if (measure != null) { out.print( measure.getModerator() ) ; } %> </b>	
+	<br /><br /> 	
+ 	<input type="checkbox" name="chk_controlstatus" id="chk_controlstatus" value="1" <% if (measure != null) { out.print( measure.getControlstatus() == 1 ? "checked" : "") ; } %> />
+	<b>Reviewed</b><br />
+	
 	<aui:button-row>
 		<aui:button type="submit" />
 
