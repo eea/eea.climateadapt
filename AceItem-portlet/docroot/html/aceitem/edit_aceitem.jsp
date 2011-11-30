@@ -89,7 +89,7 @@
 	 </div>
 	<div style="float: left;">			
 		<br><b>storagetype</b><br />
-	    <select name="storagetype" disabled>		
+	    <select name="storagetype">		
 <% 		String help = "";
 		if (aceitem==null || aceitem.getStoragetype().equalsIgnoreCase("URL"))	{
 			help = "selected" ;
