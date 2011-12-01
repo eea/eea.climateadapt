@@ -129,16 +129,15 @@
 		<aui:input name="funding"  />
 		
 		<aui:input name="duration"  />	
-		
-		<b>Geographic characterisation</b><br />	
-		<input name="spatiallayer" type="text" size="65" value='<%= project == null ? "" : project.getSpatiallayer() %>'><br /><br />
+			
+		<b>source</b><br />	
+		<input name="source" type="text" size="65" maxlength="75" value="<%= project == null ? "" : project.getSource() %>"><br /><br />
 		
 		<b>special tagging</b><br />	
 		<input name="specialtagging" type="text" size="65" maxlength="75" value="<%= project == null ? "" : project.getSpecialtagging() %>"><br /><br />
-			
-		<b>source</b><br />	
-		<input name="source" type="text" size="65" maxlength="75" value="<%= project == null ? "" : project.getSource() %>">
 		
+		<b>Geographic characterisation</b><br />	
+		<input name="spatiallayer" type="text" size="65" value='<%= project == null ? "" : project.getSpatiallayer() %>'>
 		
 	  </div>
 	</aui:fieldset>
