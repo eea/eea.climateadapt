@@ -12,7 +12,26 @@
 
 	String redirect = ParamUtil.getString(request, "redirect");
 %>
+<script type="text/javascript"> 
 
+		    function checkallcountries() {
+			<% 
+				nl.wur.alterra.cgi.ace.model.constants.AceItemCountry[] country = nl.wur.alterra.cgi.ace.model.constants.AceItemCountry.values();
+				for(int i=0; i < country.length; i++) {
+					out.print("document.getElementById('chk_countries_" +  country[i]  + "').checked = true;");
+				}
+			%>		    	
+		    }
+		    
+		    function uncheckallcountries() {
+		    <% 
+		    	for(int i=0; i < country.length; i++) {
+		    		out.print("document.getElementById('chk_countries_" +  country[i]  + "').checked = false;");
+		    	}
+		    %>
+		    }
+			
+</script>
 <liferay-ui:header
 	backURL="<%= redirect %>"
 	title='<%= (project != null) ? project.getAcronym() : "new-project" %>'
@@ -142,9 +161,11 @@
 	  </div>
 	</aui:fieldset>
 
-	<b>Countries</b><br />	
+	<b>Countries&nbsp; &nbsp; &nbsp; 
+	<span id='all_countries'><a href="Javascript:checkallcountries();">check all</a></span>&nbsp; &nbsp; &nbsp;	
+	<span id='no_countries'><a href="Javascript:uncheckallcountries();">check none</a></span></b><br />
 	<table width="100%" border="0">
-	<tr><td width="110">
+	<tr><td width="70">
 	    <%-- note : i18n file should always be in sync with AceItemCountry enum --%>
 		<c:set var="i_country" value="0" />
 		<c:forEach var="countryElement" items="<%= nl.wur.alterra.cgi.ace.model.constants.AceItemCountry.values() %>" >
@@ -170,7 +191,7 @@
 			       </tr><tr>
 					<c:set var="i_country" value="0" />								    
 				</c:if>
-				<td width="110">
+				<td width="70">
 		</c:forEach>
 	</td></tr>
 	</table>

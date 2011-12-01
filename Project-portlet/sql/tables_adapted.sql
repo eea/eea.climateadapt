@@ -28,7 +28,7 @@ CREATE TABLE ace_project
   replacesid bigint,
   comments text,
   textwebpage text,
-  spatialvalues character varying(75),
+  spatialvalues character varying(255),
   source character varying(75),
   climateimpacts character varying(255),
   CONSTRAINT ace_project_pkey PRIMARY KEY (projectid)
