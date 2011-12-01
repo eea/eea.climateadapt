@@ -174,16 +174,11 @@ public class ProjectPortlet extends MVCPortlet {
 		}
 		
 		String approved = ParamUtil.getString(request, "chk_controlstatus");
-		short s_int = 1;
-		if(project.getControlstatus() > 0) {
-			s_int = project.getControlstatus() ;
-			s_int--; 
-			project.setControlstatus( s_int );
-
+		if( (approved == null ) || (approved.length()==0) ) {
+			project.setControlstatus( (short) 0 );
 		}
-		if( approved != null && approved.equalsIgnoreCase("1")) {
-			s_int++;
-			project.setControlstatus( s_int );
+		else {
+			project.setControlstatus( Short.parseShort(approved));
 		}
 		
 		project.setCompanyId(themeDisplay.getCompanyId());
