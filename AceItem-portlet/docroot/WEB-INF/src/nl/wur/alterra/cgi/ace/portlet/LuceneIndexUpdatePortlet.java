@@ -8,6 +8,7 @@ import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.util.bridges.mvc.MVCPortlet;
 import nl.wur.alterra.cgi.ace.model.AceItem;
 import nl.wur.alterra.cgi.ace.model.constants.AceItemClimateImpact;
+import nl.wur.alterra.cgi.ace.model.constants.AceItemCountry;
 import nl.wur.alterra.cgi.ace.model.constants.AceItemElement;
 import nl.wur.alterra.cgi.ace.model.constants.AceItemSector;
 import nl.wur.alterra.cgi.ace.search.lucene.ACEIndexSynchronizer;
@@ -99,10 +100,22 @@ public abstract class LuceneIndexUpdatePortlet extends MVCPortlet {
         
         aceitem.setKeyword(ParamUtil.getString(request, "keyword"));
         aceitem.setSpatialLayer(ParamUtil.getString(request, "spatialLayer"));
-        aceitem.setSpatialValues(ParamUtil.getString(request, "spatialValues").replace("UK","GB"));
-
+        
         aceitem.setSource(ParamUtil.getString(request, "source"));
         aceitem.setComments(ParamUtil.getString(request, "comments"));
+
+		String choosencountries = "";
+		for(AceItemCountry aceitemcountry : AceItemCountry.values() ) {
+			
+			if( ParamUtil.getString(request, "chk_countries_" + aceitemcountry.toString()) != null )  {
+				String s =  ParamUtil.getString(request, "chk_countries_" + aceitemcountry.toString());
+				if(s.equalsIgnoreCase(aceitemcountry.toString())) {				
+					choosencountries +=  aceitemcountry.toString() + ";";
+				}
+			}
+		}
+		aceitem.setSpatialValues(choosencountries);
+		//aceitem.setSpatialValues(ParamUtil.getString(request, "spatialValues").replace("UK","GB"));
         
         String choosensectors = "";
         for(AceItemSector aceitemsector : AceItemSector.values() ) {

@@ -37,6 +37,8 @@
 
 
 	<div style="float: left; margin-right: 35px;">
+	    <table width="100%" border="0"><tr>
+	    <td width=50%>
 		<b>Datatype</b><br />
 	    <select name="datatype">	
 		<%-- note : i18n file should always be in sync with AceItemElement enum --%>
@@ -70,34 +72,35 @@
 			</div>							
 		</c:forEach>
 		</select>
-		<br />
-		
-		<b>description</b><br />
-		<textarea name="description" rows=10 cols=100><%= aceitem == null ? "" : aceitem.getDescription() %></textarea><br /><br />
-		
-		<b>special tagging</b><br />
-		<input name="specialtagging" type="text" size="65" value='<%= aceitem == null ? "" : aceitem.getSpecialtagging() %>'><br /><br />
-		
-        <b>keywords</b><br />	
-		<textarea name="keyword" rows=5 cols=100><%= aceitem == null ? "" : aceitem.getKeyword() %></textarea><br /><br />
-
-		<aui:input name="source" />
-
-		<input type="checkbox" name="chk_importance" id="chk_importance" value="1" <% if (aceitem != null) { out.print( aceitem.getImportance() == 1 ? "checked" : "") ; } %> />
-		<b>High importance</b><br />
-		
-	 </div>
-	<div style="float: left;">			
-		<br><b>storagetype</b><br />
+		</td>
+		<td width=50%><b>storagetype</b><br />
 	    <select name="storagetype">		
 <% 		String help = "";
 		if (aceitem==null || aceitem.getStoragetype().equalsIgnoreCase("URL"))	{
 			help = "selected" ;
 		} %>
-
 			<option value="URL" <%= help %> >URL</option>
 			<option value="GEONETWORK" <%= help.length() > 0 ? "" : "selected"%> >GEONETWORK</option>
-		</select><br /><br />
+		</select>
+		</td>
+	    </tr></table>
+		
+		<b>description</b><br />
+		<textarea name="description" rows=10 cols=100><%= aceitem == null ? "" : aceitem.getDescription() %></textarea><br /><br />
+		
+        <b>keywords</b><br />	
+		<textarea name="keyword" rows=5 cols=100><%= aceitem == null ? "" : aceitem.getKeyword() %></textarea><br /><br />
+
+		<aui:input name="source" />
+		
+		<b>special tagging</b><br />
+		<input name="specialtagging" type="text" size="65" value='<%= aceitem == null ? "" : aceitem.getSpecialtagging() %>'><br /><br />
+
+		<b>Geographic characterisation</b><br />	
+		<input name="spatialLayer" type="text" size="65" value='<%= aceitem == null ? "" : aceitem.getSpatialLayer() %>'>	
+	 </div>
+	<div style="float: left;">			
+		<br>
 		<b>Sectors</b><br />
 		<!--   input name="sectors_" type="text" size="65" value="< %= aceitem == null ? "" : aceitem.getSectors_() % >"><br /><br / -->
 		
@@ -167,12 +170,6 @@
 			</div>							
 		</c:forEach>
        <br />
-		<b>Geographic characterisation</b><br />	
-		<input name="spatialLayer" type="text" size="65" value='<%= aceitem == null ? "" : aceitem.getSpatialLayer() %>'><br /><br />
-		
-		<b>Countries - separate them by ';' - Country search works on Nuts member state codes.</b><br />	
-		<input name="spatialValues" type="text" size="65" value='<%= aceitem == null ? "" : aceitem.getSpatialValues() %>'><br /><br />
-
 	  </div>
 		
 		<!--  a u i :input name="startdate" / >
@@ -181,14 +178,49 @@
 		
 		< a u i  :input name="publicationdate" / -->
 	</aui:fieldset>
-
+	<b>Countries</b><br />	
+	<table width="100%" border="0">
+	<tr><td width="110">
+	    <%-- note : i18n file should always be in sync with AceItemCountry enum --%>
+		<c:set var="i_country" value="0" />
+		<c:forEach var="countryElement" items="<%= nl.wur.alterra.cgi.ace.model.constants.AceItemCountry.values() %>" >
+			<!--  div class="check" -->
+				<c:set var="countryElementMustBeChecked" value="false" />
+				<c:set var="aceItemCountries" value='<%= aceitem == null ? "" : aceitem.getSpatialValues() %>' />
+				<c:if test="${fn:indexOf(aceItemCountries, countryElement)>=0}">
+					<c:set var="countryElementMustBeChecked" value="true" />
+				</c:if>
+				<c:choose>
+					<c:when test="${countryElementMustBeChecked}">
+						<input type="checkbox" name="chk_countries_${countryElement}" id="chk_countries_${countryElement}" value="${countryElement}" checked="checked" />
+					</c:when>
+					<c:otherwise>
+						<input type="checkbox" name="chk_countries_${countryElement}" id="chk_countries_${countryElement}" value="${countryElement}" />
+					</c:otherwise>
+				</c:choose>
+				<c:set var="i_country" value="${i_country + 1}" />
+				<label for="chk_countries_${countryElement}"><liferay-ui:message key="acesearch-country-lbl-${countryElement}" /></label>
+				</td>
+			<!--  /div -->
+			    <c:if test="${i_country==8}">
+			       </tr><tr>
+					<c:set var="i_country" value="0" />								    
+				</c:if>
+				<td width="110">
+		</c:forEach>
+	</td></tr>
+	</table>
+	<br />
+	
     <b>Comments about this database item <i>[information entered below will not be displayed on the public pages of the clearinghouse]</i></b><br />	
 	<textarea style="border-color: blue; border-style: solid; border-width: thin;" name="comments" rows=10 cols=150><%= aceitem == null ? "" : aceitem.getComments() %></textarea><br /><br />
 
+	<input type="checkbox" name="chk_importance" id="chk_importance" value="1" <% if (aceitem != null) { out.print( aceitem.getImportance() == 1 ? "checked" : "") ; } %> />
+	<b>High importance</b>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 
+	<input type="checkbox" name="chk_controlstatus" id="chk_controlstatus" value="1" <% if (aceitem != null) { out.print( aceitem.getControlstatus() == 1 ? "checked" : "") ; } %> />
+	<b>Reviewed</b>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 
  	<b>Before edited by: <% if (aceitem != null) { out.print( aceitem.getModerator() ) ; } %> </b>	
 	<br /><br />
- 	<input type="checkbox" name="chk_controlstatus" id="chk_controlstatus" value="1" <% if (aceitem != null) { out.print( aceitem.getControlstatus() == 1 ? "checked" : "") ; } %> />
-	<b>Reviewed</b><br />
 	
 	<aui:button-row>
 		<aui:button type="submit" />
