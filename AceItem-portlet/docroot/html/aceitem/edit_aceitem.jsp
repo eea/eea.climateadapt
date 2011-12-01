@@ -11,29 +11,23 @@
 	String redirect = ParamUtil.getString(request, "redirect");
 %>
 <script type="text/javascript"> 
-			
-		jQuery(document).ready(function() {
 
-			var $j = jQuery.noConflict();	
-
-		    $j("#all_countries").click(function() {
+		    function checkallcountries() {
 			<% 
 				nl.wur.alterra.cgi.ace.model.constants.AceItemCountry[] country = nl.wur.alterra.cgi.ace.model.constants.AceItemCountry.values();
 				for(int i=0; i < country.length; i++) {
 					out.print("document.getElementById('chk_countries_" +  country[i]  + "').checked = true;");
 				}
 			%>		    	
-		    });
+		    }
 		    
-		    $j("#no_countries").click(function() {
+		    function uncheckallcountries() {
 		    <% 
 		    	for(int i=0; i < country.length; i++) {
 		    		out.print("document.getElementById('chk_countries_" +  country[i]  + "').checked = false;");
 		    	}
 		    %>
-		    });
-
-		});		
+		    }
 			
 </script>
 		
@@ -205,8 +199,8 @@
 		< a u i  :input name="publicationdate" / -->
 	</aui:fieldset>
 	<b>Countries&nbsp; &nbsp; &nbsp; 
-	<span id='all_countries'><a href="Javascript:none">check all</a></span>&nbsp; &nbsp; &nbsp;	
-	<span id='no_countries'><a href="Javascript:none">check none</a></span></b><br />	
+	<span id='all_countries'><a href="Javascript:checkallcountries();">check all</a></span>&nbsp; &nbsp; &nbsp;	
+	<span id='no_countries'><a href="Javascript:uncheckallcountries();">check none</a></span></b><br />
 	<table width="100%" border="0">
 	<tr><td width="70">
 	    <%-- note : i18n file should always be in sync with AceItemCountry enum --%>
