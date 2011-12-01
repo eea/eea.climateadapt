@@ -84,40 +84,6 @@
 
 	 </div>
 	<div style="float: left;">	
-
-		<b>Implementationtype</b><br />	
-		<select name="implementationtype">	
-		<option value="" >Unknown</option>	
-<% 		String help = "";
-		if (measure!=null && measure.getImplementationtype().equalsIgnoreCase("grey"))	{
-			help = "selected" ;
-		} %>
-
-			<option value="grey" <%= help %> >Technical ('grey')</option>
-<%		help="";
-		if (measure!=null && measure.getImplementationtype().equalsIgnoreCase("green"))	{
-			help = "selected" ;
-		} %>			
-			<option value="green" <%= help %> >Ecological ('green')</option>
-<%		help="";
-		if (measure!=null && measure.getImplementationtype().equalsIgnoreCase("soft"))	{
-			help = "selected" ;
-		} %>			
-			<option value="soft" <%= help %> >Behavioural / policy ('soft')</option>			
-		</select>		
-		<aui:input name="implementationtime" />
-		
-		<aui:input name="lifetime" />
-
-		<b>Source</b><br />
-		<input name="source" type="text" size="65" value='<%= measure == null ? "" : measure.getSource() %>'><br /><br />
-		
-		<b>special tagging</b><br />	
-		<input name="specialtagging" type="text" size="65" maxlength="75" value="<%= measure == null ? "" : measure.getSpecialtagging() %>"><br /><br />
-		
-		<b>Geographic characterisation</b><br />	
-		<input name="spatiallayer" type="text" size="65" value='<%= measure == null ? "" : measure.getSpatiallayer() %>'><br /><br />
-
 	   <b>Sectors</b><br />
        <%-- note : i18n file should always be in sync with AceItemSector enum --%>	
 		<c:forEach var="adaptationSector" items="<%= nl.wur.alterra.cgi.ace.model.constants.AceItemSector.values() %>" >
@@ -185,6 +151,39 @@
 			</div>							
 		</c:forEach>
        <br />
+       
+		<b>Implementationtype</b><br />	
+		<select name="implementationtype">	
+		<option value="" >Unknown</option>	
+<% 		String help = "";
+		if (measure!=null && measure.getImplementationtype().equalsIgnoreCase("grey"))	{
+			help = "selected" ;
+		} %>
+
+			<option value="grey" <%= help %> >Technical ('grey')</option>
+<%		help="";
+		if (measure!=null && measure.getImplementationtype().equalsIgnoreCase("green"))	{
+			help = "selected" ;
+		} %>			
+			<option value="green" <%= help %> >Ecological ('green')</option>
+<%		help="";
+		if (measure!=null && measure.getImplementationtype().equalsIgnoreCase("soft"))	{
+			help = "selected" ;
+		} %>			
+			<option value="soft" <%= help %> >Behavioural / policy ('soft')</option>			
+		</select>		
+		<aui:input name="implementationtime" />
+		
+		<aui:input name="lifetime" />
+
+		<b>Source</b><br />
+		<input name="source" type="text" size="65" value='<%= measure == null ? "" : measure.getSource() %>'><br /><br />
+		
+		<b>special tagging</b><br />	
+		<input name="specialtagging" type="text" size="65" maxlength="75" value="<%= measure == null ? "" : measure.getSpecialtagging() %>"><br /><br />
+		
+		<b>Geographic characterisation</b><br />	
+		<input name="spatiallayer" type="text" size="65" value='<%= measure == null ? "" : measure.getSpatiallayer() %>'><br /><br />
 
 <%
 		String m_checked = "";
