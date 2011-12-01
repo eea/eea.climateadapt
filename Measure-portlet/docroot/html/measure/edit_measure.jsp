@@ -1,4 +1,5 @@
 <%@include file="/html/init.jsp" %>
+
 <%
 	Measure measure = null;
 
@@ -24,6 +25,23 @@
 		    $j("#mao_a").click(function() {	
 			       $j("#locationselection").removeClass("togglehide");
 			       $j("#locationselection").addClass("toggleshow");
+		    });
+		    
+		    $j("#all_countries").click(function() {
+			<% 
+				nl.wur.alterra.cgi.ace.model.constants.AceItemCountry[] country = nl.wur.alterra.cgi.ace.model.constants.AceItemCountry.values();
+				for(int i=0; i < country.length; i++) {
+					out.print("document.getElementById('chk_countries_" +  country[i]  + "').checked = true;");
+				}
+			%>		    	
+		    });
+		    
+		    $j("#no_countries").click(function() {
+		    <% 
+		    	for(int i=0; i < country.length; i++) {
+		    		out.print("document.getElementById('chk_countries_" +  country[i]  + "').checked = false;");
+		    	}
+		    %>
 		    });
 
 		});		
@@ -80,7 +98,6 @@
 		<b>keywords</b><br />	
 		<textarea name="keywords"  rows=5 cols=100><%= measure == null ? "" : measure.getKeywords() %></textarea>
 		<br />
-	
 
 	 </div>
 	<div style="float: left;">	
@@ -233,9 +250,11 @@
 
 	</aui:fieldset>
 	
-	<b>Countries</b><br />	
+	<b>Countries&nbsp; &nbsp; &nbsp; 
+	<span id='all_countries'><a href="Javascript:none">check all</a></span>&nbsp; &nbsp; &nbsp;	
+	<span id='no_countries'><a href="Javascript:none">check none</a></span></b><br />	
 	<table width="100%" border="0">
-	<tr><td width="110">
+	<tr><td width="70">
 	    <%-- note : i18n file should always be in sync with AceItemCountry enum --%>
 		<c:set var="i_country" value="0" />
 		<c:forEach var="countryElement" items="<%= nl.wur.alterra.cgi.ace.model.constants.AceItemCountry.values() %>" >
@@ -261,7 +280,7 @@
 			       </tr><tr>
 					<c:set var="i_country" value="0" />								    
 				</c:if>
-				<td width="110">
+				<td width="70">
 		</c:forEach>
 	</td></tr>
 	</table>

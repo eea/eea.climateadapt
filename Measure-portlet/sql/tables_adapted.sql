@@ -9,7 +9,7 @@ CREATE TABLE ace_measure
   implementationtime character varying(255),
   lifetime character varying(255),
   spatiallayer character varying(75),
-  spatialvalues character varying(75),
+  spatialvalues character varying(255),
   legalaspects character varying(3900),
   stakeholderparticipation character varying(3900),
   contact character varying(3900),
