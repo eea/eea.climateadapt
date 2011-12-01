@@ -84,7 +84,16 @@
 		</c:if>	
 	 </c:forEach>
 	 <br />
-
+<%   if ( (project.getClimateimpacts() != null) && (project.getClimateimpacts().length() > 0) ) { %>
+	 <b>Climate impacts</b><br />
+	 <c:set var="aceItemClimateImpacts" value="<%= project.getClimateimpacts() %>" />
+     <c:forEach var="adaptationClimateImpact" items="<%= nl.wur.alterra.cgi.ace.model.constants.AceItemClimateImpact.values() %>" >
+		<c:if test="${fn:indexOf(aceItemClimateImpacts, adaptationClimateImpact)>=0}">
+			<liferay-ui:message key="aceitem-climateimpacts-lbl-${adaptationClimateImpact}" /><br />
+		</c:if>	
+	 </c:forEach>
+	 <br />
+<%   } // end if %>
 	 </div></td>
 	<td width="50%" valign="top"><div>	
 	 

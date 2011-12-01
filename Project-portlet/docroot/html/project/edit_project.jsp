@@ -55,10 +55,8 @@
 		<textarea name="partners" rows=5 cols=100><%= project == null ? "" : project.getPartners() %></textarea><br /><br />
 
 		<b>keywords</b><br />
-		<textarea name="keywords" rows=5 cols=100><%= project == null ? "" : project.getKeywords() %></textarea><br /><br />
+		<textarea name="keywords" rows=5 cols=100><%= project == null ? "" : project.getKeywords() %></textarea><br />
 
- 		<input type="checkbox" name="chk_importance" id="chk_importance" value="1" <% if (project != null) { out.print( project.getImportance() == 1 ? "checked" : "") ; } %> />
-		<b>High importance</b><br />
 	  </div>
 	  <div style="float: left;">	
 
@@ -135,29 +133,56 @@
 		<b>Geographic characterisation</b><br />	
 		<input name="spatiallayer" type="text" size="65" value='<%= project == null ? "" : project.getSpatiallayer() %>'><br /><br />
 		
-		<b>Countries - separate them by ';' - Country search works on Nuts member state codes.</b><br />
-		<input name="spatialvalues" type="text" size="65" value="<%= project == null ? "" : project.getSpatialvalues() %>"><br /><br />
-			
 		<b>special tagging</b><br />	
 		<input name="specialtagging" type="text" size="65" maxlength="75" value="<%= project == null ? "" : project.getSpecialtagging() %>"><br /><br />
-		
 			
 		<b>source</b><br />	
-		<input name="source" type="text" size="65" maxlength="75" value="<%= project == null ? "" : project.getSource() %>"><br /><br />
+		<input name="source" type="text" size="65" maxlength="75" value="<%= project == null ? "" : project.getSource() %>">
 		
 		
 	  </div>
-
-
 	</aui:fieldset>
 
-    <b>Comments about this database item <i>[information entered below will not be displayed on the public pages of the clearinghouse]</i></b><br />	
-	<textarea style="border-color: blue; border-style: solid; border-width: thin;" name="comments" rows=10 cols=150><%= project == null ? "" : project.getComments() %></textarea><br /><br />
- 	
- 	<b>Before edited by: <% if (project != null) { out.print( project.getModerator() ) ; } %> </b>	
-	<br /><br />
+	<b>Countries</b><br />	
+	<table width="100%" border="0">
+	<tr><td width="110">
+	    <%-- note : i18n file should always be in sync with AceItemCountry enum --%>
+		<c:set var="i_country" value="0" />
+		<c:forEach var="countryElement" items="<%= nl.wur.alterra.cgi.ace.model.constants.AceItemCountry.values() %>" >
+			<!--  div class="check" -->
+				<c:set var="countryElementMustBeChecked" value="false" />
+				<c:set var="aceItemCountries" value='<%= project == null ? "" : project.getSpatialvalues() %>' />
+				<c:if test="${fn:indexOf(aceItemCountries, countryElement)>=0}">
+					<c:set var="countryElementMustBeChecked" value="true" />
+				</c:if>
+				<c:choose>
+					<c:when test="${countryElementMustBeChecked}">
+						<input type="checkbox" name="chk_countries_${countryElement}" id="chk_countries_${countryElement}" value="${countryElement}" checked="checked" />
+					</c:when>
+					<c:otherwise>
+						<input type="checkbox" name="chk_countries_${countryElement}" id="chk_countries_${countryElement}" value="${countryElement}" />
+					</c:otherwise>
+				</c:choose>
+				<c:set var="i_country" value="${i_country + 1}" />
+				<label for="chk_countries_${countryElement}"><liferay-ui:message key="acesearch-country-lbl-${countryElement}" /></label>
+				</td>
+			<!--  /div -->
+			    <c:if test="${i_country==8}">
+			       </tr><tr>
+					<c:set var="i_country" value="0" />								    
+				</c:if>
+				<td width="110">
+		</c:forEach>
+	</td></tr>
+	</table>
+	<br />
+	
+ 	<input type="checkbox" name="chk_importance" id="chk_importance" value="1" <% if (project != null) { out.print( project.getImportance() == 1 ? "checked" : "") ; } %> />
+	<b>High importance</b>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 
  	<input type="checkbox" name="chk_controlstatus" id="chk_controlstatus" value="1" <% if (project != null) { out.print( project.getControlstatus() == 1 ? "checked" : "") ; } %> />
-	<b>Reviewed</b><br />
+	<b>Reviewed</b>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 
+	<b>Before edited by: <% if (project != null) { out.print( project.getModerator() ) ; } %> </b>	
+	<br />
 	
 	<aui:button-row>
 		<aui:button type="submit" />

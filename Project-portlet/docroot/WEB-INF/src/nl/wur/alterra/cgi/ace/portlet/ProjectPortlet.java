@@ -23,6 +23,7 @@ import javax.portlet.PortletRequest;
 import nl.wur.alterra.cgi.ace.model.AceItem;
 import nl.wur.alterra.cgi.ace.model.Project;
 import nl.wur.alterra.cgi.ace.model.constants.AceItemClimateImpact;
+import nl.wur.alterra.cgi.ace.model.constants.AceItemCountry;
 import nl.wur.alterra.cgi.ace.model.constants.AceItemElement;
 import nl.wur.alterra.cgi.ace.model.constants.AceItemSector;
 import nl.wur.alterra.cgi.ace.model.constants.AceItemType;
@@ -117,6 +118,19 @@ public class ProjectPortlet extends MVCPortlet {
 		project.setPartners(ParamUtil.getString(request, "partners"));
 		project.setFunding(ParamUtil.getString(request, "funding"));
 		
+		String choosencountries = "";
+		for(AceItemCountry aceitemcountry : AceItemCountry.values() ) {
+			
+			if( ParamUtil.getString(request, "chk_countries_" + aceitemcountry.toString()) != null )  {
+				String s =  ParamUtil.getString(request, "chk_countries_" + aceitemcountry.toString());
+				if(s.equalsIgnoreCase(aceitemcountry.toString())) {				
+					choosencountries +=  aceitemcountry.toString() + ";";
+				}
+			}
+		}
+		project.setSpatialvalues(choosencountries);
+		//project.setSpatialvalues(ParamUtil.getString(request, "spatialvalues").replace("UK","GB"));
+		
 		String choosensectors = "";
 		for(AceItemSector aceitemsector : AceItemSector.values() ) {
 			
@@ -130,7 +144,6 @@ public class ProjectPortlet extends MVCPortlet {
 		project.setSectors(choosensectors);
 
 		project.setSpatiallayer(ParamUtil.getString(request, "spatiallayer"));
-		project.setSpatialvalues(ParamUtil.getString(request, "spatialvalues").replace("UK","GB"));
 		project.setAbstracts(ParamUtil.getString(request, "abstracts"));
 		project.setComments(ParamUtil.getString(request, "comments"));
 		
