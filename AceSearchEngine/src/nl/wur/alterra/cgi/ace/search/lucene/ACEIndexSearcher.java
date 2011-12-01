@@ -106,9 +106,6 @@ public class ACEIndexSearcher {
                     // ignore it (let Lucene default to relevance)
                     sort = new Sort(new SortField[] { SortField.FIELD_SCORE, SortField.FIELD_DOC });
                 }
-                else if(sortBy.equals("COUNTRY")) {
-                    sort = new Sort(new SortField( ACEIndexConstant.IndexField.COUNTRY_SORT, SortField.STRING));
-                }
                 // undefined sort: default to rating
                 else {
                     sort = new Sort(new SortField( ACEIndexConstant.IndexField.RATING_SORT, SortField.STRING));

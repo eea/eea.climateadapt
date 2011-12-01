@@ -291,7 +291,7 @@ public class ACESearchEngine {
             if ((countries != null) && (countries.length > 0)) {
                 rawQuery += " AND (";
                 for(String country: countries) {
-                    rawQuery += " (" + ACEIndexConstant.IndexField.SPATIAL_VALUE + ":" + country + ") OR";
+                    rawQuery += " (" + ACEIndexConstant.IndexField.SPATIAL_VALUES + ":" + country + ") OR";
                 }
                 rawQuery =  rawQuery.substring(0, rawQuery.lastIndexOf("OR")) + " )";
             }

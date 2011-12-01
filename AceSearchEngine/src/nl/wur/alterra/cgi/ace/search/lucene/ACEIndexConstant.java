@@ -44,9 +44,6 @@ public class ACEIndexConstant {
          */
         public static final String RELEVANCE_SORT = "relevancesort";
 
-        // TODO not implemented yet
-        public static final String COUNTRY_SORT = "countrysort";
-
         //
         // regular fields
         //
@@ -93,9 +90,9 @@ public class ACEIndexConstant {
          */
         public static final String CONTROLSTATUS = "controlstatus";
         /**
-         * Spatial Value.
+         * Spatial Values. Holds all the Countries.
          */
-        public static final String SPATIAL_VALUE = "spatialvalue";
+        public static final String SPATIAL_VALUES = "spatialvalues";
         /**
          * Spatial Layer.
          */

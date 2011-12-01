@@ -32,7 +32,7 @@ public class ACEAnalyzer {
         analyzer.addAnalyzer(ACEIndexConstant.IndexField.ELEMENT, keywordAnalyzer);
         analyzer.addAnalyzer(ACEIndexConstant.IndexField.IMPACT, keywordAnalyzer);
         analyzer.addAnalyzer(ACEIndexConstant.IndexField.SPATIAL_LAYER, keywordAnalyzer);
-        analyzer.addAnalyzer(ACEIndexConstant.IndexField.SPATIAL_VALUE, keywordAnalyzer);
+        analyzer.addAnalyzer(ACEIndexConstant.IndexField.SPATIAL_VALUES, keywordAnalyzer);
         analyzer.addAnalyzer(ACEIndexConstant.IndexField.START_DATE, keywordAnalyzer);
         analyzer.addAnalyzer(ACEIndexConstant.IndexField.STOREDAT, keywordAnalyzer);
         return analyzer;

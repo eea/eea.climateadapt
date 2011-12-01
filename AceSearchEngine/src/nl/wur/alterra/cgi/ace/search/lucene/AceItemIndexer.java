@@ -143,25 +143,27 @@ public class AceItemIndexer {
         if(controlstatus$ != null) {
             document.add(new Field(ACEIndexConstant.IndexField.CONTROLSTATUS, controlstatus$, Field.Store.YES,Field.Index.NOT_ANALYZED));
        }
-
-        if(spatialValues != null) {
-            document.add(new Field(ACEIndexConstant.IndexField.SPATIAL_VALUE, spatialValues, Field.Store.YES,Field.Index.NOT_ANALYZED));
-        }
-
         if(spatialLayers != null) {
             document.add(new Field(ACEIndexConstant.IndexField.SPATIAL_LAYER, spatialLayers, Field.Store.YES,Field.Index.NOT_ANALYZED));
         }
 
-        if ((spatialValues != null) && (spatialLayers != null))  {
-            // for searching by country
-            document.add(new Field(ACEIndexConstant.IndexField.COUNTRY_SORT, spatialValues, Field.Store.NO,Field.Index.NOT_ANALYZED));
+        //if(spatialValues != null) {
+        //    document.add(new Field(ACEIndexConstant.IndexField.SPATIAL_VALUES, spatialValues, Field.Store.YES,Field.Index.NOT_ANALYZED));
+        //}
+
+        if (spatialValues != null)   {
+            String[] spatialvalues = spatialValues.split(";");
+
+            for(int i = 0; i < spatialvalues.length; i++) {
+                document.add(new Field(ACEIndexConstant.IndexField.SPATIAL_VALUES, spatialvalues[i].trim(), Field.Store.YES,Field.Index.NOT_ANALYZED));
+            }            
         }
 
         if(elements != null) {
             String[] elementValues = elements.split(";");
 
             for(int i = 0; i < elementValues.length; i++) {
-                document.add(new Field(ACEIndexConstant.IndexField.ELEMENT, elementValues[i], Field.Store.YES,Field.Index.NOT_ANALYZED));
+                document.add(new Field(ACEIndexConstant.IndexField.ELEMENT, elementValues[i].trim(), Field.Store.YES,Field.Index.NOT_ANALYZED));
             }
         }
 
@@ -169,7 +171,7 @@ public class AceItemIndexer {
             String[] impactValues = impacts.split(";");
 
             for(int i = 0; i < impactValues.length; i++) {
-                document.add(new Field(ACEIndexConstant.IndexField.IMPACT, impactValues[i], Field.Store.YES,Field.Index.NOT_ANALYZED));
+                document.add(new Field(ACEIndexConstant.IndexField.IMPACT, impactValues[i].trim(), Field.Store.YES,Field.Index.NOT_ANALYZED));
             }
         }
 
@@ -178,7 +180,7 @@ public class AceItemIndexer {
 
             for(int i = 0; i < sectorValues.length; i++) {
                 // for searching
-                document.add(new Field(ACEIndexConstant.IndexField.SECTOR, sectorValues[i], Field.Store.YES,Field.Index.NOT_ANALYZED));
+                document.add(new Field(ACEIndexConstant.IndexField.SECTOR, sectorValues[i].trim(), Field.Store.YES,Field.Index.NOT_ANALYZED));
             }
         }
 
