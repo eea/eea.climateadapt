@@ -52,11 +52,12 @@
 	 	<b>Website</b><br />
 <% 	} %>
 	 <% out.print(  url ); %><br /><br />
-	 <b>Resolution</b><br />
-	 <% out.print( aceitem.getTargetresolution()); %><br /><br />
 
-	 <b>Geographic area / scale</b><br />
-	 <% out.print( aceitem.getSpatialLayer() + " " + aceitem.getSpatialValues()); %><br /><br />
+	 <b>Geographic area</b><br />
+	 <% out.print( aceitem.getSpatialLayer().replace("_", " ")); %><br /><br />
+	 
+	 <b>Countries</b><br />
+	 <% out.print( aceitem.getSpatialValues() ); %><br /><br />
 	
 	</div></td>
 	<td width="50%" valign="top"><div>	
