@@ -191,7 +191,15 @@ public abstract class LuceneIndexUpdatePortlet extends MVCPortlet {
               aceitem.setImportance(aceitem.getImportance()+1);
               aceitem.setRating( aceitem.getRating() + 100);
         }
-
+		
+		String approved = ParamUtil.getString(request, "chk_controlstatus");
+		if( (approved == null ) || (approved.length()==0) ) {
+			aceitem.setControlstatus( (short) 0 );
+		}
+		else {
+			aceitem.setControlstatus( Short.parseShort(approved));
+		}
+		
         return aceitem;
     }
 }
