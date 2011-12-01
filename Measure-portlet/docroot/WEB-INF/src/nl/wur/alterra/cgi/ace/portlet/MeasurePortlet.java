@@ -185,16 +185,11 @@ public class MeasurePortlet extends MVCPortlet {
 		}
 		
 		String approved = ParamUtil.getString(request, "chk_controlstatus");
-		short s_int = 1;
-		if(measure.getControlstatus() > 0) {
-			s_int = measure.getControlstatus() ;
-			s_int--; 
-			measure.setControlstatus( s_int );
-
+		if( (approved == null ) || (approved.length()==0) ) {
+			measure.setControlstatus( (short) 0 );
 		}
-		if( approved != null && approved.equalsIgnoreCase("1")) {
-			s_int++;
-			measure.setControlstatus( s_int );
+		else {
+			measure.setControlstatus( Short.parseShort(approved));
 		}
 		
 		if(ParamUtil.getString(request, "lat") != null) {
