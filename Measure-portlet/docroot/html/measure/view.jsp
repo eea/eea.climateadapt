@@ -96,6 +96,11 @@
 		<%= (measure.getControlstatus()<1 ? "No" : "Yes") %>
 		</liferay-ui:search-container-column-text> 
 
+		<liferay-ui:search-container-column-text  
+			name="source" orderable="<%= true %>" orderableProperty="source" >
+		<%= measure.getSource() %>
+		</liferay-ui:search-container-column-text> 
+		
 		<liferay-ui:search-container-column-text
 			name="sectors" 
 			value="<%= sectors %>"
