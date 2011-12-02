@@ -92,15 +92,20 @@
 		<%= (aceitem.getControlstatus()<1 ? "No" : "Yes") %>
 		</liferay-ui:search-container-column-text> 
 
+		<liferay-ui:search-container-column-text  
+			name="source" orderable="<%= true %>" orderableProperty="source" >
+		<%= aceitem.getSource() %>
+		</liferay-ui:search-container-column-text> 
+
 		<liferay-ui:search-container-column-text
 			name="sectors_"
 			value="<%= sectors %>"
 		/>
-
-		<liferay-ui:search-container-column-text
+		
+		<!-- liferay-ui:search-container-column-text
 			name="elements_"
-			value="<%= elements %>"
-		/>
+			value="< %= elements % >"
+		/ -->
 
 		<liferay-ui:search-container-column-text
 		 	name="datatype" orderable="<%= true %>" orderableProperty="datatype" >

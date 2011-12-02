@@ -29,6 +29,10 @@ public class AceItemUtil {
 				// depends on aceitem.getName()
 				orderByComparator = new AceItemNameComparator(orderByAsc);
 			}
+		    else if (orderByCol.equals("source")) {
+				// depends on aceitem.getSource()
+				orderByComparator = new AceItemSourceComparator(orderByAsc);
+			}
 		    else if (orderByCol.equals("datatype")) {
 				// depends on aceitem.getDatatype()
 				orderByComparator = new AceItemTypeComparator(orderByAsc);
