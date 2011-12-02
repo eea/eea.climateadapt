@@ -29,6 +29,10 @@ public class ProjectUtil {
 			// depends on project.getAcronym()
 			orderByComparator = new ProjectAcronymComparator(orderByAsc);
 		}
+	    else if (orderByCol.equals("source")) {
+			// depends on project.getSource()
+			orderByComparator = new ProjectSourceComparator(orderByAsc);
+		}
 	    else if (orderByCol.equals("controlstatus")) {
 			// depends on measure.getControlstatus()
 			orderByComparator = new ProjectControlstatusComparator(orderByAsc);

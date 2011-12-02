@@ -95,7 +95,12 @@
 			name="reviewed" orderable="<%= true %>" orderableProperty="controlstatus" >
 		<%= (project.getControlstatus()<1 ? "No" : "Yes") %>
 		</liferay-ui:search-container-column-text> 
-		
+
+		<liferay-ui:search-container-column-text  
+			name="source" orderable="<%= true %>" orderableProperty="source" >
+		<%= project.getSource() %>
+		</liferay-ui:search-container-column-text> 
+				
 		<liferay-ui:search-container-column-text
 			name="sectors"
 			value="<%= sectors %>"
