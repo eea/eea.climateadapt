@@ -11,11 +11,11 @@ public enum AceItemCountry {
     BG, /* Bulgaria */
     CY, /* Cyprus */
     CZ, /* Czech Republic */
-    DE, /* Germany */
     DK, /* Denmark */
     EE, /* Estonia */
     FI, /* Finland */
     FR, /* France */
+    DE, /* Germany */
     GR, /* Greece */
     HU, /* Hungary */
     IS, /* Iceland */
