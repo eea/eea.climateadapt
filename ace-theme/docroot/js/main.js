@@ -40,6 +40,8 @@ $(document).ready(function(){
     
     $('li').has('ul').addClass('submenu');
     
+    $(".db-search-fp img").attr("src","/ace-theme/images/vergroot_blauw.png");
+    
     if ($("#sec-menu ul").length == 0){
     	  $("#navigation .selected").css({"background":"none","border":"none"});
     	  $("#topnav").css({"border-bottom":"1px solid #a5bf26"});

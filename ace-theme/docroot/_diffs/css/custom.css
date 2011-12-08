@@ -12,6 +12,10 @@ body {
 	font-size: 12px;
 }
 
+p {
+	line-height: 16px;
+}
+
 a {
 	color: #02213D;
 	font-weight: normal;
@@ -19,8 +23,8 @@ a {
 }
 
 a:hover {
-	color: #a5bf26;
-	text-decoration: none;
+	color: #758816;
+	text-decoration: underline;
 }
 
 a.double-arrow {
@@ -125,7 +129,7 @@ ul#topnav {
 	background: #a5bf26;
 	height: 32px;
 	z-index: 100;
-	border-bottom: 1px solid #758816;
+	border-bottom: 1px solid #d2df92;
 }
 ul#topnav li {
 	float: left;
@@ -139,9 +143,9 @@ ul#topnav li {
 
 ul#topnav .selected {
 	background-color: #E9ECC9; 
-	border-top: 1px solid #758816;
-	border-left: 1px solid #758816;
-	border-right: 1px solid #758816;
+	border-top: 1px solid #d2df92;
+	border-left: 1px solid #d2df92;
+	border-right: 1px solid #d2df92;
 	border-top-left-radius: 3px;
 	border-top-right-radius: 3px;
 	-moz-border-radius-topleft: 3px;
@@ -163,15 +167,16 @@ ul#topnav li a {
 
 ul#topnav li.submenu:hover { 
 	background: #e9efc9;
-	border-top: 1px solid #758816;
-	border-left: 1px solid #758816;
-	border-right: 1px solid #758816;
+	border-top: 1px solid #d2df92;
+	border-left: 1px solid #d2df92;
+	border-right: 1px solid #d2df92;
 	border-top-left-radius: 3px;
 	border-top-right-radius: 3px;
 	-moz-border-radius-topleft: 3px;
 	-moz-border-radius-topright: 3px;
 	margin-top: 4px;
-	padding-top: 3px; 
+	padding-bottom: 8px;
+	padding-top: 2px;
 }
 
 ul#topnav li.submenu a:hover {
@@ -188,9 +193,10 @@ ul#topnav li a:hover {
 
 ul#topnav li ul {
 	/*border-top: 1px solid #758816;*/
-	border-bottom: 1px solid #758816;
+	border-bottom: 1px solid #d2df92;
 	float: left;
-	padding: 4px 5px 6px 5px;
+	padding: 4px 5px 5px;
+	/*padding: 4px 5px 6px 5px;*/
 	position: absolute;
 	list-style: none;
 	left: 0;
@@ -539,7 +545,8 @@ ul#subnav li a:hover {
 	/*border-top: 1px solid #758816;*/
 	border-bottom: 1px solid #758816;
 	margin: 0;
-	padding: 5px;
+	padding: 5px 5px 4px;
+	/*padding: 5px;*/
 }
 
 #sec-menu li {
@@ -955,23 +962,36 @@ ul#subnav li a:hover {
 	text-decoration: none;
 }
 
-/**** Specific styles for adaptation information image and text on frontpage ****/
-
+/**** 
+	Specific styles for elements on frontpage 
+****/
+/* Text Climate Change Adaptation in Europe */
 #p_p_id_56_INSTANCE_7vIW_ {
-	margin-top: 15px;
+	margin-top: 22px;
 }
 
 #p_p_id_56_INSTANCE_7vIW_ h1 {
 	color: #02213D;
 	font-size: 26px;
-}
-
-.image-ai-fp .portlet-body {
-	margin: -5px 0 15px 0;
+	padding-bottom: 7px;
 }
 
 .ie #p_p_id_56_INSTANCE_7vIW_ {
-	margin-top: 15px;
+	margin-top: 22px;
+}
+
+.more-spacing-list li {
+	line-height: 20px;
+}
+
+#p_p_id_56_INSTANCE_7vIW_ .double-arrow {
+	float: right;
+	margin-top: -17px;
+}
+                       
+/* Speed buttons adaptation information */
+.image-ai-fp .portlet-body {
+	margin: -5px 0 15px 0;
 }
 
 .image-ai-fp {
@@ -982,12 +1002,34 @@ ul#subnav li a:hover {
 	margin: -5px 0px 15px
 }
 
-.more-spacing-list li {
-	line-height: 20px;
+/* DB search portlet in the middle of the frontpage */
+.db-search-fp {
+	background: url("/ace-theme/images/db_search_fp.png") repeat scroll 0% 0% transparent;
+	height: 70px;
+	margin: 0pt -15px 0pt -14px;
+	position: absolute;
+	top: 408px;
+	width: 484px;
 }
 
+.db-search-fp .portlet-body {
+	left: 260px;
+	position: relative;
+	top: 22px;
+}
 
-/**** Styles modified from originally ace-theme/docroot/css/custom_common.css ****/
+.db-search-fp img {
+	position: relative;
+	top: 4px;
+}
+
+.db-search-fp img:hover {
+	cursor: pointer;
+}
+
+/**** 
+	Styles modified from originally ace-theme/docroot/css/custom_common.css 
+****/
 
 .logo .current-community, #navigation, #navigation a, .portlet, .portlet-topper, .site-breadcrumbs ul {
 	-moz-border-radius: 0;
@@ -1044,7 +1086,7 @@ span.opens-new-window-accessible,
 }
 
 .indicators a {
-	color: #02213D;
+	color: #02213D !important;
 	text-decoration: none;
 }
 
@@ -1376,6 +1418,7 @@ text and the class mapviewer to the MapViewerPortlet.
 .resultsGroupTitle {
 	color: #353f02;
 	font-size: 12px;
+	margin: -10px 0 -10px -5px;
 }
 
 .searchresult {
@@ -1426,4 +1469,18 @@ text and the class mapviewer to the MapViewerPortlet.
 	margin-right: 10px;
 	font-size: 11px;
 	text-decoration: none;
+}
+
+/****
+	Styling of the contact form
+****/
+.contact-form .aui-legend {
+	border-bottom: none;
+	color: #02213D;
+	font: normal 26px Tahoma, Times New Roman, serif;
+}
+
+.contact-form .aui-field-input-text {
+	height: 12px;
+	width: 200px;
 }
