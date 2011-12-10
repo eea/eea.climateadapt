@@ -2,7 +2,13 @@ CHM.SATCHMMap = OpenLayers.Class(CHM.CHMMap, {
 
 	location : null,
 	
-	initialize: function(options) {
+    selectionSymbolizer: {
+        'Polygon': {fillColor: '#FF0000', stroke: false},
+        'Line': {strokeColor: '#FF0000', strokeWidth: 2},
+        'Point': {graphicName: 'square', fillColor: '#FF0000', pointRadius: 5}
+    },
+
+    initialize: function(options) {
 		CHM.CHMMap.prototype.initialize.apply(this, arguments);
 	},
 	
@@ -11,32 +17,27 @@ CHM.SATCHMMap = OpenLayers.Class(CHM.CHMMap, {
 	    	displayInLayerSwitcher: true,
 	    	styleMap: new OpenLayers.StyleMap({
 	    	    "default": new OpenLayers.Style({
-	    	        pointRadius: 12, 
+	    	        pointRadius: 8, 
 	    	        fillColor: "#0070c0",
 	    	        strokeColor: "#002060",
 	    	        strokeWidth: 2,
 	    	        graphicZIndex: 1
 	    	    }),
 	    	    "default": new OpenLayers.Style({
-	    	        pointRadius: 12, 
+	    	        pointRadius: 8, 
 	    	        fillColor: "#0070c0",
 	    	        strokeColor: "#002060",
 	    	        strokeWidth: 2,
 	    	        graphicZIndex: 1
 	    	    }),
 	    	})
-//	    	styleMap: new OpenLayers.StyleMap({
-//                // Set the external graphic and background graphic images.
-//                externalGraphic: "/sat/js/chm/img/location.png",
-//                graphicZIndex: 1,
-//                pointRadius: 12
-//            })	    	
 	    });
 		
-		var similar_areas_image_layer = new OpenLayers.Layer.WMS('Biogeographical regions 2005', 
+		similar_areas_image_layer = new OpenLayers.Layer.WMS('Biogeographical regions 2005', 
 			geoserverUrl + wms + '?', 
 			{layers: 'chm:biogeo_2005', format: 'image/png', transparent: 'true'}, 
 			{visibility: false}, 
+			{tileOptions: {maxGetUrlLength: 2048}}, 
 			{isBaseLayer: false}
 		);
 		
@@ -64,7 +65,7 @@ CHM.SATCHMMap = OpenLayers.Class(CHM.CHMMap, {
         		type: OpenLayers.Filter.Comparison.EQUAL_TO, 
         		fill_color: '#ff0000', 
         		stroke_color: '#c00000',
-        		radius: 12
+        		radius: 8
         	});
         
         case_studies_dissimilar_areas = new CHM.SATVector(
@@ -200,7 +201,35 @@ CHM.SATCHMMap = OpenLayers.Class(CHM.CHMMap, {
 		        value: this.feature.geometry
 		    });
 			
+			// filter = new OpenLayers.Filter.Spatial({
+		    //    type: OpenLayers.Filter.Spatial.INTERSECTS,
+		    //    property: "geom",
+		    //    value: this.feature.geometry
+		    // });
+			
+			// sld = this.createSLD(similar_areas_image_layer, filter);
+			
+			// similar_areas_image_layer.mergeNewParams({SLD_BODY: sld, styles: ""});
+			
+			// similar_areas_image_layer.redraw(true);
+			
 			similar_areas_vector_layer.refresh({force: true});
 		}
-	}
+	},
+	
+    createSLD : function(layer, filter) {
+        var sld = {version: "1.0.0", namedLayers: {}};
+        var layerNames = [layer.params.LAYERS].join(",").split(",");
+        for (var i=0, len=layerNames.length; i<len; i++) { 
+            var name = layerNames[i];
+            sld.namedLayers[name] = {name: name, userStyles: []};
+            var symbolizer = {Polygon: this.selectionSymbolizer['Polygon']};
+            sld.namedLayers[name].userStyles.push({name: 'default', rules: [
+                new OpenLayers.Rule({symbolizer: symbolizer, 
+                    filter: filter, 
+                    maxScaleDenominator: layer.options.minScale})
+            ]});
+        }
+        return new OpenLayers.Format.SLD({srsName: this.getProjection()}).write(sld);
+    }
 });

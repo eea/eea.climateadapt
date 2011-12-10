@@ -5,7 +5,7 @@
 <%@ taglib uri="http://liferay.com/tld/aui" prefix="aui" %>
 
 <%@ page import="javax.portlet.PortletPreferences" %>
-<%@page import="nl.wur.alterra.cgi.portlet.Constants"%>
+<%@ page import="nl.wur.alterra.cgi.portlet.Constants" %>
 
 <portlet:defineObjects />
 

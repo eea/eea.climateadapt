@@ -58,6 +58,11 @@ public class SimilarAreasToolPortlet extends MVCPortlet {
 
 		prefs.setValue(Constants.bingTimeOutPreferenceName, bingtimeout);
 		
+		// Zoomlevel
+		String zoomlevel = ParamUtil.getString(request, Constants.zoomLevelPreferenceName);
+		
+		prefs.setValue(Constants.zoomLevelPreferenceName, zoomlevel);
+		
 		prefs.store();
 	}
 }
