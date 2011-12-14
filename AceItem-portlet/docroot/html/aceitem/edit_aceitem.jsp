@@ -29,7 +29,7 @@
 		    %>
 		    }
 			
-</script>
+</script>F
 		
 <liferay-ui:header
 	backURL="<%= redirect %>"
@@ -241,7 +241,7 @@
 	<b>High importance</b>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 
 	<input type="checkbox" name="chk_controlstatus" id="chk_controlstatus" value="1" <% if (aceitem != null) { out.print( aceitem.getControlstatus() == 1 ? "checked" : "") ; } %> />
 	<b>Reviewed</b>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 
- 	<b>Before edited by: <% if (aceitem != null) { out.print( aceitem.getModerator() ) ; } %> </b>	
+ 	<b>Edited by: <% if (aceitem != null) { out.print( aceitem.getModerator() ) ; } %> </b>	
 	<br /><br />
 	
 	<aui:button-row>

@@ -94,10 +94,39 @@ public abstract class LuceneIndexUpdatePortlet extends MVCPortlet {
         aceitem.setSpecialtagging(ParamUtil.getString(request, "specialtagging"));
 
         aceitem.setDatatype(ParamUtil.getString(request, "datatype"));
-        aceitem.setStoredAt(ParamUtil.getString(request, "storedAt"));
         aceitem.setStoragetype(ParamUtil.getString(request, "storagetype"));
-
         
+        if(aceitem.getStoragetype().equalsIgnoreCase("URL")) {
+			String websites= ParamUtil.getString(request, "storedAt");
+			// robust multiple website handling. Check for splitters space, ',' and ';' 
+			if(websites != null) {
+				websites = websites.replace("  ", " ");
+				websites = websites.replace(",", " ");
+				websites = websites.replace(";", " ");
+				websites = websites.replace("  ", " ");
+				String[] site = websites.split(" ");
+				if(site.length > 1)	{
+					websites = "";
+					for(int i=0; i < site.length; i++) {					
+						site[i] = site[i].trim();
+						if (site[i].length() > 0) {
+						// end up with splitter '; '
+							websites += site[i]  ;
+							if( i < site.length-1) {
+							// not last
+								websites += "; " ;
+							}
+						}
+					}
+				}
+			}
+			aceitem.setStoredAt(websites);
+        }
+        else {
+
+            aceitem.setStoredAt(ParamUtil.getString(request, "storedAt"));
+        }
+      
         aceitem.setKeyword(ParamUtil.getString(request, "keyword"));
         aceitem.setSpatialLayer(ParamUtil.getString(request, "spatialLayer"));
         

@@ -4,35 +4,72 @@
 <%@ taglib uri="http://java.sun.com/portlet_2_0" prefix="portlet" %>
 
 <%@include file="/html/init.jsp" %>
-
+<div class="item-detail">
+<div class="text-container">
 
 <%
 	Long aceitem_id = 0l ;
 	AceItem aceitem = null;
 	String url = null;
+	String[] urls = null;
+	String websitelabel = "Website";
 
 	String redirect = PortalUtil.getCurrentURL(renderRequest);
 	
 	if(request.getAttribute(Constants.ACEITEMID)!=null) {
-		aceitem_id = Long.parseLong( (String) request.getAttribute(Constants.ACEITEMID) ) ;
-		aceitem = AceItemLocalServiceUtil.getAceItem( aceitem_id ) ;
-		
-		if(aceitem.getStoragetype().equalsIgnoreCase("GEONETWORK")) {
-			url = "<a href='/map-viewer?cswRecordFileIdentifier=" + aceitem.getStoredAt() + "' >" + aceitem.getName() + "</a>" ; 
-		}
-		else {	
-			url = "<a href='" + aceitem.getStoredAt() + "' target='_blank'>" + aceitem.getStoredAt() + "</a>" ;
-		}
 
-	}
+		aceitem_id = Long.parseLong( (String) request.getAttribute(Constants.ACEITEMID) ) ;
+
+		try {
+			
+			aceitem = AceItemLocalServiceUtil.getAceItem( aceitem_id ) ;
+		}
+		catch(Exception exc) {
+			
+			aceitem = null;
+		}
+				
+		if(aceitem != null) {
+			
+			if(aceitem.getStoragetype().equalsIgnoreCase("GEONETWORK")) {
+				url = "<a href='/map-viewer?cswRecordFileIdentifier=" + aceitem.getStoredAt() + "' >" + aceitem.getName() + "</a>" ; 
+			}
+			else {	
+
+				url = aceitem.getStoredAt();
+				
+				if(url != null && url.trim().length() > 0) {
 	
+					// Portlet code checks for splitter to be '; '
+					urls = url.split(";");
+					
+					url = "" ;
+					for(int i=0; i<urls.length; i++) {
+						
+						if(i==2) { websitelabel += "s" ;}
+						
+						urls[i] = urls[i].trim();
+						
+						if(urls[i].length() > 0) {
+							if ( ! (urls[i].startsWith("http://")  || urls[i].startsWith("/") ) ) {
+								
+								urls[i] = "http://" + urls[i];
+							}
+							
+							url += "<a href='" + urls[i] + "' target='_blank'>" + urls[i] + "</a>&nbsp;&nbsp;" ;
+						}
+					} 
+				}
+			}
+		}		
+	}
+
+	if(aceitem != null) {	
 %>
-<div class="item-detail">
-<div class="text-container">
- <c:choose>
-   <c:when test="${aceitem_id>0}">
+
+
      <div class="portlet-title">
-	 <H1><% out.print( aceitem.getName() ); %></H1>
+	 <H5><% out.print( aceitem.getName() ); %></H5>
 	 </div>
 	 <div class="body">
 	 <b>Description</b><br />
@@ -120,13 +157,13 @@
 	
 	<liferay-ui:icon image="yes" url="<%=rateUpURL.toString() %>" />
 	 &nbsp;&nbsp;<br />	
-<%	 }  %>     
-   </c:when>
-   <c:otherwise>
+<%	 } 
+  }
+  else {%>      
    <div class="portlet-title">
-     <H1>No AceItem selected</H1>
+     <H1>No available item selected</H1>
     </div>
-   </c:otherwise>
- </c:choose>
+<% } 
+	%> 
  </div>
  </div>
