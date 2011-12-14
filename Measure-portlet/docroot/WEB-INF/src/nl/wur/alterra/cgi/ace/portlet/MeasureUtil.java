@@ -29,6 +29,10 @@ public class MeasureUtil {
 			// depends on measure.getName()
 			orderByComparator = new MeasureNameComparator(orderByAsc);
 		}
+	    else if (orderByCol.equals("source")) {
+			// depends on measure.getSource()
+			orderByComparator = new MeasureSourceComparator(orderByAsc);
+		}
 	    else if (orderByCol.equals("type")) {
 			// depends on measure.getMao_type()
 			orderByComparator = new MeasureTypeComparator(orderByAsc);

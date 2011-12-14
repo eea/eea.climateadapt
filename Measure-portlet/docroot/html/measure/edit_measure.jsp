@@ -293,7 +293,7 @@
 	<b>High importance</b>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 
  	<input type="checkbox" name="chk_controlstatus" id="chk_controlstatus" value="1" <% if (measure != null) { out.print( measure.getControlstatus() == 1 ? "checked" : "") ; } %> />
 	<b>Reviewed</b>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 
-	<b>Before edited by: <% if (measure != null) { out.print( measure.getModerator() ) ; } %> </b>	
+	<b>Edited by: <% if (measure != null) { out.print( measure.getModerator() ) ; } %> </b>	
  	<br />
 	
 	<aui:button-row>

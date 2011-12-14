@@ -111,7 +111,32 @@ public class MeasurePortlet extends MVCPortlet {
 		measure.setStakeholderparticipation(ParamUtil.getString(request, "stakeholderparticipation"));
 		measure.setContact(ParamUtil.getString(request, "contact"));
 		measure.setSucceslimitations(ParamUtil.getString(request, "succeslimitations"));
-		measure.setWebsite(ParamUtil.getString(request, "website"));
+
+		String websites= ParamUtil.getString(request, "website");
+		// robust multiple website handling. Check for splitters space, ',' and ';' 
+		if(websites != null) {
+			websites = websites.replace("  ", " ");
+			websites = websites.replace(",", " ");
+			websites = websites.replace(";", " ");
+			websites = websites.replace("  ", " ");
+			String[] site = websites.split(" ");
+			if(site.length > 1)	{
+				websites = "";
+				for(int i=0; i < site.length; i++) {					
+					site[i] = site[i].trim();
+					if (site[i].length() > 0) {
+					// end up with splitter '; '
+						websites += site[i]  ;
+						if( i < site.length-1) {
+						// not last
+							websites += "; " ;
+						}
+					}
+				}
+			}
+		}
+		measure.setWebsite(websites);	
+		
 		measure.setCostbenefit(ParamUtil.getString(request, "costbenefit"));	
 		measure.setKeywords(ParamUtil.getString(request, "keywords"));	
 		measure.setComments(ParamUtil.getString(request, "comments"));			

@@ -31,49 +31,66 @@
 	
 	if(request.getAttribute(Constants.MEASUREID)!=null) {
 		measure_id = Long.parseLong( (String) request.getAttribute(Constants.MEASUREID) ) ;
-		measure = MeasureLocalServiceUtil.getMeasure( measure_id ) ;
 		
-		url = measure.getWebsite();
-		
-		if(url != null && url.trim().length() > 0) {
-			urls = url.split(";");
+		try {
+			measure = MeasureLocalServiceUtil.getMeasure( measure_id ) ;
+		}
+		catch(Exception exc) {
 			
-			url = "" ;
-			for(int i=0; i<urls.length; i++) {
+			measure = null;
+		}
+		
+		if(measure != null) {
+			
+			url = measure.getWebsite();
+			
+			if(url != null && url.trim().length() > 0) {
+	
+				// Portlet code checks for splitter to be '; '
+				urls = url.split(";");
 				
-				if(i>0) { websitelabel += "s" ;}
-				
-				if(urls[i].trim().length() > 0) {
-					if ( !urls[i].startsWith("http://")) {
-						
-						urls[i] = "http://" + urls[i];
-					}
+				url = "" ;
+				for(int i=0; i<urls.length; i++) {
 					
-					url += "<a href='" + urls[i] + "' target='_blank'>" + urls[i] + "</a>&nbsp;&nbsp;&nbsp;&nbsp;" ;
-				}
-			} 
+					if(i==2) { websitelabel += "s" ;}
+					
+					urls[i] = urls[i].trim();
+					
+					if(urls[i].length() > 0) {
+						if ( ! (urls[i].startsWith("http://")  || urls[i].startsWith("/") ) ) {
+							
+							urls[i] = "http://" + urls[i];
+						}
+						
+						url += "<a href='" + urls[i] + "' target='_blank'>" + urls[i] + "</a>&nbsp;&nbsp;" ;
+					}
+				} 
+			}
+			
+			if( measure.getMao_type().equalsIgnoreCase("A")) {
+				type = "Case study" ;
+			}
+			
+			if (measure.getImplementationtype().equalsIgnoreCase("grey"))	{
+				implementationtype = "Technical ('grey')" ;
+			}
+			else if (measure.getImplementationtype().equalsIgnoreCase("green"))	{
+				implementationtype = "Ecological ('green')" ;
+			}
+			else if (measure.getImplementationtype().equalsIgnoreCase("soft"))	{
+				implementationtype = "Behavioural / policy ('soft')" ;
+			}
 		}
-		
-		if( measure.getMao_type().equalsIgnoreCase("A")) {
-			type = "Case study" ;
-		}
-		
-		if (measure.getImplementationtype().equalsIgnoreCase("grey"))	{
-			implementationtype = "Technical ('grey')" ;
-		}
-		else if (measure.getImplementationtype().equalsIgnoreCase("green"))	{
-			implementationtype = "Ecological ('green')" ;
-		}
-		else if (measure.getImplementationtype().equalsIgnoreCase("soft"))	{
-			implementationtype = "Behavioural / policy ('soft')" ;
+		else {
+			
+			measure_id = 0l;
 		}
 	}
 	
+	if(measure != null) {
 %>
 
- <c:choose>
-   <c:when test="${measure_id>0}">
-	 <H1><% out.print( measure.getName() ); %> (<%= type %>)</H1>
+	 <H3><% out.print( measure.getName() ); %> (<%= type %>)</H3>
 	 <b>Description</b><br />
 	 <% out.print( measure.getDescription() ); %><br /><br />
 	 <b>Contact</b><br />
@@ -179,10 +196,11 @@
 	
 	<liferay-ui:icon image="yes" url="<%=rateUpURL.toString() %>" />
 	 &nbsp;&nbsp;<br />	
-<%	 }  %>
-</c:when>
-<c:otherwise>
- <H1>No Measure selected</H1>
-</c:otherwise>
-</c:choose>
+<%	 } 
+  }
+  else {%>      
+
+     <H1>No available measure selected</H1>
+<% } 
+	%> 
 
