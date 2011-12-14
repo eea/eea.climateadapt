@@ -204,7 +204,7 @@
 	<b>High importance</b>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 
  	<input type="checkbox" name="chk_controlstatus" id="chk_controlstatus" value="1" <% if (project != null) { out.print( project.getControlstatus() == 1 ? "checked" : "") ; } %> />
 	<b>Reviewed</b>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 
-	<b>Before edited by: <% if (project != null) { out.print( project.getModerator() ) ; } %> </b>	
+	<b>Edited by: <% if (project != null) { out.print( project.getModerator() ) ; } %> </b>	
 	<br />
 	
 	<aui:button-row>

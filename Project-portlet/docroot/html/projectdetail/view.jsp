@@ -29,36 +29,53 @@
 	String redirect = PortalUtil.getCurrentURL(renderRequest);
 	
 	if(request.getAttribute(Constants.PROJECTID)!=null) {
+		 
 		project_id = Long.parseLong( (String) request.getAttribute(Constants.PROJECTID) ) ;
-		project = ProjectLocalServiceUtil.getProject( project_id ) ;
 		
-		url = project.getWebsite();
-		
-		if(url != null && url.trim().length() > 0) {
-			urls = url.split(";");
+		try {
 			
-			url = "" ;
-			for(int i=0; i<urls.length; i++) {
-				
-				if(i>0) { websitelabel += "s" ;}
-				
-				if(urls[i].trim().length() > 0) {
-					if ( ! urls[i].startsWith("http://")  && ! urls[i].startsWith("/") ) {
-						
-						urls[i] = "http://" + urls[i];
-					}
-					
-					url += "<a href='" + urls[i] + "' target='_blank'>" + urls[i] + "</a>&nbsp;&nbsp;&nbsp;&nbsp;" ;
-				}
-			} 
+			project = ProjectLocalServiceUtil.getProject( project_id ) ;
 		}
+		catch(Exception exc) {
+			
+			project = null;
+		}
+		
+		if(project != null) {
+				
+			url = project.getWebsite();
+			
+			if(url != null && url.trim().length() > 0) {
+	
+				// Portlet code checks for splitter to be '; '
+				urls = url.split(";");
+				
+				url = "" ;
+				for(int i=0; i<urls.length; i++) {
+					
+					if(i==2) { websitelabel += "s" ;}
+					
+					urls[i] = urls[i].trim();
+					
+					if(urls[i].length() > 0) {
+						if ( ! (urls[i].startsWith("http://")  || urls[i].startsWith("/") ) ) {
+							
+							urls[i] = "http://" + urls[i];
+						}
+						
+						url += "<a href='" + urls[i] + "' target='_blank'>" + urls[i] + "</a>&nbsp;&nbsp;" ;
+					}
+				} 
+			}
+		}		
 	}
+
+	if(project != null) {
 	
 %>
 
- <c:choose>
-   <c:when test="${project_id>0}">
-	 <H1><% out.print( project.getAcronym() ); %>: <% out.print( project.getTitle() ); %></H1>
+
+	 <H3><% out.print( project.getAcronym() ); %>: <% out.print( project.getTitle() ); %></H3>
 	 <b>Abstract</b><br />
 	 <% out.print( project.getAbstracts() ); %><br /><br />
 	 
@@ -146,9 +163,10 @@
 	
 	<liferay-ui:icon image="yes" url="<%=rateUpURL.toString() %>" />
 	 &nbsp;&nbsp;<br />	
-<%	 }  %>      
-   </c:when>
-   <c:otherwise>
-     <H1>No Project selected</H1>
-   </c:otherwise>
- </c:choose>
+<%	 } 
+  }
+  else {%>      
+
+     <H1>No available project selected</H1>
+<% } 
+	%> 

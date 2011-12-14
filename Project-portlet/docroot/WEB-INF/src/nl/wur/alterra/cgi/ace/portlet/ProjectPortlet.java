@@ -169,8 +169,32 @@ public class ProjectPortlet extends MVCPortlet {
 		}		
 		project.setClimateimpacts(choosenclimateimpacts);
 		
+		String websites= ParamUtil.getString(request, "website");
+		// robust multiple website handling. Check for splitters space, ',' and ';' 
+		if(websites != null) {
+			websites = websites.replace("  ", " ");
+			websites = websites.replace(",", " ");
+			websites = websites.replace(";", " ");
+			websites = websites.replace("  ", " ");
+			String[] site = websites.split(" ");
+			if(site.length > 1)	{
+				websites = "";
+				for(int i=0; i < site.length; i++) {					
+					site[i] = site[i].trim();
+					if (site[i].length() > 0) {
+					// end up with splitter '; '
+						websites += site[i]  ;
+						if( i < site.length-1) {
+						// not last
+							websites += "; " ;
+						}
+					}
+				}
+			}
+		}
+		project.setWebsite(websites);
+		
 		project.setKeywords(ParamUtil.getString(request, "keywords"));
-		project.setWebsite(ParamUtil.getString(request, "website"));	
 		project.setDuration(ParamUtil.getString(request, "duration"));
 		project.setSpecialtagging(ParamUtil.getString(request, "specialtagging"));
 		project.setSource(ParamUtil.getString(request, "source"));
