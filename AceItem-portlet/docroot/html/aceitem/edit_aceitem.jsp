@@ -29,7 +29,7 @@
 		    %>
 		    }
 			
-</script>F
+</script>
 		
 <liferay-ui:header
 	backURL="<%= redirect %>"
