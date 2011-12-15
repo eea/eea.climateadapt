@@ -150,13 +150,13 @@ ul#topnav .selected {
 	border-top-right-radius: 3px;
 	-moz-border-radius-topleft: 3px;
 	-moz-border-radius-topright: 3px;
-	margin-top: 4px;
+	margin-top: 6px; /*was 4px*/
 	padding-top: 0;
 }
 
 ul#topnav li.selected a {
 	margin-bottom: 1px;
-	padding-top: 2px;
+	/*padding-top: 2px;*/
 }
 
 ul#topnav li a {
@@ -174,9 +174,19 @@ ul#topnav li.submenu:hover {
 	border-top-right-radius: 3px;
 	-moz-border-radius-topleft: 3px;
 	-moz-border-radius-topright: 3px;
-	margin-top: 4px;
+	margin-top: 6px; /* was 4px */
 	padding-bottom: 8px;
-	padding-top: 2px;
+	padding-top: 0;
+	padding-left: 6px;
+	padding-right: 6px;
+}
+
+ul#topnav li.selected:hover {
+	padding: 0 7px 8px 7px;
+}
+
+ul#topnav li.selected li.first:hover {
+	padding: 0;
 }
 
 ul#topnav li.submenu a:hover {
@@ -184,8 +194,6 @@ ul#topnav li.submenu a:hover {
 	margin-bottom: 1px;
 	padding-top: 0;
 }
-
-
 
 ul#topnav li a:hover { 
 	color: #FFF; 
@@ -222,6 +230,10 @@ ul#subnav li.selected {
 	background: none; 
 	border: none;
 	margin-top: 0;
+}
+
+ul#subnav li.selected:hover {
+	padding: 0;
 }
 
 ul#subnav li.selected a {
@@ -294,6 +306,10 @@ ul#subnav li a:hover {
 
 .ie .lfr-portlet-title-editable {
 	margin-top: -6px;
+}
+
+.portlet-title-text {
+    cursor: default;
 }
 
 .lfr-portlet-title-editable-content {
@@ -543,11 +559,15 @@ ul#subnav li a:hover {
 #sec-menu ul {
 	background-color: #e9efc9;
 	/*border-top: 1px solid #758816;*/
-	border-bottom: 1px solid #758816;
+	border-bottom: 1px solid #d2df92;
 	margin: 0;
 	padding: 5px 5px 4px;
 	/*padding: 5px;*/
 }
+
+.ie8 #sec-menu ul {
+	padding: 4px 5px 5px;
+} 
 
 #sec-menu li {
 	display: inline;
@@ -1027,6 +1047,25 @@ ul#subnav li a:hover {
 	cursor: pointer;
 }
 
+#db-search-fp-link {
+	border: none;
+	height: 60px;
+	left: -245px;
+	position: absolute;
+	top: -18px;
+	width: 225px;
+}
+
+#db-search-fp-info-text {
+	margin-bottom:5px;
+	position: absolute;
+	top: -10px;
+}
+
+.db-search-fp input {
+	margin-top: 8px;
+}
+
 /**** 
 	Styles modified from originally ace-theme/docroot/css/custom_common.css 
 ****/
@@ -1165,7 +1204,9 @@ text and the class sat-map to the SimilarAreasToolPortlet.
 }
 
 .sat-map #risk-select {
-	margin-top: -305px;
+	left: 345px;
+	position: absolute;
+	top: 0;
 }
 
 .sat-map #risk-select label {
@@ -1177,7 +1218,9 @@ text and the class sat-map to the SimilarAreasToolPortlet.
 }
 
 .sat-map #sector-select {
-	margin-top: -278px;
+	left: 345px;
+	position: absolute;
+	top: 30px;
 }
 
 .sat-map #sector-select label {
@@ -1191,6 +1234,7 @@ text and the class sat-map to the SimilarAreasToolPortlet.
 .sat-map #legend_element {
 	background-color: #D2DE92;
 	color: #353F02;
+	display: none;
 	margin: -151px -254px 0 0;
 }
 
@@ -1480,7 +1524,20 @@ text and the class mapviewer to the MapViewerPortlet.
 	font: normal 26px Tahoma, Times New Roman, serif;
 }
 
+.contact-form .aui-fieldset-content {
+	margin-top: 15px;
+}
+
+.contact-form .aui-field-input-select {
+	height: 21px;
+	width: 454px;
+}
+
 .contact-form .aui-field-input-text {
 	height: 12px;
-	width: 200px;
+	width: 450px;
+}
+
+.contact-form #_1_WAR_webformportlet_INSTANCE_5ZkT_field4 {
+	height: 100px;
 }

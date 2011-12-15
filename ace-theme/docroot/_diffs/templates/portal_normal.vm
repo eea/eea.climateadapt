@@ -7,8 +7,16 @@
 <head>
 	<title>$the_title - $company_name</title>
 	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js"></script>
-
 	$theme.include($top_head_include)
+	
+	#if($is_signed_in)
+	<style type="text/css">
+		.portlet-title-text {
+    		cursor: pointer;
+		}
+	</style>
+	#end
+	
 </head>
 
 <body class="$css_class">
