@@ -65,7 +65,7 @@
 	var actual_image = "europe";
 	var selectedCountry = '';
 	
-	var countries = ['AT', 'BE', 'BG', 'CH', 'CY', 'CZ', 'DE', 'DK', 'EE', 'ES', 'FI', 'FR', 'GB', 'GR', 'HU', 'IR', 'IT', 'IS', 'LT', 'LV', 'LU', 'MT', 'NL', 'NO', 'PL', 'PT', 'RO', 'SE', 'SI', 'SK'];
+	var countries = ['AT', 'BE', 'BG', 'CH', 'CY', 'CZ', 'DE', 'DK', 'EE', 'ES', 'FI', 'FR', 'GB', 'GR', 'HU', 'IR', 'IT', 'IS', 'LT', 'LI', 'LV', 'LU', 'MT', 'NL', 'NO', 'PL', 'PT', 'RO', 'SE', 'SI', 'SK', 'TR'];
 	
 	function highlight(area) {
 		$j("#"+ actual_image+'_selected').hide();
@@ -178,6 +178,7 @@
 			<option id="IR-option" value="IR">Ireland</option>
 			<option id="IS-option" value="IS">Iceland</option>
 			<option id="IT-option" value="IT">Italy</option>
+			<option id="LI-option" value="LI">Liechtenstein</option>
 			<option id="LT-option" value="LT">Lithuania</option>
 			<option id="LV-option" value="LV">Latvia</option>
 			<option id="LU-option" value="LU">Luxembourg</option>
@@ -190,6 +191,7 @@
 			<option id="SE-option" value="SE">Sweden</option>
 			<option id="SI-option" value="SI">Slovenia</option>
 			<option id="SK-option" value="SK">Slovakia</option>
+			<option id="TR-option" value="TR">Turkey</option>
 		</select>
 		</p>
 		<map name="Map" id="country-selection-map">
