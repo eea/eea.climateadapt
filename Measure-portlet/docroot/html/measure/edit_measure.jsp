@@ -234,11 +234,11 @@
 
 		<div id="map_element" style='width: 500px; height: 500px;'></div>
 		
-		<b>lat</b><br />	
-		<input name="lat" type="text" size="10" value='<%= measure == null ? "" : measure.getLat() %>'><br /><br />
-		
 		<b>lon</b><br />	
 		<input name="lon" type="text" size="10" value='<%= measure == null ? "" : measure.getLon() %>'><br /><br />
+		
+		<b>lat</b><br />	
+		<input name="lat" type="text" size="10" value='<%= measure == null ? "" : measure.getLat() %>'><br /><br />
 		
 		<a onclick="handleClick(event)">Apply</a><br /><br />
 		
@@ -345,15 +345,15 @@
 	}
 
     function handleClick(e) {
-		measurechmmap.setMeasure(new CHM.Measure(document._measureportlet_WAR_Measureportlet_fm.lat.value, document._measureportlet_WAR_Measureportlet_fm.lon.value, new OpenLayers.Projection('EPSG:4326')));
+		measurechmmap.setMeasure(new CHM.Measure(document._measureportlet_WAR_Measureportlet_fm.lon.value, document._measureportlet_WAR_Measureportlet_fm.lat.value, new OpenLayers.Projection('EPSG:4326')));
 	}
 			
 	function measureChanged() {
 		var measure = measurechmmap.getMeasure(new OpenLayers.Projection('EPSG:4326'));
 				
-		document._measureportlet_WAR_Measureportlet_fm.lat.value = measure.x;
+		document._measureportlet_WAR_Measureportlet_fm.lon.value = measure.x;
 				
-		document._measureportlet_WAR_Measureportlet_fm.lon.value = measure.y;
+		document._measureportlet_WAR_Measureportlet_fm.lat.value = measure.y;
 	}
 			
 	function areaChanged() {
