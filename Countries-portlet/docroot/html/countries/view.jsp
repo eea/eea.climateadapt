@@ -156,8 +156,17 @@
 		<img id="SE_selected" src="<%=renderRequest.getContextPath()%>/images/countryselectionmap/SE.png" width="500" height="375" border="0" usemap="#Map" style="display:none;"/>
 		<img id="SI_selected" src="<%=renderRequest.getContextPath()%>/images/countryselectionmap/SI.png" width="500" height="375" border="0" usemap="#Map" style="display:none;"/>
 		<img id="SK_selected" src="<%=renderRequest.getContextPath()%>/images/countryselectionmap/SK.png" width="500" height="375" border="0" usemap="#Map" style="display:none;"/>
-	
+
 		<p>
+		<select id="country-selection-list"  style="margin-top:5px;">
+			<option id="no-selection-option" value="" selected="selected">Choose a country </option>
+			<c:forEach var="countryElement" items="<%= nl.wur.alterra.cgi.ace.model.constants.AceItemCountry.values() %>" >
+				<option id="${countryElement}-option" value="${countryElement}"><liferay-ui:message key="acesearch-country-lbl-${countryElement}" /></option>				
+			</c:forEach>
+		</select>
+		</p>
+	
+		<!--  <p>
 		<select id="country-selection-list"  style="margin-top:5px;">
 			<option id="no-selection-option" value="" selected="selected">Choose a country </option>
 			<option id="AT-option" value="AT">Austria</option>
@@ -193,7 +202,7 @@
 			<option id="SK-option" value="SK">Slovakia</option>
 			<option id="TR-option" value="TR">Turkey</option>
 		</select>
-		</p>
+		</p> -->
 		<map name="Map" id="country-selection-map">
 <!-- austria -->
 <area shape="poly" coords="273,249,278,250,280,249,282,250,294,246,294,243,299,239,302,237,306,237,309,233,311,233,315,235,320,235,320,237,324,243,320,244,319,249,319,255,308,259,302,259,292,258,284,255,283,256,278,256,273,254,271,251" href="#AT" alt="austria"  onclick="return select('AT')" onmouseover="highlight('AT');" onmouseout="unhighlight('AT');" />
