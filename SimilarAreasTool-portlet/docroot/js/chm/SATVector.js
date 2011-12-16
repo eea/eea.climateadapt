@@ -25,6 +25,7 @@ CHM.SATVector = OpenLayers.Class(OpenLayers.Layer.Vector, {
 	        featureType: 'casestudies',
 	        featureNS: 'http://ace.geocat.net',
 	        geometryName: 'geom',
+	        maxFeatures: 1000,
 	        srsName: 'EPSG:900913'
         });
         
