@@ -122,7 +122,9 @@ public class SimpleFilterPortlet extends MVCPortlet {
         String[] elements = requestParams.get(SearchRequestParams.ELEMENT);
         String[] impacts = requestParams.get(SearchRequestParams.IMPACT);
         String[] sortBys = requestParams.get(SearchRequestParams.SORTBY);
-        
+        if((sortBys == null) || (sortBys.length==0) || (sortBys[0].length()==0)) {
+        	sortBys = new String[] {"RATING"} ; // sort by rating 
+        }
 		PortletPreferences prefs = request.getPreferences();
 		
 		prefs.setValue(Constants.FREEPAR, ParamUtil.getString(request, Constants.FREEPAR) );
