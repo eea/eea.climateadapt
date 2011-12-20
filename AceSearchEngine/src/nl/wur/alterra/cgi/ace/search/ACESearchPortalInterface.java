@@ -139,6 +139,11 @@ public class ACESearchPortalInterface {
         if(request instanceof ClientDataRequest) {
             requestParams = request.getParameterMap();
 
+            //if(requestParams.containsKey(SearchRequestParams.SORTBY)) {
+            //	String[] key = requestParams.get(SearchRequestParams.SORTBY);
+            //	System.out.println( "Sort by " + key[0] );
+            //}
+
 			// Retrieve fuzziness from preferences
             PortletPreferences preferences = request.getPreferences();
             // System.out.println("prepareACESearchFormBean (fuzziness): " + preferences.getValue(SearchRequestParams.FUZZINESS, ""));

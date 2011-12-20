@@ -89,7 +89,7 @@ public class ACEIndexSearcher {
                 }
                 this.setStale(false);
             }
-
+/* Default sort by rating:
             //System.out.println("ACEIndexSearcher sortBy" + sortBy);
             Sort sort = null;
             if(sortBy == null) {
@@ -111,6 +111,31 @@ public class ACEIndexSearcher {
                     sort = new Sort(new SortField( ACEIndexConstant.IndexField.RATING_SORT, SortField.STRING));
                 }
             }
+ */
+
+            
+/* Default sort by relevance: */            
+            //System.out.println("ACEIndexSearcher sortBy" + sortBy);
+            Sort sort = null;
+            if(sortBy == null) { // relevance
+                sort = new Sort(new SortField[] { SortField.FIELD_SCORE, SortField.FIELD_DOC });
+                            }
+            else {
+                if(sortBy.equals("RATING")) {
+                    sort = new Sort(new SortField( ACEIndexConstant.IndexField.RATING_SORT, SortField.STRING));
+                }
+                else if(sortBy.equals("NAME")) {
+                    sort = new Sort(new SortField( ACEIndexConstant.IndexField.NAME_SORT, SortField.STRING));
+                }
+                // undefined sort: default to relevance
+                else {
+                    // ignore it (let Lucene default to relevance)
+                    sort = new Sort(new SortField[] { SortField.FIELD_SCORE, SortField.FIELD_DOC });
+                }
+            }
+            
+            
+            
            // return searcher.search(query, null, itemsPerPage, sort);
             int numHits = searcher.maxDoc();
             TopFieldCollector collector = TopFieldCollector.create(
