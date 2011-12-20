@@ -59,9 +59,9 @@
                 <input type="hidden" name="conditionAdaptationElement" id="${conditionAdaptationElementId}" value="${searchParams.conditionAdaptationElement}"/>
 
 				<liferay-ui:message key="acesearch-sort-by" />
-                <input type="radio" name="sortBy" class="sortByControl" id="${sortsearchRatingId}" value="RATING" checked /><liferay-ui:message key="acesearch-sort-rating" />
-                <input type="radio" name="sortBy" class="sortByControl" id="${sortsearchRelevanceId}" value="RELEVANCE" /><liferay-ui:message key="acesearch-sort-relevance" />
-				<input type="radio" name="sortBy" class="sortByControl" id="${sortsearchNameId}" value="NAME"/><liferay-ui:message key="acesearch-sort-name" />
+                <input type="radio" name="sortBy" class="sortByControl" id="${sortsearchRelevanceId}" value="RELEVANCE" checked /><liferay-ui:message key="acesearch-sort-relevance" />
+				<input type="radio" name="sortBy" class="sortByControl" id="${sortsearchRatingId}" value="RATING" /><liferay-ui:message key="acesearch-sort-rating" />
+                <input type="radio" name="sortBy" class="sortByControl" id="${sortsearchNameId}" value="NAME"/><liferay-ui:message key="acesearch-sort-name" />
                 <%--
 				<input type="radio" name="sortBy" class="sortByControl" id="${sortsearchCountryId}" value="COUNTRY"/><liferay-ui:message key="acesearch-sort-country" />
 				--%>
@@ -101,7 +101,97 @@
 			})	
 			
 			
+	function getCheckedValue(radioObj) {
+		if(!radioObj)
+			return "";
+		var radioLength = radioObj.length;
+		if(radioLength == undefined)
+			if(radioObj.checked)
+				return radioObj.value;
+			else
+				return "";
+		for(var i = 0; i < radioLength; i++) {
+			if(radioObj[i].checked) {
+				return radioObj[i].value;
+			}
+		}
+		return "";
+	}
 			
+/**
+ * Creates search results HTML from list of JSON AceItems.
+ *
+ */
+function displayJSONResults(unique, aceitemResults) {
+	var resultlist = '<div id="resultsListId-'+unique+'">';
+	jQuery.each(aceitemResults, function(idx, aceitem){ 
+		if (aceitem) {
+			// add searchresult
+			resultlist += '<div class="searchresult">';
+		
+			var descriptionText = aceitem.shortdescription ;
+
+			// add name and description
+            if ((aceitem.storedAt != "") && (aceitem.storagetype.substr(0, 3) == "URL")) {
+                   resultlist += '<div><span class="bolder">&#187; <a href="/viewaceitem?aceitem_id=' +  aceitem.aceItemId  + '" >' + aceitem.name + ' </a></span> - ' + descriptionText + '</div>';
+
+           } else if (aceitem.storedAt.substr(0, 14) == "ace_project_id") {
+                   resultlist += '<div><span class="bolder">&#187; <a href="/projects1?' + aceitem.storedAt + '" >' + aceitem.name + '</a></span>&nbsp;';
+                   resultlist += ' - ' + descriptionText + '</div>';
+
+            } else if (aceitem.storedAt.substr(0, 14) == "ace_measure_id") {
+                               resultlist += '<div><span class="bolder">&#187; <a href="/viewmeasure?' + aceitem.storedAt + '" >' + aceitem.name + '</a></span>&nbsp;';
+                               resultlist += ' - ' + descriptionText + '</div>';
+
+           } else {
+                   resultlist += '<div><span class="bolder">&#187; <a href="/viewaceitem?aceitem_id=' +  aceitem.aceItemId + '" >' + aceitem.name + ' </a></span> - ' + descriptionText + '</div>';
+
+           }
+            // add relevance  document.getElementById("${sortsearchRelevanceId}").checked <> getCheckedValue( document.getElementByName('sortBy') )=='RELEVANCE'
+            //resultlist += '<div class="relevance">relevance: ' + aceitem.relevance + '%</div>';
+
+            //resultlist += '<div class="relevance-title"> rating: ' + aceitem.rating + '. relevance: </div>';
+            if(true) {
+	            resultlist += '<div class="relevance-title">Search relevance: </div>';
+	            if(aceitem.relevance > 95) {
+	                resultlist += '<div class="relevance-marker"></div>';
+	                resultlist += '<div class="relevance-marker"></div>';
+	                resultlist += '<div class="relevance-marker"></div>';
+	                resultlist += '<div class="relevance-marker"></div>';
+	                resultlist += '<div class="relevance-marker"></div>';
+	            }
+	            else if(aceitem.relevance > 90) {
+	                resultlist += '<div class="relevance-marker"></div>';
+	                resultlist += '<div class="relevance-marker"></div>';
+	                resultlist += '<div class="relevance-marker"></div>';
+	                resultlist += '<div class="relevance-marker"></div>';
+	            }
+	            else if(aceitem.relevance > 85) {
+	                resultlist += '<div class="relevance-marker"></div>';
+	                resultlist += '<div class="relevance-marker"></div>';
+	                resultlist += '<div class="relevance-marker"></div>';
+	            }
+	            else if(aceitem.relevance > 80) {
+	                resultlist += '<div class="relevance-marker"></div>';
+	                resultlist += '<div class="relevance-marker"></div>';
+	            }
+	            else {
+	                resultlist += '<div class="relevance-marker"></div>';
+	            } 
+	            //resultlist += '(' + aceitem.relevance + ')';
+            }
+            
+			// add result footer 
+			// TODO use actual date from aceitem, if available
+//			resultlist += '<div class="resultfooter"><hr class="clearer"/></div>';
+			// close searchresult
+			resultlist += '<hr class="clearer"/></div>';					
+		}
+	});
+	// close searchresultlist
+	resultlist += '</div>';
+	jQuery('#expandedId-'+unique).append(resultlist);
+}			
 			
 			function displayPagedJSONResults(page, unique, aceitemResults) {
 				var startIdx = ((page -1) * <%= itemsOnPage %>);
@@ -155,25 +245,25 @@
                             </div>
                             <c:set var="relevance" value="${wrappedSearchResult.relevance}" />
                             <c:choose>
+                                <c:when test="${relevance > 95}">
+                                    <div class="relevance-marker"></div>
+                                    <div class="relevance-marker"></div>
+                                    <div class="relevance-marker"></div>
+                                    <div class="relevance-marker"></div>
+                                    <div class="relevance-marker"></div>
+                                </c:when>
+                                <c:when test="${relevance > 90}">
+                                    <div class="relevance-marker"></div>
+                                    <div class="relevance-marker"></div>
+                                    <div class="relevance-marker"></div>
+                                    <div class="relevance-marker"></div>
+                                </c:when>
+                                <c:when test="${relevance > 85}">
+                                    <div class="relevance-marker"></div>
+                                    <div class="relevance-marker"></div>
+                                    <div class="relevance-marker"></div>
+                                </c:when>
                                 <c:when test="${relevance > 80}">
-                                    <div class="relevance-marker"></div>
-                                    <div class="relevance-marker"></div>
-                                    <div class="relevance-marker"></div>
-                                    <div class="relevance-marker"></div>
-                                    <div class="relevance-marker"></div>
-                                </c:when>
-                                <c:when test="${relevance > 60}">
-                                    <div class="relevance-marker"></div>
-                                    <div class="relevance-marker"></div>
-                                    <div class="relevance-marker"></div>
-                                    <div class="relevance-marker"></div>
-                                </c:when>
-                                <c:when test="${relevance > 40}">
-                                    <div class="relevance-marker"></div>
-                                    <div class="relevance-marker"></div>
-                                    <div class="relevance-marker"></div>
-                                </c:when>
-                                <c:when test="${relevance > 20}">
                                     <div class="relevance-marker"></div>
                                     <div class="relevance-marker"></div>
                                 </c:when>
@@ -181,6 +271,7 @@
                                     <div class="relevance-marker"></div>
                                 </c:otherwise>
                             </c:choose>
+                            <!--  (<c:out value="${relevance}" />)  -->
                         </div>
 
                         <hr class="clearer"/>
