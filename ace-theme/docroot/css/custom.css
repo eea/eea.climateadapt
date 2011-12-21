@@ -111,6 +111,12 @@ body #banner .logo a {
 	height: 1%;
 }
 
+.page-title .portlet-title {
+	color: #02213D;
+	font-size: 26px;
+	padding-top: 20px;
+}
+
 /* ---------- Main navigation ---------- */
 
 #navigation {
@@ -707,7 +713,7 @@ ul#subnav li a:hover {
 	background: url("../images/bg_sector_main_article_text.png") repeat-y scroll 5% center;
 	margin-bottom: 20px;
 	margin-right: 245px;
-	min-height: 240px;
+	height: 210px;
 	position: relative;
 }
 
@@ -734,21 +740,24 @@ ul#subnav li a:hover {
 .sector-main-article h1 {
 	font: normal 26px Tahoma, Times New Roman, serif;
 	margin: 15px 0;
-	padding: 10px 0 0;
+	padding: 20px 0 0;
 }
 
 .sector-main-article .body {
+	height: 125px;
 	margin: 0 17px;
+	overflow: hidden;
 }
 
 .sector-main-article #read-more-link {
-	background-color: #AFC7DF;
+	background: url("../images/bg_sector_main_article_filter.png") repeat-y scroll 5% center transparent;
 	line-height: 30px;
+	padding-right: 10px;
 	position: absolute;
 	right: 0;
-	text-align: center;
-	top: 240px;
-	width: 80px;
+	text-align: right;
+	top: 210px;
+	width: 481px;
 }
 
 .sector-main-article #read-more-link a:hover {
@@ -874,7 +883,7 @@ ul#subnav li a:hover {
 
 #ast-menu {
 	list-style-type: none;
-	margin: 0;
+	margin: 20px 0 0;
 	width: 330px
 }
 
@@ -897,8 +906,14 @@ ul#subnav li a:hover {
 	color: #FFF
 }
 
+/* Prevent FOUC */
+.js #step-1, .js #step-2, .js #step-3, .js #step-4, .js #step-5, .js #step-6 {
+	display: none;
+}
+
 #ast-menu .ui-accordion-content-active {
 	background-color: #E9EFC9;
+	display: block;
 	margin: 0;
 	padding: 10px 5px 5px 20px;
 	width: 305px;
@@ -909,8 +924,8 @@ ul#subnav li a:hover {
 }
 
 #ast-menu .ui-accordion-content-active p {
-	margin:-22px 0 0;
-	padding-left:50px; 
+	margin: -19px 0 0;
+	padding-left: 50px; 
 }
 
 #ast-menu .ui-accordion-content-active a.active,
@@ -932,22 +947,29 @@ ul#subnav li a:hover {
 
 .ast .astheaderportlet-portlet {
 	left: -10px;
-	margin-bottom: 15px;
+	margin-bottom: 10px;
 	position: relative;
 }
 
 .ast #bottom-column,
 .ast #layout-column_column-2 {
 	margin-left: 27px;
+	padding-top: 25px;
+}
+
+.ast-main-article .body {
+	height: 125px;
+	margin-bottom: 17px;
+	overflow: hidden;
 }
 
 .ast-main-article #read-more-link {
-	background-color: #AFC7DF;
+	background: url("../images/bg_sector_main_article_filter.png") repeat-y scroll 0 center transparent;
 	line-height: 30px;
 	position: relative;
-	left: 545px;
-	text-align: center;
-	width: 80px;
+	padding-right: 10px;
+	text-align: right;
+	width: 600px;
 }
 
 .ast-main-article #read-more-link a:hover {
@@ -959,7 +981,7 @@ ul#subnav li a:hover {
 }
 
 .ast #column-3 .portlet-column-content {
-	padding: 0 15px 0 0;
+	padding: 0 15px 0 5px;
 }
 
 .ast #column-4 .portlet-column-content {
@@ -1091,7 +1113,7 @@ ul#subnav li a:hover {
 }
 
 .portlet-rss .feed-entry-content img {
-	max-width: 100%
+	width: 100%
 }
 
 .portlet-rss .feed-entry-title {
