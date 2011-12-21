@@ -98,7 +98,8 @@ public class GeoNetworkConnector {
         String response = httpUtils.post(xml, GeoNetworkRemoveHarvesterURL);
 
         System.out.println("deleteHarvester GeoNetwork response:\n" + response);
-        if(!response.contains("status=\"ok\"")) {
+        // Check if harvester could be deleted. If not found in GeoNetwork, avoid exception
+        if((!response.contains("status=\"ok\"") && (!response.contains("status=\"not-found\"")))) {
             throw new Exception("Failed to delete harvester from GeoNetwork");
         }
 

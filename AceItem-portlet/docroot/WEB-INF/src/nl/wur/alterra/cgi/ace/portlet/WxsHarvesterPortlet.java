@@ -106,9 +106,14 @@ public class WxsHarvesterPortlet extends LuceneIndexUpdatePortlet {
 		if (Validator.isNotNull(wxsHarvesterId)) {
             System.out.println("wxsHarvesterId is not null, continuing");
             WxsHarvester wxsHarvester = WxsHarvesterLocalServiceUtil.getWxsHarvester(wxsHarvesterId);
-			WxsHarvesterLocalServiceUtil.deleteWxsHarvester(wxsHarvester);
-			SessionMessages.add(request, "wxsHarvester-deleted");
-			sendRedirect(request, response);
+            try {
+                WxsHarvesterLocalServiceUtil.deleteWxsHarvester(wxsHarvester);
+                SessionMessages.add(request, "wxsHarvester-deleted");
+                sendRedirect(request, response);
+            } catch (Exception ex) {
+                SessionMessages.add(request, "error-deleting");
+                sendRedirect(request, response);
+            }
 		}
 		else {
             System.out.println("wxsHarvesterId is null, aborting delete");
