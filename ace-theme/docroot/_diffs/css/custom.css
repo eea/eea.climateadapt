@@ -1156,19 +1156,115 @@ span.opens-new-window-accessible,
 	text-decoration: none;
 }
 
-/**** Styling of the search and discover page ****/
-#acesearch_container {
-	overflow: hidden;
-	width: 100%;
+/**** 
+	Styling of the search and discover page 
+****/
+.search-discover-text {
+	background: #E9EFC9;
+	left: -15px;
+	position: relative;
+	width: 459px;
+	z-index: 1000;
 }
 
-#acesearch_container .search_section {
+.search-discover-text section {
+	margin: 0;
+}
+
+.search-discover-text .portlet-title {
+	color: #353f02;
+	font-size: 15px;
+	left: 250px;
+	padding: 0;
+	position: relative;
+	top: 15px;
+}
+
+.search-discover-text .portlet-content {
+	height: 90px;
+	margin-top: -10px;
+}
+
+.search-discover-text .portlet-body p {
+	color: #353f02;
+	font-size: 11px;
+	height: 55px;
+	margin: 0;
+	padding: 27px 20px 20px 20px;
+}
+
+.search-discover-text .portlet-body img {
+	float: left;
+	padding-right: 15px;
+	position: relative;
+	top: -13px;
+}
+
+.search-discover #acesearch_container {
+	left: -15px;
+	overflow: hidden;
+	position: relative;
+	top: -100px;
+	width: 984px;
+}
+
+.search-discover #acesearch_container h2 {
+	font-family: Tahoma,Times New Roman,serif;
+	font-size: 15px;
+	font-weight: normal;
+	margin-bottom: 5px;
+}
+
+.search-discover #acesearch_container ul {
+	margin-left: 0;
+}
+
+.search-discover #acesearch_column {
+	padding: 5px 20px 100px;
+	position: relative;
+	top: 100px;
+	width: 419px;
+}
+
+.search-discover #acesearch_container .search_section {
 	color: #353f02;
 	margin: 0;
 }
 
-#acesearch_container h2 {
-	margin-bottom: 5px;
+.search-discover #acesearch_container .search_section input {
+	background: none;
+}
+
+.search-discover #acesearch_container .search_section input[type="text"] {
+	background: #FFF;
+}
+
+.search-discover #acesearch_container .search_section a:link {
+	color: #353F02;
+	font-family: Tahoma,Times New Roman,serif;
+}
+
+.search-discover #form_footer {
+	background: #9aa854;
+	margin-top: 25px;
+	padding: 5px 15px;
+}
+
+.search-discover #form_footer input {
+	background: none;
+	background-color: #FFF;
+	border-radius: 0px 0px 0px 0px;
+	border: none;
+	color: #353f02;
+	font-family: Tahoma,Times New Roman,serif;
+	font-weight: normal;
+	height: 25px;
+	padding: 0 15px 3px;
+}
+
+.search-discover #form_footer #clear-search-form-btn {
+	background-color: #E9EFC9;
+	margin-right: 7px;
 }
 
 /**** Styling of the similar areas tool 
