@@ -162,7 +162,7 @@ pageContext.setAttribute("countriesList", countriesList);
     <!-- Search colum -->
     <div id="acesearch_column" class="acesearch_column">
         <aui:form action="<%=searchAceitemURL%>" method="post" name="<portlet:namespace/>aceItemSearchForm">
-            <div class="search_section">
+            <div id="idfreetext" class="search_section">
                 <h2><liferay-ui:message key="acesearch-section-header1" /></h2>
 
                 <div class="row">
@@ -189,7 +189,7 @@ pageContext.setAttribute("countriesList", countriesList);
 			
 			<hr class="clearer"/>
 
-            <div class="search_section">
+            <div id="idtype" class="search_section">
                 <h2><liferay-ui:message key="acesearch-section-header2" /></h2>
 
                 <div class="row">
@@ -228,7 +228,7 @@ pageContext.setAttribute("countriesList", countriesList);
                 </div>				
             </div>
 
-            <div class="search_section">
+            <div id="idextended" class="search_section">
                 <h2><liferay-ui:message key="acesearch-section-header4" /></h2>
 
                 <ul>
