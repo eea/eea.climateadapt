@@ -106,9 +106,9 @@ public class AceItemSearchResult {
     public void setShortdescription(String shortdescription) {
         this.shortdescription = shortdescription.replaceAll("\\<.*?\\>", " ");
         
-        if( this.shortdescription.length() > 400) {
+        if( this.shortdescription.length() > 150) {
         	
-        	this.shortdescription = this.shortdescription.substring(0,396).replaceAll("\"", "\"\"") + " ..." ; 
+        	this.shortdescription = this.shortdescription.substring(0,146).replaceAll("\"", "\"\"") + " ..." ; 
         }
         
     }
