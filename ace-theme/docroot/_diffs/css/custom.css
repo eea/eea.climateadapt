@@ -1239,8 +1239,13 @@ span.opens-new-window-accessible,
 	background: #FFF;
 }
 
+.search-discover input.focus, .search-discover textarea.focus {
+	background: #E5F6FE;
+	border: 1px solid #02213D;
+}
+
 .search-discover #acesearch_container .search_section a:link {
-	color: #353F02;
+	color: #353F02 !important;
 	font-family: Tahoma,Times New Roman,serif;
 }
 
@@ -1265,6 +1270,113 @@ span.opens-new-window-accessible,
 .search-discover #form_footer #clear-search-form-btn {
 	background-color: #E9EFC9;
 	margin-right: 7px;
+}
+
+.search-discover #search_results .results_header {
+	color: #02213d;
+	font-family: Tahoma, Times New Roman, serif;
+	font-size: 26px;
+	font-weight: normal;
+	margin: 10px 0 17px -6px;
+}
+
+.search-discover #search_results .number_of_results {
+	color: #67788A;	
+	font-family: Tahoma, Times New Roman, serif; 
+	font-size: 20px; 
+	font-weight: normal; 
+	margin: 10px 0 5px -5px;
+}
+
+.search-discover #search_results .expandedResultsGroup, 
+.search-discover #search_results .collapsedResultsGroup {
+	line-height: 17px;
+}
+
+.search-discover #search_results .collapsedResultsGroup .resultsGroupTitle {
+	background-color: #afc8df;
+	color: #02213d;
+	font-family: Tahoma, Times New Roman, serif;
+	font-weight: normal;
+	margin: -4px 0 -10px -5px;
+	padding: 5px 8px;
+}
+
+.search-discover #search_results .expandedResultsGroup .resultsGroupTitle {
+	background-color: #677a8b;
+	color: #FFF;
+	font-family: Tahoma, Times New Roman, serif;
+	font-weight: normal;
+	margin: -4px 0 -10px -5px;
+	padding: 5px 8px;
+}
+
+.search-discover #search_results .sortbar {
+	background-color: #d7e3ef;
+	font-size: 11px;
+	font-weight: bold;
+	margin: 10px 0 0 -5px;
+}
+
+.search-discover #search_results .sortbar .sortByControl {
+	background: none;
+	margin: 0 3px 0 20px;
+}
+
+.search-discover #search_results .pagination-box {
+	background-color: #d7e3ef;
+	height: 30px;
+	margin-left: -5px
+}
+
+.search-discover #search_results .pagination {
+	float: right;
+}
+
+.search-discover #search_results .resultlist {
+	margin-left:-5px
+}
+
+.search-discover #search_results .searchresult {
+	background: none;
+	border-bottom: none;
+	border-top: none;
+	border-right: 2px solid #d7e3ef;
+	border-left: 2px solid #d7e3ef;
+	color: #02213d;
+	font-size: 11px;
+	margin: 0;
+	padding: 15px 15px 20px 25px;
+}
+
+.search-discover #search_results .searchresult .bolder {
+	color: #02213d !important;
+	margin-left: -15px;
+}
+
+.search-discover #search_results .searchresult .bolder a {
+	color: #02213d !important;
+	font-weight: bold;
+	padding-left: 5px;
+}
+
+.search-discover #search_results .searchresult .relevance {
+	left: 290px;
+	margin: 0;
+	padding: 5px 0 0;
+	position: relative;
+}
+
+.search-discover #search_results .searchresult .relevance-marker {
+	background-color: #a5bf26;
+	border: 1px solid #a5bf26;
+	height: 5px;
+	top: 5px;
+}
+
+.search-discover #search_results .searchresult .clearer,
+.search-discover #search_results .resultfooter {
+	display: none;
 }
 
 /**** Styling of the similar areas tool 
@@ -1612,10 +1724,6 @@ text and the class mapviewer to the MapViewerPortlet.
 /****
 	Styling of glossary items
 ****/
-.glossary-item {
-	
-}
-
 .GlossaryTitle {
 	background: url("/ace-theme/images/bg_sector_main_article_text.png") repeat-y scroll 0pt 0pt transparent;
 	color: #67788A;
