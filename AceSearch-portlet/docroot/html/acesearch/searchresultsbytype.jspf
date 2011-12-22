@@ -68,7 +68,7 @@
 			</form>
 		</div>
 				
-		<div id="${paginationId}" style="padding-left: 10px; height: 30px;background-color: #D2DF92;">
+		<div id="${paginationId}" class="pagination-box" >
 
 		</div>	
 		
@@ -123,7 +123,7 @@
  *
  */
 function displayJSONResults(unique, aceitemResults) {
-	var resultlist = '<div id="resultsListId-'+unique+'">';
+	var resultlist = '<div id="resultsListId-'+unique+'" class="resultlist">';
 	jQuery.each(aceitemResults, function(idx, aceitem){ 
 		if (aceitem) {
 			// add searchresult
@@ -210,7 +210,7 @@ function displayJSONResults(unique, aceitemResults) {
 			
 		<hr class="clearer2"/>
 		
-		<div id="${resultsListId}">
+		<div id="${resultsListId}" class="resultlist">
 			<c:forEach var="wrappedSearchResult" items="${groupedResults}" begin="0" end="<%= itemsOnPage-1 %>">
 
                 <div class="searchresult">
