@@ -133,18 +133,18 @@ function displayJSONResults(unique, aceitemResults) {
 
 			// add name and description
             if ((aceitem.storedAt != "") && (aceitem.storagetype.substr(0, 3) == "URL")) {
-                   resultlist += '<div><span class="bolder">&#187; <a href="/viewaceitem?aceitem_id=' +  aceitem.aceItemId  + '" >' + aceitem.name + ' </a></span> - ' + descriptionText + '</div>';
+                   resultlist += '<span class="bolder">&#187; <a href="/viewaceitem?aceitem_id=' +  aceitem.aceItemId  + '" >' + aceitem.name + ' </a></span> - ' + descriptionText ;
 
            } else if (aceitem.storedAt.substr(0, 14) == "ace_project_id") {
-                   resultlist += '<div><span class="bolder">&#187; <a href="/projects1?' + aceitem.storedAt + '" >' + aceitem.name + '</a></span>&nbsp;';
-                   resultlist += ' - ' + descriptionText + '</div>';
+                   resultlist += '<span class="bolder">&#187; <a href="/projects1?' + aceitem.storedAt + '" >' + aceitem.name + '</a></span>&nbsp;';
+                   resultlist += ' - ' + descriptionText ;
 
             } else if (aceitem.storedAt.substr(0, 14) == "ace_measure_id") {
-                               resultlist += '<div><span class="bolder">&#187; <a href="/viewmeasure?' + aceitem.storedAt + '" >' + aceitem.name + '</a></span>&nbsp;';
-                               resultlist += ' - ' + descriptionText + '</div>';
+                               resultlist += '<span class="bolder">&#187; <a href="/viewmeasure?' + aceitem.storedAt + '" >' + aceitem.name + '</a></span>&nbsp;';
+                               resultlist += ' - ' + descriptionText ;
 
            } else {
-                   resultlist += '<div><span class="bolder">&#187; <a href="/viewaceitem?aceitem_id=' +  aceitem.aceItemId + '" >' + aceitem.name + ' </a></span> - ' + descriptionText + '</div>';
+                   resultlist += '<span class="bolder">&#187; <a href="/viewaceitem?aceitem_id=' +  aceitem.aceItemId + '" >' + aceitem.name + ' </a></span> - ' + descriptionText ;
 
            }
             // add relevance  document.getElementById("${sortsearchRelevanceId}").checked <> getCheckedValue( document.getElementByName('sortBy') )=='RELEVANCE'
@@ -152,7 +152,7 @@ function displayJSONResults(unique, aceitemResults) {
 
             //resultlist += '<div class="relevance-title"> rating: ' + aceitem.rating + '. relevance: </div>';
             if(true) {
-	            resultlist += '<div class="relevance-title">Search relevance: </div>';
+	            resultlist += '<div class="relevance"><div class="relevance-title">Search relevance: </div>';
 	            if(aceitem.relevance > 95) {
 	                resultlist += '<div class="relevance-marker"></div>';
 	                resultlist += '<div class="relevance-marker"></div>';
@@ -185,7 +185,7 @@ function displayJSONResults(unique, aceitemResults) {
 			// TODO use actual date from aceitem, if available
 //			resultlist += '<div class="resultfooter"><hr class="clearer"/></div>';
 			// close searchresult
-			resultlist += '<hr class="clearer"/></div>';					
+			resultlist += '</div><hr class="clearer"/></div>';					
 		}
 	});
 	// close searchresultlist
