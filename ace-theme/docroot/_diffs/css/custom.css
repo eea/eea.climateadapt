@@ -342,7 +342,7 @@ ul#subnav li a:hover {
 }
 
 .ie .portlet-title {
-	padding-bottom: 5px;
+	padding-bottom: 15px;
 }
 
 .ie6 .portlet-topper {
@@ -523,6 +523,10 @@ ul#subnav li a:hover {
 	color: #FFF;
 	float: left;
 	padding: 4px 10px 0 0;
+}
+
+#searchbox #searchtext_top {
+	height: 10px;
 }
 
 #p_p_id_simplesearchportlet_WAR_AceSearchportlet_INSTANCE_0oHV_ {
@@ -1079,13 +1083,19 @@ ul#subnav li a:hover {
 }
 
 #db-search-fp-info-text {
+	font-family: Tahoma,Times New Roman,serif;
 	margin-bottom:5px;
+	margin-left: 3px;
 	position: absolute;
+	text-align: center;
 	top: -10px;
+	width: 180px;
 }
 
 .db-search-fp input {
+	height: 10px;
 	margin-top: 8px;
+	width: 180px;
 }
 
 /**** 
@@ -1226,9 +1236,61 @@ span.opens-new-window-accessible,
 	width: 419px;
 }
 
+.search-discover #acesearch_column .check {
+	width: 200px;
+}
+
 .search-discover #acesearch_container .search_section {
 	color: #353f02;
+}
+
+.search-discover #idfreetext {
+	margin-bottom: 33px;
+}
+
+.search-discover #idfreetext #anyorall {
+	font-size: 11px;
+	font-weight: bold;
+}
+
+.search-discover #idfreetext #anyorall label{
+	margin-right: 35px;
+}
+
+.search-discover #idfreetext #anyOfThese {
+	height: 12px;
+	position: relative;
+	top: 5px;
+	width: 295px;
+}
+
+.search-discover #acesearch_container .clearer {
+	display: none;
+}
+
+.search-discover #idtype {
+	margin-bottom: 30px;
+}
+
+.search-discover #idtype .row {
+	font-size: 11px;
+	font-weight: bold;
+}
+
+.search-discover #idtype label {
+	margin-right:35px
+}
+
+.search-discover #idtype #all_selection_types label {
+	font-weight: normal;
 	margin: 0;
+}
+
+.search-discover #idextended #adaptation_sectors_container,
+.search-discover #idextended #climate_impacts_container,
+.search-discover #idextended #adaptation_elements_container,
+.search-discover #idextended #countries_container {
+	font-size: 11px;
 }
 
 .search-discover #acesearch_container .search_section input {
@@ -1251,6 +1313,7 @@ span.opens-new-window-accessible,
 
 .search-discover #form_footer {
 	background: #9aa854;
+	margin-bottom: 20px;
 	margin-top: 25px;
 	padding: 5px 15px;
 }
@@ -1325,14 +1388,41 @@ span.opens-new-window-accessible,
 
 .search-discover #search_results .pagination-box {
 	background-color: #d7e3ef;
-	height: 30px;
-	margin-left: -5px
+	height: 23px;
+	margin-left: -5px;
+	padding-right: 17px;
 }
 
 .search-discover #search_results .pagination {
 	float: right;
+	font-size: 11px;
+	font-weight: bold;
 }
 
+.search-discover #search_results .pagination .current {
+	background: #afc8df;
+	border: none;
+	color: #02213D;
+}
+
+.search-discover #search_results .pagination a,
+.search-discover #search_results .pagination span {
+	font-weight: bold;
+	padding: 0 1px;
+}
+
+.search-discover #search_results .pagination a {
+	background: #677a8b;
+	border: none;
+	color: #FFF !important;
+}
+
+.search-discover #search_results .pagination a:hover {
+	background: #afc8df;
+	color: #02213D !important;
+	text-decoration: none;
+}
+		
 .search-discover #search_results .resultlist {
 	margin-left:-5px
 }

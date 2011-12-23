@@ -9,7 +9,7 @@ $(document).ready(function(){
     
     //Elements for the db search speedbutton on the frontpage
     $(".db-search-fp img").attr("src","/ace-theme/images/vergroot_blauw.png");
-    $('.db-search-fp .portlet-body').prepend('<p id="db-search-fp-info-text">Search the database</p>');
+    $('.db-search-fp .portlet-body').prepend('<p id="db-search-fp-info-text">Search the CHM database</p>');
     $('.db-search-fp .portlet-body').prepend('<a id="db-search-fp-link" href="/data-and-downloads"></a>');
     
     //Fixes to main and sec. menu
