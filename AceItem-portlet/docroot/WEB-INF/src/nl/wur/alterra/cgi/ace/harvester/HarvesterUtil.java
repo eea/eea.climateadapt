@@ -232,7 +232,7 @@ public class HarvesterUtil {
         //
         // convert to AceItems, save in DBMS and update Lucene index
         //
-        storeAsAceItems(harvesterResultsBefore, harvesterResultsAfter);
+        storeAsAceItems(wxsHarvester, harvesterResultsBefore, harvesterResultsAfter);
 
         //System.out.println("finished executing harvester: " + wxsHarvester.getName());
     }
@@ -446,7 +446,8 @@ public class HarvesterUtil {
      * @param harvesterResultBefore
      * @param harvesterResultAfter
      */
-    private static synchronized void storeAsAceItems(String harvesterResultBefore, String harvesterResultAfter) throws Exception, PortalException {
+    private static synchronized void storeAsAceItems(WxsHarvester wxsHarvester, String harvesterResultBefore,
+                                                     String harvesterResultAfter) throws Exception, PortalException {
         //System.out.println("applying harvesting result to AceItem table");
 
         //System.out.println("looking for metadata ids in search response before harvesting:");
@@ -502,6 +503,8 @@ public class HarvesterUtil {
                     //System.out.println("WARNING: failed to update AceItem with geonetwork id: " + id + ", it seems it does not exist. It will be created now.");
                     AceItem aceItem = AceItemLocalServiceUtil.createAceItem();
                     aceItem = fillAceItem(aceItem, id, titleMap, abstractMap, keywordMap);
+                    aceItem.setCompanyId(wxsHarvester.getCompanyId());
+                    aceItem.setGroupId(wxsHarvester.getGroupId());
                     aceItem.setPublicationDate(new Date());
 
                     AceItemLocalServiceUtil.addAceItem(aceItem);
@@ -522,6 +525,8 @@ public class HarvesterUtil {
                 // create it
                 AceItem aceItem = AceItemLocalServiceUtil.createAceItem();
                 aceItem = fillAceItem(aceItem, id, titleMap, abstractMap, keywordMap);
+                aceItem.setCompanyId(wxsHarvester.getCompanyId());
+                aceItem.setGroupId(wxsHarvester.getGroupId());
                 aceItem.setPublicationDate(new Date());
 
                 AceItemLocalServiceUtil.addAceItem(aceItem);
