@@ -17,7 +17,7 @@ public class PortletUtils {
      * @param request request
      */
     public static void logParams(PortletRequest request) {
-        Map<String, String[]> requestParams = request.getParameterMap();
+        /*Map<String, String[]> requestParams = request.getParameterMap();
         Enumeration<String> parameterNames = request.getParameterNames();
         while(parameterNames.hasMoreElements()) {
             String name = parameterNames.nextElement();
@@ -26,6 +26,6 @@ public class PortletUtils {
             for(String value : values) {
                 System.out.println("'" + value + "'");
             }
-        }
+        }*/
     }
 }

@@ -62,7 +62,7 @@ public class WxsHarvesterLocalServiceImpl extends WxsHarvesterLocalServiceBaseIm
         // update harvester in geonetwork
         //
         try {
-            System.out.println("updating harvester to GeoNetwork");
+            //System.out.println("updating harvester to GeoNetwork");
             GeoNetworkConnector geoNetworkConnector = new GeoNetworkConnector();
             wxsHarvester = geoNetworkConnector.updateHarvester(wxsHarvester);
             wxsHarvester.setSavedToGeoNetwork(true);
@@ -71,22 +71,22 @@ public class WxsHarvesterLocalServiceImpl extends WxsHarvesterLocalServiceBaseIm
         // if it fails, leave in ACE for later retry
         catch(Exception x) {
             wxsHarvester.setSavedToGeoNetwork(false);
-            System.out.println("Error: failed to update harvester to GeoNetwork " + x.getMessage());
+            //System.out.println("Error: failed to update harvester to GeoNetwork " + x.getMessage());
             x.printStackTrace();
         }
         //
         // update harvester in ACE
         //
-        System.out.println("updating harvester to ACE");
+        //System.out.println("updating harvester to ACE");
         wxsHarvester = super.updateWxsHarvester(wxsHarvester);
-        System.out.println("finished updating harvester to ACE");
+        //System.out.println("finished updating harvester to ACE");
 
         //
         // schedule harvester for periodic runs
         //
-        System.out.println("scheduling harvester thread");
+        //System.out.println("scheduling harvester thread");
         HarvesterUtil.scheduleWxsHarvester(wxsHarvester);
-        System.out.println("finished scheduling harvester thread");
+        //System.out.println("finished scheduling harvester thread");
 
         return wxsHarvester;
     }
@@ -97,23 +97,23 @@ public class WxsHarvesterLocalServiceImpl extends WxsHarvesterLocalServiceBaseIm
         // delete harvester in geonetwork
         //
         try {
-            System.out.println("deleting harvester to GeoNetwork");
+            //System.out.println("deleting harvester to GeoNetwork");
             GeoNetworkConnector geoNetworkConnector = new GeoNetworkConnector();
             geoNetworkConnector.deleteHarvester(wxsHarvester);
         }
         // if it fails, TODO what to do ? Leave in ACE for later retry ? Or delete anyway ? For now, it is just left in ACE
         catch(Exception x) {
             wxsHarvester.setSavedToGeoNetwork(true);
-            System.out.println("ERROR: failed to delete harvester to GeoNetwork " + x.getMessage() + ". Also not deleting from ACE DBMS.");
+            //System.out.println("ERROR: failed to delete harvester to GeoNetwork " + x.getMessage() + ". Also not deleting from ACE DBMS.");
             x.printStackTrace();
             throw new SystemException(x);
         }
         //
         // delete harvester in ACE
         //
-        System.out.println("deleting harvester to ACE");
+        //System.out.println("deleting harvester to ACE");
         super.deleteWxsHarvester(wxsHarvester);
-        System.out.println("finished deleting harvester to ACE");
+        //System.out.println("finished deleting harvester to ACE");
 
         // TODO delete AceItems created from metadata from this harvester too, or not ?    YES
     }
@@ -134,7 +134,7 @@ public class WxsHarvesterLocalServiceImpl extends WxsHarvesterLocalServiceBaseIm
         // add harvester in geonetwork
         //
         try {
-            System.out.println("adding harvester to GeoNetwork");
+            //System.out.println("adding harvester to GeoNetwork");
             GeoNetworkConnector geoNetworkConnector = new GeoNetworkConnector();
             wxsHarvester = geoNetworkConnector.addHarvester(wxsHarvester);
             wxsHarvester.setSavedToGeoNetwork(true);
@@ -143,25 +143,25 @@ public class WxsHarvesterLocalServiceImpl extends WxsHarvesterLocalServiceBaseIm
         // if it fails, still add it in ACE for later retry
         catch(Exception x) {
             wxsHarvester.setSavedToGeoNetwork(false);
-            System.out.println("Error: failed to add harvester to GeoNetwork " + x.getMessage());
+            //System.out.println("Error: failed to add harvester to GeoNetwork " + x.getMessage());
             x.printStackTrace();
         }
 
         //
         // add harvester in ACE
         //
-        System.out.println("adding harvester to ACE");
+        //System.out.println("adding harvester to ACE");
 		long wxsHarvesterId = CounterLocalServiceUtil.increment(WxsHarvester.class.getName());
 		wxsHarvester.setWxsharvesterid(wxsHarvesterId);
         wxsHarvester = super.addWxsHarvester(wxsHarvester);
-        System.out.println("finished adding harvester to ACE");
+        //System.out.println("finished adding harvester to ACE");
 
         //
         // schedule harvester for periodic runs
         //
-        System.out.println("scheduling harvester thread");
+        //System.out.println("scheduling harvester thread");
         HarvesterUtil.scheduleWxsHarvester(wxsHarvester);
-        System.out.println("finished scheduling harvester thread");
+        //System.out.println("finished scheduling harvester thread");
 
         return wxsHarvester;
 	}

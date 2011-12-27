@@ -46,7 +46,7 @@ public class CustomProperties {
             File customProperties = new File(customPropertiesFilename);
             properties.load(new FileInputStream(customProperties));
             isInitialized = true;
-            System.out.println("ACE custom properties succesfully initialized");
+            //System.out.println("ACE custom properties succesfully initialized");
         }
         catch (FileNotFoundException x) {
             x.printStackTrace();
@@ -67,7 +67,7 @@ public class CustomProperties {
      */
     public static String getProperty(String key) throws CustomPropertiesNotInitializedException {
         if(! isInitialized) {
-            System.out.println("WARNING: custom properties not initialized. Trying now:");
+            //System.out.println("WARNING: custom properties not initialized. Trying now:");
             init();
             if(! isInitialized) {
                 throw new CustomPropertiesNotInitializedException("ERROR: cannot initialize custom properties");

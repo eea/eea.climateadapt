@@ -33,7 +33,7 @@ public class GeoNetworkConnector {
             this.GeoNetworkXMLSearchURL  = geoNetworkBaseURL + "/srv/en/xml.search";
         }
         catch(CustomPropertiesNotInitializedException x) {
-            System.out.println("ERROR initializing GeoNetworkConnector: configuration unavailable.");
+            //System.out.println("ERROR initializing GeoNetworkConnector: configuration unavailable.");
             throw new ExceptionInInitializerError(x);
         }
     }
@@ -97,7 +97,7 @@ public class GeoNetworkConnector {
         String xml = createDeleteRequest(wxsHarvester);
         String response = httpUtils.post(xml, GeoNetworkRemoveHarvesterURL);
 
-        System.out.println("deleteHarvester GeoNetwork response:\n" + response);
+        //System.out.println("deleteHarvester GeoNetwork response:\n" + response);
         // Check if harvester could be deleted. If not found in GeoNetwork, avoid exception
         if((!response.contains("status=\"ok\"") && (!response.contains("status=\"not-found\"")))) {
             throw new Exception("Failed to delete harvester from GeoNetwork");
@@ -254,14 +254,14 @@ public class GeoNetworkConnector {
         // strip from first "
         id = id.substring(0, id.indexOf("\""));
 
-        System.out.println("processing harvester with id: " + id);
+        //System.out.println("processing harvester with id: " + id);
 
         // strip up to uuid
         String uuid = geonetworkInfo.substring(geonetworkInfo.indexOf("<uuid>") + "<uuid>".length());
         // strip from first <
         uuid = uuid.substring(0, uuid.indexOf("<"));
 
-        System.out.println("processing harvester with uuid: " + uuid);
+        //System.out.println("processing harvester with uuid: " + uuid);
 
         wxsHarvester.setGeonetworkId(Long.parseLong(id));
         wxsHarvester.setGeonetworkUUID(uuid);

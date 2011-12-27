@@ -28,20 +28,20 @@ public class HarvesterThread implements RunnableFuture {
      * Sets this Future to the result of its computation unless it has been cancelled.
      */
     public void run() {
-        System.out.println("HarvesterThread run start");
+        //System.out.println("HarvesterThread run start");
         try {
             HarvesterUtil.executeWxsHarvester(this.wxsHarvester);
         }
         catch (PortalException x) {
-            System.out.println("ERROR: " + x.getMessage());
+            //System.out.println("ERROR: " + x.getMessage());
             x.printStackTrace();
         }
         catch (Exception x) {
-            System.out.println("ERROR: " + x.getMessage());
+            //System.out.println("ERROR: " + x.getMessage());
             x.printStackTrace();
         }
         ready.release();
-        System.out.println("HarvesterThread run end");
+        //System.out.println("HarvesterThread run end");
     }
 
     /**

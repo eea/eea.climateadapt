@@ -13,18 +13,18 @@ public class AceItemApplicationListener extends com.liferay.portal.kernel.servle
 
     @Override
     public void contextInitialized(ServletContextEvent servletContextEvent) {
-        System.out.println("AceItem Web Application Context initialized");
+        //System.out.println("AceItem Web Application Context initialized");
     }
 
     @Override
     protected void doPortalInit() {
         super.doPortalInit();
-        System.out.println("AceItem doPortalInit");
+        //System.out.println("AceItem doPortalInit");
     }
 
     @Override
     public void portalInit() {
-        System.out.println("AceItem portalInit");
+        //System.out.println("AceItem portalInit");
         super.portalInit();
     }
 

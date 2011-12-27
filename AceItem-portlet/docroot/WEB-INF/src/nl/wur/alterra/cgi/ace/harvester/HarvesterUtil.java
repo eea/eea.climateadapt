@@ -24,7 +24,6 @@ import java.util.concurrent.TimeUnit;
  * @author heikki doeleman
  */
 public class HarvesterUtil {
-
     /**
      * Initial delay when harvester thread is scheduled.
      */
@@ -58,38 +57,38 @@ public class HarvesterUtil {
      * @param wxsHarvester
      */
     public static synchronized void scheduleWxsHarvester(WxsHarvester wxsHarvester) {
-        System.out.println("scheduling harvester " + wxsHarvester.getName());
+        //System.out.println("scheduling harvester " + wxsHarvester.getName());
         ScheduledExecutorService executionService = HarvesterExecutionService.getExecutionService();
         ScheduledFuture<?> scheduledFuture = executionService.scheduleWithFixedDelay(new HarvesterThread(wxsHarvester),
                 initialDelay, wxsHarvester.getEvery(), timeUnit);
-        System.out.println("finished scheduling harvester " + wxsHarvester.getName());
+        //System.out.println("finished scheduling harvester " + wxsHarvester.getName());
         HarvesterThreads.getInstance().add(wxsHarvester, scheduledFuture);
-        System.out.println("added harvester " + wxsHarvester.getName() + "to threads map");
+        //System.out.println("added harvester " + wxsHarvester.getName() + "to threads map");
     }
 
     /**
      * Retrieves existing harvesters from the database and schedules them.
      */
     public static synchronized void scheduleHarvesters() {
-        System.out.println("scheduling harvesters");
+        //System.out.println("scheduling harvesters");
         try {
             List<WxsHarvester> wxsHarvesters = new ArrayList<WxsHarvester>();
             wxsHarvesters.addAll(WxsHarvesterLocalServiceUtil.getWxsHarvesters(0, WxsHarvesterLocalServiceUtil.getWxsHarvestersCount()));
-            System.out.println("scheduleHarvesters retrieved " + wxsHarvesters.size() + " harvesters to be scheduled");
+            //System.out.println("scheduleHarvesters retrieved " + wxsHarvesters.size() + " harvesters to be scheduled");
             for(WxsHarvester wxsHarvester : wxsHarvesters) {
                 HarvesterUtil.scheduleWxsHarvester(wxsHarvester);
             }
         }
         // do not block application startup if something goes wrong retrieving harvesters
         catch (Exception x) {
-            System.out.println("Error: failed to retrieve harvesters: "+ x.getMessage());
+            //System.out.println("Error: failed to retrieve harvesters: "+ x.getMessage());
             x.printStackTrace();
         }
         catch(Throwable x) {
-            System.out.println("Error: failed to retrieve harvesters: "+ x.getMessage());
+            //System.out.println("Error: failed to retrieve harvesters: "+ x.getMessage());
             x.printStackTrace();
         }
-        System.out.println("finished scheduling havesters");
+        //System.out.println("finished scheduling havesters");
     }
 
     /**
@@ -170,11 +169,11 @@ public class HarvesterUtil {
      * @param wxsHarvester harvester to run
      */
     public static synchronized void executeWxsHarvester(WxsHarvester wxsHarvester) throws Exception, PortalException {
-        System.out.println("executing harvester: " + wxsHarvester.getName());
+        //System.out.println("executing harvester: " + wxsHarvester.getName());
 
         // harvester was not saved to GeoNetwork
         if(! wxsHarvester.isSavedToGeoNetwork()) {
-            System.out.println("harvester: " + wxsHarvester.getName() + " was not saved to GeoNetwork");
+            //System.out.println("harvester: " + wxsHarvester.getName() + " was not saved to GeoNetwork");
             // TODO what to do? attempt to add it to GeoNetwork?
             return;
         }
@@ -207,12 +206,12 @@ public class HarvesterUtil {
             }
             catch (InterruptedException x) {
                 // TODO what to do ?
-                System.out.println(x.getMessage());
+                //System.out.println(x.getMessage());
                 x.printStackTrace();
             }
             long elapsed = System.currentTimeMillis() - start;
             if(elapsed > timeOut) {
-                System.out.println("TIMEOUT REACHED");
+                //System.out.println("TIMEOUT REACHED");
                 // TODO what to do ?
                 break;
             }
@@ -235,7 +234,7 @@ public class HarvesterUtil {
         //
         storeAsAceItems(harvesterResultsBefore, harvesterResultsAfter);
 
-        System.out.println("finished executing harvester: " + wxsHarvester.getName());
+        //System.out.println("finished executing harvester: " + wxsHarvester.getName());
     }
 
     /**
@@ -247,7 +246,7 @@ public class HarvesterUtil {
      */
     private static synchronized List getMetadataContents(String searchResponse, boolean idsOnly) {
 
-        System.out.println("creating content maps. Ids only? " + idsOnly);
+        //System.out.println("creating content maps. Ids only? " + idsOnly);
 
         List theMaps = new ArrayList();
         List<String> idList = new ArrayList<String>();
@@ -271,11 +270,11 @@ public class HarvesterUtil {
                     int openingCloseIdBracket = metadata.indexOf("<", closingIdBracket);
                     id = metadata.substring(closingIdBracket+1, openingCloseIdBracket);
                     idList.add(id);
-                    System.out.println("metadata id: " + id);
+                    //System.out.println("metadata id: " + id);
                 }
                 // metadata has no id
                 if(id == null || id.length() == 0) {
-                    System.out.println("WARNING: found metadata without id, skipping it");
+                    //System.out.println("WARNING: found metadata without id, skipping it");
                     continue;
                 }
                 if(!idsOnly) {
@@ -285,7 +284,7 @@ public class HarvesterUtil {
                         int endContent = metadata.indexOf("</title>");
                         String title = metadata.substring(startContent, endContent);
                         metadataTitleMap.put(id, title);
-                        System.out.println("metadata title: " + title);
+                        //System.out.println("metadata title: " + title);
 
                     }
 
@@ -294,7 +293,7 @@ public class HarvesterUtil {
                         int startContent = metadata.indexOf("<abstract>") + "<abstract>".length();
                         int endContent = metadata.indexOf("</abstract>");
                         String abstrakt = metadata.substring(startContent, endContent);
-                        System.out.println("metadata abstract: " + abstrakt);
+                        //System.out.println("metadata abstract: " + abstrakt);
                         metadataAbstractMap.put(id, abstrakt);
                     }
 
@@ -306,28 +305,28 @@ public class HarvesterUtil {
                             int nextKeywordStartPosition = metadata.indexOf("<keyword>");
                             if(nextKeywordStartPosition < 0) {
                                 hasMoreKeywords = false;
-                                System.out.println("metadata has no (more) keywords");
+                                //System.out.println("metadata has no (more) keywords");
                             }
                             else {
                                 // strip up to keyword
                                 metadata = metadata.substring(metadata.indexOf("<keyword>") + "<keyword>".length());
                                 // strip from first <
                                 String keyword = metadata.substring(0, metadata.indexOf("<"));
-                                System.out.println("metadata keyword: " + keyword);
+                                //System.out.println("metadata keyword: " + keyword);
                                 keywords.add(keyword);
                             }
                         }
                         if(keywords.size() > 0) {
                             metadataKeywordMap.put(id, keywords);
                         }
-                        System.out.println("metadata # keywords: " + keywords.size());
+                        //System.out.println("metadata # keywords: " + keywords.size());
                     }
                 }
 
                 // strip searchresponse to continue searching for next metadata
                 int endOfMetadataSPosition = searchResponse.indexOf("</metadata>");
                 searchResponse = searchResponse.substring(endOfMetadataSPosition + 6);
-                System.out.println("processed metadata with GN id " + id + " remaining size of searchresult: " + searchResponse.length());
+                //System.out.println("processed metadata with GN id " + id + " remaining size of searchresult: " + searchResponse.length());
             }
         }
 
@@ -337,7 +336,7 @@ public class HarvesterUtil {
             theMaps.add(metadataAbstractMap);
             theMaps.add(metadataKeywordMap);
         }
-        System.out.println("finished creating content maps. Ids only? " + idsOnly);
+        //System.out.println("finished creating content maps. Ids only? " + idsOnly);
         return theMaps;
     }
 
@@ -448,19 +447,19 @@ public class HarvesterUtil {
      * @param harvesterResultAfter
      */
     private static synchronized void storeAsAceItems(String harvesterResultBefore, String harvesterResultAfter) throws Exception, PortalException {
-        System.out.println("applying harvesting result to AceItem table");
+        //System.out.println("applying harvesting result to AceItem table");
 
-        System.out.println("looking for metadata ids in search response before harvesting:");
+        //System.out.println("looking for metadata ids in search response before harvesting:");
         List contentMapBefore = getMetadataContents(harvesterResultBefore, true);
 
         List<String> idsBeforeList = (List<String>)contentMapBefore.get(0);
-        System.out.println("# ids from before: " + idsBeforeList.size());
+        //System.out.println("# ids from before: " + idsBeforeList.size());
 
-        System.out.println("looking for metadata ids, titles, abstracts and keywords in search response after harvesting:");
+        //System.out.println("looking for metadata ids, titles, abstracts and keywords in search response after harvesting:");
         List contentMapAfter = getMetadataContents(harvesterResultAfter, false);
 
         List<String> idsAfterList = (List<String>)contentMapAfter.get(0);
-        System.out.println("# ids from after: " + idsAfterList.size());
+        //System.out.println("# ids from after: " + idsAfterList.size());
         Map<String, String> titleMap = (Map<String, String>)contentMapAfter.get(1);
         Map<String, String> abstractMap = (Map<String, String>)contentMapAfter.get(2);
         Map<String, List<String>> keywordMap = (Map<String, List<String>>)contentMapAfter.get(3);
@@ -470,15 +469,15 @@ public class HarvesterUtil {
         // ids in before, and not in after: delete them
         for(String id : idsBeforeList) {
             if(!idsAfterList.contains(id)) {
-                System.out.println("deleting AceItem with geonetwork id: " + id);
+                //System.out.println("deleting AceItem with geonetwork id: " + id);
                 // delete it
                 AceItem toDelete = AceItemLocalServiceUtil.getAceItemByStoredAt(id);
                 if(toDelete != null) {
                     AceItemLocalServiceUtil.deleteAceItem(toDelete);
-                    System.out.println("finished deleting AceItem with geonetwork id: " + id);
+                    //System.out.println("finished deleting AceItem with geonetwork id: " + id);
                 }
                 else {
-                    System.out.println("WARNING: failed to delete AceItem with geonetwork id: " + id + ", it seems it does not exist");
+                    //System.out.println("WARNING: failed to delete AceItem with geonetwork id: " + id + ", it seems it does not exist");
                 }
                 //
                 // re-index Lucene
@@ -490,23 +489,23 @@ public class HarvesterUtil {
         // ids in before and in after: update them
         for(String id : idsBeforeList) {
             if(idsAfterList.contains(id)) {
-                System.out.println("updating AceItem with geonetwork id: " + id);
+                //System.out.println("updating AceItem with geonetwork id: " + id);
                 // update it
                 AceItem toUpdate = AceItemLocalServiceUtil.getAceItemByStoredAt(id);
                 if(toUpdate != null) {
                     toUpdate = fillAceItem(toUpdate, id, titleMap, abstractMap, keywordMap);
 
                     AceItemLocalServiceUtil.updateAceItem(toUpdate);
-                    System.out.println("finished updating AceItem with geonetwork id: " + id);
+                    //System.out.println("finished updating AceItem with geonetwork id: " + id);
                 }
                 else {
-                    System.out.println("WARNING: failed to update AceItem with geonetwork id: " + id + ", it seems it does not exist. It will be created now.");
+                    //System.out.println("WARNING: failed to update AceItem with geonetwork id: " + id + ", it seems it does not exist. It will be created now.");
                     AceItem aceItem = AceItemLocalServiceUtil.createAceItem();
                     aceItem = fillAceItem(aceItem, id, titleMap, abstractMap, keywordMap);
                     aceItem.setPublicationDate(new Date());
 
                     AceItemLocalServiceUtil.addAceItem(aceItem);
-                    System.out.println("finished creating AceItem with geonetwork id: " + id);
+                    //System.out.println("finished creating AceItem with geonetwork id: " + id);
                 }
                 //
                 // re-index Lucene
@@ -519,14 +518,14 @@ public class HarvesterUtil {
         // ids in after and not in before: create them
         for(String id : idsAfterList) {
             if(!idsBeforeList.contains(id)) {
-                System.out.println("creating AceItem with geonetwork id: " + id);
+                //System.out.println("creating AceItem with geonetwork id: " + id);
                 // create it
                 AceItem aceItem = AceItemLocalServiceUtil.createAceItem();
                 aceItem = fillAceItem(aceItem, id, titleMap, abstractMap, keywordMap);
                 aceItem.setPublicationDate(new Date());
 
                 AceItemLocalServiceUtil.addAceItem(aceItem);
-                System.out.println("finished creating AceItem with geonetwork id: " + id);
+                //System.out.println("finished creating AceItem with geonetwork id: " + id);
 
                 //
                 // re-index Lucene
@@ -535,7 +534,7 @@ public class HarvesterUtil {
             }
         }
 
-        System.out.println("finished applying harvesting result to AceItem table");
+        //System.out.println("finished applying harvesting result to AceItem table");
     }
 
     /**
@@ -554,7 +553,7 @@ public class HarvesterUtil {
         aceItem.setStoragetype("GEONETWORK");
         String title = titleMap.get(id);
         if(title.length() > aceItemNameLength) {
-            System.out.println("WARNING: Metadata title too long for AceItem, cut off. Original metadata title:\n" + title + "\n");
+            //System.out.println("WARNING: Metadata title too long for AceItem, cut off. Original metadata title:\n" + title + "\n");
             title = title.substring(0, aceItemNameLength);
         }
         aceItem.setName(title);
@@ -568,14 +567,14 @@ public class HarvesterUtil {
             }
         }
         if(keyword$.length() > aceItemKeywordLength) {
-            System.out.println("WARNING: Metadata keywords too long for AceItem, cut off. Original metadata keywords:\n" + keyword$ + "\n");
+            //System.out.println("WARNING: Metadata keywords too long for AceItem, cut off. Original metadata keywords:\n" + keyword$ + "\n");
             keyword$ = keyword$.substring(0, aceItemKeywordLength);
         }
         aceItem.setKeyword(keyword$);
 
         aceItem.setTextSearch(keyword$ + " " + title + " " + abstrakt);
 
-        System.out.println("\naceItem filled with:\n" +
+        /*System.out.println("\naceItem filled with:\n" +
                 "storedAt: " + aceItem.getStoredAt() +
                 "datatype: " + aceItem.getDatatype() +
                 "storageType: " + aceItem.getStoragetype() +
@@ -583,7 +582,7 @@ public class HarvesterUtil {
                 "keyword: " + aceItem.getKeyword() +
                 "description: " + aceItem.getDescription() +
                 "textsearch: " + aceItem.getTextSearch() + "\n\n"
-        );
+        ); */
 
         return aceItem;
     }
