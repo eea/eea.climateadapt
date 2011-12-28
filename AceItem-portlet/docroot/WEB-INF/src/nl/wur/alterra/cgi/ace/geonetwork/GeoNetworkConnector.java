@@ -294,7 +294,12 @@ public class GeoNetworkConnector {
                 wxsHarvester.setSavedToGeoNetwork(false);
             }
             else {
-                wxsHarvester.setStatus(WxSHarvesterStatus.GEONETWORK_GET_SUCCESS.name());
+                if(response.contains("<lastRun>")) {
+                    wxsHarvester.setStatus(WxSHarvesterStatus.SUCCESS.name());
+                }
+                else {
+                    wxsHarvester.setStatus(WxSHarvesterStatus.NEVER_RUN.name());
+                }
             }
             return new GeoNetworkHarvesterResponse(wxsHarvester, response);
         }
