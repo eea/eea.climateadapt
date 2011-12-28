@@ -369,6 +369,7 @@ public class HarvesterUtil {
                 done = true;
             }
             else {
+                boolean skip = false;
                 // obtain next metadata
                 String metadata = searchResponse.substring(searchResponse.indexOf("<metadata>"), searchResponse.indexOf("</metadata>"));
                 String id =  null;
@@ -383,9 +384,9 @@ public class HarvesterUtil {
                 // metadata has no id
                 if(id == null || id.length() == 0) {
                     System.out.println("WARNING: found metadata without id, skipping it");
-                    continue;
+                    skip = true;
                 }
-                if(!idsOnly) {
+                if(!skip && !idsOnly) {
                     String uuid = null;
                     // this metadata has uuid
                     if(metadata.indexOf("<uuid") >= 0) {
@@ -397,7 +398,7 @@ public class HarvesterUtil {
                         // no uuid ? skip this metadata
                         if(uuid == null || uuid.length()  == 0) {
                             System.out.println("WARNING: found metadata without valid uuid, skipping it");
-                            continue;
+                            skip = true;
                         }
                         else {
                             uuidMap.put(id, uuid);
@@ -405,51 +406,53 @@ public class HarvesterUtil {
                     }
                     else {
                         System.out.println("WARNING: found metadata without uuid, skipping it");
-                        continue;
+                        skip = true;
                     }
+                    if(!skip) {
 
-                    // this metadata has a title
-                    if(metadata.indexOf("<title>") >= 0) {
-                        int startContent = metadata.indexOf("<title>") + "<title>".length();
-                        int endContent = metadata.indexOf("</title>");
-                        String title = metadata.substring(startContent, endContent);
-                        metadataTitleMap.put(id, title);
-                        //System.out.println("metadata title: " + title);
+                        // this metadata has a title
+                        if(metadata.indexOf("<title>") >= 0) {
+                            int startContent = metadata.indexOf("<title>") + "<title>".length();
+                            int endContent = metadata.indexOf("</title>");
+                            String title = metadata.substring(startContent, endContent);
+                            metadataTitleMap.put(id, title);
+                            //System.out.println("metadata title: " + title);
 
-                    }
-
-                    // this metadata has an abstract
-                    if(metadata.indexOf("<abstract>") >= 0) {
-                        int startContent = metadata.indexOf("<abstract>") + "<abstract>".length();
-                        int endContent = metadata.indexOf("</abstract>");
-                        String abstrakt = metadata.substring(startContent, endContent);
-                        //System.out.println("metadata abstract: " + abstrakt);
-                        metadataAbstractMap.put(id, abstrakt);
-                    }
-
-                    // this metadata has at least one keyword
-                    if(metadata.indexOf("<keyword>") >= 0) {
-                        List<String> keywords = new ArrayList<String>();
-                        boolean hasMoreKeywords = true;
-                        while(hasMoreKeywords) {
-                            int nextKeywordStartPosition = metadata.indexOf("<keyword>");
-                            if(nextKeywordStartPosition < 0) {
-                                hasMoreKeywords = false;
-                                //System.out.println("metadata has no (more) keywords");
-                            }
-                            else {
-                                // strip up to keyword
-                                metadata = metadata.substring(metadata.indexOf("<keyword>") + "<keyword>".length());
-                                // strip from first <
-                                String keyword = metadata.substring(0, metadata.indexOf("<"));
-                                //System.out.println("metadata keyword: " + keyword);
-                                keywords.add(keyword);
-                            }
                         }
-                        if(keywords.size() > 0) {
-                            metadataKeywordMap.put(id, keywords);
+
+                        // this metadata has an abstract
+                        if(metadata.indexOf("<abstract>") >= 0) {
+                            int startContent = metadata.indexOf("<abstract>") + "<abstract>".length();
+                            int endContent = metadata.indexOf("</abstract>");
+                            String abstrakt = metadata.substring(startContent, endContent);
+                            //System.out.println("metadata abstract: " + abstrakt);
+                            metadataAbstractMap.put(id, abstrakt);
                         }
-                        //System.out.println("metadata # keywords: " + keywords.size());
+
+                        // this metadata has at least one keyword
+                        if(metadata.indexOf("<keyword>") >= 0) {
+                            List<String> keywords = new ArrayList<String>();
+                            boolean hasMoreKeywords = true;
+                            while(hasMoreKeywords) {
+                                int nextKeywordStartPosition = metadata.indexOf("<keyword>");
+                                if(nextKeywordStartPosition < 0) {
+                                    hasMoreKeywords = false;
+                                    //System.out.println("metadata has no (more) keywords");
+                                }
+                                else {
+                                    // strip up to keyword
+                                    metadata = metadata.substring(metadata.indexOf("<keyword>") + "<keyword>".length());
+                                    // strip from first <
+                                    String keyword = metadata.substring(0, metadata.indexOf("<"));
+                                    //System.out.println("metadata keyword: " + keyword);
+                                    keywords.add(keyword);
+                                }
+                            }
+                            if(keywords.size() > 0) {
+                                metadataKeywordMap.put(id, keywords);
+                            }
+                            //System.out.println("metadata # keywords: " + keywords.size());
+                        }
                     }
                 }
 
