@@ -178,11 +178,5 @@
 	<aui:button-row>
 		<aui:button type="submit" />
 		<aui:button type="cancel"  onClick="<%= redirect %>" />
-		
-		<% if ((savedToGeoNetwork == false) && (wxsHarvester != null)) {  %>
-	  		<aui:button name="addToGeoNetwork" type="submit" value="Add to GeoNetwork"  onClick="javascript:addToGeoNetwork()" />  
-        <% } else if (wxsHarvester != null) { %>
-			<aui:button name="runHarvester" type="submit" value="Execute harvester"  onClick="javascript:executeHarvester()" />  
-        <% } %>
 	</aui:button-row>
 </aui:form>
