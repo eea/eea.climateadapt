@@ -360,6 +360,7 @@ public class HarvesterUtil {
         Map<String, String> metadataTitleMap = new HashMap<String, String>();
         Map<String, String> metadataAbstractMap = new HashMap<String, String>();
         Map<String, List<String>> metadataKeywordMap = new HashMap<String, List<String>>();
+        Map<String, String> uuidMap = new HashMap<String, String>();
 
         boolean done = false;
         while(! done) {
@@ -385,6 +386,28 @@ public class HarvesterUtil {
                     continue;
                 }
                 if(!idsOnly) {
+                    String uuid = null;
+                    // this metadata has uuid
+                    if(metadata.indexOf("<uuid") >= 0) {
+                        int startContent = metadata.indexOf("<uuid") + "<uuid".length();
+                        startContent = metadata.indexOf('>', startContent);
+                        startContent++;
+                        int endContent = metadata.indexOf("</uuid>");
+                        uuid = metadata.substring(startContent, endContent);
+                        // no uuid ? skip this metadata
+                        if(uuid == null || uuid.length()  == 0) {
+                            System.out.println("WARNING: found metadata without valid uuid, skipping it");
+                            continue;
+                        }
+                        else {
+                            uuidMap.put(id, uuid);
+                        }
+                    }
+                    else {
+                        System.out.println("WARNING: found metadata without uuid, skipping it");
+                        continue;
+                    }
+
                     // this metadata has a title
                     if(metadata.indexOf("<title>") >= 0) {
                         int startContent = metadata.indexOf("<title>") + "<title>".length();
@@ -442,6 +465,7 @@ public class HarvesterUtil {
             theMaps.add(metadataTitleMap);
             theMaps.add(metadataAbstractMap);
             theMaps.add(metadataKeywordMap);
+            theMaps.add(uuidMap);
         }
         //System.out.println("finished creating content maps. Ids only? " + idsOnly);
         return theMaps;
@@ -572,6 +596,7 @@ public class HarvesterUtil {
         Map<String, String> titleMap = (Map<String, String>)contentMapAfter.get(1);
         Map<String, String> abstractMap = (Map<String, String>)contentMapAfter.get(2);
         Map<String, List<String>> keywordMap = (Map<String, List<String>>)contentMapAfter.get(3);
+        Map<String, String> uuidMap = (Map<String, String>)contentMapAfter.get(4);
 
         ACEIndexSynchronizer aceIndexSynchronizer = new ACEIndexSynchronizer();
 
@@ -605,7 +630,7 @@ public class HarvesterUtil {
                 // update it
                 AceItem toUpdate = AceItemLocalServiceUtil.getAceItemByStoredAt(id);
                 if(toUpdate != null) {
-                    toUpdate = fillAceItem(toUpdate, id, titleMap, abstractMap, keywordMap);
+                    toUpdate = fillAceItem(toUpdate, id, titleMap, abstractMap, keywordMap, uuidMap);
                     AceItemLocalServiceUtil.updateAceItem(toUpdate);
                     //System.out.println("finished updating AceItem with geonetwork id: " + id);
                     updated++;
@@ -614,7 +639,7 @@ public class HarvesterUtil {
                     System.out.println("WARNING: failed to update AceItem with geonetwork id: " + id + ", it seems it does not exist. It will be created now.");
                     AceItem aceItem = AceItemLocalServiceUtil.createAceItem();
                     //System.out.println("a");
-                    aceItem = fillAceItem(aceItem, id, titleMap, abstractMap, keywordMap);
+                    aceItem = fillAceItem(aceItem, id, titleMap, abstractMap, keywordMap, uuidMap);
                     //System.out.println("b");
                     aceItem.setPublicationDate(new Date());
 
@@ -642,7 +667,7 @@ public class HarvesterUtil {
                 //System.out.println("creating AceItem with geonetwork id: " + id);
                 // create it
                 AceItem aceItem = AceItemLocalServiceUtil.createAceItem();
-                aceItem = fillAceItem(aceItem, id, titleMap, abstractMap, keywordMap);
+                aceItem = fillAceItem(aceItem, id, titleMap, abstractMap, keywordMap, uuidMap);
                 aceItem.setPublicationDate(new Date());
                 // the id of this harvester is stored in column NAS
                 aceItem.setWxsharvesterId(wxsHarvester.getWxsharvesterid());
@@ -683,10 +708,13 @@ public class HarvesterUtil {
      * @param titleMap
      * @param abstractMap
      * @param keywordMap
+     * @param uuidMap
      * @return
      */
-    private static synchronized AceItem fillAceItem(AceItem aceItem, String id, Map<String, String> titleMap, Map<String, String> abstractMap, Map<String, List<String>> keywordMap) {
-        aceItem.setStoredAt(id);
+    private static synchronized AceItem fillAceItem(AceItem aceItem, String id, Map<String, String> titleMap, Map<String, String> abstractMap, Map<String, List<String>> keywordMap, Map<String, String> uuidMap) {
+        String uuid = uuidMap.get(id);
+        System.out.println("SETTING STORED AT TO "  + uuid);
+        aceItem.setStoredAt(uuid);
         aceItem.setDatatype(AceItemType.MAPGRAPHDATASET.name());
         aceItem.setStoragetype("GEONETWORK");
         String title = titleMap.get(id);
