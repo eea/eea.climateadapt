@@ -1,10 +1,9 @@
 package nl.wur.alterra.cgi.ace.portlet;
 
 import com.liferay.portal.kernel.util.Validator;
+import nl.wur.alterra.cgi.ace.model.AceItem;
 
 import java.util.List;
-
-import nl.wur.alterra.cgi.ace.model.AceItem;
 
 public class AceItemValidator {
 	/**

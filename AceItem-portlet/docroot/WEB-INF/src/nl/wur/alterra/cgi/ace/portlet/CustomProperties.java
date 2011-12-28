@@ -34,6 +34,7 @@ public class CustomProperties {
      */
     public final static String GEONETWORK_ADMIN_PASSWORD = "geonetwork.admin.password";
 
+
     /**
      * Initializes custom properties.
      *
@@ -58,6 +59,10 @@ public class CustomProperties {
         }
     }
 
+    public static boolean isInitialized() {
+        return isInitialized;
+    }
+
     /**
      * Returns value for requested custom property key. Tries to initialize this class if it wasn't already.
      *
@@ -67,7 +72,7 @@ public class CustomProperties {
      */
     public static String getProperty(String key) throws CustomPropertiesNotInitializedException {
         if(! isInitialized) {
-            //System.out.println("WARNING: custom properties not initialized. Trying now:");
+            System.out.println("WARNING: custom properties not initialized. Trying now:");
             init();
             if(! isInitialized) {
                 throw new CustomPropertiesNotInitializedException("ERROR: cannot initialize custom properties");

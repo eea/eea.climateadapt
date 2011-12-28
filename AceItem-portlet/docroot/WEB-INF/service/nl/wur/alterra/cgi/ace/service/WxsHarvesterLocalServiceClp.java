@@ -410,12 +410,41 @@ public class WxsHarvesterLocalServiceClp implements WxsHarvesterLocalService {
 		return (nl.wur.alterra.cgi.ace.model.WxsHarvester)ClpSerializer.translateOutput(returnObj);
 	}
 
+	public nl.wur.alterra.cgi.ace.model.WxsHarvester updateWxsHarvester(
+		nl.wur.alterra.cgi.ace.model.WxsHarvester wxsHarvester,
+		java.lang.Boolean propagateToGeoNetwork, java.lang.Boolean reschedule)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		Object returnObj = null;
+
+		MethodHandler methodHandler = new MethodHandler(_updateWxsHarvesterMethodKey14,
+				wxsHarvester, propagateToGeoNetwork, reschedule);
+
+		try {
+			returnObj = _classLoaderProxy.invoke(methodHandler);
+		}
+		catch (Throwable t) {
+			if (t instanceof com.liferay.portal.kernel.exception.SystemException) {
+				throw (com.liferay.portal.kernel.exception.SystemException)t;
+			}
+
+			if (t instanceof RuntimeException) {
+				throw (RuntimeException)t;
+			}
+			else {
+				throw new RuntimeException(t.getClass().getName() +
+					" is not a valid exception");
+			}
+		}
+
+		return (nl.wur.alterra.cgi.ace.model.WxsHarvester)ClpSerializer.translateOutput(returnObj);
+	}
+
 	public java.util.List<nl.wur.alterra.cgi.ace.model.WxsHarvester> getWxsHarvesterByGroupId(
 		long groupId)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		Object returnObj = null;
 
-		MethodHandler methodHandler = new MethodHandler(_getWxsHarvesterByGroupIdMethodKey14,
+		MethodHandler methodHandler = new MethodHandler(_getWxsHarvesterByGroupIdMethodKey15,
 				groupId);
 
 		try {
@@ -443,7 +472,7 @@ public class WxsHarvesterLocalServiceClp implements WxsHarvesterLocalService {
 		throws com.liferay.portal.kernel.exception.SystemException {
 		Object returnObj = null;
 
-		MethodHandler methodHandler = new MethodHandler(_getWxsHarvestersByGroupIdMethodKey15,
+		MethodHandler methodHandler = new MethodHandler(_getWxsHarvestersByGroupIdMethodKey16,
 				groupId, start, end);
 
 		try {
@@ -470,7 +499,7 @@ public class WxsHarvesterLocalServiceClp implements WxsHarvesterLocalService {
 		throws com.liferay.portal.kernel.exception.SystemException {
 		Object returnObj = null;
 
-		MethodHandler methodHandler = new MethodHandler(_getWxsHarvestersCountByGroupIdMethodKey16,
+		MethodHandler methodHandler = new MethodHandler(_getWxsHarvestersCountByGroupIdMethodKey17,
 				groupId);
 
 		try {
@@ -534,10 +563,14 @@ public class WxsHarvesterLocalServiceClp implements WxsHarvesterLocalService {
 			nl.wur.alterra.cgi.ace.model.WxsHarvester.class, boolean.class);
 	private MethodKey _createWxsHarvesterMethodKey13 = new MethodKey(_classLoaderProxy.getClassName(),
 			"createWxsHarvester");
-	private MethodKey _getWxsHarvesterByGroupIdMethodKey14 = new MethodKey(_classLoaderProxy.getClassName(),
+	private MethodKey _updateWxsHarvesterMethodKey14 = new MethodKey(_classLoaderProxy.getClassName(),
+			"updateWxsHarvester",
+			nl.wur.alterra.cgi.ace.model.WxsHarvester.class,
+			java.lang.Boolean.class, java.lang.Boolean.class);
+	private MethodKey _getWxsHarvesterByGroupIdMethodKey15 = new MethodKey(_classLoaderProxy.getClassName(),
 			"getWxsHarvesterByGroupId", long.class);
-	private MethodKey _getWxsHarvestersByGroupIdMethodKey15 = new MethodKey(_classLoaderProxy.getClassName(),
+	private MethodKey _getWxsHarvestersByGroupIdMethodKey16 = new MethodKey(_classLoaderProxy.getClassName(),
 			"getWxsHarvestersByGroupId", long.class, int.class, int.class);
-	private MethodKey _getWxsHarvestersCountByGroupIdMethodKey16 = new MethodKey(_classLoaderProxy.getClassName(),
+	private MethodKey _getWxsHarvestersCountByGroupIdMethodKey17 = new MethodKey(_classLoaderProxy.getClassName(),
 			"getWxsHarvestersCountByGroupId", long.class);
 }

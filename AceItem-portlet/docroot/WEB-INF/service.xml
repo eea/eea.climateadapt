@@ -61,6 +61,10 @@
             <finder-column name="storedAt"/>
         </finder>
 
+        <finder name="WxsharvesterId" return-type="Collection">
+            <finder-column name="wxsharvesterId"/>
+        </finder>
+
     <reference package-path="com.liferay.portlet.asset" entity="AssetEntry" />
 
 	</entity>
@@ -71,6 +75,7 @@
         <column name="ogctype" type="String" />
         <column name="every" type="int" />
         <column name="topic" type="String" />
+        <column name="status" type="String" />
         <column name="savedToGeoNetwork" type="boolean" />
         <column name="geonetworkId" type="long" />
         <column name="geonetworkUUID" type="String" />

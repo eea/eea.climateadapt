@@ -238,6 +238,111 @@ public interface AceItemPersistence extends BasePersistence<AceItem> {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
+	* Finds all the ace items where wxsharvesterId = &#63;.
+	*
+	* @param wxsharvesterId the wxsharvester id to search with
+	* @return the matching ace items
+	* @throws SystemException if a system exception occurred
+	*/
+	public java.util.List<nl.wur.alterra.cgi.ace.model.AceItem> findByWxsharvesterId(
+		long wxsharvesterId)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Finds a range of all the ace items where wxsharvesterId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param wxsharvesterId the wxsharvester id to search with
+	* @param start the lower bound of the range of ace items to return
+	* @param end the upper bound of the range of ace items to return (not inclusive)
+	* @return the range of matching ace items
+	* @throws SystemException if a system exception occurred
+	*/
+	public java.util.List<nl.wur.alterra.cgi.ace.model.AceItem> findByWxsharvesterId(
+		long wxsharvesterId, int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Finds an ordered range of all the ace items where wxsharvesterId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param wxsharvesterId the wxsharvester id to search with
+	* @param start the lower bound of the range of ace items to return
+	* @param end the upper bound of the range of ace items to return (not inclusive)
+	* @param orderByComparator the comparator to order the results by
+	* @return the ordered range of matching ace items
+	* @throws SystemException if a system exception occurred
+	*/
+	public java.util.List<nl.wur.alterra.cgi.ace.model.AceItem> findByWxsharvesterId(
+		long wxsharvesterId, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Finds the first ace item in the ordered set where wxsharvesterId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param wxsharvesterId the wxsharvester id to search with
+	* @param orderByComparator the comparator to order the set by
+	* @return the first matching ace item
+	* @throws nl.wur.alterra.cgi.ace.NoSuchItemException if a matching ace item could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public nl.wur.alterra.cgi.ace.model.AceItem findByWxsharvesterId_First(
+		long wxsharvesterId,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException,
+			nl.wur.alterra.cgi.ace.NoSuchItemException;
+
+	/**
+	* Finds the last ace item in the ordered set where wxsharvesterId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param wxsharvesterId the wxsharvester id to search with
+	* @param orderByComparator the comparator to order the set by
+	* @return the last matching ace item
+	* @throws nl.wur.alterra.cgi.ace.NoSuchItemException if a matching ace item could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public nl.wur.alterra.cgi.ace.model.AceItem findByWxsharvesterId_Last(
+		long wxsharvesterId,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException,
+			nl.wur.alterra.cgi.ace.NoSuchItemException;
+
+	/**
+	* Finds the ace items before and after the current ace item in the ordered set where wxsharvesterId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param aceItemId the primary key of the current ace item
+	* @param wxsharvesterId the wxsharvester id to search with
+	* @param orderByComparator the comparator to order the set by
+	* @return the previous, current, and next ace item
+	* @throws nl.wur.alterra.cgi.ace.NoSuchItemException if a ace item with the primary key could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public nl.wur.alterra.cgi.ace.model.AceItem[] findByWxsharvesterId_PrevAndNext(
+		long aceItemId, long wxsharvesterId,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException,
+			nl.wur.alterra.cgi.ace.NoSuchItemException;
+
+	/**
 	* Finds all the ace items.
 	*
 	* @return the ace items
@@ -300,6 +405,15 @@ public interface AceItemPersistence extends BasePersistence<AceItem> {
 			nl.wur.alterra.cgi.ace.NoSuchItemException;
 
 	/**
+	* Removes all the ace items where wxsharvesterId = &#63; from the database.
+	*
+	* @param wxsharvesterId the wxsharvester id to search with
+	* @throws SystemException if a system exception occurred
+	*/
+	public void removeByWxsharvesterId(long wxsharvesterId)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
 	* Removes all the ace items from the database.
 	*
 	* @throws SystemException if a system exception occurred
@@ -325,6 +439,16 @@ public interface AceItemPersistence extends BasePersistence<AceItem> {
 	* @throws SystemException if a system exception occurred
 	*/
 	public int countByStoredAt(java.lang.String storedAt)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Counts all the ace items where wxsharvesterId = &#63;.
+	*
+	* @param wxsharvesterId the wxsharvester id to search with
+	* @return the number of matching ace items
+	* @throws SystemException if a system exception occurred
+	*/
+	public int countByWxsharvesterId(long wxsharvesterId)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**

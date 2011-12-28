@@ -20,17 +20,24 @@ public class AceItemHook extends com.liferay.portal.kernel.events.SimpleAction {
      */
     @Override
     public void run(String[] ids) throws ActionException {
-        //System.out.println("AceItemHook start");
-        // makes custom properties globally available
-        try {
-            CustomProperties.init();
+        synchronized (this) {
+            System.out.println("AceItemHook start " + this.toString());
+            if(CustomProperties.isInitialized()) {
+                System.out.println("AceItemHook already ran before, not doing it again. You probably have more than one company in your Liferay database.");
+            }
+            else {
+                // makes custom properties globally available
+                try {
+                    CustomProperties.init();
+                }
+                catch (CustomPropertiesNotInitializedException x) {
+                    throw new ActionException(x);
+                }
+                // schedules existing wxsharvesters
+                HarvesterUtil.scheduleHarvesters();
+                System.out.println("AceItemHook end");
+            }
         }
-        catch (CustomPropertiesNotInitializedException x) {
-            throw new ActionException(x);
-        }
-        // schedules existing wxsharvesters
-        HarvesterUtil.scheduleHarvesters();
-        //System.out.println("AceItemHook end");
     }
 
 }

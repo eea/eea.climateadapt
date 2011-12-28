@@ -7,7 +7,11 @@ import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.util.WebKeys;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
+import nl.wur.alterra.cgi.ace.harvester.HarvesterExecutionService;
+import nl.wur.alterra.cgi.ace.harvester.HarvesterThread;
+import nl.wur.alterra.cgi.ace.harvester.HarvesterUtil;
 import nl.wur.alterra.cgi.ace.model.WxsHarvester;
+import nl.wur.alterra.cgi.ace.model.constants.WxSHarvesterStatus;
 import nl.wur.alterra.cgi.ace.model.impl.WxsHarvesterImpl;
 import nl.wur.alterra.cgi.ace.service.WxsHarvesterLocalServiceUtil;
 
@@ -17,6 +21,9 @@ import javax.portlet.PortletPreferences;
 import javax.portlet.PortletRequest;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.ScheduledFuture;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Portlet implementation class WxsHarvesterPortlet.
@@ -31,6 +38,7 @@ public class WxsHarvesterPortlet extends LuceneIndexUpdatePortlet {
 	 */
 	public void addWxsHarvester(ActionRequest request, ActionResponse response) throws Exception {
 
+        System.out.println("WXSHARVESTERPORTLET addWxsHarvester");
 		WxsHarvester wxsHarvester = new WxsHarvesterImpl();
 		wxsHarvester.setWxsharvesterid(ParamUtil.getLong(request, "WxsHarvesterId"));
 		wxsHarvesterFromRequest(request, wxsHarvester);
@@ -77,11 +85,12 @@ public class WxsHarvesterPortlet extends LuceneIndexUpdatePortlet {
 	 *
 	 */
 	public void updateWxsHarvester(ActionRequest request, ActionResponse response) throws Exception {
+        System.out.println("WXSHARVESTERPORTLET updateWxsHarvester");
 		WxsHarvester wxsHarvester = WxsHarvesterLocalServiceUtil.getWxsHarvester(ParamUtil.getLong(request, "wxsharvesterid"));
 		wxsHarvesterFromRequest(request, wxsHarvester);
 		List<String> errors = new ArrayList<String>();
 		if (WxsHarvesterValidator.validateWxsHarvester(wxsHarvester, errors)) {
-			WxsHarvesterLocalServiceUtil.updateWxsHarvester(wxsHarvester);
+			WxsHarvesterLocalServiceUtil.updateWxsHarvester(wxsHarvester, Boolean.TRUE, Boolean.TRUE);
 			SessionMessages.add(request, "wxsHarvester-updated");
 			sendRedirect(request, response);
 		}
@@ -100,23 +109,18 @@ public class WxsHarvesterPortlet extends LuceneIndexUpdatePortlet {
 	 *
 	 */
 	public void deleteWxsHarvester(ActionRequest request, ActionResponse response) throws Exception {
-        //System.out.println("WxsHarvesterPortlet deleting harvester");
+        System.out.println("WXSHARVESTERPORTLET deleteWxsHarvester");
 		long wxsHarvesterId = ParamUtil.getLong(request, "wxsharvesterid");
 		List<String> errors = new ArrayList<String>();
 		if (Validator.isNotNull(wxsHarvesterId)) {
-            //System.out.println("wxsHarvesterId is not null, continuing");
+            System.out.println("wxsHarvesterId is not null, continuing");
             WxsHarvester wxsHarvester = WxsHarvesterLocalServiceUtil.getWxsHarvester(wxsHarvesterId);
-            try {
-                WxsHarvesterLocalServiceUtil.deleteWxsHarvester(wxsHarvester);
-                SessionMessages.add(request, "wxsHarvester-deleted");
-                sendRedirect(request, response);
-            } catch (Exception ex) {
-                SessionMessages.add(request, "error-deleting");
-                sendRedirect(request, response);
-            }
+			WxsHarvesterLocalServiceUtil.deleteWxsHarvester(wxsHarvester);
+			SessionMessages.add(request, "wxsHarvester-deleted");
+			sendRedirect(request, response);
 		}
 		else {
-            //System.out.println("wxsHarvesterId is null, aborting delete");
+            System.out.println("wxsHarvesterId is null, aborting delete");
 			SessionErrors.add(request, "error-deleting");
 		}
 	}
@@ -124,16 +128,13 @@ public class WxsHarvesterPortlet extends LuceneIndexUpdatePortlet {
 
 	/**
 	 * Adds a WxsHarvester to GeoNetwork.
-	 *
+     *
 	 */
-	public void saveWxsHarvesterToGeoNetwork(ActionRequest request, ActionResponse response) throws Exception {	
+	public void saveWxsHarvesterToGeoNetwork(ActionRequest request, ActionResponse response) throws Exception {
+        System.out.println("WXSHARVESTERPORTLET saveWxsHarvesterToGeoNetwork");
 		WxsHarvester wxsHarvester = WxsHarvesterLocalServiceUtil.getWxsHarvester(ParamUtil.getLong(request, "wxsharvesterid"));
-		
 		if (!wxsHarvester.getSavedToGeoNetwork()) {
-			// TODO: Implement to create the harvester in GeoNetwork
-			
-			wxsHarvester.setSavedToGeoNetwork(true);
-			WxsHarvesterLocalServiceUtil.updateWxsHarvester(wxsHarvester);
+			WxsHarvesterLocalServiceUtil.updateWxsHarvester(wxsHarvester, Boolean.TRUE, Boolean.TRUE);
 			SessionMessages.add(request, "wxsHarvester-updated");
 			sendRedirect(request, response);
 				
@@ -149,18 +150,20 @@ public class WxsHarvesterPortlet extends LuceneIndexUpdatePortlet {
 	 * Executes a WxsHarvester .
 	 *
 	 */
-	public void executeWxsHarvester(ActionRequest request, ActionResponse response) throws Exception {	
+	public void executeWxsHarvester(ActionRequest request, ActionResponse response) throws Exception {
+        System.out.println("WXSHARVESTERPORTLET executeWxsHarvester ");
 		WxsHarvester wxsHarvester = WxsHarvesterLocalServiceUtil.getWxsHarvester(ParamUtil.getLong(request, "wxsharvesterid"));
-		
 		if (wxsHarvester.getSavedToGeoNetwork()) {
-			// TODO: Implement to create the harvester in GeoNetwork
-			
-			SessionMessages.add(request, "wxsHarvester-updated");
+            wxsHarvester.setStatus(WxSHarvesterStatus.RUNNING.name());
+            WxsHarvesterLocalServiceUtil.updateWxsHarvester(wxsHarvester, Boolean.FALSE, Boolean.FALSE);
+            // schedule in separate thread for immediate execution
+            ScheduledExecutorService executionService = HarvesterExecutionService.getExecutionService();
+            executionService.schedule(new HarvesterThread(wxsHarvester), 1, TimeUnit.SECONDS);
+            SessionMessages.add(request, "wxsHarvester-updated");
 			sendRedirect(request, response);
 				
 		} else {
 			SessionErrors.add(request, "aceharvestergeonetwork-notexist");
-			
 			PortalUtil.copyRequestParameters(request, response);
 			response.setRenderParameter("jspPage", "/html/wxsharvester/edit_wxsharvester.jsp");
 		}

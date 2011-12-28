@@ -356,40 +356,47 @@ public class ClpSerializer {
 
 					method5.invoke(newModel, value5);
 
-					Method method6 = newModelClass.getMethod("setSavedToGeoNetwork",
-							new Class[] { Boolean.TYPE });
+					Method method6 = newModelClass.getMethod("setStatus",
+							new Class[] { String.class });
 
-					Boolean value6 = new Boolean(oldCplModel.getSavedToGeoNetwork());
+					String value6 = oldCplModel.getStatus();
 
 					method6.invoke(newModel, value6);
 
-					Method method7 = newModelClass.getMethod("setGeonetworkId",
-							new Class[] { Long.TYPE });
+					Method method7 = newModelClass.getMethod("setSavedToGeoNetwork",
+							new Class[] { Boolean.TYPE });
 
-					Long value7 = new Long(oldCplModel.getGeonetworkId());
+					Boolean value7 = new Boolean(oldCplModel.getSavedToGeoNetwork());
 
 					method7.invoke(newModel, value7);
 
-					Method method8 = newModelClass.getMethod("setGeonetworkUUID",
-							new Class[] { String.class });
+					Method method8 = newModelClass.getMethod("setGeonetworkId",
+							new Class[] { Long.TYPE });
 
-					String value8 = oldCplModel.getGeonetworkUUID();
+					Long value8 = new Long(oldCplModel.getGeonetworkId());
 
 					method8.invoke(newModel, value8);
 
-					Method method9 = newModelClass.getMethod("setCompanyId",
-							new Class[] { Long.TYPE });
+					Method method9 = newModelClass.getMethod("setGeonetworkUUID",
+							new Class[] { String.class });
 
-					Long value9 = new Long(oldCplModel.getCompanyId());
+					String value9 = oldCplModel.getGeonetworkUUID();
 
 					method9.invoke(newModel, value9);
 
-					Method method10 = newModelClass.getMethod("setGroupId",
+					Method method10 = newModelClass.getMethod("setCompanyId",
 							new Class[] { Long.TYPE });
 
-					Long value10 = new Long(oldCplModel.getGroupId());
+					Long value10 = new Long(oldCplModel.getCompanyId());
 
 					method10.invoke(newModel, value10);
+
+					Method method11 = newModelClass.getMethod("setGroupId",
+							new Class[] { Long.TYPE });
+
+					Long value11 = new Long(oldCplModel.getGroupId());
+
+					method11.invoke(newModel, value11);
 
 					return newModel;
 				}
@@ -743,40 +750,48 @@ public class ClpSerializer {
 
 					newModel.setTopic(value5);
 
-					Method method6 = oldModelClass.getMethod(
+					Method method6 = oldModelClass.getMethod("getStatus");
+
+					String value6 = (String)method6.invoke(oldModel,
+							(Object[])null);
+
+					newModel.setStatus(value6);
+
+					Method method7 = oldModelClass.getMethod(
 							"getSavedToGeoNetwork");
 
-					Boolean value6 = (Boolean)method6.invoke(oldModel,
+					Boolean value7 = (Boolean)method7.invoke(oldModel,
 							(Object[])null);
 
-					newModel.setSavedToGeoNetwork(value6);
+					newModel.setSavedToGeoNetwork(value7);
 
-					Method method7 = oldModelClass.getMethod("getGeonetworkId");
+					Method method8 = oldModelClass.getMethod("getGeonetworkId");
 
-					Long value7 = (Long)method7.invoke(oldModel, (Object[])null);
+					Long value8 = (Long)method8.invoke(oldModel, (Object[])null);
 
-					newModel.setGeonetworkId(value7);
+					newModel.setGeonetworkId(value8);
 
-					Method method8 = oldModelClass.getMethod(
+					Method method9 = oldModelClass.getMethod(
 							"getGeonetworkUUID");
 
-					String value8 = (String)method8.invoke(oldModel,
+					String value9 = (String)method9.invoke(oldModel,
 							(Object[])null);
 
-					newModel.setGeonetworkUUID(value8);
+					newModel.setGeonetworkUUID(value9);
 
-					Method method9 = oldModelClass.getMethod("getCompanyId");
-
-					Long value9 = (Long)method9.invoke(oldModel, (Object[])null);
-
-					newModel.setCompanyId(value9);
-
-					Method method10 = oldModelClass.getMethod("getGroupId");
+					Method method10 = oldModelClass.getMethod("getCompanyId");
 
 					Long value10 = (Long)method10.invoke(oldModel,
 							(Object[])null);
 
-					newModel.setGroupId(value10);
+					newModel.setCompanyId(value10);
+
+					Method method11 = oldModelClass.getMethod("getGroupId");
+
+					Long value11 = (Long)method11.invoke(oldModel,
+							(Object[])null);
+
+					newModel.setGroupId(value11);
 
 					return newModel;
 				}

@@ -1,6 +1,8 @@
 package nl.wur.alterra.cgi.ace.geonetwork;
 
+import com.liferay.portal.kernel.exception.SystemException;
 import nl.wur.alterra.cgi.ace.model.WxsHarvester;
+import nl.wur.alterra.cgi.ace.model.constants.WxSHarvesterStatus;
 import nl.wur.alterra.cgi.ace.portlet.CustomProperties;
 import nl.wur.alterra.cgi.ace.portlet.CustomPropertiesNotInitializedException;
 import nl.wur.alterra.cgi.ace.util.HTTPUtils;
@@ -33,7 +35,7 @@ public class GeoNetworkConnector {
             this.GeoNetworkXMLSearchURL  = geoNetworkBaseURL + "/srv/en/xml.search";
         }
         catch(CustomPropertiesNotInitializedException x) {
-            //System.out.println("ERROR initializing GeoNetworkConnector: configuration unavailable.");
+            System.out.println("ERROR initializing GeoNetworkConnector: configuration unavailable.");
             throw new ExceptionInInitializerError(x);
         }
     }
@@ -55,18 +57,58 @@ public class GeoNetworkConnector {
     private HTTPUtils httpUtils = new HTTPUtils();
 
     /**
+     * Logs in to GeoNetwork.
+     *
+     * @throws SystemException hmm
+     */
+    private GeoNetworkHarvesterResponse login(WxsHarvester wxsHarvester) throws SystemException {
+        //System.out.println("GeoNetworkConnector login for harvester " + wxsHarvester.toShortString());
+        String loginRequest = createLoginRequest();
+        String response = httpUtils.post(loginRequest, GeoNetworkLoginURL);
+        //System.out.println("login response: '" + response + "'");
+        // verify success
+        if(!response.contains("<ok />")) {
+            System.out.println("ERROR login for harvester " + wxsHarvester.toShortString());
+            wxsHarvester.setStatus(WxSHarvesterStatus.GEONETWORK_LOGIN_FAILURE.name());
+        }
+        else {
+            //wxsHarvester.setStatus(WxSHarvesterStatus.GEONETWORK_LOGIN_SUCCESS.name());
+        }
+        return new GeoNetworkHarvesterResponse(wxsHarvester, response);
+    }
+
+    /**
      * Adds an ACE WxsHarvester to GeoNetwork.
      *
      * @param wxsHarvester wxsharvester to publish
-     * @throws com.liferay.portal.kernel.exception.Exception hmm
+     * @throws com.liferay.portal.kernel.exception.SystemException hmm
      */
-    public WxsHarvester addHarvester(WxsHarvester wxsHarvester) throws Exception {
-        login();
-        String xml = createAddOrUpdateRequest(wxsHarvester, null);
-        String response = httpUtils.post(xml, GeoNetworkAddHarvesterURL);
-        // TODO verify success?
-        // TODO logout?
-        return setGeoNetworkIDs(wxsHarvester, response);
+    public GeoNetworkHarvesterResponse addHarvester(WxsHarvester wxsHarvester) throws SystemException {
+        System.out.println("GeoNetworkConnector adding harvester " + wxsHarvester.toShortString());
+        GeoNetworkHarvesterResponse loginResponse = login(wxsHarvester);
+        // login successful
+        if(!loginResponse.getWxsHarvester().getStatus().equals(WxSHarvesterStatus.GEONETWORK_LOGIN_FAILURE.name())) {
+            String xml = createAddOrUpdateRequest(wxsHarvester, null);
+            String response = httpUtils.post(xml, GeoNetworkAddHarvesterURL);
+            // TODO logout?
+            // ad-hoc succes verification
+            if(response.contains("BadParameterEx")) {
+                wxsHarvester.setSavedToGeoNetwork(false);
+                wxsHarvester.setStatus(WxSHarvesterStatus.GEONETWORK_INSERT_FAILURE.name());
+            }
+            else {
+                wxsHarvester = setGeoNetworkIDs(wxsHarvester, response);
+                wxsHarvester.setSavedToGeoNetwork(true);
+                //wxsHarvester.setStatus(WxSHarvesterStatus.GEONETWORK_INSERT_SUCCESS.name());
+            }
+            return new GeoNetworkHarvesterResponse(wxsHarvester, response);
+        }
+        // login failed
+        else {
+            System.out.println("ERROR: failed to login to geonetwork when adding harvester " + wxsHarvester.toShortString());
+            loginResponse.getWxsHarvester().setStatus(WxSHarvesterStatus.GEONETWORK_INSERT_FAILURE.name());
+            return loginResponse;
+        }
     }
 
     /**
@@ -74,15 +116,39 @@ public class GeoNetworkConnector {
      *
      * @param wxsHarvester
      * @return
-     * @throws Exception
+     * @throws SystemException
      */
-    public WxsHarvester updateHarvester(WxsHarvester wxsHarvester) throws Exception {
-        login();
-        String xml = createAddOrUpdateRequest(wxsHarvester, Long.toString(wxsHarvester.getGeonetworkId()));
-        String response = httpUtils.post(xml, GeoNetworkUpdateHarvesterURL);
-        // TODO verify success?
-        // TODO logout?
-        return setGeoNetworkIDs(wxsHarvester, response);
+    public GeoNetworkHarvesterResponse updateHarvester(WxsHarvester wxsHarvester) throws SystemException {
+        System.out.println("GeoNetworkConnector updating harvester " + wxsHarvester.toShortString());
+        GeoNetworkHarvesterResponse loginResponse = login(wxsHarvester);
+        // login successful
+        if(!loginResponse.getWxsHarvester().getStatus().equals(WxSHarvesterStatus.GEONETWORK_LOGIN_FAILURE.name())) {
+            String xml = createAddOrUpdateRequest(wxsHarvester, Long.toString(wxsHarvester.getGeonetworkId()));
+            String response;
+            if(wxsHarvester.getSavedToGeoNetwork() == true) {
+                response = httpUtils.post(xml, GeoNetworkUpdateHarvesterURL);
+            }
+            else {
+                response = httpUtils.post(xml, GeoNetworkAddHarvesterURL);
+            }
+            // TODO logout?
+            // ad-hoc succes verification
+            if(response.contains("BadParameterEx")) {
+                wxsHarvester.setSavedToGeoNetwork(false);
+                wxsHarvester.setStatus(WxSHarvesterStatus.GEONETWORK_INSERT_FAILURE.name());
+            }
+            else {
+                wxsHarvester = setGeoNetworkIDs(wxsHarvester, response);
+                //wxsHarvester.setStatus(WxSHarvesterStatus.GEONETWORK_UPDATE_SUCCESS.name());
+            }
+            return new GeoNetworkHarvesterResponse(wxsHarvester, response);
+        }
+        // login failed
+        else {
+            System.out.println("ERROR: failed to login to geonetwork when updating harvester " + wxsHarvester.toShortString());
+            loginResponse.getWxsHarvester().setStatus(WxSHarvesterStatus.GEONETWORK_UPDATE_FAILURE.name());
+            return loginResponse;
+        }
     }
 
     /**
@@ -90,20 +156,31 @@ public class GeoNetworkConnector {
      *
      * @param wxsHarvester
      * @return
-     * @throws Exception
+     * @throws SystemException
      */
-    public void deleteHarvester(WxsHarvester wxsHarvester) throws Exception {
-        login();
-        String xml = createDeleteRequest(wxsHarvester);
-        String response = httpUtils.post(xml, GeoNetworkRemoveHarvesterURL);
+    public GeoNetworkHarvesterResponse deleteHarvester(WxsHarvester wxsHarvester) throws SystemException {
+        System.out.println("GeoNetworkConnector deleting harvester " + wxsHarvester.toShortString());
+        GeoNetworkHarvesterResponse loginResponse = login(wxsHarvester);
+        // login successful
+        if(!loginResponse.getWxsHarvester().getStatus().equals(WxSHarvesterStatus.GEONETWORK_LOGIN_FAILURE.name())) {
+            String xml = createDeleteRequest(wxsHarvester);
+            String response = httpUtils.post(xml, GeoNetworkRemoveHarvesterURL);
+            // TODO logout?
 
-        //System.out.println("deleteHarvester GeoNetwork response:\n" + response);
-        // Check if harvester could be deleted. If not found in GeoNetwork, avoid exception
-        if((!response.contains("status=\"ok\"") && (!response.contains("status=\"not-found\"")))) {
-            throw new Exception("Failed to delete harvester from GeoNetwork");
+            System.out.println("deleteHarvester GeoNetwork response:\n" + response);
+            // TODO verify success -- when GeoNetwork supports that in future
+            //if(!response.contains("status=\"ok\"")) {
+            //    wxsHarvester.setStatus(WxSHarvesterStatus.GEONETWORK_DELETE_FAILURE.name());
+            //}
+            //wxsHarvester.setStatus(WxSHarvesterStatus.GEONETWORK_DELETE_SUCCESS.name());
+            return new GeoNetworkHarvesterResponse(wxsHarvester, response);
+            }
+        // login failed
+        else {
+            System.out.println("ERROR: failed to login to geonetwork when deleting harvester " + wxsHarvester.toShortString());
+            loginResponse.getWxsHarvester().setStatus(WxSHarvesterStatus.GEONETWORK_DELETE_FAILURE.name());
+            return loginResponse;
         }
-
-        // TODO logout?
     }
 
 
@@ -111,58 +188,118 @@ public class GeoNetworkConnector {
      * Activates a harvester in GeoNetwork.
      *
      * @param wxsHarvester
-     * @throws Exception
+     * @throws SystemException
      */
-    public void activateHarvester(WxsHarvester wxsHarvester) throws Exception {
-        login();
-        String xml = createActivateRequest(wxsHarvester);
-        String response = httpUtils.post(xml, GeoNetworkStartHarvesterURL);
-        // TODO verify success?
-        // TODO logout?
+    public GeoNetworkHarvesterResponse activateHarvester(WxsHarvester wxsHarvester) throws SystemException {
+        System.out.println("GeoNetworkConnector activating harvester " + wxsHarvester.toShortString());
+        GeoNetworkHarvesterResponse loginResponse = login(wxsHarvester);
+        // login successful
+        if(!loginResponse.getWxsHarvester().getStatus().equals(WxSHarvesterStatus.GEONETWORK_LOGIN_FAILURE.name())) {
+            String xml = createActivateRequest(wxsHarvester);
+            String response = httpUtils.post(xml, GeoNetworkStartHarvesterURL);
+            // TODO logout?
+            // TODO verify success -- when GeoNetwork supports that in future
+            //if(!response.contains("status=\"ok\"")) {
+            //    wxsHarvester.setStatus(WxSHarvesterStatus.GEONETWORK_ACTIVATE_FAILURE.name());
+            //}
+            //wxsHarvester.setStatus(WxSHarvesterStatus.GEONETWORK_ACTIVATE_SUCCESS.name());
+            return new GeoNetworkHarvesterResponse(wxsHarvester, response);
+            }
+        // login failed
+        else {
+            System.out.println("ERROR: failed to login to geonetwork when activating harvester " + wxsHarvester.toShortString());
+            loginResponse.getWxsHarvester().setStatus(WxSHarvesterStatus.GEONETWORK_ACTIVATE_FAILURE.name());
+            return loginResponse;
+        }
     }
 
     /**
      * De-activates a harvester in GeoNetwork.
      *
      * @param wxsHarvester
-     * @throws Exception
+     * @throws SystemException
      */
-    public String deActivateHarvester(WxsHarvester wxsHarvester) throws Exception {
-        login();
-        String xml = createDeActivateRequest(wxsHarvester);
-        String response = httpUtils.post(xml, GeoNetworkStopHarvesterURL);
-        // TODO verify success?
-        // TODO logout?
-        return response;
+    public GeoNetworkHarvesterResponse deActivateHarvester(WxsHarvester wxsHarvester) throws SystemException {
+        System.out.println("GeoNetworkConnector de-activating harvester " + wxsHarvester.toShortString());
+        GeoNetworkHarvesterResponse loginResponse = login(wxsHarvester);
+        // login successful
+        if(!loginResponse.getWxsHarvester().getStatus().equals(WxSHarvesterStatus.GEONETWORK_LOGIN_FAILURE.name())) {
+            String xml = createDeActivateRequest(wxsHarvester);
+            String response = httpUtils.post(xml, GeoNetworkStopHarvesterURL);
+            // TODO logout?
+            // TODO verify success -- when GeoNetwork supports that in future
+            //if(!response.contains("status=\"ok\"")) {
+            //    wxsHarvester.setStatus(WxSHarvesterStatus.GEONETWORK_DEACTIVATE_FAILURE.name());
+            //}
+            //wxsHarvester.setStatus(WxSHarvesterStatus.GEONETWORK_DEACTIVATE_SUCCESS.name());
+            return new GeoNetworkHarvesterResponse(wxsHarvester, response);
+        }
+        else {
+            System.out.println("ERROR: failed to login to geonetwork when de-activating harvester " + wxsHarvester.toShortString());
+            loginResponse.getWxsHarvester().setStatus(WxSHarvesterStatus.GEONETWORK_DEACTIVATE_FAILURE.name());
+            return loginResponse;
+        }
     }
 
     /**
-     * Runs a harvester in GeoNetwork.
+     * Requests GeoNetwork to run a harvester.
      *
      * @param wxsHarvester
-     * @throws Exception
+     * @throws SystemException
      */
-    public String runHarvester(WxsHarvester wxsHarvester) throws Exception {
-        login();
-        String xml = createRunRequest(wxsHarvester);
-        String response = httpUtils.post(xml, GeoNetworkRunHarvesterURL);
-        // TODO verify success?
-        // TODO logout?
-        return response;
+    public GeoNetworkHarvesterResponse runHarvester(WxsHarvester wxsHarvester) throws SystemException {
+        System.out.println("GeoNetworkConnector running harvester " + wxsHarvester.toShortString());
+        GeoNetworkHarvesterResponse loginResponse = login(wxsHarvester);
+        // login successful
+        if(!loginResponse.getWxsHarvester().getStatus().equals(WxSHarvesterStatus.GEONETWORK_LOGIN_FAILURE.name())) {
+            String xml = createRunRequest(wxsHarvester);
+            String response = httpUtils.post(xml, GeoNetworkRunHarvesterURL);
+            // TODO logout?
+            // TODO verify success -- when GeoNetwork supports that in future
+            //if(!response.contains("status=\"ok\"")) {
+            //    wxsHarvester.setStatus(WxSHarvesterStatus.GEONETWORK_RUN_FAILURE.name());
+            //}
+            //wxsHarvester.setStatus(WxSHarvesterStatus.GEONETWORK_RUN_SUCCESS.name());
+            return new GeoNetworkHarvesterResponse(wxsHarvester, response);
+        }
+        // login failed
+        else {
+            System.out.println("ERROR: failed to login to geonetwork when running harvester " + wxsHarvester.toShortString());
+            loginResponse.getWxsHarvester().setStatus(WxSHarvesterStatus.GEONETWORK_RUN_FAILURE.name());
+            return loginResponse;
+        }
     }
 
     /**
      * Gets a harvester's info from GeoNetwork -- this includes whether it is running right now.
      *
      * @param wxsHarvester
-     * @throws Exception
+     * @throws SystemException
      */
-    public String getHarvester(WxsHarvester wxsHarvester) throws Exception {
-        login();
-        String xml = createGetRequest(wxsHarvester);
-        String response = httpUtils.post(xml, GeoNetworkGetHarvesterURL);
-        // TODO logout?
-        return response;
+    public GeoNetworkHarvesterResponse getHarvester(WxsHarvester wxsHarvester) throws SystemException {
+        System.out.println("GeoNetworkConnector getting harvester " + wxsHarvester.toShortString());
+        GeoNetworkHarvesterResponse loginResponse = login(wxsHarvester);
+        // login successful
+        if(!loginResponse.getWxsHarvester().getStatus().equals(WxSHarvesterStatus.GEONETWORK_LOGIN_FAILURE.name())) {
+            String xml = createGetRequest(wxsHarvester);
+            String response = httpUtils.post(xml, GeoNetworkGetHarvesterURL);
+            // TODO logout?
+            // ad hoc verification
+            if(response.contains("Object Not Found")) {
+                wxsHarvester.setStatus(WxSHarvesterStatus.GEONETWORK_GET_FAILURE.name());
+                wxsHarvester.setSavedToGeoNetwork(false);
+            }
+            else {
+                //wxsHarvester.setStatus(WxSHarvesterStatus.GEONETWORK_GET_SUCCESS.name());
+            }
+            return new GeoNetworkHarvesterResponse(wxsHarvester, response);
+        }
+        // login failed
+        else {
+            System.out.println("ERROR: failed to login to geonetwork when running harvester " + wxsHarvester.toShortString());
+            loginResponse.getWxsHarvester().setStatus(WxSHarvesterStatus.GEONETWORK_GET_FAILURE.name());
+            return loginResponse;
+        }
     }
 
     /**
@@ -170,15 +307,33 @@ public class GeoNetworkConnector {
      *
      * @param wxsHarvester
      * @return
-     * @throws Exception
+     * @throws SystemException
      */
-    public String getHarvesterResults(WxsHarvester wxsHarvester) throws Exception {
-        login();
-        String xml = createHarvesterResultRequest(wxsHarvester);
-        String response = httpUtils.post(xml, GeoNetworkXMLSearchURL);
-        // TODO logout?
-        return response;
+    public GeoNetworkHarvesterResponse getHarvesterResults(WxsHarvester wxsHarvester) throws SystemException {
+        System.out.println("GeoNetworkConnector getting harvester results" + wxsHarvester.toShortString());
+        GeoNetworkHarvesterResponse loginResponse = login(wxsHarvester);
+        // login successful
+        if(!loginResponse.getWxsHarvester().getStatus().equals(WxSHarvesterStatus.GEONETWORK_LOGIN_FAILURE.name())) {
+            String xml = createHarvesterResultRequest(wxsHarvester);
+            String response = httpUtils.post(xml, GeoNetworkXMLSearchURL);
+            //System.out.println("@@ get harvester result:\n"+response);
+            // TODO logout?
+            // verify success
+            //if(!response.contains("status=\"ok\"")) {
+            //    wxsHarvester.setStatus(WxSHarvesterStatus.GEONETWORK_GETRESULTS_FAILURE.name());
+            //}
+            //wxsHarvester.setStatus(WxSHarvesterStatus.GEONETWORK_GETRESULTS_SUCCESS.name());
+            return new GeoNetworkHarvesterResponse(wxsHarvester, response);
+        }
+        // login failed
+        else {
+            System.out.println("ERROR: failed to login to geonetwork when running harvester " + wxsHarvester.toShortString());
+            loginResponse.getWxsHarvester().setStatus(WxSHarvesterStatus.GEONETWORK_GETRESULTS_FAILURE.name());
+            return loginResponse;
+        }
     }
+
+
 
     /**
      * Creates a request to retrieve metadata from a particular harvester.
@@ -254,14 +409,14 @@ public class GeoNetworkConnector {
         // strip from first "
         id = id.substring(0, id.indexOf("\""));
 
-        //System.out.println("processing harvester with id: " + id);
+        System.out.println("processing harvester with id: " + id);
 
         // strip up to uuid
         String uuid = geonetworkInfo.substring(geonetworkInfo.indexOf("<uuid>") + "<uuid>".length());
         // strip from first <
         uuid = uuid.substring(0, uuid.indexOf("<"));
 
-        //System.out.println("processing harvester with uuid: " + uuid);
+        System.out.println("processing harvester with uuid: " + uuid);
 
         wxsHarvester.setGeonetworkId(Long.parseLong(id));
         wxsHarvester.setGeonetworkUUID(uuid);
@@ -389,17 +544,6 @@ public class GeoNetworkConnector {
         xml += "</node>";
 
         return xml;
-    }
-
-    /**
-     * Logs in to GeoNetwork.
-     *
-     * @throws Exception hmm
-     */
-    public void login() throws Exception {
-        String loginRequest = createLoginRequest();
-        String response = httpUtils.post(loginRequest, GeoNetworkLoginURL);
-        // TODO verify success
     }
 
     /**

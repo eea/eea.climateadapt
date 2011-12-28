@@ -63,6 +63,7 @@
 			<basic name="ogctype" />
 			<basic name="every" />
 			<basic name="topic" />
+                        <basic name="status" />
 			<basic name="savedToGeoNetwork" />
 			<basic name="geonetworkId" />
 			<basic name="geonetworkUUID" />

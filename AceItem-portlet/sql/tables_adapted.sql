@@ -58,6 +58,7 @@ CREATE TABLE ace_wxsharvester
   ogctype character varying(75),
   every integer,
   topic character varying(75),
+  status character varying(75),
   savedtogeonetwork boolean,
   geonetworkid bigint,
   geonetworkuuid character varying(75),

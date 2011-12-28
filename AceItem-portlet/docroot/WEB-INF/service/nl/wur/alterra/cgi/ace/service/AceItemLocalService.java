@@ -266,4 +266,17 @@ public interface AceItemLocalService {
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int getAceItemsCountByGroupId(long groupId)
 		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Retrieves aceitems by nas id, which contains the ids of the wxsharvester that created the aceitems.
+	*
+	* @author heikki doeleman
+	* @param wxsHarvesterId
+	* @return
+	* @throws SystemException
+	*/
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public java.util.List<nl.wur.alterra.cgi.ace.model.AceItem> getAceItemsByWxsharvesterId(
+		long wxsHarvesterId)
+		throws com.liferay.portal.kernel.exception.SystemException;
 }

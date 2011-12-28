@@ -43,6 +43,7 @@
 		<field name="ogctype" type="String" />
 		<field name="every" type="int" />
 		<field name="topic" type="String" />
+		<field name="status" type="String" />
 		<field name="savedToGeoNetwork" type="boolean" />
 		<field name="geonetworkId" type="long" />
 		<field name="geonetworkUUID" type="String" />

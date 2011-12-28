@@ -547,6 +547,34 @@ public class AceItemLocalServiceClp implements AceItemLocalService {
 		return ((Integer)returnObj).intValue();
 	}
 
+	public java.util.List<nl.wur.alterra.cgi.ace.model.AceItem> getAceItemsByWxsharvesterId(
+		long wxsHarvesterId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		Object returnObj = null;
+
+		MethodHandler methodHandler = new MethodHandler(_getAceItemsByWxsharvesterIdMethodKey19,
+				wxsHarvesterId);
+
+		try {
+			returnObj = _classLoaderProxy.invoke(methodHandler);
+		}
+		catch (Throwable t) {
+			if (t instanceof com.liferay.portal.kernel.exception.SystemException) {
+				throw (com.liferay.portal.kernel.exception.SystemException)t;
+			}
+
+			if (t instanceof RuntimeException) {
+				throw (RuntimeException)t;
+			}
+			else {
+				throw new RuntimeException(t.getClass().getName() +
+					" is not a valid exception");
+			}
+		}
+
+		return (java.util.List<nl.wur.alterra.cgi.ace.model.AceItem>)ClpSerializer.translateOutput(returnObj);
+	}
+
 	public ClassLoaderProxy getClassLoaderProxy() {
 		return _classLoaderProxy;
 	}
@@ -597,4 +625,6 @@ public class AceItemLocalServiceClp implements AceItemLocalService {
 			com.liferay.portal.kernel.util.OrderByComparator.class);
 	private MethodKey _getAceItemsCountByGroupIdMethodKey18 = new MethodKey(_classLoaderProxy.getClassName(),
 			"getAceItemsCountByGroupId", long.class);
+	private MethodKey _getAceItemsByWxsharvesterIdMethodKey19 = new MethodKey(_classLoaderProxy.getClassName(),
+			"getAceItemsByWxsharvesterId", long.class);
 }

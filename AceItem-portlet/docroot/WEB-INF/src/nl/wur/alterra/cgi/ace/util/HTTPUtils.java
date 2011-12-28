@@ -1,10 +1,13 @@
 package nl.wur.alterra.cgi.ace.util;
 
+import com.liferay.portal.kernel.exception.SystemException;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
+import java.net.ConnectException;
 import java.net.CookieHandler;
 import java.net.CookieManager;
 import java.net.CookiePolicy;
@@ -40,7 +43,7 @@ public class HTTPUtils {
      * @return response content as string
      * @throws com.liferay.portal.kernel.exception.SystemException hmm
      */
-    public String post(String stringContent, String destination) throws Exception {
+    public String post(String stringContent, String destination) throws SystemException {
         try {
             URL url = new URL(destination);
             HttpURLConnection x = (HttpURLConnection) url.openConnection();
@@ -55,6 +58,7 @@ public class HTTPUtils {
             x.setUseCaches(false);
             x.setDefaultUseCaches(false);
 
+
             //
             // send HTTP request
             //
@@ -62,6 +66,14 @@ public class HTTPUtils {
             try {
                 outputStream = x.getOutputStream();
                 outputStream.write(stringContent.getBytes(UTF8));
+            }
+            //
+            // return exception messages rather than throwing the exceptions
+            //
+            catch(ConnectException y) {
+                System.out.println("ERORR: " + y.getMessage());
+                y.printStackTrace();
+                return y.getMessage();
             }
             finally {
                 if (outputStream != null) {
@@ -85,20 +97,23 @@ public class HTTPUtils {
             else {
                 responseStream = x.getErrorStream();
                 response = inputStream2String(responseStream);
-                //System.out.println(response);
-                // TODO do not throw SystemException in case of unsuccesful HTTP response
-                throw new Exception("Server returned response code: " + x.getResponseCode() + " with content:\n" + response);
+                System.out.println("Server returned response code: " + x.getResponseCode() + " with content:\n" + response);
             }
             //System.out.println("\nresponse from server after POST to: "+ destination + "\n" + response + "\n");
             return response;
         }
+        //
+        // return exception messages rather than throwing the exceptions
+        //
         catch(MalformedURLException x) {
+            System.out.println("ERORR: " + x.getMessage());
             x.printStackTrace();
-            throw new Exception(x.getMessage(), x);
+            return x.getMessage();
         }
         catch (IOException x) {
+            System.out.println("ERORR: " + x.getMessage());
             x.printStackTrace();
-            throw new Exception(x.getMessage(), x);
+            return x.getMessage();
         }
     }
 

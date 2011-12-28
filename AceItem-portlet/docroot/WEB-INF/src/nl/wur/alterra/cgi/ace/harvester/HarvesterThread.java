@@ -1,7 +1,9 @@
 package nl.wur.alterra.cgi.ace.harvester;
 
 import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.exception.SystemException;
 import nl.wur.alterra.cgi.ace.model.WxsHarvester;
+import nl.wur.alterra.cgi.ace.portlet.CustomPropertiesNotInitializedException;
 
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.RunnableFuture;
@@ -28,20 +30,24 @@ public class HarvesterThread implements RunnableFuture {
      * Sets this Future to the result of its computation unless it has been cancelled.
      */
     public void run() {
-        //System.out.println("HarvesterThread run start");
+        System.out.println("HarvesterThread run start");
         try {
             HarvesterUtil.executeWxsHarvester(this.wxsHarvester);
         }
-        catch (PortalException x) {
-            //System.out.println("ERROR: " + x.getMessage());
+        catch (SystemException x) {
+            System.out.println("ERROR: " + x.getMessage());
             x.printStackTrace();
         }
-        catch (Exception x) {
-            //System.out.println("ERROR: " + x.getMessage());
+        catch (PortalException x) {
+            System.out.println("ERROR: " + x.getMessage());
+            x.printStackTrace();
+        }
+        catch (CustomPropertiesNotInitializedException x) {
+            System.out.println("ERROR: " + x.getMessage());
             x.printStackTrace();
         }
         ready.release();
-        //System.out.println("HarvesterThread run end");
+        System.out.println("HarvesterThread run end");
     }
 
     /**

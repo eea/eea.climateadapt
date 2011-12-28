@@ -60,13 +60,14 @@ public class WxsHarvesterModelImpl extends BaseModelImpl<WxsHarvester>
 			{ "ogctype", new Integer(Types.VARCHAR) },
 			{ "every", new Integer(Types.INTEGER) },
 			{ "topic", new Integer(Types.VARCHAR) },
+			{ "status", new Integer(Types.VARCHAR) },
 			{ "savedToGeoNetwork", new Integer(Types.BOOLEAN) },
 			{ "geonetworkId", new Integer(Types.BIGINT) },
 			{ "geonetworkUUID", new Integer(Types.VARCHAR) },
 			{ "companyId", new Integer(Types.BIGINT) },
 			{ "groupId", new Integer(Types.BIGINT) }
 		};
-	public static final String TABLE_SQL_CREATE = "create table Ace_WxsHarvester (wxsharvesterid LONG not null primary key,name VARCHAR(75) null,url VARCHAR(75) null,ogctype VARCHAR(75) null,every INTEGER,topic VARCHAR(75) null,savedToGeoNetwork BOOLEAN,geonetworkId LONG,geonetworkUUID VARCHAR(75) null,companyId LONG,groupId LONG)";
+	public static final String TABLE_SQL_CREATE = "create table Ace_WxsHarvester (wxsharvesterid LONG not null primary key,name VARCHAR(75) null,url VARCHAR(75) null,ogctype VARCHAR(75) null,every INTEGER,topic VARCHAR(75) null,status VARCHAR(75) null,savedToGeoNetwork BOOLEAN,geonetworkId LONG,geonetworkUUID VARCHAR(75) null,companyId LONG,groupId LONG)";
 	public static final String TABLE_SQL_DROP = "drop table Ace_WxsHarvester";
 	public static final String ORDER_BY_JPQL = " ORDER BY wxsHarvester.name ASC";
 	public static final String ORDER_BY_SQL = " ORDER BY Ace_WxsHarvester.name ASC";
@@ -165,6 +166,19 @@ public class WxsHarvesterModelImpl extends BaseModelImpl<WxsHarvester>
 		_topic = topic;
 	}
 
+	public String getStatus() {
+		if (_status == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _status;
+		}
+	}
+
+	public void setStatus(String status) {
+		_status = status;
+	}
+
 	public boolean getSavedToGeoNetwork() {
 		return _savedToGeoNetwork;
 	}
@@ -247,6 +261,7 @@ public class WxsHarvesterModelImpl extends BaseModelImpl<WxsHarvester>
 		clone.setOgctype(getOgctype());
 		clone.setEvery(getEvery());
 		clone.setTopic(getTopic());
+		clone.setStatus(getStatus());
 		clone.setSavedToGeoNetwork(getSavedToGeoNetwork());
 		clone.setGeonetworkId(getGeonetworkId());
 		clone.setGeonetworkUUID(getGeonetworkUUID());
@@ -298,7 +313,7 @@ public class WxsHarvesterModelImpl extends BaseModelImpl<WxsHarvester>
 	}
 
 	public String toString() {
-		StringBundler sb = new StringBundler(23);
+		StringBundler sb = new StringBundler(25);
 
 		sb.append("{wxsharvesterid=");
 		sb.append(getWxsharvesterid());
@@ -312,6 +327,8 @@ public class WxsHarvesterModelImpl extends BaseModelImpl<WxsHarvester>
 		sb.append(getEvery());
 		sb.append(", topic=");
 		sb.append(getTopic());
+		sb.append(", status=");
+		sb.append(getStatus());
 		sb.append(", savedToGeoNetwork=");
 		sb.append(getSavedToGeoNetwork());
 		sb.append(", geonetworkId=");
@@ -328,7 +345,7 @@ public class WxsHarvesterModelImpl extends BaseModelImpl<WxsHarvester>
 	}
 
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(37);
+		StringBundler sb = new StringBundler(40);
 
 		sb.append("<model><model-name>");
 		sb.append("nl.wur.alterra.cgi.ace.model.WxsHarvester");
@@ -357,6 +374,10 @@ public class WxsHarvesterModelImpl extends BaseModelImpl<WxsHarvester>
 		sb.append(
 			"<column><column-name>topic</column-name><column-value><![CDATA[");
 		sb.append(getTopic());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>status</column-name><column-value><![CDATA[");
+		sb.append(getStatus());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>savedToGeoNetwork</column-name><column-value><![CDATA[");
@@ -390,6 +411,7 @@ public class WxsHarvesterModelImpl extends BaseModelImpl<WxsHarvester>
 	private String _ogctype;
 	private int _every;
 	private String _topic;
+	private String _status;
 	private boolean _savedToGeoNetwork;
 	private long _geonetworkId;
 	private String _geonetworkUUID;

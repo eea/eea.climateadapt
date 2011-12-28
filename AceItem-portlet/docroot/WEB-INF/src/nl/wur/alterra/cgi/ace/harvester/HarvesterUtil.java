@@ -1,19 +1,21 @@
 package nl.wur.alterra.cgi.ace.harvester;
 
 import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.exception.SystemException;
 import nl.wur.alterra.cgi.ace.geonetwork.GeoNetworkConnector;
+import nl.wur.alterra.cgi.ace.geonetwork.GeoNetworkHarvesterResponse;
 import nl.wur.alterra.cgi.ace.model.AceItem;
 import nl.wur.alterra.cgi.ace.model.WxsHarvester;
 import nl.wur.alterra.cgi.ace.model.constants.AceItemType;
+import nl.wur.alterra.cgi.ace.model.constants.WxSHarvesterStatus;
+import nl.wur.alterra.cgi.ace.portlet.CustomProperties;
+import nl.wur.alterra.cgi.ace.portlet.CustomPropertiesNotInitializedException;
 import nl.wur.alterra.cgi.ace.search.lucene.ACEIndexSynchronizer;
 import nl.wur.alterra.cgi.ace.service.AceItemLocalServiceUtil;
 import nl.wur.alterra.cgi.ace.service.WxsHarvesterLocalServiceUtil;
+import nl.wur.alterra.cgi.ace.service.persistence.WxsHarvesterUtil;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.TimeUnit;
@@ -24,8 +26,10 @@ import java.util.concurrent.TimeUnit;
  * @author heikki doeleman
  */
 public class HarvesterUtil {
+
     /**
      * Initial delay when harvester thread is scheduled.
+     * NO LONGER USED - initial delay is now set to equal subsequent delays.
      */
     private static final long initialDelay = 0;
     /**
@@ -56,39 +60,71 @@ public class HarvesterUtil {
      * Schedules a thread to periodically execute a harvester.
      * @param wxsHarvester
      */
-    public static synchronized void scheduleWxsHarvester(WxsHarvester wxsHarvester) {
-        //System.out.println("scheduling harvester " + wxsHarvester.getName());
+    public static synchronized void scheduleWxsHarvester(WxsHarvester wxsHarvester) throws SystemException {
+        System.out.println("scheduling harvester " + wxsHarvester.toShortString());
+        if(wxsHarvester.getEvery() == 0) {
+            System.out.println("did not schedule harvester " + wxsHarvester.toShortString() + " because it has interval 0. You can still execute it manually.");
+            return;
+        }
+
+        // check if harvester was saved to GeoNetwork
+        if(! isInGeoNetwork(wxsHarvester)) {
+            System.out.println("harvester " + wxsHarvester.toShortString() + " is not saved to GeoNetwork, scheduling canceled.");
+            return;
+        }
+
+        // remove old scheduledfuture, if it exists
+        unScheduleWxsHarvester(wxsHarvester);
+
+        // create new scheduledfuture
+        System.out.println("scheduling harvester " + wxsHarvester.toShortString() + " to run every " + wxsHarvester.getEvery() + " " + timeUnit.toString());
         ScheduledExecutorService executionService = HarvesterExecutionService.getExecutionService();
-        ScheduledFuture<?> scheduledFuture = executionService.scheduleWithFixedDelay(new HarvesterThread(wxsHarvester),
-                initialDelay, wxsHarvester.getEvery(), timeUnit);
-        //System.out.println("finished scheduling harvester " + wxsHarvester.getName());
-        HarvesterThreads.getInstance().add(wxsHarvester, scheduledFuture);
-        //System.out.println("added harvester " + wxsHarvester.getName() + "to threads map");
+        ScheduledFuture<?> scheduledFuture = executionService.scheduleWithFixedDelay(new HarvesterThread(wxsHarvester), wxsHarvester.getEvery(), wxsHarvester.getEvery(), timeUnit);
+        System.out.println("finished scheduling harvester " + wxsHarvester.toShortString());
+        HarvesterThreadMap.getInstance().add(wxsHarvester, scheduledFuture);
+        System.out.println("added harvester " + wxsHarvester.toShortString() + " to threads map which now contains " + HarvesterThreadMap.getInstance().size());
+    }
+
+    /**
+     * Cancels and removes a harvester thread.
+     * @param wxsHarvester
+     */
+    public static synchronized void unScheduleWxsHarvester(WxsHarvester wxsHarvester){
+        System.out.println("canceling existing ScheduledFuture for harvester " + wxsHarvester.toShortString());
+        if(HarvesterThreadMap.getInstance().containsKey(wxsHarvester)) {
+           ScheduledFuture<?> oldScheduledFuture = HarvesterThreadMap.getInstance().get(wxsHarvester);
+            oldScheduledFuture.cancel(true);
+            HarvesterThreadMap.getInstance().remove(wxsHarvester);
+            System.out.println("canceled existing ScheduledFuture for harvester " + wxsHarvester.toShortString());
+        }
+        else {
+            System.out.println("could not find existing ScheduledFuture for harvester " + wxsHarvester.toShortString());
+        }
     }
 
     /**
      * Retrieves existing harvesters from the database and schedules them.
      */
     public static synchronized void scheduleHarvesters() {
-        //System.out.println("scheduling harvesters");
+        System.out.println("scheduling harvesters");
         try {
             List<WxsHarvester> wxsHarvesters = new ArrayList<WxsHarvester>();
             wxsHarvesters.addAll(WxsHarvesterLocalServiceUtil.getWxsHarvesters(0, WxsHarvesterLocalServiceUtil.getWxsHarvestersCount()));
-            //System.out.println("scheduleHarvesters retrieved " + wxsHarvesters.size() + " harvesters to be scheduled");
+            System.out.println("scheduleHarvesters retrieved " + wxsHarvesters.size() + " harvesters to be scheduled");
             for(WxsHarvester wxsHarvester : wxsHarvesters) {
                 HarvesterUtil.scheduleWxsHarvester(wxsHarvester);
             }
         }
         // do not block application startup if something goes wrong retrieving harvesters
-        catch (Exception x) {
-            //System.out.println("Error: failed to retrieve harvesters: "+ x.getMessage());
+        catch (SystemException x) {
+            System.out.println("Error: failed to retrieve harvesters: "+ x.getMessage());
             x.printStackTrace();
         }
         catch(Throwable x) {
-            //System.out.println("Error: failed to retrieve harvesters: "+ x.getMessage());
+            System.out.println("Error: failed to retrieve harvesters: "+ x.getMessage());
             x.printStackTrace();
         }
-        //System.out.println("finished scheduling havesters");
+        System.out.println("finished scheduling havesters");
     }
 
     /**
@@ -168,33 +204,55 @@ public class HarvesterUtil {
      *
      * @param wxsHarvester harvester to run
      */
-    public static synchronized void executeWxsHarvester(WxsHarvester wxsHarvester) throws Exception, PortalException {
-        //System.out.println("executing harvester: " + wxsHarvester.getName());
+    public static synchronized void executeWxsHarvester(WxsHarvester wxsHarvester) throws SystemException, PortalException, CustomPropertiesNotInitializedException {
+        System.out.println("executing harvester: " + wxsHarvester.toShortString());
 
-        // harvester was not saved to GeoNetwork
-        if(! wxsHarvester.isSavedToGeoNetwork()) {
-            //System.out.println("harvester: " + wxsHarvester.getName() + " was not saved to GeoNetwork");
-            // TODO what to do? attempt to add it to GeoNetwork?
+        // your first time ?
+        boolean firstRun = wxsHarvester.getStatus().equals(WxSHarvesterStatus.NEVER_RUN.name());
+        // check if harvester is in geonetwork
+        if(! isInGeoNetwork(wxsHarvester)) {
+            System.out.println("ERROR: harvester " + wxsHarvester.toShortString() + " is not saved to GeoNetwork, execution canceled.");
             return;
         }
 
         //
+        // mark wxsharvester as RUNNING
+        //
+        wxsHarvester.setStatus(WxSHarvesterStatus.RUNNING.name());
+        WxsHarvesterLocalServiceUtil.updateWxsHarvester(wxsHarvester, Boolean.FALSE, Boolean.FALSE);
+
+        //
         // retrieve results of this harvester from GeoNetwork before running it (previous state)
         //
-        String harvesterResultsBefore = geoNetworkConnector.getHarvesterResults(wxsHarvester);
+        GeoNetworkHarvesterResponse getLastResultsResponse = geoNetworkConnector.getHarvesterResults(wxsHarvester);
+        if(!firstRun && getLastResultsResponse.getWxsHarvester().getStatus().equals(WxSHarvesterStatus.GEONETWORK_GETRESULTS_FAILURE.name())) {
+            WxsHarvesterLocalServiceUtil.updateWxsHarvester(wxsHarvester, Boolean.FALSE, Boolean.FALSE);
+            System.out.println("ERROR: failed to retrieve earlier harvesting results for harvester " + wxsHarvester.toShortString() + ", execution canceled.");
+            return;
+        }
+        String harvesterResultsBefore = getLastResultsResponse.getGeonetworkResponse();
 
         //
         // request WxSHarvester activation in GeoNetwork
         //
-        geoNetworkConnector.activateHarvester(wxsHarvester);
+        GeoNetworkHarvesterResponse activationResponse = geoNetworkConnector.activateHarvester(wxsHarvester);
+        if(activationResponse.getWxsHarvester().getStatus().equals(WxSHarvesterStatus.GEONETWORK_ACTIVATE_FAILURE.name())) {
+            WxsHarvesterLocalServiceUtil.updateWxsHarvester(wxsHarvester, Boolean.FALSE, Boolean.FALSE);
+            System.out.println("ERROR: failed to activate harvester " + wxsHarvester.toShortString() + ", execution canceled.");
+            return;
+        }
 
         long start = System.currentTimeMillis();
 
         //
         // request WxSHarvester run in GeoNetwork
         //
-        geoNetworkConnector.runHarvester(wxsHarvester);
-
+        GeoNetworkHarvesterResponse runResponse = geoNetworkConnector.runHarvester(wxsHarvester);
+        if(runResponse.getWxsHarvester().getStatus().equals(WxSHarvesterStatus.GEONETWORK_RUN_FAILURE.name())) {
+            WxsHarvesterLocalServiceUtil.updateWxsHarvester(wxsHarvester, Boolean.FALSE, Boolean.FALSE);
+            System.out.println("ERROR: failed to run harvester " + wxsHarvester.toShortString() + ", execution canceled.");
+            return;
+        }
         //
         // keep polling GeoNetwork to know when GeoNetwork harvester has finished
         //
@@ -205,36 +263,85 @@ public class HarvesterUtil {
                 Thread.sleep(30000);
             }
             catch (InterruptedException x) {
-                // TODO what to do ?
-                //System.out.println(x.getMessage());
-                x.printStackTrace();
+                wxsHarvester.setStatus(WxSHarvesterStatus.ACE_ERROR.name());
+                WxsHarvesterLocalServiceUtil.updateWxsHarvester(wxsHarvester, Boolean.FALSE, Boolean.FALSE);
+                System.out.println("ERROR: failed to poll status of harvester " + wxsHarvester.toShortString() + " - " + x.getMessage() + ", execution canceled.");
+                return;
             }
             long elapsed = System.currentTimeMillis() - start;
             if(elapsed > timeOut) {
-                //System.out.println("TIMEOUT REACHED");
-                // TODO what to do ?
-                break;
+                System.out.println("ERROR: harvester poll timeout for harvester " + wxsHarvester.toShortString() + ", execution canceled.");
+                wxsHarvester.setStatus(WxSHarvesterStatus.GEONETWORK_POLL_TIMEOUT.name());
+                WxsHarvesterLocalServiceUtil.updateWxsHarvester(wxsHarvester, Boolean.FALSE, Boolean.FALSE);
+                return;
             }
-            String pollResult =  geoNetworkConnector.getHarvester(wxsHarvester);
+
+            GeoNetworkHarvesterResponse statusResponse = geoNetworkConnector.getHarvester(wxsHarvester);
+            if(statusResponse.getWxsHarvester().getStatus().equals(WxSHarvesterStatus.GEONETWORK_GET_FAILURE.name())) {
+                System.out.println("ERROR: failed to poll execution status for harvester " + wxsHarvester.toShortString() + ", execution canceled.");
+                WxsHarvesterLocalServiceUtil.updateWxsHarvester(wxsHarvester, Boolean.FALSE, Boolean.FALSE);
+                return;
+            }
+            String pollResult = statusResponse.getGeonetworkResponse();
             geoNetworkHarvestingRunFinished = isRunFinished(pollResult) ;
         }
 
         //
         // de-activate GeoNetwork harvester
         //
-        geoNetworkConnector.deActivateHarvester(wxsHarvester);
+        GeoNetworkHarvesterResponse deActivateResponse = geoNetworkConnector.deActivateHarvester(wxsHarvester);
+        // if failed, store the error status but do continue processing (don't return)
+        if(deActivateResponse.getWxsHarvester().getStatus().equals(WxSHarvesterStatus.GEONETWORK_DEACTIVATE_FAILURE.name())) {
+            System.out.println("ERROR: failed to deactivate harvester " + wxsHarvester.toShortString());
+            WxsHarvesterLocalServiceUtil.updateWxsHarvester(wxsHarvester, Boolean.FALSE, Boolean.FALSE);
+        }
 
         //
         // retrieve results of this harvester from GeoNetwork after running it (new state)
         //
-        String harvesterResultsAfter = geoNetworkConnector.getHarvesterResults(wxsHarvester);
+        GeoNetworkHarvesterResponse resultsResponse = geoNetworkConnector.getHarvesterResults(wxsHarvester);
+        if(resultsResponse.getWxsHarvester().getStatus().equals(WxSHarvesterStatus.GEONETWORK_GETRESULTS_FAILURE.name())) {
+            System.out.println("ERROR: failed to retrieve results for harvester " + wxsHarvester.toShortString() + ", execution canceled.");
+            WxsHarvesterLocalServiceUtil.updateWxsHarvester(wxsHarvester, Boolean.FALSE, Boolean.FALSE);
+            return;
+        }
+        String harvesterResultsAfter = resultsResponse.getGeonetworkResponse();
 
         //
         // convert to AceItems, save in DBMS and update Lucene index
         //
         storeAsAceItems(wxsHarvester, harvesterResultsBefore, harvesterResultsAfter);
 
-        //System.out.println("finished executing harvester: " + wxsHarvester.getName());
+        wxsHarvester.setStatus(WxSHarvesterStatus.SUCCESS.name());
+        WxsHarvesterLocalServiceUtil.updateWxsHarvester(wxsHarvester, Boolean.FALSE, Boolean.FALSE);
+        System.out.println("successfully finished executing harvester: " + wxsHarvester.toShortString());
+    }
+
+    /**
+     * Returns whether a wxsharvester is saved by GeoNetwork, by asking GeoNetwork to return it. Sets savedToGeoNetwork
+     * according to result.
+     *
+     * @param wxsHarvester
+     * @return
+     * @throws SystemException
+     */
+    private static synchronized boolean isInGeoNetwork(WxsHarvester wxsHarvester) throws SystemException {
+        // check if harvester was saved to GeoNetwork
+        GeoNetworkHarvesterResponse getHarvesterResponse = geoNetworkConnector.getHarvester(wxsHarvester);
+        if(getHarvesterResponse.getWxsHarvester().getStatus().equals(WxSHarvesterStatus.GEONETWORK_GET_FAILURE.name())) {
+            System.out.println("failed to find harvester " + wxsHarvester.toShortString() + " in GeoNetwork");
+            wxsHarvester.setSavedToGeoNetwork(false);
+            WxsHarvesterLocalServiceUtil.updateWxsHarvester(wxsHarvester, Boolean.FALSE, Boolean.FALSE);
+            // TODO this does not seem to work:
+            WxsHarvesterUtil.clearCache(wxsHarvester);
+            return false;
+        }
+        else {
+            wxsHarvester.setSavedToGeoNetwork(true);
+            WxsHarvesterLocalServiceUtil.updateWxsHarvester(wxsHarvester, Boolean.FALSE, Boolean.FALSE);
+            return true;
+        }
+
     }
 
     /**
@@ -274,7 +381,7 @@ public class HarvesterUtil {
                 }
                 // metadata has no id
                 if(id == null || id.length() == 0) {
-                    //System.out.println("WARNING: found metadata without id, skipping it");
+                    System.out.println("WARNING: found metadata without id, skipping it");
                     continue;
                 }
                 if(!idsOnly) {
@@ -443,12 +550,13 @@ public class HarvesterUtil {
      *     </metadata>
      * </response>
      *
+     * @param wxsHarvester
      * @param harvesterResultBefore
      * @param harvesterResultAfter
      */
-    private static synchronized void storeAsAceItems(WxsHarvester wxsHarvester, String harvesterResultBefore,
-                                                     String harvesterResultAfter) throws Exception, PortalException {
-        //System.out.println("applying harvesting result to AceItem table");
+    private static synchronized void storeAsAceItems(WxsHarvester wxsHarvester, String harvesterResultBefore, String harvesterResultAfter) throws SystemException, PortalException, CustomPropertiesNotInitializedException {
+        try {
+        System.out.println("applying harvesting result to AceItem table");
 
         //System.out.println("looking for metadata ids in search response before harvesting:");
         List contentMapBefore = getMetadataContents(harvesterResultBefore, true);
@@ -467,6 +575,8 @@ public class HarvesterUtil {
 
         ACEIndexSynchronizer aceIndexSynchronizer = new ACEIndexSynchronizer();
 
+        int created = 0, updated = 0, deleted = 0;
+
         // ids in before, and not in after: delete them
         for(String id : idsBeforeList) {
             if(!idsAfterList.contains(id)) {
@@ -476,9 +586,10 @@ public class HarvesterUtil {
                 if(toDelete != null) {
                     AceItemLocalServiceUtil.deleteAceItem(toDelete);
                     //System.out.println("finished deleting AceItem with geonetwork id: " + id);
+                    deleted++;
                 }
                 else {
-                    //System.out.println("WARNING: failed to delete AceItem with geonetwork id: " + id + ", it seems it does not exist");
+                    System.out.println("WARNING: failed to delete AceItem with geonetwork id: " + id + ", it seems it does not exist");
                 }
                 //
                 // re-index Lucene
@@ -495,20 +606,27 @@ public class HarvesterUtil {
                 AceItem toUpdate = AceItemLocalServiceUtil.getAceItemByStoredAt(id);
                 if(toUpdate != null) {
                     toUpdate = fillAceItem(toUpdate, id, titleMap, abstractMap, keywordMap);
-
                     AceItemLocalServiceUtil.updateAceItem(toUpdate);
                     //System.out.println("finished updating AceItem with geonetwork id: " + id);
+                    updated++;
                 }
                 else {
-                    //System.out.println("WARNING: failed to update AceItem with geonetwork id: " + id + ", it seems it does not exist. It will be created now.");
+                    System.out.println("WARNING: failed to update AceItem with geonetwork id: " + id + ", it seems it does not exist. It will be created now.");
                     AceItem aceItem = AceItemLocalServiceUtil.createAceItem();
+                    //System.out.println("a");
                     aceItem = fillAceItem(aceItem, id, titleMap, abstractMap, keywordMap);
-                    aceItem.setCompanyId(wxsHarvester.getCompanyId());
-                    aceItem.setGroupId(wxsHarvester.getGroupId());
+                    //System.out.println("b");
                     aceItem.setPublicationDate(new Date());
 
+                    aceItem.setWxsharvesterId(wxsHarvester.getWxsharvesterid());
+
+                    aceItem.setCompanyId(wxsHarvester.getCompanyId());
+                    aceItem.setGroupId(wxsHarvester.getGroupId());
+                    //System.out.println("c");
                     AceItemLocalServiceUtil.addAceItem(aceItem);
-                    //System.out.println("finished creating AceItem with geonetwork id: " + id);
+                    //System.out.println("d");
+                    System.out.println("finished creating AceItem with geonetwork id: " + id);
+                    created++;
                 }
                 //
                 // re-index Lucene
@@ -525,12 +643,23 @@ public class HarvesterUtil {
                 // create it
                 AceItem aceItem = AceItemLocalServiceUtil.createAceItem();
                 aceItem = fillAceItem(aceItem, id, titleMap, abstractMap, keywordMap);
+                aceItem.setPublicationDate(new Date());
+                // the id of this harvester is stored in column NAS
+                aceItem.setWxsharvesterId(wxsHarvester.getWxsharvesterid());
+
                 aceItem.setCompanyId(wxsHarvester.getCompanyId());
                 aceItem.setGroupId(wxsHarvester.getGroupId());
-                aceItem.setPublicationDate(new Date());
+
+                // companyid and groupid are available in PortletRequest, but it's readily available here. For now
+                // they are set in custom properties to have them easy avaiable thoughout.
+                //String companyId = CustomProperties.getProperty("companyid");
+                //String groupId = CustomProperties.getProperty("groupid");
+                //aceItem.setCompanyId(Long.parseLong(companyId));
+                //aceItem.setGroupId(Long.parseLong(groupId));
 
                 AceItemLocalServiceUtil.addAceItem(aceItem);
                 //System.out.println("finished creating AceItem with geonetwork id: " + id);
+                created++;
 
                 //
                 // re-index Lucene
@@ -538,8 +667,12 @@ public class HarvesterUtil {
                 aceIndexSynchronizer.add(aceItem);
             }
         }
-
-        //System.out.println("finished applying harvesting result to AceItem table");
+        System.out.println("finished applying harvesting result to AceItem table. Created " + created + ", updated " + updated + ", deleted " + deleted + " aceitems.");
+        }
+        catch(Throwable x) {
+            System.out.println("THROWABLE message: " + x.getMessage() + " " + x.getClass().getName());
+            x.printStackTrace();
+        }
     }
 
     /**
@@ -558,7 +691,7 @@ public class HarvesterUtil {
         aceItem.setStoragetype("GEONETWORK");
         String title = titleMap.get(id);
         if(title.length() > aceItemNameLength) {
-            //System.out.println("WARNING: Metadata title too long for AceItem, cut off. Original metadata title:\n" + title + "\n");
+            System.out.println("WARNING: Metadata title too long for AceItem, cut off. Original metadata title:\n" + title + "\n");
             title = title.substring(0, aceItemNameLength);
         }
         aceItem.setName(title);
@@ -572,14 +705,15 @@ public class HarvesterUtil {
             }
         }
         if(keyword$.length() > aceItemKeywordLength) {
-            //System.out.println("WARNING: Metadata keywords too long for AceItem, cut off. Original metadata keywords:\n" + keyword$ + "\n");
+            System.out.println("WARNING: Metadata keywords too long for AceItem, cut off. Original metadata keywords:\n" + keyword$ + "\n");
             keyword$ = keyword$.substring(0, aceItemKeywordLength);
         }
         aceItem.setKeyword(keyword$);
 
         aceItem.setTextSearch(keyword$ + " " + title + " " + abstrakt);
 
-        /*System.out.println("\naceItem filled with:\n" +
+        /*
+        System.out.println("\naceItem filled with:\n" +
                 "storedAt: " + aceItem.getStoredAt() +
                 "datatype: " + aceItem.getDatatype() +
                 "storageType: " + aceItem.getStoragetype() +
@@ -587,7 +721,8 @@ public class HarvesterUtil {
                 "keyword: " + aceItem.getKeyword() +
                 "description: " + aceItem.getDescription() +
                 "textsearch: " + aceItem.getTextSearch() + "\n\n"
-        ); */
+        );
+        */
 
         return aceItem;
     }

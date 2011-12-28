@@ -90,6 +90,14 @@ public class WxsHarvesterClp extends BaseModelImpl<WxsHarvester>
 		_topic = topic;
 	}
 
+	public String getStatus() {
+		return _status;
+	}
+
+	public void setStatus(String status) {
+		_status = status;
+	}
+
 	public boolean getSavedToGeoNetwork() {
 		return _savedToGeoNetwork;
 	}
@@ -134,6 +142,10 @@ public class WxsHarvesterClp extends BaseModelImpl<WxsHarvester>
 		_groupId = groupId;
 	}
 
+	public java.lang.String toShortString() {
+		throw new UnsupportedOperationException();
+	}
+
 	public WxsHarvester toEscapedModel() {
 		if (isEscapedModel()) {
 			return this;
@@ -154,6 +166,7 @@ public class WxsHarvesterClp extends BaseModelImpl<WxsHarvester>
 		clone.setOgctype(getOgctype());
 		clone.setEvery(getEvery());
 		clone.setTopic(getTopic());
+		clone.setStatus(getStatus());
 		clone.setSavedToGeoNetwork(getSavedToGeoNetwork());
 		clone.setGeonetworkId(getGeonetworkId());
 		clone.setGeonetworkUUID(getGeonetworkUUID());
@@ -205,7 +218,7 @@ public class WxsHarvesterClp extends BaseModelImpl<WxsHarvester>
 	}
 
 	public String toString() {
-		StringBundler sb = new StringBundler(23);
+		StringBundler sb = new StringBundler(25);
 
 		sb.append("{wxsharvesterid=");
 		sb.append(getWxsharvesterid());
@@ -219,6 +232,8 @@ public class WxsHarvesterClp extends BaseModelImpl<WxsHarvester>
 		sb.append(getEvery());
 		sb.append(", topic=");
 		sb.append(getTopic());
+		sb.append(", status=");
+		sb.append(getStatus());
 		sb.append(", savedToGeoNetwork=");
 		sb.append(getSavedToGeoNetwork());
 		sb.append(", geonetworkId=");
@@ -235,7 +250,7 @@ public class WxsHarvesterClp extends BaseModelImpl<WxsHarvester>
 	}
 
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(37);
+		StringBundler sb = new StringBundler(40);
 
 		sb.append("<model><model-name>");
 		sb.append("nl.wur.alterra.cgi.ace.model.WxsHarvester");
@@ -264,6 +279,10 @@ public class WxsHarvesterClp extends BaseModelImpl<WxsHarvester>
 		sb.append(
 			"<column><column-name>topic</column-name><column-value><![CDATA[");
 		sb.append(getTopic());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>status</column-name><column-value><![CDATA[");
+		sb.append(getStatus());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>savedToGeoNetwork</column-name><column-value><![CDATA[");
@@ -297,6 +316,7 @@ public class WxsHarvesterClp extends BaseModelImpl<WxsHarvester>
 	private String _ogctype;
 	private int _every;
 	private String _topic;
+	private String _status;
 	private boolean _savedToGeoNetwork;
 	private long _geonetworkId;
 	private String _geonetworkUUID;

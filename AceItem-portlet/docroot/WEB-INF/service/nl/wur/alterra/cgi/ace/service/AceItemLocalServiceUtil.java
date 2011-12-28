@@ -297,6 +297,20 @@ public class AceItemLocalServiceUtil {
 		return getService().getAceItemsCountByGroupId(groupId);
 	}
 
+	/**
+	* Retrieves aceitems by nas id, which contains the ids of the wxsharvester that created the aceitems.
+	*
+	* @author heikki doeleman
+	* @param wxsHarvesterId
+	* @return
+	* @throws SystemException
+	*/
+	public static java.util.List<nl.wur.alterra.cgi.ace.model.AceItem> getAceItemsByWxsharvesterId(
+		long wxsHarvesterId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService().getAceItemsByWxsharvesterId(wxsHarvesterId);
+	}
+
 	public static void clearService() {
 		_service = null;
 	}

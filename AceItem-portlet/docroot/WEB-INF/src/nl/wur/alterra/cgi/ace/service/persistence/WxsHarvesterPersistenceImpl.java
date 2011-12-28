@@ -295,6 +295,7 @@ public class WxsHarvesterPersistenceImpl extends BasePersistenceImpl<WxsHarveste
 		wxsHarvesterImpl.setOgctype(wxsHarvester.getOgctype());
 		wxsHarvesterImpl.setEvery(wxsHarvester.getEvery());
 		wxsHarvesterImpl.setTopic(wxsHarvester.getTopic());
+		wxsHarvesterImpl.setStatus(wxsHarvester.getStatus());
 		wxsHarvesterImpl.setSavedToGeoNetwork(wxsHarvester.isSavedToGeoNetwork());
 		wxsHarvesterImpl.setGeonetworkId(wxsHarvester.getGeonetworkId());
 		wxsHarvesterImpl.setGeonetworkUUID(wxsHarvester.getGeonetworkUUID());

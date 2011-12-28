@@ -7,7 +7,6 @@ import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.util.PortalUtil;
 import nl.wur.alterra.cgi.ace.model.AceItem;
 import nl.wur.alterra.cgi.ace.model.impl.AceItemImpl;
-import nl.wur.alterra.cgi.ace.search.lucene.ACEIndexSynchronizer;
 import nl.wur.alterra.cgi.ace.service.AceItemLocalServiceUtil;
 
 import javax.portlet.ActionRequest;
@@ -55,7 +54,6 @@ public class AceItemPortlet extends LuceneIndexUpdatePortlet {
 		aceitemFromRequest(request, aceitem);
 		List<String> errors = new ArrayList<String>();
 		if (AceItemValidator.validateAceItem(aceitem, errors)) {
-			
 			AceItemLocalServiceUtil.updateAceItem(aceitem);
 			SessionMessages.add(request, "aceitem-updated");
             synchronizeIndexSingleAceItem(aceitem);
@@ -78,14 +76,19 @@ public class AceItemPortlet extends LuceneIndexUpdatePortlet {
 		long aceitemId = ParamUtil.getLong(request, "aceItemId");
 		List<String> errors = new ArrayList<String>();
 		if (Validator.isNotNull(aceitemId)) {
-            
+/*
 			// delete the index entry
 			AceItem aceitem = AceItemLocalServiceUtil.getAceItem(aceitemId);
 			new ACEIndexSynchronizer().delete(aceitem);			
 			
 			// delete the aceitem
+*/
 			AceItemLocalServiceUtil.deleteAceItem(aceitemId);
 			SessionMessages.add(request, "aceitem-deleted");
+// instead of commented code do this
+            AceItem aceitem = AceItemLocalServiceUtil.getAceItem(ParamUtil.getLong(request, "aceItemId"));
+            synchronizeIndexSingleAceItem(aceitem);
+// end instead
 			sendRedirect(request, response);
 		}
 		else {

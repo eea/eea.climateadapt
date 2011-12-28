@@ -28,8 +28,8 @@
 	String ogcType = nl.wur.alterra.cgi.ace.model.constants.OGCType.WMS111.getString();
 	String isoTopic = "";
 	String every_days = "0";
-	String every_hours = "1";
-	String every_minutes = "30";
+	String every_hours = "0";
+	String every_minutes = "0";
 	
 	boolean savedToGeoNetwork = false;
 

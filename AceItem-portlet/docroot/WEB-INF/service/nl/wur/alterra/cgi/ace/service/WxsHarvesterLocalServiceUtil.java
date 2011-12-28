@@ -236,6 +236,26 @@ public class WxsHarvesterLocalServiceUtil {
 	}
 
 	/**
+	* Updates a WxsHarvester. Also tries to update in GeoNetwork if asked to do so. Sets status to GEONETWORK_UPDATE_FAILURE
+	* if GeoNetwork update fails; sets it to NEVER_RUN if status was not already SUCCESS. Removes existing scheduler and
+	* creates a new one if asked to do so.
+	*
+	* @param wxsHarvester
+	* @param propagateToGeoNetwork
+	* @param reschedule
+	* @return
+	* @throws SystemException
+	*/
+	public static nl.wur.alterra.cgi.ace.model.WxsHarvester updateWxsHarvester(
+		nl.wur.alterra.cgi.ace.model.WxsHarvester wxsHarvester,
+		java.lang.Boolean propagateToGeoNetwork, java.lang.Boolean reschedule)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService()
+				   .updateWxsHarvester(wxsHarvester, propagateToGeoNetwork,
+			reschedule);
+	}
+
+	/**
 	* Gets a list with all the WxsHarvesters in a group.
 	*/
 	public static java.util.List<nl.wur.alterra.cgi.ace.model.WxsHarvester> getWxsHarvesterByGroupId(

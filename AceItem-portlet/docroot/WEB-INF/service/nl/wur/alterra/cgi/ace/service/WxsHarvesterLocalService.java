@@ -215,6 +215,22 @@ public interface WxsHarvesterLocalService {
 	public nl.wur.alterra.cgi.ace.model.WxsHarvester createWxsHarvester();
 
 	/**
+	* Updates a WxsHarvester. Also tries to update in GeoNetwork if asked to do so. Sets status to GEONETWORK_UPDATE_FAILURE
+	* if GeoNetwork update fails; sets it to NEVER_RUN if status was not already SUCCESS. Removes existing scheduler and
+	* creates a new one if asked to do so.
+	*
+	* @param wxsHarvester
+	* @param propagateToGeoNetwork
+	* @param reschedule
+	* @return
+	* @throws SystemException
+	*/
+	public nl.wur.alterra.cgi.ace.model.WxsHarvester updateWxsHarvester(
+		nl.wur.alterra.cgi.ace.model.WxsHarvester wxsHarvester,
+		java.lang.Boolean propagateToGeoNetwork, java.lang.Boolean reschedule)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
 	* Gets a list with all the WxsHarvesters in a group.
 	*/
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)

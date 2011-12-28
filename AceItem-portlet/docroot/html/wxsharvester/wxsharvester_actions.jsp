@@ -9,6 +9,9 @@ String name = WxsHarvester.class.getName();
 long wxsharvesterid = wxsHarvester.getWxsharvesterid();
 boolean savedToGeoNetwork = wxsHarvester.getSavedToGeoNetwork();
 
+int wxsharvesterevery = wxsHarvester.getEvery();
+String wxsharvesterstatus = wxsHarvester.getStatus();
+
 String redirect = PortalUtil.getCurrentURL(renderRequest);
 %>
 
@@ -54,4 +57,26 @@ String redirect = PortalUtil.getCurrentURL(renderRequest);
 		&nbsp;&nbsp;<liferay-ui:icon image="add"  message="Add to GeoNetwork" url="<%=saveWxsHarvesterToGeoNetworkURL.toString() %>" />
 
 <% } %>
+
+<% if(wxsharvesterevery == 0) { %>
+        &nbsp;&nbsp;<img id="harvester-scheduled" src="<%=renderRequest.getContextPath()%>/images/icons/harvester-manual.png" alt="Manual harvester execution" title="Manual harveste execution"/>
+<% } else { %>
+        &nbsp;&nbsp;<img id="harvester-scheduled" src="<%=renderRequest.getContextPath()%>/images/icons/harvester-scheduled.png" alt="Automatic harvester execution" title="Manual harveste execution"/>
+<% } %>
+
+<% if(wxsharvesterstatus.equals("NEVER_RUN")) { %>
+        &nbsp;&nbsp;<img id="harvester-status" src="<%=renderRequest.getContextPath()%>/images/icons/harvester-never-run.png" alt="Waiting for first run" title="Waiting for first run"/>
+
+<% } else if(wxsharvesterstatus.equals("RUNNING")) { %>
+        &nbsp;&nbsp;<img id="harvester-status" src="<%=renderRequest.getContextPath()%>/images/icons/harvester-running.png" alt="Running" title="Running"/>
+
+<% } else if(wxsharvesterstatus.equals("SUCCESS")) { %>
+        &nbsp;&nbsp;<img id="harvester-status" src="<%=renderRequest.getContextPath()%>/images/icons/harvester-run-success.png" alt="Succesfully run" title="Succesfully run"/>
+
+<% } else { %>
+        &nbsp;&nbsp;<img id="harvester-status" src="<%=renderRequest.getContextPath()%>/images/icons/harvester-run-failure.png" alt="Error: status is <%=wxsharvesterstatus%>" title="Error: status is <%=wxsharvesterstatus%>"/>
+<% } %>
+
+&nbsp;&nbsp;
+
  <!--  Commented out: no Actons button: /liferay-ui:icon-menu -->

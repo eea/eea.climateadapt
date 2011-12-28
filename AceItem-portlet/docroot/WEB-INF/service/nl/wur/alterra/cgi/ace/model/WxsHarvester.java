@@ -32,4 +32,11 @@ package nl.wur.alterra.cgi.ace.model;
  * @generated
  */
 public interface WxsHarvester extends WxsHarvesterModel {
+	/**
+	* heikki doeleman: Liferay won't let me override toString(), because if I do that it generates 2 declarations of toString()
+	* in WxsHarvesterCpl, which does not compile. Thanks Liferay !
+	*
+	* @return shorter string than toString()
+	*/
+	public java.lang.String toShortString();
 }

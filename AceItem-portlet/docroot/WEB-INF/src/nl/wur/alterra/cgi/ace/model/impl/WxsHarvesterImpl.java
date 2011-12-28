@@ -31,4 +31,16 @@ public class WxsHarvesterImpl extends WxsHarvesterModelImpl
 	implements WxsHarvester {
 	public WxsHarvesterImpl() {
 	}
+
+    /**
+     * heikki doeleman: Liferay won't let me override toString(), because if I do that it generates 2 declarations of toString()
+     * in WxsHarvesterCpl, which does not compile. Thanks Liferay !
+     *
+     * @return shorter string than toString()
+     */
+    @Override
+    public String toShortString() {
+        return this.getWxsharvesterid() + " " + this.getName();
+    }
+
 }

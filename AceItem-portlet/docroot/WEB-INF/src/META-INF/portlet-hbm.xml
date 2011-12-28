@@ -52,6 +52,7 @@
 		<property name="ogctype" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="every" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
 		<property name="topic" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="status" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="savedToGeoNetwork" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
 		<property name="geonetworkId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 		<property name="geonetworkUUID" type="com.liferay.portal.dao.orm.hibernate.StringType" />

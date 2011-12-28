@@ -143,6 +143,21 @@ public interface WxsHarvesterModel extends BaseModel<WxsHarvester> {
 	public void setTopic(String topic);
 
 	/**
+	 * Gets the status of this wxs harvester.
+	 *
+	 * @return the status of this wxs harvester
+	 */
+	@AutoEscape
+	public String getStatus();
+
+	/**
+	 * Sets the status of this wxs harvester.
+	 *
+	 * @param status the status of this wxs harvester
+	 */
+	public void setStatus(String status);
+
+	/**
 	 * Gets the saved to geo network of this wxs harvester.
 	 *
 	 * @return the saved to geo network of this wxs harvester

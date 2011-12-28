@@ -84,6 +84,14 @@ public class WxsHarvesterWrapper implements WxsHarvester {
 		_wxsHarvester.setTopic(topic);
 	}
 
+	public java.lang.String getStatus() {
+		return _wxsHarvester.getStatus();
+	}
+
+	public void setStatus(java.lang.String status) {
+		_wxsHarvester.setStatus(status);
+	}
+
 	public boolean getSavedToGeoNetwork() {
 		return _wxsHarvester.getSavedToGeoNetwork();
 	}
@@ -187,6 +195,10 @@ public class WxsHarvesterWrapper implements WxsHarvester {
 
 	public java.lang.String toXmlString() {
 		return _wxsHarvester.toXmlString();
+	}
+
+	public java.lang.String toShortString() {
+		return _wxsHarvester.toShortString();
 	}
 
 	public WxsHarvester getWrappedWxsHarvester() {
