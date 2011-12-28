@@ -30,7 +30,7 @@ public class HarvesterThread implements RunnableFuture {
      * Sets this Future to the result of its computation unless it has been cancelled.
      */
     public void run() {
-        System.out.println("HarvesterThread run start");
+        //System.out.println("HarvesterThread run start");
         try {
             HarvesterUtil.executeWxsHarvester(this.wxsHarvester);
         }
@@ -47,7 +47,7 @@ public class HarvesterThread implements RunnableFuture {
             x.printStackTrace();
         }
         ready.release();
-        System.out.println("HarvesterThread run end");
+        //System.out.println("HarvesterThread run end");
     }
 
     /**

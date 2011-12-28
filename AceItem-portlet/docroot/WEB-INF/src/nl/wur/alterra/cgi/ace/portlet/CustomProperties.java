@@ -38,7 +38,7 @@ public class CustomProperties {
     /**
      * Initializes custom properties.
      *
-     * @throws CustomPropertiesNotInitializedException hmm	 
+     * @throws CustomPropertiesNotInitializedException hmm
      */
     public synchronized static void init() throws CustomPropertiesNotInitializedException {
         properties = new Properties();
@@ -72,7 +72,7 @@ public class CustomProperties {
      */
     public static String getProperty(String key) throws CustomPropertiesNotInitializedException {
         if(! isInitialized) {
-            System.out.println("WARNING: custom properties not initialized. Trying now:");
+            //System.out.println("WARNING: custom properties not initialized. Trying now");
             init();
             if(! isInitialized) {
                 throw new CustomPropertiesNotInitializedException("ERROR: cannot initialize custom properties");

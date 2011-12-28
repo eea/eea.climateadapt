@@ -38,7 +38,7 @@ public class WxsHarvesterPortlet extends LuceneIndexUpdatePortlet {
 	 */
 	public void addWxsHarvester(ActionRequest request, ActionResponse response) throws Exception {
 
-        System.out.println("WXSHARVESTERPORTLET addWxsHarvester");
+        //System.out.println("WXSHARVESTERPORTLET addWxsHarvester");
 		WxsHarvester wxsHarvester = new WxsHarvesterImpl();
 		wxsHarvester.setWxsharvesterid(ParamUtil.getLong(request, "WxsHarvesterId"));
 		wxsHarvesterFromRequest(request, wxsHarvester);
@@ -85,7 +85,7 @@ public class WxsHarvesterPortlet extends LuceneIndexUpdatePortlet {
 	 *
 	 */
 	public void updateWxsHarvester(ActionRequest request, ActionResponse response) throws Exception {
-        System.out.println("WXSHARVESTERPORTLET updateWxsHarvester");
+        //System.out.println("WXSHARVESTERPORTLET updateWxsHarvester");
 		WxsHarvester wxsHarvester = WxsHarvesterLocalServiceUtil.getWxsHarvester(ParamUtil.getLong(request, "wxsharvesterid"));
 		wxsHarvesterFromRequest(request, wxsHarvester);
 		List<String> errors = new ArrayList<String>();
@@ -109,18 +109,18 @@ public class WxsHarvesterPortlet extends LuceneIndexUpdatePortlet {
 	 *
 	 */
 	public void deleteWxsHarvester(ActionRequest request, ActionResponse response) throws Exception {
-        System.out.println("WXSHARVESTERPORTLET deleteWxsHarvester");
+        //System.out.println("WXSHARVESTERPORTLET deleteWxsHarvester");
 		long wxsHarvesterId = ParamUtil.getLong(request, "wxsharvesterid");
 		List<String> errors = new ArrayList<String>();
 		if (Validator.isNotNull(wxsHarvesterId)) {
-            System.out.println("wxsHarvesterId is not null, continuing");
+            //System.out.println("wxsHarvesterId is not null, continuing");
             WxsHarvester wxsHarvester = WxsHarvesterLocalServiceUtil.getWxsHarvester(wxsHarvesterId);
 			WxsHarvesterLocalServiceUtil.deleteWxsHarvester(wxsHarvester);
 			SessionMessages.add(request, "wxsHarvester-deleted");
 			sendRedirect(request, response);
 		}
 		else {
-            System.out.println("wxsHarvesterId is null, aborting delete");
+            //System.out.println("wxsHarvesterId is null, aborting delete");
 			SessionErrors.add(request, "error-deleting");
 		}
 	}
@@ -131,7 +131,7 @@ public class WxsHarvesterPortlet extends LuceneIndexUpdatePortlet {
      *
 	 */
 	public void saveWxsHarvesterToGeoNetwork(ActionRequest request, ActionResponse response) throws Exception {
-        System.out.println("WXSHARVESTERPORTLET saveWxsHarvesterToGeoNetwork");
+        //System.out.println("WXSHARVESTERPORTLET saveWxsHarvesterToGeoNetwork");
 		WxsHarvester wxsHarvester = WxsHarvesterLocalServiceUtil.getWxsHarvester(ParamUtil.getLong(request, "wxsharvesterid"));
 		if (!wxsHarvester.getSavedToGeoNetwork()) {
 			WxsHarvesterLocalServiceUtil.updateWxsHarvester(wxsHarvester, Boolean.TRUE, Boolean.TRUE);
@@ -151,7 +151,7 @@ public class WxsHarvesterPortlet extends LuceneIndexUpdatePortlet {
 	 *
 	 */
 	public void executeWxsHarvester(ActionRequest request, ActionResponse response) throws Exception {
-        System.out.println("WXSHARVESTERPORTLET executeWxsHarvester ");
+        //System.out.println("WXSHARVESTERPORTLET executeWxsHarvester ");
 		WxsHarvester wxsHarvester = WxsHarvesterLocalServiceUtil.getWxsHarvester(ParamUtil.getLong(request, "wxsharvesterid"));
 		if (wxsHarvester.getSavedToGeoNetwork()) {
             wxsHarvester.setStatus(WxSHarvesterStatus.RUNNING.name());

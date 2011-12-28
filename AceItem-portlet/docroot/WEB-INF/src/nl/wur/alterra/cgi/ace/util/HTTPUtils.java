@@ -71,7 +71,7 @@ public class HTTPUtils {
             // return exception messages rather than throwing the exceptions
             //
             catch(ConnectException y) {
-                System.out.println("ERORR: " + y.getMessage());
+                System.out.println("ERROR: " + y.getMessage());
                 y.printStackTrace();
                 return y.getMessage();
             }
@@ -97,7 +97,7 @@ public class HTTPUtils {
             else {
                 responseStream = x.getErrorStream();
                 response = inputStream2String(responseStream);
-                System.out.println("Server returned response code: " + x.getResponseCode() + " with content:\n" + response);
+                //System.out.println("Server returned response code: " + x.getResponseCode() + " with content:\n" + response);
             }
             //System.out.println("\nresponse from server after POST to: "+ destination + "\n" + response + "\n");
             return response;
@@ -106,12 +106,12 @@ public class HTTPUtils {
         // return exception messages rather than throwing the exceptions
         //
         catch(MalformedURLException x) {
-            System.out.println("ERORR: " + x.getMessage());
+            System.out.println("ERROR: " + x.getMessage());
             x.printStackTrace();
             return x.getMessage();
         }
         catch (IOException x) {
-            System.out.println("ERORR: " + x.getMessage());
+            System.out.println("ERROR: " + x.getMessage());
             x.printStackTrace();
             return x.getMessage();
         }
