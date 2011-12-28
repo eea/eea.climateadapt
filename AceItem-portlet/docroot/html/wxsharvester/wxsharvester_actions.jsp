@@ -64,7 +64,7 @@ String redirect = PortalUtil.getCurrentURL(renderRequest);
         &nbsp;&nbsp;<img id="harvester-scheduled" src="<%=renderRequest.getContextPath()%>/images/icons/harvester-scheduled.png" alt="Automatic harvester execution" title="Automatic harvester execution"/>
 <% } %>
 
-<% if(wxsharvesterstatus.equals("NEVER_RUN")) { %>
+<% if(wxsharvesterstatus.equals("NEVER_RUN") || wxsharvesterstatus.equals("GEONETWORK_GET_SUCCESS")) { %>
         &nbsp;&nbsp;<img id="harvester-status" src="<%=renderRequest.getContextPath()%>/images/icons/harvester-never-run.png" alt="Waiting for first run" title="Waiting for first run"/>
 
 <% } else if(wxsharvesterstatus.equals("RUNNING")) { %>
