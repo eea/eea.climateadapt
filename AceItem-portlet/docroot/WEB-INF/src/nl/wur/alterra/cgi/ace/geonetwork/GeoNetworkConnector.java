@@ -283,7 +283,10 @@ public class GeoNetworkConnector {
         // login successful
         if(!loginResponse.getWxsHarvester().getStatus().equals(WxSHarvesterStatus.GEONETWORK_LOGIN_FAILURE.name())) {
             String xml = createGetRequest(wxsHarvester);
+            System.out.println("getting harvester:\n"+ xml);
             String response = httpUtils.post(xml, GeoNetworkGetHarvesterURL);
+            System.out.println("response to getting harvester:\n"+ response);
+
             // TODO logout?
             // ad hoc verification
             if(response.contains("Object Not Found")) {
@@ -291,7 +294,7 @@ public class GeoNetworkConnector {
                 wxsHarvester.setSavedToGeoNetwork(false);
             }
             else {
-                //wxsHarvester.setStatus(WxSHarvesterStatus.GEONETWORK_GET_SUCCESS.name());
+                wxsHarvester.setStatus(WxSHarvesterStatus.GEONETWORK_GET_SUCCESS.name());
             }
             return new GeoNetworkHarvesterResponse(wxsHarvester, response);
         }
