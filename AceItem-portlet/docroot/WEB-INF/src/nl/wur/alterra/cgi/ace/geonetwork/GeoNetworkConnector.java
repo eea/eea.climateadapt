@@ -89,6 +89,7 @@ public class GeoNetworkConnector {
         // login successful
         if(!loginResponse.getWxsHarvester().getStatus().equals(WxSHarvesterStatus.GEONETWORK_LOGIN_FAILURE.name())) {
             String xml = createAddOrUpdateRequest(wxsHarvester, null);
+            System.out.println("add request:\n" + xml);
             String response = httpUtils.post(xml, GeoNetworkAddHarvesterURL);
             // TODO logout?
             // ad-hoc succes verification
@@ -519,7 +520,10 @@ public class GeoNetworkConnector {
             xml += "</content>";
 
             xml += "<options>";
-                xml += "<every>" + wxsHarvester.getEvery() + "</every>";
+                // GeoNetwork cannot handle period of 0
+                if(wxsHarvester.getEvery() != 0) {
+                    xml += "<every>" + wxsHarvester.getEvery() + "</every>";
+                }
                 xml += "<oneRunOnly>true</oneRunOnly>";
                 xml += "<lang>eng</lang>";
                 xml += "<topic>" + wxsHarvester.getTopic() + "</topic>";
