@@ -59,9 +59,9 @@ String redirect = PortalUtil.getCurrentURL(renderRequest);
 <% } %>
 
 <% if(wxsharvesterevery == 0) { %>
-        &nbsp;&nbsp;<img id="harvester-scheduled" src="<%=renderRequest.getContextPath()%>/images/icons/harvester-manual.png" alt="Manual harvester execution" title="Manual harveste execution"/>
+        &nbsp;&nbsp;<img id="harvester-scheduled" src="<%=renderRequest.getContextPath()%>/images/icons/harvester-manual.png" alt="Manual harvester execution" title="Manual harvester execution"/>
 <% } else { %>
-        &nbsp;&nbsp;<img id="harvester-scheduled" src="<%=renderRequest.getContextPath()%>/images/icons/harvester-scheduled.png" alt="Automatic harvester execution" title="Manual harveste execution"/>
+        &nbsp;&nbsp;<img id="harvester-scheduled" src="<%=renderRequest.getContextPath()%>/images/icons/harvester-scheduled.png" alt="Automatic harvester execution" title="Automatic harvester execution"/>
 <% } %>
 
 <% if(wxsharvesterstatus.equals("NEVER_RUN")) { %>
