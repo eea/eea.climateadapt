@@ -20,10 +20,12 @@
 	String redirect = PortalUtil.getCurrentURL(renderRequest);	
 %>
 
+<%--
 <aui:button-row>
 	<portlet:actionURL name="synchronizeIndex" var="rebuildIndexURL"/>
 	<aui:button value="rebuild-index" onClick="<%= rebuildIndexURL.toString() %>"/>
 </aui:button-row>
+--%>
 
 <aui:button-row>
 	<portlet:renderURL var="addWxsHarvesterURL">
