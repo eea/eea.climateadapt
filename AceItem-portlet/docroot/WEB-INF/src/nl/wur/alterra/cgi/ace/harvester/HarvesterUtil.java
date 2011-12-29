@@ -286,6 +286,12 @@ public class HarvesterUtil {
             geoNetworkHarvestingRunFinished = isRunFinished(pollResult) ;
         }
 
+        boolean ranSuccessfully = true;
+        GeoNetworkHarvesterResponse checkStatus = geoNetworkConnector.getHarvester(wxsHarvester);
+        if(checkStatus.getGeonetworkResponse().contains("<error")) {
+            ranSuccessfully = false;
+        }
+
         //
         // de-activate GeoNetwork harvester
         //
@@ -296,23 +302,28 @@ public class HarvesterUtil {
             WxsHarvesterLocalServiceUtil.updateWxsHarvester(wxsHarvester, Boolean.FALSE, Boolean.FALSE);
         }
 
-        //
-        // retrieve results of this harvester from GeoNetwork after running it (new state)
-        //
-        GeoNetworkHarvesterResponse resultsResponse = geoNetworkConnector.getHarvesterResults(wxsHarvester);
-        if(resultsResponse.getWxsHarvester().getStatus().equals(WxSHarvesterStatus.GEONETWORK_GETRESULTS_FAILURE.name())) {
-            System.out.println("ERROR: failed to retrieve results for harvester " + wxsHarvester.toShortString() + ", execution canceled.");
-            WxsHarvesterLocalServiceUtil.updateWxsHarvester(wxsHarvester, Boolean.FALSE, Boolean.FALSE);
-            return;
+        if(ranSuccessfully) {
+            //
+            // retrieve results of this harvester from GeoNetwork after running it (new state)
+            //
+            GeoNetworkHarvesterResponse resultsResponse = geoNetworkConnector.getHarvesterResults(wxsHarvester);
+            if(resultsResponse.getWxsHarvester().getStatus().equals(WxSHarvesterStatus.GEONETWORK_GETRESULTS_FAILURE.name())) {
+                System.out.println("ERROR: failed to retrieve results for harvester " + wxsHarvester.toShortString() + ", execution canceled.");
+                WxsHarvesterLocalServiceUtil.updateWxsHarvester(wxsHarvester, Boolean.FALSE, Boolean.FALSE);
+                return;
+            }
+            String harvesterResultsAfter = resultsResponse.getGeonetworkResponse();
+
+            //
+            // convert to AceItems, save in DBMS and update Lucene index
+            //
+            storeAsAceItems(wxsHarvester, harvesterResultsBefore, harvesterResultsAfter);
+            wxsHarvester.setStatus(WxSHarvesterStatus.SUCCESS.name());
         }
-        String harvesterResultsAfter = resultsResponse.getGeonetworkResponse();
+        else {
+            wxsHarvester.setStatus(WxSHarvesterStatus.GEONETWORK_RUN_FAILURE.name());
+        }
 
-        //
-        // convert to AceItems, save in DBMS and update Lucene index
-        //
-        storeAsAceItems(wxsHarvester, harvesterResultsBefore, harvesterResultsAfter);
-
-        wxsHarvester.setStatus(WxSHarvesterStatus.SUCCESS.name());
         WxsHarvesterLocalServiceUtil.updateWxsHarvester(wxsHarvester, Boolean.FALSE, Boolean.FALSE);
         //System.out.println("successfully finished executing harvester: " + wxsHarvester.toShortString());
     }
