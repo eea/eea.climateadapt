@@ -11,6 +11,7 @@
 	Long aceitem_id = 0l ;
 	AceItem aceitem = null;
 	String url = null;
+	String metadataurl = null;
 	String[] urls = null;
 	String websitelabel = "Website";
 
@@ -32,7 +33,9 @@
 		if(aceitem != null) {
 			
 			if(aceitem.getStoragetype().equalsIgnoreCase("GEONETWORK")) {
-				url = "<a href='/map-viewer?cswRecordFileIdentifier=" + aceitem.getStoredAt() + "' >" + aceitem.getName() + "</a>" ; 
+				url = "<a href='/map-viewer?cswRecordFileIdentifier=" + aceitem.getStoredAt() + "' >View map " + aceitem.getName() + "</a>" ; 
+				metadataurl = "<a href='http://dev.ace.geocat.net/geonetwork/srv/en/metadata.show?uuid=" + aceitem.getStoredAt() + "' target='_blank'>View metadata " + aceitem.getName() + "</a>" ; 
+			//@TODO:	metadataurl = "<a href='/geonetwork/srv/en/metadata.show?uuid=" + aceitem.getStoredAt() + "' target='_blank'>View metadata " + aceitem.getName() + "</a>" ; 
 			}
 			else {	
 
@@ -83,12 +86,14 @@
 	 <b>Source</b><br />
 	 <% out.print( aceitem.getSource()); %><br /><br />
 <%  	if(aceitem.getStoragetype().equalsIgnoreCase("GEONETWORK") ) { %>
-	<b>View map</b><br />
+	<b>Go to the service</b><br />
+	 <% out.print( url ); %><br /><br />
+	 <% out.print( metadataurl ); %><br /><br />
 <%	 }
 	 else { %>
 	 	<b>Website</b><br />
-<% 	} %>
 	 <% out.print(  url ); %><br /><br />
+<% 	} %>
 
 	 <b>Geographic area</b><br />
 	 <% out.print( aceitem.getSpatialLayer().replace("_", " ")); %><br /><br />
