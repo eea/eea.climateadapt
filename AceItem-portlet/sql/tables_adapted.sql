@@ -58,12 +58,12 @@ CREATE TABLE ace_wxsharvester
   ogctype character varying(75),
   every integer,
   topic character varying(75),
-  status character varying(75),
   savedtogeonetwork boolean,
   geonetworkid bigint,
   geonetworkuuid character varying(75),
   companyid bigint,
   groupid bigint,
+  status character varying(75),
   CONSTRAINT ace_wxsharvester_pkey PRIMARY KEY (wxsharvesterid)
 )
 WITH (
