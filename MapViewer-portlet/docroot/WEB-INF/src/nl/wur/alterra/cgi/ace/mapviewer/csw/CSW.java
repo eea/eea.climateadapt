@@ -1,7 +1,6 @@
 package nl.wur.alterra.cgi.ace.mapviewer.csw;
 
 import java.net.HttpURLConnection;
-import java.util.ArrayList;
 
 import javax.xml.xpath.XPath;
 import javax.xml.xpath.XPathConstants;
@@ -10,6 +9,7 @@ import javax.xml.xpath.XPathExpressionException;
 
 import nl.wur.alterra.acg.integrator.helpers.ows.OWS;
 import nl.wur.alterra.cgi.ace.mapviewer.csw.digitaltransferoption.DigitalTransferOption;
+import nl.wur.alterra.cgi.ace.mapviewer.csw.digitaltransferoption.DigitalTransferOptions;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
@@ -41,16 +41,18 @@ public class CSW extends OWS {
 		
 		CSWRecord cswrecord = new CSWRecord();
 		
+		cswrecord.setTitle(getTitle(getrecordbyiddocument));
+		
 		cswrecord.setDigitalTransferOptions(createDigitalTransferOptions(getrecordbyiddocument));
 		
 		return(cswrecord);
 	}
 	
-	protected ArrayList<DigitalTransferOption> createDigitalTransferOptions(Document aGetRecordByIDDocument) throws XPathExpressionException {
-		ArrayList<DigitalTransferOption> result = new ArrayList<DigitalTransferOption>();
-		
+	protected DigitalTransferOptions createDigitalTransferOptions(Document aGetRecordByIDDocument) throws XPathExpressionException {
 		XPath xpath = createXPath();
-
+		
+		DigitalTransferOptions result = new DigitalTransferOptions();
+		
 		XPathExpression expr = xpath.compile("//gmd:MD_Metadata/gmd:distributionInfo/gmd:MD_Distribution/gmd:transferOptions/gmd:MD_DigitalTransferOptions/gmd:onLine");
 
 		NodeList nodelist = (NodeList) expr.evaluate(aGetRecordByIDDocument, XPathConstants.NODESET);
@@ -60,6 +62,16 @@ public class CSW extends OWS {
 		}
 		
 		return result;
+	}
+	
+	protected String getTitle(Document aGetRecordByIDDocument) throws XPathExpressionException {
+		XPath xpath = createXPath();
+		
+		XPathExpression titlexpr = xpath.compile("//gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:citation/gmd:CI_Citation/gmd:title/gco:CharacterString");
+		
+		String title = (String) titlexpr.evaluate(aGetRecordByIDDocument, XPathConstants.STRING);
+		
+		return title;
 	}
 	
 	protected DigitalTransferOption createDigitalTransferOption(Node aDigitalTransferOptionNode) throws XPathExpressionException {

@@ -1,16 +1,10 @@
 package nl.wur.alterra.cgi.ace.portlet;
 
-import java.io.PrintWriter;
-
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
 import javax.portlet.PortletPreferences;
-import javax.servlet.http.HttpServletResponse;
-
-import nl.wur.alterra.cgi.ace.mapviewer.csw.CSW;
 
 import com.liferay.portal.kernel.util.ParamUtil;
-import com.liferay.portal.util.PortalUtil;
 import com.liferay.util.bridges.mvc.MVCPortlet;
 
 /**
@@ -52,7 +46,7 @@ public class MapViewerPortlet extends MVCPortlet {
 			cswServletUrl += "?";
 		}
 
-		prefs.setValue(Constants.cswURLPreferenceName, cswServletUrl);
+		prefs.setValue(Constants.cswServletURLPreferenceName, cswServletUrl);
 
 		// Catalogue Server URL
 		String cswUrl = ParamUtil.getString(request, Constants.cswURLPreferenceName);
@@ -62,6 +56,26 @@ public class MapViewerPortlet extends MVCPortlet {
 		}
 
 		prefs.setValue(Constants.cswURLPreferenceName, cswUrl);
+
+		// Catalogue Server username
+		String cswUserName = ParamUtil.getString(request, Constants.cswUserNamePreferenceName);
+		
+		prefs.setValue(Constants.cswUserNamePreferenceName, cswUserName);
+
+		// Catalogue Server password
+		String cswPassWord = ParamUtil.getString(request, Constants.cswPassWordPreferenceName);
+		
+		prefs.setValue(Constants.cswPassWordPreferenceName, cswPassWord);
+
+		// Catalogue Server file identifiers
+		String cswRecordFileidentifiers = ParamUtil.getString(request, Constants.cswRecordFileIdentifiersPreferenceName);
+		
+		prefs.setValue(Constants.cswRecordFileIdentifiersPreferenceName, cswRecordFileidentifiers);
+		
+		// Zoomlevel
+		String zoomlevel = ParamUtil.getString(request, Constants.zoomLevelPreferenceName);
+		
+		prefs.setValue(Constants.zoomLevelPreferenceName, zoomlevel);
 		
 		// Store
 		prefs.store();

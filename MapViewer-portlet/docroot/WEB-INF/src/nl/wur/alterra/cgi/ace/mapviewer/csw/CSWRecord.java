@@ -1,25 +1,31 @@
 package nl.wur.alterra.cgi.ace.mapviewer.csw;
 
-import java.util.ArrayList;
-
-import nl.wur.alterra.cgi.ace.mapviewer.csw.digitaltransferoption.DigitalTransferOption;
+import nl.wur.alterra.cgi.ace.mapviewer.csw.digitaltransferoption.DigitalTransferOptions;
 
 public class CSWRecord {
 
-	ArrayList<DigitalTransferOption> digitalTransferOptions;
+	private String title;
+
+	DigitalTransferOptions digitalTransferOptions;
 
 	public CSWRecord() {
 		super();
-		
-		digitalTransferOptions = new ArrayList<DigitalTransferOption>();
 	}
 
-	public ArrayList<DigitalTransferOption> getDigitalTransferOptions() {
+	public String getTitle() {
+		return title;
+	}
+
+	public void setTitle(String title) {
+		this.title = title;
+	}
+
+	public DigitalTransferOptions getDigitalTransferOptions() {
 		return digitalTransferOptions;
 	}
 
 	public void setDigitalTransferOptions(
-			ArrayList<DigitalTransferOption> digitalTransferOptions) {
+			DigitalTransferOptions digitalTransferOptions) {
 		this.digitalTransferOptions = digitalTransferOptions;
 	}
 }

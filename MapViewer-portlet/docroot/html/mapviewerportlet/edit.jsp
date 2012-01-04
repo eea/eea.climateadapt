@@ -27,9 +27,17 @@
 
 	<aui:input name="<%= Constants.bingTimeOutPreferenceName %>" value='<%= prefs.getValue(Constants.bingTimeOutPreferenceName, "100") %>' size="45" type="text" />
 
+	<aui:input name="<%= Constants.zoomLevelPreferenceName %>" value='<%= prefs.getValue(Constants.zoomLevelPreferenceName, "2") %>' size="45" type="text" />
+
 	<aui:input name="<%= Constants.cswServletURLPreferenceName %>" value='<%= prefs.getValue(Constants.cswServletURLPreferenceName, "/MapViewer-portlet/cswservlet?") %>' size="45" type="text" />
 
 	<aui:input name="<%= Constants.cswURLPreferenceName %>" value='<%= prefs.getValue(Constants.cswURLPreferenceName, "http://ace.geocat.net/geonetwork/srv/en/csw?") %>' size="45" type="text" />
+
+    <aui:input name="<%= Constants.cswUserNamePreferenceName %>" value='<%= prefs.getValue(Constants.cswUserNamePreferenceName, "") %>' size="45" type="text" />
+
+    <aui:input name="<%= Constants.cswPassWordPreferenceName %>" value='<%= prefs.getValue(Constants.cswPassWordPreferenceName, "") %>' size="45" type="text" />
+
+    <aui:input name="<%= Constants.cswRecordFileIdentifiersPreferenceName %>" value='<%= prefs.getValue(Constants.cswRecordFileIdentifiersPreferenceName, "") %>' size="45" type="text" />
 
 	<aui:button-row>
 		<aui:button type="submit" />

@@ -24,7 +24,7 @@
 		<header-portlet-javascript>/js/chm/LocationControl.js</header-portlet-javascript>
 		<header-portlet-javascript>/js/chm/Locator.js</header-portlet-javascript>
 		<header-portlet-javascript>/js/chm/CSW.js</header-portlet-javascript>
-		<footer-portlet-javascript>/js/javascript.js</footer-portlet-javascript>
+<!-- 		<footer-portlet-javascript>/js/javascript.js</footer-portlet-javascript> -->
 		<css-class-wrapper>mapviewerportlet-portlet</css-class-wrapper>
 	</portlet>
 	<role-mapper>

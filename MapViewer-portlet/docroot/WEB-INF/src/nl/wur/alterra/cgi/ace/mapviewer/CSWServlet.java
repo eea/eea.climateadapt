@@ -47,8 +47,12 @@ public class CSWServlet extends HttpServlet {
 		try {
         	String cswurl = request.getParameter(Constants.cswURLPreferenceName);
         	
+        	String cswusername = request.getParameter(Constants.cswUserNamePreferenceName);
+        	
+        	String cswpassword = request.getParameter(Constants.cswPassWordPreferenceName);
+        	
         	if (csw == null || ! csw.getOnlineResource().equalsIgnoreCase(cswurl)) {
-        		csw = new CSW(cswurl, null, null);
+        		csw = new CSW(cswurl, cswusername, cswpassword);
         	}
 			
 			String metadatarecordid = request.getParameter(Constants.metadataRecordIDParameterName);

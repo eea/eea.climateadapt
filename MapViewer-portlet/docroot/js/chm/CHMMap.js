@@ -45,8 +45,9 @@ CHM.CHMMap = OpenLayers.Class(OpenLayers.Map, {
 
         this.addLayers([road, shaded, hybrid, aerial]);
         
-		if (! this.getCenter()) {
-			this.zoomToMaxExtent();
-		}
+        this.setCenter(new OpenLayers.LonLat(9.150066, 50.17437).transform(
+        	    new OpenLayers.Projection("EPSG:4326"),
+        	    this.getProjectionObject()
+        	), zoomLevel);
 	} 
 });

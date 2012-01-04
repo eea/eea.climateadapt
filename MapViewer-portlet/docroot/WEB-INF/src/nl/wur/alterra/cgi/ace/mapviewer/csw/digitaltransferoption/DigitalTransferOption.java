@@ -10,7 +10,7 @@ public class DigitalTransferOption {
 
 	public DigitalTransferOption(String url, String layerName, String protocol) {
 		super();
-
+		
 		this.url = url;
 		
 		this.layerName = layerName;

@@ -1,5 +1,7 @@
 CHM.DigitalTransferOptions = OpenLayers.Class(OpenLayers.Format.JSON, {
 	
+	title: null,
+	
 	digitaltransferoprions: [], 
 	
     read : function(json) {
@@ -14,6 +16,8 @@ CHM.DigitalTransferOptions = OpenLayers.Class(OpenLayers.Format.JSON, {
         if(! obj) {
         	console.log("Bad JSON: " + json);
         } else {
+        	this.title = obj.title;
+        	
         	for (var i = 0; i < obj.digitalTransferOptions.length; i ++) {
         		try {
         			var digitaltransferoption = obj.digitalTransferOptions[i];
@@ -25,7 +29,7 @@ CHM.DigitalTransferOptions = OpenLayers.Class(OpenLayers.Format.JSON, {
         			var protocol = digitaltransferoption.protocol;
         			
         			if (protocol.indexOf("WMS", 0) != -1) {
-        				var wmslayer = new OpenLayers.Layer.WMS(layername, 
+        				var wmslayer = new OpenLayers.Layer.WMS(this.title, 
         						url, 
         						{layers: layername, format: 'image/png', transparent: 'true'}, 
         						{visibility: true}, 

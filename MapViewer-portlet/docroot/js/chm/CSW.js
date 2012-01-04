@@ -11,7 +11,9 @@ CHM.CSW = OpenLayers.Class({
 		    	params: 
 		    	{
 		    		metadataRecordID: aID,
-		    		cswURL: cswUrl, 
+		    		cswURL: cswUrl,
+		    		cswUserName: cswUsername,
+		    		cswPassWord: cswPassword, 
 		    		random: Math.random()
 		    	},
 		    callback: this.handler
