@@ -1139,14 +1139,18 @@ span.opens-new-window-accessible,
 	display: none;
 }
 
-.multimedia .feed-entry {
-	font-size: 12px;
-}
-
 /** Additional styling for the FilterAceItemPortlet
     add class indicators to the desired portlet in 
     order to use the styles below
 **/
+.multimedia .feed-entry {
+	font-size: 11px;
+}
+
+.multimedia .feed-entry-title a {
+	font-weight: bold;
+}
+
 .indicators #filter_results {
 	padding-left: 18px;
 }
@@ -1154,16 +1158,24 @@ span.opens-new-window-accessible,
 .indicators .plus,
 .indicators .minus {
 	margin-left: -18px;
+	position: relative;
+	top: 2px;
 }
 
 .indicators a {
 	color: #02213D !important;
+	font-size: 11px;
+	font-weight: bold;
 	text-decoration: none;
 }
 
 .indicators a:hover {
-	color: #a5bf26;
-	text-decoration: none;
+	color: #758816 !important;
+	text-decoration: none !important;
+}
+
+.indicators .feed-entry-content {
+	font-size: 11px;
 }
 
 /**** 
@@ -1829,6 +1841,19 @@ text and the class mapviewer to the MapViewerPortlet.
 	margin-right: 10px;
 	font-size: 11px;
 	text-decoration: none;
+}
+
+.glossary-inline-term {
+	border-bottom: 1px dotted;
+	text-decoration: none;
+}
+
+.glossary-inline-term:hover {
+	text-decoration: none;
+}
+
+.ui-tooltip-content .GlossaryTitle {
+	display: none;
 }
 
 /****

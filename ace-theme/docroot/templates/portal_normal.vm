@@ -6,7 +6,9 @@
 
 <head>
 	<title>$the_title - $company_name</title>
+	<link type="text/css" rel="stylesheet" href="/ace-theme/css/jquery.qtip.min.css" />
 	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js"></script>
+	<script type="text/javascript" src="/ace-theme/js/jquery.qtip.min.js"></script>
 	$theme.include($top_head_include)
 	
 	#if($is_signed_in)
