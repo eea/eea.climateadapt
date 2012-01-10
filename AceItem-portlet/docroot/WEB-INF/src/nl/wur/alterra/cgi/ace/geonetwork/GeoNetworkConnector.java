@@ -547,20 +547,7 @@ public class GeoNetworkConnector {
                     x.printStackTrace();
                     // TODO should not swallow this. But not likely it'll happen
                 }
-                xml += "<capabUrl>" + url + "</capabUrl>";
-
-                if(cswHarvester.getFreetext() != null && cswHarvester.getFreetext().length() > 0 ){
-                    xml += "<freeText>" + cswHarvester.getFreetext() + "</freeText>";
-                }
-                if(cswHarvester.getTitle() != null && cswHarvester.getTitle().length() > 0 ){
-                    xml += "<title>" + cswHarvester.getTitle() + "</title>";
-                }
-                if(cswHarvester.getAbstrakt() != null && cswHarvester.getAbstrakt().length() > 0 ){
-                    xml += "<abstract>" + cswHarvester.getAbstrakt() + "</abstract>";
-                }
-                if(cswHarvester.getSubject() != null && cswHarvester.getSubject().length() > 0 ){
-                    xml += "<subject>" + cswHarvester.getSubject() + "</subject>";
-                }
+                xml += "<capabilitiesUrl>" + url + "</capabilitiesUrl>";
                 xml += "<icon>default.gif</icon>";
             xml += "</site>";
 
@@ -568,6 +555,29 @@ public class GeoNetworkConnector {
                 xml += "<validate>false</validate>";
                 xml += "<importxslt>none</importxslt>";
             xml += "</content>";
+
+            xml += "<searches>";
+                // if any of the search fields is not empty, create a search element
+                if( (cswHarvester.getFreetext() != null && cswHarvester.getFreetext().length() > 0) ||
+                            (cswHarvester.getTitle() != null && cswHarvester.getTitle().length() > 0 ) ||
+                            (cswHarvester.getAbstrakt() != null && cswHarvester.getAbstrakt().length() > 0 ) ||
+                            (cswHarvester.getSubject() != null && cswHarvester.getSubject().length() > 0 ) ) {
+                    xml += "<search>";
+                    if(cswHarvester.getFreetext() != null && cswHarvester.getFreetext().length() > 0 ){
+                        xml += "<freeText>" + cswHarvester.getFreetext() + "</freeText>";
+                    }
+                    if(cswHarvester.getTitle() != null && cswHarvester.getTitle().length() > 0 ){
+                        xml += "<title>" + cswHarvester.getTitle() + "</title>";
+                    }
+                    if(cswHarvester.getAbstrakt() != null && cswHarvester.getAbstrakt().length() > 0 ){
+                        xml += "<abstract>" + cswHarvester.getAbstrakt() + "</abstract>";
+                    }
+                    if(cswHarvester.getSubject() != null && cswHarvester.getSubject().length() > 0 ){
+                        xml += "<subject>" + cswHarvester.getSubject() + "</subject>";
+                    }
+                    xml += "</search>";
+                }
+            xml += "</searches>";
 
             xml += "<options>";
                 // GeoNetwork cannot handle period of 0
