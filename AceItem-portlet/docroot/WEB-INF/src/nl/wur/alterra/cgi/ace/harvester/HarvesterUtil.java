@@ -116,9 +116,9 @@ public class HarvesterUtil {
         //System.out.println("scheduling harvester " + cswHarvester.toShortString() + " to run every " + cswHarvester.getEvery() + " " + timeUnit.toString());
         ScheduledExecutorService executionService = HarvesterExecutionService.getExecutionService();
         ScheduledFuture<?> scheduledFuture = executionService.scheduleWithFixedDelay(new HarvesterThread(cswHarvester), cswHarvester.getEvery(), cswHarvester.getEvery(), timeUnit);
-        //System.out.println("finished scheduling harvester " + wxsHarvester.toShortString());
+        //System.out.println("finished scheduling harvester " + cswHarvester.toShortString());
         CSWHarvesterThreadMap.getInstance().add(cswHarvester, scheduledFuture);
-        //System.out.println("added harvester " + wxsHarvester.toShortString() + " to threads map which now contains " + WxSHarvesterThreadMap.getInstance().size());
+        //System.out.println("added harvester " + cswHarvester.toShortString() + " to threads map which now contains " + CSWHarvesterThreadMap.getInstance().size());
     }
 
     /**
@@ -163,10 +163,17 @@ public class HarvesterUtil {
         try {
             List<WxsHarvester> wxsHarvesters = new ArrayList<WxsHarvester>();
             wxsHarvesters.addAll(WxsHarvesterLocalServiceUtil.getWxsHarvesters(0, WxsHarvesterLocalServiceUtil.getWxsHarvestersCount()));
-            //System.out.println("scheduleHarvesters retrieved " + wxsHarvesters.size() + " harvesters to be scheduled");
+            //System.out.println("scheduleHarvesters retrieved " + wxsHarvesters.size() + " WxS harvesters to be scheduled");
             for(WxsHarvester wxsHarvester : wxsHarvesters) {
                 HarvesterUtil.scheduleWxsHarvester(wxsHarvester);
             }
+            List<CSWHarvester> cswHarvesters = new ArrayList<CSWHarvester>();
+            cswHarvesters.addAll(CSWHarvesterLocalServiceUtil.getCSWHarvesters(0, CSWHarvesterLocalServiceUtil.getCSWHarvestersCount()));
+            //System.out.println("scheduleHarvesters retrieved " + cswHarvesters.size() + " CSW harvesters to be scheduled");
+            for(CSWHarvester cswHarvester : cswHarvesters) {
+                HarvesterUtil.scheduleCSWHarvester(cswHarvester);
+            }
+
         }
         // do not block application startup if something goes wrong retrieving harvesters
         catch (SystemException x) {
@@ -380,6 +387,207 @@ public class HarvesterUtil {
         WxsHarvesterLocalServiceUtil.updateWxsHarvester(wxsHarvester, Boolean.FALSE, Boolean.FALSE);
         //System.out.println("successfully finished executing harvester: " + wxsHarvester.toShortString());
     }
+
+    /**
+     * Requests GeoNetwork to execute a cswharvester. This is done by first activating the Harvester in GeoNetwork, then
+     * requesting the actual execution, and finally de-activating the harvester in GeoNetwork after it has finished.
+     *
+     * This is intended to keep control of when they are run exclusively in ACE, avoiding the harvesters running in
+     * GeoNetwork without request from ACE (even though they should have been saved with OneRunOnly=true so even if
+     * activated they should not run periodically without explicit request).
+     *
+     * For three of the GeoNetwork services requested in this method (xml.harvesting.start, xml.harvesting.run, and
+     * xml.havesting.stop) the interface is the same. Requests look like
+     *
+     * <request>
+     *     <id>754</id>
+     * </request>
+     *
+     * and responses look like
+     *
+     * <response>
+     *     <id status="ok">754</id>
+     * </response>
+     *
+     * For the polling requests, used to find out when the harvesting run in GeoNetwork has finished, the requests are
+     * like
+     *
+     * <request>
+     *     <id>754</id>
+     * </request>
+     *
+     * and responses are like
+     *
+     * <node id="754" type="csw">
+     *     <site>
+     *         <name>Some Name</name>
+     *         <uuid>c7208ddf-54f5-4681-ae59-9bb1c9e83262</uuid>
+     *         <account>
+     *             <use>true</use>
+     *             <username />
+     *             <password />
+     *         </account>
+     *         <url>http://test.com/tst</url>
+     *         <icon>default.gif</icon>
+     *     </site>
+     *     <content>
+     *         <validate>false</validate>
+     *         <importxslt>none</importxslt>
+     *     </content>
+     *     <options>
+     *         <every>90</every>
+     *         <oneRunOnly>true</oneRunOnly>
+     *         <status>active</status>
+     *         <lang>eng</lang>
+     *         <topic>climatologyMeteorologyAtmosphere</topic>
+     *         <createThumbnails>true</createThumbnails>
+     *         <useLayer>true</useLayer>
+     *         <useLayerMd>true</useLayerMd>
+     *         <datasetCategory>2</datasetCategory>
+     *     </options>
+     *     <privileges>
+     *         <group id="1">
+     *             <operation name="view" />
+     *             <operation name="dynamic" />
+     *             <operation name="featured" />
+     *         </group>
+     *     </privileges>
+     *     <categories>
+     *         <category id="3" />
+     *     </categories>
+     *     <info>
+     *         <lastRun />
+     *         <running>false</running>
+     *     </info>
+     * </node>
+     *
+     *
+     * @param cswHarvester harvester to run
+     */
+    public static synchronized void executeCSWHarvester(CSWHarvester cswHarvester) throws SystemException, PortalException, CustomPropertiesNotInitializedException {
+        //System.out.println("executing harvester: " + cswHarvester.toShortString());
+
+        // your first time ?
+        boolean firstRun = cswHarvester.getStatus().equals(HarvesterStatus.NEVER_RUN.name());
+        // check if harvester is in geonetwork
+        if(! isInGeoNetwork(cswHarvester)) {
+            System.out.println("ERROR: harvester " + cswHarvester.toShortString() + " is not saved to GeoNetwork, execution canceled.");
+            return;
+        }
+
+        //
+        // mark cswharvester as RUNNING
+        //
+        cswHarvester.setStatus(HarvesterStatus.RUNNING.name());
+        CSWHarvesterLocalServiceUtil.updateCSWHarvester(cswHarvester, Boolean.FALSE, Boolean.FALSE);
+
+        //
+        // retrieve results of this harvester from GeoNetwork before running it (previous state)
+        //
+        GeoNetworkCSWHarvesterResponse getLastResultsResponse = geoNetworkConnector.getCSWHarvesterResults(cswHarvester);
+        if(!firstRun && getLastResultsResponse.getCSWHarvester().getStatus().equals(HarvesterStatus.GEONETWORK_GETRESULTS_FAILURE.name())) {
+            CSWHarvesterLocalServiceUtil.updateCSWHarvester(cswHarvester, Boolean.FALSE, Boolean.FALSE);
+            System.out.println("ERROR: failed to retrieve earlier harvesting results for harvester " + cswHarvester.toShortString() + ", execution canceled.");
+            return;
+        }
+        String harvesterResultsBefore = getLastResultsResponse.getGeonetworkResponse();
+
+        //
+        // request CSWHarvester activation in GeoNetwork
+        //
+        GeoNetworkCSWHarvesterResponse activationResponse = geoNetworkConnector.activateCSWHarvester(cswHarvester);
+        if(activationResponse.getCSWHarvester().getStatus().equals(HarvesterStatus.GEONETWORK_ACTIVATE_FAILURE.name())) {
+            CSWHarvesterLocalServiceUtil.updateCSWHarvester(cswHarvester, Boolean.FALSE, Boolean.FALSE);
+            System.out.println("ERROR: failed to activate harvester " + cswHarvester.toShortString() + ", execution canceled.");
+            return;
+        }
+
+        long start = System.currentTimeMillis();
+
+        //
+        // request CSWHarvester run in GeoNetwork
+        //
+        GeoNetworkCSWHarvesterResponse runResponse = geoNetworkConnector.runCSWHarvester(cswHarvester);
+        if(runResponse.getCSWHarvester().getStatus().equals(HarvesterStatus.GEONETWORK_RUN_FAILURE.name())) {
+            CSWHarvesterLocalServiceUtil.updateCSWHarvester(cswHarvester, Boolean.FALSE, Boolean.FALSE);
+            System.out.println("ERROR: failed to run harvester " + cswHarvester.toShortString() + ", execution canceled.");
+            return;
+        }
+        //
+        // keep polling GeoNetwork to know when GeoNetwork harvester has finished
+        //
+        boolean geoNetworkHarvestingRunFinished = false;
+        while(geoNetworkHarvestingRunFinished == false) {
+            // poll every 30 seconds
+            try {
+                Thread.sleep(30000);
+            }
+            catch (InterruptedException x) {
+                cswHarvester.setStatus(HarvesterStatus.ACE_ERROR.name());
+                CSWHarvesterLocalServiceUtil.updateCSWHarvester(cswHarvester, Boolean.FALSE, Boolean.FALSE);
+                System.out.println("ERROR: failed to poll status of harvester " + cswHarvester.toShortString() + " - " + x.getMessage() + ", execution canceled.");
+                return;
+            }
+            long elapsed = System.currentTimeMillis() - start;
+            if(elapsed > timeOut) {
+                System.out.println("ERROR: harvester poll timeout for harvester " + cswHarvester.toShortString() + ", execution canceled.");
+                cswHarvester.setStatus(HarvesterStatus.GEONETWORK_POLL_TIMEOUT.name());
+                CSWHarvesterLocalServiceUtil.updateCSWHarvester(cswHarvester, Boolean.FALSE, Boolean.FALSE);
+                return;
+            }
+
+            GeoNetworkCSWHarvesterResponse statusResponse = geoNetworkConnector.getCSWHarvester(cswHarvester);
+            if(statusResponse.getCSWHarvester().getStatus().equals(HarvesterStatus.GEONETWORK_GET_FAILURE.name())) {
+                System.out.println("ERROR: failed to poll execution status for harvester " + cswHarvester.toShortString() + ", execution canceled.");
+                CSWHarvesterLocalServiceUtil.updateCSWHarvester(cswHarvester, Boolean.FALSE, Boolean.FALSE);
+                return;
+            }
+            String pollResult = statusResponse.getGeonetworkResponse();
+            geoNetworkHarvestingRunFinished = isRunFinished(pollResult) ;
+        }
+
+        boolean ranSuccessfully = true;
+        GeoNetworkCSWHarvesterResponse checkStatus = geoNetworkConnector.getCSWHarvester(cswHarvester);
+        if(checkStatus.getGeonetworkResponse().contains("<error")) {
+            ranSuccessfully = false;
+        }
+
+        //
+        // de-activate GeoNetwork harvester
+        //
+        GeoNetworkCSWHarvesterResponse deActivateResponse = geoNetworkConnector.deActivateCSWHarvester(cswHarvester);
+        // if failed, store the error status but do continue processing (don't return)
+        if(deActivateResponse.getCSWHarvester().getStatus().equals(HarvesterStatus.GEONETWORK_DEACTIVATE_FAILURE.name())) {
+            System.out.println("ERROR: failed to deactivate harvester " + cswHarvester.toShortString());
+            CSWHarvesterLocalServiceUtil.updateCSWHarvester(cswHarvester, Boolean.FALSE, Boolean.FALSE);
+        }
+
+        if(ranSuccessfully) {
+            //
+            // retrieve results of this harvester from GeoNetwork after running it (new state)
+            //
+            GeoNetworkCSWHarvesterResponse resultsResponse = geoNetworkConnector.getCSWHarvesterResults(cswHarvester);
+            if(resultsResponse.getCSWHarvester().getStatus().equals(HarvesterStatus.GEONETWORK_GETRESULTS_FAILURE.name())) {
+                System.out.println("ERROR: failed to retrieve results for harvester " + cswHarvester.toShortString() + ", execution canceled.");
+                CSWHarvesterLocalServiceUtil.updateCSWHarvester(cswHarvester, Boolean.FALSE, Boolean.FALSE);
+                return;
+            }
+            String harvesterResultsAfter = resultsResponse.getGeonetworkResponse();
+
+            //
+            // convert to AceItems, save in DBMS and update Lucene index
+            //
+            storeAsAceItems(cswHarvester, harvesterResultsBefore, harvesterResultsAfter);
+            cswHarvester.setStatus(HarvesterStatus.SUCCESS.name());
+        }
+        else {
+            cswHarvester.setStatus(HarvesterStatus.GEONETWORK_RUN_FAILURE.name());
+        }
+
+        CSWHarvesterLocalServiceUtil.updateCSWHarvester(cswHarvester, Boolean.FALSE, Boolean.FALSE);
+        //System.out.println("successfully finished executing harvester: " + cswHarvester.toShortString());
+    }
+
 
     /**
      * Returns whether a wxsharvester is saved by GeoNetwork, by asking GeoNetwork to return it. Sets savedToGeoNetwork
@@ -668,11 +876,11 @@ public class HarvesterUtil {
      *     </metadata>
      * </response>
      *
-     * @param wxsHarvester
+     * @param harvester
      * @param harvesterResultBefore
      * @param harvesterResultAfter
      */
-    private static synchronized void storeAsAceItems(WxsHarvester wxsHarvester, String harvesterResultBefore, String harvesterResultAfter) throws SystemException, PortalException, CustomPropertiesNotInitializedException {
+    private static synchronized void storeAsAceItems(Object harvester, String harvesterResultBefore, String harvesterResultAfter) throws SystemException, PortalException, CustomPropertiesNotInitializedException {
         try {
         //System.out.println("applying harvesting result to AceItem table");
 
@@ -732,18 +940,27 @@ public class HarvesterUtil {
                 else {
                     System.out.println("WARNING: failed to update AceItem with geonetwork id: " + id + ", it seems it does not exist. It will be created now.");
                     AceItem aceItem = AceItemLocalServiceUtil.createAceItem();
-                    //System.out.println("a");
                     aceItem = fillAceItem(aceItem, id, titleMap, abstractMap, keywordMap, uuidMap);
-                    //System.out.println("b");
                     aceItem.setPublicationDate(new Date());
 
-                    aceItem.setWxsharvesterId(wxsHarvester.getWxsharvesterid());
+                    if(harvester instanceof WxsHarvester) {
+                        WxsHarvester wxsHarvester = (WxsHarvester) harvester;
+                        aceItem.setWxsharvesterId(wxsHarvester.getWxsharvesterid());
+                        aceItem.setCompanyId(wxsHarvester.getCompanyId());
+                        aceItem.setGroupId(wxsHarvester.getGroupId());
+                    }
+                    else if(harvester instanceof CSWHarvester) {
+                        CSWHarvester cswHarvester = (CSWHarvester) harvester;
+                        aceItem.setCswharvesterId(cswHarvester.getCswharvesterid());
+                        aceItem.setCompanyId(cswHarvester.getCompanyId());
+                        aceItem.setGroupId(cswHarvester.getGroupId());
+                    }
+                    else {
+                        System.err.println("ERROR unknown object type for harvester: " + harvester.getClass().getName());
+                        throw new SystemException("unknown object type for harvester: " + harvester.getClass().getName());
+                    }
 
-                    aceItem.setCompanyId(wxsHarvester.getCompanyId());
-                    aceItem.setGroupId(wxsHarvester.getGroupId());
-                    //System.out.println("c");
                     AceItemLocalServiceUtil.addAceItem(aceItem);
-                    //System.out.println("d");
                     //System.out.println("finished creating AceItem with geonetwork id: " + id);
                     created++;
                 }
@@ -763,11 +980,23 @@ public class HarvesterUtil {
                 AceItem aceItem = AceItemLocalServiceUtil.createAceItem();
                 aceItem = fillAceItem(aceItem, id, titleMap, abstractMap, keywordMap, uuidMap);
                 aceItem.setPublicationDate(new Date());
-                // the id of this harvester is stored in column NAS
-                aceItem.setWxsharvesterId(wxsHarvester.getWxsharvesterid());
 
-                aceItem.setCompanyId(wxsHarvester.getCompanyId());
-                aceItem.setGroupId(wxsHarvester.getGroupId());
+                if(harvester instanceof WxsHarvester) {
+                    WxsHarvester wxsHarvester = (WxsHarvester) harvester;
+                    aceItem.setWxsharvesterId(wxsHarvester.getWxsharvesterid());
+                    aceItem.setCompanyId(wxsHarvester.getCompanyId());
+                    aceItem.setGroupId(wxsHarvester.getGroupId());
+                }
+                else if(harvester instanceof CSWHarvester) {
+                    CSWHarvester cswHarvester = (CSWHarvester) harvester;
+                    aceItem.setCswharvesterId(cswHarvester.getCswharvesterid());
+                    aceItem.setCompanyId(cswHarvester.getCompanyId());
+                    aceItem.setGroupId(cswHarvester.getGroupId());
+                }
+                else {
+                    System.err.println("ERROR unknown object type for harvester: " + harvester.getClass().getName());
+                    throw new SystemException("unknown object type for harvester: " + harvester.getClass().getName());
+                }
 
                 // companyid and groupid are available in PortletRequest, but it's readily available here. For now
                 // they are set in custom properties to have them easy avaiable thoughout.

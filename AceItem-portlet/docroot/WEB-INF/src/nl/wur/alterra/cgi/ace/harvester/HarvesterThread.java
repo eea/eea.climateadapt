@@ -38,7 +38,15 @@ public class HarvesterThread implements RunnableFuture {
     public void run() {
         //System.out.println("HarvesterThread run start");
         try {
-            HarvesterUtil.executeWxsHarvester(this.wxsHarvester);
+            if(this.wxsHarvester != null) {
+                HarvesterUtil.executeWxsHarvester(this.wxsHarvester);
+            }
+            else if(this.cswHarvester != null) {
+                HarvesterUtil.executeCSWHarvester(this.cswHarvester);
+            }
+            else {
+                throw new SystemException("HarvesterThread run with null harvester");
+            }
         }
         catch (SystemException x) {
             System.out.println("ERROR: " + x.getMessage());
