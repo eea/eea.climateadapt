@@ -301,6 +301,20 @@ public class AceItemLocalServiceWrapper implements AceItemLocalService {
 		return _aceItemLocalService.getAceItemsByWxsharvesterId(wxsHarvesterId);
 	}
 
+	/**
+	* Retrieves aceitems by nas id, which contains the ids of the cswharvester that created the aceitems.
+	*
+	* @author heikki doeleman
+	* @param cswHarvesterId
+	* @return
+	* @throws SystemException
+	*/
+	public java.util.List<nl.wur.alterra.cgi.ace.model.AceItem> getAceItemsByCSWharvesterId(
+		long cswHarvesterId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _aceItemLocalService.getAceItemsByCSWharvesterId(cswHarvesterId);
+	}
+
 	public AceItemLocalService getWrappedAceItemLocalService() {
 		return _aceItemLocalService;
 	}

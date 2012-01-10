@@ -1,37 +1,37 @@
 package nl.wur.alterra.cgi.ace.model.constants;
 
 /**
- * States of WxSHarvesters.
+ * States of Harvesters.
  *
  * Must be kept in sync with the i18n section about this in Language.properties.
  *
  * @author heikki doeleman
  */
-public enum WxSHarvesterStatus {
+public enum HarvesterStatus {
     //
 
     // these states are used to display on the page what is the status of the harvester
     //
 
     /**
-     * WxSHarvester has been created but has not yet run.
+     * Harvester has been created but has not yet run.
      */
     NEVER_RUN,
     /**
-     * WxSHarvester is currently running.
+     * Harvester is currently running.
      */
     RUNNING,
     /**
-     * WxSHarvester has run at least once, and the last time GeoNetwork produced no errors.
+     * Harvester has run at least once, and the last time GeoNetwork produced no errors.
      */
     SUCCESS,
     /**
-     * WxSHarvester has run at least once, and the last time GeoNetwork produced an error.
+     * Harvester has run at least once, and the last time GeoNetwork produced an error.
      */
     ERROR,
 
     /**
-     * An internal error in ACE has occurred related to this WxSHarvester.
+     * An internal error in ACE has occurred related to this Harvester.
      */
     ACE_ERROR,
 
@@ -50,62 +50,62 @@ public enum WxSHarvesterStatus {
      */
     GEONETWORK_RUN_SUCCESS,
     /**
-     * WxSHarvester has not been succesfully saved in GeoNetwork.
+     * Harvester has not been succesfully saved in GeoNetwork.
      *
      */
     GEONETWORK_INSERT_FAILURE,
     /**
-     * WxSHarvester has been succesfully saved in GeoNetwork.
+     * Harvester has been succesfully saved in GeoNetwork.
      *
      */
     GEONETWORK_INSERT_SUCCESS,
     /**
-     * WxSHarvester has not been succesfully updated in GeoNetwork.
+     * Harvester has not been succesfully updated in GeoNetwork.
      *
      */
     GEONETWORK_UPDATE_FAILURE,
     /**
-     * WxSHarvester has been succesfully updated in GeoNetwork.
+     * Harvester has been succesfully updated in GeoNetwork.
      *
      */
     GEONETWORK_UPDATE_SUCCESS,
     /**
-     * WxSHarvester has not been succesfully deleted in GeoNetwork.
+     * Harvester has not been succesfully deleted in GeoNetwork.
      *
      */
     GEONETWORK_DELETE_FAILURE,
     /**
-     * WxSHarvester has been succesfully deleted in GeoNetwork.
+     * Harvester has been succesfully deleted in GeoNetwork.
      *
      */
     GEONETWORK_DELETE_SUCCESS,
     /**
-     * WxSHarvester has not been succesfully activated in GeoNetwork.
+     * Harvester has not been succesfully activated in GeoNetwork.
      *
      */
     GEONETWORK_ACTIVATE_FAILURE,
     /**
-     * WxSHarvester has been succesfully activated in GeoNetwork.
+     * Harvester has been succesfully activated in GeoNetwork.
      *
      */
     GEONETWORK_ACTIVATE_SUCCESS,
     /**
-     * WxSHarvester has not been succesfully de-activated in GeoNetwork.
+     * Harvester has not been succesfully de-activated in GeoNetwork.
      *
      */
     GEONETWORK_DEACTIVATE_FAILURE,
     /**
-     * WxSHarvester has been succesfully de-activated in GeoNetwork.
+     * Harvester has been succesfully de-activated in GeoNetwork.
      *
      */
     GEONETWORK_DEACTIVATE_SUCCESS,
     /**
-     * WxSHarvester has not been succesfully gotten from GeoNetwork.
+     * Harvester has not been succesfully gotten from GeoNetwork.
      *
      */
     GEONETWORK_GET_FAILURE,
     /**
-     * WxSHarvester has not been succesfully gotten from GeoNetwork.
+     * Harvester has not been succesfully gotten from GeoNetwork.
      *
      */
     GEONETWORK_GET_SUCCESS,

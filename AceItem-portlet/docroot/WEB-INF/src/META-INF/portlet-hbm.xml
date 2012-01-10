@@ -4,6 +4,7 @@
 <hibernate-mapping default-lazy="false" auto-import="false">
 	<import class="nl.wur.alterra.cgi.ace.model.AceItem" />
 	<import class="nl.wur.alterra.cgi.ace.model.WxsHarvester" />
+	<import class="nl.wur.alterra.cgi.ace.model.CSWHarvester" />
 	<class name="nl.wur.alterra.cgi.ace.model.impl.AceItemImpl" table="Ace_AceItem">
 		<cache usage="read-write" />
 		<id name="aceItemId" type="long">
@@ -12,6 +13,7 @@
 		<property name="companyId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 		<property name="groupId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 		<property name="wxsharvesterId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="cswharvesterId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 		<property name="name" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="description" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="datatype" type="com.liferay.portal.dao.orm.hibernate.StringType" />
@@ -50,6 +52,26 @@
 		<property name="name" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="url" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="ogctype" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="every" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
+		<property name="topic" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="status" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="savedToGeoNetwork" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
+		<property name="geonetworkId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="geonetworkUUID" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="companyId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="groupId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+	</class>
+	<class name="nl.wur.alterra.cgi.ace.model.impl.CSWHarvesterImpl" table="Ace_CSWHarvester">
+		<cache usage="read-write" />
+		<id name="cswharvesterid" type="long">
+			<generator class="assigned" />
+		</id>
+		<property name="name" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="url" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="freetext" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="title" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="abstrakt" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="subject" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="every" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
 		<property name="topic" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="status" type="com.liferay.portal.dao.orm.hibernate.StringType" />

@@ -20,6 +20,7 @@ import com.liferay.portal.kernel.messaging.Message;
 import com.liferay.portal.kernel.messaging.MessageListener;
 
 import nl.wur.alterra.cgi.ace.service.AceItemLocalServiceUtil;
+import nl.wur.alterra.cgi.ace.service.CSWHarvesterLocalServiceUtil;
 import nl.wur.alterra.cgi.ace.service.ClpSerializer;
 import nl.wur.alterra.cgi.ace.service.WxsHarvesterLocalServiceUtil;
 
@@ -47,6 +48,8 @@ public class ClpMessageListener implements MessageListener {
 			AceItemLocalServiceUtil.clearService();
 
 			WxsHarvesterLocalServiceUtil.clearService();
+
+			CSWHarvesterLocalServiceUtil.clearService();
 		}
 	}
 

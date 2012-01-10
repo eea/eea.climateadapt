@@ -12,7 +12,7 @@ import java.util.concurrent.ScheduledFuture;
  *
  * @author heikki doeleman
  */
-public class HarvesterThreadMap {
+public class WxSHarvesterThreadMap {
 
     private Map<WxsHarvester, ScheduledFuture> harvesterScheduledFutureMap = new ConcurrentHashMap<WxsHarvester, ScheduledFuture>();
 
@@ -38,11 +38,11 @@ public class HarvesterThreadMap {
     //
     // singleton-ness
     //
-    private HarvesterThreadMap(){}
-    private static HarvesterThreadMap instance;
-    public static synchronized HarvesterThreadMap getInstance() {
+    private WxSHarvesterThreadMap(){}
+    private static WxSHarvesterThreadMap instance;
+    public static synchronized WxSHarvesterThreadMap getInstance() {
         if(instance == null) {
-            instance = new HarvesterThreadMap();
+            instance = new WxSHarvesterThreadMap();
         }
         return instance;
     }

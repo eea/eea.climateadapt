@@ -18,10 +18,10 @@ import com.liferay.portal.kernel.bean.PortletBeanLocatorUtil;
 import com.liferay.portal.kernel.util.ClassLoaderProxy;
 
 /**
- * The utility for the ace item local service. This utility wraps {@link nl.wur.alterra.cgi.ace.service.impl.AceItemLocalServiceImpl} and is the primary access point for service operations in application layer code running on the local server.
+ * The utility for the c s w harvester local service. This utility wraps {@link nl.wur.alterra.cgi.ace.service.impl.CSWHarvesterLocalServiceImpl} and is the primary access point for service operations in application layer code running on the local server.
  *
  * <p>
- * Never modify this class directly. Add custom service methods to {@link nl.wur.alterra.cgi.ace.service.impl.AceItemLocalServiceImpl} and rerun ServiceBuilder to regenerate this class.
+ * Never modify this class directly. Add custom service methods to {@link nl.wur.alterra.cgi.ace.service.impl.CSWHarvesterLocalServiceImpl} and rerun ServiceBuilder to regenerate this class.
  * </p>
  *
  * <p>
@@ -29,59 +29,59 @@ import com.liferay.portal.kernel.util.ClassLoaderProxy;
  * </p>
  *
  * @author groot052
- * @see AceItemLocalService
- * @see nl.wur.alterra.cgi.ace.service.base.AceItemLocalServiceBaseImpl
- * @see nl.wur.alterra.cgi.ace.service.impl.AceItemLocalServiceImpl
+ * @see CSWHarvesterLocalService
+ * @see nl.wur.alterra.cgi.ace.service.base.CSWHarvesterLocalServiceBaseImpl
+ * @see nl.wur.alterra.cgi.ace.service.impl.CSWHarvesterLocalServiceImpl
  * @generated
  */
-public class AceItemLocalServiceUtil {
+public class CSWHarvesterLocalServiceUtil {
 	/**
-	* Adds the ace item to the database. Also notifies the appropriate model listeners.
+	* Adds the c s w harvester to the database. Also notifies the appropriate model listeners.
 	*
-	* @param aceItem the ace item to add
-	* @return the ace item that was added
+	* @param cswHarvester the c s w harvester to add
+	* @return the c s w harvester that was added
 	* @throws SystemException if a system exception occurred
 	*/
-	public static nl.wur.alterra.cgi.ace.model.AceItem addAceItem(
-		nl.wur.alterra.cgi.ace.model.AceItem aceItem)
+	public static nl.wur.alterra.cgi.ace.model.CSWHarvester addCSWHarvester(
+		nl.wur.alterra.cgi.ace.model.CSWHarvester cswHarvester)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return getService().addAceItem(aceItem);
+		return getService().addCSWHarvester(cswHarvester);
 	}
 
 	/**
-	* Creates a new ace item with the primary key. Does not add the ace item to the database.
+	* Creates a new c s w harvester with the primary key. Does not add the c s w harvester to the database.
 	*
-	* @param aceItemId the primary key for the new ace item
-	* @return the new ace item
+	* @param cswharvesterid the primary key for the new c s w harvester
+	* @return the new c s w harvester
 	*/
-	public static nl.wur.alterra.cgi.ace.model.AceItem createAceItem(
-		long aceItemId) {
-		return getService().createAceItem(aceItemId);
+	public static nl.wur.alterra.cgi.ace.model.CSWHarvester createCSWHarvester(
+		long cswharvesterid) {
+		return getService().createCSWHarvester(cswharvesterid);
 	}
 
 	/**
-	* Deletes the ace item with the primary key from the database. Also notifies the appropriate model listeners.
+	* Deletes the c s w harvester with the primary key from the database. Also notifies the appropriate model listeners.
 	*
-	* @param aceItemId the primary key of the ace item to delete
-	* @throws PortalException if a ace item with the primary key could not be found
+	* @param cswharvesterid the primary key of the c s w harvester to delete
+	* @throws PortalException if a c s w harvester with the primary key could not be found
 	* @throws SystemException if a system exception occurred
 	*/
-	public static void deleteAceItem(long aceItemId)
+	public static void deleteCSWHarvester(long cswharvesterid)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
-		getService().deleteAceItem(aceItemId);
+		getService().deleteCSWHarvester(cswharvesterid);
 	}
 
 	/**
-	* Deletes the ace item from the database. Also notifies the appropriate model listeners.
+	* Deletes the c s w harvester from the database. Also notifies the appropriate model listeners.
 	*
-	* @param aceItem the ace item to delete
+	* @param cswHarvester the c s w harvester to delete
 	* @throws SystemException if a system exception occurred
 	*/
-	public static void deleteAceItem(
-		nl.wur.alterra.cgi.ace.model.AceItem aceItem)
+	public static void deleteCSWHarvester(
+		nl.wur.alterra.cgi.ace.model.CSWHarvester cswHarvester)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		getService().deleteAceItem(aceItem);
+		getService().deleteCSWHarvester(cswHarvester);
 	}
 
 	/**
@@ -156,190 +156,146 @@ public class AceItemLocalServiceUtil {
 	}
 
 	/**
-	* Gets the ace item with the primary key.
+	* Gets the c s w harvester with the primary key.
 	*
-	* @param aceItemId the primary key of the ace item to get
-	* @return the ace item
-	* @throws PortalException if a ace item with the primary key could not be found
+	* @param cswharvesterid the primary key of the c s w harvester to get
+	* @return the c s w harvester
+	* @throws PortalException if a c s w harvester with the primary key could not be found
 	* @throws SystemException if a system exception occurred
 	*/
-	public static nl.wur.alterra.cgi.ace.model.AceItem getAceItem(
-		long aceItemId)
+	public static nl.wur.alterra.cgi.ace.model.CSWHarvester getCSWHarvester(
+		long cswharvesterid)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
-		return getService().getAceItem(aceItemId);
+		return getService().getCSWHarvester(cswharvesterid);
 	}
 
 	/**
-	* Gets a range of all the ace items.
+	* Gets a range of all the c s w harvesters.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param start the lower bound of the range of ace items to return
-	* @param end the upper bound of the range of ace items to return (not inclusive)
-	* @return the range of ace items
+	* @param start the lower bound of the range of c s w harvesters to return
+	* @param end the upper bound of the range of c s w harvesters to return (not inclusive)
+	* @return the range of c s w harvesters
 	* @throws SystemException if a system exception occurred
 	*/
-	public static java.util.List<nl.wur.alterra.cgi.ace.model.AceItem> getAceItems(
+	public static java.util.List<nl.wur.alterra.cgi.ace.model.CSWHarvester> getCSWHarvesters(
 		int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return getService().getAceItems(start, end);
+		return getService().getCSWHarvesters(start, end);
 	}
 
 	/**
-	* Gets the number of ace items.
+	* Gets the number of c s w harvesters.
 	*
-	* @return the number of ace items
+	* @return the number of c s w harvesters
 	* @throws SystemException if a system exception occurred
 	*/
-	public static int getAceItemsCount()
+	public static int getCSWHarvestersCount()
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return getService().getAceItemsCount();
+		return getService().getCSWHarvestersCount();
 	}
 
 	/**
-	* Updates the ace item in the database. Also notifies the appropriate model listeners.
+	* Updates the c s w harvester in the database. Also notifies the appropriate model listeners.
 	*
-	* @param aceItem the ace item to update
-	* @return the ace item that was updated
+	* @param cswHarvester the c s w harvester to update
+	* @return the c s w harvester that was updated
 	* @throws SystemException if a system exception occurred
 	*/
-	public static nl.wur.alterra.cgi.ace.model.AceItem updateAceItem(
-		nl.wur.alterra.cgi.ace.model.AceItem aceItem)
+	public static nl.wur.alterra.cgi.ace.model.CSWHarvester updateCSWHarvester(
+		nl.wur.alterra.cgi.ace.model.CSWHarvester cswHarvester)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return getService().updateAceItem(aceItem);
+		return getService().updateCSWHarvester(cswHarvester);
 	}
 
 	/**
-	* Updates the ace item in the database. Also notifies the appropriate model listeners.
+	* Updates the c s w harvester in the database. Also notifies the appropriate model listeners.
 	*
-	* @param aceItem the ace item to update
-	* @param merge whether to merge the ace item with the current session. See {@link com.liferay.portal.service.persistence.BatchSession#update(com.liferay.portal.kernel.dao.orm.Session, com.liferay.portal.model.BaseModel, boolean)} for an explanation.
-	* @return the ace item that was updated
+	* @param cswHarvester the c s w harvester to update
+	* @param merge whether to merge the c s w harvester with the current session. See {@link com.liferay.portal.service.persistence.BatchSession#update(com.liferay.portal.kernel.dao.orm.Session, com.liferay.portal.model.BaseModel, boolean)} for an explanation.
+	* @return the c s w harvester that was updated
 	* @throws SystemException if a system exception occurred
 	*/
-	public static nl.wur.alterra.cgi.ace.model.AceItem updateAceItem(
-		nl.wur.alterra.cgi.ace.model.AceItem aceItem, boolean merge)
+	public static nl.wur.alterra.cgi.ace.model.CSWHarvester updateCSWHarvester(
+		nl.wur.alterra.cgi.ace.model.CSWHarvester cswHarvester, boolean merge)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return getService().updateAceItem(aceItem, merge);
+		return getService().updateCSWHarvester(cswHarvester, merge);
 	}
 
 	/**
-	* Creates new empty aceitem.
+	* Creates empty CSWHarvester.
 	*
+	* @return cswharvester
+	*/
+	public static nl.wur.alterra.cgi.ace.model.CSWHarvester createCSWHarvester() {
+		return getService().createCSWHarvester();
+	}
+
+	/**
+	* Updates a CSWHarvester. Also tries to update in GeoNetwork if asked to do so. Sets status to GEONETWORK_UPDATE_FAILURE
+	* if GeoNetwork update fails; sets it to NEVER_RUN if status was not already SUCCESS. Removes existing scheduler and
+	* creates a new one if asked to do so.
+	*
+	* @param cswHarvester
+	* @param propagateToGeoNetwork
+	* @param reschedule
 	* @return
+	* @throws com.liferay.portal.kernel.exception.SystemException
 	*/
-	public static nl.wur.alterra.cgi.ace.model.AceItem createAceItem() {
-		return getService().createAceItem();
-	}
-
-	/**
-	* Retrieves an AceItem by its storedAt value.
-	*
-	* @param s requested storedAt value
-	* @return aceitem, or null if not found
-	* @throws SystemException hmm
-	*/
-	public static nl.wur.alterra.cgi.ace.model.AceItem getAceItemByStoredAt(
-		java.lang.String s)
-		throws com.liferay.portal.kernel.exception.SystemException {
-		return getService().getAceItemByStoredAt(s);
-	}
-
-	/**
-	* Hugo de Groot: add these methods by hand to <portlet>LocalServiceImpl
-	* and rerun ServiceBuilder if auto generation fails
-	*
-	* Gets a list with all the AceItems in a group
-	*/
-	public static java.util.List<nl.wur.alterra.cgi.ace.model.AceItem> getAceItemsByGroupId(
-		long groupId)
-		throws com.liferay.portal.kernel.exception.SystemException {
-		return getService().getAceItemsByGroupId(groupId);
-	}
-
-	/**
-	* Hugo de Groot: add these methods by hand to <portlet>LocalServiceImpl
-	* and rerun ServiceBuilder if auto generation fails
-	*
-	* Gets a list with a range of AceItems from a group
-	*/
-	public static java.util.List<nl.wur.alterra.cgi.ace.model.AceItem> getAceItemsByGroupId(
-		long groupId, int start, int end)
-		throws com.liferay.portal.kernel.exception.SystemException {
-		return getService().getAceItemsByGroupId(groupId, start, end);
-	}
-
-	/**
-	* Hugo de Groot: add these methods by hand to <portlet>LocalServiceImpl
-	* and rerun ServiceBuilder if auto generation fails
-	*
-	* Gets a list with a range of AceItems from a group
-	*/
-	public static java.util.List<nl.wur.alterra.cgi.ace.model.AceItem> getAceItemsByGroupId(
-		long groupId, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+	public static nl.wur.alterra.cgi.ace.model.CSWHarvester updateCSWHarvester(
+		nl.wur.alterra.cgi.ace.model.CSWHarvester cswHarvester,
+		java.lang.Boolean propagateToGeoNetwork, java.lang.Boolean reschedule)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getService()
-				   .getAceItemsByGroupId(groupId, start, end, orderByComparator);
+				   .updateCSWHarvester(cswHarvester, propagateToGeoNetwork,
+			reschedule);
 	}
 
 	/**
-	* Hugo de Groot: add these methods by hand to <portlet>LocalServiceImpl
-	* and rerun ServiceBuilder if auto generation fails
-	*
-	* Gets the number of AceItems in a group
+	* Gets a list with all the CSWHarvesters in a group.
 	*/
-	public static int getAceItemsCountByGroupId(long groupId)
+	public static java.util.List<nl.wur.alterra.cgi.ace.model.CSWHarvester> getCSWHarvesterByGroupId(
+		long groupId)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return getService().getAceItemsCountByGroupId(groupId);
+		return getService().getCSWHarvesterByGroupId(groupId);
 	}
 
 	/**
-	* Retrieves aceitems by nas id, which contains the ids of the wxsharvester that created the aceitems.
-	*
-	* @author heikki doeleman
-	* @param wxsHarvesterId
-	* @return
-	* @throws SystemException
+	* Gets a list with a range of CSWHarvesters from a group.
 	*/
-	public static java.util.List<nl.wur.alterra.cgi.ace.model.AceItem> getAceItemsByWxsharvesterId(
-		long wxsHarvesterId)
+	public static java.util.List<nl.wur.alterra.cgi.ace.model.CSWHarvester> getCSWHarvestersByGroupId(
+		long groupId, int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return getService().getAceItemsByWxsharvesterId(wxsHarvesterId);
+		return getService().getCSWHarvestersByGroupId(groupId, start, end);
 	}
 
 	/**
-	* Retrieves aceitems by nas id, which contains the ids of the cswharvester that created the aceitems.
-	*
-	* @author heikki doeleman
-	* @param cswHarvesterId
-	* @return
-	* @throws SystemException
+	* Gets the number of CSWHarvesters in a group.
 	*/
-	public static java.util.List<nl.wur.alterra.cgi.ace.model.AceItem> getAceItemsByCSWharvesterId(
-		long cswHarvesterId)
+	public static int getCSWHarvestersCountByGroupId(long groupId)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return getService().getAceItemsByCSWharvesterId(cswHarvesterId);
+		return getService().getCSWHarvestersCountByGroupId(groupId);
 	}
 
 	public static void clearService() {
 		_service = null;
 	}
 
-	public static AceItemLocalService getService() {
+	public static CSWHarvesterLocalService getService() {
 		if (_service == null) {
 			Object obj = PortletBeanLocatorUtil.locate(ClpSerializer.SERVLET_CONTEXT_NAME,
-					AceItemLocalService.class.getName());
+					CSWHarvesterLocalService.class.getName());
 			ClassLoader portletClassLoader = (ClassLoader)PortletBeanLocatorUtil.locate(ClpSerializer.SERVLET_CONTEXT_NAME,
 					"portletClassLoader");
 
 			ClassLoaderProxy classLoaderProxy = new ClassLoaderProxy(obj,
 					portletClassLoader);
 
-			_service = new AceItemLocalServiceClp(classLoaderProxy);
+			_service = new CSWHarvesterLocalServiceClp(classLoaderProxy);
 
 			ClpSerializer.setClassLoader(portletClassLoader);
 		}
@@ -347,9 +303,9 @@ public class AceItemLocalServiceUtil {
 		return _service;
 	}
 
-	public void setService(AceItemLocalService service) {
+	public void setService(CSWHarvesterLocalService service) {
 		_service = service;
 	}
 
-	private static AceItemLocalService _service;
+	private static CSWHarvesterLocalService _service;
 }

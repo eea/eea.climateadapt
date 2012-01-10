@@ -3,6 +3,7 @@ create table ace_aceitem (
   companyid bigint,
   groupid bigint,
   wxsharvesterid bigint,
+  cswharvesterid bigint,
   "name" character varying(255),
   description text,
   datatype character varying(255),
@@ -71,3 +72,26 @@ WITH (
 );
 ALTER TABLE ace_wxsharvester OWNER TO postgres;
 
+CREATE TABLE ace_cswharvester 
+(
+	cswharvesterid bigint NOT NULL,
+	"name" character varying(75),
+	url character varying(75),
+	freetext character varying(75),
+	title character varying(75),
+	abstrakt character varying(75),
+	subject character varying(75),
+  every integer,
+  topic character varying(75),
+  status character varying(75),
+  savedtogeonetwork boolean,
+  geonetworkid bigint,
+  geonetworkuuid character varying(75),
+  companyid bigint,
+  groupid bigint,
+  CONSTRAINT ace_cswharvester_pkey PRIMARY KEY (cswharvesterid)
+)
+WITH (
+  OIDS=FALSE
+);
+ALTER TABLE ace_cswharvester OWNER TO postgres;

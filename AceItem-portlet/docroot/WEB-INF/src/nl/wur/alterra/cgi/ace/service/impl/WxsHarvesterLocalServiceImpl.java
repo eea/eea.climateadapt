@@ -16,16 +16,15 @@ package nl.wur.alterra.cgi.ace.service.impl;
 import com.liferay.counter.service.CounterLocalServiceUtil;
 import com.liferay.portal.kernel.exception.SystemException;
 import nl.wur.alterra.cgi.ace.geonetwork.GeoNetworkConnector;
-import nl.wur.alterra.cgi.ace.geonetwork.GeoNetworkHarvesterResponse;
+import nl.wur.alterra.cgi.ace.geonetwork.GeoNetworkWxSHarvesterResponse;
 import nl.wur.alterra.cgi.ace.harvester.HarvesterUtil;
 import nl.wur.alterra.cgi.ace.model.AceItem;
 import nl.wur.alterra.cgi.ace.model.WxsHarvester;
-import nl.wur.alterra.cgi.ace.model.constants.WxSHarvesterStatus;
+import nl.wur.alterra.cgi.ace.model.constants.HarvesterStatus;
 import nl.wur.alterra.cgi.ace.model.impl.WxsHarvesterImpl;
 import nl.wur.alterra.cgi.ace.service.AceItemLocalServiceUtil;
 import nl.wur.alterra.cgi.ace.service.base.WxsHarvesterLocalServiceBaseImpl;
 
-import javax.sound.midi.SysexMessage;
 import java.util.List;
 
 /**
@@ -79,9 +78,9 @@ public class WxsHarvesterLocalServiceImpl extends WxsHarvesterLocalServiceBaseIm
         if(propagateToGeoNetwork) {
             //System.out.println("updating harvester to GeoNetwork");
             GeoNetworkConnector geoNetworkConnector = new GeoNetworkConnector();
-            GeoNetworkHarvesterResponse geoNetworkHarvesterResponse = geoNetworkConnector.updateHarvester(wxsHarvester);
+            GeoNetworkWxSHarvesterResponse geoNetworkHarvesterResponse = geoNetworkConnector.updateWxSHarvester(wxsHarvester);
             wxsHarvester = geoNetworkHarvesterResponse.getWxsHarvester();
-            if(wxsHarvester.getStatus().equals(WxSHarvesterStatus.GEONETWORK_UPDATE_FAILURE.name())) {
+            if(wxsHarvester.getStatus().equals(HarvesterStatus.GEONETWORK_UPDATE_FAILURE.name())) {
                 System.out.println("ERROR: failed to update harvester " + wxsHarvester.toShortString() + " to GeoNetwork");
             }
             else {
@@ -95,9 +94,9 @@ public class WxsHarvesterLocalServiceImpl extends WxsHarvesterLocalServiceBaseIm
         //
         //System.out.println("updating harvester " + wxsHarvester.toShortString() + " to ACE, status is: " + wxsHarvester.getStatus());
         // if status is SUCCESS (earlier run was succesful) leave it as is; otherwise set to NEVER_RUN
-        //if(!(wxsHarvester.getStatus().equals(WxSHarvesterStatus.SUCCESS.name()) ||  wxsHarvester.getStatus().equals(WxSHarvesterStatus.RUNNING.name()))) {
+        //if(!(wxsHarvester.getStatus().equals(HarvesterStatus.SUCCESS.name()) ||  wxsHarvester.getStatus().equals(HarvesterStatus.RUNNING.name()))) {
         //    System.out.println("setting status to NEVER_RUN, was " + wxsHarvester.getStatus());
-        //    wxsHarvester.setStatus(WxSHarvesterStatus.NEVER_RUN.name());
+        //    wxsHarvester.setStatus(HarvesterStatus.NEVER_RUN.name());
         //}
         wxsHarvester = super.updateWxsHarvester(wxsHarvester);
         //System.out.println("finished updating harvester " + wxsHarvester.toShortString() + " to ACE");
@@ -127,10 +126,10 @@ public class WxsHarvesterLocalServiceImpl extends WxsHarvesterLocalServiceBaseIm
         //
         //System.out.println("deleting harvester from GeoNetwork");
         GeoNetworkConnector geoNetworkConnector = new GeoNetworkConnector();
-        GeoNetworkHarvesterResponse geoNetworkHarvesterResponse = geoNetworkConnector.deleteHarvester(wxsHarvester);
-        if(geoNetworkHarvesterResponse.getWxsHarvester().getStatus().equals(WxSHarvesterStatus.GEONETWORK_DELETE_FAILURE.name())) {
+        GeoNetworkWxSHarvesterResponse geoNetworkHarvesterResponse = geoNetworkConnector.deleteWxSHarvester(wxsHarvester);
+        if(geoNetworkHarvesterResponse.getWxsHarvester().getStatus().equals(HarvesterStatus.GEONETWORK_DELETE_FAILURE.name())) {
             wxsHarvester.setSavedToGeoNetwork(true);
-            wxsHarvester.setStatus(WxSHarvesterStatus.GEONETWORK_DELETE_FAILURE.name());
+            wxsHarvester.setStatus(HarvesterStatus.GEONETWORK_DELETE_FAILURE.name());
             System.out.println("ERROR: failed to delete harvester " + wxsHarvester.toShortString() + " from GeoNetwork");
         }
         else {
@@ -177,16 +176,16 @@ public class WxsHarvesterLocalServiceImpl extends WxsHarvesterLocalServiceBaseIm
         //
         //System.out.println("adding harvester to GeoNetwork");
         GeoNetworkConnector geoNetworkConnector = new GeoNetworkConnector();
-        GeoNetworkHarvesterResponse geoNetworkHarvesterResponse = geoNetworkConnector.addHarvester(wxsHarvester);
+        GeoNetworkWxSHarvesterResponse geoNetworkHarvesterResponse = geoNetworkConnector.addWxSHarvester(wxsHarvester);
         wxsHarvester = geoNetworkHarvesterResponse.getWxsHarvester();
-        if(wxsHarvester.getStatus().equals(WxSHarvesterStatus.GEONETWORK_INSERT_FAILURE.name())) {
+        if(wxsHarvester.getStatus().equals(HarvesterStatus.GEONETWORK_INSERT_FAILURE.name())) {
             System.out.println("ERROR adding harvester " + wxsHarvester.toShortString() + " to GeoNetwork, status: " + wxsHarvester.getStatus());
             wxsHarvester.setSavedToGeoNetwork(false);
         }
         else {
             //System.out.println("succesfully added harvester " + wxsHarvester.toShortString() + " to GeoNetwork");
             wxsHarvester.setSavedToGeoNetwork(true);
-            wxsHarvester.setStatus(WxSHarvesterStatus.NEVER_RUN.name());
+            wxsHarvester.setStatus(HarvesterStatus.NEVER_RUN.name());
         }
 
         //

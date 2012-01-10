@@ -2,6 +2,7 @@ package nl.wur.alterra.cgi.ace.harvester;
 
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
+import nl.wur.alterra.cgi.ace.model.CSWHarvester;
 import nl.wur.alterra.cgi.ace.model.WxsHarvester;
 import nl.wur.alterra.cgi.ace.portlet.CustomPropertiesNotInitializedException;
 
@@ -20,8 +21,13 @@ import java.util.concurrent.TimeoutException;
 public class HarvesterThread implements RunnableFuture {
 
     private WxsHarvester wxsHarvester;
+    private CSWHarvester cswHarvester;
+
     public HarvesterThread(WxsHarvester wxsHarvester) {
         this.wxsHarvester = wxsHarvester;
+    }
+    public HarvesterThread(CSWHarvester cswHarvester) {
+        this.cswHarvester = cswHarvester;
     }
 
     Semaphore ready = new Semaphore(0);

@@ -137,4 +137,15 @@ public class AceItemLocalServiceImpl extends AceItemLocalServiceBaseImpl {
     public List<AceItem> getAceItemsByWxsharvesterId(long wxsHarvesterId) throws SystemException {
         return aceItemPersistence.findByWxsharvesterId(wxsHarvesterId);
     }
+
+    /**
+     * Retrieves aceitems by nas id, which contains the ids of the cswharvester that created the aceitems.
+     * @author heikki doeleman
+     * @param cswHarvesterId
+     * @return
+     * @throws SystemException
+     */
+    public List<AceItem> getAceItemsByCSWharvesterId(long cswHarvesterId) throws SystemException {
+        return aceItemPersistence.findByCSWharvesterId((cswHarvesterId));
+    }
 }

@@ -41,10 +41,10 @@ import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
 
 import com.liferay.portlet.asset.service.persistence.AssetEntryPersistence;
 
-import nl.wur.alterra.cgi.ace.NoSuchWxsHarvesterException;
-import nl.wur.alterra.cgi.ace.model.WxsHarvester;
-import nl.wur.alterra.cgi.ace.model.impl.WxsHarvesterImpl;
-import nl.wur.alterra.cgi.ace.model.impl.WxsHarvesterModelImpl;
+import nl.wur.alterra.cgi.ace.NoSuchCSWHarvesterException;
+import nl.wur.alterra.cgi.ace.model.CSWHarvester;
+import nl.wur.alterra.cgi.ace.model.impl.CSWHarvesterImpl;
+import nl.wur.alterra.cgi.ace.model.impl.CSWHarvesterModelImpl;
 
 import java.io.Serializable;
 
@@ -53,10 +53,10 @@ import java.util.Collections;
 import java.util.List;
 
 /**
- * The persistence implementation for the wxs harvester service.
+ * The persistence implementation for the c s w harvester service.
  *
  * <p>
- * Never modify or reference this class directly. Always use {@link WxsHarvesterUtil} to access the wxs harvester persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this class.
+ * Never modify or reference this class directly. Always use {@link CSWHarvesterUtil} to access the c s w harvester persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this class.
  * </p>
  *
  * <p>
@@ -64,17 +64,17 @@ import java.util.List;
  * </p>
  *
  * @author groot052
- * @see WxsHarvesterPersistence
- * @see WxsHarvesterUtil
+ * @see CSWHarvesterPersistence
+ * @see CSWHarvesterUtil
  * @generated
  */
-public class WxsHarvesterPersistenceImpl extends BasePersistenceImpl<WxsHarvester>
-	implements WxsHarvesterPersistence {
-	public static final String FINDER_CLASS_NAME_ENTITY = WxsHarvesterImpl.class.getName();
+public class CSWHarvesterPersistenceImpl extends BasePersistenceImpl<CSWHarvester>
+	implements CSWHarvesterPersistence {
+	public static final String FINDER_CLASS_NAME_ENTITY = CSWHarvesterImpl.class.getName();
 	public static final String FINDER_CLASS_NAME_LIST = FINDER_CLASS_NAME_ENTITY +
 		".List";
-	public static final FinderPath FINDER_PATH_FIND_BY_GROUPID = new FinderPath(WxsHarvesterModelImpl.ENTITY_CACHE_ENABLED,
-			WxsHarvesterModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
+	public static final FinderPath FINDER_PATH_FIND_BY_GROUPID = new FinderPath(CSWHarvesterModelImpl.ENTITY_CACHE_ENABLED,
+			CSWHarvesterModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
 			"findByGroupId",
 			new String[] {
 				Long.class.getName(),
@@ -82,127 +82,127 @@ public class WxsHarvesterPersistenceImpl extends BasePersistenceImpl<WxsHarveste
 			"java.lang.Integer", "java.lang.Integer",
 				"com.liferay.portal.kernel.util.OrderByComparator"
 			});
-	public static final FinderPath FINDER_PATH_COUNT_BY_GROUPID = new FinderPath(WxsHarvesterModelImpl.ENTITY_CACHE_ENABLED,
-			WxsHarvesterModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
+	public static final FinderPath FINDER_PATH_COUNT_BY_GROUPID = new FinderPath(CSWHarvesterModelImpl.ENTITY_CACHE_ENABLED,
+			CSWHarvesterModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
 			"countByGroupId", new String[] { Long.class.getName() });
-	public static final FinderPath FINDER_PATH_FIND_ALL = new FinderPath(WxsHarvesterModelImpl.ENTITY_CACHE_ENABLED,
-			WxsHarvesterModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
+	public static final FinderPath FINDER_PATH_FIND_ALL = new FinderPath(CSWHarvesterModelImpl.ENTITY_CACHE_ENABLED,
+			CSWHarvesterModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
 			"findAll", new String[0]);
-	public static final FinderPath FINDER_PATH_COUNT_ALL = new FinderPath(WxsHarvesterModelImpl.ENTITY_CACHE_ENABLED,
-			WxsHarvesterModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
+	public static final FinderPath FINDER_PATH_COUNT_ALL = new FinderPath(CSWHarvesterModelImpl.ENTITY_CACHE_ENABLED,
+			CSWHarvesterModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
 			"countAll", new String[0]);
 
 	/**
-	 * Caches the wxs harvester in the entity cache if it is enabled.
+	 * Caches the c s w harvester in the entity cache if it is enabled.
 	 *
-	 * @param wxsHarvester the wxs harvester to cache
+	 * @param cswHarvester the c s w harvester to cache
 	 */
-	public void cacheResult(WxsHarvester wxsHarvester) {
-		EntityCacheUtil.putResult(WxsHarvesterModelImpl.ENTITY_CACHE_ENABLED,
-			WxsHarvesterImpl.class, wxsHarvester.getPrimaryKey(), wxsHarvester);
+	public void cacheResult(CSWHarvester cswHarvester) {
+		EntityCacheUtil.putResult(CSWHarvesterModelImpl.ENTITY_CACHE_ENABLED,
+			CSWHarvesterImpl.class, cswHarvester.getPrimaryKey(), cswHarvester);
 	}
 
 	/**
-	 * Caches the wxs harvesters in the entity cache if it is enabled.
+	 * Caches the c s w harvesters in the entity cache if it is enabled.
 	 *
-	 * @param wxsHarvesters the wxs harvesters to cache
+	 * @param cswHarvesters the c s w harvesters to cache
 	 */
-	public void cacheResult(List<WxsHarvester> wxsHarvesters) {
-		for (WxsHarvester wxsHarvester : wxsHarvesters) {
+	public void cacheResult(List<CSWHarvester> cswHarvesters) {
+		for (CSWHarvester cswHarvester : cswHarvesters) {
 			if (EntityCacheUtil.getResult(
-						WxsHarvesterModelImpl.ENTITY_CACHE_ENABLED,
-						WxsHarvesterImpl.class, wxsHarvester.getPrimaryKey(),
+						CSWHarvesterModelImpl.ENTITY_CACHE_ENABLED,
+						CSWHarvesterImpl.class, cswHarvester.getPrimaryKey(),
 						this) == null) {
-				cacheResult(wxsHarvester);
+				cacheResult(cswHarvester);
 			}
 		}
 	}
 
 	/**
-	 * Clears the cache for all wxs harvesters.
+	 * Clears the cache for all c s w harvesters.
 	 *
 	 * <p>
 	 * The {@link com.liferay.portal.kernel.dao.orm.EntityCache} and {@link com.liferay.portal.kernel.dao.orm.FinderCache} are both cleared by this method.
 	 * </p>
 	 */
 	public void clearCache() {
-		CacheRegistryUtil.clear(WxsHarvesterImpl.class.getName());
-		EntityCacheUtil.clearCache(WxsHarvesterImpl.class.getName());
+		CacheRegistryUtil.clear(CSWHarvesterImpl.class.getName());
+		EntityCacheUtil.clearCache(CSWHarvesterImpl.class.getName());
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_ENTITY);
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
 	}
 
 	/**
-	 * Clears the cache for the wxs harvester.
+	 * Clears the cache for the c s w harvester.
 	 *
 	 * <p>
 	 * The {@link com.liferay.portal.kernel.dao.orm.EntityCache} and {@link com.liferay.portal.kernel.dao.orm.FinderCache} are both cleared by this method.
 	 * </p>
 	 */
-	public void clearCache(WxsHarvester wxsHarvester) {
-		EntityCacheUtil.removeResult(WxsHarvesterModelImpl.ENTITY_CACHE_ENABLED,
-			WxsHarvesterImpl.class, wxsHarvester.getPrimaryKey());
+	public void clearCache(CSWHarvester cswHarvester) {
+		EntityCacheUtil.removeResult(CSWHarvesterModelImpl.ENTITY_CACHE_ENABLED,
+			CSWHarvesterImpl.class, cswHarvester.getPrimaryKey());
 	}
 
 	/**
-	 * Creates a new wxs harvester with the primary key. Does not add the wxs harvester to the database.
+	 * Creates a new c s w harvester with the primary key. Does not add the c s w harvester to the database.
 	 *
-	 * @param wxsharvesterid the primary key for the new wxs harvester
-	 * @return the new wxs harvester
+	 * @param cswharvesterid the primary key for the new c s w harvester
+	 * @return the new c s w harvester
 	 */
-	public WxsHarvester create(long wxsharvesterid) {
-		WxsHarvester wxsHarvester = new WxsHarvesterImpl();
+	public CSWHarvester create(long cswharvesterid) {
+		CSWHarvester cswHarvester = new CSWHarvesterImpl();
 
-		wxsHarvester.setNew(true);
-		wxsHarvester.setPrimaryKey(wxsharvesterid);
+		cswHarvester.setNew(true);
+		cswHarvester.setPrimaryKey(cswharvesterid);
 
-		return wxsHarvester;
+		return cswHarvester;
 	}
 
 	/**
-	 * Removes the wxs harvester with the primary key from the database. Also notifies the appropriate model listeners.
+	 * Removes the c s w harvester with the primary key from the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param primaryKey the primary key of the wxs harvester to remove
-	 * @return the wxs harvester that was removed
-	 * @throws com.liferay.portal.NoSuchModelException if a wxs harvester with the primary key could not be found
+	 * @param primaryKey the primary key of the c s w harvester to remove
+	 * @return the c s w harvester that was removed
+	 * @throws com.liferay.portal.NoSuchModelException if a c s w harvester with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
-	public WxsHarvester remove(Serializable primaryKey)
+	public CSWHarvester remove(Serializable primaryKey)
 		throws NoSuchModelException, SystemException {
 		return remove(((Long)primaryKey).longValue());
 	}
 
 	/**
-	 * Removes the wxs harvester with the primary key from the database. Also notifies the appropriate model listeners.
+	 * Removes the c s w harvester with the primary key from the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param wxsharvesterid the primary key of the wxs harvester to remove
-	 * @return the wxs harvester that was removed
-	 * @throws nl.wur.alterra.cgi.ace.NoSuchWxsHarvesterException if a wxs harvester with the primary key could not be found
+	 * @param cswharvesterid the primary key of the c s w harvester to remove
+	 * @return the c s w harvester that was removed
+	 * @throws nl.wur.alterra.cgi.ace.NoSuchCSWHarvesterException if a c s w harvester with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
-	public WxsHarvester remove(long wxsharvesterid)
-		throws NoSuchWxsHarvesterException, SystemException {
+	public CSWHarvester remove(long cswharvesterid)
+		throws NoSuchCSWHarvesterException, SystemException {
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			WxsHarvester wxsHarvester = (WxsHarvester)session.get(WxsHarvesterImpl.class,
-					new Long(wxsharvesterid));
+			CSWHarvester cswHarvester = (CSWHarvester)session.get(CSWHarvesterImpl.class,
+					new Long(cswharvesterid));
 
-			if (wxsHarvester == null) {
+			if (cswHarvester == null) {
 				if (_log.isWarnEnabled()) {
 					_log.warn(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY +
-						wxsharvesterid);
+						cswharvesterid);
 				}
 
-				throw new NoSuchWxsHarvesterException(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY +
-					wxsharvesterid);
+				throw new NoSuchCSWHarvesterException(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY +
+					cswharvesterid);
 			}
 
-			return remove(wxsHarvester);
+			return remove(cswHarvester);
 		}
-		catch (NoSuchWxsHarvesterException nsee) {
+		catch (NoSuchCSWHarvesterException nsee) {
 			throw nsee;
 		}
 		catch (Exception e) {
@@ -213,25 +213,25 @@ public class WxsHarvesterPersistenceImpl extends BasePersistenceImpl<WxsHarveste
 		}
 	}
 
-	protected WxsHarvester removeImpl(WxsHarvester wxsHarvester)
+	protected CSWHarvester removeImpl(CSWHarvester cswHarvester)
 		throws SystemException {
-		wxsHarvester = toUnwrappedModel(wxsHarvester);
+		cswHarvester = toUnwrappedModel(cswHarvester);
 
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			if (wxsHarvester.isCachedModel() || BatchSessionUtil.isEnabled()) {
-				Object staleObject = session.get(WxsHarvesterImpl.class,
-						wxsHarvester.getPrimaryKeyObj());
+			if (cswHarvester.isCachedModel() || BatchSessionUtil.isEnabled()) {
+				Object staleObject = session.get(CSWHarvesterImpl.class,
+						cswHarvester.getPrimaryKeyObj());
 
 				if (staleObject != null) {
 					session.evict(staleObject);
 				}
 			}
 
-			session.delete(wxsHarvester);
+			session.delete(cswHarvester);
 
 			session.flush();
 		}
@@ -244,25 +244,25 @@ public class WxsHarvesterPersistenceImpl extends BasePersistenceImpl<WxsHarveste
 
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
 
-		EntityCacheUtil.removeResult(WxsHarvesterModelImpl.ENTITY_CACHE_ENABLED,
-			WxsHarvesterImpl.class, wxsHarvester.getPrimaryKey());
+		EntityCacheUtil.removeResult(CSWHarvesterModelImpl.ENTITY_CACHE_ENABLED,
+			CSWHarvesterImpl.class, cswHarvester.getPrimaryKey());
 
-		return wxsHarvester;
+		return cswHarvester;
 	}
 
-	public WxsHarvester updateImpl(
-		nl.wur.alterra.cgi.ace.model.WxsHarvester wxsHarvester, boolean merge)
+	public CSWHarvester updateImpl(
+		nl.wur.alterra.cgi.ace.model.CSWHarvester cswHarvester, boolean merge)
 		throws SystemException {
-		wxsHarvester = toUnwrappedModel(wxsHarvester);
+		cswHarvester = toUnwrappedModel(cswHarvester);
 
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			BatchSessionUtil.update(session, wxsHarvester, merge);
+			BatchSessionUtil.update(session, cswHarvester, merge);
 
-			wxsHarvester.setNew(false);
+			cswHarvester.setNew(false);
 		}
 		catch (Exception e) {
 			throw processException(e);
@@ -273,168 +273,171 @@ public class WxsHarvesterPersistenceImpl extends BasePersistenceImpl<WxsHarveste
 
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
 
-		EntityCacheUtil.putResult(WxsHarvesterModelImpl.ENTITY_CACHE_ENABLED,
-			WxsHarvesterImpl.class, wxsHarvester.getPrimaryKey(), wxsHarvester);
+		EntityCacheUtil.putResult(CSWHarvesterModelImpl.ENTITY_CACHE_ENABLED,
+			CSWHarvesterImpl.class, cswHarvester.getPrimaryKey(), cswHarvester);
 
-		return wxsHarvester;
+		return cswHarvester;
 	}
 
-	protected WxsHarvester toUnwrappedModel(WxsHarvester wxsHarvester) {
-		if (wxsHarvester instanceof WxsHarvesterImpl) {
-			return wxsHarvester;
+	protected CSWHarvester toUnwrappedModel(CSWHarvester cswHarvester) {
+		if (cswHarvester instanceof CSWHarvesterImpl) {
+			return cswHarvester;
 		}
 
-		WxsHarvesterImpl wxsHarvesterImpl = new WxsHarvesterImpl();
+		CSWHarvesterImpl cswHarvesterImpl = new CSWHarvesterImpl();
 
-		wxsHarvesterImpl.setNew(wxsHarvester.isNew());
-		wxsHarvesterImpl.setPrimaryKey(wxsHarvester.getPrimaryKey());
+		cswHarvesterImpl.setNew(cswHarvester.isNew());
+		cswHarvesterImpl.setPrimaryKey(cswHarvester.getPrimaryKey());
 
-		wxsHarvesterImpl.setWxsharvesterid(wxsHarvester.getWxsharvesterid());
-		wxsHarvesterImpl.setName(wxsHarvester.getName());
-		wxsHarvesterImpl.setUrl(wxsHarvester.getUrl());
-		wxsHarvesterImpl.setOgctype(wxsHarvester.getOgctype());
-		wxsHarvesterImpl.setEvery(wxsHarvester.getEvery());
-		wxsHarvesterImpl.setTopic(wxsHarvester.getTopic());
-		wxsHarvesterImpl.setStatus(wxsHarvester.getStatus());
-		wxsHarvesterImpl.setSavedToGeoNetwork(wxsHarvester.isSavedToGeoNetwork());
-		wxsHarvesterImpl.setGeonetworkId(wxsHarvester.getGeonetworkId());
-		wxsHarvesterImpl.setGeonetworkUUID(wxsHarvester.getGeonetworkUUID());
-		wxsHarvesterImpl.setCompanyId(wxsHarvester.getCompanyId());
-		wxsHarvesterImpl.setGroupId(wxsHarvester.getGroupId());
+		cswHarvesterImpl.setCswharvesterid(cswHarvester.getCswharvesterid());
+		cswHarvesterImpl.setName(cswHarvester.getName());
+		cswHarvesterImpl.setUrl(cswHarvester.getUrl());
+		cswHarvesterImpl.setFreetext(cswHarvester.getFreetext());
+		cswHarvesterImpl.setTitle(cswHarvester.getTitle());
+		cswHarvesterImpl.setAbstrakt(cswHarvester.getAbstrakt());
+		cswHarvesterImpl.setSubject(cswHarvester.getSubject());
+		cswHarvesterImpl.setEvery(cswHarvester.getEvery());
+		cswHarvesterImpl.setTopic(cswHarvester.getTopic());
+		cswHarvesterImpl.setStatus(cswHarvester.getStatus());
+		cswHarvesterImpl.setSavedToGeoNetwork(cswHarvester.isSavedToGeoNetwork());
+		cswHarvesterImpl.setGeonetworkId(cswHarvester.getGeonetworkId());
+		cswHarvesterImpl.setGeonetworkUUID(cswHarvester.getGeonetworkUUID());
+		cswHarvesterImpl.setCompanyId(cswHarvester.getCompanyId());
+		cswHarvesterImpl.setGroupId(cswHarvester.getGroupId());
 
-		return wxsHarvesterImpl;
+		return cswHarvesterImpl;
 	}
 
 	/**
-	 * Finds the wxs harvester with the primary key or throws a {@link com.liferay.portal.NoSuchModelException} if it could not be found.
+	 * Finds the c s w harvester with the primary key or throws a {@link com.liferay.portal.NoSuchModelException} if it could not be found.
 	 *
-	 * @param primaryKey the primary key of the wxs harvester to find
-	 * @return the wxs harvester
-	 * @throws com.liferay.portal.NoSuchModelException if a wxs harvester with the primary key could not be found
+	 * @param primaryKey the primary key of the c s w harvester to find
+	 * @return the c s w harvester
+	 * @throws com.liferay.portal.NoSuchModelException if a c s w harvester with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
-	public WxsHarvester findByPrimaryKey(Serializable primaryKey)
+	public CSWHarvester findByPrimaryKey(Serializable primaryKey)
 		throws NoSuchModelException, SystemException {
 		return findByPrimaryKey(((Long)primaryKey).longValue());
 	}
 
 	/**
-	 * Finds the wxs harvester with the primary key or throws a {@link nl.wur.alterra.cgi.ace.NoSuchWxsHarvesterException} if it could not be found.
+	 * Finds the c s w harvester with the primary key or throws a {@link nl.wur.alterra.cgi.ace.NoSuchCSWHarvesterException} if it could not be found.
 	 *
-	 * @param wxsharvesterid the primary key of the wxs harvester to find
-	 * @return the wxs harvester
-	 * @throws nl.wur.alterra.cgi.ace.NoSuchWxsHarvesterException if a wxs harvester with the primary key could not be found
+	 * @param cswharvesterid the primary key of the c s w harvester to find
+	 * @return the c s w harvester
+	 * @throws nl.wur.alterra.cgi.ace.NoSuchCSWHarvesterException if a c s w harvester with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
-	public WxsHarvester findByPrimaryKey(long wxsharvesterid)
-		throws NoSuchWxsHarvesterException, SystemException {
-		WxsHarvester wxsHarvester = fetchByPrimaryKey(wxsharvesterid);
+	public CSWHarvester findByPrimaryKey(long cswharvesterid)
+		throws NoSuchCSWHarvesterException, SystemException {
+		CSWHarvester cswHarvester = fetchByPrimaryKey(cswharvesterid);
 
-		if (wxsHarvester == null) {
+		if (cswHarvester == null) {
 			if (_log.isWarnEnabled()) {
-				_log.warn(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY + wxsharvesterid);
+				_log.warn(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY + cswharvesterid);
 			}
 
-			throw new NoSuchWxsHarvesterException(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY +
-				wxsharvesterid);
+			throw new NoSuchCSWHarvesterException(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY +
+				cswharvesterid);
 		}
 
-		return wxsHarvester;
+		return cswHarvester;
 	}
 
 	/**
-	 * Finds the wxs harvester with the primary key or returns <code>null</code> if it could not be found.
+	 * Finds the c s w harvester with the primary key or returns <code>null</code> if it could not be found.
 	 *
-	 * @param primaryKey the primary key of the wxs harvester to find
-	 * @return the wxs harvester, or <code>null</code> if a wxs harvester with the primary key could not be found
+	 * @param primaryKey the primary key of the c s w harvester to find
+	 * @return the c s w harvester, or <code>null</code> if a c s w harvester with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
-	public WxsHarvester fetchByPrimaryKey(Serializable primaryKey)
+	public CSWHarvester fetchByPrimaryKey(Serializable primaryKey)
 		throws SystemException {
 		return fetchByPrimaryKey(((Long)primaryKey).longValue());
 	}
 
 	/**
-	 * Finds the wxs harvester with the primary key or returns <code>null</code> if it could not be found.
+	 * Finds the c s w harvester with the primary key or returns <code>null</code> if it could not be found.
 	 *
-	 * @param wxsharvesterid the primary key of the wxs harvester to find
-	 * @return the wxs harvester, or <code>null</code> if a wxs harvester with the primary key could not be found
+	 * @param cswharvesterid the primary key of the c s w harvester to find
+	 * @return the c s w harvester, or <code>null</code> if a c s w harvester with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
-	public WxsHarvester fetchByPrimaryKey(long wxsharvesterid)
+	public CSWHarvester fetchByPrimaryKey(long cswharvesterid)
 		throws SystemException {
-		WxsHarvester wxsHarvester = (WxsHarvester)EntityCacheUtil.getResult(WxsHarvesterModelImpl.ENTITY_CACHE_ENABLED,
-				WxsHarvesterImpl.class, wxsharvesterid, this);
+		CSWHarvester cswHarvester = (CSWHarvester)EntityCacheUtil.getResult(CSWHarvesterModelImpl.ENTITY_CACHE_ENABLED,
+				CSWHarvesterImpl.class, cswharvesterid, this);
 
-		if (wxsHarvester == null) {
+		if (cswHarvester == null) {
 			Session session = null;
 
 			try {
 				session = openSession();
 
-				wxsHarvester = (WxsHarvester)session.get(WxsHarvesterImpl.class,
-						new Long(wxsharvesterid));
+				cswHarvester = (CSWHarvester)session.get(CSWHarvesterImpl.class,
+						new Long(cswharvesterid));
 			}
 			catch (Exception e) {
 				throw processException(e);
 			}
 			finally {
-				if (wxsHarvester != null) {
-					cacheResult(wxsHarvester);
+				if (cswHarvester != null) {
+					cacheResult(cswHarvester);
 				}
 
 				closeSession(session);
 			}
 		}
 
-		return wxsHarvester;
+		return cswHarvester;
 	}
 
 	/**
-	 * Finds all the wxs harvesters where groupId = &#63;.
+	 * Finds all the c s w harvesters where groupId = &#63;.
 	 *
 	 * @param groupId the group id to search with
-	 * @return the matching wxs harvesters
+	 * @return the matching c s w harvesters
 	 * @throws SystemException if a system exception occurred
 	 */
-	public List<WxsHarvester> findByGroupId(long groupId)
+	public List<CSWHarvester> findByGroupId(long groupId)
 		throws SystemException {
 		return findByGroupId(groupId, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
 	/**
-	 * Finds a range of all the wxs harvesters where groupId = &#63;.
+	 * Finds a range of all the c s w harvesters where groupId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
 	 * @param groupId the group id to search with
-	 * @param start the lower bound of the range of wxs harvesters to return
-	 * @param end the upper bound of the range of wxs harvesters to return (not inclusive)
-	 * @return the range of matching wxs harvesters
+	 * @param start the lower bound of the range of c s w harvesters to return
+	 * @param end the upper bound of the range of c s w harvesters to return (not inclusive)
+	 * @return the range of matching c s w harvesters
 	 * @throws SystemException if a system exception occurred
 	 */
-	public List<WxsHarvester> findByGroupId(long groupId, int start, int end)
+	public List<CSWHarvester> findByGroupId(long groupId, int start, int end)
 		throws SystemException {
 		return findByGroupId(groupId, start, end, null);
 	}
 
 	/**
-	 * Finds an ordered range of all the wxs harvesters where groupId = &#63;.
+	 * Finds an ordered range of all the c s w harvesters where groupId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
 	 * @param groupId the group id to search with
-	 * @param start the lower bound of the range of wxs harvesters to return
-	 * @param end the upper bound of the range of wxs harvesters to return (not inclusive)
+	 * @param start the lower bound of the range of c s w harvesters to return
+	 * @param end the upper bound of the range of c s w harvesters to return (not inclusive)
 	 * @param orderByComparator the comparator to order the results by
-	 * @return the ordered range of matching wxs harvesters
+	 * @return the ordered range of matching c s w harvesters
 	 * @throws SystemException if a system exception occurred
 	 */
-	public List<WxsHarvester> findByGroupId(long groupId, int start, int end,
+	public List<CSWHarvester> findByGroupId(long groupId, int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
 				groupId,
@@ -443,7 +446,7 @@ public class WxsHarvesterPersistenceImpl extends BasePersistenceImpl<WxsHarveste
 				String.valueOf(orderByComparator)
 			};
 
-		List<WxsHarvester> list = (List<WxsHarvester>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_GROUPID,
+		List<CSWHarvester> list = (List<CSWHarvester>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_GROUPID,
 				finderArgs, this);
 
 		if (list == null) {
@@ -462,7 +465,7 @@ public class WxsHarvesterPersistenceImpl extends BasePersistenceImpl<WxsHarveste
 					query = new StringBundler(3);
 				}
 
-				query.append(_SQL_SELECT_WXSHARVESTER_WHERE);
+				query.append(_SQL_SELECT_CSWHARVESTER_WHERE);
 
 				query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
 
@@ -472,7 +475,7 @@ public class WxsHarvesterPersistenceImpl extends BasePersistenceImpl<WxsHarveste
 				}
 
 				else {
-					query.append(WxsHarvesterModelImpl.ORDER_BY_JPQL);
+					query.append(CSWHarvesterModelImpl.ORDER_BY_JPQL);
 				}
 
 				String sql = query.toString();
@@ -483,7 +486,7 @@ public class WxsHarvesterPersistenceImpl extends BasePersistenceImpl<WxsHarveste
 
 				qPos.add(groupId);
 
-				list = (List<WxsHarvester>)QueryUtil.list(q, getDialect(),
+				list = (List<CSWHarvester>)QueryUtil.list(q, getDialect(),
 						start, end);
 			}
 			catch (Exception e) {
@@ -491,7 +494,7 @@ public class WxsHarvesterPersistenceImpl extends BasePersistenceImpl<WxsHarveste
 			}
 			finally {
 				if (list == null) {
-					list = new ArrayList<WxsHarvester>();
+					list = new ArrayList<CSWHarvester>();
 				}
 
 				cacheResult(list);
@@ -507,7 +510,7 @@ public class WxsHarvesterPersistenceImpl extends BasePersistenceImpl<WxsHarveste
 	}
 
 	/**
-	 * Finds the first wxs harvester in the ordered set where groupId = &#63;.
+	 * Finds the first c s w harvester in the ordered set where groupId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
@@ -515,14 +518,14 @@ public class WxsHarvesterPersistenceImpl extends BasePersistenceImpl<WxsHarveste
 	 *
 	 * @param groupId the group id to search with
 	 * @param orderByComparator the comparator to order the set by
-	 * @return the first matching wxs harvester
-	 * @throws nl.wur.alterra.cgi.ace.NoSuchWxsHarvesterException if a matching wxs harvester could not be found
+	 * @return the first matching c s w harvester
+	 * @throws nl.wur.alterra.cgi.ace.NoSuchCSWHarvesterException if a matching c s w harvester could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
-	public WxsHarvester findByGroupId_First(long groupId,
+	public CSWHarvester findByGroupId_First(long groupId,
 		OrderByComparator orderByComparator)
-		throws NoSuchWxsHarvesterException, SystemException {
-		List<WxsHarvester> list = findByGroupId(groupId, 0, 1, orderByComparator);
+		throws NoSuchCSWHarvesterException, SystemException {
+		List<CSWHarvester> list = findByGroupId(groupId, 0, 1, orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(4);
@@ -534,7 +537,7 @@ public class WxsHarvesterPersistenceImpl extends BasePersistenceImpl<WxsHarveste
 
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
 
-			throw new NoSuchWxsHarvesterException(msg.toString());
+			throw new NoSuchCSWHarvesterException(msg.toString());
 		}
 		else {
 			return list.get(0);
@@ -542,7 +545,7 @@ public class WxsHarvesterPersistenceImpl extends BasePersistenceImpl<WxsHarveste
 	}
 
 	/**
-	 * Finds the last wxs harvester in the ordered set where groupId = &#63;.
+	 * Finds the last c s w harvester in the ordered set where groupId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
@@ -550,16 +553,16 @@ public class WxsHarvesterPersistenceImpl extends BasePersistenceImpl<WxsHarveste
 	 *
 	 * @param groupId the group id to search with
 	 * @param orderByComparator the comparator to order the set by
-	 * @return the last matching wxs harvester
-	 * @throws nl.wur.alterra.cgi.ace.NoSuchWxsHarvesterException if a matching wxs harvester could not be found
+	 * @return the last matching c s w harvester
+	 * @throws nl.wur.alterra.cgi.ace.NoSuchCSWHarvesterException if a matching c s w harvester could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
-	public WxsHarvester findByGroupId_Last(long groupId,
+	public CSWHarvester findByGroupId_Last(long groupId,
 		OrderByComparator orderByComparator)
-		throws NoSuchWxsHarvesterException, SystemException {
+		throws NoSuchCSWHarvesterException, SystemException {
 		int count = countByGroupId(groupId);
 
-		List<WxsHarvester> list = findByGroupId(groupId, count - 1, count,
+		List<CSWHarvester> list = findByGroupId(groupId, count - 1, count,
 				orderByComparator);
 
 		if (list.isEmpty()) {
@@ -572,7 +575,7 @@ public class WxsHarvesterPersistenceImpl extends BasePersistenceImpl<WxsHarveste
 
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
 
-			throw new NoSuchWxsHarvesterException(msg.toString());
+			throw new NoSuchCSWHarvesterException(msg.toString());
 		}
 		else {
 			return list.get(0);
@@ -580,37 +583,37 @@ public class WxsHarvesterPersistenceImpl extends BasePersistenceImpl<WxsHarveste
 	}
 
 	/**
-	 * Finds the wxs harvesters before and after the current wxs harvester in the ordered set where groupId = &#63;.
+	 * Finds the c s w harvesters before and after the current c s w harvester in the ordered set where groupId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param wxsharvesterid the primary key of the current wxs harvester
+	 * @param cswharvesterid the primary key of the current c s w harvester
 	 * @param groupId the group id to search with
 	 * @param orderByComparator the comparator to order the set by
-	 * @return the previous, current, and next wxs harvester
-	 * @throws nl.wur.alterra.cgi.ace.NoSuchWxsHarvesterException if a wxs harvester with the primary key could not be found
+	 * @return the previous, current, and next c s w harvester
+	 * @throws nl.wur.alterra.cgi.ace.NoSuchCSWHarvesterException if a c s w harvester with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
-	public WxsHarvester[] findByGroupId_PrevAndNext(long wxsharvesterid,
+	public CSWHarvester[] findByGroupId_PrevAndNext(long cswharvesterid,
 		long groupId, OrderByComparator orderByComparator)
-		throws NoSuchWxsHarvesterException, SystemException {
-		WxsHarvester wxsHarvester = findByPrimaryKey(wxsharvesterid);
+		throws NoSuchCSWHarvesterException, SystemException {
+		CSWHarvester cswHarvester = findByPrimaryKey(cswharvesterid);
 
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			WxsHarvester[] array = new WxsHarvesterImpl[3];
+			CSWHarvester[] array = new CSWHarvesterImpl[3];
 
-			array[0] = getByGroupId_PrevAndNext(session, wxsHarvester, groupId,
+			array[0] = getByGroupId_PrevAndNext(session, cswHarvester, groupId,
 					orderByComparator, true);
 
-			array[1] = wxsHarvester;
+			array[1] = cswHarvester;
 
-			array[2] = getByGroupId_PrevAndNext(session, wxsHarvester, groupId,
+			array[2] = getByGroupId_PrevAndNext(session, cswHarvester, groupId,
 					orderByComparator, false);
 
 			return array;
@@ -623,8 +626,8 @@ public class WxsHarvesterPersistenceImpl extends BasePersistenceImpl<WxsHarveste
 		}
 	}
 
-	protected WxsHarvester getByGroupId_PrevAndNext(Session session,
-		WxsHarvester wxsHarvester, long groupId,
+	protected CSWHarvester getByGroupId_PrevAndNext(Session session,
+		CSWHarvester cswHarvester, long groupId,
 		OrderByComparator orderByComparator, boolean previous) {
 		StringBundler query = null;
 
@@ -636,7 +639,7 @@ public class WxsHarvesterPersistenceImpl extends BasePersistenceImpl<WxsHarveste
 			query = new StringBundler(3);
 		}
 
-		query.append(_SQL_SELECT_WXSHARVESTER_WHERE);
+		query.append(_SQL_SELECT_CSWHARVESTER_WHERE);
 
 		query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
 
@@ -695,7 +698,7 @@ public class WxsHarvesterPersistenceImpl extends BasePersistenceImpl<WxsHarveste
 		}
 
 		else {
-			query.append(WxsHarvesterModelImpl.ORDER_BY_JPQL);
+			query.append(CSWHarvesterModelImpl.ORDER_BY_JPQL);
 		}
 
 		String sql = query.toString();
@@ -710,14 +713,14 @@ public class WxsHarvesterPersistenceImpl extends BasePersistenceImpl<WxsHarveste
 		qPos.add(groupId);
 
 		if (orderByComparator != null) {
-			Object[] values = orderByComparator.getOrderByValues(wxsHarvester);
+			Object[] values = orderByComparator.getOrderByValues(cswHarvester);
 
 			for (Object value : values) {
 				qPos.add(value);
 			}
 		}
 
-		List<WxsHarvester> list = q.list();
+		List<CSWHarvester> list = q.list();
 
 		if (list.size() == 2) {
 			return list.get(1);
@@ -728,53 +731,53 @@ public class WxsHarvesterPersistenceImpl extends BasePersistenceImpl<WxsHarveste
 	}
 
 	/**
-	 * Finds all the wxs harvesters.
+	 * Finds all the c s w harvesters.
 	 *
-	 * @return the wxs harvesters
+	 * @return the c s w harvesters
 	 * @throws SystemException if a system exception occurred
 	 */
-	public List<WxsHarvester> findAll() throws SystemException {
+	public List<CSWHarvester> findAll() throws SystemException {
 		return findAll(QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
 	/**
-	 * Finds a range of all the wxs harvesters.
+	 * Finds a range of all the c s w harvesters.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param start the lower bound of the range of wxs harvesters to return
-	 * @param end the upper bound of the range of wxs harvesters to return (not inclusive)
-	 * @return the range of wxs harvesters
+	 * @param start the lower bound of the range of c s w harvesters to return
+	 * @param end the upper bound of the range of c s w harvesters to return (not inclusive)
+	 * @return the range of c s w harvesters
 	 * @throws SystemException if a system exception occurred
 	 */
-	public List<WxsHarvester> findAll(int start, int end)
+	public List<CSWHarvester> findAll(int start, int end)
 		throws SystemException {
 		return findAll(start, end, null);
 	}
 
 	/**
-	 * Finds an ordered range of all the wxs harvesters.
+	 * Finds an ordered range of all the c s w harvesters.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param start the lower bound of the range of wxs harvesters to return
-	 * @param end the upper bound of the range of wxs harvesters to return (not inclusive)
+	 * @param start the lower bound of the range of c s w harvesters to return
+	 * @param end the upper bound of the range of c s w harvesters to return (not inclusive)
 	 * @param orderByComparator the comparator to order the results by
-	 * @return the ordered range of wxs harvesters
+	 * @return the ordered range of c s w harvesters
 	 * @throws SystemException if a system exception occurred
 	 */
-	public List<WxsHarvester> findAll(int start, int end,
+	public List<CSWHarvester> findAll(int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
 				String.valueOf(start), String.valueOf(end),
 				String.valueOf(orderByComparator)
 			};
 
-		List<WxsHarvester> list = (List<WxsHarvester>)FinderCacheUtil.getResult(FINDER_PATH_FIND_ALL,
+		List<CSWHarvester> list = (List<CSWHarvester>)FinderCacheUtil.getResult(FINDER_PATH_FIND_ALL,
 				finderArgs, this);
 
 		if (list == null) {
@@ -790,7 +793,7 @@ public class WxsHarvesterPersistenceImpl extends BasePersistenceImpl<WxsHarveste
 					query = new StringBundler(2 +
 							(orderByComparator.getOrderByFields().length * 3));
 
-					query.append(_SQL_SELECT_WXSHARVESTER);
+					query.append(_SQL_SELECT_CSWHARVESTER);
 
 					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
 						orderByComparator);
@@ -798,19 +801,19 @@ public class WxsHarvesterPersistenceImpl extends BasePersistenceImpl<WxsHarveste
 					sql = query.toString();
 				}
 				else {
-					sql = _SQL_SELECT_WXSHARVESTER.concat(WxsHarvesterModelImpl.ORDER_BY_JPQL);
+					sql = _SQL_SELECT_CSWHARVESTER.concat(CSWHarvesterModelImpl.ORDER_BY_JPQL);
 				}
 
 				Query q = session.createQuery(sql);
 
 				if (orderByComparator == null) {
-					list = (List<WxsHarvester>)QueryUtil.list(q, getDialect(),
+					list = (List<CSWHarvester>)QueryUtil.list(q, getDialect(),
 							start, end, false);
 
 					Collections.sort(list);
 				}
 				else {
-					list = (List<WxsHarvester>)QueryUtil.list(q, getDialect(),
+					list = (List<CSWHarvester>)QueryUtil.list(q, getDialect(),
 							start, end);
 				}
 			}
@@ -819,7 +822,7 @@ public class WxsHarvesterPersistenceImpl extends BasePersistenceImpl<WxsHarveste
 			}
 			finally {
 				if (list == null) {
-					list = new ArrayList<WxsHarvester>();
+					list = new ArrayList<CSWHarvester>();
 				}
 
 				cacheResult(list);
@@ -834,33 +837,33 @@ public class WxsHarvesterPersistenceImpl extends BasePersistenceImpl<WxsHarveste
 	}
 
 	/**
-	 * Removes all the wxs harvesters where groupId = &#63; from the database.
+	 * Removes all the c s w harvesters where groupId = &#63; from the database.
 	 *
 	 * @param groupId the group id to search with
 	 * @throws SystemException if a system exception occurred
 	 */
 	public void removeByGroupId(long groupId) throws SystemException {
-		for (WxsHarvester wxsHarvester : findByGroupId(groupId)) {
-			remove(wxsHarvester);
+		for (CSWHarvester cswHarvester : findByGroupId(groupId)) {
+			remove(cswHarvester);
 		}
 	}
 
 	/**
-	 * Removes all the wxs harvesters from the database.
+	 * Removes all the c s w harvesters from the database.
 	 *
 	 * @throws SystemException if a system exception occurred
 	 */
 	public void removeAll() throws SystemException {
-		for (WxsHarvester wxsHarvester : findAll()) {
-			remove(wxsHarvester);
+		for (CSWHarvester cswHarvester : findAll()) {
+			remove(cswHarvester);
 		}
 	}
 
 	/**
-	 * Counts all the wxs harvesters where groupId = &#63;.
+	 * Counts all the c s w harvesters where groupId = &#63;.
 	 *
 	 * @param groupId the group id to search with
-	 * @return the number of matching wxs harvesters
+	 * @return the number of matching c s w harvesters
 	 * @throws SystemException if a system exception occurred
 	 */
 	public int countByGroupId(long groupId) throws SystemException {
@@ -877,7 +880,7 @@ public class WxsHarvesterPersistenceImpl extends BasePersistenceImpl<WxsHarveste
 
 				StringBundler query = new StringBundler(2);
 
-				query.append(_SQL_COUNT_WXSHARVESTER_WHERE);
+				query.append(_SQL_COUNT_CSWHARVESTER_WHERE);
 
 				query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
 
@@ -910,9 +913,9 @@ public class WxsHarvesterPersistenceImpl extends BasePersistenceImpl<WxsHarveste
 	}
 
 	/**
-	 * Counts all the wxs harvesters.
+	 * Counts all the c s w harvesters.
 	 *
-	 * @return the number of wxs harvesters
+	 * @return the number of c s w harvesters
 	 * @throws SystemException if a system exception occurred
 	 */
 	public int countAll() throws SystemException {
@@ -927,7 +930,7 @@ public class WxsHarvesterPersistenceImpl extends BasePersistenceImpl<WxsHarveste
 			try {
 				session = openSession();
 
-				Query q = session.createQuery(_SQL_COUNT_WXSHARVESTER);
+				Query q = session.createQuery(_SQL_COUNT_CSWHARVESTER);
 
 				count = (Long)q.uniqueResult();
 			}
@@ -950,19 +953,19 @@ public class WxsHarvesterPersistenceImpl extends BasePersistenceImpl<WxsHarveste
 	}
 
 	/**
-	 * Initializes the wxs harvester persistence.
+	 * Initializes the c s w harvester persistence.
 	 */
 	public void afterPropertiesSet() {
 		String[] listenerClassNames = StringUtil.split(GetterUtil.getString(
 					com.liferay.util.service.ServiceProps.get(
-						"value.object.listener.nl.wur.alterra.cgi.ace.model.WxsHarvester")));
+						"value.object.listener.nl.wur.alterra.cgi.ace.model.CSWHarvester")));
 
 		if (listenerClassNames.length > 0) {
 			try {
-				List<ModelListener<WxsHarvester>> listenersList = new ArrayList<ModelListener<WxsHarvester>>();
+				List<ModelListener<CSWHarvester>> listenersList = new ArrayList<ModelListener<CSWHarvester>>();
 
 				for (String listenerClassName : listenerClassNames) {
-					listenersList.add((ModelListener<WxsHarvester>)InstanceFactory.newInstance(
+					listenersList.add((ModelListener<CSWHarvester>)InstanceFactory.newInstance(
 							listenerClassName));
 				}
 
@@ -986,13 +989,13 @@ public class WxsHarvesterPersistenceImpl extends BasePersistenceImpl<WxsHarveste
 	protected UserPersistence userPersistence;
 	@BeanReference(type = AssetEntryPersistence.class)
 	protected AssetEntryPersistence assetEntryPersistence;
-	private static final String _SQL_SELECT_WXSHARVESTER = "SELECT wxsHarvester FROM WxsHarvester wxsHarvester";
-	private static final String _SQL_SELECT_WXSHARVESTER_WHERE = "SELECT wxsHarvester FROM WxsHarvester wxsHarvester WHERE ";
-	private static final String _SQL_COUNT_WXSHARVESTER = "SELECT COUNT(wxsHarvester) FROM WxsHarvester wxsHarvester";
-	private static final String _SQL_COUNT_WXSHARVESTER_WHERE = "SELECT COUNT(wxsHarvester) FROM WxsHarvester wxsHarvester WHERE ";
-	private static final String _FINDER_COLUMN_GROUPID_GROUPID_2 = "wxsHarvester.groupId = ?";
-	private static final String _ORDER_BY_ENTITY_ALIAS = "wxsHarvester.";
-	private static final String _NO_SUCH_ENTITY_WITH_PRIMARY_KEY = "No WxsHarvester exists with the primary key ";
-	private static final String _NO_SUCH_ENTITY_WITH_KEY = "No WxsHarvester exists with the key {";
-	private static Log _log = LogFactoryUtil.getLog(WxsHarvesterPersistenceImpl.class);
+	private static final String _SQL_SELECT_CSWHARVESTER = "SELECT cswHarvester FROM CSWHarvester cswHarvester";
+	private static final String _SQL_SELECT_CSWHARVESTER_WHERE = "SELECT cswHarvester FROM CSWHarvester cswHarvester WHERE ";
+	private static final String _SQL_COUNT_CSWHARVESTER = "SELECT COUNT(cswHarvester) FROM CSWHarvester cswHarvester";
+	private static final String _SQL_COUNT_CSWHARVESTER_WHERE = "SELECT COUNT(cswHarvester) FROM CSWHarvester cswHarvester WHERE ";
+	private static final String _FINDER_COLUMN_GROUPID_GROUPID_2 = "cswHarvester.groupId = ?";
+	private static final String _ORDER_BY_ENTITY_ALIAS = "cswHarvester.";
+	private static final String _NO_SUCH_ENTITY_WITH_PRIMARY_KEY = "No CSWHarvester exists with the primary key ";
+	private static final String _NO_SUCH_ENTITY_WITH_KEY = "No CSWHarvester exists with the key {";
+	private static Log _log = LogFactoryUtil.getLog(CSWHarvesterPersistenceImpl.class);
 }

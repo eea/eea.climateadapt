@@ -68,6 +68,14 @@ public class AceItemWrapper implements AceItem {
 		_aceItem.setWxsharvesterId(wxsharvesterId);
 	}
 
+	public long getCswharvesterId() {
+		return _aceItem.getCswharvesterId();
+	}
+
+	public void setCswharvesterId(long cswharvesterId) {
+		_aceItem.setCswharvesterId(cswharvesterId);
+	}
+
 	public java.lang.String getName() {
 		return _aceItem.getName();
 	}

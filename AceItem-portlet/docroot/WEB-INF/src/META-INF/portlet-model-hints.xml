@@ -6,6 +6,7 @@
 		<field name="companyId" type="long" />
 		<field name="groupId" type="long" />
 		<field name="wxsharvesterId" type="long" />
+		<field name="cswharvesterId" type="long" />
 		<field name="name" type="String" />
 		<field name="description" type="String" />
 		<field name="datatype" type="String" />
@@ -41,6 +42,23 @@
 		<field name="name" type="String" />
 		<field name="url" type="String" />
 		<field name="ogctype" type="String" />
+		<field name="every" type="int" />
+		<field name="topic" type="String" />
+		<field name="status" type="String" />
+		<field name="savedToGeoNetwork" type="boolean" />
+		<field name="geonetworkId" type="long" />
+		<field name="geonetworkUUID" type="String" />
+		<field name="companyId" type="long" />
+		<field name="groupId" type="long" />
+	</model>
+	<model name="nl.wur.alterra.cgi.ace.model.CSWHarvester">
+		<field name="cswharvesterid" type="long" />
+		<field name="name" type="String" />
+		<field name="url" type="String" />
+		<field name="freetext" type="String" />
+		<field name="title" type="String" />
+		<field name="abstrakt" type="String" />
+		<field name="subject" type="String" />
 		<field name="every" type="int" />
 		<field name="topic" type="String" />
 		<field name="status" type="String" />

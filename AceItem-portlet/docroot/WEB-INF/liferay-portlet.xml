@@ -23,6 +23,17 @@
 		<css-class-wrapper>wxsharvesterportlet-portlet</css-class-wrapper>
 	</portlet>
 	<portlet>
+		<portlet-name>cswharvesterportlet</portlet-name>
+		<icon>/icon.png</icon>
+		<instanceable>false</instanceable>
+		<header-portlet-css>/css/portlet.css</header-portlet-css>
+        <header-portlet-javascript>http://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js</header-portlet-javascript>
+		<footer-portlet-javascript>
+			/js/javascript.js
+		</footer-portlet-javascript>
+		<css-class-wrapper>cswharvesterportlet-portlet</css-class-wrapper>
+	</portlet>
+	<portlet>
 		<portlet-name>aceitemdetailportlet</portlet-name>
 		<icon>/icon.png</icon>
 		<instanceable>true</instanceable>

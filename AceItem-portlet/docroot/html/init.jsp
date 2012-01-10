@@ -29,7 +29,8 @@
 <%@ page import="nl.wur.alterra.cgi.ace.portlet.AceItemUtil"%>
 <%@ page import="nl.wur.alterra.cgi.ace.model.WxsHarvester"%>
 <%@ page import="nl.wur.alterra.cgi.ace.service.WxsHarvesterLocalServiceUtil"%>
-
+<%@ page import="nl.wur.alterra.cgi.ace.model.CSWHarvester"%>
+<%@ page import="nl.wur.alterra.cgi.ace.service.CSWHarvesterLocalServiceUtil"%>
 <liferay-theme:defineObjects />
 
 <portlet:defineObjects />

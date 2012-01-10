@@ -16,7 +16,8 @@
 		<column name="groupId" type="long" />
 		<!-- Foreign key to WxsHarvester -->
 		<column name="wxsharvesterId" type="long" convert-null="false" />
-		
+		<!-- Foreign key to CSWHarvester -->
+		<column name="cswharvesterId" type="long" convert-null="false" />
 		<!-- Other columns -->
 		<column name="name" type="String" />
 		<column name="description" type="String" />
@@ -65,9 +66,14 @@
             <finder-column name="wxsharvesterId"/>
         </finder>
 
+        <finder name="CSWharvesterId" return-type="Collection">
+            <finder-column name="cswharvesterId"/>
+        </finder>
+
     <reference package-path="com.liferay.portlet.asset" entity="AssetEntry" />
 
 	</entity>
+
 	<entity name="WxsHarvester" local-service="true" remote-service="false">
 		<column name="wxsharvesterid" type="long" primary="true" />
 		<column name="name" type="String" />
@@ -93,6 +99,32 @@
 		<reference package-path="com.liferay.portlet.asset" entity="AssetEntry" />
 	</entity>
 	
+	<entity name="CSWHarvester" local-service="true" remote-service="false">
+		<column name="cswharvesterid" type="long" primary="true" />
+		<column name="name" type="String" />
+        <column name="url" type="String" />
+        <column name="freetext" type="String" />
+        <column name="title" type="String" />
+        <column name="abstrakt" type="String" />
+        <column name="subject" type="String" />
+        <column name="every" type="int" />
+        <column name="topic" type="String" />
+        <column name="status" type="String" />
+        <column name="savedToGeoNetwork" type="boolean" />
+        <column name="geonetworkId" type="long" />
+        <column name="geonetworkUUID" type="String" />
+        <!-- Liferay internal: -->
+		<column name="companyId" type="long" />
+		<column name="groupId" type="long" />
 
+		<order by="asc">
+			<order-column name="name" case-sensitive="false" />
+		</order>
+        <!-- Liferay internal: -->
+		<finder name="GroupId" return-type="Collection">
+			<finder-column name="groupId" />
+		</finder>
+		<reference package-path="com.liferay.portlet.asset" entity="AssetEntry" />
+	</entity>
 	
 </service-builder>

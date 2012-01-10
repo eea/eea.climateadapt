@@ -36,8 +36,10 @@ import com.liferay.portlet.asset.service.persistence.AssetEntryPersistence;
 
 import nl.wur.alterra.cgi.ace.model.WxsHarvester;
 import nl.wur.alterra.cgi.ace.service.AceItemLocalService;
+import nl.wur.alterra.cgi.ace.service.CSWHarvesterLocalService;
 import nl.wur.alterra.cgi.ace.service.WxsHarvesterLocalService;
 import nl.wur.alterra.cgi.ace.service.persistence.AceItemPersistence;
+import nl.wur.alterra.cgi.ace.service.persistence.CSWHarvesterPersistence;
 import nl.wur.alterra.cgi.ace.service.persistence.WxsHarvesterPersistence;
 
 import java.util.List;
@@ -319,6 +321,44 @@ public abstract class WxsHarvesterLocalServiceBaseImpl
 	}
 
 	/**
+	 * Gets the c s w harvester local service.
+	 *
+	 * @return the c s w harvester local service
+	 */
+	public CSWHarvesterLocalService getCSWHarvesterLocalService() {
+		return cswHarvesterLocalService;
+	}
+
+	/**
+	 * Sets the c s w harvester local service.
+	 *
+	 * @param cswHarvesterLocalService the c s w harvester local service
+	 */
+	public void setCSWHarvesterLocalService(
+		CSWHarvesterLocalService cswHarvesterLocalService) {
+		this.cswHarvesterLocalService = cswHarvesterLocalService;
+	}
+
+	/**
+	 * Gets the c s w harvester persistence.
+	 *
+	 * @return the c s w harvester persistence
+	 */
+	public CSWHarvesterPersistence getCSWHarvesterPersistence() {
+		return cswHarvesterPersistence;
+	}
+
+	/**
+	 * Sets the c s w harvester persistence.
+	 *
+	 * @param cswHarvesterPersistence the c s w harvester persistence
+	 */
+	public void setCSWHarvesterPersistence(
+		CSWHarvesterPersistence cswHarvesterPersistence) {
+		this.cswHarvesterPersistence = cswHarvesterPersistence;
+	}
+
+	/**
 	 * Gets the counter local service.
 	 *
 	 * @return the counter local service
@@ -528,6 +568,10 @@ public abstract class WxsHarvesterLocalServiceBaseImpl
 	protected WxsHarvesterLocalService wxsHarvesterLocalService;
 	@BeanReference(type = WxsHarvesterPersistence.class)
 	protected WxsHarvesterPersistence wxsHarvesterPersistence;
+	@BeanReference(type = CSWHarvesterLocalService.class)
+	protected CSWHarvesterLocalService cswHarvesterLocalService;
+	@BeanReference(type = CSWHarvesterPersistence.class)
+	protected CSWHarvesterPersistence cswHarvesterPersistence;
 	@BeanReference(type = CounterLocalService.class)
 	protected CounterLocalService counterLocalService;
 	@BeanReference(type = ResourceLocalService.class)

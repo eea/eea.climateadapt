@@ -9,9 +9,8 @@ import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
 import nl.wur.alterra.cgi.ace.harvester.HarvesterExecutionService;
 import nl.wur.alterra.cgi.ace.harvester.HarvesterThread;
-import nl.wur.alterra.cgi.ace.harvester.HarvesterUtil;
 import nl.wur.alterra.cgi.ace.model.WxsHarvester;
-import nl.wur.alterra.cgi.ace.model.constants.WxSHarvesterStatus;
+import nl.wur.alterra.cgi.ace.model.constants.HarvesterStatus;
 import nl.wur.alterra.cgi.ace.model.impl.WxsHarvesterImpl;
 import nl.wur.alterra.cgi.ace.service.WxsHarvesterLocalServiceUtil;
 
@@ -22,7 +21,6 @@ import javax.portlet.PortletRequest;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -154,7 +152,7 @@ public class WxsHarvesterPortlet extends LuceneIndexUpdatePortlet {
         //System.out.println("WXSHARVESTERPORTLET executeWxsHarvester ");
 		WxsHarvester wxsHarvester = WxsHarvesterLocalServiceUtil.getWxsHarvester(ParamUtil.getLong(request, "wxsharvesterid"));
 		if (wxsHarvester.getSavedToGeoNetwork()) {
-            wxsHarvester.setStatus(WxSHarvesterStatus.RUNNING.name());
+            wxsHarvester.setStatus(HarvesterStatus.RUNNING.name());
             WxsHarvesterLocalServiceUtil.updateWxsHarvester(wxsHarvester, Boolean.FALSE, Boolean.FALSE);
             // schedule in separate thread for immediate execution
             ScheduledExecutorService executionService = HarvesterExecutionService.getExecutionService();

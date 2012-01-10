@@ -11,4 +11,9 @@
 		<property name="service" ref="nl.wur.alterra.cgi.ace.service.WxsHarvesterLocalService" />
 	</bean>
 	<bean id="nl.wur.alterra.cgi.ace.service.persistence.WxsHarvesterPersistence" class="nl.wur.alterra.cgi.ace.service.persistence.WxsHarvesterPersistenceImpl" parent="basePersistence" />
+	<bean id="nl.wur.alterra.cgi.ace.service.CSWHarvesterLocalService" class="nl.wur.alterra.cgi.ace.service.impl.CSWHarvesterLocalServiceImpl" />
+	<bean id="nl.wur.alterra.cgi.ace.service.CSWHarvesterLocalServiceUtil" class="nl.wur.alterra.cgi.ace.service.CSWHarvesterLocalServiceUtil">
+		<property name="service" ref="nl.wur.alterra.cgi.ace.service.CSWHarvesterLocalService" />
+	</bean>
+	<bean id="nl.wur.alterra.cgi.ace.service.persistence.CSWHarvesterPersistence" class="nl.wur.alterra.cgi.ace.service.persistence.CSWHarvesterPersistenceImpl" parent="basePersistence" />
 </beans>

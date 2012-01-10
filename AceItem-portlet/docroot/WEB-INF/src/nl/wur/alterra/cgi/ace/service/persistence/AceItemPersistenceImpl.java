@@ -104,6 +104,18 @@ public class AceItemPersistenceImpl extends BasePersistenceImpl<AceItem>
 	public static final FinderPath FINDER_PATH_COUNT_BY_WXSHARVESTERID = new FinderPath(AceItemModelImpl.ENTITY_CACHE_ENABLED,
 			AceItemModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
 			"countByWxsharvesterId", new String[] { Long.class.getName() });
+	public static final FinderPath FINDER_PATH_FIND_BY_CSWHARVESTERID = new FinderPath(AceItemModelImpl.ENTITY_CACHE_ENABLED,
+			AceItemModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
+			"findByCSWharvesterId",
+			new String[] {
+				Long.class.getName(),
+				
+			"java.lang.Integer", "java.lang.Integer",
+				"com.liferay.portal.kernel.util.OrderByComparator"
+			});
+	public static final FinderPath FINDER_PATH_COUNT_BY_CSWHARVESTERID = new FinderPath(AceItemModelImpl.ENTITY_CACHE_ENABLED,
+			AceItemModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
+			"countByCSWharvesterId", new String[] { Long.class.getName() });
 	public static final FinderPath FINDER_PATH_FIND_ALL = new FinderPath(AceItemModelImpl.ENTITY_CACHE_ENABLED,
 			AceItemModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
 			"findAll", new String[0]);
@@ -337,6 +349,7 @@ public class AceItemPersistenceImpl extends BasePersistenceImpl<AceItem>
 		aceItemImpl.setCompanyId(aceItem.getCompanyId());
 		aceItemImpl.setGroupId(aceItem.getGroupId());
 		aceItemImpl.setWxsharvesterId(aceItem.getWxsharvesterId());
+		aceItemImpl.setCswharvesterId(aceItem.getCswharvesterId());
 		aceItemImpl.setName(aceItem.getName());
 		aceItemImpl.setDescription(aceItem.getDescription());
 		aceItemImpl.setDatatype(aceItem.getDatatype());
@@ -1269,6 +1282,344 @@ public class AceItemPersistenceImpl extends BasePersistenceImpl<AceItem>
 	}
 
 	/**
+	 * Finds all the ace items where cswharvesterId = &#63;.
+	 *
+	 * @param cswharvesterId the cswharvester id to search with
+	 * @return the matching ace items
+	 * @throws SystemException if a system exception occurred
+	 */
+	public List<AceItem> findByCSWharvesterId(long cswharvesterId)
+		throws SystemException {
+		return findByCSWharvesterId(cswharvesterId, QueryUtil.ALL_POS,
+			QueryUtil.ALL_POS, null);
+	}
+
+	/**
+	 * Finds a range of all the ace items where cswharvesterId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param cswharvesterId the cswharvester id to search with
+	 * @param start the lower bound of the range of ace items to return
+	 * @param end the upper bound of the range of ace items to return (not inclusive)
+	 * @return the range of matching ace items
+	 * @throws SystemException if a system exception occurred
+	 */
+	public List<AceItem> findByCSWharvesterId(long cswharvesterId, int start,
+		int end) throws SystemException {
+		return findByCSWharvesterId(cswharvesterId, start, end, null);
+	}
+
+	/**
+	 * Finds an ordered range of all the ace items where cswharvesterId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param cswharvesterId the cswharvester id to search with
+	 * @param start the lower bound of the range of ace items to return
+	 * @param end the upper bound of the range of ace items to return (not inclusive)
+	 * @param orderByComparator the comparator to order the results by
+	 * @return the ordered range of matching ace items
+	 * @throws SystemException if a system exception occurred
+	 */
+	public List<AceItem> findByCSWharvesterId(long cswharvesterId, int start,
+		int end, OrderByComparator orderByComparator) throws SystemException {
+		Object[] finderArgs = new Object[] {
+				cswharvesterId,
+				
+				String.valueOf(start), String.valueOf(end),
+				String.valueOf(orderByComparator)
+			};
+
+		List<AceItem> list = (List<AceItem>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_CSWHARVESTERID,
+				finderArgs, this);
+
+		if (list == null) {
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				StringBundler query = null;
+
+				if (orderByComparator != null) {
+					query = new StringBundler(3 +
+							(orderByComparator.getOrderByFields().length * 3));
+				}
+				else {
+					query = new StringBundler(3);
+				}
+
+				query.append(_SQL_SELECT_ACEITEM_WHERE);
+
+				query.append(_FINDER_COLUMN_CSWHARVESTERID_CSWHARVESTERID_2);
+
+				if (orderByComparator != null) {
+					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+						orderByComparator);
+				}
+
+				else {
+					query.append(AceItemModelImpl.ORDER_BY_JPQL);
+				}
+
+				String sql = query.toString();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(cswharvesterId);
+
+				list = (List<AceItem>)QueryUtil.list(q, getDialect(), start, end);
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				if (list == null) {
+					list = new ArrayList<AceItem>();
+				}
+
+				cacheResult(list);
+
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_CSWHARVESTERID,
+					finderArgs, list);
+
+				closeSession(session);
+			}
+		}
+
+		return list;
+	}
+
+	/**
+	 * Finds the first ace item in the ordered set where cswharvesterId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param cswharvesterId the cswharvester id to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the first matching ace item
+	 * @throws nl.wur.alterra.cgi.ace.NoSuchItemException if a matching ace item could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	public AceItem findByCSWharvesterId_First(long cswharvesterId,
+		OrderByComparator orderByComparator)
+		throws NoSuchItemException, SystemException {
+		List<AceItem> list = findByCSWharvesterId(cswharvesterId, 0, 1,
+				orderByComparator);
+
+		if (list.isEmpty()) {
+			StringBundler msg = new StringBundler(4);
+
+			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
+
+			msg.append("cswharvesterId=");
+			msg.append(cswharvesterId);
+
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+			throw new NoSuchItemException(msg.toString());
+		}
+		else {
+			return list.get(0);
+		}
+	}
+
+	/**
+	 * Finds the last ace item in the ordered set where cswharvesterId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param cswharvesterId the cswharvester id to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the last matching ace item
+	 * @throws nl.wur.alterra.cgi.ace.NoSuchItemException if a matching ace item could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	public AceItem findByCSWharvesterId_Last(long cswharvesterId,
+		OrderByComparator orderByComparator)
+		throws NoSuchItemException, SystemException {
+		int count = countByCSWharvesterId(cswharvesterId);
+
+		List<AceItem> list = findByCSWharvesterId(cswharvesterId, count - 1,
+				count, orderByComparator);
+
+		if (list.isEmpty()) {
+			StringBundler msg = new StringBundler(4);
+
+			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
+
+			msg.append("cswharvesterId=");
+			msg.append(cswharvesterId);
+
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+			throw new NoSuchItemException(msg.toString());
+		}
+		else {
+			return list.get(0);
+		}
+	}
+
+	/**
+	 * Finds the ace items before and after the current ace item in the ordered set where cswharvesterId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param aceItemId the primary key of the current ace item
+	 * @param cswharvesterId the cswharvester id to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the previous, current, and next ace item
+	 * @throws nl.wur.alterra.cgi.ace.NoSuchItemException if a ace item with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	public AceItem[] findByCSWharvesterId_PrevAndNext(long aceItemId,
+		long cswharvesterId, OrderByComparator orderByComparator)
+		throws NoSuchItemException, SystemException {
+		AceItem aceItem = findByPrimaryKey(aceItemId);
+
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			AceItem[] array = new AceItemImpl[3];
+
+			array[0] = getByCSWharvesterId_PrevAndNext(session, aceItem,
+					cswharvesterId, orderByComparator, true);
+
+			array[1] = aceItem;
+
+			array[2] = getByCSWharvesterId_PrevAndNext(session, aceItem,
+					cswharvesterId, orderByComparator, false);
+
+			return array;
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	protected AceItem getByCSWharvesterId_PrevAndNext(Session session,
+		AceItem aceItem, long cswharvesterId,
+		OrderByComparator orderByComparator, boolean previous) {
+		StringBundler query = null;
+
+		if (orderByComparator != null) {
+			query = new StringBundler(6 +
+					(orderByComparator.getOrderByFields().length * 6));
+		}
+		else {
+			query = new StringBundler(3);
+		}
+
+		query.append(_SQL_SELECT_ACEITEM_WHERE);
+
+		query.append(_FINDER_COLUMN_CSWHARVESTERID_CSWHARVESTERID_2);
+
+		if (orderByComparator != null) {
+			String[] orderByFields = orderByComparator.getOrderByFields();
+
+			if (orderByFields.length > 0) {
+				query.append(WHERE_AND);
+			}
+
+			for (int i = 0; i < orderByFields.length; i++) {
+				query.append(_ORDER_BY_ENTITY_ALIAS);
+				query.append(orderByFields[i]);
+
+				if ((i + 1) < orderByFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN_HAS_NEXT);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN);
+					}
+				}
+			}
+
+			query.append(ORDER_BY_CLAUSE);
+
+			for (int i = 0; i < orderByFields.length; i++) {
+				query.append(_ORDER_BY_ENTITY_ALIAS);
+				query.append(orderByFields[i]);
+
+				if ((i + 1) < orderByFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC_HAS_NEXT);
+					}
+					else {
+						query.append(ORDER_BY_DESC_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC);
+					}
+					else {
+						query.append(ORDER_BY_DESC);
+					}
+				}
+			}
+		}
+
+		else {
+			query.append(AceItemModelImpl.ORDER_BY_JPQL);
+		}
+
+		String sql = query.toString();
+
+		Query q = session.createQuery(sql);
+
+		q.setFirstResult(0);
+		q.setMaxResults(2);
+
+		QueryPos qPos = QueryPos.getInstance(q);
+
+		qPos.add(cswharvesterId);
+
+		if (orderByComparator != null) {
+			Object[] values = orderByComparator.getOrderByValues(aceItem);
+
+			for (Object value : values) {
+				qPos.add(value);
+			}
+		}
+
+		List<AceItem> list = q.list();
+
+		if (list.size() == 2) {
+			return list.get(1);
+		}
+		else {
+			return null;
+		}
+	}
+
+	/**
 	 * Finds all the ace items.
 	 *
 	 * @return the ace items
@@ -1407,6 +1758,19 @@ public class AceItemPersistenceImpl extends BasePersistenceImpl<AceItem>
 	public void removeByWxsharvesterId(long wxsharvesterId)
 		throws SystemException {
 		for (AceItem aceItem : findByWxsharvesterId(wxsharvesterId)) {
+			remove(aceItem);
+		}
+	}
+
+	/**
+	 * Removes all the ace items where cswharvesterId = &#63; from the database.
+	 *
+	 * @param cswharvesterId the cswharvester id to search with
+	 * @throws SystemException if a system exception occurred
+	 */
+	public void removeByCSWharvesterId(long cswharvesterId)
+		throws SystemException {
+		for (AceItem aceItem : findByCSWharvesterId(cswharvesterId)) {
 			remove(aceItem);
 		}
 	}
@@ -1595,6 +1959,60 @@ public class AceItemPersistenceImpl extends BasePersistenceImpl<AceItem>
 	}
 
 	/**
+	 * Counts all the ace items where cswharvesterId = &#63;.
+	 *
+	 * @param cswharvesterId the cswharvester id to search with
+	 * @return the number of matching ace items
+	 * @throws SystemException if a system exception occurred
+	 */
+	public int countByCSWharvesterId(long cswharvesterId)
+		throws SystemException {
+		Object[] finderArgs = new Object[] { cswharvesterId };
+
+		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_CSWHARVESTERID,
+				finderArgs, this);
+
+		if (count == null) {
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				StringBundler query = new StringBundler(2);
+
+				query.append(_SQL_COUNT_ACEITEM_WHERE);
+
+				query.append(_FINDER_COLUMN_CSWHARVESTERID_CSWHARVESTERID_2);
+
+				String sql = query.toString();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(cswharvesterId);
+
+				count = (Long)q.uniqueResult();
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				if (count == null) {
+					count = Long.valueOf(0);
+				}
+
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_CSWHARVESTERID,
+					finderArgs, count);
+
+				closeSession(session);
+			}
+		}
+
+		return count.intValue();
+	}
+
+	/**
 	 * Counts all the ace items.
 	 *
 	 * @return the number of ace items
@@ -1663,6 +2081,8 @@ public class AceItemPersistenceImpl extends BasePersistenceImpl<AceItem>
 	protected AceItemPersistence aceItemPersistence;
 	@BeanReference(type = WxsHarvesterPersistence.class)
 	protected WxsHarvesterPersistence wxsHarvesterPersistence;
+	@BeanReference(type = CSWHarvesterPersistence.class)
+	protected CSWHarvesterPersistence cswHarvesterPersistence;
 	@BeanReference(type = ResourcePersistence.class)
 	protected ResourcePersistence resourcePersistence;
 	@BeanReference(type = UserPersistence.class)
@@ -1678,6 +2098,7 @@ public class AceItemPersistenceImpl extends BasePersistenceImpl<AceItem>
 	private static final String _FINDER_COLUMN_STOREDAT_STOREDAT_2 = "aceItem.storedAt = ?";
 	private static final String _FINDER_COLUMN_STOREDAT_STOREDAT_3 = "(aceItem.storedAt IS NULL OR aceItem.storedAt = ?)";
 	private static final String _FINDER_COLUMN_WXSHARVESTERID_WXSHARVESTERID_2 = "aceItem.wxsharvesterId = ?";
+	private static final String _FINDER_COLUMN_CSWHARVESTERID_CSWHARVESTERID_2 = "aceItem.cswharvesterId = ?";
 	private static final String _ORDER_BY_ENTITY_ALIAS = "aceItem.";
 	private static final String _NO_SUCH_ENTITY_WITH_PRIMARY_KEY = "No AceItem exists with the primary key ";
 	private static final String _NO_SUCH_ENTITY_WITH_KEY = "No AceItem exists with the key {";

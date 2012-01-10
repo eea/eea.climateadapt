@@ -8,11 +8,11 @@ import nl.wur.alterra.cgi.ace.model.WxsHarvester;
  *
  * @author heikki doeleman
  */
-public class GeoNetworkHarvesterResponse {
+public class GeoNetworkWxSHarvesterResponse {
     private WxsHarvester wxsHarvester;
     private String geonetworkResponse;
 
-    public GeoNetworkHarvesterResponse(WxsHarvester wxsHarvester, String geonetworkResponse) {
+    public GeoNetworkWxSHarvesterResponse(WxsHarvester wxsHarvester, String geonetworkResponse) {
         this.wxsHarvester = wxsHarvester;
         this.geonetworkResponse = geonetworkResponse;
     }

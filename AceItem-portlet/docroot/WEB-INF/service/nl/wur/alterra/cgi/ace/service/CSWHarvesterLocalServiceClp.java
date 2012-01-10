@@ -21,18 +21,18 @@ import com.liferay.portal.kernel.util.MethodKey;
 /**
  * @author groot052
  */
-public class AceItemLocalServiceClp implements AceItemLocalService {
-	public AceItemLocalServiceClp(ClassLoaderProxy classLoaderProxy) {
+public class CSWHarvesterLocalServiceClp implements CSWHarvesterLocalService {
+	public CSWHarvesterLocalServiceClp(ClassLoaderProxy classLoaderProxy) {
 		_classLoaderProxy = classLoaderProxy;
 	}
 
-	public nl.wur.alterra.cgi.ace.model.AceItem addAceItem(
-		nl.wur.alterra.cgi.ace.model.AceItem aceItem)
+	public nl.wur.alterra.cgi.ace.model.CSWHarvester addCSWHarvester(
+		nl.wur.alterra.cgi.ace.model.CSWHarvester cswHarvester)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		Object returnObj = null;
 
-		MethodHandler methodHandler = new MethodHandler(_addAceItemMethodKey0,
-				aceItem);
+		MethodHandler methodHandler = new MethodHandler(_addCSWHarvesterMethodKey0,
+				cswHarvester);
 
 		try {
 			returnObj = _classLoaderProxy.invoke(methodHandler);
@@ -51,14 +51,15 @@ public class AceItemLocalServiceClp implements AceItemLocalService {
 			}
 		}
 
-		return (nl.wur.alterra.cgi.ace.model.AceItem)ClpSerializer.translateOutput(returnObj);
+		return (nl.wur.alterra.cgi.ace.model.CSWHarvester)ClpSerializer.translateOutput(returnObj);
 	}
 
-	public nl.wur.alterra.cgi.ace.model.AceItem createAceItem(long aceItemId) {
+	public nl.wur.alterra.cgi.ace.model.CSWHarvester createCSWHarvester(
+		long cswharvesterid) {
 		Object returnObj = null;
 
-		MethodHandler methodHandler = new MethodHandler(_createAceItemMethodKey1,
-				aceItemId);
+		MethodHandler methodHandler = new MethodHandler(_createCSWHarvesterMethodKey1,
+				cswharvesterid);
 
 		try {
 			returnObj = _classLoaderProxy.invoke(methodHandler);
@@ -73,14 +74,14 @@ public class AceItemLocalServiceClp implements AceItemLocalService {
 			}
 		}
 
-		return (nl.wur.alterra.cgi.ace.model.AceItem)ClpSerializer.translateOutput(returnObj);
+		return (nl.wur.alterra.cgi.ace.model.CSWHarvester)ClpSerializer.translateOutput(returnObj);
 	}
 
-	public void deleteAceItem(long aceItemId)
+	public void deleteCSWHarvester(long cswharvesterid)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
-		MethodHandler methodHandler = new MethodHandler(_deleteAceItemMethodKey2,
-				aceItemId);
+		MethodHandler methodHandler = new MethodHandler(_deleteCSWHarvesterMethodKey2,
+				cswharvesterid);
 
 		try {
 			_classLoaderProxy.invoke(methodHandler);
@@ -104,10 +105,11 @@ public class AceItemLocalServiceClp implements AceItemLocalService {
 		}
 	}
 
-	public void deleteAceItem(nl.wur.alterra.cgi.ace.model.AceItem aceItem)
+	public void deleteCSWHarvester(
+		nl.wur.alterra.cgi.ace.model.CSWHarvester cswHarvester)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		MethodHandler methodHandler = new MethodHandler(_deleteAceItemMethodKey3,
-				aceItem);
+		MethodHandler methodHandler = new MethodHandler(_deleteCSWHarvesterMethodKey3,
+				cswHarvester);
 
 		try {
 			_classLoaderProxy.invoke(methodHandler);
@@ -244,13 +246,14 @@ public class AceItemLocalServiceClp implements AceItemLocalService {
 		return ((Long)returnObj).longValue();
 	}
 
-	public nl.wur.alterra.cgi.ace.model.AceItem getAceItem(long aceItemId)
+	public nl.wur.alterra.cgi.ace.model.CSWHarvester getCSWHarvester(
+		long cswharvesterid)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		Object returnObj = null;
 
-		MethodHandler methodHandler = new MethodHandler(_getAceItemMethodKey8,
-				aceItemId);
+		MethodHandler methodHandler = new MethodHandler(_getCSWHarvesterMethodKey8,
+				cswharvesterid);
 
 		try {
 			returnObj = _classLoaderProxy.invoke(methodHandler);
@@ -273,15 +276,15 @@ public class AceItemLocalServiceClp implements AceItemLocalService {
 			}
 		}
 
-		return (nl.wur.alterra.cgi.ace.model.AceItem)ClpSerializer.translateOutput(returnObj);
+		return (nl.wur.alterra.cgi.ace.model.CSWHarvester)ClpSerializer.translateOutput(returnObj);
 	}
 
-	public java.util.List<nl.wur.alterra.cgi.ace.model.AceItem> getAceItems(
+	public java.util.List<nl.wur.alterra.cgi.ace.model.CSWHarvester> getCSWHarvesters(
 		int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		Object returnObj = null;
 
-		MethodHandler methodHandler = new MethodHandler(_getAceItemsMethodKey9,
+		MethodHandler methodHandler = new MethodHandler(_getCSWHarvestersMethodKey9,
 				start, end);
 
 		try {
@@ -301,14 +304,14 @@ public class AceItemLocalServiceClp implements AceItemLocalService {
 			}
 		}
 
-		return (java.util.List<nl.wur.alterra.cgi.ace.model.AceItem>)ClpSerializer.translateOutput(returnObj);
+		return (java.util.List<nl.wur.alterra.cgi.ace.model.CSWHarvester>)ClpSerializer.translateOutput(returnObj);
 	}
 
-	public int getAceItemsCount()
+	public int getCSWHarvestersCount()
 		throws com.liferay.portal.kernel.exception.SystemException {
 		Object returnObj = null;
 
-		MethodHandler methodHandler = new MethodHandler(_getAceItemsCountMethodKey10);
+		MethodHandler methodHandler = new MethodHandler(_getCSWHarvestersCountMethodKey10);
 
 		try {
 			returnObj = _classLoaderProxy.invoke(methodHandler);
@@ -330,13 +333,13 @@ public class AceItemLocalServiceClp implements AceItemLocalService {
 		return ((Integer)returnObj).intValue();
 	}
 
-	public nl.wur.alterra.cgi.ace.model.AceItem updateAceItem(
-		nl.wur.alterra.cgi.ace.model.AceItem aceItem)
+	public nl.wur.alterra.cgi.ace.model.CSWHarvester updateCSWHarvester(
+		nl.wur.alterra.cgi.ace.model.CSWHarvester cswHarvester)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		Object returnObj = null;
 
-		MethodHandler methodHandler = new MethodHandler(_updateAceItemMethodKey11,
-				aceItem);
+		MethodHandler methodHandler = new MethodHandler(_updateCSWHarvesterMethodKey11,
+				cswHarvester);
 
 		try {
 			returnObj = _classLoaderProxy.invoke(methodHandler);
@@ -355,16 +358,16 @@ public class AceItemLocalServiceClp implements AceItemLocalService {
 			}
 		}
 
-		return (nl.wur.alterra.cgi.ace.model.AceItem)ClpSerializer.translateOutput(returnObj);
+		return (nl.wur.alterra.cgi.ace.model.CSWHarvester)ClpSerializer.translateOutput(returnObj);
 	}
 
-	public nl.wur.alterra.cgi.ace.model.AceItem updateAceItem(
-		nl.wur.alterra.cgi.ace.model.AceItem aceItem, boolean merge)
+	public nl.wur.alterra.cgi.ace.model.CSWHarvester updateCSWHarvester(
+		nl.wur.alterra.cgi.ace.model.CSWHarvester cswHarvester, boolean merge)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		Object returnObj = null;
 
-		MethodHandler methodHandler = new MethodHandler(_updateAceItemMethodKey12,
-				aceItem, merge);
+		MethodHandler methodHandler = new MethodHandler(_updateCSWHarvesterMethodKey12,
+				cswHarvester, merge);
 
 		try {
 			returnObj = _classLoaderProxy.invoke(methodHandler);
@@ -383,13 +386,13 @@ public class AceItemLocalServiceClp implements AceItemLocalService {
 			}
 		}
 
-		return (nl.wur.alterra.cgi.ace.model.AceItem)ClpSerializer.translateOutput(returnObj);
+		return (nl.wur.alterra.cgi.ace.model.CSWHarvester)ClpSerializer.translateOutput(returnObj);
 	}
 
-	public nl.wur.alterra.cgi.ace.model.AceItem createAceItem() {
+	public nl.wur.alterra.cgi.ace.model.CSWHarvester createCSWHarvester() {
 		Object returnObj = null;
 
-		MethodHandler methodHandler = new MethodHandler(_createAceItemMethodKey13);
+		MethodHandler methodHandler = new MethodHandler(_createCSWHarvesterMethodKey13);
 
 		try {
 			returnObj = _classLoaderProxy.invoke(methodHandler);
@@ -404,16 +407,17 @@ public class AceItemLocalServiceClp implements AceItemLocalService {
 			}
 		}
 
-		return (nl.wur.alterra.cgi.ace.model.AceItem)ClpSerializer.translateOutput(returnObj);
+		return (nl.wur.alterra.cgi.ace.model.CSWHarvester)ClpSerializer.translateOutput(returnObj);
 	}
 
-	public nl.wur.alterra.cgi.ace.model.AceItem getAceItemByStoredAt(
-		java.lang.String s)
+	public nl.wur.alterra.cgi.ace.model.CSWHarvester updateCSWHarvester(
+		nl.wur.alterra.cgi.ace.model.CSWHarvester cswHarvester,
+		java.lang.Boolean propagateToGeoNetwork, java.lang.Boolean reschedule)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		Object returnObj = null;
 
-		MethodHandler methodHandler = new MethodHandler(_getAceItemByStoredAtMethodKey14,
-				s);
+		MethodHandler methodHandler = new MethodHandler(_updateCSWHarvesterMethodKey14,
+				cswHarvester, propagateToGeoNetwork, reschedule);
 
 		try {
 			returnObj = _classLoaderProxy.invoke(methodHandler);
@@ -432,15 +436,15 @@ public class AceItemLocalServiceClp implements AceItemLocalService {
 			}
 		}
 
-		return (nl.wur.alterra.cgi.ace.model.AceItem)ClpSerializer.translateOutput(returnObj);
+		return (nl.wur.alterra.cgi.ace.model.CSWHarvester)ClpSerializer.translateOutput(returnObj);
 	}
 
-	public java.util.List<nl.wur.alterra.cgi.ace.model.AceItem> getAceItemsByGroupId(
+	public java.util.List<nl.wur.alterra.cgi.ace.model.CSWHarvester> getCSWHarvesterByGroupId(
 		long groupId)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		Object returnObj = null;
 
-		MethodHandler methodHandler = new MethodHandler(_getAceItemsByGroupIdMethodKey15,
+		MethodHandler methodHandler = new MethodHandler(_getCSWHarvesterByGroupIdMethodKey15,
 				groupId);
 
 		try {
@@ -460,15 +464,15 @@ public class AceItemLocalServiceClp implements AceItemLocalService {
 			}
 		}
 
-		return (java.util.List<nl.wur.alterra.cgi.ace.model.AceItem>)ClpSerializer.translateOutput(returnObj);
+		return (java.util.List<nl.wur.alterra.cgi.ace.model.CSWHarvester>)ClpSerializer.translateOutput(returnObj);
 	}
 
-	public java.util.List<nl.wur.alterra.cgi.ace.model.AceItem> getAceItemsByGroupId(
+	public java.util.List<nl.wur.alterra.cgi.ace.model.CSWHarvester> getCSWHarvestersByGroupId(
 		long groupId, int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		Object returnObj = null;
 
-		MethodHandler methodHandler = new MethodHandler(_getAceItemsByGroupIdMethodKey16,
+		MethodHandler methodHandler = new MethodHandler(_getCSWHarvestersByGroupIdMethodKey16,
 				groupId, start, end);
 
 		try {
@@ -488,43 +492,14 @@ public class AceItemLocalServiceClp implements AceItemLocalService {
 			}
 		}
 
-		return (java.util.List<nl.wur.alterra.cgi.ace.model.AceItem>)ClpSerializer.translateOutput(returnObj);
+		return (java.util.List<nl.wur.alterra.cgi.ace.model.CSWHarvester>)ClpSerializer.translateOutput(returnObj);
 	}
 
-	public java.util.List<nl.wur.alterra.cgi.ace.model.AceItem> getAceItemsByGroupId(
-		long groupId, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+	public int getCSWHarvestersCountByGroupId(long groupId)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		Object returnObj = null;
 
-		MethodHandler methodHandler = new MethodHandler(_getAceItemsByGroupIdMethodKey17,
-				groupId, start, end, orderByComparator);
-
-		try {
-			returnObj = _classLoaderProxy.invoke(methodHandler);
-		}
-		catch (Throwable t) {
-			if (t instanceof com.liferay.portal.kernel.exception.SystemException) {
-				throw (com.liferay.portal.kernel.exception.SystemException)t;
-			}
-
-			if (t instanceof RuntimeException) {
-				throw (RuntimeException)t;
-			}
-			else {
-				throw new RuntimeException(t.getClass().getName() +
-					" is not a valid exception");
-			}
-		}
-
-		return (java.util.List<nl.wur.alterra.cgi.ace.model.AceItem>)ClpSerializer.translateOutput(returnObj);
-	}
-
-	public int getAceItemsCountByGroupId(long groupId)
-		throws com.liferay.portal.kernel.exception.SystemException {
-		Object returnObj = null;
-
-		MethodHandler methodHandler = new MethodHandler(_getAceItemsCountByGroupIdMethodKey18,
+		MethodHandler methodHandler = new MethodHandler(_getCSWHarvestersCountByGroupIdMethodKey17,
 				groupId);
 
 		try {
@@ -547,75 +522,20 @@ public class AceItemLocalServiceClp implements AceItemLocalService {
 		return ((Integer)returnObj).intValue();
 	}
 
-	public java.util.List<nl.wur.alterra.cgi.ace.model.AceItem> getAceItemsByWxsharvesterId(
-		long wxsHarvesterId)
-		throws com.liferay.portal.kernel.exception.SystemException {
-		Object returnObj = null;
-
-		MethodHandler methodHandler = new MethodHandler(_getAceItemsByWxsharvesterIdMethodKey19,
-				wxsHarvesterId);
-
-		try {
-			returnObj = _classLoaderProxy.invoke(methodHandler);
-		}
-		catch (Throwable t) {
-			if (t instanceof com.liferay.portal.kernel.exception.SystemException) {
-				throw (com.liferay.portal.kernel.exception.SystemException)t;
-			}
-
-			if (t instanceof RuntimeException) {
-				throw (RuntimeException)t;
-			}
-			else {
-				throw new RuntimeException(t.getClass().getName() +
-					" is not a valid exception");
-			}
-		}
-
-		return (java.util.List<nl.wur.alterra.cgi.ace.model.AceItem>)ClpSerializer.translateOutput(returnObj);
-	}
-
-	public java.util.List<nl.wur.alterra.cgi.ace.model.AceItem> getAceItemsByCSWharvesterId(
-		long cswHarvesterId)
-		throws com.liferay.portal.kernel.exception.SystemException {
-		Object returnObj = null;
-
-		MethodHandler methodHandler = new MethodHandler(_getAceItemsByCSWharvesterIdMethodKey20,
-				cswHarvesterId);
-
-		try {
-			returnObj = _classLoaderProxy.invoke(methodHandler);
-		}
-		catch (Throwable t) {
-			if (t instanceof com.liferay.portal.kernel.exception.SystemException) {
-				throw (com.liferay.portal.kernel.exception.SystemException)t;
-			}
-
-			if (t instanceof RuntimeException) {
-				throw (RuntimeException)t;
-			}
-			else {
-				throw new RuntimeException(t.getClass().getName() +
-					" is not a valid exception");
-			}
-		}
-
-		return (java.util.List<nl.wur.alterra.cgi.ace.model.AceItem>)ClpSerializer.translateOutput(returnObj);
-	}
-
 	public ClassLoaderProxy getClassLoaderProxy() {
 		return _classLoaderProxy;
 	}
 
 	private ClassLoaderProxy _classLoaderProxy;
-	private MethodKey _addAceItemMethodKey0 = new MethodKey(_classLoaderProxy.getClassName(),
-			"addAceItem", nl.wur.alterra.cgi.ace.model.AceItem.class);
-	private MethodKey _createAceItemMethodKey1 = new MethodKey(_classLoaderProxy.getClassName(),
-			"createAceItem", long.class);
-	private MethodKey _deleteAceItemMethodKey2 = new MethodKey(_classLoaderProxy.getClassName(),
-			"deleteAceItem", long.class);
-	private MethodKey _deleteAceItemMethodKey3 = new MethodKey(_classLoaderProxy.getClassName(),
-			"deleteAceItem", nl.wur.alterra.cgi.ace.model.AceItem.class);
+	private MethodKey _addCSWHarvesterMethodKey0 = new MethodKey(_classLoaderProxy.getClassName(),
+			"addCSWHarvester", nl.wur.alterra.cgi.ace.model.CSWHarvester.class);
+	private MethodKey _createCSWHarvesterMethodKey1 = new MethodKey(_classLoaderProxy.getClassName(),
+			"createCSWHarvester", long.class);
+	private MethodKey _deleteCSWHarvesterMethodKey2 = new MethodKey(_classLoaderProxy.getClassName(),
+			"deleteCSWHarvester", long.class);
+	private MethodKey _deleteCSWHarvesterMethodKey3 = new MethodKey(_classLoaderProxy.getClassName(),
+			"deleteCSWHarvester",
+			nl.wur.alterra.cgi.ace.model.CSWHarvester.class);
 	private MethodKey _dynamicQueryMethodKey4 = new MethodKey(_classLoaderProxy.getClassName(),
 			"dynamicQuery", com.liferay.portal.kernel.dao.orm.DynamicQuery.class);
 	private MethodKey _dynamicQueryMethodKey5 = new MethodKey(_classLoaderProxy.getClassName(),
@@ -629,32 +549,28 @@ public class AceItemLocalServiceClp implements AceItemLocalService {
 	private MethodKey _dynamicQueryCountMethodKey7 = new MethodKey(_classLoaderProxy.getClassName(),
 			"dynamicQueryCount",
 			com.liferay.portal.kernel.dao.orm.DynamicQuery.class);
-	private MethodKey _getAceItemMethodKey8 = new MethodKey(_classLoaderProxy.getClassName(),
-			"getAceItem", long.class);
-	private MethodKey _getAceItemsMethodKey9 = new MethodKey(_classLoaderProxy.getClassName(),
-			"getAceItems", int.class, int.class);
-	private MethodKey _getAceItemsCountMethodKey10 = new MethodKey(_classLoaderProxy.getClassName(),
-			"getAceItemsCount");
-	private MethodKey _updateAceItemMethodKey11 = new MethodKey(_classLoaderProxy.getClassName(),
-			"updateAceItem", nl.wur.alterra.cgi.ace.model.AceItem.class);
-	private MethodKey _updateAceItemMethodKey12 = new MethodKey(_classLoaderProxy.getClassName(),
-			"updateAceItem", nl.wur.alterra.cgi.ace.model.AceItem.class,
-			boolean.class);
-	private MethodKey _createAceItemMethodKey13 = new MethodKey(_classLoaderProxy.getClassName(),
-			"createAceItem");
-	private MethodKey _getAceItemByStoredAtMethodKey14 = new MethodKey(_classLoaderProxy.getClassName(),
-			"getAceItemByStoredAt", java.lang.String.class);
-	private MethodKey _getAceItemsByGroupIdMethodKey15 = new MethodKey(_classLoaderProxy.getClassName(),
-			"getAceItemsByGroupId", long.class);
-	private MethodKey _getAceItemsByGroupIdMethodKey16 = new MethodKey(_classLoaderProxy.getClassName(),
-			"getAceItemsByGroupId", long.class, int.class, int.class);
-	private MethodKey _getAceItemsByGroupIdMethodKey17 = new MethodKey(_classLoaderProxy.getClassName(),
-			"getAceItemsByGroupId", long.class, int.class, int.class,
-			com.liferay.portal.kernel.util.OrderByComparator.class);
-	private MethodKey _getAceItemsCountByGroupIdMethodKey18 = new MethodKey(_classLoaderProxy.getClassName(),
-			"getAceItemsCountByGroupId", long.class);
-	private MethodKey _getAceItemsByWxsharvesterIdMethodKey19 = new MethodKey(_classLoaderProxy.getClassName(),
-			"getAceItemsByWxsharvesterId", long.class);
-	private MethodKey _getAceItemsByCSWharvesterIdMethodKey20 = new MethodKey(_classLoaderProxy.getClassName(),
-			"getAceItemsByCSWharvesterId", long.class);
+	private MethodKey _getCSWHarvesterMethodKey8 = new MethodKey(_classLoaderProxy.getClassName(),
+			"getCSWHarvester", long.class);
+	private MethodKey _getCSWHarvestersMethodKey9 = new MethodKey(_classLoaderProxy.getClassName(),
+			"getCSWHarvesters", int.class, int.class);
+	private MethodKey _getCSWHarvestersCountMethodKey10 = new MethodKey(_classLoaderProxy.getClassName(),
+			"getCSWHarvestersCount");
+	private MethodKey _updateCSWHarvesterMethodKey11 = new MethodKey(_classLoaderProxy.getClassName(),
+			"updateCSWHarvester",
+			nl.wur.alterra.cgi.ace.model.CSWHarvester.class);
+	private MethodKey _updateCSWHarvesterMethodKey12 = new MethodKey(_classLoaderProxy.getClassName(),
+			"updateCSWHarvester",
+			nl.wur.alterra.cgi.ace.model.CSWHarvester.class, boolean.class);
+	private MethodKey _createCSWHarvesterMethodKey13 = new MethodKey(_classLoaderProxy.getClassName(),
+			"createCSWHarvester");
+	private MethodKey _updateCSWHarvesterMethodKey14 = new MethodKey(_classLoaderProxy.getClassName(),
+			"updateCSWHarvester",
+			nl.wur.alterra.cgi.ace.model.CSWHarvester.class,
+			java.lang.Boolean.class, java.lang.Boolean.class);
+	private MethodKey _getCSWHarvesterByGroupIdMethodKey15 = new MethodKey(_classLoaderProxy.getClassName(),
+			"getCSWHarvesterByGroupId", long.class);
+	private MethodKey _getCSWHarvestersByGroupIdMethodKey16 = new MethodKey(_classLoaderProxy.getClassName(),
+			"getCSWHarvestersByGroupId", long.class, int.class, int.class);
+	private MethodKey _getCSWHarvestersCountByGroupIdMethodKey17 = new MethodKey(_classLoaderProxy.getClassName(),
+			"getCSWHarvestersCountByGroupId", long.class);
 }

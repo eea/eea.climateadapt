@@ -113,6 +113,20 @@ public interface AceItemModel extends BaseModel<AceItem> {
 	public void setWxsharvesterId(long wxsharvesterId);
 
 	/**
+	 * Gets the cswharvester id of this ace item.
+	 *
+	 * @return the cswharvester id of this ace item
+	 */
+	public long getCswharvesterId();
+
+	/**
+	 * Sets the cswharvester id of this ace item.
+	 *
+	 * @param cswharvesterId the cswharvester id of this ace item
+	 */
+	public void setCswharvesterId(long cswharvesterId);
+
+	/**
 	 * Gets the name of this ace item.
 	 *
 	 * @return the name of this ace item

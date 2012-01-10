@@ -75,6 +75,14 @@ public class AceItemClp extends BaseModelImpl<AceItem> implements AceItem {
 		_wxsharvesterId = wxsharvesterId;
 	}
 
+	public long getCswharvesterId() {
+		return _cswharvesterId;
+	}
+
+	public void setCswharvesterId(long cswharvesterId) {
+		_cswharvesterId = cswharvesterId;
+	}
+
 	public String getName() {
 		return _name;
 	}
@@ -324,6 +332,7 @@ public class AceItemClp extends BaseModelImpl<AceItem> implements AceItem {
 		clone.setCompanyId(getCompanyId());
 		clone.setGroupId(getGroupId());
 		clone.setWxsharvesterId(getWxsharvesterId());
+		clone.setCswharvesterId(getCswharvesterId());
 		clone.setName(getName());
 		clone.setDescription(getDescription());
 		clone.setDatatype(getDatatype());
@@ -398,7 +407,7 @@ public class AceItemClp extends BaseModelImpl<AceItem> implements AceItem {
 	}
 
 	public String toString() {
-		StringBundler sb = new StringBundler(67);
+		StringBundler sb = new StringBundler(69);
 
 		sb.append("{aceItemId=");
 		sb.append(getAceItemId());
@@ -408,6 +417,8 @@ public class AceItemClp extends BaseModelImpl<AceItem> implements AceItem {
 		sb.append(getGroupId());
 		sb.append(", wxsharvesterId=");
 		sb.append(getWxsharvesterId());
+		sb.append(", cswharvesterId=");
+		sb.append(getCswharvesterId());
 		sb.append(", name=");
 		sb.append(getName());
 		sb.append(", description=");
@@ -472,7 +483,7 @@ public class AceItemClp extends BaseModelImpl<AceItem> implements AceItem {
 	}
 
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(103);
+		StringBundler sb = new StringBundler(106);
 
 		sb.append("<model><model-name>");
 		sb.append("nl.wur.alterra.cgi.ace.model.AceItem");
@@ -493,6 +504,10 @@ public class AceItemClp extends BaseModelImpl<AceItem> implements AceItem {
 		sb.append(
 			"<column><column-name>wxsharvesterId</column-name><column-value><![CDATA[");
 		sb.append(getWxsharvesterId());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>cswharvesterId</column-name><column-value><![CDATA[");
+		sb.append(getCswharvesterId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>name</column-name><column-value><![CDATA[");
@@ -620,6 +635,7 @@ public class AceItemClp extends BaseModelImpl<AceItem> implements AceItem {
 	private long _companyId;
 	private long _groupId;
 	private long _wxsharvesterId;
+	private long _cswharvesterId;
 	private String _name;
 	private String _description;
 	private String _datatype;
