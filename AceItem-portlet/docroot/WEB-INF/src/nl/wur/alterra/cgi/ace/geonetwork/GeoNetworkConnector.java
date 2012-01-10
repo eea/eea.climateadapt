@@ -8,6 +8,9 @@ import nl.wur.alterra.cgi.ace.portlet.CustomProperties;
 import nl.wur.alterra.cgi.ace.portlet.CustomPropertiesNotInitializedException;
 import nl.wur.alterra.cgi.ace.util.HTTPUtils;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
+
 /**
  * Interface to GeoNetwork.
  *
@@ -533,10 +536,19 @@ public class GeoNetworkConnector {
             xml += "<site>";
                 xml += "<name>" + cswHarvester.getName() + "</name>";
                 xml += "<useAccount><use>false</use><username /><password /></useAccount>";
+
                 // CSW URLs often contain parameters separated by &. Turn these into XML ampersand entities:
                 String url = cswHarvester.getUrl();
-                url.replace("&", "&amp;");
+                try {
+                    url = URLEncoder.encode(url, "UTF-8");
+                }
+                catch (UnsupportedEncodingException x) {
+                    System.err.println(x.getMessage());
+                    x.printStackTrace();
+                    // TODO should not swallow this. But not likely it'll happen
+                }
                 xml += "<capabUrl>" + url + "</capabUrl>";
+
                 if(cswHarvester.getFreetext() != null && cswHarvester.getFreetext().length() > 0 ){
                     xml += "<freeText>" + cswHarvester.getFreetext() + "</freeText>";
                 }
