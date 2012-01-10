@@ -533,7 +533,10 @@ public class GeoNetworkConnector {
             xml += "<site>";
                 xml += "<name>" + cswHarvester.getName() + "</name>";
                 xml += "<useAccount><use>false</use><username /><password /></useAccount>";
-                xml += "<capabUrl>" + cswHarvester.getUrl() + "</capabUrl>";
+                // CSW URLs often contain parameters separated by &. Turn these into XML ampersand entities:
+                String url = cswHarvester.getUrl();
+                url.replace("&", "&amp;");
+                xml += "<capabUrl>" + url + "</capabUrl>";
                 if(cswHarvester.getFreetext() != null && cswHarvester.getFreetext().length() > 0 ){
                     xml += "<freeText>" + cswHarvester.getFreetext() + "</freeText>";
                 }
