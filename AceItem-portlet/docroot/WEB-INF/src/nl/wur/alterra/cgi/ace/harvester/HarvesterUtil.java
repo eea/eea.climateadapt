@@ -47,7 +47,7 @@ public class HarvesterUtil {
     /**
      * Timeout to process harvest execution in ms. TODO what is a good value ?
      */
-    private static final long timeOut = 20 * 60 * 1000;
+    private static final long timeOut = 120 * 60 * 1000;
 
     /**
      * Connector to GeoNetwork.
