@@ -9,7 +9,11 @@ DROP VIEW casestudies;
 CREATE OR REPLACE VIEW casestudies AS 
  SELECT st_pointfromtext(((('POINT('::text || ace_measure.lon) || ' '::text) || ace_measure.lat) || ')'::text, 4326) AS geom, ace_measure.satarea AS area, ace_measure.name AS itemname, "substring"(ace_measure.description, 1, 100) || ' ...'::text AS "desc", ace_measure.website, ace_measure.sectors_ AS sectors, ace_measure.climateimpacts_ AS risks, ace_measure.measureid
    FROM ace_measure
-  WHERE ace_measure.mao_type::text = 'A'::text;
+  WHERE ace_measure.mao_type::text = 'A'::text
+  AND ace_measure.lon IS NOT NULL 
+  AND ace_measure.lat IS NOT NULL 
+  AND ace_measure.lat > 0  ;
+
 
 ALTER TABLE casestudies OWNER TO postgres;
 
