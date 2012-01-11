@@ -12,6 +12,8 @@ CREATE OR REPLACE VIEW casestudies AS
   WHERE ace_measure.mao_type::text = 'A'::text
   AND ace_measure.lon IS NOT NULL 
   AND ace_measure.lat IS NOT NULL 
+  AND ace_measure.lon <> 'NaN' 
+  AND ace_measure.lat <> 'NaN'  
   AND ace_measure.lat > 0  ;
 
 
