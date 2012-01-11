@@ -70,10 +70,10 @@ public class CSWHarvesterPortlet extends LuceneIndexUpdatePortlet {
         cswHarvester.setGeonetworkId(ParamUtil.getLong(request, "geonetworkId"));
         cswHarvester.setGeonetworkUUID(ParamUtil.getString(request, "geonetworkUUID"));
         cswHarvester.setName(ParamUtil.getString(request, "name"));
-        cswHarvester.setFreetext("freeText");
-        cswHarvester.setTitle("title");
-        cswHarvester.setAbstrakt("abstrakt");
-        cswHarvester.setSubject("subject");
+        cswHarvester.setFreetext(ParamUtil.getString(request, "freeText"));
+        cswHarvester.setTitle(ParamUtil.getString(request, "title"));
+        cswHarvester.setAbstrakt(ParamUtil.getString(request, "abstrakt"));
+        cswHarvester.setSubject(ParamUtil.getString(request, "subject"));
         //cswHarvester.setSavedToGeoNetwork(ParamUtil.getBoolean(request, "savedToGeoNetwork"));
         cswHarvester.setUrl(ParamUtil.getString(request, "url"));
         cswHarvester.setTopic(ParamUtil.getString(request, "topic"));
