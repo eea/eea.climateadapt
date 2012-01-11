@@ -41,12 +41,12 @@ String redirect = PortalUtil.getCurrentURL(renderRequest);
 
 	
 <% if (savedToGeoNetwork) { %>
-	<portlet:actionURL name="executeCSWHarvester" var="executeCSWHarvesterURL">
+	<portlet:actionURL name="executeCswHarvester" var="executeCswHarvesterURL">
 		<portlet:param name="cswharvesterid" value="<%= String.valueOf(cswharvesterid) %>" />
 		<portlet:param name="redirect" value="<%= redirect %>"/>
 	</portlet:actionURL>
 	
-        &nbsp;&nbsp;<img id="harvester-execute" onclick="window.location='<%=executeCSWHarvesterURL.toString() %>'" src="<%=renderRequest.getContextPath()%>/images/icons/harvester-run.png" alt="Execute harvester" title="Execute harvester"/>
+        &nbsp;&nbsp;<img id="harvester-execute" onclick="window.location='<%=executeCswHarvesterURL.toString() %>'" src="<%=renderRequest.getContextPath()%>/images/icons/harvester-run.png" alt="Execute harvester" title="Execute harvester"/>
 
 <% } else { %>
 	<portlet:actionURL name="saveCSWHarvesterToGeoNetwork"  var="saveCSWHarvesterToGeoNetworkURL">

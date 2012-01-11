@@ -21,7 +21,7 @@
 <portlet:actionURL name='<%= cswHarvester == null ? "addCSWHarvester" : "updateCSWHarvester" %>' var="editCSWHarvesterURL" />
 
 <portlet:actionURL name="saveCSWHarvesterToGeoNetwork" var="saveCSWHarvesterToGeoNetworkURL"/>
-<portlet:actionURL name="executeCSWHarvester" var="executeCSWHarvester"/>
+<portlet:actionURL name="executeCswHarvester" var="executeCswHarvester"/>
 
 <%
 	// Default values
@@ -58,7 +58,7 @@
 	
 	function executeHarvester() {
 		var form = document.forms["<%= renderResponse.getNamespace() %>fm"];
-		form.action = "<%= executeCSWHarvester %>";
+		form.action = "<%= executeCswHarvester %>";
 	}
 	
 	
