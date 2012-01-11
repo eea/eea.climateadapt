@@ -76,7 +76,7 @@ CREATE TABLE ace_cswharvester
 (
 	cswharvesterid bigint NOT NULL,
 	"name" character varying(75),
-	url character varying(75),
+	url character varying(250),
 	freetext character varying(75),
 	title character varying(75),
 	abstrakt character varying(75),
