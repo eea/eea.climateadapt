@@ -51,8 +51,8 @@
 		
         mappanel = new GeoExt.MapPanel({
             renderTo: 'map_element',
-            height: 500,
-            width: 500,
+            height: 350,
+            width: 675,
             map: chmmap
         });
         
@@ -96,27 +96,28 @@
                         out.println("getRecordByID('" + fileidentifier + "')");
                 }
         }
-        
-        // Add layers from session
+
         HttpServletRequest httprequest = PortalUtil.getOriginalServletRequest(PortalUtil.getHttpServletRequest(renderRequest));
         
-		HttpSession httpsession = httprequest.getSession(true);
+ 		HttpSession httpsession = httprequest.getSession(true);
 		
-		FileIdentifiers fileidentifiers = null;
+ 		FileIdentifiers fileidentifiers = null;
+        
+        // Add layers from session
 		
-		if (httpsession.isNew()) {
-			fileidentifiers = new FileIdentifiers();
+// 		if (httpsession.isNew()) {
+ 			fileidentifiers = new FileIdentifiers();
 			
-			httpsession.setAttribute("fileIdentifiers", fileidentifiers);
-		} else {
-			fileidentifiers = (FileIdentifiers) httpsession.getAttribute("fileIdentifiers");
-		}
+// 			httpsession.setAttribute("fileIdentifiers", fileidentifiers);
+// 		} else {
+// 			fileidentifiers = (FileIdentifiers) httpsession.getAttribute("fileIdentifiers");
+// 		}
 		
-		for (int i = 0; i < fileidentifiers.size(); i ++) {
-            String fileidentifier = fileidentifiers.get(i);
+// 		for (int i = 0; i < fileidentifiers.size(); i ++) {
+//             String fileidentifier = fileidentifiers.get(i);
 
-            out.println("getRecordByID('" + fileidentifier + "')");
-    	}
+//             out.println("getRecordByID('" + fileidentifier + "')");
+//     	}
 
         // Add layer from querystring
         String fileidentifier = httprequest.getParameter(Constants.cswRecordFileIdentifierParameterName);
