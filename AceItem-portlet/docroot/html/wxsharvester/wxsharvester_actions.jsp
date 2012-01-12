@@ -46,7 +46,7 @@ String redirect = PortalUtil.getCurrentURL(renderRequest);
 		<portlet:param name="redirect" value="<%= redirect %>"/>
 	</portlet:actionURL>
 	
-        &nbsp;&nbsp;<img id="harvester-execute" onclick="window.location='<%=executeWxsHarvesterURL.toString() %>'" src="<%=renderRequest.getContextPath()%>/images/icons/harvester-run.png" alt="Execute harvester" title="yExecute harvester"/>
+        &nbsp;&nbsp;<img id="harvester-execute" onclick="window.location='<%=executeWxsHarvesterURL.toString() %>'" src="<%=renderRequest.getContextPath()%>/images/icons/harvester-run.png" alt="Execute harvester" title="Execute harvester"/>
 
 <% } else { %>
 	<portlet:actionURL name="saveWxsHarvesterToGeoNetwork"  var="saveWxsHarvesterToGeoNetworkURL">
