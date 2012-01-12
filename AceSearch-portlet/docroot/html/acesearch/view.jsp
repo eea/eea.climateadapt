@@ -106,9 +106,10 @@ pageContext.setAttribute("countriesList", countriesList);
 	function sortedSearch(sortRadio) {	
 		// grab unique part, after dash
 		var unique = sortRadio.id.match(/-([0-9]+)/)[1];	
-		var sortedSearchForm = $j("#sortsearchformId-"+unique);		
+		var sortedSearchForm = $j("#sortsearchformId-"+unique);
+		// pass sortitemtype instead off aceitemtype !
 		var querystring = 'anyOfThese=' + $j("#sortsearchformId-"+unique + " input[name=anyOfThese]").val();
-		querystring += '&aceitemtype=' + $j("#sortsearchformId-"+unique + " input[name=aceitemtype]").val();
+		querystring += '&sortitemtype=' + $j("#sortsearchformId-"+unique + " input[name=aceitemtype]").val();
         if ($j("#sortsearchformId-"+unique + " input[name=sector]").val() != undefined) {
 		    querystring += '&sector=' + $j("#sortsearchformId-"+unique + " input[name=sector]").val();
         } 
@@ -124,6 +125,7 @@ pageContext.setAttribute("countriesList", countriesList);
         querystring += '&conditionAdaptationElement=' + $j("#sortsearchformId-"+unique + " input[name=conditionAdaptationElement]").val();
 
 		querystring += '&sortBy=' + $j('#'+sortRadio.id).val();
+				
 		// replace existing resultlist with loading icon 
 		$j('#resultsListId-'+unique).remove();
 		$j('#expandedId-'+unique).append('<div id="loadingId-'+unique+'" style="text-align:center;"><img src="<%=renderRequest.getContextPath()%>/images/icons/loading.gif" title="loading" alt="loading"></div>');
