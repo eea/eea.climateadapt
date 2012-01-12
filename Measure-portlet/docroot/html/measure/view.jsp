@@ -113,7 +113,7 @@
 
 		<liferay-ui:search-container-column-text
 			name="lon" 
-			value="<%= "" + measure.getLon() %>"
+			value='<%= "" + measure.getLon() %>'
 		/>
 
 		<liferay-ui:search-container-column-text
