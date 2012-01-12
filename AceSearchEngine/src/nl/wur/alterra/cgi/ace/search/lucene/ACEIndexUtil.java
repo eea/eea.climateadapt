@@ -14,6 +14,8 @@ import java.util.Properties;
 public class ACEIndexUtil {
 	private static String indexFolderPath = "";
 	
+	private static int descriptionLength = 154;
+	
 	/**
 	 * Reads the index folder from a properties file (if exists), otherwise works as before using relative paths
 	 *
@@ -37,6 +39,13 @@ public class ACEIndexUtil {
 			properties.load(fis);
 			
 			indexFolderPath = properties.getProperty("index.path", "");
+
+			try {
+				descriptionLength = Integer.parseInt(properties.getProperty("totaldescription.length", "154")) ;
+			}
+			catch (Exception e) {
+				descriptionLength = 154;
+			}
 			
 			// Adds final File.separator
 			if (!indexFolderPath.equals("")) {
@@ -67,6 +76,19 @@ public class ACEIndexUtil {
 	public static String retrieveIndexFolder() {
 		System.out.println("---> retrieveIndexFolder: "+ indexFolderPath);
 		return indexFolderPath;	
+	}
+	
+	/**
+	 * Reads the index folder from a properties file (if exists)
+	 *
+	 * Create a file aceindex.properties in the same folder of AceSearchengine.jar with this property:
+	 *
+	 *		index.path=PATH
+	 *
+	 * @return Lucene index folder
+	 */
+	public static int retrieveTotalDescriptionLength() {
+		return descriptionLength;	
 	}
 	
 	/**

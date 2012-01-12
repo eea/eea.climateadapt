@@ -1,6 +1,7 @@
 package nl.wur.alterra.cgi.ace.search;
 
 import nl.wur.alterra.cgi.ace.model.AceItem;
+import nl.wur.alterra.cgi.ace.search.lucene.ACEIndexUtil;
 
 /**
  * AceItem wrapper class to export only relevant AceItem attributes to searchResults and add  search result specific properties.
@@ -106,9 +107,11 @@ public class AceItemSearchResult {
     public void setShortdescription(String shortdescription) {
         this.shortdescription = shortdescription.replaceAll("\\<.*?\\>", " ");
         
-        if( this.shortdescription.length() > 104) {
+        int desclength = ACEIndexUtil.retrieveTotalDescriptionLength() - this.name.length();
+        
+        if( this.shortdescription.length() > desclength) {
         	
-        	this.shortdescription = this.shortdescription.substring(0,100).replaceAll("\"", "\"\"") + " ..." ; 
+        	this.shortdescription = this.shortdescription.substring(0, desclength-4).replaceAll("\"", "\"\"") + " ..." ; 
         }
         
     }

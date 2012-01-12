@@ -3,10 +3,11 @@ package nl.wur.alterra.cgi.ace.search;
 /**
  * Bean for AceItem search form parameters.
  *
- * @author heikki doeleman
+ * @author heikki doeleman / hugo de groot
  */
 public class AceSearchFormBean {
 
+    private String sortitemtype;
     private String[] aceitemtype;
     private String[] sector;
     private String[] element;
@@ -27,6 +28,15 @@ public class AceSearchFormBean {
     private String conditionAdaptationElement;
     private String conditionClimateImpact;
 
+
+    public String getSortitemtype() {
+        return sortitemtype;
+    }
+
+    public void setSortitemtype(String sortItemType) {
+        this.sortitemtype = sortItemType;
+    }
+    
     public String[] getAceitemtype() {
         return aceitemtype;
     }

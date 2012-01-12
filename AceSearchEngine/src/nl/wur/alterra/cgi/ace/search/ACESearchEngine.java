@@ -51,8 +51,15 @@ public class ACESearchEngine {
         String[] sectors ;
         String[] sortBys ;
         String[] datainfo_type;
-		
-        aceItemTypes = searchParams.get(SearchRequestParams.ACEITEM_TYPE);
+        
+        // is sortitemtype exist use that one !!
+        aceItemTypes = searchParams.get(SearchRequestParams.SORTITEM_TYPE);
+
+        if(aceItemTypes==null || aceItemTypes.length==0) {
+
+            aceItemTypes = searchParams.get(SearchRequestParams.ACEITEM_TYPE);
+        }
+        
         datainfo_type = searchParams.get(SearchRequestParams.DATAINFO_TYPE);
         if(datainfo_type==null || datainfo_type.length==0) {
         	

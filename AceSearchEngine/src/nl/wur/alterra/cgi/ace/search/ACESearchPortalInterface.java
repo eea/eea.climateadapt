@@ -47,6 +47,7 @@ public class ACESearchPortalInterface {
 		if ( isEmpty(formBean.getAceitemtype()) || 
 			 (formBean.getDatainfo_type().equals("1") && formBean.getSortBy()==null) ) {
 			for (AceItemType aceItemType : AceItemType.values()) {
+	            
 				List<AceItemSearchResult> results = searchEngine.searchLuceneByType(formBean, aceItemType.name());
 				totalResults += results.size();
 
@@ -64,6 +65,7 @@ public class ACESearchPortalInterface {
 		// search only requested aceItemTypes
 		else {
 			for (String aceItemType : formBean.getAceitemtype()) {
+	            
 				List<AceItemSearchResult> results = searchEngine.searchLuceneByType(formBean, aceItemType);
                 
 				totalResults += results.size();
@@ -139,14 +141,8 @@ public class ACESearchPortalInterface {
         if(request instanceof ClientDataRequest) {
             requestParams = request.getParameterMap();
 
-            //if(requestParams.containsKey(SearchRequestParams.SORTBY)) {
-            //	String[] key = requestParams.get(SearchRequestParams.SORTBY);
-            //	System.out.println( "Sort by " + key[0] );
-            //}
-
 			// Retrieve fuzziness from preferences
             PortletPreferences preferences = request.getPreferences();
-            // System.out.println("prepareACESearchFormBean (fuzziness): " + preferences.getValue(SearchRequestParams.FUZZINESS, ""));
             
 			fuzziness = preferences.getValue(SearchRequestParams.FUZZINESS, "");            
         }
