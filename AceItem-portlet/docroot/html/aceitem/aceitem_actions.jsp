@@ -30,13 +30,8 @@ String redirect = PortalUtil.getCurrentURL(renderRequest);
 	</portlet:actionURL>
 		
 <%
-    if(wxsharvesterId==0) {
-		String confirmURL = "Javascript: if(confirm('Delete?')){document.location.replace('" + deleteURL.toString() + "')};";
+	String confirmURL = "Javascript: if(confirm('Delete?')){document.location.replace('" + deleteURL.toString() + "')};";
 %>
-		<liferay-ui:icon image="delete" url="<%= confirmURL %>" />
-
-<%
-    }
-%>
+	<liferay-ui:icon image="delete" url="<%= confirmURL %>" />
 
  <!--  Commented out: no Actons button: /liferay-ui:icon-menu -->
