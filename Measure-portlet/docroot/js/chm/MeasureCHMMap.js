@@ -18,8 +18,28 @@ CHM.MeasureCHMMap = OpenLayers.Class(CHM.CHMMap, {
 	
 	initialize: function(options) {
 		CHM.CHMMap.prototype.initialize.apply(this, arguments);
-		
-		measurevectorlayer = new OpenLayers.Layer.Vector('Measure');
+	},
+	
+	addMeasureLayers : function() {
+		measurevectorlayer = new OpenLayers.Layer.Vector('Measure',	{
+	    	displayInLayerSwitcher: true,
+	    	styleMap: new OpenLayers.StyleMap({
+	    	    "default": new OpenLayers.Style({
+	    	        pointRadius: 8, 
+	    	        fillColor: "#0070c0",
+	    	        strokeColor: "#002060",
+	    	        strokeWidth: 2,
+	    	        graphicZIndex: 1
+	    	    }),
+	    	    "default": new OpenLayers.Style({
+	    	        pointRadius: 8, 
+	    	        fillColor: "#0070c0",
+	    	        strokeColor: "#002060",
+	    	        strokeWidth: 2,
+	    	        graphicZIndex: 1
+	    	    }),
+	    	})
+	    });
 		
 		similarareasvectorlayer = new OpenLayers.Layer.Vector("WFS", {
 		    strategies: [new OpenLayers.Strategy.BBOX()],
@@ -38,7 +58,7 @@ CHM.MeasureCHMMap = OpenLayers.Class(CHM.CHMMap, {
 			this.setArea(e.feature.attributes.biogeo);
 		});
         
-		this.addLayers([measurevectorlayer, similarareasvectorlayer]);
+		this.addLayers([similarareasvectorlayer, measurevectorlayer]);
 				
 		measurecontrol = new CHM.MeasureControl({measureCHMMap: this});
 				
