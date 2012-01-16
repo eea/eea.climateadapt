@@ -318,17 +318,26 @@
 	
 	var locatorKey = '<%= prefs.getValue(Constants.locatorKeyPreferenceName, "Ao9qujBzDtg-nFiusTjt5VQ9x2NJB2wAD7YCRjaPz7hQQjxdFcl24tyhOwCDCIrw") %>';
 	
+	var zoomLevel = '<%= prefs.getValue(Constants.zoomLevelPreferenceName, "2") %>';
+	
 	var measurechmmap;
 	
 	var locator;
 	
-    $(document).ready(function() {
-    	setTimeout(function(){init();}, <%= prefs.getValue(Constants.bingTimeOutPreferenceName, "100") %>);
-    });
-    
-    function init() {	
-    	measurechmmap = new CHM.MeasureCHMMap('map_element', {});
-    	
+    Ext.onReady(function() {
+        measurechmmap = new CHM.MeasureCHMMap();
+
+        mappanel = new GeoExt.MapPanel({
+            renderTo: 'map_element',
+            height: 350,
+            width: 675,
+            map: measurechmmap
+        });
+
+        measurechmmap.addBingLayers();
+        
+        measurechmmap.addMeasureLayers();
+
     	measurechmmap.setOnMeasureChanged(this.measureChanged);
 		
     	measurechmmap.setOnAreaChanged(this.areaChanged);
@@ -338,7 +347,7 @@
     	locator.setOnLocationChanged(handleLocationChanged);
     	
     	handleClick(null);
-    }    			
+    });    			
 
 	function handleLocationChanged() {
 		measurechmmap.setMeasure(new CHM.Measure(locator.getLocation().x, locator.getLocation().y, new OpenLayers.Projection('EPSG:4326')));
