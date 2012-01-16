@@ -466,6 +466,11 @@ public class MeasurePortlet extends MVCPortlet {
 		String bingtimeout = ParamUtil.getString(request, Constants.bingTimeOutPreferenceName);
 
 		prefs.setValue(Constants.bingTimeOutPreferenceName, bingtimeout);
+		
+		// ZoomLevel
+		String zoomlevel = ParamUtil.getString(request, Constants.zoomLevelPreferenceName);
+
+		prefs.setValue(Constants.zoomLevelPreferenceName, zoomlevel);
 
 		prefs.store();
 	} 
