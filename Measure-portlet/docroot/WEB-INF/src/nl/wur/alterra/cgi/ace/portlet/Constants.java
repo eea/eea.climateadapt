@@ -22,4 +22,6 @@ public class Constants {
 	public static String wfsPreferenceName = "wms";
 
 	public static String wmsPreferenceName = "wfs";
+	
+	public static String zoomLevelPreferenceName = "zoomLevel";
 }
