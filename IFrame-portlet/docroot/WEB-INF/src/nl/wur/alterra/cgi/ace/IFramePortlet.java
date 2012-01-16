@@ -15,7 +15,7 @@ public class IFramePortlet extends MVCPortlet {
 
 	 
 	/**
-	 * Sets the preferences for iframe-tag inline info
+	 * Sets the preferences for iframe-tag inline and url 
 	 *
 	 */
 	public void setIFramePref(ActionRequest request, ActionResponse response)

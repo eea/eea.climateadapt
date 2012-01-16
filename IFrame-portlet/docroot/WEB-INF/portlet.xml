@@ -15,11 +15,11 @@
 		</portlet-class>
 		<init-param>
 			<name>view-jsp</name>
-			<value>/html/view.jsp</value>
+			<value>/html/iframe/view.jsp</value>
 		</init-param>
 		<init-param>
 			<name>edit-jsp</name>
-			<value>/html/edit.jsp</value>
+			<value>/html/iframe/edit.jsp</value>
 		</init-param>
 		<expiration-cache>0</expiration-cache>
 		<supports>
@@ -43,6 +43,51 @@
 				<value>frameborder='0' style='min-width:984px;min-height:800px' width='100%' height='100%'</value>
 			</preference>
 		</portlet-preferences>
+		<security-role-ref>
+			<role-name>administrator</role-name>
+		</security-role-ref>
+		<security-role-ref>
+			<role-name>guest</role-name>
+		</security-role-ref>
+		<security-role-ref>
+			<role-name>power-user</role-name>
+		</security-role-ref>
+		<security-role-ref>
+			<role-name>user</role-name>
+		</security-role-ref>
+	</portlet>
+	<portlet>
+		<portlet-name>freehtmlportlet</portlet-name>
+		<display-name>FreeHTMLportlet</display-name>
+		<portlet-class>
+			nl.wur.alterra.cgi.ace.FreeHTMLportlet
+		</portlet-class>
+		<init-param>
+			<name>view-jsp</name>
+			<value>/html/freehtml/view.jsp</value>
+		</init-param>
+		<init-param>
+			<name>edit-jsp</name>
+			<value>/html/freehtml/edit.jsp</value>
+		</init-param>
+		<expiration-cache>0</expiration-cache>
+		<supports>
+			<mime-type>text/html</mime-type>
+			<portlet-mode>VIEW</portlet-mode>
+			<portlet-mode>EDIT</portlet-mode>
+		</supports>
+		<portlet-info>
+			<title>FreeHTMLportlet</title>
+			<short-title>FreeHTMLportlet</short-title>
+			<keywords></keywords>
+		</portlet-info>
+		<!-- Portlet preferences (configurable by user in portlet EDIT mode) -->
+		<portlet-preferences>
+			<preference>
+				<name>htmltext</name>
+				<value></value>
+			</preference>
+		</portlet-preferences>		
 		<security-role-ref>
 			<role-name>administrator</role-name>
 		</security-role-ref>
