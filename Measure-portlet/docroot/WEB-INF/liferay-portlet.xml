@@ -9,8 +9,11 @@
 		<instanceable>false</instanceable>
 		<header-portlet-css>/css/portlet.css</header-portlet-css>
 		<header-portlet-javascript>http://ecn.dev.virtualearth.net/mapcontrol/mapcontrol.ashx?v=6.2&amp;mkt=en-us"</header-portlet-javascript>
+		<header-portlet-javascript>/js/ext-base.js</header-portlet-javascript>
+		<header-portlet-javascript>/js/ext-all.js</header-portlet-javascript>
 		<header-portlet-javascript>/js/jquery-1.6.2.min.js</header-portlet-javascript>
 		<header-portlet-javascript>/js/OpenLayers.js</header-portlet-javascript>
+		<header-portlet-javascript>/js/GeoExt.js</header-portlet-javascript>
 		<header-portlet-javascript>/js/chm/CHM.js</header-portlet-javascript>
 		<header-portlet-javascript>/js/chm/CHMMap.js</header-portlet-javascript>
 		<header-portlet-javascript>/js/chm/Point.js</header-portlet-javascript>
