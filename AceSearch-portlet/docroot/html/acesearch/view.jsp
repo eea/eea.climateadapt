@@ -27,21 +27,37 @@ Long totalResults = (Long) request.getAttribute("total_results");
 
 // Retrieve parameters to fill form
 String anyOfThese;
+String[] aceitemtypes = null;
+String[] sectors = null;
+String[] elements = null;
+String[] impacts = null;
+String[] countries = null;
 
 AceSearchFormBean acesearchformbean = (AceSearchFormBean) request.getAttribute(SearchRequestParams.SEARCH_PARAMS);
 
+String freetextAny = ParamUtil.getString(request, "freetextAny");
+String datainfo_type = ParamUtil.getString(request, "datainfo_type");
+
 if(acesearchformbean != null) {
    anyOfThese = acesearchformbean.getAnyOfThese();
+   if ((freetextAny == null) || (freetextAny.equals(""))) freetextAny = "2";
+   aceitemtypes = acesearchformbean.getAceitemtype();
+   if ( (datainfo_type == null) || (datainfo_type.equals("") ) ) datainfo_type = ((aceitemtypes == null) ? "1" : "2");
+    sectors = acesearchformbean.getSector();
+	elements = acesearchformbean.getElement();
+	impacts = acesearchformbean.getImpact();
+	countries = acesearchformbean.getCountries();
 }
 else {
 	anyOfThese = ParamUtil.getString(request, "anyOfThese");
+	if ((freetextAny == null) || (freetextAny.equals(""))) freetextAny = "1";
+	aceitemtypes = request.getParameterValues("aceitemtype");
+	if ((datainfo_type == null) || (datainfo_type.equals(""))) datainfo_type = "1";
+	sectors = request.getParameterValues("sector");
+	elements = request.getParameterValues("element");
+	impacts = request.getParameterValues("impact");
+	countries = request.getParameterValues("countries");	
 }
-
-String freetextAny = ParamUtil.getString(request, "freetextAny");
-if ((freetextAny == null) || (freetextAny.equals(""))) freetextAny = "1";
-
-String datainfo_type = ParamUtil.getString(request, "datainfo_type");
-if ((datainfo_type == null) || (datainfo_type.equals(""))) datainfo_type = "1";
 
 String date_type = ParamUtil.getString(request, "date_type");
 if ((date_type == null) || (date_type.equals(""))) date_type = "1";
@@ -55,27 +71,22 @@ if ((conditionAdaptationElement == null) || (conditionAdaptationElement.equals("
 String conditionClimateImpact = ParamUtil.getString(request, "conditionClimateImpact");
 if ((conditionClimateImpact == null) || (conditionClimateImpact.equals(""))) conditionClimateImpact = "AND";
 
-String[] aceitemtypes = request.getParameterValues("aceitemtype");
 if (aceitemtypes == null) aceitemtypes =  new String[0];
 List<String> aceitemtypesList = Arrays.asList(aceitemtypes);
 pageContext.setAttribute("aceitemtypesList", aceitemtypesList);
 
-String[] sectors = request.getParameterValues("sector");
 if (sectors == null) sectors = new String[0];
 List<String> sectorsList = Arrays.asList(sectors);
 pageContext.setAttribute("sectorsList", sectorsList);
 
-String[] elements = request.getParameterValues("element");
 if (elements == null) elements = new String[0];
 List<String> elementsList = Arrays.asList(elements);
 pageContext.setAttribute("elementsList", elementsList);
 
-String[] impacts = request.getParameterValues("impact");
 if (impacts == null) impacts = new String[0];
 List<String> impactsList = Arrays.asList(impacts);
 pageContext.setAttribute("impactsList", impactsList);
 
-String[] countries = request.getParameterValues("countries");
 if (countries == null) countries = new String[0];
 List<String> countriesList = Arrays.asList(countries);
 pageContext.setAttribute("countriesList", countriesList);

@@ -38,18 +38,31 @@ public class AceSearchPortlet extends MVCPortlet {
 	    	HttpServletRequest httpRequest = 
 	    		PortalUtil.getOriginalServletRequest(
 	    		PortalUtil.getHttpServletRequest(renderRequest) ) ;
-	    	
-	    		String searchtext = httpRequest.getParameter("searchtext") ;
+
+    			String searchtext = httpRequest.getParameter("searchtext") ;
+    			String searchtypes = httpRequest.getParameter("searchtypes") ;
+    			String searchsectors = httpRequest.getParameter("searchsectors") ;
+    			String searchelements = httpRequest.getParameter("searchelements") ;
+    			String searchimpacts = httpRequest.getParameter("searchimpacts") ;
+    			String searchcountries = httpRequest.getParameter("searchcountries") ;
 	    		
 	    		//System.out.println("searchtext parameter: " + searchtext) ;
 	    		
-	    		if(searchtext != null && searchtext.trim().length() > 0) {
+	    		if(searchtext != null || searchtypes != null|| searchsectors != null ||
+	    		   searchelements != null || searchimpacts != null|| searchcountries != null) {
 	
 		        	ACESearchPortalInterface searchEngine = new ACESearchPortalInterface();		    			
 	    			AceSearchFormBean formBean = searchEngine.prepareACESearchFormBean(renderRequest);
-	    			formBean.setAnyOfThese( searchtext );
-	    			renderRequest.setAttribute(SearchRequestParams.SEARCH_PARAMS, formBean);
+	    			//formBean.setImpact( new String[] { "FLOODING" } );
 	    			
+	    			if (searchtext != null) formBean.setAnyOfThese( searchtext );	    	
+	    			if (searchtypes != null) formBean.setAceitemtype( searchtypes.split(";") );
+	    			if (searchsectors != null) formBean.setSector( searchsectors.split(";") );
+	    			if (searchelements != null) formBean.setElement( searchelements.split(";") );
+	    			if (searchimpacts != null) formBean.setImpact( searchimpacts.split(";") );
+	    			if (searchcountries != null) formBean.setCountries( searchcountries.split(";") );
+	    			
+	    			renderRequest.setAttribute(SearchRequestParams.SEARCH_PARAMS, formBean);
 	    			searchEngine.handleSearchRequest(renderRequest, formBean);
 	    		}
 		}
