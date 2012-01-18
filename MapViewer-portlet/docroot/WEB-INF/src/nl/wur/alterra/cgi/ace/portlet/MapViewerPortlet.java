@@ -71,6 +71,11 @@ public class MapViewerPortlet extends MVCPortlet {
 		String cswRecordFileidentifiers = ParamUtil.getString(request, Constants.cswRecordFileIdentifiersPreferenceName);
 		
 		prefs.setValue(Constants.cswRecordFileIdentifiersPreferenceName, cswRecordFileidentifiers);
+
+		// MapViewer Servlet URL
+		String mapViewerServletUrl = ParamUtil.getString(request, Constants.mapViewerServletURLPreferenceName);
+		
+		prefs.setValue(Constants.mapViewerServletURLPreferenceName, mapViewerServletUrl);
 		
 		// Zoomlevel
 		String zoomlevel = ParamUtil.getString(request, Constants.zoomLevelPreferenceName);

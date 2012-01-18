@@ -14,6 +14,8 @@ public class Constants {
 	
 	public static String cswServletURLPreferenceName = "cswServletURL";
 	
+	public static String mapViewerServletURLPreferenceName = "mapViewerServletURL";
+	
 	public static String cswUserNamePreferenceName = "cswUserName";
 	
 	public static String cswPassWordPreferenceName = "cswPassWord";

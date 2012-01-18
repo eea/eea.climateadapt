@@ -39,6 +39,8 @@
 
     <aui:input name="<%= Constants.cswRecordFileIdentifiersPreferenceName %>" value='<%= prefs.getValue(Constants.cswRecordFileIdentifiersPreferenceName, "") %>' size="45" type="text" />
 
+	<aui:input name="<%= Constants.mapViewerServletURLPreferenceName %>" value='<%= prefs.getValue(Constants.mapViewerServletURLPreferenceName, "/MapViewer-portlet/mapviewerservlet") %>' size="45" type="text" />
+
 	<aui:button-row>
 		<aui:button type="submit" />
 	</aui:button-row>

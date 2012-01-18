@@ -28,4 +28,15 @@
     <url-pattern>/CSWServlet</url-pattern>
     <url-pattern>/cswservlet</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>MapViewerServlet</display-name>
+    <servlet-name>MapViewerServlet</servlet-name>
+    <servlet-class>nl.wur.alterra.cgi.ace.mapviewer.MapViewerServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>MapViewerServlet</servlet-name>
+    <url-pattern>/MapViewerServlet</url-pattern>
+    <url-pattern>/mapviewerservlet</url-pattern>
+  </servlet-mapping>
 </web-app>

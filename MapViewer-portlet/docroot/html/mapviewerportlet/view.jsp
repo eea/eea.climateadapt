@@ -2,20 +2,7 @@
 <%@page import="java.util.ArrayList"%>
 <%@include file="/html/init.jsp" %>
 
-<div id="locator">
-        <script type="text/javascript">
-            function getKey (event) {
-                var keyCode = ('which' in event) ? event.which : event.keyCode;
-                if (keyCode == 13) {
-                        locate(document.getElementById('location').value);
-                }
-            }
-        </script>
-        <input type="text" name="location" id="location" onkeydown="getKey(event)" />
-        <input type="submit" value="Locate" onclick="locate(document.getElementById('location').value)"/>
-</div>
-
-<div id='locations_element'></div>
+<div id='status_element'>Status</div>
 
 <div id='map_element'></div>
 
@@ -39,21 +26,25 @@
 	var cswUsername = '<%= prefs.getValue(Constants.cswUserNamePreferenceName, "") %>';
 	
 	var cswPassword = '<%= prefs.getValue(Constants.cswPassWordPreferenceName, "") %>';
+
+	var mapViewerServletUrl = '<%= prefs.getValue(Constants.mapViewerServletURLPreferenceName, "/MapViewer-portlet/mapviewerservlet") %>';
 	
-	var chmmap;
+	var mapviewerchmmap;
 				
 	var locator;
 	
 	var csw;
 	
     Ext.onReady(function() {
-    	chmmap = new CHM.CHMMap();
+    	mapviewerchmmap = new CHM.MapViewerCHMMap();
+		
+    	mapviewerchmmap.setOnStatusChanged(handleStatusChanged);
 		
         mappanel = new GeoExt.MapPanel({
             renderTo: 'map_element',
             height: 350,
             width: 675,
-            map: chmmap
+            map: mapviewerchmmap
         });
         
         legendpanel = new GeoExt.LegendPanel({
@@ -75,70 +66,44 @@
             enableDD: true
         });
 
-        chmmap.addBingLayers();
+        mapviewerchmmap.addBingLayers();
+	        
+        mapviewerchmmap.registerEvents();
+	        
+        mapviewerchmmap.restore();
         
-    	locator = new CHM.Locator('locations_element', {});
-
-    	locator.setOnLocationChanged(handleLocationChanged);
-    	
     	csw = new CHM.CSW();
     	
         <%
-        // Add layers from preferences
-        String fileidentifierspref = prefs.getValue(Constants.cswRecordFileIdentifiersPreferenceName, "");
-
-        if (fileidentifierspref != null && fileidentifierspref.length() > 0) {
-                String[] fileidentifiers = fileidentifierspref.split(",");
-
-                for (int i = 0; i < fileidentifiers.length; i ++) {
-                        String fileidentifier = fileidentifiers[i];
-
-                        out.println("getRecordByID('" + fileidentifier + "')");
-                }
-        }
-
-        HttpServletRequest httprequest = PortalUtil.getOriginalServletRequest(PortalUtil.getHttpServletRequest(renderRequest));
-        
- 		HttpSession httpsession = httprequest.getSession(true);
-		
- 		FileIdentifiers fileidentifiers = null;
-        
-        // Add layers from session
-		
-// 		if (httpsession.isNew()) {
- 			fileidentifiers = new FileIdentifiers();
-			
-// 			httpsession.setAttribute("fileIdentifiers", fileidentifiers);
-// 		} else {
-// 			fileidentifiers = (FileIdentifiers) httpsession.getAttribute("fileIdentifiers");
-// 		}
-		
-// 		for (int i = 0; i < fileidentifiers.size(); i ++) {
-//             String fileidentifier = fileidentifiers.get(i);
-
-//             out.println("getRecordByID('" + fileidentifier + "')");
-//     	}
+//         // Add layers from preferences
+//         String fileidentifierspref = prefs.getValue(Constants.cswRecordFileIdentifiersPreferenceName, "");
+//
+//         if (fileidentifierspref != null && fileidentifierspref.length() > 0) {
+//                 String[] fileidentifiers = fileidentifierspref.split(",");
+//
+//                 for (int i = 0; i < fileidentifiers.length; i ++) {
+//                         String fileidentifier = fileidentifiers[i];
+//
+//                         out.println("getRecordByID('" + fileidentifier + "')");
+//                 }
+//         }
 
         // Add layer from querystring
+		HttpServletRequest httprequest = PortalUtil.getOriginalServletRequest(PortalUtil.getHttpServletRequest(renderRequest));
+        
         String fileidentifier = httprequest.getParameter(Constants.cswRecordFileIdentifierParameterName);
 
         if (fileidentifier != null && fileidentifier.length() > 0) {
                 out.println("getRecordByID('" + fileidentifier + "')");
-                
-                fileidentifiers.add(fileidentifier);
         }
         %>
     });
-
-	function handleLocationChanged() {
-		alert("Not implemented yet!");
-	}
-	
-    function locate(aLocation) {
-    	locator.locate(aLocation);
-    }
-	
+    
     function getRecordByID(aID) {
     	csw.getRecordByID(aID);
     }
+    
+    function handleStatusChanged() {
+    	document.getElementById('status_element').innerHTML = mapviewerchmmap.getStatus();
+	}
 </script>
