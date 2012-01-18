@@ -17,15 +17,10 @@
 			<name>view-jsp</name>
 			<value>/html/countries/view.jsp</value>
 		</init-param>
-		<init-param>
-			<name>edit-jsp</name>
-			<value>/html/countries/edit.jsp</value>
-		</init-param>
 		<expiration-cache>0</expiration-cache>
 		<supports>
 			<mime-type>text/html</mime-type>
 			<portlet-mode>VIEW</portlet-mode>
-			<portlet-mode>EDIT</portlet-mode>
 		</supports>
         <!-- Resource Bundle -->
 		<resource-bundle>content.Language</resource-bundle>
