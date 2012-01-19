@@ -32,7 +32,8 @@
 	
 		<div id="${resultsListId}">
 			<c:forEach var="wrappedSearchResult" items="${groupedResults}" begin="0" end="<%= itemsOnPage-1 %>">		
-
+				<% 					
+					if ( sofarnr  < prefnritemspage ) { %>
 				<div>
 					<div>
 
@@ -72,6 +73,9 @@
 						<hr class="clearer"/>
 					</div> --%> 
 				</div>
+			<% 	
+				sofarnr++ ;
+				} %>
 			</c:forEach>
 		</div>
 

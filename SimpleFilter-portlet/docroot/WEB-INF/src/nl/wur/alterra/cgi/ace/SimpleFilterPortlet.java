@@ -51,15 +51,27 @@ public class SimpleFilterPortlet extends MVCPortlet {
             	//System.out.println("Impact: " + impact[0]);
             	       
                 Map<String, String[]> requestParams;
-        		String fuzziness = null;
 
+                String fuzziness = null;
+                String anyOfThese = null;
+                String[] aceItemTypes = null; 
                 PortletPreferences preferences = renderRequest.getPreferences();
                 requestParams = preferences.getMap();
 
         		fuzziness = preferences.getValue(SearchRequestParams.FUZZINESS, "");
-
+        		anyOfThese = preferences.getValue(SearchRequestParams.ANY, "");
+        		aceItemTypes = preferences.getValues(SearchRequestParams.ACEITEM_TYPE, new String[] {} );
+        			
                 ACESearchEngine se = new ACESearchEngine();
                 AceSearchFormBean formBean = se.prepareACESearchFormBean(requestParams, fuzziness);        	
+                
+                if( anyOfThese.length() > 0 ) {
+                	formBean.setAnyOfThese( anyOfThese );
+                }        	
+                
+                if( aceItemTypes.length > 0 ) {
+                	formBean.setAceitemtype( aceItemTypes );
+                }  
                 
                 if( !sector[0].equalsIgnoreCase("all") ) {
                 	formBean.setSector( sector );

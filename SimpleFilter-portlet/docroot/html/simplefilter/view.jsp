@@ -1,4 +1,5 @@
 <%@page import="nl.wur.alterra.cgi.ace.search.AceSearchFormBean"%>
+<%@page import="nl.wur.alterra.cgi.ace.search.SearchRequestParams"%>
 <%@page import="nl.wur.alterra.cgi.ace.SimpleFilterPortlet"%>
 <%@ page import="java.util.Arrays" %>
 <%--
@@ -24,8 +25,28 @@ Long totalResults = (Long) request.getAttribute("total_results");
 
 int filter = Integer.parseInt( renderRequest.getPreferences().getValue(Constants.FREEPAR, "0") );
 
-String includeFile = "searchresultsonetype.jspf";
+long sofarnr = 0;
 
+long prefnritemspage = Long.parseLong(renderRequest.getPreferences().getValue(Constants.NRITEMSPAGE, "10"));
+
+AceSearchFormBean acesearchformbean = (AceSearchFormBean) request.getAttribute(SearchRequestParams.SEARCH_PARAMS);
+
+// Retrieve parameters to fill form
+
+String anyOfThese = null;
+	
+String[] aceitemtypes = null;
+
+if(acesearchformbean != null) {
+	anyOfThese = acesearchformbean.getAnyOfThese();
+	
+	aceitemtypes = acesearchformbean.getAceitemtype();
+}
+else {
+	anyOfThese = renderRequest.getPreferences().getValue(SearchRequestParams.ANY,"");
+	
+	aceitemtypes = renderRequest.getPreferences().getValues(SearchRequestParams.ACEITEM_TYPE, new String[] {} );	
+}
 String selected ;
 
 String selected_impact = (String) request.getAttribute(Constants.USERIMPACT);
@@ -122,112 +143,168 @@ String redirect = PortalUtil.getCurrentURL(renderRequest);
 		<c:set var="aceitemtype" scope="page" value="DOCUMENT"/>
 		<c:set var="groupTitle" scope="page"><liferay-ui:message key="acesearch-datainfotype-lbl-DOCUMENT" /></c:set>
         
-<% 	if( filter <= 1) {	%>	
-        <%@ include file="searchresultsonetype.jspf" %>
-<% } else { %>	
-        <%@ include file="searchresultsgowebsite.jspf" %>
-<% } %>	
-
+<% 		if( sofarnr < prefnritemspage ) {
+			if( filter <= 1) {	%>	
+       			<%@ include file="searchresultsonetype.jspf" %>
+<% 			} else { %>	
+        		<%@ include file="searchresultsgowebsite.jspf" %>
+<% 			}
+  		}	%>	
 		<c:set var="groupedResults" scope="page" value="${INFORMATIONSOURCE_searchResults}"/>
 		<c:set var="groupedJSONResults" scope="page" value="${INFORMATIONSOURCE_JSONsearchResults}"/>
 		<c:set var="aceitemtype" scope="page" value="INFORMATIONSOURCE"/>				
 		<c:set var="groupTitle" scope="page"><liferay-ui:message key="acesearch-datainfotype-lbl-INFORMATIONSOURCE" /></c:set>
 
-<% 	if( filter <= 1) {	%>	
-        <%@ include file="searchresultsonetype.jspf" %>
-<% } else { %>	
-        <%@ include file="searchresultsgowebsite.jspf" %>
-<% } %>
+<% 		if( sofarnr < prefnritemspage ) {
+			if( filter <= 1) {	%>	
+       			<%@ include file="searchresultsonetype.jspf" %>
+<% 			} else { %>	
+        		<%@ include file="searchresultsgowebsite.jspf" %>
+<% 			}
+  		}	%>	
 
         <c:set var="groupedResults" scope="page" value="${GUIDANCE_searchResults}"/>
         <c:set var="groupedJSONResults" scope="page" value="${GUIDANCE_JSONsearchResults}"/>
         <c:set var="aceitemtype" scope="page" value="GUIDANCE"/>
         <c:set var="groupTitle" scope="page"><liferay-ui:message key="acesearch-datainfotype-lbl-GUIDANCE" /></c:set>
 
-<% 	if( filter <= 1) {	%>	
-        <%@ include file="searchresultsonetype.jspf" %>
-<% } else { %>	
-        <%@ include file="searchresultsgowebsite.jspf" %>
-<% } %>
+<% 		if( sofarnr < prefnritemspage ) {
+			if( filter <= 1) {	%>	
+       			<%@ include file="searchresultsonetype.jspf" %>
+<% 			} else { %>	
+        		<%@ include file="searchresultsgowebsite.jspf" %>
+<% 			}
+  		}	%>	
 
         <c:set var="groupedResults" scope="page" value="${TOOL_searchResults}"/>
         <c:set var="groupedJSONResults" scope="page" value="${TOOL_JSONsearchResults}"/>
         <c:set var="aceitemtype" scope="page" value="TOOL"/>
         <c:set var="groupTitle" scope="page"><liferay-ui:message key="acesearch-datainfotype-lbl-TOOL" /></c:set>
 
-<% 	if( filter <= 1) {	%>	
-        <%@ include file="searchresultsonetype.jspf" %>
-<% } else { %>	
-        <%@ include file="searchresultsgowebsite.jspf" %>
-<% } %>
+<% 		if( sofarnr < prefnritemspage ) {
+			if( filter <= 1) {	%>	
+       			<%@ include file="searchresultsonetype.jspf" %>
+<% 			} else { %>	
+        		<%@ include file="searchresultsgowebsite.jspf" %>
+<% 			}
+  		}	%>	
 
 		<c:set var="groupedResults" scope="page" value="${MAPGRAPHDATASET_searchResults}"/>
 		<c:set var="groupedJSONResults" scope="page" value="${MAPGRAPHDATASET_JSONsearchResults}"/>
 		<c:set var="aceitemtype" scope="page" value="MAPGRAPHDATASET"/>		
 		<c:set var="groupTitle" scope="page"><liferay-ui:message key="acesearch-datainfotype-lbl-MAPGRAPHDATASET" /></c:set>
 
-<% 	if( filter <= 1) {	%>	
-        <%@ include file="searchresultsonetype.jspf" %>
-<% } else { %>	
-        <%@ include file="searchresultsgowebsite.jspf" %>
-<% } %>
+<% 		if( sofarnr < prefnritemspage ) {
+			if( filter <= 1) {	%>	
+       			<%@ include file="searchresultsonetype.jspf" %>
+<% 			} else { %>	
+        		<%@ include file="searchresultsgowebsite.jspf" %>
+<% 			}
+  		}	%>	
 
         <c:set var="groupedResults" scope="page" value="${INDICATOR_searchResults}"/>
 		<c:set var="groupedJSONResults" scope="page" value="${INDICATOR_JSONsearchResults}"/>
 		<c:set var="aceitemtype" scope="page" value="INDICATOR"/>
 		<c:set var="groupTitle" scope="page"><liferay-ui:message key="acesearch-datainfotype-lbl-INDICATOR" /></c:set>
 
-<% 	if( filter <= 1) {	%>	
-        <%@ include file="searchresultsonetype.jspf" %>
-<% } else { %>	
-        <%@ include file="searchresultsgowebsite.jspf" %>
-<% } %>
+<% 		if( sofarnr < prefnritemspage ) {
+			if( filter <= 1) {	%>	
+       			<%@ include file="searchresultsonetype.jspf" %>
+<% 			} else { %>	
+        		<%@ include file="searchresultsgowebsite.jspf" %>
+<% 			}
+  		}	%>	
 
         <c:set var="groupedResults" scope="page" value="${RESEARCHPROJECT_searchResults}"/>
 		<c:set var="groupedJSONResults" scope="page" value="${RESEARCHPROJECT_JSONsearchResults}"/>
 		<c:set var="aceitemtype" scope="page" value="RESEARCHPROJECT"/>
 		<c:set var="groupTitle" scope="page"><liferay-ui:message key="acesearch-datainfotype-lbl-RESEARCHPROJECT" /></c:set>
 
-<% 	if( filter <= 1) {	%>	
-        <%@ include file="searchresultsonetype.jspf" %>
-<% } else { %>	
-        <%@ include file="searchresultsgowebsite.jspf" %>
-<% } %>
+<% 		if( sofarnr < prefnritemspage ) {
+			if( filter <= 1) {	%>	
+       			<%@ include file="searchresultsonetype.jspf" %>
+<% 			} else { %>	
+        		<%@ include file="searchresultsgowebsite.jspf" %>
+<% 			}
+  		}	%>	
 
         <c:set var="groupedResults" scope="page" value="${MEASURE_searchResults}"/>
 		<c:set var="groupedJSONResults" scope="page" value="${MEASURE_JSONsearchResults}"/>
 		<c:set var="aceitemtype" scope="page" value="MEASURE"/>
 		<c:set var="groupTitle" scope="page"><liferay-ui:message key="acesearch-datainfotype-lbl-MEASURE" /></c:set>
 
-<% 	if( filter <= 1) {	%>	
-        <%@ include file="searchresultsonetype.jspf" %>
-<% } else { %>	
-        <%@ include file="searchresultsgowebsite.jspf" %>
-<% } %>
+<% 		if( sofarnr < prefnritemspage ) {
+			if( filter <= 1) {	%>	
+       			<%@ include file="searchresultsonetype.jspf" %>
+<% 			} else { %>	
+        		<%@ include file="searchresultsgowebsite.jspf" %>
+<% 			}
+  		}	%>	
 
         <c:set var="groupedResults" scope="page" value="${ACTION_searchResults}"/>
 		<c:set var="groupedJSONResults" scope="page" value="${ACTION_JSONsearchResults}"/>
 		<c:set var="aceitemtype" scope="page" value="ACTION"/>
 		<c:set var="groupTitle" scope="page"><liferay-ui:message key="acesearch-datainfotype-lbl-ACTION" /></c:set>
 
-<% 	if( filter <= 1) {	%>	
-        <%@ include file="searchresultsonetype.jspf" %>
-<% } else { %>	
-        <%@ include file="searchresultsgowebsite.jspf" %>
-<% } %>
+<% 		if( sofarnr < prefnritemspage ) {
+			if( filter <= 1) {	%>	
+       			<%@ include file="searchresultsonetype.jspf" %>
+<% 			} else { %>	
+        		<%@ include file="searchresultsgowebsite.jspf" %>
+<% 			}
+  		}	%>	
 
         <c:set var="groupedResults" scope="page" value="${ORGANISATION_searchResults}"/>
 		<c:set var="groupedJSONResults" scope="page" value="${ORGANISATION_JSONsearchResults}"/>
 		<c:set var="aceitemtype" scope="page" value="ORGANISATION"/>
 		<c:set var="groupTitle" scope="page"><liferay-ui:message key="acesearch-datainfotype-lbl-ORGANISATION" /></c:set>
 
-<% 	if( filter <= 1) {	%>	
-        <%@ include file="searchresultsonetype.jspf" %>
-<% } else { %>	
-        <%@ include file="searchresultsgowebsite.jspf" %>
-<% } %>
+<% 		if( sofarnr < prefnritemspage ) {
+			if( filter <= 1) {	%>	
+       			<%@ include file="searchresultsonetype.jspf" %>
+<% 			} else { %>	
+        		<%@ include file="searchresultsgowebsite.jspf" %>
+<% 			}
+  		}	%>	
+ 		
+<% 	if( sofarnr < totalResults ) {	
+		String searchstring = "/data-and-downloads" ;
 		
-		<%-- TODO all types --%>
+		String handle = "?" ;
+		
+		if( anyOfThese != null) { 
+			searchstring += handle + "searchtext=" + anyOfThese ; 
+			handle="&" ; 
+		}
+		
+		if( (aceitemtypes != null) && (aceitemtypes.length > 0) ) { 
+			searchstring += handle + "searchtypes=" ;
+			handle="&" ; 			
+			for(int j=0; j < aceitemtypes.length; j++ )
+				{ searchstring += (j > 0 ? ";" : "" ) + aceitemtypes[j] ; } 
+		}
+		
+		if (filter==1) {
+
+			if (selected_sector != null && ! selected_sector.equalsIgnoreCase("all")) {
+				searchstring += handle + "searchsectors=" ;
+				handle="&" ; 			
+				searchstring += selected_sector;
+			}
+				
+			if(  selected_impact != null && ! selected_impact.equalsIgnoreCase("all")) {
+				searchstring += handle + "searchimpacts=" ;
+				handle="&" ; 			
+				searchstring += selected_impact;
+			}
+		}
+		
+%>		
+		<div class='searchAll' style='text-align: right'>
+			<br /><a href='<%= searchstring %>'>View all</a>
+		</div>
+<% 		
+	} %>  		
 
 	</div>
 	
