@@ -265,7 +265,7 @@ pageContext.setAttribute("countriesList", countriesList);
 								<div class="check">
 									<c:set var="adaptationSectorMustBeChecked" value="false" />
 									<c:forEach var="requestedSector" items="${sectorsList}">
-										<c:if test="${requestedSector eq adaptationSector}">
+										<c:if test="${requestedSector eq fn:substring(adaptationSector,0,-1)}">
 											<c:set var="adaptationSectorMustBeChecked" value="true" />
 										</c:if>
 									</c:forEach>	
@@ -303,7 +303,7 @@ pageContext.setAttribute("countriesList", countriesList);
 								<div class="check">
 									<c:set var="climateImpactMustBeChecked" value="false" />
 									<c:forEach var="requestedImpact" items="${impactsList}">
-										<c:if test="${requestedImpact eq climateImpact}">
+										<c:if test="${requestedImpact eq fn:substring(climateImpact,0,-1)}">
 											<c:set var="climateImpactMustBeChecked" value="true" />
 										</c:if>
 									</c:forEach>	
@@ -341,7 +341,7 @@ pageContext.setAttribute("countriesList", countriesList);
 								<div class="check">
 									<c:set var="adaptationElementMustBeChecked" value="false" />
 									<c:forEach var="requestedElement" items="${elementsList}">
-										<c:if test="${requestedElement eq adaptationElement}">
+										<c:if test="${requestedElement eq fn:substring(adaptationElement,0,-1)}">
 											<c:set var="adaptationElementMustBeChecked" value="true" />
 										</c:if>
 									</c:forEach>	
@@ -367,7 +367,7 @@ pageContext.setAttribute("countriesList", countriesList);
 								<div class="check">
 									<c:set var="countryElementMustBeChecked" value="false" />
 									<c:forEach var="requestedElement" items="${countriesList}">
-										<c:if test="${requestedElement eq countryElement}">
+										<c:if test="${requestedElement eq fn:substring(countryElement,0,-1)}">
 											<c:set var="countryElementMustBeChecked" value="true" />
 										</c:if>
 									</c:forEach>
