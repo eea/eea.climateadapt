@@ -9,6 +9,7 @@ jQuery(document).ready(function() {
     $j("#adaptation_sectors_btn").click(function() {
        showAdaptationSectorsPanel();
     });	
+	showAdaptationSectorsPanelOnLoad();
 
     $j("#countries_btn").click(function() {
           showCountriesPanel();
@@ -144,7 +145,6 @@ function resizePagination() {
 	});				
 }	
 
-
 /**
  *
  * Shows/hides the adaptation sectors panel
@@ -160,7 +160,6 @@ function showAdaptationSectorsPanel() {
         $j("#adaptation_sectors_btn").addClass('collapsed_section');
     }
 }
-
 
 /**
  *
@@ -211,6 +210,21 @@ function showClimateImpactsPanel() {
         $j("#climate_impacts_btn").removeClass('expanded_section');
         $j("#climate_impacts_btn").addClass('collapsed_section');
     }
+}
+
+/**
+ * Expands sectors panel if at least one of them is checked.
+ */
+function showAdaptationSectorsPanelOnLoad() {
+    if ($j("input[name=sector]:checked").length > 0) {
+        jQuery('#adaptation_sectors_container').show(100);
+        $j("#adaptation_sectors_btn").removeClass('collapsed_section');
+        $j("#adaptation_sectors_btn").addClass('expanded_section');
+	} 
+	else {
+        jQuery('#adaptation_sectors_container').hide();
+        $j("#adaptation_sectors_btn").removeClass('expanded_section');
+        $j("#adaptation_sectors_btn").addClass('collapsed_section');    }
 }
 
 /**
