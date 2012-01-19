@@ -3,8 +3,11 @@
 <%@ taglib uri="http://liferay.com/tld/aui" prefix="aui" %>
 
 <%@ page import="javax.portlet.PortletPreferences" %>
-<%@ page import="com.liferay.portal.util.PortalUtil"%>
-<%@ page import="nl.wur.alterra.cgi.ace.portlet.Constants"%>
+<%@ page import="com.liferay.portal.util.PortalUtil "%>
+<%@ page import="nl.wur.alterra.cgi.ace.portlet.Constants" %>
+<%@ page import="nl.wur.alterra.cgi.ace.mapviewer.csw.CSW" %>
+<%@ page import="nl.wur.alterra.cgi.ace.mapviewer.csw.CSWRecord" %>
+<%@ page import="nl.wur.alterra.cgi.ace.mapviewer.csw.digitaltransferoption.DigitalTransferOption" %>
 
 <portlet:defineObjects />
 

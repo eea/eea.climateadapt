@@ -40,6 +40,8 @@
 		
     	mapviewerchmmap.setOnStatusChanged(handleStatusChanged);
 		
+    	mapviewerchmmap.setOnRestoreComplete(handleRestoreComplete);
+		
         mappanel = new GeoExt.MapPanel({
             renderTo: 'map_element',
             height: 350,
@@ -68,42 +70,46 @@
 
         mapviewerchmmap.addBingLayers();
 	        
-        mapviewerchmmap.registerEvents();
-	        
         mapviewerchmmap.restore();
-        
-    	csw = new CHM.CSW();
-    	
-        <%
-//         // Add layers from preferences
-//         String fileidentifierspref = prefs.getValue(Constants.cswRecordFileIdentifiersPreferenceName, "");
-//
-//         if (fileidentifierspref != null && fileidentifierspref.length() > 0) {
-//                 String[] fileidentifiers = fileidentifierspref.split(",");
-//
-//                 for (int i = 0; i < fileidentifiers.length; i ++) {
-//                         String fileidentifier = fileidentifiers[i];
-//
-//                         out.println("getRecordByID('" + fileidentifier + "')");
-//                 }
-//         }
-
-        // Add layer from querystring
-		HttpServletRequest httprequest = PortalUtil.getOriginalServletRequest(PortalUtil.getHttpServletRequest(renderRequest));
-        
-        String fileidentifier = httprequest.getParameter(Constants.cswRecordFileIdentifierParameterName);
-
-        if (fileidentifier != null && fileidentifier.length() > 0) {
-                out.println("getRecordByID('" + fileidentifier + "')");
-        }
-        %>
     });
-    
-    function getRecordByID(aID) {
-    	csw.getRecordByID(aID);
-    }
     
     function handleStatusChanged() {
     	document.getElementById('status_element').innerHTML = mapviewerchmmap.getStatus();
+	}
+    
+    function handleRestoreComplete() {
+    	mapviewerchmmap.registerEvents();
+	        
+<%
+		// Add layer from querystring
+       	String cswurl = prefs.getValue(Constants.cswURLPreferenceName, "http://ace.geocat.net/geonetwork/en/csw?");
+        	
+       	String cswusername = prefs.getValue(Constants.cswUserNamePreferenceName, "");
+        	
+       	String cswpassword = prefs.getValue(Constants.cswPassWordPreferenceName, "");
+        	
+   		CSW csw = new CSW(cswurl, cswusername, cswpassword);
+			
+		HttpServletRequest httprequest = PortalUtil.getOriginalServletRequest(PortalUtil.getHttpServletRequest(renderRequest));
+        
+        String metadatarecordid = httprequest.getParameter(Constants.cswRecordFileIdentifierParameterName);
+			
+		if (metadatarecordid != null && metadatarecordid.length() > 0) {
+			CSWRecord cswrecord = csw.getRecordByID(metadatarecordid);
+			
+			for (int i = 0; i < cswrecord.getDigitalTransferOptions().size(); i ++) {
+				DigitalTransferOption digitaltransferoption = cswrecord.getDigitalTransferOptions().get(i);
+				
+				if (digitaltransferoption.getProtocol().indexOf("WMS") != -1) {
+					String javascript = "mapviewerchmmap.addLayer(new OpenLayers.Layer.WMS('" 
+						+ cswrecord.getTitle() + "', '" 
+						+ digitaltransferoption.getUrl() + "', {layers: '" 
+						+ digitaltransferoption.getLayerName() + "', format: 'image/png', transparent: 'true'}, {visibility: true}, {tileOptions: {maxGetUrlLength: 2048}}, {isBaseLayer: false}));";
+				
+					out.println(javascript);
+				}
+			}
+		}
+%>
 	}
 </script>

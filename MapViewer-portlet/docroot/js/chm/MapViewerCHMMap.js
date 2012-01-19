@@ -99,13 +99,8 @@ CHM.MapViewerCHMMap = OpenLayers.Class(CHM.CHMMap, {
 			var map = new OpenLayers.Map();
 			
             format.read(request.responseXML, {map: map});
-//            
-//            self.zoom = map.zoom;
-//            
-//            self.center = map.center;
-//            
-//            self.maxExtent = map.maxExtent;
-//          
+
+            self.zoomToExtent(format.context.bounds);
             
             var arraylength = map.layers.length;
             
