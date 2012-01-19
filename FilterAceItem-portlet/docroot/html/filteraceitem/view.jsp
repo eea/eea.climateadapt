@@ -1,4 +1,5 @@
 <%@page import="nl.wur.alterra.cgi.ace.search.AceSearchFormBean"%>
+<%@page import="nl.wur.alterra.cgi.ace.search.SearchRequestParams"%>
 <%@page import="nl.wur.alterra.cgi.ace.portlet.FilterAceItemPortlet"%>
 <%@ page import="java.util.Arrays" %>
 <%--
@@ -24,11 +25,24 @@ Long totalResults = (Long) request.getAttribute("total_results");
 
 int paging = Integer.parseInt( renderRequest.getPreferences().getValue(Constants.PAGING, "0") );
 
-String includeFile = "searchresultsonetype.jspf";
+long sofarnr = 0;
 
-if( paging > 0) {
-	includeFile = "searchresultsbytype.jspf";
- } 
+long prefnritemspage = Long.parseLong(renderRequest.getPreferences().getValue(Constants.NRITEMSPAGE, "10"));
+
+AceSearchFormBean acesearchformbean = (AceSearchFormBean) request.getAttribute(SearchRequestParams.SEARCH_PARAMS);
+
+// Retrieve parameters to fill form
+String anyOfThese = acesearchformbean.getAnyOfThese();
+	
+String[] aceitemtypes = acesearchformbean.getAceitemtype();
+
+String[] sectors = acesearchformbean.getSector();
+	
+String[] elements = acesearchformbean.getElement();
+	
+String[] countries = acesearchformbean.getCountries();
+
+
 %>
 <portlet:actionURL name="searchAceitem" var="searchAceitemURL"/>
 
@@ -113,7 +127,7 @@ if( paging > 0) {
 		<c:set var="groupTitle" scope="page"><liferay-ui:message key="acesearch-datainfotype-lbl-DOCUMENT" /></c:set>
 <% 	if( paging > 0) {	%>	
         <%@ include file="searchresultsbytype.jspf" %>
-<% } else { %>	
+<% } else if( sofarnr < prefnritemspage ) { %>	
         <%@ include file="searchresultsonetype.jspf" %>
 <% } %>	        
 
@@ -123,7 +137,7 @@ if( paging > 0) {
 		<c:set var="groupTitle" scope="page"><liferay-ui:message key="acesearch-datainfotype-lbl-INFORMATIONSOURCE" /></c:set>
 <% 	if( paging > 0) {	%>	
         <%@ include file="searchresultsbytype.jspf" %>
-<% } else { %>	
+<% } else if( sofarnr < prefnritemspage ) { %>	
         <%@ include file="searchresultsonetype.jspf" %>
 <% } %>
 
@@ -133,7 +147,7 @@ if( paging > 0) {
         <c:set var="groupTitle" scope="page"><liferay-ui:message key="acesearch-datainfotype-lbl-GUIDANCE" /></c:set>
 <% 	if( paging > 0) {	%>	
         <%@ include file="searchresultsbytype.jspf" %>
-<% } else { %>	
+<% } else if( sofarnr  < prefnritemspage ) { %>	
         <%@ include file="searchresultsonetype.jspf" %>
 <% } %>       
 
@@ -143,7 +157,7 @@ if( paging > 0) {
         <c:set var="groupTitle" scope="page"><liferay-ui:message key="acesearch-datainfotype-lbl-TOOL" /></c:set>
 <% 	if( paging > 0) {	%>	
         <%@ include file="searchresultsbytype.jspf" %>
-<% } else { %>	
+<% } else if( sofarnr  < prefnritemspage ) { %>	
         <%@ include file="searchresultsonetype.jspf" %>
 <% } %>
 
@@ -153,7 +167,7 @@ if( paging > 0) {
 		<c:set var="groupTitle" scope="page"><liferay-ui:message key="acesearch-datainfotype-lbl-MAPGRAPHDATASET" /></c:set>
 <% 	if( paging > 0) {	%>	
         <%@ include file="searchresultsbytype.jspf" %>
-<% } else { %>	
+<% } else if( sofarnr  < prefnritemspage ) { %>	
         <%@ include file="searchresultsonetype.jspf" %>
 <% } %>
 		
@@ -163,7 +177,7 @@ if( paging > 0) {
 		<c:set var="groupTitle" scope="page"><liferay-ui:message key="acesearch-datainfotype-lbl-INDICATOR" /></c:set>
 <% 	if( paging > 0) {	%>	
         <%@ include file="searchresultsbytype.jspf" %>
-<% } else { %>	
+<% } else if( sofarnr  < prefnritemspage ) { %>	
         <%@ include file="searchresultsonetype.jspf" %>
 <% } %>
 
@@ -173,7 +187,7 @@ if( paging > 0) {
 		<c:set var="groupTitle" scope="page"><liferay-ui:message key="acesearch-datainfotype-lbl-RESEARCHPROJECT" /></c:set>
 <% 	if( paging > 0) {	%>	
         <%@ include file="searchresultsbytype.jspf" %>
-<% } else { %>	
+<% } else if( sofarnr  < prefnritemspage ) { %>	
         <%@ include file="searchresultsonetype.jspf" %>
 <% } %>
 
@@ -183,7 +197,7 @@ if( paging > 0) {
 		<c:set var="groupTitle" scope="page"><liferay-ui:message key="acesearch-datainfotype-lbl-MEASURE" /></c:set>
 <% 	if( paging > 0) {	%>	
         <%@ include file="searchresultsbytype.jspf" %>
-<% } else { %>	
+<% } else if( sofarnr  < prefnritemspage ) { %>	
         <%@ include file="searchresultsonetype.jspf" %>
 <% } %>
 
@@ -193,7 +207,7 @@ if( paging > 0) {
 		<c:set var="groupTitle" scope="page"><liferay-ui:message key="acesearch-datainfotype-lbl-ACTION" /></c:set>
 <% 	if( paging > 0) {	%>	
         <%@ include file="searchresultsbytype.jspf" %>
-<% } else { %>	
+<% } else if( sofarnr < prefnritemspage ) { %>	
         <%@ include file="searchresultsonetype.jspf" %>
 <% } %>
 
@@ -203,11 +217,52 @@ if( paging > 0) {
 		<c:set var="groupTitle" scope="page"><liferay-ui:message key="acesearch-datainfotype-lbl-ORGANISATION" /></c:set>
 <% 	if( paging > 0) {	%>	
         <%@ include file="searchresultsbytype.jspf" %>
-<% } else { %>	
+<% } else if( sofarnr < prefnritemspage) { %>	
         <%@ include file="searchresultsonetype.jspf" %>
 <% } %>
+<% 	if( (paging == 0) && (sofarnr < totalResults)){	
+		String searchstring = "/data-and-downloads" ;
 		
-		<%-- TODO all types --%>
+		String handle = "?" ;
+		
+		if( anyOfThese != null) { 
+			searchstring += handle + "searchtext=" + anyOfThese ; 
+			handle="&" ; 
+		}
+		
+		if( aceitemtypes != null) { 
+			searchstring += handle + "searchtypes=" ;
+			handle="&" ; 			
+			for(int j=0; j < aceitemtypes.length; j++ )
+				{ searchstring += (j > 0 ? ";" : "" ) + aceitemtypes[j] ; } 
+		}
+
+		if(  sectors != null) { 
+			searchstring += handle + "searchsectors=" ;
+			handle="&" ; 			
+			for(int j=0; j < sectors.length; j++ ) 
+				{ searchstring += (j > 0 ? ";" : "" ) + sectors[j] ; } 
+		}
+			
+		if(  elements != null) { 
+			searchstring += handle + "searchelements=" ;
+			handle="&" ; 			
+			for(int j=0; j < elements.length; j++ ) 
+				{ searchstring += (j > 0 ? ";" : "" ) + elements[j] ; } 
+		}
+			
+		if(  countries != null) { 
+			searchstring += handle + "searchcountries=" ;
+			handle="&" ; 			
+			for(int j=0; j < countries.length; j++ ) 
+				{ searchstring += (j > 0 ? ";" : "" ) + countries[j] ; } 
+		}
+%>		
+		<div class='searchAll' style='text-align: right'>
+			<br /><a href='<%= searchstring %>'>View all</a>
+		</div>
+<% 		
+	} %>		
 
 	</div>
 	
