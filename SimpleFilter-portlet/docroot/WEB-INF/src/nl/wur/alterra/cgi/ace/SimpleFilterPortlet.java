@@ -65,11 +65,11 @@ public class SimpleFilterPortlet extends MVCPortlet {
                 ACESearchEngine se = new ACESearchEngine();
                 AceSearchFormBean formBean = se.prepareACESearchFormBean(requestParams, fuzziness);        	
                 
-                if( anyOfThese.length() > 0 ) {
+                if( (anyOfThese != null) && (anyOfThese.length() > 0 )) {
                 	formBean.setAnyOfThese( anyOfThese );
                 }        	
                 
-                if( aceItemTypes.length > 0 ) {
+                if( (aceItemTypes != null) && (aceItemTypes.length > 0 )) {
                 	formBean.setAceitemtype( aceItemTypes );
                 }  
                 
