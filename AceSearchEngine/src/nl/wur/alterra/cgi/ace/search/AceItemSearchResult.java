@@ -106,12 +106,18 @@ public class AceItemSearchResult {
 
     public void setShortdescription(String shortdescription) {
         this.shortdescription = shortdescription.replaceAll("\\<.*?\\>", " ");
+        this.shortdescription = shortdescription.replaceAll("\"", "\"\"");
         
         int desclength = ACEIndexUtil.retrieveTotalDescriptionLength() - this.name.length();
         
+        if (desclength < 4) {
+        	
+        	desclength = 24;
+        }
+        
         if( this.shortdescription.length() > desclength) {
         	
-        	this.shortdescription = this.shortdescription.substring(0, desclength-4).replaceAll("\"", "\"\"") + " ..." ; 
+        	this.shortdescription = this.shortdescription.substring(0, desclength-4) + " ..." ; 
         }
         
     }
