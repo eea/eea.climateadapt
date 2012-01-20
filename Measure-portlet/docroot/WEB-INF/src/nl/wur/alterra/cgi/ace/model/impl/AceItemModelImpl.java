@@ -60,6 +60,7 @@ public class AceItemModelImpl extends BaseModelImpl<AceItem>
 			{ "companyId", new Integer(Types.BIGINT) },
 			{ "groupId", new Integer(Types.BIGINT) },
 			{ "wxsharvesterId", new Integer(Types.BIGINT) },
+			{ "cswharvesterId", new Integer(Types.BIGINT) },
 			{ "name", new Integer(Types.VARCHAR) },
 			{ "description", new Integer(Types.VARCHAR) },
 			{ "datatype", new Integer(Types.VARCHAR) },
@@ -90,7 +91,7 @@ public class AceItemModelImpl extends BaseModelImpl<AceItem>
 			{ "comments", new Integer(Types.VARCHAR) },
 			{ "textwebpage", new Integer(Types.VARCHAR) }
 		};
-	public static final String TABLE_SQL_CREATE = "create table Ace_AceItem (aceItemId LONG not null primary key,companyId LONG,groupId LONG,wxsharvesterId LONG,name VARCHAR(75) null,description VARCHAR(75) null,datatype VARCHAR(75) null,storedAt VARCHAR(75) null,storagetype VARCHAR(75) null,specialtagging VARCHAR(75) null,textSearch VARCHAR(75) null,keyword VARCHAR(75) null,targetresolution VARCHAR(75) null,spatialLayer VARCHAR(75) null,spatialValues VARCHAR(75) null,startDate DATE null,endDate DATE null,publicationDate DATE null,sectors_ VARCHAR(75) null,elements_ VARCHAR(75) null,climateimpacts_ VARCHAR(75) null,rating LONG,importance LONG,source VARCHAR(75) null,deeplink VARCHAR(75) null,controlstatus INTEGER,creator VARCHAR(75) null,creationdate DATE null,moderator VARCHAR(75) null,approvaldate DATE null,replacesId LONG,comments VARCHAR(75) null,textwebpage VARCHAR(75) null)";
+	public static final String TABLE_SQL_CREATE = "create table Ace_AceItem (aceItemId LONG not null primary key,companyId LONG,groupId LONG,wxsharvesterId LONG,cswharvesterId LONG,name VARCHAR(75) null,description VARCHAR(75) null,datatype VARCHAR(75) null,storedAt VARCHAR(75) null,storagetype VARCHAR(75) null,specialtagging VARCHAR(75) null,textSearch VARCHAR(75) null,keyword VARCHAR(75) null,targetresolution VARCHAR(75) null,spatialLayer VARCHAR(75) null,spatialValues VARCHAR(75) null,startDate DATE null,endDate DATE null,publicationDate DATE null,sectors_ VARCHAR(75) null,elements_ VARCHAR(75) null,climateimpacts_ VARCHAR(75) null,rating LONG,importance LONG,source VARCHAR(75) null,deeplink VARCHAR(75) null,controlstatus INTEGER,creator VARCHAR(75) null,creationdate DATE null,moderator VARCHAR(75) null,approvaldate DATE null,replacesId LONG,comments VARCHAR(75) null,textwebpage VARCHAR(75) null)";
 	public static final String TABLE_SQL_DROP = "drop table Ace_AceItem";
 	public static final String ORDER_BY_JPQL = " ORDER BY aceItem.name ASC";
 	public static final String ORDER_BY_SQL = " ORDER BY Ace_AceItem.name ASC";
@@ -151,6 +152,14 @@ public class AceItemModelImpl extends BaseModelImpl<AceItem>
 
 	public void setWxsharvesterId(long wxsharvesterId) {
 		_wxsharvesterId = wxsharvesterId;
+	}
+
+	public long getCswharvesterId() {
+		return _cswharvesterId;
+	}
+
+	public void setCswharvesterId(long cswharvesterId) {
+		_cswharvesterId = cswharvesterId;
 	}
 
 	public String getName() {
@@ -523,6 +532,7 @@ public class AceItemModelImpl extends BaseModelImpl<AceItem>
 		clone.setCompanyId(getCompanyId());
 		clone.setGroupId(getGroupId());
 		clone.setWxsharvesterId(getWxsharvesterId());
+		clone.setCswharvesterId(getCswharvesterId());
 		clone.setName(getName());
 		clone.setDescription(getDescription());
 		clone.setDatatype(getDatatype());
@@ -597,7 +607,7 @@ public class AceItemModelImpl extends BaseModelImpl<AceItem>
 	}
 
 	public String toString() {
-		StringBundler sb = new StringBundler(67);
+		StringBundler sb = new StringBundler(69);
 
 		sb.append("{aceItemId=");
 		sb.append(getAceItemId());
@@ -607,6 +617,8 @@ public class AceItemModelImpl extends BaseModelImpl<AceItem>
 		sb.append(getGroupId());
 		sb.append(", wxsharvesterId=");
 		sb.append(getWxsharvesterId());
+		sb.append(", cswharvesterId=");
+		sb.append(getCswharvesterId());
 		sb.append(", name=");
 		sb.append(getName());
 		sb.append(", description=");
@@ -671,7 +683,7 @@ public class AceItemModelImpl extends BaseModelImpl<AceItem>
 	}
 
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(103);
+		StringBundler sb = new StringBundler(106);
 
 		sb.append("<model><model-name>");
 		sb.append("nl.wur.alterra.cgi.ace.model.AceItem");
@@ -692,6 +704,10 @@ public class AceItemModelImpl extends BaseModelImpl<AceItem>
 		sb.append(
 			"<column><column-name>wxsharvesterId</column-name><column-value><![CDATA[");
 		sb.append(getWxsharvesterId());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>cswharvesterId</column-name><column-value><![CDATA[");
+		sb.append(getCswharvesterId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>name</column-name><column-value><![CDATA[");
@@ -819,6 +835,7 @@ public class AceItemModelImpl extends BaseModelImpl<AceItem>
 	private long _companyId;
 	private long _groupId;
 	private long _wxsharvesterId;
+	private long _cswharvesterId;
 	private String _name;
 	private String _description;
 	private String _datatype;
