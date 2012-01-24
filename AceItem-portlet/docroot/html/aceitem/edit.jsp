@@ -23,7 +23,7 @@
 <aui:form action="<%= setAceItemPrefUrl %>" method="POST" name="fm" >
 	<aui:input name="rowsPerPage" value='<%= prefs.getValue("rowsPerPage","75") %>' size="45" type="text" />
 
-	<b>Order By Column (name or aceitemId)</b><br />
+	<b>Order By Column (use database column name)</b><br />
 	<input name='<%= Constants.ORDERBYCOL %>' type="text" size="45" value='<%= prefs.getValue(Constants.ORDERBYCOL,"name") %>' /><br /><br />
 		
 	<b>Order By Type (asc or desc)</b><br />
