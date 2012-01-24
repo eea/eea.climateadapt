@@ -29,12 +29,11 @@ $(document).ready(function(){
 $(document).ready(function()
 		{
 		   // Make sure to only match links to wikipedia with a rel tag
-		   $('a[href*="glossary#"]').each(function()
+		   $('a[href*="glossary#link"],a[href*="acronym#link"]').each(function()
 		   {
 			  
 			   var url = $(this).attr('href');
-			   var thisGlosTerm = url.substring(url.indexOf("#")+1);
-			   //alert(thisGlosTerm);
+			   var thisLinkTerm = url.substring(url.indexOf("#")+1);
 			   
 			   //add glossary CSS class
 			   $(this).addClass("glossary-inline-term");
@@ -51,16 +50,13 @@ $(document).ready(function()
 		               dataType: "html",
 		               success: function(data){
 		                  html = data;
-		                  //alert(thisGlosTerm);
-		                  //filter correct glossary term from the glossary page
-		                  //var url = $(this).attr('href');
-		                  //var glosTerm = url.substring(url.indexOf("#")+1);
-		                  var htmlFiltered = $(html).find("#" + thisGlosTerm);
+		                  //alert(thisLinkTerm);
+		                  var htmlFiltered = $(html).find("#" + thisLinkTerm);
 		                  this.set('content.text', htmlFiltered);
 		               }
 		            },
 		            title: {
-		               text: 'Glossary - ' + $(this).text() // Give the tooltip a title using each elements text
+		               text: $(this).text() // Give the tooltip a title using each elements text
 		            }
 		         },
 		         position: {

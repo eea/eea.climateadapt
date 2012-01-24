@@ -727,6 +727,7 @@ ul#subnav li a:hover {
 
 .sector-main-article .filter-container {
 	background: url("../images/bg_sector_main_article_filter.png") repeat-y scroll 5% center;
+	display: none;
 	height: 40px;
 	right: 0;
 	top: 0;
@@ -1713,14 +1714,21 @@ To retrieve the appropiate styling is it therefore
 necessary to add the class sat-text to the instruction 
 text and the class mapviewer to the MapViewerPortlet.
 ****/
+/** Make sure the preferences are reachable **/
+.mapviewer .portlet-borderless-bar {
+	margin-top: -20px;
+}
+
 .mapviewer #legend_element,
 .mapviewer #toc_element {
-	float: right;
+	margin-left: 685px;
+	margin-top: -350px;
 	width: 269px;
 }
 
 .mapviewer {
 	margin-top: -20px;
+	min-height: 410px;
 	width: 700px;
 }
 
@@ -1733,14 +1741,27 @@ text and the class mapviewer to the MapViewerPortlet.
 
 .mapviewer #map_element {
 	height: 350px;
+	margin-top: 25px;
 	width: 670px;
+}
+
+.mapviewer #status_element {
+	position: absolute;
+	top: 350px;
 }
 
 .mapviewer #toc_element {
 	background-color: #D2DE92;
 	padding: 0 0 15px 0;
-	margin: -425px -254px 0 0;
 	min-height: 250px;
+}
+
+.mapviewer li.x-tree-node {
+	margin-bottom: 15px;
+}
+
+.mapviewer .legend {
+	padding-left: 15px;
 }
 
 .mapviewer #toc_element ul { 
@@ -1771,7 +1792,8 @@ text and the class mapviewer to the MapViewerPortlet.
 .mapviewer #toc-title {
 	color: #758816;
 	font-size: 14px;
-	padding-left: 15px;
+	margin: 0;
+	padding: 15px;
 }
 
 /** adjustment of legend items **/
@@ -1786,6 +1808,12 @@ text and the class mapviewer to the MapViewerPortlet.
 	margin-bottom: 10px;
 	position:relative;
 	top:2px;
+}
+
+/** Back button on the mapviewer page **/
+.mapviewer-back {
+	position: absolute;
+	top: 530px;
 }
 
 /****
