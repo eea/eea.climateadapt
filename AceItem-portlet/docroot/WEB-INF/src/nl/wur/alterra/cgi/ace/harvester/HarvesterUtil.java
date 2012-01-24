@@ -677,7 +677,7 @@ public class HarvesterUtil {
                     int closingIdBracket = metadata.indexOf(">", metadata.indexOf("<id"));
                     int openingCloseIdBracket = metadata.indexOf("<", closingIdBracket);
                     id = metadata.substring(closingIdBracket+1, openingCloseIdBracket);
-                    idList.add(id);
+                    //idList.add(id);
                     //System.out.println("metadata id: " + id);
                 }
                 // metadata has no id
@@ -700,14 +700,46 @@ public class HarvesterUtil {
                             skip = true;
                         }
                         else {
-                            uuidMap.put(id, uuid);
+                            //uuidMap.put(id, uuid);
                         }
                     }
                     else {
                         System.out.println("WARNING: found metadata without uuid, skipping it");
                         skip = true;
                     }
+
+
+                    if (!skip) {
+                        // This element contains hierarchyLevel value
+                        if(metadata.indexOf("<category internal=\"true\">") >= 0) {
+                            int startContent = metadata.indexOf("<category internal=\"true\">") + "<category internal=\"true\">".length();
+                            int endContent = metadata.indexOf("</category>", startContent);
+                            
+                            String category = metadata.substring(startContent, endContent);
+                            System.out.println("category: " + category);
+
+                            // Discard service metadata
+                            if (category.equalsIgnoreCase("service")) {
+                                System.out.println("WARNING: found metadata no dataset, skipping it");
+                                skip = true;
+
+                            } else {
+                                // For datasets/series check that metadata contains a link of type wms
+                                if (metadata.indexOf("<link type=\"wms\">") < 0) {
+                                   System.out.println("WARNING: found dataset metadata with no wms link, skipping it");
+                                   skip = true;
+
+                                }
+                            }
+                        } else {
+                            System.out.println("WARNING: found metadata no category set, skipping it");
+                            skip = true;
+                        }
+                    }
+
                     if(!skip) {
+                        idList.add(id);
+                        uuidMap.put(id, uuid);
 
                         // this metadata has a title
                         if(metadata.indexOf("<title>") >= 0) {
@@ -752,6 +784,9 @@ public class HarvesterUtil {
                             }
                             //System.out.println("metadata # keywords: " + keywords.size());
                         }
+
+
+
                     }
                 }
 
