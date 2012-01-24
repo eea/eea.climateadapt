@@ -21,7 +21,9 @@
 <portlet:actionURL name="setMeasurePref" var="setMeasurePrefUrl" />
 
 <aui:form action="<%= setMeasurePrefUrl %>" method="POST" name="fm" >
-	<b>Order By Column (name or measureId)</b><br />
+    <aui:input name="rowsPerPage" value='<%= prefs.getValue("rowsPerPage","75") %>' size="45" type="text" />
+
+	<b>Order By Column (use database column name)</b><br />
 	<input name='<%= Constants.ORDERBYCOL %>' type="text" size="45" value='<%= prefs.getValue(Constants.ORDERBYCOL,"name") %>' /><br /><br />
 		
 	<b>Order By Type (asc or desc)</b><br />
@@ -42,8 +44,6 @@
 	<aui:input name="<%= Constants.bingTimeOutPreferenceName %>" value='<%= prefs.getValue(Constants.bingTimeOutPreferenceName, "100") %>' size="45" type="text" />
 
 	<aui:input name="<%= Constants.zoomLevelPreferenceName %>" value='<%= prefs.getValue(Constants.zoomLevelPreferenceName, "2") %>' size="45" type="text" />
-
-    <aui:input name="rowsPerPage" value='<%= prefs.getValue("rowsPerPage","75") %>' size="45" type="text" />
 
 	<aui:button-row>
 		<aui:button type="submit" />
