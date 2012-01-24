@@ -26,100 +26,21 @@
 	pageContext.setAttribute("demoId", "demoId-" + r);
 %>
 
-<%-- expanded view --%>	
+<%-- expanded view  class="expandedResultsGroupTitle resultsGroupTitle" --%>	
 <div id="${expandedId}" class="resultsgroup expandedResultsGroup togglehide">
 
 	<c:set var="groupedResults" value="${groupedResults}"/>
 
 	<c:set var="nrPageItems" value="<%= itemsOnPage %>"/>
 
-	<div id="${expandedTitleId}" class="expandedResultsGroupTitle resultsGroupTitle">
-		&#9660; <c:out value='${groupTitle}' /> (${fn:length(groupedResults)})
+	<div id="${expandedTitleId}" class="resultsGroupTitle">
+		<a href='<%= searchstring %>'>&#9660; <c:out value='${groupTitle}' /> (${fn:length(groupedResults)})</a>
 	</div>
 	
 	<div id="${paginationId}" style="padding-left: 10px; height: 20px;background-color: #D2DF92;">
 	
 	
 	</div>	
-	
-	<!-- pagination -->
-	<script type="text/javascript"> 
-
-		// searchresultsbytpe FilterAceItemPortlet
-		// ENABLE THIS WHEN RUNNING STANDALONE (WITHOUT REST OF ACE)		
-		var $j = jQuery.noConflict();
-
-        // Stores the results the data type
-        groupedJSONResults['${aceitemtype}'] = ${groupedJSONResults};
-
-
-		$j(function() {
-			$j('#${paginationId}').pagination(${fn:length(groupedResults)}, {
-				items_per_page: <%= itemsOnPage %>,
-				num_display_entries: 11,	// Number of pagination links to show			
-				num_edge_entries: 1,		// Number of fix edge page numbers to show in the pagination links
-				callback	: function(page){
-								var aceitemResults = new Array();
-								$j('#resultsListId-'+${unique}).remove();
-								// Page numbering starts with 0
-								displayPagedJSONResults(page+1, ${unique}, groupedJSONResults['${aceitemtype}']);
-							}					
-			});	
-			
-			<c:if test="${fn:length(groupedResults) <= nrPageItems}">
-			$j('#${paginationId}').hide();
-			</c:if>
-		})	
-
-
-		
-		function displayPagedJSONResults(page, unique, aceitemResults) {
-			var startIdx = ((page -1) * <%= itemsOnPage %>);
-			var endIdx = (page * <%= itemsOnPage %>) - 1;
-			if(endIdx > aceitemResults.length) {
-				endIdx = aceitemResults.length;
-			}
-			var aceitemPageResults = new Array();
-			for(var i = startIdx; i <= endIdx; i++) {
-				aceitemPageResults.push(aceitemResults[i]);
-			}
-			displayJSONResults(unique, aceitemPageResults);
-		}		
-		
-	</script>
-	
-	<hr class="clearer2"/>
-	
-	<div class="sortbar">
-		<form name="sortsearchform" id="${sortsearchformId}">
-			<input type="hidden" name="aceitemtype" value="${aceitemtype}"/>	
-			<input type="hidden" name="anyOfThese" id="${anyOfTheseId}" value="${searchParams.anyOfThese}"/>
-
-            <c:forEach var="sector" items="${searchParams.sector}">
-            <input type="hidden" name="sector" value="${sector}"/>
-            </c:forEach>
-
-            <c:forEach var="element" items="${searchParams.element}">
-            <input type="hidden" name="element" value="${element}"/>
-            </c:forEach>
-
-            <c:forEach var="countries" items="${searchParams.countries}">
-            <input type="hidden" name="countries" value="${countries}"/>
-            </c:forEach>
-
-
-            <input type="hidden" name="conditionAdaptationSector" id="${conditionAdaptationSectorId}" value="${searchParams.conditionAdaptationSector}"/>
-            <input type="hidden" name="conditionAdaptationElement" id="${conditionAdaptationElementId}" value="${searchParams.conditionAdaptationElement}"/>
-
-			<liferay-ui:message key="acesearch-sort-by" />
-            <input type="radio" name="sortBy" class="sortByControl" id="${sortsearchRatingId}" value="RATING" checked /><liferay-ui:message key="acesearch-sort-rating" />
-            <input type="radio" name="sortBy" class="sortByControl" id="${sortsearchRelevanceId}" value="RELEVANCE" /><liferay-ui:message key="acesearch-sort-relevance" />
-			<input type="radio" name="sortBy" class="sortByControl" id="${sortsearchNameId}" value="NAME"/><liferay-ui:message key="acesearch-sort-name" />
-            <%--
-			<input type="radio" name="sortBy" class="sortByControl" id="${sortsearchCountryId}" value="COUNTRY"/><liferay-ui:message key="acesearch-sort-country" />
-			--%>
-		</form>
-	</div>
 	
 	<div id="${resultsListId}">
 		<c:forEach var="wrappedSearchResult" items="${groupedResults}" begin="0" end="<%= itemsOnPage-1 %>">		
@@ -194,13 +115,13 @@
 	</div>
 
 	
-	<%-- collapsed view --%>	
+	<%-- collapsed view  old: class="collapsedResultsGroupTitle resultsGroupTitle" --%>	
 	<div id="${collapsedId}" class="collapsedResultsGroup toggleshow">
 
         <c:set var="groupedResults" value="${groupedResults}"/>
 
-		<div id="${collapsedTitleId}" class="collapsedResultsGroupTitle resultsGroupTitle">
-			&#9658; <c:out value='${groupTitle}' /> (${fn:length(groupedResults)})
+		<div id="${collapsedTitleId}" class="resultsGroupTitle">
+			<a href='<%= searchstring %>'>&#9658; <c:out value='${groupTitle}' /> (${fn:length(groupedResults)})</a>
 		</div>
 	</div>
 	

@@ -42,6 +42,37 @@ String[] elements = acesearchformbean.getElement();
 	
 String[] countries = acesearchformbean.getCountries();
 
+String searchstring = "";
+
+String searchbasestring = "/data-and-downloads" ;
+
+String handle = "?" ;
+
+if( anyOfThese != null) { 
+	searchbasestring += handle + "searchtext=" + anyOfThese ; 
+	handle="&" ; 
+}
+
+if(  sectors != null) { 
+	searchbasestring += handle + "searchsectors=" ;
+	handle="&" ; 			
+	for(int j=0; j < sectors.length; j++ ) 
+		{ searchbasestring += (j > 0 ? ";" : "" ) + sectors[j] ; } 
+}
+	
+if(  elements != null) { 
+	searchbasestring += handle + "searchelements=" ;
+	handle="&" ; 			
+	for(int j=0; j < elements.length; j++ ) 
+		{ searchbasestring += (j > 0 ? ";" : "" ) + elements[j] ; } 
+}
+	
+if(  countries != null) { 
+	searchbasestring += handle + "searchcountries=" ;
+	handle="&" ; 			
+	for(int j=0; j < countries.length; j++ ) 
+		{ searchbasestring += (j > 0 ? ";" : "" ) + countries[j] ; } 
+}
 
 %>
 <portlet:actionURL name="searchAceitem" var="searchAceitemURL"/>
@@ -125,17 +156,18 @@ String[] countries = acesearchformbean.getCountries();
 		<c:set var="groupedJSONResults" scope="page" value="${DOCUMENT_JSONsearchResults}"/>
 		<c:set var="aceitemtype" scope="page" value="DOCUMENT"/>
 		<c:set var="groupTitle" scope="page"><liferay-ui:message key="acesearch-datainfotype-lbl-DOCUMENT" /></c:set>
-<% 	if( paging > 0) {	%>	
+<% 	if( paging > 0) {	
+		searchstring = searchbasestring	+ handle + "searchtypes=DOCUMENT"; // no handle adjustment %>
         <%@ include file="searchresultsbytype.jspf" %>
 <% } else if( sofarnr < prefnritemspage ) { %>	
         <%@ include file="searchresultsonetype.jspf" %>
 <% } %>	        
-
 		<c:set var="groupedResults" scope="page" value="${INFORMATIONSOURCE_searchResults}"/>
 		<c:set var="groupedJSONResults" scope="page" value="${INFORMATIONSOURCE_JSONsearchResults}"/>
 		<c:set var="aceitemtype" scope="page" value="INFORMATIONSOURCE"/>				
 		<c:set var="groupTitle" scope="page"><liferay-ui:message key="acesearch-datainfotype-lbl-INFORMATIONSOURCE" /></c:set>
-<% 	if( paging > 0) {	%>	
+<% 	if( paging > 0) {		
+		searchstring = searchbasestring	+ handle + "searchtypes=INFORMATIONSOURCE"; // no handle adjustment %>
         <%@ include file="searchresultsbytype.jspf" %>
 <% } else if( sofarnr < prefnritemspage ) { %>	
         <%@ include file="searchresultsonetype.jspf" %>
@@ -145,7 +177,8 @@ String[] countries = acesearchformbean.getCountries();
         <c:set var="groupedJSONResults" scope="page" value="${GUIDANCE_JSONsearchResults}"/>
         <c:set var="aceitemtype" scope="page" value="GUIDANCE"/>
         <c:set var="groupTitle" scope="page"><liferay-ui:message key="acesearch-datainfotype-lbl-GUIDANCE" /></c:set>
-<% 	if( paging > 0) {	%>	
+<% 	if( paging > 0) {		
+		searchstring = searchbasestring	+ handle + "searchtypes=GUIDANCE"; // no handle adjustment %>
         <%@ include file="searchresultsbytype.jspf" %>
 <% } else if( sofarnr  < prefnritemspage ) { %>	
         <%@ include file="searchresultsonetype.jspf" %>
@@ -155,7 +188,8 @@ String[] countries = acesearchformbean.getCountries();
         <c:set var="groupedJSONResults" scope="page" value="${TOOL_JSONsearchResults}"/>
         <c:set var="aceitemtype" scope="page" value="TOOL"/>
         <c:set var="groupTitle" scope="page"><liferay-ui:message key="acesearch-datainfotype-lbl-TOOL" /></c:set>
-<% 	if( paging > 0) {	%>	
+<% 	if( paging > 0) {		
+		searchstring = searchbasestring	+ handle + "searchtypes=TOOL"; // no handle adjustment %>
         <%@ include file="searchresultsbytype.jspf" %>
 <% } else if( sofarnr  < prefnritemspage ) { %>	
         <%@ include file="searchresultsonetype.jspf" %>
@@ -165,7 +199,8 @@ String[] countries = acesearchformbean.getCountries();
 		<c:set var="groupedJSONResults" scope="page" value="${MAPGRAPHDATASET_JSONsearchResults}"/>
 		<c:set var="aceitemtype" scope="page" value="MAPGRAPHDATASET"/>		
 		<c:set var="groupTitle" scope="page"><liferay-ui:message key="acesearch-datainfotype-lbl-MAPGRAPHDATASET" /></c:set>
-<% 	if( paging > 0) {	%>	
+<% 	if( paging > 0) {		
+		searchstring = searchbasestring	+ handle + "searchtypes=MAPGRAPHDATASET"; // no handle adjustment %>
         <%@ include file="searchresultsbytype.jspf" %>
 <% } else if( sofarnr  < prefnritemspage ) { %>	
         <%@ include file="searchresultsonetype.jspf" %>
@@ -175,7 +210,8 @@ String[] countries = acesearchformbean.getCountries();
 		<c:set var="groupedJSONResults" scope="page" value="${INDICATOR_JSONsearchResults}"/>
 		<c:set var="aceitemtype" scope="page" value="INDICATOR"/>
 		<c:set var="groupTitle" scope="page"><liferay-ui:message key="acesearch-datainfotype-lbl-INDICATOR" /></c:set>
-<% 	if( paging > 0) {	%>	
+<% 	if( paging > 0) {		
+		searchstring = searchbasestring	+ handle + "searchtypes=INDICATOR"; // no handle adjustment %>
         <%@ include file="searchresultsbytype.jspf" %>
 <% } else if( sofarnr  < prefnritemspage ) { %>	
         <%@ include file="searchresultsonetype.jspf" %>
@@ -185,7 +221,8 @@ String[] countries = acesearchformbean.getCountries();
 		<c:set var="groupedJSONResults" scope="page" value="${RESEARCHPROJECT_JSONsearchResults}"/>
 		<c:set var="aceitemtype" scope="page" value="RESEARCHPROJECT"/>
 		<c:set var="groupTitle" scope="page"><liferay-ui:message key="acesearch-datainfotype-lbl-RESEARCHPROJECT" /></c:set>
-<% 	if( paging > 0) {	%>	
+<% 	if( paging > 0) {		
+		searchstring = searchbasestring	+ handle + "searchtypes=RESEARCHPROJECT"; // no handle adjustment %>
         <%@ include file="searchresultsbytype.jspf" %>
 <% } else if( sofarnr  < prefnritemspage ) { %>	
         <%@ include file="searchresultsonetype.jspf" %>
@@ -195,7 +232,8 @@ String[] countries = acesearchformbean.getCountries();
 		<c:set var="groupedJSONResults" scope="page" value="${MEASURE_JSONsearchResults}"/>
 		<c:set var="aceitemtype" scope="page" value="MEASURE"/>
 		<c:set var="groupTitle" scope="page"><liferay-ui:message key="acesearch-datainfotype-lbl-MEASURE" /></c:set>
-<% 	if( paging > 0) {	%>	
+<% 	if( paging > 0) {		
+		searchstring = searchbasestring	+ handle + "searchtypes=MEASURE"; // no handle adjustment %>
         <%@ include file="searchresultsbytype.jspf" %>
 <% } else if( sofarnr  < prefnritemspage ) { %>	
         <%@ include file="searchresultsonetype.jspf" %>
@@ -205,7 +243,8 @@ String[] countries = acesearchformbean.getCountries();
 		<c:set var="groupedJSONResults" scope="page" value="${ACTION_JSONsearchResults}"/>
 		<c:set var="aceitemtype" scope="page" value="ACTION"/>
 		<c:set var="groupTitle" scope="page"><liferay-ui:message key="acesearch-datainfotype-lbl-ACTION" /></c:set>
-<% 	if( paging > 0) {	%>	
+<% 	if( paging > 0) {		
+		searchstring = searchbasestring	+ handle + "searchtypes=ACTION"; // no handle adjustment %>	
         <%@ include file="searchresultsbytype.jspf" %>
 <% } else if( sofarnr < prefnritemspage ) { %>	
         <%@ include file="searchresultsonetype.jspf" %>
@@ -215,51 +254,24 @@ String[] countries = acesearchformbean.getCountries();
 		<c:set var="groupedJSONResults" scope="page" value="${ORGANISATION_JSONsearchResults}"/>
 		<c:set var="aceitemtype" scope="page" value="ORGANISATION"/>
 		<c:set var="groupTitle" scope="page"><liferay-ui:message key="acesearch-datainfotype-lbl-ORGANISATION" /></c:set>
-<% 	if( paging > 0) {	%>	
+<% 	if( paging > 0) {		
+		searchstring = searchbasestring	+ handle + "searchtypes=ORGANISATION"; // no handle adjustment %>
         <%@ include file="searchresultsbytype.jspf" %>
 <% } else if( sofarnr < prefnritemspage) { %>	
         <%@ include file="searchresultsonetype.jspf" %>
 <% } %>
 <% 	if( (paging == 0) && (sofarnr < totalResults)){	
-		String searchstring = "/data-and-downloads" ;
-		
-		String handle = "?" ;
-		
-		if( anyOfThese != null) { 
-			searchstring += handle + "searchtext=" + anyOfThese ; 
-			handle="&" ; 
-		}
-		
+	
 		if( aceitemtypes != null) { 
-			searchstring += handle + "searchtypes=" ;
+			searchbasestring += handle + "searchtypes=" ;
 			handle="&" ; 			
 			for(int j=0; j < aceitemtypes.length; j++ )
-				{ searchstring += (j > 0 ? ";" : "" ) + aceitemtypes[j] ; } 
+				{ searchbasestring += (j > 0 ? ";" : "" ) + aceitemtypes[j] ; } 
 		}
 
-		if(  sectors != null) { 
-			searchstring += handle + "searchsectors=" ;
-			handle="&" ; 			
-			for(int j=0; j < sectors.length; j++ ) 
-				{ searchstring += (j > 0 ? ";" : "" ) + sectors[j] ; } 
-		}
-			
-		if(  elements != null) { 
-			searchstring += handle + "searchelements=" ;
-			handle="&" ; 			
-			for(int j=0; j < elements.length; j++ ) 
-				{ searchstring += (j > 0 ? ";" : "" ) + elements[j] ; } 
-		}
-			
-		if(  countries != null) { 
-			searchstring += handle + "searchcountries=" ;
-			handle="&" ; 			
-			for(int j=0; j < countries.length; j++ ) 
-				{ searchstring += (j > 0 ? ";" : "" ) + countries[j] ; } 
-		}
 %>		
 		<div class='searchAll' style='text-align: right'>
-			<br /><a href='<%= searchstring %>'>View all</a>
+			<br /><a href='<%= searchbasestring %>'>View all</a>
 		</div>
 <% 		
 	} %>		
