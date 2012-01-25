@@ -57,10 +57,12 @@
 			var mapViewerServletUrl = 'http://localhost/mapviewerservlet';
 			
 			var map;
-						
-			var locator;
 			
-			var csw;
+			// Custom layer node UI class for the table of contents
+			var LayerNodeUI = Ext.extend(
+			    GeoExt.tree.LayerNodeUI,
+			    new GeoExt.tree.TreeNodeUIEventMixin()
+			);
 			
 		    Ext.onReady(function() {
 				map = new CHM.MapViewerCHMMap();
@@ -76,10 +78,60 @@
 		            map: map
 		        });
 		        
-		        legendPanel = new GeoExt.LegendPanel({
+		        var registerRadio = function(node) {
+			        if (!node.hasListener("radiochange")) {
+			            node.on("radiochange", function(node) {
+			                /* set your active layer here */
+			            });
+			        }
+		    	}		        
+		        
+		        var tree = new Ext.tree.TreePanel({
 		            layerStore: mapPanel.layers,
 		            renderTo: "legend_element",
-		            border: false
+		            title: "Layers",
+		            width: 250,
+		            autoScroll: true,
+		            enableDD: true,
+		            // apply the tree node component plugin to layer nodes
+		            plugins: [{
+		                ptype: "gx_treenodecomponent"
+		            }],
+		            loader: {
+		                applyLoader: false,
+		                uiProviders: {
+		                    "custom_ui": LayerNodeUI
+		                }
+		            },
+		            root: {
+		                nodeType: "gx_layercontainer",
+		                loader: {
+		                    baseAttrs: {
+		                        uiProvider: "custom_ui",
+		                        radioGroup: "active"
+		                    },
+		                    createNode: function(attr) {
+		                    	if (attr.layer instanceof OpenLayers.Layer.WMS) {
+			                        // Add a WMS legend to each WMS node created
+			                        attr.component = {
+			                            xtype: "gx_wmslegend",
+			                            layerRecord: mapPanel.layers.getByLayer(attr.layer),
+			                            showTitle: false,
+			                            // custom class for css positioning
+			                            // see tree-legend.html
+			                            cls: "legend"
+		                    		}
+		                        }
+		                        return GeoExt.tree.LayerLoader.prototype.createNode.call(this, attr);
+		                    }
+		                }
+		            },
+		            listeners: {
+		                append: registerRadio,
+		                insert: registerRadio
+		            }, 
+		            rootVisible: false,
+		            lines: false
 		        });
 		        
  		        map.addBingLayers();

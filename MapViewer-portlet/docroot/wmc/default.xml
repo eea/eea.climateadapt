@@ -1,49 +1,18 @@
 <ViewContext xmlns="http://www.opengis.net/context" version="1.1.0"
-	id="OpenLayers_Context_117"
+	id="OpenLayers_Context_212"
 	xsi:schemaLocation="http://www.opengis.net/context http://schemas.opengis.net/context/1.1.0/context.xsd"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 	<General>
 		<Window width="675" height="350" />
-		<BoundingBox minx="539339.671483770013" miny="6679984.77469999995"
-			maxx="2190379.48214779980" maxy="7536079.49134059995" SRS="EPSG:900913" />
+		<BoundingBox minx="-5317571.18279070035" miny="4500612.22462350037"
+			maxx="7890747.30252190027" maxy="11349369.9577489998" SRS="EPSG:900913" />
 		<Title />
 		<Extension>
 			<ol:maxExtent xmlns:ol="http://openlayers.org/context"
-				minx="-180.000000000000000" miny="-90.0000000000000000" maxx="180.000000000000000"
-				maxy="90.0000000000000000" />
+				minx="-2680799.45553749986" miny="4050551.00216099992" maxx="5244191.63564999960"
+				maxy="11799431.1802110001" />
 		</Extension>
 	</General>
 	<LayerList>
-		<Layer queryable="0" hidden="0">
-			<Server service="OGC:WMS" version="1.1.1">
-				<OnlineResource xlink:type="simple"
-					xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://dev.ace.geocat.net/geoserver/wms?" />
-			</Server>
-			<Name>chm:biogeo_2005</Name>
-			<Title>Biogeographical regions 2005</Title>
-			<FormatList>
-				<Format current="1">image/png</Format>
-			</FormatList>
-			<StyleList>
-				<Style current="1">
-					<Name />
-					<Title>Default</Title>
-				</Style>
-			</StyleList>
-			<Extension>
-				<ol:maxExtent xmlns:ol="http://openlayers.org/context"
-					minx="-180.000000000000000" miny="-90.0000000000000000" maxx="180.000000000000000"
-					maxy="90.0000000000000000" />
-				<ol:tileSize xmlns:ol="http://openlayers.org/context"
-					width="256" height="256" />
-				<ol:transparent xmlns:ol="http://openlayers.org/context">true</ol:transparent>
-				<ol:numZoomLevels xmlns:ol="http://openlayers.org/context">16</ol:numZoomLevels>
-				<ol:units xmlns:ol="http://openlayers.org/context">degrees</ol:units>
-				<ol:isBaseLayer xmlns:ol="http://openlayers.org/context">false</ol:isBaseLayer>
-				<ol:displayInLayerSwitcher xmlns:ol="http://openlayers.org/context">true
-				</ol:displayInLayerSwitcher>
-				<ol:singleTile xmlns:ol="http://openlayers.org/context">false</ol:singleTile>
-			</Extension>
-		</Layer>
 	</LayerList>
 </ViewContext>

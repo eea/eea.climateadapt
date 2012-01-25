@@ -2,13 +2,11 @@
 <%@page import="java.util.ArrayList"%>
 <%@include file="/html/init.jsp" %>
 
-<div id='status_element'>Status</div>
-
 <div id='map_element'></div>
 
-<div id='legend_element'><h3 id="legend-title">Legend</h3></div>
-
 <div id='toc_element'><h3 id="toc-title">Table of contents</h3></div>
+
+<div id='status_element' style='display:none'>map status</div>
 
 <script>
 	var proxyUrl = '<%= prefs.getValue(Constants.proxyUrlPreferenceName, "") %>';
@@ -30,10 +28,12 @@
 	var mapViewerServletUrl = '<%= prefs.getValue(Constants.mapViewerServletURLPreferenceName, "/MapViewer-portlet/mapviewerservlet") %>';
 	
 	var mapviewerchmmap;
-				
-	var locator;
 	
-	var csw;
+	// Custom layer node UI class for the table of contents
+	var LayerNodeUI = Ext.extend(
+	    GeoExt.tree.LayerNodeUI,
+	    new GeoExt.tree.TreeNodeUIEventMixin()
+	);
 	
     Ext.onReady(function() {
     	mapviewerchmmap = new CHM.MapViewerCHMMap();
@@ -48,24 +48,47 @@
             width: 675,
             map: mapviewerchmmap
         });
-        
-        legendpanel = new GeoExt.LegendPanel({
-            layerStore: mappanel.layers,
-            renderTo: "legend_element",
-            border: false
-        });
 
         tocpanel = new Ext.tree.TreePanel({
+            layerStore: mappanel.layers,
             renderTo: "toc_element",
-            root: new GeoExt.tree.LayerContainer({
-                text: 'Map Layers',
-                layerStore: mappanel.layers,
-                leaf: false,
-                expanded: true
-            }),
+            width: 250,
+            autoScroll: true,
+            enableDD: true,
+            // apply the tree node component plugin to layer nodes
+            plugins: [{
+                ptype: "gx_treenodecomponent"
+            }],
+            loader: {
+                applyLoader: false,
+                uiProviders: {
+                    "custom_ui": LayerNodeUI
+                }
+            },
+            root: {
+                nodeType: "gx_layercontainer",
+                loader: {
+                    baseAttrs: {
+                        uiProvider: "custom_ui"
+                    },
+                    createNode: function(attr) {
+                    	if (attr.layer instanceof OpenLayers.Layer.WMS) {
+	                        // Add a WMS legend to each WMS node created
+	                        attr.component = {
+	                            xtype: "gx_wmslegend",
+	                            layerRecord: mappanel.layers.getByLayer(attr.layer),
+	                            showTitle: false,
+	                            // custom class for css positioning
+	                            // see tree-legend.html
+	                            cls: "legend"
+                    		}
+                        }
+                        return GeoExt.tree.LayerLoader.prototype.createNode.call(this, attr);
+                    }
+                }
+            },
             rootVisible: false,
-            lines: false,
-            enableDD: true
+            lines: false
         });
 
         mapviewerchmmap.addBingLayers();
@@ -88,28 +111,32 @@
         	
        	String cswpassword = prefs.getValue(Constants.cswPassWordPreferenceName, "");
         	
-   		CSW csw = new CSW(cswurl, cswusername, cswpassword);
-			
-		HttpServletRequest httprequest = PortalUtil.getOriginalServletRequest(PortalUtil.getHttpServletRequest(renderRequest));
-        
-        String metadatarecordid = httprequest.getParameter(Constants.cswRecordFileIdentifierParameterName);
-			
-		if (metadatarecordid != null && metadatarecordid.length() > 0) {
-			CSWRecord cswrecord = csw.getRecordByID(metadatarecordid);
-			
-			for (int i = 0; i < cswrecord.getDigitalTransferOptions().size(); i ++) {
-				DigitalTransferOption digitaltransferoption = cswrecord.getDigitalTransferOptions().get(i);
+       	try {
+	   		CSW csw = new CSW(cswurl, cswusername, cswpassword);
 				
-				if (digitaltransferoption.getProtocol().indexOf("WMS") != -1) {
-					String javascript = "mapviewerchmmap.addLayer(new OpenLayers.Layer.WMS('" 
-						+ cswrecord.getTitle() + "', '" 
-						+ digitaltransferoption.getUrl() + "', {layers: '" 
-						+ digitaltransferoption.getLayerName() + "', format: 'image/png', transparent: 'true'}, {visibility: true}, {tileOptions: {maxGetUrlLength: 2048}}, {isBaseLayer: false}));";
+			HttpServletRequest httprequest = PortalUtil.getOriginalServletRequest(PortalUtil.getHttpServletRequest(renderRequest));
+	        
+	        String metadatarecordid = httprequest.getParameter(Constants.cswRecordFileIdentifierParameterName);
 				
-					out.println(javascript);
+			if (metadatarecordid != null && metadatarecordid.length() > 0) {
+				CSWRecord cswrecord = csw.getRecordByID(metadatarecordid);
+				
+				for (int i = 0; i < cswrecord.getDigitalTransferOptions().size(); i ++) {
+					DigitalTransferOption digitaltransferoption = cswrecord.getDigitalTransferOptions().get(i);
+					
+					if (digitaltransferoption.getProtocol().indexOf("WMS") != -1) {
+						String javascript = "mapviewerchmmap.addLayer(new OpenLayers.Layer.WMS('" 
+							+ cswrecord.getTitle() + "', '" 
+							+ digitaltransferoption.getUrl() + "', {layers: '" 
+							+ digitaltransferoption.getLayerName() + "', format: 'image/png', transparent: 'true'}, {visibility: true}, {tileOptions: {maxGetUrlLength: 2048}}, {isBaseLayer: false}));";
+					
+						out.println(javascript);
+					}
 				}
 			}
-		}
+       	} catch (Exception e) {
+       		out.println("document.getElementById('status_element').innerHTML = 'Error in communication with catalogue server';");
+       	}
 %>
 	}
 </script>

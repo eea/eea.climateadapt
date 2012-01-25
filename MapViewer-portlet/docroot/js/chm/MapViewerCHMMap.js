@@ -1,6 +1,6 @@
 CHM.MapViewerCHMMap = OpenLayers.Class(CHM.CHMMap, {
 	
-	self: null,
+	instance: null,
     
     onrestorecomplete: null, 
 	
@@ -11,33 +11,49 @@ CHM.MapViewerCHMMap = OpenLayers.Class(CHM.CHMMap, {
 	initialize : function(aOptions) {
 		CHM.CHMMap.prototype.initialize.apply(this, arguments);
 		
-		self = this;
+		instance = this;
 	},
 	
 	restore : function() {
-		self.restoreMapState();
+		instance.restoreMapState();
 	},
 	
+	addLayer : function(aLayer) {
+		if (aLayer instanceof OpenLayers.Layer.WMS) {
+			var name = aLayer.name;
+			
+			var url = aLayer.url;
+			
+			var paramlayers = aLayer.params.LAYERS;
+			
+			if (instance.findLayerByNameAndUrl(name, url, paramlayers) == null) {
+				CHM.CHMMap.prototype.addLayer.apply(this, arguments);
+			}
+		} else {
+			CHM.CHMMap.prototype.addLayer.apply(this, arguments);
+		}
+	}, 
+	
 	registerEvents : function() {
-		self.setStatus('registering events');
+		instance.setStatus('registering events');
 		
-		self.events.register('moveend', this, function(event) {
-			self.saveMapState(event);
+		instance.events.register('moveend', this, function(event) {
+			instance.saveMapState(event);
 		});	
 		
-		self.events.register('changelayer', this, function(event) {
-			self.saveMapState(event);
+		instance.events.register('changelayer', this, function(event) {
+			instance.saveMapState(event);
 		});	
 		
-		self.events.register('addlayer', this, function(event) {
-			self.saveMapState(event);
+		instance.events.register('addlayer', this, function(event) {
+			instance.saveMapState(event);
 		});
 		
-		self.events.register('changebaselayer', this, function(event) {
-			self.saveMapState(event);
+		instance.events.register('changebaselayer', this, function(event) {
+			instance.saveMapState(event);
 		});
 		
-		self.setStatus('events registered');
+		instance.setStatus('events registered');
 	},
 	
 	
@@ -46,12 +62,12 @@ CHM.MapViewerCHMMap = OpenLayers.Class(CHM.CHMMap, {
 	// ********************
 	
 	saveMapState : function(aEvent) {
-		self.setStatus('saving map state');
+		instance.setStatus('saving map state');
         
 		var format = new OpenLayers.Format.WMC({'layerOptions': {buffer: 0}});
 
 		try {
-            var wmc = format.write(self);
+            var wmc = format.write(instance);
 				
 			OpenLayers.Request.POST({
 				url: mapViewerServletUrl,
@@ -59,18 +75,18 @@ CHM.MapViewerCHMMap = OpenLayers.Class(CHM.CHMMap, {
 				headers: {
 					"Content-Type": "text/xml"
 				},			
-				callback: self.postHandler
+				callback: instance.postHandler
 			});
         } catch (error) {
-        	self.setStatus('client side error saving map state ' + error);
+        	instance.setStatus('client side error saving map state ' + error);
         };
 	}, 
 
 	postHandler : function (request) {
 		if (request.status == 200) {
-			self.setStatus('map state saved');
+			instance.setStatus('map state saved');
 		} else {
-			self.setStatus('server side error saving map state');
+			instance.setStatus('server side error saving map state');
 		};
 	},
 	
@@ -80,15 +96,19 @@ CHM.MapViewerCHMMap = OpenLayers.Class(CHM.CHMMap, {
 	// ***********************
 	
 	restoreMapState : function() {
-        self.setStatus('restoring map state');
+        instance.setStatus('restoring map state');
         
 		try {
 			OpenLayers.Request.GET({
 				url: mapViewerServletUrl,
-				callback: self.getHandler
+				callback: instance.getHandler,
+				params: 
+		    	{
+		    		random: Math.random()
+		    	}
 			});
         } catch (error) {
-        	self.setStatus('client side error restoring map state ' + error);
+        	instance.setStatus('client side error restoring map state ' + error);
         }
 	},
 	
@@ -99,8 +119,18 @@ CHM.MapViewerCHMMap = OpenLayers.Class(CHM.CHMMap, {
 			var map = new OpenLayers.Map();
 			
             format.read(request.responseXML, {map: map});
+            
+//            var bounds = format.context.bounds;
+//            
+//            bounds.left = bounds.left + 100;
+//            
+//            bounds.bottom = bounds.bottom + 100;
+//            
+//            bounds.right = bounds.right - 100;
+//            
+//            bounds.top = bounds.top - 100;
 
-            self.zoomToExtent(format.context.bounds);
+            instance.zoomToExtent(format.context.bounds.scale(0.99));
             
             var arraylength = map.layers.length;
             
@@ -108,49 +138,67 @@ CHM.MapViewerCHMMap = OpenLayers.Class(CHM.CHMMap, {
             	var layer = map.layers[i];
             	
             	var name = layer.name;
-
-            	var url = layer.url;
             	
-            	var paramlayers = layer.params.LAYERS;
-            	
-            	var paramformat = layer.params.FORMAT;
-            	
-            	var paramtransparent = layer.params.TRANSPARENT;
-            	
-            	var visibility = layer.visibility;
-            	
-            	var isbaselayer = layer.isBaseLayer; 
-            	
-            	var clone = new OpenLayers.Layer.WMS(
-            			name, 
-            			url, 
-            			{layers: paramlayers, format: paramformat, transparent: paramtransparent},
-            			{visibility: visibility}, 
-            			{isBaseLayer: isbaselayer}
-            		);
-            	
-            	self.addLayer(clone);
+           		var url = layer.url;
+            		
+           		var paramlayers = layer.params.LAYERS;
+           		
+       			var paramformat = layer.params.FORMAT;
+           			
+       			var paramtransparent = layer.params.TRANSPARENT;
+           			
+       			var visibility = layer.visibility;
+           			
+       			var isbaselayer = layer.isBaseLayer; 
+           			
+       			var clone = new OpenLayers.Layer.WMS(
+       					name, 
+       					url, 
+       					{layers: paramlayers, format: paramformat, transparent: paramtransparent},
+       					{visibility: visibility}, 
+       					{isBaseLayer: isbaselayer}
+       			);
+         			
+       			instance.addLayer(clone);
             }            
             
-            self.setStatus('map state restored');
+            instance.setStatus('map state restored');
             
-            self.handleOnRestoreComplete();
+            instance.handleOnRestoreComplete();
 		} else {
-			self.setStatus('server side error restoring map state');
+			instance.setStatus('server side error restoring map state');
 		};
 	}, 
 	
+	findLayerByNameAndUrl : function(aName, aUrl, aLayersParam) {
+		var result = null;
+		
+        var arraylength = instance.layers.length;
+        
+        for (var i = 0, len = arraylength; i < len; ++ i) {
+        	var layer = instance.layers[i];
+        	
+        	if (layer.name == aName && layer.url == aUrl && layer.params.LAYERS == aLayersParam) {
+        		result = layer;
+        		
+        		break;
+        	}
+        }
+        	
+        return result;	
+	}, 
+	
 	getOnRestoreComplete : function() {
-		return self.onrestorecomplete;
+		return instance.onrestorecomplete;
 	},
 	
 	setOnRestoreComplete : function(aFunction) {
-		self.onrestorecomplete = aFunction;
+		instance.onrestorecomplete = aFunction;
 	},
 	
 	handleOnRestoreComplete : function() {
-		if (self.onrestorecomplete != null) {
-			self.onrestorecomplete();
+		if (instance.onrestorecomplete != null) {
+			instance.onrestorecomplete();
 		}
 	},
 
@@ -160,26 +208,26 @@ CHM.MapViewerCHMMap = OpenLayers.Class(CHM.CHMMap, {
 	// ************
 	
 	getStatus : function() {
-		return self.status;
+		return instance.status;
 	},
 	
 	setStatus : function(aStatus) {
-		self.status = aStatus;
+		instance.status = aStatus;
 		
-		self.handleOnStatusChanged();
+		instance.handleOnStatusChanged();
 	},
 	
 	getOnStatusChanged : function() {
-		return self.onstatuschanged;
+		return instance.onstatuschanged;
 	},
 	
 	setOnStatusChanged : function(aFunction) {
-		self.onstatuschanged = aFunction;
+		instance.onstatuschanged = aFunction;
 	},
 	
 	handleOnStatusChanged : function() {
-		if (self.onstatuschanged != null) {
-			self.onstatuschanged();
+		if (instance.onstatuschanged != null) {
+			instance.onstatuschanged();
 		}
 	}
 });
