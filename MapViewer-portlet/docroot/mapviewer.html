@@ -141,8 +141,11 @@
 		                ptype: "gx_treenodeactions",
 		                listeners: {
 		                    action: GeoExt.examples.onAction
-		                }
-		            }],
+		                }		                
+		            },
+	                {
+	                    ptype: "gx_treenodecomponent"
+	                }],
 		            root: {
 		                nodeType: "gx_layercontainer",
 		                loader: {
@@ -177,6 +180,20 @@
 		                                } 
 		                            } 
 		                        }]
+		                    },
+		                    createNode: function(attr) {
+		                    	if (attr.layer instanceof OpenLayers.Layer.WMS) {
+			                        // Add a WMS legend to each WMS node created
+			                        attr.component = {
+			                            xtype: "gx_wmslegend",
+			                            layerRecord: mappanel.layers.getByLayer(attr.layer),
+			                            showTitle: false,
+			                            // custom class for css positioning
+			                            // see tree-legend.html
+			                            cls: "legend"
+		                    		}
+		                        }
+		                        return GeoExt.tree.LayerLoader.prototype.createNode.call(this, attr);
 		                    }
 		                }
 		            },
