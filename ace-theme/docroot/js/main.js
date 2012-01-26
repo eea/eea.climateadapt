@@ -79,5 +79,5 @@ $(document).ready(function()
 		   })
 		 
 		   // Make sure it doesn't follow the link when we click it
-		   .click(function(event) { event.preventDefault(); });
+		   //.click(function(event) { event.preventDefault(); });
 		});

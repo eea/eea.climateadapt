@@ -626,6 +626,8 @@ ul#subnav li a:hover {
 .ace_layout_1 #layout-column_column-3,
 .ace_layout_1 #layout-column_column-4,
 .ace_layout_1 #layout-column_column-5,
+.ace_layout_2 #layout-column_column-2,
+.ace_layout_2 #layout-column_column-3,
 .ace_layout_3 #layout-column_column-2,
 .ace_layout_3 #layout-column_column-3,
 .ace_layout_3 #layout-column_column-4 {
@@ -643,6 +645,7 @@ ul#subnav li a:hover {
 
 .ace_layout_1 #layout-column_column-4,
 .ace_layout_1 #layout-column_column-5,
+.ace_layout_2 #layout-column_column-3,
 .ace_layout_3 #layout-column_column-3,
 .ace_layout_3 #layout-column_column-4 {
 	border-left: #d7e3ef 2px solid;
@@ -653,25 +656,41 @@ ul#subnav li a:hover {
 	width: 33%;
 }
 
-/**** Ace Layout 3 ****/
+/**** Ace Layout 2 and 3 (resp. measures and sector pages) ****/
 
+.ace_layout_2 #layout-column_column-1,
 .ace_layout_3 #layout-column_column-1 {
 	margin-top: -15px;
 	padding: 0 2px 27px 0;
 }
 
+.ie7 .ace_layout_2 #layout-column_column-1,
 .ie7 .ace_layout_3 #layout-column_column-1 {
 	margin-top: 0;
 }
 
+.ace_layout_2 #column-4,
 .ace_layout_3 #column-5 {
 	background-color: #d2de92;
 }
 
+.ace_layout_2 #column-2 {
+	width: 20%;
+}
+.ace_layout_2 #column-3 {
+	width: 80%;
+}
+
+.ace_layout_2 #column-4 {
+	width: 23.3%;
+}
+
+.ace_layout_2 #layout-column_column-4,
 .ace_layout_3 #layout-column_column-5 {
 	padding: 27px 19px;
 }
 
+.ace_layout_2 #layout-column_column-4 .portlet-title,
 .ace_layout_3 #layout-column_column-5 .portlet-title {
 	color: #758816;
 }
