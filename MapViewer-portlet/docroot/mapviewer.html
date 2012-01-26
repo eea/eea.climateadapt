@@ -5,30 +5,55 @@
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 		<title>Prototype MapViewer</title>
 		<script type='text/javascript' src="http://ecn.dev.virtualearth.net/mapcontrol/mapcontrol.ashx?v=6.2&amp;mkt=en-us"></script>
-		<script type="text/javascript" src='js/ext-base.js'></script>
-		<script type="text/javascript" src='js/ext-all.js'></script>
-		<script type="text/javascript" src='js/jquery.min.js'></script>
-		<script type='text/javascript' src='js/OpenLayers.js'></script>
-		<script type="text/javascript" src='js/GeoExt.js'></script>
+        <script type="text/javascript" src="js/ext-3.4.0/adapter/ext/ext-base.js"></script>
+        <script type="text/javascript" src="js/ext-3.4.0/ext-all-debug.js"></script>
+        <script type="text/javascript" src="js/OpenLayers.js"></script>
+		<script type="text/javascript" src='js/GeoExt/lib/GeoExt.js'></script>
 		<script type="text/javascript" src="js/chm/CHM.js"></script>
 		<script type="text/javascript" src="js/chm/CHMMap.js"></script>
 		<script type="text/javascript" src="js/chm/MapViewerCHMMap.js"></script>
 		<script type="text/javascript" src="js/chm/MapState.js"></script>
-		<script type="text/javascript" src="js/chm/CSW.js"></script>
-		<script type="text/javascript" src="js/chm/Resource.js"></script>
-		<script type="text/javascript" src="js/chm/ResourceSet.js"></script>
-		<script type="text/javascript" src="js/chm/Point.js"></script>
-		<script type="text/javascript" src="js/chm/Locator.js"></script>
-		<script type="text/javascript" src="js/chm/Location.js"></script>
-		<script type="text/javascript" src="js/chm/LocationControl.js"></script>
+        <style type="text/css">
+	        .gx-tree-layer-actions {
+	            float: right;
+	        }
+	        .gx-tree-layer-action {
+	            background-position: center center;
+	            background-repeat: no-repeat;
+	            border: 0 none;
+	            height: 16px;
+	            margin: 0;
+	            padding: 0;
+	            vertical-align: top;
+	            width: 16px;
+	        }
+	        .gx-tree-layer-actions .delete {
+	            background: transparent url(js/GeoExt/resources/images/default/delete.png);
+	        }
+	        .gx-tree-layer-actions .up {
+	            background: transparent url(js/GeoExt/resources/images/default/bullet_arrow_up.png);
+	        }
+	        .gx-tree-layer-actions .down {
+	            background: transparent url(js/GeoExt/resources/images/default/bullet_arrow_down.png);
+	        }
+	        .gx-tree-layer-actions .disabled {
+	            opacity: 0.2;
+	        }
+	        .x-tree-node-el {
+	            border-bottom: 1px solid #ddd;
+	        }
+	        .x-tree-no-lines .x-tree-elbow,
+	        .x-tree-no-lines .x-tree-elbow-end,
+	        .x-tree-node-collapsed .x-tree-node-icon,
+	        .x-tree-node-expanded .x-tree-node-icon,
+	        .x-tree-node-leaf .gx-tree-layer-icon {
+	           width: 0px; !important;
+	        }
+    	</style>
+        <link rel="stylesheet" type="text/css" href="js/ext-3.4.0/resources/css/ext-all.css" />
+        <link rel="stylesheet" type="text/css" href="js/ext-3.4.0/examples/shared/examples.css" />
 	</head>
 	<body>
-
-		<div id="getRecordByID">
-			<input type="text" name="recordID" id="recordID" value="66dc6023-fece-4044-ab8b-49ac6379da35" />
-			<input type="submit" value="GetRecordByID" onclick="getRecordByID(document.getElementById('recordID').value)"/>
-		</div>
-
 		<div id='status_element'>Status</div>
 
 		<div id='map_element'></div>
@@ -58,78 +83,103 @@
 			
 			var map;
 			
+			Ext.namespace("GeoExt.examples");
+
+			// this function takes action based on the "action"
+			// parameter, it is used as a listener to layer
+			// nodes' "action" events
+			GeoExt.examples.onAction = function(node, action, evt) {
+			    var layer = node.layer;
+			    switch(action) {
+			    case "down":
+			        layer.map.raiseLayer(layer, -1);
+			        break;
+			    case "up":
+			        layer.map.raiseLayer(layer, +1);
+			        break;
+			    case "delete":
+			        layer.destroy();
+			        break;
+			    }
+			};
+
 			// Custom layer node UI class for the table of contents
-			var LayerNodeUI = Ext.extend(
+			var ui = Ext.extend (
 			    GeoExt.tree.LayerNodeUI,
 			    new GeoExt.tree.TreeNodeUIEventMixin()
 			);
 			
 		    Ext.onReady(function() {
+		        Ext.QuickTips.init();
+
 				map = new CHM.MapViewerCHMMap();
 				
 				map.setOnStatusChanged(handleStatusChanged);
 				
 				map.setOnRestoreComplete(handleRestoreComplete);
 				
-		        mapPanel = new GeoExt.MapPanel({
+		        mappanel = new GeoExt.MapPanel({
 		            renderTo: 'map_element',
 					height: 350,
 					width: 675,
 		            map: map
 		        });
 		        
-		        var registerRadio = function(node) {
-			        if (!node.hasListener("radiochange")) {
-			            node.on("radiochange", function(node) {
-			                /* set your active layer here */
-			            });
-			        }
-		    	}		        
-		        
 		        var tree = new Ext.tree.TreePanel({
-		            layerStore: mapPanel.layers,
 		            renderTo: "legend_element",
-		            title: "Layers",
+		            layerStore: mappanel.layers,
 		            width: 250,
-		            autoScroll: true,
-		            enableDD: true,
-		            // apply the tree node component plugin to layer nodes
-		            plugins: [{
-		                ptype: "gx_treenodecomponent"
-		            }],
+		            title: "Layer Tree",
 		            loader: {
 		                applyLoader: false,
 		                uiProviders: {
-		                    "custom_ui": LayerNodeUI
+		                    "ui": ui
 		                }
 		            },
+		            // apply the tree node actions plugin to layer nodes
+		            plugins: [{
+		                ptype: "gx_treenodeactions",
+		                listeners: {
+		                    action: GeoExt.examples.onAction
+		                }
+		            }],
 		            root: {
 		                nodeType: "gx_layercontainer",
 		                loader: {
 		                    baseAttrs: {
-		                        uiProvider: "custom_ui",
-		                        radioGroup: "active"
-		                    },
-		                    createNode: function(attr) {
-		                    	if (attr.layer instanceof OpenLayers.Layer.WMS) {
-			                        // Add a WMS legend to each WMS node created
-			                        attr.component = {
-			                            xtype: "gx_wmslegend",
-			                            layerRecord: mapPanel.layers.getByLayer(attr.layer),
-			                            showTitle: false,
-			                            // custom class for css positioning
-			                            // see tree-legend.html
-			                            cls: "legend"
-		                    		}
-		                        }
-		                        return GeoExt.tree.LayerLoader.prototype.createNode.call(this, attr);
+		                        radioGroup: "radiogroup",
+		                        uiProvider: "ui",
+		                        actions: [{
+		                            action: "delete",
+		                            qtip: "delete"
+		                        }, {
+		                            action: "up",
+		                            qtip: "move up",
+		                            update: function(el) { 
+		                                // "this" references the tree node 
+		                                var layer = this.layer, map = layer.map; 
+		                                if (map.getLayerIndex(layer) == map.layers.length - 1) { 
+		                                    el.addClass('disabled'); 
+		                                } else { 
+		                                    el.removeClass('disabled'); 
+		                                } 
+		                            } 
+		                        }, { 
+		                            action: "down", 
+		                            qtip: "move down", 
+		                            update: function(el) { 
+		                                // "this" references the tree node 
+		                                var layer = this.layer, map = layer.map; 
+		                                if (map.getLayerIndex(layer) == 1) { 
+		                                    el.addClass('disabled'); 
+		                                } else { 
+		                                    el.removeClass('disabled'); 
+		                                } 
+		                            } 
+		                        }]
 		                    }
 		                }
 		            },
-		            listeners: {
-		                append: registerRadio,
-		                insert: registerRadio
-		            }, 
 		            rootVisible: false,
 		            lines: false
 		        });
