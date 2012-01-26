@@ -1,0 +1,37 @@
+<ViewContext xmlns="http://www.opengis.net/context" version="1.1.0"
+	id="OpenLayers_Context_212"
+	xsi:schemaLocation="http://www.opengis.net/context http://schemas.opengis.net/context/1.1.0/context.xsd"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<General>
+		<Window width="675" height="350" />
+		<BoundingBox minx="-180" miny="-90" maxx="180" maxy="90"
+			SRS="EPSG:4326" />
+		<Title />
+		<Extension>
+			<ol:maxExtent xmlns:ol="http://openlayers.org/context"
+				minx="-180" miny="-90" maxx="180" maxy="90" />
+		</Extension>
+	</General>
+	<LayerList>
+		<Layer queryable="1" hidden="0">
+			<Server service="OGC:WMS" version="1.1.0">
+				<OnlineResource xlink:type="simple"
+					xlink:href="http://dev.ace.geocat.net/geoserver/wms" />
+			</Server>
+			<Name>background</Name>
+			<Title>Background</Title>
+			<FormatList>
+				<Format>image/jpeg</Format>
+				<Format current="1">image/png</Format>
+			</FormatList>
+			<sld:MinScaleDenominator>10000000</sld:MinScaleDenominator>
+			<SRS>EPSG:4326</SRS>
+			<Extension>
+				<ol:opacity xmlns:ol="http://openlayers.org/context">1</ol:opacity>
+				<ol:transparent xmlns:ol="http://openlayers.org/context">true</ol:transparent>
+				<ol:singleTile xmlns:ol="http://openlayers.org/context">false</ol:singleTile>
+				<ol:isBaseLayer xmlns:ol="http://openlayers.org/context">true</ol:isBaseLayer>
+			</Extension>
+		</Layer>
+	</LayerList>
+</ViewContext>

@@ -29,47 +29,102 @@
 	
 	var mapviewerchmmap;
 	
+	Ext.namespace("GeoExt.tree");
+
+	// this function takes action based on the "action"
+	// parameter, it is used as a listener to layer
+	// nodes' "action" events
+	GeoExt.tree.onAction = function(node, action, evt) {
+	    var layer = node.layer;
+	    switch(action) {
+	    case "down":
+	        layer.map.raiseLayer(layer, -1);
+	        break;
+	    case "up":
+	        layer.map.raiseLayer(layer, +1);
+	        break;
+	    case "delete":
+	        layer.destroy();
+	        break;
+	    }
+	};
+
 	// Custom layer node UI class for the table of contents
-	var LayerNodeUI = Ext.extend(
+	var ui = Ext.extend (
 	    GeoExt.tree.LayerNodeUI,
 	    new GeoExt.tree.TreeNodeUIEventMixin()
 	);
 	
     Ext.onReady(function() {
-    	mapviewerchmmap = new CHM.MapViewerCHMMap();
+        Ext.QuickTips.init();
+
+		mapviewerchmmap = new CHM.MapViewerCHMMap();
 		
-    	mapviewerchmmap.setOnStatusChanged(handleStatusChanged);
+		mapviewerchmmap.setOnStatusChanged(handleStatusChanged);
 		
-    	mapviewerchmmap.setOnRestoreComplete(handleRestoreComplete);
+		mapviewerchmmap.setOnRestoreComplete(handleRestoreComplete);
 		
         mappanel = new GeoExt.MapPanel({
             renderTo: 'map_element',
-            height: 350,
-            width: 675,
+			height: 350,
+			width: 675,
             map: mapviewerchmmap
         });
-
-        tocpanel = new Ext.tree.TreePanel({
-            layerStore: mappanel.layers,
+        
+        var tree = new Ext.tree.TreePanel({
             renderTo: "toc_element",
-            width: 250,
-            autoScroll: true,
-            enableDD: true,
-            // apply the tree node component plugin to layer nodes
-            plugins: [{
-                ptype: "gx_treenodecomponent"
-            }],
+            layerStore: mappanel.layers,
+            title: "Layer Tree",
             loader: {
                 applyLoader: false,
                 uiProviders: {
-                    "custom_ui": LayerNodeUI
+                    "ui": ui
                 }
             },
+            // apply the tree node actions plugin to layer nodes
+            plugins: [{
+                ptype: "gx_treenodeactions",
+                listeners: {
+                    action: GeoExt.tree.onAction
+                }		                
+            },
+            {
+                ptype: "gx_treenodecomponent"
+            }],
             root: {
                 nodeType: "gx_layercontainer",
                 loader: {
                     baseAttrs: {
-                        uiProvider: "custom_ui"
+                        radioGroup: "radiogroup",
+                        uiProvider: "ui",
+                        actions: [{
+                            action: "delete",
+                            qtip: "delete"
+                        }, {
+                            action: "up",
+                            qtip: "move up",
+                            update: function(el) { 
+                                // "this" references the tree node 
+                                var layer = this.layer, map = layer.map; 
+                                if (map.getLayerIndex(layer) == map.layers.length - 1) { 
+                                    el.addClass('disabled'); 
+                                } else { 
+                                    el.removeClass('disabled'); 
+                                } 
+                            } 
+                        }, { 
+                            action: "down", 
+                            qtip: "move down", 
+                            update: function(el) { 
+                                // "this" references the tree node 
+                                var layer = this.layer, map = layer.map; 
+                                if (map.getLayerIndex(layer) == 1) { 
+                                    el.addClass('disabled'); 
+                                } else { 
+                                    el.removeClass('disabled'); 
+                                } 
+                            } 
+                        }]
                     },
                     createNode: function(attr) {
                     	if (attr.layer instanceof OpenLayers.Layer.WMS) {
@@ -90,7 +145,7 @@
             rootVisible: false,
             lines: false
         });
-
+        
         mapviewerchmmap.addBingLayers();
 	        
         mapviewerchmmap.restore();

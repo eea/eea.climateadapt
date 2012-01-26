@@ -51,14 +51,13 @@
 	        }
     	</style>
         <link rel="stylesheet" type="text/css" href="js/ext-3.4.0/resources/css/ext-all.css" />
-        <link rel="stylesheet" type="text/css" href="js/ext-3.4.0/examples/shared/examples.css" />
 	</head>
 	<body>
 		<div id='status_element'>Status</div>
 
 		<div id='map_element'></div>
 
-		<div id='legend_element'></div>
+		<div id='toc_element'></div>
 
 		<script>
 			var proxyUrl = '';
@@ -81,14 +80,14 @@
 
 			var mapViewerServletUrl = 'http://localhost/mapviewerservlet';
 			
-			var map;
+			var mapviewerchmmap;
 			
-			Ext.namespace("GeoExt.examples");
+			Ext.namespace("GeoExt.tree");
 
 			// this function takes action based on the "action"
 			// parameter, it is used as a listener to layer
 			// nodes' "action" events
-			GeoExt.examples.onAction = function(node, action, evt) {
+			GeoExt.tree.onAction = function(node, action, evt) {
 			    var layer = node.layer;
 			    switch(action) {
 			    case "down":
@@ -112,21 +111,21 @@
 		    Ext.onReady(function() {
 		        Ext.QuickTips.init();
 
-				map = new CHM.MapViewerCHMMap();
+				mapviewerchmmap = new CHM.MapViewerCHMMap();
 				
-				map.setOnStatusChanged(handleStatusChanged);
+				mapviewerchmmap.setOnStatusChanged(handleStatusChanged);
 				
-				map.setOnRestoreComplete(handleRestoreComplete);
+				mapviewerchmmap.setOnRestoreComplete(handleRestoreComplete);
 				
 		        mappanel = new GeoExt.MapPanel({
 		            renderTo: 'map_element',
 					height: 350,
 					width: 675,
-		            map: map
+		            map: mapviewerchmmap
 		        });
 		        
 		        var tree = new Ext.tree.TreePanel({
-		            renderTo: "legend_element",
+		            renderTo: "toc_element",
 		            layerStore: mappanel.layers,
 		            width: 250,
 		            title: "Layer Tree",
@@ -140,7 +139,7 @@
 		            plugins: [{
 		                ptype: "gx_treenodeactions",
 		                listeners: {
-		                    action: GeoExt.examples.onAction
+		                    action: GeoExt.tree.onAction
 		                }		                
 		            },
 	                {
@@ -201,17 +200,17 @@
 		            lines: false
 		        });
 		        
- 		        map.addBingLayers();
+ 		        mapviewerchmmap.addBingLayers();
  		        
- 		        map.restore();
+ 		        mapviewerchmmap.restore();
 		    });
 		    
 		    function handleStatusChanged() {
-		    	document.getElementById('status_element').innerHTML = map.getStatus();
+		    	document.getElementById('status_element').innerHTML = mapviewerchmmap.getStatus();
 			}
 		    
 		    function handleRestoreComplete() {
- 		        map.registerEvents();
+ 		        mapviewerchmmap.registerEvents();
  		        
 				test_layer = new OpenLayers.Layer.WMS('Test', 
 						geoserverUrl + wms + '?', 
@@ -221,7 +220,7 @@
 						{isBaseLayer: false}
 					);
 				
-				map.addLayer(test_layer);
+				mapviewerchmmap.addLayer(test_layer);
 			}
 		</script>
 	</body>
