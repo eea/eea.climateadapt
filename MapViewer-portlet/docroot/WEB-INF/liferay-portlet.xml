@@ -8,17 +8,19 @@
 		<icon>/icon.png</icon>
 		<instanceable>false</instanceable>
 		<header-portlet-css>/css/portlet.css</header-portlet-css>
-        <header-portlet-css>/css/gxtree.css</header-portlet-css>
-        <header-portlet-css>/js/ext-3.4.0/resources/css/ext-all.css</header-portlet-css>
-		<header-portlet-javascript>http://ecn.dev.virtualearth.net/mapcontrol/mapcontrol.ashx?v=6.2&amp;mkt=en-us"</header-portlet-javascript>
-		<header-portlet-javascript>/js/ext-3.4.0/adapter/ext/ext-base.js</header-portlet-javascript>
-		<header-portlet-javascript>/js/ext-3.4.0/ext-all-debug.js</header-portlet-javascript>
-		<header-portlet-javascript>/js/OpenLayers.js</header-portlet-javascript>
-		<header-portlet-javascript>/js/GeoExt/lib/GeoExt.js</header-portlet-javascript>
-		<header-portlet-javascript>/js/chm/CHM.js</header-portlet-javascript>
-		<header-portlet-javascript>/js/chm/CHMMap.js</header-portlet-javascript>
-		<header-portlet-javascript>/js/chm/MapViewerCHMMap.js</header-portlet-javascript>
-		<header-portlet-javascript>/js/chm/MapState.js</header-portlet-javascript>
+        <header-portlet-css>/css/tree.css</header-portlet-css>
+        <header-portlet-css>/js2/ext-3.4.0/resources/css/ext-all.css</header-portlet-css>
+		<header-portlet-css>/js2/GeoExt/resources/css/geoext-all-debug.css"</header-portlet-css>
+		<header-portlet-javascript>/js2/ext-3.4.0/adapter/ext/ext-base.js</header-portlet-javascript>
+		<header-portlet-javascript>/js2/ext-3.4.0/ext-all</header-portlet-javascript>
+		<header-portlet-javascript>/js2/OpenLayers-2.11/OpenLayers.js</header-portlet-javascript>
+		<header-portlet-javascript>/js2/GeoExt/script/GeoExt.js</header-portlet-javascript>
+		<header-portlet-javascript>/js2/chm/CHM.js</header-portlet-javascript>
+		<header-portlet-javascript>/js2/chm/CHMMap.js</header-portlet-javascript>
+		<header-portlet-javascript>/js2/chm/MapViewerCHMMap.js</header-portlet-javascript>
+		<header-portlet-javascript>/js2/chm/MapState.js</header-portlet-javascript>
+		<header-portlet-javascript>/js2/chm/MapViewer.js</header-portlet-javascript>
+		<header-portlet-javascript>/js2/chm/createScript.js</header-portlet-javascript>
 		<css-class-wrapper>mapviewerportlet-portlet</css-class-wrapper>
 	</portlet>
 	<role-mapper>

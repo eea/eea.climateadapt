@@ -1,18 +1,111 @@
 <ViewContext xmlns="http://www.opengis.net/context" version="1.1.0"
-	id="OpenLayers_Context_212"
+	id="OpenLayers_Context_132"
 	xsi:schemaLocation="http://www.opengis.net/context http://schemas.opengis.net/context/1.1.0/context.xsd"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 	<General>
-		<Window width="675" height="350" />
-		<BoundingBox minx="-5317571.18279070035" miny="4500612.22462350037"
-			maxx="7890747.30252190027" maxy="11349369.9577489998" SRS="EPSG:900913" />
+		<Window width="498" height="498" />
+		<BoundingBox minx="1600000.00000000000" miny="444509.896449220018"
+			maxx="7438762.50810160022" maxy="6283272.40455080010" SRS="EPSG:3035" />
 		<Title />
 		<Extension>
 			<ol:maxExtent xmlns:ol="http://openlayers.org/context"
-				minx="-2680799.45553749986" miny="4050551.00216099992" maxx="5244191.63564999960"
-				maxy="11799431.1802110001" />
+				minx="1600000.00000000000" miny="766700.000000000000" maxx="7602904.42599999998"
+				maxy="5961082.30099999998" />
 		</Extension>
 	</General>
 	<LayerList>
+		<Layer queryable="0" hidden="0">
+			<Server service="OGC:WMS" version="1.1.1">
+				<OnlineResource xlink:type="simple"
+					xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://localhost/geoserver/wms?" />
+			</Server>
+			<Name>background</Name>
+			<Title>Background</Title>
+			<FormatList>
+				<Format current="1">image/png</Format>
+			</FormatList>
+			<StyleList>
+				<Style current="1">
+					<Name />
+					<Title>Default</Title>
+				</Style>
+			</StyleList>
+			<Extension>
+				<ol:maxExtent xmlns:ol="http://openlayers.org/context"
+					minx="1600000.00000000000" miny="766700.000000000000" maxx="7602904.42599999998"
+					maxy="5961082.30099999998" />
+				<ol:tileSize xmlns:ol="http://openlayers.org/context"
+					width="256" height="256" />
+				<ol:numZoomLevels xmlns:ol="http://openlayers.org/context">13</ol:numZoomLevels>
+				<ol:units xmlns:ol="http://openlayers.org/context">m</ol:units>
+				<ol:isBaseLayer xmlns:ol="http://openlayers.org/context">true</ol:isBaseLayer>
+				<ol:displayInLayerSwitcher xmlns:ol="http://openlayers.org/context">true</ol:displayInLayerSwitcher>
+				<ol:singleTile xmlns:ol="http://openlayers.org/context">false</ol:singleTile>
+			</Extension>
+		</Layer>
+		<Layer queryable="0" hidden="0">
+			<Server service="OGC:WMS" version="1.1.1">
+				<OnlineResource xlink:type="simple"
+					xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://localhost/geoserver/wms?" />
+			</Server>
+			<Name>nuts:nuts3</Name>
+			<Title>Test2</Title>
+			<MetadataURL>
+				<OnlineResource xlink:type="simple"
+					xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.nu.nl" />
+			</MetadataURL>
+			<FormatList>
+				<Format current="1">image/png</Format>
+			</FormatList>
+			<StyleList>
+				<Style current="1">
+					<Name />
+					<Title>Default</Title>
+				</Style>
+			</StyleList>
+			<Extension>
+				<ol:maxExtent xmlns:ol="http://openlayers.org/context"
+					minx="1600000.00000000000" miny="766700.000000000000" maxx="7602904.42599999998"
+					maxy="5961082.30099999998" />
+				<ol:tileSize xmlns:ol="http://openlayers.org/context"
+					width="256" height="256" />
+				<ol:transparent xmlns:ol="http://openlayers.org/context">true</ol:transparent>
+				<ol:numZoomLevels xmlns:ol="http://openlayers.org/context">13</ol:numZoomLevels>
+				<ol:units xmlns:ol="http://openlayers.org/context">m</ol:units>
+				<ol:isBaseLayer xmlns:ol="http://openlayers.org/context">false</ol:isBaseLayer>
+				<ol:displayInLayerSwitcher xmlns:ol="http://openlayers.org/context">true</ol:displayInLayerSwitcher>
+				<ol:singleTile xmlns:ol="http://openlayers.org/context">false</ol:singleTile>
+			</Extension>
+		</Layer>
+		<Layer queryable="0" hidden="0">
+			<Server service="OGC:WMS" version="1.1.1">
+				<OnlineResource xlink:type="simple"
+					xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://localhost/geoserver/wms?" />
+			</Server>
+			<Name>foreground</Name>
+			<Title>Foreground</Title>
+			<FormatList>
+				<Format current="1">image/png</Format>
+			</FormatList>
+			<StyleList>
+				<Style current="1">
+					<Name />
+					<Title>Default</Title>
+				</Style>
+			</StyleList>
+			<Extension>
+				<ol:maxExtent xmlns:ol="http://openlayers.org/context"
+					minx="1600000.00000000000" miny="766700.000000000000" maxx="7602904.42599999998"
+					maxy="5961082.30099999998" />
+				<ol:tileSize xmlns:ol="http://openlayers.org/context"
+					width="256" height="256" />
+				<ol:transparent xmlns:ol="http://openlayers.org/context">true</ol:transparent>
+				<ol:numZoomLevels xmlns:ol="http://openlayers.org/context">13</ol:numZoomLevels>
+				<ol:units xmlns:ol="http://openlayers.org/context">m</ol:units>
+				<ol:isBaseLayer xmlns:ol="http://openlayers.org/context">false</ol:isBaseLayer>
+				<ol:displayInLayerSwitcher xmlns:ol="http://openlayers.org/context">true</ol:displayInLayerSwitcher>
+				<ol:singleTile xmlns:ol="http://openlayers.org/context">false</ol:singleTile>
+			</Extension>
+		</Layer>
 	</LayerList>
 </ViewContext>
