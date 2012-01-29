@@ -10,6 +10,8 @@ CHM.MapViewer = OpenLayers.Class({
 	
 	statusElement: null,
 	
+    oncreationcomplete: null, 
+	
 	initialize : function(aMapElement, aTOCElement, aStatusElement) {
 		Ext.namespace("GeoExt.tree");
 			    
@@ -29,7 +31,7 @@ CHM.MapViewer = OpenLayers.Class({
 				
 		mapViewerInstance.map.setOnRestoreComplete(mapViewerInstance.handleRestoreComplete);
 		
-		var mappanel = new GeoExt.MapPanel({renderTo: aMapElement, height: 500, width: 500, map: mapViewerInstance.map});
+		var mappanel = new GeoExt.MapPanel({renderTo: aMapElement, height: 375, width: 650, map: mapViewerInstance.map});
 		        
 		// Use a custom layer node UI class
 		var layernodeui = Ext.extend(GeoExt.tree.LayerNodeUI, new GeoExt.tree.TreeNodeUIEventMixin());
@@ -38,7 +40,6 @@ CHM.MapViewer = OpenLayers.Class({
 	    var treepanel = new Ext.tree.TreePanel({
 	        renderTo: aTOCElement,
 	        layerStore: mappanel.layers,
-	        width: 600,
 	        autoScroll: true,
 	        enableDD: true,
 	        // Apply the tree node component plugin to layer nodes
@@ -111,17 +112,7 @@ CHM.MapViewer = OpenLayers.Class({
 	},
 		    
     handleRestoreComplete : function() {
-		test_layer = new OpenLayers.Layer.WMS('Test2', 
-				geoserverUrl + wms + '?', 
-				{layers: 'nuts:nuts3', format: 'image/png', transparent: 'true'}, 
-				{visibility: true}, 
-				{tileOptions: {maxGetUrlLength: 2048}}, 
-				{isBaseLayer: false}
-			);
-			
-		test_layer.metadataURL = 'http://www.nu.nl';
-			
-		mapViewerInstance.addLayer(test_layer);
+    	mapViewerInstance.handleOnCreationComplete();
 	},
 	
 	// This function takes action based on the "action"
@@ -139,6 +130,20 @@ CHM.MapViewer = OpenLayers.Class({
 				layer.destroy();
 	
 				break;
+		}
+	},
+	
+	getOnCreationComplete : function() {
+		return mapViewerInstance.oncreationcomplete;
+	},
+	
+	setOnCreationComplete : function(aFunction) {
+		mapViewerInstance.oncreationcomplete = aFunction;
+	},
+	
+	handleOnCreationComplete : function() {
+		if (mapViewerInstance.oncreationcomplete != null) {
+			mapViewerInstance.oncreationcomplete();
 		}
 	}
 });

@@ -25,21 +25,21 @@ CHM.MapViewerCHMMap = OpenLayers.Class(OpenLayers.Map, {
 		
 		this.numZoomLevels = 13;
 		
-		backgroundlayer = new OpenLayers.Layer.WMS(backgroundlayername, 
-				geoserverUrl + wms + '?', 
-				{layers: 'background', format: 'image/png'}, 
-				{visibility: true}, 
-				{tileOptions: {maxGetUrlLength: 2048}}, 
-				{isBaseLayer: true}
-			);
+		// backgroundlayer = new OpenLayers.Layer.WMS(backgroundlayername, 
+		//		geoserverUrl + wms + '?', 
+		//		{layers: 'background', format: 'image/png'}, 
+		//		{visibility: true}, 
+		//		{tileOptions: {maxGetUrlLength: 2048}}, 
+		//		{isBaseLayer: true}
+		//	);
 			
-		foregroundlayer = new OpenLayers.Layer.WMS(foregroundlayername, 
-				geoserverUrl + wms + '?', 
-				{layers: 'foreground', format: 'image/png', transparent: 'true'}, 
-				{visibility: true}, 
-				{tileOptions: {maxGetUrlLength: 2048}}, 
-				{isBaseLayer: false}
-			);
+		// foregroundlayer = new OpenLayers.Layer.WMS(foregroundlayername, 
+		//		geoserverUrl + wms + '?', 
+		//		{layers: 'foreground', format: 'image/png', transparent: 'true'}, 
+		//		{visibility: true}, 
+		//		{tileOptions: {maxGetUrlLength: 2048}}, 
+		//		{isBaseLayer: false}
+		//	);
 
 		// this.addLayers([backgroundlayer, foregroundlayer]);
 	},
@@ -96,7 +96,7 @@ CHM.MapViewerCHMMap = OpenLayers.Class(OpenLayers.Map, {
 			if (layerindex == instance.layers.length - 1) {
 				instance.saveMapState();
 			} else {
-				instance.setLayerIndex(foregroundlayer, instance.layers.length);
+				instance.setLayerIndex(foregroundlayer, instance.layers.length - 1);
 			}
 		} else {
 			instance.saveMapState();

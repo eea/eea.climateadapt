@@ -20,42 +20,28 @@ public class MapViewerPortlet extends MVCPortlet {
 
 		prefs.setValue(Constants.proxyUrlPreferenceName, proxyUrl);
 
-		// Microsoft Virtual Earth locator REST API URL
-		String locatorUrl = ParamUtil.getString(request, Constants.locatorUrlPreferenceName);
-		
-		if (! locatorUrl.endsWith("/")) {
-			locatorUrl += "/";
-		}
-
-		prefs.setValue(Constants.locatorUrlPreferenceName, locatorUrl);
-		
-		// Microsoft VE API key
-		String locatorkey = ParamUtil.getString(request, Constants.locatorKeyPreferenceName);
-
-		prefs.setValue(Constants.locatorKeyPreferenceName, locatorkey);
-		
-		// Microsoft Bing time out
-		String bingtimeout = ParamUtil.getString(request, Constants.bingTimeOutPreferenceName);
-
-		prefs.setValue(Constants.bingTimeOutPreferenceName, bingtimeout);
-
-		// Catalogue Server Servlet URL
-		String cswServletUrl = ParamUtil.getString(request, Constants.cswServletURLPreferenceName);
-		
-		if (! cswServletUrl.endsWith("?")) {
-			cswServletUrl += "?";
-		}
-
-		prefs.setValue(Constants.cswServletURLPreferenceName, cswServletUrl);
-
 		// Catalogue Server URL
 		String cswUrl = ParamUtil.getString(request, Constants.cswURLPreferenceName);
+		
+		if (! cswUrl.endsWith("/")) {
+			cswUrl += "/";
+		}
+
+		prefs.setValue(Constants.cswURLPreferenceName, cswUrl);
+
+		// Catalogue Server csw path
+		String cswCsw = ParamUtil.getString(request, Constants.cswCswPreferenceName);
 		
 		if (! cswUrl.endsWith("?")) {
 			cswUrl += "?";
 		}
 
-		prefs.setValue(Constants.cswURLPreferenceName, cswUrl);
+		prefs.setValue(Constants.cswCswPreferenceName, cswCsw);
+
+		// Catalogue Server show metadata path
+		String cswShowMetadata = ParamUtil.getString(request, Constants.cswShowMetadataPreferenceName);
+		
+		prefs.setValue(Constants.cswShowMetadataPreferenceName, cswShowMetadata);
 
 		// Catalogue Server username
 		String cswUserName = ParamUtil.getString(request, Constants.cswUserNamePreferenceName);
@@ -76,11 +62,6 @@ public class MapViewerPortlet extends MVCPortlet {
 		String mapViewerServletUrl = ParamUtil.getString(request, Constants.mapViewerServletURLPreferenceName);
 		
 		prefs.setValue(Constants.mapViewerServletURLPreferenceName, mapViewerServletUrl);
-		
-		// Zoomlevel
-		String zoomlevel = ParamUtil.getString(request, Constants.zoomLevelPreferenceName);
-		
-		prefs.setValue(Constants.zoomLevelPreferenceName, zoomlevel);
 		
 		// Store
 		prefs.store();

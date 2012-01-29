@@ -21,17 +21,11 @@
 <aui:form action="<%= setPreferences %>" method="POST" name="form" >
 	<aui:input name="<%= Constants.proxyUrlPreferenceName %>" value='<%= prefs.getValue(Constants.proxyUrlPreferenceName, "/SimilarAreasTool-portlet/proxy?url=") %>' size="45" type="text" />
 
-	<aui:input name="<%= Constants.locatorUrlPreferenceName %>" value='<%= prefs.getValue(Constants.locatorUrlPreferenceName, "http://dev.virtualearth.net/REST/v1/Locations/") %>' size="45" type="text" />
+	<aui:input name="<%= Constants.cswURLPreferenceName %>" value='<%= prefs.getValue(Constants.cswURLPreferenceName, "http://ace.geocat.net/geonetwork/srv/") %>' size="45" type="text" />
 
-	<aui:input name="<%= Constants.locatorKeyPreferenceName %>" value='<%= prefs.getValue(Constants.locatorKeyPreferenceName, "Ao9qujBzDtg-nFiusTjt5VQ9x2NJB2wAD7YCRjaPz7hQQjxdFcl24tyhOwCDCIrw") %>' size="45" type="text" />
+	<aui:input name="<%= Constants.cswCswPreferenceName %>" value='<%= prefs.getValue(Constants.cswCswPreferenceName, "en/csw?") %>' size="45" type="text" />
 
-	<aui:input name="<%= Constants.bingTimeOutPreferenceName %>" value='<%= prefs.getValue(Constants.bingTimeOutPreferenceName, "100") %>' size="45" type="text" />
-
-	<aui:input name="<%= Constants.zoomLevelPreferenceName %>" value='<%= prefs.getValue(Constants.zoomLevelPreferenceName, "2") %>' size="45" type="text" />
-
-	<aui:input name="<%= Constants.cswServletURLPreferenceName %>" value='<%= prefs.getValue(Constants.cswServletURLPreferenceName, "/MapViewer-portlet/cswservlet?") %>' size="45" type="text" />
-
-	<aui:input name="<%= Constants.cswURLPreferenceName %>" value='<%= prefs.getValue(Constants.cswURLPreferenceName, "http://ace.geocat.net/geonetwork/srv/en/csw?") %>' size="45" type="text" />
+	<aui:input name="<%= Constants.cswShowMetadataPreferenceName %>" value='<%= prefs.getValue(Constants.cswShowMetadataPreferenceName, "en/metadata.show?uuid=") %>' size="45" type="text" />
 
     <aui:input name="<%= Constants.cswUserNamePreferenceName %>" value='<%= prefs.getValue(Constants.cswUserNamePreferenceName, "") %>' size="45" type="text" />
 

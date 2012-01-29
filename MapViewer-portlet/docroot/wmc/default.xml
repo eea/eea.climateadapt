@@ -104,7 +104,7 @@
 				<ol:units xmlns:ol="http://openlayers.org/context">m</ol:units>
 				<ol:isBaseLayer xmlns:ol="http://openlayers.org/context">false</ol:isBaseLayer>
 				<ol:displayInLayerSwitcher xmlns:ol="http://openlayers.org/context">true</ol:displayInLayerSwitcher>
-				<ol:singleTile xmlns:ol="http://openlayers.org/context">false</ol:singleTile>
+				<ol:singleTile xmlns:ol="http://openlayers.org/context">true</ol:singleTile>
 			</Extension>
 		</Layer>
 	</LayerList>

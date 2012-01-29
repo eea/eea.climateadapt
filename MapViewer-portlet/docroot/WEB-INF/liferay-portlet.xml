@@ -10,9 +10,9 @@
 		<header-portlet-css>/css/portlet.css</header-portlet-css>
         <header-portlet-css>/css/tree.css</header-portlet-css>
         <header-portlet-css>/js2/ext-3.4.0/resources/css/ext-all.css</header-portlet-css>
-		<header-portlet-css>/js2/GeoExt/resources/css/geoext-all-debug.css"</header-portlet-css>
+		<header-portlet-css>/js2/GeoExt/resources/css/geoext-all.css"</header-portlet-css>
 		<header-portlet-javascript>/js2/ext-3.4.0/adapter/ext/ext-base.js</header-portlet-javascript>
-		<header-portlet-javascript>/js2/ext-3.4.0/ext-all</header-portlet-javascript>
+		<header-portlet-javascript>/js2/ext-3.4.0/ext-all.js</header-portlet-javascript>
 		<header-portlet-javascript>/js2/OpenLayers-2.11/OpenLayers.js</header-portlet-javascript>
 		<header-portlet-javascript>/js2/GeoExt/script/GeoExt.js</header-portlet-javascript>
 		<header-portlet-javascript>/js2/chm/CHM.js</header-portlet-javascript>
@@ -20,7 +20,6 @@
 		<header-portlet-javascript>/js2/chm/MapViewerCHMMap.js</header-portlet-javascript>
 		<header-portlet-javascript>/js2/chm/MapState.js</header-portlet-javascript>
 		<header-portlet-javascript>/js2/chm/MapViewer.js</header-portlet-javascript>
-		<header-portlet-javascript>/js2/chm/createScript.js</header-portlet-javascript>
 		<css-class-wrapper>mapviewerportlet-portlet</css-class-wrapper>
 	</portlet>
 	<role-mapper>

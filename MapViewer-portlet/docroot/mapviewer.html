@@ -5,7 +5,7 @@
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 		<title>Prototype MapViewer</title>
 		<script src="js2/ext-3.4.0/adapter/ext/ext-base.js" type="text/javascript"></script>
-		<script src="js2/ext-3.4.0/ext-all.js"  type="text/javascript"></script>
+		<script src="js2/ext-3.4.0/ext-all.js" type="text/javascript"></script>
 		<script src="js2/OpenLayers-2.11/OpenLayers.js" type="text/javascript"></script>
 		<script src="js2/GeoExt/script/GeoExt.js" type="text/javascript"></script>
 		<script src="js2/chm/CHM.js" type="text/javascript"></script>
@@ -13,7 +13,6 @@
 		<script src="js2/chm/MapViewerCHMMap.js" type="text/javascript"></script>
 		<script src="js2/chm/MapState.js" type="text/javascript"></script>
 		<script src="js2/chm/MapViewer.js" type="text/javascript"></script>
-		<script src="js2/chm/createScript.js" type="text/javascript"></script>
 		<link rel="stylesheet" type="text/css" href="js2/ext-3.4.0/resources/css/ext-all.css" />
 		<link rel="stylesheet" type="text/css" href="js2/GeoExt/resources/css/geoext-all-debug.css" />
 		<link rel="stylesheet" type="text/css" href="css/tree.css" />
@@ -22,19 +21,23 @@
 		<script type="text/javascript">
 			var proxyUrl = '';
 			
-			var geoserverUrl = 'http://localhost/geoserver/';
-			
-			var wfs = 'wfs';
-			
-			var wms = 'wms';
-	
-			var zoomLevel = '2';
-
-			var cswServletUrl = 'http://localhost/cswservlet?';
-			
 			var cswUrl = 'http://dev.ace.geocat.net/geonetwork/srv/en/csw?';
 
 			var mapViewerServletUrl = 'http://localhost/mapviewerservlet';
+
+			var foregroundlayername = "Foreground";
+			
+			var backgroundlayername = "Background";
+			
+			Ext.onReady(function() {
+				var mapviewer = new CHM.MapViewer(document.getElementById('map_element'), document.getElementById('toc_element'), document.getElementById('status_element'));
+				
+				mapviewer.setOnCreationComplete(handleMapViewerCreationComplete);
+			});
+			
+		    function handleMapViewerCreationComplete() {
+		    	alert('mapViewerCreationComplete');
+			}
 		</script>
 		<div id="map_element"></div>
 		<div id="toc_element"></div>
