@@ -67,7 +67,7 @@
 						String javascript = "mapviewer.addLayer(new OpenLayers.Layer.WMS('" 
 							+ cswrecord.getTitle() + "', '" 
 							+ digitaltransferoption.getUrl() + "', "  
-							+ "{layers: '" + digitaltransferoption.getLayerName() + "', format: 'image/png', transparent: 'true'}, {visibility: true}, {tileOptions: {maxGetUrlLength: 2048}}, {isBaseLayer: false}, {metadataURL: " + showmetadataurl + "}));";
+							+ "{layers: '" + digitaltransferoption.getLayerName() + "', format: 'image/png', transparent: 'true'}, {visibility: true}, {tileOptions: {maxGetUrlLength: 2048}}, {isBaseLayer: false}, {metadataURL: '" + showmetadataurl + "'}));";
 					
 						out.println(javascript);
 					}
