@@ -55,7 +55,10 @@ public class AceSearchPortlet extends MVCPortlet {
 	    			AceSearchFormBean formBean = searchEngine.prepareACESearchFormBean(renderRequest);
 	    			//formBean.setImpact( new String[] { "FLOODING" } );
 	    			
-	    			if (searchtext != null) formBean.setAnyOfThese( searchtext );	    	
+	    			if (searchtext != null) { 
+	    				formBean.setAnyOfThese( searchtext );
+	    				formBean.setFreetextMode("2");
+	    			}
 	    			if (searchtypes != null) formBean.setAceitemtype( searchtypes.split(";") );
 	    			if (searchsectors != null) formBean.setSector( searchsectors.split(";") );
 	    			if (searchelements != null) formBean.setElement( searchelements.split(";") );
