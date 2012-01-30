@@ -40,8 +40,6 @@
 		// Add layer from querystring
        	String cswurl = prefs.getValue(Constants.cswURLPreferenceName, "http://ace.geocat.net/geonetwork/") + prefs.getValue(Constants.cswCswPreferenceName, "en/csw?");
         	
-		System.out.println(cswurl);
-
        	String cswusername = prefs.getValue(Constants.cswUserNamePreferenceName, "");
         	
        	String cswpassword = prefs.getValue(Constants.cswPassWordPreferenceName, "");
@@ -61,15 +59,17 @@
 					
 			       	String showmetadataurl = prefs.getValue(Constants.cswURLPreferenceName, "http://ace.geocat.net/geonetwork/") + prefs.getValue(Constants.cswShowMetadataPreferenceName, "en/metadata.show?uuid=") + metadatarecordid;
 
-					System.out.println(showmetadataurl);
-
 			       	if (digitaltransferoption.getProtocol().indexOf("WMS") != -1) {
-						String javascript = "mapviewer.addLayer(new OpenLayers.Layer.WMS('" 
+						String javascript = "var layer = new OpenLayers.Layer.WMS('" 
 							+ cswrecord.getTitle() + "', '" 
 							+ digitaltransferoption.getUrl() + "', "  
-							+ "{layers: '" + digitaltransferoption.getLayerName() + "', format: 'image/png', transparent: 'true'}, {visibility: true}, {tileOptions: {maxGetUrlLength: 2048}}, {isBaseLayer: false}, {metadataURL: '" + showmetadataurl + "'}));";
+							+ "{layers: '" + digitaltransferoption.getLayerName() + "', format: 'image/png', transparent: 'true'}, {visibility: true}, {tileOptions: {maxGetUrlLength: 2048}}, {isBaseLayer: false});";
 					
-						out.println(javascript);
+							javascript += "layer.metadataURL = '" + showmetadataurl + "';";
+							
+							javascript += "mapviewer.addLayer(layer);";
+							
+							out.println(javascript);
 					}
 				}
 			}

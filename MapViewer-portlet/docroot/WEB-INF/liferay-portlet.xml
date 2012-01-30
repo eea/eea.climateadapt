@@ -10,7 +10,7 @@
 		<header-portlet-css>/css/portlet.css</header-portlet-css>
         <header-portlet-css>/css/tree.css</header-portlet-css>
         <header-portlet-css>/js2/ext-3.4.0/resources/css/ext-all.css</header-portlet-css>
-		<header-portlet-css>/js2/GeoExt/resources/css/geoext-all.css"</header-portlet-css>
+		<header-portlet-css>/js2/GeoExt/resources/css/geoext-all.css</header-portlet-css>
 		<header-portlet-javascript>/js2/ext-3.4.0/adapter/ext/ext-base.js</header-portlet-javascript>
 		<header-portlet-javascript>/js2/ext-3.4.0/ext-all.js</header-portlet-javascript>
 		<header-portlet-javascript>/js2/OpenLayers-2.11/OpenLayers.js</header-portlet-javascript>

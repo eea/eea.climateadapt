@@ -17,7 +17,7 @@
 		<Layer queryable="0" hidden="0">
 			<Server service="OGC:WMS" version="1.1.1">
 				<OnlineResource xlink:type="simple"
-					xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://localhost/geoserver/wms?" />
+					xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://dev.ace.geocat.net/geoserver/wms?" />
 			</Server>
 			<Name>background</Name>
 			<Title>Background</Title>
@@ -46,7 +46,7 @@
 		<Layer queryable="0" hidden="0">
 			<Server service="OGC:WMS" version="1.1.1">
 				<OnlineResource xlink:type="simple"
-					xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://localhost/geoserver/wms?" />
+					xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://dev.ace.geocat.net/geoserver/wms?" />
 			</Server>
 			<Name>nuts:nuts3</Name>
 			<Title>Test2</Title>
@@ -80,7 +80,7 @@
 		<Layer queryable="0" hidden="0">
 			<Server service="OGC:WMS" version="1.1.1">
 				<OnlineResource xlink:type="simple"
-					xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://localhost/geoserver/wms?" />
+					xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://dev.ace.geocat.net/geoserver/wms?" />
 			</Server>
 			<Name>foreground</Name>
 			<Title>Foreground</Title>
