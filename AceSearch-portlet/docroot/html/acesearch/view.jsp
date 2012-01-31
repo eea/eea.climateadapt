@@ -221,7 +221,7 @@ pageContext.setAttribute("countriesList", countriesList);
 								<div class="check">
 									<c:set var="aceItemMustBeChecked" value="false" />
 									<c:forEach var="requestedAceItemType" items="${aceitemtypesList}">
-										<c:if test="${requestedAceItemType eq aceItemType}">
+										<c:if test="${requestedAceItemType eq fn:substring(aceItemType,0,-1)}">
 											<c:set var="aceItemMustBeChecked" value="true" />
 										</c:if>
 									</c:forEach>	

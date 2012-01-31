@@ -48,7 +48,13 @@ public class AceSearchPortlet extends MVCPortlet {
 	    		
 	    		//System.out.println("searchtext parameter: " + searchtext) ;
 	    		
-	    		if(searchtext != null || searchtypes != null|| searchsectors != null ||
+    			String datainfo_type = ParamUtil.getString(renderRequest, "datainfo_type");
+    			// true: first time; false: Search button clicked (then datainfo_type has value)
+    			boolean startWithSearch = (datainfo_type == null) || (datainfo_type.length() <= 0) ;
+    			
+    			//System.out.println("datainfotype " + datainfo_type);
+    			
+	    		if(startWithSearch || searchtext != null || searchtypes != null|| searchsectors != null ||
 	    		   searchelements != null || searchimpacts != null|| searchcountries != null) {
 	
 		        	ACESearchPortalInterface searchEngine = new ACESearchPortalInterface();		    			
@@ -58,6 +64,9 @@ public class AceSearchPortlet extends MVCPortlet {
 	    			if (searchtext != null) { 
 	    				formBean.setAnyOfThese( searchtext );
 	    				formBean.setFreetextMode("2");
+	    			}
+	    			else {
+	    				formBean.setFreetextMode("1");
 	    			}
 	    			if (searchtypes != null) formBean.setAceitemtype( searchtypes.split(";") );
 	    			if (searchsectors != null) formBean.setSector( searchsectors.split(";") );
