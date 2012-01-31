@@ -399,7 +399,7 @@ pageContext.setAttribute("countriesList", countriesList);
 	<!-- Results column  -->
 	<div id="search_results" class="acesearch_column">
 		<c:if test="<%= totalResults != null %>">
-        	<div class="results_header"><liferay-ui:message key="acesearch-data-downloads-header" /></div>
+        	<!-- div class="results_header"><liferay-ui:message key="acesearch-data-downloads-header" /></div -->
             <c:choose>
                 <c:when test="<%= totalResults == 0 %>">
                 <div class="number_of_results"><liferay-ui:message key="acesearch-no-results" /></div>
