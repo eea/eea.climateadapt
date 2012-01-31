@@ -31,7 +31,7 @@ CHM.MapViewer = OpenLayers.Class({
 				
 		mapViewerInstance.map.setOnRestoreComplete(mapViewerInstance.handleRestoreComplete);
 		
-		var mappanel = new GeoExt.MapPanel({renderTo: aMapElement, height: 375, width: 650, map: mapViewerInstance.map});
+		var mappanel = new GeoExt.MapPanel({renderTo: aMapElement, height: 350, width: 675, map: mapViewerInstance.map});
 		        
 		// Use a custom layer node UI class
 		var layernodeui = Ext.extend(GeoExt.tree.LayerNodeUI, new GeoExt.tree.TreeNodeUIEventMixin());

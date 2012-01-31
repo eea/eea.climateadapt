@@ -17,7 +17,7 @@ CHM.MapViewerCHMMap = OpenLayers.Class(OpenLayers.Map, {
 		
 		this.units = "m";
 		
-		this.maxExtent = new OpenLayers.Bounds(1600000, 766700, 7602904.426, 5961082.301);
+		this.maxExtent = new OpenLayers.Bounds(600000, 766700, 8602904.426, 5961082.301);
 
 		this.restrictedExtent = new OpenLayers.Bounds(1600000, 766700, 7602904.426, 5961082.301);
 		
@@ -79,6 +79,10 @@ CHM.MapViewerCHMMap = OpenLayers.Class(OpenLayers.Map, {
 			instance.handleEvent(event);
 		});
 		
+		instance.events.register('removelayer', this, function(event) {
+			instance.handleEvent(event);
+		});
+		
 		instance.events.register('changebaselayer', this, function(event) {
 			instance.handleEvent(event);
 		});
@@ -91,9 +95,9 @@ CHM.MapViewerCHMMap = OpenLayers.Class(OpenLayers.Map, {
 		var foregroundlayer = instance.findLayerByName(foregroundlayername); 
 		
 		if (foregroundlayer != null) {
-			var layerindex = instance.getLayerIndex(foregroundlayer);
+			var foregroundlayerindex = instance.getLayerIndex(foregroundlayer);
 			
-			if (layerindex == instance.layers.length - 1) {
+			if (foregroundlayerindex == instance.layers.length - 1) {
 				instance.saveMapState();
 			} else {
 				instance.setLayerIndex(foregroundlayer, instance.layers.length - 1);
@@ -185,13 +189,19 @@ CHM.MapViewerCHMMap = OpenLayers.Class(OpenLayers.Map, {
        			var visibility = layer.visibility;
            			
        			var isbaselayer = layer.isBaseLayer; 
+       			
+       			var displayinlayerswitcher = layer.displayInLayerSwitcher;
+       			
+       			var singletile = layer.singleTile;
            			
        			var clone = new OpenLayers.Layer.WMS(
        					name, 
        					url, 
        					{layers: paramlayers, format: paramformat, transparent: paramtransparent},
        					{visibility: visibility}, 
-       					{isBaseLayer: isbaselayer}
+       					{isBaseLayer: isbaselayer},
+       					{displayInLayerSwitcher: displayinlayerswitcher},
+       					{singleTile: singletile}
        			);
        			
        			clone.metadataURL = layer.metadataURL;

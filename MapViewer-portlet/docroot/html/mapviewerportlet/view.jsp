@@ -74,7 +74,7 @@
 				}
 			}
        	} catch (Exception e) {
-       		out.println("document.getElementById('status_element').innerHTML = 'Error in communication with catalogue server';");
+       		out.println("document.getElementById('status_element').innerHTML = 'Error in communication with catalogue server: '" + e.getMessage() + ";");
        	}
 %>
 	}
