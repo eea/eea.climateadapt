@@ -131,23 +131,43 @@ ul#topnav {
 	width: 984px;
 	list-style: none;
 	position: relative;
-	font-size: 13px;
+	font-size: 14px;
 	background: #a5bf26;
 	height: 32px;
 	z-index: 100;
 	border-bottom: 1px solid #d2df92;
 }
 ul#topnav li {
+	background: url("/ace-theme/images/line_sep_main_menu.png") no-repeat scroll 100% 8px transparent;
 	float: left;
-	margin: 0; 
-	padding: 7px;
+	margin: 0 3px; 
+	padding: 5px 18px 7px 12px;
 }
 
 #navigation li.first {
-	margin-left: 4px;
+	margin-left: 0;
+}
+
+#navigation li.last {
+	background: none;
 }
 
 ul#topnav .selected {
+	padding-left: 0;
+	padding-right: 7px;
+	/*background-color: #E9ECC9; 
+	border-top: 1px solid #d2df92;
+	border-left: 1px solid #d2df92;
+	border-right: 1px solid #d2df92;
+	border-top-left-radius: 3px;
+	border-top-right-radius: 3px;
+	-moz-border-radius-topleft: 3px;
+	-moz-border-radius-topright: 3px;
+	margin-top: 4px;
+	padding-top: 0;*/
+}
+
+ul#topnav li.selected a {
 	background-color: #E9ECC9; 
 	border-top: 1px solid #d2df92;
 	border-left: 1px solid #d2df92;
@@ -156,18 +176,14 @@ ul#topnav .selected {
 	border-top-right-radius: 3px;
 	-moz-border-radius-topleft: 3px;
 	-moz-border-radius-topright: 3px;
-	margin-top: 6px; /*was 4px*/
-	padding-top: 0;
-}
-
-ul#topnav li.selected a {
-	margin-bottom: 1px;
-	/*padding-top: 2px;*/
+	color: #000;
+	margin-top: -1px;
+	padding: 0 11px 8px;
 }
 
 ul#topnav li a {
 	display: block;
-	color: #000;
+	color: #02213D;
 	text-decoration: none;
 }
 
@@ -186,10 +202,10 @@ ul#topnav li.submenu:hover {
 	padding-left: 6px;
 	padding-right: 6px;
 }
-
+/*
 ul#topnav li.selected:hover {
 	padding: 0 7px 8px 7px;
-}
+}*/
 
 ul#topnav li.selected li.first:hover {
 	padding: 0;
@@ -551,7 +567,7 @@ ul#subnav li a:hover {
 }
 
 #searchbox .portlet-content img:hover {
-	cursor: pointer;
+	/*cursor: pointer;*/
 }
 
 /**** Second level menu ****/
@@ -571,17 +587,18 @@ ul#subnav li a:hover {
 	/*border-top: 1px solid #758816;*/
 	border-bottom: 1px solid #d2df92;
 	margin: 0;
-	padding: 5px 5px 4px;
+	padding: 5px 0 4px 8px;
 	/*padding: 5px;*/
 }
 
 .ie8 #sec-menu ul {
-	padding: 4px 5px 5px;
+	padding: 5px 0 4px 8px;
 } 
 
 #sec-menu li {
+	background: url("/ace-theme/images/line_sep_sec_menu.png") no-repeat scroll 100% 2px transparent;
 	display: inline;
-	padding: 2px;
+	padding: 2px 6px 2px 0;
 }
 
 #sec-menu li.last {
@@ -589,8 +606,8 @@ ul#subnav li a:hover {
 }
 
 #sec-menu a {
-	color: #758816;
-	font: normal 11px Tahoma,serif;
+	color: #353f02;
+	font: normal 12px Tahoma,serif;
 	margin: 0 2px;
 	padding: 2px;
 	text-decoration: none;
@@ -598,7 +615,7 @@ ul#subnav li a:hover {
 
 #sec-menu a:hover,
 #sec-menu .selected {
-	color: #2c330a;
+	color: #dd5402;
 }
 
 #sec-menu .portlet-borderless-bar {
@@ -675,10 +692,10 @@ ul#subnav li a:hover {
 }
 
 .ace_layout_2 #column-2 {
-	width: 20%;
+	width: 33%;
 }
 .ace_layout_2 #column-3 {
-	width: 80%;
+	width: 67%;
 }
 
 .ace_layout_2 #column-4 {
@@ -711,6 +728,32 @@ ul#subnav li a:hover {
 
 .ace_layout_4 #column-2 .portlet-title {
 	color: #758816;
+}
+
+/****
+	Explore adaptation options portlet on Adaptation measures page 
+****/
+.explore-adaptation-measures #ace_simplefilter_30x {
+	height: 35px;
+}
+
+.explore-adaptation-measures #sector-selector-div {
+	left: -10px;
+	position: relative;
+	top: 10px;
+}
+
+.explore-adaptation-measures #risk-selector-div span,
+.explore-adaptation-measures #sector-selector-div span {
+	padding-top: 2px;
+}
+
+.explore-adaptation-measures #risk-selector-div span {
+	padding-right: 12px;
+}
+
+.explore-adaptation-measures #risk-selector-div select {
+	width: 163px;
 }
 
 /**** Template Sector Main Article ****/
@@ -1029,11 +1072,45 @@ ul#subnav li a:hover {
 }
 
 /**** 
-	Specific styles for elements on frontpage 
+	Frontpage specific styles 
 ****/
+/* Hover def. for the speedbuttons */
+.frontpage-layout #layout-column_column-5,
+.frontpage-layout #layout-column_column-6 {
+	margin-left: 15px;
+}
+
+.frontpage-layout #speedbutton-left, 
+.frontpage-layout #speedbutton-right {
+	margin-top: 7px;
+	padding-bottom: 6px;
+}
+
+.frontpage-layout #speedbutton-right {
+	margin-left: 10px;
+}
+
+.frontpage-layout #fp-top-row {
+	background: url("/ace-theme/images/gradient_sb_fp.png") no-repeat 0 bottom;
+	margin-bottom: 15px;
+}
+
+a.speedbutton img {
+	border: 2px solid transparent;
+}
+
+a.speedbutton img:hover {
+	border:2px solid #5ea9d3;
+}
+
+.frontpage-layout #sb-np,
+.frontpage-layout #sb-syi {
+	margin-top: 10px;
+}
+
 /* Text Climate Change Adaptation in Europe */
 #p_p_id_56_INSTANCE_7vIW_ {
-	margin-top: 22px;
+	margin: 22px 15px 0 15px;
 }
 
 #p_p_id_56_INSTANCE_7vIW_ h1 {
@@ -1047,35 +1124,49 @@ ul#subnav li a:hover {
 }
 
 .more-spacing-list li {
-	line-height: 20px;
+	line-height: 18px;
 }
 
 #p_p_id_56_INSTANCE_7vIW_ .double-arrow {
 	float: right;
 	margin-top: -17px;
 }
-                       
-/* Speed buttons adaptation information */
-.image-ai-fp .portlet-body {
-	margin: -5px 0 15px 0;
+
+.frontpage-layout #countries-list-sb {
+	left: 13px;
+	position: absolute;
+	top: 260px;
+	width: 187px;
 }
 
-.image-ai-fp {
-	margin-right: -15px;
+.frontpage-layout #countries-list-sb img {
+	left: 2px;
+	position: relative;
+	top: 5px;
 }
 
-.ie .image-ai-fp .portlet-body {
-	margin: -5px 0px 15px
+.frontpage-layout #countries-list-sb img:hover {
+	cursor: pointer;
+}
+
+.frontpage-layout #countries-list-sb select {
+	color:#02213D;
+	font-family: Tahoma,Times New Roman,serif;
+	width: 150px;
 }
 
 /* DB search portlet in the middle of the frontpage */
 .db-search-fp {
-	background: url("/ace-theme/images/db_search_fp.png") repeat scroll 0% 0% transparent;
+	background: url("/ace-theme/images/db_search_fp2.png") no-repeat scroll 14px 7px transparent;
 	height: 70px;
-	margin: 0pt -15px 0pt -14px;
+	margin: 0 0 0 2px;
 	position: absolute;
-	top: 408px;
+	top: 410px;
 	width: 484px;
+}
+
+.ie8 .db-search-fp {
+	top: 407px;
 }
 
 .db-search-fp .portlet-body {
@@ -1107,12 +1198,12 @@ ul#subnav li a:hover {
 	margin-bottom:5px;
 	margin-left: 3px;
 	position: absolute;
-	text-align: center;
 	top: -10px;
 	width: 180px;
 }
 
 .db-search-fp input {
+	border: 1px solid #758816;
 	height: 10px;
 	margin-top: 8px;
 	width: 180px;
@@ -1163,6 +1254,22 @@ span.opens-new-window-accessible,
     add class indicators to the desired portlet in 
     order to use the styles below
 **/
+.news-events ul {
+	font-size: 11px;
+	list-style: none;
+	margin-left: 0;
+}
+
+.news-events li {
+	background: url("/ace-theme/images/arrows/01_plus.png") no-repeat scroll 0 1px transparent;
+	margin-bottom: 4px;
+	padding-left: 20px;
+}
+
+.news-events li a {
+	text-decoration: none;
+}
+
 .multimedia .feed-entry {
 	font-size: 11px;
 }
@@ -1765,18 +1872,34 @@ text and the class mapviewer to the MapViewerPortlet.
 }
 
 .mapviewer #status_element {
+	display: none;
 	position: absolute;
 	top: 350px;
 }
 
 .mapviewer #toc_element {
 	background-color: #D2DE92;
-	padding: 0 0 15px 0;
 	min-height: 250px;
 }
 
+.mapviewer #map_element .x-panel,
+.mapviewer #toc_element .x-panel,
+.mapviewer #map_element	.x-panel-body,
+.mapviewer #toc_element	.x-panel-body {
+	border: none;
+}
+
+.mapviewer #toc_element	.x-panel-body {
+	margin: 15px;
+}
+
 .mapviewer li.x-tree-node {
-	margin-bottom: 15px;
+	margin: 9px 10px 9px 28px;
+	white-space: normal;
+}
+
+.mapviewer .x-tree-node-leaf .x-tree-node-icon {
+	display: none;
 }
 
 .mapviewer .legend {
@@ -1785,14 +1908,18 @@ text and the class mapviewer to the MapViewerPortlet.
 
 .mapviewer #toc_element ul { 
 	list-style-type: none;
-	margin-left: 15px;
+	margin-left: 0;
+}
+
+.mapviewer #toc_element input.x-tree-node-cb {
+	margin-left: -18px;
 }
 
 .mapviewer #toc_element a {
 	color: #353F02;
-	text-decoration: none;
 	cursor: default;
 	padding-left: 3px;
+	text-decoration: none;
 }
 
 .mapviewer #toc_element a:hover {
@@ -1812,7 +1939,7 @@ text and the class mapviewer to the MapViewerPortlet.
 	color: #758816;
 	font-size: 14px;
 	margin: 0;
-	padding: 15px;
+	padding: 15px 15px 0;
 }
 
 /** adjustment of legend items **/

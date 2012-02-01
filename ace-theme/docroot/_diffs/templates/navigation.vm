@@ -13,7 +13,7 @@
 
 				<a href="$nav_item.getURL()" $nav_item.getTarget()><span>$nav_item.icon() $htmlUtil.escape($nav_item.getName())</span></a>
 
-				
+				<!--
 				#if ($nav_item.hasChildren())
 					<ul id="subnav">
 						#foreach ($nav_child in $nav_item.getChildren())
@@ -28,7 +28,7 @@
 						#end
 					</ul>
 				#end 
-				
+				-->
 			</li>
 		#end
 	</ul>

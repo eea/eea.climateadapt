@@ -2,6 +2,10 @@
 
 $(document).ready(function(){
 	
+	//Temporarily disable the search box in the header
+	$("#searchbox #searchtext_top").attr('disabled', true);
+	$('#searchbox .portlet-content img').attr('onclick','').unbind('click');
+	
 	//Several classes for the main menu
 	$("ul li:first-child").addClass("first");
     $("ul li:last-child").addClass("last");
@@ -9,12 +13,12 @@ $(document).ready(function(){
     
     //Elements for the db search speedbutton on the frontpage
     $(".db-search-fp img").attr("src","/ace-theme/images/vergroot_blauw.png");
-    $('.db-search-fp .portlet-body').prepend('<p id="db-search-fp-info-text">Search the CHM database</p>');
+    $('.db-search-fp .portlet-body').prepend('<p id="db-search-fp-info-text">Search the <span style="font-size:15px">database</span></p>');
     $('.db-search-fp .portlet-body').prepend('<a id="db-search-fp-link" href="/data-and-downloads"></a>');
     
     //Fixes to main and sec. menu
     if ($("#sec-menu ul").length == 0){
-    	  $("#navigation .selected").css({"background":"none","border":"none", "margin-top":"7px"});
+    	  $("#navigation .selected a").css({"background":"none","border":"none", "margin-top":"0"});
     	  $("#topnav").css({"border-bottom":"1px solid #a5bf26"});
     	  $("ul#topnav li.selected a").css({"color":"#FFF"});
     }
@@ -28,8 +32,8 @@ $(document).ready(function(){
 //Add tooltips to glossary terms
 $(document).ready(function()
 		{
-		   // Make sure to only match links to wikipedia with a rel tag
-		   $('a[href*="glossary#link"],a[href*="acronym#link"]').each(function()
+		   // Make sure to only match links to the glossary
+		   $('a[href*="glossary#link"]').each(function()
 		   {
 			  
 			   var url = $(this).attr('href');
@@ -42,8 +46,8 @@ $(document).ready(function()
 		      $(this).qtip(
 		      {
 		         content: {
-		            // Set the text to an image HTML string with the correct src URL to the loading image you want to use
-		            text: '<img class="throbber" src="/projects/qtip/images/throbber.gif" alt="Loading..." />',
+		            // Set the text to a message you want to use
+		            text: '<p>Loading glossary term...</p>',
 		            ajax: {
 		               url: $(this).attr('href'), // Use the href attribute of each element for the url to load
 		               cache: false,
