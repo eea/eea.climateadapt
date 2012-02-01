@@ -126,7 +126,11 @@ CHM.MapViewerCHMMap = OpenLayers.Class(OpenLayers.Map, {
 				headers: {
 					"Content-Type": "text/xml"
 				},			
-				callback: instance.postHandler
+				callback: instance.postHandler,
+				params: 
+		    	{
+					mapViewerAppId: mapViewerAppId
+		    	}
 			});
         } catch (error) {
         	instance.setStatus('client side error saving map state ' + error);
@@ -155,6 +159,8 @@ CHM.MapViewerCHMMap = OpenLayers.Class(OpenLayers.Map, {
 				callback: instance.getHandler,
 				params: 
 		    	{
+					mapViewerWmcDirectory: mapViewerWmcDirectory,
+					mapViewerAppId: mapViewerAppId,
 		    		random: Math.random()
 		    	}
 			});
@@ -185,7 +191,9 @@ CHM.MapViewerCHMMap = OpenLayers.Class(OpenLayers.Map, {
        			var paramformat = layer.params.FORMAT;
            			
        			var paramtransparent = layer.params.TRANSPARENT;
-           			
+       			
+       			var paramstyles = layer.params.STYLES;
+       			
        			var visibility = layer.visibility;
            			
        			var isbaselayer = layer.isBaseLayer; 
@@ -197,7 +205,7 @@ CHM.MapViewerCHMMap = OpenLayers.Class(OpenLayers.Map, {
        			var clone = new OpenLayers.Layer.WMS(
        					name, 
        					url, 
-       					{layers: paramlayers, format: paramformat, transparent: paramtransparent},
+       					{layers: paramlayers, format: paramformat, transparent: paramtransparent, styles: paramstyles},
        					{visibility: visibility}, 
        					{isBaseLayer: isbaselayer},
        					{displayInLayerSwitcher: displayinlayerswitcher},

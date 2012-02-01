@@ -53,15 +53,20 @@ public class MapViewerPortlet extends MVCPortlet {
 		
 		prefs.setValue(Constants.cswPassWordPreferenceName, cswPassWord);
 
-		// Catalogue Server file identifiers
-		String cswRecordFileidentifiers = ParamUtil.getString(request, Constants.cswRecordFileIdentifiersPreferenceName);
-		
-		prefs.setValue(Constants.cswRecordFileIdentifiersPreferenceName, cswRecordFileidentifiers);
-
 		// MapViewer Servlet URL
 		String mapViewerServletUrl = ParamUtil.getString(request, Constants.mapViewerServletURLPreferenceName);
 		
 		prefs.setValue(Constants.mapViewerServletURLPreferenceName, mapViewerServletUrl);
+
+		// MapViewer app ID
+		String mapViewerAppId = ParamUtil.getString(request, Constants.mapViewerAppIdPreferenceName);
+		
+		prefs.setValue(Constants.mapViewerWmcDirectoryPreferenceName, mapViewerAppId);
+
+		// MapViewer WMC Directory name
+		String mapViewerWmcDirectoryName = ParamUtil.getString(request, Constants.mapViewerWmcDirectoryPreferenceName);
+		
+		prefs.setValue(Constants.mapViewerWmcDirectoryPreferenceName, mapViewerWmcDirectoryName);
 		
 		// Store
 		prefs.store();

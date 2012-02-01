@@ -12,10 +12,10 @@
 	width: 16px;
 }
 .gx-tree-layer-actions .delete {
-	background: transparent url(../js2/GeoExt/resources/images/default/delete.png);
+	background: transparent url(../js/GeoExt/resources/images/default/delete.png);
 }
 .gx-tree-layer-actions .metadata {
-	background: transparent url(../js2/GeoExt/resources/images/default/metadata.png);
+	background: transparent url(../js/GeoExt/resources/images/default/metadata.png);
 }
 .gx-tree-layer-actions .disabled {
 	opacity: 0.2;

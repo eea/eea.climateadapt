@@ -31,9 +31,11 @@
 
     <aui:input name="<%= Constants.cswPassWordPreferenceName %>" value='<%= prefs.getValue(Constants.cswPassWordPreferenceName, "") %>' size="45" type="text" />
 
-    <aui:input name="<%= Constants.cswRecordFileIdentifiersPreferenceName %>" value='<%= prefs.getValue(Constants.cswRecordFileIdentifiersPreferenceName, "") %>' size="45" type="text" />
-
 	<aui:input name="<%= Constants.mapViewerServletURLPreferenceName %>" value='<%= prefs.getValue(Constants.mapViewerServletURLPreferenceName, "/MapViewer-portlet/mapviewerservlet") %>' size="45" type="text" />
+
+	<aui:input name="<%= Constants.mapViewerAppIdPreferenceName %>" value='<%= prefs.getValue(Constants.mapViewerAppIdPreferenceName, "default") %>' size="45" type="text" />
+
+	<aui:input name="<%= Constants.mapViewerWmcDirectoryPreferenceName %>" value='<%= prefs.getValue(Constants.mapViewerWmcDirectoryPreferenceName, "/home/mapviewer") %>' size="45" type="text" />
 
 	<aui:button-row>
 		<aui:button type="submit" />
