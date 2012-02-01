@@ -71,7 +71,9 @@
 	  String elements = aceitem.getElements_() ;
 	  elements = elements.replace(";","; ");
 	  
-	  if (aceitem.getStoragetype().equalsIgnoreCase("URL") || aceitem.getStoragetype().equalsIgnoreCase("GEONETWORK")) {
+	  if (aceitem.getStoragetype().equalsIgnoreCase("URL") || 
+		  aceitem.getStoragetype().equalsIgnoreCase("GEONETWORK") || 
+		  aceitem.getStoragetype().equalsIgnoreCase("SETOFMAPS") ) {
 	  	  // Only URL type gets viewed by viewaceitem portlet; Ace Serviced Entities have their own portlets
 		  nameLink = "<a href='/viewaceitem?aceitem_id=" + aceitem.getAceItemId() + "'>" +  aceitem.getName() + "</a>" ;
 	  }
@@ -113,7 +115,9 @@
 		</liferay-ui:search-container-column-text> 
 
 <%
-	  if (aceitem.getStoragetype().equalsIgnoreCase("URL")|| aceitem.getStoragetype().equalsIgnoreCase("GEONETWORK")) {
+		if (aceitem.getStoragetype().equalsIgnoreCase("URL") || 
+		    aceitem.getStoragetype().equalsIgnoreCase("GEONETWORK") || 
+		    aceitem.getStoragetype().equalsIgnoreCase("SETOFMAPS") ) {
 		// Only URL type get maintained here; Ace Serviced Entities have their own maintenance pages
 %>		  
 	  	

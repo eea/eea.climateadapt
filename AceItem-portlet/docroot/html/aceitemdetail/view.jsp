@@ -33,9 +33,14 @@
 		if(aceitem != null) {
 			
 			if(aceitem.getStoragetype().equalsIgnoreCase("GEONETWORK")) {
+				// cswRecordFileIdentifier gets handled inside mapviewer-portlet
 				url = "<a href='/map-viewer?cswRecordFileIdentifier=" + aceitem.getStoredAt() + "' >View map " + aceitem.getName() + "</a>" ; 
 				//dev:	metadataurl = "<a href='http://dev.ace.geocat.net/geonetwork/srv/en/metadata.show?uuid=" + aceitem.getStoredAt() + "' target='_blank'>View metadata " + aceitem.getName() + "</a>" ; 
 				metadataurl = "<a href='/geonetwork/srv/en/metadata.show?uuid=" + aceitem.getStoredAt() + "' target='_blank'>View metadata " + aceitem.getName() + "</a>" ; 
+			}
+			else if(aceitem.getStoragetype().equalsIgnoreCase("SETOFMAPS")) {
+				// mapViewerAppId gets handled inside mapviewer-portlet
+				url = "<a href='/map-viewer?mapViewerAppId=" + aceitem.getStoredAt() + "' > " + aceitem.getName() + "</a>" ; 
 			}
 			else {	
 
@@ -90,7 +95,11 @@
 	 <% out.print( url ); %><br /><br />
 	 <% out.print( metadataurl ); %><br /><br />
 <%	 }
-	 else { %>
+	 else if(aceitem.getStoragetype().equalsIgnoreCase("SETOFMAPS") ) { %>
+		<b>View set of maps</b><br />
+		 <% out.print( url ); %><br /><br />
+	<%	 }
+		 else{ %>
 	 	<b>Website</b><br />
 	 <% out.print(  url ); %><br /><br />
 <% 	} %>

@@ -95,12 +95,9 @@
 		</td>
 		<td width=50%><b>storagetype</b><br />
 	    <select name="storagetype">		
-<% 		String help = "";
-		if (aceitem==null || aceitem.getStoragetype().equalsIgnoreCase("URL"))	{
-			help = "selected" ;
-		} %>
-			<option value="URL" <%= help %> >URL</option>
-			<option value="GEONETWORK" <%= help.length() > 0 ? "" : "selected"%> >GEONETWORK</option>
+			<option value="URL" <%= ((aceitem==null || aceitem.getStoragetype().equalsIgnoreCase("URL")) ? "selected" : "")%> >URL</option>
+			<option value="GEONETWORK" <%= ((aceitem!=null && aceitem.getStoragetype().equalsIgnoreCase("GEONETWORK")) ? "selected" : "") %> >GEONETWORK</option>
+			<option value="SETOFMAPS" <%= ((aceitem!=null && aceitem.getStoragetype().equalsIgnoreCase("SETOFMAPS")) ? "selected" : "") %> >SETOFMAPS</option>
 		</select>
 		</td>
 	    </tr></table>
