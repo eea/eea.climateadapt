@@ -37,7 +37,7 @@ CHM.MapViewer = OpenLayers.Class({
 		var layernodeui = Ext.extend(GeoExt.tree.LayerNodeUI, new GeoExt.tree.TreeNodeUIEventMixin());
 
 		// Create a tree panel
-	    var treepanel = new Ext.tree.TreePanel({
+	    new Ext.tree.TreePanel({
 	        renderTo: aTOCElement,
 	        layerStore: mappanel.layers,
 	        autoScroll: true,
@@ -83,15 +83,17 @@ CHM.MapViewer = OpenLayers.Class({
 	                    }]
 	                },
 	                createNode: function(attr) {
-	                    // add a WMS legend to each node created
-	                    attr.component = {
-	                        xtype: "gx_wmslegend",
-	                        layerRecord: mappanel.layers.getByLayer(attr.layer),
-	                        showTitle: false,
-	                        // custom class for css positioning
-	                        // see tree-legend.html
-	                        cls: "legend"
-	                    }
+                        if (attr.layer.name != foregroundlayername && attr.layer.name != backgroundlayername) { 
+		                    // add a WMS legend to each node created
+		                    attr.component = {
+		                        xtype: "chm_wmslegend",
+		                        layerRecord: mappanel.layers.getByLayer(attr.layer),
+		                        showTitle: false,
+		                        // custom class for css positioning
+		                        // see tree-legend.html
+		                        cls: "legend"
+		                    };
+                        };
 	                    return GeoExt.tree.LayerLoader.prototype.createNode.call(this, attr);
 	                }
 	            }

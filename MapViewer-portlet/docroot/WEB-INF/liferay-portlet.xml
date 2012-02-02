@@ -19,6 +19,7 @@
 		<header-portlet-javascript>/js/chm/CHMMap.js</header-portlet-javascript>
 		<header-portlet-javascript>/js/chm/MapViewerCHMMap.js</header-portlet-javascript>
 		<header-portlet-javascript>/js/chm/MapState.js</header-portlet-javascript>
+		<header-portlet-javascript>/js/chm/WMSLegend.js</header-portlet-javascript>
 		<header-portlet-javascript>/js/chm/MapViewer.js</header-portlet-javascript>
 		<css-class-wrapper>mapviewerportlet-portlet</css-class-wrapper>
 	</portlet>

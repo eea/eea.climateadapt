@@ -37,7 +37,7 @@ if (mapviewerappid == null || mapviewerappid.length() == 0) {
 	
 	var mapViewerAppId = '<%= mapviewerappid %>';
 
-	var foregroundlayername = "Foreground";
+	var foregroundlayername = "Topography";
 	
 	var backgroundlayername = "Background";
 	

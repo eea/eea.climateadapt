@@ -24,24 +24,6 @@ CHM.MapViewerCHMMap = OpenLayers.Class(OpenLayers.Map, {
 		this.maxResolution = (7602904.426 - 1600000) / 512;
 		
 		this.numZoomLevels = 13;
-		
-		// backgroundlayer = new OpenLayers.Layer.WMS(backgroundlayername, 
-		//		geoserverUrl + wms + '?', 
-		//		{layers: 'background', format: 'image/png'}, 
-		//		{visibility: true}, 
-		//		{tileOptions: {maxGetUrlLength: 2048}}, 
-		//		{isBaseLayer: true}
-		//	);
-			
-		// foregroundlayer = new OpenLayers.Layer.WMS(foregroundlayername, 
-		//		geoserverUrl + wms + '?', 
-		//		{layers: 'foreground', format: 'image/png', transparent: 'true'}, 
-		//		{visibility: true}, 
-		//		{tileOptions: {maxGetUrlLength: 2048}}, 
-		//		{isBaseLayer: false}
-		//	);
-
-		// this.addLayers([backgroundlayer, foregroundlayer]);
 	},
 	
 	restore : function() {
@@ -197,22 +179,20 @@ CHM.MapViewerCHMMap = OpenLayers.Class(OpenLayers.Map, {
        			var visibility = layer.visibility;
            			
        			var isbaselayer = layer.isBaseLayer; 
-       			
-       			var displayinlayerswitcher = layer.displayInLayerSwitcher;
-       			
-       			var singletile = layer.singleTile;
            			
        			var clone = new OpenLayers.Layer.WMS(
        					name, 
        					url, 
        					{layers: paramlayers, format: paramformat, transparent: paramtransparent, styles: paramstyles},
        					{visibility: visibility}, 
-       					{isBaseLayer: isbaselayer},
-       					{displayInLayerSwitcher: displayinlayerswitcher},
-       					{singleTile: singletile}
+       					{isBaseLayer: isbaselayer}
        			);
        			
-       			clone.metadataURL = layer.metadataURL;
+       			clone.displayInLayerSwitcher = layer.displayInLayerSwitcher;
+       			
+       			clone.singleTile = layer.singleTile;
+		
+				clone.metadataURL = layer.metadataURL;
          			
        			instance.addLayer(clone);
             }            

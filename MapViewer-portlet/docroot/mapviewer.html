@@ -12,6 +12,7 @@
 		<script src="js/chm/CHMMap.js" type="text/javascript"></script>
 		<script src="js/chm/MapViewerCHMMap.js" type="text/javascript"></script>
 		<script src="js/chm/MapState.js" type="text/javascript"></script>
+		<script src="js/chm/WMSLegend.js" type="text/javascript"></script>
 		<script src="js/chm/MapViewer.js" type="text/javascript"></script>
 		<link rel="stylesheet" type="text/css" href="js/ext-3.4.0/resources/css/ext-all.css" />
 		<link rel="stylesheet" type="text/css" href="js/GeoExt/resources/css/geoext-all.css" />
@@ -29,9 +30,9 @@
 			
 			var mapViewerAppId = 'espon';
 
-			var foregroundlayername = "foreground";
+			var foregroundlayername = "Foreground";
 			
-			var backgroundlayername = "background";
+			var backgroundlayername = "Background";
 			
 			Ext.onReady(function() {
 				var mapviewer = new CHM.MapViewer(document.getElementById('map_element'), document.getElementById('toc_element'), document.getElementById('status_element'));
