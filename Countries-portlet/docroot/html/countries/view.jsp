@@ -12,7 +12,7 @@
 * This library is distributed in the hope that it will be useful, but WITHOUT
 * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
 * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
-* details.
+* details.x
 */
 %>
 
@@ -141,7 +141,7 @@
 		<img id="GB_selected" src="<%=renderRequest.getContextPath()%>/images/countryselectionmap/GB.png" width="500" height="375" border="0" usemap="#Map" style="display:none;"/>
 		<img id="GR_selected" src="<%=renderRequest.getContextPath()%>/images/countryselectionmap/GR.png" width="500" height="375" border="0" usemap="#Map" style="display:none;"/>
 		<img id="HU_selected" src="<%=renderRequest.getContextPath()%>/images/countryselectionmap/HU.png" width="500" height="375" border="0" usemap="#Map" style="display:none;"/>
-		<img id="IR_selected" src="<%=renderRequest.getContextPath()%>/images/countryselectionmap/IR.png" width="500" height="375" border="0" usemap="#Map" style="display:none;"/>
+		<img id="IE_selected" src="<%=renderRequest.getContextPath()%>/images/countryselectionmap/IE.png" width="500" height="375" border="0" usemap="#Map" style="display:none;"/>
 		<img id="IS_selected" src="<%=renderRequest.getContextPath()%>/images/countryselectionmap/IS.png" width="500" height="375" border="0" usemap="#Map" style="display:none;"/>
 		<img id="IT_selected" src="<%=renderRequest.getContextPath()%>/images/countryselectionmap/IT.png" width="500" height="375" border="0" usemap="#Map" style="display:none;"/>
 		<img id="LI_selected" src="<%=renderRequest.getContextPath()%>/images/countryselectionmap/LI.png" width="500" height="375" border="0" usemap="#Map" style="display:none;"/>
@@ -236,7 +236,7 @@
 <!-- iceland -->
 <area shape="poly" coords="107,26,93,32,97,38,100,38,99,39,93,37,91,41,97,44,96,48,91,49,92,53,97,55,103,63,114,65,130,62,138,54,135,46,136,40,128,36,125,38,117,35,111,33,108,27" href="#IS" alt="iceland"  onclick="return select('IS')" onmouseover="highlight('IS');" onmouseout="unhighlight('IS');"/>
 <!-- ireland -->
-<area shape="poly" coords="137,156,135,160,129,163,131,168,133,167,134,166,135,166,136,169,138,170,137,173,137,176,138,182,135,186,133,189,127,189,120,191,109,193,107,181,111,178,115,176,112,170,116,161,122,161,125,163,126,157,131,155" href="#IR" alt="ireland"  onclick="return select('IR')" onmouseover="highlight('IR');" onmouseout="unhighlight('IR');"/>
+<area shape="poly" coords="137,156,135,160,129,163,131,168,133,167,134,166,135,166,136,169,138,170,137,173,137,176,138,182,135,186,133,189,127,189,120,191,109,193,107,181,111,178,115,176,112,170,116,161,122,161,125,163,126,157,131,155" href="#IE" alt="ireland"  onclick="return select('IE')" onmouseover="highlight('IE');" onmouseout="unhighlight('IE');"/>
 <!-- italy -->
 <area shape="poly" coords="211,283,218,281,223,276,232,281,235,290,231,292,232,295,234,298,235,296,233,294,236,292,239,295,237,297,242,298,253,307,253,311,255,312,255,308,258,307,260,310,259,312,264,315,266,313,273,320,277,328,270,329,271,332,268,331,267,336,260,337,258,335,257,329,255,331,256,335,246,338,248,342,250,343,266,351,273,353,275,347,273,343,273,339,280,339,286,332,284,329,287,328,287,321,281,319,284,313,291,315,291,318,296,319,297,313,290,307,277,303,277,299,276,297,271,298,261,291,256,281,249,277,248,273,251,272,248,268,251,264,255,264,255,255,248,254,246,250,238,252,234,254,232,255,232,258,228,258,226,258,225,261,225,262,223,263,220,256,217,260,210,260,210,261,211,266,208,269,208,272,210,272,209,277,213,278,212,280,211,281,211,283" href="#IT" alt="italy"  onclick="return select('IT')" onmouseover="highlight('IT');" onmouseout="unhighlight('IT');"/>
 <area shape="poly" coords="219,307,219,307,229,308,232,315,229,327,227,330,223,329,218,331,216,329,218,325,218,315,217,313,217,306" href="#IT" alt="italy"  onclick="return select('IT')" onmouseover="highlight('IT');" onmouseout="unhighlight('IT');"/>
