@@ -55,7 +55,7 @@ CREATE TABLE ace_wxsharvester
 (
   wxsharvesterid bigint NOT NULL,
   "name" character varying(75),
-  url character varying(75),
+  url character varying(255),
   ogctype character varying(75),
   every integer,
   topic character varying(75),
@@ -71,6 +71,9 @@ WITH (
   OIDS=FALSE
 );
 ALTER TABLE ace_wxsharvester OWNER TO postgres;
+
+alter TABLE ace_wxsharvester
+alter column  url type character varying(255);
 
 CREATE TABLE ace_cswharvester 
 (
