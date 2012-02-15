@@ -49,7 +49,7 @@
 						<span id="${minusId}" class="minus togglehide"><img src="/ace-theme/images/arrows/01_minus.png" /></span>
 						<span class="feed-entry-title">
 						<c:choose>
-							<c:when test="${!empty wrappedSearchResult.storedAt && fn:startsWith(wrappedSearchResult.storedAt, 'http://')==true}">
+							<c:when test="${!empty wrappedSearchResult.storedAt && fn:startsWith(wrappedSearchResult.storedAt, 'http')==true}">
 								&nbsp;<a href="<c:out value="${wrappedSearchResult.storedAt}"/>" target="_blank">
 									<c:out value="${wrappedSearchResult.name}"/></a>
 							</c:when>
@@ -61,7 +61,7 @@
 								&nbsp;<a href="<c:out value="http://${wrappedSearchResult.storedAt}"/>" target="_blank">
 									<c:out value="${wrappedSearchResult.name}"/></a>
 							</c:when>                            
-							<c:when test="${!empty wrappedSearchResult.deeplink && fn:startsWith(wrappedSearchResult.deeplink, 'http://')==true}">
+							<c:when test="${!empty wrappedSearchResult.deeplink && fn:startsWith(wrappedSearchResult.deeplink, 'http')==true}">
 								&nbsp;<a href="<c:out value="${wrappedSearchResult.deeplink}"/>" target="_blank">
 									<c:out value="${wrappedSearchResult.name}"/></a>
 							</c:when>
