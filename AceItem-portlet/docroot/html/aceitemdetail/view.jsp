@@ -59,7 +59,7 @@
 						urls[i] = urls[i].trim();
 						
 						if(urls[i].length() > 0) {
-							if ( ! (urls[i].startsWith("http://")  || urls[i].startsWith("/") ) ) {
+							if ( ! (urls[i].startsWith("http")  || urls[i].startsWith("/") ) ) {
 								
 								urls[i] = "http://" + urls[i];
 							}
