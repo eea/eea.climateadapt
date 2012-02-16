@@ -65,7 +65,7 @@
 	var actual_image = "europe";
 	var selectedCountry = '';
 	
-	var countries = ['AT', 'BE', 'BG', 'CH', 'CY', 'CZ', 'DE', 'DK', 'EE', 'ES', 'FI', 'FR', 'GB', 'GR', 'HU', 'IR', 'IT', 'IS', 'LT', 'LI', 'LV', 'LU', 'MT', 'NL', 'NO', 'PL', 'PT', 'RO', 'SE', 'SI', 'SK', 'TR'];
+	var countries = ['AT', 'BE', 'BG', 'CH', 'CY', 'CZ', 'DE', 'DK', 'EE', 'ES', 'FI', 'FR', 'GB', 'GR', 'HU', 'IE', 'IT', 'IS', 'LT', 'LI', 'LV', 'LU', 'MT', 'NL', 'NO', 'PL', 'PT', 'RO', 'SE', 'SI', 'SK', 'TR'];
 	
 	function highlight(area) {
 		$j("#"+ actual_image+'_selected').hide();
@@ -120,10 +120,10 @@
 	
 </script>
 
-<div id="<portlet:namespace/>content"></div>
+<div id="<portlet:namespace/>content">
 
-    <!-- Map colum -->
-    <div id="nas_left_column" class="nas_column">
+    <!-- Map area; height = image height + 10 -->
+    <div id="nas_left_column" class="nas_column" style="height: 385px">
 
 		<img id="europe_selected" src="<%=renderRequest.getContextPath()%>/images/countryselectionmap/europe.png" width="500" height="375" border="0" usemap="#Map" style="display:block;"/>
 		<img id="AT_selected" src="<%=renderRequest.getContextPath()%>/images/countryselectionmap/AT.png" width="500" height="375" border="0" usemap="#Map" style="display:none;"/>
@@ -158,15 +158,6 @@
 		<img id="SI_selected" src="<%=renderRequest.getContextPath()%>/images/countryselectionmap/SI.png" width="500" height="375" border="0" usemap="#Map" style="display:none;"/>
 		<img id="SK_selected" src="<%=renderRequest.getContextPath()%>/images/countryselectionmap/SK.png" width="500" height="375" border="0" usemap="#Map" style="display:none;"/>
 		<img id="TR_selected" src="<%=renderRequest.getContextPath()%>/images/countryselectionmap/TR.png" width="500" height="375" border="0" usemap="#Map" style="display:none;"/>
-
-		<p>
-		<select id="country-selection-list"  style="margin-top:5px;">
-			<option id="no-selection-option" value="" selected="selected">Choose a country </option>
-			<c:forEach var="countryElement" items="<%= nl.wur.alterra.cgi.ace.model.constants.AceItemCountry.values() %>" >
-				<option id="${countryElement}-option" value="${countryElement}"><liferay-ui:message key="acesearch-country-lbl-${countryElement}" /></option>				
-			</c:forEach>
-		</select>
-		</p>
 	
 		<!--  <p>
 		<select id="country-selection-list"  style="margin-top:5px;">
@@ -186,7 +177,7 @@
 			<option id="GB-option" value="GB">United Kingdom</option>
 			<option id="GR-option" value="GR">Greece</option>
 			<option id="HU-option" value="HU">Hungary</option>
-			<option id="IR-option" value="IR">Ireland</option>
+			<option id="IE-option" value="IE">Ireland</option>
 			<option id="IS-option" value="IS">Iceland</option>
 			<option id="IT-option" value="IT">Italy</option>
 			<option id="LI-option" value="LI">Liechtenstein</option>
@@ -277,5 +268,14 @@
 
 		</map>
 	
+    </div>
+    <div>
+		<select id="country-selection-list"  style="margin-top:5px;">
+			<option id="no-selection-option" value="" selected="selected">Choose a country </option>
+			<c:forEach var="countryElement" items="<%= nl.wur.alterra.cgi.ace.model.constants.AceItemCountry.values() %>" >
+				<option id="${countryElement}-option" value="${countryElement}"><liferay-ui:message key="acesearch-country-lbl-${countryElement}" /></option>				
+			</c:forEach>
+		</select>
+		</p>
     </div>
 </div>
