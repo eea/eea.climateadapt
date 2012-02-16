@@ -73,14 +73,13 @@
 	if(project != null) {
 	
 %>
-
-
-	 <H3><% out.print( project.getAcronym() ); %>: <% out.print( project.getTitle() ); %></H3>
+	 <div class="detailheader" style="width: 100%">
+	 <% out.print( project.getAcronym() ); %>: <% out.print( project.getTitle() ); %>
+	 </div>
+	 <div class="detailcontainer" style="width: 100%">
+	 <div class="detailleft" style="width: 70%; float: left;">
 	 <b>Abstract</b><br />
 	 <% out.print( project.getAbstracts() ); %><br /><br />
-	 
-	<table border="0" width="100%"><tr>
-	<td width="50%" valign="top"><div style="margin-right: 35px;">
  	 <b>Lead</b><br />
 	 <% out.print( project.getLead() ); %><br /><br />
 	 <b>Partners</b><br />
@@ -111,9 +110,8 @@
 	 </c:forEach>
 	 <br />
 <%   } // end if %>
-	 </div></td>
-	<td width="50%" valign="top"><div>	
-	 
+	 </div>
+	 <div class="detailright" style="width: 30%; float: left;">
 	 <% if (url != null && url.trim().length() > 0)  {%>		
 		 <b><%= websitelabel %></b><br />
 		 <%= url %><br /><br />
@@ -133,8 +131,8 @@
 	 
 	 <b>Countries</b><br />
 	 <% out.print( project.getSpatialvalues() ); %><br /><br />
-	 </div></td></tr>
-      </table>
+	 </div>
+  </div>	
 <%  
 	String lastratedprojectid = "";
 
@@ -143,6 +141,7 @@
 		lastratedprojectid = (String) renderRequest.getPortletSession().getAttribute("lastRatedProjectId") ;
 	}
 	if( ! project_id.toString().equalsIgnoreCase( lastratedprojectid )) { %>
+  <div class="detailfooter" style="width: 100%"> 
 	Would you recommend this item to others?
 	&nbsp;&nbsp;
 	
@@ -163,6 +162,7 @@
 	
 	<liferay-ui:icon image="yes" url="<%=rateUpURL.toString() %>" />
 	 &nbsp;&nbsp;<br />	
+	 </div>
 <%	 } 
   }
   else {%>      
