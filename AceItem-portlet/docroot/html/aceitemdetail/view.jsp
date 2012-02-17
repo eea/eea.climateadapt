@@ -75,21 +75,15 @@
 	if(aceitem != null) {	
 %>
 
-
-     <div class="portlet-title">
-	 <H5><% out.print( aceitem.getName() ); %></H5>
+	 <div class="detailcontainer" style="width: 100%">
+	 <div class="detailheader" style="width: 100%">
+	 <span class="portlet-title"><H6><% out.print( aceitem.getName() ); %></H6>
 	 </div>
-	 <div class="body">
+	 	 
+	 <div class="detailleft" style="width: 67%; padding-right: 20px; float: left;">	 
 	 <b>Description</b><br />
 	 <% out.print( aceitem.getDescription() ); %><br /><br />
 
-	<table border="0" width="100%"><tr>
-	<td width="50%" valign="top"><div style="margin-right: 35px;">	 
-	 <b>Keywords</b><br />
-	 <% out.print( aceitem.getKeyword()); %><br /><br />
-	 
-	 <b>Source</b><br />
-	 <% out.print( aceitem.getSource()); %><br /><br />
 <%  	if(aceitem.getStoragetype().equalsIgnoreCase("GEONETWORK") ) { %>
 	<b>Go to the service</b><br />
 	 <% out.print( url ); %><br /><br />
@@ -104,14 +98,15 @@
 	 <% out.print(  url ); %><br /><br />
 <% 	} %>
 
-	 <b>Geographic area</b><br />
-	 <% out.print( aceitem.getSpatialLayer().replace("_", " ")); %><br /><br />
 	 
-	 <b>Countries</b><br />
-	 <% out.print( aceitem.getSpatialValues() ); %><br /><br />
+	 <b>Source</b><br />
+	 <% out.print( aceitem.getSource()); %><br /><br />
 	
-	</div></td>
-	<td width="50%" valign="top"><div>	
+	 </div>
+	 <div class="detailright" style="width: 30%; float: left;">	 
+	 
+	 <b>Keywords</b><br />
+	 <% out.print( aceitem.getKeyword()); %><br /><br />
 	
 	 <b>Sectors</b><br />
 	 <c:set var="aceItemSectors" value="<%= aceitem.getSectors_() %>" />
@@ -140,9 +135,13 @@
 	 </c:forEach>
 	 <br /><br />
 
-	 </div></td></tr>
-      </table>	 
-     </div>
+	 <b>Geographic area</b><br />
+	 <% out.print( aceitem.getSpatialLayer().replace("_", " ")); %><br /><br />
+	 
+	 <b>Countries</b><br />
+	 <% out.print( aceitem.getSpatialValues() ); %><br /><br />
+
+	 </div>
 <%  
 	String lastratedaceitemid = "";
 
@@ -151,6 +150,7 @@
 		lastratedaceitemid = (String) renderRequest.getPortletSession().getAttribute("lastRatedAceItemId") ;
 	}
 	if( ! aceitem_id.toString().equalsIgnoreCase( lastratedaceitemid )) { %>
+  <div class="detailfooter" style="width: 100%; clear: both"> 		
 	Would you recommend this item to others?
 	&nbsp;&nbsp;
 	
@@ -171,9 +171,10 @@
 	
 	<liferay-ui:icon image="yes" url="<%=rateUpURL.toString() %>" />
 	 &nbsp;&nbsp;<br />	
-<%	 } 
-  }
-  else {%>      
+<%	 } %>
+  </div>
+<%	}
+  else {%>     
    <div class="portlet-title">
      <H1>No available item selected</H1>
     </div>
