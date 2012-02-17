@@ -90,19 +90,53 @@
 	if(measure != null) {
 %>
 
-	 <H3><% out.print( measure.getName() ); %> (<%= type %>)</H3>
+	 <div class="detailcontainer">
+	 <div class="detailheader">
+	 <span class="portlet-title"><H6><% out.print( measure.getName() ); %> (<%= type %>)</H6>
+	 </div>
+	 	 
+	 <div class="detailleft">	 
 	 <b>Description</b><br />
 	 <% out.print( measure.getDescription() ); %><br /><br />
+
+	<% if (url != null && url.trim().length() > 0)  {%>		
+		 <b><%= websitelabel %></b><br />
+		 <%= url %><br /><br />
+	<% } %>
+		 
 	 <b>Contact</b><br />
 	 <% out.print( measure.getContact() ); %><br /><br />	 
-		 
-		<% if (url != null && url.trim().length() > 0)  {%>		
-			 <b><%= websitelabel %></b><br />
-			 <%= url %><br /><br />
-		<% } %>
-	<table border="0" width="100%"><tr>
-	<td width="50%" valign="top"><div style="margin-right: 35px;">
-   
+	 
+	 <b>Implementationtype</b><br />
+	 <% out.print( implementationtype ); %><br /><br />
+	 
+	 <b>Implementationtime</b><br />
+	 <% out.print( measure.getImplementationtime() ); %><br /><br />
+	 
+	 <b>Lifetime</b><br />
+	 <% out.print( measure.getLifetime() ); %><br /><br />
+	 
+	 <b>Legal aspects</b><br />
+	 <% out.print( measure.getLegalaspects() ); %><br /><br />
+	 
+	 <b>Stakeholder participation</b><br />
+	 <% out.print( measure.getStakeholderparticipation() ); %><br /><br />
+	 
+	 <b>Succes and limitation factors</b><br />
+	 <% out.print( measure.getSucceslimitations() ); %><br /><br />
+	 
+	 <b>Cost benefit</b><br />
+	 <% out.print( measure.getCostbenefit() ); %><br /><br />
+	 	 
+	 <b>Source</b><br />
+	 <% out.print( measure.getSource() ); %><br /><br />
+	 
+	 </div>
+	 <div class="detailright">	 
+	
+	 <b>Keywords</b><br />
+	 <% out.print( measure.getKeywords()); %><br /><br />
+
 	 <b>Sectors</b><br />
 	 <c:set var="aceItemSectors" value="<%= measure.getSectors_() %>" />
      <c:forEach var="adaptationSector" items="<%= nl.wur.alterra.cgi.ace.model.constants.AceItemSector.values() %>" >
@@ -128,46 +162,13 @@
 			<liferay-ui:message key="aceitem-climateimpacts-lbl-${adaptationClimateImpact}" /><br />
 		</c:if>	
 	 </c:forEach>
-	 <br /><br />
-	 
-	 <b>Source</b><br />
-	 <% out.print( measure.getSource() ); %><br /><br />
-	 
-	 	<b>Keywords</b><br />
-	 <% out.print( measure.getKeywords()); %><br /><br />
-	 
+	 <br /><br />	 
 	 <b>Geographic characterisation</b><br />
 	 <% out.print( measure.getSpatiallayer().replace("_", " ") ); %><br /><br />
 	 
 	 <b>Countries</b><br />
 	 <% out.print( measure.getSpatialvalues() ); %><br /><br />
-
-	 </div></td>
-	<td width="50%" valign="top"><div>		 
-	 
-	 <b>Implementationtype</b><br />
-	 <% out.print( implementationtype ); %><br /><br />
-	 
-	 <b>Implementationtime</b><br />
-	 <% out.print( measure.getImplementationtime() ); %><br /><br />
-	 
-	 <b>Lifetime</b><br />
-	 <% out.print( measure.getLifetime() ); %><br /><br />
-	 
-	 <b>Legal aspects</b><br />
-	 <% out.print( measure.getLegalaspects() ); %><br /><br />
-	 
-	 <b>Stakeholder participation</b><br />
-	 <% out.print( measure.getStakeholderparticipation() ); %><br /><br />
-	 
-	 <b>Succes and limitation factors</b><br />
-	 <% out.print( measure.getSucceslimitations() ); %><br /><br />
-	 
-	 <b>Cost benefit</b><br />
-	 <% out.print( measure.getCostbenefit() ); %><br /><br />	
-
-	 </div></td></tr>
-      </table>
+	 </div>
 <%  
 	String lastratedmeasureid = "";
 
@@ -176,6 +177,7 @@
 		lastratedmeasureid = (String) renderRequest.getPortletSession().getAttribute("lastRatedMeasureId") ;
 	}
 	if( ! measure_id.toString().equalsIgnoreCase( lastratedmeasureid )) { %>
+  <div class="detailfooter"> 	
 	Would you recommend this item to others?
 	&nbsp;&nbsp;
 	
@@ -196,9 +198,10 @@
 	
 	<liferay-ui:icon image="yes" url="<%=rateUpURL.toString() %>" />
 	 &nbsp;&nbsp;<br />	
-<%	 } 
-  }
-  else {%>      
+<%	 } %>
+  </div>
+<%	}
+  else {%>     
 
      <H1>No available measure selected</H1>
 <% } 
