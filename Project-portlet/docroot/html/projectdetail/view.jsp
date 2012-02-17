@@ -73,17 +73,39 @@
 	if(project != null) {
 	
 %>
-	 <div class="detailheader" style="width: 100%">
-	 <% out.print( project.getAcronym() ); %>: <% out.print( project.getTitle() ); %>
-	 </div>
 	 <div class="detailcontainer" style="width: 100%">
-	 <div class="detailleft" style="width: 70%; float: left;">
+	 <div class="detailheader" style="width: 100%">
+	 <span class="portlet-title"><H6><% out.print( project.getAcronym() ); %>: <% out.print( project.getTitle() ); %></H6></span>
+	 </div>
+
+	 <div class="detailleft" style="width: 67%; padding-right: 20px; float: left;">
 	 <b>Abstract</b><br />
 	 <% out.print( project.getAbstracts() ); %><br /><br />
  	 <b>Lead</b><br />
 	 <% out.print( project.getLead() ); %><br /><br />
 	 <b>Partners</b><br />
 	 <% out.print( project.getPartners() ); %><br /><br />
+
+	 <b>Funding</b><br />
+	 <% out.print( project.getFunding() ); %><br /><br />
+ 
+	 <b>Duration</b><br />
+	 <% out.print( project.getDuration() ); %><br /><br />
+
+
+	 <% if (project.getSource().trim().length() > 0)  {%>		
+	 	<b>Source</b><br />
+	 	<% out.print( project.getSource() ); %><br /><br />
+	 <% } %>
+	 
+	 <% if (url != null && url.trim().length() > 0)  {%>		
+		 <b><%= websitelabel %></b><br />
+		 <%= url %><br /><br />
+	 <% } %>
+	 </div>
+	 <div class="detailright" style="width: 30%; float: left;">
+	 <b>Keywords</b><br />
+	 <% out.print( project.getKeywords()); %><br /><br />	 
 	 <b>Sectors</b><br />
 	 <c:set var="aceItemSectors" value="<%= project.getSectors() %>" />
      <c:forEach var="adaptationSector" items="<%= nl.wur.alterra.cgi.ace.model.constants.AceItemSector.values() %>" >
@@ -109,30 +131,14 @@
 		</c:if>	
 	 </c:forEach>
 	 <br />
-<%   } // end if %>
-	 </div>
-	 <div class="detailright" style="width: 30%; float: left;">
-	 <% if (url != null && url.trim().length() > 0)  {%>		
-		 <b><%= websitelabel %></b><br />
-		 <%= url %><br /><br />
-	 <% } %>	 
-	 <b>Keywords</b><br />
-	 <% out.print( project.getKeywords()); %><br /><br />
-	 <b>Funding</b><br />
-	 <% out.print( project.getFunding() ); %><br /><br />
- 
-	 <b>Duration</b><br />
-	 <% out.print( project.getDuration() ); %><br /><br />
-	 <b>Source</b><br />
-	 <% out.print( project.getSource() ); %><br /><br />
-	 
+<%   } // end if %>	 
 	 <b>Geographic characterisation</b><br />
 	 <% out.print( project.getSpatiallayer().replace("_", " ") ); %><br /><br />
 	 
 	 <b>Countries</b><br />
-	 <% out.print( project.getSpatialvalues() ); %><br /><br />
+	 <% out.print( project.getSpatialvalues().replace(";","; ") ); %><br /><br />
 	 </div>
-  </div>	
+
 <%  
 	String lastratedprojectid = "";
 
@@ -141,7 +147,7 @@
 		lastratedprojectid = (String) renderRequest.getPortletSession().getAttribute("lastRatedProjectId") ;
 	}
 	if( ! project_id.toString().equalsIgnoreCase( lastratedprojectid )) { %>
-  <div class="detailfooter" style="width: 100%"> 
+  <div class="detailfooter" style="width: 100%; clear: both"> 
 	Would you recommend this item to others?
 	&nbsp;&nbsp;
 	
@@ -163,8 +169,9 @@
 	<liferay-ui:icon image="yes" url="<%=rateUpURL.toString() %>" />
 	 &nbsp;&nbsp;<br />	
 	 </div>
-<%	 } 
-  }
+<%	 } %>
+  </div>
+<%	}
   else {%>      
 
      <H1>No available project selected</H1>
