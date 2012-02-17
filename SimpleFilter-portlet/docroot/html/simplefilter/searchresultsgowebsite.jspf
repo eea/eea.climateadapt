@@ -80,7 +80,15 @@
 							<c:when test="${empty wrappedSearchResult.deeplink && !empty wrappedSearchResult.storedAt && fn:startsWith(wrappedSearchResult.storedAt, 'ace_measure_id')==true}">
 								&nbsp;<a href="<c:out value="/viewmeasure?${wrappedSearchResult.storedAt}"/>" >
 									<c:out value="${wrappedSearchResult.name}"/></a>
-							</c:when>                         
+							</c:when>  
+							<c:when test="${fn:startsWith(wrappedSearchResult.storagetype, 'GEONETWORK')==true}">
+								&nbsp;<a href="<c:out value="/map-viewer?cswRecordFileIdentifier=${wrappedSearchResult.storedAt}"/>" >
+									<c:out value="${wrappedSearchResult.name}"/></a>
+							</c:when>   
+							<c:when test="${fn:startsWith(wrappedSearchResult.storagetype, 'SETOFMAPS')==true}">
+								&nbsp;<a href="<c:out value="/map-viewer?mapViewerAppId=${wrappedSearchResult.storedAt}"/>" >
+									<c:out value="${wrappedSearchResult.name}"/></a>
+							</c:when>                        
 							<c:otherwise>
 								&nbsp;<a href="<c:out value="/viewaceitem?aceitem_id=${wrappedSearchResult.aceItemId}"/>" ><c:out value="${wrappedSearchResult.name}"/></a>
 							</c:otherwise>  
