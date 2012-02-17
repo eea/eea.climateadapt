@@ -78,7 +78,7 @@ String redirect = PortalUtil.getCurrentURL(renderRequest);
 
 <div id="<portlet:namespace/>content" style="width: 100%;">
 <%
-	if (filter==1) {
+	if (filter==1 || filter==3) {
 %>
 			<form action="<%=searchAceitemURL%>" method="post" id="ace_simplefilter_30x" name="<portlet:namespace/>aceItemSearchForm">
 
@@ -284,7 +284,7 @@ String redirect = PortalUtil.getCurrentURL(renderRequest);
 				{ searchstring += (j > 0 ? ";" : "" ) + aceitemtypes[j] ; } 
 		}
 		
-		if (filter==1) {
+		if (filter==1 || filter==3) {
 
 			if (selected_sector != null && ! selected_sector.equalsIgnoreCase("all")) {
 				searchstring += handle + "searchsectors=" ;
