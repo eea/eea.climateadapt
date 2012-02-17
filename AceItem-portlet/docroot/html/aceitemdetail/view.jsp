@@ -75,12 +75,12 @@
 	if(aceitem != null) {	
 %>
 
-	 <div class="detailcontainer" style="width: 100%">
-	 <div class="detailheader" style="width: 100%">
+	 <div class="detailcontainer">
+	 <div class="detailheader">
 	 <span class="portlet-title"><H6><% out.print( aceitem.getName() ); %></H6>
 	 </div>
 	 	 
-	 <div class="detailleft" style="width: 67%; padding-right: 20px; float: left;">	 
+	 <div class="detailleft">	 
 	 <b>Description</b><br />
 	 <% out.print( aceitem.getDescription() ); %><br /><br />
 
@@ -103,7 +103,7 @@
 	 <% out.print( aceitem.getSource()); %><br /><br />
 	
 	 </div>
-	 <div class="detailright" style="width: 30%; float: left;">	 
+	 <div class="detailright">	 
 	 
 	 <b>Keywords</b><br />
 	 <% out.print( aceitem.getKeyword()); %><br /><br />
@@ -150,7 +150,7 @@
 		lastratedaceitemid = (String) renderRequest.getPortletSession().getAttribute("lastRatedAceItemId") ;
 	}
 	if( ! aceitem_id.toString().equalsIgnoreCase( lastratedaceitemid )) { %>
-  <div class="detailfooter" style="width: 100%; clear: both"> 		
+  <div class="detailfooter"> 		
 	Would you recommend this item to others?
 	&nbsp;&nbsp;
 	
