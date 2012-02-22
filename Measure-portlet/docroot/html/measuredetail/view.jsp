@@ -198,12 +198,14 @@
 	
 	<liferay-ui:icon image="yes" url="<%=rateUpURL.toString() %>" />
 	 &nbsp;&nbsp;<br />	
+	 </div>
 <%	 } %>
   </div>
 <%	}
-  else {%>     
-
-     <H1>No available measure selected</H1>
+  else {%>      
+   <div class="portlet-title">
+ 		<H1>No available measure selected</H1>
+    </div>
 <% } 
 	%> 
 
