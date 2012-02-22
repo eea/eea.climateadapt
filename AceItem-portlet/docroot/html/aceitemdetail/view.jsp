@@ -4,8 +4,6 @@
 <%@ taglib uri="http://java.sun.com/portlet_2_0" prefix="portlet" %>
 
 <%@include file="/html/init.jsp" %>
-<div class="item-detail">
-<div class="text-container">
 
 <%
 	Long aceitem_id = 0l ;
@@ -171,14 +169,14 @@
 	
 	<liferay-ui:icon image="yes" url="<%=rateUpURL.toString() %>" />
 	 &nbsp;&nbsp;<br />	
+	 </div>
 <%	 } %>
   </div>
 <%	}
-  else {%>     
+  else {%>      
    <div class="portlet-title">
      <H1>No available item selected</H1>
     </div>
 <% } 
 	%> 
- </div>
- </div>
+
