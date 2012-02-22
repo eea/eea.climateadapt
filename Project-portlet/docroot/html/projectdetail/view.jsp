@@ -73,14 +73,20 @@
 	if(project != null) {
 	
 %>
-	 <div class="detailcontainer" style="width: 100%">
-	 <div class="detailheader" style="width: 100%">
+	 <div class="detailcontainer">
+	 <div class="detailheader">
 	 <span class="portlet-title"><H6><% out.print( project.getAcronym() ); %>: <% out.print( project.getTitle() ); %></H6></span>
 	 </div>
 
-	 <div class="detailleft" style="width: 67%; padding-right: 20px; float: left;">
+	 <div class="detailleft">
 	 <b>Abstract</b><br />
 	 <% out.print( project.getAbstracts() ); %><br /><br />
+	 
+	 <% if (url != null && url.trim().length() > 0)  {%>		
+		 <b><%= websitelabel %></b><br />
+		 <%= url %><br /><br />
+	 <% } %>
+	 
  	 <b>Lead</b><br />
 	 <% out.print( project.getLead() ); %><br /><br />
 	 <b>Partners</b><br />
@@ -98,12 +104,8 @@
 	 	<% out.print( project.getSource() ); %><br /><br />
 	 <% } %>
 	 
-	 <% if (url != null && url.trim().length() > 0)  {%>		
-		 <b><%= websitelabel %></b><br />
-		 <%= url %><br /><br />
-	 <% } %>
 	 </div>
-	 <div class="detailright" style="width: 30%; float: left;">
+	 <div class="detailright">
 	 <b>Keywords</b><br />
 	 <% out.print( project.getKeywords()); %><br /><br />	 
 	 <b>Sectors</b><br />
@@ -147,7 +149,7 @@
 		lastratedprojectid = (String) renderRequest.getPortletSession().getAttribute("lastRatedProjectId") ;
 	}
 	if( ! project_id.toString().equalsIgnoreCase( lastratedprojectid )) { %>
-  <div class="detailfooter" style="width: 100%; clear: both"> 
+  <div class="detailfooter"> 
 	Would you recommend this item to others?
 	&nbsp;&nbsp;
 	
@@ -173,7 +175,8 @@
   </div>
 <%	}
   else {%>      
-
-     <H1>No available project selected</H1>
+   <div class="portlet-title">
+ 		<H1>No available project selected</H1>
+    </div>
 <% } 
 	%> 
