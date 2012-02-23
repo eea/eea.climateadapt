@@ -234,10 +234,13 @@
     <b>Comments about this database item <i>[information entered below will not be displayed on the public pages of the clearinghouse]</i></b><br />	
 	<textarea style="border-color: blue; border-style: solid; border-width: thin;" name="comments" rows=10 cols=150><%= aceitem == null ? "" : aceitem.getComments() %></textarea><br /><br />
 
-	<input type="checkbox" name="chk_importance" id="chk_importance" value="1" <% if (aceitem != null) { out.print( aceitem.getImportance() == 1 ? "checked" : "") ; } %> />
+	<input type="checkbox" name="chk_importance" id="chk_importance" value="1" <% if ((aceitem != null) && (aceitem.getImportance() == 1) ) { out.print( "checked" ) ; } %> />
 	<b>High importance</b>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 
-	<input type="checkbox" name="chk_controlstatus" id="chk_controlstatus" value="1" <% if (aceitem != null) { out.print( aceitem.getControlstatus() == 1 ? "checked" : "") ; } %> />
+<% if (renderRequest.isUserInRole("administrator") ) { // || renderRequest.isUserInRole("power-user")) { %>
+	<input type="checkbox" name="chk_controlstatus" id="chk_controlstatus" value="1" <% //  if ((aceitem != null) && (aceitem.getControlstatus() == 1) ) { out.print( "checked" ) ; } %> />
 	<b>Reviewed</b>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 
+<% } %>
+
  	<b>Edited by: <% if (aceitem != null) { out.print( aceitem.getModerator() ) ; } %> </b>	
 	<br /><br />
 	

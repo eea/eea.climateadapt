@@ -118,14 +118,16 @@
 		if (aceitem.getStoragetype().equalsIgnoreCase("URL") || 
 		    aceitem.getStoragetype().equalsIgnoreCase("GEONETWORK") || 
 		    aceitem.getStoragetype().equalsIgnoreCase("SETOFMAPS") ) {
-		// Only URL type get maintained here; Ace Serviced Entities have their own maintenance pages
+			// Only URL type get maintained here; Ace Serviced Entities have their own maintenance pages
+			
+			if(aceitem.getReplacesId() !=  aceitem.getAceItemId()) {
+			// Only editable if not gets replaced
 %>		  
-	  	
 		<liferay-ui:search-container-column-jsp
 			align="right"
 			path="/html/aceitem/aceitem_actions.jsp"
 		/>
-<%
+<%			}
 	  }
 %> 
 

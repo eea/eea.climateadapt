@@ -52,10 +52,44 @@ public class AceItemPortlet extends LuceneIndexUpdatePortlet {
 	 */
 	public void updateAceItem(ActionRequest request, ActionResponse response) throws Exception {
 		AceItem aceitem = AceItemLocalServiceUtil.getAceItem(ParamUtil.getLong(request, "aceItemId"));
+		System.out.println("ReplacesId: " + aceitem.getReplacesId());
+		// retain old and new status
+		Short oldapproved = aceitem.getControlstatus();
+		Short newapproved = 0;
+		String approved = ParamUtil.getString(request, "chk_controlstatus");
+		if( (approved != null ) && (approved.length()>0) ) {
+			
+			newapproved = Short.parseShort(approved);
+		}
+		if ( (oldapproved == 1) &&  (newapproved == 0) ) { 
+		// The old record stays untouched, only replacesId gets filled (from now no edit or delete possible anymore)
+			aceitem.setReplacesId( aceitem.getAceItemId() ) ;
+			// Must be done BEFORE aceitemFromRequest();
+			AceItemLocalServiceUtil.updateAceItem(aceitem);
+		}
+		
 		aceitemFromRequest(request, aceitem);
+		
 		List<String> errors = new ArrayList<String>();
 		if (AceItemValidator.validateAceItem(aceitem, errors)) {
-			AceItemLocalServiceUtil.updateAceItem(aceitem);
+			if ( (oldapproved == 1) &&  (newapproved == 0) ) { 
+     			// The changed item gets added as a copy with replacesId filled (is already done above)
+				// save the new copy: simple addAceItem
+				AceItemLocalServiceUtil.addAceItem(aceitem);
+				// automatically gets a new aceitemid;
+			}
+			else {
+				
+				if ( (newapproved == 1)  && aceitem.getReplacesId() != 0) {
+					// delete the old aceitem which gets replaced
+					AceItem oldaceitem = AceItemLocalServiceUtil.getAceItem(aceitem.getReplacesId());
+					new ACEIndexSynchronizer().delete(oldaceitem);	
+					AceItemLocalServiceUtil.deleteAceItem(aceitem.getReplacesId());
+					aceitem.setReplacesId( (long) 0);	
+				}
+				
+				AceItemLocalServiceUtil.updateAceItem(aceitem);
+			}
 			SessionMessages.add(request, "aceitem-updated");
             synchronizeIndexSingleAceItem(aceitem);
 			sendRedirect(request, response);
@@ -77,19 +111,24 @@ public class AceItemPortlet extends LuceneIndexUpdatePortlet {
 		long aceitemId = ParamUtil.getLong(request, "aceItemId");
 		List<String> errors = new ArrayList<String>();
 		if (Validator.isNotNull(aceitemId)) {
-/* ENABLE THIS !!! Hugo de Groot */
+
 			// delete the index entry
 			AceItem aceitem = AceItemLocalServiceUtil.getAceItem(aceitemId);
+			
 			new ACEIndexSynchronizer().delete(aceitem);			
 			
+			if(aceitem.getReplacesId() != 0) {
+			// Reset the already approved aceitem from the item that should be replaced
+				aceitem = AceItemLocalServiceUtil.getAceItem( aceitem.getReplacesId() );
+				aceitem.setReplacesId( (long) 0);
+				AceItemLocalServiceUtil.updateAceItem(aceitem);
+			}
+			
 			// delete the aceitem
-/* END ENABLE THIS !!! Hugo de Groot */
 			AceItemLocalServiceUtil.deleteAceItem(aceitemId);
+
 			SessionMessages.add(request, "aceitem-deleted");
-// THIS instead code IS NOT OK!!! Hugo de Groot. Dont enable this !!! instead of commented code do this
-//            AceItem aceitem = AceItemLocalServiceUtil.getAceItem(ParamUtil.getLong(request, "aceItemId"));
-//            synchronizeIndexSingleAceItem(aceitem);
-// end instead
+
 			sendRedirect(request, response);
 		}
 		else {

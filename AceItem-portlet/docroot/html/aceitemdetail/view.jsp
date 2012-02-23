@@ -101,7 +101,8 @@
 	 <% out.print( aceitem.getSource()); %><br /><br />
 	
 	 </div>
-	 <div class="detailright">	 
+	 <div class="detailright">
+	 <div class="detailrightinner">
 	 
 	 <b>Keywords</b><br />
 	 <% out.print( aceitem.getKeyword()); %><br /><br />
@@ -139,7 +140,6 @@
 	 <b>Countries</b><br />
 	 <% out.print( aceitem.getSpatialValues() ); %><br /><br />
 
-	 </div>
 <%  
 	String lastratedaceitemid = "";
 
@@ -171,11 +171,13 @@
 	 &nbsp;&nbsp;<br />	
 	 </div>
 <%	 } %>
+	 </div>
+	</div>
   </div>
 <%	}
-  else {%>      
+  else {%>     
    <div class="portlet-title">
-     <H1>No available item selected</H1>
+     <H6>No available item selected</H6>
     </div>
 <% } 
 	%> 
