@@ -193,6 +193,8 @@ CHM.MapViewerCHMMap = OpenLayers.Class(OpenLayers.Map, {
        			clone.singleTile = layer.singleTile;
 		
 				clone.metadataURL = layer.metadataURL;
+				
+				clone.attribution = layer.attribution;
          			
        			instance.addLayer(clone);
             }            

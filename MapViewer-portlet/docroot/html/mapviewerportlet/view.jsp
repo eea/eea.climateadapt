@@ -1,4 +1,3 @@
-<%@page import="nl.wur.alterra.cgi.ace.mapviewer.csw.FileIdentifiers"%>
 <%@page import="java.util.ArrayList"%>
 <%@include file="/html/init.jsp" %>
 
@@ -51,10 +50,14 @@ if (mapviewerappid == null || mapviewerappid.length() == 0) {
 	
     function handleMapViewerCreationComplete() {
 <%
-        String metadatarecordid = httprequest.getParameter(Constants.cswRecordFileIdentifierParameterName);
-				
-		if (metadatarecordid != null && metadatarecordid.length() > 0) {
-			// Add layer from querystring
+		// Add layer(s) from querystring
+		String cswrecordfileidentifiersparameter = httprequest.getParameter(Constants.cswRecordFileIdentifierParameterName);
+
+		if (cswrecordfileidentifiersparameter == null) {
+			cswrecordfileidentifiersparameter = httprequest.getParameter(Constants.cswRecordFileIdentifiersParameterName);
+		}
+
+		if (cswrecordfileidentifiersparameter != null && cswrecordfileidentifiersparameter.length() > 0) {
 	       	String cswurl = prefs.getValue(Constants.cswURLPreferenceName, "http://ace.geocat.net/geonetwork/") + prefs.getValue(Constants.cswCswPreferenceName, "en/csw?");
 	        	
 	       	String cswusername = prefs.getValue(Constants.cswUserNamePreferenceName, "");
@@ -62,28 +65,36 @@ if (mapviewerappid == null || mapviewerappid.length() == 0) {
 	       	String cswpassword = prefs.getValue(Constants.cswPassWordPreferenceName, "");
 	        	
 	       	try {
+		        String[] metadatarecordids = cswrecordfileidentifiersparameter.split(";");
+		        
 		   		CSW csw = new CSW(cswurl, cswusername, cswpassword);
 					
-				CSWRecord cswrecord = csw.getRecordByID(metadatarecordid);
-					
-				for (int i = 0; i < cswrecord.getDigitalTransferOptions().size(); i ++) {
-					DigitalTransferOption digitaltransferoption = cswrecord.getDigitalTransferOptions().get(i);
-					
-			       	String showmetadataurl = prefs.getValue(Constants.cswURLPreferenceName, "http://ace.geocat.net/geonetwork/") + prefs.getValue(Constants.cswShowMetadataPreferenceName, "en/metadata.show?uuid=") + metadatarecordid;
-	
-			       	if (digitaltransferoption.getProtocol().indexOf("WMS") != -1) {
-						String javascript = "var layer = new OpenLayers.Layer.WMS('" 
-							+ cswrecord.getTitle() + "', '" 
-							+ digitaltransferoption.getUrl() + "', "  
-							+ "{layers: '" + digitaltransferoption.getLayerName() + "', format: 'image/png', transparent: 'true'}, {visibility: true}, {tileOptions: {maxGetUrlLength: 2048}}, {isBaseLayer: false});";
-					
-							javascript += "layer.metadataURL = '" + showmetadataurl + "';";
+		        for (int i = 0; i < metadatarecordids.length; i ++) {
+		        	String metadatarecordid = metadatarecordids[i];
+						
+					CSWRecord cswrecord = csw.getRecordByID(metadatarecordid);
+						
+					for (int j = 0; j < cswrecord.getDigitalTransferOptions().size(); j ++) {
+						DigitalTransferOption digitaltransferoption = cswrecord.getDigitalTransferOptions().get(j);
+						
+				       	String showmetadataurl = prefs.getValue(Constants.cswURLPreferenceName, "http://ace.geocat.net/geonetwork/") + prefs.getValue(Constants.cswShowMetadataPreferenceName, "en/metadata.show?uuid=") + metadatarecordid;
+		
+				       	if (digitaltransferoption.getProtocol().indexOf("WMS") != -1) {
+							String javascript = "var layer = new OpenLayers.Layer.WMS('" 
+								+ cswrecord.getTitle() + "', '" 
+								+ digitaltransferoption.getUrl() + "', "  
+								+ "{layers: '" + digitaltransferoption.getLayerName() + "', format: 'image/png', transparent: 'true'}, {visibility: true}, {tileOptions: {maxGetUrlLength: 2048}}, {isBaseLayer: false});";
+						
+								javascript += "layer.metadataURL = '" + showmetadataurl + "';";
 								
-							javascript += "mapviewer.addLayer(layer);";
+								javascript += "layer.attribution = '" + cswrecord.getAttribution() + "';";
 								
-							out.println(javascript);
+								javascript += "mapviewer.addLayer(layer);";
+									
+								out.println(javascript);
+						}
 					}
-				}
+		        }
 	       	} catch (Exception e) {
 	       		out.println("document.getElementById('status_element').innerHTML = 'Error in communication with catalogue server: '" + e.getMessage() + ";");
 	       	}

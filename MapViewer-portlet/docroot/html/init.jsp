@@ -5,9 +5,10 @@
 <%@ page import="javax.portlet.PortletPreferences" %>
 <%@ page import="com.liferay.portal.util.PortalUtil "%>
 <%@ page import="nl.wur.alterra.cgi.ace.portlet.Constants" %>
-<%@ page import="nl.wur.alterra.cgi.ace.mapviewer.csw.CSW" %>
-<%@ page import="nl.wur.alterra.cgi.ace.mapviewer.csw.CSWRecord" %>
-<%@ page import="nl.wur.alterra.cgi.ace.mapviewer.csw.digitaltransferoption.DigitalTransferOption" %>
+<%@ page import="nl.wur.alterra.quickanddirtyows.csw.CSW" %>
+<%@ page import="nl.wur.alterra.quickanddirtyows.csw.CSWRecord" %>
+<%@ page import="nl.wur.alterra.quickanddirtyows.csw.digitaltransferoption.DigitalTransferOption" %>
+<%@ page import="nl.wur.alterra.quickanddirtyows.csw.FileIdentifiers"%>
 
 <portlet:defineObjects />
 

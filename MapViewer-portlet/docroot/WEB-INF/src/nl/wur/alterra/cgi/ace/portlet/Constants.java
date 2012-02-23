@@ -5,6 +5,14 @@ public class Constants {
 	// Parameter names used in query strings
 	public static String cswRecordFileIdentifierParameterName = "cswRecordFileIdentifier";
 	
+	public static String cswUrlParameterName = "cswUrl";
+	
+	public static String cswPasswordParameterName = "cswPassword";
+	
+	public static String cswUserNameParameterName = "cswUserName";
+	
+	public static String cswRecordFileIdentifiersParameterName = "cswRecordFileIdentifiers";
+	
 	public static String mapViewerAppIdParameterName = "mapViewerAppId";
 	
 	public static String mapViewerWmcDirectoryParameterName = "mapViewerWmcDirectory";
