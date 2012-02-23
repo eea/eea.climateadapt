@@ -17,6 +17,9 @@
 .gx-tree-layer-actions .metadata {
 	background: transparent url(../js/GeoExt/resources/images/default/metadata.png);
 }
+.gx-tree-layer-actions .abstract {
+	background: transparent url(../js/GeoExt/resources/images/default/abstract.png);
+}
 .gx-tree-layer-actions .disabled {
 	opacity: 0.2;
 }

@@ -10,9 +10,11 @@ CHM.MapViewer = OpenLayers.Class({
 	
 	statusElement: null,
 	
+	abstractElement: null,
+	
     oncreationcomplete: null, 
 	
-	initialize : function(aMapElement, aTOCElement, aStatusElement) {
+	initialize : function(aMapElement, aTOCElement, aStatusElement, aAbstractElement) {
 		Ext.namespace("GeoExt.tree");
 			    
 		mapViewerInstance = this;
@@ -22,6 +24,8 @@ CHM.MapViewer = OpenLayers.Class({
 		mapViewerInstance.tocElement = aTOCElement;
 		
 		mapViewerInstance.statusElement = aStatusElement;
+		
+		mapViewerInstance.abstractElement = aAbstractElement;
 		
 		Ext.QuickTips.init();
 
@@ -63,6 +67,18 @@ CHM.MapViewer = OpenLayers.Class({
 	                            // "this" references the tree node 
 	                            var layer = this.layer; 
 	                            if (layer.name == foregroundlayername || layer.name == backgroundlayername) { 
+	                                el.addClass('disabled'); 
+	                            } else { 
+	                                el.removeClass('disabled'); 
+	                            } 
+	                        } 
+	                    }, {
+	                        action: "abstract",
+	                        qtip: "show abstract",
+	                        update: function(el) { 
+	                            // "this" references the tree node 
+	                            var layer = this.layer; 
+	                            if (layer.metadataURL == null) { 
 	                                el.addClass('disabled'); 
 	                            } else { 
 	                                el.removeClass('disabled'); 
@@ -124,6 +140,10 @@ CHM.MapViewer = OpenLayers.Class({
 		var layer = node.layer;
 	
 		switch(action) {
+			case "abstract":
+				mapViewerInstance.showAbstract(layer);
+	
+				break;
 			case "metadata":
 				window.open(layer.metadataURL);
 	
@@ -134,6 +154,40 @@ CHM.MapViewer = OpenLayers.Class({
 				break;
 		}
 	},
+	
+	showAbstract : function (aLayer) {
+		mapViewerInstance.setStatus('downloading abstract');
+		
+		var cswurl = aLayer.metadataURL.split(showMetadata)[0] + csw;
+		
+		var fileidentifier = aLayer.metadataURL.split(showMetadata)[1];
+		
+		OpenLayers.Request.GET({
+			url: cswServletUrl,
+			callback: mapViewerInstance.getHandler,
+			params: 
+	    	{
+				cswUrl: cswurl,
+				cswPassword: cswUsername,
+	    		cswUserName: cswPassword,
+	    		cswRecordFileIdentifier: fileidentifier
+	    	}
+		});
+	},
+	
+	getHandler : function (request) {
+		if (request.status == 200) {
+			var format = new CHM.GetRecordByIdResponse();
+			
+            var obj = format.read(request.responseXML);
+            
+            mapViewerInstance.abstractElement.innerHTML = obj.abstract;
+		
+			mapViewerInstance.setStatus('abstract downloaded');
+		} else {
+			mapViewerInstance.setStatus('error downloading abstract');
+		};
+	}, 
 	
 	getOnCreationComplete : function() {
 		return mapViewerInstance.oncreationcomplete;
@@ -147,5 +201,9 @@ CHM.MapViewer = OpenLayers.Class({
 		if (mapViewerInstance.oncreationcomplete != null) {
 			mapViewerInstance.oncreationcomplete();
 		}
+	},
+		    
+    setStatus : function(aStatus) {
+    	mapViewerInstance.statusElement.innerHTML = aStatus;
 	}
 });

@@ -15,7 +15,9 @@ if (mapviewerappid == null || mapviewerappid.length() == 0) {
 
 <div id='toc_element'><h3 id="toc-title">Table of contents</h3></div>
 
-<div id='status_element'>map status</div>
+<div id='status_element'>status</div>
+
+<div id='abstract_element'>abstract</div>
 
 <script>
 	var proxyUrl = '<%= prefs.getValue(Constants.proxyUrlPreferenceName, "") %>';
@@ -34,6 +36,8 @@ if (mapviewerappid == null || mapviewerappid.length() == 0) {
 	
 	var mapViewerWmcDirectory = '<%= prefs.getValue(Constants.mapViewerWmcDirectoryPreferenceName, "/home/mapviewer") %>'; 
 	
+	var cswServletUrl = '<%= prefs.getValue(Constants.cswServletURLPreferenceName, "/MapViewer-portlet/cswservlet") %>';;
+	
 	var mapViewerAppId = '<%= mapviewerappid %>';
 
 	var foregroundlayername = "Topography";
@@ -43,7 +47,7 @@ if (mapviewerappid == null || mapviewerappid.length() == 0) {
 	var mapviewer;
 	
 	Ext.onReady(function() {
-		mapviewer = new CHM.MapViewer(document.getElementById('map_element'), document.getElementById('toc_element'), document.getElementById('status_element'));
+		mapviewer = new CHM.MapViewer(document.getElementById('map_element'), document.getElementById('toc_element'), document.getElementById('status_element'), document.getElementById('abstract_element'));
 		
 		mapviewer.setOnCreationComplete(handleMapViewerCreationComplete);
 	});

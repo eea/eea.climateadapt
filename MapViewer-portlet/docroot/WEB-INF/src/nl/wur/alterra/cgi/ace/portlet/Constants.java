@@ -22,6 +22,8 @@ public class Constants {
 	
 	public static String cswPassWordPreferenceName = "cswPassWord";
 	
+	public static String cswServletURLPreferenceName = "cswServletURL";
+	
 	public static String cswShowMetadataPreferenceName = "cswShowMetadata";
 	
 	public static String cswURLPreferenceName = "cswURL";

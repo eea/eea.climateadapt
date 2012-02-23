@@ -53,6 +53,11 @@ public class MapViewerPortlet extends MVCPortlet {
 		
 		prefs.setValue(Constants.cswPassWordPreferenceName, cswPassWord);
 
+		// CSW Servlet URL
+		String cswServletUrl = ParamUtil.getString(request, Constants.cswServletURLPreferenceName);
+		
+		prefs.setValue(Constants.cswServletURLPreferenceName, cswServletUrl);
+
 		// MapViewer Servlet URL
 		String mapViewerServletUrl = ParamUtil.getString(request, Constants.mapViewerServletURLPreferenceName);
 		
