@@ -138,7 +138,7 @@
 	 <% out.print( aceitem.getSpatialLayer().replace("_", " ")); %><br /><br />
 	 
 	 <b>Countries</b><br />
-	 <% out.print( aceitem.getSpatialValues() ); %><br /><br />
+	 <% out.print( aceitem.getSpatialValues().replace(";","; ") ); %><br /><br />
 
 <%  
 	String lastratedaceitemid = "";
