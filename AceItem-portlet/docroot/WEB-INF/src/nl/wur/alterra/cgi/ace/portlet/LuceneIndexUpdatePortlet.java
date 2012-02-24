@@ -189,6 +189,11 @@ public abstract class LuceneIndexUpdatePortlet extends MVCPortlet {
         					+ aceitem.getSpatialValues()+ " " 
         					+ aceitem.getTextwebpage() );        
 		
+        if( aceitem.getStoragetype().equalsIgnoreCase("GEONETWORK") || 
+      		aceitem.getStoragetype().equalsIgnoreCase("SETOFMAPS")) {
+        		aceitem.setTextSearch( aceitem.getTextSearch() + ' ' + aceitem.getStoragetype());
+        }
+        
 		if( ( coalesce(choosensectors).length() > 0 ) && ( choosensectors.indexOf(";")  ==  choosensectors.lastIndexOf(";") ) ) { // one sector
 				
 			aceitem.setTextSearch( aceitem.getTextSearch() + ' ' + coalesce( choosensectors.substring(0, choosensectors.indexOf(";") ) ) );
