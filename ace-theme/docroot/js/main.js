@@ -24,7 +24,13 @@ $(document).ready(function(){
     }
     
     //Add a bottom line to the search results windows on the Search and Discover page
-    $(".search-discover .resultlist:last-child").css({"border-bottom":"2px solid #d7e3ef"});    
+    $(".search-discover .resultlist:last-child").css({"border-bottom":"2px solid #d7e3ef"});
+    
+    //Set equal heights to columns on various pages
+    setEqualHeight($(".detailleft, .detailright")); //Ace detail pages
+    setEqualHeight($(".ace_layout_3 #layout-column_column-2, .ace_layout_3 #layout-column_column-3, .ace_layout_3 #layout-column_column-4")); //Sector pages
+    setEqualHeight($(".frontpage-layout #layout-column_column-4, .frontpage-layout #layout-column_column-5, .frontpage-layout #layout-column_column-6")); //frontpage
+    setEqualHeight($(".ast #layout-column_column-3, .ast #layout-column_column-4")); //AST
     
 });
 
@@ -85,3 +91,16 @@ $(document).ready(function()
 		   // Make sure it doesn't follow the link when we click it
 		   //.click(function(event) { event.preventDefault(); });
 		});
+
+function setEqualHeight(columns){  
+	var tallestcolumn = 0;  
+	columns.each(  
+		function(){  
+			currentHeight = $(this).height();  
+				if(currentHeight > tallestcolumn){  
+					tallestcolumn  = currentHeight;  
+				}  
+		}  
+	);  
+	columns.css("min-height", tallestcolumn);  
+}
