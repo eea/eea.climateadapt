@@ -22,6 +22,7 @@ import nl.wur.alterra.cgi.ace.model.AceItem;
 import nl.wur.alterra.cgi.ace.model.WxsHarvester;
 import nl.wur.alterra.cgi.ace.model.constants.HarvesterStatus;
 import nl.wur.alterra.cgi.ace.model.impl.WxsHarvesterImpl;
+import nl.wur.alterra.cgi.ace.search.lucene.ACEIndexSynchronizer;
 import nl.wur.alterra.cgi.ace.service.AceItemLocalServiceUtil;
 import nl.wur.alterra.cgi.ace.service.base.WxsHarvesterLocalServiceBaseImpl;
 
@@ -154,6 +155,7 @@ public class WxsHarvesterLocalServiceImpl extends WxsHarvesterLocalServiceBaseIm
         List<AceItem> aceItemsToDelete = AceItemLocalServiceUtil.getAceItemsByWxsharvesterId(wxsHarvester.getWxsharvesterid());
         //System.out.println("found # " + aceItemsToDelete.size() + " aceitems to delete");
         for(AceItem aceItem : aceItemsToDelete) {
+            new ACEIndexSynchronizer().delete(aceItem);
             AceItemLocalServiceUtil.deleteAceItem(aceItem);
         }
         //System.out.println("succesfully deleted aceitems for harvester " + wxsHarvester.toShortString());

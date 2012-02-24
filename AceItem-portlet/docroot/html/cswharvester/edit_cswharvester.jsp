@@ -29,11 +29,13 @@
 	String every_days = "0";
 	String every_hours = "0";
 	String every_minutes = "0";
+    String harvesterType = "";
 	
 	boolean savedToGeoNetwork = false;
 
 	if (cswHarvester != null) {
 		isoTopic = cswHarvester.getTopic();
+        harvesterType = cswHarvester.getType();
 		savedToGeoNetwork = cswHarvester.getSavedToGeoNetwork();
 		
 		int every = cswHarvester.getEvery();
@@ -60,7 +62,35 @@
 		var form = document.forms["<%= renderResponse.getNamespace() %>fm"];
 		form.action = "<%= executeCswHarvester %>";
 	}
-	
+
+    function changeCredentialsVisibility() {
+        var $j = jQuery.noConflict();
+
+        var form = document.forms["<%= renderResponse.getNamespace() %>fm"];
+
+        var harvesterType = form.elements["type"].value;
+
+        if (harvesterType == "CSW") {
+            $j("#credentials").hide();
+            $j("#iso-topic-category").show();
+            $j("#url-csw-hint").show();
+            $j("#url-geonetwork-hint").hide();
+
+            form.elements["username"].disabled = true;
+            form.elements["password"].disabled = true;
+
+            form.elements["username"].value = "";
+            form.elements["password"].value = "";
+        } else {
+            $j("#credentials").show();
+            $j("#iso-topic-category").hide();
+            $j("#url-csw-hint").hide();
+            $j("#url-geonetwork-hint").show();
+
+            form.elements["username"].disabled = false;
+            form.elements["password"].disabled = false;
+        }
+    }
 	
 	function submitFormHandler(e) {
 		var form = document.forms["<%= renderResponse.getNamespace() %>fm"];
@@ -107,7 +137,30 @@
 
 		<liferay-ui:error key="aceharvesterurl-required" message="aceharvesterurl-required" />		
 		<b><liferay-ui:message key="aceharvester-url" /></b><br />
-		<input name="url" type="text" size="120" value='<%= cswHarvester == null ? "" : cswHarvester.getUrl() %>'><br /><br />
+		<input name="url" type="text" size="120" value='<%= cswHarvester == null ? "" : cswHarvester.getUrl() %>'><br />
+        <div id="url-csw-hint">
+            <liferay-ui:message key="aceharvester-url-csw-hint" />
+        </div>
+        <div id="url-geonetwork-hint">
+            <liferay-ui:message key="aceharvester-url-geonetwork-hint" />
+        </div>
+        <br />
+
+        <b><liferay-ui:message key="aceharvester-protocol" /></b><br />
+        <c:set var="typeVal" value="<%= harvesterType %>" />
+        <select name="type" onchange="changeCredentialsVisibility()">
+            <c:choose>
+                <c:when test="${typeVal eq 'CSW'}">
+                    <option value="CSW" selected="selected">CSW</option>
+                    <option value="GN">GeoNetwork</option>
+                </c:when>
+                <c:otherwise>
+                    <option value="CSW">CSW</option>
+                    <option value="GN" selected="selected">GeoNetwork</option>
+                </c:otherwise>
+            </c:choose>
+        </select><br /><br />
+
 
         <b><liferay-ui:message key="aceharvester-freetext" /></b><br />
         <input name="freetext" type="text" size="120" value='<%= cswHarvester == null ? "" : cswHarvester.getFreetext() %>'><br /><br />
@@ -122,30 +175,40 @@
         <input name="subject" type="text" size="120" value='<%= cswHarvester == null ? "" : cswHarvester.getSubject() %>'><br /><br />
 
 
-		<b><liferay-ui:message key="aceharvester-isotopic" /></b><br />	
-		<c:set var="isoTopicVal" value="<%= isoTopic %>" />
-		
-		<select name="topic">
-			 <option value=""></option>
-			 <c:forEach var="isoTopicEl" items="<%= nl.wur.alterra.cgi.ace.model.constants.ISOTopicCategory.values() %>" >
-				<c:set var="isoTopicElMustBeChecked" value="false" />
-				
-				<c:if test="${isoTopicEl.string eq isoTopicVal}">
-					<c:set var="isoTopicElMustBeChecked" value="true" />
-				</c:if>	
-			 	
-			 	<c:choose>
-					<c:when test="${isoTopicElMustBeChecked}">
-						<option value="${isoTopicEl}" selected="selected" ><liferay-ui:message key="aceharvester-isotopic-lbl-${isoTopicEl}" /></option>
-					</c:when>
-					<c:otherwise>
-						<option value="${isoTopicEl}" ><liferay-ui:message key="aceharvester-isotopic-lbl-${isoTopicEl}" /></option>
-					</c:otherwise>
-				</c:choose>
-				
-			 </c:forEach>
-		</select><br /><br />	
-		
+        <div id="credentials">
+            <b><liferay-ui:message key="aceharvester-username" /></b><br />
+            <input name="username" id="harvester-username" type="text" size="120" value='<%= cswHarvester == null ? "" : cswHarvester.getUsername() %>'><br /><br />
+            <b><liferay-ui:message key="aceharvester-password" /></b><br />
+            <input name="password" id="harvester-password" type="password" size="120" value='<%= cswHarvester == null ? "" : cswHarvester.getPassword() %>'><br /><br />
+        </div>
+
+        <div id="iso-topic-category">
+            <b><liferay-ui:message key="aceharvester-isotopic" /></b><br />
+            <c:set var="isoTopicVal" value="<%= isoTopic %>" />
+
+            <select name="topic">
+                <option value=""></option>
+                <c:forEach var="isoTopicEl" items="<%= nl.wur.alterra.cgi.ace.model.constants.ISOTopicCategory.values() %>" >
+                    <c:set var="isoTopicElMustBeChecked" value="false" />
+
+                    <c:if test="${isoTopicEl.string eq isoTopicVal}">
+                        <c:set var="isoTopicElMustBeChecked" value="true" />
+                    </c:if>
+
+                    <c:choose>
+                        <c:when test="${isoTopicElMustBeChecked}">
+                            <option value="${isoTopicEl}" selected="selected" ><liferay-ui:message key="aceharvester-isotopic-lbl-${isoTopicEl}" /></option>
+                        </c:when>
+                        <c:otherwise>
+                            <option value="${isoTopicEl}" ><liferay-ui:message key="aceharvester-isotopic-lbl-${isoTopicEl}" /></option>
+                        </c:otherwise>
+                    </c:choose>
+
+                </c:forEach>
+            </select><br /><br />
+
+        </div>
+
         <div style="float: left; margin-right: 35px;">
             <b><liferay-ui:message key="aceharvester-every" /></b><br />
             <input name="every_days" type="text" size="5" maxlength="2" value='<%= every_days %>'> : 
@@ -166,4 +229,11 @@
 		<aui:button type="submit" />
 		<aui:button type="cancel"  onClick="<%= redirect %>" />
 	</aui:button-row>
+
+
+    <script>
+        jQuery(document).ready(function() {
+            changeCredentialsVisibility();
+        });
+    </script>
 </aui:form>

@@ -78,6 +78,10 @@ public class CSWHarvesterPortlet extends LuceneIndexUpdatePortlet {
         cswHarvester.setUrl(ParamUtil.getString(request, "url"));
         cswHarvester.setTopic(ParamUtil.getString(request, "topic"));
 
+        cswHarvester.setType(ParamUtil.getString(request, "type"));
+        cswHarvester.setUsername(ParamUtil.getString(request, "username"));
+        cswHarvester.setPassword(ParamUtil.getString(request, "password"));
+
 		return cswHarvester;
 	}
 

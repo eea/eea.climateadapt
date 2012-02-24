@@ -117,6 +117,11 @@
 		<column name="companyId" type="long" />
 		<column name="groupId" type="long" />
 
+
+        <column name="type" type="String" />  <!-- csw, geonetwork -->
+        <column name="username" type="String" />
+        <column name="password" type="String" />
+
 		<order by="asc">
 			<order-column name="name" case-sensitive="false" />
 		</order>

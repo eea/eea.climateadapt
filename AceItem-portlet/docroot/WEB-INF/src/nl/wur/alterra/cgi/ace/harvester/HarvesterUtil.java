@@ -788,6 +788,9 @@ public class HarvesterUtil {
 
 
                     }
+                } else if (!skip) {
+                    idList.add(id);
+                    //System.out.println("metadata id: " + id);
                 }
 
                 // strip searchresponse to continue searching for next metadata
@@ -920,15 +923,18 @@ public class HarvesterUtil {
         //System.out.println("applying harvesting result to AceItem table");
 
         //System.out.println("looking for metadata ids in search response before harvesting:");
-        List contentMapBefore = getMetadataContents(harvesterResultBefore, true);
+        List contentMapBefore = getMetadataContents(harvesterResultBefore, false);
 
         List<String> idsBeforeList = (List<String>)contentMapBefore.get(0);
+        Map<String, String> uuidsBeforeMap = (Map<String, String>)contentMapBefore.get(4);
+
         //System.out.println("# ids from before: " + idsBeforeList.size());
 
         //System.out.println("looking for metadata ids, titles, abstracts and keywords in search response after harvesting:");
         List contentMapAfter = getMetadataContents(harvesterResultAfter, false);
 
         List<String> idsAfterList = (List<String>)contentMapAfter.get(0);
+
         //System.out.println("# ids from after: " + idsAfterList.size());
         Map<String, String> titleMap = (Map<String, String>)contentMapAfter.get(1);
         Map<String, String> abstractMap = (Map<String, String>)contentMapAfter.get(2);
@@ -944,19 +950,24 @@ public class HarvesterUtil {
             if(!idsAfterList.contains(id)) {
                 //System.out.println("deleting AceItem with geonetwork id: " + id);
                 // delete it
-                AceItem toDelete = AceItemLocalServiceUtil.getAceItemByStoredAt(id);
+
+                //storedAt uses uuid (rev. 908,909)
+                String toDeleteUuid = uuidsBeforeMap.get(id);
+                AceItem toDelete = AceItemLocalServiceUtil.getAceItemByStoredAt(toDeleteUuid);
                 if(toDelete != null) {
                     AceItemLocalServiceUtil.deleteAceItem(toDelete);
-                    //System.out.println("finished deleting AceItem with geonetwork id: " + id);
+                    System.out.println("finished deleting AceItem with geonetwork id: " + id);
                     deleted++;
+
+                    //
+                    // re-index Lucene
+                    //
+                    aceIndexSynchronizer.delete(toDelete);
+
                 }
                 else {
                     System.out.println("WARNING: failed to delete AceItem with geonetwork id: " + id + ", it seems it does not exist");
                 }
-                //
-                // re-index Lucene
-                //
-                aceIndexSynchronizer.delete(toDelete);
             }
         }
 
@@ -965,12 +976,20 @@ public class HarvesterUtil {
             if(idsAfterList.contains(id)) {
                 //System.out.println("updating AceItem with geonetwork id: " + id);
                 // update it
-                AceItem toUpdate = AceItemLocalServiceUtil.getAceItemByStoredAt(id);
+
+                //storedAt uses uuid (rev. 908,909)
+                String toDeleteUuid = uuidMap.get(id);
+                AceItem toUpdate = AceItemLocalServiceUtil.getAceItemByStoredAt(toDeleteUuid);
                 if(toUpdate != null) {
                     toUpdate = fillAceItem(toUpdate, id, titleMap, abstractMap, keywordMap, uuidMap);
                     AceItemLocalServiceUtil.updateAceItem(toUpdate);
                     //System.out.println("finished updating AceItem with geonetwork id: " + id);
                     updated++;
+
+                    //
+                    // re-index Lucene
+                    //
+                    aceIndexSynchronizer.update(toUpdate);
                 }
                 else {
                     System.out.println("WARNING: failed to update AceItem with geonetwork id: " + id + ", it seems it does not exist. It will be created now.");
@@ -998,11 +1017,14 @@ public class HarvesterUtil {
                     AceItemLocalServiceUtil.addAceItem(aceItem);
                     //System.out.println("finished creating AceItem with geonetwork id: " + id);
                     created++;
+
+                    //
+                    // re-index Lucene
+                    //
+                    aceIndexSynchronizer.update(aceItem);
+
                 }
-                //
-                // re-index Lucene
-                //
-                aceIndexSynchronizer.update(toUpdate);
+
             }
         }
 

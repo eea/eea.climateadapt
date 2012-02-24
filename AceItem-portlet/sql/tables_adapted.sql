@@ -98,3 +98,7 @@ WITH (
   OIDS=FALSE
 );
 ALTER TABLE ace_cswharvester OWNER TO postgres;
+
+alter TABLE ace_cswharvester add column type_ character varying(10);
+alter TABLE ace_cswharvester add column  username character varying(32);
+alter TABLE ace_cswharvester add column  password_ character varying(32);

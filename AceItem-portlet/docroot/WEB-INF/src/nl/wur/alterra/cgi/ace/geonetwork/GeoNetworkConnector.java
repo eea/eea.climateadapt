@@ -9,6 +9,8 @@ import nl.wur.alterra.cgi.ace.portlet.CustomPropertiesNotInitializedException;
 import nl.wur.alterra.cgi.ace.util.HTTPUtils;
 
 import java.io.UnsupportedEncodingException;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.net.URLEncoder;
 
 /**
@@ -106,7 +108,15 @@ public class GeoNetworkConnector {
         GeoNetworkCSWHarvesterResponse loginResponse = loginForCSWHarvester(cswHarvester);
         // loginForCSWHarvester successful
         if(!loginResponse.getCSWHarvester().getStatus().equals(HarvesterStatus.GEONETWORK_LOGIN_FAILURE.name())) {
-            String xml = createCSWHarvesterAddOrUpdateRequest(cswHarvester, null);
+            String xml = "";
+            
+            if (cswHarvester.getType().equalsIgnoreCase("csw")) {
+                xml = createCSWProtocolHarvesterAddOrUpdateRequest(cswHarvester, null);
+
+            } else {
+                xml = createGeonetworkProtocolHarvesterAddOrUpdateRequest(cswHarvester, null);
+            }
+            
             System.out.println("add request:\n" + xml);
             String response = httpUtils.post(xml, GeoNetworkAddHarvesterURL);
             // TODO logout?
@@ -142,7 +152,15 @@ public class GeoNetworkConnector {
         GeoNetworkCSWHarvesterResponse loginResponse = loginForCSWHarvester(cswHarvester);
         // loginForCSWHarvester successful
         if(!loginResponse.getCSWHarvester().getStatus().equals(HarvesterStatus.GEONETWORK_LOGIN_FAILURE.name())) {
-            String xml = createCSWHarvesterAddOrUpdateRequest(cswHarvester, Long.toString(cswHarvester.getGeonetworkId()));
+            String xml = "";
+
+            if (cswHarvester.getType().equalsIgnoreCase("csw")) {
+                xml = createCSWProtocolHarvesterAddOrUpdateRequest(cswHarvester, Long.toString(cswHarvester.getGeonetworkId()));
+                
+            } else {
+                xml = createGeonetworkProtocolHarvesterAddOrUpdateRequest(cswHarvester, Long.toString(cswHarvester.getGeonetworkId()));
+            }
+
             String response;
             if(cswHarvester.getSavedToGeoNetwork() == true) {
                 response = httpUtils.post(xml, GeoNetworkUpdateHarvesterURL);
@@ -520,18 +538,20 @@ public class GeoNetworkConnector {
      * @param id GeoNetwork id (if updating, otherwise null)
      * @return add harvester request
      */
-    private String createCSWHarvesterAddOrUpdateRequest(CSWHarvester cswHarvester, String id) {
+    private String createCSWProtocolHarvesterAddOrUpdateRequest(CSWHarvester cswHarvester, String id) {
 
         String xml;
 
-        // add
-        if(id == null) {
-            xml = "<node type=\"csw\">";
-        }
-        // update
-        else {
-            xml = "<node id=\"" + id + "\" type=\"csw\">";
-        }
+            // add
+            if(id == null) {
+                xml = "<node type=\"csw\">";
+            }
+            // update
+            else {
+                xml = "<node id=\"" + id + "\" type=\"csw\">";
+            }
+
+
 
             xml += "<site>";
                 xml += "<name>" + cswHarvester.getName() + "</name>";
@@ -575,6 +595,7 @@ public class GeoNetworkConnector {
                     if(cswHarvester.getSubject() != null && cswHarvester.getSubject().length() > 0 ){
                         xml += "<subject>" + cswHarvester.getSubject() + "</subject>";
                     }
+
                     xml += "</search>";
                 }
             xml += "</searches>";
@@ -611,6 +632,117 @@ public class GeoNetworkConnector {
     }
 
 
+    /**
+     * Creates a harvester using GeoNetwork protocol
+     * @param cswHarvester
+     * @param id
+     * @return
+     */
+    private String createGeonetworkProtocolHarvesterAddOrUpdateRequest(CSWHarvester cswHarvester, String id) {
+        String xml;
+
+        // add
+        if(id == null) {
+            xml = "<node type=\"geonetwork\">";
+        }
+        // update
+        else {
+            xml = "<node id=\"" + id + "\" type=\"geonetwork\">";
+        }
+
+
+        xml += "<site>";
+        xml += "<name>" + cswHarvester.getName() + "</name>";
+
+
+        // Add credentials
+        if (!cswHarvester.getUsername().equals("")) {
+            xml += "<account>";
+            xml += "<use>true</use>";
+            xml += "<username>" + cswHarvester.getUsername() + "</username>";
+            xml += "<password>" + cswHarvester.getPassword() + "</password>";
+            xml += "</account>";
+        } else {
+            xml += "<useAccount><use>false</use><username /><password /></useAccount>";
+        }
+
+
+        String url = cswHarvester.getUrl();
+        try {
+            URL aURL = new URL(url);
+
+            xml += "<host>" + aURL.getHost() + "</host>";
+            xml += "<port>" + ((aURL.getPort() == -1)?80:aURL.getPort()) + "</port>";
+            xml += "<servlet>" + aURL.getPath().replaceFirst("/", "") + "</servlet>";
+        }
+        catch (MalformedURLException x) {
+            System.err.println(x.getMessage());
+            x.printStackTrace();
+            // TODO should not swallow this. But not likely it'll happen
+        }
+
+        xml += "<icon>default.gif</icon>";
+        xml += "</site>";
+
+
+
+        xml += "<content>";
+        xml += "<validate>false</validate>";
+        xml += "<importxslt>none</importxslt>";
+        xml += "</content>";
+
+        xml += "<searches>";
+        // if any of the search fields is not empty, create a search element
+        if( (cswHarvester.getFreetext() != null && cswHarvester.getFreetext().length() > 0) ||
+                (cswHarvester.getTitle() != null && cswHarvester.getTitle().length() > 0 ) ||
+                (cswHarvester.getAbstrakt() != null && cswHarvester.getAbstrakt().length() > 0 ) ||
+                (cswHarvester.getSubject() != null && cswHarvester.getSubject().length() > 0 ) ) {
+            xml += "<search>";
+            if(cswHarvester.getFreetext() != null && cswHarvester.getFreetext().length() > 0 ){
+                xml += "<freeText>" + cswHarvester.getFreetext() + "</freeText>";
+            }
+            if(cswHarvester.getTitle() != null && cswHarvester.getTitle().length() > 0 ){
+                xml += "<title>" + cswHarvester.getTitle() + "</title>";
+            }
+            if(cswHarvester.getAbstrakt() != null && cswHarvester.getAbstrakt().length() > 0 ){
+                xml += "<abstract>" + cswHarvester.getAbstrakt() + "</abstract>";
+            }
+            if(cswHarvester.getSubject() != null && cswHarvester.getSubject().length() > 0 ){
+                    xml += "<keywords>" + cswHarvester.getSubject() + "</keywords>";
+            }
+
+            xml += "<digital>false</digital>";
+            xml += "<hardcopy>false</hardcopy>";
+
+            xml += "</search>";
+        }
+        xml += "</searches>";
+
+        xml += "<options>";
+        // GeoNetwork cannot handle period of 0
+        if(cswHarvester.getEvery() != 0) {
+            xml += "<every>" + cswHarvester.getEvery() + "</every>";
+        }
+        xml += "<oneRunOnly>true</oneRunOnly>";
+        xml += "<lang>eng</lang>";
+        xml += "</options>";
+
+        xml += "<privileges>";
+        xml += "<group id=\"1\">";
+        xml += "<operation name=\"view\" />";
+        xml += "<operation name=\"dynamic\" />";
+        xml += "<operation name=\"featured\" />";
+        xml += "</group>";
+        xml += "</privileges>";
+
+        xml += "<categories>";
+        xml += "<category id=\"3\" />";
+        xml += "</categories>";
+
+        xml += "</node>";
+
+        return xml;
+    }
 
     //
     // WxSHarvester methods
