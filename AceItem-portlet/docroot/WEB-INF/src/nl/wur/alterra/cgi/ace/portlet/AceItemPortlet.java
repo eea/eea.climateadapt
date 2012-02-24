@@ -52,7 +52,7 @@ public class AceItemPortlet extends LuceneIndexUpdatePortlet {
 	 */
 	public void updateAceItem(ActionRequest request, ActionResponse response) throws Exception {
 		AceItem aceitem = AceItemLocalServiceUtil.getAceItem(ParamUtil.getLong(request, "aceItemId"));
-		System.out.println("ReplacesId: " + aceitem.getReplacesId());
+		//System.out.println("ReplacesId: " + aceitem.getReplacesId());
 		// retain old and new status
 		Short oldapproved = aceitem.getControlstatus();
 		Short newapproved = 0;
@@ -124,7 +124,7 @@ public class AceItemPortlet extends LuceneIndexUpdatePortlet {
 				AceItemLocalServiceUtil.updateAceItem(aceitem);
 			}
 			
-			// delete the aceitem
+			// delete the aceitem by saved Id (aceitem itself may be the old one here)
 			AceItemLocalServiceUtil.deleteAceItem(aceitemId);
 
 			SessionMessages.add(request, "aceitem-deleted");

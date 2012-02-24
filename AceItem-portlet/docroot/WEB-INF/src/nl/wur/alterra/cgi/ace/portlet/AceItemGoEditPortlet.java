@@ -10,6 +10,9 @@ import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
 import javax.servlet.http.HttpServletRequest;
 
+import nl.wur.alterra.cgi.ace.model.AceItem;
+import nl.wur.alterra.cgi.ace.service.AceItemLocalServiceUtil;
+
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.util.bridges.mvc.MVCPortlet;
@@ -26,8 +29,19 @@ public class AceItemGoEditPortlet extends MVCPortlet {
     	HttpServletRequest httpRequest = 
     		PortalUtil.getOriginalServletRequest(
     		PortalUtil.getHttpServletRequest(renderRequest) ) ;
-
-		renderRequest.setAttribute(Constants.ACEITEMID, httpRequest.getParameter(Constants.ACEITEMID));
+		
+		try {
+			AceItem aceitem = AceItemLocalServiceUtil.getAceItem( Long.parseLong(httpRequest.getParameter(Constants.ACEITEMID) ) ) ;
+			
+			if(aceitem.getReplacesId() != aceitem.getAceItemId()) { 
+				// there is no candidate item for this item: edit is permitted
+				renderRequest.setAttribute(Constants.ACEITEMID, httpRequest.getParameter(Constants.ACEITEMID));
+			}
+		}
+		catch (Exception e) {
+			System.out.println(e.getMessage()) ;
+			e.printStackTrace(System.out) ;
+		} 
     		
         include(viewJSP, renderRequest, renderResponse);
     }
