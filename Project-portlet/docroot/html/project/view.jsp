@@ -110,11 +110,17 @@
 			name="elements"
 			value="<%= elements %>"
 		/>
-
+<%
+			if(project.getReplacesId() !=  project.getProjectId()) {
+			// Only editable if not gets replaced
+%>
 		<liferay-ui:search-container-column-jsp
 			align="right"
 			path="/html/project/project_actions.jsp"
 		/>
+<%			
+	  }
+%> 		
 	</liferay-ui:search-container-row>
 
 	<liferay-ui:search-iterator />

@@ -18,7 +18,6 @@
 
 <%@include file="/html/init.jsp" %>
 
-
 <%
 	Long project_id = 0l ;
 	Project project = null;
@@ -106,6 +105,7 @@
 	 
 	 </div>
 	 <div class="detailright">
+	 <div class="detailrightinner">
 	 <b>Keywords</b><br />
 	 <% out.print( project.getKeywords()); %><br /><br />	 
 	 <b>Sectors</b><br />
@@ -139,8 +139,6 @@
 	 
 	 <b>Countries</b><br />
 	 <% out.print( project.getSpatialvalues().replace(";","; ") ); %><br /><br />
-	 </div>
-
 <%  
 	String lastratedprojectid = "";
 
@@ -172,11 +170,13 @@
 	 &nbsp;&nbsp;<br />	
 	 </div>
 <%	 } %>
+	 </div>
+	</div>
   </div>
 <%	}
   else {%>      
    <div class="portlet-title">
- 		<H1>No available project selected</H1>
+ 		<H6>No available project selected</H6>
     </div>
 <% } 
 	%> 
