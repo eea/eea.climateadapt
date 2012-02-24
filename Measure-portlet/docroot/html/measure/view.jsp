@@ -120,11 +120,17 @@
 			name="type" orderable="<%= true %>" orderableProperty="type" 
 			value="<%= type %>"
 		/>
-
+<%
+			if(measure.getReplacesId() !=  measure.getMeasureId()) {
+			// Only editable if no candidate item exists for this measure
+%>
 		<liferay-ui:search-container-column-jsp
 			align="right"
 			path="/html/measure/measure_actions.jsp"
 		/>
+<%			
+	  }
+%> 		
 	</liferay-ui:search-container-row>
 
 	<liferay-ui:search-iterator />

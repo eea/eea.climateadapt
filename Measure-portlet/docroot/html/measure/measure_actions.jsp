@@ -22,6 +22,10 @@ String redirect = PortalUtil.getCurrentURL(renderRequest);
 	
 	<liferay-ui:icon image="edit" url="<%=editURL.toString() %>" />
 
+<% if (renderRequest.isUserInRole("administrator") || 
+		( renderRequest.isUserInRole("power-user") && (measure.getControlstatus() == 0) ) ) { // || renderRequest.isUserInRole("portal-content-reviewer") ) { 
+	    // if approved only administrator can delete; otherwise also power user can delete %>
+
     <!--  PERFORM PORTLET ACTION deleteMeasure AT CHOICE delete -->
 	<portlet:actionURL name="deleteMeasure" var="deleteURL">
 		<portlet:param name="measureId" value="<%= String.valueOf(measureId) %>" />
@@ -32,5 +36,5 @@ String redirect = PortalUtil.getCurrentURL(renderRequest);
 String confirmURL = "Javascript: if(confirm('Delete?')){document.location.replace('" + deleteURL.toString() + "')};";
 %>
 	<liferay-ui:icon image="delete" url="<%= confirmURL %>" />		
-
+<% } %>	
 <!--  Commented out: no Actons button: /liferay-ui:icon-menu -->

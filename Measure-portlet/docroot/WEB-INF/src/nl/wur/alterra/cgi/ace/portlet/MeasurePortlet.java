@@ -20,8 +20,6 @@ import nl.wur.alterra.cgi.ace.search.lucene.ACEIndexSynchronizer;
 import nl.wur.alterra.cgi.ace.service.AceItemLocalServiceUtil;
 import nl.wur.alterra.cgi.ace.service.MeasureLocalServiceUtil;
 
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.servlet.SessionMessages;
 import com.liferay.portal.kernel.util.ParamUtil;
@@ -245,21 +243,54 @@ public class MeasurePortlet extends MVCPortlet {
 	 */
 	public void updateMeasure(ActionRequest request, ActionResponse response)
 		throws Exception {
+		
+		AceItem aceitem = null;
 
 		Measure measure = MeasureLocalServiceUtil.getMeasure(ParamUtil.getLong(request, "measureId"));
+		
+		// retain old and new status
+		Short oldapproved = measure.getControlstatus();
+		Short newapproved = 0;
+		String approved = ParamUtil.getString(request, "chk_controlstatus");
+		if( (approved != null ) && (approved.length()>0) ) {
+			
+			newapproved = Short.parseShort(approved);
+		}
+		if ( (oldapproved == 1) &&  (newapproved == 0) ) { 
+		// The old record stays untouched, only replacesId gets filled (from now no edit or delete possible anymore)
+			measure.setReplacesId( measure.getMeasureId() ) ;
+			// Must be done BEFORE measureFromRequest();
+			MeasureLocalServiceUtil.updateMeasure(measure);
+		}
 		
 		measureFromRequest(request, measure);
 
 		ArrayList<String> errors = new ArrayList<String>();
 
 		if (MeasureValidator.validateMeasure(measure, errors)) {
-						
-			MeasureLocalServiceUtil.updateMeasure(measure);
-
-			AceItem aceitem = AceItemLocalServiceUtil.getAceItemByStoredAt("ace_measure_id=" + measure.getMeasureId());
-			
-			
-			updateAceItem(measure, aceitem);
+		
+			if ( (oldapproved == 1) &&  (newapproved == 0) ) { 
+     			// The changed item gets added as a copy with replacesId filled (is already done above)
+				// save the new copy: simple addMeasure
+				MeasureLocalServiceUtil.addMeasure(measure);
+				// automatically gets a new measureid;
+			}
+			else {
+				
+				if ( (newapproved == 1)  && measure.getReplacesId() != 0) {
+					// delete the old measure which gets replaced, update the corresponding aceitem
+					aceitem = AceItemLocalServiceUtil.getAceItemByStoredAt("ace_measure_id=" + measure.getReplacesId() );
+					aceitem.setStoredAt("ace_measure_id=" + measure.getMeasureId());
+					MeasureLocalServiceUtil.deleteMeasure(measure.getReplacesId());
+					measure.setReplacesId( (long) 0);	
+				}
+				else {
+					aceitem = AceItemLocalServiceUtil.getAceItemByStoredAt("ace_measure_id=" + measure.getMeasureId());
+				}
+				
+				MeasureLocalServiceUtil.updateMeasure(measure);
+				updateAceItem(measure, aceitem);
+			}			
 			
 			SessionMessages.add(request, "measure-updated");
 			
@@ -276,7 +307,6 @@ public class MeasurePortlet extends MVCPortlet {
 		}
 	}
 
-
 	/**
 	 * Deletes a measure from the database.
 	 *
@@ -288,13 +318,24 @@ public class MeasurePortlet extends MVCPortlet {
 
 		if (Validator.isNotNull(measureId)) {
 			
-			AceItem aceitem = AceItemLocalServiceUtil.getAceItemByStoredAt("ace_measure_id=" + measureId);
+			Measure measure = MeasureLocalServiceUtil.getMeasure(measureId);
+ 
+			if(measure.getReplacesId() != 0) {
+				// Candidate gets deleted: the already approved measure gets editable again
+					measure = MeasureLocalServiceUtil.getMeasure( measure.getReplacesId() );
+					measure.setReplacesId( (long) 0);
+					MeasureLocalServiceUtil.updateMeasure(measure);
+			}
+			else {
+				// get the associated aceitem
+				AceItem aceitem = AceItemLocalServiceUtil.getAceItemByStoredAt("ace_measure_id=" + measureId);
+				// delete the aceitem index entry
+				new ACEIndexSynchronizer().delete(aceitem);			
+				// delete the aceitem
+				AceItemLocalServiceUtil.deleteAceItem(aceitem.getAceItemId());					
+			}
 			
-			// delete the aceitem index entry
-			new ACEIndexSynchronizer().delete(aceitem);			
-			// delete the aceitem
-			AceItemLocalServiceUtil.deleteAceItem(aceitem.getAceItemId());			
-			
+			// delete the measure by saved Id (measure itself may be the old one here)				
 			MeasureLocalServiceUtil.deleteMeasure(measureId);
 
 			SessionMessages.add(request, "measure-deleted");
@@ -318,7 +359,7 @@ public class MeasurePortlet extends MVCPortlet {
 	}
 	
 	/**
-	 * Update the corresponding AceItem when updating a Project.
+	 * Update the corresponding AceItem when updating a Measure.
 	 *
 	 */
 	private void updateAceItem(Measure measure, AceItem aceitem) throws Exception {

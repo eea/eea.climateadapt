@@ -132,7 +132,8 @@
 	 <% out.print( measure.getSource() ); %><br /><br />
 	 
 	 </div>
-	 <div class="detailright">	 
+	 <div class="detailright">
+	 <div class="detailrightinner">
 	
 	 <b>Keywords</b><br />
 	 <% out.print( measure.getKeywords()); %><br /><br />
@@ -167,8 +168,7 @@
 	 <% out.print( measure.getSpatiallayer().replace("_", " ") ); %><br /><br />
 	 
 	 <b>Countries</b><br />
-	 <% out.print( measure.getSpatialvalues() ); %><br /><br />
-	 </div>
+	 <% out.print( measure.getSpatialvalues().replace(";","; ") ); %><br /><br />
 <%  
 	String lastratedmeasureid = "";
 
@@ -200,11 +200,13 @@
 	 &nbsp;&nbsp;<br />	
 	 </div>
 <%	 } %>
+	 </div>
+	</div>
   </div>
 <%	}
-  else {%>      
+  else {%>     
    <div class="portlet-title">
- 		<H1>No available measure selected</H1>
+ 		<H6>No available measure selected</H6>
     </div>
 <% } 
 	%> 
