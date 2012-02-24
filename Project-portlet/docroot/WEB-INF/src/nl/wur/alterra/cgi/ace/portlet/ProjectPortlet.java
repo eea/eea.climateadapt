@@ -264,8 +264,6 @@ public class ProjectPortlet extends MVCPortlet {
 				
 				if ( (newapproved == 1)  && project.getReplacesId() != 0) {
 					// delete the old project which gets replaced, update the corresponding aceitem
-					//Project oldproject = ProjectLocalServiceUtil.getProject(project.getReplacesId());
-					//new ACEIndexSynchronizer().delete(oldproject);
 					aceitem = AceItemLocalServiceUtil.getAceItemByStoredAt("ace_project_id=" + project.getReplacesId() );
 					aceitem.setStoredAt("ace_project_id=" + project.getProjectId());
 					ProjectLocalServiceUtil.deleteProject(project.getReplacesId());
@@ -309,7 +307,7 @@ public class ProjectPortlet extends MVCPortlet {
 			Project project = ProjectLocalServiceUtil.getProject(projectId);
 			
 			if(project.getReplacesId() != 0) {
-				// Reset the already approved project from the item that should be replaced
+				// Candidate gets deleted: the already approved project gets editable again
 					project = ProjectLocalServiceUtil.getProject( project.getReplacesId() );
 					project.setReplacesId( (long) 0);
 					ProjectLocalServiceUtil.updateProject(project);

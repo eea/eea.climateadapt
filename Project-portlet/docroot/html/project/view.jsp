@@ -112,7 +112,7 @@
 		/>
 <%
 			if(project.getReplacesId() !=  project.getProjectId()) {
-			// Only editable if not gets replaced
+			// Only editable if no candidate item exists for this project
 %>
 		<liferay-ui:search-container-column-jsp
 			align="right"

@@ -9,7 +9,10 @@ import javax.portlet.PortletPreferences;
 import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
 import javax.servlet.http.HttpServletRequest;
+import nl.wur.alterra.cgi.ace.model.Project;
+import nl.wur.alterra.cgi.ace.service.ProjectLocalServiceUtil;
 
+import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.util.bridges.mvc.MVCPortlet;
@@ -26,8 +29,22 @@ public class ProjectGoEditPortlet extends MVCPortlet {
     	HttpServletRequest httpRequest = 
     		PortalUtil.getOriginalServletRequest(
     		PortalUtil.getHttpServletRequest(renderRequest) ) ;
-
-    	renderRequest.setAttribute(Constants.PROJECTID, httpRequest.getParameter("ace_project_id"));
+    	
+    	if( httpRequest.getParameter("ace_project_id") != null ) {
+    		try {
+    			Project project = ProjectLocalServiceUtil.getProject( Long.parseLong(httpRequest.getParameter("ace_project_id") ) ) ;
+    			
+    			if(project.getReplacesId() != project.getProjectId()) { 
+    			// there is no candidate item for this item: edit is permitted
+        	    	renderRequest.setAttribute(Constants.PROJECTID, httpRequest.getParameter("ace_project_id"));
+    			}
+    		}
+    		catch (Exception e) {
+    			System.out.println(e.getMessage()) ;
+    			e.printStackTrace(System.out) ;
+    		}
+    	}
+    	
     		
         include(viewJSP, renderRequest, renderResponse);
     }
