@@ -17,7 +17,9 @@ if (mapviewerappid == null || mapviewerappid.length() == 0) {
 
 <div id='status_element'>status</div>
 
-<div id='abstract_element'>abstract</div>
+<div id="abstract_element">
+	<div id="abstract_tabs_element"></div>
+</div>
 
 <script>
 	var proxyUrl = '<%= prefs.getValue(Constants.proxyUrlPreferenceName, "") %>';
@@ -47,7 +49,13 @@ if (mapviewerappid == null || mapviewerappid.length() == 0) {
 	var mapviewer;
 	
 	Ext.onReady(function() {
-		mapviewer = new CHM.MapViewer(document.getElementById('map_element'), document.getElementById('toc_element'), document.getElementById('status_element'), document.getElementById('abstract_element'));
+		mapviewer = new CHM.MapViewer(
+				document.getElementById('map_element'), 
+				document.getElementById('toc_element'), 
+				document.getElementById('status_element'), 
+				document.getElementById('abstract_element'), 
+				document.getElementById('abstract_tabs_element') 
+			);
 		
 		mapviewer.setOnCreationComplete(handleMapViewerCreationComplete);
 	});

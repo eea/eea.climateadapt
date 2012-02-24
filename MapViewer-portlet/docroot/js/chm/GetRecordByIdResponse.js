@@ -97,31 +97,41 @@ CHM.GetRecordByIdResponse = OpenLayers.Class(OpenLayers.Format.XML, {
      * {Array} List of named layers.
      */
     read: function(data) {
-        if(typeof data == "string") { 
+        if (typeof data == "string") { 
             data = OpenLayers.Format.XML.prototype.read.apply(this, [data]);
         }
-        if(data && data.nodeType == 9) {
+        
+        if (data && data.nodeType == 9) {
             data = data.documentElement;
         }
-        var obj = {};
-        this.readNode(data, obj);
-        return obj;
+        
+        var metadata = {};
+        
+        this.readNode(data, metadata);
+        
+        return metadata;
     },
     
     /**
      * Method: runChildNodes
      */
-    readNode: function(node, obj) {
+    readNode: function(node, metadata) {
         var children = node.childNodes;
+
         var childNode, processor, prefix, local;
-        for(var i=0, len=children.length; i<len; ++i) {
+
+        for (var i = 0, len = children.length; i < len; ++ i) {
             childNode = children[i];
-            if(childNode.nodeType == 1) {
+
+            if (childNode.nodeType == 1) {
                 prefix = this.getNamespacePrefix(childNode.namespaceURI);
+
                 local = childNode.nodeName.split(":").pop();
+
                 processor = this["read_" + prefix + "_" + local];
-                if(processor) {
-                    processor.apply(this, [childNode, obj]);
+
+                if (processor) {
+                    processor.apply(this, [childNode, metadata]);
                 }
             }
         }
@@ -130,28 +140,55 @@ CHM.GetRecordByIdResponse = OpenLayers.Class(OpenLayers.Format.XML, {
     /**
      * Method: read_wmc_General 
      */
-    read_gmd_MD_Metadata: function(node, obj) {
-        this.readNode(node, obj);
+    read_gmd_MD_Metadata: function(node, metadata) {
+        this.readNode(node, metadata);
     },
     
-    read_gmd_identificationInfo: function(node, obj) {
-        this.readNode(node, obj);
+    read_gmd_identificationInfo: function(node, metadata) {
+        this.readNode(node, metadata);
     },
     
-    read_gmd_MD_DataIdentification: function(node, obj) {
-        this.readNode(node, obj);
+    read_gmd_MD_DataIdentification: function(node, metadata) {
+        this.readNode(node, metadata);
     },
     
-    read_gmd_abstract: function(node, obj) {
+    read_gmd_citation: function(node, metadata) {
+        this.readNode(node, metadata);
+    },
+    
+    read_gmd_CI_Citation: function(node, metadata) {
+        this.readNode(node, metadata);
+    },
+    
+    read_gmd_fileIdentifier: function(node, metadata) {
+    	metadata.fileIdentifier = this.readString(node);
+    }, 
+    
+    read_gmd_title: function(node, metadata) {
+    	metadata.title = this.readString(node);
+    },
+    
+    read_gmd_abstract: function(node, metadata) {
+    	metadata.abstractText = this.readString(node);
+    },
+    
+    readString: function(node) {
+    	var result = "";
+    	
         var children = node.childNodes;
+
         var childNode;
-        for(var i=0, len=children.length; i<len; ++i) {
+
+        for(var i = 0, len = children.length; i < len; ++ i) {
             childNode = children[i];
-            if(childNode.nodeType == 1) {
-                obj.abstract = this.getChildValue(childNode);
+            
+            if (childNode.nodeType == 1) {
+                result = this.getChildValue(childNode);
             }
         }
-    },
+        
+        return result;
+    }, 
 
     /**
      * Method: read_wmc_BoundingBox

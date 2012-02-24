@@ -12,9 +12,15 @@ CHM.MapViewer = OpenLayers.Class({
 	
 	abstractElement: null,
 	
+	abstractTabsElement: null, 
+	
+	abstractWindow: null,
+	
+	abstractTabPanel: null,
+	
     oncreationcomplete: null, 
 	
-	initialize : function(aMapElement, aTOCElement, aStatusElement, aAbstractElement) {
+	initialize : function(aMapElement, aTOCElement, aStatusElement, aAbstractElement, aAbstractTabsElement) {
 		Ext.namespace("GeoExt.tree");
 			    
 		mapViewerInstance = this;
@@ -27,7 +33,11 @@ CHM.MapViewer = OpenLayers.Class({
 		
 		mapViewerInstance.abstractElement = aAbstractElement;
 		
+		mapViewerInstance.abstractTabsElement = aAbstractTabsElement;
+		
 		Ext.QuickTips.init();
+		
+		mapViewerInstance.createWindow();
 
 		mapViewerInstance.map = new CHM.MapViewerCHMMap();
 				
@@ -162,32 +172,76 @@ CHM.MapViewer = OpenLayers.Class({
 		
 		var fileidentifier = aLayer.metadataURL.split(showMetadata)[1];
 		
-		OpenLayers.Request.GET({
-			url: cswServletUrl,
-			callback: mapViewerInstance.getHandler,
-			params: 
-	    	{
-				cswUrl: cswurl,
-				cswPassword: cswUsername,
-	    		cswUserName: cswPassword,
-	    		cswRecordFileIdentifier: fileidentifier
-	    	}
-		});
+		if (mapViewerInstance.abstractWindow != null) {
+			mapViewerInstance.abstractWindow.show();
+		}
+		
+		var tab = mapViewerInstance.abstractTabPanel.getItem(fileidentifier);
+		
+		if (tab != null) {
+			mapViewerInstance.abstractTabPanel.setActiveTab(fileidentifier);
+		} else {
+			OpenLayers.Request.GET({
+				url: cswServletUrl,
+				callback: mapViewerInstance.getHandler,
+				params: 
+		    	{
+					cswUrl: cswurl,
+					cswPassword: cswUsername,
+		    		cswUserName: cswPassword,
+		    		cswRecordFileIdentifier: fileidentifier
+		    	}
+			});
+		}
 	},
 	
 	getHandler : function (request) {
 		if (request.status == 200) {
 			var format = new CHM.GetRecordByIdResponse();
 			
-            var obj = format.read(request.responseXML);
+            var metadata = format.read(request.responseXML);
             
-            mapViewerInstance.abstractElement.innerHTML = obj.abstract;
+            mapViewerInstance.abstractTabPanel.add({
+            	title: metadata.title,
+            	html: '<h1>' + metadata.title + '</h1><p>' + metadata.abstractText + '</p>',
+    	        closable: true,
+    	        id: metadata.fileIdentifier
+	        }).show();
 		
 			mapViewerInstance.setStatus('abstract downloaded');
 		} else {
 			mapViewerInstance.setStatus('error downloading abstract');
 		};
-	}, 
+	},
+	
+	createWindow : function() {
+		mapViewerInstance.abstractTabPanel = new Ext.TabPanel({
+           	applyTo: mapViewerInstance.abstractTabsElement,
+            autoTabs: true,
+            activeTab: 0,
+            enableTabScroll: true,
+            deferredRender: false,
+            border: false
+        });
+           
+        mapViewerInstance.abstractWindow = new Ext.Window({
+            applyTo: mapViewerInstance.abstractElement,
+            layout: 'fit',
+            width: 500,
+            height: 300,
+            closeAction: 'hide',
+            plain: true,
+            items: mapViewerInstance.abstractTabPanel,
+            buttons: [
+            	{
+            		text: 'Close', 
+            		handler: function() {
+            			mapViewerInstance.abstractWindow.hide();
+            		}
+            	}
+            ]
+        });
+	},
 	
 	getOnCreationComplete : function() {
 		return mapViewerInstance.oncreationcomplete;
