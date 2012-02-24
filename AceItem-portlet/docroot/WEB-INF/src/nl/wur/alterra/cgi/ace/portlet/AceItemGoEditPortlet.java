@@ -29,19 +29,21 @@ public class AceItemGoEditPortlet extends MVCPortlet {
     	HttpServletRequest httpRequest = 
     		PortalUtil.getOriginalServletRequest(
     		PortalUtil.getHttpServletRequest(renderRequest) ) ;
-		
-		try {
-			AceItem aceitem = AceItemLocalServiceUtil.getAceItem( Long.parseLong(httpRequest.getParameter(Constants.ACEITEMID) ) ) ;
-			
-			if(aceitem.getReplacesId() != aceitem.getAceItemId()) { 
-				// there is no candidate item for this item: edit is permitted
-				renderRequest.setAttribute(Constants.ACEITEMID, httpRequest.getParameter(Constants.ACEITEMID));
+    	
+    	if( httpRequest.getParameter(Constants.ACEITEMID) != null ) {		
+			try {
+				AceItem aceitem = AceItemLocalServiceUtil.getAceItem( Long.parseLong(httpRequest.getParameter(Constants.ACEITEMID) ) ) ;
+				
+				if(aceitem.getReplacesId() != aceitem.getAceItemId()) { 
+					// there is no candidate item for this item: edit is permitted
+					renderRequest.setAttribute(Constants.ACEITEMID, httpRequest.getParameter(Constants.ACEITEMID));
+				}
 			}
-		}
-		catch (Exception e) {
-			System.out.println(e.getMessage()) ;
-			e.printStackTrace(System.out) ;
-		} 
+			catch (Exception e) {
+				System.out.println(e.getMessage()) ;
+				e.printStackTrace(System.out) ;
+			} 
+    	}
     		
         include(viewJSP, renderRequest, renderResponse);
     }
