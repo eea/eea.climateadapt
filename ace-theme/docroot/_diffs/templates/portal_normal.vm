@@ -43,7 +43,6 @@
 						<li id="signin"><a href="$sign_in_url" id="sign-in" rel="nofollow">$sign_in_text</a></li>
 					#end
                     <li id="twitter"><a href="http://twitter.com/euenvironment" target="_blank">Twitter</a></li>
-                    <li id="rss"><a href="/web/guest/home/-/journal/rss/14403?doAsGroupId=18&refererPlid=13750&_15_groupId=18" target="_blank">RSS</a></li>
 					<li id="glossary"><a href="/glossary">Glossary</a></li>
 					<li id="contact"><a href="/contact">Contact</a></li>
 					<li id="sitemap"><a href="/sitemap">Sitemap</a></li>
@@ -54,10 +53,7 @@
             
             <div id="searchbox">
             	<p id="search-title">Search the website</p>
-            	#set ($instanceId = "0oHV")
-				#set ($myPortletId = "simplesearchportlet_WAR_AceSearchportlet_INSTANCE_${instanceId}")
-				$taglibLiferay.runtime($myPortletId, '', $velocityPortletPreferences.toString())
-				$velocityPortletPreferences.reset()
+            	<span>$theme.search()</span>
 			</div>
 
 			<h2 class="community-title">

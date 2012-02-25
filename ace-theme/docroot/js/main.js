@@ -2,9 +2,8 @@
 
 $(document).ready(function(){
 	
-	//Temporarily disable the search box in the header
-	$("#searchbox #searchtext_top").attr('disabled', true);
-	$('#searchbox .portlet-content img').attr('onclick','').unbind('click');
+	//New image for search button in the header
+	$('#searchbox input[type="image"]').attr('src', "/AceSearch-portlet/images/vergrootglas.png");
 	
 	//Several classes for the main menu
 	$("ul li:first-child").addClass("first");

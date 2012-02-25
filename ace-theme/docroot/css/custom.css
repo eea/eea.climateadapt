@@ -522,17 +522,21 @@ ul#subnav li a:hover {
 	padding: 1px 0 2px 20px;
 }
 
-#header-menu li#rss a {
-	background: url("/ace-theme/images/rss.png") no-repeat;
-	padding: 0 0 2px 20px;
-}
-
 /**** Search box in header ****/
 
 #searchbox {
 	position: absolute;
 	right: 10px;
-	top: 50px;
+	top: 49px;
+}
+
+#searchbox span{
+	float: left;
+}
+
+#searchbox input[type="text"] {
+	height: 10px;
+	margin-right: 2px;
 }
 
 #search-title {
@@ -541,33 +545,12 @@ ul#subnav li a:hover {
 	padding: 4px 10px 0 0;
 }
 
-#searchbox #searchtext_top {
-	height: 10px;
-}
-
-#p_p_id_simplesearchportlet_WAR_AceSearchportlet_INSTANCE_0oHV_ {
-	float: left;
-}
-
-#searchbox .portlet-topper {
-	display: none;
-}
-
 .ie7 #searchbox {
 	top: 65px;
 }
 
 #searchbox select {
 	display: none;
-}
-
-#searchbox .portlet-content img {
-	position: relative;
-	top: 4px;
-}
-
-#searchbox .portlet-content img:hover {
-	/*cursor: pointer;*/
 }
 
 /**** Second level menu ****/
@@ -641,9 +624,9 @@ ul#subnav li a:hover {
 	float: right;
 }
 
-.ace_layout_1 #layout-column_column-3,
-.ace_layout_1 #layout-column_column-4,
-.ace_layout_1 #layout-column_column-5,
+.faq #layout-column_column-2,
+.faq #layout-column_column-3,
+.faq #layout-column_column-4,
 .ace_layout_2 #layout-column_column-2,
 .ace_layout_2 #layout-column_column-3,
 .ace_layout_3 #layout-column_column-2,
@@ -652,17 +635,8 @@ ul#subnav li a:hover {
 	padding: 0 15px;
 }
 
-.ace_layout_1 #layout-column_column-5 {
-	padding: 0 15px;
-}
-
-.ace_layout_1 #layout-column_column-3,
-.ace_layout_3 #layout-column_column-2 {
-	
-}
-
-.ace_layout_1 #layout-column_column-4,
-.ace_layout_1 #layout-column_column-5,
+.faq #layout-column_column-3,
+.faq #layout-column_column-4,
 .ace_layout_2 #layout-column_column-3,
 .ace_layout_3 #layout-column_column-3,
 .ace_layout_3 #layout-column_column-4,
@@ -1113,7 +1087,7 @@ ul#subnav li a:hover {
 .frontpage-layout #layout-column_column-4,
 .frontpage-layout #layout-column_column-5,
 .frontpage-layout #layout-column_column-6 {
-	padding: 0 17px;
+	padding: 0 16px;
 }
 
 .frontpage-layout #speedbutton-left, 
@@ -1792,6 +1766,10 @@ necessary to add the class sector-main-article to the
 main article and the class transnational-search to
 the search column.
 ****/
+.transnationalregion {
+	background: url("../images/bg_sector_main_article_text.png") repeat-y scroll 5% center transparent;
+}
+
 .transnational-search {
 	background-color: #D2DF92;
 	margin-top: 15px;
@@ -1807,8 +1785,11 @@ the search column.
 	width: 145px;
 }
 
+.transnationalregion #layout-column_column-1 {
+     padding: 20px
+}
+
 .transnationalregion #column-2 {
-	background: url("../images/bg_sector_main_article_text.png") repeat-y scroll 5% center transparent;
 	padding: 15px;
 }
 
@@ -1819,6 +1800,10 @@ the search column.
 
 .transnationalregion #column-2 .title {
 	font-size:13px
+}
+
+.transnat-region-middle {
+	padding-right: 100px;
 }
 
 .transnationalregion #assessments {
@@ -1868,6 +1853,20 @@ the search column.
 .transnationalregion .ui-corner-all {
 	border-bottom-left-radius: 0px;
 	border-bottom-right-radius: 0px;
+}
+
+.transnationalregion #tabs-5 th {
+    background: none;
+}
+
+.transnationalregion #tabs-5 th, 
+.transnationalregion #tabs-5 td {
+    padding: 7px 14px;
+}
+
+.transnationalregion #weblinks ul {
+	margin-top: 0;
+	margin-left:15px
 }
 
 /**** Styling of the map viewer 
