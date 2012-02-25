@@ -3,11 +3,6 @@
 
 <layout-templates>
 	<custom>
-		<layout-template id="ace_layout_1" name="Ace Layout 1">
-			<template-path>/ace_layout_1.tpl</template-path>
-			<wap-template-path>/ace_layout_1.wap.tpl</wap-template-path>
-			<thumbnail-path>/ace_layout_1.png</thumbnail-path>
-		</layout-template>
 		<layout-template id="ace_layout_2" name="Ace Layout 2">
 			<template-path>/ace_layout_2.tpl</template-path>
 			<wap-template-path>/ace_layout_2.wap.tpl</wap-template-path>
@@ -40,6 +35,11 @@
 			<template-path>/frontpage.tpl</template-path>
 			<wap-template-path>/frontpage.wap.tpl</wap-template-path>
 			<thumbnail-path>/frontpage.png</thumbnail-path>
+		</layout-template>
+		<layout-template id="faq" name="FAQ">
+			<template-path>/faq.tpl</template-path>
+			<wap-template-path>/faq.wap.tpl</wap-template-path>
+			<thumbnail-path>/faq.png</thumbnail-path>
 		</layout-template>
 	</custom>
 </layout-templates>
