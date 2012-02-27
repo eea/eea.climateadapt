@@ -23,7 +23,6 @@ import nl.wur.alterra.cgi.ace.service.MeasureLocalServiceUtil;
 import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.servlet.SessionMessages;
 import com.liferay.portal.kernel.util.ParamUtil;
-import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.util.WebKeys;
 import com.liferay.portal.model.User;
 import com.liferay.portal.service.UserServiceUtil;
@@ -32,9 +31,10 @@ import com.liferay.portal.util.PortalUtil;
 import com.liferay.util.bridges.mvc.MVCPortlet;
 
 /**
- * Portlet implementation class MeasurePortlet
+ * Portlet implementation class ShareInfoPortlet
  */
-public class MeasurePortlet extends MVCPortlet {
+public class ShareInfoPortlet extends MVCPortlet {
+	 
 	 
 	/**
 	 * Adds a new measure to the database
@@ -74,9 +74,10 @@ public class MeasurePortlet extends MVCPortlet {
 
 			PortalUtil.copyRequestParameters(request, response);
 
-			response.setRenderParameter("jspPage", "/html/measure/edit_measure.jsp");
+			response.setRenderParameter("jspPage", "/html/addcasestudy/view.jsp");
 		}
 	}
+
 
 	/**
 	 * Convenience method to   F I L L   a Measure object out of the request. Used
@@ -227,126 +228,29 @@ public class MeasurePortlet extends MVCPortlet {
 		else {
 			measure.setControlstatus( Short.parseShort(approved));
 		}
+
+		if(ParamUtil.getString(request, "lon") != null) {
+			try {
+				measure.setLon(Double.parseDouble(ParamUtil.getString(request, "lon")));
+			}
+			catch (NumberFormatException e) {
+				// do nothing
+			}
+		}
 		
 		if(ParamUtil.getString(request, "lat") != null) {
-			measure.setLat(Double.parseDouble(ParamUtil.getString(request, "lat")));
+			try {
+				measure.setLon(Double.parseDouble(ParamUtil.getString(request, "lat")));
+			}
+			catch (NumberFormatException e) {
+				// do nothing
+			}
 		}
-		if(ParamUtil.getString(request, "lon") != null) {
-			measure.setLon(Double.parseDouble(ParamUtil.getString(request, "lon")));
-		}
+		
 		measure.setSatarea(ParamUtil.getString(request, "satarea"));
 	}
 
-	/**
-	 * Updates the database record of an existing measure.
-	 *
-	 */
-	public void updateMeasure(ActionRequest request, ActionResponse response)
-		throws Exception {
-		
-		AceItem aceitem = null;
-
-		Measure measure = MeasureLocalServiceUtil.getMeasure(ParamUtil.getLong(request, "measureId"));
-		
-		// retain old and new status
-		Short oldapproved = measure.getControlstatus();
-		Short newapproved = 0;
-		String approved = ParamUtil.getString(request, "chk_controlstatus");
-		if( (approved != null ) && (approved.length()>0) ) {
-			
-			newapproved = Short.parseShort(approved);
-		}
-		if ( (oldapproved == 1) &&  (newapproved == 0) ) { 
-		// The old record stays untouched, only replacesId gets filled (from now no edit or delete possible anymore)
-			measure.setReplacesId( measure.getMeasureId() ) ;
-			// Must be done BEFORE measureFromRequest();
-			MeasureLocalServiceUtil.updateMeasure(measure);
-		}
-		
-		measureFromRequest(request, measure);
-
-		ArrayList<String> errors = new ArrayList<String>();
-
-		if (MeasureValidator.validateMeasure(measure, errors)) {
-		
-			if ( (oldapproved == 1) &&  (newapproved == 0) ) { 
-     			// The changed item gets added as a copy with replacesId filled (is already done above)
-				// save the new copy: simple addMeasure
-				MeasureLocalServiceUtil.addMeasure(measure);
-				// automatically gets a new measureid;
-			}
-			else {
-				
-				if ( (newapproved == 1)  && measure.getReplacesId() != 0) {
-					// delete the old measure which gets replaced, update the corresponding aceitem
-					aceitem = AceItemLocalServiceUtil.getAceItemByStoredAt("ace_measure_id=" + measure.getReplacesId() );
-					aceitem.setStoredAt("ace_measure_id=" + measure.getMeasureId());
-					MeasureLocalServiceUtil.deleteMeasure(measure.getReplacesId());
-					measure.setReplacesId( (long) 0);	
-				}
-				else {
-					aceitem = AceItemLocalServiceUtil.getAceItemByStoredAt("ace_measure_id=" + measure.getMeasureId());
-				}
-				
-				MeasureLocalServiceUtil.updateMeasure(measure);
-				updateAceItem(measure, aceitem);
-			}			
-			
-			SessionMessages.add(request, "measure-updated");
-			
-			sendRedirect(request, response);
-		}
-		else {
-			for (String error : errors) {
-				SessionErrors.add(request, error);
-			}
-
-			PortalUtil.copyRequestParameters(request, response);
-
-			response.setRenderParameter("jspPage", "/html/measure/edit_measure.jsp");
-		}
-	}
-
-	/**
-	 * Deletes a measure from the database.
-	 *
-	 */
-	public void deleteMeasure(ActionRequest request, ActionResponse response)
-		throws Exception {
-
-		long measureId = ParamUtil.getLong(request, "measureId");
-
-		if (Validator.isNotNull(measureId)) {
-			
-			Measure measure = MeasureLocalServiceUtil.getMeasure(measureId);
- 
-			if(measure.getReplacesId() != 0) {
-				// Candidate gets deleted: the already approved measure gets editable again
-					measure = MeasureLocalServiceUtil.getMeasure( measure.getReplacesId() );
-					measure.setReplacesId( (long) 0);
-					MeasureLocalServiceUtil.updateMeasure(measure);
-			}
-			else {
-				// get the associated aceitem
-				AceItem aceitem = AceItemLocalServiceUtil.getAceItemByStoredAt("ace_measure_id=" + measureId);
-				// delete the aceitem index entry
-				new ACEIndexSynchronizer().delete(aceitem);			
-				// delete the aceitem
-				AceItemLocalServiceUtil.deleteAceItem(aceitem.getAceItemId());					
-			}
-			
-			// delete the measure by saved Id (measure itself may be the old one here)				
-			MeasureLocalServiceUtil.deleteMeasure(measureId);
-
-			SessionMessages.add(request, "measure-deleted");
-
-			sendRedirect(request, response);
-		}
-		else {
-			SessionErrors.add(request, "error-deleting");
-		}
-	}
-
+	
 	private String coalesce(String aString) {
 		String result = "";
 		
@@ -456,19 +360,10 @@ public class MeasurePortlet extends MVCPortlet {
 	 * Sets the preferences for how measures can be ordered
 	 *
 	 */
-	public void setMeasurePref(ActionRequest request, ActionResponse response)
+	public void setAddCaseStudyPref(ActionRequest request, ActionResponse response)
 		throws Exception {
-		String rowsPerPage = ParamUtil.getString(request, "rowsPerPage");
+
 		PortletPreferences prefs = request.getPreferences();
-		prefs.setValue("rowsPerPage", rowsPerPage);
-		
-		String orderByCol = ParamUtil.getString(request, Constants.ORDERBYCOL);
-
-		prefs.setValue(Constants.ORDERBYCOL, orderByCol);
-
-		String orderByType = ParamUtil.getString(request, Constants.ORDERBYTYPE);
-
-		prefs.setValue(Constants.ORDERBYTYPE, orderByType);
 
 		String proxyUrl = ParamUtil.getString(request, Constants.proxyUrlPreferenceName);
 

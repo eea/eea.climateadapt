@@ -177,4 +177,44 @@
 			<role-name>user</role-name>
 		</security-role-ref>
 	</portlet>
+	<portlet>
+		<portlet-name>shareinfoportlet</portlet-name>
+		<display-name>ShareInfoPortlet</display-name>
+		<portlet-class>
+			nl.wur.alterra.cgi.ace.portlet.ShareInfoPortlet
+		</portlet-class>
+		<init-param>
+			<name>view-jsp</name>
+			<value>/html/shareinfo/view.jsp</value>
+		</init-param>
+		<init-param>
+			<name>edit-jsp</name>
+			<value>/html/shareinfo/edit.jsp</value>
+		</init-param>
+		<expiration-cache>0</expiration-cache>
+		<supports>
+			<mime-type>text/html</mime-type>
+			<portlet-mode>VIEW</portlet-mode>
+			<portlet-mode>EDIT</portlet-mode>
+		</supports>
+		<!-- Resource Bundle -->
+		<resource-bundle>content.Language</resource-bundle>
+		<portlet-info>
+			<title>ShareInfoPortlet</title>
+			<short-title>ShareInfoPortlet</short-title>
+			<keywords></keywords>
+		</portlet-info>
+		<security-role-ref>
+			<role-name>administrator</role-name>
+		</security-role-ref>
+		<security-role-ref>
+			<role-name>guest</role-name>
+		</security-role-ref>
+		<security-role-ref>
+			<role-name>power-user</role-name>
+		</security-role-ref>
+		<security-role-ref>
+			<role-name>user</role-name>
+		</security-role-ref>
+	</portlet>
 </portlet-app>

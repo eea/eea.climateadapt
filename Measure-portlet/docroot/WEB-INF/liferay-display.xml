@@ -10,5 +10,7 @@
 		<portlet id="backportlet"></portlet>
 		<portlet id="measuredetailportlet"></portlet>
 		<portlet id="measuregoeditportlet"></portlet>
+		<portlet id="addcasestudyportlet"></portlet>
+		<portlet id="shareinfoportlet"></portlet>
 	</category>
 </display>

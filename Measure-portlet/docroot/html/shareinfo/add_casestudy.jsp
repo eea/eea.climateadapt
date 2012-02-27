@@ -3,12 +3,6 @@
 <%
 	Measure measure = null;
 
-	long measureId = ParamUtil.getLong(request, "measureId");
-	
-	if (measureId > 0) {
-		measure = MeasureLocalServiceUtil.getMeasure(measureId);
-	}
-
 	String redirect = ParamUtil.getString(request, "redirect");
 %>
 		<script type="text/javascript"> 
@@ -16,17 +10,7 @@
 		jQuery(document).ready(function() {
 
 			var $j = jQuery.noConflict();	
-
-		    $j("#mao_m").click(function() {
-			       $j("#locationselection").removeClass("toggleshow");
-			       $j("#locationselection").addClass("togglehide");
-		    });
-		    
-		    $j("#mao_a").click(function() {	
-			       $j("#locationselection").removeClass("togglehide");
-			       $j("#locationselection").addClass("toggleshow");
-		    });
-		    
+   
 		    $j("#all_countries").click(function() {
 			<% 
 				nl.wur.alterra.cgi.ace.model.constants.AceItemCountry[] country = nl.wur.alterra.cgi.ace.model.constants.AceItemCountry.values();
@@ -50,7 +34,7 @@
 
 <liferay-ui:header
 	backURL="<%= redirect %>"
-	title='<%= (measure != null) ? measure.getName() : "new-measure" %>'
+	title='<%= (measure != null) ? measure.getName() : "Add a case study" %>'
 />
 
 
@@ -60,12 +44,15 @@
 
 <aui:form action="<%= editMeasureURL %>" method="POST" name="fm">
 	<aui:fieldset>
+		
+		<aui:input type="hidden" name="mao_type" value="A" />
+	
 		<aui:input type="hidden" name="redirect" value="<%= redirect %>" />
 
 		<aui:input type="hidden" name="measureId" value='<%= measure == null ? "" : measure.getMeasureId() %>'/>
 
 		<liferay-ui:error key="measurename-required" message="measurename-required" />
-		<b>name</b><br />	
+		<b>name</b> <i>(required)</i><br />	
 		<input name="name" type="text" size="120" value="<%= measure == null ? "" : measure.getName() %>"><br /><br />
 
 		<b>website</b><br />	
@@ -169,63 +156,16 @@
 		</c:forEach>
        <br />
        
-		<!-- b>Implementationtype</b><br />	
-		<select name="implementationtype">	
-		<option value="" >Unknown</option>	
-< % 		String help = "";
-		if (measure!=null && measure.getImplementationtype().equalsIgnoreCase("grey"))	{
-			help = "selected" ;
-		} % >
-
-			<option value="grey" < %= help %> >Technical ('grey')</option>
-< %		help="";
-		if (measure!=null && measure.getImplementationtype().equalsIgnoreCase("green"))	{
-			help = "selected" ;
-		} %>			
-			<option value="green" < %= help %> >Ecological ('green')</option>
-< %		help="";
-		if (measure!=null && measure.getImplementationtype().equalsIgnoreCase("soft"))	{
-			help = "selected" ;
-		} %>			
-			<option value="soft" < %= help %> >Behavioural / policy ('soft')</option>			
-		</select -->
-				
 		<aui:input name="implementationtime" />
 		
 		<aui:input name="lifetime" />
 
 		<b>Source</b><br />
-		<input name="source" type="text" size="65" value='<%= measure == null ? "" : measure.getSource() %>'><br /><br />
-		
-		<b>special tagging</b><br />	
-		<input name="specialtagging" type="text" size="65" maxlength="75" value="<%= measure == null ? "" : measure.getSpecialtagging() %>"><br /><br />
-		
-		<b>Geographic characterisation</b><br />	
+		<input name="source" type="text" size="65" value='<%= measure == null ? "" : measure.getSource() %>'><br /><br />		
+		<b>Geographical characterisation</b><br />	
 		<input name="spatiallayer" type="text" size="65" value='<%= measure == null ? "" : measure.getSpatiallayer() %>'><br /><br />
 
-<%
-		String m_checked = "";
-		String a_checked = "";
-		String toggleclass = "togglehide";
-		
-		if(measure != null && measure.getMao_type().equalsIgnoreCase("M") ) {
-			m_checked = "checked";
-		}
-		else {
-			a_checked = "checked";
-			toggleclass = "toggleshow";
-		}
-%>
-		<b>Type</b><br />
-		<input id="mao_m" name="mao_type" type="radio" value="M" <%= m_checked %>>Adaptation option&nbsp;&nbsp;&nbsp;
-		<input id="mao_a" name="mao_type" type="radio" value="A" <%= a_checked %>>Case study<br /><br />
-		
-		<!--  a u i :input name="startdate" / >
-		
-		< a u  i:input name="enddate" / >
-		
-		< a u i  :input name="publicationdate" / -->
-	<div id="locationselection" class="<%= toggleclass %>">	
+	<div id="locationselection" class="toggleshow">	
 		<div id="locator">
 			<input type="text" name="location" id="location" />
 			<a onclick="locate(document.getElementById('location').value)">Locate</a>
@@ -244,7 +184,7 @@
 		<a onclick="handleClick(event)">Apply</a><br /><br />
 		
 		<b>bio-geographical region</b><br />	
-		<input name="satarea" type="text" size="50" value='<%= measure == null ? "" : measure.getSatarea() %>'>
+		<input name="satarea" type="text" size="50" value='<%= measure == null ? "" : measure.getSatarea() %>' disabled="disabled">
 	  </div>
  
 	 </div>	
@@ -289,16 +229,6 @@
 	
     <b>Comments about this database item <i>[information entered below will not be displayed on the public pages of the clearinghouse]</i></b><br />	
 	<textarea style="border-color: blue; border-style: solid; border-width: thin;" name="comments" rows=10 cols=150><%= measure == null ? "" : measure.getComments() %></textarea><br /><br />
-
-	<input type="checkbox" name="chk_importance" id="chk_importance" value="1" <% if ((measure != null) && (measure.getImportance() == 1) ) { out.print( "checked" ) ; } %> />
-	<b>High importance</b>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 
-
-<% if (renderRequest.isUserInRole("administrator") ) { // || renderRequest.isUserInRole("power-user")) { %>
-	<input type="checkbox" name="chk_controlstatus" id="chk_controlstatus" value="1" <% // if ((measure != null) && ( measure.getControlstatus() == 1) ) { out.print( "checked" ) ; } %> />
-	<b>Reviewed</b>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 
-<% } %>	
-	<b>Edited by: <% if (measure != null) { out.print( measure.getModerator() ) ; } %> </b>	
- 	<br />
 	
 	<aui:button-row>
 		<aui:button type="submit" />

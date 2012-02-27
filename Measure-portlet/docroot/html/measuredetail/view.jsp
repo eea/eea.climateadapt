@@ -107,8 +107,8 @@
 	 <b>Contact</b><br />
 	 <% out.print( measure.getContact() ); %><br /><br />	 
 	 
-	 <b>Implementationtype</b><br />
-	 <% out.print( implementationtype ); %><br /><br />
+	 <!-- b>Implementationtype</b><br />
+	 < % out.print( implementationtype ); %><br /><br / -->
 	 
 	 <b>Implementationtime</b><br />
 	 <% out.print( measure.getImplementationtime() ); %><br /><br />
