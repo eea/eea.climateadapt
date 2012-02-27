@@ -92,7 +92,7 @@
 
 	 <div class="detailcontainer">
 	 <div class="detailheader">
-	 <span class="portlet-title"><H6><% out.print( measure.getName() ); %> (<%= type %>)</H6>
+	 <span class="portlet-title"><H6><% out.print( measure.getName() ); %> (<%= type %>)</H6></span>
 	 </div>
 	 	 
 	 <div class="detailleft">	 
