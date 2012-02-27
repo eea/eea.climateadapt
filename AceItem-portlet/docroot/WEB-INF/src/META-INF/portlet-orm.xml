@@ -90,6 +90,13 @@
 			<basic name="geonetworkUUID" />
 			<basic name="companyId" />
 			<basic name="groupId" />
+			<basic name="type">
+				<column name="TYPE_" />
+			</basic>
+			<basic name="username" />
+			<basic name="password">
+				<column name="PASSWORD_" />
+			</basic>
 			<transient name="primaryKey" />
 		</attributes>
 	</mapped-superclass>

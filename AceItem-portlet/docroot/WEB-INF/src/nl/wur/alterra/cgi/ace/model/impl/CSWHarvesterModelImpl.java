@@ -68,9 +68,12 @@ public class CSWHarvesterModelImpl extends BaseModelImpl<CSWHarvester>
 			{ "geonetworkId", new Integer(Types.BIGINT) },
 			{ "geonetworkUUID", new Integer(Types.VARCHAR) },
 			{ "companyId", new Integer(Types.BIGINT) },
-			{ "groupId", new Integer(Types.BIGINT) }
+			{ "groupId", new Integer(Types.BIGINT) },
+			{ "type_", new Integer(Types.VARCHAR) },
+			{ "username", new Integer(Types.VARCHAR) },
+			{ "password_", new Integer(Types.VARCHAR) }
 		};
-	public static final String TABLE_SQL_CREATE = "create table Ace_CSWHarvester (cswharvesterid LONG not null primary key,name VARCHAR(75) null,url VARCHAR(75) null,freetext VARCHAR(75) null,title VARCHAR(75) null,abstrakt VARCHAR(75) null,subject VARCHAR(75) null,every INTEGER,topic VARCHAR(75) null,status VARCHAR(75) null,savedToGeoNetwork BOOLEAN,geonetworkId LONG,geonetworkUUID VARCHAR(75) null,companyId LONG,groupId LONG)";
+	public static final String TABLE_SQL_CREATE = "create table Ace_CSWHarvester (cswharvesterid LONG not null primary key,name VARCHAR(75) null,url VARCHAR(75) null,freetext VARCHAR(75) null,title VARCHAR(75) null,abstrakt VARCHAR(75) null,subject VARCHAR(75) null,every INTEGER,topic VARCHAR(75) null,status VARCHAR(75) null,savedToGeoNetwork BOOLEAN,geonetworkId LONG,geonetworkUUID VARCHAR(75) null,companyId LONG,groupId LONG,type_ VARCHAR(75) null,username VARCHAR(75) null,password_ VARCHAR(75) null)";
 	public static final String TABLE_SQL_DROP = "drop table Ace_CSWHarvester";
 	public static final String ORDER_BY_JPQL = " ORDER BY cswHarvester.name ASC";
 	public static final String ORDER_BY_SQL = " ORDER BY Ace_CSWHarvester.name ASC";
@@ -270,6 +273,45 @@ public class CSWHarvesterModelImpl extends BaseModelImpl<CSWHarvester>
 		_groupId = groupId;
 	}
 
+	public String getType() {
+		if (_type == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _type;
+		}
+	}
+
+	public void setType(String type) {
+		_type = type;
+	}
+
+	public String getUsername() {
+		if (_username == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _username;
+		}
+	}
+
+	public void setUsername(String username) {
+		_username = username;
+	}
+
+	public String getPassword() {
+		if (_password == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _password;
+		}
+	}
+
+	public void setPassword(String password) {
+		_password = password;
+	}
+
 	public CSWHarvester toEscapedModel() {
 		if (isEscapedModel()) {
 			return (CSWHarvester)this;
@@ -312,6 +354,9 @@ public class CSWHarvesterModelImpl extends BaseModelImpl<CSWHarvester>
 		clone.setGeonetworkUUID(getGeonetworkUUID());
 		clone.setCompanyId(getCompanyId());
 		clone.setGroupId(getGroupId());
+		clone.setType(getType());
+		clone.setUsername(getUsername());
+		clone.setPassword(getPassword());
 
 		return clone;
 	}
@@ -358,7 +403,7 @@ public class CSWHarvesterModelImpl extends BaseModelImpl<CSWHarvester>
 	}
 
 	public String toString() {
-		StringBundler sb = new StringBundler(31);
+		StringBundler sb = new StringBundler(37);
 
 		sb.append("{cswharvesterid=");
 		sb.append(getCswharvesterid());
@@ -390,13 +435,19 @@ public class CSWHarvesterModelImpl extends BaseModelImpl<CSWHarvester>
 		sb.append(getCompanyId());
 		sb.append(", groupId=");
 		sb.append(getGroupId());
+		sb.append(", type=");
+		sb.append(getType());
+		sb.append(", username=");
+		sb.append(getUsername());
+		sb.append(", password=");
+		sb.append(getPassword());
 		sb.append("}");
 
 		return sb.toString();
 	}
 
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(49);
+		StringBundler sb = new StringBundler(58);
 
 		sb.append("<model><model-name>");
 		sb.append("nl.wur.alterra.cgi.ace.model.CSWHarvester");
@@ -462,6 +513,18 @@ public class CSWHarvesterModelImpl extends BaseModelImpl<CSWHarvester>
 			"<column><column-name>groupId</column-name><column-value><![CDATA[");
 		sb.append(getGroupId());
 		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>type</column-name><column-value><![CDATA[");
+		sb.append(getType());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>username</column-name><column-value><![CDATA[");
+		sb.append(getUsername());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>password</column-name><column-value><![CDATA[");
+		sb.append(getPassword());
+		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");
 
@@ -483,5 +546,8 @@ public class CSWHarvesterModelImpl extends BaseModelImpl<CSWHarvester>
 	private String _geonetworkUUID;
 	private long _companyId;
 	private long _groupId;
+	private String _type;
+	private String _username;
+	private String _password;
 	private transient ExpandoBridge _expandoBridge;
 }

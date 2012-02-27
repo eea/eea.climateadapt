@@ -67,5 +67,8 @@
 		<field name="geonetworkUUID" type="String" />
 		<field name="companyId" type="long" />
 		<field name="groupId" type="long" />
+		<field name="type" type="String" />
+		<field name="username" type="String" />
+		<field name="password" type="String" />
 	</model>
 </model-hints>

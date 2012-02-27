@@ -304,6 +304,9 @@ public class CSWHarvesterPersistenceImpl extends BasePersistenceImpl<CSWHarveste
 		cswHarvesterImpl.setGeonetworkUUID(cswHarvester.getGeonetworkUUID());
 		cswHarvesterImpl.setCompanyId(cswHarvester.getCompanyId());
 		cswHarvesterImpl.setGroupId(cswHarvester.getGroupId());
+		cswHarvesterImpl.setType(cswHarvester.getType());
+		cswHarvesterImpl.setUsername(cswHarvester.getUsername());
+		cswHarvesterImpl.setPassword(cswHarvester.getPassword());
 
 		return cswHarvesterImpl;
 	}
