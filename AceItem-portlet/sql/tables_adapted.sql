@@ -92,13 +92,12 @@ CREATE TABLE ace_cswharvester
   geonetworkuuid character varying(75),
   companyid bigint,
   groupid bigint,
+  type_ character varying(75),
+  username character varying(75),
+  password_ character varying(75),
   CONSTRAINT ace_cswharvester_pkey PRIMARY KEY (cswharvesterid)
 )
 WITH (
   OIDS=FALSE
 );
 ALTER TABLE ace_cswharvester OWNER TO postgres;
-
-alter TABLE ace_cswharvester add column type_ character varying(10);
-alter TABLE ace_cswharvester add column  username character varying(32);
-alter TABLE ace_cswharvester add column  password_ character varying(32);
