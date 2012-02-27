@@ -281,6 +281,51 @@ public interface CSWHarvesterModel extends BaseModel<CSWHarvester> {
 	public void setGroupId(long groupId);
 
 	/**
+	 * Gets the type of this c s w harvester.
+	 *
+	 * @return the type of this c s w harvester
+	 */
+	@AutoEscape
+	public String getType();
+
+	/**
+	 * Sets the type of this c s w harvester.
+	 *
+	 * @param type the type of this c s w harvester
+	 */
+	public void setType(String type);
+
+	/**
+	 * Gets the username of this c s w harvester.
+	 *
+	 * @return the username of this c s w harvester
+	 */
+	@AutoEscape
+	public String getUsername();
+
+	/**
+	 * Sets the username of this c s w harvester.
+	 *
+	 * @param username the username of this c s w harvester
+	 */
+	public void setUsername(String username);
+
+	/**
+	 * Gets the password of this c s w harvester.
+	 *
+	 * @return the password of this c s w harvester
+	 */
+	@AutoEscape
+	public String getPassword();
+
+	/**
+	 * Sets the password of this c s w harvester.
+	 *
+	 * @param password the password of this c s w harvester
+	 */
+	public void setPassword(String password);
+
+	/**
 	 * Gets a copy of this c s w harvester as an escaped model instance by wrapping it with an {@link com.liferay.portal.kernel.bean.AutoEscapeBeanHandler}.
 	 *
 	 * @return the escaped model instance

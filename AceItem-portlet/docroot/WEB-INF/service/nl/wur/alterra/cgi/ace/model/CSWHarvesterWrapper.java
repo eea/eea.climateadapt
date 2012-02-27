@@ -160,6 +160,30 @@ public class CSWHarvesterWrapper implements CSWHarvester {
 		_cswHarvester.setGroupId(groupId);
 	}
 
+	public java.lang.String getType() {
+		return _cswHarvester.getType();
+	}
+
+	public void setType(java.lang.String type) {
+		_cswHarvester.setType(type);
+	}
+
+	public java.lang.String getUsername() {
+		return _cswHarvester.getUsername();
+	}
+
+	public void setUsername(java.lang.String username) {
+		_cswHarvester.setUsername(username);
+	}
+
+	public java.lang.String getPassword() {
+		return _cswHarvester.getPassword();
+	}
+
+	public void setPassword(java.lang.String password) {
+		_cswHarvester.setPassword(password);
+	}
+
 	public nl.wur.alterra.cgi.ace.model.CSWHarvester toEscapedModel() {
 		return _cswHarvester.toEscapedModel();
 	}
