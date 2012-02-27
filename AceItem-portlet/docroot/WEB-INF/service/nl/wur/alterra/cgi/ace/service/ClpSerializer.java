@@ -537,6 +537,27 @@ public class ClpSerializer {
 
 					method14.invoke(newModel, value14);
 
+					Method method15 = newModelClass.getMethod("setType",
+							new Class[] { String.class });
+
+					String value15 = oldCplModel.getType();
+
+					method15.invoke(newModel, value15);
+
+					Method method16 = newModelClass.getMethod("setUsername",
+							new Class[] { String.class });
+
+					String value16 = oldCplModel.getUsername();
+
+					method16.invoke(newModel, value16);
+
+					Method method17 = newModelClass.getMethod("setPassword",
+							new Class[] { String.class });
+
+					String value17 = oldCplModel.getPassword();
+
+					method17.invoke(newModel, value17);
+
 					return newModel;
 				}
 				catch (Exception e) {
@@ -1067,6 +1088,27 @@ public class ClpSerializer {
 							(Object[])null);
 
 					newModel.setGroupId(value14);
+
+					Method method15 = oldModelClass.getMethod("getType");
+
+					String value15 = (String)method15.invoke(oldModel,
+							(Object[])null);
+
+					newModel.setType(value15);
+
+					Method method16 = oldModelClass.getMethod("getUsername");
+
+					String value16 = (String)method16.invoke(oldModel,
+							(Object[])null);
+
+					newModel.setUsername(value16);
+
+					Method method17 = oldModelClass.getMethod("getPassword");
+
+					String value17 = (String)method17.invoke(oldModel,
+							(Object[])null);
+
+					newModel.setPassword(value17);
 
 					return newModel;
 				}
