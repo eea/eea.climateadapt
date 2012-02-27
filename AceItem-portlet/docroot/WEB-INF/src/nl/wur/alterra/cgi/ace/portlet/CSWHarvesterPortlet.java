@@ -36,7 +36,7 @@ public class CSWHarvesterPortlet extends LuceneIndexUpdatePortlet {
 	 */
 	public void addCSWHarvester(ActionRequest request, ActionResponse response) throws Exception {
 
-        System.out.println("CSWHARVESTERPORTLET addCSWHarvester ");
+        //System.out.println("CSWHARVESTERPORTLET addCSWHarvester ");
         CSWHarvester cswHarvester = new CSWHarvesterImpl();
 		cswHarvester.setCswharvesterid(ParamUtil.getLong(request, "cswharvesterid"));
 		cswHarvesterFromRequest(request, cswHarvester);
