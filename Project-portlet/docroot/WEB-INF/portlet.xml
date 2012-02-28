@@ -145,4 +145,39 @@
 			<role-name>user</role-name>
 		</security-role-ref>
 	</portlet>
+	<portlet>
+		<portlet-name>shareprojectportlet</portlet-name>
+		<display-name>ShareProjectPortlet</display-name>
+		<portlet-class>
+			nl.wur.alterra.cgi.ace.portlet.ShareProjectPortlet
+		</portlet-class>
+		<init-param>
+			<name>view-jsp</name>
+			<value>/html/shareinfo/view.jsp</value>
+		</init-param>
+		<expiration-cache>0</expiration-cache>
+		<supports>
+			<mime-type>text/html</mime-type>
+			<portlet-mode>VIEW</portlet-mode>
+		</supports>
+		<!-- Resource Bundle -->
+		<resource-bundle>content.Language</resource-bundle>
+		<portlet-info>
+			<title>ShareProjectPortlet</title>
+			<short-title>ShareProjectPortlet</short-title>
+			<keywords></keywords>
+		</portlet-info>
+		<security-role-ref>
+			<role-name>administrator</role-name>
+		</security-role-ref>
+		<security-role-ref>
+			<role-name>guest</role-name>
+		</security-role-ref>
+		<security-role-ref>
+			<role-name>power-user</role-name>
+		</security-role-ref>
+		<security-role-ref>
+			<role-name>user</role-name>
+		</security-role-ref>
+	</portlet>
 </portlet-app>

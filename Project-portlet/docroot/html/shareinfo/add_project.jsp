@@ -2,6 +2,12 @@
 <%@include file="/html/init.jsp" %>
 
 <%
+
+   if ( ! renderRequest.isUserInRole("user") ) { // || renderRequest.isUserInRole("portal-content-reviewer") ) { 
+	    // if approved only administrator can delete; otherwise also power user can delete %>
+		Please sign in (at the upper right menu bar) to add a research / knowledge project. 
+<% }	    
+   else {
 	Project project = null;
 
 	long projectId = ParamUtil.getLong(request, "projectId");
@@ -34,7 +40,7 @@
 </script>
 <liferay-ui:header
 	backURL="<%= redirect %>"
-	title='<%= (project != null) ? project.getAcronym() : "new-project" %>'
+	title='Add a research / knowledge project'
 />
 
 
@@ -50,18 +56,19 @@
 
 		<aui:input type="hidden" name="projectId" value='<%= project == null ? "" : project.getProjectId() %>'/>
 
-
 		<liferay-ui:error key="projectacronym-required" message="projectacronym-required" />		
-		<aui:input name="acronym"  />
+		<b>acronym</b> <i>(required)</i><br />	
+		<input name="acronym" type="text" size="70" value="<%= project == null ? "" : project.getAcronym() %>"><br /><br />
+
 		
 		<liferay-ui:error key="projecttitle-required" message="projecttitle-required" />
 
 	  <div style="float: left; margin-right: 35px;">
-		<b>title</b><br />	
+		<b>title</b> <i>(required)</i><br />	
 		<input name="title" type="text" size="120" value="<%= project == null ? "" : project.getTitle() %>"><br /><br />
 
 		<liferay-ui:error key="projectlead-required" message="projectlead-required" />
-		<b>lead</b><br />	
+		<b>lead</b> <i>(required)</i><br />	
 		<input name="lead" type="text" size="120" value="<%= project == null ? "" : project.getLead() %>"><br /><br />
 
 
@@ -152,10 +159,7 @@
 			
 		<b>source</b><br />	
 		<input name="source" type="text" size="65" maxlength="75" value="<%= project == null ? "" : project.getSource() %>"><br /><br />
-		
-		<b>special tagging</b><br />	
-		<input name="specialtagging" type="text" size="65" maxlength="75" value="<%= project == null ? "" : project.getSpecialtagging() %>"><br /><br />
-		
+
 		<b>Geographic characterisation</b><br />	
 		<input name="spatiallayer" type="text" size="65" value='<%= project == null ? "" : project.getSpatiallayer() %>'>
 		
@@ -200,16 +204,6 @@
 	
     <b>Comments about this database item <i>[information entered below will not be displayed on the public pages of the clearinghouse]</i></b><br />	
 	<textarea style="border-color: blue; border-style: solid; border-width: thin;" name="comments" rows=10 cols=150><%= project == null ? "" : project.getComments() %></textarea><br /><br />
- 	
- 	<input type="checkbox" name="chk_importance" id="chk_importance" value="1" <% if ((project != null) && (project.getImportance() == 1) ) { out.print( "checked" ) ; } %> />
-	<b>High importance</b>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 
- 	
-<% if (renderRequest.isUserInRole("administrator") ) { // || renderRequest.isUserInRole("power-user")) { %>
-	<input type="checkbox" name="chk_controlstatus" id="chk_controlstatus" value="1" <% //  if ((project != null) && (project.getControlstatus() == 1) ) { out.print( "checked" ) ; } %> />
-	<b>Reviewed</b>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 
-<% } %>	
-	<b>Edited by: <% if (project != null) { out.print( project.getModerator() ) ; } %> </b>	
-	<br />
 	
 	<aui:button-row>
 		<aui:button type="submit" />
@@ -217,5 +211,5 @@
 		<aui:button type="cancel"  onClick="history.go(-1);" /> <!-- onClick="< %= redirect % >" -->
 	</aui:button-row>
 </aui:form>
-		
+<% }  %>		
 		

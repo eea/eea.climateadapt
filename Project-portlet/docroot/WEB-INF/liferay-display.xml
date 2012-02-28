@@ -6,5 +6,6 @@
 		<portlet id="projectportlet"></portlet>
 		<portlet id="projectdetailportlet"></portlet>
 		<portlet id="projectgoeditportlet"></portlet>
+		<portlet id="shareprojectportlet"></portlet>
 	</category>
 </display>
