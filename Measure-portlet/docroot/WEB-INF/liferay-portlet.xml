@@ -66,9 +66,9 @@
 		</css-class-wrapper>
 	</portlet>
 	<portlet>
-		<portlet-name>shareinfoportlet</portlet-name>
+		<portlet-name>sharemeasureportlet</portlet-name>
 		<icon>/icon.png</icon>
-		<instanceable>true</instanceable>
+		<instanceable>false</instanceable>
 		<header-portlet-css>/css/portlet.css</header-portlet-css>
 		<header-portlet-css>/css/portlet.css</header-portlet-css>
 		<header-portlet-javascript>http://ecn.dev.virtualearth.net/mapcontrol/mapcontrol.ashx?v=6.2&amp;mkt=en-us"</header-portlet-javascript>
@@ -90,7 +90,7 @@
 		<header-portlet-javascript>/js/chm/LocationControl.js</header-portlet-javascript>
 		<header-portlet-javascript>/js/chm/Locator.js</header-portlet-javascript>
 		<footer-portlet-javascript>/js/javascript.js</footer-portlet-javascript>		
-		<css-class-wrapper>shareinfoportlet-portlet</css-class-wrapper>
+		<css-class-wrapper>sharemeasureportlet-portlet</css-class-wrapper>
 	</portlet>
 	<role-mapper>
 		<role-name>administrator</role-name>

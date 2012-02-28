@@ -178,10 +178,10 @@
 		</security-role-ref>
 	</portlet>
 	<portlet>
-		<portlet-name>shareinfoportlet</portlet-name>
+		<portlet-name>sharemeasureportlet</portlet-name>
 		<display-name>ShareMeasurePortlet</display-name>
 		<portlet-class>
-			nl.wur.alterra.cgi.ace.portlet.ShareInfoPortlet
+			nl.wur.alterra.cgi.ace.portlet.ShareMeasurePortlet
 		</portlet-class>
 		<init-param>
 			<name>view-jsp</name>
@@ -200,8 +200,8 @@
 		<!-- Resource Bundle -->
 		<resource-bundle>content.Language</resource-bundle>
 		<portlet-info>
-			<title>ShareInfoPortlet</title>
-			<short-title>ShareInfoPortlet</short-title>
+			<title>ShareMeasurePortlet</title>
+			<short-title>ShareMeasurePortlet</short-title>
 			<keywords></keywords>
 		</portlet-info>
 		<security-role-ref>
