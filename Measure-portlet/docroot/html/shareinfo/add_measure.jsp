@@ -1,11 +1,22 @@
 <%@include file="/html/init.jsp" %>
 
 <%
+   String mao_type = prefs.getValue(Constants.mao_typePreferenceName, "A");
+
+   if ( ! renderRequest.isUserInRole("user") ) { // || renderRequest.isUserInRole("portal-content-reviewer") ) { 
+	    // if approved only administrator can delete; otherwise also power user can delete %>
+		Please sign in (at the upper right menu bar) to <%= mao_type.equalsIgnoreCase("A") ? "add a case study" : "add an adaptation option" %>
+<% }	    
+   else {
 	Measure measure = null;
 
-	String redirect = ParamUtil.getString(request, "redirect");
+	long measureId = ParamUtil.getLong(request, "measureId");
 	
-	String mao_type = prefs.getValue(Constants.mao_typePreferenceName, "A");
+	if (measureId > 0) {
+		measure = MeasureLocalServiceUtil.getMeasure(measureId);
+	}
+	
+	String redirect = ParamUtil.getString(request, "redirect");
 %>
 		<script type="text/javascript"> 
 			
@@ -47,7 +58,7 @@
 <aui:form action="<%= editMeasureURL %>" method="POST" name="fm">
 	<aui:fieldset>
 		
-		<aui:input type="hidden" name="mao_type" value="A" />
+		<aui:input type="hidden" name="mao_type" value="<%= mao_type %>" />
 	
 		<aui:input type="hidden" name="redirect" value="<%= redirect %>" />
 
@@ -319,3 +330,4 @@
     	locator.locate(aLocation);
     }
 </script>
+<% }  %>

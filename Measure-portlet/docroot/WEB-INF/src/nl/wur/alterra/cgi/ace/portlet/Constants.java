@@ -7,7 +7,7 @@ public class Constants {
 	
     public static final String MEASUREID = "measure_id";
 	
-	public static final String EDITURL = "editUrl"; // used inside AceItemGoEditPortlet
+	public static final String EDITURL = "editUrl"; // used inside MeasureGoEditPortlet
 
 	public static String bingTimeOutPreferenceName = "bingtimeout";
 
@@ -25,5 +25,5 @@ public class Constants {
 
 	public static String zoomLevelPreferenceName = "zoomLevel";
 	
-	public static String mao_typePreferenceName = "mao_type";
+	public static String mao_typePreferenceName = "mao_type"; // used inside ShareMeasurePortlet
 }

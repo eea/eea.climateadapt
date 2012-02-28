@@ -64,7 +64,9 @@ public class ShareMeasurePortlet extends MVCPortlet {
 			updateAceItem(measure, aceitem);
 			
 			SessionMessages.add(request, "measure-added");
-
+			
+			request.getPortletSession().setAttribute("lastAddedMeasureId", "" + measure.getMeasureId() );
+			
 			sendRedirect(request, response);
 		}
 		else {
@@ -74,10 +76,49 @@ public class ShareMeasurePortlet extends MVCPortlet {
 
 			PortalUtil.copyRequestParameters(request, response);
 
-			response.setRenderParameter("jspPage", "/html/addcasestudy/view.jsp");
+			response.setRenderParameter("jspPage", "/html/shareinfo/view.jsp");
 		}
 	}
 
+	/**
+	 * Updates the database record of an existing measure.
+	 *
+	 */
+	public void updateMeasure(ActionRequest request, ActionResponse response)
+		throws Exception {
+		
+		AceItem aceitem = null;
+
+		Measure measure = MeasureLocalServiceUtil.getMeasure(ParamUtil.getLong(request, "measureId"));
+		
+		measureFromRequest(request, measure);
+
+		ArrayList<String> errors = new ArrayList<String>();
+
+		if (MeasureValidator.validateMeasure(measure, errors)) {
+		
+			aceitem = AceItemLocalServiceUtil.getAceItemByStoredAt("ace_measure_id=" + measure.getMeasureId());
+
+			MeasureLocalServiceUtil.updateMeasure(measure);
+
+			updateAceItem(measure, aceitem);
+				
+			SessionMessages.add(request, "measure-updated");
+			
+			request.getPortletSession().setAttribute("lastAddedMeasureId", "" + measure.getMeasureId() );
+			
+			sendRedirect(request, response);
+		}
+		else {
+			for (String error : errors) {
+				SessionErrors.add(request, error);
+			}
+
+			PortalUtil.copyRequestParameters(request, response);
+
+			response.setRenderParameter("jspPage", "/html/shareinfo/add_measure.jsp");
+		}
+	}
 
 	/**
 	 * Convenience method to   F I L L   a Measure object out of the request. Used
@@ -85,6 +126,7 @@ public class ShareMeasurePortlet extends MVCPortlet {
 	 *
 	 */
 	private void measureFromRequest(PortletRequest request, Measure measure)  throws Exception  {
+
 		ThemeDisplay themeDisplay =
 			(ThemeDisplay)request.getAttribute(WebKeys.THEME_DISPLAY);
 		
