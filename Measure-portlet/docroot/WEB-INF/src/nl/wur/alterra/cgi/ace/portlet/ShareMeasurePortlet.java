@@ -31,9 +31,9 @@ import com.liferay.portal.util.PortalUtil;
 import com.liferay.util.bridges.mvc.MVCPortlet;
 
 /**
- * Portlet implementation class ShareInfoPortlet
+ * Portlet implementation class ShareMeasurePortlet
  */
-public class ShareInfoPortlet extends MVCPortlet {
+public class ShareMeasurePortlet extends MVCPortlet {
 	 
 	 
 	/**

@@ -27,4 +27,4 @@
 		<portlet:param name="redirect" value="<%= redirect %>" />
 	</portlet:renderURL>
 
-	<a href='<%= addMeasureURL.toString() %>'><%= mao_type.equalsIgnoreCase("A") ? "Add a case study" : "Add a adaptation option" %></a>
+	<a href='<%= addMeasureURL.toString() %>'><%= mao_type.equalsIgnoreCase("A") ? "Add a case study" : "Add an adaptation option" %></a>

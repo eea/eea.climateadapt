@@ -36,7 +36,7 @@
 
 <liferay-ui:header
 	backURL="<%= redirect %>"
-	title='<%= mao_type.equalsIgnoreCase("A") ? "Add a case study" : "Add a adaptation option" %>'
+	title='<%= mao_type.equalsIgnoreCase("A") ? "Add case study" : "Add adaptation option" %>'
 />
 
 
