@@ -76,7 +76,7 @@ public class ShareMeasurePortlet extends MVCPortlet {
 
 			PortalUtil.copyRequestParameters(request, response);
 
-			response.setRenderParameter("jspPage", "/html/shareinfo/view.jsp");
+			response.setRenderParameter("jspPage", "/html/shareinfo/add_measure.jsp");
 		}
 	}
 
