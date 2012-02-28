@@ -179,7 +179,7 @@
 	</portlet>
 	<portlet>
 		<portlet-name>shareinfoportlet</portlet-name>
-		<display-name>ShareInfoPortlet</display-name>
+		<display-name>ShareMeasurePortlet</display-name>
 		<portlet-class>
 			nl.wur.alterra.cgi.ace.portlet.ShareInfoPortlet
 		</portlet-class>

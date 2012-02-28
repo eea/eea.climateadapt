@@ -18,11 +18,13 @@
 
 <%
 	String redirect = PortalUtil.getCurrentURL(renderRequest);
+
+	String mao_type = prefs.getValue(Constants.mao_typePreferenceName, "A");
 %>
 
 	<portlet:renderURL var="addMeasureURL">
-		<portlet:param name="jspPage" value="/html/shareinfo/add_casestudy.jsp" />
+		<portlet:param name="jspPage" value="/html/shareinfo/add_measure.jsp" />
 		<portlet:param name="redirect" value="<%= redirect %>" />
 	</portlet:renderURL>
 
-	<a href="<%= addMeasureURL.toString() %>">Add a case study</a>
+	<a href='<%= addMeasureURL.toString() %>'><%= mao_type.equalsIgnoreCase("A") ? "Add a case study" : "Add a adaptation option" %></a>

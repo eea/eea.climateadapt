@@ -18,9 +18,30 @@
 
 <%@include file="/html/init.jsp" %>
 
-<portlet:actionURL name="setAddCaseStudyPref" var="setAddCaseStudyPrefUrl" />
+<%
+		String m_checked = "";
+		String a_checked = "";
+		String toggleclass = "togglehide";
+		
+		String mao_type = prefs.getValue(Constants.mao_typePreferenceName, "A");
+		
+		if( mao_type.equalsIgnoreCase("M")) {
+			m_checked = "checked";
+		}
+		else {
+			a_checked = "checked";
+			toggleclass = "toggleshow";
+		}
+%>
 
-<aui:form action="<%= setAddCaseStudyPrefUrl %>" method="POST" name="fm" >
+<portlet:actionURL name="setAddMeasurePref" var="setAddMeasurePrefUrl" />
+
+<aui:form action="<%= setAddMeasurePrefUrl %>" method="POST" name="fm" >
+
+		<b>Type</b><br />
+		<input id="mao_m" name="mao_type" type="radio" value="M" <%= m_checked %>>Adaptation option&nbsp;&nbsp;&nbsp;
+		<input id="mao_a" name="mao_type" type="radio" value="A" <%= a_checked %>>Case study<br /><br />
+
 	
 	<aui:input name="<%= Constants.proxyUrlPreferenceName %>" value='<%= prefs.getValue(Constants.proxyUrlPreferenceName, "/SimilarAreasTool-portlet/proxy?url=") %>' size="45" type="text" />
 

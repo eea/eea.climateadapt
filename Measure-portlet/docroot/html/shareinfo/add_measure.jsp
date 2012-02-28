@@ -4,6 +4,8 @@
 	Measure measure = null;
 
 	String redirect = ParamUtil.getString(request, "redirect");
+	
+	String mao_type = prefs.getValue(Constants.mao_typePreferenceName, "A");
 %>
 		<script type="text/javascript"> 
 			
@@ -34,7 +36,7 @@
 
 <liferay-ui:header
 	backURL="<%= redirect %>"
-	title='<%= (measure != null) ? measure.getName() : "Add a case study" %>'
+	title='<%= mao_type.equalsIgnoreCase("A") ? "Add a case study" : "Add a adaptation option" %>'
 />
 
 
@@ -165,7 +167,17 @@
 		<b>Geographical characterisation</b><br />	
 		<input name="spatiallayer" type="text" size="65" value='<%= measure == null ? "" : measure.getSpatiallayer() %>'><br /><br />
 
-	<div id="locationselection" class="toggleshow">	
+<%
+		String m_checked = "";
+		String a_checked = "";
+		String toggleclass = "togglehide";
+		
+		if( mao_type.equalsIgnoreCase("A")) {
+			toggleclass = "toggleshow";
+		}
+%>
+
+	<div id="locationselection" class="<%= toggleclass %>">	
 		<div id="locator">
 			<input type="text" name="location" id="location" />
 			<a onclick="locate(document.getElementById('location').value)">Locate</a>

@@ -360,11 +360,15 @@ public class ShareInfoPortlet extends MVCPortlet {
 	 * Sets the preferences for how measures can be ordered
 	 *
 	 */
-	public void setAddCaseStudyPref(ActionRequest request, ActionResponse response)
+	public void setAddMeasurePref(ActionRequest request, ActionResponse response)
 		throws Exception {
 
 		PortletPreferences prefs = request.getPreferences();
+		
+		String mao_type = ParamUtil.getString(request, Constants.mao_typePreferenceName);
 
+		prefs.setValue(Constants.mao_typePreferenceName, mao_type);		
+		
 		String proxyUrl = ParamUtil.getString(request, Constants.proxyUrlPreferenceName);
 
 		prefs.setValue(Constants.proxyUrlPreferenceName, proxyUrl);
