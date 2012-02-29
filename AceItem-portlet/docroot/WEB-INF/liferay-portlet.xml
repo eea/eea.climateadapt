@@ -57,6 +57,18 @@
 			aceitemgoeditportlet-portlet
 		</css-class-wrapper>
 	</portlet>
+	<portlet>
+		<portlet-name>shareaceitemportlet</portlet-name>
+		<icon>/icon.png</icon>
+		<instanceable>true</instanceable>
+		<header-portlet-css>/css/portlet.css</header-portlet-css>
+		<footer-portlet-javascript>
+			/js/javascript.js
+		</footer-portlet-javascript>
+		<css-class-wrapper>
+			shareaceitemportlet-portlet
+		</css-class-wrapper>
+	</portlet>
 	<role-mapper>
 		<role-name>administrator</role-name>
 		<role-link>Administrator</role-link>

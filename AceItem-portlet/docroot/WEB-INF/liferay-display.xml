@@ -5,8 +5,9 @@
 	<category name="Ace">
 		<portlet id="aceitemportlet"></portlet>
 		<portlet id="wxsharvesterportlet"></portlet>
-        <portlet id="cswharvesterportlet"></portlet>
+		<portlet id="cswharvesterportlet"></portlet>
 		<portlet id="aceitemdetailportlet"></portlet>
 		<portlet id="aceitemgoeditportlet"></portlet>
+		<portlet id="shareaceitemportlet"></portlet>
 	</category>
 </display>
