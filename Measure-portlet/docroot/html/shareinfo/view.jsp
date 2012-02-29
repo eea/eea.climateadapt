@@ -21,7 +21,7 @@
 
    if ( ! renderRequest.isUserInRole("user") ) { // || renderRequest.isUserInRole("portal-content-reviewer") ) { 
 	    // if approved only administrator can delete; otherwise also power user can delete %>
-		Please sign in (at the upper right menu bar) to <%= mao_type.equalsIgnoreCase("A") ? "add a case study" : "add an adaptation option" %>
+		Please sign in (at the upper right menu bar) to <%= mao_type.equalsIgnoreCase("A") ? "add a case study" : "add an adaptation option" %>.
 <% }	    
    else {
 	   
