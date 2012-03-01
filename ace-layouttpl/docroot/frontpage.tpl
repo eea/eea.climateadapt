@@ -21,8 +21,11 @@
 			<td class="aui-w25 portlet-column" id="column-5">
 				$processor.processColumn("column-5", "portlet-column-content")
 			</td>
-			<td class="aui-w50 portlet-column portlet-column-last" id="column-6">
-				$processor.processColumn("column-6", "portlet-column-content portlet-column-content-last")
+			<td class="aui-w25 portlet-column portlet-column-last" id="column-6">
+				$processor.processColumn("column-6", "portlet-column-content")
+			</td>
+			<td class="aui-w25 portlet-column portlet-column-last" id="column-7">
+				$processor.processColumn("column-7", "portlet-column-content portlet-column-content-last")
 			</td>
 		</tr>
 	</table>
@@ -45,8 +48,11 @@
 		<div class="aui-w25 portlet-column" id="column-5">
 			$processor.processColumn("column-5", "portlet-column-content")
 		</div>
-		<div class="aui-w50 portlet-column portlet-column-last" id="column-6">
-			$processor.processColumn("column-6", "portlet-column-content portlet-column-content-last")
+		<div class="aui-w25 portlet-column portlet-column-last" id="column-6">
+			$processor.processColumn("column-6", "portlet-column-content")
+		</div>
+		<div class="aui-w25 portlet-column portlet-column-last" id="column-7">
+			$processor.processColumn("column-7", "portlet-column-content portlet-column-content-last")
 		</div>
 	</div>
 #end
