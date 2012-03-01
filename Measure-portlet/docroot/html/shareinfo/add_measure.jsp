@@ -5,7 +5,7 @@
 
    if ( ! renderRequest.isUserInRole("user") ) { // || renderRequest.isUserInRole("portal-content-reviewer") ) { 
 	    // if approved only administrator can delete; otherwise also power user can delete %>
-		Please sign in (at the upper right menu bar) to <%= mao_type.equalsIgnoreCase("A") ? "add a case study" : "add an adaptation option" %>.
+		Please <a href='/home?p_p_id=58&p_p_lifecycle=0&p_p_state=maximized&p_p_mode=view&saveLastPath=0&_58_struts_action=%2Flogin%2Flogin'>sign in</a> to <%= mao_type.equalsIgnoreCase("A") ? "add a case study" : "add an adaptation option" %>.
 <% }	    
    else {
 	Measure measure = null;
@@ -199,10 +199,10 @@
 		<div id="map_element" style='width: 500px; height: 500px;'></div>
 		
 		<b>lon</b><br />	
-		<input name="lon" type="text" size="10" value='<%= measure == null ? "" : measure.getLon() %>'><br /><br />
+		<input name="lon" id="lon" type="text" size="10" value='<%= measure == null ? "" : measure.getLon() %>'><br /><br />
 		
 		<b>lat</b><br />	
-		<input name="lat" type="text" size="10" value='<%= measure == null ? "" : measure.getLat() %>'><br /><br />
+		<input name="lat" id="lat" type="text" size="10" value='<%= measure == null ? "" : measure.getLat() %>'><br /><br />
 		
 		<a onclick="handleClick(event)">Apply</a><br /><br />
 		

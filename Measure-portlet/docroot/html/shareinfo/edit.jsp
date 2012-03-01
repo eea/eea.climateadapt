@@ -21,7 +21,6 @@
 <%
 		String m_checked = "";
 		String a_checked = "";
-		String toggleclass = "togglehide";
 		
 		String mao_type = prefs.getValue(Constants.mao_typePreferenceName, "A");
 		
@@ -30,7 +29,6 @@
 		}
 		else {
 			a_checked = "checked";
-			toggleclass = "toggleshow";
 		}
 %>
 

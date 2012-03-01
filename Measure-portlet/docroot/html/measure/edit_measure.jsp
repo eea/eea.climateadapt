@@ -236,10 +236,10 @@
 		<div id="map_element" style='width: 500px; height: 500px;'></div>
 		
 		<b>lon</b><br />	
-		<input name="lon" type="text" size="10" value='<%= measure == null ? "" : measure.getLon() %>'><br /><br />
+		<input name="lon" id="lon" type="text" size="10" value='<%= measure == null ? "" : measure.getLon() %>'><br /><br />
 		
 		<b>lat</b><br />	
-		<input name="lat" type="text" size="10" value='<%= measure == null ? "" : measure.getLat() %>'><br /><br />
+		<input name="lat" id="lat" type="text" size="10" value='<%= measure == null ? "" : measure.getLat() %>'><br /><br />
 		
 		<a onclick="handleClick(event)">Apply</a><br /><br />
 		
