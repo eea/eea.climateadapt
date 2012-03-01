@@ -535,8 +535,10 @@ ul#subnav li a:hover {
 }
 
 #searchbox input[type="text"] {
+	color: #666;
 	height: 10px;
 	margin-right: 2px;
+	padding-left: 3px;
 }
 
 #search-title {
@@ -551,6 +553,43 @@ ul#subnav li a:hover {
 
 #searchbox select {
 	display: none;
+}
+
+/****
+	Web Content Search page
+****/
+.portlet-journal-content-search {
+	padding: 15px;
+}
+
+.portlet-journal-content-search .portlet-title {
+	color: #02213D;
+}
+
+.portlet-journal-content-search .portlet-icon-back {
+	font-size: 12px;
+	font-weight: normal;
+}
+
+.portlet-journal-content-search input[type="text"] {
+	height: 10px;
+}
+
+.portlet-journal-content-search .search-results {
+	padding-top: 25px;
+}
+
+.portlet-journal-content-search .search-results .col-2,
+.portlet-journal-content-search .search-results .col-4 {
+	display: none;
+}
+
+.portlet-journal-content-search .lfr-search-container {
+	margin-top: 10px;
+}
+
+.portlet-journal-content-search .results-header th, .results-header td {
+	color: #02213D;
 }
 
 /**** Second level menu ****/
@@ -641,7 +680,8 @@ ul#subnav li a:hover {
 .ace_layout_3 #layout-column_column-3,
 .ace_layout_3 #layout-column_column-4,
 .frontpage-layout #layout-column_column-5,
-.frontpage-layout #layout-column_column-6 {
+.frontpage-layout #layout-column_column-6,
+.frontpage-layout #layout-column_column-7 {
 	border-left: #d7e3ef 2px solid;
 }
 
@@ -1086,7 +1126,8 @@ ul#subnav li a:hover {
 /* Hover def. for the speedbuttons */
 .frontpage-layout #layout-column_column-4,
 .frontpage-layout #layout-column_column-5,
-.frontpage-layout #layout-column_column-6 {
+.frontpage-layout #layout-column_column-6,
+.frontpage-layout #layout-column_column-7 {
 	padding: 0 16px;
 }
 
@@ -1802,7 +1843,8 @@ the search column.
 	font-size:13px
 }
 
-.transnat-region-middle {
+.transnat-region-middle,
+.national-page-middle {
 	padding-right: 100px;
 }
 
@@ -1882,9 +1924,9 @@ text and the class mapviewer to the MapViewerPortlet.
 
 .mapviewer #legend_element,
 .mapviewer #toc_element {
-	margin-left: 685px;
+	margin-left: 695px;
 	margin-top: -350px;
-	width: 269px;
+	width: 270px;
 }
 
 .mapviewer {
@@ -1902,6 +1944,7 @@ text and the class mapviewer to the MapViewerPortlet.
 
 .mapviewer #map_element {
 	height: 350px;
+	margin-left: 7px;
 	margin-top: 25px;
 	width: 670px;
 }
@@ -1914,7 +1957,9 @@ text and the class mapviewer to the MapViewerPortlet.
 
 .mapviewer #toc_element {
 	background-color: #D2DE92;
+	max-height: 430px;
 	min-height: 250px;
+	overflow-y: scroll;
 }
 
 .mapviewer #map_element .x-panel,
@@ -1991,10 +2036,27 @@ text and the class mapviewer to the MapViewerPortlet.
 	top:2px;
 }
 
-/** Back button on the mapviewer page **/
-.mapviewer-back {
-	position: absolute;
-	top: 530px;
+/** Listing of available maps on the mapviewer page **/
+.mapviewer-map-listing {
+	position: relative;
+	top: -50px;
+}
+
+/** Styling of abstract dialog **/
+#abstract_tabs_element ul.x-tab-strip-top {
+	list-style-type: none;
+	margin-left: 0;
+}
+
+#abstract_tabs_element .x-panel-body h1,
+#abstract_tabs_element .x-panel-body p {
+	padding: 0 10px;
+}
+
+#abstract_tabs_element .x-panel-body h1 {
+	font-size: 16px;
+	font-weight: normal;
+	margin-bottom: 10px;
 }
 
 /****
@@ -2135,5 +2197,23 @@ text and the class mapviewer to the MapViewerPortlet.
 .detailfooter a,
 .detailfooter a:hover {
 	text-decoration: none;
+}
+
+/****
+	Share your info pages
+****/
+.share-your-info .image {
+	float: right;
+	height: 240px;
+	padding: 40px 0 15px 15px;
+}
+
+.share-your-info h1 {
+	font: normal 26px Tahoma, Times New Roman, serif;
+	margin: -5px 0 20px;
+}
+
+.share-your-info ul#third-level-menu {
+	margin-left: 0;
 }
 	

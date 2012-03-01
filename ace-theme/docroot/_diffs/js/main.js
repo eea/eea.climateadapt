@@ -28,8 +28,15 @@ $(document).ready(function(){
     //Set equal heights to columns on various pages
     setEqualHeight($(".detailleft, .detailright")); //Ace detail pages
     setEqualHeight($(".ace_layout_3 #layout-column_column-2, .ace_layout_3 #layout-column_column-3, .ace_layout_3 #layout-column_column-4")); //Sector pages
-    setEqualHeight($(".frontpage-layout #layout-column_column-4, .frontpage-layout #layout-column_column-5, .frontpage-layout #layout-column_column-6")); //frontpage
+    setEqualHeight($(".frontpage-layout #layout-column_column-4, .frontpage-layout #layout-column_column-5, .frontpage-layout #layout-column_column-6, .frontpage-layout #layout-column_column-7")); //frontpage
     setEqualHeight($(".ast #layout-column_column-3, .ast #layout-column_column-4")); //AST
+    setEqualHeight($(".faq #layout-column_column-2, .faq #layout-column_column-3")); //FAQ and Mapviewer
+    
+    //Search button on the portlet web content search page
+    $('.portlet-journal-content-search .portlet-body input[type="image"]').attr("src","/ace-theme/images/vergroot_blauw.png");
+    
+    //Search button on the portlet web content search page
+    $('.portlet-journal-content-search .col-3 a').css("font-size","11px");
     
 });
 
