@@ -69,6 +69,75 @@ public class ProjectPortlet extends ProjectUpdateHelper {
 		}
 	}
 
+	/**
+	 * Updates the database record of an existing project.
+	 *
+	 */
+	public void updateProject(ActionRequest request, ActionResponse response)
+		throws Exception {
+		
+		AceItem aceitem = null;
+		
+		Project project = ProjectLocalServiceUtil.getProject(ParamUtil.getLong(request, "projectId"));	
+		
+		// retain old and new status
+		Short oldapproved = project.getControlstatus();
+		Short newapproved = 0;
+		String approved = ParamUtil.getString(request, "chk_controlstatus");
+		if( (approved != null ) && (approved.length()>0) ) {
+			
+			newapproved = Short.parseShort(approved);
+		}
+		if ( (oldapproved == 1) &&  (newapproved == 0) ) { 
+		// The old record stays untouched, only replacesId gets filled (from now no edit or delete possible anymore)
+			project.setReplacesId( project.getProjectId() ) ;
+			// Must be done BEFORE projectFromRequest();
+			ProjectLocalServiceUtil.updateProject(project);
+		}
+		
+		projectFromRequest(request, project);
+
+		ArrayList<String> errors = new ArrayList<String>();
+
+		if (ProjectValidator.validateProject(project, errors)) {
+			
+			if ( (oldapproved == 1) &&  (newapproved == 0) ) { 
+     			// The changed item gets added as a copy with replacesId filled (is already done above)
+				// save the new copy: simple addProject
+				ProjectLocalServiceUtil.addProject(project);
+				// automatically gets a new projectid;
+			}
+			else {
+				
+				if ( (newapproved == 1)  && project.getReplacesId() != 0) {
+					// delete the old project which gets replaced, update the corresponding aceitem
+					aceitem = AceItemLocalServiceUtil.getAceItemByStoredAt("ace_project_id=" + project.getReplacesId() );
+					aceitem.setStoredAt("ace_project_id=" + project.getProjectId());
+					ProjectLocalServiceUtil.deleteProject(project.getReplacesId());
+					project.setReplacesId( (long) 0);	
+				}
+				else {
+					aceitem = AceItemLocalServiceUtil.getAceItemByStoredAt("ace_project_id=" + project.getProjectId());
+				}
+				
+				ProjectLocalServiceUtil.updateProject(project);
+				updateAceItem(project, aceitem);
+			}
+			
+			SessionMessages.add(request, "project-updated");
+			
+			sendRedirect(request, response);
+		}
+		else {
+			for (String error : errors) {
+				SessionErrors.add(request, error);
+			}
+
+			PortalUtil.copyRequestParameters(request, response);
+
+			response.setRenderParameter("jspPage", "/html/project/edit_project.jsp");
+		}
+	}
 
 	/**
 	 * Deletes a project from the database.
