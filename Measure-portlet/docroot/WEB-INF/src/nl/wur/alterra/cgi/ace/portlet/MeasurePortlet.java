@@ -68,6 +68,76 @@ public class MeasurePortlet extends MeasureUpdateHelper {
 	}
 
 	/**
+	 * Updates the database record of an existing measure.
+	 *
+	 */
+	public void updateMeasure(ActionRequest request, ActionResponse response)
+		throws Exception {
+		
+		AceItem aceitem = null;
+
+		Measure measure = MeasureLocalServiceUtil.getMeasure(ParamUtil.getLong(request, "measureId"));
+		
+		// retain old and new status
+		Short oldapproved = measure.getControlstatus();
+		Short newapproved = 0;
+		String approved = ParamUtil.getString(request, "chk_controlstatus");
+		if( (approved != null ) && (approved.length()>0) ) {
+			
+			newapproved = Short.parseShort(approved);
+		}
+		if ( (oldapproved == 1) &&  (newapproved == 0) ) { 
+		// The old record stays untouched, only replacesId gets filled (from now no edit or delete possible anymore)
+			measure.setReplacesId( measure.getMeasureId() ) ;
+			// Must be done BEFORE measureFromRequest();
+			MeasureLocalServiceUtil.updateMeasure(measure);
+		}
+		
+		measureFromRequest(request, measure);
+
+		ArrayList<String> errors = new ArrayList<String>();
+
+		if (MeasureValidator.validateMeasure(measure, errors)) {
+		
+			if ( (oldapproved == 1) &&  (newapproved == 0) ) { 
+     			// The changed item gets added as a copy with replacesId filled (is already done above)
+				// save the new copy: simple addMeasure
+				MeasureLocalServiceUtil.addMeasure(measure);
+				// automatically gets a new measureid;
+			}
+			else {
+				
+				if ( (newapproved == 1)  && measure.getReplacesId() != 0) {
+					// delete the old measure which gets replaced, update the corresponding aceitem
+					aceitem = AceItemLocalServiceUtil.getAceItemByStoredAt("ace_measure_id=" + measure.getReplacesId() );
+					aceitem.setStoredAt("ace_measure_id=" + measure.getMeasureId());
+					MeasureLocalServiceUtil.deleteMeasure(measure.getReplacesId());
+					measure.setReplacesId( (long) 0);	
+				}
+				else {
+					aceitem = AceItemLocalServiceUtil.getAceItemByStoredAt("ace_measure_id=" + measure.getMeasureId());
+				}
+				
+				MeasureLocalServiceUtil.updateMeasure(measure);
+				updateAceItem(measure, aceitem);
+			}			
+			
+			SessionMessages.add(request, "measure-updated");
+			
+			sendRedirect(request, response);
+		}
+		else {
+			for (String error : errors) {
+				SessionErrors.add(request, error);
+			}
+
+			PortalUtil.copyRequestParameters(request, response);
+
+			response.setRenderParameter("jspPage", "/html/measure/edit_measure.jsp");
+		}
+	}	
+	
+	/**
 	 * Deletes a measure from the database.
 	 *
 	 */
