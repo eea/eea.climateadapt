@@ -253,7 +253,7 @@ public class ACESearchEngine {
             }
 
             rawQuery += " AND ( (" + ACEIndexConstant.IndexField.CONTROLSTATUS + ":1) OR (" 
-            + ACEIndexConstant.IndexField.CONTROLSTATUS + ":0) )";
+            + ACEIndexConstant.IndexField.CONTROLSTATUS + ":2) )";
 
             //
             // handle sectors
