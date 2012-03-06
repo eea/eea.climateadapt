@@ -92,7 +92,7 @@
 			property="title"
 		/>
 		<liferay-ui:search-container-column-text  
-			name="reviewed" orderable="<%= true %>" orderableProperty="controlstatus" >
+			name="approved" orderable="<%= true %>" orderableProperty="controlstatus" >
 		<%= (project.getControlstatus()<1 ? "No" : "Yes") %>
 		</liferay-ui:search-container-column-text> 
 

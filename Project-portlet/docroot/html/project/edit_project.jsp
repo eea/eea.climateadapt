@@ -206,7 +206,7 @@
  	
 <% if (renderRequest.isUserInRole("administrator") ) { // || renderRequest.isUserInRole("power-user")) { %>
 	<input type="checkbox" name="chk_controlstatus" id="chk_controlstatus" value="1" <% //  if ((project != null) && (project.getControlstatus() == 1) ) { out.print( "checked" ) ; } %> />
-	<b>Reviewed</b>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 
+	<b>Approved</b>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 
 <% } %>	
 	<b>Edited by: <% if (project != null) { out.print( project.getModerator() ) ; } %> </b>	
 	<br />
