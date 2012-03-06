@@ -24,7 +24,7 @@ String redirect = PortalUtil.getCurrentURL(renderRequest);
 	<liferay-ui:icon image="edit" url="<%=editURL.toString() %>" />
 
 <% if (renderRequest.isUserInRole("administrator") || 
-		( renderRequest.isUserInRole("power-user") && (aceitem.getControlstatus() == 0) ) ) { // || renderRequest.isUserInRole("portal-content-reviewer") ) { 
+		( renderRequest.isUserInRole("power-user") && (aceitem.getControlstatus() == 0) ) ) { 
 	    // if approved only administrator can delete; otherwise also power user can delete %>
     <!--  PERFORM PORTLET ACTION deleteAceItem AT CHOICE delete -->
 	<portlet:actionURL name="deleteAceItem" var="deleteURL">
