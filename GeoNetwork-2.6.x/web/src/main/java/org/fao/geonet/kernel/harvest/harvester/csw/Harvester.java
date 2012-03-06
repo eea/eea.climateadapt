@@ -436,6 +436,7 @@ class Harvester
 		}
 		catch(Exception e)
 		{
+            e.printStackTrace();
 			log.warning("Raised exception when searching : "+ e);
 			throw new OperationAbortedEx("Raised exception when searching", e);
 		}
