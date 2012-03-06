@@ -244,7 +244,7 @@
 		<a onclick="handleClick(event)">Apply</a><br /><br />
 		
 		<b>bio-geographical region</b><br />	
-		<input name="satarea" type="text" size="50" value='<%= measure == null ? "" : measure.getSatarea() %>'>
+		<input name="satarea" id="satarea" type="text" size="50" value='<%= measure == null ? "" : measure.getSatarea() %>'>
 	  </div>
  
 	 </div>	
@@ -358,19 +358,19 @@
 	}
 
     function handleClick(e) {
-		measurechmmap.setMeasure(new CHM.Measure(document._measureportlet_WAR_Measureportlet_fm.lon.value, document._measureportlet_WAR_Measureportlet_fm.lat.value, new OpenLayers.Projection('EPSG:4326')));
+		measurechmmap.setMeasure(new CHM.Measure(document.getElementById('lon').value, document.getElementById('lat').value, new OpenLayers.Projection('EPSG:4326')));
 	}
 			
 	function measureChanged() {
 		var measure = measurechmmap.getMeasure(new OpenLayers.Projection('EPSG:4326'));
 				
-		document._measureportlet_WAR_Measureportlet_fm.lon.value = measure.x;
+		document.getElementById('lon').value = measure.x;
 				
-		document._measureportlet_WAR_Measureportlet_fm.lat.value = measure.y;
+		document.getElementById('lat').value = measure.y;
 	}
 			
 	function areaChanged() {
-		document._measureportlet_WAR_Measureportlet_fm.satarea.value = measurechmmap.getArea();
+		document.getElementById('satarea').value = measurechmmap.getArea();
 	}
 	
     function locate(aLocation) {

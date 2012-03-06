@@ -19,9 +19,9 @@ public class Constants {
 
 	public static String proxyUrlPreferenceName = "proxyUrl";
 
-	public static String wfsPreferenceName = "wms";
+	public static String wfsPreferenceName = "wfs";
 
-	public static String wmsPreferenceName = "wfs";
+	public static String wmsPreferenceName = "wms";
 
 	public static String zoomLevelPreferenceName = "zoomLevel";
 	

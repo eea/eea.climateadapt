@@ -186,7 +186,7 @@ public abstract class MeasureUpdateHelper extends MVCPortlet {
 		
 		if(ParamUtil.getString(request, "lat") != null) {
 			try {
-				measure.setLon(Double.parseDouble(ParamUtil.getString(request, "lat")));
+				measure.setLat(Double.parseDouble(ParamUtil.getString(request, "lat")));
 			}
 			catch (NumberFormatException e) {
 				// do nothing
