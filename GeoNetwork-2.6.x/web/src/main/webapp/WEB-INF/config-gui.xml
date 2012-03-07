@@ -57,12 +57,11 @@
         params      OpenLayers params hash as expected in new OpenLayers.Layer.WMS(name, url, params, options)
         options     OpenLayers options hash as expected in new OpenLayers.Layer.WMS(name, url, params, options)
  -->
-  <mapSearch options="{projection: 'EPSG:4326', maxExtent: new OpenLayers.Bounds(-180,-90,180,90), units: 'degrees', restrictedExtent: new OpenLayers.Bounds(-180,-90,180,90)}">
+<mapSearch options="{projection: 'EPSG:4326', maxExtent: new OpenLayers.Bounds(-180,-90,180,90), units: 'm', restrictedExtent: new OpenLayers.Bounds(-180,-90,180,90)}">
   <layers>
-    <layer server="http://localhost:8080/geoserver/wms" tocName="Borders"  params="{layers: 'gn:gboundaries', transparent: 'true', format: 'image/png'}"  options="{}" />
-    <layer server="http://localhost:8080/geoserver/wms" tocName="Ortophoto" params="{layers: 'gn:world', format: 'image/jpeg'}" options="{isBaseLayer: true}" />
+    <layer server="http://www2.demis.nl/wms/wms.ashx?WMS=BlueMarble" tocName="Map"  params="{layers: 'Earth Image,Borders,Coastlines', format: 'image/jpeg'}"  options="{isBaseLayer: true}" /> 
   </layers>
- </mapSearch>
+</mapSearch>
 
   <!-- Configuration for map viewer
     mapViewer/@options:     OpenLayers options hash as expected in new OpenLayers.Map(div, options)
@@ -79,12 +78,12 @@
         params      OpenLayers params hash as expected in new OpenLayers.Layer.WMS(name, url, params, options)
         options     OpenLayers options hash as expected in new OpenLayers.Layer.WMS(name, url, params, options)
  -->
-  <mapViewer options="{projection: 'EPSG:4326', maxExtent: new OpenLayers.Bounds(-180,-90,180,90), units: 'degrees', restrictedExtent: new OpenLayers.Bounds(-180,-90,180,90)}">
+ <mapViewer options="{projection: 'EPSG:4326', maxExtent: new OpenLayers.Bounds(-180,-90,180,90), units: 'm', restrictedExtent: new OpenLayers.Bounds(-180,-90,180,90)}">
   <layers>
-    <layer server="http://localhost:8080/geoserver/wms" tocName="Borders"  params="{layers: 'gn:gboundaries', transparent: 'true', format: 'image/png'}"  options="{}" />
-    <layer server="http://localhost:8080/geoserver/wms" tocName="Ortophoto" params="{layers: 'gn:world', format: 'image/jpeg'}" options="{isBaseLayer: true}" />
-  </layers>
-  <scales values="[7500000, 5000000, 2500000,  1000000, 750000, 500000, 250000, 100000, 75000, 50000, 25000, 10000, 7500, 5000, 2500, 1000]" />
+    <layer server="http://www2.demis.nl/wms/wms.ashx?WMS=BlueMarble" tocName="Borders"  params="{layers: 'Borders,Coastlines', transparent: 'true', format: 'image/png'}"  options="{}" /> 
+    <layer server="http://www2.demis.nl/wms/wms.ashx?WMS=BlueMarble" tocName="Ortophoto"  params="{layers: 'Earth Image', format: 'image/png'}"  options="{isBaseLayer: true}" /> 
+  </layers> 
+ <scales values="[7500000, 5000000, 2500000,  1000000, 750000, 500000, 250000, 100000, 75000, 50000, 25000, 10000, 7500, 5000, 2500, 1000]" />
   <!--scales values="[]" /-->    
   <proj>
     <crs code="EPSG:4326" default="1" name="WGS84 (lat/lon)" />
@@ -99,7 +98,7 @@
  
  <!-- 
   Google translation service:
-  Set this parameter to "1" to activate google translation service.
+  Set this parameter to "1" to activate google translation service.svn
   Google AJAX API Terms of Use http://code.google.com/apis/ajaxlanguage/terms.html
  -->
  <editor-google-translate>0</editor-google-translate>
