@@ -33,6 +33,7 @@ import jeeves.utils.XmlRequest;
 import org.apache.commons.httpclient.HttpClient;
 import org.apache.commons.httpclient.HttpException;
 import org.apache.commons.httpclient.methods.GetMethod;
+import org.apache.commons.lang.StringUtils;
 import org.fao.geonet.GeonetContext;
 import org.fao.geonet.constants.Geonet;
 import org.fao.geonet.constants.Params;
@@ -508,9 +509,23 @@ class Harvester
 			
 			// Get metadataUrl xlink:href
 			// TODO : add support for WCS & WFS metadataUrl element.
-			XPath mdUrl 		= XPath.newInstance ("./MetadataURL[@type='TC211' and Format='text/xml']/OnlineResource");
+            String dummyNsPrefix = "";
+            // Check if add namespace prefix to Xpath queries.  If layer.getNamespace() is:
+            //    * Namespace.NO_NAMESPACE, should not be added, otherwise exception is launched
+            //    * Another namespace, should be added a namespace prefix to Xpath queries, otherwise doesn't find any result
+            boolean addNsPrefix = !layer.getNamespace().equals(Namespace.NO_NAMESPACE);
+            if (addNsPrefix) dummyNsPrefix = "x:";
+                
+			XPath mdUrl 		= XPath.newInstance ("./" + dummyNsPrefix + "MetadataURL[@type='TC211' and " + dummyNsPrefix + "Format='text/xml']/" + dummyNsPrefix + "OnlineResource");
+            if (addNsPrefix) mdUrl.addNamespace("x", layer.getNamespace().getURI());
 			Element onLineSrc 	= (Element) mdUrl.selectSingleNode (layer);
-			
+
+            if (onLineSrc == null) {
+                mdUrl 		= XPath.newInstance ("./" + dummyNsPrefix + "MetadataURL[@type='ISO19115:2003' and " + dummyNsPrefix + "Format='text/xml']/" + dummyNsPrefix + "OnlineResource");
+                if (addNsPrefix) mdUrl.addNamespace("x", layer.getNamespace().getURI());
+                onLineSrc 	= (Element) mdUrl.selectSingleNode (layer);
+            }
+
 			if (onLineSrc != null) {
 				org.jdom.Attribute href = onLineSrc.getAttribute ("href", xlink);
 
@@ -519,6 +534,10 @@ class Harvester
 					try {
 						xml = Xml.loadFile (new URL(mdXml));
 
+                        if (xml.getName().equals("GetRecordByIdResponse")) {
+                            xml = (Element) xml.getChildren().get(0);
+                        }
+                        
 						schema = dataMan.autodetectSchema (xml); // ie. iso19115 or 139 or DC
 						// Extract uuid from loaded xml document
 						// FIXME : uuid could be duplicate if metadata already exist in catalog
