@@ -517,11 +517,6 @@ ul#subnav li a:hover {
 	color: #a5bf26;
 }
 
-#header-menu li#twitter a {
-	background: url("/ace-theme/images/twitter.png") no-repeat;
-	padding: 1px 0 2px 20px;
-}
-
 /**** Search box in header ****/
 
 #searchbox {
@@ -663,6 +658,7 @@ ul#subnav li a:hover {
 	float: right;
 }
 
+.faq #layout-column_column-1,
 .faq #layout-column_column-2,
 .faq #layout-column_column-3,
 .faq #layout-column_column-4,
