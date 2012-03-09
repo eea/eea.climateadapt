@@ -73,8 +73,9 @@
 	  
 	  if (aceitem.getStoragetype().equalsIgnoreCase("URL") || 
 		  aceitem.getStoragetype().equalsIgnoreCase("GEONETWORK") || 
+		  aceitem.getStoragetype().equalsIgnoreCase("PLAINMETADATA") ||
 		  aceitem.getStoragetype().equalsIgnoreCase("SETOFMAPS") ) {
-	  	  // Only URL type gets viewed by viewaceitem portlet; Ace Serviced Entities have their own portlets
+	  	  // Only these types get viewed by viewaceitem portlet; Ace Serviced Entities have their own portlets
 		  nameLink = "<a href='/viewaceitem?aceitem_id=" + aceitem.getAceItemId() + "'>" +  aceitem.getName() + "</a>" ;
 	  }
 %>      
@@ -116,9 +117,10 @@
 
 <%
 		if (aceitem.getStoragetype().equalsIgnoreCase("URL") || 
-		    aceitem.getStoragetype().equalsIgnoreCase("GEONETWORK") || 
+			aceitem.getStoragetype().equalsIgnoreCase("GEONETWORK") || 
+			aceitem.getStoragetype().equalsIgnoreCase("PLAINMETADATA") || 
 		    aceitem.getStoragetype().equalsIgnoreCase("SETOFMAPS") ) {
-			// Only URL type get maintained here; Ace Serviced Entities have their own maintenance pages
+			// Only these types get maintained here; Ace Serviced Entities have their own maintenance pages
 			
 			if(aceitem.getReplacesId() !=  aceitem.getAceItemId()) {
 			// Only editable if not gets replaced
