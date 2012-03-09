@@ -22,7 +22,7 @@ String redirect = PortalUtil.getCurrentURL(renderRequest);
 	
 	<liferay-ui:icon image="edit" url="<%=editURL.toString() %>" />
 
-<% if (renderRequest.isUserInRole("administrator") || 
+<% if (renderRequest.isUserInRole("Portal Content Reviewer") || renderRequest.isUserInRole("administrator") || 
 		( renderRequest.isUserInRole("power-user") && (project.getControlstatus() == 0) ) ) { 
 	    // if approved only administrator can delete; otherwise also power user can delete %>
     <!--  PERFORM PORTLET ACTION deleteProject AT CHOICE delete -->
