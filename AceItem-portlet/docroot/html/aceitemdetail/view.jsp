@@ -36,6 +36,10 @@
 				//dev:	metadataurl = "<a href='http://dev.ace.geocat.net/geonetwork/srv/en/metadata.show?uuid=" + aceitem.getStoredAt() + "' target='_blank'>View metadata " + aceitem.getName() + "</a>" ; 
 				metadataurl = "<a href='/geonetwork/srv/en/metadata.show?uuid=" + aceitem.getStoredAt() + "' target='_blank'>View metadata " + aceitem.getName() + "</a>" ; 
 			}
+			else if(aceitem.getStoragetype().equalsIgnoreCase("PLAINMETADATA")) {
+				// mapViewerAppId gets handled inside mapviewer-portlet
+				url = "<a href='/geonetwork/srv/en/metadata.show?uuid=" + aceitem.getStoredAt() + "' target='_blank'>View metadata " + aceitem.getName() + "</a>" ; 
+			}
 			else if(aceitem.getStoragetype().equalsIgnoreCase("SETOFMAPS")) {
 				// mapViewerAppId gets handled inside mapviewer-portlet
 				url = "<a href='/map-viewer?mapViewerAppId=" + aceitem.getStoredAt() + "' > " + aceitem.getName() + "</a>" ; 
@@ -82,10 +86,14 @@
 	 <b>Description</b><br />
 	 <% out.print( aceitem.getDescription() ); %><br /><br />
 
-<%  	if(aceitem.getStoragetype().equalsIgnoreCase("GEONETWORK") ) { %>
+<%  if(aceitem.getStoragetype().equalsIgnoreCase("GEONETWORK") ) { %>
 	<b>Go to the service</b><br />
 	 <% out.print( url ); %><br /><br />
 	 <% out.print( metadataurl ); %><br /><br />
+<%	 }
+	else if(aceitem.getStoragetype().equalsIgnoreCase("PLAINMETADATA") ) { %>
+		<b>View metadata</b><br />
+		 <% out.print( url ); %><br /><br />
 <%	 }
 	 else if(aceitem.getStoragetype().equalsIgnoreCase("SETOFMAPS") ) { %>
 		<b>View set of maps</b><br />

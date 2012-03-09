@@ -190,7 +190,8 @@ public abstract class LuceneIndexUpdatePortlet extends MVCPortlet {
         					+ aceitem.getTextwebpage() );        
 		
         if( aceitem.getStoragetype().equalsIgnoreCase("GEONETWORK") || 
-      		aceitem.getStoragetype().equalsIgnoreCase("SETOFMAPS")) {
+        	aceitem.getStoragetype().equalsIgnoreCase("PLAINMETADATA") || 
+          	aceitem.getStoragetype().equalsIgnoreCase("SETOFMAPS")) {
         		aceitem.setTextSearch( aceitem.getTextSearch() + ' ' + aceitem.getStoragetype());
         }
         

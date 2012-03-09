@@ -99,11 +99,12 @@
 	    <select name="storagetype">		
 			<option value="URL" <%= ((aceitem==null || aceitem.getStoragetype().equalsIgnoreCase("URL")) ? "selected" : "")%> >URL</option>
 			<option value="GEONETWORK" <%= ((aceitem!=null && aceitem.getStoragetype().equalsIgnoreCase("GEONETWORK")) ? "selected" : "") %> >GEONETWORK</option>
+			<option value="PLAINMETADATA" <%= ((aceitem!=null && aceitem.getStoragetype().equalsIgnoreCase("PLAINMETADATA")) ? "selected" : "") %> >PLAINMETADATA</option>
 			<option value="SETOFMAPS" <%= ((aceitem!=null && aceitem.getStoragetype().equalsIgnoreCase("SETOFMAPS")) ? "selected" : "") %> >SETOFMAPS</option>
 		</select>
 		</td>
 	    </tr></table>
-		
+	
 		<b>description</b><br />
 		<textarea name="description" rows=10 cols=100><%= aceitem == null ? "" : aceitem.getDescription() %></textarea><br /><br />
 		
