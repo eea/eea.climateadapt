@@ -293,8 +293,8 @@
 	<input type="checkbox" name="chk_importance" id="chk_importance" value="1" <% if ((measure != null) && (measure.getImportance() == 1) ) { out.print( "checked" ) ; } %> />
 	<b>High importance</b>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 
 
-<% if (renderRequest.isUserInRole("administrator") ) { // || renderRequest.isUserInRole("power-user")) { %>
-	<input type="checkbox" name="chk_controlstatus" id="chk_controlstatus" value="1" <% // if ((measure != null) && ( measure.getControlstatus() == 1) ) { out.print( "checked" ) ; } %> />
+<% if ((renderRequest.isUserInRole("Portal Content Reviewer") || renderRequest.isUserInRole("administrator"))  ) { // || renderRequest.isUserInRole("Power User")) { %>
+	<input type="checkbox" name="chk_controlstatus" id="chk_controlstatus" value="1" <% if ((renderRequest.isUserInRole("Portal Content Reviewer") || renderRequest.isUserInRole("administrator")) && (measure != null) && ( measure.getControlstatus() == 1) ) { out.print( "checked" ) ; } %> />
 	<b>Approved</b>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 
 <% } %>	
 	<b>Edited by: <% if (measure != null) { out.print( measure.getModerator() ) ; } %> </b>	
@@ -308,7 +308,6 @@
 </aui:form>
 
 <div id='map_element'></div>
-
 <script>
 	var proxyUrl = '<%= prefs.getValue(Constants.proxyUrlPreferenceName, "") %>';
 	
