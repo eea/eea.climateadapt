@@ -85,6 +85,10 @@
 								&nbsp;<a href="<c:out value="/map-viewer?cswRecordFileIdentifier=${wrappedSearchResult.storedAt}"/>" >
 									<c:out value="${wrappedSearchResult.name}"/></a>
 							</c:when>   
+							<c:when test="${fn:startsWith(wrappedSearchResult.storagetype, 'PLAINMETADATA')==true}">
+								&nbsp;<a href="<c:out value="/geonetwork/srv/en/metadata.show?uuid=${wrappedSearchResult.storedAt}"/>" target="_blank">
+									<c:out value="${wrappedSearchResult.name}"/></a>
+							</c:when>   
 							<c:when test="${fn:startsWith(wrappedSearchResult.storagetype, 'SETOFMAPS')==true}">
 								&nbsp;<a href="<c:out value="/map-viewer?mapViewerAppId=${wrappedSearchResult.storedAt}"/>" >
 									<c:out value="${wrappedSearchResult.name}"/></a>

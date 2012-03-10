@@ -42,12 +42,21 @@ public class SimpleFilterPortlet extends MVCPortlet {
 
         	String sector[] = new String[1];
         	sector[0] = (String) renderRequest.getAttribute(Constants.USERSECTOR);
-
-        	if(sector[0] != null) {
-              	 
+        	
+        	if (sector[0] == null) {
+        		
+        		sector[0] = (String) renderRequest.getPortletSession().getAttribute(Constants.USERSECTOR);
+        	}
+        	
+        	if (sector[0] != null) {
+              	         		
             	//System.out.println("Sector: " + sector[0]);
             	String impact[] = new String[1];
             	impact[0] = (String) renderRequest.getAttribute(Constants.USERIMPACT);
+            	if (impact[0] == null) {
+            		
+            		impact[0] = (String) renderRequest.getPortletSession().getAttribute(Constants.USERIMPACT);
+            	}
             	//System.out.println("Impact: " + impact[0]);
             	       
                 Map<String, String[]> requestParams;
@@ -73,10 +82,12 @@ public class SimpleFilterPortlet extends MVCPortlet {
                 	formBean.setAceitemtype( aceItemTypes );
                 }  
                 
+                renderRequest.getPortletSession().setAttribute(Constants.USERSECTOR, sector[0]);
                 if( !sector[0].equalsIgnoreCase("all") ) {
                 	formBean.setSector( sector );
                 }        	
                 
+                renderRequest.getPortletSession().setAttribute(Constants.USERIMPACT, impact[0]);
                 if( !impact[0].equalsIgnoreCase("all") ) {
                 	formBean.setImpact( impact );
                 }

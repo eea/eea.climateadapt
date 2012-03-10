@@ -49,9 +49,9 @@ else {
 }
 String selected ;
 
-String selected_impact = (String) request.getAttribute(Constants.USERIMPACT);
+String selected_impact = (String) renderRequest.getPortletSession().getAttribute(Constants.USERIMPACT);
 
-String selected_sector = (String) request.getAttribute(Constants.USERSECTOR);
+String selected_sector = (String) renderRequest.getPortletSession().getAttribute(Constants.USERSECTOR);
 
 if (selected_impact == null || selected_impact.equalsIgnoreCase("all")) {
 	

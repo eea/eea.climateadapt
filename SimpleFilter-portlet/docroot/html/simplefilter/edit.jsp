@@ -45,6 +45,9 @@ String initial_date = null;
 String final_date = null;
 String simple_date = null;
 
+String sortby = acesearchformbean.getSortBy();
+if (sortby == null) sortby = "NAME" ;
+
 String[] sectors = acesearchformbean.getSector();
 if (sectors == null) sectors = new String[0];
 List<String> sectorsList = Arrays.asList(sectors);
@@ -102,6 +105,15 @@ pageContext.setAttribute("countriesList", countriesList);
                     <input type="text" class="text" name="<%= Constants.FUZZINESS %>" value='<%= renderRequest.getPreferences().getValue(Constants.FUZZINESS, "0.7") %>' />
                  </div>
             </div>  
+            
+             <div class="search_section">
+                <div class="row">
+				<liferay-ui:message key="acesearch-sort-by" /><br />
+                <input type="radio" name="sortBy" class="sortByControl" id="${sortsearchRelevanceId}" value="RELEVANCE" <%= (sortby.equals("RELEVANCE"))?"checked":"" %> /><liferay-ui:message key="acesearch-sort-relevance" /><br />
+				<input type="radio" name="sortBy" class="sortByControl" id="${sortsearchRatingId}" value="RATING" <%= (sortby.equals("RATING"))?"checked":"" %> /><liferay-ui:message key="acesearch-sort-rating" /><br />
+                <input type="radio" name="sortBy" class="sortByControl" id="${sortsearchNameId}" value="NAME" <%= (sortby.equals("NAME"))?"checked":"" %> /><liferay-ui:message key="acesearch-sort-name" /><br />
+                </div>
+            </div>
 
              <div class="search_section">
                <h2><liferay-ui:message key="acesearch-section-header1" /></h2>
