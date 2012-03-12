@@ -92,8 +92,8 @@
 		</liferay-ui:search-container-column-text>      
 
 		<liferay-ui:search-container-column-text  
-			name="approved" orderable="<%= true %>" orderableProperty="controlstatus" >
-		<%= (measure.getControlstatus()<1 ? "No" : "Yes") %>
+			name="status" orderable="<%= true %>" orderableProperty="controlstatus" >
+		<%= (measure.getControlstatus()<Constants.Status_APPROVED ? (measure.getControlstatus()==Constants.Status_SUBMITTED ? "Submitted" : "Draft") : "Approved") %>
 		</liferay-ui:search-container-column-text> 
 
 		<liferay-ui:search-container-column-text  

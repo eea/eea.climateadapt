@@ -23,6 +23,12 @@ public class Constants {
 
 	public static String wmsPreferenceName = "wms";
 
+	public static final short Status_SUBMITTED = -1; 
+	
+	public static final short Status_DRAFT = 0;
+	
+	public static final short Status_APPROVED = 1; 
+
 	public static String zoomLevelPreferenceName = "zoomLevel";
 	
 	public static String mao_typePreferenceName = "mao_type"; // used inside ShareMeasurePortlet

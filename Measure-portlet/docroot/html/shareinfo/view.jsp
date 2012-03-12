@@ -50,7 +50,7 @@
 
 	<a href='<%= addMeasureURL.toString() %>'><%= mao_type.equalsIgnoreCase("A") ? "Add a case study" : "Add an adaptation option" %></a>
 <% 
-	if ( (measure != null) && (measure.getControlstatus() == 0) ) {
+	if ( (measure != null) && (measure.getControlstatus() != Constants.Status_APPROVED) ) {
 %>
 	<portlet:renderURL var="editMeasureURL">
 		<portlet:param name="jspPage" value="/html/shareinfo/add_measure.jsp" />

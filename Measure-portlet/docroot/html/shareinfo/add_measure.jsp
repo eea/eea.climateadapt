@@ -252,6 +252,8 @@
 	
     <b>Comments about this database item <i>[information entered below will not be displayed on the public pages of the clearinghouse]</i></b><br />	
 	<textarea style="border-color: blue; border-style: solid; border-width: thin;" name="comments" rows=10 cols=150><%= measure == null ? "" : measure.getComments() %></textarea><br /><br />
+
+	<input type="hidden" name="chk_controlstatus" id="chk_controlstatus" value="<% out.print("" + Constants.Status_SUBMITTED); %>" />
 	
 	<aui:button-row>
 		<aui:button type="submit" />
