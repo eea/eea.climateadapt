@@ -656,6 +656,7 @@ public class HarvesterUtil {
 
         List theMaps = new ArrayList();
         List<String> idList = new ArrayList<String>();
+        Map<String, String> metadataStorageTypeMap = new HashMap<String, String>();
         Map<String, String> metadataTitleMap = new HashMap<String, String>();
         Map<String, String> metadataAbstractMap = new HashMap<String, String>();
         Map<String, List<String>> metadataKeywordMap = new HashMap<String, List<String>>();
@@ -708,36 +709,17 @@ public class HarvesterUtil {
                         skip = true;
                     }
 
-
                     if (!skip) {
-                        // This element contains hierarchyLevel value
-                        if(metadata.indexOf("<category internal=\"true\">") >= 0) {
-                            int startContent = metadata.indexOf("<category internal=\"true\">") + "<category internal=\"true\">".length();
-                            int endContent = metadata.indexOf("</category>", startContent);
-                            
-                            String category = metadata.substring(startContent, endContent);
-                            System.out.println("category: " + category);
+                        // All metadata becomes ACEITEMS
+                        if (metadata.indexOf("<link type=\"wms\">") < 0) {
+                            metadataStorageTypeMap.put(id, "PLAINMETADATA");
+                            //System.out.println("PLAINMETADATA");
 
-                            // Discard service metadata
-                            if (category.equalsIgnoreCase("service")) {
-                                System.out.println("WARNING: found metadata no dataset, skipping it");
-                                skip = true;
-
-                            } else {
-                                // For datasets/series check that metadata contains a link of type wms
-                                if (metadata.indexOf("<link type=\"wms\">") < 0) {
-                                   System.out.println("WARNING: found dataset metadata with no wms link, skipping it");
-                                   skip = true;
-
-                                }
-                            }
                         } else {
-                            System.out.println("WARNING: found metadata no category set, skipping it");
-                            skip = true;
+                            metadataStorageTypeMap.put(id, "GEONETWORK");
+                            //System.out.println("GEONETWORK");
                         }
-                    }
 
-                    if(!skip) {
                         idList.add(id);
                         uuidMap.put(id, uuid);
 
@@ -806,6 +788,7 @@ public class HarvesterUtil {
             theMaps.add(metadataAbstractMap);
             theMaps.add(metadataKeywordMap);
             theMaps.add(uuidMap);
+            theMaps.add(metadataStorageTypeMap);
         }
         //System.out.println("finished creating content maps. Ids only? " + idsOnly);
         return theMaps;
@@ -918,7 +901,8 @@ public class HarvesterUtil {
      * @param harvesterResultBefore
      * @param harvesterResultAfter
      */
-    private static synchronized void storeAsAceItems(Object harvester, String harvesterResultBefore, String harvesterResultAfter) throws SystemException, PortalException, CustomPropertiesNotInitializedException {
+    private static synchronized void storeAsAceItems(Object harvester, String harvesterResultBefore, 
+                                                     String harvesterResultAfter) throws SystemException, PortalException, CustomPropertiesNotInitializedException {
         try {
         //System.out.println("applying harvesting result to AceItem table");
 
@@ -940,6 +924,7 @@ public class HarvesterUtil {
         Map<String, String> abstractMap = (Map<String, String>)contentMapAfter.get(2);
         Map<String, List<String>> keywordMap = (Map<String, List<String>>)contentMapAfter.get(3);
         Map<String, String> uuidMap = (Map<String, String>)contentMapAfter.get(4);
+        Map<String, String> storageTypeMap = (Map<String, String>)contentMapAfter.get(5);
 
         ACEIndexSynchronizer aceIndexSynchronizer = new ACEIndexSynchronizer();
 
@@ -981,7 +966,7 @@ public class HarvesterUtil {
                 String toDeleteUuid = uuidMap.get(id);
                 AceItem toUpdate = AceItemLocalServiceUtil.getAceItemByStoredAt(toDeleteUuid);
                 if(toUpdate != null) {
-                    toUpdate = fillAceItem(toUpdate, id, titleMap, abstractMap, keywordMap, uuidMap);
+                    toUpdate = fillAceItem(toUpdate, id, titleMap, abstractMap, keywordMap, uuidMap, storageTypeMap);
                     AceItemLocalServiceUtil.updateAceItem(toUpdate);
                     //System.out.println("finished updating AceItem with geonetwork id: " + id);
                     updated++;
@@ -994,7 +979,7 @@ public class HarvesterUtil {
                 else {
                     System.out.println("WARNING: failed to update AceItem with geonetwork id: " + id + ", it seems it does not exist. It will be created now.");
                     AceItem aceItem = AceItemLocalServiceUtil.createAceItem();
-                    aceItem = fillAceItem(aceItem, id, titleMap, abstractMap, keywordMap, uuidMap);
+                    aceItem = fillAceItem(aceItem, id, titleMap, abstractMap, keywordMap, uuidMap, storageTypeMap);
                     aceItem.setPublicationDate(new Date());
 
                     if(harvester instanceof WxsHarvester) {
@@ -1035,7 +1020,7 @@ public class HarvesterUtil {
                 //System.out.println("creating AceItem with geonetwork id: " + id);
                 // create it
                 AceItem aceItem = AceItemLocalServiceUtil.createAceItem();
-                aceItem = fillAceItem(aceItem, id, titleMap, abstractMap, keywordMap, uuidMap);
+                aceItem = fillAceItem(aceItem, id, titleMap, abstractMap, keywordMap, uuidMap, storageTypeMap);
                 aceItem.setPublicationDate(new Date());
 
                 if(harvester instanceof WxsHarvester) {
@@ -1091,12 +1076,15 @@ public class HarvesterUtil {
      * @param uuidMap
      * @return
      */
-    private static synchronized AceItem fillAceItem(AceItem aceItem, String id, Map<String, String> titleMap, Map<String, String> abstractMap, Map<String, List<String>> keywordMap, Map<String, String> uuidMap) {
+    private static synchronized AceItem fillAceItem(AceItem aceItem, String id, Map<String, String> titleMap,
+                                                    Map<String, String> abstractMap, Map<String,
+                                                    List<String>> keywordMap, Map<String, String> uuidMap,
+                                                    Map<String, String> storageTypeMap) {
         String uuid = uuidMap.get(id);
         System.out.println("SETTING STORED AT TO "  + uuid);
         aceItem.setStoredAt(uuid);
         aceItem.setDatatype(AceItemType.MAPGRAPHDATASET.name());
-        aceItem.setStoragetype("GEONETWORK");
+        aceItem.setStoragetype(storageTypeMap.get(id));
         String title = titleMap.get(id);
         if(title.length() > aceItemNameLength) {
             System.out.println("WARNING: Metadata title too long for AceItem, cut off. Original metadata title:\n" + title + "\n");
