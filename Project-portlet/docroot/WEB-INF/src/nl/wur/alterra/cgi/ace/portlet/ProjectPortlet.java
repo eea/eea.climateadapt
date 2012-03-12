@@ -88,7 +88,7 @@ public class ProjectPortlet extends ProjectUpdateHelper {
 			
 			newapproved = Short.parseShort(approved);
 		}
-		if ( (oldapproved == 1) &&  (newapproved == 0) ) { 
+		if ( (oldapproved == Constants.Status_APPROVED) &&  (newapproved != Constants.Status_APPROVED) ) { 
 		// The old record stays untouched, only replacesId gets filled (from now no edit or delete possible anymore)
 			project.setReplacesId( project.getProjectId() ) ;
 			// Must be done BEFORE projectFromRequest();
@@ -101,7 +101,7 @@ public class ProjectPortlet extends ProjectUpdateHelper {
 
 		if (ProjectValidator.validateProject(project, errors)) {
 			
-			if ( (oldapproved == 1) &&  (newapproved == 0) ) { 
+			if ( (oldapproved == Constants.Status_APPROVED) &&  (newapproved != Constants.Status_APPROVED) ) { 
      			// The changed item gets added as a copy with replacesId filled (is already done above)
 				// save the new copy: simple addProject
 				ProjectLocalServiceUtil.addProject(project);
@@ -109,7 +109,7 @@ public class ProjectPortlet extends ProjectUpdateHelper {
 			}
 			else {
 				
-				if ( (newapproved == 1)  && project.getReplacesId() != 0) {
+				if ( (newapproved == Constants.Status_APPROVED)  && project.getReplacesId() != 0) {
 					// delete the old project which gets replaced, update the corresponding aceitem
 					aceitem = AceItemLocalServiceUtil.getAceItemByStoredAt("ace_project_id=" + project.getReplacesId() );
 					aceitem.setStoredAt("ace_project_id=" + project.getProjectId());
