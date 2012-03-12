@@ -1,5 +1,8 @@
 package nl.wur.alterra.cgi.ace.portlet;
 
+import org.apache.commons.lang.exception.NestableException;
+import com.liferay.util.mail.MailEngine;
+import com.liferay.util.mail.MailEngineException;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.WebKeys;
 import com.liferay.portal.model.User;
@@ -13,6 +16,7 @@ import nl.wur.alterra.cgi.ace.model.constants.AceItemElement;
 import nl.wur.alterra.cgi.ace.model.constants.AceItemSector;
 import nl.wur.alterra.cgi.ace.search.lucene.ACEIndexSynchronizer;
 
+import javax.mail.internet.InternetAddress;
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
 import javax.portlet.PortletRequest;
@@ -246,8 +250,63 @@ public abstract class LuceneIndexUpdatePortlet extends MVCPortlet {
 		}
 		else {
 			aceitem.setControlstatus( Short.parseShort(approved));
+			
+			if(aceitem.getControlstatus()==Constants.Status_SUBMITTED) {
+				System.out.println("sendSubmitNotification");
+				sendSubmitNotification(aceitem);
+			}
 		}
 		
         return aceitem;
+    }
+    
+    private void sendSubmitNotification(AceItem aceitem) {
+      try {
+    	InternetAddress fromInternetAddress = new InternetAddress("no-reply@eea.europa.eu"); // CustomProperties.getProperty(CustomProperties.NOTIFICATIONMAIL_FROM_ADDRESS);
+    	String notificationaddresslist="hugo.degroot@wur.nl;hugo.degroot@wanadoo.nl"; // CustomProperties.getProperty(CustomProperties.NOTIFICATIONMAIL_TO_ADDRESSLIST);
+    	
+    	String[] notificationaddresses = notificationaddresslist.split(";");
+     	InternetAddress[] toInternetAddresses = new InternetAddress[notificationaddresses.length] ;
+     	for(int i = 0 ; i < notificationaddresses.length; i++) { 		
+    		toInternetAddresses[i] = new InternetAddress(notificationaddresses[i]);
+    	}
+    	
+    	String subject = " is waiting for approval";
+    	String body = "Please have a look at the submitted ";
+    	String hosturl="http://ace.geocat.net"; // CustomProperties.getProperty(CustomProperties.NOTIFICATIONMAIL_HOSTURL);
+    	String viewprojectpage="/projects1";    // CustomProperties.getProperty(CustomProperties.NOTIFICATIONMAIL_PROJECTPAGE);
+    	String viewmeasurepage="/viewmeasure";  // CustomProperties.getProperty(CustomProperties.NOTIFICATIONMAIL_MEASUREPAGE);
+    	String viewaceitempage="/viewaceitem";  // CustomProperties.getProperty(CustomProperties.NOTIFICATIONMAIL_ACEITEMPAGE);
+    	if(aceitem.getStoragetype().equalsIgnoreCase("PROJECT")) {
+    		subject = "A project " + subject;
+    		body += "project at " + hosturl + viewprojectpage + "?" + aceitem.getStoredAt();
+      	}
+    	else if(aceitem.getStoragetype().equalsIgnoreCase("MEASURE")) {
+    		subject = "A measure " + subject;
+    		
+    		if(aceitem.getDatatype().equalsIgnoreCase("ACTION")) {
+    			body += "case study " ;
+    		}
+    		else {
+    			body += "adaptation option " ;
+    		}
+    	
+    		body += " at " + hosturl + viewmeasurepage + "?" + aceitem.getStoredAt();
+        }
+    	else {
+    		subject = "A database item " + subject;
+    		body += "item at " + hosturl + viewaceitempage + "?aceitem_id=" + aceitem.getAceItemId();
+    	}
+    	
+    	subject = "Climate-adapt: " + subject;
+		    	
+    	MailEngine.send(fromInternetAddress, toInternetAddresses, null, null, subject, body, false, null, null, null);
+      }
+      catch (Exception e) {
+    	  // do nothing
+    	  System.out.println("Sending submit notification for database item failed.");
+    	  System.out.println(e.getMessage());
+    	  e.printStackTrace();
+      }
     }
 }
