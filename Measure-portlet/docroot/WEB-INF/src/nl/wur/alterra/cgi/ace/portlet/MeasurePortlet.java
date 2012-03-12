@@ -86,7 +86,7 @@ public class MeasurePortlet extends MeasureUpdateHelper {
 			
 			newapproved = Short.parseShort(approved);
 		}
-		if ( (oldapproved == 1) &&  (newapproved == 0) ) { 
+		if ( (oldapproved == Constants.Status_APPROVED) &&  (newapproved != Constants.Status_APPROVED) ) { 
 		// The old record stays untouched, only replacesId gets filled (from now no edit or delete possible anymore)
 			measure.setReplacesId( measure.getMeasureId() ) ;
 			// Must be done BEFORE measureFromRequest();
@@ -99,7 +99,7 @@ public class MeasurePortlet extends MeasureUpdateHelper {
 
 		if (MeasureValidator.validateMeasure(measure, errors)) {
 		
-			if ( (oldapproved == 1) &&  (newapproved == 0) ) { 
+			if ( (oldapproved == Constants.Status_APPROVED) &&  (newapproved != Constants.Status_APPROVED) ) { 
      			// The changed item gets added as a copy with replacesId filled (is already done above)
 				// save the new copy: simple addMeasure
 				MeasureLocalServiceUtil.addMeasure(measure);
@@ -107,7 +107,7 @@ public class MeasurePortlet extends MeasureUpdateHelper {
 			}
 			else {
 				
-				if ( (newapproved == 1)  && measure.getReplacesId() != 0) {
+				if ( (newapproved == Constants.Status_APPROVED)  && measure.getReplacesId() != 0) {
 					// delete the old measure which gets replaced, update the corresponding aceitem
 					aceitem = AceItemLocalServiceUtil.getAceItemByStoredAt("ace_measure_id=" + measure.getReplacesId() );
 					aceitem.setStoredAt("ace_measure_id=" + measure.getMeasureId());
