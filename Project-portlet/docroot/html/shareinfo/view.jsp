@@ -49,7 +49,7 @@
 
 	<a href='<%= addProjectURL.toString() %>'>Add a research / knowledge project.</a>
 <% 
-	if ( (project != null) && (project.getControlstatus() == 0) ) {
+	if ( (project != null) && (project.getControlstatus() != Constants.Status_APPROVED) ) {
 %>
 	<portlet:renderURL var="editProjectURL">
 		<portlet:param name="jspPage" value="/html/shareinfo/add_project.jsp" />
