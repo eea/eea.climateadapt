@@ -23,9 +23,9 @@ public class Constants {
 
 	public static String wmsPreferenceName = "wms";
 
-	public static final short Status_SUBMITTED = -1; 
+	public static final short Status_SUBMITTED = 0; 
 	
-	public static final short Status_DRAFT = 0;
+	public static final short Status_DRAFT = -1;
 	
 	public static final short Status_APPROVED = 1; 
 
