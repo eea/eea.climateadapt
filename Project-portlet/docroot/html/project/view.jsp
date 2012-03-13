@@ -94,7 +94,7 @@
 		
 		<liferay-ui:search-container-column-text  
 			name="status" orderable="<%= true %>" orderableProperty="controlstatus" >
-		<%= (project.getControlstatus()<Constants.Status_APPROVED ? (project.getControlstatus()==Constants.Status_SUBMITTED ? "Submitted" : "Draft") : "Approved") %>
+		<%= (project.getControlstatus()<ACEIndexUtil.Status_APPROVED ? (project.getControlstatus()==ACEIndexUtil.Status_SUBMITTED ? "Submitted" : "Draft") : "Approved") %>
 		</liferay-ui:search-container-column-text> 
 
 		<liferay-ui:search-container-column-text  

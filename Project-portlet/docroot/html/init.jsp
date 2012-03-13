@@ -27,6 +27,7 @@
 <%@ page import="nl.wur.alterra.cgi.ace.model.Project"%>
 <%@ page import="nl.wur.alterra.cgi.ace.service.ProjectLocalServiceUtil"%>
 <%@ page import="nl.wur.alterra.cgi.ace.portlet.ProjectUtil"%>
+<%@ page import="nl.wur.alterra.cgi.ace.search.lucene.ACEIndexUtil"%>
 
 <liferay-theme:defineObjects />
 

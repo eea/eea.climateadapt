@@ -250,7 +250,7 @@ public abstract class ProjectUpdateHelper extends MVCPortlet {
 	
     protected void sendSubmitNotification(Project project) {
 
-    	  if(project.getControlstatus()==Constants.Status_SUBMITTED)  { 	
+    	  if(project.getControlstatus()==ACEIndexUtil.Status_SUBMITTED)  { 	
         	try {
         	InternetAddress fromInternetAddress = new InternetAddress(ACEIndexUtil.retrieveNotificationFromAddress());
         	String notificationaddresslist=ACEIndexUtil.retrieveNotificationToAddressList(); 

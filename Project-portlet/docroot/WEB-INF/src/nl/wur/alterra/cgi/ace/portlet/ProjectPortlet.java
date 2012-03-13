@@ -18,6 +18,7 @@ import nl.wur.alterra.cgi.ace.model.constants.AceItemType;
 import nl.wur.alterra.cgi.ace.model.impl.AceItemImpl;
 import nl.wur.alterra.cgi.ace.model.impl.ProjectImpl;
 import nl.wur.alterra.cgi.ace.search.lucene.ACEIndexSynchronizer;
+import nl.wur.alterra.cgi.ace.search.lucene.ACEIndexUtil;
 import nl.wur.alterra.cgi.ace.service.AceItemLocalServiceUtil;
 import nl.wur.alterra.cgi.ace.service.ProjectLocalServiceUtil;
 
@@ -56,6 +57,11 @@ public class ProjectPortlet extends ProjectUpdateHelper {
 			
 			SessionMessages.add(request, "project-added");
 
+			String notify = ParamUtil.getString(request, "notify_status");
+			if( (notify != null ) && (notify.length()>0) && (project.getControlstatus() == ACEIndexUtil.Status_SUBMITTED)) {
+				sendSubmitNotification(project);
+			}			
+			
 			sendRedirect(request, response);
 		}
 		else {
@@ -88,7 +94,7 @@ public class ProjectPortlet extends ProjectUpdateHelper {
 			
 			newapproved = Short.parseShort(approved);
 		}
-		if ( (oldapproved == Constants.Status_APPROVED) &&  (newapproved != Constants.Status_APPROVED) ) { 
+		if ( (oldapproved == ACEIndexUtil.Status_APPROVED) &&  (newapproved != ACEIndexUtil.Status_APPROVED) ) { 
 		// The old record stays untouched, only replacesId gets filled (from now no edit or delete possible anymore)
 			project.setReplacesId( project.getProjectId() ) ;
 			// Must be done BEFORE projectFromRequest();
@@ -101,7 +107,7 @@ public class ProjectPortlet extends ProjectUpdateHelper {
 
 		if (ProjectValidator.validateProject(project, errors)) {
 			
-			if ( (oldapproved == Constants.Status_APPROVED) &&  (newapproved != Constants.Status_APPROVED) ) { 
+			if ( (oldapproved == ACEIndexUtil.Status_APPROVED) &&  (newapproved != ACEIndexUtil.Status_APPROVED) ) { 
      			// The changed item gets added as a copy with replacesId filled (is already done above)
 				// save the new copy: simple addProject
 				ProjectLocalServiceUtil.addProject(project);
@@ -109,7 +115,7 @@ public class ProjectPortlet extends ProjectUpdateHelper {
 			}
 			else {
 				
-				if ( (newapproved == Constants.Status_APPROVED)  && project.getReplacesId() != 0) {
+				if ( (newapproved == ACEIndexUtil.Status_APPROVED)  && project.getReplacesId() != 0) {
 					// delete the old project which gets replaced, update the corresponding aceitem
 					aceitem = AceItemLocalServiceUtil.getAceItemByStoredAt("ace_project_id=" + project.getReplacesId() );
 					aceitem.setStoredAt("ace_project_id=" + project.getProjectId());
@@ -125,6 +131,11 @@ public class ProjectPortlet extends ProjectUpdateHelper {
 			}
 			
 			SessionMessages.add(request, "project-updated");
+			
+			String notify = ParamUtil.getString(request, "notify_status");
+			if( (notify != null ) && (notify.length()>0) && (newapproved == ACEIndexUtil.Status_SUBMITTED)) {
+				sendSubmitNotification(project);
+			}
 			
 			sendRedirect(request, response);
 		}
