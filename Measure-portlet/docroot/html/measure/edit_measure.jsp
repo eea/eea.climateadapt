@@ -310,9 +310,9 @@
 	<input type="hidden" name="chk_controlstatus" id="chk_controlstatus" value=<% out.print( ((measure != null) && (measure.getControlstatus() == ACEIndexUtil.Status_SUBMITTED)) ? "" + ACEIndexUtil.Status_SUBMITTED : "" + ACEIndexUtil.Status_DRAFT ) ;%> />
 	<input type="hidden" name="notify_status" id="notify_status" value="1" />
 	<aui:button-row>
-		<input value="Save as draft" type="button" onClick="document.getElementById('chk_controlstatus').value=<% out.print("" + ACEIndexUtil.Status_DRAFT); %>; document.forms[0].submit();" />
+		<input value="Save as draft" type="button" onClick="document.getElementById('chk_controlstatus').value=<% out.print("" + ACEIndexUtil.Status_DRAFT); %>; document._measureportlet_WAR_Measureportlet_fm.submit();" />
 
-		<input value="Submit for publication" type="button" onClick="document.getElementById('chk_controlstatus').value=<% out.print("" + ACEIndexUtil.Status_SUBMITTED); %>; document.forms[0].submit();" />
+		<input value="Submit for publication" type="button" onClick="document.getElementById('chk_controlstatus').value=<% out.print("" + ACEIndexUtil.Status_SUBMITTED); %>; document._measureportlet_WAR_Measureportlet_fm.submit();" />
 		
 		<input value="Cancel" type="button"  onClick="history.go(-1);" /> <!-- onClick="< %= redirect % >" -->
 	</aui:button-row>	
