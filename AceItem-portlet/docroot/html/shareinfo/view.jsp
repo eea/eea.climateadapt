@@ -71,7 +71,7 @@
 
 	<a href='<%= addAceItemURL.toString() %>'>Add <%= literal %><%= typedescription %></a>
 <% 
-	if ( (aceitem != null) && (aceitem.getControlstatus() != Constants.Status_APPROVED) ) {
+	if ( (aceitem != null) && (aceitem.getControlstatus() != ACEIndexUtil.Status_APPROVED) ) {
 %>
 	<portlet:renderURL var="editAceItemURL">
 		<portlet:param name="jspPage" value="/html/shareinfo/add_aceitem.jsp" />

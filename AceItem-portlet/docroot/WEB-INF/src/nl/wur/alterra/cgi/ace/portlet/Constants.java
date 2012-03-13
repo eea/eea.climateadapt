@@ -11,9 +11,4 @@ public class Constants {
 	
 	public static final String SHARETYPE = "sharetype"; // used inside ShareAceItemPortlet
 
-	public static final short Status_SUBMITTED = 0; 
-	
-	public static final short Status_DRAFT = -1;
-	
-	public static final short Status_APPROVED = 1;
 }

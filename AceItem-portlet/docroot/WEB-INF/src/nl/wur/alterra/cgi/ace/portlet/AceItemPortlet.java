@@ -8,6 +8,7 @@ import com.liferay.portal.util.PortalUtil;
 import nl.wur.alterra.cgi.ace.model.AceItem;
 import nl.wur.alterra.cgi.ace.model.impl.AceItemImpl;
 import nl.wur.alterra.cgi.ace.search.lucene.ACEIndexSynchronizer;
+import nl.wur.alterra.cgi.ace.search.lucene.ACEIndexUtil;
 import nl.wur.alterra.cgi.ace.service.AceItemLocalServiceUtil;
 
 import javax.portlet.ActionRequest;
@@ -35,6 +36,12 @@ public class AceItemPortlet extends LuceneIndexUpdatePortlet {
 			AceItemLocalServiceUtil.addAceItem(aceitem);
 			SessionMessages.add(request, "aceitem-added");
             synchronizeIndexSingleAceItem(aceitem);
+
+			String notify = ParamUtil.getString(request, "notify_status");
+			if( (notify != null ) && (notify.length()>0) && (aceitem.getControlstatus() == ACEIndexUtil.Status_SUBMITTED)) {
+				sendSubmitNotification(aceitem);
+			}
+			
 			sendRedirect(request, response);
 		}
 		else {
@@ -61,7 +68,7 @@ public class AceItemPortlet extends LuceneIndexUpdatePortlet {
 			
 			newapproved = Short.parseShort(approved);
 		}
-		if ( (oldapproved == Constants.Status_APPROVED) &&  (newapproved != Constants.Status_APPROVED) ) { 
+		if ( (oldapproved == ACEIndexUtil.Status_APPROVED) &&  (newapproved != ACEIndexUtil.Status_APPROVED) ) { 
 		// The old record stays untouched, only replacesId gets filled (from now no edit or delete possible anymore)
 			aceitem.setReplacesId( aceitem.getAceItemId() ) ;
 			// Must be done BEFORE aceitemFromRequest();
@@ -72,7 +79,7 @@ public class AceItemPortlet extends LuceneIndexUpdatePortlet {
 		
 		List<String> errors = new ArrayList<String>();
 		if (AceItemValidator.validateAceItem(aceitem, errors)) {
-			if ( (oldapproved == Constants.Status_APPROVED) &&  (newapproved != Constants.Status_APPROVED) ) { 
+			if ( (oldapproved == ACEIndexUtil.Status_APPROVED) &&  (newapproved != ACEIndexUtil.Status_APPROVED) ) { 
      			// The changed item gets added as a copy with replacesId filled (is already done above)
 				// save the new copy: simple addAceItem
 				AceItemLocalServiceUtil.addAceItem(aceitem);
@@ -80,7 +87,7 @@ public class AceItemPortlet extends LuceneIndexUpdatePortlet {
 			}
 			else {
 				
-				if ( (newapproved == Constants.Status_APPROVED)  && aceitem.getReplacesId() != 0) {
+				if ( (newapproved == ACEIndexUtil.Status_APPROVED)  && aceitem.getReplacesId() != 0) {
 					// delete the old aceitem which gets replaced
 					AceItem oldaceitem = AceItemLocalServiceUtil.getAceItem(aceitem.getReplacesId());
 					new ACEIndexSynchronizer().delete(oldaceitem);	
@@ -92,6 +99,12 @@ public class AceItemPortlet extends LuceneIndexUpdatePortlet {
 			}
 			SessionMessages.add(request, "aceitem-updated");
             synchronizeIndexSingleAceItem(aceitem);
+
+            String notify = ParamUtil.getString(request, "notify_status");
+			if( (notify != null ) && (notify.length()>0) && (newapproved == ACEIndexUtil.Status_SUBMITTED)) {
+				sendSubmitNotification(aceitem);
+			}
+			
 			sendRedirect(request, response);
 		}
 		else {

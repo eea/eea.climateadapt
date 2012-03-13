@@ -32,6 +32,7 @@
 <%@ page import="nl.wur.alterra.cgi.ace.service.WxsHarvesterLocalServiceUtil"%>
 <%@ page import="nl.wur.alterra.cgi.ace.model.CSWHarvester"%>
 <%@ page import="nl.wur.alterra.cgi.ace.service.CSWHarvesterLocalServiceUtil"%>
+<%@ page import="nl.wur.alterra.cgi.ace.search.lucene.ACEIndexUtil"%>
 <liferay-theme:defineObjects />
 
 <portlet:defineObjects />

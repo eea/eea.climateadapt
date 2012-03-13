@@ -257,7 +257,7 @@ public abstract class LuceneIndexUpdatePortlet extends MVCPortlet {
     
     protected void sendSubmitNotification(AceItem aceitem) {
 
-	  if(aceitem.getControlstatus()==Constants.Status_SUBMITTED)  { 	
+	  if(aceitem.getControlstatus()==ACEIndexUtil.Status_SUBMITTED)  { 	
     	try {
     	InternetAddress fromInternetAddress = new InternetAddress(ACEIndexUtil.retrieveNotificationFromAddress());
     	String notificationaddresslist=ACEIndexUtil.retrieveNotificationToAddressList(); 
