@@ -52,7 +52,8 @@ public class ShareProjectPortlet extends ProjectUpdateHelper {
 			updateAceItem(project, aceitem);
 			
 			SessionMessages.add(request, "project-added");
-			
+
+            sendSubmitNotification(project);			
 			request.getPortletSession().setAttribute("lastAddedProjectId", "" + project.getProjectId() );
 			
 			sendRedirect(request, response);
@@ -94,6 +95,7 @@ public class ShareProjectPortlet extends ProjectUpdateHelper {
 			
 			SessionMessages.add(request, "project-updated");
 
+            sendSubmitNotification(project);
 			request.getPortletSession().setAttribute("lastAddedProjectId", "" + project.getProjectId() );
 			
 			sendRedirect(request, response);

@@ -6,6 +6,8 @@ import com.liferay.portal.model.User;
 import com.liferay.portal.service.UserServiceUtil;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.util.bridges.mvc.MVCPortlet;
+import com.liferay.util.mail.MailEngine;
+
 import nl.wur.alterra.cgi.ace.model.AceItem;
 import nl.wur.alterra.cgi.ace.model.Project;
 import nl.wur.alterra.cgi.ace.model.constants.AceItemClimateImpact;
@@ -13,8 +15,10 @@ import nl.wur.alterra.cgi.ace.model.constants.AceItemCountry;
 import nl.wur.alterra.cgi.ace.model.constants.AceItemElement;
 import nl.wur.alterra.cgi.ace.model.constants.AceItemSector;
 import nl.wur.alterra.cgi.ace.search.lucene.ACEIndexSynchronizer;
+import nl.wur.alterra.cgi.ace.search.lucene.ACEIndexUtil;
 import nl.wur.alterra.cgi.ace.service.AceItemLocalServiceUtil;
 
+import javax.mail.internet.InternetAddress;
 import javax.portlet.PortletRequest;
 
 /**
@@ -243,5 +247,36 @@ public abstract class ProjectUpdateHelper extends MVCPortlet {
 
         new ACEIndexSynchronizer().reIndex(aceitem);
 	}
+	
+    protected void sendSubmitNotification(Project project) {
 
+    	  if(project.getControlstatus()==Constants.Status_SUBMITTED)  { 	
+        	try {
+        	InternetAddress fromInternetAddress = new InternetAddress(ACEIndexUtil.retrieveNotificationFromAddress());
+        	String notificationaddresslist=ACEIndexUtil.retrieveNotificationToAddressList(); 
+        	
+        	String[] notificationaddresses = notificationaddresslist.split(";");
+         	InternetAddress[] toInternetAddresses = new InternetAddress[notificationaddresses.length] ;
+         	for(int i = 0 ; i < notificationaddresses.length; i++) { 		
+         		if (notificationaddresses[i].trim().length() > 0 ) {
+         			toInternetAddresses[i] = new InternetAddress(notificationaddresses[i]);
+         		}
+        	}
+         	
+         	String hosturl=ACEIndexUtil.retrieveNotificationHostUrl();
+         	
+        	String subject = "Climate-adapt: A project is waiting for approval";
+        	String body = "Please have a look at the submitted ";
+        	body += "project at " + hosturl + "/projects1?ace_project_id=" + project.getProjectId();
+    		    	
+        	MailEngine.send(fromInternetAddress, toInternetAddresses, null, null, subject, body, false, null, null, null);
+          }
+          catch (Exception e) {
+        	  // do nothing
+        	  System.out.println("Sending submit notification for project failed.");
+        	  System.out.println(e.getMessage());
+        	  e.printStackTrace();
+          }
+        }
+      }
 }

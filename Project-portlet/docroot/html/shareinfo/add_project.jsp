@@ -210,7 +210,7 @@
 	<aui:button-row>
 		<aui:button type="submit" />
 
-		<aui:button type="cancel"  onClick="history.go(-1);" /> <!-- onClick="< %= redirect % >" -->
+		<aui:button type="cancel" onClick="<%= redirect %>" />
 	</aui:button-row>
 </aui:form>
 <% }  %>		
