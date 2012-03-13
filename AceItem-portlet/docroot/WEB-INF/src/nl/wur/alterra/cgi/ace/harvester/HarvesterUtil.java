@@ -711,14 +711,43 @@ public class HarvesterUtil {
 
                     if (!skip) {
                         // All metadata becomes ACEITEMS
-                        if (metadata.indexOf("<link type=\"wms\">") < 0) {
-                            metadataStorageTypeMap.put(id, "PLAINMETADATA");
-                            //System.out.println("PLAINMETADATA");
+
+                        // Check if category present
+                        if(metadata.indexOf("<category internal=\"true\">") >= 0) {
+                            int startContent = metadata.indexOf("<category internal=\"true\">") + "<category internal=\"true\">".length();
+                            int endContent = metadata.indexOf("</category>", startContent);
+
+                            String category = metadata.substring(startContent, endContent);
+                            //System.out.println("category: " + category);
+
+                            // Service metadata
+                            if (category.equalsIgnoreCase("service")) {
+                                metadataStorageTypeMap.put(id, "PLAINMETADATA");
+                                //System.out.println("PLAINMETADATA");
+
+                            } else {
+                                // For datasets/series check that metadata contains a link of type wms
+                                if (metadata.indexOf("<link type=\"wms\">") < 0) {
+                                    metadataStorageTypeMap.put(id, "PLAINMETADATA");
+                                    //System.out.println("PLAINMETADATA");
+
+                                } else {
+                                    metadataStorageTypeMap.put(id, "GEONETWORK");
+                                    //System.out.println("GEONETWORK");
+                                }
+                            }
 
                         } else {
-                            metadataStorageTypeMap.put(id, "GEONETWORK");
-                            //System.out.println("GEONETWORK");
+                            if (metadata.indexOf("<link type=\"wms\">") < 0) {
+                                metadataStorageTypeMap.put(id, "PLAINMETADATA");
+                                //System.out.println("PLAINMETADATA");
+
+                            } else {
+                                metadataStorageTypeMap.put(id, "GEONETWORK");
+                                //System.out.println("GEONETWORK");
+                            }
                         }
+
 
                         idList.add(id);
                         uuidMap.put(id, uuid);
