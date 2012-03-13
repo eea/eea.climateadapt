@@ -164,16 +164,6 @@ public class GeonetHarvester extends AbstractHarvester
 			settingMan.add(dbms, "id:"+searchID, "sourceUuid", s.sourceUuid);
 			settingMan.add(dbms, "id:"+searchID, "sourceName", s.sourceName);
 		}
-
-		//--- store group mapping
-
-		for (Group g : params.getGroupCopyPolicy())
-		{
-			String  groupID = settingMan.add(dbms, path, "groupCopyPolicy", "");
-
-			settingMan.add(dbms, "id:"+groupID, "name",   g.name);
-			settingMan.add(dbms, "id:"+groupID, "policy", g.policy);
-		}
 	}
 
 	//---------------------------------------------------------------------------

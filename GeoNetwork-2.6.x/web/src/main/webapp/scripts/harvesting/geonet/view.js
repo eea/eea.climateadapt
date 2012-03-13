@@ -11,7 +11,8 @@ gn.View = function(xmlLoader)
 	var searchTransf = new XSLTransformer('harvesting/geonet/client-search-row.xsl', xmlLoader);
 	var policyTransf = new XSLTransformer('harvesting/geonet/client-policy-row.xsl', xmlLoader);
 	var resultTransf = new XSLTransformer('harvesting/geonet/client-result-tip.xsl', xmlLoader);
-	
+    var privilTransf = new XSLTransformer('harvesting/geonet/client-privil-row.xsl', xmlLoader);
+
 	var loader = xmlLoader;
 	var valid  = new Validator(loader);
 	var shower = null;
@@ -21,6 +22,7 @@ gn.View = function(xmlLoader)
 		
 	this.setPrefix('gn');
 	this.setResultTransf(resultTransf);
+    this.setPrivilTransf(privilTransf);
 	
 	//--- public methods
 	
@@ -116,20 +118,10 @@ function setData(node)
 	
 	for (var i=0; i<list.length; i++)
 		addSearch(list[i]);
-	
-	//--- add group mapping
-	
-	var list = policies.getElementsByTagName('group');
-	
-	removeAllPolicyGroups();
-	
-	for (var i=0; i<list.length; i++)
-	{
-		var name  = list[i].getAttribute('name');
-		var policy= list[i].getAttribute('policy');
-		
-		addPolicyGroup(name, policy);
-	}
+
+
+    this.removeAllGroupRows();
+    this.addGroupRows(node);
 	
 	//--- set categories
 
@@ -179,9 +171,8 @@ function getData()
 	data.CATEGORIES = this.getSelectedCategories();
 	
 	//--- add group mapping information
-		
-	data.GROUP_LIST = getPolicyGroups();
-	
+    data.PRIVILEGES = this.getPrivileges();
+
 	return data;
 }
 

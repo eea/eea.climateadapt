@@ -35,19 +35,11 @@ function retrieveSources(data, callBack)
 
 //=====================================================================================
 
-function retrieveGroups(data, callBack, username, password)
+function retrieveGroups(callBack)
 {
-	this.retrieveGroupsCB = callBack;
-	
-	var url = 'http://'+ data.HOST;
-	
-	if (data.PORT != '')
-		url += ':'+data.PORT;
-		
-	url += '/'+data.SERVLET+'/srv/'+Env.lang+'/xml.info';
-	
-	new InfoService(loader, 'groups', callBack, url, username, password);
+    new InfoService(loader, 'groups', callBack);
 }
+
 
 //=====================================================================================
 
@@ -100,16 +92,6 @@ function getUpdateRequest(data)
 	
 	request = str.replace(request, '{SEARCH_LIST}', text);
 	
-	//--- substitute group mapping
-	
-	list = data.GROUP_LIST;
-	text = '';
-		
-	for (var i=0; i<list.length; i++)
-		text += str.substitute(groupTemp, list[i]);
-	
-	request = str.replace(request, '{GROUP_LIST}', text);
-	
 	return this.substituteCommon(data, request);	
 }
 
@@ -142,10 +124,10 @@ var updateTemp =
 '    <searches>'+
 '       {SEARCH_LIST}'+
 '    </searches>'+
-    
-'    <groupsCopyPolicy>'+
-'       {GROUP_LIST}'+
-'    </groupsCopyPolicy>'+
+
+'    <privileges>'+
+'       {PRIVIL_LIST}'+
+'    </privileges>'+
 
 '    <categories>'+
 '       {CATEG_LIST}'+

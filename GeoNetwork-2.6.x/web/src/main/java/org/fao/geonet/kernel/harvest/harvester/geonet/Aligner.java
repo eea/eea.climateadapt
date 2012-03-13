@@ -31,10 +31,7 @@ import jeeves.utils.XmlRequest;
 import org.fao.geonet.GeonetContext;
 import org.fao.geonet.constants.Geonet;
 import org.fao.geonet.kernel.DataManager;
-import org.fao.geonet.kernel.harvest.harvester.CategoryMapper;
-import org.fao.geonet.kernel.harvest.harvester.GroupMapper;
-import org.fao.geonet.kernel.harvest.harvester.RecordInfo;
-import org.fao.geonet.kernel.harvest.harvester.UUIDMapper;
+import org.fao.geonet.kernel.harvest.harvester.*;
 import org.fao.geonet.kernel.mef.IMEFVisitor;
 import org.fao.geonet.kernel.mef.MEFLib;
 import org.fao.geonet.kernel.mef.MEFVisitor;
@@ -287,7 +284,7 @@ public class Aligner
 		new File(priDir).mkdirs();
 
 		addCategories(id);
-		addPrivileges(id, info.getChild("privileges"));
+        addPrivileges(id);
 
 		dbms.commit();
 		dataMan.indexMetadataGroup(dbms, id);
@@ -320,59 +317,34 @@ public class Aligner
 	//--- Privileges
 	//--------------------------------------------------------------------------
 
-	private void addPrivileges(String id, Element privil) throws Exception
-	{
-		Map<String, Set<String>> groupOper = buildPrivileges(privil);
+    private void addPrivileges(String id) throws Exception
+    {
+        for (Privileges priv : params.getPrivileges())
+        {
+            String name = localGroups.getName(priv.getGroupId());
 
-		for (Group remoteGroup : params.getGroupCopyPolicy())
-		{
-			//--- get operations allowed to remote group
-			Set<String> oper = groupOper.get(remoteGroup.name);
+            if (name == null)
+                log.debug("    - Skipping removed group with id:"+ priv.getGroupId());
+            else
+            {
+                log.debug("    - Setting privileges for group : "+ name);
 
-			//--- if we don't find any match, maybe the remote group has been removed
+                for (int opId: priv.getOperations())
+                {
+                    name = dataMan.getAccessManager().getPrivilegeName(opId);
 
-			if (oper == null)
-				log.info("    - Remote group has been removed or no privileges exist : "+ remoteGroup.name);
-			else
-			{
-				String localGrpId = localGroups.getID(remoteGroup.name);
-
-				if (localGrpId == null)
-				{
-					//--- group does not exist locally
-
-					if (remoteGroup.policy == Group.CopyPolicy.CREATE_AND_COPY)
-					{
-						log.debug("    - Creating local group : "+ remoteGroup.name);
-						localGrpId = createGroup(remoteGroup.name);
-
-						if (localGrpId == null)
-							log.info("    - Specified group was not found remotely : "+ remoteGroup.name);
-						else
-						{
-							log.debug("    - Setting privileges for group : "+ remoteGroup.name);
-							addOperations(id, localGrpId, oper);
-						}
-					}
-				}
-				else
-				{
-					//--- group exists locally
-
-					if (remoteGroup.policy == Group.CopyPolicy.COPY_TO_INTRANET)
-					{
-						log.debug("    - Setting privileges for 'intranet' group");
-						addOperations(id, "0", oper);
-					}
-					else
-					{
-						log.debug("    - Setting privileges for group : "+ remoteGroup.name);
-						addOperations(id, localGrpId, oper);
-					}
-				}
-			}
-		}
-	}
+                    //--- allow only: view, dynamic, featured
+                    if (opId == 0 || opId == 5 || opId == 6)
+                    {
+                        log.debug("       --> "+ name);
+                        dataMan.setOperation(dbms, id, priv.getGroupId(), opId +"");
+                    }
+                    else
+                        log.debug("       --> "+ name +" (skipped)");
+                }
+            }
+        }
+    }
 
 	//--------------------------------------------------------------------------
 
@@ -545,7 +517,7 @@ public class Aligner
 		addCategories(id);
 
 		dbms.execute("DELETE FROM OperationAllowed WHERE metadataId=?", Integer.parseInt(id));
-		addPrivileges(id, info.getChild("privileges"));
+		addPrivileges(id);
 
 		dbms.commit();
 		dataMan.indexMetadataGroup(dbms, id);

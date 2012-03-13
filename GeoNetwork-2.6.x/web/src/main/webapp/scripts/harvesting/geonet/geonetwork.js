@@ -26,7 +26,8 @@ function Geonetwork(xmlLoader)
 	this.removeSearchRow = view.removeSearch;
 	this.getResultTip    = view.getResultTip;
 	this.retrieveSources = retrieveSources;
-	this.retrieveGroups  = retrieveGroups;
+    this.addGroupRow    = addGroupRow;
+    this.removeGroupRow = view.removeGroupRow;
 	
 	this.model = model;
 	this.view  = view;
@@ -46,7 +47,8 @@ this.getEditPanel = function() { return "gn.editPanel"; }
 this.init = function()
 {
 	this.view.init();
-	
+
+    model.retrieveGroups    (ker.wrap(this, init_groups_OK));
 	model.retrieveCategories(ker.wrap(this, init_categ_OK));
 	model.retrieveImportXslts     (ker.wrap(this, init_importXslts_OK));
 }
@@ -91,54 +93,14 @@ function retrieveSources()
 
 //=====================================================================================
 
-function retrieveGroups()
+function init_groups_OK(data)
 {
-	var data = view.getHostData();
-	
-	if (data.HOST == '')
-		alert(loader.getText('supplyHost'));
-		
-	else if (data.SERVLET == '')
-		alert(loader.getText('supplyServlet'));
-		
-	else
-	{
-		var cb = ker.wrap(this, retrieveGroups_OK);
-	
-		if (data.USE_ACCOUNT)
-			model.retrieveGroups(data, cb, data.USERNAME, data.PASSWORD);
-		else
-			model.retrieveGroups(data, cb);
-	}
+    view.clearGroups();
+
+    for (var i=0; i<data.length; i++)
+        view.addGroup(data[i].id, data[i].label[Env.lang]);
 }
 
-//-------------------------------------------------------------------------------------
-
-function retrieveGroups_OK(data)
-{
-	//--- add new groups
-	
-	for (var i=0; i<data.length; i++)
-	{	
-		var remoteGroup = data[i];
-		var policyGroup = view.findPolicyGroup(remoteGroup.name);
-		
-		//--- skip 'intranet' group
-		if (remoteGroup.id == '0')
-			continue;
-			
-		if (policyGroup == null)
-			view.addPolicyGroup(remoteGroup.name, 'dontCopy');
-	}
-	
-	//--- remove missing groups
-	
-	var list = view.getListedPolicyGroups();
-	
-	for (var i=0; i<list.length; i++)
-		if (!existsGroup(list[i], data))
-			view.removePolicyGroup(list[i]);
-}
 
 //-------------------------------------------------------------------------------------
 
@@ -152,4 +114,17 @@ function existsGroup(name, data)
 }
 
 //=====================================================================================
+
+function addGroupRow()
+{
+    var groups = view.getSelectedGroups();
+
+    if (groups.length == 0) alert(loader.getText('pleaseSelectGroup'));
+    else						view.addEmptyGroupRows(groups);
 }
+
+
+//=====================================================================================
+}
+
+

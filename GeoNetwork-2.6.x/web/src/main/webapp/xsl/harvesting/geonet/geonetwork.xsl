@@ -139,7 +139,37 @@
 
 	<!-- ============================================================================================= -->
 
-	<xsl:template name="privileges-GN">
+    <xsl:template name="privileges-GN">
+        <h1 align="left"><xsl:value-of select="/root/gui/harvesting/privileges"/></h1>
+
+        <table>
+            <tr>
+                <td class="padded" valign="top"><xsl:value-of select="/root/gui/harvesting/groups"/></td>
+                <td class="padded"><select id="gn.groups" class="content" size="8" multiple="on"/></td>
+                <td class="padded" valign="top">
+                    <div align="center">
+                        <button id="gn.addGroups" class="content" onclick="harvesting.geonet.addGroupRow()">
+                            <xsl:value-of select="/root/gui/harvesting/add"/>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+        </table>
+
+        <table id="gn.privileges">
+            <tr>
+                <th class="padded"><b><xsl:value-of select="/root/gui/harvesting/group"/></b></th>
+                <th class="padded"><b><xsl:value-of select="/root/gui/harvesting/oper/op[@id='0']"/></b></th>
+                <th class="padded"><b><xsl:value-of select="/root/gui/harvesting/oper/op[@id='5']"/></b></th>
+                <th class="padded"><b><xsl:value-of select="/root/gui/harvesting/oper/op[@id='6']"/></b></th>
+                <th/>
+            </tr>
+        </table>
+
+    </xsl:template>
+
+
+    <!--<xsl:template name="privileges-GN">
 		<h1 align="left"><xsl:value-of select="/root/gui/harvesting/privileges"/></h1>
 			
 		<table id="gn.groups">
@@ -154,7 +184,7 @@
 				<xsl:value-of select="/root/gui/harvesting/retrieveGroups"/>
 			</button>
 		</div>
-	</xsl:template>
+	</xsl:template>-->
 	
 	<!-- ============================================================================================= -->
 
