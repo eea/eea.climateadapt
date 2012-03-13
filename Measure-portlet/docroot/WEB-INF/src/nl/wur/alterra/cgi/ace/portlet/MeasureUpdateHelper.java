@@ -308,7 +308,7 @@ public abstract class MeasureUpdateHelper extends MVCPortlet {
 
 	protected void sendSubmitNotification(Measure measure) {
 
-  	  if(measure.getControlstatus()==Constants.Status_SUBMITTED)  { 	
+  	  if(measure.getControlstatus()==ACEIndexUtil.Status_SUBMITTED)  { 	
       	try {
       	InternetAddress fromInternetAddress = new InternetAddress(ACEIndexUtil.retrieveNotificationFromAddress());
       	String notificationaddresslist=ACEIndexUtil.retrieveNotificationToAddressList(); 

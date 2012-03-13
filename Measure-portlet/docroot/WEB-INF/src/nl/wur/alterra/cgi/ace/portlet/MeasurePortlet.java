@@ -11,6 +11,7 @@ import nl.wur.alterra.cgi.ace.model.Measure;
 import nl.wur.alterra.cgi.ace.model.impl.AceItemImpl;
 import nl.wur.alterra.cgi.ace.model.impl.MeasureImpl;
 import nl.wur.alterra.cgi.ace.search.lucene.ACEIndexSynchronizer;
+import nl.wur.alterra.cgi.ace.search.lucene.ACEIndexUtil;
 import nl.wur.alterra.cgi.ace.service.AceItemLocalServiceUtil;
 import nl.wur.alterra.cgi.ace.service.MeasureLocalServiceUtil;
 
@@ -54,6 +55,11 @@ public class MeasurePortlet extends MeasureUpdateHelper {
 			
 			SessionMessages.add(request, "measure-added");
 
+			String notify = ParamUtil.getString(request, "notify_status");
+			if( (notify != null ) && (notify.length()>0) && (measure.getControlstatus() == ACEIndexUtil.Status_SUBMITTED)) {
+				sendSubmitNotification(measure);
+			}
+			
 			sendRedirect(request, response);
 		}
 		else {
@@ -86,7 +92,7 @@ public class MeasurePortlet extends MeasureUpdateHelper {
 			
 			newapproved = Short.parseShort(approved);
 		}
-		if ( (oldapproved == Constants.Status_APPROVED) &&  (newapproved != Constants.Status_APPROVED) ) { 
+		if ( (oldapproved == ACEIndexUtil.Status_APPROVED) &&  (newapproved != ACEIndexUtil.Status_APPROVED) ) { 
 		// The old record stays untouched, only replacesId gets filled (from now no edit or delete possible anymore)
 			measure.setReplacesId( measure.getMeasureId() ) ;
 			// Must be done BEFORE measureFromRequest();
@@ -99,7 +105,7 @@ public class MeasurePortlet extends MeasureUpdateHelper {
 
 		if (MeasureValidator.validateMeasure(measure, errors)) {
 		
-			if ( (oldapproved == Constants.Status_APPROVED) &&  (newapproved != Constants.Status_APPROVED) ) { 
+			if ( (oldapproved == ACEIndexUtil.Status_APPROVED) && (newapproved != ACEIndexUtil.Status_APPROVED) ) { 
      			// The changed item gets added as a copy with replacesId filled (is already done above)
 				// save the new copy: simple addMeasure
 				MeasureLocalServiceUtil.addMeasure(measure);
@@ -107,7 +113,7 @@ public class MeasurePortlet extends MeasureUpdateHelper {
 			}
 			else {
 				
-				if ( (newapproved == Constants.Status_APPROVED)  && measure.getReplacesId() != 0) {
+				if ( (newapproved == ACEIndexUtil.Status_APPROVED)  && measure.getReplacesId() != 0) {
 					// delete the old measure which gets replaced, update the corresponding aceitem
 					aceitem = AceItemLocalServiceUtil.getAceItemByStoredAt("ace_measure_id=" + measure.getReplacesId() );
 					aceitem.setStoredAt("ace_measure_id=" + measure.getMeasureId());
@@ -123,6 +129,11 @@ public class MeasurePortlet extends MeasureUpdateHelper {
 			}			
 			
 			SessionMessages.add(request, "measure-updated");
+			
+			String notify = ParamUtil.getString(request, "notify_status");
+			if( (notify != null ) && (notify.length()>0) && (newapproved == ACEIndexUtil.Status_SUBMITTED)) {
+				sendSubmitNotification(measure);
+			}
 			
 			sendRedirect(request, response);
 		}

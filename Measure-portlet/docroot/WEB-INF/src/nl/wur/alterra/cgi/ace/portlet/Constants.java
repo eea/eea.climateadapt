@@ -21,13 +21,7 @@ public class Constants {
 
 	public static String wfsPreferenceName = "wfs";
 
-	public static String wmsPreferenceName = "wms";
-
-	public static final short Status_SUBMITTED = 0; 
-	
-	public static final short Status_DRAFT = -1;
-	
-	public static final short Status_APPROVED = 1; 
+	public static String wmsPreferenceName = "wms"; 
 
 	public static String zoomLevelPreferenceName = "zoomLevel";
 	
