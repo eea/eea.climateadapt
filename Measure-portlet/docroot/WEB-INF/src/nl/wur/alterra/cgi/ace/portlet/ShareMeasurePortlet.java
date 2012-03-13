@@ -50,9 +50,10 @@ public class ShareMeasurePortlet extends MeasureUpdateHelper {
 			aceitem.setStoragetype("MEASURE");
 			AceItemLocalServiceUtil.addAceItem(aceitem);
 			updateAceItem(measure, aceitem);
-			
+
 			SessionMessages.add(request, "measure-added");
-			
+
+            sendSubmitNotification(measure);
 			request.getPortletSession().setAttribute("lastAddedMeasureId", "" + measure.getMeasureId() );
 			
 			sendRedirect(request, response);
@@ -92,7 +93,8 @@ public class ShareMeasurePortlet extends MeasureUpdateHelper {
 			updateAceItem(measure, aceitem);
 				
 			SessionMessages.add(request, "measure-updated");
-			
+
+            sendSubmitNotification(measure);			
 			request.getPortletSession().setAttribute("lastAddedMeasureId", "" + measure.getMeasureId() );
 			
 			sendRedirect(request, response);

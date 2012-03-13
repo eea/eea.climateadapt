@@ -5,6 +5,8 @@ import com.liferay.portal.model.User;
 import com.liferay.portal.service.UserServiceUtil;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.util.bridges.mvc.MVCPortlet;
+import com.liferay.util.mail.MailEngine;
+
 import nl.wur.alterra.cgi.ace.model.AceItem;
 import nl.wur.alterra.cgi.ace.model.Measure;
 import nl.wur.alterra.cgi.ace.model.constants.AceItemClimateImpact;
@@ -13,8 +15,10 @@ import nl.wur.alterra.cgi.ace.model.constants.AceItemElement;
 import nl.wur.alterra.cgi.ace.model.constants.AceItemSector;
 import nl.wur.alterra.cgi.ace.model.constants.AceItemType;
 import nl.wur.alterra.cgi.ace.search.lucene.ACEIndexSynchronizer;
+import nl.wur.alterra.cgi.ace.search.lucene.ACEIndexUtil;
 import nl.wur.alterra.cgi.ace.service.AceItemLocalServiceUtil;
 
+import javax.mail.internet.InternetAddress;
 import javax.portlet.PortletRequest;
 
 /**
@@ -301,4 +305,43 @@ public abstract class MeasureUpdateHelper extends MVCPortlet {
 
         new ACEIndexSynchronizer().reIndex(aceitem);		
 	}
+
+	protected void sendSubmitNotification(Measure measure) {
+
+  	  if(measure.getControlstatus()==Constants.Status_SUBMITTED)  { 	
+      	try {
+      	InternetAddress fromInternetAddress = new InternetAddress(ACEIndexUtil.retrieveNotificationFromAddress());
+      	String notificationaddresslist=ACEIndexUtil.retrieveNotificationToAddressList(); 
+      	
+      	String[] notificationaddresses = notificationaddresslist.split(";");
+       	InternetAddress[] toInternetAddresses = new InternetAddress[notificationaddresses.length] ;
+       	for(int i = 0 ; i < notificationaddresses.length; i++) { 		
+       		if (notificationaddresses[i].trim().length() > 0 ) {
+       			toInternetAddresses[i] = new InternetAddress(notificationaddresses[i]);
+       		}
+      	}
+     	
+     	String hosturl=ACEIndexUtil.retrieveNotificationHostUrl();
+     	
+    	String subject = "Climate-adapt: A measure is waiting for approval";
+    	String body = "Please have a look at the submitted ";
+    	
+  		if(measure.getMao_type().equalsIgnoreCase("A")) {
+  			body += "case study " ;
+  		}
+  		else {
+  			body += "adaptation option " ;
+  		}
+  		body += "at " + hosturl + "/viewmeasure?ace_measure_id=" + measure.getMeasureId();
+  		    	
+      	MailEngine.send(fromInternetAddress, toInternetAddresses, null, null, subject, body, false, null, null, null);
+        }
+        catch (Exception e) {
+      	  // do nothing
+      	  System.out.println("Sending submit notification for database item failed.");
+      	  System.out.println(e.getMessage());
+      	  e.printStackTrace();
+        }
+      }
+    }	
 }
