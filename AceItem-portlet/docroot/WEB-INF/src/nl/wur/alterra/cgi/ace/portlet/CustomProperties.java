@@ -33,31 +33,6 @@ public class CustomProperties {
      * Administrator password in GeoNetwork.
      */
     public final static String GEONETWORK_ADMIN_PASSWORD = "geonetwork.admin.password";
-    
-    /**
-     * Notification mail: from address.
-     */
-    public final static String NOTIFICATIONMAIL_FROM_ADDRESS = "notificationmail.from.address";
-    /**
-     * Notification mail: to adresses.
-     */
-    public final static String NOTIFICATIONMAIL_TO_ADDRESSLIST = "notificationmail.to.addresslist";
-    /**
-     * Notification mail: website address.
-     */
-    public final static String NOTIFICATIONMAIL_HOSTURL = "notificationmail.hosturl";
-    /**
-     * Notification mail: viewprojectpage.
-     */
-    public final static String NOTIFICATIONMAIL_PROJECTPAGE = "notificationmail.projectpage";
-    /**
-     * Notification mail: viewmeasurepage.
-     */
-    public final static String NOTIFICATIONMAIL_MEASUREPAGE = "notificationmail.measurepage";
-    /**
-     * Notification mail: viewaceitempage.
-     */
-    public final static String NOTIFICATIONMAIL_ACEITEMPAGE = "notificationmail.aceitempage";
 
     /**
      * Initializes custom properties.

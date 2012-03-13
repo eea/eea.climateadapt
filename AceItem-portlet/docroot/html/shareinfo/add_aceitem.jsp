@@ -77,11 +77,12 @@
 
 		<aui:input type="hidden" name="wxsharvesterId" value='<%= aceitem == null ? "" : aceitem.getWxsharvesterId() %>'/>
 		
-		<b>name</b><br />	
+		<liferay-ui:error key="aceitemname-required" message="aceitemname-required" />
+		<b>name</b> <i>(required)</i><br />	
 		<input name="name" type="text" size="120" value='<%= aceitem == null ? "" : aceitem.getName() %>'><br /><br />
 		
 		<liferay-ui:error key="aceitemstoredat-required" message="aceitemstoredat-required" />
-		<b>website</b><br />	
+		<b>website</b> <i>(required)</i><br />	
 		<input name="storedAt" type="text" size="120" value='<%= aceitem == null ? "" : aceitem.getStoredAt() %>'><br /><br />
 
 
@@ -221,7 +222,7 @@
 	<aui:button-row>
 		<aui:button type="submit" />
 
-		<aui:button type="cancel"  onClick="history.go(-1);" /> <!-- onClick="< %= redirect % >" -->
+		<aui:button type="cancel" onClick="<%= redirect %>" />
 	</aui:button-row>
 </aui:form>
 <% } %>

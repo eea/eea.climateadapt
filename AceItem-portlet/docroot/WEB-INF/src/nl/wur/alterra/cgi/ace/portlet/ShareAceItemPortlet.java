@@ -35,7 +35,7 @@ public class ShareAceItemPortlet extends LuceneIndexUpdatePortlet {
 			AceItemLocalServiceUtil.addAceItem(aceitem);
 			SessionMessages.add(request, "aceitem-added");
             synchronizeIndexSingleAceItem(aceitem);
-
+            sendSubmitNotification(aceitem);
 			request.getPortletSession().setAttribute("lastAddedAceItemId", "" + aceitem.getAceItemId() );
             
 			sendRedirect(request, response);
@@ -64,7 +64,7 @@ public class ShareAceItemPortlet extends LuceneIndexUpdatePortlet {
 			AceItemLocalServiceUtil.updateAceItem(aceitem);
 			SessionMessages.add(request, "aceitem-updated");
             synchronizeIndexSingleAceItem(aceitem);
-            
+            sendSubmitNotification(aceitem);          
 			request.getPortletSession().setAttribute("lastAddedAceItemId", "" + aceitem.getAceItemId() );
             
 			sendRedirect(request, response);
