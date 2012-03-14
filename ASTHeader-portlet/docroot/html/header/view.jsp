@@ -24,10 +24,10 @@
 	String headertext = renderRequest.getPreferences().getValue("headertext", "Header text");
 %>
 <table border="0" cellpadding="5">
-<tr valign="middle">
+<!--  tr valign="middle">
 	<td colspan="2" height="40px">&nbsp;
 	</td>
-</tr>
+</tr -->
 <tr valign="middle">
 	<td width="70px">
 	<img src="<%= request.getContextPath() %>/images/bullit<%= step %>.png">
