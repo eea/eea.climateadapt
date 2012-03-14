@@ -650,12 +650,12 @@ public class HarvesterUtil {
      * @param searchResponse response to search in
      * @return List containing content maps
      */
-    private static synchronized List getMetadataContents(String searchResponse, boolean idsOnly) {
+    private static synchronized List getMetadataContents(String searchResponse) {
 
         //System.out.println("creating content maps. Ids only? " + idsOnly);
 
         List theMaps = new ArrayList();
-        List<String> idList = new ArrayList<String>();
+        List<String> uuidList = new ArrayList<String>();
         Map<String, String> metadataStorageTypeMap = new HashMap<String, String>();
         Map<String, String> metadataTitleMap = new HashMap<String, String>();
         Map<String, String> metadataAbstractMap = new HashMap<String, String>();
@@ -672,21 +672,8 @@ public class HarvesterUtil {
                 boolean skip = false;
                 // obtain next metadata
                 String metadata = searchResponse.substring(searchResponse.indexOf("<metadata>"), searchResponse.indexOf("</metadata>"));
-                String id =  null;
-                // get this metadata id
-                if(metadata.indexOf("<id") >= 0) {
-                    int closingIdBracket = metadata.indexOf(">", metadata.indexOf("<id"));
-                    int openingCloseIdBracket = metadata.indexOf("<", closingIdBracket);
-                    id = metadata.substring(closingIdBracket+1, openingCloseIdBracket);
-                    //idList.add(id);
-                    //System.out.println("metadata id: " + id);
-                }
-                // metadata has no id
-                if(id == null || id.length() == 0) {
-                    System.out.println("WARNING: found metadata without id, skipping it");
-                    skip = true;
-                }
-                if(!skip && !idsOnly) {
+
+                if(!skip) {
                     String uuid = null;
                     // this metadata has uuid
                     if(metadata.indexOf("<uuid") >= 0) {
@@ -722,42 +709,41 @@ public class HarvesterUtil {
 
                             // Service metadata
                             if (category.equalsIgnoreCase("service")) {
-                                metadataStorageTypeMap.put(id, "PLAINMETADATA");
+                                metadataStorageTypeMap.put(uuid, "PLAINMETADATA");
                                 //System.out.println("PLAINMETADATA");
 
                             } else {
                                 // For datasets/series check that metadata contains a link of type wms
                                 if (metadata.indexOf("<link type=\"wms\">") < 0) {
-                                    metadataStorageTypeMap.put(id, "PLAINMETADATA");
+                                    metadataStorageTypeMap.put(uuid, "PLAINMETADATA");
                                     //System.out.println("PLAINMETADATA");
 
                                 } else {
-                                    metadataStorageTypeMap.put(id, "GEONETWORK");
+                                    metadataStorageTypeMap.put(uuid, "GEONETWORK");
                                     //System.out.println("GEONETWORK");
                                 }
                             }
 
                         } else {
                             if (metadata.indexOf("<link type=\"wms\">") < 0) {
-                                metadataStorageTypeMap.put(id, "PLAINMETADATA");
+                                metadataStorageTypeMap.put(uuid, "PLAINMETADATA");
                                 //System.out.println("PLAINMETADATA");
 
                             } else {
-                                metadataStorageTypeMap.put(id, "GEONETWORK");
+                                metadataStorageTypeMap.put(uuid, "GEONETWORK");
                                 //System.out.println("GEONETWORK");
                             }
                         }
 
 
-                        idList.add(id);
-                        uuidMap.put(id, uuid);
+                        uuidList.add(uuid);
 
                         // this metadata has a title
                         if(metadata.indexOf("<title>") >= 0) {
                             int startContent = metadata.indexOf("<title>") + "<title>".length();
                             int endContent = metadata.indexOf("</title>");
                             String title = metadata.substring(startContent, endContent);
-                            metadataTitleMap.put(id, title);
+                            metadataTitleMap.put(uuid, title);
                             //System.out.println("metadata title: " + title);
 
                         }
@@ -768,7 +754,7 @@ public class HarvesterUtil {
                             int endContent = metadata.indexOf("</abstract>");
                             String abstrakt = metadata.substring(startContent, endContent);
                             //System.out.println("metadata abstract: " + abstrakt);
-                            metadataAbstractMap.put(id, abstrakt);
+                            metadataAbstractMap.put(uuid, abstrakt);
                         }
 
                         // this metadata has at least one keyword
@@ -791,7 +777,7 @@ public class HarvesterUtil {
                                 }
                             }
                             if(keywords.size() > 0) {
-                                metadataKeywordMap.put(id, keywords);
+                                metadataKeywordMap.put(uuid, keywords);
                             }
                             //System.out.println("metadata # keywords: " + keywords.size());
                         }
@@ -799,9 +785,6 @@ public class HarvesterUtil {
 
 
                     }
-                } else if (!skip) {
-                    idList.add(id);
-                    //System.out.println("metadata id: " + id);
                 }
 
                 // strip searchresponse to continue searching for next metadata
@@ -811,14 +794,12 @@ public class HarvesterUtil {
             }
         }
 
-        theMaps.add(idList);
-        if(!idsOnly) {
-            theMaps.add(metadataTitleMap);
-            theMaps.add(metadataAbstractMap);
-            theMaps.add(metadataKeywordMap);
-            theMaps.add(uuidMap);
-            theMaps.add(metadataStorageTypeMap);
-        }
+        theMaps.add(uuidList);
+        theMaps.add(metadataTitleMap);
+        theMaps.add(metadataAbstractMap);
+        theMaps.add(metadataKeywordMap);
+        theMaps.add(metadataStorageTypeMap);
+
         //System.out.println("finished creating content maps. Ids only? " + idsOnly);
         return theMaps;
     }
@@ -936,15 +917,14 @@ public class HarvesterUtil {
         //System.out.println("applying harvesting result to AceItem table");
 
         //System.out.println("looking for metadata ids in search response before harvesting:");
-        List contentMapBefore = getMetadataContents(harvesterResultBefore, false);
+        List contentMapBefore = getMetadataContents(harvesterResultBefore);
 
         List<String> idsBeforeList = (List<String>)contentMapBefore.get(0);
-        Map<String, String> uuidsBeforeMap = (Map<String, String>)contentMapBefore.get(4);
 
         //System.out.println("# ids from before: " + idsBeforeList.size());
 
         //System.out.println("looking for metadata ids, titles, abstracts and keywords in search response after harvesting:");
-        List contentMapAfter = getMetadataContents(harvesterResultAfter, false);
+        List contentMapAfter = getMetadataContents(harvesterResultAfter);
 
         List<String> idsAfterList = (List<String>)contentMapAfter.get(0);
 
@@ -952,25 +932,23 @@ public class HarvesterUtil {
         Map<String, String> titleMap = (Map<String, String>)contentMapAfter.get(1);
         Map<String, String> abstractMap = (Map<String, String>)contentMapAfter.get(2);
         Map<String, List<String>> keywordMap = (Map<String, List<String>>)contentMapAfter.get(3);
-        Map<String, String> uuidMap = (Map<String, String>)contentMapAfter.get(4);
-        Map<String, String> storageTypeMap = (Map<String, String>)contentMapAfter.get(5);
+        Map<String, String> storageTypeMap = (Map<String, String>)contentMapAfter.get(4);
 
         ACEIndexSynchronizer aceIndexSynchronizer = new ACEIndexSynchronizer();
 
         int created = 0, updated = 0, deleted = 0;
 
         // ids in before, and not in after: delete them
-        for(String id : idsBeforeList) {
-            if(!idsAfterList.contains(id)) {
-                //System.out.println("deleting AceItem with geonetwork id: " + id);
+        for(String uuid : idsBeforeList) {
+            if(!idsAfterList.contains(uuid)) {
+                System.out.println("deleting AceItem with geonetwork uuid: " + uuid);
                 // delete it
 
                 //storedAt uses uuid (rev. 908,909)
-                String toDeleteUuid = uuidsBeforeMap.get(id);
-                AceItem toDelete = AceItemLocalServiceUtil.getAceItemByStoredAt(toDeleteUuid);
+                AceItem toDelete = AceItemLocalServiceUtil.getAceItemByStoredAt(uuid);
                 if(toDelete != null) {
                     AceItemLocalServiceUtil.deleteAceItem(toDelete);
-                    System.out.println("finished deleting AceItem with geonetwork id: " + id);
+                    System.out.println("finished deleting AceItem with geonetwork uuid: " + uuid);
                     deleted++;
 
                     //
@@ -980,24 +958,25 @@ public class HarvesterUtil {
 
                 }
                 else {
-                    System.out.println("WARNING: failed to delete AceItem with geonetwork id: " + id + ", it seems it does not exist");
+                    System.out.println("WARNING: failed to delete AceItem with geonetwork uuid: " + uuid + ", it seems it does not exist");
                 }
             }
         }
 
         // ids in before and in after: update them
-        for(String id : idsBeforeList) {
-            if(idsAfterList.contains(id)) {
-                //System.out.println("updating AceItem with geonetwork id: " + id);
+        for(String uuid : idsBeforeList) {
+            if(idsAfterList.contains(uuid)) {
+                System.out.println("updating AceItem with geonetwork uuid: " + uuid);
                 // update it
 
                 //storedAt uses uuid (rev. 908,909)
-                String toDeleteUuid = uuidMap.get(id);
-                AceItem toUpdate = AceItemLocalServiceUtil.getAceItemByStoredAt(toDeleteUuid);
+                AceItem toUpdate = AceItemLocalServiceUtil.getAceItemByStoredAt(uuid);
                 if(toUpdate != null) {
-                    toUpdate = fillAceItem(toUpdate, id, titleMap, abstractMap, keywordMap, uuidMap, storageTypeMap);
+                    System.out.println(" updating AceItem with id: " +  toUpdate.getAceItemId() );
+
+                    toUpdate = fillAceItem(toUpdate, uuid, titleMap, abstractMap, keywordMap, storageTypeMap);
                     AceItemLocalServiceUtil.updateAceItem(toUpdate);
-                    //System.out.println("finished updating AceItem with geonetwork id: " + id);
+                    System.out.println("finished updating AceItem with geonetwork uuid: " + uuid);
                     updated++;
 
                     //
@@ -1006,9 +985,9 @@ public class HarvesterUtil {
                     aceIndexSynchronizer.update(toUpdate);
                 }
                 else {
-                    System.out.println("WARNING: failed to update AceItem with geonetwork id: " + id + ", it seems it does not exist. It will be created now.");
+                    System.out.println("WARNING: failed to update AceItem with geonetwork uuid: " + uuid + ", it seems it does not exist. It will be created now.");
                     AceItem aceItem = AceItemLocalServiceUtil.createAceItem();
-                    aceItem = fillAceItem(aceItem, id, titleMap, abstractMap, keywordMap, uuidMap, storageTypeMap);
+                    aceItem = fillAceItem(aceItem, uuid, titleMap, abstractMap, keywordMap, storageTypeMap);
                     aceItem.setPublicationDate(new Date());
 
                     if(harvester instanceof WxsHarvester) {
@@ -1044,12 +1023,12 @@ public class HarvesterUtil {
 
 
         // ids in after and not in before: create them
-        for(String id : idsAfterList) {
-            if(!idsBeforeList.contains(id)) {
-                //System.out.println("creating AceItem with geonetwork id: " + id);
+        for(String uuid : idsAfterList) {
+            if(!idsBeforeList.contains(uuid)) {
+                System.out.println("creating AceItem with geonetwork uuid: " + uuid);
                 // create it
                 AceItem aceItem = AceItemLocalServiceUtil.createAceItem();
-                aceItem = fillAceItem(aceItem, id, titleMap, abstractMap, keywordMap, uuidMap, storageTypeMap);
+                aceItem = fillAceItem(aceItem, uuid, titleMap, abstractMap, keywordMap, storageTypeMap);
                 aceItem.setPublicationDate(new Date());
 
                 if(harvester instanceof WxsHarvester) {
@@ -1098,31 +1077,31 @@ public class HarvesterUtil {
      * Fills aceItem properties with values.
      *
      * @param aceItem
-     * @param id
+     * @param uuid
      * @param titleMap
      * @param abstractMap
      * @param keywordMap
-     * @param uuidMap
      * @return
      */
-    private static synchronized AceItem fillAceItem(AceItem aceItem, String id, Map<String, String> titleMap,
+    private static synchronized AceItem fillAceItem(AceItem aceItem, String uuid, Map<String, String> titleMap,
                                                     Map<String, String> abstractMap, Map<String,
-                                                    List<String>> keywordMap, Map<String, String> uuidMap,
+                                                    List<String>> keywordMap,
                                                     Map<String, String> storageTypeMap) {
-        String uuid = uuidMap.get(id);
+
         System.out.println("SETTING STORED AT TO "  + uuid);
         aceItem.setStoredAt(uuid);
         aceItem.setDatatype(AceItemType.MAPGRAPHDATASET.name());
-        aceItem.setStoragetype(storageTypeMap.get(id));
-        String title = titleMap.get(id);
+        aceItem.setStoragetype(storageTypeMap.get(uuid));
+        String title = titleMap.get(uuid);
         if(title.length() > aceItemNameLength) {
             System.out.println("WARNING: Metadata title too long for AceItem, cut off. Original metadata title:\n" + title + "\n");
             title = title.substring(0, aceItemNameLength);
         }
+
         aceItem.setName(title);
-        String abstrakt = abstractMap.get(id);
+        String abstrakt = abstractMap.get(uuid);
         aceItem.setDescription(abstrakt);
-        List<String> keywords = keywordMap.get(id);
+        List<String> keywords = keywordMap.get(uuid);
         String keyword$ = "";
         if(keywords != null && keywords.size() > 0) {
             for(String k : keywords) {
