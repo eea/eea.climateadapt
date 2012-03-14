@@ -252,7 +252,7 @@ public abstract class MeasureUpdateHelper extends MVCPortlet {
 		aceitem.setDeeplink(measure.getWebsite());
 		
 		aceitem.setSpecialtagging(measure.getSpecialtagging());
-/*		
+		
 		aceitem.setControlstatus(measure.getControlstatus());
 		
 		if(measure.getCreator() != null) {
@@ -270,7 +270,7 @@ public abstract class MeasureUpdateHelper extends MVCPortlet {
 		if(measure.getApprovaldate() != null) {
 			aceitem.setApprovaldate(measure.getApprovaldate());
 		}
-*/		
+		
 		aceitem.setTextSearch( measure.getSpecialtagging() + ' ' +
  			   		aceitem.getName() + ' ' +
  			   		measure.getDescription() + ' ' +
