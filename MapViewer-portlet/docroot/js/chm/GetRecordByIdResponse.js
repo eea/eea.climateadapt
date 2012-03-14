@@ -116,25 +116,27 @@ CHM.GetRecordByIdResponse = OpenLayers.Class(OpenLayers.Format.XML, {
      * Method: runChildNodes
      */
     readNode: function(node, metadata) {
-        var children = node.childNodes;
+    	if (node != null) {
+            var children = node.childNodes;
 
-        var childNode, processor, prefix, local;
+            var childNode, processor, prefix, local;
 
-        for (var i = 0, len = children.length; i < len; ++ i) {
-            childNode = children[i];
+            for (var i = 0, len = children.length; i < len; ++ i) {
+                childNode = children[i];
 
-            if (childNode.nodeType == 1) {
-                prefix = this.getNamespacePrefix(childNode.namespaceURI);
+                if (childNode.nodeType == 1) {
+                    prefix = this.getNamespacePrefix(childNode.namespaceURI);
 
-                local = childNode.nodeName.split(":").pop();
+                    local = childNode.nodeName.split(":").pop();
 
-                processor = this["read_" + prefix + "_" + local];
+                    processor = this["read_" + prefix + "_" + local];
 
-                if (processor) {
-                    processor.apply(this, [childNode, metadata]);
+                    if (processor) {
+                        processor.apply(this, [childNode, metadata]);
+                    }
                 }
             }
-        }
+    	}
     },
     
     /**

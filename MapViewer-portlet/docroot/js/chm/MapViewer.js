@@ -199,7 +199,7 @@ CHM.MapViewer = OpenLayers.Class({
 		if (request.status == 200) {
 			var format = new CHM.GetRecordByIdResponse();
 			
-            var metadata = format.read(request.responseXML);
+            var metadata = format.read(request.responseText);
             
             mapViewerInstance.abstractTabPanel.add({
             	title: metadata.title,

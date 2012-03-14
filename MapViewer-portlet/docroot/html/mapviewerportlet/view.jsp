@@ -83,6 +83,8 @@ if (mapviewerappid == null || mapviewerappid.length() == 0) {
 					
 		        for (int i = 0; i < metadatarecordids.length; i ++) {
 		        	String metadatarecordid = metadatarecordids[i];
+		        	
+		        	metadatarecordid = metadatarecordid.replace(" ", "%20");
 						
 					CSWRecord cswrecord = csw.getRecordByID(metadatarecordid);
 						
@@ -93,13 +95,20 @@ if (mapviewerappid == null || mapviewerappid.length() == 0) {
 		
 				       	if (digitaltransferoption.getProtocol().indexOf("WMS") != -1) {
 							String javascript = "var layer = new OpenLayers.Layer.WMS('" 
-								+ cswrecord.getTitle() + "', '" 
-								+ digitaltransferoption.getUrl() + "', "  
+								+ cswrecord.getTitle();
+							
+							if (cswrecord.getDigitalTransferOptions().size() > 1 && digitaltransferoption.getLayerTitle() != null) {
+								javascript += " - " + digitaltransferoption.getLayerTitle();
+							}
+							
+							javascript += "', '" + digitaltransferoption.getUrl() + "', "  
 								+ "{layers: '" + digitaltransferoption.getLayerName() + "', format: 'image/png', transparent: 'true'}, {visibility: true}, {tileOptions: {maxGetUrlLength: 2048}}, {isBaseLayer: false});";
 						
 								javascript += "layer.metadataURL = '" + showmetadataurl + "';";
 								
-								javascript += "layer.attribution = '" + cswrecord.getAttribution() + "';";
+								if (cswrecord.getAttribution() != null) {
+									javascript += "layer.attribution = '" + cswrecord.getAttribution() + "';";
+								}
 								
 								javascript += "mapviewer.addLayer(layer);";
 									
