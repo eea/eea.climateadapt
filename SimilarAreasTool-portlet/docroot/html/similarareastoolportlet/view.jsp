@@ -67,6 +67,18 @@
 	
 	var wfs = '<%= prefs.getValue(Constants.wfsPreferenceName, "wfs") %>';
 	
+	var featureNamespace = '<%= prefs.getValue(Constants.featureNamespacePreferenceName, "http://climate-adapt.eea.europa.eu") %>';
+	
+	var areasFeatureType = '<%= prefs.getValue(Constants.areasFeatureTypePreferenceName, "biogeo_2005") %>';
+	
+	var areasLayer = '<%= prefs.getValue(Constants.areasLayerPreferenceName, "chm:biogeo_2005") %>';
+	
+	var caseStudiesFeatureType = '<%= prefs.getValue(Constants.caseStudiesFeatureTypePreferenceName, "casestudies") %>';
+	
+	var geometryColumn = '<%= prefs.getValue(Constants.geometryColumnPreferenceName, "geom") %>';
+	
+	var areaColumn = '<%= prefs.getValue(Constants.areaColumnPreferenceName, "area") %>';
+	
 	var locatorUrl = '<%= prefs.getValue(Constants.locatorUrlPreferenceName, "http://dev.virtualearth.net/REST/v1/Locations/") %>';
 	
 	var locatorKey = '<%= prefs.getValue(Constants.locatorKeyPreferenceName, "Ao9qujBzDtg-nFiusTjt5VQ9x2NJB2wAD7YCRjaPz7hQQjxdFcl24tyhOwCDCIrw") %>';

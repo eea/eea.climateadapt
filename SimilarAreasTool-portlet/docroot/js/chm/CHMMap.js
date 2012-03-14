@@ -16,8 +16,6 @@ CHM.CHMMap = OpenLayers.Class(OpenLayers.Map, {
 		this.restrictedExtent = new OpenLayers.Bounds(-2680799.4555375, 4050551.002161, 5253975.5752687, 11799431.180210993);
         
         this.addControl(new OpenLayers.Control.LayerSwitcher());
-        
-       // ll=&spn=0.065305,0.154324&t=m&z=13
 	},
 	
 	addBingLayers : function() {

@@ -4,9 +4,7 @@ CHM.SATVector = OpenLayers.Class(OpenLayers.Layer.Vector, {
 	
 	type: null, 
 	
-	fill_color: null,
-	
-	stroke_color: null,
+	marker: null, 
 	
 	radius: null,
 	
@@ -22,27 +20,22 @@ CHM.SATVector = OpenLayers.Class(OpenLayers.Layer.Vector, {
         protocol = new OpenLayers.Protocol.WFS({
 	       	version: '1.1.0',
 			url:  proxyUrl + geoserverUrl + wfs + '?', 
-	        featureType: 'casestudies',
-	        featureNS: 'http://ace.geocat.net',
-	        geometryName: 'geom',
-	        maxFeatures: 1000,
+	        featureType: caseStudiesFeatureType,
+	        featureNS: featureNamespace,
+	        geometryName: geometryColumn,
 	        srsName: 'EPSG:900913'
         });
         
         this.styleMap = new OpenLayers.StyleMap({
 	        "default": new OpenLayers.Style({
 		        pointRadius: this.radius, 
-		        fillColor: this.fill_color,
-		        strokeColor: this.stroke_color,
-		        strokeWidth: 2,
-		        graphicZIndex: 1
+		        graphicZIndex: 1,
+		        externalGraphic: this.marker
 	        }),
 	        "select": new OpenLayers.Style({
 		        pointRadius: this.radius, 
-		        fillColor: this.fill_color,
-		        strokeColor: this.stroke_color,
-		        strokeWidth: 2,
-		        graphicZIndex: 1
+		        graphicZIndex: 1,
+		        externalGraphic: this.marker
 	        })
         });
 	},
@@ -69,7 +62,7 @@ CHM.SATVector = OpenLayers.Class(OpenLayers.Layer.Vector, {
 		var filters = new Array();
 		
 		if (this.area != null) {
-			var area_filter = this.createFilter(this.type, 'area', this.area);
+			var area_filter = this.createFilter(this.type, areaColumn, this.area);
 			
 			filters.push(area_filter);
 			

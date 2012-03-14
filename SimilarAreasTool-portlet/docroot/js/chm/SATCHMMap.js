@@ -17,25 +17,16 @@ CHM.SATCHMMap = OpenLayers.Class(CHM.CHMMap, {
 	    	displayInLayerSwitcher: true,
 	    	styleMap: new OpenLayers.StyleMap({
 	    	    "default": new OpenLayers.Style({
-	    	        pointRadius: 8, 
-	    	        fillColor: "#0070c0",
-	    	        strokeColor: "#002060",
-	    	        strokeWidth: 2,
-	    	        graphicZIndex: 1
-	    	    }),
-	    	    "default": new OpenLayers.Style({
-	    	        pointRadius: 8, 
-	    	        fillColor: "#0070c0",
-	    	        strokeColor: "#002060",
-	    	        strokeWidth: 2,
-	    	        graphicZIndex: 1
+	    	        pointRadius: 12,
+	    	        graphicZIndex: 1,
+			        externalGraphic: '/SimilarAreasTool-portlet/js/chm/markers/location.png'
 	    	    }),
 	    	})
 	    });
 		
 		similar_areas_image_layer = new OpenLayers.Layer.WMS('Biogeographical regions 2005', 
 			geoserverUrl + wms + '?', 
-			{layers: 'chm:biogeo_2005', format: 'image/png', transparent: 'true'}, 
+			{layers: areasLayer, format: 'image/png', transparent: 'true'}, 
 			{visibility: false}, 
 			{tileOptions: {maxGetUrlLength: 2048}}, 
 			{isBaseLayer: false}
@@ -46,9 +37,9 @@ CHM.SATCHMMap = OpenLayers.Class(CHM.CHMMap, {
 		    protocol: new OpenLayers.Protocol.WFS({
 		      	version: '1.1.0',
 		        url: proxyUrl + geoserverUrl + wfs + '?', 
-		        featureType: 'biogeo_2005',
-		        featureNS: 'http://ace.geocat.net',
-		        geometryName: 'geom',
+		        featureType: areasFeatureType,
+		        featureNS: featureNamespace,
+		        geometryName: geometryColumn,
 		        maxFeatures: 1,
 		        srsName: this.projection
 		    })
@@ -63,9 +54,8 @@ CHM.SATCHMMap = OpenLayers.Class(CHM.CHMMap, {
         	{
     			displayInLayerSwitcher: true,
         		type: OpenLayers.Filter.Comparison.EQUAL_TO, 
-        		fill_color: '#ff0000', 
-        		stroke_color: '#c00000',
-        		radius: 8
+        		radius: 10,
+        		marker: '/SimilarAreasTool-portlet/js/chm/markers/similar.png'
         	});
         
         case_studies_dissimilar_areas = new CHM.SATVector(
@@ -73,9 +63,8 @@ CHM.SATCHMMap = OpenLayers.Class(CHM.CHMMap, {
         	{
     			displayInLayerSwitcher: true,
         		type: OpenLayers.Filter.Comparison.NOT_EQUAL_TO, 
-        		fill_color: '#b8b894', 
-        		stroke_color: '#484b35',
-        		radius: 8
+        		radius: 8,
+        		marker: '/SimilarAreasTool-portlet/js/chm/markers/dissimilar.png'
         	});
         
         select = new OpenLayers.Layer.Vector(
@@ -86,7 +75,7 @@ CHM.SATCHMMap = OpenLayers.Class(CHM.CHMMap, {
         	}
         );
 
-		this.addLayers([similar_areas_image_layer, similar_areas_vector_layer, select, location_vector_layer, case_studies_similar_areas, case_studies_dissimilar_areas]);
+		this.addLayers([similar_areas_image_layer, similar_areas_vector_layer, select, case_studies_dissimilar_areas, case_studies_similar_areas, location_vector_layer]);
             
 		locationcontrol = new CHM.LocationControl({satCHMMap: this});
 		

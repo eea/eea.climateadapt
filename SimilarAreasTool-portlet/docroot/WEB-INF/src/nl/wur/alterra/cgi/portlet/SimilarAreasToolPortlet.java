@@ -38,6 +38,25 @@ public class SimilarAreasToolPortlet extends MVCPortlet {
 		String wms = ParamUtil.getString(request, Constants.wmsPreferenceName);
 
 		prefs.setValue(Constants.wmsPreferenceName, wms);
+		
+		// GeoServer feature namespace
+		String featurenamespace = ParamUtil.getString(request, Constants.featureNamespacePreferenceName);
+
+		prefs.setValue(Constants.featureNamespacePreferenceName, featurenamespace);
+
+		// Name of featuretype of similar areas
+		String areasfeaturetype = ParamUtil.getString(request, Constants.areasFeatureTypePreferenceName);
+
+		prefs.setValue(Constants.areasFeatureTypePreferenceName, areasfeaturetype);
+
+		// Name of featuretype of case studies
+		String casestudiesfeaturetype = ParamUtil.getString(request, Constants.caseStudiesFeatureTypePreferenceName);
+
+		prefs.setValue(Constants.caseStudiesFeatureTypePreferenceName, casestudiesfeaturetype);
+
+		String geometrycolumn = ParamUtil.getString(request, Constants.geometryColumnPreferenceName);
+
+		prefs.setValue(Constants.geometryColumnPreferenceName, geometrycolumn);
 
 		// Microsoft Virtual Earth locator REST API URL
 		String locatorUrl = ParamUtil.getString(request, Constants.locatorUrlPreferenceName);
