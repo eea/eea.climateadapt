@@ -12,6 +12,21 @@ CHM.WMSLegend = Ext.extend(GeoExt.WMSLegend, {
                 !this.layerRecord.get('hideInLegend'));
         }
         CHM.WMSLegend.superclass.update.call(this);
+    },
+    
+    getLegendUrl: function(layerName, layerNames) {
+        var layer = this.layerRecord.getLayer();
+
+        var url = layer.getFullRequestString({
+            REQUEST: "GetLegendGraphic",
+            EXCEPTIONS: "application/vnd.ogc.se_xml",
+            LAYER: layer.params.LAYERS,
+            FORMAT: "image/png"
+        });
+        
+        console.log(url);
+        
+        return url;
     }
 });
 

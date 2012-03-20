@@ -117,7 +117,8 @@ CHM.MapViewer = OpenLayers.Class({
 		                        showTitle: false,
 		                        // custom class for css positioning
 		                        // see tree-legend.html
-		                        cls: "legend"
+		                        cls: "legend",
+		                        useScaleParameter: false
 		                    };
                         };
 	                    return GeoExt.tree.LayerLoader.prototype.createNode.call(this, attr);
