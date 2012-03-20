@@ -117,7 +117,7 @@ if (mapviewerappid == null || mapviewerappid.length() == 0) {
 					}
 		        }
 	       	} catch (Exception e) {
-	       		out.println("document.getElementById('status_element').innerHTML = 'Error in communication with catalogue server: '" + e.getMessage() + ";");
+	       		out.println("document.getElementById('status_element').innerHTML = Error in communication with catalogue server: " + e.getMessage() + ";");
 	       	}
     	}
 %>
