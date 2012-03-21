@@ -92,7 +92,7 @@
 	<footer id="footer" role="contentinfo">
 		<div class="container">
             <a href="http://ec.europa.eu/" target="_blank"><img src="/ace-theme/images/logo_eu.jpg" alt="European Commission logo" style="margin-bottom: 3px" /><div>European Commission</div></a>
-			<a href="http://www.eea.europa.eu/" target="_blank"><img src="/ace-theme/images/logo_eea.png" style="width: 52px; margin-top: -8px" alt="EEA logo" /><div>European Environment Agency</div></a>
+			<a href="http://www.eea.europa.eu/" target="_blank"><img src="/ace-theme/images/logo_eea.png" style="width: 52px; margin-top: 4px" alt="EEA logo" /><div>European Environment Agency</div></a>
         </div>
 	</footer>
 </div>
