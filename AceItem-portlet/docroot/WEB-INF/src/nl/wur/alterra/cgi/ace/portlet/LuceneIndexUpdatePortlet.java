@@ -84,7 +84,8 @@ public abstract class LuceneIndexUpdatePortlet extends MVCPortlet {
 			String moderator = aceitem.getModerator();
 			if(moderator.indexOf(user.getScreenName())==-1) {
 				
-				aceitem.setModerator( moderator + (moderator.length()==0 ? "" : ", ") + user.getScreenName());
+				aceitem.setModerator( moderator + (moderator.length()==0 ? "" : ", ") + user.getFullName() 
+						+ " (" + user.getEmailAddress() + ")" );
 			}
 		}
 		

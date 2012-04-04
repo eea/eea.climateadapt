@@ -78,7 +78,7 @@
 		<aui:input type="hidden" name="wxsharvesterId" value='<%= aceitem == null ? "" : aceitem.getWxsharvesterId() %>'/>
 		
 		<liferay-ui:error key="aceitemname-required" message="aceitemname-required" />
-		<b>name</b> <i>(required)</i><br />	
+		<b>item-name</b> <i>(required)</i><br />	
 		<input name="name" type="text" size="120" value='<%= aceitem == null ? "" : aceitem.getName() %>'><br /><br />
 		
 		<liferay-ui:error key="aceitemstoredat-required" message="aceitemstoredat-required" />
@@ -214,7 +214,7 @@
 	</table>
 	<br />
 	
-    <b>Comments about this database item <i>[information entered below will not be displayed on the public pages of the clearinghouse]</i></b><br />	
+    <b>Comments about this database item <i>[information entered below will not be displayed on the public pages of climate-adapt]</i></b><br />	
 	<textarea style="border-color: blue; border-style: solid; border-width: thin;" name="comments" rows=10 cols=150><%= aceitem == null ? "" : aceitem.getComments() %></textarea><br /><br />
 
 	<input type="hidden" name="chk_controlstatus" id="chk_controlstatus" value="<% out.print("" + ACEIndexUtil.Status_SUBMITTED); %>" />
