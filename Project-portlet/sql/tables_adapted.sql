@@ -23,7 +23,7 @@ CREATE TABLE ace_project
   controlstatus smallint,
   creator character varying(75),
   creationdate timestamp without time zone,
-  moderator character varying(75),
+  moderator character varying(2000),
   approvaldate timestamp without time zone,
   replacesid bigint,
   comments text,

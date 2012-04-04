@@ -64,7 +64,7 @@
 		<liferay-ui:error key="projecttitle-required" message="projecttitle-required" />
 
 	  <div style="float: left; margin-right: 35px;">
-		<b>title</b> <i>(required)</i><br />	
+		<b>project title</b> <i>(required)</i><br />	
 		<input name="title" type="text" size="120" value="<%= project == null ? "" : project.getTitle() %>"><br /><br />
 
 		<liferay-ui:error key="projectlead-required" message="projectlead-required" />
@@ -202,7 +202,7 @@
 	</table>
 	<br />
 	
-    <b>Comments about this database item <i>[information entered below will not be displayed on the public pages of the clearinghouse]</i></b><br />	
+    <b>Comments about this database item <i>[information entered below will not be displayed on the public pages of climate-adapt]</i></b><br />	
 	<textarea style="border-color: blue; border-style: solid; border-width: thin;" name="comments" rows=10 cols=150><%= project == null ? "" : project.getComments() %></textarea><br /><br />
 
 	<input type="hidden" name="chk_controlstatus" id="chk_controlstatus" value="<% out.print("" + ACEIndexUtil.Status_SUBMITTED); %>" />

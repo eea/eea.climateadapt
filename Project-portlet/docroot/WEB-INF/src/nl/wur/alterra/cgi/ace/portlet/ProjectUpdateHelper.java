@@ -43,7 +43,8 @@ public abstract class ProjectUpdateHelper extends MVCPortlet {
 			String moderator = project.getModerator();
 			if(moderator.indexOf(user.getScreenName())==-1) {
 				
-				project.setModerator( moderator + (moderator.length()==0 ? "" : ", ") + user.getScreenName());
+				project.setModerator( moderator + (moderator.length()==0 ? "" : ", ") + user.getFullName() 
+						+ " (" + user.getEmailAddress() + ")" );
 			}
 		}
 		
