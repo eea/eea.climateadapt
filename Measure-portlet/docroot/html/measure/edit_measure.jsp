@@ -65,7 +65,7 @@
 		<aui:input type="hidden" name="measureId" value='<%= measure == null ? "" : measure.getMeasureId() %>'/>
 
 		<liferay-ui:error key="measurename-required" message="measurename-required" />
-		<b>name</b><br />	
+		<b>item-name</b><br />	
 		<input name="name" type="text" size="120" value="<%= measure == null ? "" : measure.getName() %>"><br /><br />
 
 		<b>website</b><br />	
@@ -287,7 +287,7 @@
 	</table>
 	<br />
 	
-    <b>Comments about this database item <i>[information entered below will not be displayed on the public pages of the clearinghouse]</i></b><br />	
+    <b>Comments about this database item <i>[information entered below will not be displayed on the public pages of climate-adapt]</i></b><br />	
 	<textarea style="border-color: blue; border-style: solid; border-width: thin;" name="comments" rows=10 cols=150><%= measure == null ? "" : measure.getComments() %></textarea><br /><br />
 
 <% if (renderRequest.isUserInRole("Portal Content Reviewer") || renderRequest.isUserInRole("administrator") ) { // || renderRequest.isUserInRole("Power User")) { %>

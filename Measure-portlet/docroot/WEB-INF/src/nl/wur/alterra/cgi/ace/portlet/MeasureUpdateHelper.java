@@ -43,7 +43,8 @@ public abstract class MeasureUpdateHelper extends MVCPortlet {
 			String moderator = measure.getModerator();
 			if(moderator.indexOf(user.getScreenName())==-1) {
 				
-				measure.setModerator( moderator + (moderator.length()==0 ? "" : ", ") + user.getScreenName());
+				measure.setModerator( moderator + (moderator.length()==0 ? "" : ", ") + user.getFullName() 
+				+ " (" + user.getEmailAddress() + ")" );
 			}
 		}
 		
