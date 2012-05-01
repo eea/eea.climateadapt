@@ -6,7 +6,10 @@
 		<title>Measure</title>
 		<script type="text/javascript" src='js/jquery-1.6.2.min.js'></script>
 		<script src='http://dev.virtualearth.net/mapcontrol/mapcontrol.ashx?v=6.1'></script>
+		<script type="text/javascript" src='js/ext-base.js'></script>
+		<script type="text/javascript" src='js/ext-all.js'></script>
 		<script type='text/javascript' src='js/OpenLayers.js'></script>
+		<script type="text/javascript" src='js/GeoExt.js'></script>
 		<script type="text/javascript" src="js/chm/CHM.js"></script>
 		<script type="text/javascript" src="js/chm/CHMMap.js"></script>
 		<script type="text/javascript" src="js/chm/Point.js"></script>
@@ -42,31 +45,52 @@
 			
 			var wfs = 'wfs';
 			
+			var featureNamespace = 'http://climate-adapt.eea.europa.eu';
+			
+			var areasFeatureType = 'biogeo_2005';
+			
+			var areasLayer = 'chm:biogeo_2005';
+			
+			var caseStudiesFeatureType = 'casestudies';
+			
+			var geometryColumn = 'geom';
+			
+			var areaColumn = 'area';
+			
 			var locatorUrl = 'http://localhost/ve/REST/v1/Locations/';
 			
 			var locatorKey = 'Ao9qujBzDtg-nFiusTjt5VQ9x2NJB2wAD7YCRjaPz7hQQjxdFcl24tyhOwCDCIrw';
+			
+			var zoomLevel = 2;
 			
 			var measurechmmap;
 			
 			var locator;
 			
-		    $(document).ready(function() {
-		    	setTimeout(function(){init();}, 500);
-		    });
-		    
-		    function init() {	
-		    	measurechmmap = new CHM.MeasureCHMMap('map_element', {});
-		    	
+		    Ext.onReady(function() {
+		        measurechmmap = new CHM.MeasureCHMMap();
+
+		        mappanel = new GeoExt.MapPanel({
+		            renderTo: 'map_element',
+		            height: 350,
+		            width: 675,
+		            map: measurechmmap
+		        });
+
+		        measurechmmap.addBingLayers();
+		        
+		        measurechmmap.addMeasureLayers();
+
 		    	measurechmmap.setOnMeasureChanged(this.measureChanged);
 				
 		    	measurechmmap.setOnAreaChanged(this.areaChanged);
+				
+		    	locator = new CHM.Locator('locations_element', {});
+
+		    	locator.setOnLocationChanged(handleLocationChanged);
 		    	
-				locator = new CHM.Locator('locations_element', {});
-				
-				locator.setOnLocationChanged(handleLocationChanged);
-				
 		    	handleClick(null);
-		    }    			
+		    });    			
 			
 			function handleLocationChanged() {
 				measurechmmap.setMeasure(new CHM.Measure(locator.getLocation().x, locator.getLocation().y, new OpenLayers.Projection('EPSG:4326')));

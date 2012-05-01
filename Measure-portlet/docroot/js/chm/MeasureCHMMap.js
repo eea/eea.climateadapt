@@ -41,16 +41,25 @@ CHM.MeasureCHMMap = OpenLayers.Class(CHM.CHMMap, {
 	    	})
 	    });
 		
+		similar_areas_image_layer = new OpenLayers.Layer.WMS('Biogeographical regions', 
+			geoserverUrl + wms + '?', 
+			{layers: areasLayer, format: 'image/png', transparent: 'true'}, 
+			{visibility: true}, 
+			{tileOptions: {maxGetUrlLength: 2048}}, 
+			{isBaseLayer: false}
+		);
+		
 		similarareasvectorlayer = new OpenLayers.Layer.Vector("WFS", {
 		    strategies: [new OpenLayers.Strategy.BBOX()],
 		    protocol: new OpenLayers.Protocol.WFS({
 		      	version: '1.1.0',
 		        url: proxyUrl + geoserverUrl + wfs + '?', 
-		        featureType: 'biogeo_2005',
-		        featureNS: 'http://ace.geocat.net',
-		        geometryName: 'geom',
+		        featureType: areasFeatureType,
+		        featureNS: featureNamespace,
+		        geometryName: geometryColumn,
 		        maxFeatures: 1,
-		        srsName: this.projection
+		        srsName: this.projection,
+		        propertyNames: ["biogeo"]
 		    })
 		});
 		
@@ -58,7 +67,7 @@ CHM.MeasureCHMMap = OpenLayers.Class(CHM.CHMMap, {
 			this.setArea(e.feature.attributes.biogeo);
 		});
         
-		this.addLayers([similarareasvectorlayer, measurevectorlayer]);
+		this.addLayers([similar_areas_image_layer, similarareasvectorlayer, measurevectorlayer]);
 				
 		measurecontrol = new CHM.MeasureControl({measureCHMMap: this});
 				
@@ -72,6 +81,8 @@ CHM.MeasureCHMMap = OpenLayers.Class(CHM.CHMMap, {
 	},
 	
 	setArea : function(aArea) {
+		similar_areas_image_layer.mergeNewParams({'CQL_FILTER': "biogeo = '" + aArea + "' "});
+		
 		this.area = aArea;
 		
 		this.handleOnAreaChanged();
