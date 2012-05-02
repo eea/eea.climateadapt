@@ -263,15 +263,26 @@
 </aui:form>
 
 <div id='map_element'></div>
-
 <script>
 	var proxyUrl = '<%= prefs.getValue(Constants.proxyUrlPreferenceName, "") %>';
 	
-	var geoserverUrl = '<%= prefs.getValue(Constants.geoserverUrlPreferenceName, "http://ace.geocat.net/geoserver/") %>';
+	var geoserverUrl = '<%= prefs.getValue(Constants.geoserverUrlPreferenceName, "http://climate-adapt.eea.europa.eu/geoserver/") %>';
 	
 	var wms = '<%= prefs.getValue(Constants.wmsPreferenceName, "wms") %>';
 	
 	var wfs = '<%= prefs.getValue(Constants.wfsPreferenceName, "wfs") %>';
+	
+	var featureNamespace = '<%= prefs.getValue(Constants.featureNamespacePreferenceName, "http://climate-adapt.eea.europa.eu") %>';
+	
+	var areasFeatureType = '<%= prefs.getValue(Constants.areasFeatureTypePreferenceName, "biogeo_2005") %>';
+	
+	var areasLayer = '<%= prefs.getValue(Constants.areasLayerPreferenceName, "chm:biogeo_2005") %>';
+	
+	var caseStudiesFeatureType = '<%= prefs.getValue(Constants.caseStudiesFeatureTypePreferenceName, "casestudies") %>';
+	
+	var geometryColumn = '<%= prefs.getValue(Constants.geometryColumnPreferenceName, "geom") %>';
+	
+	var areaColumn = '<%= prefs.getValue(Constants.areaColumnPreferenceName, "area") %>';
 	
 	var locatorUrl = '<%= prefs.getValue(Constants.locatorUrlPreferenceName, "http://dev.virtualearth.net/REST/v1/Locations/") %>';
 	

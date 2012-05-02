@@ -27,7 +27,6 @@
 %>
 <div style="clear: both">   
 	<input type="button" value="Edit" onClick="document.location.href='<%= editUrl %>';">
-    <br />    <br />
 </div>    
 <%		}	
 	}
