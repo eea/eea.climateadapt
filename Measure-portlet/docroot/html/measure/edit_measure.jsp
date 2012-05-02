@@ -290,7 +290,7 @@
     <b>Comments about this database item <i>[information entered below will not be displayed on the public pages of climate-adapt]</i></b><br />	
 	<textarea style="border-color: blue; border-style: solid; border-width: thin;" name="comments" rows=10 cols=150><%= measure == null ? "" : measure.getComments() %></textarea><br /><br />
 
-<% if (renderRequest.isUserInRole("Portal Content Reviewer") || renderRequest.isUserInRole("administrator") ) { // || renderRequest.isUserInRole("Power User")) { %>
+<% if (renderRequest.isUserInRole("Portal Content Reviewer") || renderRequest.isUserInRole("administrator") ) { %>
 	<input type="checkbox" name="chk_importance" id="chk_importance" value="1" <% if ((measure != null) && (measure.getImportance() == 1) ) { out.print( "checked" ) ; } %> />
 	<b>High importance</b>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 
 
@@ -306,7 +306,11 @@
 		<aui:button type="cancel"  onClick="history.go(-1);" /> <!-- onClick="< %= redirect % >" -->
 	</aui:button-row>
 <% }
-   else  { %>
+   else  { 
+     if(renderRequest.isUserInRole("Power User")) { %>
+		<b>Edited by: <% if (measure != null) { out.print( measure.getModerator() ) ; } %> </b>	
+ 		<br />    
+<% 	 } %>
 	<input type="hidden" name="chk_controlstatus" id="chk_controlstatus" value=<% out.print( ((measure != null) && (measure.getControlstatus() == ACEIndexUtil.Status_SUBMITTED)) ? "" + ACEIndexUtil.Status_SUBMITTED : "" + ACEIndexUtil.Status_DRAFT ) ;%> />
 	<input type="hidden" name="notify_status" id="notify_status" value="1" />
 	<aui:button-row>

@@ -225,14 +225,33 @@ public class MeasurePortlet extends MeasureUpdateHelper {
 		String wms = ParamUtil.getString(request, Constants.wmsPreferenceName);
 
 		prefs.setValue(Constants.wmsPreferenceName, wms);
+	    
+		String featurenamespace = ParamUtil.getString(request, Constants.featureNamespacePreferenceName);
 
+		prefs.setValue(Constants.featureNamespacePreferenceName, featurenamespace);
+	    
+	    String areasFeatureType = ParamUtil.getString(request, Constants.areasFeatureTypePreferenceName);
+
+		prefs.setValue(Constants.areasFeatureTypePreferenceName, areasFeatureType);	    
+	    
+	    String areasLayer = ParamUtil.getString(request, Constants.areasLayerPreferenceName);
+
+		prefs.setValue(Constants.areasLayerPreferenceName, areasLayer);	    
+	    
+	    String caseStudiesFeatureType = ParamUtil.getString(request, Constants.caseStudiesFeatureTypePreferenceName);
+
+		prefs.setValue(Constants.caseStudiesFeatureTypePreferenceName, caseStudiesFeatureType);	    
+	    
+	    String geometryColumn = ParamUtil.getString(request, Constants.geometryColumnPreferenceName);
+
+		prefs.setValue(Constants.geometryColumnPreferenceName, geometryColumn);	    
+		
 		// Microsoft Virtual Earth locator REST API URL
 		String locatorUrl = ParamUtil.getString(request, Constants.locatorUrlPreferenceName);
 		
 		if (! locatorUrl.endsWith("/")) {
 			locatorUrl += "/";
 		}
-
 		prefs.setValue(Constants.locatorUrlPreferenceName, locatorUrl);
 		
 		// Microsoft VE API key

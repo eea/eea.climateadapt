@@ -41,10 +41,12 @@ public abstract class MeasureUpdateHelper extends MVCPortlet {
 		if(request.getRemoteUser() != null) {
 			User user = UserServiceUtil.getUserById( Long.parseLong(request.getRemoteUser()));
 			String moderator = measure.getModerator();
-			if(moderator.indexOf(user.getScreenName())==-1) {
+			
+			String newModerator = user.getFullName() + " (" + user.getEmailAddress() + ")" ;  
+						
+			if(moderator.indexOf( newModerator )==-1) {
 				
-				measure.setModerator( moderator + (moderator.length()==0 ? "" : ", ") + user.getFullName() 
-				+ " (" + user.getEmailAddress() + ")" );
+				measure.setModerator( moderator + (moderator.length()==0 ? "" : ", ") + newModerator );
 			}
 		}
 		
