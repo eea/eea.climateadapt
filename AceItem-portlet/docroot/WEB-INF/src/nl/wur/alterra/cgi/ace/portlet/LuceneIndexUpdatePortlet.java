@@ -82,10 +82,12 @@ public abstract class LuceneIndexUpdatePortlet extends MVCPortlet {
         if(request.getRemoteUser() != null) {
 			User user = UserServiceUtil.getUserById( Long.parseLong(request.getRemoteUser()));
 			String moderator = aceitem.getModerator();
-			if(moderator.indexOf(user.getScreenName())==-1) {
+			
+			String newModerator = user.getFullName() + " (" + user.getEmailAddress() + ")" ;  
+			
+			if(moderator.indexOf( newModerator )==-1) {
 				
-				aceitem.setModerator( moderator + (moderator.length()==0 ? "" : ", ") + user.getFullName() 
-						+ " (" + user.getEmailAddress() + ")" );
+				aceitem.setModerator( moderator + (moderator.length()==0 ? "" : ", ") + newModerator );
 			}
 		}
 		
@@ -194,7 +196,7 @@ public abstract class LuceneIndexUpdatePortlet extends MVCPortlet {
         					+ aceitem.getSpatialValues()+ " " 
         					+ aceitem.getTextwebpage() );        
 		
-        if( aceitem.getStoragetype().equalsIgnoreCase("GEONETWORK") || 
+        if( aceitem.getStoragetype().equalsIgnoreCase("MAPLAYER") || 
         	aceitem.getStoragetype().equalsIgnoreCase("PLAINMETADATA") || 
           	aceitem.getStoragetype().equalsIgnoreCase("SETOFMAPS")) {
         		aceitem.setTextSearch( aceitem.getTextSearch() + ' ' + aceitem.getStoragetype());

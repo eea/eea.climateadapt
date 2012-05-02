@@ -72,7 +72,7 @@
 	  elements = elements.replace(";","; ");
 	  
 	  if (aceitem.getStoragetype().equalsIgnoreCase("URL") || 
-		  aceitem.getStoragetype().equalsIgnoreCase("GEONETWORK") || 
+		  aceitem.getStoragetype().equalsIgnoreCase("MAPLAYER") || 
 		  aceitem.getStoragetype().equalsIgnoreCase("PLAINMETADATA") ||
 		  aceitem.getStoragetype().equalsIgnoreCase("SETOFMAPS") ) {
 	  	  // Only these types get viewed by viewaceitem portlet; Ace Serviced Entities have their own portlets
@@ -117,7 +117,7 @@
 
 <%
 		if (aceitem.getStoragetype().equalsIgnoreCase("URL") || 
-			aceitem.getStoragetype().equalsIgnoreCase("GEONETWORK") || 
+			aceitem.getStoragetype().equalsIgnoreCase("MAPLAYER") || 
 			aceitem.getStoragetype().equalsIgnoreCase("PLAINMETADATA") || 
 		    aceitem.getStoragetype().equalsIgnoreCase("SETOFMAPS") ) {
 			// Only these types get maintained here; Ace Serviced Entities have their own maintenance pages

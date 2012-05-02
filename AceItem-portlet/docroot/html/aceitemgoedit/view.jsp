@@ -7,6 +7,7 @@
 						 + (String) request.getAttribute(Constants.ACEITEMID) ;
 %>
 	<input type="button" value="Edit" onClick="document.location.href='<%= editUrl %>';">
+    <br />    <br />
 <%			
 	}
 %>

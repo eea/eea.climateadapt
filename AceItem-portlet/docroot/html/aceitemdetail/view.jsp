@@ -30,7 +30,7 @@
 				
 		if(aceitem != null) {
 			
-			if(aceitem.getStoragetype().equalsIgnoreCase("GEONETWORK")) {
+			if(aceitem.getStoragetype().equalsIgnoreCase("MAPLAYER")) {
 				// cswRecordFileIdentifier gets handled inside mapviewer-portlet
 				url = "<a href='/map-viewer?cswRecordFileIdentifier=" + aceitem.getStoredAt() + "' >View map " + aceitem.getName() + "</a>" ; 
 				//dev:	metadataurl = "<a href='http://dev.ace.geocat.net/geonetwork/srv/en/metadata.show?uuid=" + aceitem.getStoredAt() + "' target='_blank'>View metadata " + aceitem.getName() + "</a>" ; 
@@ -86,7 +86,7 @@
 	 <b>Description</b><br />
 	 <% out.print( aceitem.getDescription() ); %><br /><br />
 
-<%  if(aceitem.getStoragetype().equalsIgnoreCase("GEONETWORK") ) { %>
+<%  if(aceitem.getStoragetype().equalsIgnoreCase("MAPLAYER") ) { %>
 	<b>Go to the service</b><br />
 	 <% out.print( url ); %><br /><br />
 	 <% out.print( metadataurl ); %><br /><br />

@@ -98,7 +98,7 @@
 		<td width=50%><b>storagetype</b><br />
 	    <select name="storagetype">		
 			<option value="URL" <%= ((aceitem==null || aceitem.getStoragetype().equalsIgnoreCase("URL")) ? "selected" : "")%> >URL</option>
-			<option value="GEONETWORK" <%= ((aceitem!=null && aceitem.getStoragetype().equalsIgnoreCase("GEONETWORK")) ? "selected" : "") %> >GEONETWORK</option>
+			<option value="MAPLAYER" <%= ((aceitem!=null && aceitem.getStoragetype().equalsIgnoreCase("MAPLAYER")) ? "selected" : "") %> >MAPLAYER</option>
 			<option value="PLAINMETADATA" <%= ((aceitem!=null && aceitem.getStoragetype().equalsIgnoreCase("PLAINMETADATA")) ? "selected" : "") %> >PLAINMETADATA</option>
 			<option value="SETOFMAPS" <%= ((aceitem!=null && aceitem.getStoragetype().equalsIgnoreCase("SETOFMAPS")) ? "selected" : "") %> >SETOFMAPS</option>
 		</select>
@@ -252,7 +252,11 @@
 		<aui:button type="cancel"  onClick="history.go(-1);" /> <!-- onClick="< %= redirect % >" -->
 	</aui:button-row>	
 <% }
-   else  { %>
+  else  { 
+     if(renderRequest.isUserInRole("Power User")) { %>
+		<b>Edited by: <% if (aceitem != null) { out.print( aceitem.getModerator() ) ; } %> </b>	
+		<br />    
+<% 	 } %>
 	<input type="hidden" name="chk_controlstatus" id="chk_controlstatus" value=<% out.print( ((aceitem != null) && (aceitem.getControlstatus() == ACEIndexUtil.Status_SUBMITTED)) ? "" + ACEIndexUtil.Status_SUBMITTED : "" + ACEIndexUtil.Status_DRAFT ) ;%> />
 	<input type="hidden" name="notify_status" id="notify_status" value="1" />
 	<aui:button-row>

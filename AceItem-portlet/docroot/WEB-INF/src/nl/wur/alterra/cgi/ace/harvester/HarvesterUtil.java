@@ -719,8 +719,8 @@ public class HarvesterUtil {
                                     //System.out.println("PLAINMETADATA");
 
                                 } else {
-                                    metadataStorageTypeMap.put(uuid, "GEONETWORK");
-                                    //System.out.println("GEONETWORK");
+                                    metadataStorageTypeMap.put(uuid, "MAPLAYER");
+                                    //System.out.println("MAPLAYER");
                                 }
                             }
 
@@ -730,8 +730,8 @@ public class HarvesterUtil {
                                 //System.out.println("PLAINMETADATA");
 
                             } else {
-                                metadataStorageTypeMap.put(uuid, "GEONETWORK");
-                                //System.out.println("GEONETWORK");
+                                metadataStorageTypeMap.put(uuid, "MAPLAYER");
+                                //System.out.println("MAPLAYER");
                             }
                         }
 
