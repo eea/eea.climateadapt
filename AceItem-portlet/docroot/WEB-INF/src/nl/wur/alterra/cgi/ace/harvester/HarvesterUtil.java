@@ -1091,7 +1091,8 @@ public class HarvesterUtil {
         System.out.println("SETTING STORED AT TO "  + uuid);
         aceItem.setStoredAt(uuid);
         aceItem.setDatatype(AceItemType.MAPGRAPHDATASET.name());
-        aceItem.setStoragetype(storageTypeMap.get(uuid));
+        String storagetype = storageTypeMap.get(uuid) ;
+        aceItem.setStoragetype( storagetype );
         String title = titleMap.get(uuid);
         if(title.length() > aceItemNameLength) {
             System.out.println("WARNING: Metadata title too long for AceItem, cut off. Original metadata title:\n" + title + "\n");
@@ -1114,7 +1115,7 @@ public class HarvesterUtil {
         }
         aceItem.setKeyword(keyword$);
 
-        aceItem.setTextSearch(keyword$ + " " + title + " " + abstrakt);
+        aceItem.setTextSearch(keyword$ + " " + title + " " + abstrakt + " " + storagetype);
 
         /*
         System.out.println("\naceItem filled with:\n" +
