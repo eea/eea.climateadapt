@@ -217,7 +217,11 @@
 		<aui:button type="cancel"  onClick="history.go(-1);" /> <!-- onClick="< %= redirect % >" -->
 	</aui:button-row>
 <% }
-   else  { %>
+  else  { 
+     if(renderRequest.isUserInRole("Power User")) { %>
+		<b>Edited by: <% if (project != null) { out.print( project.getModerator() ) ; } %> </b>	
+		<br />    
+<% 	 } %>
 	<input type="hidden" name="chk_controlstatus" id="chk_controlstatus" value=<% out.print( ((project != null) && (project.getControlstatus() == ACEIndexUtil.Status_SUBMITTED)) ? "" + ACEIndexUtil.Status_SUBMITTED : "" + ACEIndexUtil.Status_DRAFT ) ;%> />
 	<input type="hidden" name="notify_status" id="notify_status" value="1" />
 	<aui:button-row>

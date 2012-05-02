@@ -41,10 +41,12 @@ public abstract class ProjectUpdateHelper extends MVCPortlet {
 		if(request.getRemoteUser() != null) {
 			User user = UserServiceUtil.getUserById( Long.parseLong(request.getRemoteUser()));
 			String moderator = project.getModerator();
-			if(moderator.indexOf(user.getScreenName())==-1) {
+			
+			String newModerator = user.getFullName() + " (" + user.getEmailAddress() + ")" ;  
+			
+			if(moderator.indexOf( newModerator )==-1) {
 				
-				project.setModerator( moderator + (moderator.length()==0 ? "" : ", ") + user.getFullName() 
-						+ " (" + user.getEmailAddress() + ")" );
+				project.setModerator( moderator + (moderator.length()==0 ? "" : ", ") + newModerator );
 			}
 		}
 		
