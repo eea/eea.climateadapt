@@ -11,6 +11,7 @@ import javax.portlet.RenderResponse;
 import javax.servlet.http.HttpServletRequest;
 
 import nl.wur.alterra.cgi.ace.model.AceItem;
+import nl.wur.alterra.cgi.ace.search.lucene.ACEIndexUtil;
 import nl.wur.alterra.cgi.ace.service.AceItemLocalServiceUtil;
 
 import com.liferay.portal.kernel.util.ParamUtil;
@@ -34,8 +35,20 @@ public class AceItemGoEditPortlet extends MVCPortlet {
 			try {
 				AceItem aceitem = AceItemLocalServiceUtil.getAceItem( Long.parseLong(httpRequest.getParameter(Constants.ACEITEMID) ) ) ;
 				
-				if(aceitem.getReplacesId() != aceitem.getAceItemId()) { 
-					// there is no candidate item for this item: edit is permitted
+				if(aceitem.getReplacesId() != aceitem.getAceItemId()
+        			    && ( 
+        			    		(renderRequest.isUserInRole("Portal Content Reviewer") || 
+        						 renderRequest.isUserInRole("administrator") ||
+        						 renderRequest.isUserInRole("Power User") 
+        						)
+        					|| 
+        					    ( renderRequest.isUserInRole("User") && 
+        					      (aceitem.getControlstatus() != ACEIndexUtil.Status_APPROVED)
+        					    )
+        			     )
+        			   ) { 
+        			// there is no candidate item for this item: edit is permitted
+        			// EIONET users can only edit as long as status is not APPROVED 
 					renderRequest.setAttribute(Constants.ACEITEMID, httpRequest.getParameter(Constants.ACEITEMID));
 				}
 			}
@@ -56,6 +69,21 @@ public class AceItemGoEditPortlet extends MVCPortlet {
 		String editUrl = ParamUtil.getString(request, Constants.EDITURL);
 		PortletPreferences prefs = request.getPreferences();
 		prefs.setValue(Constants.EDITURL, editUrl);
+
+		String publicationShareEditUrl = ParamUtil.getString(request, Constants.PUBLICATIONSHAREEDITURL);
+		prefs.setValue(Constants.PUBLICATIONSHAREEDITURL, publicationShareEditUrl);
+
+		String infoportalShareEditUrl = ParamUtil.getString(request, Constants.INFOPORTALSHAREEDITURL);
+		prefs.setValue(Constants.INFOPORTALSHAREEDITURL, infoportalShareEditUrl);
+
+		String guidanceShareEditUrl = ParamUtil.getString(request, Constants.GUIDANCESHAREEDITURL);
+		prefs.setValue(Constants.GUIDANCESHAREEDITURL, guidanceShareEditUrl);
+
+		String toolShareEditUrl = ParamUtil.getString(request, Constants.TOOLSHAREEDITURL);
+		prefs.setValue(Constants.TOOLSHAREEDITURL, toolShareEditUrl);
+
+		String organisationShareEditUrl = ParamUtil.getString(request, Constants.ORGANISATIONSHAREEDITURL);
+		prefs.setValue(Constants.ORGANISATIONSHAREEDITURL, organisationShareEditUrl);
 		
 		prefs.store();
 	}

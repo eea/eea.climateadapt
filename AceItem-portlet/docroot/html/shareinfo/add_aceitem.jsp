@@ -5,19 +5,19 @@
 	String typedescription = "";
 	
 	if (sharetype.equalsIgnoreCase(AceItemType.DOCUMENT.toString())) {
-	   typedescription = "add a publication or report";  
+	   typedescription = "add / edit the publication or report";  
 	}
 	else if (sharetype.equalsIgnoreCase(AceItemType.INFORMATIONSOURCE.toString())) {
-	   typedescription = "add an information portal";
+	   typedescription = "add / edit the information portal";
 	}
 	else if (sharetype.equalsIgnoreCase(AceItemType.GUIDANCE.toString())) {
-	   typedescription = "add a guidance document";  
+	   typedescription = "add / edit the guidance document";  
 	}
 	else if (sharetype.equalsIgnoreCase(AceItemType.TOOL.toString())) {
-	   typedescription = "add a tool";  
+	   typedescription = "add /edit the tool";  
 	}
 	else if (sharetype.equalsIgnoreCase(AceItemType.ORGANISATION.toString())) {
-	   typedescription = "add an organisation"; 
+	   typedescription = "add / edit the organisation"; 
 	}
 	
  if ( ! renderRequest.isUserInRole("user") ) { // || renderRequest.isUserInRole("portal-content-reviewer") ) { 

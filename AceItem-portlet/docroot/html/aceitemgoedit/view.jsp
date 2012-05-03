@@ -3,32 +3,69 @@
 <%		
 	if(request.getAttribute(Constants.ACEITEMID)!=null) {
 
-		String editUrl = prefs.getValue(Constants.EDITURL, "/web/guest/aceitems1")
-						 + (String) request.getAttribute(Constants.ACEITEMID) ;
+		String editUrl = "" ;
+
+		long aceitemId = 0;
 		
 		AceItem aceitem = null;
 		
 		String moderator = "";
 		
-		long aceitemId = Long.parseLong((String) request.getAttribute(Constants.ACEITEMID));
+		String newModerator = user.getFullName() + " (" + user.getEmailAddress() + ")" ;  ;	
+		
+		try {
+			aceitemId = Long.parseLong( (String) renderRequest.getPortletSession().getAttribute("lastAddedAceItemId") );
+			
+			if (aceitemId > 0) {
+				aceitem = AceItemLocalServiceUtil.getAceItem(aceitemId);
+			}
+		}
+		catch (NumberFormatException e) {
+			// do nothing
+		}		
 
-		if (aceitemId > 0) {
-			aceitem = AceItemLocalServiceUtil.getAceItem(aceitemId);
+		if (aceitem != null) {
 			
 			moderator = aceitem.getModerator();
-		}
-		
-		String newModerator = user.getFullName() + " (" + user.getEmailAddress() + ")" ;  ;
 			
-		if (renderRequest.isUserInRole("Portal Content Reviewer") 
-				|| renderRequest.isUserInRole("administrator")
-				|| renderRequest.isUserInRole("Power User")
-				|| (moderator.indexOf(newModerator) > -1) ) { 
+			if (renderRequest.isUserInRole("Portal Content Reviewer") 
+					|| renderRequest.isUserInRole("administrator")
+					|| renderRequest.isUserInRole("Power User")) {
+				
+				editUrl = prefs.getValue(Constants.EDITURL,"/web/guest/aceitems1?p_p_id=aceitemportlet_WAR_AceItemportlet&p_p_lifecycle=0&p_p_state=normal&p_p_mode=view&p_p_col_id=column-1&p_p_col_count=1&_aceitemportlet_WAR_AceItemportlet_jspPage=%2Fhtml%2Faceitem%2Fedit_aceitem.jsp&_aceitemportlet_WAR_AceItemportlet_redirect=%2Fweb%2Fguest%2Faceitems1&_aceitemportlet_WAR_AceItemportlet_aceItemId=") ;
+
+			}
+			else if (moderator.indexOf(newModerator) > -1 ) { 
+				
+				if(aceitem.getDatatype().equalsIgnoreCase( AceItemType.DOCUMENT.toString() )) {  
+					editUrl = prefs.getValue(Constants.PUBLICATIONSHAREEDITURL,"/web/guest/share-your-info/publications-and-reports?p_p_id=shareaceitemportlet_WAR_AceItemportlet_INSTANCE_A8ua&p_p_lifecycle=0&p_p_state=normal&p_p_mode=view&p_p_col_id=column-2&p_p_col_count=1&_shareaceitemportlet_WAR_AceItemportlet_INSTANCE_A8ua_jspPage=%2Fhtml%2Fshareinfo%2Fadd_aceitem.jsp&_shareaceitemportlet_WAR_AceItemportlet_INSTANCE_A8ua_redirect=%2Fen%2Fshare-your-info%2Fpublications-and-reports&_shareaceitemportlet_WAR_AceItemportlet_INSTANCE_A8ua_aceitemId=") ;
+				}
+				else if(aceitem.getDatatype().equalsIgnoreCase( AceItemType.INFORMATIONSOURCE.toString() )){ 
+					editUrl = prefs.getValue(Constants.INFOPORTALSHAREEDITURL,"/web/guest/share-your-info/information-portals?p_p_id=shareaceitemportlet_WAR_AceItemportlet_INSTANCE_K5tr&p_p_lifecycle=0&p_p_state=normal&p_p_mode=view&p_p_col_id=column-2&p_p_col_count=1&_shareaceitemportlet_WAR_AceItemportlet_INSTANCE_K5tr_jspPage=%2Fhtml%2Fshareinfo%2Fadd_aceitem.jsp&_shareaceitemportlet_WAR_AceItemportlet_INSTANCE_K5tr_redirect=%2Fen%2Fshare-your-info%2Finformation-portals&_shareaceitemportlet_WAR_AceItemportlet_INSTANCE_K5tr_aceitemId=") ;
+				}
+				else if(aceitem.getDatatype().equalsIgnoreCase( AceItemType.GUIDANCE.toString() )){ 
+					editUrl = prefs.getValue(Constants.GUIDANCESHAREEDITURL,"/web/guest/share-your-info/guidance-documents?p_p_id=shareaceitemportlet_WAR_AceItemportlet_INSTANCE_J4yK&p_p_lifecycle=0&p_p_state=normal&p_p_mode=view&p_p_col_id=column-2&p_p_col_count=1&_shareaceitemportlet_WAR_AceItemportlet_INSTANCE_J4yK_jspPage=%2Fhtml%2Fshareinfo%2Fadd_aceitem.jsp&_shareaceitemportlet_WAR_AceItemportlet_INSTANCE_J4yK_redirect=%2Fen%2Fshare-your-info%2Fguidance-documents&_shareaceitemportlet_WAR_AceItemportlet_INSTANCE_J4yK_aceitemId=") ;
+				}
+				else if(aceitem.getDatatype().equalsIgnoreCase( AceItemType.TOOL.toString() )){ 
+					editUrl = prefs.getValue(Constants.TOOLSHAREEDITURL,"/web/guest/share-your-info/tools?p_p_id=shareaceitemportlet_WAR_AceItemportlet_INSTANCE_gZM7&p_p_lifecycle=0&p_p_state=normal&p_p_mode=view&p_p_col_id=column-2&p_p_col_count=1&_shareaceitemportlet_WAR_AceItemportlet_INSTANCE_gZM7_jspPage=%2Fhtml%2Fshareinfo%2Fadd_aceitem.jsp&_shareaceitemportlet_WAR_AceItemportlet_INSTANCE_gZM7_redirect=%2Fen%2Fshare-your-info%2Ftools&_shareaceitemportlet_WAR_AceItemportlet_INSTANCE_gZM7_aceitemId=") ;
+				}
+				else if(aceitem.getDatatype().equalsIgnoreCase( AceItemType.ORGANISATION.toString() )){ 
+					editUrl = prefs.getValue(Constants.ORGANISATIONSHAREEDITURL,"/web/guest/share-your-info/organisations?p_p_id=shareaceitemportlet_WAR_AceItemportlet_INSTANCE_vfO6&p_p_lifecycle=0&p_p_state=normal&p_p_mode=view&p_p_col_id=column-2&p_p_col_count=1&_shareaceitemportlet_WAR_AceItemportlet_INSTANCE_vfO6_jspPage=%2Fhtml%2Fshareinfo%2Fadd_aceitem.jsp&_shareaceitemportlet_WAR_AceItemportlet_INSTANCE_vfO6_redirect=%2Fen%2Fshare-your-info%2Forganisations&_shareaceitemportlet_WAR_AceItemportlet_INSTANCE_vfO6_aceitemId=") ;
+				}
+				
+			}
+			
+			editUrl += "" + aceitemId ;
+			
+			if (renderRequest.isUserInRole("Portal Content Reviewer") 
+					|| renderRequest.isUserInRole("administrator")
+					|| renderRequest.isUserInRole("Power User")
+					|| (moderator.indexOf(newModerator) > -1) ) { 
 %>		
-<div style="clear: both">   
-	<input type="button" value="Edit" onClick="document.location.href='<%= editUrl %>';">
-</div>     
-<%		
-		}		
+			<div style="clear: both">   
+				<input type="button" value="Edit" onClick="document.location.href='<%= editUrl %>';">
+			</div>     
+<%			}
+		}	
 	}
 %>
