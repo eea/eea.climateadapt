@@ -10,6 +10,7 @@ import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
 import javax.servlet.http.HttpServletRequest;
 import nl.wur.alterra.cgi.ace.model.Project;
+import nl.wur.alterra.cgi.ace.search.lucene.ACEIndexUtil;
 import nl.wur.alterra.cgi.ace.service.ProjectLocalServiceUtil;
 
 import com.liferay.portal.kernel.exception.PortalException;
@@ -34,8 +35,20 @@ public class ProjectGoEditPortlet extends MVCPortlet {
     		try {
     			Project project = ProjectLocalServiceUtil.getProject( Long.parseLong(httpRequest.getParameter("ace_project_id") ) ) ;
     			
-    			if(project.getReplacesId() != project.getProjectId()) { 
+    			if( project.getReplacesId() != project.getProjectId()
+    			    && ( 
+    			    		(renderRequest.isUserInRole("Portal Content Reviewer") || 
+           						 renderRequest.isUserInRole("administrator") ||
+           						 renderRequest.isUserInRole("Power User") 
+           						)
+           					|| 
+           					    ( renderRequest.isUserInRole("User") && 
+           					      (project.getControlstatus() != ACEIndexUtil.Status_APPROVED)
+           					    )
+    			     )
+    			   ) { 
     			// there is no candidate item for this item: edit is permitted
+    			// EIONET users can only edit as long as status is not APPROVED 
         	    	renderRequest.setAttribute(Constants.PROJECTID, httpRequest.getParameter("ace_project_id"));
         	    }
     		}

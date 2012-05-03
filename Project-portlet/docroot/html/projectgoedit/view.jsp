@@ -25,10 +25,8 @@
 		}
 		
 		if (project != null) {
-			project = ProjectLocalServiceUtil.getProject(projectId);
 			
 			moderator = project.getModerator();
-
 
 			if (renderRequest.isUserInRole("Portal Content Reviewer") 
 					|| renderRequest.isUserInRole("administrator")
