@@ -125,13 +125,6 @@
 			<short-title>ProjectGoEditPortlet</short-title>
 			<keywords></keywords>
 		</portlet-info>
-		    	<!-- Portlet preferences (configurable by user in portlet EDIT mode) -->
-		<portlet-preferences>
-			<preference>
-				<name>editUrl</name>
-				<value>/web/guest/projects</value>
-			</preference>
-		</portlet-preferences>
 		<security-role-ref>
 			<role-name>administrator</role-name>
 		</security-role-ref>

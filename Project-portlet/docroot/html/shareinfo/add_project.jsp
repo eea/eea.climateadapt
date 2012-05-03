@@ -40,7 +40,7 @@
 </script>
 <liferay-ui:header
 	backURL="<%= redirect %>"
-	title='Add a research / knowledge project'
+	title='Add / edit the research / knowledge project'
 />
 
 

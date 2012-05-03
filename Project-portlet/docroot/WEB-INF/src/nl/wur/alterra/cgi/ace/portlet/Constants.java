@@ -9,4 +9,6 @@ public class Constants {
 
 	public static final String EDITURL = "editUrl"; // used inside ProjectGoEditPortlet
 
+	public static final String SHAREINFOEDITURL = "shareInfoEditUrl"; // used inside ProjectGoEditPortlet
+
 }

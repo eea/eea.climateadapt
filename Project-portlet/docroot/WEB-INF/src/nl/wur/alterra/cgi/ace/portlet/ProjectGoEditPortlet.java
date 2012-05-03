@@ -37,7 +37,7 @@ public class ProjectGoEditPortlet extends MVCPortlet {
     			if(project.getReplacesId() != project.getProjectId()) { 
     			// there is no candidate item for this item: edit is permitted
         	    	renderRequest.setAttribute(Constants.PROJECTID, httpRequest.getParameter("ace_project_id"));
-    			}
+        	    }
     		}
     		catch (Exception e) {
     			System.out.println(e.getMessage()) ;
@@ -57,6 +57,9 @@ public class ProjectGoEditPortlet extends MVCPortlet {
 		String editUrl = ParamUtil.getString(request, Constants.EDITURL);
 		PortletPreferences prefs = request.getPreferences();
 		prefs.setValue(Constants.EDITURL, editUrl);
+
+		String shareInfoEditUrl = ParamUtil.getString(request, Constants.SHAREINFOEDITURL);
+		prefs.setValue(Constants.SHAREINFOEDITURL, shareInfoEditUrl);
 		
 		prefs.store();
 	} 

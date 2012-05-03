@@ -22,8 +22,15 @@
 
 <aui:form action="<%= setProjectGoEditPrefUrl %>" method="POST" name="fm" >
 
-	<b>Edit url (long stuff ending with 'projectId=')</b><br />
-	<input name='<%= Constants.EDITURL %>' type="text" size="180" value='<%= prefs.getValue(Constants.EDITURL,"/web/guest/projects") %>' /><br /><br />
+	<b>Normal edit url (long stuff ending with 'projectId=')</b><br />
+	<input name='<%= Constants.EDITURL %>' type="text" size="180" 
+	value='<%= prefs.getValue(Constants.EDITURL,"/web/guest/projects?p_p_id=projectportlet_WAR_Projectportlet&p_p_lifecycle=0&p_p_state=normal&p_p_mode=view&p_p_col_id=column-1&p_p_col_count=1&_projectportlet_WAR_Projectportlet_jspPage=%2Fhtml%2Fproject%2Fedit_project.jsp&_projectportlet_WAR_Projectportlet_redirect=%2Fweb%2Fguest%2Fprojects&_projectportlet_WAR_Projectportlet_projectId=") %>' />
+	<br /><br />
+
+	<b>EIONET edit url (/web/guest/share-your-info/research-and-knowledge-projects?... ending with 'projectId=')</b><br />
+	<input name='<%= Constants.SHAREINFOEDITURL %>' type="text" size="180" 
+	value='<%= prefs.getValue(Constants.SHAREINFOEDITURL,"/web/guest/share-your-info/research-and-knowledge-projects?p_p_id=shareprojectportlet_WAR_Projectportlet&p_p_lifecycle=0&p_p_state=normal&p_p_mode=view&p_p_col_id=column-2&p_p_col_count=1&_shareprojectportlet_WAR_Projectportlet_jspPage=%2Fhtml%2Fshareinfo%2Fadd_project.jsp&_shareprojectportlet_WAR_Projectportlet_redirect=%2Fen%2Fshare-your-info%2Fresearch-and-knowledge-projects&_shareprojectportlet_WAR_Projectportlet_projectId=") %>' />
+	<br /><br />
 
 	<aui:button-row>
 		<aui:button type="submit" />
