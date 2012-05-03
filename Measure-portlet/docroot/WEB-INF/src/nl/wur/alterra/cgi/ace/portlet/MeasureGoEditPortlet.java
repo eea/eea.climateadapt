@@ -11,6 +11,7 @@ import javax.portlet.RenderResponse;
 import javax.servlet.http.HttpServletRequest;
 
 import nl.wur.alterra.cgi.ace.model.Measure;
+import nl.wur.alterra.cgi.ace.search.lucene.ACEIndexUtil;
 import nl.wur.alterra.cgi.ace.service.MeasureLocalServiceUtil;
 
 import com.liferay.portal.kernel.util.ParamUtil;
@@ -34,8 +35,20 @@ public class MeasureGoEditPortlet extends MVCPortlet {
     		try {
     			Measure measure = MeasureLocalServiceUtil.getMeasure( Long.parseLong(httpRequest.getParameter("ace_measure_id") ) ) ;
     			
-    			if(measure.getReplacesId() != measure.getMeasureId()) { 
-    			// there is no candidate item for this item: edit is permitted
+    			if(measure.getReplacesId() != measure.getMeasureId()
+        			    && ( 
+        			    		(renderRequest.isUserInRole("Portal Content Reviewer") || 
+        						 renderRequest.isUserInRole("administrator") ||
+        						 renderRequest.isUserInRole("Power User") 
+        						)
+        					|| 
+        					    ( renderRequest.isUserInRole("User") && 
+        					      (measure.getControlstatus() != ACEIndexUtil.Status_APPROVED)
+        					    )
+        			     )
+        			   ) { 
+        			// there is no candidate item for this item: edit is permitted
+        			// EIONET users can only edit as long as status is not APPROVED 
     				renderRequest.setAttribute(Constants.MEASUREID, httpRequest.getParameter("ace_measure_id"));
     			}
     		}
@@ -56,6 +69,12 @@ public class MeasureGoEditPortlet extends MVCPortlet {
 		String editUrl = ParamUtil.getString(request, Constants.EDITURL);
 		PortletPreferences prefs = request.getPreferences();
 		prefs.setValue(Constants.EDITURL, editUrl);
+
+		String adaptationoptionShareEditUrl = ParamUtil.getString(request, Constants.ADAPATIONOPTIONSHAREEDITURL);
+		prefs.setValue(Constants.ADAPATIONOPTIONSHAREEDITURL, adaptationoptionShareEditUrl);
+
+		String casestudyShareEditUrl = ParamUtil.getString(request, Constants.CASESTUDYSHAREEDITURL);
+		prefs.setValue(Constants.CASESTUDYSHAREEDITURL, casestudyShareEditUrl);
 		
 		prefs.store();
 	}

@@ -3,31 +3,60 @@
 <%		
 	if(request.getAttribute(Constants.MEASUREID)!=null) {
 
-		String editUrl = prefs.getValue(Constants.EDITURL, "/web/guest/measures")
-						 + (String) request.getAttribute(Constants.MEASUREID) ;		
+		String editUrl = ""; 
+
+		long measureId = 0;	
 		
 		Measure measure = null;
-							
+		
 		String moderator = "";
 		
-		long measureId = Long.parseLong((String) request.getAttribute(Constants.MEASUREID));
-
-		if (measureId > 0) {
-			measure = MeasureLocalServiceUtil.getMeasure(measureId);
+		String newModerator = user.getFullName() + " (" + user.getEmailAddress() + ")" ; 
+		
+		try {
+			measureId = Long.parseLong((String) request.getAttribute(Constants.MEASUREID));		
+			
+			if (measureId > 0) {
+				measure = MeasureLocalServiceUtil.getMeasure(measureId);
+			}
+		}
+		catch (NumberFormatException e) {
+			// do nothing
+		}		
+		
+		if (measure != null) {
 			
 			moderator = measure.getModerator();
-		}
-		
-		String newModerator = user.getFullName() + " (" + user.getEmailAddress() + ")" ;  ;
+
+			if (renderRequest.isUserInRole("Portal Content Reviewer") 
+					|| renderRequest.isUserInRole("administrator")
+					|| renderRequest.isUserInRole("Power User")) {
+				
+				editUrl = prefs.getValue(Constants.EDITURL,"/web/guest/measures?p_p_id=measureportlet_WAR_Measureportlet&p_p_lifecycle=0&p_p_state=normal&p_p_mode=view&p_p_col_id=column-1&p_p_col_count=1&_measureportlet_WAR_Measureportlet_jspPage=%2Fhtml%2Fmeasure%2Fedit_measure.jsp&_measureportlet_WAR_Measureportlet_redirect=%2Fweb%2Fguest%2Fmeasures&_measureportlet_WAR_Measureportlet_measureId=");
+
+			}
+			else if (moderator.indexOf(newModerator) > -1 ) { 
+				
+				if(measure.getMao_type().equalsIgnoreCase("A")) { // "A" = Action, ofwel case Study 
+					editUrl = prefs.getValue(Constants.CASESTUDYSHAREEDITURL,"/web/guest/share-your-info/case-studies?p_p_id=sharemeasureportlet_WAR_Measureportlet&p_p_lifecycle=0&p_p_state=normal&p_p_mode=view&p_p_col_id=column-2&p_p_col_count=1&_sharemeasureportlet_WAR_Measureportlet_jspPage=%2Fhtml%2Fshareinfo%2Fadd_measure.jsp&_sharemeasureportlet_WAR_Measureportlet_redirect=%2Fen%2Fshare-your-info%2Fcase-studies&_sharemeasureportlet_WAR_Measureportlet_measureId=") ;
+				}
+				else { // "M" = Measure, ofwel adaptation option
+					editUrl = prefs.getValue(Constants.ADAPATIONOPTIONSHAREEDITURL,"/web/guest/share-your-info/adaptation-options?p_p_id=sharemeasureportlet_WAR_Measureportlet&p_p_lifecycle=0&p_p_state=normal&p_p_mode=view&p_p_col_id=column-2&p_p_col_count=1&_sharemeasureportlet_WAR_Measureportlet_jspPage=%2Fhtml%2Fshareinfo%2Fadd_measure.jsp&_sharemeasureportlet_WAR_Measureportlet_redirect=%2Fen%2Fshare-your-info%2Fadaptation-options&_sharemeasureportlet_WAR_Measureportlet_measureId=");
+				}
+				
+			}
 			
-		if (renderRequest.isUserInRole("Portal Content Reviewer") 
-				|| renderRequest.isUserInRole("administrator")
-				|| renderRequest.isUserInRole("Power User")
-				|| (moderator.indexOf(newModerator) > -1) ) {
+			editUrl += "" + measureId ;
+			
+			if (renderRequest.isUserInRole("Portal Content Reviewer") 
+					|| renderRequest.isUserInRole("administrator")
+					|| renderRequest.isUserInRole("Power User")
+					|| (moderator.indexOf(newModerator) > -1) ) {
 %>
-<div style="clear: both">   
-	<input type="button" value="Edit" onClick="document.location.href='<%= editUrl %>';">
-</div>    
-<%		}	
+			<div style="clear: both">   
+				<input type="button" value="Edit" onClick="document.location.href='<%= editUrl %>';">
+			</div>   	
+<%			}
+		}	
 	}
 %>

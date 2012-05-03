@@ -19,8 +19,8 @@
 <%
    String mao_type = prefs.getValue(Constants.mao_typePreferenceName, "A");
 
-   if ( ! renderRequest.isUserInRole("user") ) { // || renderRequest.isUserInRole("portal-content-reviewer") ) { 
-	    // if approved only administrator can delete; otherwise also power user can delete %>
+   if ( ! renderRequest.isUserInRole("user") ) { 
+%>
 		Please <a href='/home?p_p_id=58&p_p_lifecycle=0&p_p_state=maximized&p_p_mode=view&saveLastPath=0&_58_struts_action=%2Flogin%2Flogin'>sign in with your EIONET account</a> to <%= mao_type.equalsIgnoreCase("A") ? "add a case study" : "add an adaptation option" %>.
 <% }	    
    else {
@@ -58,7 +58,7 @@
 		<portlet:param name="redirect" value="<%= redirect %>" />
 	</portlet:renderURL>
 	&nbsp;&nbsp;&nbsp;&nbsp;	
-	<a href='<%= editMeasureURL.toString() %>'><%= mao_type.equalsIgnoreCase("A") ? "Modify last added case study" : "Modify last added adaptation option" %></a>
+	<a href='<%= editMeasureURL.toString() %>'><%= mao_type.equalsIgnoreCase("A") ? "Modify last edited case study" : "Modify last edited adaptation option" %></a>
 	
 <%	} 
 } // else main %>

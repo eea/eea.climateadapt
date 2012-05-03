@@ -9,6 +9,10 @@ public class Constants {
 	
 	public static final String EDITURL = "editUrl"; // used inside MeasureGoEditPortlet
 
+	public static final String ADAPATIONOPTIONSHAREEDITURL = "adaptationoptionShareEditUrl"; // used inside MeasureGoEditPortlet
+
+	public static final String CASESTUDYSHAREEDITURL = "casestudyShareEditUrl"; // used inside MeasureGoEditPortlet
+
 	public static String areaColumnPreferenceName = "areaColumn";
 
 	public static String areasFeatureTypePreferenceName = "areasFeatureType";
