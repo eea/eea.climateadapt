@@ -4,8 +4,10 @@ package nl.wur.alterra.cgi.ace.portlet;
 import java.util.List;
 
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.Validator;
 import nl.wur.alterra.cgi.ace.model.Project;
+import nl.wur.alterra.cgi.ace.service.ProjectLocalServiceUtil;
 
 public class ProjectValidator {
 	/**
@@ -18,22 +20,42 @@ public class ProjectValidator {
 	 */
 	public static boolean validateProject(Project project, List errors) {
 		boolean valid = true;
-
-		if (Validator.isNull(project.getAcronym())) {
-			errors.add("projectacronym-required");
-			valid = false;
+			
+		if( project.getProjectId() > 0 )  {
+			
+			Project dbproject = null;
+			
+			try {
+				dbproject = ProjectLocalServiceUtil.getProject( project.getProjectId() );
+			}
+			catch (Exception e) {
+				
+				dbproject = null ;
+			}
+			
+			// hack !!
+			if( (dbproject != null) && ( dbproject.getCreationdate().getTime() != project.getApprovaldate().getTime() ) )  {
+				errors.add("projectchange-required");
+				valid = false;
+			}
 		}
 
-		if (Validator.isNull(project.getTitle())) {
-			errors.add("projecttitle-required");
-			valid = false;
+		if (valid) {
+			if (Validator.isNull(project.getAcronym())) {
+				errors.add("projectacronym-required");
+				valid = false;
+			}
+	
+			if (Validator.isNull(project.getTitle())) {
+				errors.add("projecttitle-required");
+				valid = false;
+			}
+	
+			if (Validator.isNull(project.getLead())) {
+				errors.add("projectlead-required");
+				valid = false;
+			}
 		}
-
-		if (Validator.isNull(project.getLead())) {
-			errors.add("projectlead-required");
-			valid = false;
-		}
-		
 		
 		return valid;
 	}

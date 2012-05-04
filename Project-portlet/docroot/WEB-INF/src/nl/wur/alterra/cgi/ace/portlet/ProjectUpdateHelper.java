@@ -1,5 +1,7 @@
 package nl.wur.alterra.cgi.ace.portlet;
 
+import java.util.Date;
+
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.WebKeys;
 import com.liferay.portal.model.User;
@@ -49,6 +51,10 @@ public abstract class ProjectUpdateHelper extends MVCPortlet {
 				project.setModerator( moderator + (moderator.length()==0 ? "" : ", ") + newModerator );
 			}
 		}
+		
+		Date d = new Date() ;
+		d.setTime(ParamUtil.getLong(request, "checkcreationdate"));
+		project.setApprovaldate(d);  // hack !!!
 		
 		project.setAcronym(ParamUtil.getString(request, "acronym"));
 		project.setTitle(ParamUtil.getString(request, "title"));
@@ -171,6 +177,8 @@ public abstract class ProjectUpdateHelper extends MVCPortlet {
 		
 		project.setCompanyId(themeDisplay.getCompanyId());
 		project.setGroupId(themeDisplay.getScopeGroupId());
+				
+		project.setCreationdate( new Date() );
 	}
 
 	private String coalesce(String aString) {

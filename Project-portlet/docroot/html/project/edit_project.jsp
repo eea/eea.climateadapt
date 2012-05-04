@@ -48,8 +48,11 @@
 	<aui:fieldset>
 		<aui:input type="hidden" name="redirect" value="<%= redirect %>" />
 
-		<aui:input type="hidden" name="projectId" value='<%= project == null ? "" : project.getProjectId() %>'/>
+<% if (project != null) { %>
+		<aui:input type="hidden" name="checkcreationdate" value='<%= project.getCreationdate() %>'/>
+<% } %>
 
+		<aui:input type="hidden" name="checkcreationdate" value='<%= project == null ? "" : project.getCreationdate().getTime() %>'/>
 
 		<liferay-ui:error key="projectacronym-required" message="projectacronym-required" />		
 		<aui:input name="acronym"  />

@@ -85,7 +85,9 @@ else {
 		<aui:input type="hidden" name="redirect" value="<%= redirect %>" />
 
 		<aui:input type="hidden" name="projectId" value='<%= project == null ? "" : project.getProjectId() %>'/>
-
+<% if (project != null) { %>
+		<aui:input type="hidden" name="checkcreationdate" value='<%= project.getCreationdate().getTime() %>'/>
+<% } %>
 		<liferay-ui:error key="projectacronym-required" message="projectacronym-required" />		
 		<b>acronym</b> <i>(required)</i><br />	
 		<input name="acronym" type="text" size="70" value="<%= project == null ? "" : project.getAcronym() %>"><br /><br />
