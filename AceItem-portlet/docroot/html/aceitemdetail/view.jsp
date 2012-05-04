@@ -29,7 +29,7 @@
 		}
 				
 		if(aceitem != null) {
-			
+
 			if(aceitem.getStoragetype().equalsIgnoreCase("MAPLAYER")) {
 				// cswRecordFileIdentifier gets handled inside mapviewer-portlet
 				url = "<a href='/map-viewer?cswRecordFileIdentifier=" + aceitem.getStoredAt() + "' >View map " + aceitem.getName() + "</a>" ; 
@@ -74,7 +74,10 @@
 		}		
 	}
 
-	if(aceitem != null) {	
+	if(aceitem != null	&&
+	   ! aceitem.getStoragetype().equalsIgnoreCase("PROJECT") &&
+	   ! aceitem.getStoragetype().equalsIgnoreCase("MEASURE") 
+	   ) {	
 %>
 
 	 <div class="detailcontainer">

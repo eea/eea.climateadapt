@@ -36,19 +36,18 @@ public class AceItemGoEditPortlet extends MVCPortlet {
 				AceItem aceitem = AceItemLocalServiceUtil.getAceItem( Long.parseLong(httpRequest.getParameter(Constants.ACEITEMID) ) ) ;
 				
 				// if there is no candidate item for this item: edit is permitted
-				if(aceitem.getReplacesId() != aceitem.getAceItemId() 
+				if(aceitem.getReplacesId() != aceitem.getAceItemId()
+						&&
+						! aceitem.getStoragetype().equalsIgnoreCase("PROJECT") 
+						&&
+						! aceitem.getStoragetype().equalsIgnoreCase("MEASURE") 
         			    && ( 
-        			    		(renderRequest.isUserInRole("Portal Content Reviewer") || 
-        						 renderRequest.isUserInRole("administrator") ||
-        						 renderRequest.isUserInRole("Power User") 
-        						)
-        					|| 
-        					    ( renderRequest.isUserInRole("User") && 
-        					      ((aceitem.getControlstatus() == ACEIndexUtil.Status_DRAFT) || (aceitem.getControlstatus() == ACEIndexUtil.Status_SUBMITTED))
-        					    )
-        			     )
-        			   ) { 
-        			// && part: EIONET users can only edit as long as status is not APPROVED 
+    			    		 renderRequest.isUserInRole("Portal Content Reviewer") || 
+    						 renderRequest.isUserInRole("administrator") ||
+    						 renderRequest.isUserInRole("Power User") || 
+    					     renderRequest.isUserInRole("User")
+        					)
+        			   ) {  
 					renderRequest.setAttribute(Constants.ACEITEMID, httpRequest.getParameter(Constants.ACEITEMID));
 				}
 			}

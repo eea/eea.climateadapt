@@ -21,18 +21,39 @@
 
 	String orderByCol = ParamUtil.getString(request, Constants.ORDERBYCOL);
 	String orderByType = ParamUtil.getString(request, Constants.ORDERBYTYPE);
-
+	
+	if (Validator.isNotNull(orderByCol)) {
+		renderRequest.getPortletSession().setAttribute(Constants.ORDERBYCOL, orderByCol );
+	}
+	else {
+		orderByCol = (String) renderRequest.getPortletSession().getAttribute(Constants.ORDERBYCOL);
+	}
+	if (Validator.isNotNull(orderByType)) {
+		renderRequest.getPortletSession().setAttribute(Constants.ORDERBYTYPE, orderByType );
+	}
+	else {
+		orderByType = (String) renderRequest.getPortletSession().getAttribute(Constants.ORDERBYTYPE);
+	}	
+	
 	if (Validator.isNotNull(orderByCol) && Validator.isNotNull(orderByType)) {
-		prefs.setValue(Constants.ORDERBYCOL, orderByCol);
-		prefs.setValue(Constants.ORDERBYTYPE, orderByType);
+		//prefs.setValue(Constants.ORDERBYCOL, orderByCol);
+		//prefs.setValue(Constants.ORDERBYTYPE, orderByType);
+
+		renderRequest.getPortletSession().setAttribute(Constants.ORDERBYCOL, orderByCol );
+		renderRequest.getPortletSession().setAttribute(Constants.ORDERBYTYPE, orderByType );		
 
 	} else {
 
 		orderByCol = prefs.getValue(Constants.ORDERBYCOL, "name");
 		orderByType = prefs.getValue(Constants.ORDERBYTYPE, "asc");
+		renderRequest.getPortletSession().setAttribute(Constants.ORDERBYCOL, orderByCol );
+		renderRequest.getPortletSession().setAttribute(Constants.ORDERBYTYPE, orderByType );
 
 	}
-
+	
+	orderByCol = (String) renderRequest.getPortletSession().getAttribute(Constants.ORDERBYCOL);
+	orderByType = (String) renderRequest.getPortletSession().getAttribute(Constants.ORDERBYTYPE);
+	
 	OrderByComparator orderByComparator = AceItemUtil.getAceItemOrderByComparator(orderByCol, orderByType);
 %>
 

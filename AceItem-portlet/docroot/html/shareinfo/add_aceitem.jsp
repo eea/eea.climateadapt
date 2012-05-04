@@ -12,7 +12,7 @@
 	
 	String literal = "a ";
 	
-	String newModerator = user.getFullName() + " (" + user.getEmailAddress() + ")" ;  ;	
+	String newModerator = user.getFullName() + " (" + user.getEmailAddress() + ")" ; 
 
 	if (sharetype.equalsIgnoreCase(AceItemType.DOCUMENT.toString())) {
 	   typedescription = "publication or report";  
@@ -59,14 +59,14 @@
  }
  else {
 
-	String redirect = ParamUtil.getString(request, "redirect");
-	
-	if(aceitem==null) {
-		typedescription = "Add " + literal + typedescription ;
-	}
-	else {
-		typedescription = "Edit the " + typedescription ;
-	}
+		String redirect = ParamUtil.getString(request, "redirect");
+		
+		if(aceitem==null) {
+			typedescription = "Add " + literal + typedescription ;
+		}
+		else {
+			typedescription = "Edit the " + typedescription ;
+		}
 	
 %>
 <script type="text/javascript"> 

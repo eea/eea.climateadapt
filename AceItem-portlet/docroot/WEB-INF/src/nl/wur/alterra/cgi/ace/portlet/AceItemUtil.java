@@ -21,23 +21,23 @@ public class AceItemUtil {
 			
 			OrderByComparator orderByComparator = null;
 			
-			if (orderByCol.equals("aceItemId")) {
+			if (orderByCol.equalsIgnoreCase("aceItemId")) {
 				
 				orderByComparator = new AceItemIdComparator(orderByAsc);
 			} 
-		    else if (orderByCol.equals("name")) {
+		    else if (orderByCol.equalsIgnoreCase("name")) {
 				// depends on aceitem.getName()
 				orderByComparator = new AceItemNameComparator(orderByAsc);
 			}
-		    else if (orderByCol.equals("source")) {
+		    else if (orderByCol.equalsIgnoreCase("source")) {
 				// depends on aceitem.getSource()
 				orderByComparator = new AceItemSourceComparator(orderByAsc);
 			}
-		    else if (orderByCol.equals("datatype")) {
+		    else if (orderByCol.equalsIgnoreCase("datatype")) {
 				// depends on aceitem.getDatatype()
 				orderByComparator = new AceItemTypeComparator(orderByAsc);
 			}
-		    else if (orderByCol.equals("controlstatus")) {
+		    else if (orderByCol.equalsIgnoreCase("controlstatus")) {
 				// depends on measure.getControlstatus()
 				orderByComparator = new AceItemControlstatusComparator(orderByAsc);
 			}
