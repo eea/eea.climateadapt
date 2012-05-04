@@ -21,19 +21,19 @@ public class ProjectUtil {
 		
 		OrderByComparator orderByComparator = null;
 		
-		if (orderByCol.equals("projectId")) {
+		if (orderByCol.equalsIgnoreCase("projectId")) {
 			
 			orderByComparator = new ProjectIdComparator(orderByAsc);
 		} 
-	    else if (orderByCol.equals("acronym")) {
+	    else if (orderByCol.equalsIgnoreCase("acronym")) {
 			// depends on project.getAcronym()
 			orderByComparator = new ProjectAcronymComparator(orderByAsc);
 		}
-	    else if (orderByCol.equals("source")) {
+	    else if (orderByCol.equalsIgnoreCase("source")) {
 			// depends on project.getSource()
 			orderByComparator = new ProjectSourceComparator(orderByAsc);
 		}
-	    else if (orderByCol.equals("controlstatus")) {
+	    else if (orderByCol.equalsIgnoreCase("controlstatus")) {
 			// depends on measure.getControlstatus()
 			orderByComparator = new ProjectControlstatusComparator(orderByAsc);
 		}

@@ -3,20 +3,51 @@
 
 <%
 
+	Project project = null;
+	
+	long projectId = ParamUtil.getLong(request, "projectId");
+	
+	String moderator = "";
+	
+	String newModerator = user.getFullName() + " (" + user.getEmailAddress() + ")" ;  	
+	
+	if (projectId > 0) {
+		
+		try {
+			project = ProjectLocalServiceUtil.getProject(projectId);
+			moderator = project.getModerator();
+		}
+		catch(Exception e) {
+			projectId = 0;
+			project = null;
+		}
+	}
+	
    if ( ! renderRequest.isUserInRole("user") ) { // || renderRequest.isUserInRole("portal-content-reviewer") ) { 
 	    // if approved only administrator can delete; otherwise also power user can delete %>
 		Please <a href='/home?p_p_id=58&p_p_lifecycle=0&p_p_state=maximized&p_p_mode=view&saveLastPath=0&_58_struts_action=%2Flogin%2Flogin'>sign in with your EIONET account</a> to add a research / knowledge project. 
 <% }	    
-   else {
-	Project project = null;
+   else  if ( (project != null)
+		     && 
+		     ((moderator.indexOf(newModerator) == -1 ) || (project.getControlstatus() >= ACEIndexUtil.Status_APPROVED) ) 
+		    ) { 
 
-	long projectId = ParamUtil.getLong(request, "projectId");
-
-	if (projectId > 0) {
-		project = ProjectLocalServiceUtil.getProject(projectId);
-	}
+		out.print("You are not allowed to edit the research / knowledge project <b>" + '"' + project.getAcronym() + '"' + "</b>" + 
+				( moderator.indexOf(newModerator) > -1 ? " for it has already been approved." : "." ) );
+}
+else {
 
 	String redirect = ParamUtil.getString(request, "redirect");
+
+	String typedescription = "";
+
+	if(project==null) {
+		typedescription = "Add a research / knowledge project" ;
+	}
+	else {
+		typedescription = "Edit the research / knowledge project" ;
+	}
+	
 %>
 <script type="text/javascript"> 
 
@@ -39,8 +70,7 @@
 			
 </script>
 <liferay-ui:header
-	backURL="<%= redirect %>"
-	title='Add / edit the research / knowledge project'
+	backURL="<%= redirect %>" title="<%= typedescription %>"
 />
 
 
