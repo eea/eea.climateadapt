@@ -21,23 +21,23 @@ public class MeasureUtil {
 		
 		OrderByComparator orderByComparator = null;
 		
-		if (orderByCol.equals("measureId")) {
+		if (orderByCol.equalsIgnoreCase("measureId")) {
 			
 			orderByComparator = new MeasureIdComparator(orderByAsc);
 		} 
-	    else if (orderByCol.equals("name")) {
+	    else if (orderByCol.equalsIgnoreCase("name")) {
 			// depends on measure.getName()
 			orderByComparator = new MeasureNameComparator(orderByAsc);
 		}
-	    else if (orderByCol.equals("source")) {
+	    else if (orderByCol.equalsIgnoreCase("source")) {
 			// depends on measure.getSource()
 			orderByComparator = new MeasureSourceComparator(orderByAsc);
 		}
-	    else if (orderByCol.equals("type")) {
+	    else if (orderByCol.equalsIgnoreCase("type")) {
 			// depends on measure.getMao_type()
 			orderByComparator = new MeasureTypeComparator(orderByAsc);
 		}
-	    else if (orderByCol.equals("controlstatus")) {
+	    else if (orderByCol.equalsIgnoreCase("controlstatus")) {
 			// depends on measure.getControlstatus()
 			orderByComparator = new MeasureControlstatusComparator(orderByAsc);
 		}

@@ -34,21 +34,16 @@ public class MeasureGoEditPortlet extends MVCPortlet {
     	if( httpRequest.getParameter("ace_measure_id") != null ) {
     		try {
     			Measure measure = MeasureLocalServiceUtil.getMeasure( Long.parseLong(httpRequest.getParameter("ace_measure_id") ) ) ;
-    			
+
+    			// if there is no candidate item for this item: edit is permitted
     			if(measure.getReplacesId() != measure.getMeasureId()
         			    && ( 
-        			    		(renderRequest.isUserInRole("Portal Content Reviewer") || 
-        						 renderRequest.isUserInRole("administrator") ||
-        						 renderRequest.isUserInRole("Power User") 
-        						)
-        					|| 
-        					    ( renderRequest.isUserInRole("User") && 
-        					      (measure.getControlstatus() != ACEIndexUtil.Status_APPROVED)
-        					    )
-        			     )
-        			   ) { 
-        			// there is no candidate item for this item: edit is permitted
-        			// EIONET users can only edit as long as status is not APPROVED 
+       			    		 renderRequest.isUserInRole("Portal Content Reviewer") || 
+       						 renderRequest.isUserInRole("administrator") ||
+       						 renderRequest.isUserInRole("Power User") || 
+       					     renderRequest.isUserInRole("User")
+           					)
+           			   ) { 
     				renderRequest.setAttribute(Constants.MEASUREID, httpRequest.getParameter("ace_measure_id"));
     			}
     		}

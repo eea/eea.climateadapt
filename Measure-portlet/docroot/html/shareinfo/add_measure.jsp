@@ -3,20 +3,49 @@
 <%
    String mao_type = prefs.getValue(Constants.mao_typePreferenceName, "A");
 
+	Measure measure = null;
+	
+	long measureId = ParamUtil.getLong(request, "measureId");
+	
+	String moderator = "";
+	
+	String newModerator = user.getFullName() + " (" + user.getEmailAddress() + ")" ;  
+	
+	if (measureId > 0) {
+		
+		try {
+			measure = MeasureLocalServiceUtil.getMeasure(measureId);
+			moderator = measure.getModerator();
+		}
+		catch(Exception e) {
+			measureId = 0;
+			measure = null;
+		}
+	}
    if ( ! renderRequest.isUserInRole("user") ) { // || renderRequest.isUserInRole("portal-content-reviewer") ) { 
 	    // if approved only administrator can delete; otherwise also power user can delete %>
 		Please <a href='/home?p_p_id=58&p_p_lifecycle=0&p_p_state=maximized&p_p_mode=view&saveLastPath=0&_58_struts_action=%2Flogin%2Flogin'>sign in with your EIONET account</a> to <%= mao_type.equalsIgnoreCase("A") ? "add a case study" : "add an adaptation option" %>.
-<% }	    
-   else {
-	Measure measure = null;
+<% }
+   else  if ( (measure != null)
+		     && 
+		     ((moderator.indexOf(newModerator) == -1 ) || (measure.getControlstatus() >= ACEIndexUtil.Status_APPROVED) ) 
+		    ) { 
 
-	long measureId = ParamUtil.getLong(request, "measureId");
-	
-	if (measureId > 0) {
-		measure = MeasureLocalServiceUtil.getMeasure(measureId);
+		out.print("You are not allowed to edit the " + (mao_type.equalsIgnoreCase("A") ? "case study" : "adaptation option") + " <b>" + '"' + measure.getName() + '"' + "</b>" + 
+				( moderator.indexOf(newModerator) > -1 ? " for it has already been approved." : "." ) );
 	}
+   else {
 	
 	String redirect = ParamUtil.getString(request, "redirect");
+	
+	String typedescription = "";
+	
+	if(measure==null) {
+		typedescription = "Add " + (mao_type.equalsIgnoreCase("A") ? "a case study" : "an adaptation option") ;
+	}
+	else {
+		typedescription = "Edit the " + (mao_type.equalsIgnoreCase("A") ? "case study" : "adaptation option") ;
+	}	
 %>
 		<script type="text/javascript"> 
 			
@@ -46,8 +75,7 @@
 		</script>
 
 <liferay-ui:header
-	backURL="<%= redirect %>"
-	title='<%= mao_type.equalsIgnoreCase("A") ? "Add / edit the case study" : "Add / edit the adaptation option" %>'
+	backURL="<%= redirect %>" title="<%= typedescription %>"
 />
 
 
