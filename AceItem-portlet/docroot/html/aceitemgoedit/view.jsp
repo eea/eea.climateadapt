@@ -14,7 +14,7 @@
 		String newModerator = user.getFullName() + " (" + user.getEmailAddress() + ")" ;  ;	
 		
 		try {
-			aceitemId = Long.parseLong( (String) renderRequest.getPortletSession().getAttribute("lastAddedAceItemId") );
+			aceitemId = Long.parseLong((String) request.getAttribute(Constants.ACEITEMID));
 			
 			if (aceitemId > 0) {
 				aceitem = AceItemLocalServiceUtil.getAceItem(aceitemId);

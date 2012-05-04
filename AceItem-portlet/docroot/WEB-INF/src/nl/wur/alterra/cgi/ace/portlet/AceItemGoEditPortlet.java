@@ -35,7 +35,8 @@ public class AceItemGoEditPortlet extends MVCPortlet {
 			try {
 				AceItem aceitem = AceItemLocalServiceUtil.getAceItem( Long.parseLong(httpRequest.getParameter(Constants.ACEITEMID) ) ) ;
 				
-				if(aceitem.getReplacesId() != aceitem.getAceItemId()
+				// if there is no candidate item for this item: edit is permitted
+				if(aceitem.getReplacesId() != aceitem.getAceItemId() 
         			    && ( 
         			    		(renderRequest.isUserInRole("Portal Content Reviewer") || 
         						 renderRequest.isUserInRole("administrator") ||
@@ -43,12 +44,11 @@ public class AceItemGoEditPortlet extends MVCPortlet {
         						)
         					|| 
         					    ( renderRequest.isUserInRole("User") && 
-        					      (aceitem.getControlstatus() != ACEIndexUtil.Status_APPROVED)
+        					      ((aceitem.getControlstatus() == ACEIndexUtil.Status_DRAFT) || (aceitem.getControlstatus() == ACEIndexUtil.Status_SUBMITTED))
         					    )
         			     )
         			   ) { 
-        			// there is no candidate item for this item: edit is permitted
-        			// EIONET users can only edit as long as status is not APPROVED 
+        			// && part: EIONET users can only edit as long as status is not APPROVED 
 					renderRequest.setAttribute(Constants.ACEITEMID, httpRequest.getParameter(Constants.ACEITEMID));
 				}
 			}

@@ -3,37 +3,71 @@
 	String sharetype = prefs.getValue(Constants.SHARETYPE, AceItemType.DOCUMENT.toString());
 	
 	String typedescription = "";
-	
-	if (sharetype.equalsIgnoreCase(AceItemType.DOCUMENT.toString())) {
-	   typedescription = "add / edit the publication or report";  
-	}
-	else if (sharetype.equalsIgnoreCase(AceItemType.INFORMATIONSOURCE.toString())) {
-	   typedescription = "add / edit the information portal";
-	}
-	else if (sharetype.equalsIgnoreCase(AceItemType.GUIDANCE.toString())) {
-	   typedescription = "add / edit the guidance document";  
-	}
-	else if (sharetype.equalsIgnoreCase(AceItemType.TOOL.toString())) {
-	   typedescription = "add /edit the tool";  
-	}
-	else if (sharetype.equalsIgnoreCase(AceItemType.ORGANISATION.toString())) {
-	   typedescription = "add / edit the organisation"; 
-	}
-	
- if ( ! renderRequest.isUserInRole("user") ) { // || renderRequest.isUserInRole("portal-content-reviewer") ) { 
-	    // if approved only administrator can delete; otherwise also power user can delete %>
-		Please <a href='/home?p_p_id=58&p_p_lifecycle=0&p_p_state=maximized&p_p_mode=view&saveLastPath=0&_58_struts_action=%2Flogin%2Flogin'>sign in with your EIONET account</a> to <%= typedescription %>.
-<% }	    
- else {
+
 	AceItem aceitem = null;
 	
 	long aceItemId = ParamUtil.getLong(request, "aceitemId");
+	
+	String moderator = "";
+	
+	String literal = "a ";
+	
+	String newModerator = user.getFullName() + " (" + user.getEmailAddress() + ")" ;  ;	
+
+	if (sharetype.equalsIgnoreCase(AceItemType.DOCUMENT.toString())) {
+	   typedescription = "publication or report";  
+	}
+	else if (sharetype.equalsIgnoreCase(AceItemType.INFORMATIONSOURCE.toString())) {
+	   typedescription = "information portal";
+	   literal = "an ";
+	}
+	else if (sharetype.equalsIgnoreCase(AceItemType.GUIDANCE.toString())) {
+	   typedescription = "guidance document";  
+	}
+	else if (sharetype.equalsIgnoreCase(AceItemType.TOOL.toString())) {
+	   typedescription = "tool";  
+	}
+	else if (sharetype.equalsIgnoreCase(AceItemType.ORGANISATION.toString())) {
+	   typedescription = "organisation";
+	   literal = "an "; 
+	}	
 
 	if (aceItemId > 0) {
-		aceitem = AceItemLocalServiceUtil.getAceItem(aceItemId);
+		
+		try {
+			aceitem = AceItemLocalServiceUtil.getAceItem(aceItemId);
+			moderator = aceitem.getModerator();
+		}
+		catch(Exception e) {
+			aceItemId = 0;
+			aceitem = null;
+		}
 	}
+	
+	
+	if ( ! renderRequest.isUserInRole("user") ) { 
+%>
+		Please <a href='/home?p_p_id=58&p_p_lifecycle=0&p_p_state=maximized&p_p_mode=view&saveLastPath=0&_58_struts_action=%2Flogin%2Flogin'>sign in with your EIONET account</a> to add  <%= literal %><%= typedescription %>.
+<% }	
+ else  if ( (aceitem != null)
+		     && 
+		     ((moderator.indexOf(newModerator) == -1 ) || (aceitem.getControlstatus() >= ACEIndexUtil.Status_APPROVED) ) 
+		    ) { 
+
+		out.print("You are not allowed to edit the " + typedescription + " <b>" + '"' + aceitem.getName() + '"' + "</b>" + 
+				( moderator.indexOf(newModerator) > -1 ? " for it has already been approved." : "." ) );
+ }
+ else {
 
 	String redirect = ParamUtil.getString(request, "redirect");
+	
+	if(aceitem==null) {
+		typedescription = "Add " + literal + typedescription ;
+	}
+	else {
+		typedescription = "Edit the " + typedescription ;
+	}
+	
 %>
 <script type="text/javascript"> 
 
