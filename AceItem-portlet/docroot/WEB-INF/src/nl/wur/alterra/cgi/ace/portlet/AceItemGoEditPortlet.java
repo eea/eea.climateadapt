@@ -33,10 +33,16 @@ public class AceItemGoEditPortlet extends MVCPortlet {
     	
     	if( httpRequest.getParameter(Constants.ACEITEMID) != null ) {		
 			try {
-				AceItem aceitem = AceItemLocalServiceUtil.getAceItem( Long.parseLong(httpRequest.getParameter(Constants.ACEITEMID) ) ) ;
-				
-				// if there is no candidate item for this item: edit is permitted
-				if(aceitem.getReplacesId() != aceitem.getAceItemId()
+				AceItem aceitem = null;
+    			try {
+    				aceitem =AceItemLocalServiceUtil.getAceItem( Long.parseLong(httpRequest.getParameter(Constants.ACEITEMID) ) ) ;
+    			}
+    			catch(Exception e) {
+    				aceitem = null;
+    			}
+    			
+    			// if there is no candidate item for this item: edit is permitted
+    			if((aceitem != null) && (aceitem.getReplacesId() != aceitem.getAceItemId())
 						&&
 						! aceitem.getStoragetype().equalsIgnoreCase("PROJECT") 
 						&&

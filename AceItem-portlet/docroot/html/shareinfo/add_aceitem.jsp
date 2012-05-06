@@ -111,6 +111,10 @@
 
 		<aui:input type="hidden" name="wxsharvesterId" value='<%= aceitem == null ? "" : aceitem.getWxsharvesterId() %>'/>
 		
+<% if (aceitem != null) { %>
+		<liferay-ui:error key="aceitem-changed" message="aceitem-changed" />
+		<aui:input type="hidden" name="checkcreationdate" value='<%= aceitem.getCreationdate().getTime() %>'/>
+<% } %>
 		<liferay-ui:error key="aceitemname-required" message="aceitemname-required" />
 		<b>item-name</b> <i>(required)</i><br />	
 		<input name="name" type="text" size="120" value='<%= aceitem == null ? "" : aceitem.getName() %>'><br /><br />

@@ -1,5 +1,7 @@
 package nl.wur.alterra.cgi.ace.portlet;
 
+import java.util.Date;
+
 import com.liferay.util.mail.MailEngine;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.WebKeys;
@@ -90,6 +92,10 @@ public abstract class LuceneIndexUpdatePortlet extends MVCPortlet {
 				aceitem.setModerator( moderator + (moderator.length()==0 ? "" : ", ") + newModerator );
 			}
 		}
+		
+		Date d = new Date() ;
+		d.setTime(ParamUtil.getLong(request, "checkcreationdate"));
+		aceitem.setApprovaldate(d);  // hack optimistic locking!!!  Check with dbrecord in AceItemValidator
 		
         aceitem.setCompanyId(themeDisplay.getCompanyId());
         aceitem.setGroupId(themeDisplay.getScopeGroupId());
@@ -254,6 +260,8 @@ public abstract class LuceneIndexUpdatePortlet extends MVCPortlet {
 		else {
 			aceitem.setControlstatus( Short.parseShort(approved));
 		}
+		
+        aceitem.setCreationdate( new Date() );
 		
         return aceitem;
     }

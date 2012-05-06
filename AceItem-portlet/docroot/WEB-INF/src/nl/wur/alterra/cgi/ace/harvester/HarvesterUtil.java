@@ -1128,7 +1128,8 @@ public class HarvesterUtil {
                 "textsearch: " + aceItem.getTextSearch() + "\n\n"
         );
         */
-
+        aceItem.setCreationdate( new Date() );
+        
         return aceItem;
     }
 

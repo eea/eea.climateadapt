@@ -59,8 +59,8 @@
 			aceitem = AceItemLocalServiceUtil.getAceItem(aceitemId);
 		}
 	}
-	catch (NumberFormatException e) {
-		// do nothing
+	catch (Exception e) {
+		aceitem = null;
 	}
 	
 %>		

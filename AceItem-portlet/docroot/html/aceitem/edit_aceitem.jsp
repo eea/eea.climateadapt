@@ -50,11 +50,16 @@
 		
 		<aui:input type="hidden" name="wxsharvesterId" value='<%= aceitem == null ? "" : aceitem.getWxsharvesterId() %>'/>
 
-		<b>item-name</b><br />	
+<% if (aceitem != null) { %>
+		<liferay-ui:error key="aceitem-changed" message="aceitem-changed" />
+		<aui:input type="hidden" name="checkcreationdate" value='<%= aceitem.getCreationdate().getTime() %>'/>
+<% } %>
+		<liferay-ui:error key="aceitemname-required" message="aceitemname-required" />
+		<b>item-name</b> <i>(required)</i><br />	
 		<input name="name" type="text" size="120" value='<%= aceitem == null ? "" : aceitem.getName() %>'><br /><br />
 		
 		<liferay-ui:error key="aceitemstoredat-required" message="aceitemstoredat-required" />
-		<b>website</b><br />	
+		<b>website</b> <i>(required)</i><br />	
 		<input name="storedAt" type="text" size="120" value='<%= aceitem == null ? "" : aceitem.getStoredAt() %>'><br /><br />
 
 
