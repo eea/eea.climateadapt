@@ -1,4 +1,6 @@
 package nl.wur.alterra.cgi.ace.portlet;
+import java.util.Date;
+
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.WebKeys;
 import com.liferay.portal.model.User;
@@ -49,6 +51,10 @@ public abstract class MeasureUpdateHelper extends MVCPortlet {
 				measure.setModerator( moderator + (moderator.length()==0 ? "" : ", ") + newModerator );
 			}
 		}
+		
+		Date d = new Date() ;
+		d.setTime(ParamUtil.getLong(request, "checkcreationdate"));
+		measure.setApprovaldate(d);  // hack optimistic locking!!!  Check with dbrecord in MeasureValidator
 		
 		measure.setCompanyId(themeDisplay.getCompanyId());
 		measure.setGroupId(themeDisplay.getScopeGroupId());
@@ -201,6 +207,8 @@ public abstract class MeasureUpdateHelper extends MVCPortlet {
 		}
 		
 		measure.setSatarea(ParamUtil.getString(request, "satarea"));
+				
+		measure.setCreationdate( new Date() );
 	}
 
 	

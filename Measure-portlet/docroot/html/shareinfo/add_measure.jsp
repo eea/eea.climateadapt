@@ -92,6 +92,10 @@
 
 		<aui:input type="hidden" name="measureId" value='<%= measure == null ? "" : measure.getMeasureId() %>'/>
 
+<% if (measure != null) { %>
+		<liferay-ui:error key="measure-changed" message="measure-changed" />
+		<aui:input type="hidden" name="checkcreationdate" value='<%= measure.getCreationdate().getTime() %>'/>
+<% } %>
 		<liferay-ui:error key="measurename-required" message="measurename-required" />
 		<b>item-name</b> <i>(required)</i><br />	
 		<input name="name" type="text" size="120" value="<%= measure == null ? "" : measure.getName() %>"><br /><br />

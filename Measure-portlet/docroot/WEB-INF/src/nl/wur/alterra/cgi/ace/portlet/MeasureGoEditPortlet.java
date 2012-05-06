@@ -33,10 +33,16 @@ public class MeasureGoEditPortlet extends MVCPortlet {
  
     	if( httpRequest.getParameter("ace_measure_id") != null ) {
     		try {
-    			Measure measure = MeasureLocalServiceUtil.getMeasure( Long.parseLong(httpRequest.getParameter("ace_measure_id") ) ) ;
-
+    			Measure measure = null;
+    			try {
+    				measure = MeasureLocalServiceUtil.getMeasure( Long.parseLong(httpRequest.getParameter("ace_measure_id") ) ) ;
+    			}
+    			catch(Exception e) {
+    				measure = null;
+    			}
+    			
     			// if there is no candidate item for this item: edit is permitted
-    			if(measure.getReplacesId() != measure.getMeasureId()
+    			if((measure != null) && (measure.getReplacesId() != measure.getMeasureId())
         			    && ( 
        			    		 renderRequest.isUserInRole("Portal Content Reviewer") || 
        						 renderRequest.isUserInRole("administrator") ||

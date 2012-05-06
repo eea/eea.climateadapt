@@ -38,8 +38,8 @@
 			measure = MeasureLocalServiceUtil.getMeasure(measureId);
 		}
 	}
-	catch (NumberFormatException e) {
-		// do nothing
+	catch (Exception e) {
+		measure = null;
 	}
 	
 %>		
