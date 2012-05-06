@@ -54,7 +54,7 @@ public abstract class ProjectUpdateHelper extends MVCPortlet {
 		
 		Date d = new Date() ;
 		d.setTime(ParamUtil.getLong(request, "checkcreationdate"));
-		project.setApprovaldate(d);  // hack !!!
+		project.setApprovaldate(d);  // hack optimistic locking!!!  Check with dbrecord in ProjectValidator
 		
 		project.setAcronym(ParamUtil.getString(request, "acronym"));
 		project.setTitle(ParamUtil.getString(request, "title"));

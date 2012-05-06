@@ -33,15 +33,16 @@ public class ProjectValidator {
 				dbproject = null ;
 			}
 			
-			// hack !!
+			// hack optimistic locking!!!  check Approvaldate and then always set to null
 			if( (dbproject != null) && ( dbproject.getCreationdate().getTime() != project.getApprovaldate().getTime() ) )  {
 			    //System.out.println("project-change: " + dbproject.getCreationdate().getTime() + " - " + project.getApprovaldate().getTime());				
 				errors.add("project-change");
 				valid = false;
 			}
+			project.setApprovaldate(null);
 		}
 
-		if (valid) {
+		if (valid) {			
 			if (Validator.isNull(project.getAcronym())) {
 				errors.add("projectacronym-required");
 				valid = false;
