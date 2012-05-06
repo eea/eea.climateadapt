@@ -47,24 +47,25 @@
 <aui:form action="<%= saveProjectURL %>" method="POST" name="fm">
 	<aui:fieldset>
 		<aui:input type="hidden" name="redirect" value="<%= redirect %>" />
-
+		
+		<aui:input type="hidden" name="projectId" value='<%= project == null ? "" : project.getProjectId() %>'/>
+		
 <% if (project != null) { %>
-		<aui:input type="hidden" name="checkcreationdate" value='<%= project.getCreationdate() %>'/>
+		<liferay-ui:error key="project-change" message="project-change" />
+		<aui:input type="hidden" name="checkcreationdate" value='<%= project.getCreationdate().getTime() %>'/>
 <% } %>
-
-		<aui:input type="hidden" name="checkcreationdate" value='<%= project == null ? "" : project.getCreationdate().getTime() %>'/>
-
 		<liferay-ui:error key="projectacronym-required" message="projectacronym-required" />		
-		<aui:input name="acronym"  />
+		<b>acronym</b> <i>(required)</i><br />	
+		<input name="acronym" type="text" size="70" value="<%= project == null ? "" : project.getAcronym() %>"><br /><br />
 		
 		<liferay-ui:error key="projecttitle-required" message="projecttitle-required" />
 
 	  <div style="float: left; margin-right: 35px;">
-		<b>project title</b><br />	
+		<b>project title</b> <i>(required)</i><br />
 		<input name="title" type="text" size="120" value="<%= project == null ? "" : project.getTitle() %>"><br /><br />
 
 		<liferay-ui:error key="projectlead-required" message="projectlead-required" />
-		<b>lead</b><br />	
+		<b>lead</b> <i>(required)</i><br />		
 		<input name="lead" type="text" size="120" value="<%= project == null ? "" : project.getLead() %>"><br /><br />
 
 

@@ -26,7 +26,7 @@ public class ProjectValidator {
 			Project dbproject = null;
 			
 			try {
-				dbproject = ProjectLocalServiceUtil.getProject( project.getProjectId() );
+			    dbproject = ProjectLocalServiceUtil.getProject( project.getProjectId() );
 			}
 			catch (Exception e) {
 				
@@ -35,7 +35,8 @@ public class ProjectValidator {
 			
 			// hack !!
 			if( (dbproject != null) && ( dbproject.getCreationdate().getTime() != project.getApprovaldate().getTime() ) )  {
-				errors.add("projectchange-required");
+			    //System.out.println("project-change: " + dbproject.getCreationdate().getTime() + " - " + project.getApprovaldate().getTime());				
+				errors.add("project-change");
 				valid = false;
 			}
 		}

@@ -33,10 +33,16 @@ public class ProjectGoEditPortlet extends MVCPortlet {
     	
     	if( httpRequest.getParameter("ace_project_id") != null ) {
     		try {
-    			Project project = ProjectLocalServiceUtil.getProject( Long.parseLong(httpRequest.getParameter("ace_project_id") ) ) ;
+    			Project project = null;
+    			try {
+    				project = ProjectLocalServiceUtil.getProject( Long.parseLong(httpRequest.getParameter("ace_project_id") ) ) ;
+    			}
+    			catch(Exception e) {
+    				project = null;
+    			}
     			
     			// if there is no candidate item for this item: edit is permitted
-    			if( project.getReplacesId() != project.getProjectId()
+    			if( (project != null) && (project.getReplacesId() != project.getProjectId())
         			    && ( 
        			    		 renderRequest.isUserInRole("Portal Content Reviewer") || 
        						 renderRequest.isUserInRole("administrator") ||

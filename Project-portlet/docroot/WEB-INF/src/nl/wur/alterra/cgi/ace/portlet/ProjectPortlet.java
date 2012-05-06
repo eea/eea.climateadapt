@@ -83,8 +83,8 @@ public class ProjectPortlet extends ProjectUpdateHelper {
 		throws Exception {
 		
 		AceItem aceitem = null;
-		
-		Project project = ProjectLocalServiceUtil.getProject(ParamUtil.getLong(request, "projectId"));	
+
+	    Project project = ProjectLocalServiceUtil.getProject(ParamUtil.getLong(request, "projectId"));	
 		
 		// retain old and new status
 		Short oldapproved = project.getControlstatus();

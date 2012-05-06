@@ -37,8 +37,8 @@
 			project = ProjectLocalServiceUtil.getProject(projectId);
 		}
 	}
-	catch (NumberFormatException e) {
-		// do nothing
+	catch (Exception e) {
+		project = null;
 	}
 	
 %>		
