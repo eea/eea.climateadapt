@@ -6,7 +6,7 @@
 
 	AceItem aceitem = null;
 	
-	long aceItemId = ParamUtil.getLong(request, "aceitemId");
+	long aceItemId = ParamUtil.getLong(request, "aceItemId");
 	
 	String moderator = "";
 	
@@ -81,24 +81,21 @@
 		    }
 		    
 		    function uncheckallcountries() {
-		    <% 
+<% 
 		    	for(int i=0; i < country.length; i++) {
 		    		out.print("document.getElementById('chk_countries_" +  country[i]  + "').checked = false;");
 		    	}
-		    %>
-		    }
+		    %>}
 			
 </script>
-		
-<liferay-ui:header
-	backURL="<%= redirect %>" title="<%= typedescription %>"
-/>
+
+<liferay-ui:header backURL='<%= redirect %>' title='<%= typedescription %>' />
 
 <aui:model-context bean="<%= aceitem %>" model="<%= AceItem.class %>" />
 
 <portlet:actionURL name='<%= aceitem == null ? "addAceItem" : "updateAceItem" %>' var="editAceItemURL" />
 
-<aui:form action="<%= editAceItemURL %>" method="POST" name="fm">
+<aui:form action='<%= editAceItemURL %>' method="POST" name="fm">
 	<aui:fieldset>
 
 	    <input name="datatype" type="hidden" value="<%=sharetype%>">

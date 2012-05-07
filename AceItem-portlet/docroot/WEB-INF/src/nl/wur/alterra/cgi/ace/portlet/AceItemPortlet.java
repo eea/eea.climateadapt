@@ -58,61 +58,71 @@ public class AceItemPortlet extends LuceneIndexUpdatePortlet {
 	 *
 	 */
 	public void updateAceItem(ActionRequest request, ActionResponse response) throws Exception {
-		AceItem aceitem = AceItemLocalServiceUtil.getAceItem(ParamUtil.getLong(request, "aceItemId"));
-		//System.out.println("ReplacesId: " + aceitem.getReplacesId());
-		// retain old and new status
-		Short oldapproved = aceitem.getControlstatus();
-		Short newapproved = 0;
-		String approved = ParamUtil.getString(request, "chk_controlstatus");
-		if( (approved != null ) && (approved.length()>0) ) {
-			
-			newapproved = Short.parseShort(approved);
+		AceItem aceitem = null;
+		
+		try {
+			aceitem = AceItemLocalServiceUtil.getAceItem(ParamUtil.getLong(request, "aceItemId"));
 		}
-		if ( (oldapproved == ACEIndexUtil.Status_APPROVED) &&  (newapproved != ACEIndexUtil.Status_APPROVED) ) { 
-		// The old record stays untouched, only replacesId gets filled (from now no edit or delete possible anymore)
-			aceitem.setReplacesId( aceitem.getAceItemId() ) ;
-			// Must be done BEFORE aceitemFromRequest();
-			AceItemLocalServiceUtil.updateAceItem(aceitem);
+		catch (Exception e) {
+			aceitem = null;
 		}
 		
-		aceitemFromRequest(request, aceitem);
-		
-		List<String> errors = new ArrayList<String>();
-		if (AceItemValidator.validateAceItem(aceitem, errors)) {
-			if ( (oldapproved == ACEIndexUtil.Status_APPROVED) &&  (newapproved != ACEIndexUtil.Status_APPROVED) ) { 
-     			// The changed item gets added as a copy with replacesId filled (is already done above)
-				// save the new copy: simple addAceItem
-				AceItemLocalServiceUtil.addAceItem(aceitem);
-				// automatically gets a new aceitemid;
+		if(aceitem != null) {
+			//System.out.println("ReplacesId: " + aceitem.getReplacesId());
+			// retain old and new status
+			Short oldapproved = aceitem.getControlstatus();
+			Short newapproved = 0;
+			String approved = ParamUtil.getString(request, "chk_controlstatus");
+			if( (approved != null ) && (approved.length()>0) ) {
+				
+				newapproved = Short.parseShort(approved);
 			}
-			else {
-				
-				if ( (newapproved == ACEIndexUtil.Status_APPROVED)  && aceitem.getReplacesId() != 0) {
-					// delete the old aceitem which gets replaced
-					AceItem oldaceitem = AceItemLocalServiceUtil.getAceItem(aceitem.getReplacesId());
-					new ACEIndexSynchronizer().delete(oldaceitem);	
-					AceItemLocalServiceUtil.deleteAceItem(aceitem.getReplacesId());
-					aceitem.setReplacesId( (long) 0);	
-				}
-				
+			if ( (oldapproved == ACEIndexUtil.Status_APPROVED) &&  (newapproved != ACEIndexUtil.Status_APPROVED) ) { 
+			// The old record stays untouched, only replacesId gets filled (from now no edit or delete possible anymore)
+				aceitem.setReplacesId( aceitem.getAceItemId() ) ;
+				// Must be done BEFORE aceitemFromRequest();
 				AceItemLocalServiceUtil.updateAceItem(aceitem);
 			}
-			SessionMessages.add(request, "aceitem-updated");
-            synchronizeIndexSingleAceItem(aceitem);
-
-            String notify = ParamUtil.getString(request, "notify_status");
-			if( (notify != null ) && (notify.length()>0) && (newapproved == ACEIndexUtil.Status_SUBMITTED)) {
-				sendSubmitNotification(aceitem);
-			}
 			
-			sendRedirect(request, response);
-		}
-		else {
-			for (String error : errors) {
-				SessionErrors.add(request, error);
+			aceitemFromRequest(request, aceitem);
+			
+			List<String> errors = new ArrayList<String>();
+			if (AceItemValidator.validateAceItem(aceitem, errors)) {
+				if ( (oldapproved == ACEIndexUtil.Status_APPROVED) &&  (newapproved != ACEIndexUtil.Status_APPROVED) ) { 
+	     			// The changed item gets added as a copy with replacesId filled (is already done above)
+					// save the new copy: simple addAceItem
+					AceItemLocalServiceUtil.addAceItem(aceitem);
+					// automatically gets a new aceitemid;
+				}
+				else {
+					
+					if ( (newapproved == ACEIndexUtil.Status_APPROVED)  && aceitem.getReplacesId() != 0) {
+						// delete the old aceitem which gets replaced
+						AceItem oldaceitem = AceItemLocalServiceUtil.getAceItem(aceitem.getReplacesId());
+						new ACEIndexSynchronizer().delete(oldaceitem);	
+						AceItemLocalServiceUtil.deleteAceItem(aceitem.getReplacesId());
+						aceitem.setReplacesId( (long) 0);	
+					}
+					
+					AceItemLocalServiceUtil.updateAceItem(aceitem);
+				}
+				SessionMessages.add(request, "aceitem-updated");
+	            synchronizeIndexSingleAceItem(aceitem);
+	
+	            String notify = ParamUtil.getString(request, "notify_status");
+				if( (notify != null ) && (notify.length()>0) && (newapproved == ACEIndexUtil.Status_SUBMITTED)) {
+					sendSubmitNotification(aceitem);
+				}
+				
+				sendRedirect(request, response);
 			}
-			PortalUtil.copyRequestParameters(request, response);
-			response.setRenderParameter("jspPage", "/html/aceitem/edit_aceitem.jsp");
+			else {
+				for (String error : errors) {
+					SessionErrors.add(request, error);
+				}
+				PortalUtil.copyRequestParameters(request, response);
+				response.setRenderParameter("jspPage", "/html/aceitem/edit_aceitem.jsp");
+			}
 		}
 	}
 
@@ -126,23 +136,32 @@ public class AceItemPortlet extends LuceneIndexUpdatePortlet {
 		if (Validator.isNotNull(aceitemId)) {
 
 			// delete the index entry
-			AceItem aceitem = AceItemLocalServiceUtil.getAceItem(aceitemId);
+			AceItem aceitem = null;
 			
-			new ACEIndexSynchronizer().delete(aceitem);			
-			
-			if(aceitem.getReplacesId() != 0) {
-			// Reset the already approved aceitem from the item that should be replaced
-				aceitem = AceItemLocalServiceUtil.getAceItem( aceitem.getReplacesId() );
-				aceitem.setReplacesId( (long) 0);
-				AceItemLocalServiceUtil.updateAceItem(aceitem);
+			try {
+				aceitem = aceitem = AceItemLocalServiceUtil.getAceItem(aceitemId);
+			}
+			catch (Exception e) {
+				aceitem = null;
 			}
 			
-			// delete the aceitem by saved Id (aceitem itself may be the old one here)
-			AceItemLocalServiceUtil.deleteAceItem(aceitemId);
-
-			SessionMessages.add(request, "aceitem-deleted");
-
-			sendRedirect(request, response);
+			if(aceitem != null) {
+				new ACEIndexSynchronizer().delete(aceitem);			
+				
+				if(aceitem.getReplacesId() != 0) {
+				// Reset the already approved aceitem from the item that should be replaced
+					aceitem = AceItemLocalServiceUtil.getAceItem( aceitem.getReplacesId() );
+					aceitem.setReplacesId( (long) 0);
+					AceItemLocalServiceUtil.updateAceItem(aceitem);
+				}
+				
+				// delete the aceitem by saved Id (aceitem itself may be the old one here)
+				AceItemLocalServiceUtil.deleteAceItem(aceitemId);
+	
+				SessionMessages.add(request, "aceitem-deleted");
+	
+				sendRedirect(request, response);
+			}
 		}
 		else {
 			SessionErrors.add(request, "error-deleting");

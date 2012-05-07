@@ -32,8 +32,8 @@ public class AceItemValidator {
 			
 			// hack optimistic locking!!!  check Approvaldate and then always set to null
 			if( (dbaceitem != null) && ( dbaceitem.getCreationdate().getTime() != aceitem.getApprovaldate().getTime() ) )  {
-			    //System.out.println("aceitem-change: " + dbaceitem.getCreationdate().getTime() + " - " + aceitem.getApprovaldate().getTime());				
-				errors.add("aceitem-change");
+			    //System.out.println("aceitem-changed: " + dbaceitem.getCreationdate().getTime() + " - " + aceitem.getApprovaldate().getTime());				
+				errors.add("aceitem-changed");
 				valid = false;
 			}
 			aceitem.setApprovaldate(null);

@@ -54,27 +54,36 @@ public class ShareAceItemPortlet extends LuceneIndexUpdatePortlet {
 	 *
 	 */
 	public void updateAceItem(ActionRequest request, ActionResponse response) throws Exception {
-		AceItem aceitem = AceItemLocalServiceUtil.getAceItem(ParamUtil.getLong(request, "aceItemId"));
-
-		aceitemFromRequest(request, aceitem);
+		AceItem aceitem = null;
 		
-		List<String> errors = new ArrayList<String>();
-		if (AceItemValidator.validateAceItem(aceitem, errors)) {
-				
-			AceItemLocalServiceUtil.updateAceItem(aceitem);
-			SessionMessages.add(request, "aceitem-updated");
-            synchronizeIndexSingleAceItem(aceitem);
-            sendSubmitNotification(aceitem);          
-			request.getPortletSession().setAttribute("lastAddedAceItemId", "" + aceitem.getAceItemId() );
-            
-			sendRedirect(request, response);
+		try {
+			aceitem = AceItemLocalServiceUtil.getAceItem(ParamUtil.getLong(request, "aceItemId"));
 		}
-		else {
-			for (String error : errors) {
-				SessionErrors.add(request, error);
+		catch (Exception e) {
+			aceitem = null;
+		}
+		
+		if(aceitem != null) {
+			aceitemFromRequest(request, aceitem);
+			
+			List<String> errors = new ArrayList<String>();
+			if (AceItemValidator.validateAceItem(aceitem, errors)) {
+					
+				AceItemLocalServiceUtil.updateAceItem(aceitem);
+				SessionMessages.add(request, "aceitem-updated");
+	            synchronizeIndexSingleAceItem(aceitem);
+	            sendSubmitNotification(aceitem);          
+				request.getPortletSession().setAttribute("lastAddedAceItemId", "" + aceitem.getAceItemId() );
+	            
+				sendRedirect(request, response);
 			}
-			PortalUtil.copyRequestParameters(request, response);
-			response.setRenderParameter("jspPage", "/html/shareinfo/add_aceitem.jsp");
+			else {
+				for (String error : errors) {
+					SessionErrors.add(request, error);
+				}
+				PortalUtil.copyRequestParameters(request, response);
+				response.setRenderParameter("jspPage", "/html/shareinfo/add_aceitem.jsp");
+			}
 		}
 	}
 	
