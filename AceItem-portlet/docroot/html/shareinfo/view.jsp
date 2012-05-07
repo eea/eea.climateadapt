@@ -75,7 +75,7 @@
 %>
 	<portlet:renderURL var="editAceItemURL">
 		<portlet:param name="jspPage" value="/html/shareinfo/add_aceitem.jsp" />
-		<portlet:param name="aceitemId" value="<%= String.valueOf(aceitemId) %>"/>
+		<portlet:param name="aceItemId" value="<%= String.valueOf(aceitemId) %>"/>
 		<portlet:param name="redirect" value="<%= redirect %>" />
 	</portlet:renderURL>
 	&nbsp;&nbsp;&nbsp;&nbsp;	

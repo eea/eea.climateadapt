@@ -29,27 +29,27 @@
 
 	<b>Share publication and report edit url (/web/guest/share-your-info/publications-and-reports?...  ending with 'aceItemId=')</b><br />
 	<input name='<%= Constants.PUBLICATIONSHAREEDITURL %>' type="text" size="180" 
-	value='<%= prefs.getValue(Constants.PUBLICATIONSHAREEDITURL,"/web/guest/share-your-info/publications-and-reports?p_p_id=shareaceitemportlet_WAR_AceItemportlet_INSTANCE_A8ua&p_p_lifecycle=0&p_p_state=normal&p_p_mode=view&p_p_col_id=column-2&p_p_col_count=1&_shareaceitemportlet_WAR_AceItemportlet_INSTANCE_A8ua_jspPage=%2Fhtml%2Fshareinfo%2Fadd_aceitem.jsp&_shareaceitemportlet_WAR_AceItemportlet_INSTANCE_A8ua_redirect=%2Fen%2Fshare-your-info%2Fpublications-and-reports&_shareaceitemportlet_WAR_AceItemportlet_INSTANCE_A8ua_aceitemId=") %>' />
+	value='<%= prefs.getValue(Constants.PUBLICATIONSHAREEDITURL,"/web/guest/share-your-info/publications-and-reports?p_p_id=shareaceitemportlet_WAR_AceItemportlet_INSTANCE_A8ua&p_p_lifecycle=0&p_p_state=normal&p_p_mode=view&p_p_col_id=column-2&p_p_col_count=1&_shareaceitemportlet_WAR_AceItemportlet_INSTANCE_A8ua_jspPage=%2Fhtml%2Fshareinfo%2Fadd_aceitem.jsp&_shareaceitemportlet_WAR_AceItemportlet_INSTANCE_A8ua_redirect=%2Fen%2Fshare-your-info%2Fpublications-and-reports&_shareaceitemportlet_WAR_AceItemportlet_INSTANCE_A8ua_aceItemId=") %>' />
 	<br /><br />
 
 	<b>Share information portal edit url (/web/guest/share-your-info/tools?...  ending with 'aceItemId=')</b><br />
 	<input name='<%= Constants.INFOPORTALSHAREEDITURL %>' type="text" size="180" 
-	value='<%= prefs.getValue(Constants.INFOPORTALSHAREEDITURL,"/web/guest/share-your-info/information-portals?p_p_id=shareaceitemportlet_WAR_AceItemportlet_INSTANCE_K5tr&p_p_lifecycle=0&p_p_state=normal&p_p_mode=view&p_p_col_id=column-2&p_p_col_count=1&_shareaceitemportlet_WAR_AceItemportlet_INSTANCE_K5tr_jspPage=%2Fhtml%2Fshareinfo%2Fadd_aceitem.jsp&_shareaceitemportlet_WAR_AceItemportlet_INSTANCE_K5tr_redirect=%2Fen%2Fshare-your-info%2Finformation-portals&_shareaceitemportlet_WAR_AceItemportlet_INSTANCE_K5tr_aceitemId=") %>' />
+	value='<%= prefs.getValue(Constants.INFOPORTALSHAREEDITURL,"/web/guest/share-your-info/information-portals?p_p_id=shareaceitemportlet_WAR_AceItemportlet_INSTANCE_K5tr&p_p_lifecycle=0&p_p_state=normal&p_p_mode=view&p_p_col_id=column-2&p_p_col_count=1&_shareaceitemportlet_WAR_AceItemportlet_INSTANCE_K5tr_jspPage=%2Fhtml%2Fshareinfo%2Fadd_aceitem.jsp&_shareaceitemportlet_WAR_AceItemportlet_INSTANCE_K5tr_redirect=%2Fen%2Fshare-your-info%2Finformation-portals&_shareaceitemportlet_WAR_AceItemportlet_INSTANCE_K5tr_aceItemId=") %>' />
 	<br /><br />
 
 	<b>Share guidance document edit url (/web/guest/share-your-info/guidance-documents?...  ending with 'aceItemId=')</b><br />
 	<input name='<%= Constants.GUIDANCESHAREEDITURL %>' type="text" size="180" 
-	value='<%= prefs.getValue(Constants.GUIDANCESHAREEDITURL,"/web/guest/share-your-info/guidance-documents?p_p_id=shareaceitemportlet_WAR_AceItemportlet_INSTANCE_J4yK&p_p_lifecycle=0&p_p_state=normal&p_p_mode=view&p_p_col_id=column-2&p_p_col_count=1&_shareaceitemportlet_WAR_AceItemportlet_INSTANCE_J4yK_jspPage=%2Fhtml%2Fshareinfo%2Fadd_aceitem.jsp&_shareaceitemportlet_WAR_AceItemportlet_INSTANCE_J4yK_redirect=%2Fen%2Fshare-your-info%2Fguidance-documents&_shareaceitemportlet_WAR_AceItemportlet_INSTANCE_J4yK_aceitemId=") %>' />
+	value='<%= prefs.getValue(Constants.GUIDANCESHAREEDITURL,"/web/guest/share-your-info/guidance-documents?p_p_id=shareaceitemportlet_WAR_AceItemportlet_INSTANCE_J4yK&p_p_lifecycle=0&p_p_state=normal&p_p_mode=view&p_p_col_id=column-2&p_p_col_count=1&_shareaceitemportlet_WAR_AceItemportlet_INSTANCE_J4yK_jspPage=%2Fhtml%2Fshareinfo%2Fadd_aceitem.jsp&_shareaceitemportlet_WAR_AceItemportlet_INSTANCE_J4yK_redirect=%2Fen%2Fshare-your-info%2Fguidance-documents&_shareaceitemportlet_WAR_AceItemportlet_INSTANCE_J4yK_aceItemId=") %>' />
 	<br /><br />
 
 	<b>Share tool edit url (/web/guest/share-your-info/tools?...  ending with 'aceItemId=')</b><br />
 	<input name='<%= Constants.TOOLSHAREEDITURL %>' type="text" size="180" 
-	value='<%= prefs.getValue(Constants.TOOLSHAREEDITURL,"/web/guest/share-your-info/tools?p_p_id=shareaceitemportlet_WAR_AceItemportlet_INSTANCE_gZM7&p_p_lifecycle=0&p_p_state=normal&p_p_mode=view&p_p_col_id=column-2&p_p_col_count=1&_shareaceitemportlet_WAR_AceItemportlet_INSTANCE_gZM7_jspPage=%2Fhtml%2Fshareinfo%2Fadd_aceitem.jsp&_shareaceitemportlet_WAR_AceItemportlet_INSTANCE_gZM7_redirect=%2Fen%2Fshare-your-info%2Ftools&_shareaceitemportlet_WAR_AceItemportlet_INSTANCE_gZM7_aceitemId=") %>' />
+	value='<%= prefs.getValue(Constants.TOOLSHAREEDITURL,"/web/guest/share-your-info/tools?p_p_id=shareaceitemportlet_WAR_AceItemportlet_INSTANCE_gZM7&p_p_lifecycle=0&p_p_state=normal&p_p_mode=view&p_p_col_id=column-2&p_p_col_count=1&_shareaceitemportlet_WAR_AceItemportlet_INSTANCE_gZM7_jspPage=%2Fhtml%2Fshareinfo%2Fadd_aceitem.jsp&_shareaceitemportlet_WAR_AceItemportlet_INSTANCE_gZM7_redirect=%2Fen%2Fshare-your-info%2Ftools&_shareaceitemportlet_WAR_AceItemportlet_INSTANCE_gZM7_aceItemId=") %>' />
 	<br /><br />
 
 	<b>Share organisation edit url (/web/guest/share-your-info/tools?...  ending with 'aceItemId=')</b><br />
 	<input name='<%= Constants.ORGANISATIONSHAREEDITURL %>' type="text" size="180" 
-	value='<%= prefs.getValue(Constants.ORGANISATIONSHAREEDITURL,"/web/guest/share-your-info/organisations?p_p_id=shareaceitemportlet_WAR_AceItemportlet_INSTANCE_vfO6&p_p_lifecycle=0&p_p_state=normal&p_p_mode=view&p_p_col_id=column-2&p_p_col_count=1&_shareaceitemportlet_WAR_AceItemportlet_INSTANCE_vfO6_jspPage=%2Fhtml%2Fshareinfo%2Fadd_aceitem.jsp&_shareaceitemportlet_WAR_AceItemportlet_INSTANCE_vfO6_redirect=%2Fen%2Fshare-your-info%2Forganisations&_shareaceitemportlet_WAR_AceItemportlet_INSTANCE_vfO6_aceitemId=") %>' />
+	value='<%= prefs.getValue(Constants.ORGANISATIONSHAREEDITURL,"/web/guest/share-your-info/organisations?p_p_id=shareaceitemportlet_WAR_AceItemportlet_INSTANCE_vfO6&p_p_lifecycle=0&p_p_state=normal&p_p_mode=view&p_p_col_id=column-2&p_p_col_count=1&_shareaceitemportlet_WAR_AceItemportlet_INSTANCE_vfO6_jspPage=%2Fhtml%2Fshareinfo%2Fadd_aceitem.jsp&_shareaceitemportlet_WAR_AceItemportlet_INSTANCE_vfO6_redirect=%2Fen%2Fshare-your-info%2Forganisations&_shareaceitemportlet_WAR_AceItemportlet_INSTANCE_vfO6_aceItemId=") %>' />
 	<br /><br />
 
 	<aui:button-row>
