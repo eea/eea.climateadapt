@@ -78,35 +78,45 @@ public class ShareMeasurePortlet extends MeasureUpdateHelper {
 		
 		AceItem aceitem = null;
 
-		Measure measure = MeasureLocalServiceUtil.getMeasure(ParamUtil.getLong(request, "measureId"));
+		Measure measure = null;
 		
-		measureFromRequest(request, measure);
-
-		ArrayList<String> errors = new ArrayList<String>();
-
-		if (MeasureValidator.validateMeasure(measure, errors)) {
-		
-			aceitem = AceItemLocalServiceUtil.getAceItemByStoredAt("ace_measure_id=" + measure.getMeasureId());
-
-			MeasureLocalServiceUtil.updateMeasure(measure);
-
-			updateAceItem(measure, aceitem);
-				
-			SessionMessages.add(request, "measure-updated");
-
-            sendSubmitNotification(measure);			
-			request.getPortletSession().setAttribute("lastAddedMeasureId", "" + measure.getMeasureId() );
-			
-			sendRedirect(request, response);
+		try {
+			measure = MeasureLocalServiceUtil.getMeasure(ParamUtil.getLong(request, "measureId"));
 		}
-		else {
-			for (String error : errors) {
-				SessionErrors.add(request, error);
+		catch (Exception e) {
+			measure = null;
+		}
+		
+		if(measure != null) {
+		
+			measureFromRequest(request, measure);
+	
+			ArrayList<String> errors = new ArrayList<String>();
+	
+			if (MeasureValidator.validateMeasure(measure, errors)) {
+			
+				aceitem = AceItemLocalServiceUtil.getAceItemByStoredAt("ace_measure_id=" + measure.getMeasureId());
+	
+				MeasureLocalServiceUtil.updateMeasure(measure);
+	
+				updateAceItem(measure, aceitem);
+					
+				SessionMessages.add(request, "measure-updated");
+	
+	            sendSubmitNotification(measure);			
+				request.getPortletSession().setAttribute("lastAddedMeasureId", "" + measure.getMeasureId() );
+				
+				sendRedirect(request, response);
 			}
-
-			PortalUtil.copyRequestParameters(request, response);
-
-			response.setRenderParameter("jspPage", "/html/shareinfo/add_measure.jsp");
+			else {
+				for (String error : errors) {
+					SessionErrors.add(request, error);
+				}
+	
+				PortalUtil.copyRequestParameters(request, response);
+	
+				response.setRenderParameter("jspPage", "/html/shareinfo/add_measure.jsp");
+			}
 		}
 	}
 	

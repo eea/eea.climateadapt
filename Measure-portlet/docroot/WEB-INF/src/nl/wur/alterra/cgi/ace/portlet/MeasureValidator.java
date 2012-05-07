@@ -33,8 +33,8 @@ public class MeasureValidator {
 			
 			// hack optimistic locking!!!  check Approvaldate and then always set to null
 			if( (dbmeasure != null) && ( dbmeasure.getCreationdate().getTime() != measure.getApprovaldate().getTime() ) )  {
-			    //System.out.println("measure-change: " + dbmeasure.getCreationdate().getTime() + " - " + measure.getApprovaldate().getTime());				
-				errors.add("measure-change");
+			    //System.out.println("measure-changed: " + dbmeasure.getCreationdate().getTime() + " - " + measure.getApprovaldate().getTime());				
+				errors.add("measure-changed");
 				valid = false;
 			}
 			measure.setApprovaldate(null);

@@ -82,69 +82,78 @@ public class MeasurePortlet extends MeasureUpdateHelper {
 		
 		AceItem aceitem = null;
 
-		Measure measure = MeasureLocalServiceUtil.getMeasure(ParamUtil.getLong(request, "measureId"));
+		Measure measure = null;
 		
-		// retain old and new status
-		Short oldapproved = measure.getControlstatus();
-		Short newapproved = 0;
-		String approved = ParamUtil.getString(request, "chk_controlstatus");
-		if( (approved != null ) && (approved.length()>0) ) {
-			
-			newapproved = Short.parseShort(approved);
+		try {
+			measure = MeasureLocalServiceUtil.getMeasure(ParamUtil.getLong(request, "measureId"));
 		}
-		if ( (oldapproved == ACEIndexUtil.Status_APPROVED) &&  (newapproved != ACEIndexUtil.Status_APPROVED) ) { 
-		// The old record stays untouched, only replacesId gets filled (from now no edit or delete possible anymore)
-			measure.setReplacesId( measure.getMeasureId() ) ;
-			// Must be done BEFORE measureFromRequest();
-			MeasureLocalServiceUtil.updateMeasure(measure);
+		catch (Exception e) {
+			measure = null;
 		}
 		
-		measureFromRequest(request, measure);
-
-		ArrayList<String> errors = new ArrayList<String>();
-
-		if (MeasureValidator.validateMeasure(measure, errors)) {
-		
-			if ( (oldapproved == ACEIndexUtil.Status_APPROVED) && (newapproved != ACEIndexUtil.Status_APPROVED) ) { 
-     			// The changed item gets added as a copy with replacesId filled (is already done above)
-				// save the new copy: simple addMeasure
-				MeasureLocalServiceUtil.addMeasure(measure);
-				// automatically gets a new measureid;
-			}
-			else {
+		if(measure != null) {		
+			// retain old and new status
+			Short oldapproved = measure.getControlstatus();
+			Short newapproved = 0;
+			String approved = ParamUtil.getString(request, "chk_controlstatus");
+			if( (approved != null ) && (approved.length()>0) ) {
 				
-				if ( (newapproved == ACEIndexUtil.Status_APPROVED)  && measure.getReplacesId() != 0) {
-					// delete the old measure which gets replaced, update the corresponding aceitem
-					aceitem = AceItemLocalServiceUtil.getAceItemByStoredAt("ace_measure_id=" + measure.getReplacesId() );
-					aceitem.setStoredAt("ace_measure_id=" + measure.getMeasureId());
-					MeasureLocalServiceUtil.deleteMeasure(measure.getReplacesId());
-					measure.setReplacesId( (long) 0);	
+				newapproved = Short.parseShort(approved);
+			}
+			if ( (oldapproved == ACEIndexUtil.Status_APPROVED) &&  (newapproved != ACEIndexUtil.Status_APPROVED) ) { 
+			// The old record stays untouched, only replacesId gets filled (from now no edit or delete possible anymore)
+				measure.setReplacesId( measure.getMeasureId() ) ;
+				// Must be done BEFORE measureFromRequest();
+				MeasureLocalServiceUtil.updateMeasure(measure);
+			}
+			
+			measureFromRequest(request, measure);
+	
+			ArrayList<String> errors = new ArrayList<String>();
+	
+			if (MeasureValidator.validateMeasure(measure, errors)) {
+			
+				if ( (oldapproved == ACEIndexUtil.Status_APPROVED) && (newapproved != ACEIndexUtil.Status_APPROVED) ) { 
+	     			// The changed item gets added as a copy with replacesId filled (is already done above)
+					// save the new copy: simple addMeasure
+					MeasureLocalServiceUtil.addMeasure(measure);
+					// automatically gets a new measureid;
 				}
 				else {
-					aceitem = AceItemLocalServiceUtil.getAceItemByStoredAt("ace_measure_id=" + measure.getMeasureId());
+					
+					if ( (newapproved == ACEIndexUtil.Status_APPROVED)  && measure.getReplacesId() != 0) {
+						// delete the old measure which gets replaced, update the corresponding aceitem
+						aceitem = AceItemLocalServiceUtil.getAceItemByStoredAt("ace_measure_id=" + measure.getReplacesId() );
+						aceitem.setStoredAt("ace_measure_id=" + measure.getMeasureId());
+						MeasureLocalServiceUtil.deleteMeasure(measure.getReplacesId());
+						measure.setReplacesId( (long) 0);	
+					}
+					else {
+						aceitem = AceItemLocalServiceUtil.getAceItemByStoredAt("ace_measure_id=" + measure.getMeasureId());
+					}
+					
+					MeasureLocalServiceUtil.updateMeasure(measure);
+					updateAceItem(measure, aceitem);
+				}			
+				
+				SessionMessages.add(request, "measure-updated");
+				
+				String notify = ParamUtil.getString(request, "notify_status");
+				if( (notify != null ) && (notify.length()>0) && (newapproved == ACEIndexUtil.Status_SUBMITTED)) {
+					sendSubmitNotification(measure);
 				}
 				
-				MeasureLocalServiceUtil.updateMeasure(measure);
-				updateAceItem(measure, aceitem);
-			}			
-			
-			SessionMessages.add(request, "measure-updated");
-			
-			String notify = ParamUtil.getString(request, "notify_status");
-			if( (notify != null ) && (notify.length()>0) && (newapproved == ACEIndexUtil.Status_SUBMITTED)) {
-				sendSubmitNotification(measure);
+				sendRedirect(request, response);
 			}
-			
-			sendRedirect(request, response);
-		}
-		else {
-			for (String error : errors) {
-				SessionErrors.add(request, error);
+			else {
+				for (String error : errors) {
+					SessionErrors.add(request, error);
+				}
+	
+				PortalUtil.copyRequestParameters(request, response);
+	
+				response.setRenderParameter("jspPage", "/html/measure/edit_measure.jsp");
 			}
-
-			PortalUtil.copyRequestParameters(request, response);
-
-			response.setRenderParameter("jspPage", "/html/measure/edit_measure.jsp");
 		}
 	}	
 	
@@ -159,29 +168,38 @@ public class MeasurePortlet extends MeasureUpdateHelper {
 
 		if (Validator.isNotNull(measureId)) {
 			
-			Measure measure = MeasureLocalServiceUtil.getMeasure(measureId);
- 
-			if(measure.getReplacesId() != 0) {
-				// Candidate gets deleted: the already approved measure gets editable again
-					measure = MeasureLocalServiceUtil.getMeasure( measure.getReplacesId() );
-					measure.setReplacesId( (long) 0);
-					MeasureLocalServiceUtil.updateMeasure(measure);
+			Measure measure = null;
+			
+			try {
+				measure = MeasureLocalServiceUtil.getMeasure(measureId);
 			}
-			else {
-				// get the associated aceitem
-				AceItem aceitem = AceItemLocalServiceUtil.getAceItemByStoredAt("ace_measure_id=" + measureId);
-				// delete the aceitem index entry
-				new ACEIndexSynchronizer().delete(aceitem);			
-				// delete the aceitem
-				AceItemLocalServiceUtil.deleteAceItem(aceitem.getAceItemId());					
+			catch (Exception e) {
+				measure = null;
 			}
 			
-			// delete the measure by saved Id (measure itself may be the old one here)				
-			MeasureLocalServiceUtil.deleteMeasure(measureId);
-
-			SessionMessages.add(request, "measure-deleted");
-
-			sendRedirect(request, response);
+			if(measure != null) {
+				if(measure.getReplacesId() != 0) {
+					// Candidate gets deleted: the already approved measure gets editable again
+						measure = MeasureLocalServiceUtil.getMeasure( measure.getReplacesId() );
+						measure.setReplacesId( (long) 0);
+						MeasureLocalServiceUtil.updateMeasure(measure);
+				}
+				else {
+					// get the associated aceitem
+					AceItem aceitem = AceItemLocalServiceUtil.getAceItemByStoredAt("ace_measure_id=" + measureId);
+					// delete the aceitem index entry
+					new ACEIndexSynchronizer().delete(aceitem);			
+					// delete the aceitem
+					AceItemLocalServiceUtil.deleteAceItem(aceitem.getAceItemId());					
+				}
+				
+				// delete the measure by saved Id (measure itself may be the old one here)				
+				MeasureLocalServiceUtil.deleteMeasure(measureId);
+	
+				SessionMessages.add(request, "measure-deleted");
+	
+				sendRedirect(request, response);
+			}
 		}
 		else {
 			SessionErrors.add(request, "error-deleting");
