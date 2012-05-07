@@ -84,69 +84,78 @@ public class ProjectPortlet extends ProjectUpdateHelper {
 		
 		AceItem aceitem = null;
 
-	    Project project = ProjectLocalServiceUtil.getProject(ParamUtil.getLong(request, "projectId"));	
+	    Project project = null;
 		
-		// retain old and new status
-		Short oldapproved = project.getControlstatus();
-		Short newapproved = 0;
-		String approved = ParamUtil.getString(request, "chk_controlstatus");
-		if( (approved != null ) && (approved.length()>0) ) {
-			
-			newapproved = Short.parseShort(approved);
+		try {
+			project = ProjectLocalServiceUtil.getProject(ParamUtil.getLong(request, "projectId"));		
 		}
-		if ( (oldapproved == ACEIndexUtil.Status_APPROVED) &&  (newapproved != ACEIndexUtil.Status_APPROVED) ) { 
-		// The old record stays untouched, only replacesId gets filled (from now no edit or delete possible anymore)
-			project.setReplacesId( project.getProjectId() ) ;
-			// Must be done BEFORE projectFromRequest();
-			ProjectLocalServiceUtil.updateProject(project);
+		catch (Exception e) {
+			project = null;
 		}
 		
-		projectFromRequest(request, project);
-
-		ArrayList<String> errors = new ArrayList<String>();
-
-		if (ProjectValidator.validateProject(project, errors)) {
-			
-			if ( (oldapproved == ACEIndexUtil.Status_APPROVED) &&  (newapproved != ACEIndexUtil.Status_APPROVED) ) { 
-     			// The changed item gets added as a copy with replacesId filled (is already done above)
-				// save the new copy: simple addProject
-				ProjectLocalServiceUtil.addProject(project);
-				// automatically gets a new projectid;
-			}
-			else {
+		if(project != null) {		
+			// retain old and new status
+			Short oldapproved = project.getControlstatus();
+			Short newapproved = 0;
+			String approved = ParamUtil.getString(request, "chk_controlstatus");
+			if( (approved != null ) && (approved.length()>0) ) {
 				
-				if ( (newapproved == ACEIndexUtil.Status_APPROVED)  && project.getReplacesId() != 0) {
-					// delete the old project which gets replaced, update the corresponding aceitem
-					aceitem = AceItemLocalServiceUtil.getAceItemByStoredAt("ace_project_id=" + project.getReplacesId() );
-					aceitem.setStoredAt("ace_project_id=" + project.getProjectId());
-					ProjectLocalServiceUtil.deleteProject(project.getReplacesId());
-					project.setReplacesId( (long) 0);	
+				newapproved = Short.parseShort(approved);
+			}
+			if ( (oldapproved == ACEIndexUtil.Status_APPROVED) &&  (newapproved != ACEIndexUtil.Status_APPROVED) ) { 
+			// The old record stays untouched, only replacesId gets filled (from now no edit or delete possible anymore)
+				project.setReplacesId( project.getProjectId() ) ;
+				// Must be done BEFORE projectFromRequest();
+				ProjectLocalServiceUtil.updateProject(project);
+			}
+			
+			projectFromRequest(request, project);
+	
+			ArrayList<String> errors = new ArrayList<String>();
+	
+			if (ProjectValidator.validateProject(project, errors)) {
+				
+				if ( (oldapproved == ACEIndexUtil.Status_APPROVED) &&  (newapproved != ACEIndexUtil.Status_APPROVED) ) { 
+	     			// The changed item gets added as a copy with replacesId filled (is already done above)
+					// save the new copy: simple addProject
+					ProjectLocalServiceUtil.addProject(project);
+					// automatically gets a new projectid;
 				}
 				else {
-					aceitem = AceItemLocalServiceUtil.getAceItemByStoredAt("ace_project_id=" + project.getProjectId());
+					
+					if ( (newapproved == ACEIndexUtil.Status_APPROVED)  && project.getReplacesId() != 0) {
+						// delete the old project which gets replaced, update the corresponding aceitem
+						aceitem = AceItemLocalServiceUtil.getAceItemByStoredAt("ace_project_id=" + project.getReplacesId() );
+						aceitem.setStoredAt("ace_project_id=" + project.getProjectId());
+						ProjectLocalServiceUtil.deleteProject(project.getReplacesId());
+						project.setReplacesId( (long) 0);	
+					}
+					else {
+						aceitem = AceItemLocalServiceUtil.getAceItemByStoredAt("ace_project_id=" + project.getProjectId());
+					}
+					
+					ProjectLocalServiceUtil.updateProject(project);
+					updateAceItem(project, aceitem);
 				}
 				
-				ProjectLocalServiceUtil.updateProject(project);
-				updateAceItem(project, aceitem);
+				SessionMessages.add(request, "project-updated");
+				
+				String notify = ParamUtil.getString(request, "notify_status");
+				if( (notify != null ) && (notify.length()>0) && (newapproved == ACEIndexUtil.Status_SUBMITTED)) {
+					sendSubmitNotification(project);
+				}
+				
+				sendRedirect(request, response);
 			}
-			
-			SessionMessages.add(request, "project-updated");
-			
-			String notify = ParamUtil.getString(request, "notify_status");
-			if( (notify != null ) && (notify.length()>0) && (newapproved == ACEIndexUtil.Status_SUBMITTED)) {
-				sendSubmitNotification(project);
+			else {
+				for (String error : errors) {
+					SessionErrors.add(request, error);
+				}
+	
+				PortalUtil.copyRequestParameters(request, response);
+	
+				response.setRenderParameter("jspPage", "/html/project/edit_project.jsp");
 			}
-			
-			sendRedirect(request, response);
-		}
-		else {
-			for (String error : errors) {
-				SessionErrors.add(request, error);
-			}
-
-			PortalUtil.copyRequestParameters(request, response);
-
-			response.setRenderParameter("jspPage", "/html/project/edit_project.jsp");
 		}
 	}
 
@@ -161,29 +170,38 @@ public class ProjectPortlet extends ProjectUpdateHelper {
 
 		if (Validator.isNotNull(projectId)) {
 
-			Project project = ProjectLocalServiceUtil.getProject(projectId);
+			Project project = null;
 			
-			if(project.getReplacesId() != 0) {
-				// Candidate gets deleted: the already approved project gets editable again
-					project = ProjectLocalServiceUtil.getProject( project.getReplacesId() );
-					project.setReplacesId( (long) 0);
-					ProjectLocalServiceUtil.updateProject(project);
+			try {
+				project = ProjectLocalServiceUtil.getProject(projectId);
 			}
-			else {
-				// get the associated aceitem
-				AceItem aceitem = AceItemLocalServiceUtil.getAceItemByStoredAt("ace_project_id=" + projectId);
-				// delete the aceitem index entry
-				new ACEIndexSynchronizer().delete(aceitem);			
-				// delete the aceitem
-				AceItemLocalServiceUtil.deleteAceItem(aceitem.getAceItemId());				
+			catch (Exception e) {
+				project = null;
 			}
 			
-			// delete the project by saved Id (project itself may be the old one here)			
-			ProjectLocalServiceUtil.deleteProject(projectId);
-
-			SessionMessages.add(request, "project-deleted");
-
-			sendRedirect(request, response);
+			if(project != null) {			
+				if(project.getReplacesId() != 0) {
+					// Candidate gets deleted: the already approved project gets editable again
+						project = ProjectLocalServiceUtil.getProject( project.getReplacesId() );
+						project.setReplacesId( (long) 0);
+						ProjectLocalServiceUtil.updateProject(project);
+				}
+				else {
+					// get the associated aceitem
+					AceItem aceitem = AceItemLocalServiceUtil.getAceItemByStoredAt("ace_project_id=" + projectId);
+					// delete the aceitem index entry
+					new ACEIndexSynchronizer().delete(aceitem);			
+					// delete the aceitem
+					AceItemLocalServiceUtil.deleteAceItem(aceitem.getAceItemId());				
+				}
+				
+				// delete the project by saved Id (project itself may be the old one here)			
+				ProjectLocalServiceUtil.deleteProject(projectId);
+	
+				SessionMessages.add(request, "project-deleted");
+	
+				sendRedirect(request, response);
+			}
 		}
 		else {
 			SessionErrors.add(request, "error-deleting");

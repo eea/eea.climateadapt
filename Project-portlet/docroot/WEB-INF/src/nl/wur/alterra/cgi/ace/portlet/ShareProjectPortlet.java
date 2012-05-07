@@ -79,35 +79,44 @@ public class ShareProjectPortlet extends ProjectUpdateHelper {
 		
 		AceItem aceitem = null;
 		
-		Project project = ProjectLocalServiceUtil.getProject(ParamUtil.getLong(request, "projectId"));	
+		Project project = null;
 		
-		projectFromRequest(request, project);
-
-		ArrayList<String> errors = new ArrayList<String>();
-
-		if (ProjectValidator.validateProject(project, errors)) {
-			
-			aceitem = AceItemLocalServiceUtil.getAceItemByStoredAt("ace_project_id=" + project.getProjectId());
-
-			ProjectLocalServiceUtil.updateProject(project);
-				
-			updateAceItem(project, aceitem);
-			
-			SessionMessages.add(request, "project-updated");
-
-            sendSubmitNotification(project);
-			request.getPortletSession().setAttribute("lastAddedProjectId", "" + project.getProjectId() );
-			
-			sendRedirect(request, response);
+		try {
+			project = ProjectLocalServiceUtil.getProject(ParamUtil.getLong(request, "projectId"));	
 		}
-		else {
-			for (String error : errors) {
-				SessionErrors.add(request, error);
+		catch (Exception e) {
+			project = null;
+		}
+		
+		if(project != null) {		
+			projectFromRequest(request, project);
+	
+			ArrayList<String> errors = new ArrayList<String>();
+	
+			if (ProjectValidator.validateProject(project, errors)) {
+				
+				aceitem = AceItemLocalServiceUtil.getAceItemByStoredAt("ace_project_id=" + project.getProjectId());
+	
+				ProjectLocalServiceUtil.updateProject(project);
+					
+				updateAceItem(project, aceitem);
+				
+				SessionMessages.add(request, "project-updated");
+	
+	            sendSubmitNotification(project);
+				request.getPortletSession().setAttribute("lastAddedProjectId", "" + project.getProjectId() );
+				
+				sendRedirect(request, response);
 			}
-
-			PortalUtil.copyRequestParameters(request, response);
-
-			response.setRenderParameter("jspPage", "/html/shareinfo/add_project.jsp");
+			else {
+				for (String error : errors) {
+					SessionErrors.add(request, error);
+				}
+	
+				PortalUtil.copyRequestParameters(request, response);
+	
+				response.setRenderParameter("jspPage", "/html/shareinfo/add_project.jsp");
+			}
 		}
 	}	
 }
