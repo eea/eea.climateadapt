@@ -76,6 +76,8 @@ CHM.SATCHMMap = OpenLayers.Class(CHM.CHMMap, {
         	}
         );
 
+		similar_areas_image_layer.mergeNewParams({'CQL_FILTER': "biogeo = 'JustToMakeSureThatNoAreasAreShownAtStartUp' "});
+		
 		this.addLayers([similar_areas_image_layer, similar_areas_vector_layer, select, case_studies_dissimilar_areas, case_studies_similar_areas, location_vector_layer]);
             
 		locationcontrol = new CHM.LocationControl({satCHMMap: this});

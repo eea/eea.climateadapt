@@ -49,6 +49,11 @@ public class SimilarAreasToolPortlet extends MVCPortlet {
 
 		prefs.setValue(Constants.areasFeatureTypePreferenceName, areasfeaturetype);
 
+		// Name of layer of similar areas
+		String areaslayer = ParamUtil.getString(request, Constants.areasLayerPreferenceName);
+
+		prefs.setValue(Constants.areasLayerPreferenceName, areaslayer);
+
 		// Name of featuretype of case studies
 		String casestudiesfeaturetype = ParamUtil.getString(request, Constants.caseStudiesFeatureTypePreferenceName);
 
