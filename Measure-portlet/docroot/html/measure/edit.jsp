@@ -39,9 +39,9 @@
     
     <aui:input name="<%= Constants.featureNamespacePreferenceName %>" value='<%= prefs.getValue(Constants.featureNamespacePreferenceName, "http://climate-adapt.eea.europa.eu") %>' size="45" type="text" />
 
-    <aui:input name="<%= Constants.areasFeatureTypePreferenceName %>" value='<%= prefs.getValue(Constants.areasFeatureTypePreferenceName, "biogeo_2005") %>' size="45" type="text" />
+    <aui:input name="<%= Constants.areasFeatureTypePreferenceName %>" value='<%= prefs.getValue(Constants.areasFeatureTypePreferenceName, "biogeo_2008") %>' size="45" type="text" />
 
-    <aui:input name="<%= Constants.areasLayerPreferenceName %>" value='<%= prefs.getValue(Constants.areasLayerPreferenceName, "chm:biogeo_2005") %>' size="45" type="text" />
+    <aui:input name="<%= Constants.areasLayerPreferenceName %>" value='<%= prefs.getValue(Constants.areasLayerPreferenceName, "chm:biogeo_2008") %>' size="45" type="text" />
 
     <aui:input name="<%= Constants.caseStudiesFeatureTypePreferenceName %>" value='<%= prefs.getValue(Constants.caseStudiesFeatureTypePreferenceName, "casestudies") %>' size="45" type="text" />
 

@@ -51,15 +51,15 @@
     
     <aui:input name="<%= Constants.featureNamespacePreferenceName %>" value='<%= prefs.getValue(Constants.featureNamespacePreferenceName, "http://climate-adapt.eea.europa.eu") %>' size="45" type="text" />
 
-    <aui:input name="<%= Constants.areasFeatureTypePreferenceName %>" value='<%= prefs.getValue(Constants.areasFeatureTypePreferenceName, "biogeo_2005") %>' size="45" type="text" />
+    <aui:input name="<%= Constants.areasFeatureTypePreferenceName %>" value='<%= prefs.getValue(Constants.areasFeatureTypePreferenceName, "biogeo_2008") %>' size="45" type="text" />
 
-    <aui:input name="<%= Constants.areasLayerPreferenceName %>" value='<%= prefs.getValue(Constants.areasLayerPreferenceName, "chm:biogeo_2005") %>' size="45" type="text" />
+    <aui:input name="<%= Constants.areasLayerPreferenceName %>" value='<%= prefs.getValue(Constants.areasLayerPreferenceName, "chm:biogeo_2008") %>' size="45" type="text" />
 
     <aui:input name="<%= Constants.caseStudiesFeatureTypePreferenceName %>" value='<%= prefs.getValue(Constants.caseStudiesFeatureTypePreferenceName, "casestudies") %>' size="45" type="text" />
 
     <aui:input name="<%= Constants.geometryColumnPreferenceName %>" value='<%= prefs.getValue(Constants.geometryColumnPreferenceName, "geom") %>' size="45" type="text" />
 
-    <aui:input name="<%= Constants.locatorUrlPreferenceName %>" value='<%= prefs.getValue(Constants.locatorUrlPreferenceName, "http://dev.virtualearth.net/REST/v1/Locations/") %>' size="45" type="text" />
+    <aui:input name="<%= Constants.locatorUrlPreferenceName %>" value='<%= prefs.getValue(Constants.locatorUrlPreferenceName, "/ve/REST/v1/Locations/") %>' size="45" type="text" />
 
 	<aui:input name="<%= Constants.locatorKeyPreferenceName %>" value='<%= prefs.getValue(Constants.locatorKeyPreferenceName, "Ao9qujBzDtg-nFiusTjt5VQ9x2NJB2wAD7YCRjaPz7hQQjxdFcl24tyhOwCDCIrw") %>' size="45" type="text" />
 
