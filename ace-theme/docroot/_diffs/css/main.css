@@ -1,24 +1,19 @@
-@import url(base.css) screen;
+@media screen {
 
-@import url(application.css) screen;
+@import url(base.css);
+@import url(application.css);
+@import url(layout.css);
+@import url(dockbar.css);
+@import url(navigation.css);
+@import url(portlet.css);
+@import url(forms.css);
+@import url(extras.css);
+@import url(custom.css);
 
-@import url(layout.css) screen;
-
-@import url(dockbar.css) screen;
-
-@import url(navigation.css) screen;
-
-@import url(portlet.css) screen;
-
-@import url(forms.css) screen;
-
-@import url(extras.css) screen;
-
-@import url(custom.css) screen;
-
+}
 /* The style applied at print-time only. */
 
-@media print{
+@media print {
 
 	div#tabs ul.ui-tabs-nav{
 		display:none;
