@@ -1,0 +1,50 @@
+@import url(base.css) screen;
+
+@import url(application.css) screen;
+
+@import url(layout.css) screen;
+
+@import url(dockbar.css) screen;
+
+@import url(navigation.css) screen;
+
+@import url(portlet.css) screen;
+
+@import url(forms.css) screen;
+
+@import url(extras.css) screen;
+
+@import url(custom.css) screen;
+
+/* The style applied at print-time only. */
+
+@media print{
+
+	div#tabs ul.ui-tabs-nav{
+		display:none;
+	}
+
+	div.countries-list, div.region-list{
+		display:none;
+	}
+
+	div#header-menu, div#searchbox{
+		display:none
+	}
+
+	a#skip-to-content{
+		display:none;
+	}
+
+	#sec-menu, #navigation{
+		display:none;
+	}
+
+	#footer{
+		display:none;
+	}
+
+	nav#navigation, nav#sec-menu, hgroup#heading{
+		display:none;
+	}
+}
