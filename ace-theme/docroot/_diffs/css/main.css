@@ -13,7 +13,7 @@
 }
 /* The style applied at print-time only. */
 
-@media print {
+@media print{
 
 	div#tabs ul.ui-tabs-nav{
 		display:none;
@@ -24,22 +24,60 @@
 	}
 
 	div#header-menu, div#searchbox{
-		display:none
+		display:none;
+	}
+
+	div#layout-column_column-1 {
+		float:left;
+		padding-right:10px;
 	}
 
 	a#skip-to-content{
 		display:none;
 	}
 
-	#sec-menu, #navigation{
-		display:none;
-	}
-
-	#footer{
+	#sec-menu, #navigation, #heading{
 		display:none;
 	}
 
 	nav#navigation, nav#sec-menu, hgroup#heading{
 		display:none;
 	}
+
+	div#sb-ast, div#sb-np, div#sb-csst, div#sb-syi{
+		display:none;
+	}
+
+	a.double-arrow{
+		display:none;
+	}
+
+	div.db-search-fp{
+		display:none;
+	}
+
+	ul#third-level-menu{
+		display:none;
+	}
+
+	div.portlet-msg-error{
+		display:none;
+	}
+
+	div#read-more-link{
+		display:none;
+	}
+
+	select{
+		display:none;
+	}
+
+	#footer {
+		padding-top: 20px;
+	}
+	#footer a{
+		float:left;
+		margin-left:100px;
+	}
 }
+
