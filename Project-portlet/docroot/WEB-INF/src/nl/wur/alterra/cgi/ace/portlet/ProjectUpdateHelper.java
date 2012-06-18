@@ -29,7 +29,9 @@ import javax.portlet.PortletRequest;
  * @author hugo de groot
  */
 public abstract class ProjectUpdateHelper extends MVCPortlet {
-
+	
+	private String username = "";	
+	private String useremail = "";
 
 	/**
 	 * Convenience method to  F I L L  a Project object out of the request. Used
@@ -44,7 +46,9 @@ public abstract class ProjectUpdateHelper extends MVCPortlet {
 			User user = UserServiceUtil.getUserById( Long.parseLong(request.getRemoteUser()));
 			String moderator = project.getModerator();
 			
-			String newModerator = user.getFullName() + " (" + user.getEmailAddress() + ")" ;  
+			username = user.getFullName();
+			useremail = user.getEmailAddress();
+			String newModerator = username + " (" + useremail + ")" ;  
 			
 			if(moderator.indexOf( newModerator )==-1) {
 				
@@ -279,6 +283,8 @@ public abstract class ProjectUpdateHelper extends MVCPortlet {
         	String subject = "Climate-adapt: A project is waiting for approval";
         	String body = "Please have a look at the submitted ";
         	body += "project at " + hosturl + "/projects1?ace_project_id=" + project.getProjectId();
+        	body += "\nEditor: " + username;
+        	body += "\nEmail: " + useremail;
     		    	
         	MailEngine.send(fromInternetAddress, toInternetAddresses, null, null, subject, body, false, null, null, null);
           }
