@@ -29,7 +29,9 @@ import javax.portlet.PortletRequest;
  * @author heikki doeleman
  */
 public abstract class LuceneIndexUpdatePortlet extends MVCPortlet {
-
+	
+	private String username = "";	
+	private String useremail = "";
 
     /**
      * Rebuilds complete index based on contents of database.
@@ -85,7 +87,9 @@ public abstract class LuceneIndexUpdatePortlet extends MVCPortlet {
 			User user = UserServiceUtil.getUserById( Long.parseLong(request.getRemoteUser()));
 			String moderator = aceitem.getModerator();
 			
-			String newModerator = user.getFullName() + " (" + user.getEmailAddress() + ")" ;  
+			username = user.getFullName();
+			useremail = user.getEmailAddress();
+			String newModerator = username + " (" + useremail + ")" ;  
 			
 			if(moderator.indexOf( newModerator )==-1) {
 				
@@ -303,7 +307,9 @@ public abstract class LuceneIndexUpdatePortlet extends MVCPortlet {
     	}    	
 
   		body += "at " + hosturl + "/viewaceitem?aceitem_id=" + aceitem.getAceItemId();
-		    	
+    	body += "\nEditor: " + username;
+    	body += "\nEmail: " + useremail;
+    	
     	MailEngine.send(fromInternetAddress, toInternetAddresses, null, null, subject, body, false, null, null, null);
       }
       catch (Exception e) {
