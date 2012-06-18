@@ -29,6 +29,9 @@ import javax.portlet.PortletRequest;
  * @author hugo de groot
  */
 public abstract class MeasureUpdateHelper extends MVCPortlet {
+	
+	private String username = "";	
+	private String useremail = "";
 
 	/**
 	 * Convenience method to   F I L L   a Measure object out of the request. Used
@@ -44,7 +47,9 @@ public abstract class MeasureUpdateHelper extends MVCPortlet {
 			User user = UserServiceUtil.getUserById( Long.parseLong(request.getRemoteUser()));
 			String moderator = measure.getModerator();
 			
-			String newModerator = user.getFullName() + " (" + user.getEmailAddress() + ")" ;  
+			username = user.getFullName();
+			useremail = user.getEmailAddress();
+			String newModerator = username + " (" + useremail + ")" ;   
 						
 			if(moderator.indexOf( newModerator )==-1) {
 				
@@ -344,7 +349,9 @@ public abstract class MeasureUpdateHelper extends MVCPortlet {
   			body += "adaptation option " ;
   		}
   		body += "at " + hosturl + "/viewmeasure?ace_measure_id=" + measure.getMeasureId();
-  		    	
+    	body += "\nEditor: " + username;
+    	body += "\nEmail: " + useremail;
+    	
       	MailEngine.send(fromInternetAddress, toInternetAddresses, null, null, subject, body, false, null, null, null);
         }
         catch (Exception e) {
