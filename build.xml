@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<project name="ClimateAdapt" basedir="." default="deploy">
+
+	<!-- Load environment specific properties required for this build. -->
+	<property file="${basedir}/build.properties" />
+
+	<!-- Call the deploy target of build.xml in the root of Liferay Plugins SDK + copy search-engine JAR to its location in app-server. -->
+	<target name="deploy" depends="build.searchEngine">
+		<ant dir="${plugins.sdk.home}" target="deploy" inheritAll="false"/>
+		<copy file="AceSearchEngine/dist/lib/AceSearchEngine.jar" todir="${app.server.dir}/lib/ext"/>
+	</target>
+
+	<!-- Build the ClimateAdapt search-engine JAR. -->
+	<target name="build.searchEngine">
+		<ant dir="AceSearchEngine" target="dist" inheritAll="false" />
+	</target>
+
+</project>
