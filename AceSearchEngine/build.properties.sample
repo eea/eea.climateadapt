@@ -1,0 +1,3 @@
+
+app.server.dir=D:/liferay-portal-6.0.5/tomcat-6.0.26
+app.server.portal.dir=${app.server.dir}/webapps/ROOT
