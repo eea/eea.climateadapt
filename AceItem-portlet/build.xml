@@ -1,5 +1,13 @@
 <?xml version="1.0"?>
-
 <project name="AceItem-portlet-portlet" basedir="." default="deploy">
-	<import file="../build-common-portlet.xml" />
+	<import file="../build-common-portlet.xml"/>
+
+	<!-- Extend the "deploy" target of ../build-common-portlet.xml by doing the following: -->
+	<!--    * build the service                                                            -->
+	<!--    * copy the built service JAR into the app-server's lib/ext                     -->
+
+	<target name="deploy" depends="build-common-plugin.deploy, build-common-plugin.build-service">
+		<copy file="${project.dir}/portlets/AceItem-portlet/docroot/WEB-INF/lib/AceItem-portlet-service.jar" todir="${app.server.dir}/lib/ext" overwrite="true"/>
+	</target>
+
 </project>
