@@ -5,9 +5,14 @@
 	<property file="${basedir}/build.properties" />
 
 	<!-- Call the deploy target of build.xml in the root of Liferay Plugins SDK + copy search-engine JAR to its location in app-server. -->
-	<target name="deploy" depends="build.searchEngine">
+	<target name="deploy" depends="war">
 		<ant dir="${plugins.sdk.home}" target="deploy" inheritAll="false"/>
 		<copy file="AceSearchEngine/dist/lib/AceSearchEngine.jar" todir="${app.server.dir}/lib/ext"/>
+	</target>
+
+	<!-- Call the deploy target of build.xml in the root of Liferay Plugins SDK + copy search-engine JAR to its location in app-server. -->
+	<target name="war" depends="build.searchEngine">
+		<ant dir="${plugins.sdk.home}" target="war" inheritAll="false"/>
 	</target>
 
 	<!-- Build the ClimateAdapt search-engine JAR. -->
