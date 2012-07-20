@@ -7,13 +7,12 @@ software from scratch. It assumes that the steps described in docs/Clearinghouse
 have already been carried out.
 
 *********************************************
-1. Make sure you have Ant 1.7.1 and Java 1.6
+1. Make sure you have Ant 1.7.0 and Java 1.6
 *********************************************
 
-As of July 2012, ClimateAdapt runs on Liferay portal 6.0.5 which means
-that ClimateAdapt's portlets, themes and layouts must be built with
-Liferay Plugins SDK (see further below) which requires Ant 1.7.1 as the
-building tool.
+As of July 2012, ClimateAdapt runs on Liferay portal 6.0.5 which means that ClimateAdapt's
+portlets, themes and layouts must be built with Liferay Plugins SDK (see further below)
+which requires Ant 1.7.0 or higher as the building tool.
 
 Java runtime and compiler of version 1.6 is also required.
 
