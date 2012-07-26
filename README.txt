@@ -59,6 +59,7 @@ ln -s TRUNK/Measure-portlet Measure-portlet
 ln -s TRUNK/Project-portlet Project-portlet
 ln -s TRUNK/SimilarAreasTool-portlet SimilarAreasTool-portlet
 ln -s TRUNK/SimpleFilter-portlet SimpleFilter-portlet
+ln -s TRUNK/web-form-portlet web-form-portlet
 
 While in PLUGINS_SDK_HOME/layouttpl, create the following symbolic link:
 ln -s TRUNK/ace-layouttpl ace-layouttpl
