@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="docroot/WEB-INF/src"/>
+	<classpathentry kind="lib" path="docroot/WEB-INF/lib/commons-codec-1.2.jar"/>
+	<classpathentry kind="lib" path="docroot/WEB-INF/lib/commons-httpclient-3.0.1.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="lib" path="D:/liferay-portal-6.0.5/tomcat-6.0.26/webapps/ROOT/WEB-INF/lib/util-bridges.jar"/>
+	<classpathentry kind="lib" path="D:/liferay-portal-6.0.5/tomcat-6.0.26/webapps/ROOT/WEB-INF/lib/util-java.jar"/>
+	<classpathentry kind="lib" path="D:/liferay-portal-6.0.5/tomcat-6.0.26/webapps/ROOT/WEB-INF/lib/commons-beanutils.jar"/>
+	<classpathentry kind="lib" path="D:/liferay-portal-6.0.5/tomcat-6.0.26/webapps/ROOT/WEB-INF/lib/commons-collections.jar"/>
+	<classpathentry kind="lib" path="D:/liferay-portal-6.0.5/tomcat-6.0.26/webapps/ROOT/WEB-INF/lib/commons-io.jar"/>
+	<classpathentry kind="lib" path="D:/liferay-portal-6.0.5/tomcat-6.0.26/webapps/ROOT/WEB-INF/lib/commons-lang.jar"/>
+	<classpathentry kind="lib" path="D:/liferay-portal-6.0.5/tomcat-6.0.26/webapps/ROOT/WEB-INF/lib/commons-logging.jar"/>
+	<classpathentry kind="lib" path="D:/liferay-portal-6.0.5/tomcat-6.0.26/webapps/ROOT/WEB-INF/lib/commons-validator.jar"/>
+	<classpathentry kind="lib" path="D:/liferay-portal-6.0.5/tomcat-6.0.26/lib/servlet-api.jar"/>
+	<classpathentry kind="lib" path="D:/liferay-portal-6.0.5/tomcat-6.0.26/lib/jsp-api.jar"/>
+	<classpathentry kind="lib" path="D:/liferay-portal-6.0.5/tomcat-6.0.26/lib/ext/portlet.jar"/>
+	<classpathentry kind="lib" path="D:/liferay-portal-6.0.5/tomcat-6.0.26/lib/ext/portal-service.jar"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/AceSearchEngine"/>
+	<classpathentry kind="output" path="docroot/WEB-INF/classes"/>
+</classpath>
