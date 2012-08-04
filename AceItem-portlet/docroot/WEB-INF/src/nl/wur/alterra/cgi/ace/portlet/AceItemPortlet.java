@@ -22,7 +22,6 @@ import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.servlet.SessionMessages;
 import com.liferay.portal.kernel.util.ParamUtil;
-import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.util.PortalUtil;
 
 /**
@@ -140,49 +139,6 @@ public class AceItemPortlet extends LuceneIndexUpdatePortlet {
     }
 
     /**
-     * Deletes a aceitem from the database..
-     *
-     * @param request
-     * @param response
-     * @throws Exception
-     */
-    public void deleteAceItem(ActionRequest request, ActionResponse response) throws Exception {
-        long aceitemId = ParamUtil.getLong(request, "aceItemId");
-        List<String> errors = new ArrayList<String>();
-        if (Validator.isNotNull(aceitemId)) {
-
-            // delete the index entry
-            AceItem aceitem = null;
-
-            try {
-                aceitem = aceitem = AceItemLocalServiceUtil.getAceItem(aceitemId);
-            } catch (Exception e) {
-                aceitem = null;
-            }
-
-            if (aceitem != null) {
-                new ACEIndexSynchronizer().delete(aceitem);
-
-                if (aceitem.getReplacesId() != 0) {
-                    // Reset the already approved aceitem from the item that should be replaced
-                    aceitem = AceItemLocalServiceUtil.getAceItem(aceitem.getReplacesId());
-                    aceitem.setReplacesId((long) 0);
-                    AceItemLocalServiceUtil.updateAceItem(aceitem);
-                }
-
-                // delete the aceitem by saved Id (aceitem itself may be the old one here)
-                AceItemLocalServiceUtil.deleteAceItem(aceitemId);
-
-                SessionMessages.add(request, "aceitem-deleted");
-
-                sendRedirect(request, response);
-            }
-        } else {
-            SessionErrors.add(request, "error-deleting");
-        }
-    }
-
-    /**
      * Sets the preferences for how many aceitems can be viewed per page and the format for the phone number.
      *
      * @param request
@@ -216,7 +172,7 @@ public class AceItemPortlet extends LuceneIndexUpdatePortlet {
 
         HashSet<Long> itemIds = getSubmittedAceItemIds(actionRequest);
         if (itemIds.isEmpty()) {
-            SessionErrors.add(actionRequest, "error-deleting");
+            SessionErrors.add(actionRequest, "none-selected");
             return;
         }
 

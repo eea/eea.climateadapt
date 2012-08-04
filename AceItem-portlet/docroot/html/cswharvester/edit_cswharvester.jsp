@@ -30,23 +30,23 @@
 	String every_hours = "0";
 	String every_minutes = "0";
     String harvesterType = "";
-	
+
 	boolean savedToGeoNetwork = false;
 
 	if (cswHarvester != null) {
 		isoTopic = cswHarvester.getTopic();
         harvesterType = cswHarvester.getType();
 		savedToGeoNetwork = cswHarvester.getSavedToGeoNetwork();
-		
+
 		int every = cswHarvester.getEvery();
 		if (every > 0) {
 			int every_days_i 	= every/(24*60);
 		    int every_hours_i 	= (every%(24*60)) / 60;
    			int every_minutes_i =(every%(24*60)) % 60;
-		
+
 			every_days = every_days_i+"";
 			every_hours = every_hours_i+"";
-			every_minutes = every_minutes_i+"";	
+			every_minutes = every_minutes_i+"";
 		}
 	}
 
@@ -57,7 +57,7 @@
 		var form = document.forms["<%= renderResponse.getNamespace() %>fm"];
 		form.action = "<%= saveCSWHarvesterToGeoNetworkURL %>";
 	}
-	
+
 	function executeHarvester() {
 		var form = document.forms["<%= renderResponse.getNamespace() %>fm"];
 		form.action = "<%= executeCswHarvester %>";
@@ -91,31 +91,31 @@
             form.elements["password"].disabled = false;
         }
     }
-	
+
 	function submitFormHandler(e) {
 		var form = document.forms["<%= renderResponse.getNamespace() %>fm"];
-			
+
 		// Validate interval values
 		var everyDaysVal = parseInt(form.elements["every_days"].value);
 		var everyHoursVal = parseInt(form.elements["every_hours"].value);
 		if ((everyHoursVal < 0) || (everyHoursVal > 23)) {
 			alert("Hour interval must be between 0-23");
-			e.returnValue = false; 
+			e.returnValue = false;
 			return false;
 		}
-		
+
 		var everyMinutesVal = parseInt(form.elements["every_minutes"].value);
 		if ((everyMinutesVal < 0) || (everyMinutesVal > 59)) {
 			alert("Minutes interval must be between 0-59");
-			e.returnValue = false; 
+			e.returnValue = false;
 			return false;
 		}
-		
+
 		// Every value is stored in minutes
 		var everyVal = (everyDaysVal * 24 * 60) + (everyHoursVal * 60) + everyMinutesVal;
-		
-		form.elements["<%= renderResponse.getNamespace() %>every"].value = everyVal + "";		 
-		
+
+		form.elements["<%= renderResponse.getNamespace() %>every"].value = everyVal + "";
+
 		return true;
 	}
 
@@ -131,11 +131,11 @@
 
 		<aui:input type="hidden" name="every" value='<%= cswHarvester == null ? "" : cswHarvester.getEvery() %>'/>
 
-		<liferay-ui:error key="aceharvestername-required" message="aceharvestername-required" />		
-		<b><liferay-ui:message key="aceharvester-name" /></b><br />	
+		<liferay-ui:error key="aceharvestername-required" message="aceharvestername-required" />
+		<b><liferay-ui:message key="aceharvester-name" /></b><br />
 		<input name="name" type="text" size="120" value='<%= cswHarvester == null ? "" : cswHarvester.getName() %>'><br /><br />
 
-		<liferay-ui:error key="aceharvesterurl-required" message="aceharvesterurl-required" />		
+		<liferay-ui:error key="aceharvesterurl-required" message="aceharvesterurl-required" />
 		<b><liferay-ui:message key="aceharvester-url" /></b><br />
 		<input name="url" type="text" size="120" value='<%= cswHarvester == null ? "" : cswHarvester.getUrl() %>'><br />
         <div id="url-csw-hint">
@@ -211,17 +211,17 @@
 
         <div style="float: left; margin-right: 35px;">
             <b><liferay-ui:message key="aceharvester-every" /></b><br />
-            <input name="every_days" type="text" size="5" maxlength="2" value='<%= every_days %>'> : 
-            <input name="every_hours" type="text" size="5" maxlength="2"value='<%= every_hours %>'> :            
+            <input name="every_days" type="text" size="5" maxlength="2" value='<%= every_days %>'> :
+            <input name="every_hours" type="text" size="5" maxlength="2"value='<%= every_hours %>'> :
             <input name="every_minutes" type="text" size="5" maxlength="2" value='<%= every_minutes %>'>
             <liferay-ui:message key="aceharvester-every-lbl-description" /><br /><br />
-            
-            
-            <% if ((savedToGeoNetwork == false) && (cswHarvester != null)) {  %>
-				<span style="color: #ff0000; font-weight: bold"><liferay-ui:message key="aceharvestergeonetwork-notexist" /></span>             
-            <% } else if (cswHarvester != null) { %>
-				<span style="color: #000000; font-weight: bold"><liferay-ui:message key="aceharvestergeonetwork-exist" /></span>             
-            <% } %>
+
+            <%
+            boolean savedInGeo = cswHarvester != null && cswHarvester.getSavedToGeoNetwork() == true;
+            String checkedStr = savedInGeo ? "checked=\"checked\"" : "";
+            String disabledStr = savedInGeo ? "disabled=\"disabled\"" : "";
+            %>
+            <b>Available in GeoNetwork:</b>&nbsp;&nbsp;<input type="checkbox" name="saveInGeoNw" <%=checkedStr%> <%=disabledStr%>/>
          </div>
 	</aui:fieldset>
 
