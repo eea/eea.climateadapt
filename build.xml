@@ -4,20 +4,34 @@
 	<!-- Load environment specific properties required for this build. -->
 	<property file="${basedir}/build.properties" />
 
-	<!-- Call the deploy target of build.xml in the root of Liferay Plugins SDK + copy search-engine JAR to its location in app-server. -->
-	<target name="deploy" depends="war">
+    <!-- Go into Plugins-SDK home and run its deploy target. But first ensure that AceItem portlet service and search engine have been deployed first. -->
+    <target name="deploy" depends="deploy.aceItemService,deploy.aceSearchEngine">
 		<ant dir="${plugins.sdk.home}" target="deploy" inheritAll="false"/>
-		<copy file="AceSearchEngine/dist/lib/AceSearchEngine.jar" todir="${app.server.dir}/lib/ext"/>
 	</target>
 
-	<!-- Call the deploy target of build.xml in the root of Liferay Plugins SDK + copy search-engine JAR to its location in app-server. -->
-	<target name="war" depends="build.searchEngine">
+    <!-- Go into Plugins-SDK home and run its war target. -->
+    <target name="war" depends="deploy.aceItemService,deploy.aceSearchEngine">
 		<ant dir="${plugins.sdk.home}" target="war" inheritAll="false"/>
 	</target>
 
-	<!-- Build the ClimateAdapt search-engine JAR. -->
-	<target name="build.searchEngine">
+    <!-- Build AceItem portlet service. -->
+    <target name="build.aceItemService">
+		<ant dir="${plugins.sdk.home}/portlets/AceItem-portlet" target="build-service" inheritAll="false"/>
+	</target>
+
+    <!-- Deploy AceItem portlet service. -->
+    <target name="deploy.aceItemService">
+        <ant dir="${plugins.sdk.home}/portlets/AceItem-portlet" target="deploy-service" inheritAll="false"/>
+	</target>
+
+	<!-- Build AceItem search engine JAR. Note that portlet service must be deployed beforehand. -->
+	<target name="build.aceSearchEngine">
 		<ant dir="AceSearchEngine" target="dist" inheritAll="false" />
+	</target>
+
+    <!-- Deploy AceItem search engine JAR. -->
+    <target name="deploy.aceSearchEngine" depends="build.aceSearchEngine">
+        <ant dir="AceSearchEngine" target="deploy" inheritAll="false" />
 	</target>
 
 </project>
