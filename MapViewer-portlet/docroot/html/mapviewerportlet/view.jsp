@@ -23,43 +23,43 @@ if (mapviewerappid == null || mapviewerappid.length() == 0) {
 
 <script>
 	var proxyUrl = '<%= prefs.getValue(Constants.proxyUrlPreferenceName, "") %>';
-	
+
 	var cswUrl = '<%= prefs.getValue(Constants.cswURLPreferenceName, "http://dev.ace.geocat.net/geonetwork/srv/") %>';
 
-	var csw = '<%= prefs.getValue(Constants.cswCswPreferenceName, "en/csw?") %>'; 
+	var csw = '<%= prefs.getValue(Constants.cswCswPreferenceName, "en/csw?") %>';
 
-	var showMetadata = '<%= prefs.getValue(Constants.cswShowMetadataPreferenceName, "en/metadata.show?uuid=") %>'; 
-	
+	var showMetadata = '<%= prefs.getValue(Constants.cswShowMetadataPreferenceName, "en/metadata.show?uuid=") %>';
+
 	var cswUsername = '<%= prefs.getValue(Constants.cswUserNamePreferenceName, "") %>';
-	
+
 	var cswPassword = '<%= prefs.getValue(Constants.cswPassWordPreferenceName, "") %>';
 
 	var mapViewerServletUrl = '<%= prefs.getValue(Constants.mapViewerServletURLPreferenceName, "/MapViewer-portlet/mapviewerservlet") %>';
-	
-	var mapViewerWmcDirectory = '<%= prefs.getValue(Constants.mapViewerWmcDirectoryPreferenceName, "/home/mapviewer") %>'; 
-	
+
+	var mapViewerWmcDirectory = '<%= prefs.getValue(Constants.mapViewerWmcDirectoryPreferenceName, "/home/mapviewer") %>';
+
 	var cswServletUrl = '<%= prefs.getValue(Constants.cswServletURLPreferenceName, "/MapViewer-portlet/cswservlet") %>';;
-	
+
 	var mapViewerAppId = '<%= mapviewerappid %>';
 
 	var foregroundlayername = "Topography";
-	
+
 	var backgroundlayername = "Background";
-	
+
 	var mapviewer;
-	
+
 	Ext.onReady(function() {
 		mapviewer = new CHM.MapViewer(
-				document.getElementById('map_element'), 
-				document.getElementById('toc_element'), 
-				document.getElementById('status_element'), 
-				document.getElementById('abstract_element'), 
-				document.getElementById('abstract_tabs_element') 
+				document.getElementById('map_element'),
+				document.getElementById('toc_element'),
+				document.getElementById('status_element'),
+				document.getElementById('abstract_element'),
+				document.getElementById('abstract_tabs_element')
 			);
-		
+
 		mapviewer.setOnCreationComplete(handleMapViewerCreationComplete);
 	});
-	
+
     function handleMapViewerCreationComplete() {
 <%
 		// Add layer(s) from querystring
@@ -71,47 +71,54 @@ if (mapviewerappid == null || mapviewerappid.length() == 0) {
 
 		if (cswrecordfileidentifiersparameter != null && cswrecordfileidentifiersparameter.length() > 0) {
 	       	String cswurl = prefs.getValue(Constants.cswURLPreferenceName, "http://ace.geocat.net/geonetwork/") + prefs.getValue(Constants.cswCswPreferenceName, "en/csw?");
-	        	
+
 	       	String cswusername = prefs.getValue(Constants.cswUserNamePreferenceName, "");
-	        	
+
 	       	String cswpassword = prefs.getValue(Constants.cswPassWordPreferenceName, "");
-	        	
+
 	       	try {
 		        String[] metadatarecordids = cswrecordfileidentifiersparameter.split(";");
-		        
+
 		   		CSW csw = new CSW(cswurl, cswusername, cswpassword);
-					
+
 		        for (int i = 0; i < metadatarecordids.length; i ++) {
 		        	String metadatarecordid = metadatarecordids[i];
-		        	
+
 		        	metadatarecordid = metadatarecordid.replace(" ", "%20");
-						
+
 					CSWRecord cswrecord = csw.getRecordByID(metadatarecordid);
-						
+
 					for (int j = 0; j < cswrecord.getDigitalTransferOptions().size(); j ++) {
 						DigitalTransferOption digitaltransferoption = cswrecord.getDigitalTransferOptions().get(j);
-						
+
 				       	String showmetadataurl = prefs.getValue(Constants.cswURLPreferenceName, "http://ace.geocat.net/geonetwork/") + prefs.getValue(Constants.cswShowMetadataPreferenceName, "en/metadata.show?uuid=") + metadatarecordid;
-		
-				       	if (digitaltransferoption.getProtocol().indexOf("WMS") != -1) {
-							String javascript = "var layer = new OpenLayers.Layer.WMS('" 
+
+				       	String protocol = digitaltransferoption.getProtocol();
+				       	String protocolUpperCase = protocol == null ? "" : protocol.toUpperCase();
+
+				       	String url = digitaltransferoption.getUrl();
+				       	String urlUpperCase = url == null ? "" : url.toUpperCase();
+
+				       	if (protocolUpperCase.indexOf("WMS") > 0 || urlUpperCase.indexOf("SERVICE=WMS") > 0) {
+
+							String javascript = "var layer = new OpenLayers.Layer.WMS('"
 								+ cswrecord.getTitle();
-							
+
 							if (cswrecord.getDigitalTransferOptions().size() > 1 && digitaltransferoption.getLayerTitle() != null) {
 								javascript += " - " + digitaltransferoption.getLayerTitle();
 							}
-							
-							javascript += "', '" + digitaltransferoption.getUrl() + "', "  
+
+							javascript += "', '" + digitaltransferoption.getUrl() + "', "
 								+ "{layers: '" + digitaltransferoption.getLayerName() + "', format: 'image/png', transparent: 'true'}, {visibility: true}, {tileOptions: {maxGetUrlLength: 2048}}, {isBaseLayer: false});";
-						
+
 								javascript += "layer.metadataURL = '" + showmetadataurl + "';";
-								
+
 								if (cswrecord.getAttribution() != null) {
 									javascript += "layer.attribution = '" + cswrecord.getAttribution() + "';";
 								}
-								
+
 								javascript += "mapviewer.addLayer(layer);";
-									
+
 								out.println(javascript);
 						}
 					}
