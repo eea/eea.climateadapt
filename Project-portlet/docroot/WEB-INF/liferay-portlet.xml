@@ -2,7 +2,7 @@
 <!DOCTYPE liferay-portlet-app PUBLIC "-//Liferay//DTD Portlet Application 6.0.0//EN" "http://www.liferay.com/dtd/liferay-portlet-app_6_0_0.dtd">
 
 <liferay-portlet-app>
-	
+
 	<portlet>
 		<portlet-name>projectportlet</portlet-name>
 		<icon>/icon.png</icon>
@@ -47,6 +47,18 @@
 		</footer-portlet-javascript>
 		<css-class-wrapper>
 			shareprojectportlet-portlet
+		</css-class-wrapper>
+	</portlet>
+	<portlet>
+		<portlet-name>transRegionProjectsPortlet</portlet-name>
+		<icon>/icon.png</icon>
+		<instanceable>true</instanceable>
+		<header-portlet-css>/css/portlet.css</header-portlet-css>
+		<footer-portlet-javascript>
+			/js/javascript.js
+		</footer-portlet-javascript>
+		<css-class-wrapper>
+			transRegionProjectsPortlet-portlet
 		</css-class-wrapper>
 	</portlet>
 	<role-mapper>

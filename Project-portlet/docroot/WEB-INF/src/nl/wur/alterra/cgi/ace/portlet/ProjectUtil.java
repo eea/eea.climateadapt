@@ -1,30 +1,41 @@
 package nl.wur.alterra.cgi.ace.portlet;
 
+import org.apache.commons.lang.StringEscapeUtils;
+import org.apache.commons.lang.StringUtils;
+
+import nl.wur.alterra.cgi.ace.model.Project;
+
 import com.liferay.portal.kernel.util.OrderByComparator;
 
-public class ProjectUtil {
 /**
-*
-* @param orderByCol
-* @param orderByType
-* @return
-*/
+ * The portlet's utility methods.
+ */
+public class ProjectUtil {
 
-	public static OrderByComparator getProjectOrderByComparator(
-	String orderByCol, String orderByType) {
-	
+    /** */
+    public static final String DOTS = " ...";
+
+    /**
+     * Returns a projects comparator given the order-by column and the order-by type (i.e. asc or desc).
+     *
+     * @param orderByCol
+     * @param orderByType
+     * @return
+     */
+	public static OrderByComparator getProjectOrderByComparator(String orderByCol, String orderByType) {
+
 		boolean orderByAsc = false;
-		
+
 		if (orderByType.equals("asc")) {
 			orderByAsc = true;
 		}
-		
+
 		OrderByComparator orderByComparator = null;
-		
+
 		if (orderByCol.equalsIgnoreCase("projectId")) {
-			
+
 			orderByComparator = new ProjectIdComparator(orderByAsc);
-		} 
+		}
 	    else if (orderByCol.equalsIgnoreCase("acronym")) {
 			// depends on project.getAcronym()
 			orderByComparator = new ProjectAcronymComparator(orderByAsc);
@@ -37,7 +48,46 @@ public class ProjectUtil {
 			// depends on measure.getControlstatus()
 			orderByComparator = new ProjectControlstatusComparator(orderByAsc);
 		}
-		
+
 		return orderByComparator;
+	}
+
+	/**
+	 *
+	 * @param project
+	 * @param transRegionUrl
+	 * @return
+	 */
+	public static boolean projectMatchesTransRegionUrl(Project project, String transRegionUrl){
+
+	    String spatialLayer = project.getSpatiallayer();
+	    if (StringUtils.isBlank(transRegionUrl) || StringUtils.isBlank(spatialLayer)){
+	        return false;
+	    }
+
+	    String urlTrailer = StringUtils.substringAfterLast(transRegionUrl, "/");
+	    String region = urlTrailer.replace('-', ' ').replace('_', ' ').toLowerCase();
+	    region = StringUtils.deleteWhitespace(region);
+
+	    spatialLayer = spatialLayer.replace('-', ' ').replace('_', ' ').toLowerCase();
+	    spatialLayer = StringUtils.deleteWhitespace(spatialLayer);
+
+	    return spatialLayer.contains(region);
+    }
+
+	/**
+	 *
+	 * @param str
+	 * @param length
+	 * @return
+	 */
+	public static String truncateWithDots(String str, int length){
+
+	    if (str != null && str.length() > length){
+	        return str.substring(0, length) + DOTS;
+	    }
+	    else{
+	        return str;
+	    }
 	}
 }
