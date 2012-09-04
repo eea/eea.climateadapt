@@ -54,13 +54,12 @@ public class ProjectUtil {
 
 	/**
 	 *
-	 * @param project
+	 * @param spatialLayer
 	 * @param transRegionUrl
 	 * @return
 	 */
-	public static boolean projectMatchesTransRegionUrl(Project project, String transRegionUrl){
+	public static boolean spatialLayerMatchesTransRegionUrl(String spatialLayer, String transRegionUrl){
 
-	    String spatialLayer = project.getSpatiallayer();
 	    if (StringUtils.isBlank(transRegionUrl) || StringUtils.isBlank(spatialLayer)){
 	        return false;
 	    }

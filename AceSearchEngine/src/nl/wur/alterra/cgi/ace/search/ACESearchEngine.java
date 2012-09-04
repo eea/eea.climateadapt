@@ -51,7 +51,7 @@ public class ACESearchEngine {
         String[] sectors ;
         String[] sortBys ;
         String[] datainfo_type;
-        
+
         // is sortitemtype exist use that one !!
         aceItemTypes = searchParams.get(SearchRequestParams.SORTITEM_TYPE);
 
@@ -59,10 +59,10 @@ public class ACESearchEngine {
 
             aceItemTypes = searchParams.get(SearchRequestParams.ACEITEM_TYPE);
         }
-        
+
         datainfo_type = searchParams.get(SearchRequestParams.DATAINFO_TYPE);
         if(datainfo_type==null || datainfo_type.length==0) {
-        	
+
         	datainfo_type = new String[1];
         	datainfo_type[0] = "2";
         }
@@ -98,7 +98,7 @@ public class ACESearchEngine {
         if(sortBys != null && sortBys.length > 0) {
             sortBy = sortBys[0];
         }
-        
+
         String fuzzinessVal = defaultFuzziness;
         if(fuzziness != null) {
             fuzzinessVal = fuzziness;
@@ -114,7 +114,7 @@ public class ACESearchEngine {
         formBean.setImpact(impacts);
         formBean.setSector(sectors);
         formBean.setSortBy(sortBy);
-        
+
         formBean.setFuzziness(fuzzinessVal);
 
 		if(isEmpty(anyOfThese)) {
@@ -221,7 +221,7 @@ public class ACESearchEngine {
      * @return results results
      * @throws ACELuceneException hmm
      */
-    protected List<AceItemSearchResult> searchLuceneByType(AceSearchFormBean formBean, String aceItemType) throws Exception {
+    public List<AceItemSearchResult> searchLuceneByType(AceSearchFormBean formBean, String aceItemType) throws Exception {
         try {
             //
             // handle free text input
@@ -252,7 +252,7 @@ public class ACESearchEngine {
                 rawQuery = ACEIndexConstant.IndexField.DATATYPE + ":" + aceItemType;
             }
 
-            rawQuery += " AND ( (" + ACEIndexConstant.IndexField.CONTROLSTATUS + ":1) OR (" 
+            rawQuery += " AND ( (" + ACEIndexConstant.IndexField.CONTROLSTATUS + ":1) OR ("
             + ACEIndexConstant.IndexField.CONTROLSTATUS + ":2) )";
 
             //
@@ -348,19 +348,19 @@ public class ACESearchEngine {
                 String aceItemId = document.get(ACEIndexConstant.IndexField.ACEITEM_ID);
                 if(aceItemId != null) {
 
-                    aceItem = AceItemLocalServiceUtil.getAceItem(Long.parseLong(aceItemId));  
-                    aceItem.setAceItemId(Long.parseLong(aceItemId));                  
-	
+                    aceItem = AceItemLocalServiceUtil.getAceItem(Long.parseLong(aceItemId));
+                    aceItem.setAceItemId(Long.parseLong(aceItemId));
+
 	                // relevance expressed as a percentage
 	                float relevance = hit.score * normalizeScoreFactor * 100;
-	                
+
 	                // System.out.println("hit.score is: " + hit.score);
 	                // System.out.println("relevance (0.0) is: " + relevance);
-	
-	
+
+
 	                AceItemSearchResult aceItemSearchResult = new AceItemSearchResult(aceItem);
 	                aceItemSearchResult.setRelevance(relevance);
-	
+
 	                results.add(aceItemSearchResult);
                 }
             }
