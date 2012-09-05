@@ -64,6 +64,7 @@ public class ProjectUtil {
 	        return false;
 	    }
 
+	    transRegionUrl = StringUtils.substringBefore(transRegionUrl, "?");
 	    String urlTrailer = StringUtils.substringAfterLast(transRegionUrl, "/");
 	    String region = urlTrailer.replace('-', ' ').replace('_', ' ').toLowerCase();
 	    region = StringUtils.deleteWhitespace(region);
