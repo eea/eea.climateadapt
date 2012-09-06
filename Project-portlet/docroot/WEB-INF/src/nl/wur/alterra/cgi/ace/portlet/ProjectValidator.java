@@ -35,7 +35,7 @@ public class ProjectValidator {
 			// hack optimistic locking!!!  check Approvaldate and then always set to null
 			if(dbproject != null){
 			    long creationDate = dbproject.getCreationdate() == null ? 0 : dbproject.getCreationdate().getTime();
-			    long approvalDate = dbproject.getApprovaldate() == null ? 0 : dbproject.getApprovaldate().getTime();
+			    long approvalDate = project.getApprovaldate() == null ? 0 : project.getApprovaldate().getTime();
 			    if (creationDate != approvalDate)  {
 			        errors.add("project-change");
 			        valid = false;

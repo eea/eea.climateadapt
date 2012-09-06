@@ -34,7 +34,7 @@ public class MeasureValidator {
 			// hack optimistic locking!!!  check Approvaldate and then always set to null
 			if(dbmeasure != null){
                 long creationDate = dbmeasure.getCreationdate() == null ? 0 : dbmeasure.getCreationdate().getTime();
-                long approvalDate = dbmeasure.getApprovaldate() == null ? 0 : dbmeasure.getApprovaldate().getTime();
+                long approvalDate = measure.getApprovaldate() == null ? 0 : measure.getApprovaldate().getTime();
                 if (creationDate != approvalDate)  {
                     errors.add("measure-changed");
                     valid = false;
