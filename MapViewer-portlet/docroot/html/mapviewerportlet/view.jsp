@@ -99,7 +99,7 @@ if (mapviewerappid == null || mapviewerappid.length() == 0) {
 				       	String url = digitaltransferoption.getUrl();
 				       	String urlUpperCase = url == null ? "" : url.toUpperCase();
 
-				       	if (protocolUpperCase.indexOf("WMS") > 0 || urlUpperCase.indexOf("SERVICE=WMS") > 0) {
+				       	if (protocolUpperCase.indexOf("WMS") >= 0 || urlUpperCase.indexOf("SERVICE=WMS") >= 0) {
 
 							String javascript = "var layer = new OpenLayers.Layer.WMS('"
 								+ cswrecord.getTitle();
