@@ -1,10 +1,6 @@
 package nl.wur.alterra.cgi.ace.portlet;
 
-import org.apache.commons.lang.StringEscapeUtils;
 import org.apache.commons.lang.StringUtils;
-
-import nl.wur.alterra.cgi.ace.model.Project;
-
 import com.liferay.portal.kernel.util.OrderByComparator;
 
 /**

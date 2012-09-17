@@ -25,6 +25,8 @@
 
 <%
 int pageSize = 3;
+int pageBarSize = 5;
+int pageBarHalf = 2;
 
 List<Project> regionProjects = (List<Project>) request.getAttribute(TransRegionProjectsPortlet.REGION_PROJECTS);
 int projectsTotal = regionProjects==null ? 0 : regionProjects.size();
@@ -38,20 +40,27 @@ int orgPages = Double.valueOf(Math.ceil((double)organisationsTotal / (double)pag
 int orgPage = NumberUtils.toInt(request.getParameter("orgPage"), 1);
 orgPage = Math.min(Math.max(orgPage, 1), orgPages);
 
-//Get the wished page of projects.
+// Get the wished page of projects.
 if (prjPages > 1){
     int fromIndex = (prjPage-1) * pageSize;
     int toIndex = Math.min(fromIndex + pageSize, projectsTotal);
     regionProjects = regionProjects.subList(fromIndex, toIndex);
 }
 
-//Get the wished page of organisations.
+// Get the wished page of organisations.
 if (orgPages > 1){
     int fromIndex = (orgPage-1) * pageSize;
     int toIndex = Math.min(fromIndex + pageSize, organisationsTotal);
     regionOrganisations = regionOrganisations.subList(fromIndex, toIndex);
 }
 
+// Calculate the first and last page number to display on paging bar.
+int prjFirstPageNo = Math.max(Math.min(prjPage - pageBarHalf, prjPages - (pageBarSize - 1)), 1);
+int prjLastPageNo = Math.min(prjFirstPageNo + pageBarSize - 1, prjPages);
+int orgFirstPageNo = Math.max(Math.min(orgPage - pageBarHalf, orgPages - (pageBarSize - 1)), 1);
+int orgLastPageNo = Math.min(orgFirstPageNo + pageBarSize - 1, orgPages);
+
+// Set the flag indicating if user can add new projects/organisations
 boolean canAddNew = renderRequest.isUserInRole("Portal Content Reviewer") ||
 renderRequest.isUserInRole("administrator") || renderRequest.isUserInRole("power-user") || renderRequest.isUserInRole("Writer");
 %>
@@ -73,6 +82,20 @@ renderRequest.isUserInRole("administrator") || renderRequest.isUserInRole("power
     <portlet:param name="prjPage" value="<%=String.valueOf(prjPage)%>"/>
 </portlet:renderURL>
 
+<portlet:renderURL var="pageLinkTempl">
+ <portlet:param name="prjPage" value="<%=String.valueOf(prjPage)%>"/>
+ <portlet:param name="orgPage" value="<%=String.valueOf(orgPage)%>"/>
+</portlet:renderURL>
+
+<%-- Hide the entire portlet if no results to display. --%>
+<%
+if (projectsTotal == 0 && organisationsTotal == 0){ %>
+	<script type="text/javascript">
+	    document.getElementById("column-3").style.display = "none";
+	</script><%
+}
+else{ %>
+
 <div style="width:250px">
 
     <div>
@@ -91,15 +114,43 @@ renderRequest.isUserInRole("administrator") || renderRequest.isUserInRole("power
                 %>
             </ul>
             <%
-            if (prjPages > 1){
-                String prevHref = prjPage > 1 ? prevProjectsLink : "javascript:;";
-                String prevStyle = prjPage > 1 ? "" : "style=\"text-decoration:none;\"";
-
-                String nextHref = prjPage < prjPages ? nextProjectsLink : "javascript:;";
-                String nextStyle = prjPage < prjPages ? "" : "style=\"text-decoration:none;\"";
-                %>
+            if (prjPages > 1){ %>
                 <div style="text-align:right">
-                    <a href="<%=prevHref%>" class="prevnext" <%=prevStyle%>>prev</a>&nbsp;|&nbsp;<a href="<%=nextHref%>" class="prevnext" <%=nextStyle%>>next</a>
+                    <%
+                    if (prjPage == 1){ %>
+                        <span class="currPageNum">&lt;</span><%
+                    } else{ %>
+                        <a href="<%=prevProjectsLink%>" class="pageNum">&lt;</a><%
+                    }
+
+                    if (prjFirstPageNo > 1){ %>
+                        &nbsp;<a href="<%=pageLinkTempl.replace("prjPage=" + prjPage, "prjPage=1")%>" class="pageNum">1</a><%
+                    }
+
+                    if (prjFirstPageNo > 2){ %>
+                        <span style="font-weight:bold">&nbsp;...</span><%
+                    }
+
+                    for (int i=prjFirstPageNo; i<=prjLastPageNo; i++){
+                        if (i == prjPage){ %>
+                            &nbsp;<span class="currPageNum"><%=i%></span><%
+                        } else { %>
+                            &nbsp;<a href="<%=pageLinkTempl.replace("prjPage=" + prjPage, "prjPage=" + i)%>" class="pageNum"><%=i%></a><%
+                        }
+                    }
+
+                    if (prjLastPageNo < prjPages-1){ %>
+                        <span style="font-weight:bold">&nbsp;...</span><%
+                    }
+                    if (prjLastPageNo < prjPages) { %>
+                        &nbsp;<a href="<%=pageLinkTempl.replace("prjPage=" + prjPage, "prjPage=" + prjPages)%>" class="pageNum"><%=prjPages%></a><%
+                    }
+
+                    if (prjPage == prjPages){ %>
+                        &nbsp;<span class="currPageNum">&gt;</span><%
+                    } else{ %>
+                        &nbsp;<a href="<%=nextProjectsLink%>" class="pageNum">&gt;</a><%
+                    } %>
                 </div><%
             }
         }
@@ -121,20 +172,50 @@ renderRequest.isUserInRole("administrator") || renderRequest.isUserInRole("power
                 %>
             </ul>
             <%
-            if (orgPages > 1){
-                String prevHref = orgPage > 1 ? prevOrganisationsLink : "javascript:;";
-                String prevStyle = orgPage > 1 ? "" : "style=\"text-decoration:none;\"";
-
-                String nextHref = orgPage < orgPages ? nextOrganisationsLink : "javascript:;";
-                String nextStyle = orgPage < orgPages ? "" : "style=\"text-decoration:none;\"";
-                %>
+            if (orgPages > 1){ %>
                 <div style="text-align:right">
-                    <a href="<%=prevHref%>" class="prevnext" <%=prevStyle%>>prev</a>&nbsp;|&nbsp;<a href="<%=nextHref%>" class="prevnext" <%=nextStyle%>>next</a>
+                    <%
+                    if (orgPage == 1){ %>
+                        <span class="currPageNum">&lt;</span><%
+                    } else{ %>
+                        <a href="<%=prevOrganisationsLink%>" class="pageNum">&lt;</a><%
+                    }
+
+                    if (orgFirstPageNo > 1){ %>
+                        &nbsp;<a href="<%=pageLinkTempl.replace("orgPage=" + orgPage, "orgPage=1")%>" class="pageNum">1</a><%
+                    }
+
+                    if (orgFirstPageNo > 2){ %>
+                        <span style="font-weight:bold">&nbsp;...</span><%
+                    }
+
+                    for (int i=orgFirstPageNo; i<=orgLastPageNo; i++){
+                        if (i == orgPage){ %>
+                            &nbsp;<span class="currPageNum"><%=i%></span><%
+                        } else { %>
+                            &nbsp;<a href="<%=pageLinkTempl.replace("orgPage=" + orgPage, "orgPage=" + i)%>" class="pageNum"><%=i%></a><%
+                        }
+                    }
+
+                    if (orgLastPageNo < orgPages-1){ %>
+                        <span style="font-weight:bold">&nbsp;...</span><%
+                    }
+                    if (orgLastPageNo < orgPages) { %>
+                        &nbsp;<a href="<%=pageLinkTempl.replace("orgPage=" + orgPage, "orgPage=" + orgPages)%>" class="pageNum"><%=orgPages%></a><%
+                    }
+
+                    if (orgPage == orgPages){ %>
+                        &nbsp;<span class="currPageNum">&gt;</span><%
+                    } else{ %>
+                        &nbsp;<a href="<%=nextOrganisationsLink%>" class="pageNum">&gt;</a><%
+                    } %>
                 </div><%
             }
         }
         %>
     </div>
-
 </div>
 <div style="clear: both"> </div>
+<%
+} // End of else of the if block that decides if to display the portlet at all.
+%>
