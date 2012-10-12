@@ -2451,8 +2451,9 @@
                             <!-- ETj
                             <a href="javascript:popInterMap('{/root/gui/url}/intermap/srv/{/root/gui/language}/map.addServicesExt?url={gmd:linkage/gmd:URL}&amp;service={gmd:name/gco:CharacterString|gmd:name/gmx:MimeFileType}&amp;type=2')" title="{/root/strings/interactiveMap}">
                             -->
-                            <a href="javascript:addWMSLayer([['{$name}','{$linkage}','{$name}','{$metadata_id}']])" title="{/root/strings/interactiveMap}">
-                                    <xsl:choose>
+
+                            <xsl:variable name="linkDesc">
+                                <xsl:choose>
                                     <xsl:when test="string($description)!=''">
                                         <xsl:value-of select="$description"/>
                                     </xsl:when>
@@ -2460,8 +2461,22 @@
                                         <xsl:value-of select="$name"/>
                                     </xsl:otherwise>
                                 </xsl:choose>
-                            </a>
+                            </xsl:variable>
 
+                            <xsl:choose>
+                                <!-- Don't add javascript code in metadata.show as map viewer not available -->
+                                <xsl:when test="/root/gui/reqService = 'metadata.show'">
+                                    <xsl:value-of select="$linkDesc" /> (OGC-WMS Server: <a href="{$linkage}" title="{/root/strings/interactiveMap}"><xsl:value-of select="$linkage" /></a>)
+                                </xsl:when>  
+
+                                <xsl:otherwise>
+                                    <a href="javascript:addWMSLayer([['{$name}','{$linkage}','{$name}','{$metadata_id}']])" title="{/root/strings/interactiveMap}">
+                                        <xsl:value-of select="$linkDesc" />
+                                    </a> <br/>(OGC-WMS Server: <xsl:value-of select="$linkage"/> )
+                                </xsl:otherwise>
+                            </xsl:choose>
+
+                            
                             <!--a href="javascript:runIM_addService('{$linkage}','{$name}',2)" title="{/root/strings/interactiveMap}">
                                 <xsl:choose>
                                     <xsl:when test="string($description)!=''">
@@ -2471,7 +2486,7 @@
                                         <xsl:value-of select="$name"/>
                                     </xsl:otherwise>
                                 </xsl:choose>
-                            </a--><br/>(OGC-WMS Server: <xsl:value-of select="$linkage"/> )
+                            </a-->
                         </xsl:with-param>
                     </xsl:apply-templates>
                     <!-- Create a link for a WMS service that will open in Google Earth through the reflector -->
@@ -2500,8 +2515,9 @@
                         <xsl:with-param name="schema"  select="$schema"/>
                         <xsl:with-param name="title"  select="/root/gui/strings/interactiveMap"/>
                         <xsl:with-param name="text">
-                            <a href="javascript:addWMSServerLayers('{$linkage}')" title="{/root/strings/interactiveMap}">
-                                <xsl:choose>
+
+                            <xsl:variable name="linkDesc">
+                                 <xsl:choose>
                                     <xsl:when test="string($description)!=''">
                                         <xsl:value-of select="$description"/>
                                     </xsl:when>
@@ -2509,7 +2525,21 @@
                                         <xsl:value-of select="/root/gui/strings/wmslayers"/>
                                     </xsl:otherwise>
                                 </xsl:choose>
-                            </a>
+                            </xsl:variable>
+
+                            <xsl:choose>
+                                <!-- Don't add javascript code in metadata.show as map viewer not available -->
+                                <xsl:when test="/root/gui/reqService = 'metadata.show'">
+                                    <xsl:value-of select="$linkDesc" /> (<a href="{$linkage}" title="{/root/strings/interactiveMap}"><xsl:value-of select="$linkage" /></a>)
+                                </xsl:when>  
+
+                                <xsl:otherwise>
+                                    <a href="javascript:addWMSServerLayers('{$linkage}')" title="{/root/strings/interactiveMap}">
+                                        <xsl:value-of select="$linkDesc" />
+                                    </a>
+                                </xsl:otherwise>
+                            </xsl:choose>
+
                         </xsl:with-param>
                     </xsl:apply-templates>
                 </xsl:when>
@@ -2538,7 +2568,8 @@
                         <xsl:with-param name="schema"  select="$schema"/>
                         <xsl:with-param name="title"  select="/root/gui/strings/interactiveMap"/>
                         <xsl:with-param name="text">
-                            <a href="javascript:addWMSServerLayers('{$linkage}')" title="{/root/strings/interactiveMap}">
+
+                            <xsl:variable name="linkDesc">
                                 <xsl:choose>
                                     <xsl:when test="string($description)!=''">
                                         <xsl:value-of select="$description"/>
@@ -2550,7 +2581,21 @@
                                         <xsl:value-of select="/root/gui/strings/wmslayers"/>
                                     </xsl:otherwise>
                                 </xsl:choose>
-                            </a>
+                            </xsl:variable>
+
+                            <xsl:choose>
+                                <!-- Don't add javascript code in metadata.show as map viewer not available -->
+                                <xsl:when test="/root/gui/reqService = 'metadata.show'">
+                                    <xsl:value-of select="$linkDesc" /> (<a href="{$linkage}" title="{/root/strings/interactiveMap}"><xsl:value-of select="$linkage" /></a>)
+                                </xsl:when>  
+
+                                <xsl:otherwise>
+                                    <a href="javascript:addWMSServerLayers('{$linkage}')" title="{/root/strings/interactiveMap}">
+                                        <xsl:value-of select="$linkDesc" />
+                                    </a>
+                                </xsl:otherwise>
+                            </xsl:choose>
+
                         </xsl:with-param>
                     </xsl:apply-templates>
                 </xsl:when>
@@ -2576,7 +2621,8 @@
                         <xsl:with-param name="schema"  select="$schema"/>
                         <xsl:with-param name="title"  select="/root/gui/strings/interactiveMap"/>
                         <xsl:with-param name="text">
-                            <a href="javascript:addWMSServerLayers('{$linkage}')" title="{/root/strings/interactiveMap}">
+
+                            <xsl:variable name="linkDesc">
                                 <xsl:choose>
                                     <xsl:when test="string($description)!=''">
                                         <xsl:value-of select="$description"/>
@@ -2588,7 +2634,21 @@
                                         <xsl:value-of select="/root/gui/strings/wmslayers"/>
                                     </xsl:otherwise>
                                 </xsl:choose>
-                            </a>
+                            </xsl:variable>
+
+                            <xsl:choose>
+                                <!-- Don't add javascript code in metadata.show as map viewer not available -->
+                                <xsl:when test="/root/gui/reqService = 'metadata.show'">
+                                    <xsl:value-of select="$linkDesc" /> (<a href="{$linkage}" title="{/root/strings/interactiveMap}"><xsl:value-of select="$linkage" /></a>)
+                                </xsl:when>  
+
+                                <xsl:otherwise>
+                                    <a href="javascript:addWMSServerLayers('{$linkage}')" title="{/root/strings/interactiveMap}">
+                                        <xsl:value-of select="$linkDesc" />
+                                    </a>
+                                </xsl:otherwise>
+                            </xsl:choose>
+                          
                         </xsl:with-param>
                     </xsl:apply-templates>
                 </xsl:when>
@@ -2618,8 +2678,9 @@
                         <xsl:with-param name="title"  select="/root/gui/strings/interactiveMap"/>
                         <xsl:with-param name="text">
     <!--	ETj					<a href="javascript:popInterMap('{/root/gui/url}/intermap/srv/{/root/gui/language}/map.addServicesExt?url={gmd:linkage/gmd:URL}&amp;service={gmd:name/gco:CharacterString|gmd:name/gmx:MimeFileType}&amp;type=1')" title="{/root/strings/interactiveMap}">
-    -->						<a href="javascript:addWMSServerLayers('{$linkage}')" title="{/root/strings/interactiveMap}">
-                                    <xsl:choose>
+    -->						
+                            <xsl:variable name="linkDesc">
+                                 <xsl:choose>
                                     <xsl:when test="string($description)!=''">
                                         <xsl:value-of select="$description"/>
                                     </xsl:when>
@@ -2627,7 +2688,21 @@
                                         <xsl:value-of select="$name"/>
                                     </xsl:otherwise>
                                 </xsl:choose>
-                            </a>
+                            </xsl:variable>
+
+                            <xsl:choose>
+                                <!-- Don't add javascript code in metadata.show as map viewer not available -->
+                                <xsl:when test="/root/gui/reqService = 'metadata.show'">
+                                    <xsl:value-of select="$linkDesc" /> (<a href="{$linkage}" title="{/root/strings/interactiveMap}"><xsl:value-of select="$linkage" /></a>)
+                                </xsl:when>  
+
+                                <xsl:otherwise>
+                                    <a href="javascript:addWMSServerLayers('{$linkage}')" title="{/root/strings/interactiveMap}">
+                                        <xsl:value-of select="$linkDesc" />
+                                    </a>
+                                </xsl:otherwise>
+                            </xsl:choose>
+                          
                         </xsl:with-param>
                     </xsl:apply-templates>
                 </xsl:when>
