@@ -31,6 +31,17 @@
 		    %>
 		    }
 
+		    function <portlet:namespace />initEditor() {
+                var editorValue = document.getElementById("<portlet:namespace />abstractsField").value;
+                return editorValue;
+            }
+
+            function saveData() {
+                var x = window.<portlet:namespace />editor.getHTML();
+                document.getElementById("<portlet:namespace />abstractsField").value = x;
+                return true;
+            }
+
 </script>
 <liferay-ui:header
 	backURL="<%= redirect %>"
@@ -75,7 +86,8 @@
 		<input name="website" type="text" size="120" value="<%= project == null ? "" : project.getWebsite() %>"><br /><br />
 
 		<b>abstract</b><br />
-		<textarea name="abstracts" rows=10 cols=100><%= project == null ? "" : project.getAbstracts() %></textarea><br /><br />
+		<liferay-ui:input-editor/>
+		<input id="<portlet:namespace />abstractsField" type="hidden" name="abstracts" value="<%= project==null ? "" : (project.getAbstracts()==null ? "" : project.getAbstracts()) %>"/><br /><br />
 
 		<b>partners</b><br />
 		<textarea name="partners" rows=5 cols=100><%= project == null ? "" : project.getPartners() %></textarea><br /><br />
@@ -218,7 +230,7 @@
 	<br />
 
 	<aui:button-row>
-		<aui:button type="submit" />
+		<aui:button type="submit" onClick="return saveData();"/>
 
 		<aui:button type="cancel"  onClick="history.go(-1);" /> <!-- onClick="< %= redirect % >" -->
 	</aui:button-row>

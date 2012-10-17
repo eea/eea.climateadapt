@@ -34,6 +34,17 @@
 		    %>
 		    }
 
+		    function <portlet:namespace />initEditor() {
+                var editorValue = document.getElementById("<portlet:namespace />descriptionField").value;
+                return editorValue;
+            }
+
+            function saveData() {
+                var x = window.<portlet:namespace />editor.getHTML();
+                document.getElementById("<portlet:namespace />descriptionField").value = x;
+                return true;
+            }
+
 </script>
 
 <liferay-ui:header
@@ -115,8 +126,11 @@
 		</td>
 	    </tr></table>
 
-		<b>description</b><br />
-		<textarea name="description" rows=10 cols=100><%= aceitem == null ? "" : aceitem.getDescription() %></textarea><br /><br />
+		<br/>
+        <b>description</b><br />
+        <liferay-ui:input-editor/>
+        <input id="<portlet:namespace />descriptionField" type="hidden" name="description" value="<%= aceitem==null ? "" : (aceitem.getDescription()==null ? "" : aceitem.getDescription()) %>"/>
+        <br/>
 
         <b>keywords</b><br />
 		<textarea name="keyword" rows=5 cols=100><%= aceitem == null ? "" : aceitem.getKeyword() %></textarea><br /><br />
@@ -257,7 +271,7 @@
 	<b>Edited by: <% if (aceitem != null) { out.print( aceitem.getModerator() ) ; } %> </b>
 	<br /><br />
 	<aui:button-row>
-		<aui:button type="submit" />
+		<aui:button type="submit" onClick="return saveData();"/>
 
 		<aui:button type="cancel"  onClick="history.go(-1);" /> <!-- onClick="< %= redirect % >" -->
 	</aui:button-row>
