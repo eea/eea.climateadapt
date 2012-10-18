@@ -137,7 +137,9 @@ public class ProjectPortlet extends ProjectUpdateHelper {
                     }
 
                     ProjectLocalServiceUtil.updateProject(project);
-                    updateAceItem(project, aceitem);
+                    if (aceitem != null){
+                        updateAceItem(project, aceitem);
+                    }
                 }
 
                 SessionMessages.add(request, "project-updated");

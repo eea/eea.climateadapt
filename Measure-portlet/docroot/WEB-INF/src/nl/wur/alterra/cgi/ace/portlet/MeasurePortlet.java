@@ -135,7 +135,9 @@ public class MeasurePortlet extends MeasureUpdateHelper {
                     }
 
                     MeasureLocalServiceUtil.updateMeasure(measure);
-                    updateAceItem(measure, aceitem);
+                    if (aceitem != null){
+                        updateAceItem(measure, aceitem);
+                    }
                 }
 
                 SessionMessages.add(request, "measure-updated");
