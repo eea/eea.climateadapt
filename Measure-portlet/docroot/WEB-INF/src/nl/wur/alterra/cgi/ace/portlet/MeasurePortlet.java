@@ -1,5 +1,6 @@
 package nl.wur.alterra.cgi.ace.portlet;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.HashSet;
@@ -35,10 +36,26 @@ public class MeasurePortlet extends MeasureUpdateHelper {
     public static final String SUBMITTED_MEASURE_ID_PREFIX = "measure_";
 
     /**
+     * @param request
+     * @param response
+     */
+    public void addMeasure(ActionRequest request, ActionResponse response){
+        try {
+            doAddMeasure(request, response);
+        } catch (Exception e) {
+            e.printStackTrace();
+
+            SessionErrors.add(request, "measure-add-tech-error");
+            PortalUtil.copyRequestParameters(request, response);
+            response.setRenderParameter("jspPage", "/html/measure/edit_measure.jsp");
+        }
+    }
+
+    /**
      * Adds a new measure to the database
      *
      */
-    public void addMeasure(ActionRequest request, ActionResponse response) throws Exception {
+    private void doAddMeasure(ActionRequest request, ActionResponse response) throws Exception {
 
         Measure measure = new MeasureImpl();
 
@@ -72,9 +89,24 @@ public class MeasurePortlet extends MeasureUpdateHelper {
             for (String error : errors) {
                 SessionErrors.add(request, error);
             }
-
             PortalUtil.copyRequestParameters(request, response);
+            response.setRenderParameter("jspPage", "/html/measure/edit_measure.jsp");
+        }
+    }
 
+    /**
+     *
+     * @param request
+     * @param response
+     */
+    public void updateMeasure(ActionRequest request, ActionResponse response){
+        try {
+            doUpdateMeasure(request, response);
+        } catch (Exception e) {
+            e.printStackTrace();
+
+            SessionErrors.add(request, "measure-save-tech-error");
+            PortalUtil.copyRequestParameters(request, response);
             response.setRenderParameter("jspPage", "/html/measure/edit_measure.jsp");
         }
     }
@@ -83,7 +115,7 @@ public class MeasurePortlet extends MeasureUpdateHelper {
      * Updates the database record of an existing measure.
      *
      */
-    public void updateMeasure(ActionRequest request, ActionResponse response) throws Exception {
+    private void doUpdateMeasure(ActionRequest request, ActionResponse response) throws Exception {
 
         AceItem aceitem = null;
 
@@ -127,7 +159,9 @@ public class MeasurePortlet extends MeasureUpdateHelper {
                     if ((newapproved == ACEIndexUtil.Status_APPROVED) && measure.getReplacesId() != 0) {
                         // delete the old measure which gets replaced, update the corresponding aceitem
                         aceitem = AceItemLocalServiceUtil.getAceItemByStoredAt("ace_measure_id=" + measure.getReplacesId());
-                        aceitem.setStoredAt("ace_measure_id=" + measure.getMeasureId());
+                        if (aceitem != null){
+                            aceitem.setStoredAt("ace_measure_id=" + measure.getMeasureId());
+                        }
                         MeasureLocalServiceUtil.deleteMeasure(measure.getReplacesId());
                         measure.setReplacesId((long) 0);
                     } else {
@@ -152,9 +186,7 @@ public class MeasurePortlet extends MeasureUpdateHelper {
                 for (String error : errors) {
                     SessionErrors.add(request, error);
                 }
-
                 PortalUtil.copyRequestParameters(request, response);
-
                 response.setRenderParameter("jspPage", "/html/measure/edit_measure.jsp");
             }
         }
@@ -266,17 +298,21 @@ public class MeasurePortlet extends MeasureUpdateHelper {
             // Candidate gets deleted: the already approved measure becomes editable again.
             if (measure.getReplacesId() != 0) {
                 measure = MeasureLocalServiceUtil.getMeasure(measure.getReplacesId());
-                measure.setReplacesId((long) 0);
-                MeasureLocalServiceUtil.updateMeasure(measure);
+                if (measure != null){
+                    measure.setReplacesId((long) 0);
+                    MeasureLocalServiceUtil.updateMeasure(measure);
+                }
             } else {
                 // Get the associated ace-item
                 AceItem aceItem = AceItemLocalServiceUtil.getAceItemByStoredAt("ace_measure_id=" + measureId);
 
-                // Delete the ace-item index entry.
-                new ACEIndexSynchronizer().delete(aceItem);
+                if (aceItem != null){
+                    // Delete the ace-item index entry.
+                    new ACEIndexSynchronizer().delete(aceItem);
 
-                // Delete the ace-item.
-                AceItemLocalServiceUtil.deleteAceItem(aceItem.getAceItemId());
+                    // Delete the ace-item.
+                    AceItemLocalServiceUtil.deleteAceItem(aceItem.getAceItemId());
+                }
             }
 
             // Delete the measure by saved Id (measure itself may be the old one here).
@@ -334,9 +370,9 @@ public class MeasurePortlet extends MeasureUpdateHelper {
      *
      * @param actionRequest
      * @param actionResponse
-     * @throws Exception
+     * @throws IOException
      */
-    public void measuresFormSubmitted(ActionRequest actionRequest, ActionResponse actionResponse) throws Exception {
+    public void measuresFormSubmitted(ActionRequest actionRequest, ActionResponse actionResponse) throws IOException {
 
         String submitAction = actionRequest.getParameter("submitAction");
         if (StringUtils.isBlank(submitAction)) {
@@ -344,7 +380,12 @@ public class MeasurePortlet extends MeasureUpdateHelper {
         }
 
         if (submitAction.equals("delete")) {
-            deleteMeasures(actionRequest, actionResponse);
+            try {
+                deleteMeasures(actionRequest, actionResponse);
+            } catch (Exception e) {
+                e.printStackTrace();
+                SessionErrors.add(actionRequest, "measure-delete-tech-error");
+            }
         }
 
         sendRedirect(actionRequest, actionResponse);

@@ -22,6 +22,7 @@
 <liferay-ui:success key="project-updated" message="project-updated-successfully" />
 <liferay-ui:success key="project-deleted" message="project-deleted-successfully" />
 <liferay-ui:error key="none-selected" message="none-selected" />
+<liferay-ui:error key="project-delete-tech-error" message="project-delete-tech-error" />
 
 <%
     String redirectUrl = PortalUtil.getCurrentURL(renderRequest);

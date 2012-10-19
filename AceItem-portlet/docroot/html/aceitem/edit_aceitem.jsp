@@ -66,9 +66,14 @@
 
 		<aui:input type="hidden" name="wxsharvesterId" value='<%= aceitem == null ? "" : aceitem.getWxsharvesterId() %>'/>
 
-<% if (aceitem != null) { %>
+        <liferay-ui:error key="aceitem-add-tech-error" message="aceitem-add-tech-error" />
+        <liferay-ui:error key="aceitem-save-tech-error" message="aceitem-save-tech-error" />
+
+<% if (aceitem != null) {
+        long creationTime = aceitem.getCreationdate() == null ? 0 : aceitem.getCreationdate().getTime();
+        %>
 		<liferay-ui:error key="aceitem-changed" message="aceitem-changed" />
-		<aui:input type="hidden" name="checkcreationdate" value='<%= aceitem.getCreationdate().getTime() %>'/>
+		<aui:input type="hidden" name="checkcreationdate" value='<%= creationTime %>'/>
 <% } %>
 		<liferay-ui:error key="aceitemname-required" message="aceitemname-required" />
 		<b>item-name</b> <i>(required)</i><br />

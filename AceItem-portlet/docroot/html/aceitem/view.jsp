@@ -20,6 +20,7 @@
 <liferay-ui:success key="aceitem-updated" message="aceitem-updated-successfully" />
 <liferay-ui:success key="aceitem-deleted" message="aceitem-deleted-successfully" />
 <liferay-ui:error key="none-selected" message="none-selected" />
+<liferay-ui:error key="aceitem-delete-tech-error" message="aceitem-delete-tech-error" />
 
 <%
     String redirectUrl = PortalUtil.getCurrentURL(renderRequest);

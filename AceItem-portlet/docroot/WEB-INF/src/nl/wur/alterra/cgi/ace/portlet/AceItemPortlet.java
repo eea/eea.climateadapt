@@ -34,13 +34,29 @@ public class AceItemPortlet extends LuceneIndexUpdatePortlet {
     public static final String SUBMITTED_ACE_ITEM_ID_PREFIX = "aceitem_";
 
     /**
+     *
+     * @param request
+     * @param response
+     */
+    public void addAceItem(ActionRequest request, ActionResponse response) {
+        try {
+            doAddAceItem(request, response);
+        } catch (Exception e) {
+            e.printStackTrace();
+            SessionErrors.add(request, "aceitem-add-tech-error");
+            PortalUtil.copyRequestParameters(request, response);
+            response.setRenderParameter("jspPage", "/html/aceitem/edit_aceitem.jsp");
+        }
+    }
+
+    /**
      * Adds a new aceitem to the database.
      *
      * @param request
      * @param response
      * @throws Exception
      */
-    public void addAceItem(ActionRequest request, ActionResponse response) throws Exception {
+    private void doAddAceItem(ActionRequest request, ActionResponse response) throws Exception {
         AceItem aceitem = new AceItemImpl();
         aceitem.setAceItemId(ParamUtil.getLong(request, "aceItemId"));
         aceitemFromRequest(request, aceitem);
@@ -66,13 +82,29 @@ public class AceItemPortlet extends LuceneIndexUpdatePortlet {
     }
 
     /**
+     *
+     * @param request
+     * @param response
+     */
+    public void updateAceItem(ActionRequest request, ActionResponse response) {
+        try {
+            doUpdateAceItem(request, response);
+        } catch (Exception e) {
+            e.printStackTrace();
+            SessionErrors.add(request, "aceitem-save-tech-error");
+            PortalUtil.copyRequestParameters(request, response);
+            response.setRenderParameter("jspPage", "/html/aceitem/edit_aceitem.jsp");
+        }
+    }
+
+    /**
      * Updates the database record of an existing aceitem..
      *
      * @param request
      * @param response
      * @throws Exception
      */
-    public void updateAceItem(ActionRequest request, ActionResponse response) throws Exception {
+    private void doUpdateAceItem(ActionRequest request, ActionResponse response) throws Exception {
         AceItem aceitem = null;
 
         try {
@@ -112,7 +144,9 @@ public class AceItemPortlet extends LuceneIndexUpdatePortlet {
                     if ((newapproved == ACEIndexUtil.Status_APPROVED) && aceitem.getReplacesId() != 0) {
                         // delete the old aceitem which gets replaced
                         AceItem oldaceitem = AceItemLocalServiceUtil.getAceItem(aceitem.getReplacesId());
-                        new ACEIndexSynchronizer().delete(oldaceitem);
+                        if (oldaceitem != null){
+                            new ACEIndexSynchronizer().delete(oldaceitem);
+                        }
                         AceItemLocalServiceUtil.deleteAceItem(aceitem.getReplacesId());
                         aceitem.setReplacesId((long) 0);
                     }
@@ -209,8 +243,10 @@ public class AceItemPortlet extends LuceneIndexUpdatePortlet {
 
                 // Reset the already approved ace-item from the item that should be replaced.
                 aceitem = AceItemLocalServiceUtil.getAceItem(aceitem.getReplacesId());
-                aceitem.setReplacesId((long) 0);
-                AceItemLocalServiceUtil.updateAceItem(aceitem);
+                if (aceitem != null){
+                    aceitem.setReplacesId((long) 0);
+                    AceItemLocalServiceUtil.updateAceItem(aceitem);
+                }
             }
 
             // Delete the ace-item by saved id (ace-item itself may be the old one here).
@@ -257,7 +293,12 @@ public class AceItemPortlet extends LuceneIndexUpdatePortlet {
         }
 
         if (submitAction.equals("delete")) {
-            deleteAceItems(actionRequest, actionResponse);
+            try {
+                deleteAceItems(actionRequest, actionResponse);
+            } catch (Exception e) {
+                e.printStackTrace();
+                SessionErrors.add(actionRequest, "aceitem-delete-tech-error");
+            }
         }
 
         sendRedirect(actionRequest, actionResponse);

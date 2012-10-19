@@ -36,10 +36,28 @@ public class ProjectPortlet extends ProjectUpdateHelper {
     public static final String SUBMITTED_PROJECT_ID_PREFIX = "project_";
 
     /**
+     *
+     * @param request
+     * @param response
+     */
+    public void addProject(ActionRequest request, ActionResponse response) {
+
+        try {
+            doAddProject(request, response);
+        } catch (Exception e) {
+            e.printStackTrace();
+
+            SessionErrors.add(request, "project-add-tech-error");
+            PortalUtil.copyRequestParameters(request, response);
+            response.setRenderParameter("jspPage", "/html/project/edit_project.jsp");
+        }
+    }
+
+    /**
      * Adds a new project to the database
      *
      */
-    public void addProject(ActionRequest request, ActionResponse response) throws Exception {
+    private void doAddProject(ActionRequest request, ActionResponse response) throws Exception {
 
         Project project = new ProjectImpl();
 
@@ -82,10 +100,27 @@ public class ProjectPortlet extends ProjectUpdateHelper {
     }
 
     /**
+     *
+     * @param request
+     * @param response
+     */
+    public void updateProject(ActionRequest request, ActionResponse response) {
+        try {
+            doUpdateProject(request, response);
+        } catch (Exception e) {
+            e.printStackTrace();
+
+            SessionErrors.add(request, "project-save-tech-error");
+            PortalUtil.copyRequestParameters(request, response);
+            response.setRenderParameter("jspPage", "/html/project/edit_project.jsp");
+        }
+    }
+
+    /**
      * Updates the database record of an existing project.
      *
      */
-    public void updateProject(ActionRequest request, ActionResponse response) throws Exception {
+    private void doUpdateProject(ActionRequest request, ActionResponse response) throws Exception {
 
         AceItem aceitem = null;
 
@@ -107,7 +142,8 @@ public class ProjectPortlet extends ProjectUpdateHelper {
                 newapproved = Short.parseShort(approved);
             }
             if ((oldapproved == ACEIndexUtil.Status_APPROVED) && (newapproved != ACEIndexUtil.Status_APPROVED)) {
-                // The old record stays untouched, only replacesId gets filled (from now no edit or delete possible anymore)
+                // The old record stays untouched, only replacesId gets filled
+                // (from now no edit or delete possible anymore)
                 project.setReplacesId(project.getProjectId());
                 // Must be done BEFORE projectFromRequest();
                 ProjectLocalServiceUtil.updateProject(project);
@@ -120,16 +156,20 @@ public class ProjectPortlet extends ProjectUpdateHelper {
             if (ProjectValidator.validateProject(project, errors)) {
 
                 if ((oldapproved == ACEIndexUtil.Status_APPROVED) && (newapproved != ACEIndexUtil.Status_APPROVED)) {
-                    // The changed item gets added as a copy with replacesId filled (is already done above)
+                    // The changed item gets added as a copy with replacesId
+                    // filled (is already done above)
                     // save the new copy: simple addProject
                     ProjectLocalServiceUtil.addProject(project);
                     // automatically gets a new projectid;
                 } else {
 
                     if ((newapproved == ACEIndexUtil.Status_APPROVED) && project.getReplacesId() != 0) {
-                        // delete the old project which gets replaced, update the corresponding aceitem
+                        // delete the old project which gets replaced, update
+                        // the corresponding aceitem
                         aceitem = AceItemLocalServiceUtil.getAceItemByStoredAt("ace_project_id=" + project.getReplacesId());
-                        aceitem.setStoredAt("ace_project_id=" + project.getProjectId());
+                        if (aceitem != null){
+                            aceitem.setStoredAt("ace_project_id=" + project.getProjectId());
+                        }
                         ProjectLocalServiceUtil.deleteProject(project.getReplacesId());
                         project.setReplacesId((long) 0);
                     } else {
@@ -137,7 +177,7 @@ public class ProjectPortlet extends ProjectUpdateHelper {
                     }
 
                     ProjectLocalServiceUtil.updateProject(project);
-                    if (aceitem != null){
+                    if (aceitem != null) {
                         updateAceItem(project, aceitem);
                     }
                 }
@@ -163,7 +203,8 @@ public class ProjectPortlet extends ProjectUpdateHelper {
     }
 
     /**
-     * Sets the preferences for how many projects can be viewed per page and the format for the phone number
+     * Sets the preferences for how many projects can be viewed per page and the
+     * format for the phone number
      *
      */
     public void setProjectPref(ActionRequest request, ActionResponse response) throws Exception {
@@ -205,24 +246,29 @@ public class ProjectPortlet extends ProjectUpdateHelper {
         // If project object found.
         if (project != null) {
 
-            // Candidate gets deleted: the already approved project gets editable again.
+            // Candidate gets deleted: the already approved project gets
+            // editable again.
             if (project.getReplacesId() != 0) {
 
                 project = ProjectLocalServiceUtil.getProject(project.getReplacesId());
-                project.setReplacesId((long) 0);
-                ProjectLocalServiceUtil.updateProject(project);
+                if (project != null){
+                    project.setReplacesId((long) 0);
+                    ProjectLocalServiceUtil.updateProject(project);
+                }
             } else {
                 // Get the associated ace-item.
                 AceItem aceitem = AceItemLocalServiceUtil.getAceItemByStoredAt("ace_project_id=" + projectId);
 
-                // Delete the ace-item index entry.
-                new ACEIndexSynchronizer().delete(aceitem);
-
-                // Delete the ace-item.
-                AceItemLocalServiceUtil.deleteAceItem(aceitem.getAceItemId());
+                if (aceitem != null){
+                    // Delete the ace-item index entry.
+                    new ACEIndexSynchronizer().delete(aceitem);
+                    // Delete the ace-item.
+                    AceItemLocalServiceUtil.deleteAceItem(aceitem.getAceItemId());
+                }
             }
 
-            // Delete the project by saved Id (project itself may be the old one here).
+            // Delete the project by saved Id (project itself may be the old one
+            // here).
             ProjectLocalServiceUtil.deleteProject(projectId);
 
             SessionMessages.add(actionRequest, "project-deleted");
@@ -236,8 +282,7 @@ public class ProjectPortlet extends ProjectUpdateHelper {
      * @throws PortalException
      * @throws SystemException
      */
-    private void deleteProjects(ActionRequest actionRequest, ActionResponse actionResponse) throws PortalException,
-            SystemException {
+    private void deleteProjects(ActionRequest actionRequest, ActionResponse actionResponse) throws PortalException, SystemException {
 
         HashSet<Long> projectIds = getSubmittedProjectIds(actionRequest);
         if (projectIds.isEmpty()) {
@@ -288,7 +333,12 @@ public class ProjectPortlet extends ProjectUpdateHelper {
         }
 
         if (submitAction.equals("delete")) {
-            deleteProjects(actionRequest, actionResponse);
+            try {
+                deleteProjects(actionRequest, actionResponse);
+            } catch (Exception e) {
+                e.printStackTrace();
+                SessionErrors.add(actionRequest, "project-delete-tech-error");
+            }
         }
 
         sendRedirect(actionRequest, actionResponse);

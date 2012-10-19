@@ -61,6 +61,9 @@
 
 		<aui:input type="hidden" name="projectId" value='<%= project == null ? "" : project.getProjectId() %>'/>
 
+        <liferay-ui:error key="project-add-tech-error" message="project-add-tech-error" />
+        <liferay-ui:error key="project-save-tech-error" message="project-save-tech-error" />
+
 <% if (project != null) {
         long creationTime = project.getCreationdate() == null ? 0 : project.getCreationdate().getTime();
         %>

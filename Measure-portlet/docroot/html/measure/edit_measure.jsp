@@ -75,6 +75,9 @@
 
 		<aui:input type="hidden" name="measureId" value='<%= measure == null ? "" : measure.getMeasureId() %>'/>
 
+		<liferay-ui:error key="measure-add-tech-error" message="measure-add-tech-error" />
+		<liferay-ui:error key="measure-save-tech-error" message="measure-save-tech-error" />
+
 <% if (measure != null) {
         long creationTime = measure.getCreationdate() == null ? 0 : measure.getCreationdate().getTime();
         %>

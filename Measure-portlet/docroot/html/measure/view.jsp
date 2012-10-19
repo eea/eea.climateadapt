@@ -20,6 +20,7 @@
 <liferay-ui:success key="measure-updated" message="measure-updated-successfully" />
 <liferay-ui:success key="measure-deleted" message="measure-deleted-successfully" />
 <liferay-ui:error key="none-selected" message="none-selected" />
+<liferay-ui:error key="measure-delete-tech-error" message="measure-delete-tech-error" />
 
 <%
     String redirectUrl = PortalUtil.getCurrentURL(renderRequest);
