@@ -86,10 +86,10 @@
 <% } %>
 		<liferay-ui:error key="measurename-required" message="measurename-required" />
 		<b>item-name</b> <i>(required)</i><br />
-		<input name="name" type="text" size="120" value="<%= measure == null ? "" : measure.getName() %>"><br /><br />
+		<input name="name" type="text" size="120" maxlength="255" value="<%= measure == null ? "" : measure.getName() %>"><br /><br />
 
 		<b>website</b><br />
-		<input name="website" type="text" size="120" value="<%= measure == null ? "" : measure.getWebsite() %>"><br /><br />
+		<input name="website" type="text" size="120" maxlength="1024" value="<%= measure == null ? "" : measure.getWebsite() %>"><br /><br />
 
 	 <div style="float: left; margin-right: 35px;">
 
@@ -217,13 +217,13 @@
 		<aui:input name="lifetime" />
 
 		<b>Source</b><br />
-		<input name="source" type="text" size="65" value='<%= measure == null ? "" : measure.getSource() %>'><br /><br />
+		<input name="source" type="text" size="65" maxlength="75" value='<%= measure == null ? "" : measure.getSource() %>'><br /><br />
 
 		<b>special tagging</b><br />
 		<input name="specialtagging" type="text" size="65" maxlength="75" value="<%= measure == null ? "" : measure.getSpecialtagging() %>"><br /><br />
 
 		<b>Geographic characterisation</b><br />
-		<input name="spatiallayer" type="text" size="65" value='<%= measure == null ? "" : measure.getSpatiallayer() %>'><br /><br />
+		<input name="spatiallayer" type="text" size="65" maxlength="75" value='<%= measure == null ? "" : measure.getSpatiallayer() %>'><br /><br />
 
 <%
 		String m_checked = "";
@@ -266,7 +266,7 @@
 		<a onclick="handleClick(event)">Apply</a><br /><br />
 
 		<b>bio-geographical region</b><br />
-		<input name="satarea" id="satarea" type="text" size="50" value='<%= measure == null ? "" : measure.getSatarea() %>'>
+		<input name="satarea" id="satarea" type="text" size="50" maxlength="254" value='<%= measure == null ? "" : measure.getSatarea() %>'>
 	  </div>
 
 	 </div>
