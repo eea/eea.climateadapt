@@ -357,9 +357,9 @@ public abstract class MeasureUpdateHelper extends MVCPortlet {
       	// send second email to contributor
     	InternetAddress[] contributorAddress = new InternetAddress[1];
     	contributorAddress[0] = new InternetAddress(useremail);
-    	subject = "Your contribution to Climate-Adapt" ; 
-    	body = "Thank you for your contribution to Climate-Adapt regarding '" + measure.getName() + "'.\n\n" ; 
-    	body += "Your contribution will be reviewed and handled by the website moderators." ; 
+    	subject = "Your submission to Climate-ADAPT" ; 
+    	body = "You have successfully submitted information to Climate-ADAPT regarding '" + measure.getName() + "'.\n" ; 
+    	body += "This material will be reviewed prior to publication. We thank you for your interest in Climate-ADAPT." ; 
     	MailEngine.send(fromInternetAddress, contributorAddress, null, null, subject, body, false, null, null, null);
       }
         catch (Exception e) {

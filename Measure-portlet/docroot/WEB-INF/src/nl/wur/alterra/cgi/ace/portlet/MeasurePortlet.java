@@ -11,6 +11,7 @@ import javax.portlet.PortletPreferences;
 
 import nl.wur.alterra.cgi.ace.model.AceItem;
 import nl.wur.alterra.cgi.ace.model.Measure;
+import nl.wur.alterra.cgi.ace.model.constants.AceItemType;
 import nl.wur.alterra.cgi.ace.model.impl.AceItemImpl;
 import nl.wur.alterra.cgi.ace.model.impl.MeasureImpl;
 import nl.wur.alterra.cgi.ace.search.lucene.ACEIndexSynchronizer;
@@ -52,6 +53,21 @@ public class MeasurePortlet extends MeasureUpdateHelper {
     }
 
     /**
+     * Adds an aceitem to the database for the measure 
+     *
+     */
+    private AceItem createAceItemInsideDB (Measure measure) throws Exception {
+    	AceItem aceitem = new AceItemImpl();
+        //aceitem.setAceItemId(ParamUtil.getLong(request, "aceItemId"));
+        aceitem.setCompanyId(measure.getCompanyId());
+        aceitem.setGroupId(measure.getGroupId());
+        aceitem.setStoredAt("ace_measure_id=" + measure.getMeasureId());
+        aceitem.setStoragetype("MEASURE");
+        AceItemLocalServiceUtil.addAceItem(aceitem); 
+    	return aceitem;
+    }
+   
+    /**
      * Adds a new measure to the database
      *
      */
@@ -68,13 +84,7 @@ public class MeasurePortlet extends MeasureUpdateHelper {
             MeasureLocalServiceUtil.addMeasure(measure);
 
             // create an AceItem for this measure
-            AceItem aceitem = new AceItemImpl();
-            aceitem.setAceItemId(ParamUtil.getLong(request, "aceItemId"));
-            aceitem.setCompanyId(measure.getCompanyId());
-            aceitem.setGroupId(measure.getGroupId());
-            aceitem.setStoredAt("ace_measure_id=" + measure.getMeasureId());
-            aceitem.setStoragetype("MEASURE");
-            AceItemLocalServiceUtil.addAceItem(aceitem);
+            AceItem aceitem = createAceItemInsideDB(measure);
             updateAceItem(measure, aceitem);
 
             SessionMessages.add(request, "measure-added");
@@ -159,13 +169,17 @@ public class MeasurePortlet extends MeasureUpdateHelper {
                     if ((newapproved == ACEIndexUtil.Status_APPROVED) && measure.getReplacesId() != 0) {
                         // delete the old measure which gets replaced, update the corresponding aceitem
                         aceitem = AceItemLocalServiceUtil.getAceItemByStoredAt("ace_measure_id=" + measure.getReplacesId());
-                        if (aceitem != null){
-                            aceitem.setStoredAt("ace_measure_id=" + measure.getMeasureId());
+                        if (aceitem == null){
+                            aceitem = createAceItemInsideDB(measure);
                         }
+                        aceitem.setStoredAt("ace_measure_id=" + measure.getMeasureId());
                         MeasureLocalServiceUtil.deleteMeasure(measure.getReplacesId());
                         measure.setReplacesId((long) 0);
                     } else {
                         aceitem = AceItemLocalServiceUtil.getAceItemByStoredAt("ace_measure_id=" + measure.getMeasureId());
+                        if (aceitem == null){
+                            aceitem = createAceItemInsideDB(measure);
+                        }                        
                     }
 
                     MeasureLocalServiceUtil.updateMeasure(measure);
