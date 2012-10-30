@@ -114,11 +114,11 @@
 <% } %>
 		<liferay-ui:error key="aceitemname-required" message="aceitemname-required" />
 		<b>item-name</b> <i>(required)</i><br />	
-		<input name="name" type="text" size="120" value='<%= aceitem == null ? "" : aceitem.getName() %>'><br /><br />
+		<input name="name" type="text" size="120" maxlength="255" value='<%= aceitem == null ? "" : aceitem.getName() %>'><br /><br />
 		
 		<liferay-ui:error key="aceitemstoredat-required" message="aceitemstoredat-required" />
 		<b>website</b> <i>(required)</i><br />	
-		<input name="storedAt" type="text" size="120" value='<%= aceitem == null ? "" : aceitem.getStoredAt() %>'><br /><br />
+		<input name="storedAt" type="text" size="120" maxlength="255" value='<%= aceitem == null ? "" : aceitem.getStoredAt() %>'><br /><br />
 
 
 	<div style="float: left; margin-right: 35px;">
@@ -132,7 +132,7 @@
 		<aui:input name="source" />
 
 		<b>Geographic characterisation</b><br />	
-		<input name="spatialLayer" type="text" size="65" value='<%= aceitem == null ? "" : aceitem.getSpatialLayer() %>'>	
+		<input name="spatialLayer" type="text" size="65" maxlength="75" value='<%= aceitem == null ? "" : aceitem.getSpatialLayer() %>'>	
 	 </div>
 	<div style="float: left;">			
 		<br>

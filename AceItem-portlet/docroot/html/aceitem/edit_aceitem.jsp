@@ -77,11 +77,11 @@
 <% } %>
 		<liferay-ui:error key="aceitemname-required" message="aceitemname-required" />
 		<b>item-name</b> <i>(required)</i><br />
-		<input name="name" type="text" size="120" value='<%= aceitem == null ? "" : aceitem.getName() %>'><br /><br />
+		<input name="name" type="text" size="120" maxlength="255" value='<%= aceitem == null ? "" : aceitem.getName() %>'><br /><br />
 
 		<liferay-ui:error key="aceitemstoredat-required" message="aceitemstoredat-required" />
 		<b>website</b> <i>(required)</i><br />
-		<input name="storedAt" type="text" size="120" value='<%= aceitem == null ? "" : aceitem.getStoredAt() %>'><br /><br />
+		<input name="storedAt" type="text" size="120" maxlength="255" value='<%= aceitem == null ? "" : aceitem.getStoredAt() %>'><br /><br />
 
 
 	<div style="float: left; margin-right: 35px;">
@@ -140,13 +140,13 @@
         <b>keywords</b><br />
 		<textarea name="keyword" rows=5 cols=100><%= aceitem == null ? "" : aceitem.getKeyword() %></textarea><br /><br />
 
-		<aui:input name="source" />
+		<aui:input name="source" maxlength="75" />
 
 		<b>special tagging</b><br />
-		<input name="specialtagging" type="text" size="65" value='<%= aceitem == null ? "" : aceitem.getSpecialtagging() %>'><br /><br />
+		<input name="specialtagging" type="text" size="65" maxlength="75" value='<%= aceitem == null ? "" : aceitem.getSpecialtagging() %>'><br /><br />
 
 		<b>Geographic characterisation</b><br />
-		<input name="spatialLayer" type="text" size="65" value='<%= aceitem == null ? "" : aceitem.getSpatialLayer() %>'>
+		<input name="spatialLayer" type="text" size="65" maxlength="75" value='<%= aceitem == null ? "" : aceitem.getSpatialLayer() %>'>
 	 </div>
 	<div style="float: left;">
 		<br>
