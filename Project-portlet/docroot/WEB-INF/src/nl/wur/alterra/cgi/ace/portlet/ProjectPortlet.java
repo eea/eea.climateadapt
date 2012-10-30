@@ -54,6 +54,23 @@ public class ProjectPortlet extends ProjectUpdateHelper {
     }
 
     /**
+     * Adds an aceitem to the database for the project 
+     *
+     */
+    private AceItem createAceItemInsideDB(Project project) throws Exception {
+    	AceItem aceitem = new AceItemImpl();
+        //aceitem.setAceItemId(ParamUtil.getLong(request, "aceItemId"));
+        aceitem.setCompanyId(project.getCompanyId());
+        aceitem.setGroupId(project.getGroupId());
+        aceitem.setDatatype(AceItemType.RESEARCHPROJECT.toString());
+        aceitem.setStoredAt("ace_project_id=" + project.getProjectId());
+        aceitem.setStoragetype("PROJECT");
+        AceItemLocalServiceUtil.addAceItem(aceitem);	
+    	return aceitem;
+    }
+   
+    
+    /**
      * Adds a new project to the database
      *
      */
@@ -70,14 +87,7 @@ public class ProjectPortlet extends ProjectUpdateHelper {
             ProjectLocalServiceUtil.addProject(project);
 
             // create an AceItem for this project
-            AceItem aceitem = new AceItemImpl();
-            aceitem.setAceItemId(ParamUtil.getLong(request, "aceItemId"));
-            aceitem.setCompanyId(project.getCompanyId());
-            aceitem.setGroupId(project.getGroupId());
-            aceitem.setDatatype(AceItemType.RESEARCHPROJECT.toString());
-            aceitem.setStoredAt("ace_project_id=" + project.getProjectId());
-            aceitem.setStoragetype("PROJECT");
-            AceItemLocalServiceUtil.addAceItem(aceitem);
+            AceItem aceitem = createAceItemInsideDB(project);
             updateAceItem(project, aceitem);
 
             SessionMessages.add(request, "project-added");
@@ -167,13 +177,17 @@ public class ProjectPortlet extends ProjectUpdateHelper {
                         // delete the old project which gets replaced, update
                         // the corresponding aceitem
                         aceitem = AceItemLocalServiceUtil.getAceItemByStoredAt("ace_project_id=" + project.getReplacesId());
-                        if (aceitem != null){
-                            aceitem.setStoredAt("ace_project_id=" + project.getProjectId());
+                        if (aceitem == null){
+                            aceitem = createAceItemInsideDB(project);
                         }
+                        aceitem.setStoredAt("ace_project_id=" + project.getProjectId());
                         ProjectLocalServiceUtil.deleteProject(project.getReplacesId());
                         project.setReplacesId((long) 0);
                     } else {
                         aceitem = AceItemLocalServiceUtil.getAceItemByStoredAt("ace_project_id=" + project.getProjectId());
+                        if (aceitem == null){
+                            aceitem = createAceItemInsideDB(project);
+                        }
                     }
 
                     ProjectLocalServiceUtil.updateProject(project);
@@ -203,8 +217,8 @@ public class ProjectPortlet extends ProjectUpdateHelper {
     }
 
     /**
-     * Sets the preferences for how many projects can be viewed per page and the
-     * format for the phone number
+     * Sets the preferences for how many projects can be viewed per page and 
+     * other preferences
      *
      */
     public void setProjectPref(ActionRequest request, ActionResponse response) throws Exception {
