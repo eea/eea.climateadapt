@@ -7,7 +7,7 @@ create table ace_aceitem (
   "name" character varying(255),
   description text,
   datatype character varying(255),
-  storedat character varying(255),
+  storedat character varying(1024),
   storagetype character varying(255),
   specialtagging character varying(75) DEFAULT NULL::character varying,
   textsearch text,
