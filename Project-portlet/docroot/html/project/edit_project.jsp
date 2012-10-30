@@ -72,21 +72,21 @@
 <% } %>
 		<liferay-ui:error key="projectacronym-required" message="projectacronym-required" />
 		<b>acronym</b> <i>(required)</i><br />
-		<input name="acronym" type="text" size="70" value="<%= project == null ? "" : project.getAcronym() %>"><br /><br />
+		<input name="acronym" type="text" size="70" maxlength="75" value="<%= project == null ? "" : project.getAcronym() %>"><br /><br />
 
 		<liferay-ui:error key="projecttitle-required" message="projecttitle-required" />
 
 	  <div style="float: left; margin-right: 35px;">
 		<b>project title</b> <i>(required)</i><br />
-		<input name="title" type="text" size="120" value="<%= project == null ? "" : project.getTitle() %>"><br /><br />
+		<input name="title" type="text" size="120" maxlength="255" value="<%= project == null ? "" : project.getTitle() %>"><br /><br />
 
 		<liferay-ui:error key="projectlead-required" message="projectlead-required" />
 		<b>lead</b> <i>(required)</i><br />
-		<input name="lead" type="text" size="120" value="<%= project == null ? "" : project.getLead() %>"><br /><br />
+		<input name="lead" type="text" size="120" maxlength="255" value="<%= project == null ? "" : project.getLead() %>"><br /><br />
 
 
 		<b>website</b><br />
-		<input name="website" type="text" size="120" value="<%= project == null ? "" : project.getWebsite() %>"><br /><br />
+		<input name="website" type="text" size="120" maxlength="255" value="<%= project == null ? "" : project.getWebsite() %>"><br /><br />
 
 		<b>abstract</b><br />
 		<liferay-ui:input-editor/>
@@ -178,7 +178,7 @@
 		<input name="specialtagging" type="text" size="65" maxlength="75" value="<%= project == null ? "" : project.getSpecialtagging() %>"><br /><br />
 
 		<b>Geographic characterisation</b><br />
-		<input name="spatiallayer" type="text" size="65" value='<%= project == null ? "" : project.getSpatiallayer() %>'>
+		<input name="spatiallayer" type="text" size="65" maxlength="75" value='<%= project == null ? "" : project.getSpatiallayer() %>'>
 
 	  </div>
 	</aui:fieldset>
