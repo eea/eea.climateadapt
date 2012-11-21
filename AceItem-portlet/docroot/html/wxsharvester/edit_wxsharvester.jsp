@@ -103,11 +103,11 @@
 
 		<liferay-ui:error key="aceharvestername-required" message="aceharvestername-required" />
 		<b><liferay-ui:message key="aceharvester-name" /></b><br />
-		<input name="name" type="text" size="120" value='<%= wxsHarvester == null ? "" : wxsHarvester.getName() %>'><br /><br />
+		<input name="name" type="text" size="120" maxlength="255" value='<%= wxsHarvester == null ? "" : wxsHarvester.getName() %>'><br /><br />
 
 		<liferay-ui:error key="aceharvesterurl-required" message="aceharvesterurl-required" />
 		<b><liferay-ui:message key="aceharvester-url" /></b><br />
-		<input name="url" type="text" size="120" value='<%= wxsHarvester == null ? "" : wxsHarvester.getUrl() %>'>
+		<input name="url" type="text" size="120" maxlength="255" value='<%= wxsHarvester == null ? "" : wxsHarvester.getUrl() %>'>
         <div id="url-csw-hint">
             <liferay-ui:message key="aceharvester-url-wms-hint" />
         </div><br />

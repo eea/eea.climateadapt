@@ -133,11 +133,11 @@
 
 		<liferay-ui:error key="aceharvestername-required" message="aceharvestername-required" />
 		<b><liferay-ui:message key="aceharvester-name" /></b><br />
-		<input name="name" type="text" size="120" value='<%= cswHarvester == null ? "" : cswHarvester.getName() %>'><br /><br />
+		<input name="name" type="text" size="120" maxlength="255" value='<%= cswHarvester == null ? "" : cswHarvester.getName() %>'><br /><br />
 
 		<liferay-ui:error key="aceharvesterurl-required" message="aceharvesterurl-required" />
 		<b><liferay-ui:message key="aceharvester-url" /></b><br />
-		<input name="url" type="text" size="120" value='<%= cswHarvester == null ? "" : cswHarvester.getUrl() %>'><br />
+		<input name="url" type="text" size="120" maxlength="255" value='<%= cswHarvester == null ? "" : cswHarvester.getUrl() %>'><br />
         <div id="url-csw-hint">
             <liferay-ui:message key="aceharvester-url-csw-hint" />
         </div>
