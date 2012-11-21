@@ -54,7 +54,7 @@ ALTER TABLE ace_aceitem ALTER COLUMN aceitemid SET DEFAULT nextval('ace_aceitem_
 CREATE TABLE ace_wxsharvester
 (
   wxsharvesterid bigint NOT NULL,
-  "name" character varying(75),
+  "name" character varying(255),
   url character varying(255),
   ogctype character varying(75),
   every integer,
@@ -73,13 +73,13 @@ WITH (
 ALTER TABLE ace_wxsharvester OWNER TO postgres;
 
 alter TABLE ace_wxsharvester
-alter column  url type character varying(255);
+alter column  url type character varying(1024);
 
 CREATE TABLE ace_cswharvester 
 (
 	cswharvesterid bigint NOT NULL,
-	"name" character varying(75),
-	url character varying(250),
+	"name" character varying(255),
+	url character varying(255),
 	freetext character varying(75),
 	title character varying(75),
 	abstrakt character varying(75),
