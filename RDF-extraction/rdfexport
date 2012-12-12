@@ -1,0 +1,7 @@
+#!/bin/sh
+
+LIB=$HOME/lib/java
+CP="$LIB/rdf-exporter-1.0-SNAPSHOT.jar"
+CP="$CP:$LIB/postgresql-8.4-703.jdbc4.jar"
+
+java -cp $CP eionet.rdfexport.Execute "$@"
