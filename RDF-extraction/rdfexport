@@ -1,6 +1,6 @@
 #!/bin/sh
 
-LIB=$HOME/lib/java
+LIB=/var/local/build/RDFExport/java
 CP="$LIB/rdf-exporter-1.0-SNAPSHOT.jar"
 CP="$CP:$LIB/postgresql-8.4-703.jdbc4.jar"
 
