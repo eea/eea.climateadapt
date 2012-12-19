@@ -54,7 +54,7 @@ public class ProjectPortlet extends ProjectUpdateHelper {
     }
 
     /**
-     * Adds an aceitem to the database for the project 
+     * Adds an aceitem to the database for the project
      *
      */
     private AceItem createAceItemInsideDB(Project project) throws Exception {
@@ -65,11 +65,11 @@ public class ProjectPortlet extends ProjectUpdateHelper {
         aceitem.setDatatype(AceItemType.RESEARCHPROJECT.toString());
         aceitem.setStoredAt("ace_project_id=" + project.getProjectId());
         aceitem.setStoragetype("PROJECT");
-        AceItemLocalServiceUtil.addAceItem(aceitem);	
+        AceItemLocalServiceUtil.addAceItem(aceitem);
     	return aceitem;
     }
-   
-    
+
+
     /**
      * Adds a new project to the database
      *
@@ -196,6 +196,10 @@ public class ProjectPortlet extends ProjectUpdateHelper {
                     }
                 }
 
+                if (oldapproved == ACEIndexUtil.Status_SUBMITTED && newapproved == ACEIndexUtil.Status_APPROVED){
+                    sendApprovalNotification(project);
+                }
+
                 SessionMessages.add(request, "project-updated");
 
                 String notify = ParamUtil.getString(request, "notify_status");
@@ -217,7 +221,7 @@ public class ProjectPortlet extends ProjectUpdateHelper {
     }
 
     /**
-     * Sets the preferences for how many projects can be viewed per page and 
+     * Sets the preferences for how many projects can be viewed per page and
      * other preferences
      *
      */

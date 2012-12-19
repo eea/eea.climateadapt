@@ -153,6 +153,11 @@ public class AceItemPortlet extends LuceneIndexUpdatePortlet {
 
                     AceItemLocalServiceUtil.updateAceItem(aceitem);
                 }
+
+                if (oldapproved == ACEIndexUtil.Status_SUBMITTED && newapproved == ACEIndexUtil.Status_APPROVED){
+                    sendApprovalNotification(aceitem);
+                }
+
                 SessionMessages.add(request, "aceitem-updated");
                 synchronizeIndexSingleAceItem(aceitem);
 

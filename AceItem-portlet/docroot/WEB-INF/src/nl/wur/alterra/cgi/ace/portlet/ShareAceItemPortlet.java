@@ -21,10 +21,10 @@ import com.liferay.portal.util.PortalUtil;
  */
 public class ShareAceItemPortlet extends LuceneIndexUpdatePortlet {
 
-	 
+
 	/**
 	 * Adds a new aceitem to the database.
-	 * 
+	 *
 	 */
 	public void addAceItem(ActionRequest request, ActionResponse response) throws Exception {
 		AceItem aceitem = new AceItemImpl();
@@ -33,11 +33,11 @@ public class ShareAceItemPortlet extends LuceneIndexUpdatePortlet {
 	    List<String> errors = new ArrayList<String>();
 		if (AceItemValidator.validateAceItem(aceitem, errors)) {
 			AceItemLocalServiceUtil.addAceItem(aceitem);
-			SessionMessages.add(request, "aceitem-added");
             synchronizeIndexSingleAceItem(aceitem);
             sendSubmitNotification(aceitem);
 			request.getPortletSession().setAttribute("lastAddedAceItemId", "" + aceitem.getAceItemId() );
-            
+
+			SessionMessages.add(request, "contribution-success");
 			sendRedirect(request, response);
 		}
 		else {
@@ -55,26 +55,26 @@ public class ShareAceItemPortlet extends LuceneIndexUpdatePortlet {
 	 */
 	public void updateAceItem(ActionRequest request, ActionResponse response) throws Exception {
 		AceItem aceitem = null;
-		
+
 		try {
 			aceitem = AceItemLocalServiceUtil.getAceItem(ParamUtil.getLong(request, "aceItemId"));
 		}
 		catch (Exception e) {
 			aceitem = null;
 		}
-		
+
 		if(aceitem != null) {
 			aceitemFromRequest(request, aceitem);
-			
+
 			List<String> errors = new ArrayList<String>();
 			if (AceItemValidator.validateAceItem(aceitem, errors)) {
-					
+
 				AceItemLocalServiceUtil.updateAceItem(aceitem);
-				SessionMessages.add(request, "aceitem-updated");
 	            synchronizeIndexSingleAceItem(aceitem);
-	            sendSubmitNotification(aceitem);          
+	            sendSubmitNotification(aceitem);
 				request.getPortletSession().setAttribute("lastAddedAceItemId", "" + aceitem.getAceItemId() );
-	            
+
+				SessionMessages.add(request, "contribution-success");
 				sendRedirect(request, response);
 			}
 			else {
@@ -86,7 +86,7 @@ public class ShareAceItemPortlet extends LuceneIndexUpdatePortlet {
 			}
 		}
 	}
-	
+
 	/**
 	 * Sets the preferences for which datatype is being entered at Share Your Info page.
 	 *
@@ -94,11 +94,11 @@ public class ShareAceItemPortlet extends LuceneIndexUpdatePortlet {
 	public void setAddAceItemPref(ActionRequest request, ActionResponse response) throws Exception {
 
 		PortletPreferences prefs = request.getPreferences();
-		
+
 		String sharetype = ParamUtil.getString(request, Constants.SHARETYPE);
 
 		prefs.setValue(Constants.SHARETYPE, sharetype);
-		
+
 		prefs.store();
 	}
 

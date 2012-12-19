@@ -16,23 +16,25 @@
 
 <%@include file="/html/init.jsp" %>
 
+<liferay-ui:success key="contribution-success" message="contribution-successful" />
+
 <%
 
-   if ( ! renderRequest.isUserInRole("user") ) { 
+   if ( ! renderRequest.isUserInRole("user") ) {
  %>
 		Please <a href='/home?p_p_id=58&p_p_lifecycle=0&p_p_state=maximized&p_p_mode=view&saveLastPath=0&_58_struts_action=%2Flogin%2Flogin'>sign in with your EIONET account</a> to add a research / knowledge project.
-<% }	    
+<% }
    else {
-	   
+
 	String redirect = PortalUtil.getCurrentURL(renderRequest);
 
 	long projectId = 0;
-	
+
 	Project project = null;
-	
+
 	try {
 		projectId = Long.parseLong( (String) renderRequest.getPortletSession().getAttribute("lastAddedProjectId") );
-		
+
 		if (projectId > 0) {
 			project = ProjectLocalServiceUtil.getProject(projectId);
 		}
@@ -40,15 +42,15 @@
 	catch (Exception e) {
 		project = null;
 	}
-	
-%>		
+
+%>
 	<portlet:renderURL var="addProjectURL">
 		<portlet:param name="jspPage" value="/html/shareinfo/add_project.jsp" />
 		<portlet:param name="redirect" value="<%= redirect %>" />
 	</portlet:renderURL>
 
 	<a href='<%= addProjectURL.toString() %>'>Add a research / knowledge project.</a>
-<% 
+<%
 	if ( (project != null) && (project.getControlstatus() != ACEIndexUtil.Status_APPROVED) ) {
 %>
 	<portlet:renderURL var="editProjectURL">
@@ -56,8 +58,8 @@
 		<portlet:param name="projectId" value="<%= String.valueOf(projectId) %>"/>
 		<portlet:param name="redirect" value="<%= redirect %>" />
 	</portlet:renderURL>
-	&nbsp;&nbsp;&nbsp;&nbsp;	
+	&nbsp;&nbsp;&nbsp;&nbsp;
 	<a href='<%= editProjectURL.toString() %>'>Modify last edited research / knowledge project.</a>
-	
-<%	} 
+
+<%	}
 } // else main %>

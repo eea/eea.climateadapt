@@ -53,7 +53,7 @@ public class MeasurePortlet extends MeasureUpdateHelper {
     }
 
     /**
-     * Adds an aceitem to the database for the measure 
+     * Adds an aceitem to the database for the measure
      *
      */
     private AceItem createAceItemInsideDB (Measure measure) throws Exception {
@@ -63,10 +63,10 @@ public class MeasurePortlet extends MeasureUpdateHelper {
         aceitem.setGroupId(measure.getGroupId());
         aceitem.setStoredAt("ace_measure_id=" + measure.getMeasureId());
         aceitem.setStoragetype("MEASURE");
-        AceItemLocalServiceUtil.addAceItem(aceitem); 
+        AceItemLocalServiceUtil.addAceItem(aceitem);
     	return aceitem;
     }
-   
+
     /**
      * Adds a new measure to the database
      *
@@ -179,13 +179,17 @@ public class MeasurePortlet extends MeasureUpdateHelper {
                         aceitem = AceItemLocalServiceUtil.getAceItemByStoredAt("ace_measure_id=" + measure.getMeasureId());
                         if (aceitem == null){
                             aceitem = createAceItemInsideDB(measure);
-                        }                        
+                        }
                     }
 
                     MeasureLocalServiceUtil.updateMeasure(measure);
                     if (aceitem != null){
                         updateAceItem(measure, aceitem);
                     }
+                }
+
+                if (oldapproved == ACEIndexUtil.Status_SUBMITTED && newapproved == ACEIndexUtil.Status_APPROVED){
+                    sendApprovalNotification(measure);
                 }
 
                 SessionMessages.add(request, "measure-updated");

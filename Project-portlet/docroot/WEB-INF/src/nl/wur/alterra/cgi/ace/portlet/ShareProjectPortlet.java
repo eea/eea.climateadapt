@@ -25,13 +25,13 @@ public class ShareProjectPortlet extends ProjectUpdateHelper {
 
 	/**
 	 * Adds a new project to the database
-	 * 
+	 *
 	 */
 	public void addProject(ActionRequest request, ActionResponse response)
 		throws Exception {
 
-		Project project = new ProjectImpl(); 
-		
+		Project project = new ProjectImpl();
+
 		project.setProjectId(ParamUtil.getLong(request, "projectId"));
 		projectFromRequest(request, project);
 
@@ -39,7 +39,7 @@ public class ShareProjectPortlet extends ProjectUpdateHelper {
 
 		if (ProjectValidator.validateProject(project, errors)) {
 			ProjectLocalServiceUtil.addProject(project);
-			
+
 			// create an AceItem for this project
 			AceItem aceitem = new AceItemImpl();
 			aceitem.setAceItemId(ParamUtil.getLong(request, "aceItemId"));
@@ -50,12 +50,11 @@ public class ShareProjectPortlet extends ProjectUpdateHelper {
 			aceitem.setStoragetype("PROJECT");
 			AceItemLocalServiceUtil.addAceItem(aceitem);
 			updateAceItem(project, aceitem);
-			
-			SessionMessages.add(request, "project-added");
 
-            sendSubmitNotification(project);			
+            sendSubmitNotification(project);
 			request.getPortletSession().setAttribute("lastAddedProjectId", "" + project.getProjectId() );
-			
+
+			SessionMessages.add(request, "contribution-success");
 			sendRedirect(request, response);
 		}
 		else {
@@ -76,47 +75,46 @@ public class ShareProjectPortlet extends ProjectUpdateHelper {
 	 */
 	public void updateProject(ActionRequest request, ActionResponse response)
 		throws Exception {
-		
+
 		AceItem aceitem = null;
-		
+
 		Project project = null;
-		
+
 		try {
-			project = ProjectLocalServiceUtil.getProject(ParamUtil.getLong(request, "projectId"));	
+			project = ProjectLocalServiceUtil.getProject(ParamUtil.getLong(request, "projectId"));
 		}
 		catch (Exception e) {
 			project = null;
 		}
-		
-		if(project != null) {		
+
+		if(project != null) {
 			projectFromRequest(request, project);
-	
+
 			ArrayList<String> errors = new ArrayList<String>();
-	
+
 			if (ProjectValidator.validateProject(project, errors)) {
-				
+
 				aceitem = AceItemLocalServiceUtil.getAceItemByStoredAt("ace_project_id=" + project.getProjectId());
-	
+
 				ProjectLocalServiceUtil.updateProject(project);
-					
+
 				updateAceItem(project, aceitem);
-				
-				SessionMessages.add(request, "project-updated");
-	
+
 	            sendSubmitNotification(project);
 				request.getPortletSession().setAttribute("lastAddedProjectId", "" + project.getProjectId() );
-				
+
+				SessionMessages.add(request, "contribution-success");
 				sendRedirect(request, response);
 			}
 			else {
 				for (String error : errors) {
 					SessionErrors.add(request, error);
 				}
-	
+
 				PortalUtil.copyRequestParameters(request, response);
-	
+
 				response.setRenderParameter("jspPage", "/html/shareinfo/add_project.jsp");
 			}
 		}
-	}	
+	}
 }
