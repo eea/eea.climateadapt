@@ -81,7 +81,7 @@
 		<portlet:param name="redirect" value="<%= redirect %>" />
 	</portlet:renderURL>
 	&nbsp;&nbsp;&nbsp;&nbsp;
-	<a href='<%= editAceItemURL.toString() %>'>Modify last edited <%= typedescription %></a>
+	<a href='<%= editAceItemURL.toString() %>'>Modify earlier submitted <%= typedescription %></a>
 
 <%	}
 } // else isUserInRole %>
