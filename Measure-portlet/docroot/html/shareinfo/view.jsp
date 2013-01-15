@@ -60,7 +60,7 @@
 		<portlet:param name="redirect" value="<%= redirect %>" />
 	</portlet:renderURL>
 	&nbsp;&nbsp;&nbsp;&nbsp;
-	<a href='<%= editMeasureURL.toString() %>'><%= mao_type.equalsIgnoreCase("A") ? "Modify last edited case study" : "Modify last edited adaptation option" %></a>
+	<a href='<%= editMeasureURL.toString() %>'><%= mao_type.equalsIgnoreCase("A") ? "Modify earlier submitted case study" : "Modify earlier submitted adaptation option" %></a>
 
 <%	}
 } // else main %>

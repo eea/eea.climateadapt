@@ -1,15 +1,21 @@
 package nl.wur.alterra.cgi.ace.portlet;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
+import javax.portlet.PortletException;
 import javax.portlet.PortletPreferences;
+import javax.portlet.RenderRequest;
+import javax.portlet.RenderResponse;
+import javax.servlet.http.HttpServletRequest;
 
 import nl.wur.alterra.cgi.ace.model.AceItem;
 import nl.wur.alterra.cgi.ace.model.Measure;
 import nl.wur.alterra.cgi.ace.model.impl.AceItemImpl;
 import nl.wur.alterra.cgi.ace.model.impl.MeasureImpl;
+import nl.wur.alterra.cgi.ace.search.ACESearchPortalInterface;
 import nl.wur.alterra.cgi.ace.service.AceItemLocalServiceUtil;
 import nl.wur.alterra.cgi.ace.service.MeasureLocalServiceUtil;
 
@@ -23,6 +29,28 @@ import com.liferay.portal.util.PortalUtil;
  */
 public class ShareMeasurePortlet extends MeasureUpdateHelper {
 
+	@Override
+	public void doView(RenderRequest renderRequest, RenderResponse renderResponse) throws IOException, PortletException {
+		try {
+	    	HttpServletRequest httpRequest = 
+	    		PortalUtil.getOriginalServletRequest(
+	    		PortalUtil.getHttpServletRequest(renderRequest) ) ;
+
+	    	try {
+	    		int measureid = Integer.parseInt( httpRequest.getParameter("submissionid") ) ;
+				renderRequest.getPortletSession().setAttribute("lastAddedMeasureId", "" +  measureid );
+	    	}
+	    	catch (NumberFormatException e) {
+	    		// do nothing
+	    	}
+
+		}
+        catch (Exception x) {
+			x.printStackTrace();
+            throw new PortletException(x);
+		}
+		super.doView(renderRequest, renderResponse);
+	}
 
 	/**
 	 * Adds a new measure to the database
