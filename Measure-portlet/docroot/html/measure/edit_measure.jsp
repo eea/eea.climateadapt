@@ -89,7 +89,7 @@
 		<input name="name" type="text" size="120" maxlength="255" value="<%= measure == null ? "" : measure.getName() %>"><br /><br />
 
 		<b>website</b><br />
-		<input name="website" type="text" size="120" maxlength="1024" value="<%= measure == null ? "" : measure.getWebsite() %>"><br /><br />
+		<input name="website" type="text" size="120" maxlength="255" value="<%= measure == null ? "" : measure.getWebsite() %>"><br /><br />
 
 	 <div style="float: left; margin-right: 35px;">
 
