@@ -1,0 +1,145 @@
+<ViewContext xmlns="http://www.opengis.net/context" version="1.1.0"
+	id="OpenLayers_Context_132"
+	xsi:schemaLocation="http://www.opengis.net/context http://schemas.opengis.net/context/1.1.0/context.xsd"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<General>
+		<Window width="675" height="350" />
+		<BoundingBox minx="1600000.00000000000" miny="444509.896449220018"
+			maxx="7438762.50810160022" maxy="6283272.40455080010" SRS="EPSG:3035" />
+		<Title>Terrestrial Vulnerability and Risks (ESPON Climate Change project)</Title>
+		<Extension>
+			<ol:maxExtent xmlns:ol="http://openlayers.org/context"
+				minx="1600000.00000000000" miny="766700.000000000000" maxx="7602904.42599999998"
+				maxy="5961082.30099999998" />
+		</Extension>
+	</General>
+	<LayerList>
+		<Layer queryable="0" hidden="0">
+			<Server service="OGC:WMS" version="1.1.1">
+				<OnlineResource xlink:type="simple"
+					xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://climate-adapt.eea.europa.eu/geoserver/wms?" />
+			</Server>
+			<Name>background</Name>
+			<Title>Background</Title>
+			<FormatList>
+				<Format current="1">image/png</Format>
+			</FormatList>
+			<StyleList>
+				<Style current="1">
+					<Name />
+					<Title>Default</Title>
+				</Style>
+			</StyleList>
+			<Extension>
+				<ol:maxExtent xmlns:ol="http://openlayers.org/context"
+					minx="1600000.00000000000" miny="766700.000000000000" maxx="7602904.42599999998"
+					maxy="5961082.30099999998" />
+				<ol:tileSize xmlns:ol="http://openlayers.org/context"
+					width="256" height="256" />
+				<ol:numZoomLevels xmlns:ol="http://openlayers.org/context">13</ol:numZoomLevels>
+				<ol:units xmlns:ol="http://openlayers.org/context">m</ol:units>
+				<ol:isBaseLayer xmlns:ol="http://openlayers.org/context">true</ol:isBaseLayer>
+				<ol:displayInLayerSwitcher xmlns:ol="http://openlayers.org/context">false</ol:displayInLayerSwitcher>
+				<ol:singleTile xmlns:ol="http://openlayers.org/context">false</ol:singleTile>
+			</Extension>
+		</Layer>
+		<Layer queryable="0" hidden="1">
+			<Server service="OGC:WMS" version="1.1.1">
+				<OnlineResource xlink:type="simple"
+					xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://climate-adapt.eea.europa.eu/geoserver/wms?" />
+			</Server>
+			<Name>chm:espon_nuts3</Name>
+			<Title>Change in exposure to river flooding</Title>
+			<MetadataURL>
+				<OnlineResource xlink:type="simple" xmlns:xlink="http://www.w3.org/1999/xlink" 
+					xlink:href="http://climate-adapt.eea.europa.eu/geonetwork/srv/en/metadata.show?uuid=e6fe540a76d09ce4acff2346a810e09c00f6cb74"/>
+			</MetadataURL>
+			<FormatList>
+				<Format current="1">image/png</Format>
+			</FormatList>
+			<StyleList>
+				<Style current="1">
+					<Name>espon_change_in_exposure_to_river_flooding</Name>
+					<Title>Change in exposure to river flooding</Title>
+				</Style>
+			</StyleList>
+			<Extension>
+				<ol:maxExtent xmlns:ol="http://openlayers.org/context"
+					minx="1600000.00000000000" miny="766700.000000000000" maxx="7602904.42599999998"
+					maxy="5961082.30099999998" />
+				<ol:tileSize xmlns:ol="http://openlayers.org/context" width="256" height="256" />
+				<ol:transparent xmlns:ol="http://openlayers.org/context">true</ol:transparent>
+				<ol:numZoomLevels xmlns:ol="http://openlayers.org/context">13</ol:numZoomLevels>
+				<ol:units xmlns:ol="http://openlayers.org/context">m</ol:units>
+				<ol:isBaseLayer xmlns:ol="http://openlayers.org/context">false</ol:isBaseLayer>
+				<ol:displayInLayerSwitcher xmlns:ol="http://openlayers.org/context">true</ol:displayInLayerSwitcher>
+				<ol:singleTile xmlns:ol="http://openlayers.org/context">false</ol:singleTile>
+				<ol:attribution xmlns:ol="http://openlayers.org/context"><![CDATA[&copy; ESPON, IRPUD & PIK 2011]]></ol:attribution>
+			</Extension>
+		</Layer>
+		<Layer queryable="0" hidden="0">
+			<Server service="OGC:WMS" version="1.1.1">
+				<OnlineResource xlink:type="simple"
+					xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://climate-adapt.eea.europa.eu/geoserver/wms?" />
+			</Server>
+			<Name>chm:espon_nuts3</Name>
+			<Title>Change in exposure to coastal flooding</Title>
+			<MetadataURL>
+				<OnlineResource xlink:type="simple" xmlns:xlink="http://www.w3.org/1999/xlink" 
+					xlink:href="http://climate-adapt.eea.europa.eu/geonetwork/srv/en/metadata.show?uuid=f3d55e05c4bae2fe436259222e28710a2617c830"/>
+			</MetadataURL>
+			<FormatList>
+				<Format current="1">image/png</Format>
+			</FormatList>
+			<StyleList>
+				<Style current="1">
+					<Name>espon_change_in_exposure_to_coastal_flooding</Name>
+					<Title>Change in exposure to coastal flooding</Title>
+				</Style>
+			</StyleList>
+			<Extension>
+				<ol:maxExtent xmlns:ol="http://openlayers.org/context"
+					minx="1600000.00000000000" miny="766700.000000000000" maxx="7602904.42599999998"
+					maxy="5961082.30099999998" />
+				<ol:tileSize xmlns:ol="http://openlayers.org/context" width="256" height="256" />
+				<ol:transparent xmlns:ol="http://openlayers.org/context">true</ol:transparent>
+				<ol:numZoomLevels xmlns:ol="http://openlayers.org/context">13</ol:numZoomLevels>
+				<ol:units xmlns:ol="http://openlayers.org/context">m</ol:units>
+				<ol:isBaseLayer xmlns:ol="http://openlayers.org/context">false</ol:isBaseLayer>
+				<ol:displayInLayerSwitcher xmlns:ol="http://openlayers.org/context">true</ol:displayInLayerSwitcher>
+				<ol:singleTile xmlns:ol="http://openlayers.org/context">false</ol:singleTile>
+				<ol:attribution xmlns:ol="http://openlayers.org/context"><![CDATA[&copy; ESPON, IRPUD, 2011]]></ol:attribution>
+			</Extension>
+		</Layer>
+		<Layer queryable="0" hidden="0">
+			<Server service="OGC:WMS" version="1.1.1">
+				<OnlineResource xlink:type="simple"
+					xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://climate-adapt.eea.europa.eu/geoserver/wms?" />
+			</Server>
+			<Name>foreground</Name>
+			<Title>Topography</Title>
+			<FormatList>
+				<Format current="1">image/png</Format>
+			</FormatList>
+			<StyleList>
+				<Style current="1">
+					<Name />
+					<Title>Default</Title>
+				</Style>
+			</StyleList>
+			<Extension>
+				<ol:maxExtent xmlns:ol="http://openlayers.org/context"
+					minx="1600000.00000000000" miny="766700.000000000000" maxx="7602904.42599999998"
+					maxy="5961082.30099999998" />
+				<ol:tileSize xmlns:ol="http://openlayers.org/context"
+					width="256" height="256" />
+				<ol:transparent xmlns:ol="http://openlayers.org/context">true</ol:transparent>
+				<ol:numZoomLevels xmlns:ol="http://openlayers.org/context">13</ol:numZoomLevels>
+				<ol:units xmlns:ol="http://openlayers.org/context">m</ol:units>
+				<ol:isBaseLayer xmlns:ol="http://openlayers.org/context">false</ol:isBaseLayer>
+				<ol:displayInLayerSwitcher xmlns:ol="http://openlayers.org/context">true</ol:displayInLayerSwitcher>
+				<ol:singleTile xmlns:ol="http://openlayers.org/context">true</ol:singleTile>
+			</Extension>
+		</Layer>
+	</LayerList>
+</ViewContext>
