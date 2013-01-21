@@ -35,7 +35,9 @@ JAR-files
 =========
 
 The source for AceItem-portlet-service.jar is in ../AceItem-portlet/docroot/WEB-INF/service/
-and apparently not built by ant
+It is deployed directly into /var/local/liferay-portal-6.0.5/tomcat-6.0.26/lib/ext even
+if you only do 'ant war'
 
-AceSearchEngine.jar is in ../AceSearchEngine/dist/lib/ and apparently not built
-by ant. The source is in ../AceSearchEngine/src
+The source for AceSearchEngine.jar is in ../AceSearchEngine/src
+It is deployed directly into /var/local/liferay-portal-6.0.5/tomcat-6.0.26/lib/ext even
+if you only do 'ant war'
