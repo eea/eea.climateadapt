@@ -59,7 +59,7 @@
 		<portlet:param name="redirect" value="<%= redirect %>" />
 	</portlet:renderURL>
 	&nbsp;&nbsp;&nbsp;&nbsp;
-	<a href='<%= editProjectURL.toString() %>'>Modify earlier submitted research / knowledge project.</a>
+	<a href='<%= editProjectURL.toString() %>'>Modify the submitted research / knowledge project '<%= project.getAcronym() %>' .</a>
 
 <%	}
 } // else main %>
