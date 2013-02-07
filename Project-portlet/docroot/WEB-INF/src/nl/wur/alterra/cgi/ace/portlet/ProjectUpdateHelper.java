@@ -247,6 +247,7 @@ public abstract class ProjectUpdateHelper extends MVCPortlet {
                 + ' ' + project.getKeywords() + ' ' + project.getSource() + ' ' + project.getSpatialvalues() + ' '
                 + project.getTextwebpage());
 
+/* At free text searxh don't search any longer on Advanced Search Fields
         String sctrs = project.getSectors();
 
         if ((coalesce(sctrs).length() > 0) && (sctrs.indexOf(";") == sctrs.lastIndexOf(";"))) { // one
@@ -254,7 +255,23 @@ public abstract class ProjectUpdateHelper extends MVCPortlet {
 
             aceitem.setTextSearch(aceitem.getTextSearch() + ' ' + coalesce(sctrs.substring(0, sctrs.indexOf(";"))));
         }
+        String lmnt = project.getElement();
 
+        if ((coalesce(lmnt).length() > 0) && (lmnt.indexOf(";") == lmnt.lastIndexOf(";"))) { // one
+                                                                                                // element
+
+            aceitem.setTextSearch(aceitem.getTextSearch() + ' ' + coalesce(lmnt.substring(0, lmnt.indexOf(";"))));
+        }
+
+        String mpcts = project.getClimateimpacts();
+
+        if ((coalesce(mpcts).length() > 0) && (mpcts.indexOf(";") == mpcts.lastIndexOf(";"))) { // one
+                                                                                                // climate
+                                                                                                // impact
+
+            aceitem.setTextSearch(aceitem.getTextSearch() + ' ' + coalesce(mpcts.substring(0, mpcts.indexOf(";"))));
+        }
+*/        
         AceItemLocalServiceUtil.updateAceItem(aceitem);
 
         new ACEIndexSynchronizer().reIndex(aceitem);
