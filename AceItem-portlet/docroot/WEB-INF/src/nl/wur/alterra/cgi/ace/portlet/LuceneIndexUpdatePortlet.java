@@ -215,7 +215,7 @@ public abstract class LuceneIndexUpdatePortlet extends MVCPortlet {
                 || aceitem.getStoragetype().equalsIgnoreCase("SETOFMAPS")) {
             aceitem.setTextSearch(aceitem.getTextSearch() + ' ' + aceitem.getStoragetype());
         }
-
+/* At free text searxh don't search any longer on Advanced Search Fields
         if ((coalesce(choosensectors).length() > 0) && (choosensectors.indexOf(";") == choosensectors.lastIndexOf(";"))) { // one
                                                                                                                            // sector
 
@@ -239,6 +239,7 @@ public abstract class LuceneIndexUpdatePortlet extends MVCPortlet {
             aceitem.setTextSearch(aceitem.getTextSearch() + ' '
                     + coalesce(choosenclimateimpacts.substring(0, choosenclimateimpacts.indexOf(";"))));
         }
+*/        
         /*
          * int dateMonth = ParamUtil.getInteger(request, "startDateMonth"); int
          * dateDay = ParamUtil.getInteger(request, "startDateDay"); int dateYear
