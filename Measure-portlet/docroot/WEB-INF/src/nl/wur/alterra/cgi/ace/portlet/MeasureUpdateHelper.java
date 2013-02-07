@@ -295,12 +295,20 @@ public abstract class MeasureUpdateHelper extends MVCPortlet {
                 + ' ' + measure.getSucceslimitations() + ' ' + measure.getCostbenefit() + ' '
                 + measure.getStakeholderparticipation() + ' ' + measure.getSource() + ' ' + measure.getTextwebpage());
 
+/* At free text searxh don't search any longer on Advanced Search Fields
         String sctrs = measure.getSectors_();
-
         if ((coalesce(sctrs).length() > 0) && (sctrs.indexOf(";") == sctrs.lastIndexOf(";"))) { // one
                                                                                                 // sector
 
             aceitem.setTextSearch(aceitem.getTextSearch() + ' ' + coalesce(sctrs.substring(0, sctrs.indexOf(";"))));
+        }
+        
+        String lmnts = measure.getElements_();
+
+        if ((coalesce(lmnts).length() > 0) && (lmnts.indexOf(";") == lmnts.lastIndexOf(";"))) { // one
+                                                                                                // element
+
+            aceitem.setTextSearch(aceitem.getTextSearch() + ' ' + coalesce(lmnts.substring(0, lmnts.indexOf(";"))));
         }
 
         String mpcts = measure.getClimateimpacts_();
@@ -311,7 +319,7 @@ public abstract class MeasureUpdateHelper extends MVCPortlet {
 
             aceitem.setTextSearch(aceitem.getTextSearch() + ' ' + coalesce(mpcts.substring(0, mpcts.indexOf(";"))));
         }
-
+*/
         AceItemLocalServiceUtil.updateAceItem(aceitem);
 
         new ACEIndexSynchronizer().reIndex(aceitem);
