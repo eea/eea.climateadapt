@@ -215,7 +215,7 @@ public abstract class LuceneIndexUpdatePortlet extends MVCPortlet {
                 || aceitem.getStoragetype().equalsIgnoreCase("SETOFMAPS")) {
             aceitem.setTextSearch(aceitem.getTextSearch() + ' ' + aceitem.getStoragetype());
         }
-
+/* At free text searxh don't search any longer on Advanced Search Fields
         if ((coalesce(choosensectors).length() > 0) && (choosensectors.indexOf(";") == choosensectors.lastIndexOf(";"))) { // one
                                                                                                                            // sector
 
@@ -239,6 +239,7 @@ public abstract class LuceneIndexUpdatePortlet extends MVCPortlet {
             aceitem.setTextSearch(aceitem.getTextSearch() + ' '
                     + coalesce(choosenclimateimpacts.substring(0, choosenclimateimpacts.indexOf(";"))));
         }
+*/        
         /*
          * int dateMonth = ParamUtil.getInteger(request, "startDateMonth"); int
          * dateDay = ParamUtil.getInteger(request, "startDateDay"); int dateYear
@@ -325,8 +326,22 @@ public abstract class LuceneIndexUpdatePortlet extends MVCPortlet {
                 contributorAddress[0] = new InternetAddress(useremail);
                 subject = "Your submission to Climate-ADAPT";
                 body = "You have successfully submitted information to Climate-ADAPT regarding '" + aceitem.getName() + "'.\n";
-                body += "This material will be reviewed prior to publication. We thank you for your interest in Climate-ADAPT!";
-
+                body += "This material will be reviewed prior to publication.\n";
+                body += "As long as the item has not been approved you can still make changes by going to:\n\n";
+                body += hosturl + "/share-your-info/" ;
+                if (aceitem.getDatatype().equalsIgnoreCase(AceItemType.DOCUMENT.toString())) {
+                    body += "publications-and-reports";
+                } else if (aceitem.getDatatype().equalsIgnoreCase(AceItemType.INFORMATIONSOURCE.toString())) {
+                    body += "information-portals";
+                } else if (aceitem.getDatatype().equalsIgnoreCase(AceItemType.GUIDANCE.toString())) {
+                    body += "guidance-documents";
+                } else if (aceitem.getDatatype().equalsIgnoreCase(AceItemType.TOOL.toString())) {
+                    body += "tools";
+                } else if (aceitem.getDatatype().equalsIgnoreCase(AceItemType.ORGANISATION.toString())) {
+                    body += "organisations";
+                }
+                body += "?submissionid=" + aceitem.getAceItemId();
+                body += "\n\nWe thank you for your interest in Climate-ADAPT.";
                 MailEngine.send(fromInternetAddress, contributorAddress, null, null, subject, body, false, null, null, null);
             } catch (Exception e) {
                 // do nothing

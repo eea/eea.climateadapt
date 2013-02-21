@@ -1,0 +1,485 @@
+<ViewContext xmlns="http://www.opengis.net/context" version="1.1.0"
+	id="OpenLayers_Context_132"
+	xsi:schemaLocation="http://www.opengis.net/context http://schemas.opengis.net/context/1.1.0/context.xsd"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<General>
+		<Window width="675" height="350" />
+		<BoundingBox minx="1600000.00000000000" miny="444509.896449220018"
+			maxx="7438762.50810160022" maxy="6283272.40455080010" SRS="EPSG:3035" />
+		<Title>Vulnerability and risk – Water Sector (ClimWatAdapt project)</Title>
+		<Extension>
+			<ol:maxExtent xmlns:ol="http://openlayers.org/context"
+				minx="1600000.00000000000" miny="766700.000000000000" maxx="7602904.42599999998"
+				maxy="5961082.30099999998" />
+		</Extension>
+	</General>
+	<LayerList>
+		<Layer queryable="0" hidden="0">
+			<Server service="OGC:WMS" version="1.1.1">
+				<OnlineResource xlink:type="simple"
+					xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://climate-adapt.eea.europa.eu/geoserver/wms?" />
+			</Server>
+			<Name>background</Name>
+			<Title>Background</Title>
+			<FormatList>
+				<Format current="1">image/png</Format>
+			</FormatList>
+			<StyleList>
+				<Style current="1">
+					<Name />
+					<Title>Default</Title>
+				</Style>
+			</StyleList>
+			<Extension>
+				<ol:maxExtent xmlns:ol="http://openlayers.org/context"
+					minx="1600000.00000000000" miny="766700.000000000000" maxx="7602904.42599999998"
+					maxy="5961082.30099999998" />
+				<ol:tileSize xmlns:ol="http://openlayers.org/context"
+					width="256" height="256" />
+				<ol:numZoomLevels xmlns:ol="http://openlayers.org/context">13</ol:numZoomLevels>
+				<ol:units xmlns:ol="http://openlayers.org/context">m</ol:units>
+				<ol:isBaseLayer xmlns:ol="http://openlayers.org/context">true</ol:isBaseLayer>
+				<ol:displayInLayerSwitcher xmlns:ol="http://openlayers.org/context">false</ol:displayInLayerSwitcher>
+				<ol:singleTile xmlns:ol="http://openlayers.org/context">false</ol:singleTile>
+			</Extension>
+		</Layer>
+		<Layer queryable="0" hidden="1">
+			<Server service="OGC:WMS" version="1.1.1">
+				<OnlineResource xlink:type="simple"
+					xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://climate-adapt.eea.europa.eu/geoserver/wms?" />
+			</Server>
+			<Name>cwa:hydroelec_dams_rb_2050</Name>
+			<Title>Risk of losses in power production by hydroelectric dams (2050)</Title>
+			<MetadataURL>
+				<OnlineResource xlink:type="simple" xmlns:xlink="http://www.w3.org/1999/xlink" 
+					xlink:href="http://climate-adapt.eea.europa.eu/geonetwork/srv/en/metadata.show?uuid=e13bac3bda11ca1ad9ee679a8be88b9fc3d1f7e2"/>
+			</MetadataURL>
+			<FormatList>
+				<Format current="1">image/png</Format>
+			</FormatList>
+			<StyleList>
+				<Style current="1">
+					<Name />
+					<Title>Default</Title>
+				</Style>
+			</StyleList>
+			<Extension>
+				<ol:maxExtent xmlns:ol="http://openlayers.org/context"
+					minx="1600000.00000000000" miny="766700.000000000000" maxx="7602904.42599999998"
+					maxy="5961082.30099999998" />
+				<ol:tileSize xmlns:ol="http://openlayers.org/context"
+					width="256" height="256" />
+				<ol:transparent xmlns:ol="http://openlayers.org/context">true</ol:transparent>
+				<ol:numZoomLevels xmlns:ol="http://openlayers.org/context">13</ol:numZoomLevels>
+				<ol:units xmlns:ol="http://openlayers.org/context">m</ol:units>
+				<ol:isBaseLayer xmlns:ol="http://openlayers.org/context">false</ol:isBaseLayer>
+				<ol:displayInLayerSwitcher xmlns:ol="http://openlayers.org/context">true</ol:displayInLayerSwitcher>
+				<ol:singleTile xmlns:ol="http://openlayers.org/context">true</ol:singleTile>
+			</Extension>
+		</Layer>
+		<Layer queryable="0" hidden="1">
+			<Server service="OGC:WMS" version="1.1.1">
+				<OnlineResource xlink:type="simple"
+					xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://climate-adapt.eea.europa.eu/geoserver/wms?" />
+			</Server>
+			<Name>cwa:precalc_vi_nuts2_median_2050_fpa</Name>
+			<Title>Relative area of NUTS2-units affected by floods (2050)</Title>
+			<MetadataURL>
+				<OnlineResource xlink:type="simple" xmlns:xlink="http://www.w3.org/1999/xlink" 
+					xlink:href="http://climate-adapt.eea.europa.eu/geonetwork/srv/en/metadata.show?uuid=bd3277a237dc06bca906a594370502dd8f14af9c"/>
+			</MetadataURL>
+			<FormatList>
+				<Format current="1">image/png</Format>
+			</FormatList>
+			<StyleList>
+				<Style current="1">
+					<Name />
+					<Title>Default</Title>
+				</Style>
+			</StyleList>
+			<Extension>
+				<ol:maxExtent xmlns:ol="http://openlayers.org/context"
+					minx="1600000.00000000000" miny="766700.000000000000" maxx="7602904.42599999998"
+					maxy="5961082.30099999998" />
+				<ol:tileSize xmlns:ol="http://openlayers.org/context"
+					width="256" height="256" />
+				<ol:transparent xmlns:ol="http://openlayers.org/context">true</ol:transparent>
+				<ol:numZoomLevels xmlns:ol="http://openlayers.org/context">13</ol:numZoomLevels>
+				<ol:units xmlns:ol="http://openlayers.org/context">m</ol:units>
+				<ol:isBaseLayer xmlns:ol="http://openlayers.org/context">false</ol:isBaseLayer>
+				<ol:displayInLayerSwitcher xmlns:ol="http://openlayers.org/context">true</ol:displayInLayerSwitcher>
+				<ol:singleTile xmlns:ol="http://openlayers.org/context">true</ol:singleTile>
+			</Extension>
+		</Layer>
+		<Layer queryable="0" hidden="1">
+			<Server service="OGC:WMS" version="1.1.1">
+				<OnlineResource xlink:type="simple"
+					xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://climate-adapt.eea.europa.eu/geoserver/wms?" />
+			</Server>
+			<Name>cwa:precalc_vi_nuts2_median_2050_dpa</Name>
+			<Title>Relative area of NUTS2-units affected by severe droughts (2050)</Title>
+			<MetadataURL>
+				<OnlineResource xlink:type="simple" xmlns:xlink="http://www.w3.org/1999/xlink" 
+					xlink:href="http://climate-adapt.eea.europa.eu/geonetwork/srv/en/metadata.show?uuid=225f69b5c7c03e9b14576e8c3a327ef250917364"/>
+			</MetadataURL>
+			<FormatList>
+				<Format current="1">image/png</Format>
+			</FormatList>
+			<StyleList>
+				<Style current="1">
+					<Name />
+					<Title>Default</Title>
+				</Style>
+			</StyleList>
+			<Extension>
+				<ol:maxExtent xmlns:ol="http://openlayers.org/context"
+					minx="1600000.00000000000" miny="766700.000000000000" maxx="7602904.42599999998"
+					maxy="5961082.30099999998" />
+				<ol:tileSize xmlns:ol="http://openlayers.org/context"
+					width="256" height="256" />
+				<ol:transparent xmlns:ol="http://openlayers.org/context">true</ol:transparent>
+				<ol:numZoomLevels xmlns:ol="http://openlayers.org/context">13</ol:numZoomLevels>
+				<ol:units xmlns:ol="http://openlayers.org/context">m</ol:units>
+				<ol:isBaseLayer xmlns:ol="http://openlayers.org/context">false</ol:isBaseLayer>
+				<ol:displayInLayerSwitcher xmlns:ol="http://openlayers.org/context">true</ol:displayInLayerSwitcher>
+				<ol:singleTile xmlns:ol="http://openlayers.org/context">true</ol:singleTile>
+			</Extension>
+		</Layer>
+		<Layer queryable="0" hidden="1">
+			<Server service="OGC:WMS" version="1.1.1">
+				<OnlineResource xlink:type="simple"
+					xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://climate-adapt.eea.europa.eu/geoserver/wms?" />
+			</Server>
+			<Name>cwa:cta_irr_rb_ecf_2050</Name>
+			<Title>Ratio of irrigation water consumption to water availability (2050, EcF)</Title>
+			<MetadataURL>
+				<OnlineResource xlink:type="simple" xmlns:xlink="http://www.w3.org/1999/xlink" 
+					xlink:href="http://climate-adapt.eea.europa.eu/geonetwork/srv/en/metadata.show?uuid=d5dd9bebab20ffd9058ebd7d5f8ef2eb86e439fb"/>
+			</MetadataURL>
+			<FormatList>
+				<Format current="1">image/png</Format>
+			</FormatList>
+			<StyleList>
+				<Style current="1">
+					<Name />
+					<Title>Default</Title>
+				</Style>
+			</StyleList>
+			<Extension>
+				<ol:maxExtent xmlns:ol="http://openlayers.org/context"
+					minx="1600000.00000000000" miny="766700.000000000000" maxx="7602904.42599999998"
+					maxy="5961082.30099999998" />
+				<ol:tileSize xmlns:ol="http://openlayers.org/context"
+					width="256" height="256" />
+				<ol:transparent xmlns:ol="http://openlayers.org/context">true</ol:transparent>
+				<ol:numZoomLevels xmlns:ol="http://openlayers.org/context">13</ol:numZoomLevels>
+				<ol:units xmlns:ol="http://openlayers.org/context">m</ol:units>
+				<ol:isBaseLayer xmlns:ol="http://openlayers.org/context">false</ol:isBaseLayer>
+				<ol:displayInLayerSwitcher xmlns:ol="http://openlayers.org/context">true</ol:displayInLayerSwitcher>
+				<ol:singleTile xmlns:ol="http://openlayers.org/context">true</ol:singleTile>
+			</Extension>
+		</Layer>
+		<Layer queryable="0" hidden="1">
+			<Server service="OGC:WMS" version="1.1.1">
+				<OnlineResource xlink:type="simple"
+					xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://climate-adapt.eea.europa.eu/geoserver/wms?" />
+			</Server>
+			<Name>cwa:cta_irr_rb_sue_2050</Name>
+			<Title>Ratio of irrigation water consumption to water availability (2050, SuE)</Title>
+			<MetadataURL>
+				<OnlineResource xlink:type="simple" xmlns:xlink="http://www.w3.org/1999/xlink" 
+					xlink:href="http://climate-adapt.eea.europa.eu/geonetwork/srv/en/metadata.show?uuid=ee5b2f30e2ce03bba7cd99e9cf28f0f64d2d0247"/>
+			</MetadataURL>
+			<FormatList>
+				<Format current="1">image/png</Format>
+			</FormatList>
+			<StyleList>
+				<Style current="1">
+					<Name />
+					<Title>Default</Title>
+				</Style>
+			</StyleList>
+			<Extension>
+				<ol:maxExtent xmlns:ol="http://openlayers.org/context"
+					minx="1600000.00000000000" miny="766700.000000000000" maxx="7602904.42599999998"
+					maxy="5961082.30099999998" />
+				<ol:tileSize xmlns:ol="http://openlayers.org/context"
+					width="256" height="256" />
+				<ol:transparent xmlns:ol="http://openlayers.org/context">true</ol:transparent>
+				<ol:numZoomLevels xmlns:ol="http://openlayers.org/context">13</ol:numZoomLevels>
+				<ol:units xmlns:ol="http://openlayers.org/context">m</ol:units>
+				<ol:isBaseLayer xmlns:ol="http://openlayers.org/context">false</ol:isBaseLayer>
+				<ol:displayInLayerSwitcher xmlns:ol="http://openlayers.org/context">true</ol:displayInLayerSwitcher>
+				<ol:singleTile xmlns:ol="http://openlayers.org/context">true</ol:singleTile>
+			</Extension>
+		</Layer>
+		<Layer queryable="0" hidden="1">
+			<Server service="OGC:WMS" version="1.1.1">
+				<OnlineResource xlink:type="simple"
+					xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://climate-adapt.eea.europa.eu/geoserver/wms?" />
+			</Server>
+			<Name>cwa:cta_irr_rb_base</Name>
+			<Title>Ratio of irrigation water consumption to water availability (baseline)</Title>
+			<MetadataURL>
+				<OnlineResource xlink:type="simple" xmlns:xlink="http://www.w3.org/1999/xlink" 
+					xlink:href="http://climate-adapt.eea.europa.eu/geonetwork/srv/en/metadata.show?uuid=d0a4a9bb9677285bc9beda1eb09f0ee28c9026d1"/>
+			</MetadataURL>
+			<FormatList>
+				<Format current="1">image/png</Format>
+			</FormatList>
+			<StyleList>
+				<Style current="1">
+					<Name />
+					<Title>Default</Title>
+				</Style>
+			</StyleList>
+			<Extension>
+				<ol:maxExtent xmlns:ol="http://openlayers.org/context"
+					minx="1600000.00000000000" miny="766700.000000000000" maxx="7602904.42599999998"
+					maxy="5961082.30099999998" />
+				<ol:tileSize xmlns:ol="http://openlayers.org/context"
+					width="256" height="256" />
+				<ol:transparent xmlns:ol="http://openlayers.org/context">true</ol:transparent>
+				<ol:numZoomLevels xmlns:ol="http://openlayers.org/context">13</ol:numZoomLevels>
+				<ol:units xmlns:ol="http://openlayers.org/context">m</ol:units>
+				<ol:isBaseLayer xmlns:ol="http://openlayers.org/context">false</ol:isBaseLayer>
+				<ol:displayInLayerSwitcher xmlns:ol="http://openlayers.org/context">true</ol:displayInLayerSwitcher>
+				<ol:singleTile xmlns:ol="http://openlayers.org/context">true</ol:singleTile>
+			</Extension>
+		</Layer>
+		<Layer queryable="0" hidden="1">
+			<Server service="OGC:WMS" version="1.1.1">
+				<OnlineResource xlink:type="simple"
+					xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://climate-adapt.eea.europa.eu/geoserver/wms?" />
+			</Server>
+			<Name>cwa:wei_rb_ecf_2050_jja</Name>
+			<Title>Water stress, summer (2050, EcF)</Title>
+			<MetadataURL>
+				<OnlineResource xlink:type="simple" xmlns:xlink="http://www.w3.org/1999/xlink" 
+					xlink:href="http://climate-adapt.eea.europa.eu/geonetwork/srv/en/metadata.show?uuid=39248e7730d3e229e15100b59fd1bd5397fb319d"/>
+			</MetadataURL>
+			<FormatList>
+				<Format current="1">image/png</Format>
+			</FormatList>
+			<StyleList>
+				<Style current="1">
+					<Name />
+					<Title>Default</Title>
+				</Style>
+			</StyleList>
+			<Extension>
+				<ol:maxExtent xmlns:ol="http://openlayers.org/context"
+					minx="1600000.00000000000" miny="766700.000000000000" maxx="7602904.42599999998"
+					maxy="5961082.30099999998" />
+				<ol:tileSize xmlns:ol="http://openlayers.org/context"
+					width="256" height="256" />
+				<ol:transparent xmlns:ol="http://openlayers.org/context">true</ol:transparent>
+				<ol:numZoomLevels xmlns:ol="http://openlayers.org/context">13</ol:numZoomLevels>
+				<ol:units xmlns:ol="http://openlayers.org/context">m</ol:units>
+				<ol:isBaseLayer xmlns:ol="http://openlayers.org/context">false</ol:isBaseLayer>
+				<ol:displayInLayerSwitcher xmlns:ol="http://openlayers.org/context">true</ol:displayInLayerSwitcher>
+				<ol:singleTile xmlns:ol="http://openlayers.org/context">true</ol:singleTile>
+			</Extension>
+		</Layer>
+		<Layer queryable="0" hidden="1">
+			<Server service="OGC:WMS" version="1.1.1">
+				<OnlineResource xlink:type="simple"
+					xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://climate-adapt.eea.europa.eu/geoserver/wms?" />
+			</Server>
+			<Name>cwa:wei_rb_sue_2050_jja</Name>
+			<Title>Water stress, summer (2050, SUE)</Title>
+			<MetadataURL>
+				<OnlineResource xlink:type="simple" xmlns:xlink="http://www.w3.org/1999/xlink" 
+					xlink:href="http://climate-adapt.eea.europa.eu/geonetwork/srv/en/metadata.show?uuid=290bc7c0ce25db534aca47e20831d8a0eeecb4a5"/>
+			</MetadataURL>
+			<FormatList>
+				<Format current="1">image/png</Format>
+			</FormatList>
+			<StyleList>
+				<Style current="1">
+					<Name />
+					<Title>Default</Title>
+				</Style>
+			</StyleList>
+			<Extension>
+				<ol:maxExtent xmlns:ol="http://openlayers.org/context"
+					minx="1600000.00000000000" miny="766700.000000000000" maxx="7602904.42599999998"
+					maxy="5961082.30099999998" />
+				<ol:tileSize xmlns:ol="http://openlayers.org/context"
+					width="256" height="256" />
+				<ol:transparent xmlns:ol="http://openlayers.org/context">true</ol:transparent>
+				<ol:numZoomLevels xmlns:ol="http://openlayers.org/context">13</ol:numZoomLevels>
+				<ol:units xmlns:ol="http://openlayers.org/context">m</ol:units>
+				<ol:isBaseLayer xmlns:ol="http://openlayers.org/context">false</ol:isBaseLayer>
+				<ol:displayInLayerSwitcher xmlns:ol="http://openlayers.org/context">true</ol:displayInLayerSwitcher>
+				<ol:singleTile xmlns:ol="http://openlayers.org/context">true</ol:singleTile>
+			</Extension>
+		</Layer>
+		<Layer queryable="0" hidden="1">
+			<Server service="OGC:WMS" version="1.1.1">
+				<OnlineResource xlink:type="simple"
+					xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://climate-adapt.eea.europa.eu/geoserver/wms?" />
+			</Server>
+			<Name>cwa:wei_rb_base_jja</Name>
+			<Title>Water stress, summer (base line)</Title>
+			<MetadataURL>
+				<OnlineResource xlink:type="simple" xmlns:xlink="http://www.w3.org/1999/xlink" 
+					xlink:href="http://climate-adapt.eea.europa.eu/geonetwork/srv/en/metadata.show?uuid=e7714fb98fa48af1beca80ab426ca0a600417a15"/>
+			</MetadataURL>
+			<FormatList>
+				<Format current="1">image/png</Format>
+			</FormatList>
+			<StyleList>
+				<Style current="1">
+					<Name />
+					<Title>Default</Title>
+				</Style>
+			</StyleList>
+			<Extension>
+				<ol:maxExtent xmlns:ol="http://openlayers.org/context"
+					minx="1600000.00000000000" miny="766700.000000000000" maxx="7602904.42599999998"
+					maxy="5961082.30099999998" />
+				<ol:tileSize xmlns:ol="http://openlayers.org/context"
+					width="256" height="256" />
+				<ol:transparent xmlns:ol="http://openlayers.org/context">true</ol:transparent>
+				<ol:numZoomLevels xmlns:ol="http://openlayers.org/context">13</ol:numZoomLevels>
+				<ol:units xmlns:ol="http://openlayers.org/context">m</ol:units>
+				<ol:isBaseLayer xmlns:ol="http://openlayers.org/context">false</ol:isBaseLayer>
+				<ol:displayInLayerSwitcher xmlns:ol="http://openlayers.org/context">true</ol:displayInLayerSwitcher>
+				<ol:singleTile xmlns:ol="http://openlayers.org/context">true</ol:singleTile>
+			</Extension>
+		</Layer>
+		<Layer queryable="0" hidden="1">
+			<Server service="OGC:WMS" version="1.1.1">
+				<OnlineResource xlink:type="simple"
+					xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://climate-adapt.eea.europa.eu/geoserver/wms?" />
+			</Server>
+			<Name>cwa:wei_rb_ecf_2050_ann</Name>
+			<Title>Annual average water stress (2050, EcF)</Title>
+			<MetadataURL>
+				<OnlineResource xlink:type="simple" xmlns:xlink="http://www.w3.org/1999/xlink" 
+					xlink:href="http://climate-adapt.eea.europa.eu/geonetwork/srv/en/metadata.show?uuid=7b3f60e23781ff0e646369843683bf2125c3ff01"/>
+			</MetadataURL>
+			<FormatList>
+				<Format current="1">image/png</Format>
+			</FormatList>
+			<StyleList>
+				<Style current="1">
+					<Name />
+					<Title>Default</Title>
+				</Style>
+			</StyleList>
+			<Extension>
+				<ol:maxExtent xmlns:ol="http://openlayers.org/context"
+					minx="1600000.00000000000" miny="766700.000000000000" maxx="7602904.42599999998"
+					maxy="5961082.30099999998" />
+				<ol:tileSize xmlns:ol="http://openlayers.org/context"
+					width="256" height="256" />
+				<ol:transparent xmlns:ol="http://openlayers.org/context">true</ol:transparent>
+				<ol:numZoomLevels xmlns:ol="http://openlayers.org/context">13</ol:numZoomLevels>
+				<ol:units xmlns:ol="http://openlayers.org/context">m</ol:units>
+				<ol:isBaseLayer xmlns:ol="http://openlayers.org/context">false</ol:isBaseLayer>
+				<ol:displayInLayerSwitcher xmlns:ol="http://openlayers.org/context">true</ol:displayInLayerSwitcher>
+				<ol:singleTile xmlns:ol="http://openlayers.org/context">true</ol:singleTile>
+			</Extension>
+		</Layer>
+		<Layer queryable="0" hidden="1">
+			<Server service="OGC:WMS" version="1.1.1">
+				<OnlineResource xlink:type="simple"
+					xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://climate-adapt.eea.europa.eu/geoserver/wms?" />
+			</Server>
+			<Name>cwa:wei_rb_sue_2050_ann</Name>
+			<Title>Annual average water stress (2050, SUE)</Title>
+			<MetadataURL>
+				<OnlineResource xlink:type="simple" xmlns:xlink="http://www.w3.org/1999/xlink" 
+					xlink:href="http://climate-adapt.eea.europa.eu/geonetwork/srv/en/metadata.show?uuid=f0722e584835ddb0126fa86d0dd451cb9496b0b7"/>
+			</MetadataURL>
+			<FormatList>
+				<Format current="1">image/png</Format>
+			</FormatList>
+			<StyleList>
+				<Style current="1">
+					<Name />
+					<Title>Default</Title>
+				</Style>
+			</StyleList>
+			<Extension>
+				<ol:maxExtent xmlns:ol="http://openlayers.org/context"
+					minx="1600000.00000000000" miny="766700.000000000000" maxx="7602904.42599999998"
+					maxy="5961082.30099999998" />
+				<ol:tileSize xmlns:ol="http://openlayers.org/context"
+					width="256" height="256" />
+				<ol:transparent xmlns:ol="http://openlayers.org/context">true</ol:transparent>
+				<ol:numZoomLevels xmlns:ol="http://openlayers.org/context">13</ol:numZoomLevels>
+				<ol:units xmlns:ol="http://openlayers.org/context">m</ol:units>
+				<ol:isBaseLayer xmlns:ol="http://openlayers.org/context">false</ol:isBaseLayer>
+				<ol:displayInLayerSwitcher xmlns:ol="http://openlayers.org/context">true</ol:displayInLayerSwitcher>
+				<ol:singleTile xmlns:ol="http://openlayers.org/context">true</ol:singleTile>
+			</Extension>
+		</Layer>
+		<Layer queryable="0" hidden="0">
+			<Server service="OGC:WMS" version="1.1.1">
+				<OnlineResource xlink:type="simple"
+					xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://climate-adapt.eea.europa.eu/geoserver/wms?" />
+			</Server>
+			<Name>cwa:wei_rb_base_ann</Name>
+			<Title>Annual average water stress (base line)</Title>
+			<MetadataURL>
+				<OnlineResource xlink:type="simple" xmlns:xlink="http://www.w3.org/1999/xlink" 
+					xlink:href="http://climate-adapt.eea.europa.eu/geonetwork/srv/en/metadata.show?uuid=874ddad6f8afb1f8024d806b603d55c341e458db"/>
+			</MetadataURL>
+			<FormatList>
+				<Format current="1">image/png</Format>
+			</FormatList>
+			<StyleList>
+				<Style current="1">
+					<Name />
+					<Title>Default</Title>
+				</Style>
+			</StyleList>
+			<Extension>
+				<ol:maxExtent xmlns:ol="http://openlayers.org/context"
+					minx="1600000.00000000000" miny="766700.000000000000" maxx="7602904.42599999998"
+					maxy="5961082.30099999998" />
+				<ol:tileSize xmlns:ol="http://openlayers.org/context"
+					width="256" height="256" />
+				<ol:transparent xmlns:ol="http://openlayers.org/context">true</ol:transparent>
+				<ol:numZoomLevels xmlns:ol="http://openlayers.org/context">13</ol:numZoomLevels>
+				<ol:units xmlns:ol="http://openlayers.org/context">m</ol:units>
+				<ol:isBaseLayer xmlns:ol="http://openlayers.org/context">false</ol:isBaseLayer>
+				<ol:displayInLayerSwitcher xmlns:ol="http://openlayers.org/context">true</ol:displayInLayerSwitcher>
+				<ol:singleTile xmlns:ol="http://openlayers.org/context">true</ol:singleTile>
+			</Extension>
+		</Layer>
+		<Layer queryable="0" hidden="0">
+			<Server service="OGC:WMS" version="1.1.1">
+				<OnlineResource xlink:type="simple"
+					xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://climate-adapt.eea.europa.eu/geoserver/wms?" />
+			</Server>
+			<Name>foreground</Name>
+			<Title>Topography</Title>
+			<FormatList>
+				<Format current="1">image/png</Format>
+			</FormatList>
+			<StyleList>
+				<Style current="1">
+					<Name />
+					<Title>Default</Title>
+				</Style>
+			</StyleList>
+			<Extension>
+				<ol:maxExtent xmlns:ol="http://openlayers.org/context"
+					minx="1600000.00000000000" miny="766700.000000000000" maxx="7602904.42599999998"
+					maxy="5961082.30099999998" />
+				<ol:tileSize xmlns:ol="http://openlayers.org/context"
+					width="256" height="256" />
+				<ol:transparent xmlns:ol="http://openlayers.org/context">true</ol:transparent>
+				<ol:numZoomLevels xmlns:ol="http://openlayers.org/context">13</ol:numZoomLevels>
+				<ol:units xmlns:ol="http://openlayers.org/context">m</ol:units>
+				<ol:isBaseLayer xmlns:ol="http://openlayers.org/context">false</ol:isBaseLayer>
+				<ol:displayInLayerSwitcher xmlns:ol="http://openlayers.org/context">true</ol:displayInLayerSwitcher>
+				<ol:singleTile xmlns:ol="http://openlayers.org/context">true</ol:singleTile>
+			</Extension>
+		</Layer>
+	</LayerList>
+</ViewContext>

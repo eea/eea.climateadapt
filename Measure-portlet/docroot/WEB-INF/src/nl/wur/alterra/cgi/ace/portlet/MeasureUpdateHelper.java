@@ -295,12 +295,20 @@ public abstract class MeasureUpdateHelper extends MVCPortlet {
                 + ' ' + measure.getSucceslimitations() + ' ' + measure.getCostbenefit() + ' '
                 + measure.getStakeholderparticipation() + ' ' + measure.getSource() + ' ' + measure.getTextwebpage());
 
+/* At free text searxh don't search any longer on Advanced Search Fields
         String sctrs = measure.getSectors_();
-
         if ((coalesce(sctrs).length() > 0) && (sctrs.indexOf(";") == sctrs.lastIndexOf(";"))) { // one
                                                                                                 // sector
 
             aceitem.setTextSearch(aceitem.getTextSearch() + ' ' + coalesce(sctrs.substring(0, sctrs.indexOf(";"))));
+        }
+        
+        String lmnts = measure.getElements_();
+
+        if ((coalesce(lmnts).length() > 0) && (lmnts.indexOf(";") == lmnts.lastIndexOf(";"))) { // one
+                                                                                                // element
+
+            aceitem.setTextSearch(aceitem.getTextSearch() + ' ' + coalesce(lmnts.substring(0, lmnts.indexOf(";"))));
         }
 
         String mpcts = measure.getClimateimpacts_();
@@ -311,7 +319,7 @@ public abstract class MeasureUpdateHelper extends MVCPortlet {
 
             aceitem.setTextSearch(aceitem.getTextSearch() + ' ' + coalesce(mpcts.substring(0, mpcts.indexOf(";"))));
         }
-
+*/
         AceItemLocalServiceUtil.updateAceItem(aceitem);
 
         new ACEIndexSynchronizer().reIndex(aceitem);
@@ -353,7 +361,16 @@ public abstract class MeasureUpdateHelper extends MVCPortlet {
                 contributorAddress[0] = new InternetAddress(useremail);
                 subject = "Your submission to Climate-ADAPT";
                 body = "You have successfully submitted information to Climate-ADAPT regarding '" + measure.getName() + "'.\n";
-                body += "This material will be reviewed prior to publication. We thank you for your interest in Climate-ADAPT.";
+                body += "This material will be reviewed prior to publication.\n";
+                body += "As long as the item has not been approved you can still make changes by going to:\n\n";
+                body += hosturl + "/share-your-info/" ;
+                if (measure.getMao_type().equalsIgnoreCase("A")) {
+                    body += "case-studies";
+                } else {
+                    body += "adaptation-options";
+                }
+                body += "?submissionid=" + measure.getMeasureId();
+                body += "\n\nWe thank you for your interest in Climate-ADAPT.";
                 MailEngine.send(fromInternetAddress, contributorAddress, null, null, subject, body, false, null, null, null);
             } catch (Exception e) {
                 // do nothing

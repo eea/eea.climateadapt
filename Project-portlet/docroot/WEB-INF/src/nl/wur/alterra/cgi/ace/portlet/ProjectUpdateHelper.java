@@ -247,6 +247,7 @@ public abstract class ProjectUpdateHelper extends MVCPortlet {
                 + ' ' + project.getKeywords() + ' ' + project.getSource() + ' ' + project.getSpatialvalues() + ' '
                 + project.getTextwebpage());
 
+/* At free text searxh don't search any longer on Advanced Search Fields
         String sctrs = project.getSectors();
 
         if ((coalesce(sctrs).length() > 0) && (sctrs.indexOf(";") == sctrs.lastIndexOf(";"))) { // one
@@ -254,7 +255,23 @@ public abstract class ProjectUpdateHelper extends MVCPortlet {
 
             aceitem.setTextSearch(aceitem.getTextSearch() + ' ' + coalesce(sctrs.substring(0, sctrs.indexOf(";"))));
         }
+        String lmnt = project.getElement();
 
+        if ((coalesce(lmnt).length() > 0) && (lmnt.indexOf(";") == lmnt.lastIndexOf(";"))) { // one
+                                                                                                // element
+
+            aceitem.setTextSearch(aceitem.getTextSearch() + ' ' + coalesce(lmnt.substring(0, lmnt.indexOf(";"))));
+        }
+
+        String mpcts = project.getClimateimpacts();
+
+        if ((coalesce(mpcts).length() > 0) && (mpcts.indexOf(";") == mpcts.lastIndexOf(";"))) { // one
+                                                                                                // climate
+                                                                                                // impact
+
+            aceitem.setTextSearch(aceitem.getTextSearch() + ' ' + coalesce(mpcts.substring(0, mpcts.indexOf(";"))));
+        }
+*/        
         AceItemLocalServiceUtil.updateAceItem(aceitem);
 
         new ACEIndexSynchronizer().reIndex(aceitem);
@@ -290,7 +307,10 @@ public abstract class ProjectUpdateHelper extends MVCPortlet {
                 contributorAddress[0] = new InternetAddress(useremail);
                 subject = "Your submission to Climate-ADAPT";
                 body = "You have successfully submitted information to Climate-ADAPT regarding '" + project.getAcronym() + "'.\n";
-                body += "This material will be reviewed prior to publication. We thank you for your interest in Climate-ADAPT.";
+                body += "This material will be reviewed prior to publication.\n";
+                body += "As long as the item has not been approved you can still make changes by going to:\n\n";
+                body += hosturl + "/share-your-info/research-and-knowledge-projects?submissionid=" + project.getProjectId();
+                body += "\n\nWe thank you for your interest in Climate-ADAPT.";
                 MailEngine.send(fromInternetAddress, contributorAddress, null, null, subject, body, false, null, null, null);
             } catch (Exception e) {
                 // do nothing
