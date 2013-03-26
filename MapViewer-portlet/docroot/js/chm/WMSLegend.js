@@ -24,8 +24,6 @@ CHM.WMSLegend = Ext.extend(GeoExt.WMSLegend, {
             FORMAT: "image/png"
         });
         
-        console.log(url);
-        
         return url;
     }
 });
