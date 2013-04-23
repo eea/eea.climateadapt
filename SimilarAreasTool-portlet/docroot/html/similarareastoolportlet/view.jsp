@@ -79,7 +79,7 @@
 	
 	var areaColumn = '<%= prefs.getValue(Constants.areaColumnPreferenceName, "area") %>';
 	
-	var locatorUrl = '<%= prefs.getValue(Constants.locatorUrlPreferenceName, "http://dev.virtualearth.net/REST/v1/Locations/") %>';
+	var locatorUrl = '<%= prefs.getValue(Constants.locatorUrlPreferenceName, "http://geocode.arcgis.com/arcgis/rest/services/World/GeocodeServer") %>';
 	
 	var locatorKey = '<%= prefs.getValue(Constants.locatorKeyPreferenceName, "Ao9qujBzDtg-nFiusTjt5VQ9x2NJB2wAD7YCRjaPz7hQQjxdFcl24tyhOwCDCIrw") %>';
 	
@@ -111,10 +111,6 @@
         
         satchmmap.addSATLayers();
         
-        locator = new CHM.Locator('locations_element', {});
-
-    	locator.setOnLocationChanged(handleLocationChanged);
-    	
     	riskChange();
     				
     	sectorChange();
@@ -143,4 +139,13 @@
     function locate(aLocation) {
     	locator.locate(aLocation);
     }
+
+	dojo.require("esri.map");
+	dojo.require("esri.dijit.Geocoder");
+
+	dojo.ready(function() {
+		locator = new CHM.Locator('locations_element', {});
+
+		locator.setOnLocationChanged(handleLocationChanged);
+	});
 </script>
