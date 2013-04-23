@@ -59,32 +59,34 @@ CHM.SATVector = OpenLayers.Class(OpenLayers.Layer.Vector, {
 	},
 	
 	applyFilters : function() {
+        this.removeAllFeatures();
+     	
 		var filters = new Array();
 		
 		if (this.area != null) {
 			var area_filter = this.createFilter(this.type, areaColumn, this.area);
 			
 			filters.push(area_filter);
+		}
 			
-			if (this.risk != "ALL") {
-				var risk_filter = this.createFilter(OpenLayers.Filter.Comparison.LIKE, 'risks', '*' + this.risk + '*');
+		if (this.risk != "ALL" && this.risk != null) {
+			var risk_filter = this.createFilter(OpenLayers.Filter.Comparison.LIKE, 'risks', '*' + this.risk + '*');
 				
-				filters.push(risk_filter);
-			}
+			filters.push(risk_filter);
+		}
 			
-			if (this.sector != "ALL") {
-				var sector_filter = this.createFilter(OpenLayers.Filter.Comparison.LIKE, 'sectors', '*' + this.sector + '*');
+		if (this.sector != "ALL" && this.sector != null) {
+			var sector_filter = this.createFilter(OpenLayers.Filter.Comparison.LIKE, 'sectors', '*' + this.sector + '*');
 				
-				filters.push(sector_filter);
-			}
+			filters.push(sector_filter);
+		}
 			
+		if (filters.length > 0) {
 		    var filter = new OpenLayers.Filter.Logical({
 			    type: OpenLayers.Filter.Logical.AND,
 			    filters: filters
 		    });
-		    
-	        this.removeAllFeatures();
-	         	
+				    
 	        protocol.read({
 	            filter: filter,
 	            callback: function(result) {
@@ -97,7 +99,18 @@ CHM.SATVector = OpenLayers.Class(OpenLayers.Layer.Vector, {
 	            scope: this
 	        });
 		} else {
-			this.removeAllFeatures();
+			if (this.type == OpenLayers.Filter.Comparison.NOT_EQUAL_TO) {
+				protocol.read({
+					callback: function(result) {
+						if(result.success()) {
+							if(result.features.length) {
+								this.addFeatures(result.features);
+							}
+						}
+					},
+					scope: this
+				});
+			}
 		}
 	}, 
 		

@@ -85,6 +85,8 @@
 	
 	var zoomLevel = '<%= prefs.getValue(Constants.zoomLevelPreferenceName, "2") %>';
 	
+	var root = '/SimilarAreasTool-portlet/';
+	
 	var satchmmap;
 				
 	var locator;

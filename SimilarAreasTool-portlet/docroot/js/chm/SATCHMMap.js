@@ -19,7 +19,7 @@ CHM.SATCHMMap = OpenLayers.Class(CHM.CHMMap, {
 	    	    "default": new OpenLayers.Style({
 	    	        pointRadius: 24,
 	    	        graphicZIndex: 1,
-			        externalGraphic: '/SimilarAreasTool-portlet/js/chm/markers/location.png'
+			        externalGraphic: root + 'js/chm/markers/location.png'
 	    	    }),
 	    	})
 	    });
@@ -56,7 +56,7 @@ CHM.SATCHMMap = OpenLayers.Class(CHM.CHMMap, {
     			displayInLayerSwitcher: true,
         		type: OpenLayers.Filter.Comparison.EQUAL_TO, 
         		radius: 20,
-        		marker: '/SimilarAreasTool-portlet/js/chm/markers/similar.png'
+        		marker: root + 'js/chm/markers/similar.png'
         	});
         
         case_studies_dissimilar_areas = new CHM.SATVector(
@@ -65,7 +65,7 @@ CHM.SATCHMMap = OpenLayers.Class(CHM.CHMMap, {
     			displayInLayerSwitcher: true,
         		type: OpenLayers.Filter.Comparison.NOT_EQUAL_TO, 
         		radius: 16,
-        		marker: '/SimilarAreasTool-portlet/js/chm/markers/dissimilar.png'
+        		marker: root + 'js/chm/markers/dissimilar.png'
         	});
         
         select = new OpenLayers.Layer.Vector(
