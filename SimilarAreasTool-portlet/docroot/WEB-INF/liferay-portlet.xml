@@ -8,6 +8,8 @@
 		<icon>/icon.png</icon>
 		<instanceable>false</instanceable>
 		<header-portlet-css>/css/portlet.css</header-portlet-css>
+		<header-portlet-css>/css/ext-all.css</header-portlet-css>
+		<header-portlet-css>/css/tooltip.css</header-portlet-css>
 		<header-portlet-javascript>http://ecn.dev.virtualearth.net/mapcontrol/mapcontrol.ashx?v=6.2&amp;mkt=en-us"</header-portlet-javascript>
 		<header-portlet-javascript>http://serverapi.arcgisonline.com/jsapi/arcgis/3.4compact</header-portlet-javascript>
 		<header-portlet-javascript>/js/ext-base.js</header-portlet-javascript>
@@ -18,8 +20,8 @@
 		<header-portlet-javascript>/js/chm/CHMMap.js</header-portlet-javascript>
 		<header-portlet-javascript>/js/chm/SATCHMMap.js</header-portlet-javascript>
 		<header-portlet-javascript>/js/chm/SATVector.js</header-portlet-javascript>
-		<header-portlet-javascript>/js/chm/Resource.js</header-portlet-javascript>
-		<header-portlet-javascript>/js/chm/ResourceSet.js</header-portlet-javascript>
+		<header-portlet-javascript>/js/chm/Candidate.js</header-portlet-javascript>
+		<header-portlet-javascript>/js/chm/Candidates.js</header-portlet-javascript>
 		<header-portlet-javascript>/js/chm/Point.js</header-portlet-javascript>
 		<header-portlet-javascript>/js/chm/Location.js</header-portlet-javascript>
 		<header-portlet-javascript>/js/chm/LocationControl.js</header-portlet-javascript>
