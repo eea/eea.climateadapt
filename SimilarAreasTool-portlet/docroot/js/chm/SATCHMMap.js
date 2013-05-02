@@ -2,6 +2,10 @@ CHM.SATCHMMap = OpenLayers.Class(CHM.CHMMap, {
 
 	location : null,
 	
+	feature: null,
+	
+	tooltip: null,
+	
     selectionSymbolizer: {
         'Polygon': {fillColor: '#FF0000', stroke: false},
         'Line': {strokeColor: '#FF0000', strokeWidth: 2},
@@ -91,44 +95,12 @@ CHM.SATCHMMap = OpenLayers.Class(CHM.CHMMap, {
 			{
 				multiple: false, 
 				hover: false,
-				onSelect: this.onFeatureSelect, 
-				onUnselect: this.onFeatureUnselect
 			});
      
      	this.addControl(selectfeaturescontrol);
 	        
         selectfeaturescontrol.activate();
 	}, 
-	
-	onFeatureSelect : function(feature) {
-		var description = feature.attributes.desc;
-		
-		if (description == undefined) {
-			description = '';
-		}
-		
-		popup = new OpenLayers.Popup.Anchored(null, 
-        	feature.geometry.getBounds().getCenterLonLat(),
-        	new OpenLayers.Size(250,100),
-            "<table width='100%' border='0'>" +
-            "<tr><th>" + feature.attributes.itemname + "</th></tr>" + 
-            "<tr><td>" + description + "</td></tr>" + 
-            "<tr><td><a href='/viewmeasure?ace_measure_id=" + feature.attributes.measureid + "' target='_blank'>read more</a></td></tr>" + 
-            "</table>",
-            null, true, null);
-            
-        feature.popup = popup;
-        
-        this.map.addPopup(popup);
-	},
-        
-    onFeatureUnselect : function(feature) {
-		this.map.removePopup(feature.popup);
-		
-		feature.popup.destroy();
-		
-		feature.popup = null;
-	},
 	
 	setArea : function(aArea) {
 		similar_areas_image_layer.mergeNewParams({'CQL_FILTER': "biogeo = '" + aArea + "' "});

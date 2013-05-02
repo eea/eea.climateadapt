@@ -14,6 +14,8 @@ CHM.SATVector = OpenLayers.Class(OpenLayers.Layer.Vector, {
 	
 	sector: null,
 	
+	tooltip: null,
+	
 	initialize: function(options) {
 		OpenLayers.Layer.Vector.prototype.initialize.apply(this, arguments);
 		
@@ -38,6 +40,63 @@ CHM.SATVector = OpenLayers.Class(OpenLayers.Layer.Vector, {
 		        externalGraphic: this.marker
 	        })
         });
+        
+        this.events.register('featureselected', this, this.handleFeatureSelected);
+        
+        if ((typeof Range !== "undefined") && !Range.prototype.createContextualFragment)
+        {
+        	Range.prototype.createContextualFragment = function(html)
+        	{
+        		var frag = document.createDocumentFragment(), 
+        		div = document.createElement("div");
+        		frag.appendChild(div);
+        		div.outerHTML = html;
+        		return frag;
+        	};
+        }        
+	},
+	
+	handleFeatureSelected: function(event) {
+	    Ext.QuickTips.init();
+	    
+		if (this.tooltip != null) {
+			this.tooltip.destroy();
+		}
+		
+	    var description = event.feature.attributes.desc;
+		
+		if (description == undefined) {
+			description = '';
+		}
+		
+		pixel = this.map.getViewPortPxFromLonLat(event.feature.geometry.getBounds().getCenterLonLat());
+        
+		this.tooltip = new Ext.ToolTip({        
+            title: '<a href="#">' + event.feature.attributes.itemname + '</a>',
+            id: 'content-anchor-tip',
+            anchor: 'left',
+            html: "<table width='100%' border='0'>" +
+            "<tr><th>" + event.feature.attributes.itemname + "</th></tr>" + 
+            "<tr><td>" + description + "</td></tr>" + 
+            "<tr><td><a href='/viewmeasure?ace_measure_id=" + event.feature.attributes.measureid + "' target='_blank'>read more</a></td></tr>" + 
+            "</table>",
+            width: 415,
+            autoHide: false,
+            closable: true,
+            listeners: {
+                'render': function(){
+                    this.header.on('click', function(e){
+                        e.stopEvent();
+                        Ext.Msg.alert('Link', 'Link to something interesting.');
+                        Ext.getCmp('content-anchor-tip').hide();
+                    }, this, {delegate:'a'});
+                }
+            }
+        });
+        
+		this.tooltip.showAt([pixel.x, pixel.y]);
+        
+		return true;
 	},
 	
 	setArea : function(aArea) {
@@ -63,32 +122,63 @@ CHM.SATVector = OpenLayers.Class(OpenLayers.Layer.Vector, {
      	
 		var filters = new Array();
 		
+		var areafilter = null;
+		
 		if (this.area != null) {
-			var area_filter = this.createFilter(this.type, areaColumn, this.area);
+			areafilter = this.createFilter(this.type, areaColumn, this.area);
 			
-			filters.push(area_filter);
+			filters.push(areafilter);
 		}
+		
+		var riskfilter = null;
 			
 		if (this.risk != "ALL" && this.risk != null) {
-			var risk_filter = this.createFilter(OpenLayers.Filter.Comparison.LIKE, 'risks', '*' + this.risk + '*');
+			riskfilter = this.createFilter(OpenLayers.Filter.Comparison.LIKE, 'risks', '*' + this.risk + '*');
 				
-			filters.push(risk_filter);
+			filters.push(riskfilter);
 		}
+		
+		var sectorfilter = null;
 			
 		if (this.sector != "ALL" && this.sector != null) {
-			var sector_filter = this.createFilter(OpenLayers.Filter.Comparison.LIKE, 'sectors', '*' + this.sector + '*');
+			sectorfilter = this.createFilter(OpenLayers.Filter.Comparison.LIKE, 'sectors', '*' + this.sector + '*');
 				
-			filters.push(sector_filter);
+			filters.push(sectorfilter);
 		}
+		
+		var filter = new OpenLayers.Filter.Logical({
+			type: OpenLayers.Filter.Logical.AND,
+			filters: filters
+		});
 			
-		if (filters.length > 0) {
-		    var filter = new OpenLayers.Filter.Logical({
-			    type: OpenLayers.Filter.Logical.AND,
-			    filters: filters
-		    });
-				    
+		if (areafilter != null) {
+		    this.read(filter);
+		} else if (areafilter == null && (riskfilter != null || sectorfilter != null)) {
+			if (this.type == OpenLayers.Filter.Comparison.NOT_EQUAL_TO) {
+				this.read(filter);
+			}
+		} else {
+			if (this.type == OpenLayers.Filter.Comparison.NOT_EQUAL_TO) {
+				this.read(null);
+			}
+		}
+	}, 
+	
+	read: function(aFilter) {
+		if (aFilter == null) {
+			protocol.read({
+				callback: function(result) {
+					if(result.success()) {
+						if(result.features.length) {
+							this.addFeatures(result.features);
+						}
+					}
+				},
+				scope: this
+			});
+		} else {
 	        protocol.read({
-	            filter: filter,
+	            filter: aFilter,
 	            callback: function(result) {
 	                if(result.success()) {
 	                    if(result.features.length) {
@@ -98,21 +188,8 @@ CHM.SATVector = OpenLayers.Class(OpenLayers.Layer.Vector, {
 	            },
 	            scope: this
 	        });
-		} else {
-			if (this.type == OpenLayers.Filter.Comparison.NOT_EQUAL_TO) {
-				protocol.read({
-					callback: function(result) {
-						if(result.success()) {
-							if(result.features.length) {
-								this.addFeatures(result.features);
-							}
-						}
-					},
-					scope: this
-				});
-			}
 		}
-	}, 
+	},
 		
 	createFilter : function(aType, aProperty, aValue) {
 		var filter = new OpenLayers.Filter.Comparison({
