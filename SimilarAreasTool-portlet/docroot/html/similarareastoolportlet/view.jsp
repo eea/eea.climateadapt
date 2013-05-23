@@ -87,29 +87,22 @@
 	
 	var root = '/SimilarAreasTool-portlet/';
 	
-	var satchmmap;
-				
+	var mappanel;
+	
 	var locator;
 	
     Ext.onReady(function() {
-    	satchmmap = new CHM.SATCHMMap();
+		mappanel = new CHM.MapControl();
 
-        mappanel = new GeoExt.MapPanel({
-            renderTo: 'map_element',
-            height: 350,
-            width: 675,
-            map: satchmmap
-        });
-        
-        legendpanel = new GeoExt.LegendPanel({
-            layerStore: mappanel.layers,
-            renderTo: "legend_element",
-            border: false
-        });
+		legendpanel = new GeoExt.LegendPanel({
+			layerStore : mappanel.layers,
+			renderTo : "legend_element",
+			border : false
+		});
 
-        satchmmap.addBingLayers();
-        
-        satchmmap.addSATLayers();
+		mappanel.map.addBingLayers();
+
+		mappanel.map.addSATLayers();
         
     	riskChange();
     				
@@ -117,7 +110,7 @@
     });
 
 	function handleLocationChanged() {
-		satchmmap.setLocation(locator.getLocation());
+		mappanel.map.setLocation(locator.getLocation());
 	}
     		
     function getSelectedValue(select) {
@@ -127,13 +120,13 @@
     function riskChange() {
     	var risk = getSelectedValue(document.getElementById('riskSelect'));
     				
-    	satchmmap.setRisk(risk);
+    	mappanel.map.setRisk(risk);
     }
     			
     function sectorChange() {
     	var sector = getSelectedValue(document.getElementById('sectorSelect'));
     			
-    	satchmmap.setSector(sector);
+    	mappanel.map.setSector(sector);
     }
     	
     function locate(aLocation) {
@@ -141,6 +134,7 @@
     }
 
 	dojo.require("esri.map");
+	
 	dojo.require("esri.dijit.Geocoder");
 
 	dojo.ready(function() {

@@ -20,8 +20,10 @@
 		<script type="text/javascript" src="js/chm/Locator.js"></script>
 		<script type="text/javascript" src="js/chm/Location.js"></script>
 		<script type="text/javascript" src="js/chm/LocationControl.js"></script>
+		<script type="text/javascript" src="js/chm/MapControl.js"></script>
 		<link rel="stylesheet" href="http://serverapi.arcgisonline.com/jsapi/arcgis/3.4/js/esri/css/esri.css">
 		<link rel="stylesheet" href="css/ext-all.css">
+		<link rel="stylesheet" href="css/portlet.css">
 		<link rel="stylesheet" href="css/tooltip.css">
 	</head>
 	<body>
@@ -70,7 +72,7 @@
 
 		<div id='locations_element'></div>
 
-		<div id='map_element'></div>
+		<div id='map_element' style="width:500px;height:500px;"></div>
 
 		<div id='legend_element'></div>
 		
@@ -112,14 +114,7 @@
 			var locator;
 
 			Ext.onReady(function() {
-				satchmmap = new CHM.SATCHMMap();
-
-				mappanel = new GeoExt.MapPanel({
-					renderTo : 'map_element',
-					height : 500,
-					width : 500,
-					map : satchmmap
-				});
+				mappanel = new CHM.MapControl();
 
 				legendpanel = new GeoExt.LegendPanel({
 					layerStore : mappanel.layers,
@@ -127,9 +122,10 @@
 					border : false
 				});
 
-				satchmmap.addBingLayers();
+    	
+				mappanel.map.addBingLayers();
 
-				satchmmap.addSATLayers();
+				mappanel.map.addSATLayers();
 
 				riskChange();
 
@@ -137,7 +133,7 @@
 			});
 
 			function handleLocationChanged() {
-				satchmmap.setLocation(locator.getLocation());
+				mappanel.map.setLocation(locator.getLocation());
 			}
 
 			function getSelectedValue(select) {
@@ -147,13 +143,13 @@
 			function riskChange() {
 				var risk = getSelectedValue(document.getElementById('riskSelect'));
 
-				satchmmap.setRisk(risk);
+				mappanel.map.setRisk(risk);
 			}
 
 			function sectorChange() {
 				var sector = getSelectedValue(document.getElementById('sectorSelect'));
 
-				satchmmap.setSector(sector);
+				mappanel.map.setSector(sector);
 			}
 
 			function locate(aLocation) {

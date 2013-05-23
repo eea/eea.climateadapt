@@ -16,6 +16,10 @@ CHM.SATVector = OpenLayers.Class(OpenLayers.Layer.Vector, {
 	
 	tooltip: null,
 	
+	offsetX: null,
+	
+	offsetY: null,
+	
 	initialize: function(options) {
 		OpenLayers.Layer.Vector.prototype.initialize.apply(this, arguments);
 		
@@ -73,7 +77,6 @@ CHM.SATVector = OpenLayers.Class(OpenLayers.Layer.Vector, {
         
 		this.tooltip = new Ext.ToolTip({        
             title: '<a href="#">' + event.feature.attributes.itemname + '</a>',
-            id: 'content-anchor-tip',
             anchor: 'left',
             html: "<table width='100%' border='0'>" +
             "<tr><th>" + event.feature.attributes.itemname + "</th></tr>" + 
@@ -87,14 +90,14 @@ CHM.SATVector = OpenLayers.Class(OpenLayers.Layer.Vector, {
                 'render': function(){
                     this.header.on('click', function(e){
                         e.stopEvent();
-                        Ext.Msg.alert('Link', 'Link to something interesting.');
-                        Ext.getCmp('content-anchor-tip').hide();
+                        // Ext.Msg.alert('Link', 'Link to something interesting.');
+                        // Ext.getCmp('content-anchor-tip').hide();
                     }, this, {delegate:'a'});
                 }
             }
         });
         
-		this.tooltip.showAt([pixel.x, pixel.y]);
+		this.tooltip.showAt([pixel.x + this.offsetX, pixel.y + this.offsetY]);
         
 		return true;
 	},

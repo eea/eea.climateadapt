@@ -6,6 +6,14 @@ CHM.SATCHMMap = OpenLayers.Class(CHM.CHMMap, {
 	
 	tooltip: null,
 	
+	caseStudiesSimilarAreasVectorLayer: null,
+	
+	caseStudiesDissimilarAreasVectorLayer: null,
+	
+	offsetX: null,
+	
+	offsetY: null,
+	
     selectionSymbolizer: {
         'Polygon': {fillColor: '#FF0000', stroke: false},
         'Line': {strokeColor: '#FF0000', strokeWidth: 2},
@@ -54,7 +62,7 @@ CHM.SATCHMMap = OpenLayers.Class(CHM.CHMMap, {
 			this.setArea(e.feature.attributes.biogeo);
 		});
 		
-        case_studies_similar_areas = new CHM.SATVector(
+        this.caseStudiesSimilarAreasVectorLayer = new CHM.SATVector(
         	'Case studies in similar areas', 
         	{
     			displayInLayerSwitcher: true,
@@ -63,7 +71,11 @@ CHM.SATCHMMap = OpenLayers.Class(CHM.CHMMap, {
         		marker: root + 'js/chm/markers/similar.png'
         	});
         
-        case_studies_dissimilar_areas = new CHM.SATVector(
+        this.caseStudiesSimilarAreasVectorLayer.offsetX = this.offsetX;
+        
+        this.caseStudiesSimilarAreasVectorLayer.offsetY = this.offsetY;
+        
+        this.caseStudiesDissimilarAreasVectorLayer = new CHM.SATVector(
         	'Case studies in other areas', 
         	{
     			displayInLayerSwitcher: true,
@@ -71,6 +83,10 @@ CHM.SATCHMMap = OpenLayers.Class(CHM.CHMMap, {
         		radius: 16,
         		marker: root + 'js/chm/markers/dissimilar.png'
         	});
+        
+        this.caseStudiesDissimilarAreasVectorLayer.offsetX = this.offsetX;
+        
+        this.caseStudiesDissimilarAreasVectorLayer.offsetY = this.offsetY;
         
         select = new OpenLayers.Layer.Vector(
         	"Selection", 
@@ -82,7 +98,7 @@ CHM.SATCHMMap = OpenLayers.Class(CHM.CHMMap, {
 
 		similar_areas_image_layer.mergeNewParams({'CQL_FILTER': "biogeo = 'JustToMakeSureThatNoAreasAreShownAtStartUp' "});
 		
-		this.addLayers([similar_areas_image_layer, similar_areas_vector_layer, select, case_studies_dissimilar_areas, case_studies_similar_areas, location_vector_layer]);
+		this.addLayers([similar_areas_image_layer, similar_areas_vector_layer, select, this.caseStudiesDissimilarAreasVectorLayer, this.caseStudiesSimilarAreasVectorLayer, location_vector_layer]);
             
 		locationcontrol = new CHM.LocationControl({satCHMMap: this});
 		
@@ -91,7 +107,7 @@ CHM.SATCHMMap = OpenLayers.Class(CHM.CHMMap, {
 		locationcontrol.activate();
 		
 		var selectfeaturescontrol = new OpenLayers.Control.SelectFeature(
-			[case_studies_similar_areas, case_studies_dissimilar_areas], 
+			[this.caseStudiesSimilarAreasVectorLayer, this.caseStudiesDissimilarAreasVectorLayer], 
 			{
 				multiple: false, 
 				hover: false,
@@ -105,21 +121,21 @@ CHM.SATCHMMap = OpenLayers.Class(CHM.CHMMap, {
 	setArea : function(aArea) {
 		similar_areas_image_layer.mergeNewParams({'CQL_FILTER': "biogeo = '" + aArea + "' "});
 		
-		case_studies_similar_areas.setArea(aArea);
+		this.caseStudiesSimilarAreasVectorLayer.setArea(aArea);
 			
-		case_studies_dissimilar_areas.setArea(aArea);
+		this.caseStudiesDissimilarAreasVectorLayer.setArea(aArea);
 	},
 	
 	setRisk : function(aRisk) {
-		case_studies_similar_areas.setRisk(aRisk);
+		this.caseStudiesSimilarAreasVectorLayer.setRisk(aRisk);
 			
-		case_studies_dissimilar_areas.setRisk(aRisk);
+		this.caseStudiesDissimilarAreasVectorLayer.setRisk(aRisk);
 	},
 	
 	setSector : function(aSector) {
-		case_studies_similar_areas.setSector(aSector);
+		this.caseStudiesSimilarAreasVectorLayer.setSector(aSector);
 			
-		case_studies_dissimilar_areas.setSector(aSector);
+		this.caseStudiesDissimilarAreasVectorLayer.setSector(aSector);
 	},
 	
 	setLocation : function(aLocation) {
@@ -168,6 +184,30 @@ CHM.SATCHMMap = OpenLayers.Class(CHM.CHMMap, {
 		    });
 			
 			similar_areas_vector_layer.refresh({force: true});
+		}
+	},
+	
+	setOffsetX: function(aOffsetX) {
+		this.offsetX = aOffsetX;
+		
+		if (this.caseStudiesSimilarAreasVectorLayer != null) {
+			this.caseStudiesSimilarAreasVectorLayer.offsetX = aOffsetX;
+		}
+
+		if (this.caseStudiesDissimilarAreasVectorLayer != null) {
+			this.caseStudiesDissimilarAreasVectorLayer.offsetX = aOffsetX;
+		}
+	},
+	
+	setOffsetY: function(aOffsetY) {
+		this.offsetY = aOffsetY;
+		
+		if (this.caseStudiesSimilarAreasVectorLayer != null) {
+			this.caseStudiesSimilarAreasVectorLayer.offsetY = aOffsetY;
+		}
+
+		if (this.caseStudiesDissimilarAreasVectorLayer != null) {
+			this.caseStudiesDissimilarAreasVectorLayer.offsetY = aOffsetY;
 		}
 	}
 });
