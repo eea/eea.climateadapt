@@ -134,7 +134,7 @@
 		<br/>
         <b>description</b><br />
         <liferay-ui:input-editor/>
-        <input id="<portlet:namespace />descriptionField" type="hidden" name="description" value="<%= aceitem==null ? "" : (aceitem.getDescription()==null ? "" : aceitem.getDescription()) %>"/>
+        <input id="<portlet:namespace />descriptionField" type="hidden" name="description" value="<%= aceitem==null ? "" : (aceitem.getDescription()==null ? "" : HtmlUtil.escape(aceitem.getDescription())) %>"/>
         <br/>
 
         <b>keywords</b><br />

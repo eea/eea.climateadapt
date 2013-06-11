@@ -22,6 +22,7 @@
 <%@ page import="com.liferay.portal.model.Group"%>
 <%@ page import="com.liferay.portal.security.permission.ActionKeys"%>
 <%@ page import="com.liferay.portal.util.PortalUtil" %>
+<%@ page import="com.liferay.portal.util.HtmlUtil" %>
 
 <%@ page import="nl.wur.alterra.cgi.ace.portlet.Constants"%>
 <%@ page import="nl.wur.alterra.cgi.ace.model.AceItem"%>

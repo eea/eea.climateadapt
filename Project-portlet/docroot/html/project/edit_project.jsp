@@ -90,7 +90,7 @@
 
 		<b>abstract</b><br />
 		<liferay-ui:input-editor/>
-		<input id="<portlet:namespace />abstractsField" type="hidden" name="abstracts" value="<%= project==null ? "" : (project.getAbstracts()==null ? "" : project.getAbstracts()) %>"/><br /><br />
+		<input id="<portlet:namespace />abstractsField" type="hidden" name="abstracts" value="<%= project==null ? "" : (project.getAbstracts()==null ? "" : HtmlUtil.escape(project.getAbstracts())) %>"/><br /><br />
 
 		<b>partners</b><br />
 		<textarea name="partners" rows=5 cols=100><%= project == null ? "" : project.getPartners() %></textarea><br /><br />
