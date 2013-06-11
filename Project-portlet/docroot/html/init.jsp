@@ -19,10 +19,11 @@
 <%@ page import="com.liferay.portal.kernel.util.ParamUtil" %>
 <%@ page import="com.liferay.portal.kernel.util.Validator" %>
 <%@ page import="com.liferay.portal.kernel.util.WebKeys" %>
+<%@ page import="com.liferay.portal.kernel.util.HtmlUtil" %>
 <%@ page import="com.liferay.portal.model.Group"%>
 <%@ page import="com.liferay.portal.security.permission.ActionKeys"%>
 <%@ page import="com.liferay.portal.util.PortalUtil" %>
-<%@ page import="com.liferay.portal.util.HtmlUtil" %>
+
 
 <%@ page import="nl.wur.alterra.cgi.ace.portlet.Constants"%>
 <%@ page import="nl.wur.alterra.cgi.ace.model.Project"%>

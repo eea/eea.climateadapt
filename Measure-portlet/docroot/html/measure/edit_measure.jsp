@@ -95,7 +95,7 @@
 
         <b>description</b><br />
         <liferay-ui:input-editor/>
-        <input id="<portlet:namespace />descriptionField" type="hidden" name="description" value="<%= measure==null ? "" : (measure.getDescription()==null ? "" : HtmlUtil.escape(measure.getDescription())) %>"/>
+        <input id="<portlet:namespace />descriptionField" type="hidden" name="description" value="<%= measure==null ? "" : (measure.getDescription()==null ? "" : HtmlUtil.escapeAttribute(measure.getDescription())) %>"/>
         <br /><br />
 
 		<b>legal aspects</b><br />
