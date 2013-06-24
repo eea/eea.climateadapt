@@ -105,7 +105,7 @@
 		</portlet-class>
 		<init-param>
 			<name>view-jsp</name>
-			<value>/html/measuredetail/view.jsp</value>
+			<value>/html/measuredetail/measureview.jsp</value>
 		</init-param>
 		<expiration-cache>0</expiration-cache>
 		<supports>
@@ -191,7 +191,7 @@
 			<name>edit-jsp</name>
 			<value>/html/shareinfo/edit.jsp</value>
 		</init-param>
-		<expiration-cache>0</expiration-cache>
+       	<expiration-cache>0</expiration-cache>
 		<supports>
 			<mime-type>text/html</mime-type>
 			<portlet-mode>VIEW</portlet-mode>

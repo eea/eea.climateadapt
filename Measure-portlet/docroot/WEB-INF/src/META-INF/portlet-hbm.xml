@@ -10,6 +10,8 @@
 		</id>
 		<property name="companyId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 		<property name="groupId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="admincomment" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="casestudyfeature" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="name" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="description" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="implementationtype" type="com.liferay.portal.dao.orm.hibernate.StringType" />
@@ -20,10 +22,16 @@
 		<property name="legalaspects" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="stakeholderparticipation" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="contact" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="objectives" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="challenges" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="adaptationoptions" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="solutions" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="relevance" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="succeslimitations" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="website" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="costbenefit" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="keywords" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="geos_" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="startdate" type="org.hibernate.type.TimestampType" />
 		<property name="enddate" type="org.hibernate.type.TimestampType" />
 		<property name="publicationdate" type="org.hibernate.type.TimestampType" />
@@ -46,5 +54,10 @@
 		<property name="replacesId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 		<property name="comments" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="textwebpage" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="primephoto" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="supphotos" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="supdocs" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="year" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="geochars" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 	</class>
 </hibernate-mapping>

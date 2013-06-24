@@ -14,6 +14,8 @@
 		<column name="groupId" type="long" />
 
 		<!-- Other columns -->
+		<column name="admincomment" type="String" />
+		<column name="casestudyfeature" type="String" />
 		<column name="name" type="String" />
 		<column name="description" type="String" />
 		<column name="implementationtype" type="String" />
@@ -24,10 +26,16 @@
 		<column name="legalaspects" type="String" />
 		<column name="stakeholderparticipation" type="String" />
 		<column name="contact" type="String" />
+		<column name="objectives" type="String" />
+		<column name="challenges" type="String" />
+		<column name="adaptationoptions" type="String" />
+		<column name="solutions" type="String" />
+		<column name="relevance" type="String" />
 		<column name="succeslimitations" type="String" />
 		<column name="website" type="String" />
 		<column name="costbenefit" type="String" />
 		<column name="keywords" type="String" />
+		<column name="geos_" type="String" />
 		<column name="startdate" type="Date" />
 		<column name="enddate" type="Date" />
 		<column name="publicationdate" type="Date" />
@@ -50,6 +58,11 @@
 		<column name="replacesId" type="long" />
 		<column name="comments" type="String" />
 		<column name="textwebpage" type="String" />
+		<column name="primephoto" type="String" />
+		<column name="supphotos" type="String" />
+		<column name="supdocs" type="String" />
+		<column name="year" type="String" />
+		<column name="geochars" type="String" />
 		
 		<!-- Sort order -->
 		<order by="asc" >
@@ -65,6 +78,7 @@
 		<finder name="Controlstatus" return-type="Collection">
 			<finder-column name="controlstatus" />
 		</finder>
+	
 
 	</entity>
 </service-builder>

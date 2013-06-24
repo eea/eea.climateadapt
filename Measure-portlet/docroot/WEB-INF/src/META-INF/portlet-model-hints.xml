@@ -5,6 +5,8 @@
 		<field name="measureId" type="long" />
 		<field name="companyId" type="long" />
 		<field name="groupId" type="long" />
+		<field name="admincomment" type="String"/>
+		<field name="casestudyfeature" type="String" />
 		<field name="name" type="String" />
 		<field name="description" type="String" />
 		<field name="implementationtype" type="String" />
@@ -15,10 +17,16 @@
 		<field name="legalaspects" type="String" />
 		<field name="stakeholderparticipation" type="String" />
 		<field name="contact" type="String" />
+		<field name="objectives" type="String" />
+		<field name="challenges" type="String" />
+		<field name="adaptationoptions" type="String" />
+		<field name="solutions" type="String" />
+		<field name="relevance" type="String" />
 		<field name="succeslimitations" type="String" />
 		<field name="website" type="String" />
 		<field name="costbenefit" type="String" />
 		<field name="keywords" type="String" />
+		<field name="geos_" type="String" />
 		<field name="startdate" type="Date" />
 		<field name="enddate" type="Date" />
 		<field name="publicationdate" type="Date" />
@@ -41,5 +49,10 @@
 		<field name="replacesId" type="long" />
 		<field name="comments" type="String" />
 		<field name="textwebpage" type="String" />
+		<field name="primephoto" type="String" />
+		<field name="supphotos" type="String" />
+		<field name="supdocs" type="String" />
+		<field name="year" type="String" />
+		<field name="geochars" type="String" />
 	</model>
 </model-hints>
