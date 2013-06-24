@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2010 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2011 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -65,6 +65,22 @@ public class MeasureClp extends BaseModelImpl<Measure> implements Measure {
 
 	public void setGroupId(long groupId) {
 		_groupId = groupId;
+	}
+
+	public String getAdmincomment() {
+		return _admincomment;
+	}
+
+	public void setAdmincomment(String admincomment) {
+		_admincomment = admincomment;
+	}
+
+	public String getCasestudyfeature() {
+		return _casestudyfeature;
+	}
+
+	public void setCasestudyfeature(String casestudyfeature) {
+		_casestudyfeature = casestudyfeature;
 	}
 
 	public String getName() {
@@ -147,6 +163,46 @@ public class MeasureClp extends BaseModelImpl<Measure> implements Measure {
 		_contact = contact;
 	}
 
+	public String getObjectives() {
+		return _objectives;
+	}
+
+	public void setObjectives(String objectives) {
+		_objectives = objectives;
+	}
+
+	public String getChallenges() {
+		return _challenges;
+	}
+
+	public void setChallenges(String challenges) {
+		_challenges = challenges;
+	}
+
+	public String getAdaptationoptions() {
+		return _adaptationoptions;
+	}
+
+	public void setAdaptationoptions(String adaptationoptions) {
+		_adaptationoptions = adaptationoptions;
+	}
+
+	public String getSolutions() {
+		return _solutions;
+	}
+
+	public void setSolutions(String solutions) {
+		_solutions = solutions;
+	}
+
+	public String getRelevance() {
+		return _relevance;
+	}
+
+	public void setRelevance(String relevance) {
+		_relevance = relevance;
+	}
+
 	public String getSucceslimitations() {
 		return _succeslimitations;
 	}
@@ -177,6 +233,14 @@ public class MeasureClp extends BaseModelImpl<Measure> implements Measure {
 
 	public void setKeywords(String keywords) {
 		_keywords = keywords;
+	}
+
+	public String getGeos_() {
+		return _geos_;
+	}
+
+	public void setGeos_(String geos_) {
+		_geos_ = geos_;
 	}
 
 	public Date getStartdate() {
@@ -355,6 +419,46 @@ public class MeasureClp extends BaseModelImpl<Measure> implements Measure {
 		_textwebpage = textwebpage;
 	}
 
+	public String getPrimephoto() {
+		return _primephoto;
+	}
+
+	public void setPrimephoto(String primephoto) {
+		_primephoto = primephoto;
+	}
+
+	public String getSupphotos() {
+		return _supphotos;
+	}
+
+	public void setSupphotos(String supphotos) {
+		_supphotos = supphotos;
+	}
+
+	public String getSupdocs() {
+		return _supdocs;
+	}
+
+	public void setSupdocs(String supdocs) {
+		_supdocs = supdocs;
+	}
+
+	public String getYear() {
+		return _year;
+	}
+
+	public void setYear(String year) {
+		_year = year;
+	}
+
+	public String getGeochars() {
+		return _geochars;
+	}
+
+	public void setGeochars(String geochars) {
+		_geochars = geochars;
+	}
+
 	public Measure toEscapedModel() {
 		if (isEscapedModel()) {
 			return this;
@@ -371,6 +475,8 @@ public class MeasureClp extends BaseModelImpl<Measure> implements Measure {
 		clone.setMeasureId(getMeasureId());
 		clone.setCompanyId(getCompanyId());
 		clone.setGroupId(getGroupId());
+		clone.setAdmincomment(getAdmincomment());
+		clone.setCasestudyfeature(getCasestudyfeature());
 		clone.setName(getName());
 		clone.setDescription(getDescription());
 		clone.setImplementationtype(getImplementationtype());
@@ -381,10 +487,16 @@ public class MeasureClp extends BaseModelImpl<Measure> implements Measure {
 		clone.setLegalaspects(getLegalaspects());
 		clone.setStakeholderparticipation(getStakeholderparticipation());
 		clone.setContact(getContact());
+		clone.setObjectives(getObjectives());
+		clone.setChallenges(getChallenges());
+		clone.setAdaptationoptions(getAdaptationoptions());
+		clone.setSolutions(getSolutions());
+		clone.setRelevance(getRelevance());
 		clone.setSucceslimitations(getSucceslimitations());
 		clone.setWebsite(getWebsite());
 		clone.setCostbenefit(getCostbenefit());
 		clone.setKeywords(getKeywords());
+		clone.setGeos_(getGeos_());
 		clone.setStartdate(getStartdate());
 		clone.setEnddate(getEnddate());
 		clone.setPublicationdate(getPublicationdate());
@@ -407,6 +519,11 @@ public class MeasureClp extends BaseModelImpl<Measure> implements Measure {
 		clone.setReplacesId(getReplacesId());
 		clone.setComments(getComments());
 		clone.setTextwebpage(getTextwebpage());
+		clone.setPrimephoto(getPrimephoto());
+		clone.setSupphotos(getSupphotos());
+		clone.setSupdocs(getSupdocs());
+		clone.setYear(getYear());
+		clone.setGeochars(getGeochars());
 
 		return clone;
 	}
@@ -452,7 +569,7 @@ public class MeasureClp extends BaseModelImpl<Measure> implements Measure {
 	}
 
 	public String toString() {
-		StringBundler sb = new StringBundler(79);
+		StringBundler sb = new StringBundler(105);
 
 		sb.append("{measureId=");
 		sb.append(getMeasureId());
@@ -460,6 +577,10 @@ public class MeasureClp extends BaseModelImpl<Measure> implements Measure {
 		sb.append(getCompanyId());
 		sb.append(", groupId=");
 		sb.append(getGroupId());
+		sb.append(", admincomment=");
+		sb.append(getAdmincomment());
+		sb.append(", casestudyfeature=");
+		sb.append(getCasestudyfeature());
 		sb.append(", name=");
 		sb.append(getName());
 		sb.append(", description=");
@@ -480,6 +601,16 @@ public class MeasureClp extends BaseModelImpl<Measure> implements Measure {
 		sb.append(getStakeholderparticipation());
 		sb.append(", contact=");
 		sb.append(getContact());
+		sb.append(", objectives=");
+		sb.append(getObjectives());
+		sb.append(", challenges=");
+		sb.append(getChallenges());
+		sb.append(", adaptationoptions=");
+		sb.append(getAdaptationoptions());
+		sb.append(", solutions=");
+		sb.append(getSolutions());
+		sb.append(", relevance=");
+		sb.append(getRelevance());
 		sb.append(", succeslimitations=");
 		sb.append(getSucceslimitations());
 		sb.append(", website=");
@@ -488,6 +619,8 @@ public class MeasureClp extends BaseModelImpl<Measure> implements Measure {
 		sb.append(getCostbenefit());
 		sb.append(", keywords=");
 		sb.append(getKeywords());
+		sb.append(", geos_=");
+		sb.append(getGeos_());
 		sb.append(", startdate=");
 		sb.append(getStartdate());
 		sb.append(", enddate=");
@@ -532,13 +665,23 @@ public class MeasureClp extends BaseModelImpl<Measure> implements Measure {
 		sb.append(getComments());
 		sb.append(", textwebpage=");
 		sb.append(getTextwebpage());
+		sb.append(", primephoto=");
+		sb.append(getPrimephoto());
+		sb.append(", supphotos=");
+		sb.append(getSupphotos());
+		sb.append(", supdocs=");
+		sb.append(getSupdocs());
+		sb.append(", year=");
+		sb.append(getYear());
+		sb.append(", geochars=");
+		sb.append(getGeochars());
 		sb.append("}");
 
 		return sb.toString();
 	}
 
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(121);
+		StringBundler sb = new StringBundler(160);
 
 		sb.append("<model><model-name>");
 		sb.append("nl.wur.alterra.cgi.ace.model.Measure");
@@ -555,6 +698,14 @@ public class MeasureClp extends BaseModelImpl<Measure> implements Measure {
 		sb.append(
 			"<column><column-name>groupId</column-name><column-value><![CDATA[");
 		sb.append(getGroupId());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>admincomment</column-name><column-value><![CDATA[");
+		sb.append(getAdmincomment());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>casestudyfeature</column-name><column-value><![CDATA[");
+		sb.append(getCasestudyfeature());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>name</column-name><column-value><![CDATA[");
@@ -597,6 +748,26 @@ public class MeasureClp extends BaseModelImpl<Measure> implements Measure {
 		sb.append(getContact());
 		sb.append("]]></column-value></column>");
 		sb.append(
+			"<column><column-name>objectives</column-name><column-value><![CDATA[");
+		sb.append(getObjectives());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>challenges</column-name><column-value><![CDATA[");
+		sb.append(getChallenges());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>adaptationoptions</column-name><column-value><![CDATA[");
+		sb.append(getAdaptationoptions());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>solutions</column-name><column-value><![CDATA[");
+		sb.append(getSolutions());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>relevance</column-name><column-value><![CDATA[");
+		sb.append(getRelevance());
+		sb.append("]]></column-value></column>");
+		sb.append(
 			"<column><column-name>succeslimitations</column-name><column-value><![CDATA[");
 		sb.append(getSucceslimitations());
 		sb.append("]]></column-value></column>");
@@ -611,6 +782,10 @@ public class MeasureClp extends BaseModelImpl<Measure> implements Measure {
 		sb.append(
 			"<column><column-name>keywords</column-name><column-value><![CDATA[");
 		sb.append(getKeywords());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>geos_</column-name><column-value><![CDATA[");
+		sb.append(getGeos_());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>startdate</column-name><column-value><![CDATA[");
@@ -700,6 +875,26 @@ public class MeasureClp extends BaseModelImpl<Measure> implements Measure {
 			"<column><column-name>textwebpage</column-name><column-value><![CDATA[");
 		sb.append(getTextwebpage());
 		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>primephoto</column-name><column-value><![CDATA[");
+		sb.append(getPrimephoto());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>supphotos</column-name><column-value><![CDATA[");
+		sb.append(getSupphotos());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>supdocs</column-name><column-value><![CDATA[");
+		sb.append(getSupdocs());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>year</column-name><column-value><![CDATA[");
+		sb.append(getYear());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>geochars</column-name><column-value><![CDATA[");
+		sb.append(getGeochars());
+		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");
 
@@ -709,6 +904,8 @@ public class MeasureClp extends BaseModelImpl<Measure> implements Measure {
 	private long _measureId;
 	private long _companyId;
 	private long _groupId;
+	private String _admincomment;
+	private String _casestudyfeature;
 	private String _name;
 	private String _description;
 	private String _implementationtype;
@@ -719,10 +916,16 @@ public class MeasureClp extends BaseModelImpl<Measure> implements Measure {
 	private String _legalaspects;
 	private String _stakeholderparticipation;
 	private String _contact;
+	private String _objectives;
+	private String _challenges;
+	private String _adaptationoptions;
+	private String _solutions;
+	private String _relevance;
 	private String _succeslimitations;
 	private String _website;
 	private String _costbenefit;
 	private String _keywords;
+	private String _geos_;
 	private Date _startdate;
 	private Date _enddate;
 	private Date _publicationdate;
@@ -745,4 +948,9 @@ public class MeasureClp extends BaseModelImpl<Measure> implements Measure {
 	private long _replacesId;
 	private String _comments;
 	private String _textwebpage;
+	private String _primephoto;
+	private String _supphotos;
+	private String _supdocs;
+	private String _year;
+	private String _geochars;
 }

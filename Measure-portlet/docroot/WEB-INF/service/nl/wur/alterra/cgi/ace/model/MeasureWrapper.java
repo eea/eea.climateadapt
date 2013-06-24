@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2010 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2011 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -58,6 +58,22 @@ public class MeasureWrapper implements Measure {
 
 	public void setGroupId(long groupId) {
 		_measure.setGroupId(groupId);
+	}
+
+	public java.lang.String getAdmincomment() {
+		return _measure.getAdmincomment();
+	}
+
+	public void setAdmincomment(java.lang.String admincomment) {
+		_measure.setAdmincomment(admincomment);
+	}
+
+	public java.lang.String getCasestudyfeature() {
+		return _measure.getCasestudyfeature();
+	}
+
+	public void setCasestudyfeature(java.lang.String casestudyfeature) {
+		_measure.setCasestudyfeature(casestudyfeature);
 	}
 
 	public java.lang.String getName() {
@@ -141,6 +157,46 @@ public class MeasureWrapper implements Measure {
 		_measure.setContact(contact);
 	}
 
+	public java.lang.String getObjectives() {
+		return _measure.getObjectives();
+	}
+
+	public void setObjectives(java.lang.String objectives) {
+		_measure.setObjectives(objectives);
+	}
+
+	public java.lang.String getChallenges() {
+		return _measure.getChallenges();
+	}
+
+	public void setChallenges(java.lang.String challenges) {
+		_measure.setChallenges(challenges);
+	}
+
+	public java.lang.String getAdaptationoptions() {
+		return _measure.getAdaptationoptions();
+	}
+
+	public void setAdaptationoptions(java.lang.String adaptationoptions) {
+		_measure.setAdaptationoptions(adaptationoptions);
+	}
+
+	public java.lang.String getSolutions() {
+		return _measure.getSolutions();
+	}
+
+	public void setSolutions(java.lang.String solutions) {
+		_measure.setSolutions(solutions);
+	}
+
+	public java.lang.String getRelevance() {
+		return _measure.getRelevance();
+	}
+
+	public void setRelevance(java.lang.String relevance) {
+		_measure.setRelevance(relevance);
+	}
+
 	public java.lang.String getSucceslimitations() {
 		return _measure.getSucceslimitations();
 	}
@@ -171,6 +227,14 @@ public class MeasureWrapper implements Measure {
 
 	public void setKeywords(java.lang.String keywords) {
 		_measure.setKeywords(keywords);
+	}
+
+	public java.lang.String getGeos_() {
+		return _measure.getGeos_();
+	}
+
+	public void setGeos_(java.lang.String geos_) {
+		_measure.setGeos_(geos_);
 	}
 
 	public java.util.Date getStartdate() {
@@ -347,6 +411,46 @@ public class MeasureWrapper implements Measure {
 
 	public void setTextwebpage(java.lang.String textwebpage) {
 		_measure.setTextwebpage(textwebpage);
+	}
+
+	public java.lang.String getPrimephoto() {
+		return _measure.getPrimephoto();
+	}
+
+	public void setPrimephoto(java.lang.String primephoto) {
+		_measure.setPrimephoto(primephoto);
+	}
+
+	public java.lang.String getSupphotos() {
+		return _measure.getSupphotos();
+	}
+
+	public void setSupphotos(java.lang.String supphotos) {
+		_measure.setSupphotos(supphotos);
+	}
+
+	public java.lang.String getSupdocs() {
+		return _measure.getSupdocs();
+	}
+
+	public void setSupdocs(java.lang.String supdocs) {
+		_measure.setSupdocs(supdocs);
+	}
+
+	public java.lang.String getYear() {
+		return _measure.getYear();
+	}
+
+	public void setYear(java.lang.String year) {
+		_measure.setYear(year);
+	}
+
+	public java.lang.String getGeochars() {
+		return _measure.getGeochars();
+	}
+
+	public void setGeochars(java.lang.String geochars) {
+		_measure.setGeochars(geochars);
 	}
 
 	public nl.wur.alterra.cgi.ace.model.Measure toEscapedModel() {

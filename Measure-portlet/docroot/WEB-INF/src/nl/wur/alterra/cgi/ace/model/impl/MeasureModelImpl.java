@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2010 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2011 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -59,6 +59,8 @@ public class MeasureModelImpl extends BaseModelImpl<Measure>
 			{ "measureId", new Integer(Types.BIGINT) },
 			{ "companyId", new Integer(Types.BIGINT) },
 			{ "groupId", new Integer(Types.BIGINT) },
+			{ "admincomment", new Integer(Types.VARCHAR) },
+			{ "casestudyfeature", new Integer(Types.VARCHAR) },
 			{ "name", new Integer(Types.VARCHAR) },
 			{ "description", new Integer(Types.VARCHAR) },
 			{ "implementationtype", new Integer(Types.VARCHAR) },
@@ -69,10 +71,16 @@ public class MeasureModelImpl extends BaseModelImpl<Measure>
 			{ "legalaspects", new Integer(Types.VARCHAR) },
 			{ "stakeholderparticipation", new Integer(Types.VARCHAR) },
 			{ "contact", new Integer(Types.VARCHAR) },
+			{ "objectives", new Integer(Types.VARCHAR) },
+			{ "challenges", new Integer(Types.VARCHAR) },
+			{ "adaptationoptions", new Integer(Types.VARCHAR) },
+			{ "solutions", new Integer(Types.VARCHAR) },
+			{ "relevance", new Integer(Types.VARCHAR) },
 			{ "succeslimitations", new Integer(Types.VARCHAR) },
 			{ "website", new Integer(Types.VARCHAR) },
 			{ "costbenefit", new Integer(Types.VARCHAR) },
 			{ "keywords", new Integer(Types.VARCHAR) },
+			{ "geos_", new Integer(Types.VARCHAR) },
 			{ "startdate", new Integer(Types.TIMESTAMP) },
 			{ "enddate", new Integer(Types.TIMESTAMP) },
 			{ "publicationdate", new Integer(Types.TIMESTAMP) },
@@ -94,9 +102,14 @@ public class MeasureModelImpl extends BaseModelImpl<Measure>
 			{ "approvaldate", new Integer(Types.TIMESTAMP) },
 			{ "replacesId", new Integer(Types.BIGINT) },
 			{ "comments", new Integer(Types.VARCHAR) },
-			{ "textwebpage", new Integer(Types.VARCHAR) }
+			{ "textwebpage", new Integer(Types.VARCHAR) },
+			{ "primephoto", new Integer(Types.VARCHAR) },
+			{ "supphotos", new Integer(Types.VARCHAR) },
+			{ "supdocs", new Integer(Types.VARCHAR) },
+			{ "year", new Integer(Types.VARCHAR) },
+			{ "geochars", new Integer(Types.VARCHAR) }
 		};
-	public static final String TABLE_SQL_CREATE = "create table Ace_Measure (measureId LONG not null primary key,companyId LONG,groupId LONG,name VARCHAR(75) null,description VARCHAR(75) null,implementationtype VARCHAR(75) null,implementationtime VARCHAR(75) null,lifetime VARCHAR(75) null,spatiallayer VARCHAR(75) null,spatialvalues VARCHAR(75) null,legalaspects VARCHAR(75) null,stakeholderparticipation VARCHAR(75) null,contact VARCHAR(75) null,succeslimitations VARCHAR(75) null,website VARCHAR(75) null,costbenefit VARCHAR(75) null,keywords VARCHAR(75) null,startdate DATE null,enddate DATE null,publicationdate DATE null,specialtagging VARCHAR(75) null,sectors_ VARCHAR(75) null,elements_ VARCHAR(75) null,climateimpacts_ VARCHAR(75) null,mao_type VARCHAR(75) null,source VARCHAR(75) null,rating LONG,importance LONG,lon DOUBLE,lat DOUBLE,satarea VARCHAR(75) null,controlstatus INTEGER,creator VARCHAR(75) null,creationdate DATE null,moderator VARCHAR(75) null,approvaldate DATE null,replacesId LONG,comments VARCHAR(75) null,textwebpage VARCHAR(75) null)";
+	public static final String TABLE_SQL_CREATE = "create table Ace_Measure (measureId LONG not null primary key,companyId LONG,groupId LONG,admincomment VARCHAR(2500) null,casestudyfeature VARCHAR(75) null,name VARCHAR(75) null,description VARCHAR(75) null,implementationtype VARCHAR(75) null,implementationtime VARCHAR(75) null,lifetime VARCHAR(75) null,spatiallayer VARCHAR(75) null,spatialvalues VARCHAR(75) null,legalaspects VARCHAR(75) null,stakeholderparticipation VARCHAR(75) null,contact VARCHAR(75) null,objectives VARCHAR(3900) null,challenges VARCHAR(3900) null,adaptationoptions VARCHAR(500) null,solutions VARCHAR(3900) null,relevance VARCHAR(75) null,succeslimitations VARCHAR(75) null,website VARCHAR(75) null,costbenefit VARCHAR(75) null,keywords VARCHAR(75) null,geos_ VARCHAR(75) null,startdate DATE null,enddate DATE null,publicationdate DATE null,specialtagging VARCHAR(75) null,sectors_ VARCHAR(75) null,elements_ VARCHAR(75) null,climateimpacts_ VARCHAR(75) null,mao_type VARCHAR(75) null,source VARCHAR(75) null,rating LONG,importance LONG,lon DOUBLE,lat DOUBLE,satarea VARCHAR(75) null,controlstatus INTEGER,creator VARCHAR(75) null,creationdate DATE null,moderator VARCHAR(75) null,approvaldate DATE null,replacesId LONG,comments VARCHAR(75) null,textwebpage VARCHAR(75) null,primephoto VARCHAR(75) null,supphotos VARCHAR(75) null,supdocs VARCHAR(75) null,year VARCHAR(75) null,geochars VARCHAR(2500) null)";
 	public static final String TABLE_SQL_DROP = "drop table Ace_Measure";
 	public static final String ORDER_BY_JPQL = " ORDER BY measure.name ASC";
 	public static final String ORDER_BY_SQL = " ORDER BY Ace_Measure.name ASC";
@@ -149,6 +162,32 @@ public class MeasureModelImpl extends BaseModelImpl<Measure>
 
 	public void setGroupId(long groupId) {
 		_groupId = groupId;
+	}
+
+	public String getAdmincomment() {
+		if (_admincomment == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _admincomment;
+		}
+	}
+
+	public void setAdmincomment(String admincomment) {
+		_admincomment = admincomment;
+	}
+
+	public String getCasestudyfeature() {
+		if (_casestudyfeature == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _casestudyfeature;
+		}
+	}
+
+	public void setCasestudyfeature(String casestudyfeature) {
+		_casestudyfeature = casestudyfeature;
 	}
 
 	public String getName() {
@@ -281,6 +320,71 @@ public class MeasureModelImpl extends BaseModelImpl<Measure>
 		_contact = contact;
 	}
 
+	public String getObjectives() {
+		if (_objectives == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _objectives;
+		}
+	}
+
+	public void setObjectives(String objectives) {
+		_objectives = objectives;
+	}
+
+	public String getChallenges() {
+		if (_challenges == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _challenges;
+		}
+	}
+
+	public void setChallenges(String challenges) {
+		_challenges = challenges;
+	}
+
+	public String getAdaptationoptions() {
+		if (_adaptationoptions == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _adaptationoptions;
+		}
+	}
+
+	public void setAdaptationoptions(String adaptationoptions) {
+		_adaptationoptions = adaptationoptions;
+	}
+
+	public String getSolutions() {
+		if (_solutions == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _solutions;
+		}
+	}
+
+	public void setSolutions(String solutions) {
+		_solutions = solutions;
+	}
+
+	public String getRelevance() {
+		if (_relevance == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _relevance;
+		}
+	}
+
+	public void setRelevance(String relevance) {
+		_relevance = relevance;
+	}
+
 	public String getSucceslimitations() {
 		if (_succeslimitations == null) {
 			return StringPool.BLANK;
@@ -331,6 +435,19 @@ public class MeasureModelImpl extends BaseModelImpl<Measure>
 
 	public void setKeywords(String keywords) {
 		_keywords = keywords;
+	}
+
+	public String getGeos_() {
+		if (_geos_ == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _geos_;
+		}
+	}
+
+	public void setGeos_(String geos_) {
+		_geos_ = geos_;
 	}
 
 	public Date getStartdate() {
@@ -564,6 +681,71 @@ public class MeasureModelImpl extends BaseModelImpl<Measure>
 		_textwebpage = textwebpage;
 	}
 
+	public String getPrimephoto() {
+		if (_primephoto == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _primephoto;
+		}
+	}
+
+	public void setPrimephoto(String primephoto) {
+		_primephoto = primephoto;
+	}
+
+	public String getSupphotos() {
+		if (_supphotos == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _supphotos;
+		}
+	}
+
+	public void setSupphotos(String supphotos) {
+		_supphotos = supphotos;
+	}
+
+	public String getSupdocs() {
+		if (_supdocs == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _supdocs;
+		}
+	}
+
+	public void setSupdocs(String supdocs) {
+		_supdocs = supdocs;
+	}
+
+	public String getYear() {
+		if (_year == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _year;
+		}
+	}
+
+	public void setYear(String year) {
+		_year = year;
+	}
+
+	public String getGeochars() {
+		if (_geochars == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _geochars;
+		}
+	}
+
+	public void setGeochars(String geochars) {
+		_geochars = geochars;
+	}
+
 	public Measure toEscapedModel() {
 		if (isEscapedModel()) {
 			return (Measure)this;
@@ -593,6 +775,8 @@ public class MeasureModelImpl extends BaseModelImpl<Measure>
 		clone.setMeasureId(getMeasureId());
 		clone.setCompanyId(getCompanyId());
 		clone.setGroupId(getGroupId());
+		clone.setAdmincomment(getAdmincomment());
+		clone.setCasestudyfeature(getCasestudyfeature());
 		clone.setName(getName());
 		clone.setDescription(getDescription());
 		clone.setImplementationtype(getImplementationtype());
@@ -603,10 +787,16 @@ public class MeasureModelImpl extends BaseModelImpl<Measure>
 		clone.setLegalaspects(getLegalaspects());
 		clone.setStakeholderparticipation(getStakeholderparticipation());
 		clone.setContact(getContact());
+		clone.setObjectives(getObjectives());
+		clone.setChallenges(getChallenges());
+		clone.setAdaptationoptions(getAdaptationoptions());
+		clone.setSolutions(getSolutions());
+		clone.setRelevance(getRelevance());
 		clone.setSucceslimitations(getSucceslimitations());
 		clone.setWebsite(getWebsite());
 		clone.setCostbenefit(getCostbenefit());
 		clone.setKeywords(getKeywords());
+		clone.setGeos_(getGeos_());
 		clone.setStartdate(getStartdate());
 		clone.setEnddate(getEnddate());
 		clone.setPublicationdate(getPublicationdate());
@@ -629,6 +819,11 @@ public class MeasureModelImpl extends BaseModelImpl<Measure>
 		clone.setReplacesId(getReplacesId());
 		clone.setComments(getComments());
 		clone.setTextwebpage(getTextwebpage());
+		clone.setPrimephoto(getPrimephoto());
+		clone.setSupphotos(getSupphotos());
+		clone.setSupdocs(getSupdocs());
+		clone.setYear(getYear());
+		clone.setGeochars(getGeochars());
 
 		return clone;
 	}
@@ -674,7 +869,7 @@ public class MeasureModelImpl extends BaseModelImpl<Measure>
 	}
 
 	public String toString() {
-		StringBundler sb = new StringBundler(79);
+		StringBundler sb = new StringBundler(105);
 
 		sb.append("{measureId=");
 		sb.append(getMeasureId());
@@ -682,6 +877,10 @@ public class MeasureModelImpl extends BaseModelImpl<Measure>
 		sb.append(getCompanyId());
 		sb.append(", groupId=");
 		sb.append(getGroupId());
+		sb.append(", admincomment=");
+		sb.append(getAdmincomment());
+		sb.append(", casestudyfeature=");
+		sb.append(getCasestudyfeature());
 		sb.append(", name=");
 		sb.append(getName());
 		sb.append(", description=");
@@ -702,6 +901,16 @@ public class MeasureModelImpl extends BaseModelImpl<Measure>
 		sb.append(getStakeholderparticipation());
 		sb.append(", contact=");
 		sb.append(getContact());
+		sb.append(", objectives=");
+		sb.append(getObjectives());
+		sb.append(", challenges=");
+		sb.append(getChallenges());
+		sb.append(", adaptationoptions=");
+		sb.append(getAdaptationoptions());
+		sb.append(", solutions=");
+		sb.append(getSolutions());
+		sb.append(", relevance=");
+		sb.append(getRelevance());
 		sb.append(", succeslimitations=");
 		sb.append(getSucceslimitations());
 		sb.append(", website=");
@@ -710,6 +919,8 @@ public class MeasureModelImpl extends BaseModelImpl<Measure>
 		sb.append(getCostbenefit());
 		sb.append(", keywords=");
 		sb.append(getKeywords());
+		sb.append(", geos_=");
+		sb.append(getGeos_());
 		sb.append(", startdate=");
 		sb.append(getStartdate());
 		sb.append(", enddate=");
@@ -754,13 +965,23 @@ public class MeasureModelImpl extends BaseModelImpl<Measure>
 		sb.append(getComments());
 		sb.append(", textwebpage=");
 		sb.append(getTextwebpage());
+		sb.append(", primephoto=");
+		sb.append(getPrimephoto());
+		sb.append(", supphotos=");
+		sb.append(getSupphotos());
+		sb.append(", supdocs=");
+		sb.append(getSupdocs());
+		sb.append(", year=");
+		sb.append(getYear());
+		sb.append(", geochars=");
+		sb.append(getGeochars());
 		sb.append("}");
 
 		return sb.toString();
 	}
 
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(121);
+		StringBundler sb = new StringBundler(160);
 
 		sb.append("<model><model-name>");
 		sb.append("nl.wur.alterra.cgi.ace.model.Measure");
@@ -777,6 +998,14 @@ public class MeasureModelImpl extends BaseModelImpl<Measure>
 		sb.append(
 			"<column><column-name>groupId</column-name><column-value><![CDATA[");
 		sb.append(getGroupId());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>admincomment</column-name><column-value><![CDATA[");
+		sb.append(getAdmincomment());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>casestudyfeature</column-name><column-value><![CDATA[");
+		sb.append(getCasestudyfeature());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>name</column-name><column-value><![CDATA[");
@@ -819,6 +1048,26 @@ public class MeasureModelImpl extends BaseModelImpl<Measure>
 		sb.append(getContact());
 		sb.append("]]></column-value></column>");
 		sb.append(
+			"<column><column-name>objectives</column-name><column-value><![CDATA[");
+		sb.append(getObjectives());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>challenges</column-name><column-value><![CDATA[");
+		sb.append(getChallenges());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>adaptationoptions</column-name><column-value><![CDATA[");
+		sb.append(getAdaptationoptions());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>solutions</column-name><column-value><![CDATA[");
+		sb.append(getSolutions());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>relevance</column-name><column-value><![CDATA[");
+		sb.append(getRelevance());
+		sb.append("]]></column-value></column>");
+		sb.append(
 			"<column><column-name>succeslimitations</column-name><column-value><![CDATA[");
 		sb.append(getSucceslimitations());
 		sb.append("]]></column-value></column>");
@@ -833,6 +1082,10 @@ public class MeasureModelImpl extends BaseModelImpl<Measure>
 		sb.append(
 			"<column><column-name>keywords</column-name><column-value><![CDATA[");
 		sb.append(getKeywords());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>geos_</column-name><column-value><![CDATA[");
+		sb.append(getGeos_());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>startdate</column-name><column-value><![CDATA[");
@@ -922,6 +1175,26 @@ public class MeasureModelImpl extends BaseModelImpl<Measure>
 			"<column><column-name>textwebpage</column-name><column-value><![CDATA[");
 		sb.append(getTextwebpage());
 		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>primephoto</column-name><column-value><![CDATA[");
+		sb.append(getPrimephoto());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>supphotos</column-name><column-value><![CDATA[");
+		sb.append(getSupphotos());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>supdocs</column-name><column-value><![CDATA[");
+		sb.append(getSupdocs());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>year</column-name><column-value><![CDATA[");
+		sb.append(getYear());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>geochars</column-name><column-value><![CDATA[");
+		sb.append(getGeochars());
+		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");
 
@@ -931,6 +1204,8 @@ public class MeasureModelImpl extends BaseModelImpl<Measure>
 	private long _measureId;
 	private long _companyId;
 	private long _groupId;
+	private String _admincomment;
+	private String _casestudyfeature;
 	private String _name;
 	private String _description;
 	private String _implementationtype;
@@ -941,10 +1216,16 @@ public class MeasureModelImpl extends BaseModelImpl<Measure>
 	private String _legalaspects;
 	private String _stakeholderparticipation;
 	private String _contact;
+	private String _objectives;
+	private String _challenges;
+	private String _adaptationoptions;
+	private String _solutions;
+	private String _relevance;
 	private String _succeslimitations;
 	private String _website;
 	private String _costbenefit;
 	private String _keywords;
+	private String _geos_;
 	private Date _startdate;
 	private Date _enddate;
 	private Date _publicationdate;
@@ -967,5 +1248,10 @@ public class MeasureModelImpl extends BaseModelImpl<Measure>
 	private long _replacesId;
 	private String _comments;
 	private String _textwebpage;
+	private String _primephoto;
+	private String _supphotos;
+	private String _supdocs;
+	private String _year;
+	private String _geochars;
 	private transient ExpandoBridge _expandoBridge;
 }
