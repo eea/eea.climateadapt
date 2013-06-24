@@ -37,5 +37,12 @@ public enum AceItemCountry {
     SE, /* Sweden */
     CH, /* Switzerland */
     TR, /* Turkey */
-    GB /* United Kingdom */
+    GB, /* United Kingdom */
+    CR, /* Croatia */
+    SR, /* Serbia */
+    BO, /* Bosnia and Herzegovina */
+    MO, /* Montenegro */
+    AL, /* Albania */
+    KO, /* Kosovo under UN Security Counil Resolution 1244/99 */
+    YU /* Former Yugoslav Republic of Macedonia */
 }
