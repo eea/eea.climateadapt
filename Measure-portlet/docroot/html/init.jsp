@@ -9,6 +9,7 @@
 <%@ taglib uri="http://liferay.com/tld/aui" prefix="aui" %>
 
 <%@ page import="java.util.List" %>
+<%@ page import="java.util.ArrayList" %>
 <%@ page import="java.text.SimpleDateFormat" %>
 
 <%@ page import="javax.portlet.PortletPreferences" %>
@@ -22,13 +23,27 @@
 <%@ page import="com.liferay.portal.model.Group"%>
 <%@ page import="com.liferay.portal.security.permission.ActionKeys"%>
 <%@ page import="com.liferay.portal.util.PortalUtil" %>
-
 <%@page import="nl.wur.alterra.cgi.ace.portlet.Constants"%>
 <%@ page import="nl.wur.alterra.cgi.ace.model.Measure"%>
 <%@ page import="nl.wur.alterra.cgi.ace.service.MeasureLocalServiceUtil"%>
 <%@ page import="nl.wur.alterra.cgi.ace.portlet.MeasureUtil"%>
 <%@ page import="nl.wur.alterra.cgi.ace.search.lucene.ACEIndexUtil"%>
 <%@ page import="nl.wur.alterra.cgi.ace.portlet.MeasurePortlet"%>
+<%@ page import ="com.liferay.portlet.imagegallery.model.IGImage" %>
+<%@ page import ="com.liferay.portlet.imagegallery.service.IGImageServiceUtil" %>
+<%@ page import ="com.liferay.portal.kernel.upload.UploadPortletRequest" %>
+<%@ page import ="com.liferay.portlet.documentlibrary.service.DLFileEntryLocalServiceUtil"  %>
+<%@ page import ="com.liferay.portlet.documentlibrary.model.DLFileEntry"  %>
+<%@ page import ="com.liferay.portal.kernel.servlet.ImageServletTokenUtil"  %>
+<%@ page import =" com.liferay.portal.kernel.util.HttpUtil"  %>
+<%@ page import ="com.liferay.portal.kernel.util.HtmlUtil" %>
+<%@ page import ="com.liferay.portal.service.ImageLocalServiceUtil"  %>
+<%@ page import ="com.liferay.portal.model.Image" %>
+<%@ page import ="com.liferay.portal.kernel.util.PrefsPropsUtil" %>
+<%@ page import ="com.liferay.portal.kernel.util.PropsKeys" %>
+<%@ page import = "com.liferay.portal.kernel.dao.orm.DynamicQuery" %>
+<%@ page import = "com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil" %>
+<%@ page import = "com.liferay.portal.kernel.dao.orm.PropertyFactoryUtil" %>
 
 <liferay-theme:defineObjects />
 
