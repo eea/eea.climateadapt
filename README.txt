@@ -49,6 +49,11 @@ svn checkout https://svn.eionet.europa.eu/repositories/ClimateAdapt/trunk Climat
 
 Your TRUNK then becomes /local/build/ClimateAdapt
 
+To be able to build the AceSearchEngine you must add a build.properties file.
+In TRUNK do:
+    cp AceSearchEngine/build.properties.sample AceSearchEngine/build.properties
+    edit AceSearchEngine/build.properties
+
 *******************************************************
 4. Create symbolic links to ClimateAdapt portlets, etc.
 *******************************************************
