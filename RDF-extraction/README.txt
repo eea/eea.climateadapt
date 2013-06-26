@@ -1,12 +1,7 @@
+How to extract data in RDF format
+=================================
 
-How to extract data in RDF format:
-
-1. Check out RDFExport from SVN https://svn.eionet.europa.eu/repositories/Reportnet/RDFExport
-and build it
-
-2. Modify the rdfexport to find the JAR files the right places.
-
-3. Run the 'runit' script
+Run the 'runit' script. The result is in climateadapt.rdf.gz.
 
 After importing the data into a SPARQL database you can do this:
 
@@ -25,3 +20,7 @@ WHERE {
   ?ucountry rdfs:label ?country
 }
 ----------------
+
+The script runs a Java program that is available in SVN from https://svn.eionet.europa.eu/repositories/Reportnet/RDFExport
+It requires maven to build it. You can then modify the rdfexport to find the JAR files the right places.
+
