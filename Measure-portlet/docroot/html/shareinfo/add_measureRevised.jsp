@@ -1053,7 +1053,8 @@
 											 
 										  }
 										%>
-										<textarea name="implementationtime"  rows="10" cols="40" data-maxLength="250"><%= measure == null ? implTime : measure.getImplementationtime() %></textarea>
+										<textarea name="implementationtime" id="<portlet:namespace />implField" rows="10" cols="40" class="WYSIWYG" data-maxLength="250"><%= measure == null ? implTime : measure.getImplementationtime() %></textarea>
+										<div class="case-studies-character-count"></div>
 									</li>
 								</ul>
 							</div>
@@ -1078,7 +1079,8 @@
 										  }
 										%>
 										
-										<textarea name="lifetime"  rows="10" cols="40" data-maxLength="250"><%= measure == null ? lifeTime : measure.getLifetime() %></textarea>
+										<textarea name="lifetime"  id="<portlet:namespace />lifeTimeField" rows="10" cols="40" class="WYSIWYG" data-maxLength="250"><%= measure == null ? lifeTime : measure.getLifetime() %></textarea>
+										<div class="case-studies-character-count"></div>
 									</li>
 								</ul>
 							</div>
@@ -1099,7 +1101,7 @@
                                 <liferay-ui:error key="contact-required" message="contact-required" />
 								<ul>
 									<li>
-										<p><em>Contact of reference institution and persons) who is directly involved in the development and implementation of the case.</em> (100 word limit)</p>
+										<p><em>Contact of reference institution and persons) who is directly involved in the development and implementation of the case.</em> (500 char limit)</p>
 										<% 
 										  String caseContact="";
 										  if (measure == null || Validator.isNull(measure.getContact())) {
@@ -1109,7 +1111,7 @@
 											  }
 										  }
 										%>
-										<textarea name="contact"  rows="10" cols="40" data-maxlength="500"><%= measure == null ? caseContact : measure.getContact() %></textarea>
+										<textarea name="contact"  id="<portlet:namespace />contactField" rows="10" cols="40" class="WYSIWYG" data-maxlength="500"><%= measure == null ? caseContact : measure.getContact() %></textarea>
 										<div class="case-studies-character-count"></div>
 									</li>
 								</ul>
@@ -1121,7 +1123,7 @@
 
 								<ul>
 									<li>
-										<p><em>List the Name and Website that refers to the original documents directly related to the case implementation process and its responsible actors.</em></p>
+										<p><em>List the Name and Website that refers to the original documents directly related to the case implementation process and its responsible actors (500 char limit).</em></p>
 										<% 
 										  String website = "";
 										  if (measure == null || Validator.isNull(measure.getWebsite())) {
@@ -1132,7 +1134,7 @@
 										  }
 										%>
 										
-										<textarea name="website"  rows="10" cols="40" data-maxlength="500"><%= measure == null ? website : measure.getWebsite() %></textarea>
+										<textarea name="website" id="<portlet:namespace />websitefield" rows="10" cols="40" class="WYSIWYG" data-maxlength="500"><%= measure == null ? website : measure.getWebsite() %></textarea>
 										<div class="case-studies-character-count"></div>
 									</li>
 								</ul>
@@ -1152,7 +1154,8 @@
 										  }
 										%>
 										
-										<textarea name="source"  rows="10" cols="40" data-maxLength="250"><%= (measure == null || Validator.isNull(measure.getSource())) ? source : measure.getSource() %></textarea>
+										<textarea name="source"  id="<portlet:namespace />sourcefield" rows="10" cols="40" class="WYSIWYG" data-maxLength="250"><%= (measure == null || Validator.isNull(measure.getSource())) ? source : measure.getSource() %></textarea>
+										<div class="case-studies-character-count"></div>
 									</li>
 								</ul>
 							</div>
@@ -1186,7 +1189,7 @@
 												  primePhotoId = measureFromRequest.getPrimephoto();
 											  }
 										  }
-										  else
+										  else if (Validator.isNotNull(measure.getPrimephoto()))
 										  {
 											  IGImage image = IGImageServiceUtil.getImage(Long.parseLong(measure.getPrimephoto()));
 											  primePhoto = image.getNameWithExtension();
@@ -1271,21 +1274,20 @@
 									  </li>
 									  
 									  <li>
-										<p><strong><em>Additional Case Study Photo <span class="case-studies-tabbed-content-photo-upload-position">${loop.count}</span> Label:</em></strong> (4-6 words limit)</p>
-										<p>Brief name of photo (required)</p>
-										<div class="inputfilename"><input type="text" name="sup_photos_names${loop.count}" size="30" maxlength="255" value="${sphotonames[loop.count - 1]}"></div>
+										<p><strong><em>Additional Case Study Photo <span class="case-studies-tabbed-content-photo-upload-position">${loop.count}</span> Label:</em></strong></p>
+										<p>Brief name of photo (required - 150 char limit)</p>
+										<div class="inputfilename"><input type="text" name="sup_photos_names${loop.count}" size="30" maxlength="150" value="${sphotonames[loop.count - 1]}"></div>
 									  </li>
 									  
 									  <li>
-										<p><strong><span class="red">*</span> <em>Case Study Photo <span class="case-studies-tabbed-content-photo-upload-position">${loop.count}</span> - Description of Photo:</em></strong> (30 word limit)</p>
-										<p>This field is required if a photo file is included. Briefly describe the photo</p>
-										<div class="inputfiledescription"><textarea cols="40" rows="10" name="sup_photos_description${loop.count}" data-maxlength="150">${sphotodesc[loop.count - 1]}</textarea></div>
+										<p><strong><span class="red">*</span> <em>Case Study Photo <span class="case-studies-tabbed-content-photo-upload-position">${loop.count}</span> - Description of Photo:</em></strong></p>
+										<p>This field is required if a photo file is included. Briefly describe the photo (required - 250 char limit)</p>
+										<div class="inputfiledescription"><textarea cols="40" rows="10" name="sup_photos_description${loop.count}" data-maxlength="250">${sphotodesc[loop.count - 1]}</textarea></div>
+										
 									  </li>
 									 </ul>
 								   </c:forEach>
-								
-									  
-								  
+								   
 									     <div class="case-studies-tabbed-content-single-button-row">
 									       <a href="#" class="case-studies-tabbed-content-button-green case-studies-tabbed-content-button-add-photo">Add Another Photo</a>
 								         </div>
@@ -1305,14 +1307,14 @@
 											
 										</li>
 										<li>
-											<p><strong><em>Additional Case Study Photo <span class="case-studies-tabbed-content-photo-upload-position">1</span> Label:</em></strong> (4-6 words limit)</p>
-											<p>Brief name of photo (required)</p>
-											<div class="inputfilename"><input type="text" name="sup_photos_names1" size="30" maxlength="255" value=""></div>
+											<p><strong><em>Additional Case Study Photo <span class="case-studies-tabbed-content-photo-upload-position">1</span> Label:</em></strong></p>
+											<p>Brief name of photo (required - 150 char limit)</p>
+											<div class="inputfilename"><input type="text" name="sup_photos_names1" size="30" maxlength="150" value=""></div>
 										</li>
 										<li>
-											<p><strong><span class="red">*</span> <em>Case Study Photo <span class="case-studies-tabbed-content-photo-upload-position">1</span> - Description of Photo:</em></strong> (30 word limit)</p>
-											<p>This field is required if a photo file is included. Briefly describe the photo</p>
-											<div class="inputfiledescription"><textarea cols="40" rows="10" name="sup_photos_description1" data-maxlength="150"></textarea></div>
+											<p><strong><span class="red">*</span> <em>Case Study Photo <span class="case-studies-tabbed-content-photo-upload-position">1</span> - Description of Photo:</em></strong></p>
+											<p>This field is required if a photo file is included. Briefly describe the photoss (required - 250 char limit)</p>
+											<div class="inputfiledescription"><textarea cols="40" rows="10" name="sup_photos_description1" data-maxlength="250"></textarea></div>
 										</li>
 									</ul>
 									<div class="case-studies-tabbed-content-single-button-row">
@@ -1399,15 +1401,15 @@
 										  </li>
 										  
 										  <li>
-											<p><strong><em>Additional Document Files <span class="case-studies-tabbed-content-document-upload-position">${loop.count}</span>:</em></strong> (4-6 words limit)</p>
-											<p>Brief name of file (required)</p>
-											<div class="inputfilename"><input type="text" name="sup_docs_names${loop.count}" size="30" maxlength="255" value="${sdocnames[loop.count - 1]}"></div>
+											<p><strong><em>Additional Document Files <span class="case-studies-tabbed-content-document-upload-position">${loop.count}</span>:</em></strong></p>
+											<p>Brief name of file (required - 150 char limit)</p>
+											<div class="inputfilename"><input type="text" name="sup_docs_names${loop.count}" size="30" maxlength="150" value="${sdocnames[loop.count - 1]}"></div>
 										  </li>
 										  
 										  <li>
-											<p><strong><span class="red">*</span> <em>Description of Document File <span class="case-studies-tabbed-content-document-upload-position">${loop.count}</span>:</em></strong> (30 word limit)</p>
-											<p>This field is required if a file is included. Briefly describe the file </p>
-											<div class="inputfiledescription"><textarea cols="40" rows="10" name="sup_docs_description${loop.count}" data-maxlength="150">${sdocdesc[loop.count - 1]}</textarea></div>
+											<p><strong><span class="red">*</span> <em>Description of Document File <span class="case-studies-tabbed-content-document-upload-position">${loop.count}</span>:</em></strong></p>
+											<p>This field is required if a file is included. Briefly describe the file (required - 250 char limit)</p>
+											<div class="inputfiledescription"><textarea cols="40" rows="10" name="sup_docs_description${loop.count}" data-maxlength="250">${sdocdesc[loop.count - 1]}</textarea></div>
 										  </li>
 										 </ul>
 								   </c:forEach>
@@ -1428,14 +1430,14 @@
 											<div class="inputfile"><input name="supdocfiles1" type="file" /></div>
 										</li>
 										<li>
-											<p><strong><em>Additional Document Files <span class="case-studies-tabbed-content-document-upload-position">1</span> Label:</em></strong> (4-6 words limit)</p>
-											<p>Brief name of file (required)</p>
-											<div class="inputfilename"><input type="text" name="sup_docs_names1" size="30" maxlength="255" value=""></div>
+											<p><strong><em>Additional Document Files <span class="case-studies-tabbed-content-document-upload-position">1</span> Label:</em></strong></p>
+											<p>Brief name of file (required - 150 char limit)</p>
+											<div class="inputfilename"><input type="text" name="sup_docs_names1" size="30" maxlength="150" value=""></div>
 										</li>
 										<li>
-											<p><strong><span class="red">*</span> <em>Description of Document File <span class="case-studies-tabbed-content-document-upload-position">1</span>:</em></strong> (30 word limit)</p>
-											<p>This field is required if a file is included. Briefly describe the file </p>
-											<div class="inputfiledescription"><textarea cols="40" rows="10" name="sup_docs_description1" data-maxlength="150"></textarea></div>
+											<p><strong><span class="red">*</span> <em>Description of Document File <span class="case-studies-tabbed-content-document-upload-position">1</span>:</em></strong></p>
+											<p>This field is required if a file is included. Briefly describe the file (required - 250 char limit) </p>
+											<div class="inputfiledescription"><textarea cols="40" rows="10" name="sup_docs_description1" data-maxlength="250"></textarea></div>
 										</li>
 									</ul>
 									<div class="case-studies-tabbed-content-single-button-row">
@@ -1581,6 +1583,7 @@
 										        		 }
 										        	 }
 										         }
+										        
 										    %>
 											<c:forEach var="countryElement" items="<%= nl.wur.alterra.cgi.ace.model.constants.AceItemCountry.values() %>" >
 											        
@@ -2016,8 +2019,13 @@
 									<div class="case-studies-tabbed-content-review-image-wrapper">
 										<div class="case-studies-tabbed-content-review-image-label">Label</div>
 										 <% 
-										    IGImage primImage = IGImageServiceUtil.getImage(Long.parseLong(measure.getPrimephoto()));
-										    String primImageUrl = themeDisplay.getPathImage() + "/image_gallery?img_id=" + primImage.getLargeImageId() +  "&t=" + ImageServletTokenUtil.getToken(primImage.getLargeImageId());
+										    String primImageUrl = "";
+										    
+										    if (Validator.isNotNull(measure.getPrimephoto()))
+										    {
+										      IGImage primImage = IGImageServiceUtil.getImage(Long.parseLong(measure.getPrimephoto()));
+										      primImageUrl = themeDisplay.getPathImage() + "/image_gallery?img_id=" + primImage.getLargeImageId() +  "&t=" + ImageServletTokenUtil.getToken(primImage.getLargeImageId());
+										    }
 										 %>
 										<img src="<%=primImageUrl %>" class="case-studies-tabbed-content-review-image" />
 									</div>
@@ -2097,16 +2105,22 @@
 												<a name="climate_impacts_anchor"><p><strong><em>Climate Impacts</em></strong></p></a>
 												<p>This case study addresses the following climate impact areas:</p>
 												<%
-												    String climateImpacts = measure.getClimateimpacts_();
-												    String[] climateImpactsAry = climateImpacts.split(";");
+												    String[] climateImpactsAry = null;
+												    if (Validator.isNotNull(measure.getClimateimpacts_()))
+												    {
+													    String climateImpacts = measure.getClimateimpacts_();
+													    climateImpactsAry = climateImpacts.split(";");
+												    }
 												    
 												    pageContext.setAttribute("climateImpactsForReview", climateImpactsAry);
 												%>
+												
+												  <c:if test="${climateImpactsForReview ne null }">
 												    <c:forEach var="climate" items="${climateImpactsForReview}">
-												       <p><liferay-ui:message key="aceitem-climateimpacts-lbl-${climate}" /></p>
+												           <p><liferay-ui:message key="aceitem-climateimpacts-lbl-${climate}" /></p>
 												    </c:forEach>
-											
-													<div class="case-studies-form-clearing"></div>
+												  </c:if>
+												  <div class="case-studies-form-clearing"></div>
 											</li>
 											
 											<li>
@@ -2126,13 +2140,20 @@
 											<li>
 												<a name="adapt_options_anchor"><p><strong><em>Adaptation Options</em></strong></p></a>
 												<%
-												    String adaptOptions = measure.getAdaptationoptions();
-												    String[] adaptOptionsAry = adaptOptions.split(";");
-												    pageContext.setAttribute("adaptationOptionsForReview", adaptOptionsAry);
+												   
+												   String[] adaptOptionsAry = null;
+												   if (Validator.isNotNull(measure.getAdaptationoptions()))
+												   {
+													   String adaptOptions = measure.getAdaptationoptions();
+													   adaptOptionsAry = adaptOptions.split(";");
+												   }
+												   pageContext.setAttribute("adaptationOptionsForReview", adaptOptionsAry);
 												%>
+												   <c:if test="${adaptoptionsForReview ne null }">
 												    <c:forEach var="adaptoption" items="${adaptationOptionsForReview}">
 												       <p><liferay-ui:message key="aceitem-adaptoptions-lbl-${adaptoption}" /></p>
 												    </c:forEach>
+												   </c:if>
 													<div class="case-studies-form-clearing"></div>
 											</li>
 											
@@ -2145,13 +2166,20 @@
 											<li>
 												<a name="relevance_anchor"><p><strong><em>Relevance</em></strong></p></a>
 												<%
-												    String relevance = measure.getRelevance();
-												    String[] relevanceAry = relevance.split(";");
+												    
+												    String[] relevanceAry = null;
+												    if (Validator.isNotNull(measure.getRelevance()))
+												    {
+												    	String relevance = measure.getRelevance();
+												    	relevanceAry = relevance.split(";");
+												    }
 												    pageContext.setAttribute("relevanceForReview", relevanceAry);
 												  
 												%>
 												    <c:forEach var="relevance" items="${relevanceForReview}">
+												     <c:if test="${relevanceForReview ne null}">
 												       <p><liferay-ui:message key="aceitem-relevance-lbl-${relevance}" /></p>
+												     </c:if>
 												    </c:forEach>
 													<div class="case-studies-form-clearing"></div>
 										   </li>
@@ -2159,14 +2187,21 @@
 										   <li>
 												<a name="sector_policies_anchor"><p><strong><em>Relevant European Union Sector Policies:</em></strong></p></a>
 												<%
-												    String sectors = measure.getSectors_();
-												    String[] sectorAry = sectors.split(";");
+												    
+												    String[] sectorAry = null;
+												    if (Validator.isNotNull(measure.getSectors_()))
+												    {
+												    	String sectors = measure.getSectors_();
+												    	sectorAry = sectors.split(";");
+												    }
 												    pageContext.setAttribute("sectorForReview", sectorAry);
 												   
 												%>
-												    <c:forEach var="sector" items="${sectorForReview}">
-												       <p><liferay-ui:message key="acesearch-sectors-lbl-${sector}" /></p>
-												    </c:forEach>
+												   <c:if test="${sectorForReview ne null }">
+													    <c:forEach var="sector" items="${sectorForReview}">
+													       <p><liferay-ui:message key="acesearch-sectors-lbl-${sector}" /></p>
+													    </c:forEach>
+												   </c:if>
 													<div class="case-studies-form-clearing"></div>
 										   </li>
 										</ul>

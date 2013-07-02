@@ -197,15 +197,23 @@
 						<li>
 							<a name="climate_impacts_anchor"><p><strong><em>Climate Impacts</em></strong></p></a>
 							<p>This case study addresses the following climate impact areas:</p>
-							<%
-							    String climateImpacts = measure.getClimateimpacts_();
-								String[] climateImpactsAry = climateImpacts.split(";");
-								pageContext.setAttribute("climateImpactsForReview", climateImpactsAry);
-							%>
 							
-							<c:forEach var="climate" items="${climateImpactsForReview}">
-								<p><liferay-ui:message key="aceitem-climateimpacts-lbl-${climate}" /></p>
-							</c:forEach>
+							<%
+									String[] climateImpactsAry = null;
+								    if (Validator.isNotNull(measure.getClimateimpacts_()))
+								    {
+									    String climateImpacts = measure.getClimateimpacts_();
+									    climateImpactsAry = climateImpacts.split(";");
+								    }
+												    
+								    pageContext.setAttribute("climateImpactsForReview", climateImpactsAry);
+							%>
+												
+							  <c:if test="${climateImpactsForReview ne null }">
+							    <c:forEach var="climate" items="${climateImpactsForReview}">
+							           <p><liferay-ui:message key="aceitem-climateimpacts-lbl-${climate}" /></p>
+							    </c:forEach>
+							  </c:if>
 							<div class="case-studies-review-clearing"></div>
 						</li>
 						
@@ -226,16 +234,21 @@
 											
 						<li>
 								<a name="adapt_options_anchor"><p><strong><em>Adaptation Options</em></strong></p></a>
-								<%
-								    String adaptOptions = measure.getAdaptationoptions();
-								    String[] adaptOptionsAry = adaptOptions.split(";");
-								    pageContext.setAttribute("adaptationOptionsForReview", adaptOptionsAry);
-							     %>
-							     
-							     <c:forEach var="adaptoption" items="${adaptationOptionsForReview}">
-									<p><liferay-ui:message key="aceitem-adaptoptions-lbl-${adaptoption}" /></p>
-								 </c:forEach>
+								 <%
+								    String[] adaptOptionsAry = null;
 								 
+								    if (Validator.isNotNull(measure.getAdaptationoptions()))
+								    {
+									   String adaptOptions = measure.getAdaptationoptions();
+									   adaptOptionsAry = adaptOptions.split(";");
+								    }
+								   pageContext.setAttribute("adaptationOptionsForReview", adaptOptionsAry);
+								%>
+								   <c:if test="${adaptoptionsForReview ne null }">
+								    <c:forEach var="adaptoption" items="${adaptationOptionsForReview}">
+								       <p><liferay-ui:message key="aceitem-adaptoptions-lbl-${adaptoption}" /></p>
+								    </c:forEach>
+								   </c:if>
 								 <div class="case-studies-form-clearing"></div>
 						</li>
 											
@@ -248,30 +261,45 @@
 						<li>
 								<a name="relevance_anchor"><p><strong><em>Relevance</em></strong></p></a>
 								<%
-										String relevance = measure.getRelevance();
-									    String[] relevanceAry = relevance.split(";");
-									    pageContext.setAttribute("relevanceForReview", relevanceAry);
-												  
+												    
+								    String[] relevanceAry = null;
+								    if (Validator.isNotNull(measure.getRelevance()))
+								    {
+								    	String relevance = measure.getRelevance();
+								    	relevanceAry = relevance.split(";");
+								    }
+								    pageContext.setAttribute("relevanceForReview", relevanceAry);
+								  
 								%>
-								
-								<c:forEach var="relevance" items="${relevanceForReview}">
-									<p><liferay-ui:message key="aceitem-relevance-lbl-${relevance}" /></p>
-								</c:forEach>
+								    <c:forEach var="relevance" items="${relevanceForReview}">
+								     <c:if test="${relevanceForReview ne null}">
+								       <p><liferay-ui:message key="aceitem-relevance-lbl-${relevance}" /></p>
+								     </c:if>
+								    </c:forEach>
+							
 								<div class="case-studies-form-clearing"></div>
 						</li>
 										   
 						<li>
-								<a name="sector_policies_anchor"><p><strong><em>Relevant European Union Sector Policies:</em></strong></p></a>
+						        <a name="sector_policies_anchor"><p><strong><em>Relevant European Union Sector Policies:</em></strong></p></a>
 								<%
-									String sectors = measure.getSectors_();
-									String[] sectorAry = sectors.split(";");
-									pageContext.setAttribute("sectorForReview", sectorAry);
-												   
+												    
+								    String[] sectorAry = null;
+								    if (Validator.isNotNull(measure.getSectors_()))
+								    {
+								    	String sectors = measure.getSectors_();
+								    	sectorAry = sectors.split(";");
+								    }
+								    pageContext.setAttribute("sectorForReview", sectorAry);
+								   
 								%>
-								<c:forEach var="sector" items="${sectorForReview}">
-									<p><liferay-ui:message key="acesearch-sectors-lbl-${sector}" /></p>
-								</c:forEach>
-								<div class="case-studies-form-clearing"></div>
+								
+							   <c:if test="${sectorForReview ne null }">
+								    <c:forEach var="sector" items="${sectorForReview}">
+								       <p><liferay-ui:message key="acesearch-sectors-lbl-${sector}" /></p>
+								    </c:forEach>
+							   </c:if>
+							   <div class="case-studies-form-clearing"></div>
 						</li>
 					</ul>
 				</div>
@@ -453,16 +481,14 @@
 				</div>
 
 				<div class="case-studies-review-column-right-section">
+				     <p><strong>Climate impacts</strong></p>
 					 <c:forEach var="climate" items="${climateImpactsForReview}">
 						<p><liferay-ui:message key="aceitem-climateimpacts-lbl-${climate}" /></p>
 					 </c:forEach>
 				</div>
-
-				<div class="case-studies-review-column-right-section">
-					<p><strong>Geographic characterisation</strong></p>
-					<p>
-					
-							<%
+				
+				
+				<%   
 						        // getting the selected value
 						        // define radio option
 						        String geoCharSelected = "";
@@ -470,6 +496,8 @@
 						        String geoTrans1Selected = "";
 						        String geoTrans2Selected = "";
 						        String cityText = "";
+						        String OldGeoSpatialValue = "";
+						        boolean newForm = true;
 						    
 						        
 						        Measure measureForGeoChars = null;
@@ -477,50 +505,62 @@
 						        {
 						        	measureForGeoChars = measure;
 						        }
-						      
 						        
-						        if (measureForGeoChars != null && Validator.isNotNull(measureForGeoChars.getGeochars()))
+						       
+						        // if we have old GeoCharacterization value or the new GeoCharacterization value
+						        if ((measureForGeoChars != null && Validator.isNotNull(measureForGeoChars.getGeochars())) || Validator.isNotNull(measureForGeoChars.getSpatiallayer()))
 						        {
-						        	if (measureForGeoChars.getGeochars().contains("SUBNATIONAL"))
+						        	// check for new value
+						        	if (Validator.isNotNull(measureForGeoChars.getGeochars()))
 						        	{
-						        		geoCharSelected = "SUBNATIONAL";
-						        		
-						        		
-						        		String[] snationals = measureForGeoChars.getGeochars().split("\\^");
-						        		
-						        		boolean skippedFirstOne = false;
-						        		for (String snat:snationals)
-						        		{
-						        		    if (skippedFirstOne)
-						        		    {
-						        			    geoCharsSubNatlSelected.add(snat);
-						        		    }
-						        		    else
-						        		    {
-						        		    	skippedFirstOne = true;
-						        		    }
-						        			
-						        		}        
-						        	}
-						        	else if (measureForGeoChars.getGeochars().contains("TRANSNATIONAL"))
-						        	{
-						        		geoCharSelected = "TRANSNATIONAL";
-						        
-						        		String[] transnationals = measureForGeoChars.getGeochars().split("\\^");
-						        		geoTrans1Selected = transnationals[1];
-						        		geoTrans2Selected = transnationals[2];
-						        	}
-						        	else if (measureForGeoChars.getGeochars().contains("CITY"))
-						        	{
-						        		geoCharSelected = "CITY";
+								        	if (measureForGeoChars.getGeochars().contains("SUBNATIONAL"))
+								        	{
+								        		geoCharSelected = "SUBNATIONAL";
+								        		
+								        		
+								        		String[] snationals = measureForGeoChars.getGeochars().split("\\^");
+								        		
+								        		boolean skippedFirstOne = false;
+								        		for (String snat:snationals)
+								        		{
+								        		    if (skippedFirstOne)
+								        		    {
+								        			    geoCharsSubNatlSelected.add(snat);
+								        		    }
+								        		    else
+								        		    {
+								        		    	skippedFirstOne = true;
+								        		    }
+								        			
+								        		}        
+								        	}
+								        	else if (measureForGeoChars.getGeochars().contains("TRANSNATIONAL"))
+								        	{
+								        		geoCharSelected = "TRANSNATIONAL";
+								        
+								        		String[] transnationals = measureForGeoChars.getGeochars().split("\\^");
+								        		geoTrans1Selected = transnationals[1];
+								        		geoTrans2Selected = transnationals[2];
+								        	}
+								        	else if (measureForGeoChars.getGeochars().contains("CITY"))
+								        	{
+								        		geoCharSelected = "CITY";
+								        	
+								        		String[] city = measureForGeoChars.getGeochars().split("\\^");
+								        		cityText = city[1];
+								        	}
+								        	else
+								        	{
+								        		geoCharSelected = measureForGeoChars.getGeochars();
+								        	}
+						            }
+						        	// check for old value
+						        	else if (Validator.isNotNull(measureForGeoChars.getSpatiallayer()))
+						            {
+						        	newForm = false;
+						        	geoCharSelected = measureForGeoChars.getSpatiallayer();
 						        	
-						        		String[] city = measureForGeoChars.getGeochars().split("\\^");
-						        		cityText = city[1];
-						        	}
-						        	else
-						        	{
-						        		geoCharSelected = measureForGeoChars.getGeochars();
-						        	}
+						            }
 						        }
 						        
 						        
@@ -529,28 +569,37 @@
 						        pageContext.setAttribute("geoTrans1Selected", geoTrans1Selected);
 						        pageContext.setAttribute("geoTrans2Selected", geoTrans2Selected);
 						        pageContext.setAttribute("cityText", cityText);
+						        pageContext.setAttribute("newForm", newForm);
 						   %>
-					
-			                 <c:choose>
-							     <c:when test="${geoCharSelected eq 'TRANSNATIONAL'}">
-										 Macro-transnational region: <liferay-ui:message key="acesearch-geochars-lbl-${geoTrans1Selected}"/>
-										 Bio-transnational region: <liferay-ui:message key="acesearch-geochars-lbl-${geoTrans2Selected}"/>
-							     </c:when>
-							     <c:when test="${geoCharSelected eq 'SUBNATIONAL'}">
-										   Sub Nationals: <br/>
-										<c:forEach var="subNationalElement" items="${geoCharsSubNatlSelected}" >
-										    <liferay-ui:message key="acesearch-geochars-lbl-${subNationalElement}"/> <br/>
-										</c:forEach>
-								 </c:when>
-								 <c:when test="${geoCharSelected eq 'CITY'}">
-										 Cities and Towns: ${cityText}
-								 </c:when>
-							     <c:otherwise>
-										    <liferay-ui:message key="acesearch-geochars-lbl-${geoCharSelected}"/> <br/>
-								</c:otherwise>
-				            </c:choose>
-					</p>
-				</div>
+						   
+						   <c:if test="${geoCharSelected}">
+					       	<div class="case-studies-review-column-right-section">
+						        <p><strong>Geographic characterisation</strong></p>
+						        <p>
+					                 <c:choose>
+									     <c:when test="${geoCharSelected eq 'TRANSNATIONAL' && newForm eq true}">
+												 Macro-transnational region: <liferay-ui:message key="acesearch-geochars-lbl-${geoTrans1Selected}"/>
+												 Bio-transnational region: <liferay-ui:message key="acesearch-geochars-lbl-${geoTrans2Selected}"/>
+									     </c:when>
+									     <c:when test="${geoCharSelected eq 'SUBNATIONAL' && newForm eq true}">
+												   Sub Nationals: <br/>
+												<c:forEach var="subNationalElement" items="${geoCharsSubNatlSelected}" >
+												    <liferay-ui:message key="acesearch-geochars-lbl-${subNationalElement}"/> <br/>
+												</c:forEach>
+										 </c:when>
+										 <c:when test="${geoCharSelected eq 'CITY' && newForm eq true}">
+												 Cities and Towns: ${cityText}
+										 </c:when>
+										 <c:when test="${newForm eq true}">
+												 <liferay-ui:message key="acesearch-geochars-lbl-${geoCharSelected}"/> <br/>
+										 </c:when>
+									     <c:otherwise>
+												 ${geoCharSelected}"/>
+										</c:otherwise>
+						            </c:choose>
+						      </p>
+				          </div>
+				        </c:if>
 				<div class="case-studies-review-column-right-section">
 				   <%
 					    String countriesForReview = measure.getSpatialvalues();
