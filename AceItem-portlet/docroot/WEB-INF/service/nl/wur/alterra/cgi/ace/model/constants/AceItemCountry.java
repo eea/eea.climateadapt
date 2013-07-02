@@ -6,14 +6,18 @@ package nl.wur.alterra.cgi.ace.model.constants;
  * @author josegar
  */
 public enum AceItemCountry {
+	AL, /* Albania */
     AT, /* Austria */
     BE, /* Belgium */
     BG, /* Bulgaria */
+    BO, /* Bosnia and Herzegovina */
+    CR, /* Croatia */
     CY, /* Cyprus */
     CZ, /* Czech Republic */
     DK, /* Denmark */
     EE, /* Estonia */
     FI, /* Finland */
+    YU, /* Former Yugoslav Republic of Macedonia */
     FR, /* France */
     DE, /* Germany */
     GR, /* Greece */
@@ -21,16 +25,19 @@ public enum AceItemCountry {
     IS, /* Iceland */
     IE, /* Ireland */
     IT, /* Italy */
+    KO, /* Kosovo under UN Security Counil Resolution 1244/99 */
     LV, /* Latvia */
     LI, /* Liechtenstein */
     LT, /* Lithuania */
     LU, /* Luxembourg */
     MT, /* Malta */
+    MO, /* Montenegro */
     NL, /* Netherlands */
     NO, /* Norway */
     PL, /* Poland */
     PT, /* Portugal */
     RO, /* Romania */
+    SR, /* Serbia */
     SK, /* Slovakia */
     SI, /* Slovenia */
     ES, /* Spain */
@@ -38,11 +45,4 @@ public enum AceItemCountry {
     CH, /* Switzerland */
     TR, /* Turkey */
     GB, /* United Kingdom */
-    CR, /* Croatia */
-    SR, /* Serbia */
-    BO, /* Bosnia and Herzegovina */
-    MO, /* Montenegro */
-    AL, /* Albania */
-    KO, /* Kosovo under UN Security Counil Resolution 1244/99 */
-    YU /* Former Yugoslav Republic of Macedonia */
 }
