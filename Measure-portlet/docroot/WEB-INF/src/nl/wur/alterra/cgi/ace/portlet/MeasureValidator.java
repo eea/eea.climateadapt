@@ -184,13 +184,25 @@ public class MeasureValidator {
 			}
 			else
 			{
-			       Pattern p = Pattern.compile("[2][0]\\d\\d");
+			      /* Pattern p = Pattern.compile("[2][0]\\d\\d");
 			       Matcher m = p.matcher(measure.getYear());
 			       if (! m.matches())
 			       {
 			    	   errors.add("year-required");
 					   valid = false;
-			       }
+			       }*/
+				try {
+					int year = Integer.parseInt(measure.getYear());
+					if (year < 1900 || year > 2100)
+					{
+						throw new Exception("Invalid Year");
+					}
+				}
+				catch(Exception e)
+				{
+					errors.add("year-required");
+					valid = false;
+				}
 			}
 			
 			if (Validator.isNull(measure.getGeochars()))
