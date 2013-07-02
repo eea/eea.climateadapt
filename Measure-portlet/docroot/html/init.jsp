@@ -10,6 +10,7 @@
 
 <%@ page import="java.util.List" %>
 <%@ page import="java.util.ArrayList" %>
+<%@ page import="java.util.Arrays" %>
 <%@ page import="java.text.SimpleDateFormat" %>
 
 <%@ page import="javax.portlet.PortletPreferences" %>
