@@ -268,19 +268,18 @@ public abstract class MeasureUpdateHelperForSharedMeasure extends MVCPortlet {
         	if (uploadRequest.getParameter( "chk_geos_trans") != null) {
                 String e = uploadRequest.getParameter( "chk_geos_trans");
                 if (e.equalsIgnoreCase(geo.toString())) {
-                    choosengeos += geo.toString() + ";";
+                    choosengeos = geo.toString();
                 }
             }
-        	
+        	/*
         	if (uploadRequest.getParameter( "chk_geos_" + geo) != null) {
                 String e = uploadRequest.getParameter( "chk_geos_" + geo);
                 if (e.equalsIgnoreCase(geo.toString())) {
                     choosengeos += geo.toString() + ";";
                 }
-            }
+            }*/
         }
-        
-        //System.out.println("choosenGEOS is " + choosengeos);
+
         measure.setGeos_(choosengeos);
         
         String choosenGeoChars = uploadRequest.getParameter("rad_geo_chars");

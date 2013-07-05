@@ -722,6 +722,7 @@
 										<div class="case-studies-character-count"></div>
 									</li>
 									<li>
+									    <liferay-ui:error key="relevance-required" message="relevance-required" />
 										<p><strong><span class="red">*</span> <em>Importance and Relevance of Adaptation :</em></strong></p>
 										<p>Select one or more descriptions below that best describes how relevant this case study is to Climate Adaptation.</p>
 										<ul class="one-col">
@@ -1459,18 +1460,14 @@
 							<div class="case-studies-tabbed-content-header">Case Study - <em>Geographic Information</em></div>
 
 							<div class="case-studies-tabbed-content-section">
-								<div class="case-studies-tabbed-content-subheader">Spatial Level</div>
+								<div class="case-studies-tabbed-content-subheader">Governance Level</div>
 								<ul>
 									<li>
 										<p><em>Select one or more regions, this case study covers.</em></p>
 										<ul class="one-col">
 											<li>
 											   <%
-										         String choosengeos = "";
-											     ArrayList trans = new ArrayList();
-											     ArrayList nontrans = new ArrayList();
-											     boolean transExists = false;
-											     
+											         ArrayList trans = new ArrayList();
 										        	 Measure measureStructure = null;
 										        	 if (measure == null || Validator.isNull(measure.getGeos_()))
 									        	     {
@@ -1493,34 +1490,15 @@
 									        		 
 										        	 for (nl.wur.alterra.cgi.ace.model.constants.AceItemGeos geo : nl.wur.alterra.cgi.ace.model.constants.AceItemGeos.values())
 										        	 {
-										        		
-										        		 if (geo.isRadio())
-										        		 {
-										        			 if (geoValues.contains(geo.toString()))
-										        			 {
-										        				 transExists = true;
-										        			 }
-										        			 trans.add(geo);
-										        		 }
-										        		 else
-										        		 {
-										        			 nontrans.add(geo);
-										        		 }
+										        		 trans.add(geo.toString());
+										        		 
 										        	 }
 										    %>
-										    
-										    <% if (transExists == true) {%>
-										    <label for="transnational"><input type="checkbox" id="transnational" value="Transnational" checked="checked">Transnational</label>
-										    <%} else { %>
-										       <label for="transnational"><input type="checkbox" id="transnational" value="Transnational">Transnational</label>
-										      <%} %>
-										       <div class="case-studies-tabbed-content-sub-options">
-											     <ul class="five-col">
 														<c:forEach var="geo" items="<%= trans  %>" >
 															
 																<c:set var="aceItemGeos" value='<%= geoValues %>' />
 																<c:set var="adaptationGeoMustBeChecked" value="false" />
-																<c:if test="${fn:contains(aceItemGeos, geo)}">
+																<c:if test="${aceItemGeos eq geo}">
 																	<c:set var="adaptationGeoMustBeChecked" value="true" />
 																</c:if>	
 																<c:choose>
@@ -1531,28 +1509,7 @@
 																		<li><label for="chk_geos_${geo}"><input type="radio" name="chk_geos_trans" id="chk_geos_trans" value="${geo}" /><liferay-ui:message key="aceitem-geos-lbl-${geo}" /></label></li>
 																	</c:otherwise>
 																</c:choose>
-																				
 														</c:forEach>
-													</ul>
-											   </div>
-											   
-											   <c:forEach var="geo" items="<%= nontrans  %>" >
-															
-																<c:set var="aceItemGeos" value='<%= geoValues %>' />
-																<c:set var="adaptationGeoMustBeChecked" value="false" />
-																<c:if test="${fn:contains(aceItemGeos, geo)}">
-																	<c:set var="adaptationGeoMustBeChecked" value="true" />
-																</c:if>	
-																<c:choose>
-																	<c:when test="${adaptationGeoMustBeChecked}">
-																		<li><label for="chk_geos_${geo}"><input type="checkbox" name="chk_geos_${geo}" id="chk_geos_${geo}" value="${geo}" checked="checked" /><liferay-ui:message key="aceitem-geos-lbl-${geo}" /></label></li>
-																	</c:when>
-																	<c:otherwise>
-																		<li><label for="chk_geos_${geo}"><input type="checkbox" name="chk_geos_${geo}" id="chk_geos_${geo}" value="${geo}" /><liferay-ui:message key="aceitem-geos-lbl-${geo}" /></label></li>
-																	</c:otherwise>
-																</c:choose>
-																				
-												</c:forEach>
 										</ul>
 									</li>
 								</ul>
@@ -1569,20 +1526,17 @@
 										
 										      <%
 										         String choosencountries = "";
-										         if (measure == null )
-										         {
+										       
+										             
+										       
 										        	 for (nl.wur.alterra.cgi.ace.model.constants.AceItemCountry countryElement : nl.wur.alterra.cgi.ace.model.constants.AceItemCountry.values()) 
 										        	 {
-										        		 if (renderRequest.getParameter("chk_countries_" + countryElement) != null) {
-										        			 
-										        			 String e = renderRequest.getParameter("chk_countries_" + countryElement);
-										        			 if (e.equalsIgnoreCase(countryElement.toString())) {
+										        			 if (measureStructure != null && Validator.isNotNull(measureStructure.getSpatialvalues()) && measureStructure.getSpatialvalues().indexOf(countryElement.toString()) >= 0) {
 										                         choosencountries += countryElement.toString() + ";";
+										                         
 										                       
 										                     }
-										        		 }
-										        	 }
-										         }
+										        	}
 										        
 										    %>
 											<c:forEach var="countryElement" items="<%= nl.wur.alterra.cgi.ace.model.constants.AceItemCountry.values() %>" >

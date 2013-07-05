@@ -3,87 +3,26 @@ package nl.wur.alterra.cgi.ace.model.constants;
 public enum AceItemGeos {
 	
 	/**
-     * Northern Periphery
+     * Transnational region (stretching across country borders)
      */
-	NORTH_PERIPHERY(true),
-	
-	/**
-     * South East Europe
-     */
-	SE_EUROPE(true),
-	
-	/**
-     * Atlantic Area
-     */
-	A_AREA(true),
-	
-	/**
-     * North West Europe
-     */
-	NW_EUROPE(true),
-	
-	/**
-     * Maca
-     */
-	MAC(true),
-
-	/**
-     * North Sea
-     */
-	NORTH_SEA(true),
-	
-	/**
-     * Indian Ocean Area
-     */
-	IO_AREA(true),
-	
-	/**
-     * South West Europe
-     */
-	SW_EUROPE(true),
-	
-	/**
-     * Alpine Space
-     */
-	AL_SPACE(true),
-	
-	/**
-     * Central Europe
-     */
-	CE_EUROPE(true),
-	
-	/**
-     * Baltic Sea
-     */
-	B_SEA(true),
-	
-	/**
-     * Caribbean Area
-     */
-	CAR(true),
-	
-	/**
-     * Mediterranean
-     */
-	MED(true),
+	 TRANS(true),
 	
 	/**
      * National
      */
-	NAT(false),
+	NAT(true),
 	
 
 	/**
      * Subnational Regions
      */
-	SNA(false),
+	SNA(true),
 	
 	/**
-     * Local
+     * Local (e.g. city or municipal level)
      */
-	LC(false);
-	
-	
+	LC(true);
+	 
 	
 	private boolean isRadio = false;
 	
