@@ -7,6 +7,14 @@
 	background-image: url(images/help.png) !important;
 }
 
+#locate-button {
+	clear: none;
+}
+
+#help-button {
+	clear: none;
+}
+
 
 /**** Styling of the similar areas tool 
 The SAT does NOT have a seperate layout template. 

@@ -25,15 +25,17 @@ CHM.Control.Locator.LocatorControl = Ext.extend(Ext.Panel, {
     	
     	this.border = false;
     	
-    	this.locationTextField = new Ext.form.TextField({anchor: '100%', enableKeyEvents: true, value: this.location});
+    	this.locationTextField = new Ext.form.TextField({columnWidth: 1, enableKeyEvents: true, value: this.location});
     	
     	this.locationTextField.addListener('keyup', this.handleLocationTextFieldKeyUp, this);
     	
     	this.locationTextField.addListener('focus', this.focus, this);
     	
-    	this.button = new Ext.Button({text: this.locate});
+    	this.button = new Ext.Button({width: 50, text: this.locate, id: 'locate-button'});
     	
-    	this.panel = new Ext.Panel({anchor: '100%', items: [this.locationTextField, this.button], layout: 'absolute'});
+    	this.button.addListener('click', this.handleLocateButtonClick, this);
+    	
+    	this.panel = new Ext.Panel({anchor: '100%', border: false, items: [this.locationTextField, {xtype: 'label', html: '&nbsp;'}, this.button], layout: 'column'});
     	
     	this.panel.addListener('resize', this.resize, this);
     	
@@ -74,12 +76,6 @@ CHM.Control.Locator.LocatorControl = Ext.extend(Ext.Panel, {
     	h = h - this.panel.getHeight() - this.spacer.getHeight();
     	
     	this.candidatesPanel.setHeight(h);
-    	
-    	var buttonx = this.panel.getWidth() - this.button.getHeight();
-    	
-    	var buttony = 0;
-    	
-    	this.button.setPosition(buttonx, buttony);
     }, 
     
     focus: function() {
@@ -92,6 +88,10 @@ CHM.Control.Locator.LocatorControl = Ext.extend(Ext.Panel, {
     
     applicationInitialized: function() {
 
+    },
+    
+    handleLocateButtonClick: function() {
+    	this.locator.locate(this.locationTextField.getValue());
     },
     
     handleLocationTextFieldKeyUp: function(field, e) {

@@ -35,11 +35,9 @@ CHM.Application = Ext.extend(Ext.Panel,  {
 		
 		this.titleControl.html = '<h1 class="portlet-title"><span class="portlet-title-text">Case Study Search tool</span></h1>';
 		
-		this.titleControl.x = this.margin;
-		
-		this.titleControl.y = this.margin;
-		
-		var helptooltip = new Ext.ToolTip({        
+		var helptooltip = new Ext.ToolTip({   
+			title: 'Case Study Search Tool',
+			id: '',
             anchor: 'left',
             text: this.help,
             width: 415,
@@ -54,11 +52,9 @@ CHM.Application = Ext.extend(Ext.Panel,  {
             }
 		});
 		
-    	this.helpButton = new Ext.Button({iconCls: 'x-help', tooltip: helptooltip, disabled: false});
+    	this.helpButton = new Ext.Button({iconCls: 'x-help', tooltip: helptooltip, id: 'help-button', disabled: false});
     	
-		this.helpButton.x = this.width / 4;
-		
-		this.helpButton.y = this.margin;
+    	var panel = new Ext.Panel({x: this.margin, y: this.margin, border: false, items: [this.titleControl, {xtype: 'label', html: '&nbsp;'}, this.helpButton], layout: 'column'});
 		
     	this.mapControl = new CHM.Control.Map.MapControl({width: this.width / 4 * 3 - this.margin - (this.margin / 2), height: this.height / 8 * 3 - (this.margin / 2) - (this.margin / 2), x: this.margin, y: this.height / 8 * 1 + (this.margin / 2)});
     	
@@ -70,7 +66,7 @@ CHM.Application = Ext.extend(Ext.Panel,  {
     	
 		this.defaults = {collapsible : false, split : true};
 
-		this.items = [this.titleControl, this.helpButton, this.mapControl, this.gridControl, this.locatorControl, this.optionsControl];
+		this.items = [panel, this.mapControl, this.gridControl, this.locatorControl, this.optionsControl];
     	
     	CHM.Application.superclass.initComponent.call(this);
     	
