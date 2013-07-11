@@ -1,4 +1,4 @@
-CHM.SATVector = OpenLayers.Class(OpenLayers.Layer.Vector, {
+CHM.Layer.Vector.CasestudiesVector = OpenLayers.Class(OpenLayers.Layer.Vector, {
 	
 	protocol: null,
 	
@@ -13,8 +13,6 @@ CHM.SATVector = OpenLayers.Class(OpenLayers.Layer.Vector, {
 	risk: null,
 	
 	sector: null,
-	
-	tooltip: null,
 	
 	offsetX: null,
 	
@@ -63,8 +61,8 @@ CHM.SATVector = OpenLayers.Class(OpenLayers.Layer.Vector, {
 	handleFeatureSelected: function(event) {
 	    Ext.QuickTips.init();
 	    
-		if (this.tooltip != null) {
-			this.tooltip.destroy();
+		if (session.tooltip != null) {
+			session.tooltip.destroy();
 		}
 		
 	    var description = event.feature.attributes.desc;
@@ -75,11 +73,10 @@ CHM.SATVector = OpenLayers.Class(OpenLayers.Layer.Vector, {
 		
 		pixel = this.map.getViewPortPxFromLonLat(event.feature.geometry.getBounds().getCenterLonLat());
         
-		this.tooltip = new Ext.ToolTip({        
-            title: '<a href="#">' + event.feature.attributes.itemname + '</a>',
+		session.tooltip = new Ext.ToolTip({        
+            title: '<a href="' + event.feature.attributes.website + '">' + event.feature.attributes.itemname + '</a>',
             anchor: 'left',
             html: "<table width='100%' border='0'>" +
-            "<tr><th>" + event.feature.attributes.itemname + "</th></tr>" + 
             "<tr><td>" + description + "</td></tr>" + 
             "<tr><td><a href='/viewmeasure?ace_measure_id=" + event.feature.attributes.measureid + "' target='_blank'>read more</a></td></tr>" + 
             "</table>",
@@ -96,8 +93,8 @@ CHM.SATVector = OpenLayers.Class(OpenLayers.Layer.Vector, {
                 }
             }
         });
-        
-		this.tooltip.showAt([pixel.x + this.offsetX, pixel.y + this.offsetY]);
+		
+		session.tooltip.showAt([pixel.x + this.offsetX, pixel.y + this.offsetY]);
         
 		return true;
 	},

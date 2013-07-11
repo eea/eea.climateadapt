@@ -1,6 +1,4 @@
 CHM.LocationControl = OpenLayers.Class(OpenLayers.Control, {
-	satCHMMap: null, 
-	
 	defaultHandlerOptions : {
 		'single' : true,
 		'double' : false,
@@ -18,8 +16,8 @@ CHM.LocationControl = OpenLayers.Class(OpenLayers.Control, {
 	},
 	
 	trigger : function(e) {
-		var lonlat = this.satCHMMap.getLonLatFromViewPortPx(e.xy);
+		var lonlat = this.map.getLonLatFromViewPortPx(e.xy);
 		
-		this.satCHMMap.setLocation(new CHM.Location(lonlat.lon, lonlat.lat, this.satCHMMap.projection));
+		session.setLocation(new CHM.Location(lonlat.lon, lonlat.lat, this.map.projection));
 	}
 });

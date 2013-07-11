@@ -1,4 +1,4 @@
-CHM.SATCHMMap = OpenLayers.Class(CHM.CHMMap, {
+CHM.Control.Map.Map = OpenLayers.Class(OpenLayers.Map, {
 
 	location : null,
 	
@@ -21,7 +21,70 @@ CHM.SATCHMMap = OpenLayers.Class(CHM.CHMMap, {
     },
 
     initialize: function(options) {
-		CHM.CHMMap.prototype.initialize.apply(this, arguments);
+		OpenLayers.Map.prototype.initialize.apply(this, arguments);
+		
+		this.projection = new OpenLayers.Projection("EPSG:900913");
+		
+		this.units = "m";
+		
+		this.maxResolution = 156543.0339;
+		
+		this.maxExtent = new OpenLayers.Bounds(-2680799.4555375, 4050551.002161, 5244191.63565, 11799431.180210993);
+        
+		this.restrictedExtent = new OpenLayers.Bounds(-2680799.4555375, 4050551.002161, 5253975.5752687, 11799431.180210993);
+        
+        this.addControl(new OpenLayers.Control.LayerSwitcher());
+        
+        session.events.register('locationChanged', this, this.handleLocationChanged);
+        
+        session.events.register('riskChanged', this, this.handleRiskChanged);
+        
+        session.events.register('sectorChanged', this, this.handleSectorChanged);
+	},
+	
+	handleLocationChanged: function(event) {
+		this.setLocation(session.location);
+	}, 
+	
+	handleRiskChanged: function(event) {
+		this.setRisk(session.risk);
+	}, 
+	
+	handleSectorChanged: function(event) {
+		this.setSector(session.sector);
+	}, 
+	
+	addBingLayers : function() {
+        var road = new OpenLayers.Layer.VirtualEarth("Road", {
+            sphericalMercator: true,
+            maxExtent: new OpenLayers.Bounds(-20037508.34,-20037508.34,20037508.34,20037508.34),
+            type: VEMapStyle.Road
+        });
+        
+        var shaded = new OpenLayers.Layer.VirtualEarth("Shaded", {
+            sphericalMercator: true,
+            maxExtent: new OpenLayers.Bounds(-20037508.34,-20037508.34,20037508.34,20037508.34),
+            type: VEMapStyle.Shaded
+        });
+        
+        var hybrid = new OpenLayers.Layer.VirtualEarth("Hybrid", {
+            sphericalMercator: true,
+            maxExtent: new OpenLayers.Bounds(-20037508.34,-20037508.34,20037508.34,20037508.34),
+            type: VEMapStyle.Hybrid
+        });
+        
+        var aerial = new OpenLayers.Layer.VirtualEarth("Aerial", {
+            sphericalMercator: true,
+            maxExtent: new OpenLayers.Bounds(-20037508.34,-20037508.34,20037508.34,20037508.34),
+            type: VEMapStyle.Aerial
+        });
+
+        this.addLayers([road, shaded, hybrid, aerial]);
+        
+        this.setCenter(new OpenLayers.LonLat(9.150066, 50.17437).transform(
+        	    new OpenLayers.Projection("EPSG:4326"),
+        	    this.getProjectionObject()
+        	), zoomLevel);
 	},
 	
 	addSATLayers : function() {
@@ -61,32 +124,6 @@ CHM.SATCHMMap = OpenLayers.Class(CHM.CHMMap, {
 		similar_areas_vector_layer.events.register("featureadded", this, function(e) {
 			this.setArea(e.feature.attributes.biogeo);
 		});
-		
-        this.caseStudiesSimilarAreasVectorLayer = new CHM.SATVector(
-        	'Case studies in similar areas', 
-        	{
-    			displayInLayerSwitcher: true,
-        		type: OpenLayers.Filter.Comparison.EQUAL_TO, 
-        		radius: 20,
-        		marker: root + 'js/chm/markers/similar.png'
-        	});
-        
-        this.caseStudiesSimilarAreasVectorLayer.offsetX = this.offsetX;
-        
-        this.caseStudiesSimilarAreasVectorLayer.offsetY = this.offsetY;
-        
-        this.caseStudiesDissimilarAreasVectorLayer = new CHM.SATVector(
-        	'Case studies in other areas', 
-        	{
-    			displayInLayerSwitcher: true,
-        		type: OpenLayers.Filter.Comparison.NOT_EQUAL_TO, 
-        		radius: 16,
-        		marker: root + 'js/chm/markers/dissimilar.png'
-        	});
-        
-        this.caseStudiesDissimilarAreasVectorLayer.offsetX = this.offsetX;
-        
-        this.caseStudiesDissimilarAreasVectorLayer.offsetY = this.offsetY;
         
         select = new OpenLayers.Layer.Vector(
         	"Selection", 
@@ -98,24 +135,13 @@ CHM.SATCHMMap = OpenLayers.Class(CHM.CHMMap, {
 
 		similar_areas_image_layer.mergeNewParams({'CQL_FILTER': "biogeo = 'JustToMakeSureThatNoAreasAreShownAtStartUp' "});
 		
-		this.addLayers([similar_areas_image_layer, similar_areas_vector_layer, select, this.caseStudiesDissimilarAreasVectorLayer, this.caseStudiesSimilarAreasVectorLayer, location_vector_layer]);
+		this.addLayers([similar_areas_image_layer, similar_areas_vector_layer, select, location_vector_layer]);
             
 		locationcontrol = new CHM.LocationControl({satCHMMap: this});
 		
 		this.addControl(locationcontrol);
 				
 		locationcontrol.activate();
-		
-		var selectfeaturescontrol = new OpenLayers.Control.SelectFeature(
-			[this.caseStudiesSimilarAreasVectorLayer, this.caseStudiesDissimilarAreasVectorLayer], 
-			{
-				multiple: false, 
-				hover: false,
-			});
-     
-     	this.addControl(selectfeaturescontrol);
-	        
-        selectfeaturescontrol.activate();
 	}, 
 	
 	setArea : function(aArea) {
@@ -186,6 +212,30 @@ CHM.SATCHMMap = OpenLayers.Class(CHM.CHMMap, {
 			similar_areas_vector_layer.refresh({force: true});
 		}
 	},
+	
+	setSimilarAreasCasestudiesVector: function(aVector) {
+		if (this.caseStudiesSimilarAreasVectorLayer != null) {
+			this.removeLayer(this.caseStudiesSimilarAreasVectorLayer); 
+		}
+		
+		this.caseStudiesSimilarAreasVectorLayer = aVector;
+
+		if (this.caseStudiesSimilarAreasVectorLayer != null) {
+			this.addLayer(this.caseStudiesSimilarAreasVectorLayer); 
+		}
+	}, 
+	
+	setDissimilarAreasCasestudiesVector: function(aVector) {
+		if (this.caseStudiesDissimilarAreasVectorLayer != null) {
+			this.removeLayer(this.caseStudiesDissimilarAreasVectorLayer); 
+		}
+		
+		this.caseStudiesDissimilarAreasVectorLayer = aVector;
+
+		if (this.caseStudiesDissimilarAreasVectorLayer != null) {
+			this.addLayer(this.caseStudiesDissimilarAreasVectorLayer); 
+		}
+	}, 
 	
 	setOffsetX: function(aOffsetX) {
 		this.offsetX = aOffsetX;
