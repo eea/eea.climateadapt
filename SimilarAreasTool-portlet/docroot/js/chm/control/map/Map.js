@@ -10,6 +10,8 @@ CHM.Control.Map.Map = OpenLayers.Class(OpenLayers.Map, {
 	
 	caseStudiesDissimilarAreasVectorLayer: null,
 	
+	similarAreasVectorLayer: null,
+	
 	offsetX: null,
 	
 	offsetY: null,
@@ -40,7 +42,19 @@ CHM.Control.Map.Map = OpenLayers.Class(OpenLayers.Map, {
         session.events.register('riskChanged', this, this.handleRiskChanged);
         
         session.events.register('sectorChanged', this, this.handleSectorChanged);
+        
+        this.events.register('moveend', this, this.handleMoveEnd);
 	},
+	
+	handleMoveEnd: function(event) {
+		if (this.caseStudiesDissimilarAreasVectorLayer != null) {
+			this.caseStudiesDissimilarAreasVectorLayer.setExtent(this.getExtent());
+		}
+		
+		if (this.caseStudiesSimilarAreasVectorLayer != null) {
+			this.caseStudiesSimilarAreasVectorLayer.setExtent(this.getExtent());
+		}
+	}, 
 	
 	handleLocationChanged: function(event) {
 		this.setLocation(session.location);
@@ -107,8 +121,8 @@ CHM.Control.Map.Map = OpenLayers.Class(OpenLayers.Map, {
 			{isBaseLayer: false}
 		);
 		
-		similar_areas_vector_layer = new OpenLayers.Layer.Vector("Selected area", {
-		    strategies: [new OpenLayers.Strategy.BBOX()],
+		this.similarAreasVectorLayer = new OpenLayers.Layer.Vector("Selected area", {
+		    // strategies: [new OpenLayers.Strategy.BBOX()],
 		    protocol: new OpenLayers.Protocol.WFS({
 		      	version: '1.1.0',
 		        url: proxyUrl + geoserverUrl + wfs + '?', 
@@ -119,10 +133,6 @@ CHM.Control.Map.Map = OpenLayers.Class(OpenLayers.Map, {
 		        srsName: this.projection,
 		        propertyNames: ["biogeo"]
 		    })
-		});
-		
-		similar_areas_vector_layer.events.register("featureadded", this, function(e) {
-			this.setArea(e.feature.attributes.biogeo);
 		});
         
         select = new OpenLayers.Layer.Vector(
@@ -135,7 +145,7 @@ CHM.Control.Map.Map = OpenLayers.Class(OpenLayers.Map, {
 
 		similar_areas_image_layer.mergeNewParams({'CQL_FILTER': "biogeo = 'JustToMakeSureThatNoAreasAreShownAtStartUp' "});
 		
-		this.addLayers([similar_areas_image_layer, similar_areas_vector_layer, select, location_vector_layer]);
+		this.addLayers([similar_areas_image_layer, this.similarAreasVectorLayer, select, location_vector_layer]);
             
 		locationcontrol = new CHM.LocationControl({satCHMMap: this});
 		
@@ -202,14 +212,26 @@ CHM.Control.Map.Map = OpenLayers.Class(OpenLayers.Map, {
 		if (this.feature != null) {
 			location_vector_layer.addFeatures([this.feature]); 
 			
-			this.setArea(null);
-			
-			similar_areas_vector_layer.filter = new OpenLayers.Filter.Spatial({
+			var filter = new OpenLayers.Filter.Spatial({
 		        type: OpenLayers.Filter.Spatial.INTERSECTS,
 		        value: this.feature.geometry
 		    });
 			
-			similar_areas_vector_layer.refresh({force: true});
+			this.similarAreasVectorLayer.protocol.read({
+				filter: filter,
+				callback: function(result) {
+					if (result.success()) {
+						if (result.features.length == 1) {
+							var feature = result.features[0];
+							
+							this.setArea(feature.attributes.biogeo);
+						} else {
+							this.setArea(null);
+						}
+					}
+				},
+				scope: this
+			});
 		}
 	},
 	
@@ -222,6 +244,8 @@ CHM.Control.Map.Map = OpenLayers.Class(OpenLayers.Map, {
 
 		if (this.caseStudiesSimilarAreasVectorLayer != null) {
 			this.addLayer(this.caseStudiesSimilarAreasVectorLayer); 
+			
+			this.caseStudiesSimilarAreasVectorLayer.extent = this.getExtent();
 		}
 	}, 
 	
@@ -234,6 +258,8 @@ CHM.Control.Map.Map = OpenLayers.Class(OpenLayers.Map, {
 
 		if (this.caseStudiesDissimilarAreasVectorLayer != null) {
 			this.addLayer(this.caseStudiesDissimilarAreasVectorLayer); 
+			
+			this.caseStudiesDissimilarAreasVectorLayer.extent = this.getExtent();
 		}
 	}, 
 	

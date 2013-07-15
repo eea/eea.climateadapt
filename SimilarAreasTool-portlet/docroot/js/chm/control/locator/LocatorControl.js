@@ -25,7 +25,13 @@ CHM.Control.Locator.LocatorControl = Ext.extend(Ext.Panel, {
     	
     	this.border = false;
     	
-    	this.locationTextField = new Ext.form.TextField({columnWidth: 1, enableKeyEvents: true, value: this.location});
+    	this.locationTextField = new Ext.form.TextField({
+    		columnWidth: 1, 
+    		enableKeyEvents: true, 
+    		value: this.location,
+    		id: 'locator-textfield',
+    		cls: 'csst-input'
+    	});
     	
     	this.locationTextField.addListener('keyup', this.handleLocationTextFieldKeyUp, this);
     	

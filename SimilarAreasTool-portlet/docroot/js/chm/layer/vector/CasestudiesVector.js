@@ -8,6 +8,8 @@ CHM.Layer.Vector.CasestudiesVector = OpenLayers.Class(OpenLayers.Layer.Vector, {
 	
 	radius: null,
 	
+	extent: null,
+	
 	area: null,
 	
 	risk: null,
@@ -99,6 +101,14 @@ CHM.Layer.Vector.CasestudiesVector = OpenLayers.Class(OpenLayers.Layer.Vector, {
 		return true;
 	},
 	
+	setExtent: function(aExtent) {
+		if ((this.extent == null && aExtent != null) || (! this.extent.equals(aExtent))) {
+			this.extent = aExtent;
+			
+			this.applyFilters();
+		}
+	},
+	
 	setArea : function(aArea) {
 		this.area = aArea;
 		
@@ -118,9 +128,19 @@ CHM.Layer.Vector.CasestudiesVector = OpenLayers.Class(OpenLayers.Layer.Vector, {
 	},
 	
 	applyFilters : function() {
+		console.log(this.name + ': ' + this.extent + ' ' + this.area + ' ' + this.risk + ' ' + this.sector);
+		
         this.removeAllFeatures();
      	
 		var filters = new Array();
+		
+		var extentfilter = null;
+		
+		if (this.extent != null) {
+			extentfilter = this.createSpatialFilter(OpenLayers.Filter.Spatial.BBOX, 'geom', this.extent);
+			
+			filters.push(extentfilter);
+		}
 		
 		var areafilter = null;
 		
@@ -150,25 +170,33 @@ CHM.Layer.Vector.CasestudiesVector = OpenLayers.Class(OpenLayers.Layer.Vector, {
 			type: OpenLayers.Filter.Logical.AND,
 			filters: filters
 		});
-			
+		
 		if (areafilter != null) {
+			// Read for both similar and dissimilar areas
 		    this.read(filter);
-		} else if (areafilter == null && (riskfilter != null || sectorfilter != null)) {
+		} else {
+			// Read for dissimilar areas only
 			if (this.type == OpenLayers.Filter.Comparison.NOT_EQUAL_TO) {
 				this.read(filter);
 			}
-		} else {
-			if (this.type == OpenLayers.Filter.Comparison.NOT_EQUAL_TO) {
-				this.read(null);
-			}
 		}
+			
+//			if (areafilter == null && (riskfilter != null || sectorfilter != null)) {
+//			if (this.type == OpenLayers.Filter.Comparison.NOT_EQUAL_TO) {
+//				this.read(filter);
+//			}
+//		} else {
+//			if (this.type == OpenLayers.Filter.Comparison.NOT_EQUAL_TO) {
+//				this.read(null);
+//			}
+//		}
 	}, 
 	
 	read: function(aFilter) {
-		if (aFilter == null) {
+		if (aFilter == null || aFilter.length == 0) {
 			protocol.read({
 				callback: function(result) {
-					if(result.success()) {
+					if (result.success()) {
 						if(result.features.length) {
 							this.addFeatures(result.features);
 						}
@@ -180,7 +208,7 @@ CHM.Layer.Vector.CasestudiesVector = OpenLayers.Class(OpenLayers.Layer.Vector, {
 	        protocol.read({
 	            filter: aFilter,
 	            callback: function(result) {
-	                if(result.success()) {
+	                if (result.success()) {
 	                    if(result.features.length) {
 	                    	this.addFeatures(result.features);
 	                    }
@@ -199,5 +227,15 @@ CHM.Layer.Vector.CasestudiesVector = OpenLayers.Class(OpenLayers.Layer.Vector, {
        	});
        	
        	return filter;
+	},
+	
+	createSpatialFilter: function(aType, aProperty, aValue) {
+		var filter = new OpenLayers.Filter.Spatial({
+			type: aType, 
+			property: aProperty, 
+			value: aValue
+		});
+		
+		return filter;
 	}
 });
