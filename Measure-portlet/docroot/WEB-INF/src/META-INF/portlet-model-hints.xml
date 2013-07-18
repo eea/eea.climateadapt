@@ -5,7 +5,7 @@
 		<field name="measureId" type="long" />
 		<field name="companyId" type="long" />
 		<field name="groupId" type="long" />
-		<field name="admincomment" type="String"/>
+		<field name="admincomment" type="String" />
 		<field name="casestudyfeature" type="String" />
 		<field name="name" type="String" />
 		<field name="description" type="String" />
@@ -54,5 +54,6 @@
 		<field name="supdocs" type="String" />
 		<field name="year" type="String" />
 		<field name="geochars" type="String" />
+		<field name="category" type="String" />
 	</model>
 </model-hints>

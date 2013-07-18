@@ -246,18 +246,8 @@ public abstract class MeasureUpdateHelperForSharedMeasure extends MVCPortlet {
             }
         }
         measure.setCasestudyfeature(choosenfeature);
-        //System.out.println("case study feature is " + measure.getCasestudyfeature());
         
-        // adaptation options
-        String choosenoptions = "";
-        for (AceItemAdaptationOptions option : AceItemAdaptationOptions.values()) {
-            if (uploadRequest.getParameter( "chk_adaptoption_" + option) != null) {
-                String e = uploadRequest.getParameter( "chk_adaptoption_" + option);
-                if (e.equalsIgnoreCase(option.toString())) {
-                    choosenoptions += option.toString() + ";";
-                }
-            }
-        }
+        String choosenoptions = uploadRequest.getParameter("chk_adaptoptions");
         measure.setAdaptationoptions(choosenoptions);
         
         String choosengeos = "";
@@ -271,17 +261,10 @@ public abstract class MeasureUpdateHelperForSharedMeasure extends MVCPortlet {
                     choosengeos = geo.toString();
                 }
             }
-        	/*
-        	if (uploadRequest.getParameter( "chk_geos_" + geo) != null) {
-                String e = uploadRequest.getParameter( "chk_geos_" + geo);
-                if (e.equalsIgnoreCase(geo.toString())) {
-                    choosengeos += geo.toString() + ";";
-                }
-            }*/
         }
 
         measure.setGeos_(choosengeos);
-        
+      
         String choosenGeoChars = uploadRequest.getParameter("rad_geo_chars");
         measure.setGeochars(choosenGeoChars);
        
@@ -329,6 +312,7 @@ public abstract class MeasureUpdateHelperForSharedMeasure extends MVCPortlet {
                 measure.setLon(Double.parseDouble(uploadRequest.getParameter( "lon")));
             } catch (NumberFormatException e) {
                 // do nothing
+            	
             }
         }
 
@@ -337,8 +321,14 @@ public abstract class MeasureUpdateHelperForSharedMeasure extends MVCPortlet {
                 measure.setLat(Double.parseDouble(uploadRequest.getParameter( "lat")));
             } catch (NumberFormatException e) {
                 // do nothing
+            	
             }
         }
+        
+        if (Validator.isNotNull(uploadRequest.getParameter( "chk_categories"))) {
+            measure.setCategory(uploadRequest.getParameter( "chk_categories"));
+        }
+      
 
         measure.setSatarea(uploadRequest.getParameter( "satarea"));
 

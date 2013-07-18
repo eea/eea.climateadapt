@@ -59,5 +59,6 @@
 		<property name="supdocs" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="year" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="geochars" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="category" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 	</class>
 </hibernate-mapping>

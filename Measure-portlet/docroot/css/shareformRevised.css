@@ -52,6 +52,11 @@
 			margin-bottom: 35px;
 			padding: 9px 29px;
 		}
+		
+		.europe_geochar_class {
+			   position: relative;
+			   left: 30px;
+		}
 
 		#case-studies-form-wrapper .case-studies-header .case-studies-header-selector {
 			background-color: #fff;
@@ -136,6 +141,15 @@
 			padding-right: 55px;
 			width: 645px;
 		}
+		
+		.scrolling-container {
+				margin: 0 auto;
+				border: 2px solid #ccc;
+				height: 200px;
+				width:  645px;
+				padding: 25px;
+				overflow-y: scroll;
+			}
 
 		#case-studies-form-wrapper .case-studies-tabs-wrapper .case-studies-tabbed-content > ul {
 			list-style-type: none;

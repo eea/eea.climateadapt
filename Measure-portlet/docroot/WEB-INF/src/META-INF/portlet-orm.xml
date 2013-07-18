@@ -71,6 +71,7 @@
 			<basic name="supdocs" />
 			<basic name="year" />
 			<basic name="geochars" />
+			<basic name="category" />
 			<transient name="primaryKey" />
 		</attributes>
 	</mapped-superclass>

@@ -823,6 +823,21 @@ public interface MeasureModel extends BaseModel<Measure> {
 	public void setGeochars(String geochars);
 
 	/**
+	 * Gets the category of this measure.
+	 *
+	 * @return the category of this measure
+	 */
+	@AutoEscape
+	public String getCategory();
+
+	/**
+	 * Sets the category of this measure.
+	 *
+	 * @param category the category of this measure
+	 */
+	public void setCategory(String category);
+
+	/**
 	 * Gets a copy of this measure as an escaped model instance by wrapping it with an {@link com.liferay.portal.kernel.bean.AutoEscapeBeanHandler}.
 	 *
 	 * @return the escaped model instance

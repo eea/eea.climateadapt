@@ -453,6 +453,14 @@ public class MeasureWrapper implements Measure {
 		_measure.setGeochars(geochars);
 	}
 
+	public java.lang.String getCategory() {
+		return _measure.getCategory();
+	}
+
+	public void setCategory(java.lang.String category) {
+		_measure.setCategory(category);
+	}
+
 	public nl.wur.alterra.cgi.ace.model.Measure toEscapedModel() {
 		return _measure.toEscapedModel();
 	}

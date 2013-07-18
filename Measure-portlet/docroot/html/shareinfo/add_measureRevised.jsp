@@ -134,7 +134,7 @@
 		            transferMode: 'copy',
 		            useFilters: false,
 		            useCounters: false,
-		            useSorting: true,
+		            useSorting: false,
 					selectOnSubmit: false
 		        };
 		    
@@ -229,48 +229,88 @@
 			
 			//alert("Geo Characterization value is " + $('input:radio[name=rad_geo_chars]:checked').val());
 			
-			var geoCharsValue = $('input:radio[name=rad_geo_chars]:checked').val();
+			var geoCharsValue = {"geoElements":{"element":"","macrotrans":[],"biotrans":[],"countries":[],"subnational":[],"city":""}};
+			geoCharsValue.geoElements.element = $('input:radio[name=rad_geo_chars]:checked').val();
 			
-			
-			//document.<portlet:namespace />fm.rad_geo.chars = geoCharsValue;
-			//alert("geoCharsValue is " + geoCharsValue);
-			if (typeof geoCharsValue != "undefined")
+         
+			if (geoCharsValue.geoElements.element == 'EUROPE')
 			{
-			    
-				   if (geoCharsValue == "SUBNATIONAL")
-				   {
-					   $('#subnationals_selected').children('option').each(function() {
-							geoCharsValue = geoCharsValue + "^" + $(this).val();
-						 });
-				   }
-				   else if (geoCharsValue == "CITY")
-				   {
-					   geoCharsValue = geoCharsValue + "^" + $('input:[name=shared_form_city]').val();
-				   }
-				   else if (geoCharsValue == "TRANSNATIONAL")
-				   {
-					   
-				       if ($('#trans_macro_nationals option:selected').val() != "default")
-				       {
-					      geoCharsValue = geoCharsValue + "^" + $('#trans_macro_nationals option:selected').val();
-				       }
-				       
-				       if ($('#trans_bio_nationals option:selected').val() != "default")
-				       {
-					      geoCharsValue = geoCharsValue + "^" + $('#trans_bio_nationals option:selected').val();
-				       }
-					   
-				   }
-			}
-			else
-			{
-				geoCharsValue = "";
-			}
-			
 				
-			//alert("geoCharsValue is " + geoCharsValue);
-			$('input:radio[name=rad_geo_chars]:checked').val(geoCharsValue);
-			document.<portlet:namespace />fm.submit();
+			       // subnational selected
+				   ctr = 0;
+				   $('#subnationals_selected').children('option').each(function() {
+				       geoCharsValue.geoElements.subnational[ctr] = $(this).val();
+				       ctr ++;
+				   });
+				 
+				   //alert("city value is " + $('.shared_form_city').val());
+				   // if city selected
+				   if (typeof $('.shared_form_city').val() != undefined)
+				   {
+					   geoCharsValue.geoElements.city = $('.shared_form_city').val();
+				   }
+				   
+				 
+				   // macro transnational
+				   ctr = 0;
+				   $('#trans_macro_nationals option:selected').each(function(){
+				    	geoCharsValue.geoElements.macrotrans[ctr] = $(this).val();
+				    	ctr ++
+				   });
+				   
+				   // biographical region selected
+				   ctr = 0;
+                   $('#trans_bio_nationals option:selected').each(function(){
+				    	   geoCharsValue.geoElements.biotrans[ctr] = $(this).val();
+				    	   ctr ++
+				   });
+                   
+                   // countries selected
+                   ctr = 0;
+                   $('.chk_countries_geochars:checked').each(function(){
+				    	   geoCharsValue.geoElements.countries[ctr] = $(this).val();
+				    	   ctr ++
+				   });
+                   
+			}
+			
+			
+		    var result = JSON.stringify(geoCharsValue);
+		    
+			//return;
+			$('input:radio[name=rad_geo_chars]:checked').val(result);
+			
+		   // adaptation options processing
+		   var adaptoptions = "";
+		   $('.adaptoptionsfromdb:checked').each(function(){
+			   if (adaptoptions.length == 0)
+			   {
+			      adaptoptions = $(this).val();
+			   }
+			   else
+			   {
+				   adaptoptions = adaptoptions + ";" + $(this).val();
+			   }
+		   });
+		   
+		   $('input:checkbox[name=chk_adaptoptions]:checked').val(adaptoptions);
+		   
+		   // categories processing
+		   var categories = "";
+		   $('input:checkbox[name=chk_categories]:checked').each(function() {
+			   if (categories.length == 0)
+			   {
+				   categories = $(this).val();
+			   }
+			   else
+			   {
+				   categories = categories + ";" + $(this).val();
+			   }
+		   });
+		  
+		   $('input:checkbox[name=chk_categories]:checked').val(categories);
+		   
+		   document.<portlet:namespace />fm.submit();
 		}
 		
      </script>
@@ -309,14 +349,41 @@
 			<div class="case-studies-tabs-wrapper">
 				<div class="case-studies-tabs">
 					<ul>
+					    <%
+					        String nameOfClimateEntityText = "";
+					        String nameOfClimateEntityShortText = "";
+					        String descriptionOfClimateEntityShortText = "";
+					        String descriptionOfClimateEntityText = "";
+					        String toggleclass = "";
+					        String localDescription = "";
+							
+					        if (mao_type.equalsIgnoreCase("A"))
+					        {
+					        	nameOfClimateEntityText = "Case Study Name";
+					        	nameOfClimateEntityShortText = "Case Study"; 
+					        	descriptionOfClimateEntityShortText = "Case Description";
+					        	descriptionOfClimateEntityText = "Case Study Description";
+					        	toggleclass = "toggleshow";
+					        }
+					        else
+					        {
+					        	nameOfClimateEntityText = "Adaptation Option Name";
+					        	nameOfClimateEntityShortText = "Adaptation Option"; 
+					        	descriptionOfClimateEntityShortText = "Adaptation Description";
+					        	descriptionOfClimateEntityText = "Adaptation Option Description";
+					        	toggleclass = "togglehide";
+					        }
+					    %>
 					    <% if (justSaved ==  null) {%>
-						<li class="active"><a href="#">Case Description</a></li>
+						<li class="active"><a href="#"><%=descriptionOfClimateEntityText%></a></li>
 						<% } else { %>
-						<li><a href="#">Case Description</a></li>
+						<li><a href="#"><%=descriptionOfClimateEntityText%></a></li>
 						<% } %>
 						<li><a href="#">Additional Details</a></li>
 						<li><a href="#">Reference Information</a></li>
-						<li><a href="#">Photos &amp; Files</a></li>
+						<% if (mao_type.equalsIgnoreCase("A")) { %>
+						   <li><a href="#">Photos &amp; Files</a></li>
+						<% } %>
 						<li><a href="#">Geographic Information</a></li>
 						<% if (measure != null) { 
 						      if (justSaved != null) {%>
@@ -335,8 +402,8 @@
 						<% } else { %>
 						<li class="active">
 						<% } %>
-							<div class="case-studies-tabbed-content-header">Case Study - <em>Description</em></div>
-							<p>To help other people find and use this case study, please provide as much detail as possible about this case study. We will e-mail you after we review the case study.</p>
+							<div class="case-studies-tabbed-content-header"><%=nameOfClimateEntityShortText %> - <em>Description</em></div>
+							<p>To help other people find and use this <%=nameOfClimateEntityShortText.toLowerCase() %>, please provide as much detail as possible about this <%=nameOfClimateEntityShortText.toLowerCase() %>. We will e-mail you after we review the <%=nameOfClimateEntityShortText.toLowerCase() %>.</p>
 							<p><a href="#">More About the Review Process</a></p>
 
                            <% if (renderRequest.isUserInRole("Portal Content Reviewer") || renderRequest.isUserInRole("administrator") ) {  %>
@@ -382,7 +449,7 @@
 									  <!-- end of approved check box -->
 									  
 									  <li>
-									  <p><strong><em>Featured Case Study:</em></strong></p>
+									  <p><strong><em>Featured <%=nameOfClimateEntityShortText %>:</em></strong></p>
 										<%
 										         String choosenfeature = "";
 										         if (measure == null )
@@ -406,8 +473,23 @@
 										         }
 										    %>
 										 
-										<c:forEach var="feature" items="<%= nl.wur.alterra.cgi.ace.model.constants.MeasureCaseStudyFeature.values() %>" >
-												
+										<%
+										   ArrayList featureList = new ArrayList();
+										   for (nl.wur.alterra.cgi.ace.model.constants.MeasureCaseStudyFeature f : nl.wur.alterra.cgi.ace.model.constants.MeasureCaseStudyFeature.values())
+										   {
+											   if ( !mao_type.equalsIgnoreCase("A") && f.toString().equalsIgnoreCase("CASEHOME"))
+											   {
+												   continue;
+											   }
+											   else
+											   {
+												   featureList.add(f.toString());
+											   }
+										   }
+										   pageContext.setAttribute("featureList", featureList);
+										   
+										%>
+										       <c:forEach var="feature" items="${featureList}">
 													<c:set var="caseFeaturesMustBeChecked" value="false" />
 													<c:set var="caseFeature" value='<%= measure == null ? choosenfeature : measure.getCasestudyfeature() %>' />
 													<c:set var="caseFeatureMustBeChecked" value="false" />
@@ -422,9 +504,12 @@
 															<input type="checkbox" name="chk_casestudyfeature_${feature}" id="chk_casestudyfeature_${feature}" value="${feature}" />
 														</c:otherwise>
 													</c:choose>
-													<label for="chk_casestudyfeature_${feature}"><liferay-ui:message key="measure-casestudyfeature-lbl-${feature}" /></label>
-																	
-											</c:forEach>
+													<%if (mao_type.equalsIgnoreCase("A")) { %>
+													      <label for="chk_casestudyfeature_${feature}"><liferay-ui:message key="measure-casestudyfeature-lbl-${feature}" /></label>
+													 <% } else { %>
+													      <label for="chk_casestudyfeature_${feature}"><liferay-ui:message key="measure-adaptation-option-feature-lbl-${feature}" /></label>
+													 <%} %>	
+											  </c:forEach>
 									
 										<br /><br />
 										<p><em>Content Administration Comments:</em> (500 character limit)</p>
@@ -483,7 +568,7 @@
 							<% } // end of if content reviewer or administrator%> 
 
 							<div class="case-studies-tabbed-content-section">
-								<div class="case-studies-tabbed-content-subheader">Case Study Name</div>
+								<div class="case-studies-tabbed-content-subheader"><%=nameOfClimateEntityText%></div>
 								
 								<div>
 									<liferay-ui:error key="measurename-required" message="measurename-required" />
@@ -491,9 +576,22 @@
 								
 								<ul>
 									<li>
-										<p><strong><span class="red">*</span> <em>Case Study Name:</em></strong></p>
+									    <%
+									         String textSize = "";
+									         if (mao_type.equalsIgnoreCase("A"))
+									         {
+									        	 localDescription = "Provide a name that clearly identifies the context and location of the case study (100 char limit)";
+									        	 textSize = "100";
+									         }
+									         else
+									         {
+									        	 localDescription = "Adaptation Option Name (50 char limit)";
+									        	 textSize = "50";
+									         }
+									    %>
+										<p><strong><span class="red">*</span> <em><%=localDescription%></em></strong></p>
 										<% if (measure != null) { %>
-		                                      <input name="name" type="text" size="100" maxlength="120" value="<%= measure.getName() %>" /><br /><br />
+		                                      <input name="name" type="text" size="75" maxlength="<%=textSize %>" value="<%= measure.getName() %>" /><br /><br />
 										<%} else {
 											// preserve the render parameter already set
 										    // String renderName = renderRequest.getParameter("name");
@@ -505,11 +603,11 @@
 										%>
 										
 										<c:if test="${renderName ne null}">
-										  <input name="name" type="text" size="100" maxlength="120" value="${renderName}" /> <br /><br />
+										  <input name="name" type="text" size="75" maxlength="<%=textSize%>" value="${renderName}" /> <br /><br />
 										</c:if>
 																		
 										<c:if test="${renderName eq null}">
-											  <input name="name" type="text" size="100" maxlength="120" value="" /><br /><br />
+											  <input name="name" type="text" size="75" maxlength="<%=textSize%>" value="" /><br /><br />
 											</c:if>
 										<%} %>
 									</li>
@@ -517,15 +615,27 @@
 							</div>
 
 							<div class="case-studies-tabbed-content-section">
-								<div class="case-studies-tabbed-content-subheader">Case Study Description</div>
+								<div class="case-studies-tabbed-content-subheader"><%=descriptionOfClimateEntityText%></div>
 								<ul>
 									<li>
+									    <%
+									         if (mao_type.equalsIgnoreCase("A"))
+									         {
+									        	 localDescription = "Provide a brief introductory summary description about this case study and how it works (1000 character limit).";
+									         }
+									         else
+									         {
+									        	 localDescription = "Provide a description of the climate change impacts/risks, related challenges and specific objectives addressed by the adaptation option, " +
+									                                " including  also key environmental and socio-economic issues and geographical characterisation," +
+									        	                    " e.g. 'mountain area' or 'coastal area' etc. (5,000 character limit).";
+									         }
+									    %>
 									    <liferay-ui:error key="description-required" message="description-required" />	
-										<p><strong><span class="red">*</span> <em>Brief Description:</em></strong> (500 character limit)</p>
-										<p>Provide a brief introductory summary description about this case study and how it works.</p>
+										<p><strong><span class="red">*</span> <em>Brief Description:</em></strong></p>
+										<p><%=localDescription%></p>
 											
 										<% if (measure != null && measure.getDescription() != null) { %>
-										       <textarea id="<portlet:namespace />descriptionField" cols="40" rows="10" class="WYSIWYG" name="description" data-maxlength="500"><%= measure.getDescription() %></textarea>
+										       <textarea id="<portlet:namespace />descriptionField" cols="40" rows="10" class="WYSIWYG" name="description" data-maxlength="1000"><%= measure.getDescription() %></textarea>
 										<%} else {
 											// preserve the render parameter already sent
 											//String renderDescription = renderRequest.getParameter("description");
@@ -536,11 +646,11 @@
 											}
 										%>
 											<c:if test="${renderDescription ne null}">
-											  <textarea id="<portlet:namespace />descriptionField" cols="40" rows="10" class="WYSIWYG" name="description" data-maxlength="500">${renderDescription}</textarea>
+											  <textarea id="<portlet:namespace />descriptionField" cols="40" rows="10" class="WYSIWYG" name="description" data-maxlength="1000">${renderDescription}</textarea>
 											</c:if>
 											
 											<c:if test="${renderDescription eq null}">
-											 <textarea id="<portlet:namespace />descriptionField" cols="40" rows="10" class="WYSIWYG" name="description" data-maxlength="500"></textarea>
+											 <textarea id="<portlet:namespace />descriptionField" cols="40" rows="10" class="WYSIWYG" name="description" data-maxlength="5000"></textarea>
 											</c:if>
 										<%} %>
 										<div class="case-studies-character-count"></div>
@@ -548,7 +658,11 @@
 									<li>
 									    <liferay-ui:error key="climateImpacts-required" message="climateImpacts-required" />	
 										<p><strong><span class="red">*</span> <em>Climate Impacts:</em></strong></p>
-										<p>Select one or more climate change impact topics that this case study covers.</p>
+										<% if (mao_type.equalsIgnoreCase("A")) { %>
+										   <p>Select one or more climate change impact topics that this case study covers.</p>
+										<%} else { %>
+										   <p>Select one or more climate change impact topics that this adaptation option relates to.</p>
+										<% } %>
 										<ul class="three-col">
 										    <%
 										         String choosenclimateimpacts = "";
@@ -592,10 +706,13 @@
 										</ul>
 										<div class="case-studies-form-clearing"></div>
 									</li>
+									
+								    <% if (mao_type.equalsIgnoreCase("A")) { %> <!-- if measure -->
 									<li>
 									    <liferay-ui:error key="challenges-required" message="challenges-required" />
-										<p><strong><span class="red">*</span> <em>Challenges:</em></strong> (5,000 char limit)</p>
-										<p>Describe how this case study addresses climate change impacts/risks and related challenges.</p>
+										<p><strong><span class="red">*</span> <em>Challenges:</em></strong></p>
+										<p>Describe how this case study addresses climate change impacts/risks and related challenges,. 
+										   including  also key environmental and socio-economic issues and geographical characterisation, e.g. &apos;mountain area&apos; or &apos;coastal area&apos; etc (5,000 char limit).</p>
 										
 										<% if (measure != null && measure.getChallenges() != null) { %>
 										      <textarea id="<portlet:namespace />challengesField" cols="40" rows="10" class="WYSIWYG" name="challenges" data-maxlength="5000"><%= measure.getChallenges() %></textarea>
@@ -622,8 +739,8 @@
 									
 									<li>
 									    <liferay-ui:error key="objectives-required" message="objectives-required" />
-										<p><strong><span class="red">*</span> <em>Objectives:</em></strong> (1000 char limit)</p>
-										<p>Describe the objectives which triggered the adaptation measures.</p>
+										<p><strong><span class="red">*</span> <em>Objectives:</em></strong></p>
+										<p>Describe the objectives which triggered the adaptation measures (1000 char limit).</p>
 											<% if (measure != null && measure.getObjectives() != null) { %>
 											     <textarea id="<portlet:namespace />objectivesField" cols="40" rows="10" class="WYSIWYG" name="objectives" data-maxlength="1000"><%= measure.getObjectives()%></textarea>
 											<%} else {
@@ -650,54 +767,55 @@
 									    <liferay-ui:error key="adaptationOptions-required" message="adaptationOptions-required" />
 										<p><strong><span class="red">*</span> <em>Adaptation Options Implemented In The Case:</em></strong></p>
 										<p>Select one or more adaptation options that this case study addresses.</p>
-										<ul class="two-col">
-										    <%
-										         String choosenoptions = "";
-										         if (measure == null )
-										         {
-										        	 
-										             if (measureFromRequest != null)
-										             {
-										            	 
-										                 String adaptOptions = measureFromRequest.getAdaptationoptions();
-											        	 for (nl.wur.alterra.cgi.ace.model.constants.AceItemAdaptationOptions option : nl.wur.alterra.cgi.ace.model.constants.AceItemAdaptationOptions.values()) 
-											        	 {
-											        			 if (adaptOptions != null && adaptOptions.indexOf(option.toString()) >= 0) {
-											                         choosenoptions += option.toString() + ";";
-											                     }
-											        		 
-											        	 }
-										             }
-										         }
-										    %>
-										    
-											<c:forEach var="option" items="<%= nl.wur.alterra.cgi.ace.model.constants.AceItemAdaptationOptions.values() %>" >
-													<div class="check">
-														<c:set var="adaptationOptionMustBeChecked" value="false" />
-														<c:set var="aceItemOptions" value='<%= measure == null ? choosenoptions : measure.getAdaptationoptions() %>' />
-														<c:set var="adaptationOptionMustBeChecked" value="false" />
-														<c:if test="${fn:indexOf(aceItemOptions, option)>=0}">
-															<c:set var="adaptationOptionMustBeChecked" value="true" />
-														</c:if>	
-														<c:choose>
-															<c:when test="${adaptationOptionMustBeChecked}">
-																<li><label for="chk_adaptoption_${option}"><input type="checkbox" name="chk_adaptoption_${option}" id="chk_adaptoption_${option}" value="${option}" checked="checked" /><liferay-ui:message key="aceitem-adaptoptions-lbl-${option}" /></label></li>
+										<div class="scrolling-container">
+											<ul class="two-col">
+											    <%
+												    
+												    DynamicQuery query = DynamicQueryFactoryUtil.forClass(Measure.class);
+													query.add(PropertyFactoryUtil.forName("mao_type").eq("M"));
+													query.add(PropertyFactoryUtil.forName("controlstatus").eq(new Short((short)1)));
+													List results = MeasureLocalServiceUtil.dynamicQuery(query);
+													List<Measure> listOfMeasure = (List<Measure>) results;
+													
+													// look for the selected values
+													String chosenAdaptOptions = "";
+													if (measure != null && Validator.isNotNull(measure.getAdaptationoptions()))
+													{
+														chosenAdaptOptions = measure.getAdaptationoptions();
+													}
+													else if (measureFromRequest != null)
+													{
+														chosenAdaptOptions = measureFromRequest.getAdaptationoptions();
+													}
+													
+													// store the adaptoptions and the selected adapt options in page scope
+													pageContext.setAttribute("adaptoptions", listOfMeasure);
+													pageContext.setAttribute("chosenAdaptOptions", chosenAdaptOptions);
+											    %>
+											    
+												<c:forEach var="option" items="${adaptoptions}" > 
+														<div class="check">
+														  <c:choose>
+														    <c:when test="${fn:contains(chosenAdaptOptions, option.measureId)}">
+															   <li><label for="chk_adaptoption_${option.name}"><input type="checkbox" class="adaptoptionsfromdb" name="chk_adaptoptions" id="chk_adaptoption_${option.name}" value="${option.measureId}" checked/><a href='/viewmeasure?ace_measure_id=${option.measureId}' target="view adaptation">${option.name}</a></label></li>
 															</c:when>
 															<c:otherwise>
-															    <li><label for="chk_adaptoption_${option}"><input type="checkbox" name="chk_adaptoption_${option}" id="chk_adaptoption_${option}" value="${option}"/><liferay-ui:message key="aceitem-adaptoptions-lbl-${option}" /></label></li>
+															   <li><label for="chk_adaptoption_${option.name}"><input type="checkbox" class="adaptoptionsfromdb" name="chk_adaptoptions" id="chk_adaptoption_${option.name}" value="${option.measureId}" /><a href='/viewmeasure?ace_measure_id=${option.measureId}' target="view adaptation">${option.name}</a></label></li>
 															</c:otherwise>
-														</c:choose>
-													</div>							
-											</c:forEach>
-										</ul>
+														  </c:choose>
+														</div>							
+												</c:forEach>
+											</ul>
+										</div>
 										<div class="case-studies-form-clearing"></div>
+									   
 									</li>
 									
 									
 									<li>
 									    <liferay-ui:error key="solutions-required" message="solutions-required" />
-										<p><strong><span class="red">*</span> <em>Solutions:</em></strong> (5,000 char limit)</p>
-										<p>Describe the climate change adaptation solution(s) implemented.</p>
+										<p><strong><span class="red">*</span> <em>Solutions:</em></strong></p>
+										<p>Describe the climate change adaptation solution(s) implemented (5,000 char limit).</p>
 										
 										<% if (measure != null && Validator.isNotNull(measure.getSolutions())) { %>
 										      <textarea id="<portlet:namespace />solutionsField" cols="40" rows="10" class="WYSIWYG" name="solutions" data-maxlength="5000"><%= measure.getSolutions() %></textarea>
@@ -767,14 +885,15 @@
 										</ul>
 										<div class="case-studies-form-clearing"></div>
 									</li>
+								     <% } %> <!--  end of if measure -->
 									
 									<li>
 									    <liferay-ui:error key="keywords-required" message="keywords-required" />
-										<p><strong><span class="red">*</span> <em>Keywords:</em></strong> (1,000 char limit)</p>
-										<p>Describe and tag this case study with relevant keywords. Separate each keyword with a comma. For example, example keyword 1, example keyword 2</p>
+										<p><strong><span class="red">*</span> <em>Keywords:</em></strong></p>
+										<p>Describe and tag this <%=nameOfClimateEntityShortText.toLowerCase() %> with relevant keywords. Separate each keyword with a comma. For example, example keyword 1, example keyword 2  (1,000 char limit).</p>
 										
 										<% if (measure != null && Validator.isNotNull(measure.getKeywords())) { %>
-										      <textarea id="<portlet:namespace />keywordsField" cols="40" rows="10" class="WYSIWYG" name="keywords" data-maxlength="5000"><%= measure.getKeywords() %></textarea>
+										      <textarea id="<portlet:namespace />keywordsField" cols="40" rows="10" class="WYSIWYG" name="keywords" data-maxlength="1000"><%= measure.getKeywords() %></textarea>
 										<%} else {
 											// preserve the render parameter already sent
 											//String renderKeywords = renderRequest.getParameter("keywords");
@@ -786,11 +905,11 @@
 											//pageContext.setAttribute("renderKeywords", renderKeywords);
 										%>
 											<c:if test="${renderKeywords ne null}">
-											  <textarea id="<portlet:namespace />keywordsField" cols="40" rows="10" class="WYSIWYG" name="keywords" data-maxlength="5000">${renderKeywords}</textarea>
+											  <textarea id="<portlet:namespace />keywordsField" cols="40" rows="10" class="WYSIWYG" name="keywords" data-maxlength="1000">${renderKeywords}</textarea>
 											</c:if>
 											
 											<c:if test="${renderKeywords eq null}">
-											 <textarea id="<portlet:namespace />keywordsField" cols="40" rows="10" class="WYSIWYG" name="keywords" data-maxlength="5000"></textarea>
+											 <textarea id="<portlet:namespace />keywordsField" cols="40" rows="10" class="WYSIWYG" name="keywords" data-maxlength="1000"></textarea>
 											</c:if>
 										<%} %>
 										<div class="case-studies-character-count"></div>
@@ -798,8 +917,12 @@
 									
 									<li>
 									    <liferay-ui:error key="adaptationSector-required" message="adaptationSector-required" />
-										<p><strong><span class="red">*</span> <em>Relevant European Union Sector Policies:</em></strong></p>
-										<p>Select one of more relevant European Union sector policies that this case study covers.</p>
+										<p><strong><span class="red">*</span> <em>Relevant policy sectors</em></strong></p>
+										<% if (mao_type.equalsIgnoreCase("A")) { %>
+										   <p>Select one or more relevant sector policies that this case study explicitly covers.</p>
+										<% } else { %>
+										   <p>Select one or more relevant European Union sector policies that this adaptation option relates to.</p>
+										<% } %>
 										<ul class="three-col">
 										     <%
 										         String choosensectors = "";
@@ -845,9 +968,19 @@
 									
 									
 									<li>
+									    <%
+										     if (mao_type.equalsIgnoreCase("A"))
+										     {
+									        	 localDescription = "Date of final or latest actual practical implementation of Case study";
+									         }
+									         else
+									         {
+									        	 localDescription = "Date of publication of Adaptation option's related source (e.g. Report, Publication, Guidance, Project, etc.)";
+									         }
+									   %>
 									    <liferay-ui:error key="year-required" message="year-required" />
-										<p><strong><span class="red">*</span> <em>Year:</em></strong></p>
-										<p>Date of final or latest actual practical implementation of Case study</p>
+										<p><strong><%if (mao_type.equalsIgnoreCase("A")) { %><span class="red">*</span><%} %> <em>Year:</em></strong></p>
+										<p><%=localDescription%></p>
 										
 										<% if (measure != null && Validator.isNotNull(measure.getYear())) { %>
 										      <input name="year" type="text" size="5" maxlength="4" value="<%= measure.getYear() %>" /><br /><br />
@@ -883,18 +1016,93 @@
 						</li>
 						
 						<li>
-							<div class="case-studies-tabbed-content-header">Case Study - <em>Additional Details</em></div>
+							<div class="case-studies-tabbed-content-header"><%=nameOfClimateEntityShortText %> - <em>Additional Details</em></div>
+							
+							<% if (mao_type.equalsIgnoreCase("M")) {
+								
+								    ArrayList categorySelList = new ArrayList();
+								    String[] categoryList = {"Grey","Green","Soft"};
+								    
+								    Measure tempMeasure = null;
+								    if (measure != null )
+								    {
+								    	tempMeasure = measure;
+								    }
+								    else if (measureFromRequest != null)
+								    {
+								    	tempMeasure = measureFromRequest;
+								    }
+								    
+								    if (tempMeasure != null && Validator.isNotNull(tempMeasure))
+								    {
+								    	for (String s: tempMeasure.getCategory().split(";"))
+								    	{
+								    		categorySelList.add(s);
+								    	}
+								    }
+								    	
+								    pageContext.setAttribute("categoryList", categoryList);
+								    pageContext.setAttribute("categoryListSelected", categorySelList);
+								
+								%>
+							
+							<div class="case-studies-tabbed-content-section">
+								<div class="case-studies-tabbed-content-subheader">Category</div>
+								  <ul>
+								     <li>
+									   <p><em>Select one or more categories of adaptation options: The 3 options are:</em>
+									   <ul class="case-studies-tabbed-content-bullted-list">
+		                                    <li>Grey: technological and engineering solutions aiming mainly at the protection of infrastructures or people.</li><br/>
+		                                    <li>Green: ecosystem-based approaches that use the multiple services of nature aiming at raising the resilience of ecosystems and their services.</li><br/>
+		                                    <li>Soft: managerial, legal and policy approaches that alter human behavior and styles of governance (e.g. spatial planning and policies), 
+		                                        including financial/fiscal instruments, such as insurance</li><br/>
+	                                    </ul>
+									
+									   <ul class="three-col">
+									      <c:forEach var="category" items="${categoryList}">
+									         <c:choose>
+									              <c:when test="${fn:contains(categoryListSelected, fn:toLowerCase(category))}">
+									                 <li><label for="${category}"><input type="checkbox" name="chk_categories" id="chk_category_${fn:toLowerCase(category)}" value="${fn:toLowerCase(category)}" checked />${category}</label></li>
+									              </c:when>
+									              <c:otherwise>
+									                 <li><label for="${category}"><input type="checkbox" name="chk_categories" id="chk_category_${fn:toLowerCase(category)}" value="${fn:toLowerCase(category)}" />${category}</label></li>
+									              </c:otherwise>
+									         </c:choose>
+									      </c:forEach>
+									  
+									   </ul>
+									  </p>
+									</li>
+								  </ul>
+								  
+							</div>
+						   <% } %>
 
 							<div class="case-studies-tabbed-content-section">
 								<div class="case-studies-tabbed-content-subheader">Stakeholder Participation</div>
 								<ul>
 									<li>
-										<p><em>Describe:</em> (5,000 char limit)</p>
-										<ul class="case-studies-tabbed-content-bullted-list">
-											<li>The actors involved, the form of participation</li>
-											<li>The participation process</li>
-											<li>Notes regarding motivations.</li>
-										</ul>
+									    <% 
+									         if (mao_type.equalsIgnoreCase("A"))
+										     {
+									        	 localDescription = "Date of final or latest actual practical implementation of Case study";
+									         }
+									         else
+									         {
+									        	 localDescription = "Describe the Information about actors involved, the form of participation and the participation process. Focus should be on the level of participation needed and/or adopted already (from information, to full commitment in the deliberation/implementation process), with useful notes e.g. regarding motivations. (5,000 character limit)";
+									         }
+									    %>
+										<p><em><%=localDescription %></em>
+											<% if (mao_type.equalsIgnoreCase("A")) {  %>
+											<ul class="case-studies-tabbed-content-bullted-list">
+												<li>The actors involved</li>
+												<li>The form of participation</li>
+												<li>The participation process</li>
+												<li>Notes regarding motivations, etc.</li>
+											</ul>
+											(5,000 char limit)
+										   <% } %>
+										</p>
 										
 										<% if (measure != null && Validator.isNotNull(measure.getStakeholderparticipation())) { %>
 										      <textarea id="<portlet:namespace />stakeField" cols="40" rows="10" class="WYSIWYG" name="stakeholderparticipation" data-maxlength="5000"><%= measure.getStakeholderparticipation() %></textarea>
@@ -925,12 +1133,30 @@
 								<div class="case-studies-tabbed-content-subheader">Success and Limiting Factors</div>
 								<ul>
 									<li>
-										<p><em>Describe:</em> (5,000 char limit)</p>
-										<ul class="case-studies-tabbed-content-bullted-list">
-											<li>Describe the factors that were decisive for a successful implementation</li>
-											<li>Describe factors that hindered in the process and needed to be overcome.</li>
-										</ul>
+									     <% 
+									         if (mao_type.equalsIgnoreCase("A"))
+										     {
+									        	 localDescription = "Describe";
+									         }
+									         else
+									         {
+									        	 localDescription = "Describe factors that are decisive for a successful implementation and expected challenges or limiting factors which may hinder the process and need to be considered (5,000 character limit)";
+									         }
+									    %>
+										<p><em><%=localDescription %></em>
 										
+										<% 
+									    if (mao_type.equalsIgnoreCase("A"))
+										{ %>
+											<ul class="case-studies-tabbed-content-bullted-list">
+												<li>Describe the factors that were decisive for a successful implementation</li>
+												<li>Describe factors that hindered in the process and needed to be overcome.</li>
+											</ul>
+											(5,000 char limit)</p>
+										<%
+										}
+										%>
+											
 										<% if (measure != null && Validator.isNotNull(measure.getSucceslimitations())) { %>
 										      <textarea id="<portlet:namespace />successField" cols="40" rows="10" class="WYSIWYG" name="succeslimitations" data-maxlength="5000"><%= measure.getSucceslimitations() %></textarea>
 										<%} else {
@@ -959,8 +1185,9 @@
 							<div class="case-studies-tabbed-content-section">
 								<div class="case-studies-tabbed-content-subheader">Costs and Benefits</div>
 								<ul>
+								   <% if (mao_type.equalsIgnoreCase("A")) { %>
 									<li>
-										<p><em>Describe <strong>costs</strong> of this case study. Include:</em> (5,000 char limit)</p>
+										<p><em>Describe <strong>costs</strong> of this case study. Include:</em>
 										<ul class="case-studies-tabbed-content-bullted-list">
 											<li>Cost Estimates</li>
 											<li>Funding source (national/EU, name of source, e.g. Life+</li>
@@ -971,6 +1198,17 @@
 											<li>Co-benefits in other areas</li>
 											<li>How they have been estimated (not only monetization of benefits for cost benefit analysis, but general indicators of effectiveness of actions implemented.</li>
 										</ul>
+										(5,000 char limit)
+										</p>
+									<% } else { %>
+									    <p><em>Describe (5,000 character limit):</em>
+										<ul class="case-studies-tabbed-content-bullted-list">
+											<li>Costs: Focus should be on the typical main costs (with estimation per unit of intervention if possible).</li>
+											<li>Benefits: Description of all the positive outcomes - in relation to climate change adaptation or as co-benefits - and how they can be estimated: not only monetisation of benefits for cost/benefit </li>
+										</ul>
+										</p>
+								
+								       <% } %>
 										
 										<% if (measure != null && Validator.isNotNull(measure.getCostbenefit())) { %>
 										      <textarea id="<portlet:namespace />costField" cols="40" rows="10" class="WYSIWYG" name="costbenefit" data-maxlength="5000"><%= measure.getCostbenefit() %></textarea>
@@ -999,14 +1237,28 @@
 							</div>
 
 							<div class="case-studies-tabbed-content-section">
+							    <% 
+							         if (mao_type.equalsIgnoreCase("A"))
+								     {
+							        	 localDescription = "Describe";
+							         }
+							         else
+							         {
+							        	 localDescription = "Describe the Legislation framework from which the case originated, relevant institutional opportunities and constrains, which determined the case as it is (5000 character limit)";
+							         }
+								%>
 								<div class="case-studies-tabbed-content-subheader">Legal Aspects</div>
 								<ul>
 									<li>
-										<p><em>Describe:</em> (5,000 char limit)</p>
-										<ul class="case-studies-tabbed-content-bullted-list">
-											<li>Describe the legislation framework from which the case originated.</li>
-											<li>Describe the relevant institutional opportunities.</li>
-										</ul>
+										<p><em><%=localDescription %>:</em>
+										<% if (mao_type.equalsIgnoreCase("A")) { %>
+											<ul class="case-studies-tabbed-content-bullted-list">
+												<li>Describe the legislation framework from which the case originated.</li>
+												<li>Describe the relevant institutional opportunities.</li>
+											</ul>
+											(5,000 char limit)
+										<% } %>
+										</p>
 										
 										<% if (measure != null && Validator.isNotNull(measure.getLegalaspects())) { %>
 										      <textarea id="<portlet:namespace />legalField" cols="40" rows="10" class="WYSIWYG" name="legalaspects" data-maxlength="5000"><%= measure.getLegalaspects() %></textarea>
@@ -1038,11 +1290,12 @@
 								<div class="case-studies-tabbed-content-subheader">Implementation Time</div>
 								<ul>
 									<li>
-										<p><em>Describe the time needed to implement the measure. Include:</em> (250 char limit)</p>
+										<p><em>Describe the time needed to implement the measure. Include:</em>
 										<ul class="case-studies-tabbed-content-bullted-list">
 											<li>Time frame, e.g. 5-10 years</li>
 											<li>Brief explanation</li>
 										</ul>
+										(250 char limit)</p>
 										<% 
 										  String implTime = "";
 										  if (measure == null || Validator.isNull(measure.getImplementationtime())) {
@@ -1064,11 +1317,12 @@
 								<div class="case-studies-tabbed-content-subheader">Lifetime</div>
 								<ul>
 									<li>
-										<p><em>Describe the lifetime of the measure:</em> (250 char limit)</p>
+										<p><em>Describe the lifetime of the measure:</em>
 										<ul class="case-studies-tabbed-content-bullted-list">
 											<li>Time frame, e.g. 5-10 years</li>
 											<li>Brief explanation</li>
 										</ul>
+										(250 char limit)</p>
 										<% 
 										  String lifeTime = "";
 										  if (measure == null || Validator.isNull(measure.getLifetime())) {
@@ -1087,15 +1341,17 @@
 							</div>
 
 							<div class="case-studies-tabbed-content-button-row">
-								<a href="#" class="case-studies-tabbed-content-button-green case-studies-tabbed-content-button-previous case-studies-tabbed-content-float-left">Back To Case Description</a>
+								<a href="#" class="case-studies-tabbed-content-button-green case-studies-tabbed-content-button-previous case-studies-tabbed-content-float-left">Back To <%= descriptionOfClimateEntityText %></a>
 								<a href="#" class="case-studies-tabbed-content-button-green" onClick="submitform('save')">Save as Draft</a>
 								<a href="#" class="case-studies-tabbed-content-button-green case-studies-tabbed-content-button-next">Next - Reference Information</a>
 							</div>
 						</li>
+						
 						<li>
-							<div class="case-studies-tabbed-content-header">Case Study - <em>Reference Information</em></div>
+							<div class="case-studies-tabbed-content-header"><%=nameOfClimateEntityShortText %>  - <em>Reference Information</em></div>
 							<p>Please provide the contact and reference information below so that other people interested in this case study may obtain more information about this case study.</p>
 
+                            <% if (mao_type.equalsIgnoreCase("A")) { %>
 							<div class="case-studies-tabbed-content-section">
 								<div class="case-studies-tabbed-content-subheader"><span class="red">*</span> Contact</div>
 
@@ -1117,14 +1373,25 @@
 									</li>
 								</ul>
 							</div>
+						  <% } %>
 
 							<div class="case-studies-tabbed-content-section">
-							    <div class="case-studies-tabbed-content-subheader"><span class="red">*</span> Websites</div>
+							    <div class="case-studies-tabbed-content-subheader"><span class="red">*</span>Website</div>
 								<liferay-ui:error key="website-required" message="website-required" />
 
 								<ul>
 									<li>
-										<p><em>List the Name and Website that refers to the original documents directly related to the case implementation process and its responsible actors (500 char limit).</em></p>
+											<% 
+										         if (mao_type.equalsIgnoreCase("A"))
+											     {
+										        	 localDescription = "List the Name and Website that refers to the original documents directly related to the case implementation process and its responsible actors (500 char limit).";
+										         }
+										         else
+										         {
+										        	 localDescription = "List the Name and Website where the option can be found or is described. Note: may refer to the original document describing a measure and does not have to refer back to the project e.g. collected measures (500 character limit).";
+										         }
+											%>
+										<p><em><%=localDescription %></em></p>
 										<% 
 										  String website = "";
 										  if (measure == null || Validator.isNull(measure.getWebsite())) {
@@ -1144,7 +1411,17 @@
 							    <div class="case-studies-tabbed-content-subheader">Source</div>
 							    <ul>
 									<li>
-										<p><em>Original source of the case study description. For example, the name of  certain projects, if the case study was taken from there.</em> (250 char limit)</p>
+									    <% 
+									         if (mao_type.equalsIgnoreCase("A"))
+										     {
+									        	 localDescription = "Original source of the case study description. For example, the name of  certain projects, if the case study was taken from there.";
+									         }
+									         else
+									         {
+									        	 localDescription = "Describe the original source (like name of a certain project) of the adaptation option description (250 character limit)";
+									         }
+										%>
+										<p><em><%=localDescription %></em></p>
 										<% 
 										  String source = "";
 										  if (measure == null || Validator.isNull(measure.getSource())) {
@@ -1164,9 +1441,15 @@
 							<div class="case-studies-tabbed-content-button-row">
 								<a href="#" class="case-studies-tabbed-content-button-green case-studies-tabbed-content-button-previous case-studies-tabbed-content-float-left">Back To Additional Details</a>
 								<a href="#" class="case-studies-tabbed-content-button-green" onClick="submitform('save')">Save as Draft</a>
+								<% if (mao_type.equalsIgnoreCase("A")) { %>
 								<a href="#" class="case-studies-tabbed-content-button-green case-studies-tabbed-content-button-next">Next - Photos and Files</a>
+								<% } else { %>
+								<a href="#" class="case-studies-tabbed-content-button-green case-studies-tabbed-content-button-next">Next  - Geographic Information</a>
+								<% } %>
 							</div>
 						</li>
+						
+						<% if (mao_type.equalsIgnoreCase("A")) { %> <%-- beginning of condition photo and document upload only applies to case studies --%>
 						<li>
 							<div class="case-studies-tabbed-content-header">Case Study - <em>Photos &amp; Files</em></div>
 
@@ -1205,8 +1488,8 @@
 							</div>
 
 							<div class="case-studies-tabbed-content-section">
-								<div class="case-studies-tabbed-content-subheader">Additional Case Study Photos</div>
-								<p>Up to 5 additional case study photos can be added.</p>
+								<div class="case-studies-tabbed-content-subheader">Additional case study photos and pictures</div>
+								<p>Up to 5 additional case study photos or pictures can be added.</p>
 								<% 
 									String supPhotos = "";
 								   // String supPhotonames = "";
@@ -1456,14 +1739,16 @@
 								<a href="#" class="case-studies-tabbed-content-button-green case-studies-tabbed-content-button-next">Next  - Geographic Information</a>
 							</div>
 						</li>
+						<% } %> <%-- end of condition photo and document upload only applies to case studies --%>
+						
 						<li>
-							<div class="case-studies-tabbed-content-header">Case Study - <em>Geographic Information</em></div>
+							<div class="case-studies-tabbed-content-header"><%=nameOfClimateEntityShortText %>  - <em>Geographic Information</em></div>
 
 							<div class="case-studies-tabbed-content-section">
 								<div class="case-studies-tabbed-content-subheader">Governance Level</div>
 								<ul>
 									<li>
-										<p><em>Select one or more regions, this case study covers.</em></p>
+										<p><em>Select the one governance level that relates to this <%=nameOfClimateEntityShortText.toLowerCase() %></em></p>
 										<ul class="one-col">
 											<li>
 											   <%
@@ -1518,69 +1803,24 @@
 							
 							
 							<div class="case-studies-tabbed-content-section">
-								<div class="case-studies-tabbed-content-subheader">Countries</div>
-								<ul>
-									<li>
-										<p><em>Select one or more European Union countries, this case study covers.</em></p>
-										<ul class="five-col">
-										
-										      <%
-										         String choosencountries = "";
-										       
-										             
-										       
-										        	 for (nl.wur.alterra.cgi.ace.model.constants.AceItemCountry countryElement : nl.wur.alterra.cgi.ace.model.constants.AceItemCountry.values()) 
-										        	 {
-										        			 if (measureStructure != null && Validator.isNotNull(measureStructure.getSpatialvalues()) && measureStructure.getSpatialvalues().indexOf(countryElement.toString()) >= 0) {
-										                         choosencountries += countryElement.toString() + ";";
-										                         
-										                       
-										                     }
-										        	}
-										        
-										    %>
-											<c:forEach var="countryElement" items="<%= nl.wur.alterra.cgi.ace.model.constants.AceItemCountry.values() %>" >
-											        
-											        <c:set var="countryElementMustBeChecked" value="false" />
-				                                    <c:set var="aceItemCountries" value='<%= measure == null ? choosencountries : measure.getSpatialvalues() %>' />
-													<c:if test="${fn:indexOf(aceItemCountries, countryElement)>=0}">
-														<c:set var="countryElementMustBeChecked" value="true" />
-													</c:if>
-													
-													<c:choose>
-														<c:when test="${countryElementMustBeChecked}">
-															<li><label for="chk_countries_${countryElement}"><input type="checkbox" name="chk_countries_${countryElement}" id="chk_countries_${countryElement}" value="${countryElement}" checked="checked" /><liferay-ui:message key="acesearch-country-lbl-${countryElement}" /></label></li>
-														</c:when>
-														<c:otherwise>
-															<li><label for="chk_countries_${countryElement}"><input type="checkbox" name="chk_countries_${countryElement}" id="chk_countries_${countryElement}" value="${countryElement}" /><liferay-ui:message key="acesearch-country-lbl-${countryElement}" /></label></li>
-														</c:otherwise>
-													</c:choose>
-											</c:forEach>
-										</ul>
-									</li>
-								</ul>
-								<div class="case-studies-form-clearing"></div>
-							</div>
-							
-							
-							<div class="case-studies-tabbed-content-section">
 								<div class="case-studies-tabbed-content-subheader">Geographic Characterization</div>
 								<liferay-ui:error key="geo-characterization-required" message="geo-characterization-required" />
 								<ul>
 									<li>
-										<p><em>Select one Geographic Characterization</em></p>
+										<p><em>Select the characterization for this case study</em></p>
 										<ul class="one-col">
 										   <%
-										        ArrayList subnationalElements = new ArrayList();
+										        ArrayList subnationalRegions = new ArrayList();
 										        ArrayList transMacroElements = new ArrayList();
 										        ArrayList transBioElements = new ArrayList();
 										        
 										        // get the subnational elements and store it in page context
 										        for (nl.wur.alterra.cgi.ace.model.constants.AceItemGeoChars geoCharElement : nl.wur.alterra.cgi.ace.model.constants.AceItemGeoChars.values()) 
 										        {
+										        	
 										        	if (geoCharElement.toString().contains("SUBN_"))
 										        	{
-										        		subnationalElements.add(geoCharElement.toString());
+										        		subnationalRegions.add(geoCharElement);
 										        	}
 										        	else if (geoCharElement.toString().contains("TRANS_MACRO"))
 										        	{
@@ -1591,17 +1831,11 @@
 										        		transBioElements.add(geoCharElement.toString());
 										        	}
 										        }
-										        pageContext.setAttribute("subnationals", subnationalElements);
+										        pageContext.setAttribute("subnationals", subnationalRegions);
 										        pageContext.setAttribute("transmacro", transMacroElements);
 										        pageContext.setAttribute("transbio", transBioElements);
 										        
-										        // getting the selected value
-										        // define radio option
-										        String geoCharSelected = "";
-										        ArrayList geoCharsSubNatlSelected = new ArrayList();
-										        String geoTrans1Selected = "";
-										        String geoTrans2Selected = "";
-										        String cityText = "";
+										        
 										    
 										        
 										        Measure measureForGeoChars = null;
@@ -1614,80 +1848,100 @@
 										        	measureForGeoChars = measureFromRequest;
 										        }
 										        
+										        String elementSelected = "";
+										        ArrayList macroTransElements = new ArrayList();
+										        ArrayList biographicalElements = new ArrayList();
+										        ArrayList subNationalElements = new ArrayList();
+										        ArrayList countryElements = new ArrayList();
+										        String city = "";
+										        
 										        if (measureForGeoChars != null && Validator.isNotNull(measureForGeoChars.getGeochars()))
 										        {
-										        	if (measureForGeoChars.getGeochars().contains("SUBNATIONAL"))
-										        	{
-										        		geoCharSelected = "SUBNATIONAL";
-										        		
-										        		
-										        		String[] snationals = measureForGeoChars.getGeochars().split("\\^");
-										        		
-										        		boolean skippedFirstOne = false;
-										        		for (String snat:snationals)
-										        		{
-										        		    if (skippedFirstOne)
-										        		    {
-										        			    geoCharsSubNatlSelected.add(snat);
-										        		    }
-										        		    else
-										        		    {
-										        		    	skippedFirstOne = true;
-										        		    }
-										        			
-										        		}        
-										        	}
-										        	else if (measureForGeoChars.getGeochars().contains("TRANSNATIONAL"))
-										        	{
-										        		geoCharSelected = "TRANSNATIONAL";
-										        
-										        		String[] transnationals = measureForGeoChars.getGeochars().split("\\^");
-										        		geoTrans1Selected = transnationals[1];
-										        		geoTrans2Selected = transnationals[2];
-										        	}
-										        	else if (measureForGeoChars.getGeochars().contains("CITY"))
-										        	{
-										        		geoCharSelected = "CITY";
 										        	
-										        		String[] city = measureForGeoChars.getGeochars().split("\\^");
-										        		cityText = city[1];
+										        	try {
+											        	Object obj=JSONValue.parse(measureForGeoChars.getGeochars());
+														JSONObject jsonObject = (JSONObject) obj;
+														JSONObject geoElements = (JSONObject) jsonObject.get("geoElements");
+														elementSelected = (String) geoElements.get("element");
+														
+														JSONArray macroTransArray = (JSONArray) geoElements.get("macrotrans");
+														
+														for (int i = 0; i < macroTransArray.size(); i++ )
+														{
+														     macroTransElements.add(macroTransArray.get(i));
+														}
+														
+		                                                JSONArray bioTransArray = (JSONArray) geoElements.get("biotrans");
+														
+														for (int i = 0; i < bioTransArray.size(); i++ )
+														{
+														     biographicalElements.add(bioTransArray.get(i));
+														}
+														
+														JSONArray subNationalsArray = (JSONArray) geoElements.get("subnational");
+															
+													    for (int i = 0; i < subNationalsArray.size(); i++ )
+													    {
+															     subNationalElements.add(subNationalsArray.get(i));
+														}
+													    
+													    JSONArray countriesArray = (JSONArray) geoElements.get("countries");
+														
+													    for (int i = 0; i < countriesArray.size(); i++ )
+													    {
+															     countryElements.add(countriesArray.get(i));
+														}
+													    
+													    city = (String) geoElements.get("city");
 										        	}
-										        	else
+										        	catch(Exception e)
 										        	{
-										        		geoCharSelected = measureForGeoChars.getGeochars();
+										        		e.printStackTrace();
 										        	}
 										        }
 										        
-										        
-										        pageContext.setAttribute("geoCharSelected", geoCharSelected);
-										        pageContext.setAttribute("geoCharsSubNatlSelected", geoCharsSubNatlSelected);
-										        pageContext.setAttribute("geoTrans1Selected", geoTrans1Selected);
-										        pageContext.setAttribute("geoTrans2Selected", geoTrans2Selected);
-										        pageContext.setAttribute("cityText", cityText);
+										        pageContext.setAttribute("geoElementSelected", elementSelected);
+										        pageContext.setAttribute("macroTransSelected", macroTransElements);
+										        pageContext.setAttribute("bioRegionSelected", biographicalElements);
+										        pageContext.setAttribute("subNationalsSelected", subNationalElements);
+										        pageContext.setAttribute("countriesSelected", countryElements);
+										        pageContext.setAttribute("city", city);
 										   %>
 										   
 										   <c:forEach var="geoCharElement" items="<%= nl.wur.alterra.cgi.ace.model.constants.AceItemGeoChars.values() %>" >
 											        <c:choose>
-											           <c:when test="${fn:indexOf(geoCharElement, 'TRANSNATIONAL')>=0}" >
-											               <!--  dropdown boxes -->
-											               <c:choose>
-												               <c:when test="${geoCharSelected eq 'TRANSNATIONAL'}" >
-												                   <li><label for="rad_geochars_${geoCharElement}"><input type="radio" name="rad_geo_chars" id="chk_geo_chars_transnational" value="${geoCharElement}" checked /><liferay-ui:message key="acesearch-geochars-lbl-${geoCharElement}" /></label></li>												                  
-												               </c:when>
-												               
-												               <c:otherwise >
-												                   <li><label for="rad_geochars_${geoCharElement}"><input type="radio" name="rad_geo_chars" id="chk_geo_chars_transnational" value="${geoCharElement}" /><liferay-ui:message key="acesearch-geochars-lbl-${geoCharElement}" /></label></li>
-												               </c:otherwise>
-											               </c:choose>
+											            <c:when test="${geoCharElement == 'GLOBAL'}" >
+											                <c:choose>
+												                <c:when test="${geoElementSelected eq 'GLOBAL'}">
+													             <li><label for="rad_geochars_${geoCharElement}"><input type="radio" name="rad_geo_chars" id="global_geo_chars" value="${geoCharElement}" checked/><liferay-ui:message key="acesearch-geochars-lbl-${geoCharElement}" /></label></li>
+													            </c:when>
+													            <c:otherwise>
+													             <li><label for="rad_geochars_${geoCharElement}"><input type="radio" name="rad_geo_chars" id="global_geo_chars" value="${geoCharElement}" /><liferay-ui:message key="acesearch-geochars-lbl-${geoCharElement}" /></label></li>
+													            </c:otherwise>
+													       </c:choose>
+										               </c:when>
+										               
+											           <c:when test="${geoCharElement == 'EUROPE'}" >
+											                <c:choose>
+												                <c:when test="${geoElementSelected eq 'EUROPE'}">
+														             <li><label for="rad_geochars_${geoCharElement}"><input type="radio" name="rad_geo_chars" id="europe_geo_chars" value="${geoCharElement}"  checked/><liferay-ui:message key="acesearch-geochars-lbl-${geoCharElement}" /></label></li>
+														        </c:when>
+														        <c:otherwise>
+														           <li><label for="rad_geochars_${geoCharElement}"><input type="radio" name="rad_geo_chars" id="europe_geo_chars" value="${geoCharElement}" /><liferay-ui:message key="acesearch-geochars-lbl-${geoCharElement}" /></label></li>
+														        </c:otherwise>
+														     </c:choose>
+														             <div class="europe_geochar_class">	<!-- important - starting div for europe_geochar_class -->
+										               </c:when>
+										             
+											           <c:when test="${geoCharElement == 'MACRO_TRANSNATIONAL_REGION'}" >
+											               <label for="rad_geochars_${geoCharElement}"><strong><liferay-ui:message key="acesearch-geochars-lbl-${geoCharElement}" /></strong></label>
 											               <table class="case-studies-tabbed-content-table-for-translists">
                                                              <tr>
                                                                 <td width="45%">
-                                                                   Macro-transnational regions:
-													               <select id="trans_macro_nationals">
-													                  <option value="default">select one option</option>
+													               <select id="trans_macro_nationals" style="height:150px;width:200px;" multiple>
 													                  <c:forEach var="transMacroElement" items="${transmacro}" >
 													                      <c:choose>
-																	               <c:when test="${transMacroElement eq geoTrans1Selected}" >
+																	               <c:when test="${fn:contains(macroTransSelected, transMacroElement)}" >
 																	                   <option value="${transMacroElement}" selected><liferay-ui:message key="acesearch-geochars-lbl-${transMacroElement}"/></option>												                  
 																	               </c:when>
 												               
@@ -1695,22 +1949,24 @@
 																	                   <option value="${transMacroElement}"><liferay-ui:message key="acesearch-geochars-lbl-${transMacroElement}"/></option>		
 																	               </c:otherwise>
 											                              </c:choose>
-													                    
-													                      
 													                  </c:forEach>
 													               </select>
 													            </td>
-												               
-												             <td width="10%">
-												             </td>
-												            
+													          </tr>
+													         </table>
+													         <br/>
+													    </c:when>
+													    
+												        <c:when test="${geoCharElement == 'BIOGRAPHICAL_REGION'}" >
+												           <label for="rad_geochars_${geoCharElement}"><strong><liferay-ui:message key="acesearch-geochars-lbl-${geoCharElement}" /></strong></label>
+											               
+												           <table class="case-studies-tabbed-content-table-for-translists">
+                                                           <tr>
 												             <td width="45%">
-												                   Biogeographical regions:
-												                   <select id="trans_bio_nationals">
-												                      <option value="default">select one option</option>
+												                   <select id="trans_bio_nationals" style="height:100px;width:200px;" multiple>
 													                  <c:forEach var="transBioElement" items="${transbio}" >
 													                      <c:choose>
-																	               <c:when test="${transBioElement eq geoTrans2Selected}" >
+																	               <c:when test="${fn:contains(bioRegionSelected, transBioElement)}" >
 																	                   <option value="${transBioElement}" selected><liferay-ui:message key="acesearch-geochars-lbl-${transBioElement}"/></option>												                  
 																	               </c:when>
 												               
@@ -1718,7 +1974,6 @@
 																	                   <option value="${transBioElement}"><liferay-ui:message key="acesearch-geochars-lbl-${transBioElement}"/></option>		
 																	               </c:otherwise>
 											                              </c:choose>
-													                     
 													                  </c:forEach>
 													               </select>
 												             </td>
@@ -1726,77 +1981,76 @@
 												          </table>
 												          <br/>
 										               </c:when>
-											           <c:when test="${fn:indexOf(geoCharElement, 'SUBNATIONAL')>=0}" >
-											           
-											               <!--  dropdown boxes -->
-											               <c:choose>
-												               <c:when test="${geoCharSelected eq 'SUBNATIONAL'}" >
-												                   <li><label for="rad_geochars_${geoCharElement}"><input type="radio" name="rad_geo_chars" id="chk_geo_chars_subnational" value="${geoCharElement}" checked /><liferay-ui:message key="acesearch-geochars-lbl-${geoCharElement}" /></label></li>												                  
-												               </c:when>
-												               
-												               <c:otherwise >
-												                   <li><label for="rad_geochars_${geoCharElement}"><input type="radio" name="rad_geo_chars" id="chk_geo_chars_subnational" value="${geoCharElement}" /><liferay-ui:message key="acesearch-geochars-lbl-${geoCharElement}" /></label></li>
-												               </c:otherwise>
-											               </c:choose>
+										               
+										              <c:when test="${geoCharElement ==  'COUNTRIES'}" >
+										                    <label for="rad_geochars_${geoCharElement}"><strong><liferay-ui:message key="acesearch-geochars-lbl-${geoCharElement}" /></strong></label>
 											               
+															<ul>
+																<li>
+																	<p><em>Select one or more European Union countries covered by this case study</em></p>
+																	<ul class="five-col">
+																	
+																		<c:forEach var="countryElement" items="<%= nl.wur.alterra.cgi.ace.model.constants.AceItemCountry.values() %>" >
+																		        
+																		        <c:set var="countryElementMustBeChecked" value="false" />
+																				<c:if test="${fn:contains(countriesSelected, countryElement)}">
+																					<c:set var="countryElementMustBeChecked" value="true" />
+																				</c:if>
+																				
+																				<c:choose>
+																					<c:when test="${countryElementMustBeChecked}">
+																						<li><label for="chk_countries_${countryElement}"><input type="checkbox" class="chk_countries_geochars" name="chk_countries_${countryElement}" id="chk_countries_${countryElement}" value="${countryElement}" checked="checked" /><liferay-ui:message key="acesearch-country-lbl-${countryElement}" /></label></li>
+																					</c:when>
+																					<c:otherwise>
+																						<li><label for="chk_countries_${countryElement}"><input type="checkbox" class="chk_countries_geochars" name="chk_countries_${countryElement}" id="chk_countries_${countryElement}" value="${countryElement}" /><liferay-ui:message key="acesearch-country-lbl-${countryElement}" /></label></li>
+																					</c:otherwise>
+																				</c:choose>
+																		</c:forEach>
+																	</ul>
+																</li>
+															</ul>
+										              </c:when>
+										              
+											           <c:when test="${geoCharElement == 'SUBNATIONAL'}" >
+											               <label for="rad_geochars_${geoCharElement}"><strong><liferay-ui:message key="acesearch-geochars-lbl-${geoCharElement}" />:</strong></label>
+											               <p>
 											               <table class="case-studies-tabbed-content-table-for-lists">
                                                              <tr>
-                                                                <td width="35%">
+                                                                <td width="40%">
                                                                    Select applicable regions:
-													               <select id="subnationals" multiple="multiple" style="height:300px;width:200px;">
+													               <select id="subnationals" multiple="multiple" style="height:300px;width:250px;">
 													                  <c:forEach var="subNationalElement" items="${subnationals}" >
-													                      <option value="${subNationalElement}"><liferay-ui:message key="acesearch-geochars-lbl-${subNationalElement}"/></option>
+													                      <option value="${subNationalElement}">${subNationalElement.description}</option>
 													                  </c:forEach>
 													               </select>
 													            </td>
 												               
-												             <td width="30%">
+												             <td width="12%">
 												                <button id="to2" type="button">&nbsp;>&nbsp;</button>
-                                                                <button id="allTo2" type="button">&nbsp;>>&nbsp;</button>
-                                                                <button id="allTo1" type="button">&nbsp;<<&nbsp;</button>
                                                                 <button id="to1" type="button">&nbsp;<&nbsp;</button>
 												             </td>
 												            
-												             <td width="35%">
+												             <td width="40%">
 												                   Your selections:
-												                   <select id="subnationals_selected" multiple="multiple" style="height:300px;width:200px;">
-												                     <c:forEach var="subNationalElement" items="${geoCharsSubNatlSelected}" >
-													                      <option value="${subNationalElement}"><liferay-ui:message key="acesearch-geochars-lbl-${subNationalElement}"/></option>
-													                 </c:forEach>
+												                   <select id="subnationals_selected" multiple="multiple" style="height:300px;width:250px;">
+												                     <c:forEach var="subNationalElement" items="${subnationals}" >
+													                     <c:if test="${fn:contains(subNationalsSelected,subNationalElement) }">
+														                      <option value="${subNationalElement}">${subNationalElement.description}</option>
+														                 </c:if>
+														             </c:forEach>
                                                                    </select>
 												             </td>
 												           </tr>
 												          </table>
-												          <br/>
+												          </p>
 										               </c:when>
-										               <c:when test="${fn:indexOf(geoCharElement, 'CITY')>=0}" >
-										                  <c:choose>
-												               <c:when test="${geoCharSelected eq 'CITY'}" >
-												                   <li><label for="rad_geochars_${geoCharElement}"><input type="radio" name="rad_geo_chars" id="geochars_id_for_text" value="${geoCharElement}" checked/><liferay-ui:message key="acesearch-geochars-lbl-${geoCharElement}" /></label></li>												                  
-												               </c:when>
-												               
-												               <c:otherwise >
-												                   <li><label for="rad_geochars_${geoCharElement}"><input type="radio" name="rad_geo_chars" id="geochars_id_for_text" value="${geoCharElement}" /><liferay-ui:message key="acesearch-geochars-lbl-${geoCharElement}" /></label></li>
-												               </c:otherwise>
-											               </c:choose>
-										                 <span class="case-studies-tabbed-content-text-for-geochars"><input name="shared_form_city" type="text" size="50" maxlength="50" value="${cityText}" /></span>
-										               </c:when>
-										               <c:when test="${fn:indexOf(geoCharElement, 'SUBN_')>=0}" >
-										                 <!--  do nothing dealt already -->
-										               </c:when>
-										               <c:when test="${fn:indexOf(geoCharElement, 'TRANS_')>=0}" >
-										                 <!--  do nothing dealt already -->
+										               <c:when test="${geoCharElement == 'CITY'}" >
+										                 <label for="rad_geochars_${geoCharElement}"><strong><liferay-ui:message key="acesearch-geochars-lbl-${geoCharElement}" /></strong></label>
+										                 <span class="case-studies-tabbed-content-text-for-geochars"><input class="shared_form_city" type="text" size="50" maxlength="50" value="${city}" /></span>
+										                 </div> <!-- important - closing div for europe_geochar_class -->
 										               </c:when>
 										               <c:otherwise>
-										                   <c:choose>
-												               <c:when test="${geoCharSelected eq geoCharElement}" >
-												                   <li><label for="rad_geochars_${geoCharElement}"><input type="radio" name="rad_geo_chars" id="chk_geo_chars" value="${geoCharElement}" checked /><liferay-ui:message key="acesearch-geochars-lbl-${geoCharElement}" /></label></li>												                  
-												               </c:when>
-												               
-												               <c:otherwise >
-												                   <li><label for="rad_geochars_${geoCharElement}"><input type="radio" name="rad_geo_chars" id="chk_geo_chars" value="${geoCharElement}" /><liferay-ui:message key="acesearch-geochars-lbl-${geoCharElement}" /></label></li>
-												               </c:otherwise>
-											               </c:choose>
+										                 <!-- do nothing -->
 										              </c:otherwise>
 											        </c:choose>
 										   </c:forEach>
@@ -1806,14 +2060,7 @@
 							   <div class="case-studies-form-clearing"></div>
 							</div>
 							
-							
-							
-							
-							
-							
-							
-							
-
+						  <% if (mao_type.equalsIgnoreCase("A")) { %>
 							<div class="case-studies-tabbed-content-section">
 								<div class="case-studies-tabbed-content-subheader">Map</div>
 								<ul>
@@ -1829,14 +2076,10 @@
 								   <%
 										String m_checked = "";
 										String a_checked = "";
-										String toggleclass = "togglehide";
 										
-										if( mao_type.equalsIgnoreCase("A")) {
-											toggleclass = "toggleshow";
-										}
 								  %>
 								
-									<div id="locationselection" class="<%= toggleclass %>">	
+									<div id="locationselection">	
 										<div id="locator">
 											<input type="text" name="location" id="location" />
 											<a onclick="locate(document.getElementById('location').value)">Locate</a>
@@ -1943,9 +2186,14 @@
 								</ul>
 								<div class="case-studies-form-clearing"></div>
 							</div>
+						<%} %>
 							
 							<div class="case-studies-tabbed-content-button-row">
-								<a href="#" class="case-studies-tabbed-content-button-green case-studies-tabbed-content-button-previous case-studies-tabbed-content-float-left">Back To Photos &amp; Documents</a>
+							   <% if (mao_type.equalsIgnoreCase("A")) { %>
+								   <a href="#" class="case-studies-tabbed-content-button-green case-studies-tabbed-content-button-previous case-studies-tabbed-content-float-left">Back To Photos &amp; Documents</a>
+							   <% } else { %>
+							       <a href="#" class="case-studies-tabbed-content-button-green case-studies-tabbed-content-button-previous case-studies-tabbed-content-float-left">Back To Reference Information</a>
+							   <% } %>
 								<a href="#" class="case-studies-tabbed-content-button-green" onClick="submitform('save')">Save as Draft</a>
 							</div>
 						</li>
@@ -1959,8 +2207,8 @@
 						      <li>
 						 <% } %>
 						    
-							<div class="case-studies-tabbed-content-header">Case Study - <em>Review &amp; Submit for Review Process</em></div>
-							<p>Review the case study and submit the case study for <a href="#">review</a> for inclusion in the Climate- ADAPT Database. <strong>Note</strong> This preview page may appear slightly more narrow than the actual display. After this case study has been added to the database, the case study page will display slightly wider than it appears below.</p>
+							<div class="case-studies-tabbed-content-header"><%=nameOfClimateEntityShortText %> - <em>Review &amp; Submit for Review Process</em></div>
+							<p>Review the <%=nameOfClimateEntityShortText.toLowerCase() %> and submit the <%=nameOfClimateEntityShortText.toLowerCase() %> for <a href="#">review</a> for inclusion in the Climate- ADAPT Database. <strong>Note</strong> This preview page may appear slightly more narrow than the actual display. After this <%=nameOfClimateEntityShortText.toLowerCase() %> has been added to the database, the case study page will display slightly wider than it appears below.</p>
 
 							<div class="case-studies-tabbed-content-button-row">
 								<a href="#" class="case-studies-tabbed-content-button-green case-studies-tabbed-content-button-previous case-studies-tabbed-content-float-left">Back To Geographical Information</a>
@@ -1970,8 +2218,9 @@
 
 							<div class="case-studies-tabbed-content-review-wrapper">
 								<div class="case-studies-tabbed-content-review-column-left">
+								  <% if (mao_type.equalsIgnoreCase("A")) { %>
 									<div class="case-studies-tabbed-content-review-image-wrapper">
-										<div class="case-studies-tabbed-content-review-image-label">Label</div>
+										<div class="case-studies-tabbed-content-review-image-label"></div>
 										 <% 
 										    String primImageUrl = "";
 										    
@@ -1983,34 +2232,44 @@
 										 %>
 										<img src="<%=primImageUrl %>" class="case-studies-tabbed-content-review-image" />
 									</div>
+								
 
+                                
 									<div class="case-studies-tabbed-content-review-description-wrapper">
-										<p class="case-studies-tabbed-content-review-header"><%= measure.getName() %> (Case Study)</p>
+								   <% } else { %>
+								     <div class="case-studies-tabbed-content-section">
+										<p class="case-studies-tabbed-content-review-header"><%= measure.getName() %> (<%=nameOfClimateEntityShortText %>)</p>
 
 										<p><strong>Description:</strong></p>
 										<p><%= measure.getDescription() %></p>
 									</div>
+									<% } %>
 
 									<div class="case-studies-form-clearing"></div>
 
 									<div class="case-studies-tabbed-content-section">
-										<div class="case-studies-tabbed-content-subheader">Case Study Information</div>
+										<div class="case-studies-tabbed-content-subheader"><%=nameOfClimateEntityShortText %> Information</div>
 										<ul>
 											<li>
-												<p><strong><em>Case Study Description</em></strong></p>
+												<p><strong><em><%=nameOfClimateEntityShortText %> Description</em></strong></p>
 												<ul class="case-studies-tabbed-content-bullted-list">
 													<li><a href="#climate_impacts_anchor">Climate Impacts</a></li>
+													<% if (mao_type.equalsIgnoreCase("A")) { %>
 													<li><a href="#challenges_anchor">Challenges</a></li>
 													<li><a href="#objectives_anchor">Objectives</a></li>
 													<li><a href="#adapt_options_anchor">Adaptation Options Implemented In This Case</a></li>
 													<li><a href="#solutions_anchor">Solutions</a></li>
 													<li><a href="#relevance_anchor">Importance and Relevance of Adaptation</a></li>
+													<% } %>
 													<li><a href="#sector_policies_anchor">Sector Policies</a></li>
 												</ul>
 											</li>
 											<li>
 												<p><strong><em>Additional Details</em></strong></p>
 												<ul class="case-studies-tabbed-content-bullted-list">
+												  <%  if (Validator.isNotNull(measure.getCategory())) { %>
+													<li><a href="#category_anchor">Category</a></li>
+												  <% } %>
 												  <%  if (Validator.isNotNull(measure.getStakeholderparticipation())) { %>
 													<li><a href="#stake_holder_anchor">Stakeholder Participation</a></li>
 												  <% } %>
@@ -2041,7 +2300,9 @@
 											<li>
 												<p><strong><em>Reference Information</em></strong></p>
 												<ul class="case-studies-tabbed-content-bullted-list">
+												   	<% if (mao_type.equalsIgnoreCase("A")) { %>
 													<li><a href="#contact_anchor">Contact</a></li>
+													<% } %>
 													<li><a href="#website_anchor">Websites</a></li>
 												   <%  if (Validator.isNotNull(measure.getSource())) { %>
 													<li><a href="#source_anchor">Source</a></li>
@@ -2053,11 +2314,11 @@
 									</div>
 
 									<div class="case-studies-tabbed-content-section">
-										<div class="case-studies-tabbed-content-subheader">Case Study Information</div>
+										<div class="case-studies-tabbed-content-subheader"><%=nameOfClimateEntityShortText %> Information</div>
 										<ul>
 											<li>
 												<a name="climate_impacts_anchor"><p><strong><em>Climate Impacts</em></strong></p></a>
-												<p>This case study addresses the following climate impact areas:</p>
+												<p>This <%=nameOfClimateEntityShortText %> addresses the following climate impact areas:</p>
 												<%
 												    String[] climateImpactsAry = null;
 												    if (Validator.isNotNull(measure.getClimateimpacts_()))
@@ -2077,6 +2338,7 @@
 												  <div class="case-studies-form-clearing"></div>
 											</li>
 											
+										<% if (mao_type.equalsIgnoreCase("A")) { %>
 											<li>
 												<a name="challenges_anchor"><p><strong><em>Challenges</em></strong></p></a>
 												<p>Description of how this case study addresses climate change impacts/risks and related challenges:</p>
@@ -2094,20 +2356,35 @@
 											<li>
 												<a name="adapt_options_anchor"><p><strong><em>Adaptation Options</em></strong></p></a>
 												<%
-												   
-												   String[] adaptOptionsAry = null;
-												   if (Validator.isNotNull(measure.getAdaptationoptions()))
-												   {
+												  //Listing all adaptation options
+											      String[] adaptOptionsAry = null;
+												
+												  if (Validator.isNotNull(measure.getAdaptationoptions()))
+												  {
 													   String adaptOptions = measure.getAdaptationoptions();
 													   adaptOptionsAry = adaptOptions.split(";");
+													   Long selMeasuresInLong[] = new Long[adaptOptionsAry.length];
+													         int ctr = 0;
+													         for (String selMeasure : adaptOptionsAry)
+													         {
+													         	selMeasuresInLong[ctr] = Long.parseLong(selMeasure);
+													         	ctr ++;
+													         }
+													       
+													    DynamicQuery query = DynamicQueryFactoryUtil.forClass(Measure.class);
+														query.add(PropertyFactoryUtil.forName("measureId").in(selMeasuresInLong));
+														List resultsForSelected = MeasureLocalServiceUtil.dynamicQuery(query);
+														List<Measure> listOfSelectedMeasure = (List<Measure>) resultsForSelected;
+														pageContext.setAttribute("listOfSelectedMeasure", listOfSelectedMeasure);
 												   }
-												   pageContext.setAttribute("adaptationOptionsForReview", adaptOptionsAry);
-												%>
-												   <c:if test="${adaptoptionsForReview ne null }">
-												    <c:forEach var="adaptoption" items="${adaptationOptionsForReview}">
-												       <p><liferay-ui:message key="aceitem-adaptoptions-lbl-${adaptoption}" /></p>
-												    </c:forEach>
-												   </c:if>
+											       pageContext.setAttribute("adaptationOptionsForReview", adaptOptionsAry);
+											   
+											%>
+											   <c:if test="${adaptationOptionsForReview ne null }">
+											    <c:forEach var="adaptoption" items="${listOfSelectedMeasure}">
+											       <p><a href='/viewmeasure?ace_measure_id=${adaptoption.measureId}' target="view adaptation">${adaptoption.name}</a></p>
+											    </c:forEach>
+											   </c:if>
 													<div class="case-studies-form-clearing"></div>
 											</li>
 											
@@ -2137,6 +2414,7 @@
 												    </c:forEach>
 													<div class="case-studies-form-clearing"></div>
 										   </li>
+										   <% } %>
 										   
 										   <li>
 												<a name="sector_policies_anchor"><p><strong><em>Relevant European Union Sector Policies:</em></strong></p></a>
@@ -2164,17 +2442,45 @@
 									<div class="case-studies-tabbed-content-section">
 										<div class="case-studies-tabbed-content-subheader">Additional Details</div>
 										<ul>
-										   
-									 <% if (Validator.isNotNull(measure.getStakeholderparticipation()))
+										
+										<% if (Validator.isNotNull(measure.getCategory()))
 										{%>
 											<li>
-												<a name="stake_holder_anchor"><p><strong><em>Stakeholder Participation</em></strong></p></a>
+												<a name="category_anchor"><p><strong><em>Category</em></strong></p></a>
+												
+												<%
+												   ArrayList catSelected = new ArrayList();
+												  
+												   for(String s:  measure.getCategory().split(";"))
+												   {
+													   String temp = Character.toUpperCase(s.charAt(0)) + s.substring(1);
+													   catSelected.add(temp);
+												   }
+												   pageContext.setAttribute("categories", catSelected);
+												  
+												%>
 											
-											    <p><%=measure.getStakeholderparticipation() %></p>
+											    <p>
+											       <c:forEach var="category" items="${categoryList}">
+											          ${category} <br/>
+											       </c:forEach>
+											    </p>
 											    
 												<div class="case-studies-form-clearing"></div>
 											</li>
 										<%} %>
+										
+										   
+										 <% if (Validator.isNotNull(measure.getStakeholderparticipation()))
+											{%>
+												<li>
+													<a name="stake_holder_anchor"><p><strong><em>Stakeholder Participation</em></strong></p></a>
+												
+												    <p><%=measure.getStakeholderparticipation() %></p>
+												    
+													<div class="case-studies-form-clearing"></div>
+												</li>
+											<%} %>
 											
 										   
 									 <% if (Validator.isNotNull(measure.getSucceslimitations()))
@@ -2237,24 +2543,26 @@
 									<div class="case-studies-tabbed-content-section">
 										<div class="case-studies-tabbed-content-subheader">Reference Information</div>
 										<ul>
-											<li>
-												<p><strong><em>Contact</em></strong></p>
-												<a name="contact_anchor"><p><%=measure.getContact() %></p></a>
-												<div class="case-studies-form-clearing"></div>
-											</li>
+										   	<% if (mao_type.equalsIgnoreCase("A")) { %>
+												<li>
+													<a name="contact_anchor"><p><strong><em>Contact</em></strong></p></a>
+													<p><%=measure.getContact() %></p>
+													<div class="case-studies-form-clearing"></div>
+												</li>
+										    <% } %>
 											
 											<li>
-												<p><strong><em>Websites</em></strong></p>
-												<a name="website_anchor"><p><%=measure.getWebsite() %></p></a>
+												<a name="website_anchor"><p><strong><em>Websites</em></strong></p></a>
+												<p><%=measure.getWebsite() %></p>
 												<div class="case-studies-form-clearing"></div>
 											</li>
 											
 										<% if (Validator.isNotNull(measure.getSource()))
 										   {%>	
 												<li>
-													<p><strong><em>Source</em></strong></p>
+													<a name="source_anchor"><p><strong><em>Source</em></strong></p></a>
 												
-												    <a name="source_anchor"><p><%=measure.getSource() %></p></a>
+												    <p><%=measure.getSource() %></p>
 												    
 													<div class="case-studies-form-clearing"></div>
 												</li>
@@ -2368,31 +2676,62 @@
 										<p><strong>Geographic characterisation</strong></p>
 										<p>
 										     <c:choose>
-										       <c:when test="${geoCharSelected eq 'TRANSNATIONAL'}">
-										           Macro-transnational region: <liferay-ui:message key="acesearch-geochars-lbl-${geoTrans1Selected}"/>
-										           Bio-transnational region: <liferay-ui:message key="acesearch-geochars-lbl-${geoTrans2Selected}"/>
-										       </c:when>
-										        <c:when test="${geoCharSelected eq 'SUBNATIONAL'}">
-										           Sub Nationals: <br/>
-										             <c:forEach var="subNationalElement" items="${geoCharsSubNatlSelected}" >
-													    <liferay-ui:message key="acesearch-geochars-lbl-${subNationalElement}"/> <br/>
-													 </c:forEach>
-										       </c:when>
-										       <c:when test="${geoCharSelected eq 'CITY'}">
-										           Cities and Towns: ${cityText}
-										       </c:when>
-										       <c:otherwise>
-										             <liferay-ui:message key="acesearch-geochars-lbl-${geoCharSelected}"/> <br/>
-										       </c:otherwise>
-										     </c:choose>
+												     <c:when test="${geoElementSelected eq 'GLOBAL'}">
+												          Global<br/>
+												     </c:when>
+												     
+												     <c:when test="${geoElementSelected eq 'EUROPE'}">
+												          Europe:<br/>
+												          
+												          <c:if test="${fn:length(macroTransSelected) gt 0}">
+												               Macro-Transnational region:<br/>
+												               <c:forEach var="macroTransElement" items="${macroTransSelected}" >
+													                <liferay-ui:message key="acesearch-geochars-lbl-${macroTransElement}"/>,
+													           </c:forEach>
+													           <br/><br/>
+												          </c:if>
+												          
+												          <c:if test="${fn:length(bioRegionSelected) gt 0}">
+												               Biographical regions:<br/>
+												               <c:forEach var="bioRegionElement" items="${bioRegionSelected}" >
+													                <liferay-ui:message key="acesearch-geochars-lbl-${bioRegionElement}"/>,
+													           </c:forEach>
+													           <br/><br/>
+												          </c:if>
+												          
+												          <c:if test="${fn:length(countriesSelected) gt 0}">
+												               Countries:<br/>
+												               <c:forEach var="countryElement" items="${countriesSelected}" >
+													                <liferay-ui:message key="acesearch-country-lbl-${countryElement}"/>,
+													           </c:forEach>
+													           <br/><br/>
+												          </c:if>
+												          
+												          <c:if test="${fn:length(subNationalsSelected) gt 0}">
+												               Sub Nationals:<br/>
+													           <c:forEach var="subNationalElement" items="${subnationals}" >
+													                     <c:if test="${fn:contains(subNationalsSelected,subNationalElement) }">
+														                       ${subNationalElement.description},
+														                 </c:if>
+														       </c:forEach>
+														       <br/><br/>
+												          </c:if>
+												          
+												          <c:if test="${fn:length(city) gt 0}">
+												             City: ${city}<br/><br/>
+												          </c:if>
+												     </c:when>
+												     <c:otherwise>
+												         <!--  if it is old form -->
+												         <%=measure.getSpatiallayer() %><br/><br/>
+												     </c:otherwise>
+											 </c:choose>
 										</p>
-									</div>
 									
-									<div class="case-studies-tabbed-content-review-column-right-section">
 										
 										<%
 												    String countriesForReview = measure.getSpatialvalues();
-										            if (Validator.isNotNull(countriesForReview))
+										            if (Validator.isNotNull(countriesForReview) && Validator.isNull(measure.getGeochars()))
 										            {
 											            //System.out.println("countries for review is " + countriesForReview);
 													    String[] countriesAry = countriesForReview.split(";");
@@ -2400,14 +2739,13 @@
 										      
 												   
 										%>
-										            <p><strong>Countries</strong></p>
+										            <p>Countries:</p>
 										        <%} %>
 												    <c:forEach var="ctry" items="${countryForReview}">
-												       <p><liferay-ui:message key="acesearch-country-lbl-${ctry}" /></p>
+												       <liferay-ui:message key="acesearch-country-lbl-${ctry}" /><br/><br/>
 												    </c:forEach>
-									</div>
-								</div>
-
+								       </div>
+                                 </div>
 								<div class="case-studies-form-clearing"></div>
 							</div>
 						

@@ -347,6 +347,7 @@ public class MeasurePersistenceImpl extends BasePersistenceImpl<Measure>
 		measureImpl.setSupdocs(measure.getSupdocs());
 		measureImpl.setYear(measure.getYear());
 		measureImpl.setGeochars(measure.getGeochars());
+		measureImpl.setCategory(measure.getCategory());
 
 		return measureImpl;
 	}

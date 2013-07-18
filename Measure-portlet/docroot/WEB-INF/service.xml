@@ -63,6 +63,7 @@
 		<column name="supdocs" type="String" />
 		<column name="year" type="String" />
 		<column name="geochars" type="String" />
+		<column name="category" type="String" />
 		
 		<!-- Sort order -->
 		<order by="asc" >

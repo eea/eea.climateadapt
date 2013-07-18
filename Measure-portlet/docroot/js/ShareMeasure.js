@@ -38,7 +38,28 @@ $(document).ready(function() {
 				$('#case-studies-form-wrapper .case-studies-tabbed-content ul').children().eq( $(this).closest('li').index() - 1 ).addClass('active');
 			});
 
-			// Toggle SubOptions for Geographic Level Transnational Checkbox
+			
+			// toggle for Europe
+			if ( $('#case-studies-form-wrapper').find('#europe_geo_chars').is(':checked') ) {
+				$('#case-studies-form-wrapper').find('.europe_geochar_class').show();
+			} else {
+				$('#case-studies-form-wrapper').find('.europe_geochar_class').hide();
+			}
+			
+			$('#case-studies-form-wrapper').find('#europe_geo_chars').change(function() {
+				if ( $(this).is(':checked') ) {
+					$('#case-studies-form-wrapper').find('.europe_geochar_class').show();
+				}
+			});
+			
+			$('#case-studies-form-wrapper').find('#global_geo_chars').change(function() {
+				if ( $(this).is(':checked') ) {
+					$('#case-studies-form-wrapper').find('.europe_geochar_class').hide();
+				} 
+			});
+			
+			
+			/*// Toggle SubOptions for Geographic Level Transnational Checkbox
 			if ( $('#case-studies-form-wrapper').find('#transnational').is(':checked') ) {
 				$('#case-studies-form-wrapper').find('.case-studies-tabbed-content-sub-options').show();
 			} else {
@@ -66,10 +87,7 @@ $(document).ready(function() {
 				$('#case-studies-form-wrapper').find('.case-studies-tabbed-content-table-for-lists').show();
 			} else {
 				$('#case-studies-form-wrapper').find('.case-studies-tabbed-content-table-for-lists').hide();
-				/*
-				$('#subnationals_selected').children('option').each(function() {
-					$(this).remove(); 
-				 });*/
+				
 			}
 			
 			// Toggle for city text
@@ -113,7 +131,7 @@ $(document).ready(function() {
 					$('#case-studies-form-wrapper').find('.case-studies-tabbed-content-table-for-translists').hide();
 					
 				}
-			});
+			});*/
 			
 			
 			initWYSIWYG();
@@ -128,7 +146,6 @@ $(document).ready(function() {
 			$('.WYSIWYG').each(function(){	
 				// per-element configuration
 				var tmpID = '#' + $(this).attr('id');
-
 				$(tmpID).next('.case-studies-character-count').html( $(this).text().length + '/' + $(tmpID).attr('data-maxlength') );
 
 				tinymce.init({
@@ -154,6 +171,7 @@ $(document).ready(function() {
 				});
 			});
 		}
+		
 		
 		function removePhotoUploadWrapper(){
 			var indexIncrement = 1;
@@ -206,7 +224,7 @@ $(document).ready(function() {
 				//alert("tmpPos is " + tmpPos);
 				tmpHTML.find('.inputfile').html('<input name="supphotofiles' + tmpPos +'"' +  ' type="file" />');
 				tmpHTML.find('.inputfilename').html('<input type="text" name="sup_photos_names' + tmpPos + '"' + ' size="30" maxlength="255" value="" />');
-				tmpHTML.find('.inputfiledescription').html('<textarea cols="40" rows="10" name="sup_photos_description' + tmpPos + '"' + ' data-maxlength="150"></textarea>');
+				tmpHTML.find('.inputfiledescription').html('<textarea cols="40" rows="10" name="sup_photos_description' + tmpPos + '"' + ' data-maxlength="250"></textarea>');
 				//alert("tmpHTML is " + tmpHTML.html());
 				if (tmpHTML.find('a').length > 0)
 				{

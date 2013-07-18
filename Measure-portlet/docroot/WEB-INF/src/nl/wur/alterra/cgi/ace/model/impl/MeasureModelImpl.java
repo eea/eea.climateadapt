@@ -107,9 +107,10 @@ public class MeasureModelImpl extends BaseModelImpl<Measure>
 			{ "supphotos", new Integer(Types.VARCHAR) },
 			{ "supdocs", new Integer(Types.VARCHAR) },
 			{ "year", new Integer(Types.VARCHAR) },
-			{ "geochars", new Integer(Types.VARCHAR) }
+			{ "geochars", new Integer(Types.VARCHAR) },
+			{ "category", new Integer(Types.VARCHAR) }
 		};
-	public static final String TABLE_SQL_CREATE = "create table Ace_Measure (measureId LONG not null primary key,companyId LONG,groupId LONG,admincomment VARCHAR(2500) null,casestudyfeature VARCHAR(75) null,name VARCHAR(75) null,description VARCHAR(75) null,implementationtype VARCHAR(75) null,implementationtime VARCHAR(75) null,lifetime VARCHAR(75) null,spatiallayer VARCHAR(75) null,spatialvalues VARCHAR(75) null,legalaspects VARCHAR(75) null,stakeholderparticipation VARCHAR(75) null,contact VARCHAR(75) null,objectives VARCHAR(3900) null,challenges VARCHAR(3900) null,adaptationoptions VARCHAR(500) null,solutions VARCHAR(3900) null,relevance VARCHAR(75) null,succeslimitations VARCHAR(75) null,website VARCHAR(75) null,costbenefit VARCHAR(75) null,keywords VARCHAR(75) null,geos_ VARCHAR(75) null,startdate DATE null,enddate DATE null,publicationdate DATE null,specialtagging VARCHAR(75) null,sectors_ VARCHAR(75) null,elements_ VARCHAR(75) null,climateimpacts_ VARCHAR(75) null,mao_type VARCHAR(75) null,source VARCHAR(75) null,rating LONG,importance LONG,lon DOUBLE,lat DOUBLE,satarea VARCHAR(75) null,controlstatus INTEGER,creator VARCHAR(75) null,creationdate DATE null,moderator VARCHAR(75) null,approvaldate DATE null,replacesId LONG,comments VARCHAR(75) null,textwebpage VARCHAR(75) null,primephoto VARCHAR(75) null,supphotos VARCHAR(75) null,supdocs VARCHAR(75) null,year VARCHAR(75) null,geochars VARCHAR(2500) null)";
+	public static final String TABLE_SQL_CREATE = "create table Ace_Measure (measureId LONG not null primary key,companyId LONG,groupId LONG,admincomment VARCHAR(75) null,casestudyfeature VARCHAR(75) null,name VARCHAR(75) null,description VARCHAR(75) null,implementationtype VARCHAR(75) null,implementationtime VARCHAR(75) null,lifetime VARCHAR(75) null,spatiallayer VARCHAR(75) null,spatialvalues VARCHAR(75) null,legalaspects VARCHAR(75) null,stakeholderparticipation VARCHAR(75) null,contact VARCHAR(75) null,objectives VARCHAR(75) null,challenges VARCHAR(75) null,adaptationoptions VARCHAR(75) null,solutions VARCHAR(75) null,relevance VARCHAR(75) null,succeslimitations VARCHAR(75) null,website VARCHAR(75) null,costbenefit VARCHAR(75) null,keywords VARCHAR(75) null,geos_ VARCHAR(75) null,startdate DATE null,enddate DATE null,publicationdate DATE null,specialtagging VARCHAR(75) null,sectors_ VARCHAR(75) null,elements_ VARCHAR(75) null,climateimpacts_ VARCHAR(75) null,mao_type VARCHAR(75) null,source VARCHAR(75) null,rating LONG,importance LONG,lon DOUBLE,lat DOUBLE,satarea VARCHAR(75) null,controlstatus INTEGER,creator VARCHAR(75) null,creationdate DATE null,moderator VARCHAR(75) null,approvaldate DATE null,replacesId LONG,comments VARCHAR(75) null,textwebpage VARCHAR(75) null,primephoto VARCHAR(75) null,supphotos VARCHAR(75) null,supdocs VARCHAR(75) null,year VARCHAR(75) null,geochars VARCHAR(75) null,category VARCHAR(75) null)";
 	public static final String TABLE_SQL_DROP = "drop table Ace_Measure";
 	public static final String ORDER_BY_JPQL = " ORDER BY measure.name ASC";
 	public static final String ORDER_BY_SQL = " ORDER BY Ace_Measure.name ASC";
@@ -746,6 +747,19 @@ public class MeasureModelImpl extends BaseModelImpl<Measure>
 		_geochars = geochars;
 	}
 
+	public String getCategory() {
+		if (_category == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _category;
+		}
+	}
+
+	public void setCategory(String category) {
+		_category = category;
+	}
+
 	public Measure toEscapedModel() {
 		if (isEscapedModel()) {
 			return (Measure)this;
@@ -824,6 +838,7 @@ public class MeasureModelImpl extends BaseModelImpl<Measure>
 		clone.setSupdocs(getSupdocs());
 		clone.setYear(getYear());
 		clone.setGeochars(getGeochars());
+		clone.setCategory(getCategory());
 
 		return clone;
 	}
@@ -869,7 +884,7 @@ public class MeasureModelImpl extends BaseModelImpl<Measure>
 	}
 
 	public String toString() {
-		StringBundler sb = new StringBundler(105);
+		StringBundler sb = new StringBundler(107);
 
 		sb.append("{measureId=");
 		sb.append(getMeasureId());
@@ -975,13 +990,15 @@ public class MeasureModelImpl extends BaseModelImpl<Measure>
 		sb.append(getYear());
 		sb.append(", geochars=");
 		sb.append(getGeochars());
+		sb.append(", category=");
+		sb.append(getCategory());
 		sb.append("}");
 
 		return sb.toString();
 	}
 
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(160);
+		StringBundler sb = new StringBundler(163);
 
 		sb.append("<model><model-name>");
 		sb.append("nl.wur.alterra.cgi.ace.model.Measure");
@@ -1195,6 +1212,10 @@ public class MeasureModelImpl extends BaseModelImpl<Measure>
 			"<column><column-name>geochars</column-name><column-value><![CDATA[");
 		sb.append(getGeochars());
 		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>category</column-name><column-value><![CDATA[");
+		sb.append(getCategory());
+		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");
 
@@ -1253,5 +1274,6 @@ public class MeasureModelImpl extends BaseModelImpl<Measure>
 	private String _supdocs;
 	private String _year;
 	private String _geochars;
+	private String _category;
 	private transient ExpandoBridge _expandoBridge;
 }

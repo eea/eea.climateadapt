@@ -459,6 +459,14 @@ public class MeasureClp extends BaseModelImpl<Measure> implements Measure {
 		_geochars = geochars;
 	}
 
+	public String getCategory() {
+		return _category;
+	}
+
+	public void setCategory(String category) {
+		_category = category;
+	}
+
 	public Measure toEscapedModel() {
 		if (isEscapedModel()) {
 			return this;
@@ -524,6 +532,7 @@ public class MeasureClp extends BaseModelImpl<Measure> implements Measure {
 		clone.setSupdocs(getSupdocs());
 		clone.setYear(getYear());
 		clone.setGeochars(getGeochars());
+		clone.setCategory(getCategory());
 
 		return clone;
 	}
@@ -569,7 +578,7 @@ public class MeasureClp extends BaseModelImpl<Measure> implements Measure {
 	}
 
 	public String toString() {
-		StringBundler sb = new StringBundler(105);
+		StringBundler sb = new StringBundler(107);
 
 		sb.append("{measureId=");
 		sb.append(getMeasureId());
@@ -675,13 +684,15 @@ public class MeasureClp extends BaseModelImpl<Measure> implements Measure {
 		sb.append(getYear());
 		sb.append(", geochars=");
 		sb.append(getGeochars());
+		sb.append(", category=");
+		sb.append(getCategory());
 		sb.append("}");
 
 		return sb.toString();
 	}
 
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(160);
+		StringBundler sb = new StringBundler(163);
 
 		sb.append("<model><model-name>");
 		sb.append("nl.wur.alterra.cgi.ace.model.Measure");
@@ -895,6 +906,10 @@ public class MeasureClp extends BaseModelImpl<Measure> implements Measure {
 			"<column><column-name>geochars</column-name><column-value><![CDATA[");
 		sb.append(getGeochars());
 		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>category</column-name><column-value><![CDATA[");
+		sb.append(getCategory());
+		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");
 
@@ -953,4 +968,5 @@ public class MeasureClp extends BaseModelImpl<Measure> implements Measure {
 	private String _supdocs;
 	private String _year;
 	private String _geochars;
+	private String _category;
 }

@@ -4,6 +4,10 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.JSONValue;
+
 import nl.wur.alterra.cgi.ace.model.Measure;
 import nl.wur.alterra.cgi.ace.service.MeasureLocalServiceUtil;
 
@@ -60,7 +64,7 @@ public class MeasureValidator {
 				valid = false;
 			}
 			
-			if (Validator.isNull(measure.getObjectives())) {
+			if (Validator.isNull(measure.getObjectives()) && measure.getMao_type().equalsIgnoreCase("A")) {
 				errors.add("objectives-required");
 				valid = false;
 			}
@@ -78,25 +82,25 @@ public class MeasureValidator {
 				valid = false;
 			}
 			
-			if (Validator.isNull(measure.getAdaptationoptions()))
+			if (Validator.isNull(measure.getAdaptationoptions()) && measure.getMao_type().equalsIgnoreCase("A") )
 			{
 				errors.add("adaptationOptions-required");
 				valid = false;
 			}
 
-			if (Validator.isNull(measure.getChallenges()))
+			if (Validator.isNull(measure.getChallenges()) && measure.getMao_type().equalsIgnoreCase("A"))
 			{
 				errors.add("challenges-required");
 				valid = false;
 			}
 			
-			if (Validator.isNull(measure.getSolutions()))
+			if (Validator.isNull(measure.getSolutions()) && measure.getMao_type().equalsIgnoreCase("A") )
 			{
 				errors.add("solutions-required");
 				valid = false;
 			}
 			
-			if (Validator.isNull(measure.getRelevance()))
+			if (Validator.isNull(measure.getRelevance()) && measure.getMao_type().equalsIgnoreCase("A"))
 			{
 				errors.add("adaptationRelevance-required");
 				valid = false;
@@ -153,7 +157,7 @@ public class MeasureValidator {
 				valid = false;
 			}*/
 			
-			if (Validator.isNull(measure.getContact()))
+			if (Validator.isNull(measure.getContact()) && measure.getMao_type().equalsIgnoreCase("A") )
 			{
 				errors.add("contact-required");
 				valid = false;
@@ -171,18 +175,18 @@ public class MeasureValidator {
 				valid = false;
 			}*/
 			
-			if (Validator.isNull(measure.getPrimephoto()))
+			if (Validator.isNull(measure.getPrimephoto()) && measure.getMao_type().equalsIgnoreCase("A") )
 			{
 				errors.add("photo-required");
 				valid = false;
 			}
 			
-			if (Validator.isNull(measure.getYear()))
+			if (Validator.isNull(measure.getYear()) && measure.getMao_type().equalsIgnoreCase("A") )
 			{
 					errors.add("year-required");
 					valid = false;
 			}
-			else
+			else if (measure.getMao_type().equalsIgnoreCase("A"))
 			{
 			      /* Pattern p = Pattern.compile("[2][0]\\d\\d");
 			       Matcher m = p.matcher(measure.getYear());
@@ -205,35 +209,40 @@ public class MeasureValidator {
 				}
 			}
 			
-			if (Validator.isNull(measure.getGeochars()))
+			System.out.println("geoChars is " + measure.getGeochars());
+			if (Validator.isNull(measure.getGeochars()) && measure.getMao_type().equalsIgnoreCase("A") )
 			{
 					errors.add("geo-characterization-required");
 					valid = false;
 			}
-			else
+			else if (Validator.isNotNull(measure.getGeochars()))
 			{
-				 String choosenGeoChars = measure.getGeochars();
-				 if (choosenGeoChars.contains("SUBNATIONAL") || choosenGeoChars.contains("CITY"))
-			     {
-			        	if (choosenGeoChars.split("\\^").length <= 1)
-			        	{
-			        		// add error message
-			    		    errors.add("geo-characterization-required");
-			    		    valid = false;
-			        	}
-			     }
-				 else if (choosenGeoChars.contains("TRANSNATIONAL"))
-				 {
-					 if (choosenGeoChars.split("\\^").length <= 2)
-			         {
-			        		// add error message
-			    		    errors.add("geo-characterization-required"); 
-			    		    valid = false;
-			        }
-				 }
+				Object obj=JSONValue.parse(measure.getGeochars());
+				JSONObject jsonObject = (JSONObject) obj;
+				JSONObject geoElements = (JSONObject) jsonObject.get("geoElements");
+				String element = (String) geoElements.get("element");
 				
+				if (element.length() == 0 && measure.getMao_type().equalsIgnoreCase("A"))
+				{
+					errors.add("geo-characterization-required"); 
+	    		    valid = false;
+				}
+				else if (element.equalsIgnoreCase("EUROPE"))
+				{
+					JSONArray macroTrans = (JSONArray) geoElements.get("macrotrans");
+					JSONArray bioTrans = (JSONArray) geoElements.get("biotrans");
+					JSONArray countries = (JSONArray) geoElements.get("countries");
+					JSONArray subnationals = (JSONArray) geoElements.get("subnational");
+					String city = (String) geoElements.get("city");
+					
+					if (macroTrans.size() == 0 && bioTrans.size() == 0 && countries.size() == 0 && subnationals.size() == 0 && city.trim().length() == 0 )
+					{
+						errors.add("geo-characterization-required"); 
+		    		    valid = false;
+					}
+					
+				}
 			}
-		
 			
 			if (errors.size() > 0)
 			{
@@ -241,8 +250,7 @@ public class MeasureValidator {
 			}
 			
 		}
-		
-		//System.out.println("returning from VALIDATOR");
+	
 
 		return valid;
 	}
