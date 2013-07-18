@@ -74,15 +74,18 @@
 		DynamicQuery query = DynamicQueryFactoryUtil.forClass(Measure.class);
 		query.add(PropertyFactoryUtil.forName("moderator").like(moderator));
 		query.add(PropertyFactoryUtil.forName("controlstatus").eq(new Short((short)-1)));
+		query.add(PropertyFactoryUtil.forName("mao_type").eq(mao_type));
 		List results = MeasureLocalServiceUtil.dynamicQuery(query);
 		
 		if (results != null && results.size() > 0)
 		{
-			
+			if (mao_type.equalsIgnoreCase("A")) {
 		%>
 		   <span style="text-decoration:underline;text-style:normal;">Saved Case Studies:</span><br/><br/>
-		  
+		<% } else { %>
+		   <span style="text-decoration:underline;text-style:normal;">Adaptation Options:</span><br/><br/>
 		<% 
+		   }
 		   List<Measure> listOfMeasure = (List<Measure>) results;
 		
 		
