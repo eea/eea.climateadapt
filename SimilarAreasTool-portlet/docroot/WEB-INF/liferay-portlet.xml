@@ -24,6 +24,7 @@
 		<header-portlet-javascript>/js/chm/control/locator/candidate/CandidatesStore.js</header-portlet-javascript>
 		<header-portlet-javascript>/js/chm/control/locator/Locator.js</header-portlet-javascript>
 		<header-portlet-javascript>/js/chm/control/grid/GridControl.js</header-portlet-javascript>
+		<header-portlet-javascript>/js/chm/control/legend/LegendControl.js</header-portlet-javascript>
 		<header-portlet-javascript>/js/chm/control/options/OptionsControl.js</header-portlet-javascript>
 		<header-portlet-javascript>/js/chm/control/locator/LocatorControl.js</header-portlet-javascript>
 		<header-portlet-javascript>/js/chm/control/map/MapControl.js</header-portlet-javascript>

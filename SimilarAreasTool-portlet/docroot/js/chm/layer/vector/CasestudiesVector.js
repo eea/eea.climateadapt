@@ -128,8 +128,6 @@ CHM.Layer.Vector.CasestudiesVector = OpenLayers.Class(OpenLayers.Layer.Vector, {
 	},
 	
 	applyFilters : function() {
-		console.log(this.name + ': ' + this.extent + ' ' + this.area + ' ' + this.risk + ' ' + this.sector);
-		
         this.removeAllFeatures();
      	
 		var filters = new Array();
@@ -180,16 +178,6 @@ CHM.Layer.Vector.CasestudiesVector = OpenLayers.Class(OpenLayers.Layer.Vector, {
 				this.read(filter);
 			}
 		}
-			
-//			if (areafilter == null && (riskfilter != null || sectorfilter != null)) {
-//			if (this.type == OpenLayers.Filter.Comparison.NOT_EQUAL_TO) {
-//				this.read(filter);
-//			}
-//		} else {
-//			if (this.type == OpenLayers.Filter.Comparison.NOT_EQUAL_TO) {
-//				this.read(null);
-//			}
-//		}
 	}, 
 	
 	read: function(aFilter) {

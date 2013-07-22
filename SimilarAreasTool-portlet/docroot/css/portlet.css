@@ -15,6 +15,14 @@
 	clear: none;
 }
 
+.csst-legend-image {
+	text-align: center;
+}
+
+.csst-legend-text {
+	padding: 2px;
+}
+
 /**** Styling of the similar areas tool 
 The SAT does NOT have a seperate layout template. 
 To retrieve the appropiate styling is it therefore

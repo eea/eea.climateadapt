@@ -16,6 +16,8 @@
     };
     window.CHM.Control.Locator.Candidate = {
     };
+    window.CHM.Control.Legend = {
+    };
     window.CHM.Control.Map = {
     };
     window.CHM.Control.Options = {

@@ -8,6 +8,8 @@ CHM.Application = Ext.extend(Ext.Panel,  {
 	
 	optionsControl: null,
 	
+	legendControl: null,
+	
 	locatorControl: null,
 	
 	gridControl: null,
@@ -62,11 +64,13 @@ CHM.Application = Ext.extend(Ext.Panel,  {
     	
     	this.locatorControl = new CHM.Control.Locator.LocatorControl({width: this.width / 4 * 2 - (this.margin / 2) - this.margin, height: this.height / 8 * 1 - this.margin - (this.margin / 2), x: this.width / 4 * 2 + (this.margin / 2), y: this.margin});
     	
-    	this.optionsControl = new CHM.Control.Options.OptionsControl({width: this.width / 4 * 1 - (this.margin / 2) - this.margin, height: this.height / 8 * 1 - (this.margin / 2) - (this.margin / 2), x: this.width / 4 * 3 + (this.margin / 2), y: this.height / 8 * 1 + (this.margin / 2)});
+    	this.optionsControl = new CHM.Control.Options.OptionsControl({width: this.width / 4 * 1 - (this.margin / 2) - this.margin, height: this.height / 8 * 1.5 - (this.margin / 2) - (this.margin / 2), x: this.width / 4 * 3 + (this.margin / 2), y: this.height / 8 * 1 + (this.margin / 2)});
+    	
+    	this.legendControl = new CHM.Control.Legend.LegendControl({width: this.width / 4 * 1 - (this.margin / 2) - this.margin, height: this.height / 8 * 1.5 - (this.margin / 2) - (this.margin / 2), x: this.width / 4 * 3 + (this.margin / 2), y: this.height / 8 * 2.5 + (this.margin / 2) + this.margin});
     	
 		this.defaults = {collapsible : false, split : true};
 
-		this.items = [panel, this.mapControl, this.gridControl, this.locatorControl, this.optionsControl];
+		this.items = [panel, this.mapControl, this.gridControl, this.locatorControl, this.optionsControl, this.legendControl];
     	
     	CHM.Application.superclass.initComponent.call(this);
     	
