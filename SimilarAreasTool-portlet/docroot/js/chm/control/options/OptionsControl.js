@@ -17,6 +17,10 @@ CHM.Control.Options.OptionsControl = Ext.extend(Ext.Panel, {
 	sectorSelect: null,
 	
     initComponent : function() {
+    	this.id = 'csst-options';
+    	
+    	this.cls = 'csst-panel';
+    	
     	this.layout = 'anchor';
     	
     	this.optionsLabel = new Ext.form.Label({html: '<h1 class="portlet-title"><span class="portlet-title-text">' + this.options + '</span></h1>'});

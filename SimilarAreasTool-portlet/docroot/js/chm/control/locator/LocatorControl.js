@@ -21,6 +21,10 @@ CHM.Control.Locator.LocatorControl = Ext.extend(Ext.Panel, {
 	candidatesPanel: null,
 	
     initComponent : function() {
+    	this.id = 'csst-locator';
+    	
+    	this.cls = 'csst-panel';
+    	
     	this.layout = 'anchor';
     	
     	this.border = false;

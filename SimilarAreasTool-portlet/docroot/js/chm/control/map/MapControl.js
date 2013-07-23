@@ -3,6 +3,10 @@ CHM.Control.Map.MapControl = Ext.extend(GeoExt.MapPanel, {
 	map: null,
 	
     initComponent : function() {
+    	this.id = 'csst-map';
+    	
+    	this.cls = 'csst-panel';
+    	
     	this.border = true;
     	
     	this.map = new CHM.Control.Map.Map();

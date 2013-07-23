@@ -13,6 +13,10 @@ CHM.Control.Grid.GridControl = Ext.extend(Ext.Panel, {
 	dissimilarAreasGridPanel : null,
 
 	initComponent : function() {
+    	this.id = 'csst-grid';
+    	
+    	this.cls = 'csst-panel';
+    	
 		this.layout = 'anchor';
 
 		this.frame = false;

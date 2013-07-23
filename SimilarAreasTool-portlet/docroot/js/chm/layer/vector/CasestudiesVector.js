@@ -78,6 +78,7 @@ CHM.Layer.Vector.CasestudiesVector = OpenLayers.Class(OpenLayers.Layer.Vector, {
 		session.tooltip = new Ext.ToolTip({        
             title: '<a href="' + event.feature.attributes.website + '">' + event.feature.attributes.itemname + '</a>',
             anchor: 'left',
+            cls: 'csst-tooltip', 
             html: "<table width='100%' border='0'>" +
             "<tr><td>" + description + "</td></tr>" + 
             "<tr><td><a href='/viewmeasure?ace_measure_id=" + event.feature.attributes.measureid + "' target='_blank'>read more</a></td></tr>" + 

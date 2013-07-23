@@ -9,9 +9,9 @@ CHM.Control.Legend.LegendControl = Ext.extend(Ext.Panel, {
     initComponent : function() {
     	this.layout = 'anchor';
     	
-    	this.id = 'legend-panel';
+    	this.id = 'csst-legend';
     	
-    	this.cls = 'csst-legend';
+    	this.cls = 'csst-panel';
     	
     	this.legendLabel = new Ext.form.Label({html: '<h1 class="portlet-title"><span class="portlet-title-text">' + this.legend + '</span></h1>'});
     	
