@@ -7,7 +7,7 @@ CHM.Control.Map.MapControl = Ext.extend(GeoExt.MapPanel, {
     	
     	this.cls = 'csst-panel';
     	
-    	this.border = true;
+    	this.border = false;
     	
     	this.map = new CHM.Control.Map.Map();
     	

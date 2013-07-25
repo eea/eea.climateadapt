@@ -25,7 +25,7 @@ CHM.Control.Options.OptionsControl = Ext.extend(Ext.Panel, {
     	
     	this.optionsLabel = new Ext.form.Label({html: '<h1 class="portlet-title"><span class="portlet-title-text">' + this.options + '</span></h1>'});
     	
-    	this.riskLabel = new Ext.form.Label({text: this.risk});
+    	this.riskLabel = new Ext.form.Label({cls: 'risk-sector-label', text: this.risk});
     	
     	this.riskSelect = new Ext.form.ComboBox({
     	    typeAhead: true,
@@ -39,7 +39,7 @@ CHM.Control.Options.OptionsControl = Ext.extend(Ext.Panel, {
     	
     	this.riskSelect.addListener('select', this.handleRiskSelect, this);
     	
-    	this.sectorLabel = new Ext.form.Label({text: this.sector});
+    	this.sectorLabel = new Ext.form.Label({cls: 'risk-sector-label', text: this.sector});
     	
     	this.sectorSelect = new Ext.form.ComboBox({
     	    typeAhead: true,

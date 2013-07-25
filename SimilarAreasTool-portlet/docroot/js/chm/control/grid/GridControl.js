@@ -6,6 +6,18 @@ CHM.Control.Grid.GridControl = Ext.extend(Ext.Panel, {
 	
 	searchResultsPanel: null,
 	
+	searchResultsSimilar: 'Case studies in similar biogeographical region',
+	
+	searchResultsSimilarLabel: null,
+	
+	searchResultsSimilarPanel: null,
+	
+	searchResultsDissimilar: 'Case studies in non-similar biogeographical region',
+	
+	searchResultsDissimilarLabel: null,
+	
+	searchResultsDissimilarPanel: null,
+	
 	spacer: null,
 	
 	similarAreasGridPanel : null,
@@ -32,34 +44,56 @@ CHM.Control.Grid.GridControl = Ext.extend(Ext.Panel, {
 			border: false,
 			items: [this.searchResultsLabel]
 		});
+		
+		this.searchResultsSimilarLabel = new Ext.form.Label({
+			html: '<h2 class="csst-grid-subheader"><span class="portlet-title-text">' + this.searchResultsSimilar + '</span></h2>'
+		});
+		
+		this.searchResultsSimilarPanel = new Ext.Panel({
+			anchor : '100% 6%',
+			border: false,
+			items: [this.searchResultsSimilarLabel]
+		});
 
 		this.similarAreasGridPanel = new Ext.grid.GridPanel({
+			id: 'csst-search-results-similar',
 			ref : 'similarAreasFeatureGrid',
 			frame : false,
-	    	border: true,
+	    	border: false,
 			sm : new GeoExt.grid.FeatureSelectionModel(),
 			cm : this.createSimilarAreaColumnModel(),
 			store : this.createStore(),
 			autoExpandColumn : 'itemname',
-			anchor : '100% 45%',
+			anchor : '100% 39%',
 			hideHeaders : true
 		});
 		
 		this.spacer = new Ext.Spacer({anchor: '100% 1%'});
-
+		
+		this.searchResultsDissimilarLabel = new Ext.form.Label({
+			html: '<h2 class="csst-grid-subheader"><span class="portlet-title-text">' + this.searchResultsDissimilar + '</span></h2>'
+		});
+		
+		this.searchResultsDissimilarPanel = new Ext.Panel({
+			anchor : '100% 6%',
+			border: false,
+			items: [this.searchResultsDissimilarLabel]
+		});
+		
 		this.dissimilarAreasGridPanel = new Ext.grid.GridPanel({
+			id: 'csst-search-results-dissimilar',
 			ref : 'dissimilarAreasFeatureGrid',
 			frame : false,
-	    	border: true,
+	    	border: false,
 			sm : new GeoExt.grid.FeatureSelectionModel(),
 			cm : this.createDissimilarAreaColumnModel(),
 			store : this.createStore(),
 			autoExpandColumn : 'itemname',
-			anchor : '100% 44%',
+			anchor : '100% 38%',
 			hideHeaders : true
 		});
 
-		this.items = [ this.searchResultsPanel, this.similarAreasGridPanel, this.spacer, this.dissimilarAreasGridPanel ];
+		this.items = [ this.searchResultsPanel, this.searchResultsSimilarPanel, this.similarAreasGridPanel, this.spacer, this.searchResultsDissimilarPanel, this.dissimilarAreasGridPanel ];
 
 		CHM.Control.Grid.GridControl.superclass.initComponent.call(this);
 	},

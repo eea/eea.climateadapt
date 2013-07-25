@@ -45,7 +45,7 @@ CHM.Control.Locator.LocatorControl = Ext.extend(Ext.Panel, {
     	
     	this.button.addListener('click', this.handleLocateButtonClick, this);
     	
-    	this.panel = new Ext.Panel({anchor: '100%', border: false, items: [this.locationTextField, {xtype: 'label', html: '&nbsp;'}, this.button], layout: 'column'});
+    	this.panel = new Ext.Panel({anchor: '100%', border: false, items: [this.locationTextField, this.button], layout: 'column'});
     	
     	this.panel.addListener('resize', this.resize, this);
     	
@@ -69,7 +69,8 @@ CHM.Control.Locator.LocatorControl = Ext.extend(Ext.Panel, {
    	    	store: session.candidatesStore,
             sm: this.candidatesSelectionModel,
             autoExpandColumn: 'address',
-            border: true,
+            border: false,
+            id: 'locator-results',
             hideHeaders: true
    	    });
     	

@@ -3,16 +3,75 @@
    height: 968px;
 }
 
-.x-help {
-	background-image: url(images/help.png) !important;
+/* Setting font sizes for the different headings */
+
+#csst_element .portlet-title {
+	color: #666;
+	font-size: 25px;
+	font-style: normal;
+	font-weight: bold;
+	padding-right: 15px;
+	text-decoration: none;
+}
+
+#csst-options .portlet-title,
+#csst-legend .portlet-title {
+	color: #333;
+	font-size: 13px;
+	line-height: 13px;
+}
+
+#csst-options .portlet-title {
+	padding-bottom: 0;
+}
+
+#csst-grid .portlet-title {
+	color: #333;
+	font-size: 16px;
+	padding-top: 20px;
+}
+
+.csst-grid-subheader {
+	font-size: 13px;
+	margin: 7px 0;
+	padding-top: 0;
+}
+
+/* Fixes the input fields on IE */
+#csst-locator input[type='text'],
+#csst-options input[type='text'] {
+	margin-top: 0;
+	padding: 1px;
+}
+
+/* Locator and locator results window */
+#locator-textfield {
+	margin-right: 2px;
 }
 
 #locate-button {
 	clear: none;
 }
 
-#help-button {
-	clear: none;
+#locator-results,
+#csst-search-results-similar,
+#csst-search-results-dissimilar {
+	border: 1px solid #DEDEDE;
+}
+
+/* Risks and sectors options */
+.risk-sector-label {
+	color: #333;
+	display: block;
+	font-size: 11px;
+	font-weight: bold;
+	padding-bottom: 4px;
+	padding-top: 15px;
+}
+
+/* Legend */
+#csst-legend tr {
+	height: 35px;
 }
 
 .csst-legend-image {
@@ -20,146 +79,20 @@
 }
 
 .csst-legend-text {
-	padding: 2px;
+	font-size: 10px;
+	padding-left: 5px;
 }
 
-/**** Styling of the similar areas tool 
-The SAT does NOT have a seperate layout template. 
-To retrieve the appropiate styling is it therefore
-necessary to add the class sat-text to the instruction 
-text and the class sat-map to the SimilarAreasToolPortlet.
-****/
-/*
-.sat-text {
-	background-color: #D2DE92;
+/* Search results */
+#csst-grid {
+	border-top: 2px solid #D7E3EF;
 }
 
-.sat-text .portlet-topper {
-	padding: 15px 15px 0;
+/* Help tooltip button */
+#help-button {
+	clear: none;
 }
 
-.sat-text .portlet-title {
-	color: #758816;
-}
-
-.sat-text .portlet-content {
-	padding:0 15px;
-}
-
-.sat-text .portlet-content p {
-	color: #353F02;
-}
-
-.sat-text,
-.sat-map #legend_element {
-	float: right;
-	width: 269px;
-}
-
-.sat-map {
-	width: 700px;
-}
-
-.sat-map #locations_element {
-	height: 40px;
-	margin-bottom: 10px;
-	overflow: auto;
-	width: 190px;
-}
-
-.sat-map #map_element {
-	height: 350px;
-	width: 670px;
-}
-
-.sat-map form {
-	clear: both;
-	float:right;
-	margin-right: 25px;
-}
-
-.sat-map #risk-select {
-	left: 345px;
-	position: absolute;
-	top: 0;
-}
-
-.sat-map #risk-select label {
-	padding-right: 25px;
-}
-
-.sat-map #risk-select select {
-	width: 175px;
-}
-
-.sat-map #sector-select {
-	left: 345px;
-	position: absolute;
-	top: 30px;
-}
-
-.sat-map #sector-select label {
-	padding-right: 3px;
-}
-
-.sat-map #sector-select select {
-	width: 175px;
-}
-
-.sat-map #legend_element {
-	background-color: #D2DE92;
-	color: #353F02;
-	display: none;
-	margin: -151px -254px 0 0;
-}
-
-#legend-title {
-	color: #758816;
-	font-size: 14px;
-	padding-left: 15px;
-}
-
- adjustment of legend items
-.sat-map #ext-comp-1002 {
-	padding-left: 15px
-}
-
-.sat-map #ext-comp-1003 {
-	/*display: none;
-	clear: both;
-	float: left;
-	margin-bottom: 5px;
-}
-
-.sat-map #ext-comp-1004 {
-	display: none;
-	/*clear: both;
-	float: left;
-}
-
-.sat-map #ext-comp-1005 {
-	left: -151px;
-}
-
-.sat-map #ext-comp-1007 {
-	left: -180px;
-}
-
-.sat-map #ext-comp-1009 {
-	left: -65px;
-}
-
-.sat-map #ext-comp-1011 {
-	left: -75px;
-}
-
-.sat-map #ext-comp-1005,
-.sat-map #ext-comp-1007,
-.sat-map #ext-comp-1009,
-.sat-map #ext-comp-1011 {
-	clear: both;
-	float:right;
-	margin-bottom: 10px;
-	position:relative;
-	top:2px;
+.x-help {
+	background-image: url(images/help.png) !important;
 }
