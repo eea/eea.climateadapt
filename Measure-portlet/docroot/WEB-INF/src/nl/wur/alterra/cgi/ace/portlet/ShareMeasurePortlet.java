@@ -83,6 +83,7 @@ public class ShareMeasurePortlet extends MeasureUpdateHelperForSharedMeasure {
 		
 
 		if (MeasureValidator.validateMeasure(measure, errors)) {
+			
 			MeasureLocalServiceUtil.addMeasure(measure);
 
 			// create an AceItem for this measure
@@ -113,6 +114,7 @@ public class ShareMeasurePortlet extends MeasureUpdateHelperForSharedMeasure {
 			for (String error : errors) {
 				SessionErrors.add(request, error);
 			}
+			SessionErrors.add(request, "invalid-form-data");
 
 			PortalUtil.copyRequestParameters(request, response);
 			request.setAttribute("measure", measure);
@@ -187,6 +189,7 @@ public class ShareMeasurePortlet extends MeasureUpdateHelperForSharedMeasure {
 					SessionErrors.add(request, error);
 				}
 
+				SessionErrors.add(request, "invalid-form-data");
 				//PortalUtil.copyRequestParameters(request, response);
 				request.setAttribute("measureId", measure.getMeasureId());
 

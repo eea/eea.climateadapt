@@ -328,6 +328,7 @@
 <portlet:actionURL name='<%= measure == null ? "addMeasure" : "updateMeasure" %>' var="editMeasureURL" />	
 
 <aui:form action="<%= editMeasureURL %>" method="POST" name="fm" enctype="multipart/form-data" id="fm">
+    <liferay-ui:error key="invalid-form-data" message="The form has errors please correct them" />
 	<aui:input type="hidden" name="mao_type" value="<%= mao_type %>" />
 	<aui:input type="hidden" name="redirect" value="<%= redirect %>" />
 	<aui:input type="hidden" name="measureId" value='<%= measure == null ? "" : measure.getMeasureId() %>'/>
@@ -2101,7 +2102,7 @@
 										<input name="satarea" id="satarea" type="text" size="50" maxlength="254" value='<%= measure == null ? "" : measure.getSatarea() %>' disabled="disabled">
 									  </div>
 
-										
+										<div id='map_element'></div>
 											 <script>
 												var proxyUrl = '<%= prefs.getValue(Constants.proxyUrlPreferenceName, "") %>';
 												
@@ -2571,7 +2572,8 @@
 										</ul>
 									</div>
 								</div>
-
+                              </div> <!-- end of case-studies-tabbed-content-review-column-left  -->
+                              
 							   <div class="case-studies-tabbed-content-review-column-right">
 								 <%
 								   if (Validator.isNotNull(measure.getSupphotos())) { %>
