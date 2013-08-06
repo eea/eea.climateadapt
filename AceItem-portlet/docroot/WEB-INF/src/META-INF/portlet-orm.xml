@@ -53,6 +53,9 @@
 			<basic name="replacesId" />
 			<basic name="comments" />
 			<basic name="textwebpage" />
+			<basic name="year" />
+			<basic name="geochars" />
+			<basic name="feature" />
 			<transient name="primaryKey" />
 		</attributes>
 	</mapped-superclass>

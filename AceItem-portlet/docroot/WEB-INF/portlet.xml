@@ -145,7 +145,7 @@
     	</portlet-class>
     	<init-param>
     		<name>view-jsp</name>
-    		<value>/html/aceitemdetail/view.jsp</value>
+    		<value>/html/aceitemdetail/aceitemview.jsp</value>
     	</init-param>
     	<expiration-cache>0</expiration-cache>
     	<supports>

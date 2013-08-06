@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2010 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2011 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -306,6 +306,30 @@ public class AceItemWrapper implements AceItem {
 
 	public void setTextwebpage(java.lang.String textwebpage) {
 		_aceItem.setTextwebpage(textwebpage);
+	}
+
+	public java.lang.String getYear() {
+		return _aceItem.getYear();
+	}
+
+	public void setYear(java.lang.String year) {
+		_aceItem.setYear(year);
+	}
+
+	public java.lang.String getGeochars() {
+		return _aceItem.getGeochars();
+	}
+
+	public void setGeochars(java.lang.String geochars) {
+		_aceItem.setGeochars(geochars);
+	}
+
+	public java.lang.String getFeature() {
+		return _aceItem.getFeature();
+	}
+
+	public void setFeature(java.lang.String feature) {
+		_aceItem.setFeature(feature);
 	}
 
 	public nl.wur.alterra.cgi.ace.model.AceItem toEscapedModel() {

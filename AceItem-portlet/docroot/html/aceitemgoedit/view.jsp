@@ -10,6 +10,7 @@
 		AceItem aceitem = null;
 		
 		String moderator = "";
+		boolean userInRole = false;
 		
 		String newModerator = user.getFullName() + " (" + user.getEmailAddress() + ")" ;  ;	
 		
@@ -32,15 +33,16 @@
 					|| renderRequest.isUserInRole("administrator")
 					|| renderRequest.isUserInRole("Power User")) {
 				
-				editUrl = prefs.getValue(Constants.EDITURL,"/web/guest/aceitems1?p_p_id=aceitemportlet_WAR_AceItemportlet&p_p_lifecycle=0&p_p_state=normal&p_p_mode=view&p_p_col_id=column-1&p_p_col_count=1&_aceitemportlet_WAR_AceItemportlet_jspPage=%2Fhtml%2Faceitem%2Fedit_aceitem.jsp&_aceitemportlet_WAR_AceItemportlet_redirect=%2Fweb%2Fguest%2Faceitems1&_aceitemportlet_WAR_AceItemportlet_aceItemId=") ;
-
+				//editUrl = prefs.getValue(Constants.EDITURL,"/web/guest/aceitems1?p_p_id=aceitemportlet_WAR_AceItemportlet&p_p_lifecycle=0&p_p_state=normal&p_p_mode=view&p_p_col_id=column-1&p_p_col_count=1&_aceitemportlet_WAR_AceItemportlet_jspPage=%2Fhtml%2Faceitem%2Fedit_aceitem.jsp&_aceitemportlet_WAR_AceItemportlet_redirect=%2Fweb%2Fguest%2Faceitems1&_aceitemportlet_WAR_AceItemportlet_aceItemId=") ;
+                userInRole = true;
 			}
-			else if ( (moderator.indexOf(newModerator) > -1) && (aceitem.getControlstatus() >= ACEIndexUtil.Status_APPROVED) ) {
+			
+			if ( (moderator.indexOf(newModerator) > -1) && (aceitem.getControlstatus() >= ACEIndexUtil.Status_APPROVED) ) {
 %>
 				(Editing this item is no longer permitted for it has been approved.)
  				<BR/><BR/>			
 <%			}			
-			else if ( (moderator.indexOf(newModerator) > -1) && ((aceitem.getControlstatus() == ACEIndexUtil.Status_DRAFT) || (aceitem.getControlstatus() == ACEIndexUtil.Status_SUBMITTED))) { 
+			else if (userInRole || (moderator.indexOf(newModerator) > -1) && ((aceitem.getControlstatus() == ACEIndexUtil.Status_DRAFT) || (aceitem.getControlstatus() == ACEIndexUtil.Status_SUBMITTED))) { 
 				
 				if(aceitem.getDatatype().equalsIgnoreCase( AceItemType.DOCUMENT.toString() )) {  
 					editUrl = prefs.getValue(Constants.PUBLICATIONSHAREEDITURL,"/web/guest/share-your-info/publications-and-reports?p_p_id=shareaceitemportlet_WAR_AceItemportlet_INSTANCE_A8ua&p_p_lifecycle=0&p_p_state=normal&p_p_mode=view&p_p_col_id=column-2&p_p_col_count=1&_shareaceitemportlet_WAR_AceItemportlet_INSTANCE_A8ua_jspPage=%2Fhtml%2Fshareinfo%2Fadd_aceitem.jsp&_shareaceitemportlet_WAR_AceItemportlet_INSTANCE_A8ua_redirect=%2Fen%2Fshare-your-info%2Fpublications-and-reports&_shareaceitemportlet_WAR_AceItemportlet_INSTANCE_A8ua_aceItemId=") ;
@@ -62,10 +64,7 @@
 			
 			editUrl += "" + aceitemId ;
 			
-			if (renderRequest.isUserInRole("Portal Content Reviewer") 
-					|| renderRequest.isUserInRole("administrator")
-					|| renderRequest.isUserInRole("Power User")
-					|| ( (moderator.indexOf(newModerator) > -1) && ((aceitem.getControlstatus() == ACEIndexUtil.Status_DRAFT) || (aceitem.getControlstatus() == ACEIndexUtil.Status_SUBMITTED)) ) ) { 
+			if (userInRole || ((moderator.indexOf(newModerator) > -1) && ((aceitem.getControlstatus() == ACEIndexUtil.Status_DRAFT) || (aceitem.getControlstatus() == ACEIndexUtil.Status_SUBMITTED)) ) ) { 
 %>		 
 				<input type="button" value="Edit" onClick="document.location.href='<%= editUrl %>';">
  				<BR/><BR/>	 

@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2010 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2011 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -295,6 +295,27 @@ public class ClpSerializer {
 					String value33 = oldCplModel.getTextwebpage();
 
 					method33.invoke(newModel, value33);
+
+					Method method34 = newModelClass.getMethod("setYear",
+							new Class[] { String.class });
+
+					String value34 = oldCplModel.getYear();
+
+					method34.invoke(newModel, value34);
+
+					Method method35 = newModelClass.getMethod("setGeochars",
+							new Class[] { String.class });
+
+					String value35 = oldCplModel.getGeochars();
+
+					method35.invoke(newModel, value35);
+
+					Method method36 = newModelClass.getMethod("setFeature",
+							new Class[] { String.class });
+
+					String value36 = oldCplModel.getFeature();
+
+					method36.invoke(newModel, value36);
 
 					return newModel;
 				}
@@ -852,6 +873,27 @@ public class ClpSerializer {
 							(Object[])null);
 
 					newModel.setTextwebpage(value33);
+
+					Method method34 = oldModelClass.getMethod("getYear");
+
+					String value34 = (String)method34.invoke(oldModel,
+							(Object[])null);
+
+					newModel.setYear(value34);
+
+					Method method35 = oldModelClass.getMethod("getGeochars");
+
+					String value35 = (String)method35.invoke(oldModel,
+							(Object[])null);
+
+					newModel.setGeochars(value35);
+
+					Method method36 = oldModelClass.getMethod("getFeature");
+
+					String value36 = (String)method36.invoke(oldModel,
+							(Object[])null);
+
+					newModel.setFeature(value36);
 
 					return newModel;
 				}

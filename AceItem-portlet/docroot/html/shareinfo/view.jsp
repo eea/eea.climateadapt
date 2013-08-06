@@ -23,23 +23,29 @@
 
 	String typedescription = "";
 	String literal = "a ";
+	String aceItemType = "";
 
    if (sharetype.equalsIgnoreCase(AceItemType.DOCUMENT.toString())) {
 	   typedescription = "publication or report";
+	   aceItemType = "Publication and Reports";
    }
    else if (sharetype.equalsIgnoreCase(AceItemType.INFORMATIONSOURCE.toString())) {
 	   typedescription = "information portal";
 	   literal = "an ";
+	   aceItemType = "Information Portal";
    }
    else if (sharetype.equalsIgnoreCase(AceItemType.GUIDANCE.toString())) {
 	   typedescription = "guidance document";
+	   aceItemType = "Guidance Document";
    }
    else if (sharetype.equalsIgnoreCase(AceItemType.TOOL.toString())) {
 	   typedescription = "tool";
+	   aceItemType = "Tools";
    }
    else if (sharetype.equalsIgnoreCase(AceItemType.ORGANISATION.toString())) {
 	   typedescription = "organisation";
 	   literal = "an ";
+	   aceItemType = "Organization";
    }
 
    if ( ! renderRequest.isUserInRole("user") ) {
@@ -52,36 +58,70 @@
 
 	long aceitemId = 0;
 
-	AceItem aceitem = null;
+	AceItem aceitemFromMail = null;
 
 	try {
 		aceitemId = Long.parseLong( (String) renderRequest.getPortletSession().getAttribute("lastAddedAceItemId") );
 
 		if (aceitemId > 0) {
-			aceitem = AceItemLocalServiceUtil.getAceItem(aceitemId);
+			aceitemFromMail = AceItemLocalServiceUtil.getAceItem(aceitemId);
 		}
 	}
 	catch (Exception e) {
-		aceitem = null;
+		aceitemFromMail = null;
 	}
 
 %>
+
+    <!-- link for adding new ace item -->
 	<portlet:renderURL var="addAceItemURL">
 		<portlet:param name="jspPage" value="/html/shareinfo/add_aceitem.jsp" />
-		<portlet:param name="redirect" value="<%= redirect %>" />
 	</portlet:renderURL>
 
-	<a href='<%= addAceItemURL.toString() %>'>Add <%= literal %><%= typedescription %></a>
+	<a href='<%= addAceItemURL.toString() %>'>Add <%= literal %><%= aceItemType %></a><br/><br/>
 <%
-	if ( (aceitem != null) && (aceitem.getControlstatus() != ACEIndexUtil.Status_APPROVED) ) {
+    // forming link for submitted ace item so the user can still edit the submitted item
+	if ( (aceitemFromMail != null) && (aceitemFromMail.getControlstatus() != ACEIndexUtil.Status_APPROVED) ) {
 %>
-	<portlet:renderURL var="editAceItemURL">
+	<portlet:renderURL var="editMailAceItemURL">
 		<portlet:param name="jspPage" value="/html/shareinfo/add_aceitem.jsp" />
 		<portlet:param name="aceItemId" value="<%= String.valueOf(aceitemId) %>"/>
-		<portlet:param name="redirect" value="<%= redirect %>" />
 	</portlet:renderURL>
-	&nbsp;&nbsp;&nbsp;&nbsp;
-	<a href='<%= editAceItemURL.toString() %>'>Modify the submitted <%= typedescription + ' ' %>'<%=  aceitem.getName() %>'</a>
+	
+	<a href='<%= editMailAceItemURL.toString() %>'>Modify the submitted <%= aceItemType + ' ' %>'<%=  aceitemFromMail.getName() %>'</a><br/><br/>
 
-<%	}
+	<%	}
+	
+	// get the ace item types saved by the user
+	String moderator = user.getFullName() + " (" + user.getEmailAddress() + ")" ;  
+	DynamicQuery query = DynamicQueryFactoryUtil.forClass(AceItem.class);
+	query.add(PropertyFactoryUtil.forName("moderator").like(moderator));
+	query.add(PropertyFactoryUtil.forName("controlstatus").eq(new Short((short)-1)));
+	query.add(PropertyFactoryUtil.forName("datatype").eq(sharetype));
+	List results = AceItemLocalServiceUtil.dynamicQuery(query);
+	
+	if (results != null && results.size() > 0)
+	{ %>
+	
+	   <span style="text-decoration:underline;text-style:normal;">Saved <%=aceItemType %>:</span><br/><br/>
+	   
+	  <%  List<AceItem> listOfAceItem = (List<AceItem>) results;
+	
+	
+	for (AceItem m: listOfAceItem)
+	{
+	%>
+
+<portlet:renderURL var="editAceItemURL">
+	<portlet:param name="jspPage" value="/html/shareinfo/add_aceitem.jsp" />
+	<portlet:param name="aceItemId" value="<%= String.valueOf(m.getAceItemId()) %>"/>
+</portlet:renderURL>
+&nbsp;&nbsp;&nbsp;&nbsp;
+<a href='<%= editAceItemURL.toString() %>'>Modify the saved <%=aceItemType%> <%= m.getName() %>'</a>
+</br>
+
+<%	} // end of for
+} // end of if results != null
+
+
 } // else isUserInRole %>

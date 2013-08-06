@@ -28,6 +28,7 @@ public class ShareAceItemPortlet extends LuceneIndexUpdatePortlet {
 
 	@Override
 	public void doView(RenderRequest renderRequest, RenderResponse renderResponse) throws IOException, PortletException {
+		System.out.println("ACE ITEM VIEW called");
 		try {
 	    	HttpServletRequest httpRequest = 
 	    		PortalUtil.getOriginalServletRequest(
@@ -40,12 +41,13 @@ public class ShareAceItemPortlet extends LuceneIndexUpdatePortlet {
 	    	catch (NumberFormatException e) {
 	    		// do nothing
 	    	}
-
 		}
         catch (Exception x) {
 			x.printStackTrace();
             throw new PortletException(x);
 		}
+		
+		
 		super.doView(renderRequest, renderResponse);
 	}
 
@@ -61,16 +63,23 @@ public class ShareAceItemPortlet extends LuceneIndexUpdatePortlet {
 		if (AceItemValidator.validateAceItem(aceitem, errors)) {
 			AceItemLocalServiceUtil.addAceItem(aceitem);
             synchronizeIndexSingleAceItem(aceitem);
-            sendSubmitNotification(aceitem);
-			request.getPortletSession().setAttribute("lastAddedAceItemId", "" + aceitem.getAceItemId() );
+            
+            // don't want to send email and save the session when it is a save
+            /*sendSubmitNotification(aceitem);
+			request.getPortletSession().setAttribute("lastAddedAceItemId", "" + aceitem.getAceItemId() ); */
 
+			request.setAttribute("justsaved", "true");
+			request.setAttribute("aceitemId", aceitem.getAceItemId());
 			SessionMessages.add(request, "contribution-success");
-			sendRedirect(request, response);
+			// let the save takes to the form so that the user can review the page on the review tab
+			response.setRenderParameter("jspPage", "/html/shareinfo/add_aceitem.jsp");
+			//sendRedirect(request, response);
 		}
 		else {
 			for (String error : errors) {
 				SessionErrors.add(request, error);
 			}
+			SessionErrors.add(request, "invalid-form-data");
 			PortalUtil.copyRequestParameters(request, response);
 			response.setRenderParameter("jspPage", "/html/shareinfo/add_aceitem.jsp");
 		}
@@ -98,16 +107,28 @@ public class ShareAceItemPortlet extends LuceneIndexUpdatePortlet {
 
 				AceItemLocalServiceUtil.updateAceItem(aceitem);
 	            synchronizeIndexSingleAceItem(aceitem);
-	            sendSubmitNotification(aceitem);
-				request.getPortletSession().setAttribute("lastAddedAceItemId", "" + aceitem.getAceItemId() );
-
-				SessionMessages.add(request, "contribution-success");
-				sendRedirect(request, response);
+	            
+	            // send the mail only when it is a submit 
+	        	if (aceitem.getControlstatus() == -1)
+				{
+					request.setAttribute("justsaved", "true" );
+					request.setAttribute("aceitemId", aceitem.getAceItemId());
+					response.setRenderParameter("jspPage", "/html/shareinfo/add_aceitem.jsp");
+					
+				}
+				else
+				{
+	               sendSubmitNotification(aceitem);
+	              // request.getPortletSession().setAttribute("lastAddedAceItemId", "" + aceitem.getAceItemId() );
+	               SessionMessages.add(request, "contribution-success");
+				   sendRedirect(request, response);
+				}
 			}
 			else {
 				for (String error : errors) {
 					SessionErrors.add(request, error);
 				}
+				SessionErrors.add(request, "invalid-form-data");
 				PortalUtil.copyRequestParameters(request, response);
 				response.setRenderParameter("jspPage", "/html/shareinfo/add_aceitem.jsp");
 			}

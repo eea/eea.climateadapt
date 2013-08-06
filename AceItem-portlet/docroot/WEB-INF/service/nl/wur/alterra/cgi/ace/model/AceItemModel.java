@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2010 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2011 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -551,6 +551,51 @@ public interface AceItemModel extends BaseModel<AceItem> {
 	 * @param textwebpage the textwebpage of this ace item
 	 */
 	public void setTextwebpage(String textwebpage);
+
+	/**
+	 * Gets the year of this ace item.
+	 *
+	 * @return the year of this ace item
+	 */
+	@AutoEscape
+	public String getYear();
+
+	/**
+	 * Sets the year of this ace item.
+	 *
+	 * @param year the year of this ace item
+	 */
+	public void setYear(String year);
+
+	/**
+	 * Gets the geochars of this ace item.
+	 *
+	 * @return the geochars of this ace item
+	 */
+	@AutoEscape
+	public String getGeochars();
+
+	/**
+	 * Sets the geochars of this ace item.
+	 *
+	 * @param geochars the geochars of this ace item
+	 */
+	public void setGeochars(String geochars);
+
+	/**
+	 * Gets the feature of this ace item.
+	 *
+	 * @return the feature of this ace item
+	 */
+	@AutoEscape
+	public String getFeature();
+
+	/**
+	 * Sets the feature of this ace item.
+	 *
+	 * @param feature the feature of this ace item
+	 */
+	public void setFeature(String feature);
 
 	/**
 	 * Gets a copy of this ace item as an escaped model instance by wrapping it with an {@link com.liferay.portal.kernel.bean.AutoEscapeBeanHandler}.

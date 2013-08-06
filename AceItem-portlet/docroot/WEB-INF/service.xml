@@ -48,6 +48,10 @@
 		<column name="replacesId" type="long" />
 		<column name="comments" type="String" />
 		<column name="textwebpage" type="String" />
+		<column name="year" type="String" />
+		<column name="geochars" type="String" />
+		<column name="feature" type="String" />
+		
 		<!-- Sort order -->
 		<order by="asc">
 			<order-column name="name" />
