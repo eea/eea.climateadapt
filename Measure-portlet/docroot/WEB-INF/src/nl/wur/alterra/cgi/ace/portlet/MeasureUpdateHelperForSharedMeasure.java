@@ -12,7 +12,6 @@ import javax.portlet.PortletRequest;
 
 import nl.wur.alterra.cgi.ace.model.AceItem;
 import nl.wur.alterra.cgi.ace.model.Measure;
-import nl.wur.alterra.cgi.ace.model.constants.AceItemAdaptationOptions;
 import nl.wur.alterra.cgi.ace.model.constants.AceItemClimateImpact;
 import nl.wur.alterra.cgi.ace.model.constants.AceItemCountry;
 import nl.wur.alterra.cgi.ace.model.constants.AceItemElement;
@@ -28,6 +27,7 @@ import nl.wur.alterra.cgi.ace.service.AceItemLocalServiceUtil;
 import com.liferay.documentlibrary.DuplicateFileException;
 import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.upload.UploadPortletRequest;
+import com.liferay.portal.kernel.util.CharPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.util.WebKeys;
 import com.liferay.portal.model.User;
@@ -50,7 +50,6 @@ import com.liferay.util.bridges.mvc.MVCPortlet;
 import com.liferay.util.mail.MailEngine;
 import com.liferay.util.mail.MailEngineException;
 
-
 /**
  * Portlets that need to update measures and synchronize with AceItems extend
  * this class.
@@ -61,6 +60,16 @@ public abstract class MeasureUpdateHelperForSharedMeasure extends MVCPortlet {
 
     private String username = "";
     private String useremail = "";
+    public static char[] INVALID_CHARACTERS = new char[] {
+		'&', CharPool.APOSTROPHE, '@',
+		'\\', ']', '}',
+		':', ',', '=', '>',
+		'/', '<', '\n',
+		'[', '{', '%',
+		'|', '+', '#', '?',
+		'\"', '\r', ';',
+		'*', '~'
+	};
 
     /**
      * Convenience method to F I L L a Measure object out of the request. Used
@@ -123,6 +132,7 @@ public abstract class MeasureUpdateHelperForSharedMeasure extends MVCPortlet {
         //System.out.println("DESCRIPTION IS " + measure.getDescription());
         measure.setImplementationtype(uploadRequest.getParameter( "implementationtype"));
         measure.setImplementationtime(uploadRequest.getParameter( "implementationtime"));
+        //System.out.println("Implementation time is " + measure.getImplementationtime());
         measure.setLifetime(uploadRequest.getParameter( "lifetime"));
         measure.setSpatiallayer(uploadRequest.getParameter( "spatiallayer"));
         measure.setLegalaspects(uploadRequest.getParameter( "legalaspects"));
@@ -391,6 +401,9 @@ public abstract class MeasureUpdateHelperForSharedMeasure extends MVCPortlet {
 		    	
 		    	// create case name folder
 		    	String folder = "case".concat("-").concat(String.valueOf(measure.getName().trim().replace(' ', '-')));
+		    	folder = escapeName(folder);
+		    	//System.out.println("folder name is " + folder);
+		    
 		    	
 		    	try {
 		    	imageFolder = IGFolderLocalServiceUtil.getFolder(themeDisplay.getScopeGroupId(), rootFolder.getFolderId(), folder);
@@ -471,7 +484,8 @@ public abstract class MeasureUpdateHelperForSharedMeasure extends MVCPortlet {
 	    	String sup_photo_description = uploadRequest.getParameter("sup_photos_description" + counter);
 	    	String sup_photo_fileName = uploadRequest.getFileName("supphotofiles" + counter);
 	    	
-	    	if (Validator.isNull(sup_photo_name) || Validator.isNull(sup_photo_description) || Validator.isNull(sup_photo_fileName))
+	    	// if (Validator.isNull(sup_photo_name) || Validator.isNull(sup_photo_description) || Validator.isNull(sup_photo_fileName))
+	    	if (Validator.isNull(sup_photo_name) || Validator.isNull(sup_photo_fileName))	
 	    	{
 	    		
 	    		// before we declare invalid check it is just the document file missing and it was alreay uploaded
@@ -488,7 +502,8 @@ public abstract class MeasureUpdateHelperForSharedMeasure extends MVCPortlet {
 	    		{
 	    			if (Validator.isNotNull(uploadRequest.getParameter("supphotos")))
 	    			{
-	    				if (Validator.isNotNull(sup_photo_name) && Validator.isNotNull(sup_photo_description) && Validator.isNull(sup_photo_fileName) && supPhotoListStored.contains(sup_photo_name.toLowerCase()))
+	    				// if (Validator.isNotNull(sup_photo_name) && Validator.isNotNull(sup_photo_description) && Validator.isNull(sup_photo_fileName) && supPhotoListStored.contains(sup_photo_name.toLowerCase()))
+	    				if (Validator.isNotNull(sup_photo_name) && Validator.isNull(sup_photo_fileName) && supPhotoListStored.contains(sup_photo_name.toLowerCase()))	
 		    			{
 	    				
 	    					//System.out.println("photo is already there so just skip");
@@ -499,7 +514,8 @@ public abstract class MeasureUpdateHelperForSharedMeasure extends MVCPortlet {
 	    			{
 	    				isPhotosValid = false;
 	    				
-	    				if (counter > 1 || Validator.isNotNull(sup_photo_name) || Validator.isNotNull(sup_photo_description))
+	    				// if (counter > 1 || Validator.isNotNull(sup_photo_name) || Validator.isNotNull(sup_photo_description))
+	    				if (counter > 1 || Validator.isNotNull(sup_photo_name))
 	    				{
 	    				    // add error message
 	    	    		    errors.add("invalid-multiple-photo-upload");
@@ -541,6 +557,8 @@ public abstract class MeasureUpdateHelperForSharedMeasure extends MVCPortlet {
 	    	{
 	    	   folder = "case".concat("-").concat(String.valueOf(measure.getName().trim().replace(' ', '-')));
 	    	}
+	    	
+	    	folder = escapeName(folder);
 	    	
 	    	//System.out.println("folder name is " + folder);
 	    	
@@ -776,6 +794,7 @@ public abstract class MeasureUpdateHelperForSharedMeasure extends MVCPortlet {
 	    	{
 	    	   folder = "case".concat("-").concat(String.valueOf(measure.getName().trim().replace(' ', '-')));
 	    	}
+	    	folder = escapeName(folder);
 	    	
 	    	//System.out.println("folder name is " + folder);
 	    	
@@ -1247,4 +1266,28 @@ public abstract class MeasureUpdateHelperForSharedMeasure extends MVCPortlet {
             e.printStackTrace();
         }
     }
+    
+    public static String escapeName(String word) {
+		if (word == null) {
+			return null;
+		}
+		else {
+			char[] wordCharArray = word.toCharArray();
+
+			int i = 0;
+			for (char c : wordCharArray) {
+				for (char invalidChar : INVALID_CHARACTERS) {
+					//System.out.println("char is " + invalidChar);
+					if (c == invalidChar) {
+						wordCharArray[i] = '-';
+					}
+				}
+				i++;
+			}
+			
+			return new String(wordCharArray);
+		}
+
+	}
+
 }

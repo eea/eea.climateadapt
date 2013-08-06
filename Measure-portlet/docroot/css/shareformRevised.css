@@ -353,6 +353,7 @@
 			float: left;
 			position: relative;
 			width: 45%;
+			padding-right:10px;
 		}
 		
 		#case-studies-form-wrapper .case-studies-tabs-wrapper .case-studies-tabbed-content .case-studies-tabbed-content-review-wrapper .case-studies-tabbed-content-review-column-left .case-studies-tabbed-content-review-image {
@@ -512,7 +513,7 @@
 		}
 
 		#case-studies-review-wrapper .case-studies-tabbed-content-section > ul {
-			list-style-image: url('ico-arrow.png');
+			list-style-image: url('../assets/ico-arrow.png');
 		}
 
 		#case-studies-review-wrapper .case-studies-tabbed-content-section > ul > li {
@@ -525,6 +526,8 @@
 			margin: 0 0 10px 0;
 			padding-left: 15px;
 		}
+		
+			
 
 		#case-studies-review-wrapper .case-studies-review-column-left {
 			float: left;
@@ -535,6 +538,7 @@
 			float: left;
 			position: relative;
 			width: 45%;
+			padding-right: 10px;
 		}
 		
 		#case-studies-review-wrapper .case-studies-review-image {
