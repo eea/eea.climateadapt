@@ -20,7 +20,7 @@ Java runtime and compiler of version 1.6 is also required.
 2. Download and set up Liferay Plugins SDK
 ******************************************
 
-Liferay Plugins SDK is a set of Ant build files and resources strcutrued
+Liferay Plugins SDK is a set of Ant build files and resources structured
 into a certain directory tree. It is used for creating and building
 portlets, themes, layouts and other components (aka plugins) of Liferay.
 You can read more at http://www.liferay.com/documentation/liferay-portal/6.0/development/-/ai/the-plugins-sdk
