@@ -9,6 +9,7 @@ public enum AceItemCountry {
     AT, /* Austria */
     BE, /* Belgium */
     BG, /* Bulgaria */
+    HR, /* Croatia */
     CY, /* Cyprus */
     CZ, /* Czech Republic */
     DK, /* Denmark */
