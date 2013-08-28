@@ -1,0 +1,136 @@
+.news-events ul {
+	list-style-type: none;
+	margin-left: 0px;
+}
+
+.news-events li {
+    background: url("../images/01_plus.png") no-repeat scroll 0 1px transparent;
+    margin-bottom: 4px;
+    padding-left: 20px;
+}
+
+		.case-studies-events-list-header {
+			border-bottom: 3px solid #bdcb2e;
+			font-size: 1.85em;
+			font-weight: normal;
+			margin: 0 0 1em;
+			padding: 0 0 .25em;
+		}
+
+		ul.case-studies-events-list {
+			list-style-type: none;
+			margin: 0;
+			padding: 0;
+		}
+
+		ul.case-studies-events-list li {
+			border-bottom: 1px solid #c8c4c1;
+			margin-bottom: 2em;
+			padding-bottom: 0em;
+		}
+
+
+		ul.case-studies-events-list li h5 {
+			font-size: 1.5em;
+			margin: 0;
+		}
+
+		ul.case-studies-events-list li h5 a {
+			color: #034c9b;
+			text-decoration: none;
+			font-weight: bold;
+		}
+		
+        ul.case-studies-events-list li small {
+			font-size: .9em;
+			color: #636363;
+		}
+
+		ul.case-studies-events-list li p {
+			color: #232323;
+			font-size: 1.2em;
+			padding-top: 10px;
+		}
+		
+		ul.case-studies-events-list li .case-studies-events-list-column-left {
+			float: left;
+			margin-right: 15px;
+			width: 10%;
+		}
+		
+		ul.case-studies-events-list .case-studies-events-list-date {
+			background-color: #ececec;
+			text-align: center;
+			padding-bottom: 1em;
+		}
+
+	
+		ul.case-studies-events-list .case-studies-events-list-date-month {
+			background-color: #bdcb2e;
+			border-bottom: 1px solid #a3b120;
+			color: #535b05;
+			font-weight: bold;
+			padding: .25em 0;
+		}
+
+		ul.case-studies-events-list .case-studies-events-list-date-day {
+			color: #054c9c;
+			font-size: 1.5em;
+			font-weight: bold;
+			padding: .5em 0 0 0;
+		}
+
+		ul.case-studies-events-list .case-studies-events-list-date-year {
+			color: #232323;
+		}
+		
+		ul.case-studies-events-list li .case-studies-events-list-column-right {
+		
+		}
+		
+		.case-studies-three-column-layout-clearing {
+			clear: both;
+			height: 0;
+		}
+		
+		
+	/* blue button for news letter sign up  */	
+	.bluebutton {
+		display: inline-block;
+		border: solid 1px #aab91d;
+	    float: right;
+	    color: #232323;
+		background: #c7d443;
+		background: -webkit-gradient(linear, left top, left bottom, from(#c7d443), to(#afbe21));
+		background: -moz-linear-gradient(top,  #c7d443,  #afbe21);
+		filter:  progid:DXImageTransform.Microsoft.gradient(startColorstr='#faa51a', endColorstr='#f47a20');
+		cursor: pointer;
+		text-align: center;
+		text-decoration: none;
+		font: 13px/100% Verdana, Arial, Helvetica, sans-serif;
+		padding: 1em 2em 1em;
+		text-shadow: 0 1px 1px rgba(255,255,255,1);
+		-webkit-border-radius: .5em; 
+		-moz-border-radius: .5em;
+		border-radius: .5em;
+		-webkit-box-shadow: 0 1px 2px rgba(0,0,0,.2);
+		-moz-box-shadow: 0 1px 2px rgba(0,0,0,.2);
+		box-shadow: 0 1px 2px rgba(0,0,0,.2);
+	    -moz-box-shadow:    inset 0 0 2px #ffffff;
+	   -webkit-box-shadow: inset 0 0 2px #ffffff;
+	   box-shadow:         inset 0 0 2px #ffffff;
+  }
+  
+  .bluebuttondiv {
+     padding-bottom: 1.7em;
+  }
+  
+  .bluebutton:hover {
+		text-decoration: none;
+  }
+  
+  .bluebutton:active {
+	position: relative;
+	top: 1px;
+  }
+ /* end of blue button for news letter sign up */
