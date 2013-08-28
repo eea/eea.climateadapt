@@ -81,6 +81,7 @@ ln -s TRUNK/ace-layouttpl ace-layouttpl
 
 While in PLUGINS_SDK_HOME/themes, create the following symbolic link:
 ln -s TRUNK/ace-theme ace-theme
+ln -s TRUNK/ace-baltic-sea-theme ace-baltic-sea-theme
 
 *****************************
 5. Set a few build properties
