@@ -40,7 +40,7 @@ CHM.Control.Grid.GridControl = Ext.extend(Ext.Panel, {
 		});
 		
 		this.searchResultsPanel = new Ext.Panel({
-			anchor : '100% 10%',
+			anchor : '100% 6%',
 			border: false,
 			items: [this.searchResultsLabel]
 		});

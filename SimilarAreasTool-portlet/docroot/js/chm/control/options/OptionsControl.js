@@ -32,7 +32,7 @@ CHM.Control.Options.OptionsControl = Ext.extend(Ext.Panel, {
     	    triggerAction: 'all',
     	    transform:'riskSelect',
     	    forceSelection: true,
-    	    anchor: '100%',
+    	    anchor: '94%',
     		id: 'risk-select',
     		cls: 'csst-input'
     	});
@@ -46,7 +46,7 @@ CHM.Control.Options.OptionsControl = Ext.extend(Ext.Panel, {
     	    triggerAction: 'all',
     	    transform:'sectorSelect',
     	    forceSelection: true,
-    	    anchor: '100%',
+    	    anchor: '94%',
     		id: 'sector-select',
     		cls: 'csst-input'    	
     	});

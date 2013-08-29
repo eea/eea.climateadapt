@@ -58,15 +58,15 @@ CHM.Application = Ext.extend(Ext.Panel,  {
     	
     	var panel = new Ext.Panel({x: this.margin, y: this.margin, border: false, id:  'csst-title-help', items: [this.titleControl, {xtype: 'label', html: '&nbsp;'}, this.helpButton], layout: 'column'});
 		
-    	this.mapControl = new CHM.Control.Map.MapControl({width: this.width / 4 * 3 - this.margin - (this.margin / 2), height: this.height / 8 * 3 - (this.margin / 2) - (this.margin / 2), x: this.margin, y: this.height / 8 * 1 + (this.margin / 2)});
+    	this.mapControl = new CHM.Control.Map.MapControl({width: this.width / 4 * 3 - (this.margin * 1.5), height: this.height / 8 * 3 - (this.margin / 2) - (this.margin / 2), x: this.margin, y: this.height / 8 * 1 + (this.margin / 2)});
     	
-    	this.gridControl = new CHM.Control.Grid.GridControl({width: this.width / 4 * 3 - this.margin - this.margin, height: this.height / 8 * 4 - (this.margin / 2) - this.margin, x: this.margin, y: this.height / 8 * 4 + (this.margin / 2)});
+    	this.gridControl = new CHM.Control.Grid.GridControl({width: this.width / 4 * 3 - this.margin - (this.margin / 2), height: this.height / 8 * 4 - this.margin, x: this.margin, y: this.height / 8 * 4 + (this.margin * 2)});
     	
     	this.locatorControl = new CHM.Control.Locator.LocatorControl({width: this.width / 4 * 1.5 - (this.margin / 2) - this.margin, height: this.height / 8 * 1 - this.margin - (this.margin / 2), x: this.width / 4 * 2.5 + (this.margin / 2), y: this.margin * 1.5});
     	
-    	this.optionsControl = new CHM.Control.Options.OptionsControl({width: this.width / 4 * 1 - (this.margin / 2) - this.margin, height: this.height / 8 * 1.5 - (this.margin / 2) - (this.margin / 2), x: this.width / 4 * 3 + (this.margin / 2), y: this.height / 8 * 1 + (this.margin / 2)});
+    	this.optionsControl = new CHM.Control.Options.OptionsControl({width: this.width / 4 * 1 - (this.margin / 2) - this.margin, height: this.height / 8 * 1.5, x: this.width / 4 * 3 + (this.margin / 2), y: this.height / 8 * 1 + (this.margin / 2)});
     	
-    	this.legendControl = new CHM.Control.Legend.LegendControl({width: this.width / 4 * 1 - (this.margin / 2) - this.margin, height: this.height / 8 * 3 - (this.margin / 2) - (this.margin / 2), x: this.width / 4 * 3 + (this.margin / 2), y: this.height / 8 * 2.5 + (this.margin / 2) + this.margin});
+    	this.legendControl = new CHM.Control.Legend.LegendControl({width: this.width / 4 * 1 - (this.margin / 2) - this.margin, height: this.height / 8 * 2.05, x: this.width / 4 * 3 + (this.margin / 2), y: this.height / 8 * 2.5 + (this.margin / 2) + this.margin});
     	
 		this.defaults = {collapsible : false, split : true};
 
