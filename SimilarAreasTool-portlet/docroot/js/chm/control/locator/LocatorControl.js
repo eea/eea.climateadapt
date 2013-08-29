@@ -2,9 +2,10 @@ CHM.Control.Locator.LocatorControl = Ext.extend(Ext.Panel, {
 	
 	address: 'Address',
 	
-	location: 'Enter location...',
+	location: 'Enter location',
 	
-	locate: 'Locate',
+	// Text displayed in the button
+	locate: '',
 	
 	panel: null,
 	
@@ -34,18 +35,26 @@ CHM.Control.Locator.LocatorControl = Ext.extend(Ext.Panel, {
     		enableKeyEvents: true, 
     		value: this.location,
     		id: 'locator-textfield',
-    		cls: 'csst-input'
+    		cls: 'csst-input',
+    		x: 0,
+    		y: 0,
+    		anchor: '100%'
     	});
     	
     	this.locationTextField.addListener('keyup', this.handleLocationTextFieldKeyUp, this);
     	
     	this.locationTextField.addListener('focus', this.focus, this);
     	
-    	this.button = new Ext.Button({width: 50, text: this.locate, id: 'locate-button'});
+    	this.button = new Ext.Button({iconCls: 'x-search', text: this.locate, id: 'locate-button'});
     	
     	this.button.addListener('click', this.handleLocateButtonClick, this);
     	
-    	this.panel = new Ext.Panel({anchor: '100%', border: false, items: [this.locationTextField, this.button], layout: 'column'});
+    	this.panel = new Ext.Panel({
+    		anchor: '100%', 
+    		border: false, 
+    		items: [this.locationTextField, this.button], 
+    		layout: 'absolute'
+    	});
     	
     	this.panel.addListener('resize', this.resize, this);
     	
@@ -82,11 +91,13 @@ CHM.Control.Locator.LocatorControl = Ext.extend(Ext.Panel, {
     },
     
     resize: function() {
-    	var h = this.getHeight();
+    	if (this.panel.getHeight() === 0) {
+    		this.panel.setHeight(this.locationTextField.getHeight());
+    	}
     	
-    	h = h - this.panel.getHeight() - this.spacer.getHeight();
+    	this.candidatesPanel.setHeight(this.getHeight() - this.panel.getHeight() - this.spacer.getHeight());
     	
-    	this.candidatesPanel.setHeight(h);
+    	this.button.setPosition(this.getWidth() - this.button.getWidth());
     }, 
     
     focus: function() {

@@ -6,17 +6,21 @@
 /* Setting font sizes for the different headings */
 
 #csst_element .portlet-title {
-	color: #666;
 	font-size: 25px;
-	font-style: normal;
 	font-weight: bold;
-	padding-right: 15px;
 	text-decoration: none;
+}
+
+#csst-title-help .portlet-title {
+	color: #02213D;
+	font-style: italic;
+	font-weight: normal;
+	padding: 7px 10px 7px 0;
 }
 
 #csst-options .portlet-title,
 #csst-legend .portlet-title {
-	color: #333;
+	color: #0a81d4;
 	font-size: 13px;
 	line-height: 13px;
 }
@@ -26,9 +30,10 @@
 }
 
 #csst-grid .portlet-title {
-	color: #333;
+	background: #ECECEC;
+	color: #0a81d4;
 	font-size: 16px;
-	padding-top: 20px;
+	padding: 3px 0 5px 10px;
 }
 
 .csst-grid-subheader {
@@ -38,7 +43,11 @@
 }
 
 /* Fixes the input fields on IE */
-#csst-locator input[type='text'],
+#csst-locator input[type='text'] {
+	background: #EFEFEF;
+	padding: 3px;
+}
+
 #csst-options input[type='text'] {
 	margin-top: 0;
 	padding: 1px;
@@ -46,11 +55,29 @@
 
 /* Locator and locator results window */
 #locator-textfield {
-	margin-right: 2px;
+
+}
+
+#locate-button .x-btn-tl, #locate-button .x-btn-tr, 
+#locate-button .x-btn-tc, #locate-button .x-btn-ml, 
+#locate-button .x-btn-mr, #locate-button .x-btn-mc, 
+#locate-button .x-btn-bl, #locate-button .x-btn-br, 
+#locate-button .x-btn-bc {
+	background-image: none;
 }
 
 #locate-button {
-	clear: none;
+	position: relative;
+	top: -2px;
+}
+
+.x-search,
+.x-search:hover {
+	background: url(../images/search-icon-location.png) !important;
+	border-color: transparent !important;
+	color: transparent; 
+	width: 23px !important; 
+	height: 23px !important;
 }
 
 #locator-results,
@@ -59,7 +86,12 @@
 	border: 1px solid #DEDEDE;
 }
 
-/* Risks and sectors options */
+/* Risks and sectors options 
+#csst-options .x-panel-body,
+#csst-legend .x-panel-body {
+	background: #ECECEC;
+}*/
+
 .risk-sector-label {
 	color: #333;
 	display: block;
@@ -85,7 +117,7 @@
 
 /* Search results */
 #csst-grid {
-	border-top: 2px solid #D7E3EF;
+	margin-top: 40px;
 }
 
 /* Help tooltip button */
@@ -93,6 +125,16 @@
 	clear: none;
 }
 
+#help-button .x-btn-tl, #help-button .x-btn-tr, 
+#help-button .x-btn-tc, #help-button .x-btn-ml, 
+#help-button .x-btn-mr, #help-button .x-btn-mc, 
+#help-button .x-btn-bl, #help-button .x-btn-br, 
+#help-button .x-btn-bc {
+	background-image: none;
+}
+
 .x-help {
-	background-image: url(images/help.png) !important;
+	background-image: url(../images/help-icon.png) !important;
+	width: 29px !important;
+	height: 27px !important;
 }
