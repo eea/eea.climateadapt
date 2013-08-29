@@ -210,7 +210,7 @@
 <portlet:actionURL name='<%= aceitem == null ? "addAceItem" : "updateAceItem" %>' var="editAceItemURL" />
 
 <aui:form action='<%= editAceItemURL %>' method="POST" name="fm">
-   <liferay-ui:error key="invalid-form-data" message="The form has errors please correct them" />
+   <liferay-ui:error key="invalid-form-data" message="invalid-form-data" />
 	<aui:fieldset>
 
 	    <input name="datatype" type="hidden" value="<%=sharetype%>">
@@ -688,10 +688,10 @@
 											           <c:when test="${geoCharElement == 'EUROPE'}" >
 											                <c:choose>
 												                <c:when test="${geoElementSelected eq 'EUROPE'}">
-														             <li><label for="rad_geochars_${geoCharElement}"><input type="radio" name="rad_geo_chars" id="europe_geo_chars" value="${geoCharElement}"  checked/><liferay-ui:message key="acesearch-geochars-lbl-${geoCharElement}" /></label></li>
+														             <li><label for="rad_geochars_${geoCharElement}"><input type="radio" name="rad_geo_chars" id="europe_geo_chars" value="${geoCharElement}"  checked/><liferay-ui:message key="acesearch-geochars-lbl-${geoCharElement}" /> (If this <%= aceitemType.toLowerCase() %> applies to the whole of Europe, please select all the Macro-Transnational Regions below)</label></li>
 														        </c:when>
 														        <c:otherwise>
-														           <li><label for="rad_geochars_${geoCharElement}"><input type="radio" name="rad_geo_chars" id="europe_geo_chars" value="${geoCharElement}" /><liferay-ui:message key="acesearch-geochars-lbl-${geoCharElement}" /></label></li>
+														           <li><label for="rad_geochars_${geoCharElement}"><input type="radio" name="rad_geo_chars" id="europe_geo_chars" value="${geoCharElement}" /><liferay-ui:message key="acesearch-geochars-lbl-${geoCharElement}" /> (If this <%= aceitemType.toLowerCase() %> applies to the whole of Europe, please select all the Macro-Transnational Regions below)</label></li>
 														        </c:otherwise>
 														     </c:choose>
 														          <div class="europe_geochar_class">	<!-- important - starting div for europe_geochar_class -->

@@ -25,12 +25,17 @@ import nl.wur.alterra.cgi.ace.search.lucene.ACEIndexUtil;
 import nl.wur.alterra.cgi.ace.service.AceItemLocalServiceUtil;
 
 import com.liferay.documentlibrary.DuplicateFileException;
+import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.upload.UploadPortletRequest;
 import com.liferay.portal.kernel.util.CharPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.util.WebKeys;
+import com.liferay.portal.model.Role;
+import com.liferay.portal.model.RoleConstants;
 import com.liferay.portal.model.User;
+import com.liferay.portal.service.ResourcePermissionServiceUtil;
+import com.liferay.portal.service.RoleLocalServiceUtil;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.ServiceContextFactory;
 import com.liferay.portal.service.UserServiceUtil;
@@ -148,10 +153,14 @@ public abstract class MeasureUpdateHelperForSharedMeasure extends MVCPortlet {
         // robust multiple website handling. Check for splitters space, ',' and
         // ';'
         if (websites != null) {
-            websites = websites.replace("  ", " ");
             websites = websites.replace(",", " ");
             websites = websites.replace(";", " ");
-            websites = websites.replace("  ", " ");
+            websites = websites.replace("<p>", "");
+			websites = websites.replace("</p>", "");
+			websites = websites.replaceAll("http://", "");
+			websites = websites.replaceAll("&nbsp;", "");
+			websites = websites.replaceAll("&nbsp", "");
+			websites = websites.replaceAll("[\r\n]", "");
             String[] site = websites.split(" ");
             if (site.length > 1) {
                 websites = "";
@@ -162,7 +171,7 @@ public abstract class MeasureUpdateHelperForSharedMeasure extends MVCPortlet {
                         websites += site[i];
                         if (i < site.length - 1) {
                             // not last
-                            websites += "; ";
+                            websites += ";";
                         }
                     }
                 }
@@ -260,6 +269,8 @@ public abstract class MeasureUpdateHelperForSharedMeasure extends MVCPortlet {
         String choosenoptions = uploadRequest.getParameter("chk_adaptoptions");
         measure.setAdaptationoptions(choosenoptions);
         
+        measure.setMao_type(uploadRequest.getParameter( "mao_type"));
+        
         String choosengeos = "";
         for (AceItemGeos geo : AceItemGeos.values())
         {
@@ -267,13 +278,19 @@ public abstract class MeasureUpdateHelperForSharedMeasure extends MVCPortlet {
         	//System.out.println("Geo is " + geo.name());
         	if (uploadRequest.getParameter( "chk_geos_trans") != null) {
                 String e = uploadRequest.getParameter( "chk_geos_trans");
-                if (e.equalsIgnoreCase(geo.toString())) {
+                if (measure.getMao_type().equalsIgnoreCase("A") && e.equalsIgnoreCase(geo.toString())) {
                     choosengeos = geo.toString();
+                    break;
                 }
             }
         }
-
         measure.setGeos_(choosengeos);
+        
+        if (uploadRequest.getParameter( "chk_geos_trans") != null && measure.getMao_type().equalsIgnoreCase("M")) 
+        {
+        	 choosengeos = uploadRequest.getParameter("chk_geos_trans");
+        	 measure.setGeos_(choosengeos);
+        }
       
         String choosenGeoChars = uploadRequest.getParameter("rad_geo_chars");
         measure.setGeochars(choosenGeoChars);
@@ -293,9 +310,7 @@ public abstract class MeasureUpdateHelperForSharedMeasure extends MVCPortlet {
         }
         measure.setRelevance(choosenrelevance);
         
-        
-
-        measure.setMao_type(uploadRequest.getParameter( "mao_type"));
+       
         measure.setSource(uploadRequest.getParameter( "source"));
 
         String importance = uploadRequest.getParameter( "chk_importance");
@@ -374,6 +389,8 @@ public abstract class MeasureUpdateHelperForSharedMeasure extends MVCPortlet {
 		    		//looks like image replaced add the image now
 		    		File f = uploadRequest.getFile("primePhotoName");
 		    		image = IGImageServiceUtil.addImage(themeDisplay.getScopeGroupId(), folderId, sourceFileName, "", f, "image/"+extension, serviceContext);
+		    		String primaryKey = String.valueOf(image.getPrimaryKey());
+		    		addPermissions(themeDisplay, primaryKey, "com.liferay.portlet.imagegallery.model.IGImage");
 		    		measure.setPrimephoto(String.valueOf(image.getImageId()));
 		    		request.setAttribute("primePhotoId", String.valueOf(image.getImageId()));
 		    		}
@@ -412,9 +429,13 @@ public abstract class MeasureUpdateHelperForSharedMeasure extends MVCPortlet {
 		    	{
 		    		//System.out.println("image folder is null");
 		    		imageFolder = IGFolderLocalServiceUtil.addFolder(themeDisplay.getUserId(), rootFolder.getFolderId(), folder, "", serviceContext);
+		    		String primaryKey = String.valueOf(imageFolder.getPrimaryKey());
+		    		addPermissions(themeDisplay, primaryKey, "com.liferay.portlet.imagegallery.model.IGFolder");
 		    	}
 		    	
 	    		image = IGImageServiceUtil.addImage(themeDisplay.getScopeGroupId(), imageFolder.getFolderId(), sourceFileName, "", f, "image/"+extension, serviceContext);
+	    		String primaryKey = String.valueOf(image.getPrimaryKey());
+	    		addPermissions(themeDisplay, primaryKey, "com.liferay.portlet.imagegallery.model.IGImage");
 	    		measure.setPrimephoto(String.valueOf(image.getImageId()));
 	    		//request.setAttribute("primePhotoId", String.valueOf(image.getImageId()));
 		    	}
@@ -572,6 +593,8 @@ public abstract class MeasureUpdateHelperForSharedMeasure extends MVCPortlet {
 	    	{
 	    		//System.out.println("image folder is null");
 	    		imageFolder = IGFolderLocalServiceUtil.addFolder(themeDisplay.getUserId(), rootFolder.getFolderId(), folder, "", serviceContext);
+	    		String primaryKey = String.valueOf(imageFolder.getPrimaryKey());
+	    		addPermissions(themeDisplay, primaryKey, "com.liferay.portlet.imagegallery.model.IGFolder");
 	    	}
 	    	
 	    	// we are ready to do the upload
@@ -809,6 +832,8 @@ public abstract class MeasureUpdateHelperForSharedMeasure extends MVCPortlet {
 	    		//System.out.println("document folder is null");
 	    		try {
 	    		docFolder = DLFolderLocalServiceUtil.addFolder(themeDisplay.getUserId(), themeDisplay.getScopeGroupId(), rootFolder.getFolderId(), folder, "", serviceContext);
+	    		String primaryKey = String.valueOf(docFolder.getPrimaryKey());
+	    		addPermissions(themeDisplay, primaryKey, "com.liferay.portlet.documentlibrary.model.DLFolder");
 	    		}
 	    		catch(Exception ex)
 	    		{
@@ -935,7 +960,8 @@ public abstract class MeasureUpdateHelperForSharedMeasure extends MVCPortlet {
     				   //image = IGImageServiceUtil.addImage(themeDisplay.getScopeGroupId(), imageFolder.getFolderId(), sup_photo_name, sup_photo_description, f, "image/"+extension, serviceContext);
                        doc = DLFileEntryLocalServiceUtil.addFileEntry(themeDisplay.getUserId(), themeDisplay.getScopeGroupId(), docFolder.getFolderId(), f.getName(), sup_doc_name,
                               sup_doc_description, null, null,  f, serviceContext);
-                      
+                       String primaryKey = String.valueOf(doc.getPrimaryKey());
+   		    		   addPermissions(themeDisplay, primaryKey, "com.liferay.portlet.documentlibrary.model.DLFileEntry");
     			    }
     		    	catch(DuplicateFileException e)
     		    	{
@@ -999,7 +1025,8 @@ public abstract class MeasureUpdateHelperForSharedMeasure extends MVCPortlet {
 			   String extension = fileName.substring(i+1);
 			   //System.out.println("extension is " + extension);
 			   image = IGImageServiceUtil.addImage(themeDisplay.getScopeGroupId(), imageFolder.getFolderId(), sup_photo_name, sup_photo_description, f, "image/"+extension, serviceContext);
-
+			   String primaryKey = String.valueOf(image.getPrimaryKey());
+			   addPermissions(themeDisplay, primaryKey, "com.liferay.portlet.imagegallery.model.IGImage");
 		    }
 	    	catch(DuplicateImageNameException e)
 	    	{
@@ -1267,6 +1294,26 @@ public abstract class MeasureUpdateHelperForSharedMeasure extends MVCPortlet {
         }
     }
     
+    private void addPermissions(ThemeDisplay themeDisplay, String primaryKey, String resource ) throws Exception
+    {
+    	Role roleUser = RoleLocalServiceUtil.getRole(themeDisplay.getCompanyId(), RoleConstants.COMMUNITY_MEMBER);
+		long roleId = roleUser.getRoleId();
+		
+		String actionIds[] = {"VIEW"};
+		
+		// View permissions to the Community Member
+		ResourcePermissionServiceUtil.setIndividualResourcePermissions(
+				themeDisplay.getScopeGroupId(), themeDisplay.getCompanyId(),
+			resource, primaryKey, roleId, actionIds);
+		
+		// View permissions to the Guest
+		roleUser = RoleLocalServiceUtil.getRole(themeDisplay.getCompanyId(), RoleConstants.GUEST);
+		roleId = roleUser.getRoleId();
+		ResourcePermissionServiceUtil.setIndividualResourcePermissions(
+				themeDisplay.getScopeGroupId(), themeDisplay.getCompanyId(),
+			resource, primaryKey, roleId, actionIds);
+    }
+    
     public static String escapeName(String word) {
 		if (word == null) {
 			return null;
@@ -1285,6 +1332,12 @@ public abstract class MeasureUpdateHelperForSharedMeasure extends MVCPortlet {
 				i++;
 			}
 			
+			String retString = new String(wordCharArray);
+			
+			if (retString.length() >= 75)
+			{
+			   retString = retString.substring(0, 75);
+			}
 			return new String(wordCharArray);
 		}
 

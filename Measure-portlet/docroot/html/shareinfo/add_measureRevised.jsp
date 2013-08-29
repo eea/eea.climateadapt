@@ -304,6 +304,24 @@
 		  
 		   $('input:checkbox[name=chk_categories]:checked').val(categories);
 		   
+		   
+		   // governance level processing for adaptation option
+		   var governancelevels = "";
+		   $('.governanceForAdaptation:checked').each(function(){
+			   if (governancelevels.length == 0)
+			   {
+			      governancelevels = $(this).val();
+			   }
+			   else
+			   {
+				   governancelevels = governancelevels + ";" + $(this).val();
+			   }
+		   });
+		   
+		   $('input:checkbox[name=chk_geos_trans]:checked').val(governancelevels);
+		   
+		   
+		   
 		   document.<portlet:namespace />fm.submit();
 		}
 		
@@ -322,7 +340,7 @@
 <portlet:actionURL name='<%= measure == null ? "addMeasure" : "updateMeasure" %>' var="editMeasureURL" />	
 
 <aui:form action="<%= editMeasureURL %>" method="POST" name="fm" enctype="multipart/form-data" id="fm">
-    <liferay-ui:error key="invalid-form-data" message="The form has errors please correct them" />
+    <liferay-ui:error key="invalid-form-data" message="invalid-form-data" />
 	<aui:input type="hidden" name="mao_type" value="<%= mao_type %>" />
 	<aui:input type="hidden" name="redirect" value="<%= redirect %>" />
 	<aui:input type="hidden" name="measureId" value='<%= measure == null ? "" : measure.getMeasureId() %>'/>
@@ -1180,8 +1198,8 @@
 							<div class="case-studies-tabbed-content-section">
 								<div class="case-studies-tabbed-content-subheader">Costs and Benefits</div>
 								<ul>
+								  	<li>
 								   <% if (mao_type.equalsIgnoreCase("A")) { %>
-									<li>
 										<p><em>Describe <strong>costs</strong> of this case study. Include:</em>
 										<ul class="case-studies-tabbed-content-bullted-list">
 											<li>Cost Estimates</li>
@@ -1379,11 +1397,11 @@
 											<% 
 										         if (mao_type.equalsIgnoreCase("A"))
 											     {
-										        	 localDescription = "List the Name and Website that refers to the original documents directly related to the case implementation process and its responsible actors (500 char limit).";
+										        	 localDescription = "List the Name and Website that refers to the original documents directly related to the case implementation process and its responsible actors (500 char limit). Please list one website on one line only without any formatting.";
 										         }
 										         else
 										         {
-										        	 localDescription = "List the Name and Website where the option can be found or is described. Note: may refer to the original document describing a measure and does not have to refer back to the project e.g. collected measures (500 character limit).";
+										        	 localDescription = "List the Name and Website where the option can be found or is described. Note: may refer to the original document describing a measure and does not have to refer back to the project e.g. collected measures (500 character limit). Please list one website on one line only without any formatting.";
 										         }
 											%>
 										<p><em><%=localDescription %></em></p>
@@ -1483,6 +1501,7 @@
 							</div>
 
 							<div class="case-studies-tabbed-content-section">
+							   <liferay-ui:error key="invalid-multiple-photo-upload" message="invalid-multiple-photo-upload" />
 								<div class="case-studies-tabbed-content-subheader">Additional case study Illustrations</div>
 								<p>Up to 5 additional illustrations can be added.</p>
 								<% 
@@ -1492,6 +1511,7 @@
 									String[] sphotos = null;
 									String[] sphotoNames = new String[5];
 									String[] sphotoDescriptions = new String[5];
+									String[] imageNames = new String[5];
 									
 																	
 									 if (measure != null && Validator.isNotNull(measure.getSupphotos())) {
@@ -1514,17 +1534,20 @@
 									             for (String photo:sphotos)
 												 {
 													 IGImage image = IGImageServiceUtil.getImage(Long.parseLong(photo));
-													 String supPhotoName = image.getName();
+													 String supPhotoName = image.getName(); 
+													 String imageName = image.getNameWithExtension();
 													 String supPhotoDescription = image.getDescription();
 													 sphotoNames[i] = supPhotoName;
 													 sphotoDescriptions[i] = supPhotoDescription;
+													 imageNames[i] = imageName;
 													 i = i + 1;
 												 }
 												
 									            
 									             pageContext.setAttribute("sphotonames", sphotoNames);
 									             pageContext.setAttribute("sphotodesc", sphotoDescriptions);
-									             pageContext.setAttribute("photocount", sphotos.length);    
+									             pageContext.setAttribute("photocount", sphotos.length); 
+									             pageContext.setAttribute("imageNames", imageNames);  
 									    }
 									    else
 									    {
@@ -1549,6 +1572,7 @@
 									  
 									  <li>
 										<p><strong><em>Upload Case Study Illustration <span class="case-studies-tabbed-content-photo-upload-position">${loop.count}</span>:</em></strong></p>
+										<p><em>Uploaded illustration: ${imageNames[loop.count - 1]}</em></p>
 										<div class="inputfile"><input name="supphotofiles${loop.count }" type="file" /></div>
 									  </li>
 									  
@@ -1743,7 +1767,7 @@
 									<li>
 										<p><em>Select the one governance level that relates to this <%=nameOfClimateEntityShortText.toLowerCase() %></em></p>
 										<ul class="one-col">
-											<li>
+											
 											   <%
 											         ArrayList trans = new ArrayList();
 										        	 Measure measureStructure = null;
@@ -1772,8 +1796,10 @@
 										        		 
 										        	 }
 										    %>
+										    
+										    <%-- Case study deas the governance level as radios whereas the adaptation option deals the governance level as check boxes --%>
+										    <% if (mao_type.equalsIgnoreCase("A")) { %>
 														<c:forEach var="geo" items="<%= trans  %>" >
-															
 																<c:set var="aceItemGeos" value='<%= geoValues %>' />
 																<c:set var="adaptationGeoMustBeChecked" value="false" />
 																<c:if test="${aceItemGeos eq geo}">
@@ -1788,6 +1814,23 @@
 																	</c:otherwise>
 																</c:choose>
 														</c:forEach>
+											<% } else { %>
+											        <c:forEach var="geo" items="<%= trans  %>" >
+																<c:set var="aceItemGeos" value='<%= geoValues %>' />
+																<c:set var="adaptationGeoMustBeChecked" value="false" />
+																<c:if test="${fn:contains(aceItemGeos, geo)}">
+																	<c:set var="adaptationGeoMustBeChecked" value="true" />
+																</c:if>	
+																<c:choose>
+																	<c:when test="${adaptationGeoMustBeChecked}">
+																		<li><label for="chk_geos_${geo}"><input type="checkbox" class="governanceForAdaptation" name="chk_geos_trans" id="chk_geos_trans" value="${geo}" checked="checked" /><liferay-ui:message key="aceitem-geos-lbl-${geo}" /></label></li>
+																	</c:when>
+																	<c:otherwise>
+																		<li><label for="chk_geos_${geo}"><input type="checkbox" class="governanceForAdaptation" name="chk_geos_trans" id="chk_geos_trans" value="${geo}" /><liferay-ui:message key="aceitem-geos-lbl-${geo}" /></label></li>
+																	</c:otherwise>
+																</c:choose>
+													</c:forEach>
+											<% } %>
 										</ul>
 									</li>
 								</ul>
@@ -1917,16 +1960,17 @@
 											           <c:when test="${geoCharElement == 'EUROPE'}" >
 											                <c:choose>
 												                <c:when test="${geoElementSelected eq 'EUROPE'}">
-														             <li><label for="rad_geochars_${geoCharElement}"><input type="radio" name="rad_geo_chars" id="europe_geo_chars" value="${geoCharElement}"  checked/><liferay-ui:message key="acesearch-geochars-lbl-${geoCharElement}" /></label></li>
+														             <li><label for="rad_geochars_${geoCharElement}"><input type="radio" name="rad_geo_chars" id="europe_geo_chars" value="${geoCharElement}"  checked/><liferay-ui:message key="acesearch-geochars-lbl-${geoCharElement}" /> (If this <%=nameOfClimateEntityShortText.toLowerCase() %> applies to the whole of Europe, please select all the Macro-Transnational Regions below)</label></li>
 														        </c:when>
 														        <c:otherwise>
-														           <li><label for="rad_geochars_${geoCharElement}"><input type="radio" name="rad_geo_chars" id="europe_geo_chars" value="${geoCharElement}" /><liferay-ui:message key="acesearch-geochars-lbl-${geoCharElement}" /></label></li>
+														           <li><label for="rad_geochars_${geoCharElement}"><input type="radio" name="rad_geo_chars" id="europe_geo_chars" value="${geoCharElement}" /><liferay-ui:message key="acesearch-geochars-lbl-${geoCharElement}" /> (If this <%=nameOfClimateEntityShortText.toLowerCase() %> applies to the whole of Europe, please select all the Macro-Transnational Regions below)</label></li>
 														        </c:otherwise>
 														     </c:choose>
-														             <div class="europe_geochar_class">	<!-- important - starting div for europe_geochar_class -->
+														            <!-- <div class="europe_geochar_class">	 important - starting div for europe_geochar_class -->
 										               </c:when>
 										             
 											           <c:when test="${geoCharElement == 'MACRO_TRANSNATIONAL_REGION'}" >
+											              <div class="europe_geochar_class">	<!-- important - starting div for europe_geochar_class -->
 											               <label for="rad_geochars_${geoCharElement}"><strong><liferay-ui:message key="acesearch-geochars-lbl-${geoCharElement}" /></strong></label>
 											               <table class="case-studies-tabbed-content-table-for-translists">
                                                              <tr>
@@ -1948,9 +1992,11 @@
 													          </tr>
 													         </table>
 													         <br/>
+													       </div>
 													    </c:when>
 													    
 												        <c:when test="${geoCharElement == 'BIOGRAPHICAL_REGION'}" >
+												          <div class="europe_geochar_class">	<!-- important - starting div for europe_geochar_class -->
 												           <label for="rad_geochars_${geoCharElement}"><strong><liferay-ui:message key="acesearch-geochars-lbl-${geoCharElement}" /></strong></label>
 											               
 												           <table class="case-studies-tabbed-content-table-for-translists">
@@ -1973,9 +2019,11 @@
 												           </tr>
 												          </table>
 												          <br/>
+												         </div>
 										               </c:when>
 										               
 										              <c:when test="${geoCharElement ==  'COUNTRIES'}" >
+										                  <div class="europe_geochar_class">	<!-- important - starting div for europe_geochar_class -->
 										                    <label for="rad_geochars_${geoCharElement}"><strong><liferay-ui:message key="acesearch-geochars-lbl-${geoCharElement}" /></strong></label>
 											               
 															<ul>
@@ -2002,9 +2050,11 @@
 																	</ul>
 																</li>
 															</ul>
+														 </div>
 										              </c:when>
 										              
 											           <c:when test="${geoCharElement == 'SUBNATIONAL'}" >
+											              <div class="europe_geochar_class">	<!-- important - starting div for europe_geochar_class -->
 											               <label for="rad_geochars_${geoCharElement}"><strong><liferay-ui:message key="acesearch-geochars-lbl-${geoCharElement}" />:</strong></label>
 											               <p>
 											               <table class="case-studies-tabbed-content-table-for-lists">
@@ -2036,11 +2086,13 @@
 												           </tr>
 												          </table>
 												          </p>
+												         </div>
 										               </c:when>
 										               <c:when test="${geoCharElement == 'CITY'}" >
+										                <div class="europe_geochar_class">	<!-- important - starting div for europe_geochar_class -->
 										                 <label for="rad_geochars_${geoCharElement}"><strong><liferay-ui:message key="acesearch-geochars-lbl-${geoCharElement}" /></strong></label>
 										                 <span class="case-studies-tabbed-content-text-for-geochars"><input class="shared_form_city" type="text" size="50" maxlength="50" value="${city}" /></span>
-										                 </div> <!-- important - closing div for europe_geochar_class -->
+										                </div>  <!-- important - closing div for europe_geochar_class -->
 										               </c:when>
 										               <c:otherwise>
 										                 <!-- do nothing -->
@@ -2512,7 +2564,16 @@
 											
 											<li>
 												<a name="website_anchor"><strong><em>Websites</em></strong></a>
-												<p><%=measure.getWebsite() %></p>
+												<%
+												   // replacing the <p> tag
+												   String websiteForReview = measure.getWebsite();
+												   String webSites[] = websiteForReview.split(";");
+												%>
+												<p>
+												   <% for (String wsite: webSites) {
+													   if (wsite.trim().length() > 0) { 
+												   %>
+												   <a href="http://<%=wsite.trim()%>"><%=wsite.trim()%></a><br/><% }} %></p>
 												<div class="case-studies-form-clearing"></div>
 											</li>
 											
@@ -2542,11 +2603,13 @@
 								 <% 
 										 String[] sphotosInReview = measure.getSupphotos().split(";");
 								 %>
-								              <p><a href="#" id="case-studies-modal-link">Case Study Illustrations (<%= sphotosInReview.length %>)</a></p>
+								              <a href="#" id="case-studies-modal-link" class="bluebutton">Case Study Illustrations (<%= sphotosInReview.length %>)</a>
 								              <div id="case-studies-modal" title="Case Study Illustrations">
 						                        <div id="case-studies-modal-image-gallery">
 						                          <ul>
 								 <%      int photoCounter = 1;
+										  String firstImageURL = null;
+										  String firstImageAlt = null;
 									     for (String photo:sphotosInReview)
 									     {
 													 IGImage image = IGImageServiceUtil.getImage(Long.parseLong(photo)); 
@@ -2560,8 +2623,11 @@
 					             <!-- =========================== -->
 					            
 					           
-							
-							   <% if (photoCounter == 1) { %>
+							 
+							   <% if (photoCounter == 1) {
+								     firstImageURL = imageUrl;
+								     firstImageAlt = supPhotoName;
+							    %>
 								 <li class="active">
 								<%} else { %>
 								  <li>
@@ -2583,6 +2649,11 @@
 							                </div>
 									</div>
 									</div>
+									<% if (photoCounter >= 1) { %>
+									<div class="firstImage">
+									  <img src="<%=firstImageURL %>" alt="<%=firstImageAlt %>" width="160px" height="100px" />
+									</div>
+									 <% } %>
 									</div>
 								<% } // end of if %>
 								

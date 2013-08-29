@@ -396,8 +396,20 @@
 						<% } %>
 											
 						<li>
-								<a name="website_anchor"><strong><em>Websites</em></strong></a>
-								<p><%=measure.getWebsite() %></p>
+							   <a name="website_anchor"><strong><em>Websites</em></strong></a>
+								<%
+								   // replacing the <p> tag
+								   String websiteForReview = measure.getWebsite();
+								   String webSites[] = websiteForReview.split(";");
+								%>
+								
+								<p>
+								   <% for (String wsite: webSites) {
+									   if (wsite.trim().length() > 0) { 
+								   %>
+								   <a href="http://<%=wsite.trim()%>"><%=wsite.trim()%></a><br/><% }} %>
+								</p>
+								
 								<div class="case-studies-form-clearing"></div>
 						</li>
 											
@@ -422,12 +434,14 @@
 					    <% 
 										 String[] sphotosInReview = measure.getSupphotos().split(";");
 						 %>
-							<p><a href="#" id="case-studies-modal-link">Case Study Illustrations(<%= sphotosInReview.length %>)</a></p>
+							<p><a href="#" id="case-studies-modal-link" class="bluebutton">Case Study Illustrations(<%= sphotosInReview.length %>)</a></p>
 					        <div id="case-studies-modal" title="Case Study Illustrations">
 						    <div id="case-studies-modal-image-gallery">	 
 						<% 
 							
 						    int photoCounter = 1;
+						    String firstImageURL = null;
+						    String firstImageAlt = null;
 						    for (String photo:sphotosInReview)
 						    {
 								  IGImage image = IGImageServiceUtil.getImage(Long.parseLong(photo)); 
@@ -442,7 +456,10 @@
 					   
 						
 						<ul>
-							<% if (photoCounter == 1) { %>
+							<% if (photoCounter == 1) { 
+							    firstImageURL = imageUrl;
+								firstImageAlt = supPhotoName;
+							%>
 								 <li class="active">
 						    <%} else { %>
 								  <li>
@@ -463,6 +480,11 @@
 							     </div>
 								 </div>
 							     </div>
+							     <% if (photoCounter >= 1) { %>
+									<div class="firstImage">
+									  <img src="<%=firstImageURL %>" alt="<%=firstImageAlt %>" width="160px" height="100px" />
+									</div>
+								 <% } %>
 							     </div>
 				<% } // end of if %>
 				
