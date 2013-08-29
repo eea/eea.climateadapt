@@ -110,17 +110,30 @@ CHM.Control.Grid.GridControl = Ext.extend(Ext.Panel, {
 						header : '',
 						dataIndex : 'measureid',
 						width: 24,
-						renderer : function(value, metaData, record, rowIndex,
-								colIndex, store) {
-							return '<img src="' + root
-									+ 'js/chm/markers/similar_fit.png'
-									+ '" alt="Case study in similar area"/>';
+						renderer : function(value, metaData, record, rowIndex, colIndex, store) {
+							var result = '';
+							
+							var featured = record.data.feature.attributes.featured;
+							if (featured === 'yes') {
+								result = '<img src="' + root + 'js/chm/markers/similar_featured_fit.png' + '" alt="Featured case study in similar area"/>';
+							} else {
+								result = '<img src="' + root + 'js/chm/markers/similar_fit.png' + '" alt="Case study in similar area"/>';
+							}
+							
+							return result;
 						}
 					}, {
 						id : 'itemname',
 						name : 'itemname',
 						header : 'Name',
 						dataIndex : 'itemname'
+					}, {
+						id : 'featured',
+						name : 'featured',
+						header : '',
+						dataIndex : 'featured',
+						width: 75,
+						renderer: this.renderFeatured
 					} ],
 		});
 
@@ -139,22 +152,46 @@ CHM.Control.Grid.GridControl = Ext.extend(Ext.Panel, {
 						header : '',
 						dataIndex : 'measureid',
 						width: 24,
-						renderer : function(value, metaData, record, rowIndex,
-								colIndex, store) {
-							return '<img src="' + root
-									+ 'js/chm/markers/dissimilar_fit.png'
-									+ '" alt="Case study in other area"/>';
+						renderer : function(value, metaData, record, rowIndex, colIndex, store) {
+							var result = '';
+							
+							var featured = record.data.feature.attributes.featured;
+							if (featured === 'yes') {
+								result = '<img src="' + root + 'js/chm/markers/dissimilar_featured_fit.png' + '" alt="Featured case study in other area"/>';
+							} else {
+								result = '<img src="' + root + 'js/chm/markers/dissimilar_fit.png' + '" alt="Case study in other area"/>';
+							}
+							
+							return result;
 						}
 					}, {
 						id : 'itemname',
 						name : 'itemname',
 						header : 'Name',
 						dataIndex : 'itemname'
+					}, {
+						id : 'featured',
+						name : 'featured',
+						header : '',
+						dataIndex : 'featured',
+						width: 75,
+						renderer: this.renderFeatured
 					} ],
 		});
 
 		return result;
 	},
+	
+	renderFeatured: function(value, metaData, record, rowIndex, colIndex, store) {
+		var result = '';
+
+		var featured = record.data.feature.attributes.featured;
+		if (featured === 'yes') {
+			result = '<img src="' + root + 'js/chm/markers/featured-icon.png' + '" alt="Featured case study in other area"/>';
+		}
+		
+		return result;
+	}, 
 
 	createStore : function() {
 		var result = new GeoExt.data.FeatureStore({

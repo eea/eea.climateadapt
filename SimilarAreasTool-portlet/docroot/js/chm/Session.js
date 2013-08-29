@@ -27,7 +27,8 @@ CHM.Session = OpenLayers.Class({
 	    		displayInLayerSwitcher: true,
 	        	type: OpenLayers.Filter.Comparison.EQUAL_TO, 
 	        	radius: 20,
-	        	marker: root + 'js/chm/markers/similar.png'
+	        	marker: root + 'js/chm/markers/similar.png',
+	        	featuredMarker: root + 'js/chm/markers/similar_featured.png'
 	        });
 		
 		this.dissimilarAreasCasestudiesVector = new CHM.Layer.Vector.CasestudiesVector(
@@ -36,7 +37,8 @@ CHM.Session = OpenLayers.Class({
 	    		displayInLayerSwitcher: true,
         		type: OpenLayers.Filter.Comparison.NOT_EQUAL_TO, 
         		radius: 16,
-        		marker: root + 'js/chm/markers/dissimilar.png'
+        		marker: root + 'js/chm/markers/dissimilar.png',
+	        	featuredMarker: root + 'js/chm/markers/dissimilar_featured.png'
 	        });
 		
 		this.selectFeatureControl = new OpenLayers.Control.SelectFeature([this.similarAreasCasestudiesVector, this.dissimilarAreasCasestudiesVector], {multiple: false,	hover: false,});

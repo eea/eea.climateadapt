@@ -6,6 +6,8 @@ CHM.Layer.Vector.CasestudiesVector = OpenLayers.Class(OpenLayers.Layer.Vector, {
 	
 	marker: null, 
 	
+	featuredMarker: null,
+	
 	radius: null,
 	
 	extent: null,
@@ -28,22 +30,65 @@ CHM.Layer.Vector.CasestudiesVector = OpenLayers.Class(OpenLayers.Layer.Vector, {
 			url:  proxyUrl + geoserverUrl + wfs + '?', 
 	        featureType: caseStudiesFeatureType,
 	        featureNS: featureNamespace,
+	        featurePrefix: "chm",
 	        geometryName: geometryColumn,
 	        srsName: 'EPSG:900913'
         });
         
-        this.styleMap = new OpenLayers.StyleMap({
-	        "default": new OpenLayers.Style({
-		        pointRadius: this.radius, 
-		        graphicZIndex: 1,
-		        externalGraphic: this.marker
-	        }),
-	        "select": new OpenLayers.Style({
-		        pointRadius: this.radius, 
-		        graphicZIndex: 1,
-		        externalGraphic: this.marker
-	        })
-        });
+        
+        var style = new OpenLayers.Style(
+                {
+                	pointRadius: this.radius, 
+    		        graphicZIndex: 1,
+                },
+                {
+                    rules: [
+                        new OpenLayers.Rule({
+                            // a rule contains an optional filter
+                            filter: new OpenLayers.Filter.Comparison({
+                                type: OpenLayers.Filter.Comparison.EQUAL_TO,
+                                property: "featured", 
+                                value: "no"
+                            }),
+                            // if a feature matches the above filter, use this symbolizer
+                            symbolizer: {
+                                externalGraphic: this.marker
+                            }
+                        }),
+                        new OpenLayers.Rule({
+                            filter: new OpenLayers.Filter.Comparison({
+                                type: OpenLayers.Filter.Comparison.EQUAL_TO,
+                                property: "featured",
+                                value: "yes"
+                            }),
+                            symbolizer: {
+                                externalGraphic: this.featuredMarker
+                            }
+                        }),
+                        new OpenLayers.Rule({
+                            elseFilter: true,
+                            symbolizer: {
+                                externalGraphic: this.marker
+                            }
+                        })
+                    ]
+                }
+            );
+        
+        this.styleMap = new OpenLayers.StyleMap(style);
+        
+        // this.styleMap = new OpenLayers.StyleMap({
+	    //     "default": new OpenLayers.Style({
+		//         pointRadius: this.radius, 
+		//         graphicZIndex: 1,
+		//        externalGraphic: this.marker
+	    //    }),
+	    //    "select": new OpenLayers.Style({
+		//        pointRadius: this.radius, 
+		//        graphicZIndex: 1,
+		//        externalGraphic: this.marker
+	    //    })
+        // });
         
         this.events.register('featureselected', this, this.handleFeatureSelected);
         

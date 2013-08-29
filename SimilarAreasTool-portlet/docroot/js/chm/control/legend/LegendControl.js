@@ -31,12 +31,28 @@ CHM.Control.Legend.LegendControl = Ext.extend(Ext.Panel, {
 		
 		this.legendPanel.html += '<tr>';
 		
+		this.legendPanel.html += '<td class="csst-legend-image"><img src="' + root + 'js/chm/markers/similar_featured_fit.png"></td>';
+		
+		this.legendPanel.html += '<td class="csst-legend-text">Featured case study in similar biogeographical region</td>';
+		
+		this.legendPanel.html += '</tr>';
+		
+		this.legendPanel.html += '<tr>';
+		
 		this.legendPanel.html += '<td class="csst-legend-image"><img src="' + root + 'js/chm/markers/similar_fit.png"></td>';
 		
 		this.legendPanel.html += '<td class="csst-legend-text">Case study in similar biogeographical region</td>';
 		
 		this.legendPanel.html += '</tr>';
 		
+		this.legendPanel.html += '<tr>';
+		
+		this.legendPanel.html += '<td class="csst-legend-image"><img src="' + root + 'js/chm/markers/dissimilar_featured_fit.png"></td>';
+		
+		this.legendPanel.html += '<td class="csst-legend-text">Featured case study in non-similar biogeographical region</td>';
+		
+		this.legendPanel.html += '</tr>';
+
 		this.legendPanel.html += '<tr>';
 		
 		this.legendPanel.html += '<td class="csst-legend-image"><img src="' + root + 'js/chm/markers/dissimilar_fit.png"></td>';
