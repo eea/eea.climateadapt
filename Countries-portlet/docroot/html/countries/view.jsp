@@ -65,7 +65,7 @@
 	var actual_image = "europe";
 	var selectedCountry = '';
 	
-	var countries = ['AT', 'BE', 'BG', 'CH', 'CY', 'CZ', 'DE', 'DK', 'EE', 'ES', 'FI', 'FR', 'GB', 'GR', 'HR', 'HU', 'IE', 'IT', 'IS', 'LT', 'LI', 'LV', 'LU', 'MT', 'NL', 'NO', 'PL', 'PT', 'RO', 'SE', 'SI', 'SK', 'TR'];
+	var countries = ['AT', 'BE', 'BG', 'CH', 'CY', 'CZ', 'DE', 'DK', 'EE', 'ES', 'FI', 'FR', 'GB', 'GR', 'HU', 'IE', 'IT', 'IS', 'LT', 'LI', 'LV', 'LU', 'MT', 'NL', 'NO', 'PL', 'PT', 'RO', 'SE', 'SI', 'SK', 'TR'];
 	
 	function highlight(area) {
 		$j("#"+ actual_image+'_selected').hide();
@@ -111,7 +111,7 @@
 			selectedCountry = area;		
 			$j('#country-selection-list').value = area;
 			$j('#' + area + '-option').attr("selected", true);
-			
+
 			document.location.href = '/countries/' + document.getElementById(area + '-option').innerHTML.toLowerCase().replace(' ','-') ;
 		}		
 		return false;
@@ -140,8 +140,7 @@
 		<img id="FR_selected" src="<%=renderRequest.getContextPath()%>/images/countryselectionmap/FR.png" width="500" height="375" border="0" usemap="#Map" style="display:none;"/>
 		<img id="GB_selected" src="<%=renderRequest.getContextPath()%>/images/countryselectionmap/GB.png" width="500" height="375" border="0" usemap="#Map" style="display:none;"/>
 		<img id="GR_selected" src="<%=renderRequest.getContextPath()%>/images/countryselectionmap/GR.png" width="500" height="375" border="0" usemap="#Map" style="display:none;"/>
-        <img id="HR_selected" src="<%=renderRequest.getContextPath()%>/images/countryselectionmap/HR.png" width="500" height="375" border="0" usemap="#Map" style="display:none;"/>
-        <img id="HU_selected" src="<%=renderRequest.getContextPath()%>/images/countryselectionmap/HU.png" width="500" height="375" border="0" usemap="#Map" style="display:none;"/>
+		<img id="HU_selected" src="<%=renderRequest.getContextPath()%>/images/countryselectionmap/HU.png" width="500" height="375" border="0" usemap="#Map" style="display:none;"/>
 		<img id="IE_selected" src="<%=renderRequest.getContextPath()%>/images/countryselectionmap/IE.png" width="500" height="375" border="0" usemap="#Map" style="display:none;"/>
 		<img id="IS_selected" src="<%=renderRequest.getContextPath()%>/images/countryselectionmap/IS.png" width="500" height="375" border="0" usemap="#Map" style="display:none;"/>
 		<img id="IT_selected" src="<%=renderRequest.getContextPath()%>/images/countryselectionmap/IT.png" width="500" height="375" border="0" usemap="#Map" style="display:none;"/>
@@ -177,7 +176,6 @@
 			<option id="FR-option" value="FR">France</option>
 			<option id="GB-option" value="GB">United Kingdom</option>
 			<option id="GR-option" value="GR">Greece</option>
-			<option id="HR-option" value="HR">Croatia</option>
 			<option id="HU-option" value="HU">Hungary</option>
 			<option id="IE-option" value="IE">Ireland</option>
 			<option id="IS-option" value="IS">Iceland</option>
@@ -205,8 +203,6 @@
 <area shape="poly" coords="185,206,193,203,195,206,199,205,206,209,205,212,207,213,209,217,205,219,204,220,203,225,199,222,199,218,195,221,194,217,186,210,184,206" href="#BE" alt="belgium" onclick="return select('BE')" onmouseover="highlight('BE');" onmouseout="unhighlight('BE');"/>
 <!-- bulgaria -->
 <area shape="poly" coords="363,267,357,265,348,265,344,270,342,272,333,272,329,274,323,273,321,270,318,272,321,280,324,281,322,284,322,290,326,295,326,299,337,295,339,293,347,295,351,293,350,289,356,284,359,285,361,286,363,283,359,279,361,277,360,270,364,270,363,267"href="#BG" alt="bulgaria" onclick="return select('BG')" onmouseover="highlight('BG');" onmouseout="unhighlight('BG');"/>
-<!-- Croatia -->
-<area shape="poly" coords="256,266,260,265,266,265,268,266,270,261,272,261,271,256,274,256,275,254,284,260,288,261,292,259,294,260,294,264,296,265,296,267,292,268,292,266,287,266,286,267,279,266,275,268,276,268,273,266,271,269,273,272,283,283,295,293,294,294,281,292,275,288,277,286,267,281,264,277,258,272,256,269" href="#HR" alt="croatia"  onclick="return select('HR')" onmouseover="highlight('HR');" onmouseout="unhighlight('HR');" />
 <!-- cyprus -->
 <area shape="poly" coords="427,328,420,334,411,337,409,344,415,348,422,344,426,339,425,334,428,331,427,328" onclick="return select('CY')" onmouseover="highlight('CY');" onmouseout="unhighlight('CY');" />
 <!-- czech republic -->
