@@ -1,6 +1,7 @@
 package nl.wur.alterra.cgi.news.portlet;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
@@ -36,8 +37,6 @@ public class NewsPortlet extends MVCPortlet {
 	@Override
 	public void doView(RenderRequest renderRequest, RenderResponse renderResponse) throws IOException, PortletException {
 		try {
-			
-			System.out.println("inside Ace News portlet");
 			long companyId = PortalUtil.getCompanyId(renderRequest);
 			long groupId = DAOParamUtil.getLong(renderRequest, "groupId");
 			ThemeDisplay themeDisplay = (ThemeDisplay) renderRequest.getAttribute(WebKeys.THEME_DISPLAY);
@@ -47,7 +46,7 @@ public class NewsPortlet extends MVCPortlet {
 			String title = null;
 			String description = null;
 			String content = null;
-			String type = "News";
+			String type = "news";
 			String[] structureIds = {"ACENEWS"};
 			String[] templateIds = {"ACE-NEWS-TEMPLATE"};
 
@@ -79,7 +78,7 @@ public class NewsPortlet extends MVCPortlet {
 				companyId, groupId, articleId, version, title, description, content,
 				type, structureIds, templateIds, displayDateGT, displayDateLT,
 				status, reviewDate, andOperator, start, end, obc);
-			
+		
 			// we need to sort in descending based on the display date
 			JournalComparator journalComparator = new JournalComparator(1);
 			Collections.sort(journalArticlesList, journalComparator);
@@ -89,24 +88,14 @@ public class NewsPortlet extends MVCPortlet {
 			
 			for (JournalArticle article : journalArticlesList)
 			{
-				System.out.println("article title is " + article.getTitle());
-				System.out.println("article id is " + article.getArticleId());
-				System.out.println("article type is " + article.getType());
-				System.out.println("article description is " + article.getDescription());
-				System.out.println("article display date is " + article.getDisplayDate());
-				System.out.println("article version is " + article.getVersion());
-				
-				
 				String name = "url"; // The name of the custom field
 				String value = ""; // The value of the custom field: remember that this will always be a java.lang.String
-				//System.out.println("article locale is  " + article.getDefaultLocale());
+			
 				
 				// since there is no api support for the custom field we are trying to do the other way
 				Document document = SAXReaderUtil.read(article.getContentByLocale(article.getDefaultLocale()));
 				Node node = document.selectSingleNode("/root/dynamic-element[@name='" + name + "']/dynamic-content");
-				//System.out.println("xml is " + node.asXML());
 				value = node.getText();
-				System.out.println("url is " + value);
 				
 				// show only the latest version
 				if(JournalArticleLocalServiceUtil.isLatestVersion(groupId,article.getArticleId(),article.getVersion())){

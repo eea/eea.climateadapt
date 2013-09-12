@@ -1,7 +1,6 @@
 package nl.wur.alterra.cgi.events.portlet;
 
 import java.io.IOException;
-import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
@@ -15,11 +14,8 @@ import javax.servlet.http.HttpServletRequest;
 import nl.wur.alterra.cgi.util.JournalComparator;
 
 import com.liferay.portal.kernel.dao.search.DAOParamUtil;
-import com.liferay.portal.kernel.util.DateUtil;
-import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.ParamUtil;
-import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.util.WebKeys;
 import com.liferay.portal.kernel.workflow.WorkflowConstants;
 import com.liferay.portal.kernel.xml.Document;
@@ -51,7 +47,7 @@ public class EventPortlet extends MVCPortlet {
 			String title = null;
 			String description = null;
 			String content = null;
-			String type = "Events";
+			String type = "events";
 			String[] structureIds = {"ACEEVENT"};
 			String[] templateIds = {"ACE-EVENT-TEMPLATE"};
 
