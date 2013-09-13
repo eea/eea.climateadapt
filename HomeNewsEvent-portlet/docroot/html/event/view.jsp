@@ -7,7 +7,7 @@
 	   <div class="news-events">
 			  <ul>
 				<c:forEach var="journal" items="${eventList}" varStatus="status">
-				      <li>${dayList[status.count - 1]}&nbsp;${monthList[status.count - 1]}&nbsp;${yearList[status.count - 1]},&nbsp;<a href="${urlList[status.count - 1]}">${journal.title}</a>,&nbsp;${locationList[status.count - 1]}</li>
+				      <li>${journal.date}&nbsp;${journal.month}&nbsp;${journal.year},&nbsp;<a href="${journal.url}">${journal.article.title}</a>,&nbsp;${journal.location}</li>
 				</c:forEach>
 			</ul>
 	
@@ -26,16 +26,16 @@
 		        <li>
 		           <div class="case-studies-events-list-column-left">
 			            <div class="case-studies-events-list-date">
-							<div class="case-studies-events-list-date-month">${monthList[status.count - 1]}</div>
-							<div class="case-studies-events-list-date-day">${dayList[status.count - 1]}</div>
-							<div class="case-studies-events-list-date-year">${yearList[status.count - 1]}</div>
+							<div class="case-studies-events-list-date-month">${journal.month}</div>
+							<div class="case-studies-events-list-date-day">${journal.date}</div>
+							<div class="case-studies-events-list-date-year">${journal.year}</div>
 						</div>
 				   </div>
 		        
 		           <div class="case-studies-events-list-column-right">
-						<h5><a href="${urlList[status.count - 1]}">${journal.title}</a></h5>
-						<small>${locationList[status.count - 1]}</small>
-						<p>${journal.description}</p>
+						<h5><a href="${journal.url}">${journal.article.title}</a></h5>
+						<small>${journal.location}</small>
+						<p>${journal.article.description}</p>
 				  </div>
 				  <div class="case-studies-three-column-layout-clearing"></div>
 				</li>
