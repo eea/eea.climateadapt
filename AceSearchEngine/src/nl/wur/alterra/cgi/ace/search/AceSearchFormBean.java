@@ -10,6 +10,8 @@ public class AceSearchFormBean {
     private String sortitemtype;
     private String[] aceitemtype;
     private String[] sector;
+    private String[] scenario ;
+    private String[] timeperiod ;
     private String[] element;
     private String[] impact;
     private String[] countries;
@@ -26,6 +28,8 @@ public class AceSearchFormBean {
 
     private String conditionAdaptationSector;
     private String conditionAdaptationElement;
+    private String conditionScenario;
+    private String conditionTimePeriod;
     private String conditionClimateImpact;
 
 
@@ -49,6 +53,14 @@ public class AceSearchFormBean {
         return sector;
     }
 
+    public String[] getScenario() {
+        return scenario;
+    }
+
+    public String[] getTimePeriod() {
+        return timeperiod;
+    }
+
     public String[] getElement() {
         return element;
     }
@@ -63,6 +75,14 @@ public class AceSearchFormBean {
 
     public void setSector(String[] sector) {
         this.sector = sector;
+    }
+
+    public void setScenario(String[] scenario) {
+        this.scenario = scenario;
+    }
+
+    public void setTimePeriod(String[] timeperiod) {
+        this.timeperiod = timeperiod;
     }
 
     public void setElement(String[] element) {
@@ -109,6 +129,14 @@ public class AceSearchFormBean {
         this.datainfo_type = datainfo_type;
     }
 
+    public String getConditionAdaptationElement() {
+        return conditionAdaptationElement;
+    }
+
+    public void setConditionAdaptationElement(String conditionAdaptationElement) {
+        this.conditionAdaptationElement = conditionAdaptationElement;
+    }
+
     public String getConditionAdaptationSector() {
         return conditionAdaptationSector;
     }
@@ -117,20 +145,28 @@ public class AceSearchFormBean {
         this.conditionAdaptationSector = conditionAdaptationSector;
     }
 
-    public String getConditionAdaptationElement() {
-        return conditionAdaptationElement;
+    public String getConditionScenario() {
+        return conditionScenario;
     }
 
-    public String getConditionClimateImpact() {
-        return conditionClimateImpact;
+    public void setConditionScenario(String conditionScenario) {
+        this.conditionScenario = conditionScenario;
     }
 
-    public void setConditionAdaptationElement(String conditionAdaptationElement) {
-        this.conditionAdaptationElement = conditionAdaptationElement;
+    public String getConditionTimePeriod() {
+        return conditionTimePeriod;
+    }
+
+    public void setConditionTimePeriod(String conditionTimePeriod) {
+        this.conditionTimePeriod = conditionTimePeriod;
     }
 
     public void setConditionClimateImpact(String conditionClimateImpact) {
         this.conditionClimateImpact = conditionClimateImpact;
+    }
+
+    public String getConditionClimateImpact() {
+        return conditionClimateImpact;
     }
 
     public void setFreetextMode(String freetextMode$) {

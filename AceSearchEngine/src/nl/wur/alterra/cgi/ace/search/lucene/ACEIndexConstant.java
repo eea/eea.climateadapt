@@ -106,6 +106,14 @@ public class ACEIndexConstant {
          */
         public static final String ELEMENT = "element";
         /**
+         * Scenario.
+         */
+        public static final String SCENARIO = "scenario";
+        /**
+         * Time Period.
+         */
+        public static final String TIMEPERIOD = "timeperiod";
+        /**
          * Impact.
          */
         public static final String IMPACT = "impact";

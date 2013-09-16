@@ -30,6 +30,8 @@ public class ACEAnalyzer {
         analyzer.addAnalyzer(ACEIndexConstant.IndexField.DATATYPE, keywordAnalyzer);
         analyzer.addAnalyzer(ACEIndexConstant.IndexField.SECTOR, keywordAnalyzer);
         analyzer.addAnalyzer(ACEIndexConstant.IndexField.ELEMENT, keywordAnalyzer);
+        analyzer.addAnalyzer(ACEIndexConstant.IndexField.SCENARIO, keywordAnalyzer);
+        analyzer.addAnalyzer(ACEIndexConstant.IndexField.TIMEPERIOD, keywordAnalyzer);
         analyzer.addAnalyzer(ACEIndexConstant.IndexField.IMPACT, keywordAnalyzer);
         analyzer.addAnalyzer(ACEIndexConstant.IndexField.SPATIAL_LAYER, keywordAnalyzer);
         analyzer.addAnalyzer(ACEIndexConstant.IndexField.SPATIAL_VALUES, keywordAnalyzer);

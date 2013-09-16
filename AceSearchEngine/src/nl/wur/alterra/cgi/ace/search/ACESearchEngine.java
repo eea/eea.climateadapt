@@ -43,12 +43,16 @@ public class ACESearchEngine {
         String[] anyOfThese ;
         String[] conditionAdaptationElement ;
         String[] conditionAdaptationSector ;
+        String[] conditionScenario ;
+        String[] conditionTimePeriod ;
         String[] conditionClimateImpact ;
         String[] countries ;
         String[] elements ;
         String[] freetextMode ;
         String[] impacts ;
         String[] sectors ;
+        String[] scenarios ;
+        String[] timeperiods ;
         String[] sortBys ;
         String[] datainfo_type;
 
@@ -69,12 +73,16 @@ public class ACESearchEngine {
         anyOfThese = searchParams.get(SearchRequestParams.ANY);
         conditionAdaptationElement = searchParams.get(SearchRequestParams.CONDITION_ADAPTATION_ELEMENT);
         conditionAdaptationSector = searchParams.get(SearchRequestParams.CONDITION_ADAPTATION_SECTOR);
+        conditionScenario = searchParams.get(SearchRequestParams.CONDITION_SCENARIO);
+        conditionTimePeriod = searchParams.get(SearchRequestParams.CONDITION_TIME_PERIOD);
         conditionClimateImpact = searchParams.get(SearchRequestParams.CONDITION_CLIMATE_IMPACT);
         countries = searchParams.get(SearchRequestParams.COUNTRIES);
         elements = searchParams.get(SearchRequestParams.ELEMENT);
         freetextMode = searchParams.get(SearchRequestParams.FREETEXT_MODE);
         impacts = searchParams.get(SearchRequestParams.IMPACT);
         sectors = searchParams.get(SearchRequestParams.SECTOR);
+        scenarios = searchParams.get(SearchRequestParams.SCENARIO);
+        timeperiods = searchParams.get(SearchRequestParams.TIMEPERIOD);
         sortBys = searchParams.get(SearchRequestParams.SORTBY);
 
         if(isEmpty(conditionAdaptationSector)) {
@@ -85,6 +93,14 @@ public class ACESearchEngine {
             conditionAdaptationElement = new String[1];
             conditionAdaptationElement[0] = SearchRequestParams.AND_CONDITION;
         }
+        if(isEmpty(conditionScenario)) {
+        	conditionScenario = new String[1];
+        	conditionScenario[0] = SearchRequestParams.AND_CONDITION;
+        }
+        if(isEmpty(conditionTimePeriod)) {
+        	conditionTimePeriod = new String[1];
+        	conditionTimePeriod[0] = SearchRequestParams.AND_CONDITION;
+        }        
         if(isEmpty(conditionClimateImpact)) {
             conditionClimateImpact = new String[1];
             conditionClimateImpact[0] = SearchRequestParams.AND_CONDITION;
@@ -113,6 +129,8 @@ public class ACESearchEngine {
         formBean.setFreetextMode(freetextMode[0]);
         formBean.setImpact(impacts);
         formBean.setSector(sectors);
+        formBean.setScenario(scenarios);
+        formBean.setTimePeriod(timeperiods);
         formBean.setSortBy(sortBy);
 
         formBean.setFuzziness(fuzzinessVal);
@@ -136,6 +154,20 @@ public class ACESearchEngine {
         }
         else {
             formBean.setConditionAdaptationElement(SearchRequestParams.AND_CONDITION);
+        }
+
+        if (conditionScenario != null && conditionScenario[0].equalsIgnoreCase(SearchRequestParams.OR_CONDITION)) {
+            formBean.setConditionScenario(SearchRequestParams.OR_CONDITION);
+        }
+        else {
+            formBean.setConditionScenario(SearchRequestParams.AND_CONDITION);
+        }
+
+        if (conditionTimePeriod != null && conditionTimePeriod[0].equalsIgnoreCase(SearchRequestParams.OR_CONDITION)) {
+            formBean.setConditionTimePeriod(SearchRequestParams.OR_CONDITION);
+        }
+        else {
+            formBean.setConditionTimePeriod(SearchRequestParams.AND_CONDITION);
         }
 
         if (conditionClimateImpact != null && conditionClimateImpact[0].equalsIgnoreCase(SearchRequestParams.OR_CONDITION)) {
@@ -259,7 +291,7 @@ public class ACESearchEngine {
             // handle sectors
             //
             String[] sectors = formBean.getSector();
-            if ((formBean.getSector() != null) && (sectors.length > 0)) {
+            if ((sectors != null) && (sectors.length > 0)) {
                 rawQuery += " AND (";
                 for(String sector: sectors) {
                     rawQuery += " (" + ACEIndexConstant.IndexField.SECTOR + ":" + sector + ") " + formBean.getConditionAdaptationSector();
@@ -279,6 +311,30 @@ public class ACESearchEngine {
                 rawQuery =  rawQuery.substring(0, rawQuery.lastIndexOf(formBean.getConditionAdaptationElement())) + " )";
             }
 
+            //
+            // handle scenarios
+            //
+            String[] scenarios = formBean.getScenario();
+            if ((scenarios != null) && (scenarios.length > 0)) {
+                rawQuery += " AND (";
+                for(String scenario: scenarios) {
+                    rawQuery += " (" + ACEIndexConstant.IndexField.SCENARIO + ":" + scenario + ") " + formBean.getConditionScenario();
+                }
+                rawQuery =  rawQuery.substring(0, rawQuery.lastIndexOf(formBean.getConditionScenario())) + " )";
+            }  
+
+            //
+            // handle time periods
+            //
+            String[] timeperiods = formBean.getTimePeriod();
+            if ((timeperiods != null) && (timeperiods.length > 0)) {
+                rawQuery += " AND (";
+                for(String timeperiod: timeperiods) {
+                    rawQuery += " (" + ACEIndexConstant.IndexField.TIMEPERIOD + ":" + timeperiod + ") " + formBean.getConditionTimePeriod();
+                }
+                rawQuery =  rawQuery.substring(0, rawQuery.lastIndexOf(formBean.getConditionTimePeriod())) + " )";
+            }
+            
             //
             // handle impacts
             //
