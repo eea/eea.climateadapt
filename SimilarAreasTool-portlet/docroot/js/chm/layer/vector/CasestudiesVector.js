@@ -44,13 +44,11 @@ CHM.Layer.Vector.CasestudiesVector = OpenLayers.Class(OpenLayers.Layer.Vector, {
                 {
                     rules: [
                         new OpenLayers.Rule({
-                            // a rule contains an optional filter
                             filter: new OpenLayers.Filter.Comparison({
                                 type: OpenLayers.Filter.Comparison.EQUAL_TO,
                                 property: "featured", 
                                 value: "no"
                             }),
-                            // if a feature matches the above filter, use this symbolizer
                             symbolizer: {
                                 externalGraphic: this.marker
                             }
@@ -76,19 +74,6 @@ CHM.Layer.Vector.CasestudiesVector = OpenLayers.Class(OpenLayers.Layer.Vector, {
             );
         
         this.styleMap = new OpenLayers.StyleMap(style);
-        
-        // this.styleMap = new OpenLayers.StyleMap({
-	    //     "default": new OpenLayers.Style({
-		//         pointRadius: this.radius, 
-		//         graphicZIndex: 1,
-		//        externalGraphic: this.marker
-	    //    }),
-	    //    "select": new OpenLayers.Style({
-		//        pointRadius: this.radius, 
-		//        graphicZIndex: 1,
-		//        externalGraphic: this.marker
-	    //    })
-        // });
         
         this.events.register('featureselected', this, this.handleFeatureSelected);
         
@@ -230,6 +215,8 @@ CHM.Layer.Vector.CasestudiesVector = OpenLayers.Class(OpenLayers.Layer.Vector, {
 		if (aFilter == null || aFilter.length == 0) {
 			protocol.read({
 				callback: function(result) {
+			        this.removeAllFeatures();
+			     	
 					if (result.success()) {
 						if(result.features.length) {
 							this.addFeatures(result.features);
@@ -242,6 +229,8 @@ CHM.Layer.Vector.CasestudiesVector = OpenLayers.Class(OpenLayers.Layer.Vector, {
 	        protocol.read({
 	            filter: aFilter,
 	            callback: function(result) {
+	                this.removeAllFeatures();
+	             	
 	                if (result.success()) {
 	                    if(result.features.length) {
 	                    	this.addFeatures(result.features);
