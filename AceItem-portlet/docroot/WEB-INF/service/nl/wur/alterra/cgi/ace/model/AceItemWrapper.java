@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2011 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2010 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -330,6 +330,22 @@ public class AceItemWrapper implements AceItem {
 
 	public void setFeature(java.lang.String feature) {
 		_aceItem.setFeature(feature);
+	}
+
+	public java.lang.String getScenario() {
+		return _aceItem.getScenario();
+	}
+
+	public void setScenario(java.lang.String scenario) {
+		_aceItem.setScenario(scenario);
+	}
+
+	public java.lang.String getTimeperiod() {
+		return _aceItem.getTimeperiod();
+	}
+
+	public void setTimeperiod(java.lang.String timeperiod) {
+		_aceItem.setTimeperiod(timeperiod);
 	}
 
 	public nl.wur.alterra.cgi.ace.model.AceItem toEscapedModel() {

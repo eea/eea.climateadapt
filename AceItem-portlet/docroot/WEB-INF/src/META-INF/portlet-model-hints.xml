@@ -39,6 +39,8 @@
 		<field name="year" type="String" />
 		<field name="geochars" type="String" />
 		<field name="feature" type="String" />
+		<field name="scenario" type="String" />
+		<field name="timeperiod" type="String" />
 	</model>
 	<model name="nl.wur.alterra.cgi.ace.model.WxsHarvester">
 		<field name="wxsharvesterid" type="long" />

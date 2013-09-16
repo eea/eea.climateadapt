@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2011 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2010 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -596,6 +596,36 @@ public interface AceItemModel extends BaseModel<AceItem> {
 	 * @param feature the feature of this ace item
 	 */
 	public void setFeature(String feature);
+
+	/**
+	 * Gets the scenario of this ace item.
+	 *
+	 * @return the scenario of this ace item
+	 */
+	@AutoEscape
+	public String getScenario();
+
+	/**
+	 * Sets the scenario of this ace item.
+	 *
+	 * @param scenario the scenario of this ace item
+	 */
+	public void setScenario(String scenario);
+
+	/**
+	 * Gets the timeperiod of this ace item.
+	 *
+	 * @return the timeperiod of this ace item
+	 */
+	@AutoEscape
+	public String getTimeperiod();
+
+	/**
+	 * Sets the timeperiod of this ace item.
+	 *
+	 * @param timeperiod the timeperiod of this ace item
+	 */
+	public void setTimeperiod(String timeperiod);
 
 	/**
 	 * Gets a copy of this ace item as an escaped model instance by wrapping it with an {@link com.liferay.portal.kernel.bean.AutoEscapeBeanHandler}.

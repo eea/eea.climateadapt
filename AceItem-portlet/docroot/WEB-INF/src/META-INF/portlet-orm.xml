@@ -56,6 +56,8 @@
 			<basic name="year" />
 			<basic name="geochars" />
 			<basic name="feature" />
+			<basic name="scenario" />
+			<basic name="timeperiod" />
 			<transient name="primaryKey" />
 		</attributes>
 	</mapped-superclass>

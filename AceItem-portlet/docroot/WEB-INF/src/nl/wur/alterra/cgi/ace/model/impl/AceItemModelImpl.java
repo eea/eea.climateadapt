@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2011 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2010 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -92,9 +92,11 @@ public class AceItemModelImpl extends BaseModelImpl<AceItem>
 			{ "textwebpage", new Integer(Types.VARCHAR) },
 			{ "year", new Integer(Types.VARCHAR) },
 			{ "geochars", new Integer(Types.VARCHAR) },
-			{ "feature", new Integer(Types.VARCHAR) }
+			{ "feature", new Integer(Types.VARCHAR) },
+			{ "scenario", new Integer(Types.VARCHAR) },
+			{ "timeperiod", new Integer(Types.VARCHAR) }
 		};
-	public static final String TABLE_SQL_CREATE = "create table Ace_AceItem (aceItemId LONG not null primary key,companyId LONG,groupId LONG,wxsharvesterId LONG,cswharvesterId LONG,name VARCHAR(75) null,description VARCHAR(75) null,datatype VARCHAR(75) null,storedAt VARCHAR(75) null,storagetype VARCHAR(75) null,specialtagging VARCHAR(75) null,textSearch VARCHAR(75) null,keyword VARCHAR(75) null,targetresolution VARCHAR(75) null,spatialLayer VARCHAR(75) null,spatialValues VARCHAR(75) null,startDate DATE null,endDate DATE null,publicationDate DATE null,sectors_ VARCHAR(75) null,elements_ VARCHAR(75) null,climateimpacts_ VARCHAR(75) null,rating LONG,importance LONG,source VARCHAR(75) null,deeplink VARCHAR(75) null,controlstatus INTEGER,creator VARCHAR(75) null,creationdate DATE null,moderator VARCHAR(75) null,approvaldate DATE null,replacesId LONG,comments VARCHAR(75) null,textwebpage VARCHAR(75) null,year VARCHAR(75) null,geochars VARCHAR(75) null,feature VARCHAR(75) null)";
+	public static final String TABLE_SQL_CREATE = "create table Ace_AceItem (aceItemId LONG not null primary key,companyId LONG,groupId LONG,wxsharvesterId LONG,cswharvesterId LONG,name VARCHAR(75) null,description VARCHAR(75) null,datatype VARCHAR(75) null,storedAt VARCHAR(75) null,storagetype VARCHAR(75) null,specialtagging VARCHAR(75) null,textSearch VARCHAR(75) null,keyword VARCHAR(75) null,targetresolution VARCHAR(75) null,spatialLayer VARCHAR(75) null,spatialValues VARCHAR(75) null,startDate DATE null,endDate DATE null,publicationDate DATE null,sectors_ VARCHAR(75) null,elements_ VARCHAR(75) null,climateimpacts_ VARCHAR(75) null,rating LONG,importance LONG,source VARCHAR(75) null,deeplink VARCHAR(75) null,controlstatus INTEGER,creator VARCHAR(75) null,creationdate DATE null,moderator VARCHAR(75) null,approvaldate DATE null,replacesId LONG,comments VARCHAR(75) null,textwebpage VARCHAR(75) null,year VARCHAR(75) null,geochars VARCHAR(75) null,feature VARCHAR(75) null,scenario VARCHAR(75) null,timeperiod VARCHAR(75) null)";
 	public static final String TABLE_SQL_DROP = "drop table Ace_AceItem";
 	public static final String ORDER_BY_JPQL = " ORDER BY aceItem.name ASC";
 	public static final String ORDER_BY_SQL = " ORDER BY Ace_AceItem.name ASC";
@@ -544,6 +546,32 @@ public class AceItemModelImpl extends BaseModelImpl<AceItem>
 		_feature = feature;
 	}
 
+	public String getScenario() {
+		if (_scenario == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _scenario;
+		}
+	}
+
+	public void setScenario(String scenario) {
+		_scenario = scenario;
+	}
+
+	public String getTimeperiod() {
+		if (_timeperiod == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _timeperiod;
+		}
+	}
+
+	public void setTimeperiod(String timeperiod) {
+		_timeperiod = timeperiod;
+	}
+
 	public AceItem toEscapedModel() {
 		if (isEscapedModel()) {
 			return (AceItem)this;
@@ -607,6 +635,8 @@ public class AceItemModelImpl extends BaseModelImpl<AceItem>
 		clone.setYear(getYear());
 		clone.setGeochars(getGeochars());
 		clone.setFeature(getFeature());
+		clone.setScenario(getScenario());
+		clone.setTimeperiod(getTimeperiod());
 
 		return clone;
 	}
@@ -652,7 +682,7 @@ public class AceItemModelImpl extends BaseModelImpl<AceItem>
 	}
 
 	public String toString() {
-		StringBundler sb = new StringBundler(75);
+		StringBundler sb = new StringBundler(79);
 
 		sb.append("{aceItemId=");
 		sb.append(getAceItemId());
@@ -728,13 +758,17 @@ public class AceItemModelImpl extends BaseModelImpl<AceItem>
 		sb.append(getGeochars());
 		sb.append(", feature=");
 		sb.append(getFeature());
+		sb.append(", scenario=");
+		sb.append(getScenario());
+		sb.append(", timeperiod=");
+		sb.append(getTimeperiod());
 		sb.append("}");
 
 		return sb.toString();
 	}
 
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(115);
+		StringBundler sb = new StringBundler(121);
 
 		sb.append("<model><model-name>");
 		sb.append("nl.wur.alterra.cgi.ace.model.AceItem");
@@ -888,6 +922,14 @@ public class AceItemModelImpl extends BaseModelImpl<AceItem>
 			"<column><column-name>feature</column-name><column-value><![CDATA[");
 		sb.append(getFeature());
 		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>scenario</column-name><column-value><![CDATA[");
+		sb.append(getScenario());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>timeperiod</column-name><column-value><![CDATA[");
+		sb.append(getTimeperiod());
+		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");
 
@@ -932,5 +974,7 @@ public class AceItemModelImpl extends BaseModelImpl<AceItem>
 	private String _year;
 	private String _geochars;
 	private String _feature;
+	private String _scenario;
+	private String _timeperiod;
 	private transient ExpandoBridge _expandoBridge;
 }

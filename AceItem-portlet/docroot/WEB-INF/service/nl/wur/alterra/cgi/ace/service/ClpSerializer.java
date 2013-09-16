@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2011 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2010 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -316,6 +316,20 @@ public class ClpSerializer {
 					String value36 = oldCplModel.getFeature();
 
 					method36.invoke(newModel, value36);
+
+					Method method37 = newModelClass.getMethod("setScenario",
+							new Class[] { String.class });
+
+					String value37 = oldCplModel.getScenario();
+
+					method37.invoke(newModel, value37);
+
+					Method method38 = newModelClass.getMethod("setTimeperiod",
+							new Class[] { String.class });
+
+					String value38 = oldCplModel.getTimeperiod();
+
+					method38.invoke(newModel, value38);
 
 					return newModel;
 				}
@@ -894,6 +908,20 @@ public class ClpSerializer {
 							(Object[])null);
 
 					newModel.setFeature(value36);
+
+					Method method37 = oldModelClass.getMethod("getScenario");
+
+					String value37 = (String)method37.invoke(oldModel,
+							(Object[])null);
+
+					newModel.setScenario(value37);
+
+					Method method38 = oldModelClass.getMethod("getTimeperiod");
+
+					String value38 = (String)method38.invoke(oldModel,
+							(Object[])null);
+
+					newModel.setTimeperiod(value38);
 
 					return newModel;
 				}

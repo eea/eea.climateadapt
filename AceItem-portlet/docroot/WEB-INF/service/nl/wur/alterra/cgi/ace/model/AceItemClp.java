@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2011 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2010 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -339,6 +339,22 @@ public class AceItemClp extends BaseModelImpl<AceItem> implements AceItem {
 		_feature = feature;
 	}
 
+	public String getScenario() {
+		return _scenario;
+	}
+
+	public void setScenario(String scenario) {
+		_scenario = scenario;
+	}
+
+	public String getTimeperiod() {
+		return _timeperiod;
+	}
+
+	public void setTimeperiod(String timeperiod) {
+		_timeperiod = timeperiod;
+	}
+
 	public AceItem toEscapedModel() {
 		if (isEscapedModel()) {
 			return this;
@@ -389,6 +405,8 @@ public class AceItemClp extends BaseModelImpl<AceItem> implements AceItem {
 		clone.setYear(getYear());
 		clone.setGeochars(getGeochars());
 		clone.setFeature(getFeature());
+		clone.setScenario(getScenario());
+		clone.setTimeperiod(getTimeperiod());
 
 		return clone;
 	}
@@ -434,7 +452,7 @@ public class AceItemClp extends BaseModelImpl<AceItem> implements AceItem {
 	}
 
 	public String toString() {
-		StringBundler sb = new StringBundler(75);
+		StringBundler sb = new StringBundler(79);
 
 		sb.append("{aceItemId=");
 		sb.append(getAceItemId());
@@ -510,13 +528,17 @@ public class AceItemClp extends BaseModelImpl<AceItem> implements AceItem {
 		sb.append(getGeochars());
 		sb.append(", feature=");
 		sb.append(getFeature());
+		sb.append(", scenario=");
+		sb.append(getScenario());
+		sb.append(", timeperiod=");
+		sb.append(getTimeperiod());
 		sb.append("}");
 
 		return sb.toString();
 	}
 
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(115);
+		StringBundler sb = new StringBundler(121);
 
 		sb.append("<model><model-name>");
 		sb.append("nl.wur.alterra.cgi.ace.model.AceItem");
@@ -670,6 +692,14 @@ public class AceItemClp extends BaseModelImpl<AceItem> implements AceItem {
 			"<column><column-name>feature</column-name><column-value><![CDATA[");
 		sb.append(getFeature());
 		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>scenario</column-name><column-value><![CDATA[");
+		sb.append(getScenario());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>timeperiod</column-name><column-value><![CDATA[");
+		sb.append(getTimeperiod());
+		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");
 
@@ -713,4 +743,6 @@ public class AceItemClp extends BaseModelImpl<AceItem> implements AceItem {
 	private String _year;
 	private String _geochars;
 	private String _feature;
+	private String _scenario;
+	private String _timeperiod;
 }
