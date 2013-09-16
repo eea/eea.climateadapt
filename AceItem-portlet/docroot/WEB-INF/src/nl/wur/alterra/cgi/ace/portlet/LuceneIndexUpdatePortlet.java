@@ -176,7 +176,7 @@ public abstract class LuceneIndexUpdatePortlet extends MVCPortlet {
         String choosensectors = "";
         for (AceItemSector aceitemsector : AceItemSector.values()) {
 
-            if (ParamUtil.getString(request, "ectors_" + aceitemsector.toString()) != null) {
+            if (ParamUtil.getString(request, "sectors_" + aceitemsector.toString()) != null) {
                 String s = ParamUtil.getString(request, "sectors_" + aceitemsector.toString());
                 if (s.equalsIgnoreCase(aceitemsector.toString())) {
                     choosensectors += aceitemsector.toString() + ";";
