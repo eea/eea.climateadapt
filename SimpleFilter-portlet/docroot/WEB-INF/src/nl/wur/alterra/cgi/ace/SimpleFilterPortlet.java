@@ -57,7 +57,20 @@ public class SimpleFilterPortlet extends MVCPortlet {
             		
             		impact[0] = (String) renderRequest.getPortletSession().getAttribute(Constants.USERIMPACT);
             	}
-            	//System.out.println("Impact: " + impact[0]);
+
+            	String scenario[] = new String[1];
+            	scenario[0] = (String) renderRequest.getAttribute(Constants.USERSCENARIO);
+            	if (scenario[0] == null) {
+            		
+            		scenario[0] = (String) renderRequest.getPortletSession().getAttribute(Constants.USERSCENARIO);
+            	}
+
+            	String timeperiod[] = new String[1];
+            	timeperiod[0] = (String) renderRequest.getAttribute(Constants.USERTIMEPERIOD);
+            	if (timeperiod[0] == null) {
+            		
+            		timeperiod[0] = (String) renderRequest.getPortletSession().getAttribute(Constants.USERTIMEPERIOD);
+            	}
             	       
                 Map<String, String[]> requestParams;
 
@@ -70,7 +83,9 @@ public class SimpleFilterPortlet extends MVCPortlet {
         		fuzziness = preferences.getValue(SearchRequestParams.FUZZINESS, "");
         		anyOfThese = preferences.getValue(SearchRequestParams.ANY, "");
         		aceItemTypes = preferences.getValues(SearchRequestParams.ACEITEM_TYPE, new String[] {} );
-        			
+        		
+        		int nrOfCheckboxes = Integer.parseInt( preferences.getValue(Constants.NRCHECKBOXES, "2") );
+        		
                 ACESearchEngine se = new ACESearchEngine();
                 AceSearchFormBean formBean = se.prepareACESearchFormBean(requestParams, fuzziness);        	
                 
@@ -90,6 +105,18 @@ public class SimpleFilterPortlet extends MVCPortlet {
                 renderRequest.getPortletSession().setAttribute(Constants.USERIMPACT, impact[0]);
                 if( !impact[0].equalsIgnoreCase("all") ) {
                 	formBean.setImpact( impact );
+                } 
+                
+                if(nrOfCheckboxes == 4) {
+	                renderRequest.getPortletSession().setAttribute(Constants.USERSCENARIO, scenario[0]);
+	                if( (scenario[0].length() > 0) &&  !scenario[0].equalsIgnoreCase("all") ) {
+	                	formBean.setScenario( scenario );
+	                } 
+	                
+	                renderRequest.getPortletSession().setAttribute(Constants.USERTIMEPERIOD, timeperiod[0]);
+	                if( (timeperiod[0].length() > 0) &&  !timeperiod[0].equalsIgnoreCase("all") ) {
+	                	formBean.setTimePeriod( timeperiod );
+	                } 
                 }
                 
     			searchEngine.handleSearchRequest(renderRequest, formBean);
@@ -114,12 +141,12 @@ public class SimpleFilterPortlet extends MVCPortlet {
                 return;
     }	
 
-
     public void searchAceitem(ActionRequest request, ActionResponse response) throws Exception {
         try {
         		request.setAttribute(Constants.USERSECTOR, ParamUtil.getString(request, "sector-selector"));
     			request.setAttribute(Constants.USERIMPACT, ParamUtil.getString(request, "risk-selector"));
-
+          		request.setAttribute(Constants.USERSCENARIO, ParamUtil.getString(request, "scenario-selector"));
+        		request.setAttribute(Constants.USERTIMEPERIOD, ParamUtil.getString(request, "timeperiod-selector"));
         }
         catch(Exception x) {
             SessionErrors.add(request, "acesearch-execution-failure");
@@ -140,11 +167,13 @@ public class SimpleFilterPortlet extends MVCPortlet {
         String[] datainfo_type = requestParams.get(SearchRequestParams.DATAINFO_TYPE);      
         String[] anyOfThese = requestParams.get(SearchRequestParams.ANY);
         String[] aceItemTypes = requestParams.get(SearchRequestParams.ACEITEM_TYPE);
-        String[] sectors = requestParams.get(SearchRequestParams.SECTOR);
+/*        String[] sectors = requestParams.get(SearchRequestParams.SECTOR);
         String[] countries = requestParams.get(SearchRequestParams.COUNTRIES);
         String[] elements = requestParams.get(SearchRequestParams.ELEMENT);
         String[] impacts = requestParams.get(SearchRequestParams.IMPACT);
-        String[] sortBys = requestParams.get(SearchRequestParams.SORTBY);
+        String[] scenarios = requestParams.get(SearchRequestParams.SCENARIO);
+        String[] timeperiods = requestParams.get(SearchRequestParams.TIMEPERIOD);
+*/        String[] sortBys = requestParams.get(SearchRequestParams.SORTBY);
         if((sortBys == null) || (sortBys.length==0) || (sortBys[0].length()==0)) {
         	sortBys = new String[] {"RATING"} ; // sort by rating 
         }
@@ -153,17 +182,20 @@ public class SimpleFilterPortlet extends MVCPortlet {
 		prefs.setValue(Constants.FREEPAR, ParamUtil.getString(request, Constants.FREEPAR) );
 		prefs.setValue(Constants.NRITEMSPAGE, ParamUtil.getString(request, Constants.NRITEMSPAGE) );
 		prefs.setValue(Constants.FUZZINESS, ParamUtil.getString(request, Constants.FUZZINESS) );
-
+		prefs.setValue(Constants.NRCHECKBOXES, ParamUtil.getString(request, Constants.NRCHECKBOXES) );
+		
 		prefs.store();
 		prefs.setValues(SearchRequestParams.FREETEXT_MODE, new String[] {"2"} ); // always search all of the words		
 		prefs.setValues(SearchRequestParams.DATAINFO_TYPE, datainfo_type);
 		prefs.setValues(SearchRequestParams.ANY, anyOfThese);
 		prefs.setValues(SearchRequestParams.ACEITEM_TYPE, aceItemTypes);
-		prefs.setValues(SearchRequestParams.SECTOR, sectors);
+/*		prefs.setValues(SearchRequestParams.SECTOR, sectors);
 		prefs.setValues(SearchRequestParams.COUNTRIES, countries);
         prefs.setValues(SearchRequestParams.ELEMENT, elements);
         prefs.setValues(SearchRequestParams.IMPACT, impacts);
-		prefs.setValues(SearchRequestParams.SORTBY, sortBys);
+		prefs.setValues(SearchRequestParams.SCENARIO, scenarios);
+		prefs.setValues(SearchRequestParams.TIMEPERIOD, timeperiods);
+*/		prefs.setValues(SearchRequestParams.SORTBY, sortBys);
 		
 		prefs.store();
 	}
