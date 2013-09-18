@@ -177,7 +177,7 @@ String redirect = PortalUtil.getCurrentURL(renderRequest);
 					<!-- added width because IE8 renders a 100% width otherwise -->
 					<div id="timeperiod-selector-div" class="adaptationtools-selector" style="margin-top:10px;float:left;width:400px;">
 						<span style="margin-right:10px;float:left;width:95px;">
-							Time Period
+							Time period
 						</span>
 						<select id="timeperiod-selector" name="timeperiod-selector" style="float:left;width: 239px;" onchange="document.getElementById('ace_simplefilter_30x').submit()" >
 							<option value="all" <%= selected %>>All time periods</option>
