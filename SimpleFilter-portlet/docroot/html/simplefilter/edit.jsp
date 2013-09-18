@@ -48,6 +48,8 @@ String simple_date = null;
 String sortby = acesearchformbean.getSortBy();
 if (sortby == null) sortby = "NAME" ;
 
+String nrcheckboxes = renderRequest.getPreferences().getValue(Constants.NRCHECKBOXES,"2");
+
 String[] sectors = acesearchformbean.getSector();
 if (sectors == null) sectors = new String[0];
 List<String> sectorsList = Arrays.asList(sectors);
@@ -104,7 +106,7 @@ pageContext.setAttribute("countriesList", countriesList);
                     <label for='<%= Constants.FUZZINESS %>' class="input"><liferay-ui:message key='acefilter-lbl-fuzziness' /></label>
                     <input type="text" class="text" name="<%= Constants.FUZZINESS %>" value='<%= renderRequest.getPreferences().getValue(Constants.FUZZINESS, "0.7") %>' />
                  </div>
-            </div>  
+            </div> 
             
              <div class="search_section">
                 <div class="row">
@@ -112,6 +114,14 @@ pageContext.setAttribute("countriesList", countriesList);
                 <input type="radio" name="sortBy" class="sortByControl" id="${sortsearchRelevanceId}" value="RELEVANCE" <%= (sortby.equals("RELEVANCE"))?"checked":"" %> /><liferay-ui:message key="acesearch-sort-relevance" /><br />
 				<input type="radio" name="sortBy" class="sortByControl" id="${sortsearchRatingId}" value="RATING" <%= (sortby.equals("RATING"))?"checked":"" %> /><liferay-ui:message key="acesearch-sort-rating" /><br />
                 <input type="radio" name="sortBy" class="sortByControl" id="${sortsearchNameId}" value="NAME" <%= (sortby.equals("NAME"))?"checked":"" %> /><liferay-ui:message key="acesearch-sort-name" /><br />
+                </div>
+            </div>
+            
+             <div class="search_section">
+                <div class="row">
+				<liferay-ui:message key="acefilter-lbl-nrcheckboxes" /><br />
+                <input type="radio" name="<%= Constants.NRCHECKBOXES %>" class="sortByControl" id="${nrcheckboxes2Id}" value="2" <%= (nrcheckboxes.equals("2"))?"checked":"" %> /> <liferay-ui:message key="acefilter-lbl-2_checkboxes" /><br />
+				<input type="radio" name="<%= Constants.NRCHECKBOXES %>" class="sortByControl" id="${nrcheckboxes4Id}" value="4" <%= (nrcheckboxes.equals("4"))?"checked":"" %> /> <liferay-ui:message key="acefilter-lbl-4_checkboxes" /><br />
                 </div>
             </div>
 
@@ -157,7 +167,7 @@ pageContext.setAttribute("countriesList", countriesList);
             </div>
 
             <div id="form_footer">
-                <input type="submit" value="<liferay-ui:message key="acesearch-search-btn" />"/>
+                <input type="submit" value="<liferay-ui:message key="acefilter-save-btn" />"/>
             </div>
         </aui:form>
     </div>

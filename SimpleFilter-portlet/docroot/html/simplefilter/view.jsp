@@ -29,6 +29,8 @@ long sofarnr = 0;
 
 long prefnritemspage = Long.parseLong(renderRequest.getPreferences().getValue(Constants.NRITEMSPAGE, "10"));
 
+int nrOfCheckboxes = Integer.parseInt( renderRequest.getPreferences().getValue(Constants.NRCHECKBOXES, "2") );
+
 AceSearchFormBean acesearchformbean = (AceSearchFormBean) request.getAttribute(SearchRequestParams.SEARCH_PARAMS);
 
 // Retrieve parameters to fill form
@@ -52,6 +54,10 @@ String selected ;
 String selected_impact = (String) renderRequest.getPortletSession().getAttribute(Constants.USERIMPACT);
 
 String selected_sector = (String) renderRequest.getPortletSession().getAttribute(Constants.USERSECTOR);
+
+String selected_scenario = (String) renderRequest.getPortletSession().getAttribute(Constants.USERSCENARIO);
+
+String selected_timeperiod = (String) renderRequest.getPortletSession().getAttribute(Constants.USERTIMEPERIOD);
 
 if (selected_impact == null || selected_impact.equalsIgnoreCase("all")) {
 	
@@ -86,11 +92,11 @@ String redirect = PortalUtil.getCurrentURL(renderRequest);
 		<portlet:param name="redirect" value="<%= redirect %>"/>
 	</portlet:actionURL>	
 
-       					<div id="risk-selector-div" class="adaptationtools-selector" style="width:288px;">
-						<span style="margin-right:10px;float:left;" >
+       					<div id="risk-selector-div" class="adaptationtools-selector" style="width:400px;">
+						<span style="margin-right:10px;float:left;width:95px;" >
 							Climate impact
 						</span>
-						<select id="risk-selector" name="risk-selector" style="float:left;" onchange="document.getElementById('ace_simplefilter_30x').submit()" >
+						<select id="risk-selector" name="risk-selector" style="float:left;width: 239px;" onchange="document.getElementById('ace_simplefilter_30x').submit()" >
 							<option value="all" <%= selected %>>All climate impacts</option>
 							<c:set var="selectedImpact" value="<%= selected_impact %>" />
 							<c:forEach var="adaptationClimateImpact" items="<%= nl.wur.alterra.cgi.ace.model.constants.AceItemClimateImpact.values() %>" >	
@@ -112,11 +118,11 @@ String redirect = PortalUtil.getCurrentURL(renderRequest);
 	}
 %>					
 					<!-- added width because IE8 renders a 100% width otherwise -->
-					<div id="sector-selector-div" class="adaptationtools-selector" style="float:left;width:306px;">
-						<span style="margin-left:10px; margin-right:10px;float:left;">
+					<div id="sector-selector-div" class="adaptationtools-selector" style="margin-top:10px;float:left;width:400px;"> <!--  style="float:left;width:306px; -->
+						<span style="margin-right:10px;float:left;width:95px;"> 
 							Adaptation sector
 						</span>
-						<select id="sector-selector" name="sector-selector" style="float:left;" onchange="document.getElementById('ace_simplefilter_30x').submit()" >
+						<select id="sector-selector" name="sector-selector" style="float:left;width: 239px;" onchange="document.getElementById('ace_simplefilter_30x').submit()" >
 							<option value="all" <%= selected %>>All adaptation sectors</option>
 							<c:set var="selectedSector" value="<%= selected_sector %>" />
 							<c:forEach var="adaptationSector" items="<%= nl.wur.alterra.cgi.ace.model.constants.AceItemSector.values() %>">	
@@ -127,9 +133,77 @@ String redirect = PortalUtil.getCurrentURL(renderRequest);
 							        ><liferay-ui:message key="acesearch-sectors-lbl-${adaptationSector}" /></option>
 							</c:forEach>
 						</select>
-					</div>				
+					</div>	
+					
+					
+<%
+	if(nrOfCheckboxes == 4) {
+		if (selected_scenario == null || selected_scenario.equalsIgnoreCase("all")) {
+		
+			selected = "";
+		}
+		else {
+			selected = "selected='selected'";
+		}
+%>					
+					<!-- added width because IE8 renders a 100% width otherwise -->
+					<div id="scenario-selector-div" class="adaptationtools-selector" style="margin-top:10px;float:left;width:400px;">
+						<span style="margin-right:10px;float:left;width:95px;">
+							Scenario
+						</span>
+						<select id="scenario-selector" name="scenario-selector" style="float:left;width: 239px;" onchange="document.getElementById('ace_simplefilter_30x').submit()" >
+							<option value="all" <%= selected %>>All scenarios</option>
+							<c:set var="selectedScenario" value="<%= selected_scenario %>" />
+							<c:forEach var="adaptationScenario" items="<%= nl.wur.alterra.cgi.ace.model.constants.AceItemScenario.values() %>">	
+							        <option value="${adaptationScenario}"
+									<c:if test="${fn:indexOf(selectedScenario, adaptationScenario)>=0}">
+										selected='selected'
+									</c:if>       
+							        ><liferay-ui:message key="acesearch-scenario-lbl-${adaptationScenario}" /></option>
+							</c:forEach>
+						</select>
+					</div>	
+					
+					
+<%
+		if (selected_timeperiod == null || selected_timeperiod.equalsIgnoreCase("all")) {
+		
+			selected = "";
+		}
+		else {
+			selected = "selected='selected'";
+		}
+%>					
+					<!-- added width because IE8 renders a 100% width otherwise -->
+					<div id="timeperiod-selector-div" class="adaptationtools-selector" style="margin-top:10px;float:left;width:400px;">
+						<span style="margin-right:10px;float:left;width:95px;">
+							Time Period
+						</span>
+						<select id="timeperiod-selector" name="timeperiod-selector" style="float:left;width: 239px;" onchange="document.getElementById('ace_simplefilter_30x').submit()" >
+							<option value="all" <%= selected %>>All time periods</option>
+							<c:set var="selectedTimePeriod" value="<%= selected_timeperiod %>" />
+							<c:forEach var="adaptationTimePeriod" items="<%= nl.wur.alterra.cgi.ace.model.constants.AceItemTimePeriod.values() %>">	
+							        <option value="${adaptationTimePeriod}"
+									<c:if test="${fn:indexOf(selectedTimePeriod, adaptationTimePeriod)>=0}">
+										selected='selected'
+									</c:if>       
+							        ><liferay-ui:message key="acesearch-timeperiod-lbl-${adaptationTimePeriod}" /></option>
+							</c:forEach>
+						</select>
+					</div>	
+<%	}
+%>									
         </form>
+<%
+	if(nrOfCheckboxes == 4) { 
+%>		<br />        
+        <br />      
+        <br />
+<%	}
+%>        
+        <br />
         <br />        
+        <br />       
         <br />
 <% 		
 	}
