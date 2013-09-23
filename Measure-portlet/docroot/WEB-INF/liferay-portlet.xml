@@ -96,6 +96,26 @@
 		<footer-portlet-javascript>/js/javascript.js</footer-portlet-javascript>		
 		<css-class-wrapper>sharemeasureportlet-portlet</css-class-wrapper>
 	</portlet>
+	
+	<portlet>
+		<portlet-name>home_search_portlet</portlet-name>
+		<icon>/icon.png</icon>
+		<instanceable>false</instanceable>
+		<header-portlet-css>/css/homesearch.css</header-portlet-css>
+		<header-portlet-javascript>/js/jquery-1.6.2.min.js</header-portlet-javascript>
+		<css-class-wrapper>home_search_portlet-portlet</css-class-wrapper>
+	</portlet>
+	
+	<portlet>
+		<portlet-name>home_slider_portlet</portlet-name>
+		<icon>/icon.png</icon>
+		<instanceable>false</instanceable>
+		<header-portlet-css>/css/homeslider.css</header-portlet-css>
+		<header-portlet-javascript>/js/jquery-1.6.2.min.js</header-portlet-javascript>
+		<footer-portlet-javascript>/js/home/javascript.js</footer-portlet-javascript>	
+		<css-class-wrapper>home_slider_portlet-portlet</css-class-wrapper>
+	</portlet>
+	
 	<role-mapper>
 		<role-name>administrator</role-name>
 		<role-link>Administrator</role-link>
