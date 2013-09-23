@@ -10,8 +10,8 @@ public enum AceItemCountry {
     AT, /* Austria */
     BE, /* Belgium */
     BG, /* Bulgaria */
-    BO, /* Bosnia and Herzegovina */
-    CR, /* Croatia */
+    BA, /* Bosnia and Herzegovina */
+    HR, /* Croatia */
     CY, /* Cyprus */
     CZ, /* Czech Republic */
     DK, /* Denmark */
@@ -31,13 +31,13 @@ public enum AceItemCountry {
     LT, /* Lithuania */
     LU, /* Luxembourg */
     MT, /* Malta */
-    MO, /* Montenegro */
+    ME, /* Montenegro */
     NL, /* Netherlands */
     NO, /* Norway */
     PL, /* Poland */
     PT, /* Portugal */
     RO, /* Romania */
-    SR, /* Serbia */
+    RS, /* Serbia */
     SK, /* Slovakia */
     SI, /* Slovenia */
     ES, /* Spain */
