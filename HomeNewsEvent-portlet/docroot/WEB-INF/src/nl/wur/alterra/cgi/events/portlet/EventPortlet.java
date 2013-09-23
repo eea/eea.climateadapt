@@ -68,12 +68,13 @@ public class EventPortlet extends MVCPortlet {
 			boolean andOperator = true;
 			int start = -1;
 			int end = -1;
-			
+			boolean showAllFlag = false;
 			if (showParam != null && showParam.equalsIgnoreCase("full"))
 			{
 			   start = -1;
 			   end = -1;
 			   displayDateLT = null;
+			   showAllFlag = true;
 			}
 			
 			if (displayDateLT != null)
@@ -142,7 +143,7 @@ public class EventPortlet extends MVCPortlet {
 			    
 			    boolean displayFlag = false;
 			    
-			    if (eventDt.compareTo(currentDt) >= 0 )
+			    if (eventDt.compareTo(currentDt) >= 0 || showAllFlag)
 			    {
 			    	displayFlag = true;
 			    }

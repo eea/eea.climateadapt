@@ -46,6 +46,8 @@ public class ShareMeasurePortlet extends MeasureUpdateHelperForSharedMeasure {
 	    	catch (NumberFormatException e) {
 	    		// do nothing
 	    	}
+	    	
+	    	
 
 		}
         catch (Exception x) {
@@ -78,9 +80,6 @@ public class ShareMeasurePortlet extends MeasureUpdateHelperForSharedMeasure {
 		
 		ArrayList<String> errors = new ArrayList<String>();
 		measureFromRequest(request, measure, uploadRequest, errors);
-		//System.out.println("objectives is " + measure.getObjectives());
-
-		
 
 		if (MeasureValidator.validateMeasure(measure, errors)) {
 			
@@ -97,11 +96,7 @@ public class ShareMeasurePortlet extends MeasureUpdateHelperForSharedMeasure {
 			updateAceItem(measure, aceitem);
 
             sendSubmitNotification(measure);
-			/*System.out.println("SUCCESS");
-			//request.getPortletSession().setAttribute("lastAddedMeasureId", "" + measure.getMeasureId() );
-			//request.setAttribute("justsaved", "true");
-			//response.setRenderParameter("justsaved", "true");
-*/			request.setAttribute("justsaved", "true" );
+            request.setAttribute("justsaved", "true" );
 
 			SessionMessages.add(request, "contribution-success");
 			request.setAttribute("measureId", measure.getMeasureId());
@@ -110,7 +105,6 @@ public class ShareMeasurePortlet extends MeasureUpdateHelperForSharedMeasure {
 			//sendRedirect(request, response);
 		}
 		else {
-			//System.out.println("Let us see where it is wrong");
 			for (String error : errors) {
 				SessionErrors.add(request, error);
 			}
@@ -118,9 +112,6 @@ public class ShareMeasurePortlet extends MeasureUpdateHelperForSharedMeasure {
 
 			PortalUtil.copyRequestParameters(request, response);
 			request.setAttribute("measure", measure);
-			
-			
-
 			response.setRenderParameter("jspPage", "/html/shareinfo/add_measureRevised.jsp");
 		}
 	}
@@ -139,31 +130,28 @@ public class ShareMeasurePortlet extends MeasureUpdateHelperForSharedMeasure {
 		UploadPortletRequest uploadRequest = PortalUtil.getUploadPortletRequest(request);
 
 		try {
-			//System.out.println("measure id is " + uploadRequest.getParameter("measureId"));
 			measure = MeasureLocalServiceUtil.getMeasure(Long.parseLong(uploadRequest.getParameter("measureId")));
-			//measure = MeasureLocalServiceUtil.getMeasure(ParamUtil.getLong(request, "measureId"));
 		}
 		catch (Exception e) {
 			measure = null;
 		}
 
 		if(measure != null) {
-
-			/*System.out.println("Measure is not null");
-			System.out.println("NAME IS " + request.getParameter("name"));
-			System.out.println("NAME IS " + uploadRequest.getParameter("name"));
-			System.out.println("MEASURE ID IS " + uploadRequest.getParameter("measureId"));*/
+			//System.out.println("MEASURE ID IS " + uploadRequest.getParameter("measureId"));
+			//System.out.println("REDIRECT IS " + uploadRequest.getParameter("redirect"));
+			//String redirect = ParamUtil.getString(request, "redirect");
+			//System.out.println("redirect using ParamUtil is " + redirect);
 			
 			ArrayList<String> errors = new ArrayList<String>();
 			measureFromRequest(request, measure, uploadRequest, errors);
 			
 			if (MeasureValidator.validateMeasure(measure, errors)) {
 
-				//aceitem = AceItemLocalServiceUtil.getAceItemByStoredAt("ace_measure_id=" + measure.getMeasureId());
+				aceitem = AceItemLocalServiceUtil.getAceItemByStoredAt("ace_measure_id=" + measure.getMeasureId());
 
 				MeasureLocalServiceUtil.updateMeasure(measure);
 
-				//updateAceItem(measure, aceitem);
+				updateAceItem(measure, aceitem);
 				if (measure.getControlstatus() == -1)
 				{
 					request.setAttribute("justsaved", "true" );
@@ -175,14 +163,11 @@ public class ShareMeasurePortlet extends MeasureUpdateHelperForSharedMeasure {
 				else
 				{
 	               sendSubmitNotification(measure);
+	               request.getPortletSession().setAttribute("lastAddedMeasureId", "" + measure.getMeasureId() );
 	               SessionMessages.add(request, "contribution-success");
 				   sendRedirect(request, response);
 				}
-				//request.getPortletSession().setAttribute("lastAddedMeasureId", "" + measure.getMeasureId() );
 			
-
-				//SessionMessages.add(request, "contribution-success");
-				//sendRedirect(request, response);
 			}
 			else {
 				for (String error : errors) {
