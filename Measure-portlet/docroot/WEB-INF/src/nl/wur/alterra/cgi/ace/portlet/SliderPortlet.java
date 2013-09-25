@@ -61,6 +61,7 @@ public class SliderPortlet extends MVCPortlet {
 				List<Measure> listOfMeasure = (List<Measure>) results;
 				caseStudy = listOfMeasure.get(0);
 				log.info("latest case study obtained is " + caseStudy.getName());
+				log.info("description is " + caseStudy.getDescription());
 				renderRequest.setAttribute("casestudy", caseStudy);
 				
 			}
@@ -82,6 +83,7 @@ public class SliderPortlet extends MVCPortlet {
 				adaptationOption = listOfMeasure.get(0);
 				log.info("latest adaptation option id is " + adaptationOption.getMeasureId());
 				log.info("latest adaptation option is " + adaptationOption.getName());
+				log.info("description is " + adaptationOption.getDescription());
 				//renderRequest.setAttribute("adaptationoption", adaptationOption);
 			}
 			
@@ -89,6 +91,8 @@ public class SliderPortlet extends MVCPortlet {
 			AceItem aceItem = null;
 			query = DynamicQueryFactoryUtil.forClass(AceItem.class);
 			query.add(PropertyFactoryUtil.forName("controlstatus").eq(new Short((short)1)));
+			String[] dataTypes = {"ORGANISATION", "RESEARCHPROJECT", "TOOL", "GUIDANCE", "DOCUMENT", "INFORMATIONSOURCE"};
+			query.add(PropertyFactoryUtil.forName("datatype").in(dataTypes));
 			query.addOrder(OrderFactoryUtil.desc("creationdate"));
 			query.setLimit(0, 1);
 			results = AceItemLocalServiceUtil.dynamicQuery(query);
@@ -98,6 +102,7 @@ public class SliderPortlet extends MVCPortlet {
 				aceItem = listOfMeasure.get(0);
 				log.info("latest aceitem id is " + aceItem.getAceItemId());
 				log.info("latest aceitem is " + aceItem.getName());
+				log.info("description is " + aceItem.getDescription());
 			}
 			
 			if (adaptationOption != null && aceItem != null)
@@ -142,7 +147,7 @@ public class SliderPortlet extends MVCPortlet {
 			String title = null;
 			String description = null;
 			String content = null;
-			String type = "Events";
+			String type = "events";
 			String[] structureIds = {"ACEEVENT"};
 			String[] templateIds = {"ACE-EVENT-TEMPLATE"};
 			Date displayDateGT = null;

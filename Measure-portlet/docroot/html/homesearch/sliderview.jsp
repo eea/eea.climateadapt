@@ -39,6 +39,8 @@
 								</li>
 								
 							<%
+							
+							 String description = "";
 							 if (Validator.isNotNull(renderRequest.getAttribute("casestudy")))
 							 {	%>
 									<li>
@@ -56,12 +58,24 @@
 														// use generic image
 														primImageUrl = request.getContextPath() + "/assets/slider_image-1.jpg";
 													}
+													
+													description = measure.getDescription();
+													
+													// make it to first full stop if it is less than or equal to 420 else restrict to first 420 characters
+													if (description.indexOf('.') > 0 && description.indexOf('.') <= 420)
+													{
+														description = description.substring(0, description.indexOf('.') + 1);
+													}
+											        else if (description.length() >= 420)
+											        {
+											        	description = description.substring(0,420);
+											        }
 											%>
 											<img src="<%=primImageUrl%>" alt=""/>
 										</div>
 										<div class="case-studies-homepage-slider-description">
 											<h2>${casestudy.name}</h2>
-											<p>${casestudy.description}</p>
+											<p><%=description %></p>
 											
 											<a class="homepage-read-more" href="viewmeasure?ace_measure_id=${casestudy.measureId}"><img src="<%=request.getContextPath()%>/assets/ico-arrow.png" alt="arrow" />Read more</a>
 										</div>
@@ -73,7 +87,6 @@
 							     {	
 							        String type = (String) renderRequest.getAttribute("type");
 							        String name = null;
-							        String description = null;
 							        String url = null;
 							        
 							        if (type.equalsIgnoreCase("adaptationoption"))
@@ -89,6 +102,16 @@
 							        	name = aceItem.getName();
 							        	description = aceItem.getDescription();
 							        	url = "viewaceitem?aceitem_id=" + String.valueOf(aceItem.getAceItemId());
+							        }
+							        
+									// make it to first full stop if it is less than or equal to 420 else restrict to first 420 characters
+									if (description.indexOf('.') > 0 && description.indexOf('.') <= 420)
+									{
+										description = description.substring(0, description.indexOf('.') + 1);
+									}
+							        else if (description.length() >= 420)
+							        {
+							        	description = description.substring(0,420);
 							        }
 							     
 							     %>
@@ -111,14 +134,28 @@
 								
 								<%
 								 if (Validator.isNotNull(renderRequest.getAttribute("event")))
-							     {	%>
+							     {	
+							        JournalEvent event = (JournalEvent) renderRequest.getAttribute("event");
+							        description = event.getArticle().getDescription();
+							        
+							       
+							        if (description.indexOf('.') > 0 && description.indexOf('.') <= 420)
+									{
+										description = description.substring(0, description.indexOf('.') + 1);
+									}
+							        else if (description.length() >= 420)
+							        {
+							        	description = description.substring(0,420);
+							        }
+							         
+							     %>
 										<li>
 											<div class="case-studies-homepage-slider-image">
 												<img src="http://placehold.it/387x308" alt="slide title here" />
 											</div>
 											<div class="case-studies-homepage-slider-description">
 												<h2>${event.article.title}</h2>
-												<p>${event.article.description}</p>
+												<p><%=description%></p>
 												<a class="homepage-read-more" href="${event.url}"><img src="<%=request.getContextPath()%>/assets/ico-arrow.png" alt="arrow" />Read more</a>
 											</div>
 										</li>

@@ -49,6 +49,7 @@
 <%@ page import = "com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil" %>
 <%@ page import = "com.liferay.portal.kernel.dao.orm.PropertyFactoryUtil" %>
 <%@ page import = "nl.wur.alterra.cgi.ace.model.AceItem" %>
+<%@ page import = "nl.wur.alterra.cgi.ace.portlet.SliderPortlet.JournalEvent" %>
 
 <liferay-theme:defineObjects />
 
