@@ -1,3 +1,18 @@
+div.x-tip.csst-tooltip  {
+	background-image: url("images/tip-sprites.gif") !important;
+}
+
+div.csst-tooltip .x-tip-header-text a {
+   font-size: 13px;
+   font-weight: normal;
+   text-decoration: none;
+}
+
+div.csst-tooltip .x-tip-header {
+   border-bottom-style: solid;
+   border-bottom-width: 2px;
+}
+
 #csst_element {
    width: 968px; 
    height: 968px;
