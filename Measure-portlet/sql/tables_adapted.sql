@@ -39,6 +39,7 @@ CREATE TABLE ace_measure
   replacesid bigint,
   comments text,
   textwebpage text,
+  lockdate timestamp without time zone,
   CONSTRAINT ace_measure_pkey PRIMARY KEY (measureid)
 )
 WITH (
