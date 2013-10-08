@@ -284,6 +284,14 @@ public class ProjectWrapper implements Project {
 		_project.setClimateimpacts(climateimpacts);
 	}
 
+	public java.util.Date getLockdate() {
+		return _project.getLockdate();
+	}
+
+	public void setLockdate(java.util.Date lockdate) {
+		_project.setLockdate(lockdate);
+	}
+
 	public nl.wur.alterra.cgi.ace.model.Project toEscapedModel() {
 		return _project.toEscapedModel();
 	}

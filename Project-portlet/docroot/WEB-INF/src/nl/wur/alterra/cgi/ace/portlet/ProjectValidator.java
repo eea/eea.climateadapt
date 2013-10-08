@@ -32,16 +32,16 @@ public class ProjectValidator {
 				dbproject = null ;
 			}
 
-			// hack optimistic locking!!!  check Approvaldate and then always set to null
+			// hack optimistic locking!!!  check Lockdate and then always set to null
 			if(dbproject != null){
 			    long creationDate = dbproject.getCreationdate() == null ? 0 : dbproject.getCreationdate().getTime();
-			    long approvalDate = project.getApprovaldate() == null ? 0 : project.getApprovaldate().getTime();
-			    if (creationDate != approvalDate)  {
+			    long lockDate = project.getLockdate() == null ? 0 : project.getLockdate().getTime();
+			    if (creationDate != lockDate)  {
 			        errors.add("project-change");
 			        valid = false;
 			    }
 			}
-			project.setApprovaldate(null);
+			project.setLockdate(null);
 		}
 
 		if (valid) {

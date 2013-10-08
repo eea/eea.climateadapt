@@ -511,6 +511,20 @@ public interface ProjectModel extends BaseModel<Project> {
 	public void setClimateimpacts(String climateimpacts);
 
 	/**
+	 * Gets the lockdate of this project.
+	 *
+	 * @return the lockdate of this project
+	 */
+	public Date getLockdate();
+
+	/**
+	 * Sets the lockdate of this project.
+	 *
+	 * @param lockdate the lockdate of this project
+	 */
+	public void setLockdate(Date lockdate);
+
+	/**
 	 * Gets a copy of this project as an escaped model instance by wrapping it with an {@link com.liferay.portal.kernel.bean.AutoEscapeBeanHandler}.
 	 *
 	 * @return the escaped model instance

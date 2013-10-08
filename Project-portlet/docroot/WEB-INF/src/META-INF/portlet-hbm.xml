@@ -38,5 +38,6 @@
 		<property name="spatialvalues" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="source" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="climateimpacts" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="lockdate" type="org.hibernate.type.TimestampType" />
 	</class>
 </hibernate-mapping>

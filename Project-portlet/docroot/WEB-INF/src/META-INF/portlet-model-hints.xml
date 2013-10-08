@@ -33,5 +33,6 @@
 		<field name="spatialvalues" type="String" />
 		<field name="source" type="String" />
 		<field name="climateimpacts" type="String" />
+		<field name="lockdate" type="Date" />
 	</model>
 </model-hints>

@@ -43,6 +43,7 @@
 		<column name="spatialvalues" type="String" />
 		<column name="source" type="String" />
 		<column name="climateimpacts" type="String" />	
+		<column name="lockdate" type="Date" />
 		<!-- Sort order -->
 		<order by="asc">
 			<order-column name="acronym" />

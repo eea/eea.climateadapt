@@ -48,6 +48,9 @@
 			<basic name="spatialvalues" />
 			<basic name="source" />
 			<basic name="climateimpacts" />
+			<basic name="lockdate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
 			<transient name="primaryKey" />
 		</attributes>
 	</mapped-superclass>

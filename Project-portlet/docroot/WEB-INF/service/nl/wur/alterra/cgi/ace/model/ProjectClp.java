@@ -291,6 +291,14 @@ public class ProjectClp extends BaseModelImpl<Project> implements Project {
 		_climateimpacts = climateimpacts;
 	}
 
+	public Date getLockdate() {
+		return _lockdate;
+	}
+
+	public void setLockdate(Date lockdate) {
+		_lockdate = lockdate;
+	}
+
 	public Project toEscapedModel() {
 		if (isEscapedModel()) {
 			return this;
@@ -335,6 +343,7 @@ public class ProjectClp extends BaseModelImpl<Project> implements Project {
 		clone.setSpatialvalues(getSpatialvalues());
 		clone.setSource(getSource());
 		clone.setClimateimpacts(getClimateimpacts());
+		clone.setLockdate(getLockdate());
 
 		return clone;
 	}
@@ -380,7 +389,7 @@ public class ProjectClp extends BaseModelImpl<Project> implements Project {
 	}
 
 	public String toString() {
-		StringBundler sb = new StringBundler(63);
+		StringBundler sb = new StringBundler(65);
 
 		sb.append("{projectId=");
 		sb.append(getProjectId());
@@ -444,13 +453,15 @@ public class ProjectClp extends BaseModelImpl<Project> implements Project {
 		sb.append(getSource());
 		sb.append(", climateimpacts=");
 		sb.append(getClimateimpacts());
+		sb.append(", lockdate=");
+		sb.append(getLockdate());
 		sb.append("}");
 
 		return sb.toString();
 	}
 
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(97);
+		StringBundler sb = new StringBundler(100);
 
 		sb.append("<model><model-name>");
 		sb.append("nl.wur.alterra.cgi.ace.model.Project");
@@ -580,6 +591,10 @@ public class ProjectClp extends BaseModelImpl<Project> implements Project {
 			"<column><column-name>climateimpacts</column-name><column-value><![CDATA[");
 		sb.append(getClimateimpacts());
 		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>lockdate</column-name><column-value><![CDATA[");
+		sb.append(getLockdate());
+		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");
 
@@ -617,4 +632,5 @@ public class ProjectClp extends BaseModelImpl<Project> implements Project {
 	private String _spatialvalues;
 	private String _source;
 	private String _climateimpacts;
+	private Date _lockdate;
 }

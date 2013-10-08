@@ -326,6 +326,7 @@ public class ProjectPersistenceImpl extends BasePersistenceImpl<Project>
 		projectImpl.setSpatialvalues(project.getSpatialvalues());
 		projectImpl.setSource(project.getSource());
 		projectImpl.setClimateimpacts(project.getClimateimpacts());
+		projectImpl.setLockdate(project.getLockdate());
 
 		return projectImpl;
 	}
