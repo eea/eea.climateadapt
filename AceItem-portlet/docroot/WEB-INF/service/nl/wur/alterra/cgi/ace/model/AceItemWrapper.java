@@ -348,6 +348,14 @@ public class AceItemWrapper implements AceItem {
 		_aceItem.setTimeperiod(timeperiod);
 	}
 
+	public java.util.Date getLockdate() {
+		return _aceItem.getLockdate();
+	}
+
+	public void setLockdate(java.util.Date lockdate) {
+		_aceItem.setLockdate(lockdate);
+	}
+
 	public nl.wur.alterra.cgi.ace.model.AceItem toEscapedModel() {
 		return _aceItem.toEscapedModel();
 	}

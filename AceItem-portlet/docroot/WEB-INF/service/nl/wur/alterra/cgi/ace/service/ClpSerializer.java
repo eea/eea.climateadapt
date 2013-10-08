@@ -331,6 +331,13 @@ public class ClpSerializer {
 
 					method38.invoke(newModel, value38);
 
+					Method method39 = newModelClass.getMethod("setLockdate",
+							new Class[] { Date.class });
+
+					Date value39 = oldCplModel.getLockdate();
+
+					method39.invoke(newModel, value39);
+
 					return newModel;
 				}
 				catch (Exception e) {
@@ -922,6 +929,13 @@ public class ClpSerializer {
 							(Object[])null);
 
 					newModel.setTimeperiod(value38);
+
+					Method method39 = oldModelClass.getMethod("getLockdate");
+
+					Date value39 = (Date)method39.invoke(oldModel,
+							(Object[])null);
+
+					newModel.setLockdate(value39);
 
 					return newModel;
 				}

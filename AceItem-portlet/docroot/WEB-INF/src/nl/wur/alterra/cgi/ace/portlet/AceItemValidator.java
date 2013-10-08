@@ -34,13 +34,13 @@ public class AceItemValidator {
 				dbaceitem = null ;
 			}
 			
-			// hack optimistic locking!!!  check Approvaldate and then always set to null
-			if( (dbaceitem != null) && ( dbaceitem.getCreationdate().getTime() != aceitem.getApprovaldate().getTime() ) )  {
-			    //System.out.println("aceitem-changed: " + dbaceitem.getCreationdate().getTime() + " - " + aceitem.getApprovaldate().getTime());				
+			// hack optimistic locking!!!  check Lockdate and then always set to null
+			if( (dbaceitem != null) && ( dbaceitem.getCreationdate().getTime() != aceitem.getLockdate().getTime() ) )  {
+			    //System.out.println("aceitem-changed: " + dbaceitem.getCreationdate().getTime() + " - " + aceitem.getLockdate().getTime());				
 				errors.add("aceitem-changed");
 				valid = false;
 			}
-			aceitem.setApprovaldate(null);
+			aceitem.setLockdate(null);
 		}
 
 		if (valid) {

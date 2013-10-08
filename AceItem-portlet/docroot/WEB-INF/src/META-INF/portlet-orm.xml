@@ -58,6 +58,9 @@
 			<basic name="feature" />
 			<basic name="scenario" />
 			<basic name="timeperiod" />
+			<basic name="lockdate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
 			<transient name="primaryKey" />
 		</attributes>
 	</mapped-superclass>

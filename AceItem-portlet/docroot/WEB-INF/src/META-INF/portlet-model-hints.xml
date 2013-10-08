@@ -41,6 +41,7 @@
 		<field name="feature" type="String" />
 		<field name="scenario" type="String" />
 		<field name="timeperiod" type="String" />
+		<field name="lockdate" type="Date" />
 	</model>
 	<model name="nl.wur.alterra.cgi.ace.model.WxsHarvester">
 		<field name="wxsharvesterid" type="long" />

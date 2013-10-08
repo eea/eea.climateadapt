@@ -384,6 +384,7 @@ public class AceItemPersistenceImpl extends BasePersistenceImpl<AceItem>
 		aceItemImpl.setFeature(aceItem.getFeature());
 		aceItemImpl.setScenario(aceItem.getScenario());
 		aceItemImpl.setTimeperiod(aceItem.getTimeperiod());
+		aceItemImpl.setLockdate(aceItem.getLockdate());
 
 		return aceItemImpl;
 	}

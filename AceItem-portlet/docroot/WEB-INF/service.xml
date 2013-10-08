@@ -53,6 +53,7 @@
 		<column name="feature" type="String" />
 		<column name="scenario" type="String" />
 		<column name="timeperiod" type="String" />
+		<column name="lockdate" type="Date" />
 		
 		<!-- Sort order -->
 		<order by="asc">

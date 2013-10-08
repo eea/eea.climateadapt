@@ -628,6 +628,20 @@ public interface AceItemModel extends BaseModel<AceItem> {
 	public void setTimeperiod(String timeperiod);
 
 	/**
+	 * Gets the lockdate of this ace item.
+	 *
+	 * @return the lockdate of this ace item
+	 */
+	public Date getLockdate();
+
+	/**
+	 * Sets the lockdate of this ace item.
+	 *
+	 * @param lockdate the lockdate of this ace item
+	 */
+	public void setLockdate(Date lockdate);
+
+	/**
 	 * Gets a copy of this ace item as an escaped model instance by wrapping it with an {@link com.liferay.portal.kernel.bean.AutoEscapeBeanHandler}.
 	 *
 	 * @return the escaped model instance

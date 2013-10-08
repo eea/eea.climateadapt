@@ -355,6 +355,14 @@ public class AceItemClp extends BaseModelImpl<AceItem> implements AceItem {
 		_timeperiod = timeperiod;
 	}
 
+	public Date getLockdate() {
+		return _lockdate;
+	}
+
+	public void setLockdate(Date lockdate) {
+		_lockdate = lockdate;
+	}
+
 	public AceItem toEscapedModel() {
 		if (isEscapedModel()) {
 			return this;
@@ -407,6 +415,7 @@ public class AceItemClp extends BaseModelImpl<AceItem> implements AceItem {
 		clone.setFeature(getFeature());
 		clone.setScenario(getScenario());
 		clone.setTimeperiod(getTimeperiod());
+		clone.setLockdate(getLockdate());
 
 		return clone;
 	}
@@ -452,7 +461,7 @@ public class AceItemClp extends BaseModelImpl<AceItem> implements AceItem {
 	}
 
 	public String toString() {
-		StringBundler sb = new StringBundler(79);
+		StringBundler sb = new StringBundler(81);
 
 		sb.append("{aceItemId=");
 		sb.append(getAceItemId());
@@ -532,13 +541,15 @@ public class AceItemClp extends BaseModelImpl<AceItem> implements AceItem {
 		sb.append(getScenario());
 		sb.append(", timeperiod=");
 		sb.append(getTimeperiod());
+		sb.append(", lockdate=");
+		sb.append(getLockdate());
 		sb.append("}");
 
 		return sb.toString();
 	}
 
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(121);
+		StringBundler sb = new StringBundler(124);
 
 		sb.append("<model><model-name>");
 		sb.append("nl.wur.alterra.cgi.ace.model.AceItem");
@@ -700,6 +711,10 @@ public class AceItemClp extends BaseModelImpl<AceItem> implements AceItem {
 			"<column><column-name>timeperiod</column-name><column-value><![CDATA[");
 		sb.append(getTimeperiod());
 		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>lockdate</column-name><column-value><![CDATA[");
+		sb.append(getLockdate());
+		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");
 
@@ -745,4 +760,5 @@ public class AceItemClp extends BaseModelImpl<AceItem> implements AceItem {
 	private String _feature;
 	private String _scenario;
 	private String _timeperiod;
+	private Date _lockdate;
 }

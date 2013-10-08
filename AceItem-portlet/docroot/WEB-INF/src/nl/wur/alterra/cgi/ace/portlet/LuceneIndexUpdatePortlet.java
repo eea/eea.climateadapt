@@ -106,7 +106,7 @@ public abstract class LuceneIndexUpdatePortlet extends MVCPortlet {
 
         Date d = new Date();
         d.setTime(ParamUtil.getLong(request, "checkcreationdate"));
-        aceitem.setApprovaldate(d); // hack optimistic locking!!! Check with
+        aceitem.setLockdate(d); // hack optimistic locking!!! Check with
                                     // dbrecord in AceItemValidator
 
         aceitem.setCompanyId(themeDisplay.getCompanyId());
