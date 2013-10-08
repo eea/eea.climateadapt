@@ -55,5 +55,6 @@
 		<field name="year" type="String" />
 		<field name="geochars" type="String" />
 		<field name="category" type="String" />
+		<field name="lockdate" type="Date" />
 	</model>
 </model-hints>

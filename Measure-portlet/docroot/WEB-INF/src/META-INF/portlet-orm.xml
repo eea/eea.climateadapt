@@ -72,6 +72,9 @@
 			<basic name="year" />
 			<basic name="geochars" />
 			<basic name="category" />
+			<basic name="lockdate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
 			<transient name="primaryKey" />
 		</attributes>
 	</mapped-superclass>

@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2011 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2010 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -467,6 +467,14 @@ public class MeasureClp extends BaseModelImpl<Measure> implements Measure {
 		_category = category;
 	}
 
+	public Date getLockdate() {
+		return _lockdate;
+	}
+
+	public void setLockdate(Date lockdate) {
+		_lockdate = lockdate;
+	}
+
 	public Measure toEscapedModel() {
 		if (isEscapedModel()) {
 			return this;
@@ -533,6 +541,7 @@ public class MeasureClp extends BaseModelImpl<Measure> implements Measure {
 		clone.setYear(getYear());
 		clone.setGeochars(getGeochars());
 		clone.setCategory(getCategory());
+		clone.setLockdate(getLockdate());
 
 		return clone;
 	}
@@ -578,7 +587,7 @@ public class MeasureClp extends BaseModelImpl<Measure> implements Measure {
 	}
 
 	public String toString() {
-		StringBundler sb = new StringBundler(107);
+		StringBundler sb = new StringBundler(109);
 
 		sb.append("{measureId=");
 		sb.append(getMeasureId());
@@ -686,13 +695,15 @@ public class MeasureClp extends BaseModelImpl<Measure> implements Measure {
 		sb.append(getGeochars());
 		sb.append(", category=");
 		sb.append(getCategory());
+		sb.append(", lockdate=");
+		sb.append(getLockdate());
 		sb.append("}");
 
 		return sb.toString();
 	}
 
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(163);
+		StringBundler sb = new StringBundler(166);
 
 		sb.append("<model><model-name>");
 		sb.append("nl.wur.alterra.cgi.ace.model.Measure");
@@ -910,6 +921,10 @@ public class MeasureClp extends BaseModelImpl<Measure> implements Measure {
 			"<column><column-name>category</column-name><column-value><![CDATA[");
 		sb.append(getCategory());
 		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>lockdate</column-name><column-value><![CDATA[");
+		sb.append(getLockdate());
+		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");
 
@@ -969,4 +984,5 @@ public class MeasureClp extends BaseModelImpl<Measure> implements Measure {
 	private String _year;
 	private String _geochars;
 	private String _category;
+	private Date _lockdate;
 }

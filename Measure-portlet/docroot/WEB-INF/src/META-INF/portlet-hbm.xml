@@ -60,5 +60,6 @@
 		<property name="year" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="geochars" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="category" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="lockdate" type="org.hibernate.type.TimestampType" />
 	</class>
 </hibernate-mapping>

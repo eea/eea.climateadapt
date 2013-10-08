@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2011 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2010 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -426,6 +426,13 @@ public class ClpSerializer {
 					String value52 = oldCplModel.getCategory();
 
 					method52.invoke(newModel, value52);
+
+					Method method53 = newModelClass.getMethod("setLockdate",
+							new Class[] { Date.class });
+
+					Date value53 = oldCplModel.getLockdate();
+
+					method53.invoke(newModel, value53);
 
 					return newModel;
 				}
@@ -859,6 +866,13 @@ public class ClpSerializer {
 							(Object[])null);
 
 					newModel.setCategory(value52);
+
+					Method method53 = oldModelClass.getMethod("getLockdate");
+
+					Date value53 = (Date)method53.invoke(oldModel,
+							(Object[])null);
+
+					newModel.setLockdate(value53);
 
 					return newModel;
 				}

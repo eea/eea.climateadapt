@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2011 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2010 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -459,6 +459,14 @@ public class MeasureWrapper implements Measure {
 
 	public void setCategory(java.lang.String category) {
 		_measure.setCategory(category);
+	}
+
+	public java.util.Date getLockdate() {
+		return _measure.getLockdate();
+	}
+
+	public void setLockdate(java.util.Date lockdate) {
+		_measure.setLockdate(lockdate);
 	}
 
 	public nl.wur.alterra.cgi.ace.model.Measure toEscapedModel() {

@@ -123,7 +123,7 @@ public abstract class MeasureUpdateHelperForSharedMeasure extends MVCPortlet {
         	d.setTime(0);
         }
         //d.setTime(ParamUtil.getLong(request, "checkcreationdate"));
-        measure.setApprovaldate(d); // hack optimistic locking!!! Check with
+        measure.setLockdate(d); // hack optimistic locking!!! Check with
                                     // dbrecord in MeasureValidator
 
         measure.setCompanyId(themeDisplay.getCompanyId());

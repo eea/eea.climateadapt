@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2011 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2010 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -836,6 +836,20 @@ public interface MeasureModel extends BaseModel<Measure> {
 	 * @param category the category of this measure
 	 */
 	public void setCategory(String category);
+
+	/**
+	 * Gets the lockdate of this measure.
+	 *
+	 * @return the lockdate of this measure
+	 */
+	public Date getLockdate();
+
+	/**
+	 * Sets the lockdate of this measure.
+	 *
+	 * @param lockdate the lockdate of this measure
+	 */
+	public void setLockdate(Date lockdate);
 
 	/**
 	 * Gets a copy of this measure as an escaped model instance by wrapping it with an {@link com.liferay.portal.kernel.bean.AutoEscapeBeanHandler}.

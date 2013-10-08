@@ -64,6 +64,7 @@
 		<column name="year" type="String" />
 		<column name="geochars" type="String" />
 		<column name="category" type="String" />
+		<column name="lockdate" type="Date" />
 		
 		<!-- Sort order -->
 		<order by="asc" >
