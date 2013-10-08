@@ -38,6 +38,7 @@ create table ace_aceitem (
   feature character varying(75),
   scenario character varying(75),
   timeperiod character varying(75),
+  lockdate timestamp without time zone,
   CONSTRAINT ace_aceitem_pkey PRIMARY KEY (aceitemid)
 )
 WITH (
