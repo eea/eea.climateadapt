@@ -45,6 +45,10 @@
 <%@ page import = "com.liferay.portal.kernel.dao.orm.DynamicQuery" %>
 <%@ page import = "com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil" %>
 <%@ page import = "com.liferay.portal.kernel.dao.orm.PropertyFactoryUtil" %>
+<%@ page import ="com.liferay.portlet.documentlibrary.service.DLFileEntryLocalServiceUtil"  %>
+<%@ page import ="com.liferay.portlet.documentlibrary.model.DLFileEntry"  %>
+<%@ page import =" com.liferay.portal.kernel.util.HttpUtil"  %>
+<%@ page import ="com.liferay.portal.kernel.util.HtmlUtil" %>
 
 <liferay-theme:defineObjects />
 

@@ -5,9 +5,9 @@
 	String typedescription = "";
 
 	AceItem aceitem = null;
+	AceItem aceItemFromRequest = null;
 	
 	long aceItemId = ParamUtil.getLong(request, "aceItemId");
-	
 	
 	// look for request attribute because this might be the result of edit
 		if (aceItemId == 0)
@@ -62,6 +62,14 @@
 		catch(Exception e) {
 			aceItemId = 0;
 			aceitem = null;
+		}
+	}
+	
+	if (aceItemId == 0)
+	{
+		if (request.getAttribute("aceitem") != null)
+		{
+		   aceItemFromRequest = (AceItem) request.getAttribute("aceitem");
 		}
 	}
 	
@@ -209,7 +217,7 @@
 
 <portlet:actionURL name='<%= aceitem == null ? "addAceItem" : "updateAceItem" %>' var="editAceItemURL" />
 
-<aui:form action='<%= editAceItemURL %>' method="POST" name="fm">
+<aui:form action='<%= editAceItemURL %>' method="POST" enctype="multipart/form-data" name="fm">
    <liferay-ui:error key="invalid-form-data" message="invalid-form-data" />
 	<aui:fieldset>
 
@@ -245,6 +253,7 @@
 						    <li class="#"><a href="#">Item Description</a></li>
 						<% } %>
 						<li><a href="#">Reference Information</a></li>
+						<li><a href="#">Documents</a></li>
 						<li><a href="#">Geographic Information</a></li>
 						
 						<%
@@ -293,11 +302,16 @@
 											  {
 													  checked = "checked";
 											  }
-										      else if (renderRequest.getParameter("chk_controlstatus_for_approved") != null)
-										      {
-											          checked = "checked";
-										      }
-										
+											  else
+											  {
+												  if (aceItemFromRequest != null)
+												  {
+													  if (aceItemFromRequest.getControlstatus() == ACEIndexUtil.Status_APPROVED)
+													  {
+														  checked = "checked";
+													  }
+												  }
+											  }
 												  
 											  pageContext.setAttribute("checked", checked);
 										  
@@ -320,10 +334,17 @@
 									      {
 									    	  feature = "checked";
 									      }
-									      else if (Validator.isNotNull(renderRequest.getParameter("feature")))
-									      {
-									    	 feature = "checked";  
-									      }
+									      else
+										  {
+											  if (aceItemFromRequest != null)
+											  {
+												  if (Validator.isNotNull(aceItemFromRequest.getFeature()))
+												  {
+													  feature = "checked";
+												  }
+											  }
+										  }
+									     
 									      
 									  %>
 									  <input type="checkbox" name="feature" id="chk_adaptation_feature" value="CASE_SEARCH" <%=feature %>/>
@@ -334,20 +355,23 @@
 										<p><em>Content Administration Comments:</em> (500 character limit)</p> 
 										<%
 										    String adminComment = "";
-										    if (aceitem != null && Validator.isNotNull(aceitem.getComments()))
+										    if (aceitem != null && Validator.isNotNull(aceitem.getAdmincomment()))
 										    {
-										    	adminComment = aceitem.getComments(); 
+										    	adminComment = aceitem.getAdmincomment(); 
 										    }
 										    else
-										    {
-										    	if (renderRequest.getParameter("comments") != null)
-										    	{
-										    		adminComment = renderRequest.getParameter("comments");
-										    	}
-										    }
+											{
+												  if (aceItemFromRequest != null)
+												  {
+													  if (Validator.isNotNull(aceItemFromRequest.getAdmincomment()))
+													  {
+														  adminComment = aceItemFromRequest.getAdmincomment();
+													  }
+												  }
+											}
 										%>
 									
-										<textarea id="ta_caa_contact" cols="40" name="comments" rows="10" class="WYSIWYG" data-maxlength="500"><%= adminComment %></textarea>
+										<textarea id="ta_caa_contact" cols="40" name="admincomment" rows="10" class="WYSIWYG" data-maxlength="500"><%= adminComment %></textarea>
 										<div class="case-studies-character-count"></div>
 										
 										<% 
@@ -358,12 +382,15 @@
 										    	specialTagging = aceitem.getSpecialtagging();
 										    }
 										    else
-										    {
-										    	if (renderRequest.getParameter("specialtagging") != null)
-										    	{
-										    		specialTagging = renderRequest.getParameter("specialtagging");
-										    	}
-										    }
+											{
+												  if (aceItemFromRequest != null)
+												  {
+													  if (Validator.isNotNull(aceItemFromRequest.getSpecialtagging()))
+													  {
+														  specialTagging = aceItemFromRequest.getSpecialtagging();
+													  }
+												  }
+											}
 										%>
 											 
 											 <br/>
@@ -381,7 +408,26 @@
         <ul>
 	        <li>
 				<p><strong><span class="red">*</span> <em>Item Name (50 character limit)</em></strong></p>
-				<input name="name" type="text" size="75" maxlength="50" value='<%= aceitem == null ? renderRequest.getParameter("name") == null ? "" : renderRequest.getParameter("name") : aceitem.getName() %>'><br /><br />
+				<% if (aceitem != null) { %>
+		           <input name="name" type="text" size="75" maxlength="50" value="<%= aceitem.getName() %>" /><br /><br />
+				<%} else {
+							// preserve the render parameter already set
+						    // String renderName = renderRequest.getParameter("name");
+							if (aceItemFromRequest != null)
+							{
+								String renderName = aceItemFromRequest.getName();
+								pageContext.setAttribute("renderName", renderName);
+							}
+				%>
+						
+				<c:if test="${renderName ne null}">
+				  <input name="name" type="text" size="75" maxlength="50" value="${renderName}" /> <br /><br />
+				</c:if>
+												
+				<c:if test="${renderName eq null}">
+					  <input name="name" type="text" size="75" maxlength="50" value="" /><br /><br />
+					</c:if>
+				<%} %>
 			</li>
 		</ul>
 	 </div>
@@ -392,7 +438,27 @@
 	   <ul>
 		    <li>
 				<p><strong><span class="red">*</span> <em>Provide a description of the item. (5,000 character limit)</em></strong></p>
-				<textarea id="descriptionId" name="description" cols="40" rows="10" class="WYSIWYG" data-maxlength="5000"><%= aceitem == null ? renderRequest.getParameter("description") == null ? "" : renderRequest.getParameter("description") : aceitem.getDescription() %></textarea>
+				
+				<% if (aceitem != null && aceitem.getDescription() != null) { %>
+					<textarea id="<portlet:namespace />descriptionField" cols="40" rows="10" class="WYSIWYG" name="description" data-maxlength="1000"><%= aceitem.getDescription() %></textarea>
+					<textarea id="descriptionId" name="description" cols="40" rows="10" class="WYSIWYG" data-maxlength="5000"><%= aceitem.getDescription() %></textarea>
+				<%} else {
+							// preserve the render parameter already sent
+							//String renderDescription = renderRequest.getParameter("description");
+						    if (aceItemFromRequest != null)
+							{
+								String renderDescription = aceItemFromRequest.getDescription();
+								pageContext.setAttribute("renderDescription", renderDescription);
+							}
+				%>
+							<c:if test="${renderDescription ne null}">
+							  <textarea id="descriptionId" name="description" cols="40" rows="10" class="WYSIWYG" data-maxlength="5000">${renderDescription}</textarea>
+							</c:if>
+							
+							<c:if test="${renderDescription eq null}">
+							 <textarea id="descriptionId" name="description" cols="40" rows="10" class="WYSIWYG" data-maxlength="5000"></textarea>
+							</c:if>
+			<%} %>
 				<div class="case-studies-character-count"></div>
 			</li>
 	   </ul>
@@ -405,7 +471,26 @@
 	   <ul>
 	     <li>
             <p><strong><span class="red">*</span> <em>Describe and tag this item with relevant keywords. Separate each keyword with a comma. For example, example keyword 1, example keyword 2 (1,000 character limit)</em></strong></p>
-		    <textarea id="keywordId" name="keyword" cols="40" rows="10" class="WYSIWYG" data-maxlength="1000"><%= aceitem == null ? renderRequest.getParameter("keyword") == null ? "" :renderRequest.getParameter("keyword") : aceitem.getKeyword() %></textarea>
+            <% if (aceitem != null && Validator.isNotNull(aceitem.getKeyword())) { %>
+				<textarea id="keywordId" name="keyword" cols="40" rows="10" class="WYSIWYG" data-maxlength="1000"><%=aceitem.getKeyword() %></textarea>
+				<%} else {
+					// preserve the render parameter already sent
+					//String renderKeywords = renderRequest.getParameter("keywords");
+					if (aceItemFromRequest != null)
+					{
+							String renderKeywords = aceItemFromRequest.getKeyword();
+							pageContext.setAttribute("renderKeywords", renderKeywords);
+					}
+					//pageContext.setAttribute("renderKeywords", renderKeywords);
+				%>
+					<c:if test="${renderKeywords ne null}">
+					  <textarea id="keywordId" name="keyword" cols="40" rows="10" class="WYSIWYG" data-maxlength="1000">${renderKeywords}</textarea>
+					</c:if>
+					
+					<c:if test="${renderKeywords eq null}">
+					 <textarea id="keywordId" name="keyword" cols="40" rows="10" class="WYSIWYG" data-maxlength="1000"></textarea>
+					</c:if>
+				<%}%>
 		    <div class="case-studies-character-count"></div>
 		 </li>
 	  </ul>
@@ -425,16 +510,18 @@
 				         if (aceitem == null )
 				         {
 				        	
-				        	  for (nl.wur.alterra.cgi.ace.model.constants.AceItemSector aceitemsector : nl.wur.alterra.cgi.ace.model.constants.AceItemSector.values()) {
-
-				                  if (ParamUtil.getString(request, "sectors_" + aceitemsector.toString()) != null) {
-				                      String s = ParamUtil.getString(request, "sectors_" + aceitemsector.toString());
-				                      if (s.equalsIgnoreCase(aceitemsector.toString())) {
-				                          choosensectors += aceitemsector.toString() + ";";
-				                      }
-				                  }
-				              }
-				        	
+				        	 if (aceItemFromRequest != null)
+				             {
+				            	 
+				                 String adaptationSectors = aceItemFromRequest.getSectors_();
+					        	 for (nl.wur.alterra.cgi.ace.model.constants.AceItemSector sector : nl.wur.alterra.cgi.ace.model.constants.AceItemSector.values()) 
+					        	 {
+					        			 if (adaptationSectors != null && adaptationSectors.indexOf(sector.toString()) >= 0) {
+					                         choosensectors += sector.toString() + ";";
+					                     }
+					        		 
+					        	 }
+				             }
 				         }
 				%>
 				
@@ -468,18 +555,25 @@
 	  <ul>
 	    <%
 	       String choosenclimateimpacts = "";
-	       if (aceitem == null)
-	       {
-	    	   for (nl.wur.alterra.cgi.ace.model.constants.AceItemClimateImpact aceitemclimateimpact : nl.wur.alterra.cgi.ace.model.constants.AceItemClimateImpact.values()) {
-	               if (ParamUtil.getString(request, "chk_climateimpacts_" + aceitemclimateimpact) != null) {
-	                   String e = ParamUtil.getString(request, "chk_climateimpacts_" + aceitemclimateimpact);
-	                   if (e.equalsIgnoreCase(aceitemclimateimpact.toString())) {
-	                       choosenclimateimpacts += aceitemclimateimpact.toString() + ";";
-	                   }
-	               }
-	           }
-	       }
-	    
+	       
+	    if (aceitem == null )
+        {
+       	 
+       	 if (aceItemFromRequest != null)
+            {
+           	 
+	             String caseStudyClimate = aceItemFromRequest.getClimateimpacts_();
+	        	 for (nl.wur.alterra.cgi.ace.model.constants.AceItemClimateImpact aceitemclimateimpact : nl.wur.alterra.cgi.ace.model.constants.AceItemClimateImpact.values()) 
+	        	 {
+	        			 if (caseStudyClimate != null && caseStudyClimate.indexOf(aceitemclimateimpact.toString()) >= 0) {
+	                         choosenclimateimpacts += aceitemclimateimpact.toString() + ";";
+	                     }
+	        		 
+	        	 }
+            }
+       	 
+       	
+        }
 	    %>
 	  
 	    <li>
@@ -515,10 +609,29 @@
      <div class="case-studies-tabbed-content-section"> 
         <div class="case-studies-tabbed-content-subheader">Year</div>
          <liferay-ui:error key="year-required" message="Enter correct value for year or leave blank" />
-		   <ul>
+         <ul>
 			   <li>
 			       <p><strong><em>Date of publication/release/update of the item</em></strong></p>
-				   <input name="year" type="text" size="5" maxlength="4" value="<%= aceitem == null ? renderRequest.getParameter("year") == null ? "":renderRequest.getParameter("year")  : aceitem.getYear() %>" /><br /><br />
+         <% if (aceitem != null && Validator.isNotNull(aceitem.getYear())) { %>
+										      <input name="year" type="text" size="5" maxlength="4" value="<%= aceitem.getYear() %>" /><br /><br />
+										<%} else {
+											// preserve the render parameter already sent
+											//String renderKeywords = renderRequest.getParameter("keywords");
+											if (aceItemFromRequest != null)
+											{
+													String year = aceItemFromRequest.getYear();
+													pageContext.setAttribute("year", year);
+											}
+											
+										%>
+											<c:if test="${year ne null}">
+											  <input name="year" type="text" size="5" maxlength="4" value="${year}" /><br /><br />
+											</c:if>
+											
+											<c:if test="${year eq null}">
+											  <input name="year" type="text" size="5" maxlength="4" value="" /><br /><br />
+											</c:if>
+		<%} %>
 			   </li>
 		   </ul>
      </div>
@@ -526,7 +639,7 @@
      
      <div class="case-studies-tabbed-content-button-row">
 			<a href="#" class="case-studies-tabbed-content-button-green" onClick="submitform('save')">Save as Draft</a>
-			<a href="#" class="case-studies-tabbed-content-button-green case-studies-tabbed-content-button-next">Reference Information</a>
+			<a href="#" class="case-studies-tabbed-content-button-green case-studies-tabbed-content-button-next">Next - Reference Information</a>
 	</div>
     
  </li>
@@ -539,8 +652,17 @@
 		<liferay-ui:error key="aceitemstoredat-required" message="aceitemstoredat-required" />
 	   <ul>
 	    <li>	
-	        <p><strong><em>List the Name and Website where the item can be found or is described. (500 character limit).</em></strong></p>
-			<textarea id="storeAtId" name="storedAt" cols="40" rows="10" class="WYSIWYG" data-maxlength="500"><%= aceitem == null ? renderRequest.getParameter("storedAt") == null ? "":renderRequest.getParameter("storedAt") : aceitem.getStoredAt() %></textarea>
+	        <p><strong><em>List the Name and Website where the item can be found or is described. (500 character limit).Please separate each website with semicolon.</em></strong></p>
+	        <% 
+					  String website = "";
+					  if (aceitem == null || Validator.isNull(aceitem.getStoredAt())) {
+						  if (aceItemFromRequest != null && aceItemFromRequest.getStoredAt() != null)
+						  {
+							        website = aceItemFromRequest.getStoredAt();
+						  }
+					  }
+			%>
+			<textarea id="storeAtId" name="storedAt" cols="40" rows="10" class="WYSIWYG" data-maxlength="500"><%= aceitem == null ? website : aceitem.getStoredAt() %></textarea>
 			<div class="case-studies-character-count"></div>
 		</li>
 	   </ul>
@@ -551,7 +673,18 @@
 	   <ul>
 	     <li>
 	        <p><strong><em>Describe the original source of the item description (250 character limit)</em></strong></p>
-		    <textarea id="aceItemStore" name="source" cols="40" rows="10" class="WYSIWYG" data-maxlength="500"><%= aceitem == null ? renderRequest.getParameter("source") == null ? "":renderRequest.getParameter("source") : aceitem.getSource() %></textarea>
+	        <% 
+				  String source = "";
+				  if (aceitem == null || Validator.isNull(aceitem.getSource())) {
+					  if (aceItemFromRequest != null && aceItemFromRequest.getSource() != null)
+					  {
+						        source = aceItemFromRequest.getSource();
+					  }
+				  }
+			%>
+				
+	        
+		    <textarea id="aceItemStore" name="source" cols="40" rows="10" class="WYSIWYG" data-maxlength="500"><%= aceitem == null ? source : aceitem.getSource() %></textarea>
 		    <div class="case-studies-character-count"></div>
 		 </li>
 	   </ul>
@@ -559,11 +692,143 @@
 		<div class="case-studies-tabbed-content-button-row">
 		        <a href="#" class="case-studies-tabbed-content-button-green case-studies-tabbed-content-button-previous case-studies-tabbed-content-float-left">Back To Item Description</a>
 				<a href="#" class="case-studies-tabbed-content-button-green" onClick="submitform('save')">Save as Draft</a>
-				<a href="#" class="case-studies-tabbed-content-button-green case-studies-tabbed-content-button-next">Geographic Information</a>
+				<a href="#" class="case-studies-tabbed-content-button-green case-studies-tabbed-content-button-next">Next - Documents</a>
 		</div>
    </li>
-		
+   
+   
+   
+   <li>
+			<div class="case-studies-tabbed-content-header"><em>Documents</em></div>
+				<div class="case-studies-tabbed-content-section">
+					<div class="case-studies-tabbed-content-subheader">Document Files</div>
+					<liferay-ui:error key="invalid-multiple-doc-upload" message="invalid-multiple-doc-upload" />
+					<p>Upload relevant file documents. Acceptable formats include Adobe PDF and Word<need definition>. Up to 5 number of files.</p>
+								
+					<% 
+						    // to get the supdocs stored
+							String supDocs = "";
+						    StringBuilder sdocsStr = new StringBuilder("");
+						    //String array of sup documents
+							String[] sdocs = null;
+							String[] sdocNames = new String[5];
+							String[] sdocDescriptions = new String[5];
+							
+																	
+							 if (aceitem != null && Validator.isNotNull(aceitem.getSupdocs())) {
+								 
+								 // get the string array of doc ids
+								 sdocs = aceitem.getSupdocs().split(";");
+								 supDocs = aceitem.getSupdocs();
+								
+							 }
+							 else if (aceItemFromRequest != null && Validator.isNotNull(aceItemFromRequest.getSupdocs()))
+							 {
+								 sdocs = aceItemFromRequest.getSupdocs().split(";");
+								 supDocs =  aceItemFromRequest.getSupdocs();
+								
+							 }
+							 
+						    // we have atleast one supplementary document	 
+						    if (sdocs != null)
+						    {
+						    	
+						             int i = 0;
+						             
+						             for (String document:sdocs)
+									 {
+						            	 
+						            	 DLFileEntry file = DLFileEntryLocalServiceUtil.getDLFileEntry(Long.parseLong(document));
+										 String supFileName = file.getTitle();
+										 String supFileDescription = file.getDescription();
+										 sdocNames[i] = supFileName;
+										 sdocDescriptions[i] = supFileDescription;
+										 i = i + 1;
+									 }
+									
+						            
+						             pageContext.setAttribute("sdocnames", sdocNames);
+						             pageContext.setAttribute("sdocdesc", sdocDescriptions);
+						             pageContext.setAttribute("doccount", sdocs.length);    
+						    }
+						    else
+						    {
+						    	pageContext.setAttribute("doccount", 0); 
+						    }
+								
+								 %>
+								
+								<input name="supdocs" type="hidden" value="<%=supDocs %>"/>
+								
+								<c:choose>
+								<c:when test="${doccount gt 0 }">
+								   <c:forEach begin="1" end="${doccount}" varStatus="loop">
+									     <ul class="case-studies-tabbed-content-document-upload">
+									      <li class="case-studies-tabbed-content-document-upload-header">
+											<strong>Case Study Document File<span class="case-studies-tabbed-content-document-upload-position">${loop.count}</span>:</strong>
+											<a href="#" class="case-studies-tabbed-content-button-remove-document-${loop.count}">[remove]</a>
+										  </li>
+										  
+										  <li>
+											<p><strong><em>Upload Document File <span class="case-studies-tabbed-content-document-upload-position">${loop.count}</span>:</em></strong></p>
+											<div class="inputfile"><input name="supdocfiles${loop.count }" type="file" /></div>
+										  </li>
+										  
+										  <li>
+											<p><strong><em>Additional Document Files <span class="case-studies-tabbed-content-document-upload-position">${loop.count}</span>:</em></strong></p>
+											<p>Brief name of file (required - 150 char limit)</p>
+											<div class="inputfilename"><input type="text" name="sup_docs_names${loop.count}" size="30" maxlength="150" value="${sdocnames[loop.count - 1]}"></div>
+										  </li>
+										  
+										  <li>
+											<p><strong><span class="red">*</span> <em>Description of Document File <span class="case-studies-tabbed-content-document-upload-position">${loop.count}</span>:</em></strong></p>
+											<p>This field is required if a file is included. Briefly describe the file (required - 250 char limit)</p>
+											<div class="inputfiledescription"><textarea cols="40" rows="10" name="sup_docs_description${loop.count}" data-maxlength="250">${sdocdesc[loop.count - 1]}</textarea></div>
+										  </li>
+										 </ul>
+								   </c:forEach>
+								
+								   <div class="case-studies-tabbed-content-single-button-row">
+									   <a href="#" class="case-studies-tabbed-content-button-green case-studies-tabbed-content-button-add-document">Add Another Document File</a>
+								   </div>
+								    <input name="doccounter" type="hidden" id="doccounter" value="${doccount}" />
+								</c:when>
+								<c:otherwise>
+								       <input name="doccounter" id="doccounter" type="hidden" value="1" />
+									   <ul class="case-studies-tabbed-content-document-upload">
+										<li class="case-studies-tabbed-content-document-upload-header">
+											<strong>Case Study Document File <span class="case-studies-tabbed-content-document-upload-position">1</span>:</strong>
+										</li>
+										<li>
+											<p><strong><em>Upload Document File <span class="case-studies-tabbed-content-document-upload-position">1</span>:</em></strong></p>
+											<div class="inputfile"><input name="supdocfiles1" type="file" /></div>
+										</li>
+										<li>
+											<p><strong><em>Additional Document Files <span class="case-studies-tabbed-content-document-upload-position">1</span> Label:</em></strong></p>
+											<p>Brief name of file (required - 150 char limit)</p>
+											<div class="inputfilename"><input type="text" name="sup_docs_names1" size="30" maxlength="150" value=""></div>
+										</li>
+										<li>
+											<p><strong><span class="red">*</span> <em>Description of Document File <span class="case-studies-tabbed-content-document-upload-position">1</span>:</em></strong></p>
+											<p>This field is required if a file is included. Briefly describe the file (required - 250 char limit) </p>
+											<div class="inputfiledescription"><textarea cols="40" rows="10" name="sup_docs_description1" data-maxlength="250"></textarea></div>
+										</li>
+									</ul>
+									<div class="case-studies-tabbed-content-single-button-row">
+										<a href="#" class="case-studies-tabbed-content-button-green case-studies-tabbed-content-button-add-document">Add Another Document File</a>
+									</div>
+								</c:otherwise>
+							 </c:choose>
+							</div>
 
+							<div class="case-studies-tabbed-content-button-row">
+								<a href="#" class="case-studies-tabbed-content-button-green case-studies-tabbed-content-button-previous case-studies-tabbed-content-float-left">Back To Reference Information</a>
+							
+								<a href="#" class="case-studies-tabbed-content-button-green" onClick="submitform('save')">Save as Draft</a>
+
+								<a href="#" class="case-studies-tabbed-content-button-green case-studies-tabbed-content-button-next">Next - Geographic Information</a>
+							</div>
+						</li>
 	<li>
 	<div class="case-studies-tabbed-content-header">Geographic Information</div>
 	 <br/>
@@ -608,9 +873,9 @@
 										        {
 										        	geoCharsStr = aceitem.getGeochars();
 										        }
-										        else if (renderRequest.getParameter("rad_geo_chars") != null)
+										        else if (aceItemFromRequest != null)
 										        {
-										        	geoCharsStr = (String) renderRequest.getParameter("rad_geo_chars");
+										        	geoCharsStr = aceItemFromRequest.getGeochars();
 										        }
 										        
 										        String elementSelected = "";
@@ -823,12 +1088,31 @@
 								</ul>	
 		   </div> 
 		   
+		   <div class="case-studies-tabbed-content-section">
+		        <div class="case-studies-tabbed-content-header"><em>Comments</em></div>
+						   <p><em>Comments about this database item <i>[information entered below will not be displayed on the public pages of climate-adapt]</i></em></p>
+						   <%
+						       String comments = "";
+						      
+						       if (aceitem != null && Validator.isNotNull(aceitem.getComments())) 
+						       {
+						    	   comments = aceitem.getComments();
+						       }
+						       else if (aceItemFromRequest != null && Validator.isNotNull(aceItemFromRequest.getComments()))
+						       {
+						    	   comments = aceItemFromRequest.getComments();
+						       }
+						       
+						   %>
+						   <textarea cols="125" rows="10" name="authorcomment" style="border-color: blue; border-style: solid; border-width: thin;"><%=comments %></textarea>
+			</div>
+		   
 		   <div class="case-studies-tabbed-content-button-row">
 							 
 					<a href="#" class="case-studies-tabbed-content-button-green case-studies-tabbed-content-button-previous case-studies-tabbed-content-float-left">Back To Reference Information</a>
 					<a href="#" class="case-studies-tabbed-content-button-green" onClick="submitform('save')">Save as Draft</a>
 					<% if (aceitem != null) { %>
-					   <a href="#" class="case-studies-tabbed-content-button-green case-studies-tabbed-content-button-next">Review &amp; Submit</a>
+					   <a href="#" class="case-studies-tabbed-content-button-green case-studies-tabbed-content-button-next">Next - Review &amp; Submit</a>
 					<% } %>
 		   </div>
 		   
@@ -913,6 +1197,32 @@
                               </div> <!-- end of case-studies-tabbed-content-review-column-left  -->
                               
 							   <div class="case-studies-tabbed-content-review-column-right">
+								
+								 <%
+								   if (Validator.isNotNull(aceitem.getSupdocs())) { %>
+								   
+									    <div clas="case-studies-tabbed-content-review-column-right-section">
+										<p><strong>Case Study Documents</strong></p>
+										<ul class="case-studies-tabbed-content-bullted-list">
+										 
+								 <% 
+										 String[] sdocsForReview = aceitem.getSupdocs().split(";");
+									     for (String doc:sdocsForReview)
+									     {
+									    	 DLFileEntry uploadedFileEntry =  DLFileEntryLocalServiceUtil.getDLFileEntry(Long.parseLong(doc));
+									 	     String title = uploadedFileEntry.getTitle();
+									 	     String fileUrl = themeDisplay.getPortalURL() + themeDisplay.getPathContext() + "/documents/" + themeDisplay.getScopeGroupId() + "/" + uploadedFileEntry.getFolderId() +  "/" + HttpUtil.encodeURL(HtmlUtil.unescape(title));
+										
+									
+								 %>
+											<li><a href="<%=fileUrl%>"><%=title %></a></li>
+											
+								        <%} // end of for  %>
+								  
+										</ul>
+									</div>
+									
+								<% } // end of if %>
 								
 									<div class="case-studies-tabbed-content-review-column-right-section">
 										<p><strong>Keywords</strong></p>

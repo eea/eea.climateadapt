@@ -15,20 +15,20 @@ import javax.servlet.http.HttpServletRequest;
 import nl.wur.alterra.cgi.ace.model.AceItem;
 import nl.wur.alterra.cgi.ace.model.impl.AceItemImpl;
 import nl.wur.alterra.cgi.ace.service.AceItemLocalServiceUtil;
-
 import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.servlet.SessionMessages;
+import com.liferay.portal.kernel.upload.UploadPortletRequest;
 import com.liferay.portal.kernel.util.ParamUtil;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.util.PortalUtil;
 
 /**
  * Portlet implementation class ShareAceItemPortlet
  */
-public class ShareAceItemPortlet extends LuceneIndexUpdatePortlet {
+public class ShareAceItemPortlet extends LuceneIndexUpdatePortletForShareAceItem {
 
 	@Override
 	public void doView(RenderRequest renderRequest, RenderResponse renderResponse) throws IOException, PortletException {
-		System.out.println("ACE ITEM VIEW called");
 		try {
 	    	HttpServletRequest httpRequest = 
 	    		PortalUtil.getOriginalServletRequest(
@@ -57,9 +57,22 @@ public class ShareAceItemPortlet extends LuceneIndexUpdatePortlet {
 	 */
 	public void addAceItem(ActionRequest request, ActionResponse response) throws Exception {
 		AceItem aceitem = new AceItemImpl();
+		UploadPortletRequest uploadRequest = PortalUtil.getUploadPortletRequest(request);
+	    String aceitem_id = uploadRequest.getParameter("aceItemId");
+		
+		if (Validator.isNull(aceitem_id))
+		{
+			aceitem.setAceItemId(0);
+		}
+		else
+		{
+			aceitem.setAceItemId(ParamUtil.getLong(request, "aceItemId"));
+		}
+		
 		aceitem.setAceItemId(ParamUtil.getLong(request, "aceItemId"));
-		aceitemFromRequest(request, aceitem);
-	    List<String> errors = new ArrayList<String>();
+		ArrayList<String> errors = new ArrayList<String>();
+		aceitemFromRequest(request, aceitem, uploadRequest, errors);
+		
 		if (AceItemValidator.validateAceItem(aceitem, errors)) {
 			AceItemLocalServiceUtil.addAceItem(aceitem);
             synchronizeIndexSingleAceItem(aceitem);
@@ -81,6 +94,7 @@ public class ShareAceItemPortlet extends LuceneIndexUpdatePortlet {
 			}
 			SessionErrors.add(request, "invalid-form-data");
 			PortalUtil.copyRequestParameters(request, response);
+			request.setAttribute("aceitem", aceitem);
 			response.setRenderParameter("jspPage", "/html/shareinfo/add_aceitem.jsp");
 		}
 	}
@@ -91,18 +105,19 @@ public class ShareAceItemPortlet extends LuceneIndexUpdatePortlet {
 	 */
 	public void updateAceItem(ActionRequest request, ActionResponse response) throws Exception {
 		AceItem aceitem = null;
-
+		UploadPortletRequest uploadRequest = PortalUtil.getUploadPortletRequest(request);
+		
 		try {
-			aceitem = AceItemLocalServiceUtil.getAceItem(ParamUtil.getLong(request, "aceItemId"));
+			aceitem = AceItemLocalServiceUtil.getAceItem(Long.parseLong(uploadRequest.getParameter("aceItemId")));
 		}
 		catch (Exception e) {
 			aceitem = null;
 		}
-
+		
 		if(aceitem != null) {
-			aceitemFromRequest(request, aceitem);
+			ArrayList<String> errors = new ArrayList<String>();
+			aceitemFromRequest(request, aceitem, uploadRequest, errors);
 
-			List<String> errors = new ArrayList<String>();
 			if (AceItemValidator.validateAceItem(aceitem, errors)) {
 
 				AceItemLocalServiceUtil.updateAceItem(aceitem);
@@ -130,6 +145,7 @@ public class ShareAceItemPortlet extends LuceneIndexUpdatePortlet {
 				}
 				SessionErrors.add(request, "invalid-form-data");
 				PortalUtil.copyRequestParameters(request, response);
+				request.setAttribute("aceitemId", aceitem.getAceItemId());
 				response.setRenderParameter("jspPage", "/html/shareinfo/add_aceitem.jsp");
 			}
 		}
