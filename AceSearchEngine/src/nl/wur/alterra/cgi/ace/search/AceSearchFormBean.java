@@ -19,8 +19,17 @@ public class AceSearchFormBean {
     private String sortBy;
     private String fuzziness;
     private String anyOfThese;
+    private String[] year;
 
-    public FreetextMode getFreeTextMode() {
+    public String[] getYear() {
+		return year;
+	}
+
+	public void setYear(String[] year) {
+		this.year = year;
+	}
+
+	public FreetextMode getFreeTextMode() {
         return freeTextMode;
     }
 

@@ -28,6 +28,7 @@ public class SearchRequestParams {
     public static final String SCENARIO = "scenario";
     public static final String TIMEPERIOD = "timeperiod";
     public static final String IMPACT = "impact";
+    public static final String YEAR = "year";
 
 	public static final String SEARCH_PARAMS = "searchParams";
 	public static final String SEARCH_RESULTS = "searchResults";

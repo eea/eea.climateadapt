@@ -1,5 +1,7 @@
 package nl.wur.alterra.cgi.ace.search;
 
+import java.util.Date;
+
 import nl.wur.alterra.cgi.ace.model.AceItem;
 import nl.wur.alterra.cgi.ace.search.lucene.ACEIndexUtil;
 
@@ -22,8 +24,30 @@ public class AceItemSearchResult {
     private short controlstatus;
     private String deeplink;
     private String spatialLayer;
+    private String feature;
+    private boolean isNew= false;
+    
 
-    /**
+    public boolean isIsNew() {
+		return isNew;
+	}
+
+	public void setNew(boolean isNew) {
+		//System.out.println("inside setNew name is " + this.name);
+		//System.out.println("isNew is " + isNew);
+		this.isNew = isNew;
+	}
+
+	public String getFeature() {
+		return feature;
+	}
+
+	public void setFeature(String feature) {
+		//System.out.println(" setting feature " + feature);
+		this.feature = feature;
+	}
+
+	/**
      *
      * @param aceitem
      */
@@ -44,6 +68,52 @@ public class AceItemSearchResult {
         setControlstatus(aceitem.getControlstatus());
 
         setDeeplink(aceitem.getDeeplink().replaceAll("'", "\'"));
+        
+        //System.out.println("feature is " + aceitem.getFeature());
+        setFeature(aceitem.getFeature());
+        System.out.println("name is " + getName());
+        setNew(isNew(aceitem.getApprovaldate(), aceitem.getCreationdate()));
+        
+    }
+    
+    
+    
+    
+    public boolean isNew(Date approvalDate, Date createdDate)
+    {
+    	Date processDate = null;
+    	if (approvalDate == null)
+    	{
+    		processDate = createdDate;
+    	}
+    	else
+    	{
+    		processDate = approvalDate;
+    	}
+    	
+    	System.out.println("approval date is " + approvalDate);
+    	System.out.println("creation date is " + approvalDate);
+    	System.out.println("process date is " + processDate);
+    	Date today = new Date();
+    	long t1 = today.getTime();
+    	long t2 = processDate.getTime();
+    	
+    	//System.out.println("creation date is " + creationDate);
+    	long day = 1000 * 60 * 60 * 24; // milliseconds in a day
+    	
+    	long days = (t1 - t2) / day;
+    	
+    	//System.out.println("days is " + days);
+    	if (days <= 90)
+    	{
+    		System.out.println("returning true");
+    		return true;
+    	}
+    	else
+    	{
+    		System.out.println("returning false");
+    		return false;
+    	}
     }
 
     /**
