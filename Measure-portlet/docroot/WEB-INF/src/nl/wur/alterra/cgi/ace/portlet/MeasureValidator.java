@@ -39,16 +39,16 @@ public class MeasureValidator {
 				dbmeasure = null ;
 			}
 
-			// hack optimistic locking!!!  check Approvaldate and then always set to null
-			/*if(dbmeasure != null){
+			// hack optimistic locking!!!  check Lockdate and then always set to null
+			if(dbmeasure != null){
                 long creationDate = dbmeasure.getCreationdate() == null ? 0 : dbmeasure.getCreationdate().getTime();
-                long approvalDate = measure.getApprovaldate() == null ? 0 : measure.getApprovaldate().getTime();
-                if (creationDate != approvalDate)  {
+                long lockDate = measure.getLockdate() == null ? 0 : measure.getLockdate().getTime();
+                if (creationDate != lockDate)  {
                     errors.add("measure-changed");
                     valid = false;
                 }
             }
-			measure.setApprovaldate(null);*/
+			measure.setLockdate(null);
 		}
 
 		if (valid) {
