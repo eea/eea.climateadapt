@@ -298,6 +298,20 @@ ul#subnav li a:hover {
 
 .portlet-topper {
 	font-size: 1.818em;
+	text-align: center;
+	background-image: linear-gradient(bottom, rgb(210,223,146) 16%, rgb(166,191,38) 58%);
+	background-image: -o-linear-gradient(bottom, rgb(210,223,146) 16%, rgb(166,191,38) 58%);
+	background-image: -moz-linear-gradient(bottom, rgb(210,223,146) 16%, rgb(166,191,38) 58%);
+	background-image: -webkit-linear-gradient(bottom, rgb(210,223,146) 16%, rgb(166,191,38) 58%);
+	background-image: -ms-linear-gradient(bottom, rgb(210,223,146) 16%, rgb(166,191,38) 58%);
+
+	background-image: -webkit-gradient(
+		linear,
+		left bottom,
+		left top,
+		color-stop(0.16, rgb(210,223,146)),
+		color-stop(0.58, rgb(166,191,38))
+	);
 }
 
 .portlet-title {
@@ -307,7 +321,7 @@ ul#subnav li a:hover {
 	font-weight: normal;
 	line-height: 20px;
 	min-width: 50%;
-	padding: 0 0 15px 0;
+	padding: 8px 0;
 }
 
 .portlet-content, .portlet-minimized .portlet-content-container {
@@ -590,7 +604,7 @@ ul#subnav li a:hover {
 /**** Second level menu ****/
 
 #sec-menu {
-	margin-top: 35px;
+	margin-top: 10px;
 	padding: 0;
 }
 
@@ -1963,9 +1977,7 @@ text and the class mapviewer to the MapViewerPortlet.
 	padding-right: 15px;
 }
 
-.portlet-column-content-only, .ltr .portlet-column-content-first, .rtl .portlet-column-content-last {
-	padding-left: 15px;
-}
+
 
 /****
 	Styling of glossary items
