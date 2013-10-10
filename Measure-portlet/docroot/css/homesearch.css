@@ -1,6 +1,6 @@
 #case-studies-homepage-search-wrapper {
 			background-color: #f0f0f0;
-			height: 423px;
+			height: 350px;
 			position: relative;
 			width: 95%;
 		}
@@ -15,17 +15,17 @@
 
  #case-studies-homepage-search-wrapper dl {
  			margin: 0 0 -5px;
-			padding: 5%;
+			padding: 2% 5%;
 			width: 90%;
 		}
 
  #case-studies-homepage-search-wrapper dl dt {
-			margin: 0 0 .5em;
+			margin: 0 0 .2em;
 			padding: 0;
 		}
 
  #case-studies-homepage-search-wrapper dl dd {
-			margin: 0 0 1em;
+			margin: 0 0 0.4em;
 			padding: 0;
 		}
 
@@ -39,13 +39,15 @@
 
  #case-studies-homepage-search-wrapper dl dd .case-studies-homepage-button-green {
 			float: right;
+			position: relative;
+			top: -8px;
 		}
 
  #case-studies-homepage-search-wrapper .case-studies-homepage-search-footer {
     background-color: #B0C1D5;
     clear: both;
     display: block;
-    padding: 1em 5%;
+    padding: 0.5em 5%;
     text-align: right;
     bottom: 0;
     position: absolute;
@@ -82,5 +84,5 @@
 			text-align: center;
 			text-decoration: none;
 			text-shadow: 1px 1px 1px #fff;
-			padding: 10px;
+			padding: 5px 75px;
 		}

@@ -166,6 +166,7 @@ public abstract class MeasureUpdateHelperForSharedMeasure extends MVCPortlet {
                 websites = "";
                 for (int i = 0; i < site.length; i++) {
                     site[i] = site[i].trim();
+
                     if (site[i].length() > 0) {
                         // end up with splitter '; '
                         websites += site[i];
@@ -296,7 +297,7 @@ public abstract class MeasureUpdateHelperForSharedMeasure extends MVCPortlet {
         measure.setGeochars(choosenGeoChars);
        
         
-        measure.setSolutions(uploadRequest.getParameter( "solutions"));
+        measure.setSolutions(uploadRequest.getParameter("solutions"));
         
         // adaptation relevance
         String choosenrelevance = "";
@@ -330,7 +331,16 @@ public abstract class MeasureUpdateHelperForSharedMeasure extends MVCPortlet {
             measure.setControlstatus((short) -1);
         } else {
             measure.setControlstatus(Short.parseShort(approved));
+            
+            // set the approved date here
+            if (measure.getControlstatus() == 1)
+            {
+            	 Date approvalDate = new Date();
+            	 measure.setApprovaldate(approvalDate);
+            }
         }
+        
+        
 
         if (uploadRequest.getParameter( "lon") != null) {
             try {
@@ -357,7 +367,17 @@ public abstract class MeasureUpdateHelperForSharedMeasure extends MVCPortlet {
 
         measure.setSatarea(uploadRequest.getParameter( "satarea"));
 
-        measure.setCreationdate(new Date());
+        if (Validator.isNull(measure.getCreationdate()))
+        {
+        	// creation date is the time when case study is first saved
+        	measure.setCreationdate(new Date());
+        }
+        
+        
+        if (Validator.isNotNull(uploadRequest.getParameter("comments")))
+        {
+        	measure.setComments(uploadRequest.getParameter("comments"));
+        }
         
         //primary photo
 		//UploadPortletRequest uploadRequest = PortalUtil.getUploadPortletRequest(request);
@@ -996,7 +1016,6 @@ public abstract class MeasureUpdateHelperForSharedMeasure extends MVCPortlet {
     			return doc;
     			
     			
-    			
       }
     
     
@@ -1080,6 +1099,8 @@ public abstract class MeasureUpdateHelperForSharedMeasure extends MVCPortlet {
     protected void updateAceItem(Measure measure, AceItem aceitem) throws Exception {
 
         aceitem.setName(measure.getName());
+        
+        aceitem.setFeature(measure.getCasestudyfeature());
 
         aceitem.setDescription(measure.getDescription());
 
@@ -1130,12 +1151,17 @@ public abstract class MeasureUpdateHelperForSharedMeasure extends MVCPortlet {
         if (measure.getApprovaldate() != null) {
             aceitem.setApprovaldate(measure.getApprovaldate());
         }
+        
+        if (measure.getYear() != null) {
+            aceitem.setYear(measure.getYear());
+        }
 
         aceitem.setTextSearch(measure.getSpecialtagging() + ' ' + aceitem.getName() + ' ' + measure.getDescription() + ' '
                 + measure.getContact() + ' ' + measure.getKeywords() + ' ' + measure.getWebsite() + ' '
                 + measure.getSpatiallayer().replace("_", "") + ' ' + measure.getSpatialvalues() + ' ' + measure.getLegalaspects()
                 + ' ' + measure.getSucceslimitations() + ' ' + measure.getCostbenefit() + ' '
                 + measure.getStakeholderparticipation() + ' ' + measure.getSource() + ' ' + measure.getTextwebpage());
+        
 
 /* At free text searxh don't search any longer on Advanced Search Fields
         String sctrs = measure.getSectors_();

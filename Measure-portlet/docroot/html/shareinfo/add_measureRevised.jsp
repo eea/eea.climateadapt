@@ -369,6 +369,7 @@
 					        String descriptionOfClimateEntityText = "";
 					        String toggleclass = "";
 					        String localDescription = "";
+					        String uploadText = "";
 							
 					        if (mao_type.equalsIgnoreCase("A"))
 					        {
@@ -377,6 +378,7 @@
 					        	descriptionOfClimateEntityShortText = "Case Description";
 					        	descriptionOfClimateEntityText = "Case Study Description";
 					        	toggleclass = "toggleshow";
+					        	uploadText = "Illustrations and Documents";
 					        }
 					        else
 					        {
@@ -385,6 +387,7 @@
 					        	descriptionOfClimateEntityShortText = "Adaptation Description";
 					        	descriptionOfClimateEntityText = "Adaptation Option Description";
 					        	toggleclass = "togglehide";
+					        	uploadText = "Documents";
 					        }
 					    %>
 					    <% if (justSaved ==  null) {%>
@@ -394,9 +397,7 @@
 						<% } %>
 						<li><a href="#">Additional Details</a></li>
 						<li><a href="#">Reference Information</a></li>
-						<% if (mao_type.equalsIgnoreCase("A")) { %>
-						   <li><a href="#">Illustration &amp; Files</a></li>
-						<% } %>
+						<li><a href="#"><%=uploadText %></a></li>
 						<li><a href="#">Geographic Information</a></li>
 						<% if (measure != null) { 
 						      if (justSaved != null) {%>
@@ -1397,11 +1398,11 @@
 											<% 
 										         if (mao_type.equalsIgnoreCase("A"))
 											     {
-										        	 localDescription = "List the Name and Website that refers to the original documents directly related to the case implementation process and its responsible actors (500 char limit). Please list one website on one line only without any formatting.";
+										        	 localDescription = "List the Name and Website that refers to the original documents directly related to the case implementation process and its responsible actors (500 char limit). Please separate each website with semicolon.";
 										         }
 										         else
 										         {
-										        	 localDescription = "List the Name and Website where the option can be found or is described. Note: may refer to the original document describing a measure and does not have to refer back to the project e.g. collected measures (500 character limit). Please list one website on one line only without any formatting.";
+										        	 localDescription = "List the Name and Website where the option can be found or is described. Note: may refer to the original document describing a measure and does not have to refer back to the project e.g. collected measures (500 character limit). Please separate each website with semicolon.";
 										         }
 											%>
 										<p><em><%=localDescription %></em></p>
@@ -1454,17 +1455,14 @@
 							<div class="case-studies-tabbed-content-button-row">
 								<a href="#" class="case-studies-tabbed-content-button-green case-studies-tabbed-content-button-previous case-studies-tabbed-content-float-left">Back To Additional Details</a>
 								<a href="#" class="case-studies-tabbed-content-button-green" onClick="submitform('save')">Save as Draft</a>
-								<% if (mao_type.equalsIgnoreCase("A")) { %>
-								<a href="#" class="case-studies-tabbed-content-button-green case-studies-tabbed-content-button-next">Next - Illustration and Files</a>
-								<% } else { %>
-								<a href="#" class="case-studies-tabbed-content-button-green case-studies-tabbed-content-button-next">Next  - Geographic Information</a>
-								<% } %>
+								<a href="#" class="case-studies-tabbed-content-button-green case-studies-tabbed-content-button-next">Next - <%=uploadText %></a>
 							</div>
 						</li>
 						
-						<% if (mao_type.equalsIgnoreCase("A")) { %> <%-- beginning of condition photo and document upload only applies to case studies --%>
+						
 						<li>
-							<div class="case-studies-tabbed-content-header">Case Study - <em>Illustration &amp; Files</em></div>
+						   <% if (mao_type.equalsIgnoreCase("A")) {  // the upload of illustrations only applies to case studies %>
+							<div class="case-studies-tabbed-content-header">Case Study - <em><%=uploadText %></em></div>
 
 							<div class="case-studies-tabbed-content-section">
 							<liferay-ui:error key="photo-required" message="photo-required" />
@@ -1553,9 +1551,6 @@
 									    {
 									    	pageContext.setAttribute("photocount", 0); 
 									    }
-									    
-									       
-									
 								 %>
 								
 								<input name="supphotos" type="hidden" value="<%=supPhotos %>"/>
@@ -1624,6 +1619,7 @@
 								</c:otherwise>
 							 </c:choose>
 							</div>
+						<% } // the upload of illustrations only applies to case studies %>
 
 							   <div class="case-studies-tabbed-content-section">
 								<div class="case-studies-tabbed-content-subheader">Document Files</div>
@@ -1756,7 +1752,7 @@
 								<a href="#" class="case-studies-tabbed-content-button-green case-studies-tabbed-content-button-next">Next  - Geographic Information</a>
 							</div>
 						</li>
-						<% } %> <%-- end of condition photo and document upload only applies to case studies --%>
+					
 						
 						<li>
 							<div class="case-studies-tabbed-content-header"><%=nameOfClimateEntityShortText %>  - <em>Geographic Information</em></div>
@@ -2232,13 +2228,30 @@
 								<div class="case-studies-form-clearing"></div>
 							</div>
 						<%} %>
+						
+						<div class="case-studies-tabbed-content-section">
+						 <div class="case-studies-tabbed-content-header"><em>Comments</em></div>
+						   <p><em>Comments about this database item <i>[information entered below will not be displayed on the public pages of climate-adapt]</i></em></p>
+						   <%
+						       String comments = "";
+						      
+						       if (measure != null && Validator.isNotNull(measure.getComments()) )
+						       {
+						    	   comments = measure.getComments();
+						       }
+						       else if (measureFromRequest != null && Validator.isNotNull(measureFromRequest.getComments()))
+						       {
+						    	   comments = measureFromRequest.getComments();
+						       }
+						       
+						   %>
+						   <textarea cols="100" rows="10" name="comments" style="border-color: blue; border-style: solid; border-width: thin;"><%=comments %></textarea>
+						</div>
 							
 							<div class="case-studies-tabbed-content-button-row">
-							   <% if (mao_type.equalsIgnoreCase("A")) { %>
-								   <a href="#" class="case-studies-tabbed-content-button-green case-studies-tabbed-content-button-previous case-studies-tabbed-content-float-left">Back To Illustrations &amp; Documents</a>
-							   <% } else { %>
-							       <a href="#" class="case-studies-tabbed-content-button-green case-studies-tabbed-content-button-previous case-studies-tabbed-content-float-left">Back To Reference Information</a>
-							   <% } %>
+							   
+								<a href="#" class="case-studies-tabbed-content-button-green case-studies-tabbed-content-button-previous case-studies-tabbed-content-float-left">Back To <%=uploadText %></a>
+							  
 								<a href="#" class="case-studies-tabbed-content-button-green" onClick="submitform('save')">Save as Draft</a>
 							    <% if (measure != null) { %>
 							       <a href="#" class="case-studies-tabbed-content-button-green case-studies-tabbed-content-button-next">Next  - Review &amp Submit</a>
@@ -2266,7 +2279,7 @@
 
 							<div class="case-studies-tabbed-content-review-wrapper">
 								<div class="case-studies-tabbed-content-review-column-left">
-								  <% if (mao_type.equalsIgnoreCase("A")) { %>
+								 <% if (mao_type.equalsIgnoreCase("A")) { %>
 									<div class="case-studies-tabbed-content-review-image-wrapper">
 										<div class="case-studies-tabbed-content-review-image-label"></div>
 										 <% 
@@ -2285,33 +2298,34 @@
 										<p class="case-studies-tabbed-content-review-header"><%= measure.getName() %> (<%=nameOfClimateEntityShortText %>)</p>
 										<p><%= measure.getDescription() %></p>
 									</div>
-										
-									
-									  
-									<% } else { %>
+							<% } else { %>
 										 <div class="case-studies-tabbed-content-section">
 										         <p class="case-studies-tabbed-content-review-header"><%= measure.getName() %> (<%=nameOfClimateEntityShortText %>)</p>
 											     <p><%= measure.getDescription() %></p>
 										</div>
-									<% } %>
+							<% } %>	
 										
 								
 									<div class="case-studies-form-clearing"></div>
 
 									<div class="case-studies-tabbed-content-section">
 										<ul>
+										    <% if (mao_type.equalsIgnoreCase("A")) { %>
 											<li>
 												<p><strong><em><%=nameOfClimateEntityShortText %> Description</em></strong></p>
-												<ul class="case-studies-tabbed-content-bullted-list">
-													<% if (mao_type.equalsIgnoreCase("A")) { %>
-													<li><a href="#challenges_anchor">Challenges</a></li>
+												<ul class="case-studies-tabbed-content-bullted-list">													<li><a href="#challenges_anchor">Challenges</a></li>
 													<li><a href="#objectives_anchor">Objectives</a></li>
 													<li><a href="#adapt_options_anchor">Adaptation Options Implemented In This Case</a></li>
 													<li><a href="#solutions_anchor">Solutions</a></li>
 													<li><a href="#relevance_anchor">Importance and Relevance of Adaptation</a></li>
-													<% } %>
+													
 												</ul>
 											</li>
+											<% } %>
+											
+										  <% if (Validator.isNotNull(measure.getCategory()) || Validator.isNotNull(measure.getStakeholderparticipation()) || Validator.isNotNull(measure.getSucceslimitations())
+												    || Validator.isNotNull(measure.getCostbenefit()) || Validator.isNotNull(measure.getLegalaspects()) || Validator.isNotNull(measure.getImplementationtime())
+												    || Validator.isNotNull(measure.getLifetime()) ) {  %>
 											<li>
 												<p><strong><em>Additional Details</em></strong></p>
 												<ul class="case-studies-tabbed-content-bullted-list">
@@ -2344,6 +2358,7 @@
 												  <% } %>
 												</ul>
 											</li>
+										   <% } %>
 											
 											<li>
 												<p><strong><em>Reference Information</em></strong></p>
@@ -2361,6 +2376,7 @@
 										<div class="case-studies-form-clearing"></div>
 									</div>
 
+                                 <% if (mao_type.equalsIgnoreCase("A")) { %>
 									<div class="case-studies-tabbed-content-section">
 									  <div class="case-studies-tabbed-content-subheader"><%=nameOfClimateEntityShortText %> Description</div>
 										<ul>
@@ -2448,7 +2464,11 @@
 										   <% } %>
 										</ul>
 									</div>
+								<% } %>
 
+                                 <% if (Validator.isNotNull(measure.getCategory()) || Validator.isNotNull(measure.getStakeholderparticipation()) || Validator.isNotNull(measure.getSucceslimitations())
+												    || Validator.isNotNull(measure.getCostbenefit()) || Validator.isNotNull(measure.getLegalaspects()) || Validator.isNotNull(measure.getImplementationtime())
+												    || Validator.isNotNull(measure.getLifetime()) ) {  %>
 									<div class="case-studies-tabbed-content-section">
 										<div class="case-studies-tabbed-content-subheader">Additional Details</div>
 										<ul>
@@ -2550,6 +2570,7 @@
 										  <%} %>
 										</ul>
 									</div>
+								<% } %>
 
 									<div class="case-studies-tabbed-content-section">
 										<div class="case-studies-tabbed-content-subheader">Reference Information</div>
@@ -2597,8 +2618,6 @@
 								   if (Validator.isNotNull(measure.getSupphotos())) { %>
 								   
 									    <div class="case-studies-tabbed-content-review-column-right-section">
-									   
-									
 										 
 								 <% 
 										 String[] sphotosInReview = measure.getSupphotos().split(";");

@@ -39,16 +39,16 @@ public class MeasureValidator {
 				dbmeasure = null ;
 			}
 
-			// hack optimistic locking!!!  check Lockdate and then always set to null
-			if(dbmeasure != null){
+			// hack optimistic locking!!!  check Approvaldate and then always set to null
+			/*if(dbmeasure != null){
                 long creationDate = dbmeasure.getCreationdate() == null ? 0 : dbmeasure.getCreationdate().getTime();
-                long lockDate = measure.getLockdate() == null ? 0 : measure.getLockdate().getTime();
-                if (creationDate != lockDate)  {
+                long approvalDate = measure.getApprovaldate() == null ? 0 : measure.getApprovaldate().getTime();
+                if (creationDate != approvalDate)  {
                     errors.add("measure-changed");
                     valid = false;
                 }
             }
-			measure.setLockdate(null);
+			measure.setApprovaldate(null);*/
 		}
 
 		if (valid) {
@@ -175,7 +175,7 @@ public class MeasureValidator {
 				valid = false;
 			}*/
 			
-			if (Validator.isNull(measure.getPrimephoto()) && measure.getMao_type().equalsIgnoreCase("A") )
+			if (Validator.isNull(measure.getPrimephoto()) && measure.getMao_type().equalsIgnoreCase("A"))
 			{
 				errors.add("photo-required");
 				valid = false;
@@ -209,7 +209,7 @@ public class MeasureValidator {
 				}
 			}
 			
-			System.out.println("geoChars is " + measure.getGeochars());
+		
 			if (Validator.isNull(measure.getGeochars()) && measure.getMao_type().equalsIgnoreCase("A") )
 			{
 					errors.add("geo-characterization-required");
