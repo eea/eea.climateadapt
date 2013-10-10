@@ -121,6 +121,11 @@ public class AceItemValidator {
 			
 		}
 		
+		if (errors.size() > 0)
+		{
+			valid = false;
+		}
+		
 		return valid;
 	}
 
