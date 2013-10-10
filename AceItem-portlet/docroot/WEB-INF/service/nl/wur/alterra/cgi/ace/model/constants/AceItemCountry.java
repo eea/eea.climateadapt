@@ -17,7 +17,7 @@ public enum AceItemCountry {
     DK, /* Denmark */
     EE, /* Estonia */
     FI, /* Finland */
-    YU, /* Former Yugoslav Republic of Macedonia */
+    MK, /* Former Yugoslav Republic of Macedonia */
     FR, /* France */
     DE, /* Germany */
     GR, /* Greece */
