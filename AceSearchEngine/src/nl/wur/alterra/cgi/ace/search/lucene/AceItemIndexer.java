@@ -101,6 +101,7 @@ public class AceItemIndexer {
         String storageType = aceItem.getStoragetype();
         String textSearch = aceItem.getTextSearch();
         String datatype = aceItem.getDatatype();
+        String year = aceItem.getYear();
 
         Document document = new Document();
 
@@ -112,6 +113,15 @@ public class AceItemIndexer {
              * Description is indexed using whatever is the default analyzer we're using (see ACEAnalyzer).
              */
             document.add(new Field(ACEIndexConstant.IndexField.DESCRIPTION, description, Field.Store.YES,Field.Index.ANALYZED));
+        }
+        
+        if (year != null && year.length() > 0)
+        {
+        	 /*
+             * year fields are indexed using Keywordanalyzer.
+             */
+            document.add(new NumericField(ACEIndexConstant.IndexField.YEAR, Field.Store.YES, true).setIntValue(Integer.parseInt(year)));
+            document.add(new NumericField(ACEIndexConstant.IndexField.YEAR_SORT, Field.Store.NO, true).setIntValue(Integer.parseInt(year)));
         }
 
         if(endDate != null) {
@@ -230,6 +240,7 @@ public class AceItemIndexer {
             document.add(new Field(ACEIndexConstant.IndexField.DATATYPE, datatype, Field.Store.YES,Field.Index.NOT_ANALYZED));
         }
 
+        
 		return document;
     }
 

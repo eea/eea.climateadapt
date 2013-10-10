@@ -38,6 +38,10 @@ public class ACEIndexConstant {
         /**
          * To sort by AceItem rating.
          */
+        public static final String YEAR_SORT = "yearsort";
+        /**
+         * To sort by AceItem rating.
+         */
         public static final String RATING_SORT = "ratingsort";
         /**
          * To sort by relevance. This is not an actual sort field in the index, by default Lucene uses relevance.
@@ -78,9 +82,13 @@ public class ACEIndexConstant {
          */
         public static final String KEYWORD = "keyword";
         /**
-         *
+         * Name
          */
         public static final String NAME = "name";
+        /**
+        * Year
+        */
+       public static final String YEAR = "year";
         /**
          * Rating.
          */
