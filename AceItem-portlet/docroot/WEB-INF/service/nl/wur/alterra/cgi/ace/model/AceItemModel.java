@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2010 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2011 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -596,6 +596,36 @@ public interface AceItemModel extends BaseModel<AceItem> {
 	 * @param feature the feature of this ace item
 	 */
 	public void setFeature(String feature);
+
+	/**
+	 * Gets the supdocs of this ace item.
+	 *
+	 * @return the supdocs of this ace item
+	 */
+	@AutoEscape
+	public String getSupdocs();
+
+	/**
+	 * Sets the supdocs of this ace item.
+	 *
+	 * @param supdocs the supdocs of this ace item
+	 */
+	public void setSupdocs(String supdocs);
+
+	/**
+	 * Gets the admincomment of this ace item.
+	 *
+	 * @return the admincomment of this ace item
+	 */
+	@AutoEscape
+	public String getAdmincomment();
+
+	/**
+	 * Sets the admincomment of this ace item.
+	 *
+	 * @param admincomment the admincomment of this ace item
+	 */
+	public void setAdmincomment(String admincomment);
 
 	/**
 	 * Gets the scenario of this ace item.

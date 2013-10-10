@@ -39,6 +39,8 @@
 		<field name="year" type="String" />
 		<field name="geochars" type="String" />
 		<field name="feature" type="String" />
+		<field name="supdocs" type="String" />
+		<field name="admincomment" type="String" />
 		<field name="scenario" type="String" />
 		<field name="timeperiod" type="String" />
 		<field name="lockdate" type="Date" />

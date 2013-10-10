@@ -51,6 +51,8 @@
 		<column name="year" type="String" />
 		<column name="geochars" type="String" />
 		<column name="feature" type="String" />
+		<column name="supdocs" type="String" />
+		<column name="admincomment" type="String" />
 		<column name="scenario" type="String" />
 		<column name="timeperiod" type="String" />
 		<column name="lockdate" type="Date" />

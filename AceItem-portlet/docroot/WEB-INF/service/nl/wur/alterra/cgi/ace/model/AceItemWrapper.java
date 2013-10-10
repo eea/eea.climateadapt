@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2010 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2011 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -330,6 +330,22 @@ public class AceItemWrapper implements AceItem {
 
 	public void setFeature(java.lang.String feature) {
 		_aceItem.setFeature(feature);
+	}
+
+	public java.lang.String getSupdocs() {
+		return _aceItem.getSupdocs();
+	}
+
+	public void setSupdocs(java.lang.String supdocs) {
+		_aceItem.setSupdocs(supdocs);
+	}
+
+	public java.lang.String getAdmincomment() {
+		return _aceItem.getAdmincomment();
+	}
+
+	public void setAdmincomment(java.lang.String admincomment) {
+		_aceItem.setAdmincomment(admincomment);
 	}
 
 	public java.lang.String getScenario() {

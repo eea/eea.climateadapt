@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2010 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2011 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -317,26 +317,40 @@ public class ClpSerializer {
 
 					method36.invoke(newModel, value36);
 
-					Method method37 = newModelClass.getMethod("setScenario",
+					Method method37 = newModelClass.getMethod("setSupdocs",
 							new Class[] { String.class });
 
-					String value37 = oldCplModel.getScenario();
+					String value37 = oldCplModel.getSupdocs();
 
 					method37.invoke(newModel, value37);
 
-					Method method38 = newModelClass.getMethod("setTimeperiod",
+					Method method38 = newModelClass.getMethod("setAdmincomment",
 							new Class[] { String.class });
 
-					String value38 = oldCplModel.getTimeperiod();
+					String value38 = oldCplModel.getAdmincomment();
 
 					method38.invoke(newModel, value38);
 
-					Method method39 = newModelClass.getMethod("setLockdate",
-							new Class[] { Date.class });
+					Method method39 = newModelClass.getMethod("setScenario",
+							new Class[] { String.class });
 
-					Date value39 = oldCplModel.getLockdate();
+					String value39 = oldCplModel.getScenario();
 
 					method39.invoke(newModel, value39);
+
+					Method method40 = newModelClass.getMethod("setTimeperiod",
+							new Class[] { String.class });
+
+					String value40 = oldCplModel.getTimeperiod();
+
+					method40.invoke(newModel, value40);
+
+					Method method41 = newModelClass.getMethod("setLockdate",
+							new Class[] { Date.class });
+
+					Date value41 = oldCplModel.getLockdate();
+
+					method41.invoke(newModel, value41);
 
 					return newModel;
 				}
@@ -916,26 +930,40 @@ public class ClpSerializer {
 
 					newModel.setFeature(value36);
 
-					Method method37 = oldModelClass.getMethod("getScenario");
+					Method method37 = oldModelClass.getMethod("getSupdocs");
 
 					String value37 = (String)method37.invoke(oldModel,
 							(Object[])null);
 
-					newModel.setScenario(value37);
+					newModel.setSupdocs(value37);
 
-					Method method38 = oldModelClass.getMethod("getTimeperiod");
+					Method method38 = oldModelClass.getMethod("getAdmincomment");
 
 					String value38 = (String)method38.invoke(oldModel,
 							(Object[])null);
 
-					newModel.setTimeperiod(value38);
+					newModel.setAdmincomment(value38);
 
-					Method method39 = oldModelClass.getMethod("getLockdate");
+					Method method39 = oldModelClass.getMethod("getScenario");
 
-					Date value39 = (Date)method39.invoke(oldModel,
+					String value39 = (String)method39.invoke(oldModel,
 							(Object[])null);
 
-					newModel.setLockdate(value39);
+					newModel.setScenario(value39);
+
+					Method method40 = oldModelClass.getMethod("getTimeperiod");
+
+					String value40 = (String)method40.invoke(oldModel,
+							(Object[])null);
+
+					newModel.setTimeperiod(value40);
+
+					Method method41 = oldModelClass.getMethod("getLockdate");
+
+					Date value41 = (Date)method41.invoke(oldModel,
+							(Object[])null);
+
+					newModel.setLockdate(value41);
 
 					return newModel;
 				}

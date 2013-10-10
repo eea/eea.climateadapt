@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2010 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2011 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -339,6 +339,22 @@ public class AceItemClp extends BaseModelImpl<AceItem> implements AceItem {
 		_feature = feature;
 	}
 
+	public String getSupdocs() {
+		return _supdocs;
+	}
+
+	public void setSupdocs(String supdocs) {
+		_supdocs = supdocs;
+	}
+
+	public String getAdmincomment() {
+		return _admincomment;
+	}
+
+	public void setAdmincomment(String admincomment) {
+		_admincomment = admincomment;
+	}
+
 	public String getScenario() {
 		return _scenario;
 	}
@@ -413,6 +429,8 @@ public class AceItemClp extends BaseModelImpl<AceItem> implements AceItem {
 		clone.setYear(getYear());
 		clone.setGeochars(getGeochars());
 		clone.setFeature(getFeature());
+		clone.setSupdocs(getSupdocs());
+		clone.setAdmincomment(getAdmincomment());
 		clone.setScenario(getScenario());
 		clone.setTimeperiod(getTimeperiod());
 		clone.setLockdate(getLockdate());
@@ -461,7 +479,7 @@ public class AceItemClp extends BaseModelImpl<AceItem> implements AceItem {
 	}
 
 	public String toString() {
-		StringBundler sb = new StringBundler(81);
+		StringBundler sb = new StringBundler(85);
 
 		sb.append("{aceItemId=");
 		sb.append(getAceItemId());
@@ -537,6 +555,10 @@ public class AceItemClp extends BaseModelImpl<AceItem> implements AceItem {
 		sb.append(getGeochars());
 		sb.append(", feature=");
 		sb.append(getFeature());
+		sb.append(", supdocs=");
+		sb.append(getSupdocs());
+		sb.append(", admincomment=");
+		sb.append(getAdmincomment());
 		sb.append(", scenario=");
 		sb.append(getScenario());
 		sb.append(", timeperiod=");
@@ -549,7 +571,7 @@ public class AceItemClp extends BaseModelImpl<AceItem> implements AceItem {
 	}
 
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(124);
+		StringBundler sb = new StringBundler(130);
 
 		sb.append("<model><model-name>");
 		sb.append("nl.wur.alterra.cgi.ace.model.AceItem");
@@ -704,6 +726,14 @@ public class AceItemClp extends BaseModelImpl<AceItem> implements AceItem {
 		sb.append(getFeature());
 		sb.append("]]></column-value></column>");
 		sb.append(
+			"<column><column-name>supdocs</column-name><column-value><![CDATA[");
+		sb.append(getSupdocs());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>admincomment</column-name><column-value><![CDATA[");
+		sb.append(getAdmincomment());
+		sb.append("]]></column-value></column>");
+		sb.append(
 			"<column><column-name>scenario</column-name><column-value><![CDATA[");
 		sb.append(getScenario());
 		sb.append("]]></column-value></column>");
@@ -758,6 +788,8 @@ public class AceItemClp extends BaseModelImpl<AceItem> implements AceItem {
 	private String _year;
 	private String _geochars;
 	private String _feature;
+	private String _supdocs;
+	private String _admincomment;
 	private String _scenario;
 	private String _timeperiod;
 	private Date _lockdate;
