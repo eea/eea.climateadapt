@@ -25,7 +25,7 @@ public enum AceItemCountry {
     IS, /* Iceland */
     IE, /* Ireland */
     IT, /* Italy */
-    KO, /* Kosovo under UN Security Counil Resolution 1244/99 */
+    XK, /* Kosovo under UN Security Counil Resolution 1244/99 */
     LV, /* Latvia */
     LI, /* Liechtenstein */
     LT, /* Lithuania */
