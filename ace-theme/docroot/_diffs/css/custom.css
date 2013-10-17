@@ -37,7 +37,9 @@ hr, .separator {
 	border-style: solid;
 	border-width: 1px 0;
 }
-
+#main-content{
+	overflow: hidden;
+}
 #dockbar {
 	min-width: 984px;
 }
@@ -296,9 +298,10 @@ ul#subnav li a:hover {
 	text-align: left;
 }
 
-.portlet-topper {
+.frontpage-layout .portlet-topper {
 	font-size: 1.818em;
 	text-align: center;
+	background-color: #A6BF26;
 	background-image: linear-gradient(bottom, rgb(210,223,146) 16%, rgb(166,191,38) 58%);
 	background-image: -o-linear-gradient(bottom, rgb(210,223,146) 16%, rgb(166,191,38) 58%);
 	background-image: -moz-linear-gradient(bottom, rgb(210,223,146) 16%, rgb(166,191,38) 58%);
@@ -1565,6 +1568,9 @@ span.opens-new-window-accessible,
 	font-size: 20px; 
 	font-weight: normal; 
 	margin: 10px 0 5px -5px;
+	clear: left;
+	position: relative;
+	top: 8px;
 }
 
 .search-discover #search_results .expandedResultsGroup, 
