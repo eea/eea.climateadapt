@@ -134,7 +134,15 @@ CHM.Control.Grid.GridControl = Ext.extend(Ext.Panel, {
 						dataIndex : 'featured',
 						width: 75,
 						renderer: this.renderFeatured
-					} ],
+					}, {
+						id : 'newitem',
+						name : 'newitem',
+						header : '',
+						dataIndex : 'newitem',
+						width: 50,
+						renderer: this.renderNewItem
+					} 
+				],
 		});
 
 		return result;
@@ -176,7 +184,15 @@ CHM.Control.Grid.GridControl = Ext.extend(Ext.Panel, {
 						dataIndex : 'featured',
 						width: 75,
 						renderer: this.renderFeatured
-					} ],
+					}, {
+						id : 'newitem',
+						name : 'newitem',
+						header : '',
+						dataIndex : 'newitem',
+						width: 50,
+						renderer: this.renderNewItem
+					} 
+				],
 		});
 
 		return result;
@@ -187,7 +203,18 @@ CHM.Control.Grid.GridControl = Ext.extend(Ext.Panel, {
 
 		var featured = record.data.feature.attributes.featured;
 		if (featured === 'yes') {
-			result = '<img src="' + root + 'js/chm/markers/featured-icon.png' + '" alt="Featured case study in other area"/>';
+			result = '<img src="' + root + 'js/chm/markers/featured-icon.png' + '" alt="Featured case study"/>';
+		}
+		
+		return result;
+	}, 
+	
+	renderNewItem: function(value, metaData, record, rowIndex, colIndex, store) {
+		var result = '';
+
+		var newitem = record.data.feature.attributes.newitem;
+		if (newitem === 'yes') {
+			result = '<img src="' + root + 'js/chm/markers/new-en.gif' + '" alt="New case study"/>';
 		}
 		
 		return result;

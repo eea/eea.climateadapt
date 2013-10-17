@@ -98,30 +98,44 @@ CHM.Layer.Vector.CasestudiesVector = OpenLayers.Class(OpenLayers.Layer.Vector, {
 		}
 		
 	    var description = event.feature.attributes.desc;
-		
 		if (description == undefined) {
 			description = '';
 		}
 		
+		var featured = event.feature.attributes.featured;
+		
+		var newitem = event.feature.attributes.newitem;
+		
 		pixel = this.map.getViewPortPxFromLonLat(event.feature.geometry.getBounds().getCenterLonLat());
+		
+		var html = '<table width="100%" class="csst-tooltip-table">';
+		html += '<tr><td class="csst-tooltip-td">' + description + '</td></tr>';
+        html += '<tr><td class="csst-tooltip-td"><a href="/viewmeasure?ace_measure_id=' + event.feature.attributes.measureid + '" target="_blank">read more</a></td></tr>'; 
+		html += '<tr><td class="csst-tooltip-td">';
+		
+		if (featured === 'yes') {
+			html += '<img src="' + root + 'js/chm/markers/featured-icon.png' + '" alt="Featured case study"/>&nbsp;';
+		}
+		
+		if (newitem === 'yes') {
+			html += '<img src="' + root + 'js/chm/markers/new-en.gif' + '" alt="New case study"/>';
+		}
+
+		html += '</td></tr>';
+		html += '</table>';
         
 		session.tooltip = new Ext.ToolTip({        
-            title: '<a href="' + event.feature.attributes.website + '">' + event.feature.attributes.itemname + '</a>',
+            title: event.feature.attributes.itemname,
             anchor: 'left',
             cls: 'csst-tooltip', 
-            html: "<table width='100%' border='0'>" +
-            "<tr><td>" + description + "</td></tr>" + 
-            "<tr><td><a href='/viewmeasure?ace_measure_id=" + event.feature.attributes.measureid + "' target='_blank'>read more</a></td></tr>" + 
-            "</table>",
-            width: 415,
+            html: html,
+            width: 275,
             autoHide: false,
             closable: true,
             listeners: {
                 'render': function(){
                     this.header.on('click', function(e){
                         e.stopEvent();
-                        // Ext.Msg.alert('Link', 'Link to something interesting.');
-                        // Ext.getCmp('content-anchor-tip').hide();
                     }, this, {delegate:'a'});
                 }
             }
