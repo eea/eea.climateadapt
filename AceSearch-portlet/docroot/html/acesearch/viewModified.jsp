@@ -32,6 +32,8 @@ String[] sectors = null;
 String[] elements = null;
 String[] impacts = null;
 String[] countries = null;
+String startyear = null;
+String endyear = null;
 
 AceSearchFormBean acesearchformbean = (AceSearchFormBean) request.getAttribute(SearchRequestParams.SEARCH_PARAMS);
 
@@ -46,6 +48,17 @@ if(acesearchformbean != null) {
 	elements = acesearchformbean.getElement();
 	impacts = acesearchformbean.getImpact();
 	countries = acesearchformbean.getCountries();
+	
+
+	if (acesearchformbean.getStartyear() != null)
+	{
+	   startyear = acesearchformbean.getStartyear()[0];
+	}
+	
+	if (acesearchformbean.getEndyear() != null)
+	{
+	   endyear = acesearchformbean.getEndyear()[0];	
+	}
 }
 else {
 	anyOfThese = ParamUtil.getString(request, "anyOfThese");
@@ -55,7 +68,10 @@ else {
 	sectors = request.getParameterValues("sector");
 	elements = request.getParameterValues("element");
 	impacts = request.getParameterValues("impact");
-	countries = request.getParameterValues("countries");	
+	countries = request.getParameterValues("countries");
+	countries = request.getParameterValues("countries");
+	startyear = request.getParameter("startyear");
+	endyear = request.getParameter("endyear");
 }
 
 String date_type = ParamUtil.getString(request, "date_type");
@@ -66,6 +82,9 @@ if ((conditionAdaptationSector == null) || (conditionAdaptationSector.equals("")
 
 String conditionAdaptationElement = ParamUtil.getString(request, "conditionAdaptationElement");
 if ((conditionAdaptationElement == null) || (conditionAdaptationElement.equals(""))) conditionAdaptationElement = "AND";
+
+String conditionAdaptationCountry = ParamUtil.getString(request, "conditionAdaptationCountry");
+if ((conditionAdaptationCountry == null) || (conditionAdaptationCountry.equals(""))) conditionAdaptationCountry = "AND";
 
 String conditionClimateImpact = ParamUtil.getString(request, "conditionClimateImpact");
 if ((conditionClimateImpact == null) || (conditionClimateImpact.equals(""))) conditionClimateImpact = "AND";
@@ -90,6 +109,15 @@ if (countries == null) countries = new String[0];
 List<String> countriesList = Arrays.asList(countries);
 pageContext.setAttribute("countriesList", countriesList);
 
+if (startyear != null)
+{
+	pageContext.setAttribute("startyear", startyear);
+}
+
+if (endyear != null)
+{
+	pageContext.setAttribute("endyear", endyear);
+}
 
 %>
 
@@ -191,11 +219,11 @@ pageContext.setAttribute("countriesList", countriesList);
 
 <div id="<portlet:namespace/>content">
 </div>
-
     <!-- Search colum -->
     <div id="case-studies-database-search-filters-wrapper">
        <aui:form action="<%=searchAceitemURL%>" method="post" name="aceItemSearchForm">
-				<h3>Search the Database</h3>
+   
+               <img src="<%=renderRequest.getContextPath()%>/images/search.png" alt=""/>
 			 
 				<div id="case-studies-database-search-filters">
 					<div class="case-studies-database-search-filters-section">
@@ -313,6 +341,8 @@ pageContext.setAttribute("countriesList", countriesList);
 					<div class="case-studies-database-search-filters-section">
 						<a href="#" class="case-studies-database-search-filters-section-header"><liferay-ui:message key="acesearch-section-countries" /> <span class="case-studies-database-search-filters-section-header-icon">-</span></a>
 						<ul class="case-studies-database-search-filters-options">
+						    <li><label for="anycountry"><input type="radio" value="OR" id="rb_countries_any" name="conditionAdaptationCountry" <%= (conditionAdaptationCountry.equals("OR"))?"checked":"" %> /> <liferay-ui:message key="acesearch-anycountries" /></label></li>
+							<li><label for="allcountries"><input type="radio" value="AND" id="rb_countries_all" name="conditionAdaptationCountry" <%= (conditionAdaptationCountry.equals("AND"))?"checked":"" %> /> <liferay-ui:message key="acesearch-allcountries" /></label></li>
 							<li>
 							   <!--  start of countries -->
 								<ul class="case-studies-database-search-filters-sub-options">
@@ -349,7 +379,7 @@ pageContext.setAttribute("countriesList", countriesList);
 						<a href="#" class="case-studies-database-search-filters-section-header">Year <span class="case-studies-database-search-filters-section-header-icon">-</span></a>
 						<ul class="case-studies-database-search-filters-options">
 							<li>
-								<input type="text" name="year" id="tb_year_start" size="11" maxlength="4" value="" /> to <input type="text" name="year" id="tb_year_end" size="11" maxlength="4" value="" />
+								<input type="text" name="startyear" id="tb_year_start" size="11" maxlength="4" value="${startyear}" /> to <input type="text" name="endyear" id="tb_year_end" size="11" maxlength="4" value="${endyear}" />
 							</li>
 						</ul>
 					</div>
@@ -359,8 +389,9 @@ pageContext.setAttribute("countriesList", countriesList);
                 </aui:form> <!-- end of aui form -->	
 			</div>
 	<!-- Results column  -->
-	<div id="search_results" class="acesearch_column">
-	
+	<div id="search_results" class="acesearch_column" style="padding-top: 0px;">
+	     <h3 style="margin-top:0px">The database contains quality checked information and is annotated by climate adaptation experts with keywords.</h3>
+	     <p>Search the database using the keywords field below and filter the results using one or more of the filters from the left side bar</p>
         <div id="case-studies-database-search-section">
 					<label for="tb_keywords">
 						<strong>Keywords</strong>

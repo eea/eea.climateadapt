@@ -17,10 +17,52 @@ jQuery(document).ready(function() {
 	// search filter options reset
 	$j('.case-studies-database-search-filters-section').each(function(){
 		if ($j(this).find('input[value="2"]:checked,input[value="OR"]:checked').length > 0) {
-			$j(this).find('.case-studies-database-search-filters-sub-options').slideToggle();
-		} else if ( $j(this).find('input[type="radio"]').length <= 0) {
-			$j(this).find('.case-studies-database-search-filters-sub-options').slideToggle();
+			
+			if ($j(this).find('.case-studies-database-search-filters-sub-options').css('display') == 'none')
+            {
+				$j(this).find('.case-studies-database-search-filters-sub-options').slideToggle();
+            }
+			
+			if ($j(this).find('.case-studies-database-search-filters-options').css('display') == 'none')
+            {
+				$j(this).find('.case-studies-database-search-filters-options').slideToggle();
+            }
+			
+			//$j(this).find('.case-studies-database-search-filters-sub-options').slideToggle();
+			//$j(this).find('.case-studies-database-search-filters-options').slideToggle();
+			$j(this).find('.case-studies-database-search-filters-section-header').find('.case-studies-database-search-filters-section-header-icon').text('-');
+			
+		} else if ($j(this).find('input[value="1"]:checked,input[value="AND"]:checked').length > 0) {
+			if ($j(this).find('.case-studies-database-search-filters-sub-options').css('display') != 'none')
+            {
+				$j(this).find('.case-studies-database-search-filters-sub-options').slideToggle();
+            }
+			
+			if ($j(this).find('.case-studies-database-search-filters-options').css('display') != 'none')
+            {
+				$j(this).find('.case-studies-database-search-filters-options').slideToggle();
+            }
+			
+			//$j(this).find('.case-studies-database-search-filters-options').slideToggle();
+			$j(this).find('.case-studies-database-search-filters-section-header').find('.case-studies-database-search-filters-section-header-icon').text('+');
 		}
+		
+		if ($j(this).find('#tb_year_start').length > 0)
+	    {
+			if ($j(this).find('#tb_year_start').val() != '' || $j(this).find('#tb_year_end').val() != '')
+			{
+				if ($j(this).find('.case-studies-database-search-filters-options').css('display') == 'none')
+	            {
+					$j(this).find('.case-studies-database-search-filters-options').slideToggle();
+					$j(this).find('.case-studies-database-search-filters-section-header').find('.case-studies-database-search-filters-section-header-icon').text('-');
+	            }
+			}
+			else
+			{
+				$j(this).find('.case-studies-database-search-filters-options').css('display', 'none');
+				$j(this).find('.case-studies-database-search-filters-section-header').find('.case-studies-database-search-filters-section-header-icon').text('+');
+			}
+	    }
 
 		$j(this).find('input[type="radio"]').change(function(){
 			$j(this).closest('.case-studies-database-search-filters-section').find('.case-studies-database-search-filters-sub-options').slideToggle(function(){

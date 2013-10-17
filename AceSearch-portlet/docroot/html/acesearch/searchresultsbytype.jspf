@@ -59,7 +59,8 @@
                 <input type="hidden" name="conditionAdaptationSector" id="${conditionAdaptationSectorId}" value="${searchParams.conditionAdaptationSector}"/>
                 <input type="hidden" name="conditionAdaptationElement" id="${conditionAdaptationElementId}" value="${searchParams.conditionAdaptationElement}"/>
                 
-                <input type="hidden" name="year" value="${searchParams.year}"/>
+                <input type="hidden" name="startyear" value="${searchParams.startyear}"/>
+                <input type="hidden" name="endyear" value="${searchParams.endyear}"/>
 
 				<liferay-ui:message key="acesearch-sort-by" />
                 <input type="radio" name="sortBy" class="sortByControl" id="${sortsearchRelevanceId}" value="RELEVANCE" checked /><liferay-ui:message key="acesearch-sort-relevance" />
