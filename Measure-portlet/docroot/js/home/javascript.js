@@ -28,9 +28,9 @@ $(document).ready(function() {
 				nextIndex = nextIndex + 1;
 				transition($('#case-studies-homepage-slider-wrapper .case-studies-homepage-slider-content ul.blank>li:nth-child(' + nextIndex + ')'));
 
-			}, 3000);
+			}, 20000);
 		
-    var aniSpeed = 500;
+    var aniSpeed = 100;
 
 	function transition (that){
 		if ( !$(that).hasClass('active')  ) {

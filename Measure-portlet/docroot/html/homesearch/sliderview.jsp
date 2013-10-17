@@ -14,7 +14,7 @@
 									<div class="case-studies-homepage-slider-description">
 										<h2>About Climate Change Adaptation in Europe</h2>
 										<p>
-											<br />
+											
 											The European Climate Adaptation Platform (Climate-ADAPT) aims to support Europe in adapting to <a href="/glossary#linkClimateChange">climate change</a>. It is an initiative of the European Commission and helps users to access and share information on:</p>
 											<ul>
 												<li class="active-content">

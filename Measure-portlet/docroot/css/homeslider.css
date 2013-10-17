@@ -14,7 +14,7 @@
 
 		#case-studies-homepage-slider-wrapper {
 			background-color: #f0f0f0;
-			height: 350px;
+			height: 260px;
 			float: left;
 			position: relative;
 			width: 99%;
@@ -72,8 +72,8 @@
 
 		 #case-studies-homepage-slider-wrapper .case-studies-homepage-slider-content .case-studies-homepage-slider-image {
 			float: left;
-			width: 387px;
-			height: 305px;
+			width: 280px;
+			height: 220px;
 		}
 
         #case-studies-homepage-slider-wrapper .case-studies-homepage-slider-content .case-studies-homepage-slider-image img {
@@ -83,15 +83,16 @@
 		
 		 #case-studies-homepage-slider-wrapper .case-studies-homepage-slider-content .case-studies-homepage-slider-description {
 			float: right;
-			padding-right: 20px;
+			padding-right: 10px;
 			position: relative;
-			width: 290px;
+			width: 410px;
 		}
 
 		 #case-studies-homepage-slider-wrapper .case-studies-homepage-slider-content .case-studies-homepage-slider-description h2 {
 			border-bottom: 1px solid #aebe20;
 			margin-bottom: .25em;
 			padding-bottom: .25em;
+			margin-top: 0.5em;
 		}
 
 		 #case-studies-homepage-slider-wrapper .case-studies-homepage-slider-content .case-studies-homepage-slider-description a:link {
