@@ -9,6 +9,8 @@
 		<instanceable>false</instanceable>
 		<header-portlet-css>/css/portlet.css</header-portlet-css>
 		<header-portlet-css>/css/ext-all.css</header-portlet-css>
+		<header-portlet-css>/css/xtheme-gray.css</header-portlet-css>
+		<header-portlet-css>/css/csst_ext_theme.css</header-portlet-css>
 		<header-portlet-css>/css/tooltip.css</header-portlet-css>
 		<header-portlet-javascript>http://ecn.dev.virtualearth.net/mapcontrol/mapcontrol.ashx?v=6.2&amp;mkt=en-us"</header-portlet-javascript>
 		<header-portlet-javascript>http://serverapi.arcgisonline.com/jsapi/arcgis/3.4compact</header-portlet-javascript>
