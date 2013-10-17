@@ -19,14 +19,25 @@ public class AceSearchFormBean {
     private String sortBy;
     private String fuzziness;
     private String anyOfThese;
-    private String[] year;
+    private String[] startyear;
+    private String[] endyear;
 
-    public String[] getYear() {
-		return year;
+    
+
+	public String[] getStartyear() {
+		return startyear;
 	}
 
-	public void setYear(String[] year) {
-		this.year = year;
+	public void setStartyear(String[] startyear) {
+		this.startyear = startyear;
+	}
+
+	public String[] getEndyear() {
+		return endyear;
+	}
+
+	public void setEndyear(String[] endyear) {
+		this.endyear = endyear;
 	}
 
 	public FreetextMode getFreeTextMode() {
@@ -36,7 +47,9 @@ public class AceSearchFormBean {
     private FreetextMode freeTextMode;
 
     private String conditionAdaptationSector;
-    private String conditionAdaptationElement;
+    private String conditionAdaptationCountry;
+
+	private String conditionAdaptationElement;
     private String conditionScenario;
     private String conditionTimePeriod;
     private String conditionClimateImpact;
@@ -194,5 +207,13 @@ public class AceSearchFormBean {
             this.freeTextMode = FreetextMode.ANY;
         }
     }
+    
+    public String getConditionAdaptationCountry() {
+  		return conditionAdaptationCountry;
+  	}
+
+  	public void setConditionAdaptationCountry(String conditionAdaptationCountry) {
+  		this.conditionAdaptationCountry = conditionAdaptationCountry;
+  	}
 
 }

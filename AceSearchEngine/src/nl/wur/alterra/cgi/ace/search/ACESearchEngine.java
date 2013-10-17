@@ -47,6 +47,7 @@ public class ACESearchEngine {
         String[] anyOfThese ;
         String[] conditionAdaptationElement ;
         String[] conditionAdaptationSector ;
+        String[] conditionAdaptationCountry;
         String[] conditionScenario ;
         String[] conditionTimePeriod ;
         String[] conditionClimateImpact ;
@@ -60,7 +61,8 @@ public class ACESearchEngine {
         String[] sortBys ;
         String[] datainfo_type;
         String[] fromYear;
-        String[] year;
+        String[] startYear;
+        String[] endYear;
 
         // is sortitemtype exist use that one !!
         aceItemTypes = searchParams.get(SearchRequestParams.SORTITEM_TYPE);
@@ -83,6 +85,7 @@ public class ACESearchEngine {
         }
         conditionAdaptationElement = searchParams.get(SearchRequestParams.CONDITION_ADAPTATION_ELEMENT);
         conditionAdaptationSector = searchParams.get(SearchRequestParams.CONDITION_ADAPTATION_SECTOR);
+        conditionAdaptationCountry = searchParams.get(SearchRequestParams.CONDITION_ADAPTATION_COUNTRY);
         conditionScenario = searchParams.get(SearchRequestParams.CONDITION_SCENARIO);
         conditionTimePeriod = searchParams.get(SearchRequestParams.CONDITION_TIME_PERIOD);
         conditionClimateImpact = searchParams.get(SearchRequestParams.CONDITION_CLIMATE_IMPACT);
@@ -94,11 +97,17 @@ public class ACESearchEngine {
         scenarios = searchParams.get(SearchRequestParams.SCENARIO);
         timeperiods = searchParams.get(SearchRequestParams.TIMEPERIOD);
         sortBys = searchParams.get(SearchRequestParams.SORTBY);
-        year = searchParams.get(SearchRequestParams.YEAR);
+        startYear = searchParams.get(SearchRequestParams.START_YEAR);
+        endYear = searchParams.get(SearchRequestParams.END_YEAR);
+      
 
         if(isEmpty(conditionAdaptationSector)) {
             conditionAdaptationSector = new String[1];
             conditionAdaptationSector[0] = SearchRequestParams.AND_CONDITION;
+        }
+        if(isEmpty(conditionAdaptationCountry)) {
+            conditionAdaptationCountry = new String[1];
+            conditionAdaptationCountry[0] = SearchRequestParams.AND_CONDITION;
         }
         if(isEmpty(conditionAdaptationElement)) {
             conditionAdaptationElement = new String[1];
@@ -121,8 +130,12 @@ public class ACESearchEngine {
             freetextMode[0] = FreetextMode.ANY.name();
         }
         
-        if(isEmpty(year)) {
-            year = null;
+        if(isEmpty(startYear)) {
+            startYear = null;
+        }
+        
+        if(isEmpty(endYear)) {
+            endYear = null;
         }
 
         String sortBy = null;
@@ -147,7 +160,8 @@ public class ACESearchEngine {
         formBean.setScenario(scenarios);
         formBean.setTimePeriod(timeperiods);
         formBean.setSortBy(sortBy);
-        formBean.setYear(year);
+        formBean.setStartyear(startYear);
+        formBean.setEndyear(endYear);
 
         formBean.setFuzziness(fuzzinessVal);
 
@@ -163,6 +177,13 @@ public class ACESearchEngine {
         }
         else {
             formBean.setConditionAdaptationSector(SearchRequestParams.AND_CONDITION);
+        }
+        
+        if (conditionAdaptationCountry != null && conditionAdaptationCountry[0].equalsIgnoreCase(SearchRequestParams.OR_CONDITION)) {
+            formBean.setConditionAdaptationCountry(SearchRequestParams.OR_CONDITION);
+        }
+        else {
+        	formBean.setConditionAdaptationCountry(SearchRequestParams.AND_CONDITION);
         }
 
         if (conditionAdaptationElement != null && conditionAdaptationElement[0].equalsIgnoreCase(SearchRequestParams.OR_CONDITION)) {
@@ -370,20 +391,20 @@ public class ACESearchEngine {
             if ((countries != null) && (countries.length > 0)) {
                 rawQuery += " AND (";
                 for(String country: countries) {
-                    rawQuery += " (" + ACEIndexConstant.IndexField.SPATIAL_VALUES + ":" + country + ") OR";
+                    rawQuery += " (" + ACEIndexConstant.IndexField.SPATIAL_VALUES + ":" + country + ") " + formBean.getConditionAdaptationCountry();
                 }
-                rawQuery =  rawQuery.substring(0, rawQuery.lastIndexOf("OR")) + " )";
+                rawQuery =   rawQuery.substring(0, rawQuery.lastIndexOf(formBean.getConditionAdaptationCountry())) + " )";
             }
 
             // adding year 
             //rawQuery += " AND year:2013" ;
             
             Query yearQuery = null;
-            if (formBean.getYear() != null)
+            if (formBean.getStartyear() != null && formBean.getEndyear() != null)
             {
             	try {
-	            	 int fromYear = Integer.parseInt(formBean.getYear()[0]);
-	            	 int toYear = Integer.parseInt(formBean.getYear()[1]);
+	            	 int fromYear = Integer.parseInt(formBean.getStartyear()[0]);
+	            	 int toYear = Integer.parseInt(formBean.getEndyear()[0]);
 	            	 //System.out.println("from year is " + fromYear);
 	            	 //System.out.println("to year is " + toYear);
 	            	 yearQuery = NumericRangeQuery.newIntRange("year", fromYear, toYear, true, true);

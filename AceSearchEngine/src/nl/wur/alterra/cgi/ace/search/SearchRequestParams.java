@@ -28,7 +28,8 @@ public class SearchRequestParams {
     public static final String SCENARIO = "scenario";
     public static final String TIMEPERIOD = "timeperiod";
     public static final String IMPACT = "impact";
-    public static final String YEAR = "year";
+    public static final String START_YEAR = "startyear";
+    public static final String END_YEAR = "endyear";
 
 	public static final String SEARCH_PARAMS = "searchParams";
 	public static final String SEARCH_RESULTS = "searchResults";
@@ -40,6 +41,7 @@ public class SearchRequestParams {
 
     public static final String CONDITION_ADAPTATION_SECTOR = "conditionAdaptationSector";
     public static final String CONDITION_ADAPTATION_ELEMENT = "conditionAdaptationElement";
+    public static final String CONDITION_ADAPTATION_COUNTRY = "conditionAdaptationCountry";
     public static final String CONDITION_SCENARIO = "conditionScenario";
     public static final String CONDITION_TIME_PERIOD = "conditionTimePeriod";
     public static final String CONDITION_CLIMATE_IMPACT = "conditionClimateImpact";

@@ -71,7 +71,7 @@ public class AceItemSearchResult {
         
         //System.out.println("feature is " + aceitem.getFeature());
         setFeature(aceitem.getFeature());
-        System.out.println("name is " + getName());
+        //System.out.println("name is " + getName());
         setNew(isNew(aceitem.getApprovaldate(), aceitem.getCreationdate()));
         
     }
@@ -91,9 +91,9 @@ public class AceItemSearchResult {
     		processDate = approvalDate;
     	}
     	
-    	System.out.println("approval date is " + approvalDate);
-    	System.out.println("creation date is " + approvalDate);
-    	System.out.println("process date is " + processDate);
+    	//System.out.println("approval date is " + approvalDate);
+    	//System.out.println("creation date is " + approvalDate);
+    	//System.out.println("process date is " + processDate);
     	Date today = new Date();
     	long t1 = today.getTime();
     	long t2 = processDate.getTime();
@@ -106,12 +106,12 @@ public class AceItemSearchResult {
     	//System.out.println("days is " + days);
     	if (days <= 90)
     	{
-    		System.out.println("returning true");
+    		//System.out.println("returning true");
     		return true;
     	}
     	else
     	{
-    		System.out.println("returning false");
+    		//System.out.println("returning false");
     		return false;
     	}
     }
