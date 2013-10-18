@@ -3,6 +3,21 @@
 <portlet:defineObjects />
 
 <script type="text/javascript">
+
+   function submitIfEnter(event)
+   {
+	   if (event && event.keyCode == 13)
+	   {
+		   submitform();
+		   return false;
+		   
+	   }
+	   else
+	   {
+		   return true;
+	   }
+   }
+   
    function submitform()
    {
 	   // base url
@@ -53,7 +68,7 @@
 				    	
 		});
 	   
-	   
+	  
 	   //document.<portlet:namespace />fm_search.submit();
 	   document.location.href = url;
 	   
@@ -61,7 +76,7 @@
 </script>
 	
 <portlet:actionURL name='processAndRedirect' var="processAndRedirectURL" />	
-<aui:form name="fm_search" action="<%=processAndRedirectURL %>" method="POST" id="fm_search">
+<aui:form name="fm_search" id="fm_search" >
 <div id="case-studies-homepage-search-wrapper">
 					<div class="case-studies-homepage-search-header">
 						SEARCH THE CLIMATE ADAPTATION DATABASE
@@ -70,7 +85,7 @@
 					<dl>
 						<dt>Search Term(s):</dt>
 						<dd>
-							<input type="text" name="search-terms" id="search-terms" maxlength="255" value="Keyword Search" onfocus="if (this.value == 'Keyword Search') { this.value = ''; }" onblur="if (this.value == '') { this.value = 'Keyword Search'; }" />
+							<input type="text" name="search-terms" id="search-terms" maxlength="255" value="Keyword Search" onfocus="if (this.value == 'Keyword Search') { this.value = ''; }" onblur="if (this.value == '') { this.value = 'Keyword Search'; }" onkeypress="return submitIfEnter(event)" />
 						</dd>
 
 						<dt>Topics:</dt>
