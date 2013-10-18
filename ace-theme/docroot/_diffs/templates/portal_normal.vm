@@ -42,6 +42,9 @@
 					#if(!$is_signed_in)
 						<li id="signin"><a href="$sign_in_url" id="sign-in" rel="nofollow">$sign_in_text</a></li>
 					#end
+					#if($is_signed_in)
+						<li id="maintain"><a href="/maintain">Maintain</a></li>
+					#end
                     <li id="glossary"><a href="/glossary">Glossary</a></li>
 					<li id="contact"><a href="/contact">Contact</a></li>
 					<li id="sitemap"><a href="/sitemap">Sitemap</a></li>

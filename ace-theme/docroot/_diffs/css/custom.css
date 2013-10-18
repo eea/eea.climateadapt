@@ -143,7 +143,7 @@ ul#topnav li {
 	background: url("/ace-theme/images/line_sep_main_menu.png") no-repeat scroll 100% 8px transparent;
 	float: left;
 	margin: 0 3px; 
-	padding: 5px 18px 7px 12px;
+	padding: 5px 14px 7px 12px;
 }
 
 #navigation li.first {
@@ -302,19 +302,6 @@ ul#subnav li a:hover {
 	font-size: 1.818em;
 	text-align: center;
 	background-color: #A6BF26;
-	background-image: linear-gradient(bottom, rgb(210,223,146) 16%, rgb(166,191,38) 58%);
-	background-image: -o-linear-gradient(bottom, rgb(210,223,146) 16%, rgb(166,191,38) 58%);
-	background-image: -moz-linear-gradient(bottom, rgb(210,223,146) 16%, rgb(166,191,38) 58%);
-	background-image: -webkit-linear-gradient(bottom, rgb(210,223,146) 16%, rgb(166,191,38) 58%);
-	background-image: -ms-linear-gradient(bottom, rgb(210,223,146) 16%, rgb(166,191,38) 58%);
-
-	background-image: -webkit-gradient(
-		linear,
-		left bottom,
-		left top,
-		color-stop(0.16, rgb(210,223,146)),
-		color-stop(0.58, rgb(166,191,38))
-	);
 }
 
 .portlet-title {
