@@ -9,7 +9,7 @@
 							<ul class="blank" >
 								<li class="active">
 									<div class="case-studies-homepage-slider-image">
-										<img src="<%=request.getContextPath()%>/assets/slider_image-1.jpg" alt="About Climate Change Adaptation in Europe" />
+										<img src="<%=request.getContextPath()%>/assets/first_banner.jpg" alt="About Climate Change Adaptation in Europe" />
 									</div>
 									<div class="case-studies-homepage-slider-description">
 										<h2>About Climate Change Adaptation in Europe</h2>
@@ -71,7 +71,7 @@
 											        	description = description.substring(0,420);
 											        }
 											%>
-											<img src="<%=primImageUrl%>" alt=""/>
+											<img src="<%=primImageUrl%>" alt="Case Study"/>
 										</div>
 										<div class="case-studies-homepage-slider-description">
 											<h2>${casestudy.name}</h2>
@@ -118,10 +118,9 @@
 										<li>
 											<div class="case-studies-homepage-slider-image">
 											    <% 
-												   // use generic image
-												   String primImageUrlForAdaptationOption = request.getContextPath() + "/assets/slider_image-1.jpg";
+												   String primImageUrlForAdaptationOption = request.getContextPath() + "/assets/aceitem.jpg";
 												%>
-												<img src="<%=primImageUrlForAdaptationOption %>" alt="slide title here" />
+												<img src="<%=primImageUrlForAdaptationOption %>" alt="Ace Item" />
 											</div>
 											
 											<div class="case-studies-homepage-slider-description">
@@ -151,7 +150,7 @@
 							     %>
 										<li>
 											<div class="case-studies-homepage-slider-image">
-												<img src="http://placehold.it/387x308" alt="slide title here" />
+												<img src="<%=request.getContextPath()%>/assets/events.jpg" alt="Events" />
 											</div>
 											<div class="case-studies-homepage-slider-description">
 												<h2>${event.article.title}</h2>
