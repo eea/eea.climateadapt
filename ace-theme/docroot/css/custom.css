@@ -37,7 +37,9 @@ hr, .separator {
 	border-style: solid;
 	border-width: 1px 0;
 }
-
+#main-content{
+	overflow: hidden;
+}
 #dockbar {
 	min-width: 984px;
 }
@@ -141,7 +143,7 @@ ul#topnav li {
 	background: url("/ace-theme/images/line_sep_main_menu.png") no-repeat scroll 100% 8px transparent;
 	float: left;
 	margin: 0 3px; 
-	padding: 5px 18px 7px 12px;
+	padding: 5px 14px 7px 12px;
 }
 
 #navigation li.first {
@@ -296,8 +298,10 @@ ul#subnav li a:hover {
 	text-align: left;
 }
 
-.portlet-topper {
+.frontpage-layout .portlet-topper {
 	font-size: 1.818em;
+	text-align: center;
+	background-color: #A6BF26;
 }
 
 .portlet-title {
@@ -307,7 +311,7 @@ ul#subnav li a:hover {
 	font-weight: normal;
 	line-height: 20px;
 	min-width: 50%;
-	padding: 0 0 15px 0;
+	padding: 8px 0;
 }
 
 .portlet-content, .portlet-minimized .portlet-content-container {
@@ -590,7 +594,7 @@ ul#subnav li a:hover {
 /**** Second level menu ****/
 
 #sec-menu {
-	margin-top: 35px;
+	margin-top: 10px;
 	padding: 0;
 }
 
@@ -673,9 +677,9 @@ ul#subnav li a:hover {
 .ace_layout_2 #layout-column_column-3,
 .ace_layout_3 #layout-column_column-3,
 .ace_layout_3 #layout-column_column-4,
-.frontpage-layout #layout-column_column-5,
 .frontpage-layout #layout-column_column-6,
-.frontpage-layout #layout-column_column-7 {
+.frontpage-layout #layout-column_column-7,
+.frontpage-layout #layout-column_column-8 {
 	border-left: #d7e3ef 2px solid;
 }
 
@@ -742,29 +746,8 @@ ul#subnav li a:hover {
 
 /****
 	Explore adaptation options portlet on Adaptation measures page 
+	moved to SimpleFilter-portlet main.css
 ****/
-.explore-adaptation-measures #ace_simplefilter_30x {
-	height: 35px;
-}
-
-.explore-adaptation-measures #sector-selector-div {
-	left: -10px;
-	position: relative;
-	top: 10px;
-}
-
-.explore-adaptation-measures #risk-selector-div span,
-.explore-adaptation-measures #sector-selector-div span {
-	padding-top: 2px;
-}
-
-.explore-adaptation-measures #risk-selector-div span {
-	padding-right: 12px;
-}
-
-.explore-adaptation-measures #risk-selector-div select {
-	width: 163px;
-}
 
 /**** Template Sector Main Article ****/
 
@@ -1119,11 +1102,27 @@ ul#subnav li a:hover {
 ****/
 /* Hover def. for the speedbuttons */
 .frontpage-layout #layout-column_column-4,
+.frontpage-layout #layout-column_column-3,
 .frontpage-layout #layout-column_column-5,
 .frontpage-layout #layout-column_column-6,
-.frontpage-layout #layout-column_column-7 {
+.frontpage-layout #layout-column_column-7,
+.frontpage-layout #layout-column_column-8
+ {
 	padding: 0 16px;
+        min-height: 220px;
 }
+
+.frontpage-layout #layout-column_column-4
+{
+    padding-left: 14px;
+    min-height: 170px !important;
+}
+
+.frontpage-layout #layout-column_column-3 {
+    padding-right: 14px;
+    min-height: 170px;
+}
+
 
 .frontpage-layout #speedbutton-left, 
 .frontpage-layout #speedbutton-right {
@@ -1131,14 +1130,16 @@ ul#subnav li a:hover {
 	padding-bottom: 6px;
 }
 
-.frontpage-layout #speedbutton-right {
-	margin-left: 10px;
-}
 
 .frontpage-layout #fp-top-row {
 	background: url("/ace-theme/images/gradient_sb_fp.png") no-repeat 0 bottom;
 	margin-bottom: 15px;
 }
+
+#fp-top-row-custom  #layout-column_column-1{
+    padding-left: 18px;
+}
+
 
 a.speedbutton img {
 	border: 2px solid transparent;
@@ -1533,6 +1534,9 @@ span.opens-new-window-accessible,
 	font-size: 20px; 
 	font-weight: normal; 
 	margin: 10px 0 5px -5px;
+	clear: left;
+	position: relative;
+	top: 8px;
 }
 
 .search-discover #search_results .expandedResultsGroup, 
@@ -1653,145 +1657,6 @@ span.opens-new-window-accessible,
 	display: none;
 }
 
-/**** Styling of the similar areas tool 
-The SAT does NOT have a seperate layout template. 
-To retrieve the appropiate styling is it therefore
-necessary to add the class sat-text to the instruction 
-text and the class sat-map to the SimilarAreasToolPortlet.
-****/
-.sat-text {
-	background-color: #D2DE92;
-}
-
-.sat-text .portlet-topper {
-	padding: 15px 15px 0;
-}
-
-.sat-text .portlet-title {
-	color: #758816;
-}
-
-.sat-text .portlet-content {
-	padding:0 15px;
-}
-
-.sat-text .portlet-content p {
-	color: #353F02;
-}
-
-.sat-text,
-.sat-map #legend_element {
-	float: right;
-	width: 269px;
-}
-
-.sat-map {
-	width: 700px;
-}
-
-.sat-map #locations_element {
-	height: 40px;
-	margin-bottom: 10px;
-	overflow: auto;
-	width: 190px;
-}
-
-.sat-map #map_element {
-	height: 350px;
-	width: 670px;
-}
-
-.sat-map form {
-	clear: both;
-	float:right;
-	margin-right: 25px;
-}
-
-.sat-map #risk-select {
-	left: 345px;
-	position: absolute;
-	top: 0;
-}
-
-.sat-map #risk-select label {
-	padding-right: 25px;
-}
-
-.sat-map #risk-select select {
-	width: 175px;
-}
-
-.sat-map #sector-select {
-	left: 345px;
-	position: absolute;
-	top: 30px;
-}
-
-.sat-map #sector-select label {
-	padding-right: 3px;
-}
-
-.sat-map #sector-select select {
-	width: 175px;
-}
-
-.sat-map #legend_element {
-	background-color: #D2DE92;
-	color: #353F02;
-	display: none;
-	margin: -151px -254px 0 0;
-}
-
-#legend-title {
-	color: #758816;
-	font-size: 14px;
-	padding-left: 15px;
-}
-
-/** adjustment of legend items **/
-.sat-map #ext-comp-1002 {
-	padding-left: 15px
-}
-
-.sat-map #ext-comp-1003 {
-	display: none;
-	/*clear: both;
-	float: left;
-	margin-bottom: 5px;*/
-}
-
-.sat-map #ext-comp-1004 {
-	display: none;
-	/*clear: both;
-	float: left;*/
-}
-
-.sat-map #ext-comp-1005 {
-	left: -151px;
-}
-
-.sat-map #ext-comp-1007 {
-	left: -180px;
-}
-
-.sat-map #ext-comp-1009 {
-	left: -65px;
-}
-
-.sat-map #ext-comp-1011 {
-	left: -75px;
-}
-
-.sat-map #ext-comp-1005,
-.sat-map #ext-comp-1007,
-.sat-map #ext-comp-1009,
-.sat-map #ext-comp-1011 {
-	clear: both;
-	float:right;
-	margin-bottom: 10px;
-	position:relative;
-	top:2px;
-}
 
 /**** Styling for the transnational pages
 Entry page
@@ -2084,9 +1949,7 @@ text and the class mapviewer to the MapViewerPortlet.
 	padding-right: 15px;
 }
 
-.portlet-column-content-only, .ltr .portlet-column-content-first, .rtl .portlet-column-content-last {
-	padding-left: 15px;
-}
+
 
 /****
 	Styling of glossary items

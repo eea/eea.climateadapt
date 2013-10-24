@@ -37,7 +37,7 @@
 }
 
 .portlet-column-content-only, .ltr .portlet-column-content-first, .rtl .portlet-column-content-last {
-	padding-left: 0;
+	padding-left: 15px;
 }
 
 .portlet-column-content-only, .ltr .portlet-column-content-last, .rtl .portlet-column-content-first {
