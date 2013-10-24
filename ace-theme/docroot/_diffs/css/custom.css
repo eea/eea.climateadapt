@@ -746,29 +746,8 @@ ul#subnav li a:hover {
 
 /****
 	Explore adaptation options portlet on Adaptation measures page 
+	moved to SimpleFilter-portlet main.css
 ****/
-.explore-adaptation-measures #ace_simplefilter_30x {
-	height: 35px;
-}
-
-.explore-adaptation-measures #sector-selector-div {
-	left: -10px;
-	position: relative;
-	top: 10px;
-}
-
-.explore-adaptation-measures #risk-selector-div span,
-.explore-adaptation-measures #sector-selector-div span {
-	padding-top: 2px;
-}
-
-.explore-adaptation-measures #risk-selector-div span {
-	padding-right: 12px;
-}
-
-.explore-adaptation-measures #risk-selector-div select {
-	width: 163px;
-}
 
 /**** Template Sector Main Article ****/
 
