@@ -11,6 +11,8 @@
 	String metadataurl = null;
 	String[] urls = null;
 	String websitelabel = "Website";
+	String aceItemPageUrl = "";
+	String aceItemSubmitText = "";
 	
 
     String redirect = PortalUtil.getCurrentURL(renderRequest);
@@ -35,18 +37,29 @@
 		    if (sharetype.equalsIgnoreCase(AceItemType.DOCUMENT.toString())) {
 			 
 			   aceitemType = "Publication and Reports";
+			   aceItemSubmitText = "Submit a Publication and Report";
+			   aceItemPageUrl = "/share-your-info/publications-and-reports";
 			}
 			else if (sharetype.equalsIgnoreCase(AceItemType.INFORMATIONSOURCE.toString())) {
 			   aceitemType = "Information Portal";
+			   aceItemSubmitText = "Submit an Information Portal";
+			   aceItemPageUrl = "/share-your-info/information-portals";
 			}
 			else if (sharetype.equalsIgnoreCase(AceItemType.GUIDANCE.toString())) {
 			   aceitemType = "Guidance Document";
+			   aceItemSubmitText = "Submit a Guidance Document";
+			   aceItemPageUrl = "/share-your-info/guidance-documents";
+			   
 			}
 			else if (sharetype.equalsIgnoreCase(AceItemType.TOOL.toString())) {
 			   aceitemType = "Tools";
+			   aceItemSubmitText = "Submit a Tools";
+			   aceItemPageUrl = "/share-your-info/tools";
 			}
 			else if (sharetype.equalsIgnoreCase(AceItemType.ORGANISATION.toString())) {
 			   aceitemType = "Organisation";
+			   aceItemSubmitText = "Submit an Organisation";
+			   aceItemPageUrl = "/share-your-info/organisations";
 			}	
 %>
 
@@ -226,6 +239,12 @@
 						<%} %>
 					</ul>
 				</div>
+				
+				<div class="case-studies-review-clearing"></div>
+					<!--  insert submit button which takes to the ace data type page -->
+					<div class="bluebuttondiv">
+			                 <a href="<%=aceItemPageUrl %>" class="bluebutton"><%=aceItemSubmitText %></a>
+			        </div>
 			</div>
 	
 	        <div class="case-studies-review-column-right">

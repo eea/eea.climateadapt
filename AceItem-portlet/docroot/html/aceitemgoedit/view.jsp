@@ -33,7 +33,7 @@
 					|| renderRequest.isUserInRole("administrator")
 					|| renderRequest.isUserInRole("Power User")) {
 				
-				//editUrl = prefs.getValue(Constants.EDITURL,"/web/guest/aceitems1?p_p_id=aceitemportlet_WAR_AceItemportlet&p_p_lifecycle=0&p_p_state=normal&p_p_mode=view&p_p_col_id=column-1&p_p_col_count=1&_aceitemportlet_WAR_AceItemportlet_jspPage=%2Fhtml%2Faceitem%2Fedit_aceitem.jsp&_aceitemportlet_WAR_AceItemportlet_redirect=%2Fweb%2Fguest%2Faceitems1&_aceitemportlet_WAR_AceItemportlet_aceItemId=") ;
+				editUrl = prefs.getValue(Constants.EDITURL,"/web/guest/aceitems1?p_p_id=aceitemportlet_WAR_AceItemportlet&p_p_lifecycle=0&p_p_state=normal&p_p_mode=view&p_p_col_id=column-1&p_p_col_count=1&_aceitemportlet_WAR_AceItemportlet_jspPage=%2Fhtml%2Faceitem%2Fedit_aceitem.jsp&_aceitemportlet_WAR_AceItemportlet_redirect=%2Fweb%2Fguest%2Faceitems1&_aceitemportlet_WAR_AceItemportlet_aceItemId=") ;
                 userInRole = true;
 			}
 			

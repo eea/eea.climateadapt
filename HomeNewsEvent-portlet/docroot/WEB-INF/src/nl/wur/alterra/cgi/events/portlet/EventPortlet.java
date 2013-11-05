@@ -168,9 +168,9 @@ public class EventPortlet extends MVCPortlet {
 			// get the sublist for first 5 articles if it is not full page
 			if (showParam == null || ! showParam.equalsIgnoreCase("full"))
 			{
-				if (journalList.size() > 5)
+				if (journalList.size() > 3)
 				{
-				   journalList = journalList.subList(0, 5);
+				   journalList = journalList.subList(0, 3);
 				}
 			}
 		

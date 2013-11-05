@@ -19,6 +19,8 @@ import nl.wur.alterra.cgi.ace.model.constants.AceItemClimateImpact;
 import nl.wur.alterra.cgi.ace.model.constants.AceItemCountry;
 import nl.wur.alterra.cgi.ace.model.constants.AceItemElement;
 import nl.wur.alterra.cgi.ace.model.constants.AceItemSector;
+import nl.wur.alterra.cgi.ace.model.constants.AceItemScenario;
+import nl.wur.alterra.cgi.ace.model.constants.AceItemTimePeriod;
 import nl.wur.alterra.cgi.ace.model.constants.AceItemType;
 import nl.wur.alterra.cgi.ace.search.lucene.ACEIndexSynchronizer;
 import nl.wur.alterra.cgi.ace.search.lucene.ACEIndexUtil;
@@ -158,6 +160,8 @@ public abstract class LuceneIndexUpdatePortlet extends MVCPortlet {
         aceitem.setSource(ParamUtil.getString(request, "source"));
         aceitem.setComments(ParamUtil.getString(request, "comments"));
         aceitem.setYear(ParamUtil.getString(request, "year"));
+        //aceitem.setScenario(ParamUtil.getString(request, "scenario"));
+        aceitem.setTimeperiod(ParamUtil.getString(request, "timeperiod"));
 
         String choosencountries = "";
         for (AceItemCountry aceitemcountry : AceItemCountry.values()) {
@@ -176,8 +180,8 @@ public abstract class LuceneIndexUpdatePortlet extends MVCPortlet {
         String choosensectors = "";
         for (AceItemSector aceitemsector : AceItemSector.values()) {
 
-            if (ParamUtil.getString(request, "sectors_" + aceitemsector.toString()) != null) {
-                String s = ParamUtil.getString(request, "sectors_" + aceitemsector.toString());
+            if (ParamUtil.getString(request, "chk_sectors_" + aceitemsector.toString()) != null) {
+                String s = ParamUtil.getString(request, "chk_sectors_" + aceitemsector.toString());
                 if (s.equalsIgnoreCase(aceitemsector.toString())) {
                     choosensectors += aceitemsector.toString() + ";";
                 }
@@ -206,6 +210,33 @@ public abstract class LuceneIndexUpdatePortlet extends MVCPortlet {
             }
         }
         aceitem.setClimateimpacts_(choosenclimateimpacts);
+        
+        
+        String choosenscenarios = "";
+        for (AceItemScenario aceitemscenario : AceItemScenario.values()) {
+
+            if (ParamUtil.getString(request, "chk_scenario_" + aceitemscenario.toString()) != null) {
+                String s = ParamUtil.getString(request, "chk_scenario_" + aceitemscenario.toString());
+                if (s.equalsIgnoreCase(aceitemscenario.toString())) {
+                    choosenscenarios += aceitemscenario.toString() + ";";
+                }
+            }
+        }
+        aceitem.setScenario(choosenscenarios);
+        
+        String choosenTimePeriods = "";
+        for (AceItemTimePeriod aceitemTimePeriod : AceItemTimePeriod.values()) {
+
+            if (ParamUtil.getString(request, "chk_timeperiod_" + aceitemTimePeriod.toString()) != null) {
+                String s = ParamUtil.getString(request, "chk_timeperiod_" + aceitemTimePeriod.toString());
+                if (s.equalsIgnoreCase(aceitemTimePeriod.toString())) {
+                    choosenTimePeriods += aceitemTimePeriod.toString() + ";";
+                }
+            }
+        }
+        aceitem.setTimeperiod(choosenTimePeriods);
+        
+        
 
         aceitem.setTextSearch(aceitem.getSpecialtagging() + " " + aceitem.getName() + " " + aceitem.getDescription() + " "
                 + aceitem.getKeyword() + " " + aceitem.getSource() + " " + aceitem.getSpatialLayer() + " "

@@ -64,7 +64,7 @@ public class NewsPortlet extends MVCPortlet {
 			Date reviewDate = null;
 			boolean andOperator = true;
 			int start = 0;
-			int end = ParamUtil.getInteger(renderRequest, "delta", 5);
+			int end = ParamUtil.getInteger(renderRequest, "delta", 3);
 			if (showParam != null && showParam.equalsIgnoreCase("full"))
 			{
 			   start = -1;

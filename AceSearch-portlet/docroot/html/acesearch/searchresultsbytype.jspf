@@ -138,6 +138,7 @@ function displayJSONResults(unique, aceitemResults) {
 			var isNew = aceitem.isNew;
 			var imgSrc ="";
 			var imgNew = "";
+			var year = aceitem.year;
 			
 			if (feature.length > 0 && feature.indexOf("CASESEARCH") >=0)
 			{
@@ -148,21 +149,26 @@ function displayJSONResults(unique, aceitemResults) {
 			{
 				imgNew = '<img src="<%=request.getContextPath()%>/images/new-en.gif" />';
 			}
+			
+			if (year.length > 0)
+			{
+				year = " (" + year + ")";
+			}
 
 			// add name and description
             if ((aceitem.storedAt != "") && (aceitem.storagetype.substr(0, 3) == "URL")) {
-                   resultlist += '<span class="bolder">&#187; ' + imgSrc + ' ' + imgNew +  ' <a href="/viewaceitem?aceitem_id=' +  aceitem.aceItemId  + '" >' + aceitem.name + ' </a></span> - ' + descriptionText ;
+                   resultlist += '<span class="bolder">&#187; ' + imgSrc + ' ' + imgNew +  ' <a href="/viewaceitem?aceitem_id=' +  aceitem.aceItemId  + '" >' + aceitem.name + year + ' </a></span> - ' + descriptionText ;
 
            } else if (aceitem.storedAt.substr(0, 14) == "ace_project_id") {
-                   resultlist += '<span class="bolder">&#187; ' + imgSrc + ' ' + imgNew +  '  <a href="/projects1?' + aceitem.storedAt + '" >' + aceitem.name + '</a></span>&nbsp;';
+                   resultlist += '<span class="bolder">&#187; ' + imgSrc + ' ' + imgNew +  '  <a href="/projects1?' + aceitem.storedAt + '" >' + aceitem.name + year + '</a></span>&nbsp;';
                    resultlist += ' - ' + descriptionText ;
 
             } else if (aceitem.storedAt.substr(0, 14) == "ace_measure_id") {
-                               resultlist += '<span class="bolder">&#187; ' + imgSrc + ' ' + imgNew +  ' <a href="/viewmeasure?' + aceitem.storedAt + '" >' + aceitem.name + '</a></span>&nbsp;';
+                               resultlist += '<span class="bolder">&#187; ' + imgSrc + ' ' + imgNew +  ' <a href="/viewmeasure?' + aceitem.storedAt + '" >' + aceitem.name + year + '</a></span>&nbsp;';
                                resultlist += ' - ' + descriptionText ;
 
            } else {
-                   resultlist += '<span class="bolder">&#187; ' + imgSrc + ' ' + imgNew +  ' <a href="/viewaceitem?aceitem_id=' +  aceitem.aceItemId + '" >' + aceitem.name + ' </a></span> - ' + descriptionText ;
+                   resultlist += '<span class="bolder">&#187; ' + imgSrc + ' ' + imgNew +  ' <a href="/viewaceitem?aceitem_id=' +  aceitem.aceItemId + '" >' + aceitem.name + year + ' </a></span> - ' + descriptionText ;
 
            }
             // add relevance  document.getElementById("${sortsearchRelevanceId}").checked <> getCheckedValue( document.getElementByName('sortBy') )=='RELEVANCE'
@@ -249,25 +255,29 @@ function displayJSONResults(unique, aceitemResults) {
                             <c:set var="newImageToDisplay" value="<%=newImage %>" />
                        </c:if>
                        
+                       <c:if test="${fn:length(wrappedSearchResult.year) > 0 }">
+                            <c:set var="year" value=" (${wrappedSearchResult.year})" />
+                       </c:if>
+                       
                         <c:set var="descriptionText" value="${wrappedSearchResult.shortdescription}" />
 
 						<c:choose>
 							<c:when test="${!empty wrappedSearchResult.storedAt && fn:startsWith(wrappedSearchResult.storagetype, 'URL')==true}">
-								<span class="bolder">&#187; ${featureImageToDisplay} ${newImageToDisplay} <a href="<c:out value="/viewaceitem?aceitem_id=${wrappedSearchResult.aceItemId}"/>" ><c:out value="${wrappedSearchResult.name}"/></a></span>&nbsp;
+								<span class="bolder">&#187; ${featureImageToDisplay} ${newImageToDisplay} <a href="<c:out value="/viewaceitem?aceitem_id=${wrappedSearchResult.aceItemId}"/>" ><c:out value="${wrappedSearchResult.name}"/><c:out value="${year}"/></a></span>&nbsp;
 								- <c:out value="${descriptionText}" />
 							</c:when>
 							<c:when test="${!empty wrappedSearchResult.storedAt && fn:startsWith(wrappedSearchResult.storedAt, 'ace_project_id')==true}">
 								<span class="bolder">&#187; ${featureImageToDisplay} ${newImageToDisplay}  <a href="<c:out value="/projects1?${wrappedSearchResult.storedAt}"/>" >
-									<c:out value="${wrappedSearchResult.name}"/></a></span>&nbsp;
+									<c:out value="${wrappedSearchResult.name}"/><c:out value="${year}"/></a></span>&nbsp;
 								- <c:out value="${descriptionText}" />
 							</c:when>
 							<c:when test="${!empty wrappedSearchResult.storedAt && fn:startsWith(wrappedSearchResult.storedAt, 'ace_measure_id')==true}">
 								<span class="bolder">&#187; ${featureImageToDisplay} ${newImageToDisplay} <a href="<c:out value="/viewmeasure?${wrappedSearchResult.storedAt}"/>" >
-									<c:out value="${wrappedSearchResult.name}"/></a></span>&nbsp;
+									<c:out value="${wrappedSearchResult.name}"/><c:out value="${year}"/></a></span>&nbsp;
 								- <c:out value="${descriptionText}" />
 							</c:when>                            
 							<c:otherwise>
-								<span class="bolder">&#187; ${featureImageToDisplay} ${newImageToDisplay} <a href="<c:out value="/viewaceitem?aceitem_id=${wrappedSearchResult.aceItemId}"/>" ><c:out value="${wrappedSearchResult.name}"/></a></span>&nbsp;
+								<span class="bolder">&#187; ${featureImageToDisplay} ${newImageToDisplay} <a href="<c:out value="/viewaceitem?aceitem_id=${wrappedSearchResult.aceItemId}"/>" ><c:out value="${wrappedSearchResult.name}"/><c:out value="${year}"/></a></span>&nbsp;
 								- <c:out value="${descriptionText}" />
 							</c:otherwise>
 						</c:choose>

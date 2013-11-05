@@ -215,6 +215,9 @@
 }
 
 .resultsGroupTitle {
+	cursor:pointer;
+}
+.resultsGroupTitle {
 	/*background-color:#D2DF92;
 
 	margin:5px 0px 0px 0px;

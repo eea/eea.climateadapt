@@ -118,7 +118,7 @@
 										<li>
 											<div class="case-studies-homepage-slider-image">
 											    <% 
-												   String primImageUrlForAdaptationOption = request.getContextPath() + "/assets/aceitem.jpg";
+												   String primImageUrlForAdaptationOption = request.getContextPath() + "/assets/aceitem_picture.jpg";
 												%>
 												<img src="<%=primImageUrlForAdaptationOption %>" alt="Ace Item" />
 											</div>

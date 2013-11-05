@@ -146,7 +146,7 @@
 		<input name="specialtagging" type="text" size="65" maxlength="75" value='<%= aceitem == null ? "" : aceitem.getSpecialtagging() %>'><br /><br />
 
 		<b>Geographic characterisation</b><br />
-		<input name="spatialLayer" type="text" size="65" maxlength="75" value='<%= aceitem == null ? "" : aceitem.getSpatialLayer() %>'>
+		<input name="spatialLayer" type="text" size="65" maxlength="75" value='<%= aceitem == null ? "" : aceitem.getSpatialLayer() %>'><br /><br />
 	 </div>
 	<div style="float: left;">
 		<br>
@@ -219,6 +219,51 @@
 			</div>
 		</c:forEach>
        <br />
+       
+       <b>Scenario</b><br />
+       <%-- note : i18n file should always be in sync with AceItemClimateScenario enum --%>
+	   <c:forEach var="scenarioType" items="<%= nl.wur.alterra.cgi.ace.model.constants.AceItemScenario.values() %>" >
+	       <div class="check">
+				<c:set var="scenarioMustBeChecked" value="false" />
+				<c:set var="scenario" value='<%=aceitem == null ? "" : aceitem.getScenario()%>' />
+				<c:if test="${fn:indexOf(scenario, scenarioType)>=0}">
+					<c:set var="scenarioMustBeChecked" value="true" />
+				</c:if>
+					<c:choose>
+							<c:when test="${scenarioMustBeChecked}">
+							    <input type="checkbox" name="chk_scenario_${scenarioType}" id="chk_scenario_${scenarioType}" value="${scenarioType}" checked="checked" />
+							</c:when>
+							<c:otherwise>
+							     <input type="checkbox" name="chk_scenario_${scenarioType}" id="chk_scenario_${scenarioType}" value="${scenarioType}" />
+							</c:otherwise>
+						</c:choose>
+						<label for="chk_scenario_${scenarioType}"><liferay-ui:message key="acesearch-scenario-lbl-${scenarioType}" /></label>
+			 </div>
+			</c:forEach>
+			
+	   <br />
+       
+       <b>Time Period</b><br />
+       <%-- note : i18n file should always be in sync with AceItemTimePeriod enum --%>
+	   <c:forEach var="timeperiodType" items="<%= nl.wur.alterra.cgi.ace.model.constants.AceItemTimePeriod.values() %>" >
+	       <div class="check">
+				<c:set var="timeperiodMustBeChecked" value="false" />
+				<c:set var="timeperiod" value='<%=aceitem == null ? "" : aceitem.getTimeperiod()%>' />
+				<c:if test="${fn:indexOf(timeperiod, timeperiodType)>=0}">
+					<c:set var="timeperiodMustBeChecked" value="true" />
+				</c:if>
+					<c:choose>
+							<c:when test="${timeperiodMustBeChecked}">
+							    <input type="checkbox" name="chk_timeperiod_${timeperiodType}" id="chk_timeperiod_${timeperiodType}" value="${timeperiodType}" checked="checked" />
+							</c:when>
+							<c:otherwise>
+							     <input type="checkbox" name="chk_timeperiod_${timeperiodType}" id="chk_timeperiod_${timeperiodType}" value="${timeperiodType}" />
+							</c:otherwise>
+						</c:choose>
+						<label for="chk_timeperiod_${timeperiodType}"><liferay-ui:message key="acesearch-timeperiod-lbl-${timeperiodType}" /></label>
+			 </div>
+			</c:forEach>
+		
 	  </div>
 
 		<!--  a u i :input name="startdate" / >

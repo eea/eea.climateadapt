@@ -423,6 +423,27 @@
 						<%} %>
 					</ul>
 				</div>
+				
+				<div class="case-studies-review-clearing"></div>
+					<%
+						    String url = "";
+						    String submitText = "";
+						    
+						    if (nameOfClimateEntityShortText.equalsIgnoreCase("Case Study"))
+						    {
+						    	submitText = "Submit a Case Study";
+						    	url = "/share-your-info/case-studies";
+						    }
+						    else
+						    {
+						    	submitText = "Submit an Adaptation Option";
+						    	url = "/share-your-info/adaptation-options";
+						    }
+					%>
+				    <!--  insert submit button which takes to the ace data type page -->
+					<div class="bluebuttondiv">
+				                 <a href="<%=url %>" class="bluebutton"><%=submitText %></a>
+				    </div>
 			</div>
 
 	
@@ -710,6 +731,7 @@
 		</div> <!--  end of right column -->
 	</div> <!-- end of review wrapper -->
   </div> <!-- end of wrapper -->
+
   </body>
   <%} else { %>
       <div class="portlet-title">

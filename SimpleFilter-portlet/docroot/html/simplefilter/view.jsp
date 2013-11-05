@@ -211,6 +211,39 @@ String redirect = PortalUtil.getCurrentURL(renderRequest);
 </div>
 <div id="filteraceitems_container" style="width: 100%;">
 	<!-- Results column  -->
+	<!-- determine the results contain multiple data types -->
+	
+   <c:set var="cnt" value="0" />
+	
+   <c:if test="${fn:length(DOCUMENT_searchResults) > 0}">
+       <c:set var="cnt" value="${cnt+1}" />
+   </c:if>
+   
+   <c:if test="${fn:length(INFORMATIONSOURCE_searchResults) > 0}">
+       <c:set var="cnt" value="${cnt+1}" />
+   </c:if>
+   
+   <c:if test="${fn:length(GUIDANCE_searchResults) > 0}">
+       <c:set var="cnt" value="${cnt+1}" />
+   </c:if>
+   
+   <c:if test="${fn:length(TOOL_searchResults) > 0}">
+       <c:set var="cnt" value="${cnt+1}" />
+   </c:if>
+   
+   <c:if test="${fn:length(RESEARCHPROJECT_searchResults) > 0}">
+       <c:set var="cnt" value="${cnt+1}" />
+   </c:if>
+   
+    <c:if test="${fn:length(MEASURE_searchResults) > 0}">
+       <c:set var="cnt" value="${cnt+1}" />
+   </c:if>
+   
+    <c:if test="${fn:length(ORGANISATION_searchResults) > 0}">
+       <c:set var="cnt" value="${cnt+1}" />
+   </c:if>
+	 
+    
 	<div id="filter_results" class="filteraceitems_column">
         <c:set var="groupedResults" scope="page" value="${DOCUMENT_searchResults}"/>
 		<c:set var="groupedJSONResults" scope="page" value="${DOCUMENT_JSONsearchResults}"/>
@@ -378,8 +411,21 @@ String redirect = PortalUtil.getCurrentURL(renderRequest);
 			<br /><a href='<%= searchstring %>'>View all</a>
 		</div>
 <% 		
-	} %>  		
-
+	}  	
+		String portletId = themeDisplay.getPortletDisplay().getId();
+		javax.portlet.PortletPreferences portletSetup = PortletPreferencesFactoryUtil.getLayoutPortletSetup(themeDisplay.getLayout(), portletId);
+		String portletCustomTitle = themeDisplay.getPortletDisplay().getTitle();
+		portletCustomTitle = portletSetup.getValue("portlet-setup-title-" + themeDisplay.getLanguageId(),portletCustomTitle);
+		
+	   // we don't want to show the green action submit button for "discover", "search results" and "interactive maps"
+	   if ( ! ( portletCustomTitle.equalsIgnoreCase("discover") || portletCustomTitle.equalsIgnoreCase("search results") || portletCustomTitle.equalsIgnoreCase("interactive maps"))) { %>
+	     <c:if test="${cnt gt 1 }">
+	          <c:set var="url" scope="page" value="/share-your-info" />
+	          <div class="bluebuttondiv">
+	           <a href="${url}" class="bluebutton">Submit a database item</a>
+	        </div>
+	     </c:if>	
+	  <% } %>
 	</div>
 	
 	<hr class="clearer"/>

@@ -73,6 +73,12 @@
 		}
 	}
 	
+    boolean isReviewer = false;
+	if (renderRequest.isUserInRole("Portal Content Reviewer") 
+			|| renderRequest.isUserInRole("administrator")
+			|| renderRequest.isUserInRole("Power User")) {
+		isReviewer = true;
+	}
 	
 	if ( ! renderRequest.isUserInRole("user") ) { 
 %>
@@ -80,7 +86,7 @@
 <% }	
  else  if ( (aceitem != null)
 		     && 
-		     ((moderator.indexOf(newModerator) == -1 ) || (aceitem.getControlstatus() >= ACEIndexUtil.Status_APPROVED) ) 
+		     (! isReviewer && ((moderator.indexOf(newModerator) == -1 ) || (aceitem.getControlstatus() >= ACEIndexUtil.Status_APPROVED) ))
 		    ) { 
 
 		out.print("You are not allowed to edit the " + typedescription + " <b>" + '"' + aceitem.getName() + '"' + "</b>" + 
@@ -959,10 +965,11 @@
 														           <li><label for="rad_geochars_${geoCharElement}"><input type="radio" name="rad_geo_chars" id="europe_geo_chars" value="${geoCharElement}" /><liferay-ui:message key="acesearch-geochars-lbl-${geoCharElement}" /> (If this <%= aceitemType.toLowerCase() %> applies to the whole of Europe, please select all the Macro-Transnational Regions below)</label></li>
 														        </c:otherwise>
 														     </c:choose>
-														          <div class="europe_geochar_class">	<!-- important - starting div for europe_geochar_class -->
+														         <!--  <div class="europe_geochar_class">	important - starting div for europe_geochar_class -->
 										               </c:when>
 										             
-											           <c:when test="${geoCharElement == 'MACRO_TRANSNATIONAL_REGION'}" >
+											          <c:when test="${geoCharElement == 'MACRO_TRANSNATIONAL_REGION'}" >
+											           <div class="europe_geochar_class">	<!-- important - starting div for europe_geochar_class -->
 											               <label for="rad_geochars_${geoCharElement}"><strong><liferay-ui:message key="acesearch-geochars-lbl-${geoCharElement}" /></strong></label>
 											               <table class="case-studies-tabbed-content-table-for-translists">
                                                              <tr>
@@ -984,9 +991,11 @@
 													          </tr>
 													         </table>
 													         <br/>
+													      </div>
 													    </c:when>
 													    
 												        <c:when test="${geoCharElement == 'BIOGRAPHICAL_REGION'}" >
+												          <div class="europe_geochar_class">	<!-- important - starting div for europe_geochar_class -->
 												           <label for="rad_geochars_${geoCharElement}"><strong><liferay-ui:message key="acesearch-geochars-lbl-${geoCharElement}" /></strong></label>
 											               
 												           <table class="case-studies-tabbed-content-table-for-translists">
@@ -1009,9 +1018,11 @@
 												           </tr>
 												          </table>
 												          <br/>
+												          </div>
 										               </c:when>
 										               
 										              <c:when test="${geoCharElement ==  'COUNTRIES'}" >
+										               <div class="europe_geochar_class">	<!-- important - starting div for europe_geochar_class -->
 										                    <label for="rad_geochars_${geoCharElement}"><strong><liferay-ui:message key="acesearch-geochars-lbl-${geoCharElement}" /></strong></label>
 											               
 															<ul>
@@ -1038,9 +1049,11 @@
 																	</ul>
 																</li>
 															</ul>
+														</div>
 										              </c:when>
 										              
 											           <c:when test="${geoCharElement == 'SUBNATIONAL'}" >
+											            <div class="europe_geochar_class">	<!-- important - starting div for europe_geochar_class -->
 											               <label for="rad_geochars_${geoCharElement}"><strong><liferay-ui:message key="acesearch-geochars-lbl-${geoCharElement}" />:</strong></label>
 											               <p>
 											               <table class="case-studies-tabbed-content-table-for-lists">
@@ -1072,8 +1085,10 @@
 												           </tr>
 												          </table>
 												          </p>
+												         </div>
 										               </c:when>
 										               <c:when test="${geoCharElement == 'CITY'}" >
+										                <div class="europe_geochar_class">	<!-- important - starting div for europe_geochar_class -->
 										                 <label for="rad_geochars_${geoCharElement}"><strong><liferay-ui:message key="acesearch-geochars-lbl-${geoCharElement}" /></strong></label>
 										                 <span class="case-studies-tabbed-content-text-for-geochars"><input class="shared_form_city" type="text" size="50" maxlength="50" value="${city}" /></span>
 										                 </div> <!-- important - closing div for europe_geochar_class -->

@@ -232,8 +232,8 @@ public abstract class LuceneIndexUpdatePortletForShareAceItem extends MVCPortlet
         String choosensectors = "";
         for (AceItemSector aceitemsector : AceItemSector.values()) {
 
-            if (ParamUtil.getString(uploadRequest, "sectors_" + aceitemsector.toString()) != null) {
-                String s = ParamUtil.getString(uploadRequest, "sectors_" + aceitemsector.toString());
+            if (ParamUtil.getString(uploadRequest, "chk_sectors_" + aceitemsector.toString()) != null) {
+                String s = ParamUtil.getString(uploadRequest, "chk_sectors_" + aceitemsector.toString());
                 if (s.equalsIgnoreCase(aceitemsector.toString())) {
                     choosensectors += aceitemsector.toString() + ";";
                 }
