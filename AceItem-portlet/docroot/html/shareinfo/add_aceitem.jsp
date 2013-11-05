@@ -541,10 +541,10 @@
 						</c:if>	
 						<c:choose>
 							<c:when test="${adaptationSectorMustBeChecked}">
-								<li><label for="sectors_${adaptationSector}"><input type="checkbox" name="sectors_${adaptationSector}" id="chk_sectors_${adaptationSector}" value="${adaptationSector}" checked="checked" /><liferay-ui:message key="acesearch-sectors-lbl-${adaptationSector}" /></label></li>
+								<li><label for="sectors_${adaptationSector}"><input type="checkbox" name="chk_sectors_${adaptationSector}" id="chk_sectors_${adaptationSector}" value="${adaptationSector}" checked="checked" /><liferay-ui:message key="acesearch-sectors-lbl-${adaptationSector}" /></label></li>
 							</c:when>
 							<c:otherwise>
-								<li><label for="sectors_${adaptationSector}"><input type="checkbox" name="sectors_${adaptationSector}" id="chk_sectors_${adaptationSector}" value="${adaptationSector}" /><liferay-ui:message key="acesearch-sectors-lbl-${adaptationSector}" /></label></li>
+								<li><label for="sectors_${adaptationSector}"><input type="checkbox" name="chk_sectors_${adaptationSector}" id="chk_sectors_${adaptationSector}" value="${adaptationSector}" /><liferay-ui:message key="acesearch-sectors-lbl-${adaptationSector}" /></label></li>
 							</c:otherwise>
 						</c:choose>
 					</div>							

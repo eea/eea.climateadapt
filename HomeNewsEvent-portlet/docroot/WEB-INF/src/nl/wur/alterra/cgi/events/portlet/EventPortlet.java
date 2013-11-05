@@ -73,7 +73,7 @@ public class EventPortlet extends MVCPortlet {
 			{
 			   start = -1;
 			   end = -1;
-			   displayDateLT = null;
+			   //displayDateLT = null;
 			   showAllFlag = true;
 			}
 			
