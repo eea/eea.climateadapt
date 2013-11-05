@@ -25,7 +25,9 @@ public class AceItemSearchResult {
     private String deeplink;
     private String spatialLayer;
     private String feature;
-    private boolean isNew= false;
+    private String year = "";
+
+	private boolean isNew= false;
     
 
     public boolean isIsNew() {
@@ -45,6 +47,14 @@ public class AceItemSearchResult {
 	public void setFeature(String feature) {
 		//System.out.println(" setting feature " + feature);
 		this.feature = feature;
+	}
+	
+	public String getYear() {
+			return year;
+	}
+
+    public void setYear(String year) {
+			this.year = year;
 	}
 
 	/**
@@ -73,6 +83,12 @@ public class AceItemSearchResult {
         setFeature(aceitem.getFeature());
         //System.out.println("name is " + getName());
         setNew(isNew(aceitem.getApprovaldate(), aceitem.getCreationdate()));
+        
+        
+        if (aceitem.getYear() != null && aceitem.getYear().length() > 0)
+        {
+        	setYear(aceitem.getYear());
+        }
         
     }
     
