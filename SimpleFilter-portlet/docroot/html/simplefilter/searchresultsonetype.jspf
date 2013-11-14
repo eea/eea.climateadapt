@@ -86,7 +86,7 @@
 			       <c:set var="url" scope="page" value="/share-your-info/publications-and-reports" />
 			    </c:when>
 			    <c:when test="${aceitemtype eq 'INFORMATIONSOURCE'}">
-			       <c:set var="aceitemtypeName" scope="page" value="Information Source"/>
+			       <c:set var="aceitemtypeName" scope="page" value="Information Portal"/>
 			       <c:set var="articleText" scope="page" value="an" />
 			       <c:set var="url" scope="page" value="/share-your-info/information-portals" />
 			    </c:when>

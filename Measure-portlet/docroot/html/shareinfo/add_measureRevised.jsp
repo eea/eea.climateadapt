@@ -1754,7 +1754,7 @@
 						</li>
 					
 						
-						<li>
+						<li id="liforgeo" class="active">
 							<div class="case-studies-tabbed-content-header"><%=nameOfClimateEntityShortText %>  - <em>Geographic Information</em></div>
 
 							<div class="case-studies-tabbed-content-section">
@@ -2197,6 +2197,8 @@
 											    	locator.setOnLocationChanged(handleLocationChanged);
 											    	
 											    	handleClick(null);
+											    	var el = Ext.get('liforgeo');
+											    	el.removeClass('active');
 											    });    			
 											
 												function handleLocationChanged() {
@@ -2245,7 +2247,7 @@
 						       }
 						       
 						   %>
-						   <textarea cols="100" rows="10" name="comments" style="border-color: blue; border-style: solid; border-width: thin;"><%=comments %></textarea>
+						   <textarea rows="10" name="comments" style="border-color: blue; width:100%; border-style: solid; border-width: thin;"><%=comments %></textarea>
 						</div>
 							
 							<div class="case-studies-tabbed-content-button-row">

@@ -622,7 +622,7 @@ span.jPag-snext-img{
 		}
 		#search_results #case-studies-database-search-section ul#case-studies-database-search-options {
 			float: left;
-			font-size: 9px;
+			/*font-size: 9px;*/
 			list-style-type: none;
 			margin: 0 11px 0 0;
 			padding: 0;

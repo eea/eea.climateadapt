@@ -39,13 +39,13 @@
 			width: 73%;
 			height: 47px;
 			float: right;
-			margin-bottom: 5px;
+			margin-bottom: 12px;
 		}
 
  #case-studies-homepage-search-wrapper dl dd .case-studies-homepage-button-green {
 			float: right;
 			position: relative;
-			top: -8px;
+			top: -5px;
 		}
 
  #case-studies-homepage-search-wrapper .case-studies-homepage-search-footer {
@@ -72,12 +72,6 @@
 
 .case-studies-homepage-button-green {
 			background: #c7d544;
-			background: -moz-linear-gradient(top,  #c7d544 0%, #aebe20 100%);
-			background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#c7d544), color-stop(100%,#aebe20));
-			background: -webkit-linear-gradient(top,  #c7d544 0%,#aebe20 100%);
-			background: -o-linear-gradient(top,  #c7d544 0%,#aebe20 100%);
-			background: -ms-linear-gradient(top,  #c7d544 0%,#aebe20 100%);
-			background: linear-gradient(to bottom,  #c7d544 0%,#aebe20 100%);
 			filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#c7d544', endColorstr='#aebe20',GradientType=0 );
 			border: 1px solid #a3af29;
 			border-radius: 7px;
@@ -89,5 +83,5 @@
 			text-align: center;
 			text-decoration: none;
 			text-shadow: 1px 1px 1px #fff;
-			padding: 5px 75px;
+			padding: 3px 75px;
 		}
