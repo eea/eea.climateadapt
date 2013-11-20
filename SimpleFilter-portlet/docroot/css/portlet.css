@@ -511,7 +511,7 @@ span.jPag-snext-img{
 		background: #c7d443;
 		background: -webkit-gradient(linear, left top, left bottom, from(#c7d443), to(#afbe21));
 		background: -moz-linear-gradient(top,  #c7d443,  #afbe21);
-		filter:  progid:DXImageTransform.Microsoft.gradient(startColorstr='#faa51a', endColorstr='#f47a20');
+		filter:  progid:DXImageTransform.Microsoft.gradient(startColorstr='#C7D443', endColorstr='#C7D443');
 		cursor: pointer;
 		text-align: center;
 		text-decoration: none;
