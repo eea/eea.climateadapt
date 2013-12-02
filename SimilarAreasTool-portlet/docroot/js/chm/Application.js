@@ -18,6 +18,8 @@ CHM.Application = Ext.extend(Ext.Panel,  {
 	
 	helpButton: null,
 	
+	actionButtonPanel: null,
+	
     initComponent : function() {
     	Ext.QuickTips.init();
     	
@@ -68,9 +70,11 @@ CHM.Application = Ext.extend(Ext.Panel,  {
     	
     	this.legendControl = new CHM.Control.Legend.LegendControl({width: this.width / 4 * 1 - (this.margin / 2) - this.margin, height: this.height / 8 * 2.05, x: this.width / 4 * 3 + (this.margin / 2), y: this.height / 8 * 2.5 + (this.margin / 2) + this.margin});
     	
+    	this.actionButtonPanel = new Ext.Panel({width: this.width / 4 * 1 - (this.margin / 2) - this.margin, height: this.height / 8 * 0.75, x: this.width / 4 * 3 + (this.margin / 2), y: this.height / 8 * 2.5 + (this.margin / 2) + this.margin + this.margin + this.height / 8 * 2.05, html: '<a href="/share-your-info/case-studies" class="bluebutton">Submit a case study</a>', border: false});
+    	
 		this.defaults = {collapsible : false, split : true};
 
-		this.items = [panel, this.mapControl, this.gridControl, this.locatorControl, this.optionsControl, this.legendControl];
+		this.items = [panel, this.mapControl, this.gridControl, this.locatorControl, this.optionsControl, this.legendControl, this.actionButtonPanel];
     	
     	CHM.Application.superclass.initComponent.call(this);
     	
