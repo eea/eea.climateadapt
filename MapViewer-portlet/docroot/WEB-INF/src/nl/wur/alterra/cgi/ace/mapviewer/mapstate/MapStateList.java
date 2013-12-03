@@ -56,10 +56,14 @@ public class MapStateList extends ArrayList<MapState> {
 			try {
 				BufferedReader bufferedreader = new BufferedReader(new InputStreamReader(datainputstream));
 				
-				String line;
-				
-				while ((line = bufferedreader.readLine()) != null)   {
-					mapstate += line;
+				try {
+					String line;
+					
+					while ((line = bufferedreader.readLine()) != null)   {
+						mapstate += line;
+					}
+				} finally {
+					bufferedreader.close();
 				}
 			} finally {
 				datainputstream.close();

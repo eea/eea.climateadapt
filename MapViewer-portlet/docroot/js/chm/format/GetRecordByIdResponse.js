@@ -15,7 +15,7 @@
  * Inherits from:
  *  - <OpenLayers.Format.XML>
  */
-CHM.GetRecordByIdResponse = OpenLayers.Class(OpenLayers.Format.XML, {
+CHM.Format.GetRecordByIdResponse = OpenLayers.Class(OpenLayers.Format.XML, {
     
     /**
      * Property: namespaces
