@@ -17,7 +17,7 @@
 		<Layer queryable="0" hidden="0">
 			<Server service="OGC:WMS" version="1.1.1">
 				<OnlineResource xlink:type="simple"
-					xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://ace.geocat.net/geoserver/wms?" />
+					xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://climate-adapt.eea.europa.eu/geoserver/wms?" />
 			</Server>
 			<Name>background</Name>
 			<Title>Background</Title>
@@ -46,13 +46,13 @@
 		<Layer queryable="0" hidden="1">
 			<Server service="OGC:WMS" version="1.1.1">
 				<OnlineResource xlink:type="simple"
-					xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://ace.geocat.net/geoserver/wms?" />
+					xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://climate-adapt.eea.europa.eu/geoserver/wms?" />
 			</Server>
 			<Name>cwa:hydroelec_dams_rb_2050</Name>
 			<Title>Risk of losses in power production by hydroelectric dams (2050)</Title>
 			<MetadataURL>
 				<OnlineResource xlink:type="simple" xmlns:xlink="http://www.w3.org/1999/xlink" 
-					xlink:href="http://dev.ace.geocat.net/geonetwork/srv/en/metadata.show?uuid=e13bac3bda11ca1ad9ee679a8be88b9fc3d1f7e2"/>
+					xlink:href="http://climate-adapt.eea.europa.eu/geonetwork/srv/en/metadata.show?uuid=e13bac3bda11ca1ad9ee679a8be88b9fc3d1f7e2"/>
 			</MetadataURL>
 			<FormatList>
 				<Format current="1">image/png</Format>
@@ -80,13 +80,13 @@
 		<Layer queryable="0" hidden="1">
 			<Server service="OGC:WMS" version="1.1.1">
 				<OnlineResource xlink:type="simple"
-					xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://ace.geocat.net/geoserver/wms?" />
+					xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://climate-adapt.eea.europa.eu/geoserver/wms?" />
 			</Server>
 			<Name>cwa:precalc_vi_nuts2_median_2050_fpa</Name>
 			<Title>Relative area of NUTS2-units affected by floods (2050)</Title>
 			<MetadataURL>
 				<OnlineResource xlink:type="simple" xmlns:xlink="http://www.w3.org/1999/xlink" 
-					xlink:href="http://dev.ace.geocat.net/geonetwork/srv/en/metadata.show?uuid=bd3277a237dc06bca906a594370502dd8f14af9c"/>
+					xlink:href="http://climate-adapt.eea.europa.eu/geonetwork/srv/en/metadata.show?uuid=bd3277a237dc06bca906a594370502dd8f14af9c"/>
 			</MetadataURL>
 			<FormatList>
 				<Format current="1">image/png</Format>
@@ -114,13 +114,13 @@
 		<Layer queryable="0" hidden="1">
 			<Server service="OGC:WMS" version="1.1.1">
 				<OnlineResource xlink:type="simple"
-					xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://ace.geocat.net/geoserver/wms?" />
+					xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://climate-adapt.eea.europa.eu/geoserver/wms?" />
 			</Server>
 			<Name>cwa:precalc_vi_nuts2_median_2050_dpa</Name>
 			<Title>Relative area of NUTS2-units affected by severe droughts (2050)</Title>
 			<MetadataURL>
 				<OnlineResource xlink:type="simple" xmlns:xlink="http://www.w3.org/1999/xlink" 
-					xlink:href="http://dev.ace.geocat.net/geonetwork/srv/en/metadata.show?uuid=225f69b5c7c03e9b14576e8c3a327ef250917364"/>
+					xlink:href="http://climate-adapt.eea.europa.eu/geonetwork/srv/en/metadata.show?uuid=225f69b5c7c03e9b14576e8c3a327ef250917364"/>
 			</MetadataURL>
 			<FormatList>
 				<Format current="1">image/png</Format>
@@ -148,13 +148,13 @@
 		<Layer queryable="0" hidden="1">
 			<Server service="OGC:WMS" version="1.1.1">
 				<OnlineResource xlink:type="simple"
-					xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://ace.geocat.net/geoserver/wms?" />
+					xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://climate-adapt.eea.europa.eu/geoserver/wms?" />
 			</Server>
 			<Name>cwa:cta_irr_rb_ecf_2050</Name>
 			<Title>Ratio of irrigation water consumption to water availability (2050, EcF)</Title>
 			<MetadataURL>
 				<OnlineResource xlink:type="simple" xmlns:xlink="http://www.w3.org/1999/xlink" 
-					xlink:href="http://dev.ace.geocat.net/geonetwork/srv/en/metadata.show?uuid=d5dd9bebab20ffd9058ebd7d5f8ef2eb86e439fb"/>
+					xlink:href="http://climate-adapt.eea.europa.eu/geonetwork/srv/en/metadata.show?uuid=d5dd9bebab20ffd9058ebd7d5f8ef2eb86e439fb"/>
 			</MetadataURL>
 			<FormatList>
 				<Format current="1">image/png</Format>
@@ -182,13 +182,13 @@
 		<Layer queryable="0" hidden="1">
 			<Server service="OGC:WMS" version="1.1.1">
 				<OnlineResource xlink:type="simple"
-					xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://ace.geocat.net/geoserver/wms?" />
+					xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://climate-adapt.eea.europa.eu/geoserver/wms?" />
 			</Server>
 			<Name>cwa:cta_irr_rb_sue_2050</Name>
 			<Title>Ratio of irrigation water consumption to water availability (2050, SuE)</Title>
 			<MetadataURL>
 				<OnlineResource xlink:type="simple" xmlns:xlink="http://www.w3.org/1999/xlink" 
-					xlink:href="http://dev.ace.geocat.net/geonetwork/srv/en/metadata.show?uuid=ee5b2f30e2ce03bba7cd99e9cf28f0f64d2d0247"/>
+					xlink:href="http://climate-adapt.eea.europa.eu/geonetwork/srv/en/metadata.show?uuid=ee5b2f30e2ce03bba7cd99e9cf28f0f64d2d0247"/>
 			</MetadataURL>
 			<FormatList>
 				<Format current="1">image/png</Format>
@@ -216,13 +216,13 @@
 		<Layer queryable="0" hidden="1">
 			<Server service="OGC:WMS" version="1.1.1">
 				<OnlineResource xlink:type="simple"
-					xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://ace.geocat.net/geoserver/wms?" />
+					xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://climate-adapt.eea.europa.eu/geoserver/wms?" />
 			</Server>
 			<Name>cwa:cta_irr_rb_base</Name>
 			<Title>Ratio of irrigation water consumption to water availability (baseline)</Title>
 			<MetadataURL>
 				<OnlineResource xlink:type="simple" xmlns:xlink="http://www.w3.org/1999/xlink" 
-					xlink:href="http://dev.ace.geocat.net/geonetwork/srv/en/metadata.show?uuid=d0a4a9bb9677285bc9beda1eb09f0ee28c9026d1"/>
+					xlink:href="http://climate-adapt.eea.europa.eu/geonetwork/srv/en/metadata.show?uuid=d0a4a9bb9677285bc9beda1eb09f0ee28c9026d1"/>
 			</MetadataURL>
 			<FormatList>
 				<Format current="1">image/png</Format>
@@ -250,13 +250,13 @@
 		<Layer queryable="0" hidden="1">
 			<Server service="OGC:WMS" version="1.1.1">
 				<OnlineResource xlink:type="simple"
-					xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://ace.geocat.net/geoserver/wms?" />
+					xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://climate-adapt.eea.europa.eu/geoserver/wms?" />
 			</Server>
 			<Name>cwa:wei_rb_ecf_2050_jja</Name>
 			<Title>Water stress, summer (2050, EcF)</Title>
 			<MetadataURL>
 				<OnlineResource xlink:type="simple" xmlns:xlink="http://www.w3.org/1999/xlink" 
-					xlink:href="http://dev.ace.geocat.net/geonetwork/srv/en/metadata.show?uuid=39248e7730d3e229e15100b59fd1bd5397fb319d"/>
+					xlink:href="http://climate-adapt.eea.europa.eu/geonetwork/srv/en/metadata.show?uuid=39248e7730d3e229e15100b59fd1bd5397fb319d"/>
 			</MetadataURL>
 			<FormatList>
 				<Format current="1">image/png</Format>
@@ -284,13 +284,13 @@
 		<Layer queryable="0" hidden="1">
 			<Server service="OGC:WMS" version="1.1.1">
 				<OnlineResource xlink:type="simple"
-					xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://ace.geocat.net/geoserver/wms?" />
+					xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://climate-adapt.eea.europa.eu/geoserver/wms?" />
 			</Server>
 			<Name>cwa:wei_rb_sue_2050_jja</Name>
 			<Title>Water stress, summer (2050, SUE)</Title>
 			<MetadataURL>
 				<OnlineResource xlink:type="simple" xmlns:xlink="http://www.w3.org/1999/xlink" 
-					xlink:href="http://dev.ace.geocat.net/geonetwork/srv/en/metadata.show?uuid=290bc7c0ce25db534aca47e20831d8a0eeecb4a5"/>
+					xlink:href="http://climate-adapt.eea.europa.eu/geonetwork/srv/en/metadata.show?uuid=290bc7c0ce25db534aca47e20831d8a0eeecb4a5"/>
 			</MetadataURL>
 			<FormatList>
 				<Format current="1">image/png</Format>
@@ -318,13 +318,13 @@
 		<Layer queryable="0" hidden="1">
 			<Server service="OGC:WMS" version="1.1.1">
 				<OnlineResource xlink:type="simple"
-					xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://ace.geocat.net/geoserver/wms?" />
+					xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://climate-adapt.eea.europa.eu/geoserver/wms?" />
 			</Server>
 			<Name>cwa:wei_rb_base_jja</Name>
 			<Title>Water stress, summer (base line)</Title>
 			<MetadataURL>
 				<OnlineResource xlink:type="simple" xmlns:xlink="http://www.w3.org/1999/xlink" 
-					xlink:href="http://dev.ace.geocat.net/geonetwork/srv/en/metadata.show?uuid=e7714fb98fa48af1beca80ab426ca0a600417a15"/>
+					xlink:href="http://climate-adapt.eea.europa.eu/geonetwork/srv/en/metadata.show?uuid=e7714fb98fa48af1beca80ab426ca0a600417a15"/>
 			</MetadataURL>
 			<FormatList>
 				<Format current="1">image/png</Format>
@@ -352,13 +352,13 @@
 		<Layer queryable="0" hidden="1">
 			<Server service="OGC:WMS" version="1.1.1">
 				<OnlineResource xlink:type="simple"
-					xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://ace.geocat.net/geoserver/wms?" />
+					xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://climate-adapt.eea.europa.eu/geoserver/wms?" />
 			</Server>
 			<Name>cwa:wei_rb_ecf_2050_ann</Name>
 			<Title>Annual average water stress (2050, EcF)</Title>
 			<MetadataURL>
 				<OnlineResource xlink:type="simple" xmlns:xlink="http://www.w3.org/1999/xlink" 
-					xlink:href="http://dev.ace.geocat.net/geonetwork/srv/en/metadata.show?uuid=7b3f60e23781ff0e646369843683bf2125c3ff01"/>
+					xlink:href="http://climate-adapt.eea.europa.eu/geonetwork/srv/en/metadata.show?uuid=7b3f60e23781ff0e646369843683bf2125c3ff01"/>
 			</MetadataURL>
 			<FormatList>
 				<Format current="1">image/png</Format>
@@ -386,13 +386,13 @@
 		<Layer queryable="0" hidden="1">
 			<Server service="OGC:WMS" version="1.1.1">
 				<OnlineResource xlink:type="simple"
-					xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://ace.geocat.net/geoserver/wms?" />
+					xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://climate-adapt.eea.europa.eu/geoserver/wms?" />
 			</Server>
 			<Name>cwa:wei_rb_sue_2050_ann</Name>
 			<Title>Annual average water stress (2050, SUE)</Title>
 			<MetadataURL>
 				<OnlineResource xlink:type="simple" xmlns:xlink="http://www.w3.org/1999/xlink" 
-					xlink:href="http://dev.ace.geocat.net/geonetwork/srv/en/metadata.show?uuid=f0722e584835ddb0126fa86d0dd451cb9496b0b7"/>
+					xlink:href="http://climate-adapt.eea.europa.eu/geonetwork/srv/en/metadata.show?uuid=f0722e584835ddb0126fa86d0dd451cb9496b0b7"/>
 			</MetadataURL>
 			<FormatList>
 				<Format current="1">image/png</Format>
@@ -420,13 +420,13 @@
 		<Layer queryable="0" hidden="0">
 			<Server service="OGC:WMS" version="1.1.1">
 				<OnlineResource xlink:type="simple"
-					xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://ace.geocat.net/geoserver/wms?" />
+					xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://climate-adapt.eea.europa.eu/geoserver/wms?" />
 			</Server>
 			<Name>cwa:wei_rb_base_ann</Name>
 			<Title>Annual average water stress (base line)</Title>
 			<MetadataURL>
 				<OnlineResource xlink:type="simple" xmlns:xlink="http://www.w3.org/1999/xlink" 
-					xlink:href="http://dev.ace.geocat.net/geonetwork/srv/en/metadata.show?uuid=874ddad6f8afb1f8024d806b603d55c341e458db"/>
+					xlink:href="http://climate-adapt.eea.europa.eu/geonetwork/srv/en/metadata.show?uuid=874ddad6f8afb1f8024d806b603d55c341e458db"/>
 			</MetadataURL>
 			<FormatList>
 				<Format current="1">image/png</Format>
@@ -454,7 +454,7 @@
 		<Layer queryable="0" hidden="0">
 			<Server service="OGC:WMS" version="1.1.1">
 				<OnlineResource xlink:type="simple"
-					xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://ace.geocat.net/geoserver/wms?" />
+					xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://climate-adapt.eea.europa.eu/geoserver/wms?" />
 			</Server>
 			<Name>foreground</Name>
 			<Title>Topography</Title>

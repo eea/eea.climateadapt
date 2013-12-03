@@ -12,12 +12,15 @@
 				minx="1600000.00000000000" miny="766700.000000000000" maxx="7602904.42599999998"
 				maxy="5961082.30099999998" />
 		</Extension>
+		<LogoURL>
+		   <OnlineResource xlink:type="simple" xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.openstreetmap.org/assets/osm_logo-9b6498da08de0514dfcb996c32e84dbd.png"/>
+		</LogoURL>
 	</General>
 	<LayerList>
 		<Layer queryable="0" hidden="0">
 			<Server service="OGC:WMS" version="1.1.1">
 				<OnlineResource xlink:type="simple"
-					xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://ace.geocat.net/geoserver/wms?" />
+					xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://climate-adapt.eea.europa.eu/geoserver/wms?" />
 			</Server>
 			<Name>background</Name>
 			<Title>Background</Title>
@@ -46,17 +49,20 @@
 		<Layer queryable="0" hidden="1">
 			<Server service="OGC:WMS" version="1.1.1">
 				<OnlineResource xlink:type="simple"
-					xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://ace.geocat.net/geoserver/wms?" />
+					xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://climate-adapt.eea.europa.eu/geoserver/wms?" />
 			</Server>
-			<Name>chm:espon_nuts3</Name>
+			<Name>chm:espon_increase_in_annual_mean_temperature</Name>
 			<Title>Increase in annual mean temperature (deg. C)</Title>
+			<MetadataURL>
+				<OnlineResource xlink:type="simple" xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://climate-adapt.eea.europa.eu/geonetwork/srv/en/metadata.show?uuid=e227dde6ae87b3356faa1ba7efbce297e4e1e1c8"/>
+			</MetadataURL>
 			<FormatList>
 				<Format current="1">image/png</Format>
 			</FormatList>
 			<StyleList>
 				<Style current="1">
-					<Name>espon_increase_in_annual_mean_temperature</Name>
-					<Title>Increase in annual mean temperature</Title>
+					<Name />
+					<Title>Default</Title>
 				</Style>
 			</StyleList>
 			<Extension>
@@ -70,22 +76,26 @@
 				<ol:isBaseLayer xmlns:ol="http://openlayers.org/context">false</ol:isBaseLayer>
 				<ol:displayInLayerSwitcher xmlns:ol="http://openlayers.org/context">true</ol:displayInLayerSwitcher>
 				<ol:singleTile xmlns:ol="http://openlayers.org/context">false</ol:singleTile>
+				<ol:attribution xmlns:ol="http://openlayers.org/context"><![CDATA[&copy; ESPON, IRPUD, 2011]]></ol:attribution>
 			</Extension>
 		</Layer>
 		<Layer queryable="0" hidden="1">
 			<Server service="OGC:WMS" version="1.1.1">
 				<OnlineResource xlink:type="simple"
-					xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://ace.geocat.net/geoserver/wms?" />
+					xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://climate-adapt.eea.europa.eu/geoserver/wms?" />
 			</Server>
-			<Name>chm:espon_nuts3</Name>
+			<Name>chm:espon_change_in_annual_mean_precipitation_in_summer_months</Name>
 			<Title>Change in annual mean precipitation in summer months (in %)</Title>
+			<MetadataURL>
+				<OnlineResource xlink:type="simple" xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://climate-adapt.eea.europa.eu/geonetwork/srv/en/metadata.show?uuid=cacc16141bca297801c54ec8bf9fd10bc8c96ba2"/>
+			</MetadataURL>
 			<FormatList>
 				<Format current="1">image/png</Format>
 			</FormatList>
 			<StyleList>
 				<Style current="1">
-					<Name>espon_change_in_annual_mean_precipitation_in_summer_months</Name>
-					<Title>Change in annual mean precipitation in summer months</Title>
+					<Name />
+					<Title>Default</Title>
 				</Style>
 			</StyleList>
 			<Extension>
@@ -99,22 +109,26 @@
 				<ol:isBaseLayer xmlns:ol="http://openlayers.org/context">false</ol:isBaseLayer>
 				<ol:displayInLayerSwitcher xmlns:ol="http://openlayers.org/context">true</ol:displayInLayerSwitcher>
 				<ol:singleTile xmlns:ol="http://openlayers.org/context">false</ol:singleTile>
+				<ol:attribution xmlns:ol="http://openlayers.org/context"><![CDATA[&copy; ESPON, IRPUD, 2011]]></ol:attribution>
 			</Extension>
 		</Layer>
 		<Layer queryable="0" hidden="1">
 			<Server service="OGC:WMS" version="1.1.1">
 				<OnlineResource xlink:type="simple"
-					xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://ace.geocat.net/geoserver/wms?" />
+					xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://climate-adapt.eea.europa.eu/geoserver/wms?" />
 			</Server>
-			<Name>chm:espon_nuts3</Name>
-			<Title>Decrease in annual mean number of days with snow cover</Title>
+			<Name>chm:espon_decrease_in_annual_mean_number_of_days_with_snow_cover</Name>
+			<Title>Change in annual mean number of days with snow cover</Title>
+			<MetadataURL>
+				<OnlineResource xlink:type="simple" xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://climate-adapt.eea.europa.eu/geonetwork/srv/en/metadata.show?uuid=5d8db3ffa859cc6876875391ffc32bb9d532720e"/>
+			</MetadataURL>
 			<FormatList>
 				<Format current="1">image/png</Format>
 			</FormatList>
 			<StyleList>
 				<Style current="1">
-					<Name>espon_decrease_in_annual_mean_number_of_days_with_snow_cover</Name>
-					<Title>Decrease in annual mean number of days with snow cover</Title>
+					<Name />
+					<Title>Default</Title>
 				</Style>
 			</StyleList>
 			<Extension>
@@ -128,22 +142,26 @@
 				<ol:isBaseLayer xmlns:ol="http://openlayers.org/context">false</ol:isBaseLayer>
 				<ol:displayInLayerSwitcher xmlns:ol="http://openlayers.org/context">true</ol:displayInLayerSwitcher>
 				<ol:singleTile xmlns:ol="http://openlayers.org/context">false</ol:singleTile>
+				<ol:attribution xmlns:ol="http://openlayers.org/context"><![CDATA[&copy; ESPON, IRPUD, 2011]]></ol:attribution>
 			</Extension>
 		</Layer>
 		<Layer queryable="0" hidden="0">
 			<Server service="OGC:WMS" version="1.1.1">
 				<OnlineResource xlink:type="simple"
-					xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://ace.geocat.net/geoserver/wms?" />
+					xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://climate-adapt.eea.europa.eu/geoserver/wms?" />
 			</Server>
-			<Name>chm:espon_nuts3</Name>
-			<Title>Increase in annual mean number of summer days</Title>
+			<Name>chm:espon_increase_in_annual_mean_number_of_summer_days</Name>
+			<Title>Change in annual mean number of summer days</Title>
+			<MetadataURL>
+				<OnlineResource xlink:type="simple" xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://climate-adapt.eea.europa.eu/geonetwork/srv/en/metadata.show?uuid=7faa7655f8dce4e79ac1e8920149f9824140a52a"/>
+			</MetadataURL>
 			<FormatList>
 				<Format current="1">image/png</Format>
 			</FormatList>
 			<StyleList>
 				<Style current="1">
-					<Name>espon_increase_in_annual_mean_number_of_summer_days</Name>
-					<Title>Increase in annual mean number of summer days</Title>
+					<Name />
+					<Title>Default</Title>
 				</Style>
 			</StyleList>
 			<Extension>
@@ -156,13 +174,14 @@
 				<ol:units xmlns:ol="http://openlayers.org/context">m</ol:units>
 				<ol:isBaseLayer xmlns:ol="http://openlayers.org/context">false</ol:isBaseLayer>
 				<ol:displayInLayerSwitcher xmlns:ol="http://openlayers.org/context">true</ol:displayInLayerSwitcher>
-				<ol:singleTile xmlns:ol="http://openlayers.org/context">true</ol:singleTile>
+				<ol:singleTile xmlns:ol="http://openlayers.org/context">false</ol:singleTile>
+				<ol:attribution xmlns:ol="http://openlayers.org/context"><![CDATA[&copy; ESPON, IRPUD, 2011]]></ol:attribution>
 			</Extension>
 		</Layer>
 		<Layer queryable="0" hidden="0">
 			<Server service="OGC:WMS" version="1.1.1">
 				<OnlineResource xlink:type="simple"
-					xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://ace.geocat.net/geoserver/wms?" />
+					xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://climate-adapt.eea.europa.eu/geoserver/wms?" />
 			</Server>
 			<Name>foreground</Name>
 			<Title>Topography</Title>
