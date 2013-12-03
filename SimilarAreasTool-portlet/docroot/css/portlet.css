@@ -169,18 +169,19 @@ div.csst-tooltip .x-tip-header {
 }
 
 .bluebutton {
+    background: #c7d443;
+	background: -webkit-gradient(linear, left top, left bottom, from(#c7d443), to(#afbe21));
 	display: inline-block;
 	border: solid 1px #aab91d;
 	float: right;
 	color: #232323;
-	background: #c7d443;
-	background: -webkit-gradient(linear, left top, left bottom, from(#c7d443), to(#afbe21));
 	background: -moz-linear-gradient(top,  #c7d443,  #afbe21);
 	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#C7D443', endColorstr='#C7D443');
 	cursor: pointer;
 	text-align: center;
 	text-decoration: none;
-	font: 13px/100% Verdana, Arial, Helvetica, sans-serif;
+	font-size: 11px;
+    font-weight: bold;	
 	padding: 1em 2em 1em;
 	text-shadow: 0 1px 1px rgba(255,255,255,1);
 	-webkit-border-radius: .5em;
