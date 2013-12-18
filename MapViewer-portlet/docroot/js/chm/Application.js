@@ -52,9 +52,9 @@ CHM.Application = Ext.extend(Ext.Panel,  {
     	
     	var panel = new Ext.Panel({x: this.margin, y: this.margin, border: false, id: 'mapviewer-title-help', items: [this.titleControl, {xtype: 'label', html: '&nbsp;'}, this.helpButton], layout: 'column'});
 		
-    	this.mapControl = new CHM.Control.Map.MapControl({layers: [], width: this.width / 4 * 3 - (this.margin * 1.5), height: this.height / 8 * 7 - (this.margin / 2) - (this.margin / 2), x: this.margin, y: this.height / 8 * 1 + (this.margin / 2)});
+    	this.mapControl = new CHM.Control.Map.MapControl({layers: [], width: this.width / 4 * 3 - (this.margin * 1.5), height: this.height / 8 * 4 - (this.margin / 2) - (this.margin / 2), x: this.margin, y: this.height / 8 * 1 + (this.margin / 2)});
     	
-    	this.tocControl = new CHM.Control.TOC.TOCControl({mapControl: this.mapControl, width: this.width / 4 * 1 - (this.margin / 2) - this.margin, height: this.height / 8 * 7 - (this.margin / 2), x: this.width / 4 * 3 + (this.margin / 2), y: this.height / 8 * 1 + (this.margin / 2)});
+    	this.tocControl = new CHM.Control.TOC.TOCControl({mapControl: this.mapControl, width: this.width / 4 * 1 - (this.margin / 2) - this.margin, x: this.width / 4 * 3 + (this.margin / 2), y: this.height / 8 * 1 + (this.margin / 2)});
     	
 		this.defaults = {collapsible : false, split : true};
 
