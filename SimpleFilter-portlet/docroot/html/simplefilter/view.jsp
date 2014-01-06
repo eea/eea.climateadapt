@@ -422,7 +422,7 @@ String redirect = PortalUtil.getCurrentURL(renderRequest);
 	     <c:if test="${cnt gt 1 }">
 	          <c:set var="url" scope="page" value="/share-your-info" />
 	          <div class="bluebuttondiv">
-	           <a href="${url}" class="bluebutton">Submit a database item</a>
+	           <a href="${url}" class="bluebutton">Share your information</a>
 	        </div>
 	     </c:if>	
 	  <% } %>

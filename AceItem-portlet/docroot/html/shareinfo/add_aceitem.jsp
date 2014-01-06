@@ -332,7 +332,7 @@
 									  <!-- end of approved check box -->
 									  
 								<li>
-									  <p><strong><em>Featured <%=aceitemType %>:</em></strong></p>
+									  <p><b><em>Featured <%=aceitemType %>:</em></b></p>
 									  
 									  <%
 									      String feature = "";
@@ -353,7 +353,7 @@
 									     
 									      
 									  %>
-									  <input type="checkbox" name="feature" id="chk_adaptation_feature" value="CASE_SEARCH" <%=feature %>/>
+									  <input type="checkbox" name="feature" id="chk_adaptation_feature" value="CASESEARCH" <%=feature %>/>
 									  <label for="Feature this on <%=aceitemType %> search results page">Feature this on <%=aceitemType %> search results page</label>
 														
 									
@@ -413,7 +413,7 @@
         <liferay-ui:error key="aceitemname-required" message="Aceitem name required" />
         <ul>
 	        <li>
-				<p><strong><span class="red">*</span> <em>Item Name (50 character limit)</em></strong></p>
+				<p><b><span class="red">*</span> <em>Item Name (50 character limit)</em></b></p>
 				<% if (aceitem != null) { %>
 		           <input name="name" type="text" size="75" maxlength="50" value="<%= aceitem.getName() %>" /><br /><br />
 				<%} else {
@@ -443,7 +443,7 @@
 	      <liferay-ui:error key="aceitemdescription-required" message="Aceitem description required" />
 	   <ul>
 		    <li>
-				<p><strong><span class="red">*</span> <em>Provide a description of the item. (5,000 character limit)</em></strong></p>
+				<p><b><span class="red">*</span> <em>Provide a description of the item. (5,000 character limit)</em></b></p>
 				
 				<% if (aceitem != null && aceitem.getDescription() != null) { %>
 					<textarea id="<portlet:namespace />descriptionField" cols="40" rows="10" class="WYSIWYG" name="description" data-maxlength="1000"><%= aceitem.getDescription() %></textarea>
@@ -476,7 +476,7 @@
 	      <liferay-ui:error key="aceitemkeywords-required" message="Aceitem keywords required" />
 	   <ul>
 	     <li>
-            <p><strong><span class="red">*</span> <em>Describe and tag this item with relevant keywords. Separate each keyword with a comma. For example, example keyword 1, example keyword 2 (1,000 character limit)</em></strong></p>
+            <p><b><span class="red">*</span> <em>Describe and tag this item with relevant keywords. Separate each keyword with a comma. For example, example keyword 1, example keyword 2 (1,000 character limit)</em></b></p>
             <% if (aceitem != null && Validator.isNotNull(aceitem.getKeyword())) { %>
 				<textarea id="keywordId" name="keyword" cols="40" rows="10" class="WYSIWYG" data-maxlength="1000"><%=aceitem.getKeyword() %></textarea>
 				<%} else {
@@ -508,7 +508,7 @@
 	      <liferay-ui:error key="aceitem_sectors-required" message="Aceitem sectors required" />
 	       <ul>
 	        <li>
-	        <p><strong><span class="red">*</span> <em>Select one or more relevant sector policies that this item relates to.</em></strong></p>
+	        <p><b><span class="red">*</span> <em>Select one or more relevant sector policies that this item relates to.</em></b></p>
 		     <ul class="three-col">
 			<!--   input name="sectors_" type="text" size="65" value="< %= aceitem == null ? "" : aceitem.getSectors_() % >"><br /><br / -->
 			 <%
@@ -583,7 +583,7 @@
 	    %>
 	  
 	    <li>
-	     <p><strong><span class="red">*</span> <em>Select one or more climate change impact topics that this item relates to.</em></strong></p>
+	     <p><b><span class="red">*</span> <em>Select one or more climate change impact topics that this item relates to.</em></b></p>
 	     <ul class="three-col">
 		<%-- note : i18n file should always be in sync with AceItemClimateImpact enum --%>
 		<c:forEach var="adaptationClimateImpact" items="<%= nl.wur.alterra.cgi.ace.model.constants.AceItemClimateImpact.values() %>" >
@@ -617,7 +617,7 @@
          <liferay-ui:error key="year-required" message="Enter correct value for year or leave blank" />
          <ul>
 			   <li>
-			       <p><strong><em>Date of publication/release/update of the item</em></strong></p>
+			       <p><b><em>Date of publication/release/update of the item</em></b></p>
          <% if (aceitem != null && Validator.isNotNull(aceitem.getYear())) { %>
 										      <input name="year" type="text" size="5" maxlength="4" value="<%= aceitem.getYear() %>" /><br /><br />
 										<%} else {
@@ -658,7 +658,7 @@
 		<liferay-ui:error key="aceitemstoredat-required" message="aceitemstoredat-required" />
 	   <ul>
 	    <li>	
-	        <p><strong><em>List the Name and Website where the item can be found or is described. (500 character limit).Please separate each website with semicolon.</em></strong></p>
+	        <p><b><em>List the Name and Website where the item can be found or is described. (500 character limit).Please separate each website with semicolon.</em></b></p>
 	        <% 
 					  String website = "";
 					  if (aceitem == null || Validator.isNull(aceitem.getStoredAt())) {
@@ -678,7 +678,7 @@
 	  <div class="case-studies-tabbed-content-subheader">Source</div>
 	   <ul>
 	     <li>
-	        <p><strong><em>Describe the original source of the item description (250 character limit)</em></strong></p>
+	        <p><b><em>Describe the original source of the item description (250 character limit)</em></b></p>
 	        <% 
 				  String source = "";
 				  if (aceitem == null || Validator.isNull(aceitem.getSource())) {
@@ -771,23 +771,23 @@
 								   <c:forEach begin="1" end="${doccount}" varStatus="loop">
 									     <ul class="case-studies-tabbed-content-document-upload">
 									      <li class="case-studies-tabbed-content-document-upload-header">
-											<strong>Case Study Document File<span class="case-studies-tabbed-content-document-upload-position">${loop.count}</span>:</strong>
+											<b>Document File<span class="case-studies-tabbed-content-document-upload-position">${loop.count}</span>:</b>
 											<a href="#" class="case-studies-tabbed-content-button-remove-document-${loop.count}">[remove]</a>
 										  </li>
 										  
 										  <li>
-											<p><strong><em>Upload Document File <span class="case-studies-tabbed-content-document-upload-position">${loop.count}</span>:</em></strong></p>
+											<p><b><em>Upload Document File <span class="case-studies-tabbed-content-document-upload-position">${loop.count}</span>:</em></b></p>
 											<div class="inputfile"><input name="supdocfiles${loop.count }" type="file" /></div>
 										  </li>
 										  
 										  <li>
-											<p><strong><em>Additional Document Files <span class="case-studies-tabbed-content-document-upload-position">${loop.count}</span>:</em></strong></p>
+											<p><b><em>Additional Document Files <span class="case-studies-tabbed-content-document-upload-position">${loop.count}</span>:</em></b></p>
 											<p>Brief name of file (required - 150 char limit)</p>
 											<div class="inputfilename"><input type="text" name="sup_docs_names${loop.count}" size="30" maxlength="150" value="${sdocnames[loop.count - 1]}"></div>
 										  </li>
 										  
 										  <li>
-											<p><strong><span class="red">*</span> <em>Description of Document File <span class="case-studies-tabbed-content-document-upload-position">${loop.count}</span>:</em></strong></p>
+											<p><b><span class="red">*</span> <em>Description of Document File <span class="case-studies-tabbed-content-document-upload-position">${loop.count}</span>:</em></b></p>
 											<p>This field is required if a file is included. Briefly describe the file (required - 250 char limit)</p>
 											<div class="inputfiledescription"><textarea cols="40" rows="10" name="sup_docs_description${loop.count}" data-maxlength="250">${sdocdesc[loop.count - 1]}</textarea></div>
 										  </li>
@@ -803,19 +803,19 @@
 								       <input name="doccounter" id="doccounter" type="hidden" value="1" />
 									   <ul class="case-studies-tabbed-content-document-upload">
 										<li class="case-studies-tabbed-content-document-upload-header">
-											<strong>Case Study Document File <span class="case-studies-tabbed-content-document-upload-position">1</span>:</strong>
+											<b>Document File <span class="case-studies-tabbed-content-document-upload-position">1</span>:</b>
 										</li>
 										<li>
-											<p><strong><em>Upload Document File <span class="case-studies-tabbed-content-document-upload-position">1</span>:</em></strong></p>
+											<p><b><em>Upload Document File <span class="case-studies-tabbed-content-document-upload-position">1</span>:</em></b></p>
 											<div class="inputfile"><input name="supdocfiles1" type="file" /></div>
 										</li>
 										<li>
-											<p><strong><em>Additional Document Files <span class="case-studies-tabbed-content-document-upload-position">1</span> Label:</em></strong></p>
+											<p><b><em>Additional Document Files <span class="case-studies-tabbed-content-document-upload-position">1</span> Label:</em></b></p>
 											<p>Brief name of file (required - 150 char limit)</p>
 											<div class="inputfilename"><input type="text" name="sup_docs_names1" size="30" maxlength="150" value=""></div>
 										</li>
 										<li>
-											<p><strong><span class="red">*</span> <em>Description of Document File <span class="case-studies-tabbed-content-document-upload-position">1</span>:</em></strong></p>
+											<p><b><span class="red">*</span> <em>Description of Document File <span class="case-studies-tabbed-content-document-upload-position">1</span>:</em></b></p>
 											<p>This field is required if a file is included. Briefly describe the file (required - 250 char limit) </p>
 											<div class="inputfiledescription"><textarea cols="40" rows="10" name="sup_docs_description1" data-maxlength="250"></textarea></div>
 										</li>
@@ -839,11 +839,11 @@
 	<div class="case-studies-tabbed-content-header">Geographic Information</div>
 	 <br/>
 	 <div class="case-studies-tabbed-content-section"> 
-	   <div class="case-studies-tabbed-content-subheader">Geographic Characterization</div>
+	   <div class="case-studies-tabbed-content-subheader">Geographic Characterisation</div>
 	   <liferay-ui:error key="geo-characterization-required" message="Geo Characterization Required" />
 	   <ul>
 			<li>
-				<p><em>Select the characterization for this case study</em></p>
+				<p><em>Select the characterisation for this case study</em></p>
         <ul class="one-col">
 										   <%
 										        ArrayList subnationalRegions = new ArrayList();
@@ -969,8 +969,8 @@
 										               </c:when>
 										             
 											          <c:when test="${geoCharElement == 'MACRO_TRANSNATIONAL_REGION'}" >
-											           <div class="europe_geochar_class">	<!-- important - starting div for europe_geochar_class -->
-											               <label for="rad_geochars_${geoCharElement}"><strong><liferay-ui:message key="acesearch-geochars-lbl-${geoCharElement}" /></strong></label>
+											           <div class="europe_geochar_class" style="overflow:inherit">	<!-- important - starting div for europe_geochar_class -->
+											               <label for="rad_geochars_${geoCharElement}"><b><liferay-ui:message key="acesearch-geochars-lbl-${geoCharElement}" /></b></label>
 											               <table class="case-studies-tabbed-content-table-for-translists">
                                                              <tr>
                                                                 <td width="45%">
@@ -996,7 +996,7 @@
 													    
 												        <c:when test="${geoCharElement == 'BIOGRAPHICAL_REGION'}" >
 												          <div class="europe_geochar_class">	<!-- important - starting div for europe_geochar_class -->
-												           <label for="rad_geochars_${geoCharElement}"><strong><liferay-ui:message key="acesearch-geochars-lbl-${geoCharElement}" /></strong></label>
+												           <label for="rad_geochars_${geoCharElement}"><b><liferay-ui:message key="acesearch-geochars-lbl-${geoCharElement}" /></b></label>
 											               
 												           <table class="case-studies-tabbed-content-table-for-translists">
                                                            <tr>
@@ -1023,7 +1023,7 @@
 										               
 										              <c:when test="${geoCharElement ==  'COUNTRIES'}" >
 										               <div class="europe_geochar_class">	<!-- important - starting div for europe_geochar_class -->
-										                    <label for="rad_geochars_${geoCharElement}"><strong><liferay-ui:message key="acesearch-geochars-lbl-${geoCharElement}" /></strong></label>
+										                    <label for="rad_geochars_${geoCharElement}"><b><liferay-ui:message key="acesearch-geochars-lbl-${geoCharElement}" /></b></label>
 											               
 															<ul>
 																<li>
@@ -1054,7 +1054,7 @@
 										              
 											           <c:when test="${geoCharElement == 'SUBNATIONAL'}" >
 											            <div class="europe_geochar_class">	<!-- important - starting div for europe_geochar_class -->
-											               <label for="rad_geochars_${geoCharElement}"><strong><liferay-ui:message key="acesearch-geochars-lbl-${geoCharElement}" />:</strong></label>
+											               <label for="rad_geochars_${geoCharElement}"><b><liferay-ui:message key="acesearch-geochars-lbl-${geoCharElement}" />:</b></label>
 											               <p>
 											               <table class="case-studies-tabbed-content-table-for-lists">
                                                              <tr>
@@ -1089,7 +1089,7 @@
 										               </c:when>
 										               <c:when test="${geoCharElement == 'CITY'}" >
 										                <div class="europe_geochar_class">	<!-- important - starting div for europe_geochar_class -->
-										                 <label for="rad_geochars_${geoCharElement}"><strong><liferay-ui:message key="acesearch-geochars-lbl-${geoCharElement}" /></strong></label>
+										                 <label for="rad_geochars_${geoCharElement}"><b><liferay-ui:message key="acesearch-geochars-lbl-${geoCharElement}" /></b></label>
 										                 <span class="case-studies-tabbed-content-text-for-geochars"><input class="shared_form_city" type="text" size="50" maxlength="50" value="${city}" /></span>
 										                 </div> <!-- important - closing div for europe_geochar_class -->
 										               </c:when>
@@ -1102,7 +1102,7 @@
 									</li>
 								</ul>	
 		   </div> 
-		   
+		   <br/><br/>
 		   <div class="case-studies-tabbed-content-section">
 		        <div class="case-studies-tabbed-content-header"><em>Comments</em></div>
 						   <p><em>Comments about this database item <i>[information entered below will not be displayed on the public pages of climate-adapt]</i></em></p>
@@ -1119,7 +1119,7 @@
 						       }
 						       
 						   %>
-						   <textarea cols="125" rows="10" name="authorcomment" style="border-color: blue; border-style: solid; border-width: thin;"><%=comments %></textarea>
+						   <textarea cols="100" rows="10" name="authorcomment" style="border-color: blue; border-style: solid; border-width: thin;"><%=comments %></textarea>
 			</div>
 		   
 		   <div class="case-studies-tabbed-content-button-row">
@@ -1143,7 +1143,7 @@
 	<% } %>
      
 		    <div class="case-studies-tabbed-content-header"><em>Review &amp; Submit for Review Process</em></div>	
-			<p>Review the <%=aceitemType %> and submit the <%=aceitemType %> for <a href="#">review</a> for inclusion in the Climate- ADAPT Database. <strong>Note</strong> This preview page may appear slightly more narrow than the actual display. After this <%=aceitemType%> has been added to the database, the <%=aceitemType%> page will display slightly wider than it appears below.</p>
+			<p>Review the <%=aceitemType %> and submit the <%=aceitemType %> for <a href="#">review</a> for inclusion in the Climate- ADAPT Database. <b>Note</b> This preview page may appear slightly more narrow than the actual display. After this <%=aceitemType%> has been added to the database, the <%=aceitemType%> page will display slightly wider than it appears below.</p>
 
 			  <div class="case-studies-tabbed-content-button-row">
 					<a href="#" class="case-studies-tabbed-content-button-green case-studies-tabbed-content-button-previous case-studies-tabbed-content-float-left">Back To Geographical Information</a>
@@ -1164,7 +1164,7 @@
 									<div class="case-studies-tabbed-content-section">
 										<ul>
 											<!--  <li>
-												<p><strong><em><%=aceitemType %> Description</em></strong></p>
+												<p><b><em><%=aceitemType %> Description</em></b></p>
 												<ul class="case-studies-tabbed-content-bullted-list">
 													<li><a href="#climate_impacts_anchor">Climate Impacts</a></li>
 													<li><a href="#sector_policies_anchor">Sector Policies</a></li>
@@ -1172,7 +1172,7 @@
 											</li> -->
 											
 											<li>
-												<p><strong><em>Reference Information</em></strong></p>
+												<p><b><em>Reference Information</em></b></p>
 												<ul class="case-studies-tabbed-content-bullted-list">
 													<li><a href="#website_anchor">Websites</a></li>
 												   <%  if (Validator.isNotNull(aceitem.getSource())) { %>
@@ -1190,7 +1190,7 @@
 										<div class="case-studies-tabbed-content-subheader">Reference Information</div>
 										<ul>
 											<li>
-												<a name="website_anchor"><strong><em>Websites</em></strong></a>
+												<a name="website_anchor"><b><em>Websites</em></b></a>
 												<p><%=aceitem.getStoredAt() %></p>
 												<div class="case-studies-form-clearing"></div>
 											</li>
@@ -1198,7 +1198,7 @@
 										<% if (Validator.isNotNull(aceitem.getSource()))
 										   {%>	
 												<li>
-													<a name="source_anchor"><strong><em>Source</em></strong></a>
+													<a name="source_anchor"><b><em>Source</em></b></a>
 												
 												    <%=aceitem.getSource() %>
 												    
@@ -1217,7 +1217,7 @@
 								   if (Validator.isNotNull(aceitem.getSupdocs())) { %>
 								   
 									    <div clas="case-studies-tabbed-content-review-column-right-section">
-										<p><strong>Case Study Documents</strong></p>
+										<p><b>Documents</b></p>
 										<ul class="case-studies-tabbed-content-bullted-list">
 										 
 								 <% 
@@ -1240,12 +1240,12 @@
 								<% } // end of if %>
 								
 									<div class="case-studies-tabbed-content-review-column-right-section">
-										<p><strong>Keywords</strong></p>
+										<p><b>Keywords</b></p>
 										<p><%= aceitem.getKeyword() %></p>
 									</div>
 									
 									<div class="case-studies-tabbed-content-review-column-right-section">
-										<p><strong>Climate impacts</strong></p>
+										<p><b>Climate impacts</b></p>
 										   <%
 												    String[] climateImpactsAry = null;
 												    if (Validator.isNotNull(aceitem.getClimateimpacts_()))
@@ -1265,7 +1265,7 @@
 									</div>
 
 									<div class="case-studies-tabbed-content-review-column-right-section">
-										<p><strong>Sectors</strong></p>
+										<p><b>Sectors</b></p>
 										    <%
 												    
 												    String[] sectorAry = null;
@@ -1285,7 +1285,7 @@
 									</div>
 
 									<div class="case-studies-tabbed-content-review-column-right-section">
-										<p><strong>Geographic Characterization</strong></p>
+										<p><b>Geographic Characterisation</b></p>
 										<p>
 										     <c:choose>
 												     <c:when test="${geoElementSelected eq 'GLOBAL'}">

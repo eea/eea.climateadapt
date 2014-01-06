@@ -76,7 +76,7 @@
     </portlet:renderURL>
 
     <%-- Display the button that links to the page where a new ace item can be added. --%>
-    <aui:button value="Add" onClick="<%=addAceItemURL.toString()%>"/>
+    <!--<aui:button value="Add" onClick="<%=//addAceItemURL.toString()%>"/>-->
 
     <%-- Submits aceItemsForm. In order to get submit value at server side, had to override the --%>
     <%-- button's onClick which sets the value to a hidden input. --%>

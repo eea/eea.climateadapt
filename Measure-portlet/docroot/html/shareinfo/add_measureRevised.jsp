@@ -463,7 +463,7 @@
 									  <!-- end of approved check box -->
 									  
 									  <li>
-									  <p><strong><em>Featured <%=nameOfClimateEntityShortText %>:</em></strong></p>
+									  <p><b><em>Featured <%=nameOfClimateEntityShortText %>:</em></b></p>
 										<%
 										         String choosenfeature = "";
 										         if (measure == null )
@@ -603,7 +603,7 @@
 									        	 textSize = "50";
 									         }
 									    %>
-										<p><strong><span class="red">*</span> <em><%=localDescription%></em></strong></p>
+										<p><b><span class="red">*</span> <em><%=localDescription%></em></b></p>
 										<% if (measure != null) { %>
 		                                      <input name="name" type="text" size="75" maxlength="<%=textSize %>" value="<%= measure.getName() %>" /><br /><br />
 										<%} else {
@@ -645,7 +645,7 @@
 									         }
 									    %>
 									    <liferay-ui:error key="description-required" message="description-required" />	
-										<p><strong><span class="red">*</span> <em>Brief Description:</em></strong></p>
+										<p><b><span class="red">*</span> <em>Brief Description:</em></b></p>
 										<p><%=localDescription%></p>
 											
 										<% if (measure != null && measure.getDescription() != null) { %>
@@ -671,7 +671,7 @@
 									</li>
 									<li>
 									    <liferay-ui:error key="climateImpacts-required" message="climateImpacts-required" />	
-										<p><strong><span class="red">*</span> <em>Climate Impacts:</em></strong></p>
+										<p><b><span class="red">*</span> <em>Climate Impacts:</em></b></p>
 										<% if (mao_type.equalsIgnoreCase("A")) { %>
 										   <p>Select one or more climate change impact topics that this case study covers.</p>
 										<%} else { %>
@@ -724,7 +724,7 @@
 								    <% if (mao_type.equalsIgnoreCase("A")) { %> <!-- if measure -->
 									<li>
 									    <liferay-ui:error key="challenges-required" message="challenges-required" />
-										<p><strong><span class="red">*</span> <em>Challenges:</em></strong></p>
+										<p><b><span class="red">*</span> <em>Challenges:</em></b></p>
 										<p>Describe how this case study addresses climate change impacts/risks and related challenges,. 
 										   including  also key environmental and socio-economic issues and geographical characterisation, e.g. &apos;mountain area&apos; or &apos;coastal area&apos; etc (5,000 char limit).</p>
 										
@@ -753,7 +753,7 @@
 									
 									<li>
 									    <liferay-ui:error key="objectives-required" message="objectives-required" />
-										<p><strong><span class="red">*</span> <em>Objectives:</em></strong></p>
+										<p><b><span class="red">*</span> <em>Objectives:</em></b></p>
 										<p>Describe the objectives which triggered the adaptation measures (1000 char limit).</p>
 											<% if (measure != null && measure.getObjectives() != null) { %>
 											     <textarea id="<portlet:namespace />objectivesField" cols="40" rows="10" class="WYSIWYG" name="objectives" data-maxlength="1000"><%= measure.getObjectives()%></textarea>
@@ -779,7 +779,7 @@
 									
 									<li>
 									    <liferay-ui:error key="adaptationOptions-required" message="adaptationOptions-required" />
-										<p><strong><span class="red">*</span> <em>Adaptation Options Implemented In The Case:</em></strong></p>
+										<p><b><span class="red">*</span> <em>Adaptation Options Implemented In The Case:</em></b></p>
 										<p>Select one or more adaptation options that this case study addresses.</p>
 										<div class="scrolling-container">
 											<ul class="two-col">
@@ -828,7 +828,7 @@
 									
 									<li>
 									    <liferay-ui:error key="solutions-required" message="solutions-required" />
-										<p><strong><span class="red">*</span> <em>Solutions:</em></strong></p>
+										<p><b><span class="red">*</span> <em>Solutions:</em></b></p>
 										<p>Describe the climate change adaptation solution(s) implemented (5,000 char limit).</p>
 										
 										<% if (measure != null && Validator.isNotNull(measure.getSolutions())) { %>
@@ -855,7 +855,7 @@
 									</li>
 									<li>
 									    <liferay-ui:error key="relevance-required" message="relevance-required" />
-										<p><strong><span class="red">*</span> <em>Importance and Relevance of Adaptation :</em></strong></p>
+										<p><b><span class="red">*</span> <em>Importance and Relevance of Adaptation :</em></b></p>
 										<p>Select one or more descriptions below that best describes how relevant this case study is to Climate Adaptation.</p>
 										<ul class="one-col">
 										    <%
@@ -903,7 +903,7 @@
 									
 									<li>
 									    <liferay-ui:error key="keywords-required" message="keywords-required" />
-										<p><strong><span class="red">*</span> <em>Keywords:</em></strong></p>
+										<p><b><span class="red">*</span> <em>Keywords:</em></b></p>
 										<p>Describe and tag this <%=nameOfClimateEntityShortText.toLowerCase() %> with relevant keywords. Separate each keyword with a comma. For example, example keyword 1, example keyword 2  (1,000 char limit).</p>
 										
 										<% if (measure != null && Validator.isNotNull(measure.getKeywords())) { %>
@@ -931,7 +931,7 @@
 									
 									<li>
 									    <liferay-ui:error key="adaptationSector-required" message="adaptationSector-required" />
-										<p><strong><span class="red">*</span> <em>Relevant policy sectors</em></strong></p>
+										<p><b><span class="red">*</span> <em>Relevant policy sectors</em></b></p>
 										<% if (mao_type.equalsIgnoreCase("A")) { %>
 										   <p>Select one or more relevant sector policies that this case study explicitly covers.</p>
 										<% } else { %>
@@ -993,7 +993,7 @@
 									         }
 									   %>
 									    <liferay-ui:error key="year-required" message="year-required" />
-										<p><strong><%if (mao_type.equalsIgnoreCase("A")) { %><span class="red">*</span><%} %> <em>Year:</em></strong></p>
+										<p><b><%if (mao_type.equalsIgnoreCase("A")) { %><span class="red">*</span><%} %> <em>Year:</em></b></p>
 										<p><%=localDescription%></p>
 										
 										<% if (measure != null && Validator.isNotNull(measure.getYear())) { %>
@@ -1163,8 +1163,8 @@
 									    if (mao_type.equalsIgnoreCase("A"))
 										{ %>
 											<ul class="case-studies-tabbed-content-bullted-list">
-												<li>Describe the factors that were decisive for a successful implementation</li>
-												<li>Describe factors that hindered in the process and needed to be overcome.</li>
+												<li>The factors that were decisive for a successful implementation</li>
+												<li>The factors that hindered in the process and needed to be overcome.</li>
 											</ul>
 											(5,000 char limit)</p>
 										<%
@@ -1201,12 +1201,12 @@
 								<ul>
 								  	<li>
 								   <% if (mao_type.equalsIgnoreCase("A")) { %>
-										<p><em>Describe <strong>costs</strong> of this case study. Include:</em>
+										<p><em>Describe <b>costs</b> of this case study. Include:</em>
 										<ul class="case-studies-tabbed-content-bullted-list">
 											<li>Cost Estimates</li>
 											<li>Funding source (national/EU, name of source, e.g. Life+</li>
 										</ul>
-										<p>Describe the <strong>benefits</strong> of the case study:</p>
+										<p>Describe the <b>benefits</b> of the case study:</p>
 										<ul class="case-studies-tabbed-content-bullted-list">
 											<li>List all positive outcomes in relation to climate change adaptation</li>
 											<li>Co-benefits in other areas</li>
@@ -1267,8 +1267,8 @@
 										<p><em><%=localDescription %>:</em>
 										<% if (mao_type.equalsIgnoreCase("A")) { %>
 											<ul class="case-studies-tabbed-content-bullted-list">
-												<li>Describe the legislation framework from which the case originated.</li>
-												<li>Describe the relevant institutional opportunities.</li>
+												<li>The legislation framework from which the case originated.</li>
+												<li>The relevant institutional opportunities.</li>
 											</ul>
 											(5,000 char limit)
 										<% } %>
@@ -1372,7 +1372,7 @@
                                 <liferay-ui:error key="contact-required" message="contact-required" />
 								<ul>
 									<li>
-										<p><em>Contact of reference institution and persons) who is directly involved in the development and implementation of the case.</em> (500 char limit)</p>
+										<p><em>Contact of reference (institution and persons) who is directly involved in the development and implementation of the case.</em> (500 char limit)</p>
 										<% 
 										  String caseContact="";
 										  if (measure == null || Validator.isNull(measure.getContact())) {
@@ -1428,7 +1428,7 @@
 									    <% 
 									         if (mao_type.equalsIgnoreCase("A"))
 										     {
-									        	 localDescription = "Original source of the case study description. For example, the name of  certain projects, if the case study was taken from there.";
+									        	 localDescription = "Original source of the case study description. For example, the name of the project, if the case study was taken from there.";
 									         }
 									         else
 									         {
@@ -1561,24 +1561,24 @@
 								   <c:forEach begin="1" end="${photocount}" varStatus="loop">
 								     <ul class="case-studies-tabbed-content-photo-upload">
 								      <li class="case-studies-tabbed-content-photo-upload-header">
-										<strong>Case Study Illustration <span class="case-studies-tabbed-content-photo-upload-position">${loop.count}</span>:</strong>
+										<b>Case Study Illustration <span class="case-studies-tabbed-content-photo-upload-position">${loop.count}</span>:</b>
 										<a href="#" class="case-studies-tabbed-content-button-remove-photo-${loop.count}">[remove]</a>
 									  </li>
 									  
 									  <li>
-										<p><strong><em>Upload Case Study Illustration <span class="case-studies-tabbed-content-photo-upload-position">${loop.count}</span>:</em></strong></p>
+										<p><b><em>Upload Case Study Illustration <span class="case-studies-tabbed-content-photo-upload-position">${loop.count}</span>:</em></b></p>
 										<p><em>Uploaded illustration: ${imageNames[loop.count - 1]}</em></p>
 										<div class="inputfile"><input name="supphotofiles${loop.count }" type="file" /></div>
 									  </li>
 									  
 									  <li>
-										<p><strong><em>Case Study Illustration <span class="case-studies-tabbed-content-photo-upload-position">${loop.count}</span> Label:</em></strong></p>
+										<p><b><em>Case Study Illustration <span class="case-studies-tabbed-content-photo-upload-position">${loop.count}</span> Label:</em></b></p>
 										<p>Brief name of illustration (required - 150 char limit)</p>
 										<div class="inputfilename"><input type="text" name="sup_photos_names${loop.count}" size="30" maxlength="150" value="${sphotonames[loop.count - 1]}"></div>
 									  </li>
 									  
 									  <li>
-										<p><strong><em>Case Study Illustration <span class="case-studies-tabbed-content-photo-upload-position">${loop.count}</span> - Description of Illustration:</em></strong></p>
+										<p><b><em>Case Study Illustration <span class="case-studies-tabbed-content-photo-upload-position">${loop.count}</span> - Description of Illustration:</em></b></p>
 										<div class="inputfiledescription"><textarea cols="40" rows="10" name="sup_photos_description${loop.count}" data-maxlength="250">${sphotodesc[loop.count - 1]}</textarea></div>
 										
 									  </li>
@@ -1595,21 +1595,21 @@
 								       <input name="photocounter" id="photocounter" type="hidden" value="1" />
 									   <ul class="case-studies-tabbed-content-photo-upload">
 										<li class="case-studies-tabbed-content-photo-upload-header">
-											<strong>Case Study Illustration <span class="case-studies-tabbed-content-photo-upload-position">1</span>:</strong>
+											<b>Case Study Illustration <span class="case-studies-tabbed-content-photo-upload-position">1</span>:</b>
 										</li>
 										<li>
 										   
-											<p><strong><em>Upload Case Study Illustration <span class="case-studies-tabbed-content-photo-upload-position">1</span>:</em></strong></p>
+											<p><b><em>Upload Case Study Illustration <span class="case-studies-tabbed-content-photo-upload-position">1</span>:</em></b></p>
 											<div class="inputfile"><input name="supphotofiles1" type="file" /></div>
 											
 										</li>
 										<li>
-											<p><strong><em>Additional Case Study Illustration <span class="case-studies-tabbed-content-photo-upload-position">1</span> Label:</em></strong></p>
+											<p><b><em>Additional Case Study Illustration <span class="case-studies-tabbed-content-photo-upload-position">1</span> Label:</em></b></p>
 											<p>Brief name of illustration (required - 150 char limit)</p>
 											<div class="inputfilename"><input type="text" name="sup_photos_names1" size="30" maxlength="150" value=""></div>
 										</li>
 										<li>
-											<p><strong><em>Case Study Illustration <span class="case-studies-tabbed-content-photo-upload-position">1</span> - Description of Illustration:</em></strong></p>
+											<p><b><em>Case Study Illustration <span class="case-studies-tabbed-content-photo-upload-position">1</span> - Description of Illustration:</em></b></p>
 											<div class="inputfiledescription"><textarea cols="40" rows="10" name="sup_photos_description1" data-maxlength="250"></textarea></div>
 										</li>
 									</ul>
@@ -1688,23 +1688,23 @@
 								   <c:forEach begin="1" end="${doccount}" varStatus="loop">
 									     <ul class="case-studies-tabbed-content-document-upload">
 									      <li class="case-studies-tabbed-content-document-upload-header">
-											<strong>Case Study Document File<span class="case-studies-tabbed-content-document-upload-position">${loop.count}</span>:</strong>
+											<b>Case Study Document File<span class="case-studies-tabbed-content-document-upload-position">${loop.count}</span>:</b>
 											<a href="#" class="case-studies-tabbed-content-button-remove-document-${loop.count}">[remove]</a>
 										  </li>
 										  
 										  <li>
-											<p><strong><em>Upload Document File <span class="case-studies-tabbed-content-document-upload-position">${loop.count}</span>:</em></strong></p>
+											<p><b><em>Upload Document File <span class="case-studies-tabbed-content-document-upload-position">${loop.count}</span>:</em></b></p>
 											<div class="inputfile"><input name="supdocfiles${loop.count }" type="file" /></div>
 										  </li>
 										  
 										  <li>
-											<p><strong><em>Additional Document Files <span class="case-studies-tabbed-content-document-upload-position">${loop.count}</span>:</em></strong></p>
+											<p><b><em>Additional Document Files <span class="case-studies-tabbed-content-document-upload-position">${loop.count}</span>:</em></b></p>
 											<p>Brief name of file (required - 150 char limit)</p>
 											<div class="inputfilename"><input type="text" name="sup_docs_names${loop.count}" size="30" maxlength="150" value="${sdocnames[loop.count - 1]}"></div>
 										  </li>
 										  
 										  <li>
-											<p><strong><span class="red">*</span> <em>Description of Document File <span class="case-studies-tabbed-content-document-upload-position">${loop.count}</span>:</em></strong></p>
+											<p><b><span class="red">*</span> <em>Description of Document File <span class="case-studies-tabbed-content-document-upload-position">${loop.count}</span>:</em></b></p>
 											<p>This field is required if a file is included. Briefly describe the file (required - 250 char limit)</p>
 											<div class="inputfiledescription"><textarea cols="40" rows="10" name="sup_docs_description${loop.count}" data-maxlength="250">${sdocdesc[loop.count - 1]}</textarea></div>
 										  </li>
@@ -1720,19 +1720,19 @@
 								       <input name="doccounter" id="doccounter" type="hidden" value="1" />
 									   <ul class="case-studies-tabbed-content-document-upload">
 										<li class="case-studies-tabbed-content-document-upload-header">
-											<strong>Case Study Document File <span class="case-studies-tabbed-content-document-upload-position">1</span>:</strong>
+											<b>Case Study Document File <span class="case-studies-tabbed-content-document-upload-position">1</span>:</b>
 										</li>
 										<li>
-											<p><strong><em>Upload Document File <span class="case-studies-tabbed-content-document-upload-position">1</span>:</em></strong></p>
+											<p><b><em>Upload Document File <span class="case-studies-tabbed-content-document-upload-position">1</span>:</em></b></p>
 											<div class="inputfile"><input name="supdocfiles1" type="file" /></div>
 										</li>
 										<li>
-											<p><strong><em>Additional Document Files <span class="case-studies-tabbed-content-document-upload-position">1</span> Label:</em></strong></p>
+											<p><b><em>Additional Document Files <span class="case-studies-tabbed-content-document-upload-position">1</span> Label:</em></b></p>
 											<p>Brief name of file (required - 150 char limit)</p>
 											<div class="inputfilename"><input type="text" name="sup_docs_names1" size="30" maxlength="150" value=""></div>
 										</li>
 										<li>
-											<p><strong><span class="red">*</span> <em>Description of Document File <span class="case-studies-tabbed-content-document-upload-position">1</span>:</em></strong></p>
+											<p><b><span class="red">*</span> <em>Description of Document File <span class="case-studies-tabbed-content-document-upload-position">1</span>:</em></b></p>
 											<p>This field is required if a file is included. Briefly describe the file (required - 250 char limit) </p>
 											<div class="inputfiledescription"><textarea cols="40" rows="10" name="sup_docs_description1" data-maxlength="250"></textarea></div>
 										</li>
@@ -1753,8 +1753,11 @@
 							</div>
 						</li>
 					
-						
+					<% if (mao_type.equalsIgnoreCase("A")) { %>
 						<li id="liforgeo" class="active">
+					<% } else { %>
+					   <li>
+					<%} %>
 							<div class="case-studies-tabbed-content-header"><%=nameOfClimateEntityShortText %>  - <em>Geographic Information</em></div>
 
 							<div class="case-studies-tabbed-content-section">
@@ -1835,11 +1838,11 @@
 							
 							
 							<div class="case-studies-tabbed-content-section">
-								<div class="case-studies-tabbed-content-subheader">Geographic Characterization</div>
+								<div class="case-studies-tabbed-content-subheader">Geographic Characterisation</div>
 								<liferay-ui:error key="geo-characterization-required" message="geo-characterization-required" />
 								<ul>
 									<li>
-										<p><em>Select the characterization for this case study</em></p>
+										<p><em>Select the characterisation for this case study</em></p>
 										<ul class="one-col">
 										   <%
 										        ArrayList subnationalRegions = new ArrayList();
@@ -1966,8 +1969,8 @@
 										               </c:when>
 										             
 											           <c:when test="${geoCharElement == 'MACRO_TRANSNATIONAL_REGION'}" >
-											              <div class="europe_geochar_class">	<!-- important - starting div for europe_geochar_class -->
-											               <label for="rad_geochars_${geoCharElement}"><strong><liferay-ui:message key="acesearch-geochars-lbl-${geoCharElement}" /></strong></label>
+											              <div class="europe_geochar_class" style="overflow:inherit">	<!-- important - starting div for europe_geochar_class -->
+											               <label for="rad_geochars_${geoCharElement}"><b><liferay-ui:message key="acesearch-geochars-lbl-${geoCharElement}" /></b></label>
 											               <table class="case-studies-tabbed-content-table-for-translists">
                                                              <tr>
                                                                 <td width="45%">
@@ -1993,7 +1996,7 @@
 													    
 												        <c:when test="${geoCharElement == 'BIOGRAPHICAL_REGION'}" >
 												          <div class="europe_geochar_class">	<!-- important - starting div for europe_geochar_class -->
-												           <label for="rad_geochars_${geoCharElement}"><strong><liferay-ui:message key="acesearch-geochars-lbl-${geoCharElement}" /></strong></label>
+												           <label for="rad_geochars_${geoCharElement}"><b><liferay-ui:message key="acesearch-geochars-lbl-${geoCharElement}" /></b></label>
 											               
 												           <table class="case-studies-tabbed-content-table-for-translists">
                                                            <tr>
@@ -2020,7 +2023,7 @@
 										               
 										              <c:when test="${geoCharElement ==  'COUNTRIES'}" >
 										                  <div class="europe_geochar_class">	<!-- important - starting div for europe_geochar_class -->
-										                    <label for="rad_geochars_${geoCharElement}"><strong><liferay-ui:message key="acesearch-geochars-lbl-${geoCharElement}" /></strong></label>
+										                    <label for="rad_geochars_${geoCharElement}"><b><liferay-ui:message key="acesearch-geochars-lbl-${geoCharElement}" /></b></label>
 											               
 															<ul>
 																<li>
@@ -2051,7 +2054,7 @@
 										              
 											           <c:when test="${geoCharElement == 'SUBNATIONAL'}" >
 											              <div class="europe_geochar_class">	<!-- important - starting div for europe_geochar_class -->
-											               <label for="rad_geochars_${geoCharElement}"><strong><liferay-ui:message key="acesearch-geochars-lbl-${geoCharElement}" />:</strong></label>
+											               <label for="rad_geochars_${geoCharElement}"><b><liferay-ui:message key="acesearch-geochars-lbl-${geoCharElement}" />:</b></label>
 											               <p>
 											               <table class="case-studies-tabbed-content-table-for-lists">
                                                              <tr>
@@ -2086,7 +2089,7 @@
 										               </c:when>
 										               <c:when test="${geoCharElement == 'CITY'}" >
 										                <div class="europe_geochar_class">	<!-- important - starting div for europe_geochar_class -->
-										                 <label for="rad_geochars_${geoCharElement}"><strong><liferay-ui:message key="acesearch-geochars-lbl-${geoCharElement}" /></strong></label>
+										                 <label for="rad_geochars_${geoCharElement}"><b><liferay-ui:message key="acesearch-geochars-lbl-${geoCharElement}" /></b></label>
 										                 <span class="case-studies-tabbed-content-text-for-geochars"><input class="shared_form_city" type="text" size="50" maxlength="50" value="${city}" /></span>
 										                </div>  <!-- important - closing div for europe_geochar_class -->
 										               </c:when>
@@ -2271,7 +2274,7 @@
 						 <% } %>
 						    
 							<div class="case-studies-tabbed-content-header"><%=nameOfClimateEntityShortText %> - <em>Review &amp; Submit for Review Process</em></div>
-							<p>Review the <%=nameOfClimateEntityShortText.toLowerCase() %> and submit the <%=nameOfClimateEntityShortText.toLowerCase() %> for <a href="#">review</a> for inclusion in the Climate- ADAPT Database. <strong>Note</strong> This preview page may appear slightly more narrow than the actual display. After this <%=nameOfClimateEntityShortText.toLowerCase() %> has been added to the database, the <%=nameOfClimateEntityShortText.toLowerCase() %> page will display slightly wider than it appears below.</p>
+							<p>Review the <%=nameOfClimateEntityShortText.toLowerCase() %> and submit the <%=nameOfClimateEntityShortText.toLowerCase() %> for <a href="#">review</a> for inclusion in the Climate- ADAPT Database. <b>Note</b> This preview page may appear slightly more narrow than the actual display. After this <%=nameOfClimateEntityShortText.toLowerCase() %> has been added to the database, the <%=nameOfClimateEntityShortText.toLowerCase() %> page will display slightly wider than it appears below.</p>
 
 							<div class="case-studies-tabbed-content-button-row">
 								<a href="#" class="case-studies-tabbed-content-button-green case-studies-tabbed-content-button-previous case-studies-tabbed-content-float-left">Back To Geographical Information</a>
@@ -2314,7 +2317,7 @@
 										<ul>
 										    <% if (mao_type.equalsIgnoreCase("A")) { %>
 											<li>
-												<p><strong><em><%=nameOfClimateEntityShortText %> Description</em></strong></p>
+												<p><b><em><%=nameOfClimateEntityShortText %> Description</em></b></p>
 												<ul class="case-studies-tabbed-content-bullted-list">													<li><a href="#challenges_anchor">Challenges</a></li>
 													<li><a href="#objectives_anchor">Objectives</a></li>
 													<li><a href="#adapt_options_anchor">Adaptation Options Implemented In This Case</a></li>
@@ -2329,7 +2332,7 @@
 												    || Validator.isNotNull(measure.getCostbenefit()) || Validator.isNotNull(measure.getLegalaspects()) || Validator.isNotNull(measure.getImplementationtime())
 												    || Validator.isNotNull(measure.getLifetime()) ) {  %>
 											<li>
-												<p><strong><em>Additional Details</em></strong></p>
+												<p><b><em>Additional Details</em></b></p>
 												<ul class="case-studies-tabbed-content-bullted-list">
 												  <%  if (Validator.isNotNull(measure.getCategory())) { %>
 													<li><a href="#category_anchor">Category</a></li>
@@ -2363,7 +2366,7 @@
 										   <% } %>
 											
 											<li>
-												<p><strong><em>Reference Information</em></strong></p>
+												<p><b><em>Reference Information</em></b></p>
 												<ul class="case-studies-tabbed-content-bullted-list">
 												   	<% if (mao_type.equalsIgnoreCase("A")) { %>
 													<li><a href="#contact_anchor">Contact</a></li>
@@ -2384,19 +2387,19 @@
 										<ul>
 										<% if (mao_type.equalsIgnoreCase("A")) { %>
 											<li>
-												<a name="challenges_anchor"><strong><em>Challenges</em></strong></a>
+												<a name="challenges_anchor"><b><em>Challenges</em></b></a>
 												   <p><%=measure.getChallenges() %></p>
 												<div class="case-studies-form-clearing"></div>
 											</li>
 											
 											<li>
-												<a name="objectives_anchor"><strong><em>Objectives</em></strong></a>
+												<a name="objectives_anchor"><b><em>Objectives</em></b></a>
 												   <p><%=measure.getObjectives()%></p>
 												<div class="case-studies-form-clearing"></div>
 											</li>
 											
 											<li>
-												<a name="adapt_options_anchor"><strong><em>Adaptation Options</em></strong></a>
+												<a name="adapt_options_anchor"><b><em>Adaptation Options</em></b></a>
 												<%
 												  //Listing all adaptation options
 											      String[] adaptOptionsAry = null;
@@ -2435,13 +2438,13 @@
 											</li>
 											
 											<li>
-												<a name="solutions_anchor"><strong><em>Solutions</em></strong></a>
+												<a name="solutions_anchor"><b><em>Solutions</em></b></a>
 												<p><%=measure.getSolutions() %></p>
 												<div class="case-studies-form-clearing"></div>
 											</li>
 											
 											<li>
-												<a name="relevance_anchor"><strong><em>Relevance</em></strong></a>
+												<a name="relevance_anchor"><b><em>Relevance</em></b></a>
 												<%
 												    
 												    String[] relevanceAry = null;
@@ -2478,7 +2481,7 @@
 										<% if (Validator.isNotNull(measure.getCategory()))
 										{%>
 											<li>
-												<a name="category_anchor"><strong><em>Category</em></strong></a>
+												<a name="category_anchor"><b><em>Category</em></b></a>
 												
 												<%
 												   ArrayList catSelected = new ArrayList();
@@ -2507,7 +2510,7 @@
 										 <% if (Validator.isNotNull(measure.getStakeholderparticipation()))
 											{%>
 												<li>
-													<a name="stake_holder_anchor"><strong><em>Stakeholder Participation</em></strong></a>
+													<a name="stake_holder_anchor"><b><em>Stakeholder Participation</em></b></a>
 												
 												    <p><%=measure.getStakeholderparticipation() %></p>
 												    
@@ -2519,7 +2522,7 @@
 									 <% if (Validator.isNotNull(measure.getSucceslimitations()))
 										{%>
 											<li>
-												<a name="success_limitations_anchor"><strong><em>Success and Limiting Factors</em></strong></a>
+												<a name="success_limitations_anchor"><b><em>Success and Limiting Factors</em></b></a>
 											
 											    <p><%=measure.getSucceslimitations() %></p>
 											    
@@ -2530,7 +2533,7 @@
 									 <% if (Validator.isNotNull(measure.getCostbenefit()))
 										{%>	
 											<li>
-												<a name="cost_benefit_anchor"><strong><em>Costs and Benefits</em></strong></a>
+												<a name="cost_benefit_anchor"><b><em>Costs and Benefits</em></b></a>
 											
 											    <p><%=measure.getCostbenefit() %></p>
 											    
@@ -2541,7 +2544,7 @@
 										<% if (Validator.isNotNull(measure.getLegalaspects()))
 										   {%>	
 												<li>
-													<a name="legal_aspect_anchor"><strong><em>Legal Aspects</em></strong></a>
+													<a name="legal_aspect_anchor"><b><em>Legal Aspects</em></b></a>
 												
 												    <p><%=measure.getLegalaspects() %></p>
 												    
@@ -2552,7 +2555,7 @@
 										<% if (Validator.isNotNull(measure.getImplementationtime()))
 										   {%>	
 												<li>
-													<a name="implementation_time_anchor"><strong><em>Implementation Time</em></strong></a>
+													<a name="implementation_time_anchor"><b><em>Implementation Time</em></b></a>
 												
 												    <p><%=measure.getImplementationtime() %></p>
 												    
@@ -2563,7 +2566,7 @@
 										  <% if (Validator.isNotNull(measure.getLifetime()))
 										   {%>	
 												<li>
-													<a name="life_time_anchor"><strong><em>Life Time</em></strong></a>
+													<a name="life_time_anchor"><b><em>Life Time</em></b></a>
 												
 												    <p><%=measure.getLifetime() %></p>
 												    
@@ -2579,14 +2582,14 @@
 										<ul>
 										   	<% if (mao_type.equalsIgnoreCase("A")) { %>
 												<li>
-													<a name="contact_anchor"><strong><em>Contact</em></strong></a>
+													<a name="contact_anchor"><b><em>Contact</em></b></a>
 													<p><%=measure.getContact() %></p>
 													<div class="case-studies-form-clearing"></div>
 												</li>
 										    <% } %>
 											
 											<li>
-												<a name="website_anchor"><strong><em>Websites</em></strong></a>
+												<a name="website_anchor"><b><em>Websites</em></b></a>
 												<%
 												   // replacing the <p> tag
 												   String websiteForReview = measure.getWebsite();
@@ -2603,7 +2606,7 @@
 										<% if (Validator.isNotNull(measure.getSource()))
 										   {%>	
 												<li>
-													<a name="source_anchor"><strong><em>Source</em></strong></a>
+													<a name="source_anchor"><b><em>Source</em></b></a>
 												
 												    <p><%=measure.getSource() %></p>
 												    
@@ -2682,7 +2685,7 @@
 								   if (Validator.isNotNull(measure.getSupdocs())) { %>
 								   
 									    <div clas="case-studies-tabbed-content-review-column-right-section">
-										<p><strong>Case Study Documents</strong></p>
+										<p><b>Case Study Documents</b></p>
 										<ul class="case-studies-tabbed-content-bullted-list">
 										 
 								 <% 
@@ -2705,7 +2708,7 @@
 								<% } // end of if %>
 
 									<div class="case-studies-tabbed-content-review-column-right-section">
-										<p><strong>Keywords</strong></p>
+										<p><b>Keywords</b></p>
 										<p><%=measure.getKeywords() %></p>
 									</div>
 									
@@ -2721,7 +2724,7 @@
 									    pageContext.setAttribute("climateImpactsForReview", climateImpactsAry);
 										
 										%>
-											<p><strong>Climate impacts</strong></p>
+											<p><b>Climate impacts</b></p>
 											   <c:forEach var="climate" items="${climateImpactsForReview}">
 													       <p><liferay-ui:message key="aceitem-climateimpacts-lbl-${climate}" /></p>
 										       </c:forEach>
@@ -2740,14 +2743,14 @@
 												   
 										%>
 										
-										<p><strong>Sectors</strong></p>
+										<p><b>Sectors</b></p>
 											<c:forEach var="sector" items="${sectorForReview}">
 												  <p><liferay-ui:message key="acesearch-sectors-lbl-${sector}" /></p>
 										    </c:forEach>
 									</div>
 
 									<div class="case-studies-tabbed-content-review-column-right-section">
-										<p><strong>Geographic characterisation</strong></p>
+										<p><b>Geographic characterisation</b></p>
 										<p>
 										     <c:choose>
 												     <c:when test="${geoElementSelected eq 'GLOBAL'}">

@@ -4,6 +4,8 @@
 
 <script type="text/javascript">
 
+
+
    function submitIfEnter(event)
    {
 	   if (event && event.keyCode == 13)
@@ -17,6 +19,7 @@
 		   return true;
 	   }
    }
+   
    
    function submitform()
    {
@@ -34,6 +37,7 @@
 	   var andConditionSectorApplied = false;
 	   // handle sectors
 	   var firstTime = true;
+	   var multiplicityFlag = false;
 	   $('#sectors option:selected').each(function(){
 				    	  var sectorValue = $(this).val();
 				    	  if (firstTime == true)
@@ -44,14 +48,20 @@
 				    	  else
 				    	  {
 				    		  url = url + ";" +  sectorValue;
+				    		  multiplicityFlag = true;
 				    	  }
 				    	  
 		});
 	   
+	   if (multiplicityFlag == true)
+	   {
+		   url = url + "&conditionAdaptationSector=OR";
+	   }
 	  
 	   
 	   // handle countries
 	   firstTime = true;
+	   multiplicityFlag = false;
 	   $('#countries option:selected').each(function(){
 				    	  var countryValue = $(this).val();
 				    	  
@@ -63,12 +73,18 @@
 				    	  else
 				    	  {
 				    		  url = url + ";" +  countryValue;
+				    		  multiplicityFlag = true;
 				    	  }
 				    	 
 				    	
 		});
 	   
-	  
+	   if (multiplicityFlag == true)
+	   {
+		   url = url + "&conditionAdaptationCountry=OR";
+	   }
+	   
+	 
 	   //document.<portlet:namespace />fm_search.submit();
 	   document.location.href = url;
 	   
@@ -88,7 +104,7 @@
 							<input type="text" name="search-terms" id="search-terms" maxlength="255" value="Keyword Search" onfocus="if (this.value == 'Keyword Search') { this.value = ''; }" onblur="if (this.value == '') { this.value = 'Keyword Search'; }" onkeypress="return submitIfEnter(event)" />
 						</dd>
 
-						<dt>Topics:</dt>
+						<dt>Sectors:</dt>
 						<dd>
 							<select id="sectors" multiple>							  
 							<c:forEach var="adaptationSector" items="<%= nl.wur.alterra.cgi.ace.model.constants.AceItemSector.values() %>" >
@@ -110,8 +126,6 @@
 							<div class="case-studies-homepage-clearing"></div>
 						</dd>
 					</dl>
-
-					
 
 					<div class="case-studies-homepage-search-footer">
 						<a href="/data-and-downloads">Advanced Search</a>

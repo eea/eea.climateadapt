@@ -36,7 +36,7 @@
 		
 		    if (sharetype.equalsIgnoreCase(AceItemType.DOCUMENT.toString())) {
 			 
-			   aceitemType = "Publication and Reports";
+			   aceitemType = "Publications and Reports";
 			   aceItemSubmitText = "Submit a Publication and Report";
 			   aceItemPageUrl = "/share-your-info/publications-and-reports";
 			}
@@ -60,6 +60,12 @@
 			   aceitemType = "Organisation";
 			   aceItemSubmitText = "Submit an Organisation";
 			   aceItemPageUrl = "/share-your-info/organisations";
+			}
+			else if (sharetype.equalsIgnoreCase(AceItemType.MAPGRAPHDATASET.toString())) {
+				   aceitemType = "Map Graph Data Set";
+			}	
+			else if (sharetype.equalsIgnoreCase(AceItemType.ACTION.toString())) {
+				   aceitemType = "Action";
 			}	
 %>
 
@@ -75,7 +81,7 @@
 	<div class="case-studies-review-column-left">
                 <div class="case-studies-tabbed-content-section">
 					<p class="case-review-header"><%= aceitem.getName() %> (<%= aceitemType %>)</p>
-					<p><strong>Description:</strong></p>
+					<p><b>Description:</b></p>
 					<p><%= aceitem.getDescription() %></p>
 				</div>
 
@@ -85,7 +91,7 @@
 					<div class="case-studies-subheader"><%=aceitemType %> Information</div>
 					<ul>
 						<li>
-							<p><strong><em><%=aceitemType %> Description</em></strong></p>
+							<p><b><em><%=aceitemType %> Description</em></b></p>
 							<ul class="case-studies-tabbed-content-bullted-list">
 								<li><a href="#climate_impacts_anchor">Climate Impacts</a></li>
 							    <li><a href="#sector_policies_anchor">Sector Policies</a></li>
@@ -93,7 +99,7 @@
 						</li>
 						
 						<li>
-							<p><strong><em>Reference Information</em></strong></p>
+							<p><b><em>Reference Information</em></b></p>
 							<ul class="case-studies-bullted-list">
 								<li><a href="#website_anchor">Websites</a></li>
 								<% if (Validator.isNotNull(aceitem.getSource())) { %>
@@ -110,7 +116,7 @@
 					<div class="case-studies-subheader"><%=aceitemType %> Information</div>
 					<ul>
 						<li>
-							<a name="climate_impacts_anchor"><p><strong><em>Climate Impacts</em></strong></p></a>
+							<a name="climate_impacts_anchor"><p><b><em>Climate Impacts</em></b></p></a>
 							<p>This <%=aceitemType %> addresses the following climate impact areas:</p>
 							
 							<%
@@ -133,7 +139,7 @@
 						</li>
 						
 						<li>
-						        <a name="sector_policies_anchor"><p><strong><em>Relevant European Union Sector Policies:</em></strong></p></a>
+						        <a name="sector_policies_anchor"><p><b><em>Relevant European Union Sector Policies:</em></b></p></a>
 								<%	    
 								    String[] sectorAry = null;
 								    if (Validator.isNotNull(aceitem.getSectors_()))
@@ -161,7 +167,7 @@
 					<ul>
 					   
 						<li>
-							<a name="website_anchor"><p><strong><em>Websites</em></strong></p></a>
+							<a name="website_anchor"><p><b><em>Websites</em></b></p></a>
 								
 								<%
 										if(aceitem.getStoragetype().equalsIgnoreCase("MAPLAYER")) {
@@ -232,7 +238,7 @@
 						<% if (Validator.isNotNull(aceitem.getSource()))
 						{%>	
 								<li>
-									<a name="source_anchor"><p><strong><em>Source</em></strong></p></a>
+									<a name="source_anchor"><p><b><em>Source</em></b></p></a>
 									<p><%=aceitem.getSource() %></p>
 									<div class="case-studies-form-clearing"></div>
 								</li>
@@ -242,26 +248,28 @@
 				
 				<div class="case-studies-review-clearing"></div>
 					<!--  insert submit button which takes to the ace data type page -->
+				  <% if ( !(aceitemType.equalsIgnoreCase("Map Graph Data Set") || aceitemType.equalsIgnoreCase("Action"))) {%>
 					<div class="bluebuttondiv">
 			                 <a href="<%=aceItemPageUrl %>" class="bluebutton"><%=aceItemSubmitText %></a>
 			        </div>
+			     <% } %>
 			</div>
 	
 	        <div class="case-studies-review-column-right">
 				<div class="case-studies-review-column-right-section">
-					<p><strong>Keywords</strong></p>
+					<p><b>Keywords</b></p>
 					<p><%=aceitem.getKeyword() %></p>
 				</div>
 
 				<div class="case-studies-review-column-right-section">
-					<p><strong>Sectors</strong></p>
+					<p><b>Sectors</b></p>
 					<c:forEach var="sector" items="${sectorForReview}">
 						<p><liferay-ui:message key="acesearch-sectors-lbl-${sector}" /></p>
 				    </c:forEach>
 				</div>
 
 				<div class="case-studies-review-column-right-section">
-				     <p><strong>Climate impacts</strong></p>
+				     <p><b>Climate impacts</b></p>
 					 <c:forEach var="climate" items="${climateImpactsForReview}">
 						<p><liferay-ui:message key="aceitem-climateimpacts-lbl-${climate}" /></p>
 					 </c:forEach>
@@ -345,7 +353,7 @@
 							 %>
 										      
 								<div class="case-studies-review-column-right-section">
-						                       <p><strong>Geographic characterisation</strong></p>
+						                       <p><b>Geographic characterisation</b></p>
 						                       <p>
 						                       <c:choose>
 												     <c:when test="${geoElementSelected eq 'GLOBAL'}">

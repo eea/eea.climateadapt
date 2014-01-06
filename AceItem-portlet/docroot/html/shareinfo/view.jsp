@@ -26,8 +26,8 @@
 	String aceItemType = "";
 
    if (sharetype.equalsIgnoreCase(AceItemType.DOCUMENT.toString())) {
-	   typedescription = "publication or report";
-	   aceItemType = "Publication and Reports";
+	   typedescription = "publication or Report";
+	   aceItemType = "Publication and/or Report";
    }
    else if (sharetype.equalsIgnoreCase(AceItemType.INFORMATIONSOURCE.toString())) {
 	   typedescription = "information portal";

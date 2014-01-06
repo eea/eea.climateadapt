@@ -510,6 +510,9 @@ span.jPag-snext-img{
 	.europe_geochar_class {
 		   position: relative;
 		   left: 30px;
+		   overflow:hidden;
+		   zoom: 1;
+		   display: block;
 	}
 
 	#case-studies-form-wrapper .case-studies-header .case-studies-header-selector {
@@ -956,6 +959,7 @@ span.jPag-snext-img{
 	    box-shadow:         inset 0 0 2px #ffffff;
 	    margin-top: 10%;
   }
+
 
 	/* ===================== */
 	/* Portlet CSS Ends Here */

@@ -34,6 +34,8 @@ String[] impacts = null;
 String[] countries = null;
 String startyear = null;
 String endyear = null;
+String conditionAdaptationSector = null;
+String conditionAdaptationCountry = null;
 
 AceSearchFormBean acesearchformbean = (AceSearchFormBean) request.getAttribute(SearchRequestParams.SEARCH_PARAMS);
 
@@ -48,6 +50,16 @@ if(acesearchformbean != null) {
 	elements = acesearchformbean.getElement();
 	impacts = acesearchformbean.getImpact();
 	countries = acesearchformbean.getCountries();
+	
+	if (acesearchformbean.getConditionAdaptationSector() != null)
+	{
+		conditionAdaptationSector = acesearchformbean.getConditionAdaptationSector() ;
+	}
+	
+	if (acesearchformbean.getConditionAdaptationCountry() != null)
+	{
+		conditionAdaptationCountry = acesearchformbean.getConditionAdaptationCountry();
+	}
 	
 
 	if (acesearchformbean.getStartyear() != null)
@@ -77,14 +89,22 @@ else {
 String date_type = ParamUtil.getString(request, "date_type");
 if ((date_type == null) || (date_type.equals(""))) date_type = "1";
 
-String conditionAdaptationSector = ParamUtil.getString(request, "conditionAdaptationSector");
-if ((conditionAdaptationSector == null) || (conditionAdaptationSector.equals(""))) conditionAdaptationSector = "AND";
+// it might be populated from form bean
+if (conditionAdaptationSector == null )
+{
+   conditionAdaptationSector = ParamUtil.getString(request, "conditionAdaptationSector");
+   if ((conditionAdaptationSector == null) || (conditionAdaptationSector.equals(""))) conditionAdaptationSector = "AND";
+}
 
 String conditionAdaptationElement = ParamUtil.getString(request, "conditionAdaptationElement");
 if ((conditionAdaptationElement == null) || (conditionAdaptationElement.equals(""))) conditionAdaptationElement = "AND";
 
-String conditionAdaptationCountry = ParamUtil.getString(request, "conditionAdaptationCountry");
-if ((conditionAdaptationCountry == null) || (conditionAdaptationCountry.equals(""))) conditionAdaptationCountry = "AND";
+//it might be populated from form bean
+if (conditionAdaptationCountry == null)
+{
+	conditionAdaptationCountry = ParamUtil.getString(request, "conditionAdaptationCountry");
+	if ((conditionAdaptationCountry == null) || (conditionAdaptationCountry.equals(""))) conditionAdaptationCountry = "AND";
+}
 
 String conditionClimateImpact = ParamUtil.getString(request, "conditionClimateImpact");
 if ((conditionClimateImpact == null) || (conditionClimateImpact.equals(""))) conditionClimateImpact = "AND";
@@ -390,7 +410,7 @@ if (endyear != null)
 			</div>
 	<!-- Results column  -->
 	<div id="search_results" class="acesearch_column" style="padding-top: 0px;">
-	     <h3 style="margin-top:0px">The database contains quality checked information and is annotated by climate adaptation experts with keywords.</h3>
+	     <div style="margin-top:0px; font-weight:bold; padding-bottom:5px">The database contains quality checked information and is annotated by climate adaptation experts with keywords.</div>
 	     <p>Search the database using the keywords field below and filter the results using one or more of the filters from the left side bar</p>
         <div id="case-studies-database-search-section">
 					<label for="tb_keywords">

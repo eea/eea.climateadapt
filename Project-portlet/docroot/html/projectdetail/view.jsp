@@ -78,7 +78,7 @@
 	 </div>
 
 	 <div class="detailleft">
-	 <b>Abstract</b><br />
+	 <b>Description</b><br />
 	 <% out.print( project.getAbstracts() ); %><br /><br />
 	 
 	 <% if (url != null && url.trim().length() > 0)  {%>		

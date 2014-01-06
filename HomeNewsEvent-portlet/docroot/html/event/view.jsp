@@ -6,7 +6,7 @@
 	 <c:when test="${showall ne 'full'}">
 	   <div class="news-events">
 	   <p>
-         <img alt="" src="/image/image_gallery?uuid=6c02ee09-8a26-4703-b355-b7a087b51026&groupId=18&t=1315229167681" style="width: 214px; height: 59px" />
+         <a href="/more-events?show=full"><img alt="" src="/image/image_gallery?uuid=6c02ee09-8a26-4703-b355-b7a087b51026&groupId=18&t=1315229167681" style="width: 214px; height: 59px" /></a>
        </p>
 			  <ul>
 				<c:forEach var="journal" items="${eventList}" varStatus="status">

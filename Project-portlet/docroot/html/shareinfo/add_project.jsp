@@ -109,7 +109,7 @@ else {
 		<b>website</b><br />	
 		<input name="website" type="text" size="120"  maxlength="255" value="<%= project == null ? "" : project.getWebsite() %>"><br /><br />
 
-		<b>abstract</b><br />
+		<b>description</b><br />
 		<textarea name="abstracts" rows=10 cols=100><%= project == null ? "" : project.getAbstracts() %></textarea><br /><br />
 
 		<b>partners</b><br />
