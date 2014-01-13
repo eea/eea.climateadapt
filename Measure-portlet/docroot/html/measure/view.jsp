@@ -75,10 +75,7 @@
         <portlet:param name="redirect" value="<%=redirectUrl%>" />
     </portlet:renderURL>
 
-    <%-- Display the button that links to the page where a new ace item can be added. --%>
-    <!--<aui:button value="Add" onClick="<%=//addMeasureURL.toString()%>"/>-->
-
-    <%--
+     <%--
     Submits measuresForm. In order to get submit value at server side, had to override the
     button's onClick which sets the value to a hidden input.
     --%>
