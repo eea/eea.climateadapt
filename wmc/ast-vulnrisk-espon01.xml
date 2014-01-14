@@ -17,7 +17,7 @@
 		<Layer queryable="0" hidden="0">
 			<Server service="OGC:WMS" version="1.1.1">
 				<OnlineResource xlink:type="simple"
-					xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://ace.geocat.net/geoserver/wms?" />
+					xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://climate-adapt.eea.europa.eu/geoserver/wms?" />
 			</Server>
 			<Name>background</Name>
 			<Title>Background</Title>
@@ -46,17 +46,21 @@
 		<Layer queryable="0" hidden="1">
 			<Server service="OGC:WMS" version="1.1.1">
 				<OnlineResource xlink:type="simple"
-					xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://ace.geocat.net/geoserver/wms?" />
+					xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://climate-adapt.eea.europa.eu/geoserver/wms?" />
 			</Server>
-			<Name>chm:espon_nuts3</Name>
+			<Name>chm:espon_change_in_exposure_to_river_flooding</Name>
 			<Title>Change in exposure to river flooding</Title>
+			<MetadataURL>
+				<OnlineResource xlink:type="simple" xmlns:xlink="http://www.w3.org/1999/xlink" 
+					xlink:href="http://climate-adapt.eea.europa.eu/geonetwork/srv/en/metadata.show?uuid=e6fe540a76d09ce4acff2346a810e09c00f6cb74"/>
+			</MetadataURL>
 			<FormatList>
 				<Format current="1">image/png</Format>
 			</FormatList>
 			<StyleList>
 				<Style current="1">
-					<Name>espon_change_in_exposure_to_river_flooding</Name>
-					<Title>Change in exposure to river flooding</Title>
+					<Name />
+					<Title>Default</Title>
 				</Style>
 			</StyleList>
 			<Extension>
@@ -70,22 +74,27 @@
 				<ol:isBaseLayer xmlns:ol="http://openlayers.org/context">false</ol:isBaseLayer>
 				<ol:displayInLayerSwitcher xmlns:ol="http://openlayers.org/context">true</ol:displayInLayerSwitcher>
 				<ol:singleTile xmlns:ol="http://openlayers.org/context">false</ol:singleTile>
+				<ol:attribution xmlns:ol="http://openlayers.org/context"><![CDATA[&copy; ESPON, IRPUD & PIK 2011]]></ol:attribution>
 			</Extension>
 		</Layer>
 		<Layer queryable="0" hidden="0">
 			<Server service="OGC:WMS" version="1.1.1">
 				<OnlineResource xlink:type="simple"
-					xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://ace.geocat.net/geoserver/wms?" />
+					xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://climate-adapt.eea.europa.eu/geoserver/wms?" />
 			</Server>
-			<Name>chm:espon_nuts3</Name>
+			<Name>chm:espon_change_in_exposure_to_coastal_flooding</Name>
 			<Title>Change in exposure to coastal flooding</Title>
+			<MetadataURL>
+				<OnlineResource xlink:type="simple" xmlns:xlink="http://www.w3.org/1999/xlink" 
+					xlink:href="http://climate-adapt.eea.europa.eu/geonetwork/srv/en/metadata.show?uuid=f3d55e05c4bae2fe436259222e28710a2617c830"/>
+			</MetadataURL>
 			<FormatList>
 				<Format current="1">image/png</Format>
 			</FormatList>
 			<StyleList>
 				<Style current="1">
-					<Name>espon_change_in_exposure_to_coastal_flooding</Name>
-					<Title>Change in exposure to coastal flooding</Title>
+					<Name />
+					<Title>Default</Title>
 				</Style>
 			</StyleList>
 			<Extension>
@@ -99,12 +108,13 @@
 				<ol:isBaseLayer xmlns:ol="http://openlayers.org/context">false</ol:isBaseLayer>
 				<ol:displayInLayerSwitcher xmlns:ol="http://openlayers.org/context">true</ol:displayInLayerSwitcher>
 				<ol:singleTile xmlns:ol="http://openlayers.org/context">false</ol:singleTile>
+				<ol:attribution xmlns:ol="http://openlayers.org/context"><![CDATA[&copy; ESPON, IRPUD, 2011]]></ol:attribution>
 			</Extension>
 		</Layer>
 		<Layer queryable="0" hidden="0">
 			<Server service="OGC:WMS" version="1.1.1">
 				<OnlineResource xlink:type="simple"
-					xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://ace.geocat.net/geoserver/wms?" />
+					xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://climate-adapt.eea.europa.eu/geoserver/wms?" />
 			</Server>
 			<Name>foreground</Name>
 			<Title>Topography</Title>
