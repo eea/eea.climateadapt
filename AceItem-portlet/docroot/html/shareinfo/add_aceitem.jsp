@@ -289,7 +289,7 @@
 						<% } %>
 							<div class="case-studies-tabbed-content-header"><%=aceitemType %> - <em>Description</em></div>
 							<p>To help other people find and use this <%=aceitemType.toLowerCase() %>, please provide as much detail as possible about this <%=aceitemType %>. We will e-mail you after we review the <%=aceitemType %>.</p>
-							<p><a href="#">More About the Review Process</a></p>
+							
 
                            <% if (renderRequest.isUserInRole("Portal Content Reviewer") || renderRequest.isUserInRole("administrator") ) {  %>
 							<div class="case-studies-tabbed-content-section">

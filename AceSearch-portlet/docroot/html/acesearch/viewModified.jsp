@@ -234,6 +234,20 @@ if (endyear != null)
     	  }
     	  document.<portlet:namespace />aceItemSearchForm.submit();
     }
+    
+    function submitIfEnter(event)
+    {
+ 	   if (event && event.keyCode == 13)
+ 	   {
+ 		   submitform();
+ 		   return false;
+ 		   
+ 	   }
+ 	   else
+ 	   {
+ 		   return true;
+ 	   }
+    }
 										
 </script>
 
@@ -415,7 +429,7 @@ if (endyear != null)
         <div id="case-studies-database-search-section">
 					<label for="tb_keywords">
 						<strong>Keywords</strong>
-						<input type="text" name="anyOfThese" id="tb_keywords" size="30" maxlength="255" value="<%= anyOfThese %>" />
+						<input type="text" name="anyOfThese" id="tb_keywords" size="30" maxlength="255" value="<%= anyOfThese %>" onkeypress="return submitIfEnter(event)" />
 					</label>
 					<ul id="case-studies-database-search-options">
 					    <li><label for="any"><input type="radio" value="1" id="rb_keywords_options_any" name="freetextAny" <%= (freetextAny.equals("1"))?"checked":"" %>/> <liferay-ui:message key="acesearch-lbl-anywords" /></label></li>

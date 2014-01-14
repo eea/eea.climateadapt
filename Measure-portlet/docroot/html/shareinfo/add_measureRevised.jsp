@@ -418,7 +418,7 @@
 						<% } %>
 							<div class="case-studies-tabbed-content-header"><%=nameOfClimateEntityShortText %> - <em>Description</em></div>
 							<p>To help other people find and use this <%=nameOfClimateEntityShortText.toLowerCase() %>, please provide as much detail as possible about this <%=nameOfClimateEntityShortText.toLowerCase() %>. We will e-mail you after we review the <%=nameOfClimateEntityShortText.toLowerCase() %>.</p>
-							<p><a href="#">More About the Review Process</a></p>
+							
 
                            <% if (renderRequest.isUserInRole("Portal Content Reviewer") || renderRequest.isUserInRole("administrator") ) {  %>
 							<div class="case-studies-tabbed-content-section">
@@ -1688,7 +1688,7 @@
 								   <c:forEach begin="1" end="${doccount}" varStatus="loop">
 									     <ul class="case-studies-tabbed-content-document-upload">
 									      <li class="case-studies-tabbed-content-document-upload-header">
-											<b>Case Study Document File<span class="case-studies-tabbed-content-document-upload-position">${loop.count}</span>:</b>
+											<b>Document File<span class="case-studies-tabbed-content-document-upload-position">${loop.count}</span>:</b>
 											<a href="#" class="case-studies-tabbed-content-button-remove-document-${loop.count}">[remove]</a>
 										  </li>
 										  
@@ -1720,7 +1720,7 @@
 								       <input name="doccounter" id="doccounter" type="hidden" value="1" />
 									   <ul class="case-studies-tabbed-content-document-upload">
 										<li class="case-studies-tabbed-content-document-upload-header">
-											<b>Case Study Document File <span class="case-studies-tabbed-content-document-upload-position">1</span>:</b>
+											<b>Document File <span class="case-studies-tabbed-content-document-upload-position">1</span>:</b>
 										</li>
 										<li>
 											<p><b><em>Upload Document File <span class="case-studies-tabbed-content-document-upload-position">1</span>:</em></b></p>
@@ -2685,7 +2685,7 @@
 								   if (Validator.isNotNull(measure.getSupdocs())) { %>
 								   
 									    <div clas="case-studies-tabbed-content-review-column-right-section">
-										<p><b>Case Study Documents</b></p>
+										<p><b>Documents</b></p>
 										<ul class="case-studies-tabbed-content-bullted-list">
 										 
 								 <% 
