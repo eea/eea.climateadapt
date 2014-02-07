@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2010 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2011 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -65,6 +65,14 @@ public class ProjectClp extends BaseModelImpl<Project> implements Project {
 
 	public void setGroupId(long groupId) {
 		_groupId = groupId;
+	}
+
+	public String getAdmincomment() {
+		return _admincomment;
+	}
+
+	public void setAdmincomment(String admincomment) {
+		_admincomment = admincomment;
 	}
 
 	public String getAcronym() {
@@ -299,6 +307,30 @@ public class ProjectClp extends BaseModelImpl<Project> implements Project {
 		_lockdate = lockdate;
 	}
 
+	public String getFeature() {
+		return _feature;
+	}
+
+	public void setFeature(String feature) {
+		_feature = feature;
+	}
+
+	public String getSupdocs() {
+		return _supdocs;
+	}
+
+	public void setSupdocs(String supdocs) {
+		_supdocs = supdocs;
+	}
+
+	public String getGeochars() {
+		return _geochars;
+	}
+
+	public void setGeochars(String geochars) {
+		_geochars = geochars;
+	}
+
 	public Project toEscapedModel() {
 		if (isEscapedModel()) {
 			return this;
@@ -315,6 +347,7 @@ public class ProjectClp extends BaseModelImpl<Project> implements Project {
 		clone.setProjectId(getProjectId());
 		clone.setCompanyId(getCompanyId());
 		clone.setGroupId(getGroupId());
+		clone.setAdmincomment(getAdmincomment());
 		clone.setAcronym(getAcronym());
 		clone.setTitle(getTitle());
 		clone.setStartdate(getStartdate());
@@ -344,6 +377,9 @@ public class ProjectClp extends BaseModelImpl<Project> implements Project {
 		clone.setSource(getSource());
 		clone.setClimateimpacts(getClimateimpacts());
 		clone.setLockdate(getLockdate());
+		clone.setFeature(getFeature());
+		clone.setSupdocs(getSupdocs());
+		clone.setGeochars(getGeochars());
 
 		return clone;
 	}
@@ -389,7 +425,7 @@ public class ProjectClp extends BaseModelImpl<Project> implements Project {
 	}
 
 	public String toString() {
-		StringBundler sb = new StringBundler(65);
+		StringBundler sb = new StringBundler(73);
 
 		sb.append("{projectId=");
 		sb.append(getProjectId());
@@ -397,6 +433,8 @@ public class ProjectClp extends BaseModelImpl<Project> implements Project {
 		sb.append(getCompanyId());
 		sb.append(", groupId=");
 		sb.append(getGroupId());
+		sb.append(", admincomment=");
+		sb.append(getAdmincomment());
 		sb.append(", acronym=");
 		sb.append(getAcronym());
 		sb.append(", title=");
@@ -455,13 +493,19 @@ public class ProjectClp extends BaseModelImpl<Project> implements Project {
 		sb.append(getClimateimpacts());
 		sb.append(", lockdate=");
 		sb.append(getLockdate());
+		sb.append(", feature=");
+		sb.append(getFeature());
+		sb.append(", supdocs=");
+		sb.append(getSupdocs());
+		sb.append(", geochars=");
+		sb.append(getGeochars());
 		sb.append("}");
 
 		return sb.toString();
 	}
 
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(100);
+		StringBundler sb = new StringBundler(112);
 
 		sb.append("<model><model-name>");
 		sb.append("nl.wur.alterra.cgi.ace.model.Project");
@@ -478,6 +522,10 @@ public class ProjectClp extends BaseModelImpl<Project> implements Project {
 		sb.append(
 			"<column><column-name>groupId</column-name><column-value><![CDATA[");
 		sb.append(getGroupId());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>admincomment</column-name><column-value><![CDATA[");
+		sb.append(getAdmincomment());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>acronym</column-name><column-value><![CDATA[");
@@ -595,6 +643,18 @@ public class ProjectClp extends BaseModelImpl<Project> implements Project {
 			"<column><column-name>lockdate</column-name><column-value><![CDATA[");
 		sb.append(getLockdate());
 		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>feature</column-name><column-value><![CDATA[");
+		sb.append(getFeature());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>supdocs</column-name><column-value><![CDATA[");
+		sb.append(getSupdocs());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>geochars</column-name><column-value><![CDATA[");
+		sb.append(getGeochars());
+		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");
 
@@ -604,6 +664,7 @@ public class ProjectClp extends BaseModelImpl<Project> implements Project {
 	private long _projectId;
 	private long _companyId;
 	private long _groupId;
+	private String _admincomment;
 	private String _acronym;
 	private String _title;
 	private Date _startdate;
@@ -633,4 +694,7 @@ public class ProjectClp extends BaseModelImpl<Project> implements Project {
 	private String _source;
 	private String _climateimpacts;
 	private Date _lockdate;
+	private String _feature;
+	private String _supdocs;
+	private String _geochars;
 }

@@ -42,6 +42,8 @@
 		<icon>/icon.png</icon>
 		<instanceable>false</instanceable>
 		<header-portlet-css>/css/portlet.css</header-portlet-css>
+		<header-portlet-javascript>/js/jquery-1.6.2.min.js</header-portlet-javascript>
+	    <header-portlet-javascript>/js/project.js</header-portlet-javascript>
 		<footer-portlet-javascript>
 			/js/javascript.js
 		</footer-portlet-javascript>

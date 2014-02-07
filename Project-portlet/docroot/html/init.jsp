@@ -9,7 +9,11 @@
 <%@ taglib uri="http://liferay.com/tld/aui" prefix="aui" %>
 
 <%@ page import="java.util.List" %>
+<%@ page import="java.util.ArrayList" %>
 <%@ page import="java.text.SimpleDateFormat" %>
+<%@ page import="org.json.simple.JSONArray" %>
+<%@ page import="org.json.simple.JSONObject" %>
+<%@ page import="org.json.simple.JSONValue" %>
 
 <%@ page import="javax.portlet.PortletPreferences" %>
 
@@ -29,6 +33,13 @@
 <%@ page import="nl.wur.alterra.cgi.ace.portlet.ProjectUtil"%>
 <%@ page import="nl.wur.alterra.cgi.ace.search.lucene.ACEIndexUtil"%>
 <%@ page import="nl.wur.alterra.cgi.ace.portlet.ProjectPortlet"%>
+<%@ page import = "com.liferay.portal.kernel.dao.orm.DynamicQuery" %>
+<%@ page import = "com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil" %>
+<%@ page import = "com.liferay.portal.kernel.dao.orm.PropertyFactoryUtil" %>
+<%@ page import ="com.liferay.portlet.documentlibrary.service.DLFileEntryLocalServiceUtil"  %>
+<%@ page import ="com.liferay.portlet.documentlibrary.model.DLFileEntry"  %>
+<%@ page import =" com.liferay.portal.kernel.util.HttpUtil"  %>
+<%@ page import ="com.liferay.portal.kernel.util.HtmlUtil" %>
 
 <liferay-theme:defineObjects />
 

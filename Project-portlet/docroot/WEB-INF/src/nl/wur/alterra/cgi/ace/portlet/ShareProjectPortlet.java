@@ -20,13 +20,15 @@ import nl.wur.alterra.cgi.ace.service.ProjectLocalServiceUtil;
 
 import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.servlet.SessionMessages;
+import com.liferay.portal.kernel.upload.UploadPortletRequest;
 import com.liferay.portal.kernel.util.ParamUtil;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.util.PortalUtil;
 
 /**
  * Portlet implementation class ShareProjectPortlet
  */
-public class ShareProjectPortlet extends ProjectUpdateHelper {
+public class ShareProjectPortlet extends ProjectUpdateHelperRevised {
 
 	@Override
 	public void doView(RenderRequest renderRequest, RenderResponse renderResponse) throws IOException, PortletException {
@@ -57,13 +59,21 @@ public class ShareProjectPortlet extends ProjectUpdateHelper {
 	 */
 	public void addProject(ActionRequest request, ActionResponse response)
 		throws Exception {
-
 		Project project = new ProjectImpl();
+		UploadPortletRequest uploadRequest = PortalUtil.getUploadPortletRequest(request);
+	    String project_id = uploadRequest.getParameter("projectId");
+	    
+	    if (Validator.isNull(project_id))
+		{
+			project.setProjectId(0);
+		}
+		else
+		{
+			project.setProjectId(ParamUtil.getLong(request, "projectId"));
+		}
 
-		project.setProjectId(ParamUtil.getLong(request, "projectId"));
-		projectFromRequest(request, project);
-
-		ArrayList<String> errors = new ArrayList<String>();
+	    ArrayList<String> errors = new ArrayList<String>();
+		projectFromRequest(request, project, uploadRequest, errors);
 
 		if (ProjectValidator.validateProject(project, errors)) {
 			ProjectLocalServiceUtil.addProject(project);
@@ -79,20 +89,24 @@ public class ShareProjectPortlet extends ProjectUpdateHelper {
 			AceItemLocalServiceUtil.addAceItem(aceitem);
 			updateAceItem(project, aceitem);
 
-            sendSubmitNotification(project);
-			request.getPortletSession().setAttribute("lastAddedProjectId", "" + project.getProjectId() );
+            /*sendSubmitNotification(project);
+			request.getPortletSession().setAttribute("lastAddedProjectId", "" + project.getProjectId() ); */
 
+			request.setAttribute("justsaved", "true");
+			request.setAttribute("projectId", project.getProjectId());
 			SessionMessages.add(request, "contribution-success");
-			sendRedirect(request, response);
+			response.setRenderParameter("jspPage", "/html/shareinfo/add_projectRevised.jsp");
+			//sendRedirect(request, response);
 		}
 		else {
 			for (String error : errors) {
 				SessionErrors.add(request, error);
 			}
 
+			SessionErrors.add(request, "invalid-form-data");
 			PortalUtil.copyRequestParameters(request, response);
-
-			response.setRenderParameter("jspPage", "/html/shareinfo/add_project.jsp");
+			request.setAttribute("project", project);
+			response.setRenderParameter("jspPage", "/html/shareinfo/add_projectRevised.jsp");
 		}
 	}
 
@@ -105,43 +119,52 @@ public class ShareProjectPortlet extends ProjectUpdateHelper {
 		throws Exception {
 
 		AceItem aceitem = null;
-
 		Project project = null;
+		UploadPortletRequest uploadRequest = PortalUtil.getUploadPortletRequest(request);
 
 		try {
-			project = ProjectLocalServiceUtil.getProject(ParamUtil.getLong(request, "projectId"));
+			project = ProjectLocalServiceUtil.getProject(ParamUtil.getLong(uploadRequest, "projectId"));
 		}
 		catch (Exception e) {
+			e.printStackTrace();
 			project = null;
 		}
 
 		if(project != null) {
-			projectFromRequest(request, project);
-
 			ArrayList<String> errors = new ArrayList<String>();
+			projectFromRequest(request, project, uploadRequest, errors);
 
 			if (ProjectValidator.validateProject(project, errors)) {
 
 				aceitem = AceItemLocalServiceUtil.getAceItemByStoredAt("ace_project_id=" + project.getProjectId());
-
 				ProjectLocalServiceUtil.updateProject(project);
 
 				updateAceItem(project, aceitem);
-
-	            sendSubmitNotification(project);
-				request.getPortletSession().setAttribute("lastAddedProjectId", "" + project.getProjectId() );
-
-				SessionMessages.add(request, "contribution-success");
-				sendRedirect(request, response);
+				
+				// send the mail only when it is a submit 
+	        	if (project.getControlstatus() == -1)
+				{
+					request.setAttribute("justsaved", "true" );
+					request.setAttribute("projectId", project.getProjectId());
+					response.setRenderParameter("jspPage", "/html/shareinfo/add_projectRevised.jsp");
+					
+				}
+				else
+				{
+	               sendSubmitNotification(project);
+	               SessionMessages.add(request, "contribution-success");
+				   sendRedirect(request, response);
+				}
 			}
 			else {
 				for (String error : errors) {
 					SessionErrors.add(request, error);
 				}
-
+				
+				SessionErrors.add(request, "invalid-form-data");
 				PortalUtil.copyRequestParameters(request, response);
-
-				response.setRenderParameter("jspPage", "/html/shareinfo/add_project.jsp");
+				request.setAttribute("projectId", project.getProjectId());
+				response.setRenderParameter("jspPage", "/html/shareinfo/add_projectRevised.jsp");
 			}
 		}
 	}

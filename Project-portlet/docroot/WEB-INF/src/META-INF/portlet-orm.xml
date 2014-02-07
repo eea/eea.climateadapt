@@ -12,6 +12,7 @@
 			<id name="projectId" />
 			<basic name="companyId" />
 			<basic name="groupId" />
+			<basic name="admincomment" />
 			<basic name="acronym" />
 			<basic name="title" />
 			<basic name="startdate">
@@ -51,6 +52,9 @@
 			<basic name="lockdate">
 				<temporal>TIMESTAMP</temporal>
 			</basic>
+			<basic name="feature" />
+			<basic name="supdocs" />
+			<basic name="geochars" />
 			<transient name="primaryKey" />
 		</attributes>
 	</mapped-superclass>

@@ -5,6 +5,7 @@
 		<field name="projectId" type="long" />
 		<field name="companyId" type="long" />
 		<field name="groupId" type="long" />
+		<field name="admincomment" type="String" />
 		<field name="acronym" type="String" />
 		<field name="title" type="String" />
 		<field name="startdate" type="Date" />
@@ -34,5 +35,8 @@
 		<field name="source" type="String" />
 		<field name="climateimpacts" type="String" />
 		<field name="lockdate" type="Date" />
+		<field name="feature" type="String" />
+		<field name="supdocs" type="String" />
+		<field name="geochars" type="String" />
 	</model>
 </model-hints>

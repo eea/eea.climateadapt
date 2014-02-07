@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2010 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2011 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -59,6 +59,7 @@ public class ProjectModelImpl extends BaseModelImpl<Project>
 			{ "projectId", new Integer(Types.BIGINT) },
 			{ "companyId", new Integer(Types.BIGINT) },
 			{ "groupId", new Integer(Types.BIGINT) },
+			{ "admincomment", new Integer(Types.VARCHAR) },
 			{ "acronym", new Integer(Types.VARCHAR) },
 			{ "title", new Integer(Types.VARCHAR) },
 			{ "startdate", new Integer(Types.TIMESTAMP) },
@@ -87,9 +88,12 @@ public class ProjectModelImpl extends BaseModelImpl<Project>
 			{ "spatialvalues", new Integer(Types.VARCHAR) },
 			{ "source", new Integer(Types.VARCHAR) },
 			{ "climateimpacts", new Integer(Types.VARCHAR) },
-			{ "lockdate", new Integer(Types.TIMESTAMP) }
+			{ "lockdate", new Integer(Types.TIMESTAMP) },
+			{ "feature", new Integer(Types.VARCHAR) },
+			{ "supdocs", new Integer(Types.VARCHAR) },
+			{ "geochars", new Integer(Types.VARCHAR) }
 		};
-	public static final String TABLE_SQL_CREATE = "create table Ace_Project (projectId LONG not null primary key,companyId LONG,groupId LONG,acronym VARCHAR(75) null,title VARCHAR(75) null,startdate DATE null,enddate DATE null,lead VARCHAR(75) null,partners VARCHAR(75) null,funding VARCHAR(75) null,sectors VARCHAR(75) null,spatiallayer VARCHAR(75) null,abstracts VARCHAR(75) null,element VARCHAR(75) null,keywords VARCHAR(75) null,website VARCHAR(75) null,duration VARCHAR(75) null,rating LONG,importance LONG,specialtagging VARCHAR(75) null,controlstatus INTEGER,creator VARCHAR(75) null,creationdate DATE null,moderator VARCHAR(75) null,approvaldate DATE null,replacesId LONG,comments VARCHAR(75) null,textwebpage VARCHAR(75) null,spatialvalues VARCHAR(75) null,source VARCHAR(75) null,climateimpacts VARCHAR(75) null,lockdate DATE null)";
+	public static final String TABLE_SQL_CREATE = "create table Ace_Project (projectId LONG not null primary key,companyId LONG,groupId LONG,admincomment VARCHAR(75) null,acronym VARCHAR(75) null,title VARCHAR(75) null,startdate DATE null,enddate DATE null,lead VARCHAR(75) null,partners VARCHAR(75) null,funding VARCHAR(75) null,sectors VARCHAR(75) null,spatiallayer VARCHAR(75) null,abstracts VARCHAR(75) null,element VARCHAR(75) null,keywords VARCHAR(75) null,website VARCHAR(75) null,duration VARCHAR(75) null,rating LONG,importance LONG,specialtagging VARCHAR(75) null,controlstatus INTEGER,creator VARCHAR(75) null,creationdate DATE null,moderator VARCHAR(75) null,approvaldate DATE null,replacesId LONG,comments VARCHAR(75) null,textwebpage VARCHAR(75) null,spatialvalues VARCHAR(75) null,source VARCHAR(75) null,climateimpacts VARCHAR(75) null,lockdate DATE null,feature VARCHAR(75) null,supdocs VARCHAR(75) null,geochars VARCHAR(75) null)";
 	public static final String TABLE_SQL_DROP = "drop table Ace_Project";
 	public static final String ORDER_BY_JPQL = " ORDER BY project.acronym ASC";
 	public static final String ORDER_BY_SQL = " ORDER BY Ace_Project.acronym ASC";
@@ -142,6 +146,19 @@ public class ProjectModelImpl extends BaseModelImpl<Project>
 
 	public void setGroupId(long groupId) {
 		_groupId = groupId;
+	}
+
+	public String getAdmincomment() {
+		if (_admincomment == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _admincomment;
+		}
+	}
+
+	public void setAdmincomment(String admincomment) {
+		_admincomment = admincomment;
 	}
 
 	public String getAcronym() {
@@ -476,6 +493,45 @@ public class ProjectModelImpl extends BaseModelImpl<Project>
 		_lockdate = lockdate;
 	}
 
+	public String getFeature() {
+		if (_feature == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _feature;
+		}
+	}
+
+	public void setFeature(String feature) {
+		_feature = feature;
+	}
+
+	public String getSupdocs() {
+		if (_supdocs == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _supdocs;
+		}
+	}
+
+	public void setSupdocs(String supdocs) {
+		_supdocs = supdocs;
+	}
+
+	public String getGeochars() {
+		if (_geochars == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _geochars;
+		}
+	}
+
+	public void setGeochars(String geochars) {
+		_geochars = geochars;
+	}
+
 	public Project toEscapedModel() {
 		if (isEscapedModel()) {
 			return (Project)this;
@@ -505,6 +561,7 @@ public class ProjectModelImpl extends BaseModelImpl<Project>
 		clone.setProjectId(getProjectId());
 		clone.setCompanyId(getCompanyId());
 		clone.setGroupId(getGroupId());
+		clone.setAdmincomment(getAdmincomment());
 		clone.setAcronym(getAcronym());
 		clone.setTitle(getTitle());
 		clone.setStartdate(getStartdate());
@@ -534,6 +591,9 @@ public class ProjectModelImpl extends BaseModelImpl<Project>
 		clone.setSource(getSource());
 		clone.setClimateimpacts(getClimateimpacts());
 		clone.setLockdate(getLockdate());
+		clone.setFeature(getFeature());
+		clone.setSupdocs(getSupdocs());
+		clone.setGeochars(getGeochars());
 
 		return clone;
 	}
@@ -579,7 +639,7 @@ public class ProjectModelImpl extends BaseModelImpl<Project>
 	}
 
 	public String toString() {
-		StringBundler sb = new StringBundler(65);
+		StringBundler sb = new StringBundler(73);
 
 		sb.append("{projectId=");
 		sb.append(getProjectId());
@@ -587,6 +647,8 @@ public class ProjectModelImpl extends BaseModelImpl<Project>
 		sb.append(getCompanyId());
 		sb.append(", groupId=");
 		sb.append(getGroupId());
+		sb.append(", admincomment=");
+		sb.append(getAdmincomment());
 		sb.append(", acronym=");
 		sb.append(getAcronym());
 		sb.append(", title=");
@@ -645,13 +707,19 @@ public class ProjectModelImpl extends BaseModelImpl<Project>
 		sb.append(getClimateimpacts());
 		sb.append(", lockdate=");
 		sb.append(getLockdate());
+		sb.append(", feature=");
+		sb.append(getFeature());
+		sb.append(", supdocs=");
+		sb.append(getSupdocs());
+		sb.append(", geochars=");
+		sb.append(getGeochars());
 		sb.append("}");
 
 		return sb.toString();
 	}
 
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(100);
+		StringBundler sb = new StringBundler(112);
 
 		sb.append("<model><model-name>");
 		sb.append("nl.wur.alterra.cgi.ace.model.Project");
@@ -668,6 +736,10 @@ public class ProjectModelImpl extends BaseModelImpl<Project>
 		sb.append(
 			"<column><column-name>groupId</column-name><column-value><![CDATA[");
 		sb.append(getGroupId());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>admincomment</column-name><column-value><![CDATA[");
+		sb.append(getAdmincomment());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>acronym</column-name><column-value><![CDATA[");
@@ -785,6 +857,18 @@ public class ProjectModelImpl extends BaseModelImpl<Project>
 			"<column><column-name>lockdate</column-name><column-value><![CDATA[");
 		sb.append(getLockdate());
 		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>feature</column-name><column-value><![CDATA[");
+		sb.append(getFeature());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>supdocs</column-name><column-value><![CDATA[");
+		sb.append(getSupdocs());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>geochars</column-name><column-value><![CDATA[");
+		sb.append(getGeochars());
+		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");
 
@@ -794,6 +878,7 @@ public class ProjectModelImpl extends BaseModelImpl<Project>
 	private long _projectId;
 	private long _companyId;
 	private long _groupId;
+	private String _admincomment;
 	private String _acronym;
 	private String _title;
 	private Date _startdate;
@@ -823,5 +908,8 @@ public class ProjectModelImpl extends BaseModelImpl<Project>
 	private String _source;
 	private String _climateimpacts;
 	private Date _lockdate;
+	private String _feature;
+	private String _supdocs;
+	private String _geochars;
 	private transient ExpandoBridge _expandoBridge;
 }
