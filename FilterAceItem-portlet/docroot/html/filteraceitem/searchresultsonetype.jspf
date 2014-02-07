@@ -125,9 +125,13 @@
 			    </c:otherwise>
 			</c:choose>
 			
-		   <c:if test="${aceitemtype eq 'DOCUMENT' || aceitemtype eq 'INFORMATIONSOURCE' || aceitemtype eq 'GUIDANCE' || aceitemtype eq 'TOOL' || aceitemtype eq 'RESEARCHPROJECT' || aceitemtype eq 'MEASURE' || aceitemtype eq 'ORGANISATION'}" >   
+		   <c:if test="${aceitemtype eq 'DOCUMENT' || aceitemtype eq 'INFORMATIONSOURCE' || aceitemtype eq 'GUIDANCE' || aceitemtype eq 'TOOL' || aceitemtype eq 'RESEARCHPROJECT' || aceitemtype eq 'MEASURE' || aceitemtype eq 'ORGANISATION'}" > 
+		     <c:set var="url" scope="page" value="/share-your-info" />     
 		     <div class="bluebuttondiv">
-	           <a href="${url}" class="bluebutton">Submit ${articleText} ${aceitemtypeName}</a>
+	           <!-- Reverting back all the links to "Share your information" as per the requirement -->
+		       <!-- The "Submit a <database item> can be restored any time as the above logic to determine the database item url still there -->
+	           <%-- <a href="${url}" class="bluebutton">Submit ${articleText} ${aceitemtypeName}</a> --%>
+	           <a href="${url}" class="bluebutton">Share your information</a>
 	        </div>
 	      </c:if>
 	     </c:if>

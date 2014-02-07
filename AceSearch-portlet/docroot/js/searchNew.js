@@ -116,7 +116,33 @@ jQuery(document).ready(function() {
 
     });	
 	
-	
+    
+    $j('#search_rel').qtip({
+        content: {
+            text: '<p>A high relevance means that the word which is being searched for appears "relatively often" in the text.<p>',
+            
+            title: {
+                text: 'Search Relevance'
+            }
+        },
+        position: {
+            at: "bottom center",
+            my: "top center",
+            viewport: $(window),
+            effect: false
+        },
+        show: {
+            event: "mouseenter",
+            solo: true
+        },
+        hide: {
+            event: "mouseleave"
+        },
+        style: {
+            classes: "ui-tooltip-blue ui-tooltip-shadow ui-tooltip-rounded"
+        }
+    });
+
 
     $j("input[name=sortBy]:radio").change(function() {
         sortedSearch(this);
@@ -154,6 +180,7 @@ jQuery(document).ready(function() {
     showDataInfoPanel();
     
 });
+
 
 function removeHTMLTags(inStrRemoveTags){
             var strInputCode = inStrRemoveTags;

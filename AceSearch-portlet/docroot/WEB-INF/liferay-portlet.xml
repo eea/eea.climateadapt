@@ -12,6 +12,7 @@
 		<header-portlet-css>/css/data_table_jui.css</header-portlet-css>
 		<header-portlet-css>/css/pagination.css</header-portlet-css>
 		<header-portlet-javascript>http://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js</header-portlet-javascript>
+		<header-portlet-javascript>/js/jquery.qtip-1.0.0-rc3.min.js</header-portlet-javascript>
 		<!-- Originally from http://tympanus.net/jPaginate/jquery.paginate.js, but fixed -->
 		<!--header-portlet-javascript>/js/jquery.paginate.js</header-portlet-javascript-->
 		<header-portlet-javascript>/js/jquery.pagination.js</header-portlet-javascript>

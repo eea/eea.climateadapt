@@ -144,7 +144,7 @@
 				<div class="case-studies-tabbed-content-section">
 					<ul>
 						<li>
-							<p><strong><em><%=nameOfClimateEntityShortText %> Description</em></strong></p>
+							<p><b><em><%=nameOfClimateEntityShortText %> Description</em></b></p>
 							<ul class="case-studies-tabbed-content-bullted-list">
 								<% if (type.equalsIgnoreCase("case study")) { %>
 									<li><a href="#challenges_anchor">Challenges</a></li>
@@ -157,7 +157,7 @@
 						</li>
 						
 						<li>
-							<p><strong><em>Additional Details</em></strong></p>
+							<p><b><em>Additional Details</em></b></p>
 							<ul class="case-studies-bullted-list">
 							     <%  if (Validator.isNotNull(measure.getCategory())) { %>
 										<li><a href="#category_anchor">Category</a></li>
@@ -190,7 +190,7 @@
 						</li>
 						
 						<li>
-							<p><strong><em>Reference Information</em></strong></p>
+							<p><b><em>Reference Information</em></b></p>
 							<ul class="case-studies-bullted-list">
 							   <% if (type.equalsIgnoreCase("case study")) { %>
 								<li><a href="#contact_anchor">Contact</a></li>
@@ -211,19 +211,19 @@
 					
 						<% if (type.equalsIgnoreCase("case study")) { %> <%-- beginning of condition type is case study --%>	
 						<li>
-							<a name="challenges_anchor"><strong><em>Challenges</em></strong></a>
+							<a name="challenges_anchor"><b><em>Challenges</em></b></a>
 							<p><%=measure.getChallenges() %></p>
 							<div class="case-studies-review-clearing"></div>
 						</li>
 						
 						<li>
-							<a name="objectives_anchor"><strong><em>Objectives</em></strong></a>
+							<a name="objectives_anchor"><b><em>Objectives</em></b></a>
 							<p><%=measure.getObjectives()%></p>
 							<div class="case-studies-form-clearing"></div>
 						</li>
 											
 						<li>
-								<a name="adapt_options_anchor"><strong><em>Adaptation Options</em></strong></a>
+								<a name="adapt_options_anchor"><b><em>Adaptation Options</em></b></a>
 								 <%
 								    //Listing all adaptation options
 						           
@@ -263,13 +263,13 @@
 						</li>
 											
 						<li>
-								<a name="solutions_anchor"><strong><em>Solutions</em></strong></a>
+								<a name="solutions_anchor"><b><em>Solutions</em></b></a>
 								   <p><%=measure.getSolutions() %></p>
 								<div class="case-studies-form-clearing"></div>
 						</li>
 											
 						<li>
-								<a name="relevance_anchor"><strong><em>Relevance</em></strong></a>
+								<a name="relevance_anchor"><b><em>Relevance</em></b></a>
 								<%
 												    
 								    String[] relevanceAry = null;
@@ -303,7 +303,7 @@
 					     <% if (Validator.isNotNull(measure.getCategory()))
 						 {%>
 								<li>
-									<a name="category_anchor"><strong><em>Category</em></strong></a>
+									<a name="category_anchor"><b><em>Category</em></b></a>
 									
 									<%
 									   ArrayList catSelected = new ArrayList();
@@ -330,7 +330,7 @@
 						 <% if (Validator.isNotNull(measure.getStakeholderparticipation()))
 							{%>
 								<li>
-									<a name="stake_holder_anchor"><strong><em>Stakeholder Participation</em></strong></a>
+									<a name="stake_holder_anchor"><b><em>Stakeholder Participation</em></b></a>
 								    <p><%=measure.getStakeholderparticipation() %></p>
 								    <div class="case-studies-form-clearing"></div>
 							    </li>
@@ -340,7 +340,7 @@
 						   <% if (Validator.isNotNull(measure.getSucceslimitations()))
 							{%>
 									<li>
-										<a name="success_limitations_anchor"><strong><em>Success and Limiting Factors</em></strong></a>
+										<a name="success_limitations_anchor"><b><em>Success and Limiting Factors</em></b></a>
 										<p><%=measure.getSucceslimitations() %></p>
 									    <div class="case-studies-form-clearing"></div>
 									</li>
@@ -349,7 +349,7 @@
 						  <% if (Validator.isNotNull(measure.getCostbenefit()))
 						    {%>	
 								<li>
-									<a name="cost_benefit_anchor"><strong><em>Costs and Benefits</em></strong></a>
+									<a name="cost_benefit_anchor"><b><em>Costs and Benefits</em></b></a>
 									<p><%=measure.getCostbenefit() %></p>
 									<div class="case-studies-form-clearing"></div>
 								</li>
@@ -358,7 +358,7 @@
 							<% if (Validator.isNotNull(measure.getLegalaspects()))
 							   {%>	
 									<li>
-										<a name="legal_aspect_anchor"><strong><em>Legal Aspects</em></strong></a>
+										<a name="legal_aspect_anchor"><b><em>Legal Aspects</em></b></a>
 									    <p><%=measure.getLegalaspects() %></p>
 										<div class="case-studies-form-clearing"></div>
 									</li>
@@ -367,7 +367,7 @@
 							<% if (Validator.isNotNull(measure.getImplementationtime()))
 							   {%>	
 									<li>
-										<a name="implementation_time_anchor"><strong><em>Implementation Time</em></strong></a>
+										<a name="implementation_time_anchor"><b><em>Implementation Time</em></b></a>
 										<p><%=measure.getImplementationtime() %></p>
 										<div class="case-studies-form-clearing"></div>
 									</li>
@@ -376,7 +376,7 @@
 							<% if (Validator.isNotNull(measure.getLifetime()))
 							   {%>	
 									<li>
-										<a name="life_time_anchor"><strong><em>Life Time</em></strong></a>
+										<a name="life_time_anchor"><b><em>Life Time</em></b></a>
 										<p><%=measure.getLifetime() %></p>
 										<div class="case-studies-form-clearing"></div>
 								    </li>
@@ -389,14 +389,14 @@
 					<ul>
 					   <% if (type.equalsIgnoreCase("case study")) { %>
 						<li>
-							<a name="contact_anchor"><strong><em>Contact</em></strong></a>
+							<a name="contact_anchor"><b><em>Contact</em></b></a>
 							<p><%=measure.getContact() %></p>
 							<div class="case-studies-form-clearing"></div>
 						</li>
 						<% } %>
 											
 						<li>
-							   <a name="website_anchor"><strong><em>Websites</em></strong></a>
+							   <a name="website_anchor"><b><em>Websites</em></b></a>
 								<%
 								   // replacing the <p> tag
 								   String websiteForReview = measure.getWebsite();
@@ -416,7 +416,7 @@
 						<% if (Validator.isNotNull(measure.getSource()))
 						{%>	
 								<li>
-									<a name="source_anchor"><strong><em>Source</em></strong></a>
+									<a name="source_anchor"><b><em>Source</em></b></a>
 									<p><%=measure.getSource() %></p>
 									<div class="case-studies-form-clearing"></div>
 								</li>
@@ -426,10 +426,10 @@
 				
 				<div class="case-studies-review-clearing"></div>
 					<%
-						    String url = "";
-						    String submitText = "";
+						    String url = "/share-your-info";
+						    String submitText = "Share your information";
 						    
-						    if (nameOfClimateEntityShortText.equalsIgnoreCase("Case Study"))
+						    /* if (nameOfClimateEntityShortText.equalsIgnoreCase("Case Study"))
 						    {
 						    	submitText = "Submit a Case Study";
 						    	url = "/share-your-info/case-studies";
@@ -438,11 +438,11 @@
 						    {
 						    	submitText = "Submit an Adaptation Option";
 						    	url = "/share-your-info/adaptation-options";
-						    }
+						    } */
 					%>
 				    <!--  insert submit button which takes to the ace data type page -->
 					<div class="bluebuttondiv">
-				                 <a href="<%=url %>" class="bluebutton"><%=submitText %></a>
+				          <a href="<%=url %>" class="bluebutton"><%=submitText %></a>
 				    </div>
 			</div>
 
@@ -516,7 +516,7 @@
 				    
 					 String[] sdocsForReview = measure.getSupdocs().split(";"); %>	   
 					 <div clas="case-studies-review-column-right-section">
-						<p><strong>Case Study Documents  (<%= sdocsForReview.length %>)</strong></p>
+						<p><b>Case Study Documents  (<%= sdocsForReview.length %>)</b></p>
 										<ul class="case-studies-bullted-list">
 								 <% 
 									     for (String doc:sdocsForReview)
@@ -535,12 +535,12 @@
 			
 				
 				<div class="case-studies-review-column-right-section">
-					<p><strong>Keywords</strong></p>
+					<p><b>Keywords</b></p>
 					<p><%=measure.getKeywords() %></p>
 				</div>
 
 				<div class="case-studies-review-column-right-section">
-					<p><strong>Sectors</strong></p>
+					<p><b>Sectors</b></p>
 					<%
 												    
 					    String[] sectorAry = null;
@@ -558,7 +558,7 @@
 				</div>
 
 				<div class="case-studies-review-column-right-section">
-				     <p><strong>Climate impacts</strong></p>
+				     <p><b>Climate impacts</b></p>
 				     
 					<%
 						String[] climateImpactsAry = null;
@@ -655,7 +655,7 @@
 										   %>
 										      
 								<div class="case-studies-review-column-right-section">
-						                       <p><strong>Geographic characterisation</strong></p>
+						                       <p><b>Geographic characterisation</b></p>
 						                       <p>
 						                       <c:choose>
 												     <c:when test="${geoElementSelected eq 'GLOBAL'}">
@@ -694,7 +694,7 @@
 												               
 												              <c:forEach var="subNationalElement" items="${subnationals}" >
 													                     <c:if test="${fn:contains(subNationalsSelected,subNationalElement) }">
-														                      <option value="${subNationalElement}">${subNationalElement.description}</option>
+														                      ${subNationalElement.description}
 														                 </c:if>
 														       </c:forEach>
 														       <br/><br/>

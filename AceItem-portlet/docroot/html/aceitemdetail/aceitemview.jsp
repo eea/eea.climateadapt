@@ -248,7 +248,13 @@
 				
 				<div class="case-studies-review-clearing"></div>
 					<!--  insert submit button which takes to the ace data type page -->
-				  <% if ( !(aceitemType.equalsIgnoreCase("Map Graph Data Set") || aceitemType.equalsIgnoreCase("Action"))) {%>
+				  <% if ( !(aceitemType.equalsIgnoreCase("Map Graph Data Set") || aceitemType.equalsIgnoreCase("Action"))) {
+					    // all blue button links now point to "Share your information" instead of aceitem specific links.
+					    // Can be reverted to point to ace item specific links whenever required as the
+					    // logic to get the ace item specific url is already implemented above.
+					    aceItemPageUrl = "/share-your-info";
+					    aceItemSubmitText = "Share your information";
+				  %>
 					<div class="bluebuttondiv">
 			                 <a href="<%=aceItemPageUrl %>" class="bluebutton"><%=aceItemSubmitText %></a>
 			        </div>
@@ -256,6 +262,28 @@
 			</div>
 	
 	        <div class="case-studies-review-column-right">
+	               <%
+				    if (Validator.isNotNull(aceitem.getSupdocs())) { 
+				    
+					 String[] sdocsForReview = aceitem.getSupdocs().split(";"); %>	   
+					 <div clas="case-studies-review-column-right-section">
+						<p><b>Project Documents  (<%= sdocsForReview.length %>)</b></p>
+										<ul class="case-studies-bullted-list">
+								 <% 
+									     for (String doc:sdocsForReview)
+									     {
+									    	 DLFileEntry uploadedFileEntry =  DLFileEntryLocalServiceUtil.getDLFileEntry(Long.parseLong(doc));
+									 	     String title = uploadedFileEntry.getTitle();
+									 	     String fileUrl = themeDisplay.getPortalURL() + themeDisplay.getPathContext() + "/documents/" + themeDisplay.getScopeGroupId() + "/" + uploadedFileEntry.getFolderId() +  "/" + HttpUtil.encodeURL(HtmlUtil.unescape(title));
+										
+									
+								 %>
+								        <li><a href="<%=fileUrl%>"><%=title %></a></li>
+								      <%} // end of for  %>
+										</ul>
+									</div>
+					<% } // end of if %>
+					
 				<div class="case-studies-review-column-right-section">
 					<p><b>Keywords</b></p>
 					<p><%=aceitem.getKeyword() %></p>
@@ -392,7 +420,7 @@
 												               
 												              <c:forEach var="subNationalElement" items="${subnationals}" >
 													                     <c:if test="${fn:contains(subNationalsSelected,subNationalElement) }">
-														                      <option value="${subNationalElement}">${subNationalElement.description}</option>
+														                      ${subNationalElement.description}
 														                 </c:if>
 														       </c:forEach>
 														       <br/><br/>

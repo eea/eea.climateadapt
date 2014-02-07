@@ -70,10 +70,18 @@
 <aui:button-row>
 
     <%-- Prepare URL for the link to the page where a new ace item can be added. --%>
-    <portlet:renderURL var="addAceItemURL">
-        <portlet:param name="jspPage" value="/html/aceitem/edit_aceitem.jsp" />
-        <portlet:param name="redirect" value="<%= redirectUrl %>" />
-    </portlet:renderURL>
+    <%-- 
+        The addAceItemURL no longer used in this page as the structure of the ace items have been modified and hence the url
+        So all the add links would point to the common share-your-info page --%>
+	<%-- 
+	   <portlet:renderURL var="addAceItemURL">
+	        <portlet:param name="jspPage" value="/html/aceitem/edit_aceitem.jsp" />
+	        <portlet:param name="redirect" value="<%= redirectUrl %>" />
+	    </portlet:renderURL>
+    --%>
+    
+    <%-- Display the button that links to the page where a new ace item can be added. --%>
+    <aui:button value="Add" onClick="/share-your-info"/>
 
     <%-- Submits aceItemsForm. In order to get submit value at server side, had to override the --%>
     <%-- button's onClick which sets the value to a hidden input. --%>

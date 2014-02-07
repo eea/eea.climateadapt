@@ -1204,7 +1204,7 @@
 										<p><em>Describe <b>costs</b> of this case study. Include:</em>
 										<ul class="case-studies-tabbed-content-bullted-list">
 											<li>Cost Estimates</li>
-											<li>Funding source (national/EU, name of source, e.g. Life+</li>
+											<li>Funding source (national/EU, name of source, e.g. Life+)</li>
 										</ul>
 										<p>Describe the <b>benefits</b> of the case study:</p>
 										<ul class="case-studies-tabbed-content-bullted-list">
@@ -1896,38 +1896,41 @@
 										        	try {
 											        	Object obj=JSONValue.parse(measureForGeoChars.getGeochars());
 														JSONObject jsonObject = (JSONObject) obj;
-														JSONObject geoElements = (JSONObject) jsonObject.get("geoElements");
-														elementSelected = (String) geoElements.get("element");
-														
-														JSONArray macroTransArray = (JSONArray) geoElements.get("macrotrans");
-														
-														for (int i = 0; i < macroTransArray.size(); i++ )
+														if (jsonObject != null)
 														{
-														     macroTransElements.add(macroTransArray.get(i));
-														}
-														
-		                                                JSONArray bioTransArray = (JSONArray) geoElements.get("biotrans");
-														
-														for (int i = 0; i < bioTransArray.size(); i++ )
-														{
-														     biographicalElements.add(bioTransArray.get(i));
-														}
-														
-														JSONArray subNationalsArray = (JSONArray) geoElements.get("subnational");
+															JSONObject geoElements = (JSONObject) jsonObject.get("geoElements");
+															elementSelected = (String) geoElements.get("element");
 															
-													    for (int i = 0; i < subNationalsArray.size(); i++ )
-													    {
-															     subNationalElements.add(subNationalsArray.get(i));
+															JSONArray macroTransArray = (JSONArray) geoElements.get("macrotrans");
+															
+															for (int i = 0; i < macroTransArray.size(); i++ )
+															{
+															     macroTransElements.add(macroTransArray.get(i));
+															}
+															
+			                                                JSONArray bioTransArray = (JSONArray) geoElements.get("biotrans");
+															
+															for (int i = 0; i < bioTransArray.size(); i++ )
+															{
+															     biographicalElements.add(bioTransArray.get(i));
+															}
+															
+															JSONArray subNationalsArray = (JSONArray) geoElements.get("subnational");
+																
+														    for (int i = 0; i < subNationalsArray.size(); i++ )
+														    {
+																     subNationalElements.add(subNationalsArray.get(i));
+															}
+														    
+														    JSONArray countriesArray = (JSONArray) geoElements.get("countries");
+															
+														    for (int i = 0; i < countriesArray.size(); i++ )
+														    {
+																     countryElements.add(countriesArray.get(i));
+															}
+														    
+														    city = (String) geoElements.get("city");
 														}
-													    
-													    JSONArray countriesArray = (JSONArray) geoElements.get("countries");
-														
-													    for (int i = 0; i < countriesArray.size(); i++ )
-													    {
-															     countryElements.add(countriesArray.get(i));
-														}
-													    
-													    city = (String) geoElements.get("city");
 										        	}
 										        	catch(Exception e)
 										        	{
