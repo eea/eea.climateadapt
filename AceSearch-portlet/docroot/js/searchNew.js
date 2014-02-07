@@ -117,7 +117,7 @@ jQuery(document).ready(function() {
     });	
 	
     
-    $j('#search_rel').qtip({
+    $j('.qtipclass').qtip({
         content: {
             text: '<p>A high relevance means that the word which is being searched for appears "relatively often" in the text.<p>',
             

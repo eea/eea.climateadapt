@@ -63,7 +63,7 @@
                 <input type="hidden" name="endyear" value="${searchParams.endyear}"/>
 
 				<liferay-ui:message key="acesearch-sort-by" />
-                <input type="radio" name="sortBy" class="sortByControl" id="${sortsearchRelevanceId}" value="RELEVANCE" checked /><a id="search_rel" class="glossary-inline-term" href="#" style="text-decoration:none;border:none;"><b><liferay-ui:message key="acesearch-sort-relevance" /></b></a>
+                <input type="radio" name="sortBy" class="sortByControl" id="${sortsearchRelevanceId}" value="RELEVANCE" checked /><a id="search_rel" class="glossary-inline-term qtipclass" href="#" style="text-decoration:none;border:none;"><b><liferay-ui:message key="acesearch-sort-relevance" /></b></a>
                 <input type="radio" name="sortBy" class="sortByControl" id="${sortsearchNameId}" value="NAME"/><liferay-ui:message key="acesearch-sort-name" />
                 <input type="radio" name="sortBy" class="sortByControl" id="${sortsearchYearId}" value="YEAR" /><liferay-ui:message key="acesearch-sort-year" />
                 <%--
