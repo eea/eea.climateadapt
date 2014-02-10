@@ -1,0 +1,83 @@
+@media screen {
+
+@import url(base.css);
+@import url(application.css);
+@import url(layout.css);
+@import url(dockbar.css);
+@import url(navigation.css);
+@import url(portlet.css);
+@import url(forms.css);
+@import url(extras.css);
+@import url(custom.css);
+
+}
+/* The style applied at print-time only. */
+
+@media print{
+
+	div#tabs ul.ui-tabs-nav{
+		display:none;
+	}
+
+	div.countries-list, div.region-list{
+		display:none;
+	}
+
+	div#header-menu, div#searchbox{
+		display:none;
+	}
+
+	div#layout-column_column-1 {
+		float:left;
+		padding-right:10px;
+	}
+
+	a#skip-to-content{
+		display:none;
+	}
+
+	#sec-menu, #navigation, #heading{
+		display:none;
+	}
+
+	nav#navigation, nav#sec-menu, hgroup#heading{
+		display:none;
+	}
+
+	div#sb-ast, div#sb-np, div#sb-csst, div#sb-syi{
+		display:none;
+	}
+
+	a.double-arrow{
+		display:none;
+	}
+
+	div.db-search-fp{
+		display:none;
+	}
+
+	ul#third-level-menu{
+		display:none;
+	}
+
+	div.portlet-msg-error{
+		display:none;
+	}
+
+	div#read-more-link{
+		display:none;
+	}
+
+	select{
+		display:none;
+	}
+
+	#footer {
+		padding-top: 20px;
+	}
+	#footer a{
+		float:left;
+		margin-left:100px;
+	}
+}
+
