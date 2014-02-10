@@ -385,7 +385,7 @@
 												          
 												          <c:if test="${fn:length(countriesSelected) gt 0}">
 												               Countries:<br/>
-												               <c:forEach var="countryElement" items="${countriessSelected}" >
+												               <c:forEach var="countryElement" items="${countriesSelected}" >
 													                <liferay-ui:message key="acesearch-country-lbl-${countryElement}"/>,
 													           </c:forEach>
 													           <br/><br/>
