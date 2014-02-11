@@ -33,7 +33,7 @@ CHM.Control.Map.Map = OpenLayers.Class(OpenLayers.Map, {
 		
 		this.maxExtent = new OpenLayers.Bounds(-2680799.4555375, 3150551.002161, 5244191.63565, 10799431.180210993);
         
-		this.restrictedExtent = new OpenLayers.Bounds(-2680799.4555375, 3150551.002161, 5253975.5752687, 10799431.180210993);
+		this.restrictedExtent = new OpenLayers.Bounds(-3680799.4555375, 3150551.002161, 5253975.5752687, 10799431.180210993);
         
         this.addControl(new OpenLayers.Control.LayerSwitcher());
         
