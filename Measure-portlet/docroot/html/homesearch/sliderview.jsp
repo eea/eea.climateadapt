@@ -101,7 +101,14 @@
 							        	AceItem aceItem = (AceItem) renderRequest.getAttribute("aceadaptobject");
 							        	name = aceItem.getName();
 							        	description = aceItem.getDescription();
-							        	url = "viewaceitem?aceitem_id=" + String.valueOf(aceItem.getAceItemId());
+							        	if (! (aceItem.getDatatype().equalsIgnoreCase("RESEARCHPROJECT")) )
+							        	{
+							        	   url = "viewaceitem?aceitem_id=" + String.valueOf(aceItem.getAceItemId());
+							        	}
+							        	else
+							        	{
+							        		url = "projects1?ace_project_id=" + String.valueOf(aceItem.getAceItemId());
+							        	}
 							        }
 							        
 									// make it to first full stop if it is less than or equal to 420 else restrict to first 420 characters

@@ -78,11 +78,12 @@
 	<!-- Portlet Content Starts Here -->
 	<!-- =========================== -->
 	<div id="case-studies-review-wrapper">
-	 <div class="case-studies-tabbed-content-header"><%=project.getAcronym() %>: <%=project.getTitle() %> <em>Review</em></div>
+	 <div class="case-studies-tabbed-content-header">Project</div>
 	
 	
 	<div class="case-studies-review-column-left">
                 <div class="case-studies-tabbed-content-section">
+                   <p class="case-review-header"><%=project.getAcronym() %>: <%=project.getTitle() %></p>
 					<p><b>Description:</b></p>
 					<p><%= project.getAbstracts() %></p>
 				</div>
@@ -369,24 +370,24 @@
 												          
 												          <c:if test="${fn:length(macroTransSelected) gt 0}">
 												               Macro-Transnational region:
-												               <c:forEach var="macroTransElement" items="${macroTransSelected}" >
-													                <liferay-ui:message key="acesearch-geochars-lbl-${macroTransElement}"/>,
+												               <c:forEach var="macroTransElement" items="${macroTransSelected}" varStatus="status">
+													                <liferay-ui:message key="acesearch-geochars-lbl-${macroTransElement}"/>${not status.last ? ',' : ''}
 													           </c:forEach>
 													           <br/><br/>
 												          </c:if>
 												          
 												          <c:if test="${fn:length(bioRegionSelected) gt 0}">
 												               Biographical regions:<br/>
-												               <c:forEach var="bioRegionElement" items="${bioRegionSelected}" >
-													                <liferay-ui:message key="acesearch-geochars-lbl-${bioRegionElement}"/>,
+												               <c:forEach var="bioRegionElement" items="${bioRegionSelected}" varStatus="status" >
+													                <liferay-ui:message key="acesearch-geochars-lbl-${bioRegionElement}"/>${not status.last ? ',' : ''}
 													           </c:forEach>
 													           <br/><br/>
 												          </c:if>
 												          
 												          <c:if test="${fn:length(countriesSelected) gt 0}">
 												               Countries:<br/>
-												               <c:forEach var="countryElement" items="${countriesSelected}" >
-													                <liferay-ui:message key="acesearch-country-lbl-${countryElement}"/>,
+												               <c:forEach var="countryElement" items="${countriesSelected}" varStatus="status">
+													                <liferay-ui:message key="acesearch-country-lbl-${countryElement}"/>${not status.last ? ',' : ''}
 													           </c:forEach>
 													           <br/><br/>
 												          </c:if>
@@ -394,10 +395,10 @@
 												          <c:if test="${fn:length(subNationalsSelected) gt 0}">
 												               Sub Nationals:<br/>
 												               
-												              <c:forEach var="subNationalElement" items="${subnationals}" >
+												              <c:forEach var="subNationalElement" items="${subnationals}" varStatus="status">
 													                     <c:if test="${fn:contains(subNationalsSelected,subNationalElement) }">
 														                      ${subNationalElement.description}
-														                 </c:if>
+														                 </c:if>${not status.last ? ',' : ''}
 														       </c:forEach>
 														       <br/><br/>
 												          </c:if>

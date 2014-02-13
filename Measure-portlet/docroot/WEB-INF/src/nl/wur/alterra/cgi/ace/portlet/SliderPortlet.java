@@ -51,7 +51,7 @@ public class SliderPortlet extends MVCPortlet {
 			query.add(PropertyFactoryUtil.forName("controlstatus").eq(new Short((short)1)));
 			query.add(PropertyFactoryUtil.forName("mao_type").eq(mao_type));
 			query.add(PropertyFactoryUtil.forName("casestudyfeature").like("CASEHOME%"));
-			query.addOrder(OrderFactoryUtil.desc("creationdate"));
+			query.addOrder(OrderFactoryUtil.desc("approvaldate"));
 			query.setLimit(0, 1);
 			List results = MeasureLocalServiceUtil.dynamicQuery(query);
 		
@@ -67,11 +67,12 @@ public class SliderPortlet extends MVCPortlet {
 			}
 			
 			// Second we have to get the latest adaptation option or the latest types
+			// Have to find out the better approach
 			mao_type = "M";
 			query = DynamicQueryFactoryUtil.forClass(Measure.class);
 			query.add(PropertyFactoryUtil.forName("controlstatus").eq(new Short((short)1)));
 			query.add(PropertyFactoryUtil.forName("mao_type").eq(mao_type));
-			query.addOrder(OrderFactoryUtil.desc("creationdate"));
+			query.addOrder(OrderFactoryUtil.desc("approvaldate"));
 			query.setLimit(0, 1);
 			results = MeasureLocalServiceUtil.dynamicQuery(query);
 		
@@ -93,7 +94,7 @@ public class SliderPortlet extends MVCPortlet {
 			query.add(PropertyFactoryUtil.forName("controlstatus").eq(new Short((short)1)));
 			String[] dataTypes = {"ORGANISATION", "RESEARCHPROJECT", "TOOL", "GUIDANCE", "DOCUMENT", "INFORMATIONSOURCE"};
 			query.add(PropertyFactoryUtil.forName("datatype").in(dataTypes));
-			query.addOrder(OrderFactoryUtil.desc("creationdate"));
+			query.addOrder(OrderFactoryUtil.desc("approvaldate"));
 			query.setLimit(0, 1);
 			results = AceItemLocalServiceUtil.dynamicQuery(query);
 			if (results != null && results.size() > 0)
@@ -107,13 +108,13 @@ public class SliderPortlet extends MVCPortlet {
 			
 			if (adaptationOption != null && aceItem != null)
 			{
-				Date adaptCreationDate = adaptationOption.getCreationdate();
-				Date aceItemCreationDate = aceItem.getCreationdate();
+				Date adaptApprovalDate = adaptationOption.getApprovaldate();
+				Date aceItemApprovalDate = aceItem.getApprovaldate();
 				
-				log.info("adaptation option creation date " + adaptCreationDate);
-				log.info("ace item creation date " + aceItemCreationDate);
+				log.info("adaptation option approval date " + adaptApprovalDate);
+				log.info("ace item approval date " + aceItemApprovalDate);
 				
-				if (adaptCreationDate.compareTo(aceItemCreationDate) >= 0)
+				if (adaptApprovalDate.compareTo(aceItemApprovalDate) >= 0)
 				{
 					renderRequest.setAttribute("type", "adaptationoption");
 					renderRequest.setAttribute("aceadaptobject", adaptationOption);
@@ -132,7 +133,7 @@ public class SliderPortlet extends MVCPortlet {
 			}
 			else
 			{
-				renderRequest.setAttribute("type", "aceitemobject");
+				renderRequest.setAttribute("type", "aceitem");
 				renderRequest.setAttribute("aceadaptobject", aceItem);
 			}
 			

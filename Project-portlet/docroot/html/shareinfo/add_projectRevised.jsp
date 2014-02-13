@@ -475,7 +475,6 @@
 				<p><b><span class="red">*</span> <em>Provide information focusing on project output. Possibly on specific Website features. (5,000 character limit)</em></b></p>
 				
 				<% if (projectItem != null && projectItem.getAbstracts() != null) { %>
-					<textarea id="<portlet:namespace />descriptionField" cols="40" rows="10" class="WYSIWYG" name="abstracts" data-maxlength="1000"><%= projectItem.getAbstracts() %></textarea>
 					<textarea id="descriptionId" name="abstracts" cols="40" rows="10" class="WYSIWYG" data-maxlength="5000"><%= projectItem.getAbstracts() %></textarea>
 				<%} else {
 							// preserve the render parameter already sent
@@ -506,7 +505,6 @@
 				<p><b><span class="red">*</span> <em>Provide information about project partners (organisation names). (5,000 character limit)</em></b></p>
 				
 				<% if (projectItem != null && projectItem.getPartners() != null) { %>
-					<textarea id="<portlet:namespace />partnerField" cols="40" rows="10" class="WYSIWYG" name="partners" data-maxlength="1000"><%= projectItem.getPartners() %></textarea>
 					<textarea id="partnerId" name="partners" cols="40" rows="10" class="WYSIWYG" data-maxlength="5000"><%= projectItem.getPartners() %></textarea>
 				<%} else {
 							// preserve the render parameter already sent
@@ -930,7 +928,7 @@
 	   <liferay-ui:error key="geo-characterization-required" message="Geo Characterization Required" />
 	   <ul>
 			<li>
-				<p><em>Select the characterisation for this case study</em></p>
+				<p><em>Select the characterisation for this project</em></p>
         <ul class="one-col">
 										   <%
 										        ArrayList subnationalRegions = new ArrayList();
@@ -1118,7 +1116,7 @@
 											               
 															<ul>
 																<li>
-																	<p><em>Select one or more European Union countries covered by this case study</em></p>
+																	<p><em>Select one or more European Union countries covered by this project</em></p>
 																	<ul class="five-col">
 																	
 																		<c:forEach var="countryElement" items="<%= nl.wur.alterra.cgi.ace.model.constants.AceItemCountry.values() %>" >

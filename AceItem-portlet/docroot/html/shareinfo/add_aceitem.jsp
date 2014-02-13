@@ -843,7 +843,7 @@
 	   <liferay-ui:error key="geo-characterization-required" message="Geo Characterization Required" />
 	   <ul>
 			<li>
-				<p><em>Select the characterisation for this case study</em></p>
+				<p><em>Select the characterisation for this item</em></p>
         <ul class="one-col">
 										   <%
 										        ArrayList subnationalRegions = new ArrayList();
@@ -1030,7 +1030,7 @@
 											               
 															<ul>
 																<li>
-																	<p><em>Select one or more European Union countries covered by this case study</em></p>
+																	<p><em>Select one or more European Union countries covered by this item</em></p>
 																	<ul class="five-col">
 																	
 																		<c:forEach var="countryElement" items="<%= nl.wur.alterra.cgi.ace.model.constants.AceItemCountry.values() %>" >
@@ -1300,33 +1300,33 @@
 												          
 												          <c:if test="${fn:length(macroTransSelected) gt 0}">
 												               Macro-Transnational region:<br/>
-												               <c:forEach var="macroTransElement" items="${macroTransSelected}" >
-													                <liferay-ui:message key="acesearch-geochars-lbl-${macroTransElement}"/>,
+												               <c:forEach var="macroTransElement" items="${macroTransSelected}" varStatus="status">
+													                <liferay-ui:message key="acesearch-geochars-lbl-${macroTransElement}"/>${not status.last ? ',' : ''}
 													           </c:forEach>
 													           <br/><br/>
 												          </c:if>
 												          
 												          <c:if test="${fn:length(bioRegionSelected) gt 0}">
 												               Biographical regions:<br/>
-												               <c:forEach var="bioRegionElement" items="${bioRegionSelected}" >
-													                <liferay-ui:message key="acesearch-geochars-lbl-${bioRegionElement}"/>,
+												               <c:forEach var="bioRegionElement" items="${bioRegionSelected}" varStatus="status">
+													                <liferay-ui:message key="acesearch-geochars-lbl-${bioRegionElement}"/>${not status.last ? ',' : ''}
 													           </c:forEach>
 													           <br/><br/>
 												          </c:if>
 												          
 												          <c:if test="${fn:length(countriesSelected) gt 0}">
 												               Countries:<br/>
-												               <c:forEach var="countryElement" items="${countriesSelected}" >
-													                <liferay-ui:message key="acesearch-country-lbl-${countryElement}"/>,
+												               <c:forEach var="countryElement" items="${countriesSelected}" varStatus="status">
+													                <liferay-ui:message key="acesearch-country-lbl-${countryElement}"/>${not status.last ? ',' : ''}
 													           </c:forEach>
 													           <br/><br/>
 												          </c:if>
 												          
 												          <c:if test="${fn:length(subNationalsSelected) gt 0}">
 												               Sub Nationals:<br/>
-													           <c:forEach var="subNationalElement" items="${subnationals}" >
+													           <c:forEach var="subNationalElement" items="${subnationals}" varStatus="status">
 													                     <c:if test="${fn:contains(subNationalsSelected,subNationalElement) }">
-														                       ${subNationalElement.description},
+														                       ${subNationalElement.description}${not status.last ? ',' : ''}
 														                 </c:if>
 														       </c:forEach>
 														       <br/><br/>
