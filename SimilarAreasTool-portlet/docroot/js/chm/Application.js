@@ -58,7 +58,7 @@ CHM.Application = Ext.extend(Ext.Panel,  {
 		
     	this.helpButton = new Ext.Button({iconCls: 'x-help', tooltip: helptooltip, id: 'help-button', disabled: false});
     	
-    	var panel = new Ext.Panel({x: this.margin, y: this.margin, border: false, id:  'csst-title-help', items: [this.titleControl, {xtype: 'label', html: '&nbsp;'}, this.helpButton], layout: 'column'});
+    	var panel = new Ext.Panel({x: this.margin, y: this.margin, border: false, id: 'csst-title-help', items: [this.titleControl, {xtype: 'label', html: '&nbsp;'}, this.helpButton], layout: 'column'});
 		
     	this.mapControl = new CHM.Control.Map.MapControl({width: this.width / 4 * 3 - (this.margin * 1.5), height: this.height / 8 * 3 - (this.margin / 2) - (this.margin / 2), x: this.margin, y: this.height / 8 * 1 + (this.margin / 2)});
     	
@@ -68,9 +68,9 @@ CHM.Application = Ext.extend(Ext.Panel,  {
     	
     	this.optionsControl = new CHM.Control.Options.OptionsControl({width: this.width / 4 * 1 - (this.margin / 2) - this.margin, height: this.height / 8 * 1.5, x: this.width / 4 * 3 + (this.margin / 2), y: this.height / 8 * 1 + (this.margin / 2)});
     	
-    	this.legendControl = new CHM.Control.Legend.LegendControl({width: this.width / 4 * 1 - (this.margin / 2) - this.margin, height: this.height / 8 * 2.05, x: this.width / 4 * 3 + (this.margin / 2), y: this.height / 8 * 2.5 + (this.margin / 2) + this.margin});
+    	this.legendControl = new CHM.Control.Legend.LegendControl({width: this.width / 4 * 1 - (this.margin / 2) - this.margin, height: this.height / 8 * 2.5, x: this.width / 4 * 3 + (this.margin / 2), y: this.height / 8 * 2.5 + (this.margin / 2) + this.margin});
     	
-    	this.actionButtonPanel = new Ext.Panel({width: this.width / 4 * 1 - (this.margin / 2) - this.margin, height: this.height / 8 * 0.75, x: this.width / 4 * 3 + (this.margin / 2), y: this.height / 8 * 2.5 + (this.margin / 2) + this.margin + this.margin + this.height / 8 * 2.05, html: '<a href="/share-your-info/case-studies" class="bluebutton">Submit a case study</a>', border: false});
+    	this.actionButtonPanel = new Ext.Panel({width: this.width / 4 * 1 - (this.margin / 2) - this.margin, height: this.height / 8 * 0.75, x: this.width / 4 * 3 + (this.margin / 2), y: this.height / 8 * 2.8 + (this.margin / 2) + this.margin + this.margin + this.height / 8 * 2.05, html: '<a href="/share-your-info/case-studies" class="bluebutton">Share your information</a>', border: false});
     	
 		this.defaults = {collapsible : false, split : true};
 
