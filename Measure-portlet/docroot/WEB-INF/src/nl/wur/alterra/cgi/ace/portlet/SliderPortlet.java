@@ -50,6 +50,7 @@ public class SliderPortlet extends MVCPortlet {
 			DynamicQuery query = DynamicQueryFactoryUtil.forClass(Measure.class);
 			query.add(PropertyFactoryUtil.forName("controlstatus").eq(new Short((short)1)));
 			query.add(PropertyFactoryUtil.forName("mao_type").eq(mao_type));
+			query.add(PropertyFactoryUtil.forName("approvaldate").isNotNull());
 			query.add(PropertyFactoryUtil.forName("casestudyfeature").like("CASEHOME%"));
 			query.addOrder(OrderFactoryUtil.desc("approvaldate"));
 			query.setLimit(0, 1);
@@ -61,6 +62,7 @@ public class SliderPortlet extends MVCPortlet {
 				List<Measure> listOfMeasure = (List<Measure>) results;
 				caseStudy = listOfMeasure.get(0);
 				log.info("latest case study obtained is " + caseStudy.getName());
+				log.info("latest case study id is " + caseStudy.getMeasureId());
 				log.info("description is " + caseStudy.getDescription());
 				renderRequest.setAttribute("casestudy", caseStudy);
 				
@@ -72,6 +74,7 @@ public class SliderPortlet extends MVCPortlet {
 			query = DynamicQueryFactoryUtil.forClass(Measure.class);
 			query.add(PropertyFactoryUtil.forName("controlstatus").eq(new Short((short)1)));
 			query.add(PropertyFactoryUtil.forName("mao_type").eq(mao_type));
+			query.add(PropertyFactoryUtil.forName("approvaldate").isNotNull());
 			query.addOrder(OrderFactoryUtil.desc("approvaldate"));
 			query.setLimit(0, 1);
 			results = MeasureLocalServiceUtil.dynamicQuery(query);
@@ -94,6 +97,7 @@ public class SliderPortlet extends MVCPortlet {
 			query.add(PropertyFactoryUtil.forName("controlstatus").eq(new Short((short)1)));
 			String[] dataTypes = {"ORGANISATION", "RESEARCHPROJECT", "TOOL", "GUIDANCE", "DOCUMENT", "INFORMATIONSOURCE"};
 			query.add(PropertyFactoryUtil.forName("datatype").in(dataTypes));
+			query.add(PropertyFactoryUtil.forName("approvaldate").isNotNull());
 			query.addOrder(OrderFactoryUtil.desc("approvaldate"));
 			query.setLimit(0, 1);
 			results = AceItemLocalServiceUtil.dynamicQuery(query);
