@@ -107,7 +107,9 @@
 							        	}
 							        	else
 							        	{
-							        		url = "projects1?ace_project_id=" + String.valueOf(aceItem.getAceItemId());
+							        		String projectId = aceItem.getStoredAt();
+							        		projectId = projectId.substring(projectId.indexOf('=')+1);
+							        		url = "projects1?ace_project_id=" + String.valueOf(projectId);
 							        	}
 							        }
 							        
