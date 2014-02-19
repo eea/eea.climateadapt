@@ -42,6 +42,7 @@ task step1( type: JavaExec ) {
 		println('>> Starting DB migration step1 LR6.0 -> LR6.1')
 	}
 	description "Upgrade LR6.0 database to LR6.1"
+	group "LR upgrade"
 	dependsOn rootProject.rewriteProperties
 	dependsOn copyResources
 	main = 'com.liferay.portal.tools.DBUpgrader'

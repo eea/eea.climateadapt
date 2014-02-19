@@ -57,7 +57,8 @@ task execUpgrade( type: JavaExec ) {
 }
 
 task step2( type: Zip ) {
-
+	description "Upgrade LR6.1 database to LR6.2"
+	group "LR upgrade"
 	delete('../build/data.zip')
 	dependsOn execUpgrade
 

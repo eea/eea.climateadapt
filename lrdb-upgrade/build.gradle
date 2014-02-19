@@ -29,7 +29,7 @@ task downloadLr61() {
 		println('>> Downloading LR 6.1 upgrade bundle')
 
 		download {
-	        src 'http://downloads.sourceforge.net/project/lportal/Liferay%20Portal/6.1.1%20GA2/liferay-portal-db-upgrade-6.1.1-ce-ga2-20120731132656558.zip?r=http%3A%2F%2Fsourceforge.net%2Fprojects%2Flportal%2Ffiles%2FLiferay%2520Portal%2F6.1.1%2520GA2%2F&ts=1392667528&use_mirror=kent'
+	        src 'http://downloads.sourceforge.net/project/lportal/Liferay%20Portal/6.1.1%20GA2/liferay-portal-db-upgrade-6.1.1-ce-ga2-20120731132656558.zip?r=http%3A%2F%2Fsourceforge.net%2Fprojects%2Flportal%2Ffiles%2FLiferay%2520Portal%2F6.1.1%2520GA2%2F&ts=1392667528&use_mirror=netcologne'
 	        dest "${buildDir}/lr6.1.zip"
 	        onlyIfNewer true
 	    }
@@ -66,7 +66,12 @@ task downloadLr62() {
     
 }
 
-task rewriteProperties( dependsOn: ['downloadLr61','downloadLr62'] ) {
+task download( dependsOn: ['downloadLr61','downloadLr62'] ) {
+	description "Downloads LR LR6.0 and LR6.2 upgrade bundles"
+	group "LR upgrade"
+}
+
+task rewriteProperties( dependsOn: ['download'] ) {
 	doFirst{
 
 		println('>> Rewriting portal-ext.properties')
@@ -102,9 +107,14 @@ task rewriteProperties( dependsOn: ['downloadLr61','downloadLr62'] ) {
 
 
 task upgrade(dependsOn: [':lr61patch:step1', ':lr62patch:step2']) {
-	description "Performs LR upgrade from LR6.0 to LR6.2"
+	description "Performs full LR upgrade from LR6.0 to LR6.2"
+	group "LR upgrade"
 }
 
 task clean() {
-	delete( buildDir )
+	group "LR upgrade"
+	description "Deletes the build directory"
+	doLast{
+		delete( buildDir )
+	}
 }
