@@ -1,0 +1,52 @@
+apply plugin: 'java'
+
+sourceSets {
+    main {
+        java {
+            srcDir 'src'
+        }
+        resources {
+            srcDir 'src/resources'
+        }
+    }
+}
+
+libsDirName = "${lr61Dir}/lib"
+
+
+dependencies {
+  compile fileTree(dir: "${lr61Dir}/lib", include: '*.jar')
+}
+
+task copyResources(  ){
+	dependsOn rootProject.rewriteProperties
+
+	doFirst{
+		delete("${lr61Dir}liferay/data")
+		file("${lr61Dir}liferay/data").mkdirs()	
+	}
+		
+	doLast{
+		println('>> Coping resources from ' + rootProject.mainProps.getProperty('lr60.home') + "/data"  + ' to ' + "${lr61Dir}liferay/data")
+		copy{
+			from { rootProject.mainProps.getProperty('lr60.home') + "/data" }
+			into "${lr61Dir}liferay/data"
+		}
+	}
+
+}
+
+task step1( type: JavaExec ) {
+	
+	doFirst{
+		println('>> Starting DB migration step1 LR6.0 -> LR6.1')
+	}
+	description "Upgrade LR6.0 database to LR6.1"
+	dependsOn rootProject.rewriteProperties
+	dependsOn copyResources
+	main = 'com.liferay.portal.tools.DBUpgrader'
+	classpath = sourceSets.main.runtimeClasspath
+	workingDir = "${lr61Dir}"
+	maxHeapSize= "2048M"
+	jvmArgs = ["-XX:MaxPermSize=128M","-Dfile.encoding=UTF8", "-Duser.country=US", "-Duser.language=en", "-Duser.timezone=GMT"]
+}

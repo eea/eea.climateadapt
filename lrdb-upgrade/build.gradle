@@ -1,0 +1,110 @@
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath 'de.undercouch:gradle-download-task:0.5'
+    }
+}
+
+apply plugin: 'download-task'
+
+ext{
+	lr61Dir = "${buildDir}/liferay-portal-db-upgrade-6.1.1-ce-ga2/"
+	lr62Dir = "${buildDir}/liferay-portal-db-upgrade-6.2.0-ce-ga1/"
+	propertiesFile = "build.properties"
+	mainProps = new Properties()
+}
+
+
+
+
+task downloadLr61() {
+
+	inputs.file "${buildDir}/lr6.1.zip"
+	outputs.dir lr61Dir
+
+	doLast{
+
+		println('>> Downloading LR 6.1 upgrade bundle')
+
+		download {
+	        src 'http://downloads.sourceforge.net/project/lportal/Liferay%20Portal/6.1.1%20GA2/liferay-portal-db-upgrade-6.1.1-ce-ga2-20120731132656558.zip?r=http%3A%2F%2Fsourceforge.net%2Fprojects%2Flportal%2Ffiles%2FLiferay%2520Portal%2F6.1.1%2520GA2%2F&ts=1392667528&use_mirror=kent'
+	        dest "${buildDir}/lr6.1.zip"
+	        onlyIfNewer true
+	    }
+
+	    copy { 
+	     from zipTree( "${buildDir}/lr6.1.zip" ) 
+	     into buildDir 
+		}	 
+	}
+}
+
+
+task downloadLr62() {
+
+	inputs.file "${buildDir}/lr6.2.zip"
+	outputs.dir lr62Dir
+
+	doLast{
+
+		println('>> Downloading LR 6.2 upgrade bundle')
+
+		download {
+	        src 'http://downloads.sourceforge.net/project/lportal/Liferay%20Portal/6.2.0%20GA1/liferay-portal-db-upgrade-6.2.0-ce-ga1-20131101192857659.zip?r=http%3A%2F%2Fsourceforge.net%2Fprojects%2Flportal%2Ffiles%2FLiferay%2520Portal%2F6.2.0%2520GA1%2F&ts=1392643483&use_mirror=netcologne'
+	        dest "${buildDir}/lr6.2.zip"
+	        onlyIfNewer true
+	    }
+
+	    copy { 
+	     from zipTree( "${buildDir}/lr6.2.zip" ) 
+	     into buildDir 
+
+		}	 
+	}
+    
+}
+
+task rewriteProperties( dependsOn: ['downloadLr61','downloadLr62'] ) {
+	doFirst{
+
+		println('>> Rewriting portal-ext.properties')
+
+		File propsFile = new File("build.properties")
+		mainProps.load(propsFile.newDataInputStream())
+
+
+		Properties lr1p = new Properties()
+		propsFile = new File("${lr61Dir}/portal-ext.properties")
+		lr1p.load(propsFile.newDataInputStream())
+		lr1p.setProperty('jdbc.default.driverClassName', mainProps.getProperty('jdbc.default.driverClassName'))
+		lr1p.setProperty('jdbc.default.url', mainProps.getProperty('jdbc.default.url'))
+		lr1p.setProperty('jdbc.default.username',mainProps.getProperty('jdbc.default.username') )
+		lr1p.setProperty('jdbc.default.password',mainProps.getProperty('jdbc.default.password') )
+		lr1p.setProperty('image.hook.impl','com.liferay.portal.image.FileSystemHook') 
+		lr1p.store(propsFile.newWriter(), null)
+
+		Properties lr2p = new Properties()
+		propsFile = new File("${lr62Dir}/portal-ext.properties")
+		lr2p.load(propsFile.newDataInputStream())
+		lr2p.setProperty('jdbc.default.driverClassName', mainProps.getProperty('jdbc.default.driverClassName'))
+		lr2p.setProperty('jdbc.default.url', mainProps.getProperty('jdbc.default.url'))
+		lr2p.setProperty('jdbc.default.username',mainProps.getProperty('jdbc.default.username') )
+		lr2p.setProperty('jdbc.default.password',mainProps.getProperty('jdbc.default.password') )
+		lr1p.setProperty('image.hook.impl','com.liferay.portal.image.FileSystemHook') 
+		lr1p.setProperty('verify.processes','au.com.permeance.liferay.portal.verify.CustomVerifyProcessSuite') 
+
+		lr2p.store(propsFile.newWriter(), null)
+	}
+}
+
+
+
+task upgrade(dependsOn: [':lr61patch:step1', ':lr62patch:step2']) {
+	description "Performs LR upgrade from LR6.0 to LR6.2"
+}
+
+task clean() {
+	delete( buildDir )
+}

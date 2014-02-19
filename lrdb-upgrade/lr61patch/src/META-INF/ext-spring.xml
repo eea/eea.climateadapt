@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	default-destroy-method="destroy" default-init-method="afterPropertiesSet"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+	
+	<!-- LPS-37869 -->
+	<bean id="au.com.permeance.liferay.portal.documentlibrary.util.DLFileNameNormalizerUtil" class="au.com.permeance.liferay.portal.documentlibrary.util.DLFileNameNormalizerUtil">
+		<property name="fileNameNormalizer">
+			<bean class="au.com.permeance.liferay.portal.documentlibrary.util.DLFileNameNormalizerImpl" />
+		</property>
+	</bean>
+
+</beans>

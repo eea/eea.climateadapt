@@ -1,0 +1,69 @@
+apply plugin: 'java'
+
+sourceSets {
+    main {
+        java {
+            srcDir 'src'
+        }
+        resources {
+            srcDir 'src/resources'
+        }
+    }
+}
+
+libsDirName = "${lr62Dir}/lib"
+
+	  
+
+
+dependencies {
+  compile fileTree(dir: "${lr62Dir}/lib", include: '*.jar')
+}
+
+task copyResources(  ){
+	dependsOn rootProject.rewriteProperties
+	
+	doFirst{
+		delete("${lr62Dir}liferay/data")	
+	}
+	
+
+	doLast{
+		file("${lr62Dir}liferay/data").mkdirs()
+
+		println('>> Coping resources from ' + "${lr61Dir}liferay/data" + ' to ' + "${lr62Dir}liferay/data")
+
+		copy{
+			from { "${lr61Dir}liferay/data" }
+			into "${lr62Dir}liferay/data"
+		}
+	}
+
+}
+
+task execUpgrade( type: JavaExec ) {
+	doFirst{
+		println('>> Starting DB migration step2 LR6.1 -> LR6.2')
+	}
+	description "Upgrade LR6.1 database to LR6.2"
+	dependsOn rootProject.rewriteProperties
+	dependsOn copyResources
+	main = 'com.liferay.portal.tools.DBUpgrader'
+	classpath = sourceSets.main.runtimeClasspath
+	workingDir = "${lr62Dir}"
+	maxHeapSize= "2048M"
+	jvmArgs = ["-XX:MaxPermSize=128M","-Dfile.encoding=UTF8", "-Duser.country=US", "-Duser.language=en", "-Duser.timezone=GMT"]
+
+}
+
+task step2( type: Zip ) {
+
+	delete('../build/data.zip')
+	dependsOn execUpgrade
+
+	from "${lr62Dir}liferay/data"
+	destinationDir = file("../build/")
+	baseName = 'data'
+
+	
+}
