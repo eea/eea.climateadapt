@@ -18,6 +18,9 @@
 		}
 	</style>
 	#end
+	<style type="text/css">
+              #heading .logo{background:url($company_logo) no-repeat;display:block;font-size:0;height:88px;text-indent:-9999em;width:600px;}
+	</style>
 	
 </head>
 

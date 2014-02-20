@@ -3,7 +3,7 @@
 $(document).ready(function(){
 	
 	//New image for search button in the header
-	$('#searchbox input[type="image"]').attr('src', "/AceSearch-portlet/images/vergrootglas.png");
+	$('#searchbox input[type="image"]').attr('src', "/ace-theme/images/vergrootglas.png");
 	
 	//Several classes for the main menu
 	$("ul li:first-child").addClass("first");
