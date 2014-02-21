@@ -27,7 +27,7 @@ import nl.wur.alterra.cgi.ace.model.AceItem;
  * Never reference this class directly. All methods that expect a ace item model instance should use the {@link AceItem} interface instead.
  * </p>
  */
-public class AceItemImpl extends AceItemModelImpl implements AceItem {
+public class AceItemImpl extends AceItemBaseImpl {
 	public AceItemImpl() {
 	}
 

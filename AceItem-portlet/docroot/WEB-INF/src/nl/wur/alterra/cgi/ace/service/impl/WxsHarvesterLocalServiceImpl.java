@@ -121,7 +121,7 @@ public class WxsHarvesterLocalServiceImpl extends WxsHarvesterLocalServiceBaseIm
      * @throws SystemException
      */
     @Override
-	public void deleteWxsHarvester(WxsHarvester wxsHarvester) throws SystemException {
+	public nl.wur.alterra.cgi.ace.model.WxsHarvester deleteWxsHarvester(WxsHarvester wxsHarvester) throws SystemException {
         //
         // delete harvester in geonetwork
         //
@@ -147,7 +147,7 @@ public class WxsHarvesterLocalServiceImpl extends WxsHarvesterLocalServiceBaseIm
         // delete harvester in ACE
         //
         //System.out.println("deleting harvester " + wxsHarvester.toShortString() + " from ACE");
-        super.deleteWxsHarvester(wxsHarvester);
+        nl.wur.alterra.cgi.ace.model.WxsHarvester harvester = super.deleteWxsHarvester(wxsHarvester);
 
         //
         // delete AceItems created from metadata from this harvester
@@ -159,6 +159,7 @@ public class WxsHarvesterLocalServiceImpl extends WxsHarvesterLocalServiceBaseIm
             AceItemLocalServiceUtil.deleteAceItem(aceItem);
         }
         //System.out.println("succesfully deleted aceitems for harvester " + wxsHarvester.toShortString());
+        return harvester;
     }
 
 

@@ -27,8 +27,7 @@ import nl.wur.alterra.cgi.ace.model.WxsHarvester;
  * Never reference this class directly. All methods that expect a wxs harvester model instance should use the {@link WxsHarvester} interface instead.
  * </p>
  */
-public class WxsHarvesterImpl extends WxsHarvesterModelImpl
-	implements WxsHarvester {
+public class WxsHarvesterImpl extends WxsHarvesterBaseImpl {
 	public WxsHarvesterImpl() {
 	}
 

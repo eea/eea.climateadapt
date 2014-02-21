@@ -6,7 +6,9 @@ import javax.servlet.ServletContextEvent;
 
 /**
  * Application listener for AceItem web application.
- *
+ * 
+ *   PortletContextListener is deprecated in LR 6.2
+ *  
  * @author heikki doeleman
  */
 public class AceItemApplicationListener extends com.liferay.portal.kernel.servlet.PortletContextListener { //implements ServletContextListener {
@@ -16,17 +18,17 @@ public class AceItemApplicationListener extends com.liferay.portal.kernel.servle
         //System.out.println("AceItem Web Application Context initialized");
     }
 
-    @Override
-    protected void doPortalInit() {
-        super.doPortalInit();
-        //System.out.println("AceItem doPortalInit");
-    }
+    // @Override
+    // protected void doPortalInit() {
+    //     super.doPortalInit();
+    //     //System.out.println("AceItem doPortalInit");
+    // }
 
-    @Override
-    public void portalInit() {
-        //System.out.println("AceItem portalInit");
-        super.portalInit();
-    }
+    // @Override
+    // public void portalInit() {
+    //     //System.out.println("AceItem portalInit");
+    //     super.portalInit();
+    // }
 
     /**
      * Shuts down harvester execution service. TODO not tested.

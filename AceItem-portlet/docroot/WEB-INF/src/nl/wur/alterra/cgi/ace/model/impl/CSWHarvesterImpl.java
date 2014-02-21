@@ -27,8 +27,7 @@ import nl.wur.alterra.cgi.ace.model.CSWHarvester;
  * Never reference this class directly. All methods that expect a c s w harvester model instance should use the {@link CSWHarvester} interface instead.
  * </p>
  */
-public class CSWHarvesterImpl extends CSWHarvesterModelImpl
-	implements CSWHarvester {
+public class CSWHarvesterImpl extends CSWHarvesterBaseImpl {
 	public CSWHarvesterImpl() {
 	}
 

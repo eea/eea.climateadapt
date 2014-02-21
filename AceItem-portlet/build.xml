@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<project name="AceItem-portlet-portlet" basedir="." default="deploy">
+<project name="AceItem-portlet" basedir="." default="deploy">
 
 	<property file="${basedir}/build.properties" />
 

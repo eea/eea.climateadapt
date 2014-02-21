@@ -63,7 +63,7 @@ public class AceItemGoEditPortlet extends MVCPortlet {
 			} 
     	}
     		
-        include(viewJSP, renderRequest, renderResponse);
+        super.doView(renderRequest, renderResponse);
     }
     
 	/**

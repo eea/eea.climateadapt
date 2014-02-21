@@ -1,10 +1,10 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 
 <hibernate-mapping default-lazy="false" auto-import="false">
 	<import class="nl.wur.alterra.cgi.ace.model.AceItem" />
-	<import class="nl.wur.alterra.cgi.ace.model.WxsHarvester" />
 	<import class="nl.wur.alterra.cgi.ace.model.CSWHarvester" />
+	<import class="nl.wur.alterra.cgi.ace.model.WxsHarvester" />
 	<class name="nl.wur.alterra.cgi.ace.model.impl.AceItemImpl" table="Ace_AceItem">
 		<cache usage="read-write" />
 		<id name="aceItemId" type="long">
@@ -44,23 +44,6 @@
 		<property name="comments" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="textwebpage" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 	</class>
-	<class name="nl.wur.alterra.cgi.ace.model.impl.WxsHarvesterImpl" table="Ace_WxsHarvester">
-		<cache usage="read-write" />
-		<id name="wxsharvesterid" type="long">
-			<generator class="assigned" />
-		</id>
-		<property name="name" type="com.liferay.portal.dao.orm.hibernate.StringType" />
-		<property name="url" type="com.liferay.portal.dao.orm.hibernate.StringType" />
-		<property name="ogctype" type="com.liferay.portal.dao.orm.hibernate.StringType" />
-		<property name="every" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
-		<property name="topic" type="com.liferay.portal.dao.orm.hibernate.StringType" />
-		<property name="status" type="com.liferay.portal.dao.orm.hibernate.StringType" />
-		<property name="savedToGeoNetwork" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
-		<property name="geonetworkId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
-		<property name="geonetworkUUID" type="com.liferay.portal.dao.orm.hibernate.StringType" />
-		<property name="companyId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
-		<property name="groupId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
-	</class>
 	<class name="nl.wur.alterra.cgi.ace.model.impl.CSWHarvesterImpl" table="Ace_CSWHarvester">
 		<cache usage="read-write" />
 		<id name="cswharvesterid" type="long">
@@ -80,8 +63,25 @@
 		<property name="geonetworkUUID" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="companyId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 		<property name="groupId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
-		<property name="type" column="type_" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="type" type="com.liferay.portal.dao.orm.hibernate.StringType" column="type_" />
 		<property name="username" type="com.liferay.portal.dao.orm.hibernate.StringType" />
-		<property name="password" column="password_" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="password" type="com.liferay.portal.dao.orm.hibernate.StringType" column="password_" />
+	</class>
+	<class name="nl.wur.alterra.cgi.ace.model.impl.WxsHarvesterImpl" table="Ace_WxsHarvester">
+		<cache usage="read-write" />
+		<id name="wxsharvesterid" type="long">
+			<generator class="assigned" />
+		</id>
+		<property name="name" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="url" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="ogctype" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="every" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
+		<property name="topic" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="status" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="savedToGeoNetwork" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
+		<property name="geonetworkId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="geonetworkUUID" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="companyId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="groupId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 	</class>
 </hibernate-mapping>

@@ -36,7 +36,7 @@ public class AceItemDetailPortlet extends MVCPortlet {
         	
     		renderRequest.setAttribute(Constants.ACEITEMID, httpRequest.getParameter(Constants.ACEITEMID));
     		
-        include(viewJSP, renderRequest, renderResponse);
+        super.doView( renderRequest, renderResponse);
     }    
 
 	/**

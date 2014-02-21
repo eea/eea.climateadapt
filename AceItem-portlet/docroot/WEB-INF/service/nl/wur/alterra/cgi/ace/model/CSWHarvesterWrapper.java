@@ -1,257 +1,714 @@
-/**
- * Copyright (c) 2000-2010 Liferay, Inc. All rights reserved.
- *
- * This library is free software; you can redistribute it and/or modify it under
- * the terms of the GNU Lesser General Public License as published by the Free
- * Software Foundation; either version 2.1 of the License, or (at your option)
- * any later version.
- *
- * This library is distributed in the hope that it will be useful, but WITHOUT
- * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
- * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
- * details.
- */
-
 package nl.wur.alterra.cgi.ace.model;
+
+import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.model.ModelWrapper;
+
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * <p>
  * This class is a wrapper for {@link CSWHarvester}.
  * </p>
  *
- * @author    groot052
- * @see       CSWHarvester
+ * @author groot052
+ * @see CSWHarvester
  * @generated
  */
-public class CSWHarvesterWrapper implements CSWHarvester {
-	public CSWHarvesterWrapper(CSWHarvester cswHarvester) {
-		_cswHarvester = cswHarvester;
-	}
+public class CSWHarvesterWrapper implements CSWHarvester,
+    ModelWrapper<CSWHarvester> {
+    private CSWHarvester _cswHarvester;
 
-	public long getPrimaryKey() {
-		return _cswHarvester.getPrimaryKey();
-	}
+    public CSWHarvesterWrapper(CSWHarvester cswHarvester) {
+        _cswHarvester = cswHarvester;
+    }
 
-	public void setPrimaryKey(long pk) {
-		_cswHarvester.setPrimaryKey(pk);
-	}
+    @Override
+    public Class<?> getModelClass() {
+        return CSWHarvester.class;
+    }
 
-	public long getCswharvesterid() {
-		return _cswHarvester.getCswharvesterid();
-	}
+    @Override
+    public String getModelClassName() {
+        return CSWHarvester.class.getName();
+    }
 
-	public void setCswharvesterid(long cswharvesterid) {
-		_cswHarvester.setCswharvesterid(cswharvesterid);
-	}
+    @Override
+    public Map<String, Object> getModelAttributes() {
+        Map<String, Object> attributes = new HashMap<String, Object>();
 
-	public java.lang.String getName() {
-		return _cswHarvester.getName();
-	}
+        attributes.put("cswharvesterid", getCswharvesterid());
+        attributes.put("name", getName());
+        attributes.put("url", getUrl());
+        attributes.put("freetext", getFreetext());
+        attributes.put("title", getTitle());
+        attributes.put("abstrakt", getAbstrakt());
+        attributes.put("subject", getSubject());
+        attributes.put("every", getEvery());
+        attributes.put("topic", getTopic());
+        attributes.put("status", getStatus());
+        attributes.put("savedToGeoNetwork", getSavedToGeoNetwork());
+        attributes.put("geonetworkId", getGeonetworkId());
+        attributes.put("geonetworkUUID", getGeonetworkUUID());
+        attributes.put("companyId", getCompanyId());
+        attributes.put("groupId", getGroupId());
+        attributes.put("type", getType());
+        attributes.put("username", getUsername());
+        attributes.put("password", getPassword());
 
-	public void setName(java.lang.String name) {
-		_cswHarvester.setName(name);
-	}
+        return attributes;
+    }
 
-	public java.lang.String getUrl() {
-		return _cswHarvester.getUrl();
-	}
+    @Override
+    public void setModelAttributes(Map<String, Object> attributes) {
+        Long cswharvesterid = (Long) attributes.get("cswharvesterid");
 
-	public void setUrl(java.lang.String url) {
-		_cswHarvester.setUrl(url);
-	}
+        if (cswharvesterid != null) {
+            setCswharvesterid(cswharvesterid);
+        }
 
-	public java.lang.String getFreetext() {
-		return _cswHarvester.getFreetext();
-	}
+        String name = (String) attributes.get("name");
 
-	public void setFreetext(java.lang.String freetext) {
-		_cswHarvester.setFreetext(freetext);
-	}
+        if (name != null) {
+            setName(name);
+        }
 
-	public java.lang.String getTitle() {
-		return _cswHarvester.getTitle();
-	}
+        String url = (String) attributes.get("url");
 
-	public void setTitle(java.lang.String title) {
-		_cswHarvester.setTitle(title);
-	}
+        if (url != null) {
+            setUrl(url);
+        }
 
-	public java.lang.String getAbstrakt() {
-		return _cswHarvester.getAbstrakt();
-	}
+        String freetext = (String) attributes.get("freetext");
 
-	public void setAbstrakt(java.lang.String abstrakt) {
-		_cswHarvester.setAbstrakt(abstrakt);
-	}
+        if (freetext != null) {
+            setFreetext(freetext);
+        }
 
-	public java.lang.String getSubject() {
-		return _cswHarvester.getSubject();
-	}
+        String title = (String) attributes.get("title");
 
-	public void setSubject(java.lang.String subject) {
-		_cswHarvester.setSubject(subject);
-	}
+        if (title != null) {
+            setTitle(title);
+        }
 
-	public int getEvery() {
-		return _cswHarvester.getEvery();
-	}
+        String abstrakt = (String) attributes.get("abstrakt");
 
-	public void setEvery(int every) {
-		_cswHarvester.setEvery(every);
-	}
+        if (abstrakt != null) {
+            setAbstrakt(abstrakt);
+        }
 
-	public java.lang.String getTopic() {
-		return _cswHarvester.getTopic();
-	}
+        String subject = (String) attributes.get("subject");
 
-	public void setTopic(java.lang.String topic) {
-		_cswHarvester.setTopic(topic);
-	}
+        if (subject != null) {
+            setSubject(subject);
+        }
 
-	public java.lang.String getStatus() {
-		return _cswHarvester.getStatus();
-	}
+        Integer every = (Integer) attributes.get("every");
 
-	public void setStatus(java.lang.String status) {
-		_cswHarvester.setStatus(status);
-	}
+        if (every != null) {
+            setEvery(every);
+        }
 
-	public boolean getSavedToGeoNetwork() {
-		return _cswHarvester.getSavedToGeoNetwork();
-	}
+        String topic = (String) attributes.get("topic");
 
-	public boolean isSavedToGeoNetwork() {
-		return _cswHarvester.isSavedToGeoNetwork();
-	}
+        if (topic != null) {
+            setTopic(topic);
+        }
 
-	public void setSavedToGeoNetwork(boolean savedToGeoNetwork) {
-		_cswHarvester.setSavedToGeoNetwork(savedToGeoNetwork);
-	}
+        String status = (String) attributes.get("status");
 
-	public long getGeonetworkId() {
-		return _cswHarvester.getGeonetworkId();
-	}
+        if (status != null) {
+            setStatus(status);
+        }
 
-	public void setGeonetworkId(long geonetworkId) {
-		_cswHarvester.setGeonetworkId(geonetworkId);
-	}
+        Boolean savedToGeoNetwork = (Boolean) attributes.get(
+                "savedToGeoNetwork");
 
-	public java.lang.String getGeonetworkUUID() {
-		return _cswHarvester.getGeonetworkUUID();
-	}
+        if (savedToGeoNetwork != null) {
+            setSavedToGeoNetwork(savedToGeoNetwork);
+        }
 
-	public void setGeonetworkUUID(java.lang.String geonetworkUUID) {
-		_cswHarvester.setGeonetworkUUID(geonetworkUUID);
-	}
+        Long geonetworkId = (Long) attributes.get("geonetworkId");
 
-	public long getCompanyId() {
-		return _cswHarvester.getCompanyId();
-	}
+        if (geonetworkId != null) {
+            setGeonetworkId(geonetworkId);
+        }
 
-	public void setCompanyId(long companyId) {
-		_cswHarvester.setCompanyId(companyId);
-	}
+        String geonetworkUUID = (String) attributes.get("geonetworkUUID");
 
-	public long getGroupId() {
-		return _cswHarvester.getGroupId();
-	}
+        if (geonetworkUUID != null) {
+            setGeonetworkUUID(geonetworkUUID);
+        }
 
-	public void setGroupId(long groupId) {
-		_cswHarvester.setGroupId(groupId);
-	}
+        Long companyId = (Long) attributes.get("companyId");
 
-	public java.lang.String getType() {
-		return _cswHarvester.getType();
-	}
+        if (companyId != null) {
+            setCompanyId(companyId);
+        }
 
-	public void setType(java.lang.String type) {
-		_cswHarvester.setType(type);
-	}
+        Long groupId = (Long) attributes.get("groupId");
 
-	public java.lang.String getUsername() {
-		return _cswHarvester.getUsername();
-	}
+        if (groupId != null) {
+            setGroupId(groupId);
+        }
 
-	public void setUsername(java.lang.String username) {
-		_cswHarvester.setUsername(username);
-	}
+        String type = (String) attributes.get("type");
 
-	public java.lang.String getPassword() {
-		return _cswHarvester.getPassword();
-	}
+        if (type != null) {
+            setType(type);
+        }
 
-	public void setPassword(java.lang.String password) {
-		_cswHarvester.setPassword(password);
-	}
+        String username = (String) attributes.get("username");
 
-	public nl.wur.alterra.cgi.ace.model.CSWHarvester toEscapedModel() {
-		return _cswHarvester.toEscapedModel();
-	}
+        if (username != null) {
+            setUsername(username);
+        }
 
-	public boolean isNew() {
-		return _cswHarvester.isNew();
-	}
+        String password = (String) attributes.get("password");
 
-	public void setNew(boolean n) {
-		_cswHarvester.setNew(n);
-	}
+        if (password != null) {
+            setPassword(password);
+        }
+    }
 
-	public boolean isCachedModel() {
-		return _cswHarvester.isCachedModel();
-	}
+    /**
+    * Returns the primary key of this c s w harvester.
+    *
+    * @return the primary key of this c s w harvester
+    */
+    @Override
+    public long getPrimaryKey() {
+        return _cswHarvester.getPrimaryKey();
+    }
 
-	public void setCachedModel(boolean cachedModel) {
-		_cswHarvester.setCachedModel(cachedModel);
-	}
+    /**
+    * Sets the primary key of this c s w harvester.
+    *
+    * @param primaryKey the primary key of this c s w harvester
+    */
+    @Override
+    public void setPrimaryKey(long primaryKey) {
+        _cswHarvester.setPrimaryKey(primaryKey);
+    }
 
-	public boolean isEscapedModel() {
-		return _cswHarvester.isEscapedModel();
-	}
+    /**
+    * Returns the cswharvesterid of this c s w harvester.
+    *
+    * @return the cswharvesterid of this c s w harvester
+    */
+    @Override
+    public long getCswharvesterid() {
+        return _cswHarvester.getCswharvesterid();
+    }
 
-	public void setEscapedModel(boolean escapedModel) {
-		_cswHarvester.setEscapedModel(escapedModel);
-	}
+    /**
+    * Sets the cswharvesterid of this c s w harvester.
+    *
+    * @param cswharvesterid the cswharvesterid of this c s w harvester
+    */
+    @Override
+    public void setCswharvesterid(long cswharvesterid) {
+        _cswHarvester.setCswharvesterid(cswharvesterid);
+    }
 
-	public java.io.Serializable getPrimaryKeyObj() {
-		return _cswHarvester.getPrimaryKeyObj();
-	}
+    /**
+    * Returns the name of this c s w harvester.
+    *
+    * @return the name of this c s w harvester
+    */
+    @Override
+    public java.lang.String getName() {
+        return _cswHarvester.getName();
+    }
 
-	public com.liferay.portlet.expando.model.ExpandoBridge getExpandoBridge() {
-		return _cswHarvester.getExpandoBridge();
-	}
+    /**
+    * Sets the name of this c s w harvester.
+    *
+    * @param name the name of this c s w harvester
+    */
+    @Override
+    public void setName(java.lang.String name) {
+        _cswHarvester.setName(name);
+    }
 
-	public void setExpandoBridgeAttributes(
-		com.liferay.portal.service.ServiceContext serviceContext) {
-		_cswHarvester.setExpandoBridgeAttributes(serviceContext);
-	}
+    /**
+    * Returns the url of this c s w harvester.
+    *
+    * @return the url of this c s w harvester
+    */
+    @Override
+    public java.lang.String getUrl() {
+        return _cswHarvester.getUrl();
+    }
 
-	public java.lang.Object clone() {
-		return _cswHarvester.clone();
-	}
+    /**
+    * Sets the url of this c s w harvester.
+    *
+    * @param url the url of this c s w harvester
+    */
+    @Override
+    public void setUrl(java.lang.String url) {
+        _cswHarvester.setUrl(url);
+    }
 
-	public int compareTo(nl.wur.alterra.cgi.ace.model.CSWHarvester cswHarvester) {
-		return _cswHarvester.compareTo(cswHarvester);
-	}
+    /**
+    * Returns the freetext of this c s w harvester.
+    *
+    * @return the freetext of this c s w harvester
+    */
+    @Override
+    public java.lang.String getFreetext() {
+        return _cswHarvester.getFreetext();
+    }
 
-	public int hashCode() {
-		return _cswHarvester.hashCode();
-	}
+    /**
+    * Sets the freetext of this c s w harvester.
+    *
+    * @param freetext the freetext of this c s w harvester
+    */
+    @Override
+    public void setFreetext(java.lang.String freetext) {
+        _cswHarvester.setFreetext(freetext);
+    }
 
-	public java.lang.String toString() {
-		return _cswHarvester.toString();
-	}
+    /**
+    * Returns the title of this c s w harvester.
+    *
+    * @return the title of this c s w harvester
+    */
+    @Override
+    public java.lang.String getTitle() {
+        return _cswHarvester.getTitle();
+    }
 
-	public java.lang.String toXmlString() {
-		return _cswHarvester.toXmlString();
-	}
+    /**
+    * Sets the title of this c s w harvester.
+    *
+    * @param title the title of this c s w harvester
+    */
+    @Override
+    public void setTitle(java.lang.String title) {
+        _cswHarvester.setTitle(title);
+    }
 
-	public java.lang.String toShortString() {
-		return _cswHarvester.toShortString();
-	}
+    /**
+    * Returns the abstrakt of this c s w harvester.
+    *
+    * @return the abstrakt of this c s w harvester
+    */
+    @Override
+    public java.lang.String getAbstrakt() {
+        return _cswHarvester.getAbstrakt();
+    }
 
-	public CSWHarvester getWrappedCSWHarvester() {
-		return _cswHarvester;
-	}
+    /**
+    * Sets the abstrakt of this c s w harvester.
+    *
+    * @param abstrakt the abstrakt of this c s w harvester
+    */
+    @Override
+    public void setAbstrakt(java.lang.String abstrakt) {
+        _cswHarvester.setAbstrakt(abstrakt);
+    }
 
-	private CSWHarvester _cswHarvester;
+    /**
+    * Returns the subject of this c s w harvester.
+    *
+    * @return the subject of this c s w harvester
+    */
+    @Override
+    public java.lang.String getSubject() {
+        return _cswHarvester.getSubject();
+    }
+
+    /**
+    * Sets the subject of this c s w harvester.
+    *
+    * @param subject the subject of this c s w harvester
+    */
+    @Override
+    public void setSubject(java.lang.String subject) {
+        _cswHarvester.setSubject(subject);
+    }
+
+    /**
+    * Returns the every of this c s w harvester.
+    *
+    * @return the every of this c s w harvester
+    */
+    @Override
+    public int getEvery() {
+        return _cswHarvester.getEvery();
+    }
+
+    /**
+    * Sets the every of this c s w harvester.
+    *
+    * @param every the every of this c s w harvester
+    */
+    @Override
+    public void setEvery(int every) {
+        _cswHarvester.setEvery(every);
+    }
+
+    /**
+    * Returns the topic of this c s w harvester.
+    *
+    * @return the topic of this c s w harvester
+    */
+    @Override
+    public java.lang.String getTopic() {
+        return _cswHarvester.getTopic();
+    }
+
+    /**
+    * Sets the topic of this c s w harvester.
+    *
+    * @param topic the topic of this c s w harvester
+    */
+    @Override
+    public void setTopic(java.lang.String topic) {
+        _cswHarvester.setTopic(topic);
+    }
+
+    /**
+    * Returns the status of this c s w harvester.
+    *
+    * @return the status of this c s w harvester
+    */
+    @Override
+    public java.lang.String getStatus() {
+        return _cswHarvester.getStatus();
+    }
+
+    /**
+    * Sets the status of this c s w harvester.
+    *
+    * @param status the status of this c s w harvester
+    */
+    @Override
+    public void setStatus(java.lang.String status) {
+        _cswHarvester.setStatus(status);
+    }
+
+    /**
+    * Returns the saved to geo network of this c s w harvester.
+    *
+    * @return the saved to geo network of this c s w harvester
+    */
+    @Override
+    public boolean getSavedToGeoNetwork() {
+        return _cswHarvester.getSavedToGeoNetwork();
+    }
+
+    /**
+    * Returns <code>true</code> if this c s w harvester is saved to geo network.
+    *
+    * @return <code>true</code> if this c s w harvester is saved to geo network; <code>false</code> otherwise
+    */
+    @Override
+    public boolean isSavedToGeoNetwork() {
+        return _cswHarvester.isSavedToGeoNetwork();
+    }
+
+    /**
+    * Sets whether this c s w harvester is saved to geo network.
+    *
+    * @param savedToGeoNetwork the saved to geo network of this c s w harvester
+    */
+    @Override
+    public void setSavedToGeoNetwork(boolean savedToGeoNetwork) {
+        _cswHarvester.setSavedToGeoNetwork(savedToGeoNetwork);
+    }
+
+    /**
+    * Returns the geonetwork ID of this c s w harvester.
+    *
+    * @return the geonetwork ID of this c s w harvester
+    */
+    @Override
+    public long getGeonetworkId() {
+        return _cswHarvester.getGeonetworkId();
+    }
+
+    /**
+    * Sets the geonetwork ID of this c s w harvester.
+    *
+    * @param geonetworkId the geonetwork ID of this c s w harvester
+    */
+    @Override
+    public void setGeonetworkId(long geonetworkId) {
+        _cswHarvester.setGeonetworkId(geonetworkId);
+    }
+
+    /**
+    * Returns the geonetwork u u i d of this c s w harvester.
+    *
+    * @return the geonetwork u u i d of this c s w harvester
+    */
+    @Override
+    public java.lang.String getGeonetworkUUID() {
+        return _cswHarvester.getGeonetworkUUID();
+    }
+
+    /**
+    * Sets the geonetwork u u i d of this c s w harvester.
+    *
+    * @param geonetworkUUID the geonetwork u u i d of this c s w harvester
+    */
+    @Override
+    public void setGeonetworkUUID(java.lang.String geonetworkUUID) {
+        _cswHarvester.setGeonetworkUUID(geonetworkUUID);
+    }
+
+    /**
+    * Returns the company ID of this c s w harvester.
+    *
+    * @return the company ID of this c s w harvester
+    */
+    @Override
+    public long getCompanyId() {
+        return _cswHarvester.getCompanyId();
+    }
+
+    /**
+    * Sets the company ID of this c s w harvester.
+    *
+    * @param companyId the company ID of this c s w harvester
+    */
+    @Override
+    public void setCompanyId(long companyId) {
+        _cswHarvester.setCompanyId(companyId);
+    }
+
+    /**
+    * Returns the group ID of this c s w harvester.
+    *
+    * @return the group ID of this c s w harvester
+    */
+    @Override
+    public long getGroupId() {
+        return _cswHarvester.getGroupId();
+    }
+
+    /**
+    * Sets the group ID of this c s w harvester.
+    *
+    * @param groupId the group ID of this c s w harvester
+    */
+    @Override
+    public void setGroupId(long groupId) {
+        _cswHarvester.setGroupId(groupId);
+    }
+
+    /**
+    * Returns the type of this c s w harvester.
+    *
+    * @return the type of this c s w harvester
+    */
+    @Override
+    public java.lang.String getType() {
+        return _cswHarvester.getType();
+    }
+
+    /**
+    * Sets the type of this c s w harvester.
+    *
+    * @param type the type of this c s w harvester
+    */
+    @Override
+    public void setType(java.lang.String type) {
+        _cswHarvester.setType(type);
+    }
+
+    /**
+    * Returns the username of this c s w harvester.
+    *
+    * @return the username of this c s w harvester
+    */
+    @Override
+    public java.lang.String getUsername() {
+        return _cswHarvester.getUsername();
+    }
+
+    /**
+    * Sets the username of this c s w harvester.
+    *
+    * @param username the username of this c s w harvester
+    */
+    @Override
+    public void setUsername(java.lang.String username) {
+        _cswHarvester.setUsername(username);
+    }
+
+    /**
+    * Returns the password of this c s w harvester.
+    *
+    * @return the password of this c s w harvester
+    */
+    @Override
+    public java.lang.String getPassword() {
+        return _cswHarvester.getPassword();
+    }
+
+    /**
+    * Sets the password of this c s w harvester.
+    *
+    * @param password the password of this c s w harvester
+    */
+    @Override
+    public void setPassword(java.lang.String password) {
+        _cswHarvester.setPassword(password);
+    }
+
+    @Override
+    public boolean isNew() {
+        return _cswHarvester.isNew();
+    }
+
+    @Override
+    public void setNew(boolean n) {
+        _cswHarvester.setNew(n);
+    }
+
+    @Override
+    public boolean isCachedModel() {
+        return _cswHarvester.isCachedModel();
+    }
+
+    @Override
+    public void setCachedModel(boolean cachedModel) {
+        _cswHarvester.setCachedModel(cachedModel);
+    }
+
+    @Override
+    public boolean isEscapedModel() {
+        return _cswHarvester.isEscapedModel();
+    }
+
+    @Override
+    public java.io.Serializable getPrimaryKeyObj() {
+        return _cswHarvester.getPrimaryKeyObj();
+    }
+
+    @Override
+    public void setPrimaryKeyObj(java.io.Serializable primaryKeyObj) {
+        _cswHarvester.setPrimaryKeyObj(primaryKeyObj);
+    }
+
+    @Override
+    public com.liferay.portlet.expando.model.ExpandoBridge getExpandoBridge() {
+        return _cswHarvester.getExpandoBridge();
+    }
+
+    @Override
+    public void setExpandoBridgeAttributes(
+        com.liferay.portal.model.BaseModel<?> baseModel) {
+        _cswHarvester.setExpandoBridgeAttributes(baseModel);
+    }
+
+    @Override
+    public void setExpandoBridgeAttributes(
+        com.liferay.portlet.expando.model.ExpandoBridge expandoBridge) {
+        _cswHarvester.setExpandoBridgeAttributes(expandoBridge);
+    }
+
+    @Override
+    public void setExpandoBridgeAttributes(
+        com.liferay.portal.service.ServiceContext serviceContext) {
+        _cswHarvester.setExpandoBridgeAttributes(serviceContext);
+    }
+
+    @Override
+    public java.lang.Object clone() {
+        return new CSWHarvesterWrapper((CSWHarvester) _cswHarvester.clone());
+    }
+
+    @Override
+    public int compareTo(CSWHarvester cswHarvester) {
+        return _cswHarvester.compareTo(cswHarvester);
+    }
+
+    @Override
+    public int hashCode() {
+        return _cswHarvester.hashCode();
+    }
+
+    @Override
+    public com.liferay.portal.model.CacheModel<CSWHarvester> toCacheModel() {
+        return _cswHarvester.toCacheModel();
+    }
+
+    @Override
+    public CSWHarvester toEscapedModel() {
+        return new CSWHarvesterWrapper(_cswHarvester.toEscapedModel());
+    }
+
+    @Override
+    public CSWHarvester toUnescapedModel() {
+        return new CSWHarvesterWrapper(_cswHarvester.toUnescapedModel());
+    }
+
+    @Override
+    public java.lang.String toString() {
+        return _cswHarvester.toString();
+    }
+
+    @Override
+    public java.lang.String toXmlString() {
+        return _cswHarvester.toXmlString();
+    }
+
+    @Override
+    public void persist()
+        throws com.liferay.portal.kernel.exception.SystemException {
+        _cswHarvester.persist();
+    }
+
+    /**
+    * heikki doeleman: Liferay won't let me override toString(), because if I do that it generates 2 declarations of toString()
+    * in CSWHarvesterCpl, which does not compile. Thanks Liferay !
+    *
+    * @return shorter string than toString()
+    */
+    @Override
+    public java.lang.String toShortString() {
+        return _cswHarvester.toShortString();
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+
+        if (!(obj instanceof CSWHarvesterWrapper)) {
+            return false;
+        }
+
+        CSWHarvesterWrapper cswHarvesterWrapper = (CSWHarvesterWrapper) obj;
+
+        if (Validator.equals(_cswHarvester, cswHarvesterWrapper._cswHarvester)) {
+            return true;
+        }
+
+        return false;
+    }
+
+    /**
+     * @deprecated As of 6.1.0, replaced by {@link #getWrappedModel}
+     */
+    public CSWHarvester getWrappedCSWHarvester() {
+        return _cswHarvester;
+    }
+
+    @Override
+    public CSWHarvester getWrappedModel() {
+        return _cswHarvester;
+    }
+
+    @Override
+    public void resetOriginalValues() {
+        _cswHarvester.resetOriginalValues();
+    }
 }

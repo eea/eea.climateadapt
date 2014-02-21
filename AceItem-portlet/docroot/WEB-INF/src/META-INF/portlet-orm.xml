@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0"?>
 
 <entity-mappings xmlns="http://java.sun.com/xml/ns/persistence/orm" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="1.0" xsi:schemaLocation="http://java.sun.com/xml/ns/persistence/orm http://java.sun.com/xml/ns/persistence/orm_1_0.xsd">
 	<persistence-unit-metadata>
@@ -53,24 +53,9 @@
 			<basic name="replacesId" />
 			<basic name="comments" />
 			<basic name="textwebpage" />
+			<transient name="modelAttributes" />
 			<transient name="primaryKey" />
-		</attributes>
-	</mapped-superclass>
-	<mapped-superclass class="nl.wur.alterra.cgi.ace.model.impl.WxsHarvesterModelImpl">
-		<attributes>
-			<id name="wxsharvesterid" />
-			<basic name="name" />
-			<basic name="url" />
-			<basic name="ogctype" />
-			<basic name="every" />
-			<basic name="topic" />
-			<basic name="status" />
-			<basic name="savedToGeoNetwork" />
-			<basic name="geonetworkId" />
-			<basic name="geonetworkUUID" />
-			<basic name="companyId" />
-			<basic name="groupId" />
-			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
 		</attributes>
 	</mapped-superclass>
 	<mapped-superclass class="nl.wur.alterra.cgi.ace.model.impl.CSWHarvesterModelImpl">
@@ -97,19 +82,40 @@
 			<basic name="password">
 				<column name="PASSWORD_" />
 			</basic>
+			<transient name="modelAttributes" />
 			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
+		</attributes>
+	</mapped-superclass>
+	<mapped-superclass class="nl.wur.alterra.cgi.ace.model.impl.WxsHarvesterModelImpl">
+		<attributes>
+			<id name="wxsharvesterid" />
+			<basic name="name" />
+			<basic name="url" />
+			<basic name="ogctype" />
+			<basic name="every" />
+			<basic name="topic" />
+			<basic name="status" />
+			<basic name="savedToGeoNetwork" />
+			<basic name="geonetworkId" />
+			<basic name="geonetworkUUID" />
+			<basic name="companyId" />
+			<basic name="groupId" />
+			<transient name="modelAttributes" />
+			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
 		</attributes>
 	</mapped-superclass>
 	<entity class="nl.wur.alterra.cgi.ace.model.impl.AceItemImpl" name="AceItem">
 		<table name="Ace_AceItem" />
 		<attributes />
 	</entity>
-	<entity class="nl.wur.alterra.cgi.ace.model.impl.WxsHarvesterImpl" name="WxsHarvester">
-		<table name="Ace_WxsHarvester" />
-		<attributes />
-	</entity>
 	<entity class="nl.wur.alterra.cgi.ace.model.impl.CSWHarvesterImpl" name="CSWHarvester">
 		<table name="Ace_CSWHarvester" />
+		<attributes />
+	</entity>
+	<entity class="nl.wur.alterra.cgi.ace.model.impl.WxsHarvesterImpl" name="WxsHarvester">
+		<table name="Ace_WxsHarvester" />
 		<attributes />
 	</entity>
 </entity-mappings>
