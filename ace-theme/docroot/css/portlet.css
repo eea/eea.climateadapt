@@ -15,7 +15,7 @@ body.portlet {
 .portlet-title {
 	display: block;
 	font-size: 1em;
-	margin: 0;
+	margin: 0 0 1em;
 }
 
 .portlet-title-text {

@@ -1,17 +1,3 @@
-/**
- * Copyright (c) 2000-2010 Liferay, Inc. All rights reserved.
- *
- * This library is free software; you can redistribute it and/or modify it under
- * the terms of the GNU Lesser General Public License as published by the Free
- * Software Foundation; either version 2.1 of the License, or (at your option)
- * any later version.
- *
- * This library is distributed in the hope that it will be useful, but WITHOUT
- * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
- * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
- * details.
- */
-
 package nl.wur.alterra.cgi.ace.service.base;
 
 import com.liferay.counter.service.CounterLocalService;
@@ -63,533 +49,532 @@ import javax.sql.DataSource;
  * @generated
  */
 public abstract class WxsHarvesterLocalServiceBaseImpl
-	implements WxsHarvesterLocalService {
-	/**
-	 * Adds the wxs harvester to the database. Also notifies the appropriate model listeners.
-	 *
-	 * @param wxsHarvester the wxs harvester to add
-	 * @return the wxs harvester that was added
-	 * @throws SystemException if a system exception occurred
-	 */
-	public WxsHarvester addWxsHarvester(WxsHarvester wxsHarvester)
-		throws SystemException {
-		wxsHarvester.setNew(true);
+    implements WxsHarvesterLocalService {
+    @BeanReference(type = AceItemLocalService.class)
+    protected AceItemLocalService aceItemLocalService;
+    @BeanReference(type = AceItemPersistence.class)
+    protected AceItemPersistence aceItemPersistence;
+    @BeanReference(type = WxsHarvesterLocalService.class)
+    protected WxsHarvesterLocalService wxsHarvesterLocalService;
+    @BeanReference(type = WxsHarvesterPersistence.class)
+    protected WxsHarvesterPersistence wxsHarvesterPersistence;
+    @BeanReference(type = CSWHarvesterLocalService.class)
+    protected CSWHarvesterLocalService cswHarvesterLocalService;
+    @BeanReference(type = CSWHarvesterPersistence.class)
+    protected CSWHarvesterPersistence cswHarvesterPersistence;
+    @BeanReference(type = CounterLocalService.class)
+    protected CounterLocalService counterLocalService;
+    @BeanReference(type = ResourceLocalService.class)
+    protected ResourceLocalService resourceLocalService;
+    @BeanReference(type = ResourceService.class)
+    protected ResourceService resourceService;
+    @BeanReference(type = ResourcePersistence.class)
+    protected ResourcePersistence resourcePersistence;
+    @BeanReference(type = UserLocalService.class)
+    protected UserLocalService userLocalService;
+    @BeanReference(type = UserService.class)
+    protected UserService userService;
+    @BeanReference(type = UserPersistence.class)
+    protected UserPersistence userPersistence;
+    @BeanReference(type = AssetEntryLocalService.class)
+    protected AssetEntryLocalService assetEntryLocalService;
+    @BeanReference(type = AssetEntryService.class)
+    protected AssetEntryService assetEntryService;
+    @BeanReference(type = AssetEntryPersistence.class)
+    protected AssetEntryPersistence assetEntryPersistence;
 
-		return wxsHarvesterPersistence.update(wxsHarvester, false);
-	}
+    /**
+     * Adds the wxs harvester to the database. Also notifies the appropriate model listeners.
+     *
+     * @param wxsHarvester the wxs harvester to add
+     * @return the wxs harvester that was added
+     * @throws SystemException if a system exception occurred
+     */
+    public WxsHarvester addWxsHarvester(WxsHarvester wxsHarvester)
+        throws SystemException {
+        wxsHarvester.setNew(true);
 
-	/**
-	 * Creates a new wxs harvester with the primary key. Does not add the wxs harvester to the database.
-	 *
-	 * @param wxsharvesterid the primary key for the new wxs harvester
-	 * @return the new wxs harvester
-	 */
-	public WxsHarvester createWxsHarvester(long wxsharvesterid) {
-		return wxsHarvesterPersistence.create(wxsharvesterid);
-	}
+        return wxsHarvesterPersistence.update(wxsHarvester, false);
+    }
 
-	/**
-	 * Deletes the wxs harvester with the primary key from the database. Also notifies the appropriate model listeners.
-	 *
-	 * @param wxsharvesterid the primary key of the wxs harvester to delete
-	 * @throws PortalException if a wxs harvester with the primary key could not be found
-	 * @throws SystemException if a system exception occurred
-	 */
-	public void deleteWxsHarvester(long wxsharvesterid)
-		throws PortalException, SystemException {
-		wxsHarvesterPersistence.remove(wxsharvesterid);
-	}
+    /**
+     * Creates a new wxs harvester with the primary key. Does not add the wxs harvester to the database.
+     *
+     * @param wxsharvesterid the primary key for the new wxs harvester
+     * @return the new wxs harvester
+     */
+    public WxsHarvester createWxsHarvester(long wxsharvesterid) {
+        return wxsHarvesterPersistence.create(wxsharvesterid);
+    }
 
-	/**
-	 * Deletes the wxs harvester from the database. Also notifies the appropriate model listeners.
-	 *
-	 * @param wxsHarvester the wxs harvester to delete
-	 * @throws SystemException if a system exception occurred
-	 */
-	public void deleteWxsHarvester(WxsHarvester wxsHarvester)
-		throws SystemException {
-		wxsHarvesterPersistence.remove(wxsHarvester);
-	}
+    /**
+     * Deletes the wxs harvester with the primary key from the database. Also notifies the appropriate model listeners.
+     *
+     * @param wxsharvesterid the primary key of the wxs harvester to delete
+     * @throws PortalException if a wxs harvester with the primary key could not be found
+     * @throws SystemException if a system exception occurred
+     */
+    public void deleteWxsHarvester(long wxsharvesterid)
+        throws PortalException, SystemException {
+        wxsHarvesterPersistence.remove(wxsharvesterid);
+    }
 
-	/**
-	 * Performs a dynamic query on the database and returns the matching rows.
-	 *
-	 * @param dynamicQuery the dynamic query to search with
-	 * @return the matching rows
-	 * @throws SystemException if a system exception occurred
-	 */
-	@SuppressWarnings("rawtypes")
-	public List dynamicQuery(DynamicQuery dynamicQuery)
-		throws SystemException {
-		return wxsHarvesterPersistence.findWithDynamicQuery(dynamicQuery);
-	}
+    /**
+     * Deletes the wxs harvester from the database. Also notifies the appropriate model listeners.
+     *
+     * @param wxsHarvester the wxs harvester to delete
+     * @throws SystemException if a system exception occurred
+     */
+    public void deleteWxsHarvester(WxsHarvester wxsHarvester)
+        throws SystemException {
+        wxsHarvesterPersistence.remove(wxsHarvester);
+    }
 
-	/**
-	 * Performs a dynamic query on the database and returns a range of the matching rows.
-	 *
-	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
-	 * </p>
-	 *
-	 * @param dynamicQuery the dynamic query to search with
-	 * @param start the lower bound of the range of model instances to return
-	 * @param end the upper bound of the range of model instances to return (not inclusive)
-	 * @return the range of matching rows
-	 * @throws SystemException if a system exception occurred
-	 */
-	@SuppressWarnings("rawtypes")
-	public List dynamicQuery(DynamicQuery dynamicQuery, int start, int end)
-		throws SystemException {
-		return wxsHarvesterPersistence.findWithDynamicQuery(dynamicQuery,
-			start, end);
-	}
+    /**
+     * Performs a dynamic query on the database and returns the matching rows.
+     *
+     * @param dynamicQuery the dynamic query to search with
+     * @return the matching rows
+     * @throws SystemException if a system exception occurred
+     */
+    @SuppressWarnings("rawtypes")
+    public List dynamicQuery(DynamicQuery dynamicQuery)
+        throws SystemException {
+        return wxsHarvesterPersistence.findWithDynamicQuery(dynamicQuery);
+    }
 
-	/**
-	 * Performs a dynamic query on the database and returns an ordered range of the matching rows.
-	 *
-	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
-	 * </p>
-	 *
-	 * @param dynamicQuery the dynamic query to search with
-	 * @param start the lower bound of the range of model instances to return
-	 * @param end the upper bound of the range of model instances to return (not inclusive)
-	 * @param orderByComparator the comparator to order the results by
-	 * @return the ordered range of matching rows
-	 * @throws SystemException if a system exception occurred
-	 */
-	@SuppressWarnings("rawtypes")
-	public List dynamicQuery(DynamicQuery dynamicQuery, int start, int end,
-		OrderByComparator orderByComparator) throws SystemException {
-		return wxsHarvesterPersistence.findWithDynamicQuery(dynamicQuery,
-			start, end, orderByComparator);
-	}
+    /**
+     * Performs a dynamic query on the database and returns a range of the matching rows.
+     *
+     * <p>
+     * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+     * </p>
+     *
+     * @param dynamicQuery the dynamic query to search with
+     * @param start the lower bound of the range of model instances to return
+     * @param end the upper bound of the range of model instances to return (not inclusive)
+     * @return the range of matching rows
+     * @throws SystemException if a system exception occurred
+     */
+    @SuppressWarnings("rawtypes")
+    public List dynamicQuery(DynamicQuery dynamicQuery, int start, int end)
+        throws SystemException {
+        return wxsHarvesterPersistence.findWithDynamicQuery(dynamicQuery,
+            start, end);
+    }
 
-	/**
-	 * Counts the number of rows that match the dynamic query.
-	 *
-	 * @param dynamicQuery the dynamic query to search with
-	 * @return the number of rows that match the dynamic query
-	 * @throws SystemException if a system exception occurred
-	 */
-	public long dynamicQueryCount(DynamicQuery dynamicQuery)
-		throws SystemException {
-		return wxsHarvesterPersistence.countWithDynamicQuery(dynamicQuery);
-	}
+    /**
+     * Performs a dynamic query on the database and returns an ordered range of the matching rows.
+     *
+     * <p>
+     * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+     * </p>
+     *
+     * @param dynamicQuery the dynamic query to search with
+     * @param start the lower bound of the range of model instances to return
+     * @param end the upper bound of the range of model instances to return (not inclusive)
+     * @param orderByComparator the comparator to order the results by
+     * @return the ordered range of matching rows
+     * @throws SystemException if a system exception occurred
+     */
+    @SuppressWarnings("rawtypes")
+    public List dynamicQuery(DynamicQuery dynamicQuery, int start, int end,
+        OrderByComparator orderByComparator) throws SystemException {
+        return wxsHarvesterPersistence.findWithDynamicQuery(dynamicQuery,
+            start, end, orderByComparator);
+    }
 
-	/**
-	 * Gets the wxs harvester with the primary key.
-	 *
-	 * @param wxsharvesterid the primary key of the wxs harvester to get
-	 * @return the wxs harvester
-	 * @throws PortalException if a wxs harvester with the primary key could not be found
-	 * @throws SystemException if a system exception occurred
-	 */
-	public WxsHarvester getWxsHarvester(long wxsharvesterid)
-		throws PortalException, SystemException {
-		return wxsHarvesterPersistence.findByPrimaryKey(wxsharvesterid);
-	}
+    /**
+     * Counts the number of rows that match the dynamic query.
+     *
+     * @param dynamicQuery the dynamic query to search with
+     * @return the number of rows that match the dynamic query
+     * @throws SystemException if a system exception occurred
+     */
+    public long dynamicQueryCount(DynamicQuery dynamicQuery)
+        throws SystemException {
+        return wxsHarvesterPersistence.countWithDynamicQuery(dynamicQuery);
+    }
 
-	/**
-	 * Gets a range of all the wxs harvesters.
-	 *
-	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
-	 * </p>
-	 *
-	 * @param start the lower bound of the range of wxs harvesters to return
-	 * @param end the upper bound of the range of wxs harvesters to return (not inclusive)
-	 * @return the range of wxs harvesters
-	 * @throws SystemException if a system exception occurred
-	 */
-	public List<WxsHarvester> getWxsHarvesters(int start, int end)
-		throws SystemException {
-		return wxsHarvesterPersistence.findAll(start, end);
-	}
+    /**
+     * Gets the wxs harvester with the primary key.
+     *
+     * @param wxsharvesterid the primary key of the wxs harvester to get
+     * @return the wxs harvester
+     * @throws PortalException if a wxs harvester with the primary key could not be found
+     * @throws SystemException if a system exception occurred
+     */
+    public WxsHarvester getWxsHarvester(long wxsharvesterid)
+        throws PortalException, SystemException {
+        return wxsHarvesterPersistence.findByPrimaryKey(wxsharvesterid);
+    }
 
-	/**
-	 * Gets the number of wxs harvesters.
-	 *
-	 * @return the number of wxs harvesters
-	 * @throws SystemException if a system exception occurred
-	 */
-	public int getWxsHarvestersCount() throws SystemException {
-		return wxsHarvesterPersistence.countAll();
-	}
+    /**
+     * Gets a range of all the wxs harvesters.
+     *
+     * <p>
+     * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+     * </p>
+     *
+     * @param start the lower bound of the range of wxs harvesters to return
+     * @param end the upper bound of the range of wxs harvesters to return (not inclusive)
+     * @return the range of wxs harvesters
+     * @throws SystemException if a system exception occurred
+     */
+    public List<WxsHarvester> getWxsHarvesters(int start, int end)
+        throws SystemException {
+        return wxsHarvesterPersistence.findAll(start, end);
+    }
 
-	/**
-	 * Updates the wxs harvester in the database. Also notifies the appropriate model listeners.
-	 *
-	 * @param wxsHarvester the wxs harvester to update
-	 * @return the wxs harvester that was updated
-	 * @throws SystemException if a system exception occurred
-	 */
-	public WxsHarvester updateWxsHarvester(WxsHarvester wxsHarvester)
-		throws SystemException {
-		wxsHarvester.setNew(false);
+    /**
+     * Gets the number of wxs harvesters.
+     *
+     * @return the number of wxs harvesters
+     * @throws SystemException if a system exception occurred
+     */
+    public int getWxsHarvestersCount() throws SystemException {
+        return wxsHarvesterPersistence.countAll();
+    }
 
-		return wxsHarvesterPersistence.update(wxsHarvester, true);
-	}
+    /**
+     * Updates the wxs harvester in the database. Also notifies the appropriate model listeners.
+     *
+     * @param wxsHarvester the wxs harvester to update
+     * @return the wxs harvester that was updated
+     * @throws SystemException if a system exception occurred
+     */
+    public WxsHarvester updateWxsHarvester(WxsHarvester wxsHarvester)
+        throws SystemException {
+        wxsHarvester.setNew(false);
 
-	/**
-	 * Updates the wxs harvester in the database. Also notifies the appropriate model listeners.
-	 *
-	 * @param wxsHarvester the wxs harvester to update
-	 * @param merge whether to merge the wxs harvester with the current session. See {@link com.liferay.portal.service.persistence.BatchSession#update(com.liferay.portal.kernel.dao.orm.Session, com.liferay.portal.model.BaseModel, boolean)} for an explanation.
-	 * @return the wxs harvester that was updated
-	 * @throws SystemException if a system exception occurred
-	 */
-	public WxsHarvester updateWxsHarvester(WxsHarvester wxsHarvester,
-		boolean merge) throws SystemException {
-		wxsHarvester.setNew(false);
+        return wxsHarvesterPersistence.update(wxsHarvester, true);
+    }
 
-		return wxsHarvesterPersistence.update(wxsHarvester, merge);
-	}
+    /**
+     * Updates the wxs harvester in the database. Also notifies the appropriate model listeners.
+     *
+     * @param wxsHarvester the wxs harvester to update
+     * @param merge whether to merge the wxs harvester with the current session. See {@link com.liferay.portal.service.persistence.BatchSession#update(com.liferay.portal.kernel.dao.orm.Session, com.liferay.portal.model.BaseModel, boolean)} for an explanation.
+     * @return the wxs harvester that was updated
+     * @throws SystemException if a system exception occurred
+     */
+    public WxsHarvester updateWxsHarvester(WxsHarvester wxsHarvester,
+        boolean merge) throws SystemException {
+        wxsHarvester.setNew(false);
 
-	/**
-	 * Gets the ace item local service.
-	 *
-	 * @return the ace item local service
-	 */
-	public AceItemLocalService getAceItemLocalService() {
-		return aceItemLocalService;
-	}
+        return wxsHarvesterPersistence.update(wxsHarvester, merge);
+    }
 
-	/**
-	 * Sets the ace item local service.
-	 *
-	 * @param aceItemLocalService the ace item local service
-	 */
-	public void setAceItemLocalService(AceItemLocalService aceItemLocalService) {
-		this.aceItemLocalService = aceItemLocalService;
-	}
+    /**
+     * Gets the ace item local service.
+     *
+     * @return the ace item local service
+     */
+    public AceItemLocalService getAceItemLocalService() {
+        return aceItemLocalService;
+    }
 
-	/**
-	 * Gets the ace item persistence.
-	 *
-	 * @return the ace item persistence
-	 */
-	public AceItemPersistence getAceItemPersistence() {
-		return aceItemPersistence;
-	}
+    /**
+     * Sets the ace item local service.
+     *
+     * @param aceItemLocalService the ace item local service
+     */
+    public void setAceItemLocalService(AceItemLocalService aceItemLocalService) {
+        this.aceItemLocalService = aceItemLocalService;
+    }
 
-	/**
-	 * Sets the ace item persistence.
-	 *
-	 * @param aceItemPersistence the ace item persistence
-	 */
-	public void setAceItemPersistence(AceItemPersistence aceItemPersistence) {
-		this.aceItemPersistence = aceItemPersistence;
-	}
+    /**
+     * Gets the ace item persistence.
+     *
+     * @return the ace item persistence
+     */
+    public AceItemPersistence getAceItemPersistence() {
+        return aceItemPersistence;
+    }
 
-	/**
-	 * Gets the wxs harvester local service.
-	 *
-	 * @return the wxs harvester local service
-	 */
-	public WxsHarvesterLocalService getWxsHarvesterLocalService() {
-		return wxsHarvesterLocalService;
-	}
+    /**
+     * Sets the ace item persistence.
+     *
+     * @param aceItemPersistence the ace item persistence
+     */
+    public void setAceItemPersistence(AceItemPersistence aceItemPersistence) {
+        this.aceItemPersistence = aceItemPersistence;
+    }
 
-	/**
-	 * Sets the wxs harvester local service.
-	 *
-	 * @param wxsHarvesterLocalService the wxs harvester local service
-	 */
-	public void setWxsHarvesterLocalService(
-		WxsHarvesterLocalService wxsHarvesterLocalService) {
-		this.wxsHarvesterLocalService = wxsHarvesterLocalService;
-	}
+    /**
+     * Gets the wxs harvester local service.
+     *
+     * @return the wxs harvester local service
+     */
+    public WxsHarvesterLocalService getWxsHarvesterLocalService() {
+        return wxsHarvesterLocalService;
+    }
 
-	/**
-	 * Gets the wxs harvester persistence.
-	 *
-	 * @return the wxs harvester persistence
-	 */
-	public WxsHarvesterPersistence getWxsHarvesterPersistence() {
-		return wxsHarvesterPersistence;
-	}
+    /**
+     * Sets the wxs harvester local service.
+     *
+     * @param wxsHarvesterLocalService the wxs harvester local service
+     */
+    public void setWxsHarvesterLocalService(
+        WxsHarvesterLocalService wxsHarvesterLocalService) {
+        this.wxsHarvesterLocalService = wxsHarvesterLocalService;
+    }
 
-	/**
-	 * Sets the wxs harvester persistence.
-	 *
-	 * @param wxsHarvesterPersistence the wxs harvester persistence
-	 */
-	public void setWxsHarvesterPersistence(
-		WxsHarvesterPersistence wxsHarvesterPersistence) {
-		this.wxsHarvesterPersistence = wxsHarvesterPersistence;
-	}
+    /**
+     * Gets the wxs harvester persistence.
+     *
+     * @return the wxs harvester persistence
+     */
+    public WxsHarvesterPersistence getWxsHarvesterPersistence() {
+        return wxsHarvesterPersistence;
+    }
 
-	/**
-	 * Gets the c s w harvester local service.
-	 *
-	 * @return the c s w harvester local service
-	 */
-	public CSWHarvesterLocalService getCSWHarvesterLocalService() {
-		return cswHarvesterLocalService;
-	}
+    /**
+     * Sets the wxs harvester persistence.
+     *
+     * @param wxsHarvesterPersistence the wxs harvester persistence
+     */
+    public void setWxsHarvesterPersistence(
+        WxsHarvesterPersistence wxsHarvesterPersistence) {
+        this.wxsHarvesterPersistence = wxsHarvesterPersistence;
+    }
 
-	/**
-	 * Sets the c s w harvester local service.
-	 *
-	 * @param cswHarvesterLocalService the c s w harvester local service
-	 */
-	public void setCSWHarvesterLocalService(
-		CSWHarvesterLocalService cswHarvesterLocalService) {
-		this.cswHarvesterLocalService = cswHarvesterLocalService;
-	}
+    /**
+     * Gets the c s w harvester local service.
+     *
+     * @return the c s w harvester local service
+     */
+    public CSWHarvesterLocalService getCSWHarvesterLocalService() {
+        return cswHarvesterLocalService;
+    }
 
-	/**
-	 * Gets the c s w harvester persistence.
-	 *
-	 * @return the c s w harvester persistence
-	 */
-	public CSWHarvesterPersistence getCSWHarvesterPersistence() {
-		return cswHarvesterPersistence;
-	}
+    /**
+     * Sets the c s w harvester local service.
+     *
+     * @param cswHarvesterLocalService the c s w harvester local service
+     */
+    public void setCSWHarvesterLocalService(
+        CSWHarvesterLocalService cswHarvesterLocalService) {
+        this.cswHarvesterLocalService = cswHarvesterLocalService;
+    }
 
-	/**
-	 * Sets the c s w harvester persistence.
-	 *
-	 * @param cswHarvesterPersistence the c s w harvester persistence
-	 */
-	public void setCSWHarvesterPersistence(
-		CSWHarvesterPersistence cswHarvesterPersistence) {
-		this.cswHarvesterPersistence = cswHarvesterPersistence;
-	}
+    /**
+     * Gets the c s w harvester persistence.
+     *
+     * @return the c s w harvester persistence
+     */
+    public CSWHarvesterPersistence getCSWHarvesterPersistence() {
+        return cswHarvesterPersistence;
+    }
 
-	/**
-	 * Gets the counter local service.
-	 *
-	 * @return the counter local service
-	 */
-	public CounterLocalService getCounterLocalService() {
-		return counterLocalService;
-	}
+    /**
+     * Sets the c s w harvester persistence.
+     *
+     * @param cswHarvesterPersistence the c s w harvester persistence
+     */
+    public void setCSWHarvesterPersistence(
+        CSWHarvesterPersistence cswHarvesterPersistence) {
+        this.cswHarvesterPersistence = cswHarvesterPersistence;
+    }
 
-	/**
-	 * Sets the counter local service.
-	 *
-	 * @param counterLocalService the counter local service
-	 */
-	public void setCounterLocalService(CounterLocalService counterLocalService) {
-		this.counterLocalService = counterLocalService;
-	}
+    /**
+     * Gets the counter local service.
+     *
+     * @return the counter local service
+     */
+    public CounterLocalService getCounterLocalService() {
+        return counterLocalService;
+    }
 
-	/**
-	 * Gets the resource local service.
-	 *
-	 * @return the resource local service
-	 */
-	public ResourceLocalService getResourceLocalService() {
-		return resourceLocalService;
-	}
+    /**
+     * Sets the counter local service.
+     *
+     * @param counterLocalService the counter local service
+     */
+    public void setCounterLocalService(CounterLocalService counterLocalService) {
+        this.counterLocalService = counterLocalService;
+    }
 
-	/**
-	 * Sets the resource local service.
-	 *
-	 * @param resourceLocalService the resource local service
-	 */
-	public void setResourceLocalService(
-		ResourceLocalService resourceLocalService) {
-		this.resourceLocalService = resourceLocalService;
-	}
+    /**
+     * Gets the resource local service.
+     *
+     * @return the resource local service
+     */
+    public ResourceLocalService getResourceLocalService() {
+        return resourceLocalService;
+    }
 
-	/**
-	 * Gets the resource remote service.
-	 *
-	 * @return the resource remote service
-	 */
-	public ResourceService getResourceService() {
-		return resourceService;
-	}
+    /**
+     * Sets the resource local service.
+     *
+     * @param resourceLocalService the resource local service
+     */
+    public void setResourceLocalService(
+        ResourceLocalService resourceLocalService) {
+        this.resourceLocalService = resourceLocalService;
+    }
 
-	/**
-	 * Sets the resource remote service.
-	 *
-	 * @param resourceService the resource remote service
-	 */
-	public void setResourceService(ResourceService resourceService) {
-		this.resourceService = resourceService;
-	}
+    /**
+     * Gets the resource remote service.
+     *
+     * @return the resource remote service
+     */
+    public ResourceService getResourceService() {
+        return resourceService;
+    }
 
-	/**
-	 * Gets the resource persistence.
-	 *
-	 * @return the resource persistence
-	 */
-	public ResourcePersistence getResourcePersistence() {
-		return resourcePersistence;
-	}
+    /**
+     * Sets the resource remote service.
+     *
+     * @param resourceService the resource remote service
+     */
+    public void setResourceService(ResourceService resourceService) {
+        this.resourceService = resourceService;
+    }
 
-	/**
-	 * Sets the resource persistence.
-	 *
-	 * @param resourcePersistence the resource persistence
-	 */
-	public void setResourcePersistence(ResourcePersistence resourcePersistence) {
-		this.resourcePersistence = resourcePersistence;
-	}
+    /**
+     * Gets the resource persistence.
+     *
+     * @return the resource persistence
+     */
+    public ResourcePersistence getResourcePersistence() {
+        return resourcePersistence;
+    }
 
-	/**
-	 * Gets the user local service.
-	 *
-	 * @return the user local service
-	 */
-	public UserLocalService getUserLocalService() {
-		return userLocalService;
-	}
+    /**
+     * Sets the resource persistence.
+     *
+     * @param resourcePersistence the resource persistence
+     */
+    public void setResourcePersistence(ResourcePersistence resourcePersistence) {
+        this.resourcePersistence = resourcePersistence;
+    }
 
-	/**
-	 * Sets the user local service.
-	 *
-	 * @param userLocalService the user local service
-	 */
-	public void setUserLocalService(UserLocalService userLocalService) {
-		this.userLocalService = userLocalService;
-	}
+    /**
+     * Gets the user local service.
+     *
+     * @return the user local service
+     */
+    public UserLocalService getUserLocalService() {
+        return userLocalService;
+    }
 
-	/**
-	 * Gets the user remote service.
-	 *
-	 * @return the user remote service
-	 */
-	public UserService getUserService() {
-		return userService;
-	}
+    /**
+     * Sets the user local service.
+     *
+     * @param userLocalService the user local service
+     */
+    public void setUserLocalService(UserLocalService userLocalService) {
+        this.userLocalService = userLocalService;
+    }
 
-	/**
-	 * Sets the user remote service.
-	 *
-	 * @param userService the user remote service
-	 */
-	public void setUserService(UserService userService) {
-		this.userService = userService;
-	}
+    /**
+     * Gets the user remote service.
+     *
+     * @return the user remote service
+     */
+    public UserService getUserService() {
+        return userService;
+    }
 
-	/**
-	 * Gets the user persistence.
-	 *
-	 * @return the user persistence
-	 */
-	public UserPersistence getUserPersistence() {
-		return userPersistence;
-	}
+    /**
+     * Sets the user remote service.
+     *
+     * @param userService the user remote service
+     */
+    public void setUserService(UserService userService) {
+        this.userService = userService;
+    }
 
-	/**
-	 * Sets the user persistence.
-	 *
-	 * @param userPersistence the user persistence
-	 */
-	public void setUserPersistence(UserPersistence userPersistence) {
-		this.userPersistence = userPersistence;
-	}
+    /**
+     * Gets the user persistence.
+     *
+     * @return the user persistence
+     */
+    public UserPersistence getUserPersistence() {
+        return userPersistence;
+    }
 
-	/**
-	 * Gets the asset entry local service.
-	 *
-	 * @return the asset entry local service
-	 */
-	public AssetEntryLocalService getAssetEntryLocalService() {
-		return assetEntryLocalService;
-	}
+    /**
+     * Sets the user persistence.
+     *
+     * @param userPersistence the user persistence
+     */
+    public void setUserPersistence(UserPersistence userPersistence) {
+        this.userPersistence = userPersistence;
+    }
 
-	/**
-	 * Sets the asset entry local service.
-	 *
-	 * @param assetEntryLocalService the asset entry local service
-	 */
-	public void setAssetEntryLocalService(
-		AssetEntryLocalService assetEntryLocalService) {
-		this.assetEntryLocalService = assetEntryLocalService;
-	}
+    /**
+     * Gets the asset entry local service.
+     *
+     * @return the asset entry local service
+     */
+    public AssetEntryLocalService getAssetEntryLocalService() {
+        return assetEntryLocalService;
+    }
 
-	/**
-	 * Gets the asset entry remote service.
-	 *
-	 * @return the asset entry remote service
-	 */
-	public AssetEntryService getAssetEntryService() {
-		return assetEntryService;
-	}
+    /**
+     * Sets the asset entry local service.
+     *
+     * @param assetEntryLocalService the asset entry local service
+     */
+    public void setAssetEntryLocalService(
+        AssetEntryLocalService assetEntryLocalService) {
+        this.assetEntryLocalService = assetEntryLocalService;
+    }
 
-	/**
-	 * Sets the asset entry remote service.
-	 *
-	 * @param assetEntryService the asset entry remote service
-	 */
-	public void setAssetEntryService(AssetEntryService assetEntryService) {
-		this.assetEntryService = assetEntryService;
-	}
+    /**
+     * Gets the asset entry remote service.
+     *
+     * @return the asset entry remote service
+     */
+    public AssetEntryService getAssetEntryService() {
+        return assetEntryService;
+    }
 
-	/**
-	 * Gets the asset entry persistence.
-	 *
-	 * @return the asset entry persistence
-	 */
-	public AssetEntryPersistence getAssetEntryPersistence() {
-		return assetEntryPersistence;
-	}
+    /**
+     * Sets the asset entry remote service.
+     *
+     * @param assetEntryService the asset entry remote service
+     */
+    public void setAssetEntryService(AssetEntryService assetEntryService) {
+        this.assetEntryService = assetEntryService;
+    }
 
-	/**
-	 * Sets the asset entry persistence.
-	 *
-	 * @param assetEntryPersistence the asset entry persistence
-	 */
-	public void setAssetEntryPersistence(
-		AssetEntryPersistence assetEntryPersistence) {
-		this.assetEntryPersistence = assetEntryPersistence;
-	}
+    /**
+     * Gets the asset entry persistence.
+     *
+     * @return the asset entry persistence
+     */
+    public AssetEntryPersistence getAssetEntryPersistence() {
+        return assetEntryPersistence;
+    }
 
-	/**
-	 * Performs an SQL query.
-	 *
-	 * @param sql the sql query to perform
-	 */
-	protected void runSQL(String sql) throws SystemException {
-		try {
-			DataSource dataSource = wxsHarvesterPersistence.getDataSource();
+    /**
+     * Sets the asset entry persistence.
+     *
+     * @param assetEntryPersistence the asset entry persistence
+     */
+    public void setAssetEntryPersistence(
+        AssetEntryPersistence assetEntryPersistence) {
+        this.assetEntryPersistence = assetEntryPersistence;
+    }
 
-			SqlUpdate sqlUpdate = SqlUpdateFactoryUtil.getSqlUpdate(dataSource,
-					sql, new int[0]);
+    /**
+     * Performs an SQL query.
+     *
+     * @param sql the sql query to perform
+     */
+    protected void runSQL(String sql) throws SystemException {
+        try {
+            DataSource dataSource = wxsHarvesterPersistence.getDataSource();
 
-			sqlUpdate.update();
-		}
-		catch (Exception e) {
-			throw new SystemException(e);
-		}
-	}
+            SqlUpdate sqlUpdate = SqlUpdateFactoryUtil.getSqlUpdate(dataSource,
+                    sql, new int[0]);
 
-	@BeanReference(type = AceItemLocalService.class)
-	protected AceItemLocalService aceItemLocalService;
-	@BeanReference(type = AceItemPersistence.class)
-	protected AceItemPersistence aceItemPersistence;
-	@BeanReference(type = WxsHarvesterLocalService.class)
-	protected WxsHarvesterLocalService wxsHarvesterLocalService;
-	@BeanReference(type = WxsHarvesterPersistence.class)
-	protected WxsHarvesterPersistence wxsHarvesterPersistence;
-	@BeanReference(type = CSWHarvesterLocalService.class)
-	protected CSWHarvesterLocalService cswHarvesterLocalService;
-	@BeanReference(type = CSWHarvesterPersistence.class)
-	protected CSWHarvesterPersistence cswHarvesterPersistence;
-	@BeanReference(type = CounterLocalService.class)
-	protected CounterLocalService counterLocalService;
-	@BeanReference(type = ResourceLocalService.class)
-	protected ResourceLocalService resourceLocalService;
-	@BeanReference(type = ResourceService.class)
-	protected ResourceService resourceService;
-	@BeanReference(type = ResourcePersistence.class)
-	protected ResourcePersistence resourcePersistence;
-	@BeanReference(type = UserLocalService.class)
-	protected UserLocalService userLocalService;
-	@BeanReference(type = UserService.class)
-	protected UserService userService;
-	@BeanReference(type = UserPersistence.class)
-	protected UserPersistence userPersistence;
-	@BeanReference(type = AssetEntryLocalService.class)
-	protected AssetEntryLocalService assetEntryLocalService;
-	@BeanReference(type = AssetEntryService.class)
-	protected AssetEntryService assetEntryService;
-	@BeanReference(type = AssetEntryPersistence.class)
-	protected AssetEntryPersistence assetEntryPersistence;
+            sqlUpdate.update();
+        } catch (Exception e) {
+            throw new SystemException(e);
+        }
+    }
 }

@@ -20,7 +20,7 @@ Java runtime and compiler of version 1.6 is also required.
 2. Download and set up Liferay Plugins SDK
 ******************************************
 
-Liferay Plugins SDK is a set of Ant build files and resources strcutrued
+Liferay Plugins SDK is a set of Ant build files and resources structured
 into a certain directory tree. It is used for creating and building
 portlets, themes, layouts and other components (aka plugins) of Liferay.
 You can read more at http://www.liferay.com/documentation/liferay-portal/6.0/development/-/ai/the-plugins-sdk
@@ -39,8 +39,23 @@ app.server.dir=${app.server.dir}
 ant.build.javac.source=1.6
 ant.build.javac.target=1.6
 
+***************************
+3. Checkout the source code
+***************************
+
+Go to the location where you want to build your code. E.g. /local/build
+
+svn checkout https://svn.eionet.europa.eu/repositories/ClimateAdapt/trunk ClimateAdapt
+
+Your TRUNK then becomes /local/build/ClimateAdapt
+
+To be able to build the AceSearchEngine you must add a build.properties file.
+In TRUNK do:
+    cp AceSearchEngine/build.properties.sample AceSearchEngine/build.properties
+    edit AceSearchEngine/build.properties
+
 *******************************************************
-2. Create symbolic links to ClimateAdapt portlets, etc.
+4. Create symbolic links to ClimateAdapt portlets, etc.
 *******************************************************
 
 Let's call the directory where you have downloaded ClimateAdapt's trunk as TRUNK.
@@ -66,9 +81,10 @@ ln -s TRUNK/ace-layouttpl ace-layouttpl
 
 While in PLUGINS_SDK_HOME/themes, create the following symbolic link:
 ln -s TRUNK/ace-theme ace-theme
+ln -s TRUNK/ace-baltic-sea-theme ace-baltic-sea-theme
 
 *****************************
-3. Set a few build properties
+5. Set a few build properties
 *****************************
 
 In TRUNK create a copy of build.properties.sample and rename it to build.properties.
@@ -79,7 +95,7 @@ Do the same in TRUNK/AceSearchEngine, i.e. create build.properties from
 build.properties.sample and replace "app.server.dir" property.
 
 *************************************************
-4. Build and deploy your ClimateAdapt source code
+6. Build and deploy your ClimateAdapt source code
 *************************************************
 
 While in TRUNK, execute the following command to build your ClimateAdapt source code
@@ -97,7 +113,7 @@ NB! Note that you must always deploy via Ant deploy, as a direct copy-paste of
 portlet/theme/layout WAR files into Tomcat webapps does not properly deploy them.
 
 *****************************************************************
-5. Build and install GeoNetwork (requires Maven as building tool)
+7. Build and install GeoNetwork (requires Maven as building tool)
 *****************************************************************
 
 GeoNetwork code does not change that often and its build takes quite a bit of time.
@@ -111,7 +127,7 @@ copied into Tomcat's webapps directory, and Tomcat must be restarted.
 
 
 ***********************
-6. Notes for developers
+8. Notes for developers
 ***********************
 
 {PORTLET}/docroot/WEB-INF/src/service.properties contains a build number. If

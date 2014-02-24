@@ -1,17 +1,3 @@
-/**
- * Copyright (c) 2000-2010 Liferay, Inc. All rights reserved.
- *
- * This library is free software; you can redistribute it and/or modify it under
- * the terms of the GNU Lesser General Public License as published by the Free
- * Software Foundation; either version 2.1 of the License, or (at your option)
- * any later version.
- *
- * This library is distributed in the hope that it will be useful, but WITHOUT
- * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
- * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
- * details.
- */
-
 package nl.wur.alterra.cgi.ace.model;
 
 /**
@@ -24,234 +10,234 @@ package nl.wur.alterra.cgi.ace.model;
  * @generated
  */
 public class CSWHarvesterWrapper implements CSWHarvester {
-	public CSWHarvesterWrapper(CSWHarvester cswHarvester) {
-		_cswHarvester = cswHarvester;
-	}
+    private CSWHarvester _cswHarvester;
 
-	public long getPrimaryKey() {
-		return _cswHarvester.getPrimaryKey();
-	}
+    public CSWHarvesterWrapper(CSWHarvester cswHarvester) {
+        _cswHarvester = cswHarvester;
+    }
 
-	public void setPrimaryKey(long pk) {
-		_cswHarvester.setPrimaryKey(pk);
-	}
+    public long getPrimaryKey() {
+        return _cswHarvester.getPrimaryKey();
+    }
 
-	public long getCswharvesterid() {
-		return _cswHarvester.getCswharvesterid();
-	}
+    public void setPrimaryKey(long pk) {
+        _cswHarvester.setPrimaryKey(pk);
+    }
 
-	public void setCswharvesterid(long cswharvesterid) {
-		_cswHarvester.setCswharvesterid(cswharvesterid);
-	}
+    public long getCswharvesterid() {
+        return _cswHarvester.getCswharvesterid();
+    }
 
-	public java.lang.String getName() {
-		return _cswHarvester.getName();
-	}
+    public void setCswharvesterid(long cswharvesterid) {
+        _cswHarvester.setCswharvesterid(cswharvesterid);
+    }
 
-	public void setName(java.lang.String name) {
-		_cswHarvester.setName(name);
-	}
+    public java.lang.String getName() {
+        return _cswHarvester.getName();
+    }
 
-	public java.lang.String getUrl() {
-		return _cswHarvester.getUrl();
-	}
+    public void setName(java.lang.String name) {
+        _cswHarvester.setName(name);
+    }
 
-	public void setUrl(java.lang.String url) {
-		_cswHarvester.setUrl(url);
-	}
+    public java.lang.String getUrl() {
+        return _cswHarvester.getUrl();
+    }
 
-	public java.lang.String getFreetext() {
-		return _cswHarvester.getFreetext();
-	}
+    public void setUrl(java.lang.String url) {
+        _cswHarvester.setUrl(url);
+    }
 
-	public void setFreetext(java.lang.String freetext) {
-		_cswHarvester.setFreetext(freetext);
-	}
+    public java.lang.String getFreetext() {
+        return _cswHarvester.getFreetext();
+    }
 
-	public java.lang.String getTitle() {
-		return _cswHarvester.getTitle();
-	}
+    public void setFreetext(java.lang.String freetext) {
+        _cswHarvester.setFreetext(freetext);
+    }
 
-	public void setTitle(java.lang.String title) {
-		_cswHarvester.setTitle(title);
-	}
+    public java.lang.String getTitle() {
+        return _cswHarvester.getTitle();
+    }
 
-	public java.lang.String getAbstrakt() {
-		return _cswHarvester.getAbstrakt();
-	}
+    public void setTitle(java.lang.String title) {
+        _cswHarvester.setTitle(title);
+    }
 
-	public void setAbstrakt(java.lang.String abstrakt) {
-		_cswHarvester.setAbstrakt(abstrakt);
-	}
+    public java.lang.String getAbstrakt() {
+        return _cswHarvester.getAbstrakt();
+    }
 
-	public java.lang.String getSubject() {
-		return _cswHarvester.getSubject();
-	}
+    public void setAbstrakt(java.lang.String abstrakt) {
+        _cswHarvester.setAbstrakt(abstrakt);
+    }
 
-	public void setSubject(java.lang.String subject) {
-		_cswHarvester.setSubject(subject);
-	}
+    public java.lang.String getSubject() {
+        return _cswHarvester.getSubject();
+    }
 
-	public int getEvery() {
-		return _cswHarvester.getEvery();
-	}
+    public void setSubject(java.lang.String subject) {
+        _cswHarvester.setSubject(subject);
+    }
 
-	public void setEvery(int every) {
-		_cswHarvester.setEvery(every);
-	}
+    public int getEvery() {
+        return _cswHarvester.getEvery();
+    }
 
-	public java.lang.String getTopic() {
-		return _cswHarvester.getTopic();
-	}
+    public void setEvery(int every) {
+        _cswHarvester.setEvery(every);
+    }
 
-	public void setTopic(java.lang.String topic) {
-		_cswHarvester.setTopic(topic);
-	}
+    public java.lang.String getTopic() {
+        return _cswHarvester.getTopic();
+    }
 
-	public java.lang.String getStatus() {
-		return _cswHarvester.getStatus();
-	}
+    public void setTopic(java.lang.String topic) {
+        _cswHarvester.setTopic(topic);
+    }
 
-	public void setStatus(java.lang.String status) {
-		_cswHarvester.setStatus(status);
-	}
+    public java.lang.String getStatus() {
+        return _cswHarvester.getStatus();
+    }
 
-	public boolean getSavedToGeoNetwork() {
-		return _cswHarvester.getSavedToGeoNetwork();
-	}
+    public void setStatus(java.lang.String status) {
+        _cswHarvester.setStatus(status);
+    }
 
-	public boolean isSavedToGeoNetwork() {
-		return _cswHarvester.isSavedToGeoNetwork();
-	}
+    public boolean getSavedToGeoNetwork() {
+        return _cswHarvester.getSavedToGeoNetwork();
+    }
 
-	public void setSavedToGeoNetwork(boolean savedToGeoNetwork) {
-		_cswHarvester.setSavedToGeoNetwork(savedToGeoNetwork);
-	}
+    public boolean isSavedToGeoNetwork() {
+        return _cswHarvester.isSavedToGeoNetwork();
+    }
 
-	public long getGeonetworkId() {
-		return _cswHarvester.getGeonetworkId();
-	}
+    public void setSavedToGeoNetwork(boolean savedToGeoNetwork) {
+        _cswHarvester.setSavedToGeoNetwork(savedToGeoNetwork);
+    }
 
-	public void setGeonetworkId(long geonetworkId) {
-		_cswHarvester.setGeonetworkId(geonetworkId);
-	}
+    public long getGeonetworkId() {
+        return _cswHarvester.getGeonetworkId();
+    }
 
-	public java.lang.String getGeonetworkUUID() {
-		return _cswHarvester.getGeonetworkUUID();
-	}
+    public void setGeonetworkId(long geonetworkId) {
+        _cswHarvester.setGeonetworkId(geonetworkId);
+    }
 
-	public void setGeonetworkUUID(java.lang.String geonetworkUUID) {
-		_cswHarvester.setGeonetworkUUID(geonetworkUUID);
-	}
+    public java.lang.String getGeonetworkUUID() {
+        return _cswHarvester.getGeonetworkUUID();
+    }
 
-	public long getCompanyId() {
-		return _cswHarvester.getCompanyId();
-	}
+    public void setGeonetworkUUID(java.lang.String geonetworkUUID) {
+        _cswHarvester.setGeonetworkUUID(geonetworkUUID);
+    }
 
-	public void setCompanyId(long companyId) {
-		_cswHarvester.setCompanyId(companyId);
-	}
+    public long getCompanyId() {
+        return _cswHarvester.getCompanyId();
+    }
 
-	public long getGroupId() {
-		return _cswHarvester.getGroupId();
-	}
+    public void setCompanyId(long companyId) {
+        _cswHarvester.setCompanyId(companyId);
+    }
 
-	public void setGroupId(long groupId) {
-		_cswHarvester.setGroupId(groupId);
-	}
+    public long getGroupId() {
+        return _cswHarvester.getGroupId();
+    }
 
-	public java.lang.String getType() {
-		return _cswHarvester.getType();
-	}
+    public void setGroupId(long groupId) {
+        _cswHarvester.setGroupId(groupId);
+    }
 
-	public void setType(java.lang.String type) {
-		_cswHarvester.setType(type);
-	}
+    public java.lang.String getType() {
+        return _cswHarvester.getType();
+    }
 
-	public java.lang.String getUsername() {
-		return _cswHarvester.getUsername();
-	}
+    public void setType(java.lang.String type) {
+        _cswHarvester.setType(type);
+    }
 
-	public void setUsername(java.lang.String username) {
-		_cswHarvester.setUsername(username);
-	}
+    public java.lang.String getUsername() {
+        return _cswHarvester.getUsername();
+    }
 
-	public java.lang.String getPassword() {
-		return _cswHarvester.getPassword();
-	}
+    public void setUsername(java.lang.String username) {
+        _cswHarvester.setUsername(username);
+    }
 
-	public void setPassword(java.lang.String password) {
-		_cswHarvester.setPassword(password);
-	}
+    public java.lang.String getPassword() {
+        return _cswHarvester.getPassword();
+    }
 
-	public nl.wur.alterra.cgi.ace.model.CSWHarvester toEscapedModel() {
-		return _cswHarvester.toEscapedModel();
-	}
+    public void setPassword(java.lang.String password) {
+        _cswHarvester.setPassword(password);
+    }
 
-	public boolean isNew() {
-		return _cswHarvester.isNew();
-	}
+    public nl.wur.alterra.cgi.ace.model.CSWHarvester toEscapedModel() {
+        return _cswHarvester.toEscapedModel();
+    }
 
-	public void setNew(boolean n) {
-		_cswHarvester.setNew(n);
-	}
+    public boolean isNew() {
+        return _cswHarvester.isNew();
+    }
 
-	public boolean isCachedModel() {
-		return _cswHarvester.isCachedModel();
-	}
+    public void setNew(boolean n) {
+        _cswHarvester.setNew(n);
+    }
 
-	public void setCachedModel(boolean cachedModel) {
-		_cswHarvester.setCachedModel(cachedModel);
-	}
+    public boolean isCachedModel() {
+        return _cswHarvester.isCachedModel();
+    }
 
-	public boolean isEscapedModel() {
-		return _cswHarvester.isEscapedModel();
-	}
+    public void setCachedModel(boolean cachedModel) {
+        _cswHarvester.setCachedModel(cachedModel);
+    }
 
-	public void setEscapedModel(boolean escapedModel) {
-		_cswHarvester.setEscapedModel(escapedModel);
-	}
+    public boolean isEscapedModel() {
+        return _cswHarvester.isEscapedModel();
+    }
 
-	public java.io.Serializable getPrimaryKeyObj() {
-		return _cswHarvester.getPrimaryKeyObj();
-	}
+    public void setEscapedModel(boolean escapedModel) {
+        _cswHarvester.setEscapedModel(escapedModel);
+    }
 
-	public com.liferay.portlet.expando.model.ExpandoBridge getExpandoBridge() {
-		return _cswHarvester.getExpandoBridge();
-	}
+    public java.io.Serializable getPrimaryKeyObj() {
+        return _cswHarvester.getPrimaryKeyObj();
+    }
 
-	public void setExpandoBridgeAttributes(
-		com.liferay.portal.service.ServiceContext serviceContext) {
-		_cswHarvester.setExpandoBridgeAttributes(serviceContext);
-	}
+    public com.liferay.portlet.expando.model.ExpandoBridge getExpandoBridge() {
+        return _cswHarvester.getExpandoBridge();
+    }
 
-	public java.lang.Object clone() {
-		return _cswHarvester.clone();
-	}
+    public void setExpandoBridgeAttributes(
+        com.liferay.portal.service.ServiceContext serviceContext) {
+        _cswHarvester.setExpandoBridgeAttributes(serviceContext);
+    }
 
-	public int compareTo(nl.wur.alterra.cgi.ace.model.CSWHarvester cswHarvester) {
-		return _cswHarvester.compareTo(cswHarvester);
-	}
+    public java.lang.Object clone() {
+        return _cswHarvester.clone();
+    }
 
-	public int hashCode() {
-		return _cswHarvester.hashCode();
-	}
+    public int compareTo(nl.wur.alterra.cgi.ace.model.CSWHarvester cswHarvester) {
+        return _cswHarvester.compareTo(cswHarvester);
+    }
 
-	public java.lang.String toString() {
-		return _cswHarvester.toString();
-	}
+    public int hashCode() {
+        return _cswHarvester.hashCode();
+    }
 
-	public java.lang.String toXmlString() {
-		return _cswHarvester.toXmlString();
-	}
+    public java.lang.String toString() {
+        return _cswHarvester.toString();
+    }
 
-	public java.lang.String toShortString() {
-		return _cswHarvester.toShortString();
-	}
+    public java.lang.String toXmlString() {
+        return _cswHarvester.toXmlString();
+    }
 
-	public CSWHarvester getWrappedCSWHarvester() {
-		return _cswHarvester;
-	}
+    public java.lang.String toShortString() {
+        return _cswHarvester.toShortString();
+    }
 
-	private CSWHarvester _cswHarvester;
+    public CSWHarvester getWrappedCSWHarvester() {
+        return _cswHarvester;
+    }
 }

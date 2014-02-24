@@ -1,17 +1,3 @@
-/**
- * Copyright (c) 2000-2010 Liferay, Inc. All rights reserved.
- *
- * This library is free software; you can redistribute it and/or modify it under
- * the terms of the GNU Lesser General Public License as published by the Free
- * Software Foundation; either version 2.1 of the License, or (at your option)
- * any later version.
- *
- * This library is distributed in the hope that it will be useful, but WITHOUT
- * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
- * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
- * details.
- */
-
 package nl.wur.alterra.cgi.ace.model.impl;
 
 import com.liferay.portal.kernel.bean.AutoEscapeBeanHandler;
@@ -51,371 +37,361 @@ import java.sql.Types;
  * @generated
  */
 public class WxsHarvesterModelImpl extends BaseModelImpl<WxsHarvester>
-	implements WxsHarvesterModel {
-	public static final String TABLE_NAME = "Ace_WxsHarvester";
-	public static final Object[][] TABLE_COLUMNS = {
-			{ "wxsharvesterid", new Integer(Types.BIGINT) },
-			{ "name", new Integer(Types.VARCHAR) },
-			{ "url", new Integer(Types.VARCHAR) },
-			{ "ogctype", new Integer(Types.VARCHAR) },
-			{ "every", new Integer(Types.INTEGER) },
-			{ "topic", new Integer(Types.VARCHAR) },
-			{ "status", new Integer(Types.VARCHAR) },
-			{ "savedToGeoNetwork", new Integer(Types.BOOLEAN) },
-			{ "geonetworkId", new Integer(Types.BIGINT) },
-			{ "geonetworkUUID", new Integer(Types.VARCHAR) },
-			{ "companyId", new Integer(Types.BIGINT) },
-			{ "groupId", new Integer(Types.BIGINT) }
-		};
-	public static final String TABLE_SQL_CREATE = "create table Ace_WxsHarvester (wxsharvesterid LONG not null primary key,name VARCHAR(75) null,url VARCHAR(75) null,ogctype VARCHAR(75) null,every INTEGER,topic VARCHAR(75) null,status VARCHAR(75) null,savedToGeoNetwork BOOLEAN,geonetworkId LONG,geonetworkUUID VARCHAR(75) null,companyId LONG,groupId LONG)";
-	public static final String TABLE_SQL_DROP = "drop table Ace_WxsHarvester";
-	public static final String ORDER_BY_JPQL = " ORDER BY wxsHarvester.name ASC";
-	public static final String ORDER_BY_SQL = " ORDER BY Ace_WxsHarvester.name ASC";
-	public static final String DATA_SOURCE = "liferayDataSource";
-	public static final String SESSION_FACTORY = "liferaySessionFactory";
-	public static final String TX_MANAGER = "liferayTransactionManager";
-	public static final boolean ENTITY_CACHE_ENABLED = GetterUtil.getBoolean(com.liferay.util.service.ServiceProps.get(
-				"value.object.entity.cache.enabled.nl.wur.alterra.cgi.ace.model.WxsHarvester"),
-			true);
-	public static final boolean FINDER_CACHE_ENABLED = GetterUtil.getBoolean(com.liferay.util.service.ServiceProps.get(
-				"value.object.finder.cache.enabled.nl.wur.alterra.cgi.ace.model.WxsHarvester"),
-			true);
-	public static final long LOCK_EXPIRATION_TIME = GetterUtil.getLong(com.liferay.util.service.ServiceProps.get(
-				"lock.expiration.time.nl.wur.alterra.cgi.ace.model.WxsHarvester"));
+    implements WxsHarvesterModel {
+    public static final String TABLE_NAME = "Ace_WxsHarvester";
+    public static final Object[][] TABLE_COLUMNS = {
+            { "wxsharvesterid", new Integer(Types.BIGINT) },
+            { "name", new Integer(Types.VARCHAR) },
+            { "url", new Integer(Types.VARCHAR) },
+            { "ogctype", new Integer(Types.VARCHAR) },
+            { "every", new Integer(Types.INTEGER) },
+            { "topic", new Integer(Types.VARCHAR) },
+            { "status", new Integer(Types.VARCHAR) },
+            { "savedToGeoNetwork", new Integer(Types.BOOLEAN) },
+            { "geonetworkId", new Integer(Types.BIGINT) },
+            { "geonetworkUUID", new Integer(Types.VARCHAR) },
+            { "companyId", new Integer(Types.BIGINT) },
+            { "groupId", new Integer(Types.BIGINT) }
+        };
+    public static final String TABLE_SQL_CREATE = "create table Ace_WxsHarvester (wxsharvesterid LONG not null primary key,name VARCHAR(75) null,url VARCHAR(75) null,ogctype VARCHAR(75) null,every INTEGER,topic VARCHAR(75) null,status VARCHAR(75) null,savedToGeoNetwork BOOLEAN,geonetworkId LONG,geonetworkUUID VARCHAR(75) null,companyId LONG,groupId LONG)";
+    public static final String TABLE_SQL_DROP = "drop table Ace_WxsHarvester";
+    public static final String ORDER_BY_JPQL = " ORDER BY wxsHarvester.name ASC";
+    public static final String ORDER_BY_SQL = " ORDER BY Ace_WxsHarvester.name ASC";
+    public static final String DATA_SOURCE = "liferayDataSource";
+    public static final String SESSION_FACTORY = "liferaySessionFactory";
+    public static final String TX_MANAGER = "liferayTransactionManager";
+    public static final boolean ENTITY_CACHE_ENABLED = GetterUtil.getBoolean(com.liferay.util.service.ServiceProps.get(
+                "value.object.entity.cache.enabled.nl.wur.alterra.cgi.ace.model.WxsHarvester"),
+            true);
+    public static final boolean FINDER_CACHE_ENABLED = GetterUtil.getBoolean(com.liferay.util.service.ServiceProps.get(
+                "value.object.finder.cache.enabled.nl.wur.alterra.cgi.ace.model.WxsHarvester"),
+            true);
+    public static final long LOCK_EXPIRATION_TIME = GetterUtil.getLong(com.liferay.util.service.ServiceProps.get(
+                "lock.expiration.time.nl.wur.alterra.cgi.ace.model.WxsHarvester"));
+    private long _wxsharvesterid;
+    private String _name;
+    private String _url;
+    private String _ogctype;
+    private int _every;
+    private String _topic;
+    private String _status;
+    private boolean _savedToGeoNetwork;
+    private long _geonetworkId;
+    private String _geonetworkUUID;
+    private long _companyId;
+    private long _groupId;
+    private transient ExpandoBridge _expandoBridge;
 
-	public WxsHarvesterModelImpl() {
-	}
+    public WxsHarvesterModelImpl() {
+    }
 
-	public long getPrimaryKey() {
-		return _wxsharvesterid;
-	}
+    public long getPrimaryKey() {
+        return _wxsharvesterid;
+    }
 
-	public void setPrimaryKey(long pk) {
-		setWxsharvesterid(pk);
-	}
+    public void setPrimaryKey(long pk) {
+        setWxsharvesterid(pk);
+    }
 
-	public Serializable getPrimaryKeyObj() {
-		return new Long(_wxsharvesterid);
-	}
+    public Serializable getPrimaryKeyObj() {
+        return new Long(_wxsharvesterid);
+    }
 
-	public long getWxsharvesterid() {
-		return _wxsharvesterid;
-	}
+    public long getWxsharvesterid() {
+        return _wxsharvesterid;
+    }
 
-	public void setWxsharvesterid(long wxsharvesterid) {
-		_wxsharvesterid = wxsharvesterid;
-	}
+    public void setWxsharvesterid(long wxsharvesterid) {
+        _wxsharvesterid = wxsharvesterid;
+    }
 
-	public String getName() {
-		if (_name == null) {
-			return StringPool.BLANK;
-		}
-		else {
-			return _name;
-		}
-	}
+    public String getName() {
+        if (_name == null) {
+            return StringPool.BLANK;
+        } else {
+            return _name;
+        }
+    }
 
-	public void setName(String name) {
-		_name = name;
-	}
+    public void setName(String name) {
+        _name = name;
+    }
 
-	public String getUrl() {
-		if (_url == null) {
-			return StringPool.BLANK;
-		}
-		else {
-			return _url;
-		}
-	}
+    public String getUrl() {
+        if (_url == null) {
+            return StringPool.BLANK;
+        } else {
+            return _url;
+        }
+    }
 
-	public void setUrl(String url) {
-		_url = url;
-	}
+    public void setUrl(String url) {
+        _url = url;
+    }
 
-	public String getOgctype() {
-		if (_ogctype == null) {
-			return StringPool.BLANK;
-		}
-		else {
-			return _ogctype;
-		}
-	}
+    public String getOgctype() {
+        if (_ogctype == null) {
+            return StringPool.BLANK;
+        } else {
+            return _ogctype;
+        }
+    }
 
-	public void setOgctype(String ogctype) {
-		_ogctype = ogctype;
-	}
+    public void setOgctype(String ogctype) {
+        _ogctype = ogctype;
+    }
 
-	public int getEvery() {
-		return _every;
-	}
+    public int getEvery() {
+        return _every;
+    }
 
-	public void setEvery(int every) {
-		_every = every;
-	}
+    public void setEvery(int every) {
+        _every = every;
+    }
 
-	public String getTopic() {
-		if (_topic == null) {
-			return StringPool.BLANK;
-		}
-		else {
-			return _topic;
-		}
-	}
+    public String getTopic() {
+        if (_topic == null) {
+            return StringPool.BLANK;
+        } else {
+            return _topic;
+        }
+    }
 
-	public void setTopic(String topic) {
-		_topic = topic;
-	}
+    public void setTopic(String topic) {
+        _topic = topic;
+    }
 
-	public String getStatus() {
-		if (_status == null) {
-			return StringPool.BLANK;
-		}
-		else {
-			return _status;
-		}
-	}
+    public String getStatus() {
+        if (_status == null) {
+            return StringPool.BLANK;
+        } else {
+            return _status;
+        }
+    }
 
-	public void setStatus(String status) {
-		_status = status;
-	}
+    public void setStatus(String status) {
+        _status = status;
+    }
 
-	public boolean getSavedToGeoNetwork() {
-		return _savedToGeoNetwork;
-	}
+    public boolean getSavedToGeoNetwork() {
+        return _savedToGeoNetwork;
+    }
 
-	public boolean isSavedToGeoNetwork() {
-		return _savedToGeoNetwork;
-	}
+    public boolean isSavedToGeoNetwork() {
+        return _savedToGeoNetwork;
+    }
 
-	public void setSavedToGeoNetwork(boolean savedToGeoNetwork) {
-		_savedToGeoNetwork = savedToGeoNetwork;
-	}
+    public void setSavedToGeoNetwork(boolean savedToGeoNetwork) {
+        _savedToGeoNetwork = savedToGeoNetwork;
+    }
 
-	public long getGeonetworkId() {
-		return _geonetworkId;
-	}
+    public long getGeonetworkId() {
+        return _geonetworkId;
+    }
 
-	public void setGeonetworkId(long geonetworkId) {
-		_geonetworkId = geonetworkId;
-	}
+    public void setGeonetworkId(long geonetworkId) {
+        _geonetworkId = geonetworkId;
+    }
 
-	public String getGeonetworkUUID() {
-		if (_geonetworkUUID == null) {
-			return StringPool.BLANK;
-		}
-		else {
-			return _geonetworkUUID;
-		}
-	}
+    public String getGeonetworkUUID() {
+        if (_geonetworkUUID == null) {
+            return StringPool.BLANK;
+        } else {
+            return _geonetworkUUID;
+        }
+    }
 
-	public void setGeonetworkUUID(String geonetworkUUID) {
-		_geonetworkUUID = geonetworkUUID;
-	}
+    public void setGeonetworkUUID(String geonetworkUUID) {
+        _geonetworkUUID = geonetworkUUID;
+    }
 
-	public long getCompanyId() {
-		return _companyId;
-	}
+    public long getCompanyId() {
+        return _companyId;
+    }
 
-	public void setCompanyId(long companyId) {
-		_companyId = companyId;
-	}
+    public void setCompanyId(long companyId) {
+        _companyId = companyId;
+    }
 
-	public long getGroupId() {
-		return _groupId;
-	}
+    public long getGroupId() {
+        return _groupId;
+    }
 
-	public void setGroupId(long groupId) {
-		_groupId = groupId;
-	}
+    public void setGroupId(long groupId) {
+        _groupId = groupId;
+    }
 
-	public WxsHarvester toEscapedModel() {
-		if (isEscapedModel()) {
-			return (WxsHarvester)this;
-		}
-		else {
-			return (WxsHarvester)Proxy.newProxyInstance(WxsHarvester.class.getClassLoader(),
-				new Class[] { WxsHarvester.class },
-				new AutoEscapeBeanHandler(this));
-		}
-	}
+    public WxsHarvester toEscapedModel() {
+        if (isEscapedModel()) {
+            return (WxsHarvester) this;
+        } else {
+            return (WxsHarvester) Proxy.newProxyInstance(WxsHarvester.class.getClassLoader(),
+                new Class[] { WxsHarvester.class },
+                new AutoEscapeBeanHandler(this));
+        }
+    }
 
-	public ExpandoBridge getExpandoBridge() {
-		if (_expandoBridge == null) {
-			_expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(getCompanyId(),
-					WxsHarvester.class.getName(), getPrimaryKey());
-		}
+    public ExpandoBridge getExpandoBridge() {
+        if (_expandoBridge == null) {
+            _expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(getCompanyId(),
+                    WxsHarvester.class.getName(), getPrimaryKey());
+        }
 
-		return _expandoBridge;
-	}
+        return _expandoBridge;
+    }
 
-	public void setExpandoBridgeAttributes(ServiceContext serviceContext) {
-		getExpandoBridge().setAttributes(serviceContext);
-	}
+    public void setExpandoBridgeAttributes(ServiceContext serviceContext) {
+        getExpandoBridge().setAttributes(serviceContext);
+    }
 
-	public Object clone() {
-		WxsHarvesterImpl clone = new WxsHarvesterImpl();
+    public Object clone() {
+        WxsHarvesterImpl clone = new WxsHarvesterImpl();
 
-		clone.setWxsharvesterid(getWxsharvesterid());
-		clone.setName(getName());
-		clone.setUrl(getUrl());
-		clone.setOgctype(getOgctype());
-		clone.setEvery(getEvery());
-		clone.setTopic(getTopic());
-		clone.setStatus(getStatus());
-		clone.setSavedToGeoNetwork(getSavedToGeoNetwork());
-		clone.setGeonetworkId(getGeonetworkId());
-		clone.setGeonetworkUUID(getGeonetworkUUID());
-		clone.setCompanyId(getCompanyId());
-		clone.setGroupId(getGroupId());
+        clone.setWxsharvesterid(getWxsharvesterid());
+        clone.setName(getName());
+        clone.setUrl(getUrl());
+        clone.setOgctype(getOgctype());
+        clone.setEvery(getEvery());
+        clone.setTopic(getTopic());
+        clone.setStatus(getStatus());
+        clone.setSavedToGeoNetwork(getSavedToGeoNetwork());
+        clone.setGeonetworkId(getGeonetworkId());
+        clone.setGeonetworkUUID(getGeonetworkUUID());
+        clone.setCompanyId(getCompanyId());
+        clone.setGroupId(getGroupId());
 
-		return clone;
-	}
+        return clone;
+    }
 
-	public int compareTo(WxsHarvester wxsHarvester) {
-		int value = 0;
+    public int compareTo(WxsHarvester wxsHarvester) {
+        int value = 0;
 
-		value = getName().toLowerCase()
-					.compareTo(wxsHarvester.getName().toLowerCase());
+        value = getName().toLowerCase()
+                    .compareTo(wxsHarvester.getName().toLowerCase());
 
-		if (value != 0) {
-			return value;
-		}
+        if (value != 0) {
+            return value;
+        }
 
-		return 0;
-	}
+        return 0;
+    }
 
-	public boolean equals(Object obj) {
-		if (obj == null) {
-			return false;
-		}
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
 
-		WxsHarvester wxsHarvester = null;
+        WxsHarvester wxsHarvester = null;
 
-		try {
-			wxsHarvester = (WxsHarvester)obj;
-		}
-		catch (ClassCastException cce) {
-			return false;
-		}
+        try {
+            wxsHarvester = (WxsHarvester) obj;
+        } catch (ClassCastException cce) {
+            return false;
+        }
 
-		long pk = wxsHarvester.getPrimaryKey();
+        long pk = wxsHarvester.getPrimaryKey();
 
-		if (getPrimaryKey() == pk) {
-			return true;
-		}
-		else {
-			return false;
-		}
-	}
+        if (getPrimaryKey() == pk) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 
-	public int hashCode() {
-		return (int)getPrimaryKey();
-	}
+    public int hashCode() {
+        return (int) getPrimaryKey();
+    }
 
-	public String toString() {
-		StringBundler sb = new StringBundler(25);
+    public String toString() {
+        StringBundler sb = new StringBundler(25);
 
-		sb.append("{wxsharvesterid=");
-		sb.append(getWxsharvesterid());
-		sb.append(", name=");
-		sb.append(getName());
-		sb.append(", url=");
-		sb.append(getUrl());
-		sb.append(", ogctype=");
-		sb.append(getOgctype());
-		sb.append(", every=");
-		sb.append(getEvery());
-		sb.append(", topic=");
-		sb.append(getTopic());
-		sb.append(", status=");
-		sb.append(getStatus());
-		sb.append(", savedToGeoNetwork=");
-		sb.append(getSavedToGeoNetwork());
-		sb.append(", geonetworkId=");
-		sb.append(getGeonetworkId());
-		sb.append(", geonetworkUUID=");
-		sb.append(getGeonetworkUUID());
-		sb.append(", companyId=");
-		sb.append(getCompanyId());
-		sb.append(", groupId=");
-		sb.append(getGroupId());
-		sb.append("}");
+        sb.append("{wxsharvesterid=");
+        sb.append(getWxsharvesterid());
+        sb.append(", name=");
+        sb.append(getName());
+        sb.append(", url=");
+        sb.append(getUrl());
+        sb.append(", ogctype=");
+        sb.append(getOgctype());
+        sb.append(", every=");
+        sb.append(getEvery());
+        sb.append(", topic=");
+        sb.append(getTopic());
+        sb.append(", status=");
+        sb.append(getStatus());
+        sb.append(", savedToGeoNetwork=");
+        sb.append(getSavedToGeoNetwork());
+        sb.append(", geonetworkId=");
+        sb.append(getGeonetworkId());
+        sb.append(", geonetworkUUID=");
+        sb.append(getGeonetworkUUID());
+        sb.append(", companyId=");
+        sb.append(getCompanyId());
+        sb.append(", groupId=");
+        sb.append(getGroupId());
+        sb.append("}");
 
-		return sb.toString();
-	}
+        return sb.toString();
+    }
 
-	public String toXmlString() {
-		StringBundler sb = new StringBundler(40);
+    public String toXmlString() {
+        StringBundler sb = new StringBundler(40);
 
-		sb.append("<model><model-name>");
-		sb.append("nl.wur.alterra.cgi.ace.model.WxsHarvester");
-		sb.append("</model-name>");
+        sb.append("<model><model-name>");
+        sb.append("nl.wur.alterra.cgi.ace.model.WxsHarvester");
+        sb.append("</model-name>");
 
-		sb.append(
-			"<column><column-name>wxsharvesterid</column-name><column-value><![CDATA[");
-		sb.append(getWxsharvesterid());
-		sb.append("]]></column-value></column>");
-		sb.append(
-			"<column><column-name>name</column-name><column-value><![CDATA[");
-		sb.append(getName());
-		sb.append("]]></column-value></column>");
-		sb.append(
-			"<column><column-name>url</column-name><column-value><![CDATA[");
-		sb.append(getUrl());
-		sb.append("]]></column-value></column>");
-		sb.append(
-			"<column><column-name>ogctype</column-name><column-value><![CDATA[");
-		sb.append(getOgctype());
-		sb.append("]]></column-value></column>");
-		sb.append(
-			"<column><column-name>every</column-name><column-value><![CDATA[");
-		sb.append(getEvery());
-		sb.append("]]></column-value></column>");
-		sb.append(
-			"<column><column-name>topic</column-name><column-value><![CDATA[");
-		sb.append(getTopic());
-		sb.append("]]></column-value></column>");
-		sb.append(
-			"<column><column-name>status</column-name><column-value><![CDATA[");
-		sb.append(getStatus());
-		sb.append("]]></column-value></column>");
-		sb.append(
-			"<column><column-name>savedToGeoNetwork</column-name><column-value><![CDATA[");
-		sb.append(getSavedToGeoNetwork());
-		sb.append("]]></column-value></column>");
-		sb.append(
-			"<column><column-name>geonetworkId</column-name><column-value><![CDATA[");
-		sb.append(getGeonetworkId());
-		sb.append("]]></column-value></column>");
-		sb.append(
-			"<column><column-name>geonetworkUUID</column-name><column-value><![CDATA[");
-		sb.append(getGeonetworkUUID());
-		sb.append("]]></column-value></column>");
-		sb.append(
-			"<column><column-name>companyId</column-name><column-value><![CDATA[");
-		sb.append(getCompanyId());
-		sb.append("]]></column-value></column>");
-		sb.append(
-			"<column><column-name>groupId</column-name><column-value><![CDATA[");
-		sb.append(getGroupId());
-		sb.append("]]></column-value></column>");
+        sb.append(
+            "<column><column-name>wxsharvesterid</column-name><column-value><![CDATA[");
+        sb.append(getWxsharvesterid());
+        sb.append("]]></column-value></column>");
+        sb.append(
+            "<column><column-name>name</column-name><column-value><![CDATA[");
+        sb.append(getName());
+        sb.append("]]></column-value></column>");
+        sb.append(
+            "<column><column-name>url</column-name><column-value><![CDATA[");
+        sb.append(getUrl());
+        sb.append("]]></column-value></column>");
+        sb.append(
+            "<column><column-name>ogctype</column-name><column-value><![CDATA[");
+        sb.append(getOgctype());
+        sb.append("]]></column-value></column>");
+        sb.append(
+            "<column><column-name>every</column-name><column-value><![CDATA[");
+        sb.append(getEvery());
+        sb.append("]]></column-value></column>");
+        sb.append(
+            "<column><column-name>topic</column-name><column-value><![CDATA[");
+        sb.append(getTopic());
+        sb.append("]]></column-value></column>");
+        sb.append(
+            "<column><column-name>status</column-name><column-value><![CDATA[");
+        sb.append(getStatus());
+        sb.append("]]></column-value></column>");
+        sb.append(
+            "<column><column-name>savedToGeoNetwork</column-name><column-value><![CDATA[");
+        sb.append(getSavedToGeoNetwork());
+        sb.append("]]></column-value></column>");
+        sb.append(
+            "<column><column-name>geonetworkId</column-name><column-value><![CDATA[");
+        sb.append(getGeonetworkId());
+        sb.append("]]></column-value></column>");
+        sb.append(
+            "<column><column-name>geonetworkUUID</column-name><column-value><![CDATA[");
+        sb.append(getGeonetworkUUID());
+        sb.append("]]></column-value></column>");
+        sb.append(
+            "<column><column-name>companyId</column-name><column-value><![CDATA[");
+        sb.append(getCompanyId());
+        sb.append("]]></column-value></column>");
+        sb.append(
+            "<column><column-name>groupId</column-name><column-value><![CDATA[");
+        sb.append(getGroupId());
+        sb.append("]]></column-value></column>");
 
-		sb.append("</model>");
+        sb.append("</model>");
 
-		return sb.toString();
-	}
-
-	private long _wxsharvesterid;
-	private String _name;
-	private String _url;
-	private String _ogctype;
-	private int _every;
-	private String _topic;
-	private String _status;
-	private boolean _savedToGeoNetwork;
-	private long _geonetworkId;
-	private String _geonetworkUUID;
-	private long _companyId;
-	private long _groupId;
-	private transient ExpandoBridge _expandoBridge;
+        return sb.toString();
+    }
 }

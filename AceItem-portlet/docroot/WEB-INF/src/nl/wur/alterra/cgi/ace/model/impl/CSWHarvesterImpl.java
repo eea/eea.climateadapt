@@ -39,7 +39,6 @@ public class CSWHarvesterImpl extends CSWHarvesterModelImpl
      *
      * @return shorter string than toString()
      */
-    @Override
     public String toShortString() {
         return this.getCswharvesterid() + " " + this.getName();
     }

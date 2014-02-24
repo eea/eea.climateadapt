@@ -38,7 +38,6 @@ public class WxsHarvesterImpl extends WxsHarvesterModelImpl
      *
      * @return shorter string than toString()
      */
-    @Override
     public String toShortString() {
         return this.getWxsharvesterid() + " " + this.getName();
     }

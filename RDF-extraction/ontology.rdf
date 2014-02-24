@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rdf:RDF
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+    xmlns:owl="http://www.w3.org/2002/07/owl#"
+   xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+xml:base="http://climate-adapt.eea.europa.eu/rdf/ontology/">
+
+
+<!-- Description of Ontology -->
+<owl:Ontology rdf:about="">
+  <rdfs:label>Climate adapt ontology</rdfs:label>
+  <owl:versionInfo>2013-06-26</owl:versionInfo>
+</owl:Ontology>
+
+
+<rdfs:Class rdf:about="Measure">
+  <rdfs:label>Measure</rdfs:label>
+</rdfs:Class>
+
+<rdfs:Class rdf:about="Project">
+  <rdfs:label>Project</rdfs:label>
+</rdfs:Class>
+
+<rdf:Property rdf:about="contact">
+  <rdfs:label>Contact</rdfs:label>
+</rdf:Property>
+
+<rdf:Property rdf:about="costbenefit">
+  <rdfs:label>Cost/benefit</rdfs:label>
+</rdf:Property>
+
+<rdf:Property rdf:about="implementationtime">
+  <rdfs:label>Implementation time span</rdfs:label>
+</rdf:Property>
+
+<rdf:Property rdf:about="implementationtype">
+  <rdfs:label>Implementation type</rdfs:label>
+</rdf:Property>
+
+<rdf:Property rdf:about="legalaspects">
+  <rdfs:label>Legal aspects</rdfs:label>
+</rdf:Property>
+
+<rdf:Property rdf:about="mao_type">
+  <rdfs:label>Type</rdfs:label>
+  <rdfs:comment>M=Adaptation option or A=Case study</rdfs:comment>
+</rdf:Property>
+
+<rdf:Property rdf:about="satarea">
+  <rdfs:label>Bio-geographical region</rdfs:label>
+</rdf:Property>
+
+<rdf:Property rdf:about="stakeholderparticipation">
+  <rdfs:label>Stakeholder participation</rdfs:label>
+</rdf:Property>
+
+</rdf:RDF>
