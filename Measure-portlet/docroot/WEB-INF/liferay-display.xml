@@ -11,5 +11,7 @@
 		<portlet id="measuredetailportlet"></portlet>
 		<portlet id="measuregoeditportlet"></portlet>
 		<portlet id="sharemeasureportlet"></portlet>
+		<portlet id="home_search_portlet"></portlet>
+		<portlet id="home_slider_portlet"></portlet>
 	</category>
 </display>

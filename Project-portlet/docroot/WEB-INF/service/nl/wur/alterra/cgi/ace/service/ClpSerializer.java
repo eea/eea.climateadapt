@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2010 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2011 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -77,201 +77,236 @@ public class ClpSerializer {
 
 					method2.invoke(newModel, value2);
 
-					Method method3 = newModelClass.getMethod("setAcronym",
+					Method method3 = newModelClass.getMethod("setAdmincomment",
 							new Class[] { String.class });
 
-					String value3 = oldCplModel.getAcronym();
+					String value3 = oldCplModel.getAdmincomment();
 
 					method3.invoke(newModel, value3);
 
-					Method method4 = newModelClass.getMethod("setTitle",
+					Method method4 = newModelClass.getMethod("setAcronym",
 							new Class[] { String.class });
 
-					String value4 = oldCplModel.getTitle();
+					String value4 = oldCplModel.getAcronym();
 
 					method4.invoke(newModel, value4);
 
-					Method method5 = newModelClass.getMethod("setStartdate",
-							new Class[] { Date.class });
+					Method method5 = newModelClass.getMethod("setTitle",
+							new Class[] { String.class });
 
-					Date value5 = oldCplModel.getStartdate();
+					String value5 = oldCplModel.getTitle();
 
 					method5.invoke(newModel, value5);
 
-					Method method6 = newModelClass.getMethod("setEnddate",
+					Method method6 = newModelClass.getMethod("setStartdate",
 							new Class[] { Date.class });
 
-					Date value6 = oldCplModel.getEnddate();
+					Date value6 = oldCplModel.getStartdate();
 
 					method6.invoke(newModel, value6);
 
-					Method method7 = newModelClass.getMethod("setLead",
-							new Class[] { String.class });
+					Method method7 = newModelClass.getMethod("setEnddate",
+							new Class[] { Date.class });
 
-					String value7 = oldCplModel.getLead();
+					Date value7 = oldCplModel.getEnddate();
 
 					method7.invoke(newModel, value7);
 
-					Method method8 = newModelClass.getMethod("setPartners",
+					Method method8 = newModelClass.getMethod("setLead",
 							new Class[] { String.class });
 
-					String value8 = oldCplModel.getPartners();
+					String value8 = oldCplModel.getLead();
 
 					method8.invoke(newModel, value8);
 
-					Method method9 = newModelClass.getMethod("setFunding",
+					Method method9 = newModelClass.getMethod("setPartners",
 							new Class[] { String.class });
 
-					String value9 = oldCplModel.getFunding();
+					String value9 = oldCplModel.getPartners();
 
 					method9.invoke(newModel, value9);
 
-					Method method10 = newModelClass.getMethod("setSectors",
+					Method method10 = newModelClass.getMethod("setFunding",
 							new Class[] { String.class });
 
-					String value10 = oldCplModel.getSectors();
+					String value10 = oldCplModel.getFunding();
 
 					method10.invoke(newModel, value10);
 
-					Method method11 = newModelClass.getMethod("setSpatiallayer",
+					Method method11 = newModelClass.getMethod("setSectors",
 							new Class[] { String.class });
 
-					String value11 = oldCplModel.getSpatiallayer();
+					String value11 = oldCplModel.getSectors();
 
 					method11.invoke(newModel, value11);
 
-					Method method12 = newModelClass.getMethod("setAbstracts",
+					Method method12 = newModelClass.getMethod("setSpatiallayer",
 							new Class[] { String.class });
 
-					String value12 = oldCplModel.getAbstracts();
+					String value12 = oldCplModel.getSpatiallayer();
 
 					method12.invoke(newModel, value12);
 
-					Method method13 = newModelClass.getMethod("setElement",
+					Method method13 = newModelClass.getMethod("setAbstracts",
 							new Class[] { String.class });
 
-					String value13 = oldCplModel.getElement();
+					String value13 = oldCplModel.getAbstracts();
 
 					method13.invoke(newModel, value13);
 
-					Method method14 = newModelClass.getMethod("setKeywords",
+					Method method14 = newModelClass.getMethod("setElement",
 							new Class[] { String.class });
 
-					String value14 = oldCplModel.getKeywords();
+					String value14 = oldCplModel.getElement();
 
 					method14.invoke(newModel, value14);
 
-					Method method15 = newModelClass.getMethod("setWebsite",
+					Method method15 = newModelClass.getMethod("setKeywords",
 							new Class[] { String.class });
 
-					String value15 = oldCplModel.getWebsite();
+					String value15 = oldCplModel.getKeywords();
 
 					method15.invoke(newModel, value15);
 
-					Method method16 = newModelClass.getMethod("setDuration",
+					Method method16 = newModelClass.getMethod("setWebsite",
 							new Class[] { String.class });
 
-					String value16 = oldCplModel.getDuration();
+					String value16 = oldCplModel.getWebsite();
 
 					method16.invoke(newModel, value16);
 
-					Method method17 = newModelClass.getMethod("setRating",
-							new Class[] { Long.TYPE });
+					Method method17 = newModelClass.getMethod("setDuration",
+							new Class[] { String.class });
 
-					Long value17 = new Long(oldCplModel.getRating());
+					String value17 = oldCplModel.getDuration();
 
 					method17.invoke(newModel, value17);
 
-					Method method18 = newModelClass.getMethod("setImportance",
+					Method method18 = newModelClass.getMethod("setRating",
 							new Class[] { Long.TYPE });
 
-					Long value18 = new Long(oldCplModel.getImportance());
+					Long value18 = new Long(oldCplModel.getRating());
 
 					method18.invoke(newModel, value18);
 
-					Method method19 = newModelClass.getMethod("setSpecialtagging",
-							new Class[] { String.class });
+					Method method19 = newModelClass.getMethod("setImportance",
+							new Class[] { Long.TYPE });
 
-					String value19 = oldCplModel.getSpecialtagging();
+					Long value19 = new Long(oldCplModel.getImportance());
 
 					method19.invoke(newModel, value19);
 
-					Method method20 = newModelClass.getMethod("setControlstatus",
-							new Class[] { Short.TYPE });
+					Method method20 = newModelClass.getMethod("setSpecialtagging",
+							new Class[] { String.class });
 
-					Short value20 = new Short(oldCplModel.getControlstatus());
+					String value20 = oldCplModel.getSpecialtagging();
 
 					method20.invoke(newModel, value20);
 
-					Method method21 = newModelClass.getMethod("setCreator",
-							new Class[] { String.class });
+					Method method21 = newModelClass.getMethod("setControlstatus",
+							new Class[] { Short.TYPE });
 
-					String value21 = oldCplModel.getCreator();
+					Short value21 = new Short(oldCplModel.getControlstatus());
 
 					method21.invoke(newModel, value21);
 
-					Method method22 = newModelClass.getMethod("setCreationdate",
-							new Class[] { Date.class });
+					Method method22 = newModelClass.getMethod("setCreator",
+							new Class[] { String.class });
 
-					Date value22 = oldCplModel.getCreationdate();
+					String value22 = oldCplModel.getCreator();
 
 					method22.invoke(newModel, value22);
 
-					Method method23 = newModelClass.getMethod("setModerator",
-							new Class[] { String.class });
+					Method method23 = newModelClass.getMethod("setCreationdate",
+							new Class[] { Date.class });
 
-					String value23 = oldCplModel.getModerator();
+					Date value23 = oldCplModel.getCreationdate();
 
 					method23.invoke(newModel, value23);
 
-					Method method24 = newModelClass.getMethod("setApprovaldate",
-							new Class[] { Date.class });
+					Method method24 = newModelClass.getMethod("setModerator",
+							new Class[] { String.class });
 
-					Date value24 = oldCplModel.getApprovaldate();
+					String value24 = oldCplModel.getModerator();
 
 					method24.invoke(newModel, value24);
 
-					Method method25 = newModelClass.getMethod("setReplacesId",
-							new Class[] { Long.TYPE });
+					Method method25 = newModelClass.getMethod("setApprovaldate",
+							new Class[] { Date.class });
 
-					Long value25 = new Long(oldCplModel.getReplacesId());
+					Date value25 = oldCplModel.getApprovaldate();
 
 					method25.invoke(newModel, value25);
 
-					Method method26 = newModelClass.getMethod("setComments",
-							new Class[] { String.class });
+					Method method26 = newModelClass.getMethod("setReplacesId",
+							new Class[] { Long.TYPE });
 
-					String value26 = oldCplModel.getComments();
+					Long value26 = new Long(oldCplModel.getReplacesId());
 
 					method26.invoke(newModel, value26);
 
-					Method method27 = newModelClass.getMethod("setTextwebpage",
+					Method method27 = newModelClass.getMethod("setComments",
 							new Class[] { String.class });
 
-					String value27 = oldCplModel.getTextwebpage();
+					String value27 = oldCplModel.getComments();
 
 					method27.invoke(newModel, value27);
 
-					Method method28 = newModelClass.getMethod("setSpatialvalues",
+					Method method28 = newModelClass.getMethod("setTextwebpage",
 							new Class[] { String.class });
 
-					String value28 = oldCplModel.getSpatialvalues();
+					String value28 = oldCplModel.getTextwebpage();
 
 					method28.invoke(newModel, value28);
 
-					Method method29 = newModelClass.getMethod("setSource",
+					Method method29 = newModelClass.getMethod("setSpatialvalues",
 							new Class[] { String.class });
 
-					String value29 = oldCplModel.getSource();
+					String value29 = oldCplModel.getSpatialvalues();
 
 					method29.invoke(newModel, value29);
 
-					Method method30 = newModelClass.getMethod("setClimateimpacts",
+					Method method30 = newModelClass.getMethod("setSource",
 							new Class[] { String.class });
 
-					String value30 = oldCplModel.getClimateimpacts();
+					String value30 = oldCplModel.getSource();
 
 					method30.invoke(newModel, value30);
+
+					Method method31 = newModelClass.getMethod("setClimateimpacts",
+							new Class[] { String.class });
+
+					String value31 = oldCplModel.getClimateimpacts();
+
+					method31.invoke(newModel, value31);
+
+					Method method32 = newModelClass.getMethod("setLockdate",
+							new Class[] { Date.class });
+
+					Date value32 = oldCplModel.getLockdate();
+
+					method32.invoke(newModel, value32);
+
+					Method method33 = newModelClass.getMethod("setFeature",
+							new Class[] { String.class });
+
+					String value33 = oldCplModel.getFeature();
+
+					method33.invoke(newModel, value33);
+
+					Method method34 = newModelClass.getMethod("setSupdocs",
+							new Class[] { String.class });
+
+					String value34 = oldCplModel.getSupdocs();
+
+					method34.invoke(newModel, value34);
+
+					Method method35 = newModelClass.getMethod("setGeochars",
+							new Class[] { String.class });
+
+					String value35 = oldCplModel.getGeochars();
+
+					method35.invoke(newModel, value35);
 
 					return newModel;
 				}
@@ -345,203 +380,238 @@ public class ClpSerializer {
 
 					newModel.setGroupId(value2);
 
-					Method method3 = oldModelClass.getMethod("getAcronym");
+					Method method3 = oldModelClass.getMethod("getAdmincomment");
 
 					String value3 = (String)method3.invoke(oldModel,
 							(Object[])null);
 
-					newModel.setAcronym(value3);
+					newModel.setAdmincomment(value3);
 
-					Method method4 = oldModelClass.getMethod("getTitle");
+					Method method4 = oldModelClass.getMethod("getAcronym");
 
 					String value4 = (String)method4.invoke(oldModel,
 							(Object[])null);
 
-					newModel.setTitle(value4);
+					newModel.setAcronym(value4);
 
-					Method method5 = oldModelClass.getMethod("getStartdate");
+					Method method5 = oldModelClass.getMethod("getTitle");
 
-					Date value5 = (Date)method5.invoke(oldModel, (Object[])null);
+					String value5 = (String)method5.invoke(oldModel,
+							(Object[])null);
 
-					newModel.setStartdate(value5);
+					newModel.setTitle(value5);
 
-					Method method6 = oldModelClass.getMethod("getEnddate");
+					Method method6 = oldModelClass.getMethod("getStartdate");
 
 					Date value6 = (Date)method6.invoke(oldModel, (Object[])null);
 
-					newModel.setEnddate(value6);
+					newModel.setStartdate(value6);
 
-					Method method7 = oldModelClass.getMethod("getLead");
+					Method method7 = oldModelClass.getMethod("getEnddate");
 
-					String value7 = (String)method7.invoke(oldModel,
-							(Object[])null);
+					Date value7 = (Date)method7.invoke(oldModel, (Object[])null);
 
-					newModel.setLead(value7);
+					newModel.setEnddate(value7);
 
-					Method method8 = oldModelClass.getMethod("getPartners");
+					Method method8 = oldModelClass.getMethod("getLead");
 
 					String value8 = (String)method8.invoke(oldModel,
 							(Object[])null);
 
-					newModel.setPartners(value8);
+					newModel.setLead(value8);
 
-					Method method9 = oldModelClass.getMethod("getFunding");
+					Method method9 = oldModelClass.getMethod("getPartners");
 
 					String value9 = (String)method9.invoke(oldModel,
 							(Object[])null);
 
-					newModel.setFunding(value9);
+					newModel.setPartners(value9);
 
-					Method method10 = oldModelClass.getMethod("getSectors");
+					Method method10 = oldModelClass.getMethod("getFunding");
 
 					String value10 = (String)method10.invoke(oldModel,
 							(Object[])null);
 
-					newModel.setSectors(value10);
+					newModel.setFunding(value10);
 
-					Method method11 = oldModelClass.getMethod("getSpatiallayer");
+					Method method11 = oldModelClass.getMethod("getSectors");
 
 					String value11 = (String)method11.invoke(oldModel,
 							(Object[])null);
 
-					newModel.setSpatiallayer(value11);
+					newModel.setSectors(value11);
 
-					Method method12 = oldModelClass.getMethod("getAbstracts");
+					Method method12 = oldModelClass.getMethod("getSpatiallayer");
 
 					String value12 = (String)method12.invoke(oldModel,
 							(Object[])null);
 
-					newModel.setAbstracts(value12);
+					newModel.setSpatiallayer(value12);
 
-					Method method13 = oldModelClass.getMethod("getElement");
+					Method method13 = oldModelClass.getMethod("getAbstracts");
 
 					String value13 = (String)method13.invoke(oldModel,
 							(Object[])null);
 
-					newModel.setElement(value13);
+					newModel.setAbstracts(value13);
 
-					Method method14 = oldModelClass.getMethod("getKeywords");
+					Method method14 = oldModelClass.getMethod("getElement");
 
 					String value14 = (String)method14.invoke(oldModel,
 							(Object[])null);
 
-					newModel.setKeywords(value14);
+					newModel.setElement(value14);
 
-					Method method15 = oldModelClass.getMethod("getWebsite");
+					Method method15 = oldModelClass.getMethod("getKeywords");
 
 					String value15 = (String)method15.invoke(oldModel,
 							(Object[])null);
 
-					newModel.setWebsite(value15);
+					newModel.setKeywords(value15);
 
-					Method method16 = oldModelClass.getMethod("getDuration");
+					Method method16 = oldModelClass.getMethod("getWebsite");
 
 					String value16 = (String)method16.invoke(oldModel,
 							(Object[])null);
 
-					newModel.setDuration(value16);
+					newModel.setWebsite(value16);
 
-					Method method17 = oldModelClass.getMethod("getRating");
+					Method method17 = oldModelClass.getMethod("getDuration");
 
-					Long value17 = (Long)method17.invoke(oldModel,
+					String value17 = (String)method17.invoke(oldModel,
 							(Object[])null);
 
-					newModel.setRating(value17);
+					newModel.setDuration(value17);
 
-					Method method18 = oldModelClass.getMethod("getImportance");
+					Method method18 = oldModelClass.getMethod("getRating");
 
 					Long value18 = (Long)method18.invoke(oldModel,
 							(Object[])null);
 
-					newModel.setImportance(value18);
+					newModel.setRating(value18);
 
-					Method method19 = oldModelClass.getMethod(
-							"getSpecialtagging");
+					Method method19 = oldModelClass.getMethod("getImportance");
 
-					String value19 = (String)method19.invoke(oldModel,
+					Long value19 = (Long)method19.invoke(oldModel,
 							(Object[])null);
 
-					newModel.setSpecialtagging(value19);
+					newModel.setImportance(value19);
 
 					Method method20 = oldModelClass.getMethod(
+							"getSpecialtagging");
+
+					String value20 = (String)method20.invoke(oldModel,
+							(Object[])null);
+
+					newModel.setSpecialtagging(value20);
+
+					Method method21 = oldModelClass.getMethod(
 							"getControlstatus");
 
-					Short value20 = (Short)method20.invoke(oldModel,
+					Short value21 = (Short)method21.invoke(oldModel,
 							(Object[])null);
 
-					newModel.setControlstatus(value20);
+					newModel.setControlstatus(value21);
 
-					Method method21 = oldModelClass.getMethod("getCreator");
+					Method method22 = oldModelClass.getMethod("getCreator");
 
-					String value21 = (String)method21.invoke(oldModel,
+					String value22 = (String)method22.invoke(oldModel,
 							(Object[])null);
 
-					newModel.setCreator(value21);
+					newModel.setCreator(value22);
 
-					Method method22 = oldModelClass.getMethod("getCreationdate");
+					Method method23 = oldModelClass.getMethod("getCreationdate");
 
-					Date value22 = (Date)method22.invoke(oldModel,
+					Date value23 = (Date)method23.invoke(oldModel,
 							(Object[])null);
 
-					newModel.setCreationdate(value22);
+					newModel.setCreationdate(value23);
 
-					Method method23 = oldModelClass.getMethod("getModerator");
+					Method method24 = oldModelClass.getMethod("getModerator");
 
-					String value23 = (String)method23.invoke(oldModel,
+					String value24 = (String)method24.invoke(oldModel,
 							(Object[])null);
 
-					newModel.setModerator(value23);
+					newModel.setModerator(value24);
 
-					Method method24 = oldModelClass.getMethod("getApprovaldate");
+					Method method25 = oldModelClass.getMethod("getApprovaldate");
 
-					Date value24 = (Date)method24.invoke(oldModel,
+					Date value25 = (Date)method25.invoke(oldModel,
 							(Object[])null);
 
-					newModel.setApprovaldate(value24);
+					newModel.setApprovaldate(value25);
 
-					Method method25 = oldModelClass.getMethod("getReplacesId");
+					Method method26 = oldModelClass.getMethod("getReplacesId");
 
-					Long value25 = (Long)method25.invoke(oldModel,
+					Long value26 = (Long)method26.invoke(oldModel,
 							(Object[])null);
 
-					newModel.setReplacesId(value25);
+					newModel.setReplacesId(value26);
 
-					Method method26 = oldModelClass.getMethod("getComments");
-
-					String value26 = (String)method26.invoke(oldModel,
-							(Object[])null);
-
-					newModel.setComments(value26);
-
-					Method method27 = oldModelClass.getMethod("getTextwebpage");
+					Method method27 = oldModelClass.getMethod("getComments");
 
 					String value27 = (String)method27.invoke(oldModel,
 							(Object[])null);
 
-					newModel.setTextwebpage(value27);
+					newModel.setComments(value27);
 
-					Method method28 = oldModelClass.getMethod(
-							"getSpatialvalues");
+					Method method28 = oldModelClass.getMethod("getTextwebpage");
 
 					String value28 = (String)method28.invoke(oldModel,
 							(Object[])null);
 
-					newModel.setSpatialvalues(value28);
+					newModel.setTextwebpage(value28);
 
-					Method method29 = oldModelClass.getMethod("getSource");
+					Method method29 = oldModelClass.getMethod(
+							"getSpatialvalues");
 
 					String value29 = (String)method29.invoke(oldModel,
 							(Object[])null);
 
-					newModel.setSource(value29);
+					newModel.setSpatialvalues(value29);
 
-					Method method30 = oldModelClass.getMethod(
-							"getClimateimpacts");
+					Method method30 = oldModelClass.getMethod("getSource");
 
 					String value30 = (String)method30.invoke(oldModel,
 							(Object[])null);
 
-					newModel.setClimateimpacts(value30);
+					newModel.setSource(value30);
+
+					Method method31 = oldModelClass.getMethod(
+							"getClimateimpacts");
+
+					String value31 = (String)method31.invoke(oldModel,
+							(Object[])null);
+
+					newModel.setClimateimpacts(value31);
+
+					Method method32 = oldModelClass.getMethod("getLockdate");
+
+					Date value32 = (Date)method32.invoke(oldModel,
+							(Object[])null);
+
+					newModel.setLockdate(value32);
+
+					Method method33 = oldModelClass.getMethod("getFeature");
+
+					String value33 = (String)method33.invoke(oldModel,
+							(Object[])null);
+
+					newModel.setFeature(value33);
+
+					Method method34 = oldModelClass.getMethod("getSupdocs");
+
+					String value34 = (String)method34.invoke(oldModel,
+							(Object[])null);
+
+					newModel.setSupdocs(value34);
+
+					Method method35 = oldModelClass.getMethod("getGeochars");
+
+					String value35 = (String)method35.invoke(oldModel,
+							(Object[])null);
+
+					newModel.setGeochars(value35);
 
 					return newModel;
 				}

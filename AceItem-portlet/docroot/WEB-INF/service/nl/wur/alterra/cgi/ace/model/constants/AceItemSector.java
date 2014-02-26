@@ -31,6 +31,10 @@ public enum AceItemSector {
      */
     HEALTH,
     /**
+     * Urban.
+     */
+    URBAN,
+    /**
      * Infrastructure.
      */
     INFRASTRUCTURE,

@@ -1,6 +1,7 @@
 package nl.wur.alterra.cgi.ace.portlet;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Enumeration;
 import java.util.HashSet;
 
@@ -188,6 +189,10 @@ public class ProjectPortlet extends ProjectUpdateHelper {
                         if (aceitem == null){
                             aceitem = createAceItemInsideDB(project);
                         }
+                    }
+
+                    if (oldapproved == ACEIndexUtil.Status_SUBMITTED && newapproved == ACEIndexUtil.Status_APPROVED){
+                        project.setApprovaldate( new Date() );
                     }
 
                     ProjectLocalServiceUtil.updateProject(project);

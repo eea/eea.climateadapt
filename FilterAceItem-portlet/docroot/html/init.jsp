@@ -20,6 +20,7 @@
 <%@ page import="com.liferay.portal.model.Group"%>
 <%@ page import="com.liferay.portal.security.permission.ActionKeys"%>
 <%@ page import="com.liferay.portal.util.PortalUtil" %>
+<%@ page import="com.liferay.portlet.PortletPreferencesFactoryUtil" %>
 
 <%@ page import="nl.wur.alterra.cgi.ace.model.AceItem"%>
 <%@ page import="nl.wur.alterra.cgi.ace.service.AceItemLocalServiceUtil"%>

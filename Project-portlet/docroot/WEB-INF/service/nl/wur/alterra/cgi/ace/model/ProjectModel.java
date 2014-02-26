@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2010 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2011 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -97,6 +97,21 @@ public interface ProjectModel extends BaseModel<Project> {
 	 * @param groupId the group id of this project
 	 */
 	public void setGroupId(long groupId);
+
+	/**
+	 * Gets the admincomment of this project.
+	 *
+	 * @return the admincomment of this project
+	 */
+	@AutoEscape
+	public String getAdmincomment();
+
+	/**
+	 * Sets the admincomment of this project.
+	 *
+	 * @param admincomment the admincomment of this project
+	 */
+	public void setAdmincomment(String admincomment);
 
 	/**
 	 * Gets the acronym of this project.
@@ -509,6 +524,65 @@ public interface ProjectModel extends BaseModel<Project> {
 	 * @param climateimpacts the climateimpacts of this project
 	 */
 	public void setClimateimpacts(String climateimpacts);
+
+	/**
+	 * Gets the lockdate of this project.
+	 *
+	 * @return the lockdate of this project
+	 */
+	public Date getLockdate();
+
+	/**
+	 * Sets the lockdate of this project.
+	 *
+	 * @param lockdate the lockdate of this project
+	 */
+	public void setLockdate(Date lockdate);
+
+	/**
+	 * Gets the feature of this project.
+	 *
+	 * @return the feature of this project
+	 */
+	@AutoEscape
+	public String getFeature();
+
+	/**
+	 * Sets the feature of this project.
+	 *
+	 * @param feature the feature of this project
+	 */
+	public void setFeature(String feature);
+
+	/**
+	 * Gets the supdocs of this project.
+	 *
+	 * @return the supdocs of this project
+	 */
+	@AutoEscape
+	public String getSupdocs();
+
+	/**
+	 * Sets the supdocs of this project.
+	 *
+	 * @param supdocs the supdocs of this project
+	 */
+	public void setSupdocs(String supdocs);
+
+	/**
+	 * Gets the geochars of this project.
+	 *
+	 * @return the geochars of this project
+	 */
+	@AutoEscape
+	public String getGeochars();
+
+	/**
+	 * Sets the geochars of this project.
+	 *
+	 * @param geochars the geochars of this project
+	 */
+	public void setGeochars(String geochars);
 
 	/**
 	 * Gets a copy of this project as an escaped model instance by wrapping it with an {@link com.liferay.portal.kernel.bean.AutoEscapeBeanHandler}.

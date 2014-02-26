@@ -31,6 +31,7 @@ CREATE TABLE ace_project
   spatialvalues character varying(255),
   source character varying(75),
   climateimpacts character varying(255),
+  lockdate timestamp without time zone,
   CONSTRAINT ace_project_pkey PRIMARY KEY (projectid)
 )
 WITH (

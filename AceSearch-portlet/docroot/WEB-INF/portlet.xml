@@ -8,13 +8,13 @@
 		<portlet-class>nl.wur.alterra.cgi.ace.portlet.AceSearchPortlet</portlet-class>
 		<init-param>
 			<name>view-jsp</name>
-			<value>/html/acesearch/view.jsp</value>
+			<value>/html/acesearch/viewModified.jsp</value>
 		</init-param>
 		<init-param>
 			<name>edit-jsp</name>
 			<value>/html/acesearch/edit.jsp</value>
 		</init-param>
-		<expiration-cache>-1</expiration-cache>
+		<expiration-cache>0</expiration-cache>
 		<supports>
 			<mime-type>text/html</mime-type>
 			<portlet-mode>VIEW</portlet-mode>

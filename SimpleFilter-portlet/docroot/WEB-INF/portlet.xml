@@ -49,6 +49,10 @@
 				<value> </value>
 			</preference>
 			<preference>
+				<name>nrcheckboxes</name>
+				<value>2</value>
+			</preference>
+			<preference>
 				<name>datainfo_type</name>
 				<value>2</value>
 			</preference>

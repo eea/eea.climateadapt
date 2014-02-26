@@ -1,17 +1,3 @@
-/**
- * Copyright (c) 2000-2010 Liferay, Inc. All rights reserved.
- *
- * This library is free software; you can redistribute it and/or modify it under
- * the terms of the GNU Lesser General Public License as published by the Free
- * Software Foundation; either version 2.1 of the License, or (at your option)
- * any later version.
- *
- * This library is distributed in the hope that it will be useful, but WITHOUT
- * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
- * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
- * details.
- */
-
 package nl.wur.alterra.cgi.ace.model;
 
 /**
@@ -24,186 +10,186 @@ package nl.wur.alterra.cgi.ace.model;
  * @generated
  */
 public class WxsHarvesterWrapper implements WxsHarvester {
-	public WxsHarvesterWrapper(WxsHarvester wxsHarvester) {
-		_wxsHarvester = wxsHarvester;
-	}
+    private WxsHarvester _wxsHarvester;
 
-	public long getPrimaryKey() {
-		return _wxsHarvester.getPrimaryKey();
-	}
+    public WxsHarvesterWrapper(WxsHarvester wxsHarvester) {
+        _wxsHarvester = wxsHarvester;
+    }
 
-	public void setPrimaryKey(long pk) {
-		_wxsHarvester.setPrimaryKey(pk);
-	}
+    public long getPrimaryKey() {
+        return _wxsHarvester.getPrimaryKey();
+    }
 
-	public long getWxsharvesterid() {
-		return _wxsHarvester.getWxsharvesterid();
-	}
+    public void setPrimaryKey(long pk) {
+        _wxsHarvester.setPrimaryKey(pk);
+    }
 
-	public void setWxsharvesterid(long wxsharvesterid) {
-		_wxsHarvester.setWxsharvesterid(wxsharvesterid);
-	}
+    public long getWxsharvesterid() {
+        return _wxsHarvester.getWxsharvesterid();
+    }
 
-	public java.lang.String getName() {
-		return _wxsHarvester.getName();
-	}
+    public void setWxsharvesterid(long wxsharvesterid) {
+        _wxsHarvester.setWxsharvesterid(wxsharvesterid);
+    }
 
-	public void setName(java.lang.String name) {
-		_wxsHarvester.setName(name);
-	}
+    public java.lang.String getName() {
+        return _wxsHarvester.getName();
+    }
 
-	public java.lang.String getUrl() {
-		return _wxsHarvester.getUrl();
-	}
+    public void setName(java.lang.String name) {
+        _wxsHarvester.setName(name);
+    }
 
-	public void setUrl(java.lang.String url) {
-		_wxsHarvester.setUrl(url);
-	}
+    public java.lang.String getUrl() {
+        return _wxsHarvester.getUrl();
+    }
 
-	public java.lang.String getOgctype() {
-		return _wxsHarvester.getOgctype();
-	}
+    public void setUrl(java.lang.String url) {
+        _wxsHarvester.setUrl(url);
+    }
 
-	public void setOgctype(java.lang.String ogctype) {
-		_wxsHarvester.setOgctype(ogctype);
-	}
+    public java.lang.String getOgctype() {
+        return _wxsHarvester.getOgctype();
+    }
 
-	public int getEvery() {
-		return _wxsHarvester.getEvery();
-	}
+    public void setOgctype(java.lang.String ogctype) {
+        _wxsHarvester.setOgctype(ogctype);
+    }
 
-	public void setEvery(int every) {
-		_wxsHarvester.setEvery(every);
-	}
+    public int getEvery() {
+        return _wxsHarvester.getEvery();
+    }
 
-	public java.lang.String getTopic() {
-		return _wxsHarvester.getTopic();
-	}
+    public void setEvery(int every) {
+        _wxsHarvester.setEvery(every);
+    }
 
-	public void setTopic(java.lang.String topic) {
-		_wxsHarvester.setTopic(topic);
-	}
+    public java.lang.String getTopic() {
+        return _wxsHarvester.getTopic();
+    }
 
-	public java.lang.String getStatus() {
-		return _wxsHarvester.getStatus();
-	}
+    public void setTopic(java.lang.String topic) {
+        _wxsHarvester.setTopic(topic);
+    }
 
-	public void setStatus(java.lang.String status) {
-		_wxsHarvester.setStatus(status);
-	}
+    public java.lang.String getStatus() {
+        return _wxsHarvester.getStatus();
+    }
 
-	public boolean getSavedToGeoNetwork() {
-		return _wxsHarvester.getSavedToGeoNetwork();
-	}
+    public void setStatus(java.lang.String status) {
+        _wxsHarvester.setStatus(status);
+    }
 
-	public boolean isSavedToGeoNetwork() {
-		return _wxsHarvester.isSavedToGeoNetwork();
-	}
+    public boolean getSavedToGeoNetwork() {
+        return _wxsHarvester.getSavedToGeoNetwork();
+    }
 
-	public void setSavedToGeoNetwork(boolean savedToGeoNetwork) {
-		_wxsHarvester.setSavedToGeoNetwork(savedToGeoNetwork);
-	}
+    public boolean isSavedToGeoNetwork() {
+        return _wxsHarvester.isSavedToGeoNetwork();
+    }
 
-	public long getGeonetworkId() {
-		return _wxsHarvester.getGeonetworkId();
-	}
+    public void setSavedToGeoNetwork(boolean savedToGeoNetwork) {
+        _wxsHarvester.setSavedToGeoNetwork(savedToGeoNetwork);
+    }
 
-	public void setGeonetworkId(long geonetworkId) {
-		_wxsHarvester.setGeonetworkId(geonetworkId);
-	}
+    public long getGeonetworkId() {
+        return _wxsHarvester.getGeonetworkId();
+    }
 
-	public java.lang.String getGeonetworkUUID() {
-		return _wxsHarvester.getGeonetworkUUID();
-	}
+    public void setGeonetworkId(long geonetworkId) {
+        _wxsHarvester.setGeonetworkId(geonetworkId);
+    }
 
-	public void setGeonetworkUUID(java.lang.String geonetworkUUID) {
-		_wxsHarvester.setGeonetworkUUID(geonetworkUUID);
-	}
+    public java.lang.String getGeonetworkUUID() {
+        return _wxsHarvester.getGeonetworkUUID();
+    }
 
-	public long getCompanyId() {
-		return _wxsHarvester.getCompanyId();
-	}
+    public void setGeonetworkUUID(java.lang.String geonetworkUUID) {
+        _wxsHarvester.setGeonetworkUUID(geonetworkUUID);
+    }
 
-	public void setCompanyId(long companyId) {
-		_wxsHarvester.setCompanyId(companyId);
-	}
+    public long getCompanyId() {
+        return _wxsHarvester.getCompanyId();
+    }
 
-	public long getGroupId() {
-		return _wxsHarvester.getGroupId();
-	}
+    public void setCompanyId(long companyId) {
+        _wxsHarvester.setCompanyId(companyId);
+    }
 
-	public void setGroupId(long groupId) {
-		_wxsHarvester.setGroupId(groupId);
-	}
+    public long getGroupId() {
+        return _wxsHarvester.getGroupId();
+    }
 
-	public nl.wur.alterra.cgi.ace.model.WxsHarvester toEscapedModel() {
-		return _wxsHarvester.toEscapedModel();
-	}
+    public void setGroupId(long groupId) {
+        _wxsHarvester.setGroupId(groupId);
+    }
 
-	public boolean isNew() {
-		return _wxsHarvester.isNew();
-	}
+    public nl.wur.alterra.cgi.ace.model.WxsHarvester toEscapedModel() {
+        return _wxsHarvester.toEscapedModel();
+    }
 
-	public void setNew(boolean n) {
-		_wxsHarvester.setNew(n);
-	}
+    public boolean isNew() {
+        return _wxsHarvester.isNew();
+    }
 
-	public boolean isCachedModel() {
-		return _wxsHarvester.isCachedModel();
-	}
+    public void setNew(boolean n) {
+        _wxsHarvester.setNew(n);
+    }
 
-	public void setCachedModel(boolean cachedModel) {
-		_wxsHarvester.setCachedModel(cachedModel);
-	}
+    public boolean isCachedModel() {
+        return _wxsHarvester.isCachedModel();
+    }
 
-	public boolean isEscapedModel() {
-		return _wxsHarvester.isEscapedModel();
-	}
+    public void setCachedModel(boolean cachedModel) {
+        _wxsHarvester.setCachedModel(cachedModel);
+    }
 
-	public void setEscapedModel(boolean escapedModel) {
-		_wxsHarvester.setEscapedModel(escapedModel);
-	}
+    public boolean isEscapedModel() {
+        return _wxsHarvester.isEscapedModel();
+    }
 
-	public java.io.Serializable getPrimaryKeyObj() {
-		return _wxsHarvester.getPrimaryKeyObj();
-	}
+    public void setEscapedModel(boolean escapedModel) {
+        _wxsHarvester.setEscapedModel(escapedModel);
+    }
 
-	public com.liferay.portlet.expando.model.ExpandoBridge getExpandoBridge() {
-		return _wxsHarvester.getExpandoBridge();
-	}
+    public java.io.Serializable getPrimaryKeyObj() {
+        return _wxsHarvester.getPrimaryKeyObj();
+    }
 
-	public void setExpandoBridgeAttributes(
-		com.liferay.portal.service.ServiceContext serviceContext) {
-		_wxsHarvester.setExpandoBridgeAttributes(serviceContext);
-	}
+    public com.liferay.portlet.expando.model.ExpandoBridge getExpandoBridge() {
+        return _wxsHarvester.getExpandoBridge();
+    }
 
-	public java.lang.Object clone() {
-		return _wxsHarvester.clone();
-	}
+    public void setExpandoBridgeAttributes(
+        com.liferay.portal.service.ServiceContext serviceContext) {
+        _wxsHarvester.setExpandoBridgeAttributes(serviceContext);
+    }
 
-	public int compareTo(nl.wur.alterra.cgi.ace.model.WxsHarvester wxsHarvester) {
-		return _wxsHarvester.compareTo(wxsHarvester);
-	}
+    public java.lang.Object clone() {
+        return _wxsHarvester.clone();
+    }
 
-	public int hashCode() {
-		return _wxsHarvester.hashCode();
-	}
+    public int compareTo(nl.wur.alterra.cgi.ace.model.WxsHarvester wxsHarvester) {
+        return _wxsHarvester.compareTo(wxsHarvester);
+    }
 
-	public java.lang.String toString() {
-		return _wxsHarvester.toString();
-	}
+    public int hashCode() {
+        return _wxsHarvester.hashCode();
+    }
 
-	public java.lang.String toXmlString() {
-		return _wxsHarvester.toXmlString();
-	}
+    public java.lang.String toString() {
+        return _wxsHarvester.toString();
+    }
 
-	public java.lang.String toShortString() {
-		return _wxsHarvester.toShortString();
-	}
+    public java.lang.String toXmlString() {
+        return _wxsHarvester.toXmlString();
+    }
 
-	public WxsHarvester getWrappedWxsHarvester() {
-		return _wxsHarvester;
-	}
+    public java.lang.String toShortString() {
+        return _wxsHarvester.toShortString();
+    }
 
-	private WxsHarvester _wxsHarvester;
+    public WxsHarvester getWrappedWxsHarvester() {
+        return _wxsHarvester;
+    }
 }

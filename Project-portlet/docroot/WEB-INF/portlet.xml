@@ -71,7 +71,7 @@
 		</portlet-class>
 		<init-param>
 			<name>view-jsp</name>
-			<value>/html/projectdetail/view.jsp</value>
+			<value>/html/projectdetail/viewproject.jsp</value>
 		</init-param>
 		<expiration-cache>0</expiration-cache>
 		<supports>

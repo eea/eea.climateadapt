@@ -16,8 +16,6 @@
 
 <%@include file="/html/init.jsp" %>
 
-<form id="risk-select">
-	<label for="riskSelect"><liferay-ui:message key="select-climate-impact" /></label>
 	<select id="riskSelect" onchange="riskChange()">
 		<option id="chk_risks_all" value="ALL" />
 		<label for="chk_risks_all"><liferay-ui:message key="aceitem-climateimpacts-lbl-ALL" /></label>
@@ -26,9 +24,7 @@
 			<label for="chk_climateimpacts_${adaptationClimateImpact}"><liferay-ui:message key="aceitem-climateimpacts-lbl-${adaptationClimateImpact}" /></label>
 		</c:forEach>
 	</select>
-</form>
-<form id="sector-select">
-	<label for="riskSelect"><liferay-ui:message key="select-adaptation-sector" /></label>
+
 	<select id="sectorSelect" onchange="sectorChange()">
 		<option id="chk_sectors_all" value="ALL" />
 		<label for="chk_sectors_all"><liferay-ui:message key="acesearch-sectors-lbl-ALL" /></label>
@@ -37,29 +33,11 @@
 			<label for="chk_sectors_${adaptationSector}"><liferay-ui:message key="acesearch-sectors-lbl-${adaptationSector}" /></label>
 		</c:forEach>
 	</select>
-</form>
 
-<div id="locator">
-	<script type="text/javascript">
-	    function getKey (event) {
-	        var keyCode = ('which' in event) ? event.which : event.keyCode;
-	        if (keyCode == 13) {
-	        	locate(document.getElementById('location').value);
-	        }
-	    }
-	</script>
-	<input type="text" name="location" id="location" onkeydown="getKey(event)" />
-	<input type="submit" value="Locate" onclick="locate(document.getElementById('location').value)"/>
-</div>
-
-<div id='locations_element'></div>
-
-<div id='map_element'></div>
-
-<div id='legend_element'><h3 id="legend-title">Legend</h3></div>
+<div id='csst_element'></div>
 
 <script>
-	var proxyUrl = '<%= prefs.getValue(Constants.proxyUrlPreferenceName, "") %>';
+	var proxyUrl = '<%= prefs.getValue(Constants.proxyUrlPreferenceName, "/proxy/url=") %>';
 	
 	var geoserverUrl = '<%= prefs.getValue(Constants.geoserverUrlPreferenceName, "http://ace.geocat.net/geoserver/") %>';
 	
@@ -79,66 +57,11 @@
 	
 	var areaColumn = '<%= prefs.getValue(Constants.areaColumnPreferenceName, "area") %>';
 	
-	var locatorUrl = '<%= prefs.getValue(Constants.locatorUrlPreferenceName, "http://dev.virtualearth.net/REST/v1/Locations/") %>';
+	var locatorUrl = '<%= prefs.getValue(Constants.locatorUrlPreferenceName, "http://geocode.arcgis.com/arcgis/rest/services/World/GeocodeServer") %>';
 	
 	var locatorKey = '<%= prefs.getValue(Constants.locatorKeyPreferenceName, "Ao9qujBzDtg-nFiusTjt5VQ9x2NJB2wAD7YCRjaPz7hQQjxdFcl24tyhOwCDCIrw") %>';
 	
 	var zoomLevel = '<%= prefs.getValue(Constants.zoomLevelPreferenceName, "2") %>';
 	
-	var satchmmap;
-				
-	var locator;
-	
-    Ext.onReady(function() {
-    	satchmmap = new CHM.SATCHMMap();
-
-        mappanel = new GeoExt.MapPanel({
-            renderTo: 'map_element',
-            height: 350,
-            width: 675,
-            map: satchmmap
-        });
-        
-        legendpanel = new GeoExt.LegendPanel({
-            layerStore: mappanel.layers,
-            renderTo: "legend_element",
-            border: false
-        });
-
-        satchmmap.addBingLayers();
-        
-        satchmmap.addSATLayers();
-        
-        locator = new CHM.Locator('locations_element', {});
-
-    	locator.setOnLocationChanged(handleLocationChanged);
-    	
-    	riskChange();
-    				
-    	sectorChange();
-    });
-
-	function handleLocationChanged() {
-		satchmmap.setLocation(locator.getLocation());
-	}
-    		
-    function getSelectedValue(select) {
-    	return select.options[select.selectedIndex].value;
-    }
-    			
-    function riskChange() {
-    	var risk = getSelectedValue(document.getElementById('riskSelect'));
-    				
-    	satchmmap.setRisk(risk);
-    }
-    			
-    function sectorChange() {
-    	var sector = getSelectedValue(document.getElementById('sectorSelect'));
-    			
-    	satchmmap.setSector(sector);
-    }
-    	
-    function locate(aLocation) {
-    	locator.locate(aLocation);
-    }
+	var root = '/SimilarAreasTool-portlet/';
 </script>

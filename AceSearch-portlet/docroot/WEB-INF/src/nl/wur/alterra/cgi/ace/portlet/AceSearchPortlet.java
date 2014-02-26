@@ -1,28 +1,27 @@
 package nl.wur.alterra.cgi.ace.portlet;
 
-import com.liferay.portal.kernel.servlet.SessionErrors;
-import com.liferay.portal.kernel.servlet.SessionMessages;
-import com.liferay.portal.util.PortalUtil;
-import com.liferay.util.bridges.mvc.MVCPortlet;
-import nl.wur.alterra.cgi.ace.search.ACESearchPortalInterface;
-import nl.wur.alterra.cgi.ace.search.AceSearchFormBean;
-import nl.wur.alterra.cgi.ace.search.SearchRequestParams;
-import nl.wur.alterra.cgi.ace.search.lucene.ACELuceneException;
+import java.io.IOException;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
-import javax.portlet.PortletPreferences;
 import javax.portlet.PortletException;
+import javax.portlet.PortletPreferences;
 import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
 import javax.portlet.ResourceRequest;
 import javax.portlet.ResourceResponse;
 import javax.servlet.http.HttpServletRequest;
 
-import java.io.IOException;
-import java.util.Map;
+import nl.wur.alterra.cgi.ace.model.constants.AceItemCountry;
+import nl.wur.alterra.cgi.ace.search.ACESearchPortalInterface;
+import nl.wur.alterra.cgi.ace.search.AceSearchFormBean;
+import nl.wur.alterra.cgi.ace.search.SearchRequestParams;
 
+import com.liferay.portal.kernel.servlet.SessionErrors;
+import com.liferay.portal.kernel.servlet.SessionMessages;
 import com.liferay.portal.kernel.util.ParamUtil;
+import com.liferay.portal.util.PortalUtil;
+import com.liferay.util.bridges.mvc.MVCPortlet;
 
 /**
  * Search interface for AceItems.
@@ -35,6 +34,7 @@ public class AceSearchPortlet extends MVCPortlet {
 	@Override
 	public void doView(RenderRequest renderRequest, RenderResponse renderResponse) throws PortletException, IOException {
 		try {
+			
 	    	HttpServletRequest httpRequest = 
 	    		PortalUtil.getOriginalServletRequest(
 	    		PortalUtil.getHttpServletRequest(renderRequest) ) ;
@@ -45,8 +45,8 @@ public class AceSearchPortlet extends MVCPortlet {
     			String searchelements = httpRequest.getParameter("searchelements") ;
     			String searchimpacts = httpRequest.getParameter("searchimpacts") ;
     			String searchcountries = httpRequest.getParameter("searchcountries") ;
-	    		
-	    		//System.out.println("searchtext parameter: " + searchtext) ;
+    			String conditionForAdaptationSector = httpRequest.getParameter("conditionAdaptationSector") ;
+    			String conditionForCountry = httpRequest.getParameter("conditionAdaptationCountry") ;
 	    		
     			String datainfo_type = ParamUtil.getString(renderRequest, "datainfo_type");
     			// true: first time; false: Search button clicked (then datainfo_type has value)
@@ -54,8 +54,8 @@ public class AceSearchPortlet extends MVCPortlet {
     			
     			//System.out.println("datainfotype " + datainfo_type);
     			
-	    		if(startWithSearch || searchtext != null || searchtypes != null|| searchsectors != null ||
-	    		   searchelements != null || searchimpacts != null|| searchcountries != null) {
+    		     if(startWithSearch || searchtext != null || searchtypes != null|| searchsectors != null ||
+	    		   searchelements != null || searchimpacts != null|| searchcountries != null ) {
 	
 		        	ACESearchPortalInterface searchEngine = new ACESearchPortalInterface();		    			
 	    			AceSearchFormBean formBean = searchEngine.prepareACESearchFormBean(renderRequest);
@@ -73,6 +73,21 @@ public class AceSearchPortlet extends MVCPortlet {
 	    			if (searchelements != null) formBean.setElement( searchelements.split(";") );
 	    			if (searchimpacts != null) formBean.setImpact( searchimpacts.split(";") );
 	    			if (searchcountries != null) formBean.setCountries( searchcountries.split(";") );
+	    			if (conditionForAdaptationSector != null) 
+	    			{
+                        formBean.setConditionAdaptationSector(conditionForAdaptationSector);
+	    			}
+	    			if (conditionForCountry != null)
+	    			{
+	    				formBean.setConditionAdaptationCountry(conditionForCountry);
+	    			}
+	    			
+	    			/*String[] sectors = formBean.getSector();
+	    			System.out.println("sector is " + sectors);
+	    			for(String s: sectors)
+	    			{
+	    				System.out.println("sector is " + s);
+	    			}*/
 	    			
 	    			renderRequest.setAttribute(SearchRequestParams.SEARCH_PARAMS, formBean);
 	    			searchEngine.handleSearchRequest(renderRequest, formBean);
@@ -94,10 +109,14 @@ public class AceSearchPortlet extends MVCPortlet {
      */
     public void searchAceitem(ActionRequest request, ActionResponse response) throws Exception {
         try {
+        	
             PortletUtils.logParams(request);
             ACESearchPortalInterface searchEngine = new ACESearchPortalInterface();
+           
             searchEngine.handleSearchRequest(request);
+            
             PortalUtil.copyRequestParameters(request, response);
+           
             SessionMessages.add(request, "acesearch-execution-success");
         }
         catch(Exception x) {

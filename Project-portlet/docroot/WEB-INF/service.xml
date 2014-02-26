@@ -15,6 +15,7 @@
 		<column name="groupId" type="long" />
 
 		<!-- Other columns -->
+		<column name="admincomment" type="String" />
 		<column name="acronym" type="String" />
 		<column name="title" type="String" />
 		<column name="startdate" type="Date" />
@@ -43,6 +44,10 @@
 		<column name="spatialvalues" type="String" />
 		<column name="source" type="String" />
 		<column name="climateimpacts" type="String" />	
+		<column name="lockdate" type="Date" />
+		<column name="feature" type="String" />
+		<column name="supdocs" type="String" />
+		<column name="geochars" type="String" />
 		<!-- Sort order -->
 		<order by="asc">
 			<order-column name="acronym" />

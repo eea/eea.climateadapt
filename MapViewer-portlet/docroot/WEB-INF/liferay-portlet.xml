@@ -16,11 +16,14 @@
 		<header-portlet-javascript>/js/OpenLayers-2.11/OpenLayers.js</header-portlet-javascript>
 		<header-portlet-javascript>/js/GeoExt/script/GeoExt.js</header-portlet-javascript>
 		<header-portlet-javascript>/js/chm/CHM.js</header-portlet-javascript>
-		<header-portlet-javascript>/js/chm/CHMMap.js</header-portlet-javascript>
-		<header-portlet-javascript>/js/chm/MapViewerCHMMap.js</header-portlet-javascript>
-		<header-portlet-javascript>/js/chm/GetRecordByIdResponse.js</header-portlet-javascript>
-		<header-portlet-javascript>/js/chm/WMSLegend.js</header-portlet-javascript>
-		<header-portlet-javascript>/js/chm/MapViewer.js</header-portlet-javascript>
+		<header-portlet-javascript>/js/chm/control/map/Map.js</header-portlet-javascript>
+		<header-portlet-javascript>/js/chm/control/map/MapControl.js</header-portlet-javascript>
+		<header-portlet-javascript>/js/chm/control/toc/TOCControl.js</header-portlet-javascript>
+		<header-portlet-javascript>/js/chm/control/legend/LegendControl.js</header-portlet-javascript>
+		<header-portlet-javascript>/js/chm/control/legend/WMSLegend.js</header-portlet-javascript>
+		<header-portlet-javascript>/js/chm/control/legend/AbstractWindow.js</header-portlet-javascript>
+		<header-portlet-javascript>/js/chm/format/GetRecordByIdResponse.js</header-portlet-javascript>
+		<header-portlet-javascript>/js/chm/Application.js</header-portlet-javascript>
 		<css-class-wrapper>mapviewerportlet-portlet</css-class-wrapper>
 	</portlet>
 	<role-mapper>

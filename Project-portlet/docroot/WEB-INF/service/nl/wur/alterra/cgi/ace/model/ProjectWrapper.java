@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2010 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2011 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -58,6 +58,14 @@ public class ProjectWrapper implements Project {
 
 	public void setGroupId(long groupId) {
 		_project.setGroupId(groupId);
+	}
+
+	public java.lang.String getAdmincomment() {
+		return _project.getAdmincomment();
+	}
+
+	public void setAdmincomment(java.lang.String admincomment) {
+		_project.setAdmincomment(admincomment);
 	}
 
 	public java.lang.String getAcronym() {
@@ -284,7 +292,39 @@ public class ProjectWrapper implements Project {
 		_project.setClimateimpacts(climateimpacts);
 	}
 
-	public nl.wur.alterra.cgi.ace.model.Project toEscapedModel() {
+	public java.util.Date getLockdate() {
+		return _project.getLockdate();
+	}
+
+	public void setLockdate(java.util.Date lockdate) {
+		_project.setLockdate(lockdate);
+	}
+
+	public java.lang.String getFeature() {
+		return _project.getFeature();
+	}
+
+	public void setFeature(java.lang.String feature) {
+		_project.setFeature(feature);
+	}
+
+	public java.lang.String getSupdocs() {
+		return _project.getSupdocs();
+	}
+
+	public void setSupdocs(java.lang.String supdocs) {
+		_project.setSupdocs(supdocs);
+	}
+
+	public java.lang.String getGeochars() {
+		return _project.getGeochars();
+	}
+
+	public void setGeochars(java.lang.String geochars) {
+		_project.setGeochars(geochars);
+	}
+
+	public Project toEscapedModel() {
 		return _project.toEscapedModel();
 	}
 
@@ -329,7 +369,7 @@ public class ProjectWrapper implements Project {
 		return _project.clone();
 	}
 
-	public int compareTo(nl.wur.alterra.cgi.ace.model.Project project) {
+	public int compareTo(Project project) {
 		return _project.compareTo(project);
 	}
 

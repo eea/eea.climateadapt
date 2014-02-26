@@ -68,22 +68,15 @@
 
 <%-- Main action buttons for operations with ace items. --%>
 <aui:button-row>
-
-    <%-- Prepare URL for the link to the page where a new measure can be added. --%>
-    <portlet:renderURL var="addMeasureURL">
-        <portlet:param name="jspPage" value="/html/measure/edit_measure.jsp" />
-        <portlet:param name="redirect" value="<%=redirectUrl%>" />
-    </portlet:renderURL>
-
     <%-- Display the button that links to the page where a new ace item can be added. --%>
-    <aui:button value="Add" onClick="<%=addMeasureURL.toString()%>"/>
-
-    <%--
+    <aui:button value="Add" onClick="/share-your-info"/>
+    
+   <%--
     Submits measuresForm. In order to get submit value at server side, had to override the
     button's onClick which sets the value to a hidden input.
     --%>
     <aui:button type="submit" value="Delete" onClick="this.form.elements['submitAction'].value='delete';return confirm('Are you sure you want to delete the selected measures? Click OK to continue, otherwise choose Cancel.');"/>
-    <input name="submitAction" type="hidden"/>
+    <input name="submitAction" type="hidden"/>  
 
 </aui:button-row>
 
