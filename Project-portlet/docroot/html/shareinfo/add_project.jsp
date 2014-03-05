@@ -109,7 +109,7 @@ else {
 		<b>website</b><br />	
 		<input name="website" type="text" size="120"  maxlength="255" value="<%= project == null ? "" : project.getWebsite() %>"><br /><br />
 
-		<b>abstract</b><br />
+		<b>description</b><br />
 		<textarea name="abstracts" rows=10 cols=100><%= project == null ? "" : project.getAbstracts() %></textarea><br /><br />
 
 		<b>partners</b><br />
@@ -142,28 +142,6 @@ else {
 			</div>							
 		</c:forEach>
         <br />
-
-		<b>Element(s)</b><br />
-		<%-- note : i18n file should always be in sync with AceItemElement enum --%>
-		<c:forEach var="adaptationElement" items="<%= nl.wur.alterra.cgi.ace.model.constants.AceItemElement.values() %>" >
-			<div class="check">
-				<c:set var="aceItemElements" value="<%= project == null ? "" : project.getElement() %>" />
-				<c:set var="adaptationElementMustBeChecked" value="false" />
-				<c:if test="${fn:indexOf(aceItemElements, adaptationElement)>=0}">
-					<c:set var="adaptationElementMustBeChecked" value="true" />
-				</c:if>	
-				<c:choose>
-					<c:when test="${adaptationElementMustBeChecked}">
-						<input type="checkbox" name="chk_elements_${adaptationElement}" id="chk_elements_${adaptationElement}" value="${adaptationElement}" checked="checked" />
-					</c:when>
-					<c:otherwise>
-						<input type="checkbox" name="chk_elements_${adaptationElement}" id="chk_elements_${adaptationElement}" value="${adaptationElement}" />
-					</c:otherwise>
-				</c:choose>
-				<label for="chk_elements_${adaptationElement}"><liferay-ui:message key="acesearch-elements-lbl-${adaptationElement}" /></label>
-			</div>							
-		</c:forEach>
-       <br />
        
 		<b>Climate Impacts</b><br />
 		<%-- note : i18n file should always be in sync with AceItemClimateImpact enum --%>

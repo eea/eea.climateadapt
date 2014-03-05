@@ -4,155 +4,90 @@
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 		<title>Prototype Similar Areas Tool</title>
+		<script type='text/javascript' src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js"></script>
 		<script type='text/javascript' src="http://ecn.dev.virtualearth.net/mapcontrol/mapcontrol.ashx?v=6.2&amp;mkt=en-us"></script>
+		<script type="text/javascript" src="http://serverapi.arcgisonline.com/jsapi/arcgis/3.4compact"></script>
 		<script type="text/javascript" src='js/ext-base.js'></script>
 		<script type="text/javascript" src='js/ext-all.js'></script>
 		<script type='text/javascript' src='js/OpenLayers.js'></script>
 		<script type="text/javascript" src='js/GeoExt.js'></script>
 		<script type="text/javascript" src="js/chm/CHM.js"></script>
-		<script type="text/javascript" src="js/chm/CHMMap.js"></script>
-		<script type="text/javascript" src="js/chm/SATCHMMap.js"></script>
-		<script type="text/javascript" src="js/chm/SATVector.js"></script>
-		<script type="text/javascript" src="js/chm/Resource.js"></script>
-		<script type="text/javascript" src="js/chm/ResourceSet.js"></script>
 		<script type="text/javascript" src="js/chm/Point.js"></script>
-		<script type="text/javascript" src="js/chm/Locator.js"></script>
 		<script type="text/javascript" src="js/chm/Location.js"></script>
 		<script type="text/javascript" src="js/chm/LocationControl.js"></script>
+		<script type="text/javascript" src="js/chm/layer/vector/CasestudiesVector.js"></script>
+		<script type="text/javascript" src="js/chm/control/locator/candidate/CandidatesStore.js"></script>
+		<script type="text/javascript" src="js/chm/control/locator/Locator.js"></script>
+		<script type="text/javascript" src="js/chm/control/grid/GridControl.js"></script>
+		<script type="text/javascript" src="js/chm/control/options/OptionsControl.js"></script>
+		<script type="text/javascript" src="js/chm/control/legend/LegendControl.js"></script>
+		<script type="text/javascript" src="js/chm/control/locator/LocatorControl.js"></script>
+		<script type="text/javascript" src="js/chm/control/map/MapControl.js"></script>
+		<script type="text/javascript" src="js/chm/control/map/Map.js"></script>
+		<script type="text/javascript" src="js/chm/Application.js"></script>
+		<script type="text/javascript" src="js/chm/Session.js"></script>
+		
+		<link rel="stylesheet" href="http://serverapi.arcgisonline.com/jsapi/arcgis/3.4/js/esri/css/esri.css">
+		<link rel="stylesheet" href="css/ext-all.css">
+		<link rel="stylesheet" href="css/portlet.css">
+		<link rel="stylesheet" href="css/tooltip.css">
 	</head>
 	<body>
+		<select id="riskSelect" name="riskSelect">
+			<option value="ALL">All risks</option>
+			<option value="EXTREMETEMP">Extreme Temperatures</option>
+			<option value="WATERSCARCE">Water Scarcity</option>
+			<option value="FLOODING">Flooding</option>
+			<option value="SEALEVELRISE">Sea Level Rise</option>
+			<option value="DROUGHT">Droughts</option>
+			<option value="STORM">Storms</option>
+			<option value="ICEANDSNOW">Ice and Snow</option>
+		</select>
 
-		<form>
-		    Select a risk:
-			<select id="riskSelect" onchange="riskChange()">
-				<option value="ALL">All risks</option>
-				<option value="EXTREMETEMP">Extreme Temperatures</option>
-				<option value="WATERSCARCE">Water Scarcity</option>
-				<option value="FLOODING">Flooding</option>
-				<option value="SEALEVELRISE">Sea Level Rise</option>
-				<option value="DROUGHT">Droughts</option>
-				<option value="STORM">Storms</option>
-				<option value="ICEANDSNOW">Ice and Snow</option>
-			</select>
-			Select a sector: 
-			<select id="sectorSelect" onchange="sectorChange()">
-				<option value="ALL">All sectors</option>
-				<option value="AGRICULTURE">Agriculture and Forest</option>
-				<option value="BIODIVERSITY">Biodiversity</option>
-				<option value="COASTAL">Coastal areas</option>
-				<option value="DISASTERRISKREDUCTION">Disaster Risk Reduction</option>
-				<option value="FINANCIAL">Financial</option>
-				<option value="HEALTH">Health</option>
-				<option value="INFRASTRUCTURE">Infrastructure</option>
-				<option value="MARINE">Marine and Fisheries</option>
-				<option value="WATERMANAGEMENT">Water management</option>
-			</select>
-		</form>
+		<select id="sectorSelect" name="sectorSelect">
+			<option value="ALL">All sectors</option>
+			<option value="AGRICULTURE">Agriculture and Forest</option>
+			<option value="BIODIVERSITY">Biodiversity</option>
+			<option value="COASTAL">Coastal areas</option>
+			<option value="DISASTERRISKREDUCTION">Disaster Risk Reduction</option>
+			<option value="FINANCIAL">Financial</option>
+			<option value="HEALTH">Health</option>
+			<option value="INFRASTRUCTURE">Infrastructure</option>
+			<option value="MARINE">Marine and Fisheries</option>
+			<option value="WATERMANAGEMENT">Water management</option>
+		</select>
 
-		<div id="locator">
-			<script type="text/javascript">
-			    function getKey (event) {
-			        var keyCode = ('which' in event) ? event.which : event.keyCode;
-
-			        if (keyCode == 13) {
-			        	locate(document.getElementById('location').value);
-			        }
-			    }
-			</script>
-
-			<input type="text" name="location" id="location" onkeydown="getKey(event)" />
-			<input type="submit" value="Locate" onclick="locate(document.getElementById('location').value)"/>
-		</div>
-
-		<div id='locations_element'></div>
-
-		<div id='map_element'></div>
-
-		<div id='legend_element'></div>
+		<div id='csst_element'></div>
 
 		<script>
 			var proxyUrl = '';
-			
+
 			var geoserverUrl = 'http://localhost/geoserver/';
-			
+
 			var wfs = 'wfs';
-			
+
 			var wms = 'wms';
-	
+
 			var featureNamespace = 'http://climate-adapt.eea.europa.eu';
-			
+
 			var areasFeatureType = 'biogeo_2008';
-			
+
 			var areasLayer = 'chm:biogeo_2008';
-			
+
 			var caseStudiesFeatureType = 'casestudies';
-			
+
 			var geometryColumn = 'geom';
-			
+
 			var areaColumn = 'area';
 
-			var locatorUrl = 'http://localhost/ve/REST/v1/Locations/';
-			
+			var locatorUrl = 'http://localhost/geocode/arcgis/rest/services/World/GeocodeServer';
+
 			var locatorKey = 'Ao9qujBzDtg-nFiusTjt5VQ9x2NJB2wAD7YCRjaPz7hQQjxdFcl24tyhOwCDCIrw';
 
 			var zoomLevel = 2;
-			
-			var satchmmap;
-						
-			var locator;
 
-		    Ext.onReady(function() {
-		    	satchmmap = new CHM.SATCHMMap();
-
-		        mappanel = new GeoExt.MapPanel({
-		            renderTo: 'map_element',
-		            height: 500,
-		            width: 500,
-		            map: satchmmap
-		        });
-		        
-		        legendpanel = new GeoExt.LegendPanel({
-		            layerStore: mappanel.layers,
-		            renderTo: "legend_element",
-		            border: false
-		        });
-		        
-		        satchmmap.addBingLayers();
-		        
-		        satchmmap.addSATLayers();
-		        
-		    	locator = new CHM.Locator('locations_element', {});
-		
-		    	locator.setOnLocationChanged(handleLocationChanged);
-		    	
-		    	riskChange();
-		    				
-		    	sectorChange();
-		    });
-
-			function handleLocationChanged() {
-				satchmmap.setLocation(locator.getLocation());
-			}
-		    		
-		    function getSelectedValue(select) {
-		    	return select.options[select.selectedIndex].value;
-		    }
-		    			
-		    function riskChange() {
-		    	var risk = getSelectedValue(document.getElementById('riskSelect'));
-		    				
-		    	satchmmap.setRisk(risk);
-		    }
-		    			
-		    function sectorChange() {
-		    	var sector = getSelectedValue(document.getElementById('sectorSelect'));
-		    			
-		    	satchmmap.setSector(sector);
-		    }
-		    	
-		    function locate(aLocation) {
-		    	locator.locate(aLocation);
-		    }
+			var root = '';
 		</script>
+		<script type="text/javascript" src="js/javascript.js"></script>
 	</body>
 </html>

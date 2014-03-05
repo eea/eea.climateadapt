@@ -12,6 +12,8 @@
 			<id name="measureId" />
 			<basic name="companyId" />
 			<basic name="groupId" />
+			<basic name="admincomment" />
+			<basic name="casestudyfeature" />
 			<basic name="name" />
 			<basic name="description" />
 			<basic name="implementationtype" />
@@ -22,10 +24,16 @@
 			<basic name="legalaspects" />
 			<basic name="stakeholderparticipation" />
 			<basic name="contact" />
+			<basic name="objectives" />
+			<basic name="challenges" />
+			<basic name="adaptationoptions" />
+			<basic name="solutions" />
+			<basic name="relevance" />
 			<basic name="succeslimitations" />
 			<basic name="website" />
 			<basic name="costbenefit" />
 			<basic name="keywords" />
+			<basic name="geos_" />
 			<basic name="startdate">
 				<temporal>TIMESTAMP</temporal>
 			</basic>
@@ -58,6 +66,15 @@
 			<basic name="replacesId" />
 			<basic name="comments" />
 			<basic name="textwebpage" />
+			<basic name="primephoto" />
+			<basic name="supphotos" />
+			<basic name="supdocs" />
+			<basic name="year" />
+			<basic name="geochars" />
+			<basic name="category" />
+			<basic name="lockdate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
 			<transient name="primaryKey" />
 		</attributes>
 	</mapped-superclass>

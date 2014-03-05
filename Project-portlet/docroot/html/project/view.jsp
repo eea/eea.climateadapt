@@ -73,18 +73,22 @@
 
     <%-- Prepare URL for the link to the page where a new project can be added. --%>
     <portlet:renderURL var="addProjectURL">
-        <portlet:param name="jspPage" value="/html/project/edit_project.jsp" />
+        <portlet:param name="jspPage" value="/html/shareinfo/add_projectRevised.jsp" />
         <portlet:param name="redirect" value="<%=redirectUrl%>" />
     </portlet:renderURL>
 
     <%-- Display the button that links to the page where a new project can be added. --%>
-    <aui:button value="Add" onClick="<%= addProjectURL.toString() %>"/>
+    <%
+     String addUrl = prefs.getValue(Constants.SHAREINFOEDITURL,"/web/guest/share-your-info/research-and-knowledge-projects?p_p_id=shareprojectportlet_WAR_Projectportlet&p_p_lifecycle=0&p_p_state=normal&p_p_mode=view&p_p_col_id=column-2&p_p_col_count=1&_shareprojectportlet_WAR_Projectportlet_jspPage=%2Fhtml%2Fshareinfo%2Fadd_projectRevised.jsp&_shareprojectportlet_WAR_Projectportlet_redirect=%2Fen%2Fshare-your-info%2Fresearch-and-knowledge-projects&_shareprojectportlet_WAR_Projectportlet") ;
+    
+    %>
+    <aui:button value="Add" onClick="<%=addUrl %>"/>
 
     <%--
     Submits projectsForm. In order to get submit value at server side, had to override the
     button's onClick which sets the value to a hidden input.
     --%>
-    <aui:button type="submit" value="Delete" onClick="this.form.elements['submitAction'].value='delete';return confirm('Are you sure you want to delete the selected projects? Click OK to continue, otherwise choose Cancel.');"/>
+   <aui:button type="submit" value="Delete" onClick="this.form.elements['submitAction'].value='delete';return confirm('Are you sure you want to delete the selected projects? Click OK to continue, otherwise choose Cancel.');"/>
     <input name="submitAction" type="hidden"/>
 
 </aui:button-row>
@@ -112,6 +116,7 @@
 	    --%>
 
 	    <%
+	    //String projectViewLink = "<a href='/projects1?ace_project_id=" + project.getProjectId() + "'>" +  project.getAcronym() + "</a>" ;
 	    String projectViewLink = "<a href='/projects1?ace_project_id=" + project.getProjectId() + "'>" +  project.getAcronym() + "</a>" ;
 	    String projectSectorsStr = project.getSectors().replace(";","; ");
 	    String projectElementsStr = project.getElement().replace(";","; ");

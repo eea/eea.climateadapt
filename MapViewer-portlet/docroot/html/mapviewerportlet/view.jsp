@@ -11,15 +11,9 @@ if (mapviewerappid == null || mapviewerappid.length() == 0) {
 }
 %>
 
-<div id='map_element'></div>
+<div><br/><br/></div>
 
-<div id='toc_element'><h3 id="toc-title">Table of contents</h3></div>
-
-<div id='status_element'>status</div>
-
-<div id="abstract_element">
-	<div id="abstract_tabs_element"></div>
-</div>
+<div id='mapviewer_element'></div>
 
 <script>
 	var proxyUrl = '<%= prefs.getValue(Constants.proxyUrlPreferenceName, "") %>';
@@ -38,7 +32,7 @@ if (mapviewerappid == null || mapviewerappid.length() == 0) {
 
 	var mapViewerWmcDirectory = '<%= prefs.getValue(Constants.mapViewerWmcDirectoryPreferenceName, "/home/mapviewer") %>';
 
-	var cswServletUrl = '<%= prefs.getValue(Constants.cswServletURLPreferenceName, "/MapViewer-portlet/cswservlet") %>';;
+	var cswServletUrl = '<%= prefs.getValue(Constants.cswServletURLPreferenceName, "/MapViewer-portlet/cswservlet") %>';
 
 	var mapViewerAppId = '<%= mapviewerappid %>';
 
@@ -46,21 +40,16 @@ if (mapviewerappid == null || mapviewerappid.length() == 0) {
 
 	var backgroundlayername = "Background";
 
-	var mapviewer;
+	var application;
 
 	Ext.onReady(function() {
-		mapviewer = new CHM.MapViewer(
-				document.getElementById('map_element'),
-				document.getElementById('toc_element'),
-				document.getElementById('status_element'),
-				document.getElementById('abstract_element'),
-				document.getElementById('abstract_tabs_element')
-			);
-
-		mapviewer.setOnCreationComplete(handleMapViewerCreationComplete);
+		application = new CHM.Application();
+		
+		application.addListener('creationComplete', this.handleApplicationCreationComplete, this);
 	});
 
-    function handleMapViewerCreationComplete() {
+    function handleApplicationCreationComplete() {
+    	console.log('Creation complete!');
 <%
 		// Add layer(s) from querystring
 		String cswrecordfileidentifiersparameter = httprequest.getParameter(Constants.cswRecordFileIdentifierParameterName);
@@ -91,18 +80,18 @@ if (mapviewerappid == null || mapviewerappid.length() == 0) {
 					for (int j = 0; j < cswrecord.getDigitalTransferOptions().size(); j ++) {
 						DigitalTransferOption digitaltransferoption = cswrecord.getDigitalTransferOptions().get(j);
 
-				       	String showmetadataurl = prefs.getValue(Constants.cswURLPreferenceName, "http://ace.geocat.net/geonetwork/") + prefs.getValue(Constants.cswShowMetadataPreferenceName, "en/metadata.show?uuid=") + metadatarecordid;
+				       	String showmetadataurl = prefs.getValue(Constants.cswURLPreferenceName, "http://climate-adapt.eea.europa.eu/geonetwork/") + prefs.getValue(Constants.cswShowMetadataPreferenceName, "en/metadata.show?uuid=") + metadatarecordid;
 
 				       	String protocol = digitaltransferoption.getProtocol();
+				       	
 				       	String protocolUpperCase = protocol == null ? "" : protocol.toUpperCase();
 
 				       	String url = digitaltransferoption.getUrl();
+				       	
 				       	String urlUpperCase = url == null ? "" : url.toUpperCase();
 
 				       	if (protocolUpperCase.indexOf("WMS") >= 0 || urlUpperCase.indexOf("SERVICE=WMS") >= 0) {
-
-							String javascript = "var layer = new OpenLayers.Layer.WMS('"
-								+ cswrecord.getTitle();
+							String javascript = "var layer = new OpenLayers.Layer.WMS('" + cswrecord.getTitle();
 
 							if (cswrecord.getDigitalTransferOptions().size() > 1 && digitaltransferoption.getLayerTitle() != null) {
 								javascript += " - " + digitaltransferoption.getLayerTitle();
@@ -111,15 +100,15 @@ if (mapviewerappid == null || mapviewerappid.length() == 0) {
 							javascript += "', '" + digitaltransferoption.getUrl() + "', "
 								+ "{layers: '" + digitaltransferoption.getLayerName() + "', format: 'image/png', transparent: 'true'}, {visibility: true}, {tileOptions: {maxGetUrlLength: 2048}}, {isBaseLayer: false});";
 
-								javascript += "layer.metadataURL = '" + showmetadataurl + "';";
+							javascript += "layer.metadataURL = '" + showmetadataurl + "';";
 
-								if (cswrecord.getAttribution() != null) {
-									javascript += "layer.attribution = '" + cswrecord.getAttribution() + "';";
-								}
+							if (cswrecord.getAttribution() != null) {
+								javascript += "layer.attribution = '" + cswrecord.getAttribution() + "';";
+							}
 
-								javascript += "mapviewer.addLayer(layer);";
+							javascript += "application.addLayer(layer);";
 
-								out.println(javascript);
+							out.println(javascript);
 						}
 					}
 		        }

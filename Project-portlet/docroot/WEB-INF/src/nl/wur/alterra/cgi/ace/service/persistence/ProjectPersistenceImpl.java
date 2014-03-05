@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2010 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2011 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -298,6 +298,7 @@ public class ProjectPersistenceImpl extends BasePersistenceImpl<Project>
 		projectImpl.setProjectId(project.getProjectId());
 		projectImpl.setCompanyId(project.getCompanyId());
 		projectImpl.setGroupId(project.getGroupId());
+		projectImpl.setAdmincomment(project.getAdmincomment());
 		projectImpl.setAcronym(project.getAcronym());
 		projectImpl.setTitle(project.getTitle());
 		projectImpl.setStartdate(project.getStartdate());
@@ -326,6 +327,10 @@ public class ProjectPersistenceImpl extends BasePersistenceImpl<Project>
 		projectImpl.setSpatialvalues(project.getSpatialvalues());
 		projectImpl.setSource(project.getSource());
 		projectImpl.setClimateimpacts(project.getClimateimpacts());
+		projectImpl.setLockdate(project.getLockdate());
+		projectImpl.setFeature(project.getFeature());
+		projectImpl.setSupdocs(project.getSupdocs());
+		projectImpl.setGeochars(project.getGeochars());
 
 		return projectImpl;
 	}

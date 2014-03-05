@@ -1,6 +1,7 @@
 package nl.wur.alterra.cgi.ace.portlet;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Enumeration;
 import java.util.HashSet;
 import java.util.List;
@@ -149,6 +150,10 @@ public class AceItemPortlet extends LuceneIndexUpdatePortlet {
                         }
                         AceItemLocalServiceUtil.deleteAceItem(aceitem.getReplacesId());
                         aceitem.setReplacesId((long) 0);
+                    }
+
+                    if (oldapproved == ACEIndexUtil.Status_SUBMITTED && newapproved == ACEIndexUtil.Status_APPROVED){
+                        aceitem.setApprovaldate( new Date() );
                     }
 
                     AceItemLocalServiceUtil.updateAceItem(aceitem);

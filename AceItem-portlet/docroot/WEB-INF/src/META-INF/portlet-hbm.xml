@@ -43,6 +43,14 @@
 		<property name="replacesId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 		<property name="comments" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="textwebpage" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="year" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="geochars" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="feature" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="supdocs" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="admincomment" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="scenario" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="timeperiod" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="lockdate" type="org.hibernate.type.TimestampType" />
 	</class>
 	<class name="nl.wur.alterra.cgi.ace.model.impl.CSWHarvesterImpl" table="Ace_CSWHarvester">
 		<cache usage="read-write" />

@@ -94,11 +94,14 @@ public class AceItemIndexer {
         String elements = aceItem.getElements_();
         String impacts = aceItem.getClimateimpacts_();
         String sectors = aceItem.getSectors_();
+        String scenarios = aceItem.getScenario();
+        String timeperiods = aceItem.getTimeperiod();
         Date startDate = aceItem.getStartDate();
         String storedAt = aceItem.getStoredAt();
         String storageType = aceItem.getStoragetype();
         String textSearch = aceItem.getTextSearch();
         String datatype = aceItem.getDatatype();
+        String year = aceItem.getYear();
 
         Document document = new Document();
 
@@ -110,6 +113,15 @@ public class AceItemIndexer {
              * Description is indexed using whatever is the default analyzer we're using (see ACEAnalyzer).
              */
             document.add(new Field(ACEIndexConstant.IndexField.DESCRIPTION, description, Field.Store.YES,Field.Index.ANALYZED));
+        }
+        
+        if (year != null && year.length() > 0)
+        {
+        	 /*
+             * year fields are indexed using Keywordanalyzer.
+             */
+            document.add(new NumericField(ACEIndexConstant.IndexField.YEAR, Field.Store.YES, true).setIntValue(Integer.parseInt(year)));
+            document.add(new NumericField(ACEIndexConstant.IndexField.YEAR_SORT, Field.Store.NO, true).setIntValue(Integer.parseInt(year)));
         }
 
         if(endDate != null) {
@@ -184,6 +196,24 @@ public class AceItemIndexer {
             }
         }
 
+        if(scenarios != null) {
+            String[] scenarioValues = scenarios.split(";");
+
+            for(int i = 0; i < scenarioValues.length; i++) {
+                // for searching
+                document.add(new Field(ACEIndexConstant.IndexField.SCENARIO, scenarioValues[i].trim(), Field.Store.YES,Field.Index.NOT_ANALYZED));
+            }
+        }
+
+        if(timeperiods != null) {
+            String[] timeperiodValues = timeperiods.split(";");
+
+            for(int i = 0; i < timeperiodValues.length; i++) {
+                // for searching
+                document.add(new Field(ACEIndexConstant.IndexField.TIMEPERIOD, timeperiodValues[i].trim(), Field.Store.YES,Field.Index.NOT_ANALYZED));
+            }
+        }
+
         if(startDate != null) {
             /*
              * Date fields are indexed using Keywordanalyzer.
@@ -210,6 +240,7 @@ public class AceItemIndexer {
             document.add(new Field(ACEIndexConstant.IndexField.DATATYPE, datatype, Field.Store.YES,Field.Index.NOT_ANALYZED));
         }
 
+        
 		return document;
     }
 

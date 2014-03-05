@@ -36,6 +36,14 @@
 		<field name="replacesId" type="long" />
 		<field name="comments" type="String" />
 		<field name="textwebpage" type="String" />
+		<field name="year" type="String" />
+		<field name="geochars" type="String" />
+		<field name="feature" type="String" />
+		<field name="supdocs" type="String" />
+		<field name="admincomment" type="String" />
+		<field name="scenario" type="String" />
+		<field name="timeperiod" type="String" />
+		<field name="lockdate" type="Date" />
 	</model>
 	<model name="nl.wur.alterra.cgi.ace.model.CSWHarvester">
 		<field name="cswharvesterid" type="long" />

@@ -1,21 +1,12 @@
 package nl.wur.alterra.cgi.ace.model;
 
 import com.liferay.portal.kernel.bean.AutoEscapeBeanHandler;
-import com.liferay.portal.kernel.exception.SystemException;
-import com.liferay.portal.kernel.util.ProxyUtil;
 import com.liferay.portal.kernel.util.StringBundler;
-import com.liferay.portal.model.BaseModel;
 import com.liferay.portal.model.impl.BaseModelImpl;
-
-import nl.wur.alterra.cgi.ace.service.CSWHarvesterLocalServiceUtil;
-import nl.wur.alterra.cgi.ace.service.ClpSerializer;
 
 import java.io.Serializable;
 
-import java.lang.reflect.Method;
-
-import java.util.HashMap;
-import java.util.Map;
+import java.lang.reflect.Proxy;
 
 
 public class CSWHarvesterClp extends BaseModelImpl<CSWHarvester>
@@ -38,664 +29,184 @@ public class CSWHarvesterClp extends BaseModelImpl<CSWHarvester>
     private String _type;
     private String _username;
     private String _password;
-    private BaseModel<?> _cswHarvesterRemoteModel;
 
     public CSWHarvesterClp() {
     }
 
-    @Override
-    public Class<?> getModelClass() {
-        return CSWHarvester.class;
-    }
-
-    @Override
-    public String getModelClassName() {
-        return CSWHarvester.class.getName();
-    }
-
-    @Override
     public long getPrimaryKey() {
         return _cswharvesterid;
     }
 
-    @Override
-    public void setPrimaryKey(long primaryKey) {
-        setCswharvesterid(primaryKey);
+    public void setPrimaryKey(long pk) {
+        setCswharvesterid(pk);
     }
 
-    @Override
     public Serializable getPrimaryKeyObj() {
-        return _cswharvesterid;
+        return new Long(_cswharvesterid);
     }
 
-    @Override
-    public void setPrimaryKeyObj(Serializable primaryKeyObj) {
-        setPrimaryKey(((Long) primaryKeyObj).longValue());
-    }
-
-    @Override
-    public Map<String, Object> getModelAttributes() {
-        Map<String, Object> attributes = new HashMap<String, Object>();
-
-        attributes.put("cswharvesterid", getCswharvesterid());
-        attributes.put("name", getName());
-        attributes.put("url", getUrl());
-        attributes.put("freetext", getFreetext());
-        attributes.put("title", getTitle());
-        attributes.put("abstrakt", getAbstrakt());
-        attributes.put("subject", getSubject());
-        attributes.put("every", getEvery());
-        attributes.put("topic", getTopic());
-        attributes.put("status", getStatus());
-        attributes.put("savedToGeoNetwork", getSavedToGeoNetwork());
-        attributes.put("geonetworkId", getGeonetworkId());
-        attributes.put("geonetworkUUID", getGeonetworkUUID());
-        attributes.put("companyId", getCompanyId());
-        attributes.put("groupId", getGroupId());
-        attributes.put("type", getType());
-        attributes.put("username", getUsername());
-        attributes.put("password", getPassword());
-
-        return attributes;
-    }
-
-    @Override
-    public void setModelAttributes(Map<String, Object> attributes) {
-        Long cswharvesterid = (Long) attributes.get("cswharvesterid");
-
-        if (cswharvesterid != null) {
-            setCswharvesterid(cswharvesterid);
-        }
-
-        String name = (String) attributes.get("name");
-
-        if (name != null) {
-            setName(name);
-        }
-
-        String url = (String) attributes.get("url");
-
-        if (url != null) {
-            setUrl(url);
-        }
-
-        String freetext = (String) attributes.get("freetext");
-
-        if (freetext != null) {
-            setFreetext(freetext);
-        }
-
-        String title = (String) attributes.get("title");
-
-        if (title != null) {
-            setTitle(title);
-        }
-
-        String abstrakt = (String) attributes.get("abstrakt");
-
-        if (abstrakt != null) {
-            setAbstrakt(abstrakt);
-        }
-
-        String subject = (String) attributes.get("subject");
-
-        if (subject != null) {
-            setSubject(subject);
-        }
-
-        Integer every = (Integer) attributes.get("every");
-
-        if (every != null) {
-            setEvery(every);
-        }
-
-        String topic = (String) attributes.get("topic");
-
-        if (topic != null) {
-            setTopic(topic);
-        }
-
-        String status = (String) attributes.get("status");
-
-        if (status != null) {
-            setStatus(status);
-        }
-
-        Boolean savedToGeoNetwork = (Boolean) attributes.get(
-                "savedToGeoNetwork");
-
-        if (savedToGeoNetwork != null) {
-            setSavedToGeoNetwork(savedToGeoNetwork);
-        }
-
-        Long geonetworkId = (Long) attributes.get("geonetworkId");
-
-        if (geonetworkId != null) {
-            setGeonetworkId(geonetworkId);
-        }
-
-        String geonetworkUUID = (String) attributes.get("geonetworkUUID");
-
-        if (geonetworkUUID != null) {
-            setGeonetworkUUID(geonetworkUUID);
-        }
-
-        Long companyId = (Long) attributes.get("companyId");
-
-        if (companyId != null) {
-            setCompanyId(companyId);
-        }
-
-        Long groupId = (Long) attributes.get("groupId");
-
-        if (groupId != null) {
-            setGroupId(groupId);
-        }
-
-        String type = (String) attributes.get("type");
-
-        if (type != null) {
-            setType(type);
-        }
-
-        String username = (String) attributes.get("username");
-
-        if (username != null) {
-            setUsername(username);
-        }
-
-        String password = (String) attributes.get("password");
-
-        if (password != null) {
-            setPassword(password);
-        }
-    }
-
-    @Override
     public long getCswharvesterid() {
         return _cswharvesterid;
     }
 
-    @Override
     public void setCswharvesterid(long cswharvesterid) {
         _cswharvesterid = cswharvesterid;
-
-        if (_cswHarvesterRemoteModel != null) {
-            try {
-                Class<?> clazz = _cswHarvesterRemoteModel.getClass();
-
-                Method method = clazz.getMethod("setCswharvesterid", long.class);
-
-                method.invoke(_cswHarvesterRemoteModel, cswharvesterid);
-            } catch (Exception e) {
-                throw new UnsupportedOperationException(e);
-            }
-        }
     }
 
-    @Override
     public String getName() {
         return _name;
     }
 
-    @Override
     public void setName(String name) {
         _name = name;
-
-        if (_cswHarvesterRemoteModel != null) {
-            try {
-                Class<?> clazz = _cswHarvesterRemoteModel.getClass();
-
-                Method method = clazz.getMethod("setName", String.class);
-
-                method.invoke(_cswHarvesterRemoteModel, name);
-            } catch (Exception e) {
-                throw new UnsupportedOperationException(e);
-            }
-        }
     }
 
-    @Override
     public String getUrl() {
         return _url;
     }
 
-    @Override
     public void setUrl(String url) {
         _url = url;
-
-        if (_cswHarvesterRemoteModel != null) {
-            try {
-                Class<?> clazz = _cswHarvesterRemoteModel.getClass();
-
-                Method method = clazz.getMethod("setUrl", String.class);
-
-                method.invoke(_cswHarvesterRemoteModel, url);
-            } catch (Exception e) {
-                throw new UnsupportedOperationException(e);
-            }
-        }
     }
 
-    @Override
     public String getFreetext() {
         return _freetext;
     }
 
-    @Override
     public void setFreetext(String freetext) {
         _freetext = freetext;
-
-        if (_cswHarvesterRemoteModel != null) {
-            try {
-                Class<?> clazz = _cswHarvesterRemoteModel.getClass();
-
-                Method method = clazz.getMethod("setFreetext", String.class);
-
-                method.invoke(_cswHarvesterRemoteModel, freetext);
-            } catch (Exception e) {
-                throw new UnsupportedOperationException(e);
-            }
-        }
     }
 
-    @Override
     public String getTitle() {
         return _title;
     }
 
-    @Override
     public void setTitle(String title) {
         _title = title;
-
-        if (_cswHarvesterRemoteModel != null) {
-            try {
-                Class<?> clazz = _cswHarvesterRemoteModel.getClass();
-
-                Method method = clazz.getMethod("setTitle", String.class);
-
-                method.invoke(_cswHarvesterRemoteModel, title);
-            } catch (Exception e) {
-                throw new UnsupportedOperationException(e);
-            }
-        }
     }
 
-    @Override
     public String getAbstrakt() {
         return _abstrakt;
     }
 
-    @Override
     public void setAbstrakt(String abstrakt) {
         _abstrakt = abstrakt;
-
-        if (_cswHarvesterRemoteModel != null) {
-            try {
-                Class<?> clazz = _cswHarvesterRemoteModel.getClass();
-
-                Method method = clazz.getMethod("setAbstrakt", String.class);
-
-                method.invoke(_cswHarvesterRemoteModel, abstrakt);
-            } catch (Exception e) {
-                throw new UnsupportedOperationException(e);
-            }
-        }
     }
 
-    @Override
     public String getSubject() {
         return _subject;
     }
 
-    @Override
     public void setSubject(String subject) {
         _subject = subject;
-
-        if (_cswHarvesterRemoteModel != null) {
-            try {
-                Class<?> clazz = _cswHarvesterRemoteModel.getClass();
-
-                Method method = clazz.getMethod("setSubject", String.class);
-
-                method.invoke(_cswHarvesterRemoteModel, subject);
-            } catch (Exception e) {
-                throw new UnsupportedOperationException(e);
-            }
-        }
     }
 
-    @Override
     public int getEvery() {
         return _every;
     }
 
-    @Override
     public void setEvery(int every) {
         _every = every;
-
-        if (_cswHarvesterRemoteModel != null) {
-            try {
-                Class<?> clazz = _cswHarvesterRemoteModel.getClass();
-
-                Method method = clazz.getMethod("setEvery", int.class);
-
-                method.invoke(_cswHarvesterRemoteModel, every);
-            } catch (Exception e) {
-                throw new UnsupportedOperationException(e);
-            }
-        }
     }
 
-    @Override
     public String getTopic() {
         return _topic;
     }
 
-    @Override
     public void setTopic(String topic) {
         _topic = topic;
-
-        if (_cswHarvesterRemoteModel != null) {
-            try {
-                Class<?> clazz = _cswHarvesterRemoteModel.getClass();
-
-                Method method = clazz.getMethod("setTopic", String.class);
-
-                method.invoke(_cswHarvesterRemoteModel, topic);
-            } catch (Exception e) {
-                throw new UnsupportedOperationException(e);
-            }
-        }
     }
 
-    @Override
     public String getStatus() {
         return _status;
     }
 
-    @Override
     public void setStatus(String status) {
         _status = status;
-
-        if (_cswHarvesterRemoteModel != null) {
-            try {
-                Class<?> clazz = _cswHarvesterRemoteModel.getClass();
-
-                Method method = clazz.getMethod("setStatus", String.class);
-
-                method.invoke(_cswHarvesterRemoteModel, status);
-            } catch (Exception e) {
-                throw new UnsupportedOperationException(e);
-            }
-        }
     }
 
-    @Override
     public boolean getSavedToGeoNetwork() {
         return _savedToGeoNetwork;
     }
 
-    @Override
     public boolean isSavedToGeoNetwork() {
         return _savedToGeoNetwork;
     }
 
-    @Override
     public void setSavedToGeoNetwork(boolean savedToGeoNetwork) {
         _savedToGeoNetwork = savedToGeoNetwork;
-
-        if (_cswHarvesterRemoteModel != null) {
-            try {
-                Class<?> clazz = _cswHarvesterRemoteModel.getClass();
-
-                Method method = clazz.getMethod("setSavedToGeoNetwork",
-                        boolean.class);
-
-                method.invoke(_cswHarvesterRemoteModel, savedToGeoNetwork);
-            } catch (Exception e) {
-                throw new UnsupportedOperationException(e);
-            }
-        }
     }
 
-    @Override
     public long getGeonetworkId() {
         return _geonetworkId;
     }
 
-    @Override
     public void setGeonetworkId(long geonetworkId) {
         _geonetworkId = geonetworkId;
-
-        if (_cswHarvesterRemoteModel != null) {
-            try {
-                Class<?> clazz = _cswHarvesterRemoteModel.getClass();
-
-                Method method = clazz.getMethod("setGeonetworkId", long.class);
-
-                method.invoke(_cswHarvesterRemoteModel, geonetworkId);
-            } catch (Exception e) {
-                throw new UnsupportedOperationException(e);
-            }
-        }
     }
 
-    @Override
     public String getGeonetworkUUID() {
         return _geonetworkUUID;
     }
 
-    @Override
     public void setGeonetworkUUID(String geonetworkUUID) {
         _geonetworkUUID = geonetworkUUID;
-
-        if (_cswHarvesterRemoteModel != null) {
-            try {
-                Class<?> clazz = _cswHarvesterRemoteModel.getClass();
-
-                Method method = clazz.getMethod("setGeonetworkUUID",
-                        String.class);
-
-                method.invoke(_cswHarvesterRemoteModel, geonetworkUUID);
-            } catch (Exception e) {
-                throw new UnsupportedOperationException(e);
-            }
-        }
     }
 
-    @Override
     public long getCompanyId() {
         return _companyId;
     }
 
-    @Override
     public void setCompanyId(long companyId) {
         _companyId = companyId;
-
-        if (_cswHarvesterRemoteModel != null) {
-            try {
-                Class<?> clazz = _cswHarvesterRemoteModel.getClass();
-
-                Method method = clazz.getMethod("setCompanyId", long.class);
-
-                method.invoke(_cswHarvesterRemoteModel, companyId);
-            } catch (Exception e) {
-                throw new UnsupportedOperationException(e);
-            }
-        }
     }
 
-    @Override
     public long getGroupId() {
         return _groupId;
     }
 
-    @Override
     public void setGroupId(long groupId) {
         _groupId = groupId;
-
-        if (_cswHarvesterRemoteModel != null) {
-            try {
-                Class<?> clazz = _cswHarvesterRemoteModel.getClass();
-
-                Method method = clazz.getMethod("setGroupId", long.class);
-
-                method.invoke(_cswHarvesterRemoteModel, groupId);
-            } catch (Exception e) {
-                throw new UnsupportedOperationException(e);
-            }
-        }
     }
 
-    @Override
     public String getType() {
         return _type;
     }
 
-    @Override
     public void setType(String type) {
         _type = type;
-
-        if (_cswHarvesterRemoteModel != null) {
-            try {
-                Class<?> clazz = _cswHarvesterRemoteModel.getClass();
-
-                Method method = clazz.getMethod("setType", String.class);
-
-                method.invoke(_cswHarvesterRemoteModel, type);
-            } catch (Exception e) {
-                throw new UnsupportedOperationException(e);
-            }
-        }
     }
 
-    @Override
     public String getUsername() {
         return _username;
     }
 
-    @Override
     public void setUsername(String username) {
         _username = username;
-
-        if (_cswHarvesterRemoteModel != null) {
-            try {
-                Class<?> clazz = _cswHarvesterRemoteModel.getClass();
-
-                Method method = clazz.getMethod("setUsername", String.class);
-
-                method.invoke(_cswHarvesterRemoteModel, username);
-            } catch (Exception e) {
-                throw new UnsupportedOperationException(e);
-            }
-        }
     }
 
-    @Override
     public String getPassword() {
         return _password;
     }
 
-    @Override
     public void setPassword(String password) {
         _password = password;
-
-        if (_cswHarvesterRemoteModel != null) {
-            try {
-                Class<?> clazz = _cswHarvesterRemoteModel.getClass();
-
-                Method method = clazz.getMethod("setPassword", String.class);
-
-                method.invoke(_cswHarvesterRemoteModel, password);
-            } catch (Exception e) {
-                throw new UnsupportedOperationException(e);
-            }
-        }
     }
 
-    @Override
     public java.lang.String toShortString() {
-        try {
-            String methodName = "toShortString";
-
-            Class<?>[] parameterTypes = new Class<?>[] {  };
-
-            Object[] parameterValues = new Object[] {  };
-
-            java.lang.String returnObj = (java.lang.String) invokeOnRemoteModel(methodName,
-                    parameterTypes, parameterValues);
-
-            return returnObj;
-        } catch (Exception e) {
-            throw new UnsupportedOperationException(e);
-        }
+        throw new UnsupportedOperationException();
     }
 
-    public BaseModel<?> getCSWHarvesterRemoteModel() {
-        return _cswHarvesterRemoteModel;
-    }
-
-    public void setCSWHarvesterRemoteModel(BaseModel<?> cswHarvesterRemoteModel) {
-        _cswHarvesterRemoteModel = cswHarvesterRemoteModel;
-    }
-
-    public Object invokeOnRemoteModel(String methodName,
-        Class<?>[] parameterTypes, Object[] parameterValues)
-        throws Exception {
-        Object[] remoteParameterValues = new Object[parameterValues.length];
-
-        for (int i = 0; i < parameterValues.length; i++) {
-            if (parameterValues[i] != null) {
-                remoteParameterValues[i] = ClpSerializer.translateInput(parameterValues[i]);
-            }
-        }
-
-        Class<?> remoteModelClass = _cswHarvesterRemoteModel.getClass();
-
-        ClassLoader remoteModelClassLoader = remoteModelClass.getClassLoader();
-
-        Class<?>[] remoteParameterTypes = new Class[parameterTypes.length];
-
-        for (int i = 0; i < parameterTypes.length; i++) {
-            if (parameterTypes[i].isPrimitive()) {
-                remoteParameterTypes[i] = parameterTypes[i];
-            } else {
-                String parameterTypeName = parameterTypes[i].getName();
-
-                remoteParameterTypes[i] = remoteModelClassLoader.loadClass(parameterTypeName);
-            }
-        }
-
-        Method method = remoteModelClass.getMethod(methodName,
-                remoteParameterTypes);
-
-        Object returnValue = method.invoke(_cswHarvesterRemoteModel,
-                remoteParameterValues);
-
-        if (returnValue != null) {
-            returnValue = ClpSerializer.translateOutput(returnValue);
-        }
-
-        return returnValue;
-    }
-
-    @Override
-    public void persist() throws SystemException {
-        if (this.isNew()) {
-            CSWHarvesterLocalServiceUtil.addCSWHarvester(this);
-        } else {
-            CSWHarvesterLocalServiceUtil.updateCSWHarvester(this);
-        }
-    }
-
-    @Override
     public CSWHarvester toEscapedModel() {
-        return (CSWHarvester) ProxyUtil.newProxyInstance(CSWHarvester.class.getClassLoader(),
-            new Class[] { CSWHarvester.class }, new AutoEscapeBeanHandler(this));
+        if (isEscapedModel()) {
+            return this;
+        } else {
+            return (CSWHarvester) Proxy.newProxyInstance(CSWHarvester.class.getClassLoader(),
+                new Class[] { CSWHarvester.class },
+                new AutoEscapeBeanHandler(this));
+        }
     }
 
-    @Override
     public Object clone() {
         CSWHarvesterClp clone = new CSWHarvesterClp();
 
@@ -721,11 +232,11 @@ public class CSWHarvesterClp extends BaseModelImpl<CSWHarvester>
         return clone;
     }
 
-    @Override
     public int compareTo(CSWHarvester cswHarvester) {
         int value = 0;
 
-        value = getName().compareToIgnoreCase(cswHarvester.getName());
+        value = getName().toLowerCase()
+                    .compareTo(cswHarvester.getName().toLowerCase());
 
         if (value != 0) {
             return value;
@@ -734,33 +245,32 @@ public class CSWHarvesterClp extends BaseModelImpl<CSWHarvester>
         return 0;
     }
 
-    @Override
     public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
-
-        if (!(obj instanceof CSWHarvesterClp)) {
+        if (obj == null) {
             return false;
         }
 
-        CSWHarvesterClp cswHarvester = (CSWHarvesterClp) obj;
+        CSWHarvesterClp cswHarvester = null;
 
-        long primaryKey = cswHarvester.getPrimaryKey();
+        try {
+            cswHarvester = (CSWHarvesterClp) obj;
+        } catch (ClassCastException cce) {
+            return false;
+        }
 
-        if (getPrimaryKey() == primaryKey) {
+        long pk = cswHarvester.getPrimaryKey();
+
+        if (getPrimaryKey() == pk) {
             return true;
         } else {
             return false;
         }
     }
 
-    @Override
     public int hashCode() {
         return (int) getPrimaryKey();
     }
 
-    @Override
     public String toString() {
         StringBundler sb = new StringBundler(37);
 
@@ -805,7 +315,6 @@ public class CSWHarvesterClp extends BaseModelImpl<CSWHarvester>
         return sb.toString();
     }
 
-    @Override
     public String toXmlString() {
         StringBundler sb = new StringBundler(58);
 

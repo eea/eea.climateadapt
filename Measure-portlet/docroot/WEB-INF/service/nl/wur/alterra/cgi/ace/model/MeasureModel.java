@@ -99,6 +99,36 @@ public interface MeasureModel extends BaseModel<Measure> {
 	public void setGroupId(long groupId);
 
 	/**
+	 * Gets the admincomment of this measure.
+	 *
+	 * @return the admincomment of this measure
+	 */
+	@AutoEscape
+	public String getAdmincomment();
+
+	/**
+	 * Sets the admincomment of this measure.
+	 *
+	 * @param admincomment the admincomment of this measure
+	 */
+	public void setAdmincomment(String admincomment);
+
+	/**
+	 * Gets the casestudyfeature of this measure.
+	 *
+	 * @return the casestudyfeature of this measure
+	 */
+	@AutoEscape
+	public String getCasestudyfeature();
+
+	/**
+	 * Sets the casestudyfeature of this measure.
+	 *
+	 * @param casestudyfeature the casestudyfeature of this measure
+	 */
+	public void setCasestudyfeature(String casestudyfeature);
+
+	/**
 	 * Gets the name of this measure.
 	 *
 	 * @return the name of this measure
@@ -249,6 +279,81 @@ public interface MeasureModel extends BaseModel<Measure> {
 	public void setContact(String contact);
 
 	/**
+	 * Gets the objectives of this measure.
+	 *
+	 * @return the objectives of this measure
+	 */
+	@AutoEscape
+	public String getObjectives();
+
+	/**
+	 * Sets the objectives of this measure.
+	 *
+	 * @param objectives the objectives of this measure
+	 */
+	public void setObjectives(String objectives);
+
+	/**
+	 * Gets the challenges of this measure.
+	 *
+	 * @return the challenges of this measure
+	 */
+	@AutoEscape
+	public String getChallenges();
+
+	/**
+	 * Sets the challenges of this measure.
+	 *
+	 * @param challenges the challenges of this measure
+	 */
+	public void setChallenges(String challenges);
+
+	/**
+	 * Gets the adaptationoptions of this measure.
+	 *
+	 * @return the adaptationoptions of this measure
+	 */
+	@AutoEscape
+	public String getAdaptationoptions();
+
+	/**
+	 * Sets the adaptationoptions of this measure.
+	 *
+	 * @param adaptationoptions the adaptationoptions of this measure
+	 */
+	public void setAdaptationoptions(String adaptationoptions);
+
+	/**
+	 * Gets the solutions of this measure.
+	 *
+	 * @return the solutions of this measure
+	 */
+	@AutoEscape
+	public String getSolutions();
+
+	/**
+	 * Sets the solutions of this measure.
+	 *
+	 * @param solutions the solutions of this measure
+	 */
+	public void setSolutions(String solutions);
+
+	/**
+	 * Gets the relevance of this measure.
+	 *
+	 * @return the relevance of this measure
+	 */
+	@AutoEscape
+	public String getRelevance();
+
+	/**
+	 * Sets the relevance of this measure.
+	 *
+	 * @param relevance the relevance of this measure
+	 */
+	public void setRelevance(String relevance);
+
+	/**
 	 * Gets the succeslimitations of this measure.
 	 *
 	 * @return the succeslimitations of this measure
@@ -307,6 +412,21 @@ public interface MeasureModel extends BaseModel<Measure> {
 	 * @param keywords the keywords of this measure
 	 */
 	public void setKeywords(String keywords);
+
+	/**
+	 * Gets the geos_ of this measure.
+	 *
+	 * @return the geos_ of this measure
+	 */
+	@AutoEscape
+	public String getGeos_();
+
+	/**
+	 * Sets the geos_ of this measure.
+	 *
+	 * @param geos_ the geos_ of this measure
+	 */
+	public void setGeos_(String geos_);
 
 	/**
 	 * Gets the startdate of this measure.
@@ -626,6 +746,110 @@ public interface MeasureModel extends BaseModel<Measure> {
 	 * @param textwebpage the textwebpage of this measure
 	 */
 	public void setTextwebpage(String textwebpage);
+
+	/**
+	 * Gets the primephoto of this measure.
+	 *
+	 * @return the primephoto of this measure
+	 */
+	@AutoEscape
+	public String getPrimephoto();
+
+	/**
+	 * Sets the primephoto of this measure.
+	 *
+	 * @param primephoto the primephoto of this measure
+	 */
+	public void setPrimephoto(String primephoto);
+
+	/**
+	 * Gets the supphotos of this measure.
+	 *
+	 * @return the supphotos of this measure
+	 */
+	@AutoEscape
+	public String getSupphotos();
+
+	/**
+	 * Sets the supphotos of this measure.
+	 *
+	 * @param supphotos the supphotos of this measure
+	 */
+	public void setSupphotos(String supphotos);
+
+	/**
+	 * Gets the supdocs of this measure.
+	 *
+	 * @return the supdocs of this measure
+	 */
+	@AutoEscape
+	public String getSupdocs();
+
+	/**
+	 * Sets the supdocs of this measure.
+	 *
+	 * @param supdocs the supdocs of this measure
+	 */
+	public void setSupdocs(String supdocs);
+
+	/**
+	 * Gets the year of this measure.
+	 *
+	 * @return the year of this measure
+	 */
+	@AutoEscape
+	public String getYear();
+
+	/**
+	 * Sets the year of this measure.
+	 *
+	 * @param year the year of this measure
+	 */
+	public void setYear(String year);
+
+	/**
+	 * Gets the geochars of this measure.
+	 *
+	 * @return the geochars of this measure
+	 */
+	@AutoEscape
+	public String getGeochars();
+
+	/**
+	 * Sets the geochars of this measure.
+	 *
+	 * @param geochars the geochars of this measure
+	 */
+	public void setGeochars(String geochars);
+
+	/**
+	 * Gets the category of this measure.
+	 *
+	 * @return the category of this measure
+	 */
+	@AutoEscape
+	public String getCategory();
+
+	/**
+	 * Sets the category of this measure.
+	 *
+	 * @param category the category of this measure
+	 */
+	public void setCategory(String category);
+
+	/**
+	 * Gets the lockdate of this measure.
+	 *
+	 * @return the lockdate of this measure
+	 */
+	public Date getLockdate();
+
+	/**
+	 * Sets the lockdate of this measure.
+	 *
+	 * @param lockdate the lockdate of this measure
+	 */
+	public void setLockdate(Date lockdate);
 
 	/**
 	 * Gets a copy of this measure as an escaped model instance by wrapping it with an {@link com.liferay.portal.kernel.bean.AutoEscapeBeanHandler}.

@@ -2,6 +2,7 @@ package nl.wur.alterra.cgi.ace.portlet;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Enumeration;
 import java.util.HashSet;
 
@@ -180,6 +181,10 @@ public class MeasurePortlet extends MeasureUpdateHelper {
                         if (aceitem == null){
                             aceitem = createAceItemInsideDB(measure);
                         }
+                    }
+
+                    if (oldapproved == ACEIndexUtil.Status_SUBMITTED && newapproved == ACEIndexUtil.Status_APPROVED){
+                        measure.setApprovaldate( new Date() );
                     }
 
                     MeasureLocalServiceUtil.updateMeasure(measure);

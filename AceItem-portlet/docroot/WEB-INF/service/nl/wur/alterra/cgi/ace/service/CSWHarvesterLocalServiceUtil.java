@@ -1,16 +1,18 @@
 package nl.wur.alterra.cgi.ace.service;
 
 import com.liferay.portal.kernel.bean.PortletBeanLocatorUtil;
-import com.liferay.portal.kernel.util.ReferenceRegistry;
-import com.liferay.portal.service.InvokableLocalService;
+import com.liferay.portal.kernel.util.ClassLoaderProxy;
 
 /**
- * Provides the local service utility for CSWHarvester. This utility wraps
- * {@link nl.wur.alterra.cgi.ace.service.impl.CSWHarvesterLocalServiceImpl} and is the
- * primary access point for service operations in application layer code running
- * on the local server. Methods of this service will not have security checks
- * based on the propagated JAAS credentials because this service can only be
- * accessed from within the same VM.
+ * The utility for the c s w harvester local service. This utility wraps {@link nl.wur.alterra.cgi.ace.service.impl.CSWHarvesterLocalServiceImpl} and is the primary access point for service operations in application layer code running on the local server.
+ *
+ * <p>
+ * Never modify this class directly. Add custom service methods to {@link nl.wur.alterra.cgi.ace.service.impl.CSWHarvesterLocalServiceImpl} and rerun ServiceBuilder to regenerate this class.
+ * </p>
+ *
+ * <p>
+ * This is a local service. Methods of this service will not have security checks based on the propagated JAAS credentials because this service can only be accessed from within the same VM.
+ * </p>
  *
  * @author groot052
  * @see CSWHarvesterLocalService
@@ -21,16 +23,10 @@ import com.liferay.portal.service.InvokableLocalService;
 public class CSWHarvesterLocalServiceUtil {
     private static CSWHarvesterLocalService _service;
 
-    /*
-     * NOTE FOR DEVELOPERS:
-     *
-     * Never modify this class directly. Add custom service methods to {@link nl.wur.alterra.cgi.ace.service.impl.CSWHarvesterLocalServiceImpl} and rerun ServiceBuilder to regenerate this class.
-     */
-
     /**
     * Adds the c s w harvester to the database. Also notifies the appropriate model listeners.
     *
-    * @param cswHarvester the c s w harvester
+    * @param cswHarvester the c s w harvester to add
     * @return the c s w harvester that was added
     * @throws SystemException if a system exception occurred
     */
@@ -54,39 +50,32 @@ public class CSWHarvesterLocalServiceUtil {
     /**
     * Deletes the c s w harvester with the primary key from the database. Also notifies the appropriate model listeners.
     *
-    * @param cswharvesterid the primary key of the c s w harvester
-    * @return the c s w harvester that was removed
+    * @param cswharvesterid the primary key of the c s w harvester to delete
     * @throws PortalException if a c s w harvester with the primary key could not be found
     * @throws SystemException if a system exception occurred
     */
-    public static nl.wur.alterra.cgi.ace.model.CSWHarvester deleteCSWHarvester(
-        long cswharvesterid)
+    public static void deleteCSWHarvester(long cswharvesterid)
         throws com.liferay.portal.kernel.exception.PortalException,
             com.liferay.portal.kernel.exception.SystemException {
-        return getService().deleteCSWHarvester(cswharvesterid);
+        getService().deleteCSWHarvester(cswharvesterid);
     }
 
     /**
     * Deletes the c s w harvester from the database. Also notifies the appropriate model listeners.
     *
-    * @param cswHarvester the c s w harvester
-    * @return the c s w harvester that was removed
+    * @param cswHarvester the c s w harvester to delete
     * @throws SystemException if a system exception occurred
     */
-    public static nl.wur.alterra.cgi.ace.model.CSWHarvester deleteCSWHarvester(
+    public static void deleteCSWHarvester(
         nl.wur.alterra.cgi.ace.model.CSWHarvester cswHarvester)
         throws com.liferay.portal.kernel.exception.SystemException {
-        return getService().deleteCSWHarvester(cswHarvester);
-    }
-
-    public static com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery() {
-        return getService().dynamicQuery();
+        getService().deleteCSWHarvester(cswHarvester);
     }
 
     /**
     * Performs a dynamic query on the database and returns the matching rows.
     *
-    * @param dynamicQuery the dynamic query
+    * @param dynamicQuery the dynamic query to search with
     * @return the matching rows
     * @throws SystemException if a system exception occurred
     */
@@ -101,12 +90,12 @@ public class CSWHarvesterLocalServiceUtil {
     * Performs a dynamic query on the database and returns a range of the matching rows.
     *
     * <p>
-    * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link nl.wur.alterra.cgi.ace.model.impl.CSWHarvesterModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+    * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
     * </p>
     *
-    * @param dynamicQuery the dynamic query
-    * @param start the lower bound of the range of model instances
-    * @param end the upper bound of the range of model instances (not inclusive)
+    * @param dynamicQuery the dynamic query to search with
+    * @param start the lower bound of the range of model instances to return
+    * @param end the upper bound of the range of model instances to return (not inclusive)
     * @return the range of matching rows
     * @throws SystemException if a system exception occurred
     */
@@ -121,13 +110,13 @@ public class CSWHarvesterLocalServiceUtil {
     * Performs a dynamic query on the database and returns an ordered range of the matching rows.
     *
     * <p>
-    * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link nl.wur.alterra.cgi.ace.model.impl.CSWHarvesterModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+    * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
     * </p>
     *
-    * @param dynamicQuery the dynamic query
-    * @param start the lower bound of the range of model instances
-    * @param end the upper bound of the range of model instances (not inclusive)
-    * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+    * @param dynamicQuery the dynamic query to search with
+    * @param start the lower bound of the range of model instances to return
+    * @param end the upper bound of the range of model instances to return (not inclusive)
+    * @param orderByComparator the comparator to order the results by
     * @return the ordered range of matching rows
     * @throws SystemException if a system exception occurred
     */
@@ -142,9 +131,9 @@ public class CSWHarvesterLocalServiceUtil {
     }
 
     /**
-    * Returns the number of rows that match the dynamic query.
+    * Counts the number of rows that match the dynamic query.
     *
-    * @param dynamicQuery the dynamic query
+    * @param dynamicQuery the dynamic query to search with
     * @return the number of rows that match the dynamic query
     * @throws SystemException if a system exception occurred
     */
@@ -155,30 +144,9 @@ public class CSWHarvesterLocalServiceUtil {
     }
 
     /**
-    * Returns the number of rows that match the dynamic query.
+    * Gets the c s w harvester with the primary key.
     *
-    * @param dynamicQuery the dynamic query
-    * @param projection the projection to apply to the query
-    * @return the number of rows that match the dynamic query
-    * @throws SystemException if a system exception occurred
-    */
-    public static long dynamicQueryCount(
-        com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery,
-        com.liferay.portal.kernel.dao.orm.Projection projection)
-        throws com.liferay.portal.kernel.exception.SystemException {
-        return getService().dynamicQueryCount(dynamicQuery, projection);
-    }
-
-    public static nl.wur.alterra.cgi.ace.model.CSWHarvester fetchCSWHarvester(
-        long cswharvesterid)
-        throws com.liferay.portal.kernel.exception.SystemException {
-        return getService().fetchCSWHarvester(cswharvesterid);
-    }
-
-    /**
-    * Returns the c s w harvester with the primary key.
-    *
-    * @param cswharvesterid the primary key of the c s w harvester
+    * @param cswharvesterid the primary key of the c s w harvester to get
     * @return the c s w harvester
     * @throws PortalException if a c s w harvester with the primary key could not be found
     * @throws SystemException if a system exception occurred
@@ -190,22 +158,15 @@ public class CSWHarvesterLocalServiceUtil {
         return getService().getCSWHarvester(cswharvesterid);
     }
 
-    public static com.liferay.portal.model.PersistedModel getPersistedModel(
-        java.io.Serializable primaryKeyObj)
-        throws com.liferay.portal.kernel.exception.PortalException,
-            com.liferay.portal.kernel.exception.SystemException {
-        return getService().getPersistedModel(primaryKeyObj);
-    }
-
     /**
-    * Returns a range of all the c s w harvesters.
+    * Gets a range of all the c s w harvesters.
     *
     * <p>
-    * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link nl.wur.alterra.cgi.ace.model.impl.CSWHarvesterModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+    * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
     * </p>
     *
-    * @param start the lower bound of the range of c s w harvesters
-    * @param end the upper bound of the range of c s w harvesters (not inclusive)
+    * @param start the lower bound of the range of c s w harvesters to return
+    * @param end the upper bound of the range of c s w harvesters to return (not inclusive)
     * @return the range of c s w harvesters
     * @throws SystemException if a system exception occurred
     */
@@ -216,7 +177,7 @@ public class CSWHarvesterLocalServiceUtil {
     }
 
     /**
-    * Returns the number of c s w harvesters.
+    * Gets the number of c s w harvesters.
     *
     * @return the number of c s w harvesters
     * @throws SystemException if a system exception occurred
@@ -227,9 +188,9 @@ public class CSWHarvesterLocalServiceUtil {
     }
 
     /**
-    * Updates the c s w harvester in the database or adds it if it does not yet exist. Also notifies the appropriate model listeners.
+    * Updates the c s w harvester in the database. Also notifies the appropriate model listeners.
     *
-    * @param cswHarvester the c s w harvester
+    * @param cswHarvester the c s w harvester to update
     * @return the c s w harvester that was updated
     * @throws SystemException if a system exception occurred
     */
@@ -240,27 +201,17 @@ public class CSWHarvesterLocalServiceUtil {
     }
 
     /**
-    * Returns the Spring bean ID for this bean.
+    * Updates the c s w harvester in the database. Also notifies the appropriate model listeners.
     *
-    * @return the Spring bean ID for this bean
+    * @param cswHarvester the c s w harvester to update
+    * @param merge whether to merge the c s w harvester with the current session. See {@link com.liferay.portal.service.persistence.BatchSession#update(com.liferay.portal.kernel.dao.orm.Session, com.liferay.portal.model.BaseModel, boolean)} for an explanation.
+    * @return the c s w harvester that was updated
+    * @throws SystemException if a system exception occurred
     */
-    public static java.lang.String getBeanIdentifier() {
-        return getService().getBeanIdentifier();
-    }
-
-    /**
-    * Sets the Spring bean ID for this bean.
-    *
-    * @param beanIdentifier the Spring bean ID for this bean
-    */
-    public static void setBeanIdentifier(java.lang.String beanIdentifier) {
-        getService().setBeanIdentifier(beanIdentifier);
-    }
-
-    public static java.lang.Object invokeMethod(java.lang.String name,
-        java.lang.String[] parameterTypes, java.lang.Object[] arguments)
-        throws java.lang.Throwable {
-        return getService().invokeMethod(name, parameterTypes, arguments);
+    public static nl.wur.alterra.cgi.ace.model.CSWHarvester updateCSWHarvester(
+        nl.wur.alterra.cgi.ace.model.CSWHarvester cswHarvester, boolean merge)
+        throws com.liferay.portal.kernel.exception.SystemException {
+        return getService().updateCSWHarvester(cswHarvester, merge);
     }
 
     /**
@@ -324,25 +275,23 @@ public class CSWHarvesterLocalServiceUtil {
 
     public static CSWHarvesterLocalService getService() {
         if (_service == null) {
-            InvokableLocalService invokableLocalService = (InvokableLocalService) PortletBeanLocatorUtil.locate(ClpSerializer.getServletContextName(),
+            Object obj = PortletBeanLocatorUtil.locate(ClpSerializer.SERVLET_CONTEXT_NAME,
                     CSWHarvesterLocalService.class.getName());
+            ClassLoader portletClassLoader = (ClassLoader) PortletBeanLocatorUtil.locate(ClpSerializer.SERVLET_CONTEXT_NAME,
+                    "portletClassLoader");
 
-            if (invokableLocalService instanceof CSWHarvesterLocalService) {
-                _service = (CSWHarvesterLocalService) invokableLocalService;
-            } else {
-                _service = new CSWHarvesterLocalServiceClp(invokableLocalService);
-            }
+            ClassLoaderProxy classLoaderProxy = new ClassLoaderProxy(obj,
+                    portletClassLoader);
 
-            ReferenceRegistry.registerReference(CSWHarvesterLocalServiceUtil.class,
-                "_service");
+            _service = new CSWHarvesterLocalServiceClp(classLoaderProxy);
+
+            ClpSerializer.setClassLoader(portletClassLoader);
         }
 
         return _service;
     }
 
-    /**
-     * @deprecated As of 6.2.0
-     */
     public void setService(CSWHarvesterLocalService service) {
+        _service = service;
     }
 }

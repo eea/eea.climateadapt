@@ -4,57 +4,64 @@
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 		<title>Prototype MapViewer</title>
+		<script src="http://ecn.dev.virtualearth.net/mapcontrol/mapcontrol.ashx?v=6.2&amp;mkt=en-us" type="text/javascript"></script>
 		<script src="js/ext-3.4.0/adapter/ext/ext-base.js" type="text/javascript"></script>
 		<script src="js/ext-3.4.0/ext-all.js" type="text/javascript"></script>
 		<script src="js/OpenLayers-2.11/OpenLayers.js" type="text/javascript"></script>
 		<script src="js/GeoExt/script/GeoExt.js" type="text/javascript"></script>
 		<script src="js/chm/CHM.js" type="text/javascript"></script>
-		<script src="js/chm/CHMMap.js" type="text/javascript"></script>
-		<script src="js/chm/MapViewerCHMMap.js" type="text/javascript"></script>
-		<script src="js/chm/WMSLegend.js" type="text/javascript"></script>
-		<script src="js/chm/MapViewer.js" type="text/javascript"></script>
+		<script src="js/chm/control/map/Map.js" type="text/javascript"></script>
+		<script src="js/chm/control/map/MapControl.js" type="text/javascript"></script>
+		<script src="js/chm/control/toc/TOCControl.js" type="text/javascript"></script>
+		<script src="js/chm/control/legend/LegendControl.js" type="text/javascript"></script>
+		<script src="js/chm/control/legend/WMSLegend.js" type="text/javascript"></script>
+		<script src="js/chm/control/legend/AbstractWindow.js" type="text/javascript"></script>
+		<script src="js/chm/format/GetRecordByIdResponse.js" type="text/javascript"></script>
+		<script src="js/chm/Application.js" type="text/javascript"></script>
 		<link rel="stylesheet" type="text/css" href="js/ext-3.4.0/resources/css/ext-all.css" />
 		<link rel="stylesheet" type="text/css" href="js/GeoExt/resources/css/geoext-all.css" />
 		<link rel="stylesheet" type="text/css" href="css/tree.css" />
+		<link rel="stylesheet" type="text/css" href="css/portlet.css" />
 	</head>
 	<body>
 		<script type="text/javascript">
 			var proxyUrl = '';
 			
-			var cswUrl = 'http://dev.ace.geocat.net/geonetwork/srv/en/csw?';
+			var cswUrl = 'http://climate-adapt.europa.eu/geonetwork/srv/en/csw?';
 
+			var csw = "en/csw?"
+			
+			var cswServletUrl = "http://localhost/cswservlet";
+			
+			var cswUsername = "";
+
+			var cswPassword = "";
+			
 			var mapViewerServletUrl = 'http://localhost/mapviewerservlet';
 			
-			var mapViewerWmcDirectory = 'D:/UserData/Projects/IndigoACE/wmc/';
+			var mapViewerWmcDirectory = 'D:/UserData/Data/CLIMATE-ADAPT/wmc';
 			
-			var mapViewerAppId = 'espon';
+			var mapViewerAppId = 'ast-vulnrisk-espon01';
 
 			var foregroundlayername = "Foreground";
 			
 			var backgroundlayername = "Background";
 			
-			Ext.onReady(function() {
-				Ext.onReady(function() {
-					mapviewer = new CHM.MapViewer(
-							document.getElementById('map_element'), 
-							document.getElementById('toc_element'), 
-							document.getElementById('status_element'), 
-							document.getElementById('abstract_element'), 
-							document.getElementById('abstract_tabs_element') 
-						);
-				
-				mapviewer.setOnCreationComplete(handleMapViewerCreationComplete);
-			});
+			var showMetadata = "en/metadata.show?uuid=";
 			
-		    function handleMapViewerCreationComplete() {
-		    	// alert('mapViewerCreationComplete');
-			}
+			var application;
+			
+			Ext.onReady(function() {
+				application = new CHM.Application();
+		
+				application.addListener('creationComplete', this.handleApplicationCreationComplete, this);
+			});
+		
+		    function handleApplicationCreationComplete() {
+		    	console.log('CreationComplete!');
+		    }
 		</script>
-		<div id="map_element"></div>
-		<div id="toc_element"></div>
-		<div id="status_element">status</div>
-		<div id="abstract_element">
-			<div id="abstract_tabs_element"></div>
-		</div>
+		
+		<div id="mapviewer_element"></div>
 	</body>
 </html>

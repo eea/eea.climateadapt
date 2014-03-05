@@ -39,6 +39,49 @@ div.step-right h1 {
 }
 #sector-selector {
 }
+#scenario-selector {
+}
+#timeperiod-selector {
+}
+/****
+	Explore adaptation options portlet on Adaptation measures page 
+	taken from ace-theme custom.css
+****/
+/*.explore-adaptation-measures #ace_simplefilter_30x {
+	height: 35px;
+}
+*/
+.explore-adaptation-measures #sector-selector-div,
+.explore-adaptation-measures #scenario-selector-div,
+.explore-adaptation-measures #timeperiod-selector-div {
+	left: -10px;
+	position: relative;
+	top: 10px;
+}
+
+.explore-adaptation-measures #risk-selector-div span,
+.explore-adaptation-measures #sector-selector-div span,
+.explore-adaptation-measures #scenario-selector-div span,
+.explore-adaptation-measures #timeperiod-selector-div span {
+	padding-top: 2px;
+}
+
+.explore-adaptation-measures #risk-selector-div span,
+.explore-adaptation-measures #scenario-selector-div span,
+.explore-adaptation-measures #timeperiod-selector-div span {
+	padding-right: 12px;
+}
+
+.explore-adaptation-measures #risk-selector-div select,
+.explore-adaptation-measures #timeperiod-selector-div select {
+	width: 239px;
+}
+.explore-adaptation-measures #scenario-selector-div select {
+	width: 200px;
+}
+/****
+	End taken from 
+****/
 .step-left {
 	background-color:#d2df92;
 	color:#7e8f2e;

@@ -10,6 +10,7 @@
 		</id>
 		<property name="companyId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 		<property name="groupId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="admincomment" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="acronym" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="title" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="startdate" type="org.hibernate.type.TimestampType" />
@@ -38,5 +39,9 @@
 		<property name="spatialvalues" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="source" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="climateimpacts" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="lockdate" type="org.hibernate.type.TimestampType" />
+		<property name="feature" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="supdocs" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="geochars" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 	</class>
 </hibernate-mapping>

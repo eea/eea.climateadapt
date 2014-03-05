@@ -117,6 +117,7 @@ public class ACEIndexSearcher {
 /* Default sort by relevance: */            
             //System.out.println("ACEIndexSearcher sortBy" + sortBy);
             Sort sort = null;
+            //System.out.println("sort by is " + sortBy);
             if(sortBy == null) { // relevance
                 sort = new Sort(new SortField[] { SortField.FIELD_SCORE, SortField.FIELD_DOC });
                             }
@@ -126,6 +127,10 @@ public class ACEIndexSearcher {
                 }
                 else if(sortBy.equals("NAME")) {
                     sort = new Sort(new SortField( ACEIndexConstant.IndexField.NAME_SORT, SortField.STRING));
+                }
+                else if(sortBy.equals("YEAR")) {
+                	//System.out.println("sort by year requested");
+                    sort = new Sort(new SortField( ACEIndexConstant.IndexField.YEAR_SORT, SortField.INT, true));
                 }
                 // undefined sort: default to relevance
                 else {
@@ -149,7 +154,7 @@ public class ACEIndexSearcher {
             return collector.topDocs();
         }
         catch (IOException x) {
-            System.out.println(x.getMessage());
+            //System.out.println(x.getMessage());
             x.printStackTrace();
             throw new ACELuceneException(x.getMessage(), x);
         }
@@ -160,7 +165,7 @@ public class ACEIndexSearcher {
             return searcher.doc(idx);
         }
         catch (IOException x) {
-            System.out.println(x.getMessage());
+            //System.out.println(x.getMessage());
             x.printStackTrace();
             throw new ACELuceneException(x.getMessage(), x);
         }
@@ -171,7 +176,7 @@ public class ACEIndexSearcher {
             return searcher.maxDoc();
         }
         catch (IOException x) {
-            System.out.println(x.getMessage());
+            //System.out.println(x.getMessage());
             x.printStackTrace();
             throw new ACELuceneException(x.getMessage(), x);
         }
@@ -211,12 +216,12 @@ public class ACEIndexSearcher {
         searcher.close();
         }
         catch (CorruptIndexException x) {
-            System.out.println(x.getMessage());
+           //System.out.println(x.getMessage());
             x.printStackTrace();
             throw new ACELuceneException(x.getMessage(), x);
         }
         catch (IOException x) {
-            System.out.println(x.getMessage());
+            //System.out.println(x.getMessage());
             x.printStackTrace();
             throw new ACELuceneException(x.getMessage(), x);
         }

@@ -19,6 +19,8 @@ import nl.wur.alterra.cgi.ace.model.constants.AceItemClimateImpact;
 import nl.wur.alterra.cgi.ace.model.constants.AceItemCountry;
 import nl.wur.alterra.cgi.ace.model.constants.AceItemElement;
 import nl.wur.alterra.cgi.ace.model.constants.AceItemSector;
+import nl.wur.alterra.cgi.ace.model.constants.AceItemScenario;
+import nl.wur.alterra.cgi.ace.model.constants.AceItemTimePeriod;
 import nl.wur.alterra.cgi.ace.model.constants.AceItemType;
 import nl.wur.alterra.cgi.ace.search.lucene.ACEIndexSynchronizer;
 import nl.wur.alterra.cgi.ace.search.lucene.ACEIndexUtil;
@@ -65,7 +67,6 @@ public abstract class LuceneIndexUpdatePortlet extends MVCPortlet {
         // System.out.println("Re-building Lucene index for single AceItem");
         ACEIndexSynchronizer aceIndexSynchronizer = new ACEIndexSynchronizer();
         aceIndexSynchronizer.reIndex(aceitem);
-        // System.out.println("Finished re-building Lucene index for single AceItem");
     }
 
     private String coalesce(String aString) {
@@ -107,7 +108,7 @@ public abstract class LuceneIndexUpdatePortlet extends MVCPortlet {
 
         Date d = new Date();
         d.setTime(ParamUtil.getLong(request, "checkcreationdate"));
-        aceitem.setApprovaldate(d); // hack optimistic locking!!! Check with
+        aceitem.setLockdate(d); // hack optimistic locking!!! Check with
                                     // dbrecord in AceItemValidator
 
         aceitem.setCompanyId(themeDisplay.getCompanyId());
@@ -158,6 +159,9 @@ public abstract class LuceneIndexUpdatePortlet extends MVCPortlet {
 
         aceitem.setSource(ParamUtil.getString(request, "source"));
         aceitem.setComments(ParamUtil.getString(request, "comments"));
+        aceitem.setYear(ParamUtil.getString(request, "year"));
+        //aceitem.setScenario(ParamUtil.getString(request, "scenario"));
+        aceitem.setTimeperiod(ParamUtil.getString(request, "timeperiod"));
 
         String choosencountries = "";
         for (AceItemCountry aceitemcountry : AceItemCountry.values()) {
@@ -206,6 +210,33 @@ public abstract class LuceneIndexUpdatePortlet extends MVCPortlet {
             }
         }
         aceitem.setClimateimpacts_(choosenclimateimpacts);
+        
+        
+        String choosenscenarios = "";
+        for (AceItemScenario aceitemscenario : AceItemScenario.values()) {
+
+            if (ParamUtil.getString(request, "chk_scenario_" + aceitemscenario.toString()) != null) {
+                String s = ParamUtil.getString(request, "chk_scenario_" + aceitemscenario.toString());
+                if (s.equalsIgnoreCase(aceitemscenario.toString())) {
+                    choosenscenarios += aceitemscenario.toString() + ";";
+                }
+            }
+        }
+        aceitem.setScenario(choosenscenarios);
+        
+        String choosenTimePeriods = "";
+        for (AceItemTimePeriod aceitemTimePeriod : AceItemTimePeriod.values()) {
+
+            if (ParamUtil.getString(request, "chk_timeperiod_" + aceitemTimePeriod.toString()) != null) {
+                String s = ParamUtil.getString(request, "chk_timeperiod_" + aceitemTimePeriod.toString());
+                if (s.equalsIgnoreCase(aceitemTimePeriod.toString())) {
+                    choosenTimePeriods += aceitemTimePeriod.toString() + ";";
+                }
+            }
+        }
+        aceitem.setTimeperiod(choosenTimePeriods);
+        
+        
 
         aceitem.setTextSearch(aceitem.getSpecialtagging() + " " + aceitem.getName() + " " + aceitem.getDescription() + " "
                 + aceitem.getKeyword() + " " + aceitem.getSource() + " " + aceitem.getSpatialLayer() + " "
@@ -273,12 +304,20 @@ public abstract class LuceneIndexUpdatePortlet extends MVCPortlet {
 
         String approved = ParamUtil.getString(request, "chk_controlstatus");
         if ((approved == null) || (approved.length() == 0)) {
-            aceitem.setControlstatus((short) 0);
+            aceitem.setControlstatus((short) -1);
         } else {
             aceitem.setControlstatus(Short.parseShort(approved));
         }
 
         aceitem.setCreationdate(new Date());
+        
+        String choosenGeoChars = ParamUtil.getString(request, "rad_geo_chars");
+        aceitem.setGeochars(choosenGeoChars);
+        
+        if (Validator.isNotNull(ParamUtil.getString(request, "feature")))
+        {
+        	aceitem.setFeature(ParamUtil.getString(request, "feature"));
+        }
 
         return aceitem;
     }

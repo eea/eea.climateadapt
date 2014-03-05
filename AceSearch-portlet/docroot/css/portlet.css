@@ -215,12 +215,25 @@
 }
 
 .resultsGroupTitle {
-	background-color:#D2DF92;
+	cursor:pointer;
+}
+.resultsGroupTitle {
+	/*background-color:#D2DF92;
+
 	margin:5px 0px 0px 0px;
 	padding:5px;
 	font-size:1.2em;
     font-weight: bold;
-	cursor:pointer;
+	cursor:pointer; */
+	
+	/* background: url("../images/bg-tab-content-header.gif") no-repeat scroll left top transparent;
+			color: #FFFFFF;
+			cursor: pointer;
+			font-size: 15px;
+			font-weight: bold;
+			height: 22px;
+			margin-bottom: 8px;
+			padding: 3px 9px; */
 }
 
 /** styles for filter portlet **/
@@ -353,11 +366,21 @@
     display: none;
 }
 
-#search_results {
+/* #search_results {
 	background-color:#fff;
 	float:right;
 	width:50%;
+} */
+
+#search_results {
+	float: right;
+	margin-right: 4%;
+	padding-top: 50px;
+	width: 65%;
+	/* background-color:#fff; */
 }
+
+
 
 .filter_results {
 	background-color:#fff;
@@ -490,3 +513,141 @@ span.jPag-snext-img{
     background:transparent url(../images/snext.png) no-repeat center left;
             }
 /* end of pagination */
+
+
+
+/* start of new css */
+#wrapper {
+		    background-color: #fff;
+		    margin: 0 auto;
+		    position: relative;
+		    width: 984px;
+		}
+		
+		#case-studies-database-search-filters-wrapper {
+			float: left;
+			margin: 0 0 30px 2%;
+			text-align: center;
+			width: 26%;
+		}
+		#case-studies-database-search-filters-wrapper h3 {
+			color: #1b3d62;
+			font-size: 25px;
+			font-style: italic;
+			font-weight: normal;
+			height: 32px;
+			margin: 0 0 18px;
+		}
+		#case-studies-database-search-filters-wrapper #case-studies-database-search-filters {
+			background-color: #ebebeb;
+			border: 1px solid #c1c1c1;
+			padding: 5%;
+			width: 81%;
+		}
+		#case-studies-database-search-filters-wrapper #case-studies-database-search-filters .case-studies-database-search-filters-section {
+			margin-top: 25px;
+			position: relative;
+			text-align: left;
+		}
+		#case-studies-database-search-filters-wrapper #case-studies-database-search-filters .case-studies-database-search-filters-section:first-child {
+			margin-top: 0;
+		}
+		#case-studies-database-search-filters-wrapper #case-studies-database-search-filters .case-studies-database-search-filters-section a.case-studies-database-search-filters-section-header {
+			color: #0856a0;
+			display: block;
+			font-size: 14px;
+			font-weight: bold;
+			text-decoration: none;
+			padding-bottom: 9px;
+			width: 100%;
+		}
+		#case-studies-database-search-filters-wrapper #case-studies-database-search-filters .case-studies-database-search-filters-section a.case-studies-database-search-filters-section-header span.case-studies-database-search-filters-section-header-icon {
+			background-color: #fff;
+			border: 1px solid #c1c1c1;
+			border-radius: 2px;
+			color: #000;
+			display: block;
+			font-weight: normal;
+			height: 9px;
+			line-height: 0;
+			padding-top: 7px;
+			position: absolute;
+			right: 0;
+			text-align: center;
+			top: 0;
+			width: 17px;
+		}
+		#case-studies-database-search-filters-wrapper #case-studies-database-search-filters .case-studies-database-search-filters-section ul.case-studies-database-search-filters-options,
+		#case-studies-database-search-filters-wrapper #case-studies-database-search-filters .case-studies-database-search-filters-section ul.case-studies-database-search-filters-sub-options {
+			font-size: 11px;
+			list-style-type: none;
+			margin: 0;
+			padding: 0;
+		}
+		#case-studies-database-search-filters-wrapper #case-studies-database-search-filters .case-studies-database-search-filters-section ul.case-studies-database-search-filters-options {
+			font-weight: bold;
+		}
+		#case-studies-database-search-filters-wrapper #case-studies-database-search-filters .case-studies-database-search-filters-section ul.case-studies-database-search-filters-sub-options {
+			display: none;
+			font-weight: normal;
+			margin-left: -21px;
+		}
+		#case-studies-database-search-filters-wrapper #case-studies-database-search-filters .case-studies-database-search-filters-section ul.case-studies-database-search-filters-options li,
+		#case-studies-database-search-filters-wrapper #case-studies-database-search-filters .case-studies-database-search-filters-section ul.case-studies-database-search-filters-sub-options li {
+			padding: 0 0 4px 21px;
+		}
+		#case-studies-database-search-filters-wrapper #case-studies-database-search-filters .case-studies-database-search-filters-section ul.case-studies-database-search-filters-options li input[type="radio"],
+		#case-studies-database-search-filters-wrapper #case-studies-database-search-filters .case-studies-database-search-filters-section ul.case-studies-database-search-filters-options li input[type="checkbox"],
+		#case-studies-database-search-filters-wrapper #case-studies-database-search-filters .case-studies-database-search-filters-section ul.case-studies-database-search-filters-options li input[type="text"]:first-child,
+		#case-studies-database-search-filters-wrapper #case-studies-database-search-filters .case-studies-database-search-filters-section ul.case-studies-database-search-filters-sub-options li input[type="radio"],
+		#case-studies-database-search-filters-wrapper #case-studies-database-search-filters .case-studies-database-search-filters-section ul.case-studies-database-search-filters-sub-options li input[type="checkbox"] {
+			margin-left: -21px;
+		}
+		
+		
+		#search_results #case-studies-database-search-section {
+			margin-bottom: 45px;
+		}
+		#search_results #case-studies-database-search-section > label:first-child {
+			float: left;
+			margin-right: 15px;
+			padding-top: 3px;
+		}
+		#search_results #case-studies-database-search-section > label:first-child strong {
+			font-size: 11px;
+		}
+		#search_results #case-studies-database-search-section > label:first-child input {
+			height: 21px;
+			margin-left: 7px;
+		}
+		#search_results #case-studies-database-search-section ul#case-studies-database-search-options {
+			float: left;
+			/*font-size: 9px;*/
+			list-style-type: none;
+			margin: 0 11px 0 0;
+			padding: 0;
+		}
+		#search_results #case-studies-database-search-section .case-studies-database-search-button-green {
+			background: #c7d544;
+			background: -moz-linear-gradient(top,  #c7d544 0%, #aebe20 100%);
+			background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#c7d544), color-stop(100%,#aebe20));
+			background: -webkit-linear-gradient(top,  #c7d544 0%,#aebe20 100%);
+			background: -o-linear-gradient(top,  #c7d544 0%,#aebe20 100%);
+			background: -ms-linear-gradient(top,  #c7d544 0%,#aebe20 100%);
+			background: linear-gradient(to bottom,  #c7d544 0%,#aebe20 100%);
+			filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#c7d544', endColorstr='#aebe20',GradientType=0 );
+			border: 1px solid #a3af29;
+			border-radius: 7px;
+			-moz-box-shadow: inset 1px 1px 1px rgba(255,255,255,.5);
+			-webkit-box-shadow: inset 1px 1px 1px rgba(255,255,255,.5);
+			box-shadow: inset 1px 1px 1px rgba(255,255,255,.5);
+			color: #000;
+			display: inline-block;
+			float: left;
+			text-align: center;
+			text-decoration: none;
+			text-shadow: 1px 1px 1px #fff;
+			margin-top: 4px;
+			padding: 5px 50px;
+		}
+

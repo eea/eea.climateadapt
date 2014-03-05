@@ -7,7 +7,6 @@ import javax.xml.namespace.NamespaceContext;
 
 public class WMCNamespaceContext implements NamespaceContext {
 
-	@Override
 	public String getNamespaceURI(String prefix) {
 		String result = XMLConstants.NULL_NS_URI;
 		
@@ -28,7 +27,6 @@ public class WMCNamespaceContext implements NamespaceContext {
 		return result;
 	}
 
-	@Override
 	public String getPrefix(String arg0) {
 		throw new UnsupportedOperationException();
 	}

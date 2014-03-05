@@ -46,6 +46,8 @@
 		<icon>/icon.png</icon>
 		<instanceable>true</instanceable>
 		<header-portlet-css>/css/portlet.css</header-portlet-css>
+		<header-portlet-css>/css/shareformRevised.css</header-portlet-css>
+		<header-portlet-javascript>/js/jquery-1.6.2.min.js</header-portlet-javascript>
 		<footer-portlet-javascript>
 			/js/javascript.js
 		</footer-portlet-javascript>
@@ -70,6 +72,8 @@
 		<icon>/icon.png</icon>
 		<instanceable>false</instanceable>
 		<header-portlet-css>/css/portlet.css</header-portlet-css>
+		<header-portlet-css>/css/shareformRevised.css</header-portlet-css>
+		<header-portlet-css>/css/styles.css</header-portlet-css>
 		<header-portlet-javascript>http://ecn.dev.virtualearth.net/mapcontrol/mapcontrol.ashx?v=6.2&amp;mkt=en-us"</header-portlet-javascript>
 		<header-portlet-javascript>/js/ext-base.js</header-portlet-javascript>
 		<header-portlet-javascript>/js/ext-all.js</header-portlet-javascript>
@@ -80,6 +84,7 @@
 		<header-portlet-javascript>/js/chm/CHMMap.js</header-portlet-javascript>
 		<header-portlet-javascript>/js/chm/Point.js</header-portlet-javascript>
 		<header-portlet-javascript>/js/chm/Measure.js</header-portlet-javascript>
+		<header-portlet-javascript>/js/ShareMeasure.js</header-portlet-javascript>
 		<header-portlet-javascript>/js/chm/MeasureControl.js</header-portlet-javascript>
 		<header-portlet-javascript>/js/chm/MeasureCHMMap.js</header-portlet-javascript>
 		<header-portlet-javascript>/js/chm/Resource.js</header-portlet-javascript>
@@ -91,6 +96,26 @@
 		<footer-portlet-javascript>/js/javascript.js</footer-portlet-javascript>		
 		<css-class-wrapper>sharemeasureportlet-portlet</css-class-wrapper>
 	</portlet>
+	
+	<portlet>
+		<portlet-name>home_search_portlet</portlet-name>
+		<icon>/icon.png</icon>
+		<instanceable>false</instanceable>
+		<header-portlet-css>/css/homesearch.css</header-portlet-css>
+		<header-portlet-javascript>/js/jquery-1.6.2.min.js</header-portlet-javascript>
+		<css-class-wrapper>home_search_portlet-portlet</css-class-wrapper>
+	</portlet>
+	
+	<portlet>
+		<portlet-name>home_slider_portlet</portlet-name>
+		<icon>/icon.png</icon>
+		<instanceable>false</instanceable>
+		<header-portlet-css>/css/homeslider.css</header-portlet-css>
+		<header-portlet-javascript>/js/jquery-1.6.2.min.js</header-portlet-javascript>
+		<footer-portlet-javascript>/js/home/javascript.js</footer-portlet-javascript>	
+		<css-class-wrapper>home_slider_portlet-portlet</css-class-wrapper>
+	</portlet>
+	
 	<role-mapper>
 		<role-name>administrator</role-name>
 		<role-link>Administrator</role-link>

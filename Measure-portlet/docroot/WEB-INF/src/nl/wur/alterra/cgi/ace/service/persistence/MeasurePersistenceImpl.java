@@ -298,6 +298,8 @@ public class MeasurePersistenceImpl extends BasePersistenceImpl<Measure>
 		measureImpl.setMeasureId(measure.getMeasureId());
 		measureImpl.setCompanyId(measure.getCompanyId());
 		measureImpl.setGroupId(measure.getGroupId());
+		measureImpl.setAdmincomment(measure.getAdmincomment());
+		measureImpl.setCasestudyfeature(measure.getCasestudyfeature());
 		measureImpl.setName(measure.getName());
 		measureImpl.setDescription(measure.getDescription());
 		measureImpl.setImplementationtype(measure.getImplementationtype());
@@ -308,10 +310,16 @@ public class MeasurePersistenceImpl extends BasePersistenceImpl<Measure>
 		measureImpl.setLegalaspects(measure.getLegalaspects());
 		measureImpl.setStakeholderparticipation(measure.getStakeholderparticipation());
 		measureImpl.setContact(measure.getContact());
+		measureImpl.setObjectives(measure.getObjectives());
+		measureImpl.setChallenges(measure.getChallenges());
+		measureImpl.setAdaptationoptions(measure.getAdaptationoptions());
+		measureImpl.setSolutions(measure.getSolutions());
+		measureImpl.setRelevance(measure.getRelevance());
 		measureImpl.setSucceslimitations(measure.getSucceslimitations());
 		measureImpl.setWebsite(measure.getWebsite());
 		measureImpl.setCostbenefit(measure.getCostbenefit());
 		measureImpl.setKeywords(measure.getKeywords());
+		measureImpl.setGeos_(measure.getGeos_());
 		measureImpl.setStartdate(measure.getStartdate());
 		measureImpl.setEnddate(measure.getEnddate());
 		measureImpl.setPublicationdate(measure.getPublicationdate());
@@ -334,6 +342,13 @@ public class MeasurePersistenceImpl extends BasePersistenceImpl<Measure>
 		measureImpl.setReplacesId(measure.getReplacesId());
 		measureImpl.setComments(measure.getComments());
 		measureImpl.setTextwebpage(measure.getTextwebpage());
+		measureImpl.setPrimephoto(measure.getPrimephoto());
+		measureImpl.setSupphotos(measure.getSupphotos());
+		measureImpl.setSupdocs(measure.getSupdocs());
+		measureImpl.setYear(measure.getYear());
+		measureImpl.setGeochars(measure.getGeochars());
+		measureImpl.setCategory(measure.getCategory());
+		measureImpl.setLockdate(measure.getLockdate());
 
 		return measureImpl;
 	}
