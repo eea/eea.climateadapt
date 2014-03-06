@@ -1,18 +1,16 @@
 package nl.wur.alterra.cgi.ace.service;
 
 import com.liferay.portal.kernel.bean.PortletBeanLocatorUtil;
-import com.liferay.portal.kernel.util.ClassLoaderProxy;
+import com.liferay.portal.kernel.util.ReferenceRegistry;
+import com.liferay.portal.service.InvokableLocalService;
 
 /**
- * The utility for the wxs harvester local service. This utility wraps {@link nl.wur.alterra.cgi.ace.service.impl.WxsHarvesterLocalServiceImpl} and is the primary access point for service operations in application layer code running on the local server.
- *
- * <p>
- * Never modify this class directly. Add custom service methods to {@link nl.wur.alterra.cgi.ace.service.impl.WxsHarvesterLocalServiceImpl} and rerun ServiceBuilder to regenerate this class.
- * </p>
- *
- * <p>
- * This is a local service. Methods of this service will not have security checks based on the propagated JAAS credentials because this service can only be accessed from within the same VM.
- * </p>
+ * Provides the local service utility for WxsHarvester. This utility wraps
+ * {@link nl.wur.alterra.cgi.ace.service.impl.WxsHarvesterLocalServiceImpl} and is the
+ * primary access point for service operations in application layer code running
+ * on the local server. Methods of this service will not have security checks
+ * based on the propagated JAAS credentials because this service can only be
+ * accessed from within the same VM.
  *
  * @author groot052
  * @see WxsHarvesterLocalService
@@ -23,10 +21,16 @@ import com.liferay.portal.kernel.util.ClassLoaderProxy;
 public class WxsHarvesterLocalServiceUtil {
     private static WxsHarvesterLocalService _service;
 
+    /*
+     * NOTE FOR DEVELOPERS:
+     *
+     * Never modify this class directly. Add custom service methods to {@link nl.wur.alterra.cgi.ace.service.impl.WxsHarvesterLocalServiceImpl} and rerun ServiceBuilder to regenerate this class.
+     */
+
     /**
     * Adds the wxs harvester to the database. Also notifies the appropriate model listeners.
     *
-    * @param wxsHarvester the wxs harvester to add
+    * @param wxsHarvester the wxs harvester
     * @return the wxs harvester that was added
     * @throws SystemException if a system exception occurred
     */
@@ -50,32 +54,39 @@ public class WxsHarvesterLocalServiceUtil {
     /**
     * Deletes the wxs harvester with the primary key from the database. Also notifies the appropriate model listeners.
     *
-    * @param wxsharvesterid the primary key of the wxs harvester to delete
+    * @param wxsharvesterid the primary key of the wxs harvester
+    * @return the wxs harvester that was removed
     * @throws PortalException if a wxs harvester with the primary key could not be found
     * @throws SystemException if a system exception occurred
     */
-    public static void deleteWxsHarvester(long wxsharvesterid)
+    public static nl.wur.alterra.cgi.ace.model.WxsHarvester deleteWxsHarvester(
+        long wxsharvesterid)
         throws com.liferay.portal.kernel.exception.PortalException,
             com.liferay.portal.kernel.exception.SystemException {
-        getService().deleteWxsHarvester(wxsharvesterid);
+        return getService().deleteWxsHarvester(wxsharvesterid);
     }
 
     /**
     * Deletes the wxs harvester from the database. Also notifies the appropriate model listeners.
     *
-    * @param wxsHarvester the wxs harvester to delete
+    * @param wxsHarvester the wxs harvester
+    * @return the wxs harvester that was removed
     * @throws SystemException if a system exception occurred
     */
-    public static void deleteWxsHarvester(
+    public static nl.wur.alterra.cgi.ace.model.WxsHarvester deleteWxsHarvester(
         nl.wur.alterra.cgi.ace.model.WxsHarvester wxsHarvester)
         throws com.liferay.portal.kernel.exception.SystemException {
-        getService().deleteWxsHarvester(wxsHarvester);
+        return getService().deleteWxsHarvester(wxsHarvester);
+    }
+
+    public static com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery() {
+        return getService().dynamicQuery();
     }
 
     /**
     * Performs a dynamic query on the database and returns the matching rows.
     *
-    * @param dynamicQuery the dynamic query to search with
+    * @param dynamicQuery the dynamic query
     * @return the matching rows
     * @throws SystemException if a system exception occurred
     */
@@ -90,12 +101,12 @@ public class WxsHarvesterLocalServiceUtil {
     * Performs a dynamic query on the database and returns a range of the matching rows.
     *
     * <p>
-    * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+    * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link nl.wur.alterra.cgi.ace.model.impl.WxsHarvesterModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
     * </p>
     *
-    * @param dynamicQuery the dynamic query to search with
-    * @param start the lower bound of the range of model instances to return
-    * @param end the upper bound of the range of model instances to return (not inclusive)
+    * @param dynamicQuery the dynamic query
+    * @param start the lower bound of the range of model instances
+    * @param end the upper bound of the range of model instances (not inclusive)
     * @return the range of matching rows
     * @throws SystemException if a system exception occurred
     */
@@ -110,13 +121,13 @@ public class WxsHarvesterLocalServiceUtil {
     * Performs a dynamic query on the database and returns an ordered range of the matching rows.
     *
     * <p>
-    * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+    * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link nl.wur.alterra.cgi.ace.model.impl.WxsHarvesterModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
     * </p>
     *
-    * @param dynamicQuery the dynamic query to search with
-    * @param start the lower bound of the range of model instances to return
-    * @param end the upper bound of the range of model instances to return (not inclusive)
-    * @param orderByComparator the comparator to order the results by
+    * @param dynamicQuery the dynamic query
+    * @param start the lower bound of the range of model instances
+    * @param end the upper bound of the range of model instances (not inclusive)
+    * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
     * @return the ordered range of matching rows
     * @throws SystemException if a system exception occurred
     */
@@ -131,9 +142,9 @@ public class WxsHarvesterLocalServiceUtil {
     }
 
     /**
-    * Counts the number of rows that match the dynamic query.
+    * Returns the number of rows that match the dynamic query.
     *
-    * @param dynamicQuery the dynamic query to search with
+    * @param dynamicQuery the dynamic query
     * @return the number of rows that match the dynamic query
     * @throws SystemException if a system exception occurred
     */
@@ -144,9 +155,30 @@ public class WxsHarvesterLocalServiceUtil {
     }
 
     /**
-    * Gets the wxs harvester with the primary key.
+    * Returns the number of rows that match the dynamic query.
     *
-    * @param wxsharvesterid the primary key of the wxs harvester to get
+    * @param dynamicQuery the dynamic query
+    * @param projection the projection to apply to the query
+    * @return the number of rows that match the dynamic query
+    * @throws SystemException if a system exception occurred
+    */
+    public static long dynamicQueryCount(
+        com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery,
+        com.liferay.portal.kernel.dao.orm.Projection projection)
+        throws com.liferay.portal.kernel.exception.SystemException {
+        return getService().dynamicQueryCount(dynamicQuery, projection);
+    }
+
+    public static nl.wur.alterra.cgi.ace.model.WxsHarvester fetchWxsHarvester(
+        long wxsharvesterid)
+        throws com.liferay.portal.kernel.exception.SystemException {
+        return getService().fetchWxsHarvester(wxsharvesterid);
+    }
+
+    /**
+    * Returns the wxs harvester with the primary key.
+    *
+    * @param wxsharvesterid the primary key of the wxs harvester
     * @return the wxs harvester
     * @throws PortalException if a wxs harvester with the primary key could not be found
     * @throws SystemException if a system exception occurred
@@ -158,15 +190,22 @@ public class WxsHarvesterLocalServiceUtil {
         return getService().getWxsHarvester(wxsharvesterid);
     }
 
+    public static com.liferay.portal.model.PersistedModel getPersistedModel(
+        java.io.Serializable primaryKeyObj)
+        throws com.liferay.portal.kernel.exception.PortalException,
+            com.liferay.portal.kernel.exception.SystemException {
+        return getService().getPersistedModel(primaryKeyObj);
+    }
+
     /**
-    * Gets a range of all the wxs harvesters.
+    * Returns a range of all the wxs harvesters.
     *
     * <p>
-    * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+    * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link nl.wur.alterra.cgi.ace.model.impl.WxsHarvesterModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
     * </p>
     *
-    * @param start the lower bound of the range of wxs harvesters to return
-    * @param end the upper bound of the range of wxs harvesters to return (not inclusive)
+    * @param start the lower bound of the range of wxs harvesters
+    * @param end the upper bound of the range of wxs harvesters (not inclusive)
     * @return the range of wxs harvesters
     * @throws SystemException if a system exception occurred
     */
@@ -177,7 +216,7 @@ public class WxsHarvesterLocalServiceUtil {
     }
 
     /**
-    * Gets the number of wxs harvesters.
+    * Returns the number of wxs harvesters.
     *
     * @return the number of wxs harvesters
     * @throws SystemException if a system exception occurred
@@ -188,9 +227,9 @@ public class WxsHarvesterLocalServiceUtil {
     }
 
     /**
-    * Updates the wxs harvester in the database. Also notifies the appropriate model listeners.
+    * Updates the wxs harvester in the database or adds it if it does not yet exist. Also notifies the appropriate model listeners.
     *
-    * @param wxsHarvester the wxs harvester to update
+    * @param wxsHarvester the wxs harvester
     * @return the wxs harvester that was updated
     * @throws SystemException if a system exception occurred
     */
@@ -201,17 +240,27 @@ public class WxsHarvesterLocalServiceUtil {
     }
 
     /**
-    * Updates the wxs harvester in the database. Also notifies the appropriate model listeners.
+    * Returns the Spring bean ID for this bean.
     *
-    * @param wxsHarvester the wxs harvester to update
-    * @param merge whether to merge the wxs harvester with the current session. See {@link com.liferay.portal.service.persistence.BatchSession#update(com.liferay.portal.kernel.dao.orm.Session, com.liferay.portal.model.BaseModel, boolean)} for an explanation.
-    * @return the wxs harvester that was updated
-    * @throws SystemException if a system exception occurred
+    * @return the Spring bean ID for this bean
     */
-    public static nl.wur.alterra.cgi.ace.model.WxsHarvester updateWxsHarvester(
-        nl.wur.alterra.cgi.ace.model.WxsHarvester wxsHarvester, boolean merge)
-        throws com.liferay.portal.kernel.exception.SystemException {
-        return getService().updateWxsHarvester(wxsHarvester, merge);
+    public static java.lang.String getBeanIdentifier() {
+        return getService().getBeanIdentifier();
+    }
+
+    /**
+    * Sets the Spring bean ID for this bean.
+    *
+    * @param beanIdentifier the Spring bean ID for this bean
+    */
+    public static void setBeanIdentifier(java.lang.String beanIdentifier) {
+        getService().setBeanIdentifier(beanIdentifier);
+    }
+
+    public static java.lang.Object invokeMethod(java.lang.String name,
+        java.lang.String[] parameterTypes, java.lang.Object[] arguments)
+        throws java.lang.Throwable {
+        return getService().invokeMethod(name, parameterTypes, arguments);
     }
 
     /**
@@ -275,23 +324,25 @@ public class WxsHarvesterLocalServiceUtil {
 
     public static WxsHarvesterLocalService getService() {
         if (_service == null) {
-            Object obj = PortletBeanLocatorUtil.locate(ClpSerializer.SERVLET_CONTEXT_NAME,
+            InvokableLocalService invokableLocalService = (InvokableLocalService) PortletBeanLocatorUtil.locate(ClpSerializer.getServletContextName(),
                     WxsHarvesterLocalService.class.getName());
-            ClassLoader portletClassLoader = (ClassLoader) PortletBeanLocatorUtil.locate(ClpSerializer.SERVLET_CONTEXT_NAME,
-                    "portletClassLoader");
 
-            ClassLoaderProxy classLoaderProxy = new ClassLoaderProxy(obj,
-                    portletClassLoader);
+            if (invokableLocalService instanceof WxsHarvesterLocalService) {
+                _service = (WxsHarvesterLocalService) invokableLocalService;
+            } else {
+                _service = new WxsHarvesterLocalServiceClp(invokableLocalService);
+            }
 
-            _service = new WxsHarvesterLocalServiceClp(classLoaderProxy);
-
-            ClpSerializer.setClassLoader(portletClassLoader);
+            ReferenceRegistry.registerReference(WxsHarvesterLocalServiceUtil.class,
+                "_service");
         }
 
         return _service;
     }
 
+    /**
+     * @deprecated As of 6.2.0
+     */
     public void setService(WxsHarvesterLocalService service) {
-        _service = service;
     }
 }

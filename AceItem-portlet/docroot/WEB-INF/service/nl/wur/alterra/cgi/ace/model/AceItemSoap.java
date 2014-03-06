@@ -47,6 +47,14 @@ public class AceItemSoap implements Serializable {
     private long _replacesId;
     private String _comments;
     private String _textwebpage;
+    private String _year;
+    private String _geochars;
+    private String _feature;
+    private String _supdocs;
+    private String _admincomment;
+    private String _scenario;
+    private String _timeperiod;
+    private Date _lockdate;
 
     public AceItemSoap() {
     }
@@ -88,6 +96,14 @@ public class AceItemSoap implements Serializable {
         soapModel.setReplacesId(model.getReplacesId());
         soapModel.setComments(model.getComments());
         soapModel.setTextwebpage(model.getTextwebpage());
+        soapModel.setYear(model.getYear());
+        soapModel.setGeochars(model.getGeochars());
+        soapModel.setFeature(model.getFeature());
+        soapModel.setSupdocs(model.getSupdocs());
+        soapModel.setAdmincomment(model.getAdmincomment());
+        soapModel.setScenario(model.getScenario());
+        soapModel.setTimeperiod(model.getTimeperiod());
+        soapModel.setLockdate(model.getLockdate());
 
         return soapModel;
     }
@@ -406,5 +422,69 @@ public class AceItemSoap implements Serializable {
 
     public void setTextwebpage(String textwebpage) {
         _textwebpage = textwebpage;
+    }
+
+    public String getYear() {
+        return _year;
+    }
+
+    public void setYear(String year) {
+        _year = year;
+    }
+
+    public String getGeochars() {
+        return _geochars;
+    }
+
+    public void setGeochars(String geochars) {
+        _geochars = geochars;
+    }
+
+    public String getFeature() {
+        return _feature;
+    }
+
+    public void setFeature(String feature) {
+        _feature = feature;
+    }
+
+    public String getSupdocs() {
+        return _supdocs;
+    }
+
+    public void setSupdocs(String supdocs) {
+        _supdocs = supdocs;
+    }
+
+    public String getAdmincomment() {
+        return _admincomment;
+    }
+
+    public void setAdmincomment(String admincomment) {
+        _admincomment = admincomment;
+    }
+
+    public String getScenario() {
+        return _scenario;
+    }
+
+    public void setScenario(String scenario) {
+        _scenario = scenario;
+    }
+
+    public String getTimeperiod() {
+        return _timeperiod;
+    }
+
+    public void setTimeperiod(String timeperiod) {
+        _timeperiod = timeperiod;
+    }
+
+    public Date getLockdate() {
+        return _lockdate;
+    }
+
+    public void setLockdate(Date lockdate) {
+        _lockdate = lockdate;
     }
 }

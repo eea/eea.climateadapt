@@ -21,7 +21,7 @@ import nl.wur.alterra.cgi.ace.model.constants.AceItemType;
 import nl.wur.alterra.cgi.ace.search.lucene.ACEIndexSynchronizer;
 import nl.wur.alterra.cgi.ace.search.lucene.ACEIndexUtil;
 
-import com.liferay.documentlibrary.DuplicateFileException;
+import com.liferay.portlet.documentlibrary.DuplicateFileException;
 import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.upload.UploadPortletRequest;
 import com.liferay.portal.kernel.util.CharPool;
@@ -45,6 +45,8 @@ import com.liferay.portlet.documentlibrary.service.DLFolderLocalServiceUtil;
 import com.liferay.util.bridges.mvc.MVCPortlet;
 import com.liferay.util.mail.MailEngine;
 import com.liferay.util.mail.MailEngineException;
+import com.liferay.portlet.documentlibrary.service.DLAppLocalServiceUtil;
+import com.liferay.portal.kernel.repository.model.FileEntry;
 
 /**
  * Portlets that need to update the Lucene index extend this class.
@@ -505,7 +507,7 @@ public abstract class LuceneIndexUpdatePortletForShareAceItem extends MVCPortlet
 	    	{
 	    		//System.out.println("document folder is null");
 	    		try {
-	    		docFolder = DLFolderLocalServiceUtil.addFolder(themeDisplay.getUserId(), themeDisplay.getScopeGroupId(), rootFolder.getFolderId(), folder, "", serviceContext);
+	    		docFolder = DLFolderLocalServiceUtil.addFolder(themeDisplay.getUserId(), themeDisplay.getScopeGroupId(),themeDisplay.getScopeGroupId(),false, rootFolder.getFolderId(), folder, "", false, serviceContext);
 	    		String primaryKey = String.valueOf(docFolder.getPrimaryKey());
 	    		addPermissions(themeDisplay, primaryKey, "com.liferay.portlet.documentlibrary.model.DLFolder");
 	    		}
@@ -558,7 +560,7 @@ public abstract class LuceneIndexUpdatePortletForShareAceItem extends MVCPortlet
 	    		    	{
 	    		    		
 	    		    		// upload the file 
-	    		    		DLFileEntry doc = insertFile(uploadRequest, counter, docFolder, sup_doc_name, sup_doc_description, themeDisplay, serviceContext);
+	    		    		FileEntry doc = insertFile(uploadRequest, counter, docFolder, sup_doc_name, sup_doc_description, themeDisplay, serviceContext);
 	    		    		//IGImage image = insertImage(uploadRequest, counter, imageFolder, sup_photo_name, sup_photo_description, themeDisplay, serviceContext);
 	    		    		
 	   	    		        if (uploadedFiles.toString().equalsIgnoreCase(""))
@@ -583,7 +585,7 @@ public abstract class LuceneIndexUpdatePortletForShareAceItem extends MVCPortlet
 	    		    	String sup_doc_fileName = uploadRequest.getFileName("supdocfiles" + counter);
 	    		    
 	    		    	//IGImage image = insertImage(uploadRequest, counter, imageFolder, sup_photo_name, sup_photo_description, themeDisplay, serviceContext);
-	    		    	DLFileEntry doc = insertFile(uploadRequest, counter, docFolder, sup_doc_name, sup_doc_description, themeDisplay, serviceContext);
+	    		    	FileEntry doc = insertFile(uploadRequest, counter, docFolder, sup_doc_name, sup_doc_description, themeDisplay, serviceContext);
 
 	    		    	if (doc != null)
 	    		    	{
@@ -618,10 +620,10 @@ public abstract class LuceneIndexUpdatePortletForShareAceItem extends MVCPortlet
     }
     
 
-    private DLFileEntry insertFile(UploadPortletRequest uploadRequest, int counter, DLFolder docFolder, String sup_doc_name, String sup_doc_description, ThemeDisplay themeDisplay, ServiceContext serviceContext) 
+    private FileEntry insertFile(UploadPortletRequest uploadRequest, int counter, DLFolder docFolder, String sup_doc_name, String sup_doc_description, ThemeDisplay themeDisplay, ServiceContext serviceContext) 
                                    throws Exception
     {
-    	DLFileEntry doc = null;
+    	FileEntry doc = null;
     	
     	// upload the image
     			try {
@@ -633,7 +635,7 @@ public abstract class LuceneIndexUpdatePortletForShareAceItem extends MVCPortlet
     				   String extension = fileName.substring(i+1);
     				   //System.out.println("extension is " + extension);
     				   //image = IGImageServiceUtil.addImage(themeDisplay.getScopeGroupId(), imageFolder.getFolderId(), sup_photo_name, sup_photo_description, f, "image/"+extension, serviceContext);
-                       doc = DLFileEntryLocalServiceUtil.addFileEntry(themeDisplay.getUserId(), themeDisplay.getScopeGroupId(), docFolder.getFolderId(), f.getName(), sup_doc_name,
+                       doc = DLAppLocalServiceUtil.addFileEntry(themeDisplay.getUserId(), themeDisplay.getScopeGroupId(), docFolder.getFolderId(), f.getName(), sup_doc_name,
                               sup_doc_description, null, null,  f, serviceContext);
                        String primaryKey = String.valueOf(doc.getPrimaryKey());
    		    		   addPermissions(themeDisplay, primaryKey, "com.liferay.portlet.documentlibrary.model.DLFileEntry");
@@ -650,7 +652,7 @@ public abstract class LuceneIndexUpdatePortletForShareAceItem extends MVCPortlet
     		                	   if (storedDoc.getTitle().equalsIgnoreCase(sup_doc_name))
     		                	   {
     		                		   //System.out.println("match occurred");
-    		                		   doc = storedDoc;
+    		                		   doc = DLAppLocalServiceUtil.getFileEntry( storedDoc.getFileEntryId() );
     		                		   break;
     		                	   }
     		                   }
@@ -848,7 +850,7 @@ public abstract class LuceneIndexUpdatePortletForShareAceItem extends MVCPortlet
     
     private void addPermissions(ThemeDisplay themeDisplay, String primaryKey, String resource ) throws Exception
     {
-    	Role roleUser = RoleLocalServiceUtil.getRole(themeDisplay.getCompanyId(), RoleConstants.COMMUNITY_MEMBER);
+    	Role roleUser = RoleLocalServiceUtil.getRole(themeDisplay.getCompanyId(), RoleConstants.SITE_MEMBER);
 		long roleId = roleUser.getRoleId();
 		
 		String actionIds[] = {"VIEW"};

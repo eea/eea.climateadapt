@@ -1,18 +1,16 @@
 package nl.wur.alterra.cgi.ace.service;
 
 import com.liferay.portal.kernel.bean.PortletBeanLocatorUtil;
-import com.liferay.portal.kernel.util.ClassLoaderProxy;
+import com.liferay.portal.kernel.util.ReferenceRegistry;
+import com.liferay.portal.service.InvokableLocalService;
 
 /**
- * The utility for the ace item local service. This utility wraps {@link nl.wur.alterra.cgi.ace.service.impl.AceItemLocalServiceImpl} and is the primary access point for service operations in application layer code running on the local server.
- *
- * <p>
- * Never modify this class directly. Add custom service methods to {@link nl.wur.alterra.cgi.ace.service.impl.AceItemLocalServiceImpl} and rerun ServiceBuilder to regenerate this class.
- * </p>
- *
- * <p>
- * This is a local service. Methods of this service will not have security checks based on the propagated JAAS credentials because this service can only be accessed from within the same VM.
- * </p>
+ * Provides the local service utility for AceItem. This utility wraps
+ * {@link nl.wur.alterra.cgi.ace.service.impl.AceItemLocalServiceImpl} and is the
+ * primary access point for service operations in application layer code running
+ * on the local server. Methods of this service will not have security checks
+ * based on the propagated JAAS credentials because this service can only be
+ * accessed from within the same VM.
  *
  * @author groot052
  * @see AceItemLocalService
@@ -23,10 +21,16 @@ import com.liferay.portal.kernel.util.ClassLoaderProxy;
 public class AceItemLocalServiceUtil {
     private static AceItemLocalService _service;
 
+    /*
+     * NOTE FOR DEVELOPERS:
+     *
+     * Never modify this class directly. Add custom service methods to {@link nl.wur.alterra.cgi.ace.service.impl.AceItemLocalServiceImpl} and rerun ServiceBuilder to regenerate this class.
+     */
+
     /**
     * Adds the ace item to the database. Also notifies the appropriate model listeners.
     *
-    * @param aceItem the ace item to add
+    * @param aceItem the ace item
     * @return the ace item that was added
     * @throws SystemException if a system exception occurred
     */
@@ -50,32 +54,39 @@ public class AceItemLocalServiceUtil {
     /**
     * Deletes the ace item with the primary key from the database. Also notifies the appropriate model listeners.
     *
-    * @param aceItemId the primary key of the ace item to delete
+    * @param aceItemId the primary key of the ace item
+    * @return the ace item that was removed
     * @throws PortalException if a ace item with the primary key could not be found
     * @throws SystemException if a system exception occurred
     */
-    public static void deleteAceItem(long aceItemId)
+    public static nl.wur.alterra.cgi.ace.model.AceItem deleteAceItem(
+        long aceItemId)
         throws com.liferay.portal.kernel.exception.PortalException,
             com.liferay.portal.kernel.exception.SystemException {
-        getService().deleteAceItem(aceItemId);
+        return getService().deleteAceItem(aceItemId);
     }
 
     /**
     * Deletes the ace item from the database. Also notifies the appropriate model listeners.
     *
-    * @param aceItem the ace item to delete
+    * @param aceItem the ace item
+    * @return the ace item that was removed
     * @throws SystemException if a system exception occurred
     */
-    public static void deleteAceItem(
+    public static nl.wur.alterra.cgi.ace.model.AceItem deleteAceItem(
         nl.wur.alterra.cgi.ace.model.AceItem aceItem)
         throws com.liferay.portal.kernel.exception.SystemException {
-        getService().deleteAceItem(aceItem);
+        return getService().deleteAceItem(aceItem);
+    }
+
+    public static com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery() {
+        return getService().dynamicQuery();
     }
 
     /**
     * Performs a dynamic query on the database and returns the matching rows.
     *
-    * @param dynamicQuery the dynamic query to search with
+    * @param dynamicQuery the dynamic query
     * @return the matching rows
     * @throws SystemException if a system exception occurred
     */
@@ -90,12 +101,12 @@ public class AceItemLocalServiceUtil {
     * Performs a dynamic query on the database and returns a range of the matching rows.
     *
     * <p>
-    * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+    * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link nl.wur.alterra.cgi.ace.model.impl.AceItemModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
     * </p>
     *
-    * @param dynamicQuery the dynamic query to search with
-    * @param start the lower bound of the range of model instances to return
-    * @param end the upper bound of the range of model instances to return (not inclusive)
+    * @param dynamicQuery the dynamic query
+    * @param start the lower bound of the range of model instances
+    * @param end the upper bound of the range of model instances (not inclusive)
     * @return the range of matching rows
     * @throws SystemException if a system exception occurred
     */
@@ -110,13 +121,13 @@ public class AceItemLocalServiceUtil {
     * Performs a dynamic query on the database and returns an ordered range of the matching rows.
     *
     * <p>
-    * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+    * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link nl.wur.alterra.cgi.ace.model.impl.AceItemModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
     * </p>
     *
-    * @param dynamicQuery the dynamic query to search with
-    * @param start the lower bound of the range of model instances to return
-    * @param end the upper bound of the range of model instances to return (not inclusive)
-    * @param orderByComparator the comparator to order the results by
+    * @param dynamicQuery the dynamic query
+    * @param start the lower bound of the range of model instances
+    * @param end the upper bound of the range of model instances (not inclusive)
+    * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
     * @return the ordered range of matching rows
     * @throws SystemException if a system exception occurred
     */
@@ -131,9 +142,9 @@ public class AceItemLocalServiceUtil {
     }
 
     /**
-    * Counts the number of rows that match the dynamic query.
+    * Returns the number of rows that match the dynamic query.
     *
-    * @param dynamicQuery the dynamic query to search with
+    * @param dynamicQuery the dynamic query
     * @return the number of rows that match the dynamic query
     * @throws SystemException if a system exception occurred
     */
@@ -144,9 +155,30 @@ public class AceItemLocalServiceUtil {
     }
 
     /**
-    * Gets the ace item with the primary key.
+    * Returns the number of rows that match the dynamic query.
     *
-    * @param aceItemId the primary key of the ace item to get
+    * @param dynamicQuery the dynamic query
+    * @param projection the projection to apply to the query
+    * @return the number of rows that match the dynamic query
+    * @throws SystemException if a system exception occurred
+    */
+    public static long dynamicQueryCount(
+        com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery,
+        com.liferay.portal.kernel.dao.orm.Projection projection)
+        throws com.liferay.portal.kernel.exception.SystemException {
+        return getService().dynamicQueryCount(dynamicQuery, projection);
+    }
+
+    public static nl.wur.alterra.cgi.ace.model.AceItem fetchAceItem(
+        long aceItemId)
+        throws com.liferay.portal.kernel.exception.SystemException {
+        return getService().fetchAceItem(aceItemId);
+    }
+
+    /**
+    * Returns the ace item with the primary key.
+    *
+    * @param aceItemId the primary key of the ace item
     * @return the ace item
     * @throws PortalException if a ace item with the primary key could not be found
     * @throws SystemException if a system exception occurred
@@ -158,15 +190,22 @@ public class AceItemLocalServiceUtil {
         return getService().getAceItem(aceItemId);
     }
 
+    public static com.liferay.portal.model.PersistedModel getPersistedModel(
+        java.io.Serializable primaryKeyObj)
+        throws com.liferay.portal.kernel.exception.PortalException,
+            com.liferay.portal.kernel.exception.SystemException {
+        return getService().getPersistedModel(primaryKeyObj);
+    }
+
     /**
-    * Gets a range of all the ace items.
+    * Returns a range of all the ace items.
     *
     * <p>
-    * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+    * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link nl.wur.alterra.cgi.ace.model.impl.AceItemModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
     * </p>
     *
-    * @param start the lower bound of the range of ace items to return
-    * @param end the upper bound of the range of ace items to return (not inclusive)
+    * @param start the lower bound of the range of ace items
+    * @param end the upper bound of the range of ace items (not inclusive)
     * @return the range of ace items
     * @throws SystemException if a system exception occurred
     */
@@ -177,7 +216,7 @@ public class AceItemLocalServiceUtil {
     }
 
     /**
-    * Gets the number of ace items.
+    * Returns the number of ace items.
     *
     * @return the number of ace items
     * @throws SystemException if a system exception occurred
@@ -188,9 +227,9 @@ public class AceItemLocalServiceUtil {
     }
 
     /**
-    * Updates the ace item in the database. Also notifies the appropriate model listeners.
+    * Updates the ace item in the database or adds it if it does not yet exist. Also notifies the appropriate model listeners.
     *
-    * @param aceItem the ace item to update
+    * @param aceItem the ace item
     * @return the ace item that was updated
     * @throws SystemException if a system exception occurred
     */
@@ -201,17 +240,27 @@ public class AceItemLocalServiceUtil {
     }
 
     /**
-    * Updates the ace item in the database. Also notifies the appropriate model listeners.
+    * Returns the Spring bean ID for this bean.
     *
-    * @param aceItem the ace item to update
-    * @param merge whether to merge the ace item with the current session. See {@link com.liferay.portal.service.persistence.BatchSession#update(com.liferay.portal.kernel.dao.orm.Session, com.liferay.portal.model.BaseModel, boolean)} for an explanation.
-    * @return the ace item that was updated
-    * @throws SystemException if a system exception occurred
+    * @return the Spring bean ID for this bean
     */
-    public static nl.wur.alterra.cgi.ace.model.AceItem updateAceItem(
-        nl.wur.alterra.cgi.ace.model.AceItem aceItem, boolean merge)
-        throws com.liferay.portal.kernel.exception.SystemException {
-        return getService().updateAceItem(aceItem, merge);
+    public static java.lang.String getBeanIdentifier() {
+        return getService().getBeanIdentifier();
+    }
+
+    /**
+    * Sets the Spring bean ID for this bean.
+    *
+    * @param beanIdentifier the Spring bean ID for this bean
+    */
+    public static void setBeanIdentifier(java.lang.String beanIdentifier) {
+        getService().setBeanIdentifier(beanIdentifier);
+    }
+
+    public static java.lang.Object invokeMethod(java.lang.String name,
+        java.lang.String[] parameterTypes, java.lang.Object[] arguments)
+        throws java.lang.Throwable {
+        return getService().invokeMethod(name, parameterTypes, arguments);
     }
 
     /**
@@ -319,23 +368,25 @@ public class AceItemLocalServiceUtil {
 
     public static AceItemLocalService getService() {
         if (_service == null) {
-            Object obj = PortletBeanLocatorUtil.locate(ClpSerializer.SERVLET_CONTEXT_NAME,
+            InvokableLocalService invokableLocalService = (InvokableLocalService) PortletBeanLocatorUtil.locate(ClpSerializer.getServletContextName(),
                     AceItemLocalService.class.getName());
-            ClassLoader portletClassLoader = (ClassLoader) PortletBeanLocatorUtil.locate(ClpSerializer.SERVLET_CONTEXT_NAME,
-                    "portletClassLoader");
 
-            ClassLoaderProxy classLoaderProxy = new ClassLoaderProxy(obj,
-                    portletClassLoader);
+            if (invokableLocalService instanceof AceItemLocalService) {
+                _service = (AceItemLocalService) invokableLocalService;
+            } else {
+                _service = new AceItemLocalServiceClp(invokableLocalService);
+            }
 
-            _service = new AceItemLocalServiceClp(classLoaderProxy);
-
-            ClpSerializer.setClassLoader(portletClassLoader);
+            ReferenceRegistry.registerReference(AceItemLocalServiceUtil.class,
+                "_service");
         }
 
         return _service;
     }
 
+    /**
+     * @deprecated As of 6.2.0
+     */
     public void setService(AceItemLocalService service) {
-        _service = service;
     }
 }

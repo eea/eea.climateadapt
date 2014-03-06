@@ -55,10 +55,18 @@ public class AceItemCacheModel implements CacheModel<AceItem>, Externalizable {
     public long replacesId;
     public String comments;
     public String textwebpage;
+    public String year;
+    public String geochars;
+    public String feature;
+    public String supdocs;
+    public String admincomment;
+    public String scenario;
+    public String timeperiod;
+    public long lockdate;
 
     @Override
     public String toString() {
-        StringBundler sb = new StringBundler(69);
+        StringBundler sb = new StringBundler(85);
 
         sb.append("{aceItemId=");
         sb.append(aceItemId);
@@ -128,6 +136,22 @@ public class AceItemCacheModel implements CacheModel<AceItem>, Externalizable {
         sb.append(comments);
         sb.append(", textwebpage=");
         sb.append(textwebpage);
+        sb.append(", year=");
+        sb.append(year);
+        sb.append(", geochars=");
+        sb.append(geochars);
+        sb.append(", feature=");
+        sb.append(feature);
+        sb.append(", supdocs=");
+        sb.append(supdocs);
+        sb.append(", admincomment=");
+        sb.append(admincomment);
+        sb.append(", scenario=");
+        sb.append(scenario);
+        sb.append(", timeperiod=");
+        sb.append(timeperiod);
+        sb.append(", lockdate=");
+        sb.append(lockdate);
         sb.append("}");
 
         return sb.toString();
@@ -300,6 +324,54 @@ public class AceItemCacheModel implements CacheModel<AceItem>, Externalizable {
             aceItemImpl.setTextwebpage(textwebpage);
         }
 
+        if (year == null) {
+            aceItemImpl.setYear(StringPool.BLANK);
+        } else {
+            aceItemImpl.setYear(year);
+        }
+
+        if (geochars == null) {
+            aceItemImpl.setGeochars(StringPool.BLANK);
+        } else {
+            aceItemImpl.setGeochars(geochars);
+        }
+
+        if (feature == null) {
+            aceItemImpl.setFeature(StringPool.BLANK);
+        } else {
+            aceItemImpl.setFeature(feature);
+        }
+
+        if (supdocs == null) {
+            aceItemImpl.setSupdocs(StringPool.BLANK);
+        } else {
+            aceItemImpl.setSupdocs(supdocs);
+        }
+
+        if (admincomment == null) {
+            aceItemImpl.setAdmincomment(StringPool.BLANK);
+        } else {
+            aceItemImpl.setAdmincomment(admincomment);
+        }
+
+        if (scenario == null) {
+            aceItemImpl.setScenario(StringPool.BLANK);
+        } else {
+            aceItemImpl.setScenario(scenario);
+        }
+
+        if (timeperiod == null) {
+            aceItemImpl.setTimeperiod(StringPool.BLANK);
+        } else {
+            aceItemImpl.setTimeperiod(timeperiod);
+        }
+
+        if (lockdate == Long.MIN_VALUE) {
+            aceItemImpl.setLockdate(null);
+        } else {
+            aceItemImpl.setLockdate(new Date(lockdate));
+        }
+
         aceItemImpl.resetOriginalValues();
 
         return aceItemImpl;
@@ -341,6 +413,14 @@ public class AceItemCacheModel implements CacheModel<AceItem>, Externalizable {
         replacesId = objectInput.readLong();
         comments = objectInput.readUTF();
         textwebpage = objectInput.readUTF();
+        year = objectInput.readUTF();
+        geochars = objectInput.readUTF();
+        feature = objectInput.readUTF();
+        supdocs = objectInput.readUTF();
+        admincomment = objectInput.readUTF();
+        scenario = objectInput.readUTF();
+        timeperiod = objectInput.readUTF();
+        lockdate = objectInput.readLong();
     }
 
     @Override
@@ -485,5 +565,49 @@ public class AceItemCacheModel implements CacheModel<AceItem>, Externalizable {
         } else {
             objectOutput.writeUTF(textwebpage);
         }
+
+        if (year == null) {
+            objectOutput.writeUTF(StringPool.BLANK);
+        } else {
+            objectOutput.writeUTF(year);
+        }
+
+        if (geochars == null) {
+            objectOutput.writeUTF(StringPool.BLANK);
+        } else {
+            objectOutput.writeUTF(geochars);
+        }
+
+        if (feature == null) {
+            objectOutput.writeUTF(StringPool.BLANK);
+        } else {
+            objectOutput.writeUTF(feature);
+        }
+
+        if (supdocs == null) {
+            objectOutput.writeUTF(StringPool.BLANK);
+        } else {
+            objectOutput.writeUTF(supdocs);
+        }
+
+        if (admincomment == null) {
+            objectOutput.writeUTF(StringPool.BLANK);
+        } else {
+            objectOutput.writeUTF(admincomment);
+        }
+
+        if (scenario == null) {
+            objectOutput.writeUTF(StringPool.BLANK);
+        } else {
+            objectOutput.writeUTF(scenario);
+        }
+
+        if (timeperiod == null) {
+            objectOutput.writeUTF(StringPool.BLANK);
+        } else {
+            objectOutput.writeUTF(timeperiod);
+        }
+
+        objectOutput.writeLong(lockdate);
     }
 }
