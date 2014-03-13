@@ -10,6 +10,10 @@ import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
 import javax.portlet.PortletRequest;
 
+import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.repository.model.FileEntry;
+import com.liferay.portal.kernel.repository.model.Folder;
+import com.liferay.portlet.documentlibrary.service.DLAppLocalServiceUtil;
 import nl.wur.alterra.cgi.ace.model.AceItem;
 import nl.wur.alterra.cgi.ace.model.Measure;
 import nl.wur.alterra.cgi.ace.model.constants.AceItemClimateImpact;
@@ -24,7 +28,7 @@ import nl.wur.alterra.cgi.ace.search.lucene.ACEIndexSynchronizer;
 import nl.wur.alterra.cgi.ace.search.lucene.ACEIndexUtil;
 import nl.wur.alterra.cgi.ace.service.AceItemLocalServiceUtil;
 
-import com.liferay.documentlibrary.DuplicateFileException;
+//import com.liferay.documentlibrary.DuplicateFileException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.upload.UploadPortletRequest;
@@ -45,12 +49,12 @@ import com.liferay.portlet.documentlibrary.model.DLFileEntry;
 import com.liferay.portlet.documentlibrary.model.DLFolder;
 import com.liferay.portlet.documentlibrary.service.DLFileEntryLocalServiceUtil;
 import com.liferay.portlet.documentlibrary.service.DLFolderLocalServiceUtil;
-import com.liferay.portlet.imagegallery.DuplicateImageNameException;
-import com.liferay.portlet.imagegallery.NoSuchFolderException;
-import com.liferay.portlet.imagegallery.model.IGFolder;
-import com.liferay.portlet.imagegallery.model.IGImage;
-import com.liferay.portlet.imagegallery.service.IGFolderLocalServiceUtil;
-import com.liferay.portlet.imagegallery.service.IGImageServiceUtil;
+//import com.liferay.portlet.imagegallery.DuplicateImageNameException;
+//import com.liferay.portlet.imagegallery.NoSuchFolderException;
+//import com.liferay.portlet.imagegallery.model.IGFolder;
+//import com.liferay.portlet.imagegallery.model.IGImage;
+//import com.liferay.portlet.imagegallery.service.IGFolderLocalServiceUtil;
+//import com.liferay.portlet.imagegallery.service.IGImageServiceUtil;
 import com.liferay.util.bridges.mvc.MVCPortlet;
 import com.liferay.util.mail.MailEngine;
 import com.liferay.util.mail.MailEngineException;
@@ -66,15 +70,15 @@ public abstract class MeasureUpdateHelperForSharedMeasure extends MVCPortlet {
     private String username = "";
     private String useremail = "";
     public static char[] INVALID_CHARACTERS = new char[] {
-		'&', CharPool.APOSTROPHE, '@',
-		'\\', ']', '}',
-		':', ',', '=', '>',
-		'/', '<', '\n',
-		'[', '{', '%',
-		'|', '+', '#', '?',
-		'\"', '\r', ';',
-		'*', '~'
-	};
+            '&', CharPool.APOSTROPHE, '@',
+            '\\', ']', '}',
+            ':', ',', '=', '>',
+            '/', '<', '\n',
+            '[', '{', '%',
+            '|', '+', '#', '?',
+            '\"', '\r', ';',
+            '*', '~'
+    };
 
     /**
      * Convenience method to F I L L a Measure object out of the request. Used
@@ -84,17 +88,17 @@ public abstract class MeasureUpdateHelperForSharedMeasure extends MVCPortlet {
     protected void measureFromRequest(PortletRequest request, Measure measure, UploadPortletRequest req, List errors) throws Exception {
 
         ThemeDisplay themeDisplay = (ThemeDisplay) request.getAttribute(WebKeys.THEME_DISPLAY);
-        
-        
+
+
         UploadPortletRequest uploadRequest;
-        
+
         if (req == null)
         {
-           uploadRequest = PortalUtil.getUploadPortletRequest(request);
+            uploadRequest = PortalUtil.getUploadPortletRequest(request);
         }
         else
         {
-        	uploadRequest = req;
+            uploadRequest = req;
         }
 
         //System.out.println("NAME IS MEASUREFROMREQUEST IS " + uploadRequest.getParameter("name"));
@@ -113,18 +117,18 @@ public abstract class MeasureUpdateHelperForSharedMeasure extends MVCPortlet {
         }
 
         Date d = new Date();
-        
+
         if (uploadRequest.getParameter("checkcreationdate") != null)
         {
             d.setTime(Long.parseLong(uploadRequest.getParameter("checkcreationdate")));
         }
         else
         {
-        	d.setTime(0);
+            d.setTime(0);
         }
         //d.setTime(ParamUtil.getLong(request, "checkcreationdate"));
         measure.setLockdate(d); // hack optimistic locking!!! Check with
-                                    // dbrecord in MeasureValidator
+        // dbrecord in MeasureValidator
 
         measure.setCompanyId(themeDisplay.getCompanyId());
         measure.setGroupId(themeDisplay.getScopeGroupId());
@@ -147,8 +151,8 @@ public abstract class MeasureUpdateHelperForSharedMeasure extends MVCPortlet {
         measure.setChallenges(uploadRequest.getParameter( "challenges"));
         //System.out.println("CHALLENGES IS " + measure.getChallenges());
         measure.setSucceslimitations(uploadRequest.getParameter( "succeslimitations"));
-      
- 
+
+
         String websites = uploadRequest.getParameter( "website");
         // robust multiple website handling. Check for splitters space, ',' and
         // ';'
@@ -156,11 +160,11 @@ public abstract class MeasureUpdateHelperForSharedMeasure extends MVCPortlet {
             websites = websites.replace(",", " ");
             websites = websites.replace(";", " ");
             websites = websites.replace("<p>", "");
-			websites = websites.replace("</p>", "");
-			websites = websites.replaceAll("http://", "");
-			websites = websites.replaceAll("&nbsp;", "");
-			websites = websites.replaceAll("&nbsp", "");
-			websites = websites.replaceAll("[\r\n]", "");
+            websites = websites.replace("</p>", "");
+            websites = websites.replaceAll("http://", "");
+            websites = websites.replaceAll("&nbsp;", "");
+            websites = websites.replaceAll("&nbsp", "");
+            websites = websites.replaceAll("[\r\n]", "");
             String[] site = websites.split(" ");
             if (site.length > 1) {
                 websites = "";
@@ -229,7 +233,7 @@ public abstract class MeasureUpdateHelperForSharedMeasure extends MVCPortlet {
             }
         }
         measure.setSectors_(choosensectors);
-        
+
         measure.setYear(uploadRequest.getParameter("year"));
 
         String choosenelements = "";
@@ -254,7 +258,7 @@ public abstract class MeasureUpdateHelperForSharedMeasure extends MVCPortlet {
             }
         }
         measure.setClimateimpacts_(choosenclimateimpacts);
-        
+
         // case study feature - new 
         String choosenfeature = "";
         for (MeasureCaseStudyFeature feature : MeasureCaseStudyFeature.values()) {
@@ -266,18 +270,18 @@ public abstract class MeasureUpdateHelperForSharedMeasure extends MVCPortlet {
             }
         }
         measure.setCasestudyfeature(choosenfeature);
-        
+
         String choosenoptions = uploadRequest.getParameter("chk_adaptoptions");
         measure.setAdaptationoptions(choosenoptions);
-        
+
         measure.setMao_type(uploadRequest.getParameter( "mao_type"));
-        
+
         String choosengeos = "";
         for (AceItemGeos geo : AceItemGeos.values())
         {
-        	//System.out.println("Geo is " + geo.toString());
-        	//System.out.println("Geo is " + geo.name());
-        	if (uploadRequest.getParameter( "chk_geos_trans") != null) {
+            //System.out.println("Geo is " + geo.toString());
+            //System.out.println("Geo is " + geo.name());
+            if (uploadRequest.getParameter( "chk_geos_trans") != null) {
                 String e = uploadRequest.getParameter( "chk_geos_trans");
                 if (measure.getMao_type().equalsIgnoreCase("A") && e.equalsIgnoreCase(geo.toString())) {
                     choosengeos = geo.toString();
@@ -286,19 +290,19 @@ public abstract class MeasureUpdateHelperForSharedMeasure extends MVCPortlet {
             }
         }
         measure.setGeos_(choosengeos);
-        
-        if (uploadRequest.getParameter( "chk_geos_trans") != null && measure.getMao_type().equalsIgnoreCase("M")) 
+
+        if (uploadRequest.getParameter( "chk_geos_trans") != null && measure.getMao_type().equalsIgnoreCase("M"))
         {
-        	 choosengeos = uploadRequest.getParameter("chk_geos_trans");
-        	 measure.setGeos_(choosengeos);
+            choosengeos = uploadRequest.getParameter("chk_geos_trans");
+            measure.setGeos_(choosengeos);
         }
-      
+
         String choosenGeoChars = uploadRequest.getParameter("rad_geo_chars");
         measure.setGeochars(choosenGeoChars);
-       
-        
+
+
         measure.setSolutions(uploadRequest.getParameter("solutions"));
-        
+
         // adaptation relevance
         String choosenrelevance = "";
         for (AceItemRelevance relevance : AceItemRelevance.values()) {
@@ -310,8 +314,8 @@ public abstract class MeasureUpdateHelperForSharedMeasure extends MVCPortlet {
             }
         }
         measure.setRelevance(choosenrelevance);
-        
-       
+
+
         measure.setSource(uploadRequest.getParameter( "source"));
 
         String importance = uploadRequest.getParameter( "chk_importance");
@@ -331,23 +335,23 @@ public abstract class MeasureUpdateHelperForSharedMeasure extends MVCPortlet {
             measure.setControlstatus((short) -1);
         } else {
             measure.setControlstatus(Short.parseShort(approved));
-            
+
             // set the approved date here
             if (measure.getControlstatus() == 1)
             {
-            	 Date approvalDate = new Date();
-            	 measure.setApprovaldate(approvalDate);
+                Date approvalDate = new Date();
+                measure.setApprovaldate(approvalDate);
             }
         }
-        
-        
+
+
 
         if (uploadRequest.getParameter( "lon") != null) {
             try {
                 measure.setLon(Double.parseDouble(uploadRequest.getParameter( "lon")));
             } catch (NumberFormatException e) {
                 // do nothing
-            	
+
             }
         }
 
@@ -356,669 +360,673 @@ public abstract class MeasureUpdateHelperForSharedMeasure extends MVCPortlet {
                 measure.setLat(Double.parseDouble(uploadRequest.getParameter( "lat")));
             } catch (NumberFormatException e) {
                 // do nothing
-            	
+
             }
         }
-        
+
         if (Validator.isNotNull(uploadRequest.getParameter( "chk_categories"))) {
             measure.setCategory(uploadRequest.getParameter( "chk_categories"));
         }
-      
+
 
         measure.setSatarea(uploadRequest.getParameter( "satarea"));
 
         if (Validator.isNull(measure.getCreationdate()))
         {
-        	// creation date is the time when case study is first saved
-        	measure.setCreationdate(new Date());
+            // creation date is the time when case study is first saved
+            measure.setCreationdate(new Date());
         }
-        
-        
+
+
         if (Validator.isNotNull(uploadRequest.getParameter("comments")))
         {
-        	measure.setComments(uploadRequest.getParameter("comments"));
+            measure.setComments(uploadRequest.getParameter("comments"));
         }
-        
-        //primary photo
-		//UploadPortletRequest uploadRequest = PortalUtil.getUploadPortletRequest(request);
-	    ServiceContext serviceContext = ServiceContextFactory.getInstance(DLFileEntry.class.getName(), request);
-	    String sourceFileName = uploadRequest.getFileName("primePhotoName");
-	    String primePhotoId = uploadRequest.getParameter( "primephoto");
-	    
-	    //System.out.println("sourceFileName is " + sourceFileName);
-	    //System.out.println("sourceFileName is not null" + Validator.isNotNull(sourceFileName));
-	    if (Validator.isNotNull(sourceFileName) && (sourceFileName.endsWith(".png") || sourceFileName.endsWith(".jpg") || sourceFileName.endsWith(".jpeg") || sourceFileName.endsWith(".png") ||
-	    		sourceFileName.endsWith(".gif")))
-	    {
-		    IGImage image;
-		    String extension ;
-		    
-		    int i = sourceFileName.lastIndexOf('.');
-		    extension = sourceFileName.substring(i+1);
-		   
-		    //System.out.println("Inside control");
-		    if (Validator.isNotNull(primePhotoId))
-		    {
-		    	//System.out.println("primePhotoId is " + primePhotoId);
-		    	image = IGImageServiceUtil.getImage(Long.parseLong(primePhotoId)); 
-		    	long folderId = image.getFolderId();
-		    	//System.out.println("image name is " + image.getNameWithExtension());
-		    	if (! image.getNameWithExtension().equalsIgnoreCase(sourceFileName))
-		    	{
-		    		try {
-		    		//looks like image replaced add the image now
-		    		File f = uploadRequest.getFile("primePhotoName");
-		    		image = IGImageServiceUtil.addImage(themeDisplay.getScopeGroupId(), folderId, sourceFileName, "", f, "image/"+extension, serviceContext);
-		    		String primaryKey = String.valueOf(image.getPrimaryKey());
-		    		addPermissions(themeDisplay, primaryKey, "com.liferay.portlet.imagegallery.model.IGImage");
-		    		measure.setPrimephoto(String.valueOf(image.getImageId()));
-		    		request.setAttribute("primePhotoId", String.valueOf(image.getImageId()));
-		    		}
-		    		catch(DuplicateImageNameException e)
-			    	{
-	                       //get the image id
-			    		   //System.out.println("Duplicate image - getting image id");
-			    		   image = IGImageServiceUtil.getImageByFolderIdAndNameWithExtension(themeDisplay.getScopeGroupId(), folderId, sourceFileName);
-			    		   measure.setPrimephoto(String.valueOf(image.getImageId()));
-			    	}
-		    		catch(Exception e)
-		    		{
-		    			e.printStackTrace();
-		    			throw e;
-		    		}
-		    	}
-		        
-		    }
-		    else
-		    {
-		    	IGFolder imageFolder = null;
-		    	try {
-		    	IGFolder rootFolder = IGFolderLocalServiceUtil.getFolder(themeDisplay.getScopeGroupId(), 0, "casestudy");
-		    	File f = uploadRequest.getFile("primePhotoName");
-		    	
-		    	// create case name folder
-		    	String folder = "case".concat("-").concat(String.valueOf(measure.getName().trim().replace(' ', '-')));
-		    	folder = escapeName(folder);
-		    	//System.out.println("folder name is " + folder);
-		    
-		    	
-		    	try {
-		    	imageFolder = IGFolderLocalServiceUtil.getFolder(themeDisplay.getScopeGroupId(), rootFolder.getFolderId(), folder);
-		    	}
-		    	catch(NoSuchFolderException e)
-		    	{
-		    		//System.out.println("image folder is null");
-		    		imageFolder = IGFolderLocalServiceUtil.addFolder(themeDisplay.getUserId(), rootFolder.getFolderId(), folder, "", serviceContext);
-		    		String primaryKey = String.valueOf(imageFolder.getPrimaryKey());
-		    		addPermissions(themeDisplay, primaryKey, "com.liferay.portlet.imagegallery.model.IGFolder");
-		    	}
-		    	
-	    		image = IGImageServiceUtil.addImage(themeDisplay.getScopeGroupId(), imageFolder.getFolderId(), sourceFileName, "", f, "image/"+extension, serviceContext);
-	    		String primaryKey = String.valueOf(image.getPrimaryKey());
-	    		addPermissions(themeDisplay, primaryKey, "com.liferay.portlet.imagegallery.model.IGImage");
-	    		measure.setPrimephoto(String.valueOf(image.getImageId()));
-	    		//request.setAttribute("primePhotoId", String.valueOf(image.getImageId()));
-		    	}
-		    	catch(DuplicateImageNameException e)
-		    	{
-                       //get the image id
-		    		   //System.out.println("Duplicate image - getting image id");
-		    		   image = IGImageServiceUtil.getImageByFolderIdAndNameWithExtension(themeDisplay.getScopeGroupId(), imageFolder.getFolderId(), sourceFileName);
-		    		   measure.setPrimephoto(String.valueOf(image.getImageId()));
-		    	}
-		    	catch(Exception e)
-		    	{
-		    		e.printStackTrace();
-		    		throw e;
-		    	}
-		    }
-		    //System.out.println("image added image name is " + image.getNameWithExtension());
-	    }
-	    else
-	    {
-	    	measure.setPrimephoto(primePhotoId);
-	    }
-	    
-	    //System.out.println("passing primary photo");
-	    
-	    
-	    // get how many photos are uploaded
-	    
-	    int photoCounter =  0;
-	    if (Validator.isNotNull(uploadRequest.getParameter("photocounter")))
-	    {
-	    	photoCounter = Integer.parseInt(uploadRequest.getParameter("photocounter"));
-	    }
-	    		
-	    boolean isPhotosValid = true;
-	    
-	    //System.out.println("photo counter is " + photoCounter);
-	    
-	    String supphotosStored = null;
-	    String[] supPhotoIdsStored = null;
-	    List<String> supPhotoListStored = null;
-	    
-	    if (photoCounter > 0)
-	    {
-		    if (Validator.isNotNull(uploadRequest.getParameter("supphotos")))
-	    	{
-		    	//System.out.println("supphotos is " + uploadRequest.getParameter("supphotos"));
-	    		// split it
-	    		supphotosStored = uploadRequest.getParameter("supphotos");
-	    		supPhotoIdsStored = supphotosStored.split(";");
-	    		supPhotoListStored = new LinkedList<String>();
-	    		
-	    		//populate the list with already loaded image names
-	    		for (String photoId : supPhotoIdsStored)
-	    		{
-	    			IGImage image = IGImageServiceUtil.getImage(Long.parseLong(photoId));
-	    			String name = image.getName();
-	    			supPhotoListStored.add(name.toLowerCase());
-	    		}
-	    	}
-	    }
-	   
-	    //validate
-	    for(int counter=1; counter <= photoCounter; counter++)
-	    {
-	    	String sup_photo_name = uploadRequest.getParameter("sup_photos_names" + counter);
-	    	String sup_photo_description = uploadRequest.getParameter("sup_photos_description" + counter);
-	    	String sup_photo_fileName = uploadRequest.getFileName("supphotofiles" + counter);
-	    	
-	    	// if (Validator.isNull(sup_photo_name) || Validator.isNull(sup_photo_description) || Validator.isNull(sup_photo_fileName))
-	    	if (Validator.isNull(sup_photo_name) || Validator.isNull(sup_photo_fileName))	
-	    	{
-	    		
-	    		// before we declare invalid check it is just the document file missing and it was alreay uploaded
-	    		if (Validator.isNotNull(sup_photo_fileName))
-	    		{
-	    			//System.out.println("photo field missing");
-	    		    isPhotosValid = false;
-	    		    // add error message
-	    		    errors.add("invalid-multiple-photo-upload");
-	    		    SessionErrors.add(request, "invalid-multiple-photo-upload");
-	    		    break;
-	    		}
-	    		else
-	    		{
-	    			if (Validator.isNotNull(uploadRequest.getParameter("supphotos")))
-	    			{
-	    				// if (Validator.isNotNull(sup_photo_name) && Validator.isNotNull(sup_photo_description) && Validator.isNull(sup_photo_fileName) && supPhotoListStored.contains(sup_photo_name.toLowerCase()))
-	    				if (Validator.isNotNull(sup_photo_name) && Validator.isNull(sup_photo_fileName) && supPhotoListStored.contains(sup_photo_name.toLowerCase()))	
-		    			{
-	    				
-	    					//System.out.println("photo is already there so just skip");
-	    					continue;
-	    				}
-	    			}
-	    			else
-	    			{
-	    				isPhotosValid = false;
-	    				
-	    				// if (counter > 1 || Validator.isNotNull(sup_photo_name) || Validator.isNotNull(sup_photo_description))
-	    				if (counter > 1 || Validator.isNotNull(sup_photo_name))
-	    				{
-	    				    // add error message
-	    	    		    errors.add("invalid-multiple-photo-upload");
-	    	    		    SessionErrors.add(request, "invalid-multiple-photo-upload");
-	    				}
-	    				break;
-	    			}
-	    		}
-	    	}
-	    	
-	    	// check if the file name is jpg,jpeg,png,gif
-	    	if (isPhotosValid && !(sup_photo_fileName.endsWith(".jpg") || sup_photo_fileName.endsWith(".jpeg") || sup_photo_fileName.endsWith(".png") ||
-	    			sup_photo_fileName.endsWith(".gif")))
-	    	{
-	    		isPhotosValid = false;	
-	    		 // add error message
-    		    errors.add("invalid-multiple-photo-upload");
-    		    SessionErrors.add(request, "invalid-multiple-photo-upload");
-	    		break;
-	    	}
-	    }
-	    
-	    if (isPhotosValid && photoCounter > 0)
-	    {
-	    	// now we have two options. if supphotos is not null then populate it in a data structure
-	    	// iterate through the input fields and check the names already uploaded using supphotos
-	    	// if names already uploaded then skip the image upload
-	    	
-	    	// get the root folder and form the folder for inserting images
-	    	IGFolder rootFolder = IGFolderLocalServiceUtil.getFolder(themeDisplay.getScopeGroupId(), 0, "casestudy");
-	    	
-	    	// create case name folder
-	    	String folder = null;
-	    	if (Validator.isNull(measure.getName()))
-	    	{
-	    		folder = "case".concat("-").concat("temp");
-	    	}
-	    	else
-	    	{
-	    	   folder = "case".concat("-").concat(String.valueOf(measure.getName().trim().replace(' ', '-')));
-	    	}
-	    	
-	    	folder = escapeName(folder);
-	    	
-	    	//System.out.println("folder name is " + folder);
-	    	
-	    	// try to see the folder exists otherwise add the folder to the root folder
-	    	IGFolder imageFolder = null;
-	    	
-	    	try {
-	    	imageFolder = IGFolderLocalServiceUtil.getFolder(themeDisplay.getScopeGroupId(), rootFolder.getFolderId(), folder);
-	    	}
-	    	catch(NoSuchFolderException e)
-	    	{
-	    		//System.out.println("image folder is null");
-	    		imageFolder = IGFolderLocalServiceUtil.addFolder(themeDisplay.getUserId(), rootFolder.getFolderId(), folder, "", serviceContext);
-	    		String primaryKey = String.valueOf(imageFolder.getPrimaryKey());
-	    		addPermissions(themeDisplay, primaryKey, "com.liferay.portlet.imagegallery.model.IGFolder");
-	    	}
-	    	
-	    	// we are ready to do the upload
-	    	StringBuffer uploadedFiles = new StringBuffer("");
-	    	
-	    	if (Validator.isNotNull(uploadRequest.getParameter("supphotos")))
-	    	{
-	    		
-	    		// iterate through each image and do the upload if the image already not uploaded
-	    		for(int counter=1; counter <= photoCounter; counter++)
-	    		{
-	    		    	String sup_photo_name = uploadRequest.getParameter("sup_photos_names" + counter);
-	    		    	String sup_photo_description = uploadRequest.getParameter("sup_photos_description" + counter);
-	    		    	String sup_photo_fileName = uploadRequest.getFileName("supphotofiles" + counter);
-	    		    	
-	    		    	//check if the file has been already uploaded in the previous save
-	    		    	
-	    		    	//System.out.println("supPhotoList stored is " + supPhotoListStored);
-	    		    	//System.out.println("sup_photo_name is " + sup_photo_name.toLowerCase());
-	    		    	if (supPhotoListStored.contains(sup_photo_name.toLowerCase()))
-	    		    	{
-	    		    		// get the index of the photo from the list
-	    		    		int index = supPhotoListStored.indexOf(sup_photo_name.toLowerCase());
-	    		    		
-	    		    		//System.out.println("index is " + index);
-	    		    		if (uploadedFiles.toString().equalsIgnoreCase(""))
-	    		    		{
-	    		    			uploadedFiles.append(supPhotoIdsStored[index]);
-	    		    		}
-	    		    		else
-	    		    		{
-	    		    			uploadedFiles.append(";").append(supPhotoIdsStored[index]);
-	    		    		}
-	    		    	}
-	    		    	else
-	    		    	{
-	    		    		// upload the image
-	    		    		IGImage image = insertImage(uploadRequest, counter, imageFolder, sup_photo_name, sup_photo_description, themeDisplay, serviceContext);
-	    		    		
-	   	    		        if (uploadedFiles.toString().equalsIgnoreCase(""))
-	   	    		        {
-	   	    		    	     uploadedFiles.append(image.getImageId());
-	   	    		    	}
-	   	    		        else
-	   	    		        {
-	   	    		    	     uploadedFiles.append(";").append(image.getImageId());
-	   	    		        }
-	    		    		  
-	    		       }
-	    		   }
-	    	}
-	    	else
-	    	{
-	    		// first time we are uploading
-	    		for(int counter=1; counter <= photoCounter; counter++)
-	    		{
-	    		    	String sup_photo_name = uploadRequest.getParameter("sup_photos_names" + counter);
-	    		    	String sup_photo_description = uploadRequest.getParameter("sup_photos_description" + counter);
-	    		    	String sup_photo_fileName = uploadRequest.getFileName("supphotofiles" + counter);
-	    		    
-	    		    	IGImage image = insertImage(uploadRequest, counter, imageFolder, sup_photo_name, sup_photo_description, themeDisplay, serviceContext);
 
-	    		    	if (image != null)
-	    		    	{
-		 	    		    if (uploadedFiles.toString().equalsIgnoreCase(""))
-		 	    		    {
-		 	    			   uploadedFiles.append(image.getImageId());
-		 	    		    }
-		 	    		    else
-		 	    		    {
-		 	    			   uploadedFiles.append(";").append(image.getImageId());
-		 	    		    }
-	    		    	}
-	    		    
-	    		}
-	    	}
-	    	//System.out.println("uploaded files is " + uploadedFiles.toString());
-	    	measure.setSupphotos(uploadedFiles.toString());
-	    }
-	    else
-	    {
-	    	// preserve the old values
-	    	if (photoCounter > 0)
-	    	{
-	    	   measure.setSupphotos(uploadRequest.getParameter("supphotos"));
-	    	}
-	    	else
-	    	{
-	    		measure.setSupphotos("");
-	    	}
-	    }
-	    
-	    
+        //primary photo
+        //UploadPortletRequest uploadRequest = PortalUtil.getUploadPortletRequest(request);
+        ServiceContext serviceContext = ServiceContextFactory.getInstance(DLFileEntry.class.getName(), request);
+        String sourceFileName = uploadRequest.getFileName("primePhotoName");
+        String primePhotoId = uploadRequest.getParameter( "primephoto");
+
+        //System.out.println("sourceFileName is " + sourceFileName);
+        //System.out.println("sourceFileName is not null" + Validator.isNotNull(sourceFileName));
+        if (Validator.isNotNull(sourceFileName) && (sourceFileName.endsWith(".png") || sourceFileName.endsWith(".jpg") || sourceFileName.endsWith(".jpeg") || sourceFileName.endsWith(".png") ||
+                sourceFileName.endsWith(".gif")))
+        {
+            FileEntry image;
+            String extension ;
+
+            int i = sourceFileName.lastIndexOf('.');
+            extension = sourceFileName.substring(i+1);
+
+            //System.out.println("Inside control");
+            if (Validator.isNotNull(primePhotoId))
+            {
+                //System.out.println("primePhotoId is " + primePhotoId);
+                image = DLAppLocalServiceUtil.getFileEntry( Long.parseLong( primePhotoId ) );
+                long folderId = image.getFolderId();
+                //System.out.println("image name is " + image.getNameWithExtension());
+                if (! image.getTitle().equalsIgnoreCase(sourceFileName))
+                {
+                    try {
+                        //looks like image replaced add the image now
+                        File f = uploadRequest.getFile("primePhotoName");
+                        DLAppLocalServiceUtil.addFileEntry( themeDisplay.getUserId(), image.getRepositoryId(), folderId, sourceFileName, "image/"+extension, null, "", "", f, serviceContext );
+
+                        String primaryKey = String.valueOf(image.getPrimaryKey());
+                        addPermissions(themeDisplay, primaryKey, "com.liferay.portal.kernel.repository.model.FileEntry");
+                        measure.setPrimephoto(String.valueOf(image.getFileEntryId()));
+                        request.setAttribute("primePhotoId", String.valueOf(image.getFileEntryId()));
+                    }
+//                    catch(DuplicateImageNameException e)
+//                    {
+//                        //get the image id
+//                        //System.out.println("Duplicate image - getting image id");
+//                        image = IGImageServiceUtil.getImageByFolderIdAndNameWithExtension(themeDisplay.getScopeGroupId(), folderId, sourceFileName);
+//                        measure.setPrimephoto(String.valueOf(image.getImageId()));
+//                    }
+                    catch(Exception e)
+                    {
+                        e.printStackTrace();
+                        throw e;
+                    }
+                }
+
+            }
+            else
+            {
+                Folder imageFolder = null;
+                try {
+                    Folder rootFolder = DLAppLocalServiceUtil.getFolder(themeDisplay.getScopeGroupId(), 0, "casestudy");
+                    File f = uploadRequest.getFile("primePhotoName");
+
+                    // create case name folder
+                    String folder = "case".concat("-").concat(String.valueOf(measure.getName().trim().replace(' ', '-')));
+                    folder = escapeName(folder);
+                    //System.out.println("folder name is " + folder);
+
+
+                    try {
+                        imageFolder = DLAppLocalServiceUtil.getFolder(themeDisplay.getScopeGroupId(), rootFolder.getFolderId(), folder);
+                    }
+                    catch(PortalException e)
+                    {
+                        //System.out.println("image folder is null");
+                        imageFolder = DLAppLocalServiceUtil.addFolder(themeDisplay.getUserId(),themeDisplay.getScopeGroupId(), rootFolder.getFolderId(), folder, "", serviceContext);
+                        String primaryKey = String.valueOf(imageFolder.getPrimaryKey());
+                        addPermissions(themeDisplay, primaryKey, "com.liferay.portal.kernel.repository.model.Folder");
+                    }
+
+                    image = DLAppLocalServiceUtil.addFileEntry( themeDisplay.getUserId(), themeDisplay.getScopeGroupId(), imageFolder.getFolderId(), sourceFileName, "image/"+extension, null, "", "", f, serviceContext );
+                    String primaryKey = String.valueOf(image.getPrimaryKey());
+                    addPermissions(themeDisplay, primaryKey, "com.liferay.portal.kernel.repository.model.FileEntry");
+                    measure.setPrimephoto(String.valueOf(image.getFileEntryId()));
+                    //request.setAttribute("primePhotoId", String.valueOf(image.getImageId()));
+                }
+//                catch(DuplicateImageNameException e)
+//                {
+//                    //get the image id
+//                    //System.out.println("Duplicate image - getting image id");
+//                    image = IGImageServiceUtil.getImageByFolderIdAndNameWithExtension(themeDisplay.getScopeGroupId(), imageFolder.getFolderId(), sourceFileName);
+//                    measure.setPrimephoto(String.valueOf(image.getImageId()));
+//                }
+                catch(Exception e)
+                {
+                    e.printStackTrace();
+                    throw e;
+                }
+            }
+            //System.out.println("image added image name is " + image.getNameWithExtension());
+        }
+        else
+        {
+            measure.setPrimephoto(primePhotoId);
+        }
+
+        //System.out.println("passing primary photo");
+
+
+        // get how many photos are uploaded
+
+        int photoCounter =  0;
+        if (Validator.isNotNull(uploadRequest.getParameter("photocounter")))
+        {
+            photoCounter = Integer.parseInt(uploadRequest.getParameter("photocounter"));
+        }
+
+        boolean isPhotosValid = true;
+
+        //System.out.println("photo counter is " + photoCounter);
+
+        String supphotosStored = null;
+        String[] supPhotoIdsStored = null;
+        List<String> supPhotoListStored = null;
+
+        if (photoCounter > 0)
+        {
+            if (Validator.isNotNull(uploadRequest.getParameter("supphotos")))
+            {
+                //System.out.println("supphotos is " + uploadRequest.getParameter("supphotos"));
+                // split it
+                supphotosStored = uploadRequest.getParameter("supphotos");
+                supPhotoIdsStored = supphotosStored.split(";");
+                supPhotoListStored = new LinkedList<String>();
+
+                //populate the list with already loaded image names
+                for (String photoId : supPhotoIdsStored)
+                {
+                    FileEntry image = DLAppLocalServiceUtil.getFileEntry( Long.parseLong( photoId ) );
+                    String name = image.getTitle();
+                    supPhotoListStored.add(name.toLowerCase());
+                }
+            }
+        }
+
+        //validate
+        for(int counter=1; counter <= photoCounter; counter++)
+        {
+            String sup_photo_name = uploadRequest.getParameter("sup_photos_names" + counter);
+            String sup_photo_description = uploadRequest.getParameter("sup_photos_description" + counter);
+            String sup_photo_fileName = uploadRequest.getFileName("supphotofiles" + counter);
+
+            // if (Validator.isNull(sup_photo_name) || Validator.isNull(sup_photo_description) || Validator.isNull(sup_photo_fileName))
+            if (Validator.isNull(sup_photo_name) || Validator.isNull(sup_photo_fileName))
+            {
+
+                // before we declare invalid check it is just the document file missing and it was alreay uploaded
+                if (Validator.isNotNull(sup_photo_fileName))
+                {
+                    //System.out.println("photo field missing");
+                    isPhotosValid = false;
+                    // add error message
+                    errors.add("invalid-multiple-photo-upload");
+                    SessionErrors.add(request, "invalid-multiple-photo-upload");
+                    break;
+                }
+                else
+                {
+                    if (Validator.isNotNull(uploadRequest.getParameter("supphotos")))
+                    {
+                        // if (Validator.isNotNull(sup_photo_name) && Validator.isNotNull(sup_photo_description) && Validator.isNull(sup_photo_fileName) && supPhotoListStored.contains(sup_photo_name.toLowerCase()))
+                        if (Validator.isNotNull(sup_photo_name) && Validator.isNull(sup_photo_fileName) && supPhotoListStored.contains(sup_photo_name.toLowerCase()))
+                        {
+
+                            //System.out.println("photo is already there so just skip");
+                            continue;
+                        }
+                    }
+                    else
+                    {
+                        isPhotosValid = false;
+
+                        // if (counter > 1 || Validator.isNotNull(sup_photo_name) || Validator.isNotNull(sup_photo_description))
+                        if (counter > 1 || Validator.isNotNull(sup_photo_name))
+                        {
+                            // add error message
+                            errors.add("invalid-multiple-photo-upload");
+                            SessionErrors.add(request, "invalid-multiple-photo-upload");
+                        }
+                        break;
+                    }
+                }
+            }
+
+            // check if the file name is jpg,jpeg,png,gif
+            if (isPhotosValid && !(sup_photo_fileName.endsWith(".jpg") || sup_photo_fileName.endsWith(".jpeg") || sup_photo_fileName.endsWith(".png") ||
+                    sup_photo_fileName.endsWith(".gif")))
+            {
+                isPhotosValid = false;
+                // add error message
+                errors.add("invalid-multiple-photo-upload");
+                SessionErrors.add(request, "invalid-multiple-photo-upload");
+                break;
+            }
+        }
+
+        if (isPhotosValid && photoCounter > 0)
+        {
+            // now we have two options. if supphotos is not null then populate it in a data structure
+            // iterate through the input fields and check the names already uploaded using supphotos
+            // if names already uploaded then skip the image upload
+
+            // get the root folder and form the folder for inserting images
+            Folder rootFolder = DLAppLocalServiceUtil.getFolder(themeDisplay.getScopeGroupId(), 0, "casestudy");
+
+            // create case name folder
+            String folder = null;
+            if (Validator.isNull(measure.getName()))
+            {
+                folder = "case".concat("-").concat("temp");
+            }
+            else
+            {
+                folder = "case".concat("-").concat(String.valueOf(measure.getName().trim().replace(' ', '-')));
+            }
+
+            folder = escapeName(folder);
+
+            //System.out.println("folder name is " + folder);
+
+            // try to see the folder exists otherwise add the folder to the root folder
+            Folder imageFolder = null;
+
+            try {
+                imageFolder = DLAppLocalServiceUtil.getFolder(themeDisplay.getScopeGroupId(), rootFolder.getFolderId(), folder);
+            }
+            catch(PortalException e)
+            {
+                //System.out.println("image folder is null");
+                imageFolder = DLAppLocalServiceUtil.addFolder(themeDisplay.getUserId(), themeDisplay.getScopeGroupId(), rootFolder.getFolderId(), folder, "", serviceContext);
+                String primaryKey = String.valueOf(imageFolder.getPrimaryKey());
+                addPermissions(themeDisplay, primaryKey, "com.liferay.portal.kernel.repository.model.FileEntry");
+            }
+
+            // we are ready to do the upload
+            StringBuffer uploadedFiles = new StringBuffer("");
+
+            if (Validator.isNotNull(uploadRequest.getParameter("supphotos")))
+            {
+
+                // iterate through each image and do the upload if the image already not uploaded
+                for(int counter=1; counter <= photoCounter; counter++)
+                {
+                    String sup_photo_name = uploadRequest.getParameter("sup_photos_names" + counter);
+                    String sup_photo_description = uploadRequest.getParameter("sup_photos_description" + counter);
+                    String sup_photo_fileName = uploadRequest.getFileName("supphotofiles" + counter);
+
+                    //check if the file has been already uploaded in the previous save
+
+                    //System.out.println("supPhotoList stored is " + supPhotoListStored);
+                    //System.out.println("sup_photo_name is " + sup_photo_name.toLowerCase());
+                    if (supPhotoListStored.contains(sup_photo_name.toLowerCase()))
+                    {
+                        // get the index of the photo from the list
+                        int index = supPhotoListStored.indexOf(sup_photo_name.toLowerCase());
+
+                        //System.out.println("index is " + index);
+                        if (uploadedFiles.toString().equalsIgnoreCase(""))
+                        {
+                            uploadedFiles.append(supPhotoIdsStored[index]);
+                        }
+                        else
+                        {
+                            uploadedFiles.append(";").append(supPhotoIdsStored[index]);
+                        }
+                    }
+                    else
+                    {
+                        // upload the image
+                        FileEntry image = insertImage(uploadRequest, counter, imageFolder, sup_photo_name, sup_photo_description, themeDisplay, serviceContext);
+
+
+                        if (uploadedFiles.toString().equalsIgnoreCase(""))
+                        {
+                            uploadedFiles.append(image.getFileEntryId());
+                        }
+                        else
+                        {
+                            uploadedFiles.append(";").append(image.getFileEntryId());
+                        }
+
+                    }
+                }
+            }
+            else
+            {
+                // first time we are uploading
+                for(int counter=1; counter <= photoCounter; counter++)
+                {
+                    String sup_photo_name = uploadRequest.getParameter("sup_photos_names" + counter);
+                    String sup_photo_description = uploadRequest.getParameter("sup_photos_description" + counter);
+                    String sup_photo_fileName = uploadRequest.getFileName("supphotofiles" + counter);
+
+                    FileEntry image = insertImage(uploadRequest, counter, imageFolder, sup_photo_name, sup_photo_description, themeDisplay, serviceContext);
+
+                    if (image != null)
+                    {
+                        if (uploadedFiles.toString().equalsIgnoreCase(""))
+                        {
+                            uploadedFiles.append(image.getFileEntryId());
+                        }
+                        else
+                        {
+                            uploadedFiles.append(";").append(image.getFileEntryId());
+                        }
+                    }
+
+                }
+            }
+            //System.out.println("uploaded files is " + uploadedFiles.toString());
+            measure.setSupphotos(uploadedFiles.toString());
+        }
+        else
+        {
+            // preserve the old values
+            if (photoCounter > 0)
+            {
+                measure.setSupphotos(uploadRequest.getParameter("supphotos"));
+            }
+            else
+            {
+                measure.setSupphotos("");
+            }
+        }
+
+
 	    /* MULTIPLE DOC UPLOAD STARTS
 	     * 
 	     */
-	    
-        // get how many documents are uploaded
-	    
-	    int docCounter =  0;
-	    if (Validator.isNotNull(uploadRequest.getParameter("doccounter")))
-	    {
-	    	docCounter = Integer.parseInt(uploadRequest.getParameter("doccounter"));
-	    }
-	    		
-	    boolean isDocsValid = true;
-	    
-	    //System.out.println("doc counter is " + docCounter);
-	    
-	    String supdocsStored = null;
-	    String[] supDocIdsStored = null;
-	    List<String> supDocListStored = null;
-	    
-	    if (docCounter > 0)
-	    {
-		    if (Validator.isNotNull(uploadRequest.getParameter("supdocs")))
-	    	{
-		    	//System.out.println("supdocs is " + uploadRequest.getParameter("supdocs"));
-	    		// split it
-	    		supdocsStored = uploadRequest.getParameter("supdocs");
-	    		supDocIdsStored = supdocsStored.split(";");
-	    		supDocListStored = new LinkedList<String>();
-	    		
-	    		//populate the list with already loaded document names
-	    		for (String docId : supDocIdsStored)
-	    		{
-	    			DLFileEntry file = DLFileEntryLocalServiceUtil.getDLFileEntry(Long.parseLong(docId));
-					String supFileName = file.getTitle();
-					supDocListStored.add(supFileName.toLowerCase());
-	    		}
-	    	}
-	    }
-	   
-	    //validate
-	    for(int counter=1; counter <= docCounter; counter++)
-	    {
-	    	String sup_doc_name = uploadRequest.getParameter("sup_docs_names" + counter);
-	    	String sup_doc_description = uploadRequest.getParameter("sup_docs_description" + counter);
-	    	String sup_doc_fileName = uploadRequest.getFileName("supdocfiles" + counter);
-	    	
-	    	//System.out.println("name is " + sup_doc_name);
-	    	//System.out.println("description is " + sup_doc_description);
-	    	//System.out.println("filename is " + sup_doc_fileName);
-	    	
-	    	
-	    	if (Validator.isNull(sup_doc_name) || Validator.isNull(sup_doc_description) || Validator.isNull(sup_doc_fileName))
-	    	{
-	    		
-	    		// before we declare invalid check it is just the document file missing and it was alreay uploaded
-	    		if (Validator.isNotNull(sup_doc_fileName))
-	    		{
-	    			//System.out.println("document field missing");
-	    		    isDocsValid = false;
-	    		    // add error message
-	    		    errors.add("invalid-multiple-doc-upload");
-	    		    SessionErrors.add(request, "invalid-multiple-doc-upload");
-	    		    break;
-	    		}
-	    		else
-	    		{
-	    			if (Validator.isNotNull(uploadRequest.getParameter("supdocs")))
-	    			{
-	    				if (Validator.isNotNull(sup_doc_name) && Validator.isNotNull(sup_doc_description) && Validator.isNull(sup_doc_fileName) && supDocListStored.contains(sup_doc_name.toLowerCase()))
-		    			{
-	    				
-	    					//System.out.println("document is already there so just skip");
-	    					continue;
-	    				}
-	    			}
-	    			else
-	    			{
-	    				isDocsValid = false;
-	    				
-	    				if (counter > 1 || Validator.isNotNull(sup_doc_name) || Validator.isNotNull(sup_doc_description))
-	    				{
-	    				    // add error message
-	    	    		    errors.add("invalid-multiple-doc-upload");
-	    	    		    SessionErrors.add(request, "invalid-multiple-doc-upload");
-	    				}
-	    				break;
-	    			}
-	    		}
-	    	}
-	    	
-	    	// check if the file name is pdf,doc,docx,xls
-	    	if ( isDocsValid && !(sup_doc_fileName.endsWith(".pdf") || sup_doc_fileName.endsWith(".doc") || sup_doc_fileName.endsWith(".docx") ||
-	    			sup_doc_fileName.endsWith(".xls")))
-	    	{
-	    		isDocsValid = false;	
-	    		errors.add("invalid-multiple-doc-upload");
-	    		 SessionErrors.add(request, "invalid-multiple-doc-upload");
-	    		break;
-	    	}
-	    }
-	    
-	    if (isDocsValid && docCounter > 0)
-	    {
-	    	// now we have two options. if docphotos is not null then populate it in a data structure
-	    	// iterate through the input fields and check the names already uploaded using docphotos
-	    	// if names already uploaded then skip the document upload
-	    	
-	    	// get the root folder and form the folder for inserting documents
-	    	DLFolder rootFolder = null;
-	    	try {
-	    	      rootFolder = DLFolderLocalServiceUtil.getFolder(themeDisplay.getScopeGroupId(), 0, "casestudy");
-	    	}
-	    	catch(Exception e)
-	    	{
-	    		e.printStackTrace();
-	    		throw e;
-	    	}
-	    	    	
-	    	// create case name folder
-	    	String folder = null;
-	    	if (Validator.isNull(measure.getName()))
-	    	{
-	    		folder = "case".concat("-").concat("temp");
-	    	}
-	    	else
-	    	{
-	    	   folder = "case".concat("-").concat(String.valueOf(measure.getName().trim().replace(' ', '-')));
-	    	}
-	    	folder = escapeName(folder);
-	    	
-	    	//System.out.println("folder name is " + folder);
-	    	
-	    	// try to see the folder exists otherwise add the folder to the root folder
-	    	DLFolder docFolder = null;
-	    	
-	    	try {
-	    	    docFolder = DLFolderLocalServiceUtil.getFolder(themeDisplay.getScopeGroupId(), rootFolder.getFolderId(), folder);
-	    	}
-	    	catch(com.liferay.portlet.documentlibrary.NoSuchFolderException e)
-	    	{
-	    		//System.out.println("document folder is null");
-	    		try {
-	    		docFolder = DLFolderLocalServiceUtil.addFolder(themeDisplay.getUserId(), themeDisplay.getScopeGroupId(), rootFolder.getFolderId(), folder, "", serviceContext);
-	    		String primaryKey = String.valueOf(docFolder.getPrimaryKey());
-	    		addPermissions(themeDisplay, primaryKey, "com.liferay.portlet.documentlibrary.model.DLFolder");
-	    		}
-	    		catch(Exception ex)
-	    		{
-	    			throw ex;
-	    		}
-	    		
-	    	}
-	    	catch(Exception e)
-	    	{
-	    		e.printStackTrace();
-	    		throw e;
-	    	}
-	    	
-	    	// we are ready to do the upload
-	    	StringBuffer uploadedFiles = new StringBuffer("");
-	    	
-	    	if (Validator.isNotNull(uploadRequest.getParameter("supdocs")))
-	    	{
-	    		
-	    		// iterate through each document and do the upload if the document already not uploaded
-	    		for(int counter=1; counter <= docCounter; counter++)
-	    		{
-	    		    	String sup_doc_name = uploadRequest.getParameter("sup_docs_names" + counter);
-	    		    	String sup_doc_description = uploadRequest.getParameter("sup_docs_description" + counter);
-	    		    	String sup_doc_fileName = uploadRequest.getFileName("supdocfiles" + counter);
-	    		    	
-	    		    	//check if the file has been already uploaded in the previous save
-	    		    	
-	    		    	//System.out.println("supDocList stored is " + supDocListStored);
-	    		    	//System.out.println("sup_doc_name is " + sup_doc_name.toLowerCase());
-	    		    	
-	    		    	if (supDocListStored.contains(sup_doc_name.toLowerCase()))
-	    		    	{
-	    		    		// get the index of the photo from the list
-	    		    		int index = supDocListStored.indexOf(sup_doc_name.toLowerCase());
-	    		    		
-	    		    		//System.out.println("index is " + index);
-	    		    		if (uploadedFiles.toString().equalsIgnoreCase(""))
-	    		    		{
-	    		    			uploadedFiles.append(supDocIdsStored[index]);
-	    		    		}
-	    		    		else
-	    		    		{
-	    		    			uploadedFiles.append(";").append(supDocIdsStored[index]);
-	    		    		}
-	    		    	}
-	    		    	else
-	    		    	{
-	    		    		
-	    		    		// upload the file 
-	    		    		DLFileEntry doc = insertFile(uploadRequest, counter, docFolder, sup_doc_name, sup_doc_description, themeDisplay, serviceContext);
-	    		    		//IGImage image = insertImage(uploadRequest, counter, imageFolder, sup_photo_name, sup_photo_description, themeDisplay, serviceContext);
-	    		    		
-	   	    		        if (uploadedFiles.toString().equalsIgnoreCase(""))
-	   	    		        {
-	   	    		    	     uploadedFiles.append(doc.getFileEntryId());
-	   	    		    	}
-	   	    		        else
-	   	    		        {
-	   	    		    	     uploadedFiles.append(";").append(doc.getFileEntryId());
-	   	    		        }
-	    		    		  
-	    		       }
-	    		   }
-	    	}
-	    	else
-	    	{
-	    		// first time we are uploading
-	    		for(int counter=1; counter <= docCounter; counter++)
-	    		{
-	    		    	String sup_doc_name = uploadRequest.getParameter("sup_docs_names" + counter);
-	    		    	String sup_doc_description = uploadRequest.getParameter("sup_docs_description" + counter);
-	    		    	String sup_doc_fileName = uploadRequest.getFileName("supdocfiles" + counter);
-	    		    
-	    		    	//IGImage image = insertImage(uploadRequest, counter, imageFolder, sup_photo_name, sup_photo_description, themeDisplay, serviceContext);
-	    		    	DLFileEntry doc = insertFile(uploadRequest, counter, docFolder, sup_doc_name, sup_doc_description, themeDisplay, serviceContext);
 
-	    		    	if (doc != null)
-	    		    	{
-		 	    		    if (uploadedFiles.toString().equalsIgnoreCase(""))
-		 	    		    {
-		 	    			   uploadedFiles.append(doc.getFileEntryId());
-		 	    		    }
-		 	    		    else
-		 	    		    {
-		 	    			   uploadedFiles.append(";").append(doc.getFileEntryId());
-		 	    		    }
-	    		    	}
-	    		}
-	    	}
-	    	//System.out.println("uploaded files is " + uploadedFiles.toString());
-	    	measure.setSupdocs(uploadedFiles.toString());
-	    }
-	    else
-	    {
-	    	// preserve the old values
-	    	if (docCounter > 0)
-	    	{
-	    	   measure.setSupdocs(uploadRequest.getParameter("supdocs"));
-	    	}
-	    	else
-	    	{
-	    		measure.setSupdocs("");
-	    	}
-	    }
-	 
+        // get how many documents are uploaded
+
+        int docCounter =  0;
+        if (Validator.isNotNull(uploadRequest.getParameter("doccounter")))
+        {
+            docCounter = Integer.parseInt(uploadRequest.getParameter("doccounter"));
+        }
+
+        boolean isDocsValid = true;
+
+        //System.out.println("doc counter is " + docCounter);
+
+        String supdocsStored = null;
+        String[] supDocIdsStored = null;
+        List<String> supDocListStored = null;
+
+        if (docCounter > 0)
+        {
+            if (Validator.isNotNull(uploadRequest.getParameter("supdocs")))
+            {
+                //System.out.println("supdocs is " + uploadRequest.getParameter("supdocs"));
+                // split it
+                supdocsStored = uploadRequest.getParameter("supdocs");
+                supDocIdsStored = supdocsStored.split(";");
+                supDocListStored = new LinkedList<String>();
+
+                //populate the list with already loaded document names
+                for (String docId : supDocIdsStored)
+                {
+                    DLFileEntry file = DLFileEntryLocalServiceUtil.getDLFileEntry(Long.parseLong(docId));
+                    String supFileName = file.getTitle();
+                    supDocListStored.add(supFileName.toLowerCase());
+                }
+            }
+        }
+
+        //validate
+        for(int counter=1; counter <= docCounter; counter++)
+        {
+            String sup_doc_name = uploadRequest.getParameter("sup_docs_names" + counter);
+            String sup_doc_description = uploadRequest.getParameter("sup_docs_description" + counter);
+            String sup_doc_fileName = uploadRequest.getFileName("supdocfiles" + counter);
+
+            //System.out.println("name is " + sup_doc_name);
+            //System.out.println("description is " + sup_doc_description);
+            //System.out.println("filename is " + sup_doc_fileName);
+
+
+            if (Validator.isNull(sup_doc_name) || Validator.isNull(sup_doc_description) || Validator.isNull(sup_doc_fileName))
+            {
+
+                // before we declare invalid check it is just the document file missing and it was alreay uploaded
+                if (Validator.isNotNull(sup_doc_fileName))
+                {
+                    //System.out.println("document field missing");
+                    isDocsValid = false;
+                    // add error message
+                    errors.add("invalid-multiple-doc-upload");
+                    SessionErrors.add(request, "invalid-multiple-doc-upload");
+                    break;
+                }
+                else
+                {
+                    if (Validator.isNotNull(uploadRequest.getParameter("supdocs")))
+                    {
+                        if (Validator.isNotNull(sup_doc_name) && Validator.isNotNull(sup_doc_description) && Validator.isNull(sup_doc_fileName) && supDocListStored.contains(sup_doc_name.toLowerCase()))
+                        {
+
+                            //System.out.println("document is already there so just skip");
+                            continue;
+                        }
+                    }
+                    else
+                    {
+                        isDocsValid = false;
+
+                        if (counter > 1 || Validator.isNotNull(sup_doc_name) || Validator.isNotNull(sup_doc_description))
+                        {
+                            // add error message
+                            errors.add("invalid-multiple-doc-upload");
+                            SessionErrors.add(request, "invalid-multiple-doc-upload");
+                        }
+                        break;
+                    }
+                }
+            }
+
+            // check if the file name is pdf,doc,docx,xls
+            if ( isDocsValid && !(sup_doc_fileName.endsWith(".pdf") || sup_doc_fileName.endsWith(".doc") || sup_doc_fileName.endsWith(".docx") ||
+                    sup_doc_fileName.endsWith(".xls")))
+            {
+                isDocsValid = false;
+                errors.add("invalid-multiple-doc-upload");
+                SessionErrors.add(request, "invalid-multiple-doc-upload");
+                break;
+            }
+        }
+
+        if (isDocsValid && docCounter > 0)
+        {
+            // now we have two options. if docphotos is not null then populate it in a data structure
+            // iterate through the input fields and check the names already uploaded using docphotos
+            // if names already uploaded then skip the document upload
+
+            // get the root folder and form the folder for inserting documents
+            DLFolder rootFolder = null;
+            try {
+                rootFolder = DLFolderLocalServiceUtil.getFolder(themeDisplay.getScopeGroupId(), 0, "casestudy");
+            }
+            catch(Exception e)
+            {
+                e.printStackTrace();
+                throw e;
+            }
+
+            // create case name folder
+            String folder = null;
+            if (Validator.isNull(measure.getName()))
+            {
+                folder = "case".concat("-").concat("temp");
+            }
+            else
+            {
+                folder = "case".concat("-").concat(String.valueOf(measure.getName().trim().replace(' ', '-')));
+            }
+            folder = escapeName(folder);
+
+            //System.out.println("folder name is " + folder);
+
+            // try to see the folder exists otherwise add the folder to the root folder
+            Folder docFolder = null;
+
+            try {
+                //docFolder = DLFolderLocalServiceUtil.getFolder(themeDisplay.getScopeGroupId(), rootFolder.getFolderId(), folder);
+                docFolder = DLAppLocalServiceUtil.getFolder(themeDisplay.getScopeGroupId(), rootFolder.getFolderId(), folder);
+            }
+            catch(PortalException e)
+            {
+                //System.out.println("document folder is null");
+                try {
+                    docFolder = DLAppLocalServiceUtil.addFolder(themeDisplay.getUserId(), themeDisplay.getScopeGroupId(), rootFolder.getFolderId(), folder, "",  serviceContext);
+                    String primaryKey = String.valueOf(docFolder.getPrimaryKey());
+                    addPermissions(themeDisplay, primaryKey, "com.liferay.portal.kernel.repository.model.Folder");
+                }
+                catch(Exception ex)
+                {
+                    throw ex;
+                }
+
+            }
+            catch(Exception e)
+            {
+                e.printStackTrace();
+                throw e;
+            }
+
+            // we are ready to do the upload
+            StringBuffer uploadedFiles = new StringBuffer("");
+
+            if (Validator.isNotNull(uploadRequest.getParameter("supdocs")))
+            {
+
+                // iterate through each document and do the upload if the document already not uploaded
+                for(int counter=1; counter <= docCounter; counter++)
+                {
+                    String sup_doc_name = uploadRequest.getParameter("sup_docs_names" + counter);
+                    String sup_doc_description = uploadRequest.getParameter("sup_docs_description" + counter);
+                    String sup_doc_fileName = uploadRequest.getFileName("supdocfiles" + counter);
+
+                    //check if the file has been already uploaded in the previous save
+
+                    //System.out.println("supDocList stored is " + supDocListStored);
+                    //System.out.println("sup_doc_name is " + sup_doc_name.toLowerCase());
+
+                    if (supDocListStored.contains(sup_doc_name.toLowerCase()))
+                    {
+                        // get the index of the photo from the list
+                        int index = supDocListStored.indexOf(sup_doc_name.toLowerCase());
+
+                        //System.out.println("index is " + index);
+                        if (uploadedFiles.toString().equalsIgnoreCase(""))
+                        {
+                            uploadedFiles.append(supDocIdsStored[index]);
+                        }
+                        else
+                        {
+                            uploadedFiles.append(";").append(supDocIdsStored[index]);
+                        }
+                    }
+                    else
+                    {
+
+                        // upload the file
+                        FileEntry doc = insertFile(uploadRequest, counter, docFolder, sup_doc_name, sup_doc_description, themeDisplay, serviceContext);
+                        //IGImage image = insertImage(uploadRequest, counter, imageFolder, sup_photo_name, sup_photo_description, themeDisplay, serviceContext);
+
+                        if (uploadedFiles.toString().equalsIgnoreCase(""))
+                        {
+                            uploadedFiles.append(doc.getFileEntryId());
+                        }
+                        else
+                        {
+                            uploadedFiles.append(";").append(doc.getFileEntryId());
+                        }
+
+                    }
+                }
+            }
+            else
+            {
+                // first time we are uploading
+                for(int counter=1; counter <= docCounter; counter++)
+                {
+                    String sup_doc_name = uploadRequest.getParameter("sup_docs_names" + counter);
+                    String sup_doc_description = uploadRequest.getParameter("sup_docs_description" + counter);
+                    String sup_doc_fileName = uploadRequest.getFileName("supdocfiles" + counter);
+
+                    //IGImage image = insertImage(uploadRequest, counter, imageFolder, sup_photo_name, sup_photo_description, themeDisplay, serviceContext);
+                    FileEntry doc = insertFile(uploadRequest, counter, docFolder, sup_doc_name, sup_doc_description, themeDisplay, serviceContext);
+
+                    if (doc != null)
+                    {
+                        if (uploadedFiles.toString().equalsIgnoreCase(""))
+                        {
+                            uploadedFiles.append(doc.getFileEntryId());
+                        }
+                        else
+                        {
+                            uploadedFiles.append(";").append(doc.getFileEntryId());
+                        }
+                    }
+                }
+            }
+            //System.out.println("uploaded files is " + uploadedFiles.toString());
+            measure.setSupdocs(uploadedFiles.toString());
+        }
+        else
+        {
+            // preserve the old values
+            if (docCounter > 0)
+            {
+                measure.setSupdocs(uploadRequest.getParameter("supdocs"));
+            }
+            else
+            {
+                measure.setSupdocs("");
+            }
+        }
+
     }
-    
-    
-    private DLFileEntry insertFile(UploadPortletRequest uploadRequest, int counter, DLFolder docFolder, String sup_doc_name, String sup_doc_description, ThemeDisplay themeDisplay, ServiceContext serviceContext) 
-                                   throws Exception
+
+
+    private FileEntry insertFile(UploadPortletRequest uploadRequest, int counter, Folder docFolder, String sup_doc_name, String sup_doc_description, ThemeDisplay themeDisplay, ServiceContext serviceContext)
+            throws Exception
     {
-    	DLFileEntry doc = null;
-    	
-    	// upload the image
-    			try {
-    				   File f = uploadRequest.getFile("supdocfiles" + counter);
-    				   //System.out.println("inside method insertFile");
-    				   String fileName = uploadRequest.getFileName("supdocfiles" + counter);
-    				   //System.out.println("fileName is " + fileName);
-    				   int i = fileName.lastIndexOf('.');
-    				   String extension = fileName.substring(i+1);
-    				   //System.out.println("extension is " + extension);
-    				   //image = IGImageServiceUtil.addImage(themeDisplay.getScopeGroupId(), imageFolder.getFolderId(), sup_photo_name, sup_photo_description, f, "image/"+extension, serviceContext);
-                       doc = DLFileEntryLocalServiceUtil.addFileEntry(themeDisplay.getUserId(), themeDisplay.getScopeGroupId(), docFolder.getFolderId(), f.getName(), sup_doc_name,
-                              sup_doc_description, null, null,  f, serviceContext);
-                       String primaryKey = String.valueOf(doc.getPrimaryKey());
-   		    		   addPermissions(themeDisplay, primaryKey, "com.liferay.portlet.documentlibrary.model.DLFileEntry");
-    			    }
-    		    	catch(DuplicateFileException e)
-    		    	{
-    	                   //get the image id
-    		    		   //System.out.println("Duplicate file - getting file id");
-    		    		   try {
-    		    			   
-    		                   List<DLFileEntry> docs = DLFileEntryLocalServiceUtil.getFileEntries(themeDisplay.getScopeGroupId(), docFolder.getFolderId());
-    		                   for (DLFileEntry storedDoc : docs)
-    		                   {
-    		                	   if (storedDoc.getTitle().equalsIgnoreCase(sup_doc_name))
-    		                	   {
-    		                		   //System.out.println("match occurred");
-    		                		   doc = storedDoc;
-    		                		   break;
-    		                	   }
-    		                   }
-    		    		       //image = IGImageServiceUtil.getImageByFolderIdAndNameWithExtension(themeDisplay.getScopeGroupId(), imageFolder.getFolderId(), fileName);
-    		    		       //System.out.println("stored doc name is " + doc.getTitle());
-    		    		   }
-    		    		   catch(Exception ex)
-    		    		   {
-    		    			   throw ex;
-    		    		   }
-    		    	}
-    			    catch(Exception e)
-    			    {
-    			    	e.printStackTrace();
-    			    	throw e;
-    			    }
-    			
-    			return doc;
-    			
-    			
-      }
-    
-    
+        FileEntry doc = null;
+
+        // upload the image
+        try {
+            File f = uploadRequest.getFile("supdocfiles" + counter);
+            //System.out.println("inside method insertFile");
+            String fileName = uploadRequest.getFileName("supdocfiles" + counter);
+            //System.out.println("fileName is " + fileName);
+            int i = fileName.lastIndexOf('.');
+            String extension = fileName.substring(i+1);
+            //System.out.println("extension is " + extension);
+            //image = IGImageServiceUtil.addImage(themeDisplay.getScopeGroupId(), imageFolder.getFolderId(), sup_photo_name, sup_photo_description, f, "image/"+extension, serviceContext);
+
+            doc = DLAppLocalServiceUtil.addFileEntry( themeDisplay.getUserId(), themeDisplay.getScopeGroupId(), docFolder.getFolderId(), fileName,
+                    "image/"+extension, sup_doc_name, sup_doc_description, "changeLog", f, serviceContext );
+            String primaryKey = String.valueOf(doc.getPrimaryKey());
+            addPermissions(themeDisplay, primaryKey, "com.liferay.portal.kernel.repository.model.FileEntry");
+        }
+//        catch(DuplicateFileException e)
+//        {
+//            //get the image id
+//            //System.out.println("Duplicate file - getting file id");
+//            try {
+//
+//                List<DLFileEntry> docs = DLFileEntryLocalServiceUtil.getFileEntries(themeDisplay.getScopeGroupId(), docFolder.getFolderId());
+//                for (DLFileEntry storedDoc : docs)
+//                {
+//                    if (storedDoc.getTitle().equalsIgnoreCase(sup_doc_name))
+//                    {
+//                        //System.out.println("match occurred");
+//                        doc = storedDoc;
+//                        break;
+//                    }
+//                }
+//                //image = IGImageServiceUtil.getImageByFolderIdAndNameWithExtension(themeDisplay.getScopeGroupId(), imageFolder.getFolderId(), fileName);
+//                //System.out.println("stored doc name is " + doc.getTitle());
+//            }
+//            catch(Exception ex)
+//            {
+//                throw ex;
+//            }
+//        }
+        catch(Exception e)
+        {
+            e.printStackTrace();
+            throw e;
+        }
+
+        return doc;
+
+
+    }
+
+
     /**
      * Helper method to insert multiple images
      * @param uploadRequest - UploadPortalRequest object
@@ -1030,56 +1038,59 @@ public abstract class MeasureUpdateHelperForSharedMeasure extends MVCPortlet {
      * @return
      * @throws Exception
      */
-    private IGImage insertImage(UploadPortletRequest uploadRequest, int counter, IGFolder imageFolder, String sup_photo_name, String sup_photo_description, ThemeDisplay themeDisplay, ServiceContext serviceContext)
-                             throws Exception
+    private FileEntry insertImage(UploadPortletRequest uploadRequest, int counter, Folder imageFolder, String sup_photo_name, String sup_photo_description, ThemeDisplay themeDisplay, ServiceContext serviceContext)
+            throws Exception
     {
-    	IGImage image = null;
-		// upload the image
-		try {
-			   File f = uploadRequest.getFile("supphotofiles" + counter);
-			   //System.out.println("inside method insertImage");
-			   String fileName = uploadRequest.getFileName("supphotofiles" + counter);
-			   //System.out.println("fileName is " + fileName);
-			   int i = fileName.lastIndexOf('.');
-			   String extension = fileName.substring(i+1);
-			   //System.out.println("extension is " + extension);
-			   image = IGImageServiceUtil.addImage(themeDisplay.getScopeGroupId(), imageFolder.getFolderId(), sup_photo_name, sup_photo_description, f, "image/"+extension, serviceContext);
-			   String primaryKey = String.valueOf(image.getPrimaryKey());
-			   addPermissions(themeDisplay, primaryKey, "com.liferay.portlet.imagegallery.model.IGImage");
-		    }
-	    	catch(DuplicateImageNameException e)
-	    	{
-                   //get the image id
-	    		   //System.out.println("Duplicate image - getting image id");
-	    		   try {
-	    			   
-	                   List<IGImage> images = IGImageServiceUtil.getImages(themeDisplay.getScopeGroupId(), imageFolder.getFolderId());
-	                   for (IGImage storedImage : images)
-	                   {
-	                	   if (storedImage.getName().equalsIgnoreCase(sup_photo_name))
-	                	   {
-	                		   //System.out.println("match occurred");
-	                		   image = storedImage;
-	                		   break;
-	                	   }
-	                   }
-	    		       //image = IGImageServiceUtil.getImageByFolderIdAndNameWithExtension(themeDisplay.getScopeGroupId(), imageFolder.getFolderId(), fileName);
-	    		       //System.out.println("image name is " + image.getName());
-	    		   }
-	    		   catch(Exception ex)
-	    		   {
-	    			   throw ex;
-	    		   }
-	    	}
-		    catch(Exception e)
-		    {
-		    	e.printStackTrace();
-		    	throw e;
-		    }
-		
-		return image;
+        FileEntry image = null;
+        // upload the image
+        try {
+            File f = uploadRequest.getFile("supphotofiles" + counter);
+            //System.out.println("inside method insertImage");
+            String fileName = uploadRequest.getFileName("supphotofiles" + counter);
+            //System.out.println("fileName is " + fileName);
+            int i = fileName.lastIndexOf('.');
+            String extension = fileName.substring(i+1);
+            //System.out.println("extension is " + extension);
+            image = DLAppLocalServiceUtil.addFileEntry( themeDisplay.getUserId(), themeDisplay.getScopeGroupId(), imageFolder.getFolderId(), fileName,
+                    "image/"+extension, sup_photo_name, sup_photo_description, "changeLog", f, serviceContext );
+
+
+            String primaryKey = String.valueOf(image.getPrimaryKey());
+            addPermissions(themeDisplay, primaryKey, "com.liferay.portal.kernel.repository.model.FileEntry");
+        }
+//        catch(DuplicateImageNameException e)
+//        {
+//            //get the image id
+//            //System.out.println("Duplicate image - getting image id");
+//            try {
+//
+//                List<IGImage> images = IGImageServiceUtil.getImages(themeDisplay.getScopeGroupId(), imageFolder.getFolderId());
+//                for (IGImage storedImage : images)
+//                {
+//                    if (storedImage.getName().equalsIgnoreCase(sup_photo_name))
+//                    {
+//                        //System.out.println("match occurred");
+//                        image = storedImage;
+//                        break;
+//                    }
+//                }
+//                //image = IGImageServiceUtil.getImageByFolderIdAndNameWithExtension(themeDisplay.getScopeGroupId(), imageFolder.getFolderId(), fileName);
+//                //System.out.println("image name is " + image.getName());
+//            }
+//            catch(Exception ex)
+//            {
+//                throw ex;
+//            }
+//        }
+        catch(Exception e)
+        {
+            e.printStackTrace();
+            throw e;
+        }
+
+        return image;
     }
-    
+
 
     private String coalesce(String aString) {
         String result = "";
@@ -1099,7 +1110,7 @@ public abstract class MeasureUpdateHelperForSharedMeasure extends MVCPortlet {
     protected void updateAceItem(Measure measure, AceItem aceitem) throws Exception {
 
         aceitem.setName(measure.getName());
-        
+
         aceitem.setFeature(measure.getCasestudyfeature());
 
         aceitem.setDescription(measure.getDescription());
@@ -1151,7 +1162,7 @@ public abstract class MeasureUpdateHelperForSharedMeasure extends MVCPortlet {
         if (measure.getApprovaldate() != null) {
             aceitem.setApprovaldate(measure.getApprovaldate());
         }
-        
+
         if (measure.getYear() != null) {
             aceitem.setYear(measure.getYear());
         }
@@ -1319,54 +1330,54 @@ public abstract class MeasureUpdateHelperForSharedMeasure extends MVCPortlet {
             e.printStackTrace();
         }
     }
-    
+
     private void addPermissions(ThemeDisplay themeDisplay, String primaryKey, String resource ) throws Exception
     {
-    	Role roleUser = RoleLocalServiceUtil.getRole(themeDisplay.getCompanyId(), RoleConstants.COMMUNITY_MEMBER);
-		long roleId = roleUser.getRoleId();
-		
-		String actionIds[] = {"VIEW"};
-		
-		// View permissions to the Community Member
-		ResourcePermissionServiceUtil.setIndividualResourcePermissions(
-				themeDisplay.getScopeGroupId(), themeDisplay.getCompanyId(),
-			resource, primaryKey, roleId, actionIds);
-		
-		// View permissions to the Guest
-		roleUser = RoleLocalServiceUtil.getRole(themeDisplay.getCompanyId(), RoleConstants.GUEST);
-		roleId = roleUser.getRoleId();
-		ResourcePermissionServiceUtil.setIndividualResourcePermissions(
-				themeDisplay.getScopeGroupId(), themeDisplay.getCompanyId(),
-			resource, primaryKey, roleId, actionIds);
+        Role roleUser = RoleLocalServiceUtil.getRole(themeDisplay.getCompanyId(), RoleConstants.SITE_MEMBER);
+        long roleId = roleUser.getRoleId();
+
+        String actionIds[] = {"VIEW"};
+
+        // View permissions to the Community Member
+        ResourcePermissionServiceUtil.setIndividualResourcePermissions(
+                themeDisplay.getScopeGroupId(), themeDisplay.getCompanyId(),
+                resource, primaryKey, roleId, actionIds);
+
+        // View permissions to the Guest
+        roleUser = RoleLocalServiceUtil.getRole(themeDisplay.getCompanyId(), RoleConstants.GUEST);
+        roleId = roleUser.getRoleId();
+        ResourcePermissionServiceUtil.setIndividualResourcePermissions(
+                themeDisplay.getScopeGroupId(), themeDisplay.getCompanyId(),
+                resource, primaryKey, roleId, actionIds);
     }
-    
+
     public static String escapeName(String word) {
-		if (word == null) {
-			return null;
-		}
-		else {
-			char[] wordCharArray = word.toCharArray();
+        if (word == null) {
+            return null;
+        }
+        else {
+            char[] wordCharArray = word.toCharArray();
 
-			int i = 0;
-			for (char c : wordCharArray) {
-				for (char invalidChar : INVALID_CHARACTERS) {
-					//System.out.println("char is " + invalidChar);
-					if (c == invalidChar) {
-						wordCharArray[i] = '-';
-					}
-				}
-				i++;
-			}
-			
-			String retString = new String(wordCharArray);
-			
-			if (retString.length() >= 75)
-			{
-			   retString = retString.substring(0, 75);
-			}
-			return new String(wordCharArray);
-		}
+            int i = 0;
+            for (char c : wordCharArray) {
+                for (char invalidChar : INVALID_CHARACTERS) {
+                    //System.out.println("char is " + invalidChar);
+                    if (c == invalidChar) {
+                        wordCharArray[i] = '-';
+                    }
+                }
+                i++;
+            }
 
-	}
+            String retString = new String(wordCharArray);
+
+            if (retString.length() >= 75)
+            {
+                retString = retString.substring(0, 75);
+            }
+            return new String(wordCharArray);
+        }
+
+    }
 
 }

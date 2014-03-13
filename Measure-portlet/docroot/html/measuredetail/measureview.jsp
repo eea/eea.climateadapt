@@ -1,4 +1,3 @@
-<%@page import="com.liferay.portlet.imagegallery.service.IGImageLocalServiceUtil"%>
 <%@include file="/html/init.jsp" %>
 
 <%

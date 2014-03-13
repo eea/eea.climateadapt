@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<!DOCTYPE plugin-package PUBLIC "-//Liferay//DTD Plugin Package 6.2.0//EN" "http://www.liferay.com/dtd/liferay-plugin-package_6_2_0.dtd">
+
+<plugin-package>
+        <name>Ace Baltic Sea Theme</name>
+        <module-id>liferay/ace-baltic-sea-theme/6.2.0/war</module-id>
+        <types>
+                <type>theme</type>
+        </types>
+        <short-description>
+                Ace Baltic Sea Theme.
+        </short-description>
+        <change-log>
+                Adapted to the latest version of Liferay.
+        </change-log>
+        <page-url>http://climate-adapt.eea.europa.eu</page-url>
+        <licenses>
+                <license osi-approved="true">LGPL</license>
+        </licenses>
+        <liferay-versions>
+                <liferay-version>6.2.0+</liferay-version>
+        </liferay-versions>
+</plugin-package>

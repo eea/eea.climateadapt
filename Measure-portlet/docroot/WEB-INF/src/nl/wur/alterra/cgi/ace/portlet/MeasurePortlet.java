@@ -13,7 +13,6 @@ import javax.portlet.PortletPreferences;
 import nl.wur.alterra.cgi.ace.model.AceItem;
 import nl.wur.alterra.cgi.ace.model.Measure;
 import nl.wur.alterra.cgi.ace.model.constants.AceItemType;
-import nl.wur.alterra.cgi.ace.model.impl.AceItemImpl;
 import nl.wur.alterra.cgi.ace.model.impl.MeasureImpl;
 import nl.wur.alterra.cgi.ace.search.lucene.ACEIndexSynchronizer;
 import nl.wur.alterra.cgi.ace.search.lucene.ACEIndexUtil;
@@ -58,7 +57,7 @@ public class MeasurePortlet extends MeasureUpdateHelper {
      *
      */
     private AceItem createAceItemInsideDB (Measure measure) throws Exception {
-    	AceItem aceitem = new AceItemImpl();
+    	AceItem aceitem = AceItemLocalServiceUtil.createAceItem();
         //aceitem.setAceItemId(ParamUtil.getLong(request, "aceItemId"));
         aceitem.setCompanyId(measure.getCompanyId());
         aceitem.setGroupId(measure.getGroupId());

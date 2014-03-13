@@ -27,7 +27,7 @@ import nl.wur.alterra.cgi.ace.model.Project;
  * Never reference this class directly. All methods that expect a project model instance should use the {@link Project} interface instead.
  * </p>
  */
-public class ProjectImpl extends ProjectModelImpl implements Project {
+public class ProjectImpl extends ProjectBaseImpl {
 	public ProjectImpl() {
 	}
 }

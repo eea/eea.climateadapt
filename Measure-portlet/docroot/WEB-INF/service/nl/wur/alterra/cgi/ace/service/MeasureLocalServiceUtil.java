@@ -1,32 +1,16 @@
-/**
- * Copyright (c) 2000-2010 Liferay, Inc. All rights reserved.
- *
- * This library is free software; you can redistribute it and/or modify it under
- * the terms of the GNU Lesser General Public License as published by the Free
- * Software Foundation; either version 2.1 of the License, or (at your option)
- * any later version.
- *
- * This library is distributed in the hope that it will be useful, but WITHOUT
- * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
- * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
- * details.
- */
-
 package nl.wur.alterra.cgi.ace.service;
 
 import com.liferay.portal.kernel.bean.PortletBeanLocatorUtil;
-import com.liferay.portal.kernel.util.ClassLoaderProxy;
+import com.liferay.portal.kernel.util.ReferenceRegistry;
+import com.liferay.portal.service.InvokableLocalService;
 
 /**
- * The utility for the measure local service. This utility wraps {@link nl.wur.alterra.cgi.ace.service.impl.MeasureLocalServiceImpl} and is the primary access point for service operations in application layer code running on the local server.
- *
- * <p>
- * Never modify this class directly. Add custom service methods to {@link nl.wur.alterra.cgi.ace.service.impl.MeasureLocalServiceImpl} and rerun ServiceBuilder to regenerate this class.
- * </p>
- *
- * <p>
- * This is a local service. Methods of this service will not have security checks based on the propagated JAAS credentials because this service can only be accessed from within the same VM.
- * </p>
+ * Provides the local service utility for Measure. This utility wraps
+ * {@link nl.wur.alterra.cgi.ace.service.impl.MeasureLocalServiceImpl} and is the
+ * primary access point for service operations in application layer code running
+ * on the local server. Methods of this service will not have security checks
+ * based on the propagated JAAS credentials because this service can only be
+ * accessed from within the same VM.
  *
  * @author groot052
  * @see MeasureLocalService
@@ -35,314 +19,367 @@ import com.liferay.portal.kernel.util.ClassLoaderProxy;
  * @generated
  */
 public class MeasureLocalServiceUtil {
-	/**
-	* Adds the measure to the database. Also notifies the appropriate model listeners.
-	*
-	* @param measure the measure to add
-	* @return the measure that was added
-	* @throws SystemException if a system exception occurred
-	*/
-	public static nl.wur.alterra.cgi.ace.model.Measure addMeasure(
-		nl.wur.alterra.cgi.ace.model.Measure measure)
-		throws com.liferay.portal.kernel.exception.SystemException {
-		return getService().addMeasure(measure);
-	}
+    private static MeasureLocalService _service;
 
-	/**
-	* Creates a new measure with the primary key. Does not add the measure to the database.
-	*
-	* @param measureId the primary key for the new measure
-	* @return the new measure
-	*/
-	public static nl.wur.alterra.cgi.ace.model.Measure createMeasure(
-		long measureId) {
-		return getService().createMeasure(measureId);
-	}
+    /*
+     * NOTE FOR DEVELOPERS:
+     *
+     * Never modify this class directly. Add custom service methods to {@link nl.wur.alterra.cgi.ace.service.impl.MeasureLocalServiceImpl} and rerun ServiceBuilder to regenerate this class.
+     */
 
-	/**
-	* Deletes the measure with the primary key from the database. Also notifies the appropriate model listeners.
-	*
-	* @param measureId the primary key of the measure to delete
-	* @throws PortalException if a measure with the primary key could not be found
-	* @throws SystemException if a system exception occurred
-	*/
-	public static void deleteMeasure(long measureId)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
-		getService().deleteMeasure(measureId);
-	}
+    /**
+    * Adds the measure to the database. Also notifies the appropriate model listeners.
+    *
+    * @param measure the measure
+    * @return the measure that was added
+    * @throws SystemException if a system exception occurred
+    */
+    public static nl.wur.alterra.cgi.ace.model.Measure addMeasure(
+        nl.wur.alterra.cgi.ace.model.Measure measure)
+        throws com.liferay.portal.kernel.exception.SystemException {
+        return getService().addMeasure(measure);
+    }
 
-	/**
-	* Deletes the measure from the database. Also notifies the appropriate model listeners.
-	*
-	* @param measure the measure to delete
-	* @throws SystemException if a system exception occurred
-	*/
-	public static void deleteMeasure(
-		nl.wur.alterra.cgi.ace.model.Measure measure)
-		throws com.liferay.portal.kernel.exception.SystemException {
-		getService().deleteMeasure(measure);
-	}
+    /**
+    * Creates a new measure with the primary key. Does not add the measure to the database.
+    *
+    * @param measureId the primary key for the new measure
+    * @return the new measure
+    */
+    public static nl.wur.alterra.cgi.ace.model.Measure createMeasure(
+        long measureId) {
+        return getService().createMeasure(measureId);
+    }
 
-	/**
-	* Performs a dynamic query on the database and returns the matching rows.
-	*
-	* @param dynamicQuery the dynamic query to search with
-	* @return the matching rows
-	* @throws SystemException if a system exception occurred
-	*/
-	@SuppressWarnings("rawtypes")
-	public static java.util.List dynamicQuery(
-		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
-		throws com.liferay.portal.kernel.exception.SystemException {
-		return getService().dynamicQuery(dynamicQuery);
-	}
+    /**
+    * Deletes the measure with the primary key from the database. Also notifies the appropriate model listeners.
+    *
+    * @param measureId the primary key of the measure
+    * @return the measure that was removed
+    * @throws PortalException if a measure with the primary key could not be found
+    * @throws SystemException if a system exception occurred
+    */
+    public static nl.wur.alterra.cgi.ace.model.Measure deleteMeasure(
+        long measureId)
+        throws com.liferay.portal.kernel.exception.PortalException,
+            com.liferay.portal.kernel.exception.SystemException {
+        return getService().deleteMeasure(measureId);
+    }
 
-	/**
-	* Performs a dynamic query on the database and returns a range of the matching rows.
-	*
-	* <p>
-	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
-	* </p>
-	*
-	* @param dynamicQuery the dynamic query to search with
-	* @param start the lower bound of the range of model instances to return
-	* @param end the upper bound of the range of model instances to return (not inclusive)
-	* @return the range of matching rows
-	* @throws SystemException if a system exception occurred
-	*/
-	@SuppressWarnings("rawtypes")
-	public static java.util.List dynamicQuery(
-		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
-		int end) throws com.liferay.portal.kernel.exception.SystemException {
-		return getService().dynamicQuery(dynamicQuery, start, end);
-	}
+    /**
+    * Deletes the measure from the database. Also notifies the appropriate model listeners.
+    *
+    * @param measure the measure
+    * @return the measure that was removed
+    * @throws SystemException if a system exception occurred
+    */
+    public static nl.wur.alterra.cgi.ace.model.Measure deleteMeasure(
+        nl.wur.alterra.cgi.ace.model.Measure measure)
+        throws com.liferay.portal.kernel.exception.SystemException {
+        return getService().deleteMeasure(measure);
+    }
 
-	/**
-	* Performs a dynamic query on the database and returns an ordered range of the matching rows.
-	*
-	* <p>
-	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
-	* </p>
-	*
-	* @param dynamicQuery the dynamic query to search with
-	* @param start the lower bound of the range of model instances to return
-	* @param end the upper bound of the range of model instances to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
-	* @return the ordered range of matching rows
-	* @throws SystemException if a system exception occurred
-	*/
-	@SuppressWarnings("rawtypes")
-	public static java.util.List dynamicQuery(
-		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
-		int end,
-		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
-		throws com.liferay.portal.kernel.exception.SystemException {
-		return getService()
-				   .dynamicQuery(dynamicQuery, start, end, orderByComparator);
-	}
+    public static com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery() {
+        return getService().dynamicQuery();
+    }
 
-	/**
-	* Counts the number of rows that match the dynamic query.
-	*
-	* @param dynamicQuery the dynamic query to search with
-	* @return the number of rows that match the dynamic query
-	* @throws SystemException if a system exception occurred
-	*/
-	public static long dynamicQueryCount(
-		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
-		throws com.liferay.portal.kernel.exception.SystemException {
-		return getService().dynamicQueryCount(dynamicQuery);
-	}
+    /**
+    * Performs a dynamic query on the database and returns the matching rows.
+    *
+    * @param dynamicQuery the dynamic query
+    * @return the matching rows
+    * @throws SystemException if a system exception occurred
+    */
+    @SuppressWarnings("rawtypes")
+    public static java.util.List dynamicQuery(
+        com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
+        throws com.liferay.portal.kernel.exception.SystemException {
+        return getService().dynamicQuery(dynamicQuery);
+    }
 
-	/**
-	* Gets the measure with the primary key.
-	*
-	* @param measureId the primary key of the measure to get
-	* @return the measure
-	* @throws PortalException if a measure with the primary key could not be found
-	* @throws SystemException if a system exception occurred
-	*/
-	public static nl.wur.alterra.cgi.ace.model.Measure getMeasure(
-		long measureId)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
-		return getService().getMeasure(measureId);
-	}
+    /**
+    * Performs a dynamic query on the database and returns a range of the matching rows.
+    *
+    * <p>
+    * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link nl.wur.alterra.cgi.ace.model.impl.MeasureModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+    * </p>
+    *
+    * @param dynamicQuery the dynamic query
+    * @param start the lower bound of the range of model instances
+    * @param end the upper bound of the range of model instances (not inclusive)
+    * @return the range of matching rows
+    * @throws SystemException if a system exception occurred
+    */
+    @SuppressWarnings("rawtypes")
+    public static java.util.List dynamicQuery(
+        com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
+        int end) throws com.liferay.portal.kernel.exception.SystemException {
+        return getService().dynamicQuery(dynamicQuery, start, end);
+    }
 
-	/**
-	* Gets a range of all the measures.
-	*
-	* <p>
-	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
-	* </p>
-	*
-	* @param start the lower bound of the range of measures to return
-	* @param end the upper bound of the range of measures to return (not inclusive)
-	* @return the range of measures
-	* @throws SystemException if a system exception occurred
-	*/
-	public static java.util.List<nl.wur.alterra.cgi.ace.model.Measure> getMeasures(
-		int start, int end)
-		throws com.liferay.portal.kernel.exception.SystemException {
-		return getService().getMeasures(start, end);
-	}
+    /**
+    * Performs a dynamic query on the database and returns an ordered range of the matching rows.
+    *
+    * <p>
+    * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link nl.wur.alterra.cgi.ace.model.impl.MeasureModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+    * </p>
+    *
+    * @param dynamicQuery the dynamic query
+    * @param start the lower bound of the range of model instances
+    * @param end the upper bound of the range of model instances (not inclusive)
+    * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+    * @return the ordered range of matching rows
+    * @throws SystemException if a system exception occurred
+    */
+    @SuppressWarnings("rawtypes")
+    public static java.util.List dynamicQuery(
+        com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
+        int end,
+        com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+        throws com.liferay.portal.kernel.exception.SystemException {
+        return getService()
+                   .dynamicQuery(dynamicQuery, start, end, orderByComparator);
+    }
 
-	/**
-	* Gets the number of measures.
-	*
-	* @return the number of measures
-	* @throws SystemException if a system exception occurred
-	*/
-	public static int getMeasuresCount()
-		throws com.liferay.portal.kernel.exception.SystemException {
-		return getService().getMeasuresCount();
-	}
+    /**
+    * Returns the number of rows that match the dynamic query.
+    *
+    * @param dynamicQuery the dynamic query
+    * @return the number of rows that match the dynamic query
+    * @throws SystemException if a system exception occurred
+    */
+    public static long dynamicQueryCount(
+        com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
+        throws com.liferay.portal.kernel.exception.SystemException {
+        return getService().dynamicQueryCount(dynamicQuery);
+    }
 
-	/**
-	* Updates the measure in the database. Also notifies the appropriate model listeners.
-	*
-	* @param measure the measure to update
-	* @return the measure that was updated
-	* @throws SystemException if a system exception occurred
-	*/
-	public static nl.wur.alterra.cgi.ace.model.Measure updateMeasure(
-		nl.wur.alterra.cgi.ace.model.Measure measure)
-		throws com.liferay.portal.kernel.exception.SystemException {
-		return getService().updateMeasure(measure);
-	}
+    /**
+    * Returns the number of rows that match the dynamic query.
+    *
+    * @param dynamicQuery the dynamic query
+    * @param projection the projection to apply to the query
+    * @return the number of rows that match the dynamic query
+    * @throws SystemException if a system exception occurred
+    */
+    public static long dynamicQueryCount(
+        com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery,
+        com.liferay.portal.kernel.dao.orm.Projection projection)
+        throws com.liferay.portal.kernel.exception.SystemException {
+        return getService().dynamicQueryCount(dynamicQuery, projection);
+    }
 
-	/**
-	* Updates the measure in the database. Also notifies the appropriate model listeners.
-	*
-	* @param measure the measure to update
-	* @param merge whether to merge the measure with the current session. See {@link com.liferay.portal.service.persistence.BatchSession#update(com.liferay.portal.kernel.dao.orm.Session, com.liferay.portal.model.BaseModel, boolean)} for an explanation.
-	* @return the measure that was updated
-	* @throws SystemException if a system exception occurred
-	*/
-	public static nl.wur.alterra.cgi.ace.model.Measure updateMeasure(
-		nl.wur.alterra.cgi.ace.model.Measure measure, boolean merge)
-		throws com.liferay.portal.kernel.exception.SystemException {
-		return getService().updateMeasure(measure, merge);
-	}
+    public static nl.wur.alterra.cgi.ace.model.Measure fetchMeasure(
+        long measureId)
+        throws com.liferay.portal.kernel.exception.SystemException {
+        return getService().fetchMeasure(measureId);
+    }
 
-	/**
-	* Hugo de Groot: add these methods by hand to <portlet>LocalServiceImpl
-	* and rerun ServiceBuilder if auto generation fails
-	*
-	* Gets a list with all the Measures in a group
-	*/
-	public static java.util.List<nl.wur.alterra.cgi.ace.model.Measure> getMeasuresByGroupId(
-		long groupId)
-		throws com.liferay.portal.kernel.exception.SystemException {
-		return getService().getMeasuresByGroupId(groupId);
-	}
+    /**
+    * Returns the measure with the primary key.
+    *
+    * @param measureId the primary key of the measure
+    * @return the measure
+    * @throws PortalException if a measure with the primary key could not be found
+    * @throws SystemException if a system exception occurred
+    */
+    public static nl.wur.alterra.cgi.ace.model.Measure getMeasure(
+        long measureId)
+        throws com.liferay.portal.kernel.exception.PortalException,
+            com.liferay.portal.kernel.exception.SystemException {
+        return getService().getMeasure(measureId);
+    }
 
-	/**
-	* Hugo de Groot: add these methods by hand to <portlet>LocalServiceImpl
-	* and rerun ServiceBuilder if auto generation fails
-	*
-	* Gets a list with a range of Measures from a group
-	*/
-	public static java.util.List<nl.wur.alterra.cgi.ace.model.Measure> getMeasuresByGroupId(
-		long groupId, int start, int end)
-		throws com.liferay.portal.kernel.exception.SystemException {
-		return getService().getMeasuresByGroupId(groupId, start, end);
-	}
+    public static com.liferay.portal.model.PersistedModel getPersistedModel(
+        java.io.Serializable primaryKeyObj)
+        throws com.liferay.portal.kernel.exception.PortalException,
+            com.liferay.portal.kernel.exception.SystemException {
+        return getService().getPersistedModel(primaryKeyObj);
+    }
 
-	/**
-	* Hugo de Groot: add these methods by hand to <portlet>LocalServiceImpl
-	* and rerun ServiceBuilder if auto generation fails
-	*
-	* Gets a list with a range of Measures from a group
-	*/
-	public static java.util.List<nl.wur.alterra.cgi.ace.model.Measure> getMeasuresByGroupId(
-		long groupId, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
-		throws com.liferay.portal.kernel.exception.SystemException {
-		return getService()
-				   .getMeasuresByGroupId(groupId, start, end, orderByComparator);
-	}
+    /**
+    * Returns a range of all the measures.
+    *
+    * <p>
+    * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link nl.wur.alterra.cgi.ace.model.impl.MeasureModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+    * </p>
+    *
+    * @param start the lower bound of the range of measures
+    * @param end the upper bound of the range of measures (not inclusive)
+    * @return the range of measures
+    * @throws SystemException if a system exception occurred
+    */
+    public static java.util.List<nl.wur.alterra.cgi.ace.model.Measure> getMeasures(
+        int start, int end)
+        throws com.liferay.portal.kernel.exception.SystemException {
+        return getService().getMeasures(start, end);
+    }
 
-	/**
-	* Hugo de Groot: add these methods by hand to <portlet>LocalServiceImpl
-	* and rerun ServiceBuilder if auto generation fails
-	*
-	* Gets the number of Measures in a group
-	*/
-	public static int getMeasuresCountByGroupId(long groupId)
-		throws com.liferay.portal.kernel.exception.SystemException {
-		return getService().getMeasuresCountByGroupId(groupId);
-	}
+    /**
+    * Returns the number of measures.
+    *
+    * @return the number of measures
+    * @throws SystemException if a system exception occurred
+    */
+    public static int getMeasuresCount()
+        throws com.liferay.portal.kernel.exception.SystemException {
+        return getService().getMeasuresCount();
+    }
 
-	/**
-	* Gets a list with all the Measures by controlstatus
-	*/
-	public static java.util.List<nl.wur.alterra.cgi.ace.model.Measure> getMeasuresByControlstatus(
-		short controlstatus)
-		throws com.liferay.portal.kernel.exception.SystemException {
-		return getService().getMeasuresByControlstatus(controlstatus);
-	}
+    /**
+    * Updates the measure in the database or adds it if it does not yet exist. Also notifies the appropriate model listeners.
+    *
+    * @param measure the measure
+    * @return the measure that was updated
+    * @throws SystemException if a system exception occurred
+    */
+    public static nl.wur.alterra.cgi.ace.model.Measure updateMeasure(
+        nl.wur.alterra.cgi.ace.model.Measure measure)
+        throws com.liferay.portal.kernel.exception.SystemException {
+        return getService().updateMeasure(measure);
+    }
 
-	/**
-	* Gets a list with a range of Measures by controlstatus
-	*/
-	public static java.util.List<nl.wur.alterra.cgi.ace.model.Measure> getMeasuresByGroupId(
-		short controlstatus, int start, int end)
-		throws com.liferay.portal.kernel.exception.SystemException {
-		return getService().getMeasuresByGroupId(controlstatus, start, end);
-	}
+    /**
+    * Returns the Spring bean ID for this bean.
+    *
+    * @return the Spring bean ID for this bean
+    */
+    public static java.lang.String getBeanIdentifier() {
+        return getService().getBeanIdentifier();
+    }
 
-	/**
-	* Gets a list with a range of Measures by controlstatus
-	*/
-	public static java.util.List<nl.wur.alterra.cgi.ace.model.Measure> getMeasuresByControlstatus(
-		short controlstatus, int start, int end)
-		throws com.liferay.portal.kernel.exception.SystemException {
-		return getService().getMeasuresByControlstatus(controlstatus, start, end);
-	}
+    /**
+    * Sets the Spring bean ID for this bean.
+    *
+    * @param beanIdentifier the Spring bean ID for this bean
+    */
+    public static void setBeanIdentifier(java.lang.String beanIdentifier) {
+        getService().setBeanIdentifier(beanIdentifier);
+    }
 
-	/**
-	* Gets the number of Measures by controlstatus
-	*/
-	public static int getMeasuresCountByGroupId(short controlstatus)
-		throws com.liferay.portal.kernel.exception.SystemException {
-		return getService().getMeasuresCountByGroupId(controlstatus);
-	}
+    public static java.lang.Object invokeMethod(java.lang.String name,
+        java.lang.String[] parameterTypes, java.lang.Object[] arguments)
+        throws java.lang.Throwable {
+        return getService().invokeMethod(name, parameterTypes, arguments);
+    }
 
-	/**
-	* Gets the number of Measures by controlstatus
-	*/
-	public static int getMeasuresCountByControlstatus(short controlstatus)
-		throws com.liferay.portal.kernel.exception.SystemException {
-		return getService().getMeasuresCountByControlstatus(controlstatus);
-	}
+    /**
+    * Hugo de Groot: add these methods by hand to <portlet>LocalServiceImpl
+    * and rerun ServiceBuilder if auto generation fails
+    *
+    * Gets a list with all the Measures in a group
+    */
+    public static java.util.List<nl.wur.alterra.cgi.ace.model.Measure> getMeasuresByGroupId(
+        long groupId)
+        throws com.liferay.portal.kernel.exception.SystemException {
+        return getService().getMeasuresByGroupId(groupId);
+    }
 
-	public static void clearService() {
-		_service = null;
-	}
+    /**
+    * Hugo de Groot: add these methods by hand to <portlet>LocalServiceImpl
+    * and rerun ServiceBuilder if auto generation fails
+    *
+    * Gets a list with a range of Measures from a group
+    */
+    public static java.util.List<nl.wur.alterra.cgi.ace.model.Measure> getMeasuresByGroupId(
+        long groupId, int start, int end)
+        throws com.liferay.portal.kernel.exception.SystemException {
+        return getService().getMeasuresByGroupId(groupId, start, end);
+    }
 
-	public static MeasureLocalService getService() {
-		if (_service == null) {
-			Object obj = PortletBeanLocatorUtil.locate(ClpSerializer.SERVLET_CONTEXT_NAME,
-					MeasureLocalService.class.getName());
-			ClassLoader portletClassLoader = (ClassLoader)PortletBeanLocatorUtil.locate(ClpSerializer.SERVLET_CONTEXT_NAME,
-					"portletClassLoader");
+    /**
+    * Hugo de Groot: add these methods by hand to <portlet>LocalServiceImpl
+    * and rerun ServiceBuilder if auto generation fails
+    *
+    * Gets a list with a range of Measures from a group
+    */
+    public static java.util.List<nl.wur.alterra.cgi.ace.model.Measure> getMeasuresByGroupId(
+        long groupId, int start, int end,
+        com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+        throws com.liferay.portal.kernel.exception.SystemException {
+        return getService()
+                   .getMeasuresByGroupId(groupId, start, end, orderByComparator);
+    }
 
-			ClassLoaderProxy classLoaderProxy = new ClassLoaderProxy(obj,
-					portletClassLoader);
+    /**
+    * Hugo de Groot: add these methods by hand to <portlet>LocalServiceImpl
+    * and rerun ServiceBuilder if auto generation fails
+    *
+    * Gets the number of Measures in a group
+    */
+    public static int getMeasuresCountByGroupId(long groupId)
+        throws com.liferay.portal.kernel.exception.SystemException {
+        return getService().getMeasuresCountByGroupId(groupId);
+    }
 
-			_service = new MeasureLocalServiceClp(classLoaderProxy);
+    /**
+    * Gets a list with all the Measures by controlstatus
+    */
+    public static java.util.List<nl.wur.alterra.cgi.ace.model.Measure> getMeasuresByControlstatus(
+        short controlstatus)
+        throws com.liferay.portal.kernel.exception.SystemException {
+        return getService().getMeasuresByControlstatus(controlstatus);
+    }
 
-			ClpSerializer.setClassLoader(portletClassLoader);
-		}
+    /**
+    * Gets a list with a range of Measures by controlstatus
+    */
+    public static java.util.List<nl.wur.alterra.cgi.ace.model.Measure> getMeasuresByGroupId(
+        short controlstatus, int start, int end)
+        throws com.liferay.portal.kernel.exception.SystemException {
+        return getService().getMeasuresByGroupId(controlstatus, start, end);
+    }
 
-		return _service;
-	}
+    /**
+    * Gets a list with a range of Measures by controlstatus
+    */
+    public static java.util.List<nl.wur.alterra.cgi.ace.model.Measure> getMeasuresByControlstatus(
+        short controlstatus, int start, int end)
+        throws com.liferay.portal.kernel.exception.SystemException {
+        return getService().getMeasuresByControlstatus(controlstatus, start, end);
+    }
 
-	public void setService(MeasureLocalService service) {
-		_service = service;
-	}
+    /**
+    * Gets the number of Measures by controlstatus
+    */
+    public static int getMeasuresCountByGroupId(short controlstatus)
+        throws com.liferay.portal.kernel.exception.SystemException {
+        return getService().getMeasuresCountByGroupId(controlstatus);
+    }
 
-	private static MeasureLocalService _service;
+    /**
+    * Gets the number of Measures by controlstatus
+    */
+    public static int getMeasuresCountByControlstatus(short controlstatus)
+        throws com.liferay.portal.kernel.exception.SystemException {
+        return getService().getMeasuresCountByControlstatus(controlstatus);
+    }
+
+    public static void clearService() {
+        _service = null;
+    }
+
+    public static MeasureLocalService getService() {
+        if (_service == null) {
+            InvokableLocalService invokableLocalService = (InvokableLocalService) PortletBeanLocatorUtil.locate(ClpSerializer.getServletContextName(),
+                    MeasureLocalService.class.getName());
+
+            if (invokableLocalService instanceof MeasureLocalService) {
+                _service = (MeasureLocalService) invokableLocalService;
+            } else {
+                _service = new MeasureLocalServiceClp(invokableLocalService);
+            }
+
+            ReferenceRegistry.registerReference(MeasureLocalServiceUtil.class,
+                "_service");
+        }
+
+        return _service;
+    }
+
+    /**
+     * @deprecated As of 6.2.0
+     */
+    public void setService(MeasureLocalService service) {
+    }
 }

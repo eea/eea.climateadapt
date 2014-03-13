@@ -35,7 +35,7 @@ public class ProjectDetailPortlet extends MVCPortlet {
    	
     	renderRequest.setAttribute(Constants.PROJECTID, httpRequest.getParameter("ace_project_id"));
     	
-        include(viewJSP, renderRequest, renderResponse);
+        super.doView(renderRequest, renderResponse);
     }
     
 	/**

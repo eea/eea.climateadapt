@@ -52,6 +52,9 @@ public class EventPortlet extends MVCPortlet {
 			String type = "events";
 			String[] structureIds = {"ACEEVENT"};
 			String[] templateIds = {"ACE-EVENT-TEMPLATE"};
+			long classNameId = 0;
+			List<Long> folderIds = new ArrayList<Long>();
+			folderIds.add( 0L );
 
 			
 			HttpServletRequest httpRequest = 
@@ -86,11 +89,14 @@ public class EventPortlet extends MVCPortlet {
 			}
 			
 			OrderByComparator obc = new ArticleModifiedDateComparator(false);
-			
+
+/**			
 			List<JournalArticle> journalArticlesList = JournalArticleLocalServiceUtil.search(
 				companyId, groupId, articleId, version, title, description, content,
 				type, structureIds, templateIds, displayDateGT, displayDateLT,
 				status, reviewDate, andOperator, start, end, obc);
+**/
+			List<JournalArticle> journalArticlesList = JournalArticleLocalServiceUtil.search(companyId, groupId, folderIds,  classNameId, articleId, version, title, description, content, type, structureIds, templateIds, displayDateGT, displayDateLT, status, reviewDate,  andOperator,  start,  end,  obc);
 		
 			List<JournalEvent> journalList = new ArrayList<JournalEvent>();
 		

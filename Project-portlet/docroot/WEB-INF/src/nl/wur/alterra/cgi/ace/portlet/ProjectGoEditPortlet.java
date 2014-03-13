@@ -60,7 +60,7 @@ public class ProjectGoEditPortlet extends MVCPortlet {
     	}
     	
     		
-        include(viewJSP, renderRequest, renderResponse);
+        super.doView(renderRequest, renderResponse);
     }
     
 	/**

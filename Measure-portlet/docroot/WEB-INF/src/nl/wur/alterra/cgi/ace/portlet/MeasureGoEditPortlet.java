@@ -58,8 +58,8 @@ public class MeasureGoEditPortlet extends MVCPortlet {
     			e.printStackTrace(System.out) ;
     		}
     	}
-    	
-        include(viewJSP, renderRequest, renderResponse);
+   	
+        super.doView(renderRequest, renderResponse);
     }
     
 	/**

@@ -27,7 +27,7 @@ import nl.wur.alterra.cgi.ace.model.Measure;
  * Never reference this class directly. All methods that expect a measure model instance should use the {@link Measure} interface instead.
  * </p>
  */
-public class MeasureImpl extends MeasureModelImpl implements Measure {
+public class MeasureImpl extends MeasureBaseImpl {
 	public MeasureImpl() {
 	}
 }

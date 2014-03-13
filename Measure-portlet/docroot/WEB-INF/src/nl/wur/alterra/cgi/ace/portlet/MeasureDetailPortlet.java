@@ -36,7 +36,7 @@ public class MeasureDetailPortlet extends MVCPortlet {
         	
     		renderRequest.setAttribute(Constants.MEASUREID, httpRequest.getParameter("ace_measure_id"));
     		
-        include(viewJSP, renderRequest, renderResponse);
+            super.doView(renderRequest, renderResponse);
     }    
 
 	/**

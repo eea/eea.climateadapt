@@ -54,7 +54,7 @@ public class TransRegionProjectsPortlet extends MVCPortlet {
             throw new PortletException(e);
         }
 
-        include(viewJSP, renderRequest, renderResponse);
+        super.doView(renderRequest, renderResponse);
     }
 
     /**

@@ -161,6 +161,9 @@ public class SliderPortlet extends MVCPortlet {
 			boolean andOperator = true;
 			int start = -1;
 			int end = -1;
+			long classNameId = 0;
+			List<Long> folderIds = new ArrayList<Long>();
+			folderIds.add( 0L );
 			
 			Calendar c = Calendar.getInstance();
 		    c.setTime(new Date());
@@ -173,10 +176,8 @@ public class SliderPortlet extends MVCPortlet {
 		    
             OrderByComparator obc = new ArticleModifiedDateComparator(false);
 			
-			List<JournalArticle> journalArticlesList = JournalArticleLocalServiceUtil.search(
-				companyId, groupId, articleId, version, title, description, content,
-				type, structureIds, templateIds, displayDateGT, displayDateLT,
-				status, reviewDate, andOperator, start, end, obc);
+
+			List<JournalArticle> journalArticlesList = JournalArticleLocalServiceUtil.search(companyId, groupId, folderIds,  classNameId, articleId, version, title, description, content, type, structureIds, templateIds, displayDateGT, displayDateLT, status, reviewDate,  andOperator,  start,  end,  obc);
 		
 			List<JournalEvent> journalList = new ArrayList<JournalEvent>();
 			

@@ -6,7 +6,7 @@ import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 
-import com.liferay.documentlibrary.DuplicateFileException;
+import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.upload.UploadPortletRequest;
 import com.liferay.portal.kernel.util.CharPool;
@@ -40,10 +40,16 @@ import nl.wur.alterra.cgi.ace.model.constants.AceItemSector;
 import nl.wur.alterra.cgi.ace.search.lucene.ACEIndexSynchronizer;
 import nl.wur.alterra.cgi.ace.search.lucene.ACEIndexUtil;
 import nl.wur.alterra.cgi.ace.service.AceItemLocalServiceUtil;
+import com.liferay.portal.kernel.util.FileUtil;
 
 import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
 import javax.portlet.PortletRequest;
+import java.io.ByteArrayInputStream;
+import java.util.HashMap;
+import java.io.InputStream;
+import java.util.Map;
+import com.liferay.portal.kernel.util.MimeTypesUtil;
 
 /**
  * Portlets that need to update projects and synchronize with AceItems extend
@@ -406,7 +412,7 @@ public abstract class ProjectUpdateHelperRevised extends MVCPortlet {
 	    	{
 	    		//System.out.println("document folder is null");
 	    		try {
-	    		docFolder = DLFolderLocalServiceUtil.addFolder(themeDisplay.getUserId(), themeDisplay.getScopeGroupId(), rootFolder.getFolderId(), folder, "", serviceContext);
+	    		docFolder = DLFolderLocalServiceUtil.addFolder(themeDisplay.getUserId(), themeDisplay.getScopeGroupId(), themeDisplay.getScopeGroupId(),false, rootFolder.getFolderId(), folder, "", serviceContext);
 	    		String primaryKey = String.valueOf(docFolder.getPrimaryKey());
 	    		addPermissions(themeDisplay, primaryKey, "com.liferay.portlet.documentlibrary.model.DLFolder");
 	    		}
@@ -531,14 +537,20 @@ public abstract class ProjectUpdateHelperRevised extends MVCPortlet {
 		//System.out.println("fileName is " + fileName);
 		int i = fileName.lastIndexOf('.');
 		String extension = fileName.substring(i+1);
+        byte[] imageBytes = FileUtil.getBytes(f);
+        InputStream is = new ByteArrayInputStream(imageBytes);
+        long size = imageBytes.length;
+        Map fieldsMap = new HashMap();
+        long fileEntryTypeId = 0;
 		//System.out.println("extension is " + extension);
 		//image = IGImageServiceUtil.addImage(themeDisplay.getScopeGroupId(), imageFolder.getFolderId(), sup_photo_name, sup_photo_description, f, "image/"+extension, serviceContext);
-		doc = DLFileEntryLocalServiceUtil.addFileEntry(themeDisplay.getUserId(), themeDisplay.getScopeGroupId(), docFolder.getFolderId(), f.getName(), sup_doc_name,
-		       sup_doc_description, null, null,  f, serviceContext);
+
+        doc = DLFileEntryLocalServiceUtil.addFileEntry(themeDisplay.getUserId(), themeDisplay.getScopeGroupId(), themeDisplay.getScopeGroupId(), docFolder.getFolderId(), f.getName(),MimeTypesUtil.getContentType(f), sup_doc_name, sup_doc_description,"",fileEntryTypeId,fieldsMap, f, is, size, serviceContext);
+        //(long userId,              long groupId,                   long repositoryId,              long folderId,         String sourceFileName, String mimeType, String title, String description, String changeLog, long fileEntryTypeId, Map<String,Fields> fieldsMap, File file, InputStream is, long size, ServiceContext serviceContext) 
 		String primaryKey = String.valueOf(doc.getPrimaryKey());
 		   addPermissions(themeDisplay, primaryKey, "com.liferay.portlet.documentlibrary.model.DLFileEntry");
 		}
-		catch(DuplicateFileException e)
+		catch(PortalException e)
 		{
 		    //get the image id
 			   //System.out.println("Duplicate file - getting file id");
@@ -812,7 +824,7 @@ public abstract class ProjectUpdateHelperRevised extends MVCPortlet {
     
     private void addPermissions(ThemeDisplay themeDisplay, String primaryKey, String resource ) throws Exception
     {
-    	Role roleUser = RoleLocalServiceUtil.getRole(themeDisplay.getCompanyId(), RoleConstants.COMMUNITY_MEMBER);
+    	Role roleUser = RoleLocalServiceUtil.getRole(themeDisplay.getCompanyId(), RoleConstants.SITE_MEMBER);
 		long roleId = roleUser.getRoleId();
 		
 		String actionIds[] = {"VIEW"};

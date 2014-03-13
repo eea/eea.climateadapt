@@ -49,6 +49,9 @@ public class NewsPortlet extends MVCPortlet {
 			String type = "news";
 			String[] structureIds = {"ACENEWS"};
 			String[] templateIds = {"ACE-NEWS-TEMPLATE"};
+			long classNameId = 0;
+			List<Long> folderIds = new ArrayList<Long>();
+			folderIds.add( 0L );
 
 			
 			HttpServletRequest httpRequest = 
@@ -73,11 +76,14 @@ public class NewsPortlet extends MVCPortlet {
 			}
 			
 			OrderByComparator obc = new ArticleModifiedDateComparator(false);
-			
+
+/**			
 			List<JournalArticle> journalArticlesList = JournalArticleLocalServiceUtil.search(
 				companyId, groupId, articleId, version, title, description, content,
 				type, structureIds, templateIds, displayDateGT, displayDateLT,
 				status, reviewDate, andOperator, start, end, obc);
+**/
+			List<JournalArticle> journalArticlesList = JournalArticleLocalServiceUtil.search(companyId, groupId, folderIds,  classNameId, articleId, version, title, description, content, type, structureIds, templateIds, displayDateGT, displayDateLT, status, reviewDate,  andOperator,  start,  end,  obc);
 		
 			// we need to sort in descending based on the display date
 			JournalComparator journalComparator = new JournalComparator(1);

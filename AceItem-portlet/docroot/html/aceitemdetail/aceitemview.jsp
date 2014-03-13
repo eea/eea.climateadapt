@@ -1,4 +1,3 @@
-<%@page import="com.liferay.portlet.imagegallery.service.IGImageLocalServiceUtil"%>
 <%@include file="/html/init.jsp" %>
 
 <%
@@ -33,6 +32,7 @@
 	if (aceitem != null)
 	{
 		    sharetype = aceitem.getDatatype();
+
 		
 		    if (sharetype.equalsIgnoreCase(AceItemType.DOCUMENT.toString())) {
 			 
@@ -66,6 +66,9 @@
 			}	
 			else if (sharetype.equalsIgnoreCase(AceItemType.ACTION.toString())) {
 				   aceitemType = "Action";
+			}
+			else if (sharetype.equalsIgnoreCase(AceItemType.INDICATOR.toString())) {
+				   aceitemType = "Indicator";
 			}	
 %>
 

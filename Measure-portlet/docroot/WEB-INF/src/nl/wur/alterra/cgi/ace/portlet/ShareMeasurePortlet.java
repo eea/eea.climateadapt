@@ -13,7 +13,6 @@ import javax.servlet.http.HttpServletRequest;
 
 import nl.wur.alterra.cgi.ace.model.AceItem;
 import nl.wur.alterra.cgi.ace.model.Measure;
-import nl.wur.alterra.cgi.ace.model.impl.AceItemImpl;
 import nl.wur.alterra.cgi.ace.model.impl.MeasureImpl;
 import nl.wur.alterra.cgi.ace.search.ACESearchPortalInterface;
 import nl.wur.alterra.cgi.ace.service.AceItemLocalServiceUtil;
@@ -86,7 +85,7 @@ public class ShareMeasurePortlet extends MeasureUpdateHelperForSharedMeasure {
 			MeasureLocalServiceUtil.addMeasure(measure);
 
 			// create an AceItem for this measure
-			AceItem aceitem = new AceItemImpl();
+			AceItem aceitem = AceItemLocalServiceUtil.createAceItem();
 			aceitem.setAceItemId(ParamUtil.getLong(request, "aceItemId"));
 			aceitem.setCompanyId(measure.getCompanyId());
 			aceitem.setGroupId(measure.getGroupId());
