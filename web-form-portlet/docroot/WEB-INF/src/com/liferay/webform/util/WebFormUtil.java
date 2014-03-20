@@ -15,9 +15,9 @@
 package com.liferay.webform.util;
 
 import com.liferay.counter.service.CounterLocalServiceUtil;
-import com.liferay.mozilla.javascript.Context;
-import com.liferay.mozilla.javascript.Scriptable;
-import com.liferay.mozilla.javascript.ScriptableObject;
+import org.mozilla.javascript.Context;
+import org.mozilla.javascript.Scriptable;
+import org.mozilla.javascript.ScriptableObject;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.log.Log;

@@ -43,7 +43,7 @@ import com.liferay.portlet.expando.service.ExpandoRowLocalServiceUtil;
 import com.liferay.portlet.expando.service.ExpandoTableLocalServiceUtil;
 import com.liferay.portlet.expando.service.ExpandoValueLocalServiceUtil;
 import com.liferay.util.bridges.mvc.MVCPortlet;
-import com.liferay.util.servlet.PortletResponseUtil;
+import com.liferay.portal.kernel.portlet.PortletResponseUtil;
 import com.liferay.webform.util.WebFormUtil;
 
 import java.util.ArrayList;
