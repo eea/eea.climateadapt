@@ -13,7 +13,6 @@ import javax.servlet.http.HttpServletRequest;
 import nl.wur.alterra.cgi.ace.model.AceItem;
 import nl.wur.alterra.cgi.ace.model.Project;
 import nl.wur.alterra.cgi.ace.model.constants.AceItemType;
-import nl.wur.alterra.cgi.ace.model.impl.AceItemImpl;
 import nl.wur.alterra.cgi.ace.model.impl.ProjectImpl;
 import nl.wur.alterra.cgi.ace.service.AceItemLocalServiceUtil;
 import nl.wur.alterra.cgi.ace.service.ProjectLocalServiceUtil;
@@ -79,7 +78,7 @@ public class ShareProjectPortlet extends ProjectUpdateHelperRevised {
 			ProjectLocalServiceUtil.addProject(project);
 
 			// create an AceItem for this project
-			AceItem aceitem = new AceItemImpl();
+			AceItem aceitem = AceItemLocalServiceUtil.createAceItem();
 			aceitem.setAceItemId(ParamUtil.getLong(request, "aceItemId"));
 			aceitem.setCompanyId(project.getCompanyId());
 			aceitem.setGroupId(project.getGroupId());

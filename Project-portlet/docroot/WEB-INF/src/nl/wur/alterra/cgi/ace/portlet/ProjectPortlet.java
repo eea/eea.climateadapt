@@ -12,7 +12,6 @@ import javax.portlet.PortletPreferences;
 import nl.wur.alterra.cgi.ace.model.AceItem;
 import nl.wur.alterra.cgi.ace.model.Project;
 import nl.wur.alterra.cgi.ace.model.constants.AceItemType;
-import nl.wur.alterra.cgi.ace.model.impl.AceItemImpl;
 import nl.wur.alterra.cgi.ace.model.impl.ProjectImpl;
 import nl.wur.alterra.cgi.ace.search.lucene.ACEIndexSynchronizer;
 import nl.wur.alterra.cgi.ace.search.lucene.ACEIndexUtil;
@@ -59,7 +58,7 @@ public class ProjectPortlet extends ProjectUpdateHelper {
      *
      */
     private AceItem createAceItemInsideDB(Project project) throws Exception {
-    	AceItem aceitem = new AceItemImpl();
+    	AceItem aceitem = AceItemLocalServiceUtil.createAceItem();
         //aceitem.setAceItemId(ParamUtil.getLong(request, "aceItemId"));
         aceitem.setCompanyId(project.getCompanyId());
         aceitem.setGroupId(project.getGroupId());

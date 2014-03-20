@@ -5,12 +5,12 @@
 	<property file="${basedir}/build.properties" />
 
     <!-- Go into Plugins-SDK home and run its deploy target. But first ensure that AceItem portlet service and search engine have been deployed first. -->
-    <target name="deploy" depends="deploy.aceItemService,deploy.aceSearchEngine">
+    <target name="deploy" depends="deploy.aceItemService,deploy.aceSearchEngine,deploy.measureService">
 		<ant dir="${plugins.sdk.home}" target="deploy" inheritAll="false"/>
 	</target>
 
     <!-- Go into Plugins-SDK home and run its war target. -->
-    <target name="war" depends="deploy.aceItemService,deploy.aceSearchEngine">
+    <target name="war" depends="deploy.aceItemService,deploy.aceSearchEngine,deploy.measureService">
 		<ant dir="${plugins.sdk.home}" target="war" inheritAll="false"/>
 	</target>
 
@@ -32,6 +32,16 @@
     <!-- Deploy AceItem search engine JAR. -->
     <target name="deploy.aceSearchEngine" depends="build.aceSearchEngine">
         <ant dir="AceSearchEngine" target="deploy" inheritAll="false" />
+	</target>
+
+    <!-- Build Measure portlet service. -->
+    <target name="build.measureService">
+		<ant dir="${plugins.sdk.home}/portlets/Measure-portlet" target="build-service" inheritAll="false"/>
+	</target>
+
+    <!-- Deploy Measure portlet service. -->
+    <target name="deploy.measureService">
+        <ant dir="${plugins.sdk.home}/portlets/Measure-portlet" target="deploy-service" inheritAll="false"/>
 	</target>
 
 </project>
