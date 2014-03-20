@@ -1,5 +1,29 @@
 <?xml version="1.0"?>
-
 <project name="Project-portlet" basedir="." default="deploy">
+
+    <property file="${basedir}/build.properties" />
+    
 	<import file="../build-common-portlet.xml" />
+    
+    <!--
+    Override the original war by ensuring first that the service JAR will not be present in WEB-INF/lib.
+    Otherwise there will be a class-loader conflict at runtime, because the service JAR must actually
+    be present in Tomcat's lib/ext only.
+    -->
+    <target name="war">
+        <delete>
+            <fileset dir="${basedir}/docroot/WEB-INF/lib">
+                <include name="Project-portlet-service.jar"/>
+            </fileset>
+        </delete>
+        <antcall target="build-common-plugin.war"/>
+	</target>
+
+    <!--
+    Copies the service JAR into Tomcat's lib/ext. Requires Tomcat's start to take effect.
+    -->
+    <target name="deploy-service" depends="build-service">
+		<copy file="${basedir}/docroot/WEB-INF/lib/Project-portlet-service.jar" todir="${app.server.dir}/lib/ext" overwrite="true"/>
+	</target>
+    
 </project>
