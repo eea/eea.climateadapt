@@ -34,12 +34,9 @@
 <%@ page import="nl.wur.alterra.cgi.ace.portlet.MeasureUtil"%>
 <%@ page import="nl.wur.alterra.cgi.ace.search.lucene.ACEIndexUtil"%>
 <%@ page import="nl.wur.alterra.cgi.ace.portlet.MeasurePortlet"%>
-<%@ page import ="com.liferay.portlet.imagegallery.model.IGImage" %>
-<%@ page import ="com.liferay.portlet.imagegallery.service.IGImageServiceUtil" %>
 <%@ page import ="com.liferay.portal.kernel.upload.UploadPortletRequest" %>
 <%@ page import ="com.liferay.portlet.documentlibrary.service.DLFileEntryLocalServiceUtil"  %>
 <%@ page import ="com.liferay.portlet.documentlibrary.model.DLFileEntry"  %>
-<%@ page import ="com.liferay.portal.kernel.servlet.ImageServletTokenUtil"  %>
 <%@ page import =" com.liferay.portal.kernel.util.HttpUtil"  %>
 <%@ page import ="com.liferay.portal.kernel.util.HtmlUtil" %>
 <%@ page import ="com.liferay.portal.service.ImageLocalServiceUtil"  %>
@@ -51,6 +48,10 @@
 <%@ page import = "com.liferay.portal.kernel.dao.orm.PropertyFactoryUtil" %>
 <%@ page import = "nl.wur.alterra.cgi.ace.model.AceItem" %>
 <%@ page import = "nl.wur.alterra.cgi.ace.portlet.SliderPortlet.JournalEvent" %>
+<%@ page import = "com.liferay.portlet.documentlibrary.model.DLFileEntry" %>
+<%@ page import = "com.liferay.portlet.documentlibrary.service.DLFileEntryLocalServiceUtil" %>
+<%@ page import = "com.liferay.portal.webserver.WebServerServletTokenUtil" %>
+
 
 <liferay-theme:defineObjects />
 
