@@ -1,8 +1,4 @@
 <nav class="sort-pages" id="navigation">
-	<h1>
-		<span>#language("navigation")</span>
-	</h1>
-
 	<ul id="topnav">
 		#foreach ($nav_item in $nav_items)
 			#if ($nav_item.isSelected())
