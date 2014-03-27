@@ -68,6 +68,7 @@ ln -s TRUNK/AdaptationTools-portlet AdaptationTools-portlet
 ln -s TRUNK/ASTHeader-portlet ASTHeader-portlet
 ln -s TRUNK/Countries-portlet Countries-portlet
 ln -s TRUNK/FilterAceItem-portlet FilterAceItem-portlet
+ln -s TRUNK/HomeNewsEvent-portlet HomeNewsEvent-portlet
 ln -s TRUNK/IFrame-portlet IFrame-portlet
 ln -s TRUNK/MapViewer-portlet MapViewer-portlet
 ln -s TRUNK/Measure-portlet Measure-portlet
@@ -82,6 +83,12 @@ ln -s TRUNK/ace-layouttpl ace-layouttpl
 While in PLUGINS_SDK_HOME/themes, create the following symbolic link:
 ln -s TRUNK/ace-theme ace-theme
 ln -s TRUNK/ace-baltic-sea-theme ace-baltic-sea-theme
+
+While in PLUGINS_SDK_HOME/ext, create the following symbolic link:
+ln -s TRUNK/ldapImport-ext ldapImport-ext
+
+While in PLUGINS_SDK_HOME/ext, create the following symbolic link:
+ln -s TRUNK/uiError-hook uiError-hook
 
 *****************************
 5. Set a few build properties
