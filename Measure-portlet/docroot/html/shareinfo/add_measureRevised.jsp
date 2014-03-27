@@ -1478,16 +1478,16 @@
 										  if (measure == null ) {
 											  if (measureFromRequest != null && Validator.isNotNull(measureFromRequest.getPrimephoto()))
 											  {
-												  IGImage image = IGImageServiceUtil.getImage(Long.parseLong(measureFromRequest.getPrimephoto()));
-												  primePhoto = image.getNameWithExtension();
+												  DLFileEntry image = DLFileEntryLocalServiceUtil.getFileEntry(Long.parseLong(measureFromRequest.getPrimephoto())); 
+												  primePhoto = image.getName();
 												  pageContext.setAttribute("primephotoname", primePhoto);
 												  primePhotoId = measureFromRequest.getPrimephoto();
 											  }
 										  }
 										  else if (Validator.isNotNull(measure.getPrimephoto()))
 										  {
-											  IGImage image = IGImageServiceUtil.getImage(Long.parseLong(measure.getPrimephoto()));
-											  primePhoto = image.getNameWithExtension();
+											  DLFileEntry image = DLFileEntryLocalServiceUtil.getFileEntry( Long.parseLong(measure.getPrimephoto()) ); 
+											  primePhoto = image.getName();
 											  pageContext.setAttribute("primephotoname", primePhoto);
 										  }
 										%>
@@ -1531,9 +1531,9 @@
 									    	     int i = 0;
 									             for (String photo:sphotos)
 												 {
-													 IGImage image = IGImageServiceUtil.getImage(Long.parseLong(photo));
+													 DLFileEntry image = DLFileEntryLocalServiceUtil.getFileEntry(Long.parseLong(photo)); 
 													 String supPhotoName = image.getName(); 
-													 String imageName = image.getNameWithExtension();
+													 String imageName = image.getName();
 													 String supPhotoDescription = image.getDescription();
 													 sphotoNames[i] = supPhotoName;
 													 sphotoDescriptions[i] = supPhotoDescription;
@@ -2295,8 +2295,8 @@
 										    
 										    if (Validator.isNotNull(measure.getPrimephoto()))
 										    {
-										      IGImage primImage = IGImageServiceUtil.getImage(Long.parseLong(measure.getPrimephoto()));
-										      primImageUrl = themeDisplay.getPathImage() + "/image_gallery?img_id=" + primImage.getLargeImageId() +  "&t=" + ImageServletTokenUtil.getToken(primImage.getLargeImageId());
+										      DLFileEntry image = DLFileEntryLocalServiceUtil.getFileEntry(Long.parseLong(measure.getPrimephoto())); 
+										      primImageUrl = themeDisplay.getPathImage() + "/image_gallery?img_id=" + image.getLargeImageId() +  "&t=" + WebServerServletTokenUtil.getToken(image.getLargeImageId());
 										    }
 										 %>
 										<img src="<%=primImageUrl %>" class="case-studies-tabbed-content-review-image"/>
@@ -2639,10 +2639,10 @@
 										  String firstImageAlt = null;
 									     for (String photo:sphotosInReview)
 									     {
-													 IGImage image = IGImageServiceUtil.getImage(Long.parseLong(photo)); 
+													 DLFileEntry image = DLFileEntryLocalServiceUtil.getFileEntry(Long.parseLong(photo)); 
 													 String supPhotoName = image.getName(); 
 													 String supPhotoDescription = image.getDescription();
-													 String imageUrl = themeDisplay.getPathImage() + "/image_gallery?img_id=" + image.getLargeImageId() +  "&t=" + ImageServletTokenUtil.getToken(image.getLargeImageId());
+													 String imageUrl = themeDisplay.getPathImage() + "/image_gallery?img_id=" + image.getLargeImageId() +  "&t=" + WebServerServletTokenUtil.getToken(image.getLargeImageId());
 								 %>
 								 
 								 <!-- =========================== -->

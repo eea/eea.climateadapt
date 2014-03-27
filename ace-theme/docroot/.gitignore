@@ -3,3 +3,5 @@ css/
 images/
 templates/
 js/
+WEB-INF/classes
+WEB-INF/lib

@@ -5,12 +5,42 @@
 @import url(color_schemes/orange.css);
 
 /* ---------- Base styles ---------- */
+/* ---------- LR upgrade to 6.2 changes start ---------- */
+.aui {
+	background: #CCCCCC;
+}
 
-body {
+.aui body{
 	background: #CCCCCC;
 	font-family: Tahoma, Times New Roman, serif;
 	font-size: 12px;
 }
+
+#heading li{
+	line-height: 16px;
+}
+#navigation li{
+	line-height: 20px;
+}
+a#skip-to-content{
+		display:none;
+	}
+
+.portlet-topper h1, .portlet-topper h2, .portlet-topper h3{
+	line-height: 20px;
+        margin: 0px;
+}
+
+
+.portlet-body li{
+	line-height: 16px;
+}
+.aui .portlet-borderless-container{
+ padding: 0px 0px;
+ margin-bottom:0px;
+}
+
+/* ---------- LR upgrade to 6.2 changes end ---------- */
 
 p {
 	line-height: 16px;
@@ -49,6 +79,7 @@ hr, .separator {
 	margin: 0 auto;
 	position: relative;
 	width: 984px;
+        padding: 0;
 }
 
 .ie6 #wrapper {
@@ -116,7 +147,20 @@ body #banner .logo a {
 .page-title .portlet-title {
 	color: #02213D;
 	font-size: 26px;
-	padding-top: 20px;
+
+}
+.aui .portlet-title {
+    padding: 0px;
+}
+h1.portlet-title{
+ padding-left:0px;
+ padding-right:0px;
+    color: #67788A;
+    font-size: 20px;
+    font-weight: normal;
+    line-height: 20px;
+    padding-bottom: 8px;
+    padding-top: 8px;
 }
 
 /* ---------- Main navigation ---------- */
@@ -336,6 +380,8 @@ ul#subnav li a:hover {
 
 .portlet-title-text {
     cursor: default;
+    overflow: visible;
+    max-width:100%;
 }
 
 .lfr-portlet-title-editable-content {
@@ -538,6 +584,7 @@ ul#subnav li a:hover {
 	height: 10px;
 	margin-right: 2px;
 	padding-left: 3px;
+        width: 170px;	
 }
 
 #search-title {
@@ -611,17 +658,14 @@ ul#subnav li a:hover {
 	display: inline-block;
 	list-style-type: none;
 	width: 96%;
+        line-height: 16px;
 }
 
-.ie8 #sec-menu ul {
-	padding: 5px 0 4px 8px;
-} 
-
 #sec-menu li {
-	background: url("data:image/gif;base64,R0lGODlhCQAHANUAAAU+j+zsxgNBjhJLkAQ+j9PdwuvsxEJum7DBuQY/jAQ9jKu/s0RunmSJpilblo2or4mmrOfsxBZMkgI/jwY+kentyJ+4skdyndTdvhBLkRhNk7C/uLHAudPcwersxSVYl6y9tRxRk7XHu4umrebvxMzZvdHcvoqlrtDbvevtyK3BtujuyOPrwunuxoykrj5omujsxwJAjdLbwOjtxOvtxejtxevtxursxAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACH/C1hNUCBEYXRhWE1QPD94cGFja2V0IGJlZ2luPSLvu78iIGlkPSJXNU0wTXBDZWhpSHpyZVN6TlRjemtjOWQiPz4gPHg6eG1wbWV0YSB4bWxuczp4PSJhZG9iZTpuczptZXRhLyIgeDp4bXB0az0iQWRvYmUgWE1QIENvcmUgNS4zLWMwMTEgNjYuMTQ1NjYxLCAyMDEyLzAyLzA2LTE0OjU2OjI3ICAgICAgICAiPiA8cmRmOlJERiB4bWxuczpyZGY9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkvMDIvMjItcmRmLXN5bnRheC1ucyMiPiA8cmRmOkRlc2NyaXB0aW9uIHJkZjphYm91dD0iIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtbG5zOnhtcE1NPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvbW0vIiB4bWxuczpzdFJlZj0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL3NUeXBlL1Jlc291cmNlUmVmIyIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ1M2IChNYWNpbnRvc2gpIiB4bXBNTTpJbnN0YW5jZUlEPSJ4bXAuaWlkOkY4RTEzMEY5QzQ3RDExRTI4NUNGQ0UxQTNDODVDMjY4IiB4bXBNTTpEb2N1bWVudElEPSJ4bXAuZGlkOkY4RTEzMEZBQzQ3RDExRTI4NUNGQ0UxQTNDODVDMjY4Ij4gPHhtcE1NOkRlcml2ZWRGcm9tIHN0UmVmOmluc3RhbmNlSUQ9InhtcC5paWQ6RjhFMTMwRjdDNDdEMTFFMjg1Q0ZDRTFBM0M4NUMyNjgiIHN0UmVmOmRvY3VtZW50SUQ9InhtcC5kaWQ6RjhFMTMwRjhDNDdEMTFFMjg1Q0ZDRTFBM0M4NUMyNjgiLz4gPC9yZGY6RGVzY3JpcHRpb24+IDwvcmRmOlJERj4gPC94OnhtcG1ldGE+IDw/eHBhY2tldCBlbmQ9InIiPz4B//79/Pv6+fj39vX08/Lx8O/u7ezr6uno5+bl5OPi4eDf3t3c29rZ2NfW1dTT0tHQz87NzMvKycjHxsXEw8LBwL++vby7urm4t7a1tLOysbCvrq2sq6qpqKempaSjoqGgn56dnJuamZiXlpWUk5KRkI+OjYyLiomIh4aFhIOCgYB/fn18e3p5eHd2dXRzcnFwb25tbGtqaWhnZmVkY2JhYF9eXVxbWllYV1ZVVFNSUVBPTk1MS0pJSEdGRURDQkFAPz49PDs6OTg3NjU0MzIxMC8uLSwrKikoJyYlJCMiISAfHh0cGxoZGBcWFRQTEhEQDw4NDAsKCQgHBgUEAwIBAAAh+QQAAAAAACwAAAAACQAHAAAGOMBZrZYSXVS2WeXGLH00GxLGJEMVFhkJyDFRJAgASoxhObkgo4YghPAYVgHWa8C5wWgRWufwsLWCADs=") no-repeat scroll 0 7px transparent;
-	padding: 2px 0 2px 10px;
-	float: left;
-	width: 23%;
+	padding: 2px 0px 2px 10px;
+	float: left;        
+        line-height: 16px;
+        width:23%;
 }
 
 #sec-menu a {
@@ -2102,4 +2146,126 @@ text and the class mapviewer to the MapViewerPortlet.
 	    margin-top: 10%;
   }
 
+
+/* ---------- Wrapper ---------- */
+
+.portlet-layout {
+	border-collapse: collapse;
+	clear: both;
+	display: table;
+	border-spacing: 0;
+	table-layout: auto;
+	width: 100%;
+}
+
+.ie6 div.portlet-layout, .ie7 div.portlet-layout {
+	height: 1%;
+}
+
+.portlet-column {
+	display: table-cell;
+	vertical-align: top;
+}
+
+.ie6 div.portlet-column, .ie7 div.portlet-column {
+	float: left;
+	overflow: hidden;
+	width: 100%;
+}
+
+.ie6 div.aui-column-last, .ie7 div.aui-column-last {
+	margin-right: -1px;
+}
+
+.portlet-column-content {
+	padding: 5px;
+}
+
+.ie6 .portlet-column-content, .ie7 .portlet-column-content {
+	zoom: 1;
+}
+
+.portlet-column-content-only, .ltr .portlet-column-content-first, .rtl .portlet-column-content-last {
+	padding-left: 15px;
+}
+
+.portlet-column-content-only, .ltr .portlet-column-content-last, .rtl .portlet-column-content-first {
+	padding-right: 0;
+}
+
+/* ---------- Column widths ---------- */
+
+.portlet-column-content.empty {
+	padding: 50px;
+}
+
+#main-content.dragging .portlet-column {
+	border: 3px double #828F95;
+	height: 100px;
+	min-height: 100px;
+}
 	
+@media print{
+
+	div#tabs ul.ui-tabs-nav{
+		display:none;
+	}
+
+	div.countries-list, div.region-list{
+		display:none;
+	}
+
+	div#header-menu, div#searchbox{
+		display:none;
+	}
+
+	div#layout-column_column-1 {
+		float:left;
+		padding-right:10px;
+	}
+
+
+	#sec-menu, #navigation, #heading{
+		display:none;
+	}
+
+	nav#navigation, nav#sec-menu, hgroup#heading{
+		display:none;
+	}
+
+	div#sb-ast, div#sb-np, div#sb-csst, div#sb-syi{
+		display:none;
+	}
+
+	a.double-arrow{
+		display:none;
+	}
+
+	div.db-search-fp{
+		display:none;
+	}
+
+	ul#third-level-menu{
+		display:none;
+	}
+
+	div.portlet-msg-error{
+		display:none;
+	}
+
+	div#read-more-link{
+		display:none;
+	}
+
+	select{
+		display:none;
+	}
+
+	#footer {
+		padding-top: 20px;
+	}
+	#footer a{
+		float:left;
+		margin-left:100px;
+	}
+}

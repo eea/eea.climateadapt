@@ -2,3 +2,7 @@
 classes/
 lib/
 *.scss
+docroot/css/
+docroot/images/*
+docroot/templates/*
+docroot/META-INF/*

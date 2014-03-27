@@ -83,7 +83,8 @@ public class NewsPortlet extends MVCPortlet {
 				type, structureIds, templateIds, displayDateGT, displayDateLT,
 				status, reviewDate, andOperator, start, end, obc);
 **/
-			List<JournalArticle> journalArticlesList = JournalArticleLocalServiceUtil.search(companyId, groupId, folderIds,  classNameId, articleId, version, title, description, content, type, structureIds, templateIds, displayDateGT, displayDateLT, status, reviewDate,  andOperator,  start,  end,  obc);
+			List<JournalArticle> journalArticlesListRo = JournalArticleLocalServiceUtil.search(companyId, groupId, folderIds,  classNameId, articleId, version, title, description, content, type, structureIds, templateIds, displayDateGT, displayDateLT, status, reviewDate,  andOperator,  start,  end,  obc);
+			List<JournalArticle> journalArticlesList = new ArrayList<JournalArticle>(journalArticlesListRo);
 		
 			// we need to sort in descending based on the display date
 			JournalComparator journalComparator = new JournalComparator(1);

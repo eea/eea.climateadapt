@@ -29,6 +29,7 @@ import com.liferay.portlet.journal.model.JournalArticle;
 import com.liferay.portlet.journal.service.JournalArticleLocalServiceUtil;
 import com.liferay.portlet.journal.util.comparator.ArticleModifiedDateComparator;
 import com.liferay.util.bridges.mvc.MVCPortlet;
+import java.util.Locale;
 
 /**
  * Portlet implementation class EventPortlet
@@ -136,7 +137,7 @@ public class EventPortlet extends MVCPortlet {
 				node = document.selectSingleNode("/root/dynamic-element[@name='" + name + "']/dynamic-content");
 				locationValue = node.getText();
 			
-				SimpleDateFormat dateFormatter = new SimpleDateFormat("MMM/dd/yyyy");
+				SimpleDateFormat dateFormatter = new SimpleDateFormat("MMM/dd/yyyy", Locale.ENGLISH );
 				String eventDate = monthInMMFormat + "/" + dayValue + "/" + yearValue;
 				Date eventDt = dateFormatter.parse(eventDate);
 			    Calendar c = Calendar.getInstance();

@@ -120,8 +120,8 @@
 		          String primImageUrl = "";
 		          if (Validator.isNotNull(measure.getPrimephoto()))
 		          {
-					IGImage primImage = IGImageServiceUtil.getImage(Long.parseLong(measure.getPrimephoto()));
-					primImageUrl = themeDisplay.getPathImage() + "/image_gallery?img_id=" + primImage.getLargeImageId() +  "&t=" + ImageServletTokenUtil.getToken(primImage.getLargeImageId());
+					DLFileEntry primImage = DLFileEntryLocalServiceUtil.getFileEntry(Long.parseLong(measure.getPrimephoto()));
+					primImageUrl = themeDisplay.getPathImage() + "/image_gallery?img_id=" + primImage.getLargeImageId() +  "&t=" + WebServerServletTokenUtil.getToken(primImage.getLargeImageId());
 		          }
 			 %>
 			<img src="<%=primImageUrl %>" class="case-studies-review-image" />
@@ -464,10 +464,10 @@
 						    String firstImageAlt = null;
 						    for (String photo:sphotosInReview)
 						    {
-								  IGImage image = IGImageServiceUtil.getImage(Long.parseLong(photo)); 
+								  DLFileEntry image = DLFileEntryLocalServiceUtil.getFileEntry(Long.parseLong(photo)); 
 								  String supPhotoName = image.getName(); 
 								  String supPhotoDescription = image.getDescription();
-								  String imageUrl = themeDisplay.getPathImage() + "/image_gallery?img_id=" + image.getLargeImageId() +  "&t=" + ImageServletTokenUtil.getToken(image.getLargeImageId());
+								  String imageUrl = themeDisplay.getPathImage() + "/image_gallery?img_id=" + image.getLargeImageId() +  "&t=" + WebServerServletTokenUtil.getToken(image.getLargeImageId());
 						 %>
 								 
 						<!-- =========================== -->

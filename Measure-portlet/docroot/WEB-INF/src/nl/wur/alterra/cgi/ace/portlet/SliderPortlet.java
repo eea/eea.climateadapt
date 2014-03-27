@@ -93,7 +93,7 @@ public class SliderPortlet extends MVCPortlet {
 			
 			// get the latest ace item object
 			AceItem aceItem = null;
-			query = DynamicQueryFactoryUtil.forClass(AceItem.class);
+			query = AceItemLocalServiceUtil.dynamicQuery();
 			query.add(PropertyFactoryUtil.forName("controlstatus").eq(new Short((short)1)));
 			String[] dataTypes = {"ORGANISATION", "RESEARCHPROJECT", "TOOL", "GUIDANCE", "DOCUMENT", "INFORMATIONSOURCE"};
 			query.add(PropertyFactoryUtil.forName("datatype").in(dataTypes));
@@ -217,7 +217,7 @@ public class SliderPortlet extends MVCPortlet {
 				node = document.selectSingleNode("/root/dynamic-element[@name='" + name + "']/dynamic-content");
 				locationValue = node.getText();
 			
-				SimpleDateFormat dateFormatter = new SimpleDateFormat("MMM/dd/yyyy");
+				SimpleDateFormat dateFormatter = new SimpleDateFormat("MMM/dd/yyyy", java.util.Locale.ENGLISH );
 				String eventDate = monthInMMFormat + "/" + dayValue + "/" + yearValue;
 				Date eventDt = dateFormatter.parse(eventDate);
 			    c = Calendar.getInstance();
