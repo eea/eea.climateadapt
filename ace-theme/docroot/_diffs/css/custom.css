@@ -9,6 +9,28 @@
 .aui {
 	background: #CCCCCC;
 }
+.aui-w3-4, .aui-w75 {
+    width: 75%;
+}
+.aui-w50 {
+    width: 50%;
+}
+
+.aui-w33 {
+    width: 33.33%;
+}
+
+.aui .portlet, .aui .portlet-borderless-container {
+    background: none repeat scroll 0 0 rgba(0, 0, 0, 0); 
+}
+
+aui-w25 {
+    width: 25%;
+}
+#content select {
+    padding: 1px;
+    line-height:16px;
+}
 
 .aui body{
 	background: #CCCCCC;
@@ -35,11 +57,74 @@ a#skip-to-content{
 .portlet-body li{
 	line-height: 16px;
 }
-.aui .portlet-borderless-container{
+
+.portlet-body {
+    color: #02213D;
+    font-family: arial,serif;
+    line-height: 1.364em;
+}
+
+#content .portlet-borderless-container{
  padding: 0px 0px;
  margin-bottom:0px;
 }
 
+#wrapper .portlet-borderless-container{
+ padding: 0px 0px;
+ margin-bottom:0px;
+}
+
+#content h2 {
+    font-size: 1.6em;
+    line-height: 1.3em;
+}
+
+#content h1{
+ padding-left:0px;
+ padding-right:0px;
+    color: #67788A;
+    font-size: 20px;
+    font-weight: normal;
+    line-height: 20px;
+    padding-bottom: 8px;
+    padding-top: 8px;
+    margin-bottom:1em;
+}
+#content dt, #content dd{
+  line-height: 1.364em;
+}
+#content img{
+ vertical-align:initial;
+}
+#content form{
+ margin:0px;
+}
+
+
+#content input[type="text"], #content input[type="password"], #content input[type="file"], #content input[type="submit"], #content input[type="button"], #content input[type="reset"], #content select, #content textarea, #content .textarea, #content button {
+    -moz-border-bottom-colors: none;
+    -moz-border-left-colors: none;
+    -moz-border-right-colors: none;
+    -moz-border-top-colors: none;
+    background-image: url("../images/forms/input_shadow.png");
+    background-repeat: no-repeat;
+    border-color: #BFBFBF #DEDEDE #DEDEDE #BFBFBF;
+    border-image: none;
+    border-style: solid;
+    border-width: 1px;
+    font: 1em Arial,Helvetica,Verdana,sans-serif;
+    padding: 1px;
+    color:#000000;
+
+    margin-bottom:0px;
+}
+
+
+.page-title .portlet-title {
+    color: #02213D;
+    font-size: 26px;
+    padding-top: 20px;
+}
 /* ---------- LR upgrade to 6.2 changes end ---------- */
 
 p {
@@ -148,19 +233,6 @@ body #banner .logo a {
 	color: #02213D;
 	font-size: 26px;
 
-}
-.aui .portlet-title {
-    padding: 0px;
-}
-h1.portlet-title{
- padding-left:0px;
- padding-right:0px;
-    color: #67788A;
-    font-size: 20px;
-    font-weight: normal;
-    line-height: 20px;
-    padding-bottom: 8px;
-    padding-top: 8px;
 }
 
 /* ---------- Main navigation ---------- */
