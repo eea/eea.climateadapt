@@ -144,7 +144,7 @@
 								 if (Validator.isNotNull(renderRequest.getAttribute("event")))
 							     {	
 							        JournalEvent event = (JournalEvent) renderRequest.getAttribute("event");
-							        description = event.getArticle().getDescription();
+							        description = event.getArticle().getDescriptionCurrentValue();
 							        
 							       
 							        if (description.indexOf('.') > 0 && description.indexOf('.') <= 420)
@@ -162,7 +162,7 @@
 												<img src="<%=request.getContextPath()%>/assets/events.jpg" alt="Events" />
 											</div>
 											<div class="case-studies-homepage-slider-description">
-												<h2>${event.article.title}</h2>
+												<h2>${event.article.titleCurrentValue}</h2>
 												<p><%=description%></p>
 												<a class="homepage-read-more" href="${event.url}"><img src="<%=request.getContextPath()%>/assets/ico-arrow.png" alt="arrow" />Read more</a>
 											</div>
