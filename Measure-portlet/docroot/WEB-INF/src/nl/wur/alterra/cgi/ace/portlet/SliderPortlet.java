@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 import javax.portlet.PortletException;
 import javax.portlet.RenderRequest;
@@ -216,7 +217,7 @@ public class SliderPortlet extends MVCPortlet {
 				node = document.selectSingleNode("/root/dynamic-element[@name='" + name + "']/dynamic-content");
 				locationValue = node.getText();
 			
-				SimpleDateFormat dateFormatter = new SimpleDateFormat("MMM/dd/yyyy");
+				SimpleDateFormat dateFormatter = new SimpleDateFormat("MMM/dd/yyyy",new Locale("en"));
 				String eventDate = monthInMMFormat + "/" + dayValue + "/" + yearValue;
 				Date eventDt = dateFormatter.parse(eventDate);
 			    c = Calendar.getInstance();

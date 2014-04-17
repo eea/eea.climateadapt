@@ -7,17 +7,15 @@ import java.util.Calendar;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 import javax.portlet.PortletException;
 import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
 import javax.servlet.http.HttpServletRequest;
 
-import nl.wur.alterra.cgi.util.JournalComparator;
-
 import com.liferay.portal.kernel.dao.search.DAOParamUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
-import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.WebKeys;
 import com.liferay.portal.kernel.workflow.WorkflowConstants;
 import com.liferay.portal.kernel.xml.Document;
@@ -130,7 +128,7 @@ public class EventPortlet extends MVCPortlet {
 				node = document.selectSingleNode("/root/dynamic-element[@name='" + name + "']/dynamic-content");
 				locationValue = node.getText();
 			
-				SimpleDateFormat dateFormatter = new SimpleDateFormat("MMM/dd/yyyy");
+				SimpleDateFormat dateFormatter = new SimpleDateFormat("MMM/dd/yyyy", new Locale("en"));
 				String eventDate = monthInMMFormat + "/" + dayValue + "/" + yearValue;
 				Date eventDt = dateFormatter.parse(eventDate);
 			    Calendar c = Calendar.getInstance();
