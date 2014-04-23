@@ -138,8 +138,9 @@
             <%= aceItemStatusDispValue %>
         </liferay-ui:search-container-column-text>
 
+      
         <liferay-ui:search-container-column-text name="source" orderable="true" orderableProperty="source">
-            <%=aceitem.getSource()%>
+            <%=aceitem.getSource().replaceAll("&lt;p&gt;", "").replaceAll("&lt;/p&gt;", "") %>
         </liferay-ui:search-container-column-text>
 
         <liferay-ui:search-container-column-text name="sectors_" value="<%=aceItemSectorsStr%>"/>

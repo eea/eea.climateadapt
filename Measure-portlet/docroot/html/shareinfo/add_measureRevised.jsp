@@ -528,13 +528,13 @@
 										<br /><br />
 										<p><em>Content Administration Comments:</em> (500 character limit)</p>
 										<% if (measure != null && measure.getAdmincomment() != null) { %>
-										      <textarea id="ta_caa_contact" cols="40" name="admincomment" rows="10" class="WYSIWYG" data-maxlength="500"><%= measure.getAdmincomment() %></textarea>
+										      <textarea id="ta_caa_contact" cols="40" name="admincomment" rows="10" class="WYSIWYG" data-maxlength="500"><%= HtmlUtil.escapeAttribute(measure.getAdmincomment()) %></textarea>
 										<%} else {
 											// preserve the render parameter already sent
 											//String renderAdminComment = renderRequest.getParameter("admincomment");
 											if (measureFromRequest != null)
 											{
-												String renderAdminComment = measureFromRequest.getAdmincomment();
+												String renderAdminComment = HtmlUtil.escapeAttribute(measureFromRequest.getAdmincomment());
 												pageContext.setAttribute("renderAdminComment", renderAdminComment);
 											}
 											//pageContext.setAttribute("renderAdminComment", renderAdminComment);
@@ -557,7 +557,7 @@
 												 
 												  if (Validator.isNotNull(measure.getSpecialtagging()))
 												  {
-													  specialTagging = measure.getSpecialtagging();
+													  specialTagging = HtmlUtil.escapeAttribute(measure.getSpecialtagging());
 												  }
 												  
 											  }
@@ -567,7 +567,7 @@
 												  {
 													  if (Validator.isNotNull(measureFromRequest.getSpecialtagging()))
 													  {
-														  specialTagging = measureFromRequest.getSpecialtagging();
+														  specialTagging = HtmlUtil.escapeAttribute(measureFromRequest.getSpecialtagging());
 													  }
 												  }
 											  }
@@ -605,13 +605,13 @@
 									    %>
 										<p><b><span class="red">*</span> <em><%=localDescription%></em></b></p>
 										<% if (measure != null) { %>
-		                                      <input name="name" type="text" size="75" maxlength="<%=textSize %>" value="<%= measure.getName() %>" /><br /><br />
+		                                      <input name="name" type="text" size="75" maxlength="<%=textSize %>" value="<%= HtmlUtil.escapeAttribute(measure.getName()) %>" /><br /><br />
 										<%} else {
 											// preserve the render parameter already set
 										    // String renderName = renderRequest.getParameter("name");
 											if (measureFromRequest != null)
 											{
-												String renderName = measureFromRequest.getName();
+												String renderName = HtmlUtil.escapeAttribute(measureFromRequest.getName());
 												pageContext.setAttribute("renderName", renderName);
 											}
 										%>
@@ -649,13 +649,13 @@
 										<p><%=localDescription%></p>
 											
 										<% if (measure != null && measure.getDescription() != null) { %>
-										       <textarea id="<portlet:namespace />descriptionField" cols="40" rows="10" class="WYSIWYG" name="description" data-maxlength="1000"><%= measure.getDescription() %></textarea>
+										       <textarea id="<portlet:namespace />descriptionField" cols="40" rows="10" class="WYSIWYG" name="description" data-maxlength="1000"><%= HtmlUtil.escapeAttribute(measure.getDescription()) %></textarea>
 										<%} else {
 											// preserve the render parameter already sent
 											//String renderDescription = renderRequest.getParameter("description");
 										    if (measureFromRequest != null)
 											{
-												String renderDescription = measureFromRequest.getDescription();
+												String renderDescription = HtmlUtil.escapeAttribute(measureFromRequest.getDescription());
 												pageContext.setAttribute("renderDescription", renderDescription);
 											}
 										%>
@@ -729,13 +729,13 @@
 										   including  also key environmental and socio-economic issues and geographical characterisation, e.g. &apos;mountain area&apos; or &apos;coastal area&apos; etc (5,000 char limit).</p>
 										
 										<% if (measure != null && measure.getChallenges() != null) { %>
-										      <textarea id="<portlet:namespace />challengesField" cols="40" rows="10" class="WYSIWYG" name="challenges" data-maxlength="5000"><%= measure.getChallenges() %></textarea>
+										      <textarea id="<portlet:namespace />challengesField" cols="40" rows="10" class="WYSIWYG" name="challenges" data-maxlength="5000"><%= HtmlUtil.escapeAttribute(measure.getChallenges()) %></textarea>
 										<%} else {
 											// preserve the render parameter already set
 											//String renderChallenges = renderRequest.getParameter("challenges");
 											if (measureFromRequest != null)
 											{
-												String renderChallenges = measureFromRequest.getChallenges();
+												String renderChallenges = HtmlUtil.escapeAttribute(measureFromRequest.getChallenges());
 												pageContext.setAttribute("renderChallenges", renderChallenges);
 											}
 											
@@ -756,13 +756,13 @@
 										<p><b><span class="red">*</span> <em>Objectives:</em></b></p>
 										<p>Describe the objectives which triggered the adaptation measures (1000 char limit).</p>
 											<% if (measure != null && measure.getObjectives() != null) { %>
-											     <textarea id="<portlet:namespace />objectivesField" cols="40" rows="10" class="WYSIWYG" name="objectives" data-maxlength="1000"><%= measure.getObjectives()%></textarea>
+											     <textarea id="<portlet:namespace />objectivesField" cols="40" rows="10" class="WYSIWYG" name="objectives" data-maxlength="1000"><%= HtmlUtil.escapeAttribute(measure.getObjectives())%></textarea>
 											<%} else {
 												// preserve the render parameter already set
 												//String renderObjectives = renderRequest.getParameter("objectives");
 												if (measureFromRequest != null)
 											    {
-													String renderObjectives = measureFromRequest.getObjectives();
+													String renderObjectives = HtmlUtil.escapeAttribute(measureFromRequest.getObjectives());
 													pageContext.setAttribute("renderObjectives", renderObjectives);
 											    }
 											%>
@@ -832,13 +832,13 @@
 										<p>Describe the climate change adaptation solution(s) implemented (5,000 char limit).</p>
 										
 										<% if (measure != null && Validator.isNotNull(measure.getSolutions())) { %>
-										      <textarea id="<portlet:namespace />solutionsField" cols="40" rows="10" class="WYSIWYG" name="solutions" data-maxlength="5000"><%= measure.getSolutions() %></textarea>
+										      <textarea id="<portlet:namespace />solutionsField" cols="40" rows="10" class="WYSIWYG" name="solutions" data-maxlength="5000"><%= HtmlUtil.escapeAttribute(measure.getSolutions()) %></textarea>
 										<%} else {
 											// preserve the render parameter already set
 											// String renderSolutions = renderRequest.getParameter("solutions");
 											if (measureFromRequest != null)
 											{
-													String renderSolutions = measureFromRequest.getSolutions();
+													String renderSolutions = HtmlUtil.escapeAttribute(measureFromRequest.getSolutions());
 													pageContext.setAttribute("renderSolutions", renderSolutions);
 											}
 											//pageContext.setAttribute("renderSolutions", renderSolutions);
@@ -907,13 +907,13 @@
 										<p>Describe and tag this <%=nameOfClimateEntityShortText.toLowerCase() %> with relevant keywords. Separate each keyword with a comma. For example, example keyword 1, example keyword 2  (1,000 char limit).</p>
 										
 										<% if (measure != null && Validator.isNotNull(measure.getKeywords())) { %>
-										      <textarea id="<portlet:namespace />keywordsField" cols="40" rows="10" class="WYSIWYG" name="keywords" data-maxlength="1000"><%= measure.getKeywords() %></textarea>
+										      <textarea id="<portlet:namespace />keywordsField" cols="40" rows="10" class="WYSIWYG" name="keywords" data-maxlength="1000"><%= HtmlUtil.escapeAttribute(measure.getKeywords()) %></textarea>
 										<%} else {
 											// preserve the render parameter already sent
 											//String renderKeywords = renderRequest.getParameter("keywords");
 											if (measureFromRequest != null)
 											{
-													String renderKeywords = measureFromRequest.getKeywords();
+													String renderKeywords = HtmlUtil.escapeAttribute(measureFromRequest.getKeywords());
 													pageContext.setAttribute("renderKeywords", renderKeywords);
 											}
 											//pageContext.setAttribute("renderKeywords", renderKeywords);
@@ -1119,13 +1119,13 @@
 										</p>
 										
 										<% if (measure != null && Validator.isNotNull(measure.getStakeholderparticipation())) { %>
-										      <textarea id="<portlet:namespace />stakeField" cols="40" rows="10" class="WYSIWYG" name="stakeholderparticipation" data-maxlength="5000"><%= measure.getStakeholderparticipation() %></textarea>
+										      <textarea id="<portlet:namespace />stakeField" cols="40" rows="10" class="WYSIWYG" name="stakeholderparticipation" data-maxlength="5000"><%= HtmlUtil.escapeAttribute(measure.getStakeholderparticipation()) %></textarea>
 										<%} else {
 											// preserve the render parameter already sent
 											//String renderStake = renderRequest.getParameter("stakeholderparticipation");
 											if (measureFromRequest != null)
 											{
-													String renderStake = measureFromRequest.getStakeholderparticipation();
+													String renderStake = HtmlUtil.escapeAttribute(measureFromRequest.getStakeholderparticipation());
 													pageContext.setAttribute("renderStake", renderStake);
 											}
 											//pageContext.setAttribute("renderStake", renderStake);
@@ -1172,13 +1172,13 @@
 										%>
 											
 										<% if (measure != null && Validator.isNotNull(measure.getSucceslimitations())) { %>
-										      <textarea id="<portlet:namespace />successField" cols="40" rows="10" class="WYSIWYG" name="succeslimitations" data-maxlength="5000"><%= measure.getSucceslimitations() %></textarea>
+										      <textarea id="<portlet:namespace />successField" cols="40" rows="10" class="WYSIWYG" name="succeslimitations" data-maxlength="5000"><%= HtmlUtil.escapeAttribute(measure.getSucceslimitations()) %></textarea>
 										<%} else {
 											// preserve the render parameter already sent
 											//String renderSuccess = renderRequest.getParameter("succeslimitations");
 											if (measureFromRequest != null)
 											{
-													String renderSuccess = measureFromRequest.getSucceslimitations();
+													String renderSuccess = HtmlUtil.escapeAttribute(measureFromRequest.getSucceslimitations());
 													pageContext.setAttribute("renderSuccess", renderSuccess);
 											}
 											//pageContext.setAttribute("renderSuccess", renderSuccess);
@@ -1225,13 +1225,13 @@
 								       <% } %>
 										
 										<% if (measure != null && Validator.isNotNull(measure.getCostbenefit())) { %>
-										      <textarea id="<portlet:namespace />costField" cols="40" rows="10" class="WYSIWYG" name="costbenefit" data-maxlength="5000"><%= measure.getCostbenefit() %></textarea>
+										      <textarea id="<portlet:namespace />costField" cols="40" rows="10" class="WYSIWYG" name="costbenefit" data-maxlength="5000"><%= HtmlUtil.escapeAttribute(measure.getCostbenefit()) %></textarea>
 										<%} else {
 											// preserve the render parameter already sent
 											//String renderCost = renderRequest.getParameter("costbenefit");
 											if (measureFromRequest != null)
 											{
-													String renderCost = measureFromRequest.getCostbenefit();
+													String renderCost = HtmlUtil.escapeAttribute(measureFromRequest.getCostbenefit());
 													pageContext.setAttribute("renderCost", renderCost);
 											}
 											//pageContext.setAttribute("renderCost", renderCost);
@@ -1275,13 +1275,13 @@
 										</p>
 										
 										<% if (measure != null && Validator.isNotNull(measure.getLegalaspects())) { %>
-										      <textarea id="<portlet:namespace />legalField" cols="40" rows="10" class="WYSIWYG" name="legalaspects" data-maxlength="5000"><%= measure.getLegalaspects() %></textarea>
+										      <textarea id="<portlet:namespace />legalField" cols="40" rows="10" class="WYSIWYG" name="legalaspects" data-maxlength="5000"><%= HtmlUtil.escapeAttribute(measure.getLegalaspects()) %></textarea>
 										  <%} else {
 											// preserve the render parameter already sent
 											//String renderLegal = renderRequest.getParameter("legalaspects");
 											if (measureFromRequest != null)
 											{
-													String renderLegal = measureFromRequest.getLegalaspects();
+													String renderLegal = HtmlUtil.escapeAttribute(measureFromRequest.getLegalaspects());
 													pageContext.setAttribute("renderLegal", renderLegal);
 											}
 											//pageContext.setAttribute("renderLegal", renderLegal);
@@ -1316,12 +1316,12 @@
 											  
 											  if (measureFromRequest != null && measureFromRequest.getImplementationtime() != null)
 											  {
-												        implTime = measureFromRequest.getImplementationtime();
+												        implTime = HtmlUtil.escapeAttribute(measureFromRequest.getImplementationtime());
 											  }
 											 
 										  }
 										%>
-										<textarea name="implementationtime" id="<portlet:namespace />implField" rows="10" cols="40" class="WYSIWYG" data-maxLength="250"><%= measure == null ? implTime : measure.getImplementationtime() %></textarea>
+										<textarea name="implementationtime" id="<portlet:namespace />implField" rows="10" cols="40" class="WYSIWYG" data-maxLength="250"><%= measure == null ? implTime : HtmlUtil.escapeAttribute(measure.getImplementationtime()) %></textarea>
 										<div class="case-studies-character-count"></div>
 									</li>
 								</ul>
@@ -1343,12 +1343,12 @@
 										  
 											  if (measureFromRequest != null && measureFromRequest.getLifetime() != null)
 											  {
-												        lifeTime = measureFromRequest.getLifetime();
+												        lifeTime = HtmlUtil.escapeAttribute(measureFromRequest.getLifetime());
 											  }
 										  }
 										%>
 										
-										<textarea name="lifetime"  id="<portlet:namespace />lifeTimeField" rows="10" cols="40" class="WYSIWYG" data-maxLength="250"><%= measure == null ? lifeTime : measure.getLifetime() %></textarea>
+										<textarea name="lifetime"  id="<portlet:namespace />lifeTimeField" rows="10" cols="40" class="WYSIWYG" data-maxLength="250"><%= measure == null ? lifeTime : HtmlUtil.escapeAttribute(measure.getLifetime()) %></textarea>
 										<div class="case-studies-character-count"></div>
 									</li>
 								</ul>
@@ -1378,11 +1378,11 @@
 										  if (measure == null || Validator.isNull(measure.getContact())) {
 											  if (measureFromRequest != null && measureFromRequest.getContact() != null)
 											  {
-												  caseContact = measureFromRequest.getContact();
+												  caseContact = HtmlUtil.escapeAttribute(measureFromRequest.getContact());
 											  }
 										  }
 										%>
-										<textarea name="contact"  id="<portlet:namespace />contactField" rows="10" cols="40" class="WYSIWYG" data-maxlength="500"><%= measure == null ? caseContact : measure.getContact() %></textarea>
+										<textarea name="contact"  id="<portlet:namespace />contactField" rows="10" cols="40" class="WYSIWYG" data-maxlength="500"><%= measure == null ? caseContact : HtmlUtil.escapeAttribute(measure.getContact()) %></textarea>
 										<div class="case-studies-character-count"></div>
 									</li>
 								</ul>
@@ -1411,12 +1411,12 @@
 										  if (measure == null || Validator.isNull(measure.getWebsite())) {
 											  if (measureFromRequest != null && measureFromRequest.getWebsite() != null)
 											  {
-												        website = measureFromRequest.getWebsite();
+												        website = HtmlUtil.escapeAttribute(measureFromRequest.getWebsite());
 											  }
 										  }
 										%>
 										
-										<textarea name="website" id="<portlet:namespace />websitefield" rows="10" cols="40" class="WYSIWYG" data-maxlength="500"><%= measure == null ? website : measure.getWebsite() %></textarea>
+										<textarea name="website" id="<portlet:namespace />websitefield" rows="10" cols="40" class="WYSIWYG" data-maxlength="500"><%= measure == null ? website : HtmlUtil.escapeAttribute(measure.getWebsite()) %></textarea>
 										<div class="case-studies-character-count"></div>
 									</li>
 								</ul>
@@ -1441,12 +1441,12 @@
 										  if (measure == null || Validator.isNull(measure.getSource())) {
 											  if (measureFromRequest != null && measureFromRequest.getSource() != null)
 											  {
-												        source = measureFromRequest.getSource();
+												        source = HtmlUtil.escapeAttribute(measureFromRequest.getSource());
 											  }
 										  }
 										%>
 										
-										<textarea name="source"  id="<portlet:namespace />sourcefield" rows="10" cols="40" class="WYSIWYG" data-maxLength="250"><%= (measure == null || Validator.isNull(measure.getSource())) ? source : measure.getSource() %></textarea>
+										<textarea name="source"  id="<portlet:namespace />sourcefield" rows="10" cols="40" class="WYSIWYG" data-maxLength="250"><%= (measure == null || Validator.isNull(measure.getSource())) ? source : HtmlUtil.escapeAttribute(measure.getSource()) %></textarea>
 										<div class="case-studies-character-count"></div>
 									</li>
 								</ul>
@@ -1535,8 +1535,8 @@
 													 String supPhotoName = image.getName(); 
 													 String imageName = image.getName();
 													 String supPhotoDescription = image.getDescription();
-													 sphotoNames[i] = supPhotoName;
-													 sphotoDescriptions[i] = supPhotoDescription;
+													 sphotoNames[i] = HtmlUtil.escapeAttribute(supPhotoName);
+													 sphotoDescriptions[i] = HtmlUtil.escapeAttribute(supPhotoDescription);
 													 imageNames[i] = imageName;
 													 i = i + 1;
 												 }
@@ -1660,8 +1660,8 @@
 												 {
 									            	 
 									            	 DLFileEntry file = DLFileEntryLocalServiceUtil.getDLFileEntry(Long.parseLong(document));
-													 String supFileName = file.getTitle();
-													 String supFileDescription = file.getDescription();
+													 String supFileName = HtmlUtil.escapeAttribute(file.getTitle());
+													 String supFileDescription = HtmlUtil.escapeAttribute(file.getDescription());
 													 sdocNames[i] = supFileName;
 													 sdocDescriptions[i] = supFileDescription;
 													 i = i + 1;
@@ -2245,11 +2245,11 @@
 						      
 						       if (measure != null && Validator.isNotNull(measure.getComments()) )
 						       {
-						    	   comments = measure.getComments();
+						    	   comments = HtmlUtil.escapeAttribute(measure.getComments());
 						       }
 						       else if (measureFromRequest != null && Validator.isNotNull(measureFromRequest.getComments()))
 						       {
-						    	   comments = measureFromRequest.getComments();
+						    	   comments = HtmlUtil.escapeAttribute(measureFromRequest.getComments());
 						       }
 						       
 						   %>
@@ -2285,6 +2285,7 @@
 							</div>
 							<br><br>
 
+                            <% String yearDisplay = measure.getYear().length() > 0 ? "("+measure.getYear() + ")" : "";%>
 							<div class="case-studies-tabbed-content-review-wrapper">
 								<div class="case-studies-tabbed-content-review-column-left">
 								 <% if (mao_type.equalsIgnoreCase("A")) { %>
@@ -2303,13 +2304,13 @@
 									</div>
 									
 									<div style="padding-right: 10px;">
-										<p class="case-studies-tabbed-content-review-header"><%= measure.getName() %> (<%=nameOfClimateEntityShortText %>)</p>
-										<p><%= measure.getDescription() %></p>
+										<p class="case-studies-tabbed-content-review-header"><%= HtmlUtil.escapeAttribute(measure.getName()) %> <%=yearDisplay %></p>
+										<p><%= measure.getDescription().replaceAll("<p>","").replaceAll("</p>","") %></p>
 									</div>
 							<% } else { %>
 										 <div class="case-studies-tabbed-content-section">
-										         <p class="case-studies-tabbed-content-review-header"><%= measure.getName() %> (<%=nameOfClimateEntityShortText %>)</p>
-											     <p><%= measure.getDescription() %></p>
+										         <p class="case-studies-tabbed-content-review-header"><%=  HtmlUtil.escapeAttribute(measure.getName()) %> <%=yearDisplay %></p>
+											     <p><%=  measure.getDescription().replaceAll("<p>","").replaceAll("</p>","") %></p>
 										</div>
 							<% } %>	
 										
@@ -2321,7 +2322,8 @@
 										    <% if (mao_type.equalsIgnoreCase("A")) { %>
 											<li>
 												<p><b><em><%=nameOfClimateEntityShortText %> Description</em></b></p>
-												<ul class="case-studies-tabbed-content-bullted-list">													<li><a href="#challenges_anchor">Challenges</a></li>
+												<ul class="case-studies-tabbed-content-bullted-list">													
+												    <li><a href="#challenges_anchor">Challenges</a></li>
 													<li><a href="#objectives_anchor">Objectives</a></li>
 													<li><a href="#adapt_options_anchor">Adaptation Options Implemented In This Case</a></li>
 													<li><a href="#solutions_anchor">Solutions</a></li>
@@ -2391,13 +2393,13 @@
 										<% if (mao_type.equalsIgnoreCase("A")) { %>
 											<li>
 												<a name="challenges_anchor"><b><em>Challenges</em></b></a>
-												   <p><%=measure.getChallenges() %></p>
+												   <p><%=measure.getChallenges().replaceAll("<p>","").replaceAll("</p>","") %></p>
 												<div class="case-studies-form-clearing"></div>
 											</li>
 											
 											<li>
 												<a name="objectives_anchor"><b><em>Objectives</em></b></a>
-												   <p><%=measure.getObjectives()%></p>
+												   <p><%=measure.getObjectives().replaceAll("<p>","").replaceAll("</p>","")%></p>
 												<div class="case-studies-form-clearing"></div>
 											</li>
 											
@@ -2442,7 +2444,7 @@
 											
 											<li>
 												<a name="solutions_anchor"><b><em>Solutions</em></b></a>
-												<p><%=measure.getSolutions() %></p>
+												<p><%=measure.getSolutions().replaceAll("<p>","").replaceAll("</p>","") %></p>
 												<div class="case-studies-form-clearing"></div>
 											</li>
 											
@@ -2515,7 +2517,7 @@
 												<li>
 													<a name="stake_holder_anchor"><b><em>Stakeholder Participation</em></b></a>
 												
-												    <p><%=measure.getStakeholderparticipation() %></p>
+												    <p><%=measure.getStakeholderparticipation().replaceAll("<p>","").replaceAll("</p>","") %></p>
 												    
 													<div class="case-studies-form-clearing"></div>
 												</li>
@@ -2527,7 +2529,7 @@
 											<li>
 												<a name="success_limitations_anchor"><b><em>Success and Limiting Factors</em></b></a>
 											
-											    <p><%=measure.getSucceslimitations() %></p>
+											    <p><%=measure.getSucceslimitations().replaceAll("<p>","").replaceAll("</p>","") %></p>
 											    
 												<div class="case-studies-form-clearing"></div>
 											</li>
@@ -2538,7 +2540,7 @@
 											<li>
 												<a name="cost_benefit_anchor"><b><em>Costs and Benefits</em></b></a>
 											
-											    <p><%=measure.getCostbenefit() %></p>
+											    <p><%=measure.getCostbenefit().replaceAll("<p>","").replaceAll("</p>","") %></p>
 											    
 												<div class="case-studies-form-clearing"></div>
 											</li>
@@ -2549,7 +2551,7 @@
 												<li>
 													<a name="legal_aspect_anchor"><b><em>Legal Aspects</em></b></a>
 												
-												    <p><%=measure.getLegalaspects() %></p>
+												    <p><%=measure.getLegalaspects().replaceAll("<p>","").replaceAll("</p>","") %></p>
 												    
 													<div class="case-studies-form-clearing"></div>
 												</li>
@@ -2560,7 +2562,7 @@
 												<li>
 													<a name="implementation_time_anchor"><b><em>Implementation Time</em></b></a>
 												
-												    <p><%=measure.getImplementationtime() %></p>
+												    <p><%=measure.getImplementationtime().replaceAll("<p>","").replaceAll("</p>","") %></p>
 												    
 													<div class="case-studies-form-clearing"></div>
 												</li>
@@ -2571,7 +2573,7 @@
 												<li>
 													<a name="life_time_anchor"><b><em>Life Time</em></b></a>
 												
-												    <p><%=measure.getLifetime() %></p>
+												    <p><%=measure.getLifetime().replaceAll("<p>","").replaceAll("</p>","") %></p>
 												    
 													<div class="case-studies-form-clearing"></div>
 												</li>
@@ -2586,7 +2588,7 @@
 										   	<% if (mao_type.equalsIgnoreCase("A")) { %>
 												<li>
 													<a name="contact_anchor"><b><em>Contact</em></b></a>
-													<p><%=measure.getContact() %></p>
+													<p><%=measure.getContact().replaceAll("<p>","").replaceAll("</p>","") %></p>
 													<div class="case-studies-form-clearing"></div>
 												</li>
 										    <% } %>
@@ -2611,7 +2613,7 @@
 												<li>
 													<a name="source_anchor"><b><em>Source</em></b></a>
 												
-												    <p><%=measure.getSource() %></p>
+												    <p><%=measure.getSource().replaceAll("<p>","").replaceAll("</p>","") %></p>
 												    
 													<div class="case-studies-form-clearing"></div>
 												</li>
@@ -2641,7 +2643,7 @@
 									     {
 													 DLFileEntry image = DLFileEntryLocalServiceUtil.getFileEntry(Long.parseLong(photo)); 
 													 String supPhotoName = image.getName(); 
-													 String supPhotoDescription = image.getDescription();
+													 String supPhotoDescription = image.getDescription().replaceAll("<p>","").replaceAll("</p>","");
 													 String imageUrl = themeDisplay.getPathImage() + "/image_gallery?img_id=" + image.getLargeImageId() +  "&t=" + WebServerServletTokenUtil.getToken(image.getLargeImageId());
 								 %>
 								 
@@ -2663,7 +2665,7 @@
 									<center>
 										<img src="<%=imageUrl%>" alt="<%=supPhotoName %>" />
 									</center>
-									<p><%=supPhotoDescription %></p>
+									<p><%=supPhotoDescription.replaceAll("<p>","").replaceAll("</p>","") %></p>
 									
 								</li>
 								
@@ -2696,7 +2698,7 @@
 									     for (String doc:sdocsForReview)
 									     {
 									    	 DLFileEntry uploadedFileEntry =  DLFileEntryLocalServiceUtil.getDLFileEntry(Long.parseLong(doc));
-									 	     String title = uploadedFileEntry.getTitle();
+									 	     String title = HtmlUtil.escapeAttribute(uploadedFileEntry.getTitle());
 									 	     String fileUrl = themeDisplay.getPortalURL() + themeDisplay.getPathContext() + "/documents/" + themeDisplay.getScopeGroupId() + "/" + uploadedFileEntry.getFolderId() +  "/" + HttpUtil.encodeURL(HtmlUtil.unescape(title));
 										
 									
@@ -2712,7 +2714,7 @@
 
 									<div class="case-studies-tabbed-content-review-column-right-section">
 										<p><b>Keywords</b></p>
-										<p><%=measure.getKeywords() %></p>
+										<%=measure.getKeywords().replaceAll("<p>","").replaceAll("</p>","") %><br/>
 									</div>
 									
 									<div class="case-studies-tabbed-content-review-column-right-section">
@@ -2729,7 +2731,7 @@
 										%>
 											<p><b>Climate impacts</b></p>
 											   <c:forEach var="climate" items="${climateImpactsForReview}">
-													       <p><liferay-ui:message key="aceitem-climateimpacts-lbl-${climate}" /></p>
+													       <liferay-ui:message key="aceitem-climateimpacts-lbl-${climate}" /><br/>
 										       </c:forEach>
 									</div>
 
@@ -2748,7 +2750,7 @@
 										
 										<p><b>Sectors</b></p>
 											<c:forEach var="sector" items="${sectorForReview}">
-												  <p><liferay-ui:message key="acesearch-sectors-lbl-${sector}" /></p>
+												  <liferay-ui:message key="acesearch-sectors-lbl-${sector}" /><br/>
 										    </c:forEach>
 									</div>
 
@@ -2782,7 +2784,7 @@
 												          <c:if test="${fn:length(countriesSelected) gt 0}">
 												               Countries:<br/>
 												               <c:forEach var="countryElement" items="${countriesSelected}" varStatus="status">
-													                <liferay-ui:message key="acesearch-country-lbl-${countryElement}"/>${not status.last ? ',' : ''}
+													                ${countryElement}${not status.last ? ',' : ''}
 													           </c:forEach>
 													           <br/><br/>
 												          </c:if>
@@ -2798,7 +2800,7 @@
 												          </c:if>
 												          
 												          <c:if test="${fn:length(city) gt 0}">
-												             City: ${city}<br/><br/>
+												             City:<br/> ${city}<br/>
 												          </c:if>
 												     </c:when>
 												     <c:otherwise>
@@ -2822,7 +2824,7 @@
 										            <p>Countries:</p>
 										        <%} %>
 												    <c:forEach var="ctry" items="${countryForReview}">
-												       <liferay-ui:message key="acesearch-country-lbl-${ctry}" /><br/><br/>
+												       ${ctry}<br/>
 												    </c:forEach>
 								       </div>
                                  </div>

@@ -83,94 +83,17 @@
 	
 	<div class="case-studies-review-column-left">
                 <div class="case-studies-tabbed-content-section">
-					<p class="case-review-header"><%= aceitem.getName() %> (<%= aceitemType %>)</p>
+                    <% String yearDisplay = aceitem.getYear().length() > 0 ? "("+aceitem.getYear() + ")" : "";%>
+					<p class="case-review-header"><%= HtmlUtil.escapeAttribute(aceitem.getName()) %> <%= yearDisplay %></p>
 					<p><b>Description:</b></p>
-					<p><%= aceitem.getDescription() %></p>
+					<p><%= aceitem.getDescription().replaceAll("<p>","").replaceAll("</p>","") %></p>
 				</div>
 
 				<div class="case-studies-review-clearing"></div>
-
-				<div class="case-studies-tabbed-content-section">
-					<div class="case-studies-subheader"><%=aceitemType %> Information</div>
-					<ul>
-						<li>
-							<p><b><em><%=aceitemType %> Description</em></b></p>
-							<ul class="case-studies-tabbed-content-bullted-list">
-								<li><a href="#climate_impacts_anchor">Climate Impacts</a></li>
-							    <li><a href="#sector_policies_anchor">Sector Policies</a></li>
-							</ul>
-						</li>
-						
-						<li>
-							<p><b><em>Reference Information</em></b></p>
-							<ul class="case-studies-bullted-list">
-								<li><a href="#website_anchor">Websites</a></li>
-								<% if (Validator.isNotNull(aceitem.getSource())) { %>
-									   <li><a href="#source_anchor">Source</a></li>
-								<% } %>
-							</ul>
-						</li>
-					</ul>
-					<div class="case-studies-case-studies-review-clearing-clearing"></div>
-				</div>
-				
-
-				<div class="case-studies-tabbed-content-section">
-					<div class="case-studies-subheader"><%=aceitemType %> Information</div>
-					<ul>
-						<li>
-							<a name="climate_impacts_anchor"><p><b><em>Climate Impacts</em></b></p></a>
-							<p>This <%=aceitemType %> addresses the following climate impact areas:</p>
-							
-							<%
-									String[] climateImpactsAry = null;
-								    if (Validator.isNotNull(aceitem.getClimateimpacts_()))
-								    {
-									    String climateImpacts = aceitem.getClimateimpacts_();
-									    climateImpactsAry = climateImpacts.split(";");
-								    }
-												    
-								    pageContext.setAttribute("climateImpactsForReview", climateImpactsAry);
-							%>
-												
-							  <c:if test="${climateImpactsForReview ne null }">
-							    <c:forEach var="climate" items="${climateImpactsForReview}">
-							           <p><liferay-ui:message key="aceitem-climateimpacts-lbl-${climate}" /></p>
-							    </c:forEach>
-							  </c:if>
-							<div class="case-studies-review-clearing"></div>
-						</li>
-						
-						<li>
-						        <a name="sector_policies_anchor"><p><b><em>Relevant European Union Sector Policies:</em></b></p></a>
-								<%	    
-								    String[] sectorAry = null;
-								    if (Validator.isNotNull(aceitem.getSectors_()))
-								    {
-								    	String sectors = aceitem.getSectors_();
-								    	sectorAry = sectors.split(";");
-								    }
-								    pageContext.setAttribute("sectorForReview", sectorAry);
-								   
-								%>
-								
-							   <c:if test="${sectorForReview ne null }">
-								    <c:forEach var="sector" items="${sectorForReview}">
-								       <p><liferay-ui:message key="acesearch-sectors-lbl-${sector}" /></p>
-								    </c:forEach>
-							   </c:if>
-							   <div class="case-studies-form-clearing"></div>
-						</li>
-					</ul>
-				</div>
-
 				
 				<div class="case-studies-tabbed-content-section">
 					<div class="case-studies-subheader">Reference Information</div>
-					<ul>
-					   
-						<li>
-							<a name="website_anchor"><p><b><em>Websites</em></b></p></a>
+							<br/><p><b>Websites:</b></p>
 								
 								<%
 										if(aceitem.getStoragetype().equalsIgnoreCase("MAPLAYER")) {
@@ -189,7 +112,7 @@
 										}
 										else {	
 		
-											url = aceitem.getStoredAt();
+											url = aceitem.getStoredAt().replaceAll("<p>","").replaceAll("</p>","");
 											
 											if(url != null && url.trim().length() > 0) {
 								
@@ -201,8 +124,8 @@
 													
 													if(i==2) { websitelabel += "s" ;}
 													
-													urls[i] = urls[i].replace("<p>", "");
-													urls[i] = urls[i].replace("</p>", "");
+													urls[i] = urls[i].replaceAll("<p>", "");
+													urls[i] = urls[i].replaceAll("</p>", "");
 													urls[i] = urls[i].trim();
 													
 													
@@ -235,18 +158,18 @@
 											 else{ %>
 										 	<%= url %><br /><br />
 										 <% } %>
-								<div class="case-studies-form-clearing"></div>
-						 </li>
+								
+						
 											
 						<% if (Validator.isNotNull(aceitem.getSource()))
 						{%>	
-								<li>
-									<a name="source_anchor"><p><b><em>Source</em></b></p></a>
-									<p><%=aceitem.getSource() %></p>
+								
+									<p><b>Source:</b></p>
+									<p><%=aceitem.getSource().replaceAll("<p>","").replaceAll("</p>","") %></p>
 									<div class="case-studies-form-clearing"></div>
-								</li>
+								
 						<%} %>
-					</ul>
+					
 				</div>
 				
 				<div class="case-studies-review-clearing"></div>
@@ -289,22 +212,64 @@
 					
 				<div class="case-studies-review-column-right-section">
 					<p><b>Keywords</b></p>
-					<p><%=aceitem.getKeyword() %></p>
+					<%=aceitem.getKeyword().replaceAll("<p>","").replaceAll("</p>","") %><br/>
 				</div>
 
-				<div class="case-studies-review-column-right-section">
-					<p><b>Sectors</b></p>
-					<c:forEach var="sector" items="${sectorForReview}">
-						<p><liferay-ui:message key="acesearch-sectors-lbl-${sector}" /></p>
-				    </c:forEach>
-				</div>
+				
 
 				<div class="case-studies-review-column-right-section">
+					<%
+							String[] climateImpactsAry = null;
+							if (Validator.isNotNull(aceitem.getClimateimpacts_()))
+							{
+									String climateImpacts = aceitem.getClimateimpacts_();
+									climateImpactsAry = climateImpacts.split(";");
+							}
+													    
+						    pageContext.setAttribute("climateImpactsForReview", climateImpactsAry);
+				     %>
 				     <p><b>Climate impacts</b></p>
 					 <c:forEach var="climate" items="${climateImpactsForReview}">
-						<p><liferay-ui:message key="aceitem-climateimpacts-lbl-${climate}" /></p>
+					     <liferay-ui:message key="aceitem-climateimpacts-lbl-${climate}" /><br/>
 					 </c:forEach>
 				</div>
+				
+				           <%
+									String[] climateElementsAry = null;
+								    if (Validator.isNotNull(aceitem.getElements_()))
+								    {
+									    String climateElements = aceitem.getElements_();
+									    climateElementsAry = climateElements.split(";");
+								    }
+												    
+								    pageContext.setAttribute("climateElementsForReview", climateElementsAry);
+							%>
+							  <c:if test="${climateElementsForReview ne null }">
+								<div class="case-studies-review-column-right-section">
+							      	<p><b>Elements</b></p>
+										    <c:forEach var="climate" items="${climateElementsForReview}">
+										           <liferay-ui:message key="acesearch-elements-lbl-${climate}" /><br/>
+										    </c:forEach>
+						        </div>
+				             </c:if>
+				             
+						    <div class="case-studies-review-column-right-section">
+						      <%
+														    
+								    String[] sectorAry = null;
+								    if (Validator.isNotNull(aceitem.getSectors_()))
+								    {
+								    	String sectors = aceitem.getSectors_();
+								    	sectorAry = sectors.split(";");
+								    }
+								    pageContext.setAttribute("sectorForReview", sectorAry);
+														   
+							  %>
+								<p><b>Sectors</b></p>
+								<c:forEach var="sector" items="${sectorForReview}">
+									<liferay-ui:message key="acesearch-sectors-lbl-${sector}" /><br/>
+							    </c:forEach>
+						   </div>
 						   
 						  <%        
 			                        String elementSelected = "";
@@ -412,8 +377,8 @@
 												          
 												          <c:if test="${fn:length(countriesSelected) gt 0}">
 												               Countries:<br/>
-												               <c:forEach var="countryElement" items="${countriessSelected}" varStatus="status">
-													                <liferay-ui:message key="acesearch-country-lbl-${countryElement}"/>${not status.last ? ',' : ''}
+												               <c:forEach var="countryElement" items="${countriesSelected}" varStatus="status">
+													                ${countryElement}${not status.last ? ',' : ''}
 													           </c:forEach>
 													           <br/><br/>
 												          </c:if>
@@ -421,16 +386,16 @@
 												          <c:if test="${fn:length(subNationalsSelected) gt 0}">
 												               Sub Nationals:<br/>
 												               
-												              <c:forEach var="subNationalElement" items="${subnationals}" varStatus="status">
+												          <c:forEach var="subNationalElement" items="${subnationals}" varStatus="status">
 													                     <c:if test="${fn:contains(subNationalsSelected,subNationalElement) }">
-														                      ${subNationalElement.description}
-														                 </c:if>${not status.last ? ',' : ''}
+														                      ${subNationalElement.description},
+														                 </c:if>
 														       </c:forEach>
 														       <br/><br/>
 												          </c:if>
 												          
 												          <c:if test="${fn:length(city) gt 0}">
-												             City: ${city}<br/>
+												             City:<br/> ${city}<br/>
 												          </c:if>
 												     </c:when>
 												     <c:otherwise>
@@ -452,7 +417,7 @@
 					     Countries:
 					<%} %>
 					<c:forEach var="ctry" items="${countryForReview}">
-						<liferay-ui:message key="acesearch-country-lbl-${ctry}" /><br/><br/>
+						${ctry}<br/>
 				    </c:forEach>
 
 			</div>

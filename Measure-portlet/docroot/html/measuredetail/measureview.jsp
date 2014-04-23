@@ -114,6 +114,7 @@
 	
 	
 	<div class="case-studies-review-column-left">
+	  <% String yearDisplay = measure.getYear().length() > 0 ? "("+measure.getYear() + ")" : "";%>
 	  <%if (type.equalsIgnoreCase("case study")) { %>
 		<div id="" class="case-studies-review-image-wrapper ">
 		      <% 
@@ -127,13 +128,13 @@
 			<img src="<%=primImageUrl %>" class="case-studies-review-image" />
 		</div>
 		 	<div style="padding-right: 3px;">
-				<p class="case-review-header"><%= measure.getName() %> (<%=nameOfClimateEntityShortText %>)</p>
-				<p><%= measure.getDescription() %></p>
+				<p class="case-review-header"><%= HtmlUtil.escapeAttribute(measure.getName()) %> <%=yearDisplay %></p>
+				<p><%= measure.getDescription().replaceAll("<p>","").replaceAll("</p>","") %></p>
 			</div>
      <% } else { %>	
              <div class="case-studies-tabbed-content-section">
-                <p class="case-review-header"><%= measure.getName() %> (<%= type %>)</p>
-					<p><%= measure.getDescription() %></p>
+                <p class="case-review-header"><%= HtmlUtil.escapeAttribute(measure.getName()) %> <%= yearDisplay %></p>
+					<p><%= measure.getDescription().replaceAll("<p>","").replaceAll("</p>","") %></p>
 			</div>
                 
      <% } %>
@@ -211,13 +212,13 @@
 						<% if (type.equalsIgnoreCase("case study")) { %> <%-- beginning of condition type is case study --%>	
 						<li>
 							<a name="challenges_anchor"><b><em>Challenges</em></b></a>
-							<p><%=measure.getChallenges() %></p>
+							<p><%=measure.getChallenges().replaceAll("<p>","").replaceAll("</p>","") %></p>
 							<div class="case-studies-review-clearing"></div>
 						</li>
 						
 						<li>
 							<a name="objectives_anchor"><b><em>Objectives</em></b></a>
-							<p><%=measure.getObjectives()%></p>
+							<p><%=measure.getObjectives().replaceAll("<p>","").replaceAll("</p>","")%></p>
 							<div class="case-studies-form-clearing"></div>
 						</li>
 											
@@ -263,7 +264,7 @@
 											
 						<li>
 								<a name="solutions_anchor"><b><em>Solutions</em></b></a>
-								   <p><%=measure.getSolutions() %></p>
+								   <p><%=measure.getSolutions().replaceAll("<p>","").replaceAll("</p>","") %></p>
 								<div class="case-studies-form-clearing"></div>
 						</li>
 											
@@ -330,7 +331,7 @@
 							{%>
 								<li>
 									<a name="stake_holder_anchor"><b><em>Stakeholder Participation</em></b></a>
-								    <p><%=measure.getStakeholderparticipation() %></p>
+								    <p><%=measure.getStakeholderparticipation().replaceAll("<p>","").replaceAll("</p>","") %></p>
 								    <div class="case-studies-form-clearing"></div>
 							    </li>
 						   <%} %>
@@ -340,7 +341,7 @@
 							{%>
 									<li>
 										<a name="success_limitations_anchor"><b><em>Success and Limiting Factors</em></b></a>
-										<p><%=measure.getSucceslimitations() %></p>
+										<p><%=measure.getSucceslimitations().replaceAll("<p>","").replaceAll("</p>","") %></p>
 									    <div class="case-studies-form-clearing"></div>
 									</li>
 						   <%} %>
@@ -349,7 +350,7 @@
 						    {%>	
 								<li>
 									<a name="cost_benefit_anchor"><b><em>Costs and Benefits</em></b></a>
-									<p><%=measure.getCostbenefit() %></p>
+									<p><%=measure.getCostbenefit().replaceAll("<p>","").replaceAll("</p>","") %></p>
 									<div class="case-studies-form-clearing"></div>
 								</li>
 							<%} %>
@@ -358,7 +359,7 @@
 							   {%>	
 									<li>
 										<a name="legal_aspect_anchor"><b><em>Legal Aspects</em></b></a>
-									    <p><%=measure.getLegalaspects() %></p>
+									    <p><%=measure.getLegalaspects().replaceAll("<p>","").replaceAll("</p>","") %></p>
 										<div class="case-studies-form-clearing"></div>
 									</li>
 							 <%} %>
@@ -367,7 +368,7 @@
 							   {%>	
 									<li>
 										<a name="implementation_time_anchor"><b><em>Implementation Time</em></b></a>
-										<p><%=measure.getImplementationtime() %></p>
+										<p><%=measure.getImplementationtime().replaceAll("<p>","").replaceAll("</p>","") %></p>
 										<div class="case-studies-form-clearing"></div>
 									</li>
 							  <%} %>
@@ -376,7 +377,7 @@
 							   {%>	
 									<li>
 										<a name="life_time_anchor"><b><em>Life Time</em></b></a>
-										<p><%=measure.getLifetime() %></p>
+										<p><%=measure.getLifetime().replaceAll("<p>","").replaceAll("</p>","") %></p>
 										<div class="case-studies-form-clearing"></div>
 								    </li>
 						     <%} %>
@@ -389,7 +390,7 @@
 					   <% if (type.equalsIgnoreCase("case study")) { %>
 						<li>
 							<a name="contact_anchor"><b><em>Contact</em></b></a>
-							<p><%=measure.getContact() %></p>
+							<p><%=measure.getContact().replaceAll("<p>","").replaceAll("</p>","") %></p>
 							<div class="case-studies-form-clearing"></div>
 						</li>
 						<% } %>
@@ -416,7 +417,7 @@
 						{%>	
 								<li>
 									<a name="source_anchor"><b><em>Source</em></b></a>
-									<p><%=measure.getSource() %></p>
+									<p><%=measure.getSource().replaceAll("<p>","").replaceAll("</p>","") %></p>
 									<div class="case-studies-form-clearing"></div>
 								</li>
 						<%} %>
@@ -464,10 +465,12 @@
 						    String firstImageAlt = null;
 						    for (String photo:sphotosInReview)
 						    {
+
 								  DLFileEntry image = DLFileEntryLocalServiceUtil.getFileEntry(Long.parseLong(photo)); 
 								  String supPhotoName = image.getName(); 
-								  String supPhotoDescription = image.getDescription();
+								  String supPhotoDescription = image.getDescription().replaceAll("<p>","").replaceAll("</p>","");
 								  String imageUrl = themeDisplay.getPathImage() + "/image_gallery?img_id=" + image.getLargeImageId() +  "&t=" + WebServerServletTokenUtil.getToken(image.getLargeImageId());
+
 						 %>
 								 
 						<!-- =========================== -->
@@ -521,7 +524,7 @@
 									     for (String doc:sdocsForReview)
 									     {
 									    	 DLFileEntry uploadedFileEntry =  DLFileEntryLocalServiceUtil.getDLFileEntry(Long.parseLong(doc));
-									 	     String title = uploadedFileEntry.getTitle();
+									 	     String title = HtmlUtil.escapeAttribute(uploadedFileEntry.getTitle());
 									 	     String fileUrl = themeDisplay.getPortalURL() + themeDisplay.getPathContext() + "/documents/" + themeDisplay.getScopeGroupId() + "/" + uploadedFileEntry.getFolderId() +  "/" + HttpUtil.encodeURL(HtmlUtil.unescape(title));
 										
 									
@@ -535,7 +538,7 @@
 				
 				<div class="case-studies-review-column-right-section">
 					<p><b>Keywords</b></p>
-					<p><%=measure.getKeywords() %></p>
+					<%=measure.getKeywords().replaceAll("<p>","").replaceAll("</p>","") %><br/>
 				</div>
 
 				<div class="case-studies-review-column-right-section">
@@ -552,7 +555,7 @@
 								   
 					%>
 					<c:forEach var="sector" items="${sectorForReview}">
-						<p><liferay-ui:message key="acesearch-sectors-lbl-${sector}" /></p>
+						<liferay-ui:message key="acesearch-sectors-lbl-${sector}" /><br/>
 				    </c:forEach>
 				</div>
 
@@ -570,7 +573,7 @@
 					    pageContext.setAttribute("climateImpactsForReview", climateImpactsAry);
 					%>
 					 <c:forEach var="climate" items="${climateImpactsForReview}">
-						<p><liferay-ui:message key="aceitem-climateimpacts-lbl-${climate}" /></p>
+						<liferay-ui:message key="aceitem-climateimpacts-lbl-${climate}" /><br/>
 					 </c:forEach>
 				</div>
 						   
@@ -683,7 +686,7 @@
 												          <c:if test="${fn:length(countriesSelected) gt 0}">
 												               Countries:<br/>
 												               <c:forEach var="countryElement" items="${countriessSelected}" varStatus="status">
-													                <liferay-ui:message key="acesearch-country-lbl-${countryElement}"/>${not status.last ? ',' : ''}
+													               ${countryElement}${not status.last ? ',' : ''}
 													           </c:forEach>
 													           <br/><br/>
 												          </c:if>
@@ -693,14 +696,14 @@
 												               
 												              <c:forEach var="subNationalElement" items="${subnationals}" varStatus="status">
 													                     <c:if test="${fn:contains(subNationalsSelected,subNationalElement) }">
-														                      ${subNationalElement.description}
-														                 </c:if>${not status.last ? ',' : ''}
+														                      ${subNationalElement.description}${not status.last ? ',' : ''}
+														                 </c:if>
 														       </c:forEach>
 														       <br/><br/>
 												          </c:if>
 												          
 												          <c:if test="${fn:length(city) gt 0}">
-												             City: ${city}<br/>
+												             City:<br/>${city}<br/>
 												          </c:if>
 												     </c:when>
 												     <c:otherwise>
@@ -722,7 +725,7 @@
 					 Countries:
 					<%} %>
 					<c:forEach var="ctry" items="${countryForReview}">
-						<liferay-ui:message key="acesearch-country-lbl-${ctry}" /><br/><br/>
+						${ctry}<br/>
 				    </c:forEach>
 
 			</div>
