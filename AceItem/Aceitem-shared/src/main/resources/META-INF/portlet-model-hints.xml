@@ -1,0 +1,82 @@
+<?xml version="1.0"?>
+
+<model-hints>
+	<model name="nl.wur.alterra.cgi.ace.model.AceItem">
+		<field name="aceItemId" type="long" />
+		<field name="companyId" type="long" />
+		<field name="groupId" type="long" />
+		<field name="wxsharvesterId" type="long" />
+		<field name="cswharvesterId" type="long" />
+		<field name="name" type="String" />
+		<field name="description" type="String" />
+		<field name="datatype" type="String" />
+		<field name="storedAt" type="String" />
+		<field name="storagetype" type="String" />
+		<field name="specialtagging" type="String" />
+		<field name="textSearch" type="String" />
+		<field name="keyword" type="String" />
+		<field name="targetresolution" type="String" />
+		<field name="spatialLayer" type="String" />
+		<field name="spatialValues" type="String" />
+		<field name="startDate" type="Date" />
+		<field name="endDate" type="Date" />
+		<field name="publicationDate" type="Date" />
+		<field name="sectors_" type="String" />
+		<field name="elements_" type="String" />
+		<field name="climateimpacts_" type="String" />
+		<field name="rating" type="long" />
+		<field name="importance" type="long" />
+		<field name="source" type="String" />
+		<field name="deeplink" type="String" />
+		<field name="controlstatus" type="short" />
+		<field name="creator" type="String" />
+		<field name="creationdate" type="Date" />
+		<field name="moderator" type="String" />
+		<field name="approvaldate" type="Date" />
+		<field name="replacesId" type="long" />
+		<field name="comments" type="String" />
+		<field name="textwebpage" type="String" />
+		<field name="year" type="String" />
+		<field name="geochars" type="String" />
+		<field name="feature" type="String" />
+		<field name="supdocs" type="String" />
+		<field name="admincomment" type="String" />
+		<field name="scenario" type="String" />
+		<field name="timeperiod" type="String" />
+		<field name="lockdate" type="Date" />
+	</model>
+	<model name="nl.wur.alterra.cgi.ace.model.CSWHarvester">
+		<field name="cswharvesterid" type="long" />
+		<field name="name" type="String" />
+		<field name="url" type="String" />
+		<field name="freetext" type="String" />
+		<field name="title" type="String" />
+		<field name="abstrakt" type="String" />
+		<field name="subject" type="String" />
+		<field name="every" type="int" />
+		<field name="topic" type="String" />
+		<field name="status" type="String" />
+		<field name="savedToGeoNetwork" type="boolean" />
+		<field name="geonetworkId" type="long" />
+		<field name="geonetworkUUID" type="String" />
+		<field name="companyId" type="long" />
+		<field name="groupId" type="long" />
+		<field name="type" type="String" />
+		<field name="username" type="String" />
+		<field name="password" type="String" />
+	</model>
+	<model name="nl.wur.alterra.cgi.ace.model.WxsHarvester">
+		<field name="wxsharvesterid" type="long" />
+		<field name="name" type="String" />
+		<field name="url" type="String" />
+		<field name="ogctype" type="String" />
+		<field name="every" type="int" />
+		<field name="topic" type="String" />
+		<field name="status" type="String" />
+		<field name="savedToGeoNetwork" type="boolean" />
+		<field name="geonetworkId" type="long" />
+		<field name="geonetworkUUID" type="String" />
+		<field name="companyId" type="long" />
+		<field name="groupId" type="long" />
+	</model>
+</model-hints>

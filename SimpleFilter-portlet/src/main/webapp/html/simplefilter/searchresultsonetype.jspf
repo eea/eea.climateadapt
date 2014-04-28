@@ -1,0 +1,141 @@
+<c:if test="${fn:length(groupedResults) > 0}">
+
+	<%
+		//
+		// a random postfix is used to relate ids of elements
+		//
+		
+		int itemsOnPage = Integer.parseInt( renderRequest.getPreferences().getValue(Constants.NRITEMSPAGE, "10") ); 
+
+		int r = new java.util.Random().nextInt(Integer.MAX_VALUE);
+		pageContext.setAttribute("unique", "" + r);
+		pageContext.setAttribute("expandedId", "expandedId-" + r);		
+		pageContext.setAttribute("collapsedId", "collapsedId-" + r);
+		pageContext.setAttribute("expandedTitleId", "expandedTitleId-" + r);		
+		pageContext.setAttribute("collapsedTitleId", "collapsedTitleId-" + r);		
+		pageContext.setAttribute("resultsListId", "resultsListId-" + r);
+		pageContext.setAttribute("anyOfTheseId", "anyOfTheseId-" + r);		
+		pageContext.setAttribute("paginationId", "paginationId-" + r);
+		pageContext.setAttribute("demoId", "demoId-" + r);
+	%>
+	
+	<%-- expanded view --%>	
+	<div id="${collapsedId}">
+
+        <c:set var="groupedResults" value="${groupedResults}"/>
+
+		<%-- <div id="oneview" class="collapsedResultsGroupTitle resultsTitle">
+			<c:out value='${groupTitle}' /> 
+		</div>  --%>
+	
+		<c:set var="nrPageItems" value="<%= itemsOnPage %>"/>
+	
+		<div id="${resultsListId}">
+			<c:forEach var="wrappedSearchResult" items="${groupedResults}" begin="0" end="<%= itemsOnPage-1 %>">		
+				<% 					
+					if ( sofarnr  < prefnritemspage ) { %>
+				<div>
+					<div style="clear:both;">
+
+						<c:set var="descriptionId" value="descriptionId-${wrappedSearchResult.aceItemId}" />
+
+						<c:set var="plusId" value="plusId-${wrappedSearchResult.aceItemId}" />
+
+						<c:set var="minusId" value="minusId-${wrappedSearchResult.aceItemId}" />
+
+                        <c:set var="descriptionText" value="${wrappedSearchResult.shortdescription}" />	
+						
+						<span id="${plusId}" class="plus toggleshow"><img src="/ace-theme/images/arrows/01_plus.png" /></span>
+						<span id="${minusId}" class="minus togglehide"><img src="/ace-theme/images/arrows/01_minus.png" /></span>
+						<span class="feed-entry-title">
+						<c:choose>
+							<c:when test="${!empty wrappedSearchResult.storedAt && fn:startsWith(wrappedSearchResult.storagetype, 'URL')==true}">
+								&nbsp;<a href="<c:out value="/viewaceitem?aceitem_id=${wrappedSearchResult.aceItemId}"/>" ><c:out value="${wrappedSearchResult.name}"/></a>
+							</c:when>
+							<c:when test="${!empty wrappedSearchResult.storedAt && fn:startsWith(wrappedSearchResult.storedAt, 'ace_project_id')==true}">
+								&nbsp;<a href="<c:out value="/projects1?${wrappedSearchResult.storedAt}"/>" >
+									<c:out value="${wrappedSearchResult.name}"/></a>
+							</c:when>
+							<c:when test="${!empty wrappedSearchResult.storedAt && fn:startsWith(wrappedSearchResult.storedAt, 'ace_measure_id')==true}">
+								&nbsp;<a href="<c:out value="/viewmeasure?${wrappedSearchResult.storedAt}"/>" >
+									<c:out value="${wrappedSearchResult.name}"/></a>
+							</c:when>                            
+							<c:otherwise>
+								&nbsp;<a href="<c:out value="/viewaceitem?aceitem_id=${wrappedSearchResult.aceItemId}"/>" ><c:out value="${wrappedSearchResult.name}"/></a>
+							</c:otherwise>
+						</c:choose>					
+						</span>
+						<span id="${descriptionId}" class="feed-entry-content togglehide"><c:out value="${descriptionText}" /></span>
+		
+					</div><%-- 
+
+					<div class="resultfooter">
+						<hr class="clearer"/>
+					</div> --%> 
+				</div>
+			<% 	
+				sofarnr++ ;
+				} %>
+			</c:forEach>
+			
+		  <c:if test="${cnt eq 1 }">
+			<c:choose>
+			    <c:when test="${aceitemtype eq 'DOCUMENT'}">
+			       <c:set var="aceitemtypeName" scope="page" value="Publication & Report"/>
+			       <c:set var="articleText" scope="page" value="a" />
+			       <c:set var="url" scope="page" value="/share-your-info/publications-and-reports" />
+			    </c:when>
+			    <c:when test="${aceitemtype eq 'INFORMATIONSOURCE'}">
+			       <c:set var="aceitemtypeName" scope="page" value="Information Portal"/>
+			       <c:set var="articleText" scope="page" value="an" />
+			       <c:set var="url" scope="page" value="/share-your-info/information-portals" />
+			    </c:when>
+			    <c:when test="${aceitemtype eq 'GUIDANCE'}">
+			       <c:set var="aceitemtypeName" scope="page" value="Guidance Document"/>
+			       <c:set var="articleText" scope="page" value="a" />
+			       <c:set var="url" scope="page" value="/share-your-info/guidance-documents" />
+			    </c:when>
+			    <c:when test="${aceitemtype eq 'TOOL'}">
+			       <c:set var="aceitemtypeName" scope="page" value="Tool"/>
+			       <c:set var="articleText" scope="page" value="a" />
+			       <c:set var="url" scope="page" value="/share-your-info/tools" />
+			    </c:when>
+			    <c:when test="${aceitemtype eq 'RESEARCHPROJECT'}">
+			       <c:set var="aceitemtypeName" scope="page" value="Research and Knowledge Projects"/>
+			       <c:set var="articleText" scope="page" value="a" />
+			       <c:set var="url" scope="page" value="/share-your-info/research-and-knowledge-projects" />
+			    </c:when>
+			    <c:when test="${aceitemtype eq 'MEASURE'}">
+			       <c:set var="aceitemtypeName" scope="page" value="Adaptation Option"/>
+			       <c:set var="articleText" scope="page" value="an" />
+			       <c:set var="url" scope="page" value="/share-your-info/adaptation-options" />
+			    </c:when>
+			    <c:when test="${aceitemtype eq 'ORGANISATION'}">
+			       <c:set var="aceitemtypeName" scope="page" value="Organisation"/>
+			       <c:set var="articleText" scope="page" value="an" />
+			       <c:set var="url" scope="page" value="/share-your-info/organisations" />
+			    </c:when>
+			    <c:otherwise>
+			       <%-- nothing to do --%>
+			    </c:otherwise>
+			</c:choose>
+			
+		   <c:if test="${aceitemtype eq 'DOCUMENT' || aceitemtype eq 'INFORMATIONSOURCE' || aceitemtype eq 'GUIDANCE' || aceitemtype eq 'TOOL' || aceitemtype eq 'RESEARCHPROJECT' || aceitemtype eq 'MEASURE' || aceitemtype eq 'ORGANISATION'}" >
+		     <c:set var="url" scope="page" value="/share-your-info" />   
+		     <div class="bluebuttondiv">
+		       <!-- Reverting back all the links to "Share your information" as per the requirement -->
+		       <!-- The "Submit a <database item> can be restored any time as the above logic to determine the database item url still there -->
+	           <%-- <a href="${url}" class="bluebutton">Submit ${articleText} ${aceitemtypeName}</a> --%>
+	           <a href="${url}" class="bluebutton">Share your information</a>
+	        </div>
+	      </c:if>
+	     </c:if> <%--results type cnt equal to one --%>
+	     
+	     
+			
+		</div>
+
+	</div>
+	
+</c:if>
+	

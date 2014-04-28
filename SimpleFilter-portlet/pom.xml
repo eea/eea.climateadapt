@@ -10,7 +10,7 @@
   </parent>
 
 
-  <artifactId>ASTHeader-portlet</artifactId>
+  <artifactId>SimpleFilter-portlet</artifactId>
   <packaging>war</packaging>
 
   <build>
@@ -33,5 +33,21 @@
       </plugin>
     </plugins>
   </build>
+
+  <dependencies>
+    <dependency>
+      <groupId>eu.europa.eea</groupId>
+      <artifactId>AceItem-shared</artifactId>
+      <version>1.0</version>
+      <scope>provided</scope>
+    </dependency>
+
+    <dependency>
+      <groupId>com.googlecode.json-simple</groupId>
+      <artifactId>json-simple</artifactId>
+      <version>1.1.1</version>
+    </dependency>
+  </dependencies>
+
 
 </project>

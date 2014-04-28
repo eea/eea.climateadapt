@@ -5,13 +5,14 @@
 
   <parent>
     <groupId>eu.europa.eea</groupId>
-    <artifactId>portal-parent</artifactId>
+    <artifactId>aceitem-parent</artifactId>
     <version>1.0</version>
+    <relativePath>../pom.xml</relativePath>
   </parent>
 
 
-  <artifactId>ASTHeader-portlet</artifactId>
-  <packaging>war</packaging>
+  <artifactId>AceItem-shared</artifactId>
+  <packaging>jar</packaging>
 
   <build>
     <finalName>${project.artifactId}</finalName>
@@ -21,17 +22,33 @@
         <artifactId>liferay-maven-plugin</artifactId>
         <executions>
           <execution>
+            <configuration>
+              <webappBaseDir>${basedir}/../AceItem-portlet</webappBaseDir>
+            </configuration>
             <phase>generate-sources</phase>
             <goals>
-              <goal>build-css</goal>
+              <goal>build-service</goal>
             </goals>
           </execution>
         </executions>
-        <configuration>
-          <pluginType>portlet</pluginType>
-        </configuration>
       </plugin>
     </plugins>
   </build>
+
+  <dependencies>
+    <dependency>
+      <groupId>org.apache.lucene</groupId>
+      <artifactId>lucene-core</artifactId>
+      <version>2.9.0</version>
+      <scope>provided</scope>
+    </dependency>
+
+    <dependency>
+      <groupId>com.google.code.gson</groupId>
+      <artifactId>gson</artifactId>
+      <version>2.2.4</version>
+    </dependency>
+
+  </dependencies>
 
 </project>

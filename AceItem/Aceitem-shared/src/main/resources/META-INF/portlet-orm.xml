@@ -1,0 +1,131 @@
+<?xml version="1.0"?>
+
+<entity-mappings xmlns="http://java.sun.com/xml/ns/persistence/orm" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="1.0" xsi:schemaLocation="http://java.sun.com/xml/ns/persistence/orm http://java.sun.com/xml/ns/persistence/orm_1_0.xsd">
+	<persistence-unit-metadata>
+		<xml-mapping-metadata-complete/>
+		<persistence-unit-defaults>
+			<access>PROPERTY</access>
+		</persistence-unit-defaults>
+	</persistence-unit-metadata>
+	<mapped-superclass class="nl.wur.alterra.cgi.ace.model.impl.AceItemModelImpl">
+		<attributes>
+			<id name="aceItemId" />
+			<basic name="companyId" />
+			<basic name="groupId" />
+			<basic name="wxsharvesterId" />
+			<basic name="cswharvesterId" />
+			<basic name="name" />
+			<basic name="description" />
+			<basic name="datatype" />
+			<basic name="storedAt" />
+			<basic name="storagetype" />
+			<basic name="specialtagging" />
+			<basic name="textSearch" />
+			<basic name="keyword" />
+			<basic name="targetresolution" />
+			<basic name="spatialLayer" />
+			<basic name="spatialValues" />
+			<basic name="startDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="endDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="publicationDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="sectors_" />
+			<basic name="elements_" />
+			<basic name="climateimpacts_" />
+			<basic name="rating" />
+			<basic name="importance" />
+			<basic name="source" />
+			<basic name="deeplink" />
+			<basic name="controlstatus" />
+			<basic name="creator" />
+			<basic name="creationdate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="moderator" />
+			<basic name="approvaldate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="replacesId" />
+			<basic name="comments" />
+			<basic name="textwebpage" />
+			<basic name="year" />
+			<basic name="geochars" />
+			<basic name="feature" />
+			<basic name="supdocs" />
+			<basic name="admincomment" />
+			<basic name="scenario" />
+			<basic name="timeperiod" />
+			<basic name="lockdate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<transient name="modelAttributes" />
+			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
+		</attributes>
+	</mapped-superclass>
+	<mapped-superclass class="nl.wur.alterra.cgi.ace.model.impl.CSWHarvesterModelImpl">
+		<attributes>
+			<id name="cswharvesterid" />
+			<basic name="name" />
+			<basic name="url" />
+			<basic name="freetext" />
+			<basic name="title" />
+			<basic name="abstrakt" />
+			<basic name="subject" />
+			<basic name="every" />
+			<basic name="topic" />
+			<basic name="status" />
+			<basic name="savedToGeoNetwork" />
+			<basic name="geonetworkId" />
+			<basic name="geonetworkUUID" />
+			<basic name="companyId" />
+			<basic name="groupId" />
+			<basic name="type">
+				<column name="TYPE_" />
+			</basic>
+			<basic name="username" />
+			<basic name="password">
+				<column name="PASSWORD_" />
+			</basic>
+			<transient name="modelAttributes" />
+			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
+		</attributes>
+	</mapped-superclass>
+	<mapped-superclass class="nl.wur.alterra.cgi.ace.model.impl.WxsHarvesterModelImpl">
+		<attributes>
+			<id name="wxsharvesterid" />
+			<basic name="name" />
+			<basic name="url" />
+			<basic name="ogctype" />
+			<basic name="every" />
+			<basic name="topic" />
+			<basic name="status" />
+			<basic name="savedToGeoNetwork" />
+			<basic name="geonetworkId" />
+			<basic name="geonetworkUUID" />
+			<basic name="companyId" />
+			<basic name="groupId" />
+			<transient name="modelAttributes" />
+			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
+		</attributes>
+	</mapped-superclass>
+	<entity class="nl.wur.alterra.cgi.ace.model.impl.AceItemImpl" name="AceItem">
+		<table name="Ace_AceItem" />
+		<attributes />
+	</entity>
+	<entity class="nl.wur.alterra.cgi.ace.model.impl.CSWHarvesterImpl" name="CSWHarvester">
+		<table name="Ace_CSWHarvester" />
+		<attributes />
+	</entity>
+	<entity class="nl.wur.alterra.cgi.ace.model.impl.WxsHarvesterImpl" name="WxsHarvester">
+		<table name="Ace_WxsHarvester" />
+		<attributes />
+	</entity>
+</entity-mappings>

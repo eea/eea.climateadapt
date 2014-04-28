@@ -3,6 +3,8 @@ build.properties
 .ant_targets
 .project
 .classpath
+*.ipr
+*.iws
 ASTHeader-portlet/docroot/WEB-INF/classes/
 AceItem-portlet/docroot/WEB-INF/classes/
 AceItem-portlet/docroot/WEB-INF/service/classes/

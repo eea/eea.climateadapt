@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" default-destroy-method="destroy" default-init-method="afterPropertiesSet" xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+	<bean id="nl.wur.alterra.cgi.ace.service.AceItemLocalService" class="nl.wur.alterra.cgi.ace.service.impl.AceItemLocalServiceImpl" />
+	<bean id="nl.wur.alterra.cgi.ace.service.persistence.AceItemPersistence" class="nl.wur.alterra.cgi.ace.service.persistence.AceItemPersistenceImpl" parent="basePersistence" />
+	<bean id="nl.wur.alterra.cgi.ace.service.CSWHarvesterLocalService" class="nl.wur.alterra.cgi.ace.service.impl.CSWHarvesterLocalServiceImpl" />
+	<bean id="nl.wur.alterra.cgi.ace.service.persistence.CSWHarvesterPersistence" class="nl.wur.alterra.cgi.ace.service.persistence.CSWHarvesterPersistenceImpl" parent="basePersistence" />
+	<bean id="nl.wur.alterra.cgi.ace.service.WxsHarvesterLocalService" class="nl.wur.alterra.cgi.ace.service.impl.WxsHarvesterLocalServiceImpl" />
+	<bean id="nl.wur.alterra.cgi.ace.service.persistence.WxsHarvesterPersistence" class="nl.wur.alterra.cgi.ace.service.persistence.WxsHarvesterPersistenceImpl" parent="basePersistence" />
+</beans>
