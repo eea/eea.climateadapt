@@ -157,7 +157,8 @@
 <%-- Additional actions displayed below the search results. --%>
 <aui:button-row>
     <portlet:actionURL name="synchronizeIndex" var="rebuildIndexURL"/>
-    <aui:button value="rebuild-index" onClick="<%=rebuildIndexURL.toString()%>"/>
+    <a href="<%=rebuildIndexURL%>">Rebuild index</a>
+
 </aui:button-row>
 
 <%-- End aceItemsForm. --%>
