@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<!DOCTYPE liferay-portlet-app PUBLIC "-//Liferay//DTD Portlet Application 6.0.0//EN" "http://www.liferay.com/dtd/liferay-portlet-app_6_0_0.dtd">
+<!DOCTYPE liferay-portlet-app PUBLIC "-//Liferay//DTD Portlet Application 6.2.0//EN" "http://www.liferay.com/dtd/liferay-portlet-app_6_2_0.dtd">
 
 <liferay-portlet-app>
 	
@@ -7,6 +7,7 @@
 		<portlet-name>measureportlet</portlet-name>
 		<icon>/icon.png</icon>
 		<instanceable>false</instanceable>
+        <requires-namespaced-parameters>false</requires-namespaced-parameters>
 		<header-portlet-css>/css/portlet.css</header-portlet-css>
 		<header-portlet-javascript>http://ecn.dev.virtualearth.net/mapcontrol/mapcontrol.ashx?v=6.2&amp;mkt=en-us"</header-portlet-javascript>
 		<header-portlet-javascript>/js/ext-base.js</header-portlet-javascript>
@@ -33,6 +34,7 @@
 		<portlet-name>backportlet</portlet-name>
 		<icon>/icon.png</icon>
 		<instanceable>true</instanceable>
+		<requires-namespaced-parameters>false</requires-namespaced-parameters>
 		<header-portlet-css>/css/portlet.css</header-portlet-css>
 		<footer-portlet-javascript>
 			/js/javascript.js
@@ -45,6 +47,7 @@
 		<portlet-name>measuredetailportlet</portlet-name>
 		<icon>/icon.png</icon>
 		<instanceable>true</instanceable>
+		<requires-namespaced-parameters>false</requires-namespaced-parameters>
 		<header-portlet-css>/css/portlet.css</header-portlet-css>
 		<header-portlet-css>/css/shareformRevised.css</header-portlet-css>
 		<header-portlet-javascript>/js/jquery-1.6.2.min.js</header-portlet-javascript>
@@ -59,6 +62,7 @@
 		<portlet-name>measuregoeditportlet</portlet-name>
 		<icon>/icon.png</icon>
 		<instanceable>false</instanceable>
+		<requires-namespaced-parameters>false</requires-namespaced-parameters>
 		<header-portlet-css>/css/portlet.css</header-portlet-css>
 		<footer-portlet-javascript>
 			/js/javascript.js
@@ -71,6 +75,7 @@
 		<portlet-name>sharemeasureportlet</portlet-name>
 		<icon>/icon.png</icon>
 		<instanceable>false</instanceable>
+		<requires-namespaced-parameters>false</requires-namespaced-parameters>
 		<header-portlet-css>/css/portlet.css</header-portlet-css>
 		<header-portlet-css>/css/shareformRevised.css</header-portlet-css>
 		<header-portlet-css>/css/styles.css</header-portlet-css>
@@ -101,6 +106,7 @@
 		<portlet-name>home_search_portlet</portlet-name>
 		<icon>/icon.png</icon>
 		<instanceable>false</instanceable>
+		<requires-namespaced-parameters>false</requires-namespaced-parameters>
 		<header-portlet-css>/css/homesearch.css</header-portlet-css>
 		<header-portlet-javascript>/js/jquery-1.6.2.min.js</header-portlet-javascript>
 		<css-class-wrapper>home_search_portlet-portlet</css-class-wrapper>
@@ -110,6 +116,7 @@
 		<portlet-name>home_slider_portlet</portlet-name>
 		<icon>/icon.png</icon>
 		<instanceable>false</instanceable>
+		<requires-namespaced-parameters>false</requires-namespaced-parameters>
 		<header-portlet-css>/css/homeslider.css</header-portlet-css>
 		<header-portlet-javascript>/js/jquery-1.6.2.min.js</header-portlet-javascript>
 		<footer-portlet-javascript>/js/home/javascript.js</footer-portlet-javascript>	
