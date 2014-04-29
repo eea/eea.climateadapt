@@ -70,15 +70,14 @@ public class AceItemValidator {
 			}
 			
 			if (Validator.isNull(aceitem.getSectors_())) {
-				errors.add("aceitem_sectors-required");
+				errors.add("aceitemsectors-required");
 				valid = false;
 			}
 			
 			if (Validator.isNull(aceitem.getClimateimpacts_())) {
-				errors.add("aceitem_climate_impacts-required");
+				errors.add("aceitemclimateimpacts-required");
 				valid = false;
 			}
-			
 			if (Validator.isNotNull(aceitem.getYear()))
 			{
 				try {
@@ -94,7 +93,6 @@ public class AceItemValidator {
 					valid = false;
 				}
 			}
-			
 			if (Validator.isNotNull(aceitem.getGeochars()))
 			{
 				Object obj=JSONValue.parse(aceitem.getGeochars());
