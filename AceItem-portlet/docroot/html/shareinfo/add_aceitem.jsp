@@ -363,7 +363,7 @@
 										    String adminComment = "";
 										    if (aceitem != null && Validator.isNotNull(aceitem.getAdmincomment()))
 										    {
-										    	adminComment = aceitem.getAdmincomment(); 
+										    	adminComment = HtmlUtil.escapeAttribute(aceitem.getAdmincomment()); 
 										    }
 										    else
 											{
@@ -371,7 +371,7 @@
 												  {
 													  if (Validator.isNotNull(aceItemFromRequest.getAdmincomment()))
 													  {
-														  adminComment = aceItemFromRequest.getAdmincomment();
+														  adminComment = HtmlUtil.escapeAttribute(aceItemFromRequest.getAdmincomment());
 													  }
 												  }
 											}
@@ -385,7 +385,7 @@
 											String specialTagging = ""; 
 										    if (aceitem != null && Validator.isNotNull(aceitem.getSpecialtagging()))
 										    {
-										    	specialTagging = aceitem.getSpecialtagging();
+										    	specialTagging = HtmlUtil.escapeAttribute(aceitem.getSpecialtagging());
 										    }
 										    else
 											{
@@ -393,7 +393,7 @@
 												  {
 													  if (Validator.isNotNull(aceItemFromRequest.getSpecialtagging()))
 													  {
-														  specialTagging = aceItemFromRequest.getSpecialtagging();
+														  specialTagging = HtmlUtil.escapeAttribute(aceItemFromRequest.getSpecialtagging());
 													  }
 												  }
 											}
@@ -415,13 +415,13 @@
 	        <li>
 				<p><b><span class="red">*</span> <em>Item Name (50 character limit)</em></b></p>
 				<% if (aceitem != null) { %>
-		           <input name="name" type="text" size="75" maxlength="50" value="<%= aceitem.getName() %>" /><br /><br />
+		           <input name="name" type="text" size="75" maxlength="50" value="<%= HtmlUtil.escapeAttribute(aceitem.getName()) %>" /><br /><br />
 				<%} else {
 							// preserve the render parameter already set
 						    // String renderName = renderRequest.getParameter("name");
 							if (aceItemFromRequest != null)
 							{
-								String renderName = aceItemFromRequest.getName();
+								String renderName = HtmlUtil.escapeAttribute(aceItemFromRequest.getName());
 								pageContext.setAttribute("renderName", renderName);
 							}
 				%>
@@ -446,8 +446,7 @@
 				<p><b><span class="red">*</span> <em>Provide a description of the item. (5,000 character limit)</em></b></p>
 				
 				<% if (aceitem != null && aceitem.getDescription() != null) { %>
-					<textarea id="<portlet:namespace />descriptionField" cols="40" rows="10" class="WYSIWYG" name="description" data-maxlength="1000"><%= aceitem.getDescription() %></textarea>
-					<textarea id="descriptionId" name="description" cols="40" rows="10" class="WYSIWYG" data-maxlength="5000"><%= aceitem.getDescription() %></textarea>
+					<textarea id="descriptionId" name="description" cols="40" rows="10" class="WYSIWYG" data-maxlength="5000"><%= HtmlUtil.escapeAttribute(aceitem.getDescription()) %></textarea>
 				<%} else {
 							// preserve the render parameter already sent
 							//String renderDescription = renderRequest.getParameter("description");
@@ -478,13 +477,13 @@
 	     <li>
             <p><b><span class="red">*</span> <em>Describe and tag this item with relevant keywords. Separate each keyword with a comma. For example, example keyword 1, example keyword 2 (1,000 character limit)</em></b></p>
             <% if (aceitem != null && Validator.isNotNull(aceitem.getKeyword())) { %>
-				<textarea id="keywordId" name="keyword" cols="40" rows="10" class="WYSIWYG" data-maxlength="1000"><%=aceitem.getKeyword() %></textarea>
+				<textarea id="keywordId" name="keyword" cols="40" rows="10" class="WYSIWYG" data-maxlength="1000"><%=HtmlUtil.escapeAttribute(aceitem.getKeyword()) %></textarea>
 				<%} else {
 					// preserve the render parameter already sent
 					//String renderKeywords = renderRequest.getParameter("keywords");
 					if (aceItemFromRequest != null)
 					{
-							String renderKeywords = aceItemFromRequest.getKeyword();
+							String renderKeywords = HtmlUtil.escapeAttribute(aceItemFromRequest.getKeyword());
 							pageContext.setAttribute("renderKeywords", renderKeywords);
 					}
 					//pageContext.setAttribute("renderKeywords", renderKeywords);
@@ -576,6 +575,7 @@
 	                     }
 	        		 
 	        	 }
+	        	 
             }
        	 
        	
@@ -608,6 +608,64 @@
        </li>
        </ul>
     </div>
+    <div class="case-studies-form-clearing"></div>
+    <br/>
+    
+     <div class="case-studies-tabbed-content-section">
+      <div class="case-studies-tabbed-content-subheader">Elements</div>
+
+	  <ul>
+	    <%
+	       String choosenClimateElements = "";
+	       
+	    if (aceitem == null )
+        {
+       	 
+       	 if (aceItemFromRequest != null)
+            {
+           	 
+	             String caseStudyElement = aceItemFromRequest.getElements_();
+	        	 for (nl.wur.alterra.cgi.ace.model.constants.AceItemElement aceitemElement: nl.wur.alterra.cgi.ace.model.constants.AceItemElement.values()) 
+	        	 {
+	        			 if (caseStudyElement != null && caseStudyElement.indexOf(aceitemElement.toString()) >= 0) {
+	                         choosenClimateElements += aceitemElement.toString() + ";";
+	                     }
+	        		 
+	        	 }
+	        	 
+            }
+       	 
+       	
+        }
+	    %>
+	  
+	    <li>
+	     <p><b><em>Select one or more elements.</em></b></p>
+	     <ul class="three-col">
+		<%-- note : i18n file should always be in sync with AceItemElement enum --%>
+		<c:forEach var="adaptationClimateElement" items="<%= nl.wur.alterra.cgi.ace.model.constants.AceItemElement.values() %>" >
+			<div class="check">
+				<c:set var="adaptationClimateElementMustBeChecked" value="false" />
+				<c:set var="aceItemClimateElements" value='<%= aceitem == null ? choosenClimateElements : aceitem.getElements_() %>' />
+				<c:set var="adaptationClimateElementMustBeChecked" value="false" />
+				<c:if test="${fn:indexOf(aceItemClimateElements, adaptationClimateElement)>=0}">
+					<c:set var="adaptationClimateElementMustBeChecked" value="true" />
+				</c:if>	
+				<c:choose>
+					<c:when test="${adaptationClimateElementMustBeChecked}">
+						<li><label for="acesearch-elements-lbl-${adaptationClimateElement}"><input type="checkbox" name="chk_elements_${adaptationClimateElement}" id="chk_elements_${adaptationClimateElement}" value="${adaptationClimateElement}" checked="checked" /><liferay-ui:message key="acesearch-elements-lbl-${adaptationClimateElement}" /></label></li>
+					</c:when>
+					<c:otherwise>
+						<li><label for="acesearch-elements-lbl-${adaptationClimateElement}"><input type="checkbox" name="chk_elements_${adaptationClimateElement}" id="chk_elements_${adaptationClimateElement}" value="${adaptationClimateElement}" /><liferay-ui:message key="acesearch-elements-lbl-${adaptationClimateElement}" /></label></li>
+					</c:otherwise>
+				</c:choose>
+			</div>							
+		</c:forEach>
+       </ul>
+       </li>
+       </ul>
+    </div>
+    
     <div class="case-studies-form-clearing"></div>
     <br/>
     
@@ -664,11 +722,11 @@
 					  if (aceitem == null || Validator.isNull(aceitem.getStoredAt())) {
 						  if (aceItemFromRequest != null && aceItemFromRequest.getStoredAt() != null)
 						  {
-							        website = aceItemFromRequest.getStoredAt();
+							        website = HtmlUtil.escapeAttribute(aceItemFromRequest.getStoredAt());
 						  }
 					  }
 			%>
-			<textarea id="storeAtId" name="storedAt" cols="40" rows="10" class="WYSIWYG" data-maxlength="500"><%= aceitem == null ? website : aceitem.getStoredAt() %></textarea>
+			<textarea id="storeAtId" name="storedAt" cols="40" rows="10" class="WYSIWYG" data-maxlength="500"><%= aceitem == null ? website : HtmlUtil.escapeAttribute(aceitem.getStoredAt()) %></textarea>
 			<div class="case-studies-character-count"></div>
 		</li>
 	   </ul>
@@ -684,13 +742,13 @@
 				  if (aceitem == null || Validator.isNull(aceitem.getSource())) {
 					  if (aceItemFromRequest != null && aceItemFromRequest.getSource() != null)
 					  {
-						        source = aceItemFromRequest.getSource();
+						        source = HtmlUtil.escapeAttribute(aceItemFromRequest.getSource());
 					  }
 				  }
 			%>
 				
 	        
-		    <textarea id="aceItemStore" name="source" cols="40" rows="10" class="WYSIWYG" data-maxlength="500"><%= aceitem == null ? source : aceitem.getSource() %></textarea>
+		    <textarea id="aceItemStore" name="source" cols="40" rows="10" class="WYSIWYG" data-maxlength="500"><%= aceitem == null ? source : HtmlUtil.escapeAttribute(aceitem.getSource()) %></textarea>
 		    <div class="case-studies-character-count"></div>
 		 </li>
 	   </ul>
@@ -745,8 +803,8 @@
 									 {
 						            	 
 						            	 DLFileEntry file = DLFileEntryLocalServiceUtil.getDLFileEntry(Long.parseLong(document));
-										 String supFileName = file.getTitle();
-										 String supFileDescription = file.getDescription();
+										 String supFileName = HtmlUtil.escapeAttribute(file.getTitle());
+										 String supFileDescription = HtmlUtil.escapeAttribute(file.getDescription());
 										 sdocNames[i] = supFileName;
 										 sdocDescriptions[i] = supFileDescription;
 										 i = i + 1;
@@ -1114,11 +1172,11 @@
 						      
 						       if (aceitem != null && Validator.isNotNull(aceitem.getComments())) 
 						       {
-						    	   comments = aceitem.getComments();
+						    	   comments = HtmlUtil.escapeAttribute(aceitem.getComments());
 						       }
 						       else if (aceItemFromRequest != null && Validator.isNotNull(aceItemFromRequest.getComments()))
 						       {
-						    	   comments = aceItemFromRequest.getComments();
+						    	   comments = HtmlUtil.escapeAttribute(aceItemFromRequest.getComments());
 						       }
 						       
 						   %>
@@ -1157,59 +1215,30 @@
 			 <div class="case-studies-tabbed-content-review-wrapper">
 								<div class="case-studies-tabbed-content-review-column-left">
 								     <div class="case-studies-tabbed-content-section">
-										<p class="case-studies-tabbed-content-review-header"><%= aceitem.getName() %> (<%=aceitemType%>)</p>
-										<p><%= aceitem.getDescription() %></p>
+								        <% String yearDisplay = aceitem.getYear().length() > 0 ? "("+aceitem.getYear() + ")" : "";%>
+										<p class="case-studies-tabbed-content-review-header"><%= HtmlUtil.escapeAttribute(aceitem.getName()) %> <%=yearDisplay %> </p>
+										<p><%= aceitem.getDescription().replaceAll("<p>","").replaceAll("</p>","") %></p>
 									</div>
 						
 
 									<div class="case-studies-form-clearing"></div>
-
-									<div class="case-studies-tabbed-content-section">
-										<ul>
-											<!--  <li>
-												<p><b><em><%=aceitemType %> Description</em></b></p>
-												<ul class="case-studies-tabbed-content-bullted-list">
-													<li><a href="#climate_impacts_anchor">Climate Impacts</a></li>
-													<li><a href="#sector_policies_anchor">Sector Policies</a></li>
-												</ul>
-											</li> -->
-											
-											<li>
-												<p><b><em>Reference Information</em></b></p>
-												<ul class="case-studies-tabbed-content-bullted-list">
-													<li><a href="#website_anchor">Websites</a></li>
-												   <%  if (Validator.isNotNull(aceitem.getSource())) { %>
-													<li><a href="#source_anchor">Source</a></li>
-												  <% } %>
-												</ul>
-											</li>
-										</ul>
-										<div class="case-studies-form-clearing"></div>
-									</div>
-
-								
-
+									
 									<div class="case-studies-tabbed-content-section">
 										<div class="case-studies-tabbed-content-subheader">Reference Information</div>
-										<ul>
-											<li>
-												<a name="website_anchor"><b><em>Websites</em></b></a>
-												<p><%=aceitem.getStoredAt() %></p>
-												<div class="case-studies-form-clearing"></div>
-											</li>
+										
+											    <br/><p><b>Websites:</b></p>
+												<%=aceitem.getStoredAt().replaceAll("<p>","").replaceAll("</p>","") %>
 											
 										<% if (Validator.isNotNull(aceitem.getSource()))
 										   {%>	
-												<li>
-													<a name="source_anchor"><b><em>Source</em></b></a>
-												
-												    <%=aceitem.getSource() %>
+												    <br/><p><b>Source:</b></p>
+												    <%=aceitem.getSource().replaceAll("<p>","").replaceAll("</p>","") %>
 												    
 													<div class="case-studies-form-clearing"></div>
-												</li>
+												
 										 <%} %>
 											
-										</ul>
+										
 									</div>
 								</div> <!-- end of case-studies-tabbed-content-review-column-left  -->
                              
@@ -1244,7 +1273,7 @@
 								
 									<div class="case-studies-tabbed-content-review-column-right-section">
 										<p><b>Keywords</b></p>
-										<p><%= aceitem.getKeyword() %></p>
+										  <%= aceitem.getKeyword().replaceAll("<p>","").replaceAll("</p>","") %><br/>
 									</div>
 									
 									<div class="case-studies-tabbed-content-review-column-right-section">
@@ -1266,6 +1295,29 @@
 									     </p>
 									    
 									</div>
+									
+									
+										   <%
+												    String[] climateElementsAry = null;
+												    if (Validator.isNotNull(aceitem.getElements_()))
+												    {
+													    String climateElements = aceitem.getElements_();
+													    climateElementsAry = climateElements.split(";");
+												    }
+												    
+												    pageContext.setAttribute("climateElementsForReview", climateElementsAry);
+											%>
+											
+								  <c:if test="${climateElementsForReview ne null }">
+									<div class="case-studies-tabbed-content-review-column-right-section">
+										<p><b>Elements</b></p>
+									     <p>
+										   <c:forEach var="climate" items="${climateElementsForReview}">
+												       <liferay-ui:message key="acesearch-elements-lbl-${climate}" /><br/>
+									       </c:forEach>
+									     </p>
+									</div>
+								  </c:if>
 
 									<div class="case-studies-tabbed-content-review-column-right-section">
 										<p><b>Sectors</b></p>
@@ -1317,7 +1369,7 @@
 												          <c:if test="${fn:length(countriesSelected) gt 0}">
 												               Countries:<br/>
 												               <c:forEach var="countryElement" items="${countriesSelected}" varStatus="status">
-													                <liferay-ui:message key="acesearch-country-lbl-${countryElement}"/>${not status.last ? ',' : ''}
+													                ${countryElement} ${not status.last ? ',' : ''}
 													           </c:forEach>
 													           <br/><br/>
 												          </c:if>
@@ -1326,14 +1378,14 @@
 												               Sub Nationals:<br/>
 													           <c:forEach var="subNationalElement" items="${subnationals}" varStatus="status">
 													                     <c:if test="${fn:contains(subNationalsSelected,subNationalElement) }">
-														                       ${subNationalElement.description}${not status.last ? ',' : ''}
+														                       ${subNationalElement.description},
 														                 </c:if>
 														       </c:forEach>
 														       <br/><br/>
 												          </c:if>
 												          
 												          <c:if test="${fn:length(city) gt 0}">
-												             City: ${city}<br/><br/>
+												             City:<br/> ${city}<br/>
 												          </c:if>
 												     </c:when>
 												     <c:otherwise>
@@ -1356,7 +1408,7 @@
 										%>
 										            <p>Countries:</p>
 										            <c:forEach var="ctry" items="${countryForReview}">
-												       <liferay-ui:message key="acesearch-country-lbl-${ctry}" /><br/><br/>
+												       ${ctry}<br/>
 												    </c:forEach>
 										        <%} %>
 												   

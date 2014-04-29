@@ -332,7 +332,7 @@
 										    String adminComment = "";
 										    if (projectItem != null && Validator.isNotNull(projectItem.getAdmincomment()))
 										    {
-										    	adminComment = projectItem.getAdmincomment(); 
+										    	adminComment = HtmlUtil.escapeAttribute(projectItem.getAdmincomment()); 
 										    }
 										    else
 											{
@@ -340,7 +340,7 @@
 												  {
 													  if (Validator.isNotNull(projectItemFromRequest.getAdmincomment()))
 													  {
-														  adminComment = projectItemFromRequest.getAdmincomment();
+														  adminComment = HtmlUtil.escapeAttribute(projectItemFromRequest.getAdmincomment());
 													  }
 												  }
 											}
@@ -354,7 +354,7 @@
 											String specialTagging = ""; 
 										    if (projectItem != null && Validator.isNotNull(projectItem.getSpecialtagging()))
 										    {
-										    	specialTagging = projectItem.getSpecialtagging();
+										    	specialTagging = HtmlUtil.escapeAttribute(projectItem.getSpecialtagging());
 										    }
 										    else
 											{
@@ -362,7 +362,7 @@
 												  {
 													  if (Validator.isNotNull(projectItemFromRequest.getSpecialtagging()))
 													  {
-														  specialTagging = projectItemFromRequest.getSpecialtagging();
+														  specialTagging = HtmlUtil.escapeAttribute(projectItemFromRequest.getSpecialtagging());
 													  }
 												  }
 											}
@@ -384,13 +384,13 @@
 	        <li>
 				<p><b><span class="red">*</span> <em>Acronym of the project (75 character limit)</em></b></p>
 				<% if (projectItem != null) { %>
-		           <input name="acronym" type="text" size="75" maxlength="75" value="<%= projectItem.getAcronym() %>" /><br /><br />
+		           <input name="acronym" type="text" size="75" maxlength="75" value="<%= HtmlUtil.escapeAttribute(projectItem.getAcronym()) %>" /><br /><br />
 				<%} else {
 							// preserve the render parameter already set
 						    // String renderName = renderRequest.getParameter("name");
 							if (projectItemFromRequest != null)
 							{
-								String renderName = projectItemFromRequest.getAcronym();
+								String renderName = HtmlUtil.escapeAttribute(projectItemFromRequest.getAcronym());
 								pageContext.setAttribute("renderName", renderName);
 							}
 				%>
@@ -414,13 +414,13 @@
 	        <li>
 				<p><b><span class="red">*</span> <em>Project title or name (50 character limit)</em></b></p>
 				<% if (projectItem != null) { %>
-		           <input name="title" type="text" size="75" maxlength="50" value="<%= projectItem.getTitle() %>" /><br /><br />
+		           <input name="title" type="text" size="75" maxlength="50" value="<%= HtmlUtil.escapeAttribute(projectItem.getTitle()) %>" /><br /><br />
 				<%} else {
 							// preserve the render parameter already set
 						    // String renderName = renderRequest.getParameter("name");
 							if (projectItemFromRequest != null)
 							{
-								String renderName = projectItemFromRequest.getTitle();
+								String renderName = HtmlUtil.escapeAttribute(projectItemFromRequest.getTitle());
 								pageContext.setAttribute("renderName", renderName);
 							}
 				%>
@@ -444,13 +444,13 @@
 	        <li>
 				<p><b><span class="red">*</span> <em>Lead organisation or individual of the project  (100 character limit)</em></b></p>
 				<% if (projectItem != null) { %>
-		           <input name="lead" type="text" size="75" maxlength="100" value="<%= projectItem.getLead() %>" /><br /><br />
+		           <input name="lead" type="text" size="75" maxlength="100" value="<%= HtmlUtil.escapeAttribute(projectItem.getLead()) %>" /><br /><br />
 				<%} else {
 							// preserve the render parameter already set
 						    // String renderName = renderRequest.getParameter("name");
 							if (projectItemFromRequest != null)
 							{
-								String renderName = projectItemFromRequest.getLead();
+								String renderName = HtmlUtil.escapeAttribute(projectItemFromRequest.getLead());
 								pageContext.setAttribute("renderName", renderName);
 							}
 				%>
@@ -475,13 +475,13 @@
 				<p><b><span class="red">*</span> <em>Provide information focusing on project output. Possibly on specific Website features. (5,000 character limit)</em></b></p>
 				
 				<% if (projectItem != null && projectItem.getAbstracts() != null) { %>
-					<textarea id="descriptionId" name="abstracts" cols="40" rows="10" class="WYSIWYG" data-maxlength="5000"><%= projectItem.getAbstracts() %></textarea>
+					<textarea id="descriptionId" name="abstracts" cols="40" rows="10" class="WYSIWYG" data-maxlength="5000"><%= HtmlUtil.escapeAttribute(projectItem.getAbstracts()) %></textarea>
 				<%} else {
 							// preserve the render parameter already sent
 							//String renderDescription = renderRequest.getParameter("description");
 						    if (projectItemFromRequest != null)
 							{
-								String renderDescription = projectItemFromRequest.getAbstracts();
+								String renderDescription = HtmlUtil.escapeAttribute(projectItemFromRequest.getAbstracts());
 								pageContext.setAttribute("renderDescription", renderDescription);
 							}
 				%>
@@ -505,13 +505,13 @@
 				<p><b><span class="red">*</span> <em>Provide information about project partners (organisation names). (5,000 character limit)</em></b></p>
 				
 				<% if (projectItem != null && projectItem.getPartners() != null) { %>
-					<textarea id="partnerId" name="partners" cols="40" rows="10" class="WYSIWYG" data-maxlength="5000"><%= projectItem.getPartners() %></textarea>
+					<textarea id="partnerId" name="partners" cols="40" rows="10" class="WYSIWYG" data-maxlength="5000"><%= HtmlUtil.escapeAttribute(projectItem.getPartners()) %></textarea>
 				<%} else {
 							// preserve the render parameter already sent
 							//String renderDescription = renderRequest.getParameter("description");
 						    if (projectItemFromRequest != null)
 							{
-								String renderPtnerDescription = projectItemFromRequest.getPartners();
+								String renderPtnerDescription = HtmlUtil.escapeAttribute(projectItemFromRequest.getPartners());
 								pageContext.setAttribute("renderPtnerDescription", renderPtnerDescription);
 							}
 				%>
@@ -536,13 +536,13 @@
 	     <li>
             <p><b><span class="red">*</span> <em>Provide Keywords related to the project. Separate each keyword with a comma. For example, keyword 1, keyword 2 etc. (1,000 character limit)</em></b></p>
             <% if (projectItem != null && Validator.isNotNull(projectItem.getKeywords())) { %>
-				<textarea id="keywordId" name="keywords" cols="40" rows="10" class="WYSIWYG" data-maxlength="1000"><%=projectItem.getKeywords() %></textarea>
+				<textarea id="keywordId" name="keywords" cols="40" rows="10" class="WYSIWYG" data-maxlength="1000"><%=HtmlUtil.escapeAttribute(projectItem.getKeywords()) %></textarea>
 				<%} else {
 					// preserve the render parameter already sent
 					//String renderKeywords = renderRequest.getParameter("keywords");
 					if (projectItemFromRequest != null)
 					{
-							String renderKeywords = projectItemFromRequest.getKeywords();
+							String renderKeywords = HtmlUtil.escapeAttribute(projectItemFromRequest.getKeywords());
 							pageContext.setAttribute("renderKeywords", renderKeywords);
 					}
 					//pageContext.setAttribute("renderKeywords", renderKeywords);
@@ -671,19 +671,75 @@
     <div class="case-studies-form-clearing"></div>
     <br/>
     
+    
+     <div class="case-studies-tabbed-content-section">
+      <div class="case-studies-tabbed-content-subheader">Elements</div>
+
+	  <ul>
+	    <%
+	       String choosenClimateElements = "";
+	       
+	    if (projectItem == null )
+        {
+       	 
+       	 if (projectItemFromRequest != null)
+            {
+	             String caseStudyElement = projectItemFromRequest.getElement();
+	        	 for (nl.wur.alterra.cgi.ace.model.constants.AceItemElement aceitemElement: nl.wur.alterra.cgi.ace.model.constants.AceItemElement.values()) 
+	        	 {
+	        			 if (caseStudyElement != null && caseStudyElement.indexOf(aceitemElement.toString()) >= 0) {
+	                         choosenClimateElements += aceitemElement.toString() + ";";
+	                     }
+	        		 
+	        	 }
+	        	 
+            }
+        }
+	    %>
+	  
+	    <li>
+	     <p><b><em>Select one or more elements.</em></b></p>
+	     <ul class="three-col">
+		<%-- note : i18n file should always be in sync with AceItemElement enum --%>
+		<c:forEach var="adaptationClimateElement" items="<%= nl.wur.alterra.cgi.ace.model.constants.AceItemElement.values() %>" >
+			<div class="check">
+				<c:set var="adaptationClimateElementMustBeChecked" value="false" />
+				<c:set var="aceItemClimateElements" value='<%= projectItem == null ? choosenClimateElements : projectItem.getElement() %>' />
+				<c:set var="adaptationClimateElementMustBeChecked" value="false" />
+				<c:if test="${fn:indexOf(aceItemClimateElements, adaptationClimateElement)>=0}">
+					<c:set var="adaptationClimateElementMustBeChecked" value="true" />
+				</c:if>	
+				<c:choose>
+					<c:when test="${adaptationClimateElementMustBeChecked}">
+						<li><label for="acesearch-elements-lbl-${adaptationClimateElement}"><input type="checkbox" name="chk_elements_${adaptationClimateElement}" id="chk_elements_${adaptationClimateElement}" value="${adaptationClimateElement}" checked="checked" /><liferay-ui:message key="acesearch-elements-lbl-${adaptationClimateElement}" /></label></li>
+					</c:when>
+					<c:otherwise>
+						<li><label for="acesearch-elements-lbl-${adaptationClimateElement}"><input type="checkbox" name="chk_elements_${adaptationClimateElement}" id="chk_elements_${adaptationClimateElement}" value="${adaptationClimateElement}" /><liferay-ui:message key="acesearch-elements-lbl-${adaptationClimateElement}" /></label></li>
+					</c:otherwise>
+				</c:choose>
+			</div>							
+		</c:forEach>
+       </ul>
+       </li>
+       </ul>
+    </div>
+    
+    <div class="case-studies-form-clearing"></div>
+    <br/>
+    
     <div class="case-studies-tabbed-content-section">
       <div class="case-studies-tabbed-content-subheader">Source of Funding</div>
         <ul>
 	        <li>
 				<p><b><em>Provide source of funding (100 character limit)</em></b></p>
 				<% if (projectItem != null) { %>
-		           <input name="funding" type="text" size="75" maxlength="100" value="<%= projectItem.getFunding() %>" /><br /><br />
+		           <input name="funding" type="text" size="75" maxlength="100" value="<%= HtmlUtil.escapeAttribute(projectItem.getFunding()) %>" /><br /><br />
 				<%} else {
 							// preserve the render parameter already set
 						    // String renderName = renderRequest.getParameter("name");
 							if (projectItemFromRequest != null)
 							{
-								String renderName = projectItemFromRequest.getFunding();
+								String renderName = HtmlUtil.escapeAttribute(projectItemFromRequest.getFunding());
 								pageContext.setAttribute("renderName", renderName);
 							}
 				%>
@@ -749,11 +805,11 @@
 					  if (projectItem == null || Validator.isNull(projectItem.getWebsite())) {
 						  if (projectItemFromRequest != null && projectItemFromRequest.getWebsite() != null)
 						  {
-							        website = projectItemFromRequest.getWebsite();
+							        website = HtmlUtil.escapeAttribute(projectItemFromRequest.getWebsite());
 						  }
 					  }
 			%>
-			<textarea id="website" name="website" cols="40" rows="10" class="WYSIWYG" data-maxlength="500"><%= projectItem == null ? website : projectItem.getWebsite() %></textarea>
+			<textarea id="website" name="website" cols="40" rows="10" class="WYSIWYG" data-maxlength="500"><%= projectItem == null ? website : HtmlUtil.escapeAttribute(projectItem.getWebsite()) %></textarea>
 			<div class="case-studies-character-count"></div>
 		</li>
 	   </ul>
@@ -769,13 +825,13 @@
 				  if (projectItem == null || Validator.isNull(projectItem.getSource())) {
 					  if (projectItemFromRequest != null && projectItemFromRequest.getSource() != null)
 					  {
-						        source = projectItemFromRequest.getSource();
+						        source = HtmlUtil.escapeAttribute(projectItemFromRequest.getSource());
 					  }
 				  }
 			%>
 				
 	        
-		    <textarea id="aceItemStore" name="source" cols="40" rows="10" class="WYSIWYG" data-maxlength="500"><%= projectItem == null ? source : projectItem.getSource() %></textarea>
+		    <textarea id="aceItemStore" name="source" cols="40" rows="10" class="WYSIWYG" data-maxlength="500"><%= projectItem == null ? source : HtmlUtil.escapeAttribute(projectItem.getSource()) %></textarea>
 		    <div class="case-studies-character-count"></div>
 		 </li>
 	   </ul>
@@ -830,8 +886,8 @@
 									 {
 						            	 
 						            	 DLFileEntry file = DLFileEntryLocalServiceUtil.getDLFileEntry(Long.parseLong(document));
-										 String supFileName = file.getTitle();
-										 String supFileDescription = file.getDescription();
+										 String supFileName = HtmlUtil.escapeAttribute(file.getTitle());
+										 String supFileDescription = HtmlUtil.escapeAttribute(file.getDescription());
 										 sdocNames[i] = supFileName;
 										 sdocDescriptions[i] = supFileDescription;
 										 i = i + 1;
@@ -1200,11 +1256,11 @@
 						      
 						       if (projectItem != null && Validator.isNotNull(projectItem.getComments())) 
 						       {
-						    	   comments = projectItem.getComments();
+						    	   comments = HtmlUtil.escapeAttribute(projectItem.getComments());
 						       }
 						       else if (projectItemFromRequest != null && Validator.isNotNull(projectItemFromRequest.getComments()))
 						       {
-						    	   comments = projectItemFromRequest.getComments();
+						    	   comments = HtmlUtil.escapeAttribute(projectItemFromRequest.getComments());
 						       }
 						       
 						   %>
@@ -1243,115 +1299,31 @@
 			      <div class="case-studies-tabbed-content-review-wrapper">
 								<div class="case-studies-tabbed-content-review-column-left">
 								     <div class="case-studies-tabbed-content-section">
-										<p class="case-studies-tabbed-content-review-header"><%= projectItem.getAcronym() %>: <%= projectItem.getTitle() %></p>
+								          <% String projectDuration = projectItem.getDuration().length() > 0 ? "("+ projectItem.getDuration() + ")" : "";%>
+										<p class="case-studies-tabbed-content-review-header"><%= HtmlUtil.escapeAttribute(projectItem.getAcronym()) %>: <%= HtmlUtil.escapeAttribute(projectItem.getTitle()) %> <%=projectDuration %></p>
 										<p><b>Description:</b></p>
-										<p><%= projectItem.getAbstracts() %></p>
+										<p><%= projectItem.getAbstracts().replaceAll("<p>","").replaceAll("</p>","") %></p>
 									</div>
 									<div class="case-studies-form-clearing"></div>
-									
-									<div class="case-studies-tabbed-content-section">
-										<div class="case-studies-subheader"><%=projectItem.getAcronym() %> Information</div>
-										<ul>
-											<li>
-												<p><b><em><%=projectItem.getAcronym() %> Description</em></b></p>
-												<ul class="case-studies-bullted-list">
-													<li><a href="#climate_impacts_anchor">Climate Impacts</a></li>
-												    <li><a href="#sector_policies_anchor">Sector Policies</a></li>
-												</ul>
-											</li>
-											
-										<% if (Validator.isNotNull(projectItem.getWebsite()) && Validator.isNotNull(projectItem.getSource())) { %>
-											<li>
-												<p><b><em>Reference Information</em></b></p>
-												<ul class="case-studies-bullted-list">
-												   <% if (Validator.isNotNull(projectItem.getWebsite())) { %>
-													<li><a href="#website_anchor">Websites</a></li>
-													<% } %>
-													<% if (Validator.isNotNull(projectItem.getSource())) { %>
-														   <li><a href="#source_anchor">Source</a></li>
-													<% } %>
-												</ul>
-											</li>
-										<% } %>
-										</ul>
-										<div class="case-studies-case-studies-review-clearing-clearing"></div>
-				                    </div>
-				
-									
-				<div class="case-studies-tabbed-content-section">
-					<div class="case-studies-subheader"><%=projectItem.getAcronym()%> Information</div>
-					<ul>
-						<li>
-							<p><a name="climate_impacts_anchor"><b><em>Climate Impacts</em></b></a></p>
-							<p>This Project (<%=projectItem.getAcronym() %>) addresses the following climate impact areas:</p>
-							
-							<%
-									String[] climateImpactsAry = null;
-								    if (Validator.isNotNull(projectItem.getClimateimpacts()))
-								    {
-									    String climateImpacts = projectItem.getClimateimpacts();
-									    climateImpactsAry = climateImpacts.split(";");
-								    }
-												    
-								    pageContext.setAttribute("climateImpactsForReview", climateImpactsAry);
-							%>
-												
-							  <c:if test="${climateImpactsForReview ne null }">
-							    <c:forEach var="climate" items="${climateImpactsForReview}">
-							           <p><liferay-ui:message key="aceitem-climateimpacts-lbl-${climate}" /></p>
-							    </c:forEach>
-							  </c:if>
-							<div class="case-studies-review-clearing"></div>
-						</li>
-						
-						<li>
-						        <p><a name="sector_policies_anchor"><b><em>Relevant European Union Sector Policies:</em></b></a></p>
-								<%	    
-								    String[] sectorAry = null;
-								    if (Validator.isNotNull(projectItem.getSectors()))
-								    {
-								    	String sectors = projectItem.getSectors();
-								    	sectorAry = sectors.split(";");
-								    }
-								    pageContext.setAttribute("sectorForReview", sectorAry);
-								   
-								%>
-								
-							   <c:if test="${sectorForReview ne null }">
-								    <c:forEach var="sector" items="${sectorForReview}">
-								       <p><liferay-ui:message key="acesearch-sectors-lbl-${sector}" /></p>
-								    </c:forEach>
-							   </c:if>
-							   <div class="case-studies-form-clearing"></div>
-						</li>
-					</ul>
-				</div>
                               								
                                  <% if (Validator.isNotNull(projectItem.getWebsite()) && Validator.isNotNull(projectItem.getSource())) { %>
 									<div class="case-studies-tabbed-content-section">
 										<div class="case-studies-tabbed-content-subheader">Reference Information</div>
-										<ul>
+										
 										 <% if (Validator.isNotNull(projectItem.getWebsite()))
 										   {%>	
-											<li>
-												<a name="website_anchor"><b><em>Websites</em></b></a>
-												<p><%= projectItem.getWebsite() %></p>
-												<div class="case-studies-form-clearing"></div>
-											</li>
+												<br/><p><b>Websites:</b></p>
+												<p><%= projectItem.getWebsite().replaceAll("<p>","").replaceAll("</p>","") %></p>
+												
 										<% } %>
 											
 										<% if (Validator.isNotNull(projectItem.getSource()))
 										   {%>	
-												<li>
-													<a name="source_anchor"><b><em>Source</em></b></a>
-												
-												    <%= projectItem.getSource() %>
-												    
-													<div class="case-studies-form-clearing"></div>
-												</li>
+												    <br/><p><b>Source:</b></p>
+												    <%= projectItem.getSource().replaceAll("<p>","").replaceAll("</p>","") %>
+												   
 										 <%} %>
-											
-										</ul>
+										
 									</div>
 								<% } %>
 								</div> <!-- end of case-studies-tabbed-content-review-column-left  -->
@@ -1387,21 +1359,63 @@
 								
 									<div class="case-studies-tabbed-content-review-column-right-section">
 										<p><b>Keywords</b></p>
-										<p><%= projectItem.getKeywords() %></p>
+										<%= projectItem.getKeywords().replaceAll("<p>","").replaceAll("</p>","") %><br/>
 									</div>
 									
-										<div class="case-studies-tabbed-content-review-column-right-section">
-											<p><b>Sectors</b></p>
-											<c:forEach var="sector" items="${sectorForReview}">
-												<p><liferay-ui:message key="acesearch-sectors-lbl-${sector}" /></p>
-										    </c:forEach>
-										</div>
-						
-										<div class="case-studies-tabbed-content-review-column-right-section">
+									  <div class="case-studies-tabbed-content-review-column-right-section">
+										<%
+											String[] climateImpactsAry = null;
+										    if (Validator.isNotNull(projectItem.getClimateimpacts()))
+										    {
+											    String climateImpacts = projectItem.getClimateimpacts();
+											    climateImpactsAry = climateImpacts.split(";");
+										    }
+														    
+										    pageContext.setAttribute("climateImpactsForReview", climateImpactsAry);
+							              %>
 										     <p><b>Climate impacts</b></p>
 											 <c:forEach var="climate" items="${climateImpactsForReview}">
-												<p><liferay-ui:message key="aceitem-climateimpacts-lbl-${climate}" /></p>
+												<liferay-ui:message key="aceitem-climateimpacts-lbl-${climate}" /><br/>
 											 </c:forEach>
+										</div>
+										
+										<%
+												String[] climateElementsAry = null;
+											    if (Validator.isNotNull(projectItem.getElement()))
+											    {
+												    String climateElements = projectItem.getElement();
+												    climateElementsAry = climateElements.split(";");
+											    }
+															    
+											    pageContext.setAttribute("climateElementsForReview", climateElementsAry);
+										%>
+											
+														
+									<c:if test="${climateElementsForReview ne null }">	
+										<div class="case-studies-tabbed-content-review-column-right-section">
+										   <p><b>Elements</b></p>
+												
+												    <c:forEach var="climate" items="${climateElementsForReview}">
+												           <liferay-ui:message key="acesearch-elements-lbl-${climate}" /><br/>
+												    </c:forEach>
+										</div>
+								    </c:if>
+										
+									<div class="case-studies-tabbed-content-review-column-right-section">
+										<%	    
+											    String[] sectorAry = null;
+											    if (Validator.isNotNull(projectItem.getSectors()))
+											    {
+											    	String sectors = projectItem.getSectors();
+											    	sectorAry = sectors.split(";");
+											    }
+											    pageContext.setAttribute("sectorForReview", sectorAry);
+								   
+								         %>
+											<p><b>Sectors</b></p>
+											<c:forEach var="sector" items="${sectorForReview}">
+												<liferay-ui:message key="acesearch-sectors-lbl-${sector}" /><br/>
+										    </c:forEach>
 										</div>
 									
 									
@@ -1435,7 +1449,7 @@
 												          <c:if test="${fn:length(countriesSelected) gt 0}">
 												               Countries:<br/>
 												               <c:forEach var="countryElement" items="${countriesSelected}" varStatus="status">
-													                <liferay-ui:message key="acesearch-country-lbl-${countryElement}"/>${not status.last ? ',' : ''}
+													                ${countryElement} ${not status.last ? ',' : ''}
 													           </c:forEach>
 													           <br/><br/>
 												          </c:if>
@@ -1444,15 +1458,14 @@
 												               Sub Nationals:<br/>
 													           <c:forEach var="subNationalElement" items="${subnationals}" varStatus="status">
 													                     <c:if test="${fn:contains(subNationalsSelected,subNationalElement) }">
-														                       ${subNationalElement.description}
+														                       ${subNationalElement.description},
 														                 </c:if>
-														                 ${not status.last ? ',' : ''}
 														       </c:forEach>
 														       <br/><br/>
 												          </c:if>
 												          
 												          <c:if test="${fn:length(city) gt 0}">
-												             City: ${city}<br/><br/>
+												             City:<br/> ${city}<br/>
 												          </c:if>
 												     </c:when>
 												     <c:otherwise>
@@ -1473,7 +1486,7 @@
 										%>
 										            <p>Countries:</p>
 										            <c:forEach var="ctry" items="${countryForReview}">
-												       <liferay-ui:message key="acesearch-country-lbl-${ctry}" /><br/><br/>
+												       ${ctry}<br/>
 												    </c:forEach>
 										        <%} %>
 												   

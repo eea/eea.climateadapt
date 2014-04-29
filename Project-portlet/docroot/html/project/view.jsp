@@ -145,7 +145,7 @@
         </liferay-ui:search-container-column-text>
 
         <liferay-ui:search-container-column-text name="source" orderable="true" orderableProperty="source" >
-            <%=project.getSource()%>
+            <%=project.getSource().replaceAll("&lt;p&gt;", "").replaceAll("&lt;/p&gt;", "")%>
         </liferay-ui:search-container-column-text>
 
         <liferay-ui:search-container-column-text name="sectors" value="<%=projectSectorsStr%>"/>

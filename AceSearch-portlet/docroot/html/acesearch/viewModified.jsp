@@ -1,3 +1,4 @@
+<%@page import="nl.wur.alterra.cgi.ace.model.constants.AceItemElement"%>
 <%@ page import="java.util.Arrays" %>
 <%@page import="nl.wur.alterra.cgi.ace.search.AceSearchFormBean"%>
 <%@page import="nl.wur.alterra.cgi.ace.search.SearchRequestParams"%>
@@ -361,6 +362,44 @@ if (endyear != null)
 														<c:otherwise>
 															<input type="checkbox" name="impact" id="chk_impacts_${climateImpact}" value="${climateImpact}" />
 															<liferay-ui:message key="aceitem-climateimpacts-lbl-${climateImpact}" />
+														</c:otherwise>
+													</c:choose>
+													
+												</label>
+											</li>
+									</c:forEach>
+								</ul>
+							</li>
+						</ul>
+					</div>
+					
+					<div class="case-studies-database-search-filters-section">
+						<a href="#" class="case-studies-database-search-filters-section-header">Adaptation Elements <span class="case-studies-database-search-filters-section-header-icon">-</span></a>
+						<ul class="case-studies-database-search-filters-options">
+							<li><label for="anyelements"><input type="radio" value="OR" id="rb_elements_any" name="conditionAdaptationElement" <%= (conditionAdaptationElement.equals("OR"))?"checked":"" %> /> <liferay-ui:message key="acesearch-anyelements" /></label></li>
+							<li><label for="allelements"><input type="radio" value="AND" id="rb_elements_all" name="conditionAdaptationElement" <%= (conditionAdaptationElement.equals("AND"))?"checked":"" %> /> <liferay-ui:message key="acesearch-allelements" /></label></li>
+							<li>
+							    <!-- start of adaptation element -->
+								<ul class="case-studies-database-search-filters-sub-options">
+								    <%-- note : i18n file should always be in sync with AceItemElement enum --%>
+									<c:forEach var="adaptationElement" items="<%= nl.wur.alterra.cgi.ace.model.constants.AceItemElement.values() %>" >
+											<c:set var="adaptationElementMustBeChecked" value="false" />
+											<c:forEach var="requestedElement" items="${elementsList}">
+												<c:if test="${requestedElement eq fn:substring(adaptationElement,0,-1)}">
+													<c:set var="adaptationElementMustBeChecked" value="true" />
+												</c:if>
+											</c:forEach>	
+											
+											<li>
+											     <label for="chk_elements_${adaptationElement}">
+													<c:choose>
+														<c:when test="${adaptationElementMustBeChecked}">
+															<input type="checkbox" name="element" id="chk_elements_${adaptationElement}" value="${adaptationElement}" checked="checked" />
+															<liferay-ui:message key="acesearch-elements-lbl-${adaptationElement}" />
+														</c:when>
+														<c:otherwise>
+															<input type="checkbox" name="element" id="chk_elements_${adaptationElement}" value="${adaptationElement}" />
+															<liferay-ui:message key="acesearch-elements-lbl-${adaptationElement}" />
 														</c:otherwise>
 													</c:choose>
 													

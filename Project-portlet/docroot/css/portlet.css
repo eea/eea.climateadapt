@@ -742,6 +742,7 @@ span.jPag-snext-img{
 		display: block;
 		padding-left: 16px;
 		position: relative;
+		padding-right: 5px;
 	}
 
 	#case-studies-form-wrapper .case-studies-tabs-wrapper .case-studies-tabbed-content .case-studies-tabbed-content-section ul.one-col li {
