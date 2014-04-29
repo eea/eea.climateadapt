@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE liferay-portlet-app PUBLIC "-//Liferay//DTD Portlet Application 6.0.0//EN" "http://www.liferay.com/dtd/liferay-portlet-app_6_0_0.dtd">
+<!DOCTYPE liferay-portlet-app PUBLIC "-//Liferay//DTD Portlet Application 6.2.0//EN" "http://www.liferay.com/dtd/liferay-portlet-app_6_2_0.dtd">
 
 <liferay-portlet-app>
 	<portlet>
 		<portlet-name>aceitemportlet</portlet-name>
 		<icon>/icon.png</icon>
 		<instanceable>false</instanceable>
+        <requires-namespaced-parameters>false</requires-namespaced-parameters>
 		<header-portlet-css>/css/portlet.css</header-portlet-css>
 		<footer-portlet-javascript>/js/javascript.js</footer-portlet-javascript>
 		<css-class-wrapper>aceitemportlet-portlet</css-class-wrapper>
@@ -15,6 +16,7 @@
 		<portlet-name>wxsharvesterportlet</portlet-name>
 		<icon>/icon.png</icon>
 		<instanceable>false</instanceable>
+        <requires-namespaced-parameters>false</requires-namespaced-parameters>
 		<header-portlet-css>/css/portlet.css</header-portlet-css>
         <header-portlet-javascript>http://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js</header-portlet-javascript>
 		<footer-portlet-javascript>
@@ -26,6 +28,7 @@
 		<portlet-name>cswharvesterportlet</portlet-name>
 		<icon>/icon.png</icon>
 		<instanceable>false</instanceable>
+        <requires-namespaced-parameters>false</requires-namespaced-parameters>
 		<header-portlet-css>/css/portlet.css</header-portlet-css>
         <header-portlet-javascript>http://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js</header-portlet-javascript>
 		<footer-portlet-javascript>
@@ -37,6 +40,7 @@
 		<portlet-name>aceitemdetailportlet</portlet-name>
 		<icon>/icon.png</icon>
 		<instanceable>true</instanceable>
+        <requires-namespaced-parameters>false</requires-namespaced-parameters>
 		<header-portlet-css>/css/portlet.css</header-portlet-css>
 		<footer-portlet-javascript>
 			/js/javascript.js
@@ -49,6 +53,7 @@
 		<portlet-name>aceitemgoeditportlet</portlet-name>
 		<icon>/icon.png</icon>
 		<instanceable>false</instanceable>
+        <requires-namespaced-parameters>false</requires-namespaced-parameters>
 		<header-portlet-css>/css/portlet.css</header-portlet-css>
 		<footer-portlet-javascript>
 			/js/javascript.js
@@ -61,6 +66,7 @@
 		<portlet-name>shareaceitemportlet</portlet-name>
 		<icon>/icon.png</icon>
 		<instanceable>true</instanceable>
+        <requires-namespaced-parameters>false</requires-namespaced-parameters>
 		<header-portlet-css>/css/portlet.css</header-portlet-css>
 		<header-portlet-javascript>/js/jquery-1.6.2.min.js</header-portlet-javascript>
 	    <header-portlet-javascript>/js/aceitem.js</header-portlet-javascript>
