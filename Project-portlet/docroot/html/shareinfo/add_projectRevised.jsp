@@ -1299,9 +1299,8 @@
 			      <div class="case-studies-tabbed-content-review-wrapper">
 								<div class="case-studies-tabbed-content-review-column-left">
 								     <div class="case-studies-tabbed-content-section">
-								          <% String projectDuration = projectItem.getDuration().length() > 0 ? "("+ projectItem.getDuration() + ")" : "";%>
-										<p class="case-studies-tabbed-content-review-header"><%= HtmlUtil.escapeAttribute(projectItem.getAcronym()) %>: <%= HtmlUtil.escapeAttribute(projectItem.getTitle()) %> <%=projectDuration %></p>
-										<p><b>Description:</b></p>
+								     <p class="case-studies-tabbed-content-review-header"><%= HtmlUtil.escapeAttribute(projectItem.getAcronym()) %>: <%= HtmlUtil.escapeAttribute(projectItem.getTitle()) %></p>
+								        <p><b>Description:</b></p>
 										<p><%= projectItem.getAbstracts().replaceAll("<p>","").replaceAll("</p>","") %></p>
 									</div>
 									<div class="case-studies-form-clearing"></div>
