@@ -1262,7 +1262,7 @@ public class AceItemWrapper implements AceItem, ModelWrapper<AceItem> {
     }
 
     @Override
-    public int compareTo(nl.wur.alterra.cgi.ace.model.AceItem aceItem) {
+    public int compareTo(AceItem aceItem) {
         return _aceItem.compareTo(aceItem);
     }
 
@@ -1272,17 +1272,17 @@ public class AceItemWrapper implements AceItem, ModelWrapper<AceItem> {
     }
 
     @Override
-    public com.liferay.portal.model.CacheModel<nl.wur.alterra.cgi.ace.model.AceItem> toCacheModel() {
+    public com.liferay.portal.model.CacheModel<AceItem> toCacheModel() {
         return _aceItem.toCacheModel();
     }
 
     @Override
-    public nl.wur.alterra.cgi.ace.model.AceItem toEscapedModel() {
+    public AceItem toEscapedModel() {
         return new AceItemWrapper(_aceItem.toEscapedModel());
     }
 
     @Override
-    public nl.wur.alterra.cgi.ace.model.AceItem toUnescapedModel() {
+    public AceItem toUnescapedModel() {
         return new AceItemWrapper(_aceItem.toUnescapedModel());
     }
 

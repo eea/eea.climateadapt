@@ -1,0 +1,121 @@
+<?xml version="1.0"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>eu.europa.eea</groupId>
+  <artifactId>portal</artifactId>
+  <version>1.0</version>
+  <packaging>pom</packaging>
+  <name>lifeary-portal-tools</name>
+
+
+  <build>
+
+    <pluginManagement>
+
+      <plugins>
+        <plugin>
+          <groupId>com.soebes.maven.plugins</groupId>
+          <artifactId>iterator-maven-plugin</artifactId>
+          <version>0.2</version>
+          <configuration>
+            <items>
+
+              <item>portal-parent</item>
+              <item>AceItem</item>
+              <item>ASTHeader-portlet</item>
+              <item>AceMap-portlet</item>
+              <item>AceSearch-portlet</item>
+              <item>AdaptationTools-portlet</item>
+              <item>Countries-portlet</item>
+              <item>FilterAceItem-portlet</item>
+              <item>HomeNewsEvent-portlet</item>
+              <item>IFrame-portlet</item>
+              <item>MapViewer-portlet</item>
+              <item>Measure-portlet</item>
+              <item>Project-portlet</item>
+              <item>SimilarAreasTool-portlet</item>
+              <item>SimpleFilter-portlet</item>
+              <item>ace-layouttpl</item>
+              <item>ace-theme</item>
+            </items>
+            <workingDirectory>../@item@</workingDirectory>
+          </configuration>
+        </plugin>
+      </plugins>
+    </pluginManagement>
+
+
+    <plugins>
+
+      <plugin>
+        <groupId>com.soebes.maven.plugins</groupId>
+        <artifactId>iterator-maven-plugin</artifactId>
+        <executions>
+
+          <execution>
+            <id>package</id>
+            <phase>package</phase>
+            <goals>
+              <goal>invoker</goal>
+            </goals>
+            <configuration>
+              <goals>
+                <goal>install</goal>
+              </goals>
+            </configuration>
+          </execution>
+
+          <execution>
+            <id>clean</id>
+            <phase>clean</phase>
+            <goals>
+              <goal>invoker</goal>
+            </goals>
+            <configuration>
+              <goals>
+                <goal>clean</goal>
+              </goals>
+            </configuration>
+          </execution>
+
+          <execution>
+            <phase>package</phase>
+            <goals>
+              <goal>executor</goal>
+            </goals>
+            <configuration>
+              <pluginExecutors>
+                <pluginExecutor>
+                  <plugin>
+                    <artifactId>maven-resources-plugin</artifactId>
+                    <version>2.6</version>
+                  </plugin>
+                  <goal>copy-resources</goal>
+                  <configuration>
+                    <outputDirectory>${basedir}/target</outputDirectory>
+                    <resources>
+                      <resource>
+                        <directory>../@item@/target/</directory>
+                        <filtering>true</filtering>
+                        <includes>
+                          <include>**/*.war</include>
+                        </includes>
+                      </resource>
+                    </resources>
+                  </configuration>
+                </pluginExecutor>
+              </pluginExecutors>
+            </configuration>
+          </execution>
+
+        </executions>
+      </plugin>
+
+
+    </plugins>
+  </build>
+
+
+</project>

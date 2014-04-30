@@ -625,7 +625,7 @@ public class CSWHarvesterWrapper implements CSWHarvester,
     }
 
     @Override
-    public int compareTo(nl.wur.alterra.cgi.ace.model.CSWHarvester cswHarvester) {
+    public int compareTo(CSWHarvester cswHarvester) {
         return _cswHarvester.compareTo(cswHarvester);
     }
 
@@ -635,17 +635,17 @@ public class CSWHarvesterWrapper implements CSWHarvester,
     }
 
     @Override
-    public com.liferay.portal.model.CacheModel<nl.wur.alterra.cgi.ace.model.CSWHarvester> toCacheModel() {
+    public com.liferay.portal.model.CacheModel<CSWHarvester> toCacheModel() {
         return _cswHarvester.toCacheModel();
     }
 
     @Override
-    public nl.wur.alterra.cgi.ace.model.CSWHarvester toEscapedModel() {
+    public CSWHarvester toEscapedModel() {
         return new CSWHarvesterWrapper(_cswHarvester.toEscapedModel());
     }
 
     @Override
-    public nl.wur.alterra.cgi.ace.model.CSWHarvester toUnescapedModel() {
+    public CSWHarvester toUnescapedModel() {
         return new CSWHarvesterWrapper(_cswHarvester.toUnescapedModel());
     }
 

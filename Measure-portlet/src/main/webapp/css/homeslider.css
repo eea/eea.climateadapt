@@ -1,0 +1,115 @@
+	/* Portlet CSS Starts Here */
+		/* ======================= */
+
+		.case-studies-homepage-clearing {
+			clear: both;
+			height: 0;
+		}
+		
+		.homepage-read-more {
+		    float: right;
+		}
+
+		
+
+		#case-studies-homepage-slider-wrapper {
+			background-color: #f0f0f0;
+			height: 260px;
+			float: left;
+			position: relative;
+			width: 99%;
+		}
+
+		#case-studies-homepage-slider-wrapper .case-studies-homepage-slider-controls {
+			background-color: #B0C1D5;
+			bottom: 0;
+			padding: 0.7em 0 0.3em;
+			position: absolute;
+			text-align: center;
+			width: 100%;
+		}
+
+		#case-studies-homepage-slider-wrapper .case-studies-homepage-slider-controls ul {
+			list-style-type: none;
+			margin: 0;
+			padding: 0;
+		}
+
+		 #case-studies-homepage-slider-wrapper .case-studies-homepage-slider-controls ul li {
+			background-color: #6e89a6;
+			border-radius: 11px;
+			cursor: pointer;
+			display: inline-block;
+			height: 11px;
+			margin-left: 10px;
+			text-indent: -9999px;
+			width: 11px;
+		}
+		
+		 #case-studies-homepage-slider-wrapper .case-studies-homepage-slider-controls ul li:first-child {
+			margin-left: 0;
+		}
+
+		 #case-studies-homepage-slider-wrapper .case-studies-homepage-slider-controls ul li.active {
+			background-color: #022c56;
+		}
+
+		 #case-studies-homepage-slider-wrapper .case-studies-homepage-slider-content > ul > li {
+			display: none;
+			left: 0;
+			position: absolute;
+			top: 0;
+			width: 100%;
+		}
+
+		 #case-studies-homepage-slider-wrapper .case-studies-homepage-slider-content ul li.active {
+			display: list-item;
+		}
+		
+		 #case-studies-homepage-slider-wrapper .case-studies-homepage-slider-content ul li.active-content {
+			display: list-item;
+		}
+
+		 #case-studies-homepage-slider-wrapper .case-studies-homepage-slider-content .case-studies-homepage-slider-image {
+			float: left;
+			width: 270px;
+			height: 220px;
+		}
+
+        #case-studies-homepage-slider-wrapper .case-studies-homepage-slider-content .case-studies-homepage-slider-image img {
+			height: 100%;
+			width: 100%;
+		}
+		
+		 #case-studies-homepage-slider-wrapper .case-studies-homepage-slider-content .case-studies-homepage-slider-description {
+			float: right;
+			padding-right: 5px;
+			position: relative;
+			width: 410px;
+		}
+
+		 #case-studies-homepage-slider-wrapper .case-studies-homepage-slider-content .case-studies-homepage-slider-description h2 {
+			border-bottom: 1px solid #aebe20;
+			margin-bottom: .25em;
+			padding-bottom: .25em;
+			margin-top: 0.5em;
+		}
+
+		 #case-studies-homepage-slider-wrapper .case-studies-homepage-slider-content .case-studies-homepage-slider-description a:link {
+			color: #056bbd;
+			text-align: right;
+			text-decoration: none;
+		}
+
+		
+		
+
+		ul.blank {
+			list-style-type: none;
+			margin: 0;
+			padding: 0;
+		}
+
+		/* ===================== */
+		/* Portlet CSS Ends Here */
+		/* ===================== */

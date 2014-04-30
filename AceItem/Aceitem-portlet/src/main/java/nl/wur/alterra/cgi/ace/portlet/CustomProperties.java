@@ -19,7 +19,7 @@ public class CustomProperties {
     /**
      * Name of file containing custom properties.
      */
-    private final static String CUSTOM_PROPERTIES_FILENAME = "/ace.custom.properties";
+    private final static String CUSTOM_PROPERTIES_FILENAME = "ace.custom.properties";
 
     /**
      * Base URL to GeoNetwork installation.

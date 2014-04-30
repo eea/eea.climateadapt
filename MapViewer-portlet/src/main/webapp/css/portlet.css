@@ -1,0 +1,92 @@
+div.mapviewer-tooltip .x-tip-header-text a {
+	font-size: 13px;
+	font-weight: normal;
+	text-decoration: none;
+}
+
+.mapviewer-tooltip-td {
+	padding: 2px;
+}
+
+.mapviewer-tooltip-table {
+	vertical-align: center;
+	padding: 5px;
+	border: 0;
+}
+
+div.mapviewer-tooltip .x-tip-header {
+	border-bottom-style: solid;
+	border-bottom-width: 1px;
+	border-bottom-color: #AAAAAA;
+}
+
+#mapviewer_element {
+   width: 968px; 
+   height: 968px;
+}
+
+#mapviewer_element .portlet-title {
+	font-size: 25px;
+	font-weight: bold;
+	text-decoration: none;
+}
+
+#mapviewer-title-help .portlet-title {
+	color: #02213D;
+	font-style: italic;
+	font-weight: normal;
+	padding: 7px 10px 7px 0;
+}
+
+
+/* Help tooltip button */
+#help-button {
+	clear: none;
+}
+
+#mapviewer-map {
+	border: 1px solid #EFEFEF;
+	padding: 5px;
+}
+
+
+#help-button .x-btn-tl, #help-button .x-btn-tr, 
+#help-button .x-btn-tc, #help-button .x-btn-ml, 
+#help-button .x-btn-mr, #help-button .x-btn-mc, 
+#help-button .x-btn-bl, #help-button .x-btn-br, 
+#help-button .x-btn-bc {
+	background-image: none;
+}
+
+.x-help {
+	background-image: url(../images/help-icon.png) !important;
+	width: 29px !important;
+	height: 27px !important;
+}
+
+#mapviewer-title-help .portlet-title {
+	color: #02213D;
+	font-style: italic;
+	font-weight: normal;
+	padding: 7px 10px 7px 0;
+}
+
+#mapviewer-legend-control ul {
+	list-style-type: none;
+	margin-left: 0;
+}
+
+#mapviewer-legend-control li.x-tree-node {
+	margin: 5px 5px 5px 5px;
+	white-space: normal;
+}
+
+
+#mapviewer-toc-control div {
+    background-color: #D2DE92;
+}
+
+#mapviewer-toc-control .x-panel-body {
+	margin: 5px;
+}
+

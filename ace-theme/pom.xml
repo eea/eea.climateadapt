@@ -14,7 +14,7 @@
   <packaging>war</packaging>
 
   <build>
-    <finalName>${artifactId}</finalName>
+    <finalName>${project.artifactId}</finalName>
     <plugins>
       <plugin>
         <groupId>com.liferay.maven.plugins</groupId>

@@ -1,2 +1,7 @@
-classes/
 .sass-cache/
+classes/
+target/
+lib/
+*.iml
+*.ipr
+*.iws
