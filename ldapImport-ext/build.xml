@@ -1,5 +1,0 @@
-<?xml version="1.0"?>
-
-<project name="ldapImport-ext" basedir="." default="deploy">
-	<import file="../build-common-ext.xml" />
-</project>

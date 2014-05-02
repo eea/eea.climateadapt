@@ -7,8 +7,12 @@
     <groupId>eu.europa.eea</groupId>
     <artifactId>portal-parent</artifactId>
     <version>1.0</version>
+    <relativePath>../pom.xml</relativePath>
   </parent>
 
+  <properties>
+    <main.basedir>${project.parent.basedir}</main.basedir>
+  </properties>
 
   <artifactId>ace-layout-1-layouttpl</artifactId>
   <packaging>war</packaging>

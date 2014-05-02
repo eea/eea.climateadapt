@@ -1590,7 +1590,7 @@ public class MeasureWrapper implements Measure, ModelWrapper<Measure> {
     }
 
     @Override
-    public int compareTo(nl.wur.alterra.cgi.ace.model.Measure measure) {
+    public int compareTo(Measure measure) {
         return _measure.compareTo(measure);
     }
 
@@ -1600,17 +1600,17 @@ public class MeasureWrapper implements Measure, ModelWrapper<Measure> {
     }
 
     @Override
-    public com.liferay.portal.model.CacheModel<nl.wur.alterra.cgi.ace.model.Measure> toCacheModel() {
+    public com.liferay.portal.model.CacheModel<Measure> toCacheModel() {
         return _measure.toCacheModel();
     }
 
     @Override
-    public nl.wur.alterra.cgi.ace.model.Measure toEscapedModel() {
+    public Measure toEscapedModel() {
         return new MeasureWrapper(_measure.toEscapedModel());
     }
 
     @Override
-    public nl.wur.alterra.cgi.ace.model.Measure toUnescapedModel() {
+    public Measure toUnescapedModel() {
         return new MeasureWrapper(_measure.toUnescapedModel());
     }
 

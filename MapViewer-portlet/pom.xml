@@ -7,8 +7,12 @@
     <groupId>eu.europa.eea</groupId>
     <artifactId>portal-parent</artifactId>
     <version>1.0</version>
+    <relativePath>../pom.xml</relativePath>
   </parent>
 
+  <properties>
+    <main.basedir>${project.parent.basedir}</main.basedir>
+  </properties>
 
   <artifactId>MapViewer-portlet</artifactId>
   <packaging>war</packaging>
@@ -38,13 +42,11 @@
     <dependency>
       <groupId>com.googlecode.json-simple</groupId>
       <artifactId>json-simple</artifactId>
-      <version>1.1.1</version>
     </dependency>
 
     <dependency>
       <groupId>commons-codec</groupId>
       <artifactId>commons-codec</artifactId>
-      <version>1.4</version>
     </dependency>
   </dependencies>
 

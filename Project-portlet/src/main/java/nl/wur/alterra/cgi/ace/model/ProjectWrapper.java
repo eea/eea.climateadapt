@@ -1100,7 +1100,7 @@ public class ProjectWrapper implements Project, ModelWrapper<Project> {
     }
 
     @Override
-    public int compareTo(nl.wur.alterra.cgi.ace.model.Project project) {
+    public int compareTo(Project project) {
         return _project.compareTo(project);
     }
 
@@ -1110,17 +1110,17 @@ public class ProjectWrapper implements Project, ModelWrapper<Project> {
     }
 
     @Override
-    public com.liferay.portal.model.CacheModel<nl.wur.alterra.cgi.ace.model.Project> toCacheModel() {
+    public com.liferay.portal.model.CacheModel<Project> toCacheModel() {
         return _project.toCacheModel();
     }
 
     @Override
-    public nl.wur.alterra.cgi.ace.model.Project toEscapedModel() {
+    public Project toEscapedModel() {
         return new ProjectWrapper(_project.toEscapedModel());
     }
 
     @Override
-    public nl.wur.alterra.cgi.ace.model.Project toUnescapedModel() {
+    public Project toUnescapedModel() {
         return new ProjectWrapper(_project.toUnescapedModel());
     }
 
