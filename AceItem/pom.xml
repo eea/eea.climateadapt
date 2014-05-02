@@ -17,8 +17,8 @@
   </properties>
 
   <modules>
-    <module>Aceitem-shared</module>
-    <module>Aceitem-portlet</module>
+    <module>AceItem-shared</module>
+    <module>AceItem-portlet</module>
 
   </modules>
 

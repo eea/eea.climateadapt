@@ -5,10 +5,11 @@
 
   <groupId>eu.europa.eea</groupId>
   <artifactId>portal-parent</artifactId>
-  <version>1.0</version>
+  <version>1.0-SNAPSHOT</version>
   <packaging>pom</packaging>
-  <name>lifeary-parent</name>
-  <description>This is the parent POM for all Liferay modules that are deployed to Liferay. It defines common properties and dependencies, to make child POMs shorter and safer
+  <name>Climate-ADAPT portlets</name>
+  <description>This is the parent POM for all Liferay modules that are deployed to Climate-ADAPT.
+    It defines common properties and dependencies, to make child POMs shorter and safer
     (version mismatches etc).
   </description>
 
@@ -35,6 +36,7 @@
       <url>http://oss.sonatype.org/content/groups/public</url>
     </repository>
   </repositories>
+
   <pluginRepositories>
     <pluginRepository>
       <id>liferay-repository</id>
@@ -119,6 +121,33 @@
           <outputDirectory>${main.basedir}/target/</outputDirectory>
         </configuration>
       </plugin>
+
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-pmd-plugin</artifactId>
+        <version>2.6</version>
+        <configuration>
+          <linkXref>false</linkXref>
+          <sourceEncoding>utf-8</sourceEncoding>
+          <minimumTokens>300</minimumTokens>
+          <targetJdk>${java.version}</targetJdk>
+        </configuration>
+      </plugin>
+      <!--
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-checkstyle-plugin</artifactId>
+        <version>2.6</version>
+        <configuration>
+          <configLocation>${checkstyle.config.location}</configLocation>
+        </configuration>
+      </plugin>
+      -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-jxr-plugin</artifactId>
+        <version>2.3</version>
+      </plugin>
     </plugins>
   </build>
 
@@ -166,14 +195,12 @@
       <scope>provided</scope>
     </dependency>
 
-
     <dependency>
       <groupId>javax.portlet</groupId>
       <artifactId>portlet-api</artifactId>
       <version>2.0</version>
       <scope>provided</scope>
     </dependency>
-
 
     <dependency>
       <groupId>javax.servlet</groupId>
@@ -201,6 +228,12 @@
       <artifactId>commons-lang</artifactId>
       <version>2.6</version>
       <scope>provided</scope>
+    </dependency>
+
+    <dependency>
+      <groupId>commons-logging</groupId>
+      <artifactId>commons-logging</artifactId>
+      <version>1.1.3</version>
     </dependency>
 
     <!-- test dependencies -->

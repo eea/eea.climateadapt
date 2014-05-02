@@ -29,7 +29,8 @@ In the below instructions, the root of the code is denoted as CODEBASE.
 ***************************************************
 
 Before building with Maven, you need to give it at least the following amount of memory:
-MAVEN_OPTS=“-Xmx1024m -XX:MaxPermSize=512m”
+
+export MAVEN_OPTS="-Xmx1024m -XX:MaxPermSize=512m"
 
 Go into CODEBASE root. There you should see the "root-level" pom.xml for Maven.
 Execute the following command:
