@@ -7,7 +7,6 @@
     <groupId>eu.europa.eea</groupId>
     <artifactId>portal-parent</artifactId>
     <version>1.0</version>
-    <relativePath>../pom.xml</relativePath>
   </parent>
 
 
