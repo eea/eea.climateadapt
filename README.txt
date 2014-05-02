@@ -35,10 +35,10 @@ export MAVEN_OPTS="-Xmx1024m -XX:MaxPermSize=512m"
 Go into CODEBASE root. There you should see the "root-level" pom.xml for Maven.
 Execute the following command:
 
-> mvn package
+> mvn install
 
 As a result, all portlets, themes, layouts and hooks will be built as WAR files into CODEBASE/target.
-From there you can simply copy them into your Liferay's deploy directory and performs the deployment.
+From there you can simply copy them into your Liferay's deploy directory to perform the deployment.
 
 ********************
 4. Further notes
@@ -46,9 +46,9 @@ From there you can simply copy them into your Liferay's deploy directory and per
 
 In addition to the above "root-level" pom.xml, there is also a pom.xml inside every buildable portlet,
 so each of them can be built separately by going into the portlet's root directory and executing
-"mvn package".
+"mvn install".
 
-{PORTLET}/docroot/WEB-INF/src/service.properties contains a build number. If
+{PORTLET}/src/main/resources/service.properties contains a build number. If
 it is lower than the number of the running system, then the deployment will
 log an error in catalina.out that says: OldServiceComponentException: Build
 namespace Ace has build number 9850 which is newer than 28. The deployment
