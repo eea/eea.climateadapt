@@ -12,6 +12,9 @@
   <artifactId>ext-parent</artifactId>
   <packaging>pom</packaging>
 
+  <properties>
+    <main.basedir>${project.parent.basedir}</main.basedir>
+  </properties>
 
   <modules>
     <module>ldapImport-ext</module>
