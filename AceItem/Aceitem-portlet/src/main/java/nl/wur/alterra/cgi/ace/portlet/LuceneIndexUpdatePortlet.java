@@ -44,7 +44,12 @@ public abstract class LuceneIndexUpdatePortlet extends MVCPortlet {
     private String useremail = "";
 
     private User requestUser;
+    private ACEIndexSynchronizer aceIndexSynchronizer = new ACEIndexSynchronizer();
 
+
+    public void setAceIndexSynchronizer( ACEIndexSynchronizer synchronizer ){
+        this.aceIndexSynchronizer = synchronizer;
+    }
     /**
      * Rebuilds complete index based on contents of database.
      *
@@ -54,7 +59,6 @@ public abstract class LuceneIndexUpdatePortlet extends MVCPortlet {
      */
     public void synchronizeIndex(ActionRequest request, ActionResponse response) throws Exception {
         // System.out.println("Synchronizing Lucene index with DBMS");
-        ACEIndexSynchronizer aceIndexSynchronizer = new ACEIndexSynchronizer();
         aceIndexSynchronizer.synchronize();
         // System.out.println("Finished synchronizing Lucene index with DBMS");
     }
@@ -65,7 +69,7 @@ public abstract class LuceneIndexUpdatePortlet extends MVCPortlet {
      */
     public void synchronizeIndexSingleAceItem(AceItem aceitem) {
         // System.out.println("Re-building Lucene index for single AceItem");
-        ACEIndexSynchronizer aceIndexSynchronizer = new ACEIndexSynchronizer();
+
         aceIndexSynchronizer.reIndex(aceitem);
     }
 

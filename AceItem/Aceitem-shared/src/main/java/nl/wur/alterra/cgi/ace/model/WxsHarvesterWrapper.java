@@ -463,7 +463,7 @@ public class WxsHarvesterWrapper implements WxsHarvester,
     }
 
     @Override
-    public int compareTo(WxsHarvester wxsHarvester) {
+    public int compareTo(nl.wur.alterra.cgi.ace.model.WxsHarvester wxsHarvester) {
         return _wxsHarvester.compareTo(wxsHarvester);
     }
 
@@ -473,17 +473,17 @@ public class WxsHarvesterWrapper implements WxsHarvester,
     }
 
     @Override
-    public com.liferay.portal.model.CacheModel<WxsHarvester> toCacheModel() {
+    public com.liferay.portal.model.CacheModel<nl.wur.alterra.cgi.ace.model.WxsHarvester> toCacheModel() {
         return _wxsHarvester.toCacheModel();
     }
 
     @Override
-    public WxsHarvester toEscapedModel() {
+    public nl.wur.alterra.cgi.ace.model.WxsHarvester toEscapedModel() {
         return new WxsHarvesterWrapper(_wxsHarvester.toEscapedModel());
     }
 
     @Override
-    public WxsHarvester toUnescapedModel() {
+    public nl.wur.alterra.cgi.ace.model.WxsHarvester toUnescapedModel() {
         return new WxsHarvesterWrapper(_wxsHarvester.toUnescapedModel());
     }
 
