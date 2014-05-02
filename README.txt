@@ -11,7 +11,7 @@ and install the resulting WAR and JAR files onto Liferay's Tomcat.
 1. Prerequisites
 ************************************
 
-Make sure you have Java 1.6, Maven 3.0.5 or higher and Ant 1.7.0 or higher.
+Make sure you have Java 1.6 and Maven 3.0.5 or higher.
 This branch assumes that the built portlets, themes and layouts will be run on Liferay portal 6.2.0.
 Maven 3.0.5 or higher is used for building.
 On first build, Maven downloads the necessary Liferay Plugins SDK, and uses it for building.
@@ -29,7 +29,7 @@ In the below instructions, the root of the code is denoted as CODEBASE.
 ***************************************************
 
 Before building with Maven, you need to give it at least the following amount of memory:
-MAVEN_OPTS=-Xmx1024m -XX:MaxPermSize=512m.
+MAVEN_OPTS=“-Xmx1024m -XX:MaxPermSize=512m”
 
 Go into CODEBASE root. There you should see the "root-level" pom.xml for Maven.
 Execute the following command:
