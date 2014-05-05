@@ -122,7 +122,7 @@
 		          if (Validator.isNotNull(measure.getPrimephoto()))
 		          {
 					DLFileEntry primImage = DLFileEntryLocalServiceUtil.getFileEntry(Long.parseLong(measure.getPrimephoto()));
-					primImageUrl = themeDisplay.getPathImage() + "/image_gallery?img_id=" + primImage.getLargeImageId() +  "&t=" + WebServerServletTokenUtil.getToken(primImage.getLargeImageId());
+					primImageUrl = themeDisplay.getPathImage() + "/image_gallery?uuid=" + primImage.getUuid() +  "&t=" + WebServerServletTokenUtil.getToken(primImage.getLargeImageId()) + "&groupId=" + primImage.getGroupId();
 		          }
 			 %>
 			<img src="<%=primImageUrl %>" class="case-studies-review-image" />
@@ -469,7 +469,7 @@
 								  DLFileEntry image = DLFileEntryLocalServiceUtil.getFileEntry(Long.parseLong(photo)); 
 								  String supPhotoName = image.getName(); 
 								  String supPhotoDescription = image.getDescription().replaceAll("<p>","").replaceAll("</p>","");
-								  String imageUrl = themeDisplay.getPathImage() + "/image_gallery?img_id=" + image.getLargeImageId() +  "&t=" + WebServerServletTokenUtil.getToken(image.getLargeImageId());
+								  String imageUrl = themeDisplay.getPathImage() + "/image_gallery?uuid=" + image.getUuid() +  "&t=" + WebServerServletTokenUtil.getToken(image.getLargeImageId())  + "&groupId=" + image.getGroupId();
 
 						 %>
 								 

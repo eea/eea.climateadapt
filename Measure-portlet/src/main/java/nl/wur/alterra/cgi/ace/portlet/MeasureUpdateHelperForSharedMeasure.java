@@ -10,9 +10,16 @@ import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
 import javax.portlet.PortletRequest;
 
+import com.liferay.counter.service.CounterLocalServiceUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.repository.model.FileEntry;
 import com.liferay.portal.kernel.repository.model.Folder;
+import com.liferay.portal.model.ResourceAction;
+import com.liferay.portal.model.ResourceConstants;
+import com.liferay.portal.model.ResourcePermission;
+import com.liferay.portal.security.permission.ActionKeys;
+import com.liferay.portal.service.ResourceActionLocalServiceUtil;
+import com.liferay.portal.service.ResourcePermissionLocalServiceUtil;
 import com.liferay.portlet.documentlibrary.service.DLAppLocalServiceUtil;
 import nl.wur.alterra.cgi.ace.model.AceItem;
 import nl.wur.alterra.cgi.ace.model.Measure;
@@ -415,7 +422,7 @@ public abstract class MeasureUpdateHelperForSharedMeasure extends MVCPortlet {
                         DLAppLocalServiceUtil.addFileEntry( themeDisplay.getUserId(), image.getRepositoryId(), folderId, sourceFileName, "image/"+extension, null, "", "", f, serviceContext );
 
                         String primaryKey = String.valueOf(image.getPrimaryKey());
-                        addPermissions(themeDisplay, primaryKey, "com.liferay.portal.kernel.repository.model.FileEntry");
+                        addPermissions(themeDisplay, primaryKey, image.getClass().getName());
                         measure.setPrimephoto(String.valueOf(image.getFileEntryId()));
                         request.setAttribute("primePhotoId", String.valueOf(image.getFileEntryId()));
                     }
@@ -455,7 +462,8 @@ public abstract class MeasureUpdateHelperForSharedMeasure extends MVCPortlet {
                         //System.out.println("image folder is null");
                         imageFolder = DLAppLocalServiceUtil.addFolder(themeDisplay.getUserId(),themeDisplay.getScopeGroupId(), rootFolder.getFolderId(), folder, "", serviceContext);
                         String primaryKey = String.valueOf(imageFolder.getPrimaryKey());
-                        addPermissions(themeDisplay, primaryKey, "com.liferay.portal.kernel.repository.model.Folder");
+                        addPermissions(themeDisplay, primaryKey, DLFolder.class.getName());
+
                     }
 
                     image = DLAppLocalServiceUtil.addFileEntry( themeDisplay.getUserId(), themeDisplay.getScopeGroupId(), imageFolder.getFolderId(), sourceFileName, "image/"+extension, null, "", "", f, serviceContext );
@@ -860,7 +868,7 @@ public abstract class MeasureUpdateHelperForSharedMeasure extends MVCPortlet {
                 try {
                     docFolder = DLAppLocalServiceUtil.addFolder(themeDisplay.getUserId(), themeDisplay.getScopeGroupId(), rootFolder.getFolderId(), folder, "",  serviceContext);
                     String primaryKey = String.valueOf(docFolder.getPrimaryKey());
-                    addPermissions(themeDisplay, primaryKey, "com.liferay.portal.kernel.repository.model.Folder");
+                    addPermissions(themeDisplay, primaryKey, docFolder.getClass().getName());
                 }
                 catch(Exception ex)
                 {
@@ -1336,19 +1344,35 @@ public abstract class MeasureUpdateHelperForSharedMeasure extends MVCPortlet {
         Role roleUser = RoleLocalServiceUtil.getRole(themeDisplay.getCompanyId(), RoleConstants.SITE_MEMBER);
         long roleId = roleUser.getRoleId();
 
+        Role roleGuest = RoleLocalServiceUtil.getRole(themeDisplay.getCompanyId(), RoleConstants.GUEST);
+        long guestRoleId = roleGuest.getRoleId();
+
+
         String actionIds[] = {"VIEW"};
 
-        // View permissions to the Community Member
-        ResourcePermissionServiceUtil.setIndividualResourcePermissions(
-                themeDisplay.getScopeGroupId(), themeDisplay.getCompanyId(),
-                resource, primaryKey, roleId, actionIds);
+        ResourcePermission resourcePermission = null;
 
-        // View permissions to the Guest
-        roleUser = RoleLocalServiceUtil.getRole(themeDisplay.getCompanyId(), RoleConstants.GUEST);
-        roleId = roleUser.getRoleId();
-        ResourcePermissionServiceUtil.setIndividualResourcePermissions(
-                themeDisplay.getScopeGroupId(), themeDisplay.getCompanyId(),
-                resource, primaryKey, roleId, actionIds);
+        try {
+            resourcePermission = ResourcePermissionLocalServiceUtil.getResourcePermission( themeDisplay.getCompanyId(), resource, ResourceConstants.SCOPE_INDIVIDUAL, String.valueOf( primaryKey ), roleId );
+            ResourceAction resourceAction = ResourceActionLocalServiceUtil.getResourceAction( resource, ActionKeys.VIEW );
+            if( Validator.isNotNull( resourcePermission ) && !ResourcePermissionLocalServiceUtil.hasActionId( resourcePermission, resourceAction ) ) {
+                resourcePermission.setActionIds( resourcePermission.getActionIds() + resourceAction.getBitwiseValue() );
+                ResourcePermissionLocalServiceUtil.updateResourcePermission( resourcePermission );
+            }
+        }catch( com.liferay.portal.NoSuchResourcePermissionException e ){
+            resourcePermission = ResourcePermissionLocalServiceUtil.createResourcePermission( CounterLocalServiceUtil.increment());
+            resourcePermission.setCompanyId(themeDisplay.getCompanyId());
+            resourcePermission.setName(resource);
+            resourcePermission.setScope(ResourceConstants.SCOPE_INDIVIDUAL);
+            resourcePermission.setPrimKey(String.valueOf(primaryKey));
+            resourcePermission.setRoleId(guestRoleId);
+
+
+            ResourceAction resourceAction = ResourceActionLocalServiceUtil.getResourceAction(resource, ActionKeys.VIEW);
+            resourcePermission.setActionIds(resourceAction.getBitwiseValue());// (ActionKeys.VIEW);
+            ResourcePermissionLocalServiceUtil.addResourcePermission(resourcePermission);
+
+        }
     }
 
     public static String escapeName(String word) {
