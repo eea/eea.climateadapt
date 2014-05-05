@@ -20,6 +20,9 @@
     <module>ldapImport-ext</module>
     <module>ldapImport-ext-impl</module>
     <module>ldapImport-ext-service</module>
+    <module>ldapImport-ext-util-bridges</module>
+    <module>ldapImport-ext-util-java</module>
+    <module>ldapImport-ext-util-taglib</module>
     <module>ldapImport-ext-web</module>
   </modules>
 
