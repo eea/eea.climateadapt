@@ -68,7 +68,7 @@ if (mapviewerappid == null || mapviewerappid.length() == 0) {
 	       	try {
 		        String[] metadatarecordids = cswrecordfileidentifiersparameter.split(";");
 
-		   		CSW csw = new CSW(cswurl, cswusername, cswpassword);
+		   		CSW csw = new CSW(cswurl, cswusername, cswpassword, false);
 
 		        for (int i = 0; i < metadatarecordids.length; i ++) {
 		        	String metadatarecordid = metadatarecordids[i];
