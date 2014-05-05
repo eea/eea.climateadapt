@@ -13,6 +13,9 @@
   <artifactId>ldapImport-ext-impl</artifactId>
   <packaging>jar</packaging>
 
+  <properties>
+    <main.basedir>${project.parent.parent.basedir}</main.basedir>
+  </properties>
 
   <build>
     <plugins>
@@ -28,14 +31,14 @@
       </plugin>
     </plugins>
   </build>
-  <dependencies>
 
+  <dependencies>
     <dependency>
       <groupId>${project.groupId}</groupId>
       <artifactId>ldapImport-ext-service</artifactId>
       <version>${project.version}</version>
       <scope>provided</scope>
     </dependency>
-
   </dependencies>
+
 </project>
