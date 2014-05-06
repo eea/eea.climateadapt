@@ -64,6 +64,7 @@
     <module>ace-layouttpl</module>
     <module>ace-theme</module>
     <module>ldapImport-ext</module>
+    <module>web-form-portlet</module>
   </modules>
 
 
