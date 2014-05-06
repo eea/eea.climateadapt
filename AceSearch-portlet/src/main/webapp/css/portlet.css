@@ -523,7 +523,18 @@ span.jPag-snext-img{
 		    position: relative;
 		    width: 984px;
 		}
-		
+		#case-studies-database-search-filters-wrapper input,#case-studies-database-search-filters-wrapper   textarea{
+			width: auto;
+                        margin-top:0px;
+                }		
+		#case-studies-database-search-filters-wrapper li, #case-studies-database-search-filters-wrapper li {
+		    padding: 0 0 4px 21px;
+		}
+
+		#case-studies-database-search-filters-wrapper ul {
+		  list-style:none;
+                  margin-left:0px;
+		}
 		#case-studies-database-search-filters-wrapper {
 			float: left;
 			margin: 0 0 30px 2%;
@@ -561,7 +572,7 @@ span.jPag-snext-img{
 			padding-bottom: 9px;
 			width: 100%;
 		}
-		#case-studies-database-search-filters-wrapper #case-studies-database-search-filters .case-studies-database-search-filters-section a.case-studies-database-search-filters-section-header span.case-studies-database-search-filters-section-header-icon {
+		#case-studies-database-search-filters-wrapper  a.case-studies-database-search-filters-section-header span.case-studies-database-search-filters-section-header-icon {
 			background-color: #fff;
 			border: 1px solid #c1c1c1;
 			border-radius: 2px;
@@ -577,14 +588,13 @@ span.jPag-snext-img{
 			top: 0;
 			width: 17px;
 		}
-		#case-studies-database-search-filters-wrapper #case-studies-database-search-filters .case-studies-database-search-filters-section ul.case-studies-database-search-filters-options,
-		#case-studies-database-search-filters-wrapper #case-studies-database-search-filters .case-studies-database-search-filters-section ul.case-studies-database-search-filters-sub-options {
+		#case-studies-database-search-filters-wrapper label{
 			font-size: 11px;
 			list-style-type: none;
 			margin: 0;
 			padding: 0;
 		}
-		#case-studies-database-search-filters-wrapper #case-studies-database-search-filters .case-studies-database-search-filters-section ul.case-studies-database-search-filters-options {
+		#case-studies-database-search-filters-wrapper label{
 			font-weight: bold;
 		}
 		#case-studies-database-search-filters-wrapper #case-studies-database-search-filters .case-studies-database-search-filters-section ul.case-studies-database-search-filters-sub-options {
@@ -592,15 +602,11 @@ span.jPag-snext-img{
 			font-weight: normal;
 			margin-left: -21px;
 		}
-		#case-studies-database-search-filters-wrapper #case-studies-database-search-filters .case-studies-database-search-filters-section ul.case-studies-database-search-filters-options li,
-		#case-studies-database-search-filters-wrapper #case-studies-database-search-filters .case-studies-database-search-filters-section ul.case-studies-database-search-filters-sub-options li {
-			padding: 0 0 4px 21px;
-		}
-		#case-studies-database-search-filters-wrapper #case-studies-database-search-filters .case-studies-database-search-filters-section ul.case-studies-database-search-filters-options li input[type="radio"],
-		#case-studies-database-search-filters-wrapper #case-studies-database-search-filters .case-studies-database-search-filters-section ul.case-studies-database-search-filters-options li input[type="checkbox"],
-		#case-studies-database-search-filters-wrapper #case-studies-database-search-filters .case-studies-database-search-filters-section ul.case-studies-database-search-filters-options li input[type="text"]:first-child,
-		#case-studies-database-search-filters-wrapper #case-studies-database-search-filters .case-studies-database-search-filters-section ul.case-studies-database-search-filters-sub-options li input[type="radio"],
-		#case-studies-database-search-filters-wrapper #case-studies-database-search-filters .case-studies-database-search-filters-section ul.case-studies-database-search-filters-sub-options li input[type="checkbox"] {
+		#case-studies-database-search-filters-wrapper  ul.case-studies-database-search-filters-options li input[type="radio"],
+		#case-studies-database-search-filters-wrapper  ul.case-studies-database-search-filters-options li input[type="checkbox"],
+		#case-studies-database-search-filters-wrapper  ul.case-studies-database-search-filters-options li input[type="text"]:first-child,
+		#case-studies-database-search-filters-wrapper ul.case-studies-database-search-filters-sub-options li input[type="radio"],
+		#case-studies-database-search-filters-wrapper  ul.case-studies-database-search-filters-sub-options li input[type="checkbox"] {
 			margin-left: -21px;
 		}
 		

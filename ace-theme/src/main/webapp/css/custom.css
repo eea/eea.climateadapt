@@ -6,6 +6,41 @@
 
 /* ---------- Base styles ---------- */
 /* ---------- LR upgrade to 6.2 changes start ---------- */
+
+.fieldset .control-label{
+    font-weight: bold;
+}
+.fieldset .control-label{
+    display: block;
+    float: none;
+    margin: 0;
+    text-align: left;
+    width: auto;
+    font-size:12px;
+    color: #02213D;
+}
+
+#csst_element h1{
+ margin-top: 0px;
+}
+
+.scrolling-container label{
+   font-size:12px;
+}
+.case-studies-tabbed-content label{
+ display:inline;
+ font-size:12px;
+}
+.fieldset .control-group{
+ margin-bottom:10px;
+}
+#csst_element .risk-sector-label{
+ line-height: 16px;
+ font-size: 13px;
+ margin-bottom: 0px;
+}
+
+
 .aui {
 	background: #CCCCCC;
 }
@@ -2143,27 +2178,27 @@ text and the class mapviewer to the MapViewerPortlet.
 /****
 	Styling of the contact form
 ****/
-.contact-form .aui-legend {
+.form .aui-legend {
 	border-bottom: none;
 	color: #02213D;
 	font: normal 26px Tahoma, Times New Roman, serif;
 }
 
-.contact-form .aui-fieldset-content {
+.form .aui-fieldset-content {
 	margin-top: 15px;
 }
 
-.contact-form .aui-field-input-select {
+.form .aui-field-select {
 	height: 21px;
 	width: 454px;
 }
 
-.contact-form .aui-field-input-text {
+.form .field {
 	height: 12px;
 	width: 450px;
 }
 
-.contact-form #_1_WAR_webformportlet_INSTANCE_5ZkT_field4 {
+.form #_1_WAR_webformportlet_INSTANCE_5ZkT_field4 {
 	height: 100px;
 }
 
