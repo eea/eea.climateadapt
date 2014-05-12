@@ -635,8 +635,8 @@ public abstract class LuceneIndexUpdatePortletForShareAceItem extends MVCPortlet
     				   String extension = fileName.substring(i+1);
     				   //System.out.println("extension is " + extension);
     				   //image = IGImageServiceUtil.addImage(themeDisplay.getScopeGroupId(), imageFolder.getFolderId(), sup_photo_name, sup_photo_description, f, "image/"+extension, serviceContext);
-                       doc = DLAppLocalServiceUtil.addFileEntry(themeDisplay.getUserId(), themeDisplay.getScopeGroupId(), docFolder.getFolderId(), f.getName(), sup_doc_name,
-                              sup_doc_description, null, null,  f, serviceContext);
+                       doc = DLAppLocalServiceUtil.addFileEntry(themeDisplay.getUserId(), themeDisplay.getScopeGroupId(), docFolder.getFolderId(), "image/"+extension, f.getName(), sup_doc_name,
+                              sup_doc_description, null, f, serviceContext);
                        String primaryKey = String.valueOf(doc.getPrimaryKey());
    		    		   addPermissions(themeDisplay, primaryKey, "com.liferay.portlet.documentlibrary.model.DLFileEntry");
     			    }
