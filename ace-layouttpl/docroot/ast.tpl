@@ -17,7 +17,7 @@
 					    	doc_rel_href = doc_rel_href.substr(0, doc_rel_href.indexOf('?') );
 					    }
 					    
-					    if( (doc_rel_href == this_rel_href) ) {
+					    if( (doc_rel_href.IndexOf(this_rel_href) != -1 ) ) {
 							$(this).addClass("active");
 							return true;
 						}
