@@ -402,6 +402,10 @@
 											 <br/>
 	                                         <p><em>Special Tagging</em></p>
 	                                      	 <input name="specialtagging" type="text" size="65" maxlength="75" value="<%= specialTagging %>"><br /><br />
+	                                      	 
+	                                         <% if (aceitem != null && aceitem.getControlstatus() == 0) { %>
+	                                            <p><em><b>Submitted by:&nbsp;&nbsp;</b></em><%=aceitem.getModerator()%></p>
+	                                         <% } %>
                              </li>
            
                        </ul>
@@ -901,7 +905,7 @@
 	   <liferay-ui:error key="geo-characterization-required" message="Geo Characterization Required" />
 	   <ul>
 			<li>
-				<p><em>Select the characterisation for this item</em></p>
+				<p><b><span class="red">* </span><em>Select the characterisation for this item</em></b></p>
         <ul class="one-col">
 										   <%
 										        ArrayList subnationalRegions = new ArrayList();
@@ -1185,7 +1189,7 @@
 		   
 		   <div class="case-studies-tabbed-content-button-row">
 							 
-					<a href="#" class="case-studies-tabbed-content-button-green case-studies-tabbed-content-button-previous case-studies-tabbed-content-float-left">Back To Reference Information</a>
+					<a href="#" class="case-studies-tabbed-content-button-green case-studies-tabbed-content-button-previous case-studies-tabbed-content-float-left">Back To Documents</a>
 					<a href="#" class="case-studies-tabbed-content-button-green" onClick="submitform('save')">Save as Draft</a>
 					<% if (aceitem != null) { %>
 					   <a href="#" class="case-studies-tabbed-content-button-green case-studies-tabbed-content-button-next">Next - Review &amp; Submit</a>

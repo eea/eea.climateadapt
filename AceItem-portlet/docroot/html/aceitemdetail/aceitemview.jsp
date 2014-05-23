@@ -66,6 +66,9 @@
 			}	
 			else if (sharetype.equalsIgnoreCase(AceItemType.ACTION.toString())) {
 				   aceitemType = "Action";
+			}
+			else if (sharetype.equalsIgnoreCase(AceItemType.INDICATOR.toString())) {
+				   aceitemType = "Indicator";
 			}	
 %>
 
@@ -171,7 +174,7 @@
 				
 				<div class="case-studies-review-clearing"></div>
 					<!--  insert submit button which takes to the ace data type page -->
-				  <% if ( !(aceitemType.equalsIgnoreCase("Map Graph Data Set") || aceitemType.equalsIgnoreCase("Action"))) {
+				  <% if ( !(aceitemType.equalsIgnoreCase("Map Graph Data Set") || aceitemType.equalsIgnoreCase("Action") || aceitemType.equalsIgnoreCase("Indicator"))) {
 					    // all blue button links now point to "Share your information" instead of aceitem specific links.
 					    // Can be reverted to point to ace item specific links whenever required as the
 					    // logic to get the ace item specific url is already implemented above.

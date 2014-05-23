@@ -357,7 +357,8 @@
 		    <% if (measure != null) { %>
 		         <liferay-ui:error key="measure-changed" message="measure-changed" />
 		         <aui:input type="hidden" name="checkcreationdate" value='<%= measure.getCreationdate().getTime() %>'/>
-             <% } %>
+             <% 
+             } %>
 		    
 			<div class="case-studies-tabs-wrapper">
 				<div class="case-studies-tabs">
@@ -576,6 +577,10 @@
 											 <br/>
 	                                         <p><em>Special Tagging</em></p>
 	                                      	 <input name="specialtagging" type="text" size="65" maxlength="75" value="<%= specialTagging %>"><br /><br />
+	                                      	 
+	                                         <% if (measure != null && measure.getControlstatus() == 0) { %>
+	                                            <p><em><b>Submitted by:&nbsp;&nbsp;</b></em><%=measure.getModerator()%></p>
+	                                         <% } %>
 									</li>
 								</ul>
 							</div>
@@ -1842,7 +1847,7 @@
 								<liferay-ui:error key="geo-characterization-required" message="geo-characterization-required" />
 								<ul>
 									<li>
-										<p><em>Select the characterisation for this case study</em></p>
+										<p><b><span class="red">* </span><em>Select the characterisation for this case study</em></b></p>
 										<ul class="one-col">
 										   <%
 										        ArrayList subnationalRegions = new ArrayList();

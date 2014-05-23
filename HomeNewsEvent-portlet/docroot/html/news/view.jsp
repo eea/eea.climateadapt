@@ -11,7 +11,7 @@
 	   <div class="news-events">
 			  <ul>
 				<c:forEach var="journal" items="${newsList}" varStatus="status">
-				      <li><fmt:formatDate pattern="dd MMM yyyy"  value="${journal.displayDate}"/>&nbsp;<a href="${urlList[status.count - 1]}" target="_blank">${journal.title}</a></li>
+				      <li><fmt:formatDate pattern="dd MMM yyyy"  value="${journal.displayDate}"/>&nbsp;<a href="${urlList[status.count - 1]}" target="_blank">${titleList[status.count - 1]}</a></li>
 				</c:forEach>
 			</ul>
 	
@@ -29,7 +29,7 @@
 		
 	    <c:forEach var="journal" items="${newsList}" varStatus="status">
 	        <li>
-				<h5><a href="${urlList[status.count - 1]}" target="_blank">${journal.title}</a></h5>
+				<h5><a href="${urlList[status.count - 1]}" target="_blank">${titleList[status.count - 1]}</a></h5>
 				<small><fmt:formatDate pattern="dd MMM yyyy"  value="${journal.displayDate}"/></small>
 				<p>${journal.description}</p>
 			</li>
