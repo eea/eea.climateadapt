@@ -413,7 +413,6 @@ String redirect = PortalUtil.getCurrentURL(renderRequest);
 
 	</div>
 	
-	
 	<hr class="clearer"/>
 
 </div>
