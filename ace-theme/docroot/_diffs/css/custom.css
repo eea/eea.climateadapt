@@ -1018,8 +1018,12 @@ ul#subnav li a:hover {
 }
 
 #ast-menu .ui-accordion-content-active p {
-	margin: -19px 0 0 0;
-	padding-left: 50px; 
+	margin: -19px 0 -10px 0;
+	padding-left: 30px; 
+}
+
+.ie9 #ast-menu .ui-accordion-content-active p {
+	margin-bottom: 15px; 
 }
 
 #ast-menu ul ul {
