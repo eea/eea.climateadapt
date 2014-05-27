@@ -10,7 +10,7 @@
        </p>
 			  <ul>
 				<c:forEach var="journal" items="${eventList}" varStatus="status">
-				      <li>${journal.date}&nbsp;${journal.month}&nbsp;${journal.year},&nbsp;<a href="${journal.url}" target="_blank">${journal.article.title}</a>,&nbsp;${journal.location}</li>
+				      <li>${journal.date}&nbsp;${journal.month}&nbsp;${journal.year},&nbsp;<a href="${journal.url}" target="_blank">${journal.articleTitle}</a>,&nbsp;${journal.location}</li>
 				</c:forEach>
 			</ul>
 	
@@ -36,7 +36,7 @@
 				   </div>
 		        
 		           <div class="case-studies-events-list-column-right">
-						<h5><a href="${journal.url}" target="_blank">${journal.article.title}</a></h5>
+						<h5><a href="${journal.url}" target="_blank">${journal.articleTitle}</a></h5>
 						<small>${journal.location}</small>
 						<p>${journal.article.description}</p>
 				  </div>

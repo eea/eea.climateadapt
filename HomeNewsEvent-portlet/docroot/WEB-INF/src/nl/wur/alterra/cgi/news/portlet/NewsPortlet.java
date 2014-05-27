@@ -85,27 +85,40 @@ public class NewsPortlet extends MVCPortlet {
 			
 			List urlList = new ArrayList();
 			List journalList = new ArrayList();
+			List titleList = new ArrayList();
 			
 			for (JournalArticle article : journalArticlesList)
 			{
-				String name = "url"; // The name of the custom field
-				String value = ""; // The value of the custom field: remember that this will always be a java.lang.String
+				// The name and values of the custom fields
+				// The value of the custom field: remember that this will always be a java.lang.String
+				String name = "url"; 
+				String value = ""; 
+				String titleName = "title";
+				String titleValue = "";
 			
 				
 				// since there is no api support for the custom field we are trying to do the other way
+				// getting url
 				Document document = SAXReaderUtil.read(article.getContentByLocale(article.getDefaultLocale()));
 				Node node = document.selectSingleNode("/root/dynamic-element[@name='" + name + "']/dynamic-content");
 				value = node.getText();
+				
+				//getting title
+				node = document.selectSingleNode("/root/dynamic-element[@name='" + titleName + "']/dynamic-content");
+				titleValue = node.getText();
 				
 				// show only the latest version
 				if(JournalArticleLocalServiceUtil.isLatestVersion(groupId,article.getArticleId(),article.getVersion())){
 					journalList.add(article);
 					urlList.add(value);
+					titleList.add(titleValue);
 				}
 			}
 		
 			renderRequest.setAttribute("newsList", journalList);
 			renderRequest.setAttribute("urlList", urlList);
+			renderRequest.setAttribute("titleList", titleList);
+			
 			if (showParam != null && showParam.equalsIgnoreCase("full"))
 			{
 				renderRequest.setAttribute("showall", "full");

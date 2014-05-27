@@ -127,6 +127,11 @@ public class EventPortlet extends MVCPortlet {
 				String locationValue = "";
 				node = document.selectSingleNode("/root/dynamic-element[@name='" + name + "']/dynamic-content");
 				locationValue = node.getText();
+				
+				name = "title";
+				String titleValue = "";
+				node = document.selectSingleNode("/root/dynamic-element[@name='" + name + "']/dynamic-content");
+				titleValue = node.getText();
 			
 				SimpleDateFormat dateFormatter = new SimpleDateFormat("MMM/dd/yyyy", new Locale("en"));
 				String eventDate = monthInMMFormat + "/" + dayValue + "/" + yearValue;
@@ -138,6 +143,7 @@ public class EventPortlet extends MVCPortlet {
 			    c.set(Calendar.SECOND, 0);
 			    c.set(Calendar.MILLISECOND, 0);
 			    Date currentDt = c.getTime();
+		
 			    
 			    boolean displayFlag = false;
 			    
@@ -151,6 +157,7 @@ public class EventPortlet extends MVCPortlet {
 				if(JournalArticleLocalServiceUtil.isLatestVersion(groupId,article.getArticleId(),article.getVersion()) && displayFlag){
 					JournalEvent newEvent = new JournalEvent();
 					newEvent.setArticle(article);
+					newEvent.setArticleTitle(titleValue);
 					newEvent.setDate(dayValue);
 					newEvent.setMonth(monthValue);
 					newEvent.setYear(yearValue);
@@ -196,6 +203,7 @@ public class EventPortlet extends MVCPortlet {
 		String month;
 		String date;
 		String location;
+		String articleTitle;
 		Date eventDt;
 		JournalArticle article ;
 		
@@ -242,6 +250,13 @@ public class EventPortlet extends MVCPortlet {
 		public void setEventDt(Date eventDt) {
 			this.eventDt = eventDt;
 		}
+		public String getArticleTitle() {
+			return articleTitle;
+		}
+		public void setArticleTitle(String articleTitle) {
+			this.articleTitle = articleTitle;
+		}
+
 		
 		public int compareTo(Object o)
 		{
