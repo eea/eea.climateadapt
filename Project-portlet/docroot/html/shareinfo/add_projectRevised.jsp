@@ -371,7 +371,7 @@
 	                                         <p><em>Special Tagging</em></p>
 	                                      	 <input name="specialtagging" type="text" size="65" maxlength="75" value="<%= specialTagging %>"><br /><br /> 
 	                                      	 
-	                                      	 <% if (projectItem != null && projectItem.getControlstatus() == 0) { %>
+	                                      	 <% if (projectItem != null && projectItem.getControlstatus() >= 0) { %>
 	                                            <p><em><b>Submitted by:&nbsp;&nbsp;</b></em><%=projectItem.getModerator()%></p>
 	                                         <% } %>
                              </li>
@@ -1342,10 +1342,19 @@
 										<div class="case-studies-tabbed-content-subheader">Reference Information</div>
 										
 										 <% if (Validator.isNotNull(projectItem.getWebsite()))
-										   {%>	
-												<br/><p><b>Websites:</b></p>
-												<p><%= projectItem.getWebsite().replaceAll("<p>","").replaceAll("</p>","") %></p>
-												
+										    {%>	
+												 <br/><p><b>Websites:</b></p>
+												<%
+													   // replacing the <p> tag
+													   String websiteForReview = projectItem.getWebsite().replaceAll("<p>","").replaceAll("</p>","");
+													   String webSites[] = websiteForReview.split(";");
+												%>
+													<p>
+													   <% for (String wsite: webSites) {
+														   if (wsite.trim().length() > 0) { 
+													   %>
+													   <a href="http://<%=wsite.trim()%>"><%=wsite.trim()%></a><br/><% }} %></p>
+													<div class="case-studies-form-clearing"></div>
 										<% } %>
 										
 											

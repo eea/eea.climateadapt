@@ -578,7 +578,7 @@
 	                                         <p><em>Special Tagging</em></p>
 	                                      	 <input name="specialtagging" type="text" size="65" maxlength="75" value="<%= specialTagging %>"><br /><br />
 	                                      	 
-	                                         <% if (measure != null && measure.getControlstatus() == 0) { %>
+	                                         <% if (measure != null && measure.getControlstatus() >= 0) { %>
 	                                            <p><em><b>Submitted by:&nbsp;&nbsp;</b></em><%=measure.getModerator()%></p>
 	                                         <% } %>
 									</li>

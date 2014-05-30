@@ -131,41 +131,24 @@
 				<% if (Validator.isNotNull(project.getWebsite()) || Validator.isNotNull(project.getSource())) { %>
 					<div class="case-studies-tabbed-content-section">
 						<div class="case-studies-subheader">Reference Information</div>
-						
-								<br/><p><b>Websites</b></p>
-									
-									<%
-												url = project.getWebsite().replaceAll("<p>","").replaceAll("</p>","");
+
+									 <% if (Validator.isNotNull(project.getWebsite()))
+									    {%>	
+											 <br/><p><b>Websites:</b></p>
+											<%
+												   // replacing the <p> tag
+												   String websiteForReview = project.getWebsite().replaceAll("<p>","").replaceAll("</p>","");
+												   String webSites[] = websiteForReview.split(";");
+											%>
+												<p>
+												   <% for (String wsite: webSites) {
+													   if (wsite.trim().length() > 0) { 
+												   %>
+												   <a href="http://<%=wsite.trim()%>"><%=wsite.trim()%></a><br/><% }} %></p>
+												<div class="case-studies-form-clearing"></div>
+									<% } %>
 												
-												if(url != null && url.trim().length() > 0) {
-									
-													// Portlet code checks for splitter to be '; '
-													urls = url.split(";");
-													
-													url = "" ;
-													for(int i=0; i<urls.length; i++) {
-														
-														if(i==2) { websitelabel += "s" ;}
-														
-														urls[i] = urls[i].replace("<p>", "");
-														urls[i] = urls[i].replace("</p>", "");
-														urls[i] = urls[i].trim();
-														
-														
-														if(urls[i].length() > 0) {
-															if ( ! (urls[i].startsWith("http")  || urls[i].startsWith("/") ) ) {
-																
-																urls[i] = "http://" + urls[i];
-															}
-															
-															url += "<a href='" + urls[i] + "' target='_blank'>" + urls[i] + "</a>&nbsp;&nbsp;" ;
-														}
-													} 
-												}
-												
-									%>
-									
-									<%= url %><br/><br/>
+									<br/><br/>
 							
 							<% if (Validator.isNotNull(project.getSource()))
 							{%>	
