@@ -417,15 +417,8 @@ String redirect = PortalUtil.getCurrentURL(renderRequest);
 		String portletCustomTitle = themeDisplay.getPortletDisplay().getTitle();
 		portletCustomTitle = portletSetup.getValue("portlet-setup-title-" + themeDisplay.getLanguageId(),portletCustomTitle);
 		
-	   // we don't want to show the green action submit button for "discover", "search results" and "interactive maps"
-	   if ( ! ( portletCustomTitle.equalsIgnoreCase("discover") || portletCustomTitle.equalsIgnoreCase("search results") || portletCustomTitle.equalsIgnoreCase("interactive maps"))) { %>
-	     <c:if test="${cnt gt 1 }">
-	          <c:set var="url" scope="page" value="/share-your-info" />
-	          <div class="bluebuttondiv">
-	           <a href="${url}" class="bluebutton">Share your information</a>
-	        </div>
-	     </c:if>	
-	  <% } %>
+	 %>
+
 	</div>
 	
 	<hr class="clearer"/>

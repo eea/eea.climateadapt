@@ -32,10 +32,10 @@
 	
 		<div id="${resultsListId}">
 			<c:forEach var="wrappedSearchResult" items="${groupedResults}" begin="0" end="<%= itemsOnPage-1 %>">		
-				<%					
+				<% 					
 					if ( sofarnr  < prefnritemspage ) { %>
 				<div>
-					<div>
+					<div style="clear:both;">
 
 						<c:set var="descriptionId" value="descriptionId-${wrappedSearchResult.aceItemId}" />
 
@@ -49,53 +49,20 @@
 						<span id="${minusId}" class="minus togglehide"><img src="/ace-theme/images/arrows/01_minus.png" /></span>
 						<span class="feed-entry-title">
 						<c:choose>
-							<c:when test="${!empty wrappedSearchResult.storedAt && fn:startsWith(wrappedSearchResult.storedAt, 'http')==true}">
-								&nbsp;<a href="<c:out value="${wrappedSearchResult.storedAt}"/>" target="_blank">
+							<c:when test="${!empty wrappedSearchResult.storedAt && fn:startsWith(wrappedSearchResult.storagetype, 'URL')==true}">
+								&nbsp;<a href="<c:out value="/viewaceitem?aceitem_id=${wrappedSearchResult.aceItemId}"/>" ><c:out value="${wrappedSearchResult.name}"/></a>
+							</c:when>
+							<c:when test="${!empty wrappedSearchResult.storedAt && fn:startsWith(wrappedSearchResult.storedAt, 'ace_project_id')==true}">
+								&nbsp;<a href="<c:out value="/projects1?${wrappedSearchResult.storedAt}"/>" >
 									<c:out value="${wrappedSearchResult.name}"/></a>
 							</c:when>
-							<c:when test="${!empty wrappedSearchResult.storedAt && fn:startsWith(wrappedSearchResult.storedAt, '/')==true}">
-								&nbsp;<a href="<c:out value="${wrappedSearchResult.storedAt}"/>" target="_blank">
-									<c:out value="${wrappedSearchResult.name}"/></a>
-							</c:when>
-							<c:when test="${!empty wrappedSearchResult.storedAt && fn:startsWith(wrappedSearchResult.storedAt, 'www.')==true}">
-								&nbsp;<a href="<c:out value="http://${wrappedSearchResult.storedAt}"/>" target="_blank">
-									<c:out value="${wrappedSearchResult.name}"/></a>
-							</c:when>                            
-							<c:when test="${!empty wrappedSearchResult.deeplink && fn:startsWith(wrappedSearchResult.deeplink, 'http')==true}">
-								&nbsp;<a href="<c:out value="${wrappedSearchResult.deeplink}"/>" target="_blank">
-									<c:out value="${wrappedSearchResult.name}"/></a>
-							</c:when>
-							<c:when test="${!empty wrappedSearchResult.deeplink && fn:startsWith(wrappedSearchResult.deeplink, '/')==true}">
-								&nbsp;<a href="<c:out value="${wrappedSearchResult.deeplink}"/>" target="_blank">
-									<c:out value="${wrappedSearchResult.name}"/></a>
-							</c:when>
-							<c:when test="${!empty wrappedSearchResult.deeplink && fn:startsWith(wrappedSearchResult.deeplink, 'www.')==true}">
-								&nbsp;<a href="<c:out value="http://${wrappedSearchResult.deeplink}"/>" target="_blank">
-									<c:out value="${wrappedSearchResult.name}"/></a>
-							</c:when>                           
-							<c:when test="${empty wrappedSearchResult.deeplink && !empty wrappedSearchResult.storedAt && fn:startsWith(wrappedSearchResult.storedAt, 'ace_project_id')==true}">
-								&nbsp;<a href="<c:out value="/projects1?${wrappedSearchResult.storedAt}"/>" target="_blank">
-									<c:out value="${wrappedSearchResult.name}"/></a>
-							</c:when>
-							<c:when test="${empty wrappedSearchResult.deeplink && !empty wrappedSearchResult.storedAt && fn:startsWith(wrappedSearchResult.storedAt, 'ace_measure_id')==true}">
+							<c:when test="${!empty wrappedSearchResult.storedAt && fn:startsWith(wrappedSearchResult.storedAt, 'ace_measure_id')==true}">
 								&nbsp;<a href="<c:out value="/viewmeasure?${wrappedSearchResult.storedAt}"/>" >
 									<c:out value="${wrappedSearchResult.name}"/></a>
-							</c:when>  
-							<c:when test="${fn:startsWith(wrappedSearchResult.storagetype, 'GEONETWORK')==true}">
-								&nbsp;<a href="<c:out value="/map-viewer?cswRecordFileIdentifier=${wrappedSearchResult.storedAt}"/>" >
-									<c:out value="${wrappedSearchResult.name}"/></a>
-							</c:when>   
-							<c:when test="${fn:startsWith(wrappedSearchResult.storagetype, 'PLAINMETADATA')==true}">
-								&nbsp;<a href="<c:out value="/geonetwork/srv/en/metadata.show?uuid=${wrappedSearchResult.storedAt}"/>" target="_blank">
-									<c:out value="${wrappedSearchResult.name}"/></a>
-							</c:when>   
-							<c:when test="${fn:startsWith(wrappedSearchResult.storagetype, 'SETOFMAPS')==true}">
-								&nbsp;<a href="<c:out value="/map-viewer?mapViewerAppId=${wrappedSearchResult.storedAt}"/>" >
-									<c:out value="${wrappedSearchResult.name}"/></a>
-							</c:when>                        
+							</c:when>                            
 							<c:otherwise>
 								&nbsp;<a href="<c:out value="/viewaceitem?aceitem_id=${wrappedSearchResult.aceItemId}"/>" ><c:out value="${wrappedSearchResult.name}"/></a>
-							</c:otherwise>  
+							</c:otherwise>
 						</c:choose>					
 						</span>
 						<span id="${descriptionId}" class="feed-entry-content togglehide"><c:out value="${descriptionText}" /></span>
@@ -108,11 +75,15 @@
 				</div>
 			<% 	
 				sofarnr++ ;
-				} %>		
+				} %>
 			</c:forEach>
+			
+		 
+	     
+	     
+			
 		</div>
 
 	</div>
 	
 </c:if>
-	

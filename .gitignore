@@ -5,6 +5,7 @@ build.properties
 .classpath
 *.ipr
 *.iws
+*.iml
 ASTHeader-portlet/docroot/WEB-INF/classes/
 AceItem-portlet/docroot/WEB-INF/classes/
 AceItem-portlet/docroot/WEB-INF/service/classes/

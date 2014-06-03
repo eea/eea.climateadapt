@@ -55,7 +55,7 @@ $theme.include($body_top_include)
 					<li id="sitemap"><a href="/sitemap">Sitemap</a></li>
                     <li id="legal-notice"><a href="http://ec.europa.eu/geninfo/legal_notices_en.htm">Legal notice</a></li>
 					<li id="about"><a href="/about">About</a></li>
-                                        <li id="multimedia"><a href="/multimedia">Multimedia</a></li>
+                                        <li id="help"><a href="/help">Help</a></li>
                        </ul>
             </div>
             

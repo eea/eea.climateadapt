@@ -402,6 +402,10 @@
 											 <br/>
 	                                         <p><em>Special Tagging</em></p>
 	                                      	 <input name="specialtagging" type="text" size="65" maxlength="75" value="<%= specialTagging %>"><br /><br />
+	                                      	 
+	                                         <% if (aceitem != null && aceitem.getControlstatus() >= 0) { %>
+	                                            <p><em><b>Submitted by:&nbsp;&nbsp;</b></em><%=aceitem.getModerator()%></p>
+	                                         <% } %>
                              </li>
            
                        </ul>
@@ -901,7 +905,7 @@
 	   <liferay-ui:error key="geo-characterization-required" message="Geo Characterization Required" />
 	   <ul>
 			<li>
-				<p><em>Select the characterisation for this item</em></p>
+				<p><b><span class="red">* </span><em>Select the characterisation for this item</em></b></p>
         <ul class="one-col">
 										   <%
 										        ArrayList subnationalRegions = new ArrayList();
@@ -1185,7 +1189,7 @@
 		   
 		   <div class="case-studies-tabbed-content-button-row">
 							 
-					<a href="#" class="case-studies-tabbed-content-button-green case-studies-tabbed-content-button-previous case-studies-tabbed-content-float-left">Back To Reference Information</a>
+					<a href="#" class="case-studies-tabbed-content-button-green case-studies-tabbed-content-button-previous case-studies-tabbed-content-float-left">Back To Documents</a>
 					<a href="#" class="case-studies-tabbed-content-button-green" onClick="submitform('save')">Save as Draft</a>
 					<% if (aceitem != null) { %>
 					   <a href="#" class="case-studies-tabbed-content-button-green case-studies-tabbed-content-button-next">Next - Review &amp; Submit</a>
@@ -1226,19 +1230,89 @@
 									<div class="case-studies-tabbed-content-section">
 										<div class="case-studies-tabbed-content-subheader">Reference Information</div>
 										
-											    <br/><p><b>Websites:</b></p>
-												<%=aceitem.getStoredAt().replaceAll("<p>","").replaceAll("</p>","") %>
+									  <br/><p><b>Websites:</b></p>
+									  <%
+										    String url = null;
+									        String[] urls = null;
+										    String metadataurl = null;
+										    
+											if(aceitem.getStoragetype().equalsIgnoreCase("MAPLAYER")) {
+												// cswRecordFileIdentifier gets handled inside mapviewer-portlet
+												url = "<a href='/map-viewer?cswRecordFileIdentifier=" + aceitem.getStoredAt() + "' >View map " + aceitem.getName() + "</a>" ; 
+												//dev:	metadataurl = "<a href='http://dev.ace.geocat.net/geonetwork/srv/en/metadata.show?uuid=" + aceitem.getStoredAt() + "' target='_blank'>View metadata " + aceitem.getName() + "</a>" ; 
+												metadataurl = "<a href='/geonetwork/srv/en/metadata.show?uuid=" + aceitem.getStoredAt() + "' target='_blank'>View metadata " + aceitem.getName() + "</a>" ; 
+											}
+											else if(aceitem.getStoragetype().equalsIgnoreCase("PLAINMETADATA")) {
+												// mapViewerAppId gets handled inside mapviewer-portlet
+												url = "<a href='/geonetwork/srv/en/metadata.show?uuid=" + aceitem.getStoredAt() + "' target='_blank'>View metadata " + aceitem.getName() + "</a>" ; 
+											}
+											else if(aceitem.getStoragetype().equalsIgnoreCase("SETOFMAPS")) {
+												// mapViewerAppId gets handled inside mapviewer-portlet
+												url = "<a href='/map-viewer?mapViewerAppId=" + aceitem.getStoredAt() + "' > " + aceitem.getName() + "</a>" ; 
+											}
+										    else {	
+		
+												url = aceitem.getStoredAt().replaceAll("<p>","").replaceAll("</p>","");
+												
+												if(url != null && url.trim().length() > 0) {
+									
+													// Portlet code checks for splitter to be '; '
+													urls = url.split(";");
+													
+													url = "" ;
+													for(int i=0; i<urls.length; i++) {
+														
+														urls[i] = urls[i].replaceAll("<p>", "");
+														urls[i] = urls[i].replaceAll("</p>", "");
+														urls[i] = urls[i].trim();
+														
+														
+														if(urls[i].length() > 0) {
+															if ( ! (urls[i].startsWith("http")  || urls[i].startsWith("/") ) ) {
+																
+																urls[i] = "http://" + urls[i];
+															}
+															
+															url += "<a href='" + urls[i] + "' target='_blank'>" + urls[i] + "</a>&nbsp;&nbsp;" ;
+														}
+													} 
+												}
+										    }
+								     %>
+								
+								<%  if(aceitem.getStoragetype().equalsIgnoreCase("MAPLAYER") ) { %>
+										<b>Go to the service</b><br />
+										 <%= url %><br /><br />
+										 <%= metadataurl %><br /><br />
+									<%	 }
+										else if(aceitem.getStoragetype().equalsIgnoreCase("PLAINMETADATA") ) { %>
+											<b>View metadata</b><br />
+											 <%= url  %><br /><br />
+									<%	 }
+										 else if(aceitem.getStoragetype().equalsIgnoreCase("SETOFMAPS") ) { %>
+											<b>View set of maps</b><br />
+											 <%= url  %><br /><br />
+										<%	 }
+											 else{ %>
+										 	<%= url %><br /><br />
+										 <% } %>
+								
+						
+												
+												
+												
+												
+												
+												
+												
+												
 											
 										<% if (Validator.isNotNull(aceitem.getSource()))
 										   {%>	
 												    <br/><p><b>Source:</b></p>
 												    <%=aceitem.getSource().replaceAll("<p>","").replaceAll("</p>","") %>
-												    
 													<div class="case-studies-form-clearing"></div>
-												
 										 <%} %>
-											
-										
 									</div>
 								</div> <!-- end of case-studies-tabbed-content-review-column-left  -->
                              

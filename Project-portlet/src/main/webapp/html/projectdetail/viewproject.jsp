@@ -83,63 +83,82 @@
 	
 	<div class="case-studies-review-column-left">
                 <div class="case-studies-tabbed-content-section">
-                    <% String projectDuration = project.getDuration().length() > 0 ? "("+ project.getDuration() + ")" : "";%>
-                   <p class="case-review-header"><%=HtmlUtil.escapeAttribute(project.getAcronym()) %>: <%=HtmlUtil.escapeAttribute(project.getTitle()) %> <%=projectDuration %></p>
+                   <p class="case-review-header"><%=HtmlUtil.escapeAttribute(project.getAcronym()) %>: <%=HtmlUtil.escapeAttribute(project.getTitle()) %></p>
 					<p><b>Description:</b></p>
 					<p><%= project.getAbstracts().replaceAll("<p>","").replaceAll("</p>","") %></p>
 				</div>
 
 				<div class="case-studies-review-clearing"></div>
 				
-				<% if (Validator.isNotNull(project.getWebsite()) && Validator.isNotNull(project.getSource())) { %>
-				<div class="case-studies-tabbed-content-section">
-					<div class="case-studies-subheader">Reference Information</div>
-					
-							<br/><p><b>Websites:</b></p>
-								
-								<%
-											url = project.getWebsite().replaceAll("<p>","").replaceAll("</p>","");
-											
-											if(url != null && url.trim().length() > 0) {
-								
-												// Portlet code checks for splitter to be '; '
-												urls = url.split(";");
-												
-												url = "" ;
-												for(int i=0; i<urls.length; i++) {
-													
-													if(i==2) { websitelabel += "s" ;}
-													
-													urls[i] = urls[i].replace("<p>", "");
-													urls[i] = urls[i].replace("</p>", "");
-													urls[i] = urls[i].trim();
-													
-													
-													if(urls[i].length() > 0) {
-														if ( ! (urls[i].startsWith("http")  || urls[i].startsWith("/") ) ) {
-															
-															urls[i] = "http://" + urls[i];
-														}
-														
-														url += "<a href='" + urls[i] + "' target='_blank'>" + urls[i] + "</a>&nbsp;&nbsp;" ;
-													}
-												} 
-											}
-											
-								%>
-								
-								<%= url %><br/><br/>
 						
-											
-						<% if (Validator.isNotNull(project.getSource()))
+			<% if (Validator.isNotNull(project.getLead()) || Validator.isNotNull(project.getPartners()) || Validator.isNotNull(project.getFunding())) { %>
+				<div class="case-studies-tabbed-content-section">
+					<div class="case-studies-subheader">Project Information</div>
+					
+								
+						<% if (Validator.isNotNull(project.getLead()))
 						{%>	
 								
-									<p><a name="source_anchor"><b><em>Source</em></b></a></p>
-									<p><%=project.getSource().replaceAll("<p>","").replaceAll("</p>","") %></p>
+									<br/><p><b>Lead</b></p>
+									<p><%=project.getLead().replaceAll("<p>","").replaceAll("</p>","") %></p>
+									<div class="case-studies-form-clearing"></div>
+						
+						<%} %>
+						
+						<% if (Validator.isNotNull(project.getPartners()))
+						{%>	
+								
+									<p><b>Partners</b></p>
+									<p><%=project.getPartners().replaceAll("<p>","").replaceAll("</p>","") %></p>
+									<div class="case-studies-form-clearing"></div>
+						
+						<%} %>
+						
+						<% if (Validator.isNotNull(project.getFunding()))
+						{%>	
+								
+									<p><b>Source of funding</b></p>
+									<p><%=project.getFunding().replaceAll("<p>","").replaceAll("</p>","") %></p>
 									<div class="case-studies-form-clearing"></div>
 						
 						<%} %>
 				</div>
+			    <% } %>
+				
+				<div class="case-studies-review-clearing"></div>
+				
+				
+				<% if (Validator.isNotNull(project.getWebsite()) || Validator.isNotNull(project.getSource())) { %>
+					<div class="case-studies-tabbed-content-section">
+						<div class="case-studies-subheader">Reference Information</div>
+
+									 <% if (Validator.isNotNull(project.getWebsite()))
+									    {%>	
+											 <br/><p><b>Websites:</b></p>
+											<%
+												   // replacing the <p> tag
+												   String websiteForReview = project.getWebsite().replaceAll("<p>","").replaceAll("</p>","");
+												   String webSites[] = websiteForReview.split(";");
+											%>
+												<p>
+												   <% for (String wsite: webSites) {
+													   if (wsite.trim().length() > 0) { 
+												   %>
+												   <a href="http://<%=wsite.trim()%>"><%=wsite.trim()%></a><br/><% }} %></p>
+												<div class="case-studies-form-clearing"></div>
+									<% } %>
+												
+									<br/><br/>
+							
+							<% if (Validator.isNotNull(project.getSource()))
+							{%>	
+									
+										<p><b>Source</b></p>
+										<p><%=project.getSource().replaceAll("<p>","").replaceAll("</p>","") %></p>
+										<div class="case-studies-form-clearing"></div>
+							
+							<%} %>
+					</div>
 			    <% } %>
 				
 				<div class="case-studies-review-clearing"></div>
@@ -184,6 +203,14 @@
 					<p><b>Keywords</b></p>
 					<%=project.getKeywords().replaceAll("<p>","").replaceAll("</p>","") %><br/>
 				</div>
+				
+			   	<% if (Validator.isNotNull(project.getDuration()))
+				{%>	
+					<div class="case-studies-review-column-right-section">
+						<p><b>Duration</b></p>
+						<%=project.getDuration().replaceAll("<p>","").replaceAll("</p>","") %><br/>
+					</div>
+				<%} %>
 
 
 				<div class="case-studies-review-column-right-section">

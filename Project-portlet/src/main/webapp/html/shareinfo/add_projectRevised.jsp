@@ -367,10 +367,13 @@
 												  }
 											}
 										%>
-											 
 											 <br/>
 	                                         <p><em>Special Tagging</em></p>
-	                                      	 <input name="specialtagging" type="text" size="65" maxlength="75" value="<%= specialTagging %>"><br /><br />
+	                                      	 <input name="specialtagging" type="text" size="65" maxlength="75" value="<%= specialTagging %>"><br /><br /> 
+	                                      	 
+	                                      	 <% if (projectItem != null && projectItem.getControlstatus() >= 0) { %>
+	                                            <p><em><b>Submitted by:&nbsp;&nbsp;</b></em><%=projectItem.getModerator()%></p>
+	                                         <% } %>
                              </li>
            
                        </ul>
@@ -984,7 +987,7 @@
 	   <liferay-ui:error key="geo-characterization-required" message="Geo Characterization Required" />
 	   <ul>
 			<li>
-				<p><em>Select the characterisation for this project</em></p>
+				<p><b><span class="red">* </span><em>Select the characterisation for this project</em></b></p>
         <ul class="one-col">
 										   <%
 										        ArrayList subnationalRegions = new ArrayList();
@@ -1269,7 +1272,7 @@
 		   
 		   <div class="case-studies-tabbed-content-button-row">
 							 
-					<a href="#" class="case-studies-tabbed-content-button-green case-studies-tabbed-content-button-previous case-studies-tabbed-content-float-left">Back To Reference Information</a>
+					<a href="#" class="case-studies-tabbed-content-button-green case-studies-tabbed-content-button-previous case-studies-tabbed-content-float-left">Back To Documents</a>
 					<a href="#" class="case-studies-tabbed-content-button-green" onClick="submitform('save')">Save as Draft</a>
 					<% if (projectItem != null) { %>
 					   <a href="#" class="case-studies-tabbed-content-button-green case-studies-tabbed-content-button-next">Next - Review &amp; Submit</a>
@@ -1299,29 +1302,67 @@
 			      <div class="case-studies-tabbed-content-review-wrapper">
 								<div class="case-studies-tabbed-content-review-column-left">
 								     <div class="case-studies-tabbed-content-section">
-								          <% String projectDuration = projectItem.getDuration().length() > 0 ? "("+ projectItem.getDuration() + ")" : "";%>
-										<p class="case-studies-tabbed-content-review-header"><%= HtmlUtil.escapeAttribute(projectItem.getAcronym()) %>: <%= HtmlUtil.escapeAttribute(projectItem.getTitle()) %> <%=projectDuration %></p>
+										<p class="case-studies-tabbed-content-review-header"><%= HtmlUtil.escapeAttribute(projectItem.getAcronym()) %>: <%= HtmlUtil.escapeAttribute(projectItem.getTitle()) %></p>
 										<p><b>Description:</b></p>
 										<p><%= projectItem.getAbstracts().replaceAll("<p>","").replaceAll("</p>","") %></p>
 									</div>
 									<div class="case-studies-form-clearing"></div>
+									
+									<% if (Validator.isNotNull(projectItem.getLead()) || Validator.isNotNull(projectItem.getPartners()) || Validator.isNotNull(projectItem.getFunding())) { %>
+										<div class="case-studies-tabbed-content-section">
+											<div class="case-studies-tabbed-content-subheader">Project Information</div>
+											
+											<% if (Validator.isNotNull(projectItem.getLead()))
+											{%>	
+														<br/><p><b>Lead</b></p>
+														<p><%=projectItem.getLead().replaceAll("<p>","").replaceAll("</p>","") %></p>
+											<%} %>
+						
+											<% if (Validator.isNotNull(projectItem.getPartners()))
+											{%>	
+														<br/><p><b>Partners</b></p>
+														<p><%=projectItem.getPartners().replaceAll("<p>","").replaceAll("</p>","") %></p>
+											<%} %>
+											
+											<% if (Validator.isNotNull(projectItem.getFunding()))
+											{%>	
+													
+														<br/><p><b>Source of funding</b></p>
+														<p><%=projectItem.getFunding().replaceAll("<p>","").replaceAll("</p>","") %></p>
+											<%} %>
+											
+										</div>
+								<% } %>
+				
+				                  <div class="case-studies-review-clearing"></div>
+				
                               								
                                  <% if (Validator.isNotNull(projectItem.getWebsite()) && Validator.isNotNull(projectItem.getSource())) { %>
 									<div class="case-studies-tabbed-content-section">
 										<div class="case-studies-tabbed-content-subheader">Reference Information</div>
 										
 										 <% if (Validator.isNotNull(projectItem.getWebsite()))
-										   {%>	
-												<br/><p><b>Websites:</b></p>
-												<p><%= projectItem.getWebsite().replaceAll("<p>","").replaceAll("</p>","") %></p>
-												
+										    {%>	
+												 <br/><p><b>Websites:</b></p>
+												<%
+													   // replacing the <p> tag
+													   String websiteForReview = projectItem.getWebsite().replaceAll("<p>","").replaceAll("</p>","");
+													   String webSites[] = websiteForReview.split(";");
+												%>
+													<p>
+													   <% for (String wsite: webSites) {
+														   if (wsite.trim().length() > 0) { 
+													   %>
+													   <a href="http://<%=wsite.trim()%>"><%=wsite.trim()%></a><br/><% }} %></p>
+													<div class="case-studies-form-clearing"></div>
 										<% } %>
+										
+											
 											
 										<% if (Validator.isNotNull(projectItem.getSource()))
 										   {%>	
 												    <br/><p><b>Source:</b></p>
 												    <%= projectItem.getSource().replaceAll("<p>","").replaceAll("</p>","") %>
-												   
 										 <%} %>
 										
 									</div>
@@ -1361,6 +1402,14 @@
 										<p><b>Keywords</b></p>
 										<%= projectItem.getKeywords().replaceAll("<p>","").replaceAll("</p>","") %><br/>
 									</div>
+									
+								   	<% if (Validator.isNotNull(projectItem.getDuration()))
+				                    {%>	
+										<div class="case-studies-tabbed-content-review-column-right-section">
+											<p><b>Duration</b></p>
+											<%=projectItem.getDuration().replaceAll("<p>","").replaceAll("</p>","") %><br/>
+					                    </div>
+					                <%} %>
 									
 									  <div class="case-studies-tabbed-content-review-column-right-section">
 										<%

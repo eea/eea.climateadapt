@@ -357,7 +357,8 @@
 		    <% if (measure != null) { %>
 		         <liferay-ui:error key="measure-changed" message="measure-changed" />
 		         <aui:input type="hidden" name="checkcreationdate" value='<%= measure.getCreationdate().getTime() %>'/>
-             <% } %>
+             <% 
+             } %>
 		    
 			<div class="case-studies-tabs-wrapper">
 				<div class="case-studies-tabs">
@@ -576,6 +577,10 @@
 											 <br/>
 	                                         <p><em>Special Tagging</em></p>
 	                                      	 <input name="specialtagging" type="text" size="65" maxlength="75" value="<%= specialTagging %>"><br /><br />
+	                                      	 
+	                                         <% if (measure != null && measure.getControlstatus() >= 0) { %>
+	                                            <p><em><b>Submitted by:&nbsp;&nbsp;</b></em><%=measure.getModerator()%></p>
+	                                         <% } %>
 									</li>
 								</ul>
 							</div>
@@ -1478,16 +1483,16 @@
 										  if (measure == null ) {
 											  if (measureFromRequest != null && Validator.isNotNull(measureFromRequest.getPrimephoto()))
 											  {
-												  DLFileEntry image = DLFileEntryLocalServiceUtil.getFileEntry(Long.parseLong(measureFromRequest.getPrimephoto())); 
-												  primePhoto = image.getName();
+												  IGImage image = IGImageServiceUtil.getImage(Long.parseLong(measureFromRequest.getPrimephoto()));
+												  primePhoto = image.getNameWithExtension();
 												  pageContext.setAttribute("primephotoname", primePhoto);
 												  primePhotoId = measureFromRequest.getPrimephoto();
 											  }
 										  }
 										  else if (Validator.isNotNull(measure.getPrimephoto()))
 										  {
-											  DLFileEntry image = DLFileEntryLocalServiceUtil.getFileEntry( Long.parseLong(measure.getPrimephoto()) ); 
-											  primePhoto = image.getName();
+											  IGImage image = IGImageServiceUtil.getImage(Long.parseLong(measure.getPrimephoto()));
+											  primePhoto = image.getNameWithExtension();
 											  pageContext.setAttribute("primephotoname", primePhoto);
 										  }
 										%>
@@ -1531,9 +1536,9 @@
 									    	     int i = 0;
 									             for (String photo:sphotos)
 												 {
-													 DLFileEntry image = DLFileEntryLocalServiceUtil.getFileEntry(Long.parseLong(photo)); 
+													 IGImage image = IGImageServiceUtil.getImage(Long.parseLong(photo));
 													 String supPhotoName = image.getName(); 
-													 String imageName = image.getName();
+													 String imageName = image.getNameWithExtension();
 													 String supPhotoDescription = image.getDescription();
 													 sphotoNames[i] = HtmlUtil.escapeAttribute(supPhotoName);
 													 sphotoDescriptions[i] = HtmlUtil.escapeAttribute(supPhotoDescription);
@@ -1842,7 +1847,7 @@
 								<liferay-ui:error key="geo-characterization-required" message="geo-characterization-required" />
 								<ul>
 									<li>
-										<p><em>Select the characterisation for this case study</em></p>
+										<p><b><span class="red">* </span><em>Select the characterisation for this case study</em></b></p>
 										<ul class="one-col">
 										   <%
 										        ArrayList subnationalRegions = new ArrayList();
@@ -2296,8 +2301,8 @@
 										    
 										    if (Validator.isNotNull(measure.getPrimephoto()))
 										    {
-										      DLFileEntry image = DLFileEntryLocalServiceUtil.getFileEntry(Long.parseLong(measure.getPrimephoto())); 
-										      primImageUrl = themeDisplay.getPathImage() + "/image_gallery?uuid=" + image.getUuid() +  "&t=" + WebServerServletTokenUtil.getToken(image.getLargeImageId()) + "&groupId=" + image.getGroupId();
+										      IGImage primImage = IGImageServiceUtil.getImage(Long.parseLong(measure.getPrimephoto()));
+										      primImageUrl = themeDisplay.getPathImage() + "/image_gallery?img_id=" + primImage.getLargeImageId() +  "&t=" + ImageServletTokenUtil.getToken(primImage.getLargeImageId());
 										    }
 										 %>
 										<img src="<%=primImageUrl %>" class="case-studies-tabbed-content-review-image"/>
@@ -2641,10 +2646,10 @@
 										  String firstImageAlt = null;
 									     for (String photo:sphotosInReview)
 									     {
-													 DLFileEntry image = DLFileEntryLocalServiceUtil.getFileEntry(Long.parseLong(photo)); 
-													 String supPhotoName = image.getName(); 
+													 IGImage image = IGImageServiceUtil.getImage(Long.parseLong(photo)); 
+													 String supPhotoName = HtmlUtil.escapeAttribute(image.getName()); 
 													 String supPhotoDescription = image.getDescription().replaceAll("<p>","").replaceAll("</p>","");
-													 String imageUrl = themeDisplay.getPathImage() + "/image_gallery?uuid=" + image.getUuid() +  "&t=" + WebServerServletTokenUtil.getToken(image.getLargeImageId())  + "&groupId=" + image.getGroupId();
+													 String imageUrl = themeDisplay.getPathImage() + "/image_gallery?img_id=" + image.getLargeImageId() +  "&t=" + ImageServletTokenUtil.getToken(image.getLargeImageId());
 								 %>
 								 
 								 <!-- =========================== -->
