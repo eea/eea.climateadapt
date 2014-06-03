@@ -19,6 +19,7 @@ import nl.wur.alterra.cgi.ace.service.AceItemLocalServiceUtil;
 import nl.wur.alterra.cgi.ace.service.ProjectLocalServiceUtil;
 
 import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang.BooleanUtils;
 
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
@@ -329,9 +330,9 @@ public class ProjectPortlet extends ProjectUpdateHelper {
         if (paramNames != null) {
             while (paramNames.hasMoreElements()) {
                 String paramName = paramNames.nextElement();
-                if (paramName.startsWith(SUBMITTED_PROJECT_ID_PREFIX)) {
+                if (paramName.startsWith(SUBMITTED_PROJECT_ID_PREFIX) && ! paramName.contains(  "Checkbox" ) ) {
                     String paramValue = actionRequest.getParameter(paramName);
-                    if (StringUtils.equals(paramValue, String.valueOf(true))) {
+                    if ( BooleanUtils.toBooleanObject(paramValue) ) {
                         itemIds.add(Long.valueOf(paramName.substring(SUBMITTED_PROJECT_ID_PREFIX.length())));
                     }
                 }
