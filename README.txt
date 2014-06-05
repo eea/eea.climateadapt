@@ -3,8 +3,7 @@ This README contains instructions on how to build ClimateAdapt from source
 and install the resulting WAR and JAR files onto Liferay's Tomcat.
 
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-!!!    This branch and the below instructions is work under construction:   !!!
-!!!    you may experience errors and unstable behavior.                     !!!
+!!!    This branch and the below instructions is work under construction.   !!!
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
 ************************************
@@ -64,4 +63,4 @@ the *obsolete* format in service.xml.
 
 There is a way to tell Liferay to use other lengths than 75. You can do it in
 docroot/WEB-INF/src/META-INF/portlet-model-hints.xml, but that feature wasn't
-used.  You rebuild the Java files from service.xml by running ant build-service
+used. The above-described Maven build will always rebuild the services as well.
