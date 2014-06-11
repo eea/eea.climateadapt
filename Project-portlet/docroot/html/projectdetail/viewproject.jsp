@@ -137,7 +137,7 @@
 											 <br/><p><b>Websites:</b></p>
 											<%
 												   // replacing the <p> tag
-												   String websiteForReview = project.getWebsite().replaceAll("<p>","").replaceAll("</p>","");
+												   String websiteForReview = HtmlUtil.extractText(project.getWebsite()).replaceAll("<p>","").replaceAll("</p>","");
 												   String webSites[] = websiteForReview.split(";");
 											%>
 												<p>

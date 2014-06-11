@@ -2602,7 +2602,7 @@
 												<a name="website_anchor"><b><em>Websites</em></b></a>
 												<%
 												   // replacing the <p> tag
-												   String websiteForReview = measure.getWebsite();
+												   String websiteForReview = HtmlUtil.extractText(measure.getWebsite());
 												   String webSites[] = websiteForReview.split(";");
 												%>
 												<p>

@@ -112,7 +112,7 @@
 										}
 										else {	
 		
-											url = aceitem.getStoredAt().replaceAll("<p>","").replaceAll("</p>","");
+											url = HtmlUtil.extractText(aceitem.getStoredAt()).replaceAll("<p>","").replaceAll("</p>","");
 											
 											if(url != null && url.trim().length() > 0) {
 								
