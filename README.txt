@@ -58,28 +58,31 @@ In TRUNK do:
 4. Create symbolic links to ClimateAdapt portlets, etc.
 *******************************************************
 
-Let's call the directory where you have downloaded ClimateAdapt's trunk as TRUNK.
-While in PLUGINS_SDK_HOME/portlets, create the following symbolic links:
+Let's denote the directory where you have downloaded ClimateAdapt's trunk as TRUNK.
+And the directory of your Plugins SDK let be denoted as PLUGINS_SDK_HOME.
+Create the following symbolic links (e.g. on Linux the command is "ln -s source destionation").
+(note that on Windows the command is "mklink /J destionation source"
 
-ln -s TRUNK/AceItem-portlet AceItem-portlet
-ln -s TRUNK/AceMap-portlet AceMap-portlet
-ln -s TRUNK/AceSearch-portlet AceSearch-portlet
-ln -s TRUNK/AdaptationTools-portlet AdaptationTools-portlet
-ln -s TRUNK/ASTHeader-portlet ASTHeader-portlet
-ln -s TRUNK/Countries-portlet Countries-portlet
-ln -s TRUNK/FilterAceItem-portlet FilterAceItem-portlet
-ln -s TRUNK/IFrame-portlet IFrame-portlet
-ln -s TRUNK/MapViewer-portlet MapViewer-portlet
-ln -s TRUNK/Measure-portlet Measure-portlet
-ln -s TRUNK/Project-portlet Project-portlet
-ln -s TRUNK/SimilarAreasTool-portlet SimilarAreasTool-portlet
-ln -s TRUNK/SimpleFilter-portlet SimpleFilter-portlet
-ln -s TRUNK/web-form-portlet web-form-portlet
+ln -s TRUNK/AceItem-portlet PLUGINS_SDK_HOME/portlets/AceItem-portlet
+ln -s TRUNK/AceMap-portlet PLUGINS_SDK_HOME/portlets/AceMap-portlet
+ln -s TRUNK/AceSearch-portlet PLUGINS_SDK_HOME/portlets/AceSearch-portlet
+ln -s TRUNK/AdaptationTools-portlet PLUGINS_SDK_HOME/portlets/AdaptationTools-portlet
+ln -s TRUNK/ASTHeader-portlet PLUGINS_SDK_HOME/portlets/ASTHeader-portlet
+ln -s TRUNK/Countries-portlet PLUGINS_SDK_HOME/portlets/Countries-portlet
+ln -s TRUNK/FilterAceItem-portlet PLUGINS_SDK_HOME/portlets/FilterAceItem-portlet
+ln -s TRUNK/HomeNewsEvent-portlet PLUGINS_SDK_HOME/portlets/HomeNewsEvent-portlet
+ln -s TRUNK/IFrame-portlet PLUGINS_SDK_HOME/portlets/IFrame-portlet
+ln -s TRUNK/MapViewer-portlet PLUGINS_SDK_HOME/portlets/MapViewer-portlet
+ln -s TRUNK/Measure-portlet PLUGINS_SDK_HOME/portlets/Measure-portlet
+ln -s TRUNK/Project-portlet PLUGINS_SDK_HOME/portlets/Project-portlet
+ln -s TRUNK/SimilarAreasTool-portlet PLUGINS_SDK_HOME/portlets/SimilarAreasTool-portlet
+ln -s TRUNK/SimpleFilter-portlet PLUGINS_SDK_HOME/portlets/SimpleFilter-portlet
+ln -s TRUNK/web-form-portlet PLUGINS_SDK_HOME/portlets/web-form-portlet
 
-While in PLUGINS_SDK_HOME/layouttpl, create the following symbolic link:
-ln -s TRUNK/ace-layouttpl ace-layouttpl
+ln -s TRUNK/ace-layouttpl PLUGINS_SDK_HOME/layouttpl/ace-layouttpl
+ln -s TRUNK/ldapImport-ext PLUGINS_SDK_HOME/ext/ldapImport-ext
+ln -s TRUNK/uiError-hook PLUGINS_SDK_HOME/hooks/uiError-hook
 
-While in PLUGINS_SDK_HOME/themes, create the following symbolic link:
 ln -s TRUNK/ace-theme ace-theme
 ln -s TRUNK/ace-baltic-sea-theme ace-baltic-sea-theme
 
