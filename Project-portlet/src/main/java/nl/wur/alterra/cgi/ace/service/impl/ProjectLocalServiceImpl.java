@@ -43,94 +43,94 @@ import nl.wur.alterra.cgi.ace.service.base.ProjectLocalServiceBaseImpl;
  * @see nl.wur.alterra.cgi.ace.service.ProjectLocalServiceUtil
  */
 public class ProjectLocalServiceImpl extends ProjectLocalServiceBaseImpl {
-	
-	
-	/**
-	 * Adds the Project to the database incrementing the primary key
-	 *
-	 */
-	public Project addProject(Project project) throws SystemException {
-		long projectId = CounterLocalServiceUtil.increment(Project.class.getName());
-
-		project.setProjectId(projectId);
-
-		return super.addProject(project);
-	}
-
-	/**
-	 * Gets a list with all the Projects in a group
-	 *
-	 */
-	public List<Project> getProjectsByGroupId(long groupId) throws SystemException {
-		return projectPersistence.findByGroupId(groupId);
-	}
-
-	/**
-	 * Gets a list with a range of Projects from a group
-	 *
-	 */
-	public List<Project> getProjectsByGroupId(long groupId, int start, int end) throws SystemException {
-		return projectPersistence.findByGroupId(groupId, start, end);
-	}
-	/**
-	 * 	
-	 * Hugo de Groot: add these methods by hand to <portlet>LocalServiceImpl
-	 * and rerun ServiceBuilder if auto generation fails 
-	 * 
-	 * Gets a list with a range of Projects from a group
-	 *
-	 */
-	public List<Project> getProjectsByGroupId(long groupId, int start, int end, OrderByComparator orderByComparator) throws SystemException {
-		return projectPersistence.findByGroupId(groupId, start, end, orderByComparator);
-	}
-	/**
-	 * Gets the number of Projects in a group
-	 *
-	 */
-	public int getProjectsCountByGroupId(long groupId) throws SystemException {
-		return projectPersistence.countByGroupId(groupId);
-	}
 
 
-	/**
-	 * Gets a list with all the Projects by controlstatus
-	 *
-	 */
-	public List<Project> getProjectsByControlstatus(short controlstatus) throws SystemException {
-		return projectPersistence.findByControlstatus(controlstatus);
-	}
+    /**
+     * Adds the Project to the database incrementing the primary key
+     *
+     */
+    public Project addProject(Project project) throws SystemException {
+        long projectId = CounterLocalServiceUtil.increment(Project.class.getName());
 
-	/**
-	 * Gets a list with a range of Projects by controlstatus
-	 *
-	 */
-	public List<Project> getProjectsByGroupId(short controlstatus, int start, int end) throws SystemException {
-		return projectPersistence.findByControlstatus(controlstatus, start, end);
-	}
-	
+        project.setProjectId(projectId);
 
-	/**
-	 * Gets a list with a range of Projects by controlstatus
-	 *
-	 */
-	public List<Project> getProjectsByControlstatus(short controlstatus, int start, int end) throws SystemException {
-		return projectPersistence.findByControlstatus(controlstatus, start, end);
-	}
+        return super.addProject(project);
+    }
 
-	/**
-	 * Gets the number of Projects by controlstatus
-	 *
-	 */
-	
-	public int getProjectsCountByGroupId(short controlstatus) throws SystemException {
-		return projectPersistence.countByControlstatus(controlstatus);
-	}
-	
-	/**
-	 * Gets the number of Projects by controlstatus
-	 *
-	 */
-	public int getProjectsCountByControlstatus(short controlstatus) throws SystemException {
-		return projectPersistence.countByControlstatus(controlstatus);
-	}
+    /**
+     * Gets a list with all the Projects in a group
+     *
+     */
+    public List<Project> getProjectsByGroupId(long groupId) throws SystemException {
+        return projectPersistence.findByGroupId(groupId);
+    }
+
+    /**
+     * Gets a list with a range of Projects from a group
+     *
+     */
+    public List<Project> getProjectsByGroupId(long groupId, int start, int end) throws SystemException {
+        return projectPersistence.findByGroupId(groupId, start, end);
+    }
+    /**
+     *
+     * Hugo de Groot: add these methods by hand to <portlet>LocalServiceImpl
+     * and rerun ServiceBuilder if auto generation fails
+     *
+     * Gets a list with a range of Projects from a group
+     *
+     */
+    public List<Project> getProjectsByGroupId(long groupId, int start, int end, OrderByComparator orderByComparator) throws SystemException {
+        return projectPersistence.findByGroupId(groupId, start, end, orderByComparator);
+    }
+    /**
+     * Gets the number of Projects in a group
+     *
+     */
+    public int getProjectsCountByGroupId(long groupId) throws SystemException {
+        return projectPersistence.countByGroupId(groupId);
+    }
+
+
+    /**
+     * Gets a list with all the Projects by controlstatus
+     *
+     */
+    public List<Project> getProjectsByControlstatus(short controlstatus) throws SystemException {
+        return projectPersistence.findByControlstatus(controlstatus);
+    }
+
+    /**
+     * Gets a list with a range of Projects by controlstatus
+     *
+     */
+    public List<Project> getProjectsByGroupId(short controlstatus, int start, int end) throws SystemException {
+        return projectPersistence.findByControlstatus(controlstatus, start, end);
+    }
+
+
+    /**
+     * Gets a list with a range of Projects by controlstatus
+     *
+     */
+    public List<Project> getProjectsByControlstatus(short controlstatus, int start, int end) throws SystemException {
+        return projectPersistence.findByControlstatus(controlstatus, start, end);
+    }
+
+    /**
+     * Gets the number of Projects by controlstatus
+     *
+     */
+
+    public int getProjectsCountByGroupId(short controlstatus) throws SystemException {
+        return projectPersistence.countByControlstatus(controlstatus);
+    }
+
+    /**
+     * Gets the number of Projects by controlstatus
+     *
+     */
+    public int getProjectsCountByControlstatus(short controlstatus) throws SystemException {
+        return projectPersistence.countByControlstatus(controlstatus);
+    }
 }

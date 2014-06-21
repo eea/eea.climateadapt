@@ -28,6 +28,6 @@ import nl.wur.alterra.cgi.ace.model.Project;
  * </p>
  */
 public class ProjectImpl extends ProjectBaseImpl {
-	public ProjectImpl() {
-	}
+    public ProjectImpl() {
+    }
 }

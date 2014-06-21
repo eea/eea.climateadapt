@@ -23,33 +23,32 @@ import java.util.Map;
  */
 public class FilterAceItemPortlet extends MVCPortlet {
 
-	/*
-	 *  param: datainfo_type '2' param: sector 'WATERMANAGEMENT' param: element
-	 *  'OBSERVATIONS' param: anyOfThese 'Water' param: countries 'AT' param:
-	 *  aceitemtype 'DOCUMENT' param: javax.portlet.action 'searchAceitem'
-	 */
+    /*
+     *  param: datainfo_type '2' param: sector 'WATERMANAGEMENT' param: element
+     *  'OBSERVATIONS' param: anyOfThese 'Water' param: countries 'AT' param:
+     *  aceitemtype 'DOCUMENT' param: javax.portlet.action 'searchAceitem'
+     */
 
-	@Override
-	public void doView(RenderRequest renderRequest, RenderResponse renderResponse) throws IOException, PortletException {
-		try {
+    @Override
+    public void doView(RenderRequest renderRequest, RenderResponse renderResponse) throws IOException, PortletException {
+        try {
             ACESearchPortalInterface searchEngine = new ACESearchPortalInterface();
-			searchEngine.handleSearchRequest(renderRequest);
-		}
-        catch (Exception x) {
-			x.printStackTrace();
+            searchEngine.handleSearchRequest(renderRequest);
+        } catch (Exception x) {
+            x.printStackTrace();
             throw new PortletException(x);
-		}
-		super.doView(renderRequest, renderResponse);
-	}
+        }
+        super.doView(renderRequest, renderResponse);
+    }
 
-	public void setFilterAceItemPref(ActionRequest request, ActionResponse response) throws Exception {
+    public void setFilterAceItemPref(ActionRequest request, ActionResponse response) throws Exception {
         Map<String, String[]> requestParams = request.getParameterMap();
 
         if(requestParams == null || requestParams.get(SearchRequestParams.ANY) == null) {
             System.out.println("Search cannot be executed, it seems your portlet container failed to send the search form in this request.");
         }
 
-        String[] datainfo_type = requestParams.get(SearchRequestParams.DATAINFO_TYPE);      
+        String[] datainfo_type = requestParams.get(SearchRequestParams.DATAINFO_TYPE);
         String[] anyOfThese = requestParams.get(SearchRequestParams.ANY);
         String[] aceItemTypes = requestParams.get(SearchRequestParams.ACEITEM_TYPE);
         String[] sectors = requestParams.get(SearchRequestParams.SECTOR);
@@ -58,52 +57,51 @@ public class FilterAceItemPortlet extends MVCPortlet {
         String[] impacts = requestParams.get(SearchRequestParams.IMPACT);
         String[] sortBys = requestParams.get(SearchRequestParams.SORTBY);
         if((sortBys == null) || (sortBys.length==0) || (sortBys[0].length()==0)) {
-        	sortBys = new String[] {"RATING"} ; // sort by rating 
+            sortBys = new String[] {"RATING"} ; // sort by rating
         }
-        
-		PortletPreferences prefs = request.getPreferences();
-		
-		prefs.setValue(Constants.PAGING, ParamUtil.getString(request, Constants.PAGING) );
-		prefs.setValue(Constants.NRITEMSPAGE, ParamUtil.getString(request, Constants.NRITEMSPAGE) );
-		prefs.setValue(Constants.FUZZINESS, ParamUtil.getString(request, Constants.FUZZINESS) );
 
-		prefs.store();
-		prefs.setValues(SearchRequestParams.FREETEXT_MODE, new String[] {"2"} ); // always search all of the words
-		prefs.setValues(SearchRequestParams.DATAINFO_TYPE, datainfo_type);
-		prefs.setValues(SearchRequestParams.ANY, anyOfThese);
-		prefs.setValues(SearchRequestParams.ACEITEM_TYPE, aceItemTypes);
-		prefs.setValues(SearchRequestParams.SECTOR, sectors);
-		prefs.setValues(SearchRequestParams.COUNTRIES, countries);
+        PortletPreferences prefs = request.getPreferences();
+
+        prefs.setValue(Constants.PAGING, ParamUtil.getString(request, Constants.PAGING) );
+        prefs.setValue(Constants.NRITEMSPAGE, ParamUtil.getString(request, Constants.NRITEMSPAGE) );
+        prefs.setValue(Constants.FUZZINESS, ParamUtil.getString(request, Constants.FUZZINESS) );
+
+        prefs.store();
+        prefs.setValues(SearchRequestParams.FREETEXT_MODE, new String[] {"2"} ); // always search all of the words
+        prefs.setValues(SearchRequestParams.DATAINFO_TYPE, datainfo_type);
+        prefs.setValues(SearchRequestParams.ANY, anyOfThese);
+        prefs.setValues(SearchRequestParams.ACEITEM_TYPE, aceItemTypes);
+        prefs.setValues(SearchRequestParams.SECTOR, sectors);
+        prefs.setValues(SearchRequestParams.COUNTRIES, countries);
         prefs.setValues(SearchRequestParams.ELEMENT, elements);
         prefs.setValues(SearchRequestParams.IMPACT, impacts);
-		prefs.setValues(SearchRequestParams.SORTBY, sortBys);
-		
-		prefs.store();
-	}
+        prefs.setValues(SearchRequestParams.SORTBY, sortBys);
 
-	@Override
-	public void doEdit(RenderRequest renderRequest, RenderResponse renderResponse) throws IOException, PortletException {
+        prefs.store();
+    }
+
+    @Override
+    public void doEdit(RenderRequest renderRequest, RenderResponse renderResponse) throws IOException, PortletException {
         ACESearchPortalInterface searchEngine = new ACESearchPortalInterface();
-		AceSearchFormBean formBean = searchEngine.prepareACESearchFormBean(renderRequest);
-		renderRequest.setAttribute(SearchRequestParams.SEARCH_PARAMS, formBean);
-		super.doEdit(renderRequest, renderResponse);
-	}
+        AceSearchFormBean formBean = searchEngine.prepareACESearchFormBean(renderRequest);
+        renderRequest.setAttribute(SearchRequestParams.SEARCH_PARAMS, formBean);
+        super.doEdit(renderRequest, renderResponse);
+    }
 
-	/**
-	 * Executes 'sorting' search requests issued by Ajax calls from search results.
-	 * 
-	 * @param request request
-	 * @param response response
-	 * @throws PortletException hmm
-	 * @throws IOException hmm
-	 */
-	@Override
-	public void serveResource(ResourceRequest request, ResourceResponse response) throws PortletException, IOException {
+    /**
+     * Executes 'sorting' search requests issued by Ajax calls from search results.
+     *
+     * @param request request
+     * @param response response
+     * @throws PortletException hmm
+     * @throws IOException hmm
+     */
+    @Override
+    public void serveResource(ResourceRequest request, ResourceResponse response) throws PortletException, IOException {
         try {
             ACESearchPortalInterface searchEngine = new ACESearchPortalInterface();
             searchEngine.handleAjaxSearchRequest(request, response);
-        }
-        catch (Exception x) {
+        } catch (Exception x) {
             x.printStackTrace();
             throw new PortletException(x);
         }

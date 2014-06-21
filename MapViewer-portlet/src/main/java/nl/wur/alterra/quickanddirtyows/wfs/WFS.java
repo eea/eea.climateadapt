@@ -28,235 +28,235 @@ import org.w3c.dom.NodeList;
  */
 public class WFS extends OWS {
 
-	private Document getFeatureDocument;
+    private Document getFeatureDocument;
 
-	private File getFeatureFile;
-	
-	private int selected;
-	
-	private int inserted;
-	
-	private int updated;
-	
-	private int deleted;
+    private File getFeatureFile;
 
-	public WFS(String aOnlineResource, String aUsername, String aPassword, Boolean aParseGetCapabilities) throws Exception {
-		super(aOnlineResource, aUsername, aPassword, aParseGetCapabilities);
-	}
-	
-	@Override
-	protected String createGetCapabilitiesRequest() {
-		String result = super.createGetCapabilitiesRequest();
-		
-		result += "&service=wfs";
-		
-		return result;
-	}
+    private int selected;
 
-	public void getFeatures(String aTypeName, String aFileName)
-			throws Exception {
-		HttpURLConnection connection = createConnection("request=GetFeature"
-				+ "&service=wfs" + "&version=" + getVersion() + "&typeName="
-				+ aTypeName + "&outputFormat=GML2");
+    private int inserted;
 
-		if (aFileName == null) {
-			setGetFeatureDocument(getDocument(connection));
-		} else {
-			setGetFeatureFile(getFile(connection, aFileName));
-		}
-	}
+    private int updated;
 
-	public void transaction(String aTransactionRequest) throws Exception {
-		HttpURLConnection connection = createConnection();
+    private int deleted;
 
-		post(connection, aTransactionRequest, "text/xml");
+    public WFS(String aOnlineResource, String aUsername, String aPassword, Boolean aParseGetCapabilities) throws Exception {
+        super(aOnlineResource, aUsername, aPassword, aParseGetCapabilities);
+    }
 
-		checkTransactionResponse(connection);
-	}
+    @Override
+    protected String createGetCapabilitiesRequest() {
+        String result = super.createGetCapabilitiesRequest();
 
-	public void transaction(File aTransactionRequest) throws Exception {
-		HttpURLConnection connection = createConnection();
+        result += "&service=wfs";
 
-		post(connection, aTransactionRequest, "text/xml");
+        return result;
+    }
 
-		checkTransactionResponse(connection);
-	}
-	
-	private void checkTransactionResponse(HttpURLConnection connection) throws Exception {
-		TransactionResponse transactionresponse = createTransactionResponse(getDocument(connection));
-		
-		this.inserted += transactionresponse.inserted;
-		
-		this.updated += transactionresponse.updated;
-		
-		this.deleted += transactionresponse.deleted;
-		
-		if (transactionresponse.status.equalsIgnoreCase("FAILED")) {
-			throw new Exception("WFS transaction failed: " + transactionresponse.message);
-		}
-	}
+    public void getFeatures(String aTypeName, String aFileName)
+            throws Exception {
+        HttpURLConnection connection = createConnection("request=GetFeature"
+                + "&service=wfs" + "&version=" + getVersion() + "&typeName="
+                + aTypeName + "&outputFormat=GML2");
 
-	public void transactions(File aTransactionsRequest) throws Exception {
-		InputStream inputstream = new FileInputStream(aTransactionsRequest);
+        if (aFileName == null) {
+            setGetFeatureDocument(getDocument(connection));
+        } else {
+            setGetFeatureFile(getFile(connection, aFileName));
+        }
+    }
 
-		XMLInputFactory xmlinputfactory = XMLInputFactory.newInstance();
-		
-		XMLStreamReader xmlstreamreader = xmlinputfactory.createXMLStreamReader(inputstream);
-		
+    public void transaction(String aTransactionRequest) throws Exception {
+        HttpURLConnection connection = createConnection();
+
+        post(connection, aTransactionRequest, "text/xml");
+
+        checkTransactionResponse(connection);
+    }
+
+    public void transaction(File aTransactionRequest) throws Exception {
+        HttpURLConnection connection = createConnection();
+
+        post(connection, aTransactionRequest, "text/xml");
+
+        checkTransactionResponse(connection);
+    }
+
+    private void checkTransactionResponse(HttpURLConnection connection) throws Exception {
+        TransactionResponse transactionresponse = createTransactionResponse(getDocument(connection));
+
+        this.inserted += transactionresponse.inserted;
+
+        this.updated += transactionresponse.updated;
+
+        this.deleted += transactionresponse.deleted;
+
+        if (transactionresponse.status.equalsIgnoreCase("FAILED")) {
+            throw new Exception("WFS transaction failed: " + transactionresponse.message);
+        }
+    }
+
+    public void transactions(File aTransactionsRequest) throws Exception {
+        InputStream inputstream = new FileInputStream(aTransactionsRequest);
+
+        XMLInputFactory xmlinputfactory = XMLInputFactory.newInstance();
+
+        XMLStreamReader xmlstreamreader = xmlinputfactory.createXMLStreamReader(inputstream);
+
         TransformerFactory transformerfactory = TransformerFactory.newInstance();
-        
+
         Transformer transformer = transformerfactory.newTransformer();
-        
+
         this.selected = 0;
-        
+
         this.inserted = 0;
-        
-		try {
-			int event = xmlstreamreader.getEventType();
-			
-			while (true) {
-				switch (event) {
-				case XMLStreamConstants.START_ELEMENT:
-					if (xmlstreamreader.getLocalName().equals("Transaction")) {
-						this.selected += 1;
-						
-				        File file = new File(aTransactionsRequest.getAbsolutePath().replace(".xml", "_" + this.selected + ".xml"));
-				        
-						transformer.transform(new StAXSource(xmlstreamreader), new StreamResult(file));
-						
-						try {
-							transaction(file);
-						} finally {
-							file.delete();
-						}
-					}
-				}
 
-				if (!xmlstreamreader.hasNext()) {
-					break;
-				}
+        try {
+            int event = xmlstreamreader.getEventType();
 
-				event = xmlstreamreader.next();
-			}
-		} finally {
-			xmlstreamreader.close();
-		}
-	}
+            while (true) {
+                switch (event) {
+                case XMLStreamConstants.START_ELEMENT:
+                    if (xmlstreamreader.getLocalName().equals("Transaction")) {
+                        this.selected += 1;
 
-	public Document getGetFeatureDocument() {
-		return getFeatureDocument;
-	}
+                        File file = new File(aTransactionsRequest.getAbsolutePath().replace(".xml", "_" + this.selected + ".xml"));
 
-	public void setGetFeatureDocument(Document getFeatureDocument) {
-		this.getFeatureDocument = getFeatureDocument;
-	}
+                        transformer.transform(new StAXSource(xmlstreamreader), new StreamResult(file));
 
-	public File getGetFeatureFile() {
-		return getFeatureFile;
-	}
+                        try {
+                            transaction(file);
+                        } finally {
+                            file.delete();
+                        }
+                    }
+                }
 
-	public void setGetFeatureFile(File getFeatureFile) {
-		this.getFeatureFile = getFeatureFile;
-	}
+                if (!xmlstreamreader.hasNext()) {
+                    break;
+                }
 
-	public int getFeatureCount() throws Exception {
-		int result = -1;
+                event = xmlstreamreader.next();
+            }
+        } finally {
+            xmlstreamreader.close();
+        }
+    }
 
-		if (getGetFeatureDocument() != null) {
-			XPath xpath = createXPath();
+    public Document getGetFeatureDocument() {
+        return getFeatureDocument;
+    }
 
-			XPathExpression expr = xpath.compile("count(//gml:featureMember)");
+    public void setGetFeatureDocument(Document getFeatureDocument) {
+        this.getFeatureDocument = getFeatureDocument;
+    }
 
-			double result_double = (Double) expr.evaluate(
-					getGetFeatureDocument(), XPathConstants.NUMBER);
+    public File getGetFeatureFile() {
+        return getFeatureFile;
+    }
 
-			result = (int) result_double;
-		}
+    public void setGetFeatureFile(File getFeatureFile) {
+        this.getFeatureFile = getFeatureFile;
+    }
 
-		return result;
-	}
+    public int getFeatureCount() throws Exception {
+        int result = -1;
 
-//	public int getInsertResultCount() throws Exception {
-//		int result = -1;
+        if (getGetFeatureDocument() != null) {
+            XPath xpath = createXPath();
+
+            XPathExpression expr = xpath.compile("count(//gml:featureMember)");
+
+            double result_double = (Double) expr.evaluate(
+                    getGetFeatureDocument(), XPathConstants.NUMBER);
+
+            result = (int) result_double;
+        }
+
+        return result;
+    }
+
+//  public int getInsertResultCount() throws Exception {
+//      int result = -1;
 //
-//		if (getTransactionResponseDocument() != null) {
-//			XPath xpath = createXPath();
+//      if (getTransactionResponseDocument() != null) {
+//          XPath xpath = createXPath();
 //
-//			XPathExpression expr = xpath
-//					.compile("count(//wfs:InsertResult/ogc:FeatureId)");
+//          XPathExpression expr = xpath
+//                  .compile("count(//wfs:InsertResult/ogc:FeatureId)");
 //
-//			double result_double = (Double) expr.evaluate(
-//					getTransactionResponseDocument(), XPathConstants.NUMBER);
+//          double result_double = (Double) expr.evaluate(
+//                  getTransactionResponseDocument(), XPathConstants.NUMBER);
 //
-//			result = (int) result_double;
-//		}
+//          result = (int) result_double;
+//      }
 //
-//		return result;
-//	}
+//      return result;
+//  }
 
-	protected TransactionResponse createTransactionResponse(Document aDocument)
-			throws Exception {
-		XPath xpath = createXPath();
+    protected TransactionResponse createTransactionResponse(Document aDocument)
+            throws Exception {
+        XPath xpath = createXPath();
 
-		// Status
-		XPathExpression statusexpression = xpath.compile("//wfs:Status/*");
+        // Status
+        XPathExpression statusexpression = xpath.compile("//wfs:Status/*");
 
-		Object statusnodeset = statusexpression.evaluate(aDocument, XPathConstants.NODESET);
+        Object statusnodeset = statusexpression.evaluate(aDocument, XPathConstants.NODESET);
 
-		NodeList statusnodes = (NodeList) statusnodeset;
+        NodeList statusnodes = (NodeList) statusnodeset;
 
-		String status = "";
+        String status = "";
 
-		for (int i = 0; i < statusnodes.getLength();) {
-			status = statusnodes.item(i).getLocalName();
+        for (int i = 0; i < statusnodes.getLength();) {
+            status = statusnodes.item(i).getLocalName();
 
-			break;
-		}
-		
-		// Message
-		XPathExpression messageexpression = xpath.compile("//wfs:Message");
+            break;
+        }
 
-		String message = (String) messageexpression.evaluate(aDocument, XPathConstants.STRING);
+        // Message
+        XPathExpression messageexpression = xpath.compile("//wfs:Message");
 
-		// Insert result count
-		XPathExpression insertresultcountexpression = xpath.compile("count(//wfs:InsertResult/ogc:FeatureId)");
+        String message = (String) messageexpression.evaluate(aDocument, XPathConstants.STRING);
 
-		double insertresultcountdouble = (Double) insertresultcountexpression.evaluate(aDocument, XPathConstants.NUMBER);
+        // Insert result count
+        XPathExpression insertresultcountexpression = xpath.compile("count(//wfs:InsertResult/ogc:FeatureId)");
 
-		int insertresultcount = (int) insertresultcountdouble;
+        double insertresultcountdouble = (Double) insertresultcountexpression.evaluate(aDocument, XPathConstants.NUMBER);
 
-		return new TransactionResponse(status, message, insertresultcount, 0, 0);
-	}
+        int insertresultcount = (int) insertresultcountdouble;
 
-	public int getSelected() {
-		return selected;
-	}
+        return new TransactionResponse(status, message, insertresultcount, 0, 0);
+    }
 
-	public void setSelected(int selected) {
-		this.selected = selected;
-	}
+    public int getSelected() {
+        return selected;
+    }
 
-	public int getInserted() {
-		return inserted;
-	}
+    public void setSelected(int selected) {
+        this.selected = selected;
+    }
 
-	public void setInserted(int inserted) {
-		this.inserted = inserted;
-	}
+    public int getInserted() {
+        return inserted;
+    }
 
-	public int getUpdated() {
-		return updated;
-	}
+    public void setInserted(int inserted) {
+        this.inserted = inserted;
+    }
 
-	public void setUpdated(int updated) {
-		this.updated = updated;
-	}
+    public int getUpdated() {
+        return updated;
+    }
 
-	public int getDeleted() {
-		return deleted;
-	}
+    public void setUpdated(int updated) {
+        this.updated = updated;
+    }
 
-	public void setDeleted(int deleted) {
-		this.deleted = deleted;
-	}
+    public int getDeleted() {
+        return deleted;
+    }
+
+    public void setDeleted(int deleted) {
+        this.deleted = deleted;
+    }
 }

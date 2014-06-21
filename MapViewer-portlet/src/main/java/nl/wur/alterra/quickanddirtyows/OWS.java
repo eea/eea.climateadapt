@@ -32,262 +32,262 @@ import org.xml.sax.InputSource;
  * @created 25-Nov-2010 12:34:13
  */
 public class OWS extends RestClient {
-	
-	public static String WMS_1_3_0 = "1.3.0"; 
 
-	private String getCapabilitiesOnlineResource;
-	
-	private Document getCapabilitiesDocument;
+    public static String WMS_1_3_0 = "1.3.0";
 
-	public OWS(String aOnlineResource, String aUsername, String aPassword, Boolean aParseGetCapabilities) throws Exception {
-		super(new URL(aOnlineResource), aUsername, aPassword);
-		
-		setGetCapabilitiesOnlineResource(aOnlineResource);
-		
-		if (aParseGetCapabilities) {
-			getCapabilities();
-		}
-	}
+    private String getCapabilitiesOnlineResource;
 
-	protected void getCapabilities() throws Exception {
-		HttpURLConnection connection = createConnection(createGetCapabilitiesRequest());
+    private Document getCapabilitiesDocument;
 
-		setGetCapabilitiesDocument(getDocument(connection));
-	}
-	
-	protected String createGetCapabilitiesRequest() {
-		String result = "request=GetCapabilities";
-		
-		return result;
-	}
+    public OWS(String aOnlineResource, String aUsername, String aPassword, Boolean aParseGetCapabilities) throws Exception {
+        super(new URL(aOnlineResource), aUsername, aPassword);
 
-	protected String getVersion() {
-		return getCapabilitiesDocument.getDocumentElement().getAttribute("version");
-	}
+        setGetCapabilitiesOnlineResource(aOnlineResource);
 
-	protected Document getDocument(HttpURLConnection aURLConnection) throws Exception {
-		String response = getResponse(aURLConnection);
+        if (aParseGetCapabilities) {
+            getCapabilities();
+        }
+    }
 
-		return getDocument(response);
-	}
+    protected void getCapabilities() throws Exception {
+        HttpURLConnection connection = createConnection(createGetCapabilitiesRequest());
 
-	protected Document getDocument(String aXMLString)
-			throws Exception {
-		DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+        setGetCapabilitiesDocument(getDocument(connection));
+    }
 
-		factory.setNamespaceAware(true);
+    protected String createGetCapabilitiesRequest() {
+        String result = "request=GetCapabilities";
 
-		DocumentBuilder builder = factory.newDocumentBuilder();
+        return result;
+    }
 
-		factory.setNamespaceAware(true);
+    protected String getVersion() {
+        return getCapabilitiesDocument.getDocumentElement().getAttribute("version");
+    }
 
-		InputSource inputsource = new InputSource();
-		
-		inputsource.setCharacterStream(new StringReader(aXMLString));
+    protected Document getDocument(HttpURLConnection aURLConnection) throws Exception {
+        String response = getResponse(aURLConnection);
 
-		Document document = builder.parse(inputsource);
+        return getDocument(response);
+    }
 
-		document.getDocumentElement().normalize();
+    protected Document getDocument(String aXMLString)
+            throws Exception {
+        DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
 
-		OWSExceptionReport owsexceptionreport = createOWSExceptionReport(document);
+        factory.setNamespaceAware(true);
 
-		if (owsexceptionreport != null) {
-			throw new OWSException(owsexceptionreport);
-		}
+        DocumentBuilder builder = factory.newDocumentBuilder();
 
-		return document;
-	}
-	
-	protected File getFile(HttpURLConnection aURLConnection, String aFileName) throws Exception {
-		File response = writeResponse(aURLConnection, aFileName);
-		
-		return getFile(response);
-	}
-	
-	protected File getFile(File aFile) throws Exception {
-		InputStream inputstream = new FileInputStream(aFile);
+        factory.setNamespaceAware(true);
 
-		XMLInputFactory xmlinputfactory = XMLInputFactory.newInstance();
-		
-		XMLStreamReader xmlstreamreader = xmlinputfactory.createXMLStreamReader(inputstream);
-        
-		String exceptioncode = null;
-		
-		String exceptiontext = null;
-		
-		String locator = null;
+        InputSource inputsource = new InputSource();
 
-		try {
-			
-			int event = xmlstreamreader.getEventType();
-			
-			while (true) {
-				switch (event) {
-				case XMLStreamConstants.START_ELEMENT:
-					if (xmlstreamreader.getLocalName().equals("Exception")) {
-						exceptioncode = xmlstreamreader.getAttributeValue("http://www.opengis.net/ows", "exceptionCode");
-						
-						locator = xmlstreamreader.getAttributeValue("http://www.opengis.net/ows", "locator");
-					} else if (xmlstreamreader.getLocalName().equals("ExceptionText")) {
-						exceptiontext = xmlstreamreader.getElementText();
-					} 
-				}
+        inputsource.setCharacterStream(new StringReader(aXMLString));
 
-				if (!xmlstreamreader.hasNext()) {
-					break;
-				}
+        Document document = builder.parse(inputsource);
 
-				event = xmlstreamreader.next();
-			}
-		} finally {
-			xmlstreamreader.close();
-		}
-		
-		if (exceptiontext != null) {
-			OWSExceptionReport report = new OWSExceptionReport(exceptioncode, exceptiontext, locator);
-			
-			throw(new OWSException(report));
-		}
-		
-		return aFile;
-	}
+        document.getDocumentElement().normalize();
 
-	protected OWSExceptionReport createOWSExceptionReport(Document aDocument) throws Exception {
-		OWSExceptionReport result = null;
+        OWSExceptionReport owsexceptionreport = createOWSExceptionReport(document);
 
-		String nodename = aDocument.getDocumentElement().getNodeName();
+        if (owsexceptionreport != null) {
+            throw new OWSException(owsexceptionreport);
+        }
 
-		if (nodename.equalsIgnoreCase("ServiceExceptionReport")) {
-			result = createOWSExceptionReportFromServiceExceptionReport(aDocument);
-		} else if (nodename.equalsIgnoreCase("ows:ExceptionReport")) {
-			result = createOWSExceptionReportFromExceptionReport(aDocument);
-		}
+        return document;
+    }
 
-		return result;
-	}
+    protected File getFile(HttpURLConnection aURLConnection, String aFileName) throws Exception {
+        File response = writeResponse(aURLConnection, aFileName);
 
-	protected OWSExceptionReport createOWSExceptionReport(File aFile) throws Exception {
-		OWSExceptionReport result = null;
+        return getFile(response);
+    }
 
-		FileReader input = new FileReader(aFile);
-		
-		BufferedReader reader = new BufferedReader(input);
-		
-		try {
-			String line = reader.readLine();
-			
-			while (line != null){
-				line += reader.readLine();
-			}
-			
-			Document document = getDocument(line);
-			
-			result = createOWSExceptionReport(document);
-		} finally {
-			reader.close();
-		}
-		
-		return result;
-	}
+    protected File getFile(File aFile) throws Exception {
+        InputStream inputstream = new FileInputStream(aFile);
 
-	private OWSExceptionReport createOWSExceptionReportFromServiceExceptionReport(
-			Document aDocument) throws XPathExpressionException {
-		XPath xpath = createXPath();
+        XMLInputFactory xmlinputfactory = XMLInputFactory.newInstance();
 
-		String exceptioncode = "";
+        XMLStreamReader xmlstreamreader = xmlinputfactory.createXMLStreamReader(inputstream);
 
-		String locator = "";
+        String exceptioncode = null;
 
-		String exceptiontext = extractExceptionTextFromServiceExceptionReport(
-				aDocument, xpath);
+        String exceptiontext = null;
 
-		return new OWSExceptionReport(exceptioncode, exceptiontext, locator);
-	}
+        String locator = null;
 
-	protected XPath createXPath() {
-		XPathFactory factory = XPathFactory.newInstance();
+        try {
 
-		XPath xpath = factory.newXPath();
+            int event = xmlstreamreader.getEventType();
 
-		xpath.setNamespaceContext(new OWSNameSpaceContext());
-		
-		return xpath;
-	}
+            while (true) {
+                switch (event) {
+                case XMLStreamConstants.START_ELEMENT:
+                    if (xmlstreamreader.getLocalName().equals("Exception")) {
+                        exceptioncode = xmlstreamreader.getAttributeValue("http://www.opengis.net/ows", "exceptionCode");
 
-	private OWSExceptionReport createOWSExceptionReportFromExceptionReport(
-			Document aDocument) throws XPathExpressionException {
-		XPath xpath = createXPath();
+                        locator = xmlstreamreader.getAttributeValue("http://www.opengis.net/ows", "locator");
+                    } else if (xmlstreamreader.getLocalName().equals("ExceptionText")) {
+                        exceptiontext = xmlstreamreader.getElementText();
+                    }
+                }
 
-		String exceptioncode = "";
+                if (!xmlstreamreader.hasNext()) {
+                    break;
+                }
 
-		String locator = "";
+                event = xmlstreamreader.next();
+            }
+        } finally {
+            xmlstreamreader.close();
+        }
 
-		String exceptiontext = extractExceptionTextFromExceptionReport(aDocument, xpath);
+        if (exceptiontext != null) {
+            OWSExceptionReport report = new OWSExceptionReport(exceptioncode, exceptiontext, locator);
 
-		return new OWSExceptionReport(exceptioncode, exceptiontext, locator);
-	}
+            throw(new OWSException(report));
+        }
 
-	private String extractExceptionTextFromExceptionReport(Document aDocument,
-			XPath xpath) throws XPathExpressionException {
-		XPathExpression expr = xpath
-				.compile("//ows:Exception/ows:ExceptionText/text()");
+        return aFile;
+    }
 
-		Object result = expr.evaluate(aDocument, XPathConstants.NODESET);
+    protected OWSExceptionReport createOWSExceptionReport(Document aDocument) throws Exception {
+        OWSExceptionReport result = null;
 
-		NodeList nodes = (NodeList) result;
+        String nodename = aDocument.getDocumentElement().getNodeName();
 
-		String exceptiontext = "";
+        if (nodename.equalsIgnoreCase("ServiceExceptionReport")) {
+            result = createOWSExceptionReportFromServiceExceptionReport(aDocument);
+        } else if (nodename.equalsIgnoreCase("ows:ExceptionReport")) {
+            result = createOWSExceptionReportFromExceptionReport(aDocument);
+        }
 
-		for (int i = 0; i < nodes.getLength();) {
-			exceptiontext = nodes.item(i).getNodeValue();
+        return result;
+    }
 
-			break;
-		}
+    protected OWSExceptionReport createOWSExceptionReport(File aFile) throws Exception {
+        OWSExceptionReport result = null;
 
-		return exceptiontext;
-	}
+        FileReader input = new FileReader(aFile);
 
-	private String extractExceptionTextFromServiceExceptionReport(Document aDocument,
-			XPath xpath) throws XPathExpressionException {
-		XPathExpression expr = xpath
-				.compile("//ogc:ServiceException/text()");
+        BufferedReader reader = new BufferedReader(input);
 
-		Object result = expr.evaluate(aDocument, XPathConstants.NODESET);
+        try {
+            String line = reader.readLine();
 
-		NodeList nodes = (NodeList) result;
+            while (line != null){
+                line += reader.readLine();
+            }
 
-		String exceptiontext = "";
+            Document document = getDocument(line);
 
-		for (int i = 0; i < nodes.getLength();) {
-			exceptiontext = nodes.item(i).getNodeValue();
+            result = createOWSExceptionReport(document);
+        } finally {
+            reader.close();
+        }
 
-			break;
-		}
+        return result;
+    }
 
-		return exceptiontext;
-	}
+    private OWSExceptionReport createOWSExceptionReportFromServiceExceptionReport(
+            Document aDocument) throws XPathExpressionException {
+        XPath xpath = createXPath();
 
-	public Document getGetCapabilitiesDocument() {
-		return getCapabilitiesDocument;
-	}
+        String exceptioncode = "";
 
-	public void setGetCapabilitiesDocument(Document getCapabilitiesDocument) throws Exception {
-		this.getCapabilitiesDocument = getCapabilitiesDocument;
-		
-		if (this.getCapabilitiesDocument != null) {
-			parseGetCapabilitiesDocument();
-		}
-	}
-	
-	protected void parseGetCapabilitiesDocument() throws Exception {
-		
-	}
+        String locator = "";
 
-	public String getGetCapabilitiesOnlineResource() {
-		return getCapabilitiesOnlineResource;
-	}
+        String exceptiontext = extractExceptionTextFromServiceExceptionReport(
+                aDocument, xpath);
 
-	public void setGetCapabilitiesOnlineResource(String aGetCapabilitiesOnlineResource) {
-		this.getCapabilitiesOnlineResource = aGetCapabilitiesOnlineResource;
-	}
+        return new OWSExceptionReport(exceptioncode, exceptiontext, locator);
+    }
+
+    protected XPath createXPath() {
+        XPathFactory factory = XPathFactory.newInstance();
+
+        XPath xpath = factory.newXPath();
+
+        xpath.setNamespaceContext(new OWSNameSpaceContext());
+
+        return xpath;
+    }
+
+    private OWSExceptionReport createOWSExceptionReportFromExceptionReport(
+            Document aDocument) throws XPathExpressionException {
+        XPath xpath = createXPath();
+
+        String exceptioncode = "";
+
+        String locator = "";
+
+        String exceptiontext = extractExceptionTextFromExceptionReport(aDocument, xpath);
+
+        return new OWSExceptionReport(exceptioncode, exceptiontext, locator);
+    }
+
+    private String extractExceptionTextFromExceptionReport(Document aDocument,
+            XPath xpath) throws XPathExpressionException {
+        XPathExpression expr = xpath
+                .compile("//ows:Exception/ows:ExceptionText/text()");
+
+        Object result = expr.evaluate(aDocument, XPathConstants.NODESET);
+
+        NodeList nodes = (NodeList) result;
+
+        String exceptiontext = "";
+
+        for (int i = 0; i < nodes.getLength();) {
+            exceptiontext = nodes.item(i).getNodeValue();
+
+            break;
+        }
+
+        return exceptiontext;
+    }
+
+    private String extractExceptionTextFromServiceExceptionReport(Document aDocument,
+            XPath xpath) throws XPathExpressionException {
+        XPathExpression expr = xpath
+                .compile("//ogc:ServiceException/text()");
+
+        Object result = expr.evaluate(aDocument, XPathConstants.NODESET);
+
+        NodeList nodes = (NodeList) result;
+
+        String exceptiontext = "";
+
+        for (int i = 0; i < nodes.getLength();) {
+            exceptiontext = nodes.item(i).getNodeValue();
+
+            break;
+        }
+
+        return exceptiontext;
+    }
+
+    public Document getGetCapabilitiesDocument() {
+        return getCapabilitiesDocument;
+    }
+
+    public void setGetCapabilitiesDocument(Document getCapabilitiesDocument) throws Exception {
+        this.getCapabilitiesDocument = getCapabilitiesDocument;
+
+        if (this.getCapabilitiesDocument != null) {
+            parseGetCapabilitiesDocument();
+        }
+    }
+
+    protected void parseGetCapabilitiesDocument() throws Exception {
+
+    }
+
+    public String getGetCapabilitiesOnlineResource() {
+        return getCapabilitiesOnlineResource;
+    }
+
+    public void setGetCapabilitiesOnlineResource(String aGetCapabilitiesOnlineResource) {
+        this.getCapabilitiesOnlineResource = aGetCapabilitiesOnlineResource;
+    }
 }

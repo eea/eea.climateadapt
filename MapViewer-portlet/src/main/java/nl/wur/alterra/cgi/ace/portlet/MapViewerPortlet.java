@@ -11,69 +11,69 @@ import com.liferay.util.bridges.mvc.MVCPortlet;
  * Portlet implementation class MapViewerPortlet
  */
 public class MapViewerPortlet extends MVCPortlet {
-	
-	public void setPreferences(ActionRequest request, ActionResponse response) throws Exception {
-		PortletPreferences prefs = request.getPreferences();
-		
-		// Proxy
-		String proxyUrl = ParamUtil.getString(request, Constants.proxyUrlPreferenceName);
 
-		prefs.setValue(Constants.proxyUrlPreferenceName, proxyUrl);
+    public void setPreferences(ActionRequest request, ActionResponse response) throws Exception {
+        PortletPreferences prefs = request.getPreferences();
 
-		// Catalogue Server URL
-		String cswUrl = ParamUtil.getString(request, Constants.cswURLPreferenceName);
-		
-		if (! cswUrl.endsWith("/")) {
-			cswUrl += "/";
-		}
+        // Proxy
+        String proxyUrl = ParamUtil.getString(request, Constants.proxyUrlPreferenceName);
 
-		prefs.setValue(Constants.cswURLPreferenceName, cswUrl);
+        prefs.setValue(Constants.proxyUrlPreferenceName, proxyUrl);
 
-		// Catalogue Server csw path
-		String cswCsw = ParamUtil.getString(request, Constants.cswCswPreferenceName);
-		
-		if (! cswUrl.endsWith("?")) {
-			cswUrl += "?";
-		}
+        // Catalogue Server URL
+        String cswUrl = ParamUtil.getString(request, Constants.cswURLPreferenceName);
 
-		prefs.setValue(Constants.cswCswPreferenceName, cswCsw);
+        if (! cswUrl.endsWith("/")) {
+            cswUrl += "/";
+        }
 
-		// Catalogue Server show metadata path
-		String cswShowMetadata = ParamUtil.getString(request, Constants.cswShowMetadataPreferenceName);
-		
-		prefs.setValue(Constants.cswShowMetadataPreferenceName, cswShowMetadata);
+        prefs.setValue(Constants.cswURLPreferenceName, cswUrl);
 
-		// Catalogue Server username
-		String cswUserName = ParamUtil.getString(request, Constants.cswUserNamePreferenceName);
-		
-		prefs.setValue(Constants.cswUserNamePreferenceName, cswUserName);
+        // Catalogue Server csw path
+        String cswCsw = ParamUtil.getString(request, Constants.cswCswPreferenceName);
 
-		// Catalogue Server password
-		String cswPassWord = ParamUtil.getString(request, Constants.cswPassWordPreferenceName);
-		
-		prefs.setValue(Constants.cswPassWordPreferenceName, cswPassWord);
+        if (! cswUrl.endsWith("?")) {
+            cswUrl += "?";
+        }
 
-		// CSW Servlet URL
-		String cswServletUrl = ParamUtil.getString(request, Constants.cswServletURLPreferenceName);
-		
-		prefs.setValue(Constants.cswServletURLPreferenceName, cswServletUrl);
+        prefs.setValue(Constants.cswCswPreferenceName, cswCsw);
 
-		// MapViewer Servlet URL
-		String mapViewerServletUrl = ParamUtil.getString(request, Constants.mapViewerServletURLPreferenceName);
-		
-		prefs.setValue(Constants.mapViewerServletURLPreferenceName, mapViewerServletUrl);
+        // Catalogue Server show metadata path
+        String cswShowMetadata = ParamUtil.getString(request, Constants.cswShowMetadataPreferenceName);
 
-		// MapViewer app ID
-		String mapViewerAppId = ParamUtil.getString(request, Constants.mapViewerAppIdPreferenceName);
-		
-		prefs.setValue(Constants.mapViewerWmcDirectoryPreferenceName, mapViewerAppId);
+        prefs.setValue(Constants.cswShowMetadataPreferenceName, cswShowMetadata);
 
-		// MapViewer WMC Directory name
-		String mapViewerWmcDirectoryName = ParamUtil.getString(request, Constants.mapViewerWmcDirectoryPreferenceName);
-		
-		prefs.setValue(Constants.mapViewerWmcDirectoryPreferenceName, mapViewerWmcDirectoryName);
-		
-		// Store
-		prefs.store();
-	}
+        // Catalogue Server username
+        String cswUserName = ParamUtil.getString(request, Constants.cswUserNamePreferenceName);
+
+        prefs.setValue(Constants.cswUserNamePreferenceName, cswUserName);
+
+        // Catalogue Server password
+        String cswPassWord = ParamUtil.getString(request, Constants.cswPassWordPreferenceName);
+
+        prefs.setValue(Constants.cswPassWordPreferenceName, cswPassWord);
+
+        // CSW Servlet URL
+        String cswServletUrl = ParamUtil.getString(request, Constants.cswServletURLPreferenceName);
+
+        prefs.setValue(Constants.cswServletURLPreferenceName, cswServletUrl);
+
+        // MapViewer Servlet URL
+        String mapViewerServletUrl = ParamUtil.getString(request, Constants.mapViewerServletURLPreferenceName);
+
+        prefs.setValue(Constants.mapViewerServletURLPreferenceName, mapViewerServletUrl);
+
+        // MapViewer app ID
+        String mapViewerAppId = ParamUtil.getString(request, Constants.mapViewerAppIdPreferenceName);
+
+        prefs.setValue(Constants.mapViewerWmcDirectoryPreferenceName, mapViewerAppId);
+
+        // MapViewer WMC Directory name
+        String mapViewerWmcDirectoryName = ParamUtil.getString(request, Constants.mapViewerWmcDirectoryPreferenceName);
+
+        prefs.setValue(Constants.mapViewerWmcDirectoryPreferenceName, mapViewerWmcDirectoryName);
+
+        // Store
+        prefs.store();
+    }
 }

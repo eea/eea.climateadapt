@@ -30,236 +30,227 @@ import com.liferay.portal.util.PortalUtil;
  */
 public class ShareMeasurePortlet extends MeasureUpdateHelperForSharedMeasure {
 
-	@Override
-	public void doView(RenderRequest renderRequest, RenderResponse renderResponse) throws IOException, PortletException {
-		try {
-	    	HttpServletRequest httpRequest = 
-	    		PortalUtil.getOriginalServletRequest(
-	    		PortalUtil.getHttpServletRequest(renderRequest) ) ;
+    @Override
+    public void doView(RenderRequest renderRequest, RenderResponse renderResponse) throws IOException, PortletException {
+        try {
+            HttpServletRequest httpRequest =
+                PortalUtil.getOriginalServletRequest(
+                PortalUtil.getHttpServletRequest(renderRequest) ) ;
 
-	    	try {
-	    		int measureid = Integer.parseInt( httpRequest.getParameter("submissionid") ) ;
-				renderRequest.getPortletSession().setAttribute("lastAddedMeasureId", "" +  measureid );
-			
-	    	}
-	    	catch (NumberFormatException e) {
-	    		// do nothing
-	    	}
-	    	
-	    	
+            try {
+                int measureid = Integer.parseInt( httpRequest.getParameter("submissionid") ) ;
+                renderRequest.getPortletSession().setAttribute("lastAddedMeasureId", "" +  measureid );
 
-		}
-        catch (Exception x) {
-			x.printStackTrace();
+            } catch (NumberFormatException e) {
+                // do nothing
+            }
+
+
+
+        } catch (Exception x) {
+            x.printStackTrace();
             throw new PortletException(x);
-		}
+        }
 
-		super.doView(renderRequest, renderResponse);
-	}
+        super.doView(renderRequest, renderResponse);
+    }
 
-	/**
-	 * Adds a new measure to the database
-	 *
-	 */
-	public void addMeasure(ActionRequest request, ActionResponse response)
-		throws Exception {
+    /**
+     * Adds a new measure to the database
+     *
+     */
+    public void addMeasure(ActionRequest request, ActionResponse response)
+        throws Exception {
 
-		Measure measure = new MeasureImpl();
-		UploadPortletRequest uploadRequest = PortalUtil.getUploadPortletRequest(request);
-		String measure_id = uploadRequest.getParameter("measureId");
-		
-		if (Validator.isNull(measure_id))
-		{
-			measure.setMeasureId(0);
-		}
-		else
-		{
-		   measure.setMeasureId(ParamUtil.getLong(request, "measureId"));
-		}
-		
-		ArrayList<String> errors = new ArrayList<String>();
-		measureFromRequest(request, measure, uploadRequest, errors);
+        Measure measure = new MeasureImpl();
+        UploadPortletRequest uploadRequest = PortalUtil.getUploadPortletRequest(request);
+        String measure_id = uploadRequest.getParameter("measureId");
 
-		if (MeasureValidator.validateMeasure(measure, errors)) {
-			
-			MeasureLocalServiceUtil.addMeasure(measure);
+        if (Validator.isNull(measure_id))
+        {
+            measure.setMeasureId(0);
+        } else {
+           measure.setMeasureId(ParamUtil.getLong(request, "measureId"));
+        }
 
-			// create an AceItem for this measure
-			AceItem aceitem = AceItemLocalServiceUtil.createAceItem();
-			aceitem.setAceItemId(ParamUtil.getLong(request, "aceItemId"));
-			aceitem.setCompanyId(measure.getCompanyId());
-			aceitem.setGroupId(measure.getGroupId());
-			aceitem.setStoredAt("ace_measure_id=" + measure.getMeasureId());
-			aceitem.setStoragetype("MEASURE");
-			AceItemLocalServiceUtil.addAceItem(aceitem);
-			updateAceItem(measure, aceitem);
+        ArrayList<String> errors = new ArrayList<String>();
+        measureFromRequest(request, measure, uploadRequest, errors);
+
+        if (MeasureValidator.validateMeasure(measure, errors)) {
+
+            MeasureLocalServiceUtil.addMeasure(measure);
+
+            // create an AceItem for this measure
+            AceItem aceitem = AceItemLocalServiceUtil.createAceItem();
+            aceitem.setAceItemId(ParamUtil.getLong(request, "aceItemId"));
+            aceitem.setCompanyId(measure.getCompanyId());
+            aceitem.setGroupId(measure.getGroupId());
+            aceitem.setStoredAt("ace_measure_id=" + measure.getMeasureId());
+            aceitem.setStoragetype("MEASURE");
+            AceItemLocalServiceUtil.addAceItem(aceitem);
+            updateAceItem(measure, aceitem);
 
             sendSubmitNotification(measure);
             request.setAttribute("justsaved", "true" );
 
-			SessionMessages.add(request, "contribution-success");
-			request.setAttribute("measureId", measure.getMeasureId());
+            SessionMessages.add(request, "contribution-success");
+            request.setAttribute("measureId", measure.getMeasureId());
 
-			response.setRenderParameter("jspPage", "/html/shareinfo/add_measureRevised.jsp");
-			//sendRedirect(request, response);
-		}
-		else {
-			for (String error : errors) {
-				SessionErrors.add(request, error);
-			}
-			SessionErrors.add(request, "invalid-form-data");
+            response.setRenderParameter("jspPage", "/html/shareinfo/add_measureRevised.jsp");
+            //sendRedirect(request, response);
+        } else {
+            for (String error : errors) {
+                SessionErrors.add(request, error);
+            }
+            SessionErrors.add(request, "invalid-form-data");
 
-			PortalUtil.copyRequestParameters(request, response);
-			request.setAttribute("measure", measure);
-			response.setRenderParameter("jspPage", "/html/shareinfo/add_measureRevised.jsp");
-		}
-	}
+            PortalUtil.copyRequestParameters(request, response);
+            request.setAttribute("measure", measure);
+            response.setRenderParameter("jspPage", "/html/shareinfo/add_measureRevised.jsp");
+        }
+    }
 
-	/**
-	 * Updates the database record of an existing measure.
-	 *
-	 */
-	public void updateMeasure(ActionRequest request, ActionResponse response)
-		throws Exception {
+    /**
+     * Updates the database record of an existing measure.
+     *
+     */
+    public void updateMeasure(ActionRequest request, ActionResponse response)
+        throws Exception {
 
-		AceItem aceitem = null;
+        AceItem aceitem = null;
 
-		Measure measure = null;
-				
-		UploadPortletRequest uploadRequest = PortalUtil.getUploadPortletRequest(request);
+        Measure measure = null;
 
-		try {
-			measure = MeasureLocalServiceUtil.getMeasure(Long.parseLong(uploadRequest.getParameter("measureId")));
-		}
-		catch (Exception e) {
-			measure = null;
-		}
+        UploadPortletRequest uploadRequest = PortalUtil.getUploadPortletRequest(request);
 
-		if(measure != null) {
-			//System.out.println("MEASURE ID IS " + uploadRequest.getParameter("measureId"));
-			//System.out.println("REDIRECT IS " + uploadRequest.getParameter("redirect"));
-			//String redirect = ParamUtil.getString(request, "redirect");
-			//System.out.println("redirect using ParamUtil is " + redirect);
-			
-			ArrayList<String> errors = new ArrayList<String>();
-			measureFromRequest(request, measure, uploadRequest, errors);
-			
-			if (MeasureValidator.validateMeasure(measure, errors)) {
+        try {
+            measure = MeasureLocalServiceUtil.getMeasure(Long.parseLong(uploadRequest.getParameter("measureId")));
+        } catch (Exception e) {
+            measure = null;
+        }
 
-				aceitem = AceItemLocalServiceUtil.getAceItemByStoredAt("ace_measure_id=" + measure.getMeasureId());
+        if(measure != null) {
+            //System.out.println("MEASURE ID IS " + uploadRequest.getParameter("measureId"));
+            //System.out.println("REDIRECT IS " + uploadRequest.getParameter("redirect"));
+            //String redirect = ParamUtil.getString(request, "redirect");
+            //System.out.println("redirect using ParamUtil is " + redirect);
 
-				MeasureLocalServiceUtil.updateMeasure(measure);
+            ArrayList<String> errors = new ArrayList<String>();
+            measureFromRequest(request, measure, uploadRequest, errors);
 
-				updateAceItem(measure, aceitem);
-				if (measure.getControlstatus() == -1)
-				{
-					request.setAttribute("justsaved", "true" );
+            if (MeasureValidator.validateMeasure(measure, errors)) {
 
-					//SessionMessages.add(request, "contribution-success");
-					request.setAttribute("measureId", measure.getMeasureId());
-					response.setRenderParameter("jspPage", "/html/shareinfo/add_measureRevised.jsp");
-				}
-				else
-				{
-	               sendSubmitNotification(measure);
-	               request.getPortletSession().setAttribute("lastAddedMeasureId", "" + measure.getMeasureId() );
-	               SessionMessages.add(request, "contribution-success");
-				   sendRedirect(request, response);
-				}
-			
-			}
-			else {
-				for (String error : errors) {
-					SessionErrors.add(request, error);
-				}
+                aceitem = AceItemLocalServiceUtil.getAceItemByStoredAt("ace_measure_id=" + measure.getMeasureId());
 
-				SessionErrors.add(request, "invalid-form-data");
-				//PortalUtil.copyRequestParameters(request, response);
-				request.setAttribute("measureId", measure.getMeasureId());
+                MeasureLocalServiceUtil.updateMeasure(measure);
 
-				response.setRenderParameter("jspPage", "/html/shareinfo/add_measureRevised.jsp");
-			}
-		}
-	}
+                updateAceItem(measure, aceitem);
+                if (measure.getControlstatus() == -1)
+                {
+                    request.setAttribute("justsaved", "true" );
 
-	/**
-	 * Sets the preferences for how measures can be ordered
-	 *
-	 */
-	public void setAddMeasurePref(ActionRequest request, ActionResponse response)
-		throws Exception {
+                    //SessionMessages.add(request, "contribution-success");
+                    request.setAttribute("measureId", measure.getMeasureId());
+                    response.setRenderParameter("jspPage", "/html/shareinfo/add_measureRevised.jsp");
+                } else {
+                   sendSubmitNotification(measure);
+                   request.getPortletSession().setAttribute("lastAddedMeasureId", "" + measure.getMeasureId() );
+                   SessionMessages.add(request, "contribution-success");
+                   sendRedirect(request, response);
+                }
 
-		PortletPreferences prefs = request.getPreferences();
-		UploadPortletRequest uploadRequest = PortalUtil.getUploadPortletRequest(request);
+            } else {
+                for (String error : errors) {
+                    SessionErrors.add(request, error);
+                }
 
-		String mao_type = uploadRequest.getParameter( Constants.mao_typePreferenceName);
+                SessionErrors.add(request, "invalid-form-data");
+                //PortalUtil.copyRequestParameters(request, response);
+                request.setAttribute("measureId", measure.getMeasureId());
 
-		prefs.setValue(Constants.mao_typePreferenceName, mao_type);
+                response.setRenderParameter("jspPage", "/html/shareinfo/add_measureRevised.jsp");
+            }
+        }
+    }
 
-		String proxyUrl = uploadRequest.getParameter( Constants.proxyUrlPreferenceName);
+    /**
+     * Sets the preferences for how measures can be ordered
+     *
+     */
+    public void setAddMeasurePref(ActionRequest request, ActionResponse response)
+        throws Exception {
 
-		prefs.setValue(Constants.proxyUrlPreferenceName, proxyUrl);
+        PortletPreferences prefs = request.getPreferences();
+        UploadPortletRequest uploadRequest = PortalUtil.getUploadPortletRequest(request);
 
-		String geoserverUrl = uploadRequest.getParameter( Constants.geoserverUrlPreferenceName);
+        String mao_type = uploadRequest.getParameter( Constants.mao_typePreferenceName);
 
-		if (! geoserverUrl.endsWith("/")) {
-			geoserverUrl += "/";
-		}
+        prefs.setValue(Constants.mao_typePreferenceName, mao_type);
 
-		prefs.setValue(Constants.geoserverUrlPreferenceName, geoserverUrl);
+        String proxyUrl = uploadRequest.getParameter( Constants.proxyUrlPreferenceName);
 
-		String wfs = uploadRequest.getParameter( Constants.wfsPreferenceName);
+        prefs.setValue(Constants.proxyUrlPreferenceName, proxyUrl);
 
-		prefs.setValue(Constants.wfsPreferenceName, wfs);
+        String geoserverUrl = uploadRequest.getParameter( Constants.geoserverUrlPreferenceName);
 
-		String wms = uploadRequest.getParameter( Constants.wmsPreferenceName);
+        if (! geoserverUrl.endsWith("/")) {
+            geoserverUrl += "/";
+        }
 
-		prefs.setValue(Constants.wmsPreferenceName, wms);
+        prefs.setValue(Constants.geoserverUrlPreferenceName, geoserverUrl);
 
-		String featurenamespace = uploadRequest.getParameter( Constants.featureNamespacePreferenceName);
+        String wfs = uploadRequest.getParameter( Constants.wfsPreferenceName);
 
-		prefs.setValue(Constants.featureNamespacePreferenceName, featurenamespace);
+        prefs.setValue(Constants.wfsPreferenceName, wfs);
 
-	    String areasFeatureType = uploadRequest.getParameter( Constants.areasFeatureTypePreferenceName);
+        String wms = uploadRequest.getParameter( Constants.wmsPreferenceName);
 
-		prefs.setValue(Constants.areasFeatureTypePreferenceName, areasFeatureType);
+        prefs.setValue(Constants.wmsPreferenceName, wms);
 
-	    String areasLayer = uploadRequest.getParameter( Constants.areasLayerPreferenceName);
+        String featurenamespace = uploadRequest.getParameter( Constants.featureNamespacePreferenceName);
 
-		prefs.setValue(Constants.areasLayerPreferenceName, areasLayer);
+        prefs.setValue(Constants.featureNamespacePreferenceName, featurenamespace);
 
-	    String caseStudiesFeatureType = uploadRequest.getParameter( Constants.caseStudiesFeatureTypePreferenceName);
+        String areasFeatureType = uploadRequest.getParameter( Constants.areasFeatureTypePreferenceName);
 
-		prefs.setValue(Constants.caseStudiesFeatureTypePreferenceName, caseStudiesFeatureType);
+        prefs.setValue(Constants.areasFeatureTypePreferenceName, areasFeatureType);
 
-	    String geometryColumn = uploadRequest.getParameter( Constants.geometryColumnPreferenceName);
+        String areasLayer = uploadRequest.getParameter( Constants.areasLayerPreferenceName);
 
-		prefs.setValue(Constants.geometryColumnPreferenceName, geometryColumn);
+        prefs.setValue(Constants.areasLayerPreferenceName, areasLayer);
 
-		// Microsoft Virtual Earth locator REST API URL
-		String locatorUrl = uploadRequest.getParameter( Constants.locatorUrlPreferenceName);
+        String caseStudiesFeatureType = uploadRequest.getParameter( Constants.caseStudiesFeatureTypePreferenceName);
 
-		if (! locatorUrl.endsWith("/")) {
-			locatorUrl += "/";
-		}
-		prefs.setValue(Constants.locatorUrlPreferenceName, locatorUrl);
+        prefs.setValue(Constants.caseStudiesFeatureTypePreferenceName, caseStudiesFeatureType);
 
-		// Microsoft VE API key
-		String locatorkey = uploadRequest.getParameter( Constants.locatorKeyPreferenceName);
+        String geometryColumn = uploadRequest.getParameter( Constants.geometryColumnPreferenceName);
 
-		prefs.setValue(Constants.locatorKeyPreferenceName, locatorkey);
+        prefs.setValue(Constants.geometryColumnPreferenceName, geometryColumn);
 
-		// Microsoft Bing time out
-		String bingtimeout = uploadRequest.getParameter( Constants.bingTimeOutPreferenceName);
+        // Microsoft Virtual Earth locator REST API URL
+        String locatorUrl = uploadRequest.getParameter( Constants.locatorUrlPreferenceName);
 
-		prefs.setValue(Constants.bingTimeOutPreferenceName, bingtimeout);
+        if (! locatorUrl.endsWith("/")) {
+            locatorUrl += "/";
+        }
+        prefs.setValue(Constants.locatorUrlPreferenceName, locatorUrl);
 
-		// ZoomLevel
-		String zoomlevel = uploadRequest.getParameter( Constants.zoomLevelPreferenceName);
+        // Microsoft VE API key
+        String locatorkey = uploadRequest.getParameter( Constants.locatorKeyPreferenceName);
 
-		prefs.setValue(Constants.zoomLevelPreferenceName, zoomlevel);
+        prefs.setValue(Constants.locatorKeyPreferenceName, locatorkey);
 
-		prefs.store();
-	}
+        // Microsoft Bing time out
+        String bingtimeout = uploadRequest.getParameter( Constants.bingTimeOutPreferenceName);
+
+        prefs.setValue(Constants.bingTimeOutPreferenceName, bingtimeout);
+
+        // ZoomLevel
+        String zoomlevel = uploadRequest.getParameter( Constants.zoomLevelPreferenceName);
+
+        prefs.setValue(Constants.zoomLevelPreferenceName, zoomlevel);
+
+        prefs.store();
+    }
 
 }

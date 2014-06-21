@@ -45,106 +45,106 @@ import com.liferay.portal.kernel.util.OrderByComparator;
 public class MeasureLocalServiceImpl extends MeasureLocalServiceBaseImpl {
 
 
-	/**
-	 * Adds the Measure to the database incrementing the primary key
-	 *
-	 */
-	public Measure addMeasure(Measure measure) throws SystemException {
-		long measureId = CounterLocalServiceUtil.increment(Measure.class.getName());
+    /**
+     * Adds the Measure to the database incrementing the primary key
+     *
+     */
+    public Measure addMeasure(Measure measure) throws SystemException {
+        long measureId = CounterLocalServiceUtil.increment(Measure.class.getName());
 
-		measure.setMeasureId(measureId);
+        measure.setMeasureId(measureId);
 
-		return super.addMeasure(measure);
-	}
-	
-	/**
-	 * 	
-	 * Hugo de Groot: add these methods by hand to <portlet>LocalServiceImpl
-	 * and rerun ServiceBuilder if auto generation fails 
-	 * 
-	 * Gets a list with all the Measures in a group
-	 *
-	 */
-	public List<Measure> getMeasuresByGroupId(long groupId) throws SystemException {
-		return measurePersistence.findByGroupId(groupId);
-	}
+        return super.addMeasure(measure);
+    }
 
-	/**
-	 * 	
-	 * Hugo de Groot: add these methods by hand to <portlet>LocalServiceImpl
-	 * and rerun ServiceBuilder if auto generation fails 
-	 * 
-	 * Gets a list with a range of Measures from a group
-	 *
-	 */
-	public List<Measure> getMeasuresByGroupId(long groupId, int start, int end) throws SystemException {
-		return measurePersistence.findByGroupId(groupId, start, end);
-	}
+    /**
+     *
+     * Hugo de Groot: add these methods by hand to <portlet>LocalServiceImpl
+     * and rerun ServiceBuilder if auto generation fails
+     *
+     * Gets a list with all the Measures in a group
+     *
+     */
+    public List<Measure> getMeasuresByGroupId(long groupId) throws SystemException {
+        return measurePersistence.findByGroupId(groupId);
+    }
 
-	/**
-	 * 	
-	 * Hugo de Groot: add these methods by hand to <portlet>LocalServiceImpl
-	 * and rerun ServiceBuilder if auto generation fails 
-	 * 
-	 * Gets a list with a range of Measures from a group
-	 *
-	 */
-	public List<Measure> getMeasuresByGroupId(long groupId, int start, int end, OrderByComparator orderByComparator) throws SystemException {
-		return measurePersistence.findByGroupId(groupId, start, end, orderByComparator);
-	}
-	
-	/**
-	 * 	
-	 * Hugo de Groot: add these methods by hand to <portlet>LocalServiceImpl
-	 * and rerun ServiceBuilder if auto generation fails 
-	 * 
-	 * Gets the number of Measures in a group
-	 *
-	 */
-	public int getMeasuresCountByGroupId(long groupId) throws SystemException {
-		return measurePersistence.countByGroupId(groupId);
-	}
+    /**
+     *
+     * Hugo de Groot: add these methods by hand to <portlet>LocalServiceImpl
+     * and rerun ServiceBuilder if auto generation fails
+     *
+     * Gets a list with a range of Measures from a group
+     *
+     */
+    public List<Measure> getMeasuresByGroupId(long groupId, int start, int end) throws SystemException {
+        return measurePersistence.findByGroupId(groupId, start, end);
+    }
 
-	/**
-	 * Gets a list with all the Measures by controlstatus
-	 *
-	 */
-	
-	public List<Measure> getMeasuresByControlstatus(short controlstatus) throws SystemException {
-		return measurePersistence.findByControlstatus(controlstatus);
-	}
+    /**
+     *
+     * Hugo de Groot: add these methods by hand to <portlet>LocalServiceImpl
+     * and rerun ServiceBuilder if auto generation fails
+     *
+     * Gets a list with a range of Measures from a group
+     *
+     */
+    public List<Measure> getMeasuresByGroupId(long groupId, int start, int end, OrderByComparator orderByComparator) throws SystemException {
+        return measurePersistence.findByGroupId(groupId, start, end, orderByComparator);
+    }
 
-	/**
-	 * Gets a list with a range of Measures by controlstatus
-	 *
-	 */
-	public List<Measure> getMeasuresByGroupId(short controlstatus, int start, int end) throws SystemException {
-		return measurePersistence.findByControlstatus(controlstatus, start, end);
-	}
-	
+    /**
+     *
+     * Hugo de Groot: add these methods by hand to <portlet>LocalServiceImpl
+     * and rerun ServiceBuilder if auto generation fails
+     *
+     * Gets the number of Measures in a group
+     *
+     */
+    public int getMeasuresCountByGroupId(long groupId) throws SystemException {
+        return measurePersistence.countByGroupId(groupId);
+    }
 
-	/**
-	 * Gets a list with a range of Measures by controlstatus
-	 *
-	 */
-	public List<Measure> getMeasuresByControlstatus(short controlstatus, int start, int end) throws SystemException {
-		return measurePersistence.findByControlstatus(controlstatus, start, end);
-	}
+    /**
+     * Gets a list with all the Measures by controlstatus
+     *
+     */
 
-	/**
-	 * Gets the number of Measures by controlstatus
-	 *
-	 */
-	
-	public int getMeasuresCountByGroupId(short controlstatus) throws SystemException {
-		return measurePersistence.countByControlstatus(controlstatus);
-	}
-	
-	/**
-	 * Gets the number of Measures by controlstatus
-	 *
-	 */
-	public int getMeasuresCountByControlstatus(short controlstatus) throws SystemException {
-		return measurePersistence.countByControlstatus(controlstatus);
-	}	
+    public List<Measure> getMeasuresByControlstatus(short controlstatus) throws SystemException {
+        return measurePersistence.findByControlstatus(controlstatus);
+    }
+
+    /**
+     * Gets a list with a range of Measures by controlstatus
+     *
+     */
+    public List<Measure> getMeasuresByGroupId(short controlstatus, int start, int end) throws SystemException {
+        return measurePersistence.findByControlstatus(controlstatus, start, end);
+    }
+
+
+    /**
+     * Gets a list with a range of Measures by controlstatus
+     *
+     */
+    public List<Measure> getMeasuresByControlstatus(short controlstatus, int start, int end) throws SystemException {
+        return measurePersistence.findByControlstatus(controlstatus, start, end);
+    }
+
+    /**
+     * Gets the number of Measures by controlstatus
+     *
+     */
+
+    public int getMeasuresCountByGroupId(short controlstatus) throws SystemException {
+        return measurePersistence.countByControlstatus(controlstatus);
+    }
+
+    /**
+     * Gets the number of Measures by controlstatus
+     *
+     */
+    public int getMeasuresCountByControlstatus(short controlstatus) throws SystemException {
+        return measurePersistence.countByControlstatus(controlstatus);
+    }
 }

@@ -18,11 +18,11 @@ public class BackPortlet extends GenericPortlet {
     public void init() {
         viewJSP = getInitParameter("view-jsp");
     }
-    
+
     public void doView(
             RenderRequest renderRequest, RenderResponse renderResponse)
         throws IOException, PortletException {
-    	        
+
         include(viewJSP, renderRequest, renderResponse);
     }
 
@@ -36,7 +36,7 @@ public class BackPortlet extends GenericPortlet {
 
         portletRequestDispatcher.include(renderRequest, renderResponse);
     }
- 
+
     protected String viewJSP;
 
 }

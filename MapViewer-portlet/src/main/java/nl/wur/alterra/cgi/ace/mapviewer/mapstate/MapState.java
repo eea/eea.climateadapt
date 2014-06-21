@@ -2,29 +2,29 @@ package nl.wur.alterra.cgi.ace.mapviewer.mapstate;
 
 public class MapState {
 
-	private String mapVieweAppId;
-	
-	private String mapState;
+    private String mapVieweAppId;
 
-	public MapState(String mapVieweAppId, String mapState) {
-		super();
-		this.mapVieweAppId = mapVieweAppId;
-		this.mapState = mapState;
-	}
+    private String mapState;
 
-	public String getMapVieweAppId() {
-		return mapVieweAppId;
-	}
+    public MapState(String mapVieweAppId, String mapState) {
+        super();
+        this.mapVieweAppId = mapVieweAppId;
+        this.mapState = mapState;
+    }
 
-	public void setMapVieweAppId(String mapVieweAppId) {
-		this.mapVieweAppId = mapVieweAppId;
-	}
+    public String getMapVieweAppId() {
+        return mapVieweAppId;
+    }
 
-	public String getMapState() {
-		return mapState;
-	}
+    public void setMapVieweAppId(String mapVieweAppId) {
+        this.mapVieweAppId = mapVieweAppId;
+    }
 
-	public void setMapState(String mapState) {
-		this.mapState = mapState;
-	}
+    public String getMapState() {
+        return mapState;
+    }
+
+    public void setMapState(String mapState) {
+        this.mapState = mapState;
+    }
 }

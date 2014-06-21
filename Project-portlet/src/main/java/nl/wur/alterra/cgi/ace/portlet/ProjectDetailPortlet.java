@@ -24,76 +24,74 @@ import com.liferay.util.bridges.mvc.MVCPortlet;
  * Portlet implementation class ProjectDetailPortlet
  */
 public class ProjectDetailPortlet extends MVCPortlet {
-   
+
     public void doView(
             RenderRequest renderRequest, RenderResponse renderResponse)
         throws IOException, PortletException {
-    	
-    	HttpServletRequest httpRequest = 
-    		PortalUtil.getOriginalServletRequest(
-    		PortalUtil.getHttpServletRequest(renderRequest) ) ;
-   	
-    	renderRequest.setAttribute(Constants.PROJECTID, httpRequest.getParameter("ace_project_id"));
-    	
+
+        HttpServletRequest httpRequest =
+            PortalUtil.getOriginalServletRequest(
+            PortalUtil.getHttpServletRequest(renderRequest) ) ;
+
+        renderRequest.setAttribute(Constants.PROJECTID, httpRequest.getParameter("ace_project_id"));
+
         super.doView(renderRequest, renderResponse);
     }
-    
-	/**
-	 * Increases rating for project.
-	 *
-	 */
-	public void rateUpProject(ActionRequest request, ActionResponse response)
-		throws Exception {
 
-		long projectId = ParamUtil.getLong(request, "projectId");
+    /**
+     * Increases rating for project.
+     *
+     */
+    public void rateUpProject(ActionRequest request, ActionResponse response)
+        throws Exception {
 
-		ArrayList<String> errors = new ArrayList<String>();
+        long projectId = ParamUtil.getLong(request, "projectId");
 
-		if (Validator.isNotNull(projectId)) {
-			Project project = ProjectLocalServiceUtil.getProject(projectId);
-			
-			project.setRating( project.getRating() + 1 );
-			
-			ProjectLocalServiceUtil.updateProject(project); 
-			
-			request.getPortletSession().setAttribute("lastRatedProjectId", "" + projectId);
-			
-			sendRedirect(request, response);
-		}
-		else {
-			SessionErrors.add(request, "error-rating");
-		}
-	}  
+        ArrayList<String> errors = new ArrayList<String>();
 
-	/**
-	 * Decreases rating for project.
-	 *
-	 */
-	public void rateDownProject(ActionRequest request, ActionResponse response)
-		throws Exception {
+        if (Validator.isNotNull(projectId)) {
+            Project project = ProjectLocalServiceUtil.getProject(projectId);
 
-		long projectId = ParamUtil.getLong(request, "projectId");
+            project.setRating( project.getRating() + 1 );
 
-		ArrayList<String> errors = new ArrayList<String>();
+            ProjectLocalServiceUtil.updateProject(project);
 
-		if (Validator.isNotNull(projectId)) {
-			Project project = ProjectLocalServiceUtil.getProject(projectId);
-			
-			project.setRating( project.getRating() - 1 );
-			
-			ProjectLocalServiceUtil.updateProject(project); 
-			
-			request.getPortletSession().setAttribute("lastRatedProjectId", "" + projectId);
-			
-			sendRedirect(request, response);
-		}
-		else {
-			SessionErrors.add(request, "error-rating");
-		}
-	}	
-	
-	// override
-	protected void addSuccessMessage(
+            request.getPortletSession().setAttribute("lastRatedProjectId", "" + projectId);
+
+            sendRedirect(request, response);
+        } else {
+            SessionErrors.add(request, "error-rating");
+        }
+    }
+
+    /**
+     * Decreases rating for project.
+     *
+     */
+    public void rateDownProject(ActionRequest request, ActionResponse response)
+        throws Exception {
+
+        long projectId = ParamUtil.getLong(request, "projectId");
+
+        ArrayList<String> errors = new ArrayList<String>();
+
+        if (Validator.isNotNull(projectId)) {
+            Project project = ProjectLocalServiceUtil.getProject(projectId);
+
+            project.setRating( project.getRating() - 1 );
+
+            ProjectLocalServiceUtil.updateProject(project);
+
+            request.getPortletSession().setAttribute("lastRatedProjectId", "" + projectId);
+
+            sendRedirect(request, response);
+        } else {
+            SessionErrors.add(request, "error-rating");
+        }
+    }
+
+    // override
+    protected void addSuccessMessage(
         ActionRequest actionRequest, ActionResponse actionResponse) {
 
         SessionMessages.add(actionRequest, "request_processed", "Thank you for your feedback");

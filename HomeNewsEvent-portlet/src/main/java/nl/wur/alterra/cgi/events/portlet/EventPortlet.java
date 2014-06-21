@@ -193,8 +193,7 @@ public class EventPortlet extends MVCPortlet {
                 renderRequest.setAttribute("showall", "full");
             }
 
-        }
-        catch (Exception x) {
+        } catch (Exception x) {
             x.printStackTrace();
             throw new PortletException(x);
         }
@@ -271,9 +270,7 @@ public class EventPortlet extends MVCPortlet {
             if (this.eventDt.compareTo(journal.getEventDt()) <= 0)
             {
                 return -1;
-            }
-            else
-            {
+            } else {
                 return 1;
             }
         }

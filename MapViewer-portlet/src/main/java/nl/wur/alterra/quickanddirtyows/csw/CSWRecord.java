@@ -4,68 +4,68 @@ import nl.wur.alterra.quickanddirtyows.csw.digitaltransferoption.DigitalTransfer
 import nl.wur.alterra.quickanddirtyows.csw.keyword.Keywords;
 
 public class CSWRecord {
-	
-	private String fileIdentifier;
 
-	private String title;
-	
-	private String abstractText;
-	
-	private Keywords keywords;
+    private String fileIdentifier;
 
-	private DigitalTransferOptions digitalTransferOptions;
-	
-	private String attribution;
+    private String title;
 
-	public CSWRecord() {
-		super();
-	}
+    private String abstractText;
 
-	public String getFileIdentifier() {
-		return fileIdentifier;
-	}
+    private Keywords keywords;
 
-	public void setFileIdentifier(String fileIdentifier) {
-		this.fileIdentifier = fileIdentifier;
-	}
+    private DigitalTransferOptions digitalTransferOptions;
 
-	public String getTitle() {
-		return title;
-	}
+    private String attribution;
 
-	public void setTitle(String title) {
-		this.title = title;
-	}
+    public CSWRecord() {
+        super();
+    }
 
-	public Keywords getKeywords() {
-		return keywords;
-	}
+    public String getFileIdentifier() {
+        return fileIdentifier;
+    }
 
-	public void setKeywords(Keywords keywords) {
-		this.keywords = keywords;
-	}
+    public void setFileIdentifier(String fileIdentifier) {
+        this.fileIdentifier = fileIdentifier;
+    }
 
-	public DigitalTransferOptions getDigitalTransferOptions() {
-		return digitalTransferOptions;
-	}
+    public String getTitle() {
+        return title;
+    }
 
-	public void setDigitalTransferOptions(DigitalTransferOptions digitalTransferOptions) {
-		this.digitalTransferOptions = digitalTransferOptions;
-	}
+    public void setTitle(String title) {
+        this.title = title;
+    }
 
-	public String getAbstractText() {
-		return abstractText;
-	}
+    public Keywords getKeywords() {
+        return keywords;
+    }
 
-	public void setAbstractText(String abstractText) {
-		this.abstractText = abstractText;
-	}
+    public void setKeywords(Keywords keywords) {
+        this.keywords = keywords;
+    }
 
-	public String getAttribution() {
-		return attribution;
-	}
+    public DigitalTransferOptions getDigitalTransferOptions() {
+        return digitalTransferOptions;
+    }
 
-	public void setAttribution(String attribution) {
-		this.attribution = attribution;
-	}
+    public void setDigitalTransferOptions(DigitalTransferOptions digitalTransferOptions) {
+        this.digitalTransferOptions = digitalTransferOptions;
+    }
+
+    public String getAbstractText() {
+        return abstractText;
+    }
+
+    public void setAbstractText(String abstractText) {
+        this.abstractText = abstractText;
+    }
+
+    public String getAttribution() {
+        return attribution;
+    }
+
+    public void setAttribution(String attribution) {
+        this.attribution = attribution;
+    }
 }

@@ -9,27 +9,27 @@ import com.liferay.util.bridges.mvc.MVCPortlet;
 
 /**
  * Portlet implementation class FreeHTMLportlet
- * 
+ *
  * Purpose: add some text which may only be seen by authorised users
  * Authorisation check is done by setting view permissions for portlet
- * 
+ *
  */
 public class FreeHTMLportlet extends MVCPortlet {
-	
-	/**
-	 * Sets the preferences for htmltext
-	 *
-	 */
-	public void setHTMLTextPref(ActionRequest request, ActionResponse response)
-		throws Exception {
 
-		String htmltext = ParamUtil.getString(request, "htmltext");
+    /**
+     * Sets the preferences for htmltext
+     *
+     */
+    public void setHTMLTextPref(ActionRequest request, ActionResponse response)
+        throws Exception {
 
-		PortletPreferences prefs = request.getPreferences();
+        String htmltext = ParamUtil.getString(request, "htmltext");
 
-		prefs.setValue("htmltext", htmltext);
+        PortletPreferences prefs = request.getPreferences();
 
-		prefs.store();
-	} 
+        prefs.setValue("htmltext", htmltext);
+
+        prefs.store();
+    }
 
 }

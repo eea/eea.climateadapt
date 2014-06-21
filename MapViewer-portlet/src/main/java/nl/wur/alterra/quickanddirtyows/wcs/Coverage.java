@@ -4,108 +4,108 @@ import java.io.ByteArrayOutputStream;
 
 public class Coverage {
 
-	private String identifier;
+    private String identifier;
 
-	private String outputFormat;
-	
-	private Extent extent;
-	
-	private Extent lonLatExtent;
-	
-	private double xResolution;
-	
-	private double yResolution;
-	
-	private double xOrigin;
-	
-	private double yOrigin;
-	
-	private ByteArrayOutputStream outputStream;
-	
-	public Coverage(String identifier, String outputFormat, Extent extent,
-			Extent lonLatExtent, double xResolution, double yResolution,
-			double xOrigin, double yOrigin, ByteArrayOutputStream outputStream) {
-		super();
-		this.identifier = identifier;
-		this.outputFormat = outputFormat;
-		this.extent = extent;
-		this.lonLatExtent = lonLatExtent;
-		this.xResolution = xResolution;
-		this.yResolution = yResolution;
-		this.xOrigin = xOrigin;
-		this.yOrigin = yOrigin;
-		this.outputStream = outputStream;
-	}
+    private String outputFormat;
 
-	protected String getOutputFormat() {
-		return outputFormat;
-	}
+    private Extent extent;
 
-	protected void setOutputFormat(String outputFormat) {
-		this.outputFormat = outputFormat;
-	}
+    private Extent lonLatExtent;
 
-	protected String getIdentifier() {
-		return identifier;
-	}
+    private double xResolution;
 
-	protected void setIdentifier(String identifier) {
-		this.identifier = identifier;
-	}
+    private double yResolution;
 
-	protected Extent getExtent() {
-		return extent;
-	}
+    private double xOrigin;
 
-	protected void setExtent(Extent extent) {
-		this.extent = extent;
-	}
+    private double yOrigin;
 
-	protected Extent getLonLatExtent() {
-		return lonLatExtent;
-	}
+    private ByteArrayOutputStream outputStream;
 
-	protected void setLonLatExtent(Extent lonLatExtent) {
-		this.lonLatExtent = lonLatExtent;
-	}
+    public Coverage(String identifier, String outputFormat, Extent extent,
+            Extent lonLatExtent, double xResolution, double yResolution,
+            double xOrigin, double yOrigin, ByteArrayOutputStream outputStream) {
+        super();
+        this.identifier = identifier;
+        this.outputFormat = outputFormat;
+        this.extent = extent;
+        this.lonLatExtent = lonLatExtent;
+        this.xResolution = xResolution;
+        this.yResolution = yResolution;
+        this.xOrigin = xOrigin;
+        this.yOrigin = yOrigin;
+        this.outputStream = outputStream;
+    }
 
-	protected double getxResolution() {
-		return xResolution;
-	}
+    protected String getOutputFormat() {
+        return outputFormat;
+    }
 
-	protected void setxResolution(double xResolution) {
-		this.xResolution = xResolution;
-	}
+    protected void setOutputFormat(String outputFormat) {
+        this.outputFormat = outputFormat;
+    }
 
-	protected double getyResolution() {
-		return yResolution;
-	}
+    protected String getIdentifier() {
+        return identifier;
+    }
 
-	protected void setyResolution(double yResolution) {
-		this.yResolution = yResolution;
-	}
+    protected void setIdentifier(String identifier) {
+        this.identifier = identifier;
+    }
 
-	protected double getxOrigin() {
-		return xOrigin;
-	}
+    protected Extent getExtent() {
+        return extent;
+    }
 
-	protected void setxOrigin(double xOrigin) {
-		this.xOrigin = xOrigin;
-	}
+    protected void setExtent(Extent extent) {
+        this.extent = extent;
+    }
 
-	protected double getyOrigin() {
-		return yOrigin;
-	}
+    protected Extent getLonLatExtent() {
+        return lonLatExtent;
+    }
 
-	protected void setyOrigin(double yOrigin) {
-		this.yOrigin = yOrigin;
-	}
+    protected void setLonLatExtent(Extent lonLatExtent) {
+        this.lonLatExtent = lonLatExtent;
+    }
 
-	protected ByteArrayOutputStream getOutputStream() {
-		return outputStream;
-	}
+    protected double getxResolution() {
+        return xResolution;
+    }
 
-	protected void setOutputStream(ByteArrayOutputStream outputStream) {
-		this.outputStream = outputStream;
-	}
+    protected void setxResolution(double xResolution) {
+        this.xResolution = xResolution;
+    }
+
+    protected double getyResolution() {
+        return yResolution;
+    }
+
+    protected void setyResolution(double yResolution) {
+        this.yResolution = yResolution;
+    }
+
+    protected double getxOrigin() {
+        return xOrigin;
+    }
+
+    protected void setxOrigin(double xOrigin) {
+        this.xOrigin = xOrigin;
+    }
+
+    protected double getyOrigin() {
+        return yOrigin;
+    }
+
+    protected void setyOrigin(double yOrigin) {
+        this.yOrigin = yOrigin;
+    }
+
+    protected ByteArrayOutputStream getOutputStream() {
+        return outputStream;
+    }
+
+    protected void setOutputStream(ByteArrayOutputStream outputStream) {
+        this.outputStream = outputStream;
+    }
 }

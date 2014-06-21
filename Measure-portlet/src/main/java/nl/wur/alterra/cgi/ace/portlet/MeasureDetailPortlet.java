@@ -29,72 +29,70 @@ public class MeasureDetailPortlet extends MVCPortlet {
     public void doView(
             RenderRequest renderRequest, RenderResponse renderResponse)
         throws IOException, PortletException {
-    	
-    	HttpServletRequest httpRequest = 
-    		PortalUtil.getOriginalServletRequest(
-    		PortalUtil.getHttpServletRequest(renderRequest) ) ;
-        	
-    		renderRequest.setAttribute(Constants.MEASUREID, httpRequest.getParameter("ace_measure_id"));
-    		
+
+        HttpServletRequest httpRequest =
+            PortalUtil.getOriginalServletRequest(
+            PortalUtil.getHttpServletRequest(renderRequest) ) ;
+
+            renderRequest.setAttribute(Constants.MEASUREID, httpRequest.getParameter("ace_measure_id"));
+
             super.doView(renderRequest, renderResponse);
-    }    
+    }
 
-	/**
-	 * Increases rating for measure.
-	 *
-	 */
-	public void rateUpMeasure(ActionRequest request, ActionResponse response)
-		throws Exception {
+    /**
+     * Increases rating for measure.
+     *
+     */
+    public void rateUpMeasure(ActionRequest request, ActionResponse response)
+        throws Exception {
 
-		long measureId = ParamUtil.getLong(request, "measureId");
+        long measureId = ParamUtil.getLong(request, "measureId");
 
-		ArrayList<String> errors = new ArrayList<String>();
+        ArrayList<String> errors = new ArrayList<String>();
 
-		if (Validator.isNotNull(measureId)) {
-			Measure measure = MeasureLocalServiceUtil.getMeasure(measureId);
-			
-			measure.setRating( measure.getRating() + 1 );
-			
-			MeasureLocalServiceUtil.updateMeasure(measure); 
-			
-			request.getPortletSession().setAttribute("lastRatedMeasureId", "" + measureId);
-			
-			sendRedirect(request, response);
-		}
-		else {
-			SessionErrors.add(request, "error-rating");
-		}
-	}  
+        if (Validator.isNotNull(measureId)) {
+            Measure measure = MeasureLocalServiceUtil.getMeasure(measureId);
 
-	/**
-	 * Decreases rating for measure.
-	 *
-	 */
-	public void rateDownMeasure(ActionRequest request, ActionResponse response)
-		throws Exception {
+            measure.setRating( measure.getRating() + 1 );
 
-		long measureId = ParamUtil.getLong(request, "measureId");
+            MeasureLocalServiceUtil.updateMeasure(measure);
 
-		ArrayList<String> errors = new ArrayList<String>();
+            request.getPortletSession().setAttribute("lastRatedMeasureId", "" + measureId);
 
-		if (Validator.isNotNull(measureId)) {
-			Measure measure = MeasureLocalServiceUtil.getMeasure(measureId);
-			
-			measure.setRating( measure.getRating() - 1 );
-			
-			MeasureLocalServiceUtil.updateMeasure(measure); 
-			
-			request.getPortletSession().setAttribute("lastRatedMeasureId", "" + measureId);
-			
-			sendRedirect(request, response);
-		}
-		else {
-			SessionErrors.add(request, "error-rating");
-		}
-	}    
-	
-	// override
-	protected void addSuccessMessage(
+            sendRedirect(request, response);
+        } else {
+            SessionErrors.add(request, "error-rating");
+        }
+    }
+
+    /**
+     * Decreases rating for measure.
+     *
+     */
+    public void rateDownMeasure(ActionRequest request, ActionResponse response)
+        throws Exception {
+
+        long measureId = ParamUtil.getLong(request, "measureId");
+
+        ArrayList<String> errors = new ArrayList<String>();
+
+        if (Validator.isNotNull(measureId)) {
+            Measure measure = MeasureLocalServiceUtil.getMeasure(measureId);
+
+            measure.setRating( measure.getRating() - 1 );
+
+            MeasureLocalServiceUtil.updateMeasure(measure);
+
+            request.getPortletSession().setAttribute("lastRatedMeasureId", "" + measureId);
+
+            sendRedirect(request, response);
+        } else {
+            SessionErrors.add(request, "error-rating");
+        }
+    }
+
+    // override
+    protected void addSuccessMessage(
         ActionRequest actionRequest, ActionResponse actionResponse) {
 
         SessionMessages.add(actionRequest, "request_processed", "Thank you for your feedback");

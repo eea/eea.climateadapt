@@ -25,14 +25,14 @@ public class SimpleSearchPortlet extends MVCPortlet {
      * Stores the name for the input box
      *
      * @param request request
-	 * @param response response
+     * @param response response
      */
     public void setSimpleSearchPref(ActionRequest request, ActionResponse response) throws Exception {
-		PortletPreferences prefs = request.getPreferences();
+        PortletPreferences prefs = request.getPreferences();
 
-		prefs.setValue(Constants.searchBoxPreferenceName, ParamUtil.getString(request, Constants.searchBoxPreferenceName) );
+        prefs.setValue(Constants.searchBoxPreferenceName, ParamUtil.getString(request, Constants.searchBoxPreferenceName) );
 
-		prefs.store();	
-	}
+        prefs.store();
+    }
 
 }

@@ -102,9 +102,7 @@ public abstract class MeasureUpdateHelperForSharedMeasure extends MVCPortlet {
         if (req == null)
         {
             uploadRequest = PortalUtil.getUploadPortletRequest(request);
-        }
-        else
-        {
+        } else {
             uploadRequest = req;
         }
 
@@ -128,9 +126,7 @@ public abstract class MeasureUpdateHelperForSharedMeasure extends MVCPortlet {
         if (uploadRequest.getParameter("checkcreationdate") != null)
         {
             d.setTime(Long.parseLong(uploadRequest.getParameter("checkcreationdate")));
-        }
-        else
-        {
+        } else {
             d.setTime(0);
         }
         //d.setTime(ParamUtil.getLong(request, "checkcreationdate"));
@@ -266,7 +262,7 @@ public abstract class MeasureUpdateHelperForSharedMeasure extends MVCPortlet {
         }
         measure.setClimateimpacts_(choosenclimateimpacts);
 
-        // case study feature - new 
+        // case study feature - new
         String choosenfeature = "";
         for (MeasureCaseStudyFeature feature : MeasureCaseStudyFeature.values()) {
             if (uploadRequest.getParameter( "chk_casestudyfeature_" + feature) != null) {
@@ -425,24 +421,21 @@ public abstract class MeasureUpdateHelperForSharedMeasure extends MVCPortlet {
                         addPermissions(themeDisplay, primaryKey, image.getClass().getName());
                         measure.setPrimephoto(String.valueOf(image.getFileEntryId()));
                         request.setAttribute("primePhotoId", String.valueOf(image.getFileEntryId()));
-                    }
-//                    catch(DuplicateImageNameException e)
+
+//                  } catch(DuplicateImageNameException e)
 //                    {
 //                        //get the image id
 //                        //System.out.println("Duplicate image - getting image id");
 //                        image = IGImageServiceUtil.getImageByFolderIdAndNameWithExtension(themeDisplay.getScopeGroupId(), folderId, sourceFileName);
 //                        measure.setPrimephoto(String.valueOf(image.getImageId()));
 //                    }
-                    catch(Exception e)
-                    {
+                    } catch(Exception e) {
                         e.printStackTrace();
                         throw e;
                     }
                 }
 
-            }
-            else
-            {
+            } else {
                 Folder imageFolder = null;
                 try {
                     Folder rootFolder = DLAppLocalServiceUtil.getFolder(themeDisplay.getScopeGroupId(), 0, "casestudy");
@@ -456,9 +449,7 @@ public abstract class MeasureUpdateHelperForSharedMeasure extends MVCPortlet {
 
                     try {
                         imageFolder = DLAppLocalServiceUtil.getFolder(themeDisplay.getScopeGroupId(), rootFolder.getFolderId(), folder);
-                    }
-                    catch(PortalException e)
-                    {
+                    } catch(PortalException e) {
                         //System.out.println("image folder is null");
                         imageFolder = DLAppLocalServiceUtil.addFolder(themeDisplay.getUserId(),themeDisplay.getScopeGroupId(), rootFolder.getFolderId(), folder, "", serviceContext);
                         String primaryKey = String.valueOf(imageFolder.getPrimaryKey());
@@ -486,9 +477,7 @@ public abstract class MeasureUpdateHelperForSharedMeasure extends MVCPortlet {
                 }
             }
             //System.out.println("image added image name is " + image.getNameWithExtension());
-        }
-        else
-        {
+        } else {
             measure.setPrimephoto(primePhotoId);
         }
 
@@ -551,9 +540,7 @@ public abstract class MeasureUpdateHelperForSharedMeasure extends MVCPortlet {
                     errors.add("invalid-multiple-photo-upload");
                     SessionErrors.add(request, "invalid-multiple-photo-upload");
                     break;
-                }
-                else
-                {
+                } else {
                     if (Validator.isNotNull(uploadRequest.getParameter("supphotos")))
                     {
                         // if (Validator.isNotNull(sup_photo_name) && Validator.isNotNull(sup_photo_description) && Validator.isNull(sup_photo_fileName) && supPhotoListStored.contains(sup_photo_name.toLowerCase()))
@@ -563,9 +550,7 @@ public abstract class MeasureUpdateHelperForSharedMeasure extends MVCPortlet {
                             //System.out.println("photo is already there so just skip");
                             continue;
                         }
-                    }
-                    else
-                    {
+                    } else {
                         isPhotosValid = false;
 
                         // if (counter > 1 || Validator.isNotNull(sup_photo_name) || Validator.isNotNull(sup_photo_description))
@@ -606,9 +591,7 @@ public abstract class MeasureUpdateHelperForSharedMeasure extends MVCPortlet {
             if (Validator.isNull(measure.getName()))
             {
                 folder = "case".concat("-").concat("temp");
-            }
-            else
-            {
+            } else {
                 folder = "case".concat("-").concat(String.valueOf(measure.getName().trim().replace(' ', '-')));
             }
 
@@ -621,9 +604,7 @@ public abstract class MeasureUpdateHelperForSharedMeasure extends MVCPortlet {
 
             try {
                 imageFolder = DLAppLocalServiceUtil.getFolder(themeDisplay.getScopeGroupId(), rootFolder.getFolderId(), folder);
-            }
-            catch(PortalException e)
-            {
+            } catch(PortalException e) {
                 //System.out.println("image folder is null");
                 imageFolder = DLAppLocalServiceUtil.addFolder(themeDisplay.getUserId(), themeDisplay.getScopeGroupId(), rootFolder.getFolderId(), folder, "", serviceContext);
                 String primaryKey = String.valueOf(imageFolder.getPrimaryKey());
@@ -656,14 +637,10 @@ public abstract class MeasureUpdateHelperForSharedMeasure extends MVCPortlet {
                         if (uploadedFiles.toString().equalsIgnoreCase(""))
                         {
                             uploadedFiles.append(supPhotoIdsStored[index]);
-                        }
-                        else
-                        {
+                        } else {
                             uploadedFiles.append(";").append(supPhotoIdsStored[index]);
                         }
-                    }
-                    else
-                    {
+                    } else {
                         // upload the image
                         FileEntry image = insertImage(uploadRequest, counter, imageFolder, sup_photo_name, sup_photo_description, themeDisplay, serviceContext);
 
@@ -671,17 +648,13 @@ public abstract class MeasureUpdateHelperForSharedMeasure extends MVCPortlet {
                         if (uploadedFiles.toString().equalsIgnoreCase(""))
                         {
                             uploadedFiles.append(image.getFileEntryId());
-                        }
-                        else
-                        {
+                        } else {
                             uploadedFiles.append(";").append(image.getFileEntryId());
                         }
 
                     }
                 }
-            }
-            else
-            {
+            } else {
                 // first time we are uploading
                 for(int counter=1; counter <= photoCounter; counter++)
                 {
@@ -696,9 +669,7 @@ public abstract class MeasureUpdateHelperForSharedMeasure extends MVCPortlet {
                         if (uploadedFiles.toString().equalsIgnoreCase(""))
                         {
                             uploadedFiles.append(image.getFileEntryId());
-                        }
-                        else
-                        {
+                        } else {
                             uploadedFiles.append(";").append(image.getFileEntryId());
                         }
                     }
@@ -707,24 +678,20 @@ public abstract class MeasureUpdateHelperForSharedMeasure extends MVCPortlet {
             }
             //System.out.println("uploaded files is " + uploadedFiles.toString());
             measure.setSupphotos(uploadedFiles.toString());
-        }
-        else
-        {
+        } else {
             // preserve the old values
             if (photoCounter > 0)
             {
                 measure.setSupphotos(uploadRequest.getParameter("supphotos"));
-            }
-            else
-            {
+            } else {
                 measure.setSupphotos("");
             }
         }
 
 
-	    /* MULTIPLE DOC UPLOAD STARTS
-	     * 
-	     */
+        /* MULTIPLE DOC UPLOAD STARTS
+         *
+         */
 
         // get how many documents are uploaded
 
@@ -786,9 +753,7 @@ public abstract class MeasureUpdateHelperForSharedMeasure extends MVCPortlet {
                     errors.add("invalid-multiple-doc-upload");
                     SessionErrors.add(request, "invalid-multiple-doc-upload");
                     break;
-                }
-                else
-                {
+                } else {
                     if (Validator.isNotNull(uploadRequest.getParameter("supdocs")))
                     {
                         if (Validator.isNotNull(sup_doc_name) && Validator.isNotNull(sup_doc_description) && Validator.isNull(sup_doc_fileName) && supDocListStored.contains(sup_doc_name.toLowerCase()))
@@ -797,9 +762,7 @@ public abstract class MeasureUpdateHelperForSharedMeasure extends MVCPortlet {
                             //System.out.println("document is already there so just skip");
                             continue;
                         }
-                    }
-                    else
-                    {
+                    } else {
                         isDocsValid = false;
 
                         if (counter > 1 || Validator.isNotNull(sup_doc_name) || Validator.isNotNull(sup_doc_description))
@@ -834,9 +797,7 @@ public abstract class MeasureUpdateHelperForSharedMeasure extends MVCPortlet {
             DLFolder rootFolder = null;
             try {
                 rootFolder = DLFolderLocalServiceUtil.getFolder(themeDisplay.getScopeGroupId(), 0, "casestudy");
-            }
-            catch(Exception e)
-            {
+            } catch(Exception e) {
                 e.printStackTrace();
                 throw e;
             }
@@ -846,9 +807,7 @@ public abstract class MeasureUpdateHelperForSharedMeasure extends MVCPortlet {
             if (Validator.isNull(measure.getName()))
             {
                 folder = "case".concat("-").concat("temp");
-            }
-            else
-            {
+            } else {
                 folder = "case".concat("-").concat(String.valueOf(measure.getName().trim().replace(' ', '-')));
             }
             folder = escapeName(folder);
@@ -861,23 +820,17 @@ public abstract class MeasureUpdateHelperForSharedMeasure extends MVCPortlet {
             try {
                 //docFolder = DLFolderLocalServiceUtil.getFolder(themeDisplay.getScopeGroupId(), rootFolder.getFolderId(), folder);
                 docFolder = DLAppLocalServiceUtil.getFolder(themeDisplay.getScopeGroupId(), rootFolder.getFolderId(), folder);
-            }
-            catch(PortalException e)
-            {
+            } catch(PortalException e) {
                 //System.out.println("document folder is null");
                 try {
                     docFolder = DLAppLocalServiceUtil.addFolder(themeDisplay.getUserId(), themeDisplay.getScopeGroupId(), rootFolder.getFolderId(), folder, "",  serviceContext);
                     String primaryKey = String.valueOf(docFolder.getPrimaryKey());
                     addPermissions(themeDisplay, primaryKey, docFolder.getClass().getName());
-                }
-                catch(Exception ex)
-                {
+                } catch(Exception ex) {
                     throw ex;
                 }
 
-            }
-            catch(Exception e)
-            {
+            } catch(Exception e) {
                 e.printStackTrace();
                 throw e;
             }
@@ -909,14 +862,10 @@ public abstract class MeasureUpdateHelperForSharedMeasure extends MVCPortlet {
                         if (uploadedFiles.toString().equalsIgnoreCase(""))
                         {
                             uploadedFiles.append(supDocIdsStored[index]);
-                        }
-                        else
-                        {
+                        } else {
                             uploadedFiles.append(";").append(supDocIdsStored[index]);
                         }
-                    }
-                    else
-                    {
+                    } else {
 
                         // upload the file
                         FileEntry doc = insertFile(uploadRequest, counter, docFolder, sup_doc_name, sup_doc_description, themeDisplay, serviceContext);
@@ -925,17 +874,13 @@ public abstract class MeasureUpdateHelperForSharedMeasure extends MVCPortlet {
                         if (uploadedFiles.toString().equalsIgnoreCase(""))
                         {
                             uploadedFiles.append(doc.getFileEntryId());
-                        }
-                        else
-                        {
+                        } else {
                             uploadedFiles.append(";").append(doc.getFileEntryId());
                         }
 
                     }
                 }
-            }
-            else
-            {
+            } else {
                 // first time we are uploading
                 for(int counter=1; counter <= docCounter; counter++)
                 {
@@ -951,9 +896,7 @@ public abstract class MeasureUpdateHelperForSharedMeasure extends MVCPortlet {
                         if (uploadedFiles.toString().equalsIgnoreCase(""))
                         {
                             uploadedFiles.append(doc.getFileEntryId());
-                        }
-                        else
-                        {
+                        } else {
                             uploadedFiles.append(";").append(doc.getFileEntryId());
                         }
                     }
@@ -961,16 +904,12 @@ public abstract class MeasureUpdateHelperForSharedMeasure extends MVCPortlet {
             }
             //System.out.println("uploaded files is " + uploadedFiles.toString());
             measure.setSupdocs(uploadedFiles.toString());
-        }
-        else
-        {
+        } else {
             // preserve the old values
             if (docCounter > 0)
             {
                 measure.setSupdocs(uploadRequest.getParameter("supdocs"));
-            }
-            else
-            {
+            } else {
                 measure.setSupdocs("");
             }
         }
@@ -1180,7 +1119,7 @@ public abstract class MeasureUpdateHelperForSharedMeasure extends MVCPortlet {
                 + measure.getSpatiallayer().replace("_", "") + ' ' + measure.getSpatialvalues() + ' ' + measure.getLegalaspects()
                 + ' ' + measure.getSucceslimitations() + ' ' + measure.getCostbenefit() + ' '
                 + measure.getStakeholderparticipation() + ' ' + measure.getSource() + ' ' + measure.getTextwebpage());
-        
+
 
 /* At free text searxh don't search any longer on Advanced Search Fields
         String sctrs = measure.getSectors_();
@@ -1189,7 +1128,7 @@ public abstract class MeasureUpdateHelperForSharedMeasure extends MVCPortlet {
 
             aceitem.setTextSearch(aceitem.getTextSearch() + ' ' + coalesce(sctrs.substring(0, sctrs.indexOf(";"))));
         }
-        
+
         String lmnts = measure.getElements_();
 
         if ((coalesce(lmnts).length() > 0) && (lmnts.indexOf(";") == lmnts.lastIndexOf(";"))) { // one
@@ -1378,8 +1317,7 @@ public abstract class MeasureUpdateHelperForSharedMeasure extends MVCPortlet {
     public static String escapeName(String word) {
         if (word == null) {
             return null;
-        }
-        else {
+        } else {
             char[] wordCharArray = word.toCharArray();
 
             int i = 0;

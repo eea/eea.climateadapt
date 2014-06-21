@@ -22,60 +22,58 @@ import com.liferay.util.bridges.mvc.MVCPortlet;
  * Portlet implementation class ProjectGoEditPortlet
  */
 public class ProjectGoEditPortlet extends MVCPortlet {
-    
+
     public void doView(
             RenderRequest renderRequest, RenderResponse renderResponse)
         throws IOException, PortletException {
-    	
-    	HttpServletRequest httpRequest = 
-    		PortalUtil.getOriginalServletRequest(
-    		PortalUtil.getHttpServletRequest(renderRequest) ) ;
-    	
-    	if( httpRequest.getParameter("ace_project_id") != null ) {
-    		try {
-    			Project project = null;
-    			try {
-    				project = ProjectLocalServiceUtil.getProject( Long.parseLong(httpRequest.getParameter("ace_project_id") ) ) ;
-    			}
-    			catch(Exception e) {
-    				project = null;
-    			}
-    			
-    			// if there is no candidate item for this item: edit is permitted
-    			if( (project != null) && (project.getReplacesId() != project.getProjectId())
-        			    && ( 
-       			    		 renderRequest.isUserInRole("Portal Content Reviewer") || 
-       						 renderRequest.isUserInRole("administrator") ||
-       						 renderRequest.isUserInRole("Power User") || 
-       					     renderRequest.isUserInRole("User")
-           					)
-           			   ) { 
-        	    	renderRequest.setAttribute(Constants.PROJECTID, httpRequest.getParameter("ace_project_id"));
-        	    }
-    		}
-    		catch (Exception e) {
-    			System.out.println(e.getMessage()) ;
-    			e.printStackTrace(System.out) ;
-    		}
-    	}
-    	
-    		
+
+        HttpServletRequest httpRequest =
+            PortalUtil.getOriginalServletRequest(
+            PortalUtil.getHttpServletRequest(renderRequest) ) ;
+
+        if( httpRequest.getParameter("ace_project_id") != null ) {
+            try {
+                Project project = null;
+                try {
+                    project = ProjectLocalServiceUtil.getProject( Long.parseLong(httpRequest.getParameter("ace_project_id") ) ) ;
+                } catch(Exception e) {
+                    project = null;
+                }
+
+                // if there is no candidate item for this item: edit is permitted
+                if( (project != null) && (project.getReplacesId() != project.getProjectId())
+                        && (
+                             renderRequest.isUserInRole("Portal Content Reviewer") ||
+                             renderRequest.isUserInRole("administrator") ||
+                             renderRequest.isUserInRole("Power User") ||
+                             renderRequest.isUserInRole("User")
+                            )
+                       ) {
+                    renderRequest.setAttribute(Constants.PROJECTID, httpRequest.getParameter("ace_project_id"));
+                }
+            } catch (Exception e) {
+                System.out.println(e.getMessage()) ;
+                e.printStackTrace(System.out) ;
+            }
+        }
+
+
         super.doView(renderRequest, renderResponse);
     }
-    
-	/**
-	 * Sets the preferences: base url for editing
-	 *
-	 */
-	public void setProjectGoEditPref(ActionRequest request, ActionResponse response) throws Exception {
-		String editUrl = ParamUtil.getString(request, Constants.EDITURL);
-		PortletPreferences prefs = request.getPreferences();
-		prefs.setValue(Constants.EDITURL, editUrl);
 
-		String shareInfoEditUrl = ParamUtil.getString(request, Constants.SHAREINFOEDITURL);
-		prefs.setValue(Constants.SHAREINFOEDITURL, shareInfoEditUrl);
-		
-		prefs.store();
-	} 
+    /**
+     * Sets the preferences: base url for editing
+     *
+     */
+    public void setProjectGoEditPref(ActionRequest request, ActionResponse response) throws Exception {
+        String editUrl = ParamUtil.getString(request, Constants.EDITURL);
+        PortletPreferences prefs = request.getPreferences();
+        prefs.setValue(Constants.EDITURL, editUrl);
+
+        String shareInfoEditUrl = ParamUtil.getString(request, Constants.SHAREINFOEDITURL);
+        prefs.setValue(Constants.SHAREINFOEDITURL, shareInfoEditUrl);
+
+        prefs.store();
+    }
 
 }

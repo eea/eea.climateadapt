@@ -21,20 +21,20 @@ import com.liferay.portal.NoSuchModelException;
  */
 public class NoSuchMeasureException extends NoSuchModelException {
 
-	public NoSuchMeasureException() {
-		super();
-	}
+    public NoSuchMeasureException() {
+        super();
+    }
 
-	public NoSuchMeasureException(String msg) {
-		super(msg);
-	}
+    public NoSuchMeasureException(String msg) {
+        super(msg);
+    }
 
-	public NoSuchMeasureException(String msg, Throwable cause) {
-		super(msg, cause);
-	}
+    public NoSuchMeasureException(String msg, Throwable cause) {
+        super(msg, cause);
+    }
 
-	public NoSuchMeasureException(Throwable cause) {
-		super(cause);
-	}
+    public NoSuchMeasureException(Throwable cause) {
+        super(cause);
+    }
 
 }

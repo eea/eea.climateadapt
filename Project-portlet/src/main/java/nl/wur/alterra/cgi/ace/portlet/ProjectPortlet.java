@@ -59,7 +59,7 @@ public class ProjectPortlet extends ProjectUpdateHelper {
      *
      */
     private AceItem createAceItemInsideDB(Project project) throws Exception {
-    	AceItem aceitem = AceItemLocalServiceUtil.createAceItem();
+        AceItem aceitem = AceItemLocalServiceUtil.createAceItem();
         //aceitem.setAceItemId(ParamUtil.getLong(request, "aceItemId"));
         aceitem.setCompanyId(project.getCompanyId());
         aceitem.setGroupId(project.getGroupId());
@@ -67,7 +67,7 @@ public class ProjectPortlet extends ProjectUpdateHelper {
         aceitem.setStoredAt("ace_project_id=" + project.getProjectId());
         aceitem.setStoragetype("PROJECT");
         AceItemLocalServiceUtil.addAceItem(aceitem);
-    	return aceitem;
+        return aceitem;
     }
 
 

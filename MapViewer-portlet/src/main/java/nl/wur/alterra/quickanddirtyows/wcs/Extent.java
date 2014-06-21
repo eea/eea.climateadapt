@@ -2,70 +2,70 @@ package nl.wur.alterra.quickanddirtyows.wcs;
 
 public class Extent {
 
-	private double xMin;
-	
-	private double yMin;
-	
-	private double xMax;
-	
-	private double yMax;
-	
-	private String srsCode;
+    private double xMin;
 
-	public Extent(double xMin, double yMin, double xMax, double yMax, String srsCode) {
-		super();
-		this.xMin = xMin;
-		this.yMin = yMin;
-		this.xMax = xMax;
-		this.yMax = yMax;
-		this.srsCode = srsCode;
-	}
+    private double yMin;
 
-	public double getxMin() {
-		return xMin;
-	}
+    private double xMax;
 
-	public void setxMin(double xMin) {
-		this.xMin = xMin;
-	}
+    private double yMax;
 
-	public double getyMin() {
-		return yMin;
-	}
+    private String srsCode;
 
-	public void setyMin(double yMin) {
-		this.yMin = yMin;
-	}
+    public Extent(double xMin, double yMin, double xMax, double yMax, String srsCode) {
+        super();
+        this.xMin = xMin;
+        this.yMin = yMin;
+        this.xMax = xMax;
+        this.yMax = yMax;
+        this.srsCode = srsCode;
+    }
 
-	public double getxMax() {
-		return xMax;
-	}
+    public double getxMin() {
+        return xMin;
+    }
 
-	public void setxMax(double xMax) {
-		this.xMax = xMax;
-	}
+    public void setxMin(double xMin) {
+        this.xMin = xMin;
+    }
 
-	public double getyMax() {
-		return yMax;
-	}
+    public double getyMin() {
+        return yMin;
+    }
 
-	public void setyMax(double yMax) {
-		this.yMax = yMax;
-	}
+    public void setyMin(double yMin) {
+        this.yMin = yMin;
+    }
 
-	public String getSrsCode() {
-		return srsCode;
-	}
+    public double getxMax() {
+        return xMax;
+    }
 
-	public void setSrsCode(String srsCode) {
-		this.srsCode = srsCode;
-	}
-	
-	public Double getHeight() {
-		return this.yMax - this.yMin;
-	}
-	
-	public Double getWidth() {
-		return this.xMax - this.xMin;
-	}
+    public void setxMax(double xMax) {
+        this.xMax = xMax;
+    }
+
+    public double getyMax() {
+        return yMax;
+    }
+
+    public void setyMax(double yMax) {
+        this.yMax = yMax;
+    }
+
+    public String getSrsCode() {
+        return srsCode;
+    }
+
+    public void setSrsCode(String srsCode) {
+        this.srsCode = srsCode;
+    }
+
+    public Double getHeight() {
+        return this.yMax - this.yMin;
+    }
+
+    public Double getWidth() {
+        return this.xMax - this.xMin;
+    }
 }

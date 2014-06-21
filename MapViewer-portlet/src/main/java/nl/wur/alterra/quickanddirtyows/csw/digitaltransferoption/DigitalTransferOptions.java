@@ -4,6 +4,6 @@ import java.util.ArrayList;
 
 public class DigitalTransferOptions extends ArrayList<DigitalTransferOption> {
 
-	private static final long serialVersionUID = 1599074598785290747L;
+    private static final long serialVersionUID = 1599074598785290747L;
 
 }

@@ -28,6 +28,6 @@ import nl.wur.alterra.cgi.ace.model.Measure;
  * </p>
  */
 public class MeasureImpl extends MeasureBaseImpl {
-	public MeasureImpl() {
-	}
+    public MeasureImpl() {
+    }
 }

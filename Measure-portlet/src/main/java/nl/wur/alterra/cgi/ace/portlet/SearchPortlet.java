@@ -20,10 +20,10 @@ import com.liferay.util.bridges.mvc.MVCPortlet;
  * Portlet implementation class NewsPortlet
  */
 public class SearchPortlet extends MVCPortlet {
- 
-	@Override
-	public void doView(RenderRequest renderRequest, RenderResponse renderResponse) throws IOException, PortletException {
-		
-		super.doView(renderRequest, renderResponse);
-	}
+
+    @Override
+    public void doView(RenderRequest renderRequest, RenderResponse renderResponse) throws IOException, PortletException {
+
+        super.doView(renderRequest, renderResponse);
+    }
 }

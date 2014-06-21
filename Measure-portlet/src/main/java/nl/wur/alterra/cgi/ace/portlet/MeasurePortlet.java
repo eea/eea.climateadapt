@@ -57,14 +57,14 @@ public class MeasurePortlet extends MeasureUpdateHelper {
      *
      */
     private AceItem createAceItemInsideDB (Measure measure) throws Exception {
-    	AceItem aceitem = AceItemLocalServiceUtil.createAceItem();
+        AceItem aceitem = AceItemLocalServiceUtil.createAceItem();
         //aceitem.setAceItemId(ParamUtil.getLong(request, "aceItemId"));
         aceitem.setCompanyId(measure.getCompanyId());
         aceitem.setGroupId(measure.getGroupId());
         aceitem.setStoredAt("ace_measure_id=" + measure.getMeasureId());
         aceitem.setStoragetype("MEASURE");
         AceItemLocalServiceUtil.addAceItem(aceitem);
-    	return aceitem;
+        return aceitem;
     }
 
     /**

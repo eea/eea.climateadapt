@@ -11,26 +11,26 @@ import com.liferay.util.bridges.mvc.MVCPortlet;
  * Portlet implementation class IFramePortlet
  */
 public class IFramePortlet extends MVCPortlet {
- 
 
-	 
-	/**
-	 * Sets the preferences for iframe-tag inline and url 
-	 *
-	 */
-	public void setIFramePref(ActionRequest request, ActionResponse response)
-		throws Exception {
 
-		String url = ParamUtil.getString(request, "url");
-		
-		String inline = ParamUtil.getString(request, "inline");
 
-		PortletPreferences prefs = request.getPreferences();
+    /**
+     * Sets the preferences for iframe-tag inline and url
+     *
+     */
+    public void setIFramePref(ActionRequest request, ActionResponse response)
+        throws Exception {
 
-		prefs.setValue("url", url);
+        String url = ParamUtil.getString(request, "url");
 
-		prefs.setValue("inline-attributes", inline);
+        String inline = ParamUtil.getString(request, "inline");
 
-		prefs.store();
-	}
+        PortletPreferences prefs = request.getPreferences();
+
+        prefs.setValue("url", url);
+
+        prefs.setValue("inline-attributes", inline);
+
+        prefs.store();
+    }
 }

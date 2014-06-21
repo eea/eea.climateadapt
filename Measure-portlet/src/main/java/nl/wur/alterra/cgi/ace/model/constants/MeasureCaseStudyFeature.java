@@ -1,8 +1,8 @@
 package nl.wur.alterra.cgi.ace.model.constants;
 
 public enum MeasureCaseStudyFeature {
-	
-	 /**
+
+     /**
      * Case Study on Home
      */
      CASEHOME,
@@ -10,5 +10,5 @@ public enum MeasureCaseStudyFeature {
      * Case Study on Search
      */
     CASESEARCH,
-   
+
 }

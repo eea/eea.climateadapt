@@ -18,72 +18,68 @@ public class ProjectUtil {
      * @param orderByType
      * @return
      */
-	public static OrderByComparator getProjectOrderByComparator(String orderByCol, String orderByType) {
+    public static OrderByComparator getProjectOrderByComparator(String orderByCol, String orderByType) {
 
-		boolean orderByAsc = false;
+        boolean orderByAsc = false;
 
-		if (orderByType.equals("asc")) {
-			orderByAsc = true;
-		}
+        if (orderByType.equals("asc")) {
+            orderByAsc = true;
+        }
 
-		OrderByComparator orderByComparator = null;
+        OrderByComparator orderByComparator = null;
 
-		if (orderByCol.equalsIgnoreCase("projectId")) {
+        if (orderByCol.equalsIgnoreCase("projectId")) {
 
-			orderByComparator = new ProjectIdComparator(orderByAsc);
-		}
-	    else if (orderByCol.equalsIgnoreCase("acronym")) {
-			// depends on project.getAcronym()
-			orderByComparator = new ProjectAcronymComparator(orderByAsc);
-		}
-	    else if (orderByCol.equalsIgnoreCase("source")) {
-			// depends on project.getSource()
-			orderByComparator = new ProjectSourceComparator(orderByAsc);
-		}
-	    else if (orderByCol.equalsIgnoreCase("controlstatus")) {
-			// depends on measure.getControlstatus()
-			orderByComparator = new ProjectControlstatusComparator(orderByAsc);
-		}
+            orderByComparator = new ProjectIdComparator(orderByAsc);
+        } else if (orderByCol.equalsIgnoreCase("acronym")) {
+            // depends on project.getAcronym()
+            orderByComparator = new ProjectAcronymComparator(orderByAsc);
+        } else if (orderByCol.equalsIgnoreCase("source")) {
+            // depends on project.getSource()
+            orderByComparator = new ProjectSourceComparator(orderByAsc);
+        } else if (orderByCol.equalsIgnoreCase("controlstatus")) {
+            // depends on measure.getControlstatus()
+            orderByComparator = new ProjectControlstatusComparator(orderByAsc);
+        }
 
-		return orderByComparator;
-	}
-
-	/**
-	 *
-	 * @param spatialLayer
-	 * @param transRegionUrl
-	 * @return
-	 */
-	public static boolean spatialLayerMatchesTransRegionUrl(String spatialLayer, String transRegionUrl){
-
-	    if (StringUtils.isBlank(transRegionUrl) || StringUtils.isBlank(spatialLayer)){
-	        return false;
-	    }
-
-	    transRegionUrl = StringUtils.substringBefore(transRegionUrl, "?");
-	    String urlTrailer = StringUtils.substringAfterLast(transRegionUrl, "/");
-	    String region = urlTrailer.replace('-', ' ').replace('_', ' ').toLowerCase();
-	    region = StringUtils.deleteWhitespace(region);
-
-	    spatialLayer = spatialLayer.replace('-', ' ').replace('_', ' ').toLowerCase();
-	    spatialLayer = StringUtils.deleteWhitespace(spatialLayer);
-
-	    return spatialLayer.contains(region);
+        return orderByComparator;
     }
 
-	/**
-	 *
-	 * @param str
-	 * @param length
-	 * @return
-	 */
-	public static String truncateWithDots(String str, int length){
+    /**
+     *
+     * @param spatialLayer
+     * @param transRegionUrl
+     * @return
+     */
+    public static boolean spatialLayerMatchesTransRegionUrl(String spatialLayer, String transRegionUrl){
 
-	    if (str != null && str.length() > length){
-	        return str.substring(0, length) + DOTS;
-	    }
-	    else{
-	        return str;
-	    }
-	}
+        if (StringUtils.isBlank(transRegionUrl) || StringUtils.isBlank(spatialLayer)){
+            return false;
+        }
+
+        transRegionUrl = StringUtils.substringBefore(transRegionUrl, "?");
+        String urlTrailer = StringUtils.substringAfterLast(transRegionUrl, "/");
+        String region = urlTrailer.replace('-', ' ').replace('_', ' ').toLowerCase();
+        region = StringUtils.deleteWhitespace(region);
+
+        spatialLayer = spatialLayer.replace('-', ' ').replace('_', ' ').toLowerCase();
+        spatialLayer = StringUtils.deleteWhitespace(spatialLayer);
+
+        return spatialLayer.contains(region);
+    }
+
+    /**
+     *
+     * @param str
+     * @param length
+     * @return
+     */
+    public static String truncateWithDots(String str, int length){
+
+        if (str != null && str.length() > length){
+            return str.substring(0, length) + DOTS;
+        } else {
+            return str;
+        }
+    }
 }

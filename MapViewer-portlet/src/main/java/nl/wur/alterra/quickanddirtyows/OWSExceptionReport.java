@@ -7,23 +7,23 @@ package nl.wur.alterra.quickanddirtyows;
  */
 public class OWSExceptionReport {
 
-	public String exceptioncode;
-	public String exceptiontext;
-	public String locator;
-	
-	public OWSExceptionReport(){
-		super();
-	}
-	
-	public OWSExceptionReport(String exceptioncode, String exceptiontext,
-			String locator) {
-		super();
-		this.exceptioncode = exceptioncode;
-		this.exceptiontext = exceptiontext;
-		this.locator = locator;
-	}
+    public String exceptioncode;
+    public String exceptiontext;
+    public String locator;
 
-	public void finalize() throws Throwable {
-		super.finalize();
-	}
+    public OWSExceptionReport(){
+        super();
+    }
+
+    public OWSExceptionReport(String exceptioncode, String exceptiontext,
+            String locator) {
+        super();
+        this.exceptioncode = exceptioncode;
+        this.exceptiontext = exceptiontext;
+        this.locator = locator;
+    }
+
+    public void finalize() throws Throwable {
+        super.finalize();
+    }
 }

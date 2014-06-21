@@ -8,21 +8,21 @@ package nl.wur.alterra.quickanddirtyows;
  */
 public class OWSException extends Exception {
 
-	private static final long serialVersionUID = 4990495499965324844L;
+    private static final long serialVersionUID = 4990495499965324844L;
 
-	public OWSExceptionReport owsExceptionReport;
-	
-	public OWSException(){
-		super();
-	}
+    public OWSExceptionReport owsExceptionReport;
 
-	public OWSException(OWSExceptionReport owsExceptionReport) {
-		super();
-		this.owsExceptionReport = owsExceptionReport;
-	}
+    public OWSException(){
+        super();
+    }
 
-	@Override
-	public String getMessage() {
-		return this.owsExceptionReport.exceptioncode + " - " + this.owsExceptionReport.exceptiontext;
-	}
+    public OWSException(OWSExceptionReport owsExceptionReport) {
+        super();
+        this.owsExceptionReport = owsExceptionReport;
+    }
+
+    @Override
+    public String getMessage() {
+        return this.owsExceptionReport.exceptioncode + " - " + this.owsExceptionReport.exceptiontext;
+    }
 }
