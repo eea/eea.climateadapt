@@ -7,6 +7,16 @@
 /* ---------- Base styles ---------- */
 /* ---------- LR upgrade to 6.2 changes start ---------- */
 
+h3.ui-helper-reset {
+font-size: 12px;
+line-height: 15.6px;
+text-decoration:none;
+margin-bottom:0px;
+}
+.project-description{
+   width:700px;
+}
+
 .fieldset .control-label{
     font-weight: bold;
 }
@@ -201,6 +211,10 @@ a#skip-to-content{
 p {
 	line-height: 16px;
 }
+#content .project-description a {
+	text-decoration: none;
+}
+
 
 #content a {
 	color: #02213D;
