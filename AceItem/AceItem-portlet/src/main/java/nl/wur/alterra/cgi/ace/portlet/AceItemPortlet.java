@@ -145,21 +145,21 @@ public class AceItemPortlet extends LuceneIndexUpdatePortlet {
                     if ((newapproved == ACEIndexUtil.Status_APPROVED) && aceitem.getReplacesId() != 0) {
                         // delete the old aceitem which gets replaced
                         AceItem oldaceitem = AceItemLocalServiceUtil.getAceItem(aceitem.getReplacesId());
-                        if (oldaceitem != null){
+                        if (oldaceitem != null) {
                             new ACEIndexSynchronizer().delete(oldaceitem);
                         }
                         AceItemLocalServiceUtil.deleteAceItem(aceitem.getReplacesId());
                         aceitem.setReplacesId((long) 0);
                     }
 
-                    if (oldapproved == ACEIndexUtil.Status_SUBMITTED && newapproved == ACEIndexUtil.Status_APPROVED){
+                    if (oldapproved == ACEIndexUtil.Status_SUBMITTED && newapproved == ACEIndexUtil.Status_APPROVED) {
                         aceitem.setApprovaldate( new Date() );
                     }
 
                     AceItemLocalServiceUtil.updateAceItem(aceitem);
                 }
 
-                if (oldapproved == ACEIndexUtil.Status_SUBMITTED && newapproved == ACEIndexUtil.Status_APPROVED){
+                if (oldapproved == ACEIndexUtil.Status_SUBMITTED && newapproved == ACEIndexUtil.Status_APPROVED) {
                     sendApprovalNotification(aceitem);
                 }
 
@@ -253,7 +253,7 @@ public class AceItemPortlet extends LuceneIndexUpdatePortlet {
 
                 // Reset the already approved ace-item from the item that should be replaced.
                 aceitem = AceItemLocalServiceUtil.getAceItem(aceitem.getReplacesId());
-                if (aceitem != null){
+                if (aceitem != null) {
                     aceitem.setReplacesId((long) 0);
                     AceItemLocalServiceUtil.updateAceItem(aceitem);
                 }
@@ -279,7 +279,7 @@ public class AceItemPortlet extends LuceneIndexUpdatePortlet {
                 String paramName = paramNames.nextElement();
                 if (paramName.startsWith(SUBMITTED_ACE_ITEM_ID_PREFIX) && ! paramName.contains(  "Checkbox" )) {
                     String paramValue = actionRequest.getParameter(paramName);
-                    if (StringUtils.equals(paramValue, String.valueOf(true)) || StringUtils.equals(paramValue, "on")){
+                    if (StringUtils.equals(paramValue, String.valueOf(true)) || StringUtils.equals(paramValue, "on")) {
                         itemIds.add(Long.valueOf(paramName.substring(SUBMITTED_ACE_ITEM_ID_PREFIX.length())));
                     }
                 }

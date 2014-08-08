@@ -24,83 +24,81 @@ import com.liferay.util.bridges.mvc.MVCPortlet;
  * Portlet implementation class AceItemDetailPortlet
  */
 public class AceItemDetailPortlet extends MVCPortlet {
- 
+
 
     public void doView(
             RenderRequest renderRequest, RenderResponse renderResponse)
         throws IOException, PortletException {
-    	
-    	HttpServletRequest httpRequest = 
-    		PortalUtil.getOriginalServletRequest(
-    		PortalUtil.getHttpServletRequest(renderRequest) ) ;
-        	
-    		renderRequest.setAttribute(Constants.ACEITEMID, httpRequest.getParameter(Constants.ACEITEMID));
-    		
+
+        HttpServletRequest httpRequest =
+            PortalUtil.getOriginalServletRequest(
+            PortalUtil.getHttpServletRequest(renderRequest) ) ;
+
+            renderRequest.setAttribute(Constants.ACEITEMID, httpRequest.getParameter(Constants.ACEITEMID));
+
         super.doView( renderRequest, renderResponse);
-    }    
+    }
 
-	/**
-	 * Increases rating for aceitem.
-	 *
-	 */
-	public void rateUpAceItem(ActionRequest request, ActionResponse response)
-		throws Exception {
+    /**
+     * Increases rating for aceitem.
+     *
+     */
+    public void rateUpAceItem(ActionRequest request, ActionResponse response)
+        throws Exception {
 
-		long aceitemId = ParamUtil.getLong(request, "aceitemId");
+        long aceitemId = ParamUtil.getLong(request, "aceitemId");
 
-		ArrayList<String> errors = new ArrayList<String>();
+        ArrayList<String> errors = new ArrayList<String>();
 
-		if (Validator.isNotNull(aceitemId)) {
-			AceItem aceitem = AceItemLocalServiceUtil.getAceItem(aceitemId);
-			
-			aceitem.setRating( aceitem.getRating() + 1 );
-			
-			AceItemLocalServiceUtil.updateAceItem(aceitem); 
-			
-			request.getPortletSession().setAttribute("lastRatedAceItemId", "" + aceitemId);
-			
-			sendRedirect(request, response);
-		}
-		else {
-			SessionErrors.add(request, "error-rating");
-		}
-	}  
+        if (Validator.isNotNull(aceitemId)) {
+            AceItem aceitem = AceItemLocalServiceUtil.getAceItem(aceitemId);
 
-	/**
-	 * Decreases rating for aceitem.
-	 *
-	 */
-	public void rateDownAceItem(ActionRequest request, ActionResponse response)
-		throws Exception {
+            aceitem.setRating( aceitem.getRating() + 1 );
 
-		long aceitemId = ParamUtil.getLong(request, "aceitemId");
+            AceItemLocalServiceUtil.updateAceItem(aceitem);
 
-		ArrayList<String> errors = new ArrayList<String>();
+            request.getPortletSession().setAttribute("lastRatedAceItemId", "" + aceitemId);
 
-		if (Validator.isNotNull(aceitemId)) {
-			AceItem aceitem = AceItemLocalServiceUtil.getAceItem(aceitemId);
-			
-			aceitem.setRating( aceitem.getRating() - 1 );
-			
-			AceItemLocalServiceUtil.updateAceItem(aceitem); 
-			
-			request.getPortletSession().setAttribute("lastRatedAceItemId", "" + aceitemId);
-			
-			sendRedirect(request, response);
-		}
-		else {
-			SessionErrors.add(request, "error-rating");
-		}
-	}
-	
-	// override
-	protected void addSuccessMessage(
+            sendRedirect(request, response);
+        } else {
+            SessionErrors.add(request, "error-rating");
+        }
+    }
+
+    /**
+     * Decreases rating for aceitem.
+     *
+     */
+    public void rateDownAceItem(ActionRequest request, ActionResponse response)
+        throws Exception {
+
+        long aceitemId = ParamUtil.getLong(request, "aceitemId");
+
+        ArrayList<String> errors = new ArrayList<String>();
+
+        if (Validator.isNotNull(aceitemId)) {
+            AceItem aceitem = AceItemLocalServiceUtil.getAceItem(aceitemId);
+
+            aceitem.setRating( aceitem.getRating() - 1 );
+
+            AceItemLocalServiceUtil.updateAceItem(aceitem);
+
+            request.getPortletSession().setAttribute("lastRatedAceItemId", "" + aceitemId);
+
+            sendRedirect(request, response);
+        } else {
+            SessionErrors.add(request, "error-rating");
+        }
+    }
+
+    // override
+    protected void addSuccessMessage(
         ActionRequest actionRequest, ActionResponse actionResponse) {
-        
-		//if (false) { // it is possible to omit Messages at all.
+
+        //if (false) { // it is possible to omit Messages at all.
         //    return;
         //}
-		
+
         SessionMessages.add(actionRequest, "request_processed", "Thank you for your feedback");
     }
 }

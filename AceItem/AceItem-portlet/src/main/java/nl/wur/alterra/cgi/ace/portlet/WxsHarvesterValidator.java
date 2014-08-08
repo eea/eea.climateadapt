@@ -9,23 +9,23 @@ import java.util.List;
  * @author heikki doeleman
  */
 public class WxsHarvesterValidator {
-	/**
-	 * Verifies wxsHarvester.
-	 * 
-	 * @param wxsHarvester to be validated
-	 * @param errors to populate with any errors
-	 */
-	public static boolean validateWxsHarvester(WxsHarvester wxsHarvester, List errors) {
-		boolean valid = true;
-		if (Validator.isNull(wxsHarvester.getName())) {
-			errors.add("aceharvestername-required");
-			valid = false;
-		}
-		if (Validator.isNull(wxsHarvester.getUrl())) {
-			errors.add("aceharvesterurl-required");
-			valid = false;
-		}
-		return valid;
-	}
+    /**
+     * Verifies wxsHarvester.
+     *
+     * @param wxsHarvester to be validated
+     * @param errors to populate with any errors
+     */
+    public static boolean validateWxsHarvester(WxsHarvester wxsHarvester, List errors) {
+        boolean valid = true;
+        if (Validator.isNull(wxsHarvester.getName())) {
+            errors.add("aceharvestername-required");
+            valid = false;
+        }
+        if (Validator.isNull(wxsHarvester.getUrl())) {
+            errors.add("aceharvesterurl-required");
+            valid = false;
+        }
+        return valid;
+    }
 
 }

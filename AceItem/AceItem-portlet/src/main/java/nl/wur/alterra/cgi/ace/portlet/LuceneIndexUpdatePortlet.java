@@ -47,7 +47,7 @@ public abstract class LuceneIndexUpdatePortlet extends MVCPortlet {
     private ACEIndexSynchronizer aceIndexSynchronizer = new ACEIndexSynchronizer();
 
 
-    public void setAceIndexSynchronizer( ACEIndexSynchronizer synchronizer ){
+    public void setAceIndexSynchronizer( ACEIndexSynchronizer synchronizer ) {
         this.aceIndexSynchronizer = synchronizer;
     }
     /**
@@ -214,8 +214,8 @@ public abstract class LuceneIndexUpdatePortlet extends MVCPortlet {
             }
         }
         aceitem.setClimateimpacts_(choosenclimateimpacts);
-        
-        
+
+
         String choosenscenarios = "";
         for (AceItemScenario aceitemscenario : AceItemScenario.values()) {
 
@@ -227,7 +227,7 @@ public abstract class LuceneIndexUpdatePortlet extends MVCPortlet {
             }
         }
         aceitem.setScenario(choosenscenarios);
-        
+
         String choosenTimePeriods = "";
         for (AceItemTimePeriod aceitemTimePeriod : AceItemTimePeriod.values()) {
 
@@ -239,8 +239,8 @@ public abstract class LuceneIndexUpdatePortlet extends MVCPortlet {
             }
         }
         aceitem.setTimeperiod(choosenTimePeriods);
-        
-        
+
+
 
         aceitem.setTextSearch(aceitem.getSpecialtagging() + " " + aceitem.getName() + " " + aceitem.getDescription() + " "
                 + aceitem.getKeyword() + " " + aceitem.getSource() + " " + aceitem.getSpatialLayer() + " "
@@ -274,7 +274,7 @@ public abstract class LuceneIndexUpdatePortlet extends MVCPortlet {
             aceitem.setTextSearch(aceitem.getTextSearch() + ' '
                     + coalesce(choosenclimateimpacts.substring(0, choosenclimateimpacts.indexOf(";"))));
         }
-*/        
+*/
         /*
          * int dateMonth = ParamUtil.getInteger(request, "startDateMonth"); int
          * dateDay = ParamUtil.getInteger(request, "startDateDay"); int dateYear
@@ -314,13 +314,12 @@ public abstract class LuceneIndexUpdatePortlet extends MVCPortlet {
         }
 
         aceitem.setCreationdate(new Date());
-        
+
         String choosenGeoChars = ParamUtil.getString(request, "rad_geo_chars");
         aceitem.setGeochars(choosenGeoChars);
-        
-        if (Validator.isNotNull(ParamUtil.getString(request, "feature")))
-        {
-        	aceitem.setFeature(ParamUtil.getString(request, "feature"));
+
+        if (Validator.isNotNull(ParamUtil.getString(request, "feature"))) {
+            aceitem.setFeature(ParamUtil.getString(request, "feature"));
         }
 
         return aceitem;

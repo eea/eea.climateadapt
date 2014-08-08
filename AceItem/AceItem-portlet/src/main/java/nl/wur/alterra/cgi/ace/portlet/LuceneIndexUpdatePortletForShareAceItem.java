@@ -58,15 +58,15 @@ public abstract class LuceneIndexUpdatePortletForShareAceItem extends MVCPortlet
     private String username = "";
     private String useremail = "";
     public static char[] INVALID_CHARACTERS = new char[] {
-		'&', CharPool.APOSTROPHE, '@',
-		'\\', ']', '}',
-		':', ',', '=', '>',
-		'/', '<', '\n',
-		'[', '{', '%',
-		'|', '+', '#', '?',
-		'\"', '\r', ';',
-		'*', '~'
-	};
+        '&', CharPool.APOSTROPHE, '@',
+        '\\', ']', '}',
+        ':', ',', '=', '>',
+        '/', '<', '\n',
+        '[', '{', '%',
+        '|', '+', '#', '?',
+        '\"', '\r', ';',
+        '*', '~'
+    };
 
     private User requestUser;
 
@@ -116,15 +116,12 @@ public abstract class LuceneIndexUpdatePortletForShareAceItem extends MVCPortlet
      */
     protected AceItem aceitemFromRequest(PortletRequest request, AceItem aceitem, UploadPortletRequest ureq, List errors) throws Exception {
         ThemeDisplay themeDisplay = (ThemeDisplay) request.getAttribute(WebKeys.THEME_DISPLAY);
-        
+
         UploadPortletRequest uploadRequest;
-        if (ureq == null)
-        {
+        if (ureq == null) {
            uploadRequest = PortalUtil.getUploadPortletRequest(request);
-        }
-        else
-        {
-        	uploadRequest = ureq;
+        } else {
+            uploadRequest = ureq;
         }
 
         if (request.getRemoteUser() != null) {
@@ -140,22 +137,21 @@ public abstract class LuceneIndexUpdatePortletForShareAceItem extends MVCPortlet
                 aceitem.setModerator(moderator + (moderator.length() == 0 ? "" : ", ") + newModerator);
             }
         }
-        
+
         Date d = new Date();
-        
-        if (uploadRequest.getParameter("checkcreationdate") != null)
-        {
+
+        if (uploadRequest.getParameter("checkcreationdate") != null) {
             d.setTime(Long.parseLong(uploadRequest.getParameter("checkcreationdate")));
         }
         else
         {
-        	d.setTime(0);
+            d.setTime(0);
         }
         //d.setTime(ParamUtil.getLong(request, "checkcreationdate"));
         aceitem.setLockdate(d); // hack optimistic locking!!! Check with
                                     // dbrecord in MeasureValidator
 
-    
+
 
         aceitem.setCompanyId(themeDisplay.getCompanyId());
         aceitem.setGroupId(themeDisplay.getScopeGroupId());
@@ -173,16 +169,16 @@ public abstract class LuceneIndexUpdatePortletForShareAceItem extends MVCPortlet
             String websites = ParamUtil.getString(uploadRequest, "storedAt");
             // robust multiple website handling. Check for splitters space, ','
             // and ';'
-          
+
             if (websites != null) {
                 websites = websites.replace(",", " ");
                 websites = websites.replace(";", " ");
                 websites = websites.replace("<p>", "");
-    			websites = websites.replace("</p>", "");
-    			websites = websites.replaceAll("http://", "");
-    			websites = websites.replaceAll("&nbsp;", "");
-    			websites = websites.replaceAll("&nbsp", "");
-    			websites = websites.replaceAll("[\r\n]", "");
+                websites = websites.replace("</p>", "");
+                websites = websites.replaceAll("http://", "");
+                websites = websites.replaceAll("&nbsp;", "");
+                websites = websites.replaceAll("&nbsp", "");
+                websites = websites.replaceAll("[\r\n]", "");
                 String[] site = websites.split(" ");
                 if (site.length > 1) {
                     websites = "";
@@ -200,8 +196,8 @@ public abstract class LuceneIndexUpdatePortletForShareAceItem extends MVCPortlet
                 }
             }
             aceitem.setStoredAt(websites);
-            
-            
+
+
         } else {
 
             aceitem.setStoredAt(ParamUtil.getString(uploadRequest, "storedAt"));
@@ -215,7 +211,7 @@ public abstract class LuceneIndexUpdatePortletForShareAceItem extends MVCPortlet
         aceitem.setAdmincomment(ParamUtil.getString(uploadRequest, "admincomment"));
         aceitem.setYear(ParamUtil.getString(uploadRequest, "year"));
         aceitem.setAdmincomment(ParamUtil.getString(uploadRequest, "admincomment"));
-   
+
 
         String choosencountries = "";
         for (AceItemCountry aceitemcountry : AceItemCountry.values()) {
@@ -273,7 +269,7 @@ public abstract class LuceneIndexUpdatePortletForShareAceItem extends MVCPortlet
                 || aceitem.getStoragetype().equalsIgnoreCase("SETOFMAPS")) {
             aceitem.setTextSearch(aceitem.getTextSearch() + ' ' + aceitem.getStoragetype());
         }
-     
+
 /* At free text searxh don't search any longer on Advanced Search Fields
         if ((coalesce(choosensectors).length() > 0) && (choosensectors.indexOf(";") == choosensectors.lastIndexOf(";"))) { // one
                                                                                                                            // sector
@@ -298,7 +294,7 @@ public abstract class LuceneIndexUpdatePortletForShareAceItem extends MVCPortlet
             aceitem.setTextSearch(aceitem.getTextSearch() + ' '
                     + coalesce(choosenclimateimpacts.substring(0, choosenclimateimpacts.indexOf(";"))));
         }
-*/        
+*/
         /*
          * int dateMonth = ParamUtil.getInteger(request, "startDateMonth"); int
          * dateDay = ParamUtil.getInteger(request, "startDateDay"); int dateYear
@@ -336,344 +332,311 @@ public abstract class LuceneIndexUpdatePortletForShareAceItem extends MVCPortlet
         } else {
             aceitem.setControlstatus(Short.parseShort(approved));
             // set the approved date here
-            if (aceitem.getControlstatus() == 1)
-            {
-            	 Date approvalDate = new Date();
-            	 aceitem.setApprovaldate(approvalDate);
+            if (aceitem.getControlstatus() == 1) {
+                 Date approvalDate = new Date();
+                 aceitem.setApprovaldate(approvalDate);
             }
         }
-        
+
         if (Validator.isNull(aceitem.getCreationdate()))
         {
-        	// creation date is the time when case study is first saved
-        	aceitem.setCreationdate(new Date());
+            // creation date is the time when case study is first saved
+            aceitem.setCreationdate(new Date());
         }
 
         //aceitem.setCreationdate(new Date());
-        
+
         String choosenGeoChars = ParamUtil.getString(uploadRequest, "rad_geo_chars");
         aceitem.setGeochars(choosenGeoChars);
-        
+
         if (Validator.isNotNull(ParamUtil.getString(request, "feature")))
         {
-        	aceitem.setFeature(ParamUtil.getString(uploadRequest, "feature"));
+            aceitem.setFeature(ParamUtil.getString(uploadRequest, "feature"));
         }
-        
-        
-        
+
+
+
         /* MULTIPLE DOC UPLOAD STARTS
-	     * 
-	     */
-	    
+         *
+         */
+
         // get how many documents are uploaded
-	    
-	    int docCounter =  0;
-	    if (Validator.isNotNull(uploadRequest.getParameter("doccounter")))
-	    {
-	    	docCounter = Integer.parseInt(uploadRequest.getParameter("doccounter"));
-	    }
-	    		
-	    boolean isDocsValid = true;
-	    
-	    //System.out.println("doc counter is " + docCounter);
-	    
-	    String supdocsStored = null;
-	    String[] supDocIdsStored = null;
-	    List<String> supDocListStored = null;
-	    ServiceContext serviceContext = ServiceContextFactory.getInstance(DLFileEntry.class.getName(), request);
-	    
-	    if (docCounter > 0)
-	    {
 
-		  
-		    if (Validator.isNotNull(uploadRequest.getParameter("supdocs")))
-	    	{
-		    	//System.out.println("supdocs is " + uploadRequest.getParameter("supdocs"));
-	    		// split it
-	    		supdocsStored = uploadRequest.getParameter("supdocs");
-	    		supDocIdsStored = supdocsStored.split(";");
-	    		supDocListStored = new LinkedList<String>();
-	    		
-	    		//populate the list with already loaded document names
-	    		for (String docId : supDocIdsStored)
-	    		{
-	    			DLFileEntry file = DLFileEntryLocalServiceUtil.getDLFileEntry(Long.parseLong(docId));
-					String supFileName = file.getTitle();
-					supDocListStored.add(supFileName.toLowerCase());
-	    		}
-	    	}
-	    }
-	   
-	    //validate
-	    for(int counter=1; counter <= docCounter; counter++)
-	    {
-	    	String sup_doc_name = uploadRequest.getParameter("sup_docs_names" + counter);
-	    	String sup_doc_description = uploadRequest.getParameter("sup_docs_description" + counter);
-	    	String sup_doc_fileName = uploadRequest.getFileName("supdocfiles" + counter);
-	    	
-	    	//System.out.println("name is " + sup_doc_name);
-	    	//System.out.println("description is " + sup_doc_description);
-	    	//System.out.println("filename is " + sup_doc_fileName);
-	    	
-	    	
-	    	if (Validator.isNull(sup_doc_name) || Validator.isNull(sup_doc_description) || Validator.isNull(sup_doc_fileName))
-	    	{
-	    		
-	    		// before we declare invalid check it is just the document file missing and it was alreay uploaded
-	    		if (Validator.isNotNull(sup_doc_fileName))
-	    		{
-	    			//System.out.println("document field missing");
-	    		    isDocsValid = false;
-	    		    // add error message
-	    		    errors.add("invalid-multiple-doc-upload");
-	    		    SessionErrors.add(request, "invalid-multiple-doc-upload");
-	    		    break;
-	    		}
-	    		else
-	    		{
-	    			if (Validator.isNotNull(uploadRequest.getParameter("supdocs")))
-	    			{
-	    				if (Validator.isNotNull(sup_doc_name) && Validator.isNotNull(sup_doc_description) && Validator.isNull(sup_doc_fileName) && supDocListStored.contains(sup_doc_name.toLowerCase()))
-		    			{
-	    				
-	    					//System.out.println("document is already there so just skip");
-	    					continue;
-	    				}
-	    			}
-	    			else
-	    			{
-	    				isDocsValid = false;
-	    				
-	    				if (counter > 1 || Validator.isNotNull(sup_doc_name) || Validator.isNotNull(sup_doc_description))
-	    				{
-	    				    // add error message
-	    	    		    errors.add("invalid-multiple-doc-upload");
-	    	    		    SessionErrors.add(request, "invalid-multiple-doc-upload");
-	    				}
-	    				break;
-	    			}
-	    		}
-	    	}
-	    	
-	    	// check if the file name is pdf,doc,docx,xls
-	    	if ( isDocsValid && !(sup_doc_fileName.endsWith(".pdf") || sup_doc_fileName.endsWith(".doc") || sup_doc_fileName.endsWith(".docx") ||
-	    			sup_doc_fileName.endsWith(".xls")))
-	    	{
-	    		isDocsValid = false;	
-	    		errors.add("invalid-multiple-doc-upload");
-	    		 SessionErrors.add(request, "invalid-multiple-doc-upload");
-	    		break;
-	    	}
-	    }
-	    
-	    if (isDocsValid && docCounter > 0)
-	    {
-	    	// now we have two options. if docphotos is not null then populate it in a data structure
-	    	// iterate through the input fields and check the names already uploaded using docphotos
-	    	// if names already uploaded then skip the document upload
-	    	
-	    	// get the root folder and form the folder for inserting documents
-	    	DLFolder rootFolder = null;
-	    	try {
-	    	      rootFolder = DLFolderLocalServiceUtil.getFolder(themeDisplay.getScopeGroupId(), 0, "aceitem");
-	    	}
-	    	catch(Exception e)
-	    	{
-	    		e.printStackTrace();
-	    		throw e;
-	    	}
-	    	    	
-	    	// create case name folder
-	    	String folder = null;
-	    	if (Validator.isNull(aceitem.getName()))
-	    	{
-	    		folder = "aceitem".concat("-").concat("temp");
-	    	}
-	    	else
-	    	{
-	    	   folder = "aceitem".concat("-").concat(String.valueOf(aceitem.getName().trim().replace(' ', '-')));
-	    	}
-	    	folder = escapeName(folder);
-	    	
-	    	//System.out.println("folder name is " + folder);
-	    	
-	    	// try to see the folder exists otherwise add the folder to the root folder
-	    	DLFolder docFolder = null;
-	    	
-	    	try {
-	    	    docFolder = DLFolderLocalServiceUtil.getFolder(themeDisplay.getScopeGroupId(), rootFolder.getFolderId(), folder);
-	    	}
-	    	catch(com.liferay.portlet.documentlibrary.NoSuchFolderException e)
-	    	{
-	    		//System.out.println("document folder is null");
-	    		try {
-	    		docFolder = DLFolderLocalServiceUtil.addFolder(themeDisplay.getUserId(), themeDisplay.getScopeGroupId(),themeDisplay.getScopeGroupId(),false, rootFolder.getFolderId(), folder, "", false, serviceContext);
-	    		String primaryKey = String.valueOf(docFolder.getPrimaryKey());
-	    		addPermissions(themeDisplay, primaryKey, "com.liferay.portlet.documentlibrary.model.DLFolder");
-	    		}
-	    		catch(Exception ex)
-	    		{
-	    			throw ex;
-	    		}
-	    		
-	    	}
-	    	catch(Exception e)
-	    	{
-	    		e.printStackTrace();
-	    		throw e;
-	    	}
-	    	
-	    	// we are ready to do the upload
-	    	StringBuffer uploadedFiles = new StringBuffer("");
-	    	
-	    	if (Validator.isNotNull(uploadRequest.getParameter("supdocs")))
-	    	{
-	    		
-	    		// iterate through each document and do the upload if the document already not uploaded
-	    		for(int counter=1; counter <= docCounter; counter++)
-	    		{
-	    		    	String sup_doc_name = uploadRequest.getParameter("sup_docs_names" + counter);
-	    		    	String sup_doc_description = uploadRequest.getParameter("sup_docs_description" + counter);
-	    		    	String sup_doc_fileName = uploadRequest.getFileName("supdocfiles" + counter);
-	    		    	
-	    		    	//check if the file has been already uploaded in the previous save
-	    		    	
-	    		    	//System.out.println("supDocList stored is " + supDocListStored);
-	    		    	//System.out.println("sup_doc_name is " + sup_doc_name.toLowerCase());
-	    		    	
-	    		    	if (supDocListStored.contains(sup_doc_name.toLowerCase()))
-	    		    	{
-	    		    		// get the index of the photo from the list
-	    		    		int index = supDocListStored.indexOf(sup_doc_name.toLowerCase());
-	    		    		
-	    		    		//System.out.println("index is " + index);
-	    		    		if (uploadedFiles.toString().equalsIgnoreCase(""))
-	    		    		{
-	    		    			uploadedFiles.append(supDocIdsStored[index]);
-	    		    		}
-	    		    		else
-	    		    		{
-	    		    			uploadedFiles.append(";").append(supDocIdsStored[index]);
-	    		    		}
-	    		    	}
-	    		    	else
-	    		    	{
-	    		    		
-	    		    		// upload the file 
-	    		    		FileEntry doc = insertFile(uploadRequest, counter, docFolder, sup_doc_name, sup_doc_description, themeDisplay, serviceContext);
-	    		    		//IGImage image = insertImage(uploadRequest, counter, imageFolder, sup_photo_name, sup_photo_description, themeDisplay, serviceContext);
-	    		    		
-	   	    		        if (uploadedFiles.toString().equalsIgnoreCase(""))
-	   	    		        {
-	   	    		    	     uploadedFiles.append(doc.getFileEntryId());
-	   	    		    	}
-	   	    		        else
-	   	    		        {
-	   	    		    	     uploadedFiles.append(";").append(doc.getFileEntryId());
-	   	    		        }
-	    		    		  
-	    		       }
-	    		   }
-	    	}
-	    	else
-	    	{
-	    		// first time we are uploading
-	    		for(int counter=1; counter <= docCounter; counter++)
-	    		{
-	    		    	String sup_doc_name = uploadRequest.getParameter("sup_docs_names" + counter);
-	    		    	String sup_doc_description = uploadRequest.getParameter("sup_docs_description" + counter);
-	    		    	String sup_doc_fileName = uploadRequest.getFileName("supdocfiles" + counter);
-	    		    
-	    		    	//IGImage image = insertImage(uploadRequest, counter, imageFolder, sup_photo_name, sup_photo_description, themeDisplay, serviceContext);
-	    		    	FileEntry doc = insertFile(uploadRequest, counter, docFolder, sup_doc_name, sup_doc_description, themeDisplay, serviceContext);
+        int docCounter =  0;
+        if (Validator.isNotNull(uploadRequest.getParameter("doccounter"))) {
+            docCounter = Integer.parseInt(uploadRequest.getParameter("doccounter"));
+        }
 
-	    		    	if (doc != null)
-	    		    	{
-		 	    		    if (uploadedFiles.toString().equalsIgnoreCase(""))
-		 	    		    {
-		 	    			   uploadedFiles.append(doc.getFileEntryId());
-		 	    		    }
-		 	    		    else
-		 	    		    {
-		 	    			   uploadedFiles.append(";").append(doc.getFileEntryId());
-		 	    		    }
-	    		    	}
-	    		}
-	    	}
-	    	//System.out.println("uploaded files is " + uploadedFiles.toString());
-	    	aceitem.setSupdocs(uploadedFiles.toString());
-	    }
-	    else
-	    {
-	    	// preserve the old values
-	    	if (docCounter > 0)
-	    	{
-	    	   aceitem.setSupdocs(uploadRequest.getParameter("supdocs"));
-	    	}
-	    	else
-	    	{
-	    		aceitem.setSupdocs("");
-	    	}
-	    }
-        
+        boolean isDocsValid = true;
+
+        //System.out.println("doc counter is " + docCounter);
+
+        String supdocsStored = null;
+        String[] supDocIdsStored = null;
+        List<String> supDocListStored = null;
+        ServiceContext serviceContext = ServiceContextFactory.getInstance(DLFileEntry.class.getName(), request);
+
+        if (docCounter > 0) {
+
+
+            if (Validator.isNotNull(uploadRequest.getParameter("supdocs"))) {
+                //System.out.println("supdocs is " + uploadRequest.getParameter("supdocs"));
+                // split it
+                supdocsStored = uploadRequest.getParameter("supdocs");
+                supDocIdsStored = supdocsStored.split(";");
+                supDocListStored = new LinkedList<String>();
+
+                //populate the list with already loaded document names
+                for (String docId : supDocIdsStored)
+                {
+                    DLFileEntry file = DLFileEntryLocalServiceUtil.getDLFileEntry(Long.parseLong(docId));
+                    String supFileName = file.getTitle();
+                    supDocListStored.add(supFileName.toLowerCase());
+                }
+            }
+        }
+
+        //validate
+        for(int counter=1; counter <= docCounter; counter++)
+        {
+            String sup_doc_name = uploadRequest.getParameter("sup_docs_names" + counter);
+            String sup_doc_description = uploadRequest.getParameter("sup_docs_description" + counter);
+            String sup_doc_fileName = uploadRequest.getFileName("supdocfiles" + counter);
+
+            //System.out.println("name is " + sup_doc_name);
+            //System.out.println("description is " + sup_doc_description);
+            //System.out.println("filename is " + sup_doc_fileName);
+
+
+            if (Validator.isNull(sup_doc_name) || Validator.isNull(sup_doc_description) || Validator.isNull(sup_doc_fileName))
+            {
+
+                // before we declare invalid check it is just the document file missing and it was alreay uploaded
+                if (Validator.isNotNull(sup_doc_fileName)) {
+                    //System.out.println("document field missing");
+                    isDocsValid = false;
+                    // add error message
+                    errors.add("invalid-multiple-doc-upload");
+                    SessionErrors.add(request, "invalid-multiple-doc-upload");
+                    break;
+                } else {
+                    if (Validator.isNotNull(uploadRequest.getParameter("supdocs"))) {
+                        if (Validator.isNotNull(sup_doc_name) && Validator.isNotNull(sup_doc_description) && Validator.isNull(sup_doc_fileName) && supDocListStored.contains(sup_doc_name.toLowerCase())) {
+
+                            //System.out.println("document is already there so just skip");
+                            continue;
+                        }
+                    } else {
+                        isDocsValid = false;
+
+                        if (counter > 1 || Validator.isNotNull(sup_doc_name) || Validator.isNotNull(sup_doc_description)) {
+                            // add error message
+                            errors.add("invalid-multiple-doc-upload");
+                            SessionErrors.add(request, "invalid-multiple-doc-upload");
+                        }
+                        break;
+                    }
+                }
+            }
+
+            // check if the file name is pdf,doc,docx,xls
+            if ( isDocsValid && !(sup_doc_fileName.endsWith(".pdf") || sup_doc_fileName.endsWith(".doc") || sup_doc_fileName.endsWith(".docx") ||
+                    sup_doc_fileName.endsWith(".xls"))) {
+                isDocsValid = false;
+                errors.add("invalid-multiple-doc-upload");
+                 SessionErrors.add(request, "invalid-multiple-doc-upload");
+                break;
+            }
+        }
+
+        if (isDocsValid && docCounter > 0) {
+            // now we have two options. if docphotos is not null then populate it in a data structure
+            // iterate through the input fields and check the names already uploaded using docphotos
+            // if names already uploaded then skip the document upload
+
+            // get the root folder and form the folder for inserting documents
+            DLFolder rootFolder = null;
+            try {
+                  rootFolder = DLFolderLocalServiceUtil.getFolder(themeDisplay.getScopeGroupId(), 0, "aceitem");
+            } catch(Exception e) {
+                e.printStackTrace();
+                throw e;
+            }
+
+            // create case name folder
+            String folder = null;
+            if (Validator.isNull(aceitem.getName()))
+            {
+                folder = "aceitem".concat("-").concat("temp");
+            } else {
+               folder = "aceitem".concat("-").concat(String.valueOf(aceitem.getName().trim().replace(' ', '-')));
+            }
+            folder = escapeName(folder);
+
+            //System.out.println("folder name is " + folder);
+
+            // try to see the folder exists otherwise add the folder to the root folder
+            DLFolder docFolder = null;
+
+            try {
+                docFolder = DLFolderLocalServiceUtil.getFolder(themeDisplay.getScopeGroupId(), rootFolder.getFolderId(), folder);
+            } catch(com.liferay.portlet.documentlibrary.NoSuchFolderException e) {
+                //System.out.println("document folder is null");
+                try {
+                docFolder = DLFolderLocalServiceUtil.addFolder(themeDisplay.getUserId(), themeDisplay.getScopeGroupId(),themeDisplay.getScopeGroupId(),false, rootFolder.getFolderId(), folder, "", false, serviceContext);
+                String primaryKey = String.valueOf(docFolder.getPrimaryKey());
+                addPermissions(themeDisplay, primaryKey, "com.liferay.portlet.documentlibrary.model.DLFolder");
+                }
+                catch(Exception ex)
+                {
+                    throw ex;
+                }
+
+            } catch(Exception e) {
+                e.printStackTrace();
+                throw e;
+            }
+
+            // we are ready to do the upload
+            StringBuffer uploadedFiles = new StringBuffer("");
+
+            if (Validator.isNotNull(uploadRequest.getParameter("supdocs"))) {
+
+                // iterate through each document and do the upload if the document already not uploaded
+                for (int counter=1; counter <= docCounter; counter++) {
+                        String sup_doc_name = uploadRequest.getParameter("sup_docs_names" + counter);
+                        String sup_doc_description = uploadRequest.getParameter("sup_docs_description" + counter);
+                        String sup_doc_fileName = uploadRequest.getFileName("supdocfiles" + counter);
+
+                        //check if the file has been already uploaded in the previous save
+
+                        //System.out.println("supDocList stored is " + supDocListStored);
+                        //System.out.println("sup_doc_name is " + sup_doc_name.toLowerCase());
+
+                        if (supDocListStored.contains(sup_doc_name.toLowerCase())) {
+                            // get the index of the photo from the list
+                            int index = supDocListStored.indexOf(sup_doc_name.toLowerCase());
+
+                            //System.out.println("index is " + index);
+                            if (uploadedFiles.toString().equalsIgnoreCase(""))
+                            {
+                                uploadedFiles.append(supDocIdsStored[index]);
+                            }
+                            else
+                            {
+                                uploadedFiles.append(";").append(supDocIdsStored[index]);
+                            }
+                        }
+                        else
+                        {
+
+                            // upload the file
+                            FileEntry doc = insertFile(uploadRequest, counter, docFolder, sup_doc_name, sup_doc_description, themeDisplay, serviceContext);
+                            //IGImage image = insertImage(uploadRequest, counter, imageFolder, sup_photo_name, sup_photo_description, themeDisplay, serviceContext);
+
+                            if (uploadedFiles.toString().equalsIgnoreCase(""))
+                            {
+                                 uploadedFiles.append(doc.getFileEntryId());
+                            }
+                            else
+                            {
+                                 uploadedFiles.append(";").append(doc.getFileEntryId());
+                            }
+
+                       }
+                   }
+            } else {
+                // first time we are uploading
+                for(int counter=1; counter <= docCounter; counter++)
+                {
+                        String sup_doc_name = uploadRequest.getParameter("sup_docs_names" + counter);
+                        String sup_doc_description = uploadRequest.getParameter("sup_docs_description" + counter);
+                        String sup_doc_fileName = uploadRequest.getFileName("supdocfiles" + counter);
+
+                        //IGImage image = insertImage(uploadRequest, counter, imageFolder, sup_photo_name, sup_photo_description, themeDisplay, serviceContext);
+                        FileEntry doc = insertFile(uploadRequest, counter, docFolder, sup_doc_name, sup_doc_description, themeDisplay, serviceContext);
+
+                        if (doc != null)
+                        {
+                            if (uploadedFiles.toString().equalsIgnoreCase(""))
+                            {
+                               uploadedFiles.append(doc.getFileEntryId());
+                            }
+                            else
+                            {
+                               uploadedFiles.append(";").append(doc.getFileEntryId());
+                            }
+                        }
+                }
+            }
+            //System.out.println("uploaded files is " + uploadedFiles.toString());
+            aceitem.setSupdocs(uploadedFiles.toString());
+        } else {
+            // preserve the old values
+            if (docCounter > 0)
+            {
+               aceitem.setSupdocs(uploadRequest.getParameter("supdocs"));
+            } else {
+                aceitem.setSupdocs("");
+            }
+        }
+
         return aceitem;
     }
-    
 
-    private FileEntry insertFile(UploadPortletRequest uploadRequest, int counter, DLFolder docFolder, String sup_doc_name, String sup_doc_description, ThemeDisplay themeDisplay, ServiceContext serviceContext) 
+
+    private FileEntry insertFile(UploadPortletRequest uploadRequest, int counter, DLFolder docFolder, String sup_doc_name, String sup_doc_description, ThemeDisplay themeDisplay, ServiceContext serviceContext)
                                    throws Exception
     {
-    	FileEntry doc = null;
-    	
-    	// upload the image
-    			try {
-    				   File f = uploadRequest.getFile("supdocfiles" + counter);
-    				   //System.out.println("inside method insertFile");
-    				   String fileName = uploadRequest.getFileName("supdocfiles" + counter);
-    				   //System.out.println("fileName is " + fileName);
-    				   int i = fileName.lastIndexOf('.');
-    				   String extension = fileName.substring(i+1);
-    				   //System.out.println("extension is " + extension);
-    				   //image = IGImageServiceUtil.addImage(themeDisplay.getScopeGroupId(), imageFolder.getFolderId(), sup_photo_name, sup_photo_description, f, "image/"+extension, serviceContext);
+        FileEntry doc = null;
+
+        // upload the image
+                try {
+                       File f = uploadRequest.getFile("supdocfiles" + counter);
+                       //System.out.println("inside method insertFile");
+                       String fileName = uploadRequest.getFileName("supdocfiles" + counter);
+                       //System.out.println("fileName is " + fileName);
+                       int i = fileName.lastIndexOf('.');
+                       String extension = fileName.substring(i+1);
+                       //System.out.println("extension is " + extension);
+                       //image = IGImageServiceUtil.addImage(themeDisplay.getScopeGroupId(), imageFolder.getFolderId(), sup_photo_name, sup_photo_description, f, "image/"+extension, serviceContext);
                        doc = DLAppLocalServiceUtil.addFileEntry(themeDisplay.getUserId(), themeDisplay.getScopeGroupId(), docFolder.getFolderId(), "image/"+extension, f.getName(), sup_doc_name,
                               sup_doc_description, null, f, serviceContext);
                        String primaryKey = String.valueOf(doc.getPrimaryKey());
-   		    		   addPermissions(themeDisplay, primaryKey, "com.liferay.portlet.documentlibrary.model.DLFileEntry");
-    			    }
-    		    	catch(DuplicateFileException e)
-    		    	{
-    	                   //get the image id
-    		    		   //System.out.println("Duplicate file - getting file id");
-    		    		   try {
-    		    			   
-    		                   List<DLFileEntry> docs = DLFileEntryLocalServiceUtil.getFileEntries(themeDisplay.getScopeGroupId(), docFolder.getFolderId());
-    		                   for (DLFileEntry storedDoc : docs)
-    		                   {
-    		                	   if (storedDoc.getTitle().equalsIgnoreCase(sup_doc_name))
-    		                	   {
-    		                		   //System.out.println("match occurred");
-    		                		   doc = DLAppLocalServiceUtil.getFileEntry( storedDoc.getFileEntryId() );
-    		                		   break;
-    		                	   }
-    		                   }
-    		    		       //image = IGImageServiceUtil.getImageByFolderIdAndNameWithExtension(themeDisplay.getScopeGroupId(), imageFolder.getFolderId(), fileName);
-    		    		       //System.out.println("stored doc name is " + doc.getTitle());
-    		    		   }
-    		    		   catch(Exception ex)
-    		    		   {
-    		    			   throw ex;
-    		    		   }
-    		    	}
-    			    catch(Exception e)
-    			    {
-    			    	e.printStackTrace();
-    			    	throw e;
-    			    }
-    			
-    			return doc;
-    			
-    			
-    			
+                       addPermissions(themeDisplay, primaryKey, "com.liferay.portlet.documentlibrary.model.DLFileEntry");
+                    } catch(DuplicateFileException e) {
+                           //get the image id
+                           //System.out.println("Duplicate file - getting file id");
+                           try {
+
+                               List<DLFileEntry> docs = DLFileEntryLocalServiceUtil.getFileEntries(themeDisplay.getScopeGroupId(), docFolder.getFolderId());
+                               for (DLFileEntry storedDoc : docs)
+                               {
+                                   if (storedDoc.getTitle().equalsIgnoreCase(sup_doc_name))
+                                   {
+                                       //System.out.println("match occurred");
+                                       doc = DLAppLocalServiceUtil.getFileEntry( storedDoc.getFileEntryId() );
+                                       break;
+                                   }
+                               }
+                               //image = IGImageServiceUtil.getImageByFolderIdAndNameWithExtension(themeDisplay.getScopeGroupId(), imageFolder.getFolderId(), fileName);
+                               //System.out.println("stored doc name is " + doc.getTitle());
+                           }
+                           catch(Exception ex)
+                           {
+                               throw ex;
+                           }
+                    }
+                    catch(Exception e)
+                    {
+                        e.printStackTrace();
+                        throw e;
+                    }
+
+                return doc;
+
+
+
       }
 
     protected void sendSubmitNotification(AceItem aceitem) {
@@ -818,54 +781,53 @@ public abstract class LuceneIndexUpdatePortletForShareAceItem extends MVCPortlet
             e.printStackTrace();
         }
     }
-    
+
     public static String escapeName(String word) {
-  		if (word == null) {
-  			return null;
-  		}
-  		else {
-  			char[] wordCharArray = word.toCharArray();
+        if (word == null) {
+            return null;
+        } else {
+            char[] wordCharArray = word.toCharArray();
 
-  			int i = 0;
-  			for (char c : wordCharArray) {
-  				for (char invalidChar : INVALID_CHARACTERS) {
-  					//System.out.println("char is " + invalidChar);
-  					if (c == invalidChar) {
-  						wordCharArray[i] = '-';
-  					}
-  				}
-  				i++;
-  			}
-  			
-  			String retString = new String(wordCharArray);
-  			
-  			if (retString.length() >= 75)
-  			{
-  			   retString = retString.substring(0, 75);
-  			}
-  			return new String(wordCharArray);
-  		}
+            int i = 0;
+            for (char c : wordCharArray) {
+                for (char invalidChar : INVALID_CHARACTERS) {
+                    //System.out.println("char is " + invalidChar);
+                    if (c == invalidChar) {
+                        wordCharArray[i] = '-';
+                    }
+                }
+                i++;
+            }
 
-  	}
-    
+            String retString = new String(wordCharArray);
+
+            if (retString.length() >= 75)
+            {
+               retString = retString.substring(0, 75);
+            }
+            return new String(wordCharArray);
+        }
+
+    }
+
     private void addPermissions(ThemeDisplay themeDisplay, String primaryKey, String resource ) throws Exception
     {
-    	Role roleUser = RoleLocalServiceUtil.getRole(themeDisplay.getCompanyId(), RoleConstants.SITE_MEMBER);
-		long roleId = roleUser.getRoleId();
-		
-		String actionIds[] = {"VIEW"};
-		
-		// View permissions to the Community Member
-		ResourcePermissionServiceUtil.setIndividualResourcePermissions(
-				themeDisplay.getScopeGroupId(), themeDisplay.getCompanyId(),
-			resource, primaryKey, roleId, actionIds);
-		
-		// View permissions to the Guest
-		roleUser = RoleLocalServiceUtil.getRole(themeDisplay.getCompanyId(), RoleConstants.GUEST);
-		roleId = roleUser.getRoleId();
-		ResourcePermissionServiceUtil.setIndividualResourcePermissions(
-				themeDisplay.getScopeGroupId(), themeDisplay.getCompanyId(),
-			resource, primaryKey, roleId, actionIds);
+        Role roleUser = RoleLocalServiceUtil.getRole(themeDisplay.getCompanyId(), RoleConstants.SITE_MEMBER);
+        long roleId = roleUser.getRoleId();
+
+        String actionIds[] = {"VIEW"};
+
+        // View permissions to the Community Member
+        ResourcePermissionServiceUtil.setIndividualResourcePermissions(
+                themeDisplay.getScopeGroupId(), themeDisplay.getCompanyId(),
+            resource, primaryKey, roleId, actionIds);
+
+        // View permissions to the Guest
+        roleUser = RoleLocalServiceUtil.getRole(themeDisplay.getCompanyId(), RoleConstants.GUEST);
+        roleId = roleUser.getRoleId();
+        ResourcePermissionServiceUtil.setIndividualResourcePermissions(
+                themeDisplay.getScopeGroupId(), themeDisplay.getCompanyId(),
+            resource, primaryKey, roleId, actionIds);
     }
-    
+
 }
