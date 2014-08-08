@@ -28,7 +28,7 @@ import nl.wur.alterra.cgi.ace.model.AceItem;
  * </p>
  */
 public class AceItemImpl extends AceItemBaseImpl {
-	public AceItemImpl() {
-	}
+    public AceItemImpl() {
+    }
 
 }

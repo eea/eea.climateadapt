@@ -70,7 +70,7 @@ public class CSWHarvesterLocalServiceImpl extends CSWHarvesterLocalServiceBaseIm
      * @return
      * @throws com.liferay.portal.kernel.exception.SystemException
      */
-	public CSWHarvester updateCSWHarvester(CSWHarvester cswHarvester, Boolean propagateToGeoNetwork, Boolean reschedule) throws SystemException {
+    public CSWHarvester updateCSWHarvester(CSWHarvester cswHarvester, Boolean propagateToGeoNetwork, Boolean reschedule) throws SystemException {
         //System.out.println("updating harvester");
         //
         // update harvester in geonetwork
@@ -120,7 +120,7 @@ public class CSWHarvesterLocalServiceImpl extends CSWHarvesterLocalServiceBaseIm
      * @throws SystemException
      */
     @Override
-	public nl.wur.alterra.cgi.ace.model.CSWHarvester deleteCSWHarvester(CSWHarvester cswHarvester) throws SystemException {
+    public nl.wur.alterra.cgi.ace.model.CSWHarvester deleteCSWHarvester(CSWHarvester cswHarvester) throws SystemException {
         //
         // delete harvester in geonetwork
         //

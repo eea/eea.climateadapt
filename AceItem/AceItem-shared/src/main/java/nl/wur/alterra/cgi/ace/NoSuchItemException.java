@@ -21,20 +21,20 @@ import com.liferay.portal.NoSuchModelException;
  */
 public class NoSuchItemException extends NoSuchModelException {
 
-	public NoSuchItemException() {
-		super();
-	}
+    public NoSuchItemException() {
+        super();
+    }
 
-	public NoSuchItemException(String msg) {
-		super(msg);
-	}
+    public NoSuchItemException(String msg) {
+        super(msg);
+    }
 
-	public NoSuchItemException(String msg, Throwable cause) {
-		super(msg, cause);
-	}
+    public NoSuchItemException(String msg, Throwable cause) {
+        super(msg, cause);
+    }
 
-	public NoSuchItemException(Throwable cause) {
-		super(cause);
-	}
+    public NoSuchItemException(Throwable cause) {
+        super(cause);
+    }
 
 }

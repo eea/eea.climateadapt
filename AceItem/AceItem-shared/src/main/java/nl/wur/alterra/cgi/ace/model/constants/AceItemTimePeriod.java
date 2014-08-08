@@ -9,17 +9,17 @@ public enum AceItemTimePeriod {
     /**
      * Observations.
      */
-	OBSERVATIONS,
+    OBSERVATIONS,
     /**
      * Baseline period (scenario) .
      */
-	BASELINE,
+    BASELINE,
     /**
      * Near future (scenario).
      */
-	NEARFUTURE,
-	    /**
+    NEARFUTURE,
+    /**
      * Distant future (scenario).
      */
-	DISTANTFUTURE
+    DISTANTFUTURE
 }

@@ -75,8 +75,8 @@ public class AceItemIndexer {
         long groupId = aceItem.getGroupId();
         String controlstatus$ = "" + aceItem.getControlstatus();
         // TODO this is how BookmarkIndexer does it. Why do this like this ?
-		// long groupId = getParentGroupId(entry.getGroupId());
-		// long scopeGroupId = entry.getGroupId();
+        // long groupId = getParentGroupId(entry.getGroupId());
+        // long scopeGroupId = entry.getGroupId();
         String keyword = aceItem.getKeyword();
         String name = aceItem.getName();
         String rating$ = "" + aceItem.getRating();
@@ -85,10 +85,10 @@ public class AceItemIndexer {
             rating = 0l;
         }
         else {
-        	rating = Long.parseLong(rating$) ;
+            rating = Long.parseLong(rating$) ;
         }
         rating = 555555555l - rating; // to get right order with String comparison - descending rating order
-        rating$ = "" + rating; 
+        rating$ = "" + rating;
         String spatialValues = aceItem.getSpatialValues();
         String spatialLayers = aceItem.getSpatialLayer();
         String elements = aceItem.getElements_();
@@ -114,10 +114,10 @@ public class AceItemIndexer {
              */
             document.add(new Field(ACEIndexConstant.IndexField.DESCRIPTION, description, Field.Store.YES,Field.Index.ANALYZED));
         }
-        
+
         if (year != null && year.length() > 0)
         {
-        	 /*
+             /*
              * year fields are indexed using Keywordanalyzer.
              */
             document.add(new NumericField(ACEIndexConstant.IndexField.YEAR, Field.Store.YES, true).setIntValue(Integer.parseInt(year)));
@@ -168,7 +168,7 @@ public class AceItemIndexer {
 
             for(int i = 0; i < spatialvalues.length; i++) {
                 document.add(new Field(ACEIndexConstant.IndexField.SPATIAL_VALUES, spatialvalues[i].trim(), Field.Store.YES,Field.Index.NOT_ANALYZED));
-            }            
+            }
         }
 
         if(elements != null) {
@@ -240,8 +240,8 @@ public class AceItemIndexer {
             document.add(new Field(ACEIndexConstant.IndexField.DATATYPE, datatype, Field.Store.YES,Field.Index.NOT_ANALYZED));
         }
 
-        
-		return document;
+
+        return document;
     }
 
 }

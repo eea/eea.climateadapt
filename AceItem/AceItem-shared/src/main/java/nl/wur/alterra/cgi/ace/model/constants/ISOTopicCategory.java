@@ -84,7 +84,7 @@ public enum ISOTopicCategory {
      * utilitiescommunication
      */
     utilitiesCommunication;
-    
+
     public String getString() {
         return this.name();
     }

@@ -55,19 +55,19 @@ public class AceItemLocalServiceImpl extends AceItemLocalServiceBaseImpl {
         return new AceItemImpl();
     }
 
-	/**
-	 * Adds the AceItem to the database incrementing the primary key.
-	 *
+    /**
+     * Adds the AceItem to the database incrementing the primary key.
+     *
      * @param aceitem aceitem to add
      * @return added aceitem
      * @throws SystemException hmm
-	 */
-	public AceItem addAceItem(AceItem aceitem) throws SystemException {
-		long aceitemId = CounterLocalServiceUtil.increment(AceItem.class.getName());
-		aceitem.setAceItemId(aceitemId);
+     */
+    public AceItem addAceItem(AceItem aceitem) throws SystemException {
+        long aceitemId = CounterLocalServiceUtil.increment(AceItem.class.getName());
+        aceitem.setAceItemId(aceitemId);
         aceitem = super.addAceItem(aceitem);
         return aceitem;
-	}
+    }
 
 
     /**
@@ -81,51 +81,51 @@ public class AceItemLocalServiceImpl extends AceItemLocalServiceBaseImpl {
         return aceItemPersistence.fetchByStoredAt(s);
     }
 
-	/**
-	 *
-	 * Hugo de Groot: add these methods by hand to <portlet>LocalServiceImpl
-	 * and rerun ServiceBuilder if auto generation fails
-	 * 
-	 * Gets a list with all the AceItems in a group
-	 *
-	 */
-	public List<AceItem> getAceItemsByGroupId(long groupId) throws SystemException {
-		return aceItemPersistence.findByGroupId(groupId);
-	}
+    /**
+     *
+     * Hugo de Groot: add these methods by hand to <portlet>LocalServiceImpl
+     * and rerun ServiceBuilder if auto generation fails
+     *
+     * Gets a list with all the AceItems in a group
+     *
+     */
+    public List<AceItem> getAceItemsByGroupId(long groupId) throws SystemException {
+        return aceItemPersistence.findByGroupId(groupId);
+    }
 
-	/**
-	 * 	
-	 * Hugo de Groot: add these methods by hand to <portlet>LocalServiceImpl
-	 * and rerun ServiceBuilder if auto generation fails 
-	 * 
-	 * Gets a list with a range of AceItems from a group
-	 *
-	 */
-	public List<AceItem> getAceItemsByGroupId(long groupId, int start, int end) throws SystemException {
-		return aceItemPersistence.findByGroupId(groupId, start, end);
-	}
-	/**
-	 * 	
-	 * Hugo de Groot: add these methods by hand to <portlet>LocalServiceImpl
-	 * and rerun ServiceBuilder if auto generation fails 
-	 * 
-	 * Gets a list with a range of AceItems from a group
-	 *
-	 */
-	public List<AceItem> getAceItemsByGroupId(long groupId, int start, int end, OrderByComparator orderByComparator) throws SystemException {
-		return aceItemPersistence.findByGroupId(groupId, start, end, orderByComparator);
-	}
-	/**
-	 * 	
-	 * Hugo de Groot: add these methods by hand to <portlet>LocalServiceImpl
-	 * and rerun ServiceBuilder if auto generation fails 
-	 * 
-	 * Gets the number of AceItems in a group
-	 *
-	 */
-	public int getAceItemsCountByGroupId(long groupId) throws SystemException {
-		return aceItemPersistence.countByGroupId(groupId);
-	}
+    /**
+     *
+     * Hugo de Groot: add these methods by hand to <portlet>LocalServiceImpl
+     * and rerun ServiceBuilder if auto generation fails
+     *
+     * Gets a list with a range of AceItems from a group
+     *
+     */
+    public List<AceItem> getAceItemsByGroupId(long groupId, int start, int end) throws SystemException {
+        return aceItemPersistence.findByGroupId(groupId, start, end);
+    }
+    /**
+     *
+     * Hugo de Groot: add these methods by hand to <portlet>LocalServiceImpl
+     * and rerun ServiceBuilder if auto generation fails
+     *
+     * Gets a list with a range of AceItems from a group
+     *
+     */
+    public List<AceItem> getAceItemsByGroupId(long groupId, int start, int end, OrderByComparator orderByComparator) throws SystemException {
+        return aceItemPersistence.findByGroupId(groupId, start, end, orderByComparator);
+    }
+    /**
+     *
+     * Hugo de Groot: add these methods by hand to <portlet>LocalServiceImpl
+     * and rerun ServiceBuilder if auto generation fails
+     *
+     * Gets the number of AceItems in a group
+     *
+     */
+    public int getAceItemsCountByGroupId(long groupId) throws SystemException {
+        return aceItemPersistence.countByGroupId(groupId);
+    }
 
     /**
      * Retrieves aceitems by nas id, which contains the ids of the wxsharvester that created the aceitems.

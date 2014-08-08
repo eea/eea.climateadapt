@@ -49,7 +49,7 @@ public enum OGCType {
 
     public static List<String> stringvalues() {
         List<String> strings = new ArrayList<String>();
-        for(OGCType o : OGCType.values()) {
+        for (OGCType o : OGCType.values()) {
             strings.add(o.getString());
         }
         return strings;
@@ -64,14 +64,11 @@ public enum OGCType {
     public static String fromString(String s) {
         if(s.equals(OGCType.WMS100.getString())) {
             return OGCType.WMS100.name();
-        }
-        else if(s.equals(OGCType.WMS111.getString())) {
+        } else if(s.equals(OGCType.WMS111.getString())) {
             return OGCType.WMS111.name();
-        }
-        else if(s.equals(OGCType.WMS130.getString())){
+        } else if(s.equals(OGCType.WMS130.getString())){
             return OGCType.WMS130.name();
-        }
-        else {
+        } else {
             return OGCType.WMS111.name();
         }
     }

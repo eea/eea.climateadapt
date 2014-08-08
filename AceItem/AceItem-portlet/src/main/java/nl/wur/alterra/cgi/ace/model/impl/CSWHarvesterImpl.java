@@ -28,8 +28,8 @@ import nl.wur.alterra.cgi.ace.model.CSWHarvester;
  * </p>
  */
 public class CSWHarvesterImpl extends CSWHarvesterBaseImpl {
-	public CSWHarvesterImpl() {
-	}
+    public CSWHarvesterImpl() {
+    }
 
 
     /**

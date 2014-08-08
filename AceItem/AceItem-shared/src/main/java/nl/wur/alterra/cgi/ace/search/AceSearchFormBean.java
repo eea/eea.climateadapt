@@ -22,25 +22,25 @@ public class AceSearchFormBean {
     private String[] startyear;
     private String[] endyear;
 
-    
 
-	public String[] getStartyear() {
-		return startyear;
-	}
 
-	public void setStartyear(String[] startyear) {
-		this.startyear = startyear;
-	}
+    public String[] getStartyear() {
+        return startyear;
+    }
 
-	public String[] getEndyear() {
-		return endyear;
-	}
+    public void setStartyear(String[] startyear) {
+        this.startyear = startyear;
+    }
 
-	public void setEndyear(String[] endyear) {
-		this.endyear = endyear;
-	}
+    public String[] getEndyear() {
+        return endyear;
+    }
 
-	public FreetextMode getFreeTextMode() {
+    public void setEndyear(String[] endyear) {
+        this.endyear = endyear;
+    }
+
+    public FreetextMode getFreeTextMode() {
         return freeTextMode;
     }
 
@@ -49,7 +49,7 @@ public class AceSearchFormBean {
     private String conditionAdaptationSector;
     private String conditionAdaptationCountry;
 
-	private String conditionAdaptationElement;
+    private String conditionAdaptationElement;
     private String conditionScenario;
     private String conditionTimePeriod;
     private String conditionClimateImpact;
@@ -62,7 +62,7 @@ public class AceSearchFormBean {
     public void setSortitemtype(String sortItemType) {
         this.sortitemtype = sortItemType;
     }
-    
+
     public String[] getAceitemtype() {
         return aceitemtype;
     }
@@ -207,13 +207,13 @@ public class AceSearchFormBean {
             this.freeTextMode = FreetextMode.ANY;
         }
     }
-    
-    public String getConditionAdaptationCountry() {
-  		return conditionAdaptationCountry;
-  	}
 
-  	public void setConditionAdaptationCountry(String conditionAdaptationCountry) {
-  		this.conditionAdaptationCountry = conditionAdaptationCountry;
-  	}
+    public String getConditionAdaptationCountry() {
+        return conditionAdaptationCountry;
+    }
+
+    public void setConditionAdaptationCountry(String conditionAdaptationCountry) {
+        this.conditionAdaptationCountry = conditionAdaptationCountry;
+    }
 
 }

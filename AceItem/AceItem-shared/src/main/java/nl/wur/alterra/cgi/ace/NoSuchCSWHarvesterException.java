@@ -21,20 +21,20 @@ import com.liferay.portal.NoSuchModelException;
  */
 public class NoSuchCSWHarvesterException extends NoSuchModelException {
 
-	public NoSuchCSWHarvesterException() {
-		super();
-	}
+    public NoSuchCSWHarvesterException() {
+        super();
+    }
 
-	public NoSuchCSWHarvesterException(String msg) {
-		super(msg);
-	}
+    public NoSuchCSWHarvesterException(String msg) {
+        super(msg);
+    }
 
-	public NoSuchCSWHarvesterException(String msg, Throwable cause) {
-		super(msg, cause);
-	}
+    public NoSuchCSWHarvesterException(String msg, Throwable cause) {
+        super(msg, cause);
+    }
 
-	public NoSuchCSWHarvesterException(Throwable cause) {
-		super(cause);
-	}
+    public NoSuchCSWHarvesterException(Throwable cause) {
+        super(cause);
+    }
 
 }

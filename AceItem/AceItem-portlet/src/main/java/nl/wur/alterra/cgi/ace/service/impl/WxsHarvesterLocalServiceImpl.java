@@ -71,7 +71,7 @@ public class WxsHarvesterLocalServiceImpl extends WxsHarvesterLocalServiceBaseIm
      * @return
      * @throws SystemException
      */
-	public WxsHarvester updateWxsHarvester(WxsHarvester wxsHarvester, Boolean propagateToGeoNetwork, Boolean reschedule) throws SystemException {
+    public WxsHarvester updateWxsHarvester(WxsHarvester wxsHarvester, Boolean propagateToGeoNetwork, Boolean reschedule) throws SystemException {
         //System.out.println("updating harvester");
         //
         // update harvester in geonetwork
@@ -121,7 +121,7 @@ public class WxsHarvesterLocalServiceImpl extends WxsHarvesterLocalServiceBaseIm
      * @throws SystemException
      */
     @Override
-	public nl.wur.alterra.cgi.ace.model.WxsHarvester deleteWxsHarvester(WxsHarvester wxsHarvester) throws SystemException {
+    public nl.wur.alterra.cgi.ace.model.WxsHarvester deleteWxsHarvester(WxsHarvester wxsHarvester) throws SystemException {
         //
         // delete harvester in geonetwork
         //
@@ -163,16 +163,16 @@ public class WxsHarvesterLocalServiceImpl extends WxsHarvesterLocalServiceBaseIm
     }
 
 
-	/**
-	 * Adds a wxsharvester, also trying to add it to GeoNetwork, and schedules a periodic run. Sets status to
+    /**
+     * Adds a wxsharvester, also trying to add it to GeoNetwork, and schedules a periodic run. Sets status to
      * GEONETWORK_INSERT_FAILURE if it failed to add it to GeoNetwork, otherwise to NEVER_RUN.
-	 *
+     *
      * @param wxsHarvester WxsHarvester to add
      * @return added WxsHarvester
      * @throws com.liferay.portal.kernel.exception.SystemException hmm
-	 */
+     */
     @Override
-	public WxsHarvester addWxsHarvester(WxsHarvester wxsHarvester) throws SystemException {
+    public WxsHarvester addWxsHarvester(WxsHarvester wxsHarvester) throws SystemException {
 
         //
         // add harvester in geonetwork
@@ -195,8 +195,8 @@ public class WxsHarvesterLocalServiceImpl extends WxsHarvesterLocalServiceBaseIm
         // add harvester in ACE
         //
         //System.out.println("adding harvester " + wxsHarvester.toShortString() + " to ACE");
-		long wxsHarvesterId = CounterLocalServiceUtil.increment(WxsHarvester.class.getName());
-		wxsHarvester.setWxsharvesterid(wxsHarvesterId);
+        long wxsHarvesterId = CounterLocalServiceUtil.increment(WxsHarvester.class.getName());
+        wxsHarvester.setWxsharvesterid(wxsHarvesterId);
         wxsHarvester = super.addWxsHarvester(wxsHarvester);
         //System.out.println("finished adding harvester " + wxsHarvester.toShortString() + " to ACE");
 
@@ -208,34 +208,34 @@ public class WxsHarvesterLocalServiceImpl extends WxsHarvesterLocalServiceBaseIm
         //System.out.println("finished scheduling harvester thread");
 
         return wxsHarvester;
-	}
+    }
 
 
-	/**
-	 *
-	 * Gets a list with all the WxsHarvesters in a group.
-	 *
-	 */
-	public List<WxsHarvester> getWxsHarvesterByGroupId(long groupId) throws SystemException {
-		return wxsHarvesterPersistence.findByGroupId(groupId);
-	}
+    /**
+     *
+     * Gets a list with all the WxsHarvesters in a group.
+     *
+     */
+    public List<WxsHarvester> getWxsHarvesterByGroupId(long groupId) throws SystemException {
+        return wxsHarvesterPersistence.findByGroupId(groupId);
+    }
 
-	/**
-	 *
-	 * Gets a list with a range of WxsHarvesters from a group.
-	 *
-	 */
-	public List<WxsHarvester> getWxsHarvestersByGroupId(long groupId, int start, int end) throws SystemException {
-		return wxsHarvesterPersistence.findByGroupId(groupId, start, end);
-	}
+    /**
+     *
+     * Gets a list with a range of WxsHarvesters from a group.
+     *
+     */
+    public List<WxsHarvester> getWxsHarvestersByGroupId(long groupId, int start, int end) throws SystemException {
+        return wxsHarvesterPersistence.findByGroupId(groupId, start, end);
+    }
 
-	/**
-	 *
-	 * Gets the number of WxsHarvesters in a group.
-	 *
-	 */
-	public int getWxsHarvestersCountByGroupId(long groupId) throws SystemException {
-		return wxsHarvesterPersistence.countByGroupId(groupId);
-	}
+    /**
+     *
+     * Gets the number of WxsHarvesters in a group.
+     *
+     */
+    public int getWxsHarvestersCountByGroupId(long groupId) throws SystemException {
+        return wxsHarvesterPersistence.countByGroupId(groupId);
+    }
 
 }

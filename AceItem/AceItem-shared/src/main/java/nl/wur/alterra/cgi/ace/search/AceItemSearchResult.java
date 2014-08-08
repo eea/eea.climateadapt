@@ -27,37 +27,37 @@ public class AceItemSearchResult {
     private String feature;
     private String year = "";
 
-	private boolean isNew= false;
-    
+    private boolean isNew= false;
+
 
     public boolean isIsNew() {
-		return isNew;
-	}
+        return isNew;
+    }
 
-	public void setNew(boolean isNew) {
-		//System.out.println("inside setNew name is " + this.name);
-		//System.out.println("isNew is " + isNew);
-		this.isNew = isNew;
-	}
+    public void setNew(boolean isNew) {
+        //System.out.println("inside setNew name is " + this.name);
+        //System.out.println("isNew is " + isNew);
+        this.isNew = isNew;
+    }
 
-	public String getFeature() {
-		return feature;
-	}
+    public String getFeature() {
+        return feature;
+    }
 
-	public void setFeature(String feature) {
-		//System.out.println(" setting feature " + feature);
-		this.feature = feature;
-	}
-	
-	public String getYear() {
-			return year;
-	}
+    public void setFeature(String feature) {
+        //System.out.println(" setting feature " + feature);
+        this.feature = feature;
+    }
+
+    public String getYear() {
+            return year;
+    }
 
     public void setYear(String year) {
-			this.year = year;
-	}
+            this.year = year;
+    }
 
-	/**
+    /**
      *
      * @param aceitem
      */
@@ -78,58 +78,52 @@ public class AceItemSearchResult {
         setControlstatus(aceitem.getControlstatus());
 
         setDeeplink(aceitem.getDeeplink().replaceAll("'", "\'"));
-        
+
         //System.out.println("feature is " + aceitem.getFeature());
         setFeature(aceitem.getFeature());
         //System.out.println("name is " + getName());
         setNew(isNew(aceitem.getApprovaldate(), aceitem.getCreationdate()));
-        
-        
+
+
         if (aceitem.getYear() != null && aceitem.getYear().length() > 0)
         {
-        	setYear(aceitem.getYear());
+            setYear(aceitem.getYear());
         }
-        
+
     }
-    
-    
-    
-    
-    public boolean isNew(Date approvalDate, Date createdDate)
-    {
-    	Date processDate = null;
-    	if (approvalDate == null)
-    	{
-    		processDate = createdDate;
-    	}
-    	else
-    	{
-    		processDate = approvalDate;
-    	}
-    	
-    	//System.out.println("approval date is " + approvalDate);
-    	//System.out.println("creation date is " + approvalDate);
-    	//System.out.println("process date is " + processDate);
-    	Date today = new Date();
-    	long t1 = today.getTime();
-    	long t2 = processDate.getTime();
-    	
-    	//System.out.println("creation date is " + creationDate);
-    	long day = 1000 * 60 * 60 * 24; // milliseconds in a day
-    	
-    	long days = (t1 - t2) / day;
-    	
-    	//System.out.println("days is " + days);
-    	if (days <= 90)
-    	{
-    		//System.out.println("returning true");
-    		return true;
-    	}
-    	else
-    	{
-    		//System.out.println("returning false");
-    		return false;
-    	}
+
+
+
+
+    public boolean isNew(Date approvalDate, Date createdDate) {
+        Date processDate = null;
+        if (approvalDate == null)
+        {
+            processDate = createdDate;
+        } else {
+            processDate = approvalDate;
+        }
+
+        //System.out.println("approval date is " + approvalDate);
+        //System.out.println("creation date is " + approvalDate);
+        //System.out.println("process date is " + processDate);
+        Date today = new Date();
+        long t1 = today.getTime();
+        long t2 = processDate.getTime();
+
+        //System.out.println("creation date is " + creationDate);
+        long day = 1000 * 60 * 60 * 24; // milliseconds in a day
+
+        long days = (t1 - t2) / day;
+
+        //System.out.println("days is " + days);
+        if (days <= 90) {
+            //System.out.println("returning true");
+            return true;
+        } else {
+            //System.out.println("returning false");
+            return false;
+        }
     }
 
     /**

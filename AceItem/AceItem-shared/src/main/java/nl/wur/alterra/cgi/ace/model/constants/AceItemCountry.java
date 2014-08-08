@@ -6,7 +6,7 @@ package nl.wur.alterra.cgi.ace.model.constants;
  * @author josegar
  */
 public enum AceItemCountry {
-	AL, /* Albania */
+    AL, /* Albania */
     AT, /* Austria */
     BE, /* Belgium */
     BG, /* Bulgaria */

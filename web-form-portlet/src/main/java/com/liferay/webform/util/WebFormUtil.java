@@ -55,216 +55,216 @@ import org.mozilla.javascript.ScriptableObject;
  */
 public class WebFormUtil {
 
-	public static ExpandoTable addTable(long companyId, String tableName)
-		throws PortalException, SystemException {
+    public static ExpandoTable addTable(long companyId, String tableName)
+        throws PortalException, SystemException {
 
-		try {
-			ExpandoTableLocalServiceUtil.deleteTable(
-				companyId, WebFormUtil.class.getName(), tableName);
-		}
-		catch (NoSuchTableException nste) {
-		}
+        try {
+            ExpandoTableLocalServiceUtil.deleteTable(
+                companyId, WebFormUtil.class.getName(), tableName);
+        }
+        catch (NoSuchTableException nste) {
+        }
 
-		return ExpandoTableLocalServiceUtil.addTable(
-			companyId, WebFormUtil.class.getName(), tableName);
-	}
+        return ExpandoTableLocalServiceUtil.addTable(
+            companyId, WebFormUtil.class.getName(), tableName);
+    }
 
-	public static ExpandoTable checkTable(
-			long companyId, String tableName, PortletPreferences preferences)
-		throws Exception {
+    public static ExpandoTable checkTable(
+            long companyId, String tableName, PortletPreferences preferences)
+        throws Exception {
 
-		ExpandoTable expandoTable = null;
+        ExpandoTable expandoTable = null;
 
-		try {
-			expandoTable = ExpandoTableLocalServiceUtil.getTable(
-				companyId, WebFormUtil.class.getName(), tableName);
-		}
-		catch (NoSuchTableException nste) {
-			expandoTable = addTable(companyId, tableName);
+        try {
+            expandoTable = ExpandoTableLocalServiceUtil.getTable(
+                companyId, WebFormUtil.class.getName(), tableName);
+        }
+        catch (NoSuchTableException nste) {
+            expandoTable = addTable(companyId, tableName);
 
-			int i = 1;
+            int i = 1;
 
-			String fieldLabel = preferences.getValue(
-				"fieldLabel" + i, StringPool.BLANK);
-			String fieldType = preferences.getValue(
-				"fieldType" + i, StringPool.BLANK);
+            String fieldLabel = preferences.getValue(
+                "fieldLabel" + i, StringPool.BLANK);
+            String fieldType = preferences.getValue(
+                "fieldType" + i, StringPool.BLANK);
 
-			while ((i == 1) || Validator.isNotNull(fieldLabel)) {
-				if (!StringUtil.equalsIgnoreCase(fieldType, "paragraph")) {
-					ExpandoColumnLocalServiceUtil.addColumn(
-						expandoTable.getTableId(), fieldLabel,
-						ExpandoColumnConstants.STRING);
-				}
+            while ((i == 1) || Validator.isNotNull(fieldLabel)) {
+                if (!StringUtil.equalsIgnoreCase(fieldType, "paragraph")) {
+                    ExpandoColumnLocalServiceUtil.addColumn(
+                        expandoTable.getTableId(), fieldLabel,
+                        ExpandoColumnConstants.STRING);
+                }
 
-				i++;
+                i++;
 
-				fieldLabel = preferences.getValue(
-					"fieldLabel" + i, StringPool.BLANK);
-				fieldType = preferences.getValue(
-					"fieldType" + i, StringPool.BLANK);
-			}
-		}
+                fieldLabel = preferences.getValue(
+                    "fieldLabel" + i, StringPool.BLANK);
+                fieldType = preferences.getValue(
+                    "fieldType" + i, StringPool.BLANK);
+            }
+        }
 
-		return expandoTable;
-	}
+        return expandoTable;
+    }
 
-	public static String getEmailFromAddress(
-			PortletPreferences preferences, long companyId)
-		throws SystemException {
+    public static String getEmailFromAddress(
+            PortletPreferences preferences, long companyId)
+        throws SystemException {
 
-		return PortalUtil.getEmailFromAddress(
-			preferences, companyId, PortletPropsValues.EMAIL_FROM_ADDRESS);
-	}
+        return PortalUtil.getEmailFromAddress(
+            preferences, companyId, PortletPropsValues.EMAIL_FROM_ADDRESS);
+    }
 
-	public static String getEmailFromName(
-			PortletPreferences preferences, long companyId)
-		throws SystemException {
+    public static String getEmailFromName(
+            PortletPreferences preferences, long companyId)
+        throws SystemException {
 
-		return PortalUtil.getEmailFromName(
-			preferences, companyId, PortletPropsValues.EMAIL_FROM_NAME);
-	}
+        return PortalUtil.getEmailFromName(
+            preferences, companyId, PortletPropsValues.EMAIL_FROM_NAME);
+    }
 
-	public static String getNewDatabaseTableName(String portletId)
-		throws SystemException {
+    public static String getNewDatabaseTableName(String portletId)
+        throws SystemException {
 
-		long formId = CounterLocalServiceUtil.increment(
-			WebFormUtil.class.getName());
+        long formId = CounterLocalServiceUtil.increment(
+            WebFormUtil.class.getName());
 
-		return portletId + StringPool.UNDERLINE + formId;
-	}
+        return portletId + StringPool.UNDERLINE + formId;
+    }
 
-	public static int getTableRowsCount(long companyId, String tableName)
-		throws SystemException {
+    public static int getTableRowsCount(long companyId, String tableName)
+        throws SystemException {
 
-		return ExpandoRowLocalServiceUtil.getRowsCount(
-			companyId, WebFormUtil.class.getName(), tableName);
-	}
+        return ExpandoRowLocalServiceUtil.getRowsCount(
+            companyId, WebFormUtil.class.getName(), tableName);
+    }
 
-	public static String[] split(String s) {
-		return split(s, StringPool.COMMA);
-	}
+    public static String[] split(String s) {
+        return split(s, StringPool.COMMA);
+    }
 
-	public static String[] split(String s, String delimiter) {
-		if ((s == null) || (delimiter == null)) {
-			return new String[0];
-		}
+    public static String[] split(String s, String delimiter) {
+        if ((s == null) || (delimiter == null)) {
+            return new String[0];
+        }
 
-		s = s.trim();
+        s = s.trim();
 
-		if (!s.endsWith(delimiter)) {
-			s = s.concat(delimiter);
-		}
+        if (!s.endsWith(delimiter)) {
+            s = s.concat(delimiter);
+        }
 
-		if (s.equals(delimiter)) {
-			return new String[0];
-		}
+        if (s.equals(delimiter)) {
+            return new String[0];
+        }
 
-		List<String> nodeValues = new ArrayList<String>();
+        List<String> nodeValues = new ArrayList<String>();
 
-		if (delimiter.equals("\n") || delimiter.equals("\r")) {
-			try {
-				BufferedReader br = new BufferedReader(new StringReader(s));
+        if (delimiter.equals("\n") || delimiter.equals("\r")) {
+            try {
+                BufferedReader br = new BufferedReader(new StringReader(s));
 
-				String line = null;
+                String line = null;
 
-				while ((line = br.readLine()) != null) {
-					nodeValues.add(line);
-				}
+                while ((line = br.readLine()) != null) {
+                    nodeValues.add(line);
+                }
 
-				br.close();
-			}
-			catch (IOException ioe) {
-				ioe.printStackTrace();
-			}
-		}
-		else {
-			int offset = 0;
-			int pos = s.indexOf(delimiter, offset);
+                br.close();
+            }
+            catch (IOException ioe) {
+                ioe.printStackTrace();
+            }
+        }
+        else {
+            int offset = 0;
+            int pos = s.indexOf(delimiter, offset);
 
-			while (pos != -1) {
-				nodeValues.add(new String(s.substring(offset, pos)));
+            while (pos != -1) {
+                nodeValues.add(new String(s.substring(offset, pos)));
 
-				offset = pos + delimiter.length();
-				pos = s.indexOf(delimiter, offset);
-			}
-		}
+                offset = pos + delimiter.length();
+                pos = s.indexOf(delimiter, offset);
+            }
+        }
 
-		return nodeValues.toArray(new String[nodeValues.size()]);
-	}
+        return nodeValues.toArray(new String[nodeValues.size()]);
+    }
 
-	public static boolean validate(
-			String currentFieldValue, Map<String, String> fieldsMap,
-			String validationScript)
-		throws Exception {
+    public static boolean validate(
+            String currentFieldValue, Map<String, String> fieldsMap,
+            String validationScript)
+        throws Exception {
 
-		boolean validationResult = false;
+        boolean validationResult = false;
 
-		Context context = Context.enter();
+        Context context = Context.enter();
 
-		StringBundler sb = new StringBundler();
+        StringBundler sb = new StringBundler();
 
-		sb.append("currentFieldValue = String('");
-		sb.append(HtmlUtil.escapeJS(currentFieldValue));
-		sb.append("');\n");
+        sb.append("currentFieldValue = String('");
+        sb.append(HtmlUtil.escapeJS(currentFieldValue));
+        sb.append("');\n");
 
-		sb.append("var fieldsMap = {};\n");
+        sb.append("var fieldsMap = {};\n");
 
-		for (String key : fieldsMap.keySet()) {
-			sb.append("fieldsMap['");
-			sb.append(key);
-			sb.append("'] = '");
+        for (String key : fieldsMap.keySet()) {
+            sb.append("fieldsMap['");
+            sb.append(key);
+            sb.append("'] = '");
 
-			String value = StringUtil.replace(
-				fieldsMap.get(key), new String[] {"\r\n", "\r", "\n"},
-				new String[] {"\\n", "\\n", "\\n"});
+            String value = StringUtil.replace(
+                fieldsMap.get(key), new String[] {"\r\n", "\r", "\n"},
+                new String[] {"\\n", "\\n", "\\n"});
 
-			sb.append(HtmlUtil.escapeJS(value));
-			sb.append("';\n");
-		}
+            sb.append(HtmlUtil.escapeJS(value));
+            sb.append("';\n");
+        }
 
-		sb.append("function validation(currentFieldValue, fieldsMap) {\n");
-		sb.append(validationScript);
-		sb.append("}\n");
-		sb.append("internalValidationResult = ");
-		sb.append("validation(currentFieldValue, fieldsMap);");
+        sb.append("function validation(currentFieldValue, fieldsMap) {\n");
+        sb.append(validationScript);
+        sb.append("}\n");
+        sb.append("internalValidationResult = ");
+        sb.append("validation(currentFieldValue, fieldsMap);");
 
-		String script = sb.toString();
+        String script = sb.toString();
 
-		try {
-			Scriptable scope = context.initStandardObjects();
+        try {
+            Scriptable scope = context.initStandardObjects();
 
-			Object jsFieldsMap = Context.javaToJS(fieldsMap, scope);
+            Object jsFieldsMap = Context.javaToJS(fieldsMap, scope);
 
-			ScriptableObject.putProperty(scope, "jsFieldsMap", jsFieldsMap);
+            ScriptableObject.putProperty(scope, "jsFieldsMap", jsFieldsMap);
 
-			context.evaluateString(scope, script, "Validation Script", 1, null);
+            context.evaluateString(scope, script, "Validation Script", 1, null);
 
-			Object obj = ScriptableObject.getProperty(
-				scope, "internalValidationResult");
+            Object obj = ScriptableObject.getProperty(
+                scope, "internalValidationResult");
 
-			if (obj instanceof Boolean) {
-				validationResult = (Boolean)obj;
-			}
-			else {
-				throw new Exception("The script must return a boolean value");
-			}
-		}
-		catch (Exception e) {
-			String msg =
-				"The following script has execution errors:\n" +
-					validationScript + "\n" + e.getMessage();
+            if (obj instanceof Boolean) {
+                validationResult = (Boolean)obj;
+            }
+            else {
+                throw new Exception("The script must return a boolean value");
+            }
+        }
+        catch (Exception e) {
+            String msg =
+                "The following script has execution errors:\n" +
+                    validationScript + "\n" + e.getMessage();
 
-			_log.error(msg);
+            _log.error(msg);
 
-			throw new Exception(msg, e);
-		}
-		finally {
-			Context.exit();
-		}
+            throw new Exception(msg, e);
+        }
+        finally {
+            Context.exit();
+        }
 
-		return validationResult;
-	}
+        return validationResult;
+    }
 
-	private static Log _log = LogFactoryUtil.getLog(WebFormUtil.class);
+    private static Log _log = LogFactoryUtil.getLog(WebFormUtil.class);
 
 }

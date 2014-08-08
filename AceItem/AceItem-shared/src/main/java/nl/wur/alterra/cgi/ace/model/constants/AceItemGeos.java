@@ -1,40 +1,40 @@
 package nl.wur.alterra.cgi.ace.model.constants;
 
 public enum AceItemGeos {
-	
-	/**
+
+    /**
      * Transnational region (stretching across country borders)
      */
-	 TRANS(true),
-	
-	/**
+     TRANS(true),
+
+    /**
      * National
      */
-	NAT(true),
-	
+    NAT(true),
 
-	/**
+
+    /**
      * Subnational Regions
      */
-	SNA(true),
-	
-	/**
+    SNA(true),
+
+    /**
      * Local (e.g. city or municipal level)
      */
-	LC(true);
-	 
-	
-	private boolean isRadio = false;
-	
-	AceItemGeos(boolean isRadio)
-	{
-	   this.isRadio = isRadio;	
-	}
-	
-	public boolean isRadio()
-	{
-		return this.isRadio;
-	}
+    LC(true);
+
+
+    private boolean isRadio = false;
+
+    AceItemGeos(boolean isRadio)
+    {
+       this.isRadio = isRadio;
+    }
+
+    public boolean isRadio()
+    {
+        return this.isRadio;
+    }
 
 }
 

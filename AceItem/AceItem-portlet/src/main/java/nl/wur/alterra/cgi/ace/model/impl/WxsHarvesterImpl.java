@@ -28,8 +28,8 @@ import nl.wur.alterra.cgi.ace.model.WxsHarvester;
  * </p>
  */
 public class WxsHarvesterImpl extends WxsHarvesterBaseImpl {
-	public WxsHarvesterImpl() {
-	}
+    public WxsHarvesterImpl() {
+    }
 
     /**
      * heikki doeleman: Liferay won't let me override toString(), because if I do that it generates 2 declarations of toString()

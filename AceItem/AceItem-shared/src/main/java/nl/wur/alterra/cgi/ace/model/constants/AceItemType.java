@@ -39,7 +39,7 @@ public enum AceItemType {
     /**
      * Adaptation options.
      */
-    MEASURE, 
+    MEASURE,
     /**
      * Case studies.
      */

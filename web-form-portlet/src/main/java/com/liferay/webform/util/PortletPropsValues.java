@@ -22,14 +22,14 @@ import com.liferay.util.portlet.PortletProps;
  */
 public class PortletPropsValues {
 
-	public static final String EMAIL_FROM_ADDRESS = GetterUtil.getString(
-		PortletProps.get(PortletPropsKeys.EMAIL_FROM_ADDRESS));
+    public static final String EMAIL_FROM_ADDRESS = GetterUtil.getString(
+        PortletProps.get(PortletPropsKeys.EMAIL_FROM_ADDRESS));
 
-	public static final String EMAIL_FROM_NAME = GetterUtil.getString(
-		PortletProps.get(PortletPropsKeys.EMAIL_FROM_NAME));
+    public static final String EMAIL_FROM_NAME = GetterUtil.getString(
+        PortletProps.get(PortletPropsKeys.EMAIL_FROM_NAME));
 
-	public static final boolean VALIDATION_SCRIPT_ENABLED =
-		GetterUtil.getBoolean(
-			PortletProps.get(PortletPropsKeys.VALIDATION_SCRIPT_ENABLED));
+    public static final boolean VALIDATION_SCRIPT_ENABLED =
+        GetterUtil.getBoolean(
+            PortletProps.get(PortletPropsKeys.VALIDATION_SCRIPT_ENABLED));
 
 }

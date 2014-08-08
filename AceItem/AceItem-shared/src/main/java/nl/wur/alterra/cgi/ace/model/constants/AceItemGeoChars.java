@@ -6,42 +6,42 @@ package nl.wur.alterra.cgi.ace.model.constants;
  * @author Mohamed
  */
 public enum AceItemGeoChars {
-	
+
     /**
      * Global.
      */
      GLOBAL,
-     
+
     /**
      * Europe
      */
      EUROPE,
-     
+
     /**
      * Macro-Transnational region
      */
      MACRO_TRANSNATIONAL_REGION,
-     
+
     /**
      * Biographical regions
      */
      BIOGRAPHICAL_REGION,
-     
+
      /**
       * Countries
       */
      COUNTRIES,
-     
+
     /**
      * Subnational
      */
     SUBNATIONAL,
-    
+
     /**
      * Cities and Towns
      */
     CITY,
-    
+
     /*** Région de Bruxelles-Capitale/Brussels Hoofdstedelijk Gewest (BE) ***/
     SUBN_Région_de_Bruxelles_Capit("Région de Bruxelles-Capitale/Brussels Hoofdstedelijk Gewest (BE)"),
 
@@ -939,112 +939,112 @@ public enum AceItemGeoChars {
      *  Northern Periphery
      */
     TRANS_MACRO_NORTHPERI,
-    
+
     /**
      *  Baltic Sea
      */
     TRANS_MACRO_BACLITC,
-    
+
     /**
      *  North West Europe
      */
     TRANS_MACRO_NW_EUROPE,
-    
+
     /**
      *  North Sea
      */
     TRANS_MACRO_N_SEA,
-    
+
     /**
      *  Atlantic Area
      */
     TRANS_MACRO_ATL_AREA,
-    
+
     /**
      *  Alpine Space
      */
     TRANS_MACRO_ALP_SPACE,
-    
+
     /**
      *  Central Europe
      */
     TRANS_MACRO_CEN_EUR,
-    
+
     /**
      *  South West Europe
      */
     TRANS_MACRO_SW_EUR,
-    
+
     /**
      *  Mediterranean
      */
     TRANS_MACRO_MED,
-    
+
     /**
      *  South East Europe
      */
     TRANS_MACRO_SE_EUR,
-    
+
     /**
      *  Caribbean Area
      */
     TRANS_MACRO_CAR_AREA,
-    
+
     /**
      *  Macronesia
      */
     TRANS_MACRO_MACRONESIA,
-    
+
     /**
      * Indian Ocean Area
      */
     TRANS_MACRO_IND_OCEAN_AREA,
-    
+
     /**
      * Alpine
      */
     TRANS_BIO_ALPINE,
-    
+
     /**
      * Atlantic
      */
     TRANS_BIO_ATLANTIC,
-    
+
     /**
      * Arctic
      */
     TRANS_BIO_ARCTIC,
-    
+
     /**
      * Continental
      */
     TRANS_BIO_CONTINENTAL,
-    
+
     /**
      * Mediterranean
      */
     TRANS_BIO_MEDIT,
-    
+
     /**
      * Panonian
      */
     TRANS_BIO_PANONIAN;
-     
+
     private String description = "";
-    
+
     AceItemGeoChars()
     {
-    	
+
     }
-    
+
     AceItemGeoChars(String description)
     {
-    	this.description = description;
+        this.description = description;
     }
-    
+
     public String getDescription()
     {
-    	return this.description;
+        return this.description;
     }
-    
+
   }

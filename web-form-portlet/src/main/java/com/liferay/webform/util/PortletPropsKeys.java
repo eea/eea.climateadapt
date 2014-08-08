@@ -19,11 +19,11 @@ package com.liferay.webform.util;
  */
 public interface PortletPropsKeys {
 
-	public static final String EMAIL_FROM_ADDRESS = "email.from.address";
+    public static final String EMAIL_FROM_ADDRESS = "email.from.address";
 
-	public static final String EMAIL_FROM_NAME = "email.from.name";
+    public static final String EMAIL_FROM_NAME = "email.from.name";
 
-	public static final String VALIDATION_SCRIPT_ENABLED =
-		"validation.script.enabled";
+    public static final String VALIDATION_SCRIPT_ENABLED =
+        "validation.script.enabled";
 
 }

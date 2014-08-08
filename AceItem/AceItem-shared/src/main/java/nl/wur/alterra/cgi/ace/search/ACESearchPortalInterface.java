@@ -36,23 +36,23 @@ public class ACESearchPortalInterface {
      */
     public List<String> handleSearchRequest(PortletRequest request, AceSearchFormBean formBean) throws Exception {
 
-		List<String> keysAdded = new ArrayList<String>();
-		List<String> jsonKeysAdded = new ArrayList<String>();
+        List<String> keysAdded = new ArrayList<String>();
+        List<String> jsonKeysAdded = new ArrayList<String>();
         long totalResults = 0;
 
         ACESearchEngine searchEngine = new ACESearchEngine();
 
 
-		// no aceItemTypes requested or "All" choosen: search for all of them
-		if ( isEmpty(formBean.getAceitemtype()) || 
-			 (formBean.getDatainfo_type().equals("1") && formBean.getSortBy()==null) ) {
-			for (AceItemType aceItemType : AceItemType.values()) {
-	            
-				List<AceItemSearchResult> results = searchEngine.searchLuceneByType(formBean, aceItemType.name());
-				totalResults += results.size();
+        // no aceItemTypes requested or "All" choosen: search for all of them
+        if ( isEmpty(formBean.getAceitemtype()) ||
+             (formBean.getDatainfo_type().equals("1") && formBean.getSortBy()==null) ) {
+            for (AceItemType aceItemType : AceItemType.values()) {
 
-				//System.out.println("From all searchAceitem found #" + results.size() + " results of type " + aceItemType.name());
-				request.setAttribute(aceItemType.name() + "_" + SearchRequestParams.SEARCH_RESULTS, results);
+                List<AceItemSearchResult> results = searchEngine.searchLuceneByType(formBean, aceItemType.name());
+                totalResults += results.size();
+
+                //System.out.println("From all searchAceitem found #" + results.size() + " results of type " + aceItemType.name());
+                request.setAttribute(aceItemType.name() + "_" + SearchRequestParams.SEARCH_RESULTS, results);
 
                  keysAdded.add(aceItemType.name() + "_" + SearchRequestParams.SEARCH_RESULTS);
                  Gson gson = new Gson();
@@ -60,37 +60,37 @@ public class ACESearchPortalInterface {
 
                  request.setAttribute(aceItemType.name() + "_" + "JSON" + SearchRequestParams.SEARCH_RESULTS, json);
                  jsonKeysAdded.add(aceItemType.name() + "_" + "JSON" + SearchRequestParams.SEARCH_RESULTS);
-			}
-		}
-		// search only requested aceItemTypes
-		else {
-			for (String aceItemType : formBean.getAceitemtype()) {
-	            
-				List<AceItemSearchResult> results = searchEngine.searchLuceneByType(formBean, aceItemType);
-                
-				totalResults += results.size();
+            }
+        }
+        // search only requested aceItemTypes
+        else {
+            for (String aceItemType : formBean.getAceitemtype()) {
 
-				//System.out.println("Limited set seacrhAceitem found #" + results.size() + " results of type " + aceItemType);
-				request.setAttribute(aceItemType + "_" + SearchRequestParams.SEARCH_RESULTS, results);
-				keysAdded.add(aceItemType + "_" + SearchRequestParams.SEARCH_RESULTS);
-				Gson gson = new Gson();
-				String json = gson.toJson(results);
+                List<AceItemSearchResult> results = searchEngine.searchLuceneByType(formBean, aceItemType);
 
-				request.setAttribute(aceItemType + "_" + "JSON" + SearchRequestParams.SEARCH_RESULTS, json);
-				jsonKeysAdded.add(aceItemType + "_" + "JSON" + SearchRequestParams.SEARCH_RESULTS);
-			}
-		}
+                totalResults += results.size();
 
-		request.setAttribute(SearchRequestParams.TOTAL_RESULTS, totalResults);
+                //System.out.println("Limited set seacrhAceitem found #" + results.size() + " results of type " + aceItemType);
+                request.setAttribute(aceItemType + "_" + SearchRequestParams.SEARCH_RESULTS, results);
+                keysAdded.add(aceItemType + "_" + SearchRequestParams.SEARCH_RESULTS);
+                Gson gson = new Gson();
+                String json = gson.toJson(results);
 
-		return keysAdded;
+                request.setAttribute(aceItemType + "_" + "JSON" + SearchRequestParams.SEARCH_RESULTS, json);
+                jsonKeysAdded.add(aceItemType + "_" + "JSON" + SearchRequestParams.SEARCH_RESULTS);
+            }
+        }
+
+        request.setAttribute(SearchRequestParams.TOTAL_RESULTS, totalResults);
+
+        return keysAdded;
     }
-    
+
     public List<String> handleSearchRequest(PortletRequest request) throws Exception {
 
-    	AceSearchFormBean formBean = prepareACESearchFormBean(request);
-    	request.setAttribute(SearchRequestParams.SEARCH_PARAMS, formBean);    	
-    	return handleSearchRequest(request, formBean) ;
+        AceSearchFormBean formBean = prepareACESearchFormBean(request);
+        request.setAttribute(SearchRequestParams.SEARCH_PARAMS, formBean);
+        return handleSearchRequest(request, formBean) ;
     }
 
     /**
@@ -131,7 +131,7 @@ public class ACESearchPortalInterface {
      */
     public AceSearchFormBean prepareACESearchFormBean(PortletRequest request) {
         Map<String, String[]> requestParams;
-		String fuzziness = null;
+        String fuzziness = null;
 
         //
         // TODO: do this by checking actual pagename rather than request type ?
@@ -141,17 +141,17 @@ public class ACESearchPortalInterface {
         if(request instanceof ClientDataRequest) {
             requestParams = request.getParameterMap();
 
-			// Retrieve fuzziness from preferences
+            // Retrieve fuzziness from preferences
             PortletPreferences preferences = request.getPreferences();
-            
-			fuzziness = preferences.getValue(SearchRequestParams.FUZZINESS, "");            
+
+            fuzziness = preferences.getValue(SearchRequestParams.FUZZINESS, "");
         }
         // request from adaptationtooljsp portlet or filteraceitemportlet
         else { //if(request instanceof RenderRequest) {
             PortletPreferences preferences = request.getPreferences();
             requestParams = preferences.getMap();
 
-			fuzziness = preferences.getValue(SearchRequestParams.FUZZINESS, "");
+            fuzziness = preferences.getValue(SearchRequestParams.FUZZINESS, "");
 
         }
         ACESearchEngine searchEngine = new ACESearchEngine();

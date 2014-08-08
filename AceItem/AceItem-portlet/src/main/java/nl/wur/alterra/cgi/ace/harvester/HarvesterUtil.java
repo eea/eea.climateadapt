@@ -848,7 +848,7 @@ public class HarvesterUtil {
      * or, if you asked for <fast>false</fast>, like this
      *
      * <response from="1" to="101" selected="0">
-	 *     <summary count="101" type="local" hitsusedforsummary="101">
+     *     <summary count="101" type="local" hitsusedforsummary="101">
      *         <keywords>
      *             <keyword count="1" name="framework"/>
      *             <keyword count="1" name="hydrographic"/>
@@ -911,7 +911,7 @@ public class HarvesterUtil {
      * @param harvesterResultBefore
      * @param harvesterResultAfter
      */
-    private static synchronized void storeAsAceItems(Object harvester, String harvesterResultBefore, 
+    private static synchronized void storeAsAceItems(Object harvester, String harvesterResultBefore,
                                                      String harvesterResultAfter) throws SystemException, PortalException, CustomPropertiesNotInitializedException {
         try {
         //System.out.println("applying harvesting result to AceItem table");
@@ -1129,7 +1129,7 @@ public class HarvesterUtil {
         );
         */
         aceItem.setCreationdate( new Date() );
-        
+
         return aceItem;
     }
 

@@ -129,7 +129,7 @@ public class ACEIndexSearcher {
                     sort = new Sort(new SortField( ACEIndexConstant.IndexField.NAME_SORT, SortField.STRING));
                 }
                 else if(sortBy.equals("YEAR")) {
-                	//System.out.println("sort by year requested");
+                    //System.out.println("sort by year requested");
                     sort = new Sort(new SortField( ACEIndexConstant.IndexField.YEAR_SORT, SortField.INT, true));
                 }
                 // undefined sort: default to relevance

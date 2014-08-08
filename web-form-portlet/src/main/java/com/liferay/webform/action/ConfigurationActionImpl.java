@@ -52,295 +52,295 @@ import javax.portlet.RenderResponse;
 public class ConfigurationActionImpl extends DefaultConfigurationAction {
 
 
-	public void processAction(
-			PortletConfig portletConfig, ActionRequest actionRequest,
-			ActionResponse actionResponse)
-		throws Exception {
-
-		validateFields(actionRequest);
-
-		if (!SessionErrors.isEmpty(actionRequest)) {
-			return;
-		}
-
-		Locale defaultLocale = LocaleUtil.getDefault();
-		String defaultLanguageId = LocaleUtil.toLanguageId(defaultLocale);
-
-		boolean updateFields = ParamUtil.getBoolean(
-			actionRequest, "updateFields");
-
-		String portletResource = ParamUtil.getString(
-			actionRequest, "portletResource");
-
-		PortletPreferences preferences = actionRequest.getPreferences();
-
-		LocalizationUtil.setLocalizedPreferencesValues(
-			actionRequest, preferences, "title");
-		LocalizationUtil.setLocalizedPreferencesValues(
-			actionRequest, preferences, "description");
-
-		if (updateFields) {
-			int i = 1;
-
-			String databaseTableName = WebFormUtil.getNewDatabaseTableName(
-				portletResource);
+    public void processAction(
+            PortletConfig portletConfig, ActionRequest actionRequest,
+            ActionResponse actionResponse)
+        throws Exception {
+
+        validateFields(actionRequest);
+
+        if (!SessionErrors.isEmpty(actionRequest)) {
+            return;
+        }
+
+        Locale defaultLocale = LocaleUtil.getDefault();
+        String defaultLanguageId = LocaleUtil.toLanguageId(defaultLocale);
+
+        boolean updateFields = ParamUtil.getBoolean(
+            actionRequest, "updateFields");
+
+        String portletResource = ParamUtil.getString(
+            actionRequest, "portletResource");
+
+        PortletPreferences preferences = actionRequest.getPreferences();
+
+        LocalizationUtil.setLocalizedPreferencesValues(
+            actionRequest, preferences, "title");
+        LocalizationUtil.setLocalizedPreferencesValues(
+            actionRequest, preferences, "description");
+
+        if (updateFields) {
+            int i = 1;
+
+            String databaseTableName = WebFormUtil.getNewDatabaseTableName(
+                portletResource);
 
-			preferences.setValue("databaseTableName", databaseTableName);
-
-			int[] formFieldsIndexes = StringUtil.split(
-				ParamUtil.getString(actionRequest, "formFieldsIndexes"), 0);
-
-			for (int formFieldsIndex : formFieldsIndexes) {
-				Map<Locale, String> fieldLabelMap =
-					LocalizationUtil.getLocalizationMap(
-						actionRequest, "fieldLabel" + formFieldsIndex);
-
-				if (Validator.isNull(fieldLabelMap.get(defaultLocale))) {
-					continue;
-				}
-
-				String fieldType = ParamUtil.getString(
-					actionRequest, "fieldType" + formFieldsIndex);
-				boolean fieldOptional = ParamUtil.getBoolean(
-					actionRequest, "fieldOptional" + formFieldsIndex);
-				Map<Locale, String> fieldOptionsMap =
-					LocalizationUtil.getLocalizationMap(
-						actionRequest, "fieldOptions" + formFieldsIndex);
-				String fieldValidationScript = ParamUtil.getString(
-					actionRequest, "fieldValidationScript" + formFieldsIndex);
-				String fieldValidationErrorMessage = ParamUtil.getString(
-					actionRequest,
-					"fieldValidationErrorMessage" + formFieldsIndex);
-
-				if (Validator.isNotNull(fieldValidationScript) ^
-					Validator.isNotNull(fieldValidationErrorMessage)) {
-
-					SessionErrors.add(
-						actionRequest, "validationDefinitionInvalid" + i);
-				}
-
-				updateModifiedLocales(
-					"fieldLabel" + i, fieldLabelMap, preferences);
-				updateModifiedLocales(
-					"fieldOptions" + i, fieldOptionsMap, preferences);
-
-				preferences.setValue("fieldType" + i, fieldType);
-				preferences.setValue(
-					"fieldOptional" + i, String.valueOf(fieldOptional));
-				preferences.setValue(
-					"fieldValidationScript" + i, fieldValidationScript);
-				preferences.setValue(
-					"fieldValidationErrorMessage" + i,
-					fieldValidationErrorMessage);
+            preferences.setValue("databaseTableName", databaseTableName);
+
+            int[] formFieldsIndexes = StringUtil.split(
+                ParamUtil.getString(actionRequest, "formFieldsIndexes"), 0);
+
+            for (int formFieldsIndex : formFieldsIndexes) {
+                Map<Locale, String> fieldLabelMap =
+                    LocalizationUtil.getLocalizationMap(
+                        actionRequest, "fieldLabel" + formFieldsIndex);
+
+                if (Validator.isNull(fieldLabelMap.get(defaultLocale))) {
+                    continue;
+                }
+
+                String fieldType = ParamUtil.getString(
+                    actionRequest, "fieldType" + formFieldsIndex);
+                boolean fieldOptional = ParamUtil.getBoolean(
+                    actionRequest, "fieldOptional" + formFieldsIndex);
+                Map<Locale, String> fieldOptionsMap =
+                    LocalizationUtil.getLocalizationMap(
+                        actionRequest, "fieldOptions" + formFieldsIndex);
+                String fieldValidationScript = ParamUtil.getString(
+                    actionRequest, "fieldValidationScript" + formFieldsIndex);
+                String fieldValidationErrorMessage = ParamUtil.getString(
+                    actionRequest,
+                    "fieldValidationErrorMessage" + formFieldsIndex);
+
+                if (Validator.isNotNull(fieldValidationScript) ^
+                    Validator.isNotNull(fieldValidationErrorMessage)) {
+
+                    SessionErrors.add(
+                        actionRequest, "validationDefinitionInvalid" + i);
+                }
+
+                updateModifiedLocales(
+                    "fieldLabel" + i, fieldLabelMap, preferences);
+                updateModifiedLocales(
+                    "fieldOptions" + i, fieldOptionsMap, preferences);
+
+                preferences.setValue("fieldType" + i, fieldType);
+                preferences.setValue(
+                    "fieldOptional" + i, String.valueOf(fieldOptional));
+                preferences.setValue(
+                    "fieldValidationScript" + i, fieldValidationScript);
+                preferences.setValue(
+                    "fieldValidationErrorMessage" + i,
+                    fieldValidationErrorMessage);
 
-				i++;
-			}
+                i++;
+            }
 
-			if (!SessionErrors.isEmpty(actionRequest)) {
-				return;
-			}
+            if (!SessionErrors.isEmpty(actionRequest)) {
+                return;
+            }
 
-			// Clear previous preferences that are now blank
-
-			String fieldLabel = LocalizationUtil.getPreferencesValue(
-				preferences, "fieldLabel" + i, defaultLanguageId);
+            // Clear previous preferences that are now blank
+
+            String fieldLabel = LocalizationUtil.getPreferencesValue(
+                preferences, "fieldLabel" + i, defaultLanguageId);
 
-			while (Validator.isNotNull(fieldLabel)) {
-				Map<Locale, String> fieldLabelMap =
-					LocalizationUtil.getLocalizationMap(
-						actionRequest, "fieldLabel" + i);
-
-				for (Locale locale : fieldLabelMap.keySet()) {
-					String languageId = LocaleUtil.toLanguageId(locale);
+            while (Validator.isNotNull(fieldLabel)) {
+                Map<Locale, String> fieldLabelMap =
+                    LocalizationUtil.getLocalizationMap(
+                        actionRequest, "fieldLabel" + i);
+
+                for (Locale locale : fieldLabelMap.keySet()) {
+                    String languageId = LocaleUtil.toLanguageId(locale);
 
-					LocalizationUtil.setPreferencesValue(
-						preferences, "fieldLabel" + i, languageId,
-						StringPool.BLANK);
+                    LocalizationUtil.setPreferencesValue(
+                        preferences, "fieldLabel" + i, languageId,
+                        StringPool.BLANK);
 
-					LocalizationUtil.setPreferencesValue(
-						preferences, "fieldOptions" + i, languageId,
-						StringPool.BLANK);
-				}
+                    LocalizationUtil.setPreferencesValue(
+                        preferences, "fieldOptions" + i, languageId,
+                        StringPool.BLANK);
+                }
 
-				preferences.setValue("fieldType" + i, StringPool.BLANK);
-				preferences.setValue("fieldOptional" + i, StringPool.BLANK);
-				preferences.setValue(
-					"fieldValidationScript" + i, StringPool.BLANK);
-				preferences.setValue(
-					"fieldValidationErrorMessage" + i, StringPool.BLANK);
+                preferences.setValue("fieldType" + i, StringPool.BLANK);
+                preferences.setValue("fieldOptional" + i, StringPool.BLANK);
+                preferences.setValue(
+                    "fieldValidationScript" + i, StringPool.BLANK);
+                preferences.setValue(
+                    "fieldValidationErrorMessage" + i, StringPool.BLANK);
 
-				i++;
+                i++;
 
-				fieldLabel = LocalizationUtil.getPreferencesValue(
-					preferences, "fieldLabel" + i, defaultLanguageId);
-			}
-		}
+                fieldLabel = LocalizationUtil.getPreferencesValue(
+                    preferences, "fieldLabel" + i, defaultLanguageId);
+            }
+        }
 
-		if (SessionErrors.isEmpty(actionRequest)) {
-			preferences.store();
-		}
+        if (SessionErrors.isEmpty(actionRequest)) {
+            preferences.store();
+        }
 
-		super.processAction(portletConfig, actionRequest, actionResponse);
-	}
+        super.processAction(portletConfig, actionRequest, actionResponse);
+    }
 
 
-	public String render(
-			PortletConfig portletConfig, RenderRequest renderRequest,
-			RenderResponse renderResponse)
-		throws Exception {
+    public String render(
+            PortletConfig portletConfig, RenderRequest renderRequest,
+            RenderResponse renderResponse)
+        throws Exception {
 
-		String cmd = ParamUtil.getString(renderRequest, Constants.CMD);
+        String cmd = ParamUtil.getString(renderRequest, Constants.CMD);
 
-		if (cmd.equals(Constants.ADD)) {
-			return "/edit_field.jsp";
-		}
-		else {
-			return "/configuration.jsp";
-		}
-	}
+        if (cmd.equals(Constants.ADD)) {
+            return "/edit_field.jsp";
+        }
+        else {
+            return "/configuration.jsp";
+        }
+    }
 
-	protected void updateModifiedLocales(
-			String parameter, Map<Locale, String> newLocalizationMap,
-			PortletPreferences preferences)
-		throws Exception {
+    protected void updateModifiedLocales(
+            String parameter, Map<Locale, String> newLocalizationMap,
+            PortletPreferences preferences)
+        throws Exception {
 
-		Map<Locale, String> oldLocalizationMap =
-			LocalizationUtil.getLocalizationMap(preferences, parameter);
+        Map<Locale, String> oldLocalizationMap =
+            LocalizationUtil.getLocalizationMap(preferences, parameter);
 
-		List<Locale> modifiedLocales = LocalizationUtil.getModifiedLocales(
-			oldLocalizationMap, newLocalizationMap);
+        List<Locale> modifiedLocales = LocalizationUtil.getModifiedLocales(
+            oldLocalizationMap, newLocalizationMap);
 
-		for (Locale locale : modifiedLocales) {
-			String languageId = LocaleUtil.toLanguageId(locale);
-			String value = newLocalizationMap.get(locale);
+        for (Locale locale : modifiedLocales) {
+            String languageId = LocaleUtil.toLanguageId(locale);
+            String value = newLocalizationMap.get(locale);
 
-			LocalizationUtil.setPreferencesValue(
-				preferences, parameter, languageId, value);
-		}
-	}
+            LocalizationUtil.setPreferencesValue(
+                preferences, parameter, languageId, value);
+        }
+    }
 
-	protected void validateFields(ActionRequest actionRequest)
-		throws Exception {
+    protected void validateFields(ActionRequest actionRequest)
+        throws Exception {
 
-		Locale defaultLocale = LocaleUtil.getDefault();
-		String defaultLanguageId = LocaleUtil.toLanguageId(defaultLocale);
+        Locale defaultLocale = LocaleUtil.getDefault();
+        String defaultLanguageId = LocaleUtil.toLanguageId(defaultLocale);
 
-		boolean sendAsEmail = GetterUtil.getBoolean(
-			getParameter(actionRequest, "sendAsEmail"));
-		String subject = getParameter(actionRequest, "subject");
+        boolean sendAsEmail = GetterUtil.getBoolean(
+            getParameter(actionRequest, "sendAsEmail"));
+        String subject = getParameter(actionRequest, "subject");
 
-		boolean saveToDatabase = GetterUtil.getBoolean(
-			getParameter(actionRequest, "saveToDatabase"));
+        boolean saveToDatabase = GetterUtil.getBoolean(
+            getParameter(actionRequest, "saveToDatabase"));
 
-		boolean saveToFile = GetterUtil.getBoolean(
-			getParameter(actionRequest, "saveToFile"));
+        boolean saveToFile = GetterUtil.getBoolean(
+            getParameter(actionRequest, "saveToFile"));
 
-		if (!sendAsEmail && !saveToDatabase && !saveToFile) {
-			SessionErrors.add(actionRequest, "handlingRequired");
-		}
+        if (!sendAsEmail && !saveToDatabase && !saveToFile) {
+            SessionErrors.add(actionRequest, "handlingRequired");
+        }
 
-		if (sendAsEmail) {
-			if (Validator.isNull(subject)) {
-				SessionErrors.add(actionRequest, "subjectRequired");
-			}
+        if (sendAsEmail) {
+            if (Validator.isNull(subject)) {
+                SessionErrors.add(actionRequest, "subjectRequired");
+            }
 
-			String[] emailAdresses = WebFormUtil.split(
-				getParameter(actionRequest, "emailAddress"));
+            String[] emailAdresses = WebFormUtil.split(
+                getParameter(actionRequest, "emailAddress"));
 
-			if (emailAdresses.length == 0) {
-				SessionErrors.add(actionRequest, "emailAddressRequired");
-			}
+            if (emailAdresses.length == 0) {
+                SessionErrors.add(actionRequest, "emailAddressRequired");
+            }
 
-			for (String emailAdress : emailAdresses) {
-				emailAdress = emailAdress.trim();
+            for (String emailAdress : emailAdresses) {
+                emailAdress = emailAdress.trim();
 
-				if (!Validator.isEmailAddress(emailAdress)) {
-					SessionErrors.add(actionRequest, "emailAddressInvalid");
-				}
-			}
-		}
+                if (!Validator.isEmailAddress(emailAdress)) {
+                    SessionErrors.add(actionRequest, "emailAddressInvalid");
+                }
+            }
+        }
 
-		if (saveToFile) {
-			String fileName = getParameter(actionRequest, "fileName");
+        if (saveToFile) {
+            String fileName = getParameter(actionRequest, "fileName");
 
-			// Check if server can create a file as specified
+            // Check if server can create a file as specified
 
-			try {
-				FileOutputStream fileOutputStream = new FileOutputStream(
-					fileName, true);
+            try {
+                FileOutputStream fileOutputStream = new FileOutputStream(
+                    fileName, true);
 
-				fileOutputStream.close();
-			}
-			catch (SecurityException se) {
-				SessionErrors.add(actionRequest, "fileNameInvalid");
-			}
-			catch (FileNotFoundException fnfe) {
-				SessionErrors.add(actionRequest, "fileNameInvalid");
-			}
-		}
+                fileOutputStream.close();
+            }
+            catch (SecurityException se) {
+                SessionErrors.add(actionRequest, "fileNameInvalid");
+            }
+            catch (FileNotFoundException fnfe) {
+                SessionErrors.add(actionRequest, "fileNameInvalid");
+            }
+        }
 
-		if (saveToDatabase) {
-			int i = 1;
+        if (saveToDatabase) {
+            int i = 1;
 
-			String languageId = LocaleUtil.toLanguageId(
-				actionRequest.getLocale());
+            String languageId = LocaleUtil.toLanguageId(
+                actionRequest.getLocale());
 
-			String fieldLabel = ParamUtil.getString(
-				actionRequest, "fieldLabel" + i + "_" + languageId);
+            String fieldLabel = ParamUtil.getString(
+                actionRequest, "fieldLabel" + i + "_" + languageId);
 
-			while ((i == 1) || Validator.isNotNull(fieldLabel)) {
-				if (fieldLabel.length() > 75 ) {
-					SessionErrors.add(actionRequest, "fieldSizeInvalid" + i);
-				}
+            while ((i == 1) || Validator.isNotNull(fieldLabel)) {
+                if (fieldLabel.length() > 75 ) {
+                    SessionErrors.add(actionRequest, "fieldSizeInvalid" + i);
+                }
 
-				i++;
+                i++;
 
-				fieldLabel = ParamUtil.getString(
-					actionRequest, "fieldLabel" + i + "_" + languageId);
-			}
-		}
+                fieldLabel = ParamUtil.getString(
+                    actionRequest, "fieldLabel" + i + "_" + languageId);
+            }
+        }
 
-		if (!validateUniqueFieldNames(actionRequest)) {
-			SessionErrors.add(
-				actionRequest, DuplicateColumnNameException.class.getName());
-		}
-	}
+        if (!validateUniqueFieldNames(actionRequest)) {
+            SessionErrors.add(
+                actionRequest, DuplicateColumnNameException.class.getName());
+        }
+    }
 
-	protected boolean validateUniqueFieldNames(ActionRequest actionRequest) {
-		Locale defaultLocale = LocaleUtil.getDefault();
+    protected boolean validateUniqueFieldNames(ActionRequest actionRequest) {
+        Locale defaultLocale = LocaleUtil.getDefault();
 
-		Set<String> localizedUniqueFieldNames = new HashSet<String>();
+        Set<String> localizedUniqueFieldNames = new HashSet<String>();
 
-		int[] formFieldsIndexes = StringUtil.split(
-			ParamUtil.getString(actionRequest, "formFieldsIndexes"), 0);
+        int[] formFieldsIndexes = StringUtil.split(
+            ParamUtil.getString(actionRequest, "formFieldsIndexes"), 0);
 
-		for (int formFieldsIndex : formFieldsIndexes) {
-			Map<Locale, String> fieldLabelMap =
-				LocalizationUtil.getLocalizationMap(
-					actionRequest, "fieldLabel" + formFieldsIndex);
+        for (int formFieldsIndex : formFieldsIndexes) {
+            Map<Locale, String> fieldLabelMap =
+                LocalizationUtil.getLocalizationMap(
+                    actionRequest, "fieldLabel" + formFieldsIndex);
 
-			if (Validator.isNull(fieldLabelMap.get(defaultLocale))) {
-				continue;
-			}
+            if (Validator.isNull(fieldLabelMap.get(defaultLocale))) {
+                continue;
+            }
 
-			for (Locale locale : fieldLabelMap.keySet()) {
-				String fieldLabelValue = fieldLabelMap.get(locale);
+            for (Locale locale : fieldLabelMap.keySet()) {
+                String fieldLabelValue = fieldLabelMap.get(locale);
 
-				if (Validator.isNull(fieldLabelValue)) {
-					continue;
-				}
+                if (Validator.isNull(fieldLabelValue)) {
+                    continue;
+                }
 
-				String languageId = LocaleUtil.toLanguageId(locale);
+                String languageId = LocaleUtil.toLanguageId(locale);
 
-				if (!localizedUniqueFieldNames.add(
-						languageId + "_" + fieldLabelValue)) {
+                if (!localizedUniqueFieldNames.add(
+                        languageId + "_" + fieldLabelValue)) {
 
-					return false;
-				}
-			}
-		}
+                    return false;
+                }
+            }
+        }
 
-		return true;
-	}
+        return true;
+    }
 
 }

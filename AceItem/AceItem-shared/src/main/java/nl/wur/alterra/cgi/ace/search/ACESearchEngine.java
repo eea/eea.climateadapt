@@ -75,8 +75,8 @@ public class ACESearchEngine {
         datainfo_type = searchParams.get(SearchRequestParams.DATAINFO_TYPE);
         if(datainfo_type==null || datainfo_type.length==0) {
 
-        	datainfo_type = new String[1];
-        	datainfo_type[0] = "2";
+            datainfo_type = new String[1];
+            datainfo_type[0] = "2";
         }
         anyOfThese = searchParams.get(SearchRequestParams.ANY);
         if (anyOfThese != null)
@@ -99,7 +99,7 @@ public class ACESearchEngine {
         sortBys = searchParams.get(SearchRequestParams.SORTBY);
         startYear = searchParams.get(SearchRequestParams.START_YEAR);
         endYear = searchParams.get(SearchRequestParams.END_YEAR);
-      
+
 
         if(isEmpty(conditionAdaptationSector)) {
             conditionAdaptationSector = new String[1];
@@ -114,13 +114,13 @@ public class ACESearchEngine {
             conditionAdaptationElement[0] = SearchRequestParams.AND_CONDITION;
         }
         if(isEmpty(conditionScenario)) {
-        	conditionScenario = new String[1];
-        	conditionScenario[0] = SearchRequestParams.AND_CONDITION;
+            conditionScenario = new String[1];
+            conditionScenario[0] = SearchRequestParams.AND_CONDITION;
         }
         if(isEmpty(conditionTimePeriod)) {
-        	conditionTimePeriod = new String[1];
-        	conditionTimePeriod[0] = SearchRequestParams.AND_CONDITION;
-        }        
+            conditionTimePeriod = new String[1];
+            conditionTimePeriod[0] = SearchRequestParams.AND_CONDITION;
+        }
         if(isEmpty(conditionClimateImpact)) {
             conditionClimateImpact = new String[1];
             conditionClimateImpact[0] = SearchRequestParams.AND_CONDITION;
@@ -129,11 +129,11 @@ public class ACESearchEngine {
             freetextMode = new String[1];
             freetextMode[0] = FreetextMode.ANY.name();
         }
-        
+
         if(isEmpty(startYear)) {
             startYear = null;
         }
-        
+
         if(isEmpty(endYear)) {
             endYear = null;
         }
@@ -165,12 +165,12 @@ public class ACESearchEngine {
 
         formBean.setFuzziness(fuzzinessVal);
 
-		if(isEmpty(anyOfThese)) {
+        if(isEmpty(anyOfThese)) {
             formBean.setAnyOfThese("");
-		}
+        }
         else {
             formBean.setAnyOfThese(anyOfThese[0]);
-		}
+        }
 
         if (conditionAdaptationSector != null && conditionAdaptationSector[0].equalsIgnoreCase(SearchRequestParams.OR_CONDITION)) {
             formBean.setConditionAdaptationSector(SearchRequestParams.OR_CONDITION);
@@ -178,12 +178,12 @@ public class ACESearchEngine {
         else {
             formBean.setConditionAdaptationSector(SearchRequestParams.AND_CONDITION);
         }
-        
+
         if (conditionAdaptationCountry != null && conditionAdaptationCountry[0].equalsIgnoreCase(SearchRequestParams.OR_CONDITION)) {
             formBean.setConditionAdaptationCountry(SearchRequestParams.OR_CONDITION);
         }
         else {
-        	formBean.setConditionAdaptationCountry(SearchRequestParams.AND_CONDITION);
+            formBean.setConditionAdaptationCountry(SearchRequestParams.AND_CONDITION);
         }
 
         if (conditionAdaptationElement != null && conditionAdaptationElement[0].equalsIgnoreCase(SearchRequestParams.OR_CONDITION)) {
@@ -316,8 +316,7 @@ public class ACESearchEngine {
             //
             if(rawQuery.length() > 0) {
                 rawQuery += " AND " + ACEIndexConstant.IndexField.DATATYPE + ":" + aceItemType;
-            }
-            else {
+            } else {
                 rawQuery = ACEIndexConstant.IndexField.DATATYPE + ":" + aceItemType;
             }
 
@@ -358,7 +357,7 @@ public class ACESearchEngine {
                     rawQuery += " (" + ACEIndexConstant.IndexField.SCENARIO + ":" + scenario + ") " + formBean.getConditionScenario();
                 }
                 rawQuery =  rawQuery.substring(0, rawQuery.lastIndexOf(formBean.getConditionScenario())) + " )";
-            }  
+            }
 
             //
             // handle time periods
@@ -371,7 +370,7 @@ public class ACESearchEngine {
                 }
                 rawQuery =  rawQuery.substring(0, rawQuery.lastIndexOf(formBean.getConditionTimePeriod())) + " )";
             }
-            
+
             //
             // handle impacts
             //
@@ -396,44 +395,41 @@ public class ACESearchEngine {
                 rawQuery =   rawQuery.substring(0, rawQuery.lastIndexOf(formBean.getConditionAdaptationCountry())) + " )";
             }
 
-            // adding year 
+            // adding year
             //rawQuery += " AND year:2013" ;
-            
+
             Query yearQuery = null;
             if (formBean.getStartyear() != null && formBean.getEndyear() != null)
             {
-            	try {
-	            	 int fromYear = Integer.parseInt(formBean.getStartyear()[0]);
-	            	 int toYear = Integer.parseInt(formBean.getEndyear()[0]);
-	            	 //System.out.println("from year is " + fromYear);
-	            	 //System.out.println("to year is " + toYear);
-	            	 yearQuery = NumericRangeQuery.newIntRange("year", fromYear, toYear, true, true);
-            	}
-            	catch(NumberFormatException e)
-            	{
-            		// print stack trace and do nothing
-            		e.printStackTrace();
-            	}
+                try {
+                     int fromYear = Integer.parseInt(formBean.getStartyear()[0]);
+                     int toYear = Integer.parseInt(formBean.getEndyear()[0]);
+                     //System.out.println("from year is " + fromYear);
+                     //System.out.println("to year is " + toYear);
+                     yearQuery = NumericRangeQuery.newIntRange("year", fromYear, toYear, true, true);
+                } catch(NumberFormatException e) {
+                    // print stack trace and do nothing
+                    e.printStackTrace();
+                }
             }
-            
-            
-            
+
+
+
             ACEIndexSearcher searcher = ACEIndexSearcher.getACEIndexSearcher();
             QueryParser queryParser = new QueryParser(ACEIndexConstant.IndexField.ANY, ACEAnalyzer.getAnalyzer());
             Query query = queryParser.parse(rawQuery);
-            
+
             BooleanQuery booleanQuery = null;
-            if (yearQuery != null)
-            {
+            if (yearQuery != null) {
                booleanQuery = new BooleanQuery();
                booleanQuery.add(query, BooleanClause.Occur.MUST);
                booleanQuery.add(yearQuery, BooleanClause.Occur.MUST);
             }
-            
+
             //System.out.println("Lucene raw query: " + rawQuery);
             //System.out.println("Lucene query: " + query.toString());
             //System.out.println("Lucene boolean query: " + booleanQuery);
-            
+
             // rewritten query is better for logging/debugging but potentially throws runtime exceptions
             // System.out.println("Lucene query (rewritten): " + query.rewrite(((IndexSearcher)searcher).getIndexReader()).toString());
             long start = System.currentTimeMillis();
@@ -444,12 +440,10 @@ public class ACESearchEngine {
             if (yearQuery != null)
             {
                 topDocs = searcher.search(booleanQuery, formBean.getSortBy(), 10);
+            } else {
+                topDocs = searcher.search(query, formBean.getSortBy(), 10);
             }
-            else
-            {
-            	topDocs = searcher.search(query, formBean.getSortBy(), 10);
-            }
-            
+
             long end = System.currentTimeMillis();
             // System.out.println("Lucene searcher # total hits: " + topDocs.totalHits + " in " + (end - start) + " ms");
             ScoreDoc[] hits = topDocs.scoreDocs;
@@ -488,29 +482,27 @@ public class ACESearchEngine {
                     aceItem = AceItemLocalServiceUtil.getAceItem(Long.parseLong(aceItemId));
                     aceItem.setAceItemId(Long.parseLong(aceItemId));
 
-	                // relevance expressed as a percentage
-	                float relevance = hit.score * normalizeScoreFactor * 100;
+                    // relevance expressed as a percentage
+                    float relevance = hit.score * normalizeScoreFactor * 100;
 
-	                // System.out.println("hit.score is: " + hit.score);
-	                // System.out.println("relevance (0.0) is: " + relevance);
+                    // System.out.println("hit.score is: " + hit.score);
+                    // System.out.println("relevance (0.0) is: " + relevance);
 
 
-	                AceItemSearchResult aceItemSearchResult = new AceItemSearchResult(aceItem);
-	                aceItemSearchResult.setRelevance(relevance);
+                    AceItemSearchResult aceItemSearchResult = new AceItemSearchResult(aceItem);
+                    aceItemSearchResult.setRelevance(relevance);
                     //System.out.println("AceItemSearchResult name is " + aceItemSearchResult.getName());
                     //System.out.println("AceItemSearchResult isNew is " + aceItemSearchResult.isIsNew());
                     //System.out.println("AceItemSearchResult feature is " + aceItemSearchResult.getFeature());
-	                results.add(aceItemSearchResult);
+                    results.add(aceItemSearchResult);
                 }
             }
             return results;
-        }
-        catch(ParseException x) {
+        } catch(ParseException x) {
             //System.out.println(x.getMessage());
             x.printStackTrace();
             throw new ACELuceneException(x.getMessage(), x);
-        }
-        catch (IOException x) {
+        } catch (IOException x) {
             //System.out.println(x.getMessage());
             x.printStackTrace();
             throw new ACELuceneException(x.getMessage(), x);
