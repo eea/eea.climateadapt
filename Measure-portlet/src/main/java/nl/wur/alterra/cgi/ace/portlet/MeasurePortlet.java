@@ -40,7 +40,7 @@ public class MeasurePortlet extends MeasureUpdateHelper {
      * @param request
      * @param response
      */
-    public void addMeasure(ActionRequest request, ActionResponse response){
+    public void addMeasure(ActionRequest request, ActionResponse response) {
         try {
             doAddMeasure(request, response);
         } catch (Exception e) {
@@ -109,7 +109,7 @@ public class MeasurePortlet extends MeasureUpdateHelper {
      * @param request
      * @param response
      */
-    public void updateMeasure(ActionRequest request, ActionResponse response){
+    public void updateMeasure(ActionRequest request, ActionResponse response) {
         try {
             doUpdateMeasure(request, response);
         } catch (Exception e) {
@@ -169,7 +169,7 @@ public class MeasurePortlet extends MeasureUpdateHelper {
                     if ((newapproved == ACEIndexUtil.Status_APPROVED) && measure.getReplacesId() != 0) {
                         // delete the old measure which gets replaced, update the corresponding aceitem
                         aceitem = AceItemLocalServiceUtil.getAceItemByStoredAt("ace_measure_id=" + measure.getReplacesId());
-                        if (aceitem == null){
+                        if (aceitem == null) {
                             aceitem = createAceItemInsideDB(measure);
                         }
                         aceitem.setStoredAt("ace_measure_id=" + measure.getMeasureId());
@@ -177,22 +177,22 @@ public class MeasurePortlet extends MeasureUpdateHelper {
                         measure.setReplacesId((long) 0);
                     } else {
                         aceitem = AceItemLocalServiceUtil.getAceItemByStoredAt("ace_measure_id=" + measure.getMeasureId());
-                        if (aceitem == null){
+                        if (aceitem == null) {
                             aceitem = createAceItemInsideDB(measure);
                         }
                     }
 
-                    if (oldapproved == ACEIndexUtil.Status_SUBMITTED && newapproved == ACEIndexUtil.Status_APPROVED){
+                    if (oldapproved == ACEIndexUtil.Status_SUBMITTED && newapproved == ACEIndexUtil.Status_APPROVED) {
                         measure.setApprovaldate( new Date() );
                     }
 
                     MeasureLocalServiceUtil.updateMeasure(measure);
-                    if (aceitem != null){
+                    if (aceitem != null) {
                         updateAceItem(measure, aceitem);
                     }
                 }
 
-                if (oldapproved == ACEIndexUtil.Status_SUBMITTED && newapproved == ACEIndexUtil.Status_APPROVED){
+                if (oldapproved == ACEIndexUtil.Status_SUBMITTED && newapproved == ACEIndexUtil.Status_APPROVED) {
                     sendApprovalNotification(measure);
                 }
 
@@ -320,7 +320,7 @@ public class MeasurePortlet extends MeasureUpdateHelper {
             // Candidate gets deleted: the already approved measure becomes editable again.
             if (measure.getReplacesId() != 0) {
                 measure = MeasureLocalServiceUtil.getMeasure(measure.getReplacesId());
-                if (measure != null){
+                if (measure != null) {
                     measure.setReplacesId((long) 0);
                     MeasureLocalServiceUtil.updateMeasure(measure);
                 }
@@ -328,7 +328,7 @@ public class MeasurePortlet extends MeasureUpdateHelper {
                 // Get the associated ace-item
                 AceItem aceItem = AceItemLocalServiceUtil.getAceItemByStoredAt("ace_measure_id=" + measureId);
 
-                if (aceItem != null){
+                if (aceItem != null) {
                     // Delete the ace-item index entry.
                     new ACEIndexSynchronizer().delete(aceItem);
 

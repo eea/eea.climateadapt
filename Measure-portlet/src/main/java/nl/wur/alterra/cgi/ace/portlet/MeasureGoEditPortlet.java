@@ -29,31 +29,31 @@ public class MeasureGoEditPortlet extends MVCPortlet {
 
         HttpServletRequest httpRequest =
             PortalUtil.getOriginalServletRequest(
-            PortalUtil.getHttpServletRequest(renderRequest) ) ;
+            PortalUtil.getHttpServletRequest(renderRequest));
 
-        if( httpRequest.getParameter("ace_measure_id") != null ) {
+        if (httpRequest.getParameter("ace_measure_id") != null) {
             try {
                 Measure measure = null;
                 try {
-                    measure = MeasureLocalServiceUtil.getMeasure( Long.parseLong(httpRequest.getParameter("ace_measure_id") ) ) ;
+                    measure = MeasureLocalServiceUtil.getMeasure(Long.parseLong(httpRequest.getParameter("ace_measure_id")));
                 } catch(Exception e) {
                     measure = null;
                 }
 
                 // if there is no candidate item for this item: edit is permitted
-                if((measure != null) && (measure.getReplacesId() != measure.getMeasureId())
+                if ((measure != null) && (measure.getReplacesId() != measure.getMeasureId())
                         && (
-                             renderRequest.isUserInRole("Portal Content Reviewer") ||
-                             renderRequest.isUserInRole("administrator") ||
-                             renderRequest.isUserInRole("Power User") ||
-                             renderRequest.isUserInRole("User")
+                                renderRequest.isUserInRole("Portal Content Reviewer")
+                             || renderRequest.isUserInRole("administrator")
+                             || renderRequest.isUserInRole("Power User")
+                             || renderRequest.isUserInRole("User")
                             )
                        ) {
                     renderRequest.setAttribute(Constants.MEASUREID, httpRequest.getParameter("ace_measure_id"));
                 }
             } catch (Exception e) {
-                System.out.println(e.getMessage()) ;
-                e.printStackTrace(System.out) ;
+                System.out.println(e.getMessage());
+                e.printStackTrace(System.out);
             }
         }
 

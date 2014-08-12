@@ -99,8 +99,7 @@ public abstract class MeasureUpdateHelperForSharedMeasure extends MVCPortlet {
 
         UploadPortletRequest uploadRequest;
 
-        if (req == null)
-        {
+        if (req == null) {
             uploadRequest = PortalUtil.getUploadPortletRequest(request);
         } else {
             uploadRequest = req;
@@ -123,8 +122,7 @@ public abstract class MeasureUpdateHelperForSharedMeasure extends MVCPortlet {
 
         Date d = new Date();
 
-        if (uploadRequest.getParameter("checkcreationdate") != null)
-        {
+        if (uploadRequest.getParameter("checkcreationdate") != null) {
             d.setTime(Long.parseLong(uploadRequest.getParameter("checkcreationdate")));
         } else {
             d.setTime(0);
@@ -139,24 +137,24 @@ public abstract class MeasureUpdateHelperForSharedMeasure extends MVCPortlet {
         measure.setName(uploadRequest.getParameter("name"));
         //System.out.println("uploadRequest parameter name is " + uploadRequest.getParameter("name"));
         //System.out.println("Name is " + measure.getName());
-        measure.setAdmincomment(uploadRequest.getParameter( "admincomment"));
-        measure.setDescription(uploadRequest.getParameter( "description"));
+        measure.setAdmincomment(uploadRequest.getParameter("admincomment"));
+        measure.setDescription(uploadRequest.getParameter("description"));
         //System.out.println("DESCRIPTION IS " + measure.getDescription());
-        measure.setImplementationtype(uploadRequest.getParameter( "implementationtype"));
-        measure.setImplementationtime(uploadRequest.getParameter( "implementationtime"));
+        measure.setImplementationtype(uploadRequest.getParameter("implementationtype"));
+        measure.setImplementationtime(uploadRequest.getParameter("implementationtime"));
         //System.out.println("Implementation time is " + measure.getImplementationtime());
-        measure.setLifetime(uploadRequest.getParameter( "lifetime"));
-        measure.setSpatiallayer(uploadRequest.getParameter( "spatiallayer"));
-        measure.setLegalaspects(uploadRequest.getParameter( "legalaspects"));
-        measure.setStakeholderparticipation(uploadRequest.getParameter( "stakeholderparticipation"));
-        measure.setContact(uploadRequest.getParameter( "contact"));
-        measure.setObjectives(uploadRequest.getParameter( "objectives"));
-        measure.setChallenges(uploadRequest.getParameter( "challenges"));
+        measure.setLifetime(uploadRequest.getParameter("lifetime"));
+        measure.setSpatiallayer(uploadRequest.getParameter("spatiallayer"));
+        measure.setLegalaspects(uploadRequest.getParameter("legalaspects"));
+        measure.setStakeholderparticipation(uploadRequest.getParameter("stakeholderparticipation"));
+        measure.setContact(uploadRequest.getParameter("contact"));
+        measure.setObjectives(uploadRequest.getParameter("objectives"));
+        measure.setChallenges(uploadRequest.getParameter("challenges"));
         //System.out.println("CHALLENGES IS " + measure.getChallenges());
-        measure.setSucceslimitations(uploadRequest.getParameter( "succeslimitations"));
+        measure.setSucceslimitations(uploadRequest.getParameter("succeslimitations"));
 
 
-        String websites = uploadRequest.getParameter( "website");
+        String websites = uploadRequest.getParameter("website");
         // robust multiple website handling. Check for splitters space, ',' and
         // ';'
         if (websites != null) {
@@ -187,9 +185,9 @@ public abstract class MeasureUpdateHelperForSharedMeasure extends MVCPortlet {
         }
         measure.setWebsite(websites);
 
-        measure.setCostbenefit(uploadRequest.getParameter( "costbenefit"));
-        measure.setKeywords(uploadRequest.getParameter( "keywords"));
-        measure.setComments(uploadRequest.getParameter( "comments"));
+        measure.setCostbenefit(uploadRequest.getParameter("costbenefit"));
+        measure.setKeywords(uploadRequest.getParameter("keywords"));
+        measure.setComments(uploadRequest.getParameter("comments"));
         /*
          * int dateMonth = ParamUtil.getInteger(request, "startdateMonth"); int
          * dateDay = ParamUtil.getInteger(request, "startdateDay"); int dateYear
@@ -209,13 +207,13 @@ public abstract class MeasureUpdateHelperForSharedMeasure extends MVCPortlet {
          * publicationdate = PortalUtil.getDate(dateMonth, dateDay, dateYear);
          * measure.setEndDate(publicationdate);
          */
-        measure.setSpecialtagging(uploadRequest.getParameter( "specialtagging"));
+        measure.setSpecialtagging(uploadRequest.getParameter("specialtagging"));
 
         String choosencountries = "";
         for (AceItemCountry aceitemcountry : AceItemCountry.values()) {
 
-            if (uploadRequest.getParameter( "chk_countries_" + aceitemcountry.toString()) != null) {
-                String s = uploadRequest.getParameter( "chk_countries_" + aceitemcountry.toString());
+            if (uploadRequest.getParameter("chk_countries_" + aceitemcountry.toString()) != null) {
+                String s = uploadRequest.getParameter("chk_countries_" + aceitemcountry.toString());
                 if (s.equalsIgnoreCase(aceitemcountry.toString())) {
                     choosencountries += aceitemcountry.toString() + ";";
                 }
@@ -228,8 +226,8 @@ public abstract class MeasureUpdateHelperForSharedMeasure extends MVCPortlet {
         String choosensectors = "";
         for (AceItemSector aceitemsector : AceItemSector.values()) {
 
-            if (uploadRequest.getParameter( "chk_sectors_" + aceitemsector.toString()) != null) {
-                String s = uploadRequest.getParameter( "chk_sectors_" + aceitemsector.toString());
+            if (uploadRequest.getParameter("chk_sectors_" + aceitemsector.toString()) != null) {
+                String s = uploadRequest.getParameter("chk_sectors_" + aceitemsector.toString());
                 if (s.equalsIgnoreCase(aceitemsector.toString())) {
                     choosensectors += aceitemsector.toString() + ";";
                 }
@@ -241,8 +239,8 @@ public abstract class MeasureUpdateHelperForSharedMeasure extends MVCPortlet {
 
         String choosenelements = "";
         for (AceItemElement aceitemelement : AceItemElement.values()) {
-            if (uploadRequest.getParameter( "chk_elements_" + aceitemelement) != null) {
-                String e = uploadRequest.getParameter( "chk_elements_" + aceitemelement);
+            if (uploadRequest.getParameter("chk_elements_" + aceitemelement) != null) {
+                String e = uploadRequest.getParameter("chk_elements_" + aceitemelement);
                 if (e.equalsIgnoreCase(aceitemelement.toString())) {
                     choosenelements += aceitemelement.toString() + ";";
                 }
@@ -253,8 +251,8 @@ public abstract class MeasureUpdateHelperForSharedMeasure extends MVCPortlet {
         // climate impacts - new
         String choosenclimateimpacts = "";
         for (AceItemClimateImpact aceitemclimateimpact : AceItemClimateImpact.values()) {
-            if (uploadRequest.getParameter( "chk_climateimpacts_" + aceitemclimateimpact) != null) {
-                String e = uploadRequest.getParameter( "chk_climateimpacts_" + aceitemclimateimpact);
+            if (uploadRequest.getParameter("chk_climateimpacts_" + aceitemclimateimpact) != null) {
+                String e = uploadRequest.getParameter("chk_climateimpacts_" + aceitemclimateimpact);
                 if (e.equalsIgnoreCase(aceitemclimateimpact.toString())) {
                     choosenclimateimpacts += aceitemclimateimpact.toString() + ";";
                 }
@@ -265,8 +263,8 @@ public abstract class MeasureUpdateHelperForSharedMeasure extends MVCPortlet {
         // case study feature - new
         String choosenfeature = "";
         for (MeasureCaseStudyFeature feature : MeasureCaseStudyFeature.values()) {
-            if (uploadRequest.getParameter( "chk_casestudyfeature_" + feature) != null) {
-                String e = uploadRequest.getParameter( "chk_casestudyfeature_" + feature);
+            if (uploadRequest.getParameter("chk_casestudyfeature_" + feature) != null) {
+                String e = uploadRequest.getParameter("chk_casestudyfeature_" + feature);
                 if (e.equalsIgnoreCase(feature.toString())) {
                     choosenfeature += feature.toString() + ";";
                 }
@@ -277,15 +275,14 @@ public abstract class MeasureUpdateHelperForSharedMeasure extends MVCPortlet {
         String choosenoptions = uploadRequest.getParameter("chk_adaptoptions");
         measure.setAdaptationoptions(choosenoptions);
 
-        measure.setMao_type(uploadRequest.getParameter( "mao_type"));
+        measure.setMao_type(uploadRequest.getParameter("mao_type"));
 
         String choosengeos = "";
-        for (AceItemGeos geo : AceItemGeos.values())
-        {
+        for (AceItemGeos geo : AceItemGeos.values()) {
             //System.out.println("Geo is " + geo.toString());
             //System.out.println("Geo is " + geo.name());
-            if (uploadRequest.getParameter( "chk_geos_trans") != null) {
-                String e = uploadRequest.getParameter( "chk_geos_trans");
+            if (uploadRequest.getParameter("chk_geos_trans") != null) {
+                String e = uploadRequest.getParameter("chk_geos_trans");
                 if (measure.getMao_type().equalsIgnoreCase("A") && e.equalsIgnoreCase(geo.toString())) {
                     choosengeos = geo.toString();
                     break;
@@ -294,8 +291,7 @@ public abstract class MeasureUpdateHelperForSharedMeasure extends MVCPortlet {
         }
         measure.setGeos_(choosengeos);
 
-        if (uploadRequest.getParameter( "chk_geos_trans") != null && measure.getMao_type().equalsIgnoreCase("M"))
-        {
+        if (uploadRequest.getParameter("chk_geos_trans") != null && measure.getMao_type().equalsIgnoreCase("M")) {
             choosengeos = uploadRequest.getParameter("chk_geos_trans");
             measure.setGeos_(choosengeos);
         }
@@ -309,8 +305,8 @@ public abstract class MeasureUpdateHelperForSharedMeasure extends MVCPortlet {
         // adaptation relevance
         String choosenrelevance = "";
         for (AceItemRelevance relevance : AceItemRelevance.values()) {
-            if (uploadRequest.getParameter( "chk_relevance_" + relevance) != null) {
-                String e = uploadRequest.getParameter( "chk_relevance_" + relevance);
+            if (uploadRequest.getParameter("chk_relevance_" + relevance) != null) {
+                String e = uploadRequest.getParameter("chk_relevance_" + relevance);
                 if (e.equalsIgnoreCase(relevance.toString())) {
                     choosenrelevance += relevance.toString() + ";";
                 }
@@ -319,9 +315,9 @@ public abstract class MeasureUpdateHelperForSharedMeasure extends MVCPortlet {
         measure.setRelevance(choosenrelevance);
 
 
-        measure.setSource(uploadRequest.getParameter( "source"));
+        measure.setSource(uploadRequest.getParameter("source"));
 
-        String importance = uploadRequest.getParameter( "chk_importance");
+        String importance = uploadRequest.getParameter("chk_importance");
         if (measure.getImportance() == 1) {
             measure.setImportance(measure.getImportance() - 1);
             measure.setRating(measure.getRating() - 100);
@@ -332,7 +328,7 @@ public abstract class MeasureUpdateHelperForSharedMeasure extends MVCPortlet {
             measure.setRating(measure.getRating() + 100);
         }
 
-        String approved = uploadRequest.getParameter( "chk_controlstatus");
+        String approved = uploadRequest.getParameter("chk_controlstatus");
         //System.out.println("approved is " + approved);
         if ((approved == null) || (approved.length() == 0)) {
             measure.setControlstatus((short) -1);
@@ -340,8 +336,7 @@ public abstract class MeasureUpdateHelperForSharedMeasure extends MVCPortlet {
             measure.setControlstatus(Short.parseShort(approved));
 
             // set the approved date here
-            if (measure.getControlstatus() == 1)
-            {
+            if (measure.getControlstatus() == 1) {
                 Date approvalDate = new Date();
                 measure.setApprovaldate(approvalDate);
             }
@@ -349,40 +344,38 @@ public abstract class MeasureUpdateHelperForSharedMeasure extends MVCPortlet {
 
 
 
-        if (uploadRequest.getParameter( "lon") != null) {
+        if (uploadRequest.getParameter("lon") != null) {
             try {
-                measure.setLon(Double.parseDouble(uploadRequest.getParameter( "lon")));
+                measure.setLon(Double.parseDouble(uploadRequest.getParameter("lon")));
             } catch (NumberFormatException e) {
                 // do nothing
 
             }
         }
 
-        if (uploadRequest.getParameter( "lat") != null) {
+        if (uploadRequest.getParameter("lat") != null) {
             try {
-                measure.setLat(Double.parseDouble(uploadRequest.getParameter( "lat")));
+                measure.setLat(Double.parseDouble(uploadRequest.getParameter("lat")));
             } catch (NumberFormatException e) {
                 // do nothing
 
             }
         }
 
-        if (Validator.isNotNull(uploadRequest.getParameter( "chk_categories"))) {
-            measure.setCategory(uploadRequest.getParameter( "chk_categories"));
+        if (Validator.isNotNull(uploadRequest.getParameter("chk_categories"))) {
+            measure.setCategory(uploadRequest.getParameter("chk_categories"));
         }
 
 
-        measure.setSatarea(uploadRequest.getParameter( "satarea"));
+        measure.setSatarea(uploadRequest.getParameter("satarea"));
 
-        if (Validator.isNull(measure.getCreationdate()))
-        {
+        if (Validator.isNull(measure.getCreationdate())) {
             // creation date is the time when case study is first saved
             measure.setCreationdate(new Date());
         }
 
 
-        if (Validator.isNotNull(uploadRequest.getParameter("comments")))
-        {
+        if (Validator.isNotNull(uploadRequest.getParameter("comments"))) {
             measure.setComments(uploadRequest.getParameter("comments"));
         }
 
@@ -390,46 +383,46 @@ public abstract class MeasureUpdateHelperForSharedMeasure extends MVCPortlet {
         //UploadPortletRequest uploadRequest = PortalUtil.getUploadPortletRequest(request);
         ServiceContext serviceContext = ServiceContextFactory.getInstance(DLFileEntry.class.getName(), request);
         String sourceFileName = uploadRequest.getFileName("primePhotoName");
-        String primePhotoId = uploadRequest.getParameter( "primephoto");
+        String primePhotoId = uploadRequest.getParameter("primephoto");
 
         //System.out.println("sourceFileName is " + sourceFileName);
         //System.out.println("sourceFileName is not null" + Validator.isNotNull(sourceFileName));
-        if (Validator.isNotNull(sourceFileName) && (sourceFileName.endsWith(".png") || sourceFileName.endsWith(".jpg") || sourceFileName.endsWith(".jpeg") || sourceFileName.endsWith(".png") ||
-                sourceFileName.endsWith(".gif")))
-        {
+        if (Validator.isNotNull(sourceFileName) && (sourceFileName.endsWith(".png")
+                || sourceFileName.endsWith(".jpg")
+                || sourceFileName.endsWith(".jpeg")
+                || sourceFileName.endsWith(".png")
+                || sourceFileName.endsWith(".gif"))) {
             FileEntry image;
             String extension ;
 
             int i = sourceFileName.lastIndexOf('.');
-            extension = sourceFileName.substring(i+1);
+            extension = sourceFileName.substring(i + 1);
 
             //System.out.println("Inside control");
-            if (Validator.isNotNull(primePhotoId))
-            {
+            if (Validator.isNotNull(primePhotoId)) {
                 //System.out.println("primePhotoId is " + primePhotoId);
-                image = DLAppLocalServiceUtil.getFileEntry( Long.parseLong( primePhotoId ) );
+                image = DLAppLocalServiceUtil.getFileEntry(Long.parseLong(primePhotoId));
                 long folderId = image.getFolderId();
                 //System.out.println("image name is " + image.getNameWithExtension());
-                if (! image.getTitle().equalsIgnoreCase(sourceFileName))
-                {
+                if (! image.getTitle().equalsIgnoreCase(sourceFileName)) {
                     try {
                         //looks like image replaced add the image now
                         File f = uploadRequest.getFile("primePhotoName");
-                        DLAppLocalServiceUtil.addFileEntry( themeDisplay.getUserId(), image.getRepositoryId(), folderId, sourceFileName, "image/"+extension, null, "", "", f, serviceContext );
+                        DLAppLocalServiceUtil.addFileEntry(themeDisplay.getUserId(), image.getRepositoryId(), folderId, sourceFileName, "image/" + extension, null, "", "", f, serviceContext);
 
                         String primaryKey = String.valueOf(image.getPrimaryKey());
                         addPermissions(themeDisplay, primaryKey, image.getClass().getName());
                         measure.setPrimephoto(String.valueOf(image.getFileEntryId()));
                         request.setAttribute("primePhotoId", String.valueOf(image.getFileEntryId()));
 
-//                  } catch(DuplicateImageNameException e)
+//                  } catch (DuplicateImageNameException e)
 //                    {
 //                        //get the image id
 //                        //System.out.println("Duplicate image - getting image id");
 //                        image = IGImageServiceUtil.getImageByFolderIdAndNameWithExtension(themeDisplay.getScopeGroupId(), folderId, sourceFileName);
 //                        measure.setPrimephoto(String.valueOf(image.getImageId()));
 //                    }
-                    } catch(Exception e) {
+                    } catch (Exception e) {
                         e.printStackTrace();
                         throw e;
                     }
@@ -449,29 +442,28 @@ public abstract class MeasureUpdateHelperForSharedMeasure extends MVCPortlet {
 
                     try {
                         imageFolder = DLAppLocalServiceUtil.getFolder(themeDisplay.getScopeGroupId(), rootFolder.getFolderId(), folder);
-                    } catch(PortalException e) {
+                    } catch (PortalException e) {
                         //System.out.println("image folder is null");
-                        imageFolder = DLAppLocalServiceUtil.addFolder(themeDisplay.getUserId(),themeDisplay.getScopeGroupId(), rootFolder.getFolderId(), folder, "", serviceContext);
+                        imageFolder = DLAppLocalServiceUtil.addFolder(themeDisplay.getUserId(), themeDisplay.getScopeGroupId(), rootFolder.getFolderId(), folder, "", serviceContext);
                         String primaryKey = String.valueOf(imageFolder.getPrimaryKey());
                         addPermissions(themeDisplay, primaryKey, DLFolder.class.getName());
 
                     }
 
-                    image = DLAppLocalServiceUtil.addFileEntry( themeDisplay.getUserId(), themeDisplay.getScopeGroupId(), imageFolder.getFolderId(), sourceFileName, "image/"+extension, null, "", "", f, serviceContext );
+                    image = DLAppLocalServiceUtil.addFileEntry(themeDisplay.getUserId(), themeDisplay.getScopeGroupId(), imageFolder.getFolderId(), sourceFileName, "image/" + extension, null, "", "", f, serviceContext);
                     String primaryKey = String.valueOf(image.getPrimaryKey());
-                    addPermissions(themeDisplay, primaryKey, DLFileEntry.class.getName() );
+                    addPermissions(themeDisplay, primaryKey, DLFileEntry.class.getName());
                     measure.setPrimephoto(String.valueOf(image.getFileEntryId()));
                     //request.setAttribute("primePhotoId", String.valueOf(image.getImageId()));
                 }
-//                catch(DuplicateImageNameException e)
+//                catch (DuplicateImageNameException e)
 //                {
 //                    //get the image id
 //                    //System.out.println("Duplicate image - getting image id");
 //                    image = IGImageServiceUtil.getImageByFolderIdAndNameWithExtension(themeDisplay.getScopeGroupId(), imageFolder.getFolderId(), sourceFileName);
 //                    measure.setPrimephoto(String.valueOf(image.getImageId()));
 //                }
-                catch(Exception e)
-                {
+                catch (Exception e) {
                     e.printStackTrace();
                     throw e;
                 }
@@ -487,8 +479,7 @@ public abstract class MeasureUpdateHelperForSharedMeasure extends MVCPortlet {
         // get how many photos are uploaded
 
         int photoCounter =  0;
-        if (Validator.isNotNull(uploadRequest.getParameter("photocounter")))
-        {
+        if (Validator.isNotNull(uploadRequest.getParameter("photocounter"))) {
             photoCounter = Integer.parseInt(uploadRequest.getParameter("photocounter"));
         }
 
@@ -500,10 +491,8 @@ public abstract class MeasureUpdateHelperForSharedMeasure extends MVCPortlet {
         String[] supPhotoIdsStored = null;
         List<String> supPhotoListStored = null;
 
-        if (photoCounter > 0)
-        {
-            if (Validator.isNotNull(uploadRequest.getParameter("supphotos")))
-            {
+        if (photoCounter > 0) {
+            if (Validator.isNotNull(uploadRequest.getParameter("supphotos"))) {
                 //System.out.println("supphotos is " + uploadRequest.getParameter("supphotos"));
                 // split it
                 supphotosStored = uploadRequest.getParameter("supphotos");
@@ -511,9 +500,8 @@ public abstract class MeasureUpdateHelperForSharedMeasure extends MVCPortlet {
                 supPhotoListStored = new LinkedList<String>();
 
                 //populate the list with already loaded image names
-                for (String photoId : supPhotoIdsStored)
-                {
-                    FileEntry image = DLAppLocalServiceUtil.getFileEntry( Long.parseLong( photoId ) );
+                for (String photoId : supPhotoIdsStored) {
+                    FileEntry image = DLAppLocalServiceUtil.getFileEntry(Long.parseLong(photoId));
                     String name = image.getTitle();
                     supPhotoListStored.add(name.toLowerCase());
                 }
@@ -521,19 +509,16 @@ public abstract class MeasureUpdateHelperForSharedMeasure extends MVCPortlet {
         }
 
         //validate
-        for(int counter=1; counter <= photoCounter; counter++)
-        {
+        for (int counter = 1; counter <= photoCounter; counter++) {
             String sup_photo_name = uploadRequest.getParameter("sup_photos_names" + counter);
             String sup_photo_description = uploadRequest.getParameter("sup_photos_description" + counter);
             String sup_photo_fileName = uploadRequest.getFileName("supphotofiles" + counter);
 
             // if (Validator.isNull(sup_photo_name) || Validator.isNull(sup_photo_description) || Validator.isNull(sup_photo_fileName))
-            if (Validator.isNull(sup_photo_name) || Validator.isNull(sup_photo_fileName))
-            {
+            if (Validator.isNull(sup_photo_name) || Validator.isNull(sup_photo_fileName)) {
 
                 // before we declare invalid check it is just the document file missing and it was alreay uploaded
-                if (Validator.isNotNull(sup_photo_fileName))
-                {
+                if (Validator.isNotNull(sup_photo_fileName)) {
                     //System.out.println("photo field missing");
                     isPhotosValid = false;
                     // add error message
@@ -541,11 +526,10 @@ public abstract class MeasureUpdateHelperForSharedMeasure extends MVCPortlet {
                     SessionErrors.add(request, "invalid-multiple-photo-upload");
                     break;
                 } else {
-                    if (Validator.isNotNull(uploadRequest.getParameter("supphotos")))
-                    {
+                    if (Validator.isNotNull(uploadRequest.getParameter("supphotos"))) {
                         // if (Validator.isNotNull(sup_photo_name) && Validator.isNotNull(sup_photo_description) && Validator.isNull(sup_photo_fileName) && supPhotoListStored.contains(sup_photo_name.toLowerCase()))
-                        if (Validator.isNotNull(sup_photo_name) && Validator.isNull(sup_photo_fileName) && supPhotoListStored.contains(sup_photo_name.toLowerCase()))
-                        {
+                        if (Validator.isNotNull(sup_photo_name) && Validator.isNull(sup_photo_fileName)
+                                && supPhotoListStored.contains(sup_photo_name.toLowerCase())) {
 
                             //System.out.println("photo is already there so just skip");
                             continue;
@@ -554,8 +538,7 @@ public abstract class MeasureUpdateHelperForSharedMeasure extends MVCPortlet {
                         isPhotosValid = false;
 
                         // if (counter > 1 || Validator.isNotNull(sup_photo_name) || Validator.isNotNull(sup_photo_description))
-                        if (counter > 1 || Validator.isNotNull(sup_photo_name))
-                        {
+                        if (counter > 1 || Validator.isNotNull(sup_photo_name)) {
                             // add error message
                             errors.add("invalid-multiple-photo-upload");
                             SessionErrors.add(request, "invalid-multiple-photo-upload");
@@ -566,9 +549,10 @@ public abstract class MeasureUpdateHelperForSharedMeasure extends MVCPortlet {
             }
 
             // check if the file name is jpg,jpeg,png,gif
-            if (isPhotosValid && !(sup_photo_fileName.endsWith(".jpg") || sup_photo_fileName.endsWith(".jpeg") || sup_photo_fileName.endsWith(".png") ||
-                    sup_photo_fileName.endsWith(".gif")))
-            {
+            if (isPhotosValid && !(sup_photo_fileName.endsWith(".jpg")
+                        || sup_photo_fileName.endsWith(".jpeg")
+                        || sup_photo_fileName.endsWith(".png")
+                        || sup_photo_fileName.endsWith(".gif"))) {
                 isPhotosValid = false;
                 // add error message
                 errors.add("invalid-multiple-photo-upload");
@@ -577,8 +561,7 @@ public abstract class MeasureUpdateHelperForSharedMeasure extends MVCPortlet {
             }
         }
 
-        if (isPhotosValid && photoCounter > 0)
-        {
+        if (isPhotosValid && photoCounter > 0) {
             // now we have two options. if supphotos is not null then populate it in a data structure
             // iterate through the input fields and check the names already uploaded using supphotos
             // if names already uploaded then skip the image upload
@@ -588,8 +571,7 @@ public abstract class MeasureUpdateHelperForSharedMeasure extends MVCPortlet {
 
             // create case name folder
             String folder = null;
-            if (Validator.isNull(measure.getName()))
-            {
+            if (Validator.isNull(measure.getName())) {
                 folder = "case".concat("-").concat("temp");
             } else {
                 folder = "case".concat("-").concat(String.valueOf(measure.getName().trim().replace(' ', '-')));
@@ -604,7 +586,7 @@ public abstract class MeasureUpdateHelperForSharedMeasure extends MVCPortlet {
 
             try {
                 imageFolder = DLAppLocalServiceUtil.getFolder(themeDisplay.getScopeGroupId(), rootFolder.getFolderId(), folder);
-            } catch(PortalException e) {
+            } catch (PortalException e) {
                 //System.out.println("image folder is null");
                 imageFolder = DLAppLocalServiceUtil.addFolder(themeDisplay.getUserId(), themeDisplay.getScopeGroupId(), rootFolder.getFolderId(), folder, "", serviceContext);
                 String primaryKey = String.valueOf(imageFolder.getPrimaryKey());
@@ -614,12 +596,10 @@ public abstract class MeasureUpdateHelperForSharedMeasure extends MVCPortlet {
             // we are ready to do the upload
             StringBuffer uploadedFiles = new StringBuffer("");
 
-            if (Validator.isNotNull(uploadRequest.getParameter("supphotos")))
-            {
+            if (Validator.isNotNull(uploadRequest.getParameter("supphotos"))) {
 
                 // iterate through each image and do the upload if the image already not uploaded
-                for(int counter=1; counter <= photoCounter; counter++)
-                {
+                for (int counter = 1; counter <= photoCounter; counter++) {
                     String sup_photo_name = uploadRequest.getParameter("sup_photos_names" + counter);
                     String sup_photo_description = uploadRequest.getParameter("sup_photos_description" + counter);
                     String sup_photo_fileName = uploadRequest.getFileName("supphotofiles" + counter);
@@ -628,14 +608,12 @@ public abstract class MeasureUpdateHelperForSharedMeasure extends MVCPortlet {
 
                     //System.out.println("supPhotoList stored is " + supPhotoListStored);
                     //System.out.println("sup_photo_name is " + sup_photo_name.toLowerCase());
-                    if (supPhotoListStored.contains(sup_photo_name.toLowerCase()))
-                    {
+                    if (supPhotoListStored.contains(sup_photo_name.toLowerCase())) {
                         // get the index of the photo from the list
                         int index = supPhotoListStored.indexOf(sup_photo_name.toLowerCase());
 
                         //System.out.println("index is " + index);
-                        if (uploadedFiles.toString().equalsIgnoreCase(""))
-                        {
+                        if (uploadedFiles.toString().equalsIgnoreCase("")) {
                             uploadedFiles.append(supPhotoIdsStored[index]);
                         } else {
                             uploadedFiles.append(";").append(supPhotoIdsStored[index]);
@@ -645,8 +623,7 @@ public abstract class MeasureUpdateHelperForSharedMeasure extends MVCPortlet {
                         FileEntry image = insertImage(uploadRequest, counter, imageFolder, sup_photo_name, sup_photo_description, themeDisplay, serviceContext);
 
 
-                        if (uploadedFiles.toString().equalsIgnoreCase(""))
-                        {
+                        if (uploadedFiles.toString().equalsIgnoreCase("")) {
                             uploadedFiles.append(image.getFileEntryId());
                         } else {
                             uploadedFiles.append(";").append(image.getFileEntryId());
@@ -656,18 +633,15 @@ public abstract class MeasureUpdateHelperForSharedMeasure extends MVCPortlet {
                 }
             } else {
                 // first time we are uploading
-                for(int counter=1; counter <= photoCounter; counter++)
-                {
+                for (int counter = 1; counter <= photoCounter; counter++) {
                     String sup_photo_name = uploadRequest.getParameter("sup_photos_names" + counter);
                     String sup_photo_description = uploadRequest.getParameter("sup_photos_description" + counter);
                     String sup_photo_fileName = uploadRequest.getFileName("supphotofiles" + counter);
 
                     FileEntry image = insertImage(uploadRequest, counter, imageFolder, sup_photo_name, sup_photo_description, themeDisplay, serviceContext);
 
-                    if (image != null)
-                    {
-                        if (uploadedFiles.toString().equalsIgnoreCase(""))
-                        {
+                    if (image != null) {
+                        if (uploadedFiles.toString().equalsIgnoreCase("")) {
                             uploadedFiles.append(image.getFileEntryId());
                         } else {
                             uploadedFiles.append(";").append(image.getFileEntryId());
@@ -680,8 +654,7 @@ public abstract class MeasureUpdateHelperForSharedMeasure extends MVCPortlet {
             measure.setSupphotos(uploadedFiles.toString());
         } else {
             // preserve the old values
-            if (photoCounter > 0)
-            {
+            if (photoCounter > 0) {
                 measure.setSupphotos(uploadRequest.getParameter("supphotos"));
             } else {
                 measure.setSupphotos("");
@@ -696,8 +669,7 @@ public abstract class MeasureUpdateHelperForSharedMeasure extends MVCPortlet {
         // get how many documents are uploaded
 
         int docCounter =  0;
-        if (Validator.isNotNull(uploadRequest.getParameter("doccounter")))
-        {
+        if (Validator.isNotNull(uploadRequest.getParameter("doccounter"))) {
             docCounter = Integer.parseInt(uploadRequest.getParameter("doccounter"));
         }
 
@@ -709,10 +681,8 @@ public abstract class MeasureUpdateHelperForSharedMeasure extends MVCPortlet {
         String[] supDocIdsStored = null;
         List<String> supDocListStored = null;
 
-        if (docCounter > 0)
-        {
-            if (Validator.isNotNull(uploadRequest.getParameter("supdocs")))
-            {
+        if (docCounter > 0) {
+            if (Validator.isNotNull(uploadRequest.getParameter("supdocs"))) {
                 //System.out.println("supdocs is " + uploadRequest.getParameter("supdocs"));
                 // split it
                 supdocsStored = uploadRequest.getParameter("supdocs");
@@ -720,8 +690,7 @@ public abstract class MeasureUpdateHelperForSharedMeasure extends MVCPortlet {
                 supDocListStored = new LinkedList<String>();
 
                 //populate the list with already loaded document names
-                for (String docId : supDocIdsStored)
-                {
+                for (String docId : supDocIdsStored) {
                     DLFileEntry file = DLFileEntryLocalServiceUtil.getDLFileEntry(Long.parseLong(docId));
                     String supFileName = file.getTitle();
                     supDocListStored.add(supFileName.toLowerCase());
@@ -730,8 +699,7 @@ public abstract class MeasureUpdateHelperForSharedMeasure extends MVCPortlet {
         }
 
         //validate
-        for(int counter=1; counter <= docCounter; counter++)
-        {
+        for (int counter = 1; counter <= docCounter; counter++) {
             String sup_doc_name = uploadRequest.getParameter("sup_docs_names" + counter);
             String sup_doc_description = uploadRequest.getParameter("sup_docs_description" + counter);
             String sup_doc_fileName = uploadRequest.getFileName("supdocfiles" + counter);
@@ -741,12 +709,10 @@ public abstract class MeasureUpdateHelperForSharedMeasure extends MVCPortlet {
             //System.out.println("filename is " + sup_doc_fileName);
 
 
-            if (Validator.isNull(sup_doc_name) || Validator.isNull(sup_doc_description) || Validator.isNull(sup_doc_fileName))
-            {
+            if (Validator.isNull(sup_doc_name) || Validator.isNull(sup_doc_description) || Validator.isNull(sup_doc_fileName)) {
 
                 // before we declare invalid check it is just the document file missing and it was alreay uploaded
-                if (Validator.isNotNull(sup_doc_fileName))
-                {
+                if (Validator.isNotNull(sup_doc_fileName)) {
                     //System.out.println("document field missing");
                     isDocsValid = false;
                     // add error message
@@ -754,10 +720,9 @@ public abstract class MeasureUpdateHelperForSharedMeasure extends MVCPortlet {
                     SessionErrors.add(request, "invalid-multiple-doc-upload");
                     break;
                 } else {
-                    if (Validator.isNotNull(uploadRequest.getParameter("supdocs")))
-                    {
-                        if (Validator.isNotNull(sup_doc_name) && Validator.isNotNull(sup_doc_description) && Validator.isNull(sup_doc_fileName) && supDocListStored.contains(sup_doc_name.toLowerCase()))
-                        {
+                    if (Validator.isNotNull(uploadRequest.getParameter("supdocs"))) {
+                        if (Validator.isNotNull(sup_doc_name) && Validator.isNotNull(sup_doc_description)
+                                && Validator.isNull(sup_doc_fileName) && supDocListStored.contains(sup_doc_name.toLowerCase())) {
 
                             //System.out.println("document is already there so just skip");
                             continue;
@@ -765,8 +730,7 @@ public abstract class MeasureUpdateHelperForSharedMeasure extends MVCPortlet {
                     } else {
                         isDocsValid = false;
 
-                        if (counter > 1 || Validator.isNotNull(sup_doc_name) || Validator.isNotNull(sup_doc_description))
-                        {
+                        if (counter > 1 || Validator.isNotNull(sup_doc_name) || Validator.isNotNull(sup_doc_description)) {
                             // add error message
                             errors.add("invalid-multiple-doc-upload");
                             SessionErrors.add(request, "invalid-multiple-doc-upload");
@@ -777,9 +741,10 @@ public abstract class MeasureUpdateHelperForSharedMeasure extends MVCPortlet {
             }
 
             // check if the file name is pdf,doc,docx,xls
-            if ( isDocsValid && !(sup_doc_fileName.endsWith(".pdf") || sup_doc_fileName.endsWith(".doc") || sup_doc_fileName.endsWith(".docx") ||
-                    sup_doc_fileName.endsWith(".xls")))
-            {
+            if (isDocsValid && !(sup_doc_fileName.endsWith(".pdf")
+                    || sup_doc_fileName.endsWith(".doc")
+                    || sup_doc_fileName.endsWith(".docx")
+                    || sup_doc_fileName.endsWith(".xls"))) {
                 isDocsValid = false;
                 errors.add("invalid-multiple-doc-upload");
                 SessionErrors.add(request, "invalid-multiple-doc-upload");
@@ -787,8 +752,7 @@ public abstract class MeasureUpdateHelperForSharedMeasure extends MVCPortlet {
             }
         }
 
-        if (isDocsValid && docCounter > 0)
-        {
+        if (isDocsValid && docCounter > 0) {
             // now we have two options. if docphotos is not null then populate it in a data structure
             // iterate through the input fields and check the names already uploaded using docphotos
             // if names already uploaded then skip the document upload
@@ -797,15 +761,14 @@ public abstract class MeasureUpdateHelperForSharedMeasure extends MVCPortlet {
             DLFolder rootFolder = null;
             try {
                 rootFolder = DLFolderLocalServiceUtil.getFolder(themeDisplay.getScopeGroupId(), 0, "casestudy");
-            } catch(Exception e) {
+            } catch (Exception e) {
                 e.printStackTrace();
                 throw e;
             }
 
             // create case name folder
             String folder = null;
-            if (Validator.isNull(measure.getName()))
-            {
+            if (Validator.isNull(measure.getName())) {
                 folder = "case".concat("-").concat("temp");
             } else {
                 folder = "case".concat("-").concat(String.valueOf(measure.getName().trim().replace(' ', '-')));
@@ -820,17 +783,17 @@ public abstract class MeasureUpdateHelperForSharedMeasure extends MVCPortlet {
             try {
                 //docFolder = DLFolderLocalServiceUtil.getFolder(themeDisplay.getScopeGroupId(), rootFolder.getFolderId(), folder);
                 docFolder = DLAppLocalServiceUtil.getFolder(themeDisplay.getScopeGroupId(), rootFolder.getFolderId(), folder);
-            } catch(PortalException e) {
+            } catch (PortalException e) {
                 //System.out.println("document folder is null");
                 try {
                     docFolder = DLAppLocalServiceUtil.addFolder(themeDisplay.getUserId(), themeDisplay.getScopeGroupId(), rootFolder.getFolderId(), folder, "",  serviceContext);
                     String primaryKey = String.valueOf(docFolder.getPrimaryKey());
                     addPermissions(themeDisplay, primaryKey, docFolder.getClass().getName());
-                } catch(Exception ex) {
+                } catch (Exception ex) {
                     throw ex;
                 }
 
-            } catch(Exception e) {
+            } catch (Exception e) {
                 e.printStackTrace();
                 throw e;
             }
@@ -838,12 +801,10 @@ public abstract class MeasureUpdateHelperForSharedMeasure extends MVCPortlet {
             // we are ready to do the upload
             StringBuffer uploadedFiles = new StringBuffer("");
 
-            if (Validator.isNotNull(uploadRequest.getParameter("supdocs")))
-            {
+            if (Validator.isNotNull(uploadRequest.getParameter("supdocs"))) {
 
                 // iterate through each document and do the upload if the document already not uploaded
-                for(int counter=1; counter <= docCounter; counter++)
-                {
+                for (int counter = 1; counter <= docCounter; counter++) {
                     String sup_doc_name = uploadRequest.getParameter("sup_docs_names" + counter);
                     String sup_doc_description = uploadRequest.getParameter("sup_docs_description" + counter);
                     String sup_doc_fileName = uploadRequest.getFileName("supdocfiles" + counter);
@@ -853,14 +814,12 @@ public abstract class MeasureUpdateHelperForSharedMeasure extends MVCPortlet {
                     //System.out.println("supDocList stored is " + supDocListStored);
                     //System.out.println("sup_doc_name is " + sup_doc_name.toLowerCase());
 
-                    if (supDocListStored.contains(sup_doc_name.toLowerCase()))
-                    {
+                    if (supDocListStored.contains(sup_doc_name.toLowerCase())) {
                         // get the index of the photo from the list
                         int index = supDocListStored.indexOf(sup_doc_name.toLowerCase());
 
                         //System.out.println("index is " + index);
-                        if (uploadedFiles.toString().equalsIgnoreCase(""))
-                        {
+                        if (uploadedFiles.toString().equalsIgnoreCase("")) {
                             uploadedFiles.append(supDocIdsStored[index]);
                         } else {
                             uploadedFiles.append(";").append(supDocIdsStored[index]);
@@ -871,8 +830,7 @@ public abstract class MeasureUpdateHelperForSharedMeasure extends MVCPortlet {
                         FileEntry doc = insertFile(uploadRequest, counter, docFolder, sup_doc_name, sup_doc_description, themeDisplay, serviceContext);
                         //IGImage image = insertImage(uploadRequest, counter, imageFolder, sup_photo_name, sup_photo_description, themeDisplay, serviceContext);
 
-                        if (uploadedFiles.toString().equalsIgnoreCase(""))
-                        {
+                        if (uploadedFiles.toString().equalsIgnoreCase("")) {
                             uploadedFiles.append(doc.getFileEntryId());
                         } else {
                             uploadedFiles.append(";").append(doc.getFileEntryId());
@@ -882,8 +840,7 @@ public abstract class MeasureUpdateHelperForSharedMeasure extends MVCPortlet {
                 }
             } else {
                 // first time we are uploading
-                for(int counter=1; counter <= docCounter; counter++)
-                {
+                for (int counter = 1; counter <= docCounter; counter++) {
                     String sup_doc_name = uploadRequest.getParameter("sup_docs_names" + counter);
                     String sup_doc_description = uploadRequest.getParameter("sup_docs_description" + counter);
                     String sup_doc_fileName = uploadRequest.getFileName("supdocfiles" + counter);
@@ -891,10 +848,8 @@ public abstract class MeasureUpdateHelperForSharedMeasure extends MVCPortlet {
                     //IGImage image = insertImage(uploadRequest, counter, imageFolder, sup_photo_name, sup_photo_description, themeDisplay, serviceContext);
                     FileEntry doc = insertFile(uploadRequest, counter, docFolder, sup_doc_name, sup_doc_description, themeDisplay, serviceContext);
 
-                    if (doc != null)
-                    {
-                        if (uploadedFiles.toString().equalsIgnoreCase(""))
-                        {
+                    if (doc != null) {
+                        if (uploadedFiles.toString().equalsIgnoreCase("")) {
                             uploadedFiles.append(doc.getFileEntryId());
                         } else {
                             uploadedFiles.append(";").append(doc.getFileEntryId());
@@ -906,8 +861,7 @@ public abstract class MeasureUpdateHelperForSharedMeasure extends MVCPortlet {
             measure.setSupdocs(uploadedFiles.toString());
         } else {
             // preserve the old values
-            if (docCounter > 0)
-            {
+            if (docCounter > 0) {
                 measure.setSupdocs(uploadRequest.getParameter("supdocs"));
             } else {
                 measure.setSupdocs("");
@@ -917,9 +871,9 @@ public abstract class MeasureUpdateHelperForSharedMeasure extends MVCPortlet {
     }
 
 
-    private FileEntry insertFile(UploadPortletRequest uploadRequest, int counter, Folder docFolder, String sup_doc_name, String sup_doc_description, ThemeDisplay themeDisplay, ServiceContext serviceContext)
-            throws Exception
-    {
+    private FileEntry insertFile(UploadPortletRequest uploadRequest, int counter, Folder docFolder, String sup_doc_name,
+            String sup_doc_description, ThemeDisplay themeDisplay, ServiceContext serviceContext) throws Exception {
+
         FileEntry doc = null;
 
         // upload the image
@@ -929,16 +883,16 @@ public abstract class MeasureUpdateHelperForSharedMeasure extends MVCPortlet {
             String fileName = uploadRequest.getFileName("supdocfiles" + counter);
             //System.out.println("fileName is " + fileName);
             int i = fileName.lastIndexOf('.');
-            String extension = fileName.substring(i+1);
+            String extension = fileName.substring(i + 1);
             //System.out.println("extension is " + extension);
-            //image = IGImageServiceUtil.addImage(themeDisplay.getScopeGroupId(), imageFolder.getFolderId(), sup_photo_name, sup_photo_description, f, "image/"+extension, serviceContext);
+            //image = IGImageServiceUtil.addImage(themeDisplay.getScopeGroupId(), imageFolder.getFolderId(), sup_photo_name, sup_photo_description, f, "image/" + extension, serviceContext);
 
-            doc = DLAppLocalServiceUtil.addFileEntry( themeDisplay.getUserId(), themeDisplay.getScopeGroupId(), docFolder.getFolderId(), fileName,
-                    "image/"+extension, sup_doc_name, sup_doc_description, "changeLog", f, serviceContext );
+            doc = DLAppLocalServiceUtil.addFileEntry(themeDisplay.getUserId(), themeDisplay.getScopeGroupId(), docFolder.getFolderId(), fileName,
+                    "image/" + extension, sup_doc_name, sup_doc_description, "changeLog", f, serviceContext);
             String primaryKey = String.valueOf(doc.getPrimaryKey());
-            addPermissions(themeDisplay, primaryKey, DLFileEntry.class.getName() );
+            addPermissions(themeDisplay, primaryKey, DLFileEntry.class.getName());
         }
-//        catch(DuplicateFileException e)
+//        catch (DuplicateFileException e)
 //        {
 //            //get the image id
 //            //System.out.println("Duplicate file - getting file id");
@@ -957,13 +911,12 @@ public abstract class MeasureUpdateHelperForSharedMeasure extends MVCPortlet {
 //                //image = IGImageServiceUtil.getImageByFolderIdAndNameWithExtension(themeDisplay.getScopeGroupId(), imageFolder.getFolderId(), fileName);
 //                //System.out.println("stored doc name is " + doc.getTitle());
 //            }
-//            catch(Exception ex)
+//            catch (Exception ex)
 //            {
 //                throw ex;
 //            }
 //        }
-        catch(Exception e)
-        {
+        catch (Exception e) {
             e.printStackTrace();
             throw e;
         }
@@ -985,9 +938,8 @@ public abstract class MeasureUpdateHelperForSharedMeasure extends MVCPortlet {
      * @return
      * @throws Exception
      */
-    private FileEntry insertImage(UploadPortletRequest uploadRequest, int counter, Folder imageFolder, String sup_photo_name, String sup_photo_description, ThemeDisplay themeDisplay, ServiceContext serviceContext)
-            throws Exception
-    {
+    private FileEntry insertImage(UploadPortletRequest uploadRequest, int counter, Folder imageFolder, String sup_photo_name,
+            String sup_photo_description, ThemeDisplay themeDisplay, ServiceContext serviceContext) throws Exception {
         FileEntry image = null;
         // upload the image
         try {
@@ -996,16 +948,16 @@ public abstract class MeasureUpdateHelperForSharedMeasure extends MVCPortlet {
             String fileName = uploadRequest.getFileName("supphotofiles" + counter);
             //System.out.println("fileName is " + fileName);
             int i = fileName.lastIndexOf('.');
-            String extension = fileName.substring(i+1);
+            String extension = fileName.substring(i + 1);
             //System.out.println("extension is " + extension);
-            image = DLAppLocalServiceUtil.addFileEntry( themeDisplay.getUserId(), themeDisplay.getScopeGroupId(), imageFolder.getFolderId(), fileName,
-                    "image/"+extension, sup_photo_name, sup_photo_description, "changeLog", f, serviceContext );
+            image = DLAppLocalServiceUtil.addFileEntry(themeDisplay.getUserId(), themeDisplay.getScopeGroupId(), imageFolder.getFolderId(), fileName,
+                    "image/" + extension, sup_photo_name, sup_photo_description, "changeLog", f, serviceContext);
 
 
             String primaryKey = String.valueOf(image.getPrimaryKey());
             addPermissions(themeDisplay, primaryKey, "com.liferay.portal.kernel.repository.model.FileEntry");
         }
-//        catch(DuplicateImageNameException e)
+//        catch (DuplicateImageNameException e)
 //        {
 //            //get the image id
 //            //System.out.println("Duplicate image - getting image id");
@@ -1024,13 +976,12 @@ public abstract class MeasureUpdateHelperForSharedMeasure extends MVCPortlet {
 //                //image = IGImageServiceUtil.getImageByFolderIdAndNameWithExtension(themeDisplay.getScopeGroupId(), imageFolder.getFolderId(), fileName);
 //                //System.out.println("image name is " + image.getName());
 //            }
-//            catch(Exception ex)
+//            catch (Exception ex)
 //            {
 //                throw ex;
 //            }
 //        }
-        catch(Exception e)
-        {
+        catch (Exception e) {
             e.printStackTrace();
             throw e;
         }
@@ -1278,8 +1229,7 @@ public abstract class MeasureUpdateHelperForSharedMeasure extends MVCPortlet {
         }
     }
 
-    private void addPermissions(ThemeDisplay themeDisplay, String primaryKey, String resource ) throws Exception
-    {
+    private void addPermissions(ThemeDisplay themeDisplay, String primaryKey, String resource) throws Exception {
         Role roleUser = RoleLocalServiceUtil.getRole(themeDisplay.getCompanyId(), RoleConstants.SITE_MEMBER);
         long roleId = roleUser.getRoleId();
 
@@ -1292,14 +1242,14 @@ public abstract class MeasureUpdateHelperForSharedMeasure extends MVCPortlet {
         ResourcePermission resourcePermission = null;
 
         try {
-            resourcePermission = ResourcePermissionLocalServiceUtil.getResourcePermission( themeDisplay.getCompanyId(), resource, ResourceConstants.SCOPE_INDIVIDUAL, String.valueOf( primaryKey ), roleId );
-            ResourceAction resourceAction = ResourceActionLocalServiceUtil.getResourceAction( resource, ActionKeys.VIEW );
-            if( Validator.isNotNull( resourcePermission ) && !ResourcePermissionLocalServiceUtil.hasActionId( resourcePermission, resourceAction ) ) {
-                resourcePermission.setActionIds( resourcePermission.getActionIds() + resourceAction.getBitwiseValue() );
-                ResourcePermissionLocalServiceUtil.updateResourcePermission( resourcePermission );
+            resourcePermission = ResourcePermissionLocalServiceUtil.getResourcePermission(themeDisplay.getCompanyId(), resource, ResourceConstants.SCOPE_INDIVIDUAL, String.valueOf(primaryKey), roleId);
+            ResourceAction resourceAction = ResourceActionLocalServiceUtil.getResourceAction(resource, ActionKeys.VIEW);
+            if (Validator.isNotNull(resourcePermission) && !ResourcePermissionLocalServiceUtil.hasActionId(resourcePermission, resourceAction)) {
+                resourcePermission.setActionIds(resourcePermission.getActionIds() + resourceAction.getBitwiseValue());
+                ResourcePermissionLocalServiceUtil.updateResourcePermission(resourcePermission);
             }
-        }catch( com.liferay.portal.NoSuchResourcePermissionException e ){
-            resourcePermission = ResourcePermissionLocalServiceUtil.createResourcePermission( CounterLocalServiceUtil.increment());
+        } catch (com.liferay.portal.NoSuchResourcePermissionException e) {
+            resourcePermission = ResourcePermissionLocalServiceUtil.createResourcePermission(CounterLocalServiceUtil.increment());
             resourcePermission.setCompanyId(themeDisplay.getCompanyId());
             resourcePermission.setName(resource);
             resourcePermission.setScope(ResourceConstants.SCOPE_INDIVIDUAL);
@@ -1333,8 +1283,7 @@ public abstract class MeasureUpdateHelperForSharedMeasure extends MVCPortlet {
 
             String retString = new String(wordCharArray);
 
-            if (retString.length() >= 75)
-            {
+            if (retString.length() >= 75) {
                 retString = retString.substring(0, 75);
             }
             return new String(wordCharArray);

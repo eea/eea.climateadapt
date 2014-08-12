@@ -3,15 +3,14 @@ package nl.wur.alterra.cgi.ace.portlet;
 import com.liferay.portal.kernel.util.OrderByComparator;
 
 public class MeasureUtil {
-/**
-*
-* @param orderByCol
-* @param orderByType
-* @return
-*/
 
-    public static OrderByComparator getMeasureOrderByComparator(
-    String orderByCol, String orderByType) {
+    /**
+     *
+     * @param orderByCol
+     * @param orderByType
+     * @return
+     */
+    public static OrderByComparator getMeasureOrderByComparator(String orderByCol, String orderByType) {
 
         boolean orderByAsc = false;
 

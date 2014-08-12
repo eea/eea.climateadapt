@@ -15,7 +15,7 @@ public class MeasureControlstatusComparator extends OrderByComparator {
 
     public static String ORDER_BY_DESC = "controlstatus DESC";
 
-    private boolean _asc ;
+    private boolean _asc;
 
     public MeasureControlstatusComparator(boolean orderBy) {
         _asc = orderBy;
@@ -53,6 +53,6 @@ public class MeasureControlstatusComparator extends OrderByComparator {
     }
 
     public String toString() {
-        return "MeasureControlstatusComparator " +_asc;
+        return "MeasureControlstatusComparator " + _asc;
     }
 }

@@ -66,8 +66,7 @@ public class ShareMeasurePortlet extends MeasureUpdateHelperForSharedMeasure {
         UploadPortletRequest uploadRequest = PortalUtil.getUploadPortletRequest(request);
         String measure_id = uploadRequest.getParameter("measureId");
 
-        if (Validator.isNull(measure_id))
-        {
+        if (Validator.isNull(measure_id)) {
             measure.setMeasureId(0);
         } else {
            measure.setMeasureId(ParamUtil.getLong(request, "measureId"));

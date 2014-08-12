@@ -57,8 +57,7 @@ public class SliderPortlet extends MVCPortlet {
             List results = MeasureLocalServiceUtil.dynamicQuery(query);
 
             Measure caseStudy = null;
-            if (results != null && results.size() > 0)
-            {
+            if (results != null && results.size() > 0) {
                 List<Measure> listOfMeasure = (List<Measure>) results;
                 caseStudy = listOfMeasure.get(0);
                 log.info("latest case study obtained is " + caseStudy.getName());
@@ -81,8 +80,7 @@ public class SliderPortlet extends MVCPortlet {
 
             System.out.println("going to process other types");
             Measure adaptationOption = null;
-            if (results != null && results.size() > 0)
-            {
+            if (results != null && results.size() > 0) {
                 List<Measure> listOfMeasure = (List<Measure>) results;
                 adaptationOption = listOfMeasure.get(0);
                 log.info("latest adaptation option id is " + adaptationOption.getMeasureId());
@@ -101,8 +99,7 @@ public class SliderPortlet extends MVCPortlet {
             query.addOrder(OrderFactoryUtil.desc("approvaldate"));
             query.setLimit(0, 1);
             results = AceItemLocalServiceUtil.dynamicQuery(query);
-            if (results != null && results.size() > 0)
-            {
+            if (results != null && results.size() > 0) {
                 List<AceItem> listOfMeasure = (List<AceItem>) results;
                 aceItem = listOfMeasure.get(0);
                 log.info("latest aceitem id is " + aceItem.getAceItemId());
@@ -110,16 +107,14 @@ public class SliderPortlet extends MVCPortlet {
                 log.info("description is " + aceItem.getDescription());
             }
 
-            if (adaptationOption != null && aceItem != null)
-            {
+            if (adaptationOption != null && aceItem != null) {
                 Date adaptApprovalDate = adaptationOption.getApprovaldate();
                 Date aceItemApprovalDate = aceItem.getApprovaldate();
 
                 log.info("adaptation option approval date " + adaptApprovalDate);
                 log.info("ace item approval date " + aceItemApprovalDate);
 
-                if (adaptApprovalDate.compareTo(aceItemApprovalDate) >= 0)
-                {
+                if (adaptApprovalDate.compareTo(aceItemApprovalDate) >= 0) {
                     renderRequest.setAttribute("type", "adaptationoption");
                     renderRequest.setAttribute("aceadaptobject", adaptationOption);
                 } else {
@@ -157,7 +152,7 @@ public class SliderPortlet extends MVCPortlet {
             int end = -1;
             long classNameId = 0;
             List<Long> folderIds = new ArrayList<Long>();
-            folderIds.add( 0L );
+            folderIds.add(0L);
 
             Calendar c = Calendar.getInstance();
             c.setTime(new Date());
@@ -171,14 +166,15 @@ public class SliderPortlet extends MVCPortlet {
             OrderByComparator obc = new ArticleModifiedDateComparator(false);
 
 
-            List<JournalArticle> journalArticlesList = JournalArticleLocalServiceUtil.search(companyId, groupId, folderIds,  classNameId, articleId, version, title, description, content, type, structureIds, templateIds, displayDateGT, displayDateLT, status, reviewDate,  andOperator,  start,  end,  obc);
+            List<JournalArticle> journalArticlesList = JournalArticleLocalServiceUtil.search(companyId, groupId, folderIds,
+                    classNameId, articleId, version, title, description, content, type, structureIds, templateIds,
+                    displayDateGT, displayDateLT, status, reviewDate,  andOperator,  start,  end,  obc);
 
             List<JournalEvent> journalList = new ArrayList<JournalEvent>();
 
 
 
-            for (JournalArticle article : journalArticlesList)
-            {
+            for (JournalArticle article : journalArticlesList) {
                 String name = "url"; // The name of the custom field
                 String urlValue = ""; // The value of the custom field: remember that this will always be a java.lang.String
 
@@ -211,7 +207,7 @@ public class SliderPortlet extends MVCPortlet {
                 node = document.selectSingleNode("/root/dynamic-element[@name='" + name + "']/dynamic-content");
                 locationValue = node.getText();
 
-                SimpleDateFormat dateFormatter = new SimpleDateFormat("MMM/dd/yyyy", java.util.Locale.ENGLISH );
+                SimpleDateFormat dateFormatter = new SimpleDateFormat("MMM/dd/yyyy", java.util.Locale.ENGLISH);
                 String eventDate = monthInMMFormat + "/" + dayValue + "/" + yearValue;
                 Date eventDt = dateFormatter.parse(eventDate);
                 c = Calendar.getInstance();
@@ -224,13 +220,12 @@ public class SliderPortlet extends MVCPortlet {
 
                 boolean displayFlag = false;
 
-                if (eventDt.compareTo(currentDt) >= 0 )
-                {
+                if (eventDt.compareTo(currentDt) >= 0) {
                     displayFlag = true;
                 }
 
                 // show only the latest version
-                if(JournalArticleLocalServiceUtil.isLatestVersion(groupId,article.getArticleId(),article.getVersion()) && displayFlag){
+                if (JournalArticleLocalServiceUtil.isLatestVersion(groupId, article.getArticleId(), article.getVersion()) && displayFlag) {
                     JournalEvent newEvent = new JournalEvent();
                     newEvent.setArticle(article);
                     newEvent.setDate(dayValue);
@@ -246,8 +241,7 @@ public class SliderPortlet extends MVCPortlet {
             log.info("the length of event articles is " + journalList.size());
             JournalEvent journalEvent = null;
 
-            if (journalList.size() > 0 )
-            {
+            if (journalList.size() > 0) {
                 journalEvent = journalList.get(0);
                 log.info("journal event is " + journalEvent);
             }
@@ -260,8 +254,7 @@ public class SliderPortlet extends MVCPortlet {
     }
 
     // Decorator for the JournalArticle
-    public static class JournalEvent implements Comparable
-    {
+    public static class JournalEvent implements Comparable {
         String url;
         String year;
         String month;
@@ -314,19 +307,16 @@ public class SliderPortlet extends MVCPortlet {
             this.eventDt = eventDt;
         }
 
-        public int compareTo(Object o)
-        {
+        public int compareTo(Object o) {
             JournalEvent journal =(JournalEvent) o;
-            if (this.eventDt.compareTo(journal.getEventDt()) <= 0)
-            {
+            if (this.eventDt.compareTo(journal.getEventDt()) <= 0) {
                 return -1;
             } else {
                 return 1;
             }
         }
 
-        public String toString()
-        {
+        public String toString() {
             StringBuffer buffer = new StringBuffer();
             buffer.append("Title: ").append(this.article.getTitle());
             buffer.append("Description: ").append(this.article.getDescription());
