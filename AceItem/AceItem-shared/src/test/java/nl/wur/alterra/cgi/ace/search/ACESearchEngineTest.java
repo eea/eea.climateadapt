@@ -39,7 +39,8 @@ public class ACESearchEngineTest extends ACESearchEngine {
      * is riddled with System.out.println, which indicates the original author
      * didn't design with unit testing in mind.
      */
-    @Ignore
+    @Ignore("Make method testable first")
+    @Test
     public void simpleSearch() throws Exception {
         //ACESearchEngine se = new ACESearchEngine();
         AceSearchFormBean formBean = createFormbean(this);
