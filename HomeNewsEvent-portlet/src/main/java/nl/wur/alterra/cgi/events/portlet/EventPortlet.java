@@ -29,7 +29,7 @@ import com.liferay.portlet.journal.util.comparator.ArticleModifiedDateComparator
 import com.liferay.util.bridges.mvc.MVCPortlet;
 
 /**
- * Portlet implementation class EventPortlet
+ * Portlet implementation class EventPortlet.
  */
 public class EventPortlet extends MVCPortlet {
 
@@ -52,12 +52,12 @@ public class EventPortlet extends MVCPortlet {
             String[] templateIds = {"ACE-EVENT-TEMPLATE"};
             long classNameId = 0;
             List<Long> folderIds = new ArrayList<Long>();
-            folderIds.add( 0L );
+            folderIds.add(0L);
 
 
             HttpServletRequest httpRequest =
                     PortalUtil.getOriginalServletRequest(
-                            PortalUtil.getHttpServletRequest(renderRequest) ) ;
+                            PortalUtil.getHttpServletRequest(renderRequest));
 
             String showParam = httpRequest.getParameter("show");
 
@@ -70,16 +70,14 @@ public class EventPortlet extends MVCPortlet {
             int start = -1;
             int end = -1;
             boolean showAllFlag = false;
-            if (showParam != null && showParam.equalsIgnoreCase("full"))
-            {
+            if (showParam != null && showParam.equalsIgnoreCase("full")) {
                 start = -1;
                 end = -1;
                 //displayDateLT = null;
                 showAllFlag = true;
             }
 
-            if (displayDateLT != null)
-            {
+            if (displayDateLT != null) {
                 Calendar c = Calendar.getInstance();
                 c.setTime(displayDateLT);
                 c.add(Calendar.DATE, 1);
@@ -100,9 +98,8 @@ public class EventPortlet extends MVCPortlet {
             List<JournalEvent> journalList = new ArrayList<JournalEvent>();
 
             int ctr = 0;
-            for (JournalArticle article : journalArticlesList)
-            {
-                ctr ++;
+            for (JournalArticle article : journalArticlesList) {
+                ctr++;
                 String name = "url"; // The name of the custom field
                 String urlValue = ""; // The value of the custom field: remember that this will always be a java.lang.String
 
@@ -154,14 +151,13 @@ public class EventPortlet extends MVCPortlet {
 
                 boolean displayFlag = false;
 
-                if (eventDt.compareTo(currentDt) >= 0 || showAllFlag)
-                {
+                if (eventDt.compareTo(currentDt) >= 0 || showAllFlag) {
                     displayFlag = true;
                 }
 
 
                 // show only the latest version
-                if(JournalArticleLocalServiceUtil.isLatestVersion(groupId,article.getArticleId(),article.getVersion()) && displayFlag){
+                if (JournalArticleLocalServiceUtil.isLatestVersion(groupId, article.getArticleId(), article.getVersion()) && displayFlag) {
                     JournalEvent newEvent = new JournalEvent();
                     newEvent.setArticle(article);
                     newEvent.setArticleTitle(titleValue);
@@ -178,18 +174,15 @@ public class EventPortlet extends MVCPortlet {
 
             Collections.sort(journalList);
             // get the sublist for first 5 articles if it is not full page
-            if (showParam == null || ! showParam.equalsIgnoreCase("full"))
-            {
-                if (journalList.size() > 3)
-                {
+            if (showParam == null || !showParam.equalsIgnoreCase("full")) {
+                if (journalList.size() > 3) {
                     journalList = journalList.subList(0, 3);
                 }
             }
 
             renderRequest.setAttribute("eventList", journalList);
 
-            if (showParam != null && showParam.equalsIgnoreCase("full"))
-            {
+            if (showParam != null && showParam.equalsIgnoreCase("full")) {
                 renderRequest.setAttribute("showall", "full");
             }
 
@@ -202,8 +195,7 @@ public class EventPortlet extends MVCPortlet {
     }
 
 
-    public static class JournalEvent implements Comparable
-    {
+    public static class JournalEvent implements Comparable {
         String url;
         String year;
         String month;
@@ -211,7 +203,7 @@ public class EventPortlet extends MVCPortlet {
         String location;
         String articleTitle;
         Date eventDt;
-        JournalArticle article ;
+        JournalArticle article;
 
 
         public JournalArticle getArticle() {
@@ -264,11 +256,9 @@ public class EventPortlet extends MVCPortlet {
         }
 
 
-        public int compareTo(Object o)
-        {
-            JournalEvent journal =(JournalEvent) o;
-            if (this.eventDt.compareTo(journal.getEventDt()) <= 0)
-            {
+        public int compareTo(Object o) {
+            JournalEvent journal = (JournalEvent) o;
+            if (this.eventDt.compareTo(journal.getEventDt()) <= 0) {
                 return -1;
             } else {
                 return 1;

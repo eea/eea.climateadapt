@@ -30,7 +30,7 @@ import com.liferay.portlet.journal.util.comparator.ArticleModifiedDateComparator
 import com.liferay.util.bridges.mvc.MVCPortlet;
 
 /**
- * Portlet implementation class NewsPortlet
+ * Portlet implementation class NewsPortlet.
  */
 public class NewsPortlet extends MVCPortlet {
 
@@ -51,12 +51,12 @@ public class NewsPortlet extends MVCPortlet {
             String[] templateIds = {"ACE-NEWS-TEMPLATE"};
             long classNameId = 0;
             List<Long> folderIds = new ArrayList<Long>();
-            folderIds.add( 0L );
+            folderIds.add(0L);
 
 
             HttpServletRequest httpRequest =
                     PortalUtil.getOriginalServletRequest(
-                    PortalUtil.getHttpServletRequest(renderRequest) ) ;
+                    PortalUtil.getHttpServletRequest(renderRequest));
 
             String showParam = httpRequest.getParameter("show");
 
@@ -68,8 +68,7 @@ public class NewsPortlet extends MVCPortlet {
             boolean andOperator = true;
             int start = 0;
             int end = ParamUtil.getInteger(renderRequest, "delta", 3);
-            if (showParam != null && showParam.equalsIgnoreCase("full"))
-            {
+            if (showParam != null && showParam.equalsIgnoreCase("full")) {
                start = -1;
                end = -1;
                displayDateLT = null;
@@ -94,8 +93,7 @@ public class NewsPortlet extends MVCPortlet {
             List journalList = new ArrayList();
             List titleList = new ArrayList();
 
-            for (JournalArticle article : journalArticlesList)
-            {
+            for (JournalArticle article : journalArticlesList) {
                 // The name and values of the custom fields
                 // The value of the custom field: remember that this will always be a java.lang.String
                 String name = "url";
@@ -115,7 +113,7 @@ public class NewsPortlet extends MVCPortlet {
                 titleValue = node.getText();
 
                 // show only the latest version
-                if(JournalArticleLocalServiceUtil.isLatestVersion(groupId,article.getArticleId(),article.getVersion())){
+                if (JournalArticleLocalServiceUtil.isLatestVersion(groupId, article.getArticleId(), article.getVersion())) {
                     journalList.add(article);
                     urlList.add(value);
                     titleList.add(titleValue);
@@ -126,8 +124,7 @@ public class NewsPortlet extends MVCPortlet {
             renderRequest.setAttribute("urlList", urlList);
             renderRequest.setAttribute("titleList", titleList);
 
-            if (showParam != null && showParam.equalsIgnoreCase("full"))
-            {
+            if (showParam != null && showParam.equalsIgnoreCase("full")) {
                 renderRequest.setAttribute("showall", "full");
             }
 
