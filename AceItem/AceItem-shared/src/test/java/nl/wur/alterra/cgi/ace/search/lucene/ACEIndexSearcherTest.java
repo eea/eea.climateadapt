@@ -63,7 +63,7 @@ public class ACEIndexSearcherTest {
     }
 
     @Test
-    public void makeOneSearch() throws ACELuceneException {
+    public void makeOneSearch() throws Throwable {
         searchAndClose();
     }
 
@@ -72,16 +72,16 @@ public class ACEIndexSearcherTest {
      */
     @Ignore
     @Test
-    public void makeSecondSearch() throws ACELuceneException {
+    public void makeSecondSearch() throws Throwable {
         searchAndClose();
     }
 
     /**
-     * Get searcher singleton, search, then close the searcher.
-     * Alternatively, let the searcher variable go out of scope and then someday finalize will be called.
-     * But we're in a hurry.
+     * Get searcher singleton, search, then call finalize on the searcher.
+     * Alternatively, let the searcher variable go out of scope and then someday
+     * finalize will be called by the GC. But we're in a hurry.
      */
-    private void searchAndClose() throws ACELuceneException {
+    private void searchAndClose() throws Throwable {
         ACEIndexSearcher searcher = ACEIndexSearcher.getACEIndexSearcher();
         Query query = new TermQuery(new Term(ACEIndexConstant.IndexField.DATATYPE, "measure"));
         TopDocs hits = searcher.search(query, null, 10);
@@ -90,6 +90,6 @@ public class ACEIndexSearcherTest {
             Document hitDoc = searcher.doc(hits.scoreDocs[i].doc);
             Assert.assertEquals("measure", hitDoc.get(ACEIndexConstant.IndexField.DATATYPE));
         }
-        searcher.close();
+        searcher.finalize();
     }
 }
