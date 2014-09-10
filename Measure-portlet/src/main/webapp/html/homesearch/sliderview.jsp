@@ -177,12 +177,9 @@
                                                                                                 <p>
                                                                                                  The Covenant of Mayors Initiative on Climate Change Adaptation has been set up by the European Commission to engage cities in taking action on climate change adaptation. </p>
 <p>The initiative, recognizing the importance of acting at the most relevant scales for building climate resilience in the EU, provides a platform for supporting adaptation, networking and public awareness at the local level  where the impacts of climate change will be felt the most. </p>
-<p>Want to join the initiative?</p>
-                                                                                          <a class="homepage-read-more" href="http://www.mayors-adapt.eu" target="_blank"><img src="<%=request.getContextPath()%>/assets/ico-arrow.png" alt="arrow" />Read more</a>
+                                                                                          <a class="homepage-read-more" href="http://www.mayors-adapt.eu" target="_blank"><img src="<%=request.getContextPath()%>/assets/ico-arrow.png" alt="arrow" />Want to join the initiative?</a>
                                                                                         </div>
                                                                                 </li>
-
-
 							</ul>
 						  
 						</div>
