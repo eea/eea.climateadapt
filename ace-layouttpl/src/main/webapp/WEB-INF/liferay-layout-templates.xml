@@ -28,6 +28,11 @@
 			<wap-template-path>/ast.wap.tpl</wap-template-path>
 			<thumbnail-path>/ast.png</thumbnail-path>
 		</layout-template>
+		<layout-template id="urban_ast" name="URBAN_AST">
+			<template-path>/urban_ast.tpl</template-path>
+			<wap-template-path>/urban_ast.wap.tpl</wap-template-path>
+			<thumbnail-path>/urban_ast.png</thumbnail-path>
+		</layout-template>		
 		<layout-template id="transnationalregion"
 			name="Transnational Region">
 			<template-path>/transnationalregion.tpl</template-path>
