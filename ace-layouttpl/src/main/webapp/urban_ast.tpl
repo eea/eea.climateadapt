@@ -61,82 +61,90 @@
     <ul id="ast-menu">
       <li><a href="/urban-ast" name="step-0" onclick="document.location.href='/urban-ast'">The Urban Adaptation Support Tool - Getting started</a>
         <ul id="step-0">
-          <li><a href="/urban-ast/step01" name="step-0-1" onclick="document.location.href='/urban-ast/step01'"><p>How to use the Urban Adaptation Support Tool?</p></a></li>
-          <li><a href="/urban-ast/step02" name="step-0-2" onclick="document.location.href='/urban-ast/step02'"><p>How is the European climate changing and what are the consequences for urban areas?</p></a></li>
-          <li><a href="/urban-ast/step03" name="step-0-3" onclick="document.location.href='/urban-ast/step03'"><p>What is adaptation to climate change and why does it matter in my city/town?</p></a></li>
-          <li><a href="/urban-ast/step04" name="step-0-4" onclick="document.location.href='/urban-ast/step04'"><p>What are the key principles for adaptation?</p></a></li>
-          <li><a href="/urban-ast/step05" name="step-0-5" onclick="document.location.href='/urban-ast/step05'"><p>Where can I find support for adaptation planning in the form of advice and capacity building?</p></a></li>
+          <li><a href="/urban-ast/step-0-1" name="step-0-1" onclick="document.location.href='/urban-ast/step-0-1'"><p>How to use the Urban Adaptation Support Tool?</p></a></li>
+          <li><a href="/urban-ast/step-0-2" name="step-0-2" onclick="document.location.href='/urban-ast/step-0-2'"><p>How is the European climate changing and what are the consequences for urban areas?</p></a></li>
+          <li><a href="/urban-ast/step-0-3" name="step-0-3" onclick="document.location.href='/urban-ast/step-0-3'"><p>What is adaptation to climate change and why does it matter in my city/town?</p></a></li>
+          <li><a href="/urban-ast/step-0-4" name="step-0-4" onclick="document.location.href='/urban-ast/step-0-4'"><p>What are the key principles for adaptation?</p></a></li>
+          <li><a href="/urban-ast/step-0-5" name="step-0-5" onclick="document.location.href='/urban-ast/step-0-5'"><p>Where can I find support for adaptation planning in the form of advice and capacity building?</p></a></li>
         </ul>
       </li>
-      <li><a href="/adaptation-support-tool/step-1" name="step-1" onclick="document.location.href='/adaptation-support-tool/step-1'"><strong>1.</strong> Preparing the ground for adaptation</a>
+      <li><a href="/urban-ast/step-1" name="step-1" onclick="document.location.href='/urban-ast/step-1'"><strong>1.</strong> Preparing the ground for adaptation</a>
         <ul id="step-1">
-          <li><a href="/adaptation-support-tool/step-1/high-level-support" name="step-1-1" onclick="document.location.href='/adaptation-support-tool/step-1/high-level-support'"><p>Obtain high-level support</p></a></li>
-          <li><a href="/adaptation-support-tool/step-1/set-up-process" name="step-1-2" onclick="document.location.href='/adaptation-support-tool/step-1/set-up-process'"><p>Set up the process</p></a></li>
-          <li><a href="/adaptation-support-tool/step-1/ressources" name="step-1-3" onclick="document.location.href='/adaptation-support-tool/step-1/ressources'"><p>Estimate human and financial resources and identify funding opportunities</p></a></li>
-          <li><a href="/adaptation-support-tool/step-1/collect-information" name="step-1-4" onclick="document.location.href='/adaptation-support-tool/step-1/collect-information'"><p>Collect information</p></a></li>
-          <li><a href="/adaptation-support-tool/step-1/communicate-raise-awareness" name="step-1-5" onclick="document.location.href='/adaptation-support-tool/step-1/communicate-raise-awareness'"><p>Communicate and raise awareness</p></a>
-            <ul id="step-1-5">
-              <li><a href="/adaptation-support-tool/step-1/self-check" name="step-1-5-1" onclick="document.location.href='/adaptation-support-tool/step-1/self-check'"><p>SELF-CHECK</p></a></li>
+          <li><a href="/urban-ast/step-1/step-1-1" name="step-1-1" onclick="document.location.href='/urban-ast/step-1/step-1-1'"><p>How do I ensure high level political support for adaptation now and in the long run?</p></a></li>
+          <li><a href="/urban-ast/step-1/step-1-2" name="step-1-2" onclick="document.location.href='/urban-ast/step-1/step-1-2'"><p>How do I set up the adaptation process within my municipality?</p></a></li>
+          <li><a href="/urban-ast/step-1/step-1-3" name="step-1-3" onclick="document.location.href='/urban-ast/step-1/step-1-3'"><p>What human, technical and financial resources are required for adaptation planning and management?</p></a></li>
+          <li><a href="/urban-ast/step-1/step-1-4" name="step-1-4" onclick="document.location.href='/urban-ast/step-1/step-1-4'"><p>What financial support is available for adaptation?</p></a></li>
+          <li><a href="/urban-ast/step-1/step-1-5" name="step-1-5" onclick="document.location.href='/urban-ast/step-1/step-1-5'"><p>What initial information do I need to collect?</p></a></li>
+          <li><a href="/urban-ast/step-1/step-1-6" name="step-1-6" onclick="document.location.href='/urban-ast/step-1/step-1-6'"><p>Who are the main (internal and external) players and stakeholders in adaptation processes and how do I involve them?</p></a></li>
+          <li><a href="/urban-ast/step-1/step-1-7" name="step-1-7" onclick="document.location.href='/urban-ast/step-1/step-1-7'"><p>How do I communicate adaptation to climate change?</p></a>
+            <ul id="step-1-7">
+              <li><a href="/urban-ast/step-1/self-check" name="step-1-7-1" onclick="document.location.href='/urban-ast/step-1/self-check'"><p>SELF-CHECK</p></a></li>
             </ul>
           </li>
         </ul>
       </li>
-      <li><a href="/adaptation-support-tool/step-2" name="step-2" onclick="document.location.href='/adaptation-support-tool/step-2'"><strong>2.</strong> Assessing risks and vulnerabilities to climate change</a>
+      <li><a href="/urban-ast/step-2" name="step-2" onclick="document.location.href='/urban-ast/step-2'"><strong>2.</strong> Assessing risks and vulnerabilities to climate change</a>
         <ul id="step-2">
-          <li><a href="/adaptation-support-tool/step-2/past-weather-events" name="step-2-1" onclick="document.location.href='/adaptation-support-tool/step-2/past-weather-events'"><p>Analyse how past weather events have affected your area</p></a></li>
-          <li><a href="/adaptation-support-tool/step-2/risk-vulnerability-assessment" name="step-2-2" onclick="document.location.href='/adaptation-support-tool/step-2/risk-vulnerability-assessment'"><p>Undertake a climate change risks and vulnerability assessment</p></a></li>
-          <li><a href="/adaptation-support-tool/step-2/trans-boundary-issues" name="step-2-3" onclick="document.location.href='/adaptation-support-tool/step-2/trans-boundary-issues'"><p>Take trans-boundary issues into account</p></a></li>
-          <li><a href="/adaptation-support-tool/step-2/knowlegde-uncertainty" name="step-2-4" onclick="document.location.href='/adaptation-support-tool/step-2/knowlegde-uncertainty'"><p>Develop an approach for addressing knowledge gaps and for dealing with uncertainties</p></a></li>
-          <li><a href="/adaptation-support-tool/step-2/strategic-direction" name="step-2-5" onclick="document.location.href='/adaptation-support-tool/step-2/strategic-direction'"><p>Select your area’s main concerns and set your strategic direction</p></a>
-            <ul id="step-2-5">
-              <li><a href="/adaptation-support-tool/step-2/self-check" name="step-2-5-1" onclick="document.location.href='/adaptation-support-tool/step-2/self-check'"><p>SELF-CHECK</p></a></li>
+          <li><a href="/urban-ast/step-2/step-2-1" name="step-2-1" onclick="document.location.href='/urban-ast/step-2/step-2-1'"><p>What impacts has the past and current weather have on my city/town?</p></a></li>
+          <li><a href="/urban-ast/step-2/step-2-2" name="step-2-2" onclick="document.location.href='/urban-ast/step-2/step-2-2'"><p>What methodology can I use for carrying out risk or vulnerability assessment?</p></a></li>
+          <li><a href="/urban-ast/step-2/step-2-3" name="step-2-3" onclick="document.location.href='/urban-ast/step-2/step-2-3'"><p>Where can I find future climate and impact projections for my city/town and how to understand them?</p></a></li>
+          <li><a href="/urban-ast/step-2/step-2-4" name="step-2-4" onclick="document.location.href='/urban-ast/step-2/step-2-4'"><p>How certain are future climate projections and how do I deal with the uncertainty?</p></a></li>
+          <li><a href="/urban-ast/step-2/step-2-5" name="step-2-5" onclick="document.location.href='/urban-ast/step-2/step-2-5'"><p>Which sectors in my city/town are most likely to be impacted by climate change and how?</p></a></li>
+          <li><a href="/urban-ast/step-2/step-2-6" name="step-2-6" onclick="document.location.href='/urban-ast/step-2/step-2-6'"><p>What is the role of the surrounding areas in adaptation and how do I take that into account?</p></a></li>
+          <li><a href="/urban-ast/step-2/step-2-7" name="step-2-7" onclick="document.location.href='/urban-ast/step-2/step-2-7'"><p>Whom can I approach for further information, data and analysis assistance?</p></a></li>
+          <li><a href="/urban-ast/step-2/step-2-8" name="step-2-8" onclick="document.location.href='/urban-ast/step-2/step-2-8'"><p>How do I identify the main adaptation concerns and set the strategic direction?</p></a></li>          
+          <li><a href="/urban-ast/step-2/step-2-9" name="step-2-9" onclick="document.location.href='/urban-ast/step-2/step-2-9'"><p>How to set concrete Targets for adaptation?</p></a>
+            <ul id="step-2-9">
+              <li><a href="/urban-ast/step-2/self-check" name="step-2-9-1" onclick="document.location.href='/urban-ast/step-2/self-check'"><p>SELF-CHECK</p></a></li>
             </ul>
           </li>
         </ul>
       </li>
-      <li><a href="/adaptation-support-tool/step-3" name="step-3" onclick="document.location.href='/adaptation-support-tool/step-3'"><strong>3.</strong> Identifying adaptation options</a>
+      <li><a href="/urban-ast/step-3" name="step-3" onclick="document.location.href='/urban-ast/step-3'"><strong>3.</strong> Identifying adaptation options</a>
         <ul id="step-3">
-          <li><a href="/adaptation-support-tool/step-3/collect-options" name="step-3-1" onclick="document.location.href='/adaptation-support-tool/step-3/collect-options'"><p>Collect appropriate adaptation options given your country´s main concerns</p></a></li>
-          <li><a href="/adaptation-support-tool/step-3/explore-good-practices" name="step-3-2" onclick="document.location.href='/adaptation-support-tool/step-3/explore-good-practices'"><p>Explore good practices and existing measures</p></a></li>
-          <li><a href="/adaptation-support-tool/step-3/describe-options" name="step-3-3" onclick="document.location.href='/adaptation-support-tool/step-3/describe-options'"><p>Describe adaptation options in detail</p></a>
+          <li><a href="/urban-ast/step-3/step-3-1" name="step-3-1" onclick="document.location.href='/urban-ast/step-3/step-3-1'"><p>What adaptation measures for urban cities exist and how to set up a catalogue of measures?</p></a></li>
+          <li><a href="/urban-ast/step-3/step-3-2" name="step-3-2" onclick="document.location.href='/urban-ast/step-3/step-3-2'"><p></p>Where can I find examples of good adaptation practice of other cities and towns? </a></li>
+          <li><a href="/urban-ast/step-3/step-3-3" name="step-3-3" onclick="document.location.href='/urban-ast/step-3/step-3-3'"><p>How do I identify the existing adaptation measures in my city/town?</p></a>
             <ul id="step-3-3">
-              <li><a href="/adaptation-support-tool/step-3/self-check" name="step-3-3-1" onclick="document.location.href='/adaptation-support-tool/step-3/self-check'"><p>SELF-CHECK</p></a></li>
+              <li><a href="/urban-ast/step-3/self-check" name="step-3-3-1" onclick="document.location.href='/urban-ast/step-3/self-check'"><p>SELF-CHECK</p></a></li>
             </ul>
           </li>
         </ul>
       </li>
-      <li><a href="/adaptation-support-tool/step-4" name="step-4" onclick="document.location.href='/adaptation-support-tool/step-4'"><strong>4.</strong> Assessing adaptation options</a>
+      <li><a href="/urban-ast/step-4" name="step-4" onclick="document.location.href='/urban-ast/step-4'"><strong>4.</strong> Assessing and selecting adaptation options</a>
         <ul id="step-4">
-          <li><a href="/adaptation-support-tool/step-4/assess-time-cost-benefits" name="step-4-1" onclick="document.location.href='/adaptation-support-tool/step-4/assess-time-cost-benefits'"><p>Assess possible options in terms of time, cost, benefits and efforts</p></a></li>
-          <li><a href="/adaptation-support-tool/step-4/cross-cutting-issues" name="step-4-2" onclick="document.location.href='/adaptation-support-tool/step-4/cross-cutting-issues'"><p>Assess cross-cutting issues, trade-offs and synergies of adaptation options</p></a></li>
-          <li><a href="/adaptation-support-tool/step-4/prioritise-and-select" name="step-4-3" onclick="document.location.href='/adaptation-support-tool/step-4/prioritise-and-select'"><p>Prioritise adaptation options and select preferred ones</p></a></li>
-          <li><a href="/adaptation-support-tool/step-4/strategy-and-approval" name="step-4-4" onclick="document.location.href='/adaptation-support-tool/step-4/strategy-and-approval'"><p>Prepare a strategy document and get political approval</p></a>
-            <ul id="step-4-4">
-              <li><a href="/adaptation-support-tool/step-4/self-check" name="step-4-4-1" onclick="document.location.href='/adaptation-support-tool/step-4/self-check'"><p>SELF-CHECK</p></a></li>
+          <li><a href="/urban-ast/step-4/step-4-1" name="step-4-1" onclick="document.location.href='/urban-ast/step-4/step-4-1'"><p>What are the main aspects of adaptation measures that need to be assessed and described in detail?</p></a></li>
+          <li><a href="/urban-ast/step-4/step-4-2" name="step-4-2" onclick="document.location.href='/urban-ast/step-4/step-4-2'"><p>What methodologies can I apply for the evaluation of adaptation measures and the identification of the most suitable ones?</p></a></li>
+          <li><a href="/urban-ast/step-4/step-4-3" name="step-4-3" onclick="document.location.href='/urban-ast/step-4/step-4-3'"><p>How do I carry out cost-benefit analysis?</p></a></li>
+          <li><a href="/urban-ast/step-4/step-4-4" name="step-4-4" onclick="document.location.href='/urban-ast/step-4/step-4-4'"><p>How to assess cross-cutting issues, trade-offs and synergies of adaptation options?</p></a></li>
+          <li><a href="/urban-ast/step-4/step-4-5" name="step-4-5" onclick="document.location.href='/urban-ast/step-4/step-4-5'"><p>How to prioritise adaptation options and select the preferable ones?</p></a>
+            <ul id="step-4-5">
+              <li><a href="/urban-ast/step-4/self-check" name="step-4-5-1" onclick="document.location.href='/urban-ast/step-4/self-check'"><p>SELF-CHECK</p></a></li>
             </ul>
           </li>
         </ul>
       </li>
-      <li><a href="/adaptation-support-tool/step-5" name="step-5" onclick="document.location.href='/adaptation-support-tool/step-5'"><strong>5.</strong> Implementation</a>
+      <li><a href="/urban-ast/step-5" name="step-5" onclick="document.location.href='/urban-ast/step-5'"><strong>5.</strong> Implementation</a>
         <ul id="step-5">
-          <li><a href="/adaptation-support-tool/step-5/mainstreaming" name="step-5-1" onclick="document.location.href='/adaptation-support-tool/step-5/mainstreaming'"><p>Mainstreaming: Identify and make use of entry points for adaptation</p></a></li>
-          <li><a href="/adaptation-support-tool/step-5/seek-agreements" name="step-5-2" onclick="document.location.href='/adaptation-support-tool/step-5/seek-agreements'"><p>Seek agreements with stakeholders responsible for implementation</p></a></li>
-          <li><a href="/adaptation-support-tool/step-5/action-plan" name="step-5-3" onclick="document.location.href='/adaptation-support-tool/step-5/action-plan'"><p>Develop an action plan</p></a>
+          <li><a href="/urban-ast/step-5/step-5-1" name="step-5-1" onclick="document.location.href='/urban-ast/step-5/step-5-1'"><p>What are the main elements of a good adaptation strategy?</p></a></li>
+          <li><a href="/urban-ast/step-5/step-5-2" name="step-5-2" onclick="document.location.href='/urban-ast/step-5/step-5-2'"><p>Where do I find good examples of existing adaptation strategies and action plans in urban areas?</p></a></li>
+          <li><a href="/urban-ast/step-5/step-5-3" name="step-5-3" onclick="document.location.href='/urban-ast/step-5/step-5-3'"><p>How can I best apply mainstreaming adaptation into the existing urban policy framework and what instruments can I put in place?</p></a>
             <ul id="step-5-3">
-              <li><a href="/adaptation-support-tool/step-5/self-check" name="step-5-3-1" onclick="document.location.href='/adaptation-support-tool/step-5/self-check'"><p>SELF-CHECK</p></a></li>
+              <li><a href="/urban-ast/step-5/self-check" name="step-5-3-1" onclick="document.location.href='/urban-ast/step-5/self-check'"><p>SELF-CHECK</p></a></li>
             </ul>
           </li>
         </ul>
       </li>
-      <li><a href="/adaptation-support-tool/step-6" name="step-6" onclick="document.location.href='/adaptation-support-tool/step-6'"><strong>6.</strong> Monitoring and evaluation</a>
+      <li><a href="/urban-ast/step-6" name="step-6" onclick="document.location.href='/urban-ast/step-6'"><strong>6.</strong> Monitoring and evaluation</a>
         <ul id="step-6">
-        <li><a href="/adaptation-support-tool/step-6/develop-provisions" name="step-6-1" onclick="document.location.href='/adaptation-support-tool/step-6/develop-provisions'"><p>Develop appropriate M&E provisions for your policy´s objectives and adaptation options</p></a></li>
-        <li><a href="/adaptation-support-tool/step-6/identify-indicators" name="step-6-2" onclick="document.location.href='/adaptation-support-tool/step-6/identify-indicators'"><p>Identify indicators </p></a></li>
-        <ul id="step-6-2">
-          <li><a href="/adaptation-support-tool/step-6/self-check" name="step-6-2-1" onclick="document.location.href='/adaptation-support-tool/step-6/self-check'"><p>SELF-CHECK</p></a></li>
+            <li><a href="/urban-ast/step-6/step-6-1" name="step-6-1" onclick="document.location.href='/urban-ast/step-6/step-6-1'"><p>What approaches for monitoring and evaluation can I apply?</p></a></li>
+            <li><a href="/urban-ast/step-6/step-6-2" name="step-6-2" onclick="document.location.href='/urban-ast/step-6/step-6-2'"><p>How do I develop indicators for adaptation?</p></a></li>        
+            <li><a href="/urban-ast/step-6/step-6-3" name="step-6-3" onclick="document.location.href='/urban-ast/step-6/step-6-3'"><p>Where can I find examples of adaptation indicators?</p></a>
+                <ul id="step-6-3">
+                    <li><a href="/urban-ast/step-6/self-check" name="step-6-3-1" onclick="document.location.href='/urban-ast/step-6/self-check'"><p>SELF-CHECK</p></a></li>
+                </ul>
+            </li>
         </ul>
-      </li>
-    </ul>
   </li>
 </ul>
 </div>
