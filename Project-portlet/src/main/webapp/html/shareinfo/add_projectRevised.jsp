@@ -382,7 +382,7 @@
       
      <div class="case-studies-tabbed-content-section">
       <div class="case-studies-tabbed-content-subheader">Acronym</div>
-        <liferay-ui:error key="projectacronym-required" message="Project acronym required" />
+        <liferay-ui:error key="project-acronym-required" message="Project acronym Required" />
         <ul>
 	        <li>
 				<p><b><span class="red">*</span> <em>Acronym of the project (75 character limit)</em></b></p>
@@ -472,7 +472,7 @@
 	 
 	  <div class="case-studies-tabbed-content-section">
 	   <div class="case-studies-tabbed-content-subheader">Description</div>
-	      <liferay-ui:error key="project-acronym-required" message="Project acronym required" />
+	      <liferay-ui:error key="project-description-required" message="Description is required" />
 	   <ul>
 		    <li>
 				<p><b><span class="red">*</span> <em>Provide information focusing on project output. Possibly on specific Website features. (5,000 character limit)</em></b></p>
