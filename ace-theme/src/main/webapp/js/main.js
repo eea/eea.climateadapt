@@ -4,8 +4,6 @@ $(document).ready(function(){
 	
 	//New image for search button in the header
 	$('#searchbox input[type="image"]').attr('src', "/ace-theme/images/vergrootglas.png");
-	//Searchbox keyword name attribute changed to search portlet specific "_77_" 
-	$('#searchbox #keywords').attr('name', '_77_keywords');
 	
 	//Several classes for the main menu
 	$("ul li:first-child").addClass("first");
