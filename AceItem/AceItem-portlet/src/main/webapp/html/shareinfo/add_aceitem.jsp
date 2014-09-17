@@ -214,18 +214,6 @@
 			   document.<portlet:namespace />fm.submit();
 			}
 		    
-		    function addDocument() {
-				currVal = $('#doccounter').val();
-				$('#doccounter').val(currVal+1);
-				submitForm('save');
-		    }
-		    
-		    function removeDocument() {
-				currVal = $('#doccounter').val();
-				$('#doccounter').val(currVal-1);
-		    	submitForm('save');
-		    }
-		    
 		   
 </script>
 
@@ -850,12 +838,12 @@
 								<input name="supdocs" type="hidden" value="<%=supDocs %>"/>
 								
 								<c:choose>
-								<c:when test="${doccount gt 0}">
-								   <c:forEach begin="1" end="${doccounter}" varStatus="loop">
+								<c:when test="${doccount gt 0 }">
+								   <c:forEach begin="1" end="${doccount}" varStatus="loop">
 									     <ul class="case-studies-tabbed-content-document-upload">
 									      <li class="case-studies-tabbed-content-document-upload-header">
 											<b>Document File - ${sdocnames[loop.count - 1]} ${sdocsizes[loop.count - 1]} (${sdocdates[loop.count - 1]})</b>
-											<a href="#" class="case-studies-tabbed-content-button-remove-document-${loop.count}" onClick="removeDocument();">[remove]</a>
+											<a href="#" class="case-studies-tabbed-content-button-remove-document-${loop.count}">[remove]</a>
 										  </li>
 										  
 										  <li>
@@ -878,9 +866,9 @@
 								   </c:forEach>
 								
 								   <div class="case-studies-tabbed-content-single-button-row">
-									   <a href="#" class="case-studies-tabbed-content-button-green case-studies-tabbed-content-button-add-document" onClick="addDocument();">Add Another Document File</a>
+									   <a href="#" class="case-studies-tabbed-content-button-green case-studies-tabbed-content-button-add-document">Add Another Document File</a>
 								   </div>
-								    <input name="doccounter" type="hidden" id="doccounter" value="${doccount+1}" />
+								    <input name="doccounter" type="hidden" id="doccounter" value="${doccount}" />
 								</c:when>
 								<c:otherwise>
 								       <input name="doccounter" id="doccounter" type="hidden" value="1" />
@@ -904,7 +892,7 @@
 										</li>
 									</ul>
 									<div class="case-studies-tabbed-content-single-button-row">
-										<a href="#" class="case-studies-tabbed-content-button-green case-studies-tabbed-content-button-add-document" onClick="addDocument();">Add Another Document File</a>
+										<a href="#" class="case-studies-tabbed-content-button-green case-studies-tabbed-content-button-add-document">Add Another Document File</a>
 									</div>
 								</c:otherwise>
 							 </c:choose>
