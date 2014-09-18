@@ -61,7 +61,7 @@ public class ProjectValidator {
             }
 
             if (Validator.isNull(project.getAbstracts())) {
-                errors.add("project-acronym-required");
+                errors.add("project-description-required");
                 valid = false;
             }
 

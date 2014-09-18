@@ -780,6 +780,8 @@
 						    //String array of sup documents
 							String[] sdocs = null;
 							String[] sdocNames = new String[5];
+							String[] sdocDates = new String[5];
+							String[] sdocSizes = new String[5];
 							String[] sdocDescriptions = new String[5];
 							
 																	
@@ -809,13 +811,20 @@
 						            	 DLFileEntry file = DLFileEntryLocalServiceUtil.getDLFileEntry(Long.parseLong(document));
 										 String supFileName = HtmlUtil.escapeAttribute(file.getTitle());
 										 String supFileDescription = HtmlUtil.escapeAttribute(file.getDescription());
+										 Date supFileDate = file.getCreateDate();
+										 SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
+										 long fileSizeInKB = file.getSize() / 1024; 
 										 sdocNames[i] = supFileName;
+										 sdocDates[i] = dateFormat.format(supFileDate);
+										 sdocSizes[i] = fileSizeInKB + " KB";
 										 sdocDescriptions[i] = supFileDescription;
 										 i = i + 1;
 									 }
 									
 						            
 						             pageContext.setAttribute("sdocnames", sdocNames);
+						             pageContext.setAttribute("sdocdates", sdocDates);
+						             pageContext.setAttribute("sdocsizes", sdocSizes);
 						             pageContext.setAttribute("sdocdesc", sdocDescriptions);
 						             pageContext.setAttribute("doccount", sdocs.length);    
 						    }
@@ -833,7 +842,7 @@
 								   <c:forEach begin="1" end="${doccount}" varStatus="loop">
 									     <ul class="case-studies-tabbed-content-document-upload">
 									      <li class="case-studies-tabbed-content-document-upload-header">
-											<b>Document File<span class="case-studies-tabbed-content-document-upload-position">${loop.count}</span>:</b>
+											<b>Document File - ${sdocnames[loop.count - 1]} ${sdocsizes[loop.count - 1]} (${sdocdates[loop.count - 1]})</b>
 											<a href="#" class="case-studies-tabbed-content-button-remove-document-${loop.count}">[remove]</a>
 										  </li>
 										  
