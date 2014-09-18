@@ -175,9 +175,8 @@
                                                                                         <div class="case-studies-homepage-slider-description">
                                                                                                 <h2 style="margin-bottom: 10px">Mayors Adapt: Promoting urban leadership in adaptation to climate change</h2>
                                                                                                 <div style="float:right; margin-left: 10px;"><img alt="" src="/image/image_gallery?uuid=0f1ea9c7-e3e5-4bee-b14b-5243a9b25bcb&amp;groupId=18&amp;t=1395392839192" style="height: 60px; width: 126px;border: 1px solid #aebe20"></div>
-                                                                                                <p>
-                                                                                                 The Covenant of Mayors Initiative on Climate Change Adaptation has been set up by the European Commission to engage cities in taking action on climate change adaptation. </p>
-<p>The initiative, provides a platform for supporting adaptation, networking and public awareness at the local level  where the impacts of climate change will be felt the most. </p>
+                                                                                                <p>The Covenant of Mayors Initiative on Climate Change Adaptation has been set up by the European Commission to engage cities in taking action on climate change adaptation. </p>
+                                                                                                <p>The initiative, provides a platform for supporting adaptation, networking and public awareness at the local level  where the impacts of climate change will be felt the most. </p>
                                                                                           <a class="homepage-read-more" href="http://www.mayors-adapt.eu" target="_blank"><img src="<%=request.getContextPath()%>/assets/ico-arrow.png" alt="arrow" />Want to join the initiative?</a>
                                                                                         </div>
                                                                                 </li>
