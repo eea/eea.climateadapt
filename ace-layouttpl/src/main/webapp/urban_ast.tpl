@@ -103,7 +103,7 @@
       <li><a href="/tools/urban-ast/step-3" name="step-3" onclick="document.location.href='/tools/urban-ast/step-3'"><strong>3.</strong> Identifying adaptation options</a>
         <ul id="step-3">
           <li><a href="/tools/urban-ast/step-3/step-3-1" name="step-3-1" onclick="document.location.href='/tools/urban-ast/step-3/step-3-1'"><p>What adaptation measures for urban cities exist and how to set up a catalogue of measures?</p></a></li>
-          <li><a href="/tools/urban-ast/step-3/step-3-2" name="step-3-2" onclick="document.location.href='/tools/urban-ast/step-3/step-3-2'"><p></p>Where can I find examples of good adaptation practice of other cities and towns? </a></li>
+          <li><a href="/tools/urban-ast/step-3/step-3-2" name="step-3-2" onclick="document.location.href='/tools/urban-ast/step-3/step-3-2'"><p>Where can I find examples of good adaptation practice of other cities and towns?</p></a></li>
           <li><a href="/tools/urban-ast/step-3/step-3-3" name="step-3-3" onclick="document.location.href='/tools/urban-ast/step-3/step-3-3'"><p>How do I identify the existing adaptation measures in my city/town?</p></a>
             <ul id="step-3-3">
               <li><a href="/tools/urban-ast/step-3/self-check" name="step-3-3-1" onclick="document.location.href='/tools/urban-ast/step-3/self-check'"><p>SELF-CHECK</p></a></li>
