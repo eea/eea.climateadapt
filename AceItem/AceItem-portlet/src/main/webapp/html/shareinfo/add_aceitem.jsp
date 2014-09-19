@@ -842,7 +842,7 @@
 								   <c:forEach begin="1" end="${doccount}" varStatus="loop">
 									     <ul class="case-studies-tabbed-content-document-upload">
 									      <li class="case-studies-tabbed-content-document-upload-header">
-											<b>Document File - ${sdocnames[loop.count - 1]} ${sdocsizes[loop.count - 1]} (${sdocdates[loop.count - 1]})</b>
+											<b><span class="case-studies-tabbed-content-document-name">Document File - ${sdocnames[loop.count - 1]} ${sdocsizes[loop.count - 1]} (${sdocdates[loop.count - 1]})</span></b>
 											<a href="#" class="case-studies-tabbed-content-button-remove-document-${loop.count}">[remove]</a>
 										  </li>
 										  

@@ -59,6 +59,8 @@ $(document).ready(function() {
 			});
 			
 			initWYSIWYG();
+			addDocumentUpload();
+			removeDocumentUploadWrapper();
 			textAreaMaxLength();
 			
 			 var options = {
@@ -117,3 +119,120 @@ $(document).ready(function() {
 				}
 			});
 		}
+		
+		function addDocumentUpload() {
+			$('.case-studies-tabbed-content-button-add-document').click(function(e) {
+				e.preventDefault();
+				
+				var tmpPos = $(this).parent().parent().find('ul.case-studies-tabbed-content-document-upload').length + 1;
+				var tmpHTML = $('.case-studies-tabbed-content-document-upload').first().clone();
+				tmpHTML.find('.case-studies-tabbed-content-document-upload-position').text( tmpPos );
+				tmpHTML.find('.case-studies-tabbed-content-document-name').text( 'Document File ' + tmpPos + ':' );
+				//alert("tmpPos is " + tmpPos);
+				tmpHTML.find('.inputfile').html('<input name="supdocfiles' + tmpPos +'"' +  ' type="file" />');
+				tmpHTML.find('.inputfilename').html('<input type="text" name="sup_docs_names' + tmpPos + '"' + ' size="30" maxlength="255" value="" />');
+				tmpHTML.find('.inputfiledescription').html('<textarea cols="40" rows="10" name="sup_docs_description' + tmpPos + '"' + ' data-maxlength="150"></textarea>');
+				//alert("tmpHTML is " + tmpHTML.html());
+				
+				if (tmpHTML.find('a').length > 0)
+				{
+				   //alert("anchor exists");	
+				   tmpHTML.find('a').replaceWith( '<a href="#" class="case-studies-tabbed-content-button-remove-document-' + tmpPos + '">[remove]</a>' );
+				}
+				else
+				{
+				   tmpHTML.find('.case-studies-tabbed-content-document-upload-header').append( '<a href="#" class="case-studies-tabbed-content-button-remove-document-' + tmpPos + '">[remove]</a>' );
+				}
+				
+			    //alert(tmpHTML.html());
+				
+				//tmpHTML.find('.case-studies-tabbed-content-document-upload-header').append( '<a href="#" class="case-studies-tabbed-content-button-remove-document-' + tmpPos + '">[remove]</a>' );
+
+				if ( tmpPos <= 5 ) {
+					$(this).parent().before( tmpHTML );
+					$("#doccounter").val(tmpPos);
+
+					// add functionality to remove documet upload
+					removeDocumentUpload( '.case-studies-tabbed-content-button-remove-document-' + tmpPos );
+
+					// disable the add photo button
+					if ( tmpPos == 5 ) {
+						$(this).unbind('click');
+
+						$(this).click(function(e) {
+							e.preventDefault();
+						});
+
+						$(this).css({
+							cursor: 'default',
+							opacity: .25
+						});
+					}
+				}
+				//alert("doccounter is " + $("#doccounter").val());
+			});
+		}
+
+		function removeDocumentUploadWrapper(){
+			var indexIncrement = 1;
+			$('.case-studies-tabbed-content-document-upload').each(function() {
+				removeDocumentUpload($(this).find('.case-studies-tabbed-content-button-remove-document-' + indexIncrement));
+				if (indexIncrement == 5)
+				{
+					$('.case-studies-tabbed-content-button-add-document').unbind('click');
+					$('.case-studies-tabbed-content-button-add-document').click(function(e) {
+						//alert("unbinding");
+						e.preventDefault();
+					});
+					$('.case-studies-tabbed-content-button-add-document').css({
+						cursor: 'default',
+						opacity: .25
+					});
+				}
+				indexIncrement ++;
+			});
+		}
+
+		function removeDocumentUpload( btn_selector ) {
+			$( btn_selector ).click(function(e) {
+				e.preventDefault();
+				$(this).parent().parent().remove();
+
+				if ( $('ul.case-studies-tabbed-content-document-upload').length < 5) {
+					$('.case-studies-tabbed-content-button-add-document').css({
+						cursor: '',
+						opacity: 1
+					});
+
+					$('.case-studies-tabbed-content-button-add-document').unbind('click');
+					addDocumentUpload();
+				}
+
+				$('ul.case-studies-tabbed-content-document-upload').each(function() {
+					$(this).find('.case-studies-tabbed-content-document-upload-position').text( $(this).index('ul.case-studies-tabbed-content-document-upload') + 1 );
+				});
+				
+				var indexIncrement = 1;
+				$('.case-studies-tabbed-content-document-upload').each(function(){
+					$(this).find('.inputfile').children('input[type="file"]').attr('name', 'supdocfiles' + indexIncrement);
+					$(this).find('.inputfilename').children('input[type="text"]').attr('name', 'sup_docs_names' + indexIncrement);
+					$(this).find('.inputfiledescription').children('textarea').attr('name', 'sup_docs_description' + indexIncrement);
+					indexIncrement++;
+				});
+				
+				var docCounterVar = indexIncrement - 1;
+				$("#doccounter").val(docCounterVar);
+				//alert("doccounter is " + $("#doccounter").val());
+				// remove the add photo button 
+				if (docCounterVar == 0)
+				{
+					// remove the header text
+					//alert("to remove " + $('.case-studies-tabbed-content > ul:nth-child(1) > li:nth-child(4) > div:nth-child(4)').html());
+					$('.case-studies-tabbed-content > ul:nth-child(1) > li:nth-child(4) > div:nth-child(4)').remove();
+					//$('.case-studies-tabbed-content > ul:nth-child(1) > li:nth-child(4) > div:nth-child(4) > div:nth-child(1)').remove();
+					//$('	.case-studies-tabbed-content > ul:nth-child(1) > li:nth-child(4) > div:nth-child(4) > p:nth-child(2)').remove();
+				}
+			});
+		}
+
+		
