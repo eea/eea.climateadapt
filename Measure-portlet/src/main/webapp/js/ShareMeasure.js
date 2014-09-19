@@ -269,6 +269,7 @@ $(document).ready(function() {
 				var tmpPos = $(this).parent().parent().find('ul.case-studies-tabbed-content-document-upload').length + 1;
 				var tmpHTML = $('.case-studies-tabbed-content-document-upload').first().clone();
 				tmpHTML.find('.case-studies-tabbed-content-document-upload-position').text( tmpPos );
+				tmpHTML.find('.case-studies-tabbed-content-document-name').text( 'Document File ' + tmpPos + ':' );
 				//alert("tmpPos is " + tmpPos);
 				tmpHTML.find('.inputfile').html('<input name="supdocfiles' + tmpPos +'"' +  ' type="file" />');
 				tmpHTML.find('.inputfilename').html('<input type="text" name="sup_docs_names' + tmpPos + '"' + ' size="30" maxlength="255" value="" />');
