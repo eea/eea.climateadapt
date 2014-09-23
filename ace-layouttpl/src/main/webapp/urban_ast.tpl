@@ -85,7 +85,7 @@
       </li>
       <li><a href="/tools/urban-ast/step-2" name="step-2" onclick="document.location.href='/tools/urban-ast/step-2'"><strong>2.</strong> Assessing risks and vulnerabilities to climate change</a>
         <ul id="step-2">
-          <li><a href="/tools/urban-ast/step-2/step-2-1" name="step-2-1" onclick="document.location.href='/tools/urban-ast/step-2/step-2-1'"><p>2.1 What impacts has the past and current weather have on my city/town?</p></a></li>
+          <li><a href="/tools/urban-ast/step-2/step-2-1" name="step-2-1" onclick="document.location.href='/tools/urban-ast/step-2/step-2-1'"><p>2.1 What impacts has the past and current weather had/have on my city/town?</p></a></li>
           <li><a href="/tools/urban-ast/step-2/step-2-2" name="step-2-2" onclick="document.location.href='/tools/urban-ast/step-2/step-2-2'"><p>2.2 What methodology can I use for carrying out risk or vulnerability assessment?</p></a></li>
           <li><a href="/tools/urban-ast/step-2/step-2-3" name="step-2-3" onclick="document.location.href='/tools/urban-ast/step-2/step-2-3'"><p>2.3 Where can I find future climate and impact projections for my city/town and how to understand them?</p></a></li>
           <li><a href="/tools/urban-ast/step-2/step-2-4" name="step-2-4" onclick="document.location.href='/tools/urban-ast/step-2/step-2-4'"><p>2.4 How certain are future climate projections and how do I deal with the uncertainty?</p></a></li>
