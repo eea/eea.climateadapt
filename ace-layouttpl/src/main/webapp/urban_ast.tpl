@@ -78,7 +78,7 @@
           <li><a href="/tools/urban-ast/step-1/step-1-6" name="step-1-6" onclick="document.location.href='/tools/urban-ast/step-1/step-1-6'"><p>1.6 Who are the main (internal and external) players and stakeholders in adaptation processes and how do I involve them?</p></a></li>
           <li><a href="/tools/urban-ast/step-1/step-1-7" name="step-1-7" onclick="document.location.href='/tools/urban-ast/step-1/step-1-7'"><p>1.7 How do I communicate adaptation to climate change?</p></a>
             <ul id="step-1-7">
-              <li><a href="/tools/urban-ast/step-1/self-check" name="step-1-7-1" onclick="document.location.href='/tools/urban-ast/step-1/self-check'"><p>SELF-CHECK</p></a></li>
+              <li><a href="/tools/urban-ast/step-1/self-check" name="step-1-7-1" onclick="document.location.href='/tools/urban-ast/step-1/self-check'"><p>Self-check</p></a></li>
             </ul>
           </li>
         </ul>
@@ -95,7 +95,7 @@
           <li><a href="/tools/urban-ast/step-2/step-2-8" name="step-2-8" onclick="document.location.href='/tools/urban-ast/step-2/step-2-8'"><p>2.8 How do I identify the main adaptation concerns and set the strategic direction?</p></a></li>          
           <li><a href="/tools/urban-ast/step-2/step-2-9" name="step-2-9" onclick="document.location.href='/tools/urban-ast/step-2/step-2-9'"><p>2.9 How to set concrete Targets for adaptation?</p></a>
             <ul id="step-2-9">
-              <li><a href="/tools/urban-ast/step-2/self-check" name="step-2-9-1" onclick="document.location.href='/tools/urban-ast/step-2/self-check'"><p>SELF-CHECK</p></a></li>
+              <li><a href="/tools/urban-ast/step-2/self-check" name="step-2-9-1" onclick="document.location.href='/tools/urban-ast/step-2/self-check'"><p>Self-check</p></a></li>
             </ul>
           </li>
         </ul>
@@ -106,7 +106,7 @@
           <li><a href="/tools/urban-ast/step-3/step-3-2" name="step-3-2" onclick="document.location.href='/tools/urban-ast/step-3/step-3-2'"><p>3.2 Where can I find examples of good adaptation practice of other cities and towns?</p></a></li>
           <li><a href="/tools/urban-ast/step-3/step-3-3" name="step-3-3" onclick="document.location.href='/tools/urban-ast/step-3/step-3-3'"><p>3.3 How do I identify the existing adaptation measures in my city/town?</p></a>
             <ul id="step-3-3">
-              <li><a href="/tools/urban-ast/step-3/self-check" name="step-3-3-1" onclick="document.location.href='/tools/urban-ast/step-3/self-check'"><p>SELF-CHECK</p></a></li>
+              <li><a href="/tools/urban-ast/step-3/self-check" name="step-3-3-1" onclick="document.location.href='/tools/urban-ast/step-3/self-check'"><p>Self-check</p></a></li>
             </ul>
           </li>
         </ul>
@@ -119,7 +119,7 @@
           <li><a href="/tools/urban-ast/step-4/step-4-4" name="step-4-4" onclick="document.location.href='/tools/urban-ast/step-4/step-4-4'"><p>4.4 How to assess cross-cutting issues, trade-offs and synergies of adaptation options?</p></a></li>
           <li><a href="/tools/urban-ast/step-4/step-4-5" name="step-4-5" onclick="document.location.href='/tools/urban-ast/step-4/step-4-5'"><p>4.5 How to prioritise adaptation options and select the preferable ones?</p></a>
             <ul id="step-4-5">
-              <li><a href="/tools/urban-ast/step-4/self-check" name="step-4-5-1" onclick="document.location.href='/tools/urban-ast/step-4/self-check'"><p>SELF-CHECK</p></a></li>
+              <li><a href="/tools/urban-ast/step-4/self-check" name="step-4-5-1" onclick="document.location.href='/tools/urban-ast/step-4/self-check'"><p>Self-check</p></a></li>
             </ul>
           </li>
         </ul>
@@ -130,7 +130,7 @@
           <li><a href="/tools/urban-ast/step-5/step-5-2" name="step-5-2" onclick="document.location.href='/tools/urban-ast/step-5/step-5-2'"><p>5.2 Where do I find good examples of existing adaptation strategies and action plans in urban areas?</p></a></li>
           <li><a href="/tools/urban-ast/step-5/step-5-3" name="step-5-3" onclick="document.location.href='/tools/urban-ast/step-5/step-5-3'"><p>5.3 How can I best apply mainstreaming adaptation into the existing urban policy framework and what instruments can I put in place?</p></a>
             <ul id="step-5-3">
-              <li><a href="/tools/urban-ast/step-5/self-check" name="step-5-3-1" onclick="document.location.href='/tools/urban-ast/step-5/self-check'"><p>SELF-CHECK</p></a></li>
+              <li><a href="/tools/urban-ast/step-5/self-check" name="step-5-3-1" onclick="document.location.href='/tools/urban-ast/step-5/self-check'"><p>Self-check</p></a></li>
             </ul>
           </li>
         </ul>
@@ -141,7 +141,7 @@
             <li><a href="/tools/urban-ast/step-6/step-6-2" name="step-6-2" onclick="document.location.href='/tools/urban-ast/step-6/step-6-2'"><p>6.2 How do I develop indicators for adaptation?</p></a></li>        
             <li><a href="/tools/urban-ast/step-6/step-6-3" name="step-6-3" onclick="document.location.href='/tools/urban-ast/step-6/step-6-3'"><p>6.3 Where can I find examples of adaptation indicators?</p></a>
                 <ul id="step-6-3">
-                    <li><a href="/tools/urban-ast/step-6/self-check" name="step-6-3-1" onclick="document.location.href='/tools/urban-ast/step-6/self-check'"><p>SELF-CHECK</p></a></li>
+                    <li><a href="/tools/urban-ast/step-6/self-check" name="step-6-3-1" onclick="document.location.href='/tools/urban-ast/step-6/self-check'"><p>Self-check</p></a></li>
                 </ul>
             </li>
         </ul>
