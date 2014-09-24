@@ -114,12 +114,11 @@
       <li><a href="/tools/urban-ast/step-4" name="step-4" onclick="document.location.href='/tools/urban-ast/step-4'"><strong>4.</strong> Assessing and selecting adaptation options</a>
         <ul id="step-4">
           <li><a href="/tools/urban-ast/step-4/step-4-1" name="step-4-1" onclick="document.location.href='/tools/urban-ast/step-4/step-4-1'"><p>4.1 What are the main aspects of adaptation measures that need to be assessed and described in detail?</p></a></li>
-          <li><a href="/tools/urban-ast/step-4/step-4-2" name="step-4-2" onclick="document.location.href='/tools/urban-ast/step-4/step-4-2'"><p>4.2 What methodologies can I apply for the evaluation of adaptation measures and the identification of the most suitable ones?</p></a></li>
-          <li><a href="/tools/urban-ast/step-4/step-4-3" name="step-4-3" onclick="document.location.href='/tools/urban-ast/step-4/step-4-3'"><p>4.3 How do I carry out cost-benefit analysis?</p></a></li>
-          <li><a href="/tools/urban-ast/step-4/step-4-4" name="step-4-4" onclick="document.location.href='/tools/urban-ast/step-4/step-4-4'"><p>4.4 How to assess cross-cutting issues, trade-offs and synergies of adaptation options?</p></a></li>
-          <li><a href="/tools/urban-ast/step-4/step-4-5" name="step-4-5" onclick="document.location.href='/tools/urban-ast/step-4/step-4-5'"><p>4.5 How to prioritise adaptation options and select the preferable ones?</p></a>
-            <ul id="step-4-5">
-              <li><a href="/tools/urban-ast/step-4/self-check" name="step-4-5-1" onclick="document.location.href='/tools/urban-ast/step-4/self-check'"><p>Self-check</p></a></li>
+          <li><a href="/tools/urban-ast/step-4/step-4-2" name="step-4-2" onclick="document.location.href='/tools/urban-ast/step-4/step-4-2'"><p>4.2 How do I carry out cost-benefit analysis?</p></a></li>
+          <li><a href="/tools/urban-ast/step-4/step-4-3" name="step-4-3" onclick="document.location.href='/tools/urban-ast/step-4/step-4-3'"><p>4.3 How to assess cross-cutting issues, trade-offs and synergies of adaptation options?</p></a></li>
+          <li><a href="/tools/urban-ast/step-4/step-4-4" name="step-4-4" onclick="document.location.href='/tools/urban-ast/step-4/step-4-4'"><p>4.4 How to prioritise adaptation options and select the preferable ones?</p></a></li>
+            <ul id="step-4-4">
+              <li><a href="/tools/urban-ast/step-4/self-check" name="step-4-4-1" onclick="document.location.href='/tools/urban-ast/step-4/self-check'"><p>Self-check</p></a></li>
             </ul>
           </li>
         </ul>
