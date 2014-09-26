@@ -3,12 +3,13 @@
 
 
 		   	$(document).ready(function() {
+		   		var pageUrl = document.location.href;
 				$("#ast-menu").accordion({
 					autoHeight: false,
 					navigation: true,
 					navigationFilter: function(){
 					    // assumes ast/ in url before /step
-					    var doc_rel_href = document.location.href.substr( document.location.href.indexOf('ast/step')+4 );
+					    var doc_rel_href = pageUrl.substr( document.location.href.indexOf('ast/step')+4 );
 
 					    var this_rel_href = $(this).attr('href');
 					    this_rel_href = this_rel_href.substr( this_rel_href.indexOf('ast/step')+4 );
@@ -26,6 +27,39 @@
 				});
 
 				$("a.ui-state-active").parent().css('background-color', '#6D7A2B');
+				
+				// Get a table with the links of the menu in #ast-menu
+				var tab=new Array()
+				$.each($('#ast-menu li a'),function(){ 
+					tab.push($(this).attr('href'));
+				});
+			
+				// Check which entry match the current url and return 
+				// the previous one and the next one 
+				var tablel = tab.length; i = 0; pos = 0; previous = ""; next = "";
+				
+				while ( i < tablel && pos > 0) { 
+					pos = pageUrl.search(tab[i]);
+					if ( pos > 0) {
+						// If we are on the first page, return the last one as previous link
+						if ( i == 0) {
+							previous = tab[tablel-1];
+							next = tab[1];
+						} else if (i == tablel-1) {
+							previous = tab [tablel-2];
+							next = tab[0];
+						} else {
+							previous = tab[i-1];
+							next = tab [i+1];
+						}
+						i++;
+					} 
+				}
+				
+				// Put previous and next into the href values of respective links
+				$('#previous a').attr("href",previous);
+				$('#next a').attr("href",next);
+	
 			});
     </script>
 
@@ -46,6 +80,11 @@
           </td>
           <td class="aui-w33 portlet-column portlet-column" id="column-4">
             $processor.processColumn("column-4", "portlet-column-content portlet-column-content-last")
+          </td>
+        </tr>
+        <tr>
+          <td class="aui-w33 portlet-column portlet-column" id="column-5">
+            $processor.processColumn("column-5", "portlet-column-content portlet-column-content-only")
           </td>
         </tr>
       </table>
@@ -161,6 +200,14 @@
   <div class="aui-w33 portlet-column portlet-column" id="column-4">
     $processor.processColumn("column-4", "portlet-column-content portlet-column-content-last")
   </div>
+  <div class="aui-w33 portlet-column portlet-column" id="column-5">
+    $processor.processColumn("column-5", "portlet-column-content portlet-column-content-only")
+    <div id="bottom-menu">
+	   	<div id="previous-arrow"><a href="">Previous question</a></div>
+	    <div id="contact-link"><a href="http://climate-adapt.eea.europa.eu/contact">Contact us with your questions, comments and suggestions</a></div>
+	    <div id="next-arrow"><a href="">next question</a></div>
+    </div>
+  </div>  
 </div>
 </div>
 
