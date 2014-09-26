@@ -52,8 +52,8 @@
 							previous = tab[i-1];
 							next = tab [i+1];
 						}
-						i++;
 					} 
+					i++;
 				}
 				
 				// Put previous and next into the href values of respective links
