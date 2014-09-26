@@ -415,9 +415,9 @@
         <liferay-ui:error key="projecttitle-required" message="Project title required" />
         <ul>
 	        <li>
-				<p><b><span class="red">*</span> <em>Project title or name (50 character limit)</em></b></p>
+				<p><b><span class="red">*</span> <em>Project title or name (250 character limit)</em></b></p>
 				<% if (projectItem != null) { %>
-		           <input name="title" type="text" size="75" maxlength="50" value="<%= HtmlUtil.escapeAttribute(projectItem.getTitle()) %>" /><br /><br />
+		           <input name="title" type="text" size="75" maxlength="250" value="<%= HtmlUtil.escapeAttribute(projectItem.getTitle()) %>" /><br /><br />
 				<%} else {
 							// preserve the render parameter already set
 						    // String renderName = renderRequest.getParameter("name");
@@ -429,11 +429,11 @@
 				%>
 						
 				<c:if test="${renderName ne null}">
-				  <input name="title" type="text" size="75" maxlength="50" value="${renderName}" /> <br /><br />
+				  <input name="title" type="text" size="75" maxlength="250" value="${renderName}" /> <br /><br />
 				</c:if>
 												
 				<c:if test="${renderName eq null}">
-					  <input name="title" type="text" size="75" maxlength="50" value="" /><br /><br />
+					  <input name="title" type="text" size="75" maxlength="250" value="" /><br /><br />
 					</c:if>
 				<%} %>
 			</li>
@@ -1248,7 +1248,7 @@
 										               <c:when test="${geoCharElement == 'CITY'}" >
 										                <div class="europe_geochar_class">	<!-- important - starting div for europe_geochar_class -->
 										                 <label for="rad_geochars_${geoCharElement}"><b><liferay-ui:message key="acesearch-geochars-lbl-${geoCharElement}" /></b></label>
-										                 <span class="case-studies-tabbed-content-text-for-geochars"><input class="shared_form_city" type="text" size="50" maxlength="50" value="${city}" /></span>
+										                 <span class="case-studies-tabbed-content-text-for-geochars"><input class="shared_form_city" type="text" size="50" maxlength="250" value="${city}" /></span>
 										                 </div> <!-- important - closing div for europe_geochar_class -->
 										               </c:when>
 										               <c:otherwise>
