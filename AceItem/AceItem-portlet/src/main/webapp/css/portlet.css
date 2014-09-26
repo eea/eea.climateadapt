@@ -961,6 +961,9 @@ span.jPag-snext-img{
 	    margin-top: 10%;
   }
 
+  .shared_form_city {
+  		width: 400px !important;
+  }
 
 	/* ===================== */
 	/* Portlet CSS Ends Here */
