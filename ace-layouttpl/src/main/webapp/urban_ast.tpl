@@ -29,7 +29,7 @@
 				$("a.ui-state-active").parent().css('background-color', '#6D7A2B');
 				
 				// Get a table with the links of the menu in #ast-menu
-				var tab=new Array()
+				var tab=new Array();
 				$.each($('#ast-menu li a'),function(){ 
 					tab.push($(this).attr('href'));
 				});
