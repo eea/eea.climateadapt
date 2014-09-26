@@ -417,9 +417,9 @@
         <liferay-ui:error key="aceitemname-required" message="Aceitem name required" />
         <ul>
 	        <li>
-				<p><b><span class="red">*</span> <em>Item Name (50 character limit)</em></b></p>
+				<p><b><span class="red">*</span> <em>Item Name (250 character limit)</em></b></p>
 				<% if (aceitem != null) { %>
-		           <input name="name" type="text" size="75" maxlength="50" value="<%= HtmlUtil.escapeAttribute(aceitem.getName()) %>" /><br /><br />
+		           <input name="name" type="text" size="75" maxlength="250" value="<%= HtmlUtil.escapeAttribute(aceitem.getName()) %>" /><br /><br />
 				<%} else {
 							// preserve the render parameter already set
 						    // String renderName = renderRequest.getParameter("name");
@@ -431,11 +431,11 @@
 				%>
 						
 				<c:if test="${renderName ne null}">
-				  <input name="name" type="text" size="75" maxlength="50" value="${renderName}" /> <br /><br />
+				  <input name="name" type="text" size="75" maxlength="250" value="${renderName}" /> <br /><br />
 				</c:if>
 												
 				<c:if test="${renderName eq null}">
-					  <input name="name" type="text" size="75" maxlength="50" value="" /><br /><br />
+					  <input name="name" type="text" size="75" maxlength="250" value="" /><br /><br />
 					</c:if>
 				<%} %>
 			</li>

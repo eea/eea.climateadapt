@@ -961,6 +961,14 @@ span.jPag-snext-img{
 	    margin-top: 10%;
   }
 
+  .shared_form_city {
+  		width: 480px !important;
+  }
+
+  .case-studies-tabbed-content-section input[name="name"] {
+	    width: 480px !important;
+  }
+
 
 	/* ===================== */
 	/* Portlet CSS Ends Here */
