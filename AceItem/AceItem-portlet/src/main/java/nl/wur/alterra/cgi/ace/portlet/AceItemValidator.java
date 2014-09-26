@@ -88,6 +88,9 @@ public class AceItemValidator {
                     valid = false;
                 }
             }
+            if (Validator.isNull(aceitem.getGeochars())) {
+            	errors.add("geo-characterization-required");
+            }
             if (Validator.isNotNull(aceitem.getGeochars())) {
                 Object obj=JSONValue.parse(aceitem.getGeochars());
                 JSONObject jsonObject = (JSONObject) obj;
@@ -108,7 +111,6 @@ public class AceItemValidator {
 
                 }
             }
-
         }
 
         if (errors.size() > 0) {
