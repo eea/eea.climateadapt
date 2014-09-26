@@ -1164,7 +1164,7 @@
 										               <c:when test="${geoCharElement == 'CITY'}" >
 										                <div class="europe_geochar_class">	<!-- important - starting div for europe_geochar_class -->
 										                 <label for="rad_geochars_${geoCharElement}"><b><liferay-ui:message key="acesearch-geochars-lbl-${geoCharElement}" /></b></label>
-										                 <span class="case-studies-tabbed-content-text-for-geochars"><input class="shared_form_city" type="text" size="50" maxlength="50" value="${city}" /></span>
+										                 <span class="case-studies-tabbed-content-text-for-geochars"><input class="shared_form_city" type="text" size="50" maxlength="250" value="${city}" /></span>
 										                 </div> <!-- important - closing div for europe_geochar_class -->
 										               </c:when>
 										               <c:otherwise>
