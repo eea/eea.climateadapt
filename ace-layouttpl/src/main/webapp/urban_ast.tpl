@@ -27,7 +27,7 @@
 				});
 
 				$("a.ui-state-active").parent().css('background-color', '#6D7A2B');
-				
+				/*
 				// Get a table with the links of the menu in #ast-menu
 				var tab=new Array();
 				$('#ast-menu li a').each(function(){ 
@@ -59,7 +59,7 @@
 				// Put previous and next into the href values of respective links
 				$('#previous-link a').attr("href",previous);
 				$('#next-link a').attr("href",next);
-	
+	            */
 			});
     </script>
 
