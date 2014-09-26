@@ -57,8 +57,8 @@
 				}
 				
 				// Put previous and next into the href values of respective links
-				$('#previous a').attr("href",previous);
-				$('#next a').attr("href",next);
+				$('#previous-link a').attr("href",previous);
+				$('#next-link a').attr("href",next);
 	
 			});
     </script>
@@ -203,9 +203,9 @@
   <div class="aui-w33 portlet-column portlet-column" id="column-5">
     $processor.processColumn("column-5", "portlet-column-content portlet-column-content-only")
     <div id="bottom-menu">
-	   	<div id="previous-arrow"><a href="">Previous question</a></div>
+	   	<div id="previous-link"><a href="">Previous question</a></div>
 	    <div id="contact-link"><a href="http://climate-adapt.eea.europa.eu/contact">Contact us with your questions, comments and suggestions</a></div>
-	    <div id="next-arrow"><a href="">next question</a></div>
+	    <div id="next-link"><a href="">next question</a></div>
     </div>
   </div>  
 </div>
