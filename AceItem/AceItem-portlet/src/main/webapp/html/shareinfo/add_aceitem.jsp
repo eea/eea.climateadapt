@@ -508,7 +508,7 @@
 	  
 	 <div class="case-studies-tabbed-content-section">
 	      <div class="case-studies-tabbed-content-subheader">Policy Sectors</div>
-	      <liferay-ui:error key="aceitem_sectors-required" message="Aceitem sectors required" />
+	      <liferay-ui:error key="aceitemsectors-required" message="Aceitem sectors required" />
 	       <ul>
 	        <li>
 	        <p><b><span class="red">*</span> <em>Select one or more relevant sector policies that this item relates to.</em></b></p>
@@ -560,7 +560,7 @@
    <br/>	
    <div class="case-studies-tabbed-content-section">
       <div class="case-studies-tabbed-content-subheader">Climate Impacts</div>
-      <liferay-ui:error key="aceitem_climate_impacts-required" message="Aceitem climate impacts required" />
+      <liferay-ui:error key="aceitemclimateimpacts-required" message="Aceitem climate impacts required" />
 	  <ul>
 	    <%
 	       String choosenclimateimpacts = "";
@@ -852,7 +852,7 @@
 										  </li>
 										  
 										  <li>
-											<p><b><em>Additional Document Files <span class="case-studies-tabbed-content-document-upload-position">${loop.count}</span>:</em></b></p>
+											<p><b><span class="red">*</span> <em>Additional Document Files <span class="case-studies-tabbed-content-document-upload-position">${loop.count}</span>:</em></b></p>
 											<p>Brief name of file (required - 150 char limit)</p>
 											<div class="inputfilename"><input type="text" name="sup_docs_names${loop.count}" size="30" maxlength="150" value="${sdocnames[loop.count - 1]}"></div>
 										  </li>
@@ -881,7 +881,7 @@
 											<div class="inputfile"><input name="supdocfiles1" type="file" /></div>
 										</li>
 										<li>
-											<p><b><em>Additional Document Files <span class="case-studies-tabbed-content-document-upload-position">1</span> Label:</em></b></p>
+											<p><b><span class="red">*</span> <em>Additional Document Files <span class="case-studies-tabbed-content-document-upload-position">1</span> Label:</em></b></p>
 											<p>Brief name of file (required - 150 char limit)</p>
 											<div class="inputfilename"><input type="text" name="sup_docs_names1" size="30" maxlength="150" value=""></div>
 										</li>
