@@ -1713,7 +1713,7 @@
 										  </li>
 										  
 										  <li>
-											<p><b><em>Additional Document Files <span class="case-studies-tabbed-content-document-upload-position">${loop.count}</span>:</em></b></p>
+											<p><b><span class="red">*</span> <em>Additional Document Files <span class="case-studies-tabbed-content-document-upload-position">${loop.count}</span>:</em></b></p>
 											<p>Brief name of file (required - 150 char limit)</p>
 											<div class="inputfilename"><input type="text" name="sup_docs_names${loop.count}" size="30" maxlength="150" value="${sdocnames[loop.count - 1]}"></div>
 										  </li>
@@ -1742,7 +1742,7 @@
 											<div class="inputfile"><input name="supdocfiles1" type="file" /></div>
 										</li>
 										<li>
-											<p><b><em>Additional Document Files <span class="case-studies-tabbed-content-document-upload-position">1</span> Label:</em></b></p>
+											<p><b><span class="red">*</span> <em>Additional Document Files <span class="case-studies-tabbed-content-document-upload-position">1</span> Label:</em></b></p>
 											<p>Brief name of file (required - 150 char limit)</p>
 											<div class="inputfilename"><input type="text" name="sup_docs_names1" size="30" maxlength="150" value=""></div>
 										</li>
