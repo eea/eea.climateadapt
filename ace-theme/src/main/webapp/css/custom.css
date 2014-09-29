@@ -2533,4 +2533,42 @@ text and the class mapviewer to the MapViewerPortlet.
 }
 
 
+/* ---------- links previous next  in urban ast ---------- */
 
+#bottom-menu {
+	width: 100%;
+	background-color: #e9efc9;
+	margin: 20px;
+}
+
+#bottom-menu a{
+	color: #2c330a;
+	text-decoration: none;
+}
+
+#bottom-menu a:hover{
+	color: #758816;
+}
+
+#previous-link {
+	float: left;
+	margin-right: 20px;
+	width: 20%;
+	text-align: left;
+}
+
+#contact-link {
+	float: left;
+	margin-right: 20px;
+	text-align: center;
+}
+
+#next-link {
+	width: 20%;
+	float: right;
+	text-align: right;
+}
+
+.clear-both {
+	clear: both;
+}
