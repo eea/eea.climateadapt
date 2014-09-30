@@ -2536,8 +2536,6 @@ text and the class mapviewer to the MapViewerPortlet.
 /* ---------- links previous next  in urban ast ---------- */
 
 #bottom-menu {
-	width: 100%;
-	background-color: #e9efc9;
 	margin: 20px;
 }
 
@@ -2552,23 +2550,27 @@ text and the class mapviewer to the MapViewerPortlet.
 
 #previous-link {
 	float: left;
-	margin-right: 20px;
-	width: 20%;
+	width: 150px;
 	text-align: left;
 }
 
 #contact-link {
 	float: left;
-	margin-right: 20px;
 	text-align: center;
+	width: 310px;
 }
 
 #next-link {
-	width: 20%;
+	width: 150px;
 	float: right;
 	text-align: right;
 }
 
 .clear-both {
 	clear: both;
+}
+
+#foot-column hr{
+	color: #9aa854;
+	height: 1px;	
 }

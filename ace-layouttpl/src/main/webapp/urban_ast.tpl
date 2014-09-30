@@ -202,6 +202,7 @@
 		<div id="aui-w66 foot-column">
 			<div class="aui-w100 portlet-column portlet-column-first" id="column-5">
 			   $processor.processColumn("column-5", "portlet-column-content portlet-column-content-last")
+			   <hr />
 			   <div id="bottom-menu">
 				   	<div id="previous-link"><a href="">« Previous question</a></div>
 				    <div id="contact-link"><a href="http://climate-adapt.eea.europa.eu/contact">Contact us with your questions,<br/>comments and suggestions</a></div>
