@@ -2536,7 +2536,7 @@ text and the class mapviewer to the MapViewerPortlet.
 /* ---------- links previous next  in urban ast ---------- */
 
 #bottom-menu {
-	margin: 20px;
+	margin: 5px 20px 20px 20px;
 }
 
 #bottom-menu a{
