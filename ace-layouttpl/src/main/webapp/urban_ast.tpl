@@ -153,7 +153,7 @@
 	          <li><a href="/tools/urban-ast/step-4-1" name="step-4-1" onclick="document.location.href='/tools/urban-ast/step-4-1'"><p>4.1 What are the main aspects of adaptation measures that need to be assessed and described in detail?</p></a></li>
 	          <li><a href="/tools/urban-ast/step-4-2" name="step-4-2" onclick="document.location.href='/tools/urban-ast/step-4-2'"><p>4.2 How do I carry out cost-benefit analysis?</p></a></li>
 	          <li><a href="/tools/urban-ast/step-4-3" name="step-4-3" onclick="document.location.href='/tools/urban-ast/step-4-3'"><p>4.3 How to assess cross-cutting issues, trade-offs and synergies of adaptation options?</p></a></li>
-	          <li><a href="/tools/urban-ast/step-4-4" name="step-4-4" onclick="document.location.href='/tools/urban-ast/step-4-4'"><p>4.4 How to prioritise adaptation options and select the preferable ones?</p></a></li>
+	          <li><a href="/tools/urban-ast/step-4-4" name="step-4-4" onclick="document.location.href='/tools/urban-ast/step-4-4'"><p>4.4 How to prioritise adaptation options and select the preferable ones?</p></a>
 	            <ul id="step-4-4">
 	              <li><a href="/tools/urban-ast/step-4-check" name="step-4-4-1" onclick="document.location.href='/tools/urban-ast/step-4-check'"><p>Self-check</p></a></li>
 	            </ul>
