@@ -1305,6 +1305,15 @@ ul#subnav li a:hover {
 	text-decoration: none;
 }
 
+@-moz-document url-prefix() {
+	
+	#ast-menu li ul li {
+		margin: 0 0 10px 0; 
+	}
+	
+}
+
+
 /**** 
 	Frontpage specific styles 
 ****/
