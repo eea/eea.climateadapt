@@ -2442,7 +2442,6 @@ text and the class mapviewer to the MapViewerPortlet.
 .CSSTableGenerator {
 	margin:0px;padding:0px;
 	width:100%;
-	box-shadow: 10px 10px 5px #888888;
 	border:1px solid #3f7f00;
 	
 	-moz-border-radius-bottomleft:0px;
@@ -2532,6 +2531,15 @@ text and the class mapviewer to the MapViewerPortlet.
 	border-width:0px 0px 1px 1px;
 }
 
+.CSSTableGenerator ul{
+	list-style-type: none;
+    padding: 0px;
+    margin: 0px;
+}
+
+.CSSTableGenerator ul li{
+	margin-bottom:8px; 
+}
 
 /* ---------- links previous next  in urban ast ---------- */
 
