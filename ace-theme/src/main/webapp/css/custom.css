@@ -2568,15 +2568,11 @@ text and the class mapviewer to the MapViewerPortlet.
 	width: 310px;
 }
 
-#contact-link a{
-	color: #02213d;
-	font-weight: normal;
-	text-decoration: underline;
+#contact-link a.bluebutton{
+	margin-top: 0px;
+	float: none;
 }
 
-#contact-link a:hover{
-	color: #02213d;
-}
 
 #next-link {
 	width: 150px;
