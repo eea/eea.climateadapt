@@ -205,7 +205,8 @@
 			   <hr />
 			   <div id="bottom-menu">
 				   	<div id="previous-link"><a href="">« Previous question</a></div>
-				    <div id="contact-link"><a href="http://climate-adapt.eea.europa.eu/tools/urban-ast/contact">Contact us with your questions,<br/>comments and suggestions</a></div>
+				    <div id="contact-link" class="bluebuttondiv">
+				    	<a href="http://climate-adapt.eea.europa.eu/tools/urban-ast/contact" class="bluebutton">Contact us with your questions,<br/>comments and suggestions</a></div>
 				    <div id="next-link"><a href="">Next question »</a></div>
 			   </div>
 			   <div class="clear-both"></div>
