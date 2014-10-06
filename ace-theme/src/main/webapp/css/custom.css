@@ -1255,7 +1255,7 @@ ul#subnav li a:hover {
 
 .ast #bottom-column,
 .ast #layout-column_column-2 {
-	margin-left: 27px;
+	margin: 0 20px 0 27px;
 	padding-top: 25px;
 }
 
@@ -1305,12 +1305,16 @@ ul#subnav li a:hover {
 	text-decoration: none;
 }
 
+/* change for firefox */
 @-moz-document url-prefix() {
 	
 	#ast-menu li ul li {
-		margin: 0 0 10px 0; 
+		margin: 0 0 20px 0; 
 	}
-	
+
+	#ast-menu li ul li ul {
+		margin-top: 20px; 
+	}	
 }
 
 
