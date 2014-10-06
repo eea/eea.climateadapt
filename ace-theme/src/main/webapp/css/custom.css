@@ -1317,6 +1317,18 @@ ul#subnav li a:hover {
 	}	
 }
 
+/* Chnages for IE10 + */
+@media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {  
+	
+	#ast-menu li ul li {
+		margin: 0 0 20px 0; 
+	}
+
+	#ast-menu li ul li ul {
+		margin-top: 20px; 
+	}	
+}
+
 
 /**** 
 	Frontpage specific styles 
