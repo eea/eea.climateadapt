@@ -2619,7 +2619,7 @@
 												   <% for (String wsite: webSites) {
 													   if (wsite.trim().length() > 0) { 
 												   %>
-												   <a href="http://<%=wsite.trim()%>"><%=wsite.trim()%></a><br/><% }} %></p>
+												   <a href="<%=wsite.trim()%>"><%=wsite.trim()%></a><br/><% }} %></p>
 												<div class="case-studies-form-clearing"></div>
 											</li>
 											
