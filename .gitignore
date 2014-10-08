@@ -30,3 +30,4 @@ quickanddirtyows/classes/
 web-form-portlet/docroot/WEB-INF/classes/
 AceItem-portlet/docroot/WEB-INF/sql/
 /target
+.idea/
