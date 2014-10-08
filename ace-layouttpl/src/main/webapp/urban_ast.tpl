@@ -139,9 +139,9 @@
 	      </li>
 	      <li><a href="/tools/urban-ast/step-3-0" name="step-3-0" onclick="document.location.href='/tools/urban-ast/step-3-0'"><strong>3.</strong> Identifying adaptation options</a>
 	        <ul id="step-3">
-	          <li><a href="/tools/urban-ast/step-3-1" name="step-3-1" onclick="document.location.href='/tools/urban-ast/step-3-1'"><p>3.1 What adaptation measures for urban cities exist and how to set up a catalogue of measures?</p></a></li>
+	          <li><a href="/tools/urban-ast/step-3-1" name="step-3-1" onclick="document.location.href='/tools/urban-ast/step-3-1'"><p>3.1 What adaptation options for urban cities exist and how to set up a catalogue of options?</p></a></li>
 	          <li><a href="/tools/urban-ast/step-3-2" name="step-3-2" onclick="document.location.href='/tools/urban-ast/step-3-2'"><p>3.2 Where can I find examples of good adaptation practice of other cities and towns?</p></a></li>
-	          <li><a href="/tools/urban-ast/step-3-3" name="step-3-3" onclick="document.location.href='/tools/urban-ast/step-3-3'"><p>3.3 How do I identify the existing adaptation measures in my city/town?</p></a>
+	          <li><a href="/tools/urban-ast/step-3-3" name="step-3-3" onclick="document.location.href='/tools/urban-ast/step-3-3'"><p>3.3 How do I identify the existing adaptation options in my city/town?</p></a>
 	            <ul id="step-3-3">
 	              <li><a href="/tools/urban-ast/step-3-check" name="step-3-3-1" onclick="document.location.href='/tools/urban-ast/step-3-check'"><p>Self-check</p></a></li>
 	            </ul>
