@@ -1260,7 +1260,7 @@ ul#subnav li a:hover {
 }
 
 .ast-main-article .body {
-	height: 125px;
+/*	height: 125px;*/
 	margin-bottom: 17px;
 	overflow: hidden;
 }
