@@ -1,6 +1,8 @@
 package nl.wur.alterra.cgi.ace.search.lucene;
 
 import nl.wur.alterra.cgi.ace.model.AceItem;
+
+import org.apache.commons.lang.StringUtils;
 import org.apache.lucene.document.Document;
 import org.apache.lucene.document.Field;
 import org.apache.lucene.document.NumericField;
@@ -102,7 +104,8 @@ public class AceItemIndexer {
         String textSearch = aceItem.getTextSearch();
         String datatype = aceItem.getDatatype();
         String year = aceItem.getYear();
-
+        String feature = aceItem.getFeature();
+        
         Document document = new Document();
 
         document.add(new Field(ACEIndexConstant.IndexField.ACEITEM_ID, Long.toString(aceItemId), Field.Store.YES,Field.Index.NOT_ANALYZED));
@@ -159,6 +162,13 @@ public class AceItemIndexer {
             document.add(new Field(ACEIndexConstant.IndexField.SPATIAL_LAYER, spatialLayers, Field.Store.YES,Field.Index.NOT_ANALYZED));
         }
 
+        if(feature != null) {
+            document.add(new Field(ACEIndexConstant.IndexField.FEATURE, feature, Field.Store.YES,Field.Index.NOT_ANALYZED));
+            // for sorting
+            document.add(new Field(ACEIndexConstant.IndexField.FEATURE_SORT, feature.toUpperCase(), Field.Store.NO,Field.Index.NOT_ANALYZED));
+        }
+
+        
         //if(spatialValues != null) {
         //    document.add(new Field(ACEIndexConstant.IndexField.SPATIAL_VALUES, spatialValues, Field.Store.YES,Field.Index.NOT_ANALYZED));
         //}

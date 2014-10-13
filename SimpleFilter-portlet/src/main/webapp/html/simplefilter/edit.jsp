@@ -114,6 +114,7 @@ pageContext.setAttribute("countriesList", countriesList);
                 <input type="radio" name="sortBy" class="sortByControl" id="${sortsearchRelevanceId}" value="RELEVANCE" <%= (sortby.equals("RELEVANCE"))?"checked":"" %> /><liferay-ui:message key="acesearch-sort-relevance" /><br />
 				<input type="radio" name="sortBy" class="sortByControl" id="${sortsearchRatingId}" value="RATING" <%= (sortby.equals("RATING"))?"checked":"" %> /><liferay-ui:message key="acesearch-sort-rating" /><br />
                 <input type="radio" name="sortBy" class="sortByControl" id="${sortsearchNameId}" value="NAME" <%= (sortby.equals("NAME"))?"checked":"" %> /><liferay-ui:message key="acesearch-sort-name" /><br />
+                <input type="radio" name="sortBy" class="sortByControl" id="${sortsearchFeatureId}" value="FEATURE" <%= (sortby.equals("FEATURE"))?"checked":"" %> /><liferay-ui:message key="acesearch-sort-feature" /><br />
                 </div>
             </div>
             
