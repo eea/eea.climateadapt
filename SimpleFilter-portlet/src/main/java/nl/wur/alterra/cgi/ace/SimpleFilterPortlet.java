@@ -109,12 +109,12 @@ public class SimpleFilterPortlet extends MVCPortlet {
 
                 if(nrOfCheckboxes == 4) {
                     renderRequest.getPortletSession().setAttribute(Constants.USERSCENARIO, scenario[0]);
-                    if( (scenario[0].length() > 0) &&  !scenario[0].equalsIgnoreCase("all") ) {
+                    if( (scenario[0] != null && scenario[0].length() > 0) &&  !scenario[0].equalsIgnoreCase("all") ) {
                         formBean.setScenario( scenario );
                     }
 
                     renderRequest.getPortletSession().setAttribute(Constants.USERTIMEPERIOD, timeperiod[0]);
-                    if( (timeperiod[0].length() > 0) &&  !timeperiod[0].equalsIgnoreCase("all") ) {
+                    if( timeperiod[0] != null && (timeperiod[0].length() > 0) &&  !timeperiod[0].equalsIgnoreCase("all") ) {
                         formBean.setTimePeriod( timeperiod );
                     }
                 }
