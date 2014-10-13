@@ -1345,6 +1345,15 @@ ul#subnav li a:hover {
         min-height: 220px;
 }
 
+/* Distribute the columns evenly on the frontpage */
+.frontpage-layout #column-5,
+.frontpage-layout #column-6,
+.frontpage-layout #column-7,
+.frontpage-layout #column-8
+{
+    width: 25%;
+}
+
 .frontpage-layout #layout-column_column-4
 {
     padding-left: 14px;
