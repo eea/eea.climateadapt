@@ -31,6 +31,14 @@ long prefnritemspage = Long.parseLong(renderRequest.getPreferences().getValue(Co
 
 int nrOfCheckboxes = Integer.parseInt( renderRequest.getPreferences().getValue(Constants.NRCHECKBOXES, "2") );
 
+String defaultImpact = renderRequest.getPreferences().getValue(Constants.USERDEFAULTIMPACT, "all");
+
+String defaultSector = renderRequest.getPreferences().getValue(Constants.USERDEFAULTSECTOR, "all");
+
+String defaultScenario = renderRequest.getPreferences().getValue(Constants.USERDEFAULTSCENARIO, "all");
+
+String defaultPeriod = renderRequest.getPreferences().getValue(Constants.USERDEFAULTPERIOD, "all");
+
 AceSearchFormBean acesearchformbean = (AceSearchFormBean) request.getAttribute(SearchRequestParams.SEARCH_PARAMS);
 
 // Retrieve parameters to fill form
@@ -49,7 +57,7 @@ else {
 	
 	aceitemtypes = renderRequest.getPreferences().getValues(SearchRequestParams.ACEITEM_TYPE, new String[] {} );	
 }
-String selected ;
+String selected = "";
 
 String selected_impact = (String) renderRequest.getPortletSession().getAttribute(Constants.USERIMPACT);
 
@@ -59,11 +67,10 @@ String selected_scenario = (String) renderRequest.getPortletSession().getAttribu
 
 String selected_timeperiod = (String) renderRequest.getPortletSession().getAttribute(Constants.USERTIMEPERIOD);
 
-if (selected_impact == null || selected_impact.equalsIgnoreCase("all")) {
-	
-	selected = "";
+if (selected_impact == null  ) {
+	selected_impact = defaultImpact; 
 }
-else {
+else if ( !selected_impact.equalsIgnoreCase("all") )  {
 	selected = "selected='selected'";
 }
 
@@ -109,13 +116,14 @@ String redirect = PortalUtil.getCurrentURL(renderRequest);
 						</select>
 					</div>
 <%
-	if (selected_sector == null || selected_sector.equalsIgnoreCase("all")) {
-	
-		selected = "";
-	}
-	else {
-		selected = "selected='selected'";
-	}
+
+if (selected_sector == null  ) {
+	selected_sector = defaultSector; 
+}
+else if ( !selected_sector.equalsIgnoreCase("all") )  {
+	selected = "selected='selected'";
+}
+
 %>					
 					<!-- added width because IE8 renders a 100% width otherwise -->
 					<div id="sector-selector-div" class="adaptationtools-selector" style="margin-top:10px;float:left;width:400px;"> <!--  style="float:left;width:306px; -->
@@ -138,11 +146,10 @@ String redirect = PortalUtil.getCurrentURL(renderRequest);
 					
 <%
 	if(nrOfCheckboxes == 4) {
-		if (selected_scenario == null || selected_scenario.equalsIgnoreCase("all")) {
-		
-			selected = "";
+		if (selected_scenario == null  ) {
+			selected_scenario = defaultScenario; 
 		}
-		else {
+		else if ( !selected_scenario.equalsIgnoreCase("all") )  {
 			selected = "selected='selected'";
 		}
 %>					
@@ -166,13 +173,12 @@ String redirect = PortalUtil.getCurrentURL(renderRequest);
 					
 					
 <%
-		if (selected_timeperiod == null || selected_timeperiod.equalsIgnoreCase("all")) {
-		
-			selected = "";
-		}
-		else {
-			selected = "selected='selected'";
-		}
+if (selected_timeperiod == null  ) {
+	selected_timeperiod = defaultPeriod;
+}
+else if ( !selected_timeperiod.equalsIgnoreCase("all") )  {
+	selected = "selected='selected'";
+}
 %>					
 					<!-- added width because IE8 renders a 100% width otherwise -->
 					<div id="timeperiod-selector-div" class="adaptationtools-selector" style="margin-top:10px;float:left;width:400px;">
