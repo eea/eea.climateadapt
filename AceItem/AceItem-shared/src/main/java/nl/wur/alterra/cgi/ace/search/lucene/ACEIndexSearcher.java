@@ -134,10 +134,6 @@ public class ACEIndexSearcher {
 //                    System.out.println("sort by year requested");
                     sort = new Sort(new SortField( ACEIndexConstant.IndexField.YEAR_SORT, SortField.INT, true));
                 }
-                else if(sortBy.equals("FEATURE")) {
-//                	System.out.println("sort by feature requested");
-                    sort = new Sort(new SortField( ACEIndexConstant.IndexField.FEATURE_SORT, SortField.STRING));
-                }
                 // undefined sort: default to relevance
                 else {
                     // ignore it (let Lucene default to relevance)

@@ -25,4 +25,6 @@ public class Constants {
     
     public static final String USERDEFAULTPERIOD = "userdefaultperiod";
     
+    public static final String USERISFEATUREDITEM = "userisfeatureditem";
+    
 }

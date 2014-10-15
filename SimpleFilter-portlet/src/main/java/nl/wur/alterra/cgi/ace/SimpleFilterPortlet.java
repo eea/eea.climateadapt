@@ -85,12 +85,14 @@ public class SimpleFilterPortlet extends MVCPortlet {
             String fuzziness = null;
             String anyOfThese = null;
             String[] aceItemTypes = null;
+            String isFeaturedItem = null;
 
             requestParams = preferences.getMap();
 
             fuzziness = preferences.getValue(SearchRequestParams.FUZZINESS, "");
             anyOfThese = preferences.getValue(SearchRequestParams.ANY, "");
             aceItemTypes = preferences.getValues(SearchRequestParams.ACEITEM_TYPE, new String[] {} );
+            isFeaturedItem = preferences.getValue(Constants.USERISFEATUREDITEM, "");
             
             int nrOfCheckboxes = Integer.parseInt( preferences.getValue(Constants.NRCHECKBOXES, "2") );
 
@@ -104,7 +106,11 @@ public class SimpleFilterPortlet extends MVCPortlet {
             if( (aceItemTypes != null) && (aceItemTypes.length > 0 )) {
                 formBean.setAceitemtype( aceItemTypes );
             }
-
+            if ( isFeaturedItem != null && isFeaturedItem.length() > 0 ) {
+            	formBean.setFeaturedItem(isFeaturedItem);
+            }
+                
+            
             renderRequest.getPortletSession().setAttribute(Constants.USERSECTOR, sector[0]);
             if( !sector[0].equalsIgnoreCase("all") ) {
                 formBean.setSector( sector );
@@ -114,7 +120,7 @@ public class SimpleFilterPortlet extends MVCPortlet {
             if( !impact[0].equalsIgnoreCase("all") ) {
                 formBean.setImpact( impact );
             }
-
+            
             if(nrOfCheckboxes == 4) {
                 renderRequest.getPortletSession().setAttribute(Constants.USERSCENARIO, scenario[0]);
                 if( (scenario[0] != null && scenario[0].length() > 0) &&  !scenario[0].equalsIgnoreCase("all") ) {
@@ -190,6 +196,7 @@ public class SimpleFilterPortlet extends MVCPortlet {
         prefs.setValue(Constants.USERDEFAULTSECTOR, ParamUtil.getString(request, Constants.USERDEFAULTSECTOR));
         prefs.setValue(Constants.USERDEFAULTSCENARIO, ParamUtil.getString(request, Constants.USERDEFAULTSCENARIO));
         prefs.setValue(Constants.USERDEFAULTPERIOD, ParamUtil.getString(request, Constants.USERDEFAULTPERIOD));
+        prefs.setValue(Constants.USERISFEATUREDITEM, ParamUtil.getString(request, Constants.USERISFEATUREDITEM));
         
         prefs.store();
         prefs.setValues(SearchRequestParams.FREETEXT_MODE, new String[] {"2"} ); // always search all of the words

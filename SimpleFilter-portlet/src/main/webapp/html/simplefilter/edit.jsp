@@ -75,8 +75,8 @@ String selected_scenario = renderRequest.getPreferences().getValue(Constants.USE
 
 String selected_period = renderRequest.getPreferences().getValue(Constants.USERDEFAULTPERIOD, "all");;
 
+String isFeaturedItem = renderRequest.getPreferences().getValue(Constants.USERISFEATUREDITEM, "");
 %>
-
 
 <portlet:actionURL name="setFilterAceItemPref" var="searchAceitemURL"/>
 
@@ -125,10 +125,16 @@ String selected_period = renderRequest.getPreferences().getValue(Constants.USERD
                 <input type="radio" name="sortBy" class="sortByControl" id="${sortsearchRelevanceId}" value="RELEVANCE" <%= (sortby.equals("RELEVANCE"))?"checked":"" %> /><liferay-ui:message key="acesearch-sort-relevance" /><br />
 				<input type="radio" name="sortBy" class="sortByControl" id="${sortsearchRatingId}" value="RATING" <%= (sortby.equals("RATING"))?"checked":"" %> /><liferay-ui:message key="acesearch-sort-rating" /><br />
                 <input type="radio" name="sortBy" class="sortByControl" id="${sortsearchNameId}" value="NAME" <%= (sortby.equals("NAME"))?"checked":"" %> /><liferay-ui:message key="acesearch-sort-name" /><br />
-                <input type="radio" name="sortBy" class="sortByControl" id="${sortsearchFeatureId}" value="FEATURE" <%= (sortby.equals("FEATURE"))?"checked":"" %> /><liferay-ui:message key="acesearch-sort-feature" /><br />
                 </div>
             </div>
             
+             <div class="search_section">
+                <div class="row">
+					<liferay-ui:message key="acesearch-show-only-featured" /><br />
+					<input type="checkbox" name="userisfeatureditem" id="chk_type_isfeatureditem" value="FEATURED" <%= (isFeaturedItem.equals("FEATURED"))?"checked":"" %> />
+                </div>
+            </div>
+
              <div class="search_section">
                 <div class="row">
 				<liferay-ui:message key="acefilter-lbl-nrcheckboxes" /><br />

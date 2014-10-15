@@ -47,10 +47,6 @@ public class ACEIndexConstant {
          * To sort by relevance. This is not an actual sort field in the index, by default Lucene uses relevance.
          */
         public static final String RELEVANCE_SORT = "relevancesort";
-        /**
-         * To sort by feature. To sort by ace item feature.
-         */
-        public static final String FEATURE_SORT = "featuresort";
 
         //
         // regular fields
@@ -151,7 +147,7 @@ public class ACEIndexConstant {
         /**
          * Feature.
          */
-        public static final String FEATURE = "feature";
+        public static final String IS_FEATURED_ITEM = "isfeatured";
 
     }
 }

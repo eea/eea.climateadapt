@@ -163,9 +163,13 @@ public class AceItemIndexer {
         }
 
         if(feature != null) {
-            document.add(new Field(ACEIndexConstant.IndexField.FEATURE, feature, Field.Store.YES,Field.Index.NOT_ANALYZED));
-            // for sorting
-            document.add(new Field(ACEIndexConstant.IndexField.FEATURE_SORT, feature.toUpperCase(), Field.Store.NO,Field.Index.NOT_ANALYZED));
+            // for filtering
+            if ( feature == null || feature.equals("") ) {
+                document.add(new Field(ACEIndexConstant.IndexField.IS_FEATURED_ITEM, String.valueOf(0), Field.Store.NO,Field.Index.NOT_ANALYZED));	
+            }
+            else {
+                document.add(new Field(ACEIndexConstant.IndexField.IS_FEATURED_ITEM, String.valueOf(1), Field.Store.NO,Field.Index.NOT_ANALYZED));
+            }
         }
 
         
