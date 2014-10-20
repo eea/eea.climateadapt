@@ -815,7 +815,7 @@
 												<c:forEach var="option" items="${adaptoptions}" > 
 														<div class="check">
 														  <c:choose>
-														    <c:when test="${fn:contains(chosenAdaptOptions, option.measureId)}">
+														    <c:when test="${chosenAdaptOptions eq option.measureId}">
 															   <li><label for="chk_adaptoption_${option.name}"><input type="checkbox" class="adaptoptionsfromdb" name="chk_adaptoptions" id="chk_adaptoption_${option.name}" value="${option.measureId}" checked/><a href='/viewmeasure?ace_measure_id=${option.measureId}' target="view adaptation">${option.name}</a></label></li>
 															</c:when>
 															<c:otherwise>
