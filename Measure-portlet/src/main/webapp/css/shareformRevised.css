@@ -611,6 +611,10 @@
     padding-left: 1px;
   }
   
+   .firstImage img {
+    width: 160px;
+  }
+  
   /* blue button for submit button */	
 	.bluebutton {
 		display: inline-block;
