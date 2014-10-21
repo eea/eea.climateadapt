@@ -806,16 +806,26 @@
 													{
 														chosenAdaptOptions = measureFromRequest.getAdaptationoptions();
 													}
+													String[] adaptOptionsArray = chosenAdaptOptions.split(";");
 													
 													// store the adaptoptions and the selected adapt options in page scope
 													pageContext.setAttribute("adaptoptions", listOfMeasure);
 													pageContext.setAttribute("chosenAdaptOptions", chosenAdaptOptions);
+													pageContext.setAttribute("adaptOptionsArray", adaptOptionsArray);
 											    %>
 											    
 												<c:forEach var="option" items="${adaptoptions}" > 
-														<div class="check">
+														<c:set var="chosenOption" value="false" />
+														<c:forEach var="adaptOption" items="${adaptOptionsArray}">
+															<c:choose>
+																<c:when test="${adaptOption eq option.measureId}">
+																	<c:set var="chosenOption" value="true" />
+																</c:when>
+															</c:choose>
+														</c:forEach>
+														<div class="check">														 
 														  <c:choose>
-														    <c:when test="${chosenAdaptOptions eq option.measureId}">
+														    <c:when test="${chosenOption}">
 															   <li><label for="chk_adaptoption_${option.name}"><input type="checkbox" class="adaptoptionsfromdb" name="chk_adaptoptions" id="chk_adaptoption_${option.name}" value="${option.measureId}" checked/><a href='/viewmeasure?ace_measure_id=${option.measureId}' target="view adaptation">${option.name}</a></label></li>
 															</c:when>
 															<c:otherwise>
