@@ -3,7 +3,6 @@
 <portlet:defineObjects />
 <!-- need the javascript for the glossary content tooltip -->
 <script type="text/javascript" src="<%=request.getContextPath()%>/js/home/jquery.qtip.min.js"></script>
-<script type="text/javascript" src="<%=request.getContextPath()%>/js/home/jquery_cycle.js"></script>
 	<div id="case-studies-homepage-slider-wrapper">
 						<div class="case-studies-homepage-slider-content">
 							<ul class="blank" >
