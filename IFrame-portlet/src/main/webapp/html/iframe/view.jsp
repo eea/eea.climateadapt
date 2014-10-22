@@ -28,14 +28,15 @@
 
 <script>
 
-$("iframe").load(function() {
+$(document).ready(function () {
 	$("iframe").hide();
 });
 
-$("iframe").ready(function() {
+$("iframe").load(function() {
 	$(".loading-image").hide();
 	$("iframe").show();
 });
+
 	
 </script>
 
