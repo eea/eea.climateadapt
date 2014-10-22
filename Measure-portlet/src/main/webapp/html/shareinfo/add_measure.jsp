@@ -14,7 +14,13 @@
 	if (measureId > 0) {
 		
 		try {
-			measure = MeasureLocalServiceUtil.getMeasure(measureId);
+			if (request.getAttribute("measure") != null)
+			{
+			   measure = (Measure) request.getAttribute("measure");
+			}
+			else {
+				measure = MeasureLocalServiceUtil.getMeasure(measureId);
+			}
 			moderator = measure.getModerator();
 		}
 		catch(Exception e) {

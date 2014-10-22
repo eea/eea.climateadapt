@@ -14,7 +14,13 @@
 	if (projectId > 0) {
 		
 		try {
-			project = ProjectLocalServiceUtil.getProject(projectId);
+			if (request.getAttribute("project") != null)
+			{
+				project = (Project) request.getAttribute("project");
+			}
+			else {
+				project = ProjectLocalServiceUtil.getProject(projectId);
+			}
 			moderator = project.getModerator();
 		}
 		catch(Exception e) {

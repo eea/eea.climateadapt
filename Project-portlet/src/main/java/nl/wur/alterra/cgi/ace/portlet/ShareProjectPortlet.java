@@ -150,10 +150,10 @@ public class ShareProjectPortlet extends ProjectUpdateHelperRevised {
                 for (String error : errors) {
                     SessionErrors.add(request, error);
                 }
-
                 SessionErrors.add(request, "invalid-form-data");
                 PortalUtil.copyRequestParameters(request, response);
                 request.setAttribute("projectId", project.getProjectId());
+                request.setAttribute("project", project);
                 response.setRenderParameter("jspPage", "/html/shareinfo/add_projectRevised.jsp");
             }
         }

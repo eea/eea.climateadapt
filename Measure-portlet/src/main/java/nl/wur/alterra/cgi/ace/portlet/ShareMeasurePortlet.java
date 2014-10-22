@@ -166,7 +166,7 @@ public class ShareMeasurePortlet extends MeasureUpdateHelperForSharedMeasure {
                 SessionErrors.add(request, "invalid-form-data");
                 //PortalUtil.copyRequestParameters(request, response);
                 request.setAttribute("measureId", measure.getMeasureId());
-
+                request.setAttribute("measure", measure);
                 response.setRenderParameter("jspPage", "/html/shareinfo/add_measureRevised.jsp");
             }
         }
