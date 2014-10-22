@@ -28,9 +28,6 @@
 
 <script>
 
-$(document).ready(function () {
-	$("iframe").hide();
-});
 
 $("iframe").load(function() {
 	$(".loading-image").hide();
