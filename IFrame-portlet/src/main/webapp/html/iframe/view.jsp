@@ -30,6 +30,7 @@
 	<iframe class="ace-iframe" <%= inline %> src='<%= url %>'></iframe>
 </div>
 
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
 <script>
     $(document).ready(function () {
         $(".ace-iframe").on('load', function () {
