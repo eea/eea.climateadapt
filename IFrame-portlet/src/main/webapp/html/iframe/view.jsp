@@ -24,6 +24,19 @@
 	String inline = renderRequest.getPreferences().getValue("inline-attributes", "frameborder='0' style='min-width:984px;min-height:800px' width='100%' height='100%' ");
 %>
 
+<style>
+	.loading-image {
+	    position:absolute;
+	    left:40%;
+	    top:35%;
+	    border-radius:20px;
+	    padding:25px;
+	    border:1px solid #777777;
+	    background:#ffffff;
+	    box-shadow:0px 0px 10px #777777;
+	}
+</style>
+
 <div>
 	<img class="loading-image" src="/IFrame-portlet/images/loading-green-50.gif"/>
 	<br />
