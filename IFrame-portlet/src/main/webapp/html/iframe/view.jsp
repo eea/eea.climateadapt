@@ -24,18 +24,16 @@
 	String inline = renderRequest.getPreferences().getValue("inline-attributes", "frameborder='0' style='min-width:984px;min-height:800px' width='100%' height='100%' ");
 %>
 
-<div class="loading-image"><img src="/IFrame-portlet/images/loading-green-50.gif"/></div>
-
 <script>
-
 
 $("iframe").load(function() {
 	$(".loading-image").hide();
-	$("iframe").show();
 });
 
-	
 </script>
+
+
+<div class="loading-image"><img src="/IFrame-portlet/images/loading-green-50.gif"/></div>
 
 <br />
 <iframe <%= inline %> src='<%= url %>'></iframe>
