@@ -35,13 +35,13 @@ $(document).ready(function() {
 
 	function transition (that){
 		if ( !$(that).hasClass('active')  ) {
-			$('#case-studies-homepage-slider-wrapper>.case-studies-homepage-slider-content>ul.blank>li.active').fadeOut(fadeOutSpeed, function() {
-				$('#case-studies-homepage-slider-wrapper>.case-studies-homepage-slider-content>ul.blank>li.active').removeClass('active');
+			$('#case-studies-homepage-slider-wrapper>.case-studies-homepage-slider-content>ul>li.active').fadeOut(fadeOutSpeed, function() {
+				$('#case-studies-homepage-slider-wrapper>.case-studies-homepage-slider-content>ul>li.active').removeClass('active');
 				$('#case-studies-homepage-slider-wrapper>.case-studies-homepage-slider-controls>ul>li.active').removeClass('active');
 			});
 			
-			$('#case-studies-homepage-slider-wrapper .case-studies-homepage-slider-content ul.blank').children().eq( $(that).index() ).fadeIn(fadeInSpeed, function() {
-				$('#case-studies-homepage-slider-wrapper .case-studies-homepage-slider-content ul.blank').children().eq( $(that).index() ).addClass('active');
+			$('#case-studies-homepage-slider-wrapper .case-studies-homepage-slider-content ul').children().eq( $(that).index() ).fadeIn(fadeInSpeed, function() {
+				$('#case-studies-homepage-slider-wrapper .case-studies-homepage-slider-content ul').children().eq( $(that).index() ).addClass('active');
 				$('#case-studies-homepage-slider-wrapper .case-studies-homepage-slider-controls ul').children().eq( $(that).index() ).addClass('active');
 			});
 		}
