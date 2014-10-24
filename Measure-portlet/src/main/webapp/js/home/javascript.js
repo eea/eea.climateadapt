@@ -30,16 +30,17 @@ $(document).ready(function() {
 
 			}, 20000);
 		
-    var aniSpeed = 100;
+			var fadeOutSpeed = 150;
+			var fadeInSpeed = 300;
 
 	function transition (that){
 		if ( !$(that).hasClass('active')  ) {
-			$('#case-studies-homepage-slider-wrapper .case-studies-homepage-slider-content ul.blank').children('.active').fadeOut(aniSpeed, function() {
-				$('#case-studies-homepage-slider-wrapper .case-studies-homepage-slider-content ul.blank').children('.active').removeClass('active');
-				$('#case-studies-homepage-slider-wrapper .case-studies-homepage-slider-controls ul').find('.active').removeClass('active');
+			$('#case-studies-homepage-slider-wrapper>.case-studies-homepage-slider-content>ul.blank>li.active').fadeOut(fadeOutSpeed, function() {
+				$('#case-studies-homepage-slider-wrapper>.case-studies-homepage-slider-content>ul.blank>li.active').removeClass('active');
+				$('#case-studies-homepage-slider-wrapper>.case-studies-homepage-slider-controls>ul>li.active').removeClass('active');
 			});
-
-			$('#case-studies-homepage-slider-wrapper .case-studies-homepage-slider-content ul.blank').children().eq( $(that).index() ).fadeIn(aniSpeed, function() {
+			
+			$('#case-studies-homepage-slider-wrapper .case-studies-homepage-slider-content ul.blank').children().eq( $(that).index() ).fadeIn(fadeInSpeed, function() {
 				$('#case-studies-homepage-slider-wrapper .case-studies-homepage-slider-content ul.blank').children().eq( $(that).index() ).addClass('active');
 				$('#case-studies-homepage-slider-wrapper .case-studies-homepage-slider-controls ul').children().eq( $(that).index() ).addClass('active');
 			});
