@@ -13,25 +13,22 @@ $(document).ready(function() {
 				}
 			});
 			
-			var activeIndex=0;
 			var numBanners = $('#case-studies-homepage-slider-wrapper .case-studies-homepage-slider-content ul.blank').children().length; 
 			
+			var activeIndex=1; //Let's initialize from the second position
 			var bannerTimer = setInterval(function(){
-				var nextIndex=activeIndex+1;
-				if(activeIndex >= numBanners-1){
-					activeIndex=0;
-					nextIndex=0;
+				if(activeIndex+1 > numBanners){
+					activeIndex=1;
 				}
 				else{
 					activeIndex++;
 				}
-				nextIndex = nextIndex + 1;
-				transition($('#case-studies-homepage-slider-wrapper .case-studies-homepage-slider-content ul.blank>li:nth-child(' + nextIndex + ')'));
+				transition($('#case-studies-homepage-slider-wrapper .case-studies-homepage-slider-content ul.blank>li:nth-child(' + activeIndex + ')'));
 
 			}, 20000);
 		
 			var fadeOutSpeed = 100;
-			var fadeInSpeed = 300;
+			var fadeInSpeed = 200;
 
 	function transition (that){
 		$('#case-studies-homepage-slider-wrapper>.case-studies-homepage-slider-content>ul>li.active').fadeOut(fadeOutSpeed, function() {
