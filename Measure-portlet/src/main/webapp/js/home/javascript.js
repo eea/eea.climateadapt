@@ -34,6 +34,7 @@ $(document).ready(function() {
 		$('#case-studies-homepage-slider-wrapper>.case-studies-homepage-slider-content>ul>li.active').fadeOut(fadeOutSpeed, function() {
 			$('#case-studies-homepage-slider-wrapper>.case-studies-homepage-slider-content>ul>li.active').removeClass('active');
 			$('#case-studies-homepage-slider-wrapper>.case-studies-homepage-slider-controls>ul>li.active').removeClass('active');
+			$('#case-studies-homepage-slider-wrapper>.case-studies-homepage-slider-content>ul>li').css('style','display:none');
 		});
 		if ( !$(that).hasClass('active')  ) {			
 			$('#case-studies-homepage-slider-wrapper .case-studies-homepage-slider-content ul').children().eq( $(that).index() ).fadeIn(fadeInSpeed, function() {
