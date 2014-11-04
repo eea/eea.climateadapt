@@ -2,6 +2,11 @@
 	<div class="portlet-layout">
 		<div class="portlet-column portlet-column-only" id="column-1">
 			$processor.processColumn("column-1", "portlet-column-content portlet-column-content-first")
+		</div>
+	</div>
+	<div class="portlet-layout">	
+		<div class="aui-w20 portlet-column portlet-column-first" id="column-2">
+			$processor.processColumn("column-2", "portlet-column-content portlet-column-content-first")
 			  <ul class="menu-urban">
 		        <li>
 		            <a href="#" id="heat_waves" class="menu-link">Heat waves</a>
@@ -35,12 +40,7 @@
 		                <li><a href="#">Response capacity</a></li>
 		            </ul>
 		        </li>
-		    </ul>
-		</div>
-	</div>
-	<div class="portlet-layout">	
-		<div class="aui-w20 portlet-column portlet-column-first" id="column-2">
-			$processor.processColumn("column-2", "portlet-column-content portlet-column-content-first")
+		    </ul>			
 		</div>
         <div class="aui-w80 portlet-column" id="column-3">
 			$processor.processColumn("column-3", "portlet-column-content")
