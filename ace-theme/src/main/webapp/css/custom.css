@@ -2627,3 +2627,104 @@ text and the class mapviewer to the MapViewerPortlet.
 .portlet-title-text {
 	white-space: normal;
 }
+
+/************** Urban adaptation map viewer menu ***************/
+
+    .menu-urban ul, .menu-urban li, .menu-urban a {
+        margin: 0;
+        padding: 0;
+        border: none;
+        outline: none;
+    }
+    
+    .menu-urban {
+        width:149px;
+    }    
+    
+    .menu-urban li {
+        list-style: none;
+        margin: 0 0 2px 0;
+        opacity: 0.75;    
+        
+        -webkit-transition: opacity .25s ease .1s;
+        -moz-transition: opacity .25s ease .1s;
+        -o-transition: opacity .25s ease .1s;
+        -ms-transition: opacity .25s ease .1s;
+        transition: opacity .25s ease .1s; ,         
+    }    
+    
+    .menu-urban li:hover { opacity: 1; }     
+
+    a.menu-link {
+        display:block;
+        height:80px; 
+        padding: 5px 5px 0 5px;
+
+        text-decoration: none;
+        text-align: right;
+
+        font-family: Helvetica, Arial, sans-serif;
+        font-weight: bold;
+        font-size: 26px;
+        line-height: 25px;
+
+        color: #f3f3f3;
+        text-shadow: 1px 1px 1px rgba(0,0,0,.6);
+
+        -webkit-transition: color .2s ease-in-out;
+        -moz-transition: color .2s ease-in-out;
+        -o-transition: color .2s ease-in-out;
+        -ms-transition: color .2s ease-in-out;
+        transition: color .2s ease-in-out;
+    } 
+    
+    #heat_waves { 
+        background-image: url("heat_waves.png");
+    }
+    #drought { 
+        background-image: url("drought.png");
+    }
+    #flooding { 
+        background-image: url("flooding.png");
+    }
+    #forest_fires { 
+        background-image: url("forest_fires.png");
+    }        
+      
+    .menu-urban li ul {  
+        opacity: 0;
+        height: 0;        
+        background: #e9efc9;
+
+        -webkit-transition: opacity .25s ease .1s, height .25s ease .1s;
+        -moz-transition: opacity .25s ease .1s, height .25s ease .1s;
+        -o-transition: opacity .25s ease .1s, height .25s ease .1s;
+        -ms-transition: opacity .25s ease .1s, height .25s ease .1s;
+        transition: opacity .25s ease .1s, height .25s ease .1s;       
+    }   
+
+    .menu-urban li:hover > ul { opacity: 1; height: 80px; }    
+
+    .menu-urban ul li {
+        padding: 3px;
+        opacity: 1;
+    }
+          
+    
+    .menu-urban ul li a {
+        padding: 0px 0px 0px 25px;
+        background: url("arrow.gif") no-repeat scroll 10px 5px transparent;
+        
+        text-decoration: none;
+        font-family: Helvetica, Arial, sans-serif;
+        font-size: 13px;
+        color: #2C330A;
+
+        -webkit-transition: color .2s ease-in-out;
+        -moz-transition: color .2s ease-in-out;
+        -o-transition: color .2s ease-in-out;
+        -ms-transition: color .2s ease-in-out;
+        transition: color .2s ease-in-out;
+    }    
+ 
+    .menu-urban a:hover { color: #a5bf26; }
