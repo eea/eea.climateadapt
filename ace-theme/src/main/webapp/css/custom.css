@@ -2636,36 +2636,35 @@ text and the class mapviewer to the MapViewerPortlet.
         border: none;
         outline: none;
     }
-    
+
 .menu-urban {
         width:149px;
-    }    
-    
+    }
+
 .menu-urban li {
         list-style: none;
         margin: 0 0 2px 0;
-        opacity: 0.75;    
-        
+        opacity: 0.75;
+
         -webkit-transition: opacity .25s ease .1s;
         -moz-transition: opacity .25s ease .1s;
         -o-transition: opacity .25s ease .1s;
         -ms-transition: opacity .25s ease .1s;
-        transition: opacity .25s ease .1s;         
-    }    
-    
-.menu-urban li:hover { opacity: 1; }     
+        transition: opacity .25s ease .1s;
+    }
 
-.ace_layout_col_1_2 a.menu-link {
+.menu-urban li:hover { opacity: 1; }
+
+#content .ace_layout_col_1_2 a.menu-link {
         display:block;
-        height:80px; 
+        height:80px;
         padding: 5px 5px 0 5px;
 
         text-decoration: none;
         text-align: right;
 
-        font-family: Helvetica, Arial, sans-serif;
         font-weight: bold;
-        font-size: 26px;
+        font-size: 20px;
         line-height: 25px;
 
         color: #f3f3f3;
@@ -2676,48 +2675,48 @@ text and the class mapviewer to the MapViewerPortlet.
         -o-transition: color .2s ease-in-out;
         -ms-transition: color .2s ease-in-out;
         transition: color .2s ease-in-out;
-    } 
-    
-#heat_waves { 
+    }
+
+#heat_waves {
         background-image: url("/ace-theme/images/heat_waves.png");
     }
-#drought { 
+#drought {
         background-image: url("/ace-theme/images/drought.png");
     }
-#flooding { 
+#flooding {
         background-image: url("/ace-theme/images/flooding.png");
     }
-#forest_fires { 
+#forest_fires {
         background-image: url("/ace-theme/images/forest_fires.png");
-    }        
-      
-.ace_layout_col_1_2 .menu-urban li ul {  
+    }
+
+#content .ace_layout_col_1_2 .menu-urban li ul {
         opacity: 0;
-        height: 0;        
+        height: 0;
         background: #e9efc9;
 
         -webkit-transition: opacity .25s ease .1s, height .25s ease .1s;
         -moz-transition: opacity .25s ease .1s, height .25s ease .1s;
         -o-transition: opacity .25s ease .1s, height .25s ease .1s;
         -ms-transition: opacity .25s ease .1s, height .25s ease .1s;
-        transition: opacity .25s ease .1s, height .25s ease .1s;       
-    }   
+        transition: opacity .25s ease .1s, height .25s ease .1s;
+    }
 
-.menu-urban li:hover > ul { opacity: 1; height: 80px; }    
+#content .ace_layout_col_1_2 .menu-urban li:hover ul { opacity: 1; height: 80px; }
 
-.menu-urban ul li {
+#content .ace_layout_col_1_2 .menu-urban ul li {
         padding: 3px;
         opacity: 1;
+        line-height: 20px;
     }
-          
-    
-.ace_layout_col_1_2 .menu-urban ul li a {
+
+
+#content .ace_layout_col_1_2 .menu-urban ul li a {
         padding: 0px 0px 0px 25px;
         background: url("/ace-theme/images/arrow.gif") no-repeat scroll 10px 5px transparent;
-        
+
         text-decoration: none;
-        font-family: Helvetica, Arial, sans-serif;
-        font-size: 13px;
+        font-size: 12px;
         color: #2C330A;
 
         -webkit-transition: color .2s ease-in-out;
@@ -2725,6 +2724,13 @@ text and the class mapviewer to the MapViewerPortlet.
         -o-transition: color .2s ease-in-out;
         -ms-transition: color .2s ease-in-out;
         transition: color .2s ease-in-out;
-    }    
- 
- .ace_layout_col_1_2 .menu-urban a:hover { color: #a5bf26; }
+    }
+
+#content .ace_layout_col_1_2 .menu-urban a:hover { color: #a5bf26; }
+
+#content .ace_layout_col_1_2 .empty {
+        display: none;
+}
+
+
+
