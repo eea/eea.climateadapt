@@ -2630,18 +2630,18 @@ text and the class mapviewer to the MapViewerPortlet.
 
 /************** Urban adaptation map viewer menu ***************/
 
-    .menu-urban ul, .menu-urban li, .menu-urban a {
+.menu-urban ul, .menu-urban li, .menu-urban a {
         margin: 0;
         padding: 0;
         border: none;
         outline: none;
     }
     
-    .menu-urban {
+.menu-urban {
         width:149px;
     }    
     
-    .menu-urban li {
+.menu-urban li {
         list-style: none;
         margin: 0 0 2px 0;
         opacity: 0.75;    
@@ -2650,12 +2650,12 @@ text and the class mapviewer to the MapViewerPortlet.
         -moz-transition: opacity .25s ease .1s;
         -o-transition: opacity .25s ease .1s;
         -ms-transition: opacity .25s ease .1s;
-        transition: opacity .25s ease .1s; ,         
+        transition: opacity .25s ease .1s;         
     }    
     
-    .menu-urban li:hover { opacity: 1; }     
+.menu-urban li:hover { opacity: 1; }     
 
-    a.menu-link {
+.ace_layout_col_1_2 a.menu-link {
         display:block;
         height:80px; 
         padding: 5px 5px 0 5px;
@@ -2678,20 +2678,20 @@ text and the class mapviewer to the MapViewerPortlet.
         transition: color .2s ease-in-out;
     } 
     
-    #heat_waves { 
-        background-image: url("heat_waves.png");
+#heat_waves { 
+        background-image: url("/ace-theme/images/heat_waves.png");
     }
-    #drought { 
-        background-image: url("drought.png");
+#drought { 
+        background-image: url("/ace-theme/images/drought.png");
     }
-    #flooding { 
-        background-image: url("flooding.png");
+#flooding { 
+        background-image: url("/ace-theme/images/flooding.png");
     }
-    #forest_fires { 
-        background-image: url("forest_fires.png");
+#forest_fires { 
+        background-image: url("/ace-theme/images/forest_fires.png");
     }        
       
-    .menu-urban li ul {  
+.ace_layout_col_1_2 .menu-urban li ul {  
         opacity: 0;
         height: 0;        
         background: #e9efc9;
@@ -2703,17 +2703,17 @@ text and the class mapviewer to the MapViewerPortlet.
         transition: opacity .25s ease .1s, height .25s ease .1s;       
     }   
 
-    .menu-urban li:hover > ul { opacity: 1; height: 80px; }    
+.menu-urban li:hover > ul { opacity: 1; height: 80px; }    
 
-    .menu-urban ul li {
+.menu-urban ul li {
         padding: 3px;
         opacity: 1;
     }
           
     
-    .menu-urban ul li a {
+.ace_layout_col_1_2 .menu-urban ul li a {
         padding: 0px 0px 0px 25px;
-        background: url("arrow.gif") no-repeat scroll 10px 5px transparent;
+        background: url("/ace-theme/images/arrow.gif") no-repeat scroll 10px 5px transparent;
         
         text-decoration: none;
         font-family: Helvetica, Arial, sans-serif;
@@ -2727,4 +2727,4 @@ text and the class mapviewer to the MapViewerPortlet.
         transition: color .2s ease-in-out;
     }    
  
-    .menu-urban a:hover { color: #a5bf26; }
+ .ace_layout_col_1_2 .menu-urban a:hover { color: #a5bf26; }
