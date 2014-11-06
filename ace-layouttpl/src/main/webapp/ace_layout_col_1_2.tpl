@@ -25,7 +25,7 @@
 		            </ul>
 		        </li>
 		        <li>
-		            <a href="#" id="/tools/urban-adaptation/climatic-threats/flooding" class="menu-link">Flooding</a>
+		            <a href="/tools/urban-adaptation/climatic-threats/flooding" id="flooding" class="menu-link">Flooding</a>
 		            <ul>
 		                <li><a href="/tools/urban-adaptation/climatic-threats/flooding/exposure">Exposure</a></li>
 		                <li><a href="/tools/urban-adaptation/climatic-threats/flooding/sensitivity">Sensitivity</a></li>
