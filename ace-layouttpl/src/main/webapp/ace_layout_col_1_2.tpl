@@ -9,35 +9,35 @@
 			$processor.processColumn("column-2", "portlet-column-content portlet-column-content-first")
 			  <ul class="menu-urban">
 		        <li>
-		            <a href="#" id="heat_waves" class="menu-link">Heat waves</a>
+		            <a href="/tools/urban-adaptation/climatic-threats/heat-waves" id="heat_waves" class="menu-link">Heat waves</a>
 		            <ul>
-		                <li><a href="#">Exposure</a></li>
-		                <li><a href="#">Sensitivity</a></li>
-		                <li><a href="#">Response capacity</a></li>
+		                <li><a href="/tools/urban-adaptation/climatic-threats/heat-waves/exposure">Exposure</a></li>
+		                <li><a href="/tools/urban-adaptation/climatic-threats/heat-waves/sensitivity">Sensitivity</a></li>
+		                <li><a href="/tools/urban-adaptation/climatic-threats/heat-waves/response-capacity">Response capacity</a></li>
 		            </ul>
 		        </li>
 		        <li>
-		            <a href="#" id="drought" class="menu-link">Water scarity and droughts</a>
+		            <a href="/tools/urban-adaptation/climatic-threats/droughts" id="drought" class="menu-link">Water scarity and droughts</a>
 		            <ul>
-		                <li><a href="#">Exposure</a></li>
-		                <li><a href="#">Sensitivity</a></li>
-		                <li><a href="#">Response capacity</a></li>
+		                <li><a href="/tools/urban-adaptation/climatic-threats/droughts/exposure">Exposure</a></li>
+		                <li><a href="/tools/urban-adaptation/climatic-threats/droughts/sensitivity">Sensitivity</a></li>
+		                <li><a href="/tools/urban-adaptation/climatic-threats/droughts/response-capacity">Response capacity</a></li>
 		            </ul>
 		        </li>
 		        <li>
-		            <a href="#" id="flooding" class="menu-link">Flooding</a>
+		            <a href="#" id="/tools/urban-adaptation/climatic-threats/flooding" class="menu-link">Flooding</a>
 		            <ul>
-		                <li><a href="#">Exposure</a></li>
-		                <li><a href="#">Sensitivity</a></li>
-		                <li><a href="#">Response capacity</a></li>
+		                <li><a href="/tools/urban-adaptation/climatic-threats/flooding/exposure">Exposure</a></li>
+		                <li><a href="/tools/urban-adaptation/climatic-threats/flooding/sensitivity">Sensitivity</a></li>
+		                <li><a href="/tools/urban-adaptation/climatic-threats/flooding/response-capacity">Response capacity</a></li>
 		            </ul>
 		        </li>
 		        <li>
-		            <a href="#" id="forest_fires" class="menu-link">Forest fires</a>
+		            <a href="/tools/urban-adaptation/climatic-threats/forest-fires" id="forest_fires" class="menu-link">Forest fires</a>
 		            <ul>
-		                <li><a href="#">Exposure</a></li>
-		                <li><a href="#">Sensitivity</a></li>
-		                <li><a href="#">Response capacity</a></li>
+		                <li><a href="/tools/urban-adaptation/climatic-threats/forest-fires/exposure">Exposure</a></li>
+		                <li><a href="/tools/urban-adaptation/climatic-threats/forest-fires/sensitivity">Sensitivity</a></li>
+		                <li><a href="/tools/urban-adaptation/climatic-threats/forest-fires/response-capacity">Response capacity</a></li>
 		            </ul>
 		        </li>
 		    </ul>			
