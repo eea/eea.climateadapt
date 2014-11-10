@@ -1,3 +1,18 @@
+<script type="text/javascript">
+
+   	$(document).ready(function() {
+   		var pageUrl = document.location.href;
+		
+		// Find the page url in the list of <a> tags in tha menu and add class 'active' 
+		$('.menu-urban li a').each(function(){
+		    if (pageUrl.search($(this).attr('href')) > 0) {
+		          $(this).addClass("active");
+		    }
+		});
+	});
+</script>
+
+
 <div class="ace_layout_col_1_2" id="main-content" role="main">
 	<div class="portlet-layout">
 		<div class="portlet-column portlet-column-only" id="column-1">
