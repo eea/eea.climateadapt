@@ -7,6 +7,7 @@
 		$('.menu-urban li a').each(function(){
 		    if (pageUrl.search($(this).attr('href')) > 0) {
 		          $(this).addClass("active");
+		          $(this).closest(".menu-urban-sub").css({"opacity": "1", "height": "80px"});
 		    }
 		});
 	});
@@ -25,7 +26,7 @@
 			  <ul class="menu-urban">
 		        <li>
 		            <a href="/tools/urban-adaptation/climatic-threats/heat-waves" id="heat_waves" class="menu-link">Heat waves</a>
-		            <ul>
+		            <ul class="menu-urban-sub">
 		                <li><a href="/tools/urban-adaptation/climatic-threats/heat-waves/exposure">Exposure</a></li>
 		                <li><a href="/tools/urban-adaptation/climatic-threats/heat-waves/sensitivity">Sensitivity</a></li>
 		                <li><a href="/tools/urban-adaptation/climatic-threats/heat-waves/response-capacity">Response capacity</a></li>
@@ -33,7 +34,7 @@
 		        </li>
 		        <li>
 		            <a href="/tools/urban-adaptation/climatic-threats/droughts" id="drought" class="menu-link">Water scarity and droughts</a>
-		            <ul>
+		            <ul class="menu-urban-sub">
 		                <li><a href="/tools/urban-adaptation/climatic-threats/droughts/exposure">Exposure</a></li>
 		                <li><a href="/tools/urban-adaptation/climatic-threats/droughts/sensitivity">Sensitivity</a></li>
 		                <li><a href="/tools/urban-adaptation/climatic-threats/droughts/response-capacity">Response capacity</a></li>
@@ -41,7 +42,7 @@
 		        </li>
 		        <li>
 		            <a href="/tools/urban-adaptation/climatic-threats/flooding" id="flooding" class="menu-link">Flooding</a>
-		            <ul>
+		            <ul class="menu-urban-sub">
 		                <li><a href="/tools/urban-adaptation/climatic-threats/flooding/exposure">Exposure</a></li>
 		                <li><a href="/tools/urban-adaptation/climatic-threats/flooding/sensitivity">Sensitivity</a></li>
 		                <li><a href="/tools/urban-adaptation/climatic-threats/flooding/response-capacity">Response capacity</a></li>
@@ -49,7 +50,7 @@
 		        </li>
 		        <li>
 		            <a href="/tools/urban-adaptation/climatic-threats/forest-fires" id="forest_fires" class="menu-link">Forest fires</a>
-		            <ul>
+		            <ul class="menu-urban-sub">
 		                <li><a href="/tools/urban-adaptation/climatic-threats/forest-fires/exposure">Exposure</a></li>
 		                <li><a href="/tools/urban-adaptation/climatic-threats/forest-fires/sensitivity">Sensitivity</a></li>
 		                <li><a href="/tools/urban-adaptation/climatic-threats/forest-fires/response-capacity">Response capacity</a></li>
