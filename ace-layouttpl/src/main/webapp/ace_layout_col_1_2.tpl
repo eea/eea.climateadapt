@@ -8,6 +8,7 @@
 		    if (pageUrl.search($(this).attr('href')) > 0) {
 		          $(this).addClass("active");
 		          $(this).closest(".menu-urban-sub").css({"opacity": "1", "height": "80px"});
+		          $(this).closest(".menu-urban li").css({"opacity": "1"});
 		    }
 		});
 	});
