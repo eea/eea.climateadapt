@@ -2702,8 +2702,9 @@ text and the class mapviewer to the MapViewerPortlet.
         transition: opacity .25s ease .1s, height .25s ease .1s;
     }
 
+/*
 #content .ace_layout_col_1_2 .menu-urban li:hover ul { opacity: 1; height: 80px; }
-
+*/
 #content .ace_layout_col_1_2 .menu-urban ul li {
         padding: 3px;
         opacity: 1;
