@@ -65,6 +65,14 @@ margin-bottom:0px;
     width: 33.33%;
 }
 
+.aui-w20 {
+    width: 20%;
+}
+
+.aui-w80 {
+    width: 80%;
+}
+
 .aui .portlet, .aui .portlet-borderless-container {
     background: none repeat scroll 0 0 rgba(0, 0, 0, 0); 
 }
