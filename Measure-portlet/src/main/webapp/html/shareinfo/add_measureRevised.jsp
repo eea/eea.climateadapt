@@ -1006,7 +1006,7 @@
 									    <%
 										     if (mao_type.equalsIgnoreCase("A"))
 										     {
-									        	 localDescription = "Date of final or latest actual practical implementation of Case study";
+									        	 localDescription = "Date of case study publication or update";
 									         }
 									         else
 									         {
@@ -1120,7 +1120,7 @@
 									    <% 
 									         if (mao_type.equalsIgnoreCase("A"))
 										     {
-									        	 localDescription = "Date of final or latest actual practical implementation of Case study";
+									        	 localDescription = "Date of case study publication or update";
 									         }
 									         else
 									         {
