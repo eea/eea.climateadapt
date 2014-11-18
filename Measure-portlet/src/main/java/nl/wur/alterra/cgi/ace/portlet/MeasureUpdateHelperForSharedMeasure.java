@@ -955,7 +955,7 @@ public abstract class MeasureUpdateHelperForSharedMeasure extends MVCPortlet {
 
 
             String primaryKey = String.valueOf(image.getPrimaryKey());
-            addPermissions(themeDisplay, primaryKey, "com.liferay.portal.kernel.repository.model.FileEntry");
+            addPermissions(themeDisplay, primaryKey, DLFileEntry.class.getName());
         }
 //        catch (DuplicateImageNameException e)
 //        {
