@@ -404,10 +404,14 @@
 								%>
 								
 								<p>
-								   <% for (String wsite: webSites) {
-									   if (wsite.trim().length() > 0) { 
+                                                                  <% for (String wsite: webSites) {
+                                                                            String websiteUrl = wsite.trim();
+                                                                            if (websiteUrl.length() > 0) { 
+                                                                            if( ! websiteUrl.startsWith("http")  ){
+                                                                                websiteUrl = "http://" + websiteUrl;
+                                                                              }
 								   %>
-								   <a href="http://<%=wsite.trim()%>"><%=wsite.trim()%></a><br/><% }} %>
+								   <a href="<%=websiteUrl%>" target="_blank"><%=websiteUrl%></a><br/><% }} %>
 								</p>
 								
 								<div class="case-studies-form-clearing"></div>
