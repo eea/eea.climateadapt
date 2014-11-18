@@ -136,6 +136,7 @@ public class ShareAceItemPortlet extends LuceneIndexUpdatePortletForShareAceItem
                 for (String error : errors) {
                     SessionErrors.add(request, error);
                 }
+                request.setAttribute("aceitem", aceitem);
                 SessionErrors.add(request, "invalid-form-data");
                 PortalUtil.copyRequestParameters(request, response);
                 request.setAttribute("aceitemId", aceitem.getAceItemId());

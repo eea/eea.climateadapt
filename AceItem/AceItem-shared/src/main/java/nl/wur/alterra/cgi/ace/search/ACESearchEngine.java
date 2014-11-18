@@ -412,8 +412,10 @@ public class ACESearchEngine {
                     e.printStackTrace();
                 }
             }
-
-
+            if ( formBean.getFeaturedItem() != null && !formBean.getFeaturedItem().equals("") ) {
+//            	System.out.println("Filter by feature");
+            	rawQuery += " AND (" + ACEIndexConstant.IndexField.IS_FEATURED_ITEM + ":1" + ")";
+            }
 
             ACEIndexSearcher searcher = ACEIndexSearcher.getACEIndexSearcher();
             QueryParser queryParser = new QueryParser(ACEIndexConstant.IndexField.ANY, ACEAnalyzer.getAnalyzer());

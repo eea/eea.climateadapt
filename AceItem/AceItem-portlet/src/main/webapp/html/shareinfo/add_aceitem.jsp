@@ -56,8 +56,15 @@
 	if (aceItemId > 0) {
 		
 		try {
-			aceitem = AceItemLocalServiceUtil.getAceItem(aceItemId);
+			if (request.getAttribute("aceitem") != null)
+			{
+			   aceitem = (AceItem) request.getAttribute("aceitem");
+			}
+			else {
+				aceitem = AceItemLocalServiceUtil.getAceItem(aceItemId);
+			}
 			moderator = aceitem.getModerator();
+			
 		}
 		catch(Exception e) {
 			aceItemId = 0;

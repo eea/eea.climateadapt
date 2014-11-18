@@ -143,5 +143,11 @@ public class ACEIndexConstant {
          * Datatype.
          */
         public static final String DATATYPE = "datatype";
+
+        /**
+         * Feature.
+         */
+        public static final String IS_FEATURED_ITEM = "isfeatured";
+
     }
 }

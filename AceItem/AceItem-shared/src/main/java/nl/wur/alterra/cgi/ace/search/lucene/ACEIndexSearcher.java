@@ -123,13 +123,15 @@ public class ACEIndexSearcher {
                             }
             else {
                 if(sortBy.equals("RATING")) {
-                    sort = new Sort(new SortField( ACEIndexConstant.IndexField.RATING_SORT, SortField.STRING));
+//                    System.out.println("sort by rating requested");
+                	sort = new Sort(new SortField( ACEIndexConstant.IndexField.RATING_SORT, SortField.STRING));
                 }
                 else if(sortBy.equals("NAME")) {
-                    sort = new Sort(new SortField( ACEIndexConstant.IndexField.NAME_SORT, SortField.STRING));
+//                    System.out.println("sort by name requested");
+                	sort = new Sort(new SortField( ACEIndexConstant.IndexField.NAME_SORT, SortField.STRING));
                 }
                 else if(sortBy.equals("YEAR")) {
-                    //System.out.println("sort by year requested");
+//                    System.out.println("sort by year requested");
                     sort = new Sort(new SortField( ACEIndexConstant.IndexField.YEAR_SORT, SortField.INT, true));
                 }
                 // undefined sort: default to relevance

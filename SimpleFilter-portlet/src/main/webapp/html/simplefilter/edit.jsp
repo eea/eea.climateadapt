@@ -1,3 +1,5 @@
+<%@page import="nl.wur.alterra.cgi.ace.model.constants.AceItemTimePeriod"%>
+<%@page import="nl.wur.alterra.cgi.ace.model.constants.AceItemScenario"%>
 <%@page import="nl.wur.alterra.cgi.ace.search.AceSearchFormBean"%>
 <%@page import="nl.wur.alterra.cgi.ace.search.SearchRequestParams"%>
 <%@page import="nl.wur.alterra.cgi.ace.SimpleFilterPortlet"%>
@@ -64,8 +66,17 @@ String[] countries = acesearchformbean.getCountries();
 if (countries == null) countries = new String[0];
 List<String> countriesList = Arrays.asList(countries);
 pageContext.setAttribute("countriesList", countriesList);
-%>
 
+String selected_impact = renderRequest.getPreferences().getValue(Constants.USERDEFAULTIMPACT, "all");;
+
+String selected_sector = renderRequest.getPreferences().getValue(Constants.USERDEFAULTSECTOR, "all");;
+
+String selected_scenario = renderRequest.getPreferences().getValue(Constants.USERDEFAULTSCENARIO, "all");;
+
+String selected_period = renderRequest.getPreferences().getValue(Constants.USERDEFAULTPERIOD, "all");;
+
+String isFeaturedItem = renderRequest.getPreferences().getValue(Constants.USERISFEATUREDITEM, "");
+%>
 
 <portlet:actionURL name="setFilterAceItemPref" var="searchAceitemURL"/>
 
@@ -119,11 +130,83 @@ pageContext.setAttribute("countriesList", countriesList);
             
              <div class="search_section">
                 <div class="row">
+					<liferay-ui:message key="acesearch-show-only-featured" /><br />
+					<input type="checkbox" name="userisfeatureditem" id="chk_type_isfeatureditem" value="FEATURED" <%= (isFeaturedItem.equals("FEATURED"))?"checked":"" %> />
+                </div>
+            </div>
+
+             <div class="search_section">
+                <div class="row">
 				<liferay-ui:message key="acefilter-lbl-nrcheckboxes" /><br />
                 <input type="radio" name="<%= Constants.NRCHECKBOXES %>" class="sortByControl" id="${nrcheckboxes2Id}" value="2" <%= (nrcheckboxes.equals("2"))?"checked":"" %> /> <liferay-ui:message key="acefilter-lbl-2_checkboxes" /><br />
 				<input type="radio" name="<%= Constants.NRCHECKBOXES %>" class="sortByControl" id="${nrcheckboxes4Id}" value="4" <%= (nrcheckboxes.equals("4"))?"checked":"" %> /> <liferay-ui:message key="acefilter-lbl-4_checkboxes" /><br />
                 </div>
             </div>
+
+			<div class="search_section">
+				<h2><liferay-ui:message key="acesearch-section-header-default" /></h2>
+	
+				<div id="risk-selector-div" class="row">
+					<liferay-ui:message key="acefilter-lbl-climateimpactdefault" /><br />
+					<select id="userdefaultimpact" name="userdefaultimpact" style="float:left;" >
+						<option value="all">All climate impacts</option>
+						<c:set var="selectedImpact" value="<%= selected_impact %>" />
+						<c:forEach var="adaptationClimateImpact" items="<%= nl.wur.alterra.cgi.ace.model.constants.AceItemClimateImpact.values() %>" >	
+						        <option value="${adaptationClimateImpact}"
+								<c:if test="${fn:indexOf(selectedImpact, adaptationClimateImpact)>=0}">
+									selected='selected'
+								</c:if>       
+						        ><liferay-ui:message key="aceitem-climateimpacts-lbl-${adaptationClimateImpact}" /></option>
+						</c:forEach>
+					</select>
+				</div>
+
+				<div id="risk-selector-div" class="row">
+					<liferay-ui:message key="acefilter-lbl-sectordefault" /><br />
+					<select id="userdefaultsector" name="userdefaultsector" style="float:left;" >
+						<option value="all">All sectors</option>
+						<c:set var="selectedSector" value="<%= selected_sector %>" />
+						<c:forEach var="adaptationSector" items="<%= nl.wur.alterra.cgi.ace.model.constants.AceItemSector.values() %>" >	
+						        <option value="${adaptationSector}"
+								<c:if test="${fn:indexOf(selectedSector, adaptationSector)>=0}">
+									selected='selected'
+								</c:if>       
+						        ><liferay-ui:message key="acesearch-sectors-lbl-${adaptationSector}" /></option>
+						</c:forEach>
+					</select>
+				</div>
+
+				<div id="risk-selector-div" class="row">
+					<liferay-ui:message key="acefilter-lbl-scenariodefault" /><br />
+					<select id="userdefaultscenario" name="userdefaultscenario" style="float:left;" >
+						<option value="all">All scenarios</option>
+						<c:set var="selectedScenario" value="<%= selected_scenario %>" />
+						<c:forEach var="adaptationScenario" items="<%= AceItemScenario.values() %>" >	
+						        <option value="${adaptationScenario}"
+								<c:if test="${fn:indexOf(selectedScenario, adaptationScenario)>=0}">
+									selected='selected'
+								</c:if>       
+						        ><liferay-ui:message key="acesearch-scenario-lbl-${adaptationScenario}" /></option>
+						</c:forEach>
+					</select>
+				</div>
+
+				<div id="risk-selector-div" class="row">
+					<liferay-ui:message key="acefilter-lbl-periodefault" /><br />
+					<select id="userdefaultperiod" name="userdefaultperiod" style="float:left;" >
+						<option value="all">All periods</option>
+						<c:set var="selectedPeriod" value="<%= selected_period %>" />
+						<c:forEach var="adaptationPeriod" items="<%= AceItemTimePeriod.values() %>" >	
+						        <option value="${adaptationPeriod}"
+								<c:if test="${fn:indexOf(selectedPeriod, adaptationPeriod)>=0}">
+									selected='selected'
+								</c:if>       
+						        ><liferay-ui:message key="acesearch-timeperiod-lbl-${adaptationPeriod}" /></option>
+						</c:forEach>
+					</select>
+				</div>
+
+			</div>
 
              <div class="search_section">
                <h2><liferay-ui:message key="acesearch-section-header1" /></h2>

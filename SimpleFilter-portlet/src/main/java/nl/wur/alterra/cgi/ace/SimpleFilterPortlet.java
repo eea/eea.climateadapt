@@ -39,92 +39,103 @@ public class SimpleFilterPortlet extends MVCPortlet {
     public void doView(RenderRequest renderRequest, RenderResponse renderResponse) throws IOException, PortletException {
         try {
             ACESearchPortalInterface searchEngine = new ACESearchPortalInterface();
-
+            PortletPreferences preferences = renderRequest.getPreferences();
+            
             String sector[] = new String[1];
             sector[0] = (String) renderRequest.getAttribute(Constants.USERSECTOR);
 
             if (sector[0] == null) {
-
                 sector[0] = (String) renderRequest.getPortletSession().getAttribute(Constants.USERSECTOR);
+                if ( sector[0] == null ) {
+                	sector[0] = preferences.getValue(Constants.USERDEFAULTSECTOR, "all");
+                }
             }
 
-            if (sector[0] != null) {
-
-                //System.out.println("Sector: " + sector[0]);
-                String impact[] = new String[1];
-                impact[0] = (String) renderRequest.getAttribute(Constants.USERIMPACT);
-                if (impact[0] == null) {
-
-                    impact[0] = (String) renderRequest.getPortletSession().getAttribute(Constants.USERIMPACT);
+            String impact[] = new String[1];
+            impact[0] = (String) renderRequest.getAttribute(Constants.USERIMPACT);
+            if (impact[0] == null) {
+                impact[0] = (String) renderRequest.getPortletSession().getAttribute(Constants.USERIMPACT);
+                if ( impact[0] == null ) {
+                	impact[0] = preferences.getValue(Constants.USERDEFAULTIMPACT, "all");
                 }
-
-                String scenario[] = new String[1];
-                scenario[0] = (String) renderRequest.getAttribute(Constants.USERSCENARIO);
-                if (scenario[0] == null) {
-
-                    scenario[0] = (String) renderRequest.getPortletSession().getAttribute(Constants.USERSCENARIO);
-                }
-
-                String timeperiod[] = new String[1];
-                timeperiod[0] = (String) renderRequest.getAttribute(Constants.USERTIMEPERIOD);
-                if (timeperiod[0] == null) {
-
-                    timeperiod[0] = (String) renderRequest.getPortletSession().getAttribute(Constants.USERTIMEPERIOD);
-                }
-
-                Map<String, String[]> requestParams;
-
-                String fuzziness = null;
-                String anyOfThese = null;
-                String[] aceItemTypes = null;
-                PortletPreferences preferences = renderRequest.getPreferences();
-                requestParams = preferences.getMap();
-
-                fuzziness = preferences.getValue(SearchRequestParams.FUZZINESS, "");
-                anyOfThese = preferences.getValue(SearchRequestParams.ANY, "");
-                aceItemTypes = preferences.getValues(SearchRequestParams.ACEITEM_TYPE, new String[] {} );
-
-                int nrOfCheckboxes = Integer.parseInt( preferences.getValue(Constants.NRCHECKBOXES, "2") );
-
-                ACESearchEngine se = new ACESearchEngine();
-                AceSearchFormBean formBean = se.prepareACESearchFormBean(requestParams, fuzziness);
-
-                if( (anyOfThese != null) && (anyOfThese.length() > 0 )) {
-                    formBean.setAnyOfThese( anyOfThese );
-                }
-
-                if( (aceItemTypes != null) && (aceItemTypes.length > 0 )) {
-                    formBean.setAceitemtype( aceItemTypes );
-                }
-
-                renderRequest.getPortletSession().setAttribute(Constants.USERSECTOR, sector[0]);
-                if( !sector[0].equalsIgnoreCase("all") ) {
-                    formBean.setSector( sector );
-                }
-
-                renderRequest.getPortletSession().setAttribute(Constants.USERIMPACT, impact[0]);
-                if( !impact[0].equalsIgnoreCase("all") ) {
-                    formBean.setImpact( impact );
-                }
-
-                if(nrOfCheckboxes == 4) {
-                    renderRequest.getPortletSession().setAttribute(Constants.USERSCENARIO, scenario[0]);
-                    if( (scenario[0].length() > 0) &&  !scenario[0].equalsIgnoreCase("all") ) {
-                        formBean.setScenario( scenario );
-                    }
-
-                    renderRequest.getPortletSession().setAttribute(Constants.USERTIMEPERIOD, timeperiod[0]);
-                    if( (timeperiod[0].length() > 0) &&  !timeperiod[0].equalsIgnoreCase("all") ) {
-                        formBean.setTimePeriod( timeperiod );
-                    }
-                }
-
-                searchEngine.handleSearchRequest(renderRequest, formBean);
-            } else {
-
-                searchEngine.handleSearchRequest(renderRequest);
             }
-        } catch (Exception x) {
+
+            String scenario[] = new String[1];
+            scenario[0] = (String) renderRequest.getAttribute(Constants.USERSCENARIO);
+            if (scenario[0] == null) {
+
+                scenario[0] = (String) renderRequest.getPortletSession().getAttribute(Constants.USERSCENARIO);
+                if ( scenario[0] == null ) {
+                	scenario[0] = preferences.getValue(Constants.USERDEFAULTSCENARIO, "all");
+                }
+            }
+
+            String timeperiod[] = new String[1];
+            timeperiod[0] = (String) renderRequest.getAttribute(Constants.USERTIMEPERIOD);
+            if (timeperiod[0] == null) {
+
+                timeperiod[0] = (String) renderRequest.getPortletSession().getAttribute(Constants.USERTIMEPERIOD);
+                if ( timeperiod[0] == null ) {
+                	timeperiod[0] = preferences.getValue(Constants.USERDEFAULTPERIOD, "all");
+                }
+            }
+
+            Map<String, String[]> requestParams;
+
+            String fuzziness = null;
+            String anyOfThese = null;
+            String[] aceItemTypes = null;
+            String isFeaturedItem = null;
+
+            requestParams = preferences.getMap();
+
+            fuzziness = preferences.getValue(SearchRequestParams.FUZZINESS, "");
+            anyOfThese = preferences.getValue(SearchRequestParams.ANY, "");
+            aceItemTypes = preferences.getValues(SearchRequestParams.ACEITEM_TYPE, new String[] {} );
+            isFeaturedItem = preferences.getValue(Constants.USERISFEATUREDITEM, "");
+            
+            int nrOfCheckboxes = Integer.parseInt( preferences.getValue(Constants.NRCHECKBOXES, "2") );
+
+            ACESearchEngine se = new ACESearchEngine();
+            AceSearchFormBean formBean = se.prepareACESearchFormBean(requestParams, fuzziness);
+
+            if( (anyOfThese != null) && (anyOfThese.length() > 0 )) {
+                formBean.setAnyOfThese( anyOfThese );
+            }
+
+            if( (aceItemTypes != null) && (aceItemTypes.length > 0 )) {
+                formBean.setAceitemtype( aceItemTypes );
+            }
+            if ( isFeaturedItem != null && isFeaturedItem.length() > 0 ) {
+            	formBean.setFeaturedItem(isFeaturedItem);
+            }
+                
+            
+            renderRequest.getPortletSession().setAttribute(Constants.USERSECTOR, sector[0]);
+            if( !sector[0].equalsIgnoreCase("all") ) {
+                formBean.setSector( sector );
+            }
+
+            renderRequest.getPortletSession().setAttribute(Constants.USERIMPACT, impact[0]);
+            if( !impact[0].equalsIgnoreCase("all") ) {
+                formBean.setImpact( impact );
+            }
+            
+            if(nrOfCheckboxes == 4) {
+                renderRequest.getPortletSession().setAttribute(Constants.USERSCENARIO, scenario[0]);
+                if( (scenario[0] != null && scenario[0].length() > 0) &&  !scenario[0].equalsIgnoreCase("all") ) {
+                    formBean.setScenario( scenario );
+                }
+
+                renderRequest.getPortletSession().setAttribute(Constants.USERTIMEPERIOD, timeperiod[0]);
+                if( timeperiod[0] != null && (timeperiod[0].length() > 0) &&  !timeperiod[0].equalsIgnoreCase("all") ) {
+                    formBean.setTimePeriod( timeperiod );
+                }
+            }
+
+            searchEngine.handleSearchRequest(renderRequest, formBean);
+        } 
+        catch (Exception x) {
             x.printStackTrace();
             throw new PortletException(x);
         }
@@ -174,13 +185,19 @@ public class SimpleFilterPortlet extends MVCPortlet {
         if((sortBys == null) || (sortBys.length==0) || (sortBys[0].length()==0)) {
             sortBys = new String[] {"RATING"} ; // sort by rating
         }
-        PortletPreferences prefs = request.getPreferences();
 
+        PortletPreferences prefs = request.getPreferences();
+        
         prefs.setValue(Constants.FREEPAR, ParamUtil.getString(request, Constants.FREEPAR) );
         prefs.setValue(Constants.NRITEMSPAGE, ParamUtil.getString(request, Constants.NRITEMSPAGE) );
         prefs.setValue(Constants.FUZZINESS, ParamUtil.getString(request, Constants.FUZZINESS) );
         prefs.setValue(Constants.NRCHECKBOXES, ParamUtil.getString(request, Constants.NRCHECKBOXES) );
-
+        prefs.setValue(Constants.USERDEFAULTIMPACT, ParamUtil.getString(request, Constants.USERDEFAULTIMPACT));
+        prefs.setValue(Constants.USERDEFAULTSECTOR, ParamUtil.getString(request, Constants.USERDEFAULTSECTOR));
+        prefs.setValue(Constants.USERDEFAULTSCENARIO, ParamUtil.getString(request, Constants.USERDEFAULTSCENARIO));
+        prefs.setValue(Constants.USERDEFAULTPERIOD, ParamUtil.getString(request, Constants.USERDEFAULTPERIOD));
+        prefs.setValue(Constants.USERISFEATUREDITEM, ParamUtil.getString(request, Constants.USERISFEATUREDITEM));
+        
         prefs.store();
         prefs.setValues(SearchRequestParams.FREETEXT_MODE, new String[] {"2"} ); // always search all of the words
         prefs.setValues(SearchRequestParams.DATAINFO_TYPE, datainfo_type);

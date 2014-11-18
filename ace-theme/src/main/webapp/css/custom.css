@@ -65,6 +65,14 @@ margin-bottom:0px;
     width: 33.33%;
 }
 
+.aui-w20 {
+    width: 20%;
+}
+
+.aui-w80 {
+    width: 80%;
+}
+
 .aui .portlet, .aui .portlet-borderless-container {
     background: none repeat scroll 0 0 rgba(0, 0, 0, 0); 
 }
@@ -1260,7 +1268,7 @@ ul#subnav li a:hover {
 }
 
 .ast-main-article .body {
-	height: 125px;
+/*	height: 125px;*/
 	margin-bottom: 17px;
 	overflow: hidden;
 }
@@ -1343,6 +1351,15 @@ ul#subnav li a:hover {
  {
 	padding: 0 16px;
         min-height: 220px;
+}
+
+/* Distribute the columns evenly on the frontpage */
+.frontpage-layout #column-5,
+.frontpage-layout #column-6,
+.frontpage-layout #column-7,
+.frontpage-layout #column-8
+{
+    width: 25%;
 }
 
 .frontpage-layout #layout-column_column-4
@@ -2618,3 +2635,117 @@ text and the class mapviewer to the MapViewerPortlet.
 .portlet-title-text {
 	white-space: normal;
 }
+
+/************** Urban adaptation map viewer menu ***************/
+
+.menu-urban ul, .menu-urban li, .menu-urban a {
+        margin: 0;
+        padding: 0;
+        border: none;
+        outline: none;
+    }
+
+.menu-urban {
+        width:149px;
+    }
+
+.menu-urban li {
+        list-style: none;
+        margin: 0 0 2px 0;
+        opacity: 0.75;
+
+        -webkit-transition: opacity .25s ease .1s;
+        -moz-transition: opacity .25s ease .1s;
+        -o-transition: opacity .25s ease .1s;
+        -ms-transition: opacity .25s ease .1s;
+        transition: opacity .25s ease .1s;
+    }
+
+.menu-urban li:hover { opacity: 1; }
+
+#content .ace_layout_col_1_2 a.menu-link {
+        display:block;
+        height:80px;
+        padding: 5px 5px 0 5px;
+
+        text-decoration: none;
+        text-align: right;
+
+        font-weight: bold;
+        font-size: 20px;
+        line-height: 25px;
+
+        color: #f3f3f3;
+        text-shadow: 1px 1px 1px rgba(0,0,0,.6);
+
+        -webkit-transition: color .2s ease-in-out;
+        -moz-transition: color .2s ease-in-out;
+        -o-transition: color .2s ease-in-out;
+        -ms-transition: color .2s ease-in-out;
+        transition: color .2s ease-in-out;
+    }
+
+#heat_waves {
+        background-image: url("/ace-theme/images/heat_waves.png");
+    }
+#drought {
+        background-image: url("/ace-theme/images/drought.png");
+    }
+#flooding {
+        background-image: url("/ace-theme/images/flooding.png");
+    }
+#forest_fires {
+        background-image: url("/ace-theme/images/forest_fires.png");
+    }
+
+#content .ace_layout_col_1_2 .menu-urban li ul {
+        opacity: 0;
+        height: 0;
+        background: #e9efc9;
+
+        -webkit-transition: opacity .25s ease .1s, height .25s ease .1s;
+        -moz-transition: opacity .25s ease .1s, height .25s ease .1s;
+        -o-transition: opacity .25s ease .1s, height .25s ease .1s;
+        -ms-transition: opacity .25s ease .1s, height .25s ease .1s;
+        transition: opacity .25s ease .1s, height .25s ease .1s;
+    }
+
+/*
+#content .ace_layout_col_1_2 .menu-urban li:hover ul { opacity: 1; height: 80px; }
+*/
+#content .ace_layout_col_1_2 .menu-urban ul li {
+        padding: 3px;
+        opacity: 1;
+        line-height: 20px;
+    }
+
+
+#content .ace_layout_col_1_2 .menu-urban ul li a {
+        padding: 0px 0px 0px 25px;
+        background: url("/ace-theme/images/arrow.gif") no-repeat scroll 10px 5px transparent;
+
+        text-decoration: none;
+        font-size: 12px;
+        color: #2C330A;
+
+        -webkit-transition: color .2s ease-in-out;
+        -moz-transition: color .2s ease-in-out;
+        -o-transition: color .2s ease-in-out;
+        -ms-transition: color .2s ease-in-out;
+        transition: color .2s ease-in-out;
+    }
+  
+
+#content .ace_layout_col_1_2 .menu-urban a:hover { color: #a5bf26; }
+
+#content .ace_layout_col_1_2 .empty {
+        display: none;
+}
+
+/****** effects fo active links *****/
+#content .ace_layout_col_1_2 .menu-urban li a.active { color: #a5bf26; }
+
+
+
+
+

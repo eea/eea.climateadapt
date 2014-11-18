@@ -16,4 +16,15 @@ public class Constants {
     public static final String USERSCENARIO = "userscenario";
     
     public static final String USERTIMEPERIOD = "usertimeperiod";
+    
+    public static final String USERDEFAULTIMPACT = "userdefaultimpact";
+    
+    public static final String USERDEFAULTSECTOR = "userdefaultsector";
+    
+    public static final String USERDEFAULTSCENARIO = "userdefaultscenario";
+    
+    public static final String USERDEFAULTPERIOD = "userdefaultperiod";
+    
+    public static final String USERISFEATUREDITEM = "userisfeatureditem";
+    
 }

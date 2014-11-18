@@ -154,6 +154,7 @@
 		<!--   input name="sectors_" type="text" size="65" value="< %= aceitem == null ? "" : aceitem.getSectors_() % >"><br /><br / -->
 
        <%-- note : i18n file should always be in sync with AceItemSector enum --%>
+		<liferay-ui:error key="aceitemsectors-required" message="aceitemsectors-required" />
 		<c:forEach var="adaptationSector" items="<%= nl.wur.alterra.cgi.ace.model.constants.AceItemSector.values() %>" >
 			<div class="check">
 				<c:set var="aceItemSectors" value='<%= aceitem == null ? "" : aceitem.getSectors_() %>' />

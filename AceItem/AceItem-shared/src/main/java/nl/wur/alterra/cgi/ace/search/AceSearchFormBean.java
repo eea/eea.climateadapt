@@ -21,6 +21,7 @@ public class AceSearchFormBean {
     private String anyOfThese;
     private String[] startyear;
     private String[] endyear;
+    private String featuredItem;
 
 
 
@@ -190,8 +191,16 @@ public class AceSearchFormBean {
     public String getConditionClimateImpact() {
         return conditionClimateImpact;
     }
+    
+    public String getFeaturedItem() {
+		return featuredItem;
+	}
 
-    public void setFreetextMode(String freetextMode$) {
+	public void setFeaturedItem(String featuredItem) {
+		this.featuredItem = featuredItem;
+	}
+
+	public void setFreetextMode(String freetextMode$) {
         // if undefined search for any
         if(freetextMode$ == null) {
             this.freeTextMode = FreetextMode.ANY;

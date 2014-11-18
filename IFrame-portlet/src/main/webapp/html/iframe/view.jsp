@@ -23,5 +23,31 @@
 
 	String inline = renderRequest.getPreferences().getValue("inline-attributes", "frameborder='0' style='min-width:984px;min-height:800px' width='100%' height='100%' ");
 %>
-<br />
-<iframe <%= inline %> src='<%= url %>'></iframe>
+
+<style>
+	.loading-image {
+	    position:absolute;
+	    left:40%;
+	    top:35%;
+	    border-radius:20px;
+	    padding:25px;
+	    border:1px solid #777777;
+	    background:#ffffff;
+	    box-shadow:0px 0px 10px #777777;
+	}
+</style>
+
+<div>
+	<img class="loading-image" src="/IFrame-portlet/images/loading-green-50.gif"/>
+	<br />
+	<iframe class="ace-iframe" <%= inline %> src='<%= url %>'></iframe>
+</div>
+
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $(".ace-iframe").on('load', function () {
+        	$(".loading-image").hide();
+        });
+    });
+</script>

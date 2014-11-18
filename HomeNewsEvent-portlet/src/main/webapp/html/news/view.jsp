@@ -17,7 +17,7 @@
 	
 		
 		    <p style="text-align: right">
-				<span style="font-size: 11px"><a class="double-arrow" href="/news-archive?show=full">News archive</a></span>
+				<span style="font-size: 11px"><a class="double-arrow" href="/news-archive?show=full">More news</a></span>
 			</p>
 			
 	  </div>
