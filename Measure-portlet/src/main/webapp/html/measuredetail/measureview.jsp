@@ -5,34 +5,34 @@
 	Measure measure = null;
 	String type = "Adaptation option";
 	String nameOfClimateEntityShortText = "Adaptation Option";
-	
+
 	String redirect = PortalUtil.getCurrentURL(renderRequest);
-	
+
 	if(request.getAttribute(Constants.MEASUREID)!=null) {
 		measure_id = Long.parseLong( (String) request.getAttribute(Constants.MEASUREID) ) ;
-		
+
 		try {
 			measure = MeasureLocalServiceUtil.getMeasure( measure_id ) ;
 		}
 		catch(Exception exc) {
-			
+
 			measure = null;
 		}
-		
+
 		if(measure != null) {
-			
+
 			if( measure.getMao_type().equalsIgnoreCase("A")) {
 				type = "Case study" ;
 				nameOfClimateEntityShortText = "Case Study";
-				
+
 			}
 		}
 		else {
-			
+
 			measure_id = 0l;
 		}
 	}
-	
+
 	if(measure != null) {
 %>
 
@@ -41,7 +41,7 @@
 	<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.9.2/jquery-ui.min.js" type="text/javascript"></script>
 	<link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.9.2/themes/base/jquery-ui.css" rel="stylesheet" type="text/css" media="all" />
 	<!-- End Photo Slideshow -->
-	
+
 	<script type="text/javascript">
 		$(document).ready(function() {
 		    $('#case-studies-modal-link').click(function(e) {
@@ -60,8 +60,8 @@
 				customSldieShow();
 			});
 		});
-		
-		
+
+
 		function customSldieShow() {
 			$('#case-studies-modal-image-gallery').height( $('#case-studies-modal').height() - $('#case-studies-modal .case-studies-modal-buttons').height() );
 			$('#case-studies-modal-image-gallery ul li').height( $('#case-studies-modal-image-gallery').height() );
@@ -78,7 +78,7 @@
 				$(this).css({
 					display: 'none',
 					left: 0
-				});			
+				});
 			});
 
 			$('#case-studies-modal-image-gallery .case-studies-modal-image-gallery-navigation > a').click(function(e){
@@ -111,13 +111,13 @@
 	<!-- =========================== -->
 	<div id="case-studies-review-wrapper">
 	<div class="case-studies-tabbed-content-header"><%= type %></div>
-	
-	
+
+
 	<div class="case-studies-review-column-left">
 	  <% String yearDisplay = measure.getYear().length() > 0 ? "("+measure.getYear() + ")" : "";%>
 	  <%if (type.equalsIgnoreCase("case study")) { %>
 		<div id="" class="case-studies-review-image-wrapper ">
-		      <% 
+		      <%
 		          String primImageUrl = "";
 		          if (Validator.isNotNull(measure.getPrimephoto()))
 		          {
@@ -131,14 +131,14 @@
 				<p class="case-review-header"><%= HtmlUtil.escapeAttribute(measure.getName()) %> <%=yearDisplay %></p>
 				<p><%= measure.getDescription().replaceAll("<p>","").replaceAll("</p>","") %></p>
 			</div>
-     <% } else { %>	
+     <% } else { %>
              <div class="case-studies-tabbed-content-section">
                 <p class="case-review-header"><%= HtmlUtil.escapeAttribute(measure.getName()) %> <%= yearDisplay %></p>
 					<p><%= measure.getDescription().replaceAll("<p>","").replaceAll("</p>","") %></p>
 			</div>
-                
+
      <% } %>
-					
+
 				<div class="case-studies-review-clearing"></div>
 
 				<div class="case-studies-tabbed-content-section">
@@ -155,7 +155,7 @@
 								<% } %>
 							</ul>
 						</li>
-						
+
 						<li>
 							<p><b><em>Additional Details</em></b></p>
 							<ul class="case-studies-bullted-list">
@@ -165,30 +165,30 @@
 								 <%  if (Validator.isNotNull(measure.getStakeholderparticipation())) { %>
 										<li><a href="#stake_holder_anchor">Stakeholder Participation</a></li>
 								<% } %>
-												  
+
 								<%  if (Validator.isNotNull(measure.getSucceslimitations())) { %>
 										<li><a href="#success_limitations_anchor">Success and Limiting Factors</a></li>
 								<% } %>
-												  
+
 								<%  if (Validator.isNotNull(measure.getCostbenefit())) { %>
 										<li><a href="#cost_benefit_anchor">Costs and Benefits</a></li>
 								<% } %>
-													
-														  
+
+
 								<%  if (Validator.isNotNull(measure.getLegalaspects())) { %>
 										<li><a href="#legal_aspect_anchor">Legal Aspects</a></li>
 								<% } %>
-												  
+
 								<%  if (Validator.isNotNull(measure.getImplementationtime())) { %>
 										<li><a href="#implementation_time_anchor">Implementation Time</a></li>
 								<% } %>
-												  
+
 								<%  if (Validator.isNotNull(measure.getLifetime())) { %>
 										<li><a href="#life_time_anchor">Life Time</a></li>
 								<% } %>
 							</ul>
 						</li>
-						
+
 						<li>
 							<p><b><em>Reference Information</em></b></p>
 							<ul class="case-studies-bullted-list">
@@ -208,32 +208,32 @@
 				<div class="case-studies-tabbed-content-section">
 					<div class="case-studies-subheader"><%=nameOfClimateEntityShortText %> Description</div>
 					<ul>
-					
-						<% if (type.equalsIgnoreCase("case study")) { %> <%-- beginning of condition type is case study --%>	
+
+						<% if (type.equalsIgnoreCase("case study")) { %> <%-- beginning of condition type is case study --%>
 						<li>
 							<a name="challenges_anchor"><b><em>Challenges</em></b></a>
 							<p><%=measure.getChallenges().replaceAll("<p>","").replaceAll("</p>","") %></p>
 							<div class="case-studies-review-clearing"></div>
 						</li>
-						
+
 						<li>
 							<a name="objectives_anchor"><b><em>Objectives</em></b></a>
 							<p><%=measure.getObjectives().replaceAll("<p>","").replaceAll("</p>","")%></p>
 							<div class="case-studies-form-clearing"></div>
 						</li>
-											
+
 						<li>
 								<a name="adapt_options_anchor"><b><em>Adaptation Options</em></b></a>
 								 <%
 								    //Listing all adaptation options
-						           
+
 								    String[] adaptOptionsAry = null;
-								 
+
 								    if (Validator.isNotNull(measure.getAdaptationoptions()))
 								    {
 									   String adaptOptions = measure.getAdaptationoptions();
 									   adaptOptionsAry = adaptOptions.split(";");
-									   
+
 									   Long selMeasuresInLong[] = new Long[adaptOptionsAry.length];
 							            int ctr = 0;
 							            for (String selMeasure : adaptOptionsAry)
@@ -241,7 +241,7 @@
 							            	selMeasuresInLong[ctr] = Long.parseLong(selMeasure);
 							            	ctr ++;
 							            }
-							          
+
 										DynamicQuery query = DynamicQueryFactoryUtil.forClass(Measure.class);
 										query.add(PropertyFactoryUtil.forName("measureId").in(selMeasuresInLong));
 										List resultsForSelected = MeasureLocalServiceUtil.dynamicQuery(query);
@@ -261,17 +261,17 @@
 								   </c:if>
 								 <div class="case-studies-form-clearing"></div>
 						</li>
-											
+
 						<li>
 								<a name="solutions_anchor"><b><em>Solutions</em></b></a>
 								   <p><%=measure.getSolutions().replaceAll("<p>","").replaceAll("</p>","") %></p>
 								<div class="case-studies-form-clearing"></div>
 						</li>
-											
+
 						<li>
 								<a name="relevance_anchor"><b><em>Relevance</em></b></a>
 								<%
-												    
+
 								    String[] relevanceAry = null;
 								    if (Validator.isNotNull(measure.getRelevance()))
 								    {
@@ -279,7 +279,7 @@
 								    	relevanceAry = relevance.split(";");
 								    }
 								    pageContext.setAttribute("relevanceForReview", relevanceAry);
-								  
+
 								%>
 								   <p>
 								    <p>
@@ -290,10 +290,10 @@
 									    </c:forEach>
 								    </p>
 								  </p>
-							
+
 								<div class="case-studies-form-clearing"></div>
 						</li>
-						<% } %>	<%-- end of condition type is case study --%>		  
+						<% } %>	<%-- end of condition type is case study --%>
 					</ul>
 				</div>
 
@@ -304,29 +304,29 @@
 						 {%>
 								<li>
 									<a name="category_anchor"><b><em>Category</em></b></a>
-									
+
 									<%
 									   ArrayList catSelected = new ArrayList();
-									  
+
 									   for(String s:  measure.getCategory().split(";"))
 									   {
 										   String temp = Character.toUpperCase(s.charAt(0)) + s.substring(1);
 										   catSelected.add(temp);
 									   }
 									   pageContext.setAttribute("categories", catSelected);
-									  
+
 									%>
-								
+
 								    <p>
 								       <c:forEach var="category" items="${categoryList}">
 								          ${category} <br/>
 								       </c:forEach>
 								    </p>
-								    
+
 									<div class="case-studies-form-clearing"></div>
 								</li>
 						<%} %>
-					     
+
 						 <% if (Validator.isNotNull(measure.getStakeholderparticipation()))
 							{%>
 								<li>
@@ -335,8 +335,8 @@
 								    <div class="case-studies-form-clearing"></div>
 							    </li>
 						   <%} %>
-											
-										   
+
+
 						   <% if (Validator.isNotNull(measure.getSucceslimitations()))
 							{%>
 									<li>
@@ -345,36 +345,36 @@
 									    <div class="case-studies-form-clearing"></div>
 									</li>
 						   <%} %>
-										
+
 						  <% if (Validator.isNotNull(measure.getCostbenefit()))
-						    {%>	
+						    {%>
 								<li>
 									<a name="cost_benefit_anchor"><b><em>Costs and Benefits</em></b></a>
 									<p><%=measure.getCostbenefit().replaceAll("<p>","").replaceAll("</p>","") %></p>
 									<div class="case-studies-form-clearing"></div>
 								</li>
 							<%} %>
-										
+
 							<% if (Validator.isNotNull(measure.getLegalaspects()))
-							   {%>	
+							   {%>
 									<li>
 										<a name="legal_aspect_anchor"><b><em>Legal Aspects</em></b></a>
 									    <p><%=measure.getLegalaspects().replaceAll("<p>","").replaceAll("</p>","") %></p>
 										<div class="case-studies-form-clearing"></div>
 									</li>
 							 <%} %>
-										  
+
 							<% if (Validator.isNotNull(measure.getImplementationtime()))
-							   {%>	
+							   {%>
 									<li>
 										<a name="implementation_time_anchor"><b><em>Implementation Time</em></b></a>
 										<p><%=measure.getImplementationtime().replaceAll("<p>","").replaceAll("</p>","") %></p>
 										<div class="case-studies-form-clearing"></div>
 									</li>
 							  <%} %>
-										  
+
 							<% if (Validator.isNotNull(measure.getLifetime()))
-							   {%>	
+							   {%>
 									<li>
 										<a name="life_time_anchor"><b><em>Life Time</em></b></a>
 										<p><%=measure.getLifetime().replaceAll("<p>","").replaceAll("</p>","") %></p>
@@ -394,7 +394,7 @@
 							<div class="case-studies-form-clearing"></div>
 						</li>
 						<% } %>
-											
+
 						<li>
 							   <a name="website_anchor"><b><em>Websites</em></b></a>
 								<%
@@ -402,23 +402,23 @@
 								   String websiteForReview = HtmlUtil.extractText(measure.getWebsite());
 								   String webSites[] = websiteForReview.split(";");
 								%>
-								
+
 								<p>
                                                                   <% for (String wsite: webSites) {
                                                                             String websiteUrl = wsite.trim();
-                                                                            if (websiteUrl.length() > 0) { 
+                                                                            if (websiteUrl.length() > 0) {
                                                                             if( ! websiteUrl.startsWith("http")  ){
                                                                                 websiteUrl = "http://" + websiteUrl;
                                                                               }
 								   %>
 								   <a href="<%=websiteUrl%>" target="_blank"><%=websiteUrl%></a><br/><% }} %>
 								</p>
-								
+
 								<div class="case-studies-form-clearing"></div>
 						</li>
-											
+
 						<% if (Validator.isNotNull(measure.getSource()))
-						{%>	
+						{%>
 								<li>
 									<a name="source_anchor"><b><em>Source</em></b></a>
 									<p><%=measure.getSource().replaceAll("<p>","").replaceAll("</p>","") %></p>
@@ -427,12 +427,12 @@
 						<%} %>
 					</ul>
 				</div>
-				
+
 				<div class="case-studies-review-clearing"></div>
 					<%
 						    String url = "/share-your-info";
 						    String submitText = "Share your information";
-						    
+
 						    /* if (nameOfClimateEntityShortText.equalsIgnoreCase("Case Study"))
 						    {
 						    	submitText = "Submit a Case Study";
@@ -450,40 +450,40 @@
 				    </div>
 			</div>
 
-	
+
 	        <div class="case-studies-review-column-right">
 				 <%
 			          if (Validator.isNotNull(measure.getSupphotos())) { %>
-								   
+
 						<div class="case-studies-review-column-right-section">
-					    <% 
+					    <%
 										 String[] sphotosInReview = measure.getSupphotos().split(";");
 						 %>
 							<p><a href="#" id="case-studies-modal-link" class="bluebutton">Case Study Illustrations(<%= sphotosInReview.length %>)</a></p>
 					        <div id="case-studies-modal" title="Case Study Illustrations">
-						    <div id="case-studies-modal-image-gallery">	 
-						<% 
-							
+						    <div id="case-studies-modal-image-gallery">
+						<%
+
 						    int photoCounter = 1;
 						    String firstImageURL = null;
 						    String firstImageAlt = null;
 						    for (String photo:sphotosInReview)
 						    {
 
-								  DLFileEntry image = DLFileEntryLocalServiceUtil.getFileEntry(Long.parseLong(photo)); 
-								  String supPhotoName = image.getName(); 
+								  DLFileEntry image = DLFileEntryLocalServiceUtil.getFileEntry(Long.parseLong(photo));
+								  String supPhotoName = image.getName();
 								  String supPhotoDescription = image.getDescription().replaceAll("<p>","").replaceAll("</p>","");
 								  String imageUrl = themeDisplay.getPathImage() + "/image_gallery?uuid=" + image.getUuid() +  "&t=" + WebServerServletTokenUtil.getToken(image.getLargeImageId())  + "&groupId=" + image.getGroupId();
 
 						 %>
-								 
+
 						<!-- =========================== -->
 					    <!-- Slideshow Modal Starts Here -->
 					    <!-- =========================== -->
-					   
-						
+
+
 						<ul>
-							<% if (photoCounter == 1) { 
+							<% if (photoCounter == 1) {
 							    firstImageURL = imageUrl;
 								firstImageAlt = supPhotoName;
 							%>
@@ -497,9 +497,9 @@
 							</center>
 							<p><%=supPhotoDescription %></p>
 							</li>
-								
+
 						    <% photoCounter ++;} // end of for  %>
-								  
+
 							</ul>
 							     <div class="case-studies-modal-image-gallery-navigation">
 								       <a href="#" class="prev"><span>&lt;</span></a>
@@ -514,32 +514,32 @@
 								 <% } %>
 							     </div>
 				<% } // end of if %>
-				
-				
-				
+
+
+
 				 <%
-				    if (Validator.isNotNull(measure.getSupdocs())) { 
-				    
-					 String[] sdocsForReview = measure.getSupdocs().split(";"); %>	   
+				    if (Validator.isNotNull(measure.getSupdocs())) {
+
+					 String[] sdocsForReview = measure.getSupdocs().split(";"); %>
 					 <div clas="case-studies-review-column-right-section">
 						<p><b>Case Study Documents  (<%= sdocsForReview.length %>)</b></p>
 										<ul class="case-studies-bullted-list">
-								 <% 
+								 <%
 									     for (String doc:sdocsForReview)
 									     {
 									    	 DLFileEntry uploadedFileEntry =  DLFileEntryLocalServiceUtil.getDLFileEntry(Long.parseLong(doc));
 									 	     String title = HtmlUtil.escapeAttribute(uploadedFileEntry.getTitle());
 									 	     String fileUrl = themeDisplay.getPortalURL() + themeDisplay.getPathContext() + "/documents/" + themeDisplay.getScopeGroupId() + "/" + uploadedFileEntry.getFolderId() +  "/" + HttpUtil.encodeURL(HtmlUtil.unescape(title));
-										
-									
+
+
 								 %>
 								        <li><a href="<%=fileUrl%>"><%=title %></a></li>
 								      <%} // end of for  %>
 										</ul>
 									</div>
 								<% } // end of if %>
-			
-				
+
+
 				<div class="case-studies-review-column-right-section">
 					<p><b>Keywords</b></p>
 					<%=measure.getKeywords().replaceAll("<p>","").replaceAll("</p>","") %><br/>
@@ -548,7 +548,7 @@
 				<div class="case-studies-review-column-right-section">
 					<p><b>Sectors</b></p>
 					<%
-												    
+
 					    String[] sectorAry = null;
 					    if (Validator.isNotNull(measure.getSectors_()))
 					    {
@@ -556,7 +556,7 @@
 					    	sectorAry = sectors.split(";");
 					    }
 					    pageContext.setAttribute("sectorForReview", sectorAry);
-								   
+
 					%>
 					<c:forEach var="sector" items="${sectorForReview}">
 						<liferay-ui:message key="acesearch-sectors-lbl-${sector}" /><br/>
@@ -565,7 +565,7 @@
 
 				<div class="case-studies-review-column-right-section">
 				     <p><b>Climate impacts</b></p>
-				     
+
 					<%
 						String[] climateImpactsAry = null;
 					    if (Validator.isNotNull(measure.getClimateimpacts_()))
@@ -573,84 +573,84 @@
 						    String climateImpacts = measure.getClimateimpacts_();
 						    climateImpactsAry = climateImpacts.split(";");
 					    }
-									    
+
 					    pageContext.setAttribute("climateImpactsForReview", climateImpactsAry);
 					%>
 					 <c:forEach var="climate" items="${climateImpactsForReview}">
 						<liferay-ui:message key="aceitem-climateimpacts-lbl-${climate}" /><br/>
 					 </c:forEach>
 				</div>
-						   
-						  <%                    
-						                        
-						  
+
+						  <%
+
+
 						                        String elementSelected = "";
 										        ArrayList macroTransElements = new ArrayList();
 										        ArrayList biographicalElements = new ArrayList();
 										        ArrayList subNationalElements = new ArrayList();
 										        ArrayList countryElements = new ArrayList();
 										        String city = "";
-										        
+
 										        if (Validator.isNotNull(measure.getGeochars()) || Validator.isNotNull(measure.getSpatiallayer()))
 										        {
-										          
-										           if (Validator.isNotNull(measure.getGeochars()))	
+
+										           if (Validator.isNotNull(measure.getGeochars()))
 										           {
-										        		   
+
 											        	try {
 												        	Object obj=JSONValue.parse(measure.getGeochars());
 															JSONObject jsonObject = (JSONObject) obj;
 															JSONObject geoElements = (JSONObject) jsonObject.get("geoElements");
 															elementSelected = (String) geoElements.get("element");
-															
+
 															JSONArray macroTransArray = (JSONArray) geoElements.get("macrotrans");
-															
+
 															for (int i = 0; i < macroTransArray.size(); i++ )
 															{
 															     macroTransElements.add(macroTransArray.get(i));
 															}
-															
+
 			                                                JSONArray bioTransArray = (JSONArray) geoElements.get("biotrans");
-															
+
 															for (int i = 0; i < bioTransArray.size(); i++ )
 															{
 															     biographicalElements.add(bioTransArray.get(i));
 															}
-															
+
 															JSONArray subNationalsArray = (JSONArray) geoElements.get("subnational");
-																
+
 														    for (int i = 0; i < subNationalsArray.size(); i++ )
 														    {
 																     subNationalElements.add(subNationalsArray.get(i));
 															}
-														    
+
 														    JSONArray countriesArray = (JSONArray) geoElements.get("countries");
-															
+
 														    for (int i = 0; i < countriesArray.size(); i++ )
 														    {
 																     countryElements.add(countriesArray.get(i));
 															}
-														    
+
 														    city = (String) geoElements.get("city");
 											        	}
 											            catch(Exception e)
 											            {
 											            	e.printStackTrace();
 											            }
-											        
+
 											        pageContext.setAttribute("geoElementSelected", elementSelected);
 											        pageContext.setAttribute("macroTransSelected", macroTransElements);
 											        pageContext.setAttribute("bioRegionSelected", biographicalElements);
 											        pageContext.setAttribute("subNationalsSelected", subNationalElements);
 											        pageContext.setAttribute("countriesSelected", countryElements);
 											        pageContext.setAttribute("city", city);
-											        
-											        
+
+
 											        ArrayList subnationalRegions = new ArrayList();
 											        // get the subnational elements and store it in page context
-											        for (nl.wur.alterra.cgi.ace.model.constants.AceItemGeoChars geoCharElement : nl.wur.alterra.cgi.ace.model.constants.AceItemGeoChars.values()) 
+											        for (nl.wur.alterra.cgi.ace.model.constants.AceItemGeoChars geoCharElement : nl.wur.alterra.cgi.ace.model.constants.AceItemGeoChars.values())
 											        {
-											        	
+
 											        	if (geoCharElement.toString().contains("SUBN_"))
 											        	{
 											        		subnationalRegions.add(geoCharElement);
@@ -659,18 +659,18 @@
 											        pageContext.setAttribute("subnationals", subnationalRegions);
 										          }
 										   %>
-										      
+
 								<div class="case-studies-review-column-right-section">
 						                       <p><b>Geographic characterisation</b></p>
 						                       <p>
 						                       <c:choose>
 												     <c:when test="${geoElementSelected eq 'GLOBAL'}">
-												          Global:<br/>
+												          Global<br/>
 												     </c:when>
-												     
+
 												     <c:when test="${geoElementSelected eq 'EUROPE'}">
 												          Europe:<br/>
-												          
+
 												          <c:if test="${fn:length(macroTransSelected) gt 0}">
 												               Macro-Transnational region:
 												               <c:forEach var="macroTransElement" items="${macroTransSelected}" varStatus="status">
@@ -678,7 +678,7 @@
 													           </c:forEach>
 													           <br/><br/>
 												          </c:if>
-												          
+
 												          <c:if test="${fn:length(bioRegionSelected) gt 0}">
 												               Biographical regions:<br/>
 												               <c:forEach var="bioRegionElement" items="${bioRegionSelected}" varStatus="status">
@@ -686,7 +686,7 @@
 													           </c:forEach>
 													           <br/><br/>
 												          </c:if>
-												          
+
 												          <c:if test="${fn:length(countriesSelected) gt 0}">
 												               Countries:<br/>
 												               <c:forEach var="countryElement" items="${countriessSelected}" varStatus="status">
@@ -694,10 +694,10 @@
 													           </c:forEach>
 													           <br/><br/>
 												          </c:if>
-												          
+
 												          <c:if test="${fn:length(subNationalsSelected) gt 0}">
 												               Sub Nationals:<br/>
-												               
+
 												              <c:forEach var="subNationalElement" items="${subnationals}" varStatus="status">
 													                     <c:if test="${fn:contains(subNationalsSelected,subNationalElement) }">
 														                      ${subNationalElement.description}${not status.last ? ',' : ''}
@@ -705,7 +705,7 @@
 														       </c:forEach>
 														       <br/><br/>
 												          </c:if>
-												          
+
 												          <c:if test="${fn:length(city) gt 0}">
 												             City:<br/>${city}<br/>
 												          </c:if>
@@ -715,10 +715,10 @@
 												         <%=measure.getSpatiallayer() %><br/><br/>
 												     </c:otherwise>
 											 </c:choose>
-						   
-						   <% } 
-			
-				   
+
+						   <% }
+
+
 					    String countriesForReview = measure.getSpatialvalues();
 			            if (Validator.isNotNull(countriesForReview) && Validator.isNull(measure.getGeochars()))
 			            {
@@ -745,4 +745,4 @@
     </div>
  <% } %>
 <div style="clear: both"> </div>
-  
+
