@@ -1508,7 +1508,7 @@
 										  else if (Validator.isNotNull(measure.getPrimephoto()))
 										  {
 											  DLFileEntry image = DLFileEntryLocalServiceUtil.getFileEntry( Long.parseLong(measure.getPrimephoto()) ); 
-											  primePhoto = image.getName();
+											  primePhoto = HtmlUtil.escapeAttribute(image.getTitle());
 											  pageContext.setAttribute("primephotoname", primePhoto);
 										  }
 										%>
@@ -1553,7 +1553,7 @@
 									             for (String photo:sphotos)
 												 {
 													 DLFileEntry image = DLFileEntryLocalServiceUtil.getFileEntry(Long.parseLong(photo)); 
-													 String supPhotoName = image.getName(); 
+													 String supPhotoName = image.getTitle(); 
 													 String imageName = image.getName();
 													 String supPhotoDescription = image.getDescription();
 													 sphotoNames[i] = HtmlUtil.escapeAttribute(supPhotoName);
@@ -1588,18 +1588,18 @@
 									  
 									  <li>
 										<p><b><em>Upload Case Study Illustration <span class="case-studies-tabbed-content-photo-upload-position">${loop.count}</span>:</em></b></p>
-										<p><em>Uploaded illustration: ${imageNames[loop.count - 1]}</em></p>
+										<p><em>Uploaded illustration: ${sphotonames[loop.count - 1]}</em></p>
 										<div class="inputfile"><input name="supphotofiles${loop.count }" type="file" /></div>
 									  </li>
 									  
 									  <li>
-										<p><b><em>Case Study Illustration <span class="case-studies-tabbed-content-photo-upload-position">${loop.count}</span> Label:</em></b></p>
+										<p><b><span class="red">*</span> <em>Case Study Illustration <span class="case-studies-tabbed-content-photo-upload-position">${loop.count}</span> Label:</em></b></p>
 										<p>Brief name of illustration (required - 150 char limit)</p>
 										<div class="inputfilename"><input type="text" name="sup_photos_names${loop.count}" size="30" maxlength="150" value="${sphotonames[loop.count - 1]}"></div>
 									  </li>
 									  
 									  <li>
-										<p><b><em>Case Study Illustration <span class="case-studies-tabbed-content-photo-upload-position">${loop.count}</span> - Description of Illustration:</em></b></p>
+										<p><b><span class="red">*</span> <em>Case Study Illustration <span class="case-studies-tabbed-content-photo-upload-position">${loop.count}</span> - Description of Illustration:</em></b></p>
 										<div class="inputfiledescription"><textarea cols="40" rows="10" name="sup_photos_description${loop.count}" data-maxlength="250">${sphotodesc[loop.count - 1]}</textarea></div>
 										
 									  </li>

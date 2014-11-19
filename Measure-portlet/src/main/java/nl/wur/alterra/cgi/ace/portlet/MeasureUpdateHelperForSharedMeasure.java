@@ -590,7 +590,7 @@ public abstract class MeasureUpdateHelperForSharedMeasure extends MVCPortlet {
                 //System.out.println("image folder is null");
                 imageFolder = DLAppLocalServiceUtil.addFolder(themeDisplay.getUserId(), themeDisplay.getScopeGroupId(), rootFolder.getFolderId(), folder, "", serviceContext);
                 String primaryKey = String.valueOf(imageFolder.getPrimaryKey());
-                addPermissions(themeDisplay, primaryKey, "com.liferay.portal.kernel.repository.model.FileEntry");
+                addPermissions(themeDisplay, primaryKey, DLFileEntry.class.getName());
             }
 
             // we are ready to do the upload
