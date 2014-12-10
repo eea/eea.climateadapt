@@ -1531,6 +1531,7 @@
 									String[] sphotoNames = new String[5];
 									String[] sphotoDescriptions = new String[5];
 									String[] imageNames = new String[5];
+									Long[] sphotoIds = new Long[5];
 									
 																	
 									 if (measure != null && Validator.isNotNull(measure.getSupphotos())) {
@@ -1559,6 +1560,7 @@
 													 sphotoNames[i] = HtmlUtil.escapeAttribute(supPhotoName);
 													 sphotoDescriptions[i] = HtmlUtil.escapeAttribute(supPhotoDescription);
 													 imageNames[i] = imageName;
+													 sphotoIds[i] = image.getFileEntryId();
 													 i = i + 1;
 												 }
 												
@@ -1567,6 +1569,7 @@
 									             pageContext.setAttribute("sphotodesc", sphotoDescriptions);
 									             pageContext.setAttribute("photocount", sphotos.length); 
 									             pageContext.setAttribute("imageNames", imageNames);  
+									             pageContext.setAttribute("sphotoids", sphotoIds);
 									    }
 									    else
 									    {
@@ -1580,6 +1583,7 @@
 								<c:when test="${photocount gt 0 }">
 								 
 								   <c:forEach begin="1" end="${photocount}" varStatus="loop">
+								     <input name="sup_photos_ids${loop.count}" id="supPhotoId${loop.count}" type="hidden" value="${sphotoids[loop.count - 1]}" />
 								     <ul class="case-studies-tabbed-content-photo-upload">
 								      <li class="case-studies-tabbed-content-photo-upload-header">
 										<b>Case Study Illustration <span class="case-studies-tabbed-content-photo-upload-position">${loop.count}</span>:</b>
@@ -1613,6 +1617,7 @@
 								    <input name="photocounter" type="hidden" id="photocounter" value="${photocount}" />
 								</c:when>
 								<c:otherwise>
+								       <input name="sup_photos_id1" id="supPhotoId1" type="hidden" />
 								       <input name="photocounter" id="photocounter" type="hidden" value="1" />
 									   <ul class="case-studies-tabbed-content-photo-upload">
 										<li class="case-studies-tabbed-content-photo-upload-header">
@@ -1657,7 +1662,8 @@
 									String[] sdocDates = new String[5];
 									String[] sdocSizes = new String[5];
 								    String[] sdocDescriptions = new String[5];
-									
+									Long[] sdocIds = new Long[5];
+								    
 																	
 									 if (measure != null && Validator.isNotNull(measure.getSupdocs())) {
 										 
@@ -1693,6 +1699,7 @@
 													 sdocDates[i] = dateFormat.format(supFileDate);
 													 sdocSizes[i] = fileSizeInKB + " KB";
 													 sdocDescriptions[i] = supFileDescription;
+													 sdocIds[i] = file.getFileEntryId();
 													 i = i + 1;
 												 }
 												
@@ -1701,6 +1708,7 @@
 									             pageContext.setAttribute("sdocdates", sdocDates);
 									             pageContext.setAttribute("sdocsizes", sdocSizes);
 									             pageContext.setAttribute("sdocdesc", sdocDescriptions);
+									             pageContext.setAttribute("sdocids", sdocIds);
 									             pageContext.setAttribute("doccount", sdocs.length);    
 									    }
 									    else
@@ -1717,6 +1725,7 @@
 								<c:choose>
 								<c:when test="${doccount gt 0 }">
 								   <c:forEach begin="1" end="${doccount}" varStatus="loop">
+								     	<input name="sup_docs_ids${loop.count}" id="supDocId${loop.count}" type="hidden" value="${sdocids[loop.count - 1]}" />
 									     <ul class="case-studies-tabbed-content-document-upload">
 									      <li class="case-studies-tabbed-content-document-upload-header">
 											<b><span class="case-studies-tabbed-content-document-name">Document File - ${sdocnames[loop.count - 1]} ${sdocsizes[loop.count - 1]} (${sdocdates[loop.count - 1]})</span></b>
@@ -1748,6 +1757,7 @@
 								    <input name="doccounter" type="hidden" id="doccounter" value="${doccount}" />
 								</c:when>
 								<c:otherwise>
+								       <input name="sup_docs_ids1" id="supDocId1" type="hidden"  />
 								       <input name="doccounter" id="doccounter" type="hidden" value="1" />
 									   <ul class="case-studies-tabbed-content-document-upload">
 										<li class="case-studies-tabbed-content-document-upload-header">

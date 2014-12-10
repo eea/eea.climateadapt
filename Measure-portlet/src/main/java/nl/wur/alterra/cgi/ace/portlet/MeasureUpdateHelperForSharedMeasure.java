@@ -2,6 +2,7 @@ package nl.wur.alterra.cgi.ace.portlet;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
@@ -10,17 +11,6 @@ import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
 import javax.portlet.PortletRequest;
 
-import com.liferay.counter.service.CounterLocalServiceUtil;
-import com.liferay.portal.kernel.exception.PortalException;
-import com.liferay.portal.kernel.repository.model.FileEntry;
-import com.liferay.portal.kernel.repository.model.Folder;
-import com.liferay.portal.model.ResourceAction;
-import com.liferay.portal.model.ResourceConstants;
-import com.liferay.portal.model.ResourcePermission;
-import com.liferay.portal.security.permission.ActionKeys;
-import com.liferay.portal.service.ResourceActionLocalServiceUtil;
-import com.liferay.portal.service.ResourcePermissionLocalServiceUtil;
-import com.liferay.portlet.documentlibrary.service.DLAppLocalServiceUtil;
 import nl.wur.alterra.cgi.ace.model.AceItem;
 import nl.wur.alterra.cgi.ace.model.Measure;
 import nl.wur.alterra.cgi.ace.model.constants.AceItemClimateImpact;
@@ -35,25 +25,34 @@ import nl.wur.alterra.cgi.ace.search.lucene.ACEIndexSynchronizer;
 import nl.wur.alterra.cgi.ace.search.lucene.ACEIndexUtil;
 import nl.wur.alterra.cgi.ace.service.AceItemLocalServiceUtil;
 
-//import com.liferay.documentlibrary.DuplicateFileException;
-import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.counter.service.CounterLocalServiceUtil;
+import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.repository.model.FileEntry;
+import com.liferay.portal.kernel.repository.model.Folder;
 import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.upload.UploadPortletRequest;
 import com.liferay.portal.kernel.util.CharPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.util.WebKeys;
+import com.liferay.portal.model.ResourceAction;
+import com.liferay.portal.model.ResourceConstants;
+import com.liferay.portal.model.ResourcePermission;
 import com.liferay.portal.model.Role;
 import com.liferay.portal.model.RoleConstants;
 import com.liferay.portal.model.User;
-import com.liferay.portal.service.ResourcePermissionServiceUtil;
+import com.liferay.portal.security.permission.ActionKeys;
+import com.liferay.portal.service.ResourceActionLocalServiceUtil;
+import com.liferay.portal.service.ResourcePermissionLocalServiceUtil;
 import com.liferay.portal.service.RoleLocalServiceUtil;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.ServiceContextFactory;
 import com.liferay.portal.service.UserServiceUtil;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
+import com.liferay.portlet.documentlibrary.DuplicateFileException;
 import com.liferay.portlet.documentlibrary.model.DLFileEntry;
 import com.liferay.portlet.documentlibrary.model.DLFolder;
+import com.liferay.portlet.documentlibrary.service.DLAppLocalServiceUtil;
 import com.liferay.portlet.documentlibrary.service.DLFileEntryLocalServiceUtil;
 import com.liferay.portlet.documentlibrary.service.DLFolderLocalServiceUtil;
 //import com.liferay.portlet.imagegallery.DuplicateImageNameException;
@@ -65,6 +64,7 @@ import com.liferay.portlet.documentlibrary.service.DLFolderLocalServiceUtil;
 import com.liferay.util.bridges.mvc.MVCPortlet;
 import com.liferay.util.mail.MailEngine;
 import com.liferay.util.mail.MailEngineException;
+//import com.liferay.documentlibrary.DuplicateFileException;
 
 /**
  * Portlets that need to update measures and synchronize with AceItems extend
@@ -513,7 +513,9 @@ public abstract class MeasureUpdateHelperForSharedMeasure extends MVCPortlet {
             String sup_photo_name = uploadRequest.getParameter("sup_photos_names" + counter);
             String sup_photo_description = uploadRequest.getParameter("sup_photos_description" + counter);
             String sup_photo_fileName = uploadRequest.getFileName("supphotofiles" + counter);
+            String sup_photo_id = uploadRequest.getParameter("sup_photos_ids" + counter);
 
+            
             // if (Validator.isNull(sup_photo_name) || Validator.isNull(sup_photo_description) || Validator.isNull(sup_photo_fileName))
             if (Validator.isNull(sup_photo_name) || Validator.isNull(sup_photo_fileName)) {
 
@@ -549,7 +551,7 @@ public abstract class MeasureUpdateHelperForSharedMeasure extends MVCPortlet {
             }
 
             // check if the file name is jpg,jpeg,png,gif
-            if (isPhotosValid && !(sup_photo_fileName.endsWith(".jpg")
+            if (isPhotosValid && !Arrays.asList( supPhotoIdsStored ).contains(sup_photo_id) && !(sup_photo_fileName.endsWith(".jpg")
                         || sup_photo_fileName.endsWith(".jpeg")
                         || sup_photo_fileName.endsWith(".png")
                         || sup_photo_fileName.endsWith(".gif"))) {
@@ -603,14 +605,17 @@ public abstract class MeasureUpdateHelperForSharedMeasure extends MVCPortlet {
                     String sup_photo_name = uploadRequest.getParameter("sup_photos_names" + counter);
                     String sup_photo_description = uploadRequest.getParameter("sup_photos_description" + counter);
                     String sup_photo_fileName = uploadRequest.getFileName("supphotofiles" + counter);
-
+                    String sup_photo_id = uploadRequest.getParameter("sup_photos_ids" + counter);
+                    
                     //check if the file has been already uploaded in the previous save
 
                     //System.out.println("supPhotoList stored is " + supPhotoListStored);
                     //System.out.println("sup_photo_name is " + sup_photo_name.toLowerCase());
-                    if (supPhotoListStored.contains(sup_photo_name.toLowerCase())) {
-                        // get the index of the photo from the list
-                        int index = supPhotoListStored.indexOf(sup_photo_name.toLowerCase());
+                    if (Arrays.asList(supPhotoIdsStored).contains(sup_photo_id)) {
+                        updateFileEntry(Long.valueOf(sup_photo_id), sup_photo_name, sup_photo_description);
+                    	
+                    	// get the index of the photo from the list
+                        int index = Arrays.asList(supPhotoIdsStored).indexOf(sup_photo_id);
 
                         //System.out.println("index is " + index);
                         if (uploadedFiles.toString().equalsIgnoreCase("")) {
@@ -620,7 +625,7 @@ public abstract class MeasureUpdateHelperForSharedMeasure extends MVCPortlet {
                         }
                     } else {
                         // upload the image
-                        FileEntry image = insertImage(uploadRequest, counter, imageFolder, sup_photo_name, sup_photo_description, themeDisplay, serviceContext);
+                        FileEntry image = insertImage(uploadRequest, counter, imageFolder, sup_photo_name, sup_photo_description, themeDisplay, serviceContext, errors, request);
 
 
                         if (uploadedFiles.toString().equalsIgnoreCase("")) {
@@ -638,7 +643,7 @@ public abstract class MeasureUpdateHelperForSharedMeasure extends MVCPortlet {
                     String sup_photo_description = uploadRequest.getParameter("sup_photos_description" + counter);
                     String sup_photo_fileName = uploadRequest.getFileName("supphotofiles" + counter);
 
-                    FileEntry image = insertImage(uploadRequest, counter, imageFolder, sup_photo_name, sup_photo_description, themeDisplay, serviceContext);
+                    FileEntry image = insertImage(uploadRequest, counter, imageFolder, sup_photo_name, sup_photo_description, themeDisplay, serviceContext, errors, request);
 
                     if (image != null) {
                         if (uploadedFiles.toString().equalsIgnoreCase("")) {
@@ -703,7 +708,8 @@ public abstract class MeasureUpdateHelperForSharedMeasure extends MVCPortlet {
             String sup_doc_name = uploadRequest.getParameter("sup_docs_names" + counter);
             String sup_doc_description = uploadRequest.getParameter("sup_docs_description" + counter);
             String sup_doc_fileName = uploadRequest.getFileName("supdocfiles" + counter);
-
+            String sup_doc_id = uploadRequest.getParameter("sup_docs_ids" + counter);
+            
             //System.out.println("name is " + sup_doc_name);
             //System.out.println("description is " + sup_doc_description);
             //System.out.println("filename is " + sup_doc_fileName);
@@ -741,7 +747,7 @@ public abstract class MeasureUpdateHelperForSharedMeasure extends MVCPortlet {
             }
 
             // check if the file name is pdf,doc,docx,xls
-            if (isDocsValid && !(sup_doc_fileName.endsWith(".pdf")
+            if (isDocsValid && !Arrays.asList(supDocIdsStored).contains(sup_doc_id) && !(sup_doc_fileName.endsWith(".pdf")
                     || sup_doc_fileName.endsWith(".doc")
                     || sup_doc_fileName.endsWith(".docx")
                     || sup_doc_fileName.endsWith(".xls"))) {
@@ -808,15 +814,17 @@ public abstract class MeasureUpdateHelperForSharedMeasure extends MVCPortlet {
                     String sup_doc_name = uploadRequest.getParameter("sup_docs_names" + counter);
                     String sup_doc_description = uploadRequest.getParameter("sup_docs_description" + counter);
                     String sup_doc_fileName = uploadRequest.getFileName("supdocfiles" + counter);
-
+                    String sup_doc_id = uploadRequest.getParameter("sup_docs_ids" + counter);
+                    
                     //check if the file has been already uploaded in the previous save
 
                     //System.out.println("supDocList stored is " + supDocListStored);
                     //System.out.println("sup_doc_name is " + sup_doc_name.toLowerCase());
 
-                    if (supDocListStored.contains(sup_doc_name.toLowerCase())) {
-                        // get the index of the photo from the list
-                        int index = supDocListStored.indexOf(sup_doc_name.toLowerCase());
+                    if (Arrays.asList(supDocIdsStored).contains(sup_doc_id)) {
+                    	updateFileEntry(Long.valueOf(sup_doc_id), sup_doc_name, sup_doc_description);
+                    	// get the index of the photo from the list
+                        int index = Arrays.asList(supDocIdsStored).indexOf(sup_doc_id);
 
                         //System.out.println("index is " + index);
                         if (uploadedFiles.toString().equalsIgnoreCase("")) {
@@ -939,7 +947,7 @@ public abstract class MeasureUpdateHelperForSharedMeasure extends MVCPortlet {
      * @throws Exception
      */
     private FileEntry insertImage(UploadPortletRequest uploadRequest, int counter, Folder imageFolder, String sup_photo_name,
-            String sup_photo_description, ThemeDisplay themeDisplay, ServiceContext serviceContext) throws Exception {
+            String sup_photo_description, ThemeDisplay themeDisplay, ServiceContext serviceContext, List errors, PortletRequest request) throws Exception {
         FileEntry image = null;
         // upload the image
         try {
@@ -957,30 +965,10 @@ public abstract class MeasureUpdateHelperForSharedMeasure extends MVCPortlet {
             String primaryKey = String.valueOf(image.getPrimaryKey());
             addPermissions(themeDisplay, primaryKey, DLFileEntry.class.getName());
         }
-//        catch (DuplicateImageNameException e)
-//        {
-//            //get the image id
-//            //System.out.println("Duplicate image - getting image id");
-//            try {
-//
-//                List<IGImage> images = IGImageServiceUtil.getImages(themeDisplay.getScopeGroupId(), imageFolder.getFolderId());
-//                for (IGImage storedImage : images)
-//                {
-//                    if (storedImage.getName().equalsIgnoreCase(sup_photo_name))
-//                    {
-//                        //System.out.println("match occurred");
-//                        image = storedImage;
-//                        break;
-//                    }
-//                }
-//                //image = IGImageServiceUtil.getImageByFolderIdAndNameWithExtension(themeDisplay.getScopeGroupId(), imageFolder.getFolderId(), fileName);
-//                //System.out.println("image name is " + image.getName());
-//            }
-//            catch (Exception ex)
-//            {
-//                throw ex;
-//            }
-//        }
+        catch (DuplicateFileException e) {
+            errors.add("invalid-multiple-photo-upload");
+            SessionErrors.add(request, "invalid-multiple-photo-upload");
+        }
         catch (Exception e) {
             e.printStackTrace();
             throw e;
@@ -990,6 +978,24 @@ public abstract class MeasureUpdateHelperForSharedMeasure extends MVCPortlet {
     }
 
 
+    private DLFileEntry updateFileEntry(Long fileEntryId, String fileTitle, String fileDesc) throws Exception {
+        DLFileEntry dlFileEntry = DLFileEntryLocalServiceUtil.getDLFileEntry(fileEntryId);        
+        if ( !dlFileEntry.getTitle().equals(fileTitle) || !dlFileEntry.getDescription().equals(fileDesc) ) {
+	        // update the image
+	        try {
+	        	dlFileEntry.setTitle(fileTitle);
+	        	dlFileEntry.setDescription(fileDesc);
+	        	DLFileEntryLocalServiceUtil.updateDLFileEntry(dlFileEntry);
+	        }
+	        catch (Exception e) {
+	            e.printStackTrace();
+	            throw e;
+	        }
+        }
+        return dlFileEntry;
+    }
+
+    
     private String coalesce(String aString) {
         String result = "";
 
