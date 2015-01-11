@@ -472,6 +472,7 @@
 
 								  DLFileEntry image = DLFileEntryLocalServiceUtil.getFileEntry(Long.parseLong(photo));
 								  String supPhotoName = image.getName();
+								  String supPhotoTitle = image.getTitle();
 								  String supPhotoDescription = image.getDescription().replaceAll("<p>","").replaceAll("</p>","");
 								  String imageUrl = themeDisplay.getPathImage() + "/image_gallery?uuid=" + image.getUuid() +  "&t=" + WebServerServletTokenUtil.getToken(image.getLargeImageId())  + "&groupId=" + image.getGroupId();
 
@@ -491,9 +492,9 @@
 						    <%} else { %>
 								  <li>
 							<%} %>
-							<h3 class="case-studies-modal-image-gallery-slide-label"><%=supPhotoName %></h3>
+							<h3 class="case-studies-modal-image-gallery-slide-label"><%=supPhotoTitle %></h3>
 							<center>
-								<img src="<%=imageUrl%>" alt="<%=supPhotoName %>" />
+								<img src="<%=imageUrl%>" alt="<%=supPhotoTitle %>" />
 							</center>
 							<p><%=supPhotoDescription %></p>
 							</li>
@@ -521,14 +522,14 @@
 				    if (Validator.isNotNull(measure.getSupdocs())) {
 
 					 String[] sdocsForReview = measure.getSupdocs().split(";"); %>
-					 <div clas="case-studies-review-column-right-section">
+					 <div class="case-studies-review-column-right-section">
 						<p><b>Case Study Documents  (<%= sdocsForReview.length %>)</b></p>
 										<ul class="case-studies-bullted-list">
 								 <%
 									     for (String doc:sdocsForReview)
 									     {
 									    	 DLFileEntry uploadedFileEntry =  DLFileEntryLocalServiceUtil.getDLFileEntry(Long.parseLong(doc));
-									 	     String title = HtmlUtil.escapeAttribute(uploadedFileEntry.getTitle());
+									 	     String title = uploadedFileEntry.getTitle();
 									 	     String fileUrl = themeDisplay.getPortalURL() + themeDisplay.getPathContext() + "/documents/" + themeDisplay.getScopeGroupId() + "/" + uploadedFileEntry.getFolderId() +  "/" + HttpUtil.encodeURL(HtmlUtil.unescape(title));
 
 
