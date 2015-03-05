@@ -37,31 +37,57 @@
 <div id='csst_element'></div>
 
 <script>
+
+    /*
+     * The below block is basically a set of constants.
+     */
+
 	var proxyUrl = '<%= prefs.getValue(Constants.proxyUrlPreferenceName, "/proxy/url=") %>';
-	
+
 	var geoserverUrl = '<%= prefs.getValue(Constants.geoserverUrlPreferenceName, "http://ace.geocat.net/geoserver/") %>';
-	
+
 	var wms = '<%= prefs.getValue(Constants.wmsPreferenceName, "wms") %>';
-	
+
 	var wfs = '<%= prefs.getValue(Constants.wfsPreferenceName, "wfs") %>';
-	
+
 	var featureNamespace = '<%= prefs.getValue(Constants.featureNamespacePreferenceName, "http://climate-adapt.eea.europa.eu") %>';
-	
+
 	var areasFeatureType = '<%= prefs.getValue(Constants.areasFeatureTypePreferenceName, "biogeo_2005") %>';
-	
+
 	var areasLayer = '<%= prefs.getValue(Constants.areasLayerPreferenceName, "chm:biogeo_2005") %>';
-	
+
 	var caseStudiesFeatureType = '<%= prefs.getValue(Constants.caseStudiesFeatureTypePreferenceName, "casestudies") %>';
-	
+
 	var geometryColumn = '<%= prefs.getValue(Constants.geometryColumnPreferenceName, "geom") %>';
-	
+
 	var areaColumn = '<%= prefs.getValue(Constants.areaColumnPreferenceName, "area") %>';
-	
+
 	var locatorUrl = '<%= prefs.getValue(Constants.locatorUrlPreferenceName, "http://geocode.arcgis.com/arcgis/rest/services/World/GeocodeServer") %>';
-	
+
 	var locatorKey = '<%= prefs.getValue(Constants.locatorKeyPreferenceName, "Ao9qujBzDtg-nFiusTjt5VQ9x2NJB2wAD7YCRjaPz7hQQjxdFcl24tyhOwCDCIrw") %>';
-	
+
 	var zoomLevel = '<%= prefs.getValue(Constants.zoomLevelPreferenceName, "2") %>';
-	
+
 	var root = '/SimilarAreasTool-portlet/';
+
+    /*
+     * The below block ovewrwrites OpenLayers.Format.XML.write method with one which removes some rogue text.
+     * The purpose is to work around this IE11 bug: http://osgeo-org.1560.x6.nabble.com/WFS-and-IE-11-td5090636.html
+     * Problem well described here: http://stackoverflow.com/questions/21255173/malformed-wfs-xmlhttprequest-from-gwt-openlayers-in-ie11
+     */
+
+	var _class = OpenLayers.Format.XML;
+	var originalWriteFunction = _class.prototype.write;
+
+	var patchedWriteFunction = function() {
+	    var child = originalWriteFunction.apply( this, arguments );
+
+	    // NOTE: Remove the rogue namespaces as one block of text.
+	    child = child.replace(new RegExp('xmlns:NS\\d+="" NS\\d+:', 'g'), '');
+
+	    return child;
+	}
+
+	_class.prototype.write = patchedWriteFunction;
+
 </script>
