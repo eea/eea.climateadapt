@@ -660,7 +660,7 @@
 										<p><%=localDescription%></p>
 
 										<% if (measure != null && measure.getDescription() != null) { %>
-										       <textarea id="<portlet:namespace />descriptionField" cols="40" rows="10" class="WYSIWYG" name="description" data-maxlength="1000"><%= HtmlUtil.escapeAttribute(measure.getDescription()) %></textarea>
+										       <textarea id="<portlet:namespace />descriptionField" cols="40" rows="10" class="WYSIWYG" name="description" data-maxlength="5000"><%= HtmlUtil.escapeAttribute(measure.getDescription()) %></textarea>
 										<%} else {
 											// preserve the render parameter already sent
 											//String renderDescription = renderRequest.getParameter("description");
@@ -671,7 +671,7 @@
 											}
 										%>
 											<c:if test="${renderDescription ne null}">
-											  <textarea id="<portlet:namespace />descriptionField" cols="40" rows="10" class="WYSIWYG" name="description" data-maxlength="1000">${renderDescription}</textarea>
+											  <textarea id="<portlet:namespace />descriptionField" cols="40" rows="10" class="WYSIWYG" name="description" data-maxlength="5000">${renderDescription}</textarea>
 											</c:if>
 
 											<c:if test="${renderDescription eq null}">
