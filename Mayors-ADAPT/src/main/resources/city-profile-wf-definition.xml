@@ -1,0 +1,326 @@
+<?xml version="1.0"?>
+
+<workflow-definition xmlns="urn:liferay.com:liferay-workflow_6.2.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="urn:liferay.com:liferay-workflow_6.2.0 http://www.liferay.com/dtd/liferay-workflow-definition_6_2_0.xsd">
+	<name>City Profile Approval</name>
+	<description>City Representative can update City Profile Content, Administrator can approve or reject modification.</description>
+	<version>48</version>
+	<state>
+		<name>created</name>
+		<metadata> <![CDATA[{"xy":[36,51]}]]> </metadata>
+		<initial>true</initial>
+		<transitions>
+			<transition>
+				<name>review</name>
+				<target>review</target>
+			</transition>
+		</transitions>
+	</state>
+	<task>
+		<name>review</name>
+		<metadata> <![CDATA[{"xy":[168,36]}]]> </metadata>
+		<actions>
+			<notification>
+				<name>Review Notification</name>
+				<description>City Profile Review Notification</description>
+				<template><![CDATA[
+				<#assign journalArticleService = serviceLocator.findService('com.liferay.portlet.journal.service.JournalArticleLocalService')>
+				<#assign journalArticle = journalArticleService.getArticle(entryClassPK?number)>
+ 				${userName} sent you a City Profile of ${CITY_PROFILE_CITY_NAME} for edition.</p>
+				<a href="http://local-climate-adapt.eea.europa.eu/c/portal/accessCityProfileUserTask?companyId=${companyId}&groupId=${groupId}&userId=${CITY_PROFILE_CONTACT_USER_ID}&refererPlid=${refererPlid}&entryClassPK=${entryClassPK}&entryClassName=${entryClassName}&action=editForm" ><button>Review Form for <b>${CITY_PROFILE_CITY_NAME}</b> City Profile</button></a>
+				<a href="http://local-climate-adapt.eea.europa.eu/c/portal/accessCityProfileUserTask?companyId=${companyId}&groupId=${groupId}&userId=${CITY_PROFILE_CONTACT_USER_ID}&refererPlid=${refererPlid}&entryClassPK=${entryClassPK}&entryClassName=${entryClassName}&action=finishTask" ><button>Finish Reviewing for <b>${CITY_PROFILE_CITY_NAME}</b> City Profile</button></a>
+				]]></template>
+				<template-language>freemarker</template-language>
+				<notification-type>email</notification-type>
+				<recipients>
+					<assignees />
+				</recipients>
+				<execution-type>onAssignment</execution-type>
+			</notification>
+		</actions>
+		<assignments>
+			<scripted-assignment>
+				<script> <![CDATA[
+							import com.liferay.portal.kernel.util.GetterUtil;
+							import com.liferay.portal.kernel.workflow.WorkflowConstants;
+							import com.liferay.portal.service.UserLocalServiceUtil;
+							import com.liferay.portal.model.Group;
+							import com.liferay.portal.model.Role;
+
+							long companyId = GetterUtil.getLong((String)workflowContext.get(WorkflowConstants.CONTEXT_COMPANY_ID));
+							roles = new ArrayList<Role>();
+	
+							String emailAddress = (String)workflowContext.get("CITY_PROFILE_CONTACT_EMAIL_ADDRESS");
+							user = UserLocalServiceUtil.getUserByScreenName(companyId, "cityprofilecontact");
+							user.setEmailAddress(emailAddress);
+							user.persist();
+							workflowContext.put("CITY_PROFILE_CONTACT_USER_ID",user.getUserId());
+								]]> </script>
+				<script-language>groovy</script-language>
+			</scripted-assignment>
+		</assignments>
+		<task-timers>
+			<task-timer>
+				<name>City Profile Edition Reminder</name>
+				<delay>
+					<duration>3</duration>
+					<scale>minute</scale>
+				</delay>
+				<timer-actions>
+					<reassignments>
+						<scripted-assignment>
+							<script> <![CDATA[
+							import com.liferay.portal.kernel.util.GetterUtil;
+							import com.liferay.portal.kernel.workflow.WorkflowConstants;
+							import com.liferay.portal.service.UserLocalServiceUtil;
+							import com.liferay.portal.model.Role;
+
+							long companyId = GetterUtil.getLong((String)workflowContext.get(WorkflowConstants.CONTEXT_COMPANY_ID));
+							roles = new ArrayList<Role>();
+	
+							String emailAddress = (String)workflowContext.get("CITY_PROFILE_CONTACT_EMAIL_ADDRESS");
+							user = UserLocalServiceUtil.getUserByScreenName(companyId, "cityprofilecontact");
+							user.setEmailAddress(emailAddress);
+							user.persist();
+		
+								]]> </script>
+							<script-language>groovy</script-language>
+						</scripted-assignment>
+					</reassignments>
+					<timer-notification>
+						<name>City Profile Edition Reminder Notification</name>
+						<description>City Profile Edition Reminder Notification</description>
+						<template>Remember you have ${CITY_PROFILE_CITY_NAME} City Profile for edition</template>
+						<template-language>freemarker</template-language>
+						<notification-type>email</notification-type>
+						<recipients>
+							<assignees />
+						</recipients>
+					</timer-notification>
+				</timer-actions>
+			</task-timer>
+			<task-timer>
+				<name>City Profile Edition Expiration Notification</name>
+				<delay>
+					<duration>4</duration>
+					<scale>minute</scale>
+				</delay>
+				<timer-actions>
+					<reassignments>
+						<scripted-assignment>
+							<script> <![CDATA[
+							import com.liferay.portal.kernel.util.GetterUtil;
+							import com.liferay.portal.kernel.workflow.WorkflowConstants;
+							import com.liferay.portal.service.UserLocalServiceUtil;
+							import com.liferay.portal.model.Role;
+							long companyId = GetterUtil.getLong((String)workflowContext.get(WorkflowConstants.CONTEXT_COMPANY_ID));
+							roles = new ArrayList<Role>();
+							String emailAddress = (String)workflowContext.get("CITY_PROFILE_CONTACT_EMAIL_ADDRESS");
+							user = UserLocalServiceUtil.getUserByScreenName(companyId, "cityprofilecontact");
+							user.setEmailAddress(emailAddress);
+							user.persist();
+								]]> </script>
+							<script-language>groovy</script-language>
+						</scripted-assignment>
+					</reassignments>
+					<timer-notification>
+						<name>City Profile Edition Expiration Notification</name>
+						<description>City Profile Edition Expiration Notification</description>
+						<template>City Profile editing for ${CITY_PROFILE_CITY_NAME} city frame has expired. Data will be reviewed by Mayors-ADAPT Administrator</template>
+						<template-language>freemarker</template-language>
+						<notification-type>email</notification-type>
+						<recipients>
+							<assignees />
+						</recipients>
+					</timer-notification>
+				</timer-actions>
+			</task-timer>
+			<task-timer>
+				<name>City Profile Edition Expiration</name>
+				<delay>
+					<duration>4</duration>
+					<scale>minute</scale>
+				</delay>
+				<timer-actions>
+					<reassignments>
+						<scripted-assignment>
+							<script> <![CDATA[
+							import com.liferay.portal.kernel.util.GetterUtil;
+							import com.liferay.portal.kernel.workflow.WorkflowConstants;
+							import com.liferay.portal.service.UserLocalServiceUtil;
+							import com.liferay.portal.model.Role;
+							long companyId = GetterUtil.getLong((String)workflowContext.get(WorkflowConstants.CONTEXT_COMPANY_ID));
+							roles = new ArrayList<Role>();
+							String userId = (String)workflowContext.get("CITY_PROFILE_OWNER");
+							user = UserLocalServiceUtil.getUser(Long.parseLong(userId));
+								]]> </script>
+							<script-language>groovy</script-language>
+						</scripted-assignment>
+					</reassignments>
+					<timer-notification>
+						<name>City Profile Final Review</name>
+						<description>City Profile Final Review</description>
+						<template><![CDATA[Representative City Profile editing frame for ${CITY_PROFILE_CITY_NAME} has expired.
+				Please review city profile final approval task
+				<a href="http://local-climate-adapt.eea.europa.eu/c/portal/accessCityProfileUserTask?companyId=${companyId}&groupId=${groupId}&userId=${userId}&entryClassPK=${entryClassPK}&entryClassName=${entryClassName}&action=editTask" ><button>Final Review Task for ${CITY_PROFILE_CITY_NAME} City Profile</button></a>
+						]]></template>
+						<template-language>freemarker</template-language>
+						<notification-type>email</notification-type>
+						<recipients>
+							<assignees />
+						</recipients>
+					</timer-notification>
+				</timer-actions>
+			</task-timer>
+		</task-timers>
+		<transitions>
+			<transition>
+				<name>Finish</name>
+				<target>review_administrator</target>
+			</transition>
+		</transitions>
+	</task>
+	<task>
+		<name>review_administrator</name>
+		<metadata> <![CDATA[{"xy":[168,36]}]]> </metadata>
+		<actions>
+			<notification>
+				<name>Administrator Review Notification</name>
+				<description>Administrator Review Notification</description>
+				<template><![CDATA[
+				City Profile for ${CITY_PROFILE_CITY_NAME} was finished by representative.</b>
+				Please review city profile final approval task
+								<a href="http://local-climate-adapt.eea.europa.eu/c/portal/accessCityProfileUserTask?companyId=${companyId}&groupId=${groupId}&userId=${CITY_PROFILE_OWNER}&entryClassPK=${entryClassPK}&entryClassName=${entryClassName}&action=editTask" ><button>Final Review Task for ${CITY_PROFILE_CITY_NAME} City Profile</button></a>
+				for final Approval.
+				 ]]></template>
+				<template-language>freemarker</template-language>
+				<notification-type>email</notification-type>
+				<execution-type>onAssignment</execution-type>
+			</notification>
+		</actions>
+		<assignments>
+			<scripted-assignment>
+				<script> <![CDATA[
+							import com.liferay.portal.kernel.util.GetterUtil;
+							import com.liferay.portal.kernel.workflow.WorkflowConstants;
+							import com.liferay.portal.service.UserLocalServiceUtil;
+							import com.liferay.portal.model.Role;
+							long companyId = GetterUtil.getLong((String)workflowContext.get(WorkflowConstants.CONTEXT_COMPANY_ID));
+							long userId = GetterUtil.getLong((String)workflowContext.get("CITY_PROFILE_OWNER"));
+							roles = new ArrayList<Role>();
+							user = UserLocalServiceUtil.getUser(userId);
+								]]> </script>
+				<script-language>groovy</script-language>
+			</scripted-assignment>
+		</assignments>
+		<transitions>
+			<transition>
+				<name>approve</name>
+				<target>approved</target>
+			</transition>
+			<transition>
+				<name>reject</name>
+				<target>review</target>
+				<default>false</default>
+			</transition>
+		</transitions>
+	</task>
+	<!-- task> <name>update</name> <metadata> <![CDATA[{"transitions":{"resubmit":{"bendpoints":[[303,140]]}},"xy":[328,199]}]]> 
+		</metadata> <actions> <action> <name>reject</name> <script> <![CDATA[ Packages.com.liferay.portal.kernel.workflow.WorkflowStatusManagerUtil.updateStatus(Packages.com.liferay.portal.kernel.workflow.WorkflowConstants.toStatus("denied"), 
+		workflowContext); Packages.com.liferay.portal.kernel.workflow.WorkflowStatusManagerUtil.updateStatus(Packages.com.liferay.portal.kernel.workflow.WorkflowConstants.toStatus("pending"), 
+		workflowContext); ]]> </script> <script-language>javascript</script-language> 
+		<execution-type>onAssignment</execution-type> </action> <notification> <name>Creator 
+		Modification Notification</name> <template>Your submission was rejected by 
+		${userName}, please modify and resubmit.</template> <template-language>freemarker</template-language> 
+		<notification-type>email</notification-type> <notification-type>user-notification</notification-type> 
+		<execution-type>onAssignment</execution-type> </notification> </actions> 
+		<assignments> <user /> </assignments> <transitions> <transition> <name>resubmit</name> 
+		<target>review</target> </transition> </transitions> </task -->
+	<state>
+		<name>approved</name>
+		<metadata> <![CDATA[
+				{"xy":[380,51]}
+			]]> </metadata>
+		<actions>
+			<action>
+				<name>approve</name>
+				<script> <![CDATA[
+						import com.liferay.portal.kernel.workflow.WorkflowStatusManagerUtil;
+						import com.liferay.portal.kernel.workflow.WorkflowConstants;
+
+						WorkflowStatusManagerUtil.updateStatus(WorkflowConstants.toStatus("approved"), workflowContext);
+					]]> </script>
+				<script-language>groovy</script-language>
+				<execution-type>onEntry</execution-type>
+			</action>
+		</actions>
+		<transitions>
+			<transition>
+				<name>notify_approval</name>
+				<target>notify_approval</target>
+			</transition>
+		</transitions>
+	</state>
+	<task>
+		<name>notify_approval</name>
+		<metadata> <![CDATA[{"xy":[168,36]}]]> </metadata>
+		<assignments>
+			<scripted-assignment>
+				<script> <![CDATA[
+							import com.liferay.portal.kernel.util.GetterUtil;
+							import com.liferay.portal.kernel.workflow.WorkflowConstants;
+							import com.liferay.portal.service.UserLocalServiceUtil;
+							import com.liferay.portal.model.Group;
+							import com.liferay.portal.model.Role;
+
+							long companyId = GetterUtil.getLong((String)workflowContext.get(WorkflowConstants.CONTEXT_COMPANY_ID));
+							roles = new ArrayList<Role>();
+	
+							String emailAddress = (String)workflowContext.get("CITY_PROFILE_CONTACT_EMAIL_ADDRESS");
+							user = UserLocalServiceUtil.getUserByScreenName(companyId, "cityprofilecontact");
+							user.setEmailAddress(emailAddress);
+							user.persist();
+								]]> </script>
+				<script-language>groovy</script-language>
+			</scripted-assignment>
+		</assignments>
+		<task-timers>
+			<task-timer>
+				<name>City Profile Edition Approval</name>
+				<delay>
+					<duration>0</duration>
+					<scale>second</scale>
+				</delay>
+				<timer-actions>
+					<timer-notification>
+						<name>City Profile Approval Notification</name>
+						<description>City profile approved</description>
+						<template><![CDATA[
+				City Profile for ${CITY_PROFILE_CITY_NAME} was approved.
+				Youcan check it out at
+				<a href="http://local-climate-adapt.eea.europa.eu/-/${CITY_PROFILE_CITY_NAME_LOWERCASE}" ><button>Open ${CITY_PROFILE_CITY_NAME} City Profile</button></a>
+				 ]]></template>
+						<template-language>freemarker</template-language>
+						<notification-type>email</notification-type>
+						<recipients>
+							<assignees />
+						</recipients>
+					</timer-notification>
+				</timer-actions>
+			</task-timer>
+		</task-timers>
+		<transitions>
+			<transition>
+				<name>final</name>
+				<target>final</target>
+			</transition>
+		</transitions>
+	</task>
+	<state>
+		<name>final</name>
+		<metadata> <![CDATA[
+				{"xy":[380,51]}
+			]]> </metadata>
+	</state>
+</workflow-definition>
