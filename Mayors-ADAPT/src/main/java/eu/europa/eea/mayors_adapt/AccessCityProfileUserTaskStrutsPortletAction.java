@@ -28,7 +28,7 @@ public class AccessCityProfileUserTaskStrutsPortletAction extends
 		BaseStrutsAction {
 	private static Log _log = LogFactoryUtil
 			.getLog(AccessCityProfileUserTaskStrutsPortletAction.class);
-
+ 
 	@Override
 	public String execute(HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
