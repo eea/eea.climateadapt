@@ -1,11 +1,11 @@
 <?xml version="1.0"?>
-
+ 
 <workflow-definition xmlns="urn:liferay.com:liferay-workflow_6.2.0"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="urn:liferay.com:liferay-workflow_6.2.0 http://www.liferay.com/dtd/liferay-workflow-definition_6_2_0.xsd">
 	<name>City Profile Approval</name>
 	<description>City Representative can update City Profile Content, Administrator can approve or reject modification.</description>
-	<version>48</version>
+	<version>1</version>
 	<state>
 		<name>created</name>
 		<metadata> <![CDATA[{"xy":[36,51]}]]> </metadata>
