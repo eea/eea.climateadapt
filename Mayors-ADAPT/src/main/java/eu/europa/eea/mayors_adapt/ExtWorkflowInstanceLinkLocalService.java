@@ -68,12 +68,15 @@ public class ExtWorkflowInstanceLinkLocalService extends
 					+ workflowContext.get(key));
 		String emailContact = null;
 		String cityName = null;
+		String serverURL = null;
 		for (String key : serviceContextMap.keySet()) {
 			workflowContext.put(key, serviceContextMap.get(key));
 			if (key.startsWith("Contact"))
 				emailContact = ((String) serviceContextMap.get(key));
 			if (key.startsWith("title"))
 				cityName = ((String) serviceContextMap.get(key));
+			if (key.startsWith("redirect"))
+				serverURL = ((String) serviceContextMap.get(key)).split("\\/group")[0];
 			_log.info("ServiceContext: " + key + "->"
 					+ serviceContextMap.get(key));
 		}
@@ -108,6 +111,7 @@ public class ExtWorkflowInstanceLinkLocalService extends
 			workflowContext.put("CITY_PROFILE_CONTACT_EMAIL_ADDRESS",
 					emailContact);
 			workflowContext.put("CITY_PROFILE_OWNER", userId);
+			workflowContext.put("CITY_PROFILE_SERVER_URL", serverURL);
 		} else {
 			workflowDefinitionLink = workflowHandler.getWorkflowDefinitionLink(
 					companyId, groupId, classPK);

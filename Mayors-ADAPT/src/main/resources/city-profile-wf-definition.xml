@@ -27,9 +27,9 @@
 				<template><![CDATA[
 				<#assign journalArticleService = serviceLocator.findService('com.liferay.portlet.journal.service.JournalArticleLocalService')>
 				<#assign journalArticle = journalArticleService.getArticle(entryClassPK?number)>
- 				${userName} sent you a City Profile of ${CITY_PROFILE_CITY_NAME} for edition.</p>
-				<a href="http://local-climate-adapt.eea.europa.eu/c/portal/accessCityProfileUserTask?companyId=${companyId}&groupId=${groupId}&userId=${CITY_PROFILE_CONTACT_USER_ID}&refererPlid=${refererPlid}&entryClassPK=${entryClassPK}&entryClassName=${entryClassName}&action=editForm" ><button>Review Form for <b>${CITY_PROFILE_CITY_NAME}</b> City Profile</button></a>
-				<a href="http://local-climate-adapt.eea.europa.eu/c/portal/accessCityProfileUserTask?companyId=${companyId}&groupId=${groupId}&userId=${CITY_PROFILE_CONTACT_USER_ID}&refererPlid=${refererPlid}&entryClassPK=${entryClassPK}&entryClassName=${entryClassName}&action=finishTask" ><button>Finish Reviewing for <b>${CITY_PROFILE_CITY_NAME}</b> City Profile</button></a>
+ 				<H2>Climate-ADAPT sent you ${CITY_PROFILE_CITY_NAME} Mayor-ADAPT City Profile for edition.</H2>
+				<a href="${CITY_PROFILE_SERVER_URL}/c/portal/accessCityProfileUserTask?companyId=${companyId}&groupId=${groupId}&userId=${CITY_PROFILE_CONTACT_USER_ID}&refererPlid=${refererPlid}&entryClassPK=${entryClassPK}&entryClassName=${entryClassName}&version=${version}&action=editForm" ><button>Review Form for <b>${CITY_PROFILE_CITY_NAME}</b> City Profile</button></a>
+				<a href="${CITY_PROFILE_SERVER_URL}/c/portal/accessCityProfileUserTask?companyId=${companyId}&groupId=${groupId}&userId=${CITY_PROFILE_CONTACT_USER_ID}&refererPlid=${refererPlid}&entryClassPK=${entryClassPK}&entryClassName=${entryClassName}&version=${version}&action=finishTask" ><button>Finish Reviewing for <b>${CITY_PROFILE_CITY_NAME}</b> City Profile</button></a>
 				]]></template>
 				<template-language>freemarker</template-language>
 				<notification-type>email</notification-type>
@@ -163,7 +163,7 @@
 						<description>City Profile Final Review</description>
 						<template><![CDATA[Representative City Profile editing frame for ${CITY_PROFILE_CITY_NAME} has expired.
 				Please review city profile final approval task
-				<a href="http://local-climate-adapt.eea.europa.eu/c/portal/accessCityProfileUserTask?companyId=${companyId}&groupId=${groupId}&userId=${userId}&entryClassPK=${entryClassPK}&entryClassName=${entryClassName}&action=editTask" ><button>Final Review Task for ${CITY_PROFILE_CITY_NAME} City Profile</button></a>
+				<a href="${CITY_PROFILE_SERVER_URL}/c/portal/accessCityProfileUserTask?companyId=${companyId}&groupId=${groupId}&userId=${userId}&entryClassPK=${entryClassPK}&entryClassName=${entryClassName}&action=editTask" ><button>Final Review Task for ${CITY_PROFILE_CITY_NAME} City Profile</button></a>
 						]]></template>
 						<template-language>freemarker</template-language>
 						<notification-type>email</notification-type>
@@ -191,7 +191,7 @@
 				<template><![CDATA[
 				City Profile for ${CITY_PROFILE_CITY_NAME} was finished by representative.</b>
 				Please review city profile final approval task
-								<a href="http://local-climate-adapt.eea.europa.eu/c/portal/accessCityProfileUserTask?companyId=${companyId}&groupId=${groupId}&userId=${CITY_PROFILE_OWNER}&entryClassPK=${entryClassPK}&entryClassName=${entryClassName}&action=editTask" ><button>Final Review Task for ${CITY_PROFILE_CITY_NAME} City Profile</button></a>
+								<a href="${CITY_PROFILE_SERVER_URL}/c/portal/accessCityProfileUserTask?companyId=${companyId}&groupId=${groupId}&userId=${CITY_PROFILE_OWNER}&entryClassPK=${entryClassPK}&entryClassName=${entryClassName}&action=editTask" ><button>Final Review Task for ${CITY_PROFILE_CITY_NAME} City Profile</button></a>
 				for final Approval.
 				 ]]></template>
 				<template-language>freemarker</template-language>
@@ -299,7 +299,7 @@
 						<template><![CDATA[
 				City Profile for ${CITY_PROFILE_CITY_NAME} was approved.
 				Youcan check it out at
-				<a href="http://local-climate-adapt.eea.europa.eu/-/${CITY_PROFILE_CITY_NAME_LOWERCASE}" ><button>Open ${CITY_PROFILE_CITY_NAME} City Profile</button></a>
+				<a href="${CITY_PROFILE_SERVER_URL}/-/${CITY_PROFILE_CITY_NAME_LOWERCASE}" ><button>Open ${CITY_PROFILE_CITY_NAME} City Profile</button></a>
 				 ]]></template>
 						<template-language>freemarker</template-language>
 						<notification-type>email</notification-type>
