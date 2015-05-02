@@ -47,6 +47,7 @@
       <name>Maven2 repository</name>
       <url>http://repo1.maven.org/maven2</url>
     </repository>
+
     <repository>
       <id>liferay-repository</id>
       <name>Liferay's Maven repository</name>
@@ -54,6 +55,7 @@
     </repository>
   </repositories>
 
+<!--
   <pluginRepositories>
     <pluginRepository>
       <id>liferay-repository</id>
@@ -61,6 +63,7 @@
       <url>http://oss.sonatype.org/content/groups/public</url>
     </pluginRepository>
   </pluginRepositories>
+-->
 
   <modules>
     <module>AceItem</module>
@@ -99,6 +102,7 @@
             <target>${java.version}</target>
             <showDeprecation>true</showDeprecation>
             <showWarnings>true</showWarnings>
+            <encoding>UTF-8</encoding>
           </configuration>
         </plugin>
 
