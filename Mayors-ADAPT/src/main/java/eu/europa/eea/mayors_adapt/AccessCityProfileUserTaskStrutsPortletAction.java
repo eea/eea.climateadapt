@@ -124,7 +124,7 @@ public class AccessCityProfileUserTaskStrutsPortletAction extends
 		factoryFinishURL
 				.setParameter(
 						"redirect",
-						"http://google.com");
+						HttpUtil.encodeURL("http://google.com"));
 
 		String finishURL = "http://local-climate-adapt.eea.europa.eu/group/control_panel/manage"
 				// + "?p_auth=eVXkiYB3"
@@ -152,6 +152,13 @@ public class AccessCityProfileUserTaskStrutsPortletAction extends
 				String.valueOf(workflowInstanceLink.getWorkflowInstanceId()));
 		factoryTaskURL.setParameter("struts_action",
 				"/workflow_definitions/edit_workflow_instance");
+		factoryTaskURL.setParameter("tabs1",
+				"submissions");
+		factoryTaskURL
+		.setParameter(
+				"redirect",
+				HttpUtil.encodeURL("/newsletter"));
+
 		//
 //		factoryTaskURL
 //				.setParameter(
@@ -172,7 +179,13 @@ public class AccessCityProfileUserTaskStrutsPortletAction extends
 				+ "&refererPlid=14150"
 				+ "&_151_workflowInstanceId="
 				+ workflowInstanceLink.getWorkflowInstanceId()
-				+ "&_151_redirect=http%3A%2F%2Flocal-climate-adapt.eea.europa.eu%2Fgroup%2Fcontrol_panel%2Fmanage%3Fp_p_id%3D151%26p_p_lifecycle%3D0%26p_p_state%3Dmaximized%26p_p_mode%3Dview%26refererPlid%3D14150%26_151_tabs1%3Dsubmissions&_151_struts_action=%2Fworkflow_definitions%2Fedit_workflow_instance";
+				+ "&_151_redirect=http%3A%2F%2Flocal-climate-adapt.eea.europa.eu%2Fgroup%2Fcontrol_panel%2Fmanage%3F"
+				+ "p_p_id%3D151"
+				+ "%26p_p_lifecycle%3D0"
+				+ "%26p_p_state%3Dmaximized"
+				+ "%26p_p_mode%3Dview"
+				+ "%26refererPlid%3D14150"
+				+ "%26_151_tabs1%3Dsubmissions&_151_struts_action=%2Fworkflow_definitions%2Fedit_workflow_instance";
 
 		_log.info("recordId: " + entryClassPK);
 		_log.info("articleId: " + articleId);
@@ -200,7 +213,7 @@ public class AccessCityProfileUserTaskStrutsPortletAction extends
 					workflowInstanceLink.getGroupId(),
 					workflowInstanceLink.getUserId(), workflowTaskId, "Finish",
 					null, workflowInstance.getWorkflowContext());
-			response.sendRedirect(factoryFinishURL.toString());
+			response.sendRedirect("/newsletter");
 			break;
 		case 2:
 			response.sendRedirect(factoryTaskURL.toString());
