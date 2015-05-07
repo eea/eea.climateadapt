@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
- 
+
 <workflow-definition xmlns="urn:liferay.com:liferay-workflow_6.2.0"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="urn:liferay.com:liferay-workflow_6.2.0 http://www.liferay.com/dtd/liferay-workflow-definition_6_2_0.xsd">
@@ -23,13 +23,18 @@
 		<actions>
 			<notification>
 				<name>Review Notification</name>
-				<description>City Profile Review Notification</description>
+				<description>Mayors Adapt: your city profile is ready to be filled in</description>
 				<template><![CDATA[
-				<#assign journalArticleService = serviceLocator.findService('com.liferay.portlet.journal.service.JournalArticleLocalService')>
-				<#assign journalArticle = journalArticleService.getArticle(entryClassPK?number)>
- 				<H2>Climate-ADAPT sent you ${CITY_PROFILE_CITY_NAME} Mayor-ADAPT City Profile for edition.</H2>
-				<a href="${CITY_PROFILE_SERVER_URL}/c/portal/accessCityProfileUserTask?companyId=${companyId}&groupId=${groupId}&userId=${CITY_PROFILE_CONTACT_USER_ID}&refererPlid=${refererPlid}&entryClassPK=${entryClassPK}&entryClassName=${entryClassName}&version=${version}&action=editForm" ><button>Review Form for <b>${CITY_PROFILE_CITY_NAME}</b> City Profile</button></a>
+				<p>Dear ${CITY_PROFILE_CONTACT_NAME_SURNAME},</p>
+				<p>Welcome to the Mayors Adapt city profile platform. We have set up a template which we would like you to fill in. All the information shared in this form, will be used to showcase and represent your city and your work on Climate-ADAPT. The more information you fill in, the better will be your cities impact within the community.</p>
+				
+				<p>You can find your individual form here:</p>  
+				<a href="${CITY_PROFILE_SERVER_URL}/c/portal/accessCityProfileUserTask?companyId=${companyId}&groupId=${groupId}&userId=${CITY_PROFILE_CONTACT_USER_ID}&refererPlid=${refererPlid}&entryClassPK=${entryClassPK}&entryClassName=${entryClassName}&version=${version}&action=editForm" target="_blank"><button>Review Form for <b>${CITY_PROFILE_CITY_NAME}</b> City Profile</button></a>
+				
+				<p>Please note that you have four weeks from now to complete the form. You can edit it, save it and then come back to edit it further at a later stage. Once you submit it, we will quality manage it and may come back to you with questions or suggestions in case anything is unclear. Only once we have your final approval finish the work with this button:</p>
 				<a href="${CITY_PROFILE_SERVER_URL}/c/portal/accessCityProfileUserTask?companyId=${companyId}&groupId=${groupId}&userId=${CITY_PROFILE_CONTACT_USER_ID}&refererPlid=${refererPlid}&entryClassPK=${entryClassPK}&entryClassName=${entryClassName}&version=${version}&action=finishTask" ><button>Finish Reviewing for <b>${CITY_PROFILE_CITY_NAME}</b> City Profile</button></a>
+				
+				<p>After a final review by Mayors-ADAPT administrator, we will put the fact sheet online.</p>
 				]]></template>
 				<template-language>freemarker</template-language>
 				<notification-type>email</notification-type>
@@ -52,9 +57,13 @@
 							roles = new ArrayList<Role>();
 	
 							String emailAddress = (String)workflowContext.get("CITY_PROFILE_CONTACT_EMAIL_ADDRESS");
-							user = UserLocalServiceUtil.getUserByScreenName(companyId, "cityprofilecontact");
-							user.setEmailAddress(emailAddress);
-							user.persist();
+							
+							user = UserLocalServiceUtil.getUserByEmailAddress(companyId, emailAddress);
+							if (user==null){
+								user = UserLocalServiceUtil.getUserByScreenName(companyId, "cityprofilecontact");
+								user.setEmailAddress(emailAddress);
+								user.persist();
+							}
 							workflowContext.put("CITY_PROFILE_CONTACT_USER_ID",user.getUserId());
 								]]> </script>
 				<script-language>groovy</script-language>
@@ -80,9 +89,12 @@
 							roles = new ArrayList<Role>();
 	
 							String emailAddress = (String)workflowContext.get("CITY_PROFILE_CONTACT_EMAIL_ADDRESS");
-							user = UserLocalServiceUtil.getUserByScreenName(companyId, "cityprofilecontact");
-							user.setEmailAddress(emailAddress);
-							user.persist();
+							user = UserLocalServiceUtil.getUserByEmailAddress(companyId, emailAddress);
+							if (user==null){
+								user = UserLocalServiceUtil.getUserByScreenName(companyId, "cityprofilecontact");
+								user.setEmailAddress(emailAddress);
+								user.persist();
+							}
 		
 								]]> </script>
 							<script-language>groovy</script-language>
@@ -90,8 +102,22 @@
 					</reassignments>
 					<timer-notification>
 						<name>City Profile Edition Reminder Notification</name>
-						<description>City Profile Edition Reminder Notification</description>
-						<template>Remember you have ${CITY_PROFILE_CITY_NAME} City Profile for edition</template>
+						<description>Mayors Adapt: please remember to fill in your city profile</description>
+						<template><![CDATA[
+						<p>Dear ${CITY_PROFILE_CONTACT_NAME_SURNAME},</p>
+						
+						<p>Thank you for starting to fill in your registration form for your individual Mayors Adapt city profile fact sheet.  Please note that your login will expire in one week, so please finalise you fact sheet and submit it so that we can go over it, ask for your final approval and publish it on the website.</p>
+						
+						<p>You can find your individual form here:</p>  
+						<a href="${CITY_PROFILE_SERVER_URL}/c/portal/accessCityProfileUserTask?companyId=${companyId}&groupId=${groupId}&userId=${CITY_PROFILE_CONTACT_USER_ID}&refererPlid=${refererPlid}&entryClassPK=${entryClassPK}&entryClassName=${entryClassName}&version=${version}&action=editForm" ><button>Review Form for <b>${CITY_PROFILE_CITY_NAME}</b> City Profile</button></a>
+						
+						<p>Please note that you have one week from now to complete the form. You can edit it, save it and then come back to edit it further at a later stage. Once you submit it, we will quality manage it and may come back to you with questions or suggestions in case anything is unclear. Only once we have your final approval finish the work with this button:</p>
+						<a href="${CITY_PROFILE_SERVER_URL}/c/portal/accessCityProfileUserTask?companyId=${companyId}&groupId=${groupId}&userId=${CITY_PROFILE_CONTACT_USER_ID}&refererPlid=${refererPlid}&entryClassPK=${entryClassPK}&entryClassName=${entryClassName}&version=${version}&action=finishTask" ><button>Finish Reviewing for <b>${CITY_PROFILE_CITY_NAME}</b> City Profile</button></a>
+						
+						<p>After a final review by Mayors-ADAPT administrator, we will put the fact sheet online.</p>
+						
+						<p>For any questions, please don't hesitate to contact us at helpdesk@mayors-adapt.eu</p>						
+						]]></template>
 						<template-language>freemarker</template-language>
 						<notification-type>email</notification-type>
 						<recipients>
@@ -117,17 +143,26 @@
 							long companyId = GetterUtil.getLong((String)workflowContext.get(WorkflowConstants.CONTEXT_COMPANY_ID));
 							roles = new ArrayList<Role>();
 							String emailAddress = (String)workflowContext.get("CITY_PROFILE_CONTACT_EMAIL_ADDRESS");
-							user = UserLocalServiceUtil.getUserByScreenName(companyId, "cityprofilecontact");
-							user.setEmailAddress(emailAddress);
-							user.persist();
+							user = UserLocalServiceUtil.getUserByEmailAddress(companyId, emailAddress);
+							if (user==null){
+								user = UserLocalServiceUtil.getUserByScreenName(companyId, "cityprofilecontact");
+								user.setEmailAddress(emailAddress);
+								user.persist();
+							}
 								]]> </script>
 							<script-language>groovy</script-language>
 						</scripted-assignment>
 					</reassignments>
 					<timer-notification>
 						<name>City Profile Edition Expiration Notification</name>
-						<description>City Profile Edition Expiration Notification</description>
-						<template>City Profile editing for ${CITY_PROFILE_CITY_NAME} city frame has expired. Data will be reviewed by Mayors-ADAPT Administrator</template>
+						<description>Mayors Adapt: Time for editing your city profile has expired</description>
+						<template><![CDATA[
+						<p>Dear ${CITY_PROFILE_CONTACT_NAME_SURNAME},</p>
+						
+						<p>Thank you for filling in your city profile fact sheet. The time for editing has ended and the Mayors Adapt team will now review your input. We will get in touch with you in case any relevant information is still missing. Once we have jointly finalised the fact sheet and you have approved the content, we will publish it online.</p>
+						
+						<p>For any questions, please don't hesitate to contact us at helpdesk@mayors-adapt.eu</p>
+						]]> </template>
 						<template-language>freemarker</template-language>
 						<notification-type>email</notification-type>
 						<recipients>
@@ -152,18 +187,20 @@
 							import com.liferay.portal.model.Role;
 							long companyId = GetterUtil.getLong((String)workflowContext.get(WorkflowConstants.CONTEXT_COMPANY_ID));
 							roles = new ArrayList<Role>();
-							String userId = (String)workflowContext.get("CITY_PROFILE_OWNER");
-							user = UserLocalServiceUtil.getUser(Long.parseLong(userId));
+							long userId = GetterUtil.getLong((String)workflowContext.get("CITY_PROFILE_OWNER"));
+							user = UserLocalServiceUtil.getUser(userId);
 								]]> </script>
 							<script-language>groovy</script-language>
 						</scripted-assignment>
 					</reassignments>
 					<timer-notification>
 						<name>City Profile Final Review</name>
-						<description>City Profile Final Review</description>
-						<template><![CDATA[Representative City Profile editing frame for ${CITY_PROFILE_CITY_NAME} has expired.
-				Please review city profile final approval task
-				<a href="${CITY_PROFILE_SERVER_URL}/c/portal/accessCityProfileUserTask?companyId=${companyId}&groupId=${groupId}&userId=${userId}&entryClassPK=${entryClassPK}&entryClassName=${entryClassName}&action=editTask" ><button>Final Review Task for ${CITY_PROFILE_CITY_NAME} City Profile</button></a>
+						<description>MA fact sheets: Please review a new city profile</description>
+						<template><![CDATA[
+						<p>Representative City Profile editing frame for ${CITY_PROFILE_CITY_NAME} has expired.</p>
+						<p>Please review city profile final approval task:</p>
+						<a href="${CITY_PROFILE_SERVER_URL}/c/portal/accessCityProfileUserTask?companyId=${companyId}&groupId=${groupId}&userId=${userId}&entryClassPK=${entryClassPK}&entryClassName=${entryClassName}&action=editTask" ><button>Final Review Task for ${CITY_PROFILE_CITY_NAME} City Profile</button></a>
+				
 						]]></template>
 						<template-language>freemarker</template-language>
 						<notification-type>email</notification-type>
@@ -187,11 +224,11 @@
 		<actions>
 			<notification>
 				<name>Administrator Review Notification</name>
-				<description>Administrator Review Notification</description>
+				<description>MA fact sheets: Please review a new city profile</description>
 				<template><![CDATA[
-				City Profile for ${CITY_PROFILE_CITY_NAME} was finished by representative.</b>
-				Please review city profile final approval task
-								<a href="${CITY_PROFILE_SERVER_URL}/c/portal/accessCityProfileUserTask?companyId=${companyId}&groupId=${groupId}&userId=${CITY_PROFILE_OWNER}&entryClassPK=${entryClassPK}&entryClassName=${entryClassName}&action=editTask" ><button>Final Review Task for ${CITY_PROFILE_CITY_NAME} City Profile</button></a>
+				<p>City Profile for ${CITY_PROFILE_CITY_NAME} was finished by representative.</p>
+				<p>Please review city profile final approval task:</p>
+				<a href="${CITY_PROFILE_SERVER_URL}/c/portal/accessCityProfileUserTask?companyId=${companyId}&groupId=${groupId}&userId=${CITY_PROFILE_OWNER}&entryClassPK=${entryClassPK}&entryClassName=${entryClassName}&action=editTask" ><button>Final Review Task for ${CITY_PROFILE_CITY_NAME} City Profile</button></a>
 				for final Approval.
 				 ]]></template>
 				<template-language>freemarker</template-language>
@@ -297,9 +334,16 @@
 						<name>City Profile Approval Notification</name>
 						<description>City profile approved</description>
 						<template><![CDATA[
-				City Profile for ${CITY_PROFILE_CITY_NAME} was approved.
-				Youcan check it out at
-				<a href="${CITY_PROFILE_SERVER_URL}/-/${CITY_PROFILE_CITY_NAME_LOWERCASE}" ><button>Open ${CITY_PROFILE_CITY_NAME} City Profile</button></a>
+						<p>Dear ${CITY_PROFILE_CONTACT_NAME_SURNAME},</p>
+
+						<p>Your city profile fact sheet is now online! Have a look at it at:</p>
+						<a href="${CITY_PROFILE_SERVER_URL}/-/${CITY_PROFILE_CITY_NAME_LOWERCASE}" ><button>Open ${CITY_PROFILE_CITY_NAME} City Profile</button></a>
+
+						<p>Thank you for your collaboration creating the profile.</p>
+
+						<p>If you are interested in sharing more information, have a look at our work on an online case studies – which have already helped cities being featured in articles and television programmes. You can find more information on the Mayors Adapt website: http://mayors-adapt.eu/materials/case-studies/</p> 
+
+						<p>For any questions, please don't hesitate to contact us at helpdesk@mayors-adapt.eu</p>
 				 ]]></template>
 						<template-language>freemarker</template-language>
 						<notification-type>email</notification-type>

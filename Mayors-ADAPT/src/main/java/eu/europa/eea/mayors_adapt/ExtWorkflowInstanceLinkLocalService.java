@@ -61,25 +61,6 @@ public class ExtWorkflowInstanceLinkLocalService extends
 			SystemException {
 		ServiceContext serviceContext = (ServiceContext) workflowContext
 				.get("serviceContext");
-		Map<String, Serializable> serviceContextMap = serviceContext
-				.getAttributes();
-		for (String key : workflowContext.keySet())
-			_log.info("WorkflowContext: " + key + "->"
-					+ workflowContext.get(key));
-		String emailContact = null;
-		String cityName = null;
-		String serverURL = null;
-		for (String key : serviceContextMap.keySet()) {
-			workflowContext.put(key, serviceContextMap.get(key));
-			if (key.startsWith("Contact"))
-				emailContact = ((String) serviceContextMap.get(key));
-			if (key.startsWith("title"))
-				cityName = ((String) serviceContextMap.get(key));
-			if (key.startsWith("redirect"))
-				serverURL = ((String) serviceContextMap.get(key)).split("\\/group")[0];
-			_log.info("ServiceContext: " + key + "->"
-					+ serviceContextMap.get(key));
-		}
 		if (!WorkflowThreadLocal.isEnabled()) {
 			return;
 		}
@@ -99,6 +80,28 @@ public class ExtWorkflowInstanceLinkLocalService extends
 				.toString();
 
 		if (structureName.equalsIgnoreCase("City Profile")) {
+			String contactEmail = null;
+			String contactNameSurname = null;
+			String cityName = null;
+			String serverURL = null;
+			Map<String, Serializable> serviceContextMap = serviceContext
+					.getAttributes();
+			for (String key : workflowContext.keySet())
+				_log.info("WorkflowContext: " + key + "->"
+						+ workflowContext.get(key));
+			for (String key : serviceContextMap.keySet()) {
+				workflowContext.put(key, serviceContextMap.get(key));
+				if (key.startsWith("contactEmail"))
+					contactEmail = ((String) serviceContextMap.get(key));
+				if (key.startsWith("contactNameSurname"))
+					contactNameSurname = ((String) serviceContextMap.get(key));
+				if (key.startsWith("title"))
+					cityName = ((String) serviceContextMap.get(key));
+				if (key.startsWith("redirect"))
+					serverURL = ((String) serviceContextMap.get(key)).split("\\/group")[0];
+				_log.info("ServiceContext: " + key + "->"
+						+ serviceContextMap.get(key));
+			}
 			workflowDefinitionName = structureName + " Approval";
 			KaleoDefinition kaleoDefinition = KaleoDefinitionLocalServiceUtil
 					.getLatestKaleoDefinition(workflowDefinitionName,
@@ -108,10 +111,19 @@ public class ExtWorkflowInstanceLinkLocalService extends
 			workflowContext.put("CITY_PROFILE_CITY_NAME", cityName);
 			workflowContext.put("CITY_PROFILE_CITY_NAME_LOWERCASE",
 					cityName.toLowerCase());
+			workflowContext.put("CITY_PROFILE_CONTACT_NAME_SURNAME",
+					contactNameSurname);
 			workflowContext.put("CITY_PROFILE_CONTACT_EMAIL_ADDRESS",
-					emailContact);
+					contactEmail);
 			workflowContext.put("CITY_PROFILE_OWNER", userId);
 			workflowContext.put("CITY_PROFILE_SERVER_URL", serverURL);
+			workflowContext.put(
+					WorkflowConstants.CONTEXT_NOTIFICATION_SENDER_ADDRESS,
+					"no-reply@climate-adapt.eea.europa.eu");
+				workflowContext.put(
+					WorkflowConstants.CONTEXT_NOTIFICATION_SENDER_NAME,
+					"Mayors-ADAPT Site Administrator");
+
 		} else {
 			workflowDefinitionLink = workflowHandler.getWorkflowDefinitionLink(
 					companyId, groupId, classPK);
@@ -135,6 +147,7 @@ public class ExtWorkflowInstanceLinkLocalService extends
 				String.valueOf(classPK));
 		workflowContext.put(WorkflowConstants.CONTEXT_ENTRY_TYPE,
 				workflowHandler.getType(LocaleUtil.getDefault()));
+		
 
 		WorkflowInstance workflowInstance = WorkflowInstanceManagerUtil
 				.startWorkflowInstance(companyId, groupId, userId,

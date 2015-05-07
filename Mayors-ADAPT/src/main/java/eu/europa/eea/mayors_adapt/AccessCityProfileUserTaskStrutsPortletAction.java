@@ -44,6 +44,8 @@ public class AccessCityProfileUserTaskStrutsPortletAction extends
 		long companyId = ParamUtil.getLong(request, "companyId", 1L);
 		long refererPlid = ParamUtil.getLong(request, "referrerPlid", 14150L);
 		String version = ParamUtil.get(request, "version", "1.0");
+		if (version.equals("0.0"))
+			version = "1.0";
 		String action = ParamUtil.get(request, "action", "editTask");
 		User user = UserLocalServiceUtil.getUserByScreenName(companyId,
 				"cityprofilecontact");
@@ -71,8 +73,6 @@ public class AccessCityProfileUserTaskStrutsPortletAction extends
 					+ task.getName());
 			workflowTaskId = task.getWorkflowTaskId();
 		}
-
-
 
 		LiferayPortletURL factoryFormURL = PortletURLFactoryUtil.create(
 				request, "15", 10137L, PortletRequest.RENDER_PHASE);
@@ -106,15 +106,25 @@ public class AccessCityProfileUserTaskStrutsPortletAction extends
 						+ "%25252526_151_redirect%2525253Dhttp%252525253A%252525252F%252525252Flocal-climate-adapt.eea.europa.eu%252525252Fgroup%252525252Fcontrol_panel%252525252Fmanage%252525253Fp_p_id%252525253D151%2525252526p_p_lifecycle%252525253D0%2525252526p_p_state%252525253Dmaximized%2525252526p_p_mode%252525253Dview%2525252526refererPlid%252525253D14150%2525252526_151_tabs1%252525253Dsubmissions%25252526_151_struts_action%2525253D%252525252Fworkflow_definitions%252525252Fedit_workflow_instance%252526_151_struts_action%25253D%2525252Fworkflow_definitions%2525252Fview_content%252526_151_type%25253Dcontent%252526_151_assetEntryId%25253D11269542%26_15_referringPortletResource%3D151");
 
 		LiferayPortletURL factoryFinishURL = PortletURLFactoryUtil.create(
-				request, "15", 10137L, PortletRequest.RENDER_PHASE);
+				request, "151", 14150L, PortletRequest.ACTION_PHASE);
 		factoryFinishURL.setWindowState(LiferayWindowState.POP_UP);
 		factoryFinishURL.setPortletMode(PortletMode.VIEW);
-		factoryFinishURL.setDoAsGroupId(18L);
 		factoryFinishURL.setParameter("articleId", articleId);
 		factoryFinishURL.setParameter("workflowInstanceId",
 				String.valueOf(workflowInstanceLink.getWorkflowInstanceId()));
-		factoryFinishURL.setParameter("version", version);
-		factoryFinishURL.setParameter("struts_action", "/journal/edit_article");
+		factoryFinishURL.setParameter("workflowTaskId",
+				String.valueOf(workflowTaskId));
+		factoryFinishURL.setParameter("cmd", "save");
+		factoryFinishURL.setParameter("assigneeUserId",
+				String.valueOf(2));
+		factoryFinishURL.setParameter("transitionName",
+				"Finish");
+		factoryFinishURL.setParameter("struts_action",
+				"/workflow_definitions/edit_workflow_instance_task");
+		factoryFinishURL
+				.setParameter(
+						"redirect",
+						"http://google.com");
 
 		String finishURL = "http://local-climate-adapt.eea.europa.eu/group/control_panel/manage"
 				// + "?p_auth=eVXkiYB3"
@@ -133,17 +143,26 @@ public class AccessCityProfileUserTaskStrutsPortletAction extends
 				+ "%26_151_redirect%3Dhttp%253A%252F%252Flocal-climate-adapt.eea.europa.eu%252Fgroup%252Fcontrol_panel%252Fmanage%253Fp_p_id%253D151%2526p_p_lifecycle%253D0%2526p_p_state%253Dmaximized%2526p_p_mode%253Dview%2526refererPlid%253D14150%2526_151_tabs1%253Dsubmissions%26_151_struts_action%3D%252Fworkflow_definitions%252Fedit_workflow_instance"
 				+ "&_151_struts_action=%2Fworkflow_definitions%2Fedit_workflow_instance_task"
 				+ "&_151_transitionName=finish";
-		finishURL = "http://google.com";
 
-		LiferayPortletURL factoryTaskURL = PortletURLFactoryUtil.create(request,
-				"151", 14150L, PortletRequest.RENDER_PHASE);
+		LiferayPortletURL factoryTaskURL = PortletURLFactoryUtil.create(
+				request, "151", 14150L, PortletRequest.RENDER_PHASE);
 		factoryTaskURL.setWindowState(LiferayWindowState.POP_UP);
 		factoryTaskURL.setPortletMode(PortletMode.VIEW);
-		factoryTaskURL.setLifecycle(PortletRequest.ACTION_PHASE);
 		factoryTaskURL.setParameter("workflowInstanceId",
 				String.valueOf(workflowInstanceLink.getWorkflowInstanceId()));
-		factoryTaskURL.setParameter("redirect",
-				HttpUtil.encodeURL("http://google.com"));
+		factoryTaskURL.setParameter("struts_action",
+				"/workflow_definitions/edit_workflow_instance");
+		//
+//		factoryTaskURL
+//				.setParameter(
+//						"redirect",
+//						HttpUtil.encodeURL("http://local-climate-adapt.eea.europa.eu/group/control_panel/manage?p_p_id=151"
+//								+ "&p_p_lifecycle=0"
+//								+ "&p_p_state=maximized"
+//								+ "&p_p_mode=view"
+//								+ "&refererPlid=14150"
+//								+ "&_151_tabs1=submissions"
+//								+ "&_151_struts_action=%2Fworkflow_definitions%2Fedit_workflow_instance"));
 
 		String taskURL = "http://local-climate-adapt.eea.europa.eu/group/control_panel/manage"
 				+ "?p_p_id=151"
@@ -158,14 +177,18 @@ public class AccessCityProfileUserTaskStrutsPortletAction extends
 		_log.info("recordId: " + entryClassPK);
 		_log.info("articleId: " + articleId);
 		_log.info("taskId: " + workflowTaskId);
-		_log.info("factoryTaskURL: " + factoryTaskURL);
-		_log.info("taskURL: " + taskURL);
 		_log.info("factoryFormURL: " + factoryFormURL);
 		_log.info("formURL: " + formURL);
+		_log.info("factoryTaskURL: " + factoryTaskURL);
+		_log.info("taskURL: " + taskURL);
+		_log.info("factoryFinishURL: " + factoryFinishURL);
+		_log.info("finishURL: " + finishURL);
 		// _log.info("articleId: "+JournalArticleLocalServiceUtil.getLatestArticle(Long.parseLong(entryClassPK)).getArticleId());
 
 		//
 		// request.getParameterMap().put(approveTaskURL, approveTaskURL);
+		// request.getSession().invalidate();
+
 		List<String> actions = Arrays.asList(new String[] { "editForm",
 				"finishTask", "editTask" });
 		switch (actions.indexOf(action)) {
@@ -177,7 +200,7 @@ public class AccessCityProfileUserTaskStrutsPortletAction extends
 					workflowInstanceLink.getGroupId(),
 					workflowInstanceLink.getUserId(), workflowTaskId, "Finish",
 					null, workflowInstance.getWorkflowContext());
-			response.sendRedirect(finishURL);
+			response.sendRedirect(factoryFinishURL.toString());
 			break;
 		case 2:
 			response.sendRedirect(factoryTaskURL.toString());
