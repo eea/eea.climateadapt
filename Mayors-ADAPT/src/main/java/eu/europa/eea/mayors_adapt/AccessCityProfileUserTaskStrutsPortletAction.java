@@ -42,14 +42,16 @@ public class AccessCityProfileUserTaskStrutsPortletAction extends
 				"com.liferay.portlet.journal.model.JournalArticle");
 		long groupId = ParamUtil.getLong(request, "groupId", 18L);
 		long companyId = ParamUtil.getLong(request, "companyId", 1L);
+		long userId = ParamUtil.getLong(request, "userId", UserLocalServiceUtil.getUserByScreenName(companyId,
+				"cityprofilecontact").getUserId());
 		long refererPlid = ParamUtil.getLong(request, "referrerPlid", 14150L);
 		String version = ParamUtil.get(request, "version", "1.0");
 		if (version.equals("0.0"))
 			version = "1.0";
 		String action = ParamUtil.get(request, "action", "editTask");
-		User user = UserLocalServiceUtil.getUserByScreenName(companyId,
-				"cityprofilecontact");
-		_log.info("User: " + user.getScreenName());
+//		User user = UserLocalServiceUtil.getUserByScreenName(companyId,
+//				"cityprofilecontact");
+//		_log.info("User: " + user.getScreenName());
 		String articleId = JournalArticleLocalServiceUtil.getArticle(
 				Long.parseLong(entryClassPK)).getArticleId();
 		WorkflowInstanceLink workflowInstanceLink = WorkflowInstanceLinkLocalServiceUtil
@@ -60,10 +62,10 @@ public class AccessCityProfileUserTaskStrutsPortletAction extends
 						workflowInstanceLink.getWorkflowInstanceId());
 		_log.info("Gathering tasks for workflowInstanceLink: "
 				+ workflowInstanceLink.getWorkflowInstanceId() + " user:"
-				+ user.getUserId() + " companyId:" + companyId);
+				+ userId + " companyId:" + companyId);
 		List<WorkflowTask> tasks = WorkflowTaskManagerUtil
 				.getWorkflowTasksByWorkflowInstance(companyId,
-						user.getUserId(),
+						userId,
 						workflowInstanceLink.getWorkflowInstanceId(), false, 0,
 						1, null);
 		long workflowTaskId = 0;
