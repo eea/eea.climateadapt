@@ -16,9 +16,9 @@
 				<version>${liferay.maven.plugin.version}</version>
 				<configuration>
 					<autoDeployDir>${liferay.auto.deploy.dir}</autoDeployDir>
-					<appServerDeployDir>${liferay.app.server.deploy.dir}</appServerDeployDir>
-					<appServerLibGlobalDir>${liferay.app.server.lib.global.dir}</appServerLibGlobalDir>
-					<appServerPortalDir>${liferay.app.server.portal.dir}</appServerPortalDir>
+					<appServerDeployDir>/Climate_liferay/tomcat-7.0.42/webapps</appServerDeployDir>
+					<appServerLibGlobalDir>/Climate_liferay/tomcat-7.0.42/lib/ext</appServerLibGlobalDir>
+					<appServerPortalDir>/Climate_liferay/tomcat-7.0.42/webapps/ROOT</appServerPortalDir>
 					<liferayVersion>${liferay.version}</liferayVersion>
 					<pluginType>hook</pluginType>
 				</configuration>

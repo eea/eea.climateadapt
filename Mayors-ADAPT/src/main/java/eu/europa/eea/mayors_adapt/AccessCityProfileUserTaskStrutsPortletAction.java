@@ -1,31 +1,33 @@
 package eu.europa.eea.mayors_adapt;
 
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 
 import javax.portlet.PortletMode;
 import javax.portlet.PortletRequest;
-import javax.portlet.WindowState;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.portlet.LiferayPortletURL;
 import com.liferay.portal.kernel.portlet.LiferayWindowState;
 import com.liferay.portal.kernel.struts.BaseStrutsAction;
+import com.liferay.portal.kernel.util.FriendlyURLNormalizerUtil;
 import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
-import com.liferay.portal.kernel.util.PortalLifecycle;
-import com.liferay.portal.kernel.workflow.WorkflowConstants;
 import com.liferay.portal.kernel.workflow.WorkflowInstance;
 import com.liferay.portal.kernel.workflow.WorkflowInstanceManagerUtil;
 import com.liferay.portal.kernel.workflow.WorkflowTask;
 import com.liferay.portal.kernel.workflow.WorkflowTaskManagerUtil;
 import com.liferay.portal.model.User;
 import com.liferay.portal.model.WorkflowInstanceLink;
+import com.liferay.portal.security.auth.Authenticator;
 import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.service.WorkflowInstanceLinkLocalServiceUtil;
+import com.liferay.portal.util.PortletKeys;
 import com.liferay.portlet.PortletURLFactoryUtil;
 import com.liferay.portlet.journal.service.JournalArticleLocalServiceUtil;
 
@@ -37,21 +39,36 @@ public class AccessCityProfileUserTaskStrutsPortletAction extends
 	@Override
 	public String execute(HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
+		request.getSession().invalidate();
 		String entryClassPK = ParamUtil.get(request, "entryClassPK", "0");
 		String entryClassName = ParamUtil.get(request, "entryClassName",
 				"com.liferay.portlet.journal.model.JournalArticle");
 		long groupId = ParamUtil.getLong(request, "groupId", 18L);
 		long companyId = ParamUtil.getLong(request, "companyId", 1L);
-		long userId = ParamUtil.getLong(request, "userId", UserLocalServiceUtil.getUserByScreenName(companyId,
-				"cityprofilecontact").getUserId());
+		long userId = ParamUtil.getLong(request, "userId", UserLocalServiceUtil
+				.getUserByScreenName(companyId, "cityprofilecontact")
+				.getUserId());
 		long refererPlid = ParamUtil.getLong(request, "referrerPlid", 14150L);
 		String version = ParamUtil.get(request, "version", "1.0");
 		if (version.equals("0.0"))
 			version = "1.0";
 		String action = ParamUtil.get(request, "action", "editTask");
-//		User user = UserLocalServiceUtil.getUserByScreenName(companyId,
-//				"cityprofilecontact");
-//		_log.info("User: " + user.getScreenName());
+		HashMap<String, Object> map = new HashMap<String,Object>();
+		int authResult = UserLocalServiceUtil.authenticateByScreenName(
+				companyId, "cityprofilecontact", "cityprofilecontact", null, request.getParameterMap(),
+				map);
+		_log.info("Auth:"+authResult);
+		_log.info(authResult==Authenticator.SUCCESS);
+		_log.info(request.getParameterMap());
+		_log.info(map);
+		_log.info(request.getSession().toString());
+//		 UserLocalServiceUtil.getUserById(Long.parseLong("1222")).getS;
+		User user;
+		HttpSession session = request.getSession();
+		session.setAttribute("j_username", ""+map.get("userId"));
+		session.setAttribute("j_password", "cityprofilecontact");
+		session.setAttribute("j_remoteuser", ""+map.get("userId"));
+
 		String articleId = JournalArticleLocalServiceUtil.getArticle(
 				Long.parseLong(entryClassPK)).getArticleId();
 		WorkflowInstanceLink workflowInstanceLink = WorkflowInstanceLinkLocalServiceUtil
@@ -64,8 +81,7 @@ public class AccessCityProfileUserTaskStrutsPortletAction extends
 				+ workflowInstanceLink.getWorkflowInstanceId() + " user:"
 				+ userId + " companyId:" + companyId);
 		List<WorkflowTask> tasks = WorkflowTaskManagerUtil
-				.getWorkflowTasksByWorkflowInstance(companyId,
-						userId,
+				.getWorkflowTasksByWorkflowInstance(companyId, userId,
 						workflowInstanceLink.getWorkflowInstanceId(), false, 0,
 						1, null);
 		long workflowTaskId = 0;
@@ -75,13 +91,16 @@ public class AccessCityProfileUserTaskStrutsPortletAction extends
 					+ task.getName());
 			workflowTaskId = task.getWorkflowTaskId();
 		}
+		
 
 		LiferayPortletURL factoryFormURL = PortletURLFactoryUtil.create(
 				request, "15", 10137L, PortletRequest.RENDER_PHASE);
 		factoryFormURL.setWindowState(LiferayWindowState.POP_UP);
 		factoryFormURL.setPortletMode(PortletMode.VIEW);
 		factoryFormURL.setDoAsGroupId(18L);
+//		factoryFormURL.setEncrypt(true);
 		factoryFormURL.setParameter("articleId", articleId);
+//		factoryFormURL.addParameterIncludedInPath("articleId");
 		factoryFormURL.setParameter("workflowInstanceId",
 				String.valueOf(workflowInstanceLink.getWorkflowInstanceId()));
 		factoryFormURL.setParameter("version", version);
@@ -143,27 +162,35 @@ public class AccessCityProfileUserTaskStrutsPortletAction extends
 				+ "&_151_transitionName=finish";
 
 		LiferayPortletURL factoryTaskURL = PortletURLFactoryUtil.create(
-				request, "151", 14150L, PortletRequest.RENDER_PHASE);
-		factoryTaskURL.setWindowState(LiferayWindowState.POP_UP);
+				request, PortletKeys.CONTROL_PANEL_MENU, 14150L,
+				PortletRequest.RENDER_PHASE);
+		factoryTaskURL.setWindowState(LiferayWindowState.MAXIMIZED);
 		factoryTaskURL.setPortletMode(PortletMode.VIEW);
 		factoryTaskURL.setParameter("workflowInstanceId",
 				String.valueOf(workflowInstanceLink.getWorkflowInstanceId()));
 		factoryTaskURL.setParameter("struts_action",
 				"/workflow_definitions/edit_workflow_instance");
-		factoryTaskURL.setParameter("tabs1", "submissions");
-		factoryTaskURL.setParameter("redirect",
-				HttpUtil.encodeURL("/newsletter"));
+		// factoryTaskURL.setParameter("tabs1", "submissions");
+		// factoryTaskURL.setParameter("redirect",
+		// "http%3A%2F%2Flocal-climate-adapt.eea.europa.eu%2Fgroup%2Fcontrol_panel%2Fmanage%3F"
+		// + "p_p_id%3D151"
+		// + "%26p_p_lifecycle%3D0"
+		// + "%26p_p_state%3Dmaximized"
+		// + "%26p_p_mode%3Dview"
+		// + "%26refererPlid%3D14150"
+		// + "%26_151_tabs1%3Dsubmissions");
 
 		//
-		// factoryTaskURL
-		// .setParameter(
-		// "redirect",
-		// HttpUtil.encodeURL("http://local-climate-adapt.eea.europa.eu/group/control_panel/manage?p_p_id=151"
-		// + "&p_p_lifecycle=0"
-		// + "&p_p_state=maximized"
-		// + "&p_p_mode=view"
-		// + "&refererPlid=14150"
-		// + "&_151_tabs1=submissions"
+		factoryTaskURL
+				.setParameter(
+						"redirect",
+						HttpUtil.encodeURL(
+								"http://local-climate-adapt.eea.europa.eu/group/control_panel/manage?p_p_id=151"
+										+ "&p_p_lifecycle=0"
+										+ "&p_p_state=maximized"
+										+ "&p_p_mode=view"
+										+ "&refererPlid=14150"
+										+ "&_151_tabs1=submissions", false));
 		// +
 		// "&_151_struts_action=%2Fworkflow_definitions%2Fedit_workflow_instance"));
 
@@ -181,7 +208,8 @@ public class AccessCityProfileUserTaskStrutsPortletAction extends
 				+ "%26p_p_state%3Dmaximized"
 				+ "%26p_p_mode%3Dview"
 				+ "%26refererPlid%3D14150"
-				+ "%26_151_tabs1%3Dsubmissions&_151_struts_action=%2Fworkflow_definitions%2Fedit_workflow_instance";
+				+ "%26_151_tabs1%3Dsubmissions"
+				+ "&_151_struts_action=%2Fworkflow_definitions%2Fedit_workflow_instance";
 
 		_log.info("recordId: " + entryClassPK);
 		_log.info("articleId: " + articleId);
@@ -213,7 +241,7 @@ public class AccessCityProfileUserTaskStrutsPortletAction extends
 					workflowInstanceLink.getGroupId(),
 					workflowInstanceLink.getUserId(), workflowTaskId, "Finish",
 					null, workflowInstance.getWorkflowContext());
-			response.sendRedirect("/newsletter");
+			response.sendRedirect("/mayors-adapt/thanks");
 			break;
 		case 2:
 			response.sendRedirect(factoryTaskURL.toString());

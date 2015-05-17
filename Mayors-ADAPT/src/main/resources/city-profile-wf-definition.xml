@@ -73,7 +73,7 @@
 			<task-timer>
 				<name>City Profile Edition Reminder</name>
 				<delay>
-					<duration>3</duration>
+					<duration>15</duration>
 					<scale>minute</scale>
 				</delay>
 				<timer-actions>
@@ -129,7 +129,7 @@
 			<task-timer>
 				<name>City Profile Edition Expiration Notification</name>
 				<delay>
-					<duration>4</duration>
+					<duration>20</duration>
 					<scale>minute</scale>
 				</delay>
 				<timer-actions>
@@ -195,12 +195,10 @@
 					</reassignments>
 					<timer-notification>
 						<name>City Profile Final Review</name>
-						<description>MA fact sheets: Please review a new city profile</description>
+						<description>MA fact sheets: Please review an expired city profile</description>
 						<template><![CDATA[
 						<p>Representative City Profile editing frame for ${CITY_PROFILE_CITY_NAME} has expired.</p>
-						<p>Please review city profile final approval task:</p>
-						<a href="${CITY_PROFILE_SERVER_URL}/c/portal/accessCityProfileUserTask?companyId=${companyId}&groupId=${groupId}&userId=${userId}&entryClassPK=${entryClassPK}&entryClassName=${entryClassName}&action=editTask" ><button>Final Review Task for ${CITY_PROFILE_CITY_NAME} City Profile</button></a>
-				
+						<p>Please review city profile final approval task at Workflow Submissions</p>
 						]]></template>
 						<template-language>freemarker</template-language>
 						<notification-type>email</notification-type>
@@ -224,12 +222,10 @@
 		<actions>
 			<notification>
 				<name>Administrator Review Notification</name>
-				<description>MA fact sheets: Please review a new city profile</description>
+				<description>MA fact sheets: Please review a finished city profile</description>
 				<template><![CDATA[
 				<p>City Profile for ${CITY_PROFILE_CITY_NAME} was finished by representative.</p>
-				<p>Please review city profile final approval task:</p>
-				<a href="${CITY_PROFILE_SERVER_URL}/c/portal/accessCityProfileUserTask?companyId=${companyId}&groupId=${groupId}&userId=${CITY_PROFILE_OWNER}&entryClassPK=${entryClassPK}&entryClassName=${entryClassName}&action=editTask" ><button>Final Review Task for ${CITY_PROFILE_CITY_NAME} City Profile</button></a>
-				for final Approval.
+				<p>Please review city profile final approval task at Workflow Submissions</p>
 				 ]]></template>
 				<template-language>freemarker</template-language>
 				<notification-type>email</notification-type>
@@ -315,9 +311,12 @@
 							roles = new ArrayList<Role>();
 	
 							String emailAddress = (String)workflowContext.get("CITY_PROFILE_CONTACT_EMAIL_ADDRESS");
-							user = UserLocalServiceUtil.getUserByScreenName(companyId, "cityprofilecontact");
-							user.setEmailAddress(emailAddress);
-							user.persist();
+							user = UserLocalServiceUtil.getUserByEmailAddress(companyId, emailAddress);
+							if (user==null){
+								user = UserLocalServiceUtil.getUserByScreenName(companyId, "cityprofilecontact");
+								user.setEmailAddress(emailAddress);
+								user.persist();
+							}
 								]]> </script>
 				<script-language>groovy</script-language>
 			</scripted-assignment>
@@ -337,7 +336,7 @@
 						<p>Dear ${CITY_PROFILE_CONTACT_NAME_SURNAME},</p>
 
 						<p>Your city profile fact sheet is now online! Have a look at it at:</p>
-						<a href="${CITY_PROFILE_SERVER_URL}/-/${CITY_PROFILE_CITY_NAME_LOWERCASE}" ><button>Open ${CITY_PROFILE_CITY_NAME} City Profile</button></a>
+						<a href="${CITY_PROFILE_SERVER_URL}/-/${CITY_PROFILE_CITY_NAME_LOWERCASE}" ><button>Open <b>${CITY_PROFILE_CITY_NAME}</b> City Profile</button></a>
 
 						<p>Thank you for your collaboration creating the profile.</p>
 
