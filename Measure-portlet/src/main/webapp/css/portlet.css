@@ -16,3 +16,16 @@
 .shared_form_city {
 	width: 480px !important;
 }
+
+#_measureportlet_WAR_Measureportlet_measuresSearchContainer table td{
+	word-wrap:break-word;	
+}
+
+#_measureportlet_WAR_Measureportlet_measuresSearchContainer_col-source, .sourceClass{
+	white-space: normal !important;   
+    white-space: -moz-pre-wrap;     
+    white-space: -pre-wrap;        
+    white-space: -o-pre-wrap;     
+    word-wrap: break-word; 
+	max-width:260px;
+}

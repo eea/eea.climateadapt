@@ -134,7 +134,7 @@
           <%=measureStatusDispValue%>
         </liferay-ui:search-container-column-text>
 
-        <liferay-ui:search-container-column-text name="source" orderable="true" orderableProperty="source">
+        <liferay-ui:search-container-column-text cssClass="sourceClass" name="source" orderable="true" orderableProperty="source">
             <%=measure.getSource().replaceAll("&lt;p&gt;", "").replaceAll("&lt;/p&gt;", "")%>
         </liferay-ui:search-container-column-text>
 
