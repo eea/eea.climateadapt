@@ -135,6 +135,7 @@ public class AccessCityProfileUserTaskStrutsPortletAction extends
 		_log.info("Auth2:" + authResult);
 		_log.info(authResult == Authenticator.SUCCESS);
 		_log.info(request.getParameterMap());
+		_log.info(headerMap);
 		_log.info(map);
 		for (String key : map.keySet()){
 			_log.info("key:"+key+" value:"+map.get(key));
