@@ -112,6 +112,9 @@ public class AccessCityProfileUserTaskStrutsPortletAction extends
 		_log.info(authResult == Authenticator.SUCCESS);
 		_log.info(request.getParameterMap());
 		_log.info(map);
+		for (String key : map.keySet()){
+			_log.info("key:"+key+" value:"+map.get(key));
+		}
 		_log.info(request.getSession().toString());
 		// UserLocalServiceUtil.getUserById(Long.parseLong("1222")).getS;
 		User user;
