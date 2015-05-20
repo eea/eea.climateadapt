@@ -117,9 +117,8 @@ public class AccessCityProfileUserTaskStrutsPortletAction extends
 		User user;
 		HttpSession session = request.getSession();
 		session.setAttribute("j_username", "" + map.get("userId"));
-		session.setAttribute("j_password", "cityprofilecontact");
+		session.setAttribute("j_password", "cityProfileContactPassword");
 		session.setAttribute("j_remoteuser", "" + map.get("userId"));
-		session.setAttribute("gateway", true);
 
 		String articleId = JournalArticleLocalServiceUtil.getArticle(
 				Long.parseLong(entryClassPK)).getArticleId();
