@@ -191,7 +191,7 @@ public class AccessCityProfileUserTaskStrutsPortletAction extends
 
 		LiferayPortletURL factoryFormURL = PortletURLFactoryUtil.create(
 				request, "15", 10137L, PortletRequest.RENDER_PHASE);
-		factoryFormURL.setWindowState(LiferayWindowState.MAXIMIZED);
+		factoryFormURL.setWindowState(LiferayWindowState.POP_UP);
 		factoryFormURL.setPortletMode(PortletMode.VIEW);
 		factoryFormURL.setDoAsGroupId(18L);
 		// factoryFormURL.setEncrypt(true);
