@@ -139,19 +139,17 @@ public class AccessCityProfileUserTaskStrutsPortletAction extends
 			headerMap.put(name, headers.toArray(new String[headers.size()]));
 		}
 
-		String login = "vazqugus";
-		String password = "Gu5j4v4Z!";
-		String uId = "11255336";
-		String encPwd = "{SHA}Ns6sZQHUgo0GVvfpF3rz0kmrqxw=";
-		int authResult = UserLocalServiceUtil.authenticateByScreenName(
-				companyId, login,
-				password, headerMap,
-				request.getParameterMap(), map);
+//		String login = "vazqugus";
+		String login = "cityprofilecontact";
+//		int authResult = UserLocalServiceUtil.authenticateByScreenName(
+//				companyId, login,
+//				password, headerMap,
+//				request.getParameterMap(), map);
 
 //		LoginUtil.login(request, response, login, password, false, null);
 
-		_log.info("Auth2:" + authResult);
-		_log.info(authResult == Authenticator.SUCCESS);
+//		_log.info("Auth2:" + authResult);
+//		_log.info(authResult == Authenticator.SUCCESS);
 		_log.info(request.getParameterMap());
 		_log.info(headerMap);
 		_log.info(map);
