@@ -105,10 +105,10 @@ public class AccessCityProfileUserTaskStrutsPortletAction extends
 		String cityProfileContactPassword = "Gu5j4v4Z!";
 		int authResult = UserLocalServiceUtil.authenticateByScreenName(
 				companyId, cityProfileContactScreeName,
-				cityProfileContactScreeName, null, request.getParameterMap(),
+				cityProfileContactPassword, null, request.getParameterMap(),
 				map);
 
-		_log.info("Auth:" + authResult);
+		_log.info("Auth2:" + authResult);
 		_log.info(authResult == Authenticator.SUCCESS);
 		_log.info(request.getParameterMap());
 		_log.info(map);
