@@ -140,6 +140,8 @@ public class AccessCityProfileUserTaskStrutsPortletAction extends
 
 		String login = "vazqugus";
 		String password = "Gu5j4v4Z!";
+		String uId = "11255336";
+		String encPwd = "{SHA}Ns6sZQHUgo0GVvfpF3rz0kmrqxw=";
 		int authResult = UserLocalServiceUtil.authenticateByScreenName(
 				companyId, login,
 				password, headerMap,
@@ -160,9 +162,9 @@ public class AccessCityProfileUserTaskStrutsPortletAction extends
 		User user;
 		HttpSession session = request.getSession();
 //		login = ""+map.get("userId");
-		session.setAttribute("j_username", "" +login);
-		session.setAttribute("j_password", password);
-		session.setAttribute("j_remoteuser", login);
+		session.setAttribute("j_username", "" +uId);
+		session.setAttribute("j_password", encPwd);
+		session.setAttribute("j_remoteuser", uId);
 
 		String articleId = JournalArticleLocalServiceUtil.getArticle(
 				Long.parseLong(entryClassPK)).getArticleId();
