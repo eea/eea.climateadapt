@@ -60,19 +60,19 @@ public class AccessCityProfileUserTaskStrutsPortletAction extends
 
 		request.getSession().invalidate();
 		
-		Enumeration paras = request.getParameterNames();
+		 paras = request.getParameterNames();
 		while (paras.hasMoreElements()) {
 //			String attrName = (String) attrs.nextElement();
 //			String attrValue = (String) request.getAttribute(attrName);
 			_log.info("Param: "+paras.nextElement());
 		}
-		Enumeration attrs = request.getAttributeNames();
+		 attrs = request.getAttributeNames();
 		while (attrs.hasMoreElements()) {
 //			String attrName = (String) attrs.nextElement();
 //			String attrValue = (String) request.getAttribute(attrName);
 			_log.info("Attr: "+attrs.nextElement());
 		}		request.getSession().invalidate();
-		Enumeration heads = request.getHeaderNames();
+		 heads = request.getHeaderNames();
 		while (heads.hasMoreElements()) {
 //			String attrName = (String) attrs.nextElement();
 //			String attrValue = (String) request.getAttribute(attrName);
