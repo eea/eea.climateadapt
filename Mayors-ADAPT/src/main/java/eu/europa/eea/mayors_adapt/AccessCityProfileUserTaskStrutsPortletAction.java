@@ -32,7 +32,6 @@ import com.liferay.portal.service.WorkflowInstanceLinkLocalServiceUtil;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portlet.PortletURLFactoryUtil;
 import com.liferay.portlet.journal.service.JournalArticleLocalServiceUtil;
-import com.liferay.portlet.login.util.LoginUtil;
 
 public class AccessCityProfileUserTaskStrutsPortletAction extends
 		BaseStrutsAction {
@@ -136,7 +135,7 @@ public class AccessCityProfileUserTaskStrutsPortletAction extends
 				password, headerMap,
 				request.getParameterMap(), map);
 
-		LoginUtil.login(request, response, login, password, false, null);
+//		LoginUtil.login(request, response, login, password, false, null);
 
 		_log.info("Auth2:" + authResult);
 		_log.info(authResult == Authenticator.SUCCESS);
@@ -149,10 +148,10 @@ public class AccessCityProfileUserTaskStrutsPortletAction extends
 		_log.info(request.getSession().toString());
 		// UserLocalServiceUtil.getUserById(Long.parseLong("1222")).getS;
 		User user;
-//		HttpSession session = request.getSession();
-//		session.setAttribute("j_username", "" + map.get("userId"));
-//		session.setAttribute("j_password", "cityProfileContactPassword");
-//		session.setAttribute("j_remoteuser", "" + map.get("userId"));
+		HttpSession session = request.getSession();
+		session.setAttribute("j_username", "" + map.get("userId"));
+		session.setAttribute("j_password", "cityProfileContactPassword");
+		session.setAttribute("j_remoteuser", "" + map.get("userId"));
 
 		String articleId = JournalArticleLocalServiceUtil.getArticle(
 				Long.parseLong(entryClassPK)).getArticleId();
