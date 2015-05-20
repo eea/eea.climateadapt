@@ -29,6 +29,7 @@ public class TestStrutsAction extends BaseStrutsAction {
 	@Override
 	public String execute(HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
+		request.getSession().invalidate();
 		String entryClassPK = ParamUtil.get(request, "entryClassPK", "0");
 		String entryClassName = ParamUtil.get(request, "entryClassName",
 				"com.liferay.portlet.journal.model.JournalArticle");
