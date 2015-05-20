@@ -469,14 +469,14 @@ if (user.getScreenName().equals("cityprofilecontact"))
 
 					if ((article != null) && Validator.isNotNull(article.getStructureId()) && Validator.isNotNull(content)) {
 						ddmFields = JournalConverterUtil.getDDMFields(ddmStructure, content);
-						System.out.println("Size:"+ddmFields.getNames().size());
+						/**System.out.println("Size:"+ddmFields.getNames().size());
 						for (com.liferay.portlet.dynamicdatamapping.storage.Field field: ddmFields){
 							if (field.getName().startsWith("contact")){
 								ddmFields.remove(field.getName());
 								System.out.println("Field:"+field.getName());
 							}
 						}
-						System.out.println("Size:"+ddmFields.getNames().size());
+						System.out.println("Size:"+ddmFields.getNames().size());*/
 					}
 
 					String requestedLanguageId = defaultLanguageId;
