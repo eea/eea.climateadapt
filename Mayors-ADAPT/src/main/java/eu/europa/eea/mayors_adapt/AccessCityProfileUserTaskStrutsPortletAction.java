@@ -1,6 +1,7 @@
 package eu.europa.eea.mayors_adapt;
 
 import java.util.Arrays;
+import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.List;
 
@@ -15,7 +16,6 @@ import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.portlet.LiferayPortletURL;
 import com.liferay.portal.kernel.portlet.LiferayWindowState;
 import com.liferay.portal.kernel.struts.BaseStrutsAction;
-import com.liferay.portal.kernel.util.FriendlyURLNormalizerUtil;
 import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.workflow.WorkflowInstance;
@@ -39,7 +39,46 @@ public class AccessCityProfileUserTaskStrutsPortletAction extends
 	@Override
 	public String execute(HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
+		Enumeration paras = request.getParameterNames();
+		while (paras.hasMoreElements()) {
+//			String attrName = (String) attrs.nextElement();
+//			String attrValue = (String) request.getAttribute(attrName);
+			_log.info("Param: "+paras.nextElement());
+		}
+		Enumeration attrs = request.getAttributeNames();
+		while (attrs.hasMoreElements()) {
+//			String attrName = (String) attrs.nextElement();
+//			String attrValue = (String) request.getAttribute(attrName);
+			_log.info("Attr: "+attrs.nextElement());
+		}		request.getSession().invalidate();
+		Enumeration heads = request.getHeaderNames();
+		while (heads.hasMoreElements()) {
+//			String attrName = (String) attrs.nextElement();
+//			String attrValue = (String) request.getAttribute(attrName);
+			_log.info("Head: "+heads.nextElement());
+		}		request.getSession().invalidate();
+
 		request.getSession().invalidate();
+		
+		Enumeration paras = request.getParameterNames();
+		while (paras.hasMoreElements()) {
+//			String attrName = (String) attrs.nextElement();
+//			String attrValue = (String) request.getAttribute(attrName);
+			_log.info("Param: "+paras.nextElement());
+		}
+		Enumeration attrs = request.getAttributeNames();
+		while (attrs.hasMoreElements()) {
+//			String attrName = (String) attrs.nextElement();
+//			String attrValue = (String) request.getAttribute(attrName);
+			_log.info("Attr: "+attrs.nextElement());
+		}		request.getSession().invalidate();
+		Enumeration heads = request.getHeaderNames();
+		while (heads.hasMoreElements()) {
+//			String attrName = (String) attrs.nextElement();
+//			String attrValue = (String) request.getAttribute(attrName);
+			_log.info("Head: "+heads.nextElement());
+		}		request.getSession().invalidate();
+
 		String entryClassPK = ParamUtil.get(request, "entryClassPK", "0");
 		String entryClassName = ParamUtil.get(request, "entryClassName",
 				"com.liferay.portlet.journal.model.JournalArticle");
