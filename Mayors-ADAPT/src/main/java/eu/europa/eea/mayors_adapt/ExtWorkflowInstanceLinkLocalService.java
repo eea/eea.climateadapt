@@ -87,7 +87,7 @@ public class ExtWorkflowInstanceLinkLocalService extends
 			Map<String, Serializable> serviceContextMap = serviceContext
 					.getAttributes();
 			for (String key : workflowContext.keySet())
-				_log.info("WorkflowContext: " + key + "->"
+				_log.debug("WorkflowContext: " + key + "->"
 						+ workflowContext.get(key));
 			for (String key : serviceContextMap.keySet()) {
 				workflowContext.put(key, serviceContextMap.get(key));
@@ -99,7 +99,7 @@ public class ExtWorkflowInstanceLinkLocalService extends
 					cityName = ((String) serviceContextMap.get(key));
 				if (key.startsWith("redirect"))
 					serverURL = ((String) serviceContextMap.get(key)).split("\\/group")[0];
-				_log.info("ServiceContext: " + key + "->"
+				_log.debug("ServiceContext: " + key + "->"
 						+ serviceContextMap.get(key));
 			}
 			workflowDefinitionName = structureName + " Approval";
@@ -153,6 +153,9 @@ public class ExtWorkflowInstanceLinkLocalService extends
 				.startWorkflowInstance(companyId, groupId, userId,
 						workflowDefinitionName, workflowDefinitionVersion,
 						null, workflowContext);
+
+		_log.info("Workflow instance started: "
+				+ workflowInstance);
 
 		addWorkflowInstanceLink(userId, companyId, groupId, className, classPK,
 				workflowInstance.getWorkflowInstanceId());

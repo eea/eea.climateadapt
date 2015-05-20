@@ -2,7 +2,7 @@
 <!DOCTYPE hook PUBLIC "-//Liferay//DTD Hook 6.2.0//EN" "http://www.liferay.com/dtd/liferay-hook_6_2_0.dtd">
 
 <hook>
-	<portal-properties>portal.properties</portal-properties>
+	<portal-properties>portal-mayors_adapt.properties</portal-properties>
 	<custom-jsp-dir>/META-INF/custom_jsps</custom-jsp-dir>
 	<service>
 		<service-type>
@@ -16,6 +16,18 @@
 		<struts-action-path>/portal/accessCityProfileUserTask</struts-action-path>
 		<struts-action-impl>
 			eu.europa.eea.mayors_adapt.AccessCityProfileUserTaskStrutsPortletAction
+		</struts-action-impl>
+	</struts-action>
+	<struts-action>
+		<struts-action-path>/portal/cityprofilequery</struts-action-path>
+		<struts-action-impl>
+			eu.europa.eea.mayors_adapt.CityProfileQueryStrutsPortletAction
+		</struts-action-impl>
+	</struts-action>
+	<struts-action>
+		<struts-action-path>/portal/test</struts-action-path>
+		<struts-action-impl>
+			eu.europa.eea.mayors_adapt.TestStrutsAction
 		</struts-action-impl>
 	</struts-action>
 </hook>

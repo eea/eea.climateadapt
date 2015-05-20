@@ -57,11 +57,11 @@ public class AccessCityProfileUserTaskStrutsPortletAction extends
 		int authResult = UserLocalServiceUtil.authenticateByScreenName(
 				companyId, "cityprofilecontact", "cityprofilecontact", null, request.getParameterMap(),
 				map);
-		_log.info("Auth:"+authResult);
-		_log.info(authResult==Authenticator.SUCCESS);
-		_log.info(request.getParameterMap());
-		_log.info(map);
-		_log.info(request.getSession().toString());
+		_log.debug("Auth:"+authResult);
+		_log.debug(authResult==Authenticator.SUCCESS);
+		_log.debug(request.getParameterMap());
+		_log.debug(map);
+		_log.debug(request.getSession().toString());
 //		 UserLocalServiceUtil.getUserById(Long.parseLong("1222")).getS;
 		User user;
 		HttpSession session = request.getSession();
@@ -87,7 +87,7 @@ public class AccessCityProfileUserTaskStrutsPortletAction extends
 		long workflowTaskId = 0;
 
 		for (WorkflowTask task : tasks) {
-			_log.info("Task id: " + task.getWorkflowTaskId() + " "
+			_log.debug("Task id: " + task.getWorkflowTaskId() + " "
 					+ task.getName());
 			workflowTaskId = task.getWorkflowTaskId();
 		}
@@ -95,7 +95,7 @@ public class AccessCityProfileUserTaskStrutsPortletAction extends
 
 		LiferayPortletURL factoryFormURL = PortletURLFactoryUtil.create(
 				request, "15", 10137L, PortletRequest.RENDER_PHASE);
-		factoryFormURL.setWindowState(LiferayWindowState.POP_UP);
+		factoryFormURL.setWindowState(LiferayWindowState.MAXIMIZED);
 		factoryFormURL.setPortletMode(PortletMode.VIEW);
 		factoryFormURL.setDoAsGroupId(18L);
 //		factoryFormURL.setEncrypt(true);
@@ -211,16 +211,16 @@ public class AccessCityProfileUserTaskStrutsPortletAction extends
 				+ "%26_151_tabs1%3Dsubmissions"
 				+ "&_151_struts_action=%2Fworkflow_definitions%2Fedit_workflow_instance";
 
-		_log.info("recordId: " + entryClassPK);
-		_log.info("articleId: " + articleId);
-		_log.info("taskId: " + workflowTaskId);
-		_log.info("factoryFormURL: " + factoryFormURL);
-		_log.info("formURL: " + formURL);
-		_log.info("factoryTaskURL: " + factoryTaskURL);
-		_log.info("taskURL: " + taskURL);
-		_log.info("factoryFinishURL: " + factoryFinishURL);
-		_log.info("finishURL: " + finishURL);
-		// _log.info("articleId: "+JournalArticleLocalServiceUtil.getLatestArticle(Long.parseLong(entryClassPK)).getArticleId());
+		_log.debug("recordId: " + entryClassPK);
+		_log.debug("articleId: " + articleId);
+		_log.debug("taskId: " + workflowTaskId);
+		_log.debug("factoryFormURL: " + factoryFormURL);
+		_log.debug("formURL: " + formURL);
+		_log.debug("factoryTaskURL: " + factoryTaskURL);
+		_log.debug("taskURL: " + taskURL);
+		_log.debug("factoryFinishURL: " + factoryFinishURL);
+		_log.debug("finishURL: " + finishURL);
+		// _log.debug("articleId: "+JournalArticleLocalServiceUtil.getLatestArticle(Long.parseLong(entryClassPK)).getArticleId());
 
 		//
 		// request.getParameterMap().put(approveTaskURL, approveTaskURL);
