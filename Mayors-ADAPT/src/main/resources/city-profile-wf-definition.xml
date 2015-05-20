@@ -58,8 +58,10 @@
 	
 							String emailAddress = (String)workflowContext.get("CITY_PROFILE_CONTACT_EMAIL_ADDRESS");
 							
-							user = UserLocalServiceUtil.getUserByEmailAddress(companyId, emailAddress);
-							if (user==null){
+							try {
+								user = UserLocalServiceUtil.getUserByEmailAddress(companyId, emailAddress);
+							}
+							catch (com.liferay.portal.NoSuchUserException e) {
 								user = UserLocalServiceUtil.getUserByScreenName(companyId, "cityprofilecontact");
 								user.setEmailAddress(emailAddress);
 								user.persist();
@@ -90,12 +92,14 @@
 	
 							String emailAddress = (String)workflowContext.get("CITY_PROFILE_CONTACT_EMAIL_ADDRESS");
 							user = UserLocalServiceUtil.getUserByEmailAddress(companyId, emailAddress);
-							if (user==null){
+							try {
+								user = UserLocalServiceUtil.getUserByEmailAddress(companyId, emailAddress);
+							}
+							catch (com.liferay.portal.NoSuchUserException e) {
 								user = UserLocalServiceUtil.getUserByScreenName(companyId, "cityprofilecontact");
 								user.setEmailAddress(emailAddress);
 								user.persist();
 							}
-		
 								]]> </script>
 							<script-language>groovy</script-language>
 						</scripted-assignment>
@@ -144,7 +148,10 @@
 							roles = new ArrayList<Role>();
 							String emailAddress = (String)workflowContext.get("CITY_PROFILE_CONTACT_EMAIL_ADDRESS");
 							user = UserLocalServiceUtil.getUserByEmailAddress(companyId, emailAddress);
-							if (user==null){
+							try {
+								user = UserLocalServiceUtil.getUserByEmailAddress(companyId, emailAddress);
+							}
+							catch (com.liferay.portal.NoSuchUserException e) {
 								user = UserLocalServiceUtil.getUserByScreenName(companyId, "cityprofilecontact");
 								user.setEmailAddress(emailAddress);
 								user.persist();
@@ -312,7 +319,10 @@
 	
 							String emailAddress = (String)workflowContext.get("CITY_PROFILE_CONTACT_EMAIL_ADDRESS");
 							user = UserLocalServiceUtil.getUserByEmailAddress(companyId, emailAddress);
-							if (user==null){
+							try {
+								user = UserLocalServiceUtil.getUserByEmailAddress(companyId, emailAddress);
+							}
+							catch (com.liferay.portal.NoSuchUserException e) {
 								user = UserLocalServiceUtil.getUserByScreenName(companyId, "cityprofilecontact");
 								user.setEmailAddress(emailAddress);
 								user.persist();
