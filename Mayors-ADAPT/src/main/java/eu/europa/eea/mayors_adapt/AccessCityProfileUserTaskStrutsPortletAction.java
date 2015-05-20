@@ -53,8 +53,14 @@ public class AccessCityProfileUserTaskStrutsPortletAction extends
 			// String attrValue = (String) request.getAttribute(attrName);
 			_log.info("Attr: " + attrs.nextElement());
 		}
-		Enumeration<String> enu1 = request.getHeaderNames();
+		Enumeration sAttrs = request.getSession().getAttributeNames();
+		while (sAttrs.hasMoreElements()) {
+			String sAttrName = (String) sAttrs.nextElement();
+			 String sAttrValue = (String) request.getSession().getAttribute(sAttrName);
+			_log.info("SAttr: " + sAttrName +" value: "+sAttrValue);
+		}
 
+		Enumeration<String> enu1 = request.getHeaderNames();
 		while (enu1.hasMoreElements()) {
 			String name = enu1.nextElement();
 			Enumeration<String> enu2 = request.getHeaders(name);
@@ -86,6 +92,12 @@ public class AccessCityProfileUserTaskStrutsPortletAction extends
 				String value = enu2.nextElement();
 				_log.info("Header: " + name + " value:" + value);
 			}
+		}
+		 sAttrs = request.getSession().getAttributeNames();
+		while (sAttrs.hasMoreElements()) {
+			String sAttrName = (String) sAttrs.nextElement();
+			 String sAttrValue = (String) request.getSession().getAttribute(sAttrName);
+			_log.info("SAttr: " + sAttrName +" value: "+sAttrValue);
 		}
 		
 
