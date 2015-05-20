@@ -41,43 +41,47 @@ public class AccessCityProfileUserTaskStrutsPortletAction extends
 			HttpServletResponse response) throws Exception {
 		Enumeration paras = request.getParameterNames();
 		while (paras.hasMoreElements()) {
-//			String attrName = (String) attrs.nextElement();
-//			String attrValue = (String) request.getAttribute(attrName);
-			_log.info("Param: "+paras.nextElement());
+			// String attrName = (String) attrs.nextElement();
+			// String attrValue = (String) request.getAttribute(attrName);
+			_log.info("Param: " + paras.nextElement());
 		}
 		Enumeration attrs = request.getAttributeNames();
 		while (attrs.hasMoreElements()) {
-//			String attrName = (String) attrs.nextElement();
-//			String attrValue = (String) request.getAttribute(attrName);
-			_log.info("Attr: "+attrs.nextElement());
-		}		request.getSession().invalidate();
+			// String attrName = (String) attrs.nextElement();
+			// String attrValue = (String) request.getAttribute(attrName);
+			_log.info("Attr: " + attrs.nextElement());
+		}
+		request.getSession().invalidate();
 		Enumeration heads = request.getHeaderNames();
 		while (heads.hasMoreElements()) {
-//			String attrName = (String) attrs.nextElement();
-//			String attrValue = (String) request.getAttribute(attrName);
-			_log.info("Head: "+heads.nextElement());
-		}		request.getSession().invalidate();
+			// String attrName = (String) attrs.nextElement();
+			// String attrValue = (String) request.getAttribute(attrName);
+			_log.info("Head: " + heads.nextElement());
+		}
+		request.getSession().invalidate();
 
 		request.getSession().invalidate();
-		
-		 paras = request.getParameterNames();
+
+		paras = request.getParameterNames();
 		while (paras.hasMoreElements()) {
-//			String attrName = (String) attrs.nextElement();
-//			String attrValue = (String) request.getAttribute(attrName);
-			_log.info("Param: "+paras.nextElement());
+			// String attrName = (String) attrs.nextElement();
+			// String attrValue = (String) request.getAttribute(attrName);
+			_log.info("Param: " + paras.nextElement());
 		}
-		 attrs = request.getAttributeNames();
+		attrs = request.getAttributeNames();
 		while (attrs.hasMoreElements()) {
-//			String attrName = (String) attrs.nextElement();
-//			String attrValue = (String) request.getAttribute(attrName);
-			_log.info("Attr: "+attrs.nextElement());
-		}		request.getSession().invalidate();
-		 heads = request.getHeaderNames();
+			// String attrName = (String) attrs.nextElement();
+			// String attrValue = (String) request.getAttribute(attrName);
+			_log.info("Attr: " + attrs.nextElement());
+		}
+		request.getSession().invalidate();
+		heads = request.getHeaderNames();
 		while (heads.hasMoreElements()) {
-//			String attrName = (String) attrs.nextElement();
-//			String attrValue = (String) request.getAttribute(attrName);
-			_log.info("Head: "+heads.nextElement());
-		}		request.getSession().invalidate();
+			// String attrName = (String) attrs.nextElement();
+			// String attrValue = (String) request.getAttribute(attrName);
+			_log.info("Head: " + heads.nextElement());
+		}
+		request.getSession().invalidate();
 
 		String entryClassPK = ParamUtil.get(request, "entryClassPK", "0");
 		String entryClassName = ParamUtil.get(request, "entryClassName",
@@ -92,21 +96,29 @@ public class AccessCityProfileUserTaskStrutsPortletAction extends
 		if (version.equals("0.0"))
 			version = "1.0";
 		String action = ParamUtil.get(request, "action", "editTask");
-		HashMap<String, Object> map = new HashMap<String,Object>();
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		// int authResult = UserLocalServiceUtil.authenticateByScreenName(
+		// companyId, "cityprofilecontact", "cityprofilecontact", null,
+		// request.getParameterMap(),
+		// map);
+		String cityProfileContactScreeName = "vazqugus";
+		String cityProfileContactPassword = "Gu5j4v4Z!";
 		int authResult = UserLocalServiceUtil.authenticateByScreenName(
-				companyId, "cityprofilecontact", "cityprofilecontact", null, request.getParameterMap(),
+				companyId, cityProfileContactScreeName,
+				cityProfileContactScreeName, null, request.getParameterMap(),
 				map);
-		_log.info("Auth:"+authResult);
-		_log.info(authResult==Authenticator.SUCCESS);
+
+		_log.info("Auth:" + authResult);
+		_log.info(authResult == Authenticator.SUCCESS);
 		_log.info(request.getParameterMap());
 		_log.info(map);
 		_log.info(request.getSession().toString());
-//		 UserLocalServiceUtil.getUserById(Long.parseLong("1222")).getS;
+		// UserLocalServiceUtil.getUserById(Long.parseLong("1222")).getS;
 		User user;
 		HttpSession session = request.getSession();
-		session.setAttribute("j_username", ""+map.get("userId"));
+		session.setAttribute("j_username", "" + map.get("userId"));
 		session.setAttribute("j_password", "cityprofilecontact");
-		session.setAttribute("j_remoteuser", ""+map.get("userId"));
+		session.setAttribute("j_remoteuser", "" + map.get("userId"));
 		session.setAttribute("gateway", true);
 
 		String articleId = JournalArticleLocalServiceUtil.getArticle(
@@ -131,16 +143,15 @@ public class AccessCityProfileUserTaskStrutsPortletAction extends
 					+ task.getName());
 			workflowTaskId = task.getWorkflowTaskId();
 		}
-		
 
 		LiferayPortletURL factoryFormURL = PortletURLFactoryUtil.create(
 				request, "15", 10137L, PortletRequest.RENDER_PHASE);
 		factoryFormURL.setWindowState(LiferayWindowState.MAXIMIZED);
 		factoryFormURL.setPortletMode(PortletMode.VIEW);
 		factoryFormURL.setDoAsGroupId(18L);
-//		factoryFormURL.setEncrypt(true);
+		// factoryFormURL.setEncrypt(true);
 		factoryFormURL.setParameter("articleId", articleId);
-//		factoryFormURL.addParameterIncludedInPath("articleId");
+		// factoryFormURL.addParameterIncludedInPath("articleId");
 		factoryFormURL.setParameter("workflowInstanceId",
 				String.valueOf(workflowInstanceLink.getWorkflowInstanceId()));
 		factoryFormURL.setParameter("version", version);
