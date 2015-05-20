@@ -106,7 +106,7 @@ public class AccessCityProfileUserTaskStrutsPortletAction extends
 		// companyId, "cityprofilecontact", "cityprofilecontact", null,
 		// request.getParameterMap(),
 		// map);
-
+ 
 		Map<String, String[]> headerMap = new HashMap<String, String[]>();
 
 		 enu1 = request.getHeaderNames();
