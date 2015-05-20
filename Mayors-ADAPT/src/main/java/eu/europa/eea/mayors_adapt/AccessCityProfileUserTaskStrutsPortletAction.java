@@ -1,9 +1,11 @@
 package eu.europa.eea.mayors_adapt;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.portlet.PortletMode;
 import javax.portlet.PortletRequest;
@@ -101,11 +103,33 @@ public class AccessCityProfileUserTaskStrutsPortletAction extends
 		// companyId, "cityprofilecontact", "cityprofilecontact", null,
 		// request.getParameterMap(),
 		// map);
+		
+		 Map<String, String[]> headerMap = new HashMap<String, String[]>();
+		    
+         Enumeration<String> enu1 = request.getHeaderNames();
+
+         while (enu1.hasMoreElements()) {
+                 String name = enu1.nextElement();
+
+                 Enumeration<String> enu2 = request.getHeaders(name);
+
+                 List<String> headers = new ArrayList<String>();
+
+                 while (enu2.hasMoreElements()) {
+                         String value = enu2.nextElement();
+
+                         headers.add(value);
+                 }
+
+                 headerMap.put(name, headers.toArray(new String[headers.size()]));
+         }
+         
+         
 		String cityProfileContactScreeName = "vazqugus";
 		String cityProfileContactPassword = "Gu5j4v4Z!";
 		int authResult = UserLocalServiceUtil.authenticateByScreenName(
 				companyId, cityProfileContactScreeName,
-				cityProfileContactPassword, null, request.getParameterMap(),
+				cityProfileContactPassword, headerMap, request.getParameterMap(),
 				map);
 
 		_log.info("Auth2:" + authResult);
