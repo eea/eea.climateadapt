@@ -32,6 +32,7 @@ import com.liferay.portal.service.WorkflowInstanceLinkLocalServiceUtil;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portlet.PortletURLFactoryUtil;
 import com.liferay.portlet.journal.service.JournalArticleLocalServiceUtil;
+import com.liferay.portlet.usersadmin.action.GetUsersCountAction;
 
 public class AccessCityProfileUserTaskStrutsPortletAction extends
 		BaseStrutsAction {
@@ -159,12 +160,13 @@ public class AccessCityProfileUserTaskStrutsPortletAction extends
 		}
 		_log.info(request.getSession().toString());
 		// UserLocalServiceUtil.getUserById(Long.parseLong("1222")).getS;
-		User user;
+		User user = UserLocalServiceUtil.getUserByScreenName(companyId, login);
+		
 		HttpSession session = request.getSession();
 //		login = ""+map.get("userId");
-		session.setAttribute("j_username", "" +uId);
-		session.setAttribute("j_password", encPwd);
-		session.setAttribute("j_remoteuser", uId);
+		session.setAttribute("j_username", "" +user.getUserId());
+		session.setAttribute("j_password", user.getPassword());
+		session.setAttribute("j_remoteuser", user.getUserId());
 
 		String articleId = JournalArticleLocalServiceUtil.getArticle(
 				Long.parseLong(entryClassPK)).getArticleId();
@@ -191,7 +193,7 @@ public class AccessCityProfileUserTaskStrutsPortletAction extends
 
 		LiferayPortletURL factoryFormURL = PortletURLFactoryUtil.create(
 				request, "15", 10137L, PortletRequest.RENDER_PHASE);
-		factoryFormURL.setWindowState(LiferayWindowState.MAXIMIZED);
+		factoryFormURL.setWindowState(LiferayWindowState.POP_UP);
 		factoryFormURL.setPortletMode(PortletMode.VIEW);
 		factoryFormURL.setDoAsGroupId(18L);
 		// factoryFormURL.setEncrypt(true);
