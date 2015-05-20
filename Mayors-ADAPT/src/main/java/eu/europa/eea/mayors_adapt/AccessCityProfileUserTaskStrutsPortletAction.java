@@ -53,14 +53,16 @@ public class AccessCityProfileUserTaskStrutsPortletAction extends
 			// String attrValue = (String) request.getAttribute(attrName);
 			_log.info("Attr: " + attrs.nextElement());
 		}
-		request.getSession().invalidate();
-		Enumeration heads = request.getHeaderNames();
-		while (heads.hasMoreElements()) {
-			// String attrName = (String) attrs.nextElement();
-			// String attrValue = (String) request.getAttribute(attrName);
-			_log.info("Head: " + heads.nextElement());
+		Enumeration<String> enu1 = request.getHeaderNames();
+
+		while (enu1.hasMoreElements()) {
+			String name = enu1.nextElement();
+			Enumeration<String> enu2 = request.getHeaders(name);
+			while (enu2.hasMoreElements()) {
+				String value = enu2.nextElement();
+				_log.info("Header: " + name + " value:" + value);
+			}
 		}
-		request.getSession().invalidate();
 
 		request.getSession().invalidate();
 
@@ -77,13 +79,14 @@ public class AccessCityProfileUserTaskStrutsPortletAction extends
 			_log.info("Attr: " + attrs.nextElement());
 		}
 		request.getSession().invalidate();
-		heads = request.getHeaderNames();
-		while (heads.hasMoreElements()) {
-			// String attrName = (String) attrs.nextElement();
-			// String attrValue = (String) request.getAttribute(attrName);
-			_log.info("Head: " + heads.nextElement());
+		while (enu1.hasMoreElements()) {
+			String name = enu1.nextElement();
+			Enumeration<String> enu2 = request.getHeaders(name);
+			while (enu2.hasMoreElements()) {
+				String value = enu2.nextElement();
+				_log.info("Header: " + name + " value:" + value);
+			}
 		}
-		request.getSession().invalidate();
 
 		String entryClassPK = ParamUtil.get(request, "entryClassPK", "0");
 		String entryClassName = ParamUtil.get(request, "entryClassName",
@@ -103,42 +106,41 @@ public class AccessCityProfileUserTaskStrutsPortletAction extends
 		// companyId, "cityprofilecontact", "cityprofilecontact", null,
 		// request.getParameterMap(),
 		// map);
-		
-		 Map<String, String[]> headerMap = new HashMap<String, String[]>();
-		    
-         Enumeration<String> enu1 = request.getHeaderNames();
 
-         while (enu1.hasMoreElements()) {
-                 String name = enu1.nextElement();
+		Map<String, String[]> headerMap = new HashMap<String, String[]>();
 
-                 Enumeration<String> enu2 = request.getHeaders(name);
+		 enu1 = request.getHeaderNames();
 
-                 List<String> headers = new ArrayList<String>();
+		while (enu1.hasMoreElements()) {
+			String name = enu1.nextElement();
 
-                 while (enu2.hasMoreElements()) {
-                         String value = enu2.nextElement();
+			Enumeration<String> enu2 = request.getHeaders(name);
 
-                         headers.add(value);
-                 }
+			List<String> headers = new ArrayList<String>();
 
-                 headerMap.put(name, headers.toArray(new String[headers.size()]));
-         }
-         
-         
+			while (enu2.hasMoreElements()) {
+				String value = enu2.nextElement();
+
+				headers.add(value);
+			}
+
+			headerMap.put(name, headers.toArray(new String[headers.size()]));
+		}
+
 		String cityProfileContactScreeName = "vazqugus";
 		String cityProfileContactPassword = "Gu5j4v4Z!";
 		int authResult = UserLocalServiceUtil.authenticateByScreenName(
 				companyId, cityProfileContactScreeName,
-				cityProfileContactPassword, headerMap, request.getParameterMap(),
-				map);
+				cityProfileContactPassword, headerMap,
+				request.getParameterMap(), map);
 
 		_log.info("Auth2:" + authResult);
 		_log.info(authResult == Authenticator.SUCCESS);
 		_log.info(request.getParameterMap());
 		_log.info(headerMap);
 		_log.info(map);
-		for (String key : map.keySet()){
-			_log.info("key:"+key+" value:"+map.get(key));
+		for (String key : map.keySet()) {
+			_log.info("key:" + key + " value:" + map.get(key));
 		}
 		_log.info(request.getSession().toString());
 		// UserLocalServiceUtil.getUserById(Long.parseLong("1222")).getS;
