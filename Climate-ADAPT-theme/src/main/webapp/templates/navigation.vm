@@ -1,0 +1,40 @@
+<nav class="sort-pages" id="navigation">
+	<ul id="topnav">
+		#foreach ($nav_item in $nav_items)
+			#if ($nav_item.isSelected())
+				<li class="selected">
+			#else
+				<li>
+			#end
+
+				<a href="$nav_item.getURL()" $nav_item.getTarget()><span>$nav_item.icon() $htmlUtil.escape($nav_item.getName())</span></a>
+
+				<!--
+				#if ($nav_item.hasChildren())
+					<ul id="subnav">
+						#foreach ($nav_child in $nav_item.getChildren())
+							#if ($nav_child.isSelected())
+								<li class="selected">
+							#else
+								<li>
+							#end
+
+								<a href="$nav_child.getURL()" $nav_child.getTarget()>$nav_child.getName()</a>
+							</li>
+						#end
+					</ul>
+				#end 
+				-->
+			</li>
+		#end
+	</ul>
+</nav>
+	
+<nav id="sec-menu">
+	#set ($VOID = $velocityPortletPreferences.setValue('display-style', '4'))
+	#set ($VOID = $velocityPortletPreferences.setValue('portlet-setup-show-borders', 'false'))
+	#set ($instanceId = '9VDq')
+	#set ($myPortletId = "71_INSTANCE_${instanceId}")
+	$taglibLiferay.runtime($myPortletId, '', $velocityPortletPreferences.toString())
+	#set ($VOID = $velocityPortletPreferences.reset())
+</nav>

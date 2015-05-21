@@ -5,13 +5,9 @@
 <html class="$root_css_class" dir="#language ("lang.dir")" lang="$w3c_language_id">
 
 <head>
-
 	<title>$the_title - $company_name</title>
 
 	<meta content="initial-scale=1.0, width=device-width" name="viewport" />
-	<link type="text/css" rel="stylesheet" href="/ace-theme/css/jquery.qtip.min.css" />
-	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js"></script>
-	<script type="text/javascript" src="/ace-theme/js/jquery.qtip.min.js"></script>
 
 	$theme.include($top_head_include)
 
@@ -27,11 +23,10 @@
 <a href="#main-content" id="skip-to-content">#language ("skip-to-content")</a>
 
 $theme.include($body_top_include)
+
 #if($is_signed_in)
 						#dockbar()
 #end
-
-
 
 <div class="container-fluid" id="wrapper">
 	<header id="banner" role="banner">
@@ -41,24 +36,7 @@ $theme.include($body_top_include)
 					<span>$company_name</span>
 				</a>
 			</h1>	
-    	<div id="heading">
-	     <div id="header-menu">
-                         <ul>
-					#if(!$is_signed_in)
-						<li id="signin"><a href="$sign_in_url" id="sign-in" rel="nofollow">$sign_in_text</a></li>
-					#end
-					#if($is_signed_in)
-						<li id="maintain"><a href="/maintain">Maintain</a></li>
-					#end
-                    <li id="glossary"><a href="/glossary">Glossary</a></li>
-					<li id="contact"><a href="/contact">Contact</a></li>
-					<li id="sitemap"><a href="/sitemap">Sitemap</a></li>
-                    <li id="legal-notice"><a href="http://ec.europa.eu/geninfo/legal_notices_en.htm">Legal notice</a></li>
-					<li id="about"><a href="/about">About</a></li>
-                                        <li id="help"><a href="/help">Help</a></li>
-                       </ul>
-            </div>
-            
+             
                 <div id="searchbox">
             	<p id="search-title">Search the website</p>
             	   <span>$theme.journalContentSearch()</span>
@@ -67,7 +45,6 @@ $theme.include($body_top_include)
 			<h2 class="page-title">
 				<span>$the_title</span>
 			</h2>
-		</div>
          </hgroup>
 		#if ($has_navigation || $is_signed_in)
 			#parse ("$full_templates_path/navigation.vm")
@@ -75,6 +52,7 @@ $theme.include($body_top_include)
 	</header>
 
 	<div id="content">
+		<nav id="breadcrumbs">#breadcrumbs()</nav>
 
 		#if ($selectable)
 			$theme.include($content_include)
@@ -87,26 +65,32 @@ $theme.include($body_top_include)
 		#end
 	</div>
 
-
-#if ($theme.getSetting("footer-type") == "ace")
 	<footer id="footer" role="contentinfo">
-		        <div class="container">
-                        <a href="http://ec.europa.eu/" target="_blank"><img src="/ace-theme/images/logo_eu.jpg" alt="European Commission logo" style="margin-bottom: 3px" /><div>European Commission</div></a>
+	  	<hgroup>
+		     <div id="header-menu">
+                <ul>
+					#if(!$is_signed_in)
+						<li id="signin"><a href="$sign_in_url" id="sign-in" rel="nofollow">$sign_in_text</a></li>
+					#end
+					#if($is_signed_in)
+						<li id="maintain"><a href="/maintain">Maintain</a></li>
+					#end
+                    <li id="glossary"><a href="/glossary">Glossary</a></li>
+					<li id="contact"><a href="/contact">Contact</a></li>
+					<li id="sitemap"><a href="/sitemap">Sitemap</a></li>
+                    <li id="legal-notice"><a href="http://ec.europa.eu/geninfo/legal_notices_en.htm">Legal notice</a></li>
+					<li id="about"><a href="/about">About</a></li>
+                                        <li id="help"><a href="/help">Help</a></li>
+               </ul>
+        	</div>
+            
+        <div class="container">
+            <a href="http://ec.europa.eu/" target="_blank"><img src="/ace-theme/images/logo_eu.jpg" alt="European Commission logo" style="margin-bottom: 3px" /><div>European Commission</div></a>
 			<a href="http://www.eea.europa.eu/" target="_blank"><img src="/ace-theme/images/logo_eea.png" style="width: 52px; margin-top: 4px" alt="EEA logo" /><div>European Environment Agency</div></a>
-                        </div>
-	</footer>
-#else
-	<footer id="footer" role="contentinfo">
-		        <div style="margin-left:70px;margin-top:15px;display:block;text-align:center">
-			<a href="http://www.baltadapt.eu/" target="_blank"><img src="/ace-theme/images/logo_balt_adapt.jpg" alt="Baltadapt logo" style="margin-bottom: 3px" /></a>
-                        <a href="http://ec.europa.eu/" target="_blank"><img src="/ace-theme/images/logo_eu.jpg" alt="European Commission logo" style="margin-bottom: 3px" /><div>European Commission</div></a>
-			<a href="http://www.eea.europa.eu/" target="_blank"><img src="/ace-theme/images/logo_eea.png" style="width: 52px; margin-top: 4px" alt="EEA logo" /><div>European Environment Agency</div></a>
-			<a href="http://eu.baltic.net/" target="_blank"><img src="/ace-theme/images/logo_baltic_sea_programme.png" alt="Baltic Sea Region Programme logo" style="margin-bottom: 3px" /></a>
-                        </div>
-	</footer>
-#end
+        </div>
+    	</hgroup>
 
-
+	</footer>
 </div>
 
 $theme.include($body_bottom_include)

@@ -41,7 +41,7 @@ $theme.include($body_top_include)
 					<span>$company_name</span>
 				</a>
 			</h1>	
-    	<div id="heading">
+    	           <div id="heading">
 	     <div id="header-menu">
                          <ul>
 					#if(!$is_signed_in)

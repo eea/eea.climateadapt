@@ -178,7 +178,7 @@
 					</timer-notification>
 				</timer-actions>
 			</task-timer>
-			<task-timer>
+			<!-- task-timer>
 				<name>City Profile Edition Expiration Manager Notificatio</name>
 				<delay>
 					<duration>20</duration>
@@ -214,7 +214,7 @@
 						</recipients>
 					</timer-notification>
 				</timer-actions>
-			</task-timer>
+			</task-timer-->
 		</task-timers>
 		<transitions>
 			<transition>
@@ -231,7 +231,7 @@
 				<name>Administrator Review Notification</name>
 				<description>MA fact sheets: Please review a finished city profile</description>
 				<template><![CDATA[
-				<p>City Profile for ${CITY_PROFILE_CITY_NAME} was finished by representative.</p>
+				<p>City Profile for ${CITY_PROFILE_CITY_NAME} was finished by representative (or expired).</p>
 				<p>Please review city profile final approval task at Workflow Submissions</p>
 				 ]]></template>
 				<template-language>freemarker</template-language>
