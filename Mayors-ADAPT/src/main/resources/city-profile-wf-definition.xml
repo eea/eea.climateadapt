@@ -131,7 +131,7 @@
 				</timer-actions>
 			</task-timer>
 			<task-timer>
-				<name>City Profile Edition Expiration Notification</name>
+				<name>City Profile Edition Expiration Contact Notification</name>
 				<delay>
 					<duration>20</duration>
 					<scale>minute</scale>
@@ -166,7 +166,7 @@
 						<template><![CDATA[
 						<p>Dear ${CITY_PROFILE_CONTACT_NAME_SURNAME},</p>
 						
-						<p>Thank you for filling in your city profile fact sheet. The time for editing has ended and the Mayors Adapt team will now review your input. We will get in touch with you in case any relevant information is still missing. Once we have jointly finalised the fact sheet and you have approved the content, we will publish it online.</p>
+						<p>Thank you for filling in your city profile fact sheet for ${CITY_PROFILE_CITY_NAME}. The time for editing has ended and the Mayors Adapt team will now review your input. We will get in touch with you in case any relevant information is still missing. Once we have jointly finalised the fact sheet and you have approved the content, we will publish it online.</p>
 						
 						<p>For any questions, please don't hesitate to contact us at helpdesk@mayors-adapt.eu</p>
 						]]> </template>
@@ -179,9 +179,9 @@
 				</timer-actions>
 			</task-timer>
 			<task-timer>
-				<name>City Profile Edition Expiration</name>
+				<name>City Profile Edition Expiration Manager Notificatio</name>
 				<delay>
-					<duration>4</duration>
+					<duration>20</duration>
 					<scale>minute</scale>
 				</delay>
 				<timer-actions>

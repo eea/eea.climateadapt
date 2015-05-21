@@ -141,7 +141,7 @@ request.setAttribute("edit_article.jsp-toLanguageId", toLanguageId);
 String[][] categorySections;
 
 if (user.getScreenName().equals("cityprofilecontact"))
-	categorySections = new String[][] { new String[] {"content","abstract"}};
+	categorySections = new String[][] {mainSections};
 else 
 	categorySections = new String[][] { mainSections };
 

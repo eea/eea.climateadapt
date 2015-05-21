@@ -86,9 +86,6 @@ public class ExtWorkflowInstanceLinkLocalService extends
 			String serverURL = null;
 			Map<String, Serializable> serviceContextMap = serviceContext
 					.getAttributes();
-			for (String key : workflowContext.keySet())
-				_log.info("WorkflowContext: " + key + "->"
-						+ workflowContext.get(key));
 			for (String key : serviceContextMap.keySet()) {
 				workflowContext.put(key, serviceContextMap.get(key));
 				if (key.startsWith("contactEmail"))
@@ -123,7 +120,9 @@ public class ExtWorkflowInstanceLinkLocalService extends
 				workflowContext.put(
 					WorkflowConstants.CONTEXT_NOTIFICATION_SENDER_NAME,
 					"Mayors-ADAPT Site Administrator");
-
+				for (String key : workflowContext.keySet())
+					_log.info("WorkflowContext: " + key + "->"
+							+ workflowContext.get(key));
 		} else {
 			workflowDefinitionLink = workflowHandler.getWorkflowDefinitionLink(
 					companyId, groupId, classPK);
