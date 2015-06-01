@@ -35,7 +35,7 @@
 		            </ul>
 		        </li>
 		        <li>
-		            <a href="/tools/urban-adaptation/climatic-threats/droughts" id="drought" class="menu-link">Water scarity and droughts</a>
+		            <a href="/tools/urban-adaptation/climatic-threats/droughts" id="drought" class="menu-link">Water scarcity and droughts</a>
 		            <ul class="menu-urban-sub">
 		                <li><a href="/tools/urban-adaptation/climatic-threats/droughts/exposure">Exposure</a></li>
 		                <li><a href="/tools/urban-adaptation/climatic-threats/droughts/sensitivity">Sensitivity</a></li>
