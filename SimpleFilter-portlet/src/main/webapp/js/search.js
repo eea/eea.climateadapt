@@ -194,7 +194,7 @@ function showDataInfoPanel() {
  *
  */
 function clearSearchForm() {
-    $("input[name=anyOfThese]").val("");
+    $("textarea[name=anyOfThese]").val("");
 
     var radiosConditionAdaptationSector = $("input[name=conditionAdaptationSector]:radio");
     radiosConditionAdaptationSector.each(function() {

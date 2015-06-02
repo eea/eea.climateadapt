@@ -174,9 +174,9 @@
 		<b>source</b><br />
 		<input name="source" type="text" size="65" maxlength="75" value="<%= project == null ? "" : project.getSource() %>"><br /><br />
 
-		<b>special tagging</b><br />
-		<input name="specialtagging" type="text" size="65" maxlength="75" value="<%= project == null ? "" : project.getSpecialtagging() %>"><br /><br />
-
+		<b>special tagging</b><br />		
+		<textarea name="specialtagging" rows=5 cols=100><%= project == null ? "" : project.getSpecialtagging() %></textarea>
+		
 		<b>Geographic characterisation</b><br />
 		<input name="spatiallayer" type="text" size="65" maxlength="75" value='<%= project == null ? "" : project.getSpatiallayer() %>'>
 

@@ -212,8 +212,8 @@ String isFeaturedItem = renderRequest.getPreferences().getValue(Constants.USERIS
                <h2><liferay-ui:message key="acesearch-section-header1" /></h2>
 
                 <div class="row">
-                    <label for="anyOfThese" class="input"><liferay-ui:message key="acesearch-lbl-allwords" /></label>
-                    <input type="text" class="text" name="anyOfThese" id="anyOfThese" value="<%= anyOfThese %>"/>
+                    <label for="anyOfThese" class="input"><liferay-ui:message key="acesearch-lbl-allwords" /></label>                    
+                    <textarea name="anyOfThese" id="anyOfThese" rows=5 cols=100><%= anyOfThese %></textarea>
                 </div>
             </div>
 

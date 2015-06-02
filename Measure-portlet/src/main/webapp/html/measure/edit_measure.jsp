@@ -219,9 +219,8 @@
 		<b>Source</b><br />
 		<input name="source" type="text" size="65" maxlength="75" value='<%= measure == null ? "" : measure.getSource() %>'><br /><br />
 
-		<b>special tagging</b><br />
-		<input name="specialtagging" type="text" size="65" maxlength="75" value="<%= measure == null ? "" : measure.getSpecialtagging() %>"><br /><br />
-
+		<b>special tagging</b><br />		
+		<textarea name="specialtagging" rows=5 cols=100><%= measure == null ? "" : measure.getSpecialtagging() %></textarea>
 		<b>Geographic characterisation</b><br />
 		<input name="spatiallayer" type="text" size="65" maxlength="75" value='<%= measure == null ? "" : measure.getSpatiallayer() %>'><br /><br />
 

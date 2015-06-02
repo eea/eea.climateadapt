@@ -581,9 +581,8 @@
 										%>
 
 											 <br/>
-	                                         <p><em>Special Tagging</em></p>
-	                                      	 <input name="specialtagging" type="text" size="65" maxlength="75" value="<%= specialTagging %>"><br /><br />
-
+	                                         <p><em>Special Tagging</em></p>	                                      	 
+											 <textarea name="specialtagging" cols="40" rows="10" class="WYSIWYG" data-maxlength="5000"><%= specialTagging %></textarea><br /><br />	
 	                                         <% if (measure != null && measure.getControlstatus() >= 0) { %>
 	                                            <p><em><b>Submitted by:&nbsp;&nbsp;</b></em><%=measure.getModerator()%></p>
 	                                         <% } %>
@@ -660,7 +659,7 @@
 										<p><%=localDescription%></p>
 
 										<% if (measure != null && measure.getDescription() != null) { %>
-										       <textarea id="<portlet:namespace />descriptionField" cols="40" rows="10" class="WYSIWYG" name="description" data-maxlength="5000"><%= HtmlUtil.escapeAttribute(measure.getDescription()) %></textarea>
+										       <textarea id="<portlet:namespace />descriptionField" cols="40" rows="10" class="WYSIWYG" name="description" data-maxlength="1000"><%= HtmlUtil.escapeAttribute(measure.getDescription()) %></textarea>
 										<%} else {
 											// preserve the render parameter already sent
 											//String renderDescription = renderRequest.getParameter("description");
@@ -671,7 +670,7 @@
 											}
 										%>
 											<c:if test="${renderDescription ne null}">
-											  <textarea id="<portlet:namespace />descriptionField" cols="40" rows="10" class="WYSIWYG" name="description" data-maxlength="5000">${renderDescription}</textarea>
+											  <textarea id="<portlet:namespace />descriptionField" cols="40" rows="10" class="WYSIWYG" name="description" data-maxlength="1000">${renderDescription}</textarea>
 											</c:if>
 
 											<c:if test="${renderDescription eq null}">
