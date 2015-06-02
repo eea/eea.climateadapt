@@ -142,9 +142,9 @@
 
 		<aui:input name="source" maxlength="75" />
 
-		<b>special tagging</b><br />
-		<input name="specialtagging" type="text" size="65" maxlength="75" value='<%= aceitem == null ? "" : aceitem.getSpecialtagging() %>'><br /><br />
-
+		<b>special tagging</b><br />		
+		<textarea name="specialtagging" rows=5 cols=100><%= aceitem == null ? "" : aceitem.getSpecialtagging() %></textarea><br /><br />
+		
 		<b>Geographic characterisation</b><br />
 		<input name="spatialLayer" type="text" size="65" maxlength="75" value='<%= aceitem == null ? "" : aceitem.getSpatialLayer() %>'><br /><br />
 	 </div>

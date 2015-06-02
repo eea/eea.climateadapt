@@ -407,9 +407,8 @@
 										%>
 											 
 											 <br/>
-	                                         <p><em>Special Tagging</em></p>
-	                                      	 <input name="specialtagging" type="text" size="65" maxlength="75" value="<%= specialTagging %>"><br /><br />
-	                                      	 
+	                                         <p><em>Special Tagging</em></p>	                                      	 
+	                                      	 <textarea name="specialtagging" cols="40" rows="10" class="WYSIWYG" data-maxlength="5000"><%= specialTagging%></textarea>
 	                                         <% if (aceitem != null && aceitem.getControlstatus() >= 0) { %>
 	                                            <p><em><b>Submitted by:&nbsp;&nbsp;</b></em><%=aceitem.getModerator()%></p>
 	                                         <% } %>
