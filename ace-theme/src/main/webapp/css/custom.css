@@ -1339,11 +1339,12 @@ ul#subnav li a:hover {
 
 /* Changes for Safari 7 on MAC */
 .mac #ast-menu li ul li {
-    margin: 0 0 10px 0;
+    margin-bottom: 10px;
 }
 
 .mac #ast-menu li ul li ul {
-    margin: 10px 0 20px 0;
+    margin-top: 10px;
+    margin-bottom: 20px;
 }
 
 /**** 
