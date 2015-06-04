@@ -1325,7 +1325,7 @@ ul#subnav li a:hover {
 	}	
 }
 
-/* Chnages for IE10 + */
+/* Changes for IE10 + */
 @media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {  
 	
 	#ast-menu li ul li {
@@ -1337,6 +1337,14 @@ ul#subnav li a:hover {
 	}	
 }
 
+/* Changes for Safari 7 on MAC */
+.mac #ast-menu li ul li {
+    margin: 0 0 10px 0;
+}
+
+.mac #ast-menu li ul li ul {
+    margin: 10px 0 20px 0;
+}
 
 /**** 
 	Frontpage specific styles 
