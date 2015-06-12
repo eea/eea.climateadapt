@@ -6,8 +6,8 @@
 	version="2.0">
 
 	<portlet>
-		<portlet-name>new</portlet-name>
-		<display-name>New</display-name>
+		<portlet-name>Mayors-ADAPT-portlet</portlet-name>
+		<display-name>Mayors-ADAPT-portlet</display-name>
 		<portlet-class>eu.europa.eea.mayors_adapt.NewPortlet</portlet-class>
 		<init-param>
 			<name>view-template</name>
