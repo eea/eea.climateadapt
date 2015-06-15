@@ -29,6 +29,7 @@ import org.apache.commons.lang.StringUtils;
 
 import com.liferay.counter.service.CounterLocalServiceUtil;
 import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.repository.model.FileEntry;
 import com.liferay.portal.kernel.repository.model.Folder;
 import com.liferay.portal.kernel.servlet.SessionErrors;
@@ -379,8 +380,7 @@ public abstract class MeasureUpdateHelperForSharedMeasure extends MVCPortlet {
         ServiceContext serviceContext = ServiceContextFactory.getInstance(DLFileEntry.class.getName(), request);
         String sourceFileName = uploadRequest.getFileName("primePhotoName");
         String primePhotoId = uploadRequest.getParameter("primephoto");
-
-        //System.out.println("sourceFileName is " + sourceFileName);
+                                    
         //System.out.println("sourceFileName is not null" + Validator.isNotNull(sourceFileName));
         if (Validator.isNotNull(sourceFileName) && (sourceFileName.endsWith(".png")
                 || sourceFileName.endsWith(".jpg")
@@ -395,34 +395,30 @@ public abstract class MeasureUpdateHelperForSharedMeasure extends MVCPortlet {
 
             //System.out.println("Inside control");
             if (Validator.isNotNull(primePhotoId)) {
-                //System.out.println("primePhotoId is " + primePhotoId);
+                
                 image = DLAppLocalServiceUtil.getFileEntry(Long.parseLong(primePhotoId));
                 long folderId = image.getFolderId();
-                //System.out.println("image name is " + image.getNameWithExtension());
-                if (! image.getTitle().equalsIgnoreCase(sourceFileName)) {
-                    try {
-                        //looks like image replaced add the image now
-                        File f = uploadRequest.getFile("primePhotoName");
-                        DLAppLocalServiceUtil.addFileEntry(themeDisplay.getUserId(), image.getRepositoryId(), folderId, sourceFileName, "image/" + extension, null, "", "", f, serviceContext);
-
-                        String primaryKey = String.valueOf(image.getPrimaryKey());
-                        addPermissions(themeDisplay, primaryKey, image.getClass().getName());
-                        measure.setPrimephoto(String.valueOf(image.getFileEntryId()));
-                        request.setAttribute("primePhotoId", String.valueOf(image.getFileEntryId()));
-
-//                  } catch (DuplicateImageNameException e)
-//                    {
-//                        //get the image id
-//                        //System.out.println("Duplicate image - getting image id");
-//                        image = IGImageServiceUtil.getImageByFolderIdAndNameWithExtension(themeDisplay.getScopeGroupId(), folderId, sourceFileName);
-//                        measure.setPrimephoto(String.valueOf(image.getImageId()));
-//                    }
-                    } catch (Exception e) {
+                
+              //https://taskman.eionet.europa.eu/issues/23180
+                boolean primePhotoToBeUpdated = checkIfUploadedPrimePhotoIsNew(sourceFileName, primePhotoId);  
+                
+                //if primePhoto needs update, a new DLFileEntry must be created
+                if (primePhotoToBeUpdated) {
+                	try {
+	                	File f = uploadRequest.getFile("primePhotoName");
+	                	image = DLAppLocalServiceUtil.addFileEntry(themeDisplay.getUserId(), image.getRepositoryId(), folderId, sourceFileName, "image/" + extension, null, "", "", f, serviceContext);
+	                	String primaryKey = String.valueOf(image.getPrimaryKey());
+	                	
+	                    //addPermissions(themeDisplay, primaryKey, image.getClass().getName());
+	                    addPermissions(themeDisplay, primaryKey, DLFileEntry.class.getName());
+	                    measure.setPrimephoto(String.valueOf(image.getFileEntryId()));
+	                    request.setAttribute("primePhotoId", String.valueOf(image.getFileEntryId()));
+                	} catch (Exception e) {
                         e.printStackTrace();
                         throw e;
-                    }
+                    }    
                 }
-
+                
             } else {
                 Folder imageFolder = null;
                 try {
@@ -433,7 +429,6 @@ public abstract class MeasureUpdateHelperForSharedMeasure extends MVCPortlet {
                     String folder = "case".concat("-").concat(String.valueOf(measure.getName().trim().replace(' ', '-')));
                     folder = escapeName(folder);
                     //System.out.println("folder name is " + folder);
-
 
                     try {
                         imageFolder = DLAppLocalServiceUtil.getFolder(themeDisplay.getScopeGroupId(), rootFolder.getFolderId(), folder);
@@ -446,7 +441,9 @@ public abstract class MeasureUpdateHelperForSharedMeasure extends MVCPortlet {
                     }
 
                     image = DLAppLocalServiceUtil.addFileEntry(themeDisplay.getUserId(), themeDisplay.getScopeGroupId(), imageFolder.getFolderId(), sourceFileName, "image/" + extension, null, "", "", f, serviceContext);
+                    
                     String primaryKey = String.valueOf(image.getPrimaryKey());
+                    
                     addPermissions(themeDisplay, primaryKey, DLFileEntry.class.getName());
                     measure.setPrimephoto(String.valueOf(image.getFileEntryId()));
                     //request.setAttribute("primePhotoId", String.valueOf(image.getImageId()));
@@ -872,7 +869,34 @@ public abstract class MeasureUpdateHelperForSharedMeasure extends MVCPortlet {
         }
 
     }
-
+    
+    /**
+     * https://taskman.eionet.europa.eu/issues/23180
+     * @param sourceFileName
+     * @param primePhotoId
+     * @return
+     */
+    private boolean checkIfUploadedPrimePhotoIsNew(String sourceFileName, String primePhotoId) {
+    	String imageTitle = "";    	    	
+    	sourceFileName = sourceFileName.substring(0, sourceFileName.lastIndexOf("."));    	
+    	try {
+    		DLFileEntry image = DLFileEntryLocalServiceUtil.getFileEntry(Long.parseLong(primePhotoId));
+    		imageTitle = image.getTitle();
+    		
+    	} catch (PortalException pe) {
+    		pe.printStackTrace();
+    		return false;
+    	} catch (SystemException se) {
+    		se.printStackTrace();
+    		return false;
+    	}
+    	
+    	if (!imageTitle.isEmpty() && (!imageTitle.equals(sourceFileName))) {
+    		return true;
+    	}
+    	
+    	return false;
+    }
 
     private FileEntry insertFile(UploadPortletRequest uploadRequest, int counter, Folder docFolder, String sup_doc_name,
             String sup_doc_description, ThemeDisplay themeDisplay, ServiceContext serviceContext) throws Exception {
@@ -946,6 +970,7 @@ public abstract class MeasureUpdateHelperForSharedMeasure extends MVCPortlet {
         FileEntry image = null;
         // upload the image
         try {
+        	System.out.println("trying to insert image: "+sup_photo_name);
             File f = uploadRequest.getFile("supphotofiles" + counter);
             //System.out.println("inside method insertImage");
             String fileName = uploadRequest.getFileName("supphotofiles" + counter);
@@ -958,6 +983,7 @@ public abstract class MeasureUpdateHelperForSharedMeasure extends MVCPortlet {
 
 
             String primaryKey = String.valueOf(image.getPrimaryKey());
+            System.out.println("Before calling add permissions for illustration images");
             addPermissions(themeDisplay, primaryKey, DLFileEntry.class.getName());
         }
         catch (DuplicateFileException e) {
@@ -1231,12 +1257,13 @@ public abstract class MeasureUpdateHelperForSharedMeasure extends MVCPortlet {
     }
 
     private void addPermissions(ThemeDisplay themeDisplay, String primaryKey, String resource) throws Exception {
-        Role roleUser = RoleLocalServiceUtil.getRole(themeDisplay.getCompanyId(), RoleConstants.SITE_MEMBER);
-        long roleId = roleUser.getRoleId();
+        System.out.println("inside add Permissions");
+    	Role roleUser = RoleLocalServiceUtil.getRole(themeDisplay.getCompanyId(), RoleConstants.SITE_ADMINISTRATOR);
+        System.out.println("Role: "+roleUser.getName());
+    	long roleId = roleUser.getRoleId();
 
         Role roleGuest = RoleLocalServiceUtil.getRole(themeDisplay.getCompanyId(), RoleConstants.GUEST);
         long guestRoleId = roleGuest.getRoleId();
-
 
         String actionIds[] = {"VIEW"};
 
@@ -1244,19 +1271,22 @@ public abstract class MeasureUpdateHelperForSharedMeasure extends MVCPortlet {
 
         try {
             resourcePermission = ResourcePermissionLocalServiceUtil.getResourcePermission(themeDisplay.getCompanyId(), resource, ResourceConstants.SCOPE_INDIVIDUAL, String.valueOf(primaryKey), roleId);
+            System.out.println("resource permission:" +resourcePermission.getName());
             ResourceAction resourceAction = ResourceActionLocalServiceUtil.getResourceAction(resource, ActionKeys.VIEW);
             if (Validator.isNotNull(resourcePermission) && !ResourcePermissionLocalServiceUtil.hasActionId(resourcePermission, resourceAction)) {
                 resourcePermission.setActionIds(resourcePermission.getActionIds() + resourceAction.getBitwiseValue());
                 ResourcePermissionLocalServiceUtil.updateResourcePermission(resourcePermission);
             }
         } catch (com.liferay.portal.NoSuchResourcePermissionException e) {
+        	System.out.println("resource permission exception: " +e.toString());
+        	System.out.println("Resource:"+resource);
             resourcePermission = ResourcePermissionLocalServiceUtil.createResourcePermission(CounterLocalServiceUtil.increment());
             resourcePermission.setCompanyId(themeDisplay.getCompanyId());
             resourcePermission.setName(resource);
             resourcePermission.setScope(ResourceConstants.SCOPE_INDIVIDUAL);
             resourcePermission.setPrimKey(String.valueOf(primaryKey));
             resourcePermission.setRoleId(guestRoleId);
-
+            
 
             ResourceAction resourceAction = ResourceActionLocalServiceUtil.getResourceAction(resource, ActionKeys.VIEW);
             resourcePermission.setActionIds(resourceAction.getBitwiseValue());// (ActionKeys.VIEW);

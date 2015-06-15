@@ -50,7 +50,9 @@
 													if (Validator.isNotNull(measure.getPrimephoto()))
 													{
 													      DLFileEntry image = DLFileEntryLocalServiceUtil.getFileEntry(Long.parseLong(measure.getPrimephoto())); 
-													      primImageUrl = themeDisplay.getPathImage() + "/image_gallery?img_id=" + image.getLargeImageId() +  "&t=" + WebServerServletTokenUtil.getToken(image.getLargeImageId());
+													      //primImageUrl = themeDisplay.getPathImage() + "/image_gallery?img_id=" + image.getLargeImageId() +  "&t=" + WebServerServletTokenUtil.getToken(image.getLargeImageId());
+													      primImageUrl = themeDisplay.getPathImage() + "/image_gallery?uuid=" + image.getUuid() + "&t=" + WebServerServletTokenUtil.getToken(image.getLargeImageId()) + "&groupId=" +
+													    		  +													      image.getGroupId();
 													}
 													else
 													{

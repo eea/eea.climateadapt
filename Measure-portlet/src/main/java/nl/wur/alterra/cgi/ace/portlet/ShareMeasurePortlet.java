@@ -135,6 +135,7 @@ public class ShareMeasurePortlet extends MeasureUpdateHelperForSharedMeasure {
             //System.out.println("redirect using ParamUtil is " + redirect);
 
             ArrayList<String> errors = new ArrayList<String>();
+            System.out.println("Before Test");
             measureFromRequest(request, measure, uploadRequest, errors);
 
             if (MeasureValidator.validateMeasure(measure, errors)) {
