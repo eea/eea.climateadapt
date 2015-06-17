@@ -24,6 +24,7 @@ $dockbarOpenGradientStart: #0EA6F9;
 	#wrapper {
 		width: 90%;
 		position: relative;
+		background-color: #ccc;
 	}
 
 	.site-title {
@@ -302,12 +303,12 @@ $dockbarOpenGradientStart: #0EA6F9;
 		}
 
 		.navbar-inner {
-			background: #555;
+			background: #a5bf26;
 			border-width: 0;
 			min-height: 36px;
 
 			li a {
-				color: #FFF;
+				color: #02213d;
 			}
 		}
 	}
@@ -476,11 +477,37 @@ $dockbarOpenGradientStart: #0EA6F9;
 		}
 	}
 
-	/* ---------- Footer ---------- */
+	/* ---------- Footer ---------- 
 
 	#footer {
 		text-align: right;
 	}
+	
+#footer {
+	border-top: 2px solid #D7E3EF;
+	height: 100px;
+	margin-top: 15px;
+}
+
+#footer .container {
+	display: block;
+	margin-top: 15px;
+	position: absolute;
+	left: 292px;
+	text-align: center;
+}
+
+.ie7 #footer .container {
+	right: 34%;
+}
+
+#footer a {
+	float: left;
+	margin-bottom: 15px;
+	text-decoration: none;
+	width: 200px;
+}
+*/
 
 	/* ---------- Hudcrumbs ---------- */
 
