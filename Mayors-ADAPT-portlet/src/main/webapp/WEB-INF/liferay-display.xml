@@ -3,7 +3,7 @@
 
 <display>
 
-	<category name="category.sample">
-		<portlet id="new"></portlet>
+	<category name="category.mayors_adapt" >
+		<portlet id="Mayors-ADAPT-portlet"></portlet>
 	</category>
 </display>

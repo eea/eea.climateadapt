@@ -14,11 +14,7 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.portlet.LiferayPortlet;
 
-/**
- * Portlet implementation class NewPortlet
- */
-
-public class NewPortlet extends LiferayPortlet {
+public class MayorsAdaptPortlet extends LiferayPortlet {
 
 	public void init() {
 		viewTemplate = getInitParameter("view-template");
@@ -51,8 +47,12 @@ public class NewPortlet extends LiferayPortlet {
 		super.serveResource(resourceRequest, resourceResponse);
 	}
 
+	public void saveArticle() {
+		System.out.println("Saving Article");
+	}
+
 	protected String viewTemplate;
 
-	private static Log _log = LogFactoryUtil.getLog(NewPortlet.class);
+	private static Log _log = LogFactoryUtil.getLog(MayorsAdaptPortlet.class);
 
 }
