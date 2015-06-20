@@ -26,13 +26,13 @@ import com.liferay.portal.kernel.workflow.WorkflowTask;
 import com.liferay.portal.kernel.workflow.WorkflowTaskManagerUtil;
 import com.liferay.portal.model.User;
 import com.liferay.portal.model.WorkflowInstanceLink;
-import com.liferay.portal.security.auth.Authenticator;
 import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.service.WorkflowInstanceLinkLocalServiceUtil;
+import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portlet.PortletURLFactoryUtil;
+import com.liferay.portlet.journal.model.JournalArticle;
 import com.liferay.portlet.journal.service.JournalArticleLocalServiceUtil;
-import com.liferay.portlet.usersadmin.action.GetUsersCountAction;
 
 public class AccessCityProfileUserTaskStrutsPortletAction extends
 		BaseStrutsAction {
@@ -100,9 +100,7 @@ public class AccessCityProfileUserTaskStrutsPortletAction extends
 		}
 		
 
-		String entryClassPK = ParamUtil.get(request, "entryClassPK", "0");
-		String entryClassName = ParamUtil.get(request, "entryClassName",
-				"com.liferay.portlet.journal.model.JournalArticle");
+		String token = ParamUtil.get(request, "token", "0");
 		long groupId = ParamUtil.getLong(request, "groupId", 18L);
 		long companyId = ParamUtil.getLong(request, "companyId", 1L);
 		long userId = ParamUtil.getLong(request, "userId", UserLocalServiceUtil
@@ -139,40 +137,26 @@ public class AccessCityProfileUserTaskStrutsPortletAction extends
 			headerMap.put(name, headers.toArray(new String[headers.size()]));
 		}
 
-//		String login = "vazqugus";
-		String login = "cityprofilecontact";
-//		int authResult = UserLocalServiceUtil.authenticateByScreenName(
-//				companyId, login,
-//				password, headerMap,
-//				request.getParameterMap(), map);
-
-//		LoginUtil.login(request, response, login, password, false, null);
-
-//		_log.info("Auth2:" + authResult);
-//		_log.info(authResult == Authenticator.SUCCESS);
-		_log.info(request.getParameterMap());
-		_log.info(headerMap);
-		_log.info(map);
 		for (String key : map.keySet()) {
 			_log.info("key:" + key + " value:" + map.get(key));
 		}
-		_log.info(request.getSession().toString());
-		// UserLocalServiceUtil.getUserById(Long.parseLong("1222")).getS;
+
+		String login = "cityprofilecontact";
 		User user = UserLocalServiceUtil.getUserByScreenName(companyId, login);
-		
 		HttpSession session = request.getSession();
-//		login = ""+map.get("userId");
 		session.setAttribute("j_username", String.valueOf(user.getUserId()));
 		session.setAttribute("j_password", user.getPassword());
 		session.setAttribute("j_remoteuser", String.valueOf(user.getUserId()));
 
-		String articleId = JournalArticleLocalServiceUtil.getArticle(
-				Long.parseLong(entryClassPK)).getArticleId();
+		
+		JournalArticle article = JournalArticleLocalServiceUtil.getJournalArticleByUuidAndGroupId(token, groupId);
+
+		String articleId = article.getArticleId();
 		WorkflowInstanceLink workflowInstanceLink = WorkflowInstanceLinkLocalServiceUtil
-				.getWorkflowInstanceLink(companyId, groupId, entryClassName,
-						Long.parseLong(entryClassPK));
+				.getWorkflowInstanceLink(article.getCompanyId(), article.getGroupId(), JournalArticle.class.getName(),
+						article.getId());
 		WorkflowInstance workflowInstance = WorkflowInstanceManagerUtil
-				.getWorkflowInstance(companyId,
+				.getWorkflowInstance(article.getCompanyId(),
 						workflowInstanceLink.getWorkflowInstanceId());
 		_log.info("Gathering tasks for workflowInstanceLink: "
 				+ workflowInstanceLink.getWorkflowInstanceId() + " user:"
@@ -189,21 +173,36 @@ public class AccessCityProfileUserTaskStrutsPortletAction extends
 			workflowTaskId = task.getWorkflowTaskId();
 		}
 
+//		LiferayPortletURL factoryFormURL = PortletURLFactoryUtil.create(
+//				request, "15", 10137L, PortletRequest.RENDER_PHASE);
+//		factoryFormURL.setWindowState(LiferayWindowState.POP_UP);
+//		factoryFormURL.setPortletMode(PortletMode.VIEW);
+//		factoryFormURL.setDoAsGroupId(18L);
+//		// factoryFormURL.setEncrypt(true);
+//		factoryFormURL.setParameter("articleId", articleId);
+//		// factoryFormURL.addParameterIncludedInPath("articleId");
+//		factoryFormURL.setParameter("workflowInstanceId",
+//				String.valueOf(workflowInstanceLink.getWorkflowInstanceId()));
+//		factoryFormURL.setParameter("version", version);
+//		factoryFormURL.setParameter("struts_action", "/journal/edit_article");
+//		// factoryFormURL.setParameter("redirect",
+//		// HttpUtil.encodeURL("http://google.com"));
+
 		LiferayPortletURL factoryFormURL = PortletURLFactoryUtil.create(
-				request, "15", 10137L, PortletRequest.RENDER_PHASE);
+				request, "Mayors-ADAPT-portlet", 10137L, PortletRequest.RENDER_PHASE);
 		factoryFormURL.setWindowState(LiferayWindowState.POP_UP);
 		factoryFormURL.setPortletMode(PortletMode.VIEW);
-		factoryFormURL.setDoAsGroupId(18L);
+		factoryFormURL.setDoAsGroupId(groupId);
 		// factoryFormURL.setEncrypt(true);
-		factoryFormURL.setParameter("articleId", articleId);
+		//factoryFormURL.setParameter("articleId", articleId);
+		factoryFormURL.setParameter("token", token);
 		// factoryFormURL.addParameterIncludedInPath("articleId");
 		factoryFormURL.setParameter("workflowInstanceId",
 				String.valueOf(workflowInstanceLink.getWorkflowInstanceId()));
-		factoryFormURL.setParameter("version", version);
-		factoryFormURL.setParameter("struts_action", "/journal/edit_article");
-		// factoryFormURL.setParameter("redirect",
-		// HttpUtil.encodeURL("http://google.com"));
 
+		String pageurl = "/city-profile-form?token="+article.getUuid();
+		
+		
 		String formURL = HttpUtil
 				.decodeURL("http%3A%2F%2Flocal-climate-adapt.eea.europa.eu%2Fgroup%2Fcontrol_panel%2Fmanage"
 						+ "%3Fp_p_auth%3DLQg4QvMr"
@@ -307,7 +306,6 @@ public class AccessCityProfileUserTaskStrutsPortletAction extends
 				+ "%26_151_tabs1%3Dsubmissions"
 				+ "&_151_struts_action=%2Fworkflow_definitions%2Fedit_workflow_instance";
 
-		_log.info("recordId: " + entryClassPK);
 		_log.info("articleId: " + articleId);
 		_log.info("taskId: " + workflowTaskId);
 		_log.info("factoryFormURL: " + factoryFormURL);
@@ -326,7 +324,7 @@ public class AccessCityProfileUserTaskStrutsPortletAction extends
 				"finishTask", "editTask" });
 		switch (actions.indexOf(action)) {
 		case 0:
-			response.sendRedirect(factoryFormURL.toString());
+			response.sendRedirect(pageurl.toString());
 			break;
 		case 1:
 			_log.info("Finishing Task for : groupId:"

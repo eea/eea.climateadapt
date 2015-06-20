@@ -4,8 +4,8 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="urn:liferay.com:liferay-workflow_6.2.0 http://www.liferay.com/dtd/liferay-workflow-definition_6_2_0.xsd">
 	<name>City Profile Approval</name>
-	<description>City Representative can update City Profile Content, Administrator can approve or reject modification.</description>
-	<version>48</version>
+	<description>City Contact can update City Profile Content, Administrator can approve or reject modification.</description>
+	<version>1</version>
 	<state>
 		<name>created</name>
 		<metadata> <![CDATA[{"xy":[36,51]}]]> </metadata>
@@ -29,10 +29,10 @@
 				<p>Welcome to the Mayors Adapt city profile platform. We have set up a template which we would like you to fill in. All the information shared in this form, will be used to showcase and represent your city and your work on Climate-ADAPT. The more information you fill in, the better will be your cities impact within the community.</p>
 				
 				<p>You can find your individual form here:</p>  
-				<a href="${CITY_PROFILE_SERVER_URL}/c/portal/accessCityProfileUserTask?companyId=${companyId}&groupId=${groupId}&userId=${CITY_PROFILE_CONTACT_USER_ID}&refererPlid=${refererPlid}&entryClassPK=${entryClassPK}&entryClassName=${entryClassName}&version=${version}&action=editForm" target="_blank"><button>Review Form for <b>${CITY_PROFILE_CITY_NAME}</b> City Profile</button></a>
+				<a href="${CITY_PROFILE_SERVER_URL}/c/portal/accessCityProfileUserTask?token=${CITY_PROFILE_TOKEN}&version=${version}&action=editForm" target="_blank"><button>Review Form for <b>${CITY_PROFILE_CITY_NAME}</b> City Profile</button></a>
 				
 				<p>Please note that you have four weeks from now to complete the form. You can edit it, save it and then come back to edit it further at a later stage. Once you submit it, we will quality manage it and may come back to you with questions or suggestions in case anything is unclear. Only once we have your final approval finish the work with this button:</p>
-				<a href="${CITY_PROFILE_SERVER_URL}/c/portal/accessCityProfileUserTask?companyId=${companyId}&groupId=${groupId}&userId=${CITY_PROFILE_CONTACT_USER_ID}&refererPlid=${refererPlid}&entryClassPK=${entryClassPK}&entryClassName=${entryClassName}&version=${version}&action=finishTask" ><button>Finish Reviewing for <b>${CITY_PROFILE_CITY_NAME}</b> City Profile</button></a>
+				<a href="${CITY_PROFILE_SERVER_URL}/c/portal/accessCityProfileUserTask?token=${CITY_PROFILE_TOKEN}&version=${version}&action=finishTask" ><button>Finish Reviewing for <b>${CITY_PROFILE_CITY_NAME}</b> City Profile</button></a>
 				
 				<p>After a final review by Mayors-ADAPT administrator, we will put the fact sheet online.</p>
 				]]></template>
@@ -49,24 +49,39 @@
 				<script> <![CDATA[
 							import com.liferay.portal.kernel.util.GetterUtil;
 							import com.liferay.portal.kernel.workflow.WorkflowConstants;
+							import com.liferay.portlet.journal.service.JournalArticleLocalServiceUtil;
 							import com.liferay.portal.service.UserLocalServiceUtil;
+							import com.liferay.portlet.journal.model.JournalArticle;
 							import com.liferay.portal.model.Group;
 							import com.liferay.portal.model.Role;
 
 							long companyId = GetterUtil.getLong((String)workflowContext.get(WorkflowConstants.CONTEXT_COMPANY_ID));
+							long groupId = GetterUtil.getLong((String)workflowContext.get(WorkflowConstants.CONTEXT_GROUP_ID));
+							long classPK = GetterUtil.getLong((String)workflowContext.get(WorkflowConstants.CONTEXT_ENTRY_CLASS_PK));
+							String className = GetterUtil.getString((String)workflowContext.get(WorkflowConstants.CONTEXT_ENTRY_CLASS_NAME));
 							roles = new ArrayList<Role>();
 	
 							String emailAddress = (String)workflowContext.get("CITY_PROFILE_CONTACT_EMAIL_ADDRESS");
-							
+							println "City Profile Creation Notification.. Looking for user with email: " + emailAddress;
 							try {
 								user = UserLocalServiceUtil.getUserByEmailAddress(companyId, emailAddress);
+							 	println "Found USER: Using user " + user.getScreenName() + " with email "+ emailAddress ;
 							}
 							catch (com.liferay.portal.NoSuchUserException e) {
 								user = UserLocalServiceUtil.getUserByScreenName(companyId, "cityprofilecontact");
 								user.setEmailAddress(emailAddress);
 								user.persist();
+							 	println "No user found. Using " + user.getScreenName() + " email to " + emailAddress;
 							}
+
+
 							workflowContext.put("CITY_PROFILE_CONTACT_USER_ID",user.getUserId());
+							
+							JournalArticle cityProfile = JournalArticleLocalServiceUtil.getArticle(classPK);
+							workflowContext.put("CITY_PROFILE_TOKEN", cityProfile.getUuid());
+							workflowContext.put("CITY_PROFILE_URL", cityProfile.getUrlTitle());
+							
+							
 								]]> </script>
 				<script-language>groovy</script-language>
 			</scripted-assignment>
@@ -86,19 +101,22 @@
 							import com.liferay.portal.kernel.workflow.WorkflowConstants;
 							import com.liferay.portal.service.UserLocalServiceUtil;
 							import com.liferay.portal.model.Role;
-
 							long companyId = GetterUtil.getLong((String)workflowContext.get(WorkflowConstants.CONTEXT_COMPANY_ID));
 							roles = new ArrayList<Role>();
 	
 							String emailAddress = (String)workflowContext.get("CITY_PROFILE_CONTACT_EMAIL_ADDRESS");
 							user = UserLocalServiceUtil.getUserByEmailAddress(companyId, emailAddress);
+							println "City Profile Reminder Notification.. Looking for user with email: " + emailAddress;
+							
 							try {
 								user = UserLocalServiceUtil.getUserByEmailAddress(companyId, emailAddress);
+							 	println "Found USER: Using user " + user.getScreenName() + " with email "+ emailAddress ;
 							}
 							catch (com.liferay.portal.NoSuchUserException e) {
 								user = UserLocalServiceUtil.getUserByScreenName(companyId, "cityprofilecontact");
 								user.setEmailAddress(emailAddress);
 								user.persist();
+							 	println "No user found. Using " + user.getScreenName() + " email to " + emailAddress;
 							}
 								]]> </script>
 							<script-language>groovy</script-language>
@@ -113,10 +131,10 @@
 						<p>Thank you for starting to fill in your registration form for your individual Mayors Adapt city profile fact sheet.  Please note that your login will expire in one week, so please finalise you fact sheet and submit it so that we can go over it, ask for your final approval and publish it on the website.</p>
 						
 						<p>You can find your individual form here:</p>  
-						<a href="${CITY_PROFILE_SERVER_URL}/c/portal/accessCityProfileUserTask?companyId=${companyId}&groupId=${groupId}&userId=${CITY_PROFILE_CONTACT_USER_ID}&refererPlid=${refererPlid}&entryClassPK=${entryClassPK}&entryClassName=${entryClassName}&version=${version}&action=editForm" ><button>Review Form for <b>${CITY_PROFILE_CITY_NAME}</b> City Profile</button></a>
+						<a href="${CITY_PROFILE_SERVER_URL}/c/portal/accessCityProfileUserTask?token=${CITY_PROFILE_TOKEN}&version=${version}&action=editForm" ><button>Review Form for <b>${CITY_PROFILE_CITY_NAME}</b> City Profile</button></a>
 						
 						<p>Please note that you have one week from now to complete the form. You can edit it, save it and then come back to edit it further at a later stage. Once you submit it, we will quality manage it and may come back to you with questions or suggestions in case anything is unclear. Only once we have your final approval finish the work with this button:</p>
-						<a href="${CITY_PROFILE_SERVER_URL}/c/portal/accessCityProfileUserTask?companyId=${companyId}&groupId=${groupId}&userId=${CITY_PROFILE_CONTACT_USER_ID}&refererPlid=${refererPlid}&entryClassPK=${entryClassPK}&entryClassName=${entryClassName}&version=${version}&action=finishTask" ><button>Finish Reviewing for <b>${CITY_PROFILE_CITY_NAME}</b> City Profile</button></a>
+						<a href="${CITY_PROFILE_SERVER_URL}/c/portal/accessCityProfileUserTask?token=${CITY_PROFILE_TOKEN}&version=${version}&action=finishTask" ><button>Finish Reviewing for <b>${CITY_PROFILE_CITY_NAME}</b> City Profile</button></a>
 						
 						<p>After a final review by Mayors-ADAPT administrator, we will put the fact sheet online.</p>
 						
@@ -146,15 +164,20 @@
 							import com.liferay.portal.model.Role;
 							long companyId = GetterUtil.getLong((String)workflowContext.get(WorkflowConstants.CONTEXT_COMPANY_ID));
 							roles = new ArrayList<Role>();
+	
 							String emailAddress = (String)workflowContext.get("CITY_PROFILE_CONTACT_EMAIL_ADDRESS");
 							user = UserLocalServiceUtil.getUserByEmailAddress(companyId, emailAddress);
+							println "City Profile Expiration Notification.. Looking for user with email: " + emailAddress;
+							
 							try {
 								user = UserLocalServiceUtil.getUserByEmailAddress(companyId, emailAddress);
+							 	println "Found USER: Using user " + user.getScreenName() + " with email "+ emailAddress ;
 							}
 							catch (com.liferay.portal.NoSuchUserException e) {
 								user = UserLocalServiceUtil.getUserByScreenName(companyId, "cityprofilecontact");
 								user.setEmailAddress(emailAddress);
 								user.persist();
+							 	println "No user found. Using " + user.getScreenName() + " email to " + emailAddress;
 							}
 								]]> </script>
 							<script-language>groovy</script-language>
@@ -178,29 +201,68 @@
 					</timer-notification>
 				</timer-actions>
 			</task-timer>
-			<!-- task-timer>
-				<name>City Profile Edition Expiration Manager Notificatio</name>
+			<task-timer>
+				<name>City Profile Edition Expiration Manager Notification</name>
 				<delay>
 					<duration>20</duration>
 					<scale>minute</scale>
 				</delay>
 				<timer-actions>
-					<reassignments>
-						<scripted-assignment>
-							<script> <![CDATA[
-							import com.liferay.portal.kernel.util.GetterUtil;
-							import com.liferay.portal.kernel.workflow.WorkflowConstants;
-							import com.liferay.portal.service.UserLocalServiceUtil;
-							import com.liferay.portal.model.Role;
-							long companyId = GetterUtil.getLong((String)workflowContext.get(WorkflowConstants.CONTEXT_COMPANY_ID));
-							roles = new ArrayList<Role>();
-							long userId = GetterUtil.getLong((String)workflowContext.get("CITY_PROFILE_OWNER"));
-							user = UserLocalServiceUtil.getUser(userId);
-								]]> </script>
-							<script-language>groovy</script-language>
-						</scripted-assignment>
-					</reassignments>
-					<timer-notification>
+					<timer-action>
+						<name>timedStatusChange1</name>
+						<script> <![CDATA[
+ import com.liferay.portal.kernel.concurrent.ThreadPoolExecutor.WorkerTask;
+ import com.liferay.portal.kernel.dao.orm.QueryUtil;
+ import com.liferay.portal.kernel.util.GetterUtil
+ import com.liferay.portal.kernel.workflow.WorkflowConstants
+ import com.liferay.portal.service.CompanyLocalServiceUtil
+ import com.liferay.portal.service.GroupLocalServiceUtil
+ import com.liferay.portal.service.UserLocalServiceUtil
+ import com.liferay.portal.service.WorkflowInstanceLinkLocalServiceUtil
+ import com.liferay.portal.model.WorkflowInstanceLink
+ import com.liferay.portal.kernel.workflow.WorkflowInstanceManagerUtil
+ import com.liferay.portal.kernel.workflow.WorkflowTask;
+ import com.liferay.portal.kernel.workflow.WorkflowTaskManagerUtil
+ 
+ long companyId = GetterUtil.getLong((String)workflowContext.get(WorkflowConstants.CONTEXT_COMPANY_ID))
+ long userId = GetterUtil.getLong((String)workflowContext.get(WorkflowConstants.CONTEXT_USER_ID))
+ long groupId = GetterUtil.getLong((String)workflowContext.get(WorkflowConstants.CONTEXT_GROUP_ID))
+ 
+ String className = (String)workflowContext.get(WorkflowConstants.CONTEXT_ENTRY_CLASS_NAME);
+ long classPK = GetterUtil.getLong((String)workflowContext.get(WorkflowConstants.CONTEXT_ENTRY_CLASS_PK));
+ 
+ WorkflowInstanceLink workflowInstanceLink = WorkflowInstanceLinkLocalServiceUtil.getWorkflowInstanceLink(companyId, groupId, className, classPK);
+ long wfilID = workflowInstanceLink.getWorkflowInstanceLinkId();
+ long wfiID = workflowInstanceLink.getWorkflowInstanceId();
+ 
+ WorkflowTask thisTask = null;
+ 
+ List<WorkflowTask> taskok = WorkflowTaskManagerUtil.getWorkflowTasksByWorkflowInstance(companyId, null, wfiID, true, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
+ for (task in taskok) {
+     if(task.getName().equalsIgnoreCase("Review")){
+         thisTask = task;
+         break;
+     }
+ }
+ if (thisTask==null) {
+     List<WorkflowTask> taskok2 = WorkflowTaskManagerUtil.getWorkflowTasksByWorkflowInstance(companyId, null, wfiID, false, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
+     for (task2 in taskok2) {
+         if(task2.getName().equalsIgnoreCase("Review")){
+             thisTask = task2;
+             break;
+         }
+     }
+ }
+ long taskID = thisTask.getWorkflowTaskId();
+ println "taskID(KALEOINSTANCETOKENID): " + taskID;
+ println "isAssignedToSingleUse: " + thisTask.isAssignedToSingleUser();
+ println "completeWorkflowTask...";
+ WorkflowTaskManagerUtil.completeWorkflowTask(companyId, userId, taskID, "Finish", "Revision time has expired. Task had been closed automatically.", workflowContext);
+ 
+                     ]]> </script>
+						<script-language>groovy</script-language>
+					</timer-action>
+					<!--timer-notification>
 						<name>City Profile Final Review</name>
 						<description>MA fact sheets: Please review an expired city profile</description>
 						<template><![CDATA[
@@ -210,11 +272,15 @@
 						<template-language>freemarker</template-language>
 						<notification-type>email</notification-type>
 						<recipients>
-							<assignees />
+							<roles>
+								<role>
+									<name>Mayors-ADAPT Manager Role</name>
+								</role>
+							</roles>
 						</recipients>
-					</timer-notification>
+					</timer-notification-->
 				</timer-actions>
-			</task-timer-->
+			</task-timer>
 		</task-timers>
 		<transitions>
 			<transition>
@@ -250,6 +316,9 @@
 							long userId = GetterUtil.getLong((String)workflowContext.get("CITY_PROFILE_OWNER"));
 							roles = new ArrayList<Role>();
 							user = UserLocalServiceUtil.getUser(userId);
+							
+							println "City Profile Finished. Notifying owner user " +user.getScreenName();
+							
 								]]> </script>
 				<script-language>groovy</script-language>
 			</scripted-assignment>
@@ -318,14 +387,17 @@
 							roles = new ArrayList<Role>();
 	
 							String emailAddress = (String)workflowContext.get("CITY_PROFILE_CONTACT_EMAIL_ADDRESS");
-							user = UserLocalServiceUtil.getUserByEmailAddress(companyId, emailAddress);
+							println "City Profile Approval Notification. Looking for user with email: " + emailAddress;
+							
 							try {
 								user = UserLocalServiceUtil.getUserByEmailAddress(companyId, emailAddress);
+							 	println "Found USER: Using user " + user.getScreenName() + " with email "+ emailAddress ;
 							}
 							catch (com.liferay.portal.NoSuchUserException e) {
 								user = UserLocalServiceUtil.getUserByScreenName(companyId, "cityprofilecontact");
 								user.setEmailAddress(emailAddress);
 								user.persist();
+							 	println "No user found. Using " + user.getScreenName() + " email to " + emailAddress;
 							}
 								]]> </script>
 				<script-language>groovy</script-language>
@@ -346,6 +418,7 @@
 						<p>Dear ${CITY_PROFILE_CONTACT_NAME_SURNAME},</p>
 
 						<p>Your city profile fact sheet is now online! Have a look at it at:</p>
+						<a href="${CITY_PROFILE_URL}" ><button>Open <b>${CITY_PROFILE_CITY_NAME}</b> City Profile</button></a>
 						<a href="${CITY_PROFILE_SERVER_URL}/-/${CITY_PROFILE_CITY_NAME_LOWERCASE}" ><button>Open <b>${CITY_PROFILE_CITY_NAME}</b> City Profile</button></a>
 
 						<p>Thank you for your collaboration creating the profile.</p>

@@ -12,30 +12,10 @@
 			eu.europa.eea.mayors_adapt.ExtWorkflowInstanceLinkLocalService
 		</service-impl>
 	</service>
-	<!-- service>
-		<service-type>
-			com.liferay.portlet.journal.service.JournalArticleLocalService
-		</service-type>
-		<service-impl>
-			eu.europa.eea.mayors_adapt.ExtJournalArticleLocalService
-		</service-impl>
-	</service-->
 	<struts-action>
 		<struts-action-path>/portal/accessCityProfileUserTask</struts-action-path>
 		<struts-action-impl>
 			eu.europa.eea.mayors_adapt.AccessCityProfileUserTaskStrutsPortletAction
-		</struts-action-impl>
-	</struts-action>
-	<struts-action>
-		<struts-action-path>/portal/cityprofilequery</struts-action-path>
-		<struts-action-impl>
-			eu.europa.eea.mayors_adapt.CityProfileQueryStrutsPortletAction
-		</struts-action-impl>
-	</struts-action>
-	<struts-action>
-		<struts-action-path>/portal/test</struts-action-path>
-		<struts-action-impl>
-			eu.europa.eea.mayors_adapt.TestStrutsAction
 		</struts-action-impl>
 	</struts-action>
 </hook>

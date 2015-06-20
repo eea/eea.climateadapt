@@ -46,6 +46,8 @@ import com.liferay.portal.workflow.kaleo.service.persistence.KaleoDefinitionPers
 import com.liferay.portal.workflow.kaleo.service.persistence.KaleoDefinitionUtil;
 import com.liferay.portal.workflow.kaleo.service.persistence.KaleoTaskAssignmentInstanceUtil;
 import com.liferay.portal.workflow.kaleo.service.persistence.KaleoTaskUtil;
+import com.liferay.portlet.journal.model.JournalArticle;
+import com.liferay.portlet.journal.service.JournalArticleLocalServiceUtil;
 
 public class ExtWorkflowInstanceLinkLocalService extends
 		WorkflowInstanceLinkLocalServiceWrapper {
@@ -95,7 +97,8 @@ public class ExtWorkflowInstanceLinkLocalService extends
 				if (key.startsWith("title"))
 					cityName = ((String) serviceContextMap.get(key));
 				if (key.startsWith("redirect"))
-					serverURL = ((String) serviceContextMap.get(key)).split("\\/group")[0];
+					serverURL = ((String) serviceContextMap.get(key))
+							.split("\\/group")[0];
 				_log.info("ServiceContext: " + key + "->"
 						+ serviceContextMap.get(key));
 			}
@@ -117,12 +120,12 @@ public class ExtWorkflowInstanceLinkLocalService extends
 			workflowContext.put(
 					WorkflowConstants.CONTEXT_NOTIFICATION_SENDER_ADDRESS,
 					"no-reply@climate-adapt.eea.europa.eu");
-				workflowContext.put(
+			workflowContext.put(
 					WorkflowConstants.CONTEXT_NOTIFICATION_SENDER_NAME,
 					"Mayors-ADAPT Site Administrator");
-				for (String key : workflowContext.keySet())
-					_log.info("WorkflowContext: " + key + "->"
-							+ workflowContext.get(key));
+			for (String key : workflowContext.keySet())
+				_log.info("WorkflowContext: " + key + "->"
+						+ workflowContext.get(key));
 		} else {
 			workflowDefinitionLink = workflowHandler.getWorkflowDefinitionLink(
 					companyId, groupId, classPK);
@@ -146,15 +149,13 @@ public class ExtWorkflowInstanceLinkLocalService extends
 				String.valueOf(classPK));
 		workflowContext.put(WorkflowConstants.CONTEXT_ENTRY_TYPE,
 				workflowHandler.getType(LocaleUtil.getDefault()));
-		
 
 		WorkflowInstance workflowInstance = WorkflowInstanceManagerUtil
 				.startWorkflowInstance(companyId, groupId, userId,
 						workflowDefinitionName, workflowDefinitionVersion,
 						null, workflowContext);
 
-		_log.info("Workflow instance started: "
-				+ workflowInstance);
+		_log.info("Workflow instance started: " + workflowInstance);
 
 		addWorkflowInstanceLink(userId, companyId, groupId, className, classPK,
 				workflowInstance.getWorkflowInstanceId());
