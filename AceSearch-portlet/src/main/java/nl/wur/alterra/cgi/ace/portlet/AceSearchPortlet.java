@@ -20,6 +20,9 @@ import nl.wur.alterra.cgi.ace.search.SearchRequestParams;
 import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.servlet.SessionMessages;
 import com.liferay.portal.kernel.util.ParamUtil;
+import com.liferay.portal.search.lucene.LuceneHelperUtil;
+import com.liferay.portal.search.lucene.LuceneIndexSearcher;
+import com.liferay.portal.search.lucene.LuceneIndexer;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.util.bridges.mvc.MVCPortlet;
 
@@ -31,11 +34,12 @@ import com.liferay.util.bridges.mvc.MVCPortlet;
  */
 public class AceSearchPortlet extends MVCPortlet {
 
-    @Override
+	
+	@Override
     public void doView(RenderRequest renderRequest, RenderResponse renderResponse) throws PortletException, IOException {
         try {
 
-            HttpServletRequest httpRequest =
+                    HttpServletRequest httpRequest =
                 PortalUtil.getOriginalServletRequest(
                 PortalUtil.getHttpServletRequest(renderRequest) ) ;
 
@@ -109,6 +113,7 @@ public class AceSearchPortlet extends MVCPortlet {
         try {
 
             PortletUtils.logParams(request);
+            
             ACESearchPortalInterface searchEngine = new ACESearchPortalInterface();
 
             searchEngine.handleSearchRequest(request);

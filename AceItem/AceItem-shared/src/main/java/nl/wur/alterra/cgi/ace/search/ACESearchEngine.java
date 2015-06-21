@@ -3,6 +3,8 @@ package nl.wur.alterra.cgi.ace.search;
 import java.io.IOException;
 import java.io.StringReader;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -24,6 +26,7 @@ import org.apache.lucene.search.NumericRangeQuery;
 import org.apache.lucene.search.Query;
 import org.apache.lucene.search.ScoreDoc;
 import org.apache.lucene.search.TopDocs;
+import org.apache.lucene.util.Version;
 
 /**
  *
@@ -401,16 +404,17 @@ public class ACESearchEngine {
             Query yearQuery = null;
             if (formBean.getStartyear() != null && formBean.getEndyear() != null)
             {
+            	int fromYear=0;
+            	int toYear=Calendar.getInstance().get(Calendar.YEAR);
                 try {
-                     int fromYear = Integer.parseInt(formBean.getStartyear()[0]);
-                     int toYear = Integer.parseInt(formBean.getEndyear()[0]);
-                     //System.out.println("from year is " + fromYear);
-                     //System.out.println("to year is " + toYear);
-                     yearQuery = NumericRangeQuery.newIntRange("year", fromYear, toYear, true, true);
+                      fromYear = Integer.parseInt(formBean.getStartyear()[0]);
                 } catch(NumberFormatException e) {
-                    // print stack trace and do nothing
-                    e.printStackTrace();
                 }
+                try {
+                      toYear = Integer.parseInt(formBean.getEndyear()[0]);
+                } catch(NumberFormatException e) {
+                }
+                 yearQuery = NumericRangeQuery.newIntRange("year", fromYear, toYear, true, true);
             }
             if ( formBean.getFeaturedItem() != null && !formBean.getFeaturedItem().equals("") ) {
 //            	System.out.println("Filter by feature");
@@ -418,7 +422,7 @@ public class ACESearchEngine {
             }
 
             ACEIndexSearcher searcher = ACEIndexSearcher.getACEIndexSearcher();
-            QueryParser queryParser = new QueryParser(ACEIndexConstant.IndexField.ANY, ACEAnalyzer.getAnalyzer());
+            QueryParser queryParser = new QueryParser(Version.LUCENE_29,ACEIndexConstant.IndexField.ANY, ACEAnalyzer.getAnalyzer());
             Query query = queryParser.parse(rawQuery);
 
             BooleanQuery booleanQuery = null;
@@ -428,9 +432,10 @@ public class ACESearchEngine {
                booleanQuery.add(yearQuery, BooleanClause.Occur.MUST);
             }
 
-            //System.out.println("Lucene raw query: " + rawQuery);
-            //System.out.println("Lucene query: " + query.toString());
-            //System.out.println("Lucene boolean query: " + booleanQuery);
+            System.out.println("Lucene raw query: " + rawQuery);
+            System.out.println("Lucene query: " + query.toString());
+            System.out.println("Lucene boolean query: " + booleanQuery);
+            System.out.println("Search Bean: " + formBean.toString(formBean));
 
             // rewritten query is better for logging/debugging but potentially throws runtime exceptions
             // System.out.println("Lucene query (rewritten): " + query.rewrite(((IndexSearcher)searcher).getIndexReader()).toString());

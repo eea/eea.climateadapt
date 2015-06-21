@@ -14,6 +14,8 @@ import java.util.Properties;
 public class ACEIndexUtil {
     private static String indexFolderPath = "";
 
+    private static String webcontentIndexFolderPath = "";
+
     private static int descriptionLength = 154;
 
     private static String notificationHostUrl = "";
@@ -52,6 +54,8 @@ public class ACEIndexUtil {
 
             indexFolderPath = properties.getProperty("index.path", "");
 
+            webcontentIndexFolderPath = properties.getProperty("webcontent.index.path", "");
+
             notificationHostUrl = properties.getProperty("notification.host.url", "");
 
             notificationFromAddress = properties.getProperty("notification.from.address", "");
@@ -71,6 +75,13 @@ public class ACEIndexUtil {
             }
 
             System.out.println("---> Index folder path: "+ indexFolderPath);
+
+            // Adds final File.separator
+            if (!webcontentIndexFolderPath.equals("")) {
+                if (!webcontentIndexFolderPath.endsWith(File.separator)) webcontentIndexFolderPath += File.separator;
+            }
+
+            System.out.println("---> Webcontent Index folder path: "+ webcontentIndexFolderPath);
 
         } catch (Exception e) {
             // Log error
@@ -94,6 +105,11 @@ public class ACEIndexUtil {
     public static String retrieveIndexFolder() {
         System.out.println("---> retrieveIndexFolder: "+ indexFolderPath);
         return indexFolderPath;
+    }
+
+    public static String retrieveWebcontentIndexFolder() {
+        System.out.println("---> retrieveWebcontentIndexFolder: "+ webcontentIndexFolderPath);
+        return webcontentIndexFolderPath;
     }
 
     /**

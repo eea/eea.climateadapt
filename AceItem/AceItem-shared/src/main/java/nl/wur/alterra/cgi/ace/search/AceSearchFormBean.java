@@ -1,5 +1,12 @@
 package nl.wur.alterra.cgi.ace.search;
 
+import java.lang.reflect.AccessibleObject;
+import java.lang.reflect.Field;
+import java.util.ArrayList;
+import java.util.List;
+
+import org.apache.commons.lang.ClassUtils;
+
 /**
  * Bean for AceItem search form parameters.
  *
@@ -225,4 +232,25 @@ public class AceSearchFormBean {
         this.conditionAdaptationCountry = conditionAdaptationCountry;
     }
 
+  
+
+      public static String toString( Object o ) {
+        ArrayList<String> list = new ArrayList<String>();
+        toString( o, o.getClass(), list );
+        return o.getClass().getName().concat( list.toString() );
+      }
+
+      private static void toString( Object o, Class<?> clazz, List<String> list ) {
+        Field f[] = clazz.getDeclaredFields();
+        AccessibleObject.setAccessible( f, true );
+        for ( int i = 0; i < f.length; i++ ) {
+          try {
+            list.add( f[i].getName() + "=" + f[i].get(o) );
+          }
+          catch ( IllegalAccessException e ) { e.printStackTrace(); }
+          }
+          if ( clazz.getSuperclass().getSuperclass() != null ) {
+             toString( o, clazz.getSuperclass(), list );
+          }
+      }
 }

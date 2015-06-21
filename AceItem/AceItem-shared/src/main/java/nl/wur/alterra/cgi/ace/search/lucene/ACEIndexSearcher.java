@@ -174,15 +174,8 @@ public class ACEIndexSearcher {
     }
 
     public int maxDoc() throws ACELuceneException {
-        try {
             return searcher.maxDoc();
-        }
-        catch (IOException x) {
-            //System.out.println(x.getMessage());
-            x.printStackTrace();
-            throw new ACELuceneException(x.getMessage(), x);
-        }
-    }
+     }
 
     /**
      * Prevents cloning of singleton.

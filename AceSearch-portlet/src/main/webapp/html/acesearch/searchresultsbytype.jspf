@@ -26,56 +26,70 @@
 		pageContext.setAttribute("paginationId", "paginationId-" + r);
 		pageContext.setAttribute("demoId", "demoId-" + r);
 	%>
-	
+
 	<%-- expanded view --%>
-	<div id="${expandedId}" class="resultsgroup expandedResultsGroup togglehide">
-	
-		<c:set var="groupedResults" value="${groupedResults}"/>
-	
-		<c:set var="nrPageItems" value="<%= itemsOnPage %>"/>
-	
-		<div id="${expandedTitleId}" class="expandedResultsGroupTitle resultsGroupTitle">
-			&#9660; <c:out value='${groupTitle}' /> (${fn:length(groupedResults)})
+	<div id="${expandedId}"
+		class="resultsgroup expandedResultsGroup togglehide">
+
+		<c:set var="groupedResults" value="${groupedResults}" />
+
+		<c:set var="nrPageItems" value="<%= itemsOnPage %>" />
+
+		<div id="${expandedTitleId}"
+			class="expandedResultsGroupTitle resultsGroupTitle">
+			&#9660;
+			<c:out value='${groupTitle}' />
+			(${fn:length(groupedResults)})
 		</div>
 
 		<div class="sortbar">
 			<form name="sortsearchform" id="${sortsearchformId}">
-				<input type="hidden" name="aceitemtype" value="${aceitemtype}"/>	
-				<input type="hidden" name="anyOfThese" id="${anyOfTheseId}" value="${searchParams.anyOfThese}"/>
+				<input type="hidden" name="aceitemtype" value="${aceitemtype}" /> <input
+					type="hidden" name="anyOfThese" id="${anyOfTheseId}"
+					value="${searchParams.anyOfThese}" />
 
-                <c:forEach var="sector" items="${searchParams.sector}">
-                <input type="hidden" name="sector" value="${sector}"/>
-                </c:forEach>
+				<c:forEach var="sector" items="${searchParams.sector}">
+					<input type="hidden" name="sector" value="${sector}" />
+				</c:forEach>
 
-                <c:forEach var="element" items="${searchParams.element}">
-                <input type="hidden" name="element" value="${element}"/>
-                </c:forEach>
+				<c:forEach var="element" items="${searchParams.element}">
+					<input type="hidden" name="element" value="${element}" />
+				</c:forEach>
 
-                <c:forEach var="countries" items="${searchParams.countries}">
-                <input type="hidden" name="countries" value="${countries}"/>
-                </c:forEach>
+				<c:forEach var="countries" items="${searchParams.countries}">
+					<input type="hidden" name="countries" value="${countries}" />
+				</c:forEach>
 
 
-                <input type="hidden" name="conditionAdaptationSector" id="${conditionAdaptationSectorId}" value="${searchParams.conditionAdaptationSector}"/>
-                <input type="hidden" name="conditionAdaptationElement" id="${conditionAdaptationElementId}" value="${searchParams.conditionAdaptationElement}"/>
-                
-                <input type="hidden" name="startyear" value="${searchParams.startyear}"/>
-                <input type="hidden" name="endyear" value="${searchParams.endyear}"/>
+				<input type="hidden" name="conditionAdaptationSector"
+					id="${conditionAdaptationSectorId}"
+					value="${searchParams.conditionAdaptationSector}" /> <input
+					type="hidden" name="conditionAdaptationElement"
+					id="${conditionAdaptationElementId}"
+					value="${searchParams.conditionAdaptationElement}" /> <input
+					type="hidden" name="startyear" value="${searchParams.startyear}" />
+				<input type="hidden" name="endyear" value="${searchParams.endyear}" />
 
 				<liferay-ui:message key="acesearch-sort-by" />
-                <input type="radio" name="sortBy" class="sortByControl" id="${sortsearchRelevanceId}" value="RELEVANCE" checked /><a id="search_rel" class="glossary-inline-term qtipclass" href="#" style="text-decoration:none;border:none;"><b><liferay-ui:message key="acesearch-sort-relevance" /></b></a>
-                <input type="radio" name="sortBy" class="sortByControl" id="${sortsearchNameId}" value="NAME"/><liferay-ui:message key="acesearch-sort-name" />
-                <input type="radio" name="sortBy" class="sortByControl" id="${sortsearchYearId}" value="YEAR" /><liferay-ui:message key="acesearch-sort-year" />
-                <%--
+				<input type="radio" name="sortBy" class="sortByControl"
+					id="${sortsearchRelevanceId}" value="RELEVANCE" checked /><a
+					id="search_rel" class="glossary-inline-term qtipclass" href="#"
+					style="text-decoration: none; border: none;"><b><liferay-ui:message
+							key="acesearch-sort-relevance" /></b></a> <input type="radio"
+					name="sortBy" class="sortByControl" id="${sortsearchNameId}"
+					value="NAME" />
+				<liferay-ui:message key="acesearch-sort-name" />
+				<input type="radio" name="sortBy" class="sortByControl"
+					id="${sortsearchYearId}" value="YEAR" />
+				<liferay-ui:message key="acesearch-sort-year" />
+				<%--
 				<input type="radio" name="sortBy" class="sortByControl" id="${sortsearchCountryId}" value="COUNTRY"/><liferay-ui:message key="acesearch-sort-country" />
 				--%>
 			</form>
 		</div>
-				
-		<div id="${paginationId}" class="pagination-box" >
 
-		</div>	
-		
+		<div id="${paginationId}" class="pagination-box"></div>
+
 		<!-- pagination -->
 		<script type="text/javascript"> 
 
@@ -167,7 +181,11 @@ function displayJSONResults(unique, aceitemResults) {
                                resultlist += '<span class="bolder">&#187; ' + imgSrc + ' ' + imgNew +  ' <a href="/viewmeasure?' + aceitem.storedAt + '" >' + aceitem.name + year + '</a></span>&nbsp;';
                                resultlist += ' - ' + descriptionText ;
 
-           } else {
+           } else if (aceitem.storedAt.substr(0, 14) == "cityprofile_id") {
+               resultlist += '<span class="bolder">&#187; ' + imgSrc + ' ' + imgNew +  ' <a href="/viewcityprofile?' + aceitem.storedAt + '" >' + aceitem.name + year + '</a></span>&nbsp;';
+               resultlist += ' - ' + descriptionText ;
+
+			}else {
                    resultlist += '<span class="bolder">&#187; ' + imgSrc + ' ' + imgNew +  ' <a href="/viewaceitem?aceitem_id=' +  aceitem.aceItemId + '" >' + aceitem.name + year + ' </a></span> - ' + descriptionText ;
 
            }
@@ -218,8 +236,8 @@ function displayJSONResults(unique, aceitemResults) {
 }			
 			
 			function displayPagedJSONResults(page, unique, aceitemResults) {
-				var startIdx = ((page -1) * <%= itemsOnPage %>);
-				var endIdx = (page * <%= itemsOnPage %>) - 1;
+				var startIdx = ((page -1) * <%=itemsOnPage%>);
+				var endIdx = (page * <%=itemsOnPage%>) - 1;
 				if(endIdx > aceitemResults.length) {
 					endIdx = aceitemResults.length;
 				}
@@ -231,93 +249,136 @@ function displayJSONResults(unique, aceitemResults) {
 			}		
 			
 		</script>
-			
-		<hr class="clearer2"/>
-		
+
+		<hr class="clearer2" />
+
 		<div id="${resultsListId}" class="resultlist">
-		    <%
-		       String featureImage = "<img src = \"" + request.getContextPath() + "/images/featured-icon.png\" />" ;
-		       String newImage = "<img src = \"" + request.getContextPath() + "/images/new-en.gif\" />" ;
-		    %>
-			<c:forEach var="wrappedSearchResult" items="${groupedResults}" begin="0" end="<%= itemsOnPage-1 %>">
-			
-			     <c:set var="featureImageToDisplay" value="" />
-                 <c:set var="newImageToDisplay" value="" />
-                 
-                <div class="searchresult">
+			<%
+				String featureImage = "<img src = \""
+							+ request.getContextPath()
+							+ "/images/featured-icon.png\" />";
+					String newImage = "<img src = \"" + request.getContextPath()
+							+ "/images/new-en.gif\" />";
+			%>
+			<c:forEach var="wrappedSearchResult" items="${groupedResults}"
+				begin="0" end="<%= itemsOnPage-1 %>">
+
+				<c:set var="featureImageToDisplay" value="" />
+				<c:set var="newImageToDisplay" value="" />
+
+				<div class="searchresult">
 					<div>
-                     
-                       <c:if test="${fn:indexOf(wrappedSearchResult.feature, 'CASESEARCH')>=0}">
-                            <c:set var="featureImageToDisplay" value="<%=featureImage %>" />
-                       </c:if>
-                       
-                        <c:if test="${wrappedSearchResult.isNew}">
-                            <c:set var="newImageToDisplay" value="<%=newImage %>" />
-                       </c:if>
-                       
-                       <c:if test="${fn:length(wrappedSearchResult.year) > 0 }">
-                            <c:set var="year" value=" (${wrappedSearchResult.year})" />
-                       </c:if>
-                       
-                        <c:set var="descriptionText" value="${wrappedSearchResult.shortdescription}" />
+
+						<c:if
+							test="${fn:indexOf(wrappedSearchResult.feature, 'CASESEARCH')>=0}">
+							<c:set var="featureImageToDisplay" value="<%=featureImage%>" />
+						</c:if>
+
+						<c:if test="${wrappedSearchResult.isNew}">
+							<c:set var="newImageToDisplay" value="<%=newImage%>" />
+						</c:if>
+
+						<c:if test="${fn:length(wrappedSearchResult.year) > 0 }">
+							<c:set var="year" value=" (${wrappedSearchResult.year})" />
+						</c:if>
+
+						<c:set var="descriptionText"
+							value="${wrappedSearchResult.shortdescription}" />
 
 						<c:choose>
-							<c:when test="${!empty wrappedSearchResult.storedAt && fn:startsWith(wrappedSearchResult.storagetype, 'URL')==true}">
-								<span class="bolder">&#187; ${featureImageToDisplay} ${newImageToDisplay} <a href="<c:out value="/viewaceitem?aceitem_id=${wrappedSearchResult.aceItemId}"/>" ><c:out value="${wrappedSearchResult.name}"/><c:out value="${year}"/></a></span>&nbsp;
+							<c:when
+								test="${!empty wrappedSearchResult.storedAt && fn:startsWith(wrappedSearchResult.storagetype, 'URL')==true}">
+								<span class="bolder">&#187; ${featureImageToDisplay}
+									${newImageToDisplay} <a
+									href="<c:out value="/viewaceitem?aceitem_id=${wrappedSearchResult.aceItemId}"/>"><c:out
+											value="${wrappedSearchResult.name}" />
+										<c:out value="${year}" /></a>
+								</span>&nbsp;
 								- <c:out value="${descriptionText}" />
 							</c:when>
-							<c:when test="${!empty wrappedSearchResult.storedAt && fn:startsWith(wrappedSearchResult.storedAt, 'ace_project_id')==true}">
-								<span class="bolder">&#187; ${featureImageToDisplay} ${newImageToDisplay}  <a href="<c:out value="/projects1?${wrappedSearchResult.storedAt}"/>" >
-									<c:out value="${wrappedSearchResult.name}"/><c:out value="${year}"/></a></span>&nbsp;
+							<c:when
+								test="${!empty wrappedSearchResult.storedAt && fn:startsWith(wrappedSearchResult.storedAt, 'ace_project_id')==true}">
+								<span class="bolder">&#187; ${featureImageToDisplay}
+									${newImageToDisplay} <a
+									href="<c:out value="/projects1?${wrappedSearchResult.storedAt}"/>">
+										<c:out value="${wrappedSearchResult.name}" />
+										<c:out value="${year}" />
+								</a>
+								</span>&nbsp;
 								- <c:out value="${descriptionText}" />
 							</c:when>
-							<c:when test="${!empty wrappedSearchResult.storedAt && fn:startsWith(wrappedSearchResult.storedAt, 'ace_measure_id')==true}">
-								<span class="bolder">&#187; ${featureImageToDisplay} ${newImageToDisplay} <a href="<c:out value="/viewmeasure?${wrappedSearchResult.storedAt}"/>" >
-									<c:out value="${wrappedSearchResult.name}"/><c:out value="${year}"/></a></span>&nbsp;
+							<c:when
+								test="${!empty wrappedSearchResult.storedAt && fn:startsWith(wrappedSearchResult.storedAt, 'ace_measure_id')==true}">
+								<span class="bolder">&#187; ${featureImageToDisplay}
+									${newImageToDisplay} <a
+									href="<c:out value="/viewmeasure?${wrappedSearchResult.storedAt}"/>">
+										<c:out value="${wrappedSearchResult.name}" />
+										<c:out value="${year}" />
+								</a>
+								</span>&nbsp;
 								- <c:out value="${descriptionText}" />
-							</c:when>                            
+							</c:when>
+							<c:when
+								test="${!empty wrappedSearchResult.storedAt && fn:startsWith(wrappedSearchResult.storedAt, 'cityprofile_id')==true}">
+								<span class="bolder">&#187; ${featureImageToDisplay}
+									${newImageToDisplay} <a
+									href="<c:out value="/viewcityprofile?${wrappedSearchResult.storedAt}"/>">
+										<c:out value="${wrappedSearchResult.name}" />
+										<c:out value="${year}" />
+								</a>
+								</span>&nbsp;
+								- <c:out value="${descriptionText}" />
+							</c:when>
 							<c:otherwise>
-								<span class="bolder">&#187; ${featureImageToDisplay} ${newImageToDisplay} <a href="<c:out value="/viewaceitem?aceitem_id=${wrappedSearchResult.aceItemId}"/>" ><c:out value="${wrappedSearchResult.name}"/><c:out value="${year}"/></a></span>&nbsp;
+								<span class="bolder">&#187; ${featureImageToDisplay}
+									${newImageToDisplay} <a
+									href="<c:out value="/viewaceitem?aceitem_id=${wrappedSearchResult.aceItemId}"/>"><c:out
+											value="${wrappedSearchResult.name}" />
+										<c:out value="${year}" /></a>
+								</span>&nbsp;
 								- <c:out value="${descriptionText}" />
 							</c:otherwise>
 						</c:choose>
 
-                        <div class="relevance">
-                            <div class="relevance-title">
-                                <% // rating: <c:out value="${wrappedSearchResult.rating}"/ >. %><liferay-ui:message key="acesearch-relevance" />
-                            </div>
-                            <c:set var="relevance" value="${wrappedSearchResult.relevance}" />
-                            <c:choose>
-                                <c:when test="${relevance > 95}">
-                                    <div class="relevance-marker"></div>
-                                    <div class="relevance-marker"></div>
-                                    <div class="relevance-marker"></div>
-                                    <div class="relevance-marker"></div>
-                                    <div class="relevance-marker"></div>
-                                </c:when>
-                                <c:when test="${relevance > 90}">
-                                    <div class="relevance-marker"></div>
-                                    <div class="relevance-marker"></div>
-                                    <div class="relevance-marker"></div>
-                                    <div class="relevance-marker"></div>
-                                </c:when>
-                                <c:when test="${relevance > 85}">
-                                    <div class="relevance-marker"></div>
-                                    <div class="relevance-marker"></div>
-                                    <div class="relevance-marker"></div>
-                                </c:when>
-                                <c:when test="${relevance > 80}">
-                                    <div class="relevance-marker"></div>
-                                    <div class="relevance-marker"></div>
-                                </c:when>
-                                <c:otherwise>
-                                    <div class="relevance-marker"></div>
-                                </c:otherwise>
-                            </c:choose>
-                            <!--  (<c:out value="${relevance}" />)  -->
-                        </div>
+						<div class="relevance">
+							<div class="relevance-title">
+								<%
+									// rating: <c:out value="${wrappedSearchResult.rating}"/ >.
+								%><liferay-ui:message
+									key="acesearch-relevance" />
+							</div>
+							<c:set var="relevance" value="${wrappedSearchResult.relevance}" />
+							<c:choose>
+								<c:when test="${relevance > 95}">
+									<div class="relevance-marker"></div>
+									<div class="relevance-marker"></div>
+									<div class="relevance-marker"></div>
+									<div class="relevance-marker"></div>
+									<div class="relevance-marker"></div>
+								</c:when>
+								<c:when test="${relevance > 90}">
+									<div class="relevance-marker"></div>
+									<div class="relevance-marker"></div>
+									<div class="relevance-marker"></div>
+									<div class="relevance-marker"></div>
+								</c:when>
+								<c:when test="${relevance > 85}">
+									<div class="relevance-marker"></div>
+									<div class="relevance-marker"></div>
+									<div class="relevance-marker"></div>
+								</c:when>
+								<c:when test="${relevance > 80}">
+									<div class="relevance-marker"></div>
+									<div class="relevance-marker"></div>
+								</c:when>
+								<c:otherwise>
+									<div class="relevance-marker"></div>
+								</c:otherwise>
+							</c:choose>
+							<!--  (<c:out value="${relevance}" />)  -->
+						</div>
 
-                        <hr class="clearer"/>
+						<hr class="clearer" />
 
 					</div>
 
@@ -330,7 +391,7 @@ function displayJSONResults(unique, aceitemResults) {
 							<span class="aceitemlinkseparator">&#9474;</span>
 							<span class="aceitemlink">View metadata</span>							
 						</div-->
-						<hr class="clearer"/>
+						<hr class="clearer" />
 					</div>
 				</div>
 			</c:forEach>
@@ -338,15 +399,18 @@ function displayJSONResults(unique, aceitemResults) {
 
 	</div>
 
-	
-	<%-- collapsed view --%>	
+
+	<%-- collapsed view --%>
 	<div id="${collapsedId}" class="collapsedResultsGroup toggleshow">
 
-        <c:set var="groupedResults" value="${groupedResults}"/>
+		<c:set var="groupedResults" value="${groupedResults}" />
 
-		<div id="${collapsedTitleId}" class="collapsedResultsGroupTitle resultsGroupTitle">
-			&#9658; <c:out value='${groupTitle}' /> (${fn:length(groupedResults)})
+		<div id="${collapsedTitleId}"
+			class="collapsedResultsGroupTitle resultsGroupTitle">
+			&#9658;
+			<c:out value='${groupTitle}' />
+			(${fn:length(groupedResults)})
 		</div>
 	</div>
-	
+
 </c:if>

@@ -13,7 +13,11 @@ import nl.wur.alterra.cgi.ace.search.lucene.ACEIndexUtil;
  */
 public class AceItemSearchResult {
 
-    /** */
+    public AceItemSearchResult() {
+		super();
+	}
+
+	/** */
     private long aceItemId;
     private String name;
     private String storedAt;

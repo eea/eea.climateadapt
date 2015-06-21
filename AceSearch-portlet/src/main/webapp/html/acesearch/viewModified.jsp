@@ -551,6 +551,17 @@ if (endyear != null)
 		<c:set var="groupTitle" scope="page"><liferay-ui:message key="acesearch-datainfotype-lbl-ORGANISATION" /></c:set>
 		<%@ include file="searchresultsbytype.jspf" %>
 		
+        <c:set var="groupedResults" scope="page" value="${CITYPROFILE_searchResults}"/>
+		<c:set var="groupedJSONResults" scope="page" value="${CITYPROFILE_JSONsearchResults}"/>
+		<c:set var="aceitemtype" scope="page" value="CITYPROFILE"/>
+		<c:set var="groupTitle" scope="page"><liferay-ui:message key="acesearch-datainfotype-lbl-CITYPROFILE" /></c:set>
+		<%@ include file="searchresultsbytype.jspf" %>
+
+        <c:set var="groupedResults" scope="page" value="${ARTICLE_searchResults}"/>
+		<c:set var="groupedJSONResults" scope="page" value="${ARTICLE_JSONsearchResults}"/>
+		<c:set var="aceitemtype" scope="page" value="ARTICLE"/>
+		<c:set var="groupTitle" scope="page"><liferay-ui:message key="acesearch-datainfotype-lbl-ARTICLE" /></c:set>
+		<%@ include file="searchresultsbytype.jspf" %>
 		<%-- TODO all types --%>
 
 	</div>

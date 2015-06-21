@@ -47,5 +47,13 @@ public enum AceItemType {
     /**
      * Organisations.
      */
-    ORGANISATION
+    ORGANISATION,
+    /**
+     * City Profiles.
+     */
+    CITYPROFILE,
+    /**
+     * Articles.
+     */
+    ARTICLE
 }
