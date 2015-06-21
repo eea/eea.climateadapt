@@ -1,55 +1,64 @@
 <?xml version="1.0"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <modelVersion>4.0.0</modelVersion>
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
 
-  <parent>
-    <groupId>eu.europa.eea</groupId>
-    <artifactId>aceitem-parent</artifactId>
-    <version>1.0</version>
-  </parent>
+	<parent>
+		<groupId>eu.europa.eea</groupId>
+		<artifactId>aceitem-parent</artifactId>
+		<version>1.0</version>
+	</parent>
 
 
-  <artifactId>AceItem-shared</artifactId>
-  <packaging>jar</packaging>
+	<artifactId>AceItem-shared</artifactId>
+	<packaging>jar</packaging>
 
-  <properties>
-    <main.basedir>${project.parent.parent.basedir}</main.basedir>
-  </properties>
+	<properties>
+		<main.basedir>${project.parent.parent.basedir}</main.basedir>
+	</properties>
 
-  <build>
-    <finalName>${project.artifactId}</finalName>
-    <plugins>
-      <plugin>
-        <groupId>com.liferay.maven.plugins</groupId>
-        <artifactId>liferay-maven-plugin</artifactId>
-        <executions>
-          <execution>
-            <configuration>
-              <webappBaseDir>${basedir}/../AceItem-portlet</webappBaseDir>
-            </configuration>
-            <phase>generate-sources</phase>
-            <goals>
-              <goal>build-service</goal>
-            </goals>
-          </execution>
-        </executions>
-      </plugin>
-    </plugins>
-  </build>
+	<build>
+		<finalName>${project.artifactId}</finalName>
+		<plugins>
+			<plugin>
+				<groupId>com.liferay.maven.plugins</groupId>
+				<artifactId>liferay-maven-plugin</artifactId>
+				<configuration>
+					<autoDeployDir>${liferay.auto.deploy.dir}</autoDeployDir>
+					<appServerDeployDir>/Climate_liferay/tomcat-7.0.42/webapps</appServerDeployDir>
+					<appServerLibGlobalDir>/Climate_liferay/tomcat-7.0.42/lib/ext</appServerLibGlobalDir>
+					<appServerPortalDir>/Climate_liferay/tomcat-7.0.42/webapps/ROOT</appServerPortalDir>
+					<liferayVersion>${liferay.version}</liferayVersion>
+					<pluginType>hook</pluginType>
+					<outputDirectory>/Climate_liferay/tomcat-7.0.42/lib/ext</outputDirectory>
+				</configuration>
+				<executions>
+					<execution>
+						<configuration>
+							<webappBaseDir>${basedir}/../AceItem-portlet</webappBaseDir>
+						</configuration>
+						<phase>generate-sources</phase>
+						<goals>
+							<goal>build-service</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
 
-  <dependencies>
-    <dependency>
-      <groupId>org.apache.lucene</groupId>
-      <artifactId>lucene-core</artifactId>
-      <scope>provided</scope>
-    </dependency>
+	<dependencies>
 
-    <dependency>
-      <groupId>com.google.code.gson</groupId>
-      <artifactId>gson</artifactId>
-    </dependency>
 
-  </dependencies>
+		<dependency>
+			<groupId>com.google.code.gson</groupId>
+			<artifactId>gson</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.lucene</groupId>
+			<artifactId>lucene-core</artifactId>
+			<version>3.6.2</version>
+		</dependency>
+	</dependencies>
 
 </project>

@@ -47,24 +47,24 @@ public class ClimateSearchEngine extends IndexSearcher {
 
 	static public IndexReader getIndexReader(String INDEX_DIRECTORY)
 			throws IOException {
-//		Directory directory = FSDirectory.open(new File(INDEX_DIRECTORY));
-		Directory directory = FSDirectory.open(new File(ACEIndexUtil.retrieveWebcontentIndexFolder()));
+		// Directory directory = FSDirectory.open(new File(INDEX_DIRECTORY));
+		Directory directory = FSDirectory.open(new File(ACEIndexUtil
+				.retrieveWebcontentIndexFolder()));
 		IndexReader indexReader = IndexReader.open(directory, false);
 		return indexReader;
 	}
 
-	public TopDocs getTopDocs(AceSearchFormBean formBean,
-			String searchText, long structureId) throws IOException, PortalException,
+	public TopDocs getTopDocs(AceSearchFormBean formBean, String searchText,
+			long structureId) throws IOException, PortalException,
 			SystemException, ParseException {
 
 		BooleanQuery booleanQuery = new BooleanQuery();
 		BooleanQuery textQuery = new BooleanQuery();
-		if (searchText!=null && searchText.length() > 0) {
+		if (searchText != null && searchText.length() > 0) {
 			searchText = searchText.toLowerCase();
 			textQuery.add(new TermQuery(new Term(Field.TITLE, searchText)),
 					BooleanClause.Occur.SHOULD);
-			textQuery.add(
-					new TermQuery(new Term(Field.CONTENT, searchText)),
+			textQuery.add(new TermQuery(new Term(Field.CONTENT, searchText)),
 					BooleanClause.Occur.SHOULD);
 		}
 		booleanQuery.add(textQuery, BooleanClause.Occur.MUST);
@@ -76,118 +76,124 @@ public class ClimateSearchEngine extends IndexSearcher {
 		booleanQuery.add(new TermQuery(new Term("head", "true")),
 				BooleanClause.Occur.MUST);
 
-		
+		//
+		// everything must be a JournalArticle
+		//
+		booleanQuery.add(
+				new TermQuery(new Term(Field.ENTRY_CLASS_NAME,
+						com.liferay.portlet.journal.model.JournalArticle.class
+								.getName())), BooleanClause.Occur.MUST);
 
-        //
-        // everything must be a JournalArticle
-        //
-		booleanQuery.add(new TermQuery(new Term(Field.ENTRY_CLASS_NAME,
-				com.liferay.portlet.journal.model.JournalArticle.class.getName())), BooleanClause.Occur.MUST);
-
-        //
-        // handle city profile ItemType
-        //
+		//
+		// handle city profile ItemType
+		//
 		BooleanQuery typesQuery = new BooleanQuery();
 		String[] types = formBean.getAceitemtype();
 		if ((types != null) && (types.length > 0)) {
 			for (String type : types) {
 				if (type.equalsIgnoreCase("CITYPROFILE"))
-					booleanQuery.add(new TermQuery(new Term(Field.CLASS_TYPE_ID,
-							String.valueOf(structureId))), BooleanClause.Occur.MUST);
-					}
+					booleanQuery.add(new TermQuery(new Term(
+							Field.CLASS_TYPE_ID, String.valueOf(structureId))),
+							BooleanClause.Occur.MUST);
+
+				if (type.equalsIgnoreCase("ARTICLE"))
+					booleanQuery.add(new TermQuery(new Term(
+							Field.CLASS_TYPE_ID, String.valueOf(structureId))),
+							BooleanClause.Occur.MUST_NOT);
+			}
 		}
 
-		
-        //
-        // handle sectors
-        //
+		//
+		// handle sectors
+		//
 		BooleanQuery sectorsQuery = new BooleanQuery();
 		String sectorField = "Select12195";
 		String[] sectors = formBean.getSector();
 		if ((sectors != null) && (sectors.length > 0)) {
 			for (String sector : sectors) {
 				sectorsQuery.add(new TermQuery(new Term("ddm/" + structureId
-						+ "/"+sectorField+"_en_GB", sector)),
+						+ "/" + sectorField + "_en_GB", sector)),
 						BooleanClause.Occur.SHOULD);
 			}
 			booleanQuery.add(sectorsQuery, BooleanClause.Occur.MUST);
 		}
 
-        //
-        // handle elements
-        //
+		//
+		// handle elements
+		//
 		BooleanQuery elementsQuery = new BooleanQuery();
 		String elementField = "Element";
 		String[] elements = formBean.getElement();
 		if ((elements != null) && (elements.length > 0)) {
 			for (String element : elements) {
 				elementsQuery.add(new TermQuery(new Term("ddm/" + structureId
-						+ "/"+elementField+"_en_GB", element)),
+						+ "/" + elementField + "_en_GB", element)),
 						BooleanClause.Occur.SHOULD);
 			}
 			booleanQuery.add(elementsQuery, BooleanClause.Occur.MUST);
 		}
 
-        //
-        // handle scenarios
-        //
+		//
+		// handle scenarios
+		//
 		BooleanQuery scenariosQuery = new BooleanQuery();
 		String scenarioField = "Scenario";
 		String[] scenarios = formBean.getScenario();
 		if ((scenarios != null) && (scenarios.length > 0)) {
 			for (String scenario : scenarios) {
 				scenariosQuery.add(new TermQuery(new Term("ddm/" + structureId
-						+ "/"+scenarioField+"_en_GB", scenario)),
+						+ "/" + scenarioField + "_en_GB", scenario)),
 						BooleanClause.Occur.SHOULD);
 			}
 			booleanQuery.add(scenariosQuery, BooleanClause.Occur.MUST);
 		}
 
-
-        //
-        // handle impacts
-        //
+		//
+		// handle impacts
+		//
 		BooleanQuery impactsQuery = new BooleanQuery();
 		String impactField = "Climate_Impact";
 		String[] impacts = formBean.getImpact();
 		if ((impacts != null) && (impacts.length > 0)) {
 			for (String impact : impacts) {
 				impactsQuery.add(new TermQuery(new Term("ddm/" + structureId
-						+ "/"+impactField+"_en_GB", impact)),
+						+ "/" + impactField + "_en_GB", impact)),
 						BooleanClause.Occur.SHOULD);
 			}
 			booleanQuery.add(impactsQuery, BooleanClause.Occur.MUST);
 		}
 
-  
-        // adding year
-        //rawQuery += " AND year:2013" ;
+		// adding year
+		// rawQuery += " AND year:2013" ;
 
-        Query yearQuery = null;
-        if (formBean.getStartyear() != null && formBean.getEndyear() != null)
-        {
-        	int fromYear=1970;
-        	int toYear=Calendar.getInstance().get(Calendar.YEAR);
-            try {
-                  fromYear = Integer.parseInt(formBean.getStartyear()[0]);
-            } catch(NumberFormatException e) {
-            }
-            try {
-                  toYear = Integer.parseInt(formBean.getEndyear()[0]);
-            } catch(NumberFormatException e) {
-            }
-            String yearField = "displayDate";
- 			booleanQuery.add(new TermRangeQuery(yearField, String.valueOf(fromYear)+"0101000000",String.valueOf(toYear)+"3112235900", true,true),
+		Query yearQuery = null;
+		if (formBean.getStartyear() != null && formBean.getEndyear() != null) {
+			int fromYear = 1970;
+			int toYear = Calendar.getInstance().get(Calendar.YEAR);
+			try {
+				fromYear = Integer.parseInt(formBean.getStartyear()[0]);
+			} catch (NumberFormatException e) {
+			}
+			try {
+				toYear = Integer.parseInt(formBean.getEndyear()[0]);
+			} catch (NumberFormatException e) {
+			}
+			String yearField = "displayDate";
+			booleanQuery.add(
+					new TermRangeQuery(yearField, String.valueOf(fromYear)
+							+ "0101000000", String.valueOf(toYear)
+							+ "3112235900", true, true),
 					BooleanClause.Occur.MUST);
-        }
+		}
 
-        if ( formBean.getFeaturedItem() != null && !formBean.getFeaturedItem().equals("") ) {
-//        	System.out.println("Filter by feature");
-        	String featuredField = "featuredField";
-        	booleanQuery.add(new TermQuery(new Term("ddm/" + structureId
-					+ "/"+featuredField+"_en_GB", "true")),
+		if (formBean.getFeaturedItem() != null
+				&& !formBean.getFeaturedItem().equals("")) {
+			// System.out.println("Filter by feature");
+			String featuredField = "featuredField";
+			booleanQuery.add(new TermQuery(new Term("ddm/" + structureId + "/"
+					+ featuredField + "_en_GB", "true")),
 					BooleanClause.Occur.SHOULD);
-        }
+		}
 
 		//
 		// handle countries
@@ -212,11 +218,12 @@ public class ClimateSearchEngine extends IndexSearcher {
 	}
 
 	public List<AceItemSearchResult> searchLuceneByStructure(
-			AceSearchFormBean formBean, String aceItemType, long structureId) throws IOException,
-			PortalException, SystemException, ParseException {
-		System.out.println("Searching for structures:"+structureId);
-		ScoreDoc[] hits = this.getTopDocs(formBean,
-				formBean.getAnyOfThese(), structureId).scoreDocs;
+			AceSearchFormBean formBean, String aceItemType, long structureId)
+			throws IOException, PortalException, SystemException,
+			ParseException {
+		System.out.println("Searching for structures:" + structureId);
+		ScoreDoc[] hits = this.getTopDocs(formBean, formBean.getAnyOfThese(),
+				structureId).scoreDocs;
 
 		List<AceItemSearchResult> results = new ArrayList<AceItemSearchResult>();
 
