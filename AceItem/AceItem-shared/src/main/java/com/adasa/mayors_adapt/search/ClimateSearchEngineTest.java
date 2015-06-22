@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.logging.Logger;
 
 import junit.framework.TestCase;
+import nl.wur.alterra.cgi.ace.search.AceItemSearchResult;
 import nl.wur.alterra.cgi.ace.search.AceSearchFormBean;
 
 import org.apache.lucene.document.Document;
@@ -29,20 +30,23 @@ public class ClimateSearchEngineTest extends TestCase {
 	protected void setUp() throws Exception {
 		searcher = new ClimateSearchEngine(
 				ClimateSearchEngine.getIndexReader(INDEX_DIRECTORY));
-		List<String> locations = Arrays.asList(new String [] {"/AceItem-shared/src/main/resources/META-INF"});
-//		InitUtil.initWithSpring();
+		List<String> locations = Arrays
+				.asList(new String[] { "/AceItem-shared/src/main/resources/META-INF" });
+		// InitUtil.initWithSpring();
 		super.setUp();
 	}
 
-	public void testSearch() throws IOException, PortalException,
-			SystemException, ParseException {
+	public void Search() throws IOException, PortalException, SystemException,
+			ParseException {
 		long structureId = 11254912;
 		System.out.println("Start:" + System.currentTimeMillis());
 		AceSearchFormBean formBean = new AceSearchFormBean();
-//		formBean.setCountries(new String[]{"FR"});
+		// formBean.setCountries(new String[]{"FR"});
 		formBean.setAnyOfThese("estuaries");
-		formBean.setAceitemtype(new String[]{"CITYPROFILE"});
-		TopDocs searchResults = searcher.getTopDocs(formBean, formBean.getAnyOfThese(),structureId);
+		// formBean.setAceitemtype(new String[]{"CITYPROFILE"});
+		formBean.setAceitemtype(new String[] { "ARTICLE" });
+		TopDocs searchResults = searcher.getTopDocs(formBean,
+				formBean.getAnyOfThese(), "ARTICLE", structureId);
 		System.out.println("Resultados: " + searchResults.totalHits);
 		for (int i = 0; i < searchResults.totalHits; i++) {
 			Document docu = searcher.doc(searchResults.scoreDocs[i].doc);
@@ -72,4 +76,17 @@ public class ClimateSearchEngineTest extends TestCase {
 
 	}
 
+	public void testSearch2() throws IOException, PortalException,
+			SystemException, ParseException {
+		long structureId = 11254912;
+		System.out.println("Start:" + System.currentTimeMillis());
+		AceSearchFormBean formBean = new AceSearchFormBean();
+		// formBean.setCountries(new String[]{"FR"});
+		formBean.setAnyOfThese("paris");
+		 formBean.setAceitemtype(new String[]{"CITYPROFILE"});
+//		formBean.setAceitemtype(new String[] { "ARTICLE" });
+		 List<AceItemSearchResult> searchResults = searcher.searchLuceneByStructure(formBean, formBean.getAceitemtype()[0], structureId);
+		searcher.close();
+
+	}
 }

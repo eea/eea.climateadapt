@@ -182,7 +182,7 @@ function displayJSONResults(unique, aceitemResults) {
                                resultlist += ' - ' + descriptionText ;
 
            } else if (aceitem.storedAt.substr(0, 14) == "cityprofile_id") {
-               resultlist += '<span class="bolder">&#187; ' + imgSrc + ' ' + imgNew +  ' <a href="/viewcityprofile?' + aceitem.storedAt + '" >' + aceitem.name + year + '</a></span>&nbsp;';
+               resultlist += '<span class="bolder">&#187; ' + imgSrc + ' ' + imgNew +  ' <a href="/-/' + aceitem.name + '" >' + aceitem.name + year + '</a></span>&nbsp;';
                resultlist += ' - ' + descriptionText ;
 
 			}else {
@@ -322,7 +322,18 @@ function displayJSONResults(unique, aceitemResults) {
 								test="${!empty wrappedSearchResult.storedAt && fn:startsWith(wrappedSearchResult.storedAt, 'cityprofile_id')==true}">
 								<span class="bolder">&#187; ${featureImageToDisplay}
 									${newImageToDisplay} <a
-									href="<c:out value="/viewcityprofile?${wrappedSearchResult.storedAt}"/>">
+									href="<c:out value="/-/${wrappedSearchResult.name}"/>">
+										<c:out value="${wrappedSearchResult.name}" />
+										<c:out value="${year}" />
+								</a>
+								</span>&nbsp;
+								- <c:out value="${descriptionText}" />
+							</c:when>
+							<c:when
+								test="${!empty wrappedSearchResult.storedAt && fn:startsWith(wrappedSearchResult.storedAt, 'article_id')==true}">
+								<span class="bolder">&#187; ${featureImageToDisplay}
+									${newImageToDisplay} <a
+									href="<c:out value="/-/${wrappedSearchResult.name}"/>">
 										<c:out value="${wrappedSearchResult.name}" />
 										<c:out value="${year}" />
 								</a>

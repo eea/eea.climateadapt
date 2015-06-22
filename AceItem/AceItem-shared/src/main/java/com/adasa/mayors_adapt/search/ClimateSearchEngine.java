@@ -54,8 +54,114 @@ public class ClimateSearchEngine extends IndexSearcher {
 		return indexReader;
 	}
 
+	public List<AceItemSearchResult> searchLuceneByStructure(
+			AceSearchFormBean formBean, String aceItemType, long structureId)
+			throws IOException, PortalException, SystemException,
+			ParseException {
+		System.out.println("Searching for structures:" + structureId);
+		System.out.println("Search Bean :" + formBean.toString(formBean));
+		ScoreDoc[] hits = this.getTopDocs(formBean, formBean.getAnyOfThese(), aceItemType,
+				structureId).scoreDocs;
+
+		List<AceItemSearchResult> results = new ArrayList<AceItemSearchResult>();
+
+		//
+		// calculate factor to normalize relevance scores
+		float topScore = 0f;
+		for (ScoreDoc hit : hits) {
+
+			float score = hit.score;
+			// System.out.println("score: " + score);
+			if (score != Float.NaN) {
+				if (score > topScore) {
+					topScore = score;
+				}
+			}
+		}
+		// System.out.println("topscore is: " + topScore);
+		if (topScore == Float.NaN || !(topScore > 0f)) {
+			topScore = 1f;
+		}
+		float normalizeScoreFactor = 1 / topScore;
+		// System.out.println("normalizeScoreFactor is: " +
+		// normalizeScoreFactor);
+
+		for (ScoreDoc hit : hits) {
+			Document document = searcher.doc(hit.doc);
+
+			// AceItemLocalService aceItemLocalService =
+			// AceItemLocalServiceUtil.getService();
+			AceItem aceItem;
+
+			String aceItemId = document
+					.get(ACEIndexConstant.IndexField.ACEITEM_ID);
+
+			if (aceItemId != null) {
+
+				aceItem = AceItemLocalServiceUtil.getAceItem(Long
+						.parseLong(aceItemId));
+				aceItem.setAceItemId(Long.parseLong(aceItemId));
+
+				// relevance expressed as a percentage
+				float relevance = hit.score * normalizeScoreFactor * 100;
+
+				// System.out.println("hit.score is: " + hit.score);
+				// System.out.println("relevance (0.0) is: " + relevance);
+
+				AceItemSearchResult aceItemSearchResult = new AceItemSearchResult(
+						aceItem);
+				aceItemSearchResult.setRelevance(relevance);
+				// System.out.println("AceItemSearchResult name is " +
+				// aceItemSearchResult.getName());
+				// System.out.println("AceItemSearchResult isNew is " +
+				// aceItemSearchResult.isIsNew());
+				// System.out.println("AceItemSearchResult feature is " +
+				// aceItemSearchResult.getFeature());
+				results.add(aceItemSearchResult);
+			} else {
+				AceItemSearchResult aceItemSearchResult = new AceItemSearchResult();
+				System.out.println("Document: " + document.toString());
+				aceItemSearchResult.setName(document.getFieldable("title")
+						.stringValue());
+				// aceItemSearchResult.setAceItemId(Long.valueOf(document
+				// .getFieldable("uid").stringValue()));
+				aceItemSearchResult.setAceItemId(Long.valueOf(document
+						.getFieldable("articleId").stringValue()));
+				String classTypeId = document.get(Field.CLASS_TYPE_ID);
+				if (classTypeId != null
+						&& Long.valueOf(document.get(Field.CLASS_TYPE_ID)) == structureId) {
+					aceItemSearchResult.setStoredAt("cityprofile_id="
+							+ document.getFieldable("articleId").stringValue());
+					aceItemSearchResult.setStoragetype("CITYPROFILE");
+				} else {
+					aceItemSearchResult.setStoredAt("article_id="
+							+ document.getFieldable("articleId").stringValue());
+					aceItemSearchResult.setStoragetype("ARTICLE");
+				}
+				aceItemSearchResult.setRating(System.currentTimeMillis());
+				aceItemSearchResult.setShortdescription(document.getFieldable(
+						"title").stringValue());
+				aceItemSearchResult.setControlstatus(Short.valueOf(document
+						.getFieldable("status").stringValue()));
+				// aceItemSearchResult.setDeeplink("");
+				// aceItemSearchResult.setFeature("feature");
+				aceItemSearchResult.setNew(true);
+				// if (document.get(Field.CREATE_DATE).aceitem.getYear() != null
+				// && aceitem.getYear().length() > 0)
+				// {
+				aceItemSearchResult.setYear("2015");
+				// }
+				float relevance = hit.score * normalizeScoreFactor * 100;
+				aceItemSearchResult.setRelevance(relevance);
+				results.add(aceItemSearchResult);
+
+			}
+		}
+		return results;
+	}
+
 	public TopDocs getTopDocs(AceSearchFormBean formBean, String searchText,
-			long structureId) throws IOException, PortalException,
+			String aceItemType, long structureId) throws IOException, PortalException,
 			SystemException, ParseException {
 
 		BooleanQuery booleanQuery = new BooleanQuery();
@@ -66,8 +172,8 @@ public class ClimateSearchEngine extends IndexSearcher {
 					BooleanClause.Occur.SHOULD);
 			textQuery.add(new TermQuery(new Term(Field.CONTENT, searchText)),
 					BooleanClause.Occur.SHOULD);
+			booleanQuery.add(textQuery, BooleanClause.Occur.MUST);
 		}
-		booleanQuery.add(textQuery, BooleanClause.Occur.MUST);
 
 		booleanQuery.add(
 				new TermQuery(new Term(Field.STATUS, Integer
@@ -87,22 +193,34 @@ public class ClimateSearchEngine extends IndexSearcher {
 		//
 		// handle city profile ItemType
 		//
-		BooleanQuery typesQuery = new BooleanQuery();
-		String[] types = formBean.getAceitemtype();
-		if ((types != null) && (types.length > 0)) {
-			for (String type : types) {
-				if (type.equalsIgnoreCase("CITYPROFILE"))
-					booleanQuery.add(new TermQuery(new Term(
-							Field.CLASS_TYPE_ID, String.valueOf(structureId))),
-							BooleanClause.Occur.MUST);
+		// BooleanQuery typesQuery = new BooleanQuery();
+		// String[] types = formBean.getAceitemtype();
+		// if ((types != null) && (types.length > 0)) {
+		// for (String type : types) {
+		// System.out.println("Structure: " + type);
+		// if (type.equalsIgnoreCase("CITYPROFILE"))
+		// booleanQuery.add(new TermQuery(new Term(
+		// Field.CLASS_TYPE_ID, String.valueOf(structureId))),
+		// BooleanClause.Occur.MUST);
+		//
+		// if (type.equalsIgnoreCase("ARTICLE"))
+		// booleanQuery.add(new TermQuery(new Term(
+		// Field.CLASS_TYPE_ID, String.valueOf(structureId))),
+		// BooleanClause.Occur.MUST_NOT);
+		// }
+		// }
 
-				if (type.equalsIgnoreCase("ARTICLE"))
-					booleanQuery.add(new TermQuery(new Term(
-							Field.CLASS_TYPE_ID, String.valueOf(structureId))),
-							BooleanClause.Occur.MUST_NOT);
-			}
+		if (aceItemType.equals("CITYPROFILE")) {
+			booleanQuery.add(
+					new TermQuery(new Term(Field.CLASS_TYPE_ID, String
+							.valueOf(structureId))), BooleanClause.Occur.MUST);
 		}
-
+		else
+			booleanQuery.add(
+					new TermQuery(new Term(Field.CLASS_TYPE_ID, String
+							.valueOf(structureId))), BooleanClause.Occur.MUST_NOT);
+			
+		
 		//
 		// handle sectors
 		//
@@ -210,108 +328,13 @@ public class ClimateSearchEngine extends IndexSearcher {
 		}
 
 		TopDocs searchResults = searcher.search(booleanQuery, 99);
-		System.out.println("Lucene boolean query: " + booleanQuery);
 		System.out.println("Search Text: " + searchText);
+		System.out.println("Lucene boolean query: " + booleanQuery);
+        System.out.println("Search Bean: " + formBean.toString(formBean));
 
 		searcher.close();
 		return searchResults;
 	}
 
-	public List<AceItemSearchResult> searchLuceneByStructure(
-			AceSearchFormBean formBean, String aceItemType, long structureId)
-			throws IOException, PortalException, SystemException,
-			ParseException {
-		System.out.println("Searching for structures:" + structureId);
-		ScoreDoc[] hits = this.getTopDocs(formBean, formBean.getAnyOfThese(),
-				structureId).scoreDocs;
-
-		List<AceItemSearchResult> results = new ArrayList<AceItemSearchResult>();
-
-		//
-		// calculate factor to normalize relevance scores
-		float topScore = 0f;
-		for (ScoreDoc hit : hits) {
-
-			float score = hit.score;
-			// System.out.println("score: " + score);
-			if (score != Float.NaN) {
-				if (score > topScore) {
-					topScore = score;
-				}
-			}
-		}
-		// System.out.println("topscore is: " + topScore);
-		if (topScore == Float.NaN || !(topScore > 0f)) {
-			topScore = 1f;
-		}
-		float normalizeScoreFactor = 1 / topScore;
-		// System.out.println("normalizeScoreFactor is: " +
-		// normalizeScoreFactor);
-
-		for (ScoreDoc hit : hits) {
-			Document document = searcher.doc(hit.doc);
-
-			// AceItemLocalService aceItemLocalService =
-			// AceItemLocalServiceUtil.getService();
-			AceItem aceItem;
-
-			String aceItemId = document
-					.get(ACEIndexConstant.IndexField.ACEITEM_ID);
-
-			if (aceItemId != null) {
-
-				aceItem = AceItemLocalServiceUtil.getAceItem(Long
-						.parseLong(aceItemId));
-				aceItem.setAceItemId(Long.parseLong(aceItemId));
-
-				// relevance expressed as a percentage
-				float relevance = hit.score * normalizeScoreFactor * 100;
-
-				// System.out.println("hit.score is: " + hit.score);
-				// System.out.println("relevance (0.0) is: " + relevance);
-
-				AceItemSearchResult aceItemSearchResult = new AceItemSearchResult(
-						aceItem);
-				aceItemSearchResult.setRelevance(relevance);
-				// System.out.println("AceItemSearchResult name is " +
-				// aceItemSearchResult.getName());
-				// System.out.println("AceItemSearchResult isNew is " +
-				// aceItemSearchResult.isIsNew());
-				// System.out.println("AceItemSearchResult feature is " +
-				// aceItemSearchResult.getFeature());
-				results.add(aceItemSearchResult);
-			} else {
-				AceItemSearchResult aceItemSearchResult = new AceItemSearchResult();
-				System.out.println("Document: " + document.toString());
-				aceItemSearchResult.setName(document.getFieldable("title")
-						.stringValue());
-				// aceItemSearchResult.setAceItemId(Long.valueOf(document
-				// .getFieldable("uid").stringValue()));
-				aceItemSearchResult.setAceItemId(Long.valueOf(document
-						.getFieldable("articleId").stringValue()));
-				aceItemSearchResult.setStoredAt("cityprofile_id="
-						+ document.getFieldable("articleId").stringValue());
-				aceItemSearchResult.setStoragetype("CITYPROFILE");
-				aceItemSearchResult.setRating(System.currentTimeMillis());
-				aceItemSearchResult.setShortdescription(document.getFieldable(
-						"title").stringValue());
-				aceItemSearchResult.setControlstatus(Short.valueOf(document
-						.getFieldable("status").stringValue()));
-				// aceItemSearchResult.setDeeplink("");
-				// aceItemSearchResult.setFeature("feature");
-				aceItemSearchResult.setNew(true);
-				// if (document.get(Field.CREATE_DATE).aceitem.getYear() != null
-				// && aceitem.getYear().length() > 0)
-				// {
-				aceItemSearchResult.setYear("2015");
-				// }
-				float relevance = hit.score * normalizeScoreFactor * 100;
-				aceItemSearchResult.setRelevance(relevance);
-				results.add(aceItemSearchResult);
-
-			}
-		}
-		return results;
-	}
 
 }

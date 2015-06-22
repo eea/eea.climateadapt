@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.NoSuchElementException;
 
@@ -22,6 +23,7 @@ import com.adasa.mayors_adapt.search.ClimateSearchEngine;
 import com.google.gson.Gson;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.search.lucene.LuceneHelperUtil;
 import com.liferay.portlet.dynamicdatamapping.model.DDMStructure;
@@ -61,7 +63,8 @@ public class ACESearchPortalInterface {
 				.getStructures();
 		long structureId = 0;
 		for (DDMStructure structure : structures) {
-			if (structure.getName().equalsIgnoreCase("City Profile"))
+			if (structure.getName(LocaleUtil.getDefault()).equalsIgnoreCase(
+					structureName))
 				structureId = structure.getStructureId();
 		}
 		if (structureId == 0)
@@ -86,7 +89,8 @@ public class ACESearchPortalInterface {
 			for (AceItemType aceItemType : AceItemType.values()) {
 				List<AceItemSearchResult> results = null;
 
-				if (aceItemType.name().equals("CITYPROFILE")||aceItemType.name().equals("ARTICLE"))
+				if (aceItemType.name().equals("CITYPROFILE")
+						|| aceItemType.name().equals("ARTICLE"))
 					results = climateSearchEngine.searchLuceneByStructure(
 							formBean, aceItemType.name(), structureId);
 				else
