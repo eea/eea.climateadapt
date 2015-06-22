@@ -20,20 +20,25 @@ import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.search.Field;
 import com.liferay.portal.util.InitUtil;
 
-public class ClimateSearchEngineTest extends TestCase {
+public class ClimateSearchEngineTest {
 
 	Logger l = Logger.getLogger(getClass().getName());
 	static String INDEX_DIRECTORY = "/Climate_liferay/data/lucene/1";
 	static ClimateSearchEngine searcher;
 
-	@Override
+	public static void main(String[] args) throws Exception {
+		ClimateSearchEngineTest clazz = new ClimateSearchEngineTest();
+		clazz.setUp();
+		clazz.Search();
+		clazz.testSearch2();
+	}
+
 	protected void setUp() throws Exception {
 		searcher = new ClimateSearchEngine(
 				ClimateSearchEngine.getIndexReader(INDEX_DIRECTORY));
 		List<String> locations = Arrays
 				.asList(new String[] { "/AceItem-shared/src/main/resources/META-INF" });
 		// InitUtil.initWithSpring();
-		super.setUp();
 	}
 
 	public void Search() throws IOException, PortalException, SystemException,
@@ -83,10 +88,13 @@ public class ClimateSearchEngineTest extends TestCase {
 		AceSearchFormBean formBean = new AceSearchFormBean();
 		// formBean.setCountries(new String[]{"FR"});
 		formBean.setAnyOfThese("paris");
-		 formBean.setAceitemtype(new String[]{"CITYPROFILE"});
-//		formBean.setAceitemtype(new String[] { "ARTICLE" });
-		 List<AceItemSearchResult> searchResults = searcher.searchLuceneByStructure(formBean, formBean.getAceitemtype()[0], structureId);
+		formBean.setAceitemtype(new String[] { "CITYPROFILE" });
+		// formBean.setAceitemtype(new String[] { "ARTICLE" });
+		List<AceItemSearchResult> searchResults = searcher
+				.searchLuceneByStructure(formBean,
+						formBean.getAceitemtype()[0], structureId);
 		searcher.close();
 
 	}
+
 }
