@@ -130,7 +130,7 @@ else if (classNameId > JournalArticleConstants.CLASSNAME_ID_DEFAULT) {
 }
 
 //String[][] categorySections = {mainSections};
-String[][] categorySections = {new String[] {"content","categorization","schedule"}};
+String[][] categorySections = {new String[] {"content","categorization","schedule","display_page"}};
 
 request.setAttribute("edit_article.jsp-redirect", redirect);
 
