@@ -6,7 +6,6 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.logging.Logger;
 
-import junit.framework.TestCase;
 import nl.wur.alterra.cgi.ace.search.AceItemSearchResult;
 import nl.wur.alterra.cgi.ace.search.AceSearchFormBean;
 
@@ -18,7 +17,6 @@ import org.apache.lucene.search.TopDocs;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.search.Field;
-import com.liferay.portal.util.InitUtil;
 
 public class ClimateSearchEngineTest {
 
