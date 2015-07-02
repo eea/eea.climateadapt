@@ -92,6 +92,14 @@
 			<version>2.0</version>
 			<scope>provided</scope>
 		</dependency>
+		<dependency>
+			<groupId>kaleo</groupId>
+			<artifactId>kaleo-web-service</artifactId>
+			<version>1.0</version>
+			<scope>system</scope>
+			<systemPath>${project.basedir}/src/main/webapp/WEB-INF/lib/kaleo-web-service.jar</systemPath>
+		</dependency>
+
 
 	</dependencies>
 	<properties>
