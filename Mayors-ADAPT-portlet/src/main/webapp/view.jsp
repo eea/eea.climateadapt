@@ -146,7 +146,7 @@ city.
 						});
 	}
 	function check() {
-		window.open('/-/<%= HtmlUtil.escapeJS(cityName.toString())%>')
+		window.open('/-/<%= HtmlUtil.escapeJS(cityName.toLowerCase().toString())%>')
 	}
 </aui:script>
 	
