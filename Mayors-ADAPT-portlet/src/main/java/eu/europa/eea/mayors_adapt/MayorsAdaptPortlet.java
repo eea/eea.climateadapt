@@ -36,6 +36,7 @@ public class MayorsAdaptPortlet extends LiferayPortlet {
 			RenderResponse renderResponse) throws IOException, PortletException {
 
 		include(viewTemplate, renderRequest, renderResponse);
+		viewTemplate = getInitParameter("view-template");
 
 	}
 
