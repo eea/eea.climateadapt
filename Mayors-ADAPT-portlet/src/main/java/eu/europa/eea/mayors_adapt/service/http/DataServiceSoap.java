@@ -1,11 +1,11 @@
 package eu.europa.eea.mayors_adapt.service.http;
 
+import java.rmi.RemoteException;
+
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 
 import eu.europa.eea.mayors_adapt.service.DataServiceUtil;
-
-import java.rmi.RemoteException;
 
 /**
  * Provides the SOAP utility for the
@@ -109,6 +109,23 @@ public class DataServiceSoap {
         try {
             com.liferay.portlet.dynamicdatamapping.model.DDMStructure returnValue =
                 DataServiceUtil.getStructure();
+
+            return returnValue;
+        } catch (Exception e) {
+            _log.error(e, e);
+
+            throw new RemoteException(e.getMessage());
+        }
+    }
+
+    public static java.util.TreeSet<java.lang.String> getCitiesByCriteria(
+        java.util.List<java.lang.String> countries,
+        java.util.List<java.lang.String> sectors,
+        java.util.List<java.lang.String> impacts,
+        java.util.List<java.lang.String> stages) throws RemoteException {
+        try {
+            java.util.TreeSet<java.lang.String> returnValue = DataServiceUtil.getCitiesByCriteria(countries,
+                    sectors, impacts, stages);
 
             return returnValue;
         } catch (Exception e) {

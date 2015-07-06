@@ -1,4 +1,4 @@
-package eu.europa.eea.mayors_adapt.service;
+package eu.europa.eea.mayors_adapt.service.service;
 
 import com.liferay.portal.kernel.bean.PortletBeanLocatorUtil;
 import com.liferay.portal.kernel.util.ReferenceRegistry;
@@ -6,7 +6,7 @@ import com.liferay.portal.service.InvokableService;
 
 /**
  * Provides the remote service utility for Data. This utility wraps
- * {@link eu.europa.eea.mayors_adapt.service.impl.DataServiceImpl} and is the
+ * {@link eu.europa.eea.mayors_adapt.service.service.impl.DataServiceImpl} and is the
  * primary access point for service operations in application layer code running
  * on a remote server. Methods of this service are expected to have security
  * checks based on the propagated JAAS credentials because this service can be
@@ -14,8 +14,8 @@ import com.liferay.portal.service.InvokableService;
  *
  * @author Brian Wing Shun Chan
  * @see DataService
- * @see eu.europa.eea.mayors_adapt.service.base.DataServiceBaseImpl
- * @see eu.europa.eea.mayors_adapt.service.impl.DataServiceImpl
+ * @see eu.europa.eea.mayors_adapt.service.service.base.DataServiceBaseImpl
+ * @see eu.europa.eea.mayors_adapt.service.service.impl.DataServiceImpl
  * @generated
  */
 public class DataServiceUtil {
@@ -24,7 +24,7 @@ public class DataServiceUtil {
     /*
      * NOTE FOR DEVELOPERS:
      *
-     * Never modify this class directly. Add custom service methods to {@link eu.europa.eea.mayors_adapt.service.impl.DataServiceImpl} and rerun ServiceBuilder to regenerate this class.
+     * Never modify this class directly. Add custom service methods to {@link eu.europa.eea.mayors_adapt.service.service.impl.DataServiceImpl} and rerun ServiceBuilder to regenerate this class.
      */
 
     /**
@@ -49,40 +49,6 @@ public class DataServiceUtil {
         java.lang.String[] parameterTypes, java.lang.Object[] arguments)
         throws java.lang.Throwable {
         return getService().invokeMethod(name, parameterTypes, arguments);
-    }
-
-    public static java.util.TreeMap<java.lang.String, java.lang.String> getDataTypes() {
-        return getService().getDataTypes();
-    }
-
-    public static java.util.TreeMap<java.lang.String, java.lang.String> getAdaptationSectors() {
-        return getService().getAdaptationSectors();
-    }
-
-    public static java.util.TreeMap<java.lang.String, java.lang.String> getClimateImpacts() {
-        return getService().getClimateImpacts();
-    }
-
-    public static java.util.TreeMap<java.lang.String, java.lang.String> getAdaptationElements() {
-        return getService().getAdaptationElements();
-    }
-
-    public static java.util.TreeMap<java.lang.String, java.lang.String> getCountries() {
-        return getService().getCountries();
-    }
-
-    public static com.liferay.portlet.dynamicdatamapping.model.DDMStructure getStructure()
-        throws com.liferay.portal.kernel.exception.SystemException {
-        return getService().getStructure();
-    }
-
-    public static java.util.TreeSet<java.lang.String> getCitiesByCriteria(
-        java.util.List<java.lang.String> countries,
-        java.util.List<java.lang.String> sectors,
-        java.util.List<java.lang.String> impacts,
-        java.util.List<java.lang.String> stages) {
-        return getService()
-                   .getCitiesByCriteria(countries, sectors, impacts, stages);
     }
 
     public static void clearService() {

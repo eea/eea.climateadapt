@@ -1,8 +1,8 @@
-package eu.europa.eea.mayors_adapt.service.base;
+package eu.europa.eea.mayors_adapt.service.service.base;
+
+import eu.europa.eea.mayors_adapt.service.service.DataLocalServiceUtil;
 
 import java.util.Arrays;
-
-import eu.europa.eea.mayors_adapt.service.DataLocalServiceUtil;
 
 /**
  * @author Brian Wing Shun Chan

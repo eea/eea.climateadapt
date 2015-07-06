@@ -1,12 +1,29 @@
 package eu.europa.eea.mayors_adapt.service.impl;
 
 import java.util.List;
+import java.util.Locale;
 import java.util.TreeMap;
+import java.util.TreeSet;
 
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.search.BooleanClauseOccur;
+import com.liferay.portal.kernel.search.BooleanQuery;
+import com.liferay.portal.kernel.search.BooleanQueryFactoryUtil;
+import com.liferay.portal.kernel.search.Document;
+import com.liferay.portal.kernel.search.Field;
+import com.liferay.portal.kernel.search.Hits;
+import com.liferay.portal.kernel.search.ParseException;
+import com.liferay.portal.kernel.search.SearchContext;
+import com.liferay.portal.kernel.search.SearchEngineUtil;
+import com.liferay.portal.kernel.search.TermQueryFactoryUtil;
+import com.liferay.portal.kernel.util.LocaleUtil;
+import com.liferay.portal.kernel.workflow.WorkflowConstants;
 import com.liferay.portal.security.ac.AccessControlled;
 import com.liferay.portlet.dynamicdatamapping.model.DDMStructure;
 import com.liferay.portlet.dynamicdatamapping.service.DDMStructureLocalServiceUtil;
+import com.liferay.portlet.journal.model.JournalArticle;
 
 import eu.europa.eea.mayors_adapt.service.base.DataServiceBaseImpl;
 
@@ -135,19 +152,116 @@ public class DataServiceImpl extends DataServiceBaseImpl {
 	}
 
 	public DDMStructure getStructure() throws SystemException {
-		TreeMap<String, String> climateImpacts = new TreeMap<String, String>();
-		List<DDMStructure> r = DDMStructureLocalServiceUtil.getDDMStructures(0,
-				DDMStructureLocalServiceUtil.getDDMStructuresCount());
-		DDMStructure ret = null;
-		for (DDMStructure struct : r) {
-			if (struct.getName().equals("City Profile")
-					&& struct.getDescription().equals(
-							"Structure for a City Profile"))
-				ret = struct;
+		return cityProfileStructure;
+	}
+
+	Log _log = LogFactoryUtil.getLog("DataServiceImpl.class");
+	String structureName = "City Profile";
+	DDMStructure cityProfileStructure = getStructure(structureName);
+	long cityProfileStructureId = cityProfileStructure.getStructureId();
+	Locale locale = new Locale("en", "GB");
+
+	public TreeSet<String> getCitiesByCriteria(List<String> countries,
+			List<String> sectors, List<String> impacts, List<String> stages) {
+
+		TreeSet<String> ret = new TreeSet<String>();
+
+		SearchContext searchContext = new SearchContext();
+		searchContext.setCompanyId(1);
+		searchContext.setEntryClassNames(new String[] { JournalArticle.class
+				.getName() });
+
+		BooleanQuery booleanQuery = BooleanQueryFactoryUtil
+				.create(searchContext);
+
+		try {
+			if (countries != null && countries.size() > 0) {
+				BooleanQuery countryQuery = BooleanQueryFactoryUtil
+						.create(searchContext);
+				for (String country : countries) {
+					countryQuery.add(TermQueryFactoryUtil.create(searchContext,
+							getField("a_m_country"), country),
+							BooleanClauseOccur.SHOULD);
+				}
+				booleanQuery.add(countryQuery, BooleanClauseOccur.MUST);
+			}
+
+			if (sectors != null && sectors.size() > 0) {
+				BooleanQuery sectorQuery = BooleanQueryFactoryUtil
+						.create(searchContext);
+				for (String sector : sectors) {
+					sectorQuery.add(TermQueryFactoryUtil.create(searchContext,
+							getField("b_m_sector"), sector),
+							BooleanClauseOccur.SHOULD);
+				}
+				booleanQuery.add(sectorQuery, BooleanClauseOccur.MUST);
+			}
+
+			if (impacts != null && impacts.size() > 0) {
+				BooleanQuery impactQuery = BooleanQueryFactoryUtil
+						.create(searchContext);
+				for (String impact : impacts) {
+					impactQuery.add(TermQueryFactoryUtil.create(searchContext,
+							getField("b_m_climate_impacts"), impact),
+							BooleanClauseOccur.SHOULD);
+				}
+				booleanQuery.add(impactQuery, BooleanClauseOccur.MUST);
+			}
+
+			if (stages != null && stages.size() > 0) {
+				BooleanQuery stageQuery = BooleanQueryFactoryUtil
+						.create(searchContext);
+				for (String stage : stages) {
+					stageQuery.add(TermQueryFactoryUtil.create(searchContext,
+							getField("c_m_stage_of_the_implementation_cycle"), stage),
+							BooleanClauseOccur.SHOULD);
+				}
+				stageQuery.add(stageQuery, BooleanClauseOccur.MUST);
+			}
+
+			booleanQuery.add(TermQueryFactoryUtil.create(searchContext,
+					Field.STATUS, WorkflowConstants.STATUS_APPROVED),
+					BooleanClauseOccur.MUST);
+
+		} catch (ParseException e) {
+			_log.error("Could not parse query " + booleanQuery.toString());
+			e.printStackTrace();
 		}
-		r = DDMStructureLocalServiceUtil.getStructures(18L, "City Profile",
-				"Structure for a City Profile");
+		try {
+			_log.info("Query: " + booleanQuery.toString());
+
+			Hits hits = SearchEngineUtil.search(searchContext, booleanQuery);
+			for (Document doc : hits.getDocs()) {
+				ret.add(doc.get(locale, Field.TITLE));
+				// _log.info(doc.toString());
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		return ret;
+	}
+
+	private DDMStructure getStructure(String structureName) {
+		String structureDescription = "Structure for a City Profile";
+		DDMStructure cityProfileStructure = null;
+		List<DDMStructure> structures;
+		try {
+			structures = DDMStructureLocalServiceUtil.getStructures();
+			for (DDMStructure structure : structures) {
+				if (structure.getName(LocaleUtil.getDefault())
+						.equalsIgnoreCase(structureName))
+					cityProfileStructure = structure;
+			}
+		} catch (SystemException e) {
+			e.printStackTrace();
+		}
+		if (cityProfileStructure == null)
+			_log.error("Could not found structure with name: " + structureName);
+		return cityProfileStructure;
+	}
+
+	private String getField(String field) {
+		return "ddm/" + cityProfileStructureId + "/" + field + "_" + locale;
 	}
 
 }

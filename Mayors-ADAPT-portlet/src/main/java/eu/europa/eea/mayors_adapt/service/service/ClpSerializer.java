@@ -1,10 +1,4 @@
-package eu.europa.eea.mayors_adapt.service;
-
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-import java.lang.reflect.Method;
-import java.util.ArrayList;
-import java.util.List;
+package eu.europa.eea.mayors_adapt.service.service;
 
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
@@ -16,6 +10,14 @@ import com.liferay.portal.kernel.util.ClassLoaderObjectInputStream;
 import com.liferay.portal.kernel.util.PropsUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.BaseModel;
+
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+
+import java.lang.reflect.Method;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class ClpSerializer {

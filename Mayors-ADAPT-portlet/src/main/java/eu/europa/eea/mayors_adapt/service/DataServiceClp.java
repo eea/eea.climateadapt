@@ -24,6 +24,8 @@ public class DataServiceClp implements DataService {
     private String[] _methodParameterTypes7;
     private String _methodName8;
     private String[] _methodParameterTypes8;
+    private String _methodName9;
+    private String[] _methodParameterTypes9;
 
     public DataServiceClp(InvokableService invokableService) {
         _invokableService = invokableService;
@@ -59,6 +61,13 @@ public class DataServiceClp implements DataService {
         _methodName8 = "getStructure";
 
         _methodParameterTypes8 = new String[] {  };
+
+        _methodName9 = "getCitiesByCriteria";
+
+        _methodParameterTypes9 = new String[] {
+                "java.util.List", "java.util.List", "java.util.List",
+                "java.util.List"
+            };
     }
 
     @Override
@@ -236,5 +245,39 @@ public class DataServiceClp implements DataService {
         }
 
         return (com.liferay.portlet.dynamicdatamapping.model.DDMStructure) ClpSerializer.translateOutput(returnObj);
+    }
+
+    @Override
+    public java.util.TreeSet<java.lang.String> getCitiesByCriteria(
+        java.util.List<java.lang.String> countries,
+        java.util.List<java.lang.String> sectors,
+        java.util.List<java.lang.String> impacts,
+        java.util.List<java.lang.String> stages) {
+        Object returnObj = null;
+
+        try {
+            returnObj = _invokableService.invokeMethod(_methodName9,
+                    _methodParameterTypes9,
+                    new Object[] {
+                        ClpSerializer.translateInput(countries),
+                        
+                    ClpSerializer.translateInput(sectors),
+                        
+                    ClpSerializer.translateInput(impacts),
+                        
+                    ClpSerializer.translateInput(stages)
+                    });
+        } catch (Throwable t) {
+            t = ClpSerializer.translateThrowable(t);
+
+            if (t instanceof RuntimeException) {
+                throw (RuntimeException) t;
+            } else {
+                throw new RuntimeException(t.getClass().getName() +
+                    " is not a valid exception");
+            }
+        }
+
+        return (java.util.TreeSet<java.lang.String>) ClpSerializer.translateOutput(returnObj);
     }
 }

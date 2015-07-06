@@ -1,20 +1,20 @@
-package eu.europa.eea.mayors_adapt.service.base;
+package eu.europa.eea.mayors_adapt.service.service.base;
+
+import eu.europa.eea.mayors_adapt.service.service.DataServiceUtil;
 
 import java.util.Arrays;
-
-import eu.europa.eea.mayors_adapt.service.DataLocalServiceUtil;
 
 /**
  * @author Brian Wing Shun Chan
  * @generated
  */
-public class DataLocalServiceClpInvoker {
+public class DataServiceClpInvoker {
     private String _methodName22;
     private String[] _methodParameterTypes22;
     private String _methodName23;
     private String[] _methodParameterTypes23;
 
-    public DataLocalServiceClpInvoker() {
+    public DataServiceClpInvoker() {
         _methodName22 = "getBeanIdentifier";
 
         _methodParameterTypes22 = new String[] {  };
@@ -28,12 +28,12 @@ public class DataLocalServiceClpInvoker {
         Object[] arguments) throws Throwable {
         if (_methodName22.equals(name) &&
                 Arrays.deepEquals(_methodParameterTypes22, parameterTypes)) {
-            return DataLocalServiceUtil.getBeanIdentifier();
+            return DataServiceUtil.getBeanIdentifier();
         }
 
         if (_methodName23.equals(name) &&
                 Arrays.deepEquals(_methodParameterTypes23, parameterTypes)) {
-            DataLocalServiceUtil.setBeanIdentifier((java.lang.String) arguments[0]);
+            DataServiceUtil.setBeanIdentifier((java.lang.String) arguments[0]);
 
             return null;
         }

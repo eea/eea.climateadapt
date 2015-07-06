@@ -1,8 +1,8 @@
 package eu.europa.eea.mayors_adapt.service.base;
 
-import eu.europa.eea.mayors_adapt.service.DataServiceUtil;
-
 import java.util.Arrays;
+
+import eu.europa.eea.mayors_adapt.service.DataServiceUtil;
 
 /**
  * @author Brian Wing Shun Chan
@@ -25,6 +25,8 @@ public class DataServiceClpInvoker {
     private String[] _methodParameterTypes30;
     private String _methodName31;
     private String[] _methodParameterTypes31;
+    private String _methodName32;
+    private String[] _methodParameterTypes32;
 
     public DataServiceClpInvoker() {
         _methodName22 = "getBeanIdentifier";
@@ -58,6 +60,13 @@ public class DataServiceClpInvoker {
         _methodName31 = "getStructure";
 
         _methodParameterTypes31 = new String[] {  };
+
+        _methodName32 = "getCitiesByCriteria";
+
+        _methodParameterTypes32 = new String[] {
+                "java.util.List", "java.util.List", "java.util.List",
+                "java.util.List"
+            };
     }
 
     public Object invokeMethod(String name, String[] parameterTypes,
@@ -102,6 +111,14 @@ public class DataServiceClpInvoker {
         if (_methodName31.equals(name) &&
                 Arrays.deepEquals(_methodParameterTypes31, parameterTypes)) {
             return DataServiceUtil.getStructure();
+        }
+
+        if (_methodName32.equals(name) &&
+                Arrays.deepEquals(_methodParameterTypes32, parameterTypes)) {
+            return DataServiceUtil.getCitiesByCriteria((java.util.List<java.lang.String>) arguments[0],
+                (java.util.List<java.lang.String>) arguments[1],
+                (java.util.List<java.lang.String>) arguments[2],
+                (java.util.List<java.lang.String>) arguments[3]);
         }
 
         throw new UnsupportedOperationException();

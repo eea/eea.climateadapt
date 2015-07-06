@@ -388,7 +388,7 @@
 						<p>Dear ${CITY_PROFILE_CONTACT_NAME_SURNAME},</p>
 
 						<p>Your city profile fact sheet is now online! Have a look at it at:</p>
-						<a href="${CITY_PROFILE_SERVER_URL}/-/${CITY_PROFILE_CITY_NAME_LOWERCASE}" ><button>Open <b>${CITY_PROFILE_CITY_NAME}</b> City Profile</button></a>
+						<a href="${CITY_PROFILE_SERVER_URL}/-/${CITY_PROFILE_CITY_NAME_LOWERCASE}" >Open <b>${CITY_PROFILE_CITY_NAME}</b> City Profile</a>
 
 						<p>Thank you for your collaboration creating the profile.</p>
 

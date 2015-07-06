@@ -1,5 +1,7 @@
 package eu.europa.eea.mayors_adapt.service.base;
 
+import javax.sql.DataSource;
+
 import com.liferay.portal.kernel.bean.BeanReference;
 import com.liferay.portal.kernel.bean.IdentifiableBean;
 import com.liferay.portal.kernel.dao.jdbc.SqlUpdate;
@@ -8,12 +10,9 @@ import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.util.InfrastructureUtil;
 import com.liferay.portal.service.BaseLocalServiceImpl;
 import com.liferay.portal.service.persistence.UserPersistence;
-
 import com.liferay.portlet.asset.service.persistence.AssetEntryPersistence;
 
 import eu.europa.eea.mayors_adapt.service.DataLocalService;
-
-import javax.sql.DataSource;
 
 /**
  * Provides the base implementation for the data local service.

@@ -1,4 +1,4 @@
-package eu.europa.eea.mayors_adapt.service;
+package eu.europa.eea.mayors_adapt.service.service;
 
 import com.liferay.portal.service.ServiceWrapper;
 
@@ -42,47 +42,6 @@ public class DataServiceWrapper implements DataService,
         java.lang.String[] parameterTypes, java.lang.Object[] arguments)
         throws java.lang.Throwable {
         return _dataService.invokeMethod(name, parameterTypes, arguments);
-    }
-
-    @Override
-    public java.util.TreeMap<java.lang.String, java.lang.String> getDataTypes() {
-        return _dataService.getDataTypes();
-    }
-
-    @Override
-    public java.util.TreeMap<java.lang.String, java.lang.String> getAdaptationSectors() {
-        return _dataService.getAdaptationSectors();
-    }
-
-    @Override
-    public java.util.TreeMap<java.lang.String, java.lang.String> getClimateImpacts() {
-        return _dataService.getClimateImpacts();
-    }
-
-    @Override
-    public java.util.TreeMap<java.lang.String, java.lang.String> getAdaptationElements() {
-        return _dataService.getAdaptationElements();
-    }
-
-    @Override
-    public java.util.TreeMap<java.lang.String, java.lang.String> getCountries() {
-        return _dataService.getCountries();
-    }
-
-    @Override
-    public com.liferay.portlet.dynamicdatamapping.model.DDMStructure getStructure()
-        throws com.liferay.portal.kernel.exception.SystemException {
-        return _dataService.getStructure();
-    }
-
-    @Override
-    public java.util.TreeSet<java.lang.String> getCitiesByCriteria(
-        java.util.List<java.lang.String> countries,
-        java.util.List<java.lang.String> sectors,
-        java.util.List<java.lang.String> impacts,
-        java.util.List<java.lang.String> stages) {
-        return _dataService.getCitiesByCriteria(countries, sectors, impacts,
-            stages);
     }
 
     /**

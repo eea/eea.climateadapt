@@ -70,4 +70,11 @@ public interface DataService extends BaseService, InvokableService {
     @Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
     public com.liferay.portlet.dynamicdatamapping.model.DDMStructure getStructure()
         throws com.liferay.portal.kernel.exception.SystemException;
+
+    @Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+    public java.util.TreeSet<java.lang.String> getCitiesByCriteria(
+        java.util.List<java.lang.String> countries,
+        java.util.List<java.lang.String> sectors,
+        java.util.List<java.lang.String> impacts,
+        java.util.List<java.lang.String> stages);
 }
