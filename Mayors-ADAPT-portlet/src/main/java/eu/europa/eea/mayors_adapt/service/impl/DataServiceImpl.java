@@ -223,6 +223,10 @@ public class DataServiceImpl extends DataServiceBaseImpl {
 					Field.STATUS, WorkflowConstants.STATUS_APPROVED),
 					BooleanClauseOccur.MUST);
 
+			booleanQuery.add(TermQueryFactoryUtil.create(searchContext,
+					Field.CLASS_TYPE_ID, cityProfileStructureId),
+					BooleanClauseOccur.MUST);
+
 		} catch (ParseException e) {
 			_log.error("Could not parse query " + booleanQuery.toString());
 			e.printStackTrace();
