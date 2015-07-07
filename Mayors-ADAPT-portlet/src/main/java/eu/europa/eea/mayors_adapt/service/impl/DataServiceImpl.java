@@ -1,5 +1,7 @@
 package eu.europa.eea.mayors_adapt.service.impl;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
 import java.util.TreeMap;
@@ -202,8 +204,8 @@ public class DataServiceImpl extends DataServiceBaseImpl {
 						.create(searchContext);
 				for (String impact : impacts) {
 					impactQuery.add(TermQueryFactoryUtil.create(searchContext,
-							getField("b_m_climate_impacts"), impact),
-							BooleanClauseOccur.SHOULD);
+							getField("b_m_climate_impacts"),
+							impact), BooleanClauseOccur.MUST);
 				}
 				booleanQuery.add(impactQuery, BooleanClauseOccur.MUST);
 			}
@@ -213,10 +215,10 @@ public class DataServiceImpl extends DataServiceBaseImpl {
 						.create(searchContext);
 				for (String stage : stages) {
 					stageQuery.add(TermQueryFactoryUtil.create(searchContext,
-							getField("c_m_stage_of_the_implementation_cycle"), stage),
-							BooleanClauseOccur.SHOULD);
+							getField("c_m_stage_of_the_implementation_cycle"),
+							stage), BooleanClauseOccur.SHOULD);
 				}
-				stageQuery.add(stageQuery, BooleanClauseOccur.MUST);
+				booleanQuery.add(stageQuery, BooleanClauseOccur.MUST);
 			}
 
 			booleanQuery.add(TermQueryFactoryUtil.create(searchContext,
@@ -232,16 +234,27 @@ public class DataServiceImpl extends DataServiceBaseImpl {
 			e.printStackTrace();
 		}
 		try {
-			_log.info("Query: " + booleanQuery.toString());
+			_log.info("Executing Query: " + booleanQuery.toString());
 
 			Hits hits = SearchEngineUtil.search(searchContext, booleanQuery);
 			for (Document doc : hits.getDocs()) {
-				ret.add(doc.get(locale, Field.TITLE));
-				// _log.info(doc.toString());
+//				List<String> impactList = Arrays.asList(doc
+//						.getValues(getField("b_m_climate_impacts")));
+//				
+//				_log.info("impactList: " + impactList);
+//				_log.info("impact2List: " +impact2List);
+//						_log.info("impact: "+impacts);
+//				_log.info(impact2List.containsAll(impacts));
+//				if (impactList.containsAll(impacts))
+					ret.add(doc.get(locale, Field.TITLE));
+				_log.info(Arrays.asList(doc.getValues(getField("b_m_climate_impacts"))));
 			}
+
+			_log.info("Query executed: " + booleanQuery.toString());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+
 		return ret;
 	}
 
