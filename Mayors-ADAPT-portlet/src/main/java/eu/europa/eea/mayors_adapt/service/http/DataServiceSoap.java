@@ -39,10 +39,10 @@ import eu.europa.eea.mayors_adapt.service.DataServiceUtil;
 public class DataServiceSoap {
     private static Log _log = LogFactoryUtil.getLog(DataServiceSoap.class);
 
-    public static java.util.TreeMap<java.lang.String, java.lang.String> getDataTypes()
+    public static java.util.TreeSet<java.lang.String> getDataTypes()
         throws RemoteException {
         try {
-            java.util.TreeMap<java.lang.String, java.lang.String> returnValue = DataServiceUtil.getDataTypes();
+            java.util.TreeSet<java.lang.String> returnValue = DataServiceUtil.getDataTypes();
 
             return returnValue;
         } catch (Exception e) {
@@ -52,10 +52,10 @@ public class DataServiceSoap {
         }
     }
 
-    public static java.util.TreeMap<java.lang.String, java.lang.String> getAdaptationSectors()
+    public static java.util.TreeSet<java.lang.String> getAdaptationSectors()
         throws RemoteException {
         try {
-            java.util.TreeMap<java.lang.String, java.lang.String> returnValue = DataServiceUtil.getAdaptationSectors();
+            java.util.TreeSet<java.lang.String> returnValue = DataServiceUtil.getAdaptationSectors();
 
             return returnValue;
         } catch (Exception e) {
@@ -65,10 +65,10 @@ public class DataServiceSoap {
         }
     }
 
-    public static java.util.TreeMap<java.lang.String, java.lang.String> getClimateImpacts()
+    public static java.util.TreeSet<java.lang.String> getClimateImpacts()
         throws RemoteException {
         try {
-            java.util.TreeMap<java.lang.String, java.lang.String> returnValue = DataServiceUtil.getClimateImpacts();
+            java.util.TreeSet<java.lang.String> returnValue = DataServiceUtil.getClimateImpacts();
 
             return returnValue;
         } catch (Exception e) {
@@ -78,10 +78,10 @@ public class DataServiceSoap {
         }
     }
 
-    public static java.util.TreeMap<java.lang.String, java.lang.String> getAdaptationElements()
+    public static java.util.TreeSet<java.lang.String> getAdaptationElements()
         throws RemoteException {
         try {
-            java.util.TreeMap<java.lang.String, java.lang.String> returnValue = DataServiceUtil.getAdaptationElements();
+            java.util.TreeSet<java.lang.String> returnValue = DataServiceUtil.getAdaptationElements();
 
             return returnValue;
         } catch (Exception e) {
@@ -91,10 +91,10 @@ public class DataServiceSoap {
         }
     }
 
-    public static java.util.TreeMap<java.lang.String, java.lang.String> getCountries()
+    public static java.util.TreeSet<java.lang.String> getCountries()
         throws RemoteException {
         try {
-            java.util.TreeMap<java.lang.String, java.lang.String> returnValue = DataServiceUtil.getCountries();
+            java.util.TreeSet<java.lang.String> returnValue = DataServiceUtil.getCountries();
 
             return returnValue;
         } catch (Exception e) {
@@ -118,13 +118,13 @@ public class DataServiceSoap {
         }
     }
 
-    public static java.util.TreeSet<java.lang.String> getCitiesByCriteria(
+    public static java.util.TreeMap<java.lang.String,java.lang.String> getCitiesByCriteria(
         java.util.List<java.lang.String> countries,
         java.util.List<java.lang.String> sectors,
         java.util.List<java.lang.String> impacts,
         java.util.List<java.lang.String> stages) throws RemoteException {
         try {
-            java.util.TreeSet<java.lang.String> returnValue = DataServiceUtil.getCitiesByCriteria(countries,
+            java.util.TreeMap<java.lang.String,java.lang.String> returnValue = DataServiceUtil.getCitiesByCriteria(countries,
                     sectors, impacts, stages);
 
             return returnValue;

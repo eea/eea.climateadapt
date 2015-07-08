@@ -45,27 +45,27 @@ public class DataServiceWrapper implements DataService,
     }
 
     @Override
-    public java.util.TreeMap<java.lang.String, java.lang.String> getDataTypes() {
+    public java.util.TreeSet<java.lang.String> getDataTypes() {
         return _dataService.getDataTypes();
     }
 
     @Override
-    public java.util.TreeMap<java.lang.String, java.lang.String> getAdaptationSectors() {
+    public java.util.TreeSet<java.lang.String> getAdaptationSectors() {
         return _dataService.getAdaptationSectors();
     }
 
     @Override
-    public java.util.TreeMap<java.lang.String, java.lang.String> getClimateImpacts() {
+    public java.util.TreeSet<java.lang.String> getClimateImpacts() {
         return _dataService.getClimateImpacts();
     }
 
     @Override
-    public java.util.TreeMap<java.lang.String, java.lang.String> getAdaptationElements() {
+    public java.util.TreeSet<java.lang.String> getAdaptationElements() {
         return _dataService.getAdaptationElements();
     }
 
     @Override
-    public java.util.TreeMap<java.lang.String, java.lang.String> getCountries() {
+    public java.util.TreeSet<java.lang.String> getCountries() {
         return _dataService.getCountries();
     }
 
@@ -76,7 +76,7 @@ public class DataServiceWrapper implements DataService,
     }
 
     @Override
-    public java.util.TreeSet<java.lang.String> getCitiesByCriteria(
+    public java.util.TreeMap<java.lang.String,java.lang.String> getCitiesByCriteria(
         java.util.List<java.lang.String> countries,
         java.util.List<java.lang.String> sectors,
         java.util.List<java.lang.String> impacts,

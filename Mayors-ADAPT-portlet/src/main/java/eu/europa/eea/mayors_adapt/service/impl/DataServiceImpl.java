@@ -1,6 +1,5 @@
 package eu.europa.eea.mayors_adapt.service.impl;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
@@ -26,6 +25,7 @@ import com.liferay.portal.security.ac.AccessControlled;
 import com.liferay.portlet.dynamicdatamapping.model.DDMStructure;
 import com.liferay.portlet.dynamicdatamapping.service.DDMStructureLocalServiceUtil;
 import com.liferay.portlet.journal.model.JournalArticle;
+import com.liferay.portlet.journal.service.JournalArticleLocalServiceUtil;
 
 import eu.europa.eea.mayors_adapt.service.base.DataServiceBaseImpl;
 
@@ -33,7 +33,7 @@ import eu.europa.eea.mayors_adapt.service.base.DataServiceBaseImpl;
  * The implementation of the data remote service.
  *
  * <p>
- * All custom service methods should be put in this class. Whenever methods are
+ * All custom service methods should be add in this class. Whenever methods are
  * added, rerun ServiceBuilder to copy their definitions into the
  * {@link eu.europa.eea.mayors_adapt.service.DataService} interface.
  *
@@ -50,106 +50,102 @@ import eu.europa.eea.mayors_adapt.service.base.DataServiceBaseImpl;
 @AccessControlled(guestAccessEnabled = true)
 public class DataServiceImpl extends DataServiceBaseImpl {
 
-	public TreeMap<String, String> getDataTypes() {
-		TreeMap<String, String> dataTypes = new TreeMap<String, String>();
-		dataTypes.put("DOCUMENT", "Publications and reports");
-		dataTypes.put("INFORMATIONSOURCE", "Information portals");
-		dataTypes.put("MAPGRAPHDATASET", "Maps, graphs and datasets");
-		dataTypes.put("INDICATOR", "Indicators");
-		dataTypes.put("GUIDANCE", "Guidance");
-		dataTypes.put("TOOL", "Tools");
-		dataTypes.put("RESEARCHPROJECT", "Research and knowledge projects");
-		dataTypes.put("ORGANISATION", "Organisations");
-		dataTypes.put("MEASURE", "Adaptation options");
-		dataTypes.put("ACTION", "Case studies");
+	public TreeSet<String> getDataTypes() {
+		TreeSet<String> dataTypes = new TreeSet<String>();
+		dataTypes.add("Publications and reports");
+		dataTypes.add("Information portals");
+		dataTypes.add("Maps, graphs and datasets");
+		dataTypes.add("Indicators");
+		dataTypes.add("Guidance");
+		dataTypes.add("Tools");
+		dataTypes.add("Research and knowledge projects");
+		dataTypes.add("Organisations");
+		dataTypes.add("Adaptation options");
+		dataTypes.add("Case studies");
 		return dataTypes;
 	}
 
-	public TreeMap<String, String> getAdaptationSectors() {
-		TreeMap<String, String> adaptationSectors = new TreeMap<String, String>();
-		adaptationSectors.put("AGRICULTURE", "Agriculture and Forest");
-		adaptationSectors.put("BIODIVERSITY", "Biodiversity");
-		adaptationSectors.put("COASTAL", "Coastal areas");
-		adaptationSectors.put("DISASTERRISKREDUCTION",
-				"Disaster Risk Reduction");
-		adaptationSectors.put("FINANCIAL", "Financial");
-		adaptationSectors.put("HEALTH", "Health");
-		adaptationSectors.put("INFRASTRUCTURE", "Infrastructure");
-		adaptationSectors.put("MARINE", "Marine and Fisheries");
-		adaptationSectors.put("WATERMANAGEMENT", "Water management");
-		adaptationSectors.put("URBAN", "Urban");
+	public TreeSet<String> getAdaptationSectors() {
+		TreeSet<String> adaptationSectors = new TreeSet<String>();
+		adaptationSectors.add("Agriculture and Forest");
+		adaptationSectors.add("Biodiversity");
+		adaptationSectors.add("Coastal areas");
+		adaptationSectors.add("Disaster Risk Reduction");
+		adaptationSectors.add("Financial");
+		adaptationSectors.add("Health");
+		adaptationSectors.add("Infrastructure");
+		adaptationSectors.add("Marine and Fisheries");
+		adaptationSectors.add("Water management");
+		adaptationSectors.add("Urban");
 		return adaptationSectors;
 	}
 
-	public TreeMap<String, String> getClimateImpacts() {
-		TreeMap<String, String> climateImpacts = new TreeMap<String, String>();
-		climateImpacts.put("EXTREMETEMP", "Temperatures");
-		climateImpacts.put("WATERSCARCE", "Water Scarcity");
-		climateImpacts.put("FLOODING", "Flooding");
-		climateImpacts.put("SEALEVELRISE", "Sea Level Rise");
-		climateImpacts.put("DROUGHT", "Droughts");
-		climateImpacts.put("STORM", "Storms");
-		climateImpacts.put("ICEANDSNOW", "Ice and Snow");
+	public TreeSet<String> getClimateImpacts() {
+		TreeSet<String> climateImpacts = new TreeSet<String>();
+		climateImpacts.add("Temperatures");
+		climateImpacts.add("Water Scarcity");
+		climateImpacts.add("Flooding");
+		climateImpacts.add("Sea Level Rise");
+		climateImpacts.add("Droughts");
+		climateImpacts.add("Storms");
+		climateImpacts.add("Ice and Snow");
 		return climateImpacts;
 	}
 
-	public TreeMap<String, String> getAdaptationElements() {
-		TreeMap<String, String> adaptationElements = new TreeMap<String, String>();
-		adaptationElements.put("OBSERVATIONS", "Observations and Scenarios");
-		adaptationElements.put("VULNERABILITY", "Vulnerability Assessment");
-		adaptationElements.put("ACTION", "Adaptation Actions");
-		adaptationElements.put("PLANSTRATEGY",
-				"Adaptation Plans and Strategies");
-		adaptationElements.put("EU_POLICY", "Sector Policies");
-		adaptationElements.put("MEASUREACTION",
-				"Adaptation Measures and Actions");
+	public TreeSet<String> getAdaptationElements() {
+		TreeSet<String> adaptationElements = new TreeSet<String>();
+		adaptationElements.add("Observations and Scenarios");
+		adaptationElements.add("Vulnerability Assessment");
+		adaptationElements.add("Adaptation Actions");
+		adaptationElements.add("Adaptation Plans and Strategies");
+		adaptationElements.add("Sector Policies");
+		adaptationElements.add("Adaptation Measures and Actions");
 		return adaptationElements;
 	}
 
-	public TreeMap<String, String> getCountries() {
-		TreeMap<String, String> countries = new TreeMap<String, String>();
-		countries.put("AL", "Albania");
-		countries.put("AT", "Austria");
-		countries.put("BE", "Belgium");
-		countries.put("BG", "Bulgaria");
-		countries.put("HR", "Croatia");
-		countries.put("CY", "Cyprus");
-		countries.put("CZ", "Czech Republic");
-		countries.put("DE", "Germany");
-		countries.put("DK", "Denmark");
-		countries.put("EE", "Estonia");
-		countries.put("FI", "Finland");
-		countries.put("GB", "United Kingdom");
-		countries.put("FR", "France");
-		countries.put("GR", "Greece");
-		countries.put("HU", "Hungary");
-		countries.put("IE", "Ireland");
-		countries.put("IT", "Italy");
-		countries.put("LV", "Latvia");
-		countries.put("LT", "Lithuania");
-		countries.put("LU", "Luxembourg");
-		countries.put("MT", "Malta");
-		countries.put("NL", "Netherlands");
-		countries.put("PL", "Poland");
-		countries.put("PT", "Portugal");
-		countries.put("RO", "Romania");
-		countries.put("SK", "Slovakia");
-		countries.put("SI", "Slovenia");
-		countries.put("ES", "Spain");
-		countries.put("SE", "Sweden");
-		countries.put("CH", "Switzerland");
-		countries.put("IS", "Iceland");
-		countries.put("LI", "Liechtenstein");
-		countries.put("NO", "Norway");
-		countries.put("TR", "Turkey");
-		countries.put("HR", "Croatia");
-		countries.put("RS", "Serbia");
-		countries.put("BA", "Bosnia and Herzegovina");
-		countries.put("ME", "Montenegro");
-		countries.put("AL", "Albania");
-		countries.put("XK",
-				"Kosovo under UN Security Counil Resolution 1244/99");
-		countries.put("MK", "Former Yugoslav Republic of Macedonia");
+	public TreeSet<String> getCountries() {
+		TreeSet<String> countries = new TreeSet<String>();
+		countries.add("Albania");
+		countries.add("Austria");
+		countries.add("Belgium");
+		countries.add("Bulgaria");
+		countries.add("Croatia");
+		countries.add("Cyprus");
+		countries.add("Czech Republic");
+		countries.add("Germany");
+		countries.add("Denmark");
+		countries.add("Estonia");
+		countries.add("Finland");
+		countries.add("United Kingdom");
+		countries.add("France");
+		countries.add("Greece");
+		countries.add("Hungary");
+		countries.add("Ireland");
+		countries.add("Italy");
+		countries.add("Latvia");
+		countries.add("Lithuania");
+		countries.add("Luxembourg");
+		countries.add("Malta");
+		countries.add("Netherlands");
+		countries.add("Poland");
+		countries.add("Portugal");
+		countries.add("Romania");
+		countries.add("Slovakia");
+		countries.add("Slovenia");
+		countries.add("Spain");
+		countries.add("Sweden");
+		countries.add("Switzerland");
+		countries.add("Iceland");
+		countries.add("Liechtenstein");
+		countries.add("Norway");
+		countries.add("Turkey");
+		countries.add("Croatia");
+		countries.add("Serbia");
+		countries.add("Bosnia and Herzegovina");
+		countries.add("Montenegro");
+		countries.add("Albania");
+		countries.add("Kosovo under UN Security Counil Resolution 1244/99");
+		countries.add("Former Yugoslav Republic of Macedonia");
 		return countries;
 	}
 
@@ -163,10 +159,10 @@ public class DataServiceImpl extends DataServiceBaseImpl {
 	long cityProfileStructureId = cityProfileStructure.getStructureId();
 	Locale locale = new Locale("en", "GB");
 
-	public TreeSet<String> getCitiesByCriteria(List<String> countries,
+	public TreeMap<String, String> getCitiesByCriteria(List<String> countries,
 			List<String> sectors, List<String> impacts, List<String> stages) {
 
-		TreeSet<String> ret = new TreeSet<String>();
+		TreeMap<String, String> ret = new TreeMap<String, String>();
 
 		SearchContext searchContext = new SearchContext();
 		searchContext.setCompanyId(1);
@@ -204,8 +200,8 @@ public class DataServiceImpl extends DataServiceBaseImpl {
 						.create(searchContext);
 				for (String impact : impacts) {
 					impactQuery.add(TermQueryFactoryUtil.create(searchContext,
-							getField("b_m_climate_impacts"),
-							impact), BooleanClauseOccur.MUST);
+							getField("b_m_climate_impacts"), impact),
+							BooleanClauseOccur.MUST);
 				}
 				booleanQuery.add(impactQuery, BooleanClauseOccur.MUST);
 			}
@@ -238,16 +234,28 @@ public class DataServiceImpl extends DataServiceBaseImpl {
 
 			Hits hits = SearchEngineUtil.search(searchContext, booleanQuery);
 			for (Document doc : hits.getDocs()) {
-//				List<String> impactList = Arrays.asList(doc
-//						.getValues(getField("b_m_climate_impacts")));
-//				
-//				_log.info("impactList: " + impactList);
-//				_log.info("impact2List: " +impact2List);
-//						_log.info("impact: "+impacts);
-//				_log.info(impact2List.containsAll(impacts));
-//				if (impactList.containsAll(impacts))
-					ret.add(doc.get(locale, Field.TITLE));
-				_log.info(Arrays.asList(doc.getValues(getField("b_m_climate_impacts"))));
+				// List<String> impactList = Arrays.asList(doc
+				// .getValues(getField("b_m_climate_impacts")));
+				//
+				// _log.info("impactList: " + impactList);
+				// _log.info("impact2List: " +impact2List);
+				// _log.info("impact: "+impacts);
+				// _log.info(impact2List.containsAll(impacts));
+				// if (impactList.containsAll(impacts))
+				long articleId = Long.parseLong(doc.get(Field.UID).split("_PORTLET_")[1]);
+				String articleUrlTitle = "";
+				try {
+					JournalArticle article = JournalArticleLocalServiceUtil
+							.getArticle(articleId);
+					articleUrlTitle = article.getUrlTitle();
+				} catch (com.liferay.portlet.journal.NoSuchArticleException e) {
+					_log.error("City profile not found for indexed articleId: "+articleId);
+				}
+				ret.put(doc.get(locale, Field.TITLE),
+						"/-/" + articleUrlTitle );
+				_log.info(Arrays.asList(doc
+						.getValues(getField("b_m_climate_impacts"))));
+				_log.info(doc.toString());
 			}
 
 			_log.info("Query executed: " + booleanQuery.toString());

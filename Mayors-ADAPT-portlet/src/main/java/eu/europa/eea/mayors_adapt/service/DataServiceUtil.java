@@ -51,23 +51,23 @@ public class DataServiceUtil {
         return getService().invokeMethod(name, parameterTypes, arguments);
     }
 
-    public static java.util.TreeMap<java.lang.String, java.lang.String> getDataTypes() {
+    public static java.util.TreeSet<java.lang.String> getDataTypes() {
         return getService().getDataTypes();
     }
 
-    public static java.util.TreeMap<java.lang.String, java.lang.String> getAdaptationSectors() {
+    public static java.util.TreeSet<java.lang.String> getAdaptationSectors() {
         return getService().getAdaptationSectors();
     }
 
-    public static java.util.TreeMap<java.lang.String, java.lang.String> getClimateImpacts() {
+    public static java.util.TreeSet<java.lang.String> getClimateImpacts() {
         return getService().getClimateImpacts();
     }
 
-    public static java.util.TreeMap<java.lang.String, java.lang.String> getAdaptationElements() {
+    public static java.util.TreeSet<java.lang.String> getAdaptationElements() {
         return getService().getAdaptationElements();
     }
 
-    public static java.util.TreeMap<java.lang.String, java.lang.String> getCountries() {
+    public static java.util.TreeSet<java.lang.String> getCountries() {
         return getService().getCountries();
     }
 
@@ -76,7 +76,7 @@ public class DataServiceUtil {
         return getService().getStructure();
     }
 
-    public static java.util.TreeSet<java.lang.String> getCitiesByCriteria(
+    public static java.util.TreeMap<java.lang.String,java.lang.String> getCitiesByCriteria(
         java.util.List<java.lang.String> countries,
         java.util.List<java.lang.String> sectors,
         java.util.List<java.lang.String> impacts,
