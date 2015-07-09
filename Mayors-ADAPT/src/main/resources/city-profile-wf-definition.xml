@@ -29,7 +29,7 @@
 				<p>Welcome to the Mayors Adapt city profile platform. We have set up a template which we would like you to fill in. All the information shared in this form, will be used to showcase and represent your city and your work on Climate-ADAPT. The more information you fill in, the better will be your cities impact within the community.</p>
 				
 				<p>You can find your city profile management page here:</p>  
-				<a href="${CITY_PROFILE_SERVER_URL}/c/portal/accessCityProfileUserTask?token=${CITY_PROFILE_TOKEN}&version=${version}&action=editForm" target="_blank"><button>Management page for <b>${CITY_PROFILE_CITY_NAME}</b> city profile</button></a>
+				<a href="${CITY_PROFILE_SERVER_URL}/c/portal/accessCityProfileUserTask?token=${CITY_PROFILE_TOKEN}" target="_blank"><button>Management page for <b>${CITY_PROFILE_CITY_NAME}</b> city profile</button></a>
 				
 				<p>Please note that you have four weeks from now to complete the form. You can edit it, save it and then come back to edit it further at a later stage. Once you submit it, we will quality manage it and may come back to you with questions or suggestions in case anything is unclear.</p>
 				
@@ -387,8 +387,10 @@
 						<template><![CDATA[
 						<p>Dear ${CITY_PROFILE_CONTACT_NAME_SURNAME},</p>
 
-						<p>Your city profile fact sheet is now online! Have a look at it at:</p>
-						<a href="${CITY_PROFILE_SERVER_URL}/-/${CITY_PROFILE_CITY_NAME_LOWERCASE}" >Open <b>${CITY_PROFILE_CITY_NAME}</b> City Profile</a>
+						<p>Your city profile fact sheet is now online! You can check it from your city profile management page.</p>
+						
+						<p>You can find your city profile management page here:</p>  
+						<a href="${CITY_PROFILE_SERVER_URL}/c/portal/accessCityProfileUserTask?token=${CITY_PROFILE_TOKEN}&version=${version}&action=editForm" target="_blank"><button>Management page for <b>${CITY_PROFILE_CITY_NAME}</b> city profile</button></a>
 
 						<p>Thank you for your collaboration creating the profile.</p>
 

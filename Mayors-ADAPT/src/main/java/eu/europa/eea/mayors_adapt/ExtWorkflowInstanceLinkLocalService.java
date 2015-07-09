@@ -43,7 +43,7 @@ public class ExtWorkflowInstanceLinkLocalService extends
 			Map<String, Serializable> workflowContext) throws PortalException,
 			SystemException {
 		ExtWorkflowInstanceLinkLocalService.workflowContext = workflowContext;
-		ExtWorkflowInstanceLinkLocalService.userId  = userId;
+		ExtWorkflowInstanceLinkLocalService.userId = userId;
 
 		if (!WorkflowThreadLocal.isEnabled()) {
 			return;
@@ -117,37 +117,39 @@ public class ExtWorkflowInstanceLinkLocalService extends
 			_log.info("ServiceContext: " + key + "->"
 					+ serviceContextMap.get(key));
 		}
-		if (contactNameSurname==null) contactNameSurname="User";
+		if (contactNameSurname == null)
+			contactNameSurname = "City Profile Contact";
 		workflowDefinitionName = structureName + " Approval";
 		KaleoDefinition kaleoDefinition = null;
-		_log.error("Looking for workflow definition: "+workflowDefinitionName);
+		_log.info("Looking for workflow definition: " + workflowDefinitionName);
 		try {
 			kaleoDefinition = KaleoDefinitionLocalServiceUtil
 					.getLatestKaleoDefinition(workflowDefinitionName,
 							serviceContext);
 			workflowDefinitionName = kaleoDefinition.getName();
 			workflowDefinitionVersion = kaleoDefinition.getVersion();
-			_log.info("Ussing for workflow definition: "+kaleoDefinition.getName());
+			_log.info("Using workflow definition: "
+					+ kaleoDefinition.getName()+" version "+kaleoDefinition.getVersion());
 			workflowContext.put("CITY_PROFILE_CITY_NAME", cityName);
 			workflowContext.put("CITY_PROFILE_CITY_NAME_LOWERCASE",
 					cityName.toLowerCase());
 			workflowContext.put("CITY_PROFILE_CONTACT_NAME_SURNAME",
 					contactNameSurname);
-			workflowContext.put("CITY_PROFILE_CONTACT_EMAIL_ADDRESS", contactEmail);
+			workflowContext.put("CITY_PROFILE_CONTACT_EMAIL_ADDRESS",
+					contactEmail);
 			workflowContext.put("CITY_PROFILE_OWNER", userId);
 			workflowContext.put("CITY_PROFILE_SERVER_URL", serverURL);
 			workflowContext.put(
 					WorkflowConstants.CONTEXT_NOTIFICATION_SENDER_ADDRESS,
 					"no-reply@climate-adapt.eea.europa.eu");
-			workflowContext.put(WorkflowConstants.CONTEXT_NOTIFICATION_SENDER_NAME,
+			workflowContext.put(
+					WorkflowConstants.CONTEXT_NOTIFICATION_SENDER_NAME,
 					"Mayors-ADAPT Site Administrator");
 			for (String key : workflowContext.keySet())
 				_log.info("WorkflowContext: " + key + "->"
 						+ workflowContext.get(key));
-		} catch (PortalException e) {
-			_log.error("Workflow not found: "+workflowDefinitionName);
-		} catch (SystemException e) {
-			_log.error("Workflow not found: "+workflowDefinitionName);
+		} catch (Exception e) {
+			_log.error("Workflow not found: " + workflowDefinitionName);
 		}
 	}
 

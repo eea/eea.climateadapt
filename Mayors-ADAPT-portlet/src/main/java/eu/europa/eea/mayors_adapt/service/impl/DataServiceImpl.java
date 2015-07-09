@@ -253,9 +253,9 @@ public class DataServiceImpl extends DataServiceBaseImpl {
 				}
 				ret.put(doc.get(locale, Field.TITLE),
 						"/-/" + articleUrlTitle );
-				_log.info(Arrays.asList(doc
+				_log.debug(Arrays.asList(doc
 						.getValues(getField("b_m_climate_impacts"))));
-				_log.info(doc.toString());
+				_log.debug(doc.toString());
 			}
 
 			_log.info("Query executed: " + booleanQuery.toString());

@@ -28,15 +28,16 @@ import com.liferay.portlet.journal.service.JournalArticleLocalServiceUtil;
 
 public class MayorsAdaptPortlet extends LiferayPortlet {
 
+	String uuid = null;
+
 	public void init() {
 		viewTemplate = getInitParameter("view-template");
 	}
 
 	public void doView(RenderRequest renderRequest,
 			RenderResponse renderResponse) throws IOException, PortletException {
-
+		_log.error("View of managing page for token: " + uuid);
 		include(viewTemplate, renderRequest, renderResponse);
-		viewTemplate = getInitParameter("view-template");
 
 	}
 
@@ -62,11 +63,11 @@ public class MayorsAdaptPortlet extends LiferayPortlet {
 
 	public void finishTask(ActionRequest actionRequest,
 			ActionResponse actionResponse) throws IOException {
-		String uuid = ParamUtil.getString(actionRequest, "token");
+		if (ParamUtil.getString(actionRequest, "token") != null)
+			uuid = ParamUtil.getString(actionRequest, "token");
 		long groupId = ParamUtil.getLong(actionRequest, "groupId");
 		long companyId = ParamUtil.getLong(actionRequest, "companyId");
-
-
+		String pageurl = "";
 		_log.info("Finishing Task for item: " + uuid);
 		try {
 			long userId = UserLocalServiceUtil.getUserByScreenName(companyId,
@@ -87,8 +88,7 @@ public class MayorsAdaptPortlet extends LiferayPortlet {
 					+ workflowInstanceLink.getCompanyId());
 			List<WorkflowTask> tasks = WorkflowTaskManagerUtil
 					.getWorkflowTasksByWorkflowInstance(
-							workflowInstanceLink.getCompanyId(),
-							userId,
+							workflowInstanceLink.getCompanyId(), userId,
 							workflowInstanceLink.getWorkflowInstanceId(),
 							false, 0, 1, null);
 			long workflowTaskId = 0;
@@ -105,11 +105,12 @@ public class MayorsAdaptPortlet extends LiferayPortlet {
 					workflowInstanceLink.getGroupId(),
 					workflowInstanceLink.getUserId(), workflowTaskId, "Finish",
 					null, workflowInstance.getWorkflowContext());
-			viewTemplate = "/ok.jsp";
+			pageurl = "/c/portal/accessCityProfileUserTask?token=" + article.getUuid();
 		} catch (Exception e) {
-			viewTemplate = "/ko.jsp";
 			e.printStackTrace();
 		}
+		actionResponse.sendRedirect(pageurl.toString());
+
 	}
 
 	protected String viewTemplate;

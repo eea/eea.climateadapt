@@ -1,3 +1,9 @@
+<%@page import="com.liferay.portal.kernel.workflow.WorkflowConstants"%>
+<%@page import="com.liferay.portal.model.Portlet"%>
+<%@page import="com.liferay.portal.model.LayoutTypePortlet"%>
+<%@page import="com.liferay.portal.service.LayoutLocalServiceUtil"%>
+<%@page import="com.liferay.portal.model.Layout"%>
+<%@page import="com.liferay.portal.model.PortletPreferences"%>
 <%@page import="com.liferay.portal.kernel.log.Log"%>
 <%@page import="com.liferay.portal.kernel.log.LogFactoryUtil"%>
 <%@page import="com.liferay.portal.kernel.workflow.WorkflowTask"%>
@@ -25,24 +31,54 @@
 <%@page import="com.liferay.portal.kernel.bean.BeanParamUtil"%>
 <%@ include file="init.jsp"%>
 <%
+	Log _log = LogFactoryUtil
+	.getLog("Mayors-ADAPT-portlet/view.jsp");
+
 	HttpServletRequest httpReq = PortalUtil
 	.getOriginalServletRequest(request);
 	String uuid = httpReq.getParameter("token");
+	
+	if (uuid==null) uuid= (String) request.getAttribute("token");
+	
+	_log.info("Managing page for token: "+uuid);
+	
 
 	long groupId = ParamUtil.getLong(request, "groupId", 18L);
 	long companyId = ParamUtil.getLong(request, "companyId", 1L);
 	long userId = ParamUtil.getLong(request, "userId", UserLocalServiceUtil
-			.getUserByScreenName(companyId, "cityprofilecontact")
-			.getUserId());
+	.getUserByScreenName(companyId, "cityprofilecontact")
+	.getUserId());
+
 	
-	Log _log = LogFactoryUtil
-			.getLog("Mayors-ADAPT-portlet/view.jsp");
 	
 	JournalArticle article = JournalArticleLocalServiceUtil.getJournalArticleByUuidAndGroupId(uuid, layout.getGroupId());
 	request.setAttribute(WebKeys.JOURNAL_ARTICLE,article);
 	String cityName = article.getTitle(locale);
 	String articleId = article.getArticleId();
+	String cityUrlName = article.getUrlTitle();
 	
+	boolean disableFinish=true;
+	boolean disableOpen=true;
+	boolean disableEdit=true;
+	boolean disablePreview=true;
+	String state = WorkflowInstanceLinkLocalServiceUtil.getState(
+			article.getCompanyId(),
+			article.getGroupId(),
+			JournalArticle.class.getName(),
+			article.getId());
+	if (article.getStatus()==WorkflowConstants.STATUS_PENDING && !state.equalsIgnoreCase("review_administrator")) 
+	{
+		disableFinish=false;
+		disableEdit=false;
+	}
+	if (article.getStatus()==WorkflowConstants.STATUS_PENDING && state.equalsIgnoreCase("review_administrator")) 
+	{
+		disablePreview =false;
+	}
+	if (article.getStatus()==WorkflowConstants.STATUS_APPROVED) disableOpen=false;
+	
+	_log.info("status: "+article.getStatus());
+	_log.info("state: "+state);
 %>
 <h2>
 	Welcome to
@@ -53,7 +89,7 @@ Here you can manage Mayors-ADAPT initiative information relative to your
 city.
 
 <liferay-portlet:renderURL portletName="15"
-	var="previewArticleContentURL"
+	var="previewArticleContentURL" 
 	windowState="<%=LiferayWindowState.POP_UP.toString()%>">
 	<liferay-portlet:param name="struts_action"
 		value="/journal/preview_article_content" />
@@ -80,13 +116,12 @@ city.
 
 <liferay-portlet:actionURL var="finishTaskURL" name="finishTask"
 	windowState="<%=LiferayWindowState.POP_UP.toString()%>">
-	<liferay-portlet:param name="token"
-		value="<%=uuid %>" />
+	<liferay-portlet:param name="token" value="<%=uuid%>" />
 	<liferay-portlet:param name="companyId"
 		value="<%=String.valueOf(companyId)%>" />
 	<liferay-portlet:param name="groupId"
 		value="<%=String.valueOf(groupId)%>" />
-	<liferay-portlet:param name="userId" 
+	<liferay-portlet:param name="userId"
 		value="<%=String.valueOf(userId)%>" />
 </liferay-portlet:actionURL>
 
@@ -95,20 +130,20 @@ city.
 
 <aui:row>
 	<h3>Step 1 - Edit your City Profile</h3>
-	<aui:button value="Edit" onClick="edit()" />
+	<aui:button value="Edit" onClick="edit()" disabled="<%=disableEdit %>" />
 </aui:row>
 <aui:row>
-	<h3>Step 2 - Preview your City Profile Mayors-ADAPT page</h3>
-	<aui:button value="Preview" onClick="preview()" />
+	<h3>Step 2 - Finish your page to preview it</h3>
+	<aui:button value="Finish" onClick="finish2()" disabled="<%=disableFinish %>" />
 </aui:row>
 <aui:row>
-	<h3>Step 3 - Finish your page and publish it</h3>
-	<aui:button value="Finish" onClick="finish()" />
+	<h3>Step 3 - Preview your City Profile Mayors-adapt page</h3>
+	<aui:button value="Preview" onClick="preview()" disabled="<%=disablePreview %>" />
 </aui:row>
-
 <aui:row>
-	<h3>Step 4 - Check your page in our Portal (after ours administrators approve it)</h3>
-	<aui:button value="Open"  onClick="check()" />
+	<h3>Step 4 - Check your page in our Portal (as soon as our
+		administrators approve it)</h3>
+	<aui:button value="Check" onClick="check()" disabled="<%=disableOpen %>"  />
 </aui:row>
 
 <aui:script>
@@ -137,19 +172,33 @@ city.
 						});
 	}
 	function finish() {
-		Liferay
-				.fire(
-						'previewArticle',
-						{
-							title : '<%= HtmlUtil.escapeJS(article.getTitle(locale)) %>',
-							uri : '<%= HtmlUtil.escapeJS(finishTaskURL.toString()) %>'
-						});
+		Liferay.fire('previewArticle', {
+			title : '<%= HtmlUtil.escapeJS(article.getTitle(locale)) %>',
+			uri : '<%= HtmlUtil.escapeJS(finishTaskURL.toString()) %>'
+		});
+	}
+	function finish2() {
+		window.open('<%= HtmlUtil.escapeJS(finishTaskURL.toString())%>','_self',false)
 	}
 	function check() {
-		window.open('/-/<%= HtmlUtil.escapeJS(cityName.toLowerCase().toString())%>')
+		window.open('/-/<%= HtmlUtil.escapeJS(cityUrlName.toLowerCase().toString())%>','_self',false)
 	}
 </aui:script>
 	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

@@ -106,7 +106,14 @@ public class AccessCityProfileUserTaskStrutsPortletAction extends
 				String.valueOf(workflowInstanceLink.getWorkflowInstanceId()));
 
 		String pageurl = "/city-profile-form?token=" + article.getUuid();
-
+//		LiferayPortletURL pageurl = PortletURLFactoryUtil.create(
+//				request, "15", 14150L, PortletRequest.RENDER_PHASE);
+//		pageurl.setWindowState(LiferayWindowState.POP_UP);
+//		pageurl.setPortletMode(PortletMode.VIEW);
+//		pageurl.setParameter("token", article.getUuid());
+//		pageurl.setParameter("companyId",String.valueOf(article.getCompanyId()));
+//		pageurl.setParameter("userId",String.valueOf(article.getUserId()));
+		
 		LiferayPortletURL factoryFinishURL = PortletURLFactoryUtil.create(
 				request, "151", 14150L, PortletRequest.ACTION_PHASE);
 		factoryFinishURL.setWindowState(LiferayWindowState.POP_UP);
@@ -171,25 +178,7 @@ public class AccessCityProfileUserTaskStrutsPortletAction extends
 		_log.info("factoryFinishURL: " + factoryFinishURL);
 		_log.info("finishURL: " + finishURL);
 
-		switch (actions.indexOf(action)) {
-		case 0:
-			response.sendRedirect(pageurl.toString());
-			break;
-		case 1:
-			_log.info("Finishing Task for : groupId:"
-					+ workflowInstanceLink.getGroupId() + " user:"
-					+ workflowInstanceLink.getUserId() + " task:"
-					+ workflowTaskId);
-			WorkflowTaskManagerUtil.completeWorkflowTask(
-					workflowInstanceLink.getGroupId(),
-					workflowInstanceLink.getUserId(), workflowTaskId, "Finish",
-					null, workflowInstance.getWorkflowContext());
-			response.sendRedirect("/mayors-adapt/thanks");
-			break;
-//		case 2:
-//			response.sendRedirect(factoryTaskURL.toString());
-//			break;
-		}
+		response.sendRedirect(pageurl.toString());
 		return null;
 	}
 }
