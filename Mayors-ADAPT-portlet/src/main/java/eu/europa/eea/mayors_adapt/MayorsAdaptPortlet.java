@@ -36,7 +36,7 @@ public class MayorsAdaptPortlet extends LiferayPortlet {
 
 	public void doView(RenderRequest renderRequest,
 			RenderResponse renderResponse) throws IOException, PortletException {
-		_log.error("View of managing page for token: " + uuid);
+		_log.info("View of managing page for token: " + uuid);
 		include(viewTemplate, renderRequest, renderResponse);
 
 	}
@@ -74,6 +74,10 @@ public class MayorsAdaptPortlet extends LiferayPortlet {
 					"cityprofilecontact").getUserId();
 			JournalArticle article = JournalArticleLocalServiceUtil
 					.getJournalArticleByUuidAndGroupId(uuid, groupId);
+
+			pageurl = "/c/portal/accessCityProfileUserTask?token="
+					+ article.getUuid();
+
 			WorkflowInstanceLink workflowInstanceLink = WorkflowInstanceLinkLocalServiceUtil
 					.getWorkflowInstanceLink(article.getCompanyId(),
 							article.getGroupId(),
@@ -82,10 +86,12 @@ public class MayorsAdaptPortlet extends LiferayPortlet {
 			WorkflowInstance workflowInstance = WorkflowInstanceManagerUtil
 					.getWorkflowInstance(article.getCompanyId(),
 							workflowInstanceLink.getWorkflowInstanceId());
+
 			_log.info("Gathering tasks for workflowInstance: "
 					+ workflowInstanceLink.getWorkflowInstanceId() + " user:"
 					+ userId + " companyId:"
 					+ workflowInstanceLink.getCompanyId());
+
 			List<WorkflowTask> tasks = WorkflowTaskManagerUtil
 					.getWorkflowTasksByWorkflowInstance(
 							workflowInstanceLink.getCompanyId(), userId,
@@ -100,12 +106,13 @@ public class MayorsAdaptPortlet extends LiferayPortlet {
 						+ task.getName());
 				workflowTaskId = task.getWorkflowTaskId();
 			}
+			if (workflowTaskId == 0)
+				_log.error("No task found for user to finish");
 
 			WorkflowTaskManagerUtil.completeWorkflowTask(
 					workflowInstanceLink.getGroupId(),
 					workflowInstanceLink.getUserId(), workflowTaskId, "Finish",
 					null, workflowInstance.getWorkflowContext());
-			pageurl = "/c/portal/accessCityProfileUserTask?token=" + article.getUuid();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

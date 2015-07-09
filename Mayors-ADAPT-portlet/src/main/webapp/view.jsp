@@ -1,3 +1,4 @@
+<%@page import="com.liferay.portal.service.GroupLocalServiceUtil"%>
 <%@page import="com.liferay.portal.kernel.workflow.WorkflowConstants"%>
 <%@page import="com.liferay.portal.model.Portlet"%>
 <%@page import="com.liferay.portal.model.LayoutTypePortlet"%>
@@ -43,13 +44,11 @@
 	_log.info("Managing page for token: "+uuid);
 	
 
-	long groupId = ParamUtil.getLong(request, "groupId", 18L);
-	long companyId = ParamUtil.getLong(request, "companyId", 1L);
+	long companyId = PortalUtil.getDefaultCompanyId();
+	long groupId = GroupLocalServiceUtil.getGroup(companyId, "Guest").getGroupId();
 	long userId = ParamUtil.getLong(request, "userId", UserLocalServiceUtil
 	.getUserByScreenName(companyId, "cityprofilecontact")
 	.getUserId());
-
-	
 	
 	JournalArticle article = JournalArticleLocalServiceUtil.getJournalArticleByUuidAndGroupId(uuid, layout.getGroupId());
 	request.setAttribute(WebKeys.JOURNAL_ARTICLE,article);
@@ -125,19 +124,16 @@ city.
 		value="<%=String.valueOf(userId)%>" />
 </liferay-portlet:actionURL>
 
-<liferay-security:doAsURL doAsUserId="11270901"
-	var="impersonateArticleContentURL" />
-
 <aui:row>
 	<h3>Step 1 - Edit your City Profile</h3>
 	<aui:button value="Edit" onClick="edit()" disabled="<%=disableEdit %>" />
 </aui:row>
 <aui:row>
 	<h3>Step 2 - Finish your page to preview it</h3>
-	<aui:button value="Finish" onClick="finish2()" disabled="<%=disableFinish %>" />
+	<aui:button value="Finish" onClick="finish()" disabled="<%=disableFinish %>" />
 </aui:row>
 <aui:row>
-	<h3>Step 3 - Preview your City Profile Mayors-adapt page</h3>
+	<h3>Step 3 - Preview your City Profile Mayors Adapt page</h3>
 	<aui:button value="Preview" onClick="preview()" disabled="<%=disablePreview %>" />
 </aui:row>
 <aui:row>
@@ -162,22 +158,7 @@ city.
 			uri : '<%= HtmlUtil.escapeJS(editArticleContentURL.toString()) %>'
 		});
 	}
-	function impersonate() {
-		Liferay
-				.fire(
-						'previewArticle',
-						{
-							title : '<%= HtmlUtil.escapeJS(article.getTitle(locale)) %>',
-							uri : '<%= HtmlUtil.escapeJS(impersonateArticleContentURL.toString()) %>'
-						});
-	}
 	function finish() {
-		Liferay.fire('previewArticle', {
-			title : '<%= HtmlUtil.escapeJS(article.getTitle(locale)) %>',
-			uri : '<%= HtmlUtil.escapeJS(finishTaskURL.toString()) %>'
-		});
-	}
-	function finish2() {
 		window.open('<%= HtmlUtil.escapeJS(finishTaskURL.toString())%>','_self',false)
 	}
 	function check() {
