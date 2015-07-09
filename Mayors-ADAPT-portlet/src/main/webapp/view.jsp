@@ -48,7 +48,7 @@
 	long groupId = GroupLocalServiceUtil.getGroup(companyId, "Guest").getGroupId();
 	long userId = ParamUtil.getLong(request, "userId", UserLocalServiceUtil
 	.getUserByScreenName(companyId, "cityprofilecontact")
-	.getUserId());
+	.getUserId()); 
 	
 	JournalArticle article = JournalArticleLocalServiceUtil.getJournalArticleByUuidAndGroupId(uuid, layout.getGroupId());
 	request.setAttribute(WebKeys.JOURNAL_ARTICLE,article);
