@@ -54,7 +54,7 @@
 	request.setAttribute(WebKeys.JOURNAL_ARTICLE,article);
 	String cityName = article.getTitle(locale);
 	String articleId = article.getArticleId();
-	String cityUrlName = article.getUrlTitle();
+	String cityUrlName = article.getUrlTitle(); 
 	
 	boolean disableFinish=true;
 	boolean disableOpen=true;
