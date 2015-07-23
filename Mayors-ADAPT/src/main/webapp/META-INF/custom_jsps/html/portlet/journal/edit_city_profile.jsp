@@ -299,7 +299,7 @@ request.setAttribute("edit_article.jsp-toLanguageId", toLanguageId);
 								<c:if test="<%= hasSavePermission %>">
 									<c:if test="<%= classNameId == JournalArticleConstants.CLASSNAME_ID_DEFAULT %>">
 										<aui:button disabled="<%=pending_review_administrator%>" name="saveButton" onClick='<%= renderResponse.getNamespace() + "saveArticle()" %>' primary="<%= false %>" type="submit" value="<%= saveButtonLabel %>" />
-										<aui:button disabled="<%=pending_review_administrator%>" name="finishButton" onClick='<%= renderResponse.getNamespace() + "finishArticle()" %>' primary="<%= false %>" type="submit" value="Finish (Test)" />
+										<aui:button disabled="<%=pending_review_administrator%>" name="finishButton" onClick='<%= renderResponse.getNamespace() + "finishArticle()" %>' primary="<%= false %>" type="submit" value="Finish" />
 									</c:if>
 
 									<!--<aui:button disabled="<%= pending %>" name="publishButton" onClick='<%= renderResponse.getNamespace() + "publishArticle()" %>' type="submit" value="<%= publishButtonLabel %>" />-->
@@ -375,14 +375,13 @@ request.setAttribute("edit_article.jsp-toLanguageId", toLanguageId);
 
 <c:if test="<%= (article != null) && Validator.equals(cmd, FINISH) %>">
 	<aui:script use="city-profile-finish">
-		<liferay-portlet:actionURL portletName="Mayors-ADAPT-portlet" var="finishTaskURL" name="finishTask" windowState="<%=LiferayWindowState.POP_UP.toString()%>">
+		<liferay-portlet:actionURL portletName="MayorsADAPTportlet_WAR_MayorsADAPTportlet" var="finishTaskURL" name="finishTask" windowState="<%=LiferayWindowState.POP_UP.toString()%>">
 			<liferay-portlet:param name="token" value="<%=article.getUuid()%>" />
 			<liferay-portlet:param name="companyId"	value="<%=String.valueOf(article.getCompanyId())%>" />
 			<liferay-portlet:param name="groupId" value="<%=String.valueOf(article.getGroupId())%>" />
 			<liferay-portlet:param name="userId" value="<%=String.valueOf(article.getUserId())%>" />
 		</liferay-portlet:actionURL>
-		alert('<%= HtmlUtil.escapeJS(finishTaskURL.toString())%>');
-		window.open('<%= HtmlUtil.escapeJS(finishTaskURL.toString())%>','_self',false)
+		window.open('<%= HtmlUtil.escapeJS(finishTaskURL.toString())%>','_parent',false);
 	</aui:script>
 </c:if>
 

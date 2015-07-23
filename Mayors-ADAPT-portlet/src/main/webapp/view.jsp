@@ -160,6 +160,7 @@ city.
 		});
 	}
 	function finish() {
+		alert('<%= HtmlUtil.escapeJS(finishTaskURL.toString())%>');
 		window.open('<%= HtmlUtil.escapeJS(finishTaskURL.toString())%>','_self',false)
 	}
 	function check() {
