@@ -117,7 +117,8 @@ public class ExtWorkflowInstanceLinkLocalService extends
 			_log.info("ServiceContext: " + key + "->"
 					+ serviceContextMap.get(key));
 		}
-		if (contactNameSurname == null)
+		serverURL = "http://"+serviceContext.getRequest().getServerName();
+		if (contactNameSurname == null || contactNameSurname.length()==0)
 			contactNameSurname = "City Profile Contact";
 		workflowDefinitionName = structureName + " Approval";
 		KaleoDefinition kaleoDefinition = null;

@@ -60,6 +60,8 @@ public class MayorsAdaptPortlet extends LiferayPortlet {
 			PortletException {
 		super.serveResource(resourceRequest, resourceResponse);
 	}
+	
+	
 
 	public void finishTask(ActionRequest actionRequest,
 			ActionResponse actionResponse) throws IOException {

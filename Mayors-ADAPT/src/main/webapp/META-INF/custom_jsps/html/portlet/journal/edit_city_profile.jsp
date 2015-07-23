@@ -25,6 +25,10 @@ String tabs2 = ParamUtil.getString(request, "tabs2");
 
 String redirect = ParamUtil.getString(request, "redirect");
 
+String FINISH = "FINISH";
+
+System.out.println("CMD: "+cmd);
+
 // Make sure the redirect is correct. This is a workaround for a layout that
 // has both the Journal and Journal Content portlets and the user edits an
 // article through the Journal Content portlet and then hits cancel.
@@ -295,6 +299,7 @@ request.setAttribute("edit_article.jsp-toLanguageId", toLanguageId);
 								<c:if test="<%= hasSavePermission %>">
 									<c:if test="<%= classNameId == JournalArticleConstants.CLASSNAME_ID_DEFAULT %>">
 										<aui:button disabled="<%=pending_review_administrator%>" name="saveButton" onClick='<%= renderResponse.getNamespace() + "saveArticle()" %>' primary="<%= false %>" type="submit" value="<%= saveButtonLabel %>" />
+										<aui:button disabled="<%=pending_review_administrator%>" name="finishButton" onClick='<%= renderResponse.getNamespace() + "finishArticle()" %>' primary="<%= false %>" type="submit" value="Finish (Test)" />
 									</c:if>
 
 									<!--<aui:button disabled="<%= pending %>" name="publishButton" onClick='<%= renderResponse.getNamespace() + "publishArticle()" %>' type="submit" value="<%= publishButtonLabel %>" />-->
@@ -368,9 +373,48 @@ request.setAttribute("edit_article.jsp-toLanguageId", toLanguageId);
 	</aui:script>
 </c:if>
 
+<c:if test="<%= (article != null) && Validator.equals(cmd, FINISH) %>">
+	<aui:script use="city-profile-finish">
+		<liferay-portlet:actionURL portletName="Mayors-ADAPT-portlet" var="finishTaskURL" name="finishTask" windowState="<%=LiferayWindowState.POP_UP.toString()%>">
+			<liferay-portlet:param name="token" value="<%=article.getUuid()%>" />
+			<liferay-portlet:param name="companyId"	value="<%=String.valueOf(article.getCompanyId())%>" />
+			<liferay-portlet:param name="groupId" value="<%=String.valueOf(article.getGroupId())%>" />
+			<liferay-portlet:param name="userId" value="<%=String.valueOf(article.getUserId())%>" />
+		</liferay-portlet:actionURL>
+		alert('<%= HtmlUtil.escapeJS(finishTaskURL.toString())%>');
+		window.open('<%= HtmlUtil.escapeJS(finishTaskURL.toString())%>','_self',false)
+	</aui:script>
+</c:if>
+
 <aui:script>
 	var <portlet:namespace />documentLibraryInput = null;
 	var <portlet:namespace />imageGalleryInput = null;
+
+	disableSeparatorFields()
+
+    function disableSeparatorFields() {
+	    /* Disable title Fields (separators) and improve aspect form */
+        var formu = document.<portlet:namespace />fm1;
+        var selects =  formu.getElementsByTagName("select");
+        var inputs = formu.getElementsByTagName("input");
+        for (var i=0; i<inputs.length; i++){
+                if ((inputs[i].name).indexOf("_ti_") >= 0){
+                        inputs[i].disabled="disabled";
+                        inputs[i].style.backgroundColor = "#828282";
+                        inputs[i].style.color = "white";
+                }
+        }
+
+        for (var j=0; j<selects.length; j++){
+                if ((selects[j].name).indexOf("_15_a_m_country")>= 0 || ((selects[j].name).indexOf("_15_b_m_sector"))>= 0 || ((selects[j].name).indexOf("_15_c_m_stage_of_the_implementation_cycle"))>= 0 || (selects[j].name).indexOf("_15_b_m_current_status_of_mayors_adapt_enrolment") >= 0){
+                        selects[j].style.height="30px";
+                }
+        }
+	}
+
+	function <portlet:namespace />finishArticle() {
+		document.<portlet:namespace />fm1.<portlet:namespace /><%= Constants.CMD %>.value = "FINISH";
+	}
 
 	function <portlet:namespace />publishArticle() {
 		document.<portlet:namespace />fm1.<portlet:namespace /><%= Constants.CMD %>.value = "<%= Constants.PUBLISH %>";

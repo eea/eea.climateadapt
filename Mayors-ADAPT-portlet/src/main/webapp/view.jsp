@@ -35,6 +35,7 @@
 	Log _log = LogFactoryUtil
 	.getLog("Mayors-ADAPT-portlet/view.jsp");
 
+
 	HttpServletRequest httpReq = PortalUtil
 	.getOriginalServletRequest(request);
 	String uuid = httpReq.getParameter("token");
