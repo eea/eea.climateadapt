@@ -134,7 +134,8 @@ else if (classNameId > JournalArticleConstants.CLASSNAME_ID_DEFAULT) {
 }
 
 //String[][] categorySections = {mainSections};
-String[][] categorySections = {new String[] {"content","categorization","schedule","display-page"}};
+//String[][] categorySections = {new String[] {"content","categorization","schedule","display-page"}};
+String[][] categorySections = {new String[] {"content"}};
 
 request.setAttribute("edit_article.jsp-redirect", redirect);
 
@@ -299,7 +300,7 @@ request.setAttribute("edit_article.jsp-toLanguageId", toLanguageId);
 								<c:if test="<%= hasSavePermission %>">
 									<c:if test="<%= classNameId == JournalArticleConstants.CLASSNAME_ID_DEFAULT %>">
 										<aui:button disabled="<%=pending_review_administrator%>" name="saveButton" onClick='<%= renderResponse.getNamespace() + "saveArticle()" %>' primary="<%= false %>" type="submit" value="<%= saveButtonLabel %>" />
-										<aui:button disabled="<%=pending_review_administrator%>" name="finishButton" onClick='<%= renderResponse.getNamespace() + "finishArticle()" %>' primary="<%= false %>" type="submit" value="Finish" />
+										<aui:button disabled="<%=pending_review_administrator%>" name="finishButton" onClick='<%= renderResponse.getNamespace() + "finishArticle()" %>' primary="<%= false %>" type="button" value="Finish" />
 									</c:if>
 
 									<!--<aui:button disabled="<%= pending %>" name="publishButton" onClick='<%= renderResponse.getNamespace() + "publishArticle()" %>' type="submit" value="<%= publishButtonLabel %>" />-->
@@ -411,10 +412,27 @@ request.setAttribute("edit_article.jsp-toLanguageId", toLanguageId);
         }
 	}
 
-	function <portlet:namespace />finishArticle() {
-		document.<portlet:namespace />fm1.<portlet:namespace /><%= Constants.CMD %>.value = "FINISH";
-	}
 
+    function <portlet:namespace />finishArticle() {
+                console.log("Finishing article");
+ 
+                var formu = document.<portlet:namespace />fm1;
+                var inputs = formu.getElementsByTagName("input");
+ 
+                for (var i=0; i<inputs.length; i++){
+                        if ((inputs[i].name).indexOf("_m_") >= 0){
+                                if (inputs[i].value == ""){
+                                        console.log(inputs[i].name + " vacio");
+                                        alert("You must fill mandatory fields(*) before finish the content.");
+                                        return false;
+                                }
+                        }
+                }
+ 
+                document.<portlet:namespace />fm1.<portlet:namespace /><%= Constants.CMD %>.value = "FINISH";
+                formu.submit();
+    }
+        
 	function <portlet:namespace />publishArticle() {
 		document.<portlet:namespace />fm1.<portlet:namespace /><%= Constants.CMD %>.value = "<%= Constants.PUBLISH %>";
 	}
@@ -478,3 +496,4 @@ private String _getSectionJsp(String name) {
 
 private static final String[] _CATEGORY_NAMES = {""};
 %>
+

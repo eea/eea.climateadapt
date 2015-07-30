@@ -413,8 +413,8 @@ if (user.getScreenName().equals("cityprofilecontact"))
 			</div>
 		</div>
 
-		<div class="journal-article-general-fields">
-			<aui:input autoFocus="<%= (((article != null) && !article.isNew()) && !PropsValues.JOURNAL_ARTICLE_FORCE_AUTOGENERATE_ID && windowState.equals(WindowState.MAXIMIZED)) %>" defaultLanguageId="<%= Validator.isNotNull(toLanguageId) ? toLanguageId : defaultLanguageId %>" languageId="<%= Validator.isNotNull(toLanguageId) ? toLanguageId : defaultLanguageId %>" name="title">
+		<div class="journal-article-general-fields" style="display:none">
+			<aui:input autoFocus="<%= (((article != null) && !article.isNew()) && !PropsValues.JOURNAL_ARTICLE_FORCE_AUTOGENERATE_ID && windowState.equals(WindowState.MAXIMIZED)) %>" defaultLanguageId="<%= Validator.isNotNull(toLanguageId) ? toLanguageId : defaultLanguageId %>" languageId="<%= Validator.isNotNull(toLanguageId) ? toLanguageId : defaultLanguageId %>" name="title" >
 				<c:if test="<%= classNameId == JournalArticleConstants.CLASSNAME_ID_DEFAULT %>">
 					<aui:validator name="required" />
 				</c:if>
@@ -506,9 +506,11 @@ Only the fields [currently in green below] will be public.
 				</c:otherwise>
 			</c:choose>
 
-			<c:if test="<%= Validator.isNull(toLanguageId) %>">
-				<aui:input label="searchable" name="indexable" />
-			</c:if>
+			<div style="display:none" >
+				<c:if test="<%= Validator.isNull(toLanguageId) %>">
+					<aui:input label="searchable" name="indexable"/>
+				</c:if>
+			</div>
 		</div>
 	</div>
 
@@ -793,5 +795,189 @@ private String _getTemplateImage(ThemeDisplay themeDisplay, DDMTemplate ddmTempl
 	}
 
 	return imageURL;
+}
+%>
+
+<!-----------------------------------------  Categorization JSP ------------------------------------------------->
+<!-----------------------------------------  Categorization JSP ------------------------------------------------->
+<!-----------------------------------------  Categorization JSP ------------------------------------------------->
+<%
+//String defaultLanguageId = (String)request.getAttribute("edit_article.jsp-defaultLanguageId");
+
+//JournalArticle article = (JournalArticle)request.getAttribute(WebKeys.JOURNAL_ARTICLE);
+
+String type = BeanParamUtil.getString(article, request, "type");
+
+if (Validator.isNull(type)) {
+	type = "general";
+}
+
+//String toLanguageId = (String)request.getAttribute("edit_article.jsp-toLanguageId");
+%>
+
+<div style="display:none">
+<aui:fieldset>
+	<aui:select name="type" showEmptyOption="<%= true %>"  >
+
+		<%
+		for (int i = 0; i < JournalArticleConstants.TYPES.length; i++) {
+		%>
+
+			<aui:option label="<%= JournalArticleConstants.TYPES[i] %>" selected="<%= type.equals(JournalArticleConstants.TYPES[i]) %>" />
+
+		<%
+		}
+		%>
+
+	</aui:select>
+
+	<%
+	long classPKL = 0;
+
+	if (article != null) {
+		classPKL = article.getResourcePrimKey();
+
+		if (!article.isApproved() && (article.getVersion() != JournalArticleConstants.VERSION_DEFAULT)) {
+			try {
+				AssetEntryLocalServiceUtil.getEntry(JournalArticle.class.getName(), article.getPrimaryKey());
+
+				classPKL = article.getPrimaryKey();
+			}
+			catch (NoSuchEntryException nsee) {
+			}
+		}
+	}
+	%>
+
+	<aui:input classPK="<%= classPKL %>" name="categories" type="assetCategories" />
+
+	<aui:input classPK="<%= classPKL %>" name="tags" type="assetTags" />
+</aui:fieldset>
+</div>
+
+<aui:script>
+	function <portlet:namespace />getSuggestionsContent() {
+		return document.<portlet:namespace />fm1.<portlet:namespace />title_<%= defaultLanguageId %>.value;
+	}
+</aui:script>
+
+
+<!-----------------------------------------  Display Page JSP ------------------------------------------------->
+<!-----------------------------------------  Display Page JSP ------------------------------------------------->
+<!-----------------------------------------  Display Page JSP ------------------------------------------------->
+<%
+//JournalArticle article = (JournalArticle)request.getAttribute(WebKeys.JOURNAL_ARTICLE);
+
+//String defaultLanguageId = (String)request.getAttribute("edit_article.jsp-defaultLanguageId");
+//String toLanguageId = (String)request.getAttribute("edit_article.jsp-toLanguageId");
+
+String layoutUuid = BeanParamUtil.getString(article, request, "layoutUuid");
+
+Layout selLayout = null;
+
+String layoutBreadcrumb = StringPool.BLANK;
+
+if (Validator.isNotNull(layoutUuid)) {
+	try {
+		selLayout = LayoutLocalServiceUtil.getLayoutByUuidAndGroupId(layoutUuid, themeDisplay.getSiteGroupId(), false);
+
+		layoutBreadcrumb = _getLayoutBreadcrumb(selLayout, locale);
+	}
+	catch (NoSuchLayoutException nsle) {
+	}
+
+	if (selLayout == null) {
+		try {
+			selLayout = LayoutLocalServiceUtil.getLayoutByUuidAndGroupId(layoutUuid, themeDisplay.getSiteGroupId(), true);
+
+			layoutBreadcrumb = _getLayoutBreadcrumb(selLayout, locale);
+		}
+		catch (NoSuchLayoutException nsle) {
+		}
+	}
+}
+
+Group parentGroup = themeDisplay.getSiteGroup();
+%>
+
+<div id="<portlet:namespace />pagesContainer" style="display:none">
+	<aui:input id="pagesContainerInput" name="layoutUuid" type="hidden" value="<%= layoutUuid %>" />
+
+	<div class="display-page-item-container hide" id="<portlet:namespace />displayPageItemContainer">
+		<span class="display-page-item">
+			<span>
+				<span id="<portlet:namespace />displayPageNameInput"><%= layoutBreadcrumb %></span>
+
+				<span class="display-page-item-remove icon icon-remove" id="<portlet:namespace />displayPageItemRemove" tabindex="0"></span>
+			</span>
+		</span>
+	</div>
+</div>
+
+<div class="display-page-toolbar" id="<portlet:namespace />displayPageToolbar" style="display:none"></div>
+
+<!-----------------------------------------  Schedule JSP ------------------------------------------------->
+<!-----------------------------------------  Schedule JSP ------------------------------------------------->
+<!-----------------------------------------  Schedule JSP ------------------------------------------------->
+<%
+//JournalArticle article = (JournalArticle)request.getAttribute(WebKeys.JOURNAL_ARTICLE);
+
+boolean neverExpire = ParamUtil.getBoolean(request, "neverExpire", true);
+
+if (article != null) {
+	if ((article.getExpirationDate() != null) && !article.isExpired()) {
+		neverExpire = false;
+	}
+}
+
+boolean neverReview = ParamUtil.getBoolean(request, "neverReview", true);
+
+if (article != null) {
+	if (article.getReviewDate() != null) {
+		neverReview = false;
+	}
+}
+%>
+<div style="display:none">
+	<aui:fieldset>
+		<aui:input formName="fm1" name="displayDate" />
+		<aui:input dateTogglerCheckboxLabel="never-expire" disabled="<%= neverExpire %>" formName="fm1" name="expirationDate" />
+		<aui:input dateTogglerCheckboxLabel="never-review" disabled="<%= neverReview %>" formName="fm1" name="reviewDate" />
+	</aui:fieldset>
+</div>
+
+<%!
+private String _getLayoutBreadcrumb(Layout layout, Locale locale) throws Exception {
+	StringBundler sb = new StringBundler();
+
+	layout = layout.toEscapedModel();
+
+	if (layout.isPrivateLayout()) {
+		sb.append(LanguageUtil.get(locale, "private-pages"));
+	}
+	else {
+		sb.append(LanguageUtil.get(locale, "public-pages"));
+	}
+
+	sb.append(StringPool.SPACE);
+	sb.append(StringPool.GREATER_THAN);
+	sb.append(StringPool.SPACE);
+
+	List<Layout> ancestors = layout.getAncestors();
+
+	Collections.reverse(ancestors);
+
+	for (Layout ancestor : ancestors) {
+		ancestor = ancestor.toEscapedModel();
+
+		sb.append(ancestor.getName(locale));
+		sb.append(StringPool.SPACE);
+		sb.append(StringPool.GREATER_THAN);
+		sb.append(StringPool.SPACE);
+	}
+
+	sb.append(layout.getName(locale));
+
+	return sb.toString();
 }
 %>
