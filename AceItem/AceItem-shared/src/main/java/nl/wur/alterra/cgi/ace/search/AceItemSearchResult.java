@@ -1,6 +1,10 @@
 package nl.wur.alterra.cgi.ace.search;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
+
+import com.liferay.portal.kernel.search.Field;
 
 import nl.wur.alterra.cgi.ace.model.AceItem;
 import nl.wur.alterra.cgi.ace.search.lucene.ACEIndexUtil;
@@ -13,283 +17,290 @@ import nl.wur.alterra.cgi.ace.search.lucene.ACEIndexUtil;
  */
 public class AceItemSearchResult {
 
-    public AceItemSearchResult() {
+	public AceItemSearchResult() {
 		super();
 	}
 
 	/** */
-    private long aceItemId;
-    private String name;
-    private String storedAt;
-    private String storagetype;
-    private float relevance;
-    private long rating;
-    private String shortdescription;
-    private short controlstatus;
-    private String deeplink;
-    private String spatialLayer;
-    private String feature;
-    private String year = "";
+	private long aceItemId;
+	private String name;
+	private String storedAt;
+	private String storagetype;
+	private float relevance;
+	private long rating;
+	private String shortdescription;
+	private short controlstatus;
+	private String deeplink;
+	private String spatialLayer;
+	private String feature;
+	private String year = "";
 
-    private boolean isNew= false;
+	private boolean isNew = false;
 
+	public boolean isIsNew() {
+		return isNew;
+	}
 
-    public boolean isIsNew() {
-        return isNew;
-    }
+	public void setNew(boolean isNew) {
+		// System.out.println("inside setNew name is " + this.name);
+		// System.out.println("isNew is " + isNew);
+		this.isNew = isNew;
+	}
 
-    public void setNew(boolean isNew) {
-        //System.out.println("inside setNew name is " + this.name);
-        //System.out.println("isNew is " + isNew);
-        this.isNew = isNew;
-    }
+	public String getFeature() {
+		return feature;
+	}
 
-    public String getFeature() {
-        return feature;
-    }
+	public void setFeature(String feature) {
+		// System.out.println(" setting feature " + feature);
+		this.feature = feature;
+	}
 
-    public void setFeature(String feature) {
-        //System.out.println(" setting feature " + feature);
-        this.feature = feature;
-    }
+	public String getYear() {
+		return year;
+	}
 
-    public String getYear() {
-            return year;
-    }
+	public void setYear(String year) {
+		this.year = year;
+	}
 
-    public void setYear(String year) {
-            this.year = year;
-    }
+	/**
+	 *
+	 * @param aceitem
+	 */
+	public AceItemSearchResult(AceItem aceitem) {
 
-    /**
-     *
-     * @param aceitem
-     */
-    public AceItemSearchResult(AceItem aceitem) {
+		setAceItemId(aceitem.getAceItemId());
 
-        setAceItemId(aceitem.getAceItemId());
+		setName(aceitem.getName().replaceAll("'", "\'"));
 
-        setName(aceitem.getName().replaceAll("'", "\'"));
+		setStoredAt(aceitem.getStoredAt().replaceAll("'", "\'"));
 
-        setStoredAt(aceitem.getStoredAt().replaceAll("'", "\'"));
+		setStoragetype(aceitem.getStoragetype().replaceAll("'", "\'"));
 
-        setStoragetype(aceitem.getStoragetype().replaceAll("'", "\'"));
+		setRating(aceitem.getRating());
 
-        setRating(aceitem.getRating());
+		setShortdescription(aceitem.getDescription().replaceAll("'", "\'"));
 
-        setShortdescription(aceitem.getDescription().replaceAll("'", "\'"));
+		setControlstatus(aceitem.getControlstatus());
 
-        setControlstatus(aceitem.getControlstatus());
+		setDeeplink(aceitem.getDeeplink().replaceAll("'", "\'"));
 
-        setDeeplink(aceitem.getDeeplink().replaceAll("'", "\'"));
+		// System.out.println("feature is " + aceitem.getFeature());
+		setFeature(aceitem.getFeature());
+		// System.out.println("name is " + getName());
+		setNew(isNew(aceitem.getApprovaldate(), aceitem.getCreationdate()));
 
-        //System.out.println("feature is " + aceitem.getFeature());
-        setFeature(aceitem.getFeature());
-        //System.out.println("name is " + getName());
-        setNew(isNew(aceitem.getApprovaldate(), aceitem.getCreationdate()));
+		if (aceitem.getYear() != null && aceitem.getYear().length() > 0) {
+			setYear(aceitem.getYear());
+		}
 
+	}
 
-        if (aceitem.getYear() != null && aceitem.getYear().length() > 0)
-        {
-            setYear(aceitem.getYear());
-        }
+	// public boolean isNew(Date approvalDate, Date createdDate) {
+	// Date processDate = null;
+	// if (approvalDate == null)
+	// {
+	// processDate = createdDate;
+	// } else {
+	// processDate = approvalDate;
+	// }
+	//
+	// //System.out.println("approval date is " + approvalDate);
+	// //System.out.println("creation date is " + approvalDate);
+	// //System.out.println("process date is " + processDate);
+	// Date today = new Date();
+	// long t1 = today.getTime();
+	// long t2 = processDate.getTime();
+	//
+	// //System.out.println("creation date is " + creationDate);
+	// long day = 1000 * 60 * 60 * 24; // milliseconds in a day
+	//
+	// long days = (t1 - t2) / day;
+	//
+	// //System.out.println("days is " + days);
+	// if (days <= 90) {
+	// //System.out.println("returning true");
+	// return true;
+	// } else {
+	// //System.out.println("returning false");
+	// return false;
+	// }
+	// }
 
-    }
+	public boolean isNew(Date approvalDate, Date createdDate) {
+		boolean isNew = false;
+		if (approvalDate != null) {
+			Calendar publishCal = Calendar.getInstance();
+			publishCal.setTime(approvalDate);
+			Calendar now = Calendar.getInstance();
+			publishCal.add(Calendar.MONTH, 3);
+			if (publishCal.after(now))
+				isNew = true;
+		}
+		return isNew;
+	}
 
+	/**
+	 * @return
+	 */
+	public Long getAceItemId() {
+		return aceItemId;
+	}
 
+	/**
+	 * @param aceItemId
+	 */
+	public void setAceItemId(Long aceItemId) {
+		this.aceItemId = aceItemId;
+	}
 
+	/**
+	 * @return
+	 */
+	public String getName() {
+		return name;
+	}
 
-    public boolean isNew(Date approvalDate, Date createdDate) {
-        Date processDate = null;
-        if (approvalDate == null)
-        {
-            processDate = createdDate;
-        } else {
-            processDate = approvalDate;
-        }
+	/**
+	 * @param name
+	 */
+	public void setName(String name) {
+		this.name = name.replaceAll("\"", "\"\"");
+	}
 
-        //System.out.println("approval date is " + approvalDate);
-        //System.out.println("creation date is " + approvalDate);
-        //System.out.println("process date is " + processDate);
-        Date today = new Date();
-        long t1 = today.getTime();
-        long t2 = processDate.getTime();
+	/**
+	 * @return
+	 */
+	public String getStoragetype() {
+		return storagetype;
+	}
 
-        //System.out.println("creation date is " + creationDate);
-        long day = 1000 * 60 * 60 * 24; // milliseconds in a day
+	/**
+	 * @param storagetype
+	 */
+	public void setStoragetype(String storagetype) {
+		this.storagetype = storagetype.replaceAll("\"", "\"\"");
+	}
 
-        long days = (t1 - t2) / day;
+	/**
+	 * @return
+	 */
+	public String getStoredAt() {
+		return storedAt;
+	}
 
-        //System.out.println("days is " + days);
-        if (days <= 90) {
-            //System.out.println("returning true");
-            return true;
-        } else {
-            //System.out.println("returning false");
-            return false;
-        }
-    }
+	/**
+	 * @param storedAt
+	 */
+	public void setStoredAt(String storedAt) {
+		this.storedAt = storedAt.replaceAll("\"", "\"\"");
+	}
 
-    /**
-     * @return
-     */
-    public Long getAceItemId() {
-        return aceItemId;
-    }
+	/**
+	 * @return
+	 */
+	public float getRelevance() {
+		return relevance;
+	}
 
-    /**
-     * @param aceItemId
-     */
-    public void setAceItemId(Long aceItemId) {
-        this.aceItemId = aceItemId;
-    }
+	/**
+	 * @param relevance
+	 */
+	public void setRelevance(float relevance) {
+		String help = "" + relevance;
+		if (!help.startsWith("NaN")) {
 
-    /**
-     * @return
-     */
-    public String getName() {
-        return name;
-    }
+			this.relevance = relevance;
+		} else {
 
-    /**
-     * @param name
-     */
-    public void setName(String name) {
-        this.name = name.replaceAll("\"", "\"\"");
-    }
+			this.relevance = 0.0f;
+		}
+	}
 
-    /**
-     * @return
-     */
-    public String getStoragetype() {
-        return storagetype;
-    }
+	/**
+	 * @return
+	 */
+	public Long getRating() {
+		return rating;
+	}
 
-    /**
-     * @param storagetype
-     */
-    public void setStoragetype(String storagetype) {
-        this.storagetype = storagetype.replaceAll("\"", "\"\"");
-    }
+	/**
+	 * @param rating
+	 */
+	public void setRating(Long rating) {
+		this.rating = rating;
+	}
 
-    /**
-     * @return
-     */
-    public String getStoredAt() {
-        return storedAt;
-    }
+	/**
+	 * @return
+	 */
+	public String getShortdescription() {
+		return shortdescription;
+	}
 
-    /**
-     * @param storedAt
-     */
-    public void setStoredAt(String storedAt) {
-        this.storedAt = storedAt.replaceAll("\"", "\"\"");
-    }
+	/**
+	 * @param shortdescription
+	 */
+	public void setShortdescription(String shortdescription) {
+		this.shortdescription = shortdescription.replaceAll("\\<.*?\\>", " ");
 
-    /**
-     * @return
-     */
-    public float getRelevance() {
-        return relevance;
-    }
+		int desclength = ACEIndexUtil.retrieveTotalDescriptionLength()
+				- this.name.length();
 
-    /**
-     * @param relevance
-     */
-    public void setRelevance(float relevance) {
-        String help = "" + relevance;
-        if (!help.startsWith("NaN")) {
+		if (desclength < 4) {
 
-            this.relevance = relevance;
-        } else {
+			desclength = 24;
+		}
 
-            this.relevance = 0.0f;
-        }
-    }
+		if (this.shortdescription.length() > desclength) {
 
-    /**
-     * @return
-     */
-    public Long getRating() {
-        return rating;
-    }
+			this.shortdescription = this.shortdescription.substring(0,
+					desclength - 4).replaceAll("\"", "\"\"")
+					+ " ...";
+		}
 
-    /**
-     * @param rating
-     */
-    public void setRating(Long rating) {
-        this.rating = rating;
-    }
+	}
 
-    /**
-     * @return
-     */
-    public String getShortdescription() {
-        return shortdescription;
-    }
+	/**
+	 * @return
+	 */
+	public Short getControlstatus() {
+		return controlstatus;
+	}
 
-    /**
-     * @param shortdescription
-     */
-    public void setShortdescription(String shortdescription) {
-        this.shortdescription = shortdescription.replaceAll("\\<.*?\\>", " ");
+	/**
+	 * @param controlstatus
+	 */
+	public void setControlstatus(Short controlstatus) {
+		this.controlstatus = controlstatus;
+	}
 
-        int desclength = ACEIndexUtil.retrieveTotalDescriptionLength()
-                - this.name.length();
+	/**
+	 * @return
+	 */
+	public String getDeeplink() {
+		return deeplink;
+	}
 
-        if (desclength < 4) {
+	/**
+	 * @param deeplink
+	 */
+	public void setDeeplink(String deeplink) {
+		this.deeplink = deeplink.replaceAll("\"", "\"\"");
+	}
 
-            desclength = 24;
-        }
+	/**
+	 * @return
+	 */
+	public String getSpatialLayer() {
+		return spatialLayer;
+	}
 
-        if (this.shortdescription.length() > desclength) {
-
-            this.shortdescription = this.shortdescription.substring(0,
-                    desclength - 4).replaceAll("\"", "\"\"")
-                    + " ...";
-        }
-
-    }
-
-    /**
-     * @return
-     */
-    public Short getControlstatus() {
-        return controlstatus;
-    }
-
-    /**
-     * @param controlstatus
-     */
-    public void setControlstatus(Short controlstatus) {
-        this.controlstatus = controlstatus;
-    }
-
-    /**
-     * @return
-     */
-    public String getDeeplink() {
-        return deeplink;
-    }
-
-    /**
-     * @param deeplink
-     */
-    public void setDeeplink(String deeplink) {
-        this.deeplink = deeplink.replaceAll("\"", "\"\"");
-    }
-
-    /**
-     * @return
-     */
-    public String getSpatialLayer() {
-        return spatialLayer;
-    }
-
-    /**
-     * @param spatialLayer
-     */
-    public void setSpatialLayer(String spatialLayer) {
-        this.spatialLayer = spatialLayer;
-    }
+	/**
+	 * @param spatialLayer
+	 */
+	public void setSpatialLayer(String spatialLayer) {
+		this.spatialLayer = spatialLayer;
+	}
 }

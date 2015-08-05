@@ -1,3 +1,4 @@
+
 <root available-locales="en_GB" default-locale="en_GB">
 	<dynamic-element dataType="string" indexType="" name="a_ti_general_information" readOnly="false" repeatable="false" required="false" showLabel="false" type="text" width="large">
 		<meta-data locale="en_GB">
@@ -25,23 +26,10 @@
 			</entry>
 		</meta-data>
 	</dynamic-element>
-	<dynamic-element dataType="number" fieldNamespace="ddm" indexType="" name="a_m_population_size" readOnly="false" repeatable="false" required="false" showLabel="true" type="ddm-number" width="small">
+	<dynamic-element dataType="number" fieldNamespace="ddm" indexType="" name="a_population_size" readOnly="false" repeatable="false" required="false" showLabel="true" type="ddm-number" width="small">
 		<meta-data locale="en_GB">
 			<entry name="label">
 				<![CDATA[Population Size]]>
-			</entry>
-			<entry name="predefinedValue">
-				<![CDATA[]]>
-			</entry>
-			<entry name="tip">
-				<![CDATA[]]>
-			</entry>
-		</meta-data>
-	</dynamic-element>
-	<dynamic-element dataType="string" indexType="keyword" name="a_m_localization_of_local_authority" readOnly="false" repeatable="false" required="false" showLabel="true" type="text" width="large">
-		<meta-data locale="en_GB">
-			<entry name="label">
-				<![CDATA[Localization of Local Authority]]>
 			</entry>
 			<entry name="predefinedValue">
 				<![CDATA[]]>
@@ -418,50 +406,10 @@
 	<dynamic-element dataType="string" indexType="" name="b_m_telephone" readOnly="false" repeatable="false" required="false" showLabel="true" type="text" width="small">
 		<meta-data locale="en_GB">
 			<entry name="label">
-				<![CDATA[Telephone]]>
+				<![CDATA[Telephone (for internal use only, not publically visible)]]>
 			</entry>
 			<entry name="predefinedValue">
 				<![CDATA[]]>
-			</entry>
-			<entry name="tip">
-				<![CDATA[]]>
-			</entry>
-		</meta-data>
-	</dynamic-element>
-	<dynamic-element dataType="boolean" indexType="keyword" name="b_m_covenant_of_mayors_signatory" readOnly="false" repeatable="false" required="false" showLabel="true" type="checkbox" width="">
-		<meta-data locale="en_GB">
-			<entry name="label">
-				<![CDATA[Covenant of mayors signatory (yes/no)]]>
-			</entry>
-			<entry name="predefinedValue">
-				<![CDATA[false]]>
-			</entry>
-			<entry name="tip">
-				<![CDATA[]]>
-			</entry>
-		</meta-data>
-	</dynamic-element>
-	<dynamic-element dataType="string" indexType="keyword" multiple="false" name="b_m_current_status_of_mayors_adapt_enrolment" readOnly="false" repeatable="false" required="false" showLabel="true" type="select" width="">
-		<dynamic-element name="option16552" type="option" value="Already enroled">
-			<meta-data locale="en_GB">
-				<entry name="label">
-					<![CDATA[Already enroled]]>
-				</entry>
-			</meta-data>
-		</dynamic-element>
-		<dynamic-element name="option16553" type="option" value="In the process of enrolment">
-			<meta-data locale="en_GB">
-				<entry name="label">
-					<![CDATA[In the process of enrolment]]>
-				</entry>
-			</meta-data>
-		</dynamic-element>
-		<meta-data locale="en_GB">
-			<entry name="label">
-				<![CDATA[Current Status of Mayors Adapt Enrolment]]>
-			</entry>
-			<entry name="predefinedValue">
-				<![CDATA[[""]]]>
 			</entry>
 			<entry name="tip">
 				<![CDATA[]]>
@@ -481,7 +429,7 @@
 			</entry>
 		</meta-data>
 	</dynamic-element>
-	<dynamic-element dataType="string" indexType="keyword" name="b_m_city_background" readOnly="false" repeatable="false" required="false" showLabel="true" type="textarea" width="large">
+	<dynamic-element dataType="string" indexType="keyword" name="b_city_background" readOnly="false" repeatable="false" required="false" showLabel="true" type="textarea" width="large">
 		<meta-data locale="en_GB">
 			<entry name="label">
 				<![CDATA[City background]]>
@@ -494,7 +442,73 @@
 			</entry>
 		</meta-data>
 	</dynamic-element>
-	<dynamic-element dataType="string" indexType="keyword" name="c_ti_climate_change_impact" readOnly="true" repeatable="false" required="false" showLabel="false" type="text" width="large">
+	<dynamic-element dataType="string" indexType="" name="c_ti_signatory_status" readOnly="false" repeatable="false" required="false" showLabel="false" type="text" width="large">
+		<meta-data locale="en_GB">
+			<entry name="label">
+				<![CDATA[Signatory Status]]>
+			</entry>
+			<entry name="predefinedValue">
+				<![CDATA[Signatory Status]]>
+			</entry>
+			<entry name="tip">
+				<![CDATA[]]>
+			</entry>
+		</meta-data>
+	</dynamic-element>
+	<dynamic-element dataType="boolean" indexType="keyword" name="b_covenant_of_mayors_signatory" readOnly="false" repeatable="false" required="false" showLabel="true" type="checkbox" width="">
+		<meta-data locale="en_GB">
+			<entry name="label">
+				<![CDATA[Covenant of Mayors Signatory (yes/no)]]>
+			</entry>
+			<entry name="predefinedValue">
+				<![CDATA[false]]>
+			</entry>
+			<entry name="tip">
+				<![CDATA[]]>
+			</entry>
+		</meta-data>
+	</dynamic-element>
+	<dynamic-element dataType="string" indexType="keyword" multiple="false" name="b_m_current_status_of_mayors_adapt_enrolment" readOnly="false" repeatable="false" required="false" showLabel="true" type="select" width="">
+		<dynamic-element name="option44755" type="option" value="Already signed">
+			<meta-data locale="en_GB">
+				<entry name="label">
+					<![CDATA[Already signed]]>
+				</entry>
+			</meta-data>
+		</dynamic-element>
+		<dynamic-element name="option44756" type="option" value="In the process of signing">
+			<meta-data locale="en_GB">
+				<entry name="label">
+					<![CDATA[In the process of signing]]>
+				</entry>
+			</meta-data>
+		</dynamic-element>
+		<meta-data locale="en_GB">
+			<entry name="label">
+				<![CDATA[Status of Mayors Adapt signature (of Political Commitment)]]>
+			</entry>
+			<entry name="predefinedValue">
+				<![CDATA[[""]]]>
+			</entry>
+			<entry name="tip">
+				<![CDATA[]]>
+			</entry>
+		</meta-data>
+	</dynamic-element>
+	<dynamic-element dataType="date" fieldNamespace="ddm" indexType="keyword" name="b_signature_date" readOnly="false" repeatable="false" required="false" showLabel="true" type="ddm-date" width="small">
+		<meta-data locale="en_GB">
+			<entry name="label">
+				<![CDATA[Signature Date]]>
+			</entry>
+			<entry name="predefinedValue">
+				<![CDATA[]]>
+			</entry>
+			<entry name="tip">
+				<![CDATA[]]>
+			</entry>
+		</meta-data>
+	</dynamic-element>
+	<dynamic-element dataType="string" indexType="" name="c_ti_climate_change_impact" readOnly="true" repeatable="false" required="false" showLabel="false" type="text" width="large">
 		<meta-data locale="en_GB">
 			<entry name="label">
 				<![CDATA[Climate change impact and adaptation responses]]>
@@ -508,21 +522,21 @@
 		</meta-data>
 	</dynamic-element>
 	<dynamic-element dataType="string" indexType="keyword" multiple="true" name="b_m_climate_impacts" readOnly="false" repeatable="false" required="false" showLabel="true" type="select" width="">
-		<dynamic-element name="option4496" type="option" value="Extreme Temperatures ">
+		<dynamic-element name="option18775" type="option" value="Extreme Temperatures">
 			<meta-data locale="en_GB">
 				<entry name="label">
 					<![CDATA[Extreme Temperatures]]>
 				</entry>
 			</meta-data>
 		</dynamic-element>
-		<dynamic-element name="option4497" type="option" value="Water Scarcity ">
+		<dynamic-element name="option18776" type="option" value="Water Scarcity">
 			<meta-data locale="en_GB">
 				<entry name="label">
 					<![CDATA[Water Scarcity]]>
 				</entry>
 			</meta-data>
 		</dynamic-element>
-		<dynamic-element name="option4498" type="option" value="Flooding ">
+		<dynamic-element name="option18777" type="option" value="Flooding">
 			<meta-data locale="en_GB">
 				<entry name="label">
 					<![CDATA[Flooding]]>
@@ -557,6 +571,13 @@
 				</entry>
 			</meta-data>
 		</dynamic-element>
+		<dynamic-element name="option26829" type="option" value="Forest Fires">
+			<meta-data locale="en_GB">
+				<entry name="label">
+					<![CDATA[Forest Fires]]>
+				</entry>
+			</meta-data>
+		</dynamic-element>
 		<meta-data locale="en_GB">
 			<entry name="label">
 				<![CDATA[Specification of climate impacts]]>
@@ -569,10 +590,10 @@
 			</entry>
 		</meta-data>
 	</dynamic-element>
-	<dynamic-element dataType="string" indexType="keyword" name="b_m_quantification" readOnly="false" repeatable="false" required="false" showLabel="true" type="textarea" width="large">
+	<dynamic-element dataType="string" indexType="keyword" name="b_climate_impacts_additional_information" readOnly="false" repeatable="false" required="false" showLabel="true" type="textarea" width="large">
 		<meta-data locale="en_GB">
 			<entry name="label">
-				<![CDATA[Quantification (e.g. Expected temperature / precipitation changes by 2050)]]>
+				<![CDATA[Additional information on climate impacts (e.g. Quantification of expected temperature)]]>
 			</entry>
 			<entry name="predefinedValue">
 				<![CDATA[]]>
@@ -582,7 +603,7 @@
 			</entry>
 		</meta-data>
 	</dynamic-element>
-	<dynamic-element dataType="string" indexType="keyword" multiple="false" name="b_m_sector" readOnly="false" repeatable="false" required="false" showLabel="true" type="select" width="">
+	<dynamic-element dataType="string" indexType="keyword" multiple="true" name="b_m_sector" readOnly="false" repeatable="false" required="false" showLabel="true" type="select" width="">
 		<dynamic-element name="option33734" type="option" value="Agriculture and Forest">
 			<meta-data locale="en_GB">
 				<entry name="label">
@@ -653,22 +674,43 @@
 				</entry>
 			</meta-data>
 		</dynamic-element>
+		<dynamic-element name="option27338" type="option" value="Biodiversity">
+			<meta-data locale="en_GB">
+				<entry name="label">
+					<![CDATA[Biodiversity]]>
+				</entry>
+			</meta-data>
+		</dynamic-element>
+		<dynamic-element name="option27339" type="option" value="Water Management">
+			<meta-data locale="en_GB">
+				<entry name="label">
+					<![CDATA[Water Mangement]]>
+				</entry>
+			</meta-data>
+		</dynamic-element>
+		<dynamic-element name="option27340" type="option" value="Urban">
+			<meta-data locale="en_GB">
+				<entry name="label">
+					<![CDATA[Urban]]>
+				</entry>
+			</meta-data>
+		</dynamic-element>
 		<meta-data locale="en_GB">
 			<entry name="label">
 				<![CDATA[Key vulnerable adaptation sector]]>
 			</entry>
 			<entry name="predefinedValue">
-				<![CDATA[[""]]]>
+				<![CDATA[["Urban"]]]>
 			</entry>
 			<entry name="tip">
 				<![CDATA[]]>
 			</entry>
 		</meta-data>
 	</dynamic-element>
-	<dynamic-element dataType="string" indexType="keyword" name="c_additional_information" readOnly="false" repeatable="false" required="false" showLabel="true" type="text" width="medium">
+	<dynamic-element dataType="string" indexType="keyword" name="b_sector_additional_information" readOnly="false" repeatable="false" required="false" showLabel="true" type="textarea" width="large">
 		<meta-data locale="en_GB">
 			<entry name="label">
-				<![CDATA[Additional information]]>
+				<![CDATA[Additional information on vulnerable sectors]]>
 			</entry>
 			<entry name="predefinedValue">
 				<![CDATA[]]>
@@ -733,7 +775,7 @@
 			</entry>
 		</meta-data>
 	</dynamic-element>
-	<dynamic-element dataType="string" indexType="keyword" name="d_ti_adapation_strategy" readOnly="true" repeatable="false" required="false" showLabel="false" type="text" width="large">
+	<dynamic-element dataType="string" indexType="" name="d_ti_adapation_strategy" readOnly="true" repeatable="false" required="false" showLabel="false" type="text" width="large">
 		<meta-data locale="en_GB">
 			<entry name="label">
 				<![CDATA[Adapation Strategy]]>
@@ -746,13 +788,41 @@
 			</entry>
 		</meta-data>
 	</dynamic-element>
-	<dynamic-element dataType="boolean" indexType="keyword" name="d_m_developed_an_adaptation_strategy" readOnly="false" repeatable="false" required="false" showLabel="true" type="checkbox" width="">
+	<dynamic-element dataType="string" indexType="keyword" multiple="false" name="d_m_developed_an_adaptationstrategy" readOnly="false" repeatable="false" required="false" showLabel="true" type="select" width="">
+		<dynamic-element name="option76027" type="option" value="Yes, we have an adaptation strategy">
+			<meta-data locale="en_GB">
+				<entry name="label">
+					<![CDATA[Yes, we have an adaptation strategy]]>
+				</entry>
+			</meta-data>
+		</dynamic-element>
+		<dynamic-element name="option76028" type="option" value="No, we do not have an adaptation strategy but are currently developing one">
+			<meta-data locale="en_GB">
+				<entry name="label">
+					<![CDATA[No, we do not have an adaptation strategy but are currently developing one]]>
+				</entry>
+			</meta-data>
+		</dynamic-element>
+		<dynamic-element name="option76029" type="option" value="No, Mayors Adapt is the first example of my city considering adaptation and we will develop an adaptation strategy">
+			<meta-data locale="en_GB">
+				<entry name="label">
+					<![CDATA[No, Mayors Adapt is the first example of my city considering adaptation and we will develop an adaptation strategy]]>
+				</entry>
+			</meta-data>
+		</dynamic-element>
+		<dynamic-element name="option76030" type="option" value="We (will) integrate adaptation into existing relevant plans">
+			<meta-data locale="en_GB">
+				<entry name="label">
+					<![CDATA[We (will) integrate adaptation into existing relevant plans]]>
+				</entry>
+			</meta-data>
+		</dynamic-element>
 		<meta-data locale="en_GB">
 			<entry name="label">
 				<![CDATA[Have you already developed an adaptation strategy?]]>
 			</entry>
 			<entry name="predefinedValue">
-				<![CDATA[false]]>
+				<![CDATA[[""]]]>
 			</entry>
 			<entry name="tip">
 				<![CDATA[]]>
@@ -762,7 +832,7 @@
 	<dynamic-element dataType="date" fieldNamespace="ddm" indexType="keyword" name="d_adaptation_strategy_date_of_approval" readOnly="false" repeatable="false" required="false" showLabel="true" type="ddm-date" width="small">
 		<meta-data locale="en_GB">
 			<entry name="label">
-				<![CDATA[Date of approval]]>
+				<![CDATA[Date of approval of the strategy/ plan (If adopted)]]>
 			</entry>
 			<entry name="predefinedValue">
 				<![CDATA[]]>
@@ -772,10 +842,10 @@
 			</entry>
 		</meta-data>
 	</dynamic-element>
-	<dynamic-element dataType="string" indexType="keyword" name="d_adaptation_strategy_name" readOnly="false" repeatable="false" required="false" showLabel="true" type="text" width="small">
+	<dynamic-element dataType="string" indexType="keyword" name="d_adaptation_strategy_name" readOnly="false" repeatable="false" required="false" showLabel="true" type="text" width="large">
 		<meta-data locale="en_GB">
 			<entry name="label">
-				<![CDATA[Name]]>
+				<![CDATA[Name of the strategy/ plan (If adopted)]]>
 			</entry>
 			<entry name="predefinedValue">
 				<![CDATA[]]>
@@ -785,10 +855,10 @@
 			</entry>
 		</meta-data>
 	</dynamic-element>
-	<dynamic-element dataType="string" indexType="keyword" name="d_adaptation_strategy_weblink" readOnly="false" repeatable="false" required="false" showLabel="true" type="text" width="small">
+	<dynamic-element dataType="string" indexType="keyword" name="d_adaptation_strategy_weblink" readOnly="false" repeatable="false" required="false" showLabel="true" type="text" width="medium">
 		<meta-data locale="en_GB">
 			<entry name="label">
-				<![CDATA[Weblink]]>
+				<![CDATA[Weblink of the strategy/ plan (If adopted)]]>
 			</entry>
 			<entry name="predefinedValue">
 				<![CDATA[]]>
@@ -798,7 +868,72 @@
 			</entry>
 		</meta-data>
 	</dynamic-element>
-	<dynamic-element dataType="string" indexType="keyword" name="e_ti_integration_of_adaptation_into_existing_relevant_plans" readOnly="true" repeatable="false" required="false" showLabel="false" type="text" width="large">
+	<dynamic-element dataType="string" indexType="keyword" name="d_adaptation_strategy_summary" readOnly="false" repeatable="false" required="false" showLabel="true" type="textarea" width="large">
+		<meta-data locale="en_GB">
+			<entry name="label">
+				<![CDATA[Short content summary of the strategy/ plan (If adopted)]]>
+			</entry>
+			<entry name="predefinedValue">
+				<![CDATA[]]>
+			</entry>
+			<entry name="tip">
+				<![CDATA[]]>
+			</entry>
+		</meta-data>
+	</dynamic-element>
+	<dynamic-element dataType="string" indexType="" name="e_ti_motivation" readOnly="false" repeatable="false" required="false" showLabel="false" type="text" width="large">
+		<meta-data locale="en_GB">
+			<entry name="label">
+				<![CDATA[Motivation]]>
+			</entry>
+			<entry name="predefinedValue">
+				<![CDATA[Motivation]]>
+			</entry>
+			<entry name="tip">
+				<![CDATA[]]>
+			</entry>
+		</meta-data>
+	</dynamic-element>
+	<dynamic-element dataType="string" indexType="keyword" name="e_m_motivation" readOnly="false" repeatable="false" required="false" showLabel="true" type="text" width="large">
+		<meta-data locale="en_GB">
+			<entry name="label">
+				<![CDATA[Main motivation for taking adaptation action (and joining Mayors Adapt)]]>
+			</entry>
+			<entry name="predefinedValue">
+				<![CDATA[]]>
+			</entry>
+			<entry name="tip">
+				<![CDATA[]]>
+			</entry>
+		</meta-data>
+	</dynamic-element>
+	<dynamic-element dataType="string" indexType="" name="e_ti_additional_information" readOnly="false" repeatable="false" required="false" showLabel="false" type="text" width="large">
+		<meta-data locale="en_GB">
+			<entry name="label">
+				<![CDATA[Additional Information]]>
+			</entry>
+			<entry name="predefinedValue">
+				<![CDATA[Additional Information]]>
+			</entry>
+			<entry name="tip">
+				<![CDATA[]]>
+			</entry>
+		</meta-data>
+	</dynamic-element>
+	<dynamic-element dataType="string" indexType="keyword" name="e_additional_information_on_adaptation_responses" readOnly="false" repeatable="false" required="false" showLabel="true" type="textarea" width="large">
+		<meta-data locale="en_GB">
+			<entry name="label">
+				<![CDATA[Additional information on adaptation responses, e.g. assessments, legal processes, partners involved and political framework]]>
+			</entry>
+			<entry name="predefinedValue">
+				<![CDATA[]]>
+			</entry>
+			<entry name="tip">
+				<![CDATA[]]>
+			</entry>
+		</meta-data>
+	</dynamic-element>
+	<dynamic-element dataType="string" indexType="" name="e_ti_integration_of_adaptation_into_existing_relevant_plans" readOnly="true" repeatable="false" required="false" showLabel="false" type="text" width="large">
 		<meta-data locale="en_GB">
 			<entry name="label">
 				<![CDATA[Integration of adaptation into existing relevant plans]]>
@@ -824,36 +959,10 @@
 			</entry>
 		</meta-data>
 	</dynamic-element>
-	<dynamic-element dataType="string" indexType="keyword" name="e_m_main_motivation_for_taking_adaptation_action" readOnly="false" repeatable="false" required="false" showLabel="true" type="textarea" width="large">
+	<dynamic-element dataType="string" indexType="keyword" name="e_adaptation_weblink" readOnly="false" repeatable="false" required="false" showLabel="true" type="text" width="large">
 		<meta-data locale="en_GB">
 			<entry name="label">
-				<![CDATA[Main motivation for taking adaptation action]]>
-			</entry>
-			<entry name="predefinedValue">
-				<![CDATA[]]>
-			</entry>
-			<entry name="tip">
-				<![CDATA[]]>
-			</entry>
-		</meta-data>
-	</dynamic-element>
-	<dynamic-element dataType="string" indexType="keyword" name="e_assessments" readOnly="false" repeatable="false" required="false" showLabel="true" type="textarea" width="large">
-		<meta-data locale="en_GB">
-			<entry name="label">
-				<![CDATA[Assessments]]>
-			</entry>
-			<entry name="predefinedValue">
-				<![CDATA[]]>
-			</entry>
-			<entry name="tip">
-				<![CDATA[]]>
-			</entry>
-		</meta-data>
-	</dynamic-element>
-	<dynamic-element dataType="string" indexType="keyword" name="e_legal_processes_and_framework" readOnly="false" repeatable="false" required="false" showLabel="true" type="textarea" width="large">
-		<meta-data locale="en_GB">
-			<entry name="label">
-				<![CDATA[Legal processes and framework]]>
+				<![CDATA[Weblinks to relevant plans/ studies]]>
 			</entry>
 			<entry name="predefinedValue">
 				<![CDATA[]]>
@@ -889,23 +998,10 @@
 			</entry>
 		</meta-data>
 	</dynamic-element>
-	<dynamic-element dataType="string" indexType="keyword" name="f_m_action_event_short_description" readOnly="false" repeatable="false" required="false" showLabel="true" type="textarea" width="medium">
-		<meta-data locale="en_GB">
-			<entry name="label">
-				<![CDATA[Short description]]>
-			</entry>
-			<entry name="predefinedValue">
-				<![CDATA[]]>
-			</entry>
-			<entry name="tip">
-				<![CDATA[]]>
-			</entry>
-		</meta-data>
-	</dynamic-element>
 	<dynamic-element dataType="string" indexType="keyword" name="f_m_action_event_long_description" readOnly="false" repeatable="false" required="false" showLabel="true" type="textarea" width="large">
 		<meta-data locale="en_GB">
 			<entry name="label">
-				<![CDATA[Long Description]]>
+				<![CDATA[Description]]>
 			</entry>
 			<entry name="predefinedValue">
 				<![CDATA[]]>
@@ -928,7 +1024,7 @@
 			</entry>
 		</meta-data>
 	</dynamic-element>
-	<dynamic-element dataType="image" fieldNamespace="wcm" indexType="keyword" name="f_picture_Caption" readOnly="false" repeatable="false" required="false" showLabel="true" type="wcm-image" width="">
+	<dynamic-element dataType="string" indexType="keyword" name="f_picture_caption" readOnly="false" repeatable="false" required="false" showLabel="true" type="text" width="large">
 		<meta-data locale="en_GB">
 			<entry name="label">
 				<![CDATA[Picture Caption]]>
@@ -941,13 +1037,130 @@
 			</entry>
 		</meta-data>
 	</dynamic-element>
-	<dynamic-element dataType="string" indexType="keyword" name="g_ti_self_assessment_check_list" readOnly="false" repeatable="false" required="false" showLabel="false" type="text" width="large">
+	<dynamic-element dataType="string" indexType="keyword" multiple="true" name="f_sectors_concerned" readOnly="false" repeatable="false" required="false" showLabel="true" type="select" width="">
+		<dynamic-element name="option33734" type="option" value="Agriculture and Forest">
+			<meta-data locale="en_GB">
+				<entry name="label">
+					<![CDATA[Agriculture and Forest]]>
+				</entry>
+			</meta-data>
+		</dynamic-element>
+		<dynamic-element name="option33735" type="option" value="Coastal areas">
+			<meta-data locale="en_GB">
+				<entry name="label">
+					<![CDATA[Coastal areas]]>
+				</entry>
+			</meta-data>
+		</dynamic-element>
+		<dynamic-element name="option33736" type="option" value="Disaster Risk Reduction">
+			<meta-data locale="en_GB">
+				<entry name="label">
+					<![CDATA[Disaster Risk Reduction]]>
+				</entry>
+			</meta-data>
+		</dynamic-element>
+		<dynamic-element name="option33737" type="option" value="Financial">
+			<meta-data locale="en_GB">
+				<entry name="label">
+					<![CDATA[Financial]]>
+				</entry>
+			</meta-data>
+		</dynamic-element>
+		<dynamic-element name="option33738" type="option" value="Health">
+			<meta-data locale="en_GB">
+				<entry name="label">
+					<![CDATA[Health]]>
+				</entry>
+			</meta-data>
+		</dynamic-element>
+		<dynamic-element name="option33739" type="option" value="Infrastructure">
+			<meta-data locale="en_GB">
+				<entry name="label">
+					<![CDATA[Infrastructure]]>
+				</entry>
+			</meta-data>
+		</dynamic-element>
+		<dynamic-element name="option33740" type="option" value="Marine and Fisheries">
+			<meta-data locale="en_GB">
+				<entry name="label">
+					<![CDATA[Marine and Fisheries]]>
+				</entry>
+			</meta-data>
+		</dynamic-element>
+		<dynamic-element name="option33741" type="option" value="Tourism">
+			<meta-data locale="en_GB">
+				<entry name="label">
+					<![CDATA[Tourism]]>
+				</entry>
+			</meta-data>
+		</dynamic-element>
+		<dynamic-element name="option33742" type="option" value="Energy">
+			<meta-data locale="en_GB">
+				<entry name="label">
+					<![CDATA[Energy]]>
+				</entry>
+			</meta-data>
+		</dynamic-element>
+		<dynamic-element name="option33743" type="option" value="Other">
+			<meta-data locale="en_GB">
+				<entry name="label">
+					<![CDATA[Other]]>
+				</entry>
+			</meta-data>
+		</dynamic-element>
+		<dynamic-element name="option27338" type="option" value="Biodiversity">
+			<meta-data locale="en_GB">
+				<entry name="label">
+					<![CDATA[Biodiversity]]>
+				</entry>
+			</meta-data>
+		</dynamic-element>
+		<dynamic-element name="option27339" type="option" value="Water Management">
+			<meta-data locale="en_GB">
+				<entry name="label">
+					<![CDATA[Water Mangement]]>
+				</entry>
+			</meta-data>
+		</dynamic-element>
+		<dynamic-element name="option27340" type="option" value="Urban">
+			<meta-data locale="en_GB">
+				<entry name="label">
+					<![CDATA[Urban]]>
+				</entry>
+			</meta-data>
+		</dynamic-element>
+		<meta-data locale="en_GB">
+			<entry name="label">
+				<![CDATA[What sectors are concerned]]>
+			</entry>
+			<entry name="predefinedValue">
+				<![CDATA[["Urban"]]]>
+			</entry>
+			<entry name="tip">
+				<![CDATA[]]>
+			</entry>
+		</meta-data>
+	</dynamic-element>
+	<dynamic-element dataType="string" indexType="" name="g_ti_self_assessment_check_list" readOnly="false" repeatable="false" required="false" showLabel="false" type="text" width="large">
 		<meta-data locale="en_GB">
 			<entry name="label">
 				<![CDATA[Self-assessment check-list]]>
 			</entry>
 			<entry name="predefinedValue">
 				<![CDATA[Self-assessment check-list]]>
+			</entry>
+			<entry name="tip">
+				<![CDATA[]]>
+			</entry>
+		</meta-data>
+	</dynamic-element>
+	<dynamic-element dataType="string" indexType="" name="g_ti_strong_political_leadership" readOnly="false" repeatable="false" required="false" showLabel="false" type="text" width="large">
+		<meta-data locale="en_GB">
+			<entry name="label">
+				<![CDATA[Strong political leadership]]>
+			</entry>
+			<entry name="predefinedValue">
+				<![CDATA[Strong political leadership]]>
 			</entry>
 			<entry name="tip">
 				<![CDATA[]]>
@@ -980,6 +1193,19 @@
 			</entry>
 		</meta-data>
 	</dynamic-element>
+	<dynamic-element dataType="string" indexType="" name="g_ti_establishment_of_long_term_goals" readOnly="false" repeatable="false" required="false" showLabel="false" type="text" width="large">
+		<meta-data locale="en_GB">
+			<entry name="label">
+				<![CDATA[Establishment of long term goals]]>
+			</entry>
+			<entry name="predefinedValue">
+				<![CDATA[Establishment of long term goals]]>
+			</entry>
+			<entry name="tip">
+				<![CDATA[]]>
+			</entry>
+		</meta-data>
+	</dynamic-element>
 	<dynamic-element dataType="boolean" indexType="keyword" name="g_identified_clear_priorities_and_a_long-term_vision" readOnly="false" repeatable="false" required="false" showLabel="true" type="checkbox" width="">
 		<meta-data locale="en_GB">
 			<entry name="label">
@@ -993,6 +1219,19 @@
 			</entry>
 		</meta-data>
 	</dynamic-element>
+	<dynamic-element dataType="string" indexType="" name="g_ti_coordination_of_climate_policy" readOnly="false" repeatable="false" required="false" showLabel="false" type="text" width="large">
+		<meta-data locale="en_GB">
+			<entry name="label">
+				<![CDATA[Coordination of climate policy]]>
+			</entry>
+			<entry name="predefinedValue">
+				<![CDATA[Coordination of climate policy]]>
+			</entry>
+			<entry name="tip">
+				<![CDATA[]]>
+			</entry>
+		</meta-data>
+	</dynamic-element>
 	<dynamic-element dataType="boolean" indexType="keyword" name="g_set_a_coordinated_action_between_mitigation_and_adaptation" readOnly="false" repeatable="false" required="false" showLabel="true" type="checkbox" width="">
 		<meta-data locale="en_GB">
 			<entry name="label">
@@ -1000,6 +1239,19 @@
 			</entry>
 			<entry name="predefinedValue">
 				<![CDATA[false]]>
+			</entry>
+			<entry name="tip">
+				<![CDATA[]]>
+			</entry>
+		</meta-data>
+	</dynamic-element>
+	<dynamic-element dataType="string" indexType="" name="g_ti_integration_of_adaptation_into_plans_and_policies_in_a_multi-sectorial_way" readOnly="false" repeatable="false" required="false" showLabel="false" type="text" width="large">
+		<meta-data locale="en_GB">
+			<entry name="label">
+				<![CDATA[Integration of adaptation into plans and policies in a multi-sectorial way]]>
+			</entry>
+			<entry name="predefinedValue">
+				<![CDATA[Integration of adaptation into plans and policies in a multi-sectorial way]]>
 			</entry>
 			<entry name="tip">
 				<![CDATA[]]>
@@ -1032,6 +1284,19 @@
 			</entry>
 		</meta-data>
 	</dynamic-element>
+	<dynamic-element dataType="string" indexType="" name="g_ti_strong_multi-stakeholder_collaboration" readOnly="false" repeatable="false" required="false" showLabel="false" type="text" width="large">
+		<meta-data locale="en_GB">
+			<entry name="label">
+				<![CDATA[Strong multi-stakeholder collaboration]]>
+			</entry>
+			<entry name="predefinedValue">
+				<![CDATA[Strong multi-stakeholder collaboration]]>
+			</entry>
+			<entry name="tip">
+				<![CDATA[]]>
+			</entry>
+		</meta-data>
+	</dynamic-element>
 	<dynamic-element dataType="boolean" indexType="keyword" name="g_set_dialogue_cooperation_and_partnership_with_relevant_stakeholders" readOnly="false" repeatable="false" required="false" showLabel="true" type="checkbox" width="">
 		<meta-data locale="en_GB">
 			<entry name="label">
@@ -1039,6 +1304,19 @@
 			</entry>
 			<entry name="predefinedValue">
 				<![CDATA[false]]>
+			</entry>
+			<entry name="tip">
+				<![CDATA[]]>
+			</entry>
+		</meta-data>
+	</dynamic-element>
+	<dynamic-element dataType="string" indexType="" name="g_ti_multi-level_governance" readOnly="false" repeatable="false" required="false" showLabel="false" type="text" width="large">
+		<meta-data locale="en_GB">
+			<entry name="label">
+				<![CDATA[Multi-level governance]]>
+			</entry>
+			<entry name="predefinedValue">
+				<![CDATA[Multi-level governance]]>
 			</entry>
 			<entry name="tip">
 				<![CDATA[]]>
@@ -1058,6 +1336,19 @@
 			</entry>
 		</meta-data>
 	</dynamic-element>
+	<dynamic-element dataType="string" indexType="" name="g_ti_immediate_action_in_order_to_realise_the_opportunities_from_adaptation_no-regret_approach" readOnly="false" repeatable="false" required="false" showLabel="false" type="text" width="large">
+		<meta-data locale="en_GB">
+			<entry name="label">
+				<![CDATA[Immediate action in order to realise the opportunities from adaptation (“no-regret” approach)]]>
+			</entry>
+			<entry name="predefinedValue">
+				<![CDATA[Immediate action in order to realise the opportunities from adaptation (“no-regret” approach)]]>
+			</entry>
+			<entry name="tip">
+				<![CDATA[]]>
+			</entry>
+		</meta-data>
+	</dynamic-element>
 	<dynamic-element dataType="boolean" indexType="keyword" name="g_immediate_action_in_order_to_realise_the_opportunities_from_adaptation" readOnly="false" repeatable="false" required="false" showLabel="true" type="checkbox" width="">
 		<meta-data locale="en_GB">
 			<entry name="label">
@@ -1065,6 +1356,19 @@
 			</entry>
 			<entry name="predefinedValue">
 				<![CDATA[false]]>
+			</entry>
+			<entry name="tip">
+				<![CDATA[]]>
+			</entry>
+		</meta-data>
+	</dynamic-element>
+	<dynamic-element dataType="string" indexType="" name="g_ti_identifying_and_mobilising_financial_resources" readOnly="false" repeatable="false" required="false" showLabel="false" type="text" width="large">
+		<meta-data locale="en_GB">
+			<entry name="label">
+				<![CDATA[Identifying and mobilising financial resources]]>
+			</entry>
+			<entry name="predefinedValue">
+				<![CDATA[Identifying and mobilising financial resources]]>
 			</entry>
 			<entry name="tip">
 				<![CDATA[]]>
@@ -1084,6 +1388,19 @@
 			</entry>
 		</meta-data>
 	</dynamic-element>
+	<dynamic-element dataType="string" indexType="" name="g_ti_regular_monitoring_of_progress" readOnly="false" repeatable="false" required="false" showLabel="false" type="text" width="large">
+		<meta-data locale="en_GB">
+			<entry name="label">
+				<![CDATA[Regular monitoring of progress]]>
+			</entry>
+			<entry name="predefinedValue">
+				<![CDATA[Regular monitoring of progress]]>
+			</entry>
+			<entry name="tip">
+				<![CDATA[]]>
+			</entry>
+		</meta-data>
+	</dynamic-element>
 	<dynamic-element dataType="boolean" indexType="keyword" name="g_put_in_place_monitoring_mechanisms_to_assess_state_of_play_and_future_actions_identified" readOnly="false" repeatable="false" required="false" showLabel="true" type="checkbox" width="">
 		<meta-data locale="en_GB">
 			<entry name="label">
@@ -1091,6 +1408,19 @@
 			</entry>
 			<entry name="predefinedValue">
 				<![CDATA[false]]>
+			</entry>
+			<entry name="tip">
+				<![CDATA[]]>
+			</entry>
+		</meta-data>
+	</dynamic-element>
+	<dynamic-element dataType="string" indexType="keyword" name="g_description_on_the_progress" readOnly="false" repeatable="false" required="false" showLabel="true" type="textarea" width="large">
+		<meta-data locale="en_GB">
+			<entry name="label">
+				<![CDATA[Description on the progress]]>
+			</entry>
+			<entry name="predefinedValue">
+				<![CDATA[]]>
 			</entry>
 			<entry name="tip">
 				<![CDATA[]]>
@@ -1110,20 +1440,7 @@
 			</entry>
 		</meta-data>
 	</dynamic-element>
-	<dynamic-element dataType="image" fieldNamespace="wcm" indexType="keyword" name="Image" readOnly="false" repeatable="true" required="false" showLabel="true" type="wcm-image" width="">
-		<meta-data locale="en_GB">
-			<entry name="label">
-				<![CDATA[City Image]]>
-			</entry>
-			<entry name="predefinedValue">
-				<![CDATA[]]>
-			</entry>
-			<entry name="tip">
-				<![CDATA[]]>
-			</entry>
-		</meta-data>
-	</dynamic-element>
-	<dynamic-element dataType="double" fieldNamespace="ddm" indexType="keyword" name="a_r_city_latitude" readOnly="false" repeatable="false" required="false" showLabel="true" type="ddm-decimal" width="small">
+	<dynamic-element dataType="double" fieldNamespace="ddm" indexType="keyword" name="a_m_city_latitude" readOnly="false" repeatable="false" required="false" showLabel="true" type="ddm-decimal" width="small">
 		<meta-data locale="en_GB">
 			<entry name="label">
 				<![CDATA[City Latitude]]>
@@ -1136,13 +1453,74 @@
 			</entry>
 		</meta-data>
 	</dynamic-element>
-	<dynamic-element dataType="double" fieldNamespace="ddm" indexType="keyword" name="a_r_city_longitude" readOnly="false" repeatable="false" required="false" showLabel="true" type="ddm-decimal" width="small">
+	<dynamic-element dataType="double" fieldNamespace="ddm" indexType="keyword" name="a_m_city_longitude" readOnly="false" repeatable="false" required="false" showLabel="true" type="ddm-decimal" width="small">
 		<meta-data locale="en_GB">
 			<entry name="label">
 				<![CDATA[City Longitude]]>
 			</entry>
 			<entry name="predefinedValue">
 				<![CDATA[]]>
+			</entry>
+			<entry name="tip">
+				<![CDATA[]]>
+			</entry>
+		</meta-data>
+	</dynamic-element>
+	<dynamic-element dataType="string" indexType="keyword" name="g_ti_adaptation_elements" readOnly="false" repeatable="false" required="false" showLabel="false" type="text" width="large">
+		<meta-data locale="en_GB">
+			<entry name="label">
+				<![CDATA[Adaptation elements]]>
+			</entry>
+			<entry name="predefinedValue">
+				<![CDATA[Adaptation elements]]>
+			</entry>
+			<entry name="tip">
+				<![CDATA[]]>
+			</entry>
+		</meta-data>
+	</dynamic-element>
+	<dynamic-element dataType="string" indexType="keyword" multiple="true" name="h_m_elements" readOnly="false" repeatable="false" required="false" showLabel="true" type="select" width="">
+		<dynamic-element name="option59387" type="option" value="Observations and Scenarios">
+			<meta-data locale="en_GB">
+				<entry name="label">
+					<![CDATA[Observations and Scenarios]]>
+				</entry>
+			</meta-data>
+		</dynamic-element>
+		<dynamic-element name="option59388" type="option" value="Vulnerability Assessment">
+			<meta-data locale="en_GB">
+				<entry name="label">
+					<![CDATA[Vulnerability Assessment]]>
+				</entry>
+			</meta-data>
+		</dynamic-element>
+		<dynamic-element name="option59389" type="option" value="Adaptation Measures and Actions">
+			<meta-data locale="en_GB">
+				<entry name="label">
+					<![CDATA[Adaptation Measures and Actions]]>
+				</entry>
+			</meta-data>
+		</dynamic-element>
+		<dynamic-element name="option59390" type="option" value="Adaptation Plans and Strategies">
+			<meta-data locale="en_GB">
+				<entry name="label">
+					<![CDATA[Adaptation Plans and Strategies]]>
+				</entry>
+			</meta-data>
+		</dynamic-element>
+		<dynamic-element name="option59391" type="option" value="Sector Policies">
+			<meta-data locale="en_GB">
+				<entry name="label">
+					<![CDATA[Sector Policies]]>
+				</entry>
+			</meta-data>
+		</dynamic-element>
+		<meta-data locale="en_GB">
+			<entry name="label">
+				<![CDATA[Which of the following elements are mentioned in your city profile?]]>
+			</entry>
+			<entry name="predefinedValue">
+				<![CDATA[[""]]]>
 			</entry>
 			<entry name="tip">
 				<![CDATA[]]>

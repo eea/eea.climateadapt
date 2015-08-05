@@ -2,6 +2,7 @@ package nl.wur.alterra.cgi.ace.search;
 
 import java.io.IOException;
 import java.io.StringReader;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -28,6 +29,8 @@ import org.apache.lucene.search.ScoreDoc;
 import org.apache.lucene.search.TopDocs;
 import org.apache.lucene.util.Version;
 
+import com.liferay.portal.kernel.search.Field;
+
 /**
  *
  * Search engine for AceItems.
@@ -36,484 +39,556 @@ import org.apache.lucene.util.Version;
  */
 public class ACESearchEngine {
 
-    private static final String defaultFuzziness = "";
+	private static final String defaultFuzziness = "";
 
-    /**
-     * Prepares ACESearchFormBean from values in a map, using defaults where necessary.
-     *
-     * @param searchParams
-     * @return formbean
-     */
-    public AceSearchFormBean prepareACESearchFormBean(Map<String, String[]> searchParams, String fuzziness) {
+	/**
+	 * Prepares ACESearchFormBean from values in a map, using defaults where
+	 * necessary.
+	 *
+	 * @param searchParams
+	 * @return formbean
+	 */
+	public AceSearchFormBean prepareACESearchFormBean(
+			Map<String, String[]> searchParams, String fuzziness) {
 
-        String[] aceItemTypes ;
-        String[] anyOfThese ;
-        String[] conditionAdaptationElement ;
-        String[] conditionAdaptationSector ;
-        String[] conditionAdaptationCountry;
-        String[] conditionScenario ;
-        String[] conditionTimePeriod ;
-        String[] conditionClimateImpact ;
-        String[] countries ;
-        String[] elements ;
-        String[] freetextMode ;
-        String[] impacts ;
-        String[] sectors ;
-        String[] scenarios ;
-        String[] timeperiods ;
-        String[] sortBys ;
-        String[] datainfo_type;
-        String[] fromYear;
-        String[] startYear;
-        String[] endYear;
+		String[] aceItemTypes;
+		String[] anyOfThese;
+		String[] conditionAdaptationElement;
+		String[] conditionAdaptationSector;
+		String[] conditionAdaptationCountry;
+		String[] conditionScenario;
+		String[] conditionTimePeriod;
+		String[] conditionClimateImpact;
+		String[] countries;
+		String[] elements;
+		String[] freetextMode;
+		String[] impacts;
+		String[] sectors;
+		String[] scenarios;
+		String[] timeperiods;
+		String[] sortBys;
+		String[] datainfo_type;
+		String[] fromYear;
+		String[] startYear;
+		String[] endYear;
 
-        // is sortitemtype exist use that one !!
-        aceItemTypes = searchParams.get(SearchRequestParams.SORTITEM_TYPE);
+		// is sortitemtype exist use that one !!
+		aceItemTypes = searchParams.get(SearchRequestParams.SORTITEM_TYPE);
 
-        if(aceItemTypes==null || aceItemTypes.length==0) {
+		if (aceItemTypes == null || aceItemTypes.length == 0) {
 
-            aceItemTypes = searchParams.get(SearchRequestParams.ACEITEM_TYPE);
-        }
+			aceItemTypes = searchParams.get(SearchRequestParams.ACEITEM_TYPE);
+		}
 
-        datainfo_type = searchParams.get(SearchRequestParams.DATAINFO_TYPE);
-        if(datainfo_type==null || datainfo_type.length==0) {
+		datainfo_type = searchParams.get(SearchRequestParams.DATAINFO_TYPE);
+		if (datainfo_type == null || datainfo_type.length == 0) {
 
-            datainfo_type = new String[1];
-            datainfo_type[0] = "2";
-        }
-        anyOfThese = searchParams.get(SearchRequestParams.ANY);
-        if (anyOfThese != null)
-        {
-           //System.out.println("anyOfThese is " + anyOfThese[0]);
-        }
-        conditionAdaptationElement = searchParams.get(SearchRequestParams.CONDITION_ADAPTATION_ELEMENT);
-        conditionAdaptationSector = searchParams.get(SearchRequestParams.CONDITION_ADAPTATION_SECTOR);
-        conditionAdaptationCountry = searchParams.get(SearchRequestParams.CONDITION_ADAPTATION_COUNTRY);
-        conditionScenario = searchParams.get(SearchRequestParams.CONDITION_SCENARIO);
-        conditionTimePeriod = searchParams.get(SearchRequestParams.CONDITION_TIME_PERIOD);
-        conditionClimateImpact = searchParams.get(SearchRequestParams.CONDITION_CLIMATE_IMPACT);
-        countries = searchParams.get(SearchRequestParams.COUNTRIES);
-        elements = searchParams.get(SearchRequestParams.ELEMENT);
-        freetextMode = searchParams.get(SearchRequestParams.FREETEXT_MODE);
-        impacts = searchParams.get(SearchRequestParams.IMPACT);
-        sectors = searchParams.get(SearchRequestParams.SECTOR);
-        scenarios = searchParams.get(SearchRequestParams.SCENARIO);
-        timeperiods = searchParams.get(SearchRequestParams.TIMEPERIOD);
-        sortBys = searchParams.get(SearchRequestParams.SORTBY);
-        startYear = searchParams.get(SearchRequestParams.START_YEAR);
-        endYear = searchParams.get(SearchRequestParams.END_YEAR);
+			datainfo_type = new String[1];
+			datainfo_type[0] = "2";
+		}
+		anyOfThese = searchParams.get(SearchRequestParams.ANY);
+		if (anyOfThese != null) {
+			// System.out.println("anyOfThese is " + anyOfThese[0]);
+		}
+		conditionAdaptationElement = searchParams
+				.get(SearchRequestParams.CONDITION_ADAPTATION_ELEMENT);
+		conditionAdaptationSector = searchParams
+				.get(SearchRequestParams.CONDITION_ADAPTATION_SECTOR);
+		conditionAdaptationCountry = searchParams
+				.get(SearchRequestParams.CONDITION_ADAPTATION_COUNTRY);
+		conditionScenario = searchParams
+				.get(SearchRequestParams.CONDITION_SCENARIO);
+		conditionTimePeriod = searchParams
+				.get(SearchRequestParams.CONDITION_TIME_PERIOD);
+		conditionClimateImpact = searchParams
+				.get(SearchRequestParams.CONDITION_CLIMATE_IMPACT);
+		countries = searchParams.get(SearchRequestParams.COUNTRIES);
+		elements = searchParams.get(SearchRequestParams.ELEMENT);
+		freetextMode = searchParams.get(SearchRequestParams.FREETEXT_MODE);
+		impacts = searchParams.get(SearchRequestParams.IMPACT);
+		sectors = searchParams.get(SearchRequestParams.SECTOR);
+		scenarios = searchParams.get(SearchRequestParams.SCENARIO);
+		timeperiods = searchParams.get(SearchRequestParams.TIMEPERIOD);
+		sortBys = searchParams.get(SearchRequestParams.SORTBY);
+		startYear = searchParams.get(SearchRequestParams.START_YEAR);
+		endYear = searchParams.get(SearchRequestParams.END_YEAR);
 
+		if (isEmpty(conditionAdaptationSector)) {
+			conditionAdaptationSector = new String[1];
+			conditionAdaptationSector[0] = SearchRequestParams.AND_CONDITION;
+		}
+		if (isEmpty(conditionAdaptationCountry)) {
+			conditionAdaptationCountry = new String[1];
+			conditionAdaptationCountry[0] = SearchRequestParams.AND_CONDITION;
+		}
+		if (isEmpty(conditionAdaptationElement)) {
+			conditionAdaptationElement = new String[1];
+			conditionAdaptationElement[0] = SearchRequestParams.AND_CONDITION;
+		}
+		if (isEmpty(conditionScenario)) {
+			conditionScenario = new String[1];
+			conditionScenario[0] = SearchRequestParams.AND_CONDITION;
+		}
+		if (isEmpty(conditionTimePeriod)) {
+			conditionTimePeriod = new String[1];
+			conditionTimePeriod[0] = SearchRequestParams.AND_CONDITION;
+		}
+		if (isEmpty(conditionClimateImpact)) {
+			conditionClimateImpact = new String[1];
+			conditionClimateImpact[0] = SearchRequestParams.AND_CONDITION;
+		}
+		if (isEmpty(freetextMode)) {
+			freetextMode = new String[1];
+			freetextMode[0] = FreetextMode.ANY.name();
+		}
 
-        if(isEmpty(conditionAdaptationSector)) {
-            conditionAdaptationSector = new String[1];
-            conditionAdaptationSector[0] = SearchRequestParams.AND_CONDITION;
-        }
-        if(isEmpty(conditionAdaptationCountry)) {
-            conditionAdaptationCountry = new String[1];
-            conditionAdaptationCountry[0] = SearchRequestParams.AND_CONDITION;
-        }
-        if(isEmpty(conditionAdaptationElement)) {
-            conditionAdaptationElement = new String[1];
-            conditionAdaptationElement[0] = SearchRequestParams.AND_CONDITION;
-        }
-        if(isEmpty(conditionScenario)) {
-            conditionScenario = new String[1];
-            conditionScenario[0] = SearchRequestParams.AND_CONDITION;
-        }
-        if(isEmpty(conditionTimePeriod)) {
-            conditionTimePeriod = new String[1];
-            conditionTimePeriod[0] = SearchRequestParams.AND_CONDITION;
-        }
-        if(isEmpty(conditionClimateImpact)) {
-            conditionClimateImpact = new String[1];
-            conditionClimateImpact[0] = SearchRequestParams.AND_CONDITION;
-        }
-        if(isEmpty(freetextMode)) {
-            freetextMode = new String[1];
-            freetextMode[0] = FreetextMode.ANY.name();
-        }
+		if (isEmpty(startYear)) {
+			startYear = null;
+		}
 
-        if(isEmpty(startYear)) {
-            startYear = null;
-        }
+		if (isEmpty(endYear)) {
+			endYear = null;
+		}
 
-        if(isEmpty(endYear)) {
-            endYear = null;
-        }
+		String sortBy = null;
+		if (sortBys != null && sortBys.length > 0) {
+			sortBy = sortBys[0];
+		}
 
-        String sortBy = null;
-        if(sortBys != null && sortBys.length > 0) {
-            sortBy = sortBys[0];
-        }
+		String fuzzinessVal = defaultFuzziness;
+		if (fuzziness != null) {
+			fuzzinessVal = fuzziness;
+		}
 
-        String fuzzinessVal = defaultFuzziness;
-        if(fuzziness != null) {
-            fuzzinessVal = fuzziness;
-        }
+		AceSearchFormBean formBean = new AceSearchFormBean();
 
-        AceSearchFormBean formBean = new AceSearchFormBean();
+		formBean.setAceitemtype(aceItemTypes);
+		formBean.setDatainfo_type(datainfo_type[0]);
+		formBean.setCountries(countries);
+		formBean.setElement(elements);
+		formBean.setFreetextMode(freetextMode[0]);
+		formBean.setImpact(impacts);
+		formBean.setSector(sectors);
+		formBean.setScenario(scenarios);
+		formBean.setTimePeriod(timeperiods);
+		formBean.setSortBy(sortBy);
+		formBean.setStartyear(startYear);
+		formBean.setEndyear(endYear);
 
-        formBean.setAceitemtype(aceItemTypes);
-        formBean.setDatainfo_type(datainfo_type[0]);
-        formBean.setCountries(countries);
-        formBean.setElement(elements);
-        formBean.setFreetextMode(freetextMode[0]);
-        formBean.setImpact(impacts);
-        formBean.setSector(sectors);
-        formBean.setScenario(scenarios);
-        formBean.setTimePeriod(timeperiods);
-        formBean.setSortBy(sortBy);
-        formBean.setStartyear(startYear);
-        formBean.setEndyear(endYear);
+		formBean.setFuzziness(fuzzinessVal);
 
-        formBean.setFuzziness(fuzzinessVal);
+		if (isEmpty(anyOfThese)) {
+			formBean.setAnyOfThese("");
+		} else {
+			formBean.setAnyOfThese(anyOfThese[0]);
+		}
 
-        if(isEmpty(anyOfThese)) {
-            formBean.setAnyOfThese("");
-        }
-        else {
-            formBean.setAnyOfThese(anyOfThese[0]);
-        }
+		if (conditionAdaptationSector != null
+				&& conditionAdaptationSector[0]
+						.equalsIgnoreCase(SearchRequestParams.OR_CONDITION)) {
+			formBean.setConditionAdaptationSector(SearchRequestParams.OR_CONDITION);
+		} else {
+			formBean.setConditionAdaptationSector(SearchRequestParams.AND_CONDITION);
+		}
 
-        if (conditionAdaptationSector != null && conditionAdaptationSector[0].equalsIgnoreCase(SearchRequestParams.OR_CONDITION)) {
-            formBean.setConditionAdaptationSector(SearchRequestParams.OR_CONDITION);
-        }
-        else {
-            formBean.setConditionAdaptationSector(SearchRequestParams.AND_CONDITION);
-        }
+		if (conditionAdaptationCountry != null
+				&& conditionAdaptationCountry[0]
+						.equalsIgnoreCase(SearchRequestParams.OR_CONDITION)) {
+			formBean.setConditionAdaptationCountry(SearchRequestParams.OR_CONDITION);
+		} else {
+			formBean.setConditionAdaptationCountry(SearchRequestParams.AND_CONDITION);
+		}
 
-        if (conditionAdaptationCountry != null && conditionAdaptationCountry[0].equalsIgnoreCase(SearchRequestParams.OR_CONDITION)) {
-            formBean.setConditionAdaptationCountry(SearchRequestParams.OR_CONDITION);
-        }
-        else {
-            formBean.setConditionAdaptationCountry(SearchRequestParams.AND_CONDITION);
-        }
+		if (conditionAdaptationElement != null
+				&& conditionAdaptationElement[0]
+						.equalsIgnoreCase(SearchRequestParams.OR_CONDITION)) {
+			formBean.setConditionAdaptationElement(SearchRequestParams.OR_CONDITION);
+		} else {
+			formBean.setConditionAdaptationElement(SearchRequestParams.AND_CONDITION);
+		}
 
-        if (conditionAdaptationElement != null && conditionAdaptationElement[0].equalsIgnoreCase(SearchRequestParams.OR_CONDITION)) {
-            formBean.setConditionAdaptationElement(SearchRequestParams.OR_CONDITION);
-        }
-        else {
-            formBean.setConditionAdaptationElement(SearchRequestParams.AND_CONDITION);
-        }
+		if (conditionScenario != null
+				&& conditionScenario[0]
+						.equalsIgnoreCase(SearchRequestParams.OR_CONDITION)) {
+			formBean.setConditionScenario(SearchRequestParams.OR_CONDITION);
+		} else {
+			formBean.setConditionScenario(SearchRequestParams.AND_CONDITION);
+		}
 
-        if (conditionScenario != null && conditionScenario[0].equalsIgnoreCase(SearchRequestParams.OR_CONDITION)) {
-            formBean.setConditionScenario(SearchRequestParams.OR_CONDITION);
-        }
-        else {
-            formBean.setConditionScenario(SearchRequestParams.AND_CONDITION);
-        }
+		if (conditionTimePeriod != null
+				&& conditionTimePeriod[0]
+						.equalsIgnoreCase(SearchRequestParams.OR_CONDITION)) {
+			formBean.setConditionTimePeriod(SearchRequestParams.OR_CONDITION);
+		} else {
+			formBean.setConditionTimePeriod(SearchRequestParams.AND_CONDITION);
+		}
 
-        if (conditionTimePeriod != null && conditionTimePeriod[0].equalsIgnoreCase(SearchRequestParams.OR_CONDITION)) {
-            formBean.setConditionTimePeriod(SearchRequestParams.OR_CONDITION);
-        }
-        else {
-            formBean.setConditionTimePeriod(SearchRequestParams.AND_CONDITION);
-        }
+		if (conditionClimateImpact != null
+				&& conditionClimateImpact[0]
+						.equalsIgnoreCase(SearchRequestParams.OR_CONDITION)) {
+			formBean.setConditionClimateImpact(SearchRequestParams.OR_CONDITION);
+		} else {
+			formBean.setConditionClimateImpact(SearchRequestParams.AND_CONDITION);
+		}
 
-        if (conditionClimateImpact != null && conditionClimateImpact[0].equalsIgnoreCase(SearchRequestParams.OR_CONDITION)) {
-            formBean.setConditionClimateImpact(SearchRequestParams.OR_CONDITION);
-        }
-        else {
-            formBean.setConditionClimateImpact(SearchRequestParams.AND_CONDITION);
-        }
+		return formBean;
 
-        return formBean;
+	}
 
-    }
+	private boolean isEmpty(String[] array) {
+		return array == null || array.length == 0;
+	}
 
-    private boolean isEmpty(String[] array) {
-        return array == null || array.length == 0;
-    }
+	/**
+	 * Prepares free text query by adding fuzziness to each term in a
+	 * whitespace-separated string, adding AND if the user requested to search
+	 * for all words, and wraps it up.
+	 *
+	 * @param keywords
+	 *            keywords in whitespace-separated string
+	 * @param fuzziness
+	 *            fuzziness factor
+	 * @param freetextMode
+	 *            any or all
+	 * @return prepared query for free text
+	 * @throws java.io.IOException
+	 *             hmm
+	 */
+	private String prepareFreetext(String keywords, String fuzziness,
+			FreetextMode freetextMode) throws IOException {
+		if (freetextMode == null) {
+			freetextMode = FreetextMode.ANY;
+		}
+		String result = "";
+		TokenStream tokenStream = ACEAnalyzer.getAnalyzer().tokenStream(
+				ACEIndexConstant.IndexField.ANY, new StringReader(keywords));
+		TermAttribute termAttribute = (TermAttribute) tokenStream
+				.getAttribute(TermAttribute.class);
+		while (tokenStream.incrementToken()) {
+			String searchterm = termAttribute.term();
+			if (searchterm != null && searchterm.trim().length() > 0) {
+				result += "(";
+				switch (freetextMode) {
+				case ANY:
+					if ((searchterm.trim().length() < 4)
+							|| (fuzziness.equals(""))) {
+						result += searchterm.trim() + ") ";
+					} else {
+						result += searchterm.trim() + "~" + fuzziness + ") ";
+					}
+					break;
+				case ALL:
+					if ((searchterm.trim().length() < 4)
+							|| (fuzziness.equals(""))) {
+						result += searchterm.trim() + ") AND ";
+					} else {
+						result += searchterm.trim() + "~" + fuzziness
+								+ ") AND ";
+					}
+					break;
+				default:
+					if ((searchterm.trim().length() < 4)
+							|| (fuzziness.equals(""))) {
+						result += searchterm.trim() + ") ";
+					} else {
+						result += searchterm.trim() + "~" + fuzziness + ") ";
+					}
+				}
+			}
+		}
+		// strip last " AND "
+		if (result != null && result.length() > 0 && result.contains(" AND ")) {
+			result = result.substring(0, result.lastIndexOf(" AND "));
+		}
+		// wrap query in brackets
+		if (result != null && result.trim().length() > 0) {
+			result = "(" + result + ")";
+		}
+		// //
+		// System.out.println("*** ACESearchEngine search: searchterms with fuzziness: "
+		// + result);
+		return result;
+	}
 
-    /**
-     * Prepares free text query by adding fuzziness to each term in a whitespace-separated string, adding AND if the
-     * user requested to search for all words, and wraps it up.
-     *
-     * @param keywords keywords in whitespace-separated string
-     * @param fuzziness fuzziness factor
-     * @param freetextMode any or all
-     * @return prepared query for free text
-     * @throws java.io.IOException hmm
-     */
-    private String prepareFreetext(String keywords, String fuzziness, FreetextMode freetextMode) throws IOException {
-        if(freetextMode == null) {
-            freetextMode = FreetextMode.ANY;
-        }
-        String result = "";
-        TokenStream tokenStream = ACEAnalyzer.getAnalyzer().tokenStream(ACEIndexConstant.IndexField.ANY, new StringReader(keywords));
-        TermAttribute termAttribute = (TermAttribute) tokenStream.getAttribute(TermAttribute.class);
-        while (tokenStream.incrementToken()) {
-            String searchterm = termAttribute.term();
-            if(searchterm != null && searchterm.trim().length() > 0) {
-                result += "(";
-                switch (freetextMode) {
-                    case ANY :
-                        if((searchterm.trim().length() < 4) || (fuzziness.equals(""))){
-                            result += searchterm.trim() + ") ";
-                        }
-                        else {
-                            result += searchterm.trim() + "~" + fuzziness + ") ";
-                        }
-                        break;
-                    case ALL :
-                        if((searchterm.trim().length() < 4) || (fuzziness.equals(""))){
-                            result += searchterm.trim() + ") AND ";
-                        }
-                        else {
-                            result += searchterm.trim() + "~" + fuzziness + ") AND ";
-                        }
-                        break;
-                    default:
-                        if((searchterm.trim().length() < 4) || (fuzziness.equals(""))){
-                            result += searchterm.trim() + ") ";
-                        }
-                        else {
-                            result += searchterm.trim() + "~" + fuzziness + ") ";
-                        }
-                }
-            }
-        }
-        // strip last " AND "
-        if(result != null && result.length() > 0 && result.contains(" AND ")) {
-            result = result.substring(0, result.lastIndexOf(" AND "));
-        }
-        // wrap query in brackets
-        if(result != null && result.trim().length() > 0) {
-            result = "(" + result + ")";
-        }
-        // // System.out.println("*** ACESearchEngine search: searchterms with fuzziness: " + result);
-        return result;
-    }
+	/**
+	 * Searches Lucene, restricted to specified search parameters.
+	 *
+	 * @param formBean
+	 *            bean containing search parameters
+	 * @param aceItemType
+	 *            type of aceitem to search for
+	 * @return results results
+	 * @throws ACELuceneException
+	 *             hmm
+	 */
+	public List<AceItemSearchResult> searchLuceneByType(
+			AceSearchFormBean formBean, String aceItemType) throws Exception {
+		try {
+			//
+			// handle free text input
+			//
 
-    /**
-     * Searches Lucene, restricted to specified search parameters.
-     *
-     * @param formBean bean containing search parameters
-     * @param aceItemType type of aceitem to search for
-     * @return results results
-     * @throws ACELuceneException hmm
-     */
-    public List<AceItemSearchResult> searchLuceneByType(AceSearchFormBean formBean, String aceItemType) throws Exception {
-        try {
-            //
-            // handle free text input
-            //
+			// String rawQuery = createRawQuery(allOfThese, anyOfThese,
+			// exactlyThese, excludingThese);
+			String rawQuery = "";
+			if (formBean.getAnyOfThese() != null) {
+				rawQuery = rawQuery + " " + formBean.getAnyOfThese();
 
-            //String rawQuery = createRawQuery(allOfThese, anyOfThese, exactlyThese, excludingThese);
-            String rawQuery = "";
-            if(formBean.getAnyOfThese() != null) {
-                rawQuery = rawQuery + " " + formBean.getAnyOfThese();
+				rawQuery = prepareFreetext(rawQuery, formBean.getFuzziness(),
+						formBean.getFreeTextMode());
+			}
 
-                rawQuery = prepareFreetext(rawQuery, formBean.getFuzziness(), formBean.getFreeTextMode());
-            }
+			// user entered no searchterms; do wildcard query
+			else {
+				// TODO create a better, real wildcard-only query
+				rawQuery = "a*|e*|i*|o*|u*";
+			}
+			rawQuery = rawQuery.trim();
 
-            // user entered no searchterms; do wildcard query
-            else {
-                // TODO create a better, real wildcard-only query
-                rawQuery = "a*|e*|i*|o*|u*";
-            }
-            rawQuery = rawQuery.trim();
+			//
+			// handle aceItemType
+			//
+			if (rawQuery.length() > 0) {
+				rawQuery += " AND " + ACEIndexConstant.IndexField.DATATYPE
+						+ ":" + aceItemType;
+			} else {
+				rawQuery = ACEIndexConstant.IndexField.DATATYPE + ":"
+						+ aceItemType;
+			}
 
-            //
-            // handle aceItemType
-            //
-            if(rawQuery.length() > 0) {
-                rawQuery += " AND " + ACEIndexConstant.IndexField.DATATYPE + ":" + aceItemType;
-            } else {
-                rawQuery = ACEIndexConstant.IndexField.DATATYPE + ":" + aceItemType;
-            }
+			rawQuery += " AND ( (" + ACEIndexConstant.IndexField.CONTROLSTATUS
+					+ ":1) OR (" + ACEIndexConstant.IndexField.CONTROLSTATUS
+					+ ":2) )";
 
-            rawQuery += " AND ( (" + ACEIndexConstant.IndexField.CONTROLSTATUS + ":1) OR ("
-            + ACEIndexConstant.IndexField.CONTROLSTATUS + ":2) )";
+			//
+			// handle sectors
+			//
+			String[] sectors = formBean.getSector();
+			if ((sectors != null) && (sectors.length > 0)) {
+				rawQuery += " AND (";
+				for (String sector : sectors) {
+					rawQuery += " (" + ACEIndexConstant.IndexField.SECTOR + ":"
+							+ sector + ") "
+							+ formBean.getConditionAdaptationSector();
+				}
+				rawQuery = rawQuery.substring(0, rawQuery.lastIndexOf(formBean
+						.getConditionAdaptationSector()))
+						+ " )";
+			}
 
-            //
-            // handle sectors
-            //
-            String[] sectors = formBean.getSector();
-            if ((sectors != null) && (sectors.length > 0)) {
-                rawQuery += " AND (";
-                for(String sector: sectors) {
-                    rawQuery += " (" + ACEIndexConstant.IndexField.SECTOR + ":" + sector + ") " + formBean.getConditionAdaptationSector();
-                }
-                rawQuery =  rawQuery.substring(0, rawQuery.lastIndexOf(formBean.getConditionAdaptationSector())) + " )";
-            }
+			//
+			// handle elements
+			//
+			String[] elements = formBean.getElement();
+			if ((elements != null) && (elements.length > 0)) {
+				rawQuery += " AND (";
+				for (String element : elements) {
+					rawQuery += " (" + ACEIndexConstant.IndexField.ELEMENT
+							+ ":" + element + ") "
+							+ formBean.getConditionAdaptationElement();
+				}
+				rawQuery = rawQuery.substring(0, rawQuery.lastIndexOf(formBean
+						.getConditionAdaptationElement()))
+						+ " )";
+			}
 
-            //
-            // handle elements
-            //
-            String[] elements = formBean.getElement();
-            if ((elements != null) && (elements.length > 0)) {
-                rawQuery += " AND (";
-                for(String element: elements) {
-                    rawQuery += " (" + ACEIndexConstant.IndexField.ELEMENT + ":" + element + ") " + formBean.getConditionAdaptationElement();
-                }
-                rawQuery =  rawQuery.substring(0, rawQuery.lastIndexOf(formBean.getConditionAdaptationElement())) + " )";
-            }
+			//
+			// handle scenarios
+			//
+			String[] scenarios = formBean.getScenario();
+			if ((scenarios != null) && (scenarios.length > 0)) {
+				rawQuery += " AND (";
+				for (String scenario : scenarios) {
+					rawQuery += " (" + ACEIndexConstant.IndexField.SCENARIO
+							+ ":" + scenario + ") "
+							+ formBean.getConditionScenario();
+				}
+				rawQuery = rawQuery.substring(0,
+						rawQuery.lastIndexOf(formBean.getConditionScenario()))
+						+ " )";
+			}
 
-            //
-            // handle scenarios
-            //
-            String[] scenarios = formBean.getScenario();
-            if ((scenarios != null) && (scenarios.length > 0)) {
-                rawQuery += " AND (";
-                for(String scenario: scenarios) {
-                    rawQuery += " (" + ACEIndexConstant.IndexField.SCENARIO + ":" + scenario + ") " + formBean.getConditionScenario();
-                }
-                rawQuery =  rawQuery.substring(0, rawQuery.lastIndexOf(formBean.getConditionScenario())) + " )";
-            }
+			//
+			// handle time periods
+			//
+			String[] timeperiods = formBean.getTimePeriod();
+			if ((timeperiods != null) && (timeperiods.length > 0)) {
+				rawQuery += " AND (";
+				for (String timeperiod : timeperiods) {
+					rawQuery += " (" + ACEIndexConstant.IndexField.TIMEPERIOD
+							+ ":" + timeperiod + ") "
+							+ formBean.getConditionTimePeriod();
+				}
+				rawQuery = rawQuery
+						.substring(0, rawQuery.lastIndexOf(formBean
+								.getConditionTimePeriod()))
+						+ " )";
+			}
 
-            //
-            // handle time periods
-            //
-            String[] timeperiods = formBean.getTimePeriod();
-            if ((timeperiods != null) && (timeperiods.length > 0)) {
-                rawQuery += " AND (";
-                for(String timeperiod: timeperiods) {
-                    rawQuery += " (" + ACEIndexConstant.IndexField.TIMEPERIOD + ":" + timeperiod + ") " + formBean.getConditionTimePeriod();
-                }
-                rawQuery =  rawQuery.substring(0, rawQuery.lastIndexOf(formBean.getConditionTimePeriod())) + " )";
-            }
+			//
+			// handle impacts
+			//
+			String[] impacts = formBean.getImpact();
+			if ((impacts != null) && (impacts.length > 0)) {
+				rawQuery += " AND (";
+				for (String impact : impacts) {
+					rawQuery += " (" + ACEIndexConstant.IndexField.IMPACT + ":"
+							+ impact + ") "
+							+ formBean.getConditionClimateImpact();
+				}
+				rawQuery = rawQuery.substring(0, rawQuery.lastIndexOf(formBean
+						.getConditionClimateImpact()))
+						+ " )";
+			}
 
-            //
-            // handle impacts
-            //
-            String[] impacts = formBean.getImpact();
-            if ((impacts != null) && (impacts.length > 0)) {
-                rawQuery += " AND (";
-                for(String impact: impacts) {
-                    rawQuery += " (" + ACEIndexConstant.IndexField.IMPACT + ":" + impact + ") " + formBean.getConditionClimateImpact();
-                }
-                rawQuery =  rawQuery.substring(0, rawQuery.lastIndexOf(formBean.getConditionClimateImpact())) + " )";
-            }
+			//
+			// handle countries
+			//
+			String[] countries = formBean.getCountries();
+			if ((countries != null) && (countries.length > 0)) {
+				rawQuery += " AND (";
+				for (String country : countries) {
+					rawQuery += " ("
+							+ ACEIndexConstant.IndexField.SPATIAL_VALUES + ":"
+							+ country + ") "
+							+ formBean.getConditionAdaptationCountry();
+				}
+				rawQuery = rawQuery.substring(0, rawQuery.lastIndexOf(formBean
+						.getConditionAdaptationCountry()))
+						+ " )";
+			}
 
-            //
-            // handle countries
-            //
-            String[] countries = formBean.getCountries();
-            if ((countries != null) && (countries.length > 0)) {
-                rawQuery += " AND (";
-                for(String country: countries) {
-                    rawQuery += " (" + ACEIndexConstant.IndexField.SPATIAL_VALUES + ":" + country + ") " + formBean.getConditionAdaptationCountry();
-                }
-                rawQuery =   rawQuery.substring(0, rawQuery.lastIndexOf(formBean.getConditionAdaptationCountry())) + " )";
-            }
+			// adding year
+			// rawQuery += " AND year:2013" ;
 
-            // adding year
-            //rawQuery += " AND year:2013" ;
+			Query yearQuery = null;
+			if (formBean.getStartyear() != null
+					&& formBean.getEndyear() != null) {
+				int fromYear = 0;
+				int toYear = Calendar.getInstance().get(Calendar.YEAR);
+				try {
+					fromYear = Integer.parseInt(formBean.getStartyear()[0]);
+				} catch (NumberFormatException e) {
+				}
+				try {
+					toYear = Integer.parseInt(formBean.getEndyear()[0]);
+				} catch (NumberFormatException e) {
+				}
+				yearQuery = NumericRangeQuery.newIntRange("year", fromYear,
+						toYear, true, true);
+			}
+			if (formBean.getFeaturedItem() != null
+					&& !formBean.getFeaturedItem().equals("")) {
+				// System.out.println("Filter by feature");
+				rawQuery += " AND ("
+						+ ACEIndexConstant.IndexField.IS_FEATURED_ITEM + ":1"
+						+ ")";
+			}
 
-            Query yearQuery = null;
-            if (formBean.getStartyear() != null && formBean.getEndyear() != null)
-            {
-            	int fromYear=0;
-            	int toYear=Calendar.getInstance().get(Calendar.YEAR);
-                try {
-                      fromYear = Integer.parseInt(formBean.getStartyear()[0]);
-                } catch(NumberFormatException e) {
-                }
-                try {
-                      toYear = Integer.parseInt(formBean.getEndyear()[0]);
-                } catch(NumberFormatException e) {
-                }
-                 yearQuery = NumericRangeQuery.newIntRange("year", fromYear, toYear, true, true);
-            }
-            if ( formBean.getFeaturedItem() != null && !formBean.getFeaturedItem().equals("") ) {
-//            	System.out.println("Filter by feature");
-            	rawQuery += " AND (" + ACEIndexConstant.IndexField.IS_FEATURED_ITEM + ":1" + ")";
-            }
+			ACEIndexSearcher searcher = ACEIndexSearcher.getACEIndexSearcher();
+			QueryParser queryParser = new QueryParser(Version.LUCENE_29,
+					ACEIndexConstant.IndexField.ANY, ACEAnalyzer.getAnalyzer());
+			Query query = queryParser.parse(rawQuery);
 
-            ACEIndexSearcher searcher = ACEIndexSearcher.getACEIndexSearcher();
-            QueryParser queryParser = new QueryParser(Version.LUCENE_29,ACEIndexConstant.IndexField.ANY, ACEAnalyzer.getAnalyzer());
-            Query query = queryParser.parse(rawQuery);
+			BooleanQuery booleanQuery = null;
+			if (yearQuery != null) {
+				booleanQuery = new BooleanQuery();
+				booleanQuery.add(query, BooleanClause.Occur.MUST);
+				booleanQuery.add(yearQuery, BooleanClause.Occur.MUST);
+			}
 
-            BooleanQuery booleanQuery = null;
-            if (yearQuery != null) {
-               booleanQuery = new BooleanQuery();
-               booleanQuery.add(query, BooleanClause.Occur.MUST);
-               booleanQuery.add(yearQuery, BooleanClause.Occur.MUST);
-            }
+			System.out.println("Lucene raw query: " + rawQuery);
+			System.out.println("Lucene query: " + query.toString());
+			System.out.println("Lucene boolean query: " + booleanQuery);
+			System.out.println("Search Bean: " + formBean.toString(formBean));
 
-            System.out.println("Lucene raw query: " + rawQuery);
-            System.out.println("Lucene query: " + query.toString());
-            System.out.println("Lucene boolean query: " + booleanQuery);
-            System.out.println("Search Bean: " + formBean.toString(formBean));
+			// rewritten query is better for logging/debugging but potentially
+			// throws runtime exceptions
+			// System.out.println("Lucene query (rewritten): " +
+			// query.rewrite(((IndexSearcher)searcher).getIndexReader()).toString());
+			long start = System.currentTimeMillis();
 
-            // rewritten query is better for logging/debugging but potentially throws runtime exceptions
-            // System.out.println("Lucene query (rewritten): " + query.rewrite(((IndexSearcher)searcher).getIndexReader()).toString());
-            long start = System.currentTimeMillis();
+			// TopDocs topDocs = searcher.search(query, formBean.getSortBy(),
+			// 10);
+			// System.out.println("sort by is " + formBean.getSortBy());
+			TopDocs topDocs;
+			if (yearQuery != null) {
+				topDocs = searcher.search(booleanQuery, formBean.getSortBy(),
+						10);
+			} else {
+				topDocs = searcher.search(query, formBean.getSortBy(), 10);
+			}
 
-            //TopDocs topDocs = searcher.search(query, formBean.getSortBy(), 10);
-            //System.out.println("sort by is " + formBean.getSortBy());
-            TopDocs topDocs;
-            if (yearQuery != null)
-            {
-                topDocs = searcher.search(booleanQuery, formBean.getSortBy(), 10);
-            } else {
-                topDocs = searcher.search(query, formBean.getSortBy(), 10);
-            }
+			long end = System.currentTimeMillis();
+			// System.out.println("Lucene searcher # total hits: " +
+			// topDocs.totalHits + " in " + (end - start) + " ms");
+			ScoreDoc[] hits = topDocs.scoreDocs;
 
-            long end = System.currentTimeMillis();
-            // System.out.println("Lucene searcher # total hits: " + topDocs.totalHits + " in " + (end - start) + " ms");
-            ScoreDoc[] hits = topDocs.scoreDocs;
+			List<AceItemSearchResult> results = new ArrayList<AceItemSearchResult>();
 
-            List<AceItemSearchResult> results = new ArrayList<AceItemSearchResult>();
+			//
+			// calculate factor to normalize relevance scores
+			float topScore = 0f;
+			for (ScoreDoc hit : hits) {
+				float score = hit.score;
+				// System.out.println("score: " + score);
+				if (score != Float.NaN) {
+					if (score > topScore) {
+						topScore = score;
+					}
+				}
+			}
+			// System.out.println("topscore is: " + topScore);
+			if (topScore == Float.NaN || !(topScore > 0f)) {
+				topScore = 1f;
+			}
+			float normalizeScoreFactor = 1 / topScore;
+			// System.out.println("normalizeScoreFactor is: " +
+			// normalizeScoreFactor);
 
-            //
-            // calculate factor to normalize relevance scores
-            float topScore = 0f;
-            for(ScoreDoc hit : hits) {
-                float score = hit.score;
-                // System.out.println("score: " + score);
-                if(score != Float.NaN) {
-                    if(score > topScore) {
-                        topScore = score;
-                    }
-                }
-            }
-            // System.out.println("topscore is: " + topScore);
-            if(topScore == Float.NaN || !(topScore > 0f)) {
-                topScore = 1f;
-            }
-            float normalizeScoreFactor = 1 / topScore ;
-            // System.out.println("normalizeScoreFactor is: " + normalizeScoreFactor);
+			for (ScoreDoc hit : hits) {
+				Document document = searcher.doc(hit.doc);
 
+				// AceItemLocalService aceItemLocalService =
+				// AceItemLocalServiceUtil.getService();
+				AceItem aceItem;
 
-            for (ScoreDoc hit : hits) {
-                Document document = searcher.doc(hit.doc);
+				String aceItemId = document
+						.get(ACEIndexConstant.IndexField.ACEITEM_ID);
+				if (aceItemId != null) {
 
-                //AceItemLocalService aceItemLocalService = AceItemLocalServiceUtil.getService();
-                AceItem aceItem ;
+					aceItem = AceItemLocalServiceUtil.getAceItem(Long
+							.parseLong(aceItemId));
+					aceItem.setAceItemId(Long.parseLong(aceItemId));
 
-                String aceItemId = document.get(ACEIndexConstant.IndexField.ACEITEM_ID);
-                if(aceItemId != null) {
+					// relevance expressed as a percentage
+					float relevance = hit.score * normalizeScoreFactor * 100;
 
-                    aceItem = AceItemLocalServiceUtil.getAceItem(Long.parseLong(aceItemId));
-                    aceItem.setAceItemId(Long.parseLong(aceItemId));
+					// System.out.println("hit.score is: " + hit.score);
+					// System.out.println("relevance (0.0) is: " + relevance);
 
-                    // relevance expressed as a percentage
-                    float relevance = hit.score * normalizeScoreFactor * 100;
-
-                    // System.out.println("hit.score is: " + hit.score);
-                    // System.out.println("relevance (0.0) is: " + relevance);
-
-
-                    AceItemSearchResult aceItemSearchResult = new AceItemSearchResult(aceItem);
-                    aceItemSearchResult.setRelevance(relevance);
-                    //System.out.println("AceItemSearchResult name is " + aceItemSearchResult.getName());
-                    //System.out.println("AceItemSearchResult isNew is " + aceItemSearchResult.isIsNew());
-                    //System.out.println("AceItemSearchResult feature is " + aceItemSearchResult.getFeature());
-                    results.add(aceItemSearchResult);
-                }
-            }
-            return results;
-        } catch(ParseException x) {
-            //System.out.println(x.getMessage());
-            x.printStackTrace();
-            throw new ACELuceneException(x.getMessage(), x);
-        } catch (IOException x) {
-            //System.out.println(x.getMessage());
-            x.printStackTrace();
-            throw new ACELuceneException(x.getMessage(), x);
-        }
-    }
+					AceItemSearchResult aceItemSearchResult = new AceItemSearchResult(
+							aceItem);
+					aceItemSearchResult.setRelevance(relevance);
+					// System.out.println("AceItemSearchResult name is " +
+					// aceItemSearchResult.getName());
+					// System.out.println("AceItemSearchResult isNew is " +
+					// aceItemSearchResult.isIsNew());
+					// System.out.println("AceItemSearchResult feature is " +
+					// aceItemSearchResult.getFeature());
+					results.add(aceItemSearchResult);
+				}
+			}
+			return results;
+		} catch (ParseException x) {
+			// System.out.println(x.getMessage());
+			x.printStackTrace();
+			throw new ACELuceneException(x.getMessage(), x);
+		} catch (IOException x) {
+			// System.out.println(x.getMessage());
+			x.printStackTrace();
+			throw new ACELuceneException(x.getMessage(), x);
+		}
+	}
 
 }

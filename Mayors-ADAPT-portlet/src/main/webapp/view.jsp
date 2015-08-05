@@ -130,8 +130,8 @@ city.
 	<aui:button value="Edit" onClick="edit()" disabled="<%=disableEdit %>" />
 </aui:row>
 <aui:row>
-	<h3>Step 2 - Finish your page to preview it</h3>
-	<aui:button value="Finish" onClick="finish()" disabled="<%=disableFinish %>" />
+	<h3>Step 2 - Finish your page to preview it (you can do it from the edition form)</h3>
+	<!-- aui:button value="Finish" onClick="finish()" disabled="<%=disableFinish %>" -->
 </aui:row>
 <aui:row>
 	<h3>Step 3 - Preview your City Profile Mayors Adapt page</h3>

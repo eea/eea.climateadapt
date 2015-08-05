@@ -390,14 +390,19 @@ request.setAttribute("edit_article.jsp-toLanguageId", toLanguageId);
 	var <portlet:namespace />documentLibraryInput = null;
 	var <portlet:namespace />imageGalleryInput = null;
 
-	disableSeparatorFields()
+	decorateForm()
 
-    function disableSeparatorFields() {
+    function decorateForm() {
 	    /* Disable title Fields (separators) and improve aspect form */
         var formu = document.<portlet:namespace />fm1;
         var selects =  formu.getElementsByTagName("select");
         var inputs = formu.getElementsByTagName("input");
-        for (var i=0; i<inputs.length; i++){
+        var larges = formu.getElementsByClassName("wlarge");
+        var mediums = formu.getElementsByClassName("wmedium");
+        var smalls = formu.getElementsByClassName("wsmall");
+        var labels = formu.getElementsByTagName("label");
+        var textareas = formu.getElementsByTagName("textarea");
+        for (var i=0; i< inputs.length; i++){
                 if ((inputs[i].name).indexOf("_ti_") >= 0){
                         inputs[i].disabled="disabled";
                         inputs[i].style.backgroundColor = "#828282";
@@ -405,7 +410,30 @@ request.setAttribute("edit_article.jsp-toLanguageId", toLanguageId);
                 }
         }
 
-        for (var j=0; j<selects.length; j++){
+        for (var i=0; i< labels.length; i++){
+                if ((labels[i].htmlFor).indexOf("_m_") >= 0){
+                        labels[i].innerHTML = labels[i].innerHTML + " <span style='color:red' > *</span>";
+                }
+        }
+
+        for (var i=0; i < larges.length; i++){
+				larges[i].style.width = "924px";
+        }
+
+        for (var i=0; i < mediums.length; i++){
+				mediums[i].style.width = "462px";
+        }
+
+        for (var i=0; i < smalls.length; i++){
+				smalls[i].style.width = "231px";
+        }
+
+        for (var i=0; i < textareas.length; i++){
+				textareas[i].style.width = "924px";
+				textareas[i].style.height = "115px";
+        }
+
+        for (var j=0; j< selects.length; j++){
                 if ((selects[j].name).indexOf("_15_a_m_country")>= 0 || ((selects[j].name).indexOf("_15_b_m_sector"))>= 0 || ((selects[j].name).indexOf("_15_c_m_stage_of_the_implementation_cycle"))>= 0 || (selects[j].name).indexOf("_15_b_m_current_status_of_mayors_adapt_enrolment") >= 0){
                         selects[j].style.height="30px";
                 }

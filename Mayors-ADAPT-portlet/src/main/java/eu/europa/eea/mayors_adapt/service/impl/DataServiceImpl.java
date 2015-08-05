@@ -1,8 +1,10 @@
 package eu.europa.eea.mayors_adapt.service.impl;
 
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 import java.util.TreeMap;
 import java.util.TreeSet;
 
@@ -49,6 +51,105 @@ import eu.europa.eea.mayors_adapt.service.base.DataServiceBaseImpl;
  */
 @AccessControlled(guestAccessEnabled = true)
 public class DataServiceImpl extends DataServiceBaseImpl {
+
+	static final Map<String, String> COUNTRIES = new TreeMap<String, String>() {
+		{
+			put("AL", "Albania");
+			put("AT", "Austria");
+			put("BE", "Belgium");
+			put("BG", "Bulgaria");
+			put("CY", "Cyprus");
+			put("CZ", "Czech Republic");
+			put("DE", "Germany");
+			put("DK", "Denmark");
+			put("EE", "Estonia");
+			put("FI", "Finland");
+			put("GB", "United Kingdom");
+			put("FR", "France");
+			put("GR", "Greece");
+			put("HU", "Hungary");
+			put("IE", "Ireland");
+			put("IT", "Italy");
+			put("LV", "Latvia");
+			put("LT", "Lithuania");
+			put("LU", "Luxembourg");
+			put("MT", "Malta");
+			put("NL", "Netherlands");
+			put("PL", "Poland");
+			put("PT", "Portugal");
+			put("RO", "Romania");
+			put("SK", "Slovakia");
+			put("SI", "Slovenia");
+			put("ES", "Spain");
+			put("SE", "Sweden");
+			put("CH", "Switzerland");
+			put("IS", "Iceland");
+			put("LI", "Liechtenstein");
+			put("NO", "Norway");
+			put("TR", "Turkey");
+			put("HR", "Croatia");
+			put("RS", "Serbia");
+			put("BA", "Bosnia and Herzegovina");
+			put("ME", "Montenegro");
+			put("XK", "Kosovo under UN Security Counil Resolution 1244/99");
+			put("MK", "Former Yugoslav Republic of Macedonia");
+		}
+	};
+
+	static final Map<String, String> ELEMENTS = new TreeMap<String, String>() {
+		{
+			put("OBSERVATIONS", "Observations and Scenarios");
+			put("VULNERABILITY", "Vulnerability Assessment");
+			put("ACTION", "Adaptation Actions");
+			put("PLANSTRATEGY", "Adaptation Plans and Strategies");
+			put("EU_POLICY", "Sector Policies");
+			put("MEASUREACTION", "Adaptation Measures and Actions");
+		}
+	};
+
+	static final Map<String, String> CLIMATE_IMPACTS = new TreeMap<String, String>() {
+		{
+			put("EXTREMETEMP", "Extreme Temperatures");
+			put("WATERSCARCE", "Water Scarcity");
+			put("FLOODING", "Flooding");
+			put("SEALEVELRISE", "Sea Level Rise");
+			put("DROUGHT", "Droughts");
+			put("STORM", "Storms");
+			put("ICEANDSNOW", "Ice and Snow");
+		}
+	};
+
+	static final Map<String, String> SECTORS = new TreeMap<String, String>() {
+		{
+			put("AGRICULTURE", "Agriculture and Forest");
+			put("BIODIVERSITY", "Biodiversity");
+			put("COASTAL", "Coastal areas");
+			put("DISASTERRISKREDUCTION", "Disaster Risk Reduction");
+			put("FINANCIAL", "Financial");
+			put("HEALTH", "Health");
+			put("INFRASTRUCTURE", "Infrastructure");
+			put("MARINE", "Marine and Fisheries");
+			put("WATERMANAGEMENT", "Water management");
+			put("URBAN", "Urban");
+		}
+	};
+
+	static final Map<String, String> DATATYPES = new TreeMap<String, String>() {
+		{
+			put("DOCUMENT", "Publications and reports");
+			put("INFORMATIONSOURCE", "Information portals");
+			put("MAPGRAPHDATASET", "Maps, graphs and datasets");
+			put("INDICATOR", "Indicators");
+			put("GUIDANCE", "Guidance");
+			put("TOOL", "Tools");
+			put("RESEARCHPROJECT", "Research and knowledge projects");
+			put("ORGANISATION", "Organisations");
+			put("MEASURE", "Adaptation options");
+			put("ACTION", "Case studies");
+			put("CITYPROFILE", "City Profiles");
+			put("ARTICLE", "Articles");
+		}
+	};
 
 	public TreeSet<String> getDataTypes() {
 		TreeSet<String> dataTypes = new TreeSet<String>();
@@ -104,6 +205,7 @@ public class DataServiceImpl extends DataServiceBaseImpl {
 	}
 
 	public TreeSet<String> getCountries() {
+
 		TreeSet<String> countries = new TreeSet<String>();
 		countries.add("Albania");
 		countries.add("Austria");
@@ -189,7 +291,7 @@ public class DataServiceImpl extends DataServiceBaseImpl {
 						.create(searchContext);
 				for (String sector : sectors) {
 					sectorQuery.add(TermQueryFactoryUtil.create(searchContext,
-							getField("b_m_sector"), sector),
+							getField("b_m_sectors"), sector),
 							BooleanClauseOccur.SHOULD);
 				}
 				booleanQuery.add(sectorQuery, BooleanClauseOccur.MUST);
@@ -242,17 +344,18 @@ public class DataServiceImpl extends DataServiceBaseImpl {
 				// _log.info("impact: "+impacts);
 				// _log.info(impact2List.containsAll(impacts));
 				// if (impactList.containsAll(impacts))
-				long articleId = Long.parseLong(doc.get(Field.UID).split("_PORTLET_")[1]);
+				long articleId = Long.parseLong(doc.get(Field.UID).split(
+						"_PORTLET_")[1]);
 				String articleUrlTitle = "";
 				try {
 					JournalArticle article = JournalArticleLocalServiceUtil
 							.getArticle(articleId);
 					articleUrlTitle = article.getUrlTitle();
 				} catch (com.liferay.portlet.journal.NoSuchArticleException e) {
-					_log.error("City profile not found for indexed articleId: "+articleId);
+					_log.error("City profile not found for indexed articleId: "
+							+ articleId);
 				}
-				ret.put(doc.get(locale, Field.TITLE),
-						"/-/" + articleUrlTitle );
+				ret.put(doc.get(locale, Field.TITLE), "/-/" + articleUrlTitle);
 				_log.debug(Arrays.asList(doc
 						.getValues(getField("b_m_climate_impacts"))));
 				_log.debug(doc.toString());

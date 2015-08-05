@@ -51,7 +51,7 @@
   function initialize() {
     var mapCanvas = document.getElementById('map-canvas');
     var mapOptions = {
-      center: new google.maps.LatLng(${a_m_city_latitude.getData()},${a_m_city_longitude.getData()}),
+      center: new google.maps.LatLng(${a_r_city_latitude.getData()},${a_r_city_longitude.getData()}),
       zoom: 8,
       mapTypeId: google.maps.MapTypeId.HYBRID
     }
@@ -67,11 +67,20 @@
 				<div id="logoMayors">
 					<img src="http://mayors-adapt.eu/wp-content/themes/mayoradapt/images/logo.png" />
 				</div>
+				<div id="logoStatus">
+				    <#if Image.getSiblings()?has_content>
+				    <#list Image.getSiblings() as cur_images>
+				        <#if cur_images_index==1>
+					        <img src="${cur_images.getData()}" style="width:100%;"/>
+					    </#if>
+					</#list>
+					</#if>
+				</div>
 			</div>
 			<div>
 				<h1>${.vars['reserved-article-title'].data} - ${a_m_country.getData()}</h1>
 				<p class="textoContenido">
-				${b_city_background.getData()}
+				${b_m_city_background.getData()}
 				</p>
 				  <div class="sector-main-article">
 					  <div id="read-more-link" style="position:inherit;width:inherit">
@@ -79,7 +88,7 @@
 					  </div>  
 				  </div>				
 				<p class="textoContenido">
-                    ${b_climate_impacts_additional_information.getData()}
+                    ${b_m_quantification.getData()}
                 </p>
 				  <div class="sector-main-article">
 					  <div id="read-more-link" style="position:inherit;width:inherit">
@@ -96,11 +105,20 @@
 				  </div>				
 				<p class="textoContenido">
 				${f_m_action_event_title.getData()}<br/>
+				${f_m_action_event_short_description.getData()}<br/>
 				${f_m_action_event_long_description.getData()}<br/>
 				<div>
     		        <img alt="Picture" src="${f_picture.getData()}" />
 				</div>
 				</p>
+				  <div class="sector-main-article">
+					  <div id="read-more-link" style="position:inherit;width:inherit">
+						<a style="text-decoration:none;">Assesments</a>
+					  </div>  
+				  </div>				
+				  <p class="textoContenido">
+				    ${e_assessments.getData()}
+				  </p>
 			</div>
 		</div>
 	</div>
@@ -122,7 +140,7 @@
 			<b>Name & surname of mayor</b><br/>
 	    	${b_m_name_surname_of_mayor.getData()}<br/><br/>
 			<b>Population</b><br/>
-			${a_population_size.getData()} inhabitants<br/><br/>
+			${a_m_population_size.getData()} inhabitants<br/><br/>
 			<b>Contact person and role of contact person</b><br/>
 			${b_m_r_name_surname_of_contact_person.getData()}<br/>
 			${b_m_role_of_contact_person.getData()}<br/><br/>
@@ -132,10 +150,10 @@
 			<b>Date of oficial joining to Mayors Adapt</b><br/>
 			Joining Date. Pending add this file to the form.<br/><br/>
 			<b>Covenant of mayors signatory (yes/no)</b><br/>
-			<#if getterUtil.getBoolean(b_covenant_of_mayors_signatory.getData())>
+			<#if getterUtil.getBoolean(b_m_covenant_of_mayors_signatory.getData())>
 			    Yes
 			</#if>
-			<#if !getterUtil.getBoolean(b_covenant_of_mayors_signatory.getData())>
+			<#if !getterUtil.getBoolean(b_m_covenant_of_mayors_signatory.getData())>
 			    No
 			</#if>			
 			<br/><br/>

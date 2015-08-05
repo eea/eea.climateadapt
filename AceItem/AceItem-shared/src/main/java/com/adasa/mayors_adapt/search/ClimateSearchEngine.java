@@ -2,10 +2,15 @@ package com.adasa.mayors_adapt.search;
 
 import java.io.File;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
+import java.util.Map;
+import java.util.ResourceBundle;
+import java.util.TreeMap;
 import java.util.logging.Logger;
 
 import nl.wur.alterra.cgi.ace.model.AceItem;
@@ -34,6 +39,8 @@ import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.search.Field;
 import com.liferay.portal.kernel.workflow.WorkflowConstants;
+import com.liferay.portlet.journal.model.JournalArticle;
+import com.liferay.portlet.journal.service.JournalArticleLocalServiceUtil;
 
 public class ClimateSearchEngine extends IndexSearcher {
 
@@ -57,11 +64,11 @@ public class ClimateSearchEngine extends IndexSearcher {
 	public List<AceItemSearchResult> searchLuceneByStructure(
 			AceSearchFormBean formBean, String aceItemType, long structureId)
 			throws IOException, PortalException, SystemException,
-			ParseException {
+			ParseException, java.text.ParseException {
 		System.out.println("Searching for structures:" + structureId);
 		System.out.println("Search Bean :" + formBean.toString(formBean));
-		ScoreDoc[] hits = this.getTopDocs(formBean, formBean.getAnyOfThese(), aceItemType,
-				structureId).scoreDocs;
+		ScoreDoc[] hits = this.getTopDocs(formBean, formBean.getAnyOfThese(),
+				aceItemType, structureId).scoreDocs;
 
 		List<AceItemSearchResult> results = new ArrayList<AceItemSearchResult>();
 
@@ -119,37 +126,44 @@ public class ClimateSearchEngine extends IndexSearcher {
 				// aceItemSearchResult.getFeature());
 				results.add(aceItemSearchResult);
 			} else {
+				long articleId = Long.valueOf(document.getFieldable(Field.UID)
+						.stringValue().split("_PORTLET_")[1]);
+				JournalArticle article = JournalArticleLocalServiceUtil
+						.getArticle(articleId);
+				String articleUrlTitle = article.getUrlTitle();
 				AceItemSearchResult aceItemSearchResult = new AceItemSearchResult();
-				System.out.println("Document: " + document.toString());
-				aceItemSearchResult.setName(document.getFieldable("title")
-						.stringValue());
 				// aceItemSearchResult.setAceItemId(Long.valueOf(document
 				// .getFieldable("uid").stringValue()));
-				aceItemSearchResult.setAceItemId(Long.valueOf(document
-						.getFieldable("articleId").stringValue()));
+				aceItemSearchResult.setAceItemId(articleId);
 				String classTypeId = document.get(Field.CLASS_TYPE_ID);
+				String storageType = null;
 				if (classTypeId != null
-						&& Long.valueOf(document.get(Field.CLASS_TYPE_ID)) == structureId) {
-					aceItemSearchResult.setStoredAt("cityprofile_id="
-							+ document.getFieldable("articleId").stringValue());
-					aceItemSearchResult.setStoragetype("CITYPROFILE");
-				} else {
-					aceItemSearchResult.setStoredAt("article_id="
-							+ document.getFieldable("articleId").stringValue());
-					aceItemSearchResult.setStoragetype("ARTICLE");
-				}
+						&& Long.valueOf(classTypeId) == structureId) {
+					storageType = "CITYPROFILE";
+				} else
+					storageType = "ARTICLE";
+				aceItemSearchResult.setStoragetype(storageType);
+				aceItemSearchResult.setStoredAt(articleUrlTitle);
 				aceItemSearchResult.setRating(System.currentTimeMillis());
-				aceItemSearchResult.setShortdescription(document.getFieldable(
-						"title").stringValue());
+				aceItemSearchResult.setName(document.get(Field.TITLE));
+				aceItemSearchResult.setShortdescription(document.get(Field.CONTENT));
+				aceItemSearchResult.setFeature("");
 				aceItemSearchResult.setControlstatus(Short.valueOf(document
-						.getFieldable("status").stringValue()));
+						.getFieldable(Field.STATUS).stringValue()));
 				// aceItemSearchResult.setDeeplink("");
 				// aceItemSearchResult.setFeature("feature");
-				aceItemSearchResult.setNew(true);
-				// if (document.get(Field.CREATE_DATE).aceitem.getYear() != null
+				Date publishDate = new SimpleDateFormat("yyyyMMddHHmmSS")
+						.parse(document.getFieldable(Field.PUBLISH_DATE)
+								.stringValue());
+				Calendar publishCal = Calendar.getInstance();
+				publishCal.setTime(publishDate);
+				aceItemSearchResult.setNew(isNew(publishCal));
+				// if (document.getFieldable(Field.PUBLISH_DATE).sgetYear() !=
+				// null
 				// && aceitem.getYear().length() > 0)
 				// {
-				aceItemSearchResult.setYear("2015");
+				aceItemSearchResult.setYear(String.valueOf(publishCal
+						.get(Calendar.YEAR)));
 				// }
 				float relevance = hit.score * normalizeScoreFactor * 100;
 				aceItemSearchResult.setRelevance(relevance);
@@ -160,10 +174,20 @@ public class ClimateSearchEngine extends IndexSearcher {
 		return results;
 	}
 
-	public TopDocs getTopDocs(AceSearchFormBean formBean, String searchText,
-			String aceItemType, long structureId) throws IOException, PortalException,
-			SystemException, ParseException {
+	private boolean isNew(Calendar publishCal) {
+		boolean isNew = false;
+		Calendar now = Calendar.getInstance();
+		publishCal.add(Calendar.MONTH, 3);
+		if (publishCal.after(now))
+			isNew = true;
+		return isNew;
+	}
 
+	public TopDocs getTopDocs(AceSearchFormBean formBean, String searchText,
+			String aceItemType, long structureId) throws IOException,
+			PortalException, SystemException, ParseException {
+		ResourceBundle labels = ResourceBundle.getBundle("content.Language",
+				Locale.ENGLISH);
 		BooleanQuery booleanQuery = new BooleanQuery();
 		BooleanQuery textQuery = new BooleanQuery();
 		if (searchText != null && searchText.length() > 0) {
@@ -183,7 +207,7 @@ public class ClimateSearchEngine extends IndexSearcher {
 				BooleanClause.Occur.MUST);
 
 		//
-		// everything must be a JournalArticle
+		// everything is a JournalArticle
 		//
 		booleanQuery.add(
 				new TermQuery(new Term(Field.ENTRY_CLASS_NAME,
@@ -193,42 +217,57 @@ public class ClimateSearchEngine extends IndexSearcher {
 		//
 		// handle city profile ItemType
 		//
-		// BooleanQuery typesQuery = new BooleanQuery();
-		// String[] types = formBean.getAceitemtype();
-		// if ((types != null) && (types.length > 0)) {
-		// for (String type : types) {
-		// System.out.println("Structure: " + type);
-		// if (type.equalsIgnoreCase("CITYPROFILE"))
-		// booleanQuery.add(new TermQuery(new Term(
-		// Field.CLASS_TYPE_ID, String.valueOf(structureId))),
-		// BooleanClause.Occur.MUST);
-		//
-		// if (type.equalsIgnoreCase("ARTICLE"))
-		// booleanQuery.add(new TermQuery(new Term(
-		// Field.CLASS_TYPE_ID, String.valueOf(structureId))),
-		// BooleanClause.Occur.MUST_NOT);
-		// }
-		// }
-
-		if (aceItemType.equals("CITYPROFILE")) {
-			booleanQuery.add(
-					new TermQuery(new Term(Field.CLASS_TYPE_ID, String
-							.valueOf(structureId))), BooleanClause.Occur.MUST);
-		}
-		else
-			booleanQuery.add(
-					new TermQuery(new Term(Field.CLASS_TYPE_ID, String
-							.valueOf(structureId))), BooleanClause.Occur.MUST_NOT);
-			
-		
+		BooleanQuery typesQuery = new BooleanQuery();
+		String[] types = formBean.getAceitemtype();
+		boolean city=false, article=false; 
+//		if ((types != null) && (types.length > 0)) {
+//			for (String type : types) {
+//				System.out.println("Type: " + type);
+//				if (type.equalsIgnoreCase("CITYPROFILE")){
+//					city=true;
+//					typesQuery.add(new TermQuery(new Term(Field.CLASS_TYPE_ID,
+//							String.valueOf(structureId))),
+//							BooleanClause.Occur.MUST_NOT);
+//				}
+//				if (type.equalsIgnoreCase("ARTICLE")){
+//					article = true;
+//					typesQuery.add(new TermQuery(new Term(Field.CLASS_TYPE_ID,
+//							String.valueOf(structureId))),
+//							BooleanClause.Occur.MUST);
+//				}
+//			}
+//			if (city && article){}
+//			else if (city )
+//				booleanQuery.add(new TermQuery(new Term(Field.CLASS_TYPE_ID,
+//						String.valueOf(structureId))),
+//						BooleanClause.Occur.MUST);
+//			else if (article)
+//				booleanQuery.add(new TermQuery(new Term(Field.CLASS_TYPE_ID,
+//						String.valueOf(structureId))),
+//						BooleanClause.Occur.MUST_NOT);
+//
+//		} else {
+			if (aceItemType.equals("CITYPROFILE")) {
+				booleanQuery
+						.add(new TermQuery(new Term(Field.CLASS_TYPE_ID, String
+								.valueOf(structureId))),
+								BooleanClause.Occur.MUST);
+			}
+			if (aceItemType.equals("ARTICLE")) {
+				booleanQuery.add(new TermQuery(new Term(Field.CLASS_TYPE_ID,
+						String.valueOf(structureId))),
+						BooleanClause.Occur.MUST_NOT);
+			}
+//		}
 		//
 		// handle sectors
 		//
 		BooleanQuery sectorsQuery = new BooleanQuery();
-		String sectorField = "Select12195";
+		String sectorField = "b_m_sectors";
 		String[] sectors = formBean.getSector();
 		if ((sectors != null) && (sectors.length > 0)) {
 			for (String sector : sectors) {
+				sector = labels.getString("acesearch-sectors-lbl-" + sector);
 				sectorsQuery.add(new TermQuery(new Term("ddm/" + structureId
 						+ "/" + sectorField + "_en_GB", sector)),
 						BooleanClause.Occur.SHOULD);
@@ -240,10 +279,11 @@ public class ClimateSearchEngine extends IndexSearcher {
 		// handle elements
 		//
 		BooleanQuery elementsQuery = new BooleanQuery();
-		String elementField = "Element";
+		String elementField = "h_m_elements";
 		String[] elements = formBean.getElement();
 		if ((elements != null) && (elements.length > 0)) {
 			for (String element : elements) {
+				element = labels.getString("acesearch-elements-lbl-" + element);
 				elementsQuery.add(new TermQuery(new Term("ddm/" + structureId
 						+ "/" + elementField + "_en_GB", element)),
 						BooleanClause.Occur.SHOULD);
@@ -254,26 +294,28 @@ public class ClimateSearchEngine extends IndexSearcher {
 		//
 		// handle scenarios
 		//
-		BooleanQuery scenariosQuery = new BooleanQuery();
-		String scenarioField = "Scenario";
-		String[] scenarios = formBean.getScenario();
-		if ((scenarios != null) && (scenarios.length > 0)) {
-			for (String scenario : scenarios) {
-				scenariosQuery.add(new TermQuery(new Term("ddm/" + structureId
-						+ "/" + scenarioField + "_en_GB", scenario)),
-						BooleanClause.Occur.SHOULD);
-			}
-			booleanQuery.add(scenariosQuery, BooleanClause.Occur.MUST);
-		}
+		// BooleanQuery scenariosQuery = new BooleanQuery();
+		// String scenarioField = "Scenario";
+		// String[] scenarios = formBean.getScenario();
+		// if ((scenarios != null) && (scenarios.length > 0)) {
+		// for (String scenario : scenarios) {
+		// scenariosQuery.add(new TermQuery(new Term("ddm/" + structureId
+		// + "/" + scenarioField + "_en_GB", scenario)),
+		// BooleanClause.Occur.SHOULD);
+		// }
+		// booleanQuery.add(scenariosQuery, BooleanClause.Occur.MUST);
+		// }
 
 		//
 		// handle impacts
 		//
 		BooleanQuery impactsQuery = new BooleanQuery();
-		String impactField = "Climate_Impact";
+		String impactField = "b_m_climate_impacts";
 		String[] impacts = formBean.getImpact();
 		if ((impacts != null) && (impacts.length > 0)) {
 			for (String impact : impacts) {
+				impact = labels.getString("acesearch-climateimpacts-lbl-"
+						+ impact);
 				impactsQuery.add(new TermQuery(new Term("ddm/" + structureId
 						+ "/" + impactField + "_en_GB", impact)),
 						BooleanClause.Occur.SHOULD);
@@ -304,14 +346,17 @@ public class ClimateSearchEngine extends IndexSearcher {
 					BooleanClause.Occur.MUST);
 		}
 
-		if (formBean.getFeaturedItem() != null
-				&& !formBean.getFeaturedItem().equals("")) {
-			// System.out.println("Filter by feature");
-			String featuredField = "featuredField";
-			booleanQuery.add(new TermQuery(new Term("ddm/" + structureId + "/"
-					+ featuredField + "_en_GB", "true")),
-					BooleanClause.Occur.SHOULD);
-		}
+		//
+		// handle featured
+		//
+		// if (formBean.getFeaturedItem() != null
+		// && !formBean.getFeaturedItem().equals("")) {
+		// // System.out.println("Filter by feature");
+		// String featuredField = "featuredField";
+		// booleanQuery.add(new TermQuery(new Term("ddm/" + structureId + "/"
+		// + featuredField + "_en_GB", "true")),
+		// BooleanClause.Occur.SHOULD);
+		// }
 
 		//
 		// handle countries
@@ -319,9 +364,11 @@ public class ClimateSearchEngine extends IndexSearcher {
 		BooleanQuery countriesQuery = new BooleanQuery();
 		String[] countries = formBean.getCountries();
 		if ((countries != null) && (countries.length > 0)) {
+			String countryField = "a_m_country";
 			for (String country : countries) {
+				country = labels.getString("acesearch-country-lbl-" + country);
 				countriesQuery.add(new TermQuery(new Term("ddm/" + structureId
-						+ "/Country_en_GB", country)),
+						+ "/" + countryField + "_en_GB", country)),
 						BooleanClause.Occur.SHOULD);
 			}
 			booleanQuery.add(countriesQuery, BooleanClause.Occur.MUST);
@@ -330,11 +377,10 @@ public class ClimateSearchEngine extends IndexSearcher {
 		TopDocs searchResults = searcher.search(booleanQuery, 99);
 		System.out.println("Search Text: " + searchText);
 		System.out.println("Lucene boolean query: " + booleanQuery);
-        System.out.println("Search Bean: " + formBean.toString(formBean));
+		System.out.println("Search Bean: " + formBean.toString(formBean));
 
 		searcher.close();
 		return searchResults;
 	}
-
 
 }

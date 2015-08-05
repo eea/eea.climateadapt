@@ -128,7 +128,7 @@ jQuery(document).ready(function() {
         position: {
             at: "bottom center",
             my: "top center",
-            viewport: $(window),
+            //viewport: $(window),
             effect: false
         },
         show: {

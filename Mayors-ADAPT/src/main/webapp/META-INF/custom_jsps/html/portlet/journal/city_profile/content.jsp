@@ -184,7 +184,7 @@ if (user.getScreenName().equals("cityprofilecontact"))
 			</c:if>
 		</liferay-ui:error>
 
-		<div class="journal-article-header-edit" id="<portlet:namespace />articleHeaderEdit">
+		<div class="journal-article-header-edit" id="<portlet:namespace />articleHeaderEdit" style="visibility:hidden">
 			<div class="journal-article-header-id">
 				<c:if test="<%= (article == null) || article.isNew() %>">
 					<c:choose>
@@ -469,14 +469,6 @@ if (user.getScreenName().equals("cityprofilecontact"))
 
 					if ((article != null) && Validator.isNotNull(article.getStructureId()) && Validator.isNotNull(content)) {
 						ddmFields = JournalConverterUtil.getDDMFields(ddmStructure, content);
-						/**System.out.println("Size:"+ddmFields.getNames().size());
-						for (com.liferay.portlet.dynamicdatamapping.storage.Field field: ddmFields){
-							if (field.getName().startsWith("contact")){
-								ddmFields.remove(field.getName());
-								System.out.println("Field:"+field.getName());
-							}
-						}
-						System.out.println("Size:"+ddmFields.getNames().size());*/
 					}
 
 					String requestedLanguageId = defaultLanguageId;
@@ -495,6 +487,7 @@ Once your adhesion is confirmed by the Mayors Adapt Office and the registration 
 
 Only the fields [currently in green below] will be public.
 </p>
+<br>
 					<liferay-ddm:html
 						classNameId="<%= PortalUtil.getClassNameId(DDMStructure.class) %>"
 						classPK="<%= ddmStructure.getStructureId() %>"

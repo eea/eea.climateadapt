@@ -145,8 +145,8 @@ function displayJSONResults(unique, aceitemResults) {
 	jQuery.each(aceitemResults, function(idx, aceitem){ 
 		if (aceitem) {
 			// add searchresult
+			console.log(aceitem);
 			resultlist += '<div class="searchresult">';
-		
 			var descriptionText = aceitem.shortdescription ;
 			var feature = aceitem.feature;
 			var isNew = aceitem.isNew;
@@ -168,7 +168,6 @@ function displayJSONResults(unique, aceitemResults) {
 			{
 				year = " (" + year + ")";
 			}
-
 			// add name and description
             if ((aceitem.storedAt != "") && (aceitem.storagetype.substr(0, 3) == "URL")) {
                    resultlist += '<span class="bolder">&#187; ' + imgSrc + ' ' + imgNew +  ' <a href="/viewaceitem?aceitem_id=' +  aceitem.aceItemId  + '" >' + aceitem.name + year + ' </a></span> - ' + descriptionText ;
@@ -181,11 +180,15 @@ function displayJSONResults(unique, aceitemResults) {
                                resultlist += '<span class="bolder">&#187; ' + imgSrc + ' ' + imgNew +  ' <a href="/viewmeasure?' + aceitem.storedAt + '" >' + aceitem.name + year + '</a></span>&nbsp;';
                                resultlist += ' - ' + descriptionText ;
 
-           } else if (aceitem.storedAt.substr(0, 14) == "cityprofile_id") {
-               resultlist += '<span class="bolder">&#187; ' + imgSrc + ' ' + imgNew +  ' <a href="/-/' + aceitem.name + '" >' + aceitem.name + year + '</a></span>&nbsp;';
+           } else if (aceitem.storagetype.indexOf('CITYPROFILE')>0) {
+               resultlist += '<span class="bolder">&#187; ' + imgSrc + ' ' + imgNew +  ' <a href="/-/' + aceitem.storedAt + '" >' + aceitem.name + year + '</a></span>&nbsp;';
                resultlist += ' - ' + descriptionText ;
 
-			}else {
+           } else if (aceitem.storagetype.indexOf('ARTICLE')>0) {
+                   resultlist += '<span class="bolder">&#187; ' + imgSrc + ' ' + imgNew +  ' <a href="/-/' + aceitem.storedAt + '" >' + aceitem.name + year + '</a></span>&nbsp;';
+                   resultlist += ' - ' + descriptionText ;
+			} 
+           else {
                    resultlist += '<span class="bolder">&#187; ' + imgSrc + ' ' + imgNew +  ' <a href="/viewaceitem?aceitem_id=' +  aceitem.aceItemId + '" >' + aceitem.name + year + ' </a></span> - ' + descriptionText ;
 
            }
@@ -319,10 +322,10 @@ function displayJSONResults(unique, aceitemResults) {
 								- <c:out value="${descriptionText}" />
 							</c:when>
 							<c:when
-								test="${!empty wrappedSearchResult.storedAt && fn:startsWith(wrappedSearchResult.storedAt, 'cityprofile_id')==true}">
+								test="${!empty wrappedSearchResult.storagetype && fn:startsWith(wrappedSearchResult.storagetype, 'CITYPROFILE')==true}">
 								<span class="bolder">&#187; ${featureImageToDisplay}
 									${newImageToDisplay} <a
-									href="<c:out value="/-/${wrappedSearchResult.name}"/>">
+									href="<c:out value="/-/${wrappedSearchResult.storedAt}"/>">
 										<c:out value="${wrappedSearchResult.name}" />
 										<c:out value="${year}" />
 								</a>
@@ -330,10 +333,10 @@ function displayJSONResults(unique, aceitemResults) {
 								- <c:out value="${descriptionText}" />
 							</c:when>
 							<c:when
-								test="${!empty wrappedSearchResult.storedAt && fn:startsWith(wrappedSearchResult.storedAt, 'article_id')==true}">
+								test="${!empty wrappedSearchResult.storagetype && fn:startsWith(wrappedSearchResult.storagetype, 'ARTICLE')==true}">
 								<span class="bolder">&#187; ${featureImageToDisplay}
 									${newImageToDisplay} <a
-									href="<c:out value="/-/${wrappedSearchResult.name}"/>">
+									href="<c:out value="/-/${wrappedSearchResult.storedAt}"/>">
 										<c:out value="${wrappedSearchResult.name}" />
 										<c:out value="${year}" />
 								</a>

@@ -78,9 +78,8 @@ public class ACESearchPortalInterface {
 
 		ACESearchEngine searchEngine = new ACESearchEngine();
 
-		String INDEX_DIRECTORY = "/Climate_liferay/data/lucene/1";
 		ClimateSearchEngine climateSearchEngine = new ClimateSearchEngine(
-				ClimateSearchEngine.getIndexReader(INDEX_DIRECTORY));
+				ClimateSearchEngine.getIndexReader(null));
 
 		// no aceItemTypes requested or "All" choosen: search for all of them
 		if (isEmpty(formBean.getAceitemtype())
@@ -118,9 +117,16 @@ public class ACESearchPortalInterface {
 		// search only requested aceItemTypes
 		else {
 			for (String aceItemType : formBean.getAceitemtype()) {
+				List<AceItemSearchResult> results = null;
+				System.out.println("Searching for selected type: "+aceItemType);
 
-				List<AceItemSearchResult> results = searchEngine
-						.searchLuceneByType(formBean, aceItemType);
+				if (aceItemType.equals("CITYPROFILE")
+						|| aceItemType.equals("ARTICLE"))
+					results = climateSearchEngine.searchLuceneByStructure(
+							formBean, aceItemType, structureId);
+				else
+					results = searchEngine.searchLuceneByType(formBean,
+							aceItemType);
 
 				totalResults += results.size();
 
