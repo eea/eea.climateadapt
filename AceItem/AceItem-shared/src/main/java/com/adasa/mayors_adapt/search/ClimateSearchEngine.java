@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -146,7 +147,11 @@ public class ClimateSearchEngine extends IndexSearcher {
 				aceItemSearchResult.setStoredAt(articleUrlTitle);
 				aceItemSearchResult.setRating(System.currentTimeMillis());
 				aceItemSearchResult.setName(document.get(Field.TITLE));
-				aceItemSearchResult.setShortdescription(document.get(Field.CONTENT));
+				String description = nullSafeString(new String[] {
+						document.get(Field.CONTENT),
+						document.get(Field.DESCRIPTION),
+						document.get(Field.NAME) });
+				aceItemSearchResult.setShortdescription(description);
 				aceItemSearchResult.setFeature("");
 				aceItemSearchResult.setControlstatus(Short.valueOf(document
 						.getFieldable(Field.STATUS).stringValue()));
@@ -172,6 +177,13 @@ public class ClimateSearchEngine extends IndexSearcher {
 			}
 		}
 		return results;
+	}
+
+	private String nullSafeString(String[] strings) {
+		for (String string : Arrays.asList(strings))
+			if (string != null)
+				return string;
+		return "";
 	}
 
 	private boolean isNew(Calendar publishCal) {
@@ -219,46 +231,46 @@ public class ClimateSearchEngine extends IndexSearcher {
 		//
 		BooleanQuery typesQuery = new BooleanQuery();
 		String[] types = formBean.getAceitemtype();
-		boolean city=false, article=false; 
-//		if ((types != null) && (types.length > 0)) {
-//			for (String type : types) {
-//				System.out.println("Type: " + type);
-//				if (type.equalsIgnoreCase("CITYPROFILE")){
-//					city=true;
-//					typesQuery.add(new TermQuery(new Term(Field.CLASS_TYPE_ID,
-//							String.valueOf(structureId))),
-//							BooleanClause.Occur.MUST_NOT);
-//				}
-//				if (type.equalsIgnoreCase("ARTICLE")){
-//					article = true;
-//					typesQuery.add(new TermQuery(new Term(Field.CLASS_TYPE_ID,
-//							String.valueOf(structureId))),
-//							BooleanClause.Occur.MUST);
-//				}
-//			}
-//			if (city && article){}
-//			else if (city )
-//				booleanQuery.add(new TermQuery(new Term(Field.CLASS_TYPE_ID,
-//						String.valueOf(structureId))),
-//						BooleanClause.Occur.MUST);
-//			else if (article)
-//				booleanQuery.add(new TermQuery(new Term(Field.CLASS_TYPE_ID,
-//						String.valueOf(structureId))),
-//						BooleanClause.Occur.MUST_NOT);
-//
-//		} else {
-			if (aceItemType.equals("CITYPROFILE")) {
-				booleanQuery
-						.add(new TermQuery(new Term(Field.CLASS_TYPE_ID, String
-								.valueOf(structureId))),
-								BooleanClause.Occur.MUST);
-			}
-			if (aceItemType.equals("ARTICLE")) {
-				booleanQuery.add(new TermQuery(new Term(Field.CLASS_TYPE_ID,
-						String.valueOf(structureId))),
-						BooleanClause.Occur.MUST_NOT);
-			}
-//		}
+		boolean city = false, article = false;
+		// if ((types != null) && (types.length > 0)) {
+		// for (String type : types) {
+		// System.out.println("Type: " + type);
+		// if (type.equalsIgnoreCase("CITYPROFILE")){
+		// city=true;
+		// typesQuery.add(new TermQuery(new Term(Field.CLASS_TYPE_ID,
+		// String.valueOf(structureId))),
+		// BooleanClause.Occur.MUST_NOT);
+		// }
+		// if (type.equalsIgnoreCase("ARTICLE")){
+		// article = true;
+		// typesQuery.add(new TermQuery(new Term(Field.CLASS_TYPE_ID,
+		// String.valueOf(structureId))),
+		// BooleanClause.Occur.MUST);
+		// }
+		// }
+		// if (city && article){}
+		// else if (city )
+		// booleanQuery.add(new TermQuery(new Term(Field.CLASS_TYPE_ID,
+		// String.valueOf(structureId))),
+		// BooleanClause.Occur.MUST);
+		// else if (article)
+		// booleanQuery.add(new TermQuery(new Term(Field.CLASS_TYPE_ID,
+		// String.valueOf(structureId))),
+		// BooleanClause.Occur.MUST_NOT);
+		//
+		// } else {
+		if (aceItemType.equals("CITYPROFILE")) {
+			booleanQuery.add(
+					new TermQuery(new Term(Field.CLASS_TYPE_ID, String
+							.valueOf(structureId))), BooleanClause.Occur.MUST);
+		}
+		if (aceItemType.equals("ARTICLE")) {
+			booleanQuery.add(
+					new TermQuery(new Term(Field.CLASS_TYPE_ID, String
+							.valueOf(structureId))),
+					BooleanClause.Occur.MUST_NOT);
+		}
+		// }
 		//
 		// handle sectors
 		//
