@@ -27,9 +27,9 @@ String redirect = ParamUtil.getString(request, "redirect");
 
 String FINISH = "FINISH";
 
-boolean pending_save = true;
-
 System.out.println("CMD: "+cmd);
+
+boolean pending_save = (cmd.equals(Constants.UPDATE)) ? false : true;
 
 // Make sure the redirect is correct. This is a workaround for a layout that
 // has both the Journal and Journal Content portlets and the user edits an
@@ -484,7 +484,6 @@ request.setAttribute("edit_article.jsp-toLanguageId", toLanguageId);
 	}
 
 	function <portlet:namespace />saveArticle() {
-		pending_save = false;
 		document.<portlet:namespace />fm1.<portlet:namespace /><%= Constants.CMD %>.value = "<%= ((article == null) || Validator.isNull(article.getArticleId())) ? Constants.ADD : Constants.UPDATE %>";
 	}
 

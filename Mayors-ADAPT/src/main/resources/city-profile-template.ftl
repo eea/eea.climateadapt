@@ -87,7 +87,7 @@
 					  </div>  
 				  </div>				
 				<p class="textoContenido">
-					${e_planed_adaptation_actions.getData()}
+					${e_m_planed_adaptation_actions.getData()}
 				</p>
 				  <div class="sector-main-article">
 					  <div id="read-more-link" style="position:inherit;width:inherit">
@@ -122,8 +122,10 @@
 			<b>Name & surname of mayor</b><br/>
 	    	${b_m_name_surname_of_mayor.getData()}<br/><br/>
 			<b>Population</b><br/>
-			${a_population_size.getData()} inhabitants<br/><br/>
-			<b>Contact person and role of contact person</b><br/>
+			<#if !a_population_size??>
+				${a_population_size.getData()} inhabitants
+			</#if><br/><br/>
+			<b>Contact person</b><br/>
 			${b_m_r_name_surname_of_contact_person.getData()}<br/>
 			${b_m_role_of_contact_person.getData()}<br/><br/>
 			<b>Official e-mail</b><br/>
@@ -132,10 +134,10 @@
 			<b>Date of oficial joining to Mayors Adapt</b><br/>
 			Joining Date. Pending add this file to the form.<br/><br/>
 			<b>Covenant of mayors signatory (yes/no)</b><br/>
-			<#if getterUtil.getBoolean(b_covenant_of_mayors_signatory.getData())>
+			<#if getterUtil.getBoolean(b_m_covenant_of_mayors_signatory.getData())>
 			    Yes
 			</#if>
-			<#if !getterUtil.getBoolean(b_covenant_of_mayors_signatory.getData())>
+			<#if !getterUtil.getBoolean(b_m_covenant_of_mayors_signatory.getData())>
 			    No
 			</#if>			
 			<br/><br/>
