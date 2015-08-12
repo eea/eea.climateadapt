@@ -27,6 +27,8 @@ String redirect = ParamUtil.getString(request, "redirect");
 
 String FINISH = "FINISH";
 
+boolean pending_save = true;
+
 System.out.println("CMD: "+cmd);
 
 // Make sure the redirect is correct. This is a workaround for a layout that
@@ -300,7 +302,7 @@ request.setAttribute("edit_article.jsp-toLanguageId", toLanguageId);
 								<c:if test="<%= hasSavePermission %>">
 									<c:if test="<%= classNameId == JournalArticleConstants.CLASSNAME_ID_DEFAULT %>">
 										<aui:button disabled="<%=pending_review_administrator%>" name="saveButton" onClick='<%= renderResponse.getNamespace() + "saveArticle()" %>' primary="<%= false %>" type="submit" value="<%= saveButtonLabel %>" />
-										<aui:button disabled="<%=pending_review_administrator%>" name="finishButton" onClick='<%= renderResponse.getNamespace() + "finishArticle()" %>' primary="<%= false %>" type="button" value="Finish" />
+										<aui:button disabled="<%=pending_save%>" name="finishButton" onClick='<%= renderResponse.getNamespace() + "finishArticle()" %>' primary="<%= false %>" type="button" value="Finish" />
 									</c:if>
 
 									<!--<aui:button disabled="<%= pending %>" name="publishButton" onClick='<%= renderResponse.getNamespace() + "publishArticle()" %>' type="submit" value="<%= publishButtonLabel %>" />-->
@@ -395,13 +397,15 @@ request.setAttribute("edit_article.jsp-toLanguageId", toLanguageId);
     function decorateForm() {
 	    /* Disable title Fields (separators) and improve aspect form */
         var formu = document.<portlet:namespace />fm1;
-        var selects =  formu.getElementsByTagName("select");
+        var selects =  formu.getElementsByClassName("aui-field-select w");
         var inputs = formu.getElementsByTagName("input");
         var larges = formu.getElementsByClassName("wlarge");
         var mediums = formu.getElementsByClassName("wmedium");
         var smalls = formu.getElementsByClassName("wsmall");
         var labels = formu.getElementsByTagName("label");
+        var dates = formu.getElementsByClassName("input-medium");
         var textareas = formu.getElementsByTagName("textarea");
+
         for (var i=0; i< inputs.length; i++){
                 if ((inputs[i].name).indexOf("_ti_") >= 0){
                         inputs[i].disabled="disabled";
@@ -417,28 +421,33 @@ request.setAttribute("edit_article.jsp-toLanguageId", toLanguageId);
         }
 
         for (var i=0; i < larges.length; i++){
-				larges[i].style.width = "924px";
+				larges[i].style.width = "100%";
         }
 
         for (var i=0; i < mediums.length; i++){
-				mediums[i].style.width = "462px";
+				mediums[i].style.width = "50%";
         }
 
         for (var i=0; i < smalls.length; i++){
-				smalls[i].style.width = "231px";
+				smalls[i].style.width = "25%";
         }
 
         for (var i=0; i < textareas.length; i++){
-				textareas[i].style.width = "924px";
+				textareas[i].style.width = "100%";
 				textareas[i].style.height = "115px";
         }
 
-        for (var j=0; j< selects.length; j++){
-                if ((selects[j].name).indexOf("_15_a_m_country")>= 0 || ((selects[j].name).indexOf("_15_b_m_sector"))>= 0 || ((selects[j].name).indexOf("_15_c_m_stage_of_the_implementation_cycle"))>= 0 || (selects[j].name).indexOf("_15_b_m_current_status_of_mayors_adapt_enrolment") >= 0){
-                        selects[j].style.height="30px";
-                }
+        for (var i=0; i < dates.length; i++){
+				if (dates[i].name.indexOf("displayDate")<0 && dates[i].name.indexOf("expirationDate")<0 && dates[i].name.indexOf("reviewDate")<0)
+					dates[i].value="";
         }
-	}
+
+        for (var i=0; i < selects.length; i++){
+				if(selects[i].multiple==false)
+					selects[i].style.height="30px";
+				selects[i].style.width="100%";
+        }
+    }
 
 
     function <portlet:namespace />finishArticle() {
@@ -475,6 +484,7 @@ request.setAttribute("edit_article.jsp-toLanguageId", toLanguageId);
 	}
 
 	function <portlet:namespace />saveArticle() {
+		pending_save = false;
 		document.<portlet:namespace />fm1.<portlet:namespace /><%= Constants.CMD %>.value = "<%= ((article == null) || Validator.isNull(article.getArticleId())) ? Constants.ADD : Constants.UPDATE %>";
 	}
 

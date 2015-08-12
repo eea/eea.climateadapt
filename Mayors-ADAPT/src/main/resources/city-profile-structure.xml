@@ -6,7 +6,7 @@
 				<![CDATA[General Information]]>
 			</entry>
 			<entry name="predefinedValue">
-				<![CDATA[General Information]]>
+				<![CDATA[General information]]>
 			</entry>
 			<entry name="tip">
 				<![CDATA[]]>
@@ -16,7 +16,7 @@
 	<dynamic-element dataType="string" indexType="keyword" name="a_m_name_of_local_authority" readOnly="false" repeatable="false" required="false" showLabel="true" type="text" width="large">
 		<meta-data locale="en_GB">
 			<entry name="label">
-				<![CDATA[Name of Local Authority]]>
+				<![CDATA[Name of local authority]]>
 			</entry>
 			<entry name="predefinedValue">
 				<![CDATA[]]>
@@ -29,7 +29,7 @@
 	<dynamic-element dataType="number" fieldNamespace="ddm" indexType="" name="a_population_size" readOnly="false" repeatable="false" required="false" showLabel="true" type="ddm-number" width="small">
 		<meta-data locale="en_GB">
 			<entry name="label">
-				<![CDATA[Population Size]]>
+				<![CDATA[Population size]]>
 			</entry>
 			<entry name="predefinedValue">
 				<![CDATA[]]>
@@ -331,7 +331,7 @@
 				<![CDATA[Contact Person]]>
 			</entry>
 			<entry name="predefinedValue">
-				<![CDATA[Contact Person]]>
+				<![CDATA[Contact person]]>
 			</entry>
 			<entry name="tip">
 				<![CDATA[]]>
@@ -367,7 +367,7 @@
 	<dynamic-element dataType="string" indexType="keyword" name="b_m_role_of_contact_person" readOnly="false" repeatable="false" required="false" showLabel="true" type="text" width="medium">
 		<meta-data locale="en_GB">
 			<entry name="label">
-				<![CDATA[Role of Contact Person]]>
+				<![CDATA[Role of contact person]]>
 			</entry>
 			<entry name="predefinedValue">
 				<![CDATA[]]>
@@ -432,7 +432,7 @@
 	<dynamic-element dataType="string" indexType="keyword" name="b_city_background" readOnly="false" repeatable="false" required="false" showLabel="true" type="textarea" width="large">
 		<meta-data locale="en_GB">
 			<entry name="label">
-				<![CDATA[City background]]>
+				<![CDATA[City background. Information about the city (Wikipedia style)"]]>
 			</entry>
 			<entry name="predefinedValue">
 				<![CDATA[]]>
@@ -448,17 +448,17 @@
 				<![CDATA[Signatory Status]]>
 			</entry>
 			<entry name="predefinedValue">
-				<![CDATA[Signatory Status]]>
+				<![CDATA[Signatory status]]>
 			</entry>
 			<entry name="tip">
 				<![CDATA[]]>
 			</entry>
 		</meta-data>
 	</dynamic-element>
-	<dynamic-element dataType="boolean" indexType="keyword" name="b_covenant_of_mayors_signatory" readOnly="false" repeatable="false" required="false" showLabel="true" type="checkbox" width="">
+	<dynamic-element dataType="boolean" indexType="keyword" name="b_m_covenant_of_mayors_signatory" readOnly="false" repeatable="false" required="false" showLabel="true" type="checkbox" width="">
 		<meta-data locale="en_GB">
 			<entry name="label">
-				<![CDATA[Covenant of Mayors Signatory (yes/no)]]>
+				<![CDATA[Covenant of Mayors signatory (yes/no)]]>
 			</entry>
 			<entry name="predefinedValue">
 				<![CDATA[false]]>
@@ -485,7 +485,7 @@
 		</dynamic-element>
 		<meta-data locale="en_GB">
 			<entry name="label">
-				<![CDATA[Status of Mayors Adapt signature (of Political Commitment)]]>
+				<![CDATA[Status of Mayors Adapt signature (of political commitment)]]>
 			</entry>
 			<entry name="predefinedValue">
 				<![CDATA[[""]]]>
@@ -498,7 +498,7 @@
 	<dynamic-element dataType="date" fieldNamespace="ddm" indexType="keyword" name="b_signature_date" readOnly="false" repeatable="false" required="false" showLabel="true" type="ddm-date" width="small">
 		<meta-data locale="en_GB">
 			<entry name="label">
-				<![CDATA[Signature Date]]>
+				<![CDATA[Signature date]]>
 			</entry>
 			<entry name="predefinedValue">
 				<![CDATA[]]>
@@ -894,7 +894,7 @@
 			</entry>
 		</meta-data>
 	</dynamic-element>
-	<dynamic-element dataType="string" indexType="keyword" name="e_m_motivation" readOnly="false" repeatable="false" required="false" showLabel="true" type="text" width="large">
+	<dynamic-element dataType="string" indexType="keyword" name="e_m_motivation" readOnly="false" repeatable="false" required="false" showLabel="true" type="textarea" width="large">
 		<meta-data locale="en_GB">
 			<entry name="label">
 				<![CDATA[Main motivation for taking adaptation action (and joining Mayors Adapt)]]>
@@ -913,7 +913,7 @@
 				<![CDATA[Additional Information]]>
 			</entry>
 			<entry name="predefinedValue">
-				<![CDATA[Additional Information]]>
+				<![CDATA[Additional information]]>
 			</entry>
 			<entry name="tip">
 				<![CDATA[]]>
@@ -946,10 +946,10 @@
 			</entry>
 		</meta-data>
 	</dynamic-element>
-	<dynamic-element dataType="string" indexType="keyword" name="e_planed_adaptation_actions" readOnly="false" repeatable="false" required="false" showLabel="true" type="textarea" width="large">
+	<dynamic-element dataType="string" indexType="keyword" name="e_m_planed_adaptation_actions" readOnly="false" repeatable="false" required="false" showLabel="true" type="textarea" width="large">
 		<meta-data locale="en_GB">
 			<entry name="label">
-				<![CDATA[Planed Adaptation Actions]]>
+				<![CDATA[Planed adaptation actions]]>
 			</entry>
 			<entry name="predefinedValue">
 				<![CDATA[]]>
@@ -1027,7 +1027,7 @@
 	<dynamic-element dataType="string" indexType="keyword" name="f_picture_caption" readOnly="false" repeatable="false" required="false" showLabel="true" type="text" width="large">
 		<meta-data locale="en_GB">
 			<entry name="label">
-				<![CDATA[Picture Caption]]>
+				<![CDATA[Picture caption]]>
 			</entry>
 			<entry name="predefinedValue">
 				<![CDATA[]]>
@@ -1352,7 +1352,7 @@
 	<dynamic-element dataType="boolean" indexType="keyword" name="g_immediate_action_in_order_to_realise_the_opportunities_from_adaptation" readOnly="false" repeatable="false" required="false" showLabel="true" type="checkbox" width="">
 		<meta-data locale="en_GB">
 			<entry name="label">
-				<![CDATA[Immediate action in order to realise the opportunities from adaptation (“no-regret” approach)]]>
+				<![CDATA[Have relevant organisation and coordination been put in place? (i.e. clear role and contributions assigned to the different departments)]]>
 			</entry>
 			<entry name="predefinedValue">
 				<![CDATA[false]]>
@@ -1433,7 +1433,7 @@
 				<![CDATA[City Additional Data]]>
 			</entry>
 			<entry name="predefinedValue">
-				<![CDATA[City Additional Data]]>
+				<![CDATA[City additional data]]>
 			</entry>
 			<entry name="tip">
 				<![CDATA[]]>
@@ -1443,7 +1443,7 @@
 	<dynamic-element dataType="double" fieldNamespace="ddm" indexType="keyword" name="a_m_city_latitude" readOnly="false" repeatable="false" required="false" showLabel="true" type="ddm-decimal" width="small">
 		<meta-data locale="en_GB">
 			<entry name="label">
-				<![CDATA[City Latitude]]>
+				<![CDATA[City latitude]]>
 			</entry>
 			<entry name="predefinedValue">
 				<![CDATA[]]>
@@ -1456,7 +1456,7 @@
 	<dynamic-element dataType="double" fieldNamespace="ddm" indexType="keyword" name="a_m_city_longitude" readOnly="false" repeatable="false" required="false" showLabel="true" type="ddm-decimal" width="small">
 		<meta-data locale="en_GB">
 			<entry name="label">
-				<![CDATA[City Longitude]]>
+				<![CDATA[City longitude]]>
 			</entry>
 			<entry name="predefinedValue">
 				<![CDATA[]]>
