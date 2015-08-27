@@ -26,6 +26,7 @@
 
 <a href="#main-content" id="skip-to-content">#language ("skip-to-content")</a>
 $theme.include($body_top_include)
+<p>User: $user.getScreenName()</p>
 #if($is_signed_in && !$user.getScreenName()=="cityprofilecontact")
 						#dockbar()
 #end
