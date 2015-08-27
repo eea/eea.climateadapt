@@ -57,7 +57,7 @@ $theme.include($body_top_include)
                                         <li id="help"><a href="/help">Help</a></li>
                        </ul>
             </div>
-            
+             
                 <div id="searchbox">
             	<p id="search-title">Search the website</p>
             	   <span>$theme.journalContentSearch()</span>
