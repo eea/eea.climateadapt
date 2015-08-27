@@ -477,6 +477,7 @@ if (user.getScreenName().equals("cityprofilecontact"))
 						requestedLanguageId = toLanguageId;
 					}
 					%>
+<!-- img src="./mayors-adapt-logo.png" alt="Mayors Adapt logo" -->
 <p>In order to adhere to the Mayors Adapt initiative, local authorities need to present and discuss the full <a
 						href="http://mayors-adapt.eu/materials">Political Commitment
 						Document</a> in their municipal council. Once a decision to sign up is formally made, local authorities should complete and sign the Mayors commitment (1st page of the document) and send it by email to: <a

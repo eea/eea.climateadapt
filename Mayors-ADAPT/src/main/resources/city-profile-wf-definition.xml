@@ -25,15 +25,21 @@
 				<name>Review Notification</name>
 				<description>Mayors Adapt: your city profile is ready to be filled in</description>
 				<template><![CDATA[
-				<p>Dear ${CITY_PROFILE_CONTACT_NAME_SURNAME},</p>
-				<p>Welcome to the Mayors Adapt city profile platform. We have set up a template which we would like you to fill in. All the information shared in this form, will be used to showcase and represent your city and your work on Climate-ADAPT. The more information you fill in, the better will be your cities impact within the community.</p>
 				
+				<p>Dear City Profile Contact,</p>
+
+				<p>Thank you…Welcome to the Mayors Adapt city profile platform. We have set up a template that we would like you to fill in. All of the information shared in this form, will be used to showcase your city’s adaptation work on the EC Climate-ADAPT website. The more information you fill in, the better your city’s impact within the community will be.</p>
+
 				<p>You can find your city profile management page here:</p>  
 				<a href="${CITY_PROFILE_SERVER_URL}/c/portal/accessCityProfileUserTask?token=${CITY_PROFILE_TOKEN}" target="_blank"><button>Management page for <b>${CITY_PROFILE_CITY_NAME}</b> city profile</button></a>
-				
-				<p>Please note that you have four weeks from now to complete the form. You can edit it, save it and then come back to edit it further at a later stage. Once you submit it, we will quality manage it and may come back to you with questions or suggestions in case anything is unclear.</p>
-				
-				<p>After a final review by Mayors-ADAPT administrator, we will put the fact sheet online.</p>
+
+				<p>Please note that you have four weeks from now to complete the form. You can edit and save it and then come back to edit it further at a later stage. Once you submit it, we will review it and may come back to you with questions or suggestions in case anything is unclear.</p>
+
+				<p>After a final review by the Mayors-ADAPT administrators, we will publish the fact sheet online.</p>
+
+				<p>If you have any questions, please don’t hesitate to contact our helpdesk at helpdesk@mayors-adapt.eu.</p>
+
+				<p>Thank you in advance for your cooperation!</p>
 				]]></template>
 				<template-language>freemarker</template-language>
 				<notification-type>email</notification-type>
@@ -89,8 +95,8 @@
 			<task-timer>
 				<name>City Profile Edition Reminder</name>
 				<delay>
-					<duration>15</duration>
-					<scale>minute</scale>
+					<duration>3</duration>
+					<scale>week</scale>
 				</delay>
 				<timer-actions>
 					<reassignments>
@@ -149,8 +155,8 @@
 			<task-timer>
 				<name>City Profile Edition Expiration Contact Notification</name>
 				<delay>
-					<duration>20</duration>
-					<scale>minute</scale>
+					<duration>4</duration>
+					<scale>week</scale>
 				</delay>
 				<timer-actions>
 					<reassignments>

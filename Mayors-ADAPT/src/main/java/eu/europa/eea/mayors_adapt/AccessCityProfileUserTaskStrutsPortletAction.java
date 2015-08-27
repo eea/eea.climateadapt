@@ -35,15 +35,16 @@ public class AccessCityProfileUserTaskStrutsPortletAction extends
 		long companyId = PortalUtil.getDefaultCompanyId();
 		long groupId = GroupLocalServiceUtil.getGroup(companyId, "Guest").getGroupId();
 
+		String login = "cityprofilecontact";
+
 		User user = UserLocalServiceUtil.getUserByScreenName(companyId,
-				"cityprofilecontact");
+				login);
 
 		String token = ParamUtil.get(request, "token", "0");
 
 		_log.info("Task antes");
 		mostrarTask(token, user,  groupId);
 
-		String login = "cityprofilecontact";
 
 		HttpSession session = request.getSession();
 		session.setAttribute("j_username", String.valueOf(user.getUserId()));
