@@ -26,8 +26,8 @@
 
 <a href="#main-content" id="skip-to-content">#language ("skip-to-content")</a>
 $theme.include($body_top_include)
-<p>User: $user.getScreenName()</p>
-#if($is_signed_in )
+
+#if($is_signed_in && $user.getScreenName()!="cityprofilecontact")
 						#dockbar()
 #end
 
@@ -47,7 +47,7 @@ $theme.include($body_top_include)
 					#if(!$is_signed_in)
 						<li id="signin"><a href="$sign_in_url" id="sign-in" rel="nofollow">$sign_in_text</a></li>
 					#end
-					#if($is_signed_in)
+					#if($is_signed_in && $user.getScreenName()!="cityprofilecontact")
 						<li id="maintain"><a href="/maintain">Maintain</a></li>
 					#end
                     <li id="glossary"><a href="/glossary">Glossary</a></li>
