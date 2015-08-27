@@ -142,7 +142,7 @@ public class ExtWorkflowInstanceLinkLocalService extends
 			workflowContext.put("CITY_PROFILE_SERVER_URL", serverURL);
 			workflowContext.put(
 					WorkflowConstants.CONTEXT_NOTIFICATION_SENDER_ADDRESS,
-					"helpdesk@mayors-adapt.eu");
+					"no-reply@climate-adapt.eea.europa.eu");
 			workflowContext.put(
 					WorkflowConstants.CONTEXT_NOTIFICATION_SENDER_NAME,
 					"Mayors-ADAPT Site Administrator");
