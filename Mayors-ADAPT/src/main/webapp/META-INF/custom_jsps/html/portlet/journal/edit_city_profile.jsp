@@ -412,6 +412,9 @@ request.setAttribute("edit_article.jsp-toLanguageId", toLanguageId);
                         inputs[i].style.backgroundColor = "#828282";
                         inputs[i].style.color = "white";
                 }
+                if ((inputs[i].name).indexOf("_r_email") >= 0){
+                        inputs[i].disabled="disabled";
+                }
         }
 
         for (var i=0; i< labels.length; i++){

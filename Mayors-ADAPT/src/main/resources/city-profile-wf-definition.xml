@@ -95,8 +95,8 @@
 			<task-timer>
 				<name>City Profile Edition Reminder</name>
 				<delay>
-					<duration>3</duration>
-					<scale>week</scale>
+					<duration>20</duration>
+					<scale>day</scale>
 				</delay>
 				<timer-actions>
 					<reassignments>
@@ -155,8 +155,8 @@
 			<task-timer>
 				<name>City Profile Edition Expiration Contact Notification</name>
 				<delay>
-					<duration>4</duration>
-					<scale>week</scale>
+					<duration>30</duration>
+					<scale>day</scale>
 				</delay>
 				<timer-actions>
 					<reassignments>
@@ -189,7 +189,7 @@
 					</reassignments>
 					<timer-notification>
 						<name>City Profile Edition Expiration Notification</name>
-						<description>Mayors Adapt: Time for editing your city profile has expired</description>
+						<description>Mayors Adapt: time for editing your city profile has expired</description>
 						<template><![CDATA[
 						<p>Dear ${CITY_PROFILE_CONTACT_NAME_SURNAME},</p>
 						
@@ -208,12 +208,12 @@
 			<task-timer>
 				<name>City Profile Edition Expiration Manager Notification</name>
 				<delay>
-					<duration>20</duration>
-					<scale>minute</scale>
+					<duration>30</duration>
+					<scale>day</scale>
 				</delay>
 				<timer-actions>
 					<timer-action>
-						<name>timedStatusChange1</name>
+						<name>City Profile Edition Frame Expired</name>
 						<script> <![CDATA[
 						 import com.liferay.portal.kernel.concurrent.ThreadPoolExecutor.WorkerTask;
 						 import com.liferay.portal.kernel.dao.orm.QueryUtil;
@@ -310,6 +310,63 @@
 				<script-language>groovy</script-language>
 			</scripted-assignment>
 		</assignments>
+		<task-timers>
+			<task-timer>
+				<name>City Profile Finalization Contact Notification</name>
+				<delay>
+					<duration>0</duration>
+					<scale>second</scale>
+				</delay>
+				<timer-actions>
+					<reassignments>
+						<scripted-assignment>
+							<script> <![CDATA[
+							import com.liferay.portal.kernel.util.GetterUtil;
+							import com.liferay.portal.kernel.workflow.WorkflowConstants;
+							import com.liferay.portal.service.UserLocalServiceUtil;
+							import com.liferay.portal.model.Role;
+							long companyId = GetterUtil.getLong((String)workflowContext.get(WorkflowConstants.CONTEXT_COMPANY_ID));
+							roles = new ArrayList<Role>();
+	
+							String emailAddress = (String)workflowContext.get("CITY_PROFILE_CONTACT_EMAIL_ADDRESS");
+							user = UserLocalServiceUtil.getUserByEmailAddress(companyId, emailAddress);
+							println "City Profile Finalization Notification.. Looking for user with email: " + emailAddress;
+							
+							try {
+								user = UserLocalServiceUtil.getUserByEmailAddress(companyId, emailAddress);
+							 	println "Found USER: Using user " + user.getScreenName() + " with email "+ emailAddress ;
+							}
+							catch (com.liferay.portal.NoSuchUserException e) {
+								user = UserLocalServiceUtil.getUserByScreenName(companyId, "cityprofilecontact");
+								user.setEmailAddress(emailAddress);
+								user.persist();
+							 	println "No user found. Using " + user.getScreenName() + " email to " + emailAddress;
+							}
+								]]> </script>
+							<script-language>groovy</script-language>
+						</scripted-assignment>
+					</reassignments>
+					<timer-notification>
+						<name>City Profile Edition Finalization Notification</name>
+						<description>Mayors Adapt: thank you for finishing your city profile</description>
+						<template><![CDATA[
+						<p>Dear ${CITY_PROFILE_CONTACT_NAME_SURNAME},</p>
+						
+						<p>Thank you for filling in your city profile fact sheet for ${CITY_PROFILE_CITY_NAME}. Mayors Adapt team will now review your input. We will get in touch with you in case any relevant information is still missing. Once we have jointly finalised the fact sheet and you have approved the content, we will publish it online.</p>
+						
+						<p>For any questions, please don't hesitate to contact us at helpdesk@mayors-adapt.eu</p>
+						]]> </template>
+						<template-language>freemarker</template-language>
+						<notification-type>email</notification-type>
+						<recipients>
+							<user>
+								<screen-name>cityprofilecontact</screen-name>
+							</user>
+						</recipients>
+					</timer-notification>
+				</timer-actions>
+			</task-timer>
+		</task-timers>
 		<transitions>
 			<transition>
 				<name>approve</name>
@@ -381,14 +438,67 @@
 		</assignments>
 		<task-timers>
 			<task-timer>
-				<name>City Profile Edition Approval</name>
+				<name>City Profile Edition Approval Notification</name>
 				<delay>
 					<duration>0</duration>
 					<scale>second</scale>
 				</delay>
 				<timer-actions>
+					<timer-action>
+						<name>Finish Task</name>
+						<script> <![CDATA[
+						 import com.liferay.portal.kernel.concurrent.ThreadPoolExecutor.WorkerTask;
+						 import com.liferay.portal.kernel.dao.orm.QueryUtil;
+						 import com.liferay.portal.kernel.util.GetterUtil
+						 import com.liferay.portal.kernel.workflow.WorkflowConstants
+						 import com.liferay.portal.service.CompanyLocalServiceUtil
+						 import com.liferay.portal.service.GroupLocalServiceUtil
+						 import com.liferay.portal.service.UserLocalServiceUtil
+						 import com.liferay.portal.service.WorkflowInstanceLinkLocalServiceUtil
+						 import com.liferay.portal.model.WorkflowInstanceLink
+						 import com.liferay.portal.kernel.workflow.WorkflowInstanceManagerUtil
+						 import com.liferay.portal.kernel.workflow.WorkflowTask;
+						 import com.liferay.portal.kernel.workflow.WorkflowTaskManagerUtil
+						 
+						 long companyId = GetterUtil.getLong((String)workflowContext.get(WorkflowConstants.CONTEXT_COMPANY_ID))
+						 long userId = GetterUtil.getLong((String)workflowContext.get(WorkflowConstants.CONTEXT_USER_ID))
+						 long groupId = GetterUtil.getLong((String)workflowContext.get(WorkflowConstants.CONTEXT_GROUP_ID))
+						 
+						 String className = (String)workflowContext.get(WorkflowConstants.CONTEXT_ENTRY_CLASS_NAME);
+						 long classPK = GetterUtil.getLong((String)workflowContext.get(WorkflowConstants.CONTEXT_ENTRY_CLASS_PK));
+						 
+						 WorkflowInstanceLink workflowInstanceLink = WorkflowInstanceLinkLocalServiceUtil.getWorkflowInstanceLink(companyId, groupId, className, classPK);
+						 long wfilID = workflowInstanceLink.getWorkflowInstanceLinkId();
+						 long wfiID = workflowInstanceLink.getWorkflowInstanceId();
+						 
+						 WorkflowTask thisTask = null;
+						 
+						 List<WorkflowTask> taskok = WorkflowTaskManagerUtil.getWorkflowTasksByWorkflowInstance(companyId, null, wfiID, true, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
+						 for (task in taskok) {
+						     if(task.getName().equalsIgnoreCase("notify_approval")){
+						         thisTask = task;
+						         break;
+						     }
+						 }
+						 if (thisTask==null) {
+						     List<WorkflowTask> taskok2 = WorkflowTaskManagerUtil.getWorkflowTasksByWorkflowInstance(companyId, null, wfiID, false, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
+						     for (task2 in taskok2) {
+						         if(task2.getName().equalsIgnoreCase("notify_approval")){
+						             thisTask = task2;
+						             break;
+						         }
+						     }
+						 }
+						 long taskID = thisTask.getWorkflowTaskId();
+						 println "taskID(KALEOINSTANCETOKENID): " + taskID;
+						 println "isAssignedToSingleUse: " + thisTask.isAssignedToSingleUser();
+						 println "completeWorkflowTask...";
+						 WorkflowTaskManagerUtil.completeWorkflowTask(companyId, userId, taskID, "Final", "Revision time has expired. Task had been closed automatically.", workflowContext);
+						]]></script>
+						<script-language>groovy</script-language>
+					</timer-action>
 					<timer-notification>
-						<name>City Profile Approval Notification</name>
+						<name>Mayors Adapt: your City Profile has been Approved</name>
 						<description>City profile approved</description>
 						<template><![CDATA[
 						<p>Dear ${CITY_PROFILE_CONTACT_NAME_SURNAME},</p>
@@ -415,7 +525,7 @@
 		</task-timers>
 		<transitions>
 			<transition>
-				<name>final</name>
+				<name>Final</name>
 				<target>final</target>
 			</transition>
 		</transitions>
