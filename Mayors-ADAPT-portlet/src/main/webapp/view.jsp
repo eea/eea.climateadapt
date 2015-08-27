@@ -47,9 +47,8 @@
 
 	long companyId = PortalUtil.getDefaultCompanyId();
 	long groupId = GroupLocalServiceUtil.getGroup(companyId, "Guest").getGroupId();
-	long userId = ParamUtil.getLong(request, "userId", UserLocalServiceUtil
-	.getUserByScreenName(companyId, "cityprofilecontact")
-	.getUserId()); 
+	long userId = UserLocalServiceUtil.getUserByScreenName(companyId, "cityprofilecontact")
+	.getUserId(); 
 	
 	JournalArticle article = JournalArticleLocalServiceUtil.getJournalArticleByUuidAndGroupId(uuid, layout.getGroupId());
 	request.setAttribute(WebKeys.JOURNAL_ARTICLE,article);
@@ -62,10 +61,10 @@
 	boolean disableEdit=true;
 	boolean disablePreview=true;
 	String state = WorkflowInstanceLinkLocalServiceUtil.getState(
-			article.getCompanyId(),
-			article.getGroupId(),
-			JournalArticle.class.getName(),
-			article.getId());
+	article.getCompanyId(),
+	article.getGroupId(),
+	JournalArticle.class.getName(),
+	article.getId());
 	if (article.getStatus()==WorkflowConstants.STATUS_PENDING && !state.equalsIgnoreCase("review_administrator")) 
 	{
 		disableFinish=false;
@@ -80,16 +79,19 @@
 	_log.info("status: "+article.getStatus());
 	_log.info("state: "+state);
 %>
+<style>
+big-button {
+	font-size: 30px;
+}
+</style>
 <h2>
 	Welcome to
 	<%=cityName%>
 	city profile administration page
 </h2>
-Here you can manage Mayors-ADAPT initiative information relative to your
-city.
 
 <liferay-portlet:renderURL portletName="15"
-	var="previewArticleContentURL" 
+	var="previewArticleContentURL"
 	windowState="<%=LiferayWindowState.POP_UP.toString()%>">
 	<liferay-portlet:param name="struts_action"
 		value="/journal/preview_article_content" />
@@ -121,28 +123,39 @@ city.
 		value="<%=String.valueOf(companyId)%>" />
 	<liferay-portlet:param name="groupId"
 		value="<%=String.valueOf(groupId)%>" />
-	<liferay-portlet:param name="userId"
-		value="<%=String.valueOf(userId)%>" />
 </liferay-portlet:actionURL>
 
-<aui:row>
-	<h3>Step 1 - Edit your City Profile</h3>
-	<aui:button value="Edit" onClick="edit()" disabled="<%=disableEdit %>" />
-</aui:row>
-<aui:row>
-	<h3>Step 2 - Finish your page to preview it </h3>
-	<p>You can perform this operation from the edition form itself</p>
-	<!-- aui:button value="Finish" onClick="finish()" disabled="<%=disableFinish %>" -->
-</aui:row>
-<aui:row>
-	<h3>Step 3 - Preview your City Profile Mayors Adapt page</h3>
-	<aui:button value="Preview" onClick="preview()" disabled="<%=disablePreview %>" />
-</aui:row>
-<aui:row>
-	<h3>Step 4 - Check your page in our Portal (as soon as our
-		administrators approve it)</h3>
-	<aui:button value="Check" onClick="check()" disabled="<%=disableOpen %>"  />
-</aui:row>
+<table style="font-size: 16px;" width="80%">
+	<tr>
+		<td colspan="2">
+
+			<p>Here you can manage Mayors-ADAPT initiative information
+				relative to your city.</p>
+		</td>
+	</tr>
+	<tr>
+		<td><aui:button value="Edit" onClick="edit()"
+				disabled="<%=disableEdit%>" /></td>
+		<td>Step 1 - Edit your City Profile</td>
+	</tr>
+	<tr>
+		<td><aui:button value="Finish" onClick="finish()" disabled="true" /></td>
+		<td>Step 2 - Finish your page to preview it (Perform this
+			operation from the edition form itself)</td>
+		<!-- aui:button value="Finish" onClick="finish()" disabled="<%=disableFinish%>" -->
+	</tr>
+	<tr>
+		<td><aui:button value="Preview" onClick="preview()"
+				disabled="<%=disablePreview%>" /></td>
+		<td>Step 3 - Preview your City Profile Mayors Adapt page once form is finished</td>
+	</tr>
+	<tr>
+		<td><aui:button value="Check" onClick="check()"
+				disabled="<%=disableOpen%>" /></td>
+		<td>Step 4 - Check your page in our Portal (as soon as our
+			administrators approve it)</td>
+	</tr>
+</table>
 
 <aui:script>
 	function preview() {
@@ -162,57 +175,15 @@ city.
 	}
 	function finish() {
 		alert('<%= HtmlUtil.escapeJS(finishTaskURL.toString())%>');
-		window.open('<%= HtmlUtil.escapeJS(finishTaskURL.toString())%>','_self',false)
+		window.open('<%= HtmlUtil.escapeJS(finishTaskURL.toString())%>',
+				'_self', false)
 	}
 	function check() {
-		window.open('/-/<%= HtmlUtil.escapeJS(cityUrlName.toLowerCase().toString())%>','_self',false)
+		window
+				.open(
+						'/-/<%= HtmlUtil.escapeJS(cityUrlName.toLowerCase().toString())%>',
+						'_self', false)
 	}
-</aui:script>
+
 	
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+</aui:script>
