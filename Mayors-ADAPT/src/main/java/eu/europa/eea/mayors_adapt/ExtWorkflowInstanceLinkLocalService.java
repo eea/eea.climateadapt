@@ -21,6 +21,7 @@ import com.liferay.portal.service.WorkflowInstanceLinkLocalService;
 import com.liferay.portal.service.WorkflowInstanceLinkLocalServiceWrapper;
 import com.liferay.portal.workflow.kaleo.model.KaleoDefinition;
 import com.liferay.portal.workflow.kaleo.service.KaleoDefinitionLocalServiceUtil;
+import com.liferay.util.ContentUtil;
 
 public class ExtWorkflowInstanceLinkLocalService extends
 		WorkflowInstanceLinkLocalServiceWrapper {
@@ -89,8 +90,6 @@ public class ExtWorkflowInstanceLinkLocalService extends
 						workflowDefinitionName, workflowDefinitionVersion,
 						null, workflowContext);
 
-		_log.info("Workflow instance started: " + workflowInstance);
-
 		addWorkflowInstanceLink(userId, companyId, groupId, className, classPK,
 				workflowInstance.getWorkflowInstanceId());
 	}
@@ -114,11 +113,11 @@ public class ExtWorkflowInstanceLinkLocalService extends
 			if (key.startsWith("redirect"))
 				serverURL = ((String) serviceContextMap.get(key))
 						.split("\\/group")[0];
-			_log.info("ServiceContext: " + key + "->"
+			_log.debug("ServiceContext: " + key + "->"
 					+ serviceContextMap.get(key));
 		}
-		serverURL = "http://"+serviceContext.getRequest().getServerName();
-		if (contactNameSurname == null || contactNameSurname.length()==0)
+		serverURL = "http://" + serviceContext.getRequest().getServerName();
+		if (contactNameSurname == null || contactNameSurname.length() == 0)
 			contactNameSurname = "City Profile Contact";
 		workflowDefinitionName = structureName + " Approval";
 		KaleoDefinition kaleoDefinition = null;
@@ -129,8 +128,8 @@ public class ExtWorkflowInstanceLinkLocalService extends
 							serviceContext);
 			workflowDefinitionName = kaleoDefinition.getName();
 			workflowDefinitionVersion = kaleoDefinition.getVersion();
-			_log.info("Using workflow definition: "
-					+ kaleoDefinition.getName()+" version "+kaleoDefinition.getVersion());
+			_log.info("Using workflow definition: " + kaleoDefinition.getName()
+					+ " version " + kaleoDefinition.getVersion());
 			workflowContext.put("CITY_PROFILE_CITY_NAME", cityName);
 			workflowContext.put("CITY_PROFILE_CITY_NAME_LOWERCASE",
 					cityName.toLowerCase());
@@ -147,7 +146,7 @@ public class ExtWorkflowInstanceLinkLocalService extends
 					WorkflowConstants.CONTEXT_NOTIFICATION_SENDER_NAME,
 					"Mayors-ADAPT Site Administrator");
 			for (String key : workflowContext.keySet())
-				_log.info("WorkflowContext: " + key + "->"
+				_log.debug("WorkflowContext: " + key + "->"
 						+ workflowContext.get(key));
 		} catch (Exception e) {
 			_log.error("Workflow not found: " + workflowDefinitionName);
