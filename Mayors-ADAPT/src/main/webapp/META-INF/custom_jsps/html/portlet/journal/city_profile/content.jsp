@@ -482,11 +482,9 @@ if (user.getScreenName().equals("cityprofilecontact"))
 						href="http://mayors-adapt.eu/materials">Political Commitment
 						Document</a> in their municipal council. Once a decision to sign up is formally made, local authorities should complete and sign the Mayors commitment (1st page of the document) and send it by email to: <a
 						href="mailto:helpdesk@mayors-adapt.eu">mailto:helpdesk@mayors-adapt.eu</a>
-In the meantime, feel free to fill in the following form, including contact details as well as first information on your municipality's adaptation action status. Only the underscored fields need to be filled in at the registration stage.
+In the meantime, feel free to fill in the following form, including contact details as well as first information on your municipality's adaptation action status. Only the fileds with an asterisk need to be filled in at the registration stage.
 However, there are additional fields you can use to inform other signatories about your city and showcase your actions to the adaptation community. Since this will contribute to exchange of experience between cities, we strongly recommend you fill in as many of the fields as possible.
-Once your adhesion is confirmed by the Mayors Adapt Office and the registration form is filled in, we will get in touch with you to finalise your individual city profile fact sheet
-
-Only the fields [currently in green below] will be public.
+Once your adhesion is confirmed by the Mayors Adapt Office and the registration form is filled in, we will get in touch with you to finalise your individual city profile fact sheet.
 </p>
 <br>
 					<liferay-ddm:html

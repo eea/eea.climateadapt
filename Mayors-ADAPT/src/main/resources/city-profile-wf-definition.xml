@@ -9,6 +9,45 @@
 	<state>
 		<name>created</name>
 		<metadata> <![CDATA[{"xy":[36,51]}]]> </metadata>
+		<actions>
+			<action>
+				<name>City Profile Creation Notification</name>
+				<description>City Profile Creation Notification</description>
+				<script><![CDATA[
+				import javax.mail.internet.AddressException;
+				import javax.mail.internet.InternetAddress;
+				import com.liferay.portal.kernel.mail.MailMessage;
+				import com.liferay.mail.service.MailServiceUtil;
+
+				try {
+					String emailAddress = (String)workflowContext.get("CITY_PROFILE_CONTACT_EMAIL_ADDRESS");
+					println "Sending creation mail to cityprofilecontact: "+emailAddress; 
+					InternetAddress fromAddress = new InternetAddress(
+							"Mayors-ADAPT Site Administrator <no-reply@climate-adapt.eea.europa.eu>");
+					InternetAddress toAddress = new InternetAddress(
+							emailAddress);
+					StringBuffer body = new StringBuffer();
+					body.append("<p>Dear City Profile Contact,</p>");
+					body.append("<p>Thank you…Welcome to the Mayors Adapt city profile platform. We have set up a template that we would like you to fill in. All of the information shared in this form, will be used to showcase your city’s adaptation work on the EC Climate-ADAPT website. The more information you fill in, the better your city’s impact within the community will be.</p>");
+					body.append("<p>We'll get back to you soon with your city profile ready for completion.</p>");
+					body.append("<p>For any questions, please don't hesitate to contact us at helpdesk@mayors-adapt.eu</p>");						
+					String subject = "Mayors Adapt: welcome to Mayors Adapt city profile platform.";
+					MailMessage mailMessage = new MailMessage();
+					mailMessage.setTo(toAddress);
+					mailMessage.setFrom(fromAddress);
+					mailMessage.setSubject(subject);
+					mailMessage.setBody(body.toString());
+					mailMessage.setHTMLFormat(true);
+					MailServiceUtil.sendEmail(mailMessage);
+		        
+				} catch (AddressException e) {
+					e.printStackTrace();
+				} 
+						]]></script>
+				<script-language>groovy</script-language>
+				<execution-type>onEntry</execution-type>
+			</action>
+		</actions>
 		<initial>true</initial>
 		<transitions>
 			<transition>
@@ -21,83 +60,70 @@
 		<name>review</name>
 		<metadata> <![CDATA[{"xy":[168,36]}]]> </metadata>
 		<actions>
-			<notification>
-				<name>Review Notification</name>
-				<description>Mayors Adapt: your city profile is ready to be filled in</description>
-				<template><![CDATA[
-				
-				<p>Dear City Profile Contact,</p>
+			<action>
+				<name>City Profile Review Notification</name>
+				<description>City Profile Review Notification</description>
+				<script><![CDATA[
+				import javax.mail.internet.AddressException;
+				import javax.mail.internet.InternetAddress;
+				import com.liferay.portal.kernel.mail.MailMessage;
+				import com.liferay.mail.service.MailServiceUtil;
+				import com.liferay.portlet.journal.model.JournalArticle;
+				import com.liferay.portal.kernel.util.GetterUtil;
+				import com.liferay.portlet.journal.service.JournalArticleLocalServiceUtil;
+				import com.liferay.portal.kernel.workflow.WorkflowConstants; 
 
-				<p>Thank you…Welcome to the Mayors Adapt city profile platform. We have set up a template that we would like you to fill in. All of the information shared in this form, will be used to showcase your city’s adaptation work on the EC Climate-ADAPT website. The more information you fill in, the better your city’s impact within the community will be.</p>
+				long classPK = GetterUtil.getLong((String)workflowContext.get(WorkflowConstants.CONTEXT_ENTRY_CLASS_PK)); 
 
-				<p>You can find your city profile management page here:</p>  
-				<a href="${CITY_PROFILE_SERVER_URL}/c/portal/accessCityProfileUserTask?token=${CITY_PROFILE_TOKEN}" target="_blank"><button>Management page for <b>${CITY_PROFILE_CITY_NAME}</b> city profile</button></a>
-
-				<p>Please note that you have four weeks from now to complete the form. You can edit and save it and then come back to edit it further at a later stage. Once you submit it, we will review it and may come back to you with questions or suggestions in case anything is unclear.</p>
-
-				<p>After a final review by the Mayors-ADAPT administrators, we will publish the fact sheet online.</p>
-
-				<p>If you have any questions, please don’t hesitate to contact our helpdesk at helpdesk@mayors-adapt.eu.</p>
-
-				<p>Thank you in advance for your cooperation!</p>
-				]]></template>
-				<template-language>freemarker</template-language>
-				<notification-type>email</notification-type>
-				<recipients>
-					<assignees />
-				</recipients>
+				JournalArticle cityProfile = JournalArticleLocalServiceUtil.getArticle(classPK);
+				workflowContext.put("CITY_PROFILE_TOKEN", cityProfile.getUuid());
+				workflowContext.put("CITY_PROFILE_URL", cityProfile.getUrlTitle());
+								
+				try {
+					String emailAddress = (String)workflowContext.get("CITY_PROFILE_CONTACT_EMAIL_ADDRESS");
+					println "Sending review mail to cityprofilecontact: "+emailAddress; 
+					InternetAddress fromAddress = new InternetAddress(
+							"Mayors-ADAPT Site Administrator <no-reply@climate-adapt.eea.europa.eu>");
+					InternetAddress toAddress = new InternetAddress(
+							emailAddress);
+					StringBuffer body = new StringBuffer();
+					body.append("<p>Dear City Profile Contact,</p>");
+					body.append("<p>You have a city profile to review.</p>");
+					body.append("<p>You can find your city profile management page here:</p>");  
+					body.append("<a href=\""+workflowContext.get("CITY_PROFILE_SERVER_URL")+"/c/portal/accessCityProfileUserTask?token="+workflowContext.get("CITY_PROFILE_TOKEN")+"\" target=\"_blank\"><button>Management page for <b>"+workflowContext.get("CITY_PROFILE_CITY_NAME")+"</b> city profile</button></a>");
+					if(taskComments.length()>0)
+						body.append("<p>Comments for the review are: "+taskComments+"</p>");
+					body.append("<p>Please note that you have four weeks from now to complete the form. You can edit and save it and then come back to edit it further at a later stage. Once you submit it, we will review it and may come back to you with questions or suggestions in case anything is unclear.</p>");
+					body.append("<p>After a final review by the Mayors-ADAPT administrators, we will publish the fact sheet online.</p>");
+					body.append("<p>For any questions, please don't hesitate to contact us at helpdesk@mayors-adapt.eu</p>");						
+					String subject = "Mayors Adapt: please review your city profile";
+					MailMessage mailMessage = new MailMessage();
+					mailMessage.setTo(toAddress);
+					mailMessage.setFrom(fromAddress);
+					mailMessage.setSubject(subject);
+					mailMessage.setBody(body.toString());
+					mailMessage.setHTMLFormat(true);
+					MailServiceUtil.sendEmail(mailMessage);
+		        
+				} catch (AddressException e) {
+					e.printStackTrace();
+				} 
+						]]></script>
+				<script-language>groovy</script-language>
 				<execution-type>onAssignment</execution-type>
-			</notification>
+			</action>
 		</actions>
 		<assignments>
-			<scripted-assignment>
-				<script> <![CDATA[
-							import com.liferay.portal.kernel.util.GetterUtil;
-							import com.liferay.portal.kernel.workflow.WorkflowConstants;
-							import com.liferay.portlet.journal.service.JournalArticleLocalServiceUtil;
-							import com.liferay.portal.service.UserLocalServiceUtil;
-							import com.liferay.portlet.journal.model.JournalArticle;
-							import com.liferay.portal.model.Group;
-							import com.liferay.portal.model.Role;
-
-							long companyId = GetterUtil.getLong((String)workflowContext.get(WorkflowConstants.CONTEXT_COMPANY_ID));
-							long groupId = GetterUtil.getLong((String)workflowContext.get(WorkflowConstants.CONTEXT_GROUP_ID));
-							long classPK = GetterUtil.getLong((String)workflowContext.get(WorkflowConstants.CONTEXT_ENTRY_CLASS_PK));
-							String className = GetterUtil.getString((String)workflowContext.get(WorkflowConstants.CONTEXT_ENTRY_CLASS_NAME));
-							roles = new ArrayList<Role>();
-	
-							String emailAddress = (String)workflowContext.get("CITY_PROFILE_CONTACT_EMAIL_ADDRESS");
-							println "City Profile Creation Notification.. Looking for user with email: " + emailAddress;
-							try {
-								user = UserLocalServiceUtil.getUserByEmailAddress(companyId, emailAddress);
-							 	println "Found USER: Using user " + user.getScreenName() + " with email "+ emailAddress ;
-							}
-							catch (com.liferay.portal.NoSuchUserException e) {
-								user = UserLocalServiceUtil.getUserByScreenName(companyId, "cityprofilecontact");
-								user.setEmailAddress(emailAddress);
-								user.persist();
-							 	println "No user found. Using " + user.getScreenName() + " email to " + emailAddress;
-							}
-
-
-							workflowContext.put("CITY_PROFILE_CONTACT_USER_ID",user.getUserId());
-							
-							JournalArticle cityProfile = JournalArticleLocalServiceUtil.getArticle(classPK);
-							workflowContext.put("CITY_PROFILE_TOKEN", cityProfile.getUuid());
-							workflowContext.put("CITY_PROFILE_URL", cityProfile.getUrlTitle());
-							
-							
-								]]> </script>
-				<script-language>groovy</script-language>
-			</scripted-assignment>
+			<user>
+				<screen-name>cityprofilecontact</screen-name>
+			</user>
 		</assignments>
-
 		<task-timers>
 			<task-timer>
 				<name>City Profile Edition Reminder</name>
 				<delay>
-					<duration>4</duration>
-					<scale>minute</scale>
+					<duration>20</duration>
+					<scale>day</scale>
 				</delay>
 				<timer-actions>
 					<timer-action>
@@ -145,8 +171,8 @@
 			<task-timer>
 				<name>City Profile Edition Expiration Contact Notification</name>
 				<delay>
-					<duration>5</duration>
-					<scale>minute</scale>
+					<duration>30</duration>
+					<scale>day</scale>
 				</delay>
 				<timer-actions>
 					<timer-action>
@@ -190,8 +216,8 @@
 			<task-timer>
 				<name>City Profile Edition Expiration Manager Notification</name>
 				<delay>
-					<duration>5</duration>
-					<scale>minute</scale>
+					<duration>30</duration>
+					<scale>day</scale>
 				</delay>
 				<timer-actions>
 					<timer-action>

@@ -125,7 +125,7 @@ big-button {
 		value="<%=String.valueOf(groupId)%>" />
 </liferay-portlet:actionURL>
 
-<table style="font-size: 16px;" width="80%">
+<table style="font-size: 16px;" width="80%" >
 	<tr>
 		<td colspan="2">
 
@@ -136,24 +136,22 @@ big-button {
 	<tr>
 		<td><aui:button value="Edit" onClick="edit()"
 				disabled="<%=disableEdit%>" /></td>
-		<td>Step 1 - Edit your City Profile</td>
+		<td>Step 1 - Edit your City Profile fact sheet</td>
 	</tr>
 	<tr>
 		<td><aui:button value="Finish" onClick="finish()" disabled="true" /></td>
-		<td>Step 2 - Finish your page to preview it (Perform this
-			operation from the edition form itself)</td>
+		<td>Step 2 - Finish the edition of your  fact sheet (Perform this operation from the edition form itself)</td>
 		<!-- aui:button value="Finish" onClick="finish()" disabled="<%=disableFinish%>" -->
 	</tr>
 	<tr>
 		<td><aui:button value="Preview" onClick="preview()"
 				disabled="<%=disablePreview%>" /></td>
-		<td>Step 3 - Preview your City Profile Mayors Adapt page once form is finished</td>
+		<td>Step 3 - Preview your City Profile once it is finished</td>
 	</tr>
 	<tr>
 		<td><aui:button value="Check" onClick="check()"
 				disabled="<%=disableOpen%>" /></td>
-		<td>Step 4 - Check your page in our Portal (as soon as our
-			administrators approve it)</td>
+		<td>Step 4 - Check your page in the Climate ADAPT platform, as soon as the Mayors Adapt team approves it</td>
 	</tr>
 </table>
 
