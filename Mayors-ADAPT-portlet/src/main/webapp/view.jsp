@@ -80,15 +80,26 @@
 	_log.info("state: "+state);
 %>
 <style>
-big-button {
-	font-size: 30px;
+tableClass {
+    border: 1px solid black;
+    border-collapse: collapse;
+    padding: 15px;
 }
 </style>
-<h2>
-	Welcome to
-	<%=cityName%>
-	city profile administration page
-</h2>
+<table width="80%">
+	<tr>
+		<td><img
+			src="<%=themeDisplay.getPathThemeImages()%>/mayors_adapt_logo.png" />
+		</td>
+		<td align="right">
+			<h2>
+				Welcome to
+				<%=cityName%>
+				city profile administration page
+			</h2>
+		</td>
+	</tr>
+</table>
 
 <liferay-portlet:renderURL portletName="15"
 	var="previewArticleContentURL"
@@ -125,33 +136,34 @@ big-button {
 		value="<%=String.valueOf(groupId)%>" />
 </liferay-portlet:actionURL>
 
-<table style="font-size: 16px;" width="80%" >
-	<tr>
-		<td colspan="2">
-
-			<p>Here you can manage Mayors-ADAPT initiative information
-				relative to your city.</p>
-		</td>
-	</tr>
-	<tr>
+<br>
+<br>
+<p style="font-size: 16px;">Here you can manage Mayors-ADAPT
+	initiative information relative to your city.</p>
+<br>
+<table style="font-size: 16px;" class="tableClass" >
+	<tr style="padding:15px">
 		<td><aui:button value="Edit" onClick="edit()"
-				disabled="<%=disableEdit%>" /></td>
-		<td>Step 1 - Edit your City Profile fact sheet</td>
+				disabled="<%=disableEdit%>" style="width:80px;" /></td>
+		<td>  Step 1 - Edit your City Profile fact sheet</td>
 	</tr>
-	<tr>
-		<td><aui:button value="Finish" onClick="finish()" disabled="true" /></td>
-		<td>Step 2 - Finish the edition of your  fact sheet (Perform this operation from the edition form itself)</td>
+	<tr style="padding:15px">
+		<td><aui:button value="Finish" onClick="finish()" disabled="true"
+				style="width:80px;" /></td>
+		<td>  Step 2 - Finish the edition of your fact sheet (Perform this
+			operation from the edition form itself)</td>
 		<!-- aui:button value="Finish" onClick="finish()" disabled="<%=disableFinish%>" -->
 	</tr>
-	<tr>
+	<tr style="padding:15px">
 		<td><aui:button value="Preview" onClick="preview()"
-				disabled="<%=disablePreview%>" /></td>
-		<td>Step 3 - Preview your City Profile once it is finished</td>
+				disabled="<%=disablePreview%>" style="width:80px;" /></td>
+		<td>  Step 3 - Preview your City Profile once it is finished</td>
 	</tr>
-	<tr>
+	<tr style="padding:15px">
 		<td><aui:button value="Check" onClick="check()"
-				disabled="<%=disableOpen%>" /></td>
-		<td>Step 4 - Check your page in the Climate ADAPT platform, as soon as the Mayors Adapt team approves it</td>
+				disabled="<%=disableOpen%>" style="width:80px;" /></td>
+		<td>  Step 4 - Check your page in the Climate ADAPT platform, as
+			soon as the Mayors Adapt team approves it</td>
 	</tr>
 </table>
 
