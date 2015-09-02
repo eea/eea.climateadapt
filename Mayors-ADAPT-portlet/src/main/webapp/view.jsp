@@ -1,3 +1,4 @@
+<%@page import="com.liferay.portal.theme.ThemeDisplay"%>
 <%@page import="com.liferay.portal.service.GroupLocalServiceUtil"%>
 <%@page import="com.liferay.portal.kernel.workflow.WorkflowConstants"%>
 <%@page import="com.liferay.portal.model.Portlet"%>
@@ -43,7 +44,7 @@
 	if (uuid==null) uuid= (String) request.getAttribute("token");
 	
 	_log.info("Managing page for token: "+uuid);
-	
+	 User loggedUser = new ThemeDisplay().getUser();
 
 	long companyId = PortalUtil.getDefaultCompanyId();
 	long groupId = GroupLocalServiceUtil.getGroup(companyId, "Guest").getGroupId();
@@ -136,6 +137,10 @@ tableClass {
 		value="<%=String.valueOf(groupId)%>" />
 </liferay-portlet:actionURL>
 
+<%
+if (loggedUser!=null && loggedUser.getScreenName().equalsIgnoreCase("cityprofilecontact")){
+
+%>
 <br>
 <br>
 <p style="font-size: 16px;">Here you can manage Mayors-ADAPT
@@ -166,6 +171,12 @@ tableClass {
 			soon as the Mayors Adapt team approves it</td>
 	</tr>
 </table>
+<% } else {%>
+<br>
+<br>
+<p style="font-size: 16px;">You must access this page from your review mail link/button.</p>
+<br>
+<%} %>
 
 <aui:script>
 	function preview() {

@@ -60,11 +60,10 @@ public class MayorsAdaptPortlet extends LiferayPortlet {
 			PortletException {
 		super.serveResource(resourceRequest, resourceResponse);
 	}
-	
-	
 
 	public void finishTask(ActionRequest actionRequest,
-			ActionResponse actionResponse) throws IOException {
+			ActionResponse actionResponse) throws IOException,
+			InterruptedException {
 		if (ParamUtil.getString(actionRequest, "token") != null)
 			uuid = ParamUtil.getString(actionRequest, "token");
 		long groupId = ParamUtil.getLong(actionRequest, "groupId");
@@ -115,6 +114,8 @@ public class MayorsAdaptPortlet extends LiferayPortlet {
 					workflowInstanceLink.getGroupId(),
 					workflowInstanceLink.getUserId(), workflowTaskId, "Finish",
 					null, workflowInstance.getWorkflowContext());
+			while (article.getStatus() != 1)
+				;
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
