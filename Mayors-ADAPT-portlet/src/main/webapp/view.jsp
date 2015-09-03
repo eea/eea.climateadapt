@@ -137,10 +137,6 @@ tableClass {
 		value="<%=String.valueOf(groupId)%>" />
 </liferay-portlet:actionURL>
 
-<%
-if (loggedUser!=null && loggedUser.getScreenName().equalsIgnoreCase("cityprofilecontact")){
-
-%>
 <br>
 <br>
 <p style="font-size: 16px;">Here you can manage Mayors-ADAPT
@@ -171,12 +167,6 @@ if (loggedUser!=null && loggedUser.getScreenName().equalsIgnoreCase("cityprofile
 			soon as the Mayors Adapt team approves it</td>
 	</tr>
 </table>
-<% } else {%>
-<br>
-<br>
-<p style="font-size: 16px;">You must access this page from your review mail link/button.</p>
-<br>
-<%} %>
 
 <aui:script>
 	function preview() {
