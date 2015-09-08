@@ -439,10 +439,17 @@ request.setAttribute("edit_article.jsp-toLanguageId", toLanguageId);
 				textareas[i].style.width = "100%";
 				textareas[i].style.height = "115px";
         }
-
+        
+        
+        var today = new Date();
         for (var i=0; i < dates.length; i++){
-				if (dates[i].name.indexOf("displayDate")<0 && dates[i].name.indexOf("expirationDate")<0 && dates[i].name.indexOf("reviewDate")<0)
-					dates[i].value="";
+				if (dates[i].name.indexOf("displayDate")<0 && dates[i].name.indexOf("expirationDate")<0 && dates[i].name.indexOf("reviewDate")<0){
+			        var today = new Date();
+			        var dateS = dates[i].value.split("/");
+        	        var date = new Date(dateS[1]+"/"+dateS[0]+"/"+dateS[2]);
+					if (today.getDate()==date.getDate() && today.getMonth()==date.getMonth() && today.getFullYear() == date.getFullYear())
+						dates[i].value="";
+       		}
         }
 
         for (var i=0; i < selects.length; i++){
