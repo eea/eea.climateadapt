@@ -76,7 +76,16 @@ public class DataServiceUtil {
         return getService().getStructure();
     }
 
-    public static java.util.TreeMap<java.lang.String,java.lang.String> getCitiesByCriteria(
+    public static java.util.TreeSet<java.lang.String> getOptions(
+        java.lang.String fieldName) {
+        return getService().getOptions(fieldName);
+    }
+
+    public static java.util.TreeSet<java.lang.String> getFieldsNames() {
+        return getService().getFieldsNames();
+    }
+
+    public static java.util.TreeMap<java.lang.String, java.lang.String> getCitiesByCriteria(
         java.util.List<java.lang.String> countries,
         java.util.List<java.lang.String> sectors,
         java.util.List<java.lang.String> impacts,

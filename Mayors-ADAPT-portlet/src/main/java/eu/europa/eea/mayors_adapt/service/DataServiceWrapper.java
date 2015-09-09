@@ -76,7 +76,18 @@ public class DataServiceWrapper implements DataService,
     }
 
     @Override
-    public java.util.TreeMap<java.lang.String,java.lang.String> getCitiesByCriteria(
+    public java.util.TreeSet<java.lang.String> getOptions(
+        java.lang.String fieldName) {
+        return _dataService.getOptions(fieldName);
+    }
+
+    @Override
+    public java.util.TreeSet<java.lang.String> getFieldsNames() {
+        return _dataService.getFieldsNames();
+    }
+
+    @Override
+    public java.util.TreeMap<java.lang.String, java.lang.String> getCitiesByCriteria(
         java.util.List<java.lang.String> countries,
         java.util.List<java.lang.String> sectors,
         java.util.List<java.lang.String> impacts,

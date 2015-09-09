@@ -1,8 +1,8 @@
 package eu.europa.eea.mayors_adapt.service.base;
 
-import java.util.Arrays;
-
 import eu.europa.eea.mayors_adapt.service.DataServiceUtil;
+
+import java.util.Arrays;
 
 /**
  * @author Brian Wing Shun Chan
@@ -27,6 +27,10 @@ public class DataServiceClpInvoker {
     private String[] _methodParameterTypes31;
     private String _methodName32;
     private String[] _methodParameterTypes32;
+    private String _methodName33;
+    private String[] _methodParameterTypes33;
+    private String _methodName34;
+    private String[] _methodParameterTypes34;
 
     public DataServiceClpInvoker() {
         _methodName22 = "getBeanIdentifier";
@@ -61,9 +65,17 @@ public class DataServiceClpInvoker {
 
         _methodParameterTypes31 = new String[] {  };
 
-        _methodName32 = "getCitiesByCriteria";
+        _methodName32 = "getOptions";
 
-        _methodParameterTypes32 = new String[] {
+        _methodParameterTypes32 = new String[] { "java.lang.String" };
+
+        _methodName33 = "getFieldsNames";
+
+        _methodParameterTypes33 = new String[] {  };
+
+        _methodName34 = "getCitiesByCriteria";
+
+        _methodParameterTypes34 = new String[] {
                 "java.util.List", "java.util.List", "java.util.List",
                 "java.util.List"
             };
@@ -115,6 +127,16 @@ public class DataServiceClpInvoker {
 
         if (_methodName32.equals(name) &&
                 Arrays.deepEquals(_methodParameterTypes32, parameterTypes)) {
+            return DataServiceUtil.getOptions((java.lang.String) arguments[0]);
+        }
+
+        if (_methodName33.equals(name) &&
+                Arrays.deepEquals(_methodParameterTypes33, parameterTypes)) {
+            return DataServiceUtil.getFieldsNames();
+        }
+
+        if (_methodName34.equals(name) &&
+                Arrays.deepEquals(_methodParameterTypes34, parameterTypes)) {
             return DataServiceUtil.getCitiesByCriteria((java.util.List<java.lang.String>) arguments[0],
                 (java.util.List<java.lang.String>) arguments[1],
                 (java.util.List<java.lang.String>) arguments[2],

@@ -8,6 +8,7 @@ import java.util.Map;
 import java.util.TreeMap;
 import java.util.TreeSet;
 
+import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
@@ -23,9 +24,14 @@ import com.liferay.portal.kernel.search.SearchEngineUtil;
 import com.liferay.portal.kernel.search.TermQueryFactoryUtil;
 import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.workflow.WorkflowConstants;
+import com.liferay.portal.kernel.xml.Node;
+import com.liferay.portal.kernel.xml.SAXReaderUtil;
 import com.liferay.portal.security.ac.AccessControlled;
 import com.liferay.portlet.dynamicdatamapping.model.DDMStructure;
 import com.liferay.portlet.dynamicdatamapping.service.DDMStructureLocalServiceUtil;
+import com.liferay.portlet.dynamicdatamapping.service.persistence.DDMStructureUtil;
+import com.liferay.portlet.dynamicdatamapping.util.DDMXMLUtil;
+import com.liferay.portlet.dynamicdatamapping.util.DDMXSDUtil;
 import com.liferay.portlet.journal.model.JournalArticle;
 import com.liferay.portlet.journal.service.JournalArticleLocalServiceUtil;
 
@@ -51,6 +57,12 @@ import eu.europa.eea.mayors_adapt.service.base.DataServiceBaseImpl;
  */
 @AccessControlled(guestAccessEnabled = true)
 public class DataServiceImpl extends DataServiceBaseImpl {
+
+	Log _log = LogFactoryUtil.getLog("DataServiceImpl.class");
+	String structureName = "City Profile";
+	DDMStructure cityProfileStructure = getDDMStructure(structureName);
+	long cityProfileStructureId = cityProfileStructure.getStructureId();
+	Locale locale = new Locale("en", "GB");
 
 	static final Map<String, String> COUNTRIES = new TreeMap<String, String>() {
 		{
@@ -252,14 +264,60 @@ public class DataServiceImpl extends DataServiceBaseImpl {
 	}
 
 	public DDMStructure getStructure() throws SystemException {
+		_log.info(cityProfileStructure.getDocument());
+		try {
+			_log.info(cityProfileStructure.getCompleteXsd());
+			List<Node> pp = SAXReaderUtil.selectNodes(
+					"/root/dynamic-element[19]/*/*/entry/text()",
+					cityProfileStructure.getDocument());
+			// DocumentBuilderFactory domFactory = DocumentBuilderFactory
+			// .newInstance();
+			// domFactory.setNamespaceAware(true);
+			// DocumentBuilder builder = domFactory.newDocumentBuilder();
+			// Document doc = builder
+			// .parse(new InputSource(new StringReader(xml)));
+			// XPath xpath = XPathFactory.newInstance().newXPath();
+			// // XPath Query for showing all nodes value
+			//
+			// XPathExpression expr = xpath
+			// .compile("/soapenv:Envelope/soapenv:Header/authInfo/password");
+			// Object result = expr.evaluate(doc, XPathConstants.NODESET);
+			// NodeList nodes = (NodeList) result;
+			// System.out.println("Got " + nodes.getLength() + " nodes");
+			// System.out.println(nodes.item(0).getNodeValue());
+
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
 		return cityProfileStructure;
 	}
 
-	Log _log = LogFactoryUtil.getLog("DataServiceImpl.class");
-	String structureName = "City Profile";
-	DDMStructure cityProfileStructure = getStructure(structureName);
-	long cityProfileStructureId = cityProfileStructure.getStructureId();
-	Locale locale = new Locale("en", "GB");
+	public TreeSet<String> getOptions(String fieldName) {
+		TreeSet<String> options = new TreeSet<String>();
+		List<Node> definedOptions = SAXReaderUtil
+				.selectNodes("//dynamic-element[@name='" + fieldName
+						+ "']/*/*/entry/text()",
+						cityProfileStructure.getDocument());
+		for (Node node : definedOptions) {
+			if (!node.getText().equals("None"))
+				options.add(node.getText());
+		}
+		return options;
+	}
+
+	public TreeSet<String> getFieldsNames() {
+		TreeSet<String> fieldNames = new TreeSet<String>();
+		List<Node> definedFieldNames = SAXReaderUtil.selectNodes(
+				"/root/dynamic-element/@name",
+				cityProfileStructure.getDocument());
+		for (Node node : definedFieldNames) {
+			if (!node.getText().equals("None"))
+				fieldNames.add(node.getText());
+		}
+		return fieldNames;
+	}
 
 	public TreeMap<String, String> getCitiesByCriteria(List<String> countries,
 			List<String> sectors, List<String> impacts, List<String> stages) {
@@ -361,7 +419,7 @@ public class DataServiceImpl extends DataServiceBaseImpl {
 				_log.debug(doc.toString());
 			}
 
-			_log.info("Query executed: " + booleanQuery.toString());
+			_log.info("Query executed : " + booleanQuery.toString());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -369,7 +427,7 @@ public class DataServiceImpl extends DataServiceBaseImpl {
 		return ret;
 	}
 
-	private DDMStructure getStructure(String structureName) {
+	private DDMStructure getDDMStructure(String structureName) {
 		String structureDescription = "Structure for a City Profile";
 		DDMStructure cityProfileStructure = null;
 		List<DDMStructure> structures;

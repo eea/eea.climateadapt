@@ -10,6 +10,7 @@
 	<meta content="initial-scale=1.0, width=device-width" name="viewport" />
 
 	$theme.include($top_head_include)
+	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js"></script>
 
 	<style type="text/css">
               #heading .logo{background:url($company_logo) no-repeat;display:block;font-size:0;height:88px;text-indent:-9999em;width:600px;}

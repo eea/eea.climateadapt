@@ -1,11 +1,11 @@
 package eu.europa.eea.mayors_adapt.service.http;
 
-import java.rmi.RemoteException;
-
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 
 import eu.europa.eea.mayors_adapt.service.DataServiceUtil;
+
+import java.rmi.RemoteException;
 
 /**
  * Provides the SOAP utility for the
@@ -118,13 +118,39 @@ public class DataServiceSoap {
         }
     }
 
-    public static java.util.TreeMap<java.lang.String,java.lang.String> getCitiesByCriteria(
+    public static java.util.TreeSet<java.lang.String> getOptions(
+        java.lang.String fieldName) throws RemoteException {
+        try {
+            java.util.TreeSet<java.lang.String> returnValue = DataServiceUtil.getOptions(fieldName);
+
+            return returnValue;
+        } catch (Exception e) {
+            _log.error(e, e);
+
+            throw new RemoteException(e.getMessage());
+        }
+    }
+
+    public static java.util.TreeSet<java.lang.String> getFieldsNames()
+        throws RemoteException {
+        try {
+            java.util.TreeSet<java.lang.String> returnValue = DataServiceUtil.getFieldsNames();
+
+            return returnValue;
+        } catch (Exception e) {
+            _log.error(e, e);
+
+            throw new RemoteException(e.getMessage());
+        }
+    }
+
+    public static java.util.TreeMap<java.lang.String, java.lang.String> getCitiesByCriteria(
         java.util.List<java.lang.String> countries,
         java.util.List<java.lang.String> sectors,
         java.util.List<java.lang.String> impacts,
         java.util.List<java.lang.String> stages) throws RemoteException {
         try {
-            java.util.TreeMap<java.lang.String,java.lang.String> returnValue = DataServiceUtil.getCitiesByCriteria(countries,
+            java.util.TreeMap<java.lang.String, java.lang.String> returnValue = DataServiceUtil.getCitiesByCriteria(countries,
                     sectors, impacts, stages);
 
             return returnValue;
