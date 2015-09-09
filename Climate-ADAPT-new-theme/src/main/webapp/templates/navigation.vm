@@ -1,0 +1,63 @@
+<nav class="$nav_css_class navbar site-navigation" id="navigation" role="navigation">
+    <ul aria-label="#language ("site-pages")" class="nav nav-collapse" role="menubar"> 
+        #foreach ($nav_item in $nav_items)
+            #set($nav_li_css_class = "")
+            #if ($nav_item.isSelected())
+                #set($nav_li_css_class = $nav_li_css_class+" selected")
+            #end
+            #if ($nav_item.hasChildren())
+                #set($nav_li_css_class = $nav_li_css_class+" dropdown")
+            #end           
+            <li class="$nav_li_css_class">
+                    #if ($nav_item.hasChildren())
+                        <a href="$nav_item.getURL()" $nav_item.getTarget()   data-hover="dropdown" data-delay="100" data-close-others="false">
+                            <span>$nav_item.icon() $nav_item.getName()</span>               
+                            <b class="caret"></b>
+                        </a>
+                    #else
+                         <a href="$nav_item.getURL()" $nav_item.getTarget()>
+                            <span>$nav_item.icon() $nav_item.getName()</span>               
+                        </a>
+                       #end
+                #if ($nav_item.hasChildren())
+                    <ul class="dropdown-menu">
+                        #foreach ($nav_child in $nav_item.getChildren())
+                            #set($nav_li_css_class = "")
+                            #if ($nav_child.isSelected())
+                                #set($nav_li_css_class = " selected")
+                            #end
+                            #if ($nav_child.hasChildren())
+                                #set($nav_li_css_class = " dropdown-submenu")
+                            #end
+                            <li class="$nav_li_css_class">
+                                #if ($nav_child.hasChildren())
+                                    <a href="$nav_child.getURL()" $nav_child.getTarget()   data-hover="dropdown" data-delay="100" data-close-others="false">
+                                        <span>$nav_child.icon() $nav_child.getName()</span>                                                   
+                                    </a>
+                                #else
+                                     <a href="$nav_child.getURL()" $nav_item.getTarget()>
+                                        <span>$nav_child.icon() $nav_child.getName()</span>               
+                                    </a>
+                                   #end
+                               #if ($nav_child.hasChildren())
+                                    <ul class="dropdown-menu">
+                                        #foreach ($nav_child_child in $nav_child.getChildren())
+                                               #if ($nav_child_child.isSelected())
+                                                <li class="selected">
+                                            #else
+                                                <li>
+                                            #end
+                                                <a href="$nav_child_child.getURL()" $nav_child_child.getTarget()>$nav_child_child.getName()</a>
+                                            </li>
+                                        #end   
+                                    </ul>
+                                #end                            
+                            </li>
+                        #end
+                    </ul>
+                #end
+            </li>
+        #end
+	</ul>
+</nav>
+
