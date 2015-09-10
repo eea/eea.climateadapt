@@ -347,6 +347,50 @@ request.setAttribute("edit_article.jsp-toLanguageId", toLanguageId);
 	var <portlet:namespace />documentLibraryInput = null;
 	var <portlet:namespace />imageGalleryInput = null;
 
+	decorateForm()
+
+	decorateForm()
+
+    function decorateForm() {
+	    /* Disable title Fields (separators) and improve aspect form */
+        var formu = document.<portlet:namespace />fm1;
+        var selects =  formu.getElementsByClassName("aui-field-select w");
+        var inputs = formu.getElementsByTagName("input");
+        var larges = formu.getElementsByClassName("wlarge");
+        var mediums = formu.getElementsByClassName("wmedium");
+        var smalls = formu.getElementsByClassName("wsmall");
+        var labels = formu.getElementsByTagName("label");
+        var dates = formu.getElementsByClassName("input-medium");
+        var textareas = formu.getElementsByTagName("textarea");
+
+        for (var i=0; i< inputs.length; i++){
+                if ((inputs[i].name).indexOf("_ti_") >= 0){
+                        inputs[i].disabled="disabled";
+                        inputs[i].style.backgroundColor = "#828282";
+                        inputs[i].style.color = "white";
+                }
+        }
+
+        for (var i=0; i < larges.length; i++){
+				larges[i].style.width = "100%";
+        }
+
+        for (var i=0; i < mediums.length; i++){
+				mediums[i].style.width = "50%";
+        }
+
+        for (var i=0; i < smalls.length; i++){
+				smalls[i].style.width = "25%";
+        }
+
+        for (var i=0; i < textareas.length; i++){
+				textareas[i].style.width = "100%";
+				textareas[i].style.height = "115px";
+        }
+
+    }
+
+
 	function <portlet:namespace />publishArticle() {
 		document.<portlet:namespace />fm1.<portlet:namespace /><%= Constants.CMD %>.value = "<%= Constants.PUBLISH %>";
 	}

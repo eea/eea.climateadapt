@@ -27,8 +27,6 @@ String redirect = ParamUtil.getString(request, "redirect");
 
 String FINISH = "FINISH";
 
-System.out.println("CMD: "+cmd);
-
 boolean pending_save = (cmd.equals(Constants.UPDATE)) ? false : true;
 
 // Make sure the redirect is correct. This is a workaround for a layout that
@@ -291,10 +289,6 @@ request.setAttribute("edit_article.jsp-toLanguageId", toLanguageId);
 								pending_review_administrator = true;
 						} catch (NoSuchWorkflowInstanceLinkException e) {
 						}
-
-						System.out.println("pending?" + pending
-								+ "   pending_admin?"
-								+ pending_review_administrator);
 						%>
 
 						<c:choose>
@@ -466,17 +460,36 @@ request.setAttribute("edit_article.jsp-toLanguageId", toLanguageId);
                 var formu = document.<portlet:namespace />fm1;
                 var inputs = formu.getElementsByTagName("input");
  
+                formu.<portlet:namespace /><%= Constants.CMD %>.value = "FINISH";
+
+				var update = false;
                 for (var i=0; i<inputs.length; i++){
                         if ((inputs[i].name).indexOf("_m_") >= 0){
-                                if (inputs[i].value == ""){
+                                 console.log(inputs[i].name);
+                                 if (inputs[i].value == ""){
                                         console.log(inputs[i].name + " vacio");
                                         alert("You must fill mandatory fields(*) before finish the content.");
-                                        return false;
+						                formu.<portlet:namespace /><%= Constants.CMD %>.value = "UPDATE";
+                                        update = true;
+                                        break;
                                 }
                         }
                 }
- 
-                document.<portlet:namespace />fm1.<portlet:namespace /><%= Constants.CMD %>.value = "FINISH";
+
+        		var selects =  formu.getElementsByClassName("aui-field-select w");
+                if (!update){
+                for (var i=0; i<selects.length; i++){
+                        if ((selects[i].name).indexOf("_m_") >= 0){
+                                 console.log(selects[i].name);
+                                 if (selects[i].value == "Select"){
+                                        console.log(selects[i].name + " vacio");
+                                        alert("You must fill mandatory fields(*) before finish the content.");
+						                formu.<portlet:namespace /><%= Constants.CMD %>.value = "UPDATE";
+                                        break;
+                                }
+                        }
+                }
+ 				}
                 formu.submit();
     }
         

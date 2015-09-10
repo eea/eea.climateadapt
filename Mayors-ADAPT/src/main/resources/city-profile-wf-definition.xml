@@ -266,7 +266,7 @@
 						     }
 						 }
 						 long taskID = thisTask.getWorkflowTaskId();
-						 println "WF-->completeWorkflowTask...to Finish";
+						 println "WF: completeWorkflowTask...to Finish";
 						 WorkflowTaskManagerUtil.completeWorkflowTask(companyId, userId, taskID, "Finish", "Revision time has expired. Task had been closed automatically.", workflowContext);
 						 
                      ]]> </script>
@@ -305,13 +305,6 @@
 					<name>MA Manager</name>
 				</role>
 			</roles>
-			<!-- scripted-assignment> <script> <![CDATA[ import com.liferay.portal.kernel.util.GetterUtil; 
-				import com.liferay.portal.kernel.workflow.WorkflowConstants; import com.liferay.portal.service.UserLocalServiceUtil; 
-				import com.liferay.portal.model.Role; long companyId = GetterUtil.getLong((String)workflowContext.get(WorkflowConstants.CONTEXT_COMPANY_ID)); 
-				long userId = GetterUtil.getLong((String)workflowContext.get("CITY_PROFILE_OWNER")); 
-				roles = new ArrayList<Role>(); user = UserLocalServiceUtil.getUser(userId); 
-				println "WF->City Profile Finished. Notifying owner user " +user.getScreenName(); 
-				]]> </script> <script-language>groovy</script-language> </scripted-assignment -->
 		</assignments>
 		<task-timers>
 			<task-timer>

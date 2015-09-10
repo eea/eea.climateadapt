@@ -44,8 +44,9 @@
 	if (uuid==null) uuid= (String) request.getAttribute("token");
 	
 	_log.info("Managing page for token: "+uuid);
-	 User loggedUser = new ThemeDisplay().getUser();
-
+	ThemeDisplay td  =(ThemeDisplay)request.getAttribute(WebKeys.THEME_DISPLAY);
+	User loggedUser = td.getUser();
+	
 	long companyId = PortalUtil.getDefaultCompanyId();
 	long groupId = GroupLocalServiceUtil.getGroup(companyId, "Guest").getGroupId();
 	long userId = UserLocalServiceUtil.getUserByScreenName(companyId, "cityprofilecontact")
@@ -82,9 +83,9 @@
 %>
 <style>
 tableClass {
-    border: 1px solid black;
-    border-collapse: collapse;
-    padding: 15px;
+	border: 1px solid black;
+	border-collapse: collapse;
+	padding: 15px;
 }
 </style>
 <table width="80%">
@@ -139,35 +140,46 @@ tableClass {
 
 <br>
 <br>
+<%
+	if (loggedUser!=null && loggedUser.getScreenName().equals("cityprofilecontact")) {
+%>
 <p style="font-size: 16px;">Here you can manage Mayors-ADAPT
 	initiative information relative to your city.</p>
 <br>
-<table style="font-size: 16px;" class="tableClass" >
-	<tr style="padding:15px">
+<table style="font-size: 16px;" class="tableClass">
+	<tr style="padding: 15px">
 		<td><aui:button value="Edit" onClick="edit()"
 				disabled="<%=disableEdit%>" style="width:80px;" /></td>
-		<td>  Step 1 - Edit your City Profile fact sheet</td>
+		<td>Step 1 - Edit your City Profile fact sheet</td>
 	</tr>
-	<tr style="padding:15px">
+	<tr style="padding: 15px">
 		<td><aui:button value="Finish" onClick="finish()" disabled="true"
 				style="width:80px;" /></td>
-		<td>  Step 2 - Finish the edition of your fact sheet (Perform this
+		<td>Step 2 - Finish the edition of your fact sheet (Perform this
 			operation from the edition form itself)</td>
 		<!-- aui:button value="Finish" onClick="finish()" disabled="<%=disableFinish%>" -->
 	</tr>
-	<tr style="padding:15px">
+	<tr style="padding: 15px">
 		<td><aui:button value="Preview" onClick="preview()"
 				disabled="<%=disablePreview%>" style="width:80px;" /></td>
-		<td>  Step 3 - Preview your City Profile once it is finished</td>
+		<td>Step 3 - Preview your City Profile once it is finished</td>
 	</tr>
-	<tr style="padding:15px">
+	<tr style="padding: 15px">
 		<td><aui:button value="Check" onClick="check()"
 				disabled="<%=disableOpen%>" style="width:80px;" /></td>
-		<td>  Step 4 - Check your page in the Climate ADAPT platform, as
+		<td>Step 4 - Check your page in the Climate ADAPT platform, as
 			soon as the Mayors Adapt team approves it</td>
 	</tr>
 </table>
-
+<%
+	} else {
+%>
+<p style="font-size: 16px;">You must access this page from the
+	link/button on your Mayors Adapt Platform mail notification.</p>
+<br>
+<%
+	}
+%>
 <aui:script>
 	function preview() {
 		Liferay

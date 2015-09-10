@@ -2,6 +2,7 @@ package eu.europa.eea.mayors_adapt;
 
 import java.util.List;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -42,8 +43,8 @@ public class AccessCityProfileUserTaskStrutsPortletAction extends
 
 		String token = ParamUtil.get(request, "token", "0");
 
-		_log.info("Task antes");
-		mostrarTask(token, user,  groupId);
+//		_log.info("Task before");
+//		showTask(token, user,  groupId);
 
 
 		HttpSession session = request.getSession();
@@ -51,16 +52,17 @@ public class AccessCityProfileUserTaskStrutsPortletAction extends
 		session.setAttribute("j_password", user.getPassword());
 		session.setAttribute("j_remoteuser", String.valueOf(user.getUserId()));
 
-		_log.info("Task despues");
-		mostrarTask(token, user, groupId);
+		_log.info("Task after");
+		showTask(token, user, groupId);
 
 		String pageurl = "/city-profile-form?token=" + token;
-
+//		RequestDispatcher d=request.getRequestDispatcher(pageurl);
+//		d.forward(request, response);
 		response.sendRedirect(pageurl.toString());
 		return null;
 	}
 
-	private void mostrarTask(String token, User user, long groupId) throws Exception {
+	private void showTask(String token, User user, long groupId) throws Exception {
 		JournalArticle article = JournalArticleLocalServiceUtil
 				.getJournalArticleByUuidAndGroupId(token, groupId);
 

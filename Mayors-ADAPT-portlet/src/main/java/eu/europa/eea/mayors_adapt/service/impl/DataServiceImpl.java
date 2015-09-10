@@ -301,7 +301,7 @@ public class DataServiceImpl extends DataServiceBaseImpl {
 						+ "']/*/*/entry/text()",
 						cityProfileStructure.getDocument());
 		for (Node node : definedOptions) {
-			if (!node.getText().equals("None"))
+			if (!node.getText().equals("Select"))
 				options.add(node.getText());
 		}
 		return options;
@@ -313,7 +313,7 @@ public class DataServiceImpl extends DataServiceBaseImpl {
 				"/root/dynamic-element/@name",
 				cityProfileStructure.getDocument());
 		for (Node node : definedFieldNames) {
-			if (!node.getText().equals("None"))
+			if (!node.getText().equals("Select"))
 				fieldNames.add(node.getText());
 		}
 		return fieldNames;
