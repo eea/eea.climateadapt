@@ -28,7 +28,7 @@
 $theme.include($body_top_include)
 
 #if($is_signed_in)
-						#dockbar()
+			#dockbar()
 #end
 
 <div class="container-fluid" id="wrapper">
@@ -55,6 +55,7 @@ $theme.include($body_top_include)
 	</header>
 
 	<div id="content">
+
 		<nav id="breadcrumbs">#breadcrumbs()</nav>
 
 		#if ($selectable)

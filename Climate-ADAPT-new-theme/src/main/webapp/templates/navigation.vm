@@ -1,5 +1,5 @@
-<nav class="$nav_css_class navbar site-navigation" id="navigation" role="navigation">
-    <ul aria-label="#language ("site-pages")" class="nav nav-collapse" role="menubar"> 
+<nav id="navigation" role="navigation">
+    <ul aria-label="#language ("site-pages")" class="nav" role="menubar"> 
         #foreach ($nav_item in $nav_items)
             #set($nav_li_css_class = "")
             #if ($nav_item.isSelected())

@@ -15,6 +15,13 @@ $dockbarOpenGradientStart: #0EA6F9;
 /* ---------- Base styles ---------- */
 
 .aui {
+	
+	h1 {
+		margin:	0px;
+		margin-bottom: 2px;
+		
+	}
+
 	.separator {
 		border-color: #BFBFBF transparent #FFF;
 		border-style: solid;
@@ -22,9 +29,11 @@ $dockbarOpenGradientStart: #0EA6F9;
 	}
 
 	#wrapper {
-		width: 90%;
+		width: 100%;
 		position: relative;
 		background-color: #ccc;
+	    width: 100%;
+	    padding: initial;
 	}
 
 	.site-title {
@@ -256,6 +265,9 @@ $dockbarOpenGradientStart: #0EA6F9;
 		}
 
 		.nav {
+		    display: flex;
+    		background-color: #a5bf26;
+    		margin-bottom: 2px;
 			li {
 				&.dropdown {
 					> .dropdown-toggle {
@@ -268,8 +280,8 @@ $dockbarOpenGradientStart: #0EA6F9;
 
 				&.open {
 					> a {
-						background-color: #A3A3A3;
-						color: #FFF;
+						background-color: blue;
+						color: #a5bf26;
 					}
 				}
 
@@ -283,7 +295,8 @@ $dockbarOpenGradientStart: #0EA6F9;
 			}
 
 			.dropdown-menu {
-				background: #00ACFF;
+				
+				background: #a5bf26;
 				border-width: 0;
 				margin: 0;
 
@@ -311,6 +324,7 @@ $dockbarOpenGradientStart: #0EA6F9;
 				color: #02213d;
 			}
 		}
+
 	}
 
 	.modify-pages .delete-tab {
@@ -327,11 +341,11 @@ $dockbarOpenGradientStart: #0EA6F9;
 	/* ---------- Breadcrumbs ---------- */
 
 	.breadcrumb {
-		background-color: #FAFAFA;
+		background: #a5bf26;
 	}
 
 	#breadcrumbs {
-		margin-bottom: 45px;
+		margin-bottom: 2px;
 
 		.breadcrumb {
 			margin-bottom: 0;
@@ -430,6 +444,10 @@ $dockbarOpenGradientStart: #0EA6F9;
 	.navbar-inner .nav.staging-bar {
 		border-top-width: 0;
 		position: static;
+	
+		ul{
+			display: flex;
+		}
 
 		li {
 			.page-variations {
@@ -576,6 +594,15 @@ $dockbarOpenGradientStart: #0EA6F9;
 				@include text-shadow(none);
 			}
 		}
+		
+		.navbar-new {
+			background-color: aqua;
+			color: green; 
+			ul {
+				display : flex;
+			}
+		}
+
 	}
 
 	.update-reminder-query .reminder-query-answer {
@@ -623,6 +650,7 @@ $dockbarOpenGradientStart: #0EA6F9;
 
 	.portlet-nested-portlets .portlet-body {
 		.portlet, .portlet-borderless-container {
+			
 			@include box-shadow(none);
 		}
 	}
@@ -689,7 +717,7 @@ $dockbarOpenGradientStart: #0EA6F9;
 /**** Heading *****/
 
 #heading {
-	background-image: url("/ace-theme/images/bg_banner.jpg");
+	background-image: url("../images/bg_banner.jpg");
 }
 
 #heading .logo {
@@ -699,7 +727,7 @@ $dockbarOpenGradientStart: #0EA6F9;
 /***** Header menu *****/
 
 #header-menu {
-	background-image: url("/ace-theme/images/bg_links-tools-ace.png");
+	background-image: url("../images/bg_links-tools-ace.png");
 	position: relative;
 	right: 0;
 	top: 0;
@@ -715,7 +743,7 @@ $dockbarOpenGradientStart: #0EA6F9;
 }
 
 #header-menu li {
-	background: url("/ace-theme/images/line_sep_links.gif") no-repeat left center;
+	background: url("../images/line_sep_links.gif") no-repeat left center;
 	display: inline;
 	padding: 0 2px 0 7px;
 }
