@@ -281,9 +281,16 @@ function displayJSONResults(unique, aceitemResults) {
 							<c:set var="newImageToDisplay" value="<%=newImage%>" />
 						</c:if>
 
-						<c:if test="${fn:length(wrappedSearchResult.year) > 0 }">
-							<c:set var="year" value=" (${wrappedSearchResult.year})" />
-						</c:if>
+						<!-- https://taskman.eionet.europa.eu/issues/28591 -->
+                       <c:choose>
+	                       <c:when test="${fn:length(wrappedSearchResult.year) > 0 }">                            
+	                            <c:set var="year" value="(${wrappedSearchResult.year})" />                                              		
+	                       </c:when>
+	                       <c:otherwise>                          
+	                       		<c:set var="year" value="" />                       		
+	                       </c:otherwise>
+                       </c:choose>
+                       <!-- END -->
 
 						<c:set var="descriptionText"
 							value="${wrappedSearchResult.shortdescription}" />

@@ -47,7 +47,13 @@
 										    <% 
 											        String primImageUrl = "";
 												    Measure measure = (Measure) renderRequest.getAttribute("casestudy");
-													if (Validator.isNotNull(measure.getPrimephoto()))
+													long filteredMeasureId = MeasureUtil.filterAdaptationOptionIds(measure.getMeasureId());
+												    
+												    if (filteredMeasureId != measure.getMeasureId()) {
+												    	measure = MeasureLocalServiceUtil.getMeasure(filteredMeasureId);	
+												    }
+												    
+												    if (Validator.isNotNull(measure.getPrimephoto()))
 													{
 													      DLFileEntry image = DLFileEntryLocalServiceUtil.getFileEntry(Long.parseLong(measure.getPrimephoto())); 
 													      primImageUrl = themeDisplay.getPathImage() + "/image_gallery?img_id=" + image.getLargeImageId() +  "&t=" + WebServerServletTokenUtil.getToken(image.getLargeImageId());
@@ -69,14 +75,18 @@
 											        {
 											        	description = description.substring(0,420);
 											        }
+													String name = measure.getName();
+													long measureId = measure.getMeasureId();
 											%>
 											<img src="<%=primImageUrl%>" alt="Case Study"/>
 										</div>
 										<div class="case-studies-homepage-slider-description">
-											<h2>${casestudy.name}</h2>
+											<!-- <h2>${casestudy.name}</h2> -->
+											<h2><%=name %></h2>
 											<p><%=description %></p>
 											
-											<a class="homepage-read-more" href="viewmeasure?ace_measure_id=${casestudy.measureId}"><img src="<%=request.getContextPath()%>/assets/ico-arrow.png" alt="arrow" />Read more</a>
+											<!-- <a class="homepage-read-more" href="viewmeasure?ace_measure_id=${casestudy.measureId}"><img src="<%=request.getContextPath()%>/assets/ico-arrow.png" alt="arrow" />Read more</a> -->
+											<a class="homepage-read-more" href="viewmeasure?ace_measure_id=<%=measureId %>"><img src="<%=request.getContextPath()%>/assets/ico-arrow.png" alt="arrow" />Read more</a>
 										</div>
 									</li>
 							 <% } %>
@@ -91,6 +101,11 @@
 							        if (type.equalsIgnoreCase("adaptationoption"))
 							        {
 							        	Measure adaptationOption = (Measure) renderRequest.getAttribute("aceadaptobject");
+										long filteredMeasureId = MeasureUtil.filterAdaptationOptionIds(adaptationOption.getMeasureId());
+							        	
+							        	if (filteredMeasureId != adaptationOption.getMeasureId()) {							        		
+							        		adaptationOption = MeasureLocalServiceUtil.getMeasure(filteredMeasureId);
+							        	}
 							        	name = adaptationOption.getName();
 							        	description = adaptationOption.getDescription();
 							        	url = "viewmeasure?ace_measure_id=" + String.valueOf(adaptationOption.getMeasureId());

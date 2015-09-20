@@ -801,6 +801,8 @@
 													query.add(PropertyFactoryUtil.forName("controlstatus").eq(new Short((short)1)));
 													List results = MeasureLocalServiceUtil.dynamicQuery(query);
 													List<Measure> listOfMeasure = (List<Measure>) results;
+													
+													listOfMeasure = MeasureUtil.getFilteredItems(listOfMeasure);
 
 													// look for the selected values
 													String chosenAdaptOptions = "";
