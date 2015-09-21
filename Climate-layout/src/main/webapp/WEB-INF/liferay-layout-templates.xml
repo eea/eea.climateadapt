@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!DOCTYPE layout-templates PUBLIC "-//Liferay//DTD Layout Templates 6.2.0//EN" "http://www.liferay.com/dtd/liferay-layout-templates_6_2_0.dtd">
+
+<layout-templates>
+	<custom>
+		<layout-template id="Climate-layout" name="Climate-layout">
+			<template-path>/Climate-layout.tpl</template-path>
+			<wap-template-path>
+				/Climate-layout.wap.tpl
+			</wap-template-path>
+			<thumbnail-path>/Climate-layout.png</thumbnail-path>
+		</layout-template>
+		<layout-template id="climate" name="Climate">
+			<template-path>/climate.tpl</template-path>
+			<wap-template-path>/climate.wap.tpl</wap-template-path>
+			<thumbnail-path>/climate.png</thumbnail-path>
+		</layout-template>
+		<layout-template id="newtemplate" name="New Template">
+			<template-path>/newtemplate.tpl</template-path>
+			<wap-template-path>/newtemplate.wap.tpl</wap-template-path>
+			<thumbnail-path>/newtemplate.png</thumbnail-path>
+		</layout-template>
+	</custom>
+</layout-templates>
