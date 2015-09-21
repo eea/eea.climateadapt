@@ -25,7 +25,6 @@ import com.liferay.portal.kernel.search.Field;
 public class ClimateSearchEngineTest {
 
 	Logger l = Logger.getLogger(getClass().getName());
-	static String INDEX_DIRECTORY = "/Climate_liferay/data/lucene/1";
 	static ClimateSearchEngine searcher;
 
 	public static void main(String[] args) throws Exception {
@@ -37,7 +36,7 @@ public class ClimateSearchEngineTest {
 
 	protected void setUp() throws Exception {
 		searcher = new ClimateSearchEngine(
-				ClimateSearchEngine.getIndexReader(INDEX_DIRECTORY));
+				ClimateSearchEngine.getIndexReader(null));
 		List<String> locations = Arrays
 				.asList(new String[] { "/AceItem-shared/src/main/resources/META-INF" });
 		// InitUtil.initWithSpring();
@@ -49,10 +48,10 @@ public class ClimateSearchEngineTest {
 		System.out.println("Start:" + System.currentTimeMillis());
 		AceSearchFormBean formBean = new AceSearchFormBean();
 		// formBean.setCountries(new String[]{"FR"});
-//		formBean.setAnyOfThese("Urban");
-		String type = "CITYPROFILE";
-//		String type = "ARTICLE";
-		 formBean.setAceitemtype(new String[]{"CITYPROFILE","ARTICLE"});
+		formBean.setAnyOfThese("master");
+//		String type = "CITYPROFILE";
+		String type = "ARTICLE";
+//		 formBean.setAceitemtype(new String[]{"CITYPROFILE","ARTICLE"});
 //		 formBean.setCountries(new String[]{"AL","ES"});
 //		formBean.setAceitemtype(new String[] { "ARTICLE" });
 		TopDocs searchResults = searcher.getTopDocs(formBean,
