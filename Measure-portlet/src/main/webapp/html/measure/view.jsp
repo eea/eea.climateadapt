@@ -103,6 +103,10 @@
         --%>
 
         <%
+		 long filteredMeasureId = MeasureUtil.filterAdaptationOptionIds(measure.getMeasureId());
+        //System.out.println("initial measure id: " +measure.getMeasureId());        
+        measure = MeasureLocalServiceUtil.getMeasure(filteredMeasureId);
+        //System.out.println("filtered measure id: " +measure.getMeasureId());
         String measureViewLink = "<a href='/viewmeasure?ace_measure_id=" + measure.getMeasureId() + "'>" +  measure.getName() + "</a>" ;
         String measureSectorsStr = measure.getSectors_().replace(";","; ");
         String measureImpactsStr = measure.getClimateimpacts_().replace(";","; ");

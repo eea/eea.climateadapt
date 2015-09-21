@@ -2,6 +2,8 @@
 <%@ page import="java.util.Arrays" %>
 <%@page import="nl.wur.alterra.cgi.ace.search.AceSearchFormBean"%>
 <%@page import="nl.wur.alterra.cgi.ace.search.SearchRequestParams"%>
+<%@page import="nl.wur.alterra.cgi.ace.search.AceItemSearchResult"%>
+<%@page import="nl.wur.alterra.cgi.ace.portlet.PortletUtils"%>
 <%--
 /**
 * Copyright (c) 2000-2010 Liferay, Inc. All rights reserved.
@@ -545,8 +547,34 @@ if (endyear != null)
 		<c:set var="groupTitle" scope="page"><liferay-ui:message key="acesearch-datainfotype-lbl-RESEARCHPROJECT" /></c:set>
 		<%@ include file="searchresultsbytype.jspf" %>
 
-          <c:set var="groupedResults" scope="page" value="${MEASURE_searchResults}"/>
-		<c:set var="groupedJSONResults" scope="page" value="${MEASURE_JSONsearchResults}"/>
+        <c:set var="groupedResults" scope="page" value="${MEASURE_searchResults}"/>
+
+		<%						
+		List<AceItemSearchResult> results = (List<AceItemSearchResult>)pageContext.getAttribute("groupedResults");
+				
+		
+		for (AceItemSearchResult result : results) {
+			String storedAtBasic = "ace_measure_id=";
+			String storedAt = result.getStoredAt();
+			String measureId = storedAt.substring(storedAt.indexOf('=') + 1);			
+			long filteredMeasureId = PortletUtils.filterAdaptationOptionIds(Long.parseLong(measureId));
+			
+			if (filteredMeasureId != Long.parseLong(measureId)) {
+				String filteredStoredAt = storedAtBasic+Long.toString(filteredMeasureId);
+				result.setStoredAt(filteredStoredAt);
+				AceItem aceItem = AceItemLocalServiceUtil.getAceItemByStoredAt(filteredStoredAt);
+				result.setName(aceItem.getName());
+				result.setYear(aceItem.getYear());
+				result.setShortdescription(aceItem.getDescription());
+			}
+			
+		}
+		
+		pageContext.setAttribute("measureResults", results);				
+		pageContext.setAttribute("measureJSONResults", PortletUtils.getJSONResults(results));
+		%>
+		<c:set var="groupedResults" scope="page" value="${measureResults}"/>
+		<c:set var="groupedJSONResults" scope="page" value="${measureJSONResults}"/>
 		<c:set var="aceitemtype" scope="page" value="MEASURE"/>
 		<c:set var="groupTitle" scope="page"><liferay-ui:message key="acesearch-datainfotype-lbl-MEASURE" /></c:set>
 		<%@ include file="searchresultsbytype.jspf" %>

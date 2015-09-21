@@ -246,6 +246,8 @@
 										query.add(PropertyFactoryUtil.forName("measureId").in(selMeasuresInLong));
 										List resultsForSelected = MeasureLocalServiceUtil.dynamicQuery(query);
 										List<Measure> listOfSelectedMeasure = (List<Measure>) resultsForSelected;
+										
+										listOfSelectedMeasure = MeasureUtil.getFilteredItems(listOfSelectedMeasure);
 										pageContext.setAttribute("listOfSelectedMeasure", listOfSelectedMeasure);
 								    }
 								    pageContext.setAttribute("adaptationOptionsForReview", adaptOptionsAry);
