@@ -12,15 +12,15 @@ $dockbarGradientStart: #118ADE;
 $dockbarOpenGradientEnd: #0993DD;
 $dockbarOpenGradientStart: #0EA6F9;
 
-/*$menucolor: #67788A;*/
-$menucolor: #005F93;
+/* $menucolor: #005F93;*/
+$menucolor: #67788a;
 $menubg: #A5BF26;
 
 $breadcrumbcolor: black;
 $breadcrumbbg: lightgrey;
 
 /* ---------- Base styles ---------- */
- 
+
 .aui {
 	
 	h1 {
