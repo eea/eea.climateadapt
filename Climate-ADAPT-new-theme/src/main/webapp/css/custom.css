@@ -12,14 +12,20 @@ $dockbarGradientStart: #118ADE;
 $dockbarOpenGradientEnd: #0993DD;
 $dockbarOpenGradientStart: #0EA6F9;
 
+/*$menucolor: #67788A;*/
+$menucolor: #005F93;
+$menubg: #A5BF26;
+
+$breadcrumbcolor: black;
+$breadcrumbbg: lightgrey;
+
 /* ---------- Base styles ---------- */
 
 .aui {
 	
 	h1 {
-		margin:	0px;
-		margin-bottom: 2px;
-		
+		margin-bottom: 1px;
+		margin-top: 0px;
 	}
 
 	.separator {
@@ -31,8 +37,8 @@ $dockbarOpenGradientStart: #0EA6F9;
 	#wrapper {
 		width: 100%;
 		position: relative;
-		background-color: #ccc;
 	    width: 100%;
+	    background-color: white;
 	    padding: initial;
 	}
 
@@ -55,9 +61,7 @@ $dockbarOpenGradientStart: #0EA6F9;
 
 	#sign-in {
 		background: url(@theme_image_path@/common/key.png) no-repeat 3px 50%;
-		font-weight: bold;
 		padding: 5px 5px 5px 25px;
-		position: absolute;
 		right: 0;
 		top: -1.2em;
 	}
@@ -80,7 +84,19 @@ $dockbarOpenGradientStart: #0EA6F9;
 	.taglib-portal-message {
 		margin-bottom: 0;
 	}
-
+	
+	.caret{
+    	vertical-align: text-top;
+    	border-top: 4px solid $menucolor;
+    	background: rgba(255,255,255,0.1);
+	}
+	
+	.dropdown-menu 
+		> li > a {
+		    padding: 2px 25px 5px;
+	    	color: $menubg;
+		}
+	
 	/* ---------- Dockbar ---------- */
 
 	.dockbar {
@@ -266,37 +282,44 @@ $dockbarOpenGradientStart: #0EA6F9;
 
 		.nav {
 		    display: flex;
-    		background-color: #a5bf26;
-    		margin-bottom: 2px;
+		    background-color: $menubg;
+		    color: $menucolor;
+    		margin-bottom: 1px;
+    		
 			li {
 				&.dropdown {
 					> .dropdown-toggle {
 						.caret {
-							border-bottom-color: #FFF;
-							border-top-color: #FFF;
+							border-bottom-color: $menubg;
+							border-top-color: $menubg;
 						}
 					}
 				}
 
 				&.open {
 					> a {
-						background-color: blue;
-						color: #a5bf26;
+						background-color: $menucolor;
+						color: $menubg;
 					}
 				}
 
 				&.active > a {
-					background-color: $dockbarGradientStart;
+					background-color: $menucolor;
+					color: $menubg;
 				}
 			}
 
 			> li > a {
-				padding: 4px 15px 5px;
+				background-color: $menubg;
+			    color: $menucolor;
+			    font-size: large;
+				padding: 4px 25px 5px;
 			}
 
 			.dropdown-menu {
-				
-				background: #a5bf26;
+			    font-size: large;
+				background: $menucolor;
+				color: $menubg;
 				border-width: 0;
 				margin: 0;
 
@@ -305,8 +328,6 @@ $dockbarOpenGradientStart: #0EA6F9;
 				}
 
 				a {
-					color: #FFF;
-
 					&:hover {
 						background: none;
 						text-decoration: underline;
@@ -340,15 +361,14 @@ $dockbarOpenGradientStart: #0EA6F9;
 
 	/* ---------- Breadcrumbs ---------- */
 
-	.breadcrumb {
-		background: #a5bf26;
-	}
-
 	#breadcrumbs {
-		margin-bottom: 2px;
-
+		margin-bottom: 1px;
 		.breadcrumb {
-			margin-bottom: 0;
+		    line-height: 40px;
+			color: $breadcrumbcolor;
+			background: $breadcrumbbg;
+      		font-size: x-large;
+      		margin-bottom: 0;
 		}
 	}
 
@@ -361,8 +381,8 @@ $dockbarOpenGradientStart: #0EA6F9;
 	}
 
 	.portlet-topper {
+		height: 0px;
 		background: #D3D3D3;
-		color: #FFF;
 		padding: 0;
 
 		.portlet-title {
@@ -495,38 +515,27 @@ $dockbarOpenGradientStart: #0EA6F9;
 		}
 	}
 
-	/* ---------- Footer ---------- 
+	/* ---------- Footer ----------*/ 
 
-	#footer {
-		text-align: right;
+	.ie7 #footer .container {
+		right: 34%;
 	}
-	
-#footer {
-	border-top: 2px solid #D7E3EF;
-	height: 100px;
-	margin-top: 15px;
-}
 
-#footer .container {
-	display: block;
-	margin-top: 15px;
-	position: absolute;
-	left: 292px;
-	text-align: center;
-}
+	#footer ul {
+    	display: flex;
+    	list-style: none;
+    	float: right;
+    }
 
-.ie7 #footer .container {
-	right: 34%;
-}
-
-#footer a {
-	float: left;
-	margin-bottom: 15px;
-	text-decoration: none;
-	width: 200px;
-}
-*/
-
+	#footer li {
+    	padding: 5px;
+    }
+    
+    #footer .container {
+    	display: flex;
+    	float: left;
+    	padding-left: 200px;
+    }
 	/* ---------- Hudcrumbs ---------- */
 
 	.lfr-hudcrumbs {
@@ -578,7 +587,8 @@ $dockbarOpenGradientStart: #0EA6F9;
 			}
 
 			> .active > a {
-				background-color: $dockbarGradientStart;
+				background-color: $menucolor;
+				color:	$menubg;
 
 				@include background-image(linear-gradient($dockbarGradientStart 0%, $dockbarGradientStart 47%, $dockbarGradientEnd 100%));
 				@include box-shadow(none);
@@ -595,14 +605,6 @@ $dockbarOpenGradientStart: #0EA6F9;
 			}
 		}
 		
-		.navbar-new {
-			background-color: aqua;
-			color: green; 
-			ul {
-				display : flex;
-			}
-		}
-
 	}
 
 	.update-reminder-query .reminder-query-answer {
@@ -677,7 +679,7 @@ $dockbarOpenGradientStart: #0EA6F9;
 			.nav {
 				li.dropdown.open {
 					> .dropdown-toggle {
-						background-color: $dockbarOpenGradientStart;
+						background-color: $menubg;
 
 						@include background-image(linear-gradient($dockbarOpenGradientStart, $dockbarOpenGradientEnd));
 						@include box-shadow(none);
@@ -767,7 +769,7 @@ $dockbarOpenGradientStart: #0EA6F9;
 #searchbox {
 	position: absolute;
 	right: 80px;
-	top: 49px;
+	top: 29px;
 }
 
 #searchbox span{
