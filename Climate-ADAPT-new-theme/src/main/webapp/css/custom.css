@@ -367,7 +367,7 @@ $breadcrumbbg: #005F93;
 		    line-height: 40px;
 			color: $breadcrumbcolor;
 			background: $breadcrumbbg;
-      		font-size: x-large;
+      		font-size: medium;
       		margin-bottom: 0;
 		}
 	}
