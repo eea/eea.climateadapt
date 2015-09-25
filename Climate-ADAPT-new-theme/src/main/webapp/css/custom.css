@@ -387,7 +387,7 @@ $breadcrumbbg: #005F93;
 
 		.portlet-title {
 			/*font-size: 1em;*/
-			font-size: x-large;
+			font-size: large;
 			font-weight: normal;
 			color: $menucolor;
 			background-color: $menubg;
