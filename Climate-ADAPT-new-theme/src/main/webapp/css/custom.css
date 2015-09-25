@@ -16,8 +16,8 @@ $dockbarOpenGradientStart: #0EA6F9;
 $menucolor: #005F93;
 $menubg: #A5BF26;
 
-$breadcrumbcolor: black;
-$breadcrumbbg: lightgrey;
+$breadcrumbcolor: #A5BF26;
+$breadcrumbbg: #005F93;
 
 /* ---------- Base styles ---------- */
 
@@ -386,8 +386,11 @@ $breadcrumbbg: lightgrey;
 		padding: 0;
 
 		.portlet-title {
-			font-size: 1em;
+			/*font-size: 1em;*/
+			font-size: x-large;
 			font-weight: normal;
+			color: $menucolor;
+			background-color: $menubg;
 			line-height: 2.2;
 			margin: 0;
 
