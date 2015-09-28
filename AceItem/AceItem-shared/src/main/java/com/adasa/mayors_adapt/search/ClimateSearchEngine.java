@@ -95,11 +95,11 @@ public class ClimateSearchEngine extends IndexSearcher {
 		// normalizeScoreFactor);
 
 		for (ScoreDoc hit : hits) {
-			Document document = searcher.doc(hit.doc);
 
 			// AceItemLocalService aceItemLocalService =
 			// AceItemLocalServiceUtil.getService();
 			try {
+				Document document = searcher.doc(hit.doc);
 				AceItem aceItem;
 
 				String aceItemId = document
