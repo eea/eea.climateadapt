@@ -6,12 +6,14 @@
 		}
 		#pagina{
 			position:relative;
+			width:100%;
+			overflow-y: auto;
 		}
 		#contenedor{
 			width:70%;
 			height:100%;
 			background-color:#FFFFFF;
-			float:left;
+			position:absolute;
 		}
 		.contenedorPadding{
 			padding:10px;
@@ -53,7 +55,7 @@
     var mapOptions = {
       center: new google.maps.LatLng(${a_m_city_latitude.getData()},${a_m_city_longitude.getData()}),
       zoom: 8,
-      mapTypeId: google.maps.MapTypeId.HYBRID
+      mapTypeId: google.maps.MapTypeId.ROADMAP
     }
     var map = new google.maps.Map(mapCanvas, mapOptions)
   }
@@ -67,6 +69,9 @@
 				<div id="logoMayors">
 					<img src="http://mayors-adapt.eu/wp-content/themes/mayoradapt/images/logo.png" />
 				</div>
+				<div id="logoStatus">
+					<img src="/documents/18/11263941/stage_${c_m_stage_of_the_implementation_cycle.getData()}.png" style="max-width: 100%;"/>
+				</div>				
 			</div>
 			<div>
 				<h1>${.vars['reserved-article-title'].data} - ${a_m_country.getData()}</h1>
@@ -83,7 +88,7 @@
                 </p>
 				  <div class="sector-main-article">
 					  <div id="read-more-link" style="position:inherit;width:inherit">
-						<a style="text-decoration:none;">Planed adaptation actions</a>
+						<a style="text-decoration:none;">Planned adaptation actions</a>
 					  </div>  
 				  </div>				
 				<p class="textoContenido">
@@ -95,10 +100,17 @@
 					  </div>  
 				  </div>				
 				<p class="textoContenido">
-				${f_m_action_event_title.getData()}<br/>
+				<b>${f_m_action_event_title.getData()}</b><br/>
 				${f_m_action_event_long_description.getData()}<br/>
 				<div>
-    		        <img alt="Picture" src="${f_picture.getData()}" />
+	                <img alt="" src="${f_picture.getData()}" style="max-width: 100%;" />
+    		        <#if f_picture_caption??>
+			            <#if f_picture_caption.getData() != "null">
+			                <p class="textoContenido">
+    		                    ${f_picture_caption.getData()}
+    		                </p>
+    		            </#if>
+			        </#if>
 				</div>
 				</p>
 			</div>
@@ -118,12 +130,21 @@
 	            </#list>
             </#if><br/>
 			<b>Key vulnerable sectors</b><br/>
-			${b_m_sector.getData()}<br/>
+            <#if b_m_sector??>
+                ${b_m_sector.getData()}
+                <#list b_m_sector.getOptions() as sector>
+                    <ul>
+                        <li>${sector}</li>
+                    </ul>
+	            </#list>
+            </#if><br/>			
 			<b>Name & surname of mayor</b><br/>
 	    	${b_m_name_surname_of_mayor.getData()}<br/><br/>
 			<b>Population</b><br/>
-			<#if !a_population_size??>
-				${a_population_size.getData()} inhabitants
+			<#if a_population_size??>
+			    <#if a_population_size.getData() != "null">
+				    ${a_population_size.getData()} inhabitants
+				</#if>
 			</#if><br/><br/>
 			<b>Contact person</b><br/>
 			${b_m_r_name_surname_of_contact_person.getData()}<br/>
@@ -132,7 +153,8 @@
 			${b_m_official_email.getData()}<br/>
 			<a href="${b_m_website_of_the_local_authority.getData()}"/>Website</a><br/><br/>
 			<b>Date of oficial joining to Mayors Adapt</b><br/>
-			Joining Date. Pending add this file to the form.<br/><br/>
+			<#assign b_signature_date_DateObj = dateUtil.newDate(getterUtil.getLong(b_signature_date.getData()))>
+			${dateUtil.getDate(b_signature_date_DateObj, "dd MMM yyyy", locale)}<br/><br/>
 			<b>Covenant of mayors signatory (yes/no)</b><br/>
 			<#if getterUtil.getBoolean(b_m_covenant_of_mayors_signatory.getData())>
 			    Yes
@@ -140,6 +162,9 @@
 			<#if !getterUtil.getBoolean(b_m_covenant_of_mayors_signatory.getData())>
 			    No
 			</#if>			
+			<br/><br/>
+			<b>Last Update:</b><br/>
+			${.vars['reserved-article-modified-date'].data}
 			<br/><br/>
 		</div>
 	</div>
