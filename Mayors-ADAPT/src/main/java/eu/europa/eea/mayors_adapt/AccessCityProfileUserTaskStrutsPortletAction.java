@@ -53,7 +53,7 @@ public class AccessCityProfileUserTaskStrutsPortletAction extends
 		session.setAttribute("j_remoteuser", String.valueOf(user.getUserId()));
 
 		_log.info("Task after");
-		showTask(token, user, groupId);
+//		showTask(token, user, groupId);
 
 		String pageurl = "/city-profile-form?token=" + token;
 //		RequestDispatcher d=request.getRequestDispatcher(pageurl);
@@ -62,36 +62,36 @@ public class AccessCityProfileUserTaskStrutsPortletAction extends
 		return null;
 	}
 
-	private void showTask(String token, User user, long groupId) throws Exception {
-		JournalArticle article = JournalArticleLocalServiceUtil
-				.getJournalArticleByUuidAndGroupId(token, groupId);
-
-		WorkflowInstanceLink workflowInstanceLink = WorkflowInstanceLinkLocalServiceUtil
-				.getWorkflowInstanceLink(article.getCompanyId(),
-						article.getGroupId(), JournalArticle.class.getName(),
-						article.getId());
-
-		WorkflowInstance workflowInstance = WorkflowInstanceManagerUtil
-				.getWorkflowInstance(article.getCompanyId(),
-						workflowInstanceLink.getWorkflowInstanceId());
-
-		_log.info("Gathering tasks for workflowInstance: "
-				+ workflowInstanceLink.getWorkflowInstanceId() + " user:"
-				+ user.getUserId() + " companyId:" + workflowInstanceLink.getCompanyId());
-
-		List<WorkflowTask> tasks = WorkflowTaskManagerUtil
-				.getWorkflowTasksByWorkflowInstance(
-						workflowInstanceLink.getCompanyId(), groupId,
-						workflowInstanceLink.getWorkflowInstanceId(), false, 0,
-						1, null);
-		long workflowTaskId = 0;
-
-		_log.info("Tasks found: " + tasks.size());
-
-		for (WorkflowTask task : tasks) {
-			_log.info("Task Found id: " + task.getWorkflowTaskId() + " "
-					+ task.getName());
-			workflowTaskId = task.getWorkflowTaskId();
-		}
-	}
+//	private void showTask(String token, User user, long groupId) throws Exception {
+//		JournalArticle article = JournalArticleLocalServiceUtil
+//				.getJournalArticleByUuidAndGroupId(token, groupId);
+//
+//		WorkflowInstanceLink workflowInstanceLink = WorkflowInstanceLinkLocalServiceUtil
+//				.getWorkflowInstanceLink(article.getCompanyId(),
+//						article.getGroupId(), JournalArticle.class.getName(),
+//						article.getId());
+//
+//		WorkflowInstance workflowInstance = WorkflowInstanceManagerUtil
+//				.getWorkflowInstance(article.getCompanyId(),
+//						workflowInstanceLink.getWorkflowInstanceId());
+//
+//		_log.info("Gathering tasks for workflowInstance: "
+//				+ workflowInstanceLink.getWorkflowInstanceId() + " user:"
+//				+ user.getUserId() + " companyId:" + workflowInstanceLink.getCompanyId());
+//
+//		List<WorkflowTask> tasks = WorkflowTaskManagerUtil
+//				.getWorkflowTasksByWorkflowInstance(
+//						workflowInstanceLink.getCompanyId(), groupId,
+//						workflowInstanceLink.getWorkflowInstanceId(), false, 0,
+//						1, null);
+//		long workflowTaskId = 0;
+//
+//		_log.info("Tasks found: " + tasks.size());
+//
+//		for (WorkflowTask task : tasks) {
+//			_log.info("Task Found id: " + task.getWorkflowTaskId() + " "
+//					+ task.getName());
+//			workflowTaskId = task.getWorkflowTaskId();
+//		}
+//	}
 }
