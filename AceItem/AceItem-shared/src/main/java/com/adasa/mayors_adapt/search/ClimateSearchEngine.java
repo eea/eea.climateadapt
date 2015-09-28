@@ -99,81 +99,87 @@ public class ClimateSearchEngine extends IndexSearcher {
 
 			// AceItemLocalService aceItemLocalService =
 			// AceItemLocalServiceUtil.getService();
-			AceItem aceItem;
+			try {
+				AceItem aceItem;
 
-			String aceItemId = document
-					.get(ACEIndexConstant.IndexField.ACEITEM_ID);
+				String aceItemId = document
+						.get(ACEIndexConstant.IndexField.ACEITEM_ID);
 
-			if (aceItemId != null) {
+				if (aceItemId != null) {
 
-				aceItem = AceItemLocalServiceUtil.getAceItem(Long
-						.parseLong(aceItemId));
-				aceItem.setAceItemId(Long.parseLong(aceItemId));
+					aceItem = AceItemLocalServiceUtil.getAceItem(Long
+							.parseLong(aceItemId));
+					aceItem.setAceItemId(Long.parseLong(aceItemId));
 
-				// relevance expressed as a percentage
-				float relevance = hit.score * normalizeScoreFactor * 100;
+					// relevance expressed as a percentage
+					float relevance = hit.score * normalizeScoreFactor * 100;
 
-				// System.out.println("hit.score is: " + hit.score);
-				// System.out.println("relevance (0.0) is: " + relevance);
+					// System.out.println("hit.score is: " + hit.score);
+					// System.out.println("relevance (0.0) is: " + relevance);
 
-				AceItemSearchResult aceItemSearchResult = new AceItemSearchResult(
-						aceItem);
-				aceItemSearchResult.setRelevance(relevance);
-				// System.out.println("AceItemSearchResult name is " +
-				// aceItemSearchResult.getName());
-				// System.out.println("AceItemSearchResult isNew is " +
-				// aceItemSearchResult.isIsNew());
-				// System.out.println("AceItemSearchResult feature is " +
-				// aceItemSearchResult.getFeature());
-				results.add(aceItemSearchResult);
-			} else {
-				long articleId = Long.valueOf(document.getFieldable(Field.UID)
-						.stringValue().split("_PORTLET_")[1]);
-				JournalArticle article = JournalArticleLocalServiceUtil
-						.getArticle(articleId);
-				String articleUrlTitle = article.getUrlTitle();
-				AceItemSearchResult aceItemSearchResult = new AceItemSearchResult();
-				// aceItemSearchResult.setAceItemId(Long.valueOf(document
-				// .getFieldable("uid").stringValue()));
-				aceItemSearchResult.setAceItemId(articleId);
-				String classTypeId = document.get(Field.CLASS_TYPE_ID);
-				String storageType = null;
-				if (classTypeId != null
-						&& Long.valueOf(classTypeId) == structureId) {
-					storageType = "CITYPROFILE";
-				} else
-					storageType = "ARTICLE";
-				aceItemSearchResult.setStoragetype(storageType);
-				aceItemSearchResult.setStoredAt(articleUrlTitle);
-				aceItemSearchResult.setRating(System.currentTimeMillis());
-				aceItemSearchResult.setName(document.get(Field.TITLE));
-				String description = nullSafeString(new String[] {
-						document.get(Field.CONTENT),
-						document.get(Field.DESCRIPTION),
-						document.get(Field.NAME) });
-				aceItemSearchResult.setShortdescription(description);
-				aceItemSearchResult.setFeature("");
-				aceItemSearchResult.setControlstatus(Short.valueOf(document
-						.getFieldable(Field.STATUS).stringValue()));
-				// aceItemSearchResult.setDeeplink("");
-				// aceItemSearchResult.setFeature("feature");
-				Date publishDate = new SimpleDateFormat("yyyyMMddHHmmSS")
-						.parse(document.getFieldable(Field.PUBLISH_DATE)
-								.stringValue());
-				Calendar publishCal = Calendar.getInstance();
-				publishCal.setTime(publishDate);
-				aceItemSearchResult.setNew(isNew(publishCal));
-				// if (document.getFieldable(Field.PUBLISH_DATE).sgetYear() !=
-				// null
-				// && aceitem.getYear().length() > 0)
-				// {
-				aceItemSearchResult.setYear(String.valueOf(publishCal
-						.get(Calendar.YEAR)));
-				// }
-				float relevance = hit.score * normalizeScoreFactor * 100;
-				aceItemSearchResult.setRelevance(relevance);
-				results.add(aceItemSearchResult);
+					AceItemSearchResult aceItemSearchResult = new AceItemSearchResult(
+							aceItem);
+					aceItemSearchResult.setRelevance(relevance);
+					// System.out.println("AceItemSearchResult name is " +
+					// aceItemSearchResult.getName());
+					// System.out.println("AceItemSearchResult isNew is " +
+					// aceItemSearchResult.isIsNew());
+					// System.out.println("AceItemSearchResult feature is " +
+					// aceItemSearchResult.getFeature());
+					results.add(aceItemSearchResult);
+				} else {
+					long articleId = Long.valueOf(document
+							.getFieldable(Field.UID).stringValue()
+							.split("_PORTLET_")[1]);
+					JournalArticle article = JournalArticleLocalServiceUtil
+							.getArticle(articleId);
+					String articleUrlTitle = article.getUrlTitle();
+					AceItemSearchResult aceItemSearchResult = new AceItemSearchResult();
+					// aceItemSearchResult.setAceItemId(Long.valueOf(document
+					// .getFieldable("uid").stringValue()));
+					aceItemSearchResult.setAceItemId(articleId);
+					String classTypeId = document.get(Field.CLASS_TYPE_ID);
+					String storageType = null;
+					if (classTypeId != null
+							&& Long.valueOf(classTypeId) == structureId) {
+						storageType = "CITYPROFILE";
+					} else
+						storageType = "ARTICLE";
+					aceItemSearchResult.setStoragetype(storageType);
+					aceItemSearchResult.setStoredAt(articleUrlTitle);
+					aceItemSearchResult.setRating(System.currentTimeMillis());
+					aceItemSearchResult.setName(document.get(Field.TITLE));
+					String description = nullSafeString(new String[] {
+							document.get(Field.CONTENT),
+							document.get(Field.DESCRIPTION),
+							document.get(Field.NAME) });
+					aceItemSearchResult.setShortdescription(description);
+					aceItemSearchResult.setFeature("");
+					aceItemSearchResult.setControlstatus(Short.valueOf(document
+							.getFieldable(Field.STATUS).stringValue()));
+					// aceItemSearchResult.setDeeplink("");
+					// aceItemSearchResult.setFeature("feature");
+					Date publishDate = new SimpleDateFormat("yyyyMMddHHmmSS")
+							.parse(document.getFieldable(Field.PUBLISH_DATE)
+									.stringValue());
+					Calendar publishCal = Calendar.getInstance();
+					publishCal.setTime(publishDate);
+					aceItemSearchResult.setNew(isNew(publishCal));
+					// if (document.getFieldable(Field.PUBLISH_DATE).sgetYear()
+					// !=
+					// null
+					// && aceitem.getYear().length() > 0)
+					// {
+					aceItemSearchResult.setYear(String.valueOf(publishCal
+							.get(Calendar.YEAR)));
+					// }
+					float relevance = hit.score * normalizeScoreFactor * 100;
+					aceItemSearchResult.setRelevance(relevance);
+					results.add(aceItemSearchResult);
 
+				}
+			} catch (Exception e) {
+				l.info(e.getMessage());
 			}
 		}
 		return results;

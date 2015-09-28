@@ -48,9 +48,9 @@ public class ClimateSearchEngineTest {
 		System.out.println("Start:" + System.currentTimeMillis());
 		AceSearchFormBean formBean = new AceSearchFormBean();
 		// formBean.setCountries(new String[]{"FR"});
-		formBean.setAnyOfThese("master");
-//		String type = "CITYPROFILE";
-		String type = "ARTICLE";
+		formBean.setAnyOfThese("test");
+		String type = "CITYPROFILE";
+//		String type = "ARTICLE";
 //		 formBean.setAceitemtype(new String[]{"CITYPROFILE","ARTICLE"});
 //		 formBean.setCountries(new String[]{"AL","ES"});
 //		formBean.setAceitemtype(new String[] { "ARTICLE" });
