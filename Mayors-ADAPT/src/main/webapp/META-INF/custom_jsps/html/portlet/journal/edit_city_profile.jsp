@@ -441,7 +441,7 @@ request.setAttribute("edit_article.jsp-toLanguageId", toLanguageId);
 			        var today = new Date();
 			        var dateS = dates[i].value.split("/");
         	        var date = new Date(dateS[1]+"/"+dateS[0]+"/"+dateS[2]);
-					if (today.getDate()==date.getDate() && today.getMonth()==date.getMonth() && today.getFullYear() == date.getFullYear())
+ 					if (today.getDate()==date.getDate() && today.getMonth()==date.getMonth() && today.getFullYear() == date.getFullYear())
 						dates[i].value="";
        		}
         }
