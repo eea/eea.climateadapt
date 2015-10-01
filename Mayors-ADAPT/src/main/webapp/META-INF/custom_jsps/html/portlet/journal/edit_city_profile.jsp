@@ -441,9 +441,9 @@ request.setAttribute("edit_article.jsp-toLanguageId", toLanguageId);
 			        var today = new Date();
 			        var dateS = dates[i].value.split("/");
         	        var date = new Date(dateS[1]+"/"+dateS[0]+"/"+dateS[2]);
- 					if (today.getDate()==date.getDate() && today.getMonth()==date.getMonth() && today.getFullYear() == date.getFullYear())
+					if (date.getDate()=="1" && date.getMonth()=="0" && date.getFullYear() =="1970")
 						dates[i].value="";
-       		}
+      		}
         }
 
         for (var i=0; i < selects.length; i++){
