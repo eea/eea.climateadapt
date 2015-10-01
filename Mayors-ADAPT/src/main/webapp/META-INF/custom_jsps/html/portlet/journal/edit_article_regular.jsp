@@ -403,7 +403,10 @@ request.setAttribute("edit_article.jsp-toLanguageId", toLanguageId);
         	        console.log(i+"today: "+today);
         	        console.log(i+"dateS: "+dateS);
         	        console.log(i+"date: "+date);
-					if (today.getDate()==date.getDate() && today.getMonth()==date.getMonth() && today.getFullYear() == date.getFullYear())
+        	        console.log(i+"date:date.getDate(): "+date.getDate());
+        	        console.log(i+"date:date.getMonth(): "+date.getMonth());
+        	        console.log(i+"date:date.getFullYear(): "+date.getFullYear());
+					if (date.getDate()=="1" && date.getMonth()=="0" && date.getFullYear() =="1970")
 						dates[i].value="";
        		}
         }
