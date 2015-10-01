@@ -143,7 +143,7 @@ tableClass {
 <%
 	if (loggedUser!=null && loggedUser.getScreenName().equals("cityprofilecontact")) {
 %>
-<p style="font-size: 16px;">Here you can manage Mayors-ADAPT
+<p style="font-size: 16px;">Here you can manage Mayors Adapt
 	initiative information relative to your city.</p>
 <br>
 <table style="font-size: 16px;" class="tableClass">

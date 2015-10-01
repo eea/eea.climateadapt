@@ -12,12 +12,22 @@ $dockbarGradientStart: #118ADE;
 $dockbarOpenGradientEnd: #0993DD;
 $dockbarOpenGradientStart: #0EA6F9;
 
-/*$menucolor: #67788a;*/
+/*$menucolor: #67788a;
 $menucolor: #005F93;
 $menubg: #A5BF26;
+*/
+
+$menubg: #A5BF26;
+$menucolor: #353f02;
+$menuborder: #d2df92;
+
+$menuhighcolor: #353f02;
+$menuhighbg: #e9efc9;
 
 $breadcrumbcolor: #A5BF26;
 $breadcrumbbg: #005F93;
+
+$font: normal 12px Tahoma,serif;
 
 /* ---------- Base styles ---------- */
 
@@ -41,7 +51,7 @@ $breadcrumbbg: #005F93;
 	    background-color: white;
 	    padding: initial;
 	}
-
+	
 	.site-title {
 		a:hover {
 			text-decoration: none;
@@ -91,12 +101,30 @@ $breadcrumbbg: #005F93;
     	background: rgba(255,255,255,0.1);
 	}
 	
-	.dropdown-menu 
+	.portlet-borderless-container {
+    	padding: 0px 46px 0px 46px;
+    }
+    
+    select {
+    	width: 150px;
+    }    
+    
+    #case-studies-homepage-slider-wrapper .case-studies-homepage-slider-content .case-studies-homepage-slider-description {
+  		/* float: right; */
+  		padding-right: 5px;
+  		position: relative;
+  		/* width: 70%; */
+  		line-height: initial;
+  		font-size: initial;
+  }
+  
+/*	.dropdown-menu 
 		> li > a {
 		    padding: 2px 25px 5px;
-	    	color: $menubg;
+	    	color: $menuhighbg;
 		}
 	
+*/
 	/* ---------- Dockbar ---------- */
 
 	.dockbar {
@@ -290,36 +318,36 @@ $breadcrumbbg: #005F93;
 				&.dropdown {
 					> .dropdown-toggle {
 						.caret {
-							border-bottom-color: $menubg;
-							border-top-color: $menubg;
+							border-bottom-color: $menuhighbg;
+							border-top-color: $menuhighcolor;
 						}
 					}
 				}
 
 				&.open {
 					> a {
-						background-color: $menucolor;
-						color: $menubg;
+						background-color: $menuhighbg;
+						color: $menuhighcolor;
 					}
 				}
 
 				&.active > a {
-					background-color: $menucolor;
-					color: $menubg;
+					background-color: $menuhighbg;
+					color: $menuhighcolor;
 				}
 			}
 
 			> li > a {
 				background-color: $menubg;
 			    color: $menucolor;
-			    font-size: large;
+			    font-size: $font;
 				padding: 4px 25px 5px;
 			}
 
 			.dropdown-menu {
-			    font-size: large;
-				background: $menucolor;
-				color: $menubg;
+			    font-size: $font;
+				background: $menuhighbg;
+				color: $menuhighcolor;
 				border-width: 0;
 				margin: 0;
 
@@ -590,8 +618,8 @@ $breadcrumbbg: #005F93;
 			}
 
 			> .active > a {
-				background-color: $menucolor;
-				color:	$menubg;
+				background-color: $menuhighbg;
+				color:	$menuhighcolor;
 
 				@include background-image(linear-gradient($dockbarGradientStart 0%, $dockbarGradientStart 47%, $dockbarGradientEnd 100%));
 				@include box-shadow(none);
@@ -800,6 +828,17 @@ $breadcrumbbg: #005F93;
 #searchbox select {
 	display: none;
 }
+
+
+/****
+	Search Portlet
+****/
+	#case-studies-homepage-search-wrapper {
+  		background-color: #f0f0f0;
+  		height: 260px;
+  		position: relative;
+  		/*width: 224px;*/
+  	}
 
 /****
 	Web Content Search page

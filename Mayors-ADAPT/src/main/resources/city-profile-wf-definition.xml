@@ -27,10 +27,10 @@
 					InternetAddress toAddress = new InternetAddress(
 							emailAddress);
 					StringBuffer body = new StringBuffer();
-					body.append("<p>Dear City Profile Contact,</p>");
-					body.append("<p>Thank you…Welcome to the Mayors Adapt city profile platform. We have set up a template that we would like you to fill in. All of the information shared in this form, will be used to showcase your city’s adaptation work on the EC Climate-ADAPT website. The more information you fill in, the better your city’s impact within the community will be.</p>");
-					body.append("<p>We'll get back to you soon with your city profile ready for completion.</p>");
-					body.append("<p>For any questions, please don't hesitate to contact us at helpdesk@mayors-adapt.eu</p>");						
+					body.append("<p>Dear City Profile contact person,</p>");
+					body.append("<p>Welcome and thank you for taking the first step towards creating your Mayors Adapt city profile! Soon (within the next business day) we will send you an email with a link to your city profile management page containing a template that we would like you to fill in. The information shared in this form will be used to showcase your city’s adaptation work on the EC Climate-ADAPT website. The more information you provide, the better your city’s impact within the community will be!</p>");
+					body.append("<p>We'll get back to you soon with more information!</p>");
+					body.append("<p>For any questions, please don't hesitate to contact us at helpdesk@mayors-adapt.eu.</p>");
 					String subject = "Mayors Adapt: welcome to Mayors Adapt city profile platform.";
 					MailMessage mailMessage = new MailMessage();
 					mailMessage.setTo(toAddress);
@@ -87,15 +87,16 @@
 					InternetAddress toAddress = new InternetAddress(
 							emailAddress);
 					StringBuffer body = new StringBuffer();
-					body.append("<p>Dear City Profile Contact,</p>");
-					body.append("<p>You have a city profile to review.</p>");
-					body.append("<p>You can find your city profile management page here:</p>");  
+					body.append("<p>Dear City Profile contact person,</p>");
+					body.append("<p>Your city profile is ready for you to update.</p>");
+					body.append("<p>You can find your city profile management page here:</p>");
 					body.append("<a href=\""+workflowContext.get("CITY_PROFILE_SERVER_URL")+"/c/portal/accessCityProfileUserTask?token="+workflowContext.get("CITY_PROFILE_TOKEN")+"\" target=\"_blank\"><button>Management page for <b>"+workflowContext.get("CITY_PROFILE_CITY_NAME")+"</b> city profile</button></a>");
+					body.append("<p>Please note that you have four weeks from now to complete the form. You can save the form at any point during these four weeks and come back to it (via the above link) to edit it further at a later stage. Once you submit it, we will review it and may come back to you with questions or suggestions in case anything is unclear.</p>");
+					body.append("<p>After a final review by the Mayors Adapt administrators, we will publish the factsheet online.</p>");
+					body.append("<p>For any questions, please don't hesitate to contact us at helpdesk@mayors-adapt.eu.</p>");
+					body.append("<p>If you see comments below please note that the Mayors Adapt team has reviewed the information you have previously submitted and asks that you to take these into consideration when updating your city’s information.</p>");
 					if(taskComments.length()>0)
-						body.append("<p>Comments for the review are: "+taskComments+"</p>");
-					body.append("<p>Please note that you have four weeks from now to complete the form. You can edit and save it and then come back to edit it further at a later stage. Once you submit it, we will review it and may come back to you with questions or suggestions in case anything is unclear.</p>");
-					body.append("<p>After a final review by the Mayors-ADAPT administrators, we will publish the fact sheet online.</p>");
-					body.append("<p>For any questions, please don't hesitate to contact us at helpdesk@mayors-adapt.eu</p>");						
+						body.append("<p>Comments from the Mayors Adapt reviewer: "+taskComments+"</p>");
 					String subject = "Mayors Adapt: please review your city profile";
 					MailMessage mailMessage = new MailMessage();
 					mailMessage.setTo(toAddress);
@@ -193,9 +194,9 @@
 					InternetAddress toAddress = new InternetAddress(
 							emailAddress);
 					StringBuffer body = new StringBuffer();
-					body.append("<p>Dear "+workflowContext.get("CITY_PROFILE_CONTACT_NAME_SURNAME")+",</p>");
-					body.append("<p>Thank you for filling in your city profile fact sheet for "+workflowContext.get("CITY_PROFILE_CITY_NAME")+". The time for editing has ended and the Mayors Adapt team will now review your input. We will get in touch with you in case any relevant information is still missing. Once we have jointly finalised the fact sheet and you have approved the content, we will publish it online.</p>");
-					body.append("<p>For any questions, please don't hesitate to contact us at helpdesk@mayors-adapt.eu</p>");						
+					body.append("<p>Dear City Profile contact person,</p>");
+					body.append("<p>Thank you for filling in your city profile fact sheet for  "+workflowContext.get("CITY_PROFILE_CITY_NAME")+". The Mayors Adapt team is now reviewing your input and will get in touch with you if any relevant information is still missing. Once we have jointly finalised the profile and you have approved the content, we will publish it online.</p>");
+					body.append("<p>For any questions, please don't hesitate to contact us at helpdesk@mayors-adapt.eu.</p>");						
 					String subject = "Mayors Adapt: time for editing your city profile has expired";
 					MailMessage mailMessage = new MailMessage();
 					mailMessage.setTo(toAddress);
@@ -266,7 +267,7 @@
 						     }
 						 }
 						 long taskID = thisTask.getWorkflowTaskId();
-						 println "WF-->completeWorkflowTask...to Finish";
+						 println "WF->completeWorkflowTask...to Finish";
 						 WorkflowTaskManagerUtil.completeWorkflowTask(companyId, userId, taskID, "Finish", "Revision time has expired. Task had been closed automatically.", workflowContext);
 						 
                      ]]> </script>
@@ -305,13 +306,6 @@
 					<name>MA Manager</name>
 				</role>
 			</roles>
-			<!-- scripted-assignment> <script> <![CDATA[ import com.liferay.portal.kernel.util.GetterUtil; 
-				import com.liferay.portal.kernel.workflow.WorkflowConstants; import com.liferay.portal.service.UserLocalServiceUtil; 
-				import com.liferay.portal.model.Role; long companyId = GetterUtil.getLong((String)workflowContext.get(WorkflowConstants.CONTEXT_COMPANY_ID)); 
-				long userId = GetterUtil.getLong((String)workflowContext.get("CITY_PROFILE_OWNER")); 
-				roles = new ArrayList<Role>(); user = UserLocalServiceUtil.getUser(userId); 
-				println "WF->City Profile Finished. Notifying owner user " +user.getScreenName(); 
-				]]> </script> <script-language>groovy</script-language> </scripted-assignment -->
 		</assignments>
 		<task-timers>
 			<task-timer>
@@ -407,13 +401,13 @@
 					InternetAddress toAddress = new InternetAddress(
 							emailAddress);
 					StringBuffer body = new StringBuffer();
-					body.append("<p>Dear "+workflowContext.get("CITY_PROFILE_CONTACT_NAME_SURNAME")+",</p>");
-					body.append("<p>Your city profile fact sheet is now online! You can check it from your city profile management page.</p>");
-					body.append("<p>You can find your city profile management page here:</p>");  
+					body.append("<p>Dear City Profile contact person,</p>");
+					body.append("The Mayors Adapt team has finalised your city profile and published it online!</p>");
+					body.append("You can view it from your city profile management page here:</p>");
 					body.append("<a href=\""+workflowContext.get("CITY_PROFILE_SERVER_URL")+"/c/portal/accessCityProfileUserTask?token="+workflowContext.get("CITY_PROFILE_TOKEN")+"\" target=\"_blank\"><button>Management page for <b>"+workflowContext.get("CITY_PROFILE_CITY_NAME")+"</b> city profile</button></a>");
-					body.append("<p>Thank you for your collaboration creating the profile.</p>");
-					body.append("<p>If you are interested in sharing more information, have a look at our work on an online case studies – which have already helped cities being featured in articles and television programmes. You can find more information on the Mayors Adapt website: http://mayors-adapt.eu/materials/case-studies/</p>");
-					body.append("<p>For any questions, please don't hesitate to contact us at helpdesk@mayors-adapt.eu</p>");						
+					body.append("<p>Thank you for your collaboration!</p>");
+					body.append("<p>If you are interested in sharing more information, have a look at our case studies. These have already helped cities gain publicity such as being featured in articles or television programmes. You can find more information on the Mayors Adapt website: http://mayors-adapt.eu/materials/case-studies/.</p>");
+					body.append("<p>For any questions, please don't hesitate to contact us at helpdesk@mayors-adapt.eu.</p>");						
 					String subject = "Mayors Adapt: your city profile has been approved";
 					MailMessage mailMessage = new MailMessage();
 					mailMessage.setTo(toAddress);
