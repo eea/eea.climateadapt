@@ -24,8 +24,8 @@ $menuborder: #d2df92;
 $menuhighcolor: #353f02;
 $menuhighbg: #e9efc9;
 
-$breadcrumbcolor: #A5BF26;
-$breadcrumbbg: #005F93;
+$breadcrumbcolor: #353f02;
+$breadcrumbbg: #e9efc9;
 
 $font: normal 12px Tahoma,serif;
 
@@ -102,7 +102,7 @@ $font: normal 12px Tahoma,serif;
 	}
 	
 	.portlet-borderless-container {
-    	padding: 0px 46px 0px 46px;
+    	/*padding: 0px 46px 0px 46px;*/
     }
     
     select {
