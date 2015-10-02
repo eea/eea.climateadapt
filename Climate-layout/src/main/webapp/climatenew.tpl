@@ -1,10 +1,7 @@
 <div class="climatenew" id="main-content" role="main">
 	<div class="portlet-layout row-fluid">
-		<div class="portlet-column portlet-column-only span9" id="column-1">
+		<div class="portlet-column portlet-column-only span12" id="column-1">
 			$processor.processColumn("column-1", "portlet-column-content portlet-column-content-only")
-		</div>
-		<div class="portlet-column portlet-column-only span3" id="column-2">
-			$processor.processColumn("column-2", "portlet-column-content portlet-column-content-only")
 		</div>
 	</div>
 

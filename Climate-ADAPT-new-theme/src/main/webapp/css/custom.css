@@ -102,7 +102,7 @@ $font: normal 12px Tahoma,serif;
 	}
 	
 	.portlet-borderless-container {
-    	/*padding: 0px 46px 0px 46px;*/
+    /*padding: 0px 46px 0px 46px;*/
     }
     
     select {
@@ -392,10 +392,10 @@ $font: normal 12px Tahoma,serif;
 	#breadcrumbs {
 		margin-bottom: 1px;
 		.breadcrumb {
-		    line-height: 40px;
+			font-size: $font;
+		    /*line-height: 40px;*/
 			color: $breadcrumbcolor;
 			background: $breadcrumbbg;
-      		font-size: medium;
       		margin-bottom: 0;
 		}
 	}
@@ -579,6 +579,7 @@ $font: normal 12px Tahoma,serif;
 			background: rgba(0, 0, 0, 0.8);
 
 			li {
+				margin-left: 10px;
 				a, span {
 					color: #FFF;
 				}
