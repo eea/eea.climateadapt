@@ -2755,12 +2755,12 @@ text and the class mapviewer to the MapViewerPortlet.
 
 .dropDownMenu,
 .dropDownMenu ul {
-
   list-style: none;
   margin: 0;
   padding: 0; }
 
 .dropDownMenu li {
+  padding:0px 20px 0px 20px;
   position: relative; 
   line-height:16px;}
 
@@ -2812,5 +2812,29 @@ text and the class mapviewer to the MapViewerPortlet.
 
 .dropDownMenu > li > ul > li:hover > ul {
   display: block; }
+  
+.site-breadcrumbs {
+  margin:0px;
+  padding:0px;
+}
+
+.site-breadcrumbs li {
+  background-color: #d2df92;
+}
+
+.site-breadcrumbs a {
+  color:black;
+  background-color: d2df92;
+}
+
+.aui .breadcrumb {
+    background-color: #d2df92;
+    padding: 3px 15px 2px;
+    margin: 0;
+    top: 0;
+    padding-top: 0px;
+    padding-bottom: 0px;
+    margin-bottom: 0px;
+    }
 
 /************************************************ END of Mayors ADAPT General Styles ********************************/
