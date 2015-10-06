@@ -98,7 +98,7 @@ $theme.include($body_top_include)
                  </ul>
             </div>
 	</footer>
-#else
+#else 
 	<footer id="footer" role="contentinfo">
 		        <div style="margin-left:70px;margin-top:15px;display:block;text-align:center">
 			<a href="http://www.baltadapt.eu/" target="_blank"><img src="/ace-theme/images/logo_balt_adapt.jpg" alt="Baltadapt logo" style="margin-bottom: 3px" /></a>
