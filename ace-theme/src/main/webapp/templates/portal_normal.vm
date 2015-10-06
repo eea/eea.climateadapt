@@ -42,24 +42,14 @@ $theme.include($body_top_include)
 				</a>
 			</h1>	
     	<div id="heading">
-	     <div id="header-menu">
+    	     <div id="header-menu">
                          <ul>
 					#if(!$is_signed_in)
 						<li id="signin"><a href="$sign_in_url" id="sign-in" rel="nofollow">$sign_in_text</a></li>
 					#end
-					#if($is_signed_in && $user.getScreenName()!="cityprofilecontact")
-						<li id="maintain"><a href="/maintain">Maintain</a></li>
-					#end
-                    <li id="glossary"><a href="/glossary">Glossary</a></li>
-					<li id="contact"><a href="/contact">Contact</a></li>
-					<li id="sitemap"><a href="/sitemap">Sitemap</a></li>
-                    <li id="legal-notice"><a href="http://ec.europa.eu/geninfo/legal_notices_en.htm">Legal notice</a></li>
-					<li id="about"><a href="/about">About</a></li>
-                                        <li id="help"><a href="/help">Help</a></li>
-                       </ul>
-            </div>
-             
-                <div id="searchbox">
+					</ul>
+    		</div>
+	            <div id="searchbox">
             	<p id="search-title">Search the website</p>
             	   <span>$theme.journalContentSearch()</span>
     	        </div>
@@ -97,6 +87,16 @@ $theme.include($body_top_include)
                         <a href="http://ec.europa.eu/" target="_blank"><img src="/ace-theme/images/logo_eu.jpg" alt="European Commission logo" style="margin-bottom: 3px" /><div>European Commission</div></a>
 			<a href="http://www.eea.europa.eu/" target="_blank"><img src="/ace-theme/images/logo_eea.png" style="width: 52px; margin-top: 4px" alt="EEA logo" /><div>European Environment Agency</div></a>
                         </div>
+   	     <div>
+                 <ul>
+                    <li id="glossary"><a href="/glossary">Glossary</a></li>
+					<li id="contact"><a href="/contact">Contact</a></li>
+					<li id="sitemap"><a href="/sitemap">Sitemap</a></li>
+                    <li id="legal-notice"><a href="http://ec.europa.eu/geninfo/legal_notices_en.htm">Legal notice</a></li>
+					<li id="about"><a href="/about">About</a></li>
+                                        <li id="help"><a href="/help">Help</a></li>
+                 </ul>
+            </div>
 	</footer>
 #else
 	<footer id="footer" role="contentinfo">
@@ -106,6 +106,17 @@ $theme.include($body_top_include)
 			<a href="http://www.eea.europa.eu/" target="_blank"><img src="/ace-theme/images/logo_eea.png" style="width: 52px; margin-top: 4px" alt="EEA logo" /><div>European Environment Agency</div></a>
 			<a href="http://eu.baltic.net/" target="_blank"><img src="/ace-theme/images/logo_baltic_sea_programme.png" alt="Baltic Sea Region Programme logo" style="margin-bottom: 3px" /></a>
                         </div>
+   	     <div style="float:right;" >
+                 <ul>
+                    <li id="glossary"><a href="/glossary">Glossary</a></li>
+					<li id="contact"><a href="/contact">Contact</a></li>
+					<li id="sitemap"><a href="/sitemap">Sitemap</a></li>
+                    <li id="legal-notice"><a href="http://ec.europa.eu/geninfo/legal_notices_en.htm">Legal notice</a></li>
+					<li id="about"><a href="/about">About</a></li>
+                                        <li id="help"><a href="/help">Help</a></li>
+                 </ul>
+            </div>
+                        
 	</footer>
 #end
 
