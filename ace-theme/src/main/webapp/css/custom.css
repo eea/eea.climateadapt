@@ -2746,6 +2746,71 @@ text and the class mapviewer to the MapViewerPortlet.
 #content .ace_layout_col_1_2 .menu-urban li a.active { color: #a5bf26; }
 
 
+/************************************************ BEGIN of fMayors ADAPT General Styles ********************************/
+.menuBackground {
+  background: #a5bf26; }
 
+.dropDownMenu a {
+  color: #a5bf26; }
 
+.dropDownMenu,
+.dropDownMenu ul {
 
+  list-style: none;
+  margin: 0;
+  padding: 0; }
+
+.dropDownMenu li {
+  position: relative; 
+  line-height:16px;}
+
+.dropDownMenu a {
+  color: black;
+  padding: 10px 20px;
+  display: block;
+  text-decoration: none; }
+
+.dropDownMenu a:hover {
+  background: #d2df92;
+  color: black; }
+
+/* Level 1 Drop Down Menu */
+.dropDownMenu > li {
+  display: inline-block;
+  vertical-align: top;
+  margin-left: -4px;
+  }
+
+.dropDownMenu > li:first-child {
+  margin-left: 0; }
+
+/* Level 2 */
+.dropDownMenu > li > ul {
+  text-align: left;
+  width: 250px;
+  display: none;
+  background: #d2df92;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  z-index: 9999999;
+   }
+
+.dropDownMenu > li:hover > ul {
+  display: block; }
+
+/* Level 3 */
+.dropDownMenu > li > ul > li > ul {
+  width: 250px;
+  text-align: left;
+  display: none;
+  background: #d2df92;
+  position: absolute;
+  left: 100%;
+  top: 0;
+  z-index: 9999999; }
+
+.dropDownMenu > li > ul > li:hover > ul {
+  display: block; }
+
+/************************************************ END of Mayors ADAPT General Styles ********************************/
