@@ -2819,16 +2819,16 @@ text and the class mapviewer to the MapViewerPortlet.
 }
 
 .site-breadcrumbs li {
-  background-color: #d2df92;
+  background-color: #E9ECC9;
 }
 
 .site-breadcrumbs a {
   color:black;
-  background-color: d2df92;
+  background-color: #E9ECC9;
 }
 
 .aui .breadcrumb {
-    background-color: #d2df92;
+    background-color: #E9ECC9;
     padding: 3px 15px 2px;
     margin: 0;
     top: 0;
