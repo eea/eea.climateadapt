@@ -569,8 +569,8 @@ if (endyear != null)
 				if(aceItem!=null){
 					result.setName(aceItem.getName());
 					result.setYear(aceItem.getYear());
+					result.setShortdescription(aceItem.getDescription());
 				}
-				result.setShortdescription(aceItem.getDescription());
 			}
 			
 		}
