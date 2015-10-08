@@ -552,8 +552,9 @@ if (endyear != null)
 		<%						
 		List<AceItemSearchResult> results = (List<AceItemSearchResult>)pageContext.getAttribute("groupedResults");
 				
-		
+		System.out.println();
 		for (AceItemSearchResult result : results) {
+			
 			String storedAtBasic = "ace_measure_id=";
 			String storedAt = result.getStoredAt();
 			String measureId = storedAt.substring(storedAt.indexOf('=') + 1);			
@@ -563,8 +564,12 @@ if (endyear != null)
 				String filteredStoredAt = storedAtBasic+Long.toString(filteredMeasureId);
 				result.setStoredAt(filteredStoredAt);
 				AceItem aceItem = AceItemLocalServiceUtil.getAceItemByStoredAt(filteredStoredAt);
-				result.setName(aceItem.getName());
-				result.setYear(aceItem.getYear());
+				System.out.println("filteredStoredAt:"+filteredStoredAt);
+				System.out.println("measureId:"+measureId);
+				if(aceItem!=null){
+					result.setName(aceItem.getName());
+					result.setYear(aceItem.getYear());
+				}
 				result.setShortdescription(aceItem.getDescription());
 			}
 			
