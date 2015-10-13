@@ -564,12 +564,14 @@ if (endyear != null)
 				String filteredStoredAt = storedAtBasic+Long.toString(filteredMeasureId);
 				result.setStoredAt(filteredStoredAt);
 				AceItem aceItem = AceItemLocalServiceUtil.getAceItemByStoredAt(filteredStoredAt);
-				System.out.println("filteredStoredAt:"+filteredStoredAt);
-				System.out.println("measureId:"+measureId);
 				if(aceItem!=null){
 					result.setName(aceItem.getName());
 					result.setYear(aceItem.getYear());
 					result.setShortdescription(aceItem.getDescription());
+				}
+				else {
+					System.out.println("StoredAt is Null for measureId:"+measureId);
+					
 				}
 			}
 			
