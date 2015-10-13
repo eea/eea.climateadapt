@@ -462,6 +462,7 @@ public class ACESearchEngine {
 			// rawQuery += " AND year:2013" ;
 
 			Query yearQuery = null;
+
 			if (formBean.getStartyear() != null
 					&& formBean.getEndyear() != null) {
 				int fromYear = 0;
@@ -474,8 +475,10 @@ public class ACESearchEngine {
 					toYear = Integer.parseInt(formBean.getEndyear()[0]);
 				} catch (NumberFormatException e) {
 				}
-				yearQuery = NumericRangeQuery.newIntRange("year", fromYear,
-						toYear, true, true);
+				if (fromYear > 0 && toYear > 0)
+					yearQuery = NumericRangeQuery.newIntRange(
+							ACEIndexConstant.IndexField.YEAR, fromYear, toYear,
+							true, true);
 			}
 			if (formBean.getFeaturedItem() != null
 					&& !formBean.getFeaturedItem().equals("")) {
@@ -576,6 +579,8 @@ public class ACESearchEngine {
 					// aceItemSearchResult.isIsNew());
 					// System.out.println("AceItemSearchResult feature is " +
 					// aceItemSearchResult.getFeature());
+//					System.out.println("AceItemSearchResult year is "
+//							+ aceItemSearchResult.getYear());
 					results.add(aceItemSearchResult);
 				}
 			}
