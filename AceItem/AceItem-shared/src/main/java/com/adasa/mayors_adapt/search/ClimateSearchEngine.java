@@ -159,12 +159,15 @@ public class ClimateSearchEngine extends IndexSearcher {
 							.getFieldable(Field.STATUS).stringValue()));
 					// aceItemSearchResult.setDeeplink("");
 					// aceItemSearchResult.setFeature("feature");
-					Date publishDate = new SimpleDateFormat("yyyyMMddHHmmSS")
+					Date approvalDate = new SimpleDateFormat("yyyyMMddHHmmSS")
 							.parse(document.getFieldable(Field.PUBLISH_DATE)
 									.stringValue());
+					Date createdDate = new SimpleDateFormat("yyyyMMddHHmmSS")
+					.parse(document.getFieldable(Field.PUBLISH_DATE)
+							.stringValue());
 					Calendar publishCal = Calendar.getInstance();
-					publishCal.setTime(publishDate);
-					aceItemSearchResult.setNew(isNew(publishCal));
+					publishCal.setTime(createdDate);
+					aceItemSearchResult.setNew(aceItemSearchResult.isNew(approvalDate, createdDate));
 					// if (document.getFieldable(Field.PUBLISH_DATE).sgetYear()
 					// !=
 					// null
@@ -190,15 +193,6 @@ public class ClimateSearchEngine extends IndexSearcher {
 			if (string != null)
 				return string;
 		return "";
-	}
-
-	private boolean isNew(Calendar publishCal) {
-		boolean isNew = false;
-		Calendar now = Calendar.getInstance();
-		publishCal.add(Calendar.MONTH, 3);
-		if (publishCal.after(now))
-			isNew = true;
-		return isNew;
 	}
 
 	public TopDocs getTopDocs(AceSearchFormBean formBean, String searchText,

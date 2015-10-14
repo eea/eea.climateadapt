@@ -130,9 +130,10 @@ public class AceItemSearchResult {
 
 	public boolean isNew(Date approvalDate, Date createdDate) {
 		boolean isNew = false;
-		if (approvalDate != null) {
+		Date date = createdDate;
+		if (date != null) {
 			Calendar publishCal = Calendar.getInstance();
-			publishCal.setTime(approvalDate);
+			publishCal.setTime(date);
 			Calendar now = Calendar.getInstance();
 			publishCal.add(Calendar.MONTH, 3);
 			if (publishCal.after(now))
