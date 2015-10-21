@@ -14,6 +14,8 @@ import java.util.logging.Logger;
 
 import javax.portlet.PortletRequest;
 import javax.portlet.PortletResponse;
+import javax.portlet.PortletURL;
+import javax.portlet.WindowState;
 
 import nl.wur.alterra.cgi.ace.model.AceItem;
 import nl.wur.alterra.cgi.ace.search.AceItemSearchResult;
@@ -63,8 +65,7 @@ public class ClimateSearchEngine extends IndexSearcher {
 	LiferayPortletRequest request;
 	LiferayPortletResponse response;
 
-	public ClimateSearchEngine(IndexReader r, PortletRequest request,
-			PortletResponse response) {
+	public ClimateSearchEngine(IndexReader r, PortletRequest request) {
 		super(r);
 		this.request = (LiferayPortletRequest) request;
 		this.response = (LiferayPortletResponse) response;
@@ -169,7 +170,8 @@ public class ClimateSearchEngine extends IndexSearcher {
 						}
 					} else {
 						storageType = "ARTICLE";
-						aceItemSearchResult.setStoredAt(getStoredAt(articleId));
+//						aceItemSearchResult.setStoredAt(getStoredAt(articleId));
+						aceItemSearchResult.setStoredAt(articleUrlTitle);
 					}
 					aceItemSearchResult.setStoragetype(storageType);
 					aceItemSearchResult.setRating(System.currentTimeMillis());
@@ -208,7 +210,7 @@ public class ClimateSearchEngine extends IndexSearcher {
 
 				}
 			} catch (Exception e) {
-				l.info(e.getMessage());
+				e.printStackTrace();
 			}
 		}
 		return results;
@@ -238,7 +240,6 @@ public class ClimateSearchEngine extends IndexSearcher {
 			LiferayPortletResponse liferayPortletResponse, AssetEntry assetEntry) {
 		ThemeDisplay themeDisplay = (ThemeDisplay) request
 				.getAttribute(WebKeys.THEME_DISPLAY);
-
 		long plid = 0;
 		try {
 			plid = PortalUtil.getPlidFromPortletId(
@@ -250,10 +251,17 @@ public class ClimateSearchEngine extends IndexSearcher {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		LiferayPortletURL viewURL = PortletURLFactoryUtil.create(
-				request.getHttpServletRequest(), "101", plid,
-				PortletRequest.RENDER_PHASE);
-		// PortletURL viewURL = liferayPortletResponse.createRenderURL("15");
+//		LiferayPortletURL viewURL = PortletURLFactoryUtil.create(
+//				request.getHttpServletRequest(), "101", plid,
+//				PortletRequest.RENDER_PHASE);
+//		 PortletURL viewURL = liferayPortletResponse.createRenderURL(101);
+		PortletURL viewURL=null;
+		try {
+			viewURL = assetEntry.getAssetRenderer().getURLView(response, WindowState.NORMAL);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
 		viewURL.setParameter("struts_action", "/asset_publisher/view_content");
 

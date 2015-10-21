@@ -36,7 +36,7 @@ public class ClimateSearchEngineTest {
 
 	protected void setUp() throws Exception {
 		searcher = new ClimateSearchEngine(
-				ClimateSearchEngine.getIndexReader(null),null,null);
+				ClimateSearchEngine.getIndexReader(null),null);
 		List<String> locations = Arrays
 				.asList(new String[] { "/AceItem-shared/src/main/resources/META-INF" });
 		// InitUtil.initWithSpring();

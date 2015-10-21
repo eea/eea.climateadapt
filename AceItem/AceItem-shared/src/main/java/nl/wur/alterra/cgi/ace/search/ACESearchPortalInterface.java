@@ -54,7 +54,7 @@ public class ACESearchPortalInterface {
 	 * @throws ACELuceneException
 	 *             hmm
 	 */
-	public List<String> handleSearchRequest(PortletRequest request,PortletResponse response,
+	public List<String> handleSearchRequest(PortletRequest request,
 			AceSearchFormBean formBean) throws Exception {
 
 		long groupId = ParamUtil.getLong(request, "groupId");
@@ -80,7 +80,7 @@ public class ACESearchPortalInterface {
 		ACESearchEngine searchEngine = new ACESearchEngine();
 
 		ClimateSearchEngine climateSearchEngine = new ClimateSearchEngine(
-				ClimateSearchEngine.getIndexReader(null), request, response);
+				ClimateSearchEngine.getIndexReader(null), request);
 
 		// no aceItemTypes requested or "All" choosen: search for all of them
 		if (isEmpty(formBean.getAceitemtype())
@@ -158,7 +158,7 @@ public class ACESearchPortalInterface {
 
 		AceSearchFormBean formBean = prepareACESearchFormBean(request);
 		request.setAttribute(SearchRequestParams.SEARCH_PARAMS, formBean);
-		return handleSearchRequest(request, response, formBean);
+		return handleSearchRequest(request, formBean);
 	}
 
 	/**
