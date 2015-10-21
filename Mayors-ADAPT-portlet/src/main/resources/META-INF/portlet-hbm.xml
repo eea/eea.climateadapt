@@ -3,5 +3,4 @@
 
 <hibernate-mapping default-lazy="false" auto-import="false">
 	<import class="eu.europa.eea.mayors_adapt.service.model.Data" />
-	<import class="eu.europa.eea.mayors_adapt.model.Data" />
 </hibernate-mapping>
