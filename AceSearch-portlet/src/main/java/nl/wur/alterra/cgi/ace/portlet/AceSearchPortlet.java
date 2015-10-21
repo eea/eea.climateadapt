@@ -117,7 +117,7 @@ public class AceSearchPortlet extends MVCPortlet {
             ACESearchPortalInterface searchEngine = new ACESearchPortalInterface();
 
             searchEngine.handleSearchRequest(request);
-
+ 
             PortalUtil.copyRequestParameters(request, response);
 
             SessionMessages.add(request, "acesearch-execution-success");
