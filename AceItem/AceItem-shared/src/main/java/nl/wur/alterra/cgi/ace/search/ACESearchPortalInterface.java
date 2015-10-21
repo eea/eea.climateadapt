@@ -153,8 +153,7 @@ public class ACESearchPortalInterface {
 		return keysAdded;
 	}
 
-	public List<String> handleSearchRequest(PortletRequest request,
-			PortletResponse response) throws Exception {
+	public List<String> handleSearchRequest(PortletRequest request) throws Exception {
 
 		AceSearchFormBean formBean = prepareACESearchFormBean(request);
 		request.setAttribute(SearchRequestParams.SEARCH_PARAMS, formBean);
@@ -176,7 +175,7 @@ public class ACESearchPortalInterface {
 			ResourceResponse response) throws Exception {
 		// System.out.println("handleAjaxSearchRequest start");
 		// PortletUtils.logParams(request);
-		List<String> resultKeys = handleSearchRequest(request,response);
+		List<String> resultKeys = handleSearchRequest(request);
 		List<AceItemSearchResult> results = (List<AceItemSearchResult>) request
 				.getAttribute(resultKeys.get(0));
 

@@ -116,7 +116,7 @@ public class AceSearchPortlet extends MVCPortlet {
             
             ACESearchPortalInterface searchEngine = new ACESearchPortalInterface();
 
-            searchEngine.handleSearchRequest(request,response);
+            searchEngine.handleSearchRequest(request);
 
             PortalUtil.copyRequestParameters(request, response);
 
