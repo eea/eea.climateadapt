@@ -51,7 +51,10 @@ $theme.include($body_top_include)
     		</div>
 	            <div id="searchbox">
             	<p id="search-title">Search the website</p>
-            	   <span>$theme.journalContentSearch()</span>
+					#set ($VOID = $velocityPortletPreferences.setValue('portletSetupShowBorders', 'false'))
+					#set ($my_portlet_id = "acesearchportlet_WAR_AceSearchportlet")
+            	   <span>$theme.runtime($my_portlet_id, "", $velocityPortletPreferences.toString())</span>
+					$velocityPortletPreferences.reset()
     	        </div>
 
 			<h2 class="page-title">
