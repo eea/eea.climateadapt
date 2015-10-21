@@ -500,6 +500,7 @@ public class ACESearchEngine {
 				booleanQuery.add(yearQuery, BooleanClause.Occur.MUST);
 			}
 
+			System.out.println("-------------------------------------------------------------");
 			System.out.println("Lucene raw query: " + rawQuery);
 			System.out.println("Lucene query: " + query.toString());
 			System.out.println("Lucene boolean query: " + booleanQuery);

@@ -46,7 +46,7 @@ if (showEditURL && assetRenderer.hasEditPermission(permissionChecker)) {
 	//Mayors ADAPT begin
 	boolean cityProfileContact = user.getScreenName().equalsIgnoreCase("cityprofilecontact");
 	if (!cityProfileContact)
-		showEditURL = false
+		showEditURL = false;
 	}
 	//Mayors ADAPT end
 %>

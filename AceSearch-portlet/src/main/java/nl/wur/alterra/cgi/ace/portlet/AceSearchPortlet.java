@@ -93,7 +93,7 @@ public class AceSearchPortlet extends MVCPortlet {
                     }*/
 
                     renderRequest.setAttribute(SearchRequestParams.SEARCH_PARAMS, formBean);
-                    searchEngine.handleSearchRequest(renderRequest, formBean);
+                    searchEngine.handleSearchRequest(renderRequest,renderResponse, formBean);
                 }
         } catch (Exception x) {
             x.printStackTrace();
@@ -116,7 +116,7 @@ public class AceSearchPortlet extends MVCPortlet {
             
             ACESearchPortalInterface searchEngine = new ACESearchPortalInterface();
 
-            searchEngine.handleSearchRequest(request);
+            searchEngine.handleSearchRequest(request,response);
 
             PortalUtil.copyRequestParameters(request, response);
 

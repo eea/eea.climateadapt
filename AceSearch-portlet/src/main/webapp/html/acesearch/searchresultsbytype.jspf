@@ -168,6 +168,9 @@ function displayJSONResults(unique, aceitemResults) {
 			{
 				year = " (" + year + ")";
 			}
+			
+			console.log("Storage Type "+aceitem.storagetype);
+			console.log("Stored At "+aceitem.storedAt);
 			// add name and description
             if ((aceitem.storedAt != "") && (aceitem.storagetype.substr(0, 3) == "URL")) {
                    resultlist += '<span class="bolder">&#187; ' + imgSrc + ' ' + imgNew +  ' <a href="/viewaceitem?aceitem_id=' +  aceitem.aceItemId  + '" >' + aceitem.name + year + ' </a></span> - ' + descriptionText ;
@@ -185,8 +188,8 @@ function displayJSONResults(unique, aceitemResults) {
                resultlist += ' - ' + descriptionText ;
 
            } else if (aceitem.storagetype.indexOf('ARTICLE')>0) {
-                   resultlist += '<span class="bolder">&#187; ' + imgSrc + ' ' + imgNew +  ' <a href="/-/' + aceitem.storedAt + '" >' + aceitem.name + year + '</a></span>&nbsp;';
                    resultlist += ' - ' + descriptionText ;
+                   resultlist += '<span class="bolder">&#187; ' + imgSrc + ' ' + imgNew +  ' <a href="' + aceitem.storedAt + '" >' + aceitem.name + year + '</a></span>&nbsp;';
 			} 
            else {
                    resultlist += '<span class="bolder">&#187; ' + imgSrc + ' ' + imgNew +  ' <a href="/viewaceitem?aceitem_id=' +  aceitem.aceItemId + '" >' + aceitem.name + year + ' </a></span> - ' + descriptionText ;
@@ -343,7 +346,7 @@ function displayJSONResults(unique, aceitemResults) {
 								test="${!empty wrappedSearchResult.storagetype && fn:startsWith(wrappedSearchResult.storagetype, 'ARTICLE')==true}">
 								<span class="bolder">&#187; ${featureImageToDisplay}
 									${newImageToDisplay} <a
-									href="<c:out value="/-/${wrappedSearchResult.storedAt}"/>">
+									href="<c:out value="${wrappedSearchResult.storedAt}"/>">
 										<c:out value="${wrappedSearchResult.name}" />
 										<c:out value="${year}" />
 								</a>

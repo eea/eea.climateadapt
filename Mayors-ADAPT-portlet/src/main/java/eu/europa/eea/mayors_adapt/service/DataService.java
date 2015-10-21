@@ -53,25 +53,6 @@ public interface DataService extends BaseService, InvokableService {
         throws java.lang.Throwable;
 
     @Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-    public java.util.TreeSet<java.lang.String> getDataTypes();
-
-    @Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-    public java.util.TreeSet<java.lang.String> getAdaptationSectors();
-
-    @Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-    public java.util.TreeSet<java.lang.String> getClimateImpacts();
-
-    @Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-    public java.util.TreeSet<java.lang.String> getAdaptationElements();
-
-    @Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-    public java.util.TreeSet<java.lang.String> getCountries();
-
-    @Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-    public com.liferay.portlet.dynamicdatamapping.model.DDMStructure getStructure()
-        throws com.liferay.portal.kernel.exception.SystemException;
-
-    @Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
     public java.util.TreeSet<java.lang.String> getOptions(
         java.lang.String fieldName);
 

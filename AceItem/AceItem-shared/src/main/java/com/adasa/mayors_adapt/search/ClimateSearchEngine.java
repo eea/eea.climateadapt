@@ -9,10 +9,11 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
-import java.util.Map;
 import java.util.ResourceBundle;
-import java.util.TreeMap;
 import java.util.logging.Logger;
+
+import javax.portlet.PortletRequest;
+import javax.portlet.PortletResponse;
 
 import nl.wur.alterra.cgi.ace.model.AceItem;
 import nl.wur.alterra.cgi.ace.search.AceItemSearchResult;
@@ -38,8 +39,20 @@ import org.apache.lucene.store.FSDirectory;
 
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.portlet.LiferayPortletRequest;
+import com.liferay.portal.kernel.portlet.LiferayPortletResponse;
+import com.liferay.portal.kernel.portlet.LiferayPortletURL;
 import com.liferay.portal.kernel.search.Field;
+import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.kernel.util.WebKeys;
 import com.liferay.portal.kernel.workflow.WorkflowConstants;
+import com.liferay.portal.theme.ThemeDisplay;
+import com.liferay.portal.util.PortalUtil;
+import com.liferay.portlet.PortletURLFactoryUtil;
+import com.liferay.portlet.asset.AssetRendererFactoryRegistryUtil;
+import com.liferay.portlet.asset.model.AssetEntry;
+import com.liferay.portlet.asset.model.AssetRenderer;
+import com.liferay.portlet.asset.model.AssetRendererFactory;
 import com.liferay.portlet.journal.model.JournalArticle;
 import com.liferay.portlet.journal.service.JournalArticleLocalServiceUtil;
 
@@ -47,9 +60,14 @@ public class ClimateSearchEngine extends IndexSearcher {
 
 	Logger l = Logger.getLogger(getClass().getName());
 	IndexSearcher searcher;
+	LiferayPortletRequest request;
+	LiferayPortletResponse response;
 
-	public ClimateSearchEngine(IndexReader r) {
+	public ClimateSearchEngine(IndexReader r, PortletRequest request,
+			PortletResponse response) {
 		super(r);
+		this.request = (LiferayPortletRequest) request;
+		this.response = (LiferayPortletResponse) response;
 		searcher = new IndexSearcher(r);
 	}
 
@@ -66,8 +84,11 @@ public class ClimateSearchEngine extends IndexSearcher {
 			AceSearchFormBean formBean, String aceItemType, long structureId)
 			throws IOException, PortalException, SystemException,
 			ParseException, java.text.ParseException {
-		System.out.println("Searching for structures:" + structureId);
-		System.out.println("Search Bean :" + formBean.toString(formBean));
+		System.out
+				.println("-------------------------------------------------------------");
+		System.out.println("Searching for structure:" + structureId);
+		System.out.println("AceItem type: " + aceItemType);
+		// formBean.setAceitemtype(null);
 		ScoreDoc[] hits = this.getTopDocs(formBean, formBean.getAnyOfThese(),
 				aceItemType, structureId).scoreDocs;
 
@@ -142,11 +163,15 @@ public class ClimateSearchEngine extends IndexSearcher {
 					String storageType = null;
 					if (classTypeId != null
 							&& Long.valueOf(classTypeId) == structureId) {
-						storageType = "CITYPROFILE";
-					} else
+						{
+							storageType = "CITYPROFILE";
+							aceItemSearchResult.setStoredAt(articleUrlTitle);
+						}
+					} else {
 						storageType = "ARTICLE";
+						aceItemSearchResult.setStoredAt(getStoredAt(articleId));
+					}
 					aceItemSearchResult.setStoragetype(storageType);
-					aceItemSearchResult.setStoredAt(articleUrlTitle);
 					aceItemSearchResult.setRating(System.currentTimeMillis());
 					aceItemSearchResult.setName(document.get(Field.TITLE));
 					String description = nullSafeString(new String[] {
@@ -163,11 +188,12 @@ public class ClimateSearchEngine extends IndexSearcher {
 							.parse(document.getFieldable(Field.PUBLISH_DATE)
 									.stringValue());
 					Date createdDate = new SimpleDateFormat("yyyyMMddHHmmSS")
-					.parse(document.getFieldable(Field.PUBLISH_DATE)
-							.stringValue());
+							.parse(document.getFieldable(Field.PUBLISH_DATE)
+									.stringValue());
 					Calendar publishCal = Calendar.getInstance();
 					publishCal.setTime(createdDate);
-					aceItemSearchResult.setNew(aceItemSearchResult.isNew(approvalDate, createdDate));
+					aceItemSearchResult.setNew(aceItemSearchResult.isNew(
+							approvalDate, createdDate));
 					// if (document.getFieldable(Field.PUBLISH_DATE).sgetYear()
 					// !=
 					// null
@@ -186,6 +212,70 @@ public class ClimateSearchEngine extends IndexSearcher {
 			}
 		}
 		return results;
+	}
+
+	private String getStoredAt(long articleId) {
+		AssetEntry assetEntry;
+		String viewUrl = "";
+		try {
+			JournalArticle article = JournalArticleLocalServiceUtil
+					.getArticle(articleId);
+			assetEntry = AssetRendererFactoryRegistryUtil
+					.getAssetRendererFactoryByClassName(
+							JournalArticle.class.getName()).getAssetEntry(
+							JournalArticle.class.getName(),
+							article.getResourcePrimKey());
+			viewUrl = getAssetViewURL(request, response, assetEntry);
+		} catch (PortalException e) {
+			e.printStackTrace();
+		} catch (SystemException e) {
+			e.printStackTrace();
+		}
+		return viewUrl;
+	}
+
+	public String getAssetViewURL(LiferayPortletRequest liferayPortletRequest,
+			LiferayPortletResponse liferayPortletResponse, AssetEntry assetEntry) {
+		ThemeDisplay themeDisplay = (ThemeDisplay) request
+				.getAttribute(WebKeys.THEME_DISPLAY);
+
+		long plid = 0;
+		try {
+			plid = PortalUtil.getPlidFromPortletId(
+					themeDisplay.getScopeGroupId(), "101");
+		} catch (PortalException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SystemException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		LiferayPortletURL viewURL = PortletURLFactoryUtil.create(
+				request.getHttpServletRequest(), "101", plid,
+				PortletRequest.RENDER_PHASE);
+		// PortletURL viewURL = liferayPortletResponse.createRenderURL("15");
+
+		viewURL.setParameter("struts_action", "/asset_publisher/view_content");
+
+		String currentURL = PortalUtil.getCurrentURL(liferayPortletRequest);
+
+		// viewURL.setParameter("redirect", currentURL);
+
+		viewURL.setParameter("assetEntryId",
+				String.valueOf(assetEntry.getEntryId()));
+
+		AssetRendererFactory assetRendererFactory = assetEntry
+				.getAssetRendererFactory();
+
+		AssetRenderer assetRenderer = assetEntry.getAssetRenderer();
+
+		viewURL.setParameter("type", assetRendererFactory.getType());
+
+		if (Validator.isNotNull(assetRenderer.getUrlTitle())) {
+			viewURL.setParameter("urlTitle", assetRenderer.getUrlTitle());
+		}
+
+		return viewURL.toString();
 	}
 
 	private String nullSafeString(String[] strings) {
@@ -275,7 +365,7 @@ public class ClimateSearchEngine extends IndexSearcher {
 		// handle sectors
 		//
 		BooleanQuery sectorsQuery = new BooleanQuery();
-		String sectorField = "b_m_sectors";
+		String sectorField = "b_m_sector";
 		String[] sectors = formBean.getSector();
 		if ((sectors != null) && (sectors.length > 0)) {
 			for (String sector : sectors) {
@@ -326,7 +416,7 @@ public class ClimateSearchEngine extends IndexSearcher {
 		String[] impacts = formBean.getImpact();
 		if ((impacts != null) && (impacts.length > 0)) {
 			for (String impact : impacts) {
-				impact = labels.getString("acesearch-climateimpacts-lbl-"
+				impact = labels.getString("aceitem-climateimpacts-lbl-"
 						+ impact);
 				impactsQuery.add(new TermQuery(new Term("ddm/" + structureId
 						+ "/" + impactField + "_en_GB", impact)),
@@ -340,7 +430,7 @@ public class ClimateSearchEngine extends IndexSearcher {
 
 		Query yearQuery = null;
 		if (formBean.getStartyear() != null && formBean.getEndyear() != null) {
-			int fromYear = 1970;
+			int fromYear = 0;
 			int toYear = Calendar.getInstance().get(Calendar.YEAR);
 			try {
 				fromYear = Integer.parseInt(formBean.getStartyear()[0]);
@@ -351,11 +441,12 @@ public class ClimateSearchEngine extends IndexSearcher {
 			} catch (NumberFormatException e) {
 			}
 			String yearField = "displayDate";
-			booleanQuery.add(
-					new TermRangeQuery(yearField, String.valueOf(fromYear)
-							+ "0101000000", String.valueOf(toYear)
-							+ "3112235900", true, true),
-					BooleanClause.Occur.MUST);
+			if (fromYear > 0 && toYear > 0)
+				booleanQuery.add(
+						new TermRangeQuery(yearField, String.valueOf(fromYear)
+								+ "0101000000", String.valueOf(toYear)
+								+ "3112235900", true, true),
+						BooleanClause.Occur.MUST);
 		}
 
 		//
@@ -386,10 +477,13 @@ public class ClimateSearchEngine extends IndexSearcher {
 			booleanQuery.add(countriesQuery, BooleanClause.Occur.MUST);
 		}
 
-		TopDocs searchResults = searcher.search(booleanQuery, 99);
 		System.out.println("Search Text: " + searchText);
 		System.out.println("Lucene boolean query: " + booleanQuery);
 		System.out.println("Search Bean: " + formBean.toString(formBean));
+
+		TopDocs searchResults = searcher.search(booleanQuery, 99);
+
+		System.out.println("Results Number: " + searchResults.totalHits);
 
 		searcher.close();
 		return searchResults;

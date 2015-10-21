@@ -36,7 +36,7 @@ public class ClimateSearchEngineTest {
 
 	protected void setUp() throws Exception {
 		searcher = new ClimateSearchEngine(
-				ClimateSearchEngine.getIndexReader(null));
+				ClimateSearchEngine.getIndexReader(null),null,null);
 		List<String> locations = Arrays
 				.asList(new String[] { "/AceItem-shared/src/main/resources/META-INF" });
 		// InitUtil.initWithSpring();
@@ -48,9 +48,9 @@ public class ClimateSearchEngineTest {
 		System.out.println("Start:" + System.currentTimeMillis());
 		AceSearchFormBean formBean = new AceSearchFormBean();
 		// formBean.setCountries(new String[]{"FR"});
-		formBean.setAnyOfThese("test");
-		String type = "CITYPROFILE";
-//		String type = "ARTICLE";
+		formBean.setAnyOfThese("u");
+//		String type = "CITYPROFILE";
+		String type = "ARTICLE";
 //		 formBean.setAceitemtype(new String[]{"CITYPROFILE","ARTICLE"});
 //		 formBean.setCountries(new String[]{"AL","ES"});
 //		formBean.setAceitemtype(new String[] { "ARTICLE" });

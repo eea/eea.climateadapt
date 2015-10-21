@@ -11,6 +11,7 @@ import java.util.NoSuchElementException;
 import javax.portlet.ClientDataRequest;
 import javax.portlet.PortletPreferences;
 import javax.portlet.PortletRequest;
+import javax.portlet.PortletResponse;
 import javax.portlet.ResourceRequest;
 import javax.portlet.ResourceResponse;
 
@@ -53,7 +54,7 @@ public class ACESearchPortalInterface {
 	 * @throws ACELuceneException
 	 *             hmm
 	 */
-	public List<String> handleSearchRequest(PortletRequest request,
+	public List<String> handleSearchRequest(PortletRequest request,PortletResponse response,
 			AceSearchFormBean formBean) throws Exception {
 
 		long groupId = ParamUtil.getLong(request, "groupId");
@@ -79,7 +80,7 @@ public class ACESearchPortalInterface {
 		ACESearchEngine searchEngine = new ACESearchEngine();
 
 		ClimateSearchEngine climateSearchEngine = new ClimateSearchEngine(
-				ClimateSearchEngine.getIndexReader(null));
+				ClimateSearchEngine.getIndexReader(null), request, response);
 
 		// no aceItemTypes requested or "All" choosen: search for all of them
 		if (isEmpty(formBean.getAceitemtype())
@@ -118,7 +119,8 @@ public class ACESearchPortalInterface {
 		else {
 			for (String aceItemType : formBean.getAceitemtype()) {
 				List<AceItemSearchResult> results = null;
-				System.out.println("Searching for selected type: "+aceItemType);
+				System.out.println("Searching for selected type: "
+						+ aceItemType);
 
 				if (aceItemType.equals("CITYPROFILE")
 						|| aceItemType.equals("ARTICLE"))
@@ -151,12 +153,12 @@ public class ACESearchPortalInterface {
 		return keysAdded;
 	}
 
-	public List<String> handleSearchRequest(PortletRequest request)
-			throws Exception {
+	public List<String> handleSearchRequest(PortletRequest request,
+			PortletResponse response) throws Exception {
 
 		AceSearchFormBean formBean = prepareACESearchFormBean(request);
 		request.setAttribute(SearchRequestParams.SEARCH_PARAMS, formBean);
-		return handleSearchRequest(request, formBean);
+		return handleSearchRequest(request, response, formBean);
 	}
 
 	/**
@@ -174,7 +176,7 @@ public class ACESearchPortalInterface {
 			ResourceResponse response) throws Exception {
 		// System.out.println("handleAjaxSearchRequest start");
 		// PortletUtils.logParams(request);
-		List<String> resultKeys = handleSearchRequest(request);
+		List<String> resultKeys = handleSearchRequest(request,response);
 		List<AceItemSearchResult> results = (List<AceItemSearchResult>) request
 				.getAttribute(resultKeys.get(0));
 

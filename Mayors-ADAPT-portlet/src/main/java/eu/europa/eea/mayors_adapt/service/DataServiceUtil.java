@@ -51,31 +51,6 @@ public class DataServiceUtil {
         return getService().invokeMethod(name, parameterTypes, arguments);
     }
 
-    public static java.util.TreeSet<java.lang.String> getDataTypes() {
-        return getService().getDataTypes();
-    }
-
-    public static java.util.TreeSet<java.lang.String> getAdaptationSectors() {
-        return getService().getAdaptationSectors();
-    }
-
-    public static java.util.TreeSet<java.lang.String> getClimateImpacts() {
-        return getService().getClimateImpacts();
-    }
-
-    public static java.util.TreeSet<java.lang.String> getAdaptationElements() {
-        return getService().getAdaptationElements();
-    }
-
-    public static java.util.TreeSet<java.lang.String> getCountries() {
-        return getService().getCountries();
-    }
-
-    public static com.liferay.portlet.dynamicdatamapping.model.DDMStructure getStructure()
-        throws com.liferay.portal.kernel.exception.SystemException {
-        return getService().getStructure();
-    }
-
     public static java.util.TreeSet<java.lang.String> getOptions(
         java.lang.String fieldName) {
         return getService().getOptions(fieldName);

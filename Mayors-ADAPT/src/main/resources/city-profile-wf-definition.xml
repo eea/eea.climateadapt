@@ -333,9 +333,9 @@
 					InternetAddress toAddress = new InternetAddress(
 							emailAddress);
 					StringBuffer body = new StringBuffer();
-					body.append("<p>Dear "+workflowContext.get("CITY_PROFILE_CONTACT_NAME_SURNAME")+",</p>");
-					body.append("<p>Thank you for filling in your city profile fact sheet for "+workflowContext.get("CITY_PROFILE_CITY_NAME")+". Mayors Adapt team will now review your input. We will get in touch with you in case any relevant information is still missing. Once we have jointly finalised the fact sheet and you have approved the content, we will publish it online.</p>");
-					body.append("<p>For any questions, please don't hesitate to contact us at helpdesk@mayors-adapt.eu</p>");						
+					body.append("<p>Dear City Profile contact person,</p>");
+					body.append("<p>Thank you for filling in your city profile fact sheet for "+workflowContext.get("CITY_PROFILE_CITY_NAME")+". The Mayors Adapt team is now reviewing your input and will get in touch with you if any relevant information is still missing. Once we have jointly finalised the profile and you have approved the content, we will publish it online.</p>");
+					body.append("<p>For any questions, please don't hesitate to contact us at helpdesk@mayors-adapt.eu.</p>");						
 					String subject = "Mayors Adapt: your city profile has been finished";
 					MailMessage mailMessage = new MailMessage();
 					mailMessage.setTo(toAddress);
@@ -403,8 +403,8 @@
 					StringBuffer body = new StringBuffer();
 					body.append("<p>Dear City Profile contact person,</p>");
 					body.append("The Mayors Adapt team has finalised your city profile and published it online!</p>");
-					body.append("You can view it from your city profile management page here:</p>");
-					body.append("<a href=\""+workflowContext.get("CITY_PROFILE_SERVER_URL")+"/c/portal/accessCityProfileUserTask?token="+workflowContext.get("CITY_PROFILE_TOKEN")+"\" target=\"_blank\"><button>Management page for <b>"+workflowContext.get("CITY_PROFILE_CITY_NAME")+"</b> city profile</button></a>");
+					body.append("<p>You can view it from your city profile management page here:</p>");
+					body.append("<p><a href=\""+workflowContext.get("CITY_PROFILE_SERVER_URL")+"/c/portal/accessCityProfileUserTask?token="+workflowContext.get("CITY_PROFILE_TOKEN")+"\" target=\"_blank\"><button>Management page for <b>"+workflowContext.get("CITY_PROFILE_CITY_NAME")+"</b> city profile</button></a></p>");
 					body.append("<p>Thank you for your collaboration!</p>");
 					body.append("<p>If you are interested in sharing more information, have a look at our case studies. These have already helped cities gain publicity such as being featured in articles or television programmes. You can find more information on the Mayors Adapt website: http://mayors-adapt.eu/materials/case-studies/.</p>");
 					body.append("<p>For any questions, please don't hesitate to contact us at helpdesk@mayors-adapt.eu.</p>");						

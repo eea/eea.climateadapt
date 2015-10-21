@@ -18,18 +18,6 @@ public class DataServiceClp implements DataService {
     private String[] _methodParameterTypes4;
     private String _methodName5;
     private String[] _methodParameterTypes5;
-    private String _methodName6;
-    private String[] _methodParameterTypes6;
-    private String _methodName7;
-    private String[] _methodParameterTypes7;
-    private String _methodName8;
-    private String[] _methodParameterTypes8;
-    private String _methodName9;
-    private String[] _methodParameterTypes9;
-    private String _methodName10;
-    private String[] _methodParameterTypes10;
-    private String _methodName11;
-    private String[] _methodParameterTypes11;
 
     public DataServiceClp(InvokableService invokableService) {
         _invokableService = invokableService;
@@ -42,41 +30,17 @@ public class DataServiceClp implements DataService {
 
         _methodParameterTypes1 = new String[] { "java.lang.String" };
 
-        _methodName3 = "getDataTypes";
+        _methodName3 = "getOptions";
 
-        _methodParameterTypes3 = new String[] {  };
+        _methodParameterTypes3 = new String[] { "java.lang.String" };
 
-        _methodName4 = "getAdaptationSectors";
+        _methodName4 = "getFieldsNames";
 
         _methodParameterTypes4 = new String[] {  };
 
-        _methodName5 = "getClimateImpacts";
+        _methodName5 = "getCitiesByCriteria";
 
-        _methodParameterTypes5 = new String[] {  };
-
-        _methodName6 = "getAdaptationElements";
-
-        _methodParameterTypes6 = new String[] {  };
-
-        _methodName7 = "getCountries";
-
-        _methodParameterTypes7 = new String[] {  };
-
-        _methodName8 = "getStructure";
-
-        _methodParameterTypes8 = new String[] {  };
-
-        _methodName9 = "getOptions";
-
-        _methodParameterTypes9 = new String[] { "java.lang.String" };
-
-        _methodName10 = "getFieldsNames";
-
-        _methodParameterTypes10 = new String[] {  };
-
-        _methodName11 = "getCitiesByCriteria";
-
-        _methodParameterTypes11 = new String[] {
+        _methodParameterTypes5 = new String[] {
                 "java.util.List", "java.util.List", "java.util.List",
                 "java.util.List"
             };
@@ -129,144 +93,13 @@ public class DataServiceClp implements DataService {
     }
 
     @Override
-    public java.util.TreeSet<java.lang.String> getDataTypes() {
-        Object returnObj = null;
-
-        try {
-            returnObj = _invokableService.invokeMethod(_methodName3,
-                    _methodParameterTypes3, new Object[] {  });
-        } catch (Throwable t) {
-            t = ClpSerializer.translateThrowable(t);
-
-            if (t instanceof RuntimeException) {
-                throw (RuntimeException) t;
-            } else {
-                throw new RuntimeException(t.getClass().getName() +
-                    " is not a valid exception");
-            }
-        }
-
-        return (java.util.TreeSet<java.lang.String>) ClpSerializer.translateOutput(returnObj);
-    }
-
-    @Override
-    public java.util.TreeSet<java.lang.String> getAdaptationSectors() {
-        Object returnObj = null;
-
-        try {
-            returnObj = _invokableService.invokeMethod(_methodName4,
-                    _methodParameterTypes4, new Object[] {  });
-        } catch (Throwable t) {
-            t = ClpSerializer.translateThrowable(t);
-
-            if (t instanceof RuntimeException) {
-                throw (RuntimeException) t;
-            } else {
-                throw new RuntimeException(t.getClass().getName() +
-                    " is not a valid exception");
-            }
-        }
-
-        return (java.util.TreeSet<java.lang.String>) ClpSerializer.translateOutput(returnObj);
-    }
-
-    @Override
-    public java.util.TreeSet<java.lang.String> getClimateImpacts() {
-        Object returnObj = null;
-
-        try {
-            returnObj = _invokableService.invokeMethod(_methodName5,
-                    _methodParameterTypes5, new Object[] {  });
-        } catch (Throwable t) {
-            t = ClpSerializer.translateThrowable(t);
-
-            if (t instanceof RuntimeException) {
-                throw (RuntimeException) t;
-            } else {
-                throw new RuntimeException(t.getClass().getName() +
-                    " is not a valid exception");
-            }
-        }
-
-        return (java.util.TreeSet<java.lang.String>) ClpSerializer.translateOutput(returnObj);
-    }
-
-    @Override
-    public java.util.TreeSet<java.lang.String> getAdaptationElements() {
-        Object returnObj = null;
-
-        try {
-            returnObj = _invokableService.invokeMethod(_methodName6,
-                    _methodParameterTypes6, new Object[] {  });
-        } catch (Throwable t) {
-            t = ClpSerializer.translateThrowable(t);
-
-            if (t instanceof RuntimeException) {
-                throw (RuntimeException) t;
-            } else {
-                throw new RuntimeException(t.getClass().getName() +
-                    " is not a valid exception");
-            }
-        }
-
-        return (java.util.TreeSet<java.lang.String>) ClpSerializer.translateOutput(returnObj);
-    }
-
-    @Override
-    public java.util.TreeSet<java.lang.String> getCountries() {
-        Object returnObj = null;
-
-        try {
-            returnObj = _invokableService.invokeMethod(_methodName7,
-                    _methodParameterTypes7, new Object[] {  });
-        } catch (Throwable t) {
-            t = ClpSerializer.translateThrowable(t);
-
-            if (t instanceof RuntimeException) {
-                throw (RuntimeException) t;
-            } else {
-                throw new RuntimeException(t.getClass().getName() +
-                    " is not a valid exception");
-            }
-        }
-
-        return (java.util.TreeSet<java.lang.String>) ClpSerializer.translateOutput(returnObj);
-    }
-
-    @Override
-    public com.liferay.portlet.dynamicdatamapping.model.DDMStructure getStructure()
-        throws com.liferay.portal.kernel.exception.SystemException {
-        Object returnObj = null;
-
-        try {
-            returnObj = _invokableService.invokeMethod(_methodName8,
-                    _methodParameterTypes8, new Object[] {  });
-        } catch (Throwable t) {
-            t = ClpSerializer.translateThrowable(t);
-
-            if (t instanceof com.liferay.portal.kernel.exception.SystemException) {
-                throw (com.liferay.portal.kernel.exception.SystemException) t;
-            }
-
-            if (t instanceof RuntimeException) {
-                throw (RuntimeException) t;
-            } else {
-                throw new RuntimeException(t.getClass().getName() +
-                    " is not a valid exception");
-            }
-        }
-
-        return (com.liferay.portlet.dynamicdatamapping.model.DDMStructure) ClpSerializer.translateOutput(returnObj);
-    }
-
-    @Override
     public java.util.TreeSet<java.lang.String> getOptions(
         java.lang.String fieldName) {
         Object returnObj = null;
 
         try {
-            returnObj = _invokableService.invokeMethod(_methodName9,
-                    _methodParameterTypes9,
+            returnObj = _invokableService.invokeMethod(_methodName3,
+                    _methodParameterTypes3,
                     new Object[] { ClpSerializer.translateInput(fieldName) });
         } catch (Throwable t) {
             t = ClpSerializer.translateThrowable(t);
@@ -287,8 +120,8 @@ public class DataServiceClp implements DataService {
         Object returnObj = null;
 
         try {
-            returnObj = _invokableService.invokeMethod(_methodName10,
-                    _methodParameterTypes10, new Object[] {  });
+            returnObj = _invokableService.invokeMethod(_methodName4,
+                    _methodParameterTypes4, new Object[] {  });
         } catch (Throwable t) {
             t = ClpSerializer.translateThrowable(t);
 
@@ -312,8 +145,8 @@ public class DataServiceClp implements DataService {
         Object returnObj = null;
 
         try {
-            returnObj = _invokableService.invokeMethod(_methodName11,
-                    _methodParameterTypes11,
+            returnObj = _invokableService.invokeMethod(_methodName5,
+                    _methodParameterTypes5,
                     new Object[] {
                         ClpSerializer.translateInput(countries),
                         

@@ -503,7 +503,7 @@ if (endyear != null)
 		<c:set var="groupedJSONResults" scope="page" value="${ARTICLE_JSONsearchResults}"/>
 		<c:set var="aceitemtype" scope="page" value="ARTICLE"/>
 		<c:set var="groupTitle" scope="page"><liferay-ui:message key="acesearch-datainfotype-lbl-ARTICLE" /></c:set>
-		<!-- %@ include file="searchresultsbytype.jspf" %-->
+		<%@ include file="searchresultsbytype.jspf" %>
 
         <c:set var="groupedResults" scope="page" value="${DOCUMENT_searchResults}"/>
 		<c:set var="groupedJSONResults" scope="page" value="${DOCUMENT_JSONsearchResults}"/>
@@ -552,31 +552,35 @@ if (endyear != null)
 		<%						
 		List<AceItemSearchResult> results = (List<AceItemSearchResult>)pageContext.getAttribute("groupedResults");
 				
-		System.out.println();
-		for (AceItemSearchResult result : results) {
+		if (results!= null) {for (AceItemSearchResult result : results) {
 			
 			String storedAtBasic = "ace_measure_id=";
 			String storedAt = result.getStoredAt();
-			String measureId = storedAt.substring(storedAt.indexOf('=') + 1);			
-			long filteredMeasureId = PortletUtils.filterAdaptationOptionIds(Long.parseLong(measureId));
+			if (storedAt!=null){
+				String measureId = storedAt.substring(storedAt.indexOf('=') + 1);			
+				long filteredMeasureId = PortletUtils.filterAdaptationOptionIds(Long.parseLong(measureId));
 			
-			if (filteredMeasureId != Long.parseLong(measureId)) {
-				String filteredStoredAt = storedAtBasic+Long.toString(filteredMeasureId);
-				result.setStoredAt(filteredStoredAt);
-				AceItem aceItem = AceItemLocalServiceUtil.getAceItemByStoredAt(filteredStoredAt);
-				if(aceItem!=null){
-					result.setName(aceItem.getName());
-					result.setYear(aceItem.getYear());
-					result.setShortdescription(aceItem.getDescription());
-				}
-				else {
-					System.out.println("StoredAt is Null for measureId:"+measureId);
-					
+				if (filteredMeasureId != Long.parseLong(measureId)) {
+					String filteredStoredAt = storedAtBasic+Long.toString(filteredMeasureId);
+					result.setStoredAt(filteredStoredAt);
+					AceItem aceItem = AceItemLocalServiceUtil.getAceItemByStoredAt(filteredStoredAt);
+					if(aceItem!=null){
+						result.setName(aceItem.getName());
+						result.setYear(aceItem.getYear());
+						result.setShortdescription(aceItem.getDescription());
+					}
+					else {
+						System.out.println("aceItem is Null for measureId:"+measureId);
+					}
 				}
 			}
+			else 
+				System.out.println("storedAt is Null for aceItem name: "+result.getName()+" id: "+result.getAceItemId());
 			
 		}
-		
+		}
+		else 
+			System.out.println("No results!");
 		pageContext.setAttribute("measureResults", results);				
 		pageContext.setAttribute("measureJSONResults", PortletUtils.getJSONResults(results));
 		%>

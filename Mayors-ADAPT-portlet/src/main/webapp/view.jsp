@@ -174,7 +174,7 @@ tableClass {
 <%
 	} else {
 %>
-<p style="font-size: 16px;">You must access this page from the
+<p style="font-size: 16px;">You are not identified as a City Contact user, you must access this page from the
 	link/button on your Mayors Adapt Platform mail notification.</p>
 <br>
 <%

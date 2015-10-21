@@ -19,18 +19,6 @@ public class DataServiceClpInvoker {
     private String[] _methodParameterTypes27;
     private String _methodName28;
     private String[] _methodParameterTypes28;
-    private String _methodName29;
-    private String[] _methodParameterTypes29;
-    private String _methodName30;
-    private String[] _methodParameterTypes30;
-    private String _methodName31;
-    private String[] _methodParameterTypes31;
-    private String _methodName32;
-    private String[] _methodParameterTypes32;
-    private String _methodName33;
-    private String[] _methodParameterTypes33;
-    private String _methodName34;
-    private String[] _methodParameterTypes34;
 
     public DataServiceClpInvoker() {
         _methodName22 = "getBeanIdentifier";
@@ -41,41 +29,17 @@ public class DataServiceClpInvoker {
 
         _methodParameterTypes23 = new String[] { "java.lang.String" };
 
-        _methodName26 = "getDataTypes";
+        _methodName26 = "getOptions";
 
-        _methodParameterTypes26 = new String[] {  };
+        _methodParameterTypes26 = new String[] { "java.lang.String" };
 
-        _methodName27 = "getAdaptationSectors";
+        _methodName27 = "getFieldsNames";
 
         _methodParameterTypes27 = new String[] {  };
 
-        _methodName28 = "getClimateImpacts";
+        _methodName28 = "getCitiesByCriteria";
 
-        _methodParameterTypes28 = new String[] {  };
-
-        _methodName29 = "getAdaptationElements";
-
-        _methodParameterTypes29 = new String[] {  };
-
-        _methodName30 = "getCountries";
-
-        _methodParameterTypes30 = new String[] {  };
-
-        _methodName31 = "getStructure";
-
-        _methodParameterTypes31 = new String[] {  };
-
-        _methodName32 = "getOptions";
-
-        _methodParameterTypes32 = new String[] { "java.lang.String" };
-
-        _methodName33 = "getFieldsNames";
-
-        _methodParameterTypes33 = new String[] {  };
-
-        _methodName34 = "getCitiesByCriteria";
-
-        _methodParameterTypes34 = new String[] {
+        _methodParameterTypes28 = new String[] {
                 "java.util.List", "java.util.List", "java.util.List",
                 "java.util.List"
             };
@@ -97,46 +61,16 @@ public class DataServiceClpInvoker {
 
         if (_methodName26.equals(name) &&
                 Arrays.deepEquals(_methodParameterTypes26, parameterTypes)) {
-            return DataServiceUtil.getDataTypes();
+            return DataServiceUtil.getOptions((java.lang.String) arguments[0]);
         }
 
         if (_methodName27.equals(name) &&
                 Arrays.deepEquals(_methodParameterTypes27, parameterTypes)) {
-            return DataServiceUtil.getAdaptationSectors();
+            return DataServiceUtil.getFieldsNames();
         }
 
         if (_methodName28.equals(name) &&
                 Arrays.deepEquals(_methodParameterTypes28, parameterTypes)) {
-            return DataServiceUtil.getClimateImpacts();
-        }
-
-        if (_methodName29.equals(name) &&
-                Arrays.deepEquals(_methodParameterTypes29, parameterTypes)) {
-            return DataServiceUtil.getAdaptationElements();
-        }
-
-        if (_methodName30.equals(name) &&
-                Arrays.deepEquals(_methodParameterTypes30, parameterTypes)) {
-            return DataServiceUtil.getCountries();
-        }
-
-        if (_methodName31.equals(name) &&
-                Arrays.deepEquals(_methodParameterTypes31, parameterTypes)) {
-            return DataServiceUtil.getStructure();
-        }
-
-        if (_methodName32.equals(name) &&
-                Arrays.deepEquals(_methodParameterTypes32, parameterTypes)) {
-            return DataServiceUtil.getOptions((java.lang.String) arguments[0]);
-        }
-
-        if (_methodName33.equals(name) &&
-                Arrays.deepEquals(_methodParameterTypes33, parameterTypes)) {
-            return DataServiceUtil.getFieldsNames();
-        }
-
-        if (_methodName34.equals(name) &&
-                Arrays.deepEquals(_methodParameterTypes34, parameterTypes)) {
             return DataServiceUtil.getCitiesByCriteria((java.util.List<java.lang.String>) arguments[0],
                 (java.util.List<java.lang.String>) arguments[1],
                 (java.util.List<java.lang.String>) arguments[2],

@@ -45,37 +45,6 @@ public class DataServiceWrapper implements DataService,
     }
 
     @Override
-    public java.util.TreeSet<java.lang.String> getDataTypes() {
-        return _dataService.getDataTypes();
-    }
-
-    @Override
-    public java.util.TreeSet<java.lang.String> getAdaptationSectors() {
-        return _dataService.getAdaptationSectors();
-    }
-
-    @Override
-    public java.util.TreeSet<java.lang.String> getClimateImpacts() {
-        return _dataService.getClimateImpacts();
-    }
-
-    @Override
-    public java.util.TreeSet<java.lang.String> getAdaptationElements() {
-        return _dataService.getAdaptationElements();
-    }
-
-    @Override
-    public java.util.TreeSet<java.lang.String> getCountries() {
-        return _dataService.getCountries();
-    }
-
-    @Override
-    public com.liferay.portlet.dynamicdatamapping.model.DDMStructure getStructure()
-        throws com.liferay.portal.kernel.exception.SystemException {
-        return _dataService.getStructure();
-    }
-
-    @Override
     public java.util.TreeSet<java.lang.String> getOptions(
         java.lang.String fieldName) {
         return _dataService.getOptions(fieldName);
