@@ -13,7 +13,6 @@ import java.util.ResourceBundle;
 import java.util.logging.Logger;
 
 import javax.portlet.PortletRequest;
-import javax.portlet.PortletResponse;
 import javax.portlet.PortletURL;
 import javax.portlet.WindowState;
 
@@ -33,24 +32,25 @@ import org.apache.lucene.search.BooleanQuery;
 import org.apache.lucene.search.IndexSearcher;
 import org.apache.lucene.search.Query;
 import org.apache.lucene.search.ScoreDoc;
+import org.apache.lucene.search.Sort;
+import org.apache.lucene.search.SortField;
 import org.apache.lucene.search.TermQuery;
 import org.apache.lucene.search.TermRangeQuery;
 import org.apache.lucene.search.TopDocs;
 import org.apache.lucene.store.Directory;
 import org.apache.lucene.store.FSDirectory;
 
+import com.google.gson.Gson;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.portlet.LiferayPortletRequest;
 import com.liferay.portal.kernel.portlet.LiferayPortletResponse;
-import com.liferay.portal.kernel.portlet.LiferayPortletURL;
 import com.liferay.portal.kernel.search.Field;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.util.WebKeys;
 import com.liferay.portal.kernel.workflow.WorkflowConstants;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
-import com.liferay.portlet.PortletURLFactoryUtil;
 import com.liferay.portlet.asset.AssetRendererFactoryRegistryUtil;
 import com.liferay.portlet.asset.model.AssetEntry;
 import com.liferay.portlet.asset.model.AssetRenderer;
@@ -92,13 +92,13 @@ public class ClimateSearchEngine extends IndexSearcher {
 		// formBean.setAceitemtype(null);
 		ScoreDoc[] hits = this.getTopDocs(formBean, formBean.getAnyOfThese(),
 				aceItemType, structureId).scoreDocs;
-
 		List<AceItemSearchResult> results = new ArrayList<AceItemSearchResult>();
 
 		//
 		// calculate factor to normalize relevance scores
 		float topScore = 0f;
 		for (ScoreDoc hit : hits) {
+//			System.out.println("Doc Name: " + searcher.doc(hit.doc).toString());
 
 			float score = hit.score;
 			// System.out.println("score: " + score);
@@ -170,11 +170,12 @@ public class ClimateSearchEngine extends IndexSearcher {
 						}
 					} else {
 						storageType = "ARTICLE";
-//						aceItemSearchResult.setStoredAt(getStoredAt(articleId));
+						// aceItemSearchResult.setStoredAt(getStoredAt(articleId));
 						aceItemSearchResult.setStoredAt(articleUrlTitle);
 					}
 					aceItemSearchResult.setStoragetype(storageType);
-					aceItemSearchResult.setRating(System.currentTimeMillis());
+					aceItemSearchResult.setRating(0L);
+					aceItemSearchResult.setDeeplink("");
 					aceItemSearchResult.setName(document.get(Field.TITLE));
 					String description = nullSafeString(new String[] {
 							document.get(Field.CONTENT),
@@ -182,18 +183,19 @@ public class ClimateSearchEngine extends IndexSearcher {
 							document.get(Field.NAME) });
 					aceItemSearchResult.setShortdescription(description);
 					aceItemSearchResult.setFeature("");
-					aceItemSearchResult.setControlstatus(Short.valueOf(document
-							.getFieldable(Field.STATUS).stringValue()));
+					aceItemSearchResult.setControlstatus((short) 1);
+					// aceItemSearchResult.setControlstatus(Short.valueOf(document
+					// .getFieldable(Field.STATUS).stringValue()));
 					// aceItemSearchResult.setDeeplink("");
 					// aceItemSearchResult.setFeature("feature");
 					Date approvalDate = new SimpleDateFormat("yyyyMMddHHmmSS")
 							.parse(document.getFieldable(Field.PUBLISH_DATE)
 									.stringValue());
 					Date createdDate = new SimpleDateFormat("yyyyMMddHHmmSS")
-							.parse(document.getFieldable(Field.PUBLISH_DATE)
+							.parse(document.getFieldable(Field.CREATE_DATE)
 									.stringValue());
-					Calendar publishCal = Calendar.getInstance();
-					publishCal.setTime(createdDate);
+					Calendar createCal = Calendar.getInstance();
+					createCal.setTime(createdDate);
 					aceItemSearchResult.setNew(aceItemSearchResult.isNew(
 							approvalDate, createdDate));
 					// if (document.getFieldable(Field.PUBLISH_DATE).sgetYear()
@@ -201,7 +203,7 @@ public class ClimateSearchEngine extends IndexSearcher {
 					// null
 					// && aceitem.getYear().length() > 0)
 					// {
-					aceItemSearchResult.setYear(String.valueOf(publishCal
+					aceItemSearchResult.setYear(String.valueOf(createCal
 							.get(Calendar.YEAR)));
 					// }
 					float relevance = hit.score * normalizeScoreFactor * 100;
@@ -213,6 +215,9 @@ public class ClimateSearchEngine extends IndexSearcher {
 				e.printStackTrace();
 			}
 		}
+//		Gson gson = new Gson();
+//		String json = gson.toJson(results);
+//		System.out.println(json);
 		return results;
 	}
 
@@ -251,13 +256,14 @@ public class ClimateSearchEngine extends IndexSearcher {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-//		LiferayPortletURL viewURL = PortletURLFactoryUtil.create(
-//				request.getHttpServletRequest(), "101", plid,
-//				PortletRequest.RENDER_PHASE);
-//		 PortletURL viewURL = liferayPortletResponse.createRenderURL(101);
-		PortletURL viewURL=null;
+		// LiferayPortletURL viewURL = PortletURLFactoryUtil.create(
+		// request.getHttpServletRequest(), "101", plid,
+		// PortletRequest.RENDER_PHASE);
+		// PortletURL viewURL = liferayPortletResponse.createRenderURL(101);
+		PortletURL viewURL = null;
 		try {
-			viewURL = assetEntry.getAssetRenderer().getURLView(response, WindowState.NORMAL);
+			viewURL = assetEntry.getAssetRenderer().getURLView(response,
+					WindowState.NORMAL);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -485,14 +491,31 @@ public class ClimateSearchEngine extends IndexSearcher {
 			booleanQuery.add(countriesQuery, BooleanClause.Occur.MUST);
 		}
 
+		TopDocs searchResults;
+
+		// = searcher.search(booleanQuery, 99);
+
+		System.out.println("sort by is " + formBean.getSortBy());
+		SortField sortField = null;
+		if (formBean.getSortBy()!= null && formBean.getSortBy().equals("NAME")) {
+			sortField = new SortField("title", Locale.UK);
+		} else if (formBean.getSortBy()!= null && formBean.getSortBy().equals("YEAR")) {
+			sortField = new SortField("createDate", Locale.UK, true);
+		}
+
 		System.out.println("Search Text: " + searchText);
 		System.out.println("Lucene boolean query: " + booleanQuery);
 		System.out.println("Search Bean: " + formBean.toString(formBean));
 
-		TopDocs searchResults = searcher.search(booleanQuery, 99);
+		if (sortField != null) {
+			Sort sort = new Sort(sortField);
+			searchResults = searcher.search(booleanQuery, 99, sort);
+		} else
+			searchResults = searcher.search(booleanQuery, 99);
 
 		System.out.println("Results Number: " + searchResults.totalHits);
-
+//		System.out.println("First doc:"
+//				+ searcher.doc(searchResults.scoreDocs[0].doc).toString());
 		searcher.close();
 		return searchResults;
 	}

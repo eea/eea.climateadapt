@@ -187,6 +187,7 @@ if (endyear != null)
 
 		querystring += '&sortBy=' + $j('#'+sortRadio.id).val();
     	console.log("QueryString: "+querystring);
+    	console.log("URL: "+"<%=renderResponse.encodeURL(sortURL.toString())%>");
 				
 		// replace existing resultlist with loading icon 
 		$j('#resultsListId-'+unique).remove();
@@ -202,6 +203,7 @@ if (endyear != null)
 				$j('#loadingId-'+unique).remove();
 				var aceitemResults = new Array();
 				aceitemResults = jQuery.parseJSON(json);	
+
 
                 // Updates the results for each data type sorted
                 groupedJSONResults[$j("#sortsearchformId-"+unique + " input[name=aceitemtype]").val()] = aceitemResults;

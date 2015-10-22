@@ -139,7 +139,7 @@ public class AceSearchPortlet extends MVCPortlet {
     @Override
     public void serveResource(ResourceRequest request, ResourceResponse response) throws PortletException, IOException {
         try {
-            ACESearchPortalInterface searchEngine = new ACESearchPortalInterface();
+        	ACESearchPortalInterface searchEngine = new ACESearchPortalInterface();
             searchEngine.handleAjaxSearchRequest(request, response);
         } catch (Exception x) {
             x.printStackTrace();

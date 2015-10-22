@@ -514,7 +514,7 @@ public class ACESearchEngine {
 
 			// TopDocs topDocs = searcher.search(query, formBean.getSortBy(),
 			// 10);
-			// System.out.println("sort by is " + formBean.getSortBy());
+			 System.out.println("sort by is " + formBean.getSortBy());
 			TopDocs topDocs;
 			if (yearQuery != null) {
 				topDocs = searcher.search(booleanQuery, formBean.getSortBy(),
