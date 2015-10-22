@@ -186,6 +186,7 @@ if (endyear != null)
         querystring += '&conditionAdaptationElement=' + $j("#sortsearchformId-"+unique + " input[name=conditionAdaptationElement]").val();
 
 		querystring += '&sortBy=' + $j('#'+sortRadio.id).val();
+    	console.log("QueryString: "+querystring);
 				
 		// replace existing resultlist with loading icon 
 		$j('#resultsListId-'+unique).remove();
@@ -195,6 +196,7 @@ if (endyear != null)
 			url: "<%=renderResponse.encodeURL(sortURL.toString())%>",
 			data: querystring,
 			success: function(json) {
+		    	console.log("json: "+json);
 
 				// remove loading icon and add results to resultlist	
 				$j('#loadingId-'+unique).remove();

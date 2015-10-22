@@ -75,8 +75,8 @@
 					id="${sortsearchRelevanceId}" value="RELEVANCE" checked /><a
 					id="search_rel" class="glossary-inline-term qtipclass" href="#"
 					style="text-decoration: none; border: none;"><b><liferay-ui:message
-							key="acesearch-sort-relevance" /></b></a> <input type="radio"
-					name="sortBy" class="sortByControl" id="${sortsearchNameId}"
+							key="acesearch-sort-relevance" /></b></a>
+				 <input type="radio" name="sortBy" class="sortByControl" id="${sortsearchNameId}"
 					value="NAME" />
 				<liferay-ui:message key="acesearch-sort-name" />
 				<input type="radio" name="sortBy" class="sortByControl"
