@@ -496,7 +496,7 @@ public class ClimateSearchEngine extends IndexSearcher {
 		// = searcher.search(booleanQuery, 99);
 
 		System.out.println("sort by is " + formBean.getSortBy());
-		SortField sortField = null;
+		SortField sortField = null; 
 		if (formBean.getSortBy()!= null && formBean.getSortBy().equals("NAME")) {
 			sortField = new SortField("title", Locale.UK);
 		} else if (formBean.getSortBy()!= null && formBean.getSortBy().equals("YEAR")) {
