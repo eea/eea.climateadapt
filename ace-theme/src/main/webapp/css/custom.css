@@ -2757,10 +2757,11 @@ text and the class mapviewer to the MapViewerPortlet.
 .dropDownMenu ul {
   list-style: none;
   margin: 0;
-  padding: 0; }
+  padding: 0;
+  }
 
 .dropDownMenu li {
-  padding:0px 20px 0px 20px;
+  padding:0px 10px 0px 10px;
   position: relative; 
   line-height:16px;}
 
@@ -2787,7 +2788,7 @@ text and the class mapviewer to the MapViewerPortlet.
 /* Level 2 */
 .dropDownMenu > li > ul {
   text-align: left;
-  width: 250px;
+  width: 260px;
   display: none;
   background: #d2df92;
   position: absolute;
@@ -2801,7 +2802,7 @@ text and the class mapviewer to the MapViewerPortlet.
 
 /* Level 3 */
 .dropDownMenu > li > ul > li > ul {
-  width: 250px;
+  width: 260px;
   text-align: left;
   display: none;
   background: #d2df92;

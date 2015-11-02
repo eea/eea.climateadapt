@@ -72,8 +72,8 @@
 
 		 #case-studies-homepage-slider-wrapper .case-studies-homepage-slider-content .case-studies-homepage-slider-image {
 			float: left;
-			width: 270px;
-			height: 220px;
+			width: 420px;
+			height: 232px;
 		}
 
         #case-studies-homepage-slider-wrapper .case-studies-homepage-slider-content .case-studies-homepage-slider-image img {
@@ -85,7 +85,7 @@
 			float: right;
 			padding-right: 5px;
 			position: relative;
-			width: 410px;
+			width: 530px;
 		}
 
 		 #case-studies-homepage-slider-wrapper .case-studies-homepage-slider-content .case-studies-homepage-slider-description h2 {

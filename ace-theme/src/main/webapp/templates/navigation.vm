@@ -33,6 +33,7 @@
                                 #if ($nav_child.hasChildren())
                                     <a href="$nav_child.getURL()" $nav_child.getTarget()   data-hover="dropdown" data-delay="100" data-close-others="false">
                                         <span>$nav_child.icon() $nav_child.getName()</span>                                                   
+                             			<b class="caret" style="transform: rotate(270deg);"></b>
                                     </a>
                                 #else
                                      <a href="$nav_child.getURL()" $nav_item.getTarget()>

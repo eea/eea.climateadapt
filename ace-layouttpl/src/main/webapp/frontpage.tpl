@@ -31,12 +31,12 @@
 	</table>
 #else
 	<div id="fp-top-row-custom" class="portlet-layout">
-		<div class="aui-w75 portlet-column portlet-column-first" id="column-1">
-			$processor.processColumn("column-1", "portlet-column-content portlet-column-content-first")
+		<div class="aui-w100 portlet-column" id="column-1">
+			$processor.processColumn("column-1", "portlet-column-content")
 		</div>
-		<div class="aui-w25 portlet-column" id="column-2">
+		<!-- div class="aui-w25 portlet-column" id="column-2">
 			$processor.processColumn("column-2", "portlet-column-content")
-		</div>
+		</div-->
 	</div>
 
 	<div id="portlet-layout" class="portlet-layout">
