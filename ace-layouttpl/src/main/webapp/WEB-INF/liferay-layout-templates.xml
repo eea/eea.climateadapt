@@ -18,16 +18,19 @@
 			<wap-template-path>/ace_layout_4.wap.tpl</wap-template-path>
 			<thumbnail-path>/ace_layout_4.png</thumbnail-path>
 		</layout-template>
-        <layout-template id="ace_layout_5" name="ace_layout_5">
+		<layout-template id="ace_layout_5" name="ace_layout_5">
 			<template-path>/ace_layout_5.tpl</template-path>
 			<wap-template-path>/ace_layout_5.wap.tpl</wap-template-path>
 			<thumbnail-path>/ace_layout_5.png</thumbnail-path>
 		</layout-template>
-		<layout-template id="ace_layout_col_1_2" name="Urban Map Viewer">
+		<layout-template id="ace_layout_col_1_2"
+			name="Urban Map Viewer">
 			<template-path>/ace_layout_col_1_2.tpl</template-path>
-			<wap-template-path>/ace_layout_col_1_2.wap.tpl</wap-template-path>
+			<wap-template-path>
+				/ace_layout_col_1_2.wap.tpl
+			</wap-template-path>
 			<thumbnail-path>/ace_layout_col_1_2.png</thumbnail-path>
-		</layout-template>		
+		</layout-template>
 		<layout-template id="ast" name="AST">
 			<template-path>/ast.tpl</template-path>
 			<wap-template-path>/ast.wap.tpl</wap-template-path>
@@ -37,7 +40,7 @@
 			<template-path>/urban_ast.tpl</template-path>
 			<wap-template-path>/urban_ast.wap.tpl</wap-template-path>
 			<thumbnail-path>/urban_ast.png</thumbnail-path>
-		</layout-template>		
+		</layout-template>
 		<layout-template id="transnationalregion"
 			name="Transnational Region">
 			<template-path>/transnationalregion.tpl</template-path>
@@ -55,6 +58,11 @@
 			<template-path>/faq.tpl</template-path>
 			<wap-template-path>/faq.wap.tpl</wap-template-path>
 			<thumbnail-path>/faq.png</thumbnail-path>
+		</layout-template>
+		<layout-template id="help" name="Help">
+			<template-path>/help.tpl</template-path>
+			<wap-template-path>/help.wap.tpl</wap-template-path>
+			<thumbnail-path>/help.png</thumbnail-path>
 		</layout-template>
 	</custom>
 </layout-templates>
