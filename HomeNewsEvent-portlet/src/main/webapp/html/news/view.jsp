@@ -4,9 +4,11 @@
 
 <c:choose>
 	 <c:when test="${showall ne 'full'}">
+	<!--
 	<p>
        <a href="/news-archive?show=full"><img alt="" src="/image/image_gallery?uuid=f2dd890d-c486-4915-acc6-1bee459b0b0e&groupId=18&t=1315229176561" style="width: 214px; height: 59px" /></a>
     </p>
+    -->
 	   
 	   <div class="news-events">
 			  <ul>
