@@ -723,6 +723,7 @@ ul#subnav li a:hover {
 }
 
 #header-menu a {
+	margin-right: 10px;
 	color: #FFF;
 	font-size: 0.9em;
 	text-decoration: none;
