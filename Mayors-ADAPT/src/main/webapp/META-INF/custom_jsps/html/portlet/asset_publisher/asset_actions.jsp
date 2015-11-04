@@ -45,12 +45,11 @@ if (showEditURL && assetRenderer.hasEditPermission(permissionChecker)) {
 
 	//Mayors ADAPT begin
 	boolean cityProfileContact = user.getScreenName().equalsIgnoreCase("cityprofilecontact");
-	if (!cityProfileContact)
-		showEditURL = false;
+	if (cityProfileContact)
+		editPortletURL = null;
 	}
 	//Mayors ADAPT end
 %>
-
 <c:if test="<%= editPortletURL != null %>">
 	<div class="lfr-meta-actions asset-actions">
 
