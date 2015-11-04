@@ -43,11 +43,9 @@ $theme.include($body_top_include)
 			</h1>	
     	<div id="heading">
     	     <div id="header-menu">
-                         <ul>
 					#if(!$is_signed_in)
-						<li id="signin"><a href="$sign_in_url" id="sign-in" rel="nofollow">$sign_in_text</a></li>
+						<a href="$sign_in_url" id="sign-in" rel="nofollow">$sign_in_text</a>
 					#end
-					</ul>
     		</div>
 	            <div id="searchbox">
             	<p id="search-title">Search the website</p>
@@ -82,30 +80,21 @@ $theme.include($body_top_include)
 
 
 #if ($theme.getSetting("footer-type") == "ace")
-	<footer id="footer" role="contentinfo">
-		        <div class="container">
-                        <a href="http://ec.europa.eu/" target="_blank"><img src="/ace-theme/images/logo_eu.jpg" alt="European Commission logo" style="margin-bottom: 3px" /><div>European Commission</div></a>
-			<a href="http://www.eea.europa.eu/" target="_blank"><img src="/ace-theme/images/logo_eea.png" style="width: 52px; margin-top: 4px" alt="EEA logo" /><div>European Environment Agency</div></a>
-                        </div>
-   	     <div>
-                 <ul>
-                    <li id="glossary"><a href="/glossary">Glossary</a></li>
-					<li id="contact"><a href="/contact">Contact</a></li>
-					<li id="sitemap"><a href="/sitemap">Sitemap</a></li>
-                    <li id="legal-notice"><a href="http://ec.europa.eu/geninfo/legal_notices_en.htm">Legal notice</a></li>
-					<li id="about"><a href="/about">About</a></li>
-                                        <li id="help"><a href="/help">Help</a></li>
-                 </ul>
-            </div>
-	</footer>
+   	<table width="50%" align="center" style="text-align:center;height:100px;">
+                 <tr>
+					<td ><a href="/sitemap">Sitemap</a></td>
+                    <td ><a href="http://ec.europa.eu/geninfo/legal_notices_en.htm">Legal notice</a></td>
+					<td ><a href="/contact">Contact</a></td>
+                 </tr>
+	</table>
 #else 
 	<footer id="footer" role="contentinfo">
-		        <div style="margin-left:70px;margin-top:15px;display:block;text-align:center">
+	    <div style="margin-left:70px;margin-top:15px;display:block;text-align:center">
 			<a href="http://www.baltadapt.eu/" target="_blank"><img src="/ace-theme/images/logo_balt_adapt.jpg" alt="Baltadapt logo" style="margin-bottom: 3px" /></a>
-                        <a href="http://ec.europa.eu/" target="_blank"><img src="/ace-theme/images/logo_eu.jpg" alt="European Commission logo" style="margin-bottom: 3px" /><div>European Commission</div></a>
+            <a href="http://ec.europa.eu/" target="_blank"><img src="/ace-theme/images/logo_eu.jpg" alt="European Commission logo" style="margin-bottom: 3px" /><div>European Commission</div></a>
 			<a href="http://www.eea.europa.eu/" target="_blank"><img src="/ace-theme/images/logo_eea.png" style="width: 52px; margin-top: 4px" alt="EEA logo" /><div>European Environment Agency</div></a>
 			<a href="http://eu.baltic.net/" target="_blank"><img src="/ace-theme/images/logo_baltic_sea_programme.png" alt="Baltic Sea Region Programme logo" style="margin-bottom: 3px" /></a>
-                        </div>
+         </div>
    	     <div style="float:right;" >
                  <ul>
                     <li id="glossary"><a href="/glossary">Glossary</a></li>

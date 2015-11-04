@@ -2763,7 +2763,7 @@ text and the class mapviewer to the MapViewerPortlet.
 .dropDownMenu li {
   padding:0px 10px 0px 10px;
   position: relative; 
-  line-height:16px;}
+  line-height:15px;}
 
 .dropDownMenu a {
   color: black;
