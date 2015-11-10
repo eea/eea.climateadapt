@@ -171,6 +171,7 @@ public class ClimateSearchEngine extends IndexSearcher {
 					} else {
 						storageType = "ARTICLE";
 						// aceItemSearchResult.setStoredAt(getStoredAt(articleId));
+//						aceItemSearchResult.setStoredAt(+articleUrlTitle);
 						aceItemSearchResult.setStoredAt(articleUrlTitle);
 					}
 					aceItemSearchResult.setStoragetype(storageType);
@@ -509,9 +510,9 @@ public class ClimateSearchEngine extends IndexSearcher {
 
 		if (sortField != null) {
 			Sort sort = new Sort(sortField);
-			searchResults = searcher.search(booleanQuery, 99, sort);
+			searchResults = searcher.search(booleanQuery, 999, sort);
 		} else
-			searchResults = searcher.search(booleanQuery, 99);
+			searchResults = searcher.search(booleanQuery, 999);
 
 		System.out.println("Results Number: " + searchResults.totalHits);
 //		System.out.println("First doc:"
