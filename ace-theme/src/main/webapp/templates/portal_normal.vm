@@ -13,7 +13,6 @@
 	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js"></script>
 	<script type="text/javascript" src="/ace-theme/js/jquery.qtip.min.js"></script>
 
-
 	$theme.include($top_head_include)
 
 	<style type="text/css">
@@ -61,8 +60,14 @@ $theme.include($body_top_include)
 		#if ($has_navigation || $is_signed_in)
 			#parse ("$full_templates_path/navigation.vm")
 		#end
+		
+		#set ($urlPagina = $themeDisplay.getURLCurrent())
 		<div class="site-breadcrumbs">
-			#breadcrumbs()
+			#if ($urlPagina == "/web/guest" || $urlPagina == "/") 
+				
+			#else
+				#breadcrumbs()
+			#end
 		</div>
 	</header>
 
@@ -79,6 +84,8 @@ $theme.include($body_top_include)
 		#end
 	</div>
 
+<div>&nbsp;</div>
+<div style="background-color:#CCCCCC;width:95%;height=2px;position:absolute;left:25px;"></div>
 
 #if ($theme.getSetting("footer-type") == "ace")
    	<table width="50%" align="center" style="text-align:center;height:100px;">
