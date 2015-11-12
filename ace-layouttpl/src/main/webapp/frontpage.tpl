@@ -1,4 +1,4 @@
-<div class="frontpage-layout" id="main-content" role="main">
+<div class="frontpage-layout" id="main-content" role="main"> hola
 #if ($browserSniffer.isIe($request) && $browserSniffer.getMajorVersion($request) < 8)
 	<table class="portlet-layout" id="fp-top-row">
 		<tr>
