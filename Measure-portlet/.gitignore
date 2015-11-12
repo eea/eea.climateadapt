@@ -5,3 +5,4 @@ lib/
 *.iml
 *.ipr
 *.iws
+/bin/
