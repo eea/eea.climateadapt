@@ -1,60 +1,55 @@
 <?xml version="1.0"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-	<modelVersion>4.0.0</modelVersion>
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
 
-	<parent>
-		<groupId>eu.europa.eea</groupId>
-		<artifactId>portal-parent</artifactId>
-		<version>1.0</version>
-	</parent>
+  <parent>
+    <groupId>eu.europa.eea</groupId>
+    <artifactId>portal-parent</artifactId>
+    <version>1.0</version>
+  </parent>
 
 
-	<artifactId>AceSearch-portlet</artifactId>
-	<packaging>war</packaging>
+  <artifactId>AceSearch-portlet</artifactId>
+  <packaging>war</packaging>
 
-	<properties>
-		<main.basedir>${project.parent.basedir}</main.basedir>
-	</properties>
+  <properties>
+    <main.basedir>${project.parent.basedir}</main.basedir>
+  </properties>
 
-	<build>
-		<finalName>${project.artifactId}</finalName>
-		<plugins>
-			<plugin>
-				<groupId>com.liferay.maven.plugins</groupId>
-				<artifactId>liferay-maven-plugin</artifactId>
-				<executions>
-					<execution>
-						<phase>generate-sources</phase>
-						<goals>
-							<goal>build-css</goal>
-						</goals>
-					</execution>
-				</executions>
-				<configuration>
-					<pluginType>portlet</pluginType>
-					<autoDeployDir>${liferay.auto.deploy.dir}</autoDeployDir>
-					<appServerDeployDir>/Climate_liferay/tomcat-7.0.42/webapps</appServerDeployDir>
-					<appServerLibGlobalDir>/Climate_liferay/tomcat-7.0.42/lib/ext</appServerLibGlobalDir>
-					<appServerPortalDir>/Climate_liferay/tomcat-7.0.42/webapps/ROOT</appServerPortalDir>
-					<liferayVersion>${liferay.version}</liferayVersion>
-				</configuration>
-			</plugin>
-		</plugins>
-	</build>
+  <build>
+    <finalName>${project.artifactId}</finalName>
+    <plugins>
+      <plugin>
+        <groupId>com.liferay.maven.plugins</groupId>
+        <artifactId>liferay-maven-plugin</artifactId>
+        <executions>
+          <execution>
+            <phase>generate-sources</phase>
+            <goals>
+              <goal>build-css</goal>
+            </goals>
+          </execution>
+        </executions>
+        <configuration>
+          <pluginType>portlet</pluginType>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
 
-	<dependencies>
-		<dependency>
-			<groupId>eu.europa.eea</groupId>
-			<artifactId>AceItem-shared</artifactId>
-			<scope>provided</scope>
-		</dependency>
+  <dependencies>
+    <dependency>
+      <groupId>eu.europa.eea</groupId>
+      <artifactId>AceItem-shared</artifactId>
+      <scope>provided</scope>
+    </dependency>
 
-		<dependency>
-			<groupId>com.googlecode.json-simple</groupId>
-			<artifactId>json-simple</artifactId>
-		</dependency>
-	</dependencies>
+    <dependency>
+      <groupId>com.googlecode.json-simple</groupId>
+      <artifactId>json-simple</artifactId>
+    </dependency>
+  </dependencies>
 
 
 </project>

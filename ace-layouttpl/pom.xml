@@ -1,38 +1,33 @@
 <?xml version="1.0"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-	<modelVersion>4.0.0</modelVersion>
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
 
-	<parent>
-		<groupId>eu.europa.eea</groupId>
-		<artifactId>portal-parent</artifactId>
-		<version>1.0</version>
-	</parent>
+  <parent>
+    <groupId>eu.europa.eea</groupId>
+    <artifactId>portal-parent</artifactId>
+    <version>1.0</version>
+  </parent>
 
-	<properties>
-		<main.basedir>${project.parent.basedir}</main.basedir>
-		<autoDeployDir>${liferay.auto.deploy.dir}</autoDeployDir>
-		<appServerDeployDir>/Climate_liferay/tomcat-7.0.42/webapps</appServerDeployDir>
-		<appServerLibGlobalDir>/Climate_liferay/tomcat-7.0.42/lib/ext</appServerLibGlobalDir>
-		<appServerPortalDir>/Climate_liferay/tomcat-7.0.42/webapps/ROOT</appServerPortalDir>
-		<liferayVersion>${liferay.version}</liferayVersion>
-	</properties>
-	
-	<artifactId>ace-layout-1-layouttpl</artifactId>
-	<packaging>war</packaging>
+  <properties>
+    <main.basedir>${project.parent.basedir}</main.basedir>
+  </properties>
 
-	<build>
-		<finalName>${project.artifactId}</finalName>
-		<plugins>
-			<plugin>
-				<groupId>com.liferay.maven.plugins</groupId>
-				<artifactId>liferay-maven-plugin</artifactId>
-				<configuration>
-					<pluginType>layouttpl</pluginType>
-				</configuration>
-			</plugin>
+  <artifactId>ace-layout-1-layouttpl</artifactId>
+  <packaging>war</packaging>
 
-		</plugins>
-	</build>
+  <build>
+    <finalName>${project.artifactId}</finalName>
+    <plugins>
+      <plugin>
+        <groupId>com.liferay.maven.plugins</groupId>
+        <artifactId>liferay-maven-plugin</artifactId>
+        <configuration>
+          <pluginType>layouttpl</pluginType>
+        </configuration>
+      </plugin>
+
+    </plugins>
+  </build>
 
 </project>
