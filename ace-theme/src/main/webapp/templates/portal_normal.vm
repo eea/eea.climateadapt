@@ -85,7 +85,7 @@ $theme.include($body_top_include)
 	</div>
 
 <div>&nbsp;</div>
-<div style="background-color:#CCCCCC;width:95%;height=2px;position:absolute;left:25px;"></div>
+<div style="background-color:#CCCCCC;width:95%;height:2px;position:absolute;left:25px;"></div>
 
 #if ($theme.getSetting("footer-type") == "ace")
    	<table width="50%" align="center" style="text-align:center;height:100px;">
