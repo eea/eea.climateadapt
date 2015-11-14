@@ -83,7 +83,13 @@ public class AceItemGoEditPortlet extends MVCPortlet {
 
         String guidanceShareEditUrl = ParamUtil.getString(request, Constants.GUIDANCESHAREEDITURL);
         prefs.setValue(Constants.GUIDANCESHAREEDITURL, guidanceShareEditUrl);
-
+        
+        String indicatorsShareEditUrl = ParamUtil.getString(request, Constants.INDICATORSSHAREEDITURL);
+        prefs.setValue(Constants.INDICATORSSHAREEDITURL, indicatorsShareEditUrl);
+        
+        String mapGraphDataEditUrl = ParamUtil.getString(request, Constants.MAPGRAPHDATAEDITURL);
+        prefs.setValue(Constants.MAPGRAPHDATAEDITURL, mapGraphDataEditUrl);
+        
         String toolShareEditUrl = ParamUtil.getString(request, Constants.TOOLSHAREEDITURL);
         prefs.setValue(Constants.TOOLSHAREEDITURL, toolShareEditUrl);
 

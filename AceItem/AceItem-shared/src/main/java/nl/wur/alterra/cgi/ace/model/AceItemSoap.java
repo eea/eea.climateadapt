@@ -55,6 +55,7 @@ public class AceItemSoap implements Serializable {
     private String _scenario;
     private String _timeperiod;
     private Date _lockdate;
+    private String _metaData;
 
     public AceItemSoap() {
     }
@@ -104,6 +105,7 @@ public class AceItemSoap implements Serializable {
         soapModel.setScenario(model.getScenario());
         soapModel.setTimeperiod(model.getTimeperiod());
         soapModel.setLockdate(model.getLockdate());
+        soapModel.setMetaData(model.getMetaData());
 
         return soapModel;
     }
@@ -486,5 +488,13 @@ public class AceItemSoap implements Serializable {
 
     public void setLockdate(Date lockdate) {
         _lockdate = lockdate;
+    }
+
+    public String getMetaData() {
+        return _metaData;
+    }
+
+    public void setMetaData(String metaData) {
+        _metaData = metaData;
     }
 }

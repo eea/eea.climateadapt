@@ -51,7 +51,17 @@
 	<input name='<%= Constants.ORGANISATIONSHAREEDITURL %>' type="text" size="180" 
 	value='<%= prefs.getValue(Constants.ORGANISATIONSHAREEDITURL,"/web/guest/share-your-info/organisations?p_p_id=shareaceitemportlet_WAR_AceItemportlet_INSTANCE_vfO6&p_p_lifecycle=0&p_p_state=normal&p_p_mode=view&p_p_col_id=column-2&p_p_col_count=1&_shareaceitemportlet_WAR_AceItemportlet_INSTANCE_vfO6_jspPage=%2Fhtml%2Fshareinfo%2Fadd_aceitem.jsp&_shareaceitemportlet_WAR_AceItemportlet_INSTANCE_vfO6_redirect=%2Fen%2Fshare-your-info%2Forganisations&_shareaceitemportlet_WAR_AceItemportlet_INSTANCE_vfO6_aceItemId=") %>' />
 	<br /><br />
-
+	
+	<b>Share indication edit url (/web/guest/share-your-info/indicators?...  ending with 'aceItemId=')</b><br />
+ 	<input name='<%= Constants.INDICATORSSHAREEDITURL %>' type="text" size="180"
+ 	value='<%= prefs.getValue(Constants.INDICATORSSHAREEDITURL,"/web/guest/share-your-info/indicators?p_p_id=shareaceitemportlet_WAR_AceItemportlet_INSTANCE_4e0wgmd0N2fB&p_p_lifecycle=0&p_p_state=normal&p_p_mode=view&p_p_col_id=column-1&p_p_col_count=1&_shareaceitemportlet_WAR_AceItemportlet_INSTANCE_4e0wgmd0N2fB_jspPage=%2Fhtml%2Fshareinfo%2Fadd_aceitem.jsp&_shareaceitemportlet_WAR_AceItemportlet_INSTANCE_4e0wgmd0N2fB_redirect=%2Fen%2Fshare-your-info%2Findicators&_shareaceitemportlet_WAR_AceItemportlet_INSTANCE_4e0wgmd0N2fB_aceItemId=") %>' />
+	<br /><br />
+	
+	<b>Share map graph data edit url (/web/guest/share-your-info/map-graph-data?...  ending with 'aceItemId=')</b><br />
+	<input name='<%= Constants.MAPGRAPHDATAEDITURL %>' type="text" size="180" 
+	value='<%= prefs.getValue(Constants.MAPGRAPHDATAEDITURL,"/web/guest/share-your-info/map-graph-data?p_p_id=shareaceitemportlet_WAR_AceItemportlet_INSTANCE_0JfX0wbAluvS&p_p_lifecycle=0&p_p_state=normal&p_p_mode=view&p_p_col_id=column-1&p_p_col_count=1&_shareaceitemportlet_WAR_AceItemportlet_INSTANCE_0JfX0wbAluvS_jspPage=%2Fhtml%2Fshareinfo%2Fadd_aceitem.jsp&_shareaceitemportlet_WAR_AceItemportlet_INSTANCE_0JfX0wbAluvS_redirect=%2Fen%2Fshare-your-info%2Findicators&_shareaceitemportlet_WAR_AceItemportlet_INSTANCE_0JfX0wbAluvS_aceItemId=") %>' />
+	<br /><br />
+	
 	<aui:button-row>
 		<aui:button type="submit" />
 	</aui:button-row>

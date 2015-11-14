@@ -26,7 +26,9 @@
 	String gui_selected = "";
 	String too_selected = "";
 	String org_selected = "";
-
+	String ind_selected = "";
+	String map_selected = "";
+	
 	if (sharetype.equalsIgnoreCase(AceItemType.DOCUMENT.toString())) {
 		doc_selected = "selected";  
 	}
@@ -41,9 +43,13 @@
 	}
 	else if (sharetype.equalsIgnoreCase(AceItemType.ORGANISATION.toString())) {
 		org_selected = "selected";  
-
 	}
-
+	else if (sharetype.equalsIgnoreCase(AceItemType.INDICATOR.toString())) {
+		ind_selected = "selected";
+	}
+	else if (sharetype.equalsIgnoreCase(AceItemType.MAPGRAPHDATASET.toString())) {
+		map_selected = "selected";
+	}
 %>
 
 <portlet:actionURL name="setAddAceItemPref" var="setAddAceItemPrefUrl" />
@@ -62,6 +68,10 @@
 				<liferay-ui:message key="acesearch-datainfotype-lbl-TOOL" /></option>
 		<option value=<%= AceItemType.ORGANISATION.toString() %> <%= org_selected %>>
 				<liferay-ui:message key="acesearch-datainfotype-lbl-ORGANISATION" /></option>
+		<option value=<%= AceItemType.INDICATOR.toString() %> <%= ind_selected %>>
+				<liferay-ui:message key="acesearch-datainfotype-lbl-INDICATOR" /></option>	
+		<option value=<%= AceItemType.MAPGRAPHDATASET.toString() %> <%= map_selected %>>
+				<liferay-ui:message key="acesearch-datainfotype-lbl-MAPGRAPHDATASET" /></option>			
 	</select>
 	
 	<aui:button-row>

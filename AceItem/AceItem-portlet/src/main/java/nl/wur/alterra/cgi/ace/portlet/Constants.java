@@ -14,7 +14,11 @@ public class Constants {
     public static final String INFOPORTALSHAREEDITURL = "infoportalShareEditUrl"; // used inside AceItemGoEditPortlet
 
     public static final String GUIDANCESHAREEDITURL = "guidanceShareEditUrl"; // used inside AceItemGoEditPortlet
-
+    
+    public static final String INDICATORSSHAREEDITURL = "indicatorsShareEditUrl"; // used inside AceItemGoEditPortlet
+    
+    public static final String MAPGRAPHDATAEDITURL = "mapGraphDataEditUrl"; // used inside AceItemGoEditPortlet
+    
     public static final String TOOLSHAREEDITURL = "toolShareEditUrl"; // used inside AceItemGoEditPortlet
 
     public static final String ORGANISATIONSHAREEDITURL = "organisationShareEditUrl"; // used inside AceItemGoEditPortlet

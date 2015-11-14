@@ -56,8 +56,10 @@
 		<column name="scenario" type="String" />
 		<column name="timeperiod" type="String" />
 		<column name="lockdate" type="Date" />
+		<column name="metaData" type="String" />
 		
 		<!-- Sort order -->
+        
 		<order by="asc">
 			<order-column name="name" />
 		</order>

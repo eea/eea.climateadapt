@@ -58,7 +58,7 @@ public class AceItemPortlet extends LuceneIndexUpdatePortlet {
      * @throws Exception
      */
     private void doAddAceItem(ActionRequest request, ActionResponse response) throws Exception {
-        AceItem aceitem = new AceItemImpl();
+        AceItem aceitem = new AceItemImpl();        
         aceitem.setAceItemId(ParamUtil.getLong(request, "aceItemId"));
         aceitemFromRequest(request, aceitem);
         List<String> errors = new ArrayList<String>();

@@ -63,6 +63,7 @@
 			<basic name="lockdate">
 				<temporal>TIMESTAMP</temporal>
 			</basic>
+			<basic name="metaData" />
 			<transient name="modelAttributes" />
 			<transient name="primaryKey" />
 			<transient name="primaryKeyObj" />

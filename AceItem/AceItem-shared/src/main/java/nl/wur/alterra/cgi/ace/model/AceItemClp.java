@@ -62,6 +62,7 @@ public class AceItemClp extends BaseModelImpl<AceItem> implements AceItem {
     private String _scenario;
     private String _timeperiod;
     private Date _lockdate;
+    private String _metaData;
     private BaseModel<?> _aceItemRemoteModel;
 
     public AceItemClp() {
@@ -143,6 +144,7 @@ public class AceItemClp extends BaseModelImpl<AceItem> implements AceItem {
         attributes.put("scenario", getScenario());
         attributes.put("timeperiod", getTimeperiod());
         attributes.put("lockdate", getLockdate());
+        attributes.put("metaData", getMetaData());
 
         return attributes;
     }
@@ -399,6 +401,12 @@ public class AceItemClp extends BaseModelImpl<AceItem> implements AceItem {
 
         if (lockdate != null) {
             setLockdate(lockdate);
+        }
+
+        String metaData = (String) attributes.get("metaData");
+
+        if (metaData != null) {
+            setMetaData(metaData);
         }
     }
 
@@ -1329,6 +1337,28 @@ public class AceItemClp extends BaseModelImpl<AceItem> implements AceItem {
         }
     }
 
+    @Override
+    public String getMetaData() {
+        return _metaData;
+    }
+
+    @Override
+    public void setMetaData(String metaData) {
+        _metaData = metaData;
+
+        if (_aceItemRemoteModel != null) {
+            try {
+                Class<?> clazz = _aceItemRemoteModel.getClass();
+
+                Method method = clazz.getMethod("setMetaData", String.class);
+
+                method.invoke(_aceItemRemoteModel, metaData);
+            } catch (Exception e) {
+                throw new UnsupportedOperationException(e);
+            }
+        }
+    }
+
     public BaseModel<?> getAceItemRemoteModel() {
         return _aceItemRemoteModel;
     }
@@ -1438,6 +1468,7 @@ public class AceItemClp extends BaseModelImpl<AceItem> implements AceItem {
         clone.setScenario(getScenario());
         clone.setTimeperiod(getTimeperiod());
         clone.setLockdate(getLockdate());
+        clone.setMetaData(getMetaData());
 
         return clone;
     }
@@ -1483,7 +1514,7 @@ public class AceItemClp extends BaseModelImpl<AceItem> implements AceItem {
 
     @Override
     public String toString() {
-        StringBundler sb = new StringBundler(85);
+        StringBundler sb = new StringBundler(87);
 
         sb.append("{aceItemId=");
         sb.append(getAceItemId());
@@ -1569,6 +1600,8 @@ public class AceItemClp extends BaseModelImpl<AceItem> implements AceItem {
         sb.append(getTimeperiod());
         sb.append(", lockdate=");
         sb.append(getLockdate());
+        sb.append(", metaData=");
+        sb.append(getMetaData());
         sb.append("}");
 
         return sb.toString();
@@ -1576,7 +1609,7 @@ public class AceItemClp extends BaseModelImpl<AceItem> implements AceItem {
 
     @Override
     public String toXmlString() {
-        StringBundler sb = new StringBundler(130);
+        StringBundler sb = new StringBundler(133);
 
         sb.append("<model><model-name>");
         sb.append("nl.wur.alterra.cgi.ace.model.AceItem");
@@ -1749,6 +1782,10 @@ public class AceItemClp extends BaseModelImpl<AceItem> implements AceItem {
         sb.append(
             "<column><column-name>lockdate</column-name><column-value><![CDATA[");
         sb.append(getLockdate());
+        sb.append("]]></column-value></column>");
+        sb.append(
+            "<column><column-name>metaData</column-name><column-value><![CDATA[");
+        sb.append(getMetaData());
         sb.append("]]></column-value></column>");
 
         sb.append("</model>");

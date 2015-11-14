@@ -79,6 +79,7 @@ public class AceItemWrapper implements AceItem, ModelWrapper<AceItem> {
         attributes.put("scenario", getScenario());
         attributes.put("timeperiod", getTimeperiod());
         attributes.put("lockdate", getLockdate());
+        attributes.put("metaData", getMetaData());
 
         return attributes;
     }
@@ -335,6 +336,12 @@ public class AceItemWrapper implements AceItem, ModelWrapper<AceItem> {
 
         if (lockdate != null) {
             setLockdate(lockdate);
+        }
+
+        String metaData = (String) attributes.get("metaData");
+
+        if (metaData != null) {
+            setMetaData(metaData);
         }
     }
 
@@ -1196,6 +1203,26 @@ public class AceItemWrapper implements AceItem, ModelWrapper<AceItem> {
     @Override
     public void setLockdate(java.util.Date lockdate) {
         _aceItem.setLockdate(lockdate);
+    }
+
+    /**
+    * Returns the meta data of this ace item.
+    *
+    * @return the meta data of this ace item
+    */
+    @Override
+    public java.lang.String getMetaData() {
+        return _aceItem.getMetaData();
+    }
+
+    /**
+    * Sets the meta data of this ace item.
+    *
+    * @param metaData the meta data of this ace item
+    */
+    @Override
+    public void setMetaData(java.lang.String metaData) {
+        _aceItem.setMetaData(metaData);
     }
 
     @Override

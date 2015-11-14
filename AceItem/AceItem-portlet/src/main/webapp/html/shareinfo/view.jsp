@@ -47,6 +47,15 @@
 	   literal = "an ";
 	   aceItemType = "Organization";
    }
+   else if (sharetype.equalsIgnoreCase(AceItemType.INDICATOR.toString())) {
+	   	   typedescription = "Indicator";
+	   	   aceItemType = "Indicator";
+	   	   literal = "an ";
+   }
+   else if (sharetype.equalsIgnoreCase(AceItemType.MAPGRAPHDATASET.toString())) {
+		   typedescription = "map graph data";
+		   aceItemType = "Map Graph Dataset";
+   }
 
    if ( ! renderRequest.isUserInRole("user") ) {
 %>

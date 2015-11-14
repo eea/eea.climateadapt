@@ -44,6 +44,7 @@
 		<field name="scenario" type="String" />
 		<field name="timeperiod" type="String" />
 		<field name="lockdate" type="Date" />
+		<field name="metaData" type="String" />
 	</model>
 	<model name="nl.wur.alterra.cgi.ace.model.CSWHarvester">
 		<field name="cswharvesterid" type="long" />

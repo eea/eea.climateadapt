@@ -86,9 +86,10 @@ public class AceItemModelImpl extends BaseModelImpl<AceItem>
             { "admincomment", Types.VARCHAR },
             { "scenario", Types.VARCHAR },
             { "timeperiod", Types.VARCHAR },
-            { "lockdate", Types.TIMESTAMP }
+            { "lockdate", Types.TIMESTAMP },
+            { "metaData", Types.VARCHAR }
         };
-    public static final String TABLE_SQL_CREATE = "create table Ace_AceItem (aceItemId LONG not null primary key,companyId LONG,groupId LONG,wxsharvesterId LONG,cswharvesterId LONG,name VARCHAR(75) null,description VARCHAR(75) null,datatype VARCHAR(75) null,storedAt VARCHAR(75) null,storagetype VARCHAR(75) null,specialtagging VARCHAR(75) null,textSearch VARCHAR(75) null,keyword VARCHAR(75) null,targetresolution VARCHAR(75) null,spatialLayer VARCHAR(75) null,spatialValues VARCHAR(75) null,startDate DATE null,endDate DATE null,publicationDate DATE null,sectors_ VARCHAR(75) null,elements_ VARCHAR(75) null,climateimpacts_ VARCHAR(75) null,rating LONG,importance LONG,source VARCHAR(75) null,deeplink VARCHAR(75) null,controlstatus INTEGER,creator VARCHAR(75) null,creationdate DATE null,moderator VARCHAR(75) null,approvaldate DATE null,replacesId LONG,comments VARCHAR(75) null,textwebpage VARCHAR(75) null,year VARCHAR(75) null,geochars VARCHAR(75) null,feature VARCHAR(75) null,supdocs VARCHAR(75) null,admincomment VARCHAR(75) null,scenario VARCHAR(75) null,timeperiod VARCHAR(75) null,lockdate DATE null)";
+    public static final String TABLE_SQL_CREATE = "create table Ace_AceItem (aceItemId LONG not null primary key,companyId LONG,groupId LONG,wxsharvesterId LONG,cswharvesterId LONG,name VARCHAR(75) null,description VARCHAR(75) null,datatype VARCHAR(75) null,storedAt VARCHAR(75) null,storagetype VARCHAR(75) null,specialtagging VARCHAR(75) null,textSearch VARCHAR(75) null,keyword VARCHAR(75) null,targetresolution VARCHAR(75) null,spatialLayer VARCHAR(75) null,spatialValues VARCHAR(75) null,startDate DATE null,endDate DATE null,publicationDate DATE null,sectors_ VARCHAR(75) null,elements_ VARCHAR(75) null,climateimpacts_ VARCHAR(75) null,rating LONG,importance LONG,source VARCHAR(75) null,deeplink VARCHAR(75) null,controlstatus INTEGER,creator VARCHAR(75) null,creationdate DATE null,moderator VARCHAR(75) null,approvaldate DATE null,replacesId LONG,comments VARCHAR(75) null,textwebpage VARCHAR(75) null,year VARCHAR(75) null,geochars VARCHAR(75) null,feature VARCHAR(75) null,supdocs VARCHAR(75) null,admincomment VARCHAR(75) null,scenario VARCHAR(75) null,timeperiod VARCHAR(75) null,lockdate DATE null,metaData VARCHAR(75) null)";
     public static final String TABLE_SQL_DROP = "drop table Ace_AceItem";
     public static final String ORDER_BY_JPQL = " ORDER BY aceItem.name ASC";
     public static final String ORDER_BY_SQL = " ORDER BY Ace_AceItem.name ASC";
@@ -164,6 +165,7 @@ public class AceItemModelImpl extends BaseModelImpl<AceItem>
     private String _scenario;
     private String _timeperiod;
     private Date _lockdate;
+    private String _metaData;
     private long _columnBitmask;
     private AceItem _escapedModel;
 
@@ -246,6 +248,7 @@ public class AceItemModelImpl extends BaseModelImpl<AceItem>
         attributes.put("scenario", getScenario());
         attributes.put("timeperiod", getTimeperiod());
         attributes.put("lockdate", getLockdate());
+        attributes.put("metaData", getMetaData());
 
         return attributes;
     }
@@ -502,6 +505,12 @@ public class AceItemModelImpl extends BaseModelImpl<AceItem>
 
         if (lockdate != null) {
             setLockdate(lockdate);
+        }
+
+        String metaData = (String) attributes.get("metaData");
+
+        if (metaData != null) {
+            setMetaData(metaData);
         }
     }
 
@@ -1081,6 +1090,20 @@ public class AceItemModelImpl extends BaseModelImpl<AceItem>
         _lockdate = lockdate;
     }
 
+    @Override
+    public String getMetaData() {
+        if (_metaData == null) {
+            return StringPool.BLANK;
+        } else {
+            return _metaData;
+        }
+    }
+
+    @Override
+    public void setMetaData(String metaData) {
+        _metaData = metaData;
+    }
+
     public long getColumnBitmask() {
         return _columnBitmask;
     }
@@ -1154,6 +1177,7 @@ public class AceItemModelImpl extends BaseModelImpl<AceItem>
         aceItemImpl.setScenario(getScenario());
         aceItemImpl.setTimeperiod(getTimeperiod());
         aceItemImpl.setLockdate(getLockdate());
+        aceItemImpl.setMetaData(getMetaData());
 
         aceItemImpl.resetOriginalValues();
 
@@ -1506,12 +1530,20 @@ public class AceItemModelImpl extends BaseModelImpl<AceItem>
             aceItemCacheModel.lockdate = Long.MIN_VALUE;
         }
 
+        aceItemCacheModel.metaData = getMetaData();
+
+        String metaData = aceItemCacheModel.metaData;
+
+        if ((metaData != null) && (metaData.length() == 0)) {
+            aceItemCacheModel.metaData = null;
+        }
+
         return aceItemCacheModel;
     }
 
     @Override
     public String toString() {
-        StringBundler sb = new StringBundler(85);
+        StringBundler sb = new StringBundler(87);
 
         sb.append("{aceItemId=");
         sb.append(getAceItemId());
@@ -1597,6 +1629,8 @@ public class AceItemModelImpl extends BaseModelImpl<AceItem>
         sb.append(getTimeperiod());
         sb.append(", lockdate=");
         sb.append(getLockdate());
+        sb.append(", metaData=");
+        sb.append(getMetaData());
         sb.append("}");
 
         return sb.toString();
@@ -1604,7 +1638,7 @@ public class AceItemModelImpl extends BaseModelImpl<AceItem>
 
     @Override
     public String toXmlString() {
-        StringBundler sb = new StringBundler(130);
+        StringBundler sb = new StringBundler(133);
 
         sb.append("<model><model-name>");
         sb.append("nl.wur.alterra.cgi.ace.model.AceItem");
@@ -1777,6 +1811,10 @@ public class AceItemModelImpl extends BaseModelImpl<AceItem>
         sb.append(
             "<column><column-name>lockdate</column-name><column-value><![CDATA[");
         sb.append(getLockdate());
+        sb.append("]]></column-value></column>");
+        sb.append(
+            "<column><column-name>metaData</column-name><column-value><![CDATA[");
+        sb.append(getMetaData());
         sb.append("]]></column-value></column>");
 
         sb.append("</model>");

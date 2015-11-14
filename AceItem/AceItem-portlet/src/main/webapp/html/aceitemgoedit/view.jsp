@@ -34,6 +34,7 @@
 					|| renderRequest.isUserInRole("administrator")
 					|| renderRequest.isUserInRole("Power User")) {
 				
+				//deprecated url
 				editUrl = prefs.getValue(Constants.EDITURL,"/web/guest/aceitems1?p_p_id=aceitemportlet_WAR_AceItemportlet&p_p_lifecycle=0&p_p_state=normal&p_p_mode=view&p_p_col_id=column-1&p_p_col_count=1&_aceitemportlet_WAR_AceItemportlet_jspPage=%2Fhtml%2Faceitem%2Fedit_aceitem.jsp&_aceitemportlet_WAR_AceItemportlet_redirect=%2Fweb%2Fguest%2Faceitems1&_aceitemportlet_WAR_AceItemportlet_aceItemId=") ;
                 userInRole = true;
 			}
@@ -60,10 +61,21 @@
 				else if(aceitem.getDatatype().equalsIgnoreCase( AceItemType.ORGANISATION.toString() )){ 
 					editUrl = prefs.getValue(Constants.ORGANISATIONSHAREEDITURL,"/web/guest/share-your-info/organisations?p_p_id=shareaceitemportlet_WAR_AceItemportlet_INSTANCE_vfO6&p_p_lifecycle=0&p_p_state=normal&p_p_mode=view&p_p_col_id=column-2&p_p_col_count=1&_shareaceitemportlet_WAR_AceItemportlet_INSTANCE_vfO6_jspPage=%2Fhtml%2Fshareinfo%2Fadd_aceitem.jsp&_shareaceitemportlet_WAR_AceItemportlet_INSTANCE_vfO6_redirect=%2Fen%2Fshare-your-info%2Forganisations&_shareaceitemportlet_WAR_AceItemportlet_INSTANCE_vfO6_aceItemId=") ;
 				}
+				else if (aceitem.getDatatype().equalsIgnoreCase( AceItemType.INDICATOR.toString())) {					
+					editUrl = prefs.getValue(Constants.INDICATORSSHAREEDITURL,"/web/guest/share-your-info/indicators?p_p_id=shareaceitemportlet_WAR_AceItemportlet_INSTANCE_4e0wgmd0N2fB&p_p_lifecycle=0&p_p_state=normal&p_p_mode=view&p_p_col_id=column-1&p_p_col_count=1&_shareaceitemportlet_WAR_AceItemportlet_INSTANCE_4e0wgmd0N2fB_jspPage=%2Fhtml%2Fshareinfo%2Fadd_aceitem.jsp&_shareaceitemportlet_WAR_AceItemportlet_INSTANCE_4e0wgmd0N2fB_redirect=%2Fen%2Fshare-your-info%2Findicators&_shareaceitemportlet_WAR_AceItemportlet_INSTANCE_4e0wgmd0N2fB_aceItemId=");
+					//System.out.println("after: INDICATOR item with url: "+editUrl);
+				}
+				else if (aceitem.getDatatype().equalsIgnoreCase( AceItemType.MAPGRAPHDATASET.toString())) {
+					editUrl = prefs.getValue(Constants.MAPGRAPHDATAEDITURL, "/web/guest/share-your-info/map-graph-data?p_p_id=shareaceitemportlet_WAR_AceItemportlet_INSTANCE_0JfX0wbAluvS&p_p_lifecycle=0&p_p_state=normal&p_p_mode=view&p_p_col_id=column-1&p_p_col_count=1&_shareaceitemportlet_WAR_AceItemportlet_INSTANCE_0JfX0wbAluvS_jspPage=%2Fhtml%2Fshareinfo%2Fadd_aceitem.jsp&_shareaceitemportlet_WAR_AceItemportlet_INSTANCE_0JfX0wbAluvS_redirect=%2Fen%2Fshare-your-info%2Findicators&_shareaceitemportlet_WAR_AceItemportlet_INSTANCE_0JfX0wbAluvS_aceItemId=");
+					//System.out.println("after: MAPGRAPHDATA item with url: "+editUrl);
+				}
+				
 				
 			}
 			
-			editUrl += "" + aceitemId ;
+			editUrl += aceitemId ;
+			
+			System.out.println("final url: "+editUrl);
 			
 			if (userInRole || ((moderator.indexOf(newModerator) > -1) && ((aceitem.getControlstatus() == ACEIndexUtil.Status_DRAFT) || (aceitem.getControlstatus() == ACEIndexUtil.Status_SUBMITTED)) ) ) { 
 %>		 

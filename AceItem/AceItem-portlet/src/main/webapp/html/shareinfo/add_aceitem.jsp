@@ -6,7 +6,9 @@
 
 	AceItem aceitem = null;
 	AceItem aceItemFromRequest = null;
-	
+	boolean isIndicator = false;
+	boolean isMapGraphData = false;
+		
 	long aceItemId = ParamUtil.getLong(request, "aceItemId");
 	
 	// look for request attribute because this might be the result of edit
@@ -51,7 +53,19 @@
 	   typedescription = "organisation";
 	   literal = "an "; 
 	   aceitemType = "Organisation";
-	}	
+	}
+	else if (sharetype.equalsIgnoreCase(AceItemType.INDICATOR.toString())) {
+	   typedescription = "Indicator";
+	   literal= "an ";
+	   aceitemType  = "Indicator";
+	   isIndicator = true;
+	}
+	else if (sharetype.equalsIgnoreCase(AceItemType.MAPGRAPHDATASET.toString())) {
+		//System.out.println("Map Graph Data Set");
+		typedescription = "Map Graph Data Set";
+		aceitemType = "Map Graph Data";
+		isMapGraphData = true;		
+	}
 
 	if (aceItemId > 0) {
 		
@@ -266,7 +280,11 @@
 						    <li class="#"><a href="#">Item Description</a></li>
 						<% } %>
 						<li><a href="#">Reference Information</a></li>
+						<%													
+							if (!isIndicator && !isMapGraphData) {
+						%>
 						<li><a href="#">Documents</a></li>
+						<% } %>
 						<li><a href="#">Geographic Information</a></li>
 						
 						<%
@@ -305,7 +323,7 @@
 									
 									    <!-- approved check box -->
 									    <!-- show only if it was submitted -->
-										 <% 
+										 <% 																		
 										     // show the approved checkbox only if the user is reviewer or administrator
 										  String checked = "";
 										  if (aceitem != null && aceitem.getControlstatus() >= ACEIndexUtil.Status_SUBMITTED && (renderRequest.isUserInRole("Portal Content Reviewer") || renderRequest.isUserInRole("administrator")) )
@@ -723,11 +741,23 @@
 	  <div class="case-studies-tabbed-content-header"><em>Reference Information</em></div>	
 	  <br/>
 	  <div class="case-studies-tabbed-content-section">
-	   <div class="case-studies-tabbed-content-subheader">Website</div>
+	   <%
+	   String websiteHeader = "Website";
+	   	   if (isMapGraphData) {
+	   		   websiteHeader = "Link to Map Viewer";
+	   	   }
+	   %>
+	   	<div class="case-studies-tabbed-content-subheader"><%=websiteHeader%></div>
 		<liferay-ui:error key="aceitemstoredat-required" message="aceitemstoredat-required" />
 	   <ul>
 	    <li>	
-	        <p><b><em>List the Name and Website where the item can be found or is described. (500 character limit).Please separate each website with semicolon.</em></b></p>
+	        <p><b><span class="red">*</span><em>List the Name and <%=websiteHeader%> where the item can be found or is described. 
+	        <%if(!isMapGraphData){%>
+	        (500 character limit). Please separate each website with semicolon.
+	        <%}else{%>
+	        (250 character limit)
+	        <%} %>
+	        </em></b></p>
 	        <% 
 					  String website = "";
 					  if (aceitem == null || Validator.isNull(aceitem.getStoredAt())) {
@@ -735,9 +765,18 @@
 						  {
 							        website = HtmlUtil.escapeAttribute(aceItemFromRequest.getStoredAt());
 						  }
-					  }
+					  } else if (aceitem != null){						  
+							  website = aceitem.getStoredAt();						  
+ 					  }
 			%>
-			<textarea id="storeAtId" name="storedAt" cols="40" rows="10" class="WYSIWYG" data-maxlength="500"><%= aceitem == null ? website : HtmlUtil.escapeAttribute(aceitem.getStoredAt()) %></textarea>
+			<% if (!isMapGraphData) { %>
+				<textarea id="storeAtId" name="storedAt" cols="40" rows="10" class="WYSIWYG" data-maxlength="500">
+					<%= aceitem == null ? website : HtmlUtil.escapeAttribute(aceitem.getStoredAt()) %>
+				</textarea>
+			<% } else { %>	
+				<input id="storeAtId" name="storedAt" type="text" size="100" maxlength="250" value="<%=website %>" /> <br /> <br />
+			<% } %>	
+				
 			<div class="case-studies-character-count"></div>
 		</li>
 	   </ul>
@@ -758,21 +797,49 @@
 				  }
 			%>
 				
-	        
-		    <textarea id="aceItemStore" name="source" cols="40" rows="10" class="WYSIWYG" data-maxlength="500"><%= aceitem == null ? source : HtmlUtil.escapeAttribute(aceitem.getSource()) %></textarea>
+	        <textarea id="aceItemStore" name="source" cols="40" rows="10" class="WYSIWYG" data-maxlength="500">
+		    	<%= aceitem == null ? source : HtmlUtil.escapeAttribute(aceitem.getSource()) %>
+		    </textarea>
+		    
 		    <div class="case-studies-character-count"></div>
 		 </li>
 	   </ul>
 	 </div>
+	 <% if (isMapGraphData) { %>
+	 <div class="case-studies-tabbed-content-section">
+	 	<div class="case-studies-tabbed-content-subheader">Metadata</div>
+	 	 <ul>
+	 	 	<li>
+	 	 		<p><b><em>Describe the metadata for this Map Graph Data Set (250 character limit)</em></b></p>
+	 	 		<%
+	 	 			String metaData = "";
+	 	 			if (aceitem == null || Validator.isNull(aceitem.getMetaData())) {	 	 				
+	 	 				if (aceItemFromRequest != null && aceItemFromRequest.getMetaData() != null) {
+	 	 					metaData = HtmlUtil.escapeAttribute(aceItemFromRequest.getMetaData());
+	 	 				}		 	 				
+	 	 			} else if(aceitem != null) {	 	 		
+	 	 				metaData = aceitem.getMetaData();
+	 	 				System.out.println("metaData exists w/ value:"+metaData);
+	 	 			}
+	 	 		%>	 	 		
+	 	 		<input name="aceItemMetaData" id="aceItemMetaData" size="100" maxlength="250" value="<%=metaData%>" /> <br /><br />	 	 		
+	 	 		<div class="case-studies-character-count"></div>	 	 		
+	 	 	</li>
+	 	 </ul>
+	 </div>
+	 <% } %>
 		<div class="case-studies-tabbed-content-button-row">
 		        <a href="#" class="case-studies-tabbed-content-button-green case-studies-tabbed-content-button-previous case-studies-tabbed-content-float-left">Back To Item Description</a>
 				<a href="#" class="case-studies-tabbed-content-button-green" onClick="submitform('save')">Save as Draft</a>
-				<a href="#" class="case-studies-tabbed-content-button-green case-studies-tabbed-content-button-next">Next - Documents</a>
+				<%if(!isIndicator && !isMapGraphData) { %>
+					<a href="#" class="case-studies-tabbed-content-button-green case-studies-tabbed-content-button-next">Next - Documents</a>
+				<% } else {%>
+					<a href="#" class="case-studies-tabbed-content-button-green case-studies-tabbed-content-button-next">Next - Geographic Information</a>
+				<%}%>					
 		</div>
    </li>
-   
-   
-   
+    
+   <% if (!isIndicator && !isMapGraphData) { %>      
    <li>
 			<div class="case-studies-tabbed-content-header"><em>Documents</em></div>
 				<div class="case-studies-tabbed-content-section">
@@ -913,6 +980,7 @@
 								<a href="#" class="case-studies-tabbed-content-button-green case-studies-tabbed-content-button-next">Next - Geographic Information</a>
 							</div>
 						</li>
+						<%} %>	
 	<li>
 	<div class="case-studies-tabbed-content-header">Geographic Information</div>
 	 <br/>
@@ -1204,8 +1272,12 @@
 			</div>
 		   
 		   <div class="case-studies-tabbed-content-button-row">
-							 
+				    
+				    <% if (!isIndicator && !isMapGraphData) { %>					 
 					<a href="#" class="case-studies-tabbed-content-button-green case-studies-tabbed-content-button-previous case-studies-tabbed-content-float-left">Back To Documents</a>
+					<% } else { %>
+					<a href="#" class="case-studies-tabbed-content-button-green case-studies-tabbed-content-button-previous case-studies-tabbed-content-float-left">Back To Reference Information</a>
+					<%} %>
 					<a href="#" class="case-studies-tabbed-content-button-green" onClick="submitform('save')">Save as Draft</a>
 					<% if (aceitem != null) { %>
 					   <a href="#" class="case-studies-tabbed-content-button-green case-studies-tabbed-content-button-next">Next - Review &amp; Submit</a>

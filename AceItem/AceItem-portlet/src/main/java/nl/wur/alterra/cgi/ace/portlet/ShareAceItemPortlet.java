@@ -72,6 +72,24 @@ public class ShareAceItemPortlet extends LuceneIndexUpdatePortletForShareAceItem
 
         if (AceItemValidator.validateAceItem(aceitem, errors)) {
             AceItemLocalServiceUtil.addAceItem(aceitem);
+            
+          //check for previous aceitem that was erroneously created from re-submission of the form and delete it
+                        long currentCreationTime = aceitem.getCreationdate().getTime();
+                        //System.out.println("current creation time: "+currentCreationTime);            
+                        //System.out.println("current aceitem id: "+aceitem.getAceItemId());
+                        try {
+            	            AceItem previousAceItem = AceItemLocalServiceUtil.getAceItem(aceitem.getAceItemId() - 1);
+            	            if (previousAceItem != null) {	            	
+            	            	System.out.println("previous creation time: "+previousAceItem.getCreationdate().getTime());
+            	            	System.out.println("difference: "+Math.abs(previousAceItem.getCreationdate().getTime() - currentCreationTime));
+            	            	if (Math.abs(previousAceItem.getCreationdate().getTime() - currentCreationTime) <= 180000) { //time difference less than 3 minutes
+            	            		AceItemLocalServiceUtil.deleteAceItem(previousAceItem);
+            	            	}
+            	            }
+                        }catch(Exception e) {
+                        	e.printStackTrace();
+                        }
+                        
             synchronizeIndexSingleAceItem(aceitem);
 
             // don't want to send email and save the session when it is a save

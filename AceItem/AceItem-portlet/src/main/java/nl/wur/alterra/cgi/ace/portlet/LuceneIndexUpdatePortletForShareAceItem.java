@@ -127,7 +127,7 @@ public abstract class LuceneIndexUpdatePortletForShareAceItem extends MVCPortlet
         if (request.getRemoteUser() != null) {
             requestUser = UserServiceUtil.getUserById(Long.parseLong(request.getRemoteUser()));
             String moderator = aceitem.getModerator();
-
+                        
             username = requestUser.getFullName();
             useremail = requestUser.getEmailAddress();
             String newModerator = username + " (" + useremail + ")";
@@ -211,8 +211,12 @@ public abstract class LuceneIndexUpdatePortletForShareAceItem extends MVCPortlet
         aceitem.setAdmincomment(ParamUtil.getString(uploadRequest, "admincomment"));
         aceitem.setYear(ParamUtil.getString(uploadRequest, "year"));
         aceitem.setAdmincomment(ParamUtil.getString(uploadRequest, "admincomment"));
-
-
+        
+        String metaData = ParamUtil.getString(uploadRequest, "aceItemMetaData");
+        if (metaData != null) {   
+           aceitem.setMetaData(metaData);
+        }
+        
         String choosencountries = "";
         for (AceItemCountry aceitemcountry : AceItemCountry.values()) {
 
@@ -337,7 +341,15 @@ public abstract class LuceneIndexUpdatePortletForShareAceItem extends MVCPortlet
                  aceitem.setApprovaldate(approvalDate);
             }
         }
-
+        
+        String featured = ParamUtil.getString(uploadRequest, "feature");
+                if (!(featured == null || featured.length() == 0)) {        	        
+                	aceitem.setFeature(featured);
+                } else {
+                	aceitem.setFeature("");
+                }
+        
+        
         if (Validator.isNull(aceitem.getCreationdate()))
         {
             // creation date is the time when case study is first saved

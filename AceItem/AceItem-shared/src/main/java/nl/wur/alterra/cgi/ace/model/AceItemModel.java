@@ -660,6 +660,21 @@ public interface AceItemModel extends BaseModel<AceItem> {
      */
     public void setLockdate(Date lockdate);
 
+    /**
+     * Returns the meta data of this ace item.
+     *
+     * @return the meta data of this ace item
+     */
+    @AutoEscape
+    public String getMetaData();
+
+    /**
+     * Sets the meta data of this ace item.
+     *
+     * @param metaData the meta data of this ace item
+     */
+    public void setMetaData(String metaData);
+
     @Override
     public boolean isNew();
 

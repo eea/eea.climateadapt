@@ -24,7 +24,7 @@
 			aceitem = AceItemLocalServiceUtil.getAceItem( aceitem_id ) ;
 		}
 		catch(Exception exc) {
-
+			exc.printStackTrace();
 			aceitem = null;
 		}
     }
@@ -50,6 +50,16 @@
 			   aceItemPageUrl = "/share-your-info/guidance-documents";
 
 			}
+			else if (sharetype.equalsIgnoreCase(AceItemType.INDICATOR.toString())) {
+			   aceitemType = "Indicator";
+			   aceItemSubmitText = "Submit an Information Portal";
+			   aceItemPageUrl = "/share-your-info/indicators";
+			}
+			else if (sharetype.equalsIgnoreCase(AceItemType.MAPGRAPHDATASET.toString())) {
+				aceitemType = "Map Graph Data Set";
+				aceItemSubmitText = "Submit a Map Graph Data";
+				aceItemPageUrl = "/share-your-info/map-graph-data";
+			}
 			else if (sharetype.equalsIgnoreCase(AceItemType.TOOL.toString())) {
 			   aceitemType = "Tools";
 			   aceItemSubmitText = "Submit a Tools";
@@ -59,16 +69,10 @@
 			   aceitemType = "Organisation";
 			   aceItemSubmitText = "Submit an Organisation";
 			   aceItemPageUrl = "/share-your-info/organisations";
-			}
-			else if (sharetype.equalsIgnoreCase(AceItemType.MAPGRAPHDATASET.toString())) {
-				   aceitemType = "Map Graph Data Set";
-			}
+			}			
 			else if (sharetype.equalsIgnoreCase(AceItemType.ACTION.toString())) {
 				   aceitemType = "Action";
-			}
-			else if (sharetype.equalsIgnoreCase(AceItemType.INDICATOR.toString())) {
-				   aceitemType = "Indicator";
-			}
+			}			
 %>
 
   <body>

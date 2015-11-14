@@ -63,10 +63,11 @@ public class AceItemCacheModel implements CacheModel<AceItem>, Externalizable {
     public String scenario;
     public String timeperiod;
     public long lockdate;
+    public String metaData;
 
     @Override
     public String toString() {
-        StringBundler sb = new StringBundler(85);
+        StringBundler sb = new StringBundler(87);
 
         sb.append("{aceItemId=");
         sb.append(aceItemId);
@@ -152,6 +153,8 @@ public class AceItemCacheModel implements CacheModel<AceItem>, Externalizable {
         sb.append(timeperiod);
         sb.append(", lockdate=");
         sb.append(lockdate);
+        sb.append(", metaData=");
+        sb.append(metaData);
         sb.append("}");
 
         return sb.toString();
@@ -372,6 +375,12 @@ public class AceItemCacheModel implements CacheModel<AceItem>, Externalizable {
             aceItemImpl.setLockdate(new Date(lockdate));
         }
 
+        if (metaData == null) {
+            aceItemImpl.setMetaData(StringPool.BLANK);
+        } else {
+            aceItemImpl.setMetaData(metaData);
+        }
+
         aceItemImpl.resetOriginalValues();
 
         return aceItemImpl;
@@ -421,6 +430,7 @@ public class AceItemCacheModel implements CacheModel<AceItem>, Externalizable {
         scenario = objectInput.readUTF();
         timeperiod = objectInput.readUTF();
         lockdate = objectInput.readLong();
+        metaData = objectInput.readUTF();
     }
 
     @Override
@@ -609,5 +619,11 @@ public class AceItemCacheModel implements CacheModel<AceItem>, Externalizable {
         }
 
         objectOutput.writeLong(lockdate);
+
+        if (metaData == null) {
+            objectOutput.writeUTF(StringPool.BLANK);
+        } else {
+            objectOutput.writeUTF(metaData);
+        }
     }
 }

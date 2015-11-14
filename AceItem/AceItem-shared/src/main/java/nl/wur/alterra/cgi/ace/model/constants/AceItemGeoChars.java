@@ -458,7 +458,10 @@ public enum AceItemGeoChars {
 
     /*** Extra-Regio NUTS 2 (FR) ***/
     SUBN_Extra_Regio_NUTS_2__FR_("Extra-Regio NUTS 2 (FR)"),
-
+    
+    /*** Extra-Regio NUTS 2 (HR) ***/
+    SUBN_Extra_Regio_NUTS_2__HR_("Extra-Regio NUTS 2 (HR)"),
+    
     /*** Piemonte (IT) ***/
     SUBN_Piemonte__IT_("Piemonte (IT)"),
 

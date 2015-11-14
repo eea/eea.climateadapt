@@ -51,6 +51,7 @@
 		<property name="scenario" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="timeperiod" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="lockdate" type="org.hibernate.type.TimestampType" />
+		<property name="metaData" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 	</class>
 	<class name="nl.wur.alterra.cgi.ace.model.impl.CSWHarvesterImpl" table="Ace_CSWHarvester">
 		<cache usage="read-write" />

@@ -126,7 +126,7 @@
         }
         %>
 
-          <liferay-ui:search-container-column-text name="aceItemId" orderable="true" orderableProperty="aceItemId">
+        <liferay-ui:search-container-column-text name="aceItemId" orderable="true" orderableProperty="aceItemId">
             <%=aceitem.getAceItemId()%>
         </liferay-ui:search-container-column-text>
 
