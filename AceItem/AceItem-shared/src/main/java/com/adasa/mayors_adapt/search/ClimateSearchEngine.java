@@ -305,14 +305,19 @@ public class ClimateSearchEngine extends IndexSearcher {
 			PortalException, SystemException, ParseException {
 		ResourceBundle labels = ResourceBundle.getBundle("content.Language",
 				Locale.ENGLISH);
+		searchText = searchText.trim();
 		BooleanQuery booleanQuery = new BooleanQuery();
 		BooleanQuery textQuery = new BooleanQuery();
 		if (searchText != null && searchText.length() > 0) {
-			searchText = searchText.toLowerCase();
-			textQuery.add(new TermQuery(new Term(Field.TITLE, searchText)),
-					BooleanClause.Occur.SHOULD);
-			textQuery.add(new TermQuery(new Term(Field.CONTENT, searchText)),
-					BooleanClause.Occur.SHOULD);
+			String[] searchTextArray = searchText.split(" ");
+			for (String term : searchTextArray){
+				term = term.trim();
+				term = term.toLowerCase();
+				textQuery.add(new TermQuery(new Term(Field.TITLE, term)),
+						BooleanClause.Occur.SHOULD);
+				textQuery.add(new TermQuery(new Term(Field.CONTENT, term)),
+						BooleanClause.Occur.SHOULD);
+			}
 			booleanQuery.add(textQuery, BooleanClause.Occur.MUST);
 		}
 
