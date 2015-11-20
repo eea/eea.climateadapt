@@ -564,11 +564,24 @@ if (endyear != null)
 					
 					if (filteredMeasureId != Long.parseLong(measureId)) {
 						String filteredStoredAt = storedAtBasic+Long.toString(filteredMeasureId);
+						
 						result.setStoredAt(filteredStoredAt);
-						AceItem aceItem = AceItemLocalServiceUtil.getAceItemByStoredAt(filteredStoredAt);
-						result.setName(aceItem.getName());
-						result.setYear(aceItem.getYear());
-						result.setShortdescription(aceItem.getDescription());
+						
+						AceItem aceItem = null;
+						
+						try {
+							aceItem = AceItemLocalServiceUtil.getAceItemByStoredAt(filteredStoredAt);							
+						} catch (Exception e) {
+							e.printStackTrace();
+						}
+						
+						if (aceItem != null) {
+							result.setName(aceItem.getName());
+							result.setYear(aceItem.getYear());
+							result.setShortdescription(aceItem.getDescription());
+						} else {
+							System.out.println("AceItem is null and filteredStoredAt: "+filteredStoredAt);	
+						}
 					}
 					
 				}
