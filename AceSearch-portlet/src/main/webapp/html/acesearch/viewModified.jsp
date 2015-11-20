@@ -564,9 +564,7 @@ if (endyear != null)
 					
 					if (filteredMeasureId != Long.parseLong(measureId)) {
 						String filteredStoredAt = storedAtBasic+Long.toString(filteredMeasureId);
-						
-						result.setStoredAt(filteredStoredAt);
-						
+
 						AceItem aceItem = null;
 						
 						try {
@@ -575,12 +573,11 @@ if (endyear != null)
 							e.printStackTrace();
 						}
 						
-						if (aceItem != null) {
+						if (aceItem != null) { //the filtering is meaningless if there is no such AceItem in DB
+							result.setStoredAt(filteredStoredAt);
 							result.setName(aceItem.getName());
 							result.setYear(aceItem.getYear());
-							result.setShortdescription(aceItem.getDescription());
-						} else {
-							System.out.println("AceItem is null and filteredStoredAt: "+filteredStoredAt);	
+							result.setShortdescription(aceItem.getDescription());						
 						}
 					}
 					
