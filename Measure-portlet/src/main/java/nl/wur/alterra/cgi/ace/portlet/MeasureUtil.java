@@ -1,8 +1,11 @@
 package nl.wur.alterra.cgi.ace.portlet;
 
 import com.liferay.portal.kernel.util.OrderByComparator;
+
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import nl.wur.alterra.cgi.ace.model.Measure;
 import nl.wur.alterra.cgi.ace.service.MeasureLocalServiceUtil;
@@ -99,7 +102,9 @@ public class MeasureUtil {
     }
     
     public static List<Measure> getFilteredItems(List<Measure> items) {
-    	List<Measure> filteredItems = new ArrayList<Measure>();
+    	//List<Measure> filteredItems = new ArrayList<Measure>();
+    	Set<Measure> filteredItems = new HashSet<Measure>(); //avoid Measure item duplication due to the redirection of some ids
+    	
     	for (Measure measure : items) {
     		long measureFilteredId = filterAdaptationOptionIds(measure.getMeasureId());
     		if (measureFilteredId == measure.getMeasureId()) {
@@ -115,8 +120,8 @@ public class MeasureUtil {
     		}
     	}
     	
-    	
-    	return filteredItems;
+    	return new ArrayList<Measure>(filteredItems);
+    	//return filteredItems;
     }
 	
 }
