@@ -69,6 +69,7 @@
         <requires-namespaced-parameters>false</requires-namespaced-parameters>
 		<header-portlet-css>/css/portlet.css</header-portlet-css>
 		<header-portlet-javascript>/js/jquery-1.6.2.min.js</header-portlet-javascript>
+		<header-portlet-javascript>/js/jquery.dualListBox-1.3.min.js</header-portlet-javascript>
 	    <header-portlet-javascript>/js/aceitem.js</header-portlet-javascript>
 		<footer-portlet-javascript>
 			/js/javascript.js
