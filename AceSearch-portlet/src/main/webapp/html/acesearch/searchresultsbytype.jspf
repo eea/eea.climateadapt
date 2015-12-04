@@ -186,7 +186,8 @@ function displayJSONResults(unique, aceitemResults) {
 
            } else if (aceitem.storagetype.substr(0, 7) == "ARTICLE") {
                    resultlist += ' - ' + descriptionText ;
-                   resultlist += '<span class="bolder">&#187; ' + imgSrc + ' ' + imgNew +  ' <a href="/articles/-/asset_publisher/Sb7UJFoceqC4/content/' + aceitem.storedAt + '" >' + aceitem.name + year + '</a></span>&nbsp;';
+                   resultlist += '<span class="bolder">&#187; ' + imgSrc + ' ' + imgNew +  ' <a href="/articles/-/asset_publisher/MomcFwj7CZOC/content/' + aceitem.storedAt + '" >' + aceitem.name + year + '</a></span>&nbsp;';
+                   //resultlist += '<span class="bolder">&#187; ' + imgSrc + ' ' + imgNew +  ' <a href="/articles/-/asset_publisher/Sb7UJFoceqC4/content/' + aceitem.storedAt + '" >' + aceitem.name + year + '</a></span>&nbsp;';
 			} 
            else {
                    resultlist += '<span class="bolder">&#187; ' + imgSrc + ' ' + imgNew +  ' <a href="/viewaceitem?aceitem_id=' +  aceitem.aceItemId + '" >' + aceitem.name + year + ' </a></span> - ' + descriptionText ;
@@ -343,7 +344,8 @@ function displayJSONResults(unique, aceitemResults) {
 								test="${!empty wrappedSearchResult.storagetype && fn:startsWith(wrappedSearchResult.storagetype, 'ARTICLE')==true}">
 								<span class="bolder">&#187; ${featureImageToDisplay}
 									${newImageToDisplay} <a
-									href="<c:out value="/articles/-/asset_publisher/Sb7UJFoceqC4/content/${wrappedSearchResult.storedAt}"/>">
+									href="<c:out value="/articles/-/asset_publisher/MomcFwj7CZOC/content/${wrappedSearchResult.storedAt}"/>"
+									<%-- href="<c:out value="/articles/-/asset_publisher/Sb7UJFoceqC4/content/${wrappedSearchResult.storedAt}"/>">> --%>
 										<c:out value="${wrappedSearchResult.name}" />
 										<c:out value="${year}" />
 								</a>
