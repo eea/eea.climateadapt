@@ -163,8 +163,18 @@ public abstract class LuceneIndexUpdatePortletForShareAceItem extends MVCPortlet
         aceitem.setSpecialtagging(ParamUtil.getString(uploadRequest, "specialtagging"));
 
         aceitem.setDatatype(ParamUtil.getString(uploadRequest, "datatype"));
-        aceitem.setStoragetype(ParamUtil.getString(uploadRequest, "storagetype"));
-
+        
+        // https://taskman.eionet.europa.eu/issues/31104        
+        // check if aceitem is new and save it with MAPLAYER storagetype
+        // if it already exists, save it also with MAPLAYER storagetype
+        String storageType = aceitem.getStoragetype(); 
+        
+        if ((!Validator.isNull(storageType) && !storageType.equals("MAPLAYER")) || Validator.isNull(storageType)) {
+        	aceitem.setStoragetype("MAPLAYER");
+        }
+        
+        //aceitem.setStoragetype(ParamUtil.getString(uploadRequest, "storagetype"));
+                                
         if (aceitem.getStoragetype().equalsIgnoreCase("URL")) {
             String websites = ParamUtil.getString(uploadRequest, "storedAt");
             // robust multiple website handling. Check for splitters space, ','
