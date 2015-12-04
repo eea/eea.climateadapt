@@ -1,13 +1,10 @@
 package nl.wur.alterra.cgi.ace.portlet;
 
 import com.liferay.portal.kernel.util.Validator;
-
 import nl.wur.alterra.cgi.ace.model.AceItem;
 import nl.wur.alterra.cgi.ace.service.AceItemLocalServiceUtil;
 
 import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -59,18 +56,7 @@ public class AceItemValidator {
                 errors.add("aceitemstoredat-required");
                 valid = false;
             }
-            
-            if (!Validator.isNull(aceitem.getMetaData())) {
-            	String regex = "^(https?)://[-a-zA-Z0-9+&@#/%?=~_|!:,.;]*[-a-zA-Z0-9+&@#/%=~_|]";
-            	Pattern urlPattern = Pattern.compile(regex);
-            	Matcher matcher = urlPattern.matcher(aceitem.getMetaData());
-            	if (!matcher.matches()) {
-            		System.out.println("invalid URL: "+aceitem.getMetaData());
-            		errors.add("aceitemmetadataurl-invalid");
-            		valid = false;
-            	} 
-            }
-            
+
             if (Validator.isNull(aceitem.getDescription())) {
                 errors.add("aceitemdescription-required");
                 valid = false;

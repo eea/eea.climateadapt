@@ -1,4 +1,4 @@
-$(document).ready(function() {			
+$(document).ready(function() {
 			// Tab Control
 			$('#case-studies-form-wrapper .case-studies-tabs ul').find('li').each(function() {
 				$(this).find('a').click(function(e) {
@@ -72,8 +72,8 @@ $(document).ready(function() {
 			            useSorting: false,
 						selectOnSubmit: false
 			  };
-			 
-			 $.configureBoxes(options);
+			    
+			  $.configureBoxes(options);
 		});
 
 		function initWYSIWYG() {

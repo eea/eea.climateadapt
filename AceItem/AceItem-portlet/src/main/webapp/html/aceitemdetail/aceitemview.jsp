@@ -96,31 +96,14 @@
 
 				<div class="case-studies-tabbed-content-section">
 					<div class="case-studies-subheader">Reference Information</div>
-							<%
-								String websites = "Websites";
-								if(aceitem.getDatatype().equalsIgnoreCase(AceItemType.MAPGRAPHDATASET.toString())) {
-									websites = "Link to Map Viewer";
-								}
-							%>
-							
-							<br/><p><b><%=websites%>:</b></p>
+							<br/><p><b>Websites:</b></p>
 
 								<%
 										if(aceitem.getStoragetype().equalsIgnoreCase("MAPLAYER")) {
-											//DEPRECATED cswRecordFileIdentifier gets handled inside mapviewer-portlet
-											//url = "<a href='/map-viewer?cswRecordFileIdentifier=" + aceitem.getStoredAt() + "' >View map " + aceitem.getName() + "</a>" ;
-											// NEW URL see https://taskman.eionet.europa.eu/issues/31104
-											url = "<a href='/tools/map-viewer?layerid=" + aceitem.getStoredAt() + "' >View map " + aceitem.getName() + "</a>";
+											// cswRecordFileIdentifier gets handled inside mapviewer-portlet
+											url = "<a href='/map-viewer?cswRecordFileIdentifier=" + aceitem.getStoredAt() + "' >View map " + aceitem.getName() + "</a>" ;
 											//dev:	metadataurl = "<a href='http://dev.ace.geocat.net/geonetwork/srv/en/metadata.show?uuid=" + aceitem.getStoredAt() + "' target='_blank'>View metadata " + aceitem.getName() + "</a>" ;
-											//DEPRECATED
-											//metadataurl = "<a href='/geonetwork/srv/en/metadata.show?uuid=" + aceitem.getStoredAt() + "' target='_blank'>View metadata " + aceitem.getName() + "</a>" ;
-											//NEW METADATA URL see https://taskman.eionet.europa.eu/issues/31104
-											//we will use the new aceitem field(metadata) for this metadata url
-											if (!Validator.isNull(aceitem.getMetaData())) {
-												metadataurl = "<a href='"+aceitem.getMetaData() + "' target='_blank'>View metadata " + aceitem.getName() + "</a>";
-											} else {
-												metadataurl = "No metadata url has been provided";
-											}
+											metadataurl = "<a href='/geonetwork/srv/en/metadata.show?uuid=" + aceitem.getStoredAt() + "' target='_blank'>View metadata " + aceitem.getName() + "</a>" ;
 										}
 										else if(aceitem.getStoragetype().equalsIgnoreCase("PLAINMETADATA")) {
 											// mapViewerAppId gets handled inside mapviewer-portlet
@@ -161,7 +144,7 @@
 											}
 										}
 								%>
-																					
+
 								<%  if(aceitem.getStoragetype().equalsIgnoreCase("MAPLAYER") ) { %>
 										<b>Go to the service</b><br />
 										 <%= url %><br /><br />
@@ -189,21 +172,6 @@
 									<div class="case-studies-form-clearing"></div>
 
 						<%} %>
-						
-						
-						<%									
-							if(aceitem.getDatatype().equalsIgnoreCase(AceItemType.MAPGRAPHDATASET.toString())) {																					
-								String metadata = "";
-								if (!Validator.isNull(aceitem.getMetaData())) {
-									metadata = aceitem.getMetaData();
-								}
-						%>
-							<br/><p><b>Link to metadata: </b></p>					
-							<%=metadata %><br/><br/>
-						<%
-							
-							}
-						%>
 
 				</div>
 

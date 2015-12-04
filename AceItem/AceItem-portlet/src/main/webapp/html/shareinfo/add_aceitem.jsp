@@ -744,7 +744,7 @@
 	   <%
 	   String websiteHeader = "Website";
 	   	   if (isMapGraphData) {
-	   		   websiteHeader = "Map Layer ID";
+	   		   websiteHeader = "Link to Map Viewer";
 	   	   }
 	   %>
 	   	<div class="case-studies-tabbed-content-subheader"><%=websiteHeader%></div>
@@ -773,8 +773,8 @@
 				<textarea id="storeAtId" name="storedAt" cols="40" rows="10" class="WYSIWYG" data-maxlength="500">
 					<%= aceitem == null ? website : HtmlUtil.escapeAttribute(aceitem.getStoredAt()) %>
 				</textarea>
-			<% } else { %>					
-				<input id="storeAtId" name="storedAt" class="metadataInput" type="text" size="100" maxlength="250" value="<%=website %>" style="width:425px;" /> <br /> <br />
+			<% } else { %>	
+				<input id="storeAtId" name="storedAt" type="text" size="100" maxlength="250" value="<%=website %>" /> <br /> <br />
 			<% } %>	
 				
 			<div class="case-studies-character-count"></div>
@@ -810,7 +810,7 @@
 	 	<div class="case-studies-tabbed-content-subheader">Metadata</div>
 	 	 <ul>
 	 	 	<li>
-	 	 		<p><b><em>Please enter the metadata url for this Map Graph Data Set (250 character limit)</em></b></p>
+	 	 		<p><b><em>Describe the metadata for this Map Graph Data Set (250 character limit)</em></b></p>
 	 	 		<%
 	 	 			String metaData = "";
 	 	 			if (aceitem == null || Validator.isNull(aceitem.getMetaData())) {	 	 				
@@ -821,9 +821,8 @@
 	 	 				metaData = aceitem.getMetaData();
 	 	 				System.out.println("metaData exists w/ value:"+metaData);
 	 	 			}
-	 	 		%>	 
-	 	 		<liferay-ui:error key="aceitemmetadataurl-invalid" message="aceitemmetadataurl-invalid" />	 		
-	 	 		<input name="aceItemMetaData" id="aceItemMetaData" size="100" maxlength="250" value="<%=metaData%>" style="width:425px;" /> <br /><br />	 	 		
+	 	 		%>	 	 		
+	 	 		<input name="aceItemMetaData" id="aceItemMetaData" size="100" maxlength="250" value="<%=metaData%>" /> <br /><br />	 	 		
 	 	 		<div class="case-studies-character-count"></div>	 	 		
 	 	 	</li>
 	 	 </ul>

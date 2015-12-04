@@ -66,7 +66,7 @@
 					//System.out.println("after: INDICATOR item with url: "+editUrl);
 				}
 				else if (aceitem.getDatatype().equalsIgnoreCase( AceItemType.MAPGRAPHDATASET.toString())) {
-					editUrl = prefs.getValue(Constants.MAPGRAPHDATAEDITURL, "/web/guest/share-your-info/map-graph-data?p_p_id=shareaceitemportlet_WAR_AceItemportlet_INSTANCE_0JfX0wbAluvS&p_p_lifecycle=0&p_p_state=normal&p_p_mode=view&p_p_col_id=column-1&p_p_col_count=1&_shareaceitemportlet_WAR_AceItemportlet_INSTANCE_0JfX0wbAluvS_jspPage=%2Fhtml%2Fshareinfo%2Fadd_aceitem.jsp&_shareaceitemportlet_WAR_AceItemportlet_INSTANCE_0JfX0wbAluvS_redirect=%2Fen%2Fshare-your-info%2Fmap-graph-data&_shareaceitemportlet_WAR_AceItemportlet_INSTANCE_0JfX0wbAluvS_aceItemId=");
+					editUrl = prefs.getValue(Constants.MAPGRAPHDATAEDITURL, "/web/guest/share-your-info/map-graph-data?p_p_id=shareaceitemportlet_WAR_AceItemportlet_INSTANCE_0JfX0wbAluvS&p_p_lifecycle=0&p_p_state=normal&p_p_mode=view&p_p_col_id=column-1&p_p_col_count=1&_shareaceitemportlet_WAR_AceItemportlet_INSTANCE_0JfX0wbAluvS_jspPage=%2Fhtml%2Fshareinfo%2Fadd_aceitem.jsp&_shareaceitemportlet_WAR_AceItemportlet_INSTANCE_0JfX0wbAluvS_redirect=%2Fen%2Fshare-your-info%2Findicators&_shareaceitemportlet_WAR_AceItemportlet_INSTANCE_0JfX0wbAluvS_aceItemId=");
 					//System.out.println("after: MAPGRAPHDATA item with url: "+editUrl);
 				}
 				
