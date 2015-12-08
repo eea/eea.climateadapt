@@ -552,13 +552,24 @@ if (endyear != null)
 		<%@ include file="searchresultsbytype.jspf" %>
 
         <c:set var="groupedResults" scope="page" value="${MEASURE_searchResults}"/>
-
-		<%						
-		List<AceItemSearchResult> results = (List<AceItemSearchResult>)pageContext.getAttribute("groupedResults");
-			
-				for (AceItemSearchResult result : results) {
+	
+		<%
+		boolean isMeasureItem = false;
+		
+		for(String aceItemType : aceitemtypes) {
+			System.out.println("aceItemType: "+aceItemType);
+			if (aceItemType.equals("MEASURE")) {
+				isMeasureItem = true;
+				break;
+			}
+		}
+		
+		if (isMeasureItem) {
+			List<AceItemSearchResult> results = (List<AceItemSearchResult>)pageContext.getAttribute("groupedResults");			
+				System.out.println("list:"+results);
+				for (AceItemSearchResult result : results) {					
 					String storedAtBasic = "ace_measure_id=";
-					String storedAt = result.getStoredAt();
+					String storedAt = result.getStoredAt();					
 					String measureId = storedAt.substring(storedAt.indexOf('=') + 1);			
 					long filteredMeasureId = PortletUtils.filterAdaptationOptionIds(Long.parseLong(measureId));
 					
@@ -582,9 +593,11 @@ if (endyear != null)
 					}
 					
 				}
+				pageContext.setAttribute("measureResults", results);				
+				pageContext.setAttribute("measureJSONResults", PortletUtils.getJSONResults(results));	
+		}
 		
-		pageContext.setAttribute("measureResults", results);				
-		pageContext.setAttribute("measureJSONResults", PortletUtils.getJSONResults(results));
+		
 		%>
 		<c:set var="groupedResults" scope="page" value="${measureResults}"/>
 		<c:set var="groupedJSONResults" scope="page" value="${measureJSONResults}"/>
