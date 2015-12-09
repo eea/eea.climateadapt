@@ -497,11 +497,11 @@ if (endyear != null)
         </c:if>
 		
 
-        <c:set var="groupedResults" scope="page" value="${CITYPROFILE_searchResults}"/>
+        <%-- <c:set var="groupedResults" scope="page" value="${CITYPROFILE_searchResults}"/>
 		<c:set var="groupedJSONResults" scope="page" value="${CITYPROFILE_JSONsearchResults}"/>
 		<c:set var="aceitemtype" scope="page" value="CITYPROFILE"/>
 		<c:set var="groupTitle" scope="page"><liferay-ui:message key="acesearch-datainfotype-lbl-CITYPROFILE" /></c:set>
-		<%@ include file="searchresultsbytype.jspf" %>
+		<%@ include file="searchresultsbytype.jspf" %> --%>
 
         <c:set var="groupedResults" scope="page" value="${ARTICLE_searchResults}"/>
 		<c:set var="groupedJSONResults" scope="page" value="${ARTICLE_JSONsearchResults}"/>
@@ -611,6 +611,12 @@ if (endyear != null)
 		<c:set var="groupTitle" scope="page"><liferay-ui:message key="acesearch-datainfotype-lbl-ACTION" /></c:set>
 		<%@ include file="searchresultsbytype.jspf" %>
 
+		<c:set var="groupedResults" scope="page" value="${CITYPROFILE_searchResults}"/>
+		<c:set var="groupedJSONResults" scope="page" value="${CITYPROFILE_JSONsearchResults}"/>
+		<c:set var="aceitemtype" scope="page" value="CITYPROFILE"/>
+		<c:set var="groupTitle" scope="page"><liferay-ui:message key="acesearch-datainfotype-lbl-CITYPROFILE" /></c:set>
+		<%@ include file="searchresultsbytype.jspf" %>
+		
         <c:set var="groupedResults" scope="page" value="${ORGANISATION_searchResults}"/>
 		<c:set var="groupedJSONResults" scope="page" value="${ORGANISATION_JSONsearchResults}"/>
 		<c:set var="aceitemtype" scope="page" value="ORGANISATION"/>
