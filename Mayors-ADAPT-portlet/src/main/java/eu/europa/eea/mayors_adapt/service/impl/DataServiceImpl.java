@@ -2,9 +2,11 @@ package eu.europa.eea.mayors_adapt.service.impl;
 
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Set;
 import java.util.TreeMap;
 import java.util.TreeSet;
 
@@ -65,16 +67,21 @@ public class DataServiceImpl extends DataServiceBaseImpl {
 	Locale locale = new Locale("en", "GB");
 
 
-	public TreeSet<String> getOptions(String fieldName) {
-		TreeSet<String> options = new TreeSet<String>();
+//	public TreeSet<String> getOptions(String fieldName) {
+	public Set<String> getOptions(String fieldName) {
+		//TreeSet<String> options = new TreeSet<String>();
+		Set<String> options = new LinkedHashSet<String>();
 		List<Node> definedOptions = SAXReaderUtil
 				.selectNodes("//dynamic-element[@name='" + fieldName
 						+ "']/*/*/entry/text()",
 						cityProfileStructure.getDocument());
+		System.out.println("Hola!");
 		for (Node node : definedOptions) {
 			if (!node.getText().equals("Select"))
+				System.out.println("node: "+node.getText());
 				options.add(node.getText());
 		}
+		
 		return options;
 	}
 

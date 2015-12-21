@@ -51,7 +51,8 @@ public class DataServiceUtil {
         return getService().invokeMethod(name, parameterTypes, arguments);
     }
 
-    public static java.util.TreeSet<java.lang.String> getOptions(
+    //public static java.util.TreeSet<java.lang.String> getOptions(
+    public static java.util.Set<java.lang.String> getOptions(
         java.lang.String fieldName) {
         return getService().getOptions(fieldName);
     }

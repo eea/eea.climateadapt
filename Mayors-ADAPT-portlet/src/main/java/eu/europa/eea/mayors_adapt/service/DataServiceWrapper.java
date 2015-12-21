@@ -45,7 +45,8 @@ public class DataServiceWrapper implements DataService,
     }
 
     @Override
-    public java.util.TreeSet<java.lang.String> getOptions(
+    //public java.util.TreeSet<java.lang.String> getOptions(
+    public java.util.Set<java.lang.String> getOptions(
         java.lang.String fieldName) {
         return _dataService.getOptions(fieldName);
     }

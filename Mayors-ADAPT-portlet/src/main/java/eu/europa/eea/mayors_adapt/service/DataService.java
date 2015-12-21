@@ -53,7 +53,8 @@ public interface DataService extends BaseService, InvokableService {
         throws java.lang.Throwable;
 
     @Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-    public java.util.TreeSet<java.lang.String> getOptions(
+    //public java.util.TreeSet<java.lang.String> getOptions(
+    public java.util.Set<java.lang.String> getOptions(
         java.lang.String fieldName);
 
     @Transactional(propagation = Propagation.SUPPORTS, readOnly = true)

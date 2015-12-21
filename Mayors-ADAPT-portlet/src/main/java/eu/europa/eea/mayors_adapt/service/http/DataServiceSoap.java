@@ -39,10 +39,12 @@ import java.rmi.RemoteException;
 public class DataServiceSoap {
     private static Log _log = LogFactoryUtil.getLog(DataServiceSoap.class);
 
-    public static java.util.TreeSet<java.lang.String> getOptions(
+    //public static java.util.TreeSet<java.lang.String> getOptions(
+    public static java.util.Set<java.lang.String> getOptions(
         java.lang.String fieldName) throws RemoteException {
         try {
-            java.util.TreeSet<java.lang.String> returnValue = DataServiceUtil.getOptions(fieldName);
+            //java.util.TreeSet<java.lang.String> returnValue = DataServiceUtil.getOptions(fieldName);
+        	java.util.Set<java.lang.String> returnValue = DataServiceUtil.getOptions(fieldName);
 
             return returnValue;
         } catch (Exception e) {
@@ -52,7 +54,8 @@ public class DataServiceSoap {
         }
     }
 
-    public static java.util.TreeSet<java.lang.String> getFieldsNames()
+    //public static java.util.TreeSet<java.lang.String> getFieldsNames()
+    public static java.util.Set<java.lang.String> getFieldsNames()
         throws RemoteException {
         try {
             java.util.TreeSet<java.lang.String> returnValue = DataServiceUtil.getFieldsNames();
