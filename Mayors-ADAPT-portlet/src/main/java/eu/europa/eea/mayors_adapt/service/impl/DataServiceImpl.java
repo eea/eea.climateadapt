@@ -75,10 +75,8 @@ public class DataServiceImpl extends DataServiceBaseImpl {
 				.selectNodes("//dynamic-element[@name='" + fieldName
 						+ "']/*/*/entry/text()",
 						cityProfileStructure.getDocument());
-		System.out.println("Hola!");
 		for (Node node : definedOptions) {
 			if (!node.getText().equals("Select"))
-				System.out.println("node: "+node.getText());
 				options.add(node.getText());
 		}
 		
