@@ -19,7 +19,7 @@ fieldset, img {
 	border: 0;
 }
 
-address, caption, cite, code, dfn, em, strong, th, var {
+address, caption, cite, code, dfn, em, th, var {
 	font-style: normal;
 	font-weight: normal;
 }
@@ -139,11 +139,14 @@ h4, h5, h6 {
 	font-size: 1.1em;
 }
 
-h1, h2, h3, h4, h5, h6, strong {
+h1, h2, h3, h4, h5, h6{
 	font-family: tahoma,arial,sans-serif;  
     font-weight: normal !important;		
 }
 
+strong {
+	font-family: tahoma,arial,sans-serif;
+}
 /* ---------- Text formatting ---------- */
 
 b, strong {

@@ -89,7 +89,7 @@
                     <% String yearDisplay = aceitem.getYear().length() > 0 ? "("+aceitem.getYear() + ")" : "";%>
 					<p class="case-review-header"><%= HtmlUtil.escapeAttribute(aceitem.getName()) %> <%= yearDisplay %></p>
 					<p><b>Description:</b></p>
-					<p><%= aceitem.getDescription().replaceAll("<p>","").replaceAll("</p>","") %></p>
+					<%= aceitem.getDescription() %>
 				</div>
 
 				<div class="case-studies-review-clearing"></div>
