@@ -2,6 +2,7 @@ package nl.wur.alterra.cgi.ace.portlet;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
@@ -150,8 +151,6 @@ public abstract class LuceneIndexUpdatePortletForShareAceItem extends MVCPortlet
         //d.setTime(ParamUtil.getLong(request, "checkcreationdate"));
         aceitem.setLockdate(d); // hack optimistic locking!!! Check with
                                     // dbrecord in MeasureValidator
-
-
 
         aceitem.setCompanyId(themeDisplay.getCompanyId());
         aceitem.setGroupId(themeDisplay.getScopeGroupId());
@@ -341,6 +340,7 @@ public abstract class LuceneIndexUpdatePortletForShareAceItem extends MVCPortlet
         }
 
         String approved = ParamUtil.getString(uploadRequest, "chk_controlstatus");
+        System.out.println("approved: "+approved);
         if ((approved == null) || (approved.length() == 0)) {
             aceitem.setControlstatus((short) -1);
         } else {
@@ -662,12 +662,20 @@ public abstract class LuceneIndexUpdatePortletForShareAceItem extends MVCPortlet
       }
 
     protected void sendSubmitNotification(AceItem aceitem) {
-
-        if (aceitem.getControlstatus() == ACEIndexUtil.Status_SUBMITTED) {
-            try {
-                InternetAddress fromInternetAddress = new InternetAddress(ACEIndexUtil.retrieveNotificationFromAddress());
-                String notificationaddresslist = ACEIndexUtil.retrieveNotificationToAddressList();
-
+    	//System.out.println("inside sendSubmitNotification with control status: "+aceitem.getControlstatus());
+        
+    	String hosturl = ACEIndexUtil.retrieveNotificationHostUrl();
+    	//setting up mail addresses
+    	String subject = "";
+    	String body = "";
+    	InternetAddress fromInternetAddress;
+		    	    	
+    	if (aceitem.getControlstatus() == ACEIndexUtil.Status_SUBMITTED) {
+    		//System.out.println("aceitem with status submitted");
+            try {                
+            	fromInternetAddress = new InternetAddress(ACEIndexUtil.retrieveNotificationFromAddress());
+                String notificationaddresslist = ACEIndexUtil.retrieveNotificationToAddressList();                
+                
                 String[] notificationaddresses = notificationaddresslist.split(";");
                 InternetAddress[] toInternetAddresses = new InternetAddress[notificationaddresses.length];
                 for (int i = 0; i < notificationaddresses.length; i++) {
@@ -675,11 +683,9 @@ public abstract class LuceneIndexUpdatePortletForShareAceItem extends MVCPortlet
                         toInternetAddresses[i] = new InternetAddress(notificationaddresses[i]);
                     }
                 }
-
-                String hosturl = ACEIndexUtil.retrieveNotificationHostUrl();
-
-                String subject = "Climate-adapt: A database item is waiting for approval";
-                String body = "Please have a look at the submitted ";
+                
+                subject = "Climate-adapt: A database item is waiting for approval";
+                body = "Please have a look at the submitted ";
 
                 if (aceitem.getDatatype().equalsIgnoreCase(AceItemType.DOCUMENT.toString())) {
                     body += "publication / report ";
@@ -691,8 +697,15 @@ public abstract class LuceneIndexUpdatePortletForShareAceItem extends MVCPortlet
                     body += "tool ";
                 } else if (aceitem.getDatatype().equalsIgnoreCase(AceItemType.ORGANISATION.toString())) {
                     body += "organisation ";
+                } else if (aceitem.getDatatype().equalsIgnoreCase(AceItemType.INDICATOR.toString())) {
+                	body += "indicator";
+                } else if (aceitem.getDatatype().equalsIgnoreCase(AceItemType.MAPGRAPHDATASET.toString())) {
+                	body += "map-graph-data";
                 }
-
+                
+                //System.out.println("username: "+username);
+                //System.out.println("useremail: "+useremail);
+                
                 body += "at " + hosturl + "/viewaceitem?aceitem_id=" + aceitem.getAceItemId();
                 body += "\nEditor: " + username;
                 body += "\nEmail: " + useremail;
@@ -717,6 +730,10 @@ public abstract class LuceneIndexUpdatePortletForShareAceItem extends MVCPortlet
                     body += "tools";
                 } else if (aceitem.getDatatype().equalsIgnoreCase(AceItemType.ORGANISATION.toString())) {
                     body += "organisations";
+                } else if (aceitem.getDatatype().equalsIgnoreCase(AceItemType.INDICATOR.toString())) {
+                	body += "indicators";
+                } else if (aceitem.getDatatype().equalsIgnoreCase(AceItemType.MAPGRAPHDATASET.toString())) {
+                	body += "map-graph-data";
                 }
                 body += "?submissionid=" + aceitem.getAceItemId();
                 body += "\n\nWe thank you for your interest in Climate-ADAPT.";
@@ -725,6 +742,82 @@ public abstract class LuceneIndexUpdatePortletForShareAceItem extends MVCPortlet
                 // do nothing
                 e.printStackTrace();
             }
+        } else if (aceitem.getControlstatus() == ACEIndexUtil.Status_APPROVED) {
+        	//System.out.println("aceitem with status approved");
+        	// send a mail notification to users letting them know that their items are approved
+        	//- it must contain the name of the user and a link to the item.
+        	try {
+        		fromInternetAddress = new InternetAddress(ACEIndexUtil.retrieveNotificationFromAddress());
+        		
+        		String moderators = aceitem.getModerator();
+        		//System.out.println("moderators: "+moderators);
+        		//get moderator names and mails
+        		List<String> moderatorList = Arrays.asList(moderators.split(","));
+        		        		
+        		if(moderatorList != null && !moderatorList.isEmpty()){
+        			List<String> moderatorAddresses = new ArrayList<String>();
+        			String moderatorNames = "";
+        			int count = 0;
+        			for (String moderator : moderatorList) {
+        				count++;
+        				if (moderator.indexOf('(') > 0 && moderator.indexOf(')') > 0) {
+	        				String moderatorName = moderator.substring(0, moderator.indexOf("(") - 1);
+	                		String moderatorMail = moderator.substring(moderator.indexOf("(") + 1, moderator.indexOf(")"));
+	                		
+	                		if (!moderatorName.isEmpty()) {
+	                			moderatorNames += (count < moderatorList.size() ? moderatorName + ", " : moderatorName);	                		
+	                		}
+	                		
+	                		if (!moderatorMail.isEmpty()) {
+	                			moderatorAddresses.add(moderatorMail);
+	                		}
+	                		
+	                		//System.out.println("moderatorMail: " + moderatorMail);
+	                		//System.out.println("moderatorName: " + moderatorName);
+        				} else {
+        					continue;
+        				}
+        			}
+        			
+        			if (!moderatorAddresses.isEmpty()) {
+        				//System.out.println("moderators: "+moderatorNames);
+        				        				
+        				InternetAddress[] moderatorAddress = new InternetAddress[moderatorAddresses.size()];        						
+	            		        				
+        				for (int i = 0; i < moderatorAddress.length; i++) {
+        					moderatorAddress[i] = new InternetAddress(moderatorAddresses.get(i));
+        					//System.out.println("moderator address: "+moderatorAddress[i]);
+        				}
+        				
+        				subject = "Climate-adapt: A database item has been approved";
+	            		
+	            		body = moderatorNames + " please have a look at the approved ";
+	            		
+	    	    		 if (aceitem.getDatatype().equalsIgnoreCase(AceItemType.DOCUMENT.toString())) {
+	    	                 body += "publication / report ";
+	    	             } else if (aceitem.getDatatype().equalsIgnoreCase(AceItemType.INFORMATIONSOURCE.toString())) {
+	    	                 body += "information portal ";
+	    	             } else if (aceitem.getDatatype().equalsIgnoreCase(AceItemType.GUIDANCE.toString())) {
+	    	                 body += "guidance document ";
+	    	             } else if (aceitem.getDatatype().equalsIgnoreCase(AceItemType.TOOL.toString())) {
+	    	                 body += "tool ";
+	    	             } else if (aceitem.getDatatype().equalsIgnoreCase(AceItemType.ORGANISATION.toString())) {
+	    	                 body += "organisation ";
+	    	             } else if (aceitem.getDatatype().equalsIgnoreCase(AceItemType.INDICATOR.toString())) {
+	    	             	body += "indicator";
+	    	             } else if (aceitem.getDatatype().equalsIgnoreCase(AceItemType.MAPGRAPHDATASET.toString())) {
+	    	             	body += "map-graph-data";
+	    	             }
+	    	    		 
+	    	    		body += " at " + hosturl + "/viewaceitem?aceitem_id=" + aceitem.getAceItemId();
+	    	    		MailEngine.send(fromInternetAddress, moderatorAddress, null, null, subject, body, false, null, null, null);
+        			}	
+        		}
+        		        			    		        		
+        	} catch (Exception e) {
+        		e.printStackTrace();
+        	}
+        	
         }
     }
 
