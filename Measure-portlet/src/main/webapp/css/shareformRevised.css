@@ -10,7 +10,9 @@
 		    position: relative;
 		    width: 984px;
 		}
-	
+		
+		
+		
 		/* ======================= */
 		/* Portlet CSS Starts Here */
 		/* ======================= */
@@ -646,7 +648,11 @@
    .strong-font {
      font-weight: bold;
   }
-  
+
+
+.normalStyle ul, .normalStyle ol {
+	margin-bottom:10px !important;
+}
 
 /* ===================== */
 /* Portlet CSS Ends Here */

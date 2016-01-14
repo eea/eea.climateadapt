@@ -2436,13 +2436,13 @@
 										<% if (mao_type.equalsIgnoreCase("A")) { %>
 											<li>
 												<a name="challenges_anchor"><b><em>Challenges</em></b></a>
-												   <p><%=measure.getChallenges().replaceAll("<p>","").replaceAll("</p>","") %></p>
+												   <%=measure.getChallenges()%>
 												<div class="case-studies-form-clearing"></div>
 											</li>
 
 											<li>
 												<a name="objectives_anchor"><b><em>Objectives</em></b></a>
-												   <p><%=measure.getObjectives().replaceAll("<p>","").replaceAll("</p>","")%></p>
+												   <p><%=measure.getObjectives()%></p>
 												<div class="case-studies-form-clearing"></div>
 											</li>
 
@@ -2487,7 +2487,7 @@
 
 											<li>
 												<a name="solutions_anchor"><b><em>Solutions</em></b></a>
-												<p><%=measure.getSolutions().replaceAll("<p>","").replaceAll("</p>","") %></p>
+												<%=measure.getSolutions()%>
 												<div class="case-studies-form-clearing"></div>
 											</li>
 
@@ -2560,7 +2560,7 @@
 												<li>
 													<a name="stake_holder_anchor"><b><em>Stakeholder Participation</em></b></a>
 
-												    <p><%=measure.getStakeholderparticipation().replaceAll("<p>","").replaceAll("</p>","") %></p>
+												    <%=measure.getStakeholderparticipation()%>
 
 													<div class="case-studies-form-clearing"></div>
 												</li>
@@ -2572,7 +2572,7 @@
 											<li>
 												<a name="success_limitations_anchor"><b><em>Success and Limiting Factors</em></b></a>
 
-											    <p><%=measure.getSucceslimitations().replaceAll("<p>","").replaceAll("</p>","") %></p>
+											    <%=measure.getSucceslimitations()%>
 
 												<div class="case-studies-form-clearing"></div>
 											</li>
@@ -2583,7 +2583,7 @@
 											<li>
 												<a name="cost_benefit_anchor"><b><em>Costs and Benefits</em></b></a>
 
-											    <p><%=measure.getCostbenefit().replaceAll("<p>","").replaceAll("</p>","") %></p>
+											    <%=measure.getCostbenefit()%>
 
 												<div class="case-studies-form-clearing"></div>
 											</li>
@@ -2594,7 +2594,7 @@
 												<li>
 													<a name="legal_aspect_anchor"><b><em>Legal Aspects</em></b></a>
 
-												    <p><%=measure.getLegalaspects().replaceAll("<p>","").replaceAll("</p>","") %></p>
+												    <%=measure.getLegalaspects()%>
 
 													<div class="case-studies-form-clearing"></div>
 												</li>
@@ -2605,7 +2605,7 @@
 												<li>
 													<a name="implementation_time_anchor"><b><em>Implementation Time</em></b></a>
 
-												    <p><%=measure.getImplementationtime().replaceAll("<p>","").replaceAll("</p>","") %></p>
+												    <%=measure.getImplementationtime()%>
 
 													<div class="case-studies-form-clearing"></div>
 												</li>
@@ -2616,7 +2616,7 @@
 												<li>
 													<a name="life_time_anchor"><b><em>Life Time</em></b></a>
 
-												    <p><%=measure.getLifetime().replaceAll("<p>","").replaceAll("</p>","") %></p>
+												    <%=measure.getLifetime()%>
 
 													<div class="case-studies-form-clearing"></div>
 												</li>
