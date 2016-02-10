@@ -467,19 +467,27 @@ pageContext.setAttribute("countriesList", countriesList);
 			
 			if (filteredMeasureId != Long.parseLong(measureId)) {
 				String filteredStoredAt = storedAtBasic+Long.toString(filteredMeasureId);
-				result.setStoredAt(filteredStoredAt);
-				AceItem aceItem = AceItemLocalServiceUtil.getAceItemByStoredAt(filteredStoredAt);
-				result.setName(aceItem.getName());
-				result.setYear(aceItem.getYear());
-				result.setShortdescription(aceItem.getDescription());
-			}
-			
+				
+				AceItem aceItem = null;
+				
+				try {
+					aceItem = AceItemLocalServiceUtil.getAceItemByStoredAt(filteredStoredAt);							
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+				
+				if (aceItem != null) { //the filtering is meaningless if there is no such AceItem in DB
+					result.setStoredAt(filteredStoredAt);				
+					result.setName(aceItem.getName());
+					result.setYear(aceItem.getYear());
+					result.setShortdescription(aceItem.getDescription());	
+				}				
+			}			
 		}
 		
 		pageContext.setAttribute("measureResults", results);				
 		pageContext.setAttribute("measureJSONResults", PortletUtils.getJSONResults(results));
-		%>
-		
+		%>		
 		<c:set var="groupedResults" scope="page" value="${measureResults}"/>
 		<c:set var="groupedJSONResults" scope="page" value="${measureJSONResults}"/>		
 		<c:set var="aceitemtype" scope="page" value="MEASURE"/>
