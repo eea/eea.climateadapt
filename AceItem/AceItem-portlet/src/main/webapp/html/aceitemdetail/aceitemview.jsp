@@ -121,17 +121,7 @@
 											} else {
 												metadataurl = "No metadata url has been provided";
 											}
-										}
-										else if(aceitem.getStoragetype().equalsIgnoreCase("PLAINMETADATA")) {
-											// mapViewerAppId gets handled inside mapviewer-portlet
-											url = "<a href='/geonetwork/srv/en/metadata.show?uuid=" + aceitem.getStoredAt() + "' target='_blank'>View metadata " + aceitem.getName() + "</a>" ;
-										}
-										else if(aceitem.getStoragetype().equalsIgnoreCase("SETOFMAPS")) {
-											// mapViewerAppId gets handled inside mapviewer-portlet
-											url = "<a href='/map-viewer?mapViewerAppId=" + aceitem.getStoredAt() + "' > " + aceitem.getName() + "</a>" ;
-										}
-										else {
-
+										} else {
 											url = HtmlUtil.extractText(aceitem.getStoredAt()).replaceAll("<p>","").replaceAll("</p>","");
 
 											if(url != null && url.trim().length() > 0) {
@@ -167,15 +157,7 @@
 										 <%= url %><br /><br />
 										 <%= metadataurl %><br /><br />
 									<%	 }
-										else if(aceitem.getStoragetype().equalsIgnoreCase("PLAINMETADATA") ) { %>
-											<b>View metadata</b><br />
-											 <%= url  %><br /><br />
-									<%	 }
-										 else if(aceitem.getStoragetype().equalsIgnoreCase("SETOFMAPS") ) { %>
-											<b>View set of maps</b><br />
-											 <%= url  %><br /><br />
-										<%	 }
-											 else{ %>
+										else{ %>
 										 	<%= url %><br /><br />
 										 <% } %>
 

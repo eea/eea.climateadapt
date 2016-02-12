@@ -163,17 +163,20 @@ public abstract class LuceneIndexUpdatePortletForShareAceItem extends MVCPortlet
 
         aceitem.setDatatype(ParamUtil.getString(uploadRequest, "datatype"));
         
-        // https://taskman.eionet.europa.eu/issues/31104        
-        // check if aceitem is new and save it with MAPLAYER storagetype
-        // if it already exists, save it also with MAPLAYER storagetype
-        String storageType = aceitem.getStoragetype(); 
+        // https://taskman.eionet.europa.eu/issues/31669
+        // check if aceitem is of type MAPGRAPHDATASET, if so, save it with MAPLAYER storagetype.
+        // in case the aceitem is not of MAPGRAPHDATASET type, save it with NONE storagetype.
+        String storageType = aceitem.getStoragetype();
+        String storageTypeToSet = aceitem.getDatatype().equals(AceItemType.MAPGRAPHDATASET.toString()) ? "MAPLAYER" : "NONE";
         
-        if ((!Validator.isNull(storageType) && !storageType.equals("MAPLAYER")) || Validator.isNull(storageType)) {
-        	aceitem.setStoragetype("MAPLAYER");
+        if ((!Validator.isNull(storageType) && !storageType.equals(storageTypeToSet)) || Validator.isNull(storageType)) {
+        	aceitem.setStoragetype(storageTypeToSet);
         }
         
         //aceitem.setStoragetype(ParamUtil.getString(uploadRequest, "storagetype"));
-                                
+        
+        //DEPRECATED
+        /*
         if (aceitem.getStoragetype().equalsIgnoreCase("URL")) {
             String websites = ParamUtil.getString(uploadRequest, "storedAt");
             // robust multiple website handling. Check for splitters space, ','
@@ -210,7 +213,9 @@ public abstract class LuceneIndexUpdatePortletForShareAceItem extends MVCPortlet
         } else {
 
             aceitem.setStoredAt(ParamUtil.getString(uploadRequest, "storedAt"));
-        }
+        }*/
+        
+        aceitem.setStoredAt(ParamUtil.getString(uploadRequest, "storedAt"));
 
         aceitem.setKeyword(ParamUtil.getString(uploadRequest, "keyword"));
         aceitem.setSpatialLayer(ParamUtil.getString(uploadRequest, "spatialLayer"));
@@ -278,8 +283,7 @@ public abstract class LuceneIndexUpdatePortletForShareAceItem extends MVCPortlet
                 + aceitem.getKeyword() + " " + aceitem.getSource() + " " + aceitem.getSpatialLayer() + " "
                 + aceitem.getSpatialValues() + " " + aceitem.getTextwebpage());
 
-        if (aceitem.getStoragetype().equalsIgnoreCase("MAPLAYER") || aceitem.getStoragetype().equalsIgnoreCase("PLAINMETADATA")
-                || aceitem.getStoragetype().equalsIgnoreCase("SETOFMAPS")) {
+        if (aceitem.getStoragetype().equalsIgnoreCase("MAPLAYER") || aceitem.getStoragetype().equalsIgnoreCase("NONE")){
             aceitem.setTextSearch(aceitem.getTextSearch() + ' ' + aceitem.getStoragetype());
         }
 
