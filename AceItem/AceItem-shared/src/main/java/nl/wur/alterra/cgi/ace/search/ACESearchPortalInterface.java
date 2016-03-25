@@ -3,10 +3,15 @@ package nl.wur.alterra.cgi.ace.search;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.NoSuchElementException;
+import java.util.SortedSet;
+import java.util.TreeSet;
+import java.util.Comparator;
 
 import javax.portlet.ClientDataRequest;
 import javax.portlet.PortletPreferences;
@@ -17,8 +22,10 @@ import javax.portlet.ResourceResponse;
 
 import org.apache.lucene.search.IndexSearcher;
 
+import nl.wur.alterra.cgi.ace.model.AceItem;
 import nl.wur.alterra.cgi.ace.model.constants.AceItemType;
 import nl.wur.alterra.cgi.ace.search.lucene.ACELuceneException;
+import nl.wur.alterra.cgi.ace.service.AceItemLocalServiceUtil;
 
 import com.adasa.mayors_adapt.search.ClimateSearchEngine;
 import com.google.gson.Gson;
@@ -36,7 +43,7 @@ import com.liferay.portlet.dynamicdatamapping.service.DDMStructureLocalServiceUt
  * javax.portlet.* classes.
  *
  * @author heikki doeleman
- *
+ *	@author John Konstas - https://taskman.eionet.europa.eu/issues/70188
  */
 public class ACESearchPortalInterface {
 	private static Log _log = LogFactoryUtil
@@ -45,7 +52,122 @@ public class ACESearchPortalInterface {
 	private boolean isEmpty(String[] array) {
 		return array == null || array.length == 0;
 	}
-
+	
+	/**
+	 * The method that performs the final sorting on Measure items based on sortBy param
+	 * @param results
+	 * @param sortBy
+	 * @return
+	 */
+	private List<AceItemSearchResult> getOrderedMeasureItems(List<AceItemSearchResult> results, String sortBy) {
+		if (sortBy.equals("NAME")) {
+			Collections.sort(results, new Comparator<AceItemSearchResult>() {
+				@Override
+				public int compare(final AceItemSearchResult result1, final AceItemSearchResult result2) {
+					return result1.getName().compareTo(result2.getName());
+				}
+			});
+			return results;
+		} else if (sortBy.equals("YEAR")) {
+			Collections.sort(results, new Comparator<AceItemSearchResult>() {
+				@Override public int compare(AceItemSearchResult result1, AceItemSearchResult result2) {
+					int year1 = (result1.getName() == null || result1.getYear().isEmpty()) ? 0 : Integer.parseInt(result1.getYear());
+					int year2 = (result2.getName() == null || result2.getYear().isEmpty()) ? 0 : Integer.parseInt(result2.getYear());
+					return year2 - year1; //Descending
+				}
+			});
+			return results;
+		} else {
+			return results;
+		}
+		
+	}
+	
+	/**
+	 * The method that returns unique Ace Items based on their storedAt values after filtering process
+	 * @param results
+	 * @return
+	 */
+	private List<AceItemSearchResult> getUniqueMeasureItems(List<AceItemSearchResult> results) {
+		SortedSet<AceItemSearchResult> uniqueResults = new TreeSet<AceItemSearchResult>(new Comparator<AceItemSearchResult>() {
+			@Override
+			public int compare(AceItemSearchResult arg0, AceItemSearchResult arg1) {
+				return arg0.getStoredAt().compareTo(arg1.getStoredAt());
+			}
+		});
+ 		Iterator<AceItemSearchResult> iterator = results.iterator();
+ 		
+ 		while (iterator.hasNext()) {
+ 			uniqueResults.add(iterator.next());
+ 		}
+ 		
+ 		return new ArrayList<AceItemSearchResult>(uniqueResults);
+	}
+	
+	/**
+	 * This is the root method that gets the filtered items, gets rid of duplicates and sorts the items by sortBy,
+	 * if this is not null
+	 * @param results
+	 * @param sortBy
+	 * @return
+	 */
+	private List<AceItemSearchResult> getOrderedUniqueFilteredMeasureItems(List<AceItemSearchResult> results, String sortBy) {
+		List <AceItemSearchResult> finalResults = new ArrayList<AceItemSearchResult>();
+		
+		if (results != null && results.size() > 0) {
+			if (sortBy == null) {
+				finalResults = getUniqueMeasureItems(getFilteredMeasureItems(results));
+			} else {
+				finalResults = getOrderedMeasureItems(getUniqueMeasureItems(getFilteredMeasureItems(results)), sortBy);
+			}
+		} else {
+			finalResults = new ArrayList<AceItemSearchResult>();
+		}
+		
+		return finalResults;
+	}
+	
+	/**
+	 * This method is used in order to return a list of Measure Items
+	 *  according to issue https://taskman.eionet.europa.eu/issues/70188
+	 * @param results
+	 * @return
+	 */
+	private List<AceItemSearchResult> getFilteredMeasureItems(List<AceItemSearchResult> results) {
+		
+			System.out.println("list size:"+results.size());
+			for (AceItemSearchResult result : results) {
+				String storedAtBasic = "ace_measure_id=";
+				String storedAt = result.getStoredAt();
+				String measureId = storedAt.substring(storedAt.indexOf('=') + 1);
+				long filteredMeasureId = AceSearchMeasureUtil.filterAdaptationOptionIds(Long.parseLong(measureId));
+				
+				if (filteredMeasureId != Long.parseLong(measureId)) {
+					String filteredStoredAt = storedAtBasic+Long.toString(filteredMeasureId);
+					
+					AceItem aceItem = null;
+					
+					try {
+						aceItem = AceItemLocalServiceUtil.getAceItemByStoredAt(filteredStoredAt);
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+					
+					if (aceItem != null) { //the filtering is meaningless if there is no such AceItem in DB
+						result.setStoredAt(filteredStoredAt);
+						result.setName(aceItem.getName());
+						result.setYear(aceItem.getYear());
+						result.setShortdescription(aceItem.getDescription());
+					}
+					
+				}
+				
+			}
+		
+		return results;
+	}
+	
+	
 	/**
 	 *
 	 * @param request
@@ -56,7 +178,7 @@ public class ACESearchPortalInterface {
 	 */
 	public List<String> handleSearchRequest(PortletRequest request,
 			AceSearchFormBean formBean) throws Exception {
-
+		
 		long groupId = ParamUtil.getLong(request, "groupId");
 		String structureName = "City Profile";
 		String structureDescription = "Structure for a City Profile";
@@ -96,7 +218,13 @@ public class ACESearchPortalInterface {
 				else
 					results = searchEngine.searchLuceneByType(formBean,
 							aceItemType.name());
-
+				
+				//Call method to replace some measure items with new ones - https://taskman.eionet.europa.eu/issues/70188
+				if (aceItemType.name().equals("MEASURE")) {
+					results = getOrderedUniqueFilteredMeasureItems(results, formBean.getSortBy());
+				}
+				
+				
 				totalResults += results.size();
 
 				// System.out.println("From all searchAceitem found #" +
@@ -129,7 +257,12 @@ public class ACESearchPortalInterface {
 				else
 					results = searchEngine.searchLuceneByType(formBean,
 							aceItemType);
-
+				
+				//Call method to replace some measure items with new ones - https://taskman.eionet.europa.eu/issues/70188
+				if (aceItemType.equals("MEASURE")) {
+					results = getOrderedUniqueFilteredMeasureItems(results, formBean.getSortBy());
+				}
+				
 				totalResults += results.size();
 
 				// System.out.println("Limited set seacrhAceitem found #" +
