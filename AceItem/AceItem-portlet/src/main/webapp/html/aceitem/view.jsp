@@ -110,9 +110,13 @@
 
         // Only these types get viewed by viewaceitem portlet; Ace Serviced Entities have their own portlets
         String storageType = aceitem.getStoragetype();
-        boolean isRelevantStorageType = storageType.equalsIgnoreCase("URL") || storageType.equalsIgnoreCase("MAPLAYER")
-                             || storageType.equalsIgnoreCase("PLAINMETADATA") || storageType.equalsIgnoreCase("SETOFMAPS");
-        if (isRelevantStorageType){
+        
+        //DEPRECATED
+        //boolean isRelevantStorageType = storageType.equalsIgnoreCase("URL") || storageType.equalsIgnoreCase("MAPLAYER")
+          //                   || storageType.equalsIgnoreCase("PLAINMETADATA") || storageType.equalsIgnoreCase("SETOFMAPS");
+        boolean isRelevantStorageType = storageType.equalsIgnoreCase("NONE");
+        
+        if (isRelevantStorageType) {
             aceItemViewLink = "<a href='/viewaceitem?aceitem_id=" + aceitem.getAceItemId() + "'>" +  aceitem.getName() + "</a>" ;
         }
 
