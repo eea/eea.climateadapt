@@ -103,9 +103,9 @@
         --%>
 
         <%
-		 long filteredMeasureId = MeasureUtil.filterAdaptationOptionIds(measure.getMeasureId());
+		//long filteredMeasureId = MeasureUtil.filterAdaptationOptionIds(measure.getMeasureId());
                 
-        measure = MeasureLocalServiceUtil.getMeasure(filteredMeasureId);
+        measure = MeasureLocalServiceUtil.getMeasure(measure.getMeasureId());
         
         String measureViewLink = "<a href='/viewmeasure?ace_measure_id=" + measure.getMeasureId() + "'>" +  measure.getName() + "</a>" ;
         String measureSectorsStr = measure.getSectors_().replace(";","; ");
