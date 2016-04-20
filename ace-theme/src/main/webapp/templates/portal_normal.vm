@@ -37,7 +37,7 @@ $theme.include($body_top_include)
 	<header id="banner" role="banner">
   		<hgroup id="heading">
 			<h1 class="company-title">
-				<a class="logo" href="$company_url" title="#language("go-to") $company_name">
+				<a class="logo" href="http://climate-adapt.eea.europa.eu/" title="#language("go-to") $company_name">
 					<span>$company_name</span>
 				</a>
 			</h1>	
