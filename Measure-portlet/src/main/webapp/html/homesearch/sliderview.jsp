@@ -47,16 +47,19 @@
 										    <% 
 											        String primImageUrl = "";
 												    Measure measure = (Measure) renderRequest.getAttribute("casestudy");
-													long filteredMeasureId = MeasureUtil.filterAdaptationOptionIds(measure.getMeasureId());
-												    
+													//long filteredMeasureId = MeasureUtil.filterAdaptationOptionIds(measure.getMeasureId());
+												    /*
 												    if (filteredMeasureId != measure.getMeasureId()) {
 												    	measure = MeasureLocalServiceUtil.getMeasure(filteredMeasureId);	
-												    }
+												    }*/
 												    
 												    if (Validator.isNotNull(measure.getPrimephoto()))
 													{
 													      DLFileEntry image = DLFileEntryLocalServiceUtil.getFileEntry(Long.parseLong(measure.getPrimephoto())); 
-													      primImageUrl = themeDisplay.getPathImage() + "/image_gallery?img_id=" + image.getLargeImageId() +  "&t=" + WebServerServletTokenUtil.getToken(image.getLargeImageId());
+													      System.out.println("image title: "+image.getTitle());
+													      //primImageUrl = themeDisplay.getPathImage() + "/image_gallery?img_id=" + image.getLargeImageId() +  "&t=" + WebServerServletTokenUtil.getToken(image.getLargeImageId());
+													      primImageUrl = PortalUtil.getPortalURL(request) + "/documents/" + image.getGroupId() + "/" + image.getFolderId() + "/" + image.getTitle() + "/" + image.getUuid() + "?t=" +
+													      System.currentTimeMillis();														  	
 													}
 													else
 													{

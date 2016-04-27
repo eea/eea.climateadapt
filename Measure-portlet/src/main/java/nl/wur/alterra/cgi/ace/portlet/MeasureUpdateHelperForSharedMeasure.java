@@ -392,13 +392,17 @@ public abstract class MeasureUpdateHelperForSharedMeasure extends MVCPortlet {
 
             int i = sourceFileName.lastIndexOf('.');
             extension = sourceFileName.substring(i + 1);
-
+            
+            
             //System.out.println("Inside control");
+            //comment out the following if case - https://taskman.eionet.europa.eu/issues/71395
+            /*
             if (Validator.isNotNull(primePhotoId)) {
-                //System.out.println("primePhotoId is " + primePhotoId);
+                System.out.println("primePhotoId is " + primePhotoId);
                 image = DLAppLocalServiceUtil.getFileEntry(Long.parseLong(primePhotoId));
                 long folderId = image.getFolderId();
-                //System.out.println("image name is " + image.getNameWithExtension());
+                System.out.println("image title: "+image.getTitle());
+                System.out.println("image source filename: "+sourceFileName);
                 if (! image.getTitle().equalsIgnoreCase(sourceFileName)) {
                     try {
                         //looks like image replaced add the image now
@@ -406,6 +410,7 @@ public abstract class MeasureUpdateHelperForSharedMeasure extends MVCPortlet {
                         DLAppLocalServiceUtil.addFileEntry(themeDisplay.getUserId(), image.getRepositoryId(), folderId, sourceFileName, "image/" + extension, null, "", "", f, serviceContext);
 
                         String primaryKey = String.valueOf(image.getPrimaryKey());
+                        System.out.println("photo primary key: "+primaryKey);
                         addPermissions(themeDisplay, primaryKey, image.getClass().getName());
                         measure.setPrimephoto(String.valueOf(image.getFileEntryId()));
                         request.setAttribute("primePhotoId", String.valueOf(image.getFileEntryId()));
@@ -423,7 +428,7 @@ public abstract class MeasureUpdateHelperForSharedMeasure extends MVCPortlet {
                     }
                 }
 
-            } else {
+            }*/ //else {            	
                 Folder imageFolder = null;
                 try {
                     Folder rootFolder = DLAppLocalServiceUtil.getFolder(themeDisplay.getScopeGroupId(), 0, "casestudy");
@@ -462,7 +467,7 @@ public abstract class MeasureUpdateHelperForSharedMeasure extends MVCPortlet {
                     e.printStackTrace();
                     throw e;
                 }
-            }
+            //}comment out else
             //System.out.println("image added image name is " + image.getNameWithExtension());
         } else {
             measure.setPrimephoto(primePhotoId);
@@ -1231,7 +1236,9 @@ public abstract class MeasureUpdateHelperForSharedMeasure extends MVCPortlet {
     }
 
     private void addPermissions(ThemeDisplay themeDisplay, String primaryKey, String resource) throws Exception {
-        Role roleUser = RoleLocalServiceUtil.getRole(themeDisplay.getCompanyId(), RoleConstants.SITE_MEMBER);
+        //System.out.println("inside addPermissions");
+        //System.out.println("resource: "+resource);
+    	Role roleUser = RoleLocalServiceUtil.getRole(themeDisplay.getCompanyId(), RoleConstants.SITE_MEMBER);
         long roleId = roleUser.getRoleId();
 
         Role roleGuest = RoleLocalServiceUtil.getRole(themeDisplay.getCompanyId(), RoleConstants.GUEST);
@@ -1245,8 +1252,11 @@ public abstract class MeasureUpdateHelperForSharedMeasure extends MVCPortlet {
         try {
             resourcePermission = ResourcePermissionLocalServiceUtil.getResourcePermission(themeDisplay.getCompanyId(), resource, ResourceConstants.SCOPE_INDIVIDUAL, String.valueOf(primaryKey), roleId);
             ResourceAction resourceAction = ResourceActionLocalServiceUtil.getResourceAction(resource, ActionKeys.VIEW);
+            //System.out.println("after creating resourceAction");
             if (Validator.isNotNull(resourcePermission) && !ResourcePermissionLocalServiceUtil.hasActionId(resourcePermission, resourceAction)) {
-                resourcePermission.setActionIds(resourcePermission.getActionIds() + resourceAction.getBitwiseValue());
+                //System.out.println("inside validator of permissions");
+            	resourcePermission.setActionIds(resourcePermission.getActionIds() + resourceAction.getBitwiseValue());
+            	//System.out.println("after setting action ids");
                 ResourcePermissionLocalServiceUtil.updateResourcePermission(resourcePermission);
             }
         } catch (com.liferay.portal.NoSuchResourcePermissionException e) {
@@ -1254,6 +1264,7 @@ public abstract class MeasureUpdateHelperForSharedMeasure extends MVCPortlet {
             resourcePermission.setCompanyId(themeDisplay.getCompanyId());
             resourcePermission.setName(resource);
             resourcePermission.setScope(ResourceConstants.SCOPE_INDIVIDUAL);
+            //System.out.println("before setting primary key: " + primaryKey + " to resource permission");
             resourcePermission.setPrimKey(String.valueOf(primaryKey));
             resourcePermission.setRoleId(guestRoleId);
 

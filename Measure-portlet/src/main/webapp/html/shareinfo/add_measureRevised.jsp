@@ -2340,7 +2340,10 @@
 										    if (Validator.isNotNull(measure.getPrimephoto()))
 										    {
 										      DLFileEntry image = DLFileEntryLocalServiceUtil.getFileEntry(Long.parseLong(measure.getPrimephoto()));
-										      primImageUrl = themeDisplay.getPathImage() + "/image_gallery?uuid=" + image.getUuid() +  "&t=" + WebServerServletTokenUtil.getToken(image.getLargeImageId()) + "&groupId=" + image.getGroupId();
+										      //primImageUrl = themeDisplay.getPathImage() + "/image_gallery?uuid=" + image.getUuid() +  "&t=" + WebServerServletTokenUtil.getToken(image.getLargeImageId()) + "&groupId=" + image.getGroupId();
+										      primImageUrl = PortalUtil.getPortalURL(request) + "/documents/" + image.getGroupId() + "/" +
+										              image.getFolderId() + "/" + image.getTitle() + "/" + image.getUuid() + "?t=" +
+										              System.currentTimeMillis();	
 										    }
 										 %>
 										<img src="<%=primImageUrl %>" class="case-studies-tabbed-content-review-image"/>
@@ -2688,7 +2691,10 @@
 													 String supPhotoName = image.getName();
 													 String supPhotoTitle = image.getTitle();
 													 String supPhotoDescription = image.getDescription().replaceAll("<p>","").replaceAll("</p>","");
-													 String imageUrl = themeDisplay.getPathImage() + "/image_gallery?uuid=" + image.getUuid() +  "&t=" + WebServerServletTokenUtil.getToken(image.getLargeImageId())  + "&groupId=" + image.getGroupId();
+													 //String imageUrl = themeDisplay.getPathImage() + "/image_gallery?uuid=" + image.getUuid() +  "&t=" + WebServerServletTokenUtil.getToken(image.getLargeImageId())  + "&groupId=" + image.getGroupId();
+								 					 String imageUrl = PortalUtil.getPortalURL(request) + "/documents/" + image.getGroupId() + "/" +
+								 				            image.getFolderId() + "/" + image.getTitle() + "/" + image.getUuid() + "?t=" +
+								 				            System.currentTimeMillis();	
 								 %>
 
 								 <!-- =========================== -->
