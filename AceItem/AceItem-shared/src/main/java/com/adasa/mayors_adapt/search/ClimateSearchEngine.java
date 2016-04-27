@@ -209,7 +209,10 @@ public class ClimateSearchEngine extends IndexSearcher {
 					// }
 					float relevance = hit.score * normalizeScoreFactor * 100;
 					aceItemSearchResult.setRelevance(relevance);
-					results.add(aceItemSearchResult);
+					//Remove web contents from results
+					if(!"ARTICLE".equalsIgnoreCase(storageType)){
+						results.add(aceItemSearchResult);
+					}
 
 				}
 			} catch (Exception e) {
