@@ -428,7 +428,7 @@ public abstract class LuceneIndexUpdatePortletForShareAceItem extends MVCPortlet
             String sup_doc_name = uploadRequest.getParameter("sup_docs_names" + counter);
             String sup_doc_description = uploadRequest.getParameter("sup_docs_description" + counter);
             String sup_doc_fileName = uploadRequest.getFileName("supdocfiles" + counter);
-
+            
             //System.out.println("name is " + sup_doc_name);
             //System.out.println("description is " + sup_doc_description);
             //System.out.println("filename is " + sup_doc_fileName);
@@ -476,6 +476,7 @@ public abstract class LuceneIndexUpdatePortletForShareAceItem extends MVCPortlet
         }
 
         if (isDocsValid && docCounter > 0) {
+        	//System.out.println("isDocsValid and docCounter: " + docCounter);
             // now we have two options. if docphotos is not null then populate it in a data structure
             // iterate through the input fields and check the names already uploaded using docphotos
             // if names already uploaded then skip the document upload
@@ -484,6 +485,8 @@ public abstract class LuceneIndexUpdatePortletForShareAceItem extends MVCPortlet
             DLFolder rootFolder = null;
             try {
                   rootFolder = DLFolderLocalServiceUtil.getFolder(themeDisplay.getScopeGroupId(), 0, "aceitem");
+                  //System.out.println("rootFolder name: "+rootFolder.getName());
+                  //System.out.println("rootFolder id: "+rootFolder.getFolderId());
             } catch(Exception e) {
                 e.printStackTrace();
                 throw e;
@@ -498,9 +501,13 @@ public abstract class LuceneIndexUpdatePortletForShareAceItem extends MVCPortlet
                folder = "aceitem".concat("-").concat(String.valueOf(aceitem.getName().trim().replace(' ', '-')));
             }
             folder = escapeName(folder);
-
-            //System.out.println("folder name is " + folder);
-
+                        
+            //System.out.println("folder size: " + folder.length());
+            //make sure the folder name is <=120 characters
+            if (folder.length() > 120) {
+            	folder = folder.substring(0, 120);
+            }
+            
             // try to see the folder exists otherwise add the folder to the root folder
             DLFolder docFolder = null;
 
@@ -527,19 +534,22 @@ public abstract class LuceneIndexUpdatePortletForShareAceItem extends MVCPortlet
             StringBuffer uploadedFiles = new StringBuffer("");
 
             if (Validator.isNotNull(uploadRequest.getParameter("supdocs"))) {
-
+            	System.out.println("supdocs parameter exists");
                 // iterate through each document and do the upload if the document already not uploaded
                 for (int counter=1; counter <= docCounter; counter++) {
                         String sup_doc_name = uploadRequest.getParameter("sup_docs_names" + counter);
                         String sup_doc_description = uploadRequest.getParameter("sup_docs_description" + counter);
                         String sup_doc_fileName = uploadRequest.getFileName("supdocfiles" + counter);
-
+                        System.out.println("sup_doc_name: "+sup_doc_name);
+                        System.out.println("sup_doc_description: "+sup_doc_description);
+                        System.out.println("sup_doc_fileName: "+sup_doc_fileName);
                         //check if the file has been already uploaded in the previous save
 
                         //System.out.println("supDocList stored is " + supDocListStored);
                         //System.out.println("sup_doc_name is " + sup_doc_name.toLowerCase());
 
                         if (supDocListStored.contains(sup_doc_name.toLowerCase())) {
+                        	System.out.println("supDocListStored contains sup_doc_name");
                             // get the index of the photo from the list
                             int index = supDocListStored.indexOf(sup_doc_name.toLowerCase());
 
@@ -555,7 +565,7 @@ public abstract class LuceneIndexUpdatePortletForShareAceItem extends MVCPortlet
                         }
                         else
                         {
-
+                        	System.out.println("ready to upload the file");
                             // upload the file
                             FileEntry doc = insertFile(uploadRequest, counter, docFolder, sup_doc_name, sup_doc_description, themeDisplay, serviceContext);
                             //IGImage image = insertImage(uploadRequest, counter, imageFolder, sup_photo_name, sup_photo_description, themeDisplay, serviceContext);
@@ -614,20 +624,28 @@ public abstract class LuceneIndexUpdatePortletForShareAceItem extends MVCPortlet
     private FileEntry insertFile(UploadPortletRequest uploadRequest, int counter, DLFolder docFolder, String sup_doc_name, String sup_doc_description, ThemeDisplay themeDisplay, ServiceContext serviceContext)
                                    throws Exception
     {
+    	//System.out.println("inside inserFile");
+    	//System.out.println("sup_doc_name: "+sup_doc_name);
         FileEntry doc = null;
 
         // upload the image
                 try {
                        File f = uploadRequest.getFile("supdocfiles" + counter);
+                       System.out.println("f.getName: "+f.getName());
                        //System.out.println("inside method insertFile");
                        String fileName = uploadRequest.getFileName("supdocfiles" + counter);
                        //System.out.println("fileName is " + fileName);
                        int i = fileName.lastIndexOf('.');
-                       String extension = fileName.substring(i+1);
+                       String extension = fileName.substring(i+1);                       
                        //System.out.println("extension is " + extension);
                        //image = IGImageServiceUtil.addImage(themeDisplay.getScopeGroupId(), imageFolder.getFolderId(), sup_photo_name, sup_photo_description, f, "image/"+extension, serviceContext);
-                       doc = DLAppLocalServiceUtil.addFileEntry(themeDisplay.getUserId(), themeDisplay.getScopeGroupId(), docFolder.getFolderId(), "image/"+extension, f.getName(), sup_doc_name,
-                              sup_doc_description, null, f, serviceContext);
+                       String prefixExtension = "image";
+                       if (fileName.endsWith(".pdf")) {
+                    	   prefixExtension = "application";
+                       }
+                       //System.out.println("prefixExtension: "+prefixExtension);
+                       doc = DLAppLocalServiceUtil.addFileEntry(themeDisplay.getUserId(), themeDisplay.getScopeGroupId(), docFolder.getFolderId(),
+                    		f.getName(), prefixExtension + "/" + extension, sup_doc_name, sup_doc_description, null, f, serviceContext);
                        String primaryKey = String.valueOf(doc.getPrimaryKey());
                        addPermissions(themeDisplay, primaryKey, "com.liferay.portlet.documentlibrary.model.DLFileEntry");
                     } catch(DuplicateFileException e) {
